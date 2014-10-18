@@ -7,6 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.event.world.ChunkEvent;
@@ -33,13 +34,17 @@ public class ChunkEventHandler
 			ChunkData cd = TFC_Core.getCDM(event.world).getData(event.getChunk().xPosition, event.getChunk().zPosition);
 			if(cd== null)
 				return;
+			BiomeGenBase biome = event.world.getBiomeGenForCoords(event.getChunk().xPosition, event.getChunk().zPosition);
 			int month = TFC_Time.getSeasonAdjustedMonth(event.getChunk().zPosition << 4);
 			if (TFC_Time.getYear() > cd.lastSpringGen && month > 1 && month < 6)
 			{
 				int chunk_X = event.getChunk().xPosition;
 				int chunk_Z = event.getChunk().zPosition;
-				cd.fishPop *= Math.pow(1.2,cd.lastSpringGen - TFC_Time.getYear());
-				cd.fishPop = Math.min(cd.fishPop, ChunkData.fishPopMax);
+				if(TFC_Core.isWaterBiome(biome))
+				{
+					cd.fishPop *= Math.pow(1.2,cd.lastSpringGen - TFC_Time.getYear());
+					cd.fishPop = Math.min(cd.fishPop, ChunkData.fishPopMax);
+				}
 				cd.lastSpringGen = TFC_Time.getYear();
 
 				Random rand = new Random(event.world.getSeed() + ((chunk_X >> 3) - (chunk_Z >> 3)) * (chunk_Z >> 3));
@@ -54,14 +59,23 @@ public class ChunkEventHandler
 					cropGen.generate(event.world, event.world.rand, x, z, num);
 				}
 			}
-			else if(TFC_Time.getYear() > cd.lastSpringGen && month >= 6){
-				cd.fishPop *= Math.pow(1.2,cd.lastSpringGen - TFC_Time.getYear());
-				cd.fishPop = Math.min(cd.fishPop, ChunkData.fishPopMax);
+			else if(TFC_Time.getYear() > cd.lastSpringGen && month >= 6)
+			{
+				//Replenish fish
+				if(TFC_Core.isWaterBiome(biome))
+				{
+					cd.fishPop *= Math.pow(1.2,cd.lastSpringGen - TFC_Time.getYear());
+					cd.fishPop = Math.min(cd.fishPop, ChunkData.fishPopMax);
+				}
 				cd.lastSpringGen = TFC_Time.getYear();
 			}
 			else if(TFC_Time.getYear() > cd.lastSpringGen + 1){
-				cd.fishPop *= Math.pow(1.2,cd.lastSpringGen - TFC_Time.getYear() - 1);
-				cd.fishPop = Math.min(cd.fishPop, ChunkData.fishPopMax);
+				//Replenish fish
+				if(TFC_Core.isWaterBiome(biome))
+				{
+					cd.fishPop *= Math.pow(1.2,cd.lastSpringGen - TFC_Time.getYear());
+					cd.fishPop = Math.min(cd.fishPop, ChunkData.fishPopMax);
+				}
 				cd.lastSpringGen = TFC_Time.getYear();
 			}
 		}
@@ -69,9 +83,6 @@ public class ChunkEventHandler
 		{
 			ChunkData data = new ChunkData().CreateNew(event.world, event.getChunk().xPosition, event.getChunk().zPosition);
 			data.rainfallMap = TFC_Climate.getCacheManager(event.world).loadRainfallLayerGeneratorData(data.rainfallMap, event.getChunk().xPosition * 16, event.getChunk().zPosition * 16, 16, 16);
-			//data.rockMap1 =  TFC_Climate.getCacheManager(event.world).loadRockLayerGeneratorData(data.rockMap1, event.getChunk().xPosition * 16, event.getChunk().zPosition * 16, 16, 16, 0);
-			//data.rockMap2 =  TFC_Climate.getCacheManager(event.world).loadRockLayerGeneratorData(data.rockMap2, event.getChunk().xPosition * 16, event.getChunk().zPosition * 16, 16, 16, 1);
-			//data.rockMap3 =  TFC_Climate.getCacheManager(event.world).loadRockLayerGeneratorData(data.rockMap3, event.getChunk().xPosition * 16, event.getChunk().zPosition * 16, 16, 16, 2);
 			TFC_Core.getCDM(event.world).addData(event.getChunk(), data);
 		}
 	}
@@ -79,7 +90,9 @@ public class ChunkEventHandler
 	@SubscribeEvent
 	public void onUnload(ChunkEvent.Unload event)
 	{
-		TFC_Core.getCDM(event.world).getData(event.getChunk().xPosition, event.getChunk().zPosition).isUnloaded = true;
+		if(TFC_Core.getCDM(event.world) != null && 
+				TFC_Core.getCDM(event.world).getData(event.getChunk().xPosition, event.getChunk().zPosition) != null)
+			TFC_Core.getCDM(event.world).getData(event.getChunk().xPosition, event.getChunk().zPosition).isUnloaded = true;
 	}
 
 	@SubscribeEvent

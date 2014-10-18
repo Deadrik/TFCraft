@@ -23,6 +23,12 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 	public String type;
 	public static Item[] INGOTS;
 
+	@Override
+	public boolean canUpdate()
+	{
+		return false;
+	}
+	
 	public TEIngotPile()
 	{
 		storage = new ItemStack[1];
@@ -178,6 +184,7 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 			if(storage[index].stackSize > 0)
 			{
 				storage[index] = new ItemStack(storage[index].getItem(), storage[index].stackSize + count, storage[index].getItemDamage());
+				worldObj.markBlockForUpdate( xCoord, yCoord, zCoord );
 			}
 		}
 		updateNeighbours();
@@ -276,9 +283,12 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 	@Override
 	public void createInitNBT(NBTTagCompound nbt) {
 		nbt.setString("type", this.type);
-		ItemStack is = storage[0].copy();
-		is.stackTagCompound = null;
-		is.writeToNBT(nbt);
+		if(storage[0] != null)
+		{
+			ItemStack is = storage[0].copy();
+			is.stackTagCompound = null;
+			is.writeToNBT(nbt);
+		}
 	}
 
 }

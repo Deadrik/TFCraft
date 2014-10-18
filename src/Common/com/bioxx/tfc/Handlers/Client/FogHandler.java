@@ -38,7 +38,7 @@ public class FogHandler
 		if(event.fogMode >= 0)
 		{
 			//If the user changes their render range, we need to rerun all of this
-			if(renderRange != Minecraft.getMinecraft().gameSettings.renderDistanceChunks)
+			if(renderRange != Minecraft.getMinecraft().gameSettings.renderDistanceChunks || fogEnd < 16)
 			{
 				renderRange = Minecraft.getMinecraft().gameSettings.renderDistanceChunks;
 				boolean rainLast = false;
@@ -66,9 +66,9 @@ public class FogHandler
 
 			if((int)event.entity.posY > 128)
 			{
-				GL11.glFogf(GL11.GL_FOG_DENSITY, fogDensity);
-				GL11.glFogf(GL11.GL_FOG_START, fogStart);
-				GL11.glFogf(GL11.GL_FOG_END, fogEnd);
+				GL11.glFogf(GL11.GL_FOG_DENSITY, Math.min(fogDensity, 0.3f));
+				GL11.glFogf(GL11.GL_FOG_START, Math.max(fogStart, 8f));
+				GL11.glFogf(GL11.GL_FOG_END, Math.max(fogEnd, 16f));
 			}
 		}
 	}
@@ -135,6 +135,12 @@ public class FogHandler
 				fogStartFinish = event.farPlaneDistance*0.75f;
 				fogEndFinish = event.farPlaneDistance;
 				fogDensityFinish = 0.1f;
+			}
+			else if(!shouldLerp && localWorldFog==0)
+			{
+				fogStart = event.farPlaneDistance*0.75f;
+				fogEnd = event.farPlaneDistance;
+				fogDensity = 0.1f;
 			}
 
 		}

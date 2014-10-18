@@ -49,6 +49,12 @@ public class BlockSulfur extends BlockTerra implements ICustomCollision
 	}
 
 	@Override
+	public int damageDropped(int dmg)
+	{
+		return itemMeta;
+	}
+
+	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
 		for(int i = 0; i < 4; i++)

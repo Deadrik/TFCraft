@@ -2,12 +2,15 @@ package com.bioxx.tfc.Entities.Mobs;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntitySquid;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 
 public class EntitySquidTFC extends EntitySquid
 {
@@ -25,12 +28,31 @@ public class EntitySquidTFC extends EntitySquid
 	{
 		return this.posY > Global.SEALEVEL-16 && this.posY <= Global.SEALEVEL && this.worldObj.checkNoEntityCollision(this.boundingBox);
 	}
+	
+	@Override
+	public boolean canDespawn(){
+		return !this.hasCustomNameTag();
+	}
 
 	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(400);//MaxHealth
+	}
+	
+	@Override
+	public boolean interact(EntityPlayer player){
+		ItemStack itemstack = player.getHeldItem();
+		if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
+			String name = itemstack.stackTagCompound.getString("ItemName");
+			if(!this.hasCustomNameTag()){
+				this.setCustomNameTag(name);
+				itemstack.stackSize--;
+			}
+			return true;
+		}
+		return true;
 	}
 
 	/**

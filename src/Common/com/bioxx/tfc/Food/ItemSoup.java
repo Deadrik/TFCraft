@@ -16,13 +16,6 @@ public class ItemSoup extends ItemMeal
 	}
 
 	@Override
-	protected float[] getNutritionalWeights()
-	{
-		//These numbers are 5% of the oz value for each slot 1/3/2/1/1/1
-		return new float[]{0.1f,0.1f,0.1f,0.1f};
-	}
-
-	@Override
 	public float getFoodMaxWeight(ItemStack is) {
 		return 24;
 	}

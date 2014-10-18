@@ -14,6 +14,7 @@ public class BarrelRecipe
 	public boolean removesLiquid = true;
 	boolean isSealedRecipe = true;
 	public int minTechLevel = 1;
+	public boolean allowAnyStack = true;
 
 	public BarrelRecipe(ItemStack inputItem, FluidStack inputFluid, ItemStack outIS, FluidStack outputFluid)
 	{
@@ -35,6 +36,12 @@ public class BarrelRecipe
 		return this;
 	}
 
+	public BarrelRecipe setAllowAnyStack(boolean b)
+	{
+		this.allowAnyStack = b;
+		return this;
+	}
+
 	public BarrelRecipe setMinTechLevel(int t)
 	{
 		this.minTechLevel = t;
@@ -52,7 +59,7 @@ public class BarrelRecipe
 		boolean iStack = removesLiquid ? true : (inItemStack != null && item != null && fluid != null && barrelFluid != null && item.stackSize >= (int)Math.ceil(fluid.amount/barrelFluid.amount));
 		boolean fStack = !removesLiquid ? true : (barrelFluid != null && item != null && fluid != null && outFluid != null && fluid.amount >= item.stackSize*outFluid.amount);
 
-		boolean anyStack = !removesLiquid && !isSealedRecipe && this.outItemStack == null;
+		boolean anyStack = !removesLiquid && !isSealedRecipe && this.outItemStack == null && allowAnyStack;
 		boolean itemsEqual = OreDictionary.itemMatches(inItemStack, item, false);
 
 		return ((inItemStack != null && itemsEqual && (iStack || anyStack)) || inItemStack == null) &&
@@ -78,8 +85,12 @@ public class BarrelRecipe
 	{
 		String s = "";
 		if(this.outItemStack != null)
-			s=/*outItemStack.stackSize+"x " +*/ outItemStack.getDisplayName();
-		if(!this.barrelFluid.isFluidEqual(outFluid))
+		{
+			if(outItemStack.stackSize > 1)
+				s += outItemStack.stackSize+"x ";
+			s += outItemStack.getDisplayName();
+		}
+		if(outFluid != null && !this.barrelFluid.isFluidEqual(outFluid))
 			s=outFluid.getFluid().getLocalizedName();
 		return s;
 	}
@@ -89,12 +100,25 @@ public class BarrelRecipe
 		return this.isSealedRecipe;
 	}
 
+	protected int getnumberOfRuns(ItemStack inIS, FluidStack inFS)
+	{
+		int runs = 0;
+		int div = 0;
+		if(inIS != null && inItemStack != null)
+		{
+			runs = inIS.stackSize/this.inItemStack.stackSize;
+			div = inFS.amount/this.getInFluid().amount;
+		}
+		return Math.min(runs, div);
+	}
+
 	public ItemStack getResult(ItemStack inIS, FluidStack inFS, int sealedTime)
 	{
 		ItemStack is = null;
 		if(outItemStack != null)
 		{
 			is = outItemStack.copy();
+			is.stackSize*= this.getnumberOfRuns(inIS, inFS);
 			return is;
 		}
 		if(!removesLiquid)
@@ -110,9 +134,13 @@ public class BarrelRecipe
 		if(outFluid != null)
 		{
 			FluidStack fs = outFluid.copy();
-			if(!removesLiquid)
+			if(!removesLiquid && fs != null)
 			{
 				fs.amount = inFS.amount;
+			}
+			else if(fs != null && outItemStack != null)
+			{
+				fs.amount*=outItemStack.stackSize;
 			}
 			return fs;
 		}

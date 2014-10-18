@@ -23,15 +23,18 @@ public class RenderLeatherRack implements ISimpleBlockRenderingHandler
 		float f2 = 0.5f;
 		float f3 = 0.75f;
 		float f4 = 1f;
+		boolean breaking = renderer.overrideBlockTexture != null;
+		
 		for(int k = 0; k < 4; k++)
 		{
 			for(int i = 0; i < 4; i++)
 			{
-				if(((te.workedArea >> (k*4+i)) & 1) != 0)
+				if(((te.workedArea >> (k*4+i)) & 1) != 0 && ! breaking)
 					renderer.overrideBlockTexture = blk.scrapedTex;
 				renderer.setRenderBounds(0.25*i, 0, 0.25*k, 0.25*i+0.25, 0.001, 0.25*k+0.25);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.clearOverrideBlockTexture();
+				if ( ! breaking )
+					renderer.clearOverrideBlockTexture();
 			}
 		}
 		return false;

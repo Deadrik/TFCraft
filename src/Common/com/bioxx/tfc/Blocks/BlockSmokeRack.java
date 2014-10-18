@@ -68,6 +68,7 @@ public class BlockSmokeRack extends BlockTerraContainer
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
+		boolean flag = false;
 		if(!world.isRemote)
 		{
 			int meta = world.getBlockMetadata(x, y, z);
@@ -80,14 +81,45 @@ public class BlockSmokeRack extends BlockTerraContainer
 					te.setInventorySlotContents(0, entityplayer.inventory.getCurrentItem().copy());
 					entityplayer.inventory.getCurrentItem().stackSize--;
 					entityplayer.inventory.consumeInventoryItem(TFCItems.WoolYarn);
-					return true;
+					flag = true;
 				}
 				else if(te.getStackInSlot(0) != null)
 				{
 					TFC_Core.giveItemToPlayer(te.removeStackInSlot(0), entityplayer);
+					flag = true;
 				}
 			}
 			else if((meta & 1) == 0 && hitZ >= 0.5)
+			{ 
+				if(te.getStackInSlot(1) == null && yarn != null && isItemValid(entityplayer.inventory.getCurrentItem()))
+				{
+					te.setInventorySlotContents(1, entityplayer.inventory.getCurrentItem().copy());
+					entityplayer.inventory.getCurrentItem().stackSize--;
+					entityplayer.inventory.consumeInventoryItem(TFCItems.WoolYarn);
+					flag = true;
+				}
+				else if(te.getStackInSlot(1) != null)
+				{
+					TFC_Core.giveItemToPlayer(te.removeStackInSlot(1), entityplayer);
+					flag = true;
+				}
+			}
+			else if((meta & 1) == 1 && hitX < 0.5)
+			{
+				if(te.getStackInSlot(0) == null && yarn != null && isItemValid(entityplayer.inventory.getCurrentItem()))
+				{
+					te.setInventorySlotContents(0, entityplayer.inventory.getCurrentItem().copy());
+					entityplayer.inventory.getCurrentItem().stackSize--;
+					entityplayer.inventory.consumeInventoryItem(TFCItems.WoolYarn);
+					flag = true;
+				}
+				else if(te.getStackInSlot(0) != null)
+				{
+					TFC_Core.giveItemToPlayer(te.removeStackInSlot(0), entityplayer);
+					flag = true;
+				}
+			}
+			else if((meta & 1) == 1 && hitX >= 0.5)
 			{ 
 				if(te.getStackInSlot(1) == null && yarn != null && isItemValid(entityplayer.inventory.getCurrentItem()))
 				{
@@ -99,10 +131,11 @@ public class BlockSmokeRack extends BlockTerraContainer
 				else if(te.getStackInSlot(1) != null)
 				{
 					TFC_Core.giveItemToPlayer(te.removeStackInSlot(1), entityplayer);
+					flag = true;
 				}
 			}
 		}
-		return false;
+		return flag;
 	}
 
 	private boolean isItemValid(ItemStack is)

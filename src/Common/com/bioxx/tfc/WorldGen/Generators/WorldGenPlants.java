@@ -8,6 +8,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
@@ -58,7 +59,7 @@ public class WorldGenPlants implements IWorldGenerator
 		int flowerChunkRarity = 30;
 		int mushroomsPerChunk = 0;
 
-		float evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(chunkX, chunkZ).floatdata1;
+		//float evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(chunkX, chunkZ).floatdata1;
 		float rain = TFC_Climate.getRainfall(world, chunkX, 144, chunkZ);
 		float bioTemperature;
 
@@ -92,6 +93,19 @@ public class WorldGenPlants implements IWorldGenerator
 			flowerChunkRarity -= 5;
 			mushroomsPerChunk += 1;
 		}
+		bioTemperature = TFC_Climate.getBioTemperatureHeight(world, chunkX, Global.SEALEVEL, chunkZ);
+		if(bioTemperature < 10)
+		{
+			grassPerChunk /= 2;
+		}
+		if(bioTemperature < 5)
+		{
+			grassPerChunk /= 2;
+		}
+		if(bioTemperature < 0)
+		{
+			grassPerChunk = 0;
+		}
 
 		WorldGenFlowers.generate(world, random, chunkX, chunkZ, flowerChunkRarity);
 
@@ -102,14 +116,11 @@ public class WorldGenPlants implements IWorldGenerator
 			zCoord = chunkZ + random.nextInt(16) + 8;
 			yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
 			bioTemperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, yCoord, zCoord);
-			if(bioTemperature >= 5)
+			if (world.isAirBlock(xCoord, yCoord, zCoord) && 
+					TFCBlocks.TallGrass.canBlockStay(world, xCoord, yCoord, zCoord) &&
+					!TFC_Core.isDryGrass(world.getBlock(xCoord, yCoord - 1, zCoord)))
 			{
-				if (world.isAirBlock(xCoord, yCoord, zCoord) && 
-						TFCBlocks.TallGrass.canBlockStay(world, xCoord, yCoord, zCoord) &&
-						!TFC_Core.isDryGrass(world.getBlock(xCoord, yCoord - 1, zCoord)))
-				{
-					world.setBlock(xCoord, yCoord, zCoord, TFCBlocks.TallGrass, (world.rand.nextInt(20) == 0 ? 1 : 0), 0x2); // tallgrass with 1/20 chance to spawn a fern
-				}
+				world.setBlock(xCoord, yCoord, zCoord, TFCBlocks.TallGrass, (world.rand.nextInt(20) == 0 ? 1 : 0), 0x2); // tallgrass with 1/20 chance to spawn a fern
 			}
 
 			if(bioTemperature >= 0)
@@ -204,12 +215,12 @@ public class WorldGenPlants implements IWorldGenerator
 					plumTree.generate(world, random, xCoord, yCoord, zCoord);
 				break;
 			}
-			//			case 9:
-			//			{
-			//				if(world.isAirBlock(var2, var3, var4) && (world.getBlock(var2, var3-1, var4) == mod_TFC_Core.terraGrass || world.getBlock(var2, var3-1, var4) == mod_TFC_Core.terraGrass2))
-			//					cacaoTree.generate(world, rand, var2, var3, var4);
-			//				break;
-			//			}
+			/*case 9:
+			{
+				if(world.isAirBlock(var2, var3, var4) && (world.getBlock(var2, var3-1, var4) == mod_TFC_Core.terraGrass || world.getBlock(var2, var3-1, var4) == mod_TFC_Core.terraGrass2))
+					cacaoTree.generate(world, rand, var2, var3, var4);
+				break;
+			}*/
 			}
 		}
 

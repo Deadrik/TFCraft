@@ -29,7 +29,6 @@ import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
 import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityCowTFC extends EntityCow implements IAnimal
@@ -42,7 +41,13 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	protected boolean pregnant;
 	protected int pregnancyRequiredTime;
 	protected long conception;
-	protected float mateSizeMod;
+	protected float mateSizeMod = 0;
+	protected float mateStrengthMod = 0;
+	protected float mateAggroMod = 0;
+	protected float mateObedMod = 0;
+	protected float mateColMod = 0;
+	protected float mateClimMod = 0;
+	protected float mateHardMod = 0;
 	public float size_mod;			//How large the animal is
 	public float strength_mod;		//how strong the animal is
 	public float aggression_mod = 1;//How aggressive / obstinate the animal is
@@ -55,14 +60,14 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	public int angerTick;
 
 	int degreeOfDiversion = 1;
-	
+
 	private int familiarity = 0;
 	private long lastFamiliarityUpdate = 0;
 	private boolean familiarizedToday = false;
-	
+
 	protected float avgAdultWeight = 634;			//The average weight of adult males in kg
 	protected float dimorphism = 0.1822f;		//1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
-											//the square root of the ratio of female mass : male mass
+	//the square root of the ratio of female mass : male mass
 
 	public EntityCowTFC(World par1World)
 	{
@@ -74,7 +79,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		conception = 0;
 		mateSizeMod = 0;
 		sex = rand.nextInt(2);
-		
+
 		size_mod =(float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion + 1)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1F) * (1.0F - dimorphism * sex));
 		strength_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
 		aggression_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
@@ -138,7 +143,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		climate_mod = (float)Math.sqrt(climate_mod * climate_mod * (float)Math.sqrt((mother.getClimateAdaptation() + father_clim) * 0.5F));
 
 		this.familiarity = (int) (mother.getFamiliarity()<90?mother.getFamiliarity()/2:mother.getFamiliarity()*0.9f);
-		
+
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
@@ -178,7 +183,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			super.resetInLove();
 			setInLove(true);
 		}
-		
+
 		this.handleFamiliarityUpdate();
 
 		if(angerTick > 0 && this.rand.nextInt(2)==0){
@@ -272,27 +277,37 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
-		super.writeEntityToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setInteger ("Sex", sex);
-		par1NBTTagCompound.setLong ("Animal ID", animalID);
-		par1NBTTagCompound.setFloat ("Size Modifier", size_mod);
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger ("Sex", sex);
+		nbt.setLong ("Animal ID", animalID);
+		nbt.setFloat ("Size Modifier", size_mod);
 
-		NBTTagCompound nbt = par1NBTTagCompound;
-		nbt.setFloat ("Strength Modifier", strength_mod);
-		nbt.setFloat ("Aggression Modifier", aggression_mod);
-		nbt.setFloat ("Obedience Modifier", obedience_mod);
-		nbt.setFloat ("Colour Modifier", colour_mod);
-		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
-		nbt.setFloat ("Hardiness Modifier", hard_mod);
+		nbt.setInteger("Familiarity", familiarity);
+		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);
+		nbt.setBoolean("Familiarized Today", familiarizedToday);
 
-		par1NBTTagCompound.setInteger ("Hunger", hunger);
-		par1NBTTagCompound.setBoolean("Pregnant", pregnant);
-		par1NBTTagCompound.setFloat("MateSize", mateSizeMod);
-		par1NBTTagCompound.setLong("ConceptionTime",conception);
-		par1NBTTagCompound.setInteger("Age", getBirthDay());
-		par1NBTTagCompound.setLong("HasMilkTime", hasMilkTime);
+		NBTTagCompound nbt2 = nbt;
+		nbt2.setFloat ("Strength Modifier", strength_mod);
+		nbt2.setFloat ("Aggression Modifier", aggression_mod);
+		nbt2.setFloat ("Obedience Modifier", obedience_mod);
+		nbt2.setFloat ("Colour Modifier", colour_mod);
+		nbt2.setFloat ("Climate Adaptation Modifier", climate_mod);
+		nbt2.setFloat ("Hardiness Modifier", hard_mod);
+
+		nbt.setInteger ("Hunger", hunger);
+		nbt.setBoolean("Pregnant", pregnant);
+		nbt.setFloat("MateSize", mateSizeMod);
+		nbt.setFloat("MateStrength", mateStrengthMod);
+		nbt.setFloat("MateAggro", mateAggroMod);
+		nbt.setFloat("MateObed", mateObedMod);
+		nbt.setFloat("MateCol", mateColMod);
+		nbt.setFloat("MateClim", mateClimMod);
+		nbt.setFloat("MateHard", mateHardMod);
+		nbt.setLong("ConceptionTime",conception);
+		nbt.setInteger("Age", getBirthDay());
+		nbt.setLong("HasMilkTime", hasMilkTime);
 	}
 
 	@Override
@@ -302,6 +317,10 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
+
+		familiarity = nbt.getInteger("Familiarity");
+		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
+		familiarizedToday = nbt.getBoolean("Familiarized Today");
 
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
@@ -313,6 +332,12 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
+		mateStrengthMod = nbt.getFloat("MateStrength");
+		mateAggroMod = nbt.getFloat("MateAggro");
+		mateObedMod = nbt.getFloat("MateObed");
+		mateColMod = nbt.getFloat("MateCol");
+		mateClimMod = nbt.getFloat("MateClim");
+		mateHardMod = nbt.getFloat("MateHard");
 		conception = nbt.getLong("ConceptionTime");
 		hasMilkTime = nbt.getLong("HasMilkTime");
 		this.setAge(nbt.getInteger ("Age"));
@@ -452,10 +477,16 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 
 
 	@Override
-	public EntityAgeable createChildTFC(EntityAgeable entityageable) 
+	public EntityAgeable createChildTFC(EntityAgeable eAgeable) 
 	{
 		ArrayList<Float> data = new ArrayList<Float>();
-		data.add(entityageable.getEntityData().getFloat("MateSize"));
+		data.add(eAgeable.getEntityData().getFloat("MateSize"));
+		data.add(eAgeable.getEntityData().getFloat("MateStrength"));
+		data.add(eAgeable.getEntityData().getFloat("MateAggro"));
+		data.add(eAgeable.getEntityData().getFloat("MateObed"));
+		data.add(eAgeable.getEntityData().getFloat("MateCol"));
+		data.add(eAgeable.getEntityData().getFloat("MateClim"));
+		data.add(eAgeable.getEntityData().getFloat("MateHard"));
 		return new EntityCowTFC(worldObj, this, data);
 	}
 
@@ -628,9 +659,10 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 
 	@Override
 	public void handleFamiliarityUpdate() {
-		if(lastFamiliarityUpdate < TFC_Time.getTotalDays()){
+		int totalDays = TFC_Time.getTotalDays();
+		if(lastFamiliarityUpdate < totalDays){
 			if(familiarizedToday && familiarity < 100){
-				lastFamiliarityUpdate = TFC_Time.getTotalDays();
+				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = (6 * obedience_mod / aggression_mod);
 				if(this.isAdult() && (familiarity > 30 && familiarity < 80)){
@@ -649,6 +681,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			}
 			else if(familiarity < 30){
 				familiarity -= 2*(TFC_Time.getTotalDays() - lastFamiliarityUpdate);
+				lastFamiliarityUpdate = totalDays;
 			}
 		}
 		if(familiarity > 100)familiarity = 100;
@@ -658,7 +691,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && this.isBreedingItemTFC(stack) && isAdult()){
+		if(stack != null && this.isBreedingItemTFC(stack) && isAdult() && !familiarizedToday){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
@@ -682,7 +715,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			this.playLivingSound();
 		}
 	}
-	
+
 	@Override
 	public boolean trySetName(String name, EntityPlayer player) {
 		if(this.checkFamiliarity(InteractionEnum.NAME, player)&& !this.hasCustomNameTag()){
@@ -693,7 +726,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		this.playSound(this.getHurtSound(),  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
 		return false;
 	}
-	
+
 	@Override
 	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
 		boolean flag = false;

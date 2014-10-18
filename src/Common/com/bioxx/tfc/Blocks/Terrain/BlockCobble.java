@@ -167,36 +167,36 @@ public class BlockCobble extends BlockTerra
 	@Override
 	public void updateTick(World world, int i, int j, int k, Random random)
 	{
-		if(!world.isRemote)
+		if(!world.isRemote && world.doChunksNearChunkExist(i, j, k, 1))
 		{
 			int meta = world.getBlockMetadata(i, j, k);
 
-			boolean isBelowAir = world.isAirBlock(i, j-1, k);
+			boolean isBelowAir = BlockCollapsable.canFallBelow(world, i, j-1, k);
 			byte count = 0;
 			List sides = new ArrayList<Integer>();
 
 			if(world.isAirBlock(i+1, j, k))
 			{
 				count++;
-				if(world.isAirBlock(i+1, j-1, k))
+				if(BlockCollapsable.canFallBelow(world, i+1, j-1, k))
 					sides.add(0);
 			}
 			if(world.isAirBlock(i, j, k+1))
 			{
 				count++;
-				if(world.isAirBlock(i, j-1, k+1))
+				if(BlockCollapsable.canFallBelow(world, i, j-1, k+1))
 					sides.add(1);
 			}
 			if(world.isAirBlock(i-1, j, k))
 			{
 				count++;
-				if(world.isAirBlock(i-1, j-1, k))
+				if(BlockCollapsable.canFallBelow(world, i-1, j-1, k))
 					sides.add(2);
 			}
 			if(world.isAirBlock(i, j, k-1))
 			{
 				count++;
-				if(world.isAirBlock(i, j-1, k-1))
+				if(BlockCollapsable.canFallBelow(world, i, j-1, k-1))
 					sides.add(3);
 			}
 

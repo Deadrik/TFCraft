@@ -1,7 +1,5 @@
 package com.bioxx.tfc.Render;
 
-import com.bioxx.tfc.Core.TFC_Time;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -9,20 +7,15 @@ import net.minecraft.util.IIcon;
 
 public class RenderBlocksFixUV extends RenderBlocks
 {
-	private long lastUpdate = 0;
+	
 	public RenderBlocksFixUV(RenderBlocks old) 
 	{
 		this.blockAccess = old.blockAccess;
-		lastUpdate = TFC_Time.getTotalTicks();
-		//this.minecraftRB = Minecraft.getMinecraft();
 	}
 
 	public void update(RenderBlocks old)
 	{
-		if(TFC_Time.getTotalTicks() > lastUpdate+10)
-		{
-			this.blockAccess = old.blockAccess;
-		}
+		this.blockAccess = old.blockAccess;
 	}
 
 	@Override

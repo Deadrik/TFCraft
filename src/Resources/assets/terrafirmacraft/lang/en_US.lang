@@ -45,6 +45,10 @@ entity.fishTFC.name=Bass
 #= Entity =
 #==========
 entity.notFamiliar=The animal won't let you do that.
+fishingRod.lineTension=The line is going to snap!
+fishingRod.lineSnap=The line snapped!
+fishingRod.bite=Oh! A bite!
+fishingRod.gotAway=It got away....
 
 #================
 #= Achievements =
@@ -250,8 +254,8 @@ item.Seeds Tomato.name=Tomato Seeds
 item.Glass Bottle.name=Empty Glass Bottle
 item.Beer.name=Beer
 item.Cider.name=Cider
-item.RyeWhiskey.name=Rye Whiskey
 item.Rum.name=Rum
+item.RyeWhiskey.name=Rye Whiskey
 item.Sake.name=Sake
 item.Vodka.name=Vodka
 item.Whiskey.name=Whiskey
@@ -1569,24 +1573,15 @@ item.Wrought Iron Tuyere.name=Wrought Iron Tuyere
 
 #== Armor ==
 #=== Helmet ===
-item.Bismuth Bronze Unfinished Helmet.name=Unfinished Bismuth Bronze Helmet Stage 1
-item.Black Bronze Unfinished Helmet.name=Unfinished Black Bronze Helmet Stage 1
-item.Black Steel Unfinished Helmet.name=Unfinished Black Steel Helmet Stage 1
-item.Blue Steel Unfinished Helmet.name=Unfinished Blue Steel Helmet Stage 1
-item.Bronze Unfinished Helmet.name=Unfinished Bronze Helmet Stage 1
-item.Copper Unfinished Helmet.name=Unfinished Copper Helmet Stage 1
-item.Red Steel Unfinished Helmet.name=Unfinished Red Steel Helmet Stage 1
-item.Steel Unfinished Helmet.name=Unfinished Steel Helmet Stage 1
-item.Wrought Iron Unfinished Helmet.name=Unfinished Wrought Iron Helmet Stage 1
-item.Bismuth Bronze Unfinished Helmet2.name=Unfinished Bismuth Bronze Helmet Stage 2
-item.Black Bronze Unfinished Helmet2.name=Unfinished Black Bronze Helmet Stage 2
-item.Black Steel Unfinished Helmet2.name=Unfinished Black Steel Helmet Stage 2
-item.Blue Steel Unfinished Helmet2.name=Unfinished Blue Steel Helmet Stage 2
-item.Bronze Unfinished Helmet2.name=Unfinished Bronze Helmet Stage 2
-item.Copper Unfinished Helmet2.name=Unfinished Copper Helmet Stage 2
-item.Red Steel Unfinished Helmet2.name=Unfinished Red Steel Helmet Stage 2
-item.Steel Unfinished Helmet2.name=Unfinished Steel Helmet Stage 2
-item.Wrought Iron Unfinished Helmet2.name=Unfinished Wrought Iron Helmet Stage 2
+item.Bismuth Bronze Unfinished Helmet.name=Unfinished Bismuth Bronze Helmet
+item.Black Bronze Unfinished Helmet.name=Unfinished Black Bronze Helmet
+item.Black Steel Unfinished Helmet.name=Unfinished Black Steel Helmet
+item.Blue Steel Unfinished Helmet.name=Unfinished Blue Steel Helmet
+item.Bronze Unfinished Helmet.name=Unfinished Bronze Helmet
+item.Copper Unfinished Helmet.name=Unfinished Copper Helmet
+item.Red Steel Unfinished Helmet.name=Unfinished Red Steel Helmet
+item.Steel Unfinished Helmet.name=Unfinished Steel Helmet
+item.Wrought Iron Unfinished Helmet.name=Unfinished Wrought Iron Helmet
 item.Bismuth Bronze Helmet.name=Bismuth Bronze Helmet
 item.Black Bronze Helmet.name=Black Bronze Helmet
 item.Black Steel Helmet.name=Black Steel Helmet
@@ -1599,24 +1594,15 @@ item.Wrought Iron Helmet.name=Wrought Iron Helmet
 item.helmetCloth.name=Leather Cap
 
 #=== Chestplate ===
-item.Bismuth Bronze Unfinished Chestplate.name=Unfinished Bismuth Bronze Chestplate Stage 1
-item.Black Bronze Unfinished Chestplate.name=Unfinished Black Bronze Chestplate Stage 1
-item.Black Steel Unfinished Chestplate.name=Unfinished Black Steel Chestplate Stage 1
-item.Blue Steel Unfinished Chestplate.name=Unfinished Blue Steel Chestplate Stage 1
-item.Bronze Unfinished Chestplate.name=Unfinished Bronze Chestplate Stage 1
-item.Copper Unfinished Chestplate.name=Unfinished Copper Chestplate Stage 1
-item.Red Steel Unfinished Chestplate.name=Unfinished Red Steel Chestplate Stage 1
-item.Steel Unfinished Chestplate.name=Unfinished Steel Chestplate Stage 1
-item.Wrought Iron Unfinished Chestplate.name=Unfinished Wrought Iron Chestplate Stage 1
-item.Bismuth Bronze Unfinished Chestplate2.name=Unfinished Bismuth Bronze Chestplate Stage 2
-item.Black Bronze Unfinished Chestplate2.name=Unfinished Black Bronze Chestplate Stage 2
-item.Black Steel Unfinished Chestplate2.name=Unfinished Black Steel Chestplate Stage 2
-item.Blue Steel Unfinished Chestplate2.name=Unfinished Blue Steel Chestplate Stage 2
-item.Bronze Unfinished Chestplate2.name=Unfinished Bronze Chestplate Stage 2
-item.Copper Unfinished Chestplate2.name=Unfinished Copper Chestplate Stage 2
-item.Red Steel Unfinished Chestplate2.name=Unfinished Red Steel Chestplate Stage 2
-item.Steel Unfinished Chestplate2.name=Unfinished Steel Chestplate Stage 2
-item.Wrought Iron Unfinished Chestplate2.name=Unfinished Wrought Iron Chestplate Stage 2
+item.Bismuth Bronze Unfinished Chestplate.name=Unfinished Bismuth Bronze Chestplate
+item.Black Bronze Unfinished Chestplate.name=Unfinished Black Bronze Chestplate
+item.Black Steel Unfinished Chestplate.name=Unfinished Black Steel Chestplate
+item.Blue Steel Unfinished Chestplate.name=Unfinished Blue Steel Chestplate
+item.Bronze Unfinished Chestplate.name=Unfinished Bronze Chestplate
+item.Copper Unfinished Chestplate.name=Unfinished Copper Chestplate
+item.Red Steel Unfinished Chestplate.name=Unfinished Red Steel Chestplate
+item.Steel Unfinished Chestplate.name=Unfinished Steel Chestplate
+item.Wrought Iron Unfinished Chestplate.name=Unfinished Wrought Iron Chestplate
 item.Bismuth Bronze Chestplate.name=Bismuth Bronze Chestplate
 item.Black Bronze Chestplate.name=Black Bronze Chestplate
 item.Black Steel Chestplate.name=Black Steel Chestplate
@@ -1629,24 +1615,15 @@ item.Wrought Iron Chestplate.name=Wrought Iron Chestplate
 item.chestplateCloth.name=Leather Tunic
 
 #=== Greaves ===
-item.Bismuth Bronze Unfinished Greaves.name=Unfinished Bismuth Bronze Greaves Stage 1
-item.Black Bronze Unfinished Greaves.name=Unfinished Black Bronze Greaves Stage 1
-item.Black Steel Unfinished Greaves.name=Unfinished Black Steel Greaves Stage 1
-item.Blue Steel Unfinished Greaves.name=Unfinished Blue Steel Greaves Stage 1
-item.Bronze Unfinished Greaves.name=Unfinished Bronze Greaves Stage 1
-item.Copper Unfinished Greaves.name=Unfinished Copper Greaves Stage 1
-item.Red Steel Unfinished Greaves.name=Unfinished Red Steel Greaves Stage 1
-item.Steel Unfinished Greaves.name=Unfinished Steel Greaves Stage 1
-item.Wrought Iron Unfinished Greaves.name=Unfinished Wrought Iron Greaves Stage 1
-item.Bismuth Bronze Unfinished Greaves2.name=Unfinished Bismuth Bronze Greaves Stage 2
-item.Black Bronze Unfinished Greaves2.name=Unfinished Black Bronze Greaves Stage 2
-item.Black Steel Unfinished Greaves2.name=Unfinished Black Steel Greaves Stage 2
-item.Blue Steel Unfinished Greaves2.name=Unfinished Blue Steel Greaves Stage 2
-item.Bronze Unfinished Greaves2.name=Unfinished Bronze Greaves Stage 2
-item.Copper Unfinished Greaves2.name=Unfinished Copper Greaves Stage 2
-item.Red Steel Unfinished Greaves2.name=Unfinished Red Steel Greaves Stage 2
-item.Steel Unfinished Greaves2.name=Unfinished Steel Greaves Stage 2
-item.Wrought Iron Unfinished Greaves2.name=Unfinished Wrought Iron Greaves Stage 2
+item.Bismuth Bronze Unfinished Greaves.name=Unfinished Bismuth Bronze Greaves
+item.Black Bronze Unfinished Greaves.name=Unfinished Black Bronze Greaves
+item.Black Steel Unfinished Greaves.name=Unfinished Black Steel Greaves
+item.Blue Steel Unfinished Greaves.name=Unfinished Blue Steel Greaves
+item.Bronze Unfinished Greaves.name=Unfinished Bronze Greaves
+item.Copper Unfinished Greaves.name=Unfinished Copper Greaves
+item.Red Steel Unfinished Greaves.name=Unfinished Red Steel Greaves
+item.Steel Unfinished Greaves.name=Unfinished Steel Greaves
+item.Wrought Iron Unfinished Greaves.name=Unfinished Wrought Iron Greaves
 item.Bismuth Bronze Greaves.name=Bismuth Bronze Greaves
 item.Black Bronze Greaves.name=Black Bronze Greaves
 item.Black Steel Greaves.name=Black Steel Greaves
@@ -1659,24 +1636,15 @@ item.Wrought Iron Greaves.name=Wrought Iron Greaves
 item.leggingsCloth.name=Leather Pants
 
 #=== Boots ===
-item.Bismuth Bronze Unfinished Boots.name=Unfinished Bismuth Bronze Boots Stage 1
-item.Black Bronze Unfinished Boots.name=Unfinished Black Bronze Boots Stage 1
-item.Black Steel Unfinished Boots.name=Unfinished Black Steel Boots Stage 1
-item.Blue Steel Unfinished Boots.name=Unfinished Blue Steel Boots Stage 1
-item.Bronze Unfinished Boots.name=Unfinished Bronze Boots Stage 1
-item.Copper Unfinished Boots.name=Unfinished Copper Boots Stage 1
-item.Red Steel Unfinished Boots.name=Unfinished Red Steel Boots Stage 1
-item.Steel Unfinished Boots.name=Unfinished Steel Boots Stage 1
-item.Wrought Iron Unfinished Boots.name=Unfinished Wrought Iron Boots Stage 1
-item.Bismuth Bronze Unfinished Boots2.name=Unfinished Bismuth Bronze Boots Stage 2
-item.Black Bronze Unfinished Boots2.name=Unfinished Black Bronze Boots Stage 2
-item.Black Steel Unfinished Boots2.name=Unfinished Black Steel Boots Stage 2
-item.Blue Steel Unfinished Boots2.name=Unfinished Blue Steel Boots Stage 2
-item.Bronze Unfinished Boots2.name=Unfinished Bronze Boots Stage 2
-item.Copper Unfinished Boots2.name=Unfinished Copper Boots Stage 2
-item.Red Steel Unfinished Boots2.name=Unfinished Red Steel Boots Stage 2
-item.Steel Unfinished Boots2.name=Unfinished Steel Boots Stage 2
-item.Wrought Iron Unfinished Boots2.name=Unfinished Wrought Iron Boots Stage 2
+item.Bismuth Bronze Unfinished Boots.name=Unfinished Bismuth Bronze Boots
+item.Black Bronze Unfinished Boots.name=Unfinished Black Bronze Boots
+item.Black Steel Unfinished Boots.name=Unfinished Black Steel Boots
+item.Blue Steel Unfinished Boots.name=Unfinished Blue Steel Boots
+item.Bronze Unfinished Boots.name=Unfinished Bronze Boots
+item.Copper Unfinished Boots.name=Unfinished Copper Boots
+item.Red Steel Unfinished Boots.name=Unfinished Red Steel Boots
+item.Steel Unfinished Boots.name=Unfinished Steel Boots
+item.Wrought Iron Unfinished Boots.name=Unfinished Wrought Iron Boots
 item.Bismuth Bronze Boots.name=Bismuth Bronze Boots
 item.Black Bronze Boots.name=Black Bronze Boots
 item.Black Steel Boots.name=Black Steel Boots
@@ -1883,7 +1851,7 @@ item.stick.name=Stick
 item.coal.coal.name=Coal
 item.coal.charcoal.name=Charcoal
 item.Fertilizer.name=Fertilizer
-item.Reeds.name=Sugar Canes
+item.Reeds.name=Reeds
 
 item.Wooden Bucket Empty.name=Wooden Bucket (Empty)
 item.Wooden Bucket Water.name=Wooden Bucket (Fresh Water)
@@ -1943,7 +1911,7 @@ item.Rope.name=Rope
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Straw & Hide Bed
-tile.customBed.sleep.name=This bed is too uncomfortable to fall asleep
+tile.customBed.sleep=This bed is too uncomfortable to fall asleep
 tile.BasicPipe.name=Pipe
 tile.ValvePipe.name=Valve Pipe
 tile.Torch.name=Torch
@@ -1986,7 +1954,7 @@ tile.Flowers.flower_meads_milkweed.name=Meads Milkweed
 tile.Flowers.flower_tropical_milkweed.name=Tropical Milkweed
 tile.Flowers.flower_butterfly_milkweed.name=Butterfly Milkweed
 tile.Flowers.flower_calendula.name=Calendula
-tile.Flowers2.flower_rose.name=Red Rose
+tile.Flowers2.flower_rose.name=Poppy
 tile.Flowers2.flower_blue_orchid.name=Blue Orchid
 tile.Flowers2.flower_allium.name=Allium
 tile.Flowers2.flower_houstonia.name=Houstonia
@@ -1995,6 +1963,15 @@ tile.Flowers2.flower_tulip_orange.name=Orange Tulip
 tile.Flowers2.flower_tulip_white.name=White Tulip
 tile.Flowers2.flower_tulip_pink.name=Pink Tulip
 tile.Flowers2.flower_oxeye_daisy.name=Daisy
+
+tile.SaltWater.name=Salt Water Flowing
+tile.SaltWaterStationary.name=Salt Water
+tile.FreshWater.name=Fresh Water Flowing
+tile.FreshWaterStationary.name=Fresh Water
+tile.HotWater.name=Hot Water Flowing
+tile.HotWaterStationary.name=Hot Water
+tile.Lava.name=Lava Flowing
+tile.LavaStationary.name=Lava
 
 #=======
 #= GUI =
@@ -2324,6 +2301,7 @@ skill.weaponsmith=Weapon Smithing
 skill.agriculture=Agriculture
 skill.cooking=Cooking
 skill.prospecting=Prospecting
+skill.butchering=Butchering
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
@@ -2442,6 +2420,9 @@ gui.FoodPrep.Sandwich=Sandwich
 gui.FoodPrep.Salad=Salad
 item.Sandwich.name=Sandwich
 item.Salad.name=Salad
-item.ClayBowl.Ceramic Bowl.name= Ceramic Bowl
-item.ClayBowl.Clay Bowl.name= Clay Bowl
+item.ClayBowl.Ceramic Bowl.name=Ceramic Bowl
+item.ClayBowl.Clay Bowl.name=Clay Bowl
 item.Sugar.name=Sugar
+item.Sea Weed.name=Sea Weed
+word.stage1=Stage 1
+word.stage2=Stage 2

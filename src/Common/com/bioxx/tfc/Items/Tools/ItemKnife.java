@@ -44,7 +44,7 @@ public class ItemKnife extends ItemWeapon implements IKnife
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float HitX, float HitY, float HitZ)
 	{
 		Block id = world.getBlock(x, y, z);
-		if(!world.isRemote && id != TFCBlocks.ToolRack && id != TFCBlocks.ToolRack2)
+		if(!world.isRemote && id != TFCBlocks.ToolRack)
 		{
 			int hasBowl = -1;
 

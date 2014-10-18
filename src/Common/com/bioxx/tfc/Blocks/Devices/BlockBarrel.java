@@ -32,6 +32,7 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemBlocks.ItemBarrels;
 import com.bioxx.tfc.Items.ItemBlocks.ItemLargeVessel;
@@ -182,7 +183,7 @@ public class BlockBarrel extends BlockTerraContainer
 			{
 				BarrelEntity BE = new BarrelEntity(world, x, y, z);
 				world.spawnEntityInWorld(BE);
-				world.playSoundAtEntity(BE, "random.fuse", 1.0F, 1.0F);
+				world.playSoundAtEntity(BE, "game.tnt.primed", 1.0F, 1.0F);
 				//float f = 16.0F;
 				//EI.worldObj.createExplosion(EI, EI.posX, EI.posY, EI.posZ, f, true);
 				//world.setBlockToAir(x, y, z);
@@ -235,7 +236,7 @@ public class BlockBarrel extends BlockTerraContainer
 			te.fluid.writeToNBT(fluidNBT);
 		nbt.setTag("fluidNBT", fluidNBT);
 		nbt.setInteger("barrelType", te.barrelType);
-		nbt.setBoolean("sealed", te.getSealed());
+		nbt.setBoolean("Sealed", te.getSealed());
 
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < te.storage.length; i++)
@@ -284,7 +285,7 @@ public class BlockBarrel extends BlockTerraContainer
 
 				if(!handleInteraction(player, te))
 				{
-					if(te.getInvCount() == 0)
+					if(te.getFluidLevel() > 0 || te.getInvCount() == 0)
 						player.openGui(TerraFirmaCraft.instance, 35, world, x, y, z);
 					else
 						player.openGui(TerraFirmaCraft.instance, 36, world, x, y, z);
@@ -298,23 +299,67 @@ public class BlockBarrel extends BlockTerraContainer
 
 	protected boolean handleInteraction(EntityPlayer player, TEBarrel te) 
 	{
-		if (!te.getSealed()) 
+		if (!te.getSealed() && te.getInvCount() <= 1) 
 		{
 			ItemStack equippedItem = player.getCurrentEquippedItem();
 			if(FluidContainerRegistry.isFilledContainer(equippedItem) && !te.getSealed())
 			{
-				ItemStack is = te.addLiquid(player.getCurrentEquippedItem());
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
+				ItemStack tmp = equippedItem.copy();
+				tmp.stackSize = 1;
+				equippedItem.stackSize--;
+
+				if ( equippedItem.stackSize == 0 )
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+				
+				ItemStack is = te.addLiquid(tmp);
+
+				if ( equippedItem.stackSize == 0 && ( is.getMaxStackSize() == 1 || ! player.inventory.hasItemStack(is) ) ) // put buckets in the slot you used them from.
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
+				else
+				{
+					if ( player.inventory.addItemStackToInventory(is) == false )
+						player.dropPlayerItemWithRandomChoice(is, false); // if the new item dosn't fit, drop it.
+				}
+
+				if ( player.inventoryContainer != null )
+				{
+					// for some reason the players inventory won't update without this.
+					player.inventoryContainer.detectAndSendChanges();
+				}
+				
 				return true;
 			}
 			else if(FluidContainerRegistry.isEmptyContainer(equippedItem))
 			{
-				ItemStack is = te.removeLiquid(player.getCurrentEquippedItem());
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
+				ItemStack tmp = equippedItem.copy();
+				tmp.stackSize = 1;
+				equippedItem.stackSize--;
+				
+				if ( equippedItem.stackSize == 0 )
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+				
+				ItemStack is = te.removeLiquid(tmp);
+
+				if ( equippedItem.stackSize == 0 && ( is.getMaxStackSize() == 1 || ! player.inventory.hasItemStack(is) ) ) // put buckets in the slot you used them from.
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
+				else
+				{
+					if ( player.inventory.addItemStackToInventory(is) == false )
+						player.dropPlayerItemWithRandomChoice(is, false); // if the new item dosn't fit, drop it.
+				}
+				
+				if ( player.inventoryContainer != null )
+				{
+					// for some reason the players inventory won't update without this.
+					player.inventoryContainer.detectAndSendChanges();
+				}
+				
 				return true;
 			}
 			else if(equippedItem != null && (equippedItem.getItem() instanceof ItemBarrels || equippedItem.getItem() instanceof ItemLargeVessel))
 			{
+				ItemStack is = equippedItem.copy();
+				is.stackSize = 1;
 				if(equippedItem.hasTagCompound())
 				{
 					if(equippedItem.getTagCompound().hasKey("fluidNBT") && !equippedItem.getTagCompound().hasKey("Items") && te.getFluidLevel() < te.getMaxLiquid())
@@ -323,7 +368,7 @@ public class BlockBarrel extends BlockTerraContainer
 						te.addLiquid(fs);
 						if(fs.amount == 0)
 						{
-							equippedItem.getTagCompound().removeTag("isSealed");
+							equippedItem.getTagCompound().removeTag("Sealed");
 							equippedItem.getTagCompound().removeTag("fluidNBT");
 							if(equippedItem.getTagCompound().hasNoTags())
 								equippedItem.setTagCompound(null);
@@ -331,6 +376,41 @@ public class BlockBarrel extends BlockTerraContainer
 						else
 						{
 							fs.writeToNBT(equippedItem.getTagCompound().getCompoundTag("fluidNBT"));
+						}
+						return true;
+					}
+				}
+				else
+				{
+					if(te.getFluidStack() != null)
+					{
+						NBTTagCompound nbt = new NBTTagCompound();
+						if(is.getItem() instanceof ItemBarrels)
+						{
+							nbt.setTag("fluidNBT",te.getFluidStack().writeToNBT(new NBTTagCompound()));
+							nbt.setBoolean("Sealed", true);
+							is.setTagCompound(nbt);
+							te.actionEmpty();
+							equippedItem.stackSize--;
+							TFC_Core.giveItemToPlayer(is, player);
+						}
+						else if(is.getItem() instanceof ItemLargeVessel)
+						{
+							FluidStack fs = te.getFluidStack().copy();
+							if(fs.amount > 5000)
+							{
+								fs.amount = 5000;
+								te.drainLiquid(5000);
+							}
+							else
+							{
+								te.actionEmpty();
+							}
+							nbt.setTag("fluidNBT", fs.writeToNBT(new NBTTagCompound()));
+							nbt.setBoolean("Sealed", true);
+							is.setTagCompound(nbt);
+							equippedItem.stackSize--;
+							TFC_Core.giveItemToPlayer(is, player);
 						}
 						return true;
 					}
@@ -371,10 +451,12 @@ public class BlockBarrel extends BlockTerraContainer
 	{
 		public int fuse;
 		World world;
+		int x, y, z;
 		public BarrelEntity(World par1World)
 		{
 			super(par1World);
 			this.fuse = 60;
+
 			this.preventEntitySpawning = true;
 			this.setSize(0.98F, 0.98F);
 			this.yOffset = this.height / 2.0F;
@@ -385,6 +467,9 @@ public class BlockBarrel extends BlockTerraContainer
 			this(par1World);
 			this.setPosition(par2, par4, par6);
 			world = par1World;
+			this.x = (int)par2;
+			this.y = (int)par4;
+			this.z = (int)par6;
 			float f = (float)(Math.random() * Math.PI * 2.0D);
 			this.motionX = -((float)Math.sin(f)) * 0.02F;
 			this.motionY = 0.20000000298023224D;
@@ -398,7 +483,7 @@ public class BlockBarrel extends BlockTerraContainer
 		public void onUpdate()
 		{
 			fuse--;
-			world.playSoundAtEntity(this, "random.fuse", 1.0F, 1.0F);
+			world.playSoundAtEntity(this, "game.tnt.primed", 1.0F, 1.0F);
 			if(fuse == 0)
 				explode();
 			worldObj.spawnParticle("smoke", posX, posY + 0.5D, posZ, new Random().nextFloat(), 1.0D, new Random().nextFloat());
@@ -407,6 +492,7 @@ public class BlockBarrel extends BlockTerraContainer
 		private void explode()
 		{
 			float f = 64.0F;
+			this.worldObj.setBlockToAir(x, y, z);
 			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, f, true);
 			setDead();
 		}

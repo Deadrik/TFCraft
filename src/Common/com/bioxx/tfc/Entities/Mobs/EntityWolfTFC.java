@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLeashKnot;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -28,14 +29,15 @@ import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
+import com.bioxx.tfc.api.Enums.EnumDamageType;
+import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
 import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
+public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, ICausesDamage
 {
 	protected long animalID;
 	protected int sex;
@@ -44,7 +46,13 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	protected boolean pregnant;
 	protected int pregnancyRequiredTime;
 	protected long timeOfConception;
-	protected float mateSizeMod;
+	protected float mateSizeMod = 0;
+	protected float mateStrengthMod = 0;
+	protected float mateAggroMod = 0;
+	protected float mateObedMod = 0;
+	protected float mateColMod = 0;
+	protected float mateClimMod = 0;
+	protected float mateHardMod = 0;
 	public float size_mod;			//How large the animal is
 	public float strength_mod;		//how strong the animal is
 	public float aggression_mod = 1;//How aggressive / obstinate the animal is
@@ -59,22 +67,22 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	private boolean familiarizedToday = false;
 	public int happyTicks;
 	private boolean wasRoped = false;
-	
+
 	protected float avgAdultWeight = 44f;	//The average weight of adult males in kg
 	protected float dimorphism = 0.0786f;	//1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
-											//the square root of the ratio of female mass : male mass
+	//the square root of the ratio of female mass : male mass
 
 	public EntityWolfTFC(World par1World)
 	{
 		super(par1World);
 		this.tasks.addTask(6, new EntityAIMateTFC(this, worldObj, 1));
 		//this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntitySheepTFC.class, 200, false));
-		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityChickenTFC.class, 200, false));
-		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityPheasantTFC.class, 200, false));
-		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false));
-		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityCowTFC.class, 200, false));
-		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityDeer.class, 200, false));
-		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityHorseTFC.class, 200, false));
+		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityChickenTFC.class, 200, false));
+		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityPheasantTFC.class, 200, false));
+		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false));
+		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityCowTFC.class, 200, false));
+		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityDeer.class, 200, false));
+		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityHorseTFC.class, 200, false));
 
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
@@ -132,7 +140,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		colour_mod = (float)Math.sqrt(colour_mod * colour_mod * (float)Math.sqrt((mother.getColour() + father_col) * 0.5F));
 		hard_mod = (float)Math.sqrt(hard_mod * hard_mod * (float)Math.sqrt((mother.getHardiness() + father_hard) * 0.5F));
 		climate_mod = (float)Math.sqrt(climate_mod * climate_mod * (float)Math.sqrt((mother.getClimateAdaptation() + father_clim) * 0.5F));
-		
+
 		this.familiarity = (int) (mother.getFamiliarity()<90?mother.getFamiliarity()/2:mother.getFamiliarity()*0.9f);
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
@@ -178,6 +186,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		nbt.setBoolean("Angry", this.isAngry());
 		nbt.setInteger("Familiarity", familiarity);
 		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);
+		nbt.setBoolean("Familiarized Today", familiarizedToday);
 		nbt.setInteger ("Sex", sex);
 		nbt.setLong ("Animal ID", animalID);
 		nbt.setFloat ("Size Modifier", size_mod);
@@ -197,6 +206,12 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		nbt.setInteger ("Hunger", hunger);
 		nbt.setBoolean("Pregnant", pregnant);
 		nbt.setFloat("MateSize", mateSizeMod);
+		nbt.setFloat("MateStrength", mateStrengthMod);
+		nbt.setFloat("MateAggro", mateAggroMod);
+		nbt.setFloat("MateObed", mateObedMod);
+		nbt.setFloat("MateCol", mateColMod);
+		nbt.setFloat("MateClim", mateClimMod);
+		nbt.setFloat("MateHard", mateHardMod);
 		nbt.setLong("ConceptionTime",timeOfConception);
 		nbt.setInteger("Age", getBirthDay());
 	}
@@ -213,6 +228,10 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
 
+		familiarity = nbt.getInteger("Familiarity");
+		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
+		familiarizedToday = nbt.getBoolean("Familiarized Today");
+
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
 		obedience_mod = nbt.getFloat ("Obedience Modifier");
@@ -222,12 +241,18 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 
 		this.dataWatcher.updateObject(16, nbt.getByte("tamed"));
 		this.happyTicks = nbt.getInteger("happy");
-		
+
 		wasRoped = nbt.getBoolean("wasRoped");
 
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
+		mateStrengthMod = nbt.getFloat("MateStrength");
+		mateAggroMod = nbt.getFloat("MateAggro");
+		mateObedMod = nbt.getFloat("MateObed");
+		mateColMod = nbt.getFloat("MateCol");
+		mateClimMod = nbt.getFloat("MateClim");
+		mateHardMod = nbt.getFloat("MateHard");
 		timeOfConception = nbt.getLong("ConceptionTime");
 		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
 	}
@@ -263,8 +288,17 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		if (hunger > 0)
 			hunger--;
 
+		if(this.getLeashed()){
+			if(this.getLeashedToEntity() instanceof EntityLeashKnot && familiarity >= 5){
+				this.setSitting(true);
+			}
+			else if(this.getLeashedToEntity() instanceof EntityPlayer){
+				this.setSitting(false);
+			}
+		}
+
 		if(this.getLeashed()&&!wasRoped)wasRoped = true;
-		
+
 		if(super.isInLove())
 			setInLove(true);
 
@@ -286,7 +320,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 			this.happyTicks = this.dataWatcher.getWatchableObjectInt(23);
 		}
 
-		if(pregnant)
+		if(isPregnant() && !worldObj.isRemote)
 		{
 			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
 			{
@@ -296,11 +330,16 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 					ArrayList<Float> data = new ArrayList<Float>();
 					data.add(mateSizeMod);
 					EntityWolfTFC baby = (EntityWolfTFC) this.createChildTFC(this);
+					baby.setLocationAndAngles (posX+(rand.nextFloat()-0.5F)*2F,posY,posZ+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
+					baby.rotationYawHead = baby.rotationYaw;
+					baby.renderYawOffset = baby.rotationYaw;
+					baby.setAge((int)TFC_Time.getTotalDays());
 					//baby.func_152115_b(this.func_152113_b());//setOwner
 					//baby.setTamed(true);
 					worldObj.spawnEntityInWorld(baby);
 				}
 				pregnant = false;
+				timeOfConception = TFC_Time.getTotalTicks() + (TFC_Time.ticksInMonth);
 			}
 		}
 
@@ -348,9 +387,10 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 
 	@Override
 	public void handleFamiliarityUpdate(){
-		if(lastFamiliarityUpdate < TFC_Time.getTotalDays()){
+		int totalDays = TFC_Time.getTotalDays();
+		if(lastFamiliarityUpdate < totalDays){
 			if(familiarizedToday && familiarity < 100){
-				lastFamiliarityUpdate = TFC_Time.getTotalDays();
+				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = (6 * obedience_mod / aggression_mod);
 				if(this.isAdult() && (familiarity > 30 && familiarity < 80)){
@@ -369,6 +409,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 			}
 			else if(familiarity < 30){
 				familiarity -= 2*(TFC_Time.getTotalDays() - lastFamiliarityUpdate);
+				lastFamiliarityUpdate = totalDays;
 			}
 		}
 		if(familiarity > 100)familiarity = 100;
@@ -488,12 +529,14 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 			otherAnimal.mate(this);
 			return;
 		}
-		timeOfConception = TFC_Time.getTotalTicks();
-		pregnant = true;
-		//targetMate.setGrowingAge (TFC_Settings.dayLength);
-		resetInLove();
-		otherAnimal.setInLove(false);
-		mateSizeMod = otherAnimal.getSize();
+		if(timeOfConception < TFC_Time.getTotalTicks()){
+			timeOfConception = TFC_Time.getTotalTicks();
+			pregnant = true;
+			//targetMate.setGrowingAge (TFC_Settings.dayLength);
+			resetInLove();
+			otherAnimal.setInLove(false);
+			mateSizeMod = otherAnimal.getSize();
+		}
 	}
 
 	@Override
@@ -539,10 +582,16 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	}
 
 	@Override
-	public EntityAgeable createChildTFC(EntityAgeable entityageable)
+	public EntityAgeable createChildTFC(EntityAgeable eAgeable)
 	{
 		ArrayList<Float> data = new ArrayList<Float>();
-		data.add(entityageable.getEntityData().getFloat("MateSize"));
+		data.add(eAgeable.getEntityData().getFloat("MateSize"));
+		data.add(eAgeable.getEntityData().getFloat("MateStrength"));
+		data.add(eAgeable.getEntityData().getFloat("MateAggro"));
+		data.add(eAgeable.getEntityData().getFloat("MateObed"));
+		data.add(eAgeable.getEntityData().getFloat("MateCol"));
+		data.add(eAgeable.getEntityData().getFloat("MateClim"));
+		data.add(eAgeable.getEntityData().getFloat("MateHard"));
 		return new EntityWolfTFC(worldObj, this, data);
 	}
 
@@ -717,7 +766,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 			this.setTamed(true);
 		}
 	}
-	
+
 	@Override
 	public boolean trySetName(String name, EntityPlayer player) {
 		if(this.checkFamiliarity(InteractionEnum.NAME, player) && !this.hasCustomNameTag()){
@@ -727,7 +776,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		this.playSound("mob.wolf.growl",  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
 		return false;
 	}
-	
+
 	@Override
 	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
 		boolean flag = false;
@@ -743,5 +792,10 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
 		}
 		return flag;
+	}
+	@Override
+	public EnumDamageType GetDamageType() 
+	{
+		return EnumDamageType.SLASHING;
 	}
 }

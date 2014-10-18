@@ -1,11 +1,13 @@
 package com.bioxx.tfc.Blocks;
 
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
@@ -84,11 +86,15 @@ public class BlockStair extends BlockPartial
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion ex)
+	public boolean canDropFromExplosion(Explosion ex)
 	{
-		if(!world.isRemote)
-		{
-		}
+		return false;
+	}
+
+	@Override
+	public Item getItemDropped(int metadata, Random rand, int fortune)
+	{
+		return null;
 	}
 
 	@Override

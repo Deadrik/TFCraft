@@ -13,6 +13,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Blocks.Terrain.BlockCobble;
+import com.bioxx.tfc.Blocks.Terrain.BlockSand;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 
@@ -47,6 +49,19 @@ public class BlockThatch extends BlockTerra
 	}
 
 	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
+	{
+		if(!world.isRemote)
+		{
+			Block b = world.getBlock(x, y+1, z);
+			if(TFC_Core.isSoilOrGravel(b) || b instanceof BlockCobble || b instanceof BlockSand)
+			{
+				TFC_Core.setBlockToAirWithDrops(world, x, y, z);
+			}
+		}
+	}
+
+	@Override
 	public boolean getBlocksMovement(IBlockAccess bAccess, int x, int y, int z)
 	{
 		return true;
@@ -77,13 +92,6 @@ public class BlockThatch extends BlockTerra
 	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
 		return canBlockStay(world, x, y, z) && super.canPlaceBlockAt(world, x, y, z);
-	}
-
-	@Override
-	public boolean canBlockStay(World world, int x, int y, int z)
-	{
-		Block id = world.getBlock(x, y - 1, z);
-		return y > 0 && y < 256 ? !TFC_Core.isGround(id) && id != this : false;
 	}
 
 	@Override

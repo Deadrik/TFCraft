@@ -95,7 +95,7 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		Block b = world.getBlock(x, y, z);
-		if (b == TFCBlocks.ToolRack || b == TFCBlocks.ToolRack2)
+		if (b == TFCBlocks.ToolRack)
 			return true;
 		return false;
 	}
@@ -229,13 +229,13 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 
 	public double getWeaponDamage(ItemStack is)
 	{
-		return Math.floor(weaponDamage + (weaponDamage * (AnvilManager.getDamageBuff(is) / 200f)));
+		return Math.floor(weaponDamage + (weaponDamage * AnvilManager.getDamageBuff(is)));
 	}
 
 	@Override
 	public int getMaxDamage(ItemStack is)
 	{
-		return (int) Math.floor(getMaxDamage() + (getMaxDamage() * (AnvilManager.getDurabilityBuff(is) / 300f)));
+		return (int) Math.floor(getMaxDamage() + (getMaxDamage() * AnvilManager.getDurabilityBuff(is)));
 	}
 
 	@Override

@@ -417,27 +417,27 @@ public class TESluice extends TileEntity implements IInventory
 		//Here we make sure that the water flags are checked
 		if((meta & 3 )== 0)
 		{
-			waterInput = worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1) == TFCBlocks.SaltWater;
-			waterOutput = worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2) == TFCBlocks.SaltWater || 
-					worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2) == TFCBlocks.SaltWater;
+			waterInput = TFC_Core.isWater(worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1));
+			waterOutput = TFC_Core.isWater(worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2)) || 
+					TFC_Core.isWater(worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2));
 		}
 		if((meta & 3 )== 1)
 		{
-			waterInput = worldObj.getBlock(xCoord + 1, yCoord + 1, zCoord) == TFCBlocks.SaltWater;
-			waterOutput = worldObj.getBlock(xCoord - 2, yCoord - 1, zCoord) == TFCBlocks.SaltWater || 
-					worldObj.getBlock(xCoord - 2, yCoord - 1, zCoord) == TFCBlocks.SaltWater;
+			waterInput = TFC_Core.isWater(worldObj.getBlock(xCoord + 1, yCoord + 1, zCoord));
+			waterOutput = TFC_Core.isWater(worldObj.getBlock(xCoord - 2, yCoord - 1, zCoord)) || 
+					TFC_Core.isWater(worldObj.getBlock(xCoord - 2, yCoord - 1, zCoord));
 		}
 		if((meta & 3 )== 2)
 		{
-			waterInput = worldObj.getBlock(xCoord, yCoord + 1, zCoord + 1) == TFCBlocks.SaltWater;
-			waterOutput = worldObj.getBlock(xCoord, yCoord - 1, zCoord - 2) == TFCBlocks.SaltWater || 
-					worldObj.getBlock(xCoord, yCoord - 1, zCoord - 2) == TFCBlocks.SaltWater;
+			waterInput = TFC_Core.isWater(worldObj.getBlock(xCoord, yCoord + 1, zCoord + 1));
+			waterOutput = TFC_Core.isWater(worldObj.getBlock(xCoord, yCoord - 1, zCoord - 2)) || 
+					TFC_Core.isWater(worldObj.getBlock(xCoord, yCoord - 1, zCoord - 2));
 		}
 		if((meta & 3 )== 3)
 		{
-			waterInput = worldObj.getBlock(xCoord - 1, yCoord + 1, zCoord) == TFCBlocks.SaltWater;
-			waterOutput = worldObj.getBlock(xCoord + 2, yCoord - 1, zCoord) == TFCBlocks.SaltWater ||
-					worldObj.getBlock(xCoord + 2, yCoord - 1, zCoord) == TFCBlocks.SaltWater;
+			waterInput = TFC_Core.isWater(worldObj.getBlock(xCoord - 1, yCoord + 1, zCoord));
+			waterOutput = TFC_Core.isWater(worldObj.getBlock(xCoord + 2, yCoord - 1, zCoord)) ||
+					TFC_Core.isWater(worldObj.getBlock(xCoord + 2, yCoord - 1, zCoord));
 		}
 
 		/////////////////////////////////////////////////////////

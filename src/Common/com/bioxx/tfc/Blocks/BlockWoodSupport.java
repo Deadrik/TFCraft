@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Blocks;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -87,58 +88,64 @@ public class BlockWoodSupport extends BlockTerra
 
 	public static int[] getSupportsInRangeDir(World world, int x, int y, int z, int range, boolean checkConnection)
 	{
-		int n = 0; boolean foundN = false;
-		int s = 0; boolean foundS = false;
-		int e = 0; boolean foundE = false;
-		int w = 0; boolean foundW = false;
-		for(int i = 1; i < range; i++)
+		int n = 0; boolean foundNV = false; boolean foundNH = true;
+		int s = 0; boolean foundSV = false; boolean foundSH = true;
+		int e = 0; boolean foundEV = false; boolean foundEH = true;
+		int w = 0; boolean foundWV = false; boolean foundWH = true;
+		for(int i = 1; i <= range; i++)
 		{
-			if(!foundE)
+			if(!foundEV)
 			{
-				if(!checkConnection || TFCBlocks.isBlockHSupport(world.getBlock(x+i, y, z)))
+				if(!checkConnection)
 					e++;
-				else e -= 50;
-				if(TFCBlocks.isBlockVSupport(world.getBlock(x+i, y, z)) && e >= 0)
+				else if(checkConnection && !TFCBlocks.isBlockHSupport(world.getBlock(x+i, y, z)) && !TFCBlocks.isBlockVSupport(world.getBlock(x+i, y, z))) 
+					foundEH = false;
+				else e++;
+				if(TFCBlocks.isBlockVSupport(world.getBlock(x+i, y, z)) && (e >= 0 || i == 1))
 					if(scanVert(world, x+i, y, z))
-						foundE = true;
+						foundEV = true;
 					else e -= 50;
 			}
-			if(!foundW)
+			if(!foundWV)
 			{
-				if(!checkConnection || TFCBlocks.isBlockHSupport(world.getBlock(x-i, y, z)))
+				if(!checkConnection)
 					w++;
-				else w -= 50;
-				if(TFCBlocks.isBlockVSupport(world.getBlock(x-i, y, z)) && w >= 0)
+				else if(checkConnection && !TFCBlocks.isBlockHSupport(world.getBlock(x-i, y, z)) && !TFCBlocks.isBlockVSupport(world.getBlock(x-i, y, z))) 
+					foundWH = false;
+				else w++;
+				if(TFCBlocks.isBlockVSupport(world.getBlock(x-i, y, z)) && (w >= 0 || i == 1))
 					if(scanVert(world, x-i, y, z))
-						foundW = true;
+						foundWV = true;
 					else w -= 50;
 			}
-			if(!foundS)
+			if(!foundSV)
 			{
-				if(!checkConnection || TFCBlocks.isBlockHSupport(world.getBlock(x, y, z+i)))
+				if(!checkConnection)
 					s++;
-				else s -= 50;
+				else if(checkConnection && !TFCBlocks.isBlockHSupport(world.getBlock(x, y, z+i)) && !TFCBlocks.isBlockVSupport(world.getBlock(x, y, z+i))) 
+					foundSH = false;
+				else s++;
 
-				if(TFCBlocks.isBlockVSupport(world.getBlock(x, y, z+i)) && s >= 0)
+				if(TFCBlocks.isBlockVSupport(world.getBlock(x, y, z+i)) && (s >= 0 || i == 1))
 					if(scanVert(world, x, y, z+i))
-						foundS = true;
-					else s -= 50;
+						foundSV = true;
 			}
-			if(!foundN)
+			if(!foundNV)
 			{
-				if(!checkConnection || TFCBlocks.isBlockHSupport(world.getBlock(x, y, z-i)))
+				if(!checkConnection)
 					n++;
-				else n -= 50;
+				else if(checkConnection && !TFCBlocks.isBlockHSupport(world.getBlock(x, y, z-i)) && !TFCBlocks.isBlockVSupport(world.getBlock(x, y, z-i))) 
+					foundNH = false;
+				else n++;
 
-				if(TFCBlocks.isBlockVSupport(world.getBlock(x, y, z-i)) && n >= 0)
+				if(TFCBlocks.isBlockVSupport(world.getBlock(x, y, z-i)) && (n >= 0 || i == 1))
 					if(scanVert(world, x, y, z-i))
-						foundN = true;
-					else n -= 50;
+						foundNV = true;
 			}
 		}
-		if(foundE && foundW)
+		if(foundEV && foundEH && foundWV && foundWH)
 			return new int[]{0, 0, 0, 0, w, e};
-		if(foundS && foundN)
+		if(foundSV && foundSH && foundNV && foundNH)
 			return new int[]{0, 0, n, s, 0, 0};
 		return null;
 	}
@@ -194,8 +201,22 @@ public class BlockWoodSupport extends BlockTerra
 	}
 
 	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		Block b = world.getBlock(x, y, z);
+		if(b == TFCBlocks.WoodSupportH || b == TFCBlocks.WoodSupportV)
+			ret.add(new ItemStack(TFCBlocks.WoodSupportV, 1, metadata));
+		else if(b == TFCBlocks.WoodSupportH2 || b == TFCBlocks.WoodSupportV2)
+			ret.add(new ItemStack(TFCBlocks.WoodSupportV2, 1, metadata));
+		return ret;
+	}
+
+	@Override
 	public IIcon getIcon(int side, int meta)
 	{
+		if(meta < 0)
+			return icons[0];
 		if(meta<icons.length)
 			return icons[meta];
 		return TFCBlocks.WoodSupportH2.getIcon(side, meta-16);
@@ -366,7 +387,7 @@ public class BlockWoodSupport extends BlockTerra
 
 		int meta = world.getBlockMetadata(i, j, k);
 
-		if(isVertical && isOtherVertical)//Vertical Beam
+		if(isVertical && !isOtherHorizontal)//Vertical Beam
 		{
 			//if the block directly beneath the support is not solid or a support then break the support
 			if(!world.getBlock(i, j-1, k).isOpaqueCube() && !TFCBlocks.isBlockVSupport(world.getBlock(i, j-1, k)))
@@ -397,6 +418,7 @@ public class BlockWoodSupport extends BlockTerra
 	public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int side)
 	{
 		Block downBlock = world.getBlock(x, y-1, z);
+		Block block = world.getBlock(x, y, z);
 		//bottom
 		if(!TFCBlocks.isBlockVSupport(downBlock))
 		{
@@ -432,15 +454,15 @@ public class BlockWoodSupport extends BlockTerra
 		}
 		else if(TFCBlocks.isBlockVSupport(downBlock) || downBlock.isOpaqueCube())
 		{
-			if(side == 1 && world.isAirBlock(x, y+1, z))
+			if(side == 1 && world.isAirBlock(x, y, z))
 				return true;
-			else if(side == 2 && (TFCBlocks.isBlockVSupport(world.getBlock(x, y-1, z-1)) || world.getBlock(x, y-1, z-1).isOpaqueCube()) && world.isAirBlock(x, y, z-1))
+			else if(side == 2 && (TFCBlocks.isBlockVSupport(world.getBlock(x, y, z-1)) || world.getBlock(x, y, z-1).isOpaqueCube()) && world.isAirBlock(x, y, z-1))
 				return true;
-			else if(side == 3 && (TFCBlocks.isBlockVSupport(world.getBlock(x, y-1, z+1)) || world.getBlock(x, y-1, z+1).isOpaqueCube()) && world.isAirBlock(x, y, z+1))
+			else if(side == 3 && (TFCBlocks.isBlockVSupport(world.getBlock(x, y, z+1)) || world.getBlock(x, y, z+1).isOpaqueCube()) && world.isAirBlock(x, y, z+1))
 				return true;
-			else if(side == 4 && (TFCBlocks.isBlockVSupport(world.getBlock(x-1, y-1, z)) || world.getBlock(x-1, y-1, z).isOpaqueCube()) && world.isAirBlock(x-1, y, z))
+			else if(side == 4 && (TFCBlocks.isBlockVSupport(world.getBlock(x-1, y, z)) || world.getBlock(x-1, y, z).isOpaqueCube()) && world.isAirBlock(x-1, y, z))
 				return true;
-			else if(side == 5 && (TFCBlocks.isBlockVSupport(world.getBlock(x+1, y-1, z)) || world.getBlock(x+1, y-1, z).isOpaqueCube()) && world.isAirBlock(x+1, y, z))
+			else if(side == 5 && (TFCBlocks.isBlockVSupport(world.getBlock(x+1, y, z)) || world.getBlock(x+1, y, z).isOpaqueCube()) && world.isAirBlock(x+1, y, z))
 				return true;
 		}
 

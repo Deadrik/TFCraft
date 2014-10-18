@@ -11,7 +11,7 @@ public class WorldGenFlowers
 {
 	public static void generate(World world, Random random, int chunkX, int chunkZ, int flowersPerChunk)
 	{
-		int flowerType = new Random(world.getSeed() + ((chunkX >> 7) - (chunkZ >> 7)) * (chunkZ >> 7)).nextInt(15);
+		int flowerType = new Random(world.getSeed() + ((chunkX >> 7) - (chunkZ >> 7)) * (chunkZ >> 7)).nextInt(14);
 		BlockFlower plantBlock = (BlockFlower) TFCBlocks.Flowers;
 		if(flowerType > 5)
 		{

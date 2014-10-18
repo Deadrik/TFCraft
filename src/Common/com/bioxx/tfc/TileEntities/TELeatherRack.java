@@ -20,7 +20,7 @@ public class TELeatherRack extends NetworkTileEntity
 	public void workArea(int coord)
 	{
 		workedArea |= (1 << coord);
-		if(workedArea == -1)
+		if(workedArea == -1 && leatherItem != null)
 		{
 			int meta = leatherItem.getItemDamage();
 			leatherItem = new ItemStack(TFCItems.ScrapedHide, 1, meta);

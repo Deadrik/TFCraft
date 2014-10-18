@@ -52,9 +52,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 
 		if(TFCOptions.enableDebugMode)
 		{
-			NBTTagCompound nbt = is.getTagCompound();
-			if(nbt != null && nbt.hasKey("craftingTag") && nbt.getCompoundTag("craftingTag").hasKey("durabuff"))
-				arraylist.add("durabuff=" + is.getMaxDamage()+ "/" + is.getItem().getMaxDamage());
+			arraylist.add("durabuff=" + AnvilManager.getDurabilityBuff(is));
 		}
 	}
 
@@ -110,7 +108,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 	@Override
 	public int getMaxDamage(ItemStack stack)
 	{
-		return (int) (getMaxDamage()+(getMaxDamage() * (AnvilManager.getDurabilityBuff(stack) / 300f)));
+		return (int) (getMaxDamage()+(getMaxDamage() * AnvilManager.getDurabilityBuff(stack)));
 	}
 
 	@Override

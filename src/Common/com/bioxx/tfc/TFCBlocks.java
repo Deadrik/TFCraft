@@ -47,7 +47,6 @@ import com.bioxx.tfc.Blocks.Devices.BlockSpawnMeter;
 import com.bioxx.tfc.Blocks.Devices.BlockStand;
 import com.bioxx.tfc.Blocks.Devices.BlockStand2;
 import com.bioxx.tfc.Blocks.Devices.BlockToolRack;
-import com.bioxx.tfc.Blocks.Devices.BlockToolRack2;
 import com.bioxx.tfc.Blocks.Devices.BlockWorkbench;
 import com.bioxx.tfc.Blocks.Flora.BlockBerryBush;
 import com.bioxx.tfc.Blocks.Flora.BlockFlora;
@@ -122,7 +121,6 @@ import com.bioxx.tfc.Items.ItemBlocks.ItemMetalTrapDoor;
 import com.bioxx.tfc.Items.ItemBlocks.ItemSoil;
 import com.bioxx.tfc.Items.ItemBlocks.ItemStone;
 import com.bioxx.tfc.Items.ItemBlocks.ItemToolRack;
-import com.bioxx.tfc.Items.ItemBlocks.ItemToolRack2;
 import com.bioxx.tfc.Items.ItemBlocks.ItemTorch;
 import com.bioxx.tfc.api.Constant.Global;
 
@@ -256,7 +254,6 @@ public class TFCBlocks
 	public static Block WoodHoriz;
 	public static Block WoodHoriz2;
 	public static Block ToolRack;
-	public static Block ToolRack2;
 	public static Block SpawnMeter;
 	public static Block FoodPrep;
 	public static Block Quern;
@@ -438,7 +435,6 @@ public class TFCBlocks
 		GameRegistry.registerBlock(WoodHoriz4, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood2.class, "WoodHoriz4");
 
 		GameRegistry.registerBlock(ToolRack, ItemToolRack.class, "ToolRack");
-		GameRegistry.registerBlock(ToolRack2, ItemToolRack2.class, "ToolRack2");
 		GameRegistry.registerBlock(SpawnMeter, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "SpawnMeter");
 		GameRegistry.registerBlock(FoodPrep, "FoodPrep");
 		GameRegistry.registerBlock(Quern, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Quern");
@@ -663,7 +659,6 @@ public class TFCBlocks
 		WoodHoriz4 = new BlockLogHoriz2(8).setBlockName("WoodHoriz4").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
 
 		ToolRack = new BlockToolRack().setHardness(3F).setBlockName("Toolrack");
-		ToolRack2 = new BlockToolRack2().setHardness(3F).setBlockName("Toolrack");
 		SpawnMeter = new BlockSpawnMeter().setHardness(3F).setBlockName("SpawnMeter");
 		FoodPrep = new BlockFoodPrep().setHardness(1F).setBlockName("FoodPrep");
 		Quern = new BlockQuern().setHardness(3F).setBlockName("Quern");
@@ -719,7 +714,7 @@ public class TFCBlocks
 		Fungi = new BlockFungi().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Fungi");
 
 		SaltWater = (new BlockSaltWater(TFCFluid.SALTWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWater");
-		SaltWaterStationary = (new BlockLiquidStatic(TFCFluid.SALTWATER, Material.water, SaltWater)).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWaterStationary");
+		SaltWaterStationary = (new BlockLiquidStatic(TFCFluid.SALTWATER, Material.water, SaltWater)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWaterStationary");
 
 		FreshWater = (new BlockFreshWater(TFCFluid.FRESHWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWater");
 		FreshWaterStationary = (new BlockLiquidStatic(TFCFluid.FRESHWATER, Material.water, FreshWater)).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWaterStationary");
@@ -728,7 +723,7 @@ public class TFCBlocks
 		HotWaterStationary = (new BlockHotWaterStatic(TFCFluid.HOTWATER, Material.water, HotWater)).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWaterStationary");
 
 		Lava = (new BlockLava()).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("Lava");
-		LavaStationary = (new BlockLiquidStatic(TFCFluid.LAVA, Material.lava, Lava)).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("Lava");
+		LavaStationary = (new BlockLiquidStatic(TFCFluid.LAVA, Material.lava, Lava)).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("LavaStationary");
 		Ice = new BlockCustomIce().setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("Ice").setBlockTextureName("ice");
 
 		WaterPlant = new BlockWaterPlant(0).setBlockName("SeaGrassStill").setHardness(0.5f).setStepSound(Block.soundTypeGravel);
@@ -801,37 +796,37 @@ public class TFCBlocks
 
 	public static void setupFire()
 	{
-		Blocks.fire.setFireInfo(LogNatural, 5, 20);
-		Blocks.fire.setFireInfo(LogNatural2, 5, 20);
+		Blocks.fire.setFireInfo(LogNatural, 5, 5);
+		Blocks.fire.setFireInfo(LogNatural2, 5, 5);
 		Blocks.fire.setFireInfo(WoodSupportV, 5, 20);
 		Blocks.fire.setFireInfo(WoodSupportV2, 5, 20);
 		Blocks.fire.setFireInfo(WoodSupportH, 5, 20);
 		Blocks.fire.setFireInfo(WoodSupportH2, 5, 20);
-		Blocks.fire.setFireInfo(Leaves, 5, 20);
-		Blocks.fire.setFireInfo(Leaves2, 5, 20);
+		Blocks.fire.setFireInfo(Leaves, 20, 20);
+		Blocks.fire.setFireInfo(Leaves2, 20, 20);
 		Blocks.fire.setFireInfo(fruitTreeWood, 5, 20);
-		Blocks.fire.setFireInfo(fruitTreeLeaves, 5, 20);
-		Blocks.fire.setFireInfo(fruitTreeLeaves2, 5, 20);
+		Blocks.fire.setFireInfo(fruitTreeLeaves, 20, 20);
+		Blocks.fire.setFireInfo(fruitTreeLeaves2, 20, 20);
 		Blocks.fire.setFireInfo(Fence, 5, 20);
 		Blocks.fire.setFireInfo(Fence2, 5, 20);
 		Blocks.fire.setFireInfo(FenceGate, 5, 20);
 		Blocks.fire.setFireInfo(FenceGate2, 5, 20);
 		Blocks.fire.setFireInfo(Chest, 5, 20);
-		Blocks.fire.setFireInfo(StrawHideBed, 5, 20);
-		Blocks.fire.setFireInfo(Thatch, 5, 20);
-		Blocks.fire.setFireInfo(WoodVert, 5, 20);
-		Blocks.fire.setFireInfo(WoodVert2, 5, 20);
-		Blocks.fire.setFireInfo(WoodHoriz, 5, 20);
-		Blocks.fire.setFireInfo(WoodHoriz2, 5, 20);
-		Blocks.fire.setFireInfo(WoodHoriz3, 5, 20);
-		Blocks.fire.setFireInfo(WoodHoriz4, 5, 20);
+		Blocks.fire.setFireInfo(StrawHideBed, 20, 20);
+		Blocks.fire.setFireInfo(Thatch, 20, 20);
+		Blocks.fire.setFireInfo(WoodVert, 5, 5);
+		Blocks.fire.setFireInfo(WoodVert2, 5, 5);
+		Blocks.fire.setFireInfo(WoodHoriz, 5, 5);
+		Blocks.fire.setFireInfo(WoodHoriz2, 5, 5);
+		Blocks.fire.setFireInfo(WoodHoriz3, 5, 5);
+		Blocks.fire.setFireInfo(WoodHoriz4, 5, 5);
 		Blocks.fire.setFireInfo(Planks, 5, 20);
 		Blocks.fire.setFireInfo(Planks2, 5, 20);
 		Blocks.fire.setFireInfo(WoodConstruct, 5, 20);
-		Blocks.fire.setFireInfo(BerryBush, 5, 20);
+		Blocks.fire.setFireInfo(BerryBush, 20, 20);
 		Blocks.fire.setFireInfo(Barrel, 5, 20);
 		Blocks.fire.setFireInfo(Crops, 20, 20);
-		Blocks.fire.setFireInfo(LogPile, 20, 20);
+		Blocks.fire.setFireInfo(LogPile, 10, 10);
 		//Blocks.fire.setFireInfo(Charcoal, 100, 20);
 		for (int i=0; i < Global.WOOD_ALL.length; i++)
 			Blocks.fire.setFireInfo(Doors[i], 5, 20);

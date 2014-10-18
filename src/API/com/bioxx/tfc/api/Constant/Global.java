@@ -82,6 +82,7 @@ public class Global
 	public static final String SKILL_AGRICULTURE = "skill.agriculture";
 	public static final String SKILL_COOKING = "skill.cooking";
 	public static final String SKILL_PROSPECTING = "skill.prospecting";
+	public static final String SKILL_BUTCHERING = "skill.butchering";
 
 
 	public static Metal BISMUTH;
@@ -120,6 +121,7 @@ public class Global
 	 */
 	public static double FOOD_DECAY_RATE = 1.0170378966055869517978300569768f;
 	public static float FOOD_MAX_WEIGHT = 160;
+	public static float FOOD_MIN_DROP_WEIGHT = 0.1f;
 
 	public static int SEALEVEL = 144;
 }

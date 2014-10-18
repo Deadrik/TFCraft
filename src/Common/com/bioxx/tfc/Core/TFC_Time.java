@@ -50,6 +50,7 @@ public class TFC_Time
 
 	public static final long hourLength = 1000;
 	public static final int dayLength = 24000;
+	public static final int hoursInDay = (int) (dayLength / hourLength);
 
 	/**
 	 * This is the year length ratio for use when your numbers are based on a 360 day year and 
@@ -107,7 +108,22 @@ public class TFC_Time
 		int d = getDayOfMonth((int)(ticks/hourLength));
 		int tMonths = (int) (ticks/ticksInMonth);
 		div = tMonths/12;
-		rem = tMonths-(div*12);
+		rem = tMonths%12;
+		String m = TFC_Time.MONTHS[rem];
+		String date = d + " " + m + ", " + (1000+div);
+
+		return date;
+	}
+
+	public static String getDateStringFromHours(int tHours)
+	{
+		int tDays = tHours/hoursInDay;
+		int div = tDays/daysInMonth;
+		int rem = 0;
+		int d = getDayOfMonth(tDays);
+		int tMonths = div;
+		div = tMonths/12;
+		rem = tMonths%12;
 		String m = TFC_Time.MONTHS[rem];
 		String date = d + " " + m + ", " + (1000+div);
 
@@ -116,7 +132,7 @@ public class TFC_Time
 
 	public static int getHoursInMonth()
 	{
-		return 24*daysInMonth;
+		return hoursInDay*daysInMonth;
 	}
 
 	public static String getSeason()
@@ -156,7 +172,7 @@ public class TFC_Time
 	public static int getDayOfMonth(int tDays)
 	{
 		int months = tDays/daysInMonth;
-		int rem = tDays/(months*daysInMonth);
+		int rem = tDays-(months*daysInMonth);
 		return 1+rem;
 	}
 
@@ -234,16 +250,12 @@ public class TFC_Time
 
 	public static int getHour()
 	{
-		int h = (int)Math.floor((time % dayLength)/hourLength);
-		h -= 5;
-		if(h < 0)
-			h = 23 + h;
-		h -= 12;
-		if(h < 0)
-			h = 23+h;
-		return  h;
+		int th = (int) getTotalHours();
+		int h = getHourOfDayFromTotalHours(th);
+		return h;
 	}
 
+// TODO do we need this? same as getHour(), never used
 	public static int getHourOfDayFromTotalHours()
 	{
 		return  getHourOfDayFromTotalHours((int)getTotalHours());
@@ -251,56 +263,42 @@ public class TFC_Time
 
 	public static int getHourOfDayFromTotalHours(int th)
 	{
-		int h = th % 24;//gives us the remainder
-		h -= 5;
-		if(h < 0)
-			h = 23 + h;
-		h -= 12;
-		if(h < 0)
-			h = 23+h;
-		return  h;
+		int h = (th + 6) % hoursInDay;  //gives us the remainder, days start at 6:00
+		return h;
 	}
 
 	public static int getDayFromTotalHours(int th)
 	{
-		return th/24;
+		return th / hoursInDay;
 	}
 
 	public static int getDayFromTotalHours(long th)
 	{
-		return (int)(th/24);
+		return (int) (th / hoursInDay);
 	}
 
 	public static boolean isSpring(int z)
 	{
 		int day = (getDayOfYear() + (z > 0 ? (daysInYear) / 2 : 0)) % daysInYear;
-		if(day >= 20 && day <= 111)
-			return true;
-		return false;
+		return (day >= 20 && day <= 111);
 	}
 
 	public static boolean isSummer(int z)
 	{
 		int day = (getDayOfYear() + (z > 0 ? (daysInYear) / 2 : 0)) % daysInYear;
-		if(day >= 112 && day <= 202)
-			return true;
-		return false;
+		return (day >= 112 && day <= 202);
 	}
 
 	public static boolean isFall(int z)
 	{
 		int day = (getDayOfYear() + (z > 0 ? (daysInYear) / 2 : 0)) % daysInYear;
-		if(day >= 203 && day <= 293)
-			return true;
-		return false;
+		return (day >= 203 && day <= 293);
 	}
 
 	public static boolean isWinter(int z)
 	{
 		int day = (getDayOfYear() + (z > 0 ? (daysInYear) / 2 : 0)) % daysInYear;
-		if(day >= 294 || day < 20)
-			return true;
-		return false;
+		return (day >= 294 || day < 20);
 	}
 
 	public static int getMonthFromDayOfYear(int day)

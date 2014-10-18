@@ -82,7 +82,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 		{
 			NBTTagCompound nbt = is.getTagCompound();
 			if(nbt != null && nbt.hasKey("craftingTag") && nbt.getCompoundTag("craftingTag").hasKey("durabuff"))
-				arraylist.add("durabuff=" + is.getMaxDamage()+ "/" + is.getItem().getMaxDamage());
+				arraylist.add("durabuff=" + is.getMaxDamage()+ "/" + is.getItem().getMaxDamage(is));
 		}
 	}
 
@@ -115,10 +115,9 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
-		MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(player, player.worldObj);
+		MovingObjectPosition mop = Helper.getMouseOverObject(player, player.worldObj);
 
-		if(objectMouseOver != null && world.getBlock(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ) == TFCBlocks.ToolRack &&
-				world.getBlock(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ) == TFCBlocks.ToolRack2)
+		if(mop != null && world.getBlock(mop.blockX, mop.blockY, mop.blockZ) == TFCBlocks.ToolRack)
 			return is;
 
 		player.setItemInUse(is, this.getMaxItemUseDuration(is));
@@ -151,7 +150,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 
 	public double getWeaponDamage(ItemStack is)
 	{
-		return Math.floor(weaponBaseDamage + (weaponBaseDamage * (AnvilManager.getDamageBuff(is) / 200f)));
+		return Math.floor(weaponBaseDamage + (weaponBaseDamage * AnvilManager.getDamageBuff(is)));
 	}
 
 	@Override
@@ -165,7 +164,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	@Override
 	public int getMaxDamage(ItemStack is)
 	{
-		return (int) Math.floor(getMaxDamage() + (getMaxDamage() * (AnvilManager.getDurabilityBuff(is) / 300f)));
+		return (int) Math.floor(getMaxDamage() + (getMaxDamage() * AnvilManager.getDurabilityBuff(is)));
 	}
 
 	@Override

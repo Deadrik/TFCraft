@@ -26,7 +26,7 @@ public class TEOre extends NetworkTileEntity
 		if((extraData & 8) == 0)
 			extraData += 8;
 
-		//worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class TEOre extends NetworkTileEntity
 	@Override
 	public Packet getDescriptionPacket()
 	{
-		if((extraData & 8) != 0 || this.yCoord > 130)
+		if((extraData & 8) != 0 || this.yCoord > 100)
 		{
 			NBTTagCompound nbt = new NBTTagCompound();
 			createInitNBT(nbt);

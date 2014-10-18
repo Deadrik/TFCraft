@@ -22,6 +22,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
 
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
@@ -132,9 +133,10 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 
 				if (this.onGround)
 				{
-					if(!worldObj.isSideSolid(i, j-1, k, ForgeDirection.UP))
+					if(canReplace(worldObj, i, j-1, k))
 					{
-						TFC_Core.setBlockToAirWithDrops(worldObj, i, j-1, k);
+						//TFC_Core.setBlockToAirWithDrops(worldObj, i, j-1, k);
+						worldObj.setBlockToAir(i, j-1, k);
 						this.onGround = false;
 					}
 				}
@@ -215,9 +217,16 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 	public boolean canReplace(World world, int x, int y, int z)
 	{
 		Block b = world.getBlock(x, y, z);
-		if(b == Blocks.air || !b.isOpaqueCube())
-			return TFC_Core.setBlockWithDrops(worldObj, x, y, z, getBlock(), blockMeta);
+		if(canDestroy(b) && (b == Blocks.air || !worldObj.isSideSolid(x, y, z, ForgeDirection.UP)))
+			return TFC_Core.setBlockWithDrops(worldObj, x, y, z, getBlock(), this.blockMeta);
 		return false;
+	}
+
+	private boolean canDestroy(Block b)
+	{
+		if(b == TFCBlocks.Charcoal)
+			return false;
+		return true;
 	}
 
 	/**

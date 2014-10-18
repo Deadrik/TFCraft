@@ -40,6 +40,12 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	public LoomRecipe recipe;
 	private ResourceLocation defaultTexture = new ResourceLocation(Reference.ModID, "textures/blocks/String.png");
 
+	@Override
+	public boolean canUpdate()
+	{
+		return false;
+	}
+	
 	public TELoom()
 	{
 		storage = new ItemStack[2];
@@ -89,8 +95,11 @@ public class TELoom extends NetworkTileEntity implements IInventory
 		if(!isFinished() &&  i != null && !this.worldObj.isRemote){
 			recipe =LoomManager.getInstance().findPotentialRecipes(this.getStackInSlot(0));
 			if(this.getStackInSlot(0) != null){
-				if(LoomManager.getInstance().findPotentialRecipes(i).equals(LoomManager.getInstance().findPotentialRecipes(this.storage[0]))){
-					if(this.getStringCount() < recipe.getReqSize()){
+				LoomRecipe lr = LoomManager.getInstance().findPotentialRecipes(i);
+				if(lr != null && lr.equals(recipe))
+				{
+					if(this.getStringCount() < recipe.getReqSize())
+					{
 						i.stackSize--;
 						this.storage[0].stackSize++;
 						updateLoom();

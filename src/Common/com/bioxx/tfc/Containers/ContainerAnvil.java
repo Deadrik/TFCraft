@@ -63,7 +63,7 @@ public class ContainerAnvil extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
+	public ItemStack transferStackInSlotTFC(EntityPlayer entityplayer, int i)
 	{
 		ItemStack origStack = null;
 		Slot slot = (Slot)inventorySlots.get(i);

@@ -3,17 +3,17 @@ package com.bioxx.tfc.Containers.Slots;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bioxx.tfc.Items.Tools.ItemTerraTool;
-import com.bioxx.tfc.Items.Tools.ItemWeapon;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Interfaces.ISize;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+
+import com.bioxx.tfc.Items.Tools.ItemTerraTool;
+import com.bioxx.tfc.Items.Tools.ItemWeapon;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Interfaces.ISize;
 
 public class SlotChest extends Slot
 {
@@ -56,7 +56,7 @@ public class SlotChest extends Slot
 
 	public SlotChest addItemException(ArrayList<Item> ex)
 	{
-		exceptions = ex;
+		exceptions.addAll(ex);
 		return this;
 	}
 }

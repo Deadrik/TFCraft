@@ -57,6 +57,8 @@ public class BlockPlanks extends BlockTerra
 	@Override
 	public IIcon getIcon(int i, int j)
 	{
+		if(j < 0)
+			return icons[0];
 		if(j<icons.length)
 			return icons[j];
 		return TFCBlocks.Planks2.getIcon(i, j-16);

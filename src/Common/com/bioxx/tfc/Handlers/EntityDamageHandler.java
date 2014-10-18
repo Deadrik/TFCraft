@@ -176,7 +176,7 @@ public class EntityDamageHandler
 		}
 		else if(damageType == EnumDamageType.GENERIC)
 		{
-			damage *= (((crushMult+slashMult+pierceMult)/3)+0.25);
+			damage *= (((crushMult+slashMult+pierceMult)/3)-0.25);
 		}
 		return Math.max(0, damage);
 	}

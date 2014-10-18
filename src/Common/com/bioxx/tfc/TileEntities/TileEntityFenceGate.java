@@ -7,6 +7,12 @@ public class TileEntityFenceGate extends NetworkTileEntity
 	private boolean open = false;
 	private byte direction = 0;
 
+	@Override
+	public boolean canUpdate()
+	{
+		return false;
+	}
+	
 	public void setOpen(boolean value)
 	{
 		open = value;

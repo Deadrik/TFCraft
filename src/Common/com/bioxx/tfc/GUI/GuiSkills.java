@@ -16,6 +16,7 @@ import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.Player.SkillStats;
 import com.bioxx.tfc.api.SkillsManager;
+import com.bioxx.tfc.api.SkillsManager.Skill;
 
 public class GuiSkills extends GuiContainerTFC
 {
@@ -38,7 +39,7 @@ public class GuiSkills extends GuiContainerTFC
 		SkillStats ss = TFC_Core.getSkillStats(player);
 		int y = 10;
 		int count = -1;
-		for(String o : SkillsManager.instance.getSkillsArray())
+		for(Skill o : SkillsManager.instance.getSkillsArray())
 		{
 			count++;
 			if(count < (skillsPerPage*skillsPage)+skillsPerPage && count >= (skillsPerPage*skillsPage))
@@ -46,12 +47,12 @@ public class GuiSkills extends GuiContainerTFC
 				bindTexture(GuiTex);
 				drawTexturedModalRect(4, y, 4, 208, 168, 16);
 				y+=12;
-				float perc = ss.getPercToNextRank(o);
+				float perc = ss.getPercToNextRank(o.skillName);
 				bindTexture(GuiTex);
 				drawTexturedModalRect(4, y, 4, 168, 168, 4);
 				drawTexturedModalRect(4, y, 4, 172, (int)Math.floor(168*perc), 4);
 
-				fontRendererObj.drawString(StatCollector.translateToLocal(o) + ": " + EnumChatFormatting.DARK_BLUE + ss.getSkillRank(o).getLocalizedName(), 6, y-9, 0, false);
+				fontRendererObj.drawString(StatCollector.translateToLocal(o.skillName) + ": " + EnumChatFormatting.DARK_BLUE + ss.getSkillRank(o.skillName).getLocalizedName(), 6, y-9, 0, false);
 				y+=3;
 			}
 		}

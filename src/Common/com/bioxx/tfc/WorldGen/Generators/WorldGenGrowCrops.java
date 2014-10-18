@@ -52,11 +52,14 @@ public class WorldGenGrowCrops implements IWorldGenerator
 						if(world.setBlock(i, j, k, TFCBlocks.Crops, 0, 0x2))
 						{
 							te = (TECrop)world.getTileEntity(i, j, k);
-							te.cropId = cropBlockId;
-							float gt = Math.max(crop.growthTime / TFC_Time.daysInMonth, 0.01f);
-							float mg = Math.min(month / gt, 1.0f) * (0.75f + (rand.nextFloat() * 0.25f));
-							float growth = Math.min(crop.numGrowthStages * mg, crop.numGrowthStages);
-							te.growth = growth;
+							if(te != null)
+							{
+								te.cropId = cropBlockId;
+								float gt = Math.max(crop.growthTime / TFC_Time.daysInMonth, 0.01f);
+								float mg = Math.min(month / gt, 1.0f) * (0.75f + (rand.nextFloat() * 0.25f));
+								float growth = Math.min(crop.numGrowthStages * mg, crop.numGrowthStages);
+								te.growth = growth;
+							}
 						}
 					}
 				}

@@ -14,6 +14,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
@@ -21,6 +22,7 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.TileEntities.TileEntitySapling;
+import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 
@@ -69,17 +71,17 @@ public class BlockSapling extends BlockTerraContainer
 	{
 		for(int i = 0; i < woodNames.length; i++)
 			this.icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/" + this.woodNames[i] + " Sapling");
-			
+
 	}
 
 	public void growTree(World world, int i, int j, int k, Random rand)
 	{
-		/*int l = world.getBlockMetadata(i, j, k);
+		int l = world.getBlockMetadata(i, j, k);
 		world.setBlockToAir(i, j, k);
-		Object obj = TFCBiome.getTreeGen(l, random.nextBoolean());
+		Object obj = TFCBiome.getTreeGen(l, rand.nextBoolean());
 
-		if (obj!= null && !((WorldGenerator) obj).generate(world, random, i, j, k))
-			world.setBlock(i, j, k, this, l, 3);*/
+		if (obj!= null && !((WorldGenerator) obj).generate(world, rand, i, j, k))
+			world.setBlock(i, j, k, this, l, 3);
 	}
 
 	@Override

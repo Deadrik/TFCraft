@@ -90,7 +90,7 @@ public class ContainerWorkbench extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+	public ItemStack transferStackInSlotTFC(EntityPlayer par1EntityPlayer, int par2)
 	{
 		ItemStack var3 = null;
 		Slot var4 = (Slot)this.inventorySlots.get(par2);

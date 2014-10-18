@@ -26,7 +26,7 @@ public class WorldGenWaterPlants extends WorldGenerator
 		if (TFC_Core.isWater(world.getBlock(x, y, z)) && world.isAirBlock(x, y+1, z))
 		{
 			//How far underwater are we going
-			int depthCounter = 0;
+			int depthCounter = 1;
 			//Effectively makes sea grass grow less frequently as depth increases beyond 6 m.
 			boolean isTooDeep = false;
 			boolean isFreshWater = TFC_Core.isFreshWater(world.getBlock(x, y, z));

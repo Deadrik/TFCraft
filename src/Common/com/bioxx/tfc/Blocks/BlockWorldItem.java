@@ -1,9 +1,14 @@
 package com.bioxx.tfc.Blocks;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -32,9 +37,38 @@ public class BlockWorldItem extends BlockTerraContainer
 		return true;
 	}
 
-	@Override
+	/*@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int l)
 	{
+	}*/
+
+	@Override
+	public void onBlockPreDestroy(World world, int x, int y, int z, int meta) 
+	{
+		if(!world.isRemote)
+		{
+			TileEntity te = world.getTileEntity(x, y, z);
+			if (te instanceof IInventory) {
+				IInventory inv = (IInventory) te;
+				for (int i = 0; i< inv.getSizeInventory(); i++) {
+					if (inv.getStackInSlot(i) != null) {
+						EntityItem ei = new EntityItem(world, x+0.5, y+0.5, z+0.5, inv.getStackInSlot(i));
+						inv.setInventorySlotContents(i, null);  // so it is not created again in super.breakBlock()
+						ei.motionX = 0;
+						ei.motionY = 0;
+						ei.motionZ = 0;
+						world.spawnEntityInWorld(ei);
+					}
+				}
+			}
+		}
+		super.onBlockPreDestroy(world, x, y, z, meta);
+	}
+
+	@Override
+	public Item getItemDropped(int metadata, Random rand, int fortune)
+	{
+		return null;
 	}
 
 	@Override

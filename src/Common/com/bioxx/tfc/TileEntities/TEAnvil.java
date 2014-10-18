@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -109,12 +108,11 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 				Object[] r = getRecipe(manager);
 				AnvilRecipe recipe = r != null && r[0] !=  null ? (AnvilRecipe) r[0] : null;
 				ItemStack result = r != null && r[1] !=  null ? (ItemStack) r[1] : null;
-				EntityPlayer entityplayer = Minecraft.getMinecraft().thePlayer;
 
 				//This is where the crafting is completed and the result is added to the anvil
-				if(result != null && entityplayer != null)
+				if(result != null && lastWorker != null)
 				{
-					AnvilCraftEvent eventCraft = new AnvilCraftEvent(entityplayer, this, anvilItemStacks[INPUT1_SLOT], anvilItemStacks[INPUT2_SLOT], result);
+					AnvilCraftEvent eventCraft = new AnvilCraftEvent(lastWorker, this, anvilItemStacks[INPUT1_SLOT], anvilItemStacks[INPUT2_SLOT], result);
 					MinecraftForge.EVENT_BUS.post(eventCraft);
 					if(!eventCraft.isCanceled())
 					{
@@ -126,13 +124,13 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 						{
 							if(anvilItemStacks[INPUT1_SLOT].getItem() instanceof ItemMiscToolHead)
 							{
-								AnvilManager.setDurabilityBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillTotal(lastWorker));
-								AnvilManager.setDamageBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillTotal(lastWorker));
+								AnvilManager.setDurabilityBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillMult(lastWorker));
+								AnvilManager.setDamageBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillMult(lastWorker));
 
 							}
 							else if(anvilItemStacks[INPUT1_SLOT].getItem() instanceof ItemTFCArmor)
 							{
-								AnvilManager.setDurabilityBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillTotal(lastWorker));
+								AnvilManager.setDurabilityBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillMult(lastWorker));
 							}
 
 							increaseSkills(recipe);
@@ -882,6 +880,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		}
 	}
 
+	@SideOnly(Side.CLIENT)
 	private void sendAnvilUsePacket(int i) 
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
@@ -890,6 +889,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		this.broadcastPacketInRange(this.createDataPacket(nbt));
 	}
 
+	@SideOnly(Side.CLIENT)
 	private void sendPlanPacket(String plan) 
 	{
 		NBTTagCompound nbt = new NBTTagCompound();

@@ -53,7 +53,7 @@ public class BlockStone extends BlockCollapsable
 	@Override
 	public int damageDropped(int i)
 	{
-		return i;
+		return i+looseStart;
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class BlockStone extends BlockCollapsable
 				hasHammer = true;
 
 		if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof IToolChisel && 
-			hasHammer && !world.isRemote && ((IToolChisel)entityplayer.getCurrentEquippedItem().getItem()).canChisel(entityplayer, x, y, z))
+				hasHammer && !world.isRemote && ((IToolChisel)entityplayer.getCurrentEquippedItem().getItem()).canChisel(entityplayer, x, y, z))
 		{
 			Block id = world.getBlock(x, y, z);
 			byte meta = (byte) world.getBlockMetadata(x, y, z);

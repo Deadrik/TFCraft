@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Containers.Slots.SlotChest;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
@@ -82,7 +83,8 @@ public class ContainerChestTFC extends ContainerTFC
 		exceptions.add(TFCItems.SterlingSilverIngot);
 		exceptions.add(TFCItems.TinIngot);
 		exceptions.add(TFCItems.ZincIngot);
-
+		exceptions.add(Item.getItemFromBlock(TFCBlocks.Barrel));
+		exceptions.add(Item.getItemFromBlock(TFCBlocks.Vessel));
 		return exceptions;
 	}
 
@@ -96,7 +98,7 @@ public class ContainerChestTFC extends ContainerTFC
 	 * Called to transfer a stack from one inventory to the other eg. when shift clicking.
 	 */
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slotNum)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
 		ItemStack var2 = null;
 		Slot slot = (Slot)this.inventorySlots.get(slotNum);

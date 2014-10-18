@@ -9,7 +9,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.EnumHelper;
@@ -1029,7 +1028,7 @@ public class TFCItems
 		Coal = new ItemCoal().setUnlocalizedName("coal");
 		Stick = new ItemStick().setFull3D().setUnlocalizedName("stick");
 		Bow = new ItemCustomBow().setUnlocalizedName("bow").setTextureName("bow");
-		Items.bow = (ItemBow) Bow;
+		//Items.bow = (ItemBow) Bow;
 		Arrow = new ItemArrow().setUnlocalizedName("arrow").setCreativeTab(TFCTabs.TFCWeapons);
 		Dye = new ItemDyeCustom().setUnlocalizedName("dyePowder").setTextureName("dye_powder").setCreativeTab(TFCTabs.TFCMaterials);
 		GlassBottle = new ItemGlassBottle().setUnlocalizedName("Glass Bottle");
@@ -2032,15 +2031,15 @@ public class TFCItems
 		SterlingSilverSheet2x = new ItemMetalSheet2x(17).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
 
 		i = 0;
-		BismuthBronzeUnfinishedBoots = 	(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
-		BlackBronzeUnfinishedBoots = 	(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
-		BlackSteelUnfinishedBoots = 	(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
-		BlueSteelUnfinishedBoots = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
-		BronzeUnfinishedBoots = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
-		CopperUnfinishedBoots = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
-		WroughtIronUnfinishedBoots = 	(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
-		RedSteelUnfinishedBoots = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
-		SteelUnfinishedBoots = 			(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Boots"));
+		BismuthBronzeUnfinishedBoots = 	(new ItemUnfinishedArmor().setMetal("Bismuth Bronze", 3).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
+		BlackBronzeUnfinishedBoots = 	(new ItemUnfinishedArmor().setMetal("Black Bronze", 3).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
+		BlackSteelUnfinishedBoots = 	(new ItemUnfinishedArmor().setMetal("Black Steel", 3).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
+		BlueSteelUnfinishedBoots = 		(new ItemUnfinishedArmor().setMetal("Blue Steel", 3).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
+		BronzeUnfinishedBoots = 		(new ItemUnfinishedArmor().setMetal("Bronze", 3).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
+		CopperUnfinishedBoots = 		(new ItemUnfinishedArmor().setMetal("Copper", 3).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
+		WroughtIronUnfinishedBoots = 	(new ItemUnfinishedArmor().setMetal("Wrought Iron", 3).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
+		RedSteelUnfinishedBoots = 		(new ItemUnfinishedArmor().setMetal("Red Steel", 3).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
+		SteelUnfinishedBoots = 			(new ItemUnfinishedArmor().setMetal("Steel", 3).setUnlocalizedName(Names[i]+" Unfinished Boots"));
 
 		i = 0;
 		BismuthBronzeBoots = 	(new ItemTFCArmor(Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 3, 50,0).setUnlocalizedName(Names[i]+" Boots")); i++;
@@ -2054,15 +2053,15 @@ public class TFCItems
 		SteelBoots = 			(new ItemTFCArmor(Armor.SteelPlate, proxy.getArmorRenderID("steel"), 3, 50,0).setUnlocalizedName(Names[i]+" Boots"));
 
 		i = 0;
-		BismuthBronzeUnfinishedGreaves = 	(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
-		BlackBronzeUnfinishedGreaves = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
-		BlackSteelUnfinishedGreaves = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
-		BlueSteelUnfinishedGreaves = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
-		BronzeUnfinishedGreaves = 			(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
-		CopperUnfinishedGreaves = 			(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
-		WroughtIronUnfinishedGreaves = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
-		RedSteelUnfinishedGreaves = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
-		SteelUnfinishedGreaves = 			(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Greaves"));
+		BismuthBronzeUnfinishedGreaves = 	(new ItemUnfinishedArmor().setMetal("Bismuth Bronze", 2).setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
+		BlackBronzeUnfinishedGreaves = 		(new ItemUnfinishedArmor().setMetal("Black Bronze", 2).setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
+		BlackSteelUnfinishedGreaves = 		(new ItemUnfinishedArmor().setMetal("Black Steel", 2).setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
+		BlueSteelUnfinishedGreaves = 		(new ItemUnfinishedArmor().setMetal("Blue Steel", 2).setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
+		BronzeUnfinishedGreaves = 			(new ItemUnfinishedArmor().setMetal("Bronze", 2).setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
+		CopperUnfinishedGreaves = 			(new ItemUnfinishedArmor().setMetal("Copper", 2).setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
+		WroughtIronUnfinishedGreaves = 		(new ItemUnfinishedArmor().setMetal("Wrought Iron", 2).setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
+		RedSteelUnfinishedGreaves = 		(new ItemUnfinishedArmor().setMetal("Red Steel", 2).setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
+		SteelUnfinishedGreaves = 			(new ItemUnfinishedArmor().setMetal("Steel", 2).setUnlocalizedName(Names[i]+" Unfinished Greaves"));
 
 		i = 0;
 		BismuthBronzeGreaves = 	(new ItemTFCArmor(Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 2, 50,1).setUnlocalizedName(Names[i]+" Greaves")); i++;
@@ -2076,15 +2075,15 @@ public class TFCItems
 		SteelGreaves = 			(new ItemTFCArmor(Armor.SteelPlate, proxy.getArmorRenderID("steel"), 2, 50,1).setUnlocalizedName(Names[i]+" Greaves"));
 
 		i = 0;
-		BismuthBronzeUnfinishedChestplate = (new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
-		BlackBronzeUnfinishedChestplate = 	(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
-		BlackSteelUnfinishedChestplate = 	(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
-		BlueSteelUnfinishedChestplate = 	(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
-		BronzeUnfinishedChestplate = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
-		CopperUnfinishedChestplate = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
-		WroughtIronUnfinishedChestplate = 	(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
-		RedSteelUnfinishedChestplate = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
-		SteelUnfinishedChestplate = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Chestplate"));
+		BismuthBronzeUnfinishedChestplate = (new ItemUnfinishedArmor().setMetal("Bismuth Bronze", 1).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
+		BlackBronzeUnfinishedChestplate = 	(new ItemUnfinishedArmor().setMetal("Black Bronze", 1).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
+		BlackSteelUnfinishedChestplate = 	(new ItemUnfinishedArmor().setMetal("Black Steel", 1).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
+		BlueSteelUnfinishedChestplate = 	(new ItemUnfinishedArmor().setMetal("Blue Steel", 1).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
+		BronzeUnfinishedChestplate = 		(new ItemUnfinishedArmor().setMetal("Bronze", 1).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
+		CopperUnfinishedChestplate = 		(new ItemUnfinishedArmor().setMetal("Copper", 1).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
+		WroughtIronUnfinishedChestplate = 	(new ItemUnfinishedArmor().setMetal("Wrought Iron", 1).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
+		RedSteelUnfinishedChestplate = 		(new ItemUnfinishedArmor().setMetal("Red Steel", 1).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
+		SteelUnfinishedChestplate = 		(new ItemUnfinishedArmor().setMetal("Steel", 1).setUnlocalizedName(Names[i]+" Unfinished Chestplate"));
 
 		i = 0;
 		BismuthBronzeChestplate =	(new ItemTFCArmor(Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 1, 50,2).setUnlocalizedName(Names[i]+" Chestplate")); i++;
@@ -2098,15 +2097,15 @@ public class TFCItems
 		SteelChestplate = 			(new ItemTFCArmor(Armor.SteelPlate, proxy.getArmorRenderID("steel"), 1, 50,2).setUnlocalizedName(Names[i]+" Chestplate"));
 
 		i = 0;
-		BismuthBronzeUnfinishedHelmet = 	(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
-		BlackBronzeUnfinishedHelmet = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
-		BlackSteelUnfinishedHelmet = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
-		BlueSteelUnfinishedHelmet = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
-		BronzeUnfinishedHelmet = 			(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
-		CopperUnfinishedHelmet = 			(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
-		WroughtIronUnfinishedHelmet = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
-		RedSteelUnfinishedHelmet = 			(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
-		SteelUnfinishedHelmet = 			(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Helmet"));
+		BismuthBronzeUnfinishedHelmet = 	(new ItemUnfinishedArmor().setMetal("Bismuth Bronze", 0).setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
+		BlackBronzeUnfinishedHelmet = 		(new ItemUnfinishedArmor().setMetal("Black Bronze", 0).setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
+		BlackSteelUnfinishedHelmet = 		(new ItemUnfinishedArmor().setMetal("Black Steel", 0).setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
+		BlueSteelUnfinishedHelmet = 		(new ItemUnfinishedArmor().setMetal("Blue Steel", 0).setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
+		BronzeUnfinishedHelmet = 			(new ItemUnfinishedArmor().setMetal("Bronze", 0).setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
+		CopperUnfinishedHelmet = 			(new ItemUnfinishedArmor().setMetal("Copper", 0).setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
+		WroughtIronUnfinishedHelmet = 		(new ItemUnfinishedArmor().setMetal("Wrought Iron", 0).setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
+		RedSteelUnfinishedHelmet = 			(new ItemUnfinishedArmor().setMetal("Red Steel", 0).setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
+		SteelUnfinishedHelmet = 			(new ItemUnfinishedArmor().setMetal("Steel", 0).setUnlocalizedName(Names[i]+" Unfinished Helmet"));
 
 		i = 0;
 		BismuthBronzeHelmet = 	(new ItemTFCArmor(Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 0, 50,3).setUnlocalizedName(Names[i]+" Helmet")); i++;

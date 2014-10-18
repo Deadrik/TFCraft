@@ -69,8 +69,10 @@ public class BlockCollapsable extends BlockTerraContainer
 			return true;
 		if (block == TFCBlocks.SmokeRack)
 			return true;
-		if (block == TFCBlocks.ToolRack || block == TFCBlocks.ToolRack2)
+		if (block == TFCBlocks.ToolRack)
 			return true;
+		if(block == TFCBlocks.Charcoal)
+			return false;
 		if(!block.isNormalCube())
 			return true;
 		Material material = block.getMaterial();
@@ -158,11 +160,11 @@ public class BlockCollapsable extends BlockTerraContainer
 
 	public static Boolean isNearSupport(World world, int i, int j, int k, int range, float collapseChance)
 	{
-		for(int y = -1; y < 1; y++)
+		for(int y = -1; y <= 1; y++)
 		{
-			for(int x = -range; x < range + 1; x++)
+			for(int x = -range; x <= range; x++)
 			{
-				for(int z = -range; z < range + 1; z++)
+				for(int z = -range; z <= range; z++)
 				{
 					if(TFC_Core.isHorizSupport(world.getBlock(i + x, j + y, k + z)))
 					{

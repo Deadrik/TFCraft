@@ -21,7 +21,6 @@ import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Events.ItemCookEvent;
 import com.bioxx.tfc.api.Interfaces.ICookableFood;
-import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 import cpw.mods.fml.relauncher.Side;
@@ -427,7 +426,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 				}
 			}
 			else if(fuelTimeLeft <= 0 && fireTemp >= 1 && fireItemStacks[5] != null &&
-					(!worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || !worldObj.isRaining()))
+					((!worldObj.canLightningStrikeAt(xCoord, yCoord, zCoord) && !worldObj.canLightningStrikeAt(xCoord, yCoord+1, zCoord)) || !worldObj.isRaining()))
 			{
 				if(fireItemStacks[5] != null)
 				{

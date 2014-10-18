@@ -34,6 +34,7 @@ import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_OreDictionary;
 import com.bioxx.tfc.Core.TreeRegistry;
 import com.bioxx.tfc.Core.Player.PlayerTracker;
 import com.bioxx.tfc.Food.TFCPotion;
@@ -46,7 +47,7 @@ import com.bioxx.tfc.Handlers.EntityDamageHandler;
 import com.bioxx.tfc.Handlers.EntityLivingHandler;
 import com.bioxx.tfc.Handlers.EntitySpawnHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
-import com.bioxx.tfc.Handlers.PlayerSkillEventHandler;
+import com.bioxx.tfc.Handlers.PlayerInteractHandler;
 import com.bioxx.tfc.Handlers.Network.PacketPipeline;
 import com.bioxx.tfc.WorldGen.TFCProvider;
 import com.bioxx.tfc.WorldGen.TFCProviderHell;
@@ -124,13 +125,14 @@ public class TerraFirmaCraft
 		//Register Player Render Handler (Client only)
 		proxy.registerPlayerRenderEventHandler();
 
-		SkillsManager.instance.registerSkill(Global.SKILL_GENERAL_SMITHING);
-		SkillsManager.instance.registerSkill(Global.SKILL_TOOLSMITH);
-		SkillsManager.instance.registerSkill(Global.SKILL_ARMORSMITH);
-		SkillsManager.instance.registerSkill(Global.SKILL_WEAPONSMITH);
-		SkillsManager.instance.registerSkill(Global.SKILL_AGRICULTURE);
-		SkillsManager.instance.registerSkill(Global.SKILL_COOKING);
-		SkillsManager.instance.registerSkill(Global.SKILL_PROSPECTING);
+		SkillsManager.instance.registerSkill(Global.SKILL_GENERAL_SMITHING, 250);
+		SkillsManager.instance.registerSkill(Global.SKILL_TOOLSMITH, 100);
+		SkillsManager.instance.registerSkill(Global.SKILL_ARMORSMITH, 100);
+		SkillsManager.instance.registerSkill(Global.SKILL_WEAPONSMITH, 100);
+		SkillsManager.instance.registerSkill(Global.SKILL_AGRICULTURE, 300);
+		SkillsManager.instance.registerSkill(Global.SKILL_COOKING, 200);
+		SkillsManager.instance.registerSkill(Global.SKILL_PROSPECTING, 1500);
+		SkillsManager.instance.registerSkill(Global.SKILL_BUTCHERING, 100);
 
 		//Load Items
 		TFCItems.Setup();
@@ -169,7 +171,7 @@ public class TerraFirmaCraft
 			DimensionManager.unregisterProviderType(0);
 			DimensionManager.unregisterProviderType(1);
 			DimensionManager.registerProviderType(-1, TFCProviderHell.class, false);
-			DimensionManager.registerProviderType(0, TFCProvider.class, false);
+			DimensionManager.registerProviderType(0, TFCProvider.class, true);
 			DimensionManager.registerProviderType(1, TFCProvider.class, false);
 
 			DimensionManager.registerDimension(-1, -1);
@@ -197,6 +199,9 @@ public class TerraFirmaCraft
 		FMLCommonHandler.instance().bus().register(new CraftingHandler());
 		FMLCommonHandler.instance().bus().register(new FoodCraftingHandler());
 
+		// Register Player Interact Handler - for drinking water.
+		MinecraftForge.EVENT_BUS.register(new PlayerInteractHandler());
+		
 		// Register the Entity Spawn Handler
 		MinecraftForge.EVENT_BUS.register(new EntitySpawnHandler());
 
@@ -215,8 +220,6 @@ public class TerraFirmaCraft
 		// Register Anvil Crafting Handler
 		MinecraftForge.EVENT_BUS.register(new AnvilCraftingHandler());
 
-		MinecraftForge.EVENT_BUS.register(new PlayerSkillEventHandler());
-
 		// Register the Entity Living Update Handler
 		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
 
@@ -234,6 +237,7 @@ public class TerraFirmaCraft
 		TFCPotion.Setup();
 
 		//Register all of the recipes
+		TFC_OreDictionary.registerOreDict();
 		Recipes.registerRecipes();
 
 		ItemHeat.SetupItemHeat();
@@ -534,7 +538,7 @@ public class TerraFirmaCraft
 
 		/**Start setup here*/
 		Set<String> names = config.getCategoryNames();
-		Iterator oreIter = names.iterator();
+		Iterator<String> oreIter = names.iterator();
 
 		while(oreIter.hasNext())
 		{

@@ -181,7 +181,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	@Override
 	public int getMaxDamage(ItemStack stack)
 	{
-		return (int) (super.getMaxDamage(stack)+(super.getMaxDamage(stack) * (AnvilManager.getDurabilityBuff(stack) / 300f)));
+		return (int) (super.getMaxDamage(stack)+(super.getMaxDamage(stack) * AnvilManager.getDurabilityBuff(stack)));
 	}
 
 	@Override

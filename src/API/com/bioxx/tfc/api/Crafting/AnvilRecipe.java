@@ -198,14 +198,14 @@ public class AnvilRecipe
 		return craftingValue;
 	}
 
-	public int getSkillTotal(EntityPlayer p)
+	public float getSkillMult(EntityPlayer p)
 	{
-		int skill = 0;
-		int total = 0;
+		float skill = 0;
+		float total = 0;
 		for (String s : skillsList)
 		{
 			total++;
-			skill+=TFC_Core.getSkillStats(p).getSkillRaw(s);
+			skill+=TFC_Core.getSkillStats(p).getSkillMultiplier(s);
 		}
 		if(total > 0)
 			return skill/total;

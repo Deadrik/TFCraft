@@ -210,7 +210,7 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 	@Override
 	public boolean getTooHeavyToCarry(ItemStack is)
 	{
-		return is.hasTagCompound() && is.getTagCompound().hasKey("isSealed");
+		return is.hasTagCompound() && is.getTagCompound().hasKey("Sealed");
 	}
 }
 

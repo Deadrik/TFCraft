@@ -75,14 +75,17 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 		EntityItem ei = new EntityItem(world, i, j, k, te.sheetStack);
 		world.spawnEntityInWorld(ei);
 	}
-
+	
 	@Override
-	public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion ex) 
+	public void onBlockExploded(World world, int i, int j, int k, Explosion explosion)
 	{
 		TEMetalSheet te = (TEMetalSheet)world.getTileEntity(i, j, k);
-		te.clearSides();
+		if ( te != null )
+			te.clearSides();
+		
+		super.onBlockExploded(world, i, j, k, explosion);
 	}
-
+	
 	@Override
 	public int getRenderType()
 	{

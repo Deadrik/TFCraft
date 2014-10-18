@@ -50,7 +50,7 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
 		if(TFCOptions.enableDebugMode)
-			arraylist.add("Damage: "+is.getItemDamage());
+			arraylist.add("Damage: "+is.getItemDamage() + "/" + is.getMaxDamage());
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	@Override
 	public int getMaxDamage(ItemStack stack)
 	{
-		return (int) (getMaxDamage()+(getMaxDamage() * (AnvilManager.getDurabilityBuff(stack) / 300f)));
+		return (int) (getMaxDamage()+(getMaxDamage() * AnvilManager.getDurabilityBuff(stack)));
 	}
 
 	@Override

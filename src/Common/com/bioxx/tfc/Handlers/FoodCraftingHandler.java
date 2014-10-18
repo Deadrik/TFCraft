@@ -298,6 +298,7 @@ public class FoodCraftingHandler
 				(craftResult.getItem() == TFCItems.BarleyGrain && gridHasItem(iinventory, TFCItems.BarleyWhole)) || 
 				(craftResult.getItem() == TFCItems.RiceGrain && gridHasItem(iinventory, TFCItems.RiceWhole)))
 		{
+			HandleItem(player, iinventory, Recipes.Knives);
 			for(int i = 0; i < iinventory.getSizeInventory(); i++)
 			{
 				if(iinventory.getStackInSlot(i) == null)

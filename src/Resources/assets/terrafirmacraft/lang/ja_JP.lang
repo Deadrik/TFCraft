@@ -1,0 +1,2416 @@
+﻿#ja_JP
+#This is the Japanese language configuration file, translated by Woophoro, Nekopon, Dision2142 and crugan
+
+#Thank you for developers and all translation project team.
+
+
+
+generator.TFCDefault=TFC デフォルト
+generator.TFCFlat=TFC フラット
+
+key.ToolMode=ツールモード切替
+key.LockTool=ツールの位置をロックする
+
+effect.bleed=出血
+
+#==============
+#= Spawn Eggs =
+#==============
+entity.squidTFC.name=イカ
+entity.cowTFC.name=牛
+entity.wolfTFC.name=狼
+entity.bearTFC.name=熊
+entity.deerTFC.name=鹿
+entity.chickenTFC.name=ニワトリ
+entity.pigTFC.name=豚
+entity.skeletonTFC.name=スケルトン
+entity.zombieTFC.name=ゾンビ
+entity.spiderTFC.name=蜘蛛
+entity.slimeTFC.name=スライム
+entity.silverfishTFC.name=シルバーフィッシュ
+entity.ghastTFC.name=ガスト
+entity.caveSpiderTFC.name=洞窟グモ
+entity.blazeTFC.name=ブレイズ
+entity.endermanTFC.name=エンダーマン
+entity.pigZombieTFC.name=ゾンビピッグ
+entity.creeperTFC.name=クリーパー
+entity.sheepTFC.name=羊
+entity.pheasantTFC.name=雉
+entity.horseTFC.name=馬
+entity.irongolemTFC.name=アイアンゴーレム
+entity.fishTFC.name=バス
+
+
+#==========
+#= Entity =
+#==========
+entity.notFamiliar=
+fishingRod.lineTension=
+fishingRod.lineSnap=
+fishingRod.bite=
+fishingRod.gotAway=
+
+#================
+#= Achievements =
+#================
+achievement.achLooseRock=間違いなく石
+achievement.achLooseRock.desc=小石を拾う
+achievement.achSmallOre=あらゆる手段で
+achievement.achSmallOre.desc=鉱石の小片を発見した
+achievement.achWildVegetable=収集者
+achievement.achWildVegetable.desc=野生の野菜を見つける
+achievement.achRutabaga=馬鹿げたたまねぎ…
+achievement.achRutabaga.desc=ルタバガを見つける
+achievement.achQuern=廻せ！廻せ！
+achievement.achQuern.desc=臼を使う
+achievement.achStoneAge=旧石器時代
+achievement.achStoneAge.desc=石の道具を作る
+achievement.achCopperAge=銅器時代
+achievement.achCopperAge.desc=銅器時代に入り金属で何かを作る
+achievement.achSaw=大工さん
+achievement.achSaw.desc=のこぎりを作る
+achievement.achAnvil=ハンマータイム
+achievement.achAnvil.desc=石の金床を作る
+achievement.achPickaxe=いざ採掘!(最後)
+achievement.achPickaxe.desc=つるはしを作る
+achievement.achDiamond=ダイヤモ－ちょっとまって、いらない
+achievement.achDiamond.desc=ダイヤモンドを見つける
+achievement.achLimonite=褐 鉄 鉱!
+achievement.achLimonite.desc=褐鉄鉱を掘り出す
+achievement.achBronzeAge=青銅器時代
+achievement.achBronzeAge.desc=銅の鉄床を作製する
+achievement.achIronAge=鉄器時代
+achievement.achIronAge.desc=塊鉄を掘り出す
+achievement.achPokeCreeper=
+achievement.achPokeCreeper.desc=
+
+#============
+#= Commands =
+#============
+commands.transferTamed.noTamed=
+commands.transferTamed.tooMany=
+commands.transferTamed.wrongOwner=
+commands.transferTamed.sameTarget=
+commands.transferTamed.display.incoming=
+commands.transferTamed.display.outgoing=
+commands.transferTamed.wrongSender=
+
+#========
+#= Food =
+#========
+item.MealGeneric.name=食事
+item.meal.terrible=とても不味い
+item.meal.poor=不味い
+item.meal.decent=まずまず
+item.meal.good=美味しい
+item.meal.great=とても美味しい
+item.meal.fantastic=絶品
+
+#== Grains ==
+item.Barley Bread.name=大麦パン
+item.Corn Bread.name=トウモロコシパン
+item.Oat Bread.name=オート麦パン
+item.Rice Bread.name=米粉パン
+item.Rye Bread.name=ライ麦パン
+item.Wheat Bread.name=小麦パン
+
+item.Barley Whole.name=大麦
+item.Maize Ear.name=トウモロコシ
+item.Oat Whole.name=オート麦
+item.Rice Whole.name=米
+item.Rye Whole.name=ライ麦
+item.Wheat Whole.name=小麦
+
+item.Barley Grain.name=大麦の粒
+item.Oat Grain.name=オート麦の粒
+item.Rice Grain.name=米粒
+item.Rye Grain.name=ライ麦の粒
+item.Wheat Grain.name=小麦の粒
+
+item.Barley Ground.name=大麦粉
+item.Cornmeal Ground.name=コーンミール
+item.Oat Ground.name=オート麦粉
+item.Rice Ground.name=米粉
+item.Rye Ground.name=ライ麦粉
+item.Wheat Ground.name=小麦粉
+
+item.Barley Dough.name=大麦パン生地
+item.Cornmeal Dough.name=トウモロコシパン生地
+item.Oat Dough.name=オート麦パン生地
+item.Rice Dough.name=米粉パン生地
+item.Rye Dough.name=ライ麦パン生地
+item.Wheat Dough.name=小麦パン生地
+
+item.Seeds Barley.name=大麦の種
+item.Seeds Maize.name=トウモロコシの種
+item.Seeds Oat.name=オートの種
+item.Seeds Rice.name=米の種
+item.Seeds Rye.name=ライ麦の種
+item.Seeds Wheat.name=小麦の種
+
+#== Fruit ==
+item.Green Apple.name=青りんご
+item.Red Apple.name=赤いリンゴ
+item.Banana.name=バナナ
+item.Cherry.name=桜桃
+item.Lemon.name=レモン
+item.Olive.name=オリーブ
+item.Orange.name=オレンジ
+item.Peach.name=桃
+item.Plum.name=プラム
+
+item.FruitSapling.Green Apple.name=青リンゴの苗木
+item.FruitSapling.Red Apple.name=リンゴの苗木
+item.FruitSapling.Banana.name=バナナの苗木
+item.FruitSapling.Cherry.name=サクランボの苗木
+item.FruitSapling.Lemon.name=レモンの苗木
+item.FruitSapling.Olive.name=オリーブの苗木
+item.FruitSapling.Orange.name=オレンジの苗木
+item.FruitSapling.Peach.name=桃の苗木
+item.FruitSapling.Plum.name=プラムの苗木
+
+#=== Berry Bushes ===
+tile.BerryBush.Blackberry.name=ブラックベリーの茂み
+tile.BerryBush.Blueberry.name=ブルーベリーの茂み
+tile.BerryBush.Bunchberry.name=ゴゼンタチバナの茂み
+tile.BerryBush.Cloudberry.name=クラウドベリーの茂み
+tile.BerryBush.Cranberry.name=クランベリーの茂み
+tile.BerryBush.Elderberry.name=ニワトコの茂み
+tile.BerryBush.Gooseberry.name=セイヨウスグリの茂み
+tile.BerryBush.Raspberry.name=ラズベリーの茂み
+tile.BerryBush.Snowberry.name=セッコウボクの茂み
+tile.BerryBush.Strawberry.name=野イチゴの茂み
+tile.BerryBush.Wintergreen.name=ウィンターグリーンの茂み
+
+item.Blackberry.name=ブラックベリー
+item.Blueberry.name=ブルーベリー
+item.Bunchberry.name=ゴゼンタチバナの実
+item.Cloudberry.name=クラウドベリー
+item.Cranberry.name=クランベリー
+item.Elderberry.name=ニワトコの実
+item.Gooseberry.name=セイヨウスグリ
+item.Raspberry.name=ラズベリー
+item.Snowberry.name=セッコウボクの実
+item.Strawberry.name=野イチゴ
+item.Wintergreen Berry.name=ウィンターグリーン
+
+item.Blackberry Leaf.name=ブラックベリーの葉っぱ
+item.Blueberry Leaf.name=ブルーベリーの葉っぱ
+item.Bunchberry Leaf.name=ゴゼンタチバナの葉っぱ
+item.Cloudberry Leaf.name=クラウドベリーの葉っぱ
+item.Cranberry Leaf.name=クランベリーの葉っぱ
+item.Elderberry Leaf.name=ニワトコの葉っぱ
+item.Gooseberry Leaf.name=セイヨウスグリの葉っぱ
+item.Raspberry Leaf.name=ラズベリーの葉っぱ
+item.Snowberry Leaf.name=セッコウボクの葉っぱ
+item.Strawberry Leaf.name=野イチゴの葉っぱ
+item.Wintergreen Leaf.name=ウィンターグリーンの葉っぱ
+
+#== Protein ==
+item.Beef.name=牛肉
+item.Calamari.name=イカ
+item.egg.name=卵
+item.Fish.name=魚
+item.Mutton.name=羊肉
+item.Porkchop.name=豚肉
+item.Chicken.name=鶏肉
+item.Venison.name=鹿肉
+item.HorseMeat.name=馬肉
+item.Egg Cooked.name=目玉焼き
+
+item.Soybeans.name=大豆
+item.Seeds Soybean.name=大豆の種
+
+#== Dairy ==
+item.Cheese.name=チーズ
+
+#== Vegetables ==
+item.Green Bell Pepper.name=緑ピーマン
+item.Red Bell Pepper.name=赤ピーマン
+item.Yellow Bell Pepper.name=黄ピーマン
+item.Cabbage.name=キャベツ
+item.Carrot.name=ニンジン
+item.Garlic.name=ニンニク
+item.Greenbeans.name=サヤインゲン
+item.Onion.name=タマネギ
+item.Potato.name=ジャガイモ
+item.Rutabaga.name=ルタバガ
+item.Squash.name=スカッシュ
+item.Tomato.name=トマト
+
+item.Seeds Red Bell Pepper.name=赤ピーマンの種
+item.Seeds Yellow Bell Pepper.name=黄ピーマンの種
+item.Seeds Cabbage.name=キャベツの種
+item.Seeds Carrot.name=ニンジンの種
+item.Seeds Garlic.name=ニンニクの種
+item.Seeds Greenbean.name=サヤインゲンの種
+item.Seeds Onion.name=タマネギの種
+item.Seeds Potato.name=ジャガイモの種
+item.Seeds Rutabaga.name=ルタバガの種
+item.Seeds Squash.name=スカッシュの種
+item.Seeds Tomato.name=トマトの種
+
+#== Alcohol ==
+item.Glass Bottle.name=空き瓶
+item.Beer.name=ビール
+item.Cider.name=リンゴ酒
+item.Rum.name=ラム酒
+item.RyeWhiskey.name=ライウイスキー
+item.Sake.name=日本酒
+item.Vodka.name=ウォッカ
+item.Whiskey.name=ウイスキー
+item.CornWhiskey.name=
+
+#===========
+#= Pottery =
+#===========
+item.Clay.Clay.name=粘土
+item.Clay.Fire Clay.name=耐火粘土
+
+item.clay.clayflatlight.name=平らな明るめの粘土
+item.clay.clayflatdark.name=平らな暗めの粘土
+item.clay.clayflatfire.name=平らな耐火粘土
+item.clay.clayflatdarkfire.name=平らな暗めの耐火粘土
+
+item.Jug.Clay Jug.name=粘土の水差し
+item.Jug.Ceramic Jug.name=セラミック水差し
+item.Jug.Water Jug.name=水入り水差し
+
+item.Pot.Clay Pot.name=粘土の壷
+item.Pot.Ceramic Pot.name=セラミックの壷
+
+item.Small Vessel.Clay Vessel.name=粘土の小鍋
+item.Small Vessel.Ceramic Vessel.name=セラミックの小鍋
+
+item.Large Vessel.Clay Vessel [Large].name=粘土の大鍋
+item.Large Vessel.Ceramic Vessel [Large].name=セラミックの大鍋
+
+item.Mold.Clay Mold.name=粘土の鋳型
+item.Mold.Ceramic Mold.name=セラミック鋳型
+
+item.Axe Mold.Clay Mold Axe.name=斧の粘土型
+item.Axe Mold.Ceramic Mold Axe.name=斧の鋳型
+item.Axe Mold.Ceramic Mold Axe Copper.name=斧の鋳型（銅）
+item.Axe Mold.Ceramic Mold Axe Bronze.name=斧の鋳型（青銅）
+item.Axe Mold.Ceramic Mold Axe Black Bronze.name=斧の鋳型（黒青銅）
+item.Axe Mold.Ceramic Mold Axe Bismuth Bronze.name=斧の鋳型（蒼青銅）
+
+item.Chisel Mold.Clay Mold Chisel.name=のみの粘土型
+item.Chisel Mold.Ceramic Mold Chisel.name=のみの鋳型
+item.Chisel Mold.Ceramic Mold Chisel Copper.name=のみの鋳型（銅）
+item.Chisel Mold.Ceramic Mold Chisel Bronze.name=のみの鋳型（青銅）
+item.Chisel Mold.Ceramic Mold Chisel Black Bronze.name=のみの鋳型（黒青銅）
+item.Chisel Mold.Ceramic Mold Chisel Bismuth Bronze.name=のみの鋳型（蒼青銅）
+
+item.Hammer Mold.Clay Mold Hammer.name=ハンマーの粘土型
+item.Hammer Mold.Ceramic Mold Hammer.name=ハンマーの鋳型
+item.Hammer Mold.Ceramic Mold Hammer Copper.name=ハンマーの鋳型（銅）
+item.Hammer Mold.Ceramic Mold Hammer Bronze.name=ハンマーの鋳型（青銅）
+item.Hammer Mold.Ceramic Mold Hammer Black Bronze.name=ハンマーの鋳型（黒青銅）
+item.Hammer Mold.Ceramic Mold Hammer Bismuth Bronze.name=ハンマーの鋳型（蒼青銅）
+
+item.Hoe Mold.Clay Mold Hoe.name=クワの粘土型
+item.Hoe Mold.Ceramic Mold Hoe.name=クワの鋳型
+item.Hoe Mold.Ceramic Mold Hoe Copper.name=クワの鋳型（銅）
+item.Hoe Mold.Ceramic Mold Hoe Bronze.name=クワの鋳型（青銅）
+item.Hoe Mold.Ceramic Mold Hoe Black Bronze.name=クワの鋳型（黒青銅）
+item.Hoe Mold.Ceramic Mold Hoe Bismuth Bronze.name=クワの鋳型（蒼青銅）
+
+item.Knife Mold.Clay Mold Knife.name=ナイフの粘土型
+item.Knife Mold.Ceramic Mold Knife.name=ナイフの鋳型
+item.Knife Mold.Ceramic Mold Knife Copper.name=ナイフの鋳型（銅）
+item.Knife Mold.Ceramic Mold Knife Bronze.name=ナイフの鋳型（青銅）
+item.Knife Mold.Ceramic Mold Knife Black Bronze.name=ナイフの鋳型（黒青銅）
+item.Knife Mold.Ceramic Mold Knife Bismuth Bronze.name=ナイフの鋳型（蒼青銅）
+
+item.Javelin Mold.Clay Mold Javelin.name=ジャベリンの粘土型
+item.Javelin Mold.Ceramic Mold Javelin.name=ジャベリンの鋳型
+item.Javelin Mold.Ceramic Mold Javelin Copper.name=ジャベリンの鋳型（銅）
+item.Javelin Mold.Ceramic Mold Javelin Bronze.name=ジャベリンの鋳型（青銅）
+item.Javelin Mold.Ceramic Mold Javelin Black Bronze.name=ジャベリンの鋳型（黒青銅）
+item.Javelin Mold.Ceramic Mold Javelin Bismuth Bronze.name=ジャベリンの鋳型（蒼青銅）
+
+item.Mace Mold.Clay Mold Mace.name=メイスの粘土型
+item.Mace Mold.Ceramic Mold Mace.name=メイスの鋳型
+item.Mace Mold.Ceramic Mold Mace Copper.name=メイスの鋳型（銅）
+item.Mace Mold.Ceramic Mold Mace Bronze.name=メイスの鋳型（青銅）
+item.Mace Mold.Ceramic Mold Mace Black Bronze.name=メイスの鋳型（黒青銅）
+item.Mace Mold.Ceramic Mold Mace Bismuth Bronze.name=メイスの鋳型（蒼青銅）
+
+item.Pick Mold.Clay Mold Pick.name=つるはしの粘土型
+item.Pick Mold.Ceramic Mold Pick.name=つるはしの鋳型
+item.Pick Mold.Ceramic Mold Pick Copper.name=つるはしの鋳型（銅）
+item.Pick Mold.Ceramic Mold Pick Bronze.name=つるはしの鋳型（青銅）
+item.Pick Mold.Ceramic Mold Pick Black Bronze.name=つるはしの鋳型（黒青銅）
+item.Pick Mold.Ceramic Mold Pick Bismuth Bronze.name=つるはしの鋳型（蒼青銅）
+
+item.ProPick Mold.Clay Mold ProPick.name=探鉱鎚の粘土型
+item.ProPick Mold.Ceramic Mold ProPick.name=探鉱鎚の鋳型
+item.ProPick Mold.Ceramic Mold ProPick Copper.name=探鉱鎚の鋳型（銅）
+item.ProPick Mold.Ceramic Mold ProPick Bronze.name=探鉱鎚の鋳型（青銅）
+item.ProPick Mold.Ceramic Mold ProPick Black Bronze.name=探鉱鎚の鋳型（黒青銅）
+item.ProPick Mold.Ceramic Mold ProPick Bismuth Bronze.name=探鉱鎚の鋳型（蒼青銅）
+
+item.Saw Mold.Clay Mold Saw.name=のこぎりの粘土型
+item.Saw Mold.Ceramic Mold Saw.name=のこぎりの鋳型
+item.Saw Mold.Ceramic Mold Saw Copper.name=のこぎりの鋳型（銅）
+item.Saw Mold.Ceramic Mold Saw Bronze.name=のこぎりの鋳型（青銅）
+item.Saw Mold.Ceramic Mold Saw Black Bronze.name=のこぎりの鋳型（黒青銅）
+item.Saw Mold.Ceramic Mold Saw Bismuth Bronze.name=のこぎりの鋳型（蒼青銅）
+
+item.Scythe Mold.Clay Mold Scythe.name=鎌の粘土型
+item.Scythe Mold.Ceramic Mold Scythe.name=鎌の鋳型
+item.Scythe Mold.Ceramic Mold Scythe Copper.name=鎌の鋳型（銅）
+item.Scythe Mold.Ceramic Mold Scythe Bronze.name=鎌の鋳型（青銅）
+item.Scythe Mold.Ceramic Mold Scythe Black Bronze.name=鎌の鋳型（黒青銅）
+item.Scythe Mold.Ceramic Mold Scythe Bismuth Bronze.name=鎌の鋳型（蒼青銅）
+
+item.Shovel Mold.Clay Mold Shovel.name=シャベルの粘土型
+item.Shovel Mold.Ceramic Mold Shovel.name=シャベルの鋳型
+item.Shovel Mold.Ceramic Mold Shovel Copper.name=シャベルの鋳型（銅）
+item.Shovel Mold.Ceramic Mold Shovel Bronze.name=シャベルの鋳型（青銅）
+item.Shovel Mold.Ceramic Mold Shovel Black Bronze.name=シャベルの鋳型（黒青銅）
+item.Shovel Mold.Ceramic Mold Shovel Bismuth Bronze.name=シャベルの鋳型（蒼青銅）
+
+item.Sword Mold.Clay Mold Sword.name=剣の粘土型
+item.Sword Mold.Ceramic Mold Sword.name=剣の鋳型
+item.Sword Mold.Ceramic Mold Sword Copper.name=剣の鋳型（銅）
+item.Sword Mold.Ceramic Mold Sword Bronze.name=剣の鋳型（青銅）
+item.Sword Mold.Ceramic Mold Sword Black Bronze.name=剣の鋳型（黒青銅）
+item.Sword Mold.Ceramic Mold Sword Bismuth Bronze.name=剣の鋳型（蒼青銅）
+
+item.Spindle.name=紡錘
+item.Spindle Head.Clay Spindle.name=粘土の紡錘
+item.Spindle Head.Spindle Head.name=紡錘のヘッド
+
+item.Fire Brick.Fire Brick.name=耐火レンガ
+item.Fire Brick.Clay Fire Brick.name=生の耐火レンガ
+tile.FireBrick.name=耐火レンガ
+
+#= Gems =
+item.Agate.Chipped.name=欠けたメノウ
+item.Amethyst.Chipped.name=欠けたアメジスト
+item.Beryl.Chipped.name=欠けたベリル
+item.Diamond.Chipped.name=欠けたダイヤモンド
+item.Emerald.Chipped.name=欠けたエメラルド
+item.Garnet.Chipped.name=欠けたガーネット
+item.Jade.Chipped.name=欠けた翡翠
+item.Jasper.Chipped.name=欠けたジャスパー
+item.Opal.Chipped.name=欠けたオパール
+item.Ruby.Chipped.name=欠けたルビー
+item.Sapphire.Chipped.name=欠けたサファイア
+item.Topaz.Chipped.name=欠けたトパーズ
+item.Tourmaline.Chipped.name=欠けたトルマリン
+
+item.Agate.Flawed.name=キズのあるメノウ
+item.Amethyst.Flawed.name=キズのあるアメジスト
+item.Beryl.Flawed.name=キズのあるベリル
+item.Diamond.Flawed.name=キズのあるダイヤモンド
+item.Emerald.Flawed.name=キズのあるエメラルド
+item.Garnet.Flawed.name=キズのあるガーネット
+item.Jade.Flawed.name=キズのある翡翠
+item.Jasper.Flawed.name=キズのあるジャスパー
+item.Opal.Flawed.name=キズのあるオパール
+item.Ruby.Flawed.name=キズのあるルビー
+item.Sapphire.Flawed.name=キズのあるサファイア
+item.Topaz.Flawed.name=キズのあるトパーズ
+item.Tourmaline.Flawed.name=キズのあるトルマリン
+
+item.Agate.Normal.name=メノウ
+item.Amethyst.Normal.name=アメジスト
+item.Beryl.Normal.name=ベリル
+item.Diamond.Normal.name=ダイヤモンド
+item.Emerald.Normal.name=エメラルド
+item.Garnet.Normal.name=ガーネット
+item.Jade.Normal.name=翡翠
+item.Jasper.Normal.name=ジャスパー
+item.Opal.Normal.name=オパール
+item.Ruby.Normal.name=ルビー
+item.Sapphire.Normal.name=サファイア
+item.Topaz.Normal.name=トパーズ
+item.Tourmaline.Normal.name=トルマリン
+
+item.Agate.Flawless.name=完璧なメノウ
+item.Amethyst.Flawless.name=完璧なアメジスト
+item.Beryl.Flawless.name=完璧なベリル
+item.Diamond.Flawless.name=完璧なダイヤモンド
+item.Emerald.Flawless.name=完璧なエメラルド
+item.Garnet.Flawless.name=完璧なガーネット
+item.Jade.Flawless.name=完璧な翡翠
+item.Jasper.Flawless.name=完璧なジャスパー
+item.Opal.Flawless.name=完璧なオパール
+item.Ruby.Flawless.name=完璧なルビー
+item.Sapphire.Flawless.name=完璧なサファイア
+item.Topaz.Flawless.name=完璧なトパーズ
+item.Tourmaline.Flawless.name=完璧なトルマリン
+
+item.Agate.Exquisite.name=絶妙なメノウ
+item.Amethyst.Exquisite.name=絶妙なアメジスト
+item.Beryl.Exquisite.name=絶妙なベリル
+item.Diamond.Exquisite.name=絶妙なダイヤモンド
+item.Emerald.Exquisite.name=絶妙なエメラルド
+item.Garnet.Exquisite.name=絶妙なガーネット
+item.Jade.Exquisite.name=絶妙な翡翠
+item.Jasper.Exquisite.name=絶妙なジャスパー
+item.Opal.Exquisite.name=絶妙なオパール
+item.Ruby.Exquisite.name=絶妙なルビー
+item.Sapphire.Exquisite.name=絶妙なサファイア
+item.Topaz.Exquisite.name=絶妙なトパーズ
+item.Tourmaline.Exquisite.name=絶妙なトルマリン
+
+#===========
+#= Powders =
+#===========
+item.dyePowder.black.name=イカスミ
+item.dyePowder.blue.name=ラピスラズリ
+item.dyePowder.brown.name=カカオ豆
+item.dyePowder.cyan.name=水色の染料
+item.dyePowder.gray.name=灰色の染料
+item.dyePowder.green.name=緑色の染料
+item.dyePowder.lightBlue.name=空色の染料
+item.dyePowder.lime.name=黄緑色の染料
+item.dyePowder.magenta.name=赤紫色の染料
+item.dyePowder.orange.name=橙色の染料
+item.dyePowder.pink.name=桃色の染料
+item.dyePowder.purple.name=紫色の染料
+item.dyePowder.red.name=赤色の染料
+item.dyePowder.silver.name=薄灰色の染料
+item.dyePowder.white.name=骨粉
+item.dyePowder.yellow.name=黄色の染料
+
+item.Coke.name=コークス
+item.Powder.Flux.name=溶接剤
+item.Powder.Graphite Powder.name=黒鉛の粉
+item.Powder.Hematite Powder.name=赤鉄鉱の粉
+item.Powder.Kaolinite Powder.name=カオリン石の粉
+item.Powder.Lapis Lazuli Powder.name=ラピスラズリの粉
+item.Powder.Limonite Powder.name=褐鉄鉱の粉
+item.Powder.Malachite Powder.name=孔雀石の粉
+item.Powder.Salt.name=塩
+item.Powder.Saltpeter Powder.name=硝石の粉
+item.Powder.Sulfur Powder.name=硫黄の粉
+
+#=========
+#= Stone =
+#=========
+#== Stone Items ==
+item.LooseRock.Andesite.name=安山岩の小石
+item.LooseRock.Basalt.name=玄武岩の小石
+item.LooseRock.Chalk.name=白亜の小石
+item.LooseRock.Chert.name=燵岩の小石
+item.LooseRock.Claystone.name=粘土岩の小石
+item.LooseRock.Conglomerate.name=礫岩の小石
+item.LooseRock.Dacite.name=デイサイト岩の小石
+item.LooseRock.Diorite.name=閃緑岩の小石
+item.LooseRock.Dolomite.name=苦灰石の小石
+item.LooseRock.Gabbro.name=斑糲岩の小石
+item.LooseRock.Gneiss.name=片麻岩の小石
+item.LooseRock.Granite.name=花崗岩の小石
+item.LooseRock.Limestone.name=石灰岩の小石
+item.LooseRock.Marble.name=大理石の小石
+item.LooseRock.Phyllite.name=千枚岩の小石
+item.LooseRock.Quartzite.name=珪岩の小石
+item.LooseRock.Rhyolite.name=流紋岩の小石
+item.LooseRock.Rock Salt.name=岩塩の小石
+item.LooseRock.Schist.name=片岩の小石
+item.LooseRock.Shale.name=頁岩の小石
+item.LooseRock.Slate.name=粘板岩の小石
+
+item.ItemStoneBrick.Andesite.name=安山岩レンガ
+item.ItemStoneBrick.Basalt.name=玄武岩レンガ
+item.ItemStoneBrick.Chalk.name=白亜レンガ
+item.ItemStoneBrick.Chert.name=燵岩レンガ
+item.ItemStoneBrick.Claystone.name=粘土岩レンガ
+item.ItemStoneBrick.Conglomerate.name=礫岩レンガ
+item.ItemStoneBrick.Dacite.name=デイサイト岩レンガ
+item.ItemStoneBrick.Diorite.name=閃緑岩レンガ
+item.ItemStoneBrick.Dolomite.name=苦灰石レンガ
+item.ItemStoneBrick.Gabbro.name=斑糲岩レンガ
+item.ItemStoneBrick.Gneiss.name=片麻岩レンガ
+item.ItemStoneBrick.Granite.name=花崗岩レンガ
+item.ItemStoneBrick.Limestone.name=石灰岩レンガ
+item.ItemStoneBrick.Marble.name=大理石レンガ
+item.ItemStoneBrick.Phyllite.name=千枚岩レンガ
+item.ItemStoneBrick.Quartzite.name=珪岩レンガ
+item.ItemStoneBrick.Rhyolite.name=流紋岩レンガ
+item.ItemStoneBrick.Rock Salt.name=岩塩レンガ
+item.ItemStoneBrick.Schist.name=片岩レンガ
+item.ItemStoneBrick.Shale.name=頁岩レンガ
+item.ItemStoneBrick.Slate.name=粘板岩レンガ
+
+item.FlatRock.Andesite.name=安山岩
+item.FlatRock.Basalt.name=玄武岩
+item.FlatRock.Chalk.name=白亜
+item.FlatRock.Chert.name=燵岩
+item.FlatRock.Claystone.name=粘土岩
+item.FlatRock.Conglomerate.name=礫岩
+item.FlatRock.Dacite.name=デイサイト岩
+item.FlatRock.Diorite.name=閃緑岩
+item.FlatRock.Dolomite.name=苦灰石
+item.FlatRock.Gabbro.name=斑糲岩
+item.FlatRock.Gneiss.name=片麻岩
+item.FlatRock.Granite.name=花崗岩
+item.FlatRock.Limestone.name=石灰岩
+item.FlatRock.Marble.name=大理石
+item.FlatRock.Phyllite.name=千枚岩
+item.FlatRock.Quartzite.name=珪岩
+item.FlatRock.Rhyolite.name=流紋岩
+item.FlatRock.Rock Salt.name=岩塩
+item.FlatRock.Schist.name=片岩
+item.FlatRock.Shale.name=頁岩
+item.FlatRock.Slate=粘板岩
+
+#== Stone Blocks ==
+tile.WallCobble.Andesite.name=安山岩の丸石の壁
+tile.WallCobble.Basalt.name=玄武岩の丸石の壁
+tile.WallCobble.Chalk.name=白亜の丸石の壁
+tile.WallCobble.Chert.name=燵岩の丸石の壁
+tile.WallCobble.Claystone.name=粘土岩の丸石の壁
+tile.WallCobble.Conglomerate.name=礫岩の丸石の壁
+tile.WallCobble.Dacite.name=デイサイトの丸石の壁
+tile.WallCobble.Diorite.name=閃緑岩の丸石の壁
+tile.WallCobble.Dolomite.name=苦灰石の丸石の壁
+tile.WallCobble.Gabbro.name=斑糲岩の丸石の壁
+tile.WallCobble.Gneiss.name=片麻岩の丸石の壁
+tile.WallCobble.Granite.name=花崗岩の丸石の壁
+tile.WallCobble.Limestone.name=石灰岩の丸石の壁
+tile.WallCobble.Marble.name=大理石の丸石の壁
+tile.WallCobble.Phyllite.name=千枚岩の丸石の壁
+tile.WallCobble.Quartzite.name=珪岩の丸石の壁
+tile.WallCobble.Rhyolite.name=流紋岩の丸石の壁
+tile.WallCobble.Rock Salt.name=岩塩の丸石の壁
+tile.WallCobble.Schist.name=片岩の丸石の壁
+tile.WallCobble.Shale.name=頁岩の丸石の壁
+tile.WallCobble.Slate.name=粘板岩の丸石の壁
+
+tile.WallRaw.Andesite.name=安山岩の壁
+tile.WallRaw.Basalt.name=玄武岩の壁
+tile.WallRaw.Chalk.name=白亜の壁
+tile.WallRaw.Chert.name=燵岩の壁
+tile.WallRaw.Claystone.name=粘土岩の壁
+tile.WallRaw.Conglomerate.name=礫岩の壁
+tile.WallRaw.Dacite.name=デイサイト岩の壁
+tile.WallRaw.Diorite.name=閃緑岩の壁
+tile.WallRaw.Dolomite.name=苦灰石の壁
+tile.WallRaw.Gabbro.name=斑糲岩の壁
+tile.WallRaw.Gneiss.name=片麻岩の壁
+tile.WallRaw.Granite.name=花崗岩の壁
+tile.WallRaw.Limestone.name=石灰岩の壁
+tile.WallRaw.Marble.name=大理石の壁
+tile.WallRaw.Phyllite.name=千枚岩の壁
+tile.WallRaw.Quartzite.name=珪岩の壁
+tile.WallRaw.Rhyolite.name=流紋岩の壁
+tile.WallRaw.Rock Salt.name=岩塩の壁
+tile.WallRaw.Schist.name=片岩の壁
+tile.WallRaw.Shale.name=頁岩の壁
+tile.WallRaw.Slate.name=粘板岩の壁
+
+tile.WallBrick.Andesite.name=安山岩レンガの壁
+tile.WallBrick.Basalt.name=玄武岩レンガの壁
+tile.WallBrick.Chalk.name=白亜レンガの壁
+tile.WallBrick.Chert.name=燵岩レンガの壁
+tile.WallBrick.Claystone.name=粘土岩レンガの壁
+tile.WallBrick.Conglomerate.name=礫岩レンガの壁
+tile.WallBrick.Dacite.name=デイサイト岩レンガの壁
+tile.WallBrick.Diorite.name=閃緑岩レンガの壁
+tile.WallBrick.Dolomite.name=苦灰石レンガの壁
+tile.WallBrick.Gabbro.name=斑糲岩レンガの壁
+tile.WallBrick.Gneiss.name=片麻岩レンガの壁
+tile.WallBrick.Granite.name=花崗岩レンガの壁
+tile.WallBrick.Limestone.name=石灰岩レンガの壁
+tile.WallBrick.Marble.name=大理石レンガの壁
+tile.WallBrick.Phyllite.name=千枚岩レンガの壁
+tile.WallBrick.Quartzite.name=珪岩レンガの壁
+tile.WallBrick.Rhyolite.name=流紋岩レンガの壁
+tile.WallBrick.Rock Salt.name=岩塩レンガの壁
+tile.WallBrick.Schist.name=片岩レンガの壁
+tile.WallBrick.Shale.name=頁岩レンガの壁
+tile.WallBrick.Slate.name=粘板岩レンガの壁
+
+tile.WallSmooth.Andesite.name=安山岩のスムースストーンの壁
+tile.WallSmooth.Basalt.name=玄武岩のスムースストーンの壁
+tile.WallSmooth.Chalk.name=白亜のスムースストーンの壁
+tile.WallSmooth.Chert.name=燵岩のスムースストーンの壁
+tile.WallSmooth.Claystone.name=粘土岩のスムースストーンの壁
+tile.WallSmooth.Conglomerate.name=礫岩のスムースストーンの壁
+tile.WallSmooth.Dacite.name=デイサイト岩のスムースストーンの壁
+tile.WallSmooth.Diorite.name=閃緑岩のスムースストーンの壁
+tile.WallSmooth.Dolomite.name=苦灰石のスムースストーンの壁
+tile.WallSmooth.Gabbro.name=斑糲岩のスムースストーンの壁
+tile.WallSmooth.Gneiss.name=片麻岩のスムースストーンの壁
+tile.WallSmooth.Granite.name=花崗岩のスムースストーンの壁
+tile.WallSmooth.Limestone.name=石灰岩のスムースストーンの壁
+tile.WallSmooth.Marble.name=大理石のスムースストーンの壁
+tile.WallSmooth.Phyllite.name=千枚岩のスムースストーンの壁
+tile.WallSmooth.Quartzite.name=珪岩のスムースストーンの壁
+tile.WallSmooth.Rhyolite.name=流紋岩のスムースストーンの壁
+tile.WallSmooth.Rock Salt.name=岩塩のスムースストーンの壁
+tile.WallSmooth.Schist.name=片岩のスムースストーンの壁
+tile.WallSmooth.Shale.name=頁岩のスムースストーンの壁
+tile.WallSmooth.Slate.name=粘板岩のスムースストーンの壁
+
+tile.IgExRock.Andesite.name=安山岩
+tile.IgExRock.Basalt.name=玄武岩
+tile.SedRock.Chalk.name=白亜
+tile.SedRock.Chert.name=燵岩
+tile.SedRock.Claystone.name=粘土岩
+tile.SedRock.Conglomerate.name=礫岩
+tile.IgExRock.Dacite.name=デイサイト岩
+tile.IgInRock.Diorite.name=閃緑岩
+tile.SedRock.Dolomite.name=苦灰石
+tile.IgInRock.Gabbro.name=斑糲岩
+tile.MMRock.Gneiss.name=片麻岩
+tile.IgInRock.Granite.name=花崗岩
+tile.SedRock.Limestone.name=石灰岩
+tile.MMRock.Marble.name=大理石
+tile.MMRock.Phyllite.name=千枚岩
+tile.MMRock.Quartzite.name=珪岩
+tile.IgExRock.Rhyolite.name=流紋岩
+tile.SedRock.Rock Salt.name=岩塩
+tile.MMRock.Schist.name=片岩
+tile.SedRock.Shale.name=頁岩
+tile.MMRock.Slate.name=粘板岩
+
+tile.IgExRockCobble.Andesite.name=安山岩の丸石
+tile.IgExRockCobble.Basalt.name=玄武岩の丸石
+tile.SedRockCobble.Chalk.name=白亜の丸石
+tile.SedRockCobble.Chert.name=燵岩の丸石
+tile.SedRockCobble.Claystone.name=粘土岩の丸石
+tile.SedRockCobble.Conglomerate.name=礫岩の丸石
+tile.IgExRockCobble.Dacite.name=デイサイト岩の丸石
+tile.IgInRockCobble.Diorite.name=閃緑岩の丸石
+tile.SedRockCobble.Dolomite.name=苦灰石の丸石
+tile.IgInRockCobble.Gabbro.name=斑糲岩の丸石
+tile.MMRockCobble.Gneiss.name=片麻岩の丸石
+tile.IgInRockCobble.Granite.name=花崗岩の丸石
+tile.SedRockCobble.Limestone.name=石灰岩の丸石
+tile.MMRockCobble.Marble.name=大理石の丸石
+tile.MMRockCobble.Phyllite.name=千枚岩の丸石
+tile.MMRockCobble.Quartzite.name=珪岩の丸石
+tile.IgExRockCobble.Rhyolite.name=流紋岩の丸石
+tile.SedRockCobble.Rock Salt.name=岩塩の丸石
+tile.MMRockCobble.Schist.name=片岩の丸石
+tile.SedRockCobble.Shale.name=頁岩の丸石
+tile.MMRockCobble.Slate.name=粘板岩の丸石
+
+tile.IgExRockSmooth.Andesite.name=安山岩のスムースストーン
+tile.IgExRockSmooth.Basalt.name=玄武岩のスムースストーン
+tile.SedRockSmooth.Chalk.name=白亜のスムースストーン
+tile.SedRockSmooth.Chert.name=燵岩のスムースストーン
+tile.SedRockSmooth.Claystone.name=粘土岩のスムースストーン
+tile.SedRockSmooth.Conglomerate.name=礫岩のスムースストーン
+tile.IgExRockSmooth.Dacite.name=デイサイト岩のスムースストーン
+tile.IgInRockSmooth.Diorite.name=閃緑岩のスムースストーン
+tile.SedRockSmooth.Dolomite.name=苦灰石のスムースストーン
+tile.IgInRockSmooth.Gabbro.name=斑糲岩のスムースストーン
+tile.MMRockSmooth.Gneiss.name=片麻岩のスムースストーン
+tile.IgInRockSmooth.Granite.name=花崗岩のスムースストーン
+tile.SedRockSmooth.Limestone.name=石灰岩のスムースストーン
+tile.MMRockSmooth.Marble.name=大理石のスムースストーン
+tile.MMRockSmooth.Phyllite.name=千枚岩のスムースストーン
+tile.MMRockSmooth.Quartzite.name=珪岩のスムースストーン
+tile.IgExRockSmooth.Rhyolite.name=流紋岩のスムースストーン
+tile.SedRockSmooth.Rock Salt.name=岩塩のスムースストーン
+tile.MMRockSmooth.Schist.name=片岩のスムースストーン
+tile.SedRockSmooth.Shale.name=頁岩のスムースストーン
+tile.MMRockSmooth.Slate.name=粘板岩のスムースストーン
+
+tile.IgExRockBrick.Andesite.name=安山岩レンガ
+tile.IgExRockBrick.Basalt.name=玄武岩レンガ
+tile.SedRockBrick.Chalk.name=白亜レンガ
+tile.SedRockBrick.Chert.name=燵岩レンガ
+tile.SedRockBrick.Claystone.name=粘土岩レンガ
+tile.SedRockBrick.Conglomerate.name=礫岩レンガ
+tile.IgExRockBrick.Dacite.name=デイサイト岩レンガ
+tile.IgInRockBrick.Diorite.name=閃緑岩レンガ
+tile.SedRockBrick.Dolomite.name=苦灰石レンガ
+tile.IgInRockBrick.Gabbro.name=斑糲岩レンガ
+tile.MMRockBrick.Gneiss.name=片麻岩レンガ
+tile.IgInRockBrick.Granite.name=花崗岩レンガ
+tile.SedRockBrick.Limestone.name=石灰岩レンガ
+tile.MMRockBrick.Marble.name=大理石レンガ
+tile.MMRockBrick.Phyllite.name=千枚岩レンガ
+tile.MMRockBrick.Quartzite.name=珪岩レンガ
+tile.IgExRockBrick.Rhyolite.name=流紋岩レンガ
+tile.SedRockBrick.Rock Salt.name=岩塩レンガ
+tile.MMRockBrick.Schist.name=片岩レンガ
+tile.SedRockBrick.Shale.name=頁岩レンガ
+tile.MMRockBrick.Slate.name=粘板岩レンガ
+
+#=======
+#= Ore =
+#=======
+#== Ore Items ==
+item.Ore.Bituminous Coal.name=歴青炭
+item.Ore.Borax.name=ホウ砂
+item.Ore.Cinnabar.name=辰砂
+item.Ore.Cryolite.name=氷晶石
+item.Ore.Graphite.name=黒鉛
+item.Ore.Gypsum.name=石膏
+item.Ore.Jet.name=黒玉
+item.Ore.Kaolinite.name=カオリン石
+item.Ore.Kimberlite.name=キンバーライト
+item.Ore.Lapis Lazuli.name=ラピスラズリ
+item.Ore.Lignite.name=褐炭
+item.Ore.Microcline.name=微斜長石
+item.Ore.Olivine.name=かんらん石
+item.Ore.Petrified Wood.name=珪化木
+item.Ore.Pitchblende.name=歴青ウラン鉱
+item.Ore.Saltpeter.name=硝石
+item.Ore.Satinspar.name=繊維石膏
+item.Ore.Selenite.name=透明石膏
+item.Ore.Serpentine.name=蛇紋石
+item.Ore.Sulfur.name=硫黄
+item.Ore.Sylvite.name=カリ岩塩
+
+item.Ore.Bismuthinite.name=輝蒼鉛鉱
+item.Ore.Cassiterite.name=錫石
+item.Ore.Galena.name=方鉛鉱
+item.Ore.Garnierite.name=珪ニッケル鉱
+item.Ore.Hematite.name=赤鉄鉱
+item.Ore.Limonite.name=褐鉄鉱
+item.Ore.Magnetite.name=磁鉄鉱
+item.Ore.Malachite.name=孔雀石
+item.Ore.Native Copper.name=自然銅
+item.Ore.Native Gold.name=自然金
+item.Ore.Native Platinum.name=自然白金
+item.Ore.Native Silver.name=自然銀
+item.Ore.Sphalerite.name=閃亜鉛鉱
+item.Ore.Tetrahedrite.name=四面銅鉱
+
+item.Ore.Rich Bismuthinite.name=含有量の多い輝蒼鉛鉱
+item.Ore.Rich Cassiterite.name=含有量の多い錫石
+item.Ore.Rich Galena.name=含有量の多い方鉛鉱
+item.Ore.Rich Garnierite.name=含有量の多い珪ニッケル鉱
+item.Ore.Rich Hematite.name=含有量の多い赤鉄鉱
+item.Ore.Rich Limonite.name=含有量の多い褐鉄鉱
+item.Ore.Rich Magnetite.name=含有量の多い磁鉄鉱
+item.Ore.Rich Malachite.name=含有量の多い孔雀石
+item.Ore.Rich Native Copper.name=含有量の多い自然銅
+item.Ore.Rich Native Gold.name=含有量の多い自然金
+item.Ore.Rich Native Platinum.name=含有量の多い自然白金
+item.Ore.Rich Native Silver.name=含有量の多い自然銀
+item.Ore.Rich Sphalerite.name=含有量の多い閃亜鉛鉱
+item.Ore.Rich Tetrahedrite.name=含有量の多い四面銅鉱
+
+item.Ore.Poor Bismuthinite.name=含有量の少ない輝蒼鉛鉱
+item.Ore.Poor Cassiterite.name=含有量の少ない錫石
+item.Ore.Poor Galena.name=含有量の少ない方鉛鉱
+item.Ore.Poor Garnierite.name=含有量の少ない珪ニッケル鉱
+item.Ore.Poor Hematite.name=含有量の少ない赤鉄鉱
+item.Ore.Poor Limonite.name=含有量の少ない褐鉄鉱
+item.Ore.Poor Magnetite.name=含有量の少ない磁鉄鉱
+item.Ore.Poor Malachite.name=含有量の少ない孔雀石
+item.Ore.Poor Native Copper.name=含有量の少ない自然銅
+item.Ore.Poor Native Gold.name=含有量の少ない自然金
+item.Ore.Poor Native Platinum.name=含有量の少ない自然白金
+item.Ore.Poor Native Silver.name=含有量の少ない自然銀
+item.Ore.Poor Sphalerite.name=含有量の少ない閃亜鉛鉱
+item.Ore.Poor Tetrahedrite.name=含有量の少ない四面銅鉱
+
+item.Small Ore.Bismuthinite.name=輝蒼鉛鉱の小片
+item.Small Ore.Cassiterite.name=錫石の小片
+item.Small Ore.Galena.name=方鉛鉱の小片
+item.Small Ore.Garnierite.name=桂ニッケル鉱の小片
+item.Small Ore.Hematite.name=赤鉄鉱の小片
+item.Small Ore.Limonite.name=褐鉄鉱の小片
+item.Small Ore.Magnetite.name=磁鉄鉱の小片
+item.Small Ore.Malachite.name=孔雀石の小片
+item.Small Ore.Native Copper.name=自然銅の小片
+item.Small Ore.Native Gold.name=自然金の小片
+item.Small Ore.Native Platinum.name=自然白金の小片
+item.Small Ore.Native Silver.name=自然銀の小片
+item.Small Ore.Sphalerite.name=閃亜鉛鉱の小片
+item.Small Ore.Tetrahedrite.name=四面銅鉱の小片
+
+#== Ore Blocks ==
+tile.Ore.Bituminous Coal.name=歴青炭
+tile.Ore.Borax.name=ホウ砂
+tile.Ore.Cinnabar.name=辰砂
+tile.Ore.Cryolite.name=氷晶石
+tile.Ore.Graphite.name=黒鉛
+tile.Ore.Gypsum.name=石膏
+tile.Ore.Jet.name=黒玉
+tile.Ore.Kaolinite.name=カオリン石
+tile.Ore.Kimberlite.name=キンバーライト
+tile.Ore.Lapis Lazuli.name=ラピスラズリ
+tile.Ore.Lignite.name=褐炭
+tile.Ore.Microcline.name=微斜長石
+tile.Ore.Olivine.name=かんらん石
+tile.Ore.Petrified Wood.name=珪化木
+tile.Ore.Pitchblende.name=歴青ウラン鉱
+tile.Ore.Saltpeter.name=硝石
+tile.Ore.Satinspar.name=繊維石膏
+tile.Ore.Selenite.name=透明石膏
+tile.Ore.Serpentine.name=蛇紋石
+tile.Ore.Sulfur.name=硫黄
+tile.Ore.Sylvite.name=カリ岩塩
+
+tile.Ore.Bismuthinite.name=輝蒼鉛鉱
+tile.Ore.Cassiterite.name=錫石
+tile.Ore.Galena.name=方鉛鉱
+tile.Ore.Garnierite.name=珪ニッケル鉱
+tile.Ore.Hematite.name=赤鉄鉱
+tile.Ore.Limonite.name=褐鉄鉱
+tile.Ore.Magnetite.name=磁鉄鉱
+tile.Ore.Malachite.name=孔雀石
+tile.Ore.Native Copper.name=自然銅
+tile.Ore.Native Gold.name=自然金
+tile.Ore.Native Platinum.name=自然白金
+tile.Ore.Native Silver.name=自然銀
+tile.Ore.Sphalerite.name=閃亜鉛鉱
+tile.Ore.Tetrahedrite.name=四面銅鉱
+
+#========
+#= Wood =
+#========
+#== Wood Items ==
+item.Log.Acacia.name=アカシアの丸太
+item.Log.Ash.name=トネリコの丸太
+item.Log.Aspen.name=アスペンの丸太
+item.Log.Birch.name=白樺の丸太
+item.Log.Chestnut.name=栗の木の丸太
+item.Log.Douglas Fir.name=ダグラス・ファーの丸太
+item.Log.Hickory.name=胡桃の木の丸太
+item.Log.Kapok.name=パンヤの丸太
+item.Log.Maple.name=楓の丸太
+item.Log.Oak.name=樫の丸太
+item.Log.Pine.name=松の丸太
+item.Log.Sequoia.name=セコイアの丸太
+item.Log.Spruce.name=トウヒの丸太
+item.Log.Sycamore.name=サイカモアの丸太
+item.Log.White Cedar.name=栴檀の丸太
+item.Log.White Elm.name=楡の丸太
+item.Log.Willow.name=柳の丸太
+
+item.SinglePlank.Acacia.name=アカシアの木板
+item.SinglePlank.Ash.name=トネリコの木板
+item.SinglePlank.Aspen.name=アスペンの木板
+item.SinglePlank.Birch.name=白樺の木板
+item.SinglePlank.Chestnut.name=栗の木の木板
+item.SinglePlank.Douglas Fir.name=ダグラス・ファーの木板
+item.SinglePlank.Hickory.name=胡桃の木の木板
+item.SinglePlank.Kapok.name=パンヤの木板
+item.SinglePlank.Maple.name=楓の木板
+item.SinglePlank.Oak.name=樫の木板
+item.SinglePlank.Pine.name=松の木板
+item.SinglePlank.Sequoia.name=セコイアの木板
+item.SinglePlank.Spruce.name=トウヒの木板
+item.SinglePlank.Sycamore.name=サイカモアの木板
+item.SinglePlank.White Cedar.name=栴檀の木板
+item.SinglePlank.White Elm.name=楡の木板
+item.SinglePlank.Willow.name=柳の木板
+
+item.Acacia Door.name=アカシアのドア
+item.Ash Door.name=トネリコのドア
+item.Aspen Door.name=アスペンのドア
+item.Birch Door.name=白樺のドア
+item.Chestnut Door.name=栗の木のドア
+item.Douglas Fir Door.name=ダグラス・ファーのドア
+item.Hickory Door.name=胡桃の木のドア
+item.Kapok Door.name=パンヤのドア
+item.Maple Door.name=楓のドア
+item.Oak Door.name=樫のドア
+item.Pine Door.name=松のドア
+item.Sequoia Door.name=セコイアのドア
+item.Spruce Door.name=トウヒのドア
+item.Sycamore Door.name=サイカモアのドア
+item.White Cedar Door.name=栴檀のドア
+item.White Elm Door.name=楡のドア
+item.Willow Door.name=柳のドア
+
+item.Barrel.Acacia.name=アカシアの樽
+item.Barrel.Ash.name=トネリコの樽
+item.Barrel.Aspen.name=アスペンの樽
+item.Barrel.Birch.name=白樺の樽
+item.Barrel.Chestnut.name=栗の木の樽
+item.Barrel.Douglas Fir.name=ダグラス・ファーの樽
+item.Barrel.Hickory.name=クルミの木の樽
+item.Barrel.Kapok.name=パンヤの樽
+item.Barrel.Maple.name=楓の樽
+item.Barrel.Oak.name=樫の樽
+item.Barrel.Pine.name=松の樽
+item.Barrel.Sequoia.name=セコイアの樽
+item.Barrel.Spruce.name=トウヒの樽
+item.Barrel.Sycamore.name=サイカモアの樽
+item.Barrel.White Cedar.name=栴檀の樽
+item.Barrel.White Elm.name=楡の樽
+item.Barrel.Willow.name=柳の樽
+
+item.Loom.Acacia.name=
+item.Loom.Ash.name=
+item.Loom.Aspen.name=
+item.Loom.Birch.name=
+item.Loom.Chestnut.name=
+item.Loom.Douglas Fir.name=
+item.Loom.Hickory.name=
+item.Loom.Kapok.name=
+item.Loom.Maple.name=
+item.Loom.Oak.name=
+item.Loom.Pine.name=
+item.Loom.Sequoia.name=
+item.Loom.Spruce.name=
+item.Loom.Sycamore.name=
+item.Loom.White Cedar.name=
+item.Loom.White Elm.name=
+item.Loom.Willow.name=
+
+#== Wood Blocks ==
+tile.log.Acacia.name=アカシアの丸太
+tile.log2.Acacia.name=アカシアの丸太
+tile.log.Ash.name=トネリコの丸太
+tile.log.Aspen.name=アスペンの丸太
+tile.log.Birch.name=白樺の丸太
+tile.log.Chestnut.name=栗の木の丸太
+tile.log.Douglas Fir.name=ダグラス・ファーの丸太
+tile.log.Hickory.name=胡桃の木の丸太
+tile.log.Kapok.name=パンヤの丸太
+tile.log.Maple.name=楓の丸太
+tile.log.Oak.name=樫の丸太
+tile.log.Pine.name=松の丸太
+tile.log.Sequoia.name=セコイアの丸太
+tile.log.Spruce.name=トウヒの丸太
+tile.log.Sycamore.name=サイカモアの丸太
+tile.log.White Cedar.name=栴檀の丸太
+tile.log.White Elm.name=楡の丸太
+tile.log.Willow.name=柳の丸太
+
+tile.WoodVert2.Acacia.name=アカシアの丸太
+tile.WoodVert.Ash.name=トネリコの丸太
+tile.WoodVert.Aspen.name=アスペンの丸太
+tile.WoodVert.Birch.name=白樺の丸太
+tile.WoodVert.Chestnut.name=栗の木の丸太
+tile.WoodVert.Douglas Fir.name=ダグラス・ファーの丸太
+tile.WoodVert.Hickory.name=胡桃の木の丸太
+tile.WoodVert.Kapok.name=パンヤの丸太
+tile.WoodVert.Maple.name=楓の丸太
+tile.WoodVert.Oak.name=樫の丸太
+tile.WoodVert.Pine.name=松の丸太
+tile.WoodVert.Sequoia.name=セコイアの丸太
+tile.WoodVert.Spruce.name=トウヒの丸太
+tile.WoodVert.Sycamore.name=サイカモアの丸太
+tile.WoodVert.White Cedar.name=栴檀の丸太
+tile.WoodVert.White Elm.name=楡の丸太
+tile.WoodVert.Willow.name=柳の丸太
+
+tile.WoodHoriz3.Acacia.name=アカシアの丸太
+tile.WoodHoriz.Ash.name=トネリコの丸太
+tile.WoodHoriz.Aspen.name=アスペンの丸太
+tile.WoodHoriz.Birch.name=白樺の丸太
+tile.WoodHoriz.Chestnut.name=栗の木の丸太
+tile.WoodHoriz.Douglas Fir.name=ダグラス・ファーの丸太
+tile.WoodHoriz.Hickory.name=胡桃の木の丸太
+tile.WoodHoriz2.Kapok.name=パンヤの丸太
+tile.WoodHoriz.Maple.name=楓の丸太
+tile.WoodHoriz.Oak.name=樫の丸太
+tile.WoodHoriz2.Pine.name=松の丸太
+tile.WoodHoriz2.Sequoia.name=セコイアの丸太
+tile.WoodHoriz2.Spruce.name=トウヒの丸太
+tile.WoodHoriz2.Sycamore.name=サイカモアの丸太
+tile.WoodHoriz2.White Cedar.name=栴檀の丸太
+tile.WoodHoriz2.White Elm.name=楡の丸太
+tile.WoodHoriz2.Willow.name=柳の丸太
+
+tile.sapling2.Acacia.name=アカシアの苗木
+tile.sapling.Ash.name=トネリコの苗木
+tile.sapling.Aspen.name=アスペンの苗木
+tile.sapling.Birch.name=白樺の苗木
+tile.sapling.Chestnut.name=栗の木の苗木
+tile.sapling.Douglas Fir.name=ダグラス・ファーの苗木
+tile.sapling.Hickory.name=胡桃の木の苗木
+tile.sapling.Kapok.name=パンヤの苗木
+tile.sapling.Maple.name=楓の苗木
+tile.sapling.Oak.name=樫の苗木
+tile.sapling.Pine.name=松の苗木
+tile.sapling.Sequoia.name=セコイアの苗木
+tile.sapling.Spruce.name=トウヒの苗木
+tile.sapling.Sycamore.name=サイカモアの苗木
+tile.sapling.White Cedar.name=栴檀の苗木
+tile.sapling.White Elm.name=楡の苗木
+tile.sapling.Willow.name=柳の苗木
+
+tile.leaves.Acacia.name=アカシアの葉
+tile.leaves.Ash.name=トネリコの葉
+tile.leaves.Aspen.name=アスペンの葉
+tile.leaves.Birch.name=白樺の葉
+tile.leaves.Chestnut.name=栗の木の葉
+tile.leaves.Douglas Fir.name=ダグラス・ファーの葉
+tile.leaves.Hickory.name=胡桃の木の葉
+tile.leaves.Kapok.name=パンヤの葉
+tile.leaves.Maple.name=楓の葉
+tile.leaves.Oak.name=樫の葉
+tile.leaves.Pine.name=松の葉
+tile.leaves.Sequoia.name=セコイアの葉
+tile.leaves.Spruce.name=トウヒの葉
+tile.leaves.Sycamore.name=サイカモアの葉
+tile.leaves.White Cedar.name=栴檀の葉
+tile.leaves.White Elm.name=楡の葉
+tile.leaves.Willow.name=柳の葉
+
+tile.wood2.Acacia.name=アカシアの木板
+tile.wood.Ash.name=トネリコの木板
+tile.wood.Aspen.name=アスペンの木板
+tile.wood.Birch.name=白樺の木板
+tile.wood.Chestnut.name=栗の木の木板
+tile.wood.Douglas Fir.name=ダグラス・ファーの木板
+tile.wood.Hickory.name=胡桃の木の木板
+tile.wood.Kapok.name=パンヤの木板
+tile.wood.Maple.name=楓の木板
+tile.wood.Oak.name=樫の木板
+tile.wood.Pine.name=松の木板
+tile.wood.Sequoia.name=セコイアの木板
+tile.wood.Spruce.name=トウヒの木板
+tile.wood.Sycamore.name=サイカモアの木板
+tile.wood.White Cedar.name=栴檀の木板
+tile.wood.White Elm.name=楡の木板
+tile.wood.Willow.name=柳の木板
+
+tile.Door Acacia.name=アカシアのドア
+tile.Door Ash.name=トネリコのドア
+tile.Door Aspen.name=アスペンのドア
+tile.Door Birch.name=白樺のドア
+tile.Door Chestnut.name=栗の木のドア
+tile.Door Douglas Fir.name=ダグラス・ファーのドア
+tile.Door Hickory.name=胡桃の木のドア
+tile.Door Kapok.name=パンヤのドア
+tile.Door Maple.name=楓のドア
+tile.Door Oak.name=樫のドア
+tile.Door Pine.name=松のドア
+tile.Door Sequoia.name=セコイアのドア
+tile.Door Spruce.name=トウヒのドア
+tile.Door Sycamore.name=サイカモアのドア
+tile.Door White Cedar.name=栴檀のドア
+tile.Door White Elm.name=楡のドア
+tile.Door Willow.name=柳のドア
+
+tile.Barrel.Acacia.name=アカシアの樽
+tile.Barrel.Ash.name=トネリコの樽
+tile.Barrel.Aspen.name=アスペンの樽
+tile.Barrel.Birch.name=白樺の樽
+tile.Barrel.Chestnut.name=栗の木の樽
+tile.Barrel.Douglas Fir.name=ダグラス・ファーの樽
+tile.Barrel.Hickory.name=クルミの木の樽
+tile.Barrel.Kapok.name=パンヤの樽
+tile.Barrel.Maple.name=楓の樽
+tile.Barrel.Oak.name=樫の樽
+tile.Barrel.Pine.name=松の樽
+tile.Barrel.Sequoia.name=セコイアの樽
+tile.Barrel.Spruce.name=トウヒの樽
+tile.Barrel.Sycamore.name=サイカモアの樽
+tile.Barrel.White Cedar.name=栴檀の樽
+tile.Barrel.White Elm.name=楡の樽
+tile.Barrel.Willow.name=柳の樽
+
+tile.Loom.Acacia.name=
+tile.Loom.Ash.name=
+tile.Loom.Aspen.name=
+tile.Loom.Birch.name=
+tile.Loom.Chestnut.name=
+tile.Loom.Douglas Fir.name=
+tile.Loom.Hickory.name=
+tile.Loom.Kapok.name=
+tile.Loom.Maple.name=
+tile.Loom.Oak.name=
+tile.Loom.Pine.name=
+tile.Loom.Sequoia.name=
+tile.Loom.Spruce.name=
+tile.Loom.Sycamore.name=
+tile.Loom.White Cedar.name=
+tile.Loom.White Elm.name=
+tile.Loom.Willow.name=
+
+tile.FenceTFC.Acacia.name=アカシアのフェンス
+tile.FenceTFC.Ash.name=トネリコのフェンス
+tile.FenceTFC.Aspen.name=アスペンのフェンス
+tile.FenceTFC.Birch.name=白樺のフェンス
+tile.FenceTFC.Chestnut.name=栗の木のフェンス
+tile.FenceTFC.Douglas Fir.name=ダグラス・ファーのフェンス
+tile.FenceTFC.Hickory.name=クルミの木のフェンス
+tile.FenceTFC.Kapok.name=パンヤのフェンス
+tile.FenceTFC.Maple.name=楓のフェンス
+tile.FenceTFC.Oak.name=樫のフェンス
+tile.FenceTFC.Pine.name=松のフェンス
+tile.FenceTFC.Sequoia.name=セコイアのフェンス
+tile.FenceTFC.Spruce.name=トウヒのフェンス
+tile.FenceTFC.Sycamore.name=サイカモアのフェンス
+tile.FenceTFC.White Cedar.name=栴檀のフェンス
+tile.FenceTFC.White Elm.name=楡のフェンス
+tile.FenceTFC.Willow.name=柳のフェンス
+
+tile.FenceGateTFC.Acacia.name=アカシアのフェンスゲート
+tile.FenceGateTFC.Ash.name=トネリコのフェンスゲート
+tile.FenceGateTFC.Aspen.name=アスペンのフェンスゲート
+tile.FenceGateTFC.Birch.name=白樺のフェンスゲート
+tile.FenceGateTFC.Chestnut.name=栗の木のフェンスゲート
+tile.FenceGateTFC.Douglas Fir.name=ダグラス・ファーのフェンスゲート
+tile.FenceGateTFC.Hickory.name=クルミの木のフェンスゲート
+tile.FenceGateTFC.Kapok.name=パンヤのフェンスゲート
+tile.FenceGateTFC.Maple.name=楓のフェンスゲート
+tile.FenceGateTFC.Oak.name=樫のフェンスゲート
+tile.FenceGateTFC.Pine.name=松のフェンスゲート
+tile.FenceGateTFC.Sequoia.name=セコイアのフェンスゲート
+tile.FenceGateTFC.Spruce.name=トウヒのフェンスゲート
+tile.FenceGateTFC.Sycamore.name=サイカモアのフェンスゲート
+tile.FenceGateTFC.White Cedar.name=栴檀のフェンスゲート
+tile.FenceGateTFC.White Elm.name=楡のフェンスゲート
+tile.FenceGateTFC.Willow.name=柳のフェンスゲート
+
+tile.ArmourStand.Acacia.name=アカシアのアーマースタンド
+tile.ArmourStand.Ash.name=トネリコのアーマースタンド
+tile.ArmourStand.Aspen.name=アスペンのアーマースタンド
+tile.ArmourStand.Birch.name=白樺のアーマースタンド
+tile.ArmourStand.Chestnut.name=栗の木のアーマースタンド
+tile.ArmourStand.Douglas Fir.name=ダグラス・ファーのアーマースタンド
+tile.ArmourStand.Hickory.name=クルミの木のアーマースタンド
+tile.ArmourStand.Kapok.name=パンヤのアーマースタンド
+tile.ArmourStand.Maple.name=楓のアーマースタンド
+tile.ArmourStand.Oak.name=樫のアーマースタンド
+tile.ArmourStand.Pine.name=松のアーマースタンド
+tile.ArmourStand.Sequoia.name=セコイアのアーマースタンド
+tile.ArmourStand.Spruce.name=トウヒのアーマースタンド
+tile.ArmourStand.Sycamore.name=サイカモアのアーマースタンド
+tile.ArmourStand.White Cedar.name=栴檀のアーマースタンド
+tile.ArmourStand.White Elm.name=楡のアーマースタンド
+tile.ArmourStand.Willow.name=柳のアーマースタンド
+
+tile.WoodSupportV2.Acacia.name=アカシアの用梁
+tile.WoodSupportV.Ash.name=トネリコの用梁
+tile.WoodSupportV.Aspen.name=アスペンの用梁
+tile.WoodSupportV.Birch.name=白樺の用梁
+tile.WoodSupportV.Chestnut.name=栗の木の用梁
+tile.WoodSupportV.Douglas Fir.name=ダグラス・ファーの用梁
+tile.WoodSupportV.Hickory.name=胡桃の木の用梁
+tile.WoodSupportV.Kapok.name=パンヤの用梁
+tile.WoodSupportV.Maple.name=楓の用梁
+tile.WoodSupportV.Oak.name=樫の用梁
+tile.WoodSupportV.Pine.name=松の用梁
+tile.WoodSupportV.Sequoia.name=セコイアの用梁
+tile.WoodSupportV.Spruce.name=トウヒの用梁
+tile.WoodSupportV.Sycamore.name=サイカモアの用梁
+tile.WoodSupportV.White Cedar.name=栴檀の用梁
+tile.WoodSupportV.White Elm.name=楡の用梁
+tile.WoodSupportV.Willow.name=柳の用梁
+
+tile.Toolrack.Acacia.name=アカシアのツールラック
+tile.Toolrack.Ash.name=トネリコのツールラック
+tile.Toolrack.Aspen.name=アスペンのツールラック
+tile.Toolrack.Birch.name=白樺のツールラック
+tile.Toolrack.Chestnut.name=栗の木のツールラック
+tile.Toolrack.Douglas Fir.name=ダグラス・ファーのツールラック
+tile.Toolrack.Hickory.name=胡桃の木のツールラック
+tile.Toolrack.Kapok.name=パンヤのツールラック
+tile.Toolrack.Maple.name=楓のツールラック
+tile.Toolrack.Oak.name=樫のツールラック
+tile.Toolrack.Pine.name=松のツールラック
+tile.Toolrack.Sequoia.name=セコイアのツールラック
+tile.Toolrack.Spruce.name=トウヒのツールラック
+tile.Toolrack.Sycamore.name=サイカモアのツールラック
+tile.Toolrack.White Cedar.name=栴檀のツールラック
+tile.Toolrack.White Elm.name=楡のツールラック
+tile.Toolrack.Willow.name=柳のツールラック
+
+#=======================
+#= Tools/Weapons/Armor =
+#=======================
+
+#== Stone Heads ==
+item.Stone Hammer Head.name=石のハンマーヘッド
+item.Stone Knife Blade.name=石のナイフヘッド
+
+item.IgIn Stone Axe Head.name=石の斧ヘッド
+item.IgIn Stone Chisel Head.name=石ののみヘッド
+item.IgIn Stone Hoe Head.name=石のクワヘッド
+item.IgIn Stone Javelin Head.name=石のジャベリンヘッド
+item.IgIn Stone Shovel Head.name=石のシャベルヘッド
+
+item.Sed Stone Axe Head.name=石の斧ヘッド
+item.Sed Stone Chisel Head.name=石ののみヘッド
+item.Sed Stone Hoe Head.name=石のクワヘッド
+item.Sed Stone Javelin Head.name=石のジャベリンヘッド
+item.Sed Stone Shovel Head.name=石のシャベルヘッド
+
+item.IgEx Stone Axe Head.name=石の斧ヘッド
+item.IgEx Stone Chisel Head.name=石ののみヘッド
+item.IgEx Stone Hoe Head.name=石のクワヘッド
+item.IgEx Stone Javelin Head.name=石のジャベリンヘッド
+item.IgEx Stone Shovel Head.name=石のシャベルヘッド
+
+item.MM Stone Axe Head.name=石の斧ヘッド
+item.MM Stone Chisel Head.name=石ののみヘッド
+item.MM Stone Hoe Head.name=石のクワヘッド
+item.MM Stone Javelin Head.name=石のジャベリンヘッド
+item.MM Stone Shovel Head.name=石のシャベルヘッド
+
+#== Stone Tools ==
+item.Stone Axe.name=石の斧
+item.IgIn Stone Axe.name=石の斧
+item.Sed Stone Axe.name=石の斧
+item.IgEx Stone Axe.name=石の斧
+item.MM Stone Axe.name=石の斧
+
+item.Stone Chisel.name=石ののみ
+
+item.Stone Hammer.name=石のハンマー
+
+item.Stone Hoe.name=石のクワ
+item.IgIn Stone Hoe.name=石のクワ
+item.Sed Stone Hoe.name=石のクワ
+item.IgEx Stone Hoe.name=石のクワ
+item.MM Stone Hoe.name=石のクワ
+
+item.Stone Javelin.name=石のジャベリン
+item.IgIn Stone Javelin.name=石のジャベリン
+item.Sed Stone Javelin.name=石のジャベリン
+item.IgEx Stone Javelin.name=石のジャベリン
+item.MM Stone Javelin.name=石のジャベリン
+
+item.Stone Knife.name=石のナイフ
+
+item.Stone Shovel.name=石のシャベル
+item.IgIn Stone Shovel.name=石のシャベル
+item.Sed Stone Shovel.name=石のシャベル
+item.IgEx Stone Shovel.name=石のシャベル
+item.MM Stone Shovel.name=石のシャベル
+
+#== Metal Heads ==
+#=== Axe Head ===
+item.Bismuth Bronze Axe Head.name=蒼青銅の斧ヘッド
+item.Black Bronze Axe Head.name=黒青銅の斧ヘッド
+item.Black Steel Axe Head.name=黒鋼の斧ヘッド
+item.Blue Steel Axe Head.name=青鋼の斧ヘッド
+item.Bronze Axe Head.name=青銅の斧ヘッド
+item.Copper Axe Head.name=銅の斧ヘッド
+item.Red Steel Axe Head.name=赤鋼の斧ヘッド
+item.Steel Axe Head.name=鋼の斧ヘッド
+item.Wrought Iron Axe Head.name=錬鉄の斧ヘッド
+
+#=== Chisel Head ===
+item.Bismuth Bronze Chisel Head.name=蒼青銅の鑿ヘッド
+item.Black Bronze Chisel Head.name=黒青銅の鑿ヘッド
+item.Black Steel Chisel Head.name=黒鋼の鑿ヘッド
+item.Blue Steel Chisel Head.name=青鋼の鑿ヘッド
+item.Bronze Chisel Head.name=青銅の鑿ヘッド
+item.Copper Chisel Head.name=銅の鑿ヘッド
+item.Red Steel Chisel Head.name=赤鋼の鑿ヘッド
+item.Steel Chisel Head.name=鋼の鑿ヘッド
+item.Wrought Iron Chisel Head.name=錬鉄の鑿ヘッド
+
+#=== Hammer Head ===
+item.Bismuth Bronze Hammer Head.name=蒼青銅のハンマーヘッド
+item.Black Bronze Hammer Head.name=黒青銅のハンマーヘッド
+item.Black Steel Hammer Head.name=黒鋼のハンマーヘッド
+item.Blue Steel Hammer Head.name=青鋼のハンマーヘッド
+item.Bronze Hammer Head.name=青銅のハンマーヘッド
+item.Copper Hammer Head.name=銅のハンマーヘッド
+item.Red Steel Hammer Head.name=赤鋼のハンマーヘッド
+item.Steel Hammer Head.name=鋼のハンマーヘッド
+item.Wrought Iron Hammer Head.name=錬鉄のハンマーヘッド
+
+#=== Hoe Head ===
+item.Bismuth Bronze Hoe Head.name=蒼青銅のクワヘッド
+item.Black Bronze Hoe Head.name=黒青銅のクワヘッド
+item.Black Steel Hoe Head.name=黒鋼のクワヘッド
+item.Blue Steel Hoe Head.name=青鋼のクワヘッド
+item.Bronze Hoe Head.name=青銅のクワヘッド
+item.Copper Hoe Head.name=銅のクワヘッド
+item.Red Steel Hoe Head.name=赤鋼のクワヘッド
+item.Steel Hoe Head.name=鋼のクワヘッド
+item.Wrought Iron Hoe Head.name=錬鉄のクワヘッド
+
+#=== Javelin Head ===
+item.Bismuth Bronze Javelin Head.name=蒼青銅のジャベリンヘッド
+item.Black Bronze Javelin Head.name=黒青銅のジャベリンヘッド
+item.Black Steel Javelin Head.name=黒鋼のジャベリンヘッド
+item.Blue Steel Javelin Head.name=青鋼のジャベリンヘッド
+item.Bronze Javelin Head.name=青銅のジャベリンヘッド
+item.Copper Javelin Head.name=銅のジャベリンヘッド
+item.Red Steel Javelin Head.name=赤鋼のジャベリンヘッド
+item.Steel Javelin Head.name=鋼のジャベリンヘッド
+item.Wrought Iron Javelin Head.name=錬鉄のジャベリンヘッド
+
+#=== Knife Blade ===
+item.Bismuth Bronze Knife Blade.name=蒼青銅のナイフヘッド
+item.Black Bronze Knife Blade.name=黒青銅のナイフヘッド
+item.Black Steel Knife Blade.name=黒鋼のナイフヘッド
+item.Blue Steel Knife Blade.name=青鋼のナイフヘッド
+item.Bronze Knife Blade.name=青銅のナイフヘッド
+item.Copper Knife Blade.name=銅のナイフヘッド
+item.Red Steel Knife Blade.name=赤鋼のナイフヘッド
+item.Steel Knife Blade.name=鋼のナイフヘッド
+item.Wrought Iron Knife Blade.name=錬鉄のナイフヘッド
+
+#=== Mace Head ===
+item.Bismuth Bronze Mace Head.name=蒼青銅のメイスヘッド
+item.Black Bronze Mace Head.name=黒青銅のメイスヘッド
+item.Black Steel Mace Head.name=黒鋼のメイスヘッド
+item.Blue Steel Mace Head.name=青鋼のメイスヘッド
+item.Bronze Mace Head.name=青銅のメイスヘッド
+item.Copper Mace Head.name=銅のメイスヘッド
+item.Red Steel Mace Head.name=赤鋼のメイスヘッド
+item.Steel Mace Head.name=鋼のメイスヘッド
+item.Wrought Iron Mace Head.name=錬鉄のメイスヘッド
+
+#=== Pickaxe Head ===
+item.Bismuth Bronze Pick Head.name=蒼青銅のツルハシヘッド
+item.Black Bronze Pick Head.name=黒青銅のツルハシヘッド
+item.Black Steel Pick Head.name=黒鋼のツルハシヘッド
+item.Blue Steel Pick Head.name=青鋼のツルハシヘッド
+item.Bronze Pick Head.name=青銅のツルハシヘッド
+item.Copper Pick Head.name=銅のツルハシヘッド
+item.Red Steel Pick Head.name=赤鋼のツルハシヘッド
+item.Steel Pick Head.name=鋼のツルハシヘッド
+item.Wrought Iron Pick Head.name=錬鉄のツルハシヘッド
+
+#=== Prospector's Pick Head ===
+item.Bismuth Bronze ProPick Head.name=蒼青銅の探鉱鎚ヘッド
+item.Black Bronze ProPick Head.name=黒青銅の探鉱鎚ヘッド
+item.Black Steel ProPick Head.name=黒鋼の探鉱鎚ヘッド
+item.Blue Steel ProPick Head.name=青鋼の探鉱鎚ヘッド
+item.Bronze ProPick Head.name=青銅の探鉱鎚ヘッド
+item.Copper ProPick Head.name=銅の探鉱鎚ヘッド
+item.Red Steel ProPick Head.name=赤鋼の探鉱鎚ヘッド
+item.Steel ProPick Head.name=鋼の探鉱鎚ヘッド
+item.Wrought Iron ProPick Head.name=錬鉄の探鉱鎚ヘッド
+
+#=== Saw Blade ===
+item.Bismuth Bronze Saw Blade.name=蒼青銅の鋸ヘッド
+item.Black Bronze Saw Blade.name=黒青銅の鋸ヘッド
+item.Black Steel Saw Blade.name=黒鋼の鋸ヘッド
+item.Blue Steel Saw Blade.name=青鋼の鋸ヘッド
+item.Bronze Saw Blade.name=青銅の鋸ヘッド
+item.Copper Saw Blade.name=銅の鋸ヘッド
+item.Red Steel Saw Blade.name=赤鋼の鋸ヘッド
+item.Steel Saw Blade.name=鋼の鋸ヘッド
+item.Wrought Iron Saw Blade.name=錬鉄の鋸ヘッド
+
+#=== Scythe Blade ===
+item.Bismuth Bronze Scythe Blade.name=蒼青銅の鎌ヘッド
+item.Black Bronze Scythe Blade.name=黒青銅の鎌ヘッド
+item.Black Steel Scythe Blade.name=黒鋼の鎌ヘッド
+item.Blue Steel Scythe Blade.name=青鋼の鎌ヘッド
+item.Bronze Scythe Blade.name=青銅の鎌ヘッド
+item.Copper Scythe Blade.name=銅の鎌ヘッド
+item.Red Steel Scythe Blade.name=赤鋼の鎌ヘッド
+item.Steel Scythe Blade.name=鋼の鎌ヘッド
+item.Wrought Iron Scythe Blade.name=錬鉄の鎌ヘッド
+
+#=== Shovel Head ===
+item.Bismuth Bronze Shovel Head.name=蒼青銅のシャベルヘッド
+item.Black Bronze Shovel Head.name=黒青銅のシャベルヘッド
+item.Black Steel Shovel Head.name=黒鋼のシャベルヘッド
+item.Blue Steel Shovel Head.name=青鋼のシャベルヘッド
+item.Bronze Shovel Head.name=青銅のシャベルヘッド
+item.Copper Shovel Head.name=銅のシャベルヘッド
+item.Red Steel Shovel Head.name=赤鋼のシャベルヘッド
+item.Steel Shovel Head.name=鋼のシャベルヘッド
+item.Wrought Iron Shovel Head.name=錬鉄のシャベルヘッド
+
+#=== Sword Blade ===
+item.Bismuth Bronze Sword Blade.name=蒼青銅のソードヘッド
+item.Black Bronze Sword Blade.name=黒青銅のソードヘッド
+item.Black Steel Sword Blade.name=黒鋼のソードヘッド
+item.Blue Steel Sword Blade.name=青鋼のソードヘッド
+item.Bronze Sword Blade.name=青銅のソードヘッド
+item.Copper Sword Blade.name=銅のソードヘッド
+item.Red Steel Sword Blade.name=赤鋼のソードヘッド
+item.Steel Sword Blade.name=鋼のソードヘッド
+item.Wrought Iron Sword Blade.name=錬鉄のソードヘッド
+
+#== Metal Tools ==
+#=== Axe ===
+item.Bismuth Bronze Axe.name=蒼青銅の斧
+item.Black Bronze Axe.name=黒青銅の斧
+item.Black Steel Axe.name=黒鋼の斧
+item.Blue Steel Axe.name=青鋼の斧
+item.Bronze Axe.name=青銅の斧
+item.Copper Axe.name=銅の斧
+item.Red Steel Axe.name=赤鋼の斧
+item.Steel Axe.name=鋼の斧
+item.Wrought Iron Axe.name=錬鉄の斧
+
+#=== Chisel ===
+item.Bismuth Bronze Chisel.name=蒼青銅のノミ
+item.Black Bronze Chisel.name=黒青銅のノミ
+item.Black Steel Chisel.name=黒鋼のノミ
+item.Blue Steel Chisel.name=青鋼のノミ
+item.Bronze Chisel.name=青銅のノミ
+item.Copper Chisel.name=銅のノミ
+item.Red Steel Chisel.name=赤鋼のノミ
+item.Steel Chisel.name=鋼のノミ
+item.Wrought Iron Chisel.name=錬鉄のノミ
+
+#=== Hammer ===
+item.Bismuth Bronze Hammer.name=蒼青銅のハンマー
+item.Black Bronze Hammer.name=黒青銅のハンマー
+item.Black Steel Hammer.name=黒鋼のハンマー
+item.Blue Steel Hammer.name=青鋼のハンマー
+item.Bronze Hammer.name=青銅のハンマー
+item.Copper Hammer.name=銅のハンマー
+item.Red Steel Hammer.name=赤鋼のハンマー
+item.Steel Hammer.name=鋼のハンマー
+item.Wrought Iron Hammer.name=錬鉄のハンマー
+
+#=== Hoe ===
+item.Bismuth Bronze Hoe.name=蒼青銅のクワ
+item.Black Bronze Hoe.name=黒青銅のクワ
+item.Black Steel Hoe.name=黒鋼のクワ
+item.Blue Steel Hoe.name=青鋼のクワ
+item.Bronze Hoe.name=青銅のクワ
+item.Copper Hoe.name=銅のクワ
+item.Red Steel Hoe.name=赤鋼のクワ
+item.Steel Hoe.name=鋼のクワ
+item.Wrought Iron Hoe.name=錬鉄のクワ
+
+#=== Javelin ===
+item.Bismuth Bronze Javelin.name=蒼青銅のジャベリン
+item.Black Bronze Javelin.name=黒青銅のジャベリン
+item.Black Steel Javelin.name=黒鋼のジャベリン
+item.Blue Steel Javelin.name=青鋼のジャベリン
+item.Bronze Javelin.name=青銅のジャベリン
+item.Copper Javelin.name=銅のジャベリン
+item.Red Steel Javelin.name=赤鋼のジャベリン
+item.Steel Javelin.name=鋼のジャベリン
+item.Wrought Iron Javelin.name=錬鉄のジャベリン
+
+#=== Knife ===
+item.Bismuth Bronze Knife.name=蒼青銅のナイフ
+item.Black Bronze Knife.name=黒青銅のナイフ
+item.Black Steel Knife.name=黒鋼のナイフ
+item.Blue Steel Knife.name=青鋼のナイフ
+item.Bronze Knife.name=青銅のナイフ
+item.Copper Knife.name=銅のナイフ
+item.Red Steel Knife.name=赤鋼のナイフ
+item.Steel Knife.name=鋼のナイフ
+item.Wrought Iron Knife.name=錬鉄のナイフ
+
+#=== Mace ===
+item.Bismuth Bronze Mace.name=蒼青銅のメイス
+item.Black Bronze Mace.name=黒青銅のメイス
+item.Black Steel Mace.name=黒鋼のメイス
+item.Blue Steel Mace.name=青鋼のメイス
+item.Bronze Mace.name=青銅のメイス
+item.Copper Mace.name=銅のメイス
+item.Red Steel Mace.name=赤鋼のメイス
+item.Steel Mace.name=鋼のメイス
+item.Wrought Iron Mace.name=錬鉄のメイス
+
+#=== Pickaxe ===
+item.Bismuth Bronze Pick.name=蒼青銅のツルハシ
+item.Black Bronze Pick.name=黒青銅のツルハシ
+item.Black Steel Pick.name=黒鋼のツルハシ
+item.Blue Steel Pick.name=青鋼のツルハシ
+item.Bronze Pick.name=青銅のツルハシ
+item.Copper Pick.name=銅のツルハシ
+item.Red Steel Pick.name=赤鋼のツルハシ
+item.Steel Pick.name=鋼のツルハシ
+item.Wrought Iron Pick.name=錬鉄のツルハシ
+
+#=== Prospector's Pick ===
+item.Bismuth Bronze ProPick.name=蒼青銅の探鉱鎚
+item.Black Bronze ProPick.name=黒青銅の探鉱鎚
+item.Black Steel ProPick.name=黒鋼の探鉱鎚
+item.Blue Steel ProPick.name=青鋼の探鉱鎚
+item.Bronze ProPick.name=青銅の探鉱鎚
+item.Copper ProPick.name=銅の探鉱鎚
+item.Red Steel ProPick.name=赤鋼の探鉱鎚
+item.Steel ProPick.name=鋼の探鉱鎚
+item.Wrought Iron ProPick.name=錬鉄の探鉱鎚
+
+#=== Saw ===
+item.Bismuth Bronze Saw.name=蒼青銅の鋸
+item.Black Bronze Saw.name=黒青銅の鋸
+item.Black Steel Saw.name=黒鋼の鋸
+item.Blue Steel Saw.name=青鋼の鋸
+item.Bronze Saw.name=青銅の鋸
+item.Copper Saw.name=銅の鋸
+item.Red Steel Saw.name=赤鋼の鋸
+item.Steel Saw.name=鋼の鋸
+item.Wrought Iron Saw.name=錬鉄の鋸
+
+#=== Scythe ===
+item.Bismuth Bronze Scythe.name=蒼青銅の鎌
+item.Black Bronze Scythe.name=黒青銅の鎌
+item.Black Steel Scythe.name=黒鋼の鎌
+item.Blue Steel Scythe.name=青鋼の鎌
+item.Bronze Scythe.name=青銅の鎌
+item.Copper Scythe.name=銅の鎌
+item.Red Steel Scythe.name=赤鋼の鎌
+item.Steel Scythe.name=鋼の鎌
+item.Wrought Iron Scythe.name=錬鉄の鎌
+
+#=== Shovel ===
+item.Bismuth Bronze Shovel.name=蒼青銅のシャベル
+item.Black Bronze Shovel.name=黒青銅のシャベル
+item.Black Steel Shovel.name=黒鋼のシャベル
+item.Blue Steel Shovel.name=青鋼のシャベル
+item.Bronze Shovel.name=青銅のシャベル
+item.Copper Shovel.name=銅のシャベル
+item.Red Steel Shovel.name=赤鋼のシャベル
+item.Steel Shovel.name=鋼のシャベル
+item.Wrought Iron Shovel.name=錬鉄のシャベル
+
+#=== Sword ===
+item.Bismuth Bronze Sword.name=蒼青銅のソード
+item.Black Bronze Sword.name=黒青銅のソード
+item.Black Steel Sword.name=黒鋼のソード
+item.Blue Steel Sword.name=青鋼のソード
+item.Bronze Sword.name=青銅のソード
+item.Copper Sword.name=銅のソード
+item.Red Steel Sword.name=赤鋼のソード
+item.Steel Sword.name=鋼のソード
+item.Wrought Iron Sword.name=錬鉄のソード
+
+#=== Tuyere ===
+item.Bismuth Bronze Tuyere.name=蒼青銅の羽口
+item.Black Bronze Tuyere.name=黒青銅の羽口
+item.Black Steel Tuyere.name=黒鋼の羽口
+item.Blue Steel Tuyere.name=青鋼の羽口
+item.Bronze Tuyere.name=青銅の羽口
+item.Copper Tuyere.name=銅の羽口
+item.Red Steel Tuyere.name=赤鋼の羽口
+item.Steel Tuyere.name=鋼の羽口
+item.Wrought Iron Tuyere.name=錬鉄の羽口
+
+#== Armor ==
+#=== Helmet ===
+item.Bismuth Bronze Unfinished Helmet.name=未完成な蒼青銅のヘルメット
+item.Black Bronze Unfinished Helmet.name=未完成な黒青銅のヘルメット
+item.Black Steel Unfinished Helmet.name=未完成な黒鋼のヘルメット
+item.Blue Steel Unfinished Helmet.name=未完成な青鋼のヘルメット
+item.Bronze Unfinished Helmet.name=未完成な青銅のヘルメット
+item.Copper Unfinished Helmet.name=未完成な銅のヘルメット
+item.Red Steel Unfinished Helmet.name=未完成な赤鋼のヘルメット
+item.Steel Unfinished Helmet.name=未完成な鋼のヘルメット
+item.Wrought Iron Unfinished Helmet.name=未完成な錬鉄のヘルメット
+item.Bismuth Bronze Helmet.name=蒼青銅のヘルメット
+item.Black Bronze Helmet.name=黒青銅のヘルメット
+item.Black Steel Helmet.name=黒鋼のヘルメット
+item.Blue Steel Helmet.name=青鋼のヘルメット
+item.Bronze Helmet.name=青銅のヘルメット
+item.Copper Helmet.name=銅のヘルメット
+item.Red Steel Helmet.name=赤鋼のヘルメット
+item.Steel Helmet.name=鋼のヘルメット
+item.Wrought Iron Helmet.name=錬鉄のヘルメット
+item.helmetCloth.name=レザーキャップ
+
+#=== Chestplate ===
+item.Bismuth Bronze Unfinished Chestplate.name=未完成な蒼青銅のチェストプレート
+item.Black Bronze Unfinished Chestplate.name=未完成な黒青銅のチェストプレート
+item.Black Steel Unfinished Chestplate.name=未完成な黒鋼のチェストプレート
+item.Blue Steel Unfinished Chestplate.name=未完成な青鋼のチェストプレート
+item.Bronze Unfinished Chestplate.name=未完成な青銅のチェストプレート
+item.Copper Unfinished Chestplate.name=未完成な銅のチェストプレート
+item.Red Steel Unfinished Chestplate.name=未完成な赤鋼のチェストプレート
+item.Steel Unfinished Chestplate.name=未完成な鋼のチェストプレート
+item.Wrought Iron Unfinished Chestplate.name=未完成な錬鉄のチェストプレート
+item.Bismuth Bronze Chestplate.name=蒼青銅のチェストプレート
+item.Black Bronze Chestplate.name=黒青銅のチェストプレート
+item.Black Steel Chestplate.name=黒鋼のチェストプレート
+item.Blue Steel Chestplate.name=青鋼のチェストプレート
+item.Bronze Chestplate.name=青銅のチェストプレート
+item.Copper Chestplate.name=銅のチェストプレート
+item.Red Steel Chestplate.name=赤鋼のチェストプレート
+item.Steel Chestplate.name=鋼のチェストプレート
+item.Wrought Iron Chestplate.name=錬鉄のチェストプレート
+item.chestplateCloth.name=レザーチュニック
+
+#=== Greaves ===
+item.Bismuth Bronze Unfinished Greaves.name=未完成な蒼青銅のグリーブ
+item.Black Bronze Unfinished Greaves.name=未完成な黒青銅のグリーブ
+item.Black Steel Unfinished Greaves.name=未完成な黒鋼のグリーブ
+item.Blue Steel Unfinished Greaves.name=未完成な青鋼のグリーブ
+item.Bronze Unfinished Greaves.name=未完成な青銅のグリーブ
+item.Copper Unfinished Greaves.name=未完成な銅のグリーブ
+item.Red Steel Unfinished Greaves.name=未完成な赤鋼のグリーブ
+item.Steel Unfinished Greaves.name=未完成な鋼のグリーブ
+item.Wrought Iron Unfinished Greaves.name=未完成な錬鉄のグリーブ
+item.Bismuth Bronze Greaves.name=蒼青銅のグリーブ
+item.Black Bronze Greaves.name=黒青銅のグリーブ
+item.Black Steel Greaves.name=黒鋼のグリーブ
+item.Blue Steel Greaves.name=青鋼のグリーブ
+item.Bronze Greaves.name=青銅のグリーブ
+item.Copper Greaves.name=銅のグリーブ
+item.Red Steel Greaves.name=赤鋼のグリーブ
+item.Steel Greaves.name=鋼のグリーブ
+item.Wrought Iron Greaves.name=錬鉄のグリーブ
+item.leggingsCloth.name=レザーパンツ
+
+#=== Boots ===
+item.Bismuth Bronze Unfinished Boots.name=未完成な蒼青銅のブーツ
+item.Black Bronze Unfinished Boots.name=未完成な黒青銅のブーツ
+item.Black Steel Unfinished Boots.name=未完成な黒鋼のブーツ
+item.Blue Steel Unfinished Boots.name=未完成な青鋼のブーツ
+item.Bronze Unfinished Boots.name=未完成な青銅のブーツ
+item.Copper Unfinished Boots.name=未完成な銅のブーツ
+item.Red Steel Unfinished Boots.name=未完成な赤鋼のブーツ
+item.Steel Unfinished Boots.name=未完成な鋼のブーツ
+item.Wrought Iron Unfinished Boots.name=未完成な錬鉄のブーツ
+item.Bismuth Bronze Boots.name=蒼青銅のブーツ
+item.Black Bronze Boots.name=黒青銅のブーツ
+item.Black Steel Boots.name=黒鋼のブーツ
+item.Blue Steel Boots.name=青鋼のブーツ
+item.Bronze Boots.name=青銅のブーツ
+item.Copper Boots.name=銅のブーツ
+item.Red Steel Boots.name=赤鋼のブーツ
+item.Steel Boots.name=鋼のブーツ
+item.Wrought Iron Boots.name=錬鉄のブーツ
+item.bootsCloth.name=レザーブーツ
+
+#==========
+#= Metals =
+#==========
+item.Iron Bloom.name=塊鉄
+item.Raw Iron Bloom.name=未鍛造の塊鉄
+tile.Bloom.name=塊鉄
+
+#== Unshaped ==
+item.Bismuth Bronze Unshaped.name=鋳型に入った蒼青銅
+item.Bismuth Unshaped.name=鋳型に入った蒼鉛
+item.Black Bronze Unshaped.name=鋳型に入った黒青銅
+item.Black Steel Unshaped.name=鋳型に入った黒鋼
+item.Blue Steel Unshaped.name=鋳型に入った青鋼
+item.Brass Unshaped.name=鋳型に入った真鍮
+item.Bronze Unshaped.name=鋳型に入った青銅
+item.Copper Unshaped.name=鋳型に入った銅
+item.Gold Unshaped.name=鋳型に入った金
+item.HC Black Steel Unshaped.name=鋳型に入った高炭素黒鋼
+item.HC Blue Steel Unshaped.name=鋳型に入った高炭素青鋼
+item.HC Red Steel Unshaped.name=鋳型に入った高炭素赤鋼
+item.HC Steel Unshaped.name=鋳型に入った高炭素鋼
+item.Lead Unshaped.name=鋳型に入った鉛
+item.Nickel Unshaped.name=鋳型に入ったニッケル
+item.Pig Iron Unshaped.name=鋳型に入った銑鉄
+item.Platinum Unshaped.name=鋳型に入った白金
+item.Red Steel Unshaped.name=鋳型に入った赤鋼
+item.Rose Gold Unshaped.name=鋳型に入った金合金
+item.Silver Unshaped.name=鋳型に入った銀
+item.Steel Unshaped.name=鋳型に入った鋼
+item.Sterling Silver Unshaped.name=鋳型に入った銀合金
+item.Tin Unshaped.name=鋳型に入った錫
+item.Unknown Unshaped.name=鋳型に入った不明な金属
+item.Weak Blue Steel Unshaped.name=鋳型に入った軟青鋼
+item.Weak Red Steel Unshaped.name=鋳型に入った軟赤鋼
+item.Weak Steel Unshaped.name=鋳型に入った軟鋼
+item.Wrought Iron Unshaped.name=鋳型に入った錬鉄
+item.Zinc Unshaped.name=鋳型に入った亜鉛
+
+#== Ingot ==
+item.Bismuth Bronze Ingot.name=蒼青銅インゴット
+item.Bismuth Ingot.name=蒼鉛インゴット
+item.Black Bronze Ingot.name=黒青銅インゴット
+item.Black Steel Ingot.name=黒鋼インゴット
+item.Blue Steel Ingot.name=青鋼インゴット
+item.Brass Ingot.name=真鍮インゴット
+item.Bronze Ingot.name=青銅インゴット
+item.Copper Ingot.name=銅インゴット
+item.Gold Ingot.name=金インゴット
+item.HC Black Steel Ingot.name=高炭素黒鋼インゴット
+item.HC Blue Steel Ingot.name=高炭素青鋼インゴット
+item.HC Red Steel Ingot.name=高炭素赤鋼インゴット
+item.HC Steel Ingot.name=高炭素鋼インゴット
+item.Lead Ingot.name=鉛インゴット
+item.Nickel Ingot.name=ニッケルインゴット
+item.Pig Iron Ingot.name=銑鉄インゴット
+item.Platinum Ingot.name=白金インゴット
+item.Red Steel Ingot.name=赤鋼インゴット
+item.Rose Gold Ingot.name=金合金インゴット
+item.Silver Ingot.name=銀インゴット
+item.Steel Ingot.name=鋼インゴット
+item.Sterling Silver Ingot.name=銀合金インゴット
+item.Tin Ingot.name=錫インゴット
+item.Unknown Ingot.name=不明な金属のインゴット
+item.Weak Blue Steel Ingot.name=軟青鋼インゴット
+item.Weak Red Steel Ingot.name=軟赤鋼インゴット
+item.Weak Steel Ingot.name=軟鋼インゴット
+item.Wrought Iron Ingot.name=錬鉄インゴット
+item.Zinc Ingot.name=亜鉛インゴット
+
+#== Double Ingot ==
+item.Bismuth Bronze Double Ingot.name=蒼青銅ダブルインゴット
+item.Bismuth Double Ingot.name=蒼鉛ダブルインゴット
+item.Black Bronze Double Ingot.name=黒青銅ダブルインゴット
+item.Black Steel Double Ingot.name=黒鋼ダブルインゴット
+item.Blue Steel Double Ingot.name=青鋼ダブルインゴット
+item.Brass Double Ingot.name=真鍮ダブルインゴット
+item.Bronze Double Ingot.name=青銅ダブルインゴット
+item.Copper Double Ingot.name=銅ダブルインゴット
+item.Gold Double Ingot.name=金ダブルインゴット
+item.Lead Double Ingot.name=鉛ダブルインゴット
+item.Nickel Double Ingot.name=ニッケルダブルインゴット
+item.Pig Iron Double Ingot.name=銑鉄ダブルインゴット
+item.Platinum Double Ingot.name=白金ダブルインゴット
+item.Red Steel Double Ingot.name=赤鋼ダブルインゴット
+item.Rose Gold Double Ingot.name=金合金ダブルインゴット
+item.Silver Double Ingot.name=銀ダブルインゴット
+item.Steel Double Ingot.name=鋼ダブルインゴット
+item.Sterling Silver Double Ingot.name=銀合金ダブルインゴット
+item.Tin Double Ingot.name=錫ダブルインゴット
+item.Wrought Iron Double Ingot.name=錬鉄ダブルインゴット
+item.Zinc Double Ingot.name=亜鉛ダブルインゴット
+
+#== Sheet ==
+item.Bismuth Bronze Sheet.name=蒼青銅の延板
+item.Bismuth Sheet.name=蒼鉛の延板
+item.Black Bronze Sheet.name=黒青銅の延板
+item.Black Steel Sheet.name=黒鋼の延板
+item.Blue Steel Sheet.name=青鋼の延板
+item.Brass Sheet.name=真鍮の延板
+item.Bronze Sheet.name=青銅の延板
+item.Copper Sheet.name=銅の延板
+item.Gold Sheet.name=金の延板
+item.Lead Sheet.name=鉛の延板
+item.Nickel Sheet.name=ニッケルの延板
+item.Pig Iron Sheet.name=銑鉄の延板
+item.Platinum Sheet.name=白金の延板
+item.Red Steel Sheet.name=赤鋼の延板
+item.Rose Gold Sheet.name=金合金の延板
+item.Silver Sheet.name=銀の延板
+item.Steel Sheet.name=鋼の延板
+item.Sterling Silver Sheet.name=銀合金の延板
+item.Tin Sheet.name=錫の延板
+item.Wrought Iron Sheet.name=錬鉄の延板
+item.Zinc Sheet.name=亜鉛の延板
+
+#== DoubleSheet ==
+item.Bismuth Bronze Double Sheet.name=蒼青銅のダブル延板
+item.Bismuth Double Sheet.name=蒼鉛のダブル延板
+item.Black Bronze Double Sheet.name=黒青銅のダブル延板
+item.Black Steel Double Sheet.name=黒鋼のダブル延板
+item.Blue Steel Double Sheet.name=青鋼のダブル延板
+item.Brass Double Sheet.name=真鍮のダブル延板
+item.Bronze Double Sheet.name=青銅のダブル延板
+item.Copper Double Sheet.name=銅のダブル延板
+item.Gold Double Sheet.name=金のダブル延板
+item.Lead Double Sheet.name=鉛のダブル延板
+item.Nickel Double Sheet.name=ニッケルのダブル延板
+item.Pig Iron Double Sheet.name=銑鉄のダブル延板
+item.Platinum Double Sheet.name=白金のダブル延板
+item.Red Steel Double Sheet.name=赤鋼のダブル延板
+item.Rose Gold Double Sheet.name=金合金のダブル延板
+item.Silver Double Sheet.name=銀のダブル延板
+item.Steel Double Sheet.name=鋼のダブル延板
+item.Sterling Silver Double Sheet.name=銀合金のダブル延板
+item.Tin Double Sheet.name=錫のダブル延板
+item.Wrought Iron Double Sheet.name=錬鉄のダブル延板
+item.Zinc Double Sheet.name=亜鉛のダブル延板
+
+#===========
+#= Devices =
+#===========
+tile.Bellows.name=ふいご
+tile.Forge.name=炉
+tile.BlastFurnace.name=溶鉱炉
+tile.SpawnMeter.name=スポーン保護メーター
+tile.Quern.name=下臼
+tile.EarlyBloomery.name=塊鉄炉
+tile.Crucible.name=るつぼ
+tile.NestBox.name=巣箱
+item.SluiceItem.name=流し樋
+tile.LeatherRack.name=
+
+#== Anvils ==
+tile.Anvil.Stone.name=石の金床
+tile.Anvil.Bismuth.name=蒼鉛の金床
+tile.Anvil2.Bismuth Bronze.name=蒼青銅の金床
+tile.Anvil2.Black Bronze.name=黒青銅の金床
+tile.Anvil.Black Steel.name=黒鋼の金床
+tile.Anvil.Blue Steel.name=青鋼の金床
+tile.Anvil.Bronze.name=青銅の金床
+tile.Anvil.Copper.name=銅の金床
+tile.Anvil.Red Steel.name=赤鋼の金床
+tile.Anvil2.Rose Gold.name=金合金の金床
+tile.Anvil.Steel.name=鋼の金床
+tile.Anvil.Tin.name=錫の金床
+tile.Anvil.Wrought Iron.name=錬鉄の金床
+tile.Anvil.Zinc.name=亜鉛の金床
+
+#==================
+#= Terrain Blocks =
+#==================
+tile.Grass.name=草
+tile.DryGrass.name=枯れ草
+tile.PeatGrass.name=草
+tile.ClayGrass.name=草
+tile.dirt.name=土
+tile.sand.name=砂
+tile.Peat.name=泥炭
+tile.tilledSoil.name=
+tile.LooseRock.name=
+tile.Ice.name=氷
+
+#=================
+#= Miscellaneous =
+#=================
+#== Misc Items ==
+item.arrow.name=矢
+item.book.name=本
+item.stick.name=棒
+item.coal.coal.name=石炭
+item.coal.charcoal.name=木炭
+item.Fertilizer.name=肥料
+item.Reeds.name=
+
+item.Wooden Bucket Empty.name=木のバケツ（空）
+item.Wooden Bucket Water.name=木のバケツ（水）
+item.Wooden Bucket Salt Water.name=木のバケツ（塩水）
+item.Wooden Bucket Milk.name=木のバケツ（牛乳）
+item.Lime Water.name=石灰水
+
+item.Red Steel Bucket Empty.name=赤鋼のバケツ（空）
+item.Red Steel Bucket Water.name=赤鋼のバケツ（水）
+item.Red Steel Bucket Salt Water.name=赤鋼のバケツ（塩水）
+item.Blue Steel Bucket Empty.name=青鋼のバケツ（空）
+item.Blue Steel Bucket Lava.name=青鋼のバケツ（溶岩）
+
+item.GoldPan.name=選鉱鍋
+item.Gold Pan.Sand.name=選鉱鍋（砂）
+item.Gold Pan.Gravel.name=選鉱鍋（砂利）
+item.Gold Pan.Clay.name=選鉱鍋（粘土）
+item.Gold Pan.Dirt.name=選鉱鍋（土）
+item.Ink.name=打ち墨
+item.Firestarter.name=火熾し器
+
+item.Quern.name=上臼
+item.Blueprint.name=ブループリント
+item.Nametag.name=
+item.WoolYarn.name=羊毛糸
+item.Wool.name=羊毛
+item.WoolCloth.name=羊毛布
+item.SilkCloth.name=
+item.BurlapCloth.name=
+item.Mortar.name=モルタル
+item.Vinegar.name=酢
+
+item.Hide.small.name=生皮（小）
+item.Hide.medium.name=生皮（中）
+item.Hide.large.name=生皮（大）
+item.Soaked Hide.small.name=石灰に漬けた生皮（小）
+item.Soaked Hide.medium.name=石灰に漬けた生皮（中）
+item.Soaked Hide.large.name=石灰に漬けた生皮（大）
+item.Scraped Hide.small.name=なめし革（小）
+item.Scraped Hide.medium.name=なめし革（中）
+item.Scraped Hide.large.name=なめし革（大）
+item.Prep Hide.small.name=仕上げ前の革（小）
+item.Prep Hide.medium.name=仕上げ前の革（中）
+item.Prep Hide.large.name=仕上げ前の革（大）
+item.Sheep Skin.small.name=羊皮（小）
+item.Sheep Skin.medium.name=羊皮（中）
+item.Sheep Skin.large.name=羊皮（大）
+item.TFC Leather.name=革
+item.Flat Leather.name=フラットレザー
+item.leather.name=革
+
+item.minecartChest.name=チェスト付きトロッコ
+item.fishingRod.name=釣り竿
+
+item.Quiver.name=矢筒
+item.Rope.name=ロープ
+
+#======== Misc. Blocks========
+tile.Straw Hide Bed.name=藁と皮のベッド
+tile.customBed.sleep=こんなベッドではとても寝られない
+tile.BasicPipe.name=パイプ
+tile.ValvePipe.name=パイプの栓
+tile.Torch.name=松明
+tile.Chest.name=チェスト
+tile.Bookshelf.name=本棚
+tile.Workbench.name=作業台
+tile.ButtonWood.name=木のボタン
+
+#= Misc. Plants =
+item.Sugarcane.name=サトウキビ
+item.Hemp.name=麻
+item.Straw.name=藁
+item.Jute.name=ジュート
+item.Jute Fibre.name=ジュート繊維
+
+tile.Fungi.mushroom_brown.name=キノコ
+tile.Fungi.mushroom_red.name=
+tile.Cactus.name=サボテン
+tile.Pumpkin.name=カボチャ
+tile.Moss.name=苔
+tile.Thatch.name=ふきわら
+tile.Flora.Golden Rod.name=麒麟草
+tile.Flora.Cat Tails.name=サボテン
+
+item.Seeds Sugarcane.name=サトウキビの種
+item.Seeds Hemp.name=麻の種
+item.Seeds Jute.name=ジュートの種
+
+tile.TallGrass.tallgrass.name=
+tile.TallGrass.fern.name=シダ
+tile.TallGrass.shortgrass.name=
+tile.LilyPad.name=スイレンの葉
+tile.Vine.name=つる
+tile.SeaGrassStill.name=
+tile.SeaGrassIce.name=
+
+tile.Flowers.flower_nasturtium.name=
+tile.Flowers.flower_dandelion.name=タンポポ
+tile.Flowers.flower_meads_milkweed.name=
+tile.Flowers.flower_tropical_milkweed.name=
+tile.Flowers.flower_butterfly_milkweed.name=
+tile.Flowers.flower_calendula.name=
+tile.Flowers2.flower_rose.name=ポピー
+tile.Flowers2.flower_blue_orchid.name=ヒスイラン
+tile.Flowers2.flower_allium.name=アリウム
+tile.Flowers2.flower_houstonia.name=ヒナソウ
+tile.Flowers2.flower_tulip_red.name=赤色のチューリップ
+tile.Flowers2.flower_tulip_orange.name=橙色のチューリップ
+tile.Flowers2.flower_tulip_white.name=白色のチューリップ
+tile.Flowers2.flower_tulip_pink.name=桃色のチューリップ
+tile.Flowers2.flower_oxeye_daisy.name=フランスギク
+
+#=======
+#= GUI =
+#=======
+gui.badnbt=
+
+#== Anvil GUI ==
+gui.Anvil.Plans=設計図
+gui.Anvil.Weld=溶接
+
+gui.Anvil.LightHit=軽く打つ
+gui.Anvil.MediumHit=打つ
+gui.Anvil.HeavyHit=強く打つ
+gui.Anvil.Draw=引き伸ばす
+
+gui.Anvil.Punch=穴を開ける
+gui.Anvil.Bend=曲げる
+gui.Anvil.Upset=広げる
+gui.Anvil.Shrink=狭める
+
+gui.Anvil.Rules=手順
+gui.Anvil.Rule1=どの方法でも可
+gui.Anvil.Rule2=打つ（順不同）
+gui.Anvil.Rule3=最後に"打つ"
+gui.Anvil.Rule4=２番目に"打つ"
+gui.Anvil.Rule5=3番目に"打つ"
+gui.Anvil.Rule6=最後から２番目に"打つ"
+gui.Anvil.Rule7=最後から3番目に"打つ"
+gui.Anvil.Rule8=最後以外に"打つ"
+gui.Anvil.Rule9=穴を開ける（順不同）
+gui.Anvil.Rule10=最後に"穴を開ける"
+gui.Anvil.Rule11=２番目に"穴を開ける"
+gui.Anvil.Rule12=３番目に"穴を開ける"
+gui.Anvil.Rule13=最後から２番目に"穴を開ける"
+gui.Anvil.Rule14=最後から３番目に"穴を開ける"
+gui.Anvil.Rule15=最後以外に"穴を開ける"
+gui.Anvil.Rule16=狭める(順不同)
+gui.Anvil.Rule17=最後に"縮める"
+gui.Anvil.Rule18=２番目に"縮める"
+gui.Anvil.Rule19=３番目に"縮める"
+gui.Anvil.Rule20=最後から２番目に"縮める"
+gui.Anvil.Rule21=最後から３番目に"縮める"
+gui.Anvil.Rule22=最後以外に"縮める"
+gui.Anvil.Rule23=引き伸ばす(順不同)
+gui.Anvil.Rule24=最後に"引き伸ばす"
+gui.Anvil.Rule25=２番目に"引き伸ばす"
+gui.Anvil.Rule26=３番目に"引き伸ばす"
+gui.Anvil.Rule27=最後から２番目に"引き伸ばす"
+gui.Anvil.Rule28=最後から３番目に"引き伸ばす"
+gui.Anvil.Rule29=最後以外に"引き伸ばす"
+gui.Anvil.Rule30=広げる(順不同)
+gui.Anvil.Rule31=最後に"ひっくり返す"
+gui.Anvil.Rule32=２番目に"ひっくり返す"
+gui.Anvil.Rule33=３番目に"ひっくり返す"
+gui.Anvil.Rule34=最後から2番目に"ひっくり返す"
+gui.Anvil.Rule35=最後から3番目に"ひっくり返す"
+gui.Anvil.Rule36=最後以外に"ひっくり返す"
+gui.Anvil.Rule37=曲げる(順不同)
+gui.Anvil.Rule38=最後に"曲げる"
+gui.Anvil.Rule39=２番目に"曲げる"
+gui.Anvil.Rule40=３番目に"曲げる"
+gui.Anvil.Rule41=最後から２番目に"曲げる"
+gui.Anvil.Rule42=最後から３番目に"曲げる"
+gui.Anvil.Rule43=最後以外に"曲げる"
+
+#== Tools/Weapons/Armor GUI ==
+gui.Armor.Advanced=発展型
+gui.Armor.Shift=変形
+gui.Armor.ForgedBy=製作者：
+gui.Armor.Hold=押す
+gui.Armor.Crush=打撃
+gui.Armor.Pierce=刺突
+gui.Armor.Slash=斬撃
+
+gui.Bow.Advanced=発展型
+gui.Bow.Javelins=ジャベリン
+gui.Bow.Arrows=矢
+gui.Bow.ForgedBy=製作者：
+
+gui.DamageType.Error=エラー
+gui.DamageType.Crushing=打突
+gui.DamageType.Piercing=刺突
+gui.DamageType.Slashing=斬撃
+
+#== Barrel GUI ==
+gui.Barrel.Empty=空にする
+gui.Barrel.Seal=密封
+gui.Barrel.Unseal=
+gui.Barrel.ToggleOff=開栓
+gui.Barrel.ToggleOn=注入
+gui.Barrel.SealedOn=
+gui.Barrel.Solid=
+gui.Barrel.Liquid=
+
+#== Bloomery GUI ==
+gui.Bloomery.Charcoal=木炭
+gui.Bloomery.Ore=鉱石
+gui.Bloomery.Output=精製済み
+
+#== Calendar GUI ==
+gui.Calendar.Calendar=カレンダー
+gui.Calendar.DateBioxx=Bioxxの誕生日!
+gui.Calendar.DateDunk=Dunkの誕生日!
+gui.Calendar.DateKitty=
+
+gui.Calendar.Hour=時刻
+gui.Calendar.WitchHour=丑三つ時
+
+gui.Calendar.Day=曜日
+gui.Calendar.Sunday=日曜
+gui.Calendar.Monday=月曜
+gui.Calendar.Tuesday=火曜
+gui.Calendar.Wednesday=水曜
+gui.Calendar.Thursday=木曜
+gui.Calendar.Friday=金曜
+gui.Calendar.Saturday=土曜
+
+gui.Calendar.Season=季節
+gui.Calendar.EarlySpring=初春
+gui.Calendar.Spring=春
+gui.Calendar.LateSpring=晩春
+gui.Calendar.EarlySummer=初夏
+gui.Calendar.Summer=夏
+gui.Calendar.LateSummer=晩夏
+gui.Calendar.EarlyAutumn=初秋
+gui.Calendar.Autumn=秋
+gui.Calendar.LateAutumn=晩秋
+gui.Calendar.EarlyWinter=初冬
+gui.Calendar.Winter=冬
+gui.Calendar.LateWinter=晩冬
+
+gui.Calendar.Date=日付
+gui.Calendar.January=１月
+gui.Calendar.February=２月
+gui.Calendar.March=３月
+gui.Calendar.April=４月
+gui.Calendar.May=５月
+gui.Calendar.June=６月
+gui.Calendar.July=７月
+gui.Calendar.August=８月
+gui.Calendar.September=９月
+gui.Calendar.October=１０月
+gui.Calendar.November=１１月
+gui.Calendar.December=１２月
+
+gui.Calendar.1Hour=1時間
+gui.Calendar.1Day=1日
+gui.Calendar.1Week=1週間
+gui.Calendar.1Month=1ヶ月
+gui.Calendar.1Year=1年
+
+#== Food Prep GUI ==
+gui.FoodPrep.CreateMeal=料理を作る
+gui.FoodPrep.Effect=効果
+gui.FoodPrep.Energy=腹持ち
+gui.FoodPrep.Filling=満腹度
+gui.FoodPrep.Power=活力
+
+#== Metals ==
+gui.metal.Bismuth=蒼鉛
+gui.metal.BismuthBronze=蒼青銅
+gui.metal.BlackBronze=黒青銅
+gui.metal.BlackSteel=黒鋼
+gui.metal.BlueSteel=青鋼
+gui.metal.Brass=真鍮
+gui.metal.Bronze=青銅
+gui.metal.Copper=銅
+gui.metal.Gold=金
+gui.metal.HCBlackSteel=高炭素黒鋼
+gui.metal.HCBlueSteel=高炭素青鋼
+gui.metal.HCRedSteel=高炭素赤鋼
+gui.metal.Lead=鉛
+gui.metal.Nickel=ニッケル
+gui.metal.PigIron=銑鉄
+gui.metal.Platinum=白金
+gui.metal.RedSteel=赤鋼
+gui.metal.RoseGold=金合金
+gui.metal.Silver=銀
+gui.metal.Steel=鋼
+gui.metal.SterlingSilver=銀合金
+gui.metal.Tin=錫
+gui.metal.Unknown=不明な金属
+gui.metal.WeakBlueSteel=青軟鋼
+gui.metal.WeakRedSteel=赤軟鋼
+gui.metal.WeakSteel=軟鋼
+gui.metal.WroughtIron=練鉄
+gui.metal.Zinc=亜鉛
+
+#== Plans GUI ==
+gui.plans.axe=斧
+gui.plans.bootsplate=ブーツ
+gui.plans.bucket=バケツ
+gui.plans.chestplate=チェストプレート
+gui.plans.chisel=ノミ
+gui.plans.hammer=ハンマー
+gui.plans.helmplate=ヘルメット
+gui.plans.hoe=クワ
+gui.plans.ingot=インゴット
+gui.plans.javelin=ジャベリン
+gui.plans.knife=ナイフ
+gui.plans.legsplate=レギンズ
+gui.plans.mace=メイス
+gui.plans.pickaxe=つるはし
+gui.plans.propick=探鉱槌
+gui.plans.refinebloom=精錬
+gui.plans.saw=のこぎり
+gui.plans.scythe=鎌
+gui.plans.sheet=延板
+gui.plans.shovel=シャベル
+gui.plans.splitbloom=分割
+gui.plans.sword=剣
+gui.plans.tuyere=羽口
+gui.plans.grill=
+gui.plans.shears=
+
+#== Misc GUI ==
+gui.Blueprint=ブループリント
+gui.Nametag=
+gui.fertilized=施肥
+gui.Inventory=インベントリ
+gui.ClearSlot=搬出スロットを空にする
+gui.LogPile=丸太置き場
+gui.done=完了
+gui.Sluice.Soil=土砂
+gui.Sluice=流し樋
+gui.Workbench.Crafting=クラフト
+
+#== Tooltips ==
+gui.ShowHelp=§8ヘルプ：（§fShiftキー§8を押す）
+gui.Help=§8ヘルプ
+gui.Clay.Inst0=5つ持って§b右クリック§7で陶器を作製
+gui.Knife.Inst0=
+gui.Knife.Inst1=
+gui.Leather.Inst0=ナイフを持って§b右クリック §7で皮細工
+gui.LooseRock.Inst0=2つ持って§b右クリック §7 で石器を作製
+gui.MeltedMetal.Inst0=§b右クリック §7で鋳型にそそぐ
+gui.PotteryBase.Inst0=スニークし§b右クリックで§7オブジェクトを設置
+gui.PotteryVesselSmall.Inst0=もしくは§b右クリック、で§7インベントリーを開く
+gui.RawHide.Inst0=
+gui.Barrel.MoreItems=
+
+gui.Size.Tiny=非常に小さい
+gui.Size.VerySmall=やや小さい
+gui.Size.Small=小
+gui.Size.Medium=中
+gui.Size.Large=大
+gui.Size.VeryLarge=やや大きい
+gui.Size.Huge=非常に大きい
+
+gui.Weight.Light=軽
+gui.Weight.Medium=中
+gui.Weight.Heavy=重
+
+gui.Reach.Short=近
+gui.Reach.Medium=中
+gui.Reach.Far=遠
+
+gui.food.fruit=果物
+gui.food.vegetable=野菜
+gui.food.grain=穀物
+gui.food.protein=タンパク質
+gui.food.dairy=乳製品
+gui.food.amount=量
+gui.food.decay=腐敗度
+gui.food.salted=塩添加
+
+gui.FoodHeat.Cold=冷たい
+gui.FoodHeat.Warm=暖かい
+
+gui.Torch.CatchingFire=着火
+gui.Torch.Lit=点火
+
+gui.ItemHeat.Liquid=液化
+gui.ItemHeat.Solidified=
+gui.ItemHeat.Caution=注意
+gui.ItemHeat.Warming=暖
+gui.ItemHeat.Hot=高温
+gui.ItemHeat.VeryHot=超高温
+gui.ItemHeat.FaintRed=暗帯赤色
+gui.ItemHeat.DarkRed=暗赤色
+gui.ItemHeat.BrightRed=輝赤色
+gui.ItemHeat.Orange=橙色
+gui.ItemHeat.Yellow=黄色
+gui.ItemHeat.YellowWhite=黄白色
+gui.ItemHeat.White=白色
+gui.ItemHeat.BrilliantWhite=輝白色
+
+gui.ingot.workable=鍛造可
+gui.ingot.weldable=溶接可
+gui.ingot.danger=**危険**
+
+gui.milk.fresh=新鮮
+gui.milk.old=古い
+gui.milk.sour=酸っぱい
+
+gui.units=単位
+
+#== Chat Messages ==
+gui.GoldPan.UseFull=流水の下で使用してください。
+gui.goldpan.overused=ここはやりつくしたようです。これ以上何も見つけられません。
+
+gui.ProPick.Found=を発見した
+gui.ProPick.FoundTraces=の微量の形跡を発見した
+gui.ProPick.FoundSmall=の小規模な鉱石サンプルを発見した
+gui.ProPick.FoundMedium=の中規模な鉱石サンプルを発見した
+gui.ProPick.FoundLarge=の大規模な鉱石サンプルを発見した
+gui.ProPick.FoundVeryLarge=のとても大規模な鉱石サンプルを発見した。
+gui.ProPick.FoundNothing=鉱石の気配はない。
+
+#== Creative Tabs ==
+itemGroup.TFCArmor=(TFC) 防具
+itemGroup.TFCMaterials=(TFC) 素材
+itemGroup.TFCMisc=(TFC)その他
+itemGroup.TFCPottery=(TFC)陶芸
+itemGroup.TFCTools=(TFC) ツール
+itemGroup.TFCWeapons=(TFC)武器
+itemGroup.TFCDevices=(TFC)デバイス
+itemGroup.TFCFoods=(TFC)食料
+itemGroup.TFCBuilding=(TFC)建築ブロック
+itemGroup.TFCDecoration=(TFC)装飾ブロック
+
+#== Skill GUI ==
+skill.armorsmith=防具鍛冶スキル
+skill.gensmith=通常鍛冶スキル
+skill.toolsmith=ツール鍛冶スキル
+skill.weaponsmith=武器鍛冶スキル
+skill.agriculture=農業スキル
+skill.cooking=料理スキル
+skill.prospecting=
+skill.butchering=
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================
+fluid.freshwater=真水
+fluid.saltwater=塩水
+fluid.lavatfc=マグマ
+fluid.hotwater=熱湯
+fluid.beer=ビール
+fluid.cider=リンゴ酒
+fluid.rum=ラム酒
+fluid.ryewhiskey=ライウイスキー
+fluid.sake=日本酒
+fluid.vodka=ウォッカ
+fluid.whiskey=ウイスキー
+fluid.cornwhiskey=
+fluid.milk=ミルク
+fluid.milkcurdled=カード
+fluid.limewater=石灰水
+fluid.tannin=タンニン
+fluid.vinegar=酢
+fluid.brine=
+
+gui.showtaste=
+gui.taste=
+gui.taste.sweet=甘味
+gui.taste.sour=酸味
+gui.taste.salty=塩味
+gui.taste.bitter=苦味
+gui.taste.savory=旨味
+
+gui.taste.novice.sweet1=
+gui.taste.novice.sweet0=
+gui.taste.novice.sour1=
+gui.taste.novice.sour0=
+gui.taste.novice.salty1=
+gui.taste.novice.salty0=
+gui.taste.novice.bitter1=
+gui.taste.novice.bitter0=
+gui.taste.novice.savory1=
+gui.taste.novice.savory0=
+
+gui.taste.adept.sweet0=
+gui.taste.adept.sweet1=
+gui.taste.adept.sweet2=
+gui.taste.adept.sweet3=
+gui.taste.adept.sweet4=
+gui.taste.adept.sweet5=
+gui.taste.adept.sour0=
+gui.taste.adept.sour1=
+gui.taste.adept.sour2=
+gui.taste.adept.sour3=
+gui.taste.adept.sour4=
+gui.taste.adept.sour5=
+gui.taste.adept.salty0=
+gui.taste.adept.salty1=
+gui.taste.adept.salty2=
+gui.taste.adept.salty3=
+gui.taste.adept.salty4=
+gui.taste.adept.salty5=
+gui.taste.adept.bitter0=
+gui.taste.adept.bitter1=
+gui.taste.adept.bitter2=
+gui.taste.adept.bitter3=
+gui.taste.adept.bitter4=
+gui.taste.adept.bitter5=
+gui.taste.adept.savory0=
+gui.taste.adept.savory1=
+gui.taste.adept.savory2=
+gui.taste.adept.savory3=
+gui.taste.adept.savory4=
+gui.taste.adept.savory5=
+
+gui.taste.0=
+gui.taste.1=
+gui.taste.2=
+gui.taste.3=
+gui.taste.4=
+gui.taste.5=
+gui.taste.6=
+gui.taste.7=
+gui.taste.8=
+
+gui.skill.novice=
+gui.skill.adept=
+gui.skill.expert=
+gui.skill.master=
+gui.skillpage=
+tile.MetalTrapDoor.name=
+item.Mud Brick.name=
+item.Wet Mud Brick.name=
+gui.overburdened=
+gui.slot=
+gui.slot.back=
+word.pickled=
+word.brined=
+word.cooked=
+word.salted=
+word.smoked=
+word.dried=
+gui.barrel.pickling=
+gui.barrel.brining=
+tile.Vessel.name=
+tile.Grill.name=
+food.cooked.rare=
+food.cooked.medrare=
+food.cooked.med=
+food.cooked.medwell=
+food.cooked.well=
+food.cooked.0=
+food.cooked.1=
+food.cooked.2=
+food.cooked.3=
+food.cooked.4=
+gui.FoodPrep.Sandwich=
+gui.FoodPrep.Salad=
+item.Sandwich.name=
+item.Salad.name=
+item.ClayBowl.Ceramic Bowl.name=
+item.ClayBowl.Clay Bowl.name=
+item.Sugar.name=
+item.Sea Weed.name=
+word.stage1=Stage 1
+word.stage2=Stage 2

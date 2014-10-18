@@ -3,10 +3,12 @@ package com.bioxx.tfc.Blocks.Devices;
 import static net.minecraftforge.common.util.ForgeDirection.DOWN;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryLargeChest;
@@ -43,8 +45,8 @@ public class BlockChestTFC extends BlockTerraContainer
 	}
 
 	@Override
-    public int getDamageValue(World world, int x, int y, int z)
-    {
+	public int getDamageValue(World world, int x, int y, int z)
+	{
 		try
 		{
 			TEChest chest = (TEChest) world.getTileEntity(x, y, z);
@@ -53,23 +55,41 @@ public class BlockChestTFC extends BlockTerraContainer
 		catch( Exception E)
 		{
 			return 0;
-			
+
 		}
-    }
-	
-	@Override
-    public void onBlockHarvested(World world, int x, int y, int z, int metadata, EntityPlayer player)
-	{
-        Item item = getItemDropped(metadata, world.rand, 0);
-        dropBlockAsItem(world, x, y, z, new ItemStack(item, 1, getDamageValue(world, x, y, z)));
-		
 	}
+
+	/*@Override
+	public void onBlockHarvested(World world, int x, int y, int z, int metadata, EntityPlayer player)
+	{
+		Item item = getItemDropped(metadata, world.rand, 0);
+		dropBlockAsItem(world, x, y, z, new ItemStack(item, 1, getDamageValue(world, x, y, z)));
+
+	}*/
+
 	@Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
-    {
-        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-        return ret;
-    }
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		return ret;
+	}
+
+	@Override
+	public Item getItemDropped(int metadata, Random rand, int fortune)
+	{
+		return null;
+	}
+
+	@Override
+	public void onBlockPreDestroy(World world, int i, int j, int k, int meta) 
+	{
+		if(!world.isRemote)
+		{
+			TEChest te = (TEChest)world.getTileEntity(i, j, k);
+			EntityItem ei = new EntityItem(world, i, j, k, new ItemStack(TFCBlocks.Chest, 1, te.type));
+			world.spawnEntityInWorld(ei);
+		}
+	}
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
@@ -123,26 +143,26 @@ public class BlockChestTFC extends BlockTerraContainer
 		{
 			switch( adjDirection )
 			{
-				case NORTH:
-				case SOUTH:
-					if( chestSide == sideN || chestSide == sideS )
-					{
-						if( secFacingDir == facingE || secFacingDir == facingN ) chestSide = sideE;
-						if( secFacingDir == facingW || secFacingDir == facingS ) chestSide = sideW;
+			case NORTH:
+			case SOUTH:
+				if( chestSide == sideN || chestSide == sideS )
+				{
+					if( secFacingDir == facingE || secFacingDir == facingN ) chestSide = sideE;
+					if( secFacingDir == facingW || secFacingDir == facingS ) chestSide = sideW;
 					//System.out.println( secFacingDir );
-					}
-					break;
-				default:
-				case EAST:
-				case WEST:
-					if( chestSide == sideE || chestSide == sideW )
-					{
-						chestSide = sideN;
-						if( secFacingDir == facingN || secFacingDir == facingW ) chestSide = sideN;
-						if( secFacingDir == facingS || secFacingDir == facingE ) chestSide = sideS;
+				}
+				break;
+			default:
+			case EAST:
+			case WEST:
+				if( chestSide == sideE || chestSide == sideW )
+				{
+					chestSide = sideN;
+					if( secFacingDir == facingN || secFacingDir == facingW ) chestSide = sideN;
+					if( secFacingDir == facingS || secFacingDir == facingE ) chestSide = sideS;
 					//System.out.println( secFacingDir );
-					}
-					break;
+				}
+				break;
 			}
 
 			world.setBlockMetadataWithNotify(x, y, z, chestSide, 3);
@@ -181,21 +201,21 @@ public class BlockChestTFC extends BlockTerraContainer
 			ForgeDirection adjDirection = getAdjacentChestDirection(access, x, y, z, chest.type);
 			switch(adjDirection)
 			{
-				case NORTH:
-					this.setBlockBounds(0.0625F, 0.0F, 0.0F, 0.9375F, 0.875F, 0.9375F);
-					break;
-				case SOUTH:
-					this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 1.0F);
-					break;
-				case EAST:
-					this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 1.0F, 0.875F, 0.9375F);
-					break;
-				case WEST:
-					this.setBlockBounds(0.0F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
-				default:
-				case UNKNOWN:
-					this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
-					break;
+			case NORTH:
+				this.setBlockBounds(0.0625F, 0.0F, 0.0F, 0.9375F, 0.875F, 0.9375F);
+				break;
+			case SOUTH:
+				this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 1.0F);
+				break;
+			case EAST:
+				this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 1.0F, 0.875F, 0.9375F);
+				break;
+			case WEST:
+				this.setBlockBounds(0.0F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
+			default:
+			case UNKNOWN:
+				this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
+				break;
 			}
 		}
 	}
@@ -219,7 +239,7 @@ public class BlockChestTFC extends BlockTerraContainer
 		}
 		return false;
 	}
-	
+
 	private ForgeDirection getAdjacentChestDirection( IBlockAccess world, int x, int y, int z, int type)
 	{
 		ForgeDirection[] dirs = { ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.EAST, ForgeDirection.WEST };
@@ -239,7 +259,7 @@ public class BlockChestTFC extends BlockTerraContainer
 	{
 		//itemStack is ItemChest
 		int type = itemStack.getItemDamage();
-		
+
 		ForgeDirection adjDirection = ForgeDirection.UNKNOWN;
 		ForgeDirection[] dirs = { ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.EAST, ForgeDirection.WEST };
 		for( ForgeDirection dir : dirs )
@@ -256,7 +276,7 @@ public class BlockChestTFC extends BlockTerraContainer
 		{
 			//Single chest!
 			return true;
-			
+
 		}
 
 		//Have neighboring chest, make sure it isn't a double chest!
@@ -292,26 +312,26 @@ public class BlockChestTFC extends BlockTerraContainer
 			TEChest adjChest = (TEChest)world.getTileEntity(x + adjDirection.offsetX, y, z + adjDirection.offsetZ );
 			switch(adjDirection)
 			{
-				case NORTH:
-					inv1 = chest;
-					inv2 = adjChest;
-					break;
-				case SOUTH:
-					inv2 = chest;
-					inv1 = adjChest;
-					break;
-				case EAST:
-					inv2 = chest;
-					inv1 = adjChest;
-					break;
-				default:
-				case WEST:
-					inv1 = chest;
-					inv2 = adjChest;
-					break;
+			case NORTH:
+				inv1 = chest;
+				inv2 = adjChest;
+				break;
+			case SOUTH:
+				inv2 = chest;
+				inv1 = adjChest;
+				break;
+			case EAST:
+				inv2 = chest;
+				inv1 = adjChest;
+				break;
+			default:
+			case WEST:
+				inv1 = chest;
+				inv2 = adjChest;
+				break;
 			}
 			return new InventoryLargeChest("container.chestDouble", inv1, inv2);
-			
+
 		}
 	}
 

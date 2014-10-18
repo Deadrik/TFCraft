@@ -1,0 +1,2416 @@
+﻿#ru_RU
+#This is the Russian language configuration file, translated by Jee_Host, transcengopher & politehnik
+
+
+
+
+
+generator.TFCDefault=TFC по умолчанию
+generator.TFCFlat=TFC суперплоскость
+
+key.ToolMode=Изменить способ применения инструмента
+key.LockTool=Ограничить место применения инструмента
+
+effect.bleed=Кровотечение
+
+#==============
+#= Spawn Eggs =
+#==============
+entity.squidTFC.name=Кальмар
+entity.cowTFC.name=Корова
+entity.wolfTFC.name=Волк
+entity.bearTFC.name=Медведь
+entity.deerTFC.name=Олень
+entity.chickenTFC.name=Курица
+entity.pigTFC.name=Свинья
+entity.skeletonTFC.name=Скелет
+entity.zombieTFC.name=Зомби
+entity.spiderTFC.name=Паук
+entity.slimeTFC.name=Слизень
+entity.silverfishTFC.name=Чешуйница
+entity.ghastTFC.name=Гаст
+entity.caveSpiderTFC.name=Пещерный паук
+entity.blazeTFC.name=Ифрит
+entity.endermanTFC.name=Странник Края
+entity.pigZombieTFC.name=Зомби-свиночеловек
+entity.creeperTFC.name=Крипер
+entity.sheepTFC.name=Овца
+entity.pheasantTFC.name=Фазан
+entity.horseTFC.name=Лашадь
+entity.irongolemTFC.name=Железный голем
+entity.fishTFC.name=Окунь
+
+
+#==========
+#= Entity =
+#==========
+entity.notFamiliar=Животное не даст вам сделать это.
+fishingRod.lineTension=Леска вот-вот оборвется!
+fishingRod.lineSnap=Леска оборвалась!
+fishingRod.bite=Клюёт!
+fishingRod.gotAway=Сорвалась...
+
+#================
+#= Achievements =
+#================
+achievement.achLooseRock=Однако не кизяк
+achievement.achLooseRock.desc=Поднять камень
+achievement.achSmallOre=Всё перевернул
+achievement.achSmallOre.desc=Найти кусок руды
+achievement.achWildVegetable=Собиратель
+achievement.achWildVegetable.desc=Найти дикий овощ
+achievement.achRutabaga=Потому что здравый смысл не пройдёт...
+achievement.achRutabaga.desc=Найти брюкву
+achievement.achQuern=Давилка
+achievement.achQuern.desc=Использовать жёрнов
+achievement.achStoneAge=Первые шаги
+achievement.achStoneAge.desc=Изготовить каменный инструмент и перейти в Каменный век
+achievement.achCopperAge=Начало отлито!
+achievement.achCopperAge.desc=Отлить что-либо из металла и перейти в Медный век
+achievement.achSaw=Плотник
+achievement.achSaw.desc=Изготовить пилу
+achievement.achAnvil=Куй, пока горячо
+achievement.achAnvil.desc=Изготовить каменную наковальню
+achievement.achPickaxe=Пора за дело!
+achievement.achPickaxe.desc=Изготовить кирку
+achievement.achDiamond=АЛМ... а, стоп
+achievement.achDiamond.desc=Найти алмаз
+achievement.achLimonite=Да здравствует pakratt13!
+achievement.achLimonite.desc=Добыть лимонит
+achievement.achBronzeAge=Бронзовый век
+achievement.achBronzeAge.desc=Изготовить бронзовую наковальню и перейти в Бронзовый век
+achievement.achIronAge=Железный аргумент
+achievement.achIronAge.desc=Изготовить крицу и перейти в Железный век
+achievement.achPokeCreeper=Стив Ирвин
+achievement.achPokeCreeper.desc=Ткни в это палочкой
+
+#============
+#= Commands =
+#============
+commands.transferTamed.noTamed=Нет подходящих животных поблизости
+commands.transferTamed.tooMany=Слишком много животных поблизости
+commands.transferTamed.wrongOwner=Животное не принадлежит Вам
+commands.transferTamed.sameTarget=Нельзя передать себе
+commands.transferTamed.display.incoming=%s передал Вам животное
+commands.transferTamed.display.outgoing=Вы передали животное %s
+commands.transferTamed.wrongSender=Вы не можете передать животное
+
+#========
+#= Food =
+#========
+item.MealGeneric.name=Блюдо
+item.meal.terrible=Ужасное
+item.meal.poor=Плохое
+item.meal.decent=Обычное
+item.meal.good=Хорошее
+item.meal.great=Отличное
+item.meal.fantastic=Превосходное
+
+#== Grains ==
+item.Barley Bread.name=Ячменный хлеб
+item.Corn Bread.name=Кукурузный хлеб
+item.Oat Bread.name=Овсяный хлеб
+item.Rice Bread.name=Рисовый хлеб
+item.Rye Bread.name=Ржаной хлеб
+item.Wheat Bread.name=Пшеничный хлеб
+
+item.Barley Whole.name=Ячмень
+item.Maize Ear.name=Кукурузный початок
+item.Oat Whole.name=Овёс
+item.Rice Whole.name=Рис
+item.Rye Whole.name=Рожь
+item.Wheat Whole.name=Пшеница
+
+item.Barley Grain.name=Ячменное зерно
+item.Oat Grain.name=Овсяное зерно
+item.Rice Grain.name=Рисовое зерно
+item.Rye Grain.name=Ржаное зерно
+item.Wheat Grain.name=Пшеничное зерно
+
+item.Barley Ground.name=Ячменная мука
+item.Cornmeal Ground.name=Кукурузная мука
+item.Oat Ground.name=Овсяная мука
+item.Rice Ground.name=Рисовая мука
+item.Rye Ground.name=Ржаная мука
+item.Wheat Ground.name=Пшеничная мука
+
+item.Barley Dough.name=Ячменное тесто
+item.Cornmeal Dough.name=Кукурузное тесто
+item.Oat Dough.name=Овсяное тесто
+item.Rice Dough.name=Рисовое тесто
+item.Rye Dough.name=Ржаное тесто
+item.Wheat Dough.name=Пшеничное тесто
+
+item.Seeds Barley.name=Семена ячменя
+item.Seeds Maize.name=Семена кукурузы
+item.Seeds Oat.name=Семена овса
+item.Seeds Rice.name=Семена риса
+item.Seeds Rye.name=Семена ржи
+item.Seeds Wheat.name=Семена пшеницы
+
+#== Fruit ==
+item.Green Apple.name=Зелёное яблоко
+item.Red Apple.name=Красное яблоко
+item.Banana.name=Банан
+item.Cherry.name=Вишня
+item.Lemon.name=Лимон
+item.Olive.name=Олива
+item.Orange.name=Апельсин
+item.Peach.name=Персик
+item.Plum.name=Слива
+
+item.FruitSapling.Green Apple.name=Саженец зеленой яблони
+item.FruitSapling.Red Apple.name=Саженец красной яблони
+item.FruitSapling.Banana.name=Саженец банановой пальмы
+item.FruitSapling.Cherry.name=Саженец вишни
+item.FruitSapling.Lemon.name=Саженец лимона
+item.FruitSapling.Olive.name=Саженец оливы
+item.FruitSapling.Orange.name=Саженец апельсина
+item.FruitSapling.Peach.name=Саженец персика
+item.FruitSapling.Plum.name=Саженец сливы
+
+#=== Berry Bushes ===
+tile.BerryBush.Blackberry.name=Куст ежевики
+tile.BerryBush.Blueberry.name=Куст голубики
+tile.BerryBush.Bunchberry.name=Куст дёрена
+tile.BerryBush.Cloudberry.name=Куст морошки
+tile.BerryBush.Cranberry.name=Куст клюквы
+tile.BerryBush.Elderberry.name=Куст бузины
+tile.BerryBush.Gooseberry.name=Куст крыжовника
+tile.BerryBush.Raspberry.name=Куст малины
+tile.BerryBush.Snowberry.name=Куст снежноягодника
+tile.BerryBush.Strawberry.name=Куст клубники
+tile.BerryBush.Wintergreen.name=Куст брусники
+
+item.Blackberry.name=Ежевика
+item.Blueberry.name=Голубика
+item.Bunchberry.name=Ягоды дёрена
+item.Cloudberry.name=Морошка
+item.Cranberry.name=Клюква
+item.Elderberry.name=Ягоды бузины
+item.Gooseberry.name=Крыжовник
+item.Raspberry.name=Малина
+item.Snowberry.name=Ягоды снежноягодника
+item.Strawberry.name=Клубника
+item.Wintergreen Berry.name=Брусника
+
+item.Blackberry Leaf.name=Лист ежевики
+item.Blueberry Leaf.name=Лист голубики
+item.Bunchberry Leaf.name=Лист дёрена
+item.Cloudberry Leaf.name=Лист морошки
+item.Cranberry Leaf.name=Лист клюквы
+item.Elderberry Leaf.name=Лист бузины
+item.Gooseberry Leaf.name=Лист крыжовника
+item.Raspberry Leaf.name=Лист малины
+item.Snowberry Leaf.name=Лист снежноягодника
+item.Strawberry Leaf.name=Лист клубники
+item.Wintergreen Leaf.name=Лист брусники
+
+#== Protein ==
+item.Beef.name=Говядина
+item.Calamari.name=Кальмар
+item.egg.name=Яйцо
+item.Fish.name=Рыба
+item.Mutton.name=Баранина
+item.Porkchop.name=Свинина
+item.Chicken.name=Курятина
+item.Venison.name=Оленина
+item.HorseMeat.name=Конина
+item.Egg Cooked.name=Яичница
+
+item.Soybeans.name=Соя
+item.Seeds Soybean.name=Семена сои
+
+#== Dairy ==
+item.Cheese.name=Сыр
+
+#== Vegetables ==
+item.Green Bell Pepper.name=Зелёный сладкий перец
+item.Red Bell Pepper.name=Красный сладкий перец
+item.Yellow Bell Pepper.name=Жёлтый сладкий перец
+item.Cabbage.name=Капуста
+item.Carrot.name=Морковь
+item.Garlic.name=Чеснок
+item.Greenbeans.name=Горох
+item.Onion.name=Лук
+item.Potato.name=Картофель
+item.Rutabaga.name=Брюква
+item.Squash.name=Кабачок
+item.Tomato.name=Помидор
+
+item.Seeds Red Bell Pepper.name=Семена красного сладкого перца
+item.Seeds Yellow Bell Pepper.name=Семена жёлтого сладкого перца
+item.Seeds Cabbage.name=Семена капусты
+item.Seeds Carrot.name=Семена моркови
+item.Seeds Garlic.name=Семена чеснока
+item.Seeds Greenbean.name=Семена гороха
+item.Seeds Onion.name=Семена лука
+item.Seeds Potato.name=Семена картофеля
+item.Seeds Rutabaga.name=Семена брюквы
+item.Seeds Squash.name=Семена кабачка
+item.Seeds Tomato.name=Семена помидора
+
+#== Alcohol ==
+item.Glass Bottle.name=Пустая стеклянная бутылка
+item.Beer.name=Пиво
+item.Cider.name=Сидр
+item.Rum.name=Ром
+item.RyeWhiskey.name=Ржаное виски
+item.Sake.name=Сакэ
+item.Vodka.name=Водка
+item.Whiskey.name=Виски
+item.CornWhiskey.name=Кукурузное виски
+
+#===========
+#= Pottery =
+#===========
+item.Clay.Clay.name=Глина
+item.Clay.Fire Clay.name=Огнеупорная глина
+
+item.clay.clayflatlight.name=Глина
+item.clay.clayflatdark.name=Глина
+item.clay.clayflatfire.name=Огнеупорная глина
+item.clay.clayflatdarkfire.name=Огнеупорная глина
+
+item.Jug.Clay Jug.name=Глиняный кувшин
+item.Jug.Ceramic Jug.name=Керамический кувшин
+item.Jug.Water Jug.name=Кувшин с водой
+
+item.Pot.Clay Pot.name=Глиняный горшок
+item.Pot.Ceramic Pot.name=Керамический горшок
+
+item.Small Vessel.Clay Vessel.name=Глиняный сосуд
+item.Small Vessel.Ceramic Vessel.name=Керамический сосуд
+
+item.Large Vessel.Clay Vessel [Large].name=Глиняный сосуд [большой]
+item.Large Vessel.Ceramic Vessel [Large].name=Керамический сосуд [большой]
+
+item.Mold.Clay Mold.name=Глиняная форма
+item.Mold.Ceramic Mold.name=Керамическая форма
+
+item.Axe Mold.Clay Mold Axe.name=Глиняная форма топора
+item.Axe Mold.Ceramic Mold Axe.name=Керамическая форма топора
+item.Axe Mold.Ceramic Mold Axe Copper.name=Керамическая форма топора (медь)
+item.Axe Mold.Ceramic Mold Axe Bronze.name=Керамическая форма топора (бронза)
+item.Axe Mold.Ceramic Mold Axe Black Bronze.name=Керамическая форма топора (чёрная бронза)
+item.Axe Mold.Ceramic Mold Axe Bismuth Bronze.name=Керамическая форма топора (висмутовая бронза)
+
+item.Chisel Mold.Clay Mold Chisel.name=Глиняная форма зубила
+item.Chisel Mold.Ceramic Mold Chisel.name=Керамическая форма зубила
+item.Chisel Mold.Ceramic Mold Chisel Copper.name=Керамическая форма зубила (медь)
+item.Chisel Mold.Ceramic Mold Chisel Bronze.name=Керамическая форма зубила (бронза)
+item.Chisel Mold.Ceramic Mold Chisel Black Bronze.name=Керамическая форма зубила (чёрная бронза)
+item.Chisel Mold.Ceramic Mold Chisel Bismuth Bronze.name=Керамическая форма зубила (висмутовая бронза)
+
+item.Hammer Mold.Clay Mold Hammer.name=Глиняная форма молота
+item.Hammer Mold.Ceramic Mold Hammer.name=Керамическая форма молота
+item.Hammer Mold.Ceramic Mold Hammer Copper.name=Керамическая форма молота (медь)
+item.Hammer Mold.Ceramic Mold Hammer Bronze.name=Керамическая форма молота (бронза)
+item.Hammer Mold.Ceramic Mold Hammer Black Bronze.name=Керамическая форма молота (чёрная бронза)
+item.Hammer Mold.Ceramic Mold Hammer Bismuth Bronze.name=Керамическая форма молота (висмутовая бронза)
+
+item.Hoe Mold.Clay Mold Hoe.name=Глиняная форма мотыги
+item.Hoe Mold.Ceramic Mold Hoe.name=Керамическая форма мотыги
+item.Hoe Mold.Ceramic Mold Hoe Copper.name=Керамическая форма мотыги (медь)
+item.Hoe Mold.Ceramic Mold Hoe Bronze.name=Керамическая форма мотыги (бронза)
+item.Hoe Mold.Ceramic Mold Hoe Black Bronze.name=Керамическая форма мотыги (чёрная бронза)
+item.Hoe Mold.Ceramic Mold Hoe Bismuth Bronze.name=Керамическая форма мотыги (висмутовая бронза)
+
+item.Knife Mold.Clay Mold Knife.name=Глиняная форма ножа
+item.Knife Mold.Ceramic Mold Knife.name=Керамическая форма ножа
+item.Knife Mold.Ceramic Mold Knife Copper.name=Керамическая форма ножа (медь)
+item.Knife Mold.Ceramic Mold Knife Bronze.name=Керамическая форма ножа (бронза)
+item.Knife Mold.Ceramic Mold Knife Black Bronze.name=Керамическая форма ножа (чёрная бронза)
+item.Knife Mold.Ceramic Mold Knife Bismuth Bronze.name=Керамическая форма ножа (висмутовая бронза)
+
+item.Javelin Mold.Clay Mold Javelin.name=Глиняная форма наконечника копья
+item.Javelin Mold.Ceramic Mold Javelin.name=Керамическая форма наконечника копья
+item.Javelin Mold.Ceramic Mold Javelin Copper.name=Керамическая форма наконечника копья (медь)
+item.Javelin Mold.Ceramic Mold Javelin Bronze.name=Керамическая форма наконечника копья (бронза)
+item.Javelin Mold.Ceramic Mold Javelin Black Bronze.name=Керамическая форма наконечника копья (чёрная бронза)
+item.Javelin Mold.Ceramic Mold Javelin Bismuth Bronze.name=Керамическая форма наконечника копья (висмутовая бронза)
+
+item.Mace Mold.Clay Mold Mace.name=Глиняная форма булавы
+item.Mace Mold.Ceramic Mold Mace.name=Керамическая форма булавы
+item.Mace Mold.Ceramic Mold Mace Copper.name=Керамическая форма булавы (медь)
+item.Mace Mold.Ceramic Mold Mace Bronze.name=Керамическая форма булавы (бронза)
+item.Mace Mold.Ceramic Mold Mace Black Bronze.name=Керамическая форма булавы (чёрная бронза)
+item.Mace Mold.Ceramic Mold Mace Bismuth Bronze.name=Керамическая форма булавы (висмутовая бронза)
+
+item.Pick Mold.Clay Mold Pick.name=Глиняная форма кирки
+item.Pick Mold.Ceramic Mold Pick.name=Керамическая форма кирки
+item.Pick Mold.Ceramic Mold Pick Copper.name=Керамическая форма кирки (медь)
+item.Pick Mold.Ceramic Mold Pick Bronze.name=Керамическая форма кирки (бронза)
+item.Pick Mold.Ceramic Mold Pick Black Bronze.name=Керамическая форма кирки (чёрная бронза)
+item.Pick Mold.Ceramic Mold Pick Bismuth Bronze.name=Керамическая форма кирки (висмутовая бронза)
+
+item.ProPick Mold.Clay Mold ProPick.name=Глиняная форма геологического молотка
+item.ProPick Mold.Ceramic Mold ProPick.name=Керамическая форма геологического молотка
+item.ProPick Mold.Ceramic Mold ProPick Copper.name=Керамическая форма геологического молотка (медь)
+item.ProPick Mold.Ceramic Mold ProPick Bronze.name=Керамическая форма геологического молотка (бронза)
+item.ProPick Mold.Ceramic Mold ProPick Black Bronze.name=Керамическая форма геологического молотка (чёрная бронза)
+item.ProPick Mold.Ceramic Mold ProPick Bismuth Bronze.name=Керамическая форма геологического молотка (висмутовая бронза)
+
+item.Saw Mold.Clay Mold Saw.name=Глиняная форма пилы
+item.Saw Mold.Ceramic Mold Saw.name=Керамическая форма пилы
+item.Saw Mold.Ceramic Mold Saw Copper.name=Керамическая форма пилы (медь)
+item.Saw Mold.Ceramic Mold Saw Bronze.name=Керамическая форма пилы (бронза)
+item.Saw Mold.Ceramic Mold Saw Black Bronze.name=Керамическая форма пилы (чёрная бронза)
+item.Saw Mold.Ceramic Mold Saw Bismuth Bronze.name=Керамическая форма пилы (висмутовая бронза)
+
+item.Scythe Mold.Clay Mold Scythe.name=Глиняная форма косы
+item.Scythe Mold.Ceramic Mold Scythe.name=Керамическая форма косы
+item.Scythe Mold.Ceramic Mold Scythe Copper.name=Керамическая форма косы (медь)
+item.Scythe Mold.Ceramic Mold Scythe Bronze.name=Керамическая форма косы (бронза)
+item.Scythe Mold.Ceramic Mold Scythe Black Bronze.name=Керамическая форма косы (чёрная бронза)
+item.Scythe Mold.Ceramic Mold Scythe Bismuth Bronze.name=Керамическая форма косы (висмутовая бронза)
+
+item.Shovel Mold.Clay Mold Shovel.name=Глиняная форма лопаты
+item.Shovel Mold.Ceramic Mold Shovel.name=Керамическая форма лопаты
+item.Shovel Mold.Ceramic Mold Shovel Copper.name=Керамическая форма лопаты (медь)
+item.Shovel Mold.Ceramic Mold Shovel Bronze.name=Керамическая форма лопаты (бронза)
+item.Shovel Mold.Ceramic Mold Shovel Black Bronze.name=Керамическая форма лопаты (чёрная бронза)
+item.Shovel Mold.Ceramic Mold Shovel Bismuth Bronze.name=Керамическая форма лопаты (висмутовая бронза)
+
+item.Sword Mold.Clay Mold Sword.name=Глиняная форма меча
+item.Sword Mold.Ceramic Mold Sword.name=Керамическая форма меча
+item.Sword Mold.Ceramic Mold Sword Copper.name=Керамическая форма меча (медь)
+item.Sword Mold.Ceramic Mold Sword Bronze.name=Керамическая форма меча (бронза)
+item.Sword Mold.Ceramic Mold Sword Black Bronze.name=Керамическая форма меча (чёрная бронза)
+item.Sword Mold.Ceramic Mold Sword Bismuth Bronze.name=Керамическая форма меча (висмутовая бронза)
+
+item.Spindle.name=Веретено
+item.Spindle Head.Clay Spindle.name=Глиняное веретено
+item.Spindle Head.Spindle Head.name=Головка веретена
+
+item.Fire Brick.Fire Brick.name=Огнеупорный кирпич
+item.Fire Brick.Clay Fire Brick.name=Необожженный огнеупорный кирпич
+tile.FireBrick.name=Огнеупорный кирпич
+
+#= Gems =
+item.Agate.Chipped.name=Выщербленный агат
+item.Amethyst.Chipped.name=Выщербленный аметист
+item.Beryl.Chipped.name=Выщербленный берилл
+item.Diamond.Chipped.name=Выщербленный алмаз
+item.Emerald.Chipped.name=Выщербленный изумруд
+item.Garnet.Chipped.name=Выщербленный гранат
+item.Jade.Chipped.name=Выщербленный нефрит
+item.Jasper.Chipped.name=Выщербленная яшма
+item.Opal.Chipped.name=Выщербленный опал
+item.Ruby.Chipped.name=Выщербленный рубин
+item.Sapphire.Chipped.name=Выщербленный сапфир
+item.Topaz.Chipped.name=Выщербленный топаз
+item.Tourmaline.Chipped.name=Выщербленный турмалин
+
+item.Agate.Flawed.name=Треснутый агат
+item.Amethyst.Flawed.name=Треснутый аметист
+item.Beryl.Flawed.name=Треснутый берилл
+item.Diamond.Flawed.name=Треснутый алмаз
+item.Emerald.Flawed.name=Треснутый изумруд
+item.Garnet.Flawed.name=Треснутый гранат
+item.Jade.Flawed.name=Треснутый нефрит
+item.Jasper.Flawed.name=Треснутая яшма
+item.Opal.Flawed.name=Треснутый опал
+item.Ruby.Flawed.name=Треснутый рубин
+item.Sapphire.Flawed.name=Треснутый сапфир
+item.Topaz.Flawed.name=Треснутый топаз
+item.Tourmaline.Flawed.name=Треснутый турмалин
+
+item.Agate.Normal.name=Агат
+item.Amethyst.Normal.name=Аметист
+item.Beryl.Normal.name=Берилл
+item.Diamond.Normal.name=Алмаз
+item.Emerald.Normal.name=Изумруд
+item.Garnet.Normal.name=Гранат
+item.Jade.Normal.name=Нефрит
+item.Jasper.Normal.name=Яшма
+item.Opal.Normal.name=Опал
+item.Ruby.Normal.name=Рубин
+item.Sapphire.Normal.name=Сапфир
+item.Topaz.Normal.name=Топаз
+item.Tourmaline.Normal.name=Турмалин
+
+item.Agate.Flawless.name=Безупречный агат
+item.Amethyst.Flawless.name=Безупречный аметист
+item.Beryl.Flawless.name=Безупречный берилл
+item.Diamond.Flawless.name=Безупречный алмаз
+item.Emerald.Flawless.name=Безупречный изумруд
+item.Garnet.Flawless.name=Безупречный гранат
+item.Jade.Flawless.name=Безупречный нефрит
+item.Jasper.Flawless.name=Безупречная яшма
+item.Opal.Flawless.name=Безупречный опал
+item.Ruby.Flawless.name=Безупречный рубин
+item.Sapphire.Flawless.name=Безупречный сапфир
+item.Topaz.Flawless.name=Безупречный топаз
+item.Tourmaline.Flawless.name=Безупречный турмалин
+
+item.Agate.Exquisite.name=Изысканный агат
+item.Amethyst.Exquisite.name=Изысканный аметист
+item.Beryl.Exquisite.name=Изысканный берилл
+item.Diamond.Exquisite.name=Изысканный алмаз
+item.Emerald.Exquisite.name=Изысканный изумруд
+item.Garnet.Exquisite.name=Изысканный гранат
+item.Jade.Exquisite.name=Изысканный нефрит
+item.Jasper.Exquisite.name=Изысканная яшма
+item.Opal.Exquisite.name=Изысканный опал
+item.Ruby.Exquisite.name=Изысканный рубин
+item.Sapphire.Exquisite.name=Изысканный сапфир
+item.Topaz.Exquisite.name=Изысканный топаз
+item.Tourmaline.Exquisite.name=Изысканный турмалин
+
+#===========
+#= Powders =
+#===========
+item.dyePowder.black.name=Чернильный мешок
+item.dyePowder.blue.name=Лазурит
+item.dyePowder.brown.name=Зёрна какао
+item.dyePowder.cyan.name=Голубой краситель
+item.dyePowder.gray.name=Серый краситель
+item.dyePowder.green.name=Кактусовый зелёный
+item.dyePowder.lightBlue.name=Светло-синий краситель
+item.dyePowder.lime.name=Лимонный краситель
+item.dyePowder.magenta.name=Пурпурный краситель
+item.dyePowder.orange.name=Оранжевый краситель
+item.dyePowder.pink.name=Розовый краситель
+item.dyePowder.purple.name=Фиолетовый краситель
+item.dyePowder.red.name=Цвет розы
+item.dyePowder.silver.name=Серебряный краситель
+item.dyePowder.white.name=Костяной порошок
+item.dyePowder.yellow.name=Одуванчиковый жёлтый
+
+item.Coke.name=Кокс
+item.Powder.Flux.name=Флюс
+item.Powder.Graphite Powder.name=Графитовый порошок
+item.Powder.Hematite Powder.name=Гематитовый порошок
+item.Powder.Kaolinite Powder.name=Каолинитовый порошок
+item.Powder.Lapis Lazuli Powder.name=Лазуритовый порошок
+item.Powder.Limonite Powder.name=Лимонитовый порошок
+item.Powder.Malachite Powder.name=Малахитовый порошок
+item.Powder.Salt.name=Соль
+item.Powder.Saltpeter Powder.name=Селитровый порошок
+item.Powder.Sulfur Powder.name=Серный порошок
+
+#=========
+#= Stone =
+#=========
+#== Stone Items ==
+item.LooseRock.Andesite.name=Андезит
+item.LooseRock.Basalt.name=Базальт
+item.LooseRock.Chalk.name=Мел
+item.LooseRock.Chert.name=Кремнистый сланец
+item.LooseRock.Claystone.name=Аргиллит
+item.LooseRock.Conglomerate.name=Конгломерат
+item.LooseRock.Dacite.name=Дацит
+item.LooseRock.Diorite.name=Диорит
+item.LooseRock.Dolomite.name=Доломит
+item.LooseRock.Gabbro.name=Габбро
+item.LooseRock.Gneiss.name=Гнейс
+item.LooseRock.Granite.name=Гранит
+item.LooseRock.Limestone.name=Известняк
+item.LooseRock.Marble.name=Мрамор
+item.LooseRock.Phyllite.name=Слюдяной сланец
+item.LooseRock.Quartzite.name=Кварцит
+item.LooseRock.Rhyolite.name=Риолит
+item.LooseRock.Rock Salt.name=Каменная соль
+item.LooseRock.Schist.name=Кристаллический сланец
+item.LooseRock.Shale.name=Уплотненная глина
+item.LooseRock.Slate.name=Глинистый сланец
+
+item.ItemStoneBrick.Andesite.name=Кирпич из андезита
+item.ItemStoneBrick.Basalt.name=Кирпич из базальта
+item.ItemStoneBrick.Chalk.name=Кирпич из мела
+item.ItemStoneBrick.Chert.name=Кирпич из кремнистого сланца
+item.ItemStoneBrick.Claystone.name=Кирпич из аргиллита
+item.ItemStoneBrick.Conglomerate.name=Кирпич из конгломерата
+item.ItemStoneBrick.Dacite.name=Кирпич из дацита
+item.ItemStoneBrick.Diorite.name=Кирпич из диорита
+item.ItemStoneBrick.Dolomite.name=Кирпич из доломита
+item.ItemStoneBrick.Gabbro.name=Кирпич из габбро
+item.ItemStoneBrick.Gneiss.name=Кирпич из гнейса
+item.ItemStoneBrick.Granite.name=Кирпич из гранита
+item.ItemStoneBrick.Limestone.name=Кирпич из известняка
+item.ItemStoneBrick.Marble.name=Кирпич из мрамора
+item.ItemStoneBrick.Phyllite.name=Кирпич из слюдяного сланца
+item.ItemStoneBrick.Quartzite.name=Кирпич из кварцита
+item.ItemStoneBrick.Rhyolite.name=Кирпич из риолита
+item.ItemStoneBrick.Rock Salt.name=Кирпич из каменной соли
+item.ItemStoneBrick.Schist.name=Кирпич из кристаллического сланца
+item.ItemStoneBrick.Shale.name=Кирпич из уплотненной глины
+item.ItemStoneBrick.Slate.name=Кирпич из глинистого сланца
+
+item.FlatRock.Andesite.name=Андезит
+item.FlatRock.Basalt.name=Базальт
+item.FlatRock.Chalk.name=Мел
+item.FlatRock.Chert.name=Кремнистый сланец
+item.FlatRock.Claystone.name=Аргиллит
+item.FlatRock.Conglomerate.name=Конгломерат
+item.FlatRock.Dacite.name=Дацит
+item.FlatRock.Diorite.name=Диорит
+item.FlatRock.Dolomite.name=Доломит
+item.FlatRock.Gabbro.name=Габбро
+item.FlatRock.Gneiss.name=Гнейс
+item.FlatRock.Granite.name=Гранит
+item.FlatRock.Limestone.name=Известняк
+item.FlatRock.Marble.name=Мрамор
+item.FlatRock.Phyllite.name=Слюдяной сланец
+item.FlatRock.Quartzite.name=Кварцит
+item.FlatRock.Rhyolite.name=Риолит
+item.FlatRock.Rock Salt.name=Каменная соль
+item.FlatRock.Schist.name=Кристаллический сланец
+item.FlatRock.Shale.name=Уплотненная глина
+item.FlatRock.Slate=Глинистый сланец
+
+#== Stone Blocks ==
+tile.WallCobble.Andesite.name=Булыжная стена из андезита
+tile.WallCobble.Basalt.name=Булыжная стена из базальта
+tile.WallCobble.Chalk.name=Булыжная стена из мела
+tile.WallCobble.Chert.name=Булыжная стена из кремнистого сланца
+tile.WallCobble.Claystone.name=Булыжная стена из аргиллита
+tile.WallCobble.Conglomerate.name=Булыжная стена из конгломерата
+tile.WallCobble.Dacite.name=Булыжная стена из дацита
+tile.WallCobble.Diorite.name=Булыжная стена из диорита
+tile.WallCobble.Dolomite.name=Булыжная стена из доломита
+tile.WallCobble.Gabbro.name=Булыжная стена из габбро
+tile.WallCobble.Gneiss.name=Булыжная стена из гнейса
+tile.WallCobble.Granite.name=Булыжная стена из гранита
+tile.WallCobble.Limestone.name=Булыжная стена из известняка
+tile.WallCobble.Marble.name=Булыжная стена из мрамора
+tile.WallCobble.Phyllite.name=Булыжная стена из слюдяного сланца
+tile.WallCobble.Quartzite.name=Булыжная стена из кварцита
+tile.WallCobble.Rhyolite.name=Булыжная стена из риолита
+tile.WallCobble.Rock Salt.name=Булыжная стена из каменной соли
+tile.WallCobble.Schist.name=Булыжная стена из кристаллического сланца
+tile.WallCobble.Shale.name=Булыжная стена из уплотненной глины
+tile.WallCobble.Slate.name=Булыжная стена из глинистого сланца
+
+tile.WallRaw.Andesite.name=Стена из андезита
+tile.WallRaw.Basalt.name=Стена из базальта
+tile.WallRaw.Chalk.name=Стена из мела
+tile.WallRaw.Chert.name=Стена из кремнистого сланца
+tile.WallRaw.Claystone.name=Стена из аргиллита
+tile.WallRaw.Conglomerate.name=Стена из конгломерата
+tile.WallRaw.Dacite.name=Стена из дацита
+tile.WallRaw.Diorite.name=Стена из диорита
+tile.WallRaw.Dolomite.name=Стена из доломита
+tile.WallRaw.Gabbro.name=Стена из габбро
+tile.WallRaw.Gneiss.name=Стена из гнейса
+tile.WallRaw.Granite.name=Стена из гранита
+tile.WallRaw.Limestone.name=Стена из известняка
+tile.WallRaw.Marble.name=Стена из мрамора
+tile.WallRaw.Phyllite.name=Стена из слюдяного сланца
+tile.WallRaw.Quartzite.name=Стена из кварцита
+tile.WallRaw.Rhyolite.name=Стена из риолита
+tile.WallRaw.Rock Salt.name=Стена из каменной соли
+tile.WallRaw.Schist.name=Стена из кристаллического сланца
+tile.WallRaw.Shale.name=Стена из уплотненной глины
+tile.WallRaw.Slate.name=Стена из глинистого сланца
+
+tile.WallBrick.Andesite.name=Кирпичная стена из андезита
+tile.WallBrick.Basalt.name=Кирпичная стена из базальта
+tile.WallBrick.Chalk.name=Кирпичная стена из мела
+tile.WallBrick.Chert.name=Кирпичная стена из кремнистого сланца
+tile.WallBrick.Claystone.name=Кирпичная стена из аргиллита
+tile.WallBrick.Conglomerate.name=Кирпичная стена из конгломерата
+tile.WallBrick.Dacite.name=Кирпичная стена из дацита
+tile.WallBrick.Diorite.name=Кирпичная стена из диорита
+tile.WallBrick.Dolomite.name=Кирпичная стена из доломита
+tile.WallBrick.Gabbro.name=Кирпичная стена из габбро
+tile.WallBrick.Gneiss.name=Кирпичная стена из гнейса
+tile.WallBrick.Granite.name=Кирпичная стена из гранита
+tile.WallBrick.Limestone.name=Кирпичная стена из известняка
+tile.WallBrick.Marble.name=Кирпичная стена из мрамора
+tile.WallBrick.Phyllite.name=Кирпичная стена из слюдяного сланца
+tile.WallBrick.Quartzite.name=Кирпичная стена из кварцита
+tile.WallBrick.Rhyolite.name=Кирпичная стена из риолита
+tile.WallBrick.Rock Salt.name=Кирпичная стена из каменной соли
+tile.WallBrick.Schist.name=Кирпичная стена из кристаллического сланца
+tile.WallBrick.Shale.name=Кирпичная стена из уплотненной глины
+tile.WallBrick.Slate.name=Кирпичная стена из глинистого сланца
+
+tile.WallSmooth.Andesite.name=Гладкая стена из андезита
+tile.WallSmooth.Basalt.name=Гладкая стена из базальта
+tile.WallSmooth.Chalk.name=Гладкая стена из мела
+tile.WallSmooth.Chert.name=Гладкая стена из кремнистого сланца
+tile.WallSmooth.Claystone.name=Гладкая стена из аргиллита
+tile.WallSmooth.Conglomerate.name=Гладкая стена из конгломерата
+tile.WallSmooth.Dacite.name=Гладкая стена из дацита
+tile.WallSmooth.Diorite.name=Гладкая стена из диорита
+tile.WallSmooth.Dolomite.name=Гладкая стена из ддоломита
+tile.WallSmooth.Gabbro.name=Гладкая стена из габбро
+tile.WallSmooth.Gneiss.name=Гладкая стена из гнейса
+tile.WallSmooth.Granite.name=Гладкая стена из гранита
+tile.WallSmooth.Limestone.name=Гладкая стена из известняка
+tile.WallSmooth.Marble.name=Гладкая стена из мрамора
+tile.WallSmooth.Phyllite.name=Гладкая стена из слюдяного сланца
+tile.WallSmooth.Quartzite.name=Гладкая стена из кварцита
+tile.WallSmooth.Rhyolite.name=Гладкая стена из риолита
+tile.WallSmooth.Rock Salt.name=Гладкая стена из каменной соли
+tile.WallSmooth.Schist.name=Гладкая стена из кристаллического сланца
+tile.WallSmooth.Shale.name=Гладкая стена из уплотненной глины
+tile.WallSmooth.Slate.name=Гладкая стена из глинистого сланца
+
+tile.IgExRock.Andesite.name=Блок андезита
+tile.IgExRock.Basalt.name=Блок базальта
+tile.SedRock.Chalk.name=Блок мела
+tile.SedRock.Chert.name=Блок кремнистого сланца
+tile.SedRock.Claystone.name=Блок аргиллита
+tile.SedRock.Conglomerate.name=Блок конгломерата
+tile.IgExRock.Dacite.name=Блок дацита
+tile.IgInRock.Diorite.name=Блок диорита
+tile.SedRock.Dolomite.name=Блок доломита
+tile.IgInRock.Gabbro.name=Блок габбро
+tile.MMRock.Gneiss.name=Блок гнейса
+tile.IgInRock.Granite.name=Блок гранита
+tile.SedRock.Limestone.name=Блок известняка
+tile.MMRock.Marble.name=Блок мрамора
+tile.MMRock.Phyllite.name=Блок слюдяного сланца
+tile.MMRock.Quartzite.name=Блок кварцита
+tile.IgExRock.Rhyolite.name=Блок риолита
+tile.SedRock.Rock Salt.name=Блок каменной соли
+tile.MMRock.Schist.name=Блок кристаллического сланца
+tile.SedRock.Shale.name=Блок уплотненной глины
+tile.MMRock.Slate.name=Блок глинистого сланца
+
+tile.IgExRockCobble.Andesite.name=Булыжник из андезита
+tile.IgExRockCobble.Basalt.name=Булыжник из базальта
+tile.SedRockCobble.Chalk.name=Булыжник из мела
+tile.SedRockCobble.Chert.name=Булыжник из кремнистого сланца
+tile.SedRockCobble.Claystone.name=Булыжник из аргиллита
+tile.SedRockCobble.Conglomerate.name=Булыжник из конгломерата
+tile.IgExRockCobble.Dacite.name=Булыжник из дацита
+tile.IgInRockCobble.Diorite.name=Булыжник из диорита
+tile.SedRockCobble.Dolomite.name=Булыжник из доломита
+tile.IgInRockCobble.Gabbro.name=Булыжник из габбро
+tile.MMRockCobble.Gneiss.name=Булыжник из гнейса
+tile.IgInRockCobble.Granite.name=Булыжник из гранита
+tile.SedRockCobble.Limestone.name=Булыжник из известняка
+tile.MMRockCobble.Marble.name=Булыжник из мрамора
+tile.MMRockCobble.Phyllite.name=Булыжник из слюдяного сланца
+tile.MMRockCobble.Quartzite.name=Булыжник из кварцита
+tile.IgExRockCobble.Rhyolite.name=Булыжник из риолита
+tile.SedRockCobble.Rock Salt.name=Булыжник из каменной соли
+tile.MMRockCobble.Schist.name=Булыжник из кристаллического сланца
+tile.SedRockCobble.Shale.name=Булыжник из уплотненный глины
+tile.MMRockCobble.Slate.name=Булыжник из глинистого сланца
+
+tile.IgExRockSmooth.Andesite.name=Обтёсанный андезит
+tile.IgExRockSmooth.Basalt.name=Обтёсанный базальт
+tile.SedRockSmooth.Chalk.name=Обтёсанный мел
+tile.SedRockSmooth.Chert.name=Обтёсанный сланец
+tile.SedRockSmooth.Claystone.name=Обтёсанный аргиллит
+tile.SedRockSmooth.Conglomerate.name=Обтёсанный конгломерат
+tile.IgExRockSmooth.Dacite.name=Обтёсанный дацит
+tile.IgInRockSmooth.Diorite.name=Обтёсанный диорит
+tile.SedRockSmooth.Dolomite.name=Обтёсанный доломит
+tile.IgInRockSmooth.Gabbro.name=Обтёсанный габбро
+tile.MMRockSmooth.Gneiss.name=Обтёсанный гнейс
+tile.IgInRockSmooth.Granite.name=Обтёсанный гранит
+tile.SedRockSmooth.Limestone.name=Обтёсанный известняк
+tile.MMRockSmooth.Marble.name=Обтёсанный мрамор
+tile.MMRockSmooth.Phyllite.name=Обтёсанный слюдяной сланец
+tile.MMRockSmooth.Quartzite.name=Обтёсанный кварцит
+tile.IgExRockSmooth.Rhyolite.name=Обтёсанный риолит
+tile.SedRockSmooth.Rock Salt.name=Обтёсанная каменная соль
+tile.MMRockSmooth.Schist.name=Обтёсанный кристаллический сланец
+tile.SedRockSmooth.Shale.name=Обтёсанная уплотненная глина
+tile.MMRockSmooth.Slate.name=Обтёсанный глинистый сланец
+
+tile.IgExRockBrick.Andesite.name=Кирпичи из андезита
+tile.IgExRockBrick.Basalt.name=Кирпичи из базальта
+tile.SedRockBrick.Chalk.name=Кирпичи из мела
+tile.SedRockBrick.Chert.name=Кирпичи из кремнистого сланца
+tile.SedRockBrick.Claystone.name=Кирпичи из аргиллита
+tile.SedRockBrick.Conglomerate.name=Кирпичи из конгломерата
+tile.IgExRockBrick.Dacite.name=Кирпичи из дацита
+tile.IgInRockBrick.Diorite.name=Кирпичи из диорита
+tile.SedRockBrick.Dolomite.name=Кирпичи из доломита
+tile.IgInRockBrick.Gabbro.name=Кирпичи из габбро
+tile.MMRockBrick.Gneiss.name=Кирпичи из гнейса
+tile.IgInRockBrick.Granite.name=Кирпичи из гранита
+tile.SedRockBrick.Limestone.name=Кирпичи из известняка
+tile.MMRockBrick.Marble.name=Кирпичи из мрамора
+tile.MMRockBrick.Phyllite.name=Кирпичи из слюдяного сланца
+tile.MMRockBrick.Quartzite.name=Кирпичи из кварцита
+tile.IgExRockBrick.Rhyolite.name=Кирпичи из риолита
+tile.SedRockBrick.Rock Salt.name=Кирпичи из каменной соли
+tile.MMRockBrick.Schist.name=Кирпичи из кристаллического сланца
+tile.SedRockBrick.Shale.name=Кирпичи из уплотненной глины
+tile.MMRockBrick.Slate.name=Кирпичи из глинистого сланца
+
+#=======
+#= Ore =
+#=======
+#== Ore Items ==
+item.Ore.Bituminous Coal.name=Битумный уголь
+item.Ore.Borax.name=Бура
+item.Ore.Cinnabar.name=Киноварь
+item.Ore.Cryolite.name=Криолит
+item.Ore.Graphite.name=Графит
+item.Ore.Gypsum.name=Гипс
+item.Ore.Jet.name=Гагат
+item.Ore.Kaolinite.name=Каолинит
+item.Ore.Kimberlite.name=Кимберлит
+item.Ore.Lapis Lazuli.name=Лазурит
+item.Ore.Lignite.name=Лигнит
+item.Ore.Microcline.name=Микроклин
+item.Ore.Olivine.name=Оливин
+item.Ore.Petrified Wood.name=Окаменевшее дерево
+item.Ore.Pitchblende.name=Уранинит
+item.Ore.Saltpeter.name=Селитра
+item.Ore.Satinspar.name=Шелковистый шпат
+item.Ore.Selenite.name=Селенит
+item.Ore.Serpentine.name=Серпентин
+item.Ore.Sulfur.name=Сера
+item.Ore.Sylvite.name=Сильвин
+
+item.Ore.Bismuthinite.name=Висмутин
+item.Ore.Cassiterite.name=Касситерит
+item.Ore.Galena.name=Галенит
+item.Ore.Garnierite.name=Гарниерит
+item.Ore.Hematite.name=Гематит
+item.Ore.Limonite.name=Лимонит
+item.Ore.Magnetite.name=Магнетит
+item.Ore.Malachite.name=Малахит
+item.Ore.Native Copper.name=Самородная медь
+item.Ore.Native Gold.name=Самородное золото
+item.Ore.Native Platinum.name=Самородная платина
+item.Ore.Native Silver.name=Самородное серебро
+item.Ore.Sphalerite.name=Сфалерит
+item.Ore.Tetrahedrite.name=Тетраэдрит
+
+item.Ore.Rich Bismuthinite.name=Богатый висмутин
+item.Ore.Rich Cassiterite.name=Богатый касситерит
+item.Ore.Rich Galena.name=Богатый галенит
+item.Ore.Rich Garnierite.name=Богатый гарниерит
+item.Ore.Rich Hematite.name=Богатый гематит
+item.Ore.Rich Limonite.name=Богатый лимонит
+item.Ore.Rich Magnetite.name=Богатый магнетит
+item.Ore.Rich Malachite.name=Богатый малахит
+item.Ore.Rich Native Copper.name=Богатая самородная медь
+item.Ore.Rich Native Gold.name=Богатое самородное золото
+item.Ore.Rich Native Platinum.name=Богатая самородная платина
+item.Ore.Rich Native Silver.name=Богатое самородное серебро
+item.Ore.Rich Sphalerite.name=Богатый сфалерит
+item.Ore.Rich Tetrahedrite.name=Богатый тетраэдрит
+
+item.Ore.Poor Bismuthinite.name=Бедный висмутин
+item.Ore.Poor Cassiterite.name=Бедный касситерит
+item.Ore.Poor Galena.name=Бедный галенит
+item.Ore.Poor Garnierite.name=Бедный гарниерит
+item.Ore.Poor Hematite.name=Бедный гематит
+item.Ore.Poor Limonite.name=Бедный лимонит
+item.Ore.Poor Magnetite.name=Бедный магнетит
+item.Ore.Poor Malachite.name=Бедный малахит
+item.Ore.Poor Native Copper.name=Бедная самородная медь
+item.Ore.Poor Native Gold.name=Бедное самородное золото
+item.Ore.Poor Native Platinum.name=Бедная самородная платина
+item.Ore.Poor Native Silver.name=Бедное самородное серебро
+item.Ore.Poor Sphalerite.name=Бедный сфалерит
+item.Ore.Poor Tetrahedrite.name=Бедный тетраэдрит
+
+item.Small Ore.Bismuthinite.name=Кусок висмутина
+item.Small Ore.Cassiterite.name=Кусок касситерита
+item.Small Ore.Galena.name=Кусок галенита
+item.Small Ore.Garnierite.name=Кусок гарниерита
+item.Small Ore.Hematite.name=Кусок гематита
+item.Small Ore.Limonite.name=Кусок лимонита
+item.Small Ore.Magnetite.name=Кусок магнетита
+item.Small Ore.Malachite.name=Кусок малахита
+item.Small Ore.Native Copper.name=Медный самородок
+item.Small Ore.Native Gold.name=Золотой самородок
+item.Small Ore.Native Platinum.name=Платиновый самородок
+item.Small Ore.Native Silver.name=Серебряный самородок
+item.Small Ore.Sphalerite.name=Кусок сфалерита
+item.Small Ore.Tetrahedrite.name=Кусок тетраэдрита
+
+#== Ore Blocks ==
+tile.Ore.Bituminous Coal.name=Битумный уголь
+tile.Ore.Borax.name=Бура
+tile.Ore.Cinnabar.name=Киноварь
+tile.Ore.Cryolite.name=Криолит
+tile.Ore.Graphite.name=Графит
+tile.Ore.Gypsum.name=Гипс
+tile.Ore.Jet.name=Гагат
+tile.Ore.Kaolinite.name=Каолинит
+tile.Ore.Kimberlite.name=Кимберлит
+tile.Ore.Lapis Lazuli.name=Лазурит
+tile.Ore.Lignite.name=Лигнит
+tile.Ore.Microcline.name=Микроклин
+tile.Ore.Olivine.name=Оливин
+tile.Ore.Petrified Wood.name=Окаменевшее дерево
+tile.Ore.Pitchblende.name=Уранинит
+tile.Ore.Saltpeter.name=Селитра
+tile.Ore.Satinspar.name=Шелковистый шпат
+tile.Ore.Selenite.name=Селенит
+tile.Ore.Serpentine.name=Серпентин
+tile.Ore.Sulfur.name=Сера
+tile.Ore.Sylvite.name=Сильвин
+
+tile.Ore.Bismuthinite.name=Висмутин
+tile.Ore.Cassiterite.name=Касситерит
+tile.Ore.Galena.name=Галенит
+tile.Ore.Garnierite.name=Гарниерит
+tile.Ore.Hematite.name=Гематит
+tile.Ore.Limonite.name=Лимонит
+tile.Ore.Magnetite.name=Магнетит
+tile.Ore.Malachite.name=Малахит
+tile.Ore.Native Copper.name=Самородная медь
+tile.Ore.Native Gold.name=Самородное золото
+tile.Ore.Native Platinum.name=Самородная платина
+tile.Ore.Native Silver.name=Самородное серебро
+tile.Ore.Sphalerite.name=Сфалерит
+tile.Ore.Tetrahedrite.name=Тетраэдрит
+
+#========
+#= Wood =
+#========
+#== Wood Items ==
+item.Log.Acacia.name=Бревно из акации
+item.Log.Ash.name=Бревно из ясеня
+item.Log.Aspen.name=Бревно из осины
+item.Log.Birch.name=Бревно из березы
+item.Log.Chestnut.name=Бревно из каштана
+item.Log.Douglas Fir.name=Бревно из дугласовой пихты
+item.Log.Hickory.name=Бревно из ореха
+item.Log.Kapok.name=Бревно из сейбы
+item.Log.Maple.name=Бревно из клена
+item.Log.Oak.name=Бревно из дуба
+item.Log.Pine.name=Бревно из сосны
+item.Log.Sequoia.name=Бревно из секвойи
+item.Log.Spruce.name=Бревно из ели
+item.Log.Sycamore.name=Бревно из платана
+item.Log.White Cedar.name=Бревно из белого кедра
+item.Log.White Elm.name=Бревно из белого вяза
+item.Log.Willow.name=Бревно из ивы
+
+item.SinglePlank.Acacia.name=Доска из акации
+item.SinglePlank.Ash.name=Ясеневая доска
+item.SinglePlank.Aspen.name=Осиновая доска
+item.SinglePlank.Birch.name=Берёзовая доска
+item.SinglePlank.Chestnut.name=Каштановая доска
+item.SinglePlank.Douglas Fir.name=Доска из дугласовой пихты
+item.SinglePlank.Hickory.name=Ореховая доска
+item.SinglePlank.Kapok.name=Сейбовая доска
+item.SinglePlank.Maple.name=Кленовая доска
+item.SinglePlank.Oak.name=Дубовая доска
+item.SinglePlank.Pine.name=Сосновая доска
+item.SinglePlank.Sequoia.name=Секвойная доска
+item.SinglePlank.Spruce.name=Еловая доска
+item.SinglePlank.Sycamore.name=Платановая доска
+item.SinglePlank.White Cedar.name=Доска из белого кедра
+item.SinglePlank.White Elm.name=Доска из белого вяза
+item.SinglePlank.Willow.name=Ивовая доска
+
+item.Acacia Door.name=Дверь из акации
+item.Ash Door.name=Ясеневая дверь
+item.Aspen Door.name=Осиновая дверь
+item.Birch Door.name=Берёзовая дверь
+item.Chestnut Door.name=Каштановая дверь
+item.Douglas Fir Door.name=Дверь из дугласовой пихты
+item.Hickory Door.name=Ореховая дверь
+item.Kapok Door.name=Сейбовая дверь
+item.Maple Door.name=Кленовая дверь
+item.Oak Door.name=Дубовая дверь
+item.Pine Door.name=Сосновая дверь
+item.Sequoia Door.name=Секвойная дверь
+item.Spruce Door.name=Еловая дверь
+item.Sycamore Door.name=Платановая дверь
+item.White Cedar Door.name=Дверь из белого кедра
+item.White Elm Door.name=Дверь из белого вяза
+item.Willow Door.name=Ивовая дверь
+
+item.Barrel.Acacia.name=Бочка из акации
+item.Barrel.Ash.name=Ясеневая бочка
+item.Barrel.Aspen.name=Осинова бочка
+item.Barrel.Birch.name=Берёзовая бочка
+item.Barrel.Chestnut.name=Каштановая бочка
+item.Barrel.Douglas Fir.name=Бочка из дугласовой пихты
+item.Barrel.Hickory.name=Ореховая бочка
+item.Barrel.Kapok.name=Сейбовая бочка
+item.Barrel.Maple.name=Кленовая бочка
+item.Barrel.Oak.name=Дубовая бочка
+item.Barrel.Pine.name=Сосновая бочка
+item.Barrel.Sequoia.name=Секвойная бочка
+item.Barrel.Spruce.name=Еловая бочка
+item.Barrel.Sycamore.name=Платановая бочка
+item.Barrel.White Cedar.name=Бочка из белого кедра
+item.Barrel.White Elm.name=Бочка из белого вяза
+item.Barrel.Willow.name=Ивовая бочка
+
+item.Loom.Acacia.name=Ткацкий станок из акации
+item.Loom.Ash.name=Ясеневый ткацкий станок
+item.Loom.Aspen.name=Осиновый ткаций станок
+item.Loom.Birch.name=Березовый ткацкий станок
+item.Loom.Chestnut.name=Ткацкий станок из каштана
+item.Loom.Douglas Fir.name=Ткацкий станок из дугласовой пихты
+item.Loom.Hickory.name=Ткацкий станок из ореха
+item.Loom.Kapok.name=Ткацкий станок из сейбы
+item.Loom.Maple.name=Кленовый ткацкий станок
+item.Loom.Oak.name=Дубовый ткацкий станок
+item.Loom.Pine.name=Сосновый ткацкий станок
+item.Loom.Sequoia.name=Ткацкий станок из секвойи
+item.Loom.Spruce.name=Еловый ткацкий станок
+item.Loom.Sycamore.name=Ткацкий станок из платана
+item.Loom.White Cedar.name=Ткацкий станок из белого кедра
+item.Loom.White Elm.name=Ткацкий станок из белого вяза
+item.Loom.Willow.name=Ивовый ткацкий станок
+
+#== Wood Blocks ==
+tile.log.Acacia.name=Бревно акации
+tile.log2.Acacia.name=Бревно акации
+tile.log.Ash.name=Бревно ясеня
+tile.log.Aspen.name=Бревно осины
+tile.log.Birch.name=Бревно березы
+tile.log.Chestnut.name=Бревно каштана
+tile.log.Douglas Fir.name=Бревно дугласовой пихты
+tile.log.Hickory.name=Бревно ореха
+tile.log.Kapok.name=Бревно сейбы
+tile.log.Maple.name=Бревно клена
+tile.log.Oak.name=Бревно дуба
+tile.log.Pine.name=Бревно сосны
+tile.log.Sequoia.name=Бревно секвойи
+tile.log.Spruce.name=Бревно ели
+tile.log.Sycamore.name=Бревно платана
+tile.log.White Cedar.name=Бревно белого кедра
+tile.log.White Elm.name=Бревно белого вяза
+tile.log.Willow.name=Бревно ивы
+
+tile.WoodVert2.Acacia.name=Бревно акации
+tile.WoodVert.Ash.name=Бревно ясеня
+tile.WoodVert.Aspen.name=Бревно осины
+tile.WoodVert.Birch.name=Бревно березы
+tile.WoodVert.Chestnut.name=Бревно каштана
+tile.WoodVert.Douglas Fir.name=Бревно дугласовой пихты
+tile.WoodVert.Hickory.name=Бревно ореха
+tile.WoodVert.Kapok.name=Бревно сейбы
+tile.WoodVert.Maple.name=Бревно клена
+tile.WoodVert.Oak.name=Бревно дуба
+tile.WoodVert.Pine.name=Бревно сосны
+tile.WoodVert.Sequoia.name=Бревно секвойи
+tile.WoodVert.Spruce.name=Бревно ели
+tile.WoodVert.Sycamore.name=Бревно платана
+tile.WoodVert.White Cedar.name=Бревно белого кедра
+tile.WoodVert.White Elm.name=Бревно белого вяза
+tile.WoodVert.Willow.name=Бревно ивы
+
+tile.WoodHoriz3.Acacia.name=Бревно акации
+tile.WoodHoriz.Ash.name=Бревно ясеня
+tile.WoodHoriz.Aspen.name=Бревно осины
+tile.WoodHoriz.Birch.name=Бревно березы
+tile.WoodHoriz.Chestnut.name=Бревно каштана
+tile.WoodHoriz.Douglas Fir.name=Бревно дугласовой пихты
+tile.WoodHoriz.Hickory.name=Бревно ореха
+tile.WoodHoriz2.Kapok.name=Бревно сейбы
+tile.WoodHoriz.Maple.name=Бревно клена
+tile.WoodHoriz.Oak.name=Бревно дуба
+tile.WoodHoriz2.Pine.name=Бревно сосны
+tile.WoodHoriz2.Sequoia.name=Бревно секвойи
+tile.WoodHoriz2.Spruce.name=Бревно ели
+tile.WoodHoriz2.Sycamore.name=Бревно платана
+tile.WoodHoriz2.White Cedar.name=Бревно белого кедра
+tile.WoodHoriz2.White Elm.name=Бревно белого вяза
+tile.WoodHoriz2.Willow.name=Бревно ивы
+
+tile.sapling2.Acacia.name=Саженец акации
+tile.sapling.Ash.name=Саженец ясеня
+tile.sapling.Aspen.name=Саженец осины
+tile.sapling.Birch.name=Саженец берёзы
+tile.sapling.Chestnut.name=Саженец каштана
+tile.sapling.Douglas Fir.name=Саженец дугласовой пихты
+tile.sapling.Hickory.name=Саженец орешника
+tile.sapling.Kapok.name=Саженец сейбы
+tile.sapling.Maple.name=Саженец клёна
+tile.sapling.Oak.name=Саженец дуба
+tile.sapling.Pine.name=Саженец сосны
+tile.sapling.Sequoia.name=Саженец секвойи
+tile.sapling.Spruce.name=Саженец ели
+tile.sapling.Sycamore.name=Саженец платана
+tile.sapling.White Cedar.name=Саженец белого кедра
+tile.sapling.White Elm.name=Саженец белого вяза
+tile.sapling.Willow.name=Саженец ивы
+
+tile.leaves.Acacia.name=Листья акации
+tile.leaves.Ash.name=Листья ясеня
+tile.leaves.Aspen.name=Листья осины
+tile.leaves.Birch.name=Листья березы
+tile.leaves.Chestnut.name=Листья каштана
+tile.leaves.Douglas Fir.name=Хвоя дугласовой пихты
+tile.leaves.Hickory.name=Листья орешника
+tile.leaves.Kapok.name=Листья сейбы
+tile.leaves.Maple.name=Листья клёна
+tile.leaves.Oak.name=Листья дуба
+tile.leaves.Pine.name=Хвоя сосны
+tile.leaves.Sequoia.name=Листья секвойи
+tile.leaves.Spruce.name=Хвоя ели
+tile.leaves.Sycamore.name=Листья платана
+tile.leaves.White Cedar.name=Хвоя белого кедра
+tile.leaves.White Elm.name=Листья белого вяза
+tile.leaves.Willow.name=Листья ивы
+
+tile.wood2.Acacia.name=Доски из акации
+tile.wood.Ash.name=Ясеневые доски
+tile.wood.Aspen.name=Осиновые доски
+tile.wood.Birch.name=Берёзовые доски
+tile.wood.Chestnut.name=Каштановые доски
+tile.wood.Douglas Fir.name=Доски из дугласовой пихты
+tile.wood.Hickory.name=Ореховые доски
+tile.wood.Kapok.name=Сейбовые доски
+tile.wood.Maple.name=Кленовые доски
+tile.wood.Oak.name=Дубовые доски
+tile.wood.Pine.name=Сосновые доски
+tile.wood.Sequoia.name=Секвойные доски
+tile.wood.Spruce.name=Еловые доски
+tile.wood.Sycamore.name=Платановые доски
+tile.wood.White Cedar.name=Доски из белого кедра
+tile.wood.White Elm.name=Доски из белого вяза
+tile.wood.Willow.name=Ивовые доски
+
+tile.Door Acacia.name=Дверь из акации
+tile.Door Ash.name=Ясеневая дверь
+tile.Door Aspen.name=Осиновая дверь
+tile.Door Birch.name=Берёзовая дверь
+tile.Door Chestnut.name=Каштановая дверь
+tile.Door Douglas Fir.name=Дверь из дугласовой пихты
+tile.Door Hickory.name=Ореховая дверь
+tile.Door Kapok.name=Сейбовая дверь
+tile.Door Maple.name=Кленовая дверь
+tile.Door Oak.name=Дубовая дверь
+tile.Door Pine.name=Сосновая дверь
+tile.Door Sequoia.name=Секвойная дверь
+tile.Door Spruce.name=Еловая дверь
+tile.Door Sycamore.name=Платановая дверь
+tile.Door White Cedar.name=Дверь из белого кедра
+tile.Door White Elm.name=Дверь из белого вяза
+tile.Door Willow.name=Ивовая дверь
+
+tile.Barrel.Acacia.name=Бочка из акации
+tile.Barrel.Ash.name=Ясеневая бочка
+tile.Barrel.Aspen.name=Осинова бочка
+tile.Barrel.Birch.name=Берёзовая бочка
+tile.Barrel.Chestnut.name=Каштановая бочка
+tile.Barrel.Douglas Fir.name=Бочка из дугласовой пихты
+tile.Barrel.Hickory.name=Ореховая бочка
+tile.Barrel.Kapok.name=Сейбовая бочка
+tile.Barrel.Maple.name=Кленовая бочка
+tile.Barrel.Oak.name=Дубовая бочка
+tile.Barrel.Pine.name=Сосновая бочка
+tile.Barrel.Sequoia.name=Секвойная бочка
+tile.Barrel.Spruce.name=Еловая бочка
+tile.Barrel.Sycamore.name=Платановая бочка
+tile.Barrel.White Cedar.name=Бочка из белого кедра
+tile.Barrel.White Elm.name=Бочка из белого вяза
+tile.Barrel.Willow.name=Ивовая бочка
+
+tile.Loom.Acacia.name=Ткацкий станок из акации
+tile.Loom.Ash.name=Ясеневый ткацкий станок
+tile.Loom.Aspen.name=Осиновый ткаций станок
+tile.Loom.Birch.name=Березовый ткацкий станок
+tile.Loom.Chestnut.name=Ткацкий станок из каштана
+tile.Loom.Douglas Fir.name=Ткацкий станок из дугласовой пихты
+tile.Loom.Hickory.name=Ткацкий станок из ореха
+tile.Loom.Kapok.name=Ткацкий станок из сейбы
+tile.Loom.Maple.name=Кленовый ткацкий станок
+tile.Loom.Oak.name=Дубовый ткацкий станок
+tile.Loom.Pine.name=Сосновый ткацкий станок
+tile.Loom.Sequoia.name=Ткацкий станок из секвойи
+tile.Loom.Spruce.name=Еловый ткацкий станок
+tile.Loom.Sycamore.name=Ткацкий станок из платана
+tile.Loom.White Cedar.name=Ткацкий станок из белого кедра
+tile.Loom.White Elm.name=Ткацкий станок из белого вяза
+tile.Loom.Willow.name=Ивовый ткацкий станок
+
+tile.FenceTFC.Acacia.name=Забор из акации
+tile.FenceTFC.Ash.name=Ясеневый забор
+tile.FenceTFC.Aspen.name=Осиновый забор
+tile.FenceTFC.Birch.name=Березовый забор
+tile.FenceTFC.Chestnut.name=Каштановый забор
+tile.FenceTFC.Douglas Fir.name=Забор из дугласовой пихты
+tile.FenceTFC.Hickory.name=Ореховый забор
+tile.FenceTFC.Kapok.name=Сейбовый забор
+tile.FenceTFC.Maple.name=Кленовый забор
+tile.FenceTFC.Oak.name=Дубовый забор
+tile.FenceTFC.Pine.name=Сосновый забор
+tile.FenceTFC.Sequoia.name=Секвойный забор
+tile.FenceTFC.Spruce.name=Еловый забор
+tile.FenceTFC.Sycamore.name=Платановый забор
+tile.FenceTFC.White Cedar.name=Забор из белого кедра
+tile.FenceTFC.White Elm.name=Забор из белого вяза
+tile.FenceTFC.Willow.name=Ивовый забор
+
+tile.FenceGateTFC.Acacia.name=Калитка из акации
+tile.FenceGateTFC.Ash.name=Ясеневая калитка
+tile.FenceGateTFC.Aspen.name=Осиновая калитка
+tile.FenceGateTFC.Birch.name=Березовая калитка
+tile.FenceGateTFC.Chestnut.name=Каштановая калитка
+tile.FenceGateTFC.Douglas Fir.name=Калитка из дугласовой пихты
+tile.FenceGateTFC.Hickory.name=Ореховая калитка
+tile.FenceGateTFC.Kapok.name=Сейбовая калитка
+tile.FenceGateTFC.Maple.name=Кленовая калитка
+tile.FenceGateTFC.Oak.name=Дубовая калитка
+tile.FenceGateTFC.Pine.name=Сосновая калитка
+tile.FenceGateTFC.Sequoia.name=Секвойная калитка
+tile.FenceGateTFC.Spruce.name=Еловая калитка
+tile.FenceGateTFC.Sycamore.name=Платановая калитка
+tile.FenceGateTFC.White Cedar.name=Калитка из белого кедра
+tile.FenceGateTFC.White Elm.name=Калитка из белого вяза
+tile.FenceGateTFC.Willow.name=Ивовая калитка
+
+tile.ArmourStand.Acacia.name=Подставка для доспехов из акации
+tile.ArmourStand.Ash.name=Подставка для доспехов из ясеня
+tile.ArmourStand.Aspen.name=Подставка для доспехов из осины
+tile.ArmourStand.Birch.name=Подставка для доспехов из березы
+tile.ArmourStand.Chestnut.name=Подставка для доспехов из каштана
+tile.ArmourStand.Douglas Fir.name=Подставка для доспехов из пихты
+tile.ArmourStand.Hickory.name=Подставка для доспехов из ореха
+tile.ArmourStand.Kapok.name=Подставка для доспехов из сейбы
+tile.ArmourStand.Maple.name=Подставка для доспехов из клена
+tile.ArmourStand.Oak.name=Подставка для доспехов из дуба
+tile.ArmourStand.Pine.name=Подставка для доспехов из сосны
+tile.ArmourStand.Sequoia.name=Подставка для доспехов из секвойи
+tile.ArmourStand.Spruce.name=Подставка для доспехов из ели
+tile.ArmourStand.Sycamore.name=Подставка для доспехов из платана
+tile.ArmourStand.White Cedar.name=Подставка для доспехов из белого кедра
+tile.ArmourStand.White Elm.name=Подставка для доспехов из белого вяза
+tile.ArmourStand.Willow.name=Подставка для доспехов из ивы
+
+tile.WoodSupportV2.Acacia.name=Опора из акации
+tile.WoodSupportV.Ash.name=Ясеневая опора
+tile.WoodSupportV.Aspen.name=Осиновая опора
+tile.WoodSupportV.Birch.name=Берёзовая опора
+tile.WoodSupportV.Chestnut.name=Каштановая опора
+tile.WoodSupportV.Douglas Fir.name=Опора из дугласовой пихты
+tile.WoodSupportV.Hickory.name=Ореховая опора
+tile.WoodSupportV.Kapok.name=Сейбовая опора
+tile.WoodSupportV.Maple.name=Кленовая опора
+tile.WoodSupportV.Oak.name=Дубовая опора
+tile.WoodSupportV.Pine.name=Сосновая опора
+tile.WoodSupportV.Sequoia.name=Секвойная опора
+tile.WoodSupportV.Spruce.name=Еловая опора
+tile.WoodSupportV.Sycamore.name=Платановая опора
+tile.WoodSupportV.White Cedar.name=Опора из белого кедра
+tile.WoodSupportV.White Elm.name=Опора из белого вяза
+tile.WoodSupportV.Willow.name=Ивовая опора
+
+tile.Toolrack.Acacia.name=Вешалка для инструментов из акации
+tile.Toolrack.Ash.name=Ясеневая вешалка для инструментов
+tile.Toolrack.Aspen.name=Осиновая вешалка для инструментов
+tile.Toolrack.Birch.name=Берёзовая вешалка для инструментов
+tile.Toolrack.Chestnut.name=Каштановая вешалка для инструментов
+tile.Toolrack.Douglas Fir.name=Вешалка для инструментов из дугласовой пихты
+tile.Toolrack.Hickory.name=Ореховая вешалка для инструментов
+tile.Toolrack.Kapok.name=Сейбовая вешалка для инструментов
+tile.Toolrack.Maple.name=Кленовая вешалка для инструментов
+tile.Toolrack.Oak.name=Дубовая вешалка для инструментов
+tile.Toolrack.Pine.name=Сосновая вешалка для инструментов
+tile.Toolrack.Sequoia.name=Секвойная вешалка для инструментов
+tile.Toolrack.Spruce.name=Еловая вешалка для инструментов
+tile.Toolrack.Sycamore.name=Платановая вешалка для инструментов
+tile.Toolrack.White Cedar.name=Вешалка для инструментов из белого кедра
+tile.Toolrack.White Elm.name=Вешалка для инструментов из белого вяза
+tile.Toolrack.Willow.name=Ивовая вешалка для инструментов
+
+#=======================
+#= Tools/Weapons/Armor =
+#=======================
+
+#== Stone Heads ==
+item.Stone Hammer Head.name=Каменная голова молота
+item.Stone Knife Blade.name=Каменное лезвие ножа
+
+item.IgIn Stone Axe Head.name=Каменное лезвие топора
+item.IgIn Stone Chisel Head.name=Каменное лезвие зубила
+item.IgIn Stone Hoe Head.name=Каменное лезвие мотыги
+item.IgIn Stone Javelin Head.name=Каменный наконечник копья
+item.IgIn Stone Shovel Head.name=Каменное лезвие лопаты
+
+item.Sed Stone Axe Head.name=Каменное лезвие топора
+item.Sed Stone Chisel Head.name=Каменное лезвие зубила
+item.Sed Stone Hoe Head.name=Каменное лезвие мотыги
+item.Sed Stone Javelin Head.name=Каменный наконечник копья
+item.Sed Stone Shovel Head.name=Каменное лезвие лопаты
+
+item.IgEx Stone Axe Head.name=Каменное лезвие топора
+item.IgEx Stone Chisel Head.name=Каменное лезвие зубила
+item.IgEx Stone Hoe Head.name=Каменное лезвие мотыги
+item.IgEx Stone Javelin Head.name=Каменный наконечник копья
+item.IgEx Stone Shovel Head.name=Каменное лезвие лопаты
+
+item.MM Stone Axe Head.name=Каменное лезвие топора
+item.MM Stone Chisel Head.name=Каменное лезвие зубила
+item.MM Stone Hoe Head.name=Каменное лезвие мотыги
+item.MM Stone Javelin Head.name=Каменный наконечник копья
+item.MM Stone Shovel Head.name=Каменное лезвие лопаты
+
+#== Stone Tools ==
+item.Stone Axe.name=Каменный топор
+item.IgIn Stone Axe.name=Каменный топор
+item.Sed Stone Axe.name=Каменный топор
+item.IgEx Stone Axe.name=Каменный топор
+item.MM Stone Axe.name=Каменный топор
+
+item.Stone Chisel.name=Каменное зубило
+
+item.Stone Hammer.name=Каменный молот
+
+item.Stone Hoe.name=Каменная мотыга
+item.IgIn Stone Hoe.name=Каменная мотыга
+item.Sed Stone Hoe.name=Каменная мотыга
+item.IgEx Stone Hoe.name=Каменная мотыга
+item.MM Stone Hoe.name=Каменная мотыга
+
+item.Stone Javelin.name=Каменное копье
+item.IgIn Stone Javelin.name=Каменное копье
+item.Sed Stone Javelin.name=Каменное копье
+item.IgEx Stone Javelin.name=Каменное копье
+item.MM Stone Javelin.name=Каменное копье
+
+item.Stone Knife.name=Каменный нож
+
+item.Stone Shovel.name=Каменная лопата
+item.IgIn Stone Shovel.name=Каменная лопата
+item.Sed Stone Shovel.name=Каменная лопата
+item.IgEx Stone Shovel.name=Каменная лопата
+item.MM Stone Shovel.name=Каменная лопата
+
+#== Metal Heads ==
+#=== Axe Head ===
+item.Bismuth Bronze Axe Head.name=Лезвие топора висмутовой бронзы
+item.Black Bronze Axe Head.name=Лезвие топора чёрной бронзы
+item.Black Steel Axe Head.name=Лезвие топора чёрной стали
+item.Blue Steel Axe Head.name=Лезвие топора синей стали
+item.Bronze Axe Head.name=Бронзовое лезвие топора
+item.Copper Axe Head.name=Медное лезвие топора
+item.Red Steel Axe Head.name=Лезвие топора красной стали
+item.Steel Axe Head.name=Стальное лезвие топора
+item.Wrought Iron Axe Head.name=Лезвие топора кованого железа
+
+#=== Chisel Head ===
+item.Bismuth Bronze Chisel Head.name=Лезвие зубила висмутовой бронзы
+item.Black Bronze Chisel Head.name=Лезвие зубила чёрной бронзы
+item.Black Steel Chisel Head.name=Лезвие зубила чёрной стали
+item.Blue Steel Chisel Head.name=Лезвие зубила синей стали
+item.Bronze Chisel Head.name=Бронзовое лезвие зубила
+item.Copper Chisel Head.name=Медное лезвие зубила
+item.Red Steel Chisel Head.name=Лезвие зубила красной стали
+item.Steel Chisel Head.name=Стальное лезвие зубила
+item.Wrought Iron Chisel Head.name=Лезвие зубила кованого железа
+
+#=== Hammer Head ===
+item.Bismuth Bronze Hammer Head.name=Голова молота висмутовой бронзы
+item.Black Bronze Hammer Head.name=Голова молота чёрной бронзы
+item.Black Steel Hammer Head.name=Голова молота чёрной стали
+item.Blue Steel Hammer Head.name=Голова молота синей стали
+item.Bronze Hammer Head.name=Бронзовая голова молота
+item.Copper Hammer Head.name=Медная голова молота
+item.Red Steel Hammer Head.name=Голова молота красной стали
+item.Steel Hammer Head.name=Стальная голова молота
+item.Wrought Iron Hammer Head.name=Голова молота кованого железа
+
+#=== Hoe Head ===
+item.Bismuth Bronze Hoe Head.name=Лезвие мотыги висмутовой бронзы
+item.Black Bronze Hoe Head.name=Лезвие мотыги чёрной бронзы
+item.Black Steel Hoe Head.name=Лезвие мотыги чёрной стали
+item.Blue Steel Hoe Head.name=Лезвие мотыги синей стали
+item.Bronze Hoe Head.name=Бронзовое лезвие мотыги
+item.Copper Hoe Head.name=Медное лезвие мотыги
+item.Red Steel Hoe Head.name=Лезвие мотыги красной стали
+item.Steel Hoe Head.name=Стальное лезвие мотыги
+item.Wrought Iron Hoe Head.name=Лезвие мотыги кованого железа
+
+#=== Javelin Head ===
+item.Bismuth Bronze Javelin Head.name=Наконечник копья висмутовой бронзы
+item.Black Bronze Javelin Head.name=Наконечник копья черной бронзы
+item.Black Steel Javelin Head.name=Наконечник копья черной стали
+item.Blue Steel Javelin Head.name=Наконечник копья синей стали
+item.Bronze Javelin Head.name=Бронзовый наконечник копья
+item.Copper Javelin Head.name=Медный наконечник копья
+item.Red Steel Javelin Head.name=Наконечник копья красной стали
+item.Steel Javelin Head.name=Стальной наконечник копья
+item.Wrought Iron Javelin Head.name=Наконечник копья кованого железа
+
+#=== Knife Blade ===
+item.Bismuth Bronze Knife Blade.name=Лезвие ножа висмутовой бронзы
+item.Black Bronze Knife Blade.name=Лезвие ножа чёрной бронзы
+item.Black Steel Knife Blade.name=Лезвие ножа чёрной стали
+item.Blue Steel Knife Blade.name=Лезвие ножа синей стали
+item.Bronze Knife Blade.name=Бронзовое лезвие ножа
+item.Copper Knife Blade.name=Медное лезвие ножа
+item.Red Steel Knife Blade.name=Лезвие ножа красной стали
+item.Steel Knife Blade.name=Стальное лезвие ножа
+item.Wrought Iron Knife Blade.name=Лезвие ножа кованого железа
+
+#=== Mace Head ===
+item.Bismuth Bronze Mace Head.name=Голова булавы висмутовой бронзы
+item.Black Bronze Mace Head.name=Голова булавы чёрной бронзы
+item.Black Steel Mace Head.name=Голова булавы чёрной стали
+item.Blue Steel Mace Head.name=Голова булавы синей стали
+item.Bronze Mace Head.name=Бронзовая голова булавы
+item.Copper Mace Head.name=Медная голова булавы
+item.Red Steel Mace Head.name=Голова булавы красной стали
+item.Steel Mace Head.name=Стальная голова булавы
+item.Wrought Iron Mace Head.name=Голова булавы кованого железа
+
+#=== Pickaxe Head ===
+item.Bismuth Bronze Pick Head.name=Лезвие кирки висмутовой бронзы
+item.Black Bronze Pick Head.name=Лезвие кирки чёрной бронзы
+item.Black Steel Pick Head.name=Лезвие кирки чёрной стали
+item.Blue Steel Pick Head.name=Лезвие кирки синей стали
+item.Bronze Pick Head.name=Бронзовое лезвие кирки
+item.Copper Pick Head.name=Медное лезвие кирки
+item.Red Steel Pick Head.name=Лезвие кирки красной стали
+item.Steel Pick Head.name=Стальное лезвие кирки
+item.Wrought Iron Pick Head.name=Лезвие кирки кованого железа
+
+#=== Prospector's Pick Head ===
+item.Bismuth Bronze ProPick Head.name=Лезвие геологического молотка висмутовой бронзы
+item.Black Bronze ProPick Head.name=Лезвие геологического молотка чёрной бронзы
+item.Black Steel ProPick Head.name=Лезвие геологического молотка чёрной стали
+item.Blue Steel ProPick Head.name=Лезвие геологического молотка синей стали
+item.Bronze ProPick Head.name=Бронзовое лезвие геологического молотка
+item.Copper ProPick Head.name=Медное лезвие геологического молотка
+item.Red Steel ProPick Head.name=Лезвие геологического молотка красной стали
+item.Steel ProPick Head.name=Стальное лезвие геологического молотка
+item.Wrought Iron ProPick Head.name=Лезвие геологического молотка кованого железа
+
+#=== Saw Blade ===
+item.Bismuth Bronze Saw Blade.name=Лезвие пилы висмутовой бронзы
+item.Black Bronze Saw Blade.name=Лезвие пилы чёрной бронзы
+item.Black Steel Saw Blade.name=Лезвие пилы чёрной стали
+item.Blue Steel Saw Blade.name=Лезвие пилы синей стали
+item.Bronze Saw Blade.name=Бронзовое лезвие пилы
+item.Copper Saw Blade.name=Медное лезвие пилы
+item.Red Steel Saw Blade.name=Лезвие пилы красной стали
+item.Steel Saw Blade.name=Стальное лезвие пилы
+item.Wrought Iron Saw Blade.name=Лезвие пилы кованого железа
+
+#=== Scythe Blade ===
+item.Bismuth Bronze Scythe Blade.name=Лезвие косы висмутовой бронзы
+item.Black Bronze Scythe Blade.name=Лезвие косы чёрной бронзы
+item.Black Steel Scythe Blade.name=Лезвие косы чёрной стали
+item.Blue Steel Scythe Blade.name=Лезвие косы синей стали
+item.Bronze Scythe Blade.name=Бронзовое лезвие косы
+item.Copper Scythe Blade.name=Медное лезвие косы
+item.Red Steel Scythe Blade.name=Лезвие косы красной стали
+item.Steel Scythe Blade.name=Стальное лезвие косы
+item.Wrought Iron Scythe Blade.name=Лезвие косы кованого железа
+
+#=== Shovel Head ===
+item.Bismuth Bronze Shovel Head.name=Лезвие лопаты висмутовой бронзы
+item.Black Bronze Shovel Head.name=Лезвие лопаты чёрной бронзы
+item.Black Steel Shovel Head.name=Лезвие лопаты чёрной стали
+item.Blue Steel Shovel Head.name=Лезвие лопаты синей стали
+item.Bronze Shovel Head.name=Бронзовое лезвие лопаты
+item.Copper Shovel Head.name=Медное лезвие лопаты
+item.Red Steel Shovel Head.name=Лезвие лопаты красной стали
+item.Steel Shovel Head.name=Стальное лезвие лопаты
+item.Wrought Iron Shovel Head.name=Лезвие лопаты кованого железа
+
+#=== Sword Blade ===
+item.Bismuth Bronze Sword Blade.name=Клинок висмутовой бронзы
+item.Black Bronze Sword Blade.name=Клинок чёрной бронзы
+item.Black Steel Sword Blade.name=Клинок чёрной стали
+item.Blue Steel Sword Blade.name=Клинок синей стали
+item.Bronze Sword Blade.name=Бронзовый клинок
+item.Copper Sword Blade.name=Медный клинок
+item.Red Steel Sword Blade.name=Клинок красной стали
+item.Steel Sword Blade.name=Стальной клинок
+item.Wrought Iron Sword Blade.name=Клинок кованого железа
+
+#== Metal Tools ==
+#=== Axe ===
+item.Bismuth Bronze Axe.name=Топор висмутовой бронзы
+item.Black Bronze Axe.name=Топор чёрной бронзы
+item.Black Steel Axe.name=Топор чёрной стали
+item.Blue Steel Axe.name=Топор синей стали
+item.Bronze Axe.name=Бронзовый топор
+item.Copper Axe.name=Медный топор
+item.Red Steel Axe.name=Топор красной стали
+item.Steel Axe.name=Стальной топор
+item.Wrought Iron Axe.name=Топор кованого железа
+
+#=== Chisel ===
+item.Bismuth Bronze Chisel.name=Зубило висмутовой бронзы
+item.Black Bronze Chisel.name=Зубило чёрной бронзы
+item.Black Steel Chisel.name=Зубило чёрной стали
+item.Blue Steel Chisel.name=Зубило синей стали
+item.Bronze Chisel.name=Бронзовое зубило
+item.Copper Chisel.name=Медное зубило
+item.Red Steel Chisel.name=Зубило красной стали
+item.Steel Chisel.name=Стальное зубило
+item.Wrought Iron Chisel.name=Зубило кованого железа
+
+#=== Hammer ===
+item.Bismuth Bronze Hammer.name=Молот висмутовой бронзы
+item.Black Bronze Hammer.name=Молот чёрной бронзы
+item.Black Steel Hammer.name=Молот чёрной стали
+item.Blue Steel Hammer.name=Молот синей стали
+item.Bronze Hammer.name=Бронзовый молот
+item.Copper Hammer.name=Медный молот
+item.Red Steel Hammer.name=Молот красной стали
+item.Steel Hammer.name=Стальной молот
+item.Wrought Iron Hammer.name=Молот кованого железа
+
+#=== Hoe ===
+item.Bismuth Bronze Hoe.name=Мотыга висмутовой бронзы
+item.Black Bronze Hoe.name=Мотыга чёрной бронзы
+item.Black Steel Hoe.name=Мотыга чёрной стали
+item.Blue Steel Hoe.name=Мотыга синей стали
+item.Bronze Hoe.name=Бронзовая мотыга
+item.Copper Hoe.name=Медная мотыга
+item.Red Steel Hoe.name=Мотыга красной стали
+item.Steel Hoe.name=Стальная мотыга
+item.Wrought Iron Hoe.name=Мотыга кованого железа
+
+#=== Javelin ===
+item.Bismuth Bronze Javelin.name=Копье висмутовой бронзы
+item.Black Bronze Javelin.name=Копье черной бронзы
+item.Black Steel Javelin.name=Копье черной стали
+item.Blue Steel Javelin.name=Копье синей стали
+item.Bronze Javelin.name=Бронзовое копье
+item.Copper Javelin.name=Медное копье
+item.Red Steel Javelin.name=Копье красной стали
+item.Steel Javelin.name=Стальное копье
+item.Wrought Iron Javelin.name=Копье кованого железа
+
+#=== Knife ===
+item.Bismuth Bronze Knife.name=Нож висмутовой бронзы
+item.Black Bronze Knife.name=Нож чёрной бронзы
+item.Black Steel Knife.name=Нож чёрной стали
+item.Blue Steel Knife.name=Нож синей стали
+item.Bronze Knife.name=Бронзовый нож
+item.Copper Knife.name=Медный нож
+item.Red Steel Knife.name=Нож красной стали
+item.Steel Knife.name=Стальной нож
+item.Wrought Iron Knife.name=Нож кованого железа
+
+#=== Mace ===
+item.Bismuth Bronze Mace.name=Булава висмутовой бронзы
+item.Black Bronze Mace.name=Булава чёрной бронзы
+item.Black Steel Mace.name=Булава чёрной стали
+item.Blue Steel Mace.name=Булава синей стали
+item.Bronze Mace.name=Бронзовая булава
+item.Copper Mace.name=Медная булава
+item.Red Steel Mace.name=Булава красной стали
+item.Steel Mace.name=Стальная булава
+item.Wrought Iron Mace.name=Булава кованого железа
+
+#=== Pickaxe ===
+item.Bismuth Bronze Pick.name=Кирка висмутовой бронзы
+item.Black Bronze Pick.name=Кирка чёрной бронзы
+item.Black Steel Pick.name=Кирка чёрной стали
+item.Blue Steel Pick.name=Кирка синей стали
+item.Bronze Pick.name=Бронзовая кирка
+item.Copper Pick.name=Медная кирка
+item.Red Steel Pick.name=Кирка красной стали
+item.Steel Pick.name=Стальная кирка
+item.Wrought Iron Pick.name=Кирка кованого железа
+
+#=== Prospector's Pick ===
+item.Bismuth Bronze ProPick.name=Геологический молоток висмутовой бронзы
+item.Black Bronze ProPick.name=Геологический молоток чёрной бронзы
+item.Black Steel ProPick.name=Геологический молоток чёрной стали
+item.Blue Steel ProPick.name=Геологический молоток синей стали
+item.Bronze ProPick.name=Бронзовый геологический молоток
+item.Copper ProPick.name=Медный геологический молоток
+item.Red Steel ProPick.name=Геологический молоток красной стали
+item.Steel ProPick.name=Стальной геологический молоток
+item.Wrought Iron ProPick.name=Геологический молоток кованого железа
+
+#=== Saw ===
+item.Bismuth Bronze Saw.name=Пила висмутовой бронзы
+item.Black Bronze Saw.name=Пила чёрной бронзы
+item.Black Steel Saw.name=Пила чёрной стали
+item.Blue Steel Saw.name=Пила синей стали
+item.Bronze Saw.name=Бронзовая пила
+item.Copper Saw.name=Медная пила
+item.Red Steel Saw.name=Пила красной стали
+item.Steel Saw.name=Стальная пила
+item.Wrought Iron Saw.name=Пила кованого железа
+
+#=== Scythe ===
+item.Bismuth Bronze Scythe.name=Коса висмутовой бронзы
+item.Black Bronze Scythe.name=Коса чёрной бронзы
+item.Black Steel Scythe.name=Коса чёрной стали
+item.Blue Steel Scythe.name=Коса синей стали
+item.Bronze Scythe.name=Бронзовая коса
+item.Copper Scythe.name=Медная коса
+item.Red Steel Scythe.name=Коса красной стали
+item.Steel Scythe.name=Стальная коса
+item.Wrought Iron Scythe.name=Коса кованого железа
+
+#=== Shovel ===
+item.Bismuth Bronze Shovel.name=Лопата висмутовой бронзы
+item.Black Bronze Shovel.name=Лопата чёрной бронзы
+item.Black Steel Shovel.name=Лопата чёрной стали
+item.Blue Steel Shovel.name=Лопата синей стали
+item.Bronze Shovel.name=Бронзовая лопата
+item.Copper Shovel.name=Медная лопата
+item.Red Steel Shovel.name=Лопата красной стали
+item.Steel Shovel.name=Стальная лопата
+item.Wrought Iron Shovel.name=Лопата кованого железа
+
+#=== Sword ===
+item.Bismuth Bronze Sword.name=Меч висмутовой бронзы
+item.Black Bronze Sword.name=Меч чёрной бронзы
+item.Black Steel Sword.name=Меч чёрной стали
+item.Blue Steel Sword.name=Меч синей стали
+item.Bronze Sword.name=Бронзовый меч
+item.Copper Sword.name=Медный меч
+item.Red Steel Sword.name=Меч красной стали
+item.Steel Sword.name=Стальной меч
+item.Wrought Iron Sword.name=Меч кованого железа
+
+#=== Tuyere ===
+item.Bismuth Bronze Tuyere.name=Фурма висмутовой бронзы
+item.Black Bronze Tuyere.name=Фурма чёрной бронзы
+item.Black Steel Tuyere.name=Фурма чёрной стали
+item.Blue Steel Tuyere.name=Фурма синей стали
+item.Bronze Tuyere.name=Бронзовая фурма
+item.Copper Tuyere.name=Медная фурма
+item.Red Steel Tuyere.name=Фурма красной стали
+item.Steel Tuyere.name=Стальная фурма
+item.Wrought Iron Tuyere.name=Фурма кованого железа
+
+#== Armor ==
+#=== Helmet ===
+item.Bismuth Bronze Unfinished Helmet.name=Недоделанный шлем висмутовой бронзы
+item.Black Bronze Unfinished Helmet.name=Недоделанный шлем чёрной бронзы
+item.Black Steel Unfinished Helmet.name=Недоделанный шлем чёрной стали
+item.Blue Steel Unfinished Helmet.name=Недоделанный шлем синей стали
+item.Bronze Unfinished Helmet.name=Недоделанный бронзовый шлем
+item.Copper Unfinished Helmet.name=Недоделанный медный шлем
+item.Red Steel Unfinished Helmet.name=Недоделанный шлем красной стали
+item.Steel Unfinished Helmet.name=Недоделанный стальной шлем
+item.Wrought Iron Unfinished Helmet.name=Недоделанный шлем кованого железа
+item.Bismuth Bronze Helmet.name=Шлем висмутовой бронзы
+item.Black Bronze Helmet.name=Шлем чёрной бронзы
+item.Black Steel Helmet.name=Шлем чёрной стали
+item.Blue Steel Helmet.name=Шлем синей стали
+item.Bronze Helmet.name=Бронзовый шлем
+item.Copper Helmet.name=Медный шлем
+item.Red Steel Helmet.name=Шлем красной стали
+item.Steel Helmet.name=Стальной шлем
+item.Wrought Iron Helmet.name=Шлем кованого железа
+item.helmetCloth.name=Кожаная шапка
+
+#=== Chestplate ===
+item.Bismuth Bronze Unfinished Chestplate.name=Недоделанный нагрудник висмутовой бронзы
+item.Black Bronze Unfinished Chestplate.name=Недоделанный нагрудник чёрной бронзы
+item.Black Steel Unfinished Chestplate.name=Недоделанный нагрудник чёрной стали
+item.Blue Steel Unfinished Chestplate.name=Недоделанный нагрудник синей стали
+item.Bronze Unfinished Chestplate.name=Недоделанный бронзовый нагрудник
+item.Copper Unfinished Chestplate.name=Недоделанный медный нагрудник
+item.Red Steel Unfinished Chestplate.name=Недоделанный нагрудник красной стали
+item.Steel Unfinished Chestplate.name=Недоделанный стальной нагрудник
+item.Wrought Iron Unfinished Chestplate.name=Недоделанный нагрудник кованого железа
+item.Bismuth Bronze Chestplate.name=Нагрудник висмутовой бронзы
+item.Black Bronze Chestplate.name=Нагрудник чёрной бронзы
+item.Black Steel Chestplate.name=Нагрудник чёрной стали
+item.Blue Steel Chestplate.name=Нагрудник синей стали
+item.Bronze Chestplate.name=Бронзовый нагрудник
+item.Copper Chestplate.name=Медный нагрудник
+item.Red Steel Chestplate.name=Нагрудник красной стали
+item.Steel Chestplate.name=Стальной нагрудник
+item.Wrought Iron Chestplate.name=Нагрудник кованого железа
+item.chestplateCloth.name=Кожаная куртка
+
+#=== Greaves ===
+item.Bismuth Bronze Unfinished Greaves.name=Недоделанные поножи висмутовой бронзы
+item.Black Bronze Unfinished Greaves.name=Недоделанные поножи чёрной бронзы
+item.Black Steel Unfinished Greaves.name=Недоделанные поножи чёрной стали
+item.Blue Steel Unfinished Greaves.name=Недоделанные поножи синей стали
+item.Bronze Unfinished Greaves.name=Недоделанные бронзовые поножи
+item.Copper Unfinished Greaves.name=Недоделанные медные поножи
+item.Red Steel Unfinished Greaves.name=Недоделанные поножи красной стали
+item.Steel Unfinished Greaves.name=Недоделанные стальные поножи
+item.Wrought Iron Unfinished Greaves.name=Недоделанные поножи кованого железа
+item.Bismuth Bronze Greaves.name=Поножи висмутовой бронзы
+item.Black Bronze Greaves.name=Поножи чёрной бронзы
+item.Black Steel Greaves.name=Поножи чёрной стали
+item.Blue Steel Greaves.name=Поножи синей стали
+item.Bronze Greaves.name=Бронзовые поножи
+item.Copper Greaves.name=Медные поножи
+item.Red Steel Greaves.name=Поножи красной стали
+item.Steel Greaves.name=Стальные поножи
+item.Wrought Iron Greaves.name=Поножи кованого железа
+item.leggingsCloth.name=Кожаные штаны
+
+#=== Boots ===
+item.Bismuth Bronze Unfinished Boots.name=Недоделанные сапоги висмутовой бронзы
+item.Black Bronze Unfinished Boots.name=Недоделанные сапоги чёрной бронзы
+item.Black Steel Unfinished Boots.name=Недоделанные сапоги чёрной стали
+item.Blue Steel Unfinished Boots.name=Недоделанные сапоги синей стали
+item.Bronze Unfinished Boots.name=Недоделанные бронзовые сапоги
+item.Copper Unfinished Boots.name=Недоделанные медные сапоги
+item.Red Steel Unfinished Boots.name=Недоделанные сапоги красной стали
+item.Steel Unfinished Boots.name=Недоделанные стальные сапоги
+item.Wrought Iron Unfinished Boots.name=Недоделанные сапоги кованого железа
+item.Bismuth Bronze Boots.name=Сапоги висмутовой бронзы
+item.Black Bronze Boots.name=Сапоги чёрной бронзы
+item.Black Steel Boots.name=Сапоги чёрной стали
+item.Blue Steel Boots.name=Сапоги синей стали
+item.Bronze Boots.name=Бронзовые сапоги
+item.Copper Boots.name=Медные сапоги
+item.Red Steel Boots.name=Сапоги красной стали
+item.Steel Boots.name=Стальные сапоги
+item.Wrought Iron Boots.name=Сапоги кованого железа
+item.bootsCloth.name=Кожаные сапоги
+
+#==========
+#= Metals =
+#==========
+item.Iron Bloom.name=Кричное железо
+item.Raw Iron Bloom.name=Крица
+tile.Bloom.name=Крица
+
+#== Unshaped ==
+item.Bismuth Bronze Unshaped.name=Заготовка висмутовой бронзы
+item.Bismuth Unshaped.name=Висмутовая заготовка
+item.Black Bronze Unshaped.name=Заготовка чёрной бронзы
+item.Black Steel Unshaped.name=Заготовка чёрной стали
+item.Blue Steel Unshaped.name=Заготовка синей стали
+item.Brass Unshaped.name=Латунная заготовка
+item.Bronze Unshaped.name=Бронзовая заготовка
+item.Copper Unshaped.name=Медная заготовка
+item.Gold Unshaped.name=Золотая заготовка
+item.HC Black Steel Unshaped.name=Заготовка высокоуглеродистой чёрной стали
+item.HC Blue Steel Unshaped.name=Заготовка высокоуглеродистой синей стали
+item.HC Red Steel Unshaped.name=Заготовка высокоуглеродистой красной стали
+item.HC Steel Unshaped.name=Заготовка высокоуглеродистой стали
+item.Lead Unshaped.name=Свинцовая заготовка
+item.Nickel Unshaped.name=Никелевая заготовка
+item.Pig Iron Unshaped.name=Чугунная заготовка
+item.Platinum Unshaped.name=Платиновая заготовка
+item.Red Steel Unshaped.name=Заготовка красной стали
+item.Rose Gold Unshaped.name=Заготовка розового золота
+item.Silver Unshaped.name=Серебряная заготовка
+item.Steel Unshaped.name=Стальная заготовка
+item.Sterling Silver Unshaped.name=Стерлинговая заготовка
+item.Tin Unshaped.name=Оловянная заготовка
+item.Unknown Unshaped.name=Заготовка неивестного металла
+item.Weak Blue Steel Unshaped.name=Заготовка сырой синей стали
+item.Weak Red Steel Unshaped.name=Заготовка сырой красной стали
+item.Weak Steel Unshaped.name=Заготовка сырой стали
+item.Wrought Iron Unshaped.name=Заготовка кованого железа
+item.Zinc Unshaped.name=Цинковая заготовка
+
+#== Ingot ==
+item.Bismuth Bronze Ingot.name=Слиток висмутовой бронзы
+item.Bismuth Ingot.name=Висмутовый слиток
+item.Black Bronze Ingot.name=Слиток чёрной бронзы
+item.Black Steel Ingot.name=Слиток чёрной стали
+item.Blue Steel Ingot.name=Слиток синей стали
+item.Brass Ingot.name=Латунный слиток
+item.Bronze Ingot.name=Бронзовый слиток
+item.Copper Ingot.name=Медный слиток
+item.Gold Ingot.name=Золотой слиток
+item.HC Black Steel Ingot.name=Слиток высокоуглеродистой чёрной стали
+item.HC Blue Steel Ingot.name=Слиток высокоуглеродистой синей стали
+item.HC Red Steel Ingot.name=Слиток высокоуглеродистой красной стали
+item.HC Steel Ingot.name=Слиток высокоуглеродитсой стали
+item.Lead Ingot.name=Свинцовый слиток
+item.Nickel Ingot.name=Никелевый слиток
+item.Pig Iron Ingot.name=Чугунный слиток
+item.Platinum Ingot.name=Платиновый слиток
+item.Red Steel Ingot.name=Слиток красной стали
+item.Rose Gold Ingot.name=Слиток розового золота
+item.Silver Ingot.name=Серебряный слиток
+item.Steel Ingot.name=Стальной слиток
+item.Sterling Silver Ingot.name=Стерлинговый слиток
+item.Tin Ingot.name=Оловянный слиток
+item.Unknown Ingot.name=Слиток неизвестного металла
+item.Weak Blue Steel Ingot.name=Слиток сырой синей стали
+item.Weak Red Steel Ingot.name=Слиток сырой красной стали
+item.Weak Steel Ingot.name=Слиток сырой стали
+item.Wrought Iron Ingot.name=Слиток кованого железа
+item.Zinc Ingot.name=Цинковый слиток
+
+#== Double Ingot ==
+item.Bismuth Bronze Double Ingot.name=Двойной слиток висмутовой бронзы
+item.Bismuth Double Ingot.name=Двойной слиток висмута
+item.Black Bronze Double Ingot.name=Двойной слиток чёрной бронзы
+item.Black Steel Double Ingot.name=Двойной слиток чёрной стали
+item.Blue Steel Double Ingot.name=Двойной слиток синей стали
+item.Brass Double Ingot.name=Двойной слиток латуни
+item.Bronze Double Ingot.name=Двойной слиток бронзы
+item.Copper Double Ingot.name=Двойной слиток меди
+item.Gold Double Ingot.name=Двойной слиток золота
+item.Lead Double Ingot.name=Двойной слиток свинца
+item.Nickel Double Ingot.name=Двойной слиток никеля
+item.Pig Iron Double Ingot.name=Двойной чугунный слиток
+item.Platinum Double Ingot.name=Двойной слиток платины
+item.Red Steel Double Ingot.name=Двойной слиток красной стали
+item.Rose Gold Double Ingot.name=Двойной слиток розового золота
+item.Silver Double Ingot.name=Двойной слиток серебра
+item.Steel Double Ingot.name=Двойной слиток стали
+item.Sterling Silver Double Ingot.name=Двойной слиток стерлинга
+item.Tin Double Ingot.name=Двойной слиток олова
+item.Wrought Iron Double Ingot.name=Двойной слиток кованого железа
+item.Zinc Double Ingot.name=Двойной слиток цинка
+
+#== Sheet ==
+item.Bismuth Bronze Sheet.name=Лист висмутовой бронзы
+item.Bismuth Sheet.name=Лист висмута
+item.Black Bronze Sheet.name=Лист чёрной бронзы
+item.Black Steel Sheet.name=Лист чёрной стали
+item.Blue Steel Sheet.name=Лист синей стали
+item.Brass Sheet.name=Лист латуни
+item.Bronze Sheet.name=Лист бронзы
+item.Copper Sheet.name=Лист меди
+item.Gold Sheet.name=Лист золота
+item.Lead Sheet.name=Лист свинца
+item.Nickel Sheet.name=Лист никеля
+item.Pig Iron Sheet.name=Лист чугуна
+item.Platinum Sheet.name=Лист платины
+item.Red Steel Sheet.name=Лист красной стали
+item.Rose Gold Sheet.name=Лист розового золота
+item.Silver Sheet.name=Лист серебра
+item.Steel Sheet.name=Лист стали
+item.Sterling Silver Sheet.name=Лист стерлинга
+item.Tin Sheet.name=Лист олова
+item.Wrought Iron Sheet.name=Лист кованого железа
+item.Zinc Sheet.name=Лист цинка
+
+#== DoubleSheet ==
+item.Bismuth Bronze Double Sheet.name=Двойной лист висмутовой бронзы
+item.Bismuth Double Sheet.name=Двойной лист висмута
+item.Black Bronze Double Sheet.name=Двойной лист чёрной бронзы
+item.Black Steel Double Sheet.name=Двойной лист чёрной ствали
+item.Blue Steel Double Sheet.name=Двойной лист синей стали
+item.Brass Double Sheet.name=Двойной лист латуни
+item.Bronze Double Sheet.name=Двойной лист бронзы
+item.Copper Double Sheet.name=Двойной лист меди
+item.Gold Double Sheet.name=Двойной лист золота
+item.Lead Double Sheet.name=Двойной лист свинца
+item.Nickel Double Sheet.name=Двойной лист никеля
+item.Pig Iron Double Sheet.name=Двойной лист чугуна
+item.Platinum Double Sheet.name=Двойной лист платины
+item.Red Steel Double Sheet.name=Двойной лист красной стали
+item.Rose Gold Double Sheet.name=Двойной лист розового золота
+item.Silver Double Sheet.name=Двойной лист серебра
+item.Steel Double Sheet.name=Двойной лист стали
+item.Sterling Silver Double Sheet.name=Двойной лист стерлинга
+item.Tin Double Sheet.name=Двойной лист олова
+item.Wrought Iron Double Sheet.name=Двойной лист кованого железа
+item.Zinc Double Sheet.name=Двойной лист цинка
+
+#===========
+#= Devices =
+#===========
+tile.Bellows.name=Мехи
+tile.Forge.name=Печь
+tile.BlastFurnace.name=Домна
+tile.SpawnMeter.name=Монстрометр
+tile.Quern.name=Нижний жёрнов
+tile.EarlyBloomery.name=Сыродутный горн
+tile.Crucible.name=Тигель
+tile.NestBox.name=Насест
+item.SluiceItem.name=Рудопромывочный жёлоб
+tile.LeatherRack.name=Рама для сушки кожи
+
+#== Anvils ==
+tile.Anvil.Stone.name=Каменная наковальня
+tile.Anvil.Bismuth.name=Висмутовая наковальня
+tile.Anvil2.Bismuth Bronze.name=Наковальня висмутовой бронзы
+tile.Anvil2.Black Bronze.name=Наковальня чёрной бронзы
+tile.Anvil.Black Steel.name=Наковальня чёрной стали
+tile.Anvil.Blue Steel.name=Наковальня синей стали
+tile.Anvil.Bronze.name=Бронзовая наковальня
+tile.Anvil.Copper.name=Медная наковальня
+tile.Anvil.Red Steel.name=Наковальня красной стали
+tile.Anvil2.Rose Gold.name=Наковальня розового золота
+tile.Anvil.Steel.name=Стальная наковальня
+tile.Anvil.Tin.name=Оловянная наковальня
+tile.Anvil.Wrought Iron.name=Наковальня кованого железа
+tile.Anvil.Zinc.name=Цинковая наковальня
+
+#==================
+#= Terrain Blocks =
+#==================
+tile.Grass.name=Трава
+tile.DryGrass.name=Сухая трава
+tile.PeatGrass.name=Трава на торфе
+tile.ClayGrass.name=Трава на глине
+tile.dirt.name=Земля
+tile.sand.name=Песок
+tile.Peat.name=Торф
+tile.tilledSoil.name=Грядка
+tile.LooseRock.name=Мусор
+tile.Ice.name=Лёд
+
+#=================
+#= Miscellaneous =
+#=================
+#== Misc Items ==
+item.arrow.name=Стрела
+item.book.name=Книга
+item.stick.name=Палка
+item.coal.coal.name=Уголь
+item.coal.charcoal.name=Древесный уголь
+item.Fertilizer.name=Удобрение
+item.Reeds.name=Тростник
+
+item.Wooden Bucket Empty.name=Деревянное ведро (пусто)
+item.Wooden Bucket Water.name=Деревянное ведро (пресная вода)
+item.Wooden Bucket Salt Water.name=Деревянное ведро (солёная вода)
+item.Wooden Bucket Milk.name=Деревянное ведро (молоко)
+item.Lime Water.name=Деревянное ведро (известковое молоко)
+
+item.Red Steel Bucket Empty.name=Ведро красной стали (пусто)
+item.Red Steel Bucket Water.name=Ведро красной стали (пресная вода)
+item.Red Steel Bucket Salt Water.name=Ведро красной стали (солёная вода)
+item.Blue Steel Bucket Empty.name=Ведро синей стали (пусто)
+item.Blue Steel Bucket Lava.name=Ведро синей стали (лава)
+
+item.GoldPan.name=Промывочная миска
+item.Gold Pan.Sand.name=Промывочная миска с песком
+item.Gold Pan.Gravel.name=Промывочная миска с гравием
+item.Gold Pan.Clay.name=Промывочная миска с глиной
+item.Gold Pan.Dirt.name=Промывочная миска с землёй
+item.Ink.name=Чернила
+item.Firestarter.name=Огниво
+
+item.Quern.name=Верхний жёрнов
+item.Blueprint.name=Чертёж
+item.Nametag.name=Бирка
+item.WoolYarn.name=Шерстяная нить
+item.Wool.name=Шерсть
+item.WoolCloth.name=Шерстяное полотно
+item.SilkCloth.name=Шёлковое полотно
+item.BurlapCloth.name=Джутовое полотно
+item.Mortar.name=Раствор
+item.Vinegar.name=Уксус
+
+item.Hide.small.name=Свежая шкура (мелкая)
+item.Hide.medium.name=Свежая шкура (средняя)
+item.Hide.large.name=Свежая шкура (крупная)
+item.Soaked Hide.small.name=Отмоченная шкура (мелкая)
+item.Soaked Hide.medium.name=Отмоченная шкура (средняя)
+item.Soaked Hide.large.name=Отмоченная шкура (крупная)
+item.Scraped Hide.small.name=Гольё (мелкое)
+item.Scraped Hide.medium.name=Гольё (средное)
+item.Scraped Hide.large.name=Гольё (крупное)
+item.Prep Hide.small.name=Мягчёное гольё (мелкое)
+item.Prep Hide.medium.name=Мягчёное гольё (средное)
+item.Prep Hide.large.name=Мягчёное гольё (крупное)
+item.Sheep Skin.small.name=Овечья шкура (мелкая)
+item.Sheep Skin.medium.name=Овечья шкура (средняя)
+item.Sheep Skin.large.name=Овечья шкура (крупная)
+item.TFC Leather.name=Кожа
+item.Flat Leather.name=Кожа
+item.leather.name=Кожа
+
+item.minecartChest.name=Вагонетка с сундуком
+item.fishingRod.name=Удочка
+
+item.Quiver.name=Колчан
+item.Rope.name=Веревка
+
+#======== Misc. Blocks========
+tile.Straw Hide Bed.name=Примитивная кровать
+tile.customBed.sleep=Эта кровать непригодна для сна
+tile.BasicPipe.name=Труба
+tile.ValvePipe.name=Клапан
+tile.Torch.name=Факел
+tile.Chest.name=Сундук
+tile.Bookshelf.name=Книжная полка
+tile.Workbench.name=Верстак
+tile.ButtonWood.name=Деревянная кнопка
+
+#= Misc. Plants =
+item.Sugarcane.name=Сахарный тростник
+item.Hemp.name=Пенька
+item.Straw.name=Солома
+item.Jute.name=Джут
+item.Jute Fibre.name=Джутовое волокно
+
+tile.Fungi.mushroom_brown.name=Коричневый гриб
+tile.Fungi.mushroom_red.name=Красный гриб
+tile.Cactus.name=Кактус
+tile.Pumpkin.name=Тыква
+tile.Moss.name=Мох
+tile.Thatch.name=Солома
+tile.Flora.Golden Rod.name=Золотарник
+tile.Flora.Cat Tails.name=Рогоз
+
+item.Seeds Sugarcane.name=Семена сахарного тростника
+item.Seeds Hemp.name=Семена пеньки
+item.Seeds Jute.name=Семена джута
+
+tile.TallGrass.tallgrass.name=Высокая трава
+tile.TallGrass.fern.name=Папоротник
+tile.TallGrass.shortgrass.name=Короткая трава
+tile.LilyPad.name=Кувшинка
+tile.Vine.name=Лиана
+tile.SeaGrassStill.name=Водоросли
+tile.SeaGrassIce.name=Замороженные водоросли
+
+tile.Flowers.flower_nasturtium.name=Настурция
+tile.Flowers.flower_dandelion.name=Одуванчик
+tile.Flowers.flower_meads_milkweed.name=Луговой ваточник
+tile.Flowers.flower_tropical_milkweed.name=Ваточник кюрасавский
+tile.Flowers.flower_butterfly_milkweed.name=Ваточник туберозовый
+tile.Flowers.flower_calendula.name=Календула
+tile.Flowers2.flower_rose.name=Мак
+tile.Flowers2.flower_blue_orchid.name=Синяя архидея
+tile.Flowers2.flower_allium.name=Лук-батун
+tile.Flowers2.flower_houstonia.name=Хаустония
+tile.Flowers2.flower_tulip_red.name=Красный тюльпан
+tile.Flowers2.flower_tulip_orange.name=Оранжевый тюльпан
+tile.Flowers2.flower_tulip_white.name=Белый тюльпан
+tile.Flowers2.flower_tulip_pink.name=Розовый тюльпан
+tile.Flowers2.flower_oxeye_daisy.name=Нивяник
+
+#=======
+#= GUI =
+#=======
+gui.badnbt=Неверная информация
+
+#== Anvil GUI ==
+gui.Anvil.Plans=Чертежи
+gui.Anvil.Weld=Сварить
+
+gui.Anvil.LightHit=Слабый удар
+gui.Anvil.MediumHit=Средний удар
+gui.Anvil.HeavyHit=Сильный удар
+gui.Anvil.Draw=Протянуть
+
+gui.Anvil.Punch=Штамповать
+gui.Anvil.Bend=Изогнуть
+gui.Anvil.Upset=Обжать
+gui.Anvil.Shrink=Усадить
+
+gui.Anvil.Rules=Правила
+gui.Anvil.Rule1=Любое действие
+gui.Anvil.Rule2=Удар, когда угодно
+gui.Anvil.Rule3=Удар, последний
+gui.Anvil.Rule4=Удар, предпоследний
+gui.Anvil.Rule5=Удар, третий с конца
+gui.Anvil.Rule6=Удар, два последних
+gui.Anvil.Rule7=Удар, три последних
+gui.Anvil.Rule8=Удар, не последний
+gui.Anvil.Rule9=Штамповка, когда угодно
+gui.Anvil.Rule10=Штамповка, последняя
+gui.Anvil.Rule11=Штамповка, предпоследняя
+gui.Anvil.Rule12=Штамповка, третья с конца
+gui.Anvil.Rule13=Штамповка, две последних
+gui.Anvil.Rule14=Штамповка, три последних
+gui.Anvil.Rule15=Штамповка, не последняя
+gui.Anvil.Rule16=Усадка, когда угодно
+gui.Anvil.Rule17=Усадка, последняя
+gui.Anvil.Rule18=Усадка, предпоследняя
+gui.Anvil.Rule19=Усадка, третья с конца
+gui.Anvil.Rule20=Усадка, две последних
+gui.Anvil.Rule21=Усадка, три последних
+gui.Anvil.Rule22=Усадка, не последняя
+gui.Anvil.Rule23=Протяжка, когда угодно
+gui.Anvil.Rule24=Протяжка, последняя
+gui.Anvil.Rule25=Протяжка, предпоследняя
+gui.Anvil.Rule26=Протяжка, третья с конца
+gui.Anvil.Rule27=Протяжка, два последних
+gui.Anvil.Rule28=Протяжка, три последних
+gui.Anvil.Rule29=Протяжка, не последняя
+gui.Anvil.Rule30=Обжимка, когда угодно
+gui.Anvil.Rule31=Обжимка, последняя
+gui.Anvil.Rule32=Обжимка, предпоследняя
+gui.Anvil.Rule33=Обжимка, третья с конца
+gui.Anvil.Rule34=Обжимка, две последних
+gui.Anvil.Rule35=Обжимка, три последних
+gui.Anvil.Rule36=Обжимка, не последняя
+gui.Anvil.Rule37=Изгиб, когда угодно
+gui.Anvil.Rule38=Изгиб, последний
+gui.Anvil.Rule39=Изгиб, предпоследний
+gui.Anvil.Rule40=Изгиб, третий с конца
+gui.Anvil.Rule41=Изгиб, два последних
+gui.Anvil.Rule42=Изгиб, три последних
+gui.Anvil.Rule43=Изгиб, не последний
+
+#== Tools/Weapons/Armor GUI ==
+gui.Armor.Advanced=Дополнительно:
+gui.Armor.Shift=Shift
+gui.Armor.ForgedBy=Автор:
+gui.Armor.Hold=Зажмите
+gui.Armor.Crush=Дробящий
+gui.Armor.Pierce=Колющий
+gui.Armor.Slash=Режущий
+
+gui.Bow.Advanced=Дополнительно:
+gui.Bow.Javelins=Копья
+gui.Bow.Arrows=Стрелы
+gui.Bow.ForgedBy=Изготовил
+
+gui.DamageType.Error=Error: Bad Damage Type
+gui.DamageType.Crushing=Дробящий
+gui.DamageType.Piercing=Колющий
+gui.DamageType.Slashing=Режущий
+
+#== Barrel GUI ==
+gui.Barrel.Empty=Опорожнить
+gui.Barrel.Seal=Запечатать
+gui.Barrel.Unseal=Распечатать
+gui.Barrel.ToggleOff=Слить
+gui.Barrel.ToggleOn=Налить
+gui.Barrel.SealedOn=Запечатано
+gui.Barrel.Solid=Хранение твёрдого
+gui.Barrel.Liquid=Хранение жидкого
+
+#== Bloomery GUI ==
+gui.Bloomery.Charcoal=Древесный уголь
+gui.Bloomery.Ore=Руда
+gui.Bloomery.Output=Выработка
+
+#== Calendar GUI ==
+gui.Calendar.Calendar=Календарь
+gui.Calendar.DateBioxx=День рождения Bioxx'а!
+gui.Calendar.DateDunk=Артемьев день
+gui.Calendar.DateKitty=Битва при Ватерлоо
+
+gui.Calendar.Hour=Час
+gui.Calendar.WitchHour=Ведьмин час
+
+gui.Calendar.Day=День
+gui.Calendar.Sunday=Воскресенье
+gui.Calendar.Monday=Понедельник
+gui.Calendar.Tuesday=Вторник
+gui.Calendar.Wednesday=Среда
+gui.Calendar.Thursday=Четверг
+gui.Calendar.Friday=Пятница
+gui.Calendar.Saturday=Суббота
+
+gui.Calendar.Season=Сезон
+gui.Calendar.EarlySpring=Начало весны
+gui.Calendar.Spring=Весна
+gui.Calendar.LateSpring=Поздняя весна
+gui.Calendar.EarlySummer=Начало лета
+gui.Calendar.Summer=Лето
+gui.Calendar.LateSummer=Позднее лето
+gui.Calendar.EarlyAutumn=Начало осени
+gui.Calendar.Autumn=Осень
+gui.Calendar.LateAutumn=Поздняя осень
+gui.Calendar.EarlyWinter=Начало зимы
+gui.Calendar.Winter=Зима
+gui.Calendar.LateWinter=Окончание зимы
+
+gui.Calendar.Date=Дата
+gui.Calendar.January=Январь
+gui.Calendar.February=Февраль
+gui.Calendar.March=Март
+gui.Calendar.April=Апрель
+gui.Calendar.May=Май
+gui.Calendar.June=Июнь
+gui.Calendar.July=Июль
+gui.Calendar.August=Август
+gui.Calendar.September=Сентябрь
+gui.Calendar.October=Октябрь
+gui.Calendar.November=Ноябрь
+gui.Calendar.December=Декабрь
+
+gui.Calendar.1Hour=1 Час
+gui.Calendar.1Day=1 День
+gui.Calendar.1Week=1 Неделя
+gui.Calendar.1Month=1 Месяц
+gui.Calendar.1Year=1 Год
+
+#== Food Prep GUI ==
+gui.FoodPrep.CreateMeal=Приготовить
+gui.FoodPrep.Effect=Эффект
+gui.FoodPrep.Energy=Заряд
+gui.FoodPrep.Filling=Сытность
+gui.FoodPrep.Power=Сила
+
+#== Metals ==
+gui.metal.Bismuth=Висмут
+gui.metal.BismuthBronze=Висмутовая бронза
+gui.metal.BlackBronze=Чёрная бронза
+gui.metal.BlackSteel=Чёрная сталь
+gui.metal.BlueSteel=Синяя сталь
+gui.metal.Brass=Латунь
+gui.metal.Bronze=Бронза
+gui.metal.Copper=Медь
+gui.metal.Gold=Золото
+gui.metal.HCBlackSteel=Высокоуглеродистая чёрная сталь
+gui.metal.HCBlueSteel=Высокоуглеродистая синяя сталь
+gui.metal.HCRedSteel=Высокоуглеродистая красная сталь
+gui.metal.Lead=Свинец
+gui.metal.Nickel=Никель
+gui.metal.PigIron=Чугун
+gui.metal.Platinum=Платина
+gui.metal.RedSteel=Красная сталь
+gui.metal.RoseGold=Розовое золото
+gui.metal.Silver=Серебро
+gui.metal.Steel=Сталь
+gui.metal.SterlingSilver=Стерлинг
+gui.metal.Tin=Олово
+gui.metal.Unknown=Неивестный металл
+gui.metal.WeakBlueSteel=Сырая синяя сталь
+gui.metal.WeakRedSteel=Сырая красная сталь
+gui.metal.WeakSteel=Сырая сталь
+gui.metal.WroughtIron=Кованое железо
+gui.metal.Zinc=Цинк
+
+#== Plans GUI ==
+gui.plans.axe=Лезвие топора
+gui.plans.bootsplate=Сапоги
+gui.plans.bucket=Ведро
+gui.plans.chestplate=Нагрудник
+gui.plans.chisel=Лезвие зубила
+gui.plans.hammer=Голова молота
+gui.plans.helmplate=Шлем
+gui.plans.hoe=Лезвие мотыги
+gui.plans.ingot=Слиток
+gui.plans.javelin=Наконечник копья
+gui.plans.knife=Лезвие ножа
+gui.plans.legsplate=Поножи
+gui.plans.mace=Голова булавы
+gui.plans.pickaxe=Лезвие кирки
+gui.plans.propick=Лезвие геологического молотка
+gui.plans.refinebloom=Обработка крицы
+gui.plans.saw=Лезвие пилы
+gui.plans.scythe=Лезвие косы
+gui.plans.sheet=Лист
+gui.plans.shovel=Лезвие лопаты
+gui.plans.splitbloom=Разделение кричного железа
+gui.plans.sword=Клинок меча
+gui.plans.tuyere=Фурма
+gui.plans.grill=Гриль
+gui.plans.shears=Ножницы
+
+#== Misc GUI ==
+gui.Blueprint=Чертёж
+gui.Nametag=Бирка
+gui.fertilized=Удобрено
+gui.Inventory=Инвентарь
+gui.ClearSlot=Освободите выходную ячейку.
+gui.LogPile=Поленница
+gui.done=Готово
+gui.Sluice.Soil=Почва
+gui.Sluice=Промывочный жёлоб
+gui.Workbench.Crafting=Верстак
+
+#== Tooltips ==
+gui.ShowHelp=§8Помощь: (Зажать §fShift§8)
+gui.Help=§8Помощь:
+gui.Clay.Inst0=§bПравый клик §7с 5 кусками глины для лепки.
+gui.Knife.Inst0=§bПравый клик §7по верхней грани блока чтобы
+gui.Knife.Inst1=создать поверхность для готовки.
+gui.Leather.Inst0=§bПравый клик §7ножом в инвентаре, чтобы начать изгтовление.
+gui.LooseRock.Inst0=§bПравый клик §7с 2 камнямив ячейке, чтобы начать высекание.
+gui.MeltedMetal.Inst0=§bПравый клик §7чтобы залить жидкий металл в форму.
+gui.PotteryBase.Inst0=Shift + §bправый клик §7чтобы разместить предмет.
+gui.PotteryVesselSmall.Inst0=или §bправый клик §7чтобы открыть сосуд.
+gui.RawHide.Inst0=????
+gui.Barrel.MoreItems=§8Ещё... (Зажать §fShift§8)
+
+gui.Size.Tiny=Крошечный
+gui.Size.VerySmall=Очень маленький
+gui.Size.Small=Маленький
+gui.Size.Medium=Средний
+gui.Size.Large=Большой
+gui.Size.VeryLarge=Очень большой
+gui.Size.Huge=Огромный
+
+gui.Weight.Light=Легкий
+gui.Weight.Medium=Средний
+gui.Weight.Heavy=Тяжелый
+
+gui.Reach.Short=Близкий
+gui.Reach.Medium=Средний
+gui.Reach.Far=Дальний
+
+gui.food.fruit=Фрукты
+gui.food.vegetable=Овощи
+gui.food.grain=Зерновые
+gui.food.protein=Белки
+gui.food.dairy=Молочные
+gui.food.amount=Количество
+gui.food.decay=Гниение
+gui.food.salted=Засолено
+
+gui.FoodHeat.Cold=Холодное
+gui.FoodHeat.Warm=Разогретое
+
+gui.Torch.CatchingFire=На огне
+gui.Torch.Lit=Зажжён
+
+gui.ItemHeat.Liquid=Жидкость
+gui.ItemHeat.Solidified=Затвердевший
+gui.ItemHeat.Caution=Внимание!
+gui.ItemHeat.Warming=Подогревается
+gui.ItemHeat.Hot=Горячо
+gui.ItemHeat.VeryHot=Очень горячо
+gui.ItemHeat.FaintRed=Начинает краснеть
+gui.ItemHeat.DarkRed=Краснеет
+gui.ItemHeat.BrightRed=Ярко краснеет
+gui.ItemHeat.Orange=Раскаляется
+gui.ItemHeat.Yellow=Желтеет
+gui.ItemHeat.YellowWhite=Желтеет добела
+gui.ItemHeat.White=Белеет
+gui.ItemHeat.BrilliantWhite=Белеет до блеска
+
+gui.ingot.workable=Можно ковать
+gui.ingot.weldable=Можно сваривать
+gui.ingot.danger=**Перегрев!**
+
+gui.milk.fresh=Свежее
+gui.milk.old=Несвежее
+gui.milk.sour=Кислое
+
+gui.units=Единицы
+
+#== Chat Messages ==
+gui.GoldPan.UseFull=Надо использовать под текущей водой.
+gui.goldpan.overused=Похоже, что руды здесь больше нет. Лучше поискать другое место.
+
+gui.ProPick.Found=Обнаружено:
+gui.ProPick.FoundTraces=Найдены следы:
+gui.ProPick.FoundSmall=Найдена слабая проба:
+gui.ProPick.FoundMedium=Найдена средняя проба:
+gui.ProPick.FoundLarge=Найдена значительная проба:
+gui.ProPick.FoundVeryLarge=Найдена огромная проба:
+gui.ProPick.FoundNothing=Ничего не найдено.
+
+#== Creative Tabs ==
+itemGroup.TFCArmor=(TFC) Доспехи
+itemGroup.TFCMaterials=(TFC) Материалы
+itemGroup.TFCMisc=(TFC) Разное
+itemGroup.TFCPottery=(TFC) Керамика
+itemGroup.TFCTools=(TFC) Инструменты
+itemGroup.TFCWeapons=(TFC) Оружие
+itemGroup.TFCDevices=(TFC) Устройства
+itemGroup.TFCFoods=(TFC) Еда
+itemGroup.TFCBuilding=(TFC) Строительные блоки
+itemGroup.TFCDecoration=(TFC) Декоративные блоки
+
+#== Skill GUI ==
+skill.armorsmith=Изготовление брони
+skill.gensmith=Кузнечное дело
+skill.toolsmith=Изготовление инструментов
+skill.weaponsmith=Изготовление оружия
+skill.agriculture=Земледелие
+skill.cooking=Кулинария
+skill.prospecting=Геолого-разведка
+skill.butchering=Разделка животных
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================
+fluid.freshwater=Пресная вода
+fluid.saltwater=Солёная вода
+fluid.lavatfc=Лава
+fluid.hotwater=Горячая вода
+fluid.beer=Пиво
+fluid.cider=Сидр
+fluid.rum=Ром
+fluid.ryewhiskey=Ржаное виски
+fluid.sake=Сакэ
+fluid.vodka=Водка
+fluid.whiskey=Виски
+fluid.cornwhiskey=Кукурузное виски
+fluid.milk=Молоко
+fluid.milkcurdled=Творог
+fluid.limewater=Известковое молоко
+fluid.tannin=Таннин
+fluid.vinegar=Уксус
+fluid.brine=Рассол
+
+gui.showtaste=§8Вкус: (Зажать §fL-Ctrl§8)
+gui.taste=§8Вкус:
+gui.taste.sweet=Сладкий
+gui.taste.sour=Кислый
+gui.taste.salty=Солёный
+gui.taste.bitter=Горький
+gui.taste.savory=Пряный
+
+gui.taste.novice.sweet1=Сладкий
+gui.taste.novice.sweet0=Не сладкий
+gui.taste.novice.sour1=Кислый
+gui.taste.novice.sour0=Не кислый
+gui.taste.novice.salty1=Солёный
+gui.taste.novice.salty0=Не солёный
+gui.taste.novice.bitter1=Горький
+gui.taste.novice.bitter0=Не горький
+gui.taste.novice.savory1=Пряный
+gui.taste.novice.savory0=Не пряный
+
+gui.taste.adept.sweet0=Не сладкий
+gui.taste.adept.sweet1=Умеренно сладкий
+gui.taste.adept.sweet2=Сладкий
+gui.taste.adept.sweet3=Довольно сладкий
+gui.taste.adept.sweet4=Очень сладкий
+gui.taste.adept.sweet5=Слишком сладкий
+gui.taste.adept.sour0=Не кислый
+gui.taste.adept.sour1=Умеренно кислый
+gui.taste.adept.sour2=Кислый
+gui.taste.adept.sour3=Довольно кислый
+gui.taste.adept.sour4=Очень кислый
+gui.taste.adept.sour5=Слишком кислый
+gui.taste.adept.salty0=Не солёный
+gui.taste.adept.salty1=Умеренно солёный
+gui.taste.adept.salty2=Солёный
+gui.taste.adept.salty3=Довольно солёный
+gui.taste.adept.salty4=Очень солёный
+gui.taste.adept.salty5=Слишком солёный
+gui.taste.adept.bitter0=Не горький
+gui.taste.adept.bitter1=Умеренно горький
+gui.taste.adept.bitter2=Горький
+gui.taste.adept.bitter3=Довольно горький
+gui.taste.adept.bitter4=Очень горький
+gui.taste.adept.bitter5=Слишком горький
+gui.taste.adept.savory0=Не пряный
+gui.taste.adept.savory1=Умеренно пряный
+gui.taste.adept.savory2=Пряный
+gui.taste.adept.savory3=Довольно пряный
+gui.taste.adept.savory4=Очень пряный
+gui.taste.adept.savory5=Слишком пряный
+
+gui.taste.0=Не
+gui.taste.1=Не очень
+gui.taste.2=Немного
+gui.taste.3=В меру
+gui.taste.4=Безупречно
+gui.taste.5=Излишне
+gui.taste.6=Очень
+gui.taste.7=Слишком
+gui.taste.8=Ужасно
+
+gui.skill.novice=Новичок
+gui.skill.adept=Знаток
+gui.skill.expert=Эксперт
+gui.skill.master=Мастер
+gui.skillpage=Умения
+tile.MetalTrapDoor.name=Люк
+item.Mud Brick.name=Саманный кирпич
+item.Wet Mud Brick.name=Сырой саманный кирпич
+gui.overburdened=Перегружен
+gui.slot=Слот
+gui.slot.back=Назад
+word.pickled=(Маринованный)
+word.brined=(Засоленый)
+word.cooked=(Приготовленный)
+word.salted=(Солёный)
+word.smoked=(Копчёный)
+word.dried=(Сушёный)
+gui.barrel.pickling=Маринование
+gui.barrel.brining=Соление
+tile.Vessel.name=Большой сосуд
+tile.Grill.name=Гриль
+food.cooked.rare=Недожарено
+food.cooked.medrare=Cлабой прожарки
+food.cooked.med=Cредней прожарки
+food.cooked.medwell=Почти прожарено
+food.cooked.well=Хорошо прожарено
+food.cooked.0=Подрумянившееся
+food.cooked.1=Румяное
+food.cooked.2=Прожареное
+food.cooked.3=Пережареное
+food.cooked.4=Обуглившееся
+gui.FoodPrep.Sandwich=Бутерброд
+gui.FoodPrep.Salad=Салат
+item.Sandwich.name=Бутерброд
+item.Salad.name=Салат
+item.ClayBowl.Ceramic Bowl.name=Керамическая миска
+item.ClayBowl.Clay Bowl.name=Глиняная миска
+item.Sugar.name=Сахар
+item.Sea Weed.name=Водоросли
+word.stage1=Этап 1
+word.stage2=Этап 2

@@ -98,33 +98,19 @@ public class BlockBerryBush extends BlockTerraContainer
 
 		switch(_meta)
 		{
-		case 0://Wintergreen
+		case Wintergreen:
 		{
 			maxY = 0.2f;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case 1://Blueberries
+		case Blueberry:
 		{
 			maxY = 0.85f;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case 2://Raspberries
-		{
-			maxY = 0.85f;
-			if(isSamePlant(access, x, y + 1, z, _meta))
-				maxY = 1;
-			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-			return;
-		}
-		case 3://Strawberries
-		{
-			maxY = 0.2f;
-			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-			return;
-		}
-		case 4://Blackberries
+		case Raspberry:
 		{
 			maxY = 0.85f;
 			if(isSamePlant(access, x, y + 1, z, _meta))
@@ -132,25 +118,39 @@ public class BlockBerryBush extends BlockTerraContainer
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case 5://Bunchberries
+		case Strawberry:
 		{
 			maxY = 0.2f;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case 6://Cranberries
+		case Blackberry:
+		{
+			maxY = 0.85f;
+			if(isSamePlant(access, x, y + 1, z, _meta))
+				maxY = 1;
+			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+			return;
+		}
+		case Bunchberry:
+		{
+			maxY = 0.2f;
+			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+			return;
+		}
+		case Cranberry:
 		{
 			maxY = 0.6f;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case 7://Snowberries
+		case Snowberry:
 		{
 			maxY = 0.2f;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case 8://Elderberries
+		case Elderberry:
 		{
 			maxY = 0.85f;
 			if(isSamePlant(access, x, y + 1, z, _meta))
@@ -158,13 +158,13 @@ public class BlockBerryBush extends BlockTerraContainer
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case 9://Gooseberries
+		case Gooseberry:
 		{
 			maxY = 0.75f;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case 10://Cloudberries
+		case Cloudberry:
 		{
 			maxY = 0.35f;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
@@ -257,14 +257,14 @@ public class BlockBerryBush extends BlockTerraContainer
 
 				if(_temp >= _fi.minTemp && _temp < _fi.maxTemp)
 				{
-					if(_fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) && !tebb.hasFruit && TFC_Time.getMonthsSinceDay(tebb.dayHarvested) > 0)
+					if(!tebb.hasFruit && _fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) && TFC_Time.getMonthsSinceDay(tebb.dayHarvested) > 0)
 					{
 						tebb.hasFruit = true;
 						tebb.dayFruited = (int) TFC_Time.getTotalDays();
 						world.markBlockForUpdate(x, y, z);
 					}
 				}
-				else if(_temp < _fi.minTemp - 5 && _temp > _fi.maxTemp + 5)
+				else if(_temp < _fi.minTemp - 5 || _temp > _fi.maxTemp + 5)
 				{
 					if(tebb.hasFruit)
 					{
@@ -345,7 +345,7 @@ public class BlockBerryBush extends BlockTerraContainer
 		int meta = world.getBlockMetadata(x, y, z);
 		return (world.getFullBlockLightValue(x, y, z) >= 8 || world.canBlockSeeTheSky(x, y, z)) && 
 				(this.canThisPlantGrowOnThisBlock(world.getBlock(x, y - 1, z)) || 
-						(isSamePlant(world, x, y - 1, z, world.getBlockMetadata(x, y, z)) && (meta == 2 || meta == 4 || meta == 8)));
+						(isSamePlant(world, x, y - 1, z, world.getBlockMetadata(x, y, z)) && canStack(meta)));
 	}
 
 	@Override
@@ -372,7 +372,7 @@ public class BlockBerryBush extends BlockTerraContainer
 
 	protected boolean canThisPlantGrowOnThisBlock(Block block)
 	{
-		return TFC_Core.isSoil(block);
+		return TFC_Core.isGrass(block);
 	}
 
 	@Override
@@ -414,5 +414,9 @@ public class BlockBerryBush extends BlockTerraContainer
 			if(entity instanceof EntityLivingBase)
 				entity.attackEntityFrom(DamageSource.cactus, 5);
 		}
+	}
+
+	private boolean canStack(int meta) {
+		return meta == Raspberry || meta == Blackberry || meta == Elderberry;
 	}
 }

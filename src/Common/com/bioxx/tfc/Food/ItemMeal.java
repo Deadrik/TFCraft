@@ -143,9 +143,29 @@ public class ItemMeal extends ItemTerra implements IFood
 				StatCollector.translateToLocal(FoodRegistry.getInstance().getFood(id).getUnlocalizedName() + ".name");
 	}
 
-	protected float[] getNutritionalWeights()
+	protected float[] getNutritionalWeights(int[] FG)
 	{
-		return new float[]{0.5f,0.2f,0.2f,0.1f};
+		float[] nw = new float[FG.length];
+		float[] fw = getFoodWeights();
+		float totalWeight = 0;
+		for(int i  = 0; i < FG.length; i++)
+		{
+			if(FG[i] != -1)
+			{
+				totalWeight += fw[i];
+			}
+		}
+
+		for(int i  = 0; i < FG.length; i++)
+		{
+			nw[i] = fw[i]/totalWeight;
+		}
+		return nw;
+	}
+
+	protected float[] getFoodWeights()
+	{
+		return new float[]{10f,4f,4f,2f};
 	}
 
 	/**
@@ -182,16 +202,16 @@ public class ItemMeal extends ItemTerra implements IFood
 			float tasteFactor = foodstats.getTasteFactor(is);
 			//add the nutrition contents
 			int[] fg = is.getTagCompound().getIntArray("FG");
-			float[] weights = getNutritionalWeights();
+			float[] nWeights = getNutritionalWeights(fg);
 			for(int i = 0; i < fg.length; i++)
 			{
 				if(fg[i] != -1)
-					foodstats.addNutrition(FoodRegistry.getInstance().getFoodGroup(fg[i]), eatAmount*weights[i]*tasteFactor);
+					foodstats.addNutrition(FoodRegistry.getInstance().getFoodGroup(fg[i]), eatAmount*nWeights[i]*2.5f);
 			}
 
 			//fill the stomach
 			foodstats.stomachLevel += eatAmount * getFillingBoost();
-			foodstats.setSatisfaction(foodstats.getSatisfaction() + eatAmount * tasteFactor);
+			foodstats.setSatisfaction(foodstats.getSatisfaction() + ((eatAmount/3f) * tasteFactor), fg);
 			//Now remove the eaten amount from the itemstack.
 			if(FoodStatsTFC.reduceFood(is, eatAmount))
 			{
@@ -200,6 +220,18 @@ public class ItemMeal extends ItemTerra implements IFood
 		}
 		TFC_Core.setPlayerFoodStats(player, foodstats);
 		return is;
+	}
+
+	private float getMaxWeight(ItemStack is)
+	{
+		int[] fg = is.getTagCompound().getIntArray("FG");
+		float w = 0;
+		for(int i = 0; i < fg.length; i++)
+		{
+			if(fg[i] != -1)
+				w += this.getFoodWeights()[i];
+		}
+		return w;
 	}
 
 	public static boolean isWarm(ItemStack is)
@@ -228,16 +260,6 @@ public class ItemMeal extends ItemTerra implements IFood
 		{
 			NBTTagCompound nbt = is.getTagCompound();
 			return nbt.getFloat("foodDecay");
-		}
-		return 0f;
-	}
-
-	public float getSatisfaction(ItemStack is) 
-	{
-		if(is.hasTagCompound() && is.getTagCompound().hasKey("satisfaction"))
-		{
-			NBTTagCompound nbt = is.getTagCompound();
-			return nbt.getFloat("satisfaction");
 		}
 		return 0f;
 	}

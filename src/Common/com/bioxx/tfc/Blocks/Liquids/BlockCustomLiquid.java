@@ -6,6 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -18,6 +20,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Blocks.Vanilla.BlockCustomDoor;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLilyPad;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -55,6 +58,18 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	}
 
 	@Override
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity e) 
+	{
+		if (this.blockMaterial == Material.lava)
+		{
+			if(e instanceof EntityItem)
+			{
+				e.setFire(15);
+			}
+		}
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	/**
 	 * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called
@@ -74,7 +89,11 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z)
 	{
-		super.onBlockAdded(world, x, y, z);
+		//super.onBlockAdded(world, x, y, z);
+		if (world.getBlock(x, y, z) == this)
+		{
+			world.scheduleBlockUpdate(x, y, z, this, this.tickRate(world));
+		}
 		this.checkForHarden(world, x, y, z);
 	}
 
@@ -85,7 +104,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
-		super.onNeighborBlockChange(world, x, y, z, block);
+		//super.onNeighborBlockChange(world, x, y, z, block);
 		this.checkForHarden(world, x, y, z);
 	}
 
@@ -272,6 +291,16 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	@Override
 	public float getFilledPercentage(World world, int x, int y, int z) {
 		return 1;
+	}
+
+	@Override
+	public boolean func_149807_p(World world, int x, int y, int z)
+	{
+		Block block = world.getBlock(x, y, z);
+		if(block == TFCBlocks.Thatch || block == TFCBlocks.Barrel || block == TFCBlocks.Vessel || block == TFCBlocks.BerryBush || 
+				block == TFCBlocks.SmokeRack || block instanceof BlockCustomDoor || block == TFCBlocks.IngotPile)
+			return false;
+		return super.func_149807_p(world, x, y, z);
 	}
 
 }

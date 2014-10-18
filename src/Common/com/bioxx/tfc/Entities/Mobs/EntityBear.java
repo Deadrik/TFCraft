@@ -67,7 +67,13 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	protected boolean pregnant;
 	protected int pregnancyRequiredTime;
 	protected long timeOfConception;
-	protected float mateSizeMod;
+	protected float mateSizeMod = 0;
+	protected float mateStrengthMod = 0;
+	protected float mateAggroMod = 0;
+	protected float mateObedMod = 0;
+	protected float mateColMod = 0;
+	protected float mateClimMod = 0;
+	protected float mateHardMod = 0;
 	public float size_mod;			//How large the animal is
 	public float strength_mod;		//how strong the animal is
 	public float aggression_mod = 1;//How aggressive / obstinate the animal is
@@ -119,7 +125,6 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		//targetTasks.addTask(2, new EntityAIPanic(this,moveSpeed*1.5F));
 
 		pregnancyRequiredTime = (int) (7 * TFC_Time.ticksInMonth);
-		mateSizeMod = 1f;
 		/*fooditems.add(Item.beefRaw.itemID);
 		fooditems.add(Item.porkRaw.itemID);
 		fooditems.add(Item.fishRaw.itemID);*/
@@ -238,6 +243,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		nbt.setInteger ("Sex", sex);
 		nbt.setLong ("Animal ID", animalID);
 		nbt.setFloat ("Size Modifier", size_mod);
+		
+		nbt.setInteger("Familiarity", familiarity);
+		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);
+		nbt.setBoolean("Familiarized Today", familiarizedToday);
 
 		nbt.setFloat ("Strength Modifier", strength_mod);
 		nbt.setFloat ("Aggression Modifier", aggression_mod);
@@ -251,6 +260,12 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		nbt.setInteger ("Hunger", hunger);
 		nbt.setBoolean("Pregnant", pregnant);
 		nbt.setFloat("MateSize", mateSizeMod);
+		nbt.setFloat("MateStrength", mateStrengthMod);
+		nbt.setFloat("MateAggro", mateAggroMod);
+		nbt.setFloat("MateObed", mateObedMod);
+		nbt.setFloat("MateCol", mateColMod);
+		nbt.setFloat("MateClim", mateClimMod);
+		nbt.setFloat("MateHard", mateHardMod);
 		nbt.setLong("ConceptionTime",timeOfConception);
 		nbt.setInteger("Age", getBirthDay());
 	}
@@ -267,6 +282,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
 
+		familiarity = nbt.getInteger("Familiarity");
+		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
+		familiarizedToday = nbt.getBoolean("Familiarized Today");
+		
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
 		obedience_mod = nbt.getFloat ("Obedience Modifier");
@@ -279,6 +298,12 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
+		mateStrengthMod = nbt.getFloat("MateStrength");
+		mateAggroMod = nbt.getFloat("MateAggro");
+		mateObedMod = nbt.getFloat("MateObed");
+		mateColMod = nbt.getFloat("MateCol");
+		mateClimMod = nbt.getFloat("MateClim");
+		mateHardMod = nbt.getFloat("MateHard");
 		timeOfConception = nbt.getLong("ConceptionTime");
 		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
 	}
@@ -385,9 +410,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 				int i = rand.nextInt(3) + 1;
 				for (int x = 0; x<i;x++)
 				{
-					ArrayList<Float> data = new ArrayList<Float>();
-					data.add(mateSizeMod);
-					EntityBear baby = new EntityBear(worldObj, this,data);
+					EntityBear baby = (EntityBear) createChildTFC(this);//new EntityBear(worldObj, this,data);
 					worldObj.spawnEntityInWorld(baby);
 				}
 				pregnant = false;
@@ -518,9 +541,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) 
 	{
-		ArrayList<Float> data = new ArrayList<Float>();
+		/*ArrayList<Float> data = new ArrayList<Float>();
 		data.add(mateSizeMod);
-		return new EntityBear(worldObj, this,data);
+		return new EntityBear(worldObj, this,data);*/
+		return null;
 	}
 
 	@Override
@@ -581,6 +605,12 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		resetInLove();
 		otherAnimal.setInLove(false);
 		mateSizeMod = otherAnimal.getSize();
+		mateStrengthMod = otherAnimal.getStrength();
+		mateAggroMod = otherAnimal.getAggression();
+		mateObedMod = otherAnimal.getObedience();
+		mateColMod = otherAnimal.getColour();
+		mateClimMod = otherAnimal.getClimateAdaptation();
+		mateHardMod = otherAnimal.getHardiness();
 	}
 
 	@Override
@@ -625,10 +655,16 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	}
 
 	@Override
-	public EntityAgeable createChildTFC(EntityAgeable entityageable)
+	public EntityAgeable createChildTFC(EntityAgeable eAgeable)
 	{
 		ArrayList<Float> data = new ArrayList<Float>();
-		data.add(entityageable.getEntityData().getFloat("MateSize"));
+		data.add(eAgeable.getEntityData().getFloat("MateSize"));
+		data.add(eAgeable.getEntityData().getFloat("MateStrength"));
+		data.add(eAgeable.getEntityData().getFloat("MateAggro"));
+		data.add(eAgeable.getEntityData().getFloat("MateObed"));
+		data.add(eAgeable.getEntityData().getFloat("MateCol"));
+		data.add(eAgeable.getEntityData().getFloat("MateClim"));
+		data.add(eAgeable.getEntityData().getFloat("MateHard"));
 		return new EntityBear(worldObj, this, data);
 	}
 
@@ -750,9 +786,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 
 	@Override
 	public void handleFamiliarityUpdate() {
-		if(lastFamiliarityUpdate < TFC_Time.getTotalDays()){
+		int totalDays = TFC_Time.getTotalDays();
+		if(lastFamiliarityUpdate < totalDays){
 			if(familiarizedToday && familiarity < 100){
-				lastFamiliarityUpdate = TFC_Time.getTotalDays();
+				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = (6 * obedience_mod / aggression_mod);
 				if(this.isAdult() && (familiarity > 30 && familiarity < 80)){
@@ -771,6 +808,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			}
 			else if(familiarity < 30){
 				familiarity -= 2*(TFC_Time.getTotalDays() - lastFamiliarityUpdate);
+				lastFamiliarityUpdate = totalDays;
 			}
 		}
 		if(familiarity > 100)familiarity = 100;

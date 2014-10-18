@@ -24,6 +24,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.storage.WorldInfo;
 
 import org.lwjgl.input.Keyboard;
@@ -53,7 +54,6 @@ import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Interfaces.IFood;
-import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -626,6 +626,8 @@ public class TFC_Core
 
 	public static Block getTypeForDirtFromGrass(Block block)
 	{
+		if(TFC_Core.isDirt(block))
+			return block;
 		if (block == TFCBlocks.Grass || block == TFCBlocks.DryGrass)
 			return TFCBlocks.Dirt;
 		return TFCBlocks.Dirt2;
@@ -992,6 +994,11 @@ public class TFC_Core
 
 			if (is != null)
 			{
+				if(is.stackSize == 0)
+				{
+					iinv.setInventorySlotContents(i, null);
+					continue;
+				}
 				if ((is.getItem() instanceof ItemTerra && ((ItemTerra) is.getItem()).onUpdate(is, world, x, y, z)))
 					continue;
 				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
@@ -1149,7 +1156,7 @@ public class TFC_Core
 		{
 			return cacheTemp;
 		}
-		float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world,TFC_Time.getDayFromTotalHours(th), th, x, y, z);
+		float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world,TFC_Time.getDayFromTotalHours(th), TFC_Time.getHourOfDayFromTotalHours(th), x, y, z);
 		addCachedTemp(world, x, z, th, temp);
 		return temp;
 	}
@@ -1162,17 +1169,10 @@ public class TFC_Core
 	public static void animalDropMeat(Entity e, Item i, float foodWeight)
 	{
 		Random r;
-		while (foodWeight > 0)
-		{
-			float fw = Helper.roundNumber(Math.min(Global.FOOD_MAX_WEIGHT, foodWeight), 10);
-			if (fw < Global.FOOD_MAX_WEIGHT)
-				foodWeight = 0;
-			foodWeight -= fw;
-			ItemStack is = ItemFoodTFC.createTag(new ItemStack(i, 1), fw);
-			r = new Random(e.getUniqueID().getLeastSignificantBits() + e.getUniqueID().getMostSignificantBits());
-			Food.adjustFlavor(is, r);
-			e.entityDropItem(is, 0);
-		}
+		ItemStack is = ItemFoodTFC.createTag(new ItemStack(i, 1), foodWeight);
+		r = new Random(e.getUniqueID().getLeastSignificantBits() + e.getUniqueID().getMostSignificantBits());
+		Food.adjustFlavor(is, r);
+		e.capturedDrops.add(new EntityItem(e.worldObj, e.posX, e.posY, e.posZ, is));
 	}
 
 	public static Vec3 getEntityPos(Entity e)
@@ -1238,7 +1238,8 @@ public class TFC_Core
 				|| isGrassType1(block)
 				|| isGrassType2(block)
 				|| isGravel(block)
-				|| block == Blocks.glass;
+				|| block == Blocks.glass
+				|| block == TFCBlocks.MetalTrapDoor;
 	}
 
 	public static void writeInventoryToNBT(NBTTagCompound nbt, ItemStack[] storage)
@@ -1335,5 +1336,10 @@ public class TFC_Core
 	public static boolean setBlockToAirWithDrops(World world, int x, int y, int z)
 	{
 		return world.func_147480_a(x, y, z, true);
+	}
+
+	public static boolean isWaterBiome(BiomeGenBase b)
+	{
+		return TFC_Core.isBeachBiome(b.biomeID) || TFC_Core.isOceanicBiome(b.biomeID) || b == TFCBiome.lake || b == TFCBiome.river;
 	}
 }

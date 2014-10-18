@@ -4,7 +4,7 @@ package com.bioxx.tfc.api.Enums;
 //of the rainiest place on earth, it is well below the rainiest year on record.
 public enum EnumTree
 {
-	OAK("OAK", /*minRain*/500f, /*maxRain*/1200f, /*minTemp*/5, /*maxTemp*/15, /*minEVT*/0.25f, /*maxEVT*/2, false),
+	OAK("OAK", /*minRain*/500f, /*maxRain*/1200f, /*minTemp*/5, /*maxTemp*/25, /*minEVT*/0.25f, /*maxEVT*/2, false),
 
 	ASPEN("ASPEN", /*minRain*/300f, /*maxRain*/1600f, /*minTemp*/-5, /*maxTemp*/18, /*minEVT*/0.25f, /*maxEVT*/1, false),
 
@@ -14,7 +14,7 @@ public enum EnumTree
 
 	DOUGLASFIR("DOUGLASFIR", /*minRain*/750f, /*maxRain*/16000f, /*minTemp*/1, /*maxTemp*/14, /*minEVT*/0, /*maxEVT*/1, true),
 
-	HICKORY("HICKORY", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/4, /*maxTemp*/24, /*minEVT*/0, /*maxEVT*/1, false),
+	HICKORY("HICKORY", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/4, /*maxTemp*/28, /*minEVT*/0, /*maxEVT*/1, false),
 
 	MAPLE("MAPLE", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/3, /*maxTemp*/20, /*minEVT*/0, /*maxEVT*/1, false),
 
@@ -34,9 +34,9 @@ public enum EnumTree
 
 	WILLOW("WILLOW", /*minRain*/4000f, /*maxRain*/16000f, /*minTemp*/10, /*maxTemp*/30, /*minEVT*/0, /*maxEVT*/0.5f, false),
 
-	KAPOK("KAPOK", /*minRain*/2000f, /*maxRain*/16000f, /*minTemp*/24, /*maxTemp*/50, /*minEVT*/0f, /*maxEVT*/1f, false),
+	KAPOK("KAPOK", /*minRain*/2000f, /*maxRain*/16000f, /*minTemp*/30, /*maxTemp*/50, /*minEVT*/0f, /*maxEVT*/1f, false),
 
-	KOA("KOA", /*minRain*/500f, /*maxRain*/16000f, /*minTemp*/20, /*maxTemp*/50, /*minEVT*/0, /*maxEVT*/2, false),
+	KOA("KOA", /*minRain*/500f, /*maxRain*/16000f, /*minTemp*/28f, /*maxTemp*/50, /*minEVT*/0, /*maxEVT*/2, false),
 
 	UTACACIA("UTACACIA", /*minRain*/75f, /*maxRain*/1000f, /*minTemp*/20, /*maxTemp*/50, /*minEVT*/0, /*maxEVT*/1, false);
 

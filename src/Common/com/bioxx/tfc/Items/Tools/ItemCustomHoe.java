@@ -63,7 +63,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
 	{
-		if (world.isRemote || world.getBlock(x, y, z) == TFCBlocks.ToolRack || world.getBlock(x, y, z) == TFCBlocks.ToolRack2)
+		if (world.isRemote || world.getBlock(x, y, z) == TFCBlocks.ToolRack)
 			return false;
 		else
 		{
@@ -179,7 +179,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	@Override
 	public int getMaxDamage(ItemStack stack)
 	{
-		return (int) (getMaxDamage()+(getMaxDamage() * (AnvilManager.getDurabilityBuff(stack) / 300f)));
+		return (int) (getMaxDamage()+(getMaxDamage() * AnvilManager.getDurabilityBuff(stack)));
 	}
 
 	@Override

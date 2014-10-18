@@ -1,17 +1,22 @@
 package com.bioxx.tfc.Containers;
 
+import java.util.ArrayList;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Containers.Slots.SlotChest;
 import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEBarrel;
+import com.bioxx.tfc.api.Enums.EnumSize;
 
 public class ContainerBarrel extends ContainerTFC
 {
@@ -34,13 +39,20 @@ public class ContainerBarrel extends ContainerTFC
 
 	}
 
+	public static ArrayList<Item> getExceptions(){
+		ArrayList exceptions = new ArrayList<Item>();
+		exceptions.add(Item.getItemFromBlock(TFCBlocks.Barrel));
+		exceptions.add(Item.getItemFromBlock(TFCBlocks.Vessel));
+		return exceptions;
+	}
+
 	protected void buildLayout()
 	{
 		if(guiTab == 0)
 		{
 			//Input slot
 			if(!barrel.getSealed())
-				addSlotToContainer(new Slot(barrel, 0, 80, 29));
+				addSlotToContainer(new SlotChest(barrel, 0, 80, 29).setSize(EnumSize.LARGE).addItemException(getExceptions()));
 			else
 				addSlotToContainer(new SlotForShowOnly(barrel, 0, 80, 29));
 		}
@@ -51,7 +63,7 @@ public class ContainerBarrel extends ContainerTFC
 				for(int k = 0; k < 3; k++)
 				{
 					if(!barrel.getSealed())
-						addSlotToContainer(new SlotChest(barrel, k+(i*3), 53+(i*18), 17+(k*18)));
+						addSlotToContainer(new SlotChest(barrel, k+(i*3), 53+(i*18), 17+(k*18)).setSize(EnumSize.LARGE).addItemException(ContainerChestTFC.getExceptions()));
 					else
 						addSlotToContainer(new SlotForShowOnly(barrel, k+(i*3), 53+(i*18), 17+(k*18)));
 				}
@@ -66,7 +78,7 @@ public class ContainerBarrel extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
+	public ItemStack transferStackInSlotTFC(EntityPlayer entityplayer, int i)
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
 		if(slot != null && slot.getHasStack())
@@ -84,8 +96,14 @@ public class ContainerBarrel extends ContainerTFC
 			}
 			else
 			{
-				if (!barrel.getSealed() && !this.mergeItemStack(itemstack1, 0, 12, false))
-					return null;
+				if (!barrel.getSealed() && guiTab == 1)
+				{
+					if(!this.mergeItemStack(itemstack1, 0, 12, false)){return null;}
+				}
+				else if (!barrel.getSealed() && guiTab == 0)
+				{
+					if(!this.mergeItemStack(itemstack1, 0, 1, false)){return null;}
+				}
 			}
 
 			if(itemstack1.stackSize == 0)
@@ -147,6 +165,7 @@ public class ContainerBarrel extends ContainerTFC
 		else if (id == 2)
 		{
 			this.barrel.sealtime = val;
+			barrel.ProcessItems();
 		}
 	}
 }

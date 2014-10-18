@@ -125,7 +125,7 @@ public class ContainerHorseInventoryTFC extends ContainerTFC
 	/**
 	 * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
 	 */
-	public ItemStack transferStackInSlot(EntityPlayer player, int par2)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int par2)
 	{
 		/*
 		ItemStack itemstack = null;
@@ -218,5 +218,6 @@ public class ContainerHorseInventoryTFC extends ContainerTFC
 		this.theHorse.updateChestSaddle();*/
 		super.onContainerClosed(player);
         this.field_111243_a.closeInventory();
+        theHorse.updateChestSaddle();
 	}
 }

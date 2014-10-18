@@ -61,88 +61,87 @@ public class ItemProPick extends ItemTerra
 	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		Block block = world.getBlock(x, y, z);
-
-		// Negated the old condition and exiting the method here instead.
-		if (block == TFCBlocks.ToolRack || block == TFCBlocks.ToolRack2)
-			return true;
-
-		// Getting the meta data only when we actually need it.
-		int meta = world.getBlockMetadata(x, y, z);
-
-		// Damage the item on prospecting use.
 		if (!world.isRemote)
 		{
+			// Negated the old condition and exiting the method here instead.
+			if (block == TFCBlocks.ToolRack)
+				return true;
+
+			// Getting the meta data only when we actually need it.
+			int meta = world.getBlockMetadata(x, y, z);
+
+			// If an ore block is targeted directly, it'll tell you what it is.
+			if (block == TFCBlocks.Ore ||
+					block == TFCBlocks.Ore2 ||
+					block == TFCBlocks.Ore3)
+			{
+				if (block == TFCBlocks.Ore2) meta = meta + Global.ORE_METAL.length;
+				if (block == TFCBlocks.Ore3) meta = meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length;
+				TellResult(player, new ItemStack(TFCItems.OreChunk, 1, meta));
+				return true;
+			}
+
+			random = new Random(x * z + y);
+
+			SkillRank rank = TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_PROSPECTING);
+			int chance = 60 + ((rank.ordinal()+1)*10);
+
+			// If random(100) is less than 60, it used to succeed. we don't need to
+			// gather the blocks in a 25x25 area if it doesn't.
+			if (random.nextInt(100) >= chance && rank != SkillRank.Master)
+			{
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("gui.ProPick.FoundNothing")));
+				return true;
+			}
+
+			// Check all blocks in the 25x25 area, centered on the targeted block.
+			for (int i = -12; i < 12; i++)
+			{
+				for (int j = -12; j < 12; j++)
+				{
+					for(int k = -12; k < 12; k++)
+					{
+						int blockX = x + i;
+						int blockY = y + j;
+						int blockZ = z + k;
+
+						block = world.getBlock(blockX, blockY, blockZ);
+						meta = world.getBlockMetadata(blockX, blockY, blockZ);
+						ItemStack ore;
+						if (block == TFCBlocks.Ore)
+							ore = new ItemStack(TFCItems.OreChunk, 1, meta);
+						else if (block == TFCBlocks.Ore2)
+							ore = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length);
+						else if (block == TFCBlocks.Ore3)
+							ore = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length);
+						else
+							continue;
+
+						String oreName = ore.getDisplayName();
+
+						if (results.containsKey(oreName))
+							results.get(oreName).Count++;
+						else
+							results.put(oreName, new ProspectResult(ore, 1));
+
+						ore = null;
+						oreName = null;
+					}
+				}
+			}
+
+			// Tell the player what was found.
+			TellResult(player);
+
+			results.clear();
+			random = null;
+
+			// Damage the item on prospecting use.
+
 			itemStack.damageItem(1, player);
 			if (itemStack.getItemDamage() >= itemStack.getMaxDamage())
 				player.destroyCurrentEquippedItem();
-			return true;
 		}
-
-		// If an ore block is targeted directly, it'll tell you what it is.
-		if (block == TFCBlocks.Ore ||
-				block == TFCBlocks.Ore2 ||
-				block == TFCBlocks.Ore3)
-		{
-			if (block == TFCBlocks.Ore2) meta = meta + Global.ORE_METAL.length;
-			if (block == TFCBlocks.Ore3) meta = meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length;
-			TellResult(player, new ItemStack(TFCItems.OreChunk, 1, meta));
-			return true;
-		}
-
-		random = new Random(x * z + y);
-
-		SkillRank rank = TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_PROSPECTING);
-		int chance = 60 + ((rank.ordinal()+1)*10);
-
-		// If random(100) is less than 60, it used to succeed. we don't need to
-		// gather the blocks in a 25x25 area if it doesn't.
-		if (random.nextInt(100) >= chance && rank != SkillRank.Master)
-		{
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("gui.ProPick.FoundNothing")));
-			return true;
-		}
-
-		// Check all blocks in the 25x25 area, centered on the targeted block.
-		for (int i = -12; i < 12; i++)
-		{
-			for (int j = -12; j < 12; j++)
-			{
-				for(int k = -12; k < 12; k++)
-				{
-					int blockX = x + i;
-					int blockY = y + j;
-					int blockZ = z + k;
-
-					block = world.getBlock(blockX, blockY, blockZ);
-					meta = world.getBlockMetadata(blockX, blockY, blockZ);
-					ItemStack ore;
-					if (block == TFCBlocks.Ore)
-						ore = new ItemStack(TFCItems.OreChunk, 1, meta);
-					else if (block == TFCBlocks.Ore2)
-						ore = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length);
-					else if (block == TFCBlocks.Ore3)
-						ore = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length);
-					else
-						continue;
-
-					String oreName = ore.getDisplayName();
-
-					if (results.containsKey(oreName))
-						results.get(oreName).Count++;
-					else
-						results.put(oreName, new ProspectResult(ore, 1));
-
-					ore = null;
-					oreName = null;
-				}
-			}
-		}
-
-		// Tell the player what was found.
-		TellResult(player);
-
-		results.clear();
-		random = null;
 
 		return true;
 	}
@@ -212,6 +211,6 @@ public class ItemProPick extends ItemTerra
 	@Override
 	public int getMaxDamage(ItemStack stack)
 	{
-		return (int) (getMaxDamage()+(getMaxDamage() * (AnvilManager.getDurabilityBuff(stack) / 300f)));
+		return (int) (getMaxDamage()+(getMaxDamage() * AnvilManager.getDurabilityBuff(stack)));
 	}
 }

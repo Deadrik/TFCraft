@@ -319,6 +319,26 @@ public class BlockIngotPile extends BlockTerraContainer
 	}
 
 	@Override
+	public Item getItemDropped(int metadata, Random rand, int fortune)
+	{
+		return null;
+	}
+
+	@Override
+	public void onBlockPreDestroy(World world, int i, int j, int k, int meta) 
+	{
+		if(!world.isRemote)
+		{
+			TEIngotPile te = (TEIngotPile)world.getTileEntity(i, j, k);
+			if(te.getStackInSlot(0) != null)
+			{
+				EntityItem ei = new EntityItem(world, i, j, k, te.getStackInSlot(0));
+				world.spawnEntityInWorld(ei);
+			}
+		}
+	}
+
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;

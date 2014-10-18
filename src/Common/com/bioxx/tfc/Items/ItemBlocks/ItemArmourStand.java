@@ -60,10 +60,8 @@ public class ItemArmourStand extends ItemTerraBlock
 	{
 		if(!world.isRemote)
 		{
-			entityplayer.addChatMessage(new ChatComponentText(y+""));
 			int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
 			if (CreateStand(itemstack, entityplayer, world, x, y-1, z, side, dir)) {
-				itemstack.stackSize = itemstack.stackSize-1;
 				world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, TFCBlocks.LogNatural.stepSound.func_150496_b(), (TFCBlocks.LogNatural.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.LogNatural.stepSound.getPitch() * 0.8F);
 			}
 			return true;

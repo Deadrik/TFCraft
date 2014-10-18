@@ -248,6 +248,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedGreaves,1,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedBoots,1,0), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedBoots,1,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronKnifeHead, 1), IronRaw, new ItemStack(TFCItems.WroughtIronUnshaped, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Anvil, 1, 3), IronRaw, null));
 		//Lead
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.LeadIngot,1), LeadRaw,new ItemStack(TFCItems.LeadUnshaped,1)));
