@@ -424,6 +424,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 
 		nbt.setInteger("Familiarity", familiarity);
 		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);
+		nbt.setBoolean("Familiarized Today", familiarizedToday);
 
 		nbt.setFloat ("Strength Modifier", strength_mod);
 		nbt.setFloat ("Aggression Modifier", aggression_mod);
@@ -465,6 +466,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 
 		familiarity = nbt.getInteger("Familiarity");
 		lastFamiliarityUpdate = nbt.getLong("lastFamiliarityUpdate");
+		familiarizedToday = nbt.getBoolean("Familiarized Today");
 
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");

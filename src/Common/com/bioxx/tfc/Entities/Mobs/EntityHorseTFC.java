@@ -613,6 +613,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 		nbttc.setInteger("Familiarity", familiarity);
 		nbttc.setLong("lastFamUpdate", lastFamiliarityUpdate);
+		nbttc.setBoolean("Familiarized Today", familiarizedToday);
 
 		NBTTagCompound nbt = nbttc;
 		nbt.setFloat ("Strength Modifier", strength_mod);
@@ -679,6 +680,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 		familiarity = nbt.getInteger("Familiarity");
 		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
+		familiarizedToday = nbt.getBoolean("Familiarized Today");
 
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
