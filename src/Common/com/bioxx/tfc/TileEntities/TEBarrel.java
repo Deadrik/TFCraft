@@ -361,7 +361,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	public ItemStack addLiquid(ItemStack is)
 	{
-		if(is == null)
+		if(is == null || is.stackSize > 1)
 			return is;
 		if(FluidContainerRegistry.isFilledContainer(is))
 		{
@@ -380,7 +380,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	 */
 	public ItemStack removeLiquid(ItemStack is)
 	{
-		if(is == null)
+		if(is == null || is.stackSize > 1)
 			return is;
 		if(FluidContainerRegistry.isEmptyContainer(is))
 		{
@@ -534,19 +534,20 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 			if(mode == MODE_IN)
 			{
-				FluidStack inLiquid = FluidContainerRegistry.getFluidForFilledItem(getInputStack());
-				if(inLiquid != null)
+				ItemStack container = getInputStack();
+				FluidStack inLiquid = FluidContainerRegistry.getFluidForFilledItem(container);
+				if(inLiquid != null && container.stackSize == 1)
 				{
 					if(this.fluid == null)
 					{
 						this.fluid = inLiquid.copy();
-						this.setInventorySlotContents(0, FluidContainerRegistry.drainFluidContainer(getInputStack()));
+						this.setInventorySlotContents(0, FluidContainerRegistry.drainFluidContainer(container));
 					}
 					else if(inLiquid.isFluidEqual(this.fluid))
 					{
 						if(addLiquid(inLiquid.amount))
 						{
-							this.setInventorySlotContents(0, FluidContainerRegistry.drainFluidContainer(getInputStack()));
+							this.setInventorySlotContents(0, FluidContainerRegistry.drainFluidContainer(container));
 						}
 					}
 				}
