@@ -63,7 +63,7 @@ achievement.achRutabaga=愚蠢的洋葱…
 achievement.achRutabaga.desc=找到大头菜
 achievement.achQuern=磨盘
 achievement.achQuern.desc=使用磨盘
-achievement.achStoneAge=旧石器时代！
+achievement.achStoneAge=石器时代！
 achievement.achStoneAge.desc=敲制出石制工具进入石器时代
 achievement.achCopperAge=红铜时代！
 achievement.achCopperAge.desc=铸造金属物品进入红铜时代
@@ -81,7 +81,7 @@ achievement.achBronzeAge=青铜时代
 achievement.achBronzeAge.desc=制造出青铜砧进入青铜时代
 achievement.achIronAge=灰铁时代
 achievement.achIronAge.desc=采掘到铁块进入灰铁时代
-achievement.achPokeCreeper=鳄鱼猎人史蒂夫·欧文
+achievement.achPokeCreeper=[鳄鱼先生]史蒂夫·欧文
 achievement.achPokeCreeper.desc=用棍子戳它
 
 #============
@@ -883,23 +883,23 @@ item.Log.White Cedar.name=北美香柏树原木
 item.Log.White Elm.name=榆树原木
 item.Log.Willow.name=柳树原木
 
-item.SinglePlank.Acacia.name=金合欢木板
-item.SinglePlank.Ash.name=白蜡木板
-item.SinglePlank.Aspen.name=白杨木板
-item.SinglePlank.Birch.name=桦树木板
-item.SinglePlank.Chestnut.name=栗树木板
-item.SinglePlank.Douglas Fir.name=花旗松木板
-item.SinglePlank.Hickory.name=山核桃木板
-item.SinglePlank.Kapok.name=木棉木板
-item.SinglePlank.Maple.name=枫树木板
-item.SinglePlank.Oak.name=橡树木板
-item.SinglePlank.Pine.name=松树木板
-item.SinglePlank.Sequoia.name=红杉木板
-item.SinglePlank.Spruce.name=云杉木板
-item.SinglePlank.Sycamore.name=悬铃木板
-item.SinglePlank.White Cedar.name=北美香柏木板
-item.SinglePlank.White Elm.name=榆树木板
-item.SinglePlank.Willow.name=杨柳木板
+item.SinglePlank.Acacia.name=金合欢木材
+item.SinglePlank.Ash.name=白蜡木材
+item.SinglePlank.Aspen.name=白杨木材
+item.SinglePlank.Birch.name=桦树木材
+item.SinglePlank.Chestnut.name=栗树木材
+item.SinglePlank.Douglas Fir.name=花旗松木材
+item.SinglePlank.Hickory.name=山核桃木材
+item.SinglePlank.Kapok.name=木棉木材
+item.SinglePlank.Maple.name=枫树木材
+item.SinglePlank.Oak.name=橡树木材
+item.SinglePlank.Pine.name=松树木材
+item.SinglePlank.Sequoia.name=红杉木材
+item.SinglePlank.Spruce.name=云杉木材
+item.SinglePlank.Sycamore.name=悬铃木材
+item.SinglePlank.White Cedar.name=北美香柏木材
+item.SinglePlank.White Elm.name=榆树木材
+item.SinglePlank.Willow.name=杨柳木材
 
 item.Acacia Door.name=金合欢木门
 item.Ash Door.name=白蜡木门
@@ -1848,7 +1848,7 @@ item.stick.name=棍子
 item.coal.coal.name=煤炭
 item.coal.charcoal.name=木炭
 item.Fertilizer.name=化肥
-item.Reeds.name=甘蔗
+item.Reeds.name=芦苇
 
 item.Wooden Bucket Empty.name=木桶(空)
 item.Wooden Bucket Water.name=木桶(清水)
@@ -1907,7 +1907,7 @@ item.Quiver.name=箭袋
 item.Rope.name=绳子
 
 #======== Misc. Blocks========
-tile.Straw Hide Bed.name=稻草和生皮床
+tile.Straw Hide Bed.name=稻草兽皮床
 tile.customBed.sleep=这张床太不舒服了，睡不着。
 tile.BasicPipe.name=管道
 tile.ValvePipe.name=阀门
@@ -2039,7 +2039,7 @@ gui.Bow.Javelins=标枪
 gui.Bow.Arrows=箭
 gui.Bow.ForgedBy=锻造者
 
-gui.DamageType.Error=错误：不正确的伤害类型
+gui.DamageType.Error=伤害类型错误
 gui.DamageType.Crushing=压砸
 gui.DamageType.Piercing=穿刺
 gui.DamageType.Slashing=砍劈
@@ -2105,8 +2105,8 @@ gui.Calendar.October=十月
 gui.Calendar.November=十一月
 gui.Calendar.December=十二月
 
-gui.Calendar.1Hour=1小时
-gui.Calendar.1Day=1天
+gui.Calendar.1Hour=1时
+gui.Calendar.1Day=1日
 gui.Calendar.1Week=1周
 gui.Calendar.1Month=1月
 gui.Calendar.1Year=1年
@@ -2151,24 +2151,24 @@ gui.metal.Zinc=锌
 #== Plans GUI ==
 gui.plans.axe=斧头
 gui.plans.bootsplate=靴子
-gui.plans.bucket=桶子
-gui.plans.chestplate=护身盔甲
+gui.plans.bucket=桶
+gui.plans.chestplate=胸甲
 gui.plans.chisel=凿子
-gui.plans.hammer=锤子
+gui.plans.hammer=锤
 gui.plans.helmplate=头盔
 gui.plans.hoe=锄头
-gui.plans.ingot=锭块
+gui.plans.ingot=锭
 gui.plans.javelin=标枪
 gui.plans.knife=刀
-gui.plans.legsplate=护腿盔甲
-gui.plans.mace=梲
+gui.plans.legsplate=护腿
+gui.plans.mace=槌
 gui.plans.pickaxe=镐头
 gui.plans.propick=勘矿镐
 gui.plans.refinebloom=提炼
 gui.plans.saw=锯
-gui.plans.scythe=大镰刀
+gui.plans.scythe=镰刀
 gui.plans.sheet=薄板
-gui.plans.shovel=铲子
+gui.plans.shovel=铲
 gui.plans.splitbloom=分开
 gui.plans.sword=剑
 gui.plans.tuyere=风口
@@ -2176,7 +2176,7 @@ gui.plans.grill=烤架
 gui.plans.shears=剪刀
 
 #== Misc GUI ==
-gui.Blueprint=图纸
+gui.Blueprint=蓝图
 gui.Nametag=命名牌
 gui.fertilized=已施肥
 gui.Inventory=物品栏
@@ -2184,7 +2184,7 @@ gui.ClearSlot=清理输出格
 gui.LogPile=原木垛
 gui.done=完成
 gui.Sluice.Soil=土壤
-gui.Sluice=水闸
+gui.Sluice=洗矿槽
 gui.Workbench.Crafting=合成
 
 #== Tooltips ==
@@ -2195,7 +2195,7 @@ gui.Knife.Inst0=§b右击§7方块顶部
 gui.Knife.Inst1=来创建野餐台.
 gui.Leather.Inst0=拿着刀§b右击§7来切成形
 gui.LooseRock.Inst0=至少手持两个并§b右击§7来互相砸碎对方
-gui.MeltedMetal.Inst0=右击以倒入工具模具中
+gui.MeltedMetal.Inst0=§b右击§7以倒入工具模具中或者混合起来
 gui.PotteryBase.Inst0=潜行时§b右击§7以放置物体
 gui.PotteryVesselSmall.Inst0=或者§b右击§7以打开物品栏
 gui.RawHide.Inst0=????
@@ -2203,14 +2203,14 @@ gui.Barrel.MoreItems=§8按住§fShift§8查看更多信息
 
 gui.Size.Tiny=微小
 gui.Size.VerySmall=很小
-gui.Size.Small=小
+gui.Size.Small=小型
 gui.Size.Medium=中等
-gui.Size.Large=大
+gui.Size.Large=大型
 gui.Size.VeryLarge=很大
 gui.Size.Huge=巨大
 
 gui.Weight.Light=轻盈
-gui.Weight.Medium=中等重量
+gui.Weight.Medium=适中
 gui.Weight.Heavy=沉重
 
 gui.Reach.Short=短程
@@ -2270,26 +2270,26 @@ gui.ProPick.FoundVeryLarge=发现了巨量的
 gui.ProPick.FoundNothing=没发现什么特别的
 
 #== Creative Tabs ==
-itemGroup.TFCArmor=(TFC)装备
-itemGroup.TFCMaterials=(TFC)材料
-itemGroup.TFCMisc=(TFC)杂项
-itemGroup.TFCPottery=(TFC)陶瓷
-itemGroup.TFCTools=(TFC)工具
-itemGroup.TFCWeapons=(TFC)武器
-itemGroup.TFCDevices=(TFC)设备
-itemGroup.TFCFoods=(TFC)食物
-itemGroup.TFCBuilding=(TFC)建筑方块
-itemGroup.TFCDecoration=(TFC)装饰方块
+itemGroup.TFCArmor=群峦|装备
+itemGroup.TFCMaterials=群峦|材料
+itemGroup.TFCMisc=群峦|杂项
+itemGroup.TFCPottery=群峦|陶瓷
+itemGroup.TFCTools=群峦|工具
+itemGroup.TFCWeapons=群峦|武器
+itemGroup.TFCDevices=群峦|设备
+itemGroup.TFCFoods=群峦|食物
+itemGroup.TFCBuilding=群峦|建筑
+itemGroup.TFCDecoration=群峦|装饰
 
 #== Skill GUI ==
 skill.armorsmith=盔甲锻造
 skill.gensmith=普通锻造
 skill.toolsmith=工具锻造
 skill.weaponsmith=武器锻造
-skill.agriculture=农 业
-skill.cooking=料 理
-skill.prospecting=勘 探
-skill.butchering=屠 宰
+skill.agriculture=稼穑技巧
+skill.cooking=美食料理
+skill.prospecting=矿产勘探
+skill.butchering=牲禽屠宰
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
@@ -2373,7 +2373,7 @@ gui.taste.6=非常
 gui.taste.7=极端
 gui.taste.8=离谱
 
-gui.skill.novice=菜鸟
+gui.skill.novice=新手
 gui.skill.adept=学徒
 gui.skill.expert=专家
 gui.skill.master=大师
