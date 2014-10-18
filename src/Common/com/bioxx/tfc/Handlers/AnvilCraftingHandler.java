@@ -19,16 +19,25 @@ public class AnvilCraftingHandler
 	@SubscribeEvent
 	public void onAnvilCraft(AnvilCraftEvent event)
 	{
-		if(event.input1.getItem() == TFCItems.Bloom && event.input1.getItemDamage() > 100)
+		if(event.input1.getItem() == TFCItems.RawBloom && event.input1.getItemDamage() > 100)
 		{
 			int dam = event.input1.getItemDamage();
 			float temp = event.input1.getTagCompound()!=null?TFC_ItemHeat.GetTemp(event.input1):0;
-			ItemStack out1 = new ItemStack(TFCItems.Bloom, dam/100, 100);
-			ItemStack out2 = new ItemStack(TFCItems.Bloom, 1, dam % 100);
-			TFC_ItemHeat.SetTemp(out1, temp);
-			TFC_ItemHeat.SetTemp(out2, temp);
-			TFC_Core.giveItemToPlayer(out1, (EntityPlayer)event.entity);
-			TFC_Core.giveItemToPlayer(out2, (EntityPlayer)event.entity);
+			int count = dam/100;
+			int rem = dam % 100;
+			while(count > 0)
+			{
+				ItemStack out1 = new ItemStack(TFCItems.Bloom, 1, 100);
+				TFC_ItemHeat.SetTemp(out1, temp);
+				TFC_Core.giveItemToPlayer(out1, (EntityPlayer)event.entity);
+				count--;
+			}
+			if(rem > 0)
+			{
+				ItemStack out2 = new ItemStack(TFCItems.Bloom, 1, rem);
+				TFC_ItemHeat.SetTemp(out2, temp);
+				TFC_Core.giveItemToPlayer(out2, (EntityPlayer)event.entity);
+			}
 			event.result = null;
 		}
 	}

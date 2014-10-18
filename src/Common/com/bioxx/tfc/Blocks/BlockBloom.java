@@ -57,11 +57,12 @@ public class BlockBloom extends BlockTerraContainer
 	{
 		TileEntityBloom te = (TileEntityBloom)world.getTileEntity(i, j, k);
 		EntityItem ei = new EntityItem(world, i, j, k, new ItemStack(TFCItems.RawBloom, 1, te.size));
-		ei.motionX = 0; ei.motionY = 0; ei.motionZ = 0;
+
 		int[] pos = getBloomery(world, i, j, k);
 		ei.posX = i + pos[0];
 		ei.posY = j + 0.5;
 		ei.posZ = k + pos[1];
+		ei.motionX = 0; ei.motionY = 0; ei.motionZ = 0;
 		world.spawnEntityInWorld(ei);
 	}
 
