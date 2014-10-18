@@ -208,9 +208,9 @@ public class BlockStalactite extends BlockTerra
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
+	public Item getItemDropped(int metadata, Random rand, int fortune)
 	{
-		return Item.getItemById(0);
+		return null;
 	}
 
 	/**
