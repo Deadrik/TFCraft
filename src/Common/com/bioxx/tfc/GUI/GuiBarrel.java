@@ -326,12 +326,13 @@ public class GuiBarrel extends GuiContainerTFC
 					drawCenteredString(this.fontRendererObj,StatCollector.translateToLocal("gui.barrel.brining"), w+88, h+72, 0x555555);
 				}
 			}
-			else if(barrel.recipe == null && barrel.sealtime != 0 && barrel.getFluidStack() != null && barrel.getFluidStack().getFluid() == TFCFluid.VINEGAR)
+			else if(barrel.recipe == null && barrel.getFluidStack() != null && barrel.getFluidStack().getFluid() == TFCFluid.VINEGAR)
 			{
 				if(barrel.getStackInSlot(0) != null && barrel.getStackInSlot(0).getItem() instanceof IFood && 
 						(((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Fruit ||
 						((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Vegetable ||
-						((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Protein) && !Food.isPickled(barrel.getStackInSlot(0)))
+						((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Protein) && 
+						!Food.isPickled(barrel.getStackInSlot(0)) && Food.isBrined(barrel.getStackInSlot(0)))
 				{
 					drawCenteredString(this.fontRendererObj,StatCollector.translateToLocal("gui.barrel.pickling"), w+88, h+72, 0x555555);
 				}
