@@ -12,9 +12,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -37,7 +35,7 @@ public class BlockLogNatural extends BlockTerraContainer
 	String[] woodNames;
 	int searchDist = 10;
 	static int damage = 0;
-	boolean isStone = false;
+	boolean isStoneTool = false;
 	public IIcon[] sideIcons;
 	public IIcon[] innerIcons;
 	public IIcon[] rotatedSideIcons;
@@ -58,17 +56,20 @@ public class BlockLogNatural extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			if(!world.getBlock(x, y - 1, z).isOpaqueCube())
+			//If the base TE somehow gets destroyed and the ProcessTree was not called
+			TileEntity te = world.getTileEntity(x, y, z);
+			if(te != null && te instanceof TETreeLog)
 			{
-				if(world.getBlock(x + 1, y, z) != this && world.getBlock(x - 1, y, z) != this &&
-						world.getBlock(x, y, z + 1) != this && world.getBlock(x, y, z - 1) != this &&
-						world.getBlock(x + 1, y, z + 1) != this && world.getBlock(x + 1, y, z - 1) != this &&
-						world.getBlock(x - 1, y, z + 1) != this && world.getBlock(x - 1, y, z - 1) != this &&
-						world.getBlock(x + 1, y - 1, z) != this && world.getBlock(x - 1, y - 1, z) != this &&
-						world.getBlock(x, y - 1, z + 1) != this && world.getBlock(x, y - 1, z - 1) != this &&
-						world.getBlock(x + 1, y - 1, z + 1) != this && world.getBlock(x + 1, y - 1, z - 1) != this &&
-						world.getBlock(x - 1, y - 1, z + 1) != this && world.getBlock(x - 1, y - 1, z - 1) != this)
+				TETreeLog teLog = (TETreeLog) te;
+				TileEntity teR = world.getTileEntity(teLog.baseX, teLog.baseY, teLog.baseZ);
+				if(!teLog.isBase && teR == null)
 					world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+
+				if(teLog.isBase)
+				{
+					if(!canTreeStay(world, x, y - 1, z))
+						ProcessTree(world, null, x, y, z, false);
+				}
 			}
 		}
 	}
@@ -79,11 +80,12 @@ public class BlockLogNatural extends BlockTerraContainer
 		return new TETreeLog();
 	}
 
-	@SideOnly(Side.CLIENT)
-	@Override
 	/**
 	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SideOnly(Side.CLIENT)
+	@Override
 	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
 		for(int i = 0; i < woodNames.length; i++)
@@ -127,13 +129,11 @@ public class BlockLogNatural extends BlockTerraContainer
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int meta)
 	{
-		
 	}
 
 	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int side, EntityPlayer entityplayer)
 	{
-		
 	}
 
 	@Override
@@ -149,11 +149,24 @@ public class BlockLogNatural extends BlockTerraContainer
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion ex)
+	public void onBlockExploded(World world, int x, int y, int z, Explosion explosion)
 	{
-		//TODO This part needs more attention. The barrel explosion destroys to many blocks too fast.
-		isStone = true;
-		ProcessTree(world, null, x, y, z, true);
+		TileEntity te = world.getTileEntity(x, y, z);
+		if(te != null && te instanceof TETreeLog)
+		{
+			TETreeLog teLog = (TETreeLog) te;
+			TileEntity teR = world.getTileEntity(teLog.baseX, teLog.baseY, teLog.baseZ);
+			if(teR != null && teR instanceof TETreeLog)
+			{
+				TETreeLog teRoot = (TETreeLog) teR;
+				if(!teRoot.getDoingExplosion())
+				{
+					teRoot.setDoingExplosion(true);
+					isStoneTool = true;
+					ProcessTree(world, null, teLog.baseX, teLog.baseY, teLog.baseZ, true);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -164,11 +177,11 @@ public class BlockLogNatural extends BlockTerraContainer
 			ItemStack equip = player.getCurrentEquippedItem();
 			if(equip != null)
 			{
-				isStone = false;
-				for(int cnt = 0; cnt < TFCItems.StoneTools.length && !isStone; cnt++)
+				isStoneTool = false;
+				for(int cnt = 0; cnt < TFCItems.StoneTools.length && !isStoneTool; cnt++)
 				{
 					if(equip.getItem() == TFCItems.StoneTools[cnt])
-						isStone = true;
+						isStoneTool = true;
 				}
 			}
 
@@ -176,22 +189,12 @@ public class BlockLogNatural extends BlockTerraContainer
 
 			if(ret)
 				dmgTool(world, player);
-			else if(equip != null && isValidTool(equip.getItem()))
-				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg.noTreeChop")));
+			/*else if(equip != null && isValidTool(equip.getItem()))
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg.noTreeChop")));*/
 
 			return ret;
 		}
 		return false;
-	}
-	
-	@Override
-	public void onBlockPreDestroy(World world, int x, int y, int z, int oldMeta)
-	{
-		//This gets called a lot, not sure if this is the right place
-
-		//System.out.println("------PRE DESTROY CALLED!-------");
-		/*isStone = true;
-		ProcessTree(world, null, x, y, z, true);*/
 	}
 
 	@Override
@@ -200,6 +203,24 @@ public class BlockLogNatural extends BlockTerraContainer
 		return TFCItems.Logs;
 	}
 
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
+	{
+		//If the ground
+		if (!world.isRemote)
+		{
+			TileEntity te = world.getTileEntity(x, y, z);
+			if(te != null && te instanceof TETreeLog)
+			{
+				TETreeLog teLog = (TETreeLog) te;
+				if(y == teLog.baseY - 1)
+				{
+					if(!canTreeStay(world, teLog.baseX, teLog.baseY - 1, teLog.baseZ))
+						ProcessTree(world, null, x, y, z, false);
+				}
+			}
+		}
+	}
 
 	//*****************
 	// Private methods
@@ -212,6 +233,11 @@ public class BlockLogNatural extends BlockTerraContainer
 			if(te != null && te instanceof TETreeLog)
 			{
 				TETreeLog teLog = (TETreeLog) te;
+
+				//Allow chopping a tree only 1 blocks above the base block.
+				//Being able to cut down a tree by chopping a branch block is strange.
+				if(!teLog.isBase && (y - teLog.baseY) > 1 && !player.capabilities.isCreativeMode) return false;
+
 				if(!teLog.isBase)
 					return ProcessTree(world, player, teLog.baseX, teLog.baseY, teLog.baseZ, dropItem);
 
@@ -221,8 +247,13 @@ public class BlockLogNatural extends BlockTerraContainer
 				{
 					//Check if a valid tool is being used and is not too damaged to chop this tree down
 					ItemStack equip = player.getCurrentEquippedItem();
-					if(equip == null) return false; //Bare hands not allowed
-					if(equip != null)
+
+					if(equip == null)
+					{
+						//Breaking logs with bare hands is not allowed
+						return false;
+					}
+					else
 					{
 						if(!isValidTool(equip.getItem())) return false;
 						if(isValidTool(equip.getItem()) && (equip.getMaxDamage() - equip.getItemDamage()) < schem.getLogCount()) return false;
@@ -287,7 +318,7 @@ public class BlockLogNatural extends BlockTerraContainer
 				world.setBlock(localX, localY, localZ, Blocks.air, 0, 0x2);
 				if(dropItem)
 				{
-					if(isStone)
+					if(isStoneTool)
 					{
 						if(world.rand.nextInt(10) != 0)
 							dropBlockAsItem(world, localX, localY, localZ, new ItemStack(TFCItems.Logs, 1, meta));
@@ -426,5 +457,19 @@ public class BlockLogNatural extends BlockTerraContainer
 			}
 		}
 		return isValid;
+	}
+
+	private boolean canTreeStay(World w, int x, int y, int z)
+	{
+		int k = 0;
+		for(int i = -1; i < 2; i++)
+		{
+			for(int j = -1; j < 2; j++)
+			{
+				if(w.isAirBlock(x - i, y, z - j)) k++;
+			}
+		}
+		if(k < 4) return true;
+		return false;
 	}
 }

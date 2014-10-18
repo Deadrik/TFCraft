@@ -14,6 +14,7 @@ public class TETreeLog extends NetworkTileEntity
 	public byte schemIndex = -1;
 	public byte treeID = 0;
 	public byte rotation = 0;
+	private boolean doingExplosion = false;
 
 	public TETreeLog()
 	{
@@ -103,4 +104,15 @@ public class TETreeLog extends NetworkTileEntity
 			nbt.setByte("rotation", rotation);
 		}
 	}
+
+	public void setDoingExplosion(boolean flag)
+	{
+		this.doingExplosion = flag;
+	}
+
+	public boolean getDoingExplosion()
+	{
+		return doingExplosion;
+	}
+
 }

@@ -61,7 +61,7 @@ public class GenCommand extends CommandBase
 					
 					player.addChatMessage(new ChatComponentText("Generating Small " + params[1] + " Tree"));
 					WorldGenerator treeGen = TFCBiome.getTreeGen(i, false);
-					if (!treeGen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int) player.posX, (int) player.posY, (int) player.posZ))
+					if (!treeGen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int) player.posX+1, (int) player.posY, (int) player.posZ))
 						player.addChatMessage(new ChatComponentText("Generation Failed"));
 				}
 				else
@@ -76,7 +76,7 @@ public class GenCommand extends CommandBase
 			{
 				player.addChatMessage(new ChatComponentText("Generating Big " + params[1] + " Tree"));
 				WorldGenerator treeGen = TFCBiome.getTreeGen(i, true);
-				if (!treeGen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int) player.posX, (int) player.posY, (int) player.posZ))
+				if (!treeGen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int) player.posX+1, (int) player.posY, (int) player.posZ))
 					player.addChatMessage(new ChatComponentText("Generation Failed"));
 			}
 			else

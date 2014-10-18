@@ -134,7 +134,11 @@ public class WorldGenTrees extends WorldGenerator
 			else
 			{
 				if(world.getBlock(localX, localY, localZ).canBeReplacedByLeaves(world, localX, localY, localZ))
+				{
 					world.setBlock(localX, localY, localZ, leaves, localMeta, 0x2);
+					TETreeLog te = (TETreeLog) world.getTileEntity(localX, localY, localZ);
+					te.Setup(baseX, baseY, baseZ);
+				}
 			}
 		}
 	}

@@ -5,6 +5,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -23,13 +25,16 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.TreeRegistry;
+import com.bioxx.tfc.Core.TreeSchematic;
 import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
+import com.bioxx.tfc.TileEntities.TETreeLog;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockCustomLeaves extends BlockLeaves implements IShearable
+public class BlockCustomLeaves extends BlockLeaves implements IShearable, ITileEntityProvider
 {
 	protected int adjacentTreeBlocks[][][];
 	protected String[] woodNames;
@@ -39,14 +44,14 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	public BlockCustomLeaves()
 	{
 		super();
-		this.setTickRandomly(false);
 		this.woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, this.woodNames, 0, 16);
 		this.icons = new IIcon[16];
 		this.iconsOpaque = new IIcon[16];
-		this.setTickRandomly(false);
+		this.setTickRandomly(true);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
@@ -82,8 +87,8 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
 	{
-		Block block = world.getBlock(x, y, z);
-		/*if(!Minecraft.isFancyGraphicsEnabled() && block == this) 
+		/*Block block = world.getBlock(x, y, z);
+		if(!Minecraft.isFancyGraphicsEnabled() && block == this) 
 			return false;*/
 
 		return side == 0 && this.minY > 0.0D ? true : (side == 1 && this.maxY < 1.0D ? true : (side == 2 && this.minZ > 0.0D ? true : (side == 3 && this.maxZ < 1.0D ? true : (side == 4 && this.minX > 0.0D ? true : (side == 5 && this.maxX < 1.0D ? true : !world.getBlock(x, y, z).isOpaqueCube())))));
@@ -93,7 +98,6 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
 		onNeighborBlockChange(world, x, y, z, null);
-		return;
 	}
 
 	@Override
@@ -103,99 +107,28 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int xOrig, int yOrig, int zOrig, Block b)
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
 	{
 		if (!world.isRemote)
 		{
-			int var6 = world.getBlockMetadata(xOrig, yOrig, zOrig);
-
-			byte searchRadius = 4;
-			int maxDist = searchRadius + 1;
-			byte searchDistance = 11;
-			int center = searchDistance / 2;
-			adjacentTreeBlocks = null;
-			if (this.adjacentTreeBlocks == null)
-				this.adjacentTreeBlocks = new int[searchDistance][searchDistance][searchDistance];
-
-			if (world.checkChunksExist(xOrig - maxDist, yOrig - maxDist, zOrig - maxDist, xOrig + maxDist, yOrig + maxDist, zOrig + maxDist))
+			int meta = world.getBlockMetadata(x, y, z);
+			TileEntity te = world.getTileEntity(x, y, z);
+			if(te != null && te instanceof TETreeLog)
 			{
-				for (int xd = -searchRadius; xd <= searchRadius; ++xd)
+				TETreeLog teLeaves = (TETreeLog) te;
+				TileEntity teR = world.getTileEntity(teLeaves.baseX, teLeaves.baseY, teLeaves.baseZ);
+				if(teR == null) world.setBlockToAir(x, y, z);
+				if(teR != null && teR instanceof TETreeLog)
 				{
-					int searchY = searchRadius - Math.abs(xd);
-					for (int yd = -searchY; yd <= searchY; ++yd)
-					{
-						int searchZ = searchY - Math.abs(yd);
-						for (int zd = -searchZ; zd <= searchZ; ++zd)
-						{
-							Block block = world.getBlock(xOrig + xd, yOrig + yd, zOrig + zd);
-
-							if (block == TFCBlocks.LogNatural || block == TFCBlocks.LogNatural2)
-								this.adjacentTreeBlocks[xd + center][yd + center][zd + center] = 0;
-							else if ((block == this) && var6 == world.getBlockMetadata(xOrig + xd, yOrig + yd, zOrig + zd))
-								this.adjacentTreeBlocks[xd + center][yd + center][zd + center] = -2;
-							else
-								this.adjacentTreeBlocks[xd + center][yd + center][zd + center] = -1;
-						}
-					}
+					TETreeLog teRoot = (TETreeLog) teR;
+					TreeSchematic shem = TreeRegistry.instance.getTreeSchematic(teRoot.treeID, teRoot.schemIndex);
+					if(shem == null) System.out.println("TREE SCHEM = NULL !! meta:"+meta+" shemIndex:"+teRoot.schemIndex+" treeID:"+teRoot.treeID);
+					if(shem != null && !world.checkChunksExist(z - shem.getCenterX(), y, z - shem.getCenterZ(), z + shem.getCenterX(), y, z + shem.getCenterZ()))
+						if(!canLeavesStay(world, x, y, z, shem, meta))
+							world.setBlockToAir(x, y, z);
 				}
-
-				for (int pass = 1; pass <= 4; ++pass)
-				{
-					for (int xd = -searchRadius; xd <= searchRadius; ++xd)
-					{
-						int searchY = searchRadius - Math.abs(xd);
-						for (int yd = -searchY; yd <= searchY; ++yd)
-						{
-							int searchZ = searchY - Math.abs(yd);
-							for (int zd = -searchZ; zd <= searchZ; ++zd)
-							{
-								if (this.adjacentTreeBlocks[xd + center][yd + center][zd + center] == pass - 1)
-								{
-									if (this.adjacentTreeBlocks[xd + center - 1][yd + center][zd + center] == -2)
-										this.adjacentTreeBlocks[xd + center - 1][yd + center][zd + center] = pass;
-
-									if (this.adjacentTreeBlocks[xd + center + 1][yd + center][zd + center] == -2)
-										this.adjacentTreeBlocks[xd + center + 1][yd + center][zd + center] = pass;
-
-									if (this.adjacentTreeBlocks[xd + center][yd + center - 1][zd + center] == -2)
-										this.adjacentTreeBlocks[xd + center][yd + center - 1][zd + center] = pass;
-
-									if (this.adjacentTreeBlocks[xd + center][yd + center + 1][zd + center] == -2)
-										this.adjacentTreeBlocks[xd + center][yd + center + 1][zd + center] = pass;
-
-									if (this.adjacentTreeBlocks[xd + center][yd + center][zd + center - 1] == -2)
-										this.adjacentTreeBlocks[xd + center][yd + center][zd + center - 1] = pass;
-
-									if (this.adjacentTreeBlocks[xd + center][yd + center][zd + center + 1] == -2)
-										this.adjacentTreeBlocks[xd + center][yd + center][zd + center + 1] = pass;
-								}
-							}
-						}
-					}
-				}
-			}
-
-			int res = this.adjacentTreeBlocks[center][center][center];
-
-			if (res < 0)
-			{
-				if(world.getChunkFromBlockCoords(xOrig, zOrig) != null)
-					this.destroyLeaves(world, xOrig, yOrig, zOrig);
 			}
 		}
-	}
-
-	private void destroyLeaves(World world, int x, int y, int z)
-	{
-		world.setBlockToAir(x, y, z);
-	}
-
-	private void removeLeaves(World world, int x, int y, int z)
-	{
-		dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-		if(world.rand.nextInt(100) < 30)
-			dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Stick, 1));
-		world.setBlockToAir(x, y, z);
 	}
 
 	@Override
@@ -261,7 +194,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 			else if (world.rand.nextInt(100) < 6)
 				dropSapling(world, i, j, k, meta);;
 
-				super.harvestBlock(world, entityplayer, i, j, k, meta);
+			super.harvestBlock(world, entityplayer, i, j, k, meta);
 		}
 	}
 
@@ -314,5 +247,63 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z)
 	{
 		return false;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World var1, int var2)
+	{
+		return new TETreeLog();
+	}
+
+
+	//*****************
+	// Private methods
+	//*****************
+	private void removeLeaves(World world, int x, int y, int z)
+	{
+		dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+		if(world.rand.nextInt(100) < 30)
+			dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Stick, 1));
+		world.setBlockToAir(x, y, z);
+	}
+
+	private boolean canLeavesStay(World w, int x, int y, int z, TreeSchematic shem, int meta)
+	{
+		boolean canStay = false;
+		int rad = 1;
+		Block block;
+
+		outerloop:
+		{
+			for(int yy = -rad; yy <= rad; yy++)
+			{
+				for(int xx = -rad; xx <= rad; xx++)
+				{
+					for(int zz = -rad; zz <= rad; zz++)
+					{
+						if (xx == 0 && yy == 0 && zz == 0) continue; //don't check current square
+
+						block = w.getBlock(x + xx, y + yy, z + zz);
+						if((block == TFCBlocks.LogNatural
+								|| block == TFCBlocks.LogNatural2
+								|| block == TFCBlocks.Leaves
+								|| block == TFCBlocks.Leaves2)
+								&& meta == w.getBlockMetadata(x + xx, y + yy, z + zz))
+						{
+							canStay = true;
+							break outerloop;
+						}
+					}
+				}
+			}
+		}
+		if(!canStay) return false;
+
+		if(canStay)
+		{
+			//TODO If there is a path of touching leaves to a logNatural block in the schematic, then leaves can stay
+		}
+
+		return canStay;
 	}
 }
