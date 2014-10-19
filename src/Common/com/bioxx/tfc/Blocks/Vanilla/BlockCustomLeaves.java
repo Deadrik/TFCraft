@@ -122,7 +122,6 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable, ITileE
 				{
 					TETreeLog teRoot = (TETreeLog) teR;
 					TreeSchematic shem = TreeRegistry.instance.getTreeSchematic(teRoot.treeID, teRoot.schemIndex);
-					if(shem == null) System.out.println("TREE SCHEM = NULL !! meta:"+meta+" shemIndex:"+teRoot.schemIndex+" treeID:"+teRoot.treeID);
 					if(shem != null && !world.checkChunksExist(z - shem.getCenterX(), y, z - shem.getCenterZ(), z + shem.getCenterX(), y, z + shem.getCenterZ()))
 						if(!canLeavesStay(world, x, y, z, shem, meta))
 							world.setBlockToAir(x, y, z);
