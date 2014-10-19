@@ -9,6 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -68,7 +69,11 @@ public class BlockGravel extends BlockTerra
 	@Override
 	public Item getItemDropped(int metadata, Random rand, int fortune)
 	{
-		return Item.getItemFromBlock(this);
+		if (fortune > 3)
+		{
+			fortune = 3;
+		}
+		return rand.nextInt(10 - fortune * 3) == 0 ? Items.flint : Item.getItemFromBlock(this);
 	}
 
 	public static boolean canFallBelow(World world, int x, int y, int z)
