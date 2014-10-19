@@ -38,6 +38,13 @@ public class AnvilManager
 		recipesWeld.add(recipe);
 	}
 
+	public void clearRecipes()
+	{
+		recipes.clear();
+		recipesWeld.clear();
+		plans.clear();
+	}
+
 	/**
 	 * Adds a name for a plan type to the plans list. If it already exists then it will not be added. All types are not case sensative as it
 	 * autoconverts to lowercase when adding to prevent bugs due to case.

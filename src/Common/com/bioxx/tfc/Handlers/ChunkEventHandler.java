@@ -21,6 +21,7 @@ import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowCrops;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Crafting.AnvilManager;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -100,6 +101,7 @@ public class ChunkEventHandler
 	{
 		TFC_Climate.removeCacheManager(event.world);
 		TFC_Core.removeCDM(event.world);
+		AnvilManager.getInstance().clearRecipes();
 	}
 
 	@SubscribeEvent
