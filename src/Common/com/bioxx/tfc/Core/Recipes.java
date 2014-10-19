@@ -1582,6 +1582,10 @@ public class Recipes
 	{
 		AnvilManager manager = AnvilManager.getInstance();
 
+        manager.getRecipeList().clear();
+        manager.getWeldRecipeList().clear();
+        manager.getPlans().clear();
+
 		manager.addPlan("ingot", new PlanRecipe(
 				new RuleEnum[] {RuleEnum.HITLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.HITTHIRDFROMLAST}));
 		manager.addPlan("sheet", new PlanRecipe(
