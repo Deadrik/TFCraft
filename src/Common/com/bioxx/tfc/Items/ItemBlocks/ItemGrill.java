@@ -25,13 +25,15 @@ public class ItemGrill extends ItemTerraBlock
 	{
 		if(!world.isRemote)
 		{
-			if(side == 1 && world.isAirBlock(x, y+1, z) && checkSides(world, x, y, z))
+			if(side == 1 && world.isAirBlock(x, y+1, z))
 			{
 				TileEntity te = world.getTileEntity(x, y, z);
-				if(te != null && te instanceof TEFireEntity)
+				if(te != null && te instanceof TEFireEntity && checkSides(world, x, y, z))
 					world.setBlock( x, y+1, z, TFCBlocks.Grill, itemstack.getItemDamage(), 0x2);
 				else if(world.isAirBlock(x, y+2, z) && checkSides(world, x, y+1, z))
 					world.setBlock( x, y+2, z, TFCBlocks.Grill, itemstack.getItemDamage(), 0x2);
+				else
+					return false;  // don't delete misplaced Grill
 				player.inventory.mainInventory[player.inventory.currentItem].stackSize--;
 				return true;
 			}
