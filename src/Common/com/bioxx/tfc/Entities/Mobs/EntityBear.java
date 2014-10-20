@@ -858,6 +858,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		case SHEAR: flag = familiarity > 10;break;
 		case MILK: flag = familiarity > 10;break;
 		case NAME: flag = familiarity > 70;break;
+		case TOLERATEPLAYER: flag = familiarity > 75; break;
 		default: break;
 		}
 		if(!flag && player != null && !player.worldObj.isRemote){
