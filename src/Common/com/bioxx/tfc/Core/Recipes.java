@@ -1896,10 +1896,10 @@ public class Recipes
 
 		addTrapDoor(TFCItems.BismuthSheet, 0);addTrapDoor(TFCItems.BismuthBronzeSheet, 1);addTrapDoor(TFCItems.BlackBronzeSheet, 2);addTrapDoor(TFCItems.BlackSteelSheet, 3);
 		addTrapDoor(TFCItems.BlueSteelSheet, 4);addTrapDoor(TFCItems.BrassSheet, 5);addTrapDoor(TFCItems.BronzeSheet, 6);addTrapDoor(TFCItems.CopperSheet, 7);
-		addTrapDoor(TFCItems.GoldSheet, 8);addTrapDoor(TFCItems.WroughtIronSheet, 9);addTrapDoor(TFCItems.LeadSheet, 10);addTrapDoor(TFCItems.NickelSheet, 11);
-		addTrapDoor(TFCItems.NickelSheet, 12);addTrapDoor(TFCItems.PlatinumSheet, 13);addTrapDoor(TFCItems.RedSteelSheet, 14);addTrapDoor(TFCItems.RoseGoldSheet, 15);
-		addTrapDoor(TFCItems.SilverSheet, 16);addTrapDoor(TFCItems.SteelSheet, 17);addTrapDoor(TFCItems.SterlingSilverSheet, 18);addTrapDoor(TFCItems.TinSheet, 19);
-		addTrapDoor(TFCItems.ZincSheet, 20);
+		addTrapDoor(TFCItems.GoldSheet, 8);addTrapDoor(TFCItems.LeadSheet, 9);addTrapDoor(TFCItems.NickelSheet, 10);
+		addTrapDoor(TFCItems.NickelSheet, 11);addTrapDoor(TFCItems.PlatinumSheet, 12);addTrapDoor(TFCItems.RedSteelSheet, 13);addTrapDoor(TFCItems.RoseGoldSheet, 14);
+		addTrapDoor(TFCItems.SilverSheet, 15);addTrapDoor(TFCItems.SteelSheet, 16);addTrapDoor(TFCItems.SterlingSilverSheet, 17);addTrapDoor(TFCItems.TinSheet, 18);
+		addTrapDoor(TFCItems.WroughtIronSheet, 19);addTrapDoor(TFCItems.ZincSheet, 20);
 
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot2x), new ItemStack(TFCItems.WroughtIronIngot2x),"grill", AnvilReq.WROUGHTIRON, new ItemStack(TFCBlocks.Grill, 1, 0)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronKnifeHead), new ItemStack(TFCItems.WroughtIronKnifeHead),"shears", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.Shears, 1, 0)));
@@ -1918,16 +1918,16 @@ public class Recipes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.BronzeIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (6 << 5))));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.CopperIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (7 << 5))));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.GoldIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (8 << 5))));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.WroughtIronIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (9 << 5))));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.LeadIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (10 << 5))));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.NickelIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (11 << 5))));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.PlatinumIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (13 << 5))));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.RedSteelIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (14 << 5))));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.RoseGoldIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (15 << 5))));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.SilverIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (16 << 5))));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.SteelIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (17 << 5))));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.SterlingSilverIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (18 << 5))));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.TinIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (19 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.LeadIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (9 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.NickelIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (10 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.PlatinumIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (12 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.RedSteelIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (13 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.RoseGoldIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (14 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.SilverIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (15 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.SteelIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (16 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.SterlingSilverIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (17 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.TinIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (18 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.WroughtIronIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (19 << 5))));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.ZincIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (20 << 5))));
 	}
 
