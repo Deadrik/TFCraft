@@ -38,11 +38,7 @@ public class TFC_CoreRender
 		TEPartial te = (TEPartial) renderblocks.blockAccess.getTileEntity(x, y, z);
 		int md = renderblocks.blockAccess.getBlockMetadata(x, y, z);
 
-		boolean breaking = false;
-		/*if(renderblocks.overrideBlockTexture >= 240)
-        {
-        	breaking = true;
-        }*/
+		boolean breaking = renderblocks.overrideBlockTexture != null;
 
 		if(te.TypeID <= 0)
 			return false;
@@ -87,12 +83,8 @@ public class TFC_CoreRender
 
 	public static boolean renderBlockStairs(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
-		boolean breaking = false;
-		/*if(renderblocks.overrideBlockTexture >= 240)
-        {
-        	breaking = true;
-        }*/
-
+		boolean breaking = renderblocks.overrideBlockTexture != null;
+		
 		int var5 = renderblocks.blockAccess.getBlockMetadata(x, y, z);
 		int var6 = var5 & 3;
 		float var7 = 0.0F;
