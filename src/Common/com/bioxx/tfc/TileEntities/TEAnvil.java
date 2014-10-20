@@ -801,50 +801,63 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 
 	@Override
 	public void handleDataPacket(NBTTagCompound nbt) {
+		boolean soundFlag = false;
 		switch(nbt.getInteger("action"))
 		{
 		case -1:
 		{
+			soundFlag = canBeWorked();
 			actionLightHammer();
 			break;
 		}
 		case 0:
 		{
+			soundFlag = canBeWorked();
 			actionHeavyHammer();
 			break;
 		}
 		case 1:
 		{
+			soundFlag = canBeWorked();
 			actionDraw();
 			break;
 		}
 		case 2:
 		{
+			soundFlag = canBeWorked();
 			actionHammer();
 			break;
 		}
 		case 3:
 		{
+			soundFlag = canBeWorked();
 			actionPunch();
 			break;
 		}
 		case 4:
 		{
+			soundFlag = canBeWorked();
 			actionBend();
 			break;
 		}
 		case 5:
 		{
+			soundFlag = canBeWorked();
 			actionUpset();
 			break;
 		}
 		case 6:   
 		{
+			soundFlag = canBeWorked();
 			actionShrink();
 			break;
 		}
 		case 7:
 		{
+			soundFlag = (isTemperatureWeldable(WELD1_SLOT) && isTemperatureWeldable(WELD2_SLOT) && anvilItemStacks[HAMMER_SLOT] != null && 
+					(anvilItemStacks[WELD1_SLOT].getItemDamage() == 0 || anvilItemStacks[WELD1_SLOT].getItem().getHasSubtypes() == true) && 
+					(anvilItemStacks[WELD2_SLOT].getItemDamage() == 0 || anvilItemStacks[WELD2_SLOT].getItem().getHasSubtypes() == true) && 
+					workedRecently == 0 && anvilItemStacks[WELDOUT_SLOT] == null);
 			actionWeld();
 			break;
 		}
@@ -858,8 +871,10 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			}
 			return;
 		}
-		}	
-		worldObj.playSoundEffect(xCoord,yCoord,zCoord, TFC_Sounds.METALIMPACT, 0.1F, 0.1F + (worldObj.rand.nextFloat()/4));
+		}
+		if(soundFlag){
+			worldObj.playSoundEffect(xCoord,yCoord,zCoord, TFC_Sounds.METALIMPACT, 0.1F, 0.1F + (worldObj.rand.nextFloat()/4));
+		}
 	}
 
 	@Override
