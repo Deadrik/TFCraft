@@ -35,6 +35,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.AI.EntityAITargetNonTamedTFC;
 import com.bioxx.tfc.Food.ItemFoodMeat;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
@@ -119,7 +120,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntitySheepTFC.class,200, false));
 		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityDeer.class,200, false));
 		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false));
-		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityPlayer.class, 200, false));
+		targetTasks.addTask (4, new EntityAITargetNonTamedTFC(this, EntityPlayer.class, 200, false));
 		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityHorseTFC.class, 200, false));
 		targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		//targetTasks.addTask(2, new EntityAIPanic(this,moveSpeed*1.5F));
@@ -814,12 +815,16 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		if(familiarity > 100)familiarity = 100;
 		if(familiarity < 0)familiarity = 0;
 	}
-
+	
+	@Override
+	public boolean isFood(ItemStack item) {
+		return  item != null && item.getItem().equals(TFCItems.fishRaw);
+	}
 
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && stack.getItem().equals(TFCItems.fishRaw)){
+		if(stack != null && isFood(stack)){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
@@ -855,7 +860,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		case NAME: flag = familiarity > 70;break;
 		default: break;
 		}
-		if(!flag && !player.worldObj.isRemote){
+		if(!flag && player != null && !player.worldObj.isRemote){
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
 		}
 		return flag;

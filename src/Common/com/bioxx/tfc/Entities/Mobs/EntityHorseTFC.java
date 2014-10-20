@@ -866,14 +866,15 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		return false;
 	}
 
-	public boolean isBreedingItemTFC(ItemStack par1ItemStack)
+	public boolean isBreedingItemTFC(ItemStack item)
 	{
-		return !pregnant && (
-				par1ItemStack.getItem() == TFCItems.WheatGrain ||
-				par1ItemStack.getItem() == TFCItems.OatGrain ||
-				par1ItemStack.getItem() == TFCItems.RiceGrain ||
-				par1ItemStack.getItem() == TFCItems.BarleyGrain ||
-				par1ItemStack.getItem() == TFCItems.RyeGrain);
+		return !pregnant && isFood(item);
+	}
+	
+	@Override
+	public boolean isFood(ItemStack item) {
+		return item != null && (item.getItem() == TFCItems.WheatGrain ||item.getItem() == TFCItems.OatGrain||item.getItem() == TFCItems.RiceGrain||
+				item.getItem() == TFCItems.BarleyGrain||item.getItem() == TFCItems.RyeGrain||item.getItem() == TFCItems.MaizeEar);
 	}
 
 	@Override
@@ -1182,7 +1183,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		case NAME: flag = familiarity > 20;break;
 		default: break;
 		}
-		if(!flag && !player.worldObj.isRemote){
+		if(!flag && player != null && !player.worldObj.isRemote){
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
 		}
 		return flag;

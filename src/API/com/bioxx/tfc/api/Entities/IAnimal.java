@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
 
 public interface IAnimal
@@ -16,8 +17,8 @@ public interface IAnimal
 	
 	public enum InteractionEnum
 	{
-		MOUNT,SHEAR,MILK,BREED, NAME;
-		public static final InteractionEnum[] interactions = {MOUNT,SHEAR,MILK,BREED, NAME};
+		MOUNT,SHEAR,MILK,BREED, NAME, TOLERATEPLAYER;
+		public static final InteractionEnum[] interactions = {MOUNT,SHEAR,MILK,BREED, NAME, TOLERATEPLAYER};
 	}
 
 	public GenderEnum getGender();
@@ -50,6 +51,13 @@ public interface IAnimal
 	 * Aggression affects how likely an animal is to attack another player or animal and the ferocity of which it does so.
 	 */
 	public float getAggression();
+	
+	/**
+	 * separate from isBreedingItem, this just determines if an animal would eat from an itemstack.
+	 * @param item the item
+	 * @return see desc.
+	 */
+	public boolean isFood(ItemStack item);
 
 	/**
 	 * @return Obedience modifier of the animal. Used for rendering and various other purposes.

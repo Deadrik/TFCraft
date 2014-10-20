@@ -26,6 +26,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
+import com.bioxx.tfc.Entities.AI.EntityAISitTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Entities.IAnimal;
@@ -77,6 +78,9 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		super(par1World);
 		this.tasks.addTask(6, new EntityAIMateTFC(this, worldObj, 1));
 		//this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntitySheepTFC.class, 200, false));
+		this.targetTasks.removeTask(this.aiSit);
+		this.aiSit = new EntityAISitTFC(this);
+        this.tasks.addTask(2, this.aiSit);
 		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityChickenTFC.class, 200, false));
 		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityPheasantTFC.class, 200, false));
 		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false));
@@ -436,11 +440,16 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	{
 		return false;
 	}
-
-	public boolean isBreedingItemTFC(ItemStack is)
+	
+	public boolean isBreedingItemTFC(ItemStack item)
 	{
-		return !pregnant && is != null &&
-				(is.getItem() == TFCItems.porkchopRaw || is.getItem() == TFCItems.beefRaw || is.getItem() == TFCItems.muttonRaw || is.getItem() == TFCItems.horseMeatRaw);
+		return !pregnant && isFood(item);
+	}
+	
+	@Override
+	public boolean isFood(ItemStack item) {
+		return item != null &&
+				(item.getItem() == TFCItems.porkchopRaw || item.getItem() == TFCItems.beefRaw || item.getItem() == TFCItems.muttonRaw || item.getItem() == TFCItems.horseMeatRaw);
 	}
 
 	@Override
@@ -615,16 +624,10 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 			}
 			if(player.getHeldItem() != null)
 			{
-				Item item = player.getHeldItem().getItem();
-				if(item == (TFCItems.muttonRaw)||
-						item ==(TFCItems.horseMeatRaw)||
-						item ==(TFCItems.venisonRaw)||
-						item ==(TFCItems.porkchopRaw)||
-						item ==(TFCItems.beefRaw)||
-						item ==(TFCItems.chickenRaw)||
-						item ==(TFCItems.fishRaw)||
-						item ==(TFCItems.calamariRaw))
+				ItemStack is = player.getHeldItem();
+				if(isFood(is))
 				{
+					Item item = is.getItem();
 					if(item instanceof ItemFoodTFC && hunger <= 160000)
 					{
 						player.inventory.setInventorySlotContents(player.inventory.currentItem, (((ItemFoodTFC)item).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
@@ -788,7 +791,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		case NAME: flag = familiarity > 40;break;
 		default: break;
 		}
-		if(!flag && !player.worldObj.isRemote){
+		if(!flag && player != null && !player.worldObj.isRemote){
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
 		}
 		return flag;

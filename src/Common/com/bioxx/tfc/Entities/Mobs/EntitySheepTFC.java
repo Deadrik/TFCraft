@@ -340,14 +340,15 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		return false;
 	}
 
-	public boolean isBreedingItemTFC(ItemStack par1ItemStack)
+	public boolean isBreedingItemTFC(ItemStack item)
 	{
-		return !pregnant && (
-				par1ItemStack.getItem() == TFCItems.WheatGrain ||
-				par1ItemStack.getItem() == TFCItems.OatGrain ||
-				par1ItemStack.getItem() == TFCItems.RiceGrain ||
-				par1ItemStack.getItem() == TFCItems.BarleyGrain ||
-				par1ItemStack.getItem() == TFCItems.RyeGrain);
+		return !pregnant && isFood(item);
+	}
+	
+	@Override
+	public boolean isFood(ItemStack item) {
+		return item != null && (item.getItem() == TFCItems.WheatGrain ||item.getItem() == TFCItems.OatGrain||item.getItem() == TFCItems.RiceGrain||
+				item.getItem() == TFCItems.BarleyGrain||item.getItem() == TFCItems.RyeGrain||item.getItem() == TFCItems.MaizeEar);
 	}
 
 	/**
@@ -382,6 +383,9 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 			if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemKnife && !getSheared() && this.checkFamiliarity(InteractionEnum.SHEAR, player) && getPercentGrown(this) > 0.95F)
 			{
 				setSheared(true);
+				if(!familiarizedToday){
+					this.familiarize(player);
+				}
 				this.entityDropItem(new ItemStack(TFCItems.Wool,1), 0.0F);
 				if(!player.capabilities.isCreativeMode)
 					player.getHeldItem().damageItem(1, player);
@@ -736,7 +740,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && !familiarizedToday && this.isBreedingItemTFC(stack) && ((isAdult() && familiarity < 30) || !isAdult())){
+		if(stack != null && !familiarizedToday && this.isBreedingItemTFC(stack) && ((isAdult() && familiarity < 50) || !isAdult())){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
@@ -777,7 +781,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		case NAME: flag = familiarity > 40;break;
 		default: break;
 		}
-		if(!flag && !player.worldObj.isRemote){
+		if(!flag && player != null && !player.worldObj.isRemote){
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
 		}
 		return flag;

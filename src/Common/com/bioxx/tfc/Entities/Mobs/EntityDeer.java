@@ -773,6 +773,12 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 
 	}
 	
+	//Unused for now
+	@Override
+	public boolean isFood(ItemStack item) {
+		return false;
+	}
+	
 	@Override
 	public boolean trySetName(String name, EntityPlayer player) {
 		if(this.checkFamiliarity(InteractionEnum.NAME, player) && !this.hasCustomNameTag()){
@@ -792,9 +798,10 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		case SHEAR: flag = familiarity > 10;break;
 		case MILK: flag = familiarity > 10;break;
 		case NAME: flag = familiarity > 60;break;
+		case TOLERATEPLAYER: flag = familiarity > 40;break;
 		default: break;
 		}
-		if(!flag && !player.worldObj.isRemote){
+		if(!flag && player != null && !player.worldObj.isRemote){
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
 		}
 		return flag;

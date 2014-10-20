@@ -648,11 +648,16 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		if(familiarity > 100)familiarity = 100;
 		if(familiarity < 0)familiarity = 0;
 	}
+	
+	@Override
+	public boolean isFood(ItemStack item) {
+		return item != null && item.getItem() instanceof ItemFoodTFC && ((ItemFoodTFC)item.getItem()).getFoodGroup().equals(EnumFoodGroup.Grain);
+	}
 
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && stack.getItem() != null && stack.getItem() instanceof ItemFoodTFC && ((ItemFoodTFC)stack.getItem()).getFoodGroup().equals(EnumFoodGroup.Grain)){
+		if(stack != null && stack.getItem() != null && isFood(stack)){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
@@ -688,7 +693,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		case NAME: flag = familiarity > 20;break;
 		default: break;
 		}
-		if(!flag && !player.worldObj.isRemote){
+		if(!flag && player != null && !player.worldObj.isRemote){
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
 		}
 		return flag;
