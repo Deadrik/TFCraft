@@ -854,11 +854,9 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		}
 		case 7:
 		{
-			soundFlag = (isTemperatureWeldable(WELD1_SLOT) && isTemperatureWeldable(WELD2_SLOT) && anvilItemStacks[HAMMER_SLOT] != null && 
-					(anvilItemStacks[WELD1_SLOT].getItemDamage() == 0 || anvilItemStacks[WELD1_SLOT].getItem().getHasSubtypes() == true) && 
-					(anvilItemStacks[WELD2_SLOT].getItemDamage() == 0 || anvilItemStacks[WELD2_SLOT].getItem().getHasSubtypes() == true) && 
-					workedRecently == 0 && anvilItemStacks[WELDOUT_SLOT] == null);
+			boolean weldFlag = anvilItemStacks[WELDOUT_SLOT] == null;
 			actionWeld();
+			soundFlag = weldFlag && anvilItemStacks[WELDOUT_SLOT] != null;
 			break;
 		}
 		case 8:
