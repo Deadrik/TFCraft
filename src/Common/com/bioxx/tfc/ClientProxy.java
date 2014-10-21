@@ -61,6 +61,7 @@ import com.bioxx.tfc.Handlers.Client.BlockRenderHandler;
 import com.bioxx.tfc.Handlers.Client.ChiselHighlightHandler;
 import com.bioxx.tfc.Handlers.Client.ClientTickHandler;
 import com.bioxx.tfc.Handlers.Client.FMLClientEventHandler;
+import com.bioxx.tfc.Handlers.Client.FamiliarityHighlightHandler;
 import com.bioxx.tfc.Handlers.Client.FarmlandHighlightHandler;
 import com.bioxx.tfc.Handlers.Client.FogHandler;
 import com.bioxx.tfc.Handlers.Client.KeyBindingHandler;
@@ -588,6 +589,7 @@ public class ClientProxy extends CommonProxy
 		MinecraftForge.EVENT_BUS.register(new FarmlandHighlightHandler());
 		MinecraftForge.EVENT_BUS.register(new PlankHighlightHandler());
 		MinecraftForge.EVENT_BUS.register(new ArmourStandHighlightHandler());
+		MinecraftForge.EVENT_BUS.register(new FamiliarityHighlightHandler());
 		MinecraftForge.EVENT_BUS.register(new FogHandler());
 
 	}

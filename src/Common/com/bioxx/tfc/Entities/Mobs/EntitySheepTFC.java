@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Entities.Mobs;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import net.minecraft.entity.Entity;
@@ -171,18 +172,12 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	protected void entityInit()
 	{
-		super.entityInit();
-		this.dataWatcher.addObject(13, new Integer(0));
-		this.dataWatcher.addObject(14, new Float(1));
-		this.dataWatcher.addObject(15, Integer.valueOf(0));
-
-		this.dataWatcher.addObject(24, new Float(1));
-		this.dataWatcher.addObject(25, new Float(1));
-		this.dataWatcher.addObject(26, new Float(1));
-		this.dataWatcher.addObject(27, new Float(1));
-		this.dataWatcher.addObject(28, new Float(1));
-		this.dataWatcher.addObject(29, new Float(1));
-		this.dataWatcher.addObject(30, new Byte((byte)0));
+		super.entityInit();	
+		this.dataWatcher.addObject(13, new Integer(0)); //sex (1 or 0)
+		this.dataWatcher.addObject(15, Integer.valueOf(0));		//age
+		
+		this.dataWatcher.addObject(22, Integer.valueOf(0));	//Size, strength, aggression, obedience
+		this.dataWatcher.addObject(23, Integer.valueOf(0));	//Colour, climate, hardiness, familiarity
 	}
 
 	@Override
@@ -282,30 +277,44 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	public void syncData()
 	{
 		if(dataWatcher!= null)
-			if(!this.worldObj.isRemote){
+		{
+			if(!this.worldObj.isRemote)
+			{
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
-				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
 
-				this.dataWatcher.updateObject(24, Float.valueOf(strength_mod));
-				this.dataWatcher.updateObject(25, Float.valueOf(aggression_mod));
-				this.dataWatcher.updateObject(26, Float.valueOf(obedience_mod));
-				this.dataWatcher.updateObject(27, Float.valueOf(colour_mod));
-				this.dataWatcher.updateObject(28, Float.valueOf(climate_mod));
-				this.dataWatcher.updateObject(29, Float.valueOf(hard_mod));
-				this.dataWatcher.updateObject(30, isCorpse ? Byte.valueOf((byte) 1) : Byte.valueOf((byte) 0));
+				byte[] values = {
+						TFC_Core.getByteFromSmallFloat(size_mod),
+						TFC_Core.getByteFromSmallFloat(strength_mod),
+						TFC_Core.getByteFromSmallFloat(aggression_mod),
+						TFC_Core.getByteFromSmallFloat(obedience_mod),
+						TFC_Core.getByteFromSmallFloat(colour_mod),
+						TFC_Core.getByteFromSmallFloat(climate_mod),
+						TFC_Core.getByteFromSmallFloat(hard_mod),
+						(byte)familiarity
+				};
+				this.dataWatcher.updateObject(22, ByteBuffer.wrap(values).getInt());
+				this.dataWatcher.updateObject(23, ByteBuffer.wrap(values).getInt());
 			}
-			else{
+			else
+			{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
-				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
-
-				strength_mod = this.dataWatcher.getWatchableObjectFloat(24);
-				aggression_mod = this.dataWatcher.getWatchableObjectFloat(25);
-				obedience_mod = this.dataWatcher.getWatchableObjectFloat(26);
-				colour_mod = this.dataWatcher.getWatchableObjectFloat(27);
-				climate_mod = this.dataWatcher.getWatchableObjectFloat(28);
-				hard_mod = this.dataWatcher.getWatchableObjectFloat(29);
-				isCorpse = this.dataWatcher.getWatchableObjectByte(30) == 0 ? false : true;
+				
+				ByteBuffer buf = ByteBuffer.allocate(Long.SIZE / Byte.SIZE);
+				buf.putInt(this.dataWatcher.getWatchableObjectInt(22));
+				buf.putInt(this.dataWatcher.getWatchableObjectInt(23));
+				byte[] values = buf.array();
+				
+				size_mod = TFC_Core.getSmallFloatFromByte(values[0]);
+				strength_mod = TFC_Core.getSmallFloatFromByte(values[1]);
+				aggression_mod = TFC_Core.getSmallFloatFromByte(values[2]);
+				obedience_mod = TFC_Core.getSmallFloatFromByte(values[3]);
+				colour_mod = TFC_Core.getSmallFloatFromByte(values[4]);
+				climate_mod = TFC_Core.getSmallFloatFromByte(values[5]);
+				hard_mod = TFC_Core.getSmallFloatFromByte(values[6]);
+				
+				familiarity = values[7];
 			}
+		}
 	}
 
 	@Override
@@ -646,37 +655,37 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public float getStrength()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(24);
+		return strength_mod;
 	}
 
 	@Override
 	public float getAggression()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(25);
+		return aggression_mod;
 	}
 
 	@Override
 	public float getObedience()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(26);
+		return obedience_mod;
 	}
 
 	@Override
 	public float getColour()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(27);
+		return colour_mod;
 	}
 
 	@Override
 	public float getClimateAdaptation()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(28);
+		return climate_mod;
 	}
 
 	@Override
 	public float getHardiness()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(29);
+		return hard_mod;
 	}
 
 	@Override
