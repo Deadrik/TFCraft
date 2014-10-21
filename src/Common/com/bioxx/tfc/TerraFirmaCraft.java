@@ -196,7 +196,7 @@ public class TerraFirmaCraft
 		FMLCommonHandler.instance().bus().register(new CraftingHandler());
 		FMLCommonHandler.instance().bus().register(new FoodCraftingHandler());
 
-		// Register Player Interact Handler - for drinking water.
+		// Register Player Interact Handler - for drinking water & item pickups.
 		MinecraftForge.EVENT_BUS.register(new PlayerInteractHandler());
 		
 		// Register the Entity Spawn Handler
