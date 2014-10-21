@@ -234,7 +234,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronIngot,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,1)));
 
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.Bloom, 1, 32767), IronRaw, new ItemStack(TFCItems.WroughtIronUnshaped,1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RawBloom, 1, 32767), IronRaw, null/*new ItemStack(TFCItems.WroughtIronUnshaped,1)*/));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RawBloom, 1, 32767), IronRaw, new ItemStack(TFCItems.UnknownUnshaped,1)));
 
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronIngot2x,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnshaped,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,1)));

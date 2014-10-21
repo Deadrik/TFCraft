@@ -1977,24 +1977,24 @@ public class TFCItems
 		ZincSheet2x = 			(((ItemMetalSheet2x) new ItemMetalSheet2x(20).setUnlocalizedName("Zinc Double Sheet")).setMetal("Zinc", 400));
 
 		i = 0;
-		BrassSheet = 			new ItemMetalSheet(5).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		GoldSheet = 			new ItemMetalSheet(8).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		LeadSheet = 			new ItemMetalSheet(10).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		NickelSheet = 			new ItemMetalSheet(11).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		PigIronSheet = 			new ItemMetalSheet(12).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		PlatinumSheet = 		new ItemMetalSheet(13).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		SilverSheet = 			new ItemMetalSheet(16).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		SterlingSilverSheet = 	new ItemMetalSheet(18).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		BrassSheet = 			new ItemMetalSheet(5).setMetal("Brass", 200).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		GoldSheet = 			new ItemMetalSheet(8).setMetal("Gold", 200).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		LeadSheet = 			new ItemMetalSheet(10).setMetal("Lead", 200).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		NickelSheet = 			new ItemMetalSheet(11).setMetal("Nickel", 200).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		PigIronSheet = 			new ItemMetalSheet(12).setMetal("Pig Iron", 200).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		PlatinumSheet = 		new ItemMetalSheet(13).setMetal("Platinum", 200).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		SilverSheet = 			new ItemMetalSheet(16).setMetal("Silver", 200).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		SterlingSilverSheet = 	new ItemMetalSheet(18).setMetal("Sterling Silver", 200).setUnlocalizedName(NamesNSO[i++]+" Sheet");
 
 		i = 0;
-		BrassSheet2x = 			new ItemMetalSheet2x(5).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		GoldSheet2x = 			new ItemMetalSheet2x(8).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		LeadSheet2x = 			new ItemMetalSheet2x(10).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		NickelSheet2x = 		new ItemMetalSheet2x(1).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		PigIronSheet2x = 		new ItemMetalSheet2x(12).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		PlatinumSheet2x = 		new ItemMetalSheet2x(13).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		SilverSheet2x = 		new ItemMetalSheet2x(16).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		SterlingSilverSheet2x = new ItemMetalSheet2x(18).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		BrassSheet2x = 			new ItemMetalSheet2x(5).setMetal("Brass", 400).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		GoldSheet2x = 			new ItemMetalSheet2x(8).setMetal("Gold", 400).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		LeadSheet2x = 			new ItemMetalSheet2x(10).setMetal("Lead", 400).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		NickelSheet2x = 		new ItemMetalSheet2x(1).setMetal("Nickel", 400).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		PigIronSheet2x = 		new ItemMetalSheet2x(12).setMetal("Pig Iron", 400).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		PlatinumSheet2x = 		new ItemMetalSheet2x(13).setMetal("Platinum", 400).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		SilverSheet2x = 		new ItemMetalSheet2x(16).setMetal("Silver", 400).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		SterlingSilverSheet2x = new ItemMetalSheet2x(18).setMetal("Sterling Silver", 400).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
 
 		i = 0;
 		BismuthBronzeUnfinishedBoots = 	(new ItemUnfinishedArmor().setMetal("Bismuth Bronze", 3).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;

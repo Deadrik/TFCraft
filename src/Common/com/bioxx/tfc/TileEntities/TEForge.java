@@ -19,6 +19,7 @@ import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
+import com.bioxx.tfc.api.Interfaces.ISmeltable;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 public class TEForge extends TEFireEntity implements IInventory
@@ -129,61 +130,49 @@ public class TEForge extends TEFireEntity implements IInventory
 				else if(index.hasOutput())
 				{
 					ItemStack output = index.getOutput(inputCopy, R);
-					int count = 1;
-					Boolean useCount = false;
-					if(output.getItem() instanceof ItemMeltedMetal)
+
+					if(inputCopy.getItem() instanceof ISmeltable)
 					{
-						if(output.stackSize >= 1)
+						ISmeltable sm = (ISmeltable)inputCopy.getItem();
+						ItemStack out = new ItemStack(sm.GetMetalType(inputCopy).MeltedItem);
+						TFC_ItemHeat.SetTemp(out, TFC_ItemHeat.GetTemp(inputCopy));
+						int amt = sm.GetMetalReturnAmount(inputCopy);
+
+						while(amt > 0 && getMold() != null)
 						{
-							count = 0;
-							int c = output.stackSize;
-							for(int iterations = 0; c > 0 && iterations <= 20; iterations++)
+							ItemStack moldIS = this.getMold();
+							if(amt >= 100)
 							{
-								if(fireItemStacks[10] != null && fireItemStacks[10].getItem() == TFCItems.CeramicMold)
+								amt-= 100;
+								moldIS.stackSize--;
+								ItemStack _out = out.copy();
+								if(!addToStorage(_out.copy()))
 								{
-									fireItemStacks[10].stackSize--;
-									if(fireItemStacks[10].stackSize == 0)
-										fireItemStacks[10] = null;
-									c--;
-									count++;
+									EntityItem ei = new EntityItem(worldObj, xCoord+0.5,yCoord+1.5,zCoord+0.5, _out);
+									ei.motionX = 0;ei.motionY = 0;ei.motionZ = 0;
+									worldObj.spawnEntityInWorld(ei);
 								}
-								else if(fireItemStacks[11] != null && fireItemStacks[11].getItem() == TFCItems.CeramicMold)
+							}
+							else if(amt > 0)
+							{
+								ItemStack _out = out.copy();
+								_out.setItemDamage(100-amt);
+								amt = 0;
+								moldIS.stackSize--;
+								if(!addToStorage(_out.copy()))
 								{
-									fireItemStacks[11].stackSize--;
-									if(fireItemStacks[11].stackSize == 0)
-										fireItemStacks[11] = null;
-									c--;
-									count++;
-								}
-								else if(fireItemStacks[12] != null && fireItemStacks[12].getItem() == TFCItems.CeramicMold)
-								{
-									fireItemStacks[12].stackSize--;
-									if(fireItemStacks[12].stackSize == 0)
-										fireItemStacks[12] = null;
-									c--;
-									count++;
-								}
-								else if(fireItemStacks[13] != null && fireItemStacks[13].getItem() == TFCItems.CeramicMold)
-								{
-									fireItemStacks[13].stackSize--;
-									if(fireItemStacks[13].stackSize == 0)
-										fireItemStacks[13] = null;
-									c--;
-									count++;
+									EntityItem ei = new EntityItem(worldObj, xCoord+0.5,yCoord+1.5,zCoord+0.5, _out);
+									ei.motionX = 0;ei.motionY = 0;ei.motionZ = 0;
+									worldObj.spawnEntityInWorld(ei);
 								}
 							}
 						}
-						useCount = true;
+					}
+					else
+					{
+						fireItemStacks[i] = output;
 					}
 
-					fireItemStacks[i] = output;
-					if(useCount)
-					{
-						if(count > 0)
-							fireItemStacks[i].stackSize = count;
-						else
-							fireItemStacks[i] = null;
-					}
 
 					HeatIndex index2 = manager.findMatchingIndex(fireItemStacks[i]);
 					if(TFC_ItemHeat.IsCookable(fireItemStacks[i]) > -1)
@@ -191,12 +180,55 @@ public class TEForge extends TEFireEntity implements IInventory
 						//if the input is a new item, then apply the old temperature to it
 						TFC_ItemHeat.SetTemp(fireItemStacks[i], temp);
 					}
-
-					if(fireItemStacks[i] != null && fireItemStacks[i].getItem() instanceof ItemMeltedMetal && is.getItem() instanceof ItemMeltedMetal)
-						fireItemStacks[i].setItemDamage(dam);
 				}
 			}
 		}
+	}
+
+	public boolean addToStorage(ItemStack is)
+	{
+		if(this.getStackInSlot(10) == null)
+		{
+			this.setInventorySlotContents(10, is);
+			return true;
+		}
+		if(this.getStackInSlot(11) == null)
+		{
+			this.setInventorySlotContents(11, is);
+			return true;
+		}
+		if(this.getStackInSlot(12) == null)
+		{
+			this.setInventorySlotContents(12, is);
+			return true;
+		}
+		if(this.getStackInSlot(13) == null)
+		{
+			this.setInventorySlotContents(13, is);
+			return true;
+		}
+		return false;
+	}
+
+	private ItemStack getMold()
+	{
+		if(fireItemStacks[10] != null && fireItemStacks[10].getItem() == TFCItems.CeramicMold && fireItemStacks[10].stackSize > 0)
+		{
+			return fireItemStacks[10];
+		}
+		else if(fireItemStacks[11] != null && fireItemStacks[11].getItem() == TFCItems.CeramicMold && fireItemStacks[11].stackSize > 0)
+		{
+			return fireItemStacks[11];
+		}
+		else if(fireItemStacks[12] != null && fireItemStacks[12].getItem() == TFCItems.CeramicMold && fireItemStacks[12].stackSize > 0)
+		{
+			return fireItemStacks[12];
+		}
+		else if(fireItemStacks[13] != null && fireItemStacks[13].getItem() == TFCItems.CeramicMold && fireItemStacks[13].stackSize > 0)
+		{
+			return fireItemStacks[13];
+		}
+		return null;
 	}
 
 	@Override
