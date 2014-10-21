@@ -31,8 +31,8 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 {
 	public IIcon[] icons;
 	public String[] metalNames = {"Bismuth","Bismuth Bronze","Black Bronze","Black Steel","Blue Steel","Brass","Bronze",
-			"Copper","Gold","Lead","Nickel","Pig Iron","Platinum","Red Steel","Rose Gold","Silver","Steel",
-			"Sterling Silver","Tin","Wrought Iron","Zinc", "Unknown"};
+			"Copper","Gold","Wrought Iron","Lead","Nickel","Pig Iron","Platinum","Red Steel","Rose Gold","Silver","Steel",
+			"Sterling Silver","Tin","Zinc","Unknown"};
 
 	public BlockMetalTrapDoor()
 	{

@@ -32,8 +32,8 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 {
 	public IIcon[] icons;
 	public String[] metalNames = {"Bismuth","Bismuth Bronze","Black Bronze","Black Steel","Blue Steel","Brass","Bronze",
-			"Copper","Gold","Lead","Nickel","Pig Iron","Platinum","Red Steel","Rose Gold","Silver","Steel",
-			"Sterling Silver","Tin","Wrought Iron","Zinc"};
+			"Copper","Gold","Wrought Iron","Lead","Nickel","Pig Iron","Platinum","Red Steel","Rose Gold","Silver","Steel",
+			"Sterling Silver","Tin","Zinc"};
 	public BlockMetalSheet()
 	{
 		super(Material.iron);
@@ -75,17 +75,17 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 		EntityItem ei = new EntityItem(world, i, j, k, te.sheetStack);
 		world.spawnEntityInWorld(ei);
 	}
-	
+
 	@Override
 	public void onBlockExploded(World world, int i, int j, int k, Explosion explosion)
 	{
 		TEMetalSheet te = (TEMetalSheet)world.getTileEntity(i, j, k);
 		if ( te != null )
 			te.clearSides();
-		
+
 		super.onBlockExploded(world, i, j, k, explosion);
 	}
-	
+
 	@Override
 	public int getRenderType()
 	{
@@ -119,17 +119,17 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 		TFC_Textures.SheetBronze = icons[6];
 		TFC_Textures.SheetCopper = icons[7];
 		TFC_Textures.SheetGold = icons[8];
-		TFC_Textures.SheetLead = icons[9];
-		TFC_Textures.SheetNickel = icons[10];
-		TFC_Textures.SheetPigIron = icons[11];
-		TFC_Textures.SheetPlatinum = icons[12];
-		TFC_Textures.SheetRedSteel = icons[13];
-		TFC_Textures.SheetRoseGold = icons[14];
-		TFC_Textures.SheetSilver = icons[15];
-		TFC_Textures.SheetSteel = icons[16];
-		TFC_Textures.SheetSterlingSilver = icons[17];
-		TFC_Textures.SheetTin = icons[18];
-		TFC_Textures.SheetWroughtIron = icons[19];
+		TFC_Textures.SheetWroughtIron = icons[9];
+		TFC_Textures.SheetLead = icons[10];
+		TFC_Textures.SheetNickel = icons[11];
+		TFC_Textures.SheetPigIron = icons[12];
+		TFC_Textures.SheetPlatinum = icons[13];
+		TFC_Textures.SheetRedSteel = icons[14];
+		TFC_Textures.SheetRoseGold = icons[15];
+		TFC_Textures.SheetSilver = icons[16];
+		TFC_Textures.SheetSteel = icons[17];
+		TFC_Textures.SheetSterlingSilver = icons[18];
+		TFC_Textures.SheetTin = icons[19];
 		TFC_Textures.SheetZinc = icons[20];
 	}
 

@@ -576,7 +576,7 @@ public class RenderMetalTrapDoor implements ISimpleBlockRenderingHandler
 	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer)
 	{
 		renderer.setRenderBounds(0.125F, 0.4F, 0F, 1F, 0.475F, 1f);
-		renderInvBlock(block, metadata, renderer);
+		renderInvBlock(block, metadata&255, renderer);
 		renderer.setRenderBounds(0.0F, 0.4F, 0.1F, 0.125F, 0.525F, 0.4f);
 		int index = Math.min(((BlockMetalSheet)TFCBlocks.MetalSheet).icons.length-1, metadata >> 5);
 		renderInvBlock(block, ((BlockMetalSheet)TFCBlocks.MetalSheet).icons[index], renderer);
