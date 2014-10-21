@@ -296,12 +296,45 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 	}
 
 	@Override
+	protected void dropEquipment(boolean p_82160_1_, int p_82160_2_)
+	{
+		for (int j = 0; j < this.getLastActiveItems().length; ++j)
+		{
+			ItemStack itemstack = this.getEquipmentInSlot(j);
+			boolean flag1 = this.equipmentDropChances[j] > 1.0F;
+
+			if (itemstack != null && (p_82160_1_ || flag1) && this.rand.nextFloat() - (float)p_82160_2_ * 0.01F < this.equipmentDropChances[j])
+			{
+				if (!flag1 && itemstack.isItemStackDamageable())
+				{
+					int k = Math.max(itemstack.getMaxDamage() - 25, 1);
+					int l = itemstack.getMaxDamage() - this.rand.nextInt(this.rand.nextInt(k) + 1);
+
+					if (l > k)
+					{
+						l = k;
+					}
+
+					if (l < 1)
+					{
+						l = 1;
+					}
+
+					itemstack.setItemDamage(l);
+				}
+
+				this.entityDropItem(itemstack, 0.0F);
+			}
+		}
+	}
+
+	@Override
 	protected void addRandomArmor()
 	{
 		superAddRandomArmor();
 		if(this.getSkeletonType() == 0)
 		{
-			this.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
+			this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.Bow));
 		}
 		else if(this.getSkeletonType() == 1)
 		{
