@@ -2183,6 +2183,7 @@ gui.plans.sword=Sword
 gui.plans.tuyere=Tuyere
 gui.plans.grill=Grill
 gui.plans.shears=Shears
+gui.plans.trapdoor=Trap Door
 
 #== Misc GUI ==
 gui.Blueprint=Blueprint
