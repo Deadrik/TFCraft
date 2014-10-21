@@ -21,11 +21,11 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
-		boolean breaking = false;
-		if (renderer.overrideBlockTexture != null)
-			breaking = true;
+		boolean breaking = renderer.overrideBlockTexture != null;
 
-		if (!breaking)
+		if ( breaking )
+			renderer.renderStandardBlock(block, x, y, z);
+		else
 		{
 			// render the background rock
 			renderer.overrideBlockTexture = getRockTexture(Minecraft.getMinecraft().theWorld, x, y, z);

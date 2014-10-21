@@ -335,10 +335,17 @@ public class RenderMetalTrapDoor implements ISimpleBlockRenderingHandler
 		}
 
 		int hingeID = te.sheetStack != null ? Math.min(((BlockMetalSheet)TFCBlocks.MetalSheet).icons.length-1, te.sheetStack.getItemDamage() >> 5) : 0;
-		renderer.setOverrideBlockTexture(((BlockMetalSheet)TFCBlocks.MetalSheet).icons[hingeID]);
+		
+		boolean breaking = renderer.overrideBlockTexture != null;
+		
+		if ( ! breaking )
+			renderer.setOverrideBlockTexture(((BlockMetalSheet)TFCBlocks.MetalSheet).icons[hingeID]);
 
 		drawHinges(block, i, j, k, renderer, side, hinge);
-		renderer.clearOverrideBlockTexture();
+		
+		if ( ! breaking )
+			renderer.clearOverrideBlockTexture();
+		
 		renderer.renderAllFaces = false;
 		return true;
 	}
