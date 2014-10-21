@@ -23,6 +23,14 @@ public class TFCProvider extends WorldProvider
 	@Override
 	protected void registerWorldChunkManager()
 	{
+		/**
+		 * ChunkEventHandler.onLoadWorld gets called after the NEW World gen stuff.
+		 * Trying to make a NEW World will produce a crash because the cache is empty.
+		 * ..maybe this is not the best place for this, but it works :)
+		 */
+		TFC_Climate.worldPair.put(worldObj, new WorldCacheManager(worldObj));
+		TFC_Core.addCDM(worldObj);
+
 		super.registerWorldChunkManager();
 	}
 
@@ -169,12 +177,12 @@ public class TFCProvider extends WorldProvider
 		return false;
 	}
 
-	private boolean canSnowAtTemp(int x, int y, int z)
+	/*private boolean canSnowAtTemp(int x, int y, int z)
 	{
 		if(TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) <= 0)
 			return true;
 		return false;
-	}
+	}*/
 
 	@Override
 	public String getDimensionName()
