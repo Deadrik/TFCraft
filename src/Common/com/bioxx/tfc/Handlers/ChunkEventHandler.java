@@ -19,6 +19,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
+import com.bioxx.tfc.WorldGen.WorldCacheManager;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowCrops;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
@@ -101,7 +102,8 @@ public class ChunkEventHandler
 	{
 		TFC_Climate.removeCacheManager(event.world);
 		TFC_Core.removeCDM(event.world);
-		AnvilManager.getInstance().clearRecipes();
+		if(event.world.provider.dimensionId == 0)
+			AnvilManager.getInstance().clearRecipes();
 	}
 
 	@SubscribeEvent
@@ -109,6 +111,12 @@ public class ChunkEventHandler
 	{
 		if(event.world.provider.dimensionId == 0 && event.world.getTotalWorldTime() < 100)
 			createSpawn(event.world);
+		if(!event.world.isRemote && event.world.provider.dimensionId == 0 && AnvilManager.getInstance().getRecipeList().size() == 0)
+		{
+			TFC_Core.SetupWorld(event.world);
+		}
+		TFC_Climate.worldPair.put(event.world, new WorldCacheManager(event.world));
+		TFC_Core.addCDM(event.world);
 	}
 
 	@SubscribeEvent

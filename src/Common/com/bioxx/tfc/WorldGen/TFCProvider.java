@@ -24,8 +24,6 @@ public class TFCProvider extends WorldProvider
 	protected void registerWorldChunkManager()
 	{
 		super.registerWorldChunkManager();
-		TFC_Climate.worldPair.put(worldObj, new WorldCacheManager(worldObj));
-		TFC_Core.addCDM(worldObj);
 	}
 
 	@Override
