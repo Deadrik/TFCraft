@@ -2,6 +2,7 @@ package com.bioxx.tfc.Blocks.Devices;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
@@ -59,6 +60,20 @@ public class BlockLeatherRack extends BlockTerraContainer
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public boolean canBlockStay(World world, int x, int y, int z)
+	{
+		return world.getBlock(x, y-1, z).getMaterial() == Material.wood;
+	}
+
+	@Override
+	public void onNeighborBlockChange(World world, int i, int j, int k, Block par5)
+	{
+		super.onNeighborBlockChange(world, i, j, k, par5);
+		if(!canBlockStay(world,i,j,k))
+			world.setBlockToAir(i, j, k);
 	}
 
 	@Override
