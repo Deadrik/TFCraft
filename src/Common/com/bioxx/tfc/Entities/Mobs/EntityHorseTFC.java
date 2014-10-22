@@ -275,7 +275,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 						TFC_Core.getByteFromSmallFloat(hard_mod),
 						(byte)familiarity
 				};
-				this.dataWatcher.updateObject(22, ByteBuffer.wrap(values).getInt());
+				this.dataWatcher.updateObject(24, ByteBuffer.wrap(values).getInt());
 				this.dataWatcher.updateObject(23, ByteBuffer.wrap(values).getInt());
 			}
 			else
@@ -283,7 +283,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				sex = this.dataWatcher.getWatchableObjectInt(13);
 				
 				ByteBuffer buf = ByteBuffer.allocate(Long.SIZE / Byte.SIZE);
-				buf.putInt(this.dataWatcher.getWatchableObjectInt(22));
+				buf.putInt(this.dataWatcher.getWatchableObjectInt(24));
 				buf.putInt(this.dataWatcher.getWatchableObjectInt(23));
 				byte[] values = buf.array();
 				
@@ -307,7 +307,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.dataWatcher.addObject(13, new Integer(0)); //sex (1 or 0)
 		this.dataWatcher.addObject(15, Integer.valueOf(0));		//age
 		
-		this.dataWatcher.addObject(22, Integer.valueOf(0));	//Size, strength, aggression, obedience
+		this.dataWatcher.addObject(24, Integer.valueOf(0));	//Size, strength, aggression, obedience. EntityHorse uses 22
 		this.dataWatcher.addObject(23, Integer.valueOf(0));	//Colour, climate, hardiness, familiarity
 	}
 
