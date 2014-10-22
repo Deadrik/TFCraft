@@ -87,8 +87,8 @@ achievement.achPokeCreeper.desc=Le toucher avec un bâton
 #============
 #= Commands =
 #============
-commands.transferTamed.noTamed=Aucun animal valide à porté !
-commands.transferTamed.tooMany=Trop d'animaux à porté !
+commands.transferTamed.noTamed=Aucun animal valide à portée !
+commands.transferTamed.tooMany=Trop d'animaux à portée !
 commands.transferTamed.wrongOwner=Ça ne vous appartient pas !
 commands.transferTamed.sameTarget=Vous ne pouvez pas transférer à vous-même !
 commands.transferTamed.display.incoming=Un animal vous a été transféré par %s !
@@ -143,7 +143,7 @@ item.Wheat Dough.name=Pâte de blé
 
 item.Seeds Barley.name=Graines d'orge
 item.Seeds Maize.name=Graines de maïs
-item.Seeds Oat.name=Graines d'orge
+item.Seeds Oat.name=Graines d'avoine
 item.Seeds Rice.name=Graines de riz
 item.Seeds Rye.name=Graines de seigle
 item.Seeds Wheat.name=Graines de blé
@@ -152,7 +152,7 @@ item.Seeds Wheat.name=Graines de blé
 item.Green Apple.name=Pomme verte
 item.Red Apple.name=Pomme rouge
 item.Banana.name=Banane
-item.Cherry.name=Cherise
+item.Cherry.name=Cerise
 item.Lemon.name=Citron
 item.Olive.name=Olive
 item.Orange.name=Orange
@@ -177,9 +177,9 @@ tile.BerryBush.Cloudberry.name=Plaquebière
 tile.BerryBush.Cranberry.name=Canneberge
 tile.BerryBush.Elderberry.name=Sureau
 tile.BerryBush.Gooseberry.name=Groseillier
-tile.BerryBush.Raspberry.name=Fraisier
+tile.BerryBush.Raspberry.name=Framboisier
 tile.BerryBush.Snowberry.name=Symphorine
-tile.BerryBush.Strawberry.name=Framboisier
+tile.BerryBush.Strawberry.name=Fraisier
 tile.BerryBush.Wintergreen.name=Thé des bois
 
 item.Blackberry.name=Mûres
@@ -201,9 +201,9 @@ item.Cloudberry Leaf.name=Feuilles de plaquebière
 item.Cranberry Leaf.name=Feuilles de canneberge
 item.Elderberry Leaf.name=Feuilles de sureau
 item.Gooseberry Leaf.name=Feuilles de groseillier
-item.Raspberry Leaf.name=Feuilles de fraisier
+item.Raspberry Leaf.name=Feuilles de famboisier
 item.Snowberry Leaf.name=Feuilles de symphorine
-item.Strawberry Leaf.name=Feuilles de famboisier
+item.Strawberry Leaf.name=Feuilles de fraisier
 item.Wintergreen Leaf.name=Feuilles de thé des bois
 
 #== Protein ==
@@ -230,7 +230,7 @@ item.Red Bell Pepper.name=Poivron rouge
 item.Yellow Bell Pepper.name=Poivron jaune
 item.Cabbage.name=Choux
 item.Carrot.name=Carotte
-item.Garlic.name=Ait
+item.Garlic.name=Ail
 item.Greenbeans.name=Fèves
 item.Onion.name=Oignon
 item.Potato.name=Pomme de terre
@@ -1872,7 +1872,7 @@ item.Firestarter.name=Allumeur
 
 item.Quern.name=Meule
 item.Blueprint.name=Dessin technique
-item.Nametag.name=
+item.Nametag.name=Étiquette
 item.WoolYarn.name=Fil de laine
 item.Wool.name=Laine
 item.WoolCloth.name=Tissus de laine
@@ -1960,6 +1960,15 @@ tile.Flowers2.flower_tulip_orange.name=Tulipe orange
 tile.Flowers2.flower_tulip_white.name=Tulipe blanche
 tile.Flowers2.flower_tulip_pink.name=Tulipe rose
 tile.Flowers2.flower_oxeye_daisy.name=Marguerite
+
+tile.SaltWater.name=Eau salée
+tile.SaltWaterStationary.name=Eau salée
+tile.FreshWater.name=Eau douce
+tile.FreshWaterStationary.name=Eau douce
+tile.HotWater.name=Eau thermale
+tile.HotWaterStationary.name=Eau thermale
+tile.Lava.name=Lave
+tile.LavaStationary.name=Lave
 
 #=======
 #= GUI =
@@ -2164,7 +2173,7 @@ gui.plans.legsplate=Jambières
 gui.plans.mace=Mace
 gui.plans.pickaxe=Pioche
 gui.plans.propick=Pioche de prospecteur
-gui.plans.refinebloom=Rafiner
+gui.plans.refinebloom=Raffiner
 gui.plans.saw=Scie
 gui.plans.scythe=Faux
 gui.plans.sheet=Feuille
@@ -2174,10 +2183,11 @@ gui.plans.sword=Épée
 gui.plans.tuyere=Tuyère
 gui.plans.grill=Grill
 gui.plans.shears=Cisailles
+gui.plans.trapdoor=Trappe
 
 #== Misc GUI ==
 gui.Blueprint=Dessin technique
-gui.Nametag=
+gui.Nametag=Étiquette
 gui.fertilized=Fertilisé
 gui.Inventory=Inventaire
 gui.ClearSlot=Vider un espace de sortie.
@@ -2229,8 +2239,8 @@ gui.food.salted=Salé
 gui.FoodHeat.Cold=Froid
 gui.FoodHeat.Warm=Chaud
 
-gui.Torch.CatchingFire=Prends en feu
-gui.Torch.Lit=Allumé
+gui.Torch.CatchingFire=Prend en feu
+gui.Torch.Lit=Allumée
 
 gui.ItemHeat.Liquid=Liquide
 gui.ItemHeat.Solidified=Solidifié
@@ -2378,7 +2388,7 @@ gui.skill.adept=Adepte
 gui.skill.expert=Expert
 gui.skill.master=Maître
 gui.skillpage=Compétence
-tile.MetalTrapDoor.name=
+tile.MetalTrapDoor.name=Trappe
 item.Mud Brick.name=Brique de boue
 item.Wet Mud Brick.name=Brique de boue humide
 gui.overburdened=*Surchargé*

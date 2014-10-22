@@ -5,7 +5,7 @@
 
 
 
-generator.TFCDefault=TFC Standard
+generator.TFCDefault=TFC Standara
 generator.TFCFlat=TFC Piana
 
 key.ToolMode=Scorri la modalità dello strumento
@@ -121,11 +121,11 @@ item.Rice Whole.name=Spiga di riso
 item.Rye Whole.name=Spiga di riso
 item.Wheat Whole.name=Spiga di frumento
 
-item.Barley Grain.name=Orzo
-item.Oat Grain.name=Avena
-item.Rice Grain.name=Riso
-item.Rye Grain.name=Segale
-item.Wheat Grain.name=Frumento
+item.Barley Grain.name=Chicchi d'orzo
+item.Oat Grain.name=Chicchi d'avena
+item.Rice Grain.name=Chicchi di riso
+item.Rye Grain.name=Chicchi di segale
+item.Wheat Grain.name=Chicchi di frumento
 
 item.Barley Ground.name=Farina d'orzo
 item.Cornmeal Ground.name=Farina di mais
@@ -255,11 +255,11 @@ item.Glass Bottle.name=Boccia vuota
 item.Beer.name=Birra
 item.Cider.name=Sidro
 item.Rum.name=Rum
-item.RyeWhiskey.name=Whisky di segale
+item.RyeWhiskey.name=Uischi di segale
 item.Sake.name=Saké
 item.Vodka.name=Vodka
-item.Whiskey.name=Whisky
-item.CornWhiskey.name=Whisky di granturco
+item.Whiskey.name=Uischi
+item.CornWhiskey.name=Uischi di granturco
 
 #===========
 #= Pottery =
@@ -1155,23 +1155,23 @@ tile.FenceGateTFC.White Cedar.name=Cancelletto di tuia
 tile.FenceGateTFC.White Elm.name=Cancelletto di olmo
 tile.FenceGateTFC.Willow.name=Cancelletto di salice
 
-tile.ArmourStand.Acacia.name=Piedistallo per armatura di acacia
-tile.ArmourStand.Ash.name=Piedistallo per armatura di frassino
-tile.ArmourStand.Aspen.name=Piedistallo per armatura di pioppo
-tile.ArmourStand.Birch.name=Piedistallo per armatura di betulla
-tile.ArmourStand.Chestnut.name=Piedistallo per armatura di castagno
-tile.ArmourStand.Douglas Fir.name=Piedistallo per armatura di abete di Douglas
-tile.ArmourStand.Hickory.name=Piedistallo per armatura di noce
-tile.ArmourStand.Kapok.name=Piedistallo per armatura di capòc
-tile.ArmourStand.Maple.name=Piedistallo per armatura di acero
-tile.ArmourStand.Oak.name=Piedistallo per armatura di quercia
-tile.ArmourStand.Pine.name=Piedistallo per armatura di pino
-tile.ArmourStand.Sequoia.name=Piedistallo per armatura di sequoia
-tile.ArmourStand.Spruce.name=Piedistallo per armatura di abete rosso
-tile.ArmourStand.Sycamore.name=Piedistallo per armatura di platano
-tile.ArmourStand.White Cedar.name=Piedistallo per armatura di tuia
-tile.ArmourStand.White Elm.name=Piedistallo per armatura di olmo
-tile.ArmourStand.Willow.name=Piedistallo per armatura di salice
+tile.ArmourStand.Acacia.name=Supporto per armatura di acacia
+tile.ArmourStand.Ash.name=Supporto per armatura di frassino
+tile.ArmourStand.Aspen.name=Supporto per armatura di pioppo
+tile.ArmourStand.Birch.name=Supporto per armatura di betulla
+tile.ArmourStand.Chestnut.name=Supporto per armatura di castagno
+tile.ArmourStand.Douglas Fir.name=Supporto per armatura di abete di Douglas
+tile.ArmourStand.Hickory.name=Supporto per armatura di noce
+tile.ArmourStand.Kapok.name=Supporto per armatura di capòc
+tile.ArmourStand.Maple.name=Supporto per armatura di acero
+tile.ArmourStand.Oak.name=Supporto per armatura di quercia
+tile.ArmourStand.Pine.name=Supporto per armatura di pino
+tile.ArmourStand.Sequoia.name=Supporto per armatura di sequoia
+tile.ArmourStand.Spruce.name=Supporto per armatura di abete rosso
+tile.ArmourStand.Sycamore.name=Supporto per armatura di platano
+tile.ArmourStand.White Cedar.name=Supporto per armatura di tuia
+tile.ArmourStand.White Elm.name=Supporto per armatura di olmo
+tile.ArmourStand.Willow.name=Supporto per armatura di salice
 
 tile.WoodSupportV2.Acacia.name=Pilastro di acacia
 tile.WoodSupportV.Ash.name=Pilastro di frassino
@@ -1961,6 +1961,15 @@ tile.Flowers2.flower_tulip_white.name=Tulipano bianco
 tile.Flowers2.flower_tulip_pink.name=Tulipano rosa
 tile.Flowers2.flower_oxeye_daisy.name=Margherita
 
+tile.SaltWater.name=
+tile.SaltWaterStationary.name=
+tile.FreshWater.name=
+tile.FreshWaterStationary.name=
+tile.HotWater.name=
+tile.HotWaterStationary.name=
+tile.Lava.name=
+tile.LavaStationary.name=
+
 #=======
 #= GUI =
 #=======
@@ -2174,6 +2183,7 @@ gui.plans.sword=Spada
 gui.plans.tuyere=Ugello
 gui.plans.grill=Griglia
 gui.plans.shears=Cesoie
+gui.plans.trapdoor=Botola
 
 #== Misc GUI ==
 gui.Blueprint=Quotatura
@@ -2301,11 +2311,11 @@ fluid.hotwater=Acqua calda
 fluid.beer=Birra
 fluid.cider=Sidro
 fluid.rum=Rum
-fluid.ryewhiskey=Whisky di segale
+fluid.ryewhiskey=Uischi di segale
 fluid.sake=Saké
 fluid.vodka=Vodka
-fluid.whiskey=Whisky
-fluid.cornwhiskey=Whisky di granturco
+fluid.whiskey=Uischi
+fluid.cornwhiskey=Uischi di granturco
 fluid.milk=Latte
 fluid.milkcurdled=Latte cagliato
 fluid.limewater=Acqua di calce

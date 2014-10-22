@@ -1961,6 +1961,15 @@ tile.Flowers2.flower_tulip_white.name=Valkoinen tulppaani
 tile.Flowers2.flower_tulip_pink.name=Vaaleanpunainen tulppaani
 tile.Flowers2.flower_oxeye_daisy.name=Päivänkakkara
 
+tile.SaltWater.name=
+tile.SaltWaterStationary.name=
+tile.FreshWater.name=
+tile.FreshWaterStationary.name=
+tile.HotWater.name=
+tile.HotWaterStationary.name=
+tile.Lava.name=
+tile.LavaStationary.name=
+
 #=======
 #= GUI =
 #=======
@@ -2174,6 +2183,7 @@ gui.plans.sword=
 gui.plans.tuyere=
 gui.plans.grill=
 gui.plans.shears=
+gui.plans.trapdoor=
 
 #== Misc GUI ==
 gui.Blueprint=Suunnitelma

@@ -1961,6 +1961,15 @@ tile.Flowers2.flower_tulip_white.name=白色郁金香
 tile.Flowers2.flower_tulip_pink.name=粉色郁金香
 tile.Flowers2.flower_oxeye_daisy.name=雏菊
 
+tile.SaltWater.name=
+tile.SaltWaterStationary.name=
+tile.FreshWater.name=
+tile.FreshWaterStationary.name=
+tile.HotWater.name=
+tile.HotWaterStationary.name=
+tile.Lava.name=
+tile.LavaStationary.name=
+
 #=======
 #= GUI =
 #=======
@@ -2174,6 +2183,7 @@ gui.plans.sword=剑
 gui.plans.tuyere=风口
 gui.plans.grill=烤架
 gui.plans.shears=剪刀
+gui.plans.trapdoor=活板门
 
 #== Misc GUI ==
 gui.Blueprint=蓝图
