@@ -6,7 +6,6 @@ import net.minecraftforge.common.config.Property;
 public class TFCOptions
 {
 	public static boolean enableBetterGrass;
-	public static boolean enableInnerGrassFix;
 	public static boolean enableDebugMode;
 	public static boolean iDontLikeOnions;
 	public static boolean enableOreTest;
@@ -18,6 +17,7 @@ public class TFCOptions
 	public static int minimumRockLoad;
 	public static int initialCollapseRatio;
 	public static int propogateCollapseChance;
+	public static boolean enableCaveIns;
 
 	public static int yearLength;
 	public static float pitKilnBurnTime = 8.0f;
@@ -32,6 +32,7 @@ public class TFCOptions
 
 	public static int maxProtectionMonths;
 	public static int protectionGain;
+	public static int protectionBuffer;
 	//////////////////Features////////////////////
 	public static int RockLayer2Height = 110;
 	public static int RockLayer3Height = 55;

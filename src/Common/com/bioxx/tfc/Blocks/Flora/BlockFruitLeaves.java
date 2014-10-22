@@ -26,7 +26,6 @@ import com.bioxx.tfc.Food.FloraIndex;
 import com.bioxx.tfc.Food.FloraManager;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.TileEntities.TEFruitLeaves;
-import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -106,7 +105,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
 	{
-		return TFCOptions.enableInnerGrassFix;
+		return true;
 	}
 
 	@Override

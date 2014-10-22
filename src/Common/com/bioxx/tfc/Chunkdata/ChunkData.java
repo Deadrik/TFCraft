@@ -5,6 +5,7 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.api.TFCOptions;
 
 public class ChunkData 
 {
@@ -13,6 +14,7 @@ public class ChunkData
 	public long lastVisited;
 	public long previousVisit;
 	public int spawnProtection;
+	public int protectionBuffer = TFCOptions.protectionBuffer >= 0 ? (TFCOptions.protectionBuffer * -1) : -24; //Set buffer to default if invalid value in config.
 	public int[] heightmap;
 	public DataLayer[] rainfallMap;
 
@@ -40,8 +42,8 @@ public class ChunkData
 
 		long visit = (TFC_Time.getTotalTicks() - lastVisited) / TFC_Time.hourLength;
 		spawnProtection -= visit;
-		if(spawnProtection < -24)
-			spawnProtection = -24;
+		if (spawnProtection < protectionBuffer)
+			spawnProtection = protectionBuffer;
 
 		lastVisited = TFC_Time.getTotalTicks();
 
@@ -64,8 +66,8 @@ public class ChunkData
 		tag.setInteger("chunkZ", chunkZ);
 		long visit = (TFC_Time.getTotalTicks() - lastVisited) / TFC_Time.hourLength;
 		spawnProtection -= visit;
-		if(spawnProtection < -24)
-			spawnProtection = -24;
+		if (spawnProtection < protectionBuffer)
+			spawnProtection = protectionBuffer;
 		tag.setInteger("spawnProtection", spawnProtection);
 		tag.setLong("lastVisited", lastVisited);
 		tag.setIntArray("heightmap", heightmap);
@@ -81,7 +83,7 @@ public class ChunkData
 		chunkX = x;
 		chunkZ = z;
 		lastVisited = 0;
-		spawnProtection = -24;
+		spawnProtection = protectionBuffer;
 		lastSpringGen = TFC_Time.getYear();
 		return this;
 	}
@@ -90,8 +92,8 @@ public class ChunkData
 	{
 		long visit = (TFC_Time.getTotalTicks() - lastVisited) / TFC_Time.hourLength;
 		spawnProtection -= visit;
-		if(spawnProtection < -24)
-			spawnProtection = -24;
+		if (spawnProtection < protectionBuffer)
+			spawnProtection = protectionBuffer;
 
 		lastVisited = TFC_Time.getTotalTicks();
 
@@ -106,8 +108,8 @@ public class ChunkData
 		long visit = (TFC_Time.getTotalTicks() - lastVisited) / TFC_Time.hourLength;
 		spawnProtection -= visit;
 
-		if(spawnProtection < -24)
-			spawnProtection = -24;
+		if (spawnProtection < protectionBuffer)
+			spawnProtection = protectionBuffer;
 
 		spawnProtection += amount;
 
