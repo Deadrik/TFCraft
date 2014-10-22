@@ -116,47 +116,49 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 	@Override
 	public void onPlayerStoppedUsing(ItemStack itemstack, World world, EntityPlayer player, int itemInUseCount)
 	{
-		int var6 = this.getMaxItemUseDuration(itemstack) - itemInUseCount;
-		float force = Math.min(var6/20.0f, 1.0f);
-
-		EntityJavelin javelin = new EntityJavelin(world, player, 1.5f*force);
-		javelin.setDamage(getRangedDamage());
-
-		int var9 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, itemstack);
-
-		if (var9 > 0)
+		if(!world.isRemote)
 		{
-			javelin.setDamage(javelin.getDamage() + var9 * 0.5D + 0.5D);
+			int var6 = this.getMaxItemUseDuration(itemstack) - itemInUseCount;
+			float force = Math.min(var6/20.0f, 1.0f);
+
+			EntityJavelin javelin = new EntityJavelin(world, player, 1.5f*force);
+			javelin.setDamage(getRangedDamage());
+
+			int var9 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, itemstack);
+
+			if (var9 > 0)
+			{
+				javelin.setDamage(javelin.getDamage() + var9 * 0.5D + 0.5D);
+			}
+
+			int var10 = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, itemstack);
+
+			if (var10 > 0)
+			{
+				javelin.setDamage(javelin.getDamage()+var10);
+			}
+
+			if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, itemstack) > 0)
+			{
+				javelin.setFire(100);
+			}
+
+			world.playSoundAtEntity(player, "random.bow", 1.0F, 0.3F);
+			javelin.setDamageTaken((short) itemstack.getItemDamage());
+			javelin.setPickupItem(itemstack.getItem());
+
+			player.inventory.mainInventory[player.inventory.currentItem] = null;
+
+			if(!consumeJavelin(player))
+			{
+				player.inventory.mainInventory[player.inventory.currentItem] = consumeJavelinInQuiver(player, true);
+			}
+
+			if (!world.isRemote)
+			{
+				world.spawnEntityInWorld(javelin);
+			}
 		}
-
-		int var10 = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, itemstack);
-
-		if (var10 > 0)
-		{
-			javelin.setDamage(javelin.getDamage()+var10);
-		}
-
-		if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, itemstack) > 0)
-		{
-			javelin.setFire(100);
-		}
-
-		world.playSoundAtEntity(player, "random.bow", 1.0F, 0.3F);
-		javelin.setDamageTaken((short) itemstack.getItemDamage());
-		javelin.setPickupItem(itemstack.getItem());
-
-		player.inventory.mainInventory[player.inventory.currentItem] = null;
-
-		if(!consumeJavelin(player))
-		{
-			player.inventory.mainInventory[player.inventory.currentItem] = consumeJavelinInQuiver(player, true);
-		}
-
-		if (!world.isRemote)
-		{
-			world.spawnEntityInWorld(javelin);
-		}
-
 	}
 
 	private int getInventorySlotContainJavelin(EntityPlayer player)
@@ -174,7 +176,7 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 
 	public ItemStack consumeJavelinInQuiver(EntityPlayer player, boolean shouldConsume)
 	{
-		ItemStack quiver = player.inventory.armorItemInSlot(0);
+		ItemStack quiver = player.inventory.getStackInSlot(36);
 		if(quiver != null && quiver.getItem() instanceof ItemQuiver)
 			return ((ItemQuiver)quiver.getItem()).consumeAmmo(quiver, EnumAmmo.JAVELIN, shouldConsume);
 		return null;
