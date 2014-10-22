@@ -23,96 +23,96 @@ public class WorldGenPineTall extends WorldGenerator
 	}
 
 	@Override
-	public boolean generate(World world, Random par2Random, int i, int j, int k)
+	public boolean generate(World world, Random par2Random, int xCoord, int yCoord, int zCoord)
 	{
-		int var6 = par2Random.nextInt(5) + 7;
-		int var7 = var6 - par2Random.nextInt(2) - 3;
-		int var8 = var6 - var7;
+		int treeHeight = par2Random.nextInt(5) + 7;
+		int var7 = treeHeight - par2Random.nextInt(2) - 3;
+		int var8 = treeHeight - var7;
 		int var9 = 1 + par2Random.nextInt(var8 + 1);
-		boolean var10 = true;
+		boolean isValid = true;
 
-		if (j >= 1 && j + var6 + 1 <= 128)
+		if (yCoord >= 1 && yCoord + treeHeight + 1 <= 256)
 		{
-			int var11;
-			int var13;
-			int var14;
+			int y;
+			int x;
+			int z;
 			int var15;
 			int var18;
 			Block block;
 
-			for (var11 = j; var11 <= j + 1 + var6 && var10; ++var11)
+			for (y = yCoord; y <= yCoord + 1 + treeHeight && isValid; ++y)
 			{
 				boolean var12 = true;
 
-				if (var11 - j < var7)
+				if (y - yCoord < var7)
 					var18 = 0;
 				else
 					var18 = var9;
 
-				for (var13 = i - var18; var13 <= i + var18 && var10; ++var13)
+				for (x = xCoord - var18; x <= xCoord + var18 && isValid; ++x)
 				{
-					for (var14 = k - var18; var14 <= k + var18 && var10; ++var14)
+					for (z = zCoord - var18; z <= zCoord + var18 && isValid; ++z)
 					{
-						if (var11 >= 0 && var11 < 128)
+						if (y >= 0 && y < 256)
 						{
-							block = world.getBlock(var13, var11, var14);
-							if (block != Blocks.air && (block == null || !block.isLeaves(world, var13, var11, var14)))
-								var10 = false;
+							block = world.getBlock(x, y, z);
+							if (block != Blocks.air && block != null && !block.isLeaves(world, x, y, z) && !block.isReplaceable(world, x, y, z))
+								isValid = false;
 						}
 						else
 						{
-							var10 = false;
+							isValid = false;
 						}
 					}
 				}
 			}
 
-			if (!var10)
+			if (!isValid)
 			{
 				return false;
 			}
 			else
 			{
-				block = world.getBlock(i, j - 1, k);
+				block = world.getBlock(xCoord, yCoord - 1, zCoord);
 				Block dirt =  TFC_Core.getTypeForDirtFromGrass(block);
-				int dirtMeta =  world.getBlockMetadata(i, j-1, k);
+				int dirtMeta =  world.getBlockMetadata(xCoord, yCoord-1, zCoord);
 
-				if (TFC_Core.isSoil(block) && j < world.getActualHeight() - var6 - 1)
+				if (TFC_Core.isSoil(block) && yCoord < world.getActualHeight() - treeHeight - 1)
 				{
-					this.setBlockAndNotifyAdequately(world, i, j - 1, k, dirt, dirtMeta);
+					this.setBlockAndNotifyAdequately(world, xCoord, yCoord - 1, zCoord, dirt, dirtMeta);
 					var18 = 0;
 
-					for (var13 = j + var6; var13 >= j + var7; --var13)
+					for (x = yCoord + treeHeight; x >= yCoord + var7; --x)
 					{
-						for (var14 = i - var18; var14 <= i + var18; ++var14)
+						for (z = xCoord - var18; z <= xCoord + var18; ++z)
 						{
-							var15 = var14 - i;
+							var15 = z - xCoord;
 
-							for (int var16 = k - var18; var16 <= k + var18; ++var16)
+							for (int var16 = zCoord - var18; var16 <= zCoord + var18; ++var16)
 							{
-								int var17 = var16 - k;
-								block = world.getBlock(var14, var13, var16);
+								int var17 = var16 - zCoord;
+								block = world.getBlock(z, x, var16);
 								if ((Math.abs(var15) != var18 || Math.abs(var17) != var18 || var18 <= 0) && 
-										(block == null || block.canBeReplacedByLeaves(world, var14, var13, var16)))
+										(block == null || block.canBeReplacedByLeaves(world, z, x, var16)))
 								{
-									this.setBlockAndNotifyAdequately(world, var14, var13, var16, blockLeaf, metaLeaf);
+									this.setBlockAndNotifyAdequately(world, z, x, var16, blockLeaf, metaLeaf);
 								}
 							}
 						}
 
-						if (var18 >= 1 && var13 == j + var7 + 1)
+						if (var18 >= 1 && x == yCoord + var7 + 1)
 							--var18;
 						else if (var18 < var9)
 							++var18;
 					}
 
-					for (var13 = 0; var13 < var6 - 1; ++var13)
+					for (x = 0; x < treeHeight - 1; ++x)
 					{
-						block = world.getBlock(i, j + var13, k);
-						if (block == Blocks.air || block == null || block.isLeaves(world, i, j + var13, k) || 
-								block.canBeReplacedByLeaves(world, i, j + var13, k))
+						block = world.getBlock(xCoord, yCoord + x, zCoord);
+						if (block == Blocks.air || block == null || block.isLeaves(world, xCoord, yCoord + x, zCoord) || 
+								block.canBeReplacedByLeaves(world, xCoord, yCoord + x, zCoord))
 						{
-							this.setBlockAndNotifyAdequately(world, i, j + var13, k, blockWood, metaWood);
+							this.setBlockAndNotifyAdequately(world, xCoord, yCoord + x, zCoord, blockWood, metaWood);
 						}
 					}
 					return true;

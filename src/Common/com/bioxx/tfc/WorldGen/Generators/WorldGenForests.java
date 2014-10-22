@@ -30,6 +30,7 @@ public class WorldGenForests implements IWorldGenerator
 	int TreeType2;
 	float evt;
 	float rainfall;
+	float temperature = 20f;
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
@@ -82,79 +83,30 @@ public class WorldGenForests implements IWorldGenerator
 			if(numTrees > 30)
 				numTrees = 30;
 
-			float temperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, world.getHeightValue(xCoord, zCoord), zCoord);
+			temperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, world.getHeightValue(xCoord, zCoord), zCoord);
+			int spawnParam0 = this.canTreeSpawn(TreeType0);
+			int spawnParam1 = this.canTreeSpawn(TreeType1);
+			int spawnParam2 = this.canTreeSpawn(TreeType2);
 
 			if(getNearWater(world, xCoord, yCoord, zCoord))
 			{
 				rainfall*=2;
 				evt /= 2;
 			}
-			try
+			try 
 			{
 				if(zCoord > 14500 || zCoord < -14500)
 					gen2 = TFCBiome.getTreeGen(8, random.nextBoolean());
 				int randomNumber = random.nextInt(100);
 
-				float tree0EVTMin = TreeType0 != -1 ? EnumTree.values()[TreeType0].minEVT : 0;
-				float tree0EVTMax = TreeType0 != -1 ? EnumTree.values()[TreeType0].maxEVT : 0;
-
-				float tree0RainMin = TreeType0 != -1 ? EnumTree.values()[TreeType0].minRain : 0;
-				float tree0RainMax = TreeType0 != -1 ? EnumTree.values()[TreeType0].maxRain : 0;
-
-				float tree0TempMin = TreeType0 != -1 ? EnumTree.values()[TreeType0].minTemp : 0;
-				float tree0TempMax = TreeType0 != -1 ? EnumTree.values()[TreeType0].maxTemp : 0;
-
-				float tree1EVTMin = TreeType1 != -1 ? EnumTree.values()[TreeType1].minEVT : 0;
-				float tree1EVTMax = TreeType1 != -1 ? EnumTree.values()[TreeType1].maxEVT : 0;
-
-				float tree1RainMin = TreeType1 != -1 ? EnumTree.values()[TreeType1].minRain : 0;
-				float tree1RainMax = TreeType1 != -1 ? EnumTree.values()[TreeType1].maxRain : 0;
-
-				float tree1TempMin = TreeType1 != -1 ? EnumTree.values()[TreeType1].minTemp : 0;
-				float tree1TempMax = TreeType1 != -1 ? EnumTree.values()[TreeType1].maxTemp : 0;
-
-				float tree2EVTMin = TreeType2 != -1 ? EnumTree.values()[TreeType2].minEVT : 0;
-				float tree2EVTMax = TreeType2 != -1 ? EnumTree.values()[TreeType2].maxEVT : 0;
-
-				float tree2RainMin = TreeType2 != -1 ? EnumTree.values()[TreeType2].minRain : 0;
-				float tree2RainMax = TreeType2 != -1 ? EnumTree.values()[TreeType2].maxRain : 0;
-
-				float tree2TempMin = TreeType2 != -1 ? EnumTree.values()[TreeType2].minTemp : 0;
-				float tree2TempMax = TreeType2 != -1 ? EnumTree.values()[TreeType2].maxTemp : 0;
-
-				boolean canSpawnTemp0 = (temperature >= tree0TempMin && temperature <= tree0TempMax);
-				int canSpawnEVTRain0 = (evt >= tree0EVTMin && evt <= tree0EVTMax && 
-						rainfall >= tree0RainMin && rainfall <= tree0RainMax) ? 2 : 
-							(evt >= tree0EVTMin && evt <= tree0EVTMax) || (rainfall >= tree0RainMin && rainfall <= tree0RainMax) ? 1 : 0;
-
-				boolean canSpawnTemp1 = (temperature >= tree1TempMin && temperature <= tree1TempMax);
-				int canSpawnEVTRain1 = (evt >= tree1EVTMin && evt <= tree1EVTMax && 
-						rainfall >= tree1RainMin && rainfall <= tree1RainMax) ? 2 : 
-							(evt >= tree1EVTMin && evt <= tree1EVTMax) || (rainfall >= tree1RainMin && rainfall <= tree1RainMax) ? 1 : 0;
-
-				boolean canSpawnTemp2 = (temperature >= tree2TempMin && temperature <= tree2TempMax);
-				int canSpawnEVTRain2 = (evt >= tree2EVTMin && evt <= tree2EVTMax && 
-						rainfall >= tree2RainMin && rainfall <= tree2RainMax) ? 2 : 
-							(evt >= tree2EVTMin && evt <= tree2EVTMax) || (rainfall >= tree2RainMin && rainfall <= tree2RainMax) ? 1 : 0;
-
-				if(!canSpawnTemp2 || canSpawnEVTRain2 == 0)
-					randomNumber -= 20;
-				else if(canSpawnTemp2 && canSpawnEVTRain2 == 1)
-					randomNumber -= 10;
-
-				if(!canSpawnTemp1 || canSpawnEVTRain1 == 0)
-					randomNumber -= 30;
-				else if(canSpawnTemp1 && canSpawnEVTRain1 == 1)
-					randomNumber -= 15;
-
 				//if at least one of the trees is within the temperature zone otherewise no trees
-				if(canSpawnTemp0 || canSpawnTemp1 || canSpawnTemp2)
+				if((spawnParam0 & 1) > 0 || (spawnParam1 & 1) > 0 || (spawnParam2 & 1) > 0)
 				{
 					//if the evt makes the location harsh for all of the trees
-					if(canSpawnEVTRain0 <= 1 && canSpawnEVTRain1 <= 1 && canSpawnEVTRain2 <= 1)
+					if((spawnParam0 > 0 && (spawnParam0 & 2) == 0) && (spawnParam1 > 0 && (spawnParam1 & 2) == 0) && (spawnParam2 > 0 && (spawnParam2 & 2) == 0))
 					{
 						//there is a 1 in 10 chance for a tree otherwise no trees
-						if(random.nextInt(10) == 0)
+						if(random.nextInt(8) == 0)
 							numTrees = 1;
 						else
 							return;
@@ -165,35 +117,46 @@ public class WorldGenForests implements IWorldGenerator
 					return;
 				}
 
-				if(randomNumber < 40 && gen0 != null)
+				if(randomNumber < 50 && gen0 != null && spawnParam0 > 1)
 				{
-					if(canSpawnTemp0 && canSpawnEVTRain0 > 1)
-					{
-						gen0.setScale(1.0D, 1.0D, 1.0D);
-						gen0.generate(world, random, xCoord, yCoord, zCoord);
-					}
+					gen0.generate(world, random, xCoord, yCoord, zCoord);
 				}
-				else if(randomNumber < 70 && gen1 != null)
+				else if(randomNumber < 80 && gen1 != null && spawnParam0 > 1)
 				{
-					if(canSpawnTemp1 && canSpawnEVTRain1 > 1)
-					{
-						gen1.setScale(1.0D, 1.0D, 1.0D);
-						gen1.generate(world, random, xCoord, yCoord, zCoord);
-					}
+					gen1.generate(world, random, xCoord, yCoord, zCoord);
 				}
-				else if(randomNumber < 100 && gen2 != null)
+				else if(randomNumber < 100 && gen2 != null && spawnParam0 > 1)
 				{
-					if(canSpawnTemp2 && canSpawnEVTRain2 > 1)
-					{
-						gen2.setScale(1.0D, 1.0D, 1.0D);
-						gen2.generate(world, random, xCoord, yCoord, zCoord);
-					}
+					gen2.generate(world, random, xCoord, yCoord, zCoord);
 				}
 			}
 			catch(IndexOutOfBoundsException e)
 			{
 			}
 		}
+	}
+
+	private int canTreeSpawn(int tree)
+	{
+		float treeEVTMin = tree != -1 ? EnumTree.values()[tree].minEVT : 0;
+		float treeEVTMax = tree != -1 ? EnumTree.values()[tree].maxEVT : 0;
+
+		float treeRainMin = tree != -1 ? EnumTree.values()[tree].minRain : 0;
+		float treeRainMax = tree != -1 ? EnumTree.values()[tree].maxRain : 0;
+
+		float treeTempMin = tree != -1 ? EnumTree.values()[tree].minTemp : 0;
+		float treeTempMax = tree != -1 ? EnumTree.values()[tree].maxTemp : 0;
+
+		int out = 0;
+
+		if(temperature >= treeTempMin && temperature <= treeTempMax)
+			out += 1;
+		if(evt >= treeEVTMin && evt <= treeEVTMax)
+			out += 2;
+		if(rainfall >= treeRainMin && rainfall <= treeRainMax)
+			out += 4;
+
+		return out;
 	}
 
 	public boolean generateJungle(Random random, int chunkX, int chunkZ, World world) 

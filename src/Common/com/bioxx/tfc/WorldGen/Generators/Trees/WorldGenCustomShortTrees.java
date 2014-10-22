@@ -44,7 +44,7 @@ public class WorldGenCustomShortTrees extends WorldGenerator
 					if (i1 >= 0 && i1 < world.getHeight())
 					{
 						Block j3 = world.getBlock(i2, i1, l2);
-						if (j3 != Blocks.air && (j3 != TFCBlocks.Leaves || j3 != TFCBlocks.Leaves2) && (j3 != TFCBlocks.Sapling || j3 != TFCBlocks.Sapling2))
+						if (j3 != Blocks.air && !j3.isReplaceable(world, i2, i1, l2))
 							flag = false;
 					}
 					else

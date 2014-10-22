@@ -2,13 +2,13 @@ package com.bioxx.tfc.WorldGen.Generators.Trees;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Core;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class WorldGenDouglasFir extends WorldGenerator
 {
@@ -52,11 +52,7 @@ public class WorldGenDouglasFir extends WorldGenerator
 					if (j >= 0 && j < 256)
 					{
 						Block j2 = world.getBlock(l, j, j1);
-						if (j2 != Blocks.air && (j2 != TFCBlocks.Leaves || j2 != TFCBlocks.Leaves2) &&
-								(j2 != TFCBlocks.Grass || j2 != TFCBlocks.Grass2) &&
-								(j2 != TFCBlocks.Dirt || j2 != TFCBlocks.Dirt2) &&
-								(j2 != TFCBlocks.LogNatural || j2 != TFCBlocks.LogNatural2) &&
-								(j2 != TFCBlocks.Sapling || j2 != TFCBlocks.Sapling2))
+						if (j2 != Blocks.air && !j2.isReplaceable(world, l, j, j1))
 						{
 							flag = false;
 						}
@@ -112,7 +108,7 @@ public class WorldGenDouglasFir extends WorldGenerator
 		for (int l1 = 0; l1 < i-1; l1++)
 		{
 			Block l2 = world.getBlock(par3, par4 + l1, par5);
-			if (l2 != Blocks.air && (l2 != TFCBlocks.Leaves || l2 != TFCBlocks.Leaves2))
+			if (l2 != Blocks.air && !l2.isReplaceable(world, par3, par4 + l1, par5))
 				continue;
 			setBlockAndNotifyAdequately(world, par3, par4 + l1, par5, TFCBlocks.LogNatural, metaID);
 		}

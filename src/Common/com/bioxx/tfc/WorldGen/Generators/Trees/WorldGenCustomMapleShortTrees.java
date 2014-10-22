@@ -46,7 +46,7 @@ public class WorldGenCustomMapleShortTrees extends WorldGenerator
 					if (i1 >= 0 && i1 < world.getHeight())
 					{
 						Block j3 = world.getBlock(i2, i1, l2);
-						if (j3 != Blocks.air && j3 != TFCBlocks.Leaves)
+						if (j3 != Blocks.air && !j3.canBeReplacedByLeaves(world, i2, i1, l2))
 							flag = false;
 					}
 					else

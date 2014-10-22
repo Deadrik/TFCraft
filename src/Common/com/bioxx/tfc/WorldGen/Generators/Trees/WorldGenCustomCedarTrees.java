@@ -2,13 +2,13 @@ package com.bioxx.tfc.WorldGen.Generators.Trees;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Core;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class WorldGenCustomCedarTrees extends WorldGenerator
 {
@@ -27,22 +27,22 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 		if (yCoord < 1 || yCoord + treeHeight + 1 > world.getHeight())
 			return false;
 
-		for (int i1 = yCoord; i1 <= yCoord + 1 + treeHeight; i1++)
+		for (int y = yCoord; y <= yCoord + 1 + treeHeight; y++)
 		{
 			byte byte0 = 1;
-			if (i1 == yCoord)
+			if (y == yCoord)
 				byte0 = 0;
-			if (i1 >= yCoord + 1 + treeHeight - 2)
+			if (y >= yCoord + 1 + treeHeight - 2)
 				byte0 = 2;
 
-			for (int i2 = xCoord - byte0; i2 <= xCoord + byte0 && flag; i2++)
+			for (int x = xCoord - byte0; x <= xCoord + byte0 && flag; x++)
 			{
-				for (int l2 = zCoord - byte0; l2 <= zCoord + byte0 && flag; l2++)
+				for (int z = zCoord - byte0; z <= zCoord + byte0 && flag; z++)
 				{
-					if (i1 >= 0 && i1 < world.getHeight())
+					if (y >= 0 && y < world.getHeight())
 					{
-						Block j3 = world.getBlock(i2, i1, l2);
-						if (j3 != Blocks.air && j3 != TFCBlocks.Leaves && j3 != TFCBlocks.Sapling)
+						Block j3 = world.getBlock(x, y, z);
+						if (j3 != Blocks.air && !j3.canBeReplacedByLeaves(world, x, y, z))
 							flag = false;
 					}
 					else
@@ -60,9 +60,6 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 		if (!(TFC_Core.isSoil(var3))|| yCoord >= world.getHeight() - treeHeight - 1)
 			return false;
 
-		//DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
-		//set the block below the tree to dirt.
-		//world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2));
 		//Now we create the leaves. generates from the bottom up.
 		for (int treeHeightOffset = yCoord + 1; treeHeightOffset <= yCoord + treeHeight; treeHeightOffset++)
 		{
@@ -75,7 +72,7 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 				{
 					int j4 = zPos - zCoord;
 					if ((Math.abs(l3) != treeRadius || Math.abs(j4) != treeRadius || random.nextInt(2) != 0 && treeDiameter != 0) && 
-							world.isAirBlock(xPos, treeHeightOffset, zPos))
+							world.getBlock(xPos, treeHeightOffset, zPos).canBeReplacedByLeaves(world, xPos, treeHeightOffset, zPos))
 					{
 						setBlockAndNotifyAdequately(world, xPos, treeHeightOffset, zPos, TFCBlocks.Leaves, treeId);
 					}
