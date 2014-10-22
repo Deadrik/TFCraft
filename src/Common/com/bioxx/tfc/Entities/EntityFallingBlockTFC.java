@@ -133,6 +133,14 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 
 				if (this.onGround)
 				{
+					if(canReplace(worldObj, i, j, k))
+					{
+						worldObj.setBlockToAir(i, j, k);
+					}
+					else if(worldObj.getBlock(i, j, k).getBlockBoundsMaxY() < 1)
+					{
+						j++;
+					}
 					if(canReplace(worldObj, i, j-1, k))
 					{
 						//TFC_Core.setBlockToAirWithDrops(worldObj, i, j-1, k);
