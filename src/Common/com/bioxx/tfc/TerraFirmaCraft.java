@@ -47,6 +47,7 @@ import com.bioxx.tfc.Handlers.EntityLivingHandler;
 import com.bioxx.tfc.Handlers.EntitySpawnHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
 import com.bioxx.tfc.Handlers.PlayerInteractHandler;
+import com.bioxx.tfc.Handlers.TFCFuelHandler;
 import com.bioxx.tfc.Handlers.Network.PacketPipeline;
 import com.bioxx.tfc.WorldGen.TFCProvider;
 import com.bioxx.tfc.WorldGen.TFCProviderHell;
@@ -240,6 +241,11 @@ public class TerraFirmaCraft
 		ItemHeat.SetupItemHeat();
 
 		TFC_Climate.initCache();
+
+		//Register TFC items with forge fuel handler.
+		//This is used by vanilla furnice and many other mods.
+		TFCItems.registerFurniceFuel();
+		GameRegistry.registerFuelHandler(new TFCFuelHandler());
 	}
 
 	@EventHandler
@@ -536,7 +542,7 @@ public class TerraFirmaCraft
 
 		/**Start setup here*/
 		Set<String> names = config.getCategoryNames();
-		Iterator oreIter = names.iterator();
+		Iterator<String> oreIter = names.iterator();
 
 		while(oreIter.hasNext())
 		{
