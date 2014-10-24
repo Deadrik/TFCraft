@@ -1961,14 +1961,14 @@ tile.Flowers2.flower_tulip_white.name=Tulipa Branca
 tile.Flowers2.flower_tulip_pink.name=Tulipa Rosa
 tile.Flowers2.flower_oxeye_daisy.name=Margarida
 
-tile.SaltWater.name=
-tile.SaltWaterStationary.name=
-tile.FreshWater.name=
-tile.FreshWaterStationary.name=
-tile.HotWater.name=
-tile.HotWaterStationary.name=
-tile.Lava.name=
-tile.LavaStationary.name=
+tile.SaltWater.name=Água Salgada Corrente
+tile.SaltWaterStationary.name=Água Salgada
+tile.FreshWater.name=Água Doce Corrente
+tile.FreshWaterStationary.name=Água Doce
+tile.HotWater.name=Água Quente Corrente
+tile.HotWaterStationary.name=Água Quente
+tile.Lava.name=Lava Corrente
+tile.LavaStationary.name=Lava
 
 #=======
 #= GUI =

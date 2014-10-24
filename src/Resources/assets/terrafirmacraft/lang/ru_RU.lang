@@ -1961,14 +1961,14 @@ tile.Flowers2.flower_tulip_white.name=Белый тюльпан
 tile.Flowers2.flower_tulip_pink.name=Розовый тюльпан
 tile.Flowers2.flower_oxeye_daisy.name=Нивяник
 
-tile.SaltWater.name=
-tile.SaltWaterStationary.name=
-tile.FreshWater.name=
-tile.FreshWaterStationary.name=
-tile.HotWater.name=
-tile.HotWaterStationary.name=
-tile.Lava.name=
-tile.LavaStationary.name=
+tile.SaltWater.name=Текущая солёная вода
+tile.SaltWaterStationary.name=Солёная вода
+tile.FreshWater.name=Текущая пресная вода
+tile.FreshWaterStationary.name=Пресная вода
+tile.HotWater.name=Текущая горячая вода
+tile.HotWaterStationary.name=Горячая вода
+tile.Lava.name=Текущая лава
+tile.LavaStationary.name=Лава
 
 #=======
 #= GUI =

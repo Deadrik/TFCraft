@@ -1961,14 +1961,14 @@ tile.Flowers2.flower_tulip_white.name=白色鬱金香
 tile.Flowers2.flower_tulip_pink.name=粉色鬱金香
 tile.Flowers2.flower_oxeye_daisy.name=雛菊
 
-tile.SaltWater.name=
-tile.SaltWaterStationary.name=
-tile.FreshWater.name=
-tile.FreshWaterStationary.name=
-tile.HotWater.name=
-tile.HotWaterStationary.name=
-tile.Lava.name=
-tile.LavaStationary.name=
+tile.SaltWater.name=流動的鹹水
+tile.SaltWaterStationary.name=鹹水
+tile.FreshWater.name=流動的淡水
+tile.FreshWaterStationary.name=淡水
+tile.HotWater.name=流動的熱水
+tile.HotWaterStationary.name=熱水
+tile.Lava.name=流動的岩漿
+tile.LavaStationary.name=岩漿
 
 #=======
 #= GUI =
@@ -2304,8 +2304,8 @@ skill.butchering=動物屠宰技術
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
-fluid.freshwater=清水
-fluid.saltwater=鹽水
+fluid.freshwater=淡水
+fluid.saltwater=鹹水
 fluid.lavatfc=岩漿
 fluid.hotwater=熱水
 fluid.beer=啤酒

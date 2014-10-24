@@ -87,8 +87,8 @@ achievement.achPokeCreeper.desc=Toccalo con un bastone
 #============
 #= Commands =
 #============
-commands.transferTamed.noTamed=Nessun animale valido dentro la portata!
-commands.transferTamed.tooMany=Troppi animali dentro la portata!
+commands.transferTamed.noTamed=Nessun animale valido a portata!
+commands.transferTamed.tooMany=Troppi animali a portata!
 commands.transferTamed.wrongOwner=Quest'animale non è tuo!
 commands.transferTamed.sameTarget=Non puoi trasferirtelo da solo!
 commands.transferTamed.display.incoming=%s ti ha trasferito un animale!
@@ -1961,14 +1961,14 @@ tile.Flowers2.flower_tulip_white.name=Tulipano bianco
 tile.Flowers2.flower_tulip_pink.name=Tulipano rosa
 tile.Flowers2.flower_oxeye_daisy.name=Margherita
 
-tile.SaltWater.name=
-tile.SaltWaterStationary.name=
-tile.FreshWater.name=
-tile.FreshWaterStationary.name=
-tile.HotWater.name=
-tile.HotWaterStationary.name=
-tile.Lava.name=
-tile.LavaStationary.name=
+tile.SaltWater.name=Acqua salata corrente
+tile.SaltWaterStationary.name=Acqua salata
+tile.FreshWater.name=Acqua dolce corrente
+tile.FreshWaterStationary.name=Acqua dolce
+tile.HotWater.name=Acqua termale corrente
+tile.HotWaterStationary.name=Acqua termale
+tile.Lava.name=Lava corrente
+tile.LavaStationary.name=Lava
 
 #=======
 #= GUI =
