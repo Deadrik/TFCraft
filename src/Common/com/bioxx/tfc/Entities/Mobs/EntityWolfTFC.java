@@ -349,8 +349,12 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		super.onLivingUpdate();
 		TFC_Core.PreventEntityDataUpdate = false;
 
-		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead)
+		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead){
 			this.heal(1);
+		}
+		else if(hunger < 144000 && super.isInLove()){
+			this.setInLove(false);
+		}
 	}
 
 	public void syncData()

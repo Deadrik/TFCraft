@@ -323,6 +323,9 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		{
 			this.heal(1);
 		}
+		else if(hunger < 144000 && super.isInLove()){
+			this.setInLove(false);
+		}
 
 		/**
 		 * This Cancels out the changes made to growingAge by EntityAgeable

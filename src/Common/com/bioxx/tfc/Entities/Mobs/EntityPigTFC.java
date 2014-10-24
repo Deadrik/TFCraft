@@ -235,8 +235,12 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		super.onLivingUpdate();
 		TFC_Core.PreventEntityDataUpdate = false;
 
-		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead)
+		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead){
 			this.heal(1);
+		}
+		else if(hunger < 144000 && super.isInLove()){
+			this.setInLove(false);
+		}
 	}
 
 	public void syncData()
@@ -736,7 +740,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	public void familiarize(EntityPlayer ep) 
 	{
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && this.isBreedingItemTFC(stack) && !familiarizedToday){
+		if(stack != null && this.isFood(stack) && !familiarizedToday){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));

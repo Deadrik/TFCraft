@@ -261,6 +261,9 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		{
 			this.heal(1);
 		}
+		else if(hunger < 144000 && super.isInLove()){
+			this.setInLove(false);
+		}
 	}
 
 	public void roosterCrow()
@@ -539,7 +542,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
-			if(player.isSneaking()){
+			if(player.isSneaking() && !familiarizedToday){
 				this.familiarize(player);
 				return true;
 			}
@@ -666,7 +669,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && stack.getItem() != null && isFood(stack)){
+		if(stack != null && stack.getItem() != null && isFood(stack) && !familiarizedToday){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));

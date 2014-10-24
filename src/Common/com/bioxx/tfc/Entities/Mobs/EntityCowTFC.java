@@ -226,6 +226,9 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		{
 			this.heal(1);
 		}
+		else if(hunger < 144000 && super.isInLove()){
+			this.setInLove(false);
+		}
 	}
 
 	public void syncData()
@@ -389,7 +392,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		{
 			if(player.isSneaking() && !familiarizedToday){
 				this.familiarize(player);
-				if(player.getHeldItem() != null && isBreedingItemTFC(player.getHeldItem())){
+				if(player.getHeldItem() != null && isFood(player.getHeldItem())){
 					return true;
 				}
 			}
@@ -707,7 +710,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && this.isBreedingItemTFC(stack) && isAdult() && !familiarizedToday){
+		if(stack != null && this.isFood(stack) && !familiarizedToday && ((isAdult() && familiarity < 50) || !isAdult())){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
@@ -720,7 +723,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();
 		}
-		else if(stack != null && stack.getItem() != null && stack.getItem().equals(TFCItems.WoodenBucketMilk) && !isAdult()){
+		else if(stack != null && stack.getItem() != null && stack.getItem().equals(TFCItems.WoodenBucketMilk) && isAdult()){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,new ItemStack(TFCItems.WoodenBucketEmpty,1,0));
