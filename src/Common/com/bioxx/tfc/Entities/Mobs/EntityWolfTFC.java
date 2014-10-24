@@ -365,15 +365,15 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 						TFC_Core.getByteFromSmallFloat(size_mod),
 						TFC_Core.getByteFromSmallFloat(strength_mod),
 						TFC_Core.getByteFromSmallFloat(aggression_mod),
-						TFC_Core.getByteFromSmallFloat(obedience_mod)};
-				byte[] values2 = {
+						TFC_Core.getByteFromSmallFloat(obedience_mod),
 						TFC_Core.getByteFromSmallFloat(colour_mod),
 						TFC_Core.getByteFromSmallFloat(climate_mod),
 						TFC_Core.getByteFromSmallFloat(hard_mod),
 						(byte)familiarity
 				};
-				this.dataWatcher.updateObject(22, ByteBuffer.wrap(values).getInt());
-				this.dataWatcher.updateObject(23, ByteBuffer.wrap(values2).getInt());
+				ByteBuffer buf = ByteBuffer.wrap(values);
+				this.dataWatcher.updateObject(24, buf.getInt());
+				this.dataWatcher.updateObject(23, buf.getInt());
 				this.dataWatcher.updateObject(24, this.happyTicks);
 			}
 			else
