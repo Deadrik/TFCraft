@@ -67,13 +67,24 @@ public class BlockGravel extends BlockTerra
 	}
 
 	@Override
-	public Item getItemDropped(int metadata, Random rand, int fortune)
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+
 		if (fortune > 3)
 		{
 			fortune = 3;
 		}
-		return rand.nextInt(10 - fortune * 3) == 0 ? Items.flint : Item.getItemFromBlock(this);
+
+		if(world.rand.nextInt(10 - fortune * 3) == 0)
+		{
+			ret.add(new ItemStack(Items.flint , 1));
+		}
+		else
+		{
+			ret.add(new ItemStack(Item.getItemFromBlock(this), 1, damageDropped(metadata)));
+		}
+		return ret;
 	}
 
 	public static boolean canFallBelow(World world, int x, int y, int z)
