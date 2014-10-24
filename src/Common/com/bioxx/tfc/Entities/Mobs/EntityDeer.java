@@ -226,7 +226,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 						(byte)familiarity
 				};
 				ByteBuffer buf = ByteBuffer.wrap(values);
-				this.dataWatcher.updateObject(24, buf.getInt());
+				this.dataWatcher.updateObject(22, buf.getInt());
 				this.dataWatcher.updateObject(23, buf.getInt());
 			}
 			else
