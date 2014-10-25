@@ -8,9 +8,8 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
@@ -86,14 +85,17 @@ public class ItemProPick extends ItemTerra
 			SkillRank rank = TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_PROSPECTING);
 			int chance = 60 + ((rank.ordinal()+1)*10);
 
+			results.clear();
 			// If random(100) is less than 60, it used to succeed. we don't need to
 			// gather the blocks in a 25x25 area if it doesn't.
 			if (random.nextInt(100) >= chance && rank != SkillRank.Master)
 			{
-				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("gui.ProPick.FoundNothing")));
+				TellNothingFound(player);
 				return true;
 			}
 
+			results.clear();
+			
 			// Check all blocks in the 25x25 area, centered on the targeted block.
 			for (int i = -12; i < 12; i++)
 			{
@@ -129,15 +131,18 @@ public class ItemProPick extends ItemTerra
 					}
 				}
 			}
-
+			
 			// Tell the player what was found.
-			TellResult(player);
+			if (results.isEmpty()) {
+				TellNothingFound(player);
+			} else {
+				TellResult(player);
+			}
 
 			results.clear();
 			random = null;
 
 			// Damage the item on prospecting use.
-
 			itemStack.damageItem(1, player);
 			if (itemStack.getItemDamage() >= itemStack.getMaxDamage())
 				player.destroyCurrentEquippedItem();
@@ -147,39 +152,53 @@ public class ItemProPick extends ItemTerra
 	}
 
 	/*
+	 * Tells the player nothing was found.
+	 */
+	private void TellNothingFound(EntityPlayer player)
+	{
+		player.addChatMessage(new ChatComponentTranslation("gui.ProPick.FoundNothing"));
+	}
+
+	/*
 	 * Tells the player what block of ore he found, when directly targeting an ore block.
 	 */
 	private void TellResult(EntityPlayer player, ItemStack ore)
 	{
-		player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.Found"), ore.getItem().getItemStackDisplayName(ore))));
-	}
+		String oreName = ore.getUnlocalizedName() + ".name";
+		player.addChatMessage(
+				new ChatComponentTranslation("gui.ProPick.Found")
+				.appendText(" ")
+				.appendSibling(new ChatComponentTranslation(oreName)));
 
+	}
+	
 	/*
 	 * Tells the player what ore has been found, randomly picked off the HashMap.
 	 */
 	private void TellResult(EntityPlayer player)
 	{
-		if (results == null || results.size() == 0)
-		{
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("gui.ProPick.FoundNothing")));
-			return;
-		}
 		TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_PROSPECTING, 1);
 		int index = random.nextInt(results.size());
 		ProspectResult result = results.values().toArray(new ProspectResult[0])[index];
-		String oreName = result.ItemStack.getItem().getItemStackDisplayName(result.ItemStack);
+		String oreName = result.ItemStack.getUnlocalizedName() + ".name";
 
+		String quantityMsg;
 		if (result.Count < 10)
-			player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.FoundTraces"), oreName)));
+			quantityMsg = "gui.ProPick.FoundTraces";
 		else if(result.Count < 20)
-			player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.FoundSmall"), oreName)));
+			quantityMsg = "gui.ProPick.FoundSmall";
 		else if (result.Count < 40)
-			player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.FoundMedium"), oreName)));
+			quantityMsg = "gui.ProPick.FoundMedium";
 		else if (result.Count < 80)
-			player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.FoundLarge"), oreName)));
+			quantityMsg = "gui.ProPick.FoundLarge";
 		else
-			player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.FoundVeryLarge"), oreName)));
-
+			quantityMsg = "gui.ProPick.FoundVeryLarge";
+		
+		player.addChatMessage(
+				new ChatComponentTranslation(quantityMsg)
+				.appendText(" ")
+				.appendSibling(new ChatComponentTranslation(oreName)));
+				
 		oreName = null;
 		result = null;
 	}
