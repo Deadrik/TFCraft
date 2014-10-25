@@ -53,7 +53,14 @@ public class TFCProvider extends WorldProvider
 	@SideOnly(Side.CLIENT)
 	public int getMoonPhase(long par1)
 	{
-		return (int)(par1 / TFC_Time.dayLength) % 8;
+		int daysPassed = (int)(par1 / TFC_Time.dayLength);
+		int dayOfMonth = daysPassed % TFC_Time.daysInMonth;
+		float dayToLunarDayMultiplier = (float)8/TFC_Time.daysInMonth;
+		//Round rather than just cast to ensure that the full moon
+		//only lasts one night
+		int lunarDay = Math.round(dayOfMonth*dayToLunarDayMultiplier);
+		
+		return lunarDay % 8;
 	}
 
 	@Override
