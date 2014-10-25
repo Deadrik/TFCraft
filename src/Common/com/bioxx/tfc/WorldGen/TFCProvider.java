@@ -20,6 +20,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFCProvider extends WorldProvider
 {
+	private int moonPhase = 0;
+	private int moonPhaseLastCalculated = 0;
+	
 	@Override
 	protected void registerWorldChunkManager()
 	{
@@ -53,14 +56,23 @@ public class TFCProvider extends WorldProvider
 	@SideOnly(Side.CLIENT)
 	public int getMoonPhase(long par1)
 	{
-		int daysPassed = (int)(par1 / TFC_Time.dayLength);
-		int dayOfMonth = daysPassed % TFC_Time.daysInMonth;
-		float dayToLunarDayMultiplier = (float)8/TFC_Time.daysInMonth;
-		//Round rather than just cast to ensure that the full moon
-		//only lasts one night
-		int lunarDay = Math.round(dayOfMonth*dayToLunarDayMultiplier);
+		//Only calculate if we haven't already calculated today
+		//so we don't needlessly recalculate
+		if(TFC_Time.getDayFromTotalHours(TFC_Time.getTotalHours()) != moonPhaseLastCalculated)
+		{
+			int daysPassed = (int)(par1 / TFC_Time.dayLength);
+			int dayOfMonth = daysPassed % TFC_Time.daysInMonth;
+			float dayToLunarDayMultiplier = (float)8/TFC_Time.daysInMonth;
+			//Round rather than just cast to ensure that the full moon
+			//only lasts one night
+			int lunarDay = Math.round(dayOfMonth*dayToLunarDayMultiplier);
+			
+			moonPhase = lunarDay % 8;
+			
+			moonPhaseLastCalculated = TFC_Time.getDayFromTotalHours(TFC_Time.getTotalHours());
+		}
 		
-		return lunarDay % 8;
+		return moonPhase;
 	}
 
 	@Override
