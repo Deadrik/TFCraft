@@ -98,61 +98,65 @@ public class FoodStatsTFC
 				this.waterTimer = TFC_Time.startTime;
 			}
 
-			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength && !player.capabilities.isCreativeMode)
+			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength)
 			{
 				this.foodTimer += TFC_Time.hourLength;
-				float drainMult = 1.0f;
-				if(player.isPlayerSleeping())
-				{
-					drainMult = 0.50f;
-				}
-				//Water
-				if(player.isSprinting())
-					waterLevel -= 5+(tempWaterMod);
+				
 				if(!player.capabilities.isCreativeMode)
-					waterLevel -= bodyTemp.getExtraWater()*drainMult;
-
-				//Food
-				float hunger = ((1 + foodExhaustionLevel) + bodyTemp.getExtraFood())*drainMult;
-				if(this.satisfaction >= hunger)
 				{
-					satisfaction -= hunger; 
-					hunger = 0;
-					foodExhaustionLevel = 0;
-				}
-				else
-				{
-					hunger -= satisfaction; 
-					satisfaction = 0;
-					foodExhaustionLevel = 0;
-				}
-				this.stomachLevel = Math.max(this.stomachLevel - hunger, 0);
-
-				if(satisfaction == 0)
-				{
-					satProtein = false; satFruit = false; satVeg = false; satDairy = false; satGrain = false;
-				}
-
-				if (this.stomachLevel <= 0)
-				{
-					reduceNutrition(0.0024F);//3x penalty for starving
-				}
-				else if(this.satisfaction <= 0)
-				{
-					reduceNutrition(0.0008F);
-				}
-				else
-				{
-					if(this.satProtein)
-						this.addNutrition(EnumFoodGroup.Protein, this.satisfaction*((1-this.nutrProtein)/100), false);
-					if(this.satGrain)
-						this.addNutrition(EnumFoodGroup.Grain, this.satisfaction*((1-this.nutrGrain)/100), false);
-					if(this.satVeg)
-						this.addNutrition(EnumFoodGroup.Vegetable, this.satisfaction*((1-this.nutrVeg)/100), false);
-					if(this.satFruit)
-						this.addNutrition(EnumFoodGroup.Fruit, this.satisfaction*((1-this.nutrFruit)/100), false);
-					if(this.satDairy)
-						this.addNutrition(EnumFoodGroup.Dairy, this.satisfaction*((1-this.nutrDairy)/100), false);
+					float drainMult = 1.0f;
+					if(player.isPlayerSleeping())
+					{
+						drainMult = 0.50f;
+					}
+					//Water
+					if(player.isSprinting())
+						waterLevel -= 5+(tempWaterMod);
+					if(!player.capabilities.isCreativeMode)
+						waterLevel -= bodyTemp.getExtraWater()*drainMult;
+	
+					//Food
+					float hunger = ((1 + foodExhaustionLevel) + bodyTemp.getExtraFood())*drainMult;
+					if(this.satisfaction >= hunger)
+					{
+						satisfaction -= hunger; 
+						hunger = 0;
+						foodExhaustionLevel = 0;
+					}
+					else
+					{
+						hunger -= satisfaction; 
+						satisfaction = 0;
+						foodExhaustionLevel = 0;
+					}
+					this.stomachLevel = Math.max(this.stomachLevel - hunger, 0);
+	
+					if(satisfaction == 0)
+					{
+						satProtein = false; satFruit = false; satVeg = false; satDairy = false; satGrain = false;
+					}
+	
+					if (this.stomachLevel <= 0)
+					{
+						reduceNutrition(0.0024F);//3x penalty for starving
+					}
+					else if(this.satisfaction <= 0)
+					{
+						reduceNutrition(0.0008F);
+					}
+					else
+					{
+						if(this.satProtein)
+							this.addNutrition(EnumFoodGroup.Protein, this.satisfaction*((1-this.nutrProtein)/100), false);
+						if(this.satGrain)
+							this.addNutrition(EnumFoodGroup.Grain, this.satisfaction*((1-this.nutrGrain)/100), false);
+						if(this.satVeg)
+							this.addNutrition(EnumFoodGroup.Vegetable, this.satisfaction*((1-this.nutrVeg)/100), false);
+						if(this.satFruit)
+							this.addNutrition(EnumFoodGroup.Fruit, this.satisfaction*((1-this.nutrFruit)/100), false);
+						if(this.satDairy)
+							this.addNutrition(EnumFoodGroup.Dairy, this.satisfaction*((1-this.nutrDairy)/100), false);
+					}
 				}
 				shouldSendUpdate = true;
 			}
@@ -187,9 +191,9 @@ public class FoodStatsTFC
 			player.getEntityData().setLong("soberTime", soberTime);
 			long time = TFC_Time.getTotalTicks();
 
-			if(!player.capabilities.isCreativeMode)
+			for(;waterTimer < time;  waterTimer++)
 			{
-				for(;waterTimer < time;  waterTimer++)
+				if(!player.capabilities.isCreativeMode)
 				{
 					/**Reduce the player's water for normal living*/
 					waterLevel -= 1+(tempWaterMod/2);
