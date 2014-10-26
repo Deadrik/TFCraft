@@ -58,8 +58,8 @@ public class RenderFishTFC extends RenderLiving
 	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
     {
 		float temp = ((EntityFishTFC)par1EntityLivingBase).currentRenderYaw;
-        GL11.glRotatef(temp/*par3*/, 0.0F, 1.0F, 0.0F);
-
+        GL11.glRotatef(temp, 0.0F, 1.0F, 0.0F);
+        
         if (par1EntityLivingBase.deathTime > 0)
         {
             float f3 = ((float)par1EntityLivingBase.deathTime + par4 - 1.0F) / 20.0F * 1.6F;

@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Entities.Mobs;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import net.minecraft.entity.Entity;
@@ -153,17 +154,12 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	protected void entityInit()
 	{
-		super.entityInit();
-		this.dataWatcher.addObject(13, Integer.valueOf(0));
-		this.dataWatcher.addObject(14, Float.valueOf(1.0f));
-		this.dataWatcher.addObject(15, Integer.valueOf(0));
-
-		this.dataWatcher.addObject(24, new Float(1));
-		this.dataWatcher.addObject(25, new Float(1));
-		this.dataWatcher.addObject(26, new Float(1));
-		this.dataWatcher.addObject(27, new Float(1));
-		this.dataWatcher.addObject(28, new Float(1));
-		this.dataWatcher.addObject(29, new Float(1));
+		super.entityInit();	
+		this.dataWatcher.addObject(13, new Integer(0)); //sex (1 or 0)
+		this.dataWatcher.addObject(15, Integer.valueOf(0));		//age
+		
+		this.dataWatcher.addObject(22, Integer.valueOf(0));	//Size, strength, aggression, obedience
+		this.dataWatcher.addObject(23, Integer.valueOf(0));	//Colour, climate, hardiness, familiarity
 	}
 
 	@Override
@@ -230,33 +226,51 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		{
 			this.heal(1);
 		}
+		else if(hunger < 144000 && super.isInLove()){
+			this.setInLove(false);
+		}
 	}
 
 	public void syncData()
 	{
 		if(dataWatcher!= null)
 		{
-			if(!this.worldObj.isRemote){
+			if(!this.worldObj.isRemote)
+			{
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
-				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
 
-				this.dataWatcher.updateObject(24, Float.valueOf(strength_mod));
-				this.dataWatcher.updateObject(25, Float.valueOf(aggression_mod));
-				this.dataWatcher.updateObject(26, Float.valueOf(obedience_mod));
-				this.dataWatcher.updateObject(27, Float.valueOf(colour_mod));
-				this.dataWatcher.updateObject(28, Float.valueOf(climate_mod));
-				this.dataWatcher.updateObject(29, Float.valueOf(hard_mod));
+				byte[] values = {
+						TFC_Core.getByteFromSmallFloat(size_mod),
+						TFC_Core.getByteFromSmallFloat(strength_mod),
+						TFC_Core.getByteFromSmallFloat(aggression_mod),
+						TFC_Core.getByteFromSmallFloat(obedience_mod),
+						TFC_Core.getByteFromSmallFloat(colour_mod),
+						TFC_Core.getByteFromSmallFloat(climate_mod),
+						TFC_Core.getByteFromSmallFloat(hard_mod),
+						(byte)familiarity
+				};
+				ByteBuffer buf = ByteBuffer.wrap(values);
+				this.dataWatcher.updateObject(22, buf.getInt());
+				this.dataWatcher.updateObject(23, buf.getInt());
 			}
-			else{
+			else
+			{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
-				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
-
-				strength_mod = this.dataWatcher.getWatchableObjectFloat(24);
-				aggression_mod = this.dataWatcher.getWatchableObjectFloat(25);
-				obedience_mod = this.dataWatcher.getWatchableObjectFloat(26);
-				colour_mod = this.dataWatcher.getWatchableObjectFloat(27);
-				climate_mod = this.dataWatcher.getWatchableObjectFloat(28);
-				hard_mod = this.dataWatcher.getWatchableObjectFloat(29);
+				
+				ByteBuffer buf = ByteBuffer.allocate(Long.SIZE / Byte.SIZE);
+				buf.putInt(this.dataWatcher.getWatchableObjectInt(22));
+				buf.putInt(this.dataWatcher.getWatchableObjectInt(23));
+				byte[] values = buf.array();
+				
+				size_mod = TFC_Core.getSmallFloatFromByte(values[0]);
+				strength_mod = TFC_Core.getSmallFloatFromByte(values[1]);
+				aggression_mod = TFC_Core.getSmallFloatFromByte(values[2]);
+				obedience_mod = TFC_Core.getSmallFloatFromByte(values[3]);
+				colour_mod = TFC_Core.getSmallFloatFromByte(values[4]);
+				climate_mod = TFC_Core.getSmallFloatFromByte(values[5]);
+				hard_mod = TFC_Core.getSmallFloatFromByte(values[6]);
+				
+				familiarity = values[7];
 			}
 		}
 	}
@@ -376,9 +390,11 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
-			if(player.isSneaking()){
+			if(player.isSneaking() && !familiarizedToday){
 				this.familiarize(player);
-				return true;
+				if(player.getHeldItem() != null && isFood(player.getHeldItem())){
+					return true;
+				}
 			}
 			//player.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE ? "Female" : "Male"));
 			if(getGender()==GenderEnum.FEMALE && pregnant)
@@ -393,6 +409,9 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 				if (var2 != null && var2.getItem() == TFCItems.WoodenBucketEmpty)
 				{
 					ItemStack is = new ItemStack(TFCItems.WoodenBucketMilk);
+					if(!familiarizedToday){
+						this.familiarize(player);
+					}
 					ItemCustomBucketMilk.createTag(is, 20f);
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
 					hasMilkTime = TFC_Time.getTotalTicks() + TFC_Time.dayLength;//Can be milked once every day
@@ -430,10 +449,15 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		return false;
 	}
 
-	public boolean isBreedingItemTFC(ItemStack par1ItemStack)
+	public boolean isBreedingItemTFC(ItemStack item)
 	{
-		return !pregnant &&(par1ItemStack.getItem() == TFCItems.WheatGrain ||par1ItemStack.getItem() == TFCItems.OatGrain||par1ItemStack.getItem() == TFCItems.RiceGrain||
-				par1ItemStack.getItem() == TFCItems.BarleyGrain||par1ItemStack.getItem() == TFCItems.RyeGrain);
+		return !pregnant && isFood(item);
+	}
+	
+	@Override
+	public boolean isFood(ItemStack item) {
+		return item != null && (item.getItem() == TFCItems.WheatGrain ||item.getItem() == TFCItems.OatGrain||item.getItem() == TFCItems.RiceGrain||
+				item.getItem() == TFCItems.BarleyGrain||item.getItem() == TFCItems.RyeGrain||item.getItem() == TFCItems.MaizeEar);
 	}
 
 	@Override
@@ -587,44 +611,39 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	}
 
 	@Override
-	public float getStrength() {
-		// TODO Auto-generated method stub
-		return this.getDataWatcher().getWatchableObjectFloat(24);
+	public float getStrength()
+	{
+		return strength_mod;
 	}
 
-
 	@Override
-	public float getAggression() {
-		// TODO Auto-generated method stub
-		return this.getDataWatcher().getWatchableObjectFloat(25);
+	public float getAggression()
+	{
+		return aggression_mod;
 	}
 
-
 	@Override
-	public float getObedience() {
-		// TODO Auto-generated method stub
-		return this.getDataWatcher().getWatchableObjectFloat(26);
+	public float getObedience()
+	{
+		return obedience_mod;
 	}
 
-
 	@Override
-	public float getColour() {
-		// TODO Auto-generated method stub
-		return this.getDataWatcher().getWatchableObjectFloat(27);
+	public float getColour()
+	{
+		return colour_mod;
 	}
 
-
 	@Override
-	public float getClimateAdaptation() {
-		// TODO Auto-generated method stub
-		return this.getDataWatcher().getWatchableObjectFloat(28);
+	public float getClimateAdaptation()
+	{
+		return climate_mod;
 	}
 
-
 	@Override
-	public float getHardiness() {
-		// TODO Auto-generated method stub
-		return this.getDataWatcher().getWatchableObjectFloat(29);
+	public float getHardiness()
+	{
+		return hard_mod;
 	}
 
 	@Override
@@ -691,7 +710,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && this.isBreedingItemTFC(stack) && isAdult() && !familiarizedToday){
+		if(stack != null && this.isFood(stack) && !familiarizedToday && ((isAdult() && familiarity < 50) || !isAdult())){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
@@ -704,7 +723,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();
 		}
-		else if(stack != null && stack.getItem() != null && stack.getItem().equals(TFCItems.WoodenBucketMilk) && !isAdult()){
+		else if(stack != null && stack.getItem() != null && stack.getItem().equals(TFCItems.WoodenBucketMilk) && isAdult()){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,new ItemStack(TFCItems.WoodenBucketEmpty,1,0));
@@ -738,9 +757,10 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		case NAME: flag = familiarity > 35;break;
 		default: break;
 		}
-		if(!flag && !player.worldObj.isRemote){
+		if(!flag && player != null && !player.worldObj.isRemote){
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
 		}
 		return flag;
 	}
+
 }

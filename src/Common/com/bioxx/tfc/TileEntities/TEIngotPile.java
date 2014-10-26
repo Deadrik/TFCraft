@@ -28,7 +28,7 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 	{
 		return false;
 	}
-	
+
 	public TEIngotPile()
 	{
 		storage = new ItemStack[1];
@@ -282,7 +282,8 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 
 	@Override
 	public void createInitNBT(NBTTagCompound nbt) {
-		nbt.setString("type", this.type);
+		if(this.type != null)
+			nbt.setString("type", this.type);
 		if(storage[0] != null)
 		{
 			ItemStack is = storage[0].copy();

@@ -335,10 +335,17 @@ public class RenderMetalTrapDoor implements ISimpleBlockRenderingHandler
 		}
 
 		int hingeID = te.sheetStack != null ? Math.min(((BlockMetalSheet)TFCBlocks.MetalSheet).icons.length-1, te.sheetStack.getItemDamage() >> 5) : 0;
-		renderer.setOverrideBlockTexture(((BlockMetalSheet)TFCBlocks.MetalSheet).icons[hingeID]);
+		
+		boolean breaking = renderer.overrideBlockTexture != null;
+		
+		if ( ! breaking )
+			renderer.setOverrideBlockTexture(((BlockMetalSheet)TFCBlocks.MetalSheet).icons[hingeID]);
 
 		drawHinges(block, i, j, k, renderer, side, hinge);
-		renderer.clearOverrideBlockTexture();
+		
+		if ( ! breaking )
+			renderer.clearOverrideBlockTexture();
+		
 		renderer.renderAllFaces = false;
 		return true;
 	}
@@ -576,7 +583,7 @@ public class RenderMetalTrapDoor implements ISimpleBlockRenderingHandler
 	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer)
 	{
 		renderer.setRenderBounds(0.125F, 0.4F, 0F, 1F, 0.475F, 1f);
-		renderInvBlock(block, metadata, renderer);
+		renderInvBlock(block, metadata&255, renderer);
 		renderer.setRenderBounds(0.0F, 0.4F, 0.1F, 0.125F, 0.525F, 0.4f);
 		int index = Math.min(((BlockMetalSheet)TFCBlocks.MetalSheet).icons.length-1, metadata >> 5);
 		renderInvBlock(block, ((BlockMetalSheet)TFCBlocks.MetalSheet).icons[index], renderer);

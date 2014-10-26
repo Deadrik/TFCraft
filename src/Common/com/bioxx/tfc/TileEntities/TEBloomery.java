@@ -132,8 +132,8 @@ public class TEBloomery extends NetworkTileEntity
 						bloomeryLit = false;
 
 						/* Was causing any blocks above the chimney to be removed in weird places depending on molten count.
-						* Bloomery appears to be working just fine and removing the molten blocks without line. Not sure why it was here.
-						* -Kitty */
+						 * Bloomery appears to be working just fine and removing the molten blocks without line. Not sure why it was here.
+						 * -Kitty */
 						//worldObj.setBlockToAir(xCoord + direction[0], yCoord + (moltenCount < 2 ? 2 : moltenCount) - 1, zCoord + direction[1]);
 
 						oreCount = 0;
@@ -244,7 +244,7 @@ public class TEBloomery extends NetworkTileEntity
 			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
 					xCoord + direction[0], yCoord, zCoord + direction[1], 
 					xCoord + direction[0] + 1, yCoord+(maxCount/8) + 1.1, zCoord + direction[1] + 1));
-			
+
 			/*Create a list of any players that are inside the chimney*/
 			List playerList = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(
 					xCoord + direction[0], yCoord, zCoord + direction[1], 
@@ -261,7 +261,7 @@ public class TEBloomery extends NetworkTileEntity
 					{
 						for(int c = 0; c < entity.getEntityItem().stackSize; c++)
 						{
-							if(charcoalCount+oreCount < (2*maxCount) && charcoalCount < (maxCount))
+							if(charcoalCount+oreCount < (2*maxCount) && charcoalCount < maxCount)
 							{
 								charcoalCount++;
 								entity.getEntityItem().stackSize--;
@@ -276,7 +276,7 @@ public class TEBloomery extends NetworkTileEntity
 						int c = entity.getEntityItem().stackSize;
 						for(; c > 0; )
 						{
-							if(charcoalCount+oreCount < (2*maxCount) && oreCount < (maxCount) && outCount < 1000)
+							if(charcoalCount+oreCount < (2*maxCount) && oreCount < maxCount && outCount < 1000)
 							{
 								if(AddOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage())))
 								{
@@ -300,7 +300,7 @@ public class TEBloomery extends NetworkTileEntity
 						int c = entity.getEntityItem().stackSize;
 						for(; c > 0; )
 						{
-							if(((ISmeltable)entity.getEntityItem().getItem()).GetMetalReturnAmount(entity.getEntityItem()) < 100 && outCount < 1000)
+							if(((ISmeltable)entity.getEntityItem().getItem()).GetMetalReturnAmount(entity.getEntityItem()) < 100 && oreCount < maxCount && outCount < 1000)
 							{
 								if(AddOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage()))) 
 								{

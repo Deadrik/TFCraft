@@ -48,6 +48,7 @@ import com.bioxx.tfc.Handlers.EntityLivingHandler;
 import com.bioxx.tfc.Handlers.EntitySpawnHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
 import com.bioxx.tfc.Handlers.PlayerInteractHandler;
+import com.bioxx.tfc.Handlers.TFCFuelHandler;
 import com.bioxx.tfc.Handlers.Network.PacketPipeline;
 import com.bioxx.tfc.WorldGen.TFCProvider;
 import com.bioxx.tfc.WorldGen.TFCProviderHell;
@@ -199,7 +200,7 @@ public class TerraFirmaCraft
 		FMLCommonHandler.instance().bus().register(new CraftingHandler());
 		FMLCommonHandler.instance().bus().register(new FoodCraftingHandler());
 
-		// Register Player Interact Handler - for drinking water.
+		// Register Player Interact Handler - for drinking water & item pickups.
 		MinecraftForge.EVENT_BUS.register(new PlayerInteractHandler());
 		
 		// Register the Entity Spawn Handler
@@ -243,6 +244,11 @@ public class TerraFirmaCraft
 		ItemHeat.SetupItemHeat();
 
 		TFC_Climate.initCache();
+
+		//Register TFC items with forge fuel handler.
+		//This is used by vanilla furnice and many other mods.
+		TFCItems.registerFurniceFuel();
+		GameRegistry.registerFuelHandler(new TFCFuelHandler());
 	}
 
 	@EventHandler
@@ -293,14 +299,13 @@ public class TerraFirmaCraft
 		/**Start setup here*/
 
 		//General
-		TFCOptions.enableBetterGrass = TFCOptions.getBooleanFor(config, "General", "enableBetterGrass", true);
+		TFCOptions.enableBetterGrass = TFCOptions.getBooleanFor(config, "General", "enableBetterGrass", true, "If true, then the side of a grass block which has another grass block adjacent and one block lower than it will show as completely grass.");
 		TFCOptions.use2DGrill = TFCOptions.getBooleanFor(config, "General", "use2DGrill", true);
-		TFCOptions.enableInnerGrassFix = TFCOptions.getBooleanFor(config, "General", "enableInnerGrassFix", true, "Set this to false if your computer has to run in fast mode and you get lag. This setting forces the sides of grass to render when viewing from the inside.");
 		TFCOptions.enableDebugMode = TFCOptions.getBooleanFor(config,"General","enableDebugMode",false, "Set this to true if you want to turn on debug mode which is useful for bug hunting");
 		TFCOptions.iDontLikeOnions = TFCOptions.getBooleanFor(config, "General", "enableNotOnions", false,"Set this to true if you don't like onions.");
 		TFCOptions.enableOreTest = TFCOptions.getBooleanFor(config, "General","enableOreTest", false, "This will generate only ore in your world with nothing else. *Caution Unsupported*");
 		TFCOptions.quiverHUDPosition = TFCOptions.getStringFor(config, "General", "quiverHUDPosition", "bottomleft", "Valid position strings are: bottomleft, left, topleft, bottomright, right, topright");
-		TFCOptions.generateSmoke = TFCOptions.getBooleanFor(config, "General", "generateSmoke", false, "Should forges generate smoke blocks?");
+		TFCOptions.generateSmoke = TFCOptions.getBooleanFor(config, "General", "generateSmoke", false, "Should forges generate smoke blocks? *Caution Unsupported*");
 
 		//Time
 		TFCOptions.yearLength = TFCOptions.getIntFor(config, "Time", "yearLength", 96, "This is how many days are in a year. Keep this to multiples of 12.");
@@ -322,6 +327,7 @@ public class TerraFirmaCraft
 		TFCOptions.minimumRockLoad = TFCOptions.getIntFor(config,"Cavein Options","minimumRockLoad",1, "This is the minimum number of solid blocks that must be over a section in order for it to collapse.");
 		TFCOptions.initialCollapseRatio = TFCOptions.getIntFor(config,"Cavein Options","initialCollapseRatio",10, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");
 		TFCOptions.propogateCollapseChance = TFCOptions.getIntFor(config,"Cavein Options","propogateCollapseChance",55, "This number is the likelihood for each block to propagate the collapse farther.");
+		TFCOptions.enableCaveIns = TFCOptions.getBooleanFor(config, "Cavein Options", "enableCaveIns", true, "Set this to false to disable cave ins.");
 
 		TFCOptions.cropNutrientAColor[0] = (byte) TFCOptions.getIntFor(config, "ColorNutrientA", "Red", 237);
 		TFCOptions.cropNutrientAColor[1] = (byte) TFCOptions.getIntFor(config, "ColorNutrientA", "Green", 28);
@@ -362,6 +368,7 @@ public class TerraFirmaCraft
 		//Protection
 		TFCOptions.maxProtectionMonths = TFCOptions.getIntFor(config,"Protection","maxProtectionMonths", 10, "The maximum number of months of spawn protection that can accumulate.");
 		TFCOptions.protectionGain = TFCOptions.getIntFor(config, "Protection", "protectionGain", 8, "The number of hours of protection gained in the 5x5 chunk area for spending 1 hour in that chunk.");
+		TFCOptions.protectionBuffer = TFCOptions.getIntFor(config, "Protection", "protectionBuffer", 24, "The minimum number of hours of protection that must be accumulated in a chunk in order to bypass the buffer and prevent hostile mob spawning.");
 
 		//Player
 		TFCOptions.HealthGainRate = TFCOptions.getIntFor(config,"Player","HealthGainRate", 20, "The rate of Health Gain per experience level. Set to 0 to turn off.");

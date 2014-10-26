@@ -2,6 +2,9 @@ package com.bioxx.tfc.Entities.AI;
 
 import java.util.List;
 
+import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
+
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -51,8 +54,15 @@ public class EntityAIAvoidEntityTFC extends EntityAIBase
 	public boolean shouldExecute()
 	{
 		if (this.targetEntityClass == EntityPlayer.class)
-			if (this.theEntity instanceof EntityTameable && ((EntityTameable)this.theEntity).isTamed())
+		{
+			if(this.theEntity instanceof IAnimal && ((IAnimal)theEntity).checkFamiliarity(InteractionEnum.TOLERATEPLAYER, null)){
 				return false;
+			}
+			if (this.theEntity instanceof EntityTameable && ((EntityTameable)this.theEntity).isTamed())
+			{
+				return false;
+			}
+		}
 
 		List list = this.theEntity.worldObj.selectEntitiesWithinAABB(this.targetEntityClass, this.theEntity.boundingBox.expand((double)this.distanceFromEntity, 3.0D, (double)this.distanceFromEntity), this.field_98218_a);
 

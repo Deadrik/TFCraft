@@ -320,7 +320,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 		{
 			if(mode == 0)
 			{
-				if(side == 0 && world.getBlock(x, y+1, z) == block) {
+				if(TFC_Core.isRawStone(world.getBlock(x, y+1, z)) && TFC_Core.isRawStone(world.getBlock(x, y+2, z))) {
 					return false;
 				}
 
@@ -332,7 +332,8 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 			}
 			else if(mode == 1)
 			{
-				if ((side == 0) && TFC_Core.isRawStone(block) && TFC_Core.isRawStone(world.getBlock(x, y+1, z))) {
+				if (TFC_Core.isRawStone(block) && TFC_Core.isRawStone(world.getBlock(x, y+1, z)) && 
+						TFC_Core.isRawStone(world.getBlock(x, y+2, z))) {
 					return false;
 				}
 
@@ -344,7 +345,8 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 			}
 			else if(mode == 2)
 			{
-				if ((side == 0) && TFC_Core.isRawStone(block) && TFC_Core.isRawStone(world.getBlock(x, y+1, z))) {
+				if (TFC_Core.isRawStone(block) && TFC_Core.isRawStone(world.getBlock(x, y+1, z)) && 
+						TFC_Core.isRawStone(world.getBlock(x, y+2, z))) {
 					return false;
 				}
 

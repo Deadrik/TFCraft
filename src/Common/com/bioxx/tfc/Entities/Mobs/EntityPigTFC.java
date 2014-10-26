@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Entities.Mobs;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import net.minecraft.entity.Entity;
@@ -179,17 +180,12 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	@Override
 	protected void entityInit()
 	{
-		super.entityInit();
-		this.dataWatcher.addObject(13, Integer.valueOf(0));
-		this.dataWatcher.addObject(14, Float.valueOf(1.0f));
-		this.dataWatcher.addObject(15, Integer.valueOf(0));
-
-		this.dataWatcher.addObject(24, new Float(1));
-		this.dataWatcher.addObject(25, new Float(1));
-		this.dataWatcher.addObject(26, new Float(1));
-		this.dataWatcher.addObject(27, new Float(1));
-		this.dataWatcher.addObject(28, new Float(1));
-		this.dataWatcher.addObject(29, new Float(1));
+		super.entityInit();	
+		this.dataWatcher.addObject(13, new Integer(0)); //sex (1 or 0)
+		this.dataWatcher.addObject(15, Integer.valueOf(0));		//age
+		
+		this.dataWatcher.addObject(22, Integer.valueOf(0));	//Size, strength, aggression, obedience
+		this.dataWatcher.addObject(23, Integer.valueOf(0));	//Colour, climate, hardiness, familiarity
 	}
 
 	@Override
@@ -239,35 +235,54 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		super.onLivingUpdate();
 		TFC_Core.PreventEntityDataUpdate = false;
 
-		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead)
+		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead){
 			this.heal(1);
+		}
+		else if(hunger < 144000 && super.isInLove()){
+			this.setInLove(false);
+		}
 	}
 
 	public void syncData()
 	{
 		if(dataWatcher!= null)
 		{
-			if(!this.worldObj.isRemote){
+			if(!this.worldObj.isRemote)
+			{
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
-				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
 
-				this.dataWatcher.updateObject(24, Float.valueOf(strength_mod));
-				this.dataWatcher.updateObject(25, Float.valueOf(aggression_mod));
-				this.dataWatcher.updateObject(26, Float.valueOf(obedience_mod));
-				this.dataWatcher.updateObject(27, Float.valueOf(colour_mod));
-				this.dataWatcher.updateObject(28, Float.valueOf(climate_mod));
-				this.dataWatcher.updateObject(29, Float.valueOf(hard_mod));
+				byte[] values = {
+						TFC_Core.getByteFromSmallFloat(size_mod),
+						TFC_Core.getByteFromSmallFloat(strength_mod),
+						TFC_Core.getByteFromSmallFloat(aggression_mod),
+						TFC_Core.getByteFromSmallFloat(obedience_mod),
+						TFC_Core.getByteFromSmallFloat(colour_mod),
+						TFC_Core.getByteFromSmallFloat(climate_mod),
+						TFC_Core.getByteFromSmallFloat(hard_mod),
+						(byte)familiarity
+				};
+				ByteBuffer buf = ByteBuffer.wrap(values);
+				this.dataWatcher.updateObject(22, buf.getInt());
+				this.dataWatcher.updateObject(23, buf.getInt());
 			}
-			else{
+			else
+			{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
-				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
-
-				strength_mod = this.dataWatcher.getWatchableObjectFloat(24);
-				aggression_mod = this.dataWatcher.getWatchableObjectFloat(25);
-				obedience_mod = this.dataWatcher.getWatchableObjectFloat(26);
-				colour_mod = this.dataWatcher.getWatchableObjectFloat(27);
-				climate_mod = this.dataWatcher.getWatchableObjectFloat(28);
-				hard_mod = this.dataWatcher.getWatchableObjectFloat(29);
+				
+				ByteBuffer buf = ByteBuffer.allocate(Long.SIZE / Byte.SIZE);
+				buf.putInt(this.dataWatcher.getWatchableObjectInt(22));
+				buf.putInt(this.dataWatcher.getWatchableObjectInt(23));
+				byte[] values = buf.array();
+				
+				size_mod = TFC_Core.getSmallFloatFromByte(values[0]);
+				strength_mod = TFC_Core.getSmallFloatFromByte(values[1]);
+				aggression_mod = TFC_Core.getSmallFloatFromByte(values[2]);
+				obedience_mod = TFC_Core.getSmallFloatFromByte(values[3]);
+				colour_mod = TFC_Core.getSmallFloatFromByte(values[4]);
+				climate_mod = TFC_Core.getSmallFloatFromByte(values[5]);
+				hard_mod = TFC_Core.getSmallFloatFromByte(values[6]);
+				
+				familiarity = values[7];
 			}
 		}
 	}
@@ -466,14 +481,15 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		return false;
 	}
 
-	public boolean isBreedingItemTFC(ItemStack par1ItemStack)
+	public boolean isBreedingItemTFC(ItemStack item)
 	{
-		return !pregnant && (
-				par1ItemStack.getItem() == TFCItems.WheatGrain ||
-				par1ItemStack.getItem() == TFCItems.OatGrain ||
-				par1ItemStack.getItem() == TFCItems.RiceGrain ||
-				par1ItemStack.getItem() == TFCItems.BarleyGrain ||
-				par1ItemStack.getItem() == TFCItems.RyeGrain);
+		return !pregnant && isFood(item);
+	}
+	
+	@Override
+	public boolean isFood(ItemStack item) {
+		return item != null && (item.getItem() == TFCItems.WheatGrain ||item.getItem() == TFCItems.OatGrain||item.getItem() == TFCItems.RiceGrain||
+				item.getItem() == TFCItems.BarleyGrain||item.getItem() == TFCItems.RyeGrain||item.getItem() == TFCItems.MaizeEar);
 	}
 
 	@Override
@@ -627,37 +643,37 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	@Override
 	public float getStrength()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(24);
+		return strength_mod;
 	}
 
 	@Override
 	public float getAggression()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(25);
+		return aggression_mod;
 	}
 
 	@Override
 	public float getObedience()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(26);
+		return obedience_mod;
 	}
 
 	@Override
 	public float getColour()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(27);
+		return colour_mod;
 	}
 
 	@Override
 	public float getClimateAdaptation()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(28);
+		return climate_mod;
 	}
 
 	@Override
 	public float getHardiness()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(29);
+		return hard_mod;
 	}
 
 	@Override
@@ -724,7 +740,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	public void familiarize(EntityPlayer ep) 
 	{
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && this.isBreedingItemTFC(stack) && !familiarizedToday){
+		if(stack != null && this.isFood(stack) && !familiarizedToday){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
@@ -760,7 +776,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		case NAME: flag = familiarity > 40;break;
 		default: break;
 		}
-		if(!flag && !player.worldObj.isRemote){
+		if(!flag && player != null && !player.worldObj.isRemote){
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
 		}
 		return flag;

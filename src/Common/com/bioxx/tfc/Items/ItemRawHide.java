@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
@@ -52,9 +53,9 @@ public class ItemRawHide extends ItemLooseRock
 					itemstack.stackSize--;
 				}
 			}
-			else if(itemstack.getItem() == TFCItems.SoakedHide)
+			else if(itemstack.getItem() == TFCItems.SoakedHide && side == ForgeDirection.UP.ordinal() )
 			{
-				if(world.getBlock(x, y, z) instanceof BlockLogHoriz && world.setBlock(x, y+1, z, TFCBlocks.LeatherRack))
+				if(world.getBlock(x, y, z) instanceof BlockLogHoriz && world.isAirBlock( x, y + 1, z ) && world.setBlock(x, y+1, z, TFCBlocks.LeatherRack))
 				{
 					TELeatherRack te = (TELeatherRack)world.getTileEntity(x, y+1, z);
 					te.setLeather(itemstack);

@@ -24,6 +24,7 @@ import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Food.ItemSalad;
 import com.bioxx.tfc.Food.ItemSandwich;
 import com.bioxx.tfc.Food.ItemSoup;
+import com.bioxx.tfc.Handlers.TFCFuelHandler;
 import com.bioxx.tfc.Items.ItemAlcohol;
 import com.bioxx.tfc.Items.ItemArrow;
 import com.bioxx.tfc.Items.ItemBloom;
@@ -1989,11 +1990,11 @@ public class TFCItems
 		BlueSteelSheet = 		(((ItemMetalSheet) new ItemMetalSheet(4).setUnlocalizedName("Blue Steel Sheet")).setMetal("Blue Steel", 200));
 		BronzeSheet = 			(((ItemMetalSheet) new ItemMetalSheet(6).setUnlocalizedName("Bronze Sheet")).setMetal("Bronze", 200));
 		CopperSheet = 			(((ItemMetalSheet) new ItemMetalSheet(7).setUnlocalizedName("Copper Sheet")).setMetal("Copper", 200));
-		WroughtIronSheet = 		(((ItemMetalSheet) new ItemMetalSheet(19).setUnlocalizedName("Wrought Iron Sheet")).setMetal("Wrought Iron", 200));
-		RedSteelSheet = 		(((ItemMetalSheet) new ItemMetalSheet(13).setUnlocalizedName("Red Steel Sheet")).setMetal("Red Steel", 200));
-		RoseGoldSheet = 		(((ItemMetalSheet) new ItemMetalSheet(14).setUnlocalizedName("Rose Gold Sheet")).setMetal("Rose Gold", 200));
-		SteelSheet = 			(((ItemMetalSheet) new ItemMetalSheet(16).setUnlocalizedName("Steel Sheet")).setMetal("Steel", 200));
-		TinSheet = 				(((ItemMetalSheet) new ItemMetalSheet(18).setUnlocalizedName("Tin Sheet")).setMetal("Tin", 200));
+		WroughtIronSheet = 		(((ItemMetalSheet) new ItemMetalSheet(9).setUnlocalizedName("Wrought Iron Sheet")).setMetal("Wrought Iron", 200));
+		RedSteelSheet = 		(((ItemMetalSheet) new ItemMetalSheet(14).setUnlocalizedName("Red Steel Sheet")).setMetal("Red Steel", 200));
+		RoseGoldSheet = 		(((ItemMetalSheet) new ItemMetalSheet(15).setUnlocalizedName("Rose Gold Sheet")).setMetal("Rose Gold", 200));
+		SteelSheet = 			(((ItemMetalSheet) new ItemMetalSheet(17).setUnlocalizedName("Steel Sheet")).setMetal("Steel", 200));
+		TinSheet = 				(((ItemMetalSheet) new ItemMetalSheet(19).setUnlocalizedName("Tin Sheet")).setMetal("Tin", 200));
 		ZincSheet = 			(((ItemMetalSheet) new ItemMetalSheet(20).setUnlocalizedName("Zinc Sheet")).setMetal("Zinc", 200));
 
 		BismuthSheet2x = 		(((ItemMetalSheet2x) new ItemMetalSheet2x(0).setUnlocalizedName("Bismuth Double Sheet")).setMetal("Bismuth", 400));
@@ -2003,32 +2004,32 @@ public class TFCItems
 		BlueSteelSheet2x = 		(((ItemMetalSheet2x) new ItemMetalSheet2x(4).setUnlocalizedName("Blue Steel Double Sheet")).setMetal("Blue Steel", 400));
 		BronzeSheet2x = 		(((ItemMetalSheet2x) new ItemMetalSheet2x(6).setUnlocalizedName("Bronze Double Sheet")).setMetal("Bronze", 400));
 		CopperSheet2x = 		(((ItemMetalSheet2x) new ItemMetalSheet2x(7).setUnlocalizedName("Copper Double Sheet")).setMetal("Copper", 400));
-		WroughtIronSheet2x = 	(((ItemMetalSheet2x) new ItemMetalSheet2x(19).setUnlocalizedName("Wrought Iron Double Sheet")).setMetal("Wrought Iron", 400));
-		RedSteelSheet2x = 		(((ItemMetalSheet2x) new ItemMetalSheet2x(13).setUnlocalizedName("Red Steel Double Sheet")).setMetal("Red Steel", 400));
-		RoseGoldSheet2x = 		(((ItemMetalSheet2x) new ItemMetalSheet2x(14).setUnlocalizedName("Rose Gold Double Sheet")).setMetal("Rose Gold", 400));
-		SteelSheet2x = 			(((ItemMetalSheet2x) new ItemMetalSheet2x(16).setUnlocalizedName("Steel Double Sheet")).setMetal("Steel", 400));
-		TinSheet2x = 			(((ItemMetalSheet2x) new ItemMetalSheet2x(18).setUnlocalizedName("Tin Double Sheet")).setMetal("Tin", 400));
+		WroughtIronSheet2x = 	(((ItemMetalSheet2x) new ItemMetalSheet2x(9).setUnlocalizedName("Wrought Iron Double Sheet")).setMetal("Wrought Iron", 400));
+		RedSteelSheet2x = 		(((ItemMetalSheet2x) new ItemMetalSheet2x(14).setUnlocalizedName("Red Steel Double Sheet")).setMetal("Red Steel", 400));
+		RoseGoldSheet2x = 		(((ItemMetalSheet2x) new ItemMetalSheet2x(15).setUnlocalizedName("Rose Gold Double Sheet")).setMetal("Rose Gold", 400));
+		SteelSheet2x = 			(((ItemMetalSheet2x) new ItemMetalSheet2x(17).setUnlocalizedName("Steel Double Sheet")).setMetal("Steel", 400));
+		TinSheet2x = 			(((ItemMetalSheet2x) new ItemMetalSheet2x(19).setUnlocalizedName("Tin Double Sheet")).setMetal("Tin", 400));
 		ZincSheet2x = 			(((ItemMetalSheet2x) new ItemMetalSheet2x(20).setUnlocalizedName("Zinc Double Sheet")).setMetal("Zinc", 400));
 
 		i = 0;
-		BrassSheet = 			new ItemMetalSheet(5).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		GoldSheet = 			new ItemMetalSheet(8).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		LeadSheet = 			new ItemMetalSheet(9).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		NickelSheet = 			new ItemMetalSheet(10).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		PigIronSheet = 			new ItemMetalSheet(11).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		PlatinumSheet = 		new ItemMetalSheet(12).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		SilverSheet = 			new ItemMetalSheet(15).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		SterlingSilverSheet = 	new ItemMetalSheet(17).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		BrassSheet = 			new ItemMetalSheet(5).setMetal("Brass", 200).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		GoldSheet = 			new ItemMetalSheet(8).setMetal("Gold", 200).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		LeadSheet = 			new ItemMetalSheet(10).setMetal("Lead", 200).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		NickelSheet = 			new ItemMetalSheet(11).setMetal("Nickel", 200).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		PigIronSheet = 			new ItemMetalSheet(12).setMetal("Pig Iron", 200).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		PlatinumSheet = 		new ItemMetalSheet(13).setMetal("Platinum", 200).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		SilverSheet = 			new ItemMetalSheet(16).setMetal("Silver", 200).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		SterlingSilverSheet = 	new ItemMetalSheet(18).setMetal("Sterling Silver", 200).setUnlocalizedName(NamesNSO[i++]+" Sheet");
 
 		i = 0;
-		BrassSheet2x = 			new ItemMetalSheet2x(5).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		GoldSheet2x = 			new ItemMetalSheet2x(8).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		LeadSheet2x = 			new ItemMetalSheet2x(9).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		NickelSheet2x = 		new ItemMetalSheet2x(10).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		PigIronSheet2x = 		new ItemMetalSheet2x(11).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		PlatinumSheet2x = 		new ItemMetalSheet2x(12).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		SilverSheet2x = 		new ItemMetalSheet2x(15).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		SterlingSilverSheet2x = new ItemMetalSheet2x(17).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		BrassSheet2x = 			new ItemMetalSheet2x(5).setMetal("Brass", 400).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		GoldSheet2x = 			new ItemMetalSheet2x(8).setMetal("Gold", 400).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		LeadSheet2x = 			new ItemMetalSheet2x(10).setMetal("Lead", 400).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		NickelSheet2x = 		new ItemMetalSheet2x(1).setMetal("Nickel", 400).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		PigIronSheet2x = 		new ItemMetalSheet2x(12).setMetal("Pig Iron", 400).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		PlatinumSheet2x = 		new ItemMetalSheet2x(13).setMetal("Platinum", 400).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		SilverSheet2x = 		new ItemMetalSheet2x(16).setMetal("Silver", 400).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		SterlingSilverSheet2x = new ItemMetalSheet2x(18).setMetal("Sterling Silver", 400).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
 
 		i = 0;
 		BismuthBronzeUnfinishedBoots = 	(new ItemUnfinishedArmor().setMetal("Bismuth Bronze", 3).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
@@ -2914,5 +2915,47 @@ public class TFCItems
 		GameRegistry.registerItem(Shears, Shears.getUnlocalizedName());
 
 		System.out.println(new StringBuilder().append("[TFC] All Items Registered").toString());
+	}
+
+	public static void registerFurniceFuel()
+	{
+		//1 sec = 20 burn time value
+		TFCFuelHandler.registerFuel(BlueSteelBucketLava, 20000);
+		TFCFuelHandler.registerFuel(SinglePlank, 400);
+		TFCFuelHandler.registerFuel(WoodenBucketEmpty, 300);
+		TFCFuelHandler.registerFuel(FireStarter, 100);
+		TFCFuelHandler.registerFuel(Logs, 800);
+		TFCFuelHandler.registerFuel(SluiceItem, 300);
+		TFCFuelHandler.registerFuel(Rope, 50);
+		TFCFuelHandler.registerFuel(Arrow, 20);
+		TFCFuelHandler.registerFuel(Bow, 100);
+		TFCFuelHandler.registerFuel(FishingRod, 100);
+		TFCFuelHandler.registerFuel(Stick, 100);
+		TFCFuelHandler.registerFuel(Coal, 1600);
+		TFCFuelHandler.registerFuel(WoolCloth, 20);
+		TFCFuelHandler.registerFuel(SilkCloth, 20);
+		TFCFuelHandler.registerFuel(BurlapCloth, 20);
+		TFCFuelHandler.registerFuel(Straw, 20);
+
+		for(int l = 0; l < Recipes.Doors.length; l++)
+			TFCFuelHandler.registerFuel(Recipes.Doors[l], 300);
+
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.WoodSupportV), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.WoodSupportV2), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.WoodSupportH), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.WoodSupportH2), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Fence), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Fence2), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.FenceGate), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.FenceGate2), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Chest), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.StrawHideBed), 200);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Thatch), 200);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Planks), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Planks2), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Barrel), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Torch), 100);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Sapling), 100);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Sapling2), 100);
 	}
 }

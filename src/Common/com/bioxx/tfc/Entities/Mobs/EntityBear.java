@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Entities.Mobs;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -35,6 +36,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.AI.EntityAITargetNonTamedTFC;
 import com.bioxx.tfc.Food.ItemFoodMeat;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
@@ -119,7 +121,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntitySheepTFC.class,200, false));
 		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityDeer.class,200, false));
 		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false));
-		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityPlayer.class, 200, false));
+		targetTasks.addTask (4, new EntityAITargetNonTamedTFC(this, EntityPlayer.class, 200, false));
 		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityHorseTFC.class, 200, false));
 		targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		//targetTasks.addTask(2, new EntityAIPanic(this,moveSpeed*1.5F));
@@ -204,15 +206,11 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	{
 		super.entityInit ();
 		dataWatcher.addObject (18, getHealth());
-		this.dataWatcher.addObject(13, new Integer(0));
-		this.dataWatcher.addObject(14, new Float(1));
-		this.dataWatcher.addObject(15, Integer.valueOf(0));
-		this.dataWatcher.addObject(24, new Float(1));
-		this.dataWatcher.addObject(25, new Float(1));
-		this.dataWatcher.addObject(26, new Float(1));
-		this.dataWatcher.addObject(27, new Float(1));
-		this.dataWatcher.addObject(28, new Float(1));
-		this.dataWatcher.addObject(29, new Float(1));
+		this.dataWatcher.addObject(13, new Integer(0)); //sex (1 or 0)
+		this.dataWatcher.addObject(15, Integer.valueOf(0));		//age
+		
+		this.dataWatcher.addObject(22, Integer.valueOf(0));	//Size, strength, aggression, obedience
+		this.dataWatcher.addObject(23, Integer.valueOf(0));	//Colour, climate, hardiness, familiarity
 	}
 
 
@@ -472,28 +470,42 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	{
 		if(dataWatcher!= null)
 		{
-			if(!this.worldObj.isRemote){
+			if(!this.worldObj.isRemote)
+			{
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
-				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
 
-				this.dataWatcher.updateObject(24, Float.valueOf(strength_mod));
-				this.dataWatcher.updateObject(25, Float.valueOf(aggression_mod));
-				this.dataWatcher.updateObject(26, Float.valueOf(obedience_mod));
-				this.dataWatcher.updateObject(27, Float.valueOf(colour_mod));
-				this.dataWatcher.updateObject(28, Float.valueOf(climate_mod));
-				this.dataWatcher.updateObject(29, Float.valueOf(hard_mod));
+				byte[] values = {
+						TFC_Core.getByteFromSmallFloat(size_mod),
+						TFC_Core.getByteFromSmallFloat(strength_mod),
+						TFC_Core.getByteFromSmallFloat(aggression_mod),
+						TFC_Core.getByteFromSmallFloat(obedience_mod),
+						TFC_Core.getByteFromSmallFloat(colour_mod),
+						TFC_Core.getByteFromSmallFloat(climate_mod),
+						TFC_Core.getByteFromSmallFloat(hard_mod),
+						(byte)familiarity
+				};
+				ByteBuffer buf = ByteBuffer.wrap(values);
+				this.dataWatcher.updateObject(22, buf.getInt());
+				this.dataWatcher.updateObject(23, buf.getInt());
 			}
 			else
 			{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
-				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
-
-				strength_mod = this.dataWatcher.getWatchableObjectFloat(24);
-				aggression_mod = this.dataWatcher.getWatchableObjectFloat(25);
-				obedience_mod = this.dataWatcher.getWatchableObjectFloat(26);
-				colour_mod = this.dataWatcher.getWatchableObjectFloat(27);
-				climate_mod = this.dataWatcher.getWatchableObjectFloat(28);
-				hard_mod = this.dataWatcher.getWatchableObjectFloat(29);
+				
+				ByteBuffer buf = ByteBuffer.allocate(Long.SIZE / Byte.SIZE);
+				buf.putInt(this.dataWatcher.getWatchableObjectInt(22));
+				buf.putInt(this.dataWatcher.getWatchableObjectInt(23));
+				byte[] values = buf.array();
+				
+				size_mod = TFC_Core.getSmallFloatFromByte(values[0]);
+				strength_mod = TFC_Core.getSmallFloatFromByte(values[1]);
+				aggression_mod = TFC_Core.getSmallFloatFromByte(values[2]);
+				obedience_mod = TFC_Core.getSmallFloatFromByte(values[3]);
+				colour_mod = TFC_Core.getSmallFloatFromByte(values[4]);
+				climate_mod = TFC_Core.getSmallFloatFromByte(values[5]);
+				hard_mod = TFC_Core.getSmallFloatFromByte(values[6]);
+				
+				familiarity = values[7];
 			}
 		}
 	}
@@ -703,38 +715,37 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public float getStrength()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(24);
+		return strength_mod;
 	}
 
 	@Override
 	public float getAggression()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(25);
+		return aggression_mod;
 	}
 
 	@Override
 	public float getObedience()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(26);
+		return obedience_mod;
 	}
-
 
 	@Override
 	public float getColour()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(27);
+		return colour_mod;
 	}
 
 	@Override
 	public float getClimateAdaptation()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(28);
+		return climate_mod;
 	}
 
 	@Override
 	public float getHardiness()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(29);
+		return hard_mod;
 	}
 
 	@Override
@@ -814,12 +825,16 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		if(familiarity > 100)familiarity = 100;
 		if(familiarity < 0)familiarity = 0;
 	}
-
+	
+	@Override
+	public boolean isFood(ItemStack item) {
+		return  item != null && item.getItem().equals(TFCItems.fishRaw);
+	}
 
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && stack.getItem().equals(TFCItems.fishRaw)){
+		if(stack != null && isFood(stack)){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
@@ -853,9 +868,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		case SHEAR: flag = familiarity > 10;break;
 		case MILK: flag = familiarity > 10;break;
 		case NAME: flag = familiarity > 70;break;
+		case TOLERATEPLAYER: flag = familiarity > 75; break;
 		default: break;
 		}
-		if(!flag && !player.worldObj.isRemote){
+		if(!flag && player != null && !player.worldObj.isRemote){
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
 		}
 		return flag;

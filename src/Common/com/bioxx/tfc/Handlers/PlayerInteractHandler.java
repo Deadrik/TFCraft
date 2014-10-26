@@ -1,30 +1,36 @@
 package com.bioxx.tfc.Handlers;
 
 import java.util.HashMap;
+import java.util.Random;
 import java.util.UUID;
 
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraft.world.World;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class PlayerInteractHandler
 {
-
 	private HashMap<UUID, Long> lastDrink = new HashMap<UUID, Long>();
 	
 	@SubscribeEvent
@@ -106,4 +112,36 @@ public class PlayerInteractHandler
 		}
 	}
 
+	/**
+	 * When a player picks up a vanilla item it will get replaced with
+	 * the appropriate TFC item. This will solve problems like the boat
+	 * crash dropping vanilla sticks and planks.
+	 */
+	@SubscribeEvent
+	public void onItemPickup(EntityItemPickupEvent event)
+	{
+		if(event.item.getEntityItem().getItem() == Items.stick)
+		{
+			int count = event.item.getEntityItem().stackSize;
+			event.item.delayBeforeCanPickup = 100;
+			event.item.setDead();
+			event.item.setInvisible(true);
+			Random rand = event.entityPlayer.worldObj.rand;
+			event.entityPlayer.worldObj.playSoundAtEntity(event.entityPlayer, "random.pop", 0.2F, ((rand.nextFloat() - rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+			ItemStack tfcSticks = new ItemStack(TFCItems.Stick, count);
+			event.entityPlayer.inventory.addItemStackToInventory(tfcSticks);
+		}
+
+		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(Blocks.planks))
+		{
+			int count = event.item.getEntityItem().stackSize;
+			event.item.delayBeforeCanPickup = 100;
+			event.item.setDead();
+			event.item.setInvisible(true);
+			Random rand = event.entityPlayer.worldObj.rand;
+			event.entityPlayer.worldObj.playSoundAtEntity(event.entityPlayer, "random.pop", 0.2F, ((rand.nextFloat() - rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+			ItemStack tfcPlanks = new ItemStack(TFCBlocks.Planks, count);
+			event.entityPlayer.inventory.addItemStackToInventory(tfcPlanks);
+		}
+	}
 }

@@ -7,7 +7,7 @@ public class Reference
 
 	public static final int VersionMajor = 0;
 	public static final int VersionMinor = 79;
-	public static final int VersionRevision = 8;
+	public static final int VersionRevision = 9;
 
 	public static final String ModVersion = VersionMajor+"."+VersionMinor+"."+VersionRevision;
 

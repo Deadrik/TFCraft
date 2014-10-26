@@ -244,7 +244,7 @@ public class BlockCollapsable extends BlockTerraContainer
 		float seismicModifier = 0.2f;
 		float softModifier = 0.1f;
 		TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(x, z);
-		int finalCollapseRatio = TFCOptions.initialCollapseRatio;
+		int finalCollapseRatio = TFCOptions.initialCollapseRatio > 0 ? TFCOptions.initialCollapseRatio : 10; //Set to default if invalid value is entered in config.
 
 		//Make sure that the player gets exhausted from harvesting this block since we override the vanilla method
 		if(entityplayer != null)
@@ -272,7 +272,7 @@ public class BlockCollapsable extends BlockTerraContainer
 		}*/
 
 		//First we check the rng to see if a collapse is going to occur
-		if(world.rand.nextInt(finalCollapseRatio) == 0)
+		if (TFCOptions.enableCaveIns && world.rand.nextInt(finalCollapseRatio) == 0)
 		{
 			//Now we look for a suitable block nearby to act as the epicenter
 			int counter = 0;

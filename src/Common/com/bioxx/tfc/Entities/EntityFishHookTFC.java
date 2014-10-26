@@ -472,7 +472,7 @@ public class EntityFishHookTFC extends EntityFishHook
 		if(TFC_Time.getTotalTicks()%40 == 0){
 			force += 0d;
 		}
-		lineTension += forceRatio -31;
+		lineTension += (forceRatio -31 > 1 ? Math.sqrt(forceRatio - 31) : forceRatio - 31);
 
 		lineTension = Math.max(lineTension, 0);
 

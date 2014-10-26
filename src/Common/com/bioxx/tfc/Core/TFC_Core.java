@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Core;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -20,6 +21,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
@@ -1010,6 +1012,18 @@ public class TFC_Core
 			}
 
 		}
+	}
+	
+	//Takes a small float in the range of 0.5 to 1.5. The resulting float would be of the form [0 0111111 [the byte] 0..0], such that the byte returned
+	//is the only unknown value
+	public static byte getByteFromSmallFloat(float f){
+		MathHelper.clamp_float(f, 0.5f, 1.5f);
+		return (byte)((Float.floatToIntBits(f) >> 16) & 0xff);
+	}
+	
+	public static float getSmallFloatFromByte(byte b)
+	{
+		return ByteBuffer.wrap(new byte[]{(byte)63, b,(byte)(0),(byte)0}).getFloat();
 	}
 
 	/**
