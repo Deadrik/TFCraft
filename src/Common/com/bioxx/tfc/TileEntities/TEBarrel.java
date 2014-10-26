@@ -47,6 +47,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	public int sealtime = 0;
 	public int unsealtime = 0;
 	private int processTimer = 0;
+	private boolean primed = false;
 
 	public static final int MODE_IN = 0;
 	public static final int MODE_OUT = 1;
@@ -84,6 +85,23 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		if(reason.equals("killing fuse"))
 			sealed = false;
+	}
+
+	/**
+	 * Is the barrel primed, if true the fuse counting down
+	 */
+	public boolean isPrimed()
+	{
+		return primed;
+	}
+	
+	/**
+	 * Set the barrels primed status, set to true if the barrels fuse is
+	 * running --THIS DOES NOT START OR STOP THE FUSE--
+	 */
+	public void setPrimed(boolean bPrimed)
+	{
+		primed = bPrimed;
 	}
 
 	@Override
