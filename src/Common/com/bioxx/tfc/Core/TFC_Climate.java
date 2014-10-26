@@ -371,8 +371,8 @@ public class TFC_Climate
 			y-=Global.SEALEVEL;
 			y = Math.min(y, 440);
 			float ySq = y * y;
-			temp = temp - (ySq / 677.966f) * (((110 - y) + Math.abs(110 - y)) / (2 * (110.01f - y)));
-			temp -= (0.16225 * y * (((y - 110) + Math.abs(y - 110)) / (2 * (y - 110.01f))));
+			temp = temp - (ySq / 677.966f) * (((110.01f - y) + Math.abs(110.01f - y)) / (2 * (110.01f - y)));
+			temp -= (0.16225 * y * (((y - 110.01f) + Math.abs(y - 110.01f)) / (2 * (y - 110.01f))));
 		}
 		return temp;
 	}
