@@ -492,7 +492,7 @@ public class BlockBarrel extends BlockTerraContainer
 		private void explode()
 		{
 			float f = 64.0F;
-			this.worldObj.setBlockToAir(x, y, z);
+			this.worldObj.removeTileEntity(x, y, z);
 			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, f, true);
 			setDead();
 		}
