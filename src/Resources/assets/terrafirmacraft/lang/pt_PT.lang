@@ -1961,6 +1961,15 @@ tile.Flowers2.flower_tulip_white.name=Tulipa Branca
 tile.Flowers2.flower_tulip_pink.name=Tulipa Rosa
 tile.Flowers2.flower_oxeye_daisy.name=Margarida
 
+tile.SaltWater.name=Água Salgada Corrente
+tile.SaltWaterStationary.name=Água Salgada
+tile.FreshWater.name=Água Doce Corrente
+tile.FreshWaterStationary.name=Água Doce
+tile.HotWater.name=Água Quente Corrente
+tile.HotWaterStationary.name=Água Quente
+tile.Lava.name=Lava Corrente
+tile.LavaStationary.name=Lava
+
 #=======
 #= GUI =
 #=======
@@ -2174,6 +2183,7 @@ gui.plans.sword=Espada
 gui.plans.tuyere=Alcaraviz
 gui.plans.grill=Grelha
 gui.plans.shears=Tesoura
+gui.plans.trapdoor=Alçapão
 
 #== Misc GUI ==
 gui.Blueprint=Diagrama

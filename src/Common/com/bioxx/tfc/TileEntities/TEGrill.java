@@ -8,6 +8,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -104,22 +105,23 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 
 	public void careForInventorySlot(ItemStack is)
 	{
-		if(is != null && worldObj.getTileEntity(xCoord, yCoord-1, zCoord) != null)
+		TileEntity te = worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
+		if(is != null && te instanceof TEFireEntity)
 		{
-			TEFireEntity te = (TEFireEntity)worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
 			float temp = TFC_ItemHeat.GetTemp(is);
-			if(te.fuelTimeLeft > 0 && is.getItem() instanceof IFood)
+			TEFireEntity fire = (TEFireEntity) te;
+			if(fire.fuelTimeLeft > 0 && is.getItem() instanceof IFood)
 			{
-				float inc = Food.getCooked(is)+Math.min((te.fireTemp/700), 2f);
+				float inc = Food.getCooked(is)+Math.min((fire.fireTemp/700), 2f);
 				Food.setCooked(is, inc);
 				temp = inc;
 			}
-			else if(te.fireTemp > temp)
+			else if(fire.fireTemp > temp)
 			{
 				temp += TFC_ItemHeat.getTempIncrease(is);
 			}
 
-			if(te.fireTemp > temp)
+			if(fire.fireTemp > temp)
 				temp += TFC_ItemHeat.getTempIncrease(is);
 			else
 				temp -= TFC_ItemHeat.getTempDecrease(is);
@@ -133,7 +135,6 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 		Random R = new Random();
 		if(storage[i] != null)
 		{
-			TEFireEntity te = (TEFireEntity) worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
 			HeatIndex index = manager.findMatchingIndex(storage[i]);
 			if(index != null && Food.isCooked(storage[i]))
 			{
@@ -146,9 +147,11 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 				cookedTasteProfile[3] = R.nextInt(30)-15;
 				cookedTasteProfile[4] = R.nextInt(30)-15;
 				Food.setCookedProfile(storage[i], cookedTasteProfile);
-				if(te != null)
+				TileEntity te = worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
+				if(te instanceof TEFireEntity)
 				{
-					Food.setFuelProfile(storage[i], EnumFuelMaterial.getFuelProfile(te.fuelTasteProfile));
+					TEFireEntity fire = (TEFireEntity) te;
+					Food.setFuelProfile(storage[i], EnumFuelMaterial.getFuelProfile(fire.fuelTasteProfile));
 				}
 			}
 

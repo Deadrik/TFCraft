@@ -32,9 +32,12 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 		IBlockAccess blockAccess = renderblocks.blockAccess;
 		TileEntityToolRack te = (TileEntityToolRack)blockAccess.getTileEntity(i, j, k);
 		int dir = blockAccess.getBlockMetadata(i, j, k);
+		boolean breaking = renderblocks.overrideBlockTexture != null;
 		if(te != null)
 		{
-			renderblocks.overrideBlockTexture = block.getIcon(0, te.woodType);
+			if ( ! breaking )
+				renderblocks.overrideBlockTexture = block.getIcon(0, te.woodType);
+			
 			double minX = 0;
 			double maxX = 0.5;
 			double minZ = 0;
@@ -61,7 +64,10 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				renderRackDir3(block, i, j, k, renderblocks, 0.3f);
 			}
 		}
-		renderblocks.clearOverrideBlockTexture();
+		
+		if ( ! breaking )
+			renderblocks.clearOverrideBlockTexture();
+		
 		return true;
 	}
 

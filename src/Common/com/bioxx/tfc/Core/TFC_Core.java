@@ -309,6 +309,18 @@ public class TFC_Core
 				|| block == TFCBlocks.StoneMM;
 	}
 
+	public static boolean isOreStone(Block block)
+	{
+		return block == TFCBlocks.Ore
+				|| block == TFCBlocks.Ore2
+				|| block == TFCBlocks.Ore3;
+	}
+
+	public static boolean isNaturalStone(Block block)
+	{
+		return isRawStone( block ) || isOreStone( block );
+	}
+	
 	public static boolean isCobbleStone(Block block)
 	{
 		return block == TFCBlocks.StoneIgExCobble
