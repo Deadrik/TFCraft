@@ -154,7 +154,7 @@ public class WorldGenPlants implements IWorldGenerator
 			}
 		}
 
-		if (random.nextInt(70) == 0 && rain > 500)
+		if (random.nextInt(70) == 0 && rain >= 500)
 		{
 			xCoord = chunkX + random.nextInt(16) + 8;
 			zCoord = chunkZ + random.nextInt(16) + 8;
