@@ -98,12 +98,16 @@ public class FoodStatsTFC
 				this.waterTimer = TFC_Time.startTime;
 			}
 
+			if(player.capabilities.isCreativeMode)
+			{
+				foodTimer = TFC_Time.getTotalTicks();
+				waterTimer = TFC_Time.getTotalTicks();
+			}
+			
 			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength)
 			{
 				this.foodTimer += TFC_Time.hourLength;
 				
-				if(!player.capabilities.isCreativeMode)
-				{
 					float drainMult = 1.0f;
 					if(player.isPlayerSleeping())
 					{
@@ -157,7 +161,6 @@ public class FoodStatsTFC
 						if(this.satDairy)
 							this.addNutrition(EnumFoodGroup.Dairy, this.satisfaction*((1-this.nutrDairy)/100), false);
 					}
-				}
 				shouldSendUpdate = true;
 			}
 
@@ -189,19 +192,15 @@ public class FoodStatsTFC
 				shouldSendUpdate = true;
 			}
 			player.getEntityData().setLong("soberTime", soberTime);
-			long time = TFC_Time.getTotalTicks();
-
-			for(;waterTimer < time;  waterTimer++)
+			
+			for(;waterTimer < TFC_Time.getTotalTicks();  waterTimer++)
 			{
-				if(!player.capabilities.isCreativeMode)
-				{
 					/**Reduce the player's water for normal living*/
 					waterLevel -= 1+(tempWaterMod/2);
 					if(waterLevel < 0)
 						waterLevel = 0;
 					if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0 && temp > 35)
 						player.attackEntityFrom(DamageSource.generic, 2);
-				}
 			}
 		}
 		else{
