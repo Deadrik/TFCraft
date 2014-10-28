@@ -24,7 +24,6 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
-import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowTrees;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
@@ -210,13 +209,14 @@ public class BlockGrass extends BlockTerra
 	{
 		if (!world.isRemote)
 		{
-			if(world.getBlock(i, j + 1, k) == Blocks.snow)
+			int meta = world.getBlockMetadata(i, j, k);
+			if(world.getBlock(i, j + 1, k) == Blocks.snow && !TFC_Core.isDryGrass(this))
 			{
-				world.setBlock(i, j, k, TFC_Core.getTypeForDryGrassFromSoil(world.getBlock(i, j, k)), world.getBlockMetadata(i, j, k), 0x2);
+				world.setBlock(i, j, k, TFC_Core.getTypeForDryGrassFromSoil(this), meta, 0x2);
 			}
 			else if (world.getBlockLightValue(i, j + 1, k) < 4 && world.getBlock(i, j + 1, k).getLightOpacity() > 2)
 			{
-				world.setBlock(i, j, k, TFC_Core.getTypeForDirt(world.getBlockMetadata(i, j, k) + textureOffset), world.getBlockMetadata(i, j, k), 0x2);
+				world.setBlock(i, j, k, TFC_Core.getTypeForDirtFromGrass(this), meta, 0x2);
 			}
 			else if (world.getBlockLightValue(i, j + 1, k) >= 4)
 			{
@@ -224,9 +224,8 @@ public class BlockGrass extends BlockTerra
 
 				float rain = TFC_Climate.getRainfall(world, i, j + 1, k);
 				float temp = TFC_Climate.getHeightAdjustedTemp(world, i, j+1, k);
-				Block id = world.getBlock(i, j, k);
 
-				if (TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && world.getBlock(i, j + 1, k).getMaterial() != Material.water && world.isAirBlock(i, j + 1, k))
+				if (TFC_Core.isGrass(this) && !TFC_Core.isDryGrass(this) && world.getBlock(i, j + 1, k).getMaterial() != Material.water && world.isAirBlock(i, j + 1, k))
 				{
 					if(rand.nextInt((int) ((16800-rain)/4)) == 0 && temp > 20)
 						world.setBlock(i, j + 1, k, TFCBlocks.TallGrass, (world.rand.nextInt(30) == 0 ? 1 : 0), 0x2); // 1/30 chance to spawn fern
@@ -248,16 +247,13 @@ public class BlockGrass extends BlockTerra
 					}
 				}
 
-				DataLayer rock1 = TFC_Climate.getRockLayer(world, i, j, k, 0);
-				if(TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && !nearWater && rain < 500)
+				if(TFC_Core.isGrass(this) && !TFC_Core.isDryGrass(this) && !nearWater && rain < 500)
 				{
-					int meta = TFC_Core.getSoilMetaFromStone(rock1.block, rock1.data2);
-					world.setBlock(i, j, k, TFC_Core.getTypeForDryGrass(rock1.data1), meta, 2);
+					world.setBlock(i, j, k, TFC_Core.getTypeForDryGrassFromSoil(this), meta, 2);
 				}
-				else if(TFC_Core.isGrass(id) && TFC_Core.isDryGrass(id) && (nearWater || rain>=500) && world.getBlock(i, j+1, k) != Blocks.snow)
+				else if(TFC_Core.isGrass(this) && TFC_Core.isDryGrass(this) && (nearWater || rain>=500) && world.getBlock(i, j+1, k) != Blocks.snow)
 				{
-					int meta = TFC_Core.getSoilMetaFromStone(rock1.block, rock1.data2);
-					world.setBlock(i, j, k, TFC_Core.getTypeForGrass(rock1.data1), meta, 2);
+					world.setBlock(i, j, k, TFC_Core.getTypeForGrassFromSoil(this), meta, 2);
 				}
 			}
 
