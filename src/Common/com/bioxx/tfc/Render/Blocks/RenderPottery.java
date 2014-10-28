@@ -21,16 +21,22 @@ public class RenderPottery implements ISimpleBlockRenderingHandler
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
 		TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
+		boolean breaking = renderer.overrideBlockTexture != null;
+		
 		if(te.straw > 0)
 		{
-			renderer.overrideBlockTexture = TFCBlocks.Thatch.getIcon(world, x, y, z, 0);
+			if ( ! breaking )
+				renderer.overrideBlockTexture = TFCBlocks.Thatch.getIcon(world, x, y, z, 0);
+			
 			renderer.setRenderBounds(0, 0, 0, 1, 0.0625*te.straw, 1);
 			renderer.renderStandardBlock(block, x, y, z);
 		}
 
 		if(te.wood > 0)
 		{
-			renderer.overrideBlockTexture = TFCBlocks.LogPile.getIcon(0, 0);
+			if ( ! breaking )
+				renderer.overrideBlockTexture = TFCBlocks.LogPile.getIcon(0, 0);
+			
 			int w = te.wood;
 			if(te.wood > 4)
 			{
@@ -42,7 +48,10 @@ public class RenderPottery implements ISimpleBlockRenderingHandler
 			renderer.setRenderBounds(0, 0.5, 0, 0.25*w, 0.75, 1);
 			renderer.renderStandardBlock(block, x, y, z);
 		}
-		renderer.clearOverrideBlockTexture();
+		
+		if ( ! breaking )
+			renderer.clearOverrideBlockTexture();
+		
 		return true;
 	}
 

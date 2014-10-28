@@ -98,6 +98,19 @@ public class BlockStone extends BlockCollapsable
 	}
 
 	@Override
+	public void onBlockExploded(World world, int x, int y, int z, Explosion explosion)
+	{
+		if(world.rand .nextInt(100) < 30)
+		{
+			world.setBlock(x, y, z, dropBlock, world.getBlockMetadata(x, y, z), 0x2);
+		}
+		else
+		{
+			super.onBlockExploded(world, x, y, z, explosion);
+		}
+	}
+
+	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, Block l)
 	{
 		DropCarvedStone(world, i, j, k);

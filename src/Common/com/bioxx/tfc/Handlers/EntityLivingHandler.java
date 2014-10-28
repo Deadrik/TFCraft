@@ -104,14 +104,17 @@ public class EntityLivingHandler
 
 				//Scan the players inventory for any items that are too heavy to carry normally
 				boolean isOverburdened = false;
-				for (int i = 0; i < player.inventory.mainInventory.length;i++)
+				if(!player.capabilities.isCreativeMode)
 				{
-					ItemStack is = player.inventory.getStackInSlot(i);
-					if(is != null && is.getItem() instanceof IEquipable)
+					for (int i = 0; i < player.inventory.mainInventory.length;i++)
 					{
-						isOverburdened = ((IEquipable)is.getItem()).getTooHeavyToCarry(is);
-						if(isOverburdened)
-							break;
+						ItemStack is = player.inventory.getStackInSlot(i);
+						if(is != null && is.getItem() instanceof IEquipable)
+						{
+							isOverburdened = ((IEquipable)is.getItem()).getTooHeavyToCarry(is);
+							if(isOverburdened)
+								break;
+						}
 					}
 				}
 
