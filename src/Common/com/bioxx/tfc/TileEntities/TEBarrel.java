@@ -51,6 +51,8 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	public static final int MODE_IN = 0;
 	public static final int MODE_OUT = 1;
 	public BarrelRecipe recipe;
+	//temporary field. No need to save
+	public boolean shouldDropItem = true;
 
 	public TEBarrel()
 	{
@@ -65,6 +67,11 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	protected int getTechLevel()
 	{
 		return 1;
+	}
+
+	public void clearInventory()
+	{
+		storage = new ItemStack[12];
 	}
 
 	@Override
