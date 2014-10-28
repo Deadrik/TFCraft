@@ -181,12 +181,12 @@ public class BlockBarrel extends BlockTerraContainer
 			TEBarrel TE = (TEBarrel)world.getTileEntity(x, y, z);
 			if(TE.getGunPowderCount() >= 256 && TE.getSealed())
 			{
-				BarrelEntity BE = new BarrelEntity(world, x, y, z);
-				world.spawnEntityInWorld(BE);
-				world.playSoundAtEntity(BE, "game.tnt.primed", 1.0F, 1.0F);
-				//float f = 16.0F;
-				//EI.worldObj.createExplosion(EI, EI.posX, EI.posY, EI.posZ, f, true);
-				//world.setBlockToAir(x, y, z);
+				if(!TE.isPrimed())
+				{
+					BarrelEntity BE = new BarrelEntity(world, x, y, z);
+					world.spawnEntityInWorld(BE);
+					TE.setPrimed(true);
+				}
 			}
 		}
 	}
@@ -206,9 +206,13 @@ public class BlockBarrel extends BlockTerraContainer
 				ItemStack is = new ItemStack(Item.getItemFromBlock(block), 1, te.barrelType);
 				NBTTagCompound nbt = writeBarrelToNBT(te);
 				is.setTagCompound(nbt);
-				EntityItem ei = new EntityItem(world,x,y,z,is);
-				world.spawnEntityInWorld(ei);
-
+				
+				if(!te.isPrimed())
+				{
+					EntityItem ei = new EntityItem(world,x,y,z,is);
+					world.spawnEntityInWorld(ei);
+				}
+				
 				for(int s = 0; s < te.getSizeInventory(); ++s)
 					te.setInventorySlotContents(s, null);
 			}
@@ -280,6 +284,9 @@ public class BlockBarrel extends BlockTerraContainer
 					{
 						entity.setDead();
 					}
+					
+					te.setPrimed(false);
+					
 					return true;
 				}
 
