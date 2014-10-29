@@ -5,9 +5,9 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TileEntities.TELogPile;
+import com.bioxx.tfc.TileEntities.TEPottery;
 
 public class ItemTorch extends ItemTerraBlock
 {
@@ -29,7 +29,28 @@ public class ItemTorch extends ItemTerraBlock
 				te.neighborChanged();
 				entityItem.setDead();
 			}
-			else entityItem.getEntityData().setInteger("torchCount", count+1);
+			else
+			{
+				if(entityItem.worldObj.rand.nextInt(10) < 2)
+					entityItem.worldObj.spawnParticle("lava", entityItem.posX, entityItem.posY, entityItem.posZ, -0.5F + entityItem.worldObj.rand.nextFloat(), -0.5F + entityItem.worldObj.rand.nextFloat(), -0.5F + entityItem.worldObj.rand.nextFloat());
+				entityItem.getEntityData().setInteger("torchCount", count+1);
+			}
+		}
+		if(entityItem.worldObj.getBlock((int)Math.floor(entityItem.posX), (int)Math.floor(entityItem.posY)-1, (int)Math.floor(entityItem.posZ)) == TFCBlocks.Pottery)
+		{
+			int count = entityItem.getEntityData().getInteger("torchCount");
+			if(count > 80)
+			{
+				TEPottery tepot = (TEPottery) entityItem.worldObj.getTileEntity((int)Math.floor(entityItem.posX), (int)Math.floor(entityItem.posY)-1, (int)Math.floor(entityItem.posZ));
+				if(!entityItem.worldObj.isRemote && tepot.wood == 8 && tepot.burnStart == 0)
+					tepot.StartPitFire();
+			}
+			else
+			{
+				if(entityItem.worldObj.rand.nextInt(10) < 2)
+					entityItem.worldObj.spawnParticle("lava", entityItem.posX, entityItem.posY, entityItem.posZ, -0.95F + entityItem.worldObj.rand.nextFloat(), -0.95F + entityItem.worldObj.rand.nextFloat(), -0.95F + entityItem.worldObj.rand.nextFloat());
+				entityItem.getEntityData().setInteger("torchCount", count+1);
+			}
 		}
 		return false;
 	}
