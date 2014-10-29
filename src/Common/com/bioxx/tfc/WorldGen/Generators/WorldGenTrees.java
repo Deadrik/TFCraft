@@ -10,7 +10,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TreeRegistry;
-import com.bioxx.tfc.Core.TreeSchematic;
+import com.bioxx.tfc.Core.Schematic;
 import com.bioxx.tfc.TileEntities.TETreeLog;
 
 public class WorldGenTrees extends WorldGenerator
@@ -32,7 +32,7 @@ public class WorldGenTrees extends WorldGenerator
 	public boolean generate(World world, Random rand, int x, int y, int z)
 	{
 		//Get a random tree schematic
-		TreeSchematic schem = TreeRegistry.instance.getRandomTreeSchematicWithGrowthStage(treeID, growthStage);
+		Schematic schem = TreeRegistry.instance.getRandomTreeSchematicWithGrowthStage(treeID, growthStage);
 		if(schem == null) return false;
 
 		//This is for testing, so every tree generates at the coords you need
@@ -52,7 +52,7 @@ public class WorldGenTrees extends WorldGenerator
 		return false;
 	}
 
-	private boolean genTree(TreeSchematic schem, int meta, World world, int treeX, int treeY, int treeZ)
+	private boolean genTree(Schematic schem, int meta, World world, int treeX, int treeY, int treeZ)
 	{
 		int rot = world.rand.nextInt(4);
 		int index;
@@ -82,7 +82,7 @@ public class WorldGenTrees extends WorldGenerator
 	}
 
 	private void Process(World world, int treeX, int treeY, int treeZ, int meta,
-			TreeSchematic schem, int schemX, int schemY, int schemZ, int rot, boolean doBase, Block b)
+			Schematic schem, int schemX, int schemY, int schemZ, int rot, boolean doBase, Block b)
 	{
 		int localX = treeX + schem.getCenterX() - schemX;
 		int localZ = treeZ + schem.getCenterZ() - schemZ;

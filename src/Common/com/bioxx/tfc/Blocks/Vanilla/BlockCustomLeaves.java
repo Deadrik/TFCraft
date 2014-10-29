@@ -26,7 +26,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TreeRegistry;
-import com.bioxx.tfc.Core.TreeSchematic;
+import com.bioxx.tfc.Core.Schematic;
 import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
 import com.bioxx.tfc.TileEntities.TETreeLog;
 import com.bioxx.tfc.api.Constant.Global;
@@ -121,7 +121,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable, ITileE
 				if(teR != null && teR instanceof TETreeLog)
 				{
 					TETreeLog teRoot = (TETreeLog) teR;
-					TreeSchematic shem = TreeRegistry.instance.getTreeSchematic(teRoot.treeID, teRoot.schemIndex);
+					Schematic shem = TreeRegistry.instance.getTreeSchematic(teRoot.treeID, teRoot.schemIndex);
 					if(shem != null && !world.checkChunksExist(z - shem.getCenterX(), y, z - shem.getCenterZ(), z + shem.getCenterX(), y, z + shem.getCenterZ()))
 						if(!canLeavesStay(world, x, y, z, shem, meta))
 							world.setBlockToAir(x, y, z);
@@ -266,7 +266,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable, ITileE
 		world.setBlockToAir(x, y, z);
 	}
 
-	private boolean canLeavesStay(World w, int x, int y, int z, TreeSchematic shem, int meta)
+	private boolean canLeavesStay(World w, int x, int y, int z, Schematic shem, int meta)
 	{
 		boolean canStay = false;
 		int rad = 1;

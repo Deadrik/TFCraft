@@ -22,6 +22,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.Recipes;
+import com.bioxx.tfc.Core.Schematic;
 import com.bioxx.tfc.Core.TreeRegistry;
 import com.bioxx.tfc.Core.TreeSchematic;
 import com.bioxx.tfc.TileEntities.TETreeLog;
@@ -284,7 +285,7 @@ public class BlockLogNatural extends BlockTerraContainer
 	}
 
 	private void ProcessRot(World world, int treeX, int treeY, int treeZ, int meta,
-			TreeSchematic schem, int schemX, int schemY, int schemZ, int rot, boolean dropItem)
+			Schematic schem, int schemX, int schemY, int schemZ, int rot, boolean dropItem)
 	{
 		int localX = treeX + schem.getCenterX() - schemX;
 		int localZ = treeZ + schem.getCenterZ() - schemZ;
@@ -355,7 +356,7 @@ public class BlockLogNatural extends BlockTerraContainer
 				else
 					equip.damageItem(damage, entityplayer);
 			}
-			
+
 			//If this method gets called more then ones by mistake,
 			//make sure the second call will not make any damage.
 			damage = 0;
