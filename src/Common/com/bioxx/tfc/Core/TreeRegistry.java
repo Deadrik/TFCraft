@@ -50,7 +50,8 @@ public class TreeRegistry
 				File root = new File(TerraFirmaCraft.instance.getClass().getClassLoader().getResource(treePath + tName + "/").toURI());
 				for( File f : root.listFiles())
 				{
-					String schemType = f.getName().substring(0, f.getName().indexOf('_'));
+					int index = f.getName().indexOf('-');
+					String schemType = f.getName().substring(0, index);
 					if(f.isFile())
 					{
 						TreeSchematic schem = new TreeSchematic(treePath + tName + "/" + f.getName());

@@ -17,10 +17,7 @@ public class TreeSchematic extends Schematic
 	public boolean Load()
 	{
 		super.Load();
-		int num = path.indexOf('_') + 1;
-
-
-		num += 4;
+		int num = path.indexOf('-') + 1;
 		growthStage = Integer.parseInt(path.substring(num, num + 1));
 		countLogs();
 		return true;
