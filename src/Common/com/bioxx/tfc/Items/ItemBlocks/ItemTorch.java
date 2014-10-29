@@ -48,7 +48,7 @@ public class ItemTorch extends ItemTerraBlock
 			else
 			{
 				if(entityItem.worldObj.rand.nextInt(10) < 2)
-					entityItem.worldObj.spawnParticle("lava", entityItem.posX, entityItem.posY, entityItem.posZ, -0.95F + entityItem.worldObj.rand.nextFloat(), -0.95F + entityItem.worldObj.rand.nextFloat(), -0.95F + entityItem.worldObj.rand.nextFloat());
+					entityItem.worldObj.spawnParticle("lava", entityItem.posX, entityItem.posY, entityItem.posZ, -0.5F + entityItem.worldObj.rand.nextFloat(), -0.5F + entityItem.worldObj.rand.nextFloat(), -0.5F + entityItem.worldObj.rand.nextFloat());
 				entityItem.getEntityData().setInteger("torchCount", count+1);
 			}
 		}
