@@ -37,5 +37,6 @@ public class TreeConfiguration
 		maxRain = maxR;
 		minTemp = minT;
 		maxTemp = maxT;
+		isEvergreen = eg;
 	}
 }

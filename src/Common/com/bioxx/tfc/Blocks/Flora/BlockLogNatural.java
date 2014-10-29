@@ -242,7 +242,7 @@ public class BlockLogNatural extends BlockTerraContainer
 				if(!teLog.isBase)
 					return ProcessTree(world, player, teLog.baseX, teLog.baseY, teLog.baseZ, dropItem);
 
-				TreeSchematic schem = TreeRegistry.instance.getTreeSchematic(teLog.treeID, teLog.schemIndex);
+				TreeSchematic schem = TreeRegistry.instance.getTreeSchematic(teLog.treeID, teLog.schemIndex, teLog.growthStage);
 
 				if(player != null && !player.capabilities.isCreativeMode)
 				{

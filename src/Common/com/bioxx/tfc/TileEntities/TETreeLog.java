@@ -2,8 +2,6 @@ package com.bioxx.tfc.TileEntities;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-import com.bioxx.tfc.Core.TreeRegistry;
-
 public class TETreeLog extends NetworkTileEntity
 {
 	public int dayBorn = -20;
@@ -14,6 +12,7 @@ public class TETreeLog extends NetworkTileEntity
 	public byte schemIndex = -1;
 	public byte treeID = 0;
 	public byte rotation = 0;
+	public byte growthStage = 0;
 	private boolean doingExplosion = false;
 
 	public TETreeLog()
@@ -57,6 +56,7 @@ public class TETreeLog extends NetworkTileEntity
 		{
 			schemIndex = nbt.getByte("schemIndex");
 			treeID = nbt.getByte("treeID");
+			this.growthStage = nbt.getByte("growthStage");
 			rotation = nbt.getByte("rotation");
 		}
 	}
@@ -75,6 +75,7 @@ public class TETreeLog extends NetworkTileEntity
 			nbt.setByte("schemIndex", schemIndex);
 			nbt.setByte("treeID", treeID);
 			nbt.setByte("rotation", rotation);
+			nbt.setByte("growthStage", growthStage);
 		}
 	}
 
@@ -82,10 +83,10 @@ public class TETreeLog extends NetworkTileEntity
 	public void handleInitPacket(NBTTagCompound nbt) 
 	{
 		treeID = nbt.getByte("treeID");
-		schemIndex = nbt.getByte("schemIndex");
-		rotation = nbt.getByte("rotation");
+		/*schemIndex = nbt.getByte("schemIndex");
+		rotation = nbt.getByte("rotation");*/
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		TreeRegistry.instance.getTreeSchematic(treeID, schemIndex);
+		//TreeRegistry.instance.getTreeSchematic(treeID, schemIndex);
 	}
 
 	@Override
@@ -100,8 +101,8 @@ public class TETreeLog extends NetworkTileEntity
 		if(isBase)
 		{
 			nbt.setByte("treeID", treeID);
-			nbt.setByte("schemID", schemIndex);
-			nbt.setByte("rotation", rotation);
+			//nbt.setByte("schemID", schemIndex);
+			//nbt.setByte("rotation", rotation);
 		}
 	}
 

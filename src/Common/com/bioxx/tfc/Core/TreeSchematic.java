@@ -5,9 +5,6 @@ import net.minecraft.block.material.Material;
 
 public class TreeSchematic extends Schematic
 {
-	/**
-	 * Tree Schematic ID: All schematics with this id are considered to be growth stages of this schematic
-	 */
 	private int growthStage;
 	private int logCount;
 

@@ -8,9 +8,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.Schematic;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TreeRegistry;
-import com.bioxx.tfc.Core.Schematic;
 import com.bioxx.tfc.TileEntities.TETreeLog;
 
 public class WorldGenTrees extends WorldGenerator
@@ -32,7 +32,7 @@ public class WorldGenTrees extends WorldGenerator
 	public boolean generate(World world, Random rand, int x, int y, int z)
 	{
 		//Get a random tree schematic
-		Schematic schem = TreeRegistry.instance.getRandomTreeSchematicWithGrowthStage(treeID, growthStage);
+		Schematic schem = TreeRegistry.instance.getRandomTreeSchematic(rand, treeID, growthStage);
 		if(schem == null) return false;
 
 		//This is for testing, so every tree generates at the coords you need
