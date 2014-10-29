@@ -26,9 +26,9 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.Schematic;
-import com.bioxx.tfc.Core.TreeRegistry;
 import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
 import com.bioxx.tfc.TileEntities.TETreeLog;
+import com.bioxx.tfc.api.TreeRegistry;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;

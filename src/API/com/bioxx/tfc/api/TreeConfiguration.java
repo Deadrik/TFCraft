@@ -1,4 +1,4 @@
-package com.bioxx.tfc.Core;
+package com.bioxx.tfc.api;
 
 public class TreeConfiguration 
 {

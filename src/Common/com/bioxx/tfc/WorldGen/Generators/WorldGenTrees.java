@@ -10,8 +10,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.Schematic;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TreeRegistry;
 import com.bioxx.tfc.TileEntities.TETreeLog;
+import com.bioxx.tfc.api.TreeRegistry;
 
 public class WorldGenTrees extends WorldGenerator
 {

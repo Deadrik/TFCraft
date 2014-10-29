@@ -23,9 +23,9 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.Schematic;
-import com.bioxx.tfc.Core.TreeRegistry;
-import com.bioxx.tfc.Core.TreeSchematic;
 import com.bioxx.tfc.TileEntities.TETreeLog;
+import com.bioxx.tfc.api.TreeRegistry;
+import com.bioxx.tfc.api.TreeSchematic;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;

@@ -1,7 +1,9 @@
-package com.bioxx.tfc.Core;
+package com.bioxx.tfc.api;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+
+import com.bioxx.tfc.Core.Schematic;
 
 public class TreeSchematic extends Schematic
 {
@@ -27,12 +29,13 @@ public class TreeSchematic extends Schematic
 	{
 		return growthStage;
 	}
-
+	@Deprecated
 	public int getLogCount()
 	{
 		return logCount;
 	}
 
+	@Deprecated
 	private void countLogs()
 	{
 		int index;

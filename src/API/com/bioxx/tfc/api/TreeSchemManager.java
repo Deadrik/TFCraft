@@ -1,4 +1,4 @@
-package com.bioxx.tfc.Core;
+package com.bioxx.tfc.api;
 
 import java.util.Random;
 import java.util.Vector;
