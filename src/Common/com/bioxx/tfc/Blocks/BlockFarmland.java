@@ -78,6 +78,8 @@ public class BlockFarmland extends BlockContainer
 	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side)
 	{
 		int meta = access.getBlockMetadata(x, y, z);
+		if(meta < 0 || meta > DirtTexture.length)
+			meta = 0;
 		if (side == 1)//top
 			return DirtTexture[meta];
 		else
@@ -88,6 +90,8 @@ public class BlockFarmland extends BlockContainer
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
+		if(meta < 0 || meta > DirtTexture.length)
+			meta = 0;
 		if (side == ForgeDirection.UP.ordinal())
 			return DirtTexture[meta];
 		else
