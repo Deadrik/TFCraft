@@ -166,9 +166,13 @@ public class BlockCollapsable extends BlockTerraContainer
 			{
 				for(int z = -range; z <= range; z++)
 				{
+					if(x == 0 && z == 0 && TFC_Core.isVertSupport(world.getBlock(i + x, j + y, k + z)))
+					{
+						return true;
+					}
 					if(TFC_Core.isHorizSupport(world.getBlock(i + x, j + y, k + z)))
 					{
-						if(world.rand.nextFloat() < collapseChance / 100f / 2f)
+						if(world.rand.nextFloat() < collapseChance / 100f)
 							world.setBlockToAir(i + x, j + y, k + z);
 						else return true;
 					}
@@ -317,14 +321,14 @@ public class BlockCollapsable extends BlockTerraContainer
 					if(world.rand.nextInt(100) < TFCOptions.propogateCollapseChance && distSqrd < 1225)
 					{
 						if(world.getBlock(i+x, j+y, k+z) instanceof BlockCollapsable && 
-								((BlockCollapsable)world.getBlock(i+x, j+y, k+z)).tryToFall(world, i+x, j+y, k+z, world.getBlockMetadata( i+x, j+y, k+z)))
+								((BlockCollapsable)world.getBlock(i+x, j+y, k+z)).tryToFall(world, i+x, j+y, k+z, 1))
 						{
 							int done = 0;
 							while(done < height)
 							{
 								done++;
 								if(world.getBlock(i+x, j+y, k+z) instanceof BlockCollapsable && world.rand.nextInt(100) < TFCOptions.propogateCollapseChance) {
-									((BlockCollapsable)world.getBlock(i+x, j+y, k+z)).tryToFall(world, i+x, j+y+done, k+z,world.getBlockMetadata( i+x, j+y+done, k+z));
+									((BlockCollapsable)world.getBlock(i+x, j+y, k+z)).tryToFall(world, i+x, j+y+done, k+z, 1);
 								} else {
 									done = height;
 								}
