@@ -383,11 +383,13 @@ public class TELogPile extends TileEntity implements IInventory
 				float percent = 25 + worldObj.rand.nextInt(26);
 				count = (int) (count * (percent / 100));
 				worldObj.setBlock(x, y, z, TFCBlocks.Charcoal, count, 0x2);
-				worldObj.notifyBlockOfNeighborChange(x, y, z, TFCBlocks.Charcoal);
+
 				//Activate the surrounding log piles
 				createCharcoal(x+1, y, z, forceComplete); createCharcoal(x-1, y, z, forceComplete);
 				createCharcoal(x, y+1, z, forceComplete); createCharcoal(x, y-1, z, forceComplete);
 				createCharcoal(x, y, z+1, forceComplete); createCharcoal(x, y, z-1, forceComplete);
+
+				worldObj.notifyBlockOfNeighborChange(x, y, z, TFCBlocks.Charcoal);
 			}
 		}
 	}
