@@ -33,6 +33,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
@@ -91,7 +92,9 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
 		this.tasks.addTask(5, new EntityAIWander(this, 0.75));
 		this.tasks.addTask(6, this.aiEatGrass);
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPigTFC.class, 6.0F));
+		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
+		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16f, 0.25F, 0.3F));
 		this.tasks.addTask(8, new EntityAILookIdle(this));
 
 		hunger = 168000;
