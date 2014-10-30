@@ -52,18 +52,40 @@ public class ModelIngot extends ModelBox
         this.vertexPositions[6] = vert6;
         this.vertexPositions[7] = vert7;
         
+        int x1 = textureOffsetX + 8;
+        int x2 = textureOffsetX + 16;
+        int x3 = textureOffsetX + 32;
+        int x5 = textureOffsetX + 48;
+        
+        int y1 = textureOffsetY + 4;
+        int y2 = textureOffsetY + 8;
+        int y3 = textureOffsetY + 24;
+        int y4 = textureOffsetY + 28;
+        
+        if( width > depth ) {
+            x1 = textureOffsetX + 8;
+            x2 = textureOffsetX + 16;
+            x3 = textureOffsetX + 48;
+            x5 = textureOffsetX + 32;
+            
+            y1 = textureOffsetY + 4;
+            y2 = textureOffsetY + 8;
+            y3 = textureOffsetY + 16;
+            y4 = textureOffsetY + 20;
+        }
+        
         this.quadList[0] = new TexturedQuad(new PositionTextureVertex[] {vert5, vert1, vert2, vert6}, 
-        		textureOffsetX + depth + width, textureOffsetY + depth, textureOffsetX + depth + width + depth, textureOffsetY + depth + height, renderer.textureWidth, renderer.textureHeight);
+        		x5, y3, x2, y4, renderer.textureWidth, renderer.textureHeight);
         this.quadList[1] = new TexturedQuad(new PositionTextureVertex[] {vert0, vert4, vert7, vert3}, 
-        		textureOffsetX, textureOffsetY + depth, textureOffsetX + depth, textureOffsetY + depth + height, renderer.textureWidth, renderer.textureHeight);
+        		x5, y1, x2, y2, renderer.textureWidth, renderer.textureHeight);
         this.quadList[2] = new TexturedQuad(new PositionTextureVertex[] {vert5, vert4, vert0, vert1}, 
-        		textureOffsetX + depth, textureOffsetY, textureOffsetX + depth + width, textureOffsetY + depth, renderer.textureWidth, renderer.textureHeight);
+        		x1, y3, x2, y2, renderer.textureWidth, renderer.textureHeight);
         this.quadList[3] = new TexturedQuad(new PositionTextureVertex[] {vert2, vert3, vert7, vert6}, 
-        		textureOffsetX + depth + width, textureOffsetY + depth, textureOffsetX + depth + width + width, textureOffsetY, renderer.textureWidth, renderer.textureHeight);
+        		x2, y2, x3, y3, renderer.textureWidth, renderer.textureHeight);
         this.quadList[4] = new TexturedQuad(new PositionTextureVertex[] {vert1, vert0, vert3, vert2}, 
-        		textureOffsetX + depth, textureOffsetY + depth, textureOffsetX + depth + width, textureOffsetY + depth + height, renderer.textureWidth, renderer.textureHeight);
+        		x2, y1, x3, y2, renderer.textureWidth, renderer.textureHeight);
         this.quadList[5] = new TexturedQuad(new PositionTextureVertex[] {vert4, vert5, vert6, vert7}, 
-        		textureOffsetX + depth + width + depth, textureOffsetY + depth, textureOffsetX + depth + width + depth + width, textureOffsetY + depth + height, renderer.textureWidth, renderer.textureHeight);
+        		x2, y4, x3, y3, renderer.textureWidth, renderer.textureHeight);
 	}
 	
 	@SideOnly(Side.CLIENT)
