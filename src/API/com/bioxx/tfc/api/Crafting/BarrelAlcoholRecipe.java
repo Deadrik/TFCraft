@@ -35,27 +35,27 @@ public class BarrelAlcoholRecipe extends BarrelRecipe
 	}
 
 	@Override
-	public Boolean matches(ItemStack item, FluidStack fluid)
+	public Boolean matches(ItemStack inIS, FluidStack inFluid)
 	{
 		if(recipeIS.hasTagCompound())
 		{
-			if(item == null || !item.hasTagCompound())
+			if(inIS == null || !inIS.hasTagCompound())
 			{
 				return false;
 			}
 			if(recipeIS.getItem() instanceof ItemFoodTFC)
 			{
-				if(!(item.getItem() instanceof ItemFoodTFC))
+				if(!(inIS.getItem() instanceof ItemFoodTFC))
 				{
 					return false;
 				}
 				float inW = recipeIS.getTagCompound().getFloat("foodWeight");
-				float itW = item.getTagCompound().getFloat("foodWeight");
-				float percent = itW/(inW * ((float)fluid.amount/(float)recipeFluid.amount));
+				float itW = inIS.getTagCompound().getFloat("foodWeight");
+				float percent = itW/(inW * ((float)inFluid.amount/(float)recipeFluid.amount));
 				if(percent < 0.25f)
 					return false;
 			}
 		}
-		return super.matches(item, fluid);
+		return inIS.getItem() == recipeIS.getItem() && inFluid.isFluidEqual(recipeFluid);
 	}
 }
