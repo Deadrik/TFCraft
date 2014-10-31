@@ -63,29 +63,29 @@ public class ContainerFoodPrep extends ContainerTFC
 	{
 		if(guiTab == 0)
 		{
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 0, 43, 11).addItemInclusion(TFCItems.WheatBread, TFCItems.BarleyBread, TFCItems.OatBread, 
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 0, 44, 24).addItemInclusion(TFCItems.WheatBread, TFCItems.BarleyBread, TFCItems.OatBread,
 					TFCItems.RyeBread, TFCItems.RiceBread, TFCItems.CornBread).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 61, 11).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 79, 11).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 97, 11).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 115, 11).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 62, 24).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 80, 24).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 98, 24).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 116, 24).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
 			/*this.addSlotToContainer(new SlotFoodOnly(chestInventory, 5, 125, 11).addItemInclusion(TFCItems.WheatBread, TFCItems.BarleyBread, TFCItems.OatBread, 
 					TFCItems.RyeBread, TFCItems.RiceBread, TFCItems.CornBread).setSize(EnumSize.HUGE));*/
 		}
 		else if(guiTab == 1)
 		{
-			this.addSlotToContainer(new SlotBlocked(chestInventory, 0, 16, 26));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 53, 11).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 71, 11).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 89, 11).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 107, 11).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotBlocked(chestInventory, 0, 15, 8));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 53, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 71, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 89, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 107, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
 			/*this.addSlotToContainer(new SlotBlocked(chestInventory, 5, 16, 44));*/
 		}
-		this.addSlotToContainer(new SlotBlocked(chestInventory, 6, 80, 35));
-		this.addSlotToContainer(new SlotSize(chestInventory, 7, 53, 59).setSize(EnumSize.SMALL));
-		this.addSlotToContainer(new SlotSize(chestInventory, 8, 71, 59).setSize(EnumSize.SMALL));
-		this.addSlotToContainer(new SlotSize(chestInventory, 9, 89, 59).setSize(EnumSize.SMALL));
-		this.addSlotToContainer(new SlotSize(chestInventory, 10, 107, 59).setSize(EnumSize.SMALL));
+		this.addSlotToContainer(new SlotBlocked(chestInventory, 6, 57, 46));
+		this.addSlotToContainer(new SlotSize(chestInventory, 7, 145, 8).setSize(EnumSize.SMALL));
+		this.addSlotToContainer(new SlotSize(chestInventory, 8, 145, 26).setSize(EnumSize.SMALL));
+		this.addSlotToContainer(new SlotSize(chestInventory, 9, 145, 44).setSize(EnumSize.SMALL));
+		this.addSlotToContainer(new SlotSize(chestInventory, 10, 145, 62).setSize(EnumSize.SMALL));
 	}
 
 	public EntityPlayer getPlayer()
