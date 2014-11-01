@@ -298,9 +298,12 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 					}
 				}
 			}
-			for(int i = 9; i < 45 && getEmptyCraftSlot() != -1 && knifeSlot != -1; i++)
+			for(int i = 9; i < 45 && getEmptyCraftSlot() != -1 && knifeSlot != -1 && inventorySlots.getSlot(knifeSlot).getStack() != null; i++)
 			{
 				ItemStack is = this.inventorySlots.getSlot(i).getStack();
+				int knifeDamage = inventorySlots.getSlot(knifeSlot).getStack().getItemDamage();
+				if(knifeDamage >= inventorySlots.getSlot(knifeSlot).getStack().getMaxDamage())
+					break;
 				if(is != null && !(is.getItem() instanceof ItemMeal) && is.getItem() instanceof IFood && ((IFood)is.getItem()).getFoodDecay(is) > 0 && 
 						Food.getDecayTimer(is) >= TFC_Time.getTotalHours())
 				{
