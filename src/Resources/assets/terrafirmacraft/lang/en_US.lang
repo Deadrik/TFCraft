@@ -1191,6 +1191,25 @@ tile.WoodSupportV.White Cedar.name=White Cedar Support Beam
 tile.WoodSupportV.White Elm.name=White Elm Support Beam
 tile.WoodSupportV.Willow.name=Willow Support Beam
 
+tile.WoodSupportH2.name=Wood Support Beam
+tile.WoodSupportH2.Acacia.name=Acacia Support Beam
+tile.WoodSupportH.Ash.name=Ash Support Beam
+tile.WoodSupportH.Aspen.name=Aspen Support Beam
+tile.WoodSupportH.Birch.name=Birch Support Beam
+tile.WoodSupportH.Chestnut.name=Chestnut Support Beam
+tile.WoodSupportH.Douglas Fir.name=Douglas Fir Support Beam
+tile.WoodSupportH.Hickory.name=Hickory Support Beam
+tile.WoodSupportH.Kapok.name=Kapok Support Beam
+tile.WoodSupportH.Maple.name=Maple Support Beam
+tile.WoodSupportH.Oak.name=Oak Support Beam
+tile.WoodSupportH.Pine.name=Pine Support Beam
+tile.WoodSupportH.Sequoia.name=Sequoia Support Beam
+tile.WoodSupportH.Spruce.name=Spruce Support Beam
+tile.WoodSupportH.Sycamore.name=Sycamore Support Beam
+tile.WoodSupportH.White Cedar.name=White Cedar Support Beam
+tile.WoodSupportH.White Elm.name=White Elm Support Beam
+tile.WoodSupportH.Willow.name=Willow Support Beam
+
 tile.Toolrack.Acacia.name=Acacia Tool Rack
 tile.Toolrack.Ash.name=Ash Tool Rack
 tile.Toolrack.Aspen.name=Aspen Tool Rack
@@ -1916,6 +1935,12 @@ tile.Chest.name=Chest
 tile.Bookshelf.name=Bookshelf
 tile.Workbench.name=Workbench
 tile.ButtonWood.name=Wooden Button
+tile.Firepit.name=Firepit
+tile.LogPile.name=Log Pile
+tile.Charcoal.name=Charcoal
+tile.StoneDetailed.name=Detailed
+tile.Sulfur.name=Sulfur
+tile.Reeds.name=Reeds
 
 #= Misc. Plants =
 item.Sugarcane.name=Sugarcane
