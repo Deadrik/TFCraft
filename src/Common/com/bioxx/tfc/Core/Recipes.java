@@ -325,6 +325,14 @@ public class Recipes
 				new Object[] {getStackNoTemp(new ItemStack(TFCItems.CopperIngot, 1)), new ItemStack(TFCItems.CeramicMold, 1, 1)});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.GoldUnshaped, 1, 0), 
 				new Object[] {getStackNoTemp(new ItemStack(TFCItems.GoldIngot, 1)), new ItemStack(TFCItems.CeramicMold, 1, 1)});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.HCSteelUnshaped, 1, 0), 
+				new Object[] {getStackNoTemp(new ItemStack(TFCItems.HCSteelIngot, 1)), new ItemStack(TFCItems.CeramicMold, 1, 1)});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.HCBlackSteelUnshaped, 1, 0), 
+				new Object[] {getStackNoTemp(new ItemStack(TFCItems.HCBlackSteelIngot, 1)), new ItemStack(TFCItems.CeramicMold, 1, 1)});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.HCBlueSteelUnshaped, 1, 0), 
+				new Object[] {getStackNoTemp(new ItemStack(TFCItems.HCBlueSteelIngot, 1)), new ItemStack(TFCItems.CeramicMold, 1, 1)});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.HCRedSteelUnshaped, 1, 0), 
+				new Object[] {getStackNoTemp(new ItemStack(TFCItems.HCRedSteelIngot, 1)), new ItemStack(TFCItems.CeramicMold, 1, 1)});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.WroughtIronUnshaped, 1, 0), 
 				new Object[] {getStackNoTemp(new ItemStack(TFCItems.WroughtIronIngot, 1)), new ItemStack(TFCItems.CeramicMold, 1, 1)});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.LeadUnshaped, 1, 0), 
@@ -339,6 +347,8 @@ public class Recipes
 				new Object[] {getStackNoTemp(new ItemStack(TFCItems.RedSteelIngot, 1)), new ItemStack(TFCItems.CeramicMold, 1, 1)});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.RoseGoldUnshaped, 1, 0), 
 				new Object[] {getStackNoTemp(new ItemStack(TFCItems.RoseGoldIngot, 1)), new ItemStack(TFCItems.CeramicMold, 1, 1)});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SilverUnshaped, 1, 0), 
+				new Object[] {getStackNoTemp(new ItemStack(TFCItems.SilverIngot, 1)), new ItemStack(TFCItems.CeramicMold, 1, 1)});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SteelUnshaped, 1, 0), 
 				new Object[] {getStackNoTemp(new ItemStack(TFCItems.SteelIngot, 1)), new ItemStack(TFCItems.CeramicMold, 1, 1)});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SterlingSilverUnshaped, 1, 0), 
@@ -353,6 +363,8 @@ public class Recipes
 				new Object[] {getStackNoTemp(new ItemStack(TFCItems.WeakBlueSteelIngot, 1)), new ItemStack(TFCItems.CeramicMold, 1, 1)});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.WeakRedSteelUnshaped, 1, 0), 
 				new Object[] {getStackNoTemp(new ItemStack(TFCItems.WeakRedSteelIngot, 1)), new ItemStack(TFCItems.CeramicMold, 1, 1)});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.UnknownUnshaped, 1, 0), 
+				new Object[] {getStackNoTemp(new ItemStack(TFCItems.UnknownIngot, 1)), new ItemStack(TFCItems.CeramicMold, 1, 1)});
 
 		//Unshaped -> Ingot
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BismuthIngot, 1, 0), 
