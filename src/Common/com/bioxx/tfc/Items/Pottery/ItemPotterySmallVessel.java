@@ -294,7 +294,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				if(tag.hasKey("MetalAmount"))
 				{
 					// suffix the amount of metal to the metal name.
-					name += " (" + tag.getInteger("MetalAmount")+StatCollector.translateToLocal("gui.units");
+					name += " (" + tag.getInteger("MetalAmount")+" "+StatCollector.translateToLocal("gui.units")+")";
 				}
 
 				arraylist.add(EnumChatFormatting.DARK_GREEN + name);
