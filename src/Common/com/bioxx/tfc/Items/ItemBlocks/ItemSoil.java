@@ -3,12 +3,15 @@ package com.bioxx.tfc.Items.ItemBlocks;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Render.Item.HeatItemRenderer;
 import com.bioxx.tfc.api.Constant.Global;
 
 public class ItemSoil extends ItemTerraBlock
@@ -36,5 +39,12 @@ public class ItemSoil extends ItemTerraBlock
 			arraylist.add(EnumChatFormatting.DARK_GRAY + Global.STONE_ALL[dam]);
 		else
 			arraylist.add(EnumChatFormatting.DARK_RED + "Unknown");
+	}
+
+	@Override
+	public void registerIcons(IIconRegister registerer)
+	{
+		super.registerIcons(registerer);
+		MinecraftForgeClient.registerItemRenderer(this, new HeatItemRenderer());
 	}
 }
