@@ -1,14 +1,18 @@
 package com.bioxx.tfc.Items;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
 
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
+import com.bioxx.tfc.Render.Item.HeatItemRenderer;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -42,6 +46,13 @@ public class ItemMetalSheet extends ItemTerra implements ISmeltable
 		return this;
 	}
 
+	@Override
+	public void registerIcons(IIconRegister registerer)
+	{
+		super.registerIcons(registerer);
+		MinecraftForgeClient.registerItemRenderer(this, new HeatItemRenderer());
+	}
+	
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{

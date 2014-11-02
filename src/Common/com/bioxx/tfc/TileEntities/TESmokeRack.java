@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 
+import com.bioxx.tfc.Blocks.BlockSmokeRack;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -111,7 +112,7 @@ public class TESmokeRack extends NetworkTileEntity implements IInventory
 		if(flag)
 		{
 			storage[i] = itemstack;
-			broadcastPacketInRange();
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
 	}
 
@@ -120,6 +121,7 @@ public class TESmokeRack extends NetworkTileEntity implements IInventory
 		ItemStack is = this.getStackInSlot(i).copy();
 		Food.setDried(is, (int)TFC_Time.getTotalHours()-this.driedCounter[i]);
 		this.setInventorySlotContents(i, null);
+		broadcastPacketInRange();
 		return is;
 	}
 
@@ -155,6 +157,10 @@ public class TESmokeRack extends NetworkTileEntity implements IInventory
 	@Override
 	public void closeInventory()
 	{
+		if(worldObj.isRemote)
+		{
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
 	}
 
 	@Override
@@ -187,5 +193,29 @@ public class TESmokeRack extends NetworkTileEntity implements IInventory
 	public void createInitNBT(NBTTagCompound nbt) 
 	{
 		TFC_Core.writeInventoryToNBT(nbt, storage);
+	}
+
+	public void putStackInSlot(EntityPlayer entityplayer, int i, ItemStack itemstack)
+	{
+		if(TFC_Core.areItemsEqual(storage[i], itemstack)) return;
+		
+		if (itemstack == null)
+		{
+			setInventorySlotContents(i, itemstack);
+		}
+		else
+		{
+			// check if the player has any hanging items in their inventory.
+			ItemStack hangItem = TFC_Core.getItemInInventory(BlockSmokeRack.getCreatedWithItem(), entityplayer.inventory);
+			if (hangItem != null)
+			{
+				setInventorySlotContents(i, itemstack);
+				if(itemstack != null && TFC_Core.areItemsEqual(storage[i], itemstack))
+				{
+					// consume one of the hanging items in the players inventory.
+					entityplayer.inventory.consumeInventoryItem(BlockSmokeRack.getCreatedWithItem());			
+				}
+			}
+		}
 	}
 }

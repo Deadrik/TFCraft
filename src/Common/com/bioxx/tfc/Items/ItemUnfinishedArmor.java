@@ -6,10 +6,12 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
+import com.bioxx.tfc.Render.Item.HeatItemRenderer;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
@@ -40,6 +42,7 @@ public class ItemUnfinishedArmor extends ItemTerra implements ISmeltable
 	public void registerIcons(IIconRegister registerer)
 	{
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", "").replace("Unfinished ", "").replace("Stage2 ", ""));
+		MinecraftForgeClient.registerItemRenderer(this, new HeatItemRenderer());
 	}
 
 	@Override
