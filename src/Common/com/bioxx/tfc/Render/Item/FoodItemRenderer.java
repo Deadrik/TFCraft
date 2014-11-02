@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.api.Food;
+import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class FoodItemRenderer implements IItemRenderer
@@ -53,6 +54,29 @@ public class FoodItemRenderer implements IItemRenderer
 
 			if(type == ItemRenderType.INVENTORY)
 			{
+				if(TFC_ItemHeat.HasTemp(is))
+				{
+					float meltTemp = TFC_ItemHeat.IsCookable(is);
+					float temp = TFC_ItemHeat.GetTemp(is);
+					if(temp > 0 && temp < meltTemp)
+					{
+						renderQuad(1, 1, 13, 1, 0);
+						
+						float tempValue = (13 / meltTemp) * temp;
+						if (tempValue < 0) tempValue = 0;
+						if (tempValue > 13) tempValue = 13;
+						
+						if(temp < meltTemp*0.1F)	// Cold
+							renderQuad(1, 1, tempValue, 1, 0xffffff);						
+						else if(temp >= meltTemp*0.1F && temp < meltTemp*0.4F)	// Warm
+							renderQuad(1, 1, tempValue, 1, 0xff8000);						
+						else if(temp >= meltTemp*0.4F && temp < meltTemp*0.8F)	// Hot
+							renderQuad(1, 1, tempValue, 1, 0xff6000);						
+						else	// VeryHot
+							renderQuad(1, 1, tempValue, 1, 0xff0000);		
+					}
+				}
+			
 				if(((IFood)is.getItem()).renderDecay())
 				{
 					if(decayPerc < 0.10)
