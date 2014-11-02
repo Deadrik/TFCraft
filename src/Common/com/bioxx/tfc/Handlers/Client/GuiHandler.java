@@ -33,6 +33,7 @@ import com.bioxx.tfc.GUI.GuiQuern;
 import com.bioxx.tfc.GUI.GuiQuiver;
 import com.bioxx.tfc.GUI.GuiScreenHorseInventoryTFC;
 import com.bioxx.tfc.GUI.GuiSluice;
+import com.bioxx.tfc.GUI.GuiSmokeRack;
 import com.bioxx.tfc.GUI.GuiVessel;
 import com.bioxx.tfc.GUI.GuiVesselLiquid;
 import com.bioxx.tfc.GUI.GuiWorkbench;
@@ -47,6 +48,7 @@ import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
+import com.bioxx.tfc.TileEntities.TESmokeRack;
 import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TESluice;
@@ -145,6 +147,8 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 			return new GuiLargeVessel(player.inventory, ((TEVessel) te), world, x, y, z, 0);
 		case 47:
 			return new GuiLargeVessel(player.inventory, ((TEVessel) te), world, x, y, z, 1);
+		case 99:
+			return new GuiSmokeRack(player.inventory, (TESmokeRack) te, world, x, y, z);
 		default:
 			return null;
 		}
