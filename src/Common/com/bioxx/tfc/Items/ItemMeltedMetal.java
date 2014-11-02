@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
@@ -16,6 +17,7 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.Render.Item.HeatItemRenderer;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
@@ -37,6 +39,7 @@ public class ItemMeltedMetal extends ItemTerra
 	public void registerIcons(IIconRegister registerer)
 	{
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
+		MinecraftForgeClient.registerItemRenderer(this, new HeatItemRenderer());
 	}
 
 	@Override
