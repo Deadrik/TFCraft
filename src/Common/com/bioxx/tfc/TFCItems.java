@@ -43,6 +43,7 @@ import com.bioxx.tfc.Items.ItemFruitTreeSapling;
 import com.bioxx.tfc.Items.ItemGem;
 import com.bioxx.tfc.Items.ItemGlassBottle;
 import com.bioxx.tfc.Items.ItemIngot;
+import com.bioxx.tfc.Items.ItemJuteFibre;
 import com.bioxx.tfc.Items.ItemLeather;
 import com.bioxx.tfc.Items.ItemLogs;
 import com.bioxx.tfc.Items.ItemLooseRock;
@@ -1585,7 +1586,7 @@ public class TFCItems
 		UnknownUnshaped = new ItemMeltedMetal().setUnlocalizedName("Unknown Unshaped");
 
 		Jute = new ItemTerra().setFolder("plants/").setUnlocalizedName("Jute").setCreativeTab(TFCTabs.TFCMaterials);
-		JuteFibre = new ItemTerra().setFolder("plants/").setUnlocalizedName("Jute Fibre").setCreativeTab(TFCTabs.TFCMaterials);
+		JuteFibre = new ItemJuteFibre().setFolder("plants/").setUnlocalizedName("Jute Fibre").setCreativeTab(TFCTabs.TFCMaterials);
 
 		Items.reeds.setCreativeTab(null);
 		Reeds = new ItemReeds().setUnlocalizedName("Reeds").setCreativeTab(CreativeTabs.tabMaterials).setTextureName("reeds");

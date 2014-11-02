@@ -303,6 +303,7 @@ public class TerraFirmaCraft
 		TFCOptions.enableOreTest = TFCOptions.getBooleanFor(config, "General","enableOreTest", false, "This will generate only ore in your world with nothing else. *Caution Unsupported*");
 		TFCOptions.quiverHUDPosition = TFCOptions.getStringFor(config, "General", "quiverHUDPosition", "bottomleft", "Valid position strings are: bottomleft, left, topleft, bottomright, right, topright");
 		TFCOptions.generateSmoke = TFCOptions.getBooleanFor(config, "General", "generateSmoke", false, "Should forges generate smoke blocks? *Caution Unsupported*");
+		TFCOptions.useJuteFibreForSmokeRack = TFCOptions.getBooleanFor(config, "general", "useJuteFibreForSmokeRack", false, "If true, then jute fibre will be used instead of wool yarn for smoke racks");
 
 		//Time
 		TFCOptions.yearLength = TFCOptions.getIntFor(config, "Time", "yearLength", 96, "This is how many days are in a year. Keep this to multiples of 12.");
