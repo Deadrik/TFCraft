@@ -87,7 +87,7 @@ public class WorldGenRedwoodXL extends WorldGenerator
 		for (int y1 = 0; y1 < height - 3; y1++)
 		{
 			final Block j4 = world.getBlock(x, y + y1, z);
-			if (j4.isAir(world, x, y + y1, z) || j4.isLeaves(world, x, y + y1, z) && j4.canBeReplacedByLeaves(world, x, y + y1, z))
+			if (j4.isAir(world, x, y + y1, z) || j4.isLeaves(world, x, y + y1, z) || j4.canBeReplacedByLeaves(world, x, y + y1, z))
 			{
 				setBlockID(world, x, y+y1, z, blockWood, metaWood);
 				setBlockID(world, x-1, y+y1, z, blockWood, metaWood);
