@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
@@ -17,6 +18,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
+import com.bioxx.tfc.Render.Item.HeatItemRenderer;
 import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -59,6 +61,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	public void registerIcons(IIconRegister registerer)
 	{
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
+		MinecraftForgeClient.registerItemRenderer(this, new HeatItemRenderer());
 	}
 
 	@Override
