@@ -61,4 +61,9 @@ public class BarrelMultiItemRecipe extends BarrelRecipe
 		}
 		return fs;
 	}
+
+    public boolean isKeepstacksize()
+    {
+        return keepstacksize;
+    }
 }
