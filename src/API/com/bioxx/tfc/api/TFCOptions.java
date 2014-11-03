@@ -58,6 +58,8 @@ public class TFCOptions
 	public static int normalOreUnits = 25;
 	public static int richOreUnits = 35;
 
+	public static boolean useJuteFibreForSmokeRack = false;
+	
 	public static String quiverHUDPosition = "bottomleft";
 
 	public static boolean getBooleanFor(Configuration config,String heading, String item, boolean value)
