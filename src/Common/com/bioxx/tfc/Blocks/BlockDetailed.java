@@ -99,7 +99,7 @@ public class BlockDetailed extends BlockPartial
 		if (side != ForgeDirection.UP) // later will be == ForgeDirection.UNKNOWN, when all will implemented
 			return false;
 		
-		TEDetailed te = ((TEDetailed)bAccess.getTileEntity(x, y, z));
+		TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 		int opaqueCount = 0;
 		if (side == ForgeDirection.UP)
 		{
