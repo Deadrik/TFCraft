@@ -3,6 +3,7 @@ package com.bioxx.tfc.Blocks;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bioxx.tfc.api.TFCOptions;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
@@ -96,6 +97,9 @@ public class BlockDetailed extends BlockPartial
 	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
+		if (!TFCOptions.enableDetailedBlockSolidSide)
+			return false;
+
 		TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 
 		int opaqueCount = 0;
@@ -142,9 +146,7 @@ public class BlockDetailed extends BlockPartial
 				return false;
 		}
 
-		// double opaquePercent = (double)opaqueCount / 64 * 100;
-		// return opaquePercent >= 90
-		return opaqueCount >= 57;
+		return ((double)opaqueCount / 64 * 100) >= TFCOptions.detailedBlockSolidSidePercentage;
 	}
 
 	@Override
