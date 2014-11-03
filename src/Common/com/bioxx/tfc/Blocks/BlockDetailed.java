@@ -96,24 +96,55 @@ public class BlockDetailed extends BlockPartial
 	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
-		if (side != ForgeDirection.UP) // later will be == ForgeDirection.UNKNOWN, when all will implemented
-			return false;
-		
 		TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
+
 		int opaqueCount = 0;
-		if (side == ForgeDirection.UP)
+		switch (side)
 		{
-			for (int sub_z = 0; sub_z < 8; ++sub_z)
+			case UP:
+				for (int sub_z = 0; sub_z < 8; ++sub_z)
+					for (int sub_x = 0; sub_x < 8; ++sub_x)
+						if (te.getBlockExists(sub_x, 7, sub_z))
+							++opaqueCount;
+				break;
+			case DOWN:
+				for (int sub_z = 0; sub_z < 8; ++sub_z)
+					for (int sub_x = 0; sub_x < 8; ++sub_x)
+						if (te.getBlockExists(sub_x, 0, sub_z))
+							++opaqueCount;
+				break;
+			case NORTH:
 				for (int sub_x = 0; sub_x < 8; ++sub_x)
-					if (te.getBlockExists(sub_x, 7, sub_z))
-						++opaqueCount;
+					for (int sub_y = 0; sub_y < 8; ++sub_y)
+						if (te.getBlockExists(sub_x, sub_y, 0))
+							++opaqueCount;
+				break;
+			case SOUTH:
+				for (int sub_x = 0; sub_x < 8; ++sub_x)
+					for (int sub_y = 0; sub_y < 8; ++sub_y)
+						if (te.getBlockExists(sub_x, sub_y, 7))
+							++opaqueCount;
+				break;
+			case WEST:
+				for (int sub_z = 0; sub_z < 8; ++sub_z)
+					for (int sub_y = 0; sub_y < 8; ++sub_y)
+						if (te.getBlockExists(0, sub_y, sub_z))
+							++opaqueCount;
+				break;
+			case EAST:
+				for (int sub_z = 0; sub_z < 8; ++sub_z)
+					for (int sub_y = 0; sub_y < 8; ++sub_y)
+						if (te.getBlockExists(7, sub_y, sub_z))
+							++opaqueCount;
+				break;
+			case UNKNOWN:
+			default:
+				return false;
 		}
 
 		// double opaquePercent = (double)opaqueCount / 64 * 100;
-		// if (opaquePercent >= 90)
-		if (opaqueCount >= 57)
-			return true;
-		return false;
+		// return opaquePercent >= 90
+		return opaqueCount >= 57;
 	}
 
 	@Override
