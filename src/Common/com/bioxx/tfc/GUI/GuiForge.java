@@ -39,8 +39,16 @@ public class GuiForge extends GuiContainer
 
 		int i1 = ForgeEntity.getTemperatureScaled(49);
 		drawTexturedModalRect(w + 8, h + 65 - i1, 185, 31, 15, 6);
-		
+
 		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
+	}
+
+	@Override
+	protected boolean checkHotbarKeys(int keycode)
+	{
+		//Disabled to prevent players placing stacks into the forge
+		// return super.checkHotbarKeys(keycode);
+		return false;
 	}
 
 	@Override
