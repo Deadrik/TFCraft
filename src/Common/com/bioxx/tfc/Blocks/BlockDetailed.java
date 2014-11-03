@@ -92,6 +92,29 @@ public class BlockDetailed extends BlockPartial
 	{
 		return false;
 	}
+	
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
+	{
+		if (side != ForgeDirection.UP) // later will be == ForgeDirection.UNKNOWN, when all will implemented
+			return false;
+		
+		TEDetailed te = ((TEDetailed)bAccess.getTileEntity(x, y, z));
+		int opaqueCount = 0;
+		if (side == ForgeDirection.UP)
+		{
+			for (int sub_z = 0; sub_z < 8; ++sub_z)
+				for (int sub_x = 0; sub_x < 8; ++sub_x)
+					if (te.getBlockExists(sub_x, 7, sub_z))
+						++opaqueCount;
+		}
+
+		// double opaquePercent = (double)opaqueCount / 64 * 100;
+		// if (opaquePercent >= 90)
+		if (opaqueCount >= 57)
+			return true;
+		return false;
+	}
 
 	@Override
 	public boolean renderAsNormalBlock()
