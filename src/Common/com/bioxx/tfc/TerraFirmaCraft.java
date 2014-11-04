@@ -304,7 +304,7 @@ public class TerraFirmaCraft
 		TFCOptions.quiverHUDPosition = TFCOptions.getStringFor(config, "General", "quiverHUDPosition", "bottomleft", "Valid position strings are: bottomleft, left, topleft, bottomright, right, topright");
 		TFCOptions.generateSmoke = TFCOptions.getBooleanFor(config, "General", "generateSmoke", false, "Should forges generate smoke blocks? *Caution Unsupported*");
 		TFCOptions.enableDetailedBlockSolidSide = TFCOptions.getBooleanFor(config, "General", "enableDetailedBlockSolidSide", true, "Should sides of Detailed blocks be considered as solid?");
-		TFCOptions.detailedBlockSolidSidePercentage = TFCOptions.getDoubleFor(config, "General", "detailedBlockSolidSidePercentage", 90.0, "Percentage of opaque sub-blocks on the side");
+		TFCOptions.maxCountOfTranspSubBlocksOnSide = TFCOptions.getIntFor(config, "General", "maxCountOfTranspSubBlocksOnSide", 12, "Maximum count of transparent sub-blocks on side: 0..64");
 
 		//Time
 		TFCOptions.yearLength = TFCOptions.getIntFor(config, "Time", "yearLength", 96, "This is how many days are in a year. Keep this to multiples of 12.");

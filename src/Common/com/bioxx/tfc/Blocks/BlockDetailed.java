@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bioxx.tfc.api.TFCOptions;
+import ibxm.Player;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -99,52 +101,29 @@ public class BlockDetailed extends BlockPartial
 	{
 		if (!TFCOptions.enableDetailedBlockSolidSide)
 			return false;
+		if (side == ForgeDirection.UNKNOWN)
+			return false;
+
+		int transpCount = TFCOptions.maxCountOfTranspSubBlocksOnSide;
+		if (transpCount < 0 || transpCount >= 64)
+			return false;
 
 		TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 
-		int tranCount = 64 - TFCOptions.minCountOfSolidSubBlocksOnSide;
-		switch (side)
-		{
-			case UP:
-				for (int sub_z = 0; sub_z < 8; ++sub_z)
-					for (int sub_x = 0; sub_x < 8; ++sub_x)
-						if (!te.getBlockExists(sub_x, 7, sub_z) && --tranCount < 0)
-							return false;
-				break;
-			case DOWN:
-				for (int sub_z = 0; sub_z < 8; ++sub_z)
-					for (int sub_x = 0; sub_x < 8; ++sub_x)
-						if (te.getBlockExists(sub_x, 0, sub_z) && --tranCount < 0)
-							return false;
-				break;
-			case NORTH:
-				for (int sub_x = 0; sub_x < 8; ++sub_x)
-					for (int sub_y = 0; sub_y < 8; ++sub_y)
-						if (te.getBlockExists(sub_x, sub_y, 0) && --tranCount < 0)
-							return false;
-				break;
-			case SOUTH:
-				for (int sub_x = 0; sub_x < 8; ++sub_x)
-					for (int sub_y = 0; sub_y < 8; ++sub_y)
-						if (te.getBlockExists(sub_x, sub_y, 7) && --tranCount < 0)
-							return false;
-				break;
-			case WEST:
-				for (int sub_z = 0; sub_z < 8; ++sub_z)
-					for (int sub_y = 0; sub_y < 8; ++sub_y)
-						if (te.getBlockExists(0, sub_y, sub_z) && --tranCount < 0)
-							return false;
-				break;
-			case EAST:
-				for (int sub_z = 0; sub_z < 8; ++sub_z)
-					for (int sub_y = 0; sub_y < 8; ++sub_y)
-						if (te.getBlockExists(7, sub_y, sub_z) && --tranCount < 0)
-							return false;
-				break;
-			case UNKNOWN:
-			default:
-				return false;
-		}
+		int start_x = (side == ForgeDirection.EAST ? 7 : 0);
+		int end_x = (side == ForgeDirection.WEST ? 1 : 8);
+
+		int start_y = (side == ForgeDirection.UP ? 7 : 0);
+		int end_y = (side == ForgeDirection.DOWN ? 1 : 8);
+
+		int start_z = (side == ForgeDirection.SOUTH ? 7 : 0);
+		int end_z = (side == ForgeDirection.NORTH ? 1 : 8);
+
+		for (int sub_x = start_x; sub_x < end_x; ++sub_x)
+			for (int sub_y = start_y; sub_y < end_y; ++sub_y)
+				for (int sub_z = start_z; sub_z < end_z; ++sub_z)
+					if (!te.getBlockExists(sub_x, sub_y, sub_z) && --transpCount < 0)
+						return false;
 
 		return true;
 	}
