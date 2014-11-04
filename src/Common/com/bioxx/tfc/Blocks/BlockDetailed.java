@@ -102,51 +102,51 @@ public class BlockDetailed extends BlockPartial
 
 		TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 
-		int opaqueCount = 0;
+		int tranCount = 64 - TFCOptions.minCountOfSolidSubBlocksOnSide;
 		switch (side)
 		{
 			case UP:
 				for (int sub_z = 0; sub_z < 8; ++sub_z)
 					for (int sub_x = 0; sub_x < 8; ++sub_x)
-						if (te.getBlockExists(sub_x, 7, sub_z))
-							++opaqueCount;
+						if (!te.getBlockExists(sub_x, 7, sub_z) && --tranCount < 0)
+							return false;
 				break;
 			case DOWN:
 				for (int sub_z = 0; sub_z < 8; ++sub_z)
 					for (int sub_x = 0; sub_x < 8; ++sub_x)
-						if (te.getBlockExists(sub_x, 0, sub_z))
-							++opaqueCount;
+						if (te.getBlockExists(sub_x, 0, sub_z) && --tranCount < 0)
+							return false;
 				break;
 			case NORTH:
 				for (int sub_x = 0; sub_x < 8; ++sub_x)
 					for (int sub_y = 0; sub_y < 8; ++sub_y)
-						if (te.getBlockExists(sub_x, sub_y, 0))
-							++opaqueCount;
+						if (te.getBlockExists(sub_x, sub_y, 0) && --tranCount < 0)
+							return false;
 				break;
 			case SOUTH:
 				for (int sub_x = 0; sub_x < 8; ++sub_x)
 					for (int sub_y = 0; sub_y < 8; ++sub_y)
-						if (te.getBlockExists(sub_x, sub_y, 7))
-							++opaqueCount;
+						if (te.getBlockExists(sub_x, sub_y, 7) && --tranCount < 0)
+							return false;
 				break;
 			case WEST:
 				for (int sub_z = 0; sub_z < 8; ++sub_z)
 					for (int sub_y = 0; sub_y < 8; ++sub_y)
-						if (te.getBlockExists(0, sub_y, sub_z))
-							++opaqueCount;
+						if (te.getBlockExists(0, sub_y, sub_z) && --tranCount < 0)
+							return false;
 				break;
 			case EAST:
 				for (int sub_z = 0; sub_z < 8; ++sub_z)
 					for (int sub_y = 0; sub_y < 8; ++sub_y)
-						if (te.getBlockExists(7, sub_y, sub_z))
-							++opaqueCount;
+						if (te.getBlockExists(7, sub_y, sub_z) && --tranCount < 0)
+							return false;
 				break;
 			case UNKNOWN:
 			default:
 				return false;
 		}
 
-		return ((double)opaqueCount / 64 * 100) >= TFCOptions.detailedBlockSolidSidePercentage;
+		return true;
 	}
 
 	@Override
