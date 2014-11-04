@@ -73,7 +73,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	public float colour_mod = 1;	//what the animal looks like
 	public float climate_mod = 1;	//climate adaptability
 	public float hard_mod = 1;		//hardiness
-	
+
 	protected float mateSizeMod = 0;
 	protected float mateStrengthMod = 0;
 	protected float mateAggroMod = 0;
@@ -230,8 +230,13 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		super.onLivingUpdate();
 		TFC_Core.PreventEntityDataUpdate = false;
 
-		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead)
+		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead){
+
 			this.heal(1);
+		}
+		else if(hunger < 144000 && super.isInLove()){
+			this.setInLove(false);
+		}
 	}
 
 	private float getPercentGrown(IAnimal animal)
@@ -275,18 +280,19 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 						TFC_Core.getByteFromSmallFloat(hard_mod),
 						(byte)familiarity
 				};
-				this.dataWatcher.updateObject(22, ByteBuffer.wrap(values).getInt());
-				this.dataWatcher.updateObject(23, ByteBuffer.wrap(values).getInt());
+				ByteBuffer buf = ByteBuffer.wrap(values);
+				this.dataWatcher.updateObject(24, buf.getInt());
+				this.dataWatcher.updateObject(23, buf.getInt());
 			}
 			else
 			{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
-				
+
 				ByteBuffer buf = ByteBuffer.allocate(Long.SIZE / Byte.SIZE);
-				buf.putInt(this.dataWatcher.getWatchableObjectInt(22));
+				buf.putInt(this.dataWatcher.getWatchableObjectInt(24));
 				buf.putInt(this.dataWatcher.getWatchableObjectInt(23));
 				byte[] values = buf.array();
-				
+
 				size_mod = TFC_Core.getSmallFloatFromByte(values[0]);
 				strength_mod = TFC_Core.getSmallFloatFromByte(values[1]);
 				aggression_mod = TFC_Core.getSmallFloatFromByte(values[2]);
@@ -294,7 +300,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				colour_mod = TFC_Core.getSmallFloatFromByte(values[4]);
 				climate_mod = TFC_Core.getSmallFloatFromByte(values[5]);
 				hard_mod = TFC_Core.getSmallFloatFromByte(values[6]);
-				
+
 				familiarity = values[7];
 			}
 		}
@@ -306,8 +312,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		super.entityInit();	
 		this.dataWatcher.addObject(13, new Integer(0)); //sex (1 or 0)
 		this.dataWatcher.addObject(15, Integer.valueOf(0));		//age
-		
-		this.dataWatcher.addObject(22, Integer.valueOf(0));	//Size, strength, aggression, obedience
+
+		this.dataWatcher.addObject(24, Integer.valueOf(0));	//Size, strength, aggression, obedience. EntityHorse uses 22
 		this.dataWatcher.addObject(23, Integer.valueOf(0));	//Colour, climate, hardiness, familiarity
 	}
 
@@ -878,7 +884,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	{
 		return !pregnant && isFood(item);
 	}
-	
+
 	@Override
 	public boolean isFood(ItemStack item) {
 		return item != null && (item.getItem() == TFCItems.WheatGrain ||item.getItem() == TFCItems.OatGrain||item.getItem() == TFCItems.RiceGrain||
@@ -1145,7 +1151,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if((this.riddenByEntity == null || !this.riddenByEntity.equals(ep)) && !familiarizedToday && stack != null && this.isBreedingItemTFC(stack)  && ((isAdult() && familiarity < 50) || !isAdult())){
+		if((this.riddenByEntity == null || !this.riddenByEntity.equals(ep)) && !familiarizedToday && stack != null && this.isFood(stack)  && ((isAdult() && familiarity < 50) || !isAdult())){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));

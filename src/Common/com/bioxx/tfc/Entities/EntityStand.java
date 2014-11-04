@@ -82,6 +82,11 @@ public class EntityStand extends EntityLiving
 	public boolean canBePushed(){
 		return true;
 	}
+	
+	@Override
+	public boolean canDespawn(){
+		return false;
+	}
 
 	@Override
 	public void onLivingUpdate(){

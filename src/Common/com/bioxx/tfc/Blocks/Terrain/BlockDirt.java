@@ -12,6 +12,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -116,6 +117,13 @@ public class BlockDirt extends BlockTerra
 	public int tickRate(World world)
 	{
 		return 3;
+	}
+
+	@Override
+	public void onBlockExploded(World world, int x, int y, int z, Explosion explosion)
+	{
+		world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+		onBlockDestroyedByExplosion(world, x, y, z, explosion);
 	}
 
 	private void tryToFall(World world, int x, int y, int z)

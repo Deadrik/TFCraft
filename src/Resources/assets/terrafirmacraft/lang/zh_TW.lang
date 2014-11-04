@@ -44,11 +44,11 @@ entity.fishTFC.name=鱸魚
 #==========
 #= Entity =
 #==========
-entity.notFamiliar=
-fishingRod.lineTension=
-fishingRod.lineSnap=
-fishingRod.bite=
-fishingRod.gotAway=
+entity.notFamiliar=這隻動物不會理你。
+fishingRod.lineTension=線快被拉斷了！
+fishingRod.lineSnap=線被扯斷了！
+fishingRod.bite=噢！被咬了一口！
+fishingRod.gotAway=牠跑掉了...
 
 #================
 #= Achievements =
@@ -90,7 +90,7 @@ achievement.achPokeCreeper.desc=用木棍戳兇惡的爬行動物！
 commands.transferTamed.noTamed=範圍內無有效的動物！
 commands.transferTamed.tooMany=範圍內動物過多！
 commands.transferTamed.wrongOwner=這並不屬於你！
-commands.transferTamed.sameTarget=你無法轉讓給自己！
+commands.transferTamed.sameTarget=你無法佔有牠！
 commands.transferTamed.display.incoming=%s將一個動物轉讓給你！
 commands.transferTamed.display.outgoing=你將一個動物轉讓給%s！
 commands.transferTamed.wrongSender=你無法轉讓動物！
@@ -216,7 +216,7 @@ item.Porkchop.name=豬肉
 item.Chicken.name=雞肉
 item.Venison.name=鹿肉
 item.HorseMeat.name=馬肉
-item.Egg Cooked.name=熟雞蛋
+item.Egg Cooked.name=荷包蛋
 
 item.Soybeans.name=黃豆
 item.Seeds Soybean.name=黃豆籽
@@ -259,7 +259,7 @@ item.RyeWhiskey.name=黑麥威士忌
 item.Sake.name=清酒
 item.Vodka.name=伏特加
 item.Whiskey.name=威士忌
-item.CornWhiskey.name=
+item.CornWhiskey.name=玉米威士忌
 
 #===========
 #= Pottery =
@@ -279,11 +279,11 @@ item.Jug.Water Jug.name=裝水水壺
 item.Pot.Clay Pot.name=黏土鍋
 item.Pot.Ceramic Pot.name=陶鍋
 
-item.Small Vessel.Clay Vessel.name=黏土瓶
-item.Small Vessel.Ceramic Vessel.name=陶瓶
+item.Small Vessel.Clay Vessel.name=黏土罐
+item.Small Vessel.Ceramic Vessel.name=陶罐
 
-item.Large Vessel.Clay Vessel [Large].name=大黏土瓶
-item.Large Vessel.Ceramic Vessel [Large].name=大陶瓶
+item.Large Vessel.Clay Vessel [Large].name=大黏土罐
+item.Large Vessel.Ceramic Vessel [Large].name=大陶罐
 
 item.Mold.Clay Mold.name=黏土模具
 item.Mold.Ceramic Mold.name=陶模
@@ -1173,23 +1173,23 @@ tile.ArmourStand.White Cedar.name=香柏盔甲架
 tile.ArmourStand.White Elm.name=榆樹盔甲架
 tile.ArmourStand.Willow.name=柳樹盔甲架
 
-tile.WoodSupportV2.Acacia.name=金合歡橫樑
-tile.WoodSupportV.Ash.name=梣樹橫樑
-tile.WoodSupportV.Aspen.name=白楊橫樑
-tile.WoodSupportV.Birch.name=樺木橫樑
-tile.WoodSupportV.Chestnut.name=栗樹橫樑
-tile.WoodSupportV.Douglas Fir.name=花旗松橫樑
-tile.WoodSupportV.Hickory.name=山胡桃橫樑
-tile.WoodSupportV.Kapok.name=木棉橫樑
-tile.WoodSupportV.Maple.name=楓樹橫樑
-tile.WoodSupportV.Oak.name=橡木橫樑
-tile.WoodSupportV.Pine.name=松木橫樑
-tile.WoodSupportV.Sequoia.name=加州紅木橫樑
-tile.WoodSupportV.Spruce.name=雲山橫樑
-tile.WoodSupportV.Sycamore.name=梧桐橫樑
-tile.WoodSupportV.White Cedar.name=香柏橫樑
-tile.WoodSupportV.White Elm.name=榆樹橫樑
-tile.WoodSupportV.Willow.name=柳樹橫樑
+tile.WoodSupportV2.Acacia.name=金合歡支柱
+tile.WoodSupportV.Ash.name=梣樹支柱
+tile.WoodSupportV.Aspen.name=白楊支柱
+tile.WoodSupportV.Birch.name=樺木支柱
+tile.WoodSupportV.Chestnut.name=栗樹支柱
+tile.WoodSupportV.Douglas Fir.name=花旗松支柱
+tile.WoodSupportV.Hickory.name=山胡桃支柱
+tile.WoodSupportV.Kapok.name=木棉支柱
+tile.WoodSupportV.Maple.name=楓樹支柱
+tile.WoodSupportV.Oak.name=橡木支柱
+tile.WoodSupportV.Pine.name=松木支柱
+tile.WoodSupportV.Sequoia.name=加州紅木支柱
+tile.WoodSupportV.Spruce.name=雲山支柱
+tile.WoodSupportV.Sycamore.name=梧桐支柱
+tile.WoodSupportV.White Cedar.name=香柏支柱
+tile.WoodSupportV.White Elm.name=榆樹支柱
+tile.WoodSupportV.Willow.name=柳樹支柱
 
 tile.Toolrack.Acacia.name=金合歡工具架
 tile.Toolrack.Ash.name=梣樹工具架
@@ -1573,15 +1573,15 @@ item.Wrought Iron Tuyere.name=熟鐵風口
 
 #== Armor ==
 #=== Helmet ===
-item.Bismuth Bronze Unfinished Helmet.name=第一階段未完成鉍銅頭盔
-item.Black Bronze Unfinished Helmet.name=第一階段未完成黑銅頭盔
-item.Black Steel Unfinished Helmet.name=第一階段未完成黑鋼頭盔
-item.Blue Steel Unfinished Helmet.name=第一階段未完成藍鋼頭盔
-item.Bronze Unfinished Helmet.name=第一階段未完成青銅頭盔
-item.Copper Unfinished Helmet.name=第一階段未完成銅頭盔
-item.Red Steel Unfinished Helmet.name=第一階段未完成紅鋼頭盔
-item.Steel Unfinished Helmet.name=第一階段未完成鋼鐵頭盔
-item.Wrought Iron Unfinished Helmet.name=第一階段未完成熟鐵頭盔
+item.Bismuth Bronze Unfinished Helmet.name=未完成鉍銅頭盔
+item.Black Bronze Unfinished Helmet.name=未完成黑銅頭盔
+item.Black Steel Unfinished Helmet.name=未完成黑鋼頭盔
+item.Blue Steel Unfinished Helmet.name=未完成藍鋼頭盔
+item.Bronze Unfinished Helmet.name=未完成青銅頭盔
+item.Copper Unfinished Helmet.name=未完成銅頭盔
+item.Red Steel Unfinished Helmet.name=未完成紅鋼頭盔
+item.Steel Unfinished Helmet.name=未完成鋼鐵頭盔
+item.Wrought Iron Unfinished Helmet.name=未完成熟鐵頭盔
 item.Bismuth Bronze Helmet.name=鉍銅頭盔
 item.Black Bronze Helmet.name=黑銅頭盔
 item.Black Steel Helmet.name=黑鋼頭盔
@@ -1594,15 +1594,15 @@ item.Wrought Iron Helmet.name=熟鐵頭盔
 item.helmetCloth.name=皮帽
 
 #=== Chestplate ===
-item.Bismuth Bronze Unfinished Chestplate.name=第一階段未完成鉍銅胸甲
-item.Black Bronze Unfinished Chestplate.name=第一階段未完成黑銅胸甲
-item.Black Steel Unfinished Chestplate.name=第一階段未完成黑鋼胸甲
-item.Blue Steel Unfinished Chestplate.name=第一階段未完成藍鋼胸甲
-item.Bronze Unfinished Chestplate.name=第一階段未完成青銅胸甲
-item.Copper Unfinished Chestplate.name=第一階段未完成銅胸甲
-item.Red Steel Unfinished Chestplate.name=第一階段未完成紅鋼胸甲
-item.Steel Unfinished Chestplate.name=第一階段未完成鋼鐵胸甲
-item.Wrought Iron Unfinished Chestplate.name=第一階段未完成熟鐵胸甲
+item.Bismuth Bronze Unfinished Chestplate.name=未完成鉍銅胸甲
+item.Black Bronze Unfinished Chestplate.name=未完成黑銅胸甲
+item.Black Steel Unfinished Chestplate.name=未完成黑鋼胸甲
+item.Blue Steel Unfinished Chestplate.name=未完成藍鋼胸甲
+item.Bronze Unfinished Chestplate.name=未完成青銅胸甲
+item.Copper Unfinished Chestplate.name=未完成銅胸甲
+item.Red Steel Unfinished Chestplate.name=未完成紅鋼胸甲
+item.Steel Unfinished Chestplate.name=未完成鋼鐵胸甲
+item.Wrought Iron Unfinished Chestplate.name=未完成熟鐵胸甲
 item.Bismuth Bronze Chestplate.name=鉍銅胸甲
 item.Black Bronze Chestplate.name=黑銅胸甲
 item.Black Steel Chestplate.name=黑鋼胸甲
@@ -1615,15 +1615,15 @@ item.Wrought Iron Chestplate.name=熟鐵胸甲
 item.chestplateCloth.name=皮衣
 
 #=== Greaves ===
-item.Bismuth Bronze Unfinished Greaves.name=第一階段未完成鉍銅脛甲
-item.Black Bronze Unfinished Greaves.name=第一階段未完成黑銅脛甲
-item.Black Steel Unfinished Greaves.name=第一階段未完成黑鋼脛甲
-item.Blue Steel Unfinished Greaves.name=第一階段未完成藍鋼脛甲
-item.Bronze Unfinished Greaves.name=第一階段未完成青銅脛甲
-item.Copper Unfinished Greaves.name=第一階段未完成銅脛甲
-item.Red Steel Unfinished Greaves.name=第一階段未完成紅鋼脛甲
-item.Steel Unfinished Greaves.name=第一階段未完成鋼鐵脛甲
-item.Wrought Iron Unfinished Greaves.name=第一階段未完成熟鐵脛甲
+item.Bismuth Bronze Unfinished Greaves.name=未完成鉍銅脛甲
+item.Black Bronze Unfinished Greaves.name=未完成黑銅脛甲
+item.Black Steel Unfinished Greaves.name=未完成黑鋼脛甲
+item.Blue Steel Unfinished Greaves.name=未完成藍鋼脛甲
+item.Bronze Unfinished Greaves.name=未完成青銅脛甲
+item.Copper Unfinished Greaves.name=未完成銅脛甲
+item.Red Steel Unfinished Greaves.name=未完成紅鋼脛甲
+item.Steel Unfinished Greaves.name=未完成鋼鐵脛甲
+item.Wrought Iron Unfinished Greaves.name=未完成熟鐵脛甲
 item.Bismuth Bronze Greaves.name=鉍銅脛甲
 item.Black Bronze Greaves.name=黑銅脛甲
 item.Black Steel Greaves.name=黑鋼脛甲
@@ -1636,15 +1636,15 @@ item.Wrought Iron Greaves.name=熟鐵脛甲
 item.leggingsCloth.name=皮褲
 
 #=== Boots ===
-item.Bismuth Bronze Unfinished Boots.name=第一階段未完成鉍銅靴
-item.Black Bronze Unfinished Boots.name=第一階段未完成黑銅靴
-item.Black Steel Unfinished Boots.name=第一階段未完成黑鋼靴
-item.Blue Steel Unfinished Boots.name=第一階段未完成藍鋼靴
-item.Bronze Unfinished Boots.name=第一階段未完成青銅靴
-item.Copper Unfinished Boots.name=第一階段未完成銅靴
-item.Red Steel Unfinished Boots.name=第一階段未完成紅鋼靴
-item.Steel Unfinished Boots.name=第一階段未完成鋼鐵靴
-item.Wrought Iron Unfinished Boots.name=第一階段未完成熟鐵靴
+item.Bismuth Bronze Unfinished Boots.name=未完成鉍銅靴
+item.Black Bronze Unfinished Boots.name=未完成黑銅靴
+item.Black Steel Unfinished Boots.name=未完成黑鋼靴
+item.Blue Steel Unfinished Boots.name=未完成藍鋼靴
+item.Bronze Unfinished Boots.name=未完成青銅靴
+item.Copper Unfinished Boots.name=未完成銅靴
+item.Red Steel Unfinished Boots.name=未完成紅鋼靴
+item.Steel Unfinished Boots.name=未完成鋼鐵靴
+item.Wrought Iron Unfinished Boots.name=未完成熟鐵靴
 item.Bismuth Bronze Boots.name=鉍銅靴
 item.Black Bronze Boots.name=黑銅靴
 item.Black Steel Boots.name=黑鋼靴
@@ -1848,7 +1848,7 @@ item.stick.name=木棍
 item.coal.coal.name=煤炭
 item.coal.charcoal.name=木炭
 item.Fertilizer.name=肥料
-item.Reeds.name=甘蔗
+item.Reeds.name=蘆葦
 
 item.Wooden Bucket Empty.name=空木桶
 item.Wooden Bucket Water.name=淡水木桶
@@ -1872,7 +1872,7 @@ item.Firestarter.name=起火器
 
 item.Quern.name=磨石
 item.Blueprint.name=藍圖
-item.Nametag.name=
+item.Nametag.name=命名牌
 item.WoolYarn.name=羊毛紗
 item.Wool.name=羊毛
 item.WoolCloth.name=羊毛布
@@ -1961,6 +1961,15 @@ tile.Flowers2.flower_tulip_white.name=白色鬱金香
 tile.Flowers2.flower_tulip_pink.name=粉色鬱金香
 tile.Flowers2.flower_oxeye_daisy.name=雛菊
 
+tile.SaltWater.name=流動的鹹水
+tile.SaltWaterStationary.name=鹹水
+tile.FreshWater.name=流動的淡水
+tile.FreshWaterStationary.name=淡水
+tile.HotWater.name=流動的熱水
+tile.HotWaterStationary.name=熱水
+tile.Lava.name=流動的岩漿
+tile.LavaStationary.name=岩漿
+
 #=======
 #= GUI =
 #=======
@@ -2026,7 +2035,7 @@ gui.Anvil.Rule42=最後三次彎曲
 gui.Anvil.Rule43=非最後一次彎曲
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=強化
+gui.Armor.Advanced=進階
 gui.Armor.Shift=Shift
 gui.Armor.ForgedBy=打造自
 gui.Armor.Hold=按住
@@ -2034,7 +2043,7 @@ gui.Armor.Crush=破碎
 gui.Armor.Pierce=貫通
 gui.Armor.Slash=切斷
 
-gui.Bow.Advanced=強化
+gui.Bow.Advanced=進階
 gui.Bow.Javelins=標槍
 gui.Bow.Arrows=箭矢
 gui.Bow.ForgedBy=打造自
@@ -2174,10 +2183,11 @@ gui.plans.sword=劍
 gui.plans.tuyere=風口
 gui.plans.grill=烤架
 gui.plans.shears=剪刀
+gui.plans.trapdoor=地板門
 
 #== Misc GUI ==
 gui.Blueprint=藍圖
-gui.Nametag=
+gui.Nametag=命名牌
 gui.fertilized=已施肥
 gui.Inventory=物品欄
 gui.ClearSlot=清除輸出格
@@ -2191,8 +2201,8 @@ gui.Workbench.Crafting=製作
 gui.ShowHelp=§8幫助：(長按 §fShift§8)
 gui.Help=§8幫助：
 gui.Clay.Inst0=手持五塊§b右鍵§7來塑形
-gui.Knife.Inst0=
-gui.Knife.Inst1=
+gui.Knife.Inst0=對一個方塊頂部§b右鍵§7
+gui.Knife.Inst1=來製作一個調理桌
 gui.Leather.Inst0=持刀§b右鍵§7來分切
 gui.LooseRock.Inst0=手持至少兩塊§b右鍵§7以鑿製
 gui.MeltedMetal.Inst0=§b右鍵§7以注入模具或混合金屬
@@ -2288,14 +2298,14 @@ skill.toolsmith=工具鍛造技術
 skill.weaponsmith=武器鍛造技術
 skill.agriculture=農業耕種技術
 skill.cooking=食物料理技術
-skill.prospecting=
-skill.butchering=
+skill.prospecting=礦物探勘技術
+skill.butchering=動物屠宰技術
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
-fluid.freshwater=清水
-fluid.saltwater=鹽水
+fluid.freshwater=淡水
+fluid.saltwater=鹹水
 fluid.lavatfc=岩漿
 fluid.hotwater=熱水
 fluid.beer=啤酒
@@ -2305,7 +2315,7 @@ fluid.ryewhiskey=黑麥威士忌
 fluid.sake=清酒
 fluid.vodka=伏特加
 fluid.whiskey=威士忌
-fluid.cornwhiskey=
+fluid.cornwhiskey=玉米威士忌
 fluid.milk=牛奶
 fluid.milkcurdled=凝固的牛奶
 fluid.limewater=石灰水
@@ -2319,59 +2329,59 @@ gui.taste.sweet=甜
 gui.taste.sour=酸
 gui.taste.salty=鹹
 gui.taste.bitter=苦
-gui.taste.savory=香
+gui.taste.savory=味道不錯
 
 gui.taste.novice.sweet1=甜
 gui.taste.novice.sweet0=不甜
 gui.taste.novice.sour1=酸
 gui.taste.novice.sour0=不酸
 gui.taste.novice.salty1=鹹
-gui.taste.novice.salty0=沒鹹味
+gui.taste.novice.salty0=不鹹
 gui.taste.novice.bitter1=苦
 gui.taste.novice.bitter0=不苦
-gui.taste.novice.savory1=香
-gui.taste.novice.savory0=沒香味
+gui.taste.novice.savory1=味道不錯
+gui.taste.novice.savory0=無味
 
 gui.taste.adept.sweet0=不甜
-gui.taste.adept.sweet1=甜度適中
+gui.taste.adept.sweet1=稍甜
 gui.taste.adept.sweet2=甜
 gui.taste.adept.sweet3=很甜
 gui.taste.adept.sweet4=非常甜
 gui.taste.adept.sweet5=超甜
 gui.taste.adept.sour0=不酸
-gui.taste.adept.sour1=酸度適中
+gui.taste.adept.sour1=稍酸
 gui.taste.adept.sour2=酸
 gui.taste.adept.sour3=很酸
 gui.taste.adept.sour4=非常酸
 gui.taste.adept.sour5=超酸
-gui.taste.adept.salty0=沒鹹味
-gui.taste.adept.salty1=鹹度適中
+gui.taste.adept.salty0=不鹹
+gui.taste.adept.salty1=稍有鹹味
 gui.taste.adept.salty2=鹹
 gui.taste.adept.salty3=很鹹
 gui.taste.adept.salty4=非常鹹
 gui.taste.adept.salty5=超鹹
 gui.taste.adept.bitter0=不苦
-gui.taste.adept.bitter1=苦味適中
+gui.taste.adept.bitter1=稍苦
 gui.taste.adept.bitter2=苦
 gui.taste.adept.bitter3=很苦
 gui.taste.adept.bitter4=非常苦
 gui.taste.adept.bitter5=超苦
-gui.taste.adept.savory0=沒香味
-gui.taste.adept.savory1=香味適中
-gui.taste.adept.savory2=香
-gui.taste.adept.savory3=很香
-gui.taste.adept.savory4=非常香
-gui.taste.adept.savory5=超香
+gui.taste.adept.savory0=無味
+gui.taste.adept.savory1=稍微香
+gui.taste.adept.savory2=味道不錯
+gui.taste.adept.savory3=頗美味
+gui.taste.adept.savory4=相當美味
+gui.taste.adept.savory5=非常美味
 
-gui.taste.0=
-gui.taste.1=
-gui.taste.2=
-gui.taste.3=
-gui.taste.4=
-gui.taste.5=
-gui.taste.6=
-gui.taste.7=
-gui.taste.8=
+gui.taste.0=完全不
+gui.taste.1=不怎麼
+gui.taste.2=稍微
+gui.taste.3=適當的
+gui.taste.4=完美的
+gui.taste.5=過度的
+gui.taste.6=非常
+gui.taste.7=極度的
+gui.taste.8=離譜的
 
 gui.skill.novice=新手
 gui.skill.adept=熟手
@@ -2382,16 +2392,16 @@ tile.MetalTrapDoor.name=地板門
 item.Mud Brick.name=泥磚
 item.Wet Mud Brick.name=濕泥磚
 gui.overburdened=*負擔過重*
-gui.slot=插槽
-gui.slot.back=退回
+gui.slot=格子
+gui.slot.back=背部
 word.pickled=醃製
-word.brined=鹽漬
+word.brined=鹽醃
 word.cooked=熟
-word.salted=鹹
+word.salted=鹽漬
 word.smoked=煙燻
-word.dried=乾燥
+word.dried=風乾
 gui.barrel.pickling=醃製中
-gui.barrel.brining=鹽漬中
+gui.barrel.brining=鹽醃中
 tile.Vessel.name=大壺
 tile.Grill.name=烤架
 food.cooked.rare=生的
@@ -2399,18 +2409,18 @@ food.cooked.medrare=三分熟
 food.cooked.med=五分熟
 food.cooked.medwell=七分熟
 food.cooked.well=全熟
-food.cooked.0=很亮
-food.cooked.1=亮
-food.cooked.2=中等
-food.cooked.3=暗
-food.cooked.4=很暗
+food.cooked.0=微烤
+food.cooked.1=輕烤
+food.cooked.2=烤熟
+food.cooked.3=微焦
+food.cooked.4=焦黑
 gui.FoodPrep.Sandwich=三明治
 gui.FoodPrep.Salad=沙拉
-item.Sandwich.name=
+item.Sandwich.name=三明治
 item.Salad.name=沙拉
-item.ClayBowl.Ceramic Bowl.name=
-item.ClayBowl.Clay Bowl.name=
-item.Sugar.name=
-item.Sea Weed.name=
-word.stage1=
-word.stage2=
+item.ClayBowl.Ceramic Bowl.name=陶碗
+item.ClayBowl.Clay Bowl.name=黏土碗
+item.Sugar.name=砂糖
+item.Sea Weed.name=海藻
+word.stage1=第一階段
+word.stage2=第二階段

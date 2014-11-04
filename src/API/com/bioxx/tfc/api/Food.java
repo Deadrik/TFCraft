@@ -150,6 +150,18 @@ public class Food
 		return nbt.getFloat("foodDecay");
 	}
 
+	public static void setDecayTimer(ItemStack is, int value)
+	{
+		NBTTagCompound nbt = is.getTagCompound();
+		nbt.setInteger("decayTimer", value);
+	}
+
+	public static int getDecayTimer(ItemStack is)
+	{
+		NBTTagCompound nbt = is.getTagCompound();
+		return nbt.getInteger("decayTimer");
+	}
+
 	public static void setWeight(ItemStack is, float value)
 	{
 		NBTTagCompound nbt = is.getTagCompound();

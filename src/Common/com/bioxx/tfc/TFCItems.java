@@ -24,6 +24,7 @@ import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Food.ItemSalad;
 import com.bioxx.tfc.Food.ItemSandwich;
 import com.bioxx.tfc.Food.ItemSoup;
+import com.bioxx.tfc.Handlers.TFCFuelHandler;
 import com.bioxx.tfc.Items.ItemAlcohol;
 import com.bioxx.tfc.Items.ItemArrow;
 import com.bioxx.tfc.Items.ItemBloom;
@@ -2880,5 +2881,47 @@ public class TFCItems
 		GameRegistry.registerItem(Shears, Shears.getUnlocalizedName());
 
 		System.out.println(new StringBuilder().append("[TFC] All Items Registered").toString());
+	}
+
+	public static void registerFurniceFuel()
+	{
+		//1 sec = 20 burn time value
+		TFCFuelHandler.registerFuel(BlueSteelBucketLava, 20000);
+		TFCFuelHandler.registerFuel(SinglePlank, 400);
+		TFCFuelHandler.registerFuel(WoodenBucketEmpty, 300);
+		TFCFuelHandler.registerFuel(FireStarter, 100);
+		TFCFuelHandler.registerFuel(Logs, 800);
+		TFCFuelHandler.registerFuel(SluiceItem, 300);
+		TFCFuelHandler.registerFuel(Rope, 50);
+		TFCFuelHandler.registerFuel(Arrow, 20);
+		TFCFuelHandler.registerFuel(Bow, 100);
+		TFCFuelHandler.registerFuel(FishingRod, 100);
+		TFCFuelHandler.registerFuel(Stick, 100);
+		TFCFuelHandler.registerFuel(Coal, 1600);
+		TFCFuelHandler.registerFuel(WoolCloth, 20);
+		TFCFuelHandler.registerFuel(SilkCloth, 20);
+		TFCFuelHandler.registerFuel(BurlapCloth, 20);
+		TFCFuelHandler.registerFuel(Straw, 20);
+
+		for(int l = 0; l < Recipes.Doors.length; l++)
+			TFCFuelHandler.registerFuel(Recipes.Doors[l], 300);
+
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.WoodSupportV), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.WoodSupportV2), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.WoodSupportH), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.WoodSupportH2), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Fence), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Fence2), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.FenceGate), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.FenceGate2), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Chest), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.StrawHideBed), 200);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Thatch), 200);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Planks), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Planks2), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Barrel), 300);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Torch), 100);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Sapling), 100);
+		TFCFuelHandler.registerFuel(Item.getItemFromBlock(TFCBlocks.Sapling2), 100);
 	}
 }

@@ -349,8 +349,12 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		super.onLivingUpdate();
 		TFC_Core.PreventEntityDataUpdate = false;
 
-		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead)
+		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead){
 			this.heal(1);
+		}
+		else if(hunger < 144000 && super.isInLove()){
+			this.setInLove(false);
+		}
 	}
 
 	public void syncData()
@@ -365,15 +369,15 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 						TFC_Core.getByteFromSmallFloat(size_mod),
 						TFC_Core.getByteFromSmallFloat(strength_mod),
 						TFC_Core.getByteFromSmallFloat(aggression_mod),
-						TFC_Core.getByteFromSmallFloat(obedience_mod)};
-				byte[] values2 = {
+						TFC_Core.getByteFromSmallFloat(obedience_mod),
 						TFC_Core.getByteFromSmallFloat(colour_mod),
 						TFC_Core.getByteFromSmallFloat(climate_mod),
 						TFC_Core.getByteFromSmallFloat(hard_mod),
 						(byte)familiarity
 				};
-				this.dataWatcher.updateObject(22, ByteBuffer.wrap(values).getInt());
-				this.dataWatcher.updateObject(23, ByteBuffer.wrap(values2).getInt());
+				ByteBuffer buf = ByteBuffer.wrap(values);
+				this.dataWatcher.updateObject(22, buf.getInt());
+				this.dataWatcher.updateObject(23, buf.getInt());
 				this.dataWatcher.updateObject(24, this.happyTicks);
 			}
 			else

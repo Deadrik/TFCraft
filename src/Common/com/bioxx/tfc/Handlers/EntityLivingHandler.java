@@ -9,6 +9,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -101,17 +103,25 @@ public class EntityLivingHandler
 				{
 					setThirsty(player, false);
 				}
+				if (foodstats.stomachLevel / foodstats.getMaxStomach(player) <= 0.25f)
+				{
+					player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 20, 1));
+					player.addPotionEffect(new PotionEffect(Potion.weakness.id, 20, 1));
+				}
 
 				//Scan the players inventory for any items that are too heavy to carry normally
 				boolean isOverburdened = false;
-				for (int i = 0; i < player.inventory.mainInventory.length;i++)
+				if(!player.capabilities.isCreativeMode)
 				{
-					ItemStack is = player.inventory.getStackInSlot(i);
-					if(is != null && is.getItem() instanceof IEquipable)
+					for (int i = 0; i < player.inventory.mainInventory.length;i++)
 					{
-						isOverburdened = ((IEquipable)is.getItem()).getTooHeavyToCarry(is);
-						if(isOverburdened)
-							break;
+						ItemStack is = player.inventory.getStackInSlot(i);
+						if(is != null && is.getItem() instanceof IEquipable)
+						{
+							isOverburdened = ((IEquipable)is.getItem()).getTooHeavyToCarry(is);
+							if(isOverburdened)
+								break;
+						}
 					}
 				}
 

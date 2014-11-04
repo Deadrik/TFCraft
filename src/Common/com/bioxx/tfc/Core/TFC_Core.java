@@ -309,6 +309,18 @@ public class TFC_Core
 				|| block == TFCBlocks.StoneMM;
 	}
 
+	public static boolean isOreStone(Block block)
+	{
+		return block == TFCBlocks.Ore
+				|| block == TFCBlocks.Ore2
+				|| block == TFCBlocks.Ore3;
+	}
+
+	public static boolean isNaturalStone(Block block)
+	{
+		return isRawStone( block ) || isOreStone( block );
+	}
+	
 	public static boolean isCobbleStone(Block block)
 	{
 		return block == TFCBlocks.StoneIgExCobble
@@ -1018,12 +1030,12 @@ public class TFC_Core
 	//is the only unknown value
 	public static byte getByteFromSmallFloat(float f){
 		MathHelper.clamp_float(f, 0.5f, 1.5f);
-		return (byte)((Float.floatToIntBits(f + 0.4921875f) >> 16) & 0xff);
+		return (byte)((Float.floatToIntBits(f) >> 16) & 0xff);
 	}
 	
 	public static float getSmallFloatFromByte(byte b)
 	{
-		return ByteBuffer.wrap(new byte[]{(byte)63, b,(byte)(0),(byte)0}).getFloat() - 0.4921875f;
+		return ByteBuffer.wrap(new byte[]{(byte)63, b,(byte)(0),(byte)0}).getFloat();
 	}
 
 	/**

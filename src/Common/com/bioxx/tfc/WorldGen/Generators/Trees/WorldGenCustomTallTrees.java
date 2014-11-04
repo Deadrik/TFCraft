@@ -47,7 +47,7 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 					if (y >= 0 && y+height < world.getHeight())
 					{
 						Block j3 = world.getBlock(x, y, z);
-						if (j3 != Blocks.air && !j3.isReplaceable(world, x, y, z))
+						if (j3 != Blocks.air && !j3.canBeReplacedByLeaves(world, x, y, z))
 							flag = false;
 					}
 					else

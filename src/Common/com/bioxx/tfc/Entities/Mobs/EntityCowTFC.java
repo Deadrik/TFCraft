@@ -25,6 +25,7 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.AI.AIEatGrass;
+import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
@@ -96,6 +97,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.RiceGrain, false));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.BarleyGrain, false));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.OatGrain, false));
+		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
 		this.tasks.addTask(6, this.aiEatGrass);
 
 		//	We hijack the growingAge to hold the day of birth rather
@@ -226,6 +228,9 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		{
 			this.heal(1);
 		}
+		else if(hunger < 144000 && super.isInLove()){
+			this.setInLove(false);
+		}
 	}
 
 	public void syncData()
@@ -246,8 +251,9 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 						TFC_Core.getByteFromSmallFloat(hard_mod),
 						(byte)familiarity
 				};
-				this.dataWatcher.updateObject(22, ByteBuffer.wrap(values).getInt());
-				this.dataWatcher.updateObject(23, ByteBuffer.wrap(values).getInt());
+				ByteBuffer buf = ByteBuffer.wrap(values);
+				this.dataWatcher.updateObject(22, buf.getInt());
+				this.dataWatcher.updateObject(23, buf.getInt());
 			}
 			else
 			{
@@ -388,7 +394,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		{
 			if(player.isSneaking() && !familiarizedToday){
 				this.familiarize(player);
-				if(player.getHeldItem() != null && isBreedingItemTFC(player.getHeldItem())){
+				if(player.getHeldItem() != null && isFood(player.getHeldItem())){
 					return true;
 				}
 			}
@@ -706,7 +712,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && this.isBreedingItemTFC(stack) && isAdult() && !familiarizedToday){
+		if(stack != null && this.isFood(stack) && !familiarizedToday && ((isAdult() && familiarity < 50) || !isAdult())){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
@@ -719,7 +725,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();
 		}
-		else if(stack != null && stack.getItem() != null && stack.getItem().equals(TFCItems.WoodenBucketMilk) && !isAdult()){
+		else if(stack != null && stack.getItem() != null && stack.getItem().equals(TFCItems.WoodenBucketMilk) && isAdult()){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,new ItemStack(TFCItems.WoodenBucketEmpty,1,0));

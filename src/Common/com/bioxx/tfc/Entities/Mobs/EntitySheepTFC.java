@@ -260,8 +260,12 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		super.onLivingUpdate();
 		TFC_Core.PreventEntityDataUpdate = false;
 
-		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isCorpse && !isDead)
+		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isCorpse && !isDead){
 			this.heal(1);
+		}
+		else if(hunger < 144000 && super.isInLove()){
+			this.setInLove(false);
+		}
 	}
 
 	@Override
@@ -292,8 +296,9 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 						TFC_Core.getByteFromSmallFloat(hard_mod),
 						(byte)familiarity
 				};
-				this.dataWatcher.updateObject(22, ByteBuffer.wrap(values).getInt());
-				this.dataWatcher.updateObject(23, ByteBuffer.wrap(values).getInt());
+				ByteBuffer buf = ByteBuffer.wrap(values);
+				this.dataWatcher.updateObject(22, buf.getInt());
+				this.dataWatcher.updateObject(23, buf.getInt());
 			}
 			else
 			{
@@ -379,7 +384,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		{
 			if(player.isSneaking() && !familiarizedToday){
 				this.familiarize(player);
-				if(player.getHeldItem() != null && isBreedingItemTFC(player.getHeldItem())){
+				if(player.getHeldItem() != null && isFood(player.getHeldItem())){
 					return true;
 				}
 			}
@@ -749,7 +754,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && !familiarizedToday && this.isBreedingItemTFC(stack) && ((isAdult() && familiarity < 50) || !isAdult())){
+		if(stack != null && !familiarizedToday && this.isFood(stack) && ((isAdult() && familiarity < 50) || !isAdult())){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));

@@ -33,6 +33,7 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIFindNest;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
@@ -87,7 +88,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		this.tasks.addTask(1, new EntityAIPanic(this, 1.4D));
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
 		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
-		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityChickenTFC.class, 6.0F));
+		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
 		this.tasks.addTask(7, new EntityAILookIdle(this));
 		this.tasks.addTask(6, this.aiEatGrass);
 		addAI();
@@ -261,6 +263,9 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		{
 			this.heal(1);
 		}
+		else if(hunger < 144000 && super.isInLove()){
+			this.setInLove(false);
+		}
 	}
 
 	public void roosterCrow()
@@ -288,8 +293,9 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 						TFC_Core.getByteFromSmallFloat(hard_mod),
 						(byte)familiarity
 				};
-				this.dataWatcher.updateObject(22, ByteBuffer.wrap(values).getInt());
-				this.dataWatcher.updateObject(23, ByteBuffer.wrap(values).getInt());
+				ByteBuffer buf = ByteBuffer.wrap(values);
+				this.dataWatcher.updateObject(22, buf.getInt());
+				this.dataWatcher.updateObject(23, buf.getInt());
 			}
 			else
 			{
@@ -538,7 +544,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
-			if(player.isSneaking()){
+			if(player.isSneaking() && !familiarizedToday){
 				this.familiarize(player);
 				return true;
 			}
@@ -665,7 +671,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && stack.getItem() != null && isFood(stack)){
+		if(stack != null && stack.getItem() != null && isFood(stack) && !familiarizedToday){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));

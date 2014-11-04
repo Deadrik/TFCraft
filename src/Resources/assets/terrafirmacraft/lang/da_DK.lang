@@ -48,14 +48,14 @@ entity.notFamiliar=Dyret vil ikke være med til det der.
 fishingRod.lineTension=Linen er ved at knække!
 fishingRod.lineSnap=Linen knækkede!
 fishingRod.bite=Bid!
-fishingRod.gotAway=Den slap væk...
+fishingRod.gotAway=Den slap væk…
 
 #================
 #= Achievements =
 #================
 achievement.achLooseRock=Tid til at stene!
 achievement.achLooseRock.desc=Saml en sten op
-achievement.achSmallOre=§No stone unturned
+achievement.achSmallOre=§oNo stone unturned
 achievement.achSmallOre.desc=Find en malm-klump
 achievement.achWildVegetable=Samler
 achievement.achWildVegetable.desc=Find en vild grøntsag
@@ -92,7 +92,7 @@ commands.transferTamed.tooMany=For mange dyr inden for rækkevidde!
 commands.transferTamed.wrongOwner=Det/den tilhører ikke dig!
 commands.transferTamed.sameTarget=Du kan ikke overdrage dig selv!
 commands.transferTamed.display.incoming=Et dyr er blevet overdraget til dig af %s!
-commands.transferTamed.display.outgoing=Du overdraget et dyr til %s!
+commands.transferTamed.display.outgoing=Du har overdraget et dyr til %s!
 commands.transferTamed.wrongSender=Du kan ikke overføre dyr!
 
 #========
@@ -324,11 +324,11 @@ item.Knife Mold.Ceramic Mold Knife Black Bronze.name=Knivsstøbeform (Sort Bronz
 item.Knife Mold.Ceramic Mold Knife Bismuth Bronze.name=Knivsstøbeform (Bismuthbronze)
 
 item.Javelin Mold.Clay Mold Javelin.name=Lerstøbeform Til Spydspid
-item.Javelin Mold.Ceramic Mold Javelin.name=Spydspids-støbeform
-item.Javelin Mold.Ceramic Mold Javelin Copper.name=Spydspids-støbeform (Kobber)
-item.Javelin Mold.Ceramic Mold Javelin Bronze.name=Spydspids-støbeform (Bronze)
-item.Javelin Mold.Ceramic Mold Javelin Black Bronze.name=Spydspids-støbeform (Sort Bronze)
-item.Javelin Mold.Ceramic Mold Javelin Bismuth Bronze.name=Spydspids-støbeform (Bismuthbronze)
+item.Javelin Mold.Ceramic Mold Javelin.name=Spydspidsstøbeform
+item.Javelin Mold.Ceramic Mold Javelin Copper.name=Spydspidsstøbeform (Kobber)
+item.Javelin Mold.Ceramic Mold Javelin Bronze.name=Spydspidsstøbeform (Bronze)
+item.Javelin Mold.Ceramic Mold Javelin Black Bronze.name=Spydspidsstøbeform (Sort Bronze)
+item.Javelin Mold.Ceramic Mold Javelin Bismuth Bronze.name=Spydspidsstøbeform (Bismuthbronze)
 
 item.Mace Mold.Clay Mold Mace.name=Lerstøbeform Til Morgenstjerne
 item.Mace Mold.Ceramic Mold Mace.name=Morgenstjernestøbeform
@@ -380,8 +380,8 @@ item.Sword Mold.Ceramic Mold Sword Black Bronze.name=Sværdstøbeform (Sort Bron
 item.Sword Mold.Ceramic Mold Sword Bismuth Bronze.name=Sværdstøbeform (Bismuthbronze)
 
 item.Spindle.name=Ten
-item.Spindle Head.Clay Spindle.name=Ler-ten
-item.Spindle Head.Spindle Head.name=Ten-hoved
+item.Spindle Head.Clay Spindle.name=Lerten
+item.Spindle Head.Spindle Head.name=Tenhoved
 
 item.Fire Brick.Fire Brick.name=Ildfast Mursten
 item.Fire Brick.Clay Fire Brick.name=Ubrændt Ildfast Mursten
@@ -1218,27 +1218,27 @@ item.Stone Hammer Head.name=Stenhammerhoved
 item.Stone Knife Blade.name=Sten-knivsblad
 
 item.IgIn Stone Axe Head.name=Stenøksehoved
-item.IgIn Stone Chisel Head.name=Sten-mejselhoved
+item.IgIn Stone Chisel Head.name=Stenmejselhoved
 item.IgIn Stone Hoe Head.name=Stenhakkejernshoved
-item.IgIn Stone Javelin Head.name=Sten-spydspids
+item.IgIn Stone Javelin Head.name=Stenspydspids
 item.IgIn Stone Shovel Head.name=Stenskovlshoved
 
 item.Sed Stone Axe Head.name=Stenøksehoved
-item.Sed Stone Chisel Head.name=Sten-mejselhoved
+item.Sed Stone Chisel Head.name=Stenmejselhoved
 item.Sed Stone Hoe Head.name=Stenhakkejernshoved
-item.Sed Stone Javelin Head.name=Sten-spydspids
+item.Sed Stone Javelin Head.name=Stenspydspids
 item.Sed Stone Shovel Head.name=Stenskovlshoved
 
 item.IgEx Stone Axe Head.name=Stenøksehoved
-item.IgEx Stone Chisel Head.name=Sten-mejselhoved
+item.IgEx Stone Chisel Head.name=Stenmejselhoved
 item.IgEx Stone Hoe Head.name=Stenhakkejernshoved
-item.IgEx Stone Javelin Head.name=Sten-spydspids
+item.IgEx Stone Javelin Head.name=Stenspydspids
 item.IgEx Stone Shovel Head.name=Stenskovlshoved
 
 item.MM Stone Axe Head.name=Stenøksehoved
-item.MM Stone Chisel Head.name=Sten-mejselhoved
+item.MM Stone Chisel Head.name=Stenmejselhoved
 item.MM Stone Hoe Head.name=Stenhakkejernshoved
-item.MM Stone Javelin Head.name=Sten-spydspids
+item.MM Stone Javelin Head.name=Stenspydspids
 item.MM Stone Shovel Head.name=Stenskovlshoved
 
 #== Stone Tools ==
@@ -1961,6 +1961,15 @@ tile.Flowers2.flower_tulip_white.name=Hvid Tulipan
 tile.Flowers2.flower_tulip_pink.name=Lyserød Tulipan
 tile.Flowers2.flower_oxeye_daisy.name=Marguerit
 
+tile.SaltWater.name=
+tile.SaltWaterStationary.name=Saltvand
+tile.FreshWater.name=
+tile.FreshWaterStationary.name=Ferskvand
+tile.HotWater.name=
+tile.HotWaterStationary.name=Varmt Vand
+tile.Lava.name=
+tile.LavaStationary.name=Lava
+
 #=======
 #= GUI =
 #=======
@@ -2174,6 +2183,7 @@ gui.plans.sword=Sværd
 gui.plans.tuyere=Indblæsningsrør
 gui.plans.grill=Grill
 gui.plans.shears=Saks
+gui.plans.trapdoor=Gulv-lem
 
 #== Misc GUI ==
 gui.Blueprint=Arbejdstegning
