@@ -161,7 +161,7 @@ public class BlockToolRack extends BlockTerraContainer
 		if(te.storage[slot] == null && hasToolInHand)
 		{
 			te.storage[slot] = entityplayer.getCurrentEquippedItem().copy();
-			entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem] = null;
+			entityplayer.getCurrentEquippedItem().stackSize--;
 		}
 		else if(te.storage[slot] != null)
 		{
