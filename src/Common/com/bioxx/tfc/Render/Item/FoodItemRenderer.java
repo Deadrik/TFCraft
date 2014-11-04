@@ -66,11 +66,11 @@ public class FoodItemRenderer implements IItemRenderer
 						if (tempValue < 0) tempValue = 0;
 						if (tempValue > 13) tempValue = 13;
 						
-						if(temp < meltTemp*0.1F)	// Cold
+						if (temp < meltTemp*0.1F)	// Cold
 							renderQuad(1, 1, tempValue, 1, 0xffffff);						
-						else if(temp >= meltTemp*0.1F && temp < meltTemp*0.4F)	// Warm
+						else if (temp < meltTemp*0.4F)	// Warm
 							renderQuad(1, 1, tempValue, 1, 0xff8000);						
-						else if(temp >= meltTemp*0.4F && temp < meltTemp*0.8F)	// Hot
+						else if (temp < meltTemp*0.8F)	// Hot
 							renderQuad(1, 1, tempValue, 1, 0xff6000);						
 						else	// VeryHot
 							renderQuad(1, 1, tempValue, 1, 0xff0000);		
