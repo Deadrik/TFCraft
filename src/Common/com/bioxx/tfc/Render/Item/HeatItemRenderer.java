@@ -22,6 +22,207 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class HeatItemRenderer implements IItemRenderer
 {
+	public static class HeatItemDetails
+	{
+		public HeatItemDetails(ItemStack is)
+		{
+			hasTemp = false;
+			meltTemp = -1;
+			temp = 0;
+			
+			color = 0x000000;
+			range = 0;
+			subRange = 0;
+			isWorkable = false;
+			isWeldable = false;
+			isInDanger = false;
+			isLiquid = false;
+			
+			initialise(is);
+		}
+		
+		public boolean hasTemp;
+		public float meltTemp;
+		public float temp;
+		
+		public int color;
+		public int range;
+		public int subRange;
+		public boolean isWorkable;
+		public boolean isWeldable;
+		public boolean isInDanger;
+		public boolean isLiquid;
+		
+		public void initialise(ItemStack is)
+		{
+			if (is == null) return;
+
+			hasTemp = TFC_ItemHeat.HasTemp(is);
+			if (!hasTemp) return;
+			
+			meltTemp = TFC_ItemHeat.IsCookable(is);
+			temp = TFC_ItemHeat.GetTemp(is);
+			
+			if (meltTemp <= 0 || temp <= 0) return;
+			
+			if (temp < meltTemp)
+			{
+				if (temp < 80)	// Warming
+				{
+					color = 0x400000;
+					range = 1;
+					if(temp>(80 * 0.2))
+						subRange = 1;
+					if(temp>(80 * 0.4))
+						subRange = 2;
+					if(temp>(80 * 0.6))
+						subRange = 3;
+					if(temp>(80 * 0.8))
+						subRange = 4;
+				}
+				else if (temp < 210)	// Hot
+				{
+					color = 0x600000;
+					range = 2;
+					if(temp>80+((210-80) * 0.2))
+						subRange = 1;
+					if(temp>80+((210-80) * 0.4))
+						subRange = 2;
+					if(temp>80+((210-80) * 0.6))
+						subRange = 3;
+					if(temp>80+((210-80) * 0.8))
+						subRange = 4;
+				}
+				else if (temp < 480)	// VeryHot
+				{
+					color = 0x800000;
+					range = 3;						
+					if(temp>210+((480-210) * 0.2))
+						subRange = 1;
+					if(temp>210+((480-210) * 0.4))
+						subRange = 2;
+					if(temp>210+((480-210) * 0.6))
+						subRange = 3;
+					if(temp>210+((480-210) * 0.8))
+						subRange = 4;
+				}
+				else if (temp < 580)	// FaintRed
+				{
+					color = 0xa00000;
+					range = 4;
+					if(temp>480+((580-480) * 0.2))
+						subRange = 1;
+					if(temp>480+((580-480) * 0.4))
+						subRange = 2;
+					if(temp>480+((580-480) * 0.6))
+						subRange = 3;
+					if(temp>480+((580-480) * 0.8))
+						subRange = 4;
+				}
+				else if (temp < 730)	// DarkRed
+				{
+					color = 0xc40000;
+					range = 5;
+					if(temp>580+((730-580) * 0.2))
+						subRange = 1;
+					if(temp>580+((730-580) * 0.4))
+						subRange = 2;
+					if(temp>580+((730-580) * 0.6))
+						subRange = 3;
+					if(temp>580+((730-580) * 0.8))
+						subRange = 4;
+				}
+				else if (temp < 930)	// BrightRed
+				{
+					color = 0xff5555;
+					range = 6;
+					if(temp>730+((930-730) * 0.2))
+						subRange = 1;
+					if(temp>730+((930-730) * 0.4))
+						subRange = 2;
+					if(temp>730+((930-730) * 0.6))
+						subRange = 3;
+					if(temp>730+((930-730) * 0.8))
+						subRange = 4;
+				}
+				else if (temp < 1100)	// Orange
+				{
+					color = 0xffaa00;
+					range = 7;
+					if(temp>930+((1100-930) * 0.2))
+						subRange = 1;
+					if(temp>930+((1100-930) * 0.4))
+						subRange = 2;
+					if(temp>930+((1100-930) * 0.6))
+						subRange = 3;
+					if(temp>930+((1100-930) * 0.8))
+						subRange = 4;
+				}
+				else if (temp < 1300)	// Yellow
+				{
+					color = 0xffff00;
+					range = 8;
+					if(temp>1100+((1300-1100) * 0.2))
+						subRange = 1;
+					if(temp>1100+((1300-1100) * 0.4))
+						subRange = 2;
+					if(temp>1100+((1300-1100) * 0.6))
+						subRange = 3;
+					if(temp>1100+((1300-1100) * 0.8))
+						subRange = 4;
+				}
+				else if (temp < 1400)	// YellowWhite
+				{
+					color = 0xffffc0;
+					range = 9;
+					if(temp>1300+((1400-1300) * 0.2))
+						subRange = 1;
+					if(temp>1300+((1400-1300) * 0.4))
+						subRange = 2;
+					if(temp>1300+((1400-1300) * 0.6))
+						subRange = 3;
+					if(temp>1300+((1400-1300) * 0.8))
+						subRange = 4;
+				}
+				else if (temp < 1500)	// White
+				{
+					color = 0xe5e5e5;
+					range = 10;
+					if(temp>1400+((1500-1400) * 0.2))
+						subRange = 1;
+					if(temp>1400+((1500-1400) * 0.4))
+						subRange = 2;
+					if(temp>1400+((1500-1400) * 0.6))
+						subRange = 3;
+					if(temp>1400+((1500-1400) * 0.8))
+						subRange = 4;
+				}
+				else // BrilliantWhite
+				{
+					color = 0xffffff;
+					range = 11;
+					subRange = 4;
+				}
+			}
+			else if (temp >= meltTemp)
+			{
+				color = 0x0080ff;
+				range = 12;
+				subRange = 4;
+				isLiquid = true;
+			}
+
+			if (range < 0) range = 0;
+
+			if (is.getItem() instanceof ItemIngot || is.getItem() instanceof ItemMetalSheet ||
+				is.getItem() instanceof ItemUnfinishedArmor || is.getItem() instanceof ItemBloom)
+			{
+				isWorkable = HeatRegistry.getInstance().isTemperatureWorkable(is);
+				isWeldable = HeatRegistry.getInstance().isTemperatureWeldable(is);
+				isInDanger = HeatRegistry.getInstance().isTemperatureDanger(is);
+			}
+		}
+	}
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) 
@@ -48,181 +249,28 @@ public class HeatItemRenderer implements IItemRenderer
 		
 		if(type == ItemRenderType.INVENTORY)
 		{
-			if(TFC_ItemHeat.HasTemp(is))
+			HeatItemDetails details = new HeatItemDetails(is);
+			if (details.hasTemp && details.range > 0)
 			{
-				float meltTemp = TFC_ItemHeat.IsCookable(is);
-				float temp = TFC_ItemHeat.GetTemp(is);
-				if(temp > 0 && temp < meltTemp)
-				{
-					renderQuad(1, 1, 10, 1, 0);
+				renderQuad(1, 1, 10, 1, 0);
 
-					int color = 0;
-					float tempValue = 0F;
-					
-					if(temp < 80)	// Warming
-					{
-						color = 0x400000;
-						tempValue = 2;
-						if(temp>(80 * 0.2))
-							tempValue = 4;
-						if(temp>(80 * 0.4))
-							tempValue = 6;
-						if(temp>(80 * 0.6))
-							tempValue = 8;
-						if(temp>(80 * 0.8))
-							tempValue = 10;
-					}
-					else if(temp < 210)	// Hot
-					{
-						color = 0x600000;
-						tempValue = 2;
-						if(temp>80+((210-80) * 0.2))
-							tempValue = 4;
-						if(temp>80+((210-80) * 0.4))
-							tempValue = 6;
-						if(temp>80+((210-80) * 0.6))
-							tempValue = 8;
-						if(temp>80+((210-80) * 0.8))
-							tempValue = 10;
-					}
-					else if(temp < 480)	// VeryHot
-					{
-						color = 0x800000;
-						tempValue = 2;						
-						if(temp>210+((480-210) * 0.2))
-							tempValue = 4;
-						if(temp>210+((480-210) * 0.4))
-							tempValue = 6;
-						if(temp>210+((480-210) * 0.6))
-							tempValue = 8;
-						if(temp>210+((480-210) * 0.8))
-							tempValue = 10;
-					}
-					else if(temp < 580)	// FaintRed
-					{
-						color = 0xa00000;
-						tempValue = 2;
-						if(temp>480+((580-480) * 0.2))
-							tempValue = 4;
-						if(temp>480+((580-480) * 0.4))
-							tempValue = 6;
-						if(temp>480+((580-480) * 0.6))
-							tempValue = 8;
-						if(temp>480+((580-480) * 0.8))
-							tempValue = 10;
-					}
-					else if(temp < 730)	// DarkRed
-					{
-						color = 0xc40000;
-						tempValue = 2;
-						if(temp>580+((730-580) * 0.2))
-							tempValue = 4;
-						if(temp>580+((730-580) * 0.4))
-							tempValue = 6;
-						if(temp>580+((730-580) * 0.6))
-							tempValue = 8;
-						if(temp>580+((730-580) * 0.8))
-							tempValue = 10;
-					}
-					else if(temp < 930)	// BrightRed
-					{
-						color = 0xff5555;
-						tempValue = 2;
-						if(temp>730+((930-730) * 0.2))
-							tempValue = 4;
-						if(temp>730+((930-730) * 0.4))
-							tempValue = 6;
-						if(temp>730+((930-730) * 0.6))
-							tempValue = 8;
-						if(temp>730+((930-730) * 0.8))
-							tempValue = 10;
-					}
-					else if(temp < 1100)	// Orange
-					{
-						color = 0xffaa00;
-						tempValue = 2;
-						if(temp>930+((1100-930) * 0.2))
-							tempValue = 4;
-						if(temp>930+((1100-930) * 0.4))
-							tempValue = 6;
-						if(temp>930+((1100-930) * 0.6))
-							tempValue = 8;
-						if(temp>930+((1100-930) * 0.8))
-							tempValue = 10;
-					}
-					else if(temp < 1300)	// Yellow
-					{
-						color = 0xffff00;
-						tempValue = 2;
-						if(temp>1100+((1300-1100) * 0.2))
-							tempValue = 4;
-						if(temp>1100+((1300-1100) * 0.4))
-							tempValue = 6;
-						if(temp>1100+((1300-1100) * 0.6))
-							tempValue = 8;
-						if(temp>1100+((1300-1100) * 0.8))
-							tempValue = 10;
-					}
-					else if(temp < 1400)	// YellowWhite
-					{
-						color = 0xffffc0;
-						tempValue = 2;
-						if(temp>1300+((1400-1300) * 0.2))
-							tempValue = 4;
-						if(temp>1300+((1400-1300) * 0.4))
-							tempValue = 6;
-						if(temp>1300+((1400-1300) * 0.6))
-							tempValue = 8;
-						if(temp>1300+((1400-1300) * 0.8))
-							tempValue = 10;
-					}
-					else if(temp < 1500)	// White
-					{
-						color = 0xe5e5e5;
-						tempValue = 2;
-						if(temp>1400+((1500-1400) * 0.2))
-							tempValue = 4;
-						if(temp>1400+((1500-1400) * 0.4))
-							tempValue = 6;
-						if(temp>1400+((1500-1400) * 0.6))
-							tempValue = 8;
-						if(temp>1400+((1500-1400) * 0.8))
-							tempValue = 10;
-					}
-					else // BrilliantWhite
-					{
-						color = 0xffffff;
-						tempValue = 10;
-					}
+				int tempValue = details.range > 0 ? 2 : 0;
+				tempValue += (2 * details.subRange);
+				
+				if (tempValue < 0) tempValue = 0;
+				if (tempValue > 10) tempValue = 10;
+				renderQuad(1, 1, tempValue, 1, details.color);
 
-					if (tempValue < 0) tempValue = 3;
-					if (tempValue > 10) tempValue = 7;
-					renderQuad(1, 1, tempValue, 1, color);
-				}
-				else if (meltTemp > 0 && temp >= meltTemp)
-				{
-					renderQuad(1, 1, 10, 1, 0x0080ff);					
-				}
-
-				if(	is.getItem() instanceof ItemIngot || is.getItem() instanceof ItemMetalSheet ||
-					is.getItem() instanceof ItemUnfinishedArmor || is.getItem() instanceof ItemBloom)
+				if (details.isWorkable || details.isWeldable || details.isInDanger)
 				{
 					renderQuad(12, 1, 3, 1, 0);
-					
-					if(HeatRegistry.getInstance().isTemperatureWorkable(is))
-					{
-						renderQuad(12, 1, 1, 1, 0x00ff00);
-					}
-	
-					if(HeatRegistry.getInstance().isTemperatureWeldable(is))
-					{
-						renderQuad(13, 1, 1, 1, 0xffaa00);
-					}
 
-					if(HeatRegistry.getInstance().isTemperatureDanger(is))
-					{
+					if (details.isWorkable)
+						renderQuad(12, 1, 1, 1, 0x00ff00);
+					if (details.isWeldable)
+						renderQuad(13, 1, 1, 1, 0xffaa00);
+					if (details.isInDanger)
 						renderQuad(14, 1, 1, 1, 0xff0000);
-					}
 				}
 			}
 		}
@@ -255,5 +303,4 @@ public class HeatItemRenderer implements IItemRenderer
 		tess.draw();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
-
 }
