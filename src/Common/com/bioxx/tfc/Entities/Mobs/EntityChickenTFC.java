@@ -548,10 +548,9 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 				this.familiarize(player);
 				return true;
 			}
-			/*if(!player.isSneaking())
-			{
-				player.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
-			}*/
+			if (TFC_Core.getPercentGrown(this) < 0.65f && !player.isSneaking()) {
+				player.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE ? "Female" : "Male"));  // TODO i18n?
+			}
 		}
 		//player.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		if(!worldObj.isRemote && isAdult()&& player.isSneaking() && attackEntityFrom(DamageSource.generic, 5))
