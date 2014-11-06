@@ -205,23 +205,23 @@ public class GuiBlueprint extends GuiScreen
 		this.nameTextField.drawTextBox();
 
 		int axesNameLeft = left + 10;
-		int axesAngleLeft = axesNameLeft + this.fontRendererObj.getStringWidth("X: ") + 4 + 20 + 4;
+		int axesAngleLeft = axesNameLeft + fontRendererObj.getStringWidth("X: ") + 4 + 20 + fontRendererObj.getStringWidth("360") / 2;
 		int topShift = (20 - this.fontRendererObj.FONT_HEIGHT) / 2;
 
 		// X:
 		top += 10 + this.fontRendererObj.FONT_HEIGHT + 4 + 20 + 4;
 		fontRendererObj.drawString("X:", axesNameLeft, top + topShift, 0x000000);
-		fontRendererObj.drawString(String.valueOf(x_angle), axesAngleLeft, top + topShift, 0x000000);
+		drawCenteredString(fontRendererObj, String.valueOf(x_angle), axesAngleLeft, top + topShift, 0x000000);
 
 		// Y:
 		top += 20 + 4;
 		fontRendererObj.drawString("Y:", axesNameLeft, top + topShift, 0x000000);
-		fontRendererObj.drawString(String.valueOf(y_angle), axesAngleLeft, top + topShift, 0x000000);
+		drawCenteredString(fontRendererObj, String.valueOf(y_angle), axesAngleLeft, top + topShift, 0x000000);
 
 		// Z:
 		top += 20 + 4;
 		fontRendererObj.drawString("Z:", axesNameLeft, top + topShift, 0x000000);
-		fontRendererObj.drawString(String.valueOf(z_angle), axesAngleLeft, top + topShift, 0x000000);
+		drawCenteredString(fontRendererObj, String.valueOf(z_angle), axesAngleLeft, top + topShift, 0x000000);
 
 		super.drawScreen(par1, par2, par3);
 	}
