@@ -1,13 +1,11 @@
 package com.bioxx.tfc.GUI;
 
-import com.bioxx.tfc.TileEntities.TEDetailed;
-import ibxm.Player;
+import com.bioxx.tfc.Handlers.Network.BlueprintTurnCubePacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -20,8 +18,6 @@ import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.ItemRenamePacket;
-
-import java.util.BitSet;
 
 public class GuiBlueprint extends GuiScreen
 {
@@ -62,8 +58,6 @@ public class GuiBlueprint extends GuiScreen
 	{
 		//super(new ContainerBlueprint(p, world, i, j, k));
 		this.world = world;
-		Minecraft.getMinecraft().thePlayer.sendChatMessage("left: " + guiLeft());
-		Minecraft.getMinecraft().thePlayer.sendChatMessage("top: " + guiTop());
 		x = i;
 		z = k;
 		player = p;
@@ -158,62 +152,6 @@ public class GuiBlueprint extends GuiScreen
 		fontrenderer.drawString(s, i - fontrenderer.getStringWidth(s) / 2, j, k);
 	}
 
-	private static byte[] turnMatrix(byte[] bytes, int x_angle, int y_angle, int z_angle)
-	{
-		BitSet data = TEDetailed.fromByteArray(bytes, 512);
-		BitSet turned_data = new BitSet(512);
-
-		x_angle /= 90;
-		y_angle /= 90;
-		z_angle /= 90;
-
-		for (int x = 1; x <= 8; ++x)
-			for (int z = 1; z <= 8; ++z)
-				for (int y = 1; y <= 8; ++y)
-				{
-					int _x = x;
-					int _y = y;
-					int _z = z;
-
-					// Turn by x
-					for (int i = 0; i < x_angle; ++i)
-					{
-						int buf = _z;
-						_z = 8 - _y;
-						_y = buf;
-					}
-
-					// Turn by y
-					for (int i = 0; i < y_angle; ++i)
-					{
-						int buf = _x;
-						_x = 8 - _z;
-						_z = buf;
-					}
-
-					// Turn by z
-					for (int i = 0; i < z_angle; ++i)
-					{
-						int buf = _y;
-						_y = 8 - _x;
-						_x = buf;
-					}
-
-//					Minecraft.getMinecraft().thePlayer.sendChatMessage("original xyz: {" + x + "; " + y + "; " + z + "}");
-//					Minecraft.getMinecraft().thePlayer.sendChatMessage("turned xyz: {" + _x + "; " + _y + "; " + _z + "}");
-
-					int src_i = (x * 8 + z) * 8 + y;
-					int res_i = (_x * 8 + _z) * 8 + _y;
-
-//					Minecraft.getMinecraft().thePlayer.sendChatMessage("original ind: " + src_i);
-//					Minecraft.getMinecraft().thePlayer.sendChatMessage("turned ind: " + res_i);
-
-					turned_data.set(res_i - 1, data.get(src_i - 1));
-				}
-
-		return TEDetailed.toByteArray(turned_data);
-	}
-
 	@Override
 	protected void actionPerformed(GuiButton guibutton)
 	{
@@ -237,19 +175,18 @@ public class GuiBlueprint extends GuiScreen
 			ItemStack stack = player.inventory.getCurrentItem();
 			stack.stackTagCompound.setString("Name", nameTextField.getText());
 
-			if (x_angle != 0 || y_angle != 0 || z_angle != 0)
-			{
-				byte[] turned_data = this.turnMatrix(stack.stackTagCompound.getByteArray("data"), x_angle, y_angle, z_angle);
-				NBTTagCompound nbt = stack.getTagCompound();
-				nbt.setByteArray("data", TEDetailed.toByteArray(new BitSet(512)));
-				stack.setTagCompound(nbt);
-			}
-			player.inventory.setItemStack(stack);
+			AbstractPacket pkt;
 
-			AbstractPacket pkt = new ItemRenamePacket(nameTextField.getText());
+			pkt = new ItemRenamePacket(nameTextField.getText());
 			//TerraFirmaCraft.packetPipeline.sendToAll(pkt);
 			TerraFirmaCraft.packetPipeline.sendToServer(pkt);
-			
+
+			if (x_angle != 0 || y_angle != 0 || z_angle != 0)
+			{
+				pkt = new BlueprintTurnCubePacket(x_angle, y_angle, z_angle);
+				TerraFirmaCraft.packetPipeline.sendToServer(pkt);
+			}
+
 			Minecraft.getMinecraft().displayGuiScreen(null);//player.closeScreen();
 		}
 	}
