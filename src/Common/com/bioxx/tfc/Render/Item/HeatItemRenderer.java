@@ -224,83 +224,96 @@ public class HeatItemRenderer implements IItemRenderer
 		}
 	}
 
+	private Tessellator tessellator = Tessellator.instance;
+
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) 
 	{
-		if(type == ItemRenderType.INVENTORY)
-		{
-			return true;
-		}
+		switch (type) 
+		{ 
+			case INVENTORY: 
+				return true; 
+			default: 
+				return false; 
+		} 
+	}
+
+	@Override
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) 
+	{	
 		return false;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
-		return false;
-	}
-
-	@Override
-	public void renderItem(ItemRenderType type, ItemStack is, Object... data) 
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) 
 	{
+		if(type != ItemRenderType.INVENTORY)
+		{
+			System.out.println("HeatItemRenderer.renderItem called with wrong render type: " + type.toString());
+			return;
+		}
+		
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GL11.glEnable(GL11.GL_BLEND);
 		
-		renderIcon(0, 0, is.getItem().getIconIndex(is), 16, 16);
+		tessellator.startDrawingQuads();
+
+		IIcon icon = item.getIconIndex();
+		tessellator.addVertexWithUV( 0.0, 16.0, 0.0, (double)icon.getMinU(), (double)icon.getMaxV());
+		tessellator.addVertexWithUV(16.0, 16.0, 0.0, (double)icon.getMaxU(), (double)icon.getMaxV());
+		tessellator.addVertexWithUV(16.0,  0.0, 0.0, (double)icon.getMaxU(), (double)icon.getMinV());
+		tessellator.addVertexWithUV( 0.0,  0.0, 0.0, (double)icon.getMinU(), (double)icon.getMinV());
 		
-		if(type == ItemRenderType.INVENTORY)
-		{
-			HeatItemDetails details = new HeatItemDetails(is);
-			if (details.hasTemp && details.range > 0)
-			{
-				renderQuad(1, 1, 10, 1, 0);
-
-				int tempValue = details.range > 0 ? 2 : 0;
-				tempValue += (2 * details.subRange);
-				
-				if (tempValue < 0) tempValue = 0;
-				if (tempValue > 10) tempValue = 10;
-				renderQuad(1, 1, tempValue, 1, details.color);
-
-				if (details.isWorkable || details.isWeldable || details.isInDanger)
-				{
-					renderQuad(12, 1, 3, 1, 0);
-
-					if (details.isWorkable)
-						renderQuad(12, 1, 1, 1, 0x00ff00);
-					if (details.isWeldable)
-						renderQuad(13, 1, 1, 1, 0xffaa00);
-					if (details.isInDanger)
-						renderQuad(14, 1, 1, 1, 0xff0000);
-				}
-			}
-		}
+		tessellator.draw();		
+		
+		renderHeatBar(type, item);
 		
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
-	public static void renderIcon(int x, int y, IIcon icon, int sizeX, int sizeY)
+	private void renderHeatBar(ItemRenderType type, ItemStack item)
 	{
-		Tessellator tessellator = Tessellator.instance;
-		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV((double)(x + 0), (double)(y + sizeY), (double)0, (double)icon.getMinU(), (double)icon.getMaxV());
-		tessellator.addVertexWithUV((double)(x + sizeX), (double)(y + sizeY), (double)0, (double)icon.getMaxU(), (double)icon.getMaxV());
-		tessellator.addVertexWithUV((double)(x + sizeX), (double)(y + 0), (double)0, (double)icon.getMaxU(), (double)icon.getMinV());
-		tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)0, (double)icon.getMinU(), (double)icon.getMinV());
-		tessellator.draw();
-	}
+		if(type != ItemRenderType.INVENTORY) return;
 
-	private static void renderQuad(double x, double y, double sizeX, double sizeY, int color)
-	{
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		Tessellator tess = Tessellator.instance;
-		tess.startDrawingQuads();
-		tess.setColorOpaque_I(color);
-		tess.addVertex((double)(x + 0), (double)(y + 0), 0.0D);
-		tess.addVertex((double)(x + 0), (double)(y + sizeY), 0.0D);
-		tess.addVertex((double)(x + sizeX), (double)(y + sizeY), 0.0D);
-		tess.addVertex((double)(x + sizeX), (double)(y + 0), 0.0D);
-		tess.draw();
+
+		HeatItemDetails details = new HeatItemDetails(item);
+		if (details.hasTemp && details.range > 0)
+		{
+			renderQuad(1, 1, 10, 1, 0);
+
+			int tempValue = details.range > 0 ? 2 : 0;
+			tempValue += (2 * details.subRange);
+			
+			if (tempValue < 0) tempValue = 0;
+			if (tempValue > 10) tempValue = 10;
+			renderQuad(1, 1, tempValue, 1, details.color);
+
+			if (details.isWorkable || details.isWeldable || details.isInDanger)
+			{
+				renderQuad(12, 1, 3, 1, 0);
+
+				if (details.isWorkable)
+					renderQuad(12, 1, 1, 1, 0x00ff00);
+				if (details.isWeldable)
+					renderQuad(13, 1, 1, 1, 0xffaa00);
+				if (details.isInDanger)
+					renderQuad(14, 1, 1, 1, 0xff0000);
+			}
+		}
+
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
+	}
+	
+	private void renderQuad(double x, double y, double sizeX, double sizeY, int color)
+	{
+		tessellator.startDrawingQuads();
+		tessellator.setColorOpaque_I(color);
+		tessellator.addVertex((double)(x + 0), 	   (double)(y + 0),     0.0D);
+		tessellator.addVertex((double)(x + 0),     (double)(y + sizeY), 0.0D);
+		tessellator.addVertex((double)(x + sizeX), (double)(y + sizeY), 0.0D);
+		tessellator.addVertex((double)(x + sizeX), (double)(y + 0),     0.0D);
+		tessellator.draw();
 	}
 }

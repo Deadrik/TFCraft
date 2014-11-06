@@ -11,7 +11,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Render.Item.HeatItemRenderer;
+import com.bioxx.tfc.Render.Item.HeatItemRenderer3D;
 import com.bioxx.tfc.api.Constant.Global;
 
 public class ItemSoil extends ItemTerraBlock
@@ -45,6 +45,6 @@ public class ItemSoil extends ItemTerraBlock
 	public void registerIcons(IIconRegister registerer)
 	{
 		super.registerIcons(registerer);
-		MinecraftForgeClient.registerItemRenderer(this, new HeatItemRenderer());
+		MinecraftForgeClient.registerItemRenderer(this, new HeatItemRenderer3D());
 	}
 }
