@@ -83,13 +83,24 @@ public class BlockTorch extends BlockTerraContainer
 				player.inventory.consumeInventoryItem(TFCItems.Stick);
 				TFC_Core.giveItemToPlayer(new ItemStack(TFCBlocks.Torch), player);
 			}
-			else if(world.getBlockMetadata(x, y, z) >= 8 && player.inventory.getCurrentItem() != null && 
+			else if(player.inventory.getCurrentItem() != null && 
 					player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(TFCBlocks.Torch))
 			{
 				TELightEmitter te = (TELightEmitter)world.getTileEntity(x, y, z);
 				te.hourPlaced = (int)TFC_Time.getTotalHours();
-				world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)-8, 3);
+				if (world.getBlockMetadata(x, y, z) >= 8)
+				{
+				    world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)-8, 3);
+				}
 			}
+		}
+		else
+		{
+		    if(TFCOptions.enableDebugMode)
+		    {
+		        int metadata = world.getBlockMetadata(x, y, z);
+		        System.out.println("Meta = "+(new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
+		    }
 		}
 		return true;
 	}
