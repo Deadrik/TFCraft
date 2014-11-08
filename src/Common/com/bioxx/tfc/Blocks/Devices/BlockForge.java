@@ -45,6 +45,7 @@ public class BlockForge extends BlockTerraContainer
 		int yCoord = j;
 		int zCoord = k;
 		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
+		TEForge tef = (TEForge)world.getTileEntity(i, j, k);
 
 		if(world.isRemote)
 		{
@@ -52,9 +53,8 @@ public class BlockForge extends BlockTerraContainer
 		}
 		else if(equippedItem != null && (equippedItem.getItem() instanceof ItemFirestarter || equippedItem.getItem() instanceof ItemFlintSteel))
 		{
-			if((TEForge)world.getTileEntity(i, j, k) != null)
+			if(tef != null)
 			{
-				TEForge tef = (TEForge)world.getTileEntity(i, j, k);
 				if(tef.fireTemp <= 0 && tef.fireItemStacks[7] != null && tef.isSmokeStackValid)
 				{
 					tef.fireTemp = 10;
@@ -73,7 +73,7 @@ public class BlockForge extends BlockTerraContainer
 			}
 			return true;
 		}
-		else if(equippedItem != null && equippedItem.getItem() instanceof ItemStick )
+		else if(tef.fireTemp > 0 && equippedItem != null && equippedItem.getItem() instanceof ItemStick )
 		{
 			entityplayer.inventory.consumeInventoryItem(TFCItems.Stick);
 			TFC_Core.giveItemToPlayer(new ItemStack(TFCBlocks.Torch), entityplayer);
@@ -81,9 +81,8 @@ public class BlockForge extends BlockTerraContainer
 		}
 		else
 		{
-			if((TEForge)world.getTileEntity(i, j, k)!=null)
+			if(tef !=null)
 			{
-				TEForge tef = (TEForge)world.getTileEntity(i, j, k);
 				if(tef.isSmokeStackValid)
 				{
 					entityplayer.openGui(TerraFirmaCraft.instance, 23, world, i, j, k);
