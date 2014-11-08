@@ -119,7 +119,7 @@ public class ItemCustomBucket extends ItemTerra
 		int[][] map = {{0,-1,0},{0,1,0},{0,0,-1},{0,0,1},{-1,0,0},{1,0,0}};
 
 		if (!isEmpty && world.isAirBlock( x + map[side][0], y + map[side][1], z + map[side][2] ) ) {
-			world.setBlock( x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.FreshWaterStationary, 2, 0x1 );
+			world.setBlock( x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.FreshWater, 2, 0x1 );
 			player.setCurrentItemOrArmor(0, new ItemStack(TFCItems.WoodenBucketEmpty));
 			return true;
 		}
