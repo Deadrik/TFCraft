@@ -10,6 +10,7 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
@@ -108,6 +109,22 @@ public class ItemCustomBucket extends ItemTerra
 			}
 			return is;
 		}
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	{
+		
+		boolean isEmpty = this.bucketContents == Blocks.air;
+		int[][] map = {{0,-1,0},{0,1,0},{0,0,-1},{0,0,1},{-1,0,0},{1,0,0}};
+
+		if (!isEmpty && world.isAirBlock( x + map[side][0], y + map[side][1], z + map[side][2] ) ) {
+			world.setBlock( x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.FreshWaterStationary, 2, 0x1 );
+			player.setCurrentItemOrArmor(0, new ItemStack(TFCItems.WoodenBucketEmpty));
+			return true;
+		}
+		
+		return false;
 	}
 
 	@Override
