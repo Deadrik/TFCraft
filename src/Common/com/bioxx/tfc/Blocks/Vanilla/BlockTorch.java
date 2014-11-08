@@ -29,6 +29,9 @@ import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Items.ItemBlocks.ItemTorch;
+import com.bioxx.tfc.Items.Tools.ItemFirestarter;
+import com.bioxx.tfc.Items.Tools.ItemFlintSteel;
 import com.bioxx.tfc.TileEntities.TELightEmitter;
 import com.bioxx.tfc.api.TFCOptions;
 
@@ -75,6 +78,8 @@ public class BlockTorch extends BlockTerraContainer
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
 	{
+		ItemStack equippedItem = player.getCurrentEquippedItem();
+		
 		if(!world.isRemote)
 		{
 			if(world.getBlockMetadata(x, y, z) < 8 && player.inventory.getCurrentItem() != null && 
@@ -83,12 +88,34 @@ public class BlockTorch extends BlockTerraContainer
 				player.inventory.consumeInventoryItem(TFCItems.Stick);
 				TFC_Core.giveItemToPlayer(new ItemStack(TFCBlocks.Torch), player);
 			}
-			else if(world.getBlockMetadata(x, y, z) >= 8 && player.inventory.getCurrentItem() != null && 
-					player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(TFCBlocks.Torch))
+			else if(world.getBlockMetadata(x, y, z) >= 8 && equippedItem != null)
 			{
-				TELightEmitter te = (TELightEmitter)world.getTileEntity(x, y, z);
-				te.hourPlaced = (int)TFC_Time.getTotalHours();
-				world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)-8, 3);
+				if( equippedItem.getItem() instanceof ItemTorch )
+				{
+					TELightEmitter te = (TELightEmitter)world.getTileEntity(x, y, z);
+					te.hourPlaced = (int)TFC_Time.getTotalHours();
+					world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)-8, 3);
+				}
+				else if ( equippedItem.getItem() instanceof ItemFirestarter || equippedItem.getItem() instanceof ItemFlintSteel  )
+				{
+
+					int chance = new Random().nextInt(100);
+					int ss = equippedItem.stackSize;
+					int dam = equippedItem.getItemDamage()+1;
+
+					if(dam >= player.getCurrentEquippedItem().getItem().getMaxDamage())
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+					else
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(equippedItem.getItem(),ss,dam));
+
+					if( equippedItem.getItem() instanceof ItemFlintSteel || chance > 70 )
+					{
+						TELightEmitter te = (TELightEmitter)world.getTileEntity(x, y, z);
+						te.hourPlaced = (int)TFC_Time.getTotalHours();
+						world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)-8, 3);
+					}
+					
+				}
 			}
 		}
 		return true;
