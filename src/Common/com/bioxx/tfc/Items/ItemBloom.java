@@ -2,13 +2,16 @@ package com.bioxx.tfc.Items;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Render.Item.HeatItemRenderer;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -48,6 +51,13 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 		list.add(new ItemStack(this, 1, 400));
 	}
 
+	@Override
+	public void registerIcons(IIconRegister registerer)
+	{
+		super.registerIcons(registerer);
+		MinecraftForgeClient.registerItemRenderer(this, new HeatItemRenderer());
+	}
+	
 	@Override
 	public Metal GetMetalType(ItemStack is)
 	{
