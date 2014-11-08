@@ -23,6 +23,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemLogs;
 import com.bioxx.tfc.TileEntities.TEFirepit;
 
@@ -66,6 +67,12 @@ public class BlockFirepit extends BlockTerraContainer
 					world.setBlockMetadataWithNotify(x, y, z, 1, 3);
 				}
 			}
+			return true;
+		}
+		else if(item == TFCItems.Stick)
+		{
+			entityplayer.inventory.consumeInventoryItem(TFCItems.Stick);
+			TFC_Core.giveItemToPlayer(new ItemStack(TFCBlocks.Torch), entityplayer);
 			return true;
 		}
 		else

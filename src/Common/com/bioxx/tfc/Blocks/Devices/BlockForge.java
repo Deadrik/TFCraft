@@ -17,8 +17,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Items.ItemStick;
 import com.bioxx.tfc.Items.Tools.ItemFirestarter;
 import com.bioxx.tfc.Items.Tools.ItemFlintSteel;
 import com.bioxx.tfc.TileEntities.TEForge;
@@ -68,6 +71,12 @@ public class BlockForge extends BlockTerraContainer
 					world.setBlockMetadataWithNotify(i, j, k, 2, 3);
 				}
 			}
+			return true;
+		}
+		else if(equippedItem != null && equippedItem.getItem() instanceof ItemStick )
+		{
+			entityplayer.inventory.consumeInventoryItem(TFCItems.Stick);
+			TFC_Core.giveItemToPlayer(new ItemStack(TFCBlocks.Torch), entityplayer);
 			return true;
 		}
 		else
