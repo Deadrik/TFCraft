@@ -1845,6 +1845,7 @@ tile.Ice.name=Jää
 item.arrow.name=Nuoli
 item.book.name=Kirja
 item.stick.name=Keppi
+item.torch_off.name=Soihtu pois
 item.coal.coal.name=Kivihiili
 item.coal.charcoal.name=Puuhiili
 item.Fertilizer.name=

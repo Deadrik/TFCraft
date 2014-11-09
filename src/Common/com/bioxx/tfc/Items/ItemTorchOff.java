@@ -59,11 +59,11 @@ public class ItemTorchOff extends ItemTerra
 	@Override
 	public EnumSize getSize(ItemStack is) 
 	{
-		return EnumSize.TINY;
+		return EnumSize.VERYSMALL;
 	}
 	@Override
 	public EnumWeight getWeight(ItemStack is) 
 	{
-		return EnumWeight.LIGHT;
+		return EnumWeight.HEAVY;
 	}
 }

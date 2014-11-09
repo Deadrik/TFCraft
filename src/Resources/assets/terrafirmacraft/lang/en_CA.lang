@@ -45,6 +45,9 @@ tile.customBed.sleep=This bed is too uncomfortable to sleep in, eh?
 #=================
 #= Miscellaneous =
 #=================
+#== Misc Items ==
+item.torch_off.name=Until Torch
+
 #= Misc. Plants =
 item.Jute Fibre.name=Jute Fibre
 

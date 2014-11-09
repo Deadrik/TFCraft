@@ -1845,6 +1845,7 @@ tile.Ice.name=Ghiaccio
 item.arrow.name=Freccia
 item.book.name=Libro
 item.stick.name=Stecco
+item.torch_off.name=Torcia off
 item.coal.coal.name=Carbone
 item.coal.charcoal.name=Carbonella
 item.Fertilizer.name=Fertilizzante
