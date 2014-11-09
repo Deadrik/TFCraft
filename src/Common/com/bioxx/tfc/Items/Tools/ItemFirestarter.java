@@ -2,6 +2,7 @@ package com.bioxx.tfc.Items.Tools;
 
 import java.util.Iterator;
 import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
@@ -14,6 +15,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
@@ -64,7 +66,7 @@ public class ItemFirestarter extends ItemTerra
 	@Override
 	public int getMaxItemUseDuration(ItemStack p_77626_1_)
 	{
-		return 40;
+		return 20;
 	}
 
 	@Override
@@ -95,7 +97,8 @@ public class ItemFirestarter extends ItemTerra
 				if(count < 4 && chance > 70)
 					world.spawnParticle("flame", hitX, hitY, hitZ, 0.0F, 0.0F, 0.0F);
 
-				if(count < 35 && count % 3 == 1) player.playSound(TFC_Sounds.FIRESTARTER, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
+				if (count < 35 && count % 3 == 1)
+					player.playSound(TFC_Sounds.FIRESTARTER, /*volume*/0.5f, /*pitch*/0.05F);
 			}
 			else if(!world.isRemote && count == 1)
 			{
