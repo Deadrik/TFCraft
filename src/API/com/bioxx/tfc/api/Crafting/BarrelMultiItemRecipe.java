@@ -23,13 +23,13 @@ public class BarrelMultiItemRecipe extends BarrelRecipe
 	@Override
 	public ItemStack getResult(ItemStack inIS, FluidStack inFS, int sealedTime)
 	{
-		ItemStack out = outItemStack.copy();
+		ItemStack out = recipeOutIS.copy();
 		if(inIS != null && inIS.getItem() instanceof IFood)
 		{
 			int w = (int)Math.floor(Food.getWeight(inIS));
-			if(w * outFluid.amount <= inFS.amount)
+			if(w * recipeOutFluid.amount <= inFS.amount)
 			{
-				Food.setWeight(out, w*Food.getWeight(outItemStack));
+				Food.setWeight(out, w*Food.getWeight(recipeOutIS));
 			}
 		}
 		else
@@ -45,14 +45,14 @@ public class BarrelMultiItemRecipe extends BarrelRecipe
 	@Override
 	public FluidStack getResultFluid(ItemStack inIS, FluidStack inFS, int sealedTime)
 	{
-		FluidStack fs = outFluid.copy(); 
+		FluidStack fs = recipeOutFluid.copy(); 
 
 		if(inIS != null && inIS.getItem() instanceof IFood)
 		{
 			int w = (int)Math.floor(Food.getWeight(inIS));
-			if(w * outFluid.amount <= inFS.amount)
+			if(w * recipeOutFluid.amount <= inFS.amount)
 			{
-				fs.amount = (w * outFluid.amount);
+				fs.amount = (w * recipeOutFluid.amount);
 			}
 		}
 		else

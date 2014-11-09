@@ -424,8 +424,7 @@ public class BlockWoodSupport extends BlockTerra
 		{
 			if(side == 0 && world.isAirBlock(x, y-1, z))
 			{
-				if(isNextToSupport(world,x,y,z) != 0 && hasSupportsInRange(world, x,y,z,5))
-					return true;
+				return true;
 			}
 			else if(side == 1 && world.getBlock(x, y-1, z).isOpaqueCube())
 			{

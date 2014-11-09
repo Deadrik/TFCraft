@@ -27,6 +27,7 @@ import com.bioxx.tfc.Core.ColorizerFoliageTFC;
 import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.EntityBarrel;
 import com.bioxx.tfc.Entities.EntityCustomMinecart;
 import com.bioxx.tfc.Entities.EntityFallingBlockTFC;
 import com.bioxx.tfc.Entities.EntityFishHookTFC;
@@ -72,6 +73,7 @@ import com.bioxx.tfc.Handlers.Client.SoundHandler;
 import com.bioxx.tfc.Render.EntityRendererTFC;
 import com.bioxx.tfc.Render.FoliageColorReloadListener;
 import com.bioxx.tfc.Render.GrassColorReloadListener;
+import com.bioxx.tfc.Render.RenderBarrelEntity;
 import com.bioxx.tfc.Render.RenderBear;
 import com.bioxx.tfc.Render.RenderChickenTFC;
 import com.bioxx.tfc.Render.RenderCowTFC;
@@ -211,7 +213,7 @@ public class ClientProxy extends CommonProxy
 		//RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderPlayerTFC());
 		RenderingRegistry.registerEntityRenderingHandler(EntityProjectileTFC.class, new RenderArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFishHookTFC.class, new RenderFish());
-
+		RenderingRegistry.registerEntityRenderingHandler(EntityBarrel.class, new RenderBarrelEntity());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFallingBlockTFC.class, new RenderFallingBlock());
 
 		RenderingRegistry.registerBlockHandler(TFCBlocks.chestRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderChest());

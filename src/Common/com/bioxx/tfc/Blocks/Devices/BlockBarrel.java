@@ -8,7 +8,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
@@ -34,6 +32,7 @@ import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
+import com.bioxx.tfc.Entities.EntityBarrel;
 import com.bioxx.tfc.Items.ItemBlocks.ItemBarrels;
 import com.bioxx.tfc.Items.ItemBlocks.ItemLargeVessel;
 import com.bioxx.tfc.TileEntities.TEBarrel;
@@ -123,18 +122,62 @@ public class BlockBarrel extends BlockTerraContainer
 		return TFCBlocks.barrelRenderId;
 	}
 
-	/**
-	 * Called whenever the block is added into the world. Args: world, x, y, z
-	 */
 	@Override
-	public void onBlockAdded(World par1World, int par2, int par3, int par4)
+	public void onBlockPreDestroy(World world, int x, int y, int z, int meta) 
 	{
-		super.onBlockAdded(par1World, par2, par3, par4);
+		if (!world.isRemote)
+		{
+			TEBarrel te = (TEBarrel)world.getTileEntity(x, y, z);
+			if (te != null && te.shouldDropItem)
+			{
+				if(te.getSealed())
+				{
+					ItemStack is = new ItemStack(Item.getItemFromBlock(this), 1, te.barrelType);
+					NBTTagCompound nbt = writeBarrelToNBT(te);
+					is.setTagCompound(nbt);
+					EntityItem ei = new EntityItem(world,x,y,z,is);
+					world.spawnEntityInWorld(ei);
+
+					for(int s = 0; s < te.getSizeInventory(); ++s)
+						te.setInventorySlotContents(s, null);
+				}
+				else
+				{
+					ItemStack is = new ItemStack(Item.getItemFromBlock(this), 1, te.barrelType);
+					EntityItem ei = new EntityItem(world,x,y,z,is);
+					world.spawnEntityInWorld(ei);
+				}
+			}
+		}
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion)
+	public void onBlockExploded(World world, int x, int y, int z, Explosion explosion)
 	{
+		onBlockDestroyedByExplosion(world, x, y, z, explosion);
+		world.setBlockToAir(x, y, z);
+	}
+
+	@Override
+	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion exp)
+	{
+		TEBarrel te = (TEBarrel)world.getTileEntity(x, y, z);
+		if(te != null && te.getGunPowderCount() >= 256 && te.getSealed())
+		{
+			ItemStack is = new ItemStack(this, 1, te.barrelType);
+			NBTTagCompound nbt = writeBarrelToNBT(te);
+			is.setTagCompound(nbt);
+			EntityBarrel BE = new EntityBarrel(world, x, y, z, is);
+			BE.setFuse(1);
+			te.clearInventory();
+			te.shouldDropItem = false;
+			world.spawnEntityInWorld(BE);
+
+		}
+		else
+		{
+			super.onBlockDestroyedByExplosion(world, x, y, z, exp);
+		}
 	}
 
 	/**
@@ -164,6 +207,13 @@ public class BlockBarrel extends BlockTerraContainer
 	}
 
 	@Override
+	public boolean canDropFromExplosion(Explosion exp)
+	{
+
+		return true;
+	}
+
+	@Override
 	protected ItemStack createStackedBlock(int par1)
 	{
 		int j = 0;
@@ -178,48 +228,22 @@ public class BlockBarrel extends BlockTerraContainer
 	{
 		if (world.isBlockIndirectlyGettingPowered(x, y, z))
 		{
-			TEBarrel TE = (TEBarrel)world.getTileEntity(x, y, z);
-			if(TE.getGunPowderCount() >= 256 && TE.getSealed())
+			TEBarrel te = (TEBarrel)world.getTileEntity(x, y, z);
+			if(te.getGunPowderCount() >= 256 && te.getSealed())
 			{
-				BarrelEntity BE = new BarrelEntity(world, x, y, z);
+				ItemStack is = new ItemStack(this, 1, te.barrelType);
+				NBTTagCompound nbt = writeBarrelToNBT(te);
+				is.setTagCompound(nbt);
+				EntityBarrel BE = new EntityBarrel(world, x, y, z, is);
+				te.clearInventory();
+				te.shouldDropItem = false;
 				world.spawnEntityInWorld(BE);
 				world.playSoundAtEntity(BE, "game.tnt.primed", 1.0F, 1.0F);
 				//float f = 16.0F;
 				//EI.worldObj.createExplosion(EI, EI.posX, EI.posY, EI.posZ, f, true);
-				//world.setBlockToAir(x, y, z);
+				world.setBlockToAir(x, y, z);
 			}
 		}
-	}
-
-	/**
-	 * Called whenever the block is removed.
-	 */
-	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
-	{
-		TEBarrel te = (TEBarrel)world.getTileEntity(x, y, z);
-
-		if (te != null)
-		{
-			if(te.getSealed())
-			{
-				ItemStack is = new ItemStack(Item.getItemFromBlock(block), 1, te.barrelType);
-				NBTTagCompound nbt = writeBarrelToNBT(te);
-				is.setTagCompound(nbt);
-				EntityItem ei = new EntityItem(world,x,y,z,is);
-				world.spawnEntityInWorld(ei);
-
-				for(int s = 0; s < te.getSizeInventory(); ++s)
-					te.setInventorySlotContents(s, null);
-			}
-			else
-			{
-				ItemStack is = new ItemStack(Item.getItemFromBlock(block), 1, te.barrelType);
-				EntityItem ei = new EntityItem(world,x,y,z,is);
-				world.spawnEntityInWorld(ei);
-			}
-		}
-		super.breakBlock(world, x, y, z, block, meta);
 	}
 
 	@Override
@@ -273,16 +297,6 @@ public class BlockBarrel extends BlockTerraContainer
 			if(world.getTileEntity(x, y, z) != null)
 			{
 				TEBarrel te = (TEBarrel)(world.getTileEntity(x, y, z));
-				if(te.getGunPowderCount() >= 256 && te.getSealed())
-				{
-					List<Entity> list = world.getEntitiesWithinAABB(BarrelEntity.class, AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1));
-					for(Entity entity : list)
-					{
-						entity.setDead();
-					}
-					return true;
-				}
-
 				if(!handleInteraction(player, te))
 				{
 					if(te.getFluidLevel() > 0 || te.getInvCount() == 0)
@@ -310,7 +324,7 @@ public class BlockBarrel extends BlockTerraContainer
 
 				if ( equippedItem.stackSize == 0 )
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-				
+
 				ItemStack is = te.addLiquid(tmp);
 
 				if ( equippedItem.stackSize == 0 && ( is.getMaxStackSize() == 1 || ! player.inventory.hasItemStack(is) ) ) // put buckets in the slot you used them from.
@@ -326,7 +340,7 @@ public class BlockBarrel extends BlockTerraContainer
 					// for some reason the players inventory won't update without this.
 					player.inventoryContainer.detectAndSendChanges();
 				}
-				
+
 				return true;
 			}
 			else if(FluidContainerRegistry.isEmptyContainer(equippedItem))
@@ -334,10 +348,10 @@ public class BlockBarrel extends BlockTerraContainer
 				ItemStack tmp = equippedItem.copy();
 				tmp.stackSize = 1;
 				equippedItem.stackSize--;
-				
+
 				if ( equippedItem.stackSize == 0 )
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-				
+
 				ItemStack is = te.removeLiquid(tmp);
 
 				if ( equippedItem.stackSize == 0 && ( is.getMaxStackSize() == 1 || ! player.inventory.hasItemStack(is) ) ) // put buckets in the slot you used them from.
@@ -347,13 +361,13 @@ public class BlockBarrel extends BlockTerraContainer
 					if ( player.inventory.addItemStackToInventory(is) == false )
 						player.dropPlayerItemWithRandomChoice(is, false); // if the new item dosn't fit, drop it.
 				}
-				
+
 				if ( player.inventoryContainer != null )
 				{
 					// for some reason the players inventory won't update without this.
 					player.inventoryContainer.detectAndSendChanges();
 				}
-				
+
 				return true;
 			}
 			else if(equippedItem != null && (equippedItem.getItem() instanceof ItemBarrels || equippedItem.getItem() instanceof ItemLargeVessel))
@@ -445,73 +459,5 @@ public class BlockBarrel extends BlockTerraContainer
 	public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
 	{
 		return true;
-	}
-
-	public class BarrelEntity extends Entity
-	{
-		public int fuse;
-		World world;
-		int x, y, z;
-		public BarrelEntity(World par1World)
-		{
-			super(par1World);
-			this.fuse = 60;
-
-			this.preventEntitySpawning = true;
-			this.setSize(0.98F, 0.98F);
-			this.yOffset = this.height / 2.0F;
-		}
-
-		public BarrelEntity(World par1World, double par2, double par4, double par6)
-		{
-			this(par1World);
-			this.setPosition(par2, par4, par6);
-			world = par1World;
-			this.x = (int)par2;
-			this.y = (int)par4;
-			this.z = (int)par6;
-			float f = (float)(Math.random() * Math.PI * 2.0D);
-			this.motionX = -((float)Math.sin(f)) * 0.02F;
-			this.motionY = 0.20000000298023224D;
-			this.motionZ = -((float)Math.cos(f)) * 0.02F;
-			this.prevPosX = par2;
-			this.prevPosY = par4;
-			this.prevPosZ = par6;
-		}
-
-		@Override
-		public void onUpdate()
-		{
-			fuse--;
-			world.playSoundAtEntity(this, "game.tnt.primed", 1.0F, 1.0F);
-			if(fuse == 0)
-				explode();
-			worldObj.spawnParticle("smoke", posX, posY + 0.5D, posZ, new Random().nextFloat(), 1.0D, new Random().nextFloat());
-		}
-
-		private void explode()
-		{
-			float f = 64.0F;
-			this.worldObj.setBlockToAir(x, y, z);
-			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, f, true);
-			setDead();
-		}
-
-		@Override
-		protected void entityInit()
-		{
-		}
-
-		@Override
-		protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
-		{
-			this.fuse = par1NBTTagCompound.getByte("Fuse");
-		}
-
-		@Override
-		protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
-		{
-			par1NBTTagCompound.setByte("Fuse", (byte)this.fuse);
-		}
 	}
 }

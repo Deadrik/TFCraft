@@ -12,6 +12,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -62,6 +63,13 @@ public class BlockSand extends BlockTerra
 	public int damageDropped(int dmg)
 	{
 		return dmg;
+	}
+
+	@Override
+	public void onBlockExploded(World world, int x, int y, int z, Explosion explosion)
+	{
+		world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+		onBlockDestroyedByExplosion(world, x, y, z, explosion);
 	}
 
 	public static boolean canFallBelow(World world, int x, int y, int z)

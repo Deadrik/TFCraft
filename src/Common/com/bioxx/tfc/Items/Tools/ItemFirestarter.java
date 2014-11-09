@@ -2,29 +2,36 @@ package com.bioxx.tfc.Items.Tools;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEPottery;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 
 public class ItemFirestarter extends ItemTerra
 {
+	private boolean canBeUsed = false;
+	private boolean isCoal = false;
+	private boolean isPottery = false;
+	private boolean canBlockBurn = false;
+
 	public ItemFirestarter()
 	{
 		super();
@@ -51,93 +58,150 @@ public class ItemFirestarter extends ItemTerra
 	}
 
 	@Override
-	public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	public EnumAction getItemUseAction(ItemStack p_77661_1_)
 	{
-		if(!world.isRemote)
+		return EnumAction.bow;
+	}
+
+	@Override
+	public int getMaxItemUseDuration(ItemStack p_77626_1_)
+	{
+		return 20;
+	}
+
+	@Override
+	public void onUsingTick(ItemStack stack, EntityPlayer player, int count)
+	{
+		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(player.worldObj, player, true);
+		if(mop != null && mop.typeOfHit == MovingObjectType.BLOCK)
 		{
-			boolean surroundSolids = world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH) && world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH) &&
-					world.isSideSolid(x - 1, y, z, ForgeDirection.EAST) && world.isSideSolid(x + 1, y, z, ForgeDirection.WEST);
+			World world = player.worldObj;
+			int x = mop.blockX;
+			int y = mop.blockY;
+			int z = mop.blockZ;
+			double hitX = mop.hitVec.xCoord;
+			double hitY = mop.hitVec.yCoord;
+			double hitZ = mop.hitVec.zCoord;
+			int chance = world.rand.nextInt(100);
 
-			if(side == 1 && world.getBlock(x, y, z).isNormalCube() &&
-					world.getBlock(x, y, z).isOpaqueCube() &&
-					world.getBlock(x, y, z).getMaterial() != Material.wood &&
-					world.getBlock(x, y, z).getMaterial() != Material.cloth &&
-					world.isAirBlock(x, y + 1, z) &&
-					world.getBlock(x, y, z) != TFCBlocks.Charcoal &&
-					world.getBlock(x, y, z) != Blocks.coal_block)
+			if(world.getBlock(x, y + 1, z) == TFCBlocks.Firepit)
+				player.stopUsingItem();
+
+			if(count > 0 && world.isRemote)
 			{
+				Boolean genSmoke = canBeUsed || isCoal || isPottery || canBlockBurn;
 
-				List list = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(x, y + 1, z, x + 1, y + 2, z + 1));
-				int numsticks = 0;
-				int hasPaper = 0;
+				if(genSmoke && chance > 70)
+					world.spawnParticle("smoke", hitX, hitY, hitZ, 0.0F, 0.1F, 0.0F);
 
-				if (list != null && !list.isEmpty())
+				if(count < 4 && chance > 70)
+					world.spawnParticle("flame", hitX, hitY, hitZ, 0.0F, 0.0F, 0.0F);
+
+				if (count < 35 && count % 3 == 1)
+					player.playSound(TFC_Sounds.FIRESTARTER, /*volume*/0.5f, /*pitch*/0.05F);
+			}
+			else if(!world.isRemote && count == 1)
+			{
+				if(canBeUsed)
 				{
-					for (Iterator iterator = list.iterator(); iterator.hasNext();)
-					{
-						EntityItem entity = (EntityItem)iterator.next();
-						if(entity.getEntityItem().getItem() == Items.paper)
-							hasPaper = 40;
-						else if(entity.getEntityItem().getItem() == TFCItems.Stick)
-							numsticks+=entity.getEntityItem().stackSize;
-					}
-				}
+					List list = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(x, y + 1, z, x + 1, y + 2, z + 1));
+					int numsticks = 0;
+					int hasStraw = 0;
 
-				itemstack.damageItem(1, entityplayer);
-
-				if(itemstack.getItemDamage() >= itemstack.getMaxDamage())
-					itemstack.stackSize = 0;
-
-				int chance = new Random().nextInt(100);
-				if(chance > 70 - hasPaper)
-				{
-					if(numsticks >= 3)
+					if (list != null && !list.isEmpty())
 					{
 						for (Iterator iterator = list.iterator(); iterator.hasNext();)
 						{
 							EntityItem entity = (EntityItem)iterator.next();
-							if(entity.getEntityItem().getItem() == TFCItems.Stick)
-								entity.setDead();
-							if(entity.getEntityItem().getItem() == Items.paper)
+							if(entity.getEntityItem().getItem() == TFCItems.Straw)
+								hasStraw = 40;
+							else if(entity.getEntityItem().getItem() == TFCItems.Stick)
+								numsticks+=entity.getEntityItem().stackSize;
+						}
+					}
+
+					stack.damageItem(1, player);
+					if(stack.getItemDamage() >= stack.getMaxDamage())
+						stack.stackSize = 0;
+
+					if((chance > 70 - hasStraw) && numsticks >= 3)
+					{
+						for (Iterator iterator = list.iterator(); iterator.hasNext();)
+						{
+							EntityItem entity = (EntityItem)iterator.next();
+							if(entity.getEntityItem().getItem() == TFCItems.Stick || entity.getEntityItem().getItem() == TFCItems.Straw)
 								entity.setDead();
 						}
 						world.setBlock(x, y + 1, z, TFCBlocks.Firepit, 1, 2);
 					}
-					return true;
 				}
-			}
-			else if((world.getBlock(x, y, z) == TFCBlocks.Charcoal && world.getBlockMetadata(x, y, z) > 6) || world.getBlock(x, y, z) == Blocks.coal_block)
-			{
-				if(world.getBlock(x, y - 1, z).getMaterial() == Material.rock &&
-						world.getBlock(x + 1, y, z).getMaterial() == Material.rock &&
-						world.getBlock(x - 1, y, z).getMaterial() == Material.rock &&
-						world.getBlock(x, y, z + 1).getMaterial() == Material.rock &&
-						world.getBlock(x, y, z - 1).getMaterial() == Material.rock &&
-						world.getBlock(x, y - 1, z).isNormalCube() && surroundSolids)
+				else if(isCoal)
 				{
-					int chance = new Random().nextInt(100);
+					if(chance > 70)
+						world.setBlock(x, y, z, TFCBlocks.Forge, 1, 2);
+					stack.damageItem(1, player);
+				}
+				else if(isPottery)
+				{
 					if(chance > 70)
 					{
-						world.setBlock(x, y, z, TFCBlocks.Forge, 1, 2);
-						TEForge te = (TEForge)world.getTileEntity(x, y, z);
+						TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
+						te.StartPitFire();
 					}
-					itemstack.damageItem(1, entityplayer);
-					return true;
+					stack.damageItem(1, player);
 				}
-			}
-			else if(world.getBlock(x, y, z) == TFCBlocks.Pottery && surroundSolids)
-			{
-				int chance = new Random().nextInt(100);
-				if(chance > 70)
+				else if(canBlockBurn)
 				{
-					TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
-					te.StartPitFire();
+					if(chance > 70)
+						world.setBlock(x, y + 1, z, Blocks.fire);
+					stack.damageItem(1, player);
 				}
-				itemstack.damageItem(1, entityplayer);
-				return true;
 			}
-			return false;
 		}
+	}
+
+	@Override
+	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
+	{
+		if(canBeUsed || isCoal || isPottery || canBlockBurn)
+			player.setItemInUse(is, this.getMaxItemUseDuration(is));
+		return is;
+	}
+
+	@Override
+	public boolean onItemUseFirst(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	{
+		Block block = world.getBlock(x, y, z);
+		boolean surroundSolids = world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH)
+				&& world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH)
+				&& world.isSideSolid(x - 1, y, z, ForgeDirection.EAST)
+				&& world.isSideSolid(x + 1, y, z, ForgeDirection.WEST);
+		boolean surroundRock = world.getBlock(x, y - 1, z).getMaterial() == Material.rock
+				&& world.getBlock(x + 1, y, z).getMaterial() == Material.rock
+				&& world.getBlock(x - 1, y, z).getMaterial() == Material.rock
+				&& world.getBlock(x, y, z + 1).getMaterial() == Material.rock
+				&& world.getBlock(x, y, z - 1).getMaterial() == Material.rock
+				&& world.getBlock(x, y - 1, z).isNormalCube();
+		canBeUsed = side == 1
+				&& block.isNormalCube()
+				&& block.isOpaqueCube()
+				&& block.getMaterial() != Material.wood
+				&& block.getMaterial() != Material.cloth
+				&& world.isAirBlock(x, y + 1, z)
+				&& block != TFCBlocks.Charcoal
+				&& block != Blocks.coal_block;
+		isCoal = ((block == TFCBlocks.Charcoal && world.getBlockMetadata(x, y, z) > 6) || block == Blocks.coal_block) && surroundRock && surroundSolids;
+		isPottery = block == TFCBlocks.Pottery && surroundSolids;
+		if(isPottery)
+		{
+			isPottery = false;
+			TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
+			if(!te.isLit() && te.wood == 8)
+				isPottery = true;
+		}
+		// If the firestarter should be used with all flammable blocks, uncomment the next line.
+		//canBlockBurn = side == 1 && Blocks.fire.canCatchFire(world, x, y, z, ForgeDirection.UP);
+
 		return false;
 	}
 

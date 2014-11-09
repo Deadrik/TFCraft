@@ -1,10 +1,10 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IIcon;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockMM extends BlockStone
 {

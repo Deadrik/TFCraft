@@ -267,6 +267,8 @@ public class FoodCraftingHandler
 				if(knifeSlot >= 0)
 				{
 					player.inventory.getStackInSlot(knifeSlot).damageItem(1 , player);
+					if(player.inventory.getStackInSlot(knifeSlot).getItemDamage() == player.inventory.getStackInSlot(knifeSlot).getMaxDamage())
+						player.inventory.setInventorySlotContents(knifeSlot, null);
 					float decay = Food.getDecay(craftResult);
 					Food.setDecay(craftResult, 0);
 					Food.setWeight(craftResult, Food.getWeight(craftResult)-decay);
