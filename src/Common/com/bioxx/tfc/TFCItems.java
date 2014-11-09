@@ -61,6 +61,7 @@ import com.bioxx.tfc.Items.ItemStick;
 import com.bioxx.tfc.Items.ItemStoneBrick;
 import com.bioxx.tfc.Items.ItemTFCArmor;
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.Items.ItemTorchOff;
 import com.bioxx.tfc.Items.ItemTuyere;
 import com.bioxx.tfc.Items.ItemUnfinishedArmor;
 import com.bioxx.tfc.Items.ItemYarn;
@@ -864,6 +865,7 @@ public class TFCItems
 	public static Item FlatClay;
 	public static Item FireBrick;
 	public static Item Stick;
+	public static Item TorchOff;
 	public static Item Arrow;
 	public static Item Rope;
 
@@ -1019,6 +1021,7 @@ public class TFCItems
 		FishingRod = new ItemCustomFishingRod().setUnlocalizedName("fishingRod").setTextureName("tools/fishing_rod");
 		Coal = new ItemCoal().setUnlocalizedName("coal");
 		Stick = new ItemStick().setFull3D().setUnlocalizedName("stick");
+		TorchOff = new ItemTorchOff().setUnlocalizedName("torch_off");
 		Bow = new ItemCustomBow().setUnlocalizedName("bow").setTextureName("bow");
 		//Items.bow = (ItemBow) Bow;
 		Arrow = new ItemArrow().setUnlocalizedName("arrow").setCreativeTab(TFCTabs.TFCWeapons);
@@ -2630,6 +2633,7 @@ public class TFCItems
 		GameRegistry.registerItem(FishingRod, FishingRod.getUnlocalizedName());
 		GameRegistry.registerItem(Coal, Coal.getUnlocalizedName());
 		GameRegistry.registerItem(Stick, Stick.getUnlocalizedName());
+		GameRegistry.registerItem(TorchOff, TorchOff.getUnlocalizedName());
 		GameRegistry.registerItem(Bow, Bow.getUnlocalizedName());
 		GameRegistry.registerItem(Arrow, Arrow.getUnlocalizedName());
 		GameRegistry.registerItem(Dye, Dye.getUnlocalizedName());
@@ -2897,6 +2901,7 @@ public class TFCItems
 		TFCFuelHandler.registerFuel(Bow, 100);
 		TFCFuelHandler.registerFuel(FishingRod, 100);
 		TFCFuelHandler.registerFuel(Stick, 100);
+		TFCFuelHandler.registerFuel(TorchOff, 100);
 		TFCFuelHandler.registerFuel(Coal, 1600);
 		TFCFuelHandler.registerFuel(WoolCloth, 20);
 		TFCFuelHandler.registerFuel(SilkCloth, 20);

@@ -125,12 +125,13 @@ public class BlockTorch extends BlockTerraContainer
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		Item item = getItemDropped(metadata, world.rand, fortune);
 
 		if(metadata >= 8)
-			return ret;
-
-		Item item = getItemDropped(metadata, world.rand, fortune);
-		if (item != null)
+		{
+			ret.add(new ItemStack(TFCItems.TorchOff, 1, 0));
+		}
+		else if (item != null)
 		{
 			ret.add(new ItemStack(item, 1, damageDropped(metadata)));
 		}
@@ -330,27 +331,27 @@ public class BlockTorch extends BlockTerraContainer
 			int l = world.getBlockMetadata(x, y, z);
 			boolean flag = false;
 
-			if (!world.isSideSolid(x - 1, y, z, EAST, true) && l == 1)
+			if (!world.isSideSolid(x - 1, y, z, EAST, true) && ( l == 1 || l == 9 ))
 			{
 				flag = true;
 			}
 
-			if (!world.isSideSolid(x + 1, y, z, WEST, true) && l == 2)
+			if (!world.isSideSolid(x + 1, y, z, WEST, true) && ( l == 2 || l == 10 ))
 			{
 				flag = true;
 			}
 
-			if (!world.isSideSolid(x, y, z - 1, SOUTH, true) && l == 3)
+			if (!world.isSideSolid(x, y, z - 1, SOUTH, true) && ( l == 3 || l == 11 ))
 			{
 				flag = true;
 			}
 
-			if (!world.isSideSolid(x, y, z + 1, NORTH, true) && l == 4)
+			if (!world.isSideSolid(x, y, z + 1, NORTH, true) && ( l == 4 || l == 12 ))
 			{
 				flag = true;
 			}
 
-			if (!this.canSupportTorch(world, x, y - 1, z) && l == 5)
+			if (!this.canSupportTorch(world, x, y - 1, z) && ( l == 5 || l == 13 ))
 			{
 				flag = true;
 			}
