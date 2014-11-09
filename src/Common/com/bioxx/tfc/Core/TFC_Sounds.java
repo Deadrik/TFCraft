@@ -14,6 +14,7 @@ public class TFC_Sounds
 	public static final String ROOSTERCROW = LOCATION + "mob.rooster.cry";
 	public static final String BELLOWS = LOCATION + "bellows.blow.air";
 	public static final String CERAMICBREAK = LOCATION + "item.ceramicbreak";
+	public static final String FIRESTARTER = LOCATION + "item.firestarter";
 	public static final String DEERSAY = LOCATION + "mob.deer.say";
 	public static final String DEERCRY = LOCATION + "mob.deer.cry";
 	public static final String DEERHURT = LOCATION + "mob.deer.hurt";
