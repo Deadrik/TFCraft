@@ -1,7 +1,6 @@
 package com.bioxx.tfc.Items;
 
 import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,7 +12,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
@@ -105,7 +103,9 @@ public class ItemLogs extends ItemTerra
 	@Override
 	public IIcon getIconFromDamage(int meta)
 	{
-		return icons[meta];
+		if(meta < icons.length)
+			return icons[meta];
+		return icons[0];
 	}
 
 	IIcon[] icons = new IIcon[Global.WOOD_ALL.length];
@@ -238,9 +238,6 @@ public class ItemLogs extends ItemTerra
 		int meta = m % 8;
 		Block log = TFCBlocks.WoodHoriz;
 		switch (m/8) {
-		case 0:
-			log = TFCBlocks.WoodHoriz;
-			break;
 		case 1:
 			log = TFCBlocks.WoodHoriz2;
 			break;
@@ -248,7 +245,7 @@ public class ItemLogs extends ItemTerra
 			log = TFCBlocks.WoodHoriz3;
 			break;
 		case 3:
-			log = TFCBlocks.WoodHoriz4;
+			//log = TFCBlocks.WoodHoriz4;
 			break;
 		}
 

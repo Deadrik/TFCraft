@@ -1,10 +1,8 @@
 package com.bioxx.tfc.Blocks.Flora;
 
 import net.minecraft.util.IIcon;
-
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -13,9 +11,14 @@ public class BlockLogHoriz2 extends BlockLogHoriz
 	public BlockLogHoriz2(int off)
 	{
 		super(off);
-		woodNames = new String[Global.WOOD_ALL.length - 16];
-		if(16 + off < Global.WOOD_ALL.length)
-			System.arraycopy(Global.WOOD_ALL, 16 + off, woodNames, 0, Global.WOOD_ALL.length - 16 > off ? off : Global.WOOD_ALL.length - 16);
+		int size = Global.WOOD_ALL.length - 16 - off;
+		if(size < 0) size = 0;
+		woodNames = new String[size * 2];
+		if(off < Global.WOOD_ALL.length - 16)
+		{
+			System.arraycopy(Global.WOOD_ALL, 16 + off, woodNames, 0, size);
+			System.arraycopy(Global.WOOD_ALL, 16 + off, woodNames, size, size);
+		}
 	}
 
 	@Override

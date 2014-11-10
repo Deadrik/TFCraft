@@ -13,7 +13,7 @@ public class BlockLogVert2 extends BlockLogVert
 	public BlockLogVert2()
 	{
 		super();
-		woodNames = new String[Global.WOOD_ALL.length - 16];
+		this.woodNames = new String[Global.WOOD_ALL.length - 16];
 		System.arraycopy(Global.WOOD_ALL, 16, woodNames, 0, Global.WOOD_ALL.length - 16);
 	}
 
@@ -27,6 +27,7 @@ public class BlockLogVert2 extends BlockLogVert
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
+		if(meta > 15) meta -= 16;
 		return TFCBlocks.LogNatural2.getIcon(side, meta);
 	}
 }
