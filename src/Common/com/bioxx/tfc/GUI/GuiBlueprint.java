@@ -51,7 +51,7 @@ public class GuiBlueprint extends GuiScreen
 	protected int xSize = 200;
 
 	/** The Y size of the inventory window in pixels. */
-	protected int ySize = 136;
+	protected int ySize = 172;
 	/**
 	 * Starting X position for the Gui. Inconsistent use for Gui backgrounds.
 	 */
