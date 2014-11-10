@@ -19,6 +19,15 @@ import com.bioxx.tfc.api.Util.Helper;
 
 public class ItemBlueprint extends ItemTerra
 {
+	public static final String suffix = "BR:";
+
+	public static final String tag_completed = "Completed";
+	public static final String tag_item_name = "ItemName";
+	public static final String tag_data = "Data";
+	public static final String tag_x_angle = "xAngle";
+	public static final String tag_y_angle = "yAngle";
+	public static final String tag_z_angle = "zAngle";
+
 	public ItemBlueprint()
 	{
 		super();
@@ -38,20 +47,20 @@ public class ItemBlueprint extends ItemTerra
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
 	{
-		MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(player, world);
-		if(objectMouseOver == null)
-			return stack;
-
-		int side = objectMouseOver.sideHit;
-		int x = objectMouseOver.blockX;
-		int y = objectMouseOver.blockY;
-		int z = objectMouseOver.blockZ;
-
-		if(stack.stackTagCompound != null && !stack.stackTagCompound.hasKey("ItemName") &&
-				(world.getBlock(x, y, z) == TFCBlocks.Detailed))
-		{
-			player.openGui(TerraFirmaCraft.instance, 34, player.worldObj, x, y, z);
+		MovingObjectPosition mo = Helper.getMouseOverObject(player, world);
+		int x = (int)player.posX;
+		int y = (int)player.posY;
+		int z = (int)player.posZ;
+		if (mo != null) {
+			x = mo.blockX; y = mo.blockY; z = mo.blockZ;
 		}
+
+		if (mo == null || world.getBlock(mo.blockX, mo.blockY, mo.blockZ) != TFCBlocks.Detailed) {
+			if (stack.hasTagCompound() && stack.stackTagCompound.getBoolean(tag_completed))
+				player.openGui(TerraFirmaCraft.instance, 34, player.worldObj, x, y, z);
+		}
+		else if (!stack.hasTagCompound() || !stack.stackTagCompound.getBoolean(tag_completed))
+			player.openGui(TerraFirmaCraft.instance, 34, player.worldObj, mo.blockX, mo.blockY, mo.blockZ);
 
 		return stack;
 	}
@@ -59,55 +68,69 @@ public class ItemBlueprint extends ItemTerra
 	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
-		if(stack.stackTagCompound == null &&
-				(world.getBlock(x, y, z) == TFCBlocks.Detailed))
+		if (world.getBlock(x, y, z) != TFCBlocks.Detailed)
+			return false;
+
+		if(!stack.hasTagCompound() || !stack.stackTagCompound.getBoolean(tag_completed))
 		{
 			TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 
 			byte[] data = TEDetailed.toByteArray(te.data);
 
 			NBTTagCompound nbt = new NBTTagCompound();
-			nbt.setByteArray("data", data);
+			nbt.setByteArray(tag_data, data);
 
 			stack.setTagCompound(nbt);
 		}
-		else if(stack.stackTagCompound != null && stack.stackTagCompound.hasKey("ItemName") && (world.getBlock(x, y, z) == TFCBlocks.Detailed))
+		else if (stack.hasTagCompound() && stack.stackTagCompound.getBoolean(tag_completed))
 		{
 			int hasChisel = -1;
 			int hasHammer = -1;
 
-			for(int i = 0; i < 9;i++)
-			{
-				if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemHammer)
-					hasHammer = i;
-				if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemChisel)
-					hasChisel = i;
+			if (!player.capabilities.isCreativeMode) {
+				for (int i = 0; i < 9; i++) {
+					if (player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemHammer)
+						hasHammer = i;
+					if (player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemChisel)
+						hasChisel = i;
+				}
+
+				if (hasChisel == -1 || hasHammer == -1)
+					return false;
 			}
 
-			if(hasChisel >= 0 && hasHammer >= 0)
-			{
+			TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
+			BitSet blueprintData = TEDetailed.turnCube(
+							stack.stackTagCompound.getByteArray(tag_data),
+							stack.stackTagCompound.getInteger(tag_x_angle),
+							stack.stackTagCompound.getInteger(tag_y_angle),
+							stack.stackTagCompound.getInteger(tag_z_angle)
+			);
 
-				TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
-				byte[] data = stack.stackTagCompound.getByteArray("data");
-				BitSet blueprintData = TEDetailed.fromByteArray(data, 512);
-				for(int c = 0; c < 512; c++)
+			for(int c = 0; c < 512; c++)
+				if(te.data.get(c) && !blueprintData.get(c))
 				{
-					if(te.data.get(c) && !blueprintData.get(c))
-					{
-						te.data.clear(c);
+					te.data.clear(c);
 
+					if (!player.capabilities.isCreativeMode)
+					{
 						if(player.inventory.mainInventory[hasChisel] != null)
 							player.inventory.mainInventory[hasChisel].damageItem(1, player);
+						else
+							break;
 
 						if(player.inventory.mainInventory[hasHammer] != null)
 							player.inventory.mainInventory[hasHammer].damageItem(1, player);
+						else
+							break;
 					}
 				}
-				if(!world.isRemote)
-				{
-					world.markBlockForUpdate(x, y, z);
+
+			if(!world.isRemote)
+			{
+				world.markBlockForUpdate(x, y, z);
+				if (!player.capabilities.isCreativeMode)
 					stack.stackSize--;
-				}
 			}
 		}
 		return false;
@@ -116,8 +139,9 @@ public class ItemBlueprint extends ItemTerra
 	@Override
 	public String getItemStackDisplayName(ItemStack is)
 	{
-		if(is.hasTagCompound() && is.stackTagCompound.hasKey("ItemName"))
-			return is.stackTagCompound.getString("ItemName");
-		else return StatCollector.translateToLocal("gui.Blueprint");
+		if(is.hasTagCompound() && is.stackTagCompound.hasKey(tag_completed))
+			return suffix + is.stackTagCompound.getString(tag_item_name);
+		else
+			return StatCollector.translateToLocal(this.getUnlocalizedName());
 	}
 }

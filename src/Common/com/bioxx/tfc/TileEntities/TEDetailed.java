@@ -185,7 +185,10 @@ public class TEDetailed extends NetworkTileEntity {
 		return bytes;
 	}
 
-	public static byte[] turnCube(byte[] bytes, int x_angle, int y_angle, int z_angle) {
+	public static BitSet turnCube(byte[] bytes, int x_angle, int y_angle, int z_angle) {
+		if (x_angle == 0 && y_angle == 0 && z_angle == 0)
+			return fromByteArray(bytes, 512);
+
 		BitSet data = fromByteArray(bytes, 512);
 		BitSet turned_data = new BitSet(512);
 
@@ -202,7 +205,13 @@ public class TEDetailed extends NetworkTileEntity {
 						_y = 7 - _z;
 						_z = buf;
 					}
-
+					// Z:
+					for (int i = 0; i < z_angle; i += 90)
+					{
+						int buf = _x;
+						_x = 7 - _y;
+						_y = buf;
+					}
 					// Y:
 					for (int i = 0; i < y_angle; i += 90)
 					{
@@ -211,19 +220,11 @@ public class TEDetailed extends NetworkTileEntity {
 						_x = buf;
 					}
 
-					// Z:
-					for (int i = 0; i < z_angle; i += 90)
-					{
-						int buf = _x;
-						_x = 7 - _y;
-						_y = buf;
-					}
-
 					int src_i = (x * 8 + z) * 8 + y;
 					int res_i = (_x * 8 + _z) * 8 + _y;
 					turned_data.set(res_i, data.get(src_i));
 				}
 
-		return toByteArray(turned_data);
+		return turned_data;
 	}
 }
