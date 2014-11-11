@@ -20,7 +20,6 @@ import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
-import com.bioxx.tfc.TileEntities.TEPartial;
 
 public class BlockStair extends BlockPartial
 {
@@ -175,8 +174,6 @@ public class BlockStair extends BlockPartial
 		}
 		if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer && !world.isRemote)
 		{
-			Block block = world.getBlock(x, y, z);
-			byte meta = (byte) world.getBlockMetadata(x, y, z);
 
 			int mode = 0;
 			if(!world.isRemote)
@@ -192,41 +189,11 @@ public class BlockStair extends BlockPartial
 
 			if(mode == 1)
 			{
-				ChangeStairs(world, x, y, z, hitX, hitY, hitZ);
+				ItemChisel.ChangeStairs(world, x, y, z, hitX, hitY, hitZ);
 				entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
 				return true;
 			}
 		}
 		return false;
-	}
-
-	public static void ChangeStairs(World world, int x, int y, int z, float hitX, float hitY, float hitZ)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
-		
-		if( hitY > 0.5F ) {
-			if( ( meta == 4 && hitX < 0.5F && hitZ < 0.5F )
-			 || ( meta == 6 && hitX < 0.5F && hitZ > 0.5F ) ) meta = 0;
-			if( ( meta == 7 && hitX > 0.5F && hitZ < 0.5F )
-			 || ( meta == 5 && hitX > 0.5F && hitZ > 0.5F ) ) meta = 1;
-			if( ( meta == 6 && hitX > 0.5F && hitZ < 0.5F )
-			 || ( meta == 5 && hitX < 0.5F && hitZ < 0.5F ) ) meta = 2;
-			if( ( meta == 7 && hitX < 0.5F && hitZ > 0.5F )
-			 || ( meta == 4 && hitX > 0.5F && hitZ > 0.5F ) ) meta = 3;
-		}
-		else
-		{
-			if( ( meta == 12 && hitX < 0.5F && hitZ < 0.5F )
-			 || ( meta == 14 && hitX < 0.5F && hitZ > 0.5F ) ) meta = 8;
-			if( ( meta == 15 && hitX > 0.5F && hitZ < 0.5F )
-			 || ( meta == 13 && hitX > 0.5F && hitZ > 0.5F ) ) meta = 9;
-			if( ( meta == 14 && hitX > 0.5F && hitZ < 0.5F )
-			 || ( meta == 13 && hitX < 0.5F && hitZ < 0.5F ) ) meta = 10;
-			if( ( meta == 15 && hitX < 0.5F && hitZ > 0.5F )
-			 || ( meta == 12 && hitX > 0.5F && hitZ > 0.5F ) ) meta = 11;
-		}
-		
-		world.setBlockMetadataWithNotify(x, y, z, meta, 0x2);
-		
 	}
 }
