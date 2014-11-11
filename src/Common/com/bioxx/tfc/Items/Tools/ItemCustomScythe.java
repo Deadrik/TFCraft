@@ -18,7 +18,7 @@ public class ItemCustomScythe extends ItemTerraTool
 
 	public ItemCustomScythe(ToolMaterial e)
 	{
-		super(e.getDamageVsEntity(),e, blocks);
+		super((int)-(e.getDamageVsEntity()*0.3f),e, blocks);
 		this.setMaxDamage(e.getMaxUses()*3);
 //		this.damageVsEntity = e.getDamageVsEntity();
 		this.efficiencyOnProperMaterial = e.getEfficiencyOnProperMaterial();
