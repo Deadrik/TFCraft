@@ -102,30 +102,24 @@ public class TFC_Time
 
 	public static String getDateString(long ticks)
 	{
-		int tDays = (int) (ticks/dayLength);
-		int div = tDays/daysInMonth;
-		int rem = tDays-(div*daysInMonth);
-		int d = getDayOfMonth((int)(ticks/hourLength));
-		int tMonths = (int) (ticks/ticksInMonth);
-		div = tMonths/12;
-		rem = tMonths%12;
-		String m = TFC_Time.MONTHS[rem];
-		String date = d + " " + m + ", " + (1000+div);
-
-		return date;
+	    return getDateStringFromHours((int) (ticks / hourLength));
 	}
 
 	public static String getDateStringFromHours(int tHours)
 	{
-		int tDays = tHours/hoursInDay;
-		int div = tDays/daysInMonth;
-		int rem = 0;
-		int d = getDayOfMonth(tDays);
-		int tMonths = div;
-		div = tMonths/12;
-		rem = tMonths%12;
-		String m = TFC_Time.MONTHS[rem];
-		String date = d + " " + m + ", " + (1000+div);
+		int tDays = tHours / hoursInDay;
+
+		int day = tDays % daysInMonth;
+		int tMonths = tDays / daysInMonth;
+
+		int month = tMonths % 12;
+		int year = tMonths / 12;
+
+		int d = day + 1;
+		String m = TFC_Time.MONTHS[month];
+		int y = 1000 + year;
+
+		String date = d + " " + m + ", " + y;
 
 		return date;
 	}
