@@ -1,7 +1,6 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
 import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.TFC_ItemHeat;
@@ -43,6 +41,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	{
 		try
 		{
+			//System.out.println(is.getItemDamage()+":"+MetaNames.length);
 			if(MetaNames != null)
 				return getUnlocalizedName().concat("." + MetaNames[is.getItemDamage()]);
 		}
@@ -53,12 +52,6 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 
 		return super.getUnlocalizedName(is);
 	}
-
-	//	@Override
-	//	public String getItemStackDisplayName(ItemStack is)
-	//	{
-	//		return StringUtil.localize(getUnlocalizedName(is).replace(" ", ""));
-	//	}
 
 	/**
 	 * This is called by inventories in the world to tick things such as temperature and food decay. Override this and 
@@ -136,14 +129,6 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		/*if(MetaNames != null)
-		{
-			icons = new IIcon[MetaNames.length];
-			for(int i = 0; i < MetaNames.length; i++)
-			{
-				icons[i] = registerer.registerIcon(folder+MetaNames[i]);
-			}
-		}*/
 	}
 
 	@Override
@@ -151,5 +136,4 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	{
 		return EnumItemReach.SHORT;
 	}
-
 }

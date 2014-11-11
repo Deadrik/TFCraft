@@ -958,8 +958,6 @@ item.Loom.White Elm.name=White Elm Loom
 item.Loom.Willow.name=Willow Loom
 
 #== Wood Blocks ==
-tile.log2.name=Log
-tile.log.Acacia.name=Acacia Log
 tile.log2.Acacia.name=Acacia Log
 tile.log.Ash.name=Ash Log
 tile.log.Aspen.name=Aspen Log
@@ -1033,7 +1031,6 @@ tile.sapling.White Elm.name=White Elm Sapling
 tile.sapling.Willow.name=Willow Sapling
 
 tile.leaves2.name=Acacia Leaves
-tile.leaves.Acacia.name=Acacia Leaves
 tile.leaves2.Acacia.name=Acacia Leaves
 tile.leaves.Ash.name=Ash Leaves
 tile.leaves.Aspen.name=Aspen Leaves

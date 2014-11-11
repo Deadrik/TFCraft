@@ -97,7 +97,7 @@ public class ItemFirestarter extends ItemTerra
 				if(count < 4 && chance > 70)
 					world.spawnParticle("flame", hitX, hitY, hitZ, 0.0F, 0.0F, 0.0F);
 
-				if (count < 35 && count % 3 == 1)
+				if (count < this.getMaxItemUseDuration(null) - 4 && count % 3 == 1)
 					player.playSound(TFC_Sounds.FIRESTARTER, /*volume*/0.5f, /*pitch*/0.05F);
 			}
 			else if(!world.isRemote && count == 1)
