@@ -55,9 +55,25 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 		}
 	}
 
-	public static void CreateStairs(World world, int x, int y, int z, Block id, int meta, byte m)
+	public static void CreateStairs(World world, int x, int y, int z, Block id, int meta, float hitX, float hitY, float hitZ)
 	{
-		world.setBlock(x, y, z, TFCBlocks.stoneStairs, m, 0x2);
+		int rot = 0;
+
+		if( hitY > 0.5F ) {
+			if( hitX < 0.5F && hitZ > 0.5F ) rot = 4;
+			if( hitX > 0.5F && hitZ < 0.5F ) rot = 5;
+			if( hitX < 0.5F && hitZ < 0.5F ) rot = 6;
+			if( hitX > 0.5F && hitZ > 0.5F ) rot = 7;
+		}
+		else
+		{
+			if( hitX < 0.5F && hitZ > 0.5F ) rot = 12;
+			if( hitX > 0.5F && hitZ < 0.5F ) rot = 13;
+			if( hitX < 0.5F && hitZ < 0.5F ) rot = 14;
+			if( hitX > 0.5F && hitZ > 0.5F ) rot = 15;
+		}
+		
+		world.setBlock(x, y, z, TFCBlocks.stoneStairs, rot, 0x2);
 		TEPartial te = (TEPartial)world.getTileEntity(x, y, z);
 		te.TypeID = (short) Block.getIdFromBlock(id);
 		te.MetaID = (byte) meta;
@@ -255,39 +271,12 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 	@Override
 	public boolean onUsed(World world, EntityPlayer player, int x, int y, int z, Block block, int meta, int side, float hitX, float hitY, float hitZ)
 	{
-		byte newMeta = 0;
-		if (side == 0)
-		{
-			newMeta = (byte) (newMeta | 4);
-		}
-
-		int rot = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-		byte flip = (byte) (newMeta & 4);
-		byte rotation = 0;
-
-		if (rot == 0)
-		{
-			rotation = (byte) ( 2 | flip);
-		}
-		else if (rot == 1)
-		{
-			rotation = (byte) ( 1 | flip);
-		}
-		else if (rot == 2)
-		{
-			rotation = (byte) ( 3 | flip);
-		}
-		else if (rot == 3)
-		{
-			rotation = (byte) ( 0 | flip);
-		}
-
 		int mode = 0;
 		PlayerInfo pi = null;
 
 		int hasChisel = -1;
 		int hasHammer = -1;
-
+		
 		for(int i = 0; i < 9;i++)
 		{
 			if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemHammer) {
@@ -337,7 +326,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 					return false;
 				}
 
-				ItemChisel.CreateStairs(world, x, y, z, block, meta, rotation);
+				ItemChisel.CreateStairs(world, x, y, z, block, meta, hitX, hitY, hitZ);
 
 				player.inventory.mainInventory[hasChisel].damageItem(1, player);
 
