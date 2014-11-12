@@ -18,22 +18,18 @@ public class ModelIngot extends ModelBox
     /** An array of 6 TexturedQuads, one for each face of a cube */
     private TexturedQuad[] quadList;
 	
-	public ModelIngot(ModelRenderer renderer, int textureOffsetX, int textureOffsetY,
-			float originX, float originY, float originZ, int width, int height, int depth,
-			float scale) {
-		super(renderer, textureOffsetX, textureOffsetY, originX, originY, originZ, width, height, depth, scale);
+	public ModelIngot(ModelRenderer renderer, int textureOffsetX, int textureOffsetY) {
+		super(renderer, textureOffsetX, textureOffsetY, 0.5F, 0, 0.5F, 15, 4, 7, 0);
+		
+		float originX = .5f;
+		float originY = 0;
+		float originZ = .5f;
 		
         this.vertexPositions = new PositionTextureVertex[8];
         this.quadList = new TexturedQuad[6];
-        float maxX = originX + (float)width;
-        float maxY = originY + (float)height;
-        float maxZ = originZ + (float)depth;
-        originX -= scale;
-        originY -= scale;
-        originZ -= scale;
-        maxX += scale;
-        maxY += scale;
-        maxZ += scale;
+        float maxX = originX + 15;
+        float maxY = originY + 4;
+        float maxZ = originZ + 7;
         
         PositionTextureVertex vert0 = new PositionTextureVertex(originX, originY, originZ, 0.0F, 0.0F);
         PositionTextureVertex vert1 = new PositionTextureVertex(maxX, originY, originZ, 0.0F, 8.0F);
@@ -52,18 +48,29 @@ public class ModelIngot extends ModelBox
         this.vertexPositions[6] = vert6;
         this.vertexPositions[7] = vert7;
         
+        int x1 = textureOffsetX + 4;
+        int x2 = textureOffsetX + 20;
+        int x3 = textureOffsetX + 44;
+        int x4 = textureOffsetX + 60;
+            
+        int y1 = textureOffsetY + 4;
+        int y2 = textureOffsetY + 8;
+        int y3 = textureOffsetY + 16;
+        int y4 = textureOffsetY + 20;
+        int y5 = textureOffsetY + 28;
+        
         this.quadList[0] = new TexturedQuad(new PositionTextureVertex[] {vert5, vert1, vert2, vert6}, 
-        		textureOffsetX + depth + width, textureOffsetY + depth, textureOffsetX + depth + width + depth, textureOffsetY + depth + height, renderer.textureWidth, renderer.textureHeight);
+        		x3, y1, x4, y2, renderer.textureWidth, renderer.textureHeight); // petit
         this.quadList[1] = new TexturedQuad(new PositionTextureVertex[] {vert0, vert4, vert7, vert3}, 
-        		textureOffsetX, textureOffsetY + depth, textureOffsetX + depth, textureOffsetY + depth + height, renderer.textureWidth, renderer.textureHeight);
+        		x1, y1, x2, y2, renderer.textureWidth, renderer.textureHeight); // petit
         this.quadList[2] = new TexturedQuad(new PositionTextureVertex[] {vert5, vert4, vert0, vert1}, 
-        		textureOffsetX + depth, textureOffsetY, textureOffsetX + depth + width, textureOffsetY + depth, renderer.textureWidth, renderer.textureHeight);
+        		x2, y4, x3, y5, renderer.textureWidth, renderer.textureHeight); // bottom
         this.quadList[3] = new TexturedQuad(new PositionTextureVertex[] {vert2, vert3, vert7, vert6}, 
-        		textureOffsetX + depth + width, textureOffsetY + depth, textureOffsetX + depth + width + width, textureOffsetY, renderer.textureWidth, renderer.textureHeight);
+        		x2, y2, x3, y3, renderer.textureWidth, renderer.textureHeight); // top
         this.quadList[4] = new TexturedQuad(new PositionTextureVertex[] {vert1, vert0, vert3, vert2}, 
-        		textureOffsetX + depth, textureOffsetY + depth, textureOffsetX + depth + width, textureOffsetY + depth + height, renderer.textureWidth, renderer.textureHeight);
+        		x2, y1, x3, y2, renderer.textureWidth, renderer.textureHeight); // long
         this.quadList[5] = new TexturedQuad(new PositionTextureVertex[] {vert4, vert5, vert6, vert7}, 
-        		textureOffsetX + depth + width + depth, textureOffsetY + depth, textureOffsetX + depth + width + depth + width, textureOffsetY + depth + height, renderer.textureWidth, renderer.textureHeight);
+        		x3, y4, x2, y3, renderer.textureWidth, renderer.textureHeight); // long
 	}
 	
 	@SideOnly(Side.CLIENT)
