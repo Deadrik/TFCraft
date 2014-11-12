@@ -1845,6 +1845,7 @@ tile.Ice.name=Glace
 item.arrow.name=Flèche
 item.book.name=Livre
 item.stick.name=Bâton
+item.torch_off.name=Torche éteint
 item.coal.coal.name=Charbon
 item.coal.charcoal.name=Charbon de bois
 item.Fertilizer.name=Engrais

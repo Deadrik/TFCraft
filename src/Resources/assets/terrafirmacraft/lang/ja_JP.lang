@@ -1845,6 +1845,7 @@ tile.Ice.name=氷
 item.arrow.name=矢
 item.book.name=本
 item.stick.name=棒
+item.torch_off.name=トーチオフ
 item.coal.coal.name=石炭
 item.coal.charcoal.name=木炭
 item.Fertilizer.name=肥料

@@ -1876,6 +1876,7 @@ tile.Ice.name=Ice
 item.arrow.name=Arrow
 item.book.name=Book
 item.stick.name=Stick
+item.torch_off.name=Until Torch
 item.coal.coal.name=Coal
 item.coal.charcoal.name=Charcoal
 item.Fertilizer.name=Fertilizer

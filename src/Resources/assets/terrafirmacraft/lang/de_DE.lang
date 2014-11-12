@@ -1845,6 +1845,7 @@ tile.Ice.name=Eis
 item.arrow.name=Pfeil
 item.book.name=Buch
 item.stick.name=Stock
+item.torch_off.name=Fackel ausgestorben
 item.coal.coal.name=Kohle
 item.coal.charcoal.name=Holzkohle
 item.Fertilizer.name=Dünger
