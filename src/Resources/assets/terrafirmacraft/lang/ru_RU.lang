@@ -2193,6 +2193,7 @@ gui.Inventory=Инвентарь
 gui.ClearSlot=Освободите выходную ячейку.
 gui.LogPile=Поленница
 gui.done=Готово
+gui.cancel=Отмена
 gui.Sluice.Soil=Почва
 gui.Sluice=Промывочный жёлоб
 gui.Workbench.Crafting=Верстак

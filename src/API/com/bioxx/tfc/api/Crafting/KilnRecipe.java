@@ -72,6 +72,10 @@ public class KilnRecipe
 		return KilnLevel;
 	}
 
+    public ItemStack getInput1()
+    {
+        return input1;
+    }
 }
 
 

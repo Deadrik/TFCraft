@@ -59,4 +59,8 @@ public class BarrelLiquidToLiquidRecipe extends BarrelRecipe
 		return null;
 	}
 
+    public FluidStack getInputfluid()
+    {
+        return inputfluid;
+    }
 }

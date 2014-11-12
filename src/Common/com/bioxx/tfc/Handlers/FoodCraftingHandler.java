@@ -285,8 +285,22 @@ public class FoodCraftingHandler
 				//If we're salting the food
 				if(iinventory.getStackInSlot(i).getItem() == TFCItems.Powder && iinventory.getStackInSlot(i).getItemDamage() == 9)
 					Food.setSalted(craftResult, true);
+				boolean f = isInvFull(player);
 
-				if(iinventory.getStackInSlot(i).getItem() instanceof ItemKnife)
+				if(iinventory.getStackInSlot(i).getItem() instanceof ItemKnife && f)
+				{
+					if(FoodCraftingHandler.PreCrafted)
+					{
+						//Food.setWeight(craftResult, finalWeight);
+					}
+					else
+					{
+						Food.setWeight(craftResult, finalWeight);
+						iinventory.getStackInSlot(i).stackSize = 2;
+					}
+				}
+
+				if(iinventory.getStackInSlot(i).getItem() instanceof ItemKnife && (!f || !FoodCraftingHandler.PreCrafted))
 				{
 					if(Food.getDecay(craftResult) > 0)
 					{
@@ -314,6 +328,16 @@ public class FoodCraftingHandler
 			}
 		}
 		return craftResult;
+	}
+
+	public static boolean isInvFull(EntityPlayer player)
+	{
+		for(int i = 0; i < player.inventory.mainInventory.length; i++) 
+		{
+			if(player.inventory.mainInventory[i] == null)
+				return false;
+		}
+		return true;
 	}
 
 	/**

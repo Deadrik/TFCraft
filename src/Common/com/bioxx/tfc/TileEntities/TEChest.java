@@ -317,7 +317,10 @@ public class TEChest extends TileEntityChest implements IInventory
 	public boolean receiveClientEvent(int par1, int par2)
 	{
 		if (par1 == 1)
+		{
 			this.numPlayersUsing = par2;
+			this.checkForAdjacentChests();
+		}
 		return true;
 	}
 
@@ -340,7 +343,8 @@ public class TEChest extends TileEntityChest implements IInventory
 	{
 		this.updateContainingBlockInfo();
 		this.checkForAdjacentChests();
-		super.invalidate();
+		this.tileEntityInvalid = true;
+		//got rid of the super call because it may be interfering with our own calls.
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package com.bioxx.tfc.Items;
 
 import java.util.BitSet;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -61,10 +62,16 @@ public class ItemCustomNameTag extends ItemTerra
 		}
 		if(stack.stackTagCompound != null && !stack.stackTagCompound.hasKey("ItemName"))
 		{
-			player.openGui(TerraFirmaCraft.instance, 34, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+			player.openGui(TerraFirmaCraft.instance, 48, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
 		}
 
 		return stack;
+	}
+	
+	@Override
+	public void registerIcons(IIconRegister registerer)
+	{
+		//Don't
 	}
 
 	@Override

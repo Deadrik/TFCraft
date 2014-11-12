@@ -15,6 +15,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
@@ -222,11 +223,11 @@ public class BlockGrass extends BlockTerra
 			{
 				world.setBlock(i, j, k, TFC_Core.getTypeForDryGrassFromSoil(this), meta, 0x2);
 			}
-			else if (world.getBlockLightValue(i, j + 1, k) < 4 && world.getBlock(i, j + 1, k).getLightOpacity() > 2)
+			else if (world.getBlock(i, j+1, k).isSideSolid(world, i, j+1, k, ForgeDirection.DOWN))
 			{
 				world.setBlock(i, j, k, TFC_Core.getTypeForDirtFromGrass(this), meta, 0x2);
 			}
-			else if (world.getBlockLightValue(i, j + 1, k) >= 4)
+			else if (world.canBlockSeeTheSky(i, j, k))
 			{
 				spreadGrass(world, i, j, k, rand);
 
@@ -274,23 +275,23 @@ public class BlockGrass extends BlockTerra
 		for (int var6 = 0; var6 < 4; ++var6)
 		{
 			int x = i + rand.nextInt(3) - 1;
-			int y = j + rand.nextInt(5) - 3;
 			int z = k + rand.nextInt(3) - 1;
+			int y = world.getTopSolidOrLiquidBlock(x, z);
 
-			float rain = TFC_Climate.getRainfall(world, x, y + 1, z);
+			float rain = TFC_Climate.getRainfall(world, x, y, z);
 
 			Block id = world.getBlock(x, y, z);
 			int meta = world.getBlockMetadata(x, y, z);
 
-			boolean isSolid = world.getBlock(x, y + 1, z).isOpaqueCube();
+			boolean skyAccess = world.canBlockSeeTheSky(x, y, z);
 
 			//Spread to other blocks
-			if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0 && !isSolid)
+			if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0 && skyAccess)
 				world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRainByBlock(id, rain), meta, 0x2);
-			else if (TFC_Core.isClay(id) && rand.nextInt(10) == 0 && !isSolid)
+			else if (TFC_Core.isClay(id) && rand.nextInt(10) == 0 && skyAccess)
 				world.setBlock(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta, 0x2);
-			else if (TFC_Core.isPeat(id) && rand.nextInt(10) == 0 && !isSolid)
-				world.setBlock(x, y, z, TFCBlocks.PeatGrass);
+			else if (TFC_Core.isPeat(id) && rand.nextInt(10) == 0 && skyAccess)
+				world.setBlock(x, y, z, TFCBlocks.PeatGrass, 0, 0x2);
 		}
 	}
 

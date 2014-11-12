@@ -397,7 +397,7 @@ public class TFC_OreDictionary
 
 		OreDictionary.registerOre("materialCloth", new ItemStack(TFCItems.WoolCloth));
 		OreDictionary.registerOre("materialCloth", new ItemStack(TFCItems.SilkCloth));
-		OreDictionary.registerOre("materialWool", new ItemStack(TFCItems.Wool));
+		OreDictionary.registerOre("materialWool", new ItemStack(TFCItems.Wool, 1, WILD));
 
 		//Tools
 		for (Item chisel : Recipes.Chisels)

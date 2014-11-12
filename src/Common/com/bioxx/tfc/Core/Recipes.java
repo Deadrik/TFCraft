@@ -1891,7 +1891,7 @@ public class Recipes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelSheet), null, "bucket", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelBucketEmpty, 1)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelSheet),null, "bucket", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelBucketEmpty, 1)));
 
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RawBloom, 1, WILD), null, "splitbloom", AnvilReq.BRONZE, new ItemStack(TFCItems.Bloom, 1)).setInheritsDamage().clearRecipeSkills());
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RawBloom, 1, WILD), null, "refinebloom", AnvilReq.BRONZE, new ItemStack(TFCItems.Bloom, 1)).setInheritsDamage().clearRecipeSkills());
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.Bloom, 1, 100), null , "refinebloom", AnvilReq.BRONZE, new ItemStack(TFCItems.WroughtIronIngot, 1)).clearRecipeSkills());
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.Bloom, 1, WILD), null, "splitbloom", AnvilReq.BRONZE, new ItemStack(TFCItems.Bloom, 1)).clearRecipeSkills());
 

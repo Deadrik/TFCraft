@@ -3,8 +3,11 @@ package com.bioxx.tfc.Blocks;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bioxx.tfc.api.TFCOptions;
+import ibxm.Player;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -92,6 +95,38 @@ public class BlockDetailed extends BlockPartial
 	{
 		return false;
 	}
+	
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
+	{
+		if (!TFCOptions.enableDetailedBlockSolidSide)
+			return false;
+		if (side == ForgeDirection.UNKNOWN)
+			return false;
+
+		int transpCount = TFCOptions.maxCountOfTranspSubBlocksOnSide;
+		if (transpCount < 0 || transpCount >= 64)
+			return false;
+
+		TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
+
+		int start_x = (side == ForgeDirection.EAST ? 7 : 0);
+		int end_x = (side == ForgeDirection.WEST ? 1 : 8);
+
+		int start_y = (side == ForgeDirection.UP ? 7 : 0);
+		int end_y = (side == ForgeDirection.DOWN ? 1 : 8);
+
+		int start_z = (side == ForgeDirection.SOUTH ? 7 : 0);
+		int end_z = (side == ForgeDirection.NORTH ? 1 : 8);
+
+		for (int sub_x = start_x; sub_x < end_x; ++sub_x)
+			for (int sub_y = start_y; sub_y < end_y; ++sub_y)
+				for (int sub_z = start_z; sub_z < end_z; ++sub_z)
+					if (!te.getBlockExists(sub_x, sub_y, sub_z) && --transpCount < 0)
+						return false;
+
+		return true;
+	}
 
 	@Override
 	public boolean renderAsNormalBlock()
@@ -138,6 +173,8 @@ public class BlockDetailed extends BlockPartial
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
 		if(pi!=null)
 			mode = pi.ChiselMode;
+		
+		TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 
 		int hasChisel = -1;
 		int hasHammer = -1;
@@ -150,34 +187,85 @@ public class BlockDetailed extends BlockPartial
 				hasChisel = i;
 		}
 
-		if(mode == 3 && xSelected != -10)
+		if(mode == 1)
 		{
-			TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
+			int index = -10;
+			
+			if( xSelected < 4 && ySelected < 4 && zSelected < 4 )
+				for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++) {
+					index = (subX * 8 + subZ) * 8 + subY;
+					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
+				}
+			if( xSelected > 3 && ySelected < 4 && zSelected < 4 )
+				for(int subX = 4; subX < 8; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++) {
+					index = (subX * 8 + subZ) * 8 + subY;
+					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
+				}
+			if( xSelected > 3 && ySelected < 4 && zSelected > 3 )
+				for(int subX = 4; subX < 8; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 0; subY < 4; subY++) {
+					index = (subX * 8 + subZ) * 8 + subY;
+					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
+				}
+			if( xSelected < 4 && ySelected < 4 && zSelected > 3 )
+				for(int subX = 0; subX < 4; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 0; subY < 4; subY++) {
+					index = (subX * 8 + subZ) * 8 + subY;
+					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
+				}
+			if( xSelected < 4 && ySelected > 3 && zSelected < 4 )
+				for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 4; subY < 8; subY++) {
+					index = (subX * 8 + subZ) * 8 + subY;
+					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
+				}
+			if( xSelected > 3 && ySelected > 3 && zSelected < 4 )
+				for(int subX = 4; subX < 8; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 4; subY < 8; subY++) {
+					index = (subX * 8 + subZ) * 8 + subY;
+					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
+				}
+			if( xSelected > 3 && ySelected > 3 && zSelected > 3 )
+				for(int subX = 4; subX < 8; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 4; subY < 8; subY++) {
+					index = (subX * 8 + subZ) * 8 + subY;
+					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
+				}
+			if( xSelected < 4 && ySelected > 3 && zSelected > 3 )
+				for(int subX = 0; subX < 4; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 4; subY < 8; subY++) {
+					index = (subX * 8 + subZ) * 8 + subY;
+					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
+				}
+			
+			return true;
+		}
+		else if(mode == 3 && xSelected != -10)
+		{
 			int index = (xSelected * 8 + zSelected) * 8 + ySelected;
 
 			if(index >= 0)
 			{
-				te.data.clear(index);
-				te.clearQuad(xSelected, ySelected, zSelected);
-				if(te.isBlockEmpty())
-				{
-					world.setBlockToAir(x, y, z);
-				}
-				if(player.inventory.mainInventory[hasChisel] != null)
-					player.inventory.mainInventory[hasChisel].damageItem(1, player);
-
-				if(player.inventory.mainInventory[hasHammer] != null)
-					player.inventory.mainInventory[hasHammer].damageItem(1, player);
-
-				NBTTagCompound nbt = new NBTTagCompound();
-				nbt.setByte("packetType", TEDetailed.Packet_Update);
-				nbt.setInteger("index", index);
-				te.createDataNBT(nbt);
-				te.broadcastPacketInRange(te.createDataPacket(nbt));
+				deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
 			}
 			return true;
 		}
 		return false;
+	}
+
+	public void deleteBox(World world, int x, int y, int z, EntityPlayer player, TEDetailed te, int index, int hasChisel, int hasHammer)
+	{
+		te.data.clear(index);
+		te.clearQuad(xSelected, ySelected, zSelected);
+		if(te.isBlockEmpty())
+		{
+			world.setBlockToAir(x, y, z);
+		}
+		if(player.inventory.mainInventory[hasChisel] != null)
+			player.inventory.mainInventory[hasChisel].damageItem(1, player);
+
+		if(player.inventory.mainInventory[hasHammer] != null)
+			player.inventory.mainInventory[hasHammer].damageItem(1, player);
+		
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setByte("packetType", TEDetailed.Packet_Update);
+		nbt.setInteger("index", index);
+		te.createDataNBT(nbt);
+		te.broadcastPacketInRange(te.createDataPacket(nbt));
 	}
 
 	@Override
