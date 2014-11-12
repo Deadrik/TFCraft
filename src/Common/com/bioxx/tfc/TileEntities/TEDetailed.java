@@ -141,7 +141,7 @@ public class TEDetailed extends NetworkTileEntity
 		if(packetType == TEDetailed.Packet_Update)
 		{
 			int index = nbt.getInteger("index");
-			data.flip(index);
+			data.set(index, false);
 
 			for(int subX = 0; subX < 8; subX++)
 			{
