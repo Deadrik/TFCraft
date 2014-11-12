@@ -173,6 +173,8 @@ public class BlockDetailed extends BlockPartial
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
 		if(pi!=null)
 			mode = pi.ChiselMode;
+		
+		TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 
 		int hasChisel = -1;
 		int hasHammer = -1;
@@ -185,34 +187,85 @@ public class BlockDetailed extends BlockPartial
 				hasChisel = i;
 		}
 
-		if(mode == 3 && xSelected != -10)
+		if(mode == 1)
 		{
-			TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
+			int index = -10;
+			
+			if( xSelected < 4 && ySelected < 4 && zSelected < 4 )
+				for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++) {
+					index = (subX * 8 + subZ) * 8 + subY;
+					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
+				}
+			if( xSelected > 3 && ySelected < 4 && zSelected < 4 )
+				for(int subX = 4; subX < 8; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++) {
+					index = (subX * 8 + subZ) * 8 + subY;
+					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
+				}
+			if( xSelected > 3 && ySelected < 4 && zSelected > 3 )
+				for(int subX = 4; subX < 8; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 0; subY < 4; subY++) {
+					index = (subX * 8 + subZ) * 8 + subY;
+					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
+				}
+			if( xSelected < 4 && ySelected < 4 && zSelected > 3 )
+				for(int subX = 0; subX < 4; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 0; subY < 4; subY++) {
+					index = (subX * 8 + subZ) * 8 + subY;
+					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
+				}
+			if( xSelected < 4 && ySelected > 3 && zSelected < 4 )
+				for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 4; subY < 8; subY++) {
+					index = (subX * 8 + subZ) * 8 + subY;
+					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
+				}
+			if( xSelected > 3 && ySelected > 3 && zSelected < 4 )
+				for(int subX = 4; subX < 8; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 4; subY < 8; subY++) {
+					index = (subX * 8 + subZ) * 8 + subY;
+					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
+				}
+			if( xSelected > 3 && ySelected > 3 && zSelected > 3 )
+				for(int subX = 4; subX < 8; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 4; subY < 8; subY++) {
+					index = (subX * 8 + subZ) * 8 + subY;
+					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
+				}
+			if( xSelected < 4 && ySelected > 3 && zSelected > 3 )
+				for(int subX = 0; subX < 4; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 4; subY < 8; subY++) {
+					index = (subX * 8 + subZ) * 8 + subY;
+					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
+				}
+			
+			return true;
+		}
+		else if(mode == 3 && xSelected != -10)
+		{
 			int index = (xSelected * 8 + zSelected) * 8 + ySelected;
 
 			if(index >= 0)
 			{
-				te.data.clear(index);
-				te.clearQuad(xSelected, ySelected, zSelected);
-				if(te.isBlockEmpty())
-				{
-					world.setBlockToAir(x, y, z);
-				}
-				if(player.inventory.mainInventory[hasChisel] != null)
-					player.inventory.mainInventory[hasChisel].damageItem(1, player);
-
-				if(player.inventory.mainInventory[hasHammer] != null)
-					player.inventory.mainInventory[hasHammer].damageItem(1, player);
-
-				NBTTagCompound nbt = new NBTTagCompound();
-				nbt.setByte("packetType", TEDetailed.Packet_Update);
-				nbt.setInteger("index", index);
-				te.createDataNBT(nbt);
-				te.broadcastPacketInRange(te.createDataPacket(nbt));
+				deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
 			}
 			return true;
 		}
 		return false;
+	}
+
+	public void deleteBox(World world, int x, int y, int z, EntityPlayer player, TEDetailed te, int index, int hasChisel, int hasHammer)
+	{
+		te.data.clear(index);
+		te.clearQuad(xSelected, ySelected, zSelected);
+		if(te.isBlockEmpty())
+		{
+			world.setBlockToAir(x, y, z);
+		}
+		if(player.inventory.mainInventory[hasChisel] != null)
+			player.inventory.mainInventory[hasChisel].damageItem(1, player);
+
+		if(player.inventory.mainInventory[hasHammer] != null)
+			player.inventory.mainInventory[hasHammer].damageItem(1, player);
+		
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setByte("packetType", TEDetailed.Packet_Update);
+		nbt.setInteger("index", index);
+		te.createDataNBT(nbt);
+		te.broadcastPacketInRange(te.createDataPacket(nbt));
 	}
 
 	@Override
