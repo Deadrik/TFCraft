@@ -323,7 +323,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		{
 			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
 			{
-				int i = rand.nextInt(1) + 1;
+				int i = rand.nextInt(2) + 1;
 				for (int x = 0; x<i;x++)
 				{
 					ArrayList<Float> data = new ArrayList<Float>();

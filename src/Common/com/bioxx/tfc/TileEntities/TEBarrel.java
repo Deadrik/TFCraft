@@ -727,7 +727,10 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					FluidStack origFS = getFluidStack() != null ? getFluidStack().copy() : null;
 					if(fluid.isFluidEqual(recipe.getResultFluid(origIS, origFS, time)))
 					{
-						fluid.amount -= recipe.getResultFluid(origIS, origFS, time).amount;
+						if(fluid.getFluid() == TFCFluid.BRINE)
+							fluid.amount -= recipe.getResultFluid(origIS, origFS, time).amount * Food.getWeight(origIS);
+						else
+							fluid.amount -= recipe.getResultFluid(origIS, origFS, time).amount;
 					}
 					else
 					{

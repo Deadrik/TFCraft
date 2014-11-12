@@ -1,18 +1,20 @@
 package com.bioxx.tfc.Blocks.Flora;
 
 import net.minecraft.util.IIcon;
-
 import com.bioxx.tfc.api.Constant.Global;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockLogNatural2 extends BlockLogNatural
 {
 	public BlockLogNatural2()
 	{
 		super();
+		this.woodNames = new String[Global.WOOD_ALL.length - 16];
 		System.arraycopy(Global.WOOD_ALL, 16, woodNames, 0, Global.WOOD_ALL.length - 16);
-		sideIcons = new IIcon[woodNames.length];
-		innerIcons = new IIcon[woodNames.length];
-		rotatedSideIcons = new IIcon[woodNames.length];
+		this.sideIcons = new IIcon[woodNames.length];
+		this.innerIcons = new IIcon[woodNames.length];
+		this.rotatedSideIcons = new IIcon[woodNames.length];
 	}
 
 	@Override
@@ -21,8 +23,13 @@ public class BlockLogNatural2 extends BlockLogNatural
 		return dmg += 16;
 	}
 
-	public int getItemDamage(int dmg)
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta)
 	{
-		return dmg += 16;
+		if(meta > 15) meta -= 16;
+		if (side == 0 || side == 1)
+			return innerIcons[meta];
+		return sideIcons[meta];
 	}
 }

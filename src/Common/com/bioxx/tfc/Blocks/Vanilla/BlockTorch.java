@@ -88,13 +88,14 @@ public class BlockTorch extends BlockTerraContainer
 				player.inventory.consumeInventoryItem(TFCItems.Stick);
 				TFC_Core.giveItemToPlayer(new ItemStack(TFCBlocks.Torch), player);
 			}
-			else if(world.getBlockMetadata(x, y, z) >= 8 && equippedItem != null)
+			else if(equippedItem != null)
 			{
 				if( equippedItem.getItem() instanceof ItemTorch )
 				{
 					TELightEmitter te = (TELightEmitter)world.getTileEntity(x, y, z);
 					te.hourPlaced = (int)TFC_Time.getTotalHours();
-					world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)-8, 3);
+					if (world.getBlockMetadata(x, y, z) >= 8)
+					    world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)-8, 3);
 				}
 				else if ( equippedItem.getItem() instanceof ItemFirestarter || equippedItem.getItem() instanceof ItemFlintSteel  )
 				{
@@ -112,11 +113,19 @@ public class BlockTorch extends BlockTerraContainer
 					{
 						TELightEmitter te = (TELightEmitter)world.getTileEntity(x, y, z);
 						te.hourPlaced = (int)TFC_Time.getTotalHours();
-						world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)-8, 3);
+						if (world.getBlockMetadata(x, y, z) >= 8)
+						    world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)-8, 3);
 					}
-					
 				}
 			}
+		}
+		else
+		{
+		    if(TFCOptions.enableDebugMode)
+		    {
+		        int metadata = world.getBlockMetadata(x, y, z);
+		        System.out.println("Meta = "+(new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
+		    }
 		}
 		return true;
 	}
@@ -256,17 +265,11 @@ public class BlockTorch extends BlockTerraContainer
 		{
 			this.onBlockAdded(world, x, y, z);
 		}
-		if(world.getBlockMetadata(x, y, z) < 8)
+		if(world.getBlockMetadata(x, y, z) < 8 && TFCOptions.torchBurnTime != 0)
 		{
 			TELightEmitter te = (TELightEmitter) world.getTileEntity(x, y, z);
-			if (TFCOptions.torchBurnTime != 0 && te != null)
-			{
-				if (TFC_Time.getTotalHours() > te.hourPlaced + TFCOptions.torchBurnTime)
-				{
-					world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)+8, 3);
-				}
-			}
-			else if(world.isRaining() && world.canBlockSeeTheSky(x, y, z))
+			if ( (te != null && TFC_Time.getTotalHours() > te.hourPlaced + TFCOptions.torchBurnTime) || 
+			        (world.isRaining() && world.canBlockSeeTheSky(x, y, z)) )
 			{
 				world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)+8, 3);
 			}
@@ -438,11 +441,11 @@ public class BlockTorch extends BlockTerraContainer
 			return;
 
 
-		double centerX = (double)((float)x + 0.5F);
-		double centerY = (double)((float)y + 0.7F);
-		double centerZ = (double)((float)z + 0.5F);
-		double d3 = 0.2199999988079071D;
-		double d4 = 0.27000001072883606D;
+		double centerX = x + 0.5F;
+		double centerY = y + 0.7F;
+		double centerZ = z + 0.5F;
+		double d3 = 0.22;
+		double d4 = 0.27;
 
 		if ((meta & 7) == 1)
 		{
