@@ -19,7 +19,7 @@ public class AnvilCraftingHandler
 	@SubscribeEvent
 	public void onAnvilCraft(AnvilCraftEvent event)
 	{
-		if(event.input1.getItem() == TFCItems.RawBloom && event.input1.getItemDamage() > 100)
+		if(event.input1.getItem() == TFCItems.Bloom && event.input1.getItemDamage() > 100)
 		{
 			int dam = event.input1.getItemDamage();
 			float temp = event.input1.getTagCompound()!=null?TFC_ItemHeat.GetTemp(event.input1):0;
