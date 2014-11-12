@@ -178,11 +178,10 @@ public class ClientProxy extends CommonProxy
 	@SideOnly(Side.CLIENT)
 	public void registerRenderInformation()
 	{
+		Minecraft.getMinecraft().entityRenderer = new EntityRendererTFC(Minecraft.getMinecraft(),Minecraft.getMinecraft().getResourceManager());
 		IReloadableResourceManager IRRM = (IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager();
 		IRRM.registerReloadListener(new GrassColorReloadListener());
-		IRRM.registerReloadListener(new FoliageColorReloadListener());
-
-		Minecraft.getMinecraft().entityRenderer = new EntityRendererTFC(Minecraft.getMinecraft(),Minecraft.getMinecraft().getResourceManager());
+		IRRM.registerReloadListener(new FoliageColorReloadListener());		
 		IRRM.registerReloadListener(Minecraft.getMinecraft().entityRenderer);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityJavelin.class, new RenderTerraJavelin());

@@ -73,13 +73,13 @@ public class GuiFoodPrep extends GuiContainerTFC
 		buttonList.clear();
 		if(guiTab == 0)
 		{
-			buttonList.add(new GuiButton(0, guiLeft + 101, guiTop + 33, 42, 20, StatCollector.translateToLocal("gui.FoodPrep.CreateMeal")));
+			buttonList.add(new GuiButton(0, guiLeft + 78, guiTop + 44, 42, 20, StatCollector.translateToLocal("gui.FoodPrep.CreateMeal")));
 			buttonList.add(new GuiFoodPrepTabButton(2, guiLeft+36, guiTop-21, 31, 21, this, new ItemStack(TFCItems.Salad), StatCollector.translateToLocal("gui.FoodPrep.Salad")).setButtonCoord(31, 172));
 			buttonList.add(new GuiFoodPrepTabButton(1, guiLeft+5, guiTop-21, 31, 21, this, new ItemStack(TFCItems.Sandwich), StatCollector.translateToLocal("gui.FoodPrep.Sandwich")));
 		}
 		else if(guiTab == 1)
 		{
-			buttonList.add(new GuiButton(0, guiLeft + 101, guiTop + 33, 42, 20, StatCollector.translateToLocal("gui.FoodPrep.CreateMeal")));
+			buttonList.add(new GuiButton(0, guiLeft + 78, guiTop + 44, 42, 20, StatCollector.translateToLocal("gui.FoodPrep.CreateMeal")));
 			buttonList.add(new GuiFoodPrepTabButton(2, guiLeft+36, guiTop-21, 31, 21, this, new ItemStack(TFCItems.Salad), StatCollector.translateToLocal("gui.FoodPrep.Salad")));
 			buttonList.add(new GuiFoodPrepTabButton(1, guiLeft+5, guiTop-21, 31, 21, this, new ItemStack(TFCItems.Sandwich), StatCollector.translateToLocal("gui.FoodPrep.Sandwich")).setButtonCoord(31, 172));
 		}

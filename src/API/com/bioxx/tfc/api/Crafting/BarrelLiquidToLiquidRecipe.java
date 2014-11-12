@@ -17,7 +17,7 @@ public class BarrelLiquidToLiquidRecipe extends BarrelRecipe
 	public Boolean matches(ItemStack item, FluidStack fluid)
 	{
 		FluidStack itemLiquid = FluidContainerRegistry.getFluidForFilledItem(item);
-		if(barrelFluid != null && barrelFluid.isFluidEqual(fluid) && itemLiquid != null && itemLiquid.isFluidEqual(inputfluid))
+		if(recipeFluid != null && recipeFluid.isFluidEqual(fluid) && itemLiquid != null && itemLiquid.isFluidEqual(inputfluid))
 		{
 			//Make sure that when we combine the liquids that there is enough room in the barrel for the new liquid to fit
 			if(10000-fluid.amount < itemLiquid.amount)
@@ -42,9 +42,9 @@ public class BarrelLiquidToLiquidRecipe extends BarrelRecipe
 	@Override
 	public FluidStack getResultFluid(ItemStack inIS, FluidStack inFS, int sealedTime)
 	{
-		if(outFluid != null)
+		if(recipeOutFluid != null)
 		{
-			FluidStack fs = outFluid.copy();
+			FluidStack fs = recipeOutFluid.copy();
 			FluidStack itemLiquid = FluidContainerRegistry.getFluidForFilledItem(inIS);
 			if(!removesLiquid)
 			{
@@ -52,11 +52,15 @@ public class BarrelLiquidToLiquidRecipe extends BarrelRecipe
 			}
 			else
 			{
-				fs.amount = ( fs.amount * inFS.amount ) / barrelFluid.amount;
+				fs.amount = ( fs.amount * inFS.amount ) / recipeFluid.amount;
 			}
 			return fs;
 		}
 		return null;
 	}
 
+    public FluidStack getInputfluid()
+    {
+        return inputfluid;
+    }
 }

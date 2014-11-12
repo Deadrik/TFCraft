@@ -37,7 +37,7 @@ public class LoomRecipe
 
 	public ItemStack getInItem()
 	{
-		return inItemStack.copy();
+		return inItemStack;
 	}
 
 	public int getReqSize(){
@@ -62,4 +62,9 @@ public class LoomRecipe
 		}
 		return is;
 	}
+
+    public ItemStack getOutItemStack()
+    {
+        return outItemStack;
+    }
 }

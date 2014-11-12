@@ -133,7 +133,7 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 				int j = mop.blockY;
 				int k = mop.blockZ;
 
-				if (!player.canPlayerEdit(i, j, k, mop.sideHit, is) || !(world.getBlock(i, j, k) instanceof IFluidBlock) || is.hasTagCompound())
+				if (!player.canPlayerEdit(i, j, k, mop.sideHit, is) || !(world.getBlock(i, j, k) instanceof IFluidBlock) || is.hasTagCompound() || is.getItemDamage() == 0)
 				{
 					return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
 				}

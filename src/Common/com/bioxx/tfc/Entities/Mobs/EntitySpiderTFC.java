@@ -4,7 +4,9 @@ import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.world.World;
 
@@ -27,5 +29,17 @@ public class EntitySpiderTFC extends EntitySpider implements ICausesDamage
 	public EnumDamageType GetDamageType()
 	{
 		return EnumDamageType.PIERCING;
+	}
+
+	@Override
+	public void onLivingUpdate()
+	{
+		super.onLivingUpdate();
+		if(this.riddenByEntity != null && this.riddenByEntity instanceof EntitySkeleton && !worldObj.isRemote)
+		{
+			EntitySkeleton es = (EntitySkeleton)this.riddenByEntity;
+			es.dismountEntity(es.ridingEntity);
+			es.setDead();
+		}
 	}
 }

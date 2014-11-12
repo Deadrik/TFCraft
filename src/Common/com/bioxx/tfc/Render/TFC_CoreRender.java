@@ -85,14 +85,14 @@ public class TFC_CoreRender
 	{
 		boolean breaking = renderblocks.overrideBlockTexture != null;
 		
-		int var5 = renderblocks.blockAccess.getBlockMetadata(x, y, z);
-		int var6 = var5 & 3;
+		int meta = renderblocks.blockAccess.getBlockMetadata(x, y, z);
+		int rvmeta = meta & 7;
 		float var7 = 0.0F;
 		float var8 = 0.5F;
 		float var9 = 0.5F;
 		float var10 = 1.0F;
 
-		if ((var5 & 4) != 0)
+		if ((meta & 8) != 0)
 		{
 			var7 = 0.5F;
 			var8 = 1.0F;
@@ -105,8 +105,8 @@ public class TFC_CoreRender
 			return false;
 
 		int type = te.TypeID;
-		int meta = te.MetaID;
-		IIcon tex = Block.getBlockById(type).getIcon(0, meta);
+		int temeta = te.MetaID;
+		IIcon tex = Block.getBlockById(type).getIcon(0, temeta);
 		if(!breaking)
 		{
 			//ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
@@ -116,26 +116,48 @@ public class TFC_CoreRender
 		renderblocks.setRenderBounds(0.0F, var7, 0.0F, 1.0F, var8, 1.0F);
 		renderblocks.renderStandardBlock(block, x, y, z);
 
-		if (var6 == 0)
+		if (rvmeta == 0 || rvmeta == 4 )
 		{
 			renderblocks.setRenderBounds(0.5F, var9, 0.0F, 1.0F, var10, 1.0F);
 			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		else if (var6 == 1)
+		else if (rvmeta == 1 || rvmeta == 5 )
 		{
 			renderblocks.setRenderBounds(0.0F, var9, 0.0F, 0.5F, var10, 1.0F);
 			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		else if (var6 == 2)
+		else if (rvmeta == 2 || rvmeta == 6 )
 		{
 			renderblocks.setRenderBounds(0.0F, var9, 0.5F, 1.0F, var10, 1.0F);
 			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		else if (var6 == 3)
+		else if (rvmeta == 3 || rvmeta == 7 )
 		{
 			renderblocks.setRenderBounds(0.0F, var9, 0.0F, 1.0F, var10, 0.5F);
 			renderblocks.renderStandardBlock(block, x, y, z);
 		}
+		
+		if (rvmeta == 4)
+		{
+			renderblocks.setRenderBounds(0.0F, var9, 0.0F, 0.5F, var10, 0.5F);
+			renderblocks.renderStandardBlock(block, x, y, z);
+		}
+		else if (rvmeta == 5)
+		{
+			renderblocks.setRenderBounds(0.5F, var9, 0.5F, 1.0F, var10, 1.0F);
+			renderblocks.renderStandardBlock(block, x, y, z);
+		}
+		else if (rvmeta == 6)
+		{
+			renderblocks.setRenderBounds(0.5F, var9, 0.0F, 1.0F, var10, 0.5F);
+			renderblocks.renderStandardBlock(block, x, y, z);
+		}
+		else if (rvmeta == 7)
+		{
+			renderblocks.setRenderBounds(0.0F, var9, 0.5F, 0.5F, var10, 1.0F);
+			renderblocks.renderStandardBlock(block, x, y, z);
+		}
+		
 		renderblocks.clearOverrideBlockTexture();
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		renderblocks.renderAllFaces = false;

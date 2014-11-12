@@ -33,6 +33,7 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIFindNest;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
@@ -87,7 +88,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		this.tasks.addTask(1, new EntityAIPanic(this, 1.4D));
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
 		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
-		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityChickenTFC.class, 6.0F));
+		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
 		this.tasks.addTask(7, new EntityAILookIdle(this));
 		this.tasks.addTask(6, this.aiEatGrass);
 		addAI();

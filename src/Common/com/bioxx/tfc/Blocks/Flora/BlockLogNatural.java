@@ -2,7 +2,6 @@ package com.bioxx.tfc.Blocks.Flora;
 
 import java.util.List;
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -16,7 +15,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
@@ -27,7 +25,6 @@ import com.bioxx.tfc.TileEntities.TETreeLog;
 import com.bioxx.tfc.api.TreeRegistry;
 import com.bioxx.tfc.api.TreeSchematic;
 import com.bioxx.tfc.api.Constant.Global;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -45,11 +42,11 @@ public class BlockLogNatural extends BlockTerraContainer
 	{
 		super(Material.wood);
 		this.setTickRandomly(true);
-		woodNames = Global.WOOD_ALL.clone();
+		this.woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
-		sideIcons = new IIcon[woodNames.length];
-		innerIcons = new IIcon[woodNames.length];
-		rotatedSideIcons = new IIcon[woodNames.length];
+		this.sideIcons = new IIcon[woodNames.length];
+		this.innerIcons = new IIcon[woodNames.length];
+		this.rotatedSideIcons = new IIcon[woodNames.length];
 	}
 
 	@Override
@@ -109,9 +106,7 @@ public class BlockLogNatural extends BlockTerraContainer
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		if (side == 1)
-			return innerIcons[meta];
-		if (side == 0)
+		if (side == 0 || side == 1)
 			return innerIcons[meta];
 		return sideIcons[meta];
 	}

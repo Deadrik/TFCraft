@@ -267,10 +267,10 @@ item.CornWhiskey.name=Corn Whiskey
 item.Clay.Clay.name=Clay
 item.Clay.Fire Clay.name=Fire Clay
 
-item.clay.clayflatlight.name=Flat Clay Light
-item.clay.clayflatdark.name=Flat Clay Dark
-item.clay.clayflatfire.name=Flat Fire Clay
-item.clay.clayflatdarkfire.name=Flat Fire Clay Dark
+item.Flat Clay.clay flat light.name=Flat Clay
+item.Flat Clay.clay flat dark.name=Flat Clay
+item.Flat Clay.clay flat fire.name=Flat Fire Clay
+item.Flat Clay.clay flat dark fire.name=Flat Fire Clay
 
 item.Jug.Clay Jug.name=Clay Jug
 item.Jug.Ceramic Jug.name=Ceramic Jug
@@ -386,6 +386,7 @@ item.Spindle Head.Spindle Head.name=Spindle Head
 item.Fire Brick.Fire Brick.name=Fire Brick
 item.Fire Brick.Clay Fire Brick.name=Clay Fire Brick
 tile.FireBrick.name=Fire Brick Block
+tile.Pottery.name=Pottery
 
 #= Gems =
 item.Agate.Chipped.name=Chipped Agate
@@ -824,6 +825,7 @@ item.Small Ore.Sphalerite.name=Small Sphalerite
 item.Small Ore.Tetrahedrite.name=Small Tetrahedrite
 
 #== Ore Blocks ==
+tile.Ore.name=Ore
 tile.Ore.Bituminous Coal.name=Bituminous Coal
 tile.Ore.Borax.name=Borax
 tile.Ore.Cinnabar.name=Cinnabar
@@ -956,7 +958,6 @@ item.Loom.White Elm.name=White Elm Loom
 item.Loom.Willow.name=Willow Loom
 
 #== Wood Blocks ==
-tile.log.Acacia.name=Acacia Log
 tile.log2.Acacia.name=Acacia Log
 tile.log.Ash.name=Ash Log
 tile.log.Aspen.name=Aspen Log
@@ -1029,7 +1030,8 @@ tile.sapling.White Cedar.name=White Cedar Sapling
 tile.sapling.White Elm.name=White Elm Sapling
 tile.sapling.Willow.name=Willow Sapling
 
-tile.leaves.Acacia.name=Acacia Leaves
+tile.leaves2.name=Acacia Leaves
+tile.leaves2.Acacia.name=Acacia Leaves
 tile.leaves.Ash.name=Ash Leaves
 tile.leaves.Aspen.name=Aspen Leaves
 tile.leaves.Birch.name=Birch Leaves
@@ -1064,6 +1066,10 @@ tile.wood.Sycamore.name=Sycamore Planks
 tile.wood.White Cedar.name=White Cedar Planks
 tile.wood.White Elm.name=White Elm Planks
 tile.wood.Willow.name=Willow Planks
+
+tile.fruitTreeWood.name=Fruit Tree
+tile.fruitTreeLeaves.name=Fruit Tree Leaves
+tile.fruitTreeLeaves2.name=Fruit Tree Leaves
 
 tile.Door Acacia.name=Acacia Door
 tile.Door Ash.name=Ash Door
@@ -1190,6 +1196,25 @@ tile.WoodSupportV.Sycamore.name=Sycamore Support Beam
 tile.WoodSupportV.White Cedar.name=White Cedar Support Beam
 tile.WoodSupportV.White Elm.name=White Elm Support Beam
 tile.WoodSupportV.Willow.name=Willow Support Beam
+
+tile.WoodSupportH2.name=Wood Support Beam
+tile.WoodSupportH2.Acacia.name=Acacia Support Beam
+tile.WoodSupportH.Ash.name=Ash Support Beam
+tile.WoodSupportH.Aspen.name=Aspen Support Beam
+tile.WoodSupportH.Birch.name=Birch Support Beam
+tile.WoodSupportH.Chestnut.name=Chestnut Support Beam
+tile.WoodSupportH.Douglas Fir.name=Douglas Fir Support Beam
+tile.WoodSupportH.Hickory.name=Hickory Support Beam
+tile.WoodSupportH.Kapok.name=Kapok Support Beam
+tile.WoodSupportH.Maple.name=Maple Support Beam
+tile.WoodSupportH.Oak.name=Oak Support Beam
+tile.WoodSupportH.Pine.name=Pine Support Beam
+tile.WoodSupportH.Sequoia.name=Sequoia Support Beam
+tile.WoodSupportH.Spruce.name=Spruce Support Beam
+tile.WoodSupportH.Sycamore.name=Sycamore Support Beam
+tile.WoodSupportH.White Cedar.name=White Cedar Support Beam
+tile.WoodSupportH.White Elm.name=White Elm Support Beam
+tile.WoodSupportH.Willow.name=Willow Support Beam
 
 tile.Toolrack.Acacia.name=Acacia Tool Rack
 tile.Toolrack.Ash.name=Ash Tool Rack
@@ -1794,6 +1819,9 @@ item.Tin Double Sheet.name=Tin Double Sheet
 item.Wrought Iron Double Sheet.name=Wrought Iron Double Sheet
 item.Zinc Double Sheet.name=Zinc Double Sheet
 
+#== Misc ==
+item.Blueprint=Blueprint
+
 #===========
 #= Devices =
 #===========
@@ -1803,10 +1831,16 @@ tile.BlastFurnace.name=Blast Furnace
 tile.SpawnMeter.name=Protection Meter
 tile.Quern.name=Quern Base
 tile.EarlyBloomery.name=Bloomery
+tile.Molten.name=Molten Ore
 tile.Crucible.name=Crucible
 tile.NestBox.name=Nest Box
 item.SluiceItem.name=Sluice
+tile.Sluice.name=Sluice
 tile.LeatherRack.name=Leather Rack
+tile.FoodPrep.name=Food Prep
+tile.MetalSheet.name=Metal Sheet
+tile.ingotpile.name=Ingot Pile
+tile.SmokeRack.name=Smoke Rack
 
 #== Anvils ==
 tile.Anvil.Stone.name=Stone Anvil
@@ -1911,14 +1945,27 @@ item.Rope.name=Rope
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Straw & Hide Bed
+tile.StrawHideBed.name=Straw & Hide Bed
 tile.customBed.sleep=This bed is too uncomfortable to fall asleep
 tile.BasicPipe.name=Pipe
 tile.ValvePipe.name=Valve Pipe
+tile.Smoke.name=Smoke
 tile.Torch.name=Torch
 tile.Chest.name=Chest
 tile.Bookshelf.name=Bookshelf
 tile.Workbench.name=Workbench
 tile.ButtonWood.name=Wooden Button
+tile.Firepit.name=Firepit
+tile.LogPile.name=Log Pile
+tile.Charcoal.name=Charcoal
+tile.StoneDetailed.name=Detailed
+tile.stoneStairs.name=Stair
+tile.stoneSlabs.name=Slab
+tile.stoneStalac.name=Stalactite
+tile.WoodConstruct.name=Lumber
+
+tile.Sulfur.name=Sulfur
+tile.Reeds.name=Reeds
 
 #= Misc. Plants =
 item.Sugarcane.name=Sugarcane
@@ -2129,6 +2176,8 @@ gui.FoodPrep.Effect=Effect
 gui.FoodPrep.Energy=Energy
 gui.FoodPrep.Filling=Filling
 gui.FoodPrep.Power=Power
+gui.FoodPrep.Sandwich=Sandwich
+gui.FoodPrep.Salad=Salad
 
 #== Metals ==
 gui.metal.Bismuth=Bismuth
@@ -2196,8 +2245,9 @@ gui.Inventory=Inventory
 gui.ClearSlot=Clear an output slot.
 gui.LogPile=Log Pile
 gui.done=Done
+gui.cancel=Cancel
 gui.Sluice.Soil=Soil
-gui.Sluice=Sluice
+gui.Sluice.Overworked=Overworked
 gui.Workbench.Crafting=Crafting
 
 #== Tooltips ==
@@ -2417,13 +2467,13 @@ food.cooked.1=Light
 food.cooked.2=Medium
 food.cooked.3=Dark
 food.cooked.4=Very Dark
-gui.FoodPrep.Sandwich=Sandwich
-gui.FoodPrep.Salad=Salad
 item.Sandwich.name=Sandwich
 item.Salad.name=Salad
+item.Soup.name=Soup
 item.ClayBowl.Ceramic Bowl.name=Ceramic Bowl
 item.ClayBowl.Clay Bowl.name=Clay Bowl
 item.Sugar.name=Sugar
 item.Sea Weed.name=Sea Weed
 word.stage1=Stage 1
 word.stage2=Stage 2
+gui.barrel.preserving=Preserving

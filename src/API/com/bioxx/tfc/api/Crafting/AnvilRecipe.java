@@ -211,6 +211,46 @@ public class AnvilRecipe
 			return skill/total;
 		return 0;
 	}
+
+    public String getPlan()
+    {
+        return plan;
+    }
+
+    public ItemStack getInput1()
+    {
+        return input1;
+    }
+
+    public ItemStack getInput2()
+    {
+        return input2;
+    }
+
+    public boolean isFlux()
+    {
+        return flux;
+    }
+
+    public int getAnvilreq()
+    {
+        return anvilreq;
+    }
+
+    public boolean isInheritsDamage()
+    {
+        return inheritsDamage;
+    }
+
+    public int getCraftingXP()
+    {
+        return craftingXP;
+    }
+
+    public ArrayList<String> getSkillsList()
+    {
+        return skillsList;
+    }
 }
 
 

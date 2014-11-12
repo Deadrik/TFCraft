@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -26,6 +27,7 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.Food;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.BarrelBriningRecipe;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
@@ -305,7 +307,7 @@ public class GuiBarrel extends GuiContainerTFC
 				}
 				GL11.glColor3f(0, 0, 0);
 			}
-
+			ItemStack inStack = barrel.getStackInSlot(0);
 			if(barrel.getFluidStack() != null)
 				drawCenteredString(this.fontRendererObj, barrel.fluid.getFluid().getLocalizedName(), w+88, h+7, 0x555555);
 			if(barrel.sealtime != 0)
@@ -316,26 +318,34 @@ public class GuiBarrel extends GuiContainerTFC
 			{
 				drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.Bloomery.Output")+": "+barrel.recipe.getRecipeName(), w+88, h+72, 0x555555);
 			}
-			else if(barrel.recipe != null && barrel.sealtime != 0 && barrel.getFluidStack() != null && barrel.getFluidStack().getFluid() == TFCFluid.BRINE)
+			else if(barrel.recipe != null && barrel.getSealed() && barrel.getFluidStack() != null && barrel.getFluidStack().getFluid() == TFCFluid.BRINE)
 			{
 				if(barrel.getStackInSlot(0) != null && barrel.getStackInSlot(0).getItem() instanceof IFood && 
 						(((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Fruit ||
 						((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Vegetable ||
-						((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Protein) && !Food.isBrined(barrel.getStackInSlot(0)))
+						((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Protein) && !Food.isBrined(inStack))
 				{
 					drawCenteredString(this.fontRendererObj,StatCollector.translateToLocal("gui.barrel.brining"), w+88, h+72, 0x555555);
 				}
 			}
-			else if(barrel.recipe == null && barrel.getFluidStack() != null && barrel.getFluidStack().getFluid() == TFCFluid.VINEGAR)
+			else if(inStack != null && barrel.recipe == null && barrel.getSealed() && barrel.getFluidStack() != null && 
+					!Food.isPickled(inStack) && Food.getWeight(inStack)/barrel.getFluidStack().amount <= Global.FOOD_MAX_WEIGHT/barrel.getMaxLiquid() && 
+					barrel.getFluidStack().getFluid() == TFCFluid.VINEGAR)
 			{
-				if(barrel.getStackInSlot(0) != null && barrel.getStackInSlot(0).getItem() instanceof IFood && 
-						(((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Fruit ||
-						((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Vegetable ||
-						((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Protein) && 
-						!Food.isPickled(barrel.getStackInSlot(0)) && Food.isBrined(barrel.getStackInSlot(0)))
+				if(barrel.getStackInSlot(0) != null && inStack.getItem() instanceof IFood && 
+						(((IFood)inStack.getItem()).getFoodGroup() == EnumFoodGroup.Fruit ||
+						((IFood)inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable ||
+						((IFood)inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein) && 
+						!Food.isPickled(inStack) && Food.isBrined(inStack))
 				{
 					drawCenteredString(this.fontRendererObj,StatCollector.translateToLocal("gui.barrel.pickling"), w+88, h+72, 0x555555);
 				}
+			}
+			else if(inStack != null && barrel.recipe == null && barrel.getSealed() && barrel.getFluidStack() != null && 
+					Food.isPickled(inStack) && Food.getWeight(inStack)/barrel.getFluidStack().amount <= Global.FOOD_MAX_WEIGHT/barrel.getMaxLiquid()*2 && 
+					barrel.getFluidStack().getFluid() == TFCFluid.VINEGAR)
+			{
+				drawCenteredString(this.fontRendererObj,StatCollector.translateToLocal("gui.barrel.preserving"), w+88, h+72, 0x555555);
 			}
 		}
 		else if(guiTab == 1)

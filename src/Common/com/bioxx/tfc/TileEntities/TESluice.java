@@ -209,7 +209,7 @@ public class TESluice extends TileEntity implements IInventory
 	{
 		int meta = getBlockMetadata();
 		boolean isFoot = BlockSluice.isBlockFootOfBed(meta);
-		if(isFoot)
+		if (isFoot || soilAmount == -1)
 			return;
 
 		/*********************************************************
@@ -292,15 +292,16 @@ public class TESluice extends TileEntity implements IInventory
 					processTimeRemaining = 0;
 				}
 
-				while(processTimeRemaining > 100 && soilAmount > 0)
+				ChunkData cd = TFC_Core.getCDM(worldObj).getData(xCoord >> 4, zCoord >> 4);
+				if (cd.sluicedAmount > 300)
 				{
-					ChunkData cd = TFC_Core.getCDM(worldObj).getData(xCoord >> 4, zCoord >> 4);
-					if(cd.sluicedAmount > 300)
-					{
-						processTimeRemaining = 0;
-						return;
-					}
+					processTimeRemaining = 0;
+					soilAmount = -1;
+					return;
+				}
 
+				while (processTimeRemaining > 100 && soilAmount > 0)
+				{
 					float gemMod = 1;
 					float oreMod = 1;
 					if(soilType == 1)

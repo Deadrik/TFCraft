@@ -32,6 +32,7 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Food.ItemMeal;
 import com.bioxx.tfc.Food.TFCPotion;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Tools.IKnife;
@@ -268,10 +269,11 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 		{
 			spamTimer = TFC_Time.getTotalTicks();
 			Item iType = activeSlot.getStack().getItem();
+			ItemStack activeIS = activeSlot.getStack();
 			for(int i = 9; i < 45 && getEmptyCraftSlot() != -1; i++)
 			{
 				ItemStack is = this.inventorySlots.getSlot(i).getStack();
-				if(is != null && is.getItem() == iType && ((IFood)is.getItem()).getFoodWeight(is) < Global.FOOD_MAX_WEIGHT)
+				if(is != null && is.getItem() == iType && Food.areEqual(activeIS, is) && ((IFood)is.getItem()).getFoodWeight(is) < Global.FOOD_MAX_WEIGHT)
 					this.handleMouseClick(this.inventorySlots.getSlot(i), i, getEmptyCraftSlot(), 7);
 			}
 
@@ -292,25 +294,24 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 					ItemStack is = this.inventorySlots.getSlot(i).getStack();
 					if(is != null && is.getItem() instanceof IKnife)
 					{
-						knifeSlot = i;//knifeSlot = getEmptyCraftSlot();
-						//this.handleMouseClick(this.inventorySlots.getSlot(i), i, knifeSlot, 7);
+						knifeSlot = i;
 						break;
 					}
 				}
 			}
-			for(int i = 9; i < 45 && getEmptyCraftSlot() != -1 && knifeSlot != -1; i++)
+			for(int i = 9; i < 45 && getEmptyCraftSlot() != -1 && knifeSlot != -1 && inventorySlots.getSlot(knifeSlot).getStack() != null; i++)
 			{
 				ItemStack is = this.inventorySlots.getSlot(i).getStack();
-				if(is != null && !(is.getItem() instanceof ItemMeal) && is.getItem() instanceof IFood && ((IFood)is.getItem()).getFoodDecay(is) > 0)
+				int knifeDamage = inventorySlots.getSlot(knifeSlot).getStack().getItemDamage();
+				if(knifeDamage >= inventorySlots.getSlot(knifeSlot).getStack().getMaxDamage())
+					break;
+				if(is != null && !(is.getItem() instanceof ItemMeal) && is.getItem() instanceof IFood && ((IFood)is.getItem()).getFoodDecay(is) > 0 && 
+						Food.getDecayTimer(is) >= TFC_Time.getTotalHours())
 				{
 					this.handleMouseClick(this.inventorySlots.getSlot(i), i, getEmptyCraftSlot(), 7);
 					this.handleMouseClick(this.inventorySlots.getSlot(0), 0, 0, 1);
 				}
 			}
-			/*if(knifeSlot != -1)
-			{
-				this.handleMouseClick(this.inventorySlots.getSlot(knifeSlot), knifeSlot, 0, 1);
-			}*/
 			return true;
 		}
 		else return super.checkHotbarKeys(keycode);

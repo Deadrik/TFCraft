@@ -19,43 +19,43 @@ public class BarrelAlcoholRecipe extends BarrelRecipe
 	@Override
 	public ItemStack getResult(ItemStack inIS, FluidStack inFS, int sealedTime)
 	{
-		return outItemStack;
+		return recipeOutIS;
 	}
 
 	@Override
 	public FluidStack getResultFluid(ItemStack inIS, FluidStack inFS, int sealedTime)
 	{
 		float amt = inFS.amount/10000f;
-		FluidStack out = outFluid.copy();
+		FluidStack out = recipeOutFluid.copy();
 		if(out.tag == null)
 			out.tag = new NBTTagCompound();
 		float weight = Food.getWeight(inIS);
-		out.tag.setFloat("potency", (weight/Food.getWeight(inItemStack))/amt);
-		return outFluid;
+		out.tag.setFloat("potency", (weight/Food.getWeight(recipeIS))/amt);
+		return recipeOutFluid;
 	}
 
 	@Override
-	public Boolean matches(ItemStack item, FluidStack fluid)
+	public Boolean matches(ItemStack inIS, FluidStack inFluid)
 	{
-		if(inItemStack.hasTagCompound())
+		if(recipeIS.hasTagCompound())
 		{
-			if(item == null || !item.hasTagCompound())
+			if(inIS == null || !inIS.hasTagCompound())
 			{
 				return false;
 			}
-			if(inItemStack.getItem() instanceof ItemFoodTFC)
+			if(recipeIS.getItem() instanceof ItemFoodTFC)
 			{
-				if(!(item.getItem() instanceof ItemFoodTFC))
+				if(!(inIS.getItem() instanceof ItemFoodTFC))
 				{
 					return false;
 				}
-				float inW = inItemStack.getTagCompound().getFloat("foodWeight");
-				float itW = item.getTagCompound().getFloat("foodWeight");
-				float percent = itW/(inW * ((float)fluid.amount/(float)barrelFluid.amount));
+				float inW = recipeIS.getTagCompound().getFloat("foodWeight");
+				float itW = inIS.getTagCompound().getFloat("foodWeight");
+				float percent = itW/(inW * ((float)inFluid.amount/(float)recipeFluid.amount));
 				if(percent < 0.25f)
 					return false;
 			}
 		}
-		return super.matches(item, fluid);
+		return inIS.getItem() == recipeIS.getItem() && inFluid.isFluidEqual(recipeFluid);
 	}
 }

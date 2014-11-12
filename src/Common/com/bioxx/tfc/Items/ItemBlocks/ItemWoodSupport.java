@@ -83,6 +83,38 @@ public class ItemWoodSupport extends ItemTerraBlock
 					return true;
 				}
 			}
+			else if(y < 255 && y > 0 && side == 0)
+			{
+				boolean shouldGen = false;
+				int dist = 0;
+				for(dist = 1; dist <= 20 && !shouldGen; dist++)
+				{
+					if(!world.getBlock(x, y-dist, z).isReplaceable(world, x, y-dist, z))
+					{
+						//Found a solid block and check if it is solid on top. If it is, then we allow gen and break. 
+						//Otherwise we stop scanning and dont allow gen.
+						if(world.getBlock(x, y-dist, z).isSideSolid(world, x, y, z, ForgeDirection.UP))
+						{
+							shouldGen = true;
+							break;
+						}
+						else
+						{
+							break;
+						}
+					}
+				}
+				if(itemstack.stackSize >= dist)
+					for(int j = 1; j <= dist && shouldGen; j++)
+					{
+						if(world.getBlock(x, y-j, z).isReplaceable(world, x, y-j, z))
+						{
+							placeBlockAt(getBlock(), itemstack, player, world, x, y-j, z, itemstack.getItemDamage(), 2);
+							--itemstack.stackSize;
+						}
+						else break;
+					}
+			}
 			else
 			{
 				Block b = TFCBlocks.WoodSupportH;

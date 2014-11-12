@@ -1,7 +1,6 @@
 package com.bioxx.tfc.Blocks.Liquids;
 
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -16,9 +15,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
-
 import com.bioxx.tfc.TFCBlocks;
-
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Sounds;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -100,17 +99,37 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
-		super.updateTick(world, x, y, z, rand);
 		if(!world.isRemote)
 		{
-			if(world.isAirBlock(x, y+1, z))
+			if(world.isAirBlock(x, y + 1, z))
 			{
 				world.provider.canBlockFreeze(x, y, z, false);
 			}
 
+			// Play frog sound at night only in fresh water.
+			if(world.getBlock(x, y, z) == TFCBlocks.FreshWaterStationary && world.isAirBlock(x, y + 1, z))
+			{
+				if(rand.nextInt(100) < 25 && world.getBlockLightValue(x, y, z) < 7)
+				{
+					outerloop:
+					for(int x1 = x - 3; x1 < x + 3; x1++)
+					{
+						for(int z1 = z - 3; z1 < z + 3; z1++)
+						{
+							if(TFC_Core.isGrass(world.getBlock(x1, y, z1)) || world.getBlock(x1, y - 1, z1) == TFCBlocks.WaterPlant)
+							{
+								float mod = rand.nextFloat();
+								world.playSoundEffect(x, y, z, TFC_Sounds.FROG, (mod < 0.55F ? mod : 0.55F), (mod < 0.41F ? mod + 0.8F : 0.8F));
+								break outerloop;
+							}
+						}
+					}
+				}
+			}
+
 			if(this.getMaterial() == Material.lava)
 			{
-				if(world.getBlock(x, y+1, z) == Blocks.air)
+				if(world.getBlock(x, y + 1, z) == Blocks.air)
 				{
 					int i = x-2+rand.nextInt(5);
 					int j = y+1+rand.nextInt(4);
@@ -124,8 +143,9 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 					}
 				}
 			}
-
 		}
+
+		super.updateTick(world, x, y, z, rand);
 	}
 
 	/**

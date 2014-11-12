@@ -52,7 +52,10 @@ public class GuiSluice extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		fontRendererObj.drawString(StatCollector.translateToLocal("gui.Sluice.Soil") + ": " + sluiceInventory.soilAmount + "/50", 15, 39, 0x404040);
+		if (sluiceInventory.soilAmount != -1)
+			fontRendererObj.drawString(StatCollector.translateToLocal("gui.Sluice.Soil") + ": " + sluiceInventory.soilAmount + "/50", 15, 39, 0x404040);
+		else
+			fontRendererObj.drawString(StatCollector.translateToLocal("gui.Sluice.Overworked"), 10, 39, 0x404040);
 	}
 
 }

@@ -183,7 +183,7 @@ public class RenderOverlayHandler
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight+5, 0, 33, (int) (90*percentWater), 5);
 
 			//Draw Notifications
-			String healthString = (int)mc.thePlayer.getHealth()+"/"+(int)maxHealth;
+			String healthString = (int) Math.min(mc.thePlayer.getHealth(), maxHealth) + "/" + (int) maxHealth;
 			mc.fontRenderer.drawString(healthString, mid-45-(mc.fontRenderer.getStringWidth(healthString)/2), healthRowHeight+1, Color.white.getRGB());
 			if(mc.thePlayer.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getModifier(TFCAttributes.overburdenedUUID) != null)
 				mc.fontRenderer.drawString(StatCollector.translateToLocal("gui.overburdened"), mid-(mc.fontRenderer.getStringWidth(StatCollector.translateToLocal("gui.overburdened"))/2), healthRowHeight-20, Color.red.getRGB());
