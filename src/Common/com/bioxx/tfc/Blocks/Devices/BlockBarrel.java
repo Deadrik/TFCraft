@@ -410,6 +410,9 @@ public class BlockBarrel extends BlockTerraContainer
 						}
 						else if(is.getItem() instanceof ItemLargeVessel)
 						{
+							if(is.getItemDamage() == 0)
+								return false;
+							
 							FluidStack fs = te.getFluidStack().copy();
 							if(fs.amount > 5000)
 							{

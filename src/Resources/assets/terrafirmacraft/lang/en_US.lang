@@ -1819,6 +1819,9 @@ item.Tin Double Sheet.name=Tin Double Sheet
 item.Wrought Iron Double Sheet.name=Wrought Iron Double Sheet
 item.Zinc Double Sheet.name=Zinc Double Sheet
 
+#== Misc ==
+item.Blueprint=Blueprint
+
 #===========
 #= Devices =
 #===========
@@ -2240,6 +2243,7 @@ gui.Inventory=Inventory
 gui.ClearSlot=Clear an output slot.
 gui.LogPile=Log Pile
 gui.done=Done
+gui.cancel=Cancel
 gui.Sluice.Soil=Soil
 gui.Sluice.Overworked=Overworked
 gui.Workbench.Crafting=Crafting

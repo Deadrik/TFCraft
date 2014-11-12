@@ -73,15 +73,45 @@ public class BarrelRecipe
 
 	public ItemStack getInItem()
 	{
-		return recipeIS.copy();
+		return recipeIS;
 	}
 
 	public FluidStack getInFluid()
 	{
-		return recipeFluid.copy();
+		return recipeFluid;
 	}
 
-	public String getRecipeName()
+    public ItemStack getRecipeOutIS()
+    {
+        return recipeOutIS;
+    }
+
+    public FluidStack getRecipeOutFluid()
+    {
+        return recipeOutFluid;
+    }
+
+    public int getSealTime()
+    {
+        return sealTime;
+    }
+
+    public boolean isRemovesLiquid()
+    {
+        return removesLiquid;
+    }
+
+    public int getMinTechLevel()
+    {
+        return minTechLevel;
+    }
+
+    public boolean isAllowAnyStack()
+    {
+        return allowAnyStack;
+    }
+
+    public String getRecipeName()
 	{
 		String s = "";
 		if(this.recipeOutIS != null)

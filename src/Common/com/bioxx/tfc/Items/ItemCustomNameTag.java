@@ -62,7 +62,7 @@ public class ItemCustomNameTag extends ItemTerra
 		}
 		if(stack.stackTagCompound != null && !stack.stackTagCompound.hasKey("ItemName"))
 		{
-			player.openGui(TerraFirmaCraft.instance, 34, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+			player.openGui(TerraFirmaCraft.instance, 48, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
 		}
 
 		return stack;

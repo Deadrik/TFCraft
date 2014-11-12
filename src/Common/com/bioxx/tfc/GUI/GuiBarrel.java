@@ -328,7 +328,7 @@ public class GuiBarrel extends GuiContainerTFC
 					drawCenteredString(this.fontRendererObj,StatCollector.translateToLocal("gui.barrel.brining"), w+88, h+72, 0x555555);
 				}
 			}
-			else if(barrel.recipe == null && barrel.getSealed() && barrel.getFluidStack() != null && 
+			else if(inStack != null && barrel.recipe == null && barrel.getSealed() && barrel.getFluidStack() != null && 
 					!Food.isPickled(inStack) && Food.getWeight(inStack)/barrel.getFluidStack().amount <= Global.FOOD_MAX_WEIGHT/barrel.getMaxLiquid() && 
 					barrel.getFluidStack().getFluid() == TFCFluid.VINEGAR)
 			{
@@ -341,7 +341,7 @@ public class GuiBarrel extends GuiContainerTFC
 					drawCenteredString(this.fontRendererObj,StatCollector.translateToLocal("gui.barrel.pickling"), w+88, h+72, 0x555555);
 				}
 			}
-			else if(barrel.recipe == null && barrel.getSealed() && barrel.getFluidStack() != null && 
+			else if(inStack != null && barrel.recipe == null && barrel.getSealed() && barrel.getFluidStack() != null && 
 					Food.isPickled(inStack) && Food.getWeight(inStack)/barrel.getFluidStack().amount <= Global.FOOD_MAX_WEIGHT/barrel.getMaxLiquid()*2 && 
 					barrel.getFluidStack().getFluid() == TFCFluid.VINEGAR)
 			{

@@ -306,7 +306,7 @@ public class GuiLargeVessel extends GuiContainerTFC
 				drawCenteredString(this.fontRendererObj, barrel.fluid.getFluid().getLocalizedName(), w+88, h+7, 0x555555);
 			if(barrel.sealtime != 0)
 			{
-				drawCenteredString(this.fontRendererObj, TFC_Time.getDateString(barrel.sealtime*1000), w+88, h+17, 0x555555);
+				drawCenteredString(this.fontRendererObj, TFC_Time.getDateStringFromHours(barrel.sealtime), w+88, h+17, 0x555555);
 			}
 			if(barrel.recipe != null)
 			{
