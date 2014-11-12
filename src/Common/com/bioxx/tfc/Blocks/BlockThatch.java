@@ -71,8 +71,8 @@ public class BlockThatch extends BlockTerra
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
 	{
-		entity.motionX *= 0.8D;
-		entity.motionZ *= 0.8D;
+		entity.motionX *= 0.1D;
+		entity.motionZ *= 0.1D;
 	}
 
 	@Override
