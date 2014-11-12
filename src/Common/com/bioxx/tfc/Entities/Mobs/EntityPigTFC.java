@@ -368,7 +368,9 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 				this.familiarize(player);
 				return true;
 			}
-			//player.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
+			if (isChild() && !player.isSneaking()) {
+			    player.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
+			}
 			if(getGender() == GenderEnum.FEMALE && pregnant)
 				player.addChatMessage(new ChatComponentText("Pregnant"));
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));

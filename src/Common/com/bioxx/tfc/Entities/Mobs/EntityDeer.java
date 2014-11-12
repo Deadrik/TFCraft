@@ -389,7 +389,9 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 				this.familiarize(player);
 				return true;
 			}
-			//par1EntityPlayer.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
+			if (TFC_Core.getPercentGrown(this) < 0.25F && !player.isSneaking()) {
+			    player.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE ? "Female" : "Male"));
+			}
 			if(getGender()==GenderEnum.FEMALE && pregnant)
 			{
 				player.addChatMessage(new ChatComponentText("Pregnant"));

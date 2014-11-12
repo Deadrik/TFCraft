@@ -388,7 +388,9 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 					return true;
 				}
 			}
-			//player.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
+			if (TFC_Core.getPercentGrown(this) < 0.5F && !player.isSneaking()) {
+			    player.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male")); 
+			}
 			if(getGender() == GenderEnum.FEMALE && pregnant)
 				player.addChatMessage(new ChatComponentText("Pregnant"));
 
