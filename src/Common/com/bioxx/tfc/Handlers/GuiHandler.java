@@ -26,6 +26,7 @@ import com.bioxx.tfc.Containers.ContainerPlayerTFC;
 import com.bioxx.tfc.Containers.ContainerQuern;
 import com.bioxx.tfc.Containers.ContainerQuiver;
 import com.bioxx.tfc.Containers.ContainerSluice;
+import com.bioxx.tfc.Containers.ContainerSmokeRack;
 import com.bioxx.tfc.Containers.ContainerSpecialCrafting;
 import com.bioxx.tfc.Containers.ContainerVessel;
 import com.bioxx.tfc.Containers.ContainerWorkbench;
@@ -43,6 +44,7 @@ import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
+import com.bioxx.tfc.TileEntities.TESmokeRack;
 import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TESluice;
@@ -171,6 +173,8 @@ public class GuiHandler implements IGuiHandler
 			return new ContainerLargeVessel(player.inventory, ((TEVessel) te), world, x, y, z, 0);
 		case 47:
 			return new ContainerLargeVessel(player.inventory, ((TEVessel) te), world, x, y, z, 1);
+		case 99:
+			return new ContainerSmokeRack(player.inventory, (TESmokeRack) te, world, x, y, z);
 		default:
 		{
 			return null;

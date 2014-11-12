@@ -18,11 +18,13 @@ import net.minecraftforge.common.util.ForgeDirection;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.Terrain.BlockCollapsable;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Food.ItemFoodMeat;
 import com.bioxx.tfc.TileEntities.TESmokeRack;
 import com.bioxx.tfc.api.Food;
+import com.bioxx.tfc.api.TFCOptions;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -62,7 +64,7 @@ public class BlockSmokeRack extends BlockTerraContainer
 	@Override
 	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
 	{
-		return new ItemStack(TFCItems.WoolYarn);
+		return new ItemStack(getCreatedWithItem());
 	}
 
 	@Override
@@ -73,17 +75,17 @@ public class BlockSmokeRack extends BlockTerraContainer
 		{
 			int meta = world.getBlockMetadata(x, y, z);
 			TESmokeRack te = (TESmokeRack) world.getTileEntity(x, y, z);
-			ItemStack yarn = TFC_Core.getItemInInventory(TFCItems.WoolYarn, entityplayer.inventory);
+			ItemStack yarn = TFC_Core.getItemInInventory(getCreatedWithItem(), entityplayer.inventory);
 			if((meta & 1) == 0 && hitZ < 0.5)
 			{
 				if(te.getStackInSlot(0) == null && yarn != null && isItemValid(entityplayer.inventory.getCurrentItem()))
 				{
 					te.setInventorySlotContents(0, entityplayer.inventory.getCurrentItem().copy());
 					entityplayer.inventory.getCurrentItem().stackSize--;
-					entityplayer.inventory.consumeInventoryItem(TFCItems.WoolYarn);
+					entityplayer.inventory.consumeInventoryItem(getCreatedWithItem());
 					flag = true;
 				}
-				else if(te.getStackInSlot(0) != null)
+				else if(te.getStackInSlot(0) != null && entityplayer.isSneaking())
 				{
 					TFC_Core.giveItemToPlayer(te.removeStackInSlot(0), entityplayer);
 					flag = true;
@@ -95,10 +97,10 @@ public class BlockSmokeRack extends BlockTerraContainer
 				{
 					te.setInventorySlotContents(1, entityplayer.inventory.getCurrentItem().copy());
 					entityplayer.inventory.getCurrentItem().stackSize--;
-					entityplayer.inventory.consumeInventoryItem(TFCItems.WoolYarn);
+					entityplayer.inventory.consumeInventoryItem(getCreatedWithItem());
 					flag = true;
 				}
-				else if(te.getStackInSlot(1) != null)
+				else if(te.getStackInSlot(1) != null && entityplayer.isSneaking())
 				{
 					TFC_Core.giveItemToPlayer(te.removeStackInSlot(1), entityplayer);
 					flag = true;
@@ -110,10 +112,10 @@ public class BlockSmokeRack extends BlockTerraContainer
 				{
 					te.setInventorySlotContents(0, entityplayer.inventory.getCurrentItem().copy());
 					entityplayer.inventory.getCurrentItem().stackSize--;
-					entityplayer.inventory.consumeInventoryItem(TFCItems.WoolYarn);
+					entityplayer.inventory.consumeInventoryItem(getCreatedWithItem());
 					flag = true;
 				}
-				else if(te.getStackInSlot(0) != null)
+				else if(te.getStackInSlot(0) != null && entityplayer.isSneaking())
 				{
 					TFC_Core.giveItemToPlayer(te.removeStackInSlot(0), entityplayer);
 					flag = true;
@@ -125,14 +127,20 @@ public class BlockSmokeRack extends BlockTerraContainer
 				{
 					te.setInventorySlotContents(1, entityplayer.inventory.getCurrentItem().copy());
 					entityplayer.inventory.getCurrentItem().stackSize--;
-					entityplayer.inventory.consumeInventoryItem(TFCItems.WoolYarn);
+					entityplayer.inventory.consumeInventoryItem(getCreatedWithItem());
 					return true;
 				}
-				else if(te.getStackInSlot(1) != null)
+				else if(te.getStackInSlot(1) != null && entityplayer.isSneaking())
 				{
 					TFC_Core.giveItemToPlayer(te.removeStackInSlot(1), entityplayer);
 					flag = true;
 				}
+			}
+			
+			if (flag == false)
+			{
+				entityplayer.openGui(TerraFirmaCraft.instance, 99, world, x, y, z);
+				flag = true;
 			}
 		}
 		return flag;
@@ -227,7 +235,7 @@ public class BlockSmokeRack extends BlockTerraContainer
 	@Override
 	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
 	{
-		return TFCItems.WoolYarn;
+		return getCreatedWithItem();
 	}
 
 	@Override
@@ -241,5 +249,13 @@ public class BlockSmokeRack extends BlockTerraContainer
 	public TileEntity createTileEntity(World world, int meta)
 	{
 		return new TESmokeRack();
+	}
+
+	public static Item getCreatedWithItem()
+	{
+		if(TFCOptions.useJuteFibreForSmokeRack)
+			return TFCItems.JuteFibre;
+		else
+			return TFCItems.WoolYarn;
 	}
 }

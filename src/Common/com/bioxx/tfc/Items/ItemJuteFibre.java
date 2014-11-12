@@ -7,15 +7,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Blocks.BlockSmokeRack;
 import com.bioxx.tfc.Blocks.BlockWoodSupport;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.api.TFCOptions;
 
-public class ItemYarn extends ItemTerra
+public class ItemJuteFibre extends ItemTerra
 {
 	protected final int[][] sidesMap = new int[][]{{0,-1,0},{0,1,0},{0,0,-1},{0,0,1},{-1,0,0},{1,0,0}};
 
-	public ItemYarn()
+	public ItemJuteFibre()
 	{
 		super();
 		this.hasSubtypes = false;
@@ -28,8 +29,8 @@ public class ItemYarn extends ItemTerra
 	{
 		if(!world.isRemote && side > 1 && !world.getBlock(x, y, z).equals(TFCBlocks.Loom))
 		{
-			if(TFCOptions.useJuteFibreForSmokeRack) return false;
-
+			if(!TFCOptions.useJuteFibreForSmokeRack) return false;
+			
 			int length = 0;
 			int[] map = sidesMap[side];
 			ForgeDirection opp = ForgeDirection.VALID_DIRECTIONS[side].getOpposite();
