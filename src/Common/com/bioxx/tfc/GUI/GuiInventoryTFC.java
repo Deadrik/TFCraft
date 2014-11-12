@@ -269,10 +269,11 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 		{
 			spamTimer = TFC_Time.getTotalTicks();
 			Item iType = activeSlot.getStack().getItem();
+			ItemStack activeIS = activeSlot.getStack();
 			for(int i = 9; i < 45 && getEmptyCraftSlot() != -1; i++)
 			{
 				ItemStack is = this.inventorySlots.getSlot(i).getStack();
-				if(is != null && is.getItem() == iType && ((IFood)is.getItem()).getFoodWeight(is) < Global.FOOD_MAX_WEIGHT)
+				if(is != null && is.getItem() == iType && Food.areEqual(activeIS, is) && ((IFood)is.getItem()).getFoodWeight(is) < Global.FOOD_MAX_WEIGHT)
 					this.handleMouseClick(this.inventorySlots.getSlot(i), i, getEmptyCraftSlot(), 7);
 			}
 
