@@ -177,6 +177,7 @@ item.leggingsCloth.name=Leather Trousers
 #=================
 #== Misc Items ==
 item.Fertilizer.name=Fertiliser
+item.torch_off.name=Until Torch
 
 #= Misc. Plants =
 item.Jute Fibre.name=Jute Fibre

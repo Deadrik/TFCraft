@@ -29,6 +29,9 @@ import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Items.ItemBlocks.ItemTorch;
+import com.bioxx.tfc.Items.Tools.ItemFirestarter;
+import com.bioxx.tfc.Items.Tools.ItemFlintSteel;
 import com.bioxx.tfc.TileEntities.TELightEmitter;
 import com.bioxx.tfc.api.TFCOptions;
 
@@ -75,6 +78,8 @@ public class BlockTorch extends BlockTerraContainer
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
 	{
+		ItemStack equippedItem = player.getCurrentEquippedItem();
+		
 		if(!world.isRemote)
 		{
 			if(world.getBlockMetadata(x, y, z) < 8 && player.inventory.getCurrentItem() != null && 
@@ -83,14 +88,34 @@ public class BlockTorch extends BlockTerraContainer
 				player.inventory.consumeInventoryItem(TFCItems.Stick);
 				TFC_Core.giveItemToPlayer(new ItemStack(TFCBlocks.Torch), player);
 			}
-			else if(player.inventory.getCurrentItem() != null && 
-					player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(TFCBlocks.Torch))
+			else if(equippedItem != null)
 			{
-				TELightEmitter te = (TELightEmitter)world.getTileEntity(x, y, z);
-				te.hourPlaced = (int)TFC_Time.getTotalHours();
-				if (world.getBlockMetadata(x, y, z) >= 8)
+				if( equippedItem.getItem() instanceof ItemTorch )
 				{
-				    world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)-8, 3);
+					TELightEmitter te = (TELightEmitter)world.getTileEntity(x, y, z);
+					te.hourPlaced = (int)TFC_Time.getTotalHours();
+					if (world.getBlockMetadata(x, y, z) >= 8)
+					    world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)-8, 3);
+				}
+				else if ( equippedItem.getItem() instanceof ItemFirestarter || equippedItem.getItem() instanceof ItemFlintSteel  )
+				{
+
+					int chance = new Random().nextInt(100);
+					int ss = equippedItem.stackSize;
+					int dam = equippedItem.getItemDamage()+1;
+
+					if(dam >= player.getCurrentEquippedItem().getItem().getMaxDamage())
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+					else
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(equippedItem.getItem(),ss,dam));
+
+					if( equippedItem.getItem() instanceof ItemFlintSteel || chance > 70 )
+					{
+						TELightEmitter te = (TELightEmitter)world.getTileEntity(x, y, z);
+						te.hourPlaced = (int)TFC_Time.getTotalHours();
+						if (world.getBlockMetadata(x, y, z) >= 8)
+						    world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)-8, 3);
+					}
 				}
 			}
 		}
@@ -109,12 +134,13 @@ public class BlockTorch extends BlockTerraContainer
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		Item item = getItemDropped(metadata, world.rand, fortune);
 
 		if(metadata >= 8)
-			return ret;
-
-		Item item = getItemDropped(metadata, world.rand, fortune);
-		if (item != null)
+		{
+			ret.add(new ItemStack(TFCItems.TorchOff, 1, 0));
+		}
+		else if (item != null)
 		{
 			ret.add(new ItemStack(item, 1, damageDropped(metadata)));
 		}
@@ -308,27 +334,27 @@ public class BlockTorch extends BlockTerraContainer
 			int l = world.getBlockMetadata(x, y, z);
 			boolean flag = false;
 
-			if (!world.isSideSolid(x - 1, y, z, EAST, true) && l == 1)
+			if (!world.isSideSolid(x - 1, y, z, EAST, true) && ( l == 1 || l == 9 ))
 			{
 				flag = true;
 			}
 
-			if (!world.isSideSolid(x + 1, y, z, WEST, true) && l == 2)
+			if (!world.isSideSolid(x + 1, y, z, WEST, true) && ( l == 2 || l == 10 ))
 			{
 				flag = true;
 			}
 
-			if (!world.isSideSolid(x, y, z - 1, SOUTH, true) && l == 3)
+			if (!world.isSideSolid(x, y, z - 1, SOUTH, true) && ( l == 3 || l == 11 ))
 			{
 				flag = true;
 			}
 
-			if (!world.isSideSolid(x, y, z + 1, NORTH, true) && l == 4)
+			if (!world.isSideSolid(x, y, z + 1, NORTH, true) && ( l == 4 || l == 12 ))
 			{
 				flag = true;
 			}
 
-			if (!this.canSupportTorch(world, x, y - 1, z) && l == 5)
+			if (!this.canSupportTorch(world, x, y - 1, z) && ( l == 5 || l == 13 ))
 			{
 				flag = true;
 			}

@@ -1845,6 +1845,7 @@ tile.Ice.name=Is
 item.arrow.name=Pil
 item.book.name=Bog
 item.stick.name=Pind
+item.torch_off.name=Fakkel off
 item.coal.coal.name=Kul
 item.coal.charcoal.name=Trækul
 item.Fertilizer.name=Gødning

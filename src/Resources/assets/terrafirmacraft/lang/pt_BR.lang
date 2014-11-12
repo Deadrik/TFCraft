@@ -1845,6 +1845,7 @@ tile.Ice.name=Gelo
 item.arrow.name=Flecha
 item.book.name=Livro
 item.stick.name=Pau
+item.torch_off.name=Tocha off
 item.coal.coal.name=Carvão
 item.coal.charcoal.name=Carvão Vegetal
 item.Fertilizer.name=Fertilizante

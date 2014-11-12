@@ -1845,6 +1845,7 @@ tile.Ice.name=Лёд
 item.arrow.name=Стрела
 item.book.name=Книга
 item.stick.name=Палка
+item.torch_off.name=Факел от
 item.coal.coal.name=Уголь
 item.coal.charcoal.name=Древесный уголь
 item.Fertilizer.name=Удобрение

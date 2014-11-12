@@ -23,6 +23,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemLogs;
 import com.bioxx.tfc.TileEntities.TEFirepit;
 
@@ -46,6 +47,8 @@ public class BlockFirepit extends BlockTerraContainer
 			item = entityplayer.getCurrentEquippedItem().getItem();
 		else
 			item = null;
+		
+		TEFirepit te = (TEFirepit)world.getTileEntity(x, y, z);
 
 		if(world.isRemote)
 		{
@@ -53,9 +56,8 @@ public class BlockFirepit extends BlockTerraContainer
 		}
 		else if(item == TFCItems.FireStarter || item == TFCItems.FlintSteel)
 		{
-			if((TEFirepit)world.getTileEntity(x, y, z) != null)
+			if(te != null)
 			{
-				TEFirepit te = (TEFirepit)world.getTileEntity(x, y, z);
 				if(te.fireTemp < 210 && te.fireItemStacks[5] != null)
 				{
 					te.fireTemp = 300;
@@ -68,9 +70,15 @@ public class BlockFirepit extends BlockTerraContainer
 			}
 			return true;
 		}
+		else if(te.fireTemp > 0 && item == TFCItems.Stick)
+		{
+			entityplayer.inventory.consumeInventoryItem(TFCItems.Stick);
+			TFC_Core.giveItemToPlayer(new ItemStack(TFCBlocks.Torch), entityplayer);
+			return true;
+		}
 		else
 		{
-			if((TEFirepit)world.getTileEntity(x, y, z) != null)
+			if(te != null)
 				entityplayer.openGui(TerraFirmaCraft.instance, 20, world, x, y, z);
 			return true;
 		}

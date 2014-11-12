@@ -1845,6 +1845,7 @@ tile.Ice.name=冰
 item.arrow.name=箭
 item.book.name=书
 item.stick.name=棍子
+item.torch_off.name=火炬熄灭
 item.coal.coal.name=煤炭
 item.coal.charcoal.name=木炭
 item.Fertilizer.name=化肥
