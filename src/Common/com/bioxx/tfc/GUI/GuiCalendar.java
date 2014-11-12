@@ -111,7 +111,12 @@ public class GuiCalendar extends GuiScreen
 
 		drawCenteredString(fontRendererObj, StatCollector.translateToLocal("gui.Calendar.Day") + " : " + day, l + 87, i1 + 36, 0x000000);
 
-		drawCenteredString(fontRendererObj, StatCollector.translateToLocal("gui.Calendar.Date") + " : " + dom + " " + TFC_Time.MONTHS[month] + ", " + (1000 + TFC_Time.getYear()), l + 87, i1 + 46, 0x000000);
+		int year = 1000 + TFC_Time.getYear();
+        // year changes at January, not March
+		if (month >= TFC_Time.January) {
+		    year += 1;
+		}
+        drawCenteredString(fontRendererObj, StatCollector.translateToLocal("gui.Calendar.Date") + " : " + dom + " " + TFC_Time.MONTHS[month] + ", " + year, l + 87, i1 + 46, 0x000000);
 
 		float temp = Math.round((TFC_Climate.getHeightAdjustedTemp(player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ)));
 
