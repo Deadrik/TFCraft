@@ -164,7 +164,9 @@ public class Food
 	public static float getDecay(ItemStack is)
 	{
 		NBTTagCompound nbt = is.getTagCompound();
-		return nbt.getFloat("foodDecay");
+		if(nbt != null)
+			return nbt.getFloat("foodDecay");
+		else return 0;
 	}
 
 	public static void setDecayTimer(ItemStack is, int value)
@@ -190,7 +192,9 @@ public class Food
 	public static float getWeight(ItemStack is)
 	{
 		NBTTagCompound nbt = is.getTagCompound();
-		return nbt.getFloat("foodWeight");
+		if(nbt != null)
+			return nbt.getFloat("foodWeight");
+		else return 0;
 	}
 
 	public static boolean isDried(ItemStack is)
