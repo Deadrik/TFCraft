@@ -3,11 +3,8 @@ package com.bioxx.tfc.Blocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bioxx.tfc.api.TFCOptions;
-import ibxm.Player;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -30,7 +27,10 @@ import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.TileEntities.TEDetailed;
+import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.TileEntities.TileEntityWoodConstruct;
+
+import com.bioxx.tfc.api.TFCOptions;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -509,5 +509,30 @@ public class BlockDetailed extends BlockPartial
 		if(te.TypeID >= 0)
 			return Blocks.fire.getEncouragement(Block.getBlockById(te.TypeID));
 		else return 0;
+	}
+	
+	public static void ListToDetailled(World world, int x, int y, int z, int[][][] list)
+	{
+
+		TEPartial tep = (TEPartial)world.getTileEntity(x, y, z);
+		world.setBlock(x, y, z, TFCBlocks.Detailed);
+		
+		TEDetailed te;
+		te = (TEDetailed)world.getTileEntity(x, y, z);
+		te.TypeID = tep.TypeID;
+		te.MetaID = tep.MetaID;
+		
+		for(int subX = 0; subX < 8; subX++)
+		for(int subZ = 0; subZ < 8; subZ++)
+		for(int subY = 0; subY < 8; subY++)
+			if(list[subX][subY][subZ] == 1)
+			{
+				te.setBlock(subX, subY, subZ);
+				te.setQuad(subX, subY, subZ);
+			}
+		
+		world.notifyBlocksOfNeighborChange(x, y, z, world.getBlock(x, y, z));
+		
+		return;
 	}
 }

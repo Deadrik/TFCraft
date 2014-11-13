@@ -241,4 +241,34 @@ public class BlockSlab extends BlockPartial
 			return false;
 		}
 	}
+	
+	public static int[][][] EmptySlab(int side, float hitX, float hitY, float hitZ, int[][][] list) {
+
+		int bx = 0; int tx = 8;
+		int by = 0; int ty = 8;
+		int bz = 0; int tz = 8;
+		
+		if( side == 0 || side == 1 )
+		{
+			ty = (int) Math.floor(hitY*8)+(side==0?1:0);
+			by = ty-1;
+		}
+		else if( side == 2 || side == 3 )
+		{
+			tz = (int) Math.floor(hitZ*8)+(side==2?1:0);
+			bz = tz-1;
+		}
+		else if( side == 4 ||side == 5 )
+		{
+			tx = (int) Math.floor(hitX*8)+(side==4?1:0);
+			bx = tx-1;
+		}
+		
+		for(int subX = bx; subX < tx; subX++)
+			for(int subZ = bz; subZ < tz; subZ++)
+				for(int subY = by; subY < ty; subY++)
+					list[subX][subY][subZ] = 0;
+		
+		return list;
+	}
 }
