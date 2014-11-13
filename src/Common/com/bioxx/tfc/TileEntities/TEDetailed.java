@@ -121,7 +121,7 @@ public class TEDetailed extends NetworkTileEntity {
 		packetType = nbt.getByte("packetType");
 		if (packetType == TEDetailed.Packet_Update) {
 			int index = nbt.getInteger("index");
-			data.flip(index);
+			data.set(index, false);
 
 			for (int subX = 0; subX < 8; subX++) {
 				for (int subZ = 0; subZ < 8; subZ++) {
@@ -138,12 +138,14 @@ public class TEDetailed extends NetworkTileEntity {
 			((BlockDetailed) TFCBlocks.Detailed).xSelected = nbt.getByte("xSelected");
 			((BlockDetailed) TFCBlocks.Detailed).ySelected = nbt.getByte("ySelected");
 			((BlockDetailed) TFCBlocks.Detailed).zSelected = nbt.getByte("zSelected");
+			((BlockDetailed) TFCBlocks.Detailed).side = nbt.getByte("side");
 
-			((BlockDetailed) TFCBlocks.Detailed).onBlockActivatedServer(worldObj, xCoord, yCoord, zCoord, this.entityplayer, 0, 0, 0, 0);
+			((BlockDetailed) TFCBlocks.Detailed).onBlockActivatedServer(worldObj, xCoord, yCoord, zCoord, this.entityplayer);
 
 			((BlockDetailed) TFCBlocks.Detailed).xSelected = -10;
 			((BlockDetailed) TFCBlocks.Detailed).ySelected = -10;
 			((BlockDetailed) TFCBlocks.Detailed).zSelected = -10;
+			((BlockDetailed) TFCBlocks.Detailed).side = -1;
 		}
 
 	}

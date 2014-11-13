@@ -197,7 +197,7 @@ public class BlockStair extends BlockPartial
 			else if(mode == 2)
 			{
 				int[][][] list = StairToDetailledList( world.getBlockMetadata(x, y, z) );
-				list = BlockSlab.EmptySlab(side, hitX, hitY, hitZ, list);
+				list = BlockSlab.EmptySlabFloat(side, hitX, hitY, hitZ, list);
 				BlockDetailed.ListToDetailled(world, x, y, z, list );
 				list = null;
 				System.gc();
@@ -238,7 +238,7 @@ public class BlockStair extends BlockPartial
 		
 		if( meta == newmeta ) {
 			int[][][] list = StairToDetailledList(meta);
-			list = EmptyLastStair(hitX, hitY, hitZ, list);
+			list = EmptyStairFloat(hitX, hitY, hitZ, list);
 			BlockDetailed.ListToDetailled(world, x, y, z, list );
 			list = null;
 			System.gc();
@@ -278,7 +278,11 @@ public class BlockStair extends BlockPartial
 		return list;
 	}
 	
-	private static int[][][] EmptyLastStair(float hitX, float hitY, float hitZ, int[][][] list) {
+	public static int[][][] EmptyStairFloat(float hitX, float hitY, float hitZ, int[][][] list) {
+		return EmptyStairFloat(hitX, hitY, hitZ, list, 0);
+	}
+	
+	public static int[][][] EmptyStairFloat(float hitX, float hitY, float hitZ, int[][][] list, int state) {
 
 		boolean xmymzm = hitX < 0.5F && hitY < 0.5F && hitZ < 0.5F;
 		boolean xpymzm = hitX > 0.5F && hitY < 0.5F && hitZ < 0.5F;
@@ -288,31 +292,54 @@ public class BlockStair extends BlockPartial
 		boolean xpypzm = hitX > 0.5F && hitY > 0.5F && hitZ < 0.5F;
 		boolean xpypzp = hitX > 0.5F && hitY > 0.5F && hitZ > 0.5F;
 		boolean xmypzp = hitX < 0.5F && hitY > 0.5F && hitZ > 0.5F;
+		
+		return EmptyStair(xmymzm, xpymzm, xpymzp, xmymzp, xmypzm, xpypzm, xpypzp, xmypzp, list, state);
+	}
+	
+	public static int[][][] EmptyStairInt(int xSelected, int ySelected, int zSelected, int[][][] list) {
+		return EmptyStairInt(xSelected, ySelected, zSelected, list, 0);
+	}
+	
+	public static int[][][] EmptyStairInt(int xSelected, int ySelected, int zSelected, int[][][] list, int state) {
+
+		boolean xmymzm = xSelected < 4 && ySelected < 4 && zSelected < 4;
+		boolean xpymzm = xSelected > 3 && ySelected < 4 && zSelected < 4;
+		boolean xpymzp = xSelected > 3 && ySelected < 4 && zSelected > 3;
+		boolean xmymzp = xSelected < 4 && ySelected < 4 && zSelected > 3;
+		boolean xmypzm = xSelected < 4 && ySelected > 3 && zSelected < 4;
+		boolean xpypzm = xSelected > 3 && ySelected > 3 && zSelected < 4;
+		boolean xpypzp = xSelected > 3 && ySelected > 3 && zSelected > 3;
+		boolean xmypzp = xSelected < 4 && ySelected > 3 && zSelected > 3;
+		
+		return EmptyStair(xmymzm, xpymzm, xpymzp, xmymzp, xmypzm, xpypzm, xpypzp, xmypzp, list, state);
+	}
+	
+	public static int[][][] EmptyStair(boolean xmymzm, boolean xpymzm, boolean xpymzp, boolean xmymzp, boolean xmypzm, boolean xpypzm, boolean xpypzp, boolean xmypzp, int[][][] list, int state) {
 
 		if( xmymzm )
 			for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++)
-				list[subX][subY][subZ] = 0;
+				list[subX][subY][subZ] = state;
 		else if( xpymzm )
 			for(int subX = 4; subX < 8; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++)
-				list[subX][subY][subZ] = 0;
+				list[subX][subY][subZ] = state;
 		else if( xpymzp )
 			for(int subX = 4; subX < 8; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 0; subY < 4; subY++)
-				list[subX][subY][subZ] = 0;
+				list[subX][subY][subZ] = state;
 		else if( xmymzp )
 			for(int subX = 0; subX < 4; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 0; subY < 4; subY++)
-				list[subX][subY][subZ] = 0;
+				list[subX][subY][subZ] = state;
 		else if( xmypzm )
 			for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 4; subY < 8; subY++)
-				list[subX][subY][subZ] = 0;
+				list[subX][subY][subZ] = state;
 		else if( xpypzm )
 			for(int subX = 4; subX < 8; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 4; subY < 8; subY++)
-				list[subX][subY][subZ] = 0;
+				list[subX][subY][subZ] = state;
 		else if( xpypzp )
 			for(int subX = 4; subX < 8; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 4; subY < 8; subY++)
-				list[subX][subY][subZ] = 0;
+				list[subX][subY][subZ] = state;
 		else if( xmypzp )
 			for(int subX = 0; subX < 4; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 4; subY < 8; subY++)
-				list[subX][subY][subZ] = 0;
+				list[subX][subY][subZ] = state;
 		
 		return list;
 	}

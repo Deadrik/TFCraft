@@ -29,7 +29,6 @@ import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.TileEntities.TEDetailed;
 import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.TileEntities.TileEntityWoodConstruct;
-
 import com.bioxx.tfc.api.TFCOptions;
 
 import cpw.mods.fml.relauncher.Side;
@@ -161,13 +160,14 @@ public class BlockDetailed extends BlockPartial
 			nbt.setInteger("xSelected", xSelected);
 			nbt.setInteger("ySelected", ySelected);
 			nbt.setInteger("zSelected", zSelected);
+			nbt.setInteger("side", side);
 			te.createDataNBT(nbt);
 			te.broadcastPacketInRange(te.createDataPacket(nbt));
 		}
 		return false;
 	}
 
-	public boolean onBlockActivatedServer(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) 
+	public boolean onBlockActivatedServer(World world, int x, int y, int z, EntityPlayer player) 
 	{
 		int mode = 0;
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
@@ -189,48 +189,44 @@ public class BlockDetailed extends BlockPartial
 
 		if(mode == 1)
 		{
+			
+			int[][][] list = new int[8][8][8];
+			BlockStair.EmptyStairInt(xSelected, ySelected, zSelected, list, 1);
+			
 			int index = -10;
 			
-			if( xSelected < 4 && ySelected < 4 && zSelected < 4 )
-				for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++) {
+			for(int subX = 0; subX < 8; subX++)
+			for(int subZ = 0; subZ < 8; subZ++)
+			for(int subY = 0; subY < 8; subY++)
+				if(list[subX][subY][subZ] == 1)
+				{
 					index = (subX * 8 + subZ) * 8 + subY;
 					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
 				}
-			if( xSelected > 3 && ySelected < 4 && zSelected < 4 )
-				for(int subX = 4; subX < 8; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++) {
+			
+			list = null;
+			System.gc();
+			
+			return true;
+		}
+		else if(mode == 2)
+		{System.out.println(side);
+			int[][][] list = new int[8][8][8];
+			BlockSlab.EmptySlabInt(side, xSelected, ySelected, zSelected, list, 1);
+
+			int index = -10;
+			
+			for(int subX = 0; subX < 8; subX++)
+			for(int subZ = 0; subZ < 8; subZ++)
+			for(int subY = 0; subY < 8; subY++)
+				if(list[subX][subY][subZ] == 1)
+				{
 					index = (subX * 8 + subZ) * 8 + subY;
 					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
 				}
-			if( xSelected > 3 && ySelected < 4 && zSelected > 3 )
-				for(int subX = 4; subX < 8; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 0; subY < 4; subY++) {
-					index = (subX * 8 + subZ) * 8 + subY;
-					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
-				}
-			if( xSelected < 4 && ySelected < 4 && zSelected > 3 )
-				for(int subX = 0; subX < 4; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 0; subY < 4; subY++) {
-					index = (subX * 8 + subZ) * 8 + subY;
-					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
-				}
-			if( xSelected < 4 && ySelected > 3 && zSelected < 4 )
-				for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 4; subY < 8; subY++) {
-					index = (subX * 8 + subZ) * 8 + subY;
-					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
-				}
-			if( xSelected > 3 && ySelected > 3 && zSelected < 4 )
-				for(int subX = 4; subX < 8; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 4; subY < 8; subY++) {
-					index = (subX * 8 + subZ) * 8 + subY;
-					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
-				}
-			if( xSelected > 3 && ySelected > 3 && zSelected > 3 )
-				for(int subX = 4; subX < 8; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 4; subY < 8; subY++) {
-					index = (subX * 8 + subZ) * 8 + subY;
-					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
-				}
-			if( xSelected < 4 && ySelected > 3 && zSelected > 3 )
-				for(int subX = 0; subX < 4; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 4; subY < 8; subY++) {
-					index = (subX * 8 + subZ) * 8 + subY;
-					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
-				}
+			
+			list = null;
+			System.gc();
 			
 			return true;
 		}
