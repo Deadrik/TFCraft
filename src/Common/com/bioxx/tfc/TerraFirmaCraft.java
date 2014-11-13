@@ -158,6 +158,13 @@ public class TerraFirmaCraft
 			GameRegistry.registerWorldGenerator(new WorldGenLargeRock(), 7);
 			GameRegistry.registerWorldGenerator(new WorldGenPlants(), 8);
 
+			// remove vanilla world types
+			for (int i = 0; i < WorldType.worldTypes.length; i += 1)
+			{
+			    if (WorldType.worldTypes[i] != null && WorldType.worldTypes[i].getCanBeCreated()) {
+			        WorldType.worldTypes[i] = null;
+			    }
+			}
 			WorldType.DEFAULT = new TFCWorldType(0, "TFCDefault");
 			WorldType.FLAT = new TFCWorldType(1, "TFCFlat");
 
