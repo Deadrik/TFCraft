@@ -49,4 +49,14 @@ public class QuernManager
 		}
 		return null;
 	}
+
+    public List getRecipes()
+    {
+        return recipes;
+    }
+
+    public List getValidItems()
+    {
+        return validItems;
+    }
 }

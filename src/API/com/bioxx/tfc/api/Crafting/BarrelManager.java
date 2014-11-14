@@ -37,4 +37,9 @@ public class BarrelManager
 		}
 		return null;
 	}
+
+    public List getRecipes()
+    {
+        return recipes;
+    }
 }

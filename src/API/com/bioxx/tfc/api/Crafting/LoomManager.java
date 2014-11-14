@@ -75,4 +75,8 @@ public class LoomManager
 		return null;
 	}
 
+    public List getRecipes()
+    {
+        return recipes;
+    }
 }

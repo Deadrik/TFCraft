@@ -65,7 +65,17 @@ public class ItemLooseRock extends ItemTerra
 		return this;
 	}
 
-	@Override
+    public Item getSpecialCraftingType()
+    {
+        return specialCraftingType;
+    }
+
+    public ItemStack getSpecialCraftingTypeAlternate()
+    {
+        return specialCraftingTypeAlternate;
+    }
+
+    @Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
