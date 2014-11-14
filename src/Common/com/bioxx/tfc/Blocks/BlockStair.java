@@ -19,6 +19,8 @@ import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
+import com.bioxx.tfc.TileEntities.TEDetailed;
+import com.bioxx.tfc.TileEntities.TEPartial;
 
 public class BlockStair extends BlockPartial
 {
@@ -188,11 +190,157 @@ public class BlockStair extends BlockPartial
 
 			if(mode == 1)
 			{
-				ItemChisel.ChangeStairs(world, x, y, z, hitX, hitY, hitZ);
+				ChangeStairs(world, x, y, z, hitX, hitY, hitZ);
+				entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
+				return true;
+			}
+			else if(mode == 2)
+			{
+				int[][][] list = StairToDetailledList( world.getBlockMetadata(x, y, z) );
+				list = BlockSlab.EmptySlabFloat(side, hitX, hitY, hitZ, list);
+				BlockDetailed.ListToDetailled(world, x, y, z, list );
+				list = null;
+				System.gc();
+				
 				entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
 				return true;
 			}
 		}
 		return false;
+	}
+
+	public static void ChangeStairs(World world, int x, int y, int z, float hitX, float hitY, float hitZ)
+	{
+		int meta = world.getBlockMetadata(x, y, z);
+		int newmeta = meta;
+		
+		if( hitY > 0.5F ) {
+			if( ( meta == 4 && hitX < 0.5F && hitZ < 0.5F )
+			 || ( meta == 6 && hitX < 0.5F && hitZ > 0.5F ) ) newmeta = 0;
+			if( ( meta == 7 && hitX > 0.5F && hitZ < 0.5F )
+			 || ( meta == 5 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 1;
+			if( ( meta == 6 && hitX > 0.5F && hitZ < 0.5F )
+			 || ( meta == 5 && hitX < 0.5F && hitZ < 0.5F ) ) newmeta = 2;
+			if( ( meta == 7 && hitX < 0.5F && hitZ > 0.5F )
+			 || ( meta == 4 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 3;
+		}
+		else
+		{
+			if( ( meta == 12 && hitX < 0.5F && hitZ < 0.5F )
+			 || ( meta == 14 && hitX < 0.5F && hitZ > 0.5F ) ) newmeta = 8;
+			if( ( meta == 15 && hitX > 0.5F && hitZ < 0.5F )
+			 || ( meta == 13 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 9;
+			if( ( meta == 14 && hitX > 0.5F && hitZ < 0.5F )
+			 || ( meta == 13 && hitX < 0.5F && hitZ < 0.5F ) ) newmeta = 10;
+			if( ( meta == 15 && hitX < 0.5F && hitZ > 0.5F )
+			 || ( meta == 12 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 11;
+		}
+		
+		if( meta == newmeta ) {
+			int[][][] list = StairToDetailledList(meta);
+			list = EmptyStairFloat(hitX, hitY, hitZ, list);
+			BlockDetailed.ListToDetailled(world, x, y, z, list );
+			list = null;
+			System.gc();
+		} else
+			world.setBlockMetadataWithNotify(x, y, z, newmeta, 0x2);
+	}
+
+	public static int[][][] StairToDetailledList(int meta)
+	{
+		int[][][] list = new int[8][8][8];
+		
+		if( meta != 8 && meta != 10 && meta != 14 )
+			for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++)
+				list[subX][subY][subZ] = 1;
+		if( meta != 10 && meta != 9 && meta != 13 )
+			for(int subX = 4; subX < 8; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++)
+				list[subX][subY][subZ] = 1;
+		if( meta != 9 && meta != 11 && meta != 15 )
+			for(int subX = 4; subX < 8; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 0; subY < 4; subY++)
+				list[subX][subY][subZ] = 1;
+		if( meta != 11 && meta != 8 && meta != 12 )
+			for(int subX = 0; subX < 4; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 0; subY < 4; subY++)
+				list[subX][subY][subZ] = 1;
+		if( meta != 0 && meta != 2 && meta != 6)
+			for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 4; subY < 8; subY++)
+				list[subX][subY][subZ] = 1;
+		if( meta != 2 && meta != 1 && meta != 5 )
+			for(int subX = 4; subX < 8; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 4; subY < 8; subY++)
+				list[subX][subY][subZ] = 1;
+		if( meta != 1 && meta != 3 && meta != 7 )
+			for(int subX = 4; subX < 8; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 4; subY < 8; subY++)
+				list[subX][subY][subZ] = 1;
+		if( meta != 3 && meta != 0 && meta != 4 )
+			for(int subX = 0; subX < 4; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 4; subY < 8; subY++)
+				list[subX][subY][subZ] = 1;
+		
+		return list;
+	}
+	
+	public static int[][][] EmptyStairFloat(float hitX, float hitY, float hitZ, int[][][] list) {
+		return EmptyStairFloat(hitX, hitY, hitZ, list, 0);
+	}
+	
+	public static int[][][] EmptyStairFloat(float hitX, float hitY, float hitZ, int[][][] list, int state) {
+
+		boolean xmymzm = hitX < 0.5F && hitY < 0.5F && hitZ < 0.5F;
+		boolean xpymzm = hitX > 0.5F && hitY < 0.5F && hitZ < 0.5F;
+		boolean xpymzp = hitX > 0.5F && hitY < 0.5F && hitZ > 0.5F;
+		boolean xmymzp = hitX < 0.5F && hitY < 0.5F && hitZ > 0.5F;
+		boolean xmypzm = hitX < 0.5F && hitY > 0.5F && hitZ < 0.5F;
+		boolean xpypzm = hitX > 0.5F && hitY > 0.5F && hitZ < 0.5F;
+		boolean xpypzp = hitX > 0.5F && hitY > 0.5F && hitZ > 0.5F;
+		boolean xmypzp = hitX < 0.5F && hitY > 0.5F && hitZ > 0.5F;
+		
+		return EmptyStair(xmymzm, xpymzm, xpymzp, xmymzp, xmypzm, xpypzm, xpypzp, xmypzp, list, state);
+	}
+	
+	public static int[][][] EmptyStairInt(int xSelected, int ySelected, int zSelected, int[][][] list) {
+		return EmptyStairInt(xSelected, ySelected, zSelected, list, 0);
+	}
+	
+	public static int[][][] EmptyStairInt(int xSelected, int ySelected, int zSelected, int[][][] list, int state) {
+
+		boolean xmymzm = xSelected < 4 && ySelected < 4 && zSelected < 4;
+		boolean xpymzm = xSelected > 3 && ySelected < 4 && zSelected < 4;
+		boolean xpymzp = xSelected > 3 && ySelected < 4 && zSelected > 3;
+		boolean xmymzp = xSelected < 4 && ySelected < 4 && zSelected > 3;
+		boolean xmypzm = xSelected < 4 && ySelected > 3 && zSelected < 4;
+		boolean xpypzm = xSelected > 3 && ySelected > 3 && zSelected < 4;
+		boolean xpypzp = xSelected > 3 && ySelected > 3 && zSelected > 3;
+		boolean xmypzp = xSelected < 4 && ySelected > 3 && zSelected > 3;
+		
+		return EmptyStair(xmymzm, xpymzm, xpymzp, xmymzp, xmypzm, xpypzm, xpypzp, xmypzp, list, state);
+	}
+	
+	public static int[][][] EmptyStair(boolean xmymzm, boolean xpymzm, boolean xpymzp, boolean xmymzp, boolean xmypzm, boolean xpypzm, boolean xpypzp, boolean xmypzp, int[][][] list, int state) {
+
+		if( xmymzm )
+			for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++)
+				list[subX][subY][subZ] = state;
+		else if( xpymzm )
+			for(int subX = 4; subX < 8; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++)
+				list[subX][subY][subZ] = state;
+		else if( xpymzp )
+			for(int subX = 4; subX < 8; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 0; subY < 4; subY++)
+				list[subX][subY][subZ] = state;
+		else if( xmymzp )
+			for(int subX = 0; subX < 4; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 0; subY < 4; subY++)
+				list[subX][subY][subZ] = state;
+		else if( xmypzm )
+			for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 4; subY < 8; subY++)
+				list[subX][subY][subZ] = state;
+		else if( xpypzm )
+			for(int subX = 4; subX < 8; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 4; subY < 8; subY++)
+				list[subX][subY][subZ] = state;
+		else if( xpypzp )
+			for(int subX = 4; subX < 8; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 4; subY < 8; subY++)
+				list[subX][subY][subZ] = state;
+		else if( xmypzp )
+			for(int subX = 0; subX < 4; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 4; subY < 8; subY++)
+				list[subX][subY][subZ] = state;
+		
+		return list;
 	}
 }

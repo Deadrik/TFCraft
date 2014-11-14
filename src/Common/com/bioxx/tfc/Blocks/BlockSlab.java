@@ -241,4 +241,72 @@ public class BlockSlab extends BlockPartial
 			return false;
 		}
 	}
+	
+	public static int[][][] EmptySlabFloat(int side, float hitX, float hitY, float hitZ, int[][][] list) {
+		return EmptySlabFloat(side, hitX, hitY, hitZ, list, 0);
+	}
+	
+	public static int[][][] EmptySlabFloat(int side, float hitX, float hitY, float hitZ, int[][][] list, int state) {
+		
+		int bx = 0; int tx = 8;
+		int by = 0; int ty = 8;
+		int bz = 0; int tz = 8;
+		
+		if( side == 0 || side == 1 )
+		{
+			ty = (int) Math.floor(hitY*8)+(side==0?1:0);
+			by = ty-1;
+		}
+		else if( side == 2 || side == 3 )
+		{
+			tz = (int) Math.floor(hitZ*8)+(side==2?1:0);
+			bz = tz-1;
+		}
+		else if( side == 4 ||side == 5 )
+		{
+			tx = (int) Math.floor(hitX*8)+(side==4?1:0);
+			bx = tx-1;
+		}
+		
+		return EmptySlab(bx, tx, by, ty, bz, tz, list, state);
+	}
+	
+	public static int[][][] EmptySlabInt(int side, int xSelected, int ySelected, int zSelected, int[][][] list) {
+		return EmptySlabInt(side, xSelected, ySelected, zSelected, list, 0);
+	}
+	
+	public static int[][][] EmptySlabInt(int side, int xSelected, int ySelected, int zSelected, int[][][] list, int state) {
+		
+		int bx = 0; int tx = 8;
+		int by = 0; int ty = 8;
+		int bz = 0; int tz = 8;
+		
+		if( side == 0 || side == 1 )
+		{
+			by = ySelected;
+		 	ty = by+1;
+		}
+		else if( side == 2 || side == 3 )
+		{
+			bz = zSelected;
+			tz = bz+1;
+		}
+		else if( side == 4 ||side == 5 )
+		{
+			bx = xSelected;
+			tx = bx+1; 
+		}
+		
+		return EmptySlab(bx, tx, by, ty, bz, tz, list, state);
+	}
+	
+	public static int[][][] EmptySlab(int bx, int tx, int by, int ty, int bz, int tz, int[][][] list, int state) {
+
+		for(int subX = bx; subX < tx; subX++)
+			for(int subZ = bz; subZ < tz; subZ++)
+				for(int subY = by; subY < ty; subY++)
+					list[subX][subY][subZ] = state;
+		
+		return list;
+	}
 }
