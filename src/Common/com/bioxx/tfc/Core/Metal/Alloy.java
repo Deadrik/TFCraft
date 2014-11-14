@@ -132,6 +132,12 @@ public class Alloy
             tier = t;
             name = n;
         }
+
+        @Override
+        public String toString()
+        {
+            return name;
+        }
     }
 
 	public void toPacket(DataOutputStream dos)
