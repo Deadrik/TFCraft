@@ -227,7 +227,7 @@ public class BlockGrass extends BlockTerra
 			{
 				world.setBlock(i, j, k, TFC_Core.getTypeForDirtFromGrass(this), meta, 0x2);
 			}
-			else if (world.canBlockSeeTheSky(i, j, k))
+			else if (world.canBlockSeeTheSky(i, j + 1, k))
 			{
 				spreadGrass(world, i, j, k, rand);
 
@@ -238,7 +238,7 @@ public class BlockGrass extends BlockTerra
 				{
 					if(rand.nextInt((int) ((16800-rain)/4)) == 0 && temp > 20)
 						world.setBlock(i, j + 1, k, TFCBlocks.TallGrass, (world.rand.nextInt(30) == 0 ? 1 : 0), 0x2); // 1/30 chance to spawn fern
-					else if (rand.nextInt(15000) == 0 && temp > 20 && world.canBlockSeeTheSky(i, j + 1, k))
+					else if (rand.nextInt(15000) == 0 && temp > 20)
 						new WorldGenGrowTrees().generate(world, rand, i, j, k);
 				}
 
@@ -283,14 +283,12 @@ public class BlockGrass extends BlockTerra
 			Block id = world.getBlock(x, y, z);
 			int meta = world.getBlockMetadata(x, y, z);
 
-			boolean skyAccess = world.canBlockSeeTheSky(x, y, z);
-
 			//Spread to other blocks
-			if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0 && skyAccess)
+			if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0)
 				world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRainByBlock(id, rain), meta, 0x2);
-			else if (TFC_Core.isClay(id) && rand.nextInt(10) == 0 && skyAccess)
+			else if (TFC_Core.isClay(id) && rand.nextInt(10) == 0)
 				world.setBlock(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta, 0x2);
-			else if (TFC_Core.isPeat(id) && rand.nextInt(10) == 0 && skyAccess)
+			else if (TFC_Core.isPeat(id) && rand.nextInt(10) == 0)
 				world.setBlock(x, y, z, TFCBlocks.PeatGrass, 0, 0x2);
 		}
 	}

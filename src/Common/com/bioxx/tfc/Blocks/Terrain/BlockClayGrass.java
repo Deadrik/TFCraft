@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
@@ -67,9 +68,9 @@ public class BlockClayGrass extends BlockGrass
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
-		if (world.getBlockLightValue(x, y + 1, z) < 4 && world.getBlock(x, y + 1, z).getLightOpacity() > 2)
+		if (world.getBlock(x, y + 1, z).isSideSolid(world, x, y + 1, z, ForgeDirection.DOWN))
 			world.setBlock(x, y, z, TFC_Core.getTypeForClay(world.getBlockMetadata(x, y, z) + textureOffset), world.getBlockMetadata(x, y, z), 0x2);
-		else if (world.getBlockLightValue(x, y + 1, z) >= 4)
+		else if (world.canBlockSeeTheSky(x, y + 1, z))
 		{
 			spreadGrass(world, x, y, z, rand);
 		}
