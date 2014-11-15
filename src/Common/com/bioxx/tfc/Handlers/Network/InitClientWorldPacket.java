@@ -2,12 +2,8 @@ package com.bioxx.tfc.Handlers.Network;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-
-import java.io.DataInputStream;
 import java.util.HashMap;
-
 import net.minecraft.entity.player.EntityPlayer;
-
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
@@ -16,7 +12,6 @@ import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Core.Player.SkillStats;
 import com.bioxx.tfc.api.TFCOptions;
-
 import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class InitClientWorldPacket extends AbstractPacket
@@ -31,7 +26,6 @@ public class InitClientWorldPacket extends AbstractPacket
 	private float nutrProtein;
 	private float nutrDairy;
 	private boolean craftingTable = false;
-	private DataInputStream dis;
 	private SkillStats playerSkills;
 	private int daysInYear, HGRate, HGCap;
 	private HashMap<String, Integer> skillMap = new HashMap<String, Integer>();
@@ -143,14 +137,11 @@ public class InitClientWorldPacket extends AbstractPacket
 		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
 				player.getDisplayName(),
 				player.getUniqueID()));
-
-		System.out.println("Recieved client init packet.");
 	}
 
 	@Override
 	public void handleServerSide(EntityPlayer player)
 	{
-		System.out.println("Recieved server init packet.");
 	}
 
 }

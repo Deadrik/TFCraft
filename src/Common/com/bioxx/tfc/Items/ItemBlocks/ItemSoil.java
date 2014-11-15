@@ -14,10 +14,6 @@ public class ItemSoil extends ItemTerraBlock
 	public ItemSoil(Block b)
 	{
 		super(b);
-		if(TFC_Core.isStoneIgEx(b)) MetaNames = Global.STONE_IGEX;
-		else if(TFC_Core.isStoneIgIn(b)) MetaNames = Global.STONE_IGIN;
-		else if(TFC_Core.isStoneSed(b)) MetaNames = Global.STONE_SED;
-		else if(TFC_Core.isStoneMM(b)) MetaNames = Global.STONE_MM;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

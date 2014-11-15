@@ -18,8 +18,10 @@ public class ItemCustomWood2 extends ItemCustomWood
 	{
 		try
 		{
-			if(MetaNames != null)
-				return getUnlocalizedName().concat("." + MetaNames[is.getItemDamage() > 15 ? is.getItemDamage() - 16 : is.getItemDamage()]);
+			int meta = is.getItemDamage();
+			if(meta > 15) meta -= 16;
+			if(MetaNames != null && meta < MetaNames.length)
+				return getUnlocalizedName().concat("." + MetaNames[meta]);
 		}
 		catch(Exception ex)
 		{

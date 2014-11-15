@@ -57,6 +57,7 @@ public class BlockLogHoriz extends BlockLogVert
 		return (dmg & 7) + offset;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SideOnly(Side.CLIENT)
 	@Override
 	/**

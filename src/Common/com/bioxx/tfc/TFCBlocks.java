@@ -654,7 +654,8 @@ public class TFCBlocks
 		WoodHoriz = new BlockLogHoriz(0).setBlockName("WoodHoriz").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
 		WoodHoriz2 = new BlockLogHoriz(8).setBlockName("WoodHoriz2").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
 		WoodHoriz3 = new BlockLogHoriz2(0).setBlockName("WoodHoriz3").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
-		WoodHoriz4 = new BlockLogHoriz2(8).setBlockName("WoodHoriz4").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
+		//Use 8 instead of 0 if Global.WOOD_ALL.length > 24
+		WoodHoriz4 = new BlockLogHoriz2(/*8*/0).setBlockName("WoodHoriz4").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
 
 		ToolRack = new BlockToolRack().setHardness(3F).setBlockName("Toolrack");
 		SpawnMeter = new BlockSpawnMeter().setHardness(3F).setBlockName("SpawnMeter");

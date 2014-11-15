@@ -2,7 +2,6 @@ package com.bioxx.tfc.Blocks;
 
 import java.util.List;
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -15,15 +14,12 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
-
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TEFarmland;
 import com.bioxx.tfc.api.Constant.Global;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -52,6 +48,7 @@ public class BlockFarmland extends BlockContainer
 			DirtTexture[i] = registerer.registerIcon(Reference.ModID + ":" + "farmland/Farmland " + Global.STONE_ALL[i + textureOffset]);
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SideOnly(Side.CLIENT)
 	@Override
 	/**
@@ -60,7 +57,7 @@ public class BlockFarmland extends BlockContainer
 	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
 		// Change to false if this block should not be added to the creative tab
-		Boolean addToCreative = false;
+		Boolean addToCreative = true;
 
 		if(addToCreative)
 		{
@@ -119,7 +116,7 @@ public class BlockFarmland extends BlockContainer
 	/**
 	 * returns true if there is at least one cropblock nearby (x-1 to x+1, y+1, z-1 to z+1)
 	 */
-	private boolean isCropsNearby(World world, int x, int y, int z)
+	/*private boolean isCropsNearby(World world, int x, int y, int z)
 	{
 		byte var5 = 0;
 		for (int var6 = x - var5; var6 <= x + var5; ++var6)
@@ -132,7 +129,7 @@ public class BlockFarmland extends BlockContainer
 			}
 		}
 		return false;
-	}
+	}*/
 
 	/**
 	 * returns true if there's water nearby (x-4 to x+4, y to y+1, k-4 to k+4)
