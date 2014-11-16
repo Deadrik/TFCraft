@@ -31,4 +31,14 @@ public class AlloyMetalCompare extends AlloyMetal
 				&&	(b.metal == -1 || (Math.round(b.metal * 1000f) >= Math.round(this.metalMin * 1000f)
 				&&	Math.round(b.metal * 1000f) <= Math.round(this.metalMax * 1000f))));
 	}
+
+    public float getMetalMin()
+    {
+        return metalMin;
+    }
+
+    public float getMetalMax()
+    {
+        return metalMax;
+    }
 }

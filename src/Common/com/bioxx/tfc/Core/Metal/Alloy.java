@@ -111,20 +111,34 @@ public class Alloy
 
 	public enum EnumTier
 	{
-		TierI(1),//Pit Kiln
-		TierII(2),//Beehive Kiln
-		TierIII(3),//Bloomery
-		TierIV(4),//Blast Furnace
-		TierV(5), //Crucible
+		TierI(1, "Pit Kiln"),
+		TierII(2, "Beehive Kiln"),
+		TierIII(3, "Bloomery"),
+		TierIV(4, "Blast Furnace"),
+		TierV(5, "Crucible"),
 		TierVI(6), TierVII(7), TierVIII(8), TierIX(9), TierX(10);
 
-		public int tier;
+		public final int tier;
+		public final String name;
 
 		EnumTier(int t)
 		{
 			tier = t;
+            name = name();
 		}
-	}
+
+        EnumTier(int t, String n)
+        {
+            tier = t;
+            name = n;
+        }
+
+        @Override
+        public String toString()
+        {
+            return name;
+        }
+    }
 
 	public void toPacket(DataOutputStream dos)
 	{
@@ -199,4 +213,9 @@ public class Alloy
 		}
 		return this;
 	}
+
+    public EnumTier getFurnaceTier()
+    {
+        return furnaceTier;
+    }
 }
