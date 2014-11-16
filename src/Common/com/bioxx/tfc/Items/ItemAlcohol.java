@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -130,9 +131,8 @@ public class ItemAlcohol extends ItemTerra
 						}
 						if(soberTime > 10000+levelMod && !player.capabilities.isCreativeMode){
 							soberTime = 0;
-							//((EntityPlayerMP)player).mcServer.getConfigurationManager().sendChatMsg(player.username+" died of alcohol poisoning.");
-							player.inventory.dropAllItems();
-							player.setHealth(0);
+
+							player.attackEntityFrom((new DamageSource("alcohol")).setDamageBypassesArmor().setDamageIsAbsolute(), player.getMaxHealth());
 						}
 					}
 

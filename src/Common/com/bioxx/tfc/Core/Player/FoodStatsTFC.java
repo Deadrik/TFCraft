@@ -2,7 +2,6 @@ package com.bioxx.tfc.Core.Player;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -196,7 +195,7 @@ public class FoodStatsTFC
 					if(waterLevel < 0)
 						waterLevel = 0;
 					if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0 && temp > 35)
-						player.attackEntityFrom(DamageSource.generic, 2);
+						player.attackEntityFrom((new DamageSource("heatStroke")).setDamageBypassesArmor().setDamageIsAbsolute(), 2);
 				}
 			}
 		}

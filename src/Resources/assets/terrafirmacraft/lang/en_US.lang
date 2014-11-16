@@ -12,6 +12,8 @@ key.ToolMode=Cycle Tool Mode
 key.LockTool=Lock Tool Location
 
 effect.bleed=Bleeding
+death.attack.alcohol=%1$s died of alcohol poisoning
+death.attack.heatStroke=%1$s died of heat stroke
 
 #==============
 #= Spawn Eggs =
