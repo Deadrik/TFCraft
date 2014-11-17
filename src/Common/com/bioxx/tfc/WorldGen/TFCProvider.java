@@ -187,14 +187,14 @@ public class TFCProvider extends WorldProvider
 	@Override
 	public boolean canSnowAt(int x, int y, int z, boolean checkLight)
 	{
-        if (TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) > 0)
-	        return false;
-        Material material = worldObj.getBlock(x, y, z).getMaterial();
-        if (material == Material.snow)  // avoid vanilla MC to replace snow
-            return false;
+		if (TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) > 0)
+			return false;
+		Material material = worldObj.getBlock(x, y, z).getMaterial();
+		if (material == Material.snow)  // avoid vanilla MC to replace snow
+			return false;
 		if(TFCBlocks.Snow.canPlaceBlockAt(worldObj, x, y, z) && material.isReplaceable())
 			return true;
-		
+
 		return false;
 	}
 
