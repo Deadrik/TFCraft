@@ -1,7 +1,6 @@
 package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -12,7 +11,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
-
+import net.minecraftforge.fluids.IFluidContainerItem;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
@@ -32,7 +31,6 @@ import com.bioxx.tfc.api.Crafting.BarrelRecipe;
 import com.bioxx.tfc.api.Crafting.BarrelVinegarRecipe;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -297,6 +295,15 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				return FluidContainerRegistry.drainFluidContainer(is);
 			}
 		}
+		else if(is.getItem() instanceof IFluidContainerItem)
+		{
+			FluidStack isfs = ((IFluidContainerItem) is.getItem()).getFluid(is);
+			if(isfs != null && addLiquid(isfs))
+			{
+				((IFluidContainerItem) is.getItem()).drain(is, is.getMaxDamage(), true);
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			}
+		}
 		return is;
 	}
 
@@ -321,6 +328,17 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				}
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				return out;
+			}
+		}
+		else if(fluid != null && is.getItem() instanceof IFluidContainerItem)
+		{
+			FluidStack isfs = ((IFluidContainerItem) is.getItem()).getFluid(is);
+			if(isfs == null || fluid.isFluidEqual(isfs))
+			{
+				fluid.amount -= ((IFluidContainerItem) is.getItem()).fill(is, fluid, true);
+				if(fluid.amount == 0)
+					fluid = null;
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 		}
 		return is;
@@ -643,7 +661,6 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				int count = 1;
 				while(this.getInputStack().stackSize > getInputStack().getMaxStackSize())
 				{
-					int ss = getInputStack().stackSize;
 					ItemStack is = getInputStack().splitStack(getInputStack().getMaxStackSize());
 					if(count < this.storage.length && this.getStackInSlot(count) == null)
 					{
@@ -692,12 +709,31 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 						}
 					}
 				}
+				else if(container != null && container.getItem() instanceof IFluidContainerItem)
+				{
+					FluidStack isfs = ((IFluidContainerItem)container.getItem()).getFluid(container);
+					if(isfs != null && addLiquid(isfs))
+					{
+						((IFluidContainerItem) container.getItem()).drain(container, container.getMaxDamage(), true);
+					}
+				}
 			}
 			else if(mode == MODE_OUT)
 			{
-				if(FluidContainerRegistry.isEmptyContainer(getInputStack()))
+				ItemStack container = getInputStack();
+				if(FluidContainerRegistry.isEmptyContainer(container))
 				{
 					this.setInventorySlotContents(0, this.removeLiquid(getInputStack()));
+				}
+				else if(container != null && fluid != null && container.getItem() instanceof IFluidContainerItem)
+				{
+					FluidStack isfs = ((IFluidContainerItem)container.getItem()).getFluid(container);
+					if(isfs == null || fluid.isFluidEqual(isfs))
+					{
+						fluid.amount -= ((IFluidContainerItem) container.getItem()).fill(container, fluid, true);
+						if(fluid.amount == 0)
+							fluid = null;
+					}
 				}
 			}
 		}

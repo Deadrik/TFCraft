@@ -1,8 +1,6 @@
 package com.bioxx.tfc.Blocks.Devices;
 
 import java.util.List;
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
@@ -23,7 +21,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
-
+import net.minecraftforge.fluids.IFluidContainerItem;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
@@ -37,13 +35,11 @@ import com.bioxx.tfc.Items.ItemBlocks.ItemBarrels;
 import com.bioxx.tfc.Items.ItemBlocks.ItemLargeVessel;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.Constant.Global;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBarrel extends BlockTerraContainer
 {
-	private final Random random = new Random();
 	private String[] woodNames;
 
 	public BlockBarrel()
@@ -90,9 +86,10 @@ public class BlockBarrel extends BlockTerraContainer
 			return blockIcon;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) 
+	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List)
 	{
 		for(int i = 0; i < woodNames.length; i++)
 			par3List.add(new ItemStack(this, 1, i));
@@ -316,7 +313,12 @@ public class BlockBarrel extends BlockTerraContainer
 		if (!te.getSealed() && te.getInvCount() <= 1) 
 		{
 			ItemStack equippedItem = player.getCurrentEquippedItem();
-			if(FluidContainerRegistry.isFilledContainer(equippedItem) && !te.getSealed())
+			if(equippedItem == null)
+				return false;
+
+			if((FluidContainerRegistry.isFilledContainer(equippedItem)
+					|| (equippedItem.getItem() instanceof IFluidContainerItem && ((IFluidContainerItem)equippedItem.getItem()).getFluid(equippedItem) != null))
+					&& !te.getSealed())
 			{
 				ItemStack tmp = equippedItem.copy();
 				tmp.stackSize = 1;
@@ -343,7 +345,7 @@ public class BlockBarrel extends BlockTerraContainer
 
 				return true;
 			}
-			else if(FluidContainerRegistry.isEmptyContainer(equippedItem))
+			else if(FluidContainerRegistry.isEmptyContainer(equippedItem) || equippedItem.getItem() instanceof IFluidContainerItem)
 			{
 				ItemStack tmp = equippedItem.copy();
 				tmp.stackSize = 1;
@@ -370,7 +372,7 @@ public class BlockBarrel extends BlockTerraContainer
 
 				return true;
 			}
-			else if(equippedItem != null && (equippedItem.getItem() instanceof ItemBarrels || equippedItem.getItem() instanceof ItemLargeVessel))
+			else if(equippedItem.getItem() instanceof ItemBarrels || equippedItem.getItem() instanceof ItemLargeVessel)
 			{
 				ItemStack is = equippedItem.copy();
 				is.stackSize = 1;
