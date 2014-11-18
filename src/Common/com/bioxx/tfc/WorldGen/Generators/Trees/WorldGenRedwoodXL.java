@@ -35,13 +35,19 @@ public class WorldGenRedwoodXL extends WorldGenerator
 		final int k = height - j;
 		final int l = 4 + rand.nextInt(6);
 
-		if (y < 1 || y + height + 1 > 256)
+		if (y < 1 || y >= 180 || y + height + 1 > 256)
 			return false;
 
-		if (!TFC_Core.isSoil(world.getBlock(x, y - 1, z)) || !TFC_Core.isSoil(world.getBlock(x-1, y - 1, z)) || 
-				!TFC_Core.isSoil(world.getBlock(x, y - 1, z-1)) || !TFC_Core.isSoil(world.getBlock(x-1, y - 1, z-1)) || y >= 180)
+		for (int x1 = x; x1 >= x-1; x1 -= 1)
 		{
-			return false;
+			for (int z1 = z; z1 >= z-1; z1 -= 1)
+			{
+				if (!TFC_Core.isSoil(world.getBlock(x1, y - 1, z1)))
+					return false;
+				Block block = world.getBlock(x1, y, z1);
+				if (!block.isLeaves(world, x1, y, z1) && !block.canBeReplacedByLeaves(world, x1, y, z1))
+					return false;
+			}
 		}
 
 		for (int y1 = y; y1 <= y + 1 + height; y1++)
