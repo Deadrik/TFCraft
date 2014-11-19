@@ -276,7 +276,7 @@ public class BlockGrass extends BlockTerra
 		{
 			int x = i + rand.nextInt(3) - 1;
 			int z = k + rand.nextInt(3) - 1;
-			int y = world.getTopSolidOrLiquidBlock(x, z);
+			int y = world.getTopSolidOrLiquidBlock(x, z) - 1;
 
 			float rain = TFC_Climate.getRainfall(world, x, y, z);
 
