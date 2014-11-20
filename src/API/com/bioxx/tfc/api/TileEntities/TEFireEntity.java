@@ -1,10 +1,15 @@
 package com.bioxx.tfc.api.TileEntities;
 
+import java.util.Random;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import com.bioxx.tfc.TileEntities.NetworkTileEntity;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
+import com.bioxx.tfc.api.Interfaces.ICookableFood;
 
 public class TEFireEntity extends NetworkTileEntity
 {
@@ -26,7 +31,25 @@ public class TEFireEntity extends NetworkTileEntity
 		if(is != null)
 		{
 			float temp = TFC_ItemHeat.GetTemp(is);
-			if(fireTemp > temp)
+			if(fuelTimeLeft > 0 && is.getItem() instanceof ICookableFood)
+			{
+				float inc = Food.getCooked(is)+Math.min((fireTemp/700), 2f);
+				Food.setCooked(is, inc);
+				temp = inc;
+				if(Food.isCooked(is))
+				{
+					int[] cookedTasteProfile = new int[] {0,0,0,0,0};
+					Random R = new Random(((ICookableFood)is.getItem()).getFoodID()+(((int)Food.getCooked(is)-600)/120));
+					cookedTasteProfile[0] = R.nextInt(30)-15;
+					cookedTasteProfile[1] = R.nextInt(30)-15;
+					cookedTasteProfile[2] = R.nextInt(30)-15;
+					cookedTasteProfile[3] = R.nextInt(30)-15;
+					cookedTasteProfile[4] = R.nextInt(30)-15;
+					Food.setCookedProfile(is, cookedTasteProfile);
+					Food.setFuelProfile(is, EnumFuelMaterial.getFuelProfile(fuelTasteProfile));
+				}
+			}
+			else if(fireTemp > temp)
 			{
 				temp += TFC_ItemHeat.getTempIncrease(is);
 			}
