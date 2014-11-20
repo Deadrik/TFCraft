@@ -33,9 +33,11 @@ public class TEFireEntity extends NetworkTileEntity
 			float temp = TFC_ItemHeat.GetTemp(is);
 			if(fuelTimeLeft > 0 && is.getItem() instanceof ICookableFood)
 			{
-				float inc = Food.getCooked(is)+Math.min((fireTemp/700), 2f);
-				Food.setCooked(is, inc);
-				temp = inc;
+				float inc = Math.min((fireTemp/700), 2f);
+				temp = temp + inc;
+				//Set cooked, if the temp is too high then make it heat faster but not cook properly
+				float cook = Food.getCooked(is) + Math.min(inc, 0.94f);
+				Food.setCooked(is, cook);
 				if(Food.isCooked(is))
 				{
 					int[] cookedTasteProfile = new int[] {0,0,0,0,0};
