@@ -232,9 +232,9 @@ public class Food
 	public static int getCookedColorMultiplier(ItemStack is)
 	{
 		float cookedLevel = Food.getCooked(is);
-		int r = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f)); 
-		int b = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f));
-		int g = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f));
+		int r = Math.max(255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f)), 0); 
+		int b = Math.max(255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f)), 0);
+		int g = Math.max(255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f)), 0);
 		int rbg = (r << 16) + (b << 8) + g;
 		return rbg;
 	}

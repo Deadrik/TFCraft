@@ -21,7 +21,6 @@ import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Events.ItemCookEvent;
 import com.bioxx.tfc.api.Interfaces.ICookableFood;
-import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 import cpw.mods.fml.relauncher.Side;
@@ -108,24 +107,8 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 		TileEntity te = worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
 		if(is != null && te instanceof TEFireEntity)
 		{
-			float temp = TFC_ItemHeat.GetTemp(is);
 			TEFireEntity fire = (TEFireEntity) te;
-			if(fire.fuelTimeLeft > 0 && is.getItem() instanceof IFood)
-			{
-				float inc = Food.getCooked(is)+Math.min((fire.fireTemp/700), 2f);
-				Food.setCooked(is, inc);
-				temp = inc;
-			}
-			else if(fire.fireTemp > temp)
-			{
-				temp += TFC_ItemHeat.getTempIncrease(is);
-			}
-
-			if(fire.fireTemp > temp)
-				temp += TFC_ItemHeat.getTempIncrease(is);
-			else
-				temp -= TFC_ItemHeat.getTempDecrease(is);
-			TFC_ItemHeat.SetTemp(is, temp);
+			fire.careForInventorySlot(is);
 		}
 	}
 

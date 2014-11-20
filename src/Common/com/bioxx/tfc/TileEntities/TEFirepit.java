@@ -20,7 +20,6 @@ import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Events.ItemCookEvent;
-import com.bioxx.tfc.api.Interfaces.ICookableFood;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 import cpw.mods.fml.relauncher.Side;
@@ -348,40 +347,6 @@ public class TEFirepit extends TEFireEntity implements IInventory
 		fireItemStacks[slot] = is;
 		if(is != null && is.stackSize > getInventoryStackLimit())
 			is.stackSize = getInventoryStackLimit();
-	}
-
-	@Override
-	public void careForInventorySlot(ItemStack is)
-	{
-		if(is != null)
-		{
-			float temp = TFC_ItemHeat.GetTemp(is);
-			if(fuelTimeLeft > 0 && is.getItem() instanceof ICookableFood)
-			{
-				float inc = Food.getCooked(is)+Math.min((fireTemp/700), 2f);
-				Food.setCooked(is, inc);
-				temp = inc;
-				if(Food.isCooked(is))
-				{
-					int[] cookedTasteProfile = new int[] {0,0,0,0,0};
-					Random R = new Random(((ICookableFood)is.getItem()).getFoodID()+(((int)Food.getCooked(is)-600)/120));
-					cookedTasteProfile[0] = R.nextInt(30)-15;
-					cookedTasteProfile[1] = R.nextInt(30)-15;
-					cookedTasteProfile[2] = R.nextInt(30)-15;
-					cookedTasteProfile[3] = R.nextInt(30)-15;
-					cookedTasteProfile[4] = R.nextInt(30)-15;
-					Food.setCookedProfile(is, cookedTasteProfile);
-					Food.setFuelProfile(is, EnumFuelMaterial.getFuelProfile(fuelTasteProfile));
-				}
-			}
-			else if(fireTemp > temp)
-			{
-				temp += TFC_ItemHeat.getTempIncrease(is);
-			}
-			else
-				temp -= TFC_ItemHeat.getTempDecrease(is);
-			TFC_ItemHeat.SetTemp(is, temp);
-		}
 	}
 
 	@Override

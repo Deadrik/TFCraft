@@ -170,7 +170,7 @@ public class TEForge extends TEFireEntity implements IInventory
 					}
 					else
 					{
-						fireItemStacks[i] = output;
+						fireItemStacks[i] = output.copy();
 					}
 
 
