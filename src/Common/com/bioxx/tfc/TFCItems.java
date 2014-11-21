@@ -1021,7 +1021,7 @@ public class TFCItems
 		Coal = new ItemCoal().setUnlocalizedName("coal");
 		Stick = new ItemStick().setFull3D().setUnlocalizedName("stick");
 		Bow = new ItemCustomBow().setUnlocalizedName("bow").setTextureName("bow");
-		Items.bow = (ItemBow) Bow;
+		//Items.bow = (ItemBow) Bow;
 		Arrow = new ItemArrow().setUnlocalizedName("arrow").setCreativeTab(TFCTabs.TFCWeapons);
 		Dye = new ItemDyeCustom().setUnlocalizedName("dyePowder").setTextureName("dye_powder").setCreativeTab(TFCTabs.TFCMaterials);
 		GlassBottle = new ItemGlassBottle().setUnlocalizedName("Glass Bottle");
