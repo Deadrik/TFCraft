@@ -1,6 +1,7 @@
 package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -12,6 +13,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
@@ -31,6 +33,7 @@ import com.bioxx.tfc.api.Crafting.BarrelRecipe;
 import com.bioxx.tfc.api.Crafting.BarrelVinegarRecipe;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -213,10 +216,6 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			storage[i] = is;
 			if(i == 0)
 			{
-				if(storage[0] == null)
-					System.out.println("Setting input to null" + " : " + worldObj.isRemote);
-				else
-					System.out.println("Setting input to "+storage[0].getDisplayName() + " : " + worldObj.isRemote);
 				ProcessItems();
 				if(!getSealed())
 					this.unsealtime = (int)TFC_Time.getTotalHours();
