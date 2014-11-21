@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
@@ -447,7 +448,6 @@ public class Recipes
 		// Otherwise TFC can not use the 4 planks recipe to create its own crafting upgrade.
 		RemoveRecipe(new ItemStack(Blocks.crafting_table));
 		// Other Conflicting Recipes
-		RemoveRecipe(new ItemStack(Items.bow));
 		RemoveRecipe(new ItemStack(Items.fishing_rod));
 		RemoveRecipe(new ItemStack(Blocks.wooden_button));
 		RemoveRecipe(new ItemStack(Items.flint_and_steel));
@@ -455,6 +455,9 @@ public class Recipes
 		RemoveRecipe(new ItemStack(Items.sugar));
 		RemoveRecipe(new ItemStack(Items.glass_bottle, 3));
 		RemoveRecipe(new ItemStack(Items.paper, 3));
+
+		//Have to do this by class for some items that are overriden like the bow
+		RemoveRecipe(ItemBow.class);
 
 		//Recipe Configuration
 		if (TFCCrafting.anvilRecipe == false)
@@ -2300,6 +2303,23 @@ public class Recipes
 				ItemStack recipeResult = recipe.getRecipeOutput();
 
 				if (ItemStack.areItemStacksEqual(resultItem, recipeResult))
+					recipes.remove(i--);
+			}
+		}
+	}
+
+	public static void RemoveRecipe(Class clazz)
+	{
+		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
+		for (int i = 0; i < recipes.size(); i++)
+		{
+			IRecipe tmpRecipe = recipes.get(i);
+			if (tmpRecipe instanceof IRecipe)
+			{
+				IRecipe recipe = tmpRecipe;
+				ItemStack recipeResult = recipe.getRecipeOutput();
+
+				if (recipeResult!= null && clazz.isInstance(recipeResult.getItem()))
 					recipes.remove(i--);
 			}
 		}
