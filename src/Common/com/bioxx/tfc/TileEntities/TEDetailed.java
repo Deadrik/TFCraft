@@ -12,10 +12,13 @@ public class TEDetailed extends NetworkTileEntity {
 	public short TypeID = -1;
 	public byte MetaID = 0;
 	public BitSet data;
+	public BitSet quads;
 	public static final byte Packet_Update = 0;
 	public static final byte Packet_Activate = 1;
+	public static final byte Packet_Delete = 2;
+	public static final byte BOX = 0;
+	public static final byte QUAD = 1;
 	protected byte packetType = -1;
-	private BitSet quads;
 
 	public TEDetailed() {
 		data = new BitSet(512);
@@ -43,6 +46,10 @@ public class TEDetailed extends NetworkTileEntity {
 		data.set((x * 8 + z) * 8 + y);
 	}
 
+	public void setData(BitSet data) {
+		this.data = data;
+	}
+
 	public void setQuad(int x, int y, int z) {
 		int x1 = x >= 4 ? 1 : 0;
 		int y1 = y >= 4 ? 1 : 0;
@@ -57,6 +64,10 @@ public class TEDetailed extends NetworkTileEntity {
 		int z1 = z >= 4 ? 1 : 0;
 		int index = (x1 * 2 + z1) * 2 + y1;
 		quads.clear(index);
+	}
+
+	public void setQuadData(BitSet quaddata) {
+		quads = quaddata;
 	}
 
 	public boolean isQuadSolid(int x, int y, int z) {
@@ -121,7 +132,7 @@ public class TEDetailed extends NetworkTileEntity {
 		packetType = nbt.getByte("packetType");
 		if (packetType == TEDetailed.Packet_Update) {
 			int index = nbt.getInteger("index");
-			data.set(index, false);
+			data.flip(index);
 
 			for (int subX = 0; subX < 8; subX++) {
 				for (int subZ = 0; subZ < 8; subZ++) {
@@ -130,6 +141,27 @@ public class TEDetailed extends NetworkTileEntity {
 							setQuad(subX, subY, subZ);
 					}
 				}
+			}
+
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+ 		}
+		else if (packetType == TEDetailed.Packet_Delete)
+		{
+			int xSelected = nbt.getInteger("xSelected");
+			int ySelected = nbt.getInteger("ySelected");
+			int zSelected = nbt.getInteger("zSelected");
+			int shape = nbt.getInteger("shape");
+
+			if(shape == TEDetailed.BOX)
+			{
+				int index = (xSelected * 8 + zSelected) * 8 + ySelected;
+				data.set(index, false);
+				setQuad(xSelected, ySelected, zSelected);
+			}
+			else if(shape == TEDetailed.QUAD)
+			{
+				data.andNot(BlockDetailed.getEmptyQuad(xSelected, ySelected, zSelected));
+				setQuad(xSelected*4, ySelected*4, zSelected*4);
 			}
 
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -152,6 +184,8 @@ public class TEDetailed extends NetworkTileEntity {
 	public void createDataNBT(NBTTagCompound nbt) {
 		packetType = nbt.getByte("packetType");
 		if (packetType == TEDetailed.Packet_Update) {
+			/*The data for this is already set in BlockDetailed onBlockActivatedServer()*/
+		} else if (packetType == TEDetailed.Packet_Delete) {
 			/*The data for this is already set in BlockDetailed onBlockActivatedServer()*/
 		} else if (packetType == TEDetailed.Packet_Activate) {
 			nbt.setByte("chiselMode", PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode);
