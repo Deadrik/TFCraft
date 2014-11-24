@@ -59,23 +59,22 @@ public class BlockBloom extends BlockTerraContainer
 		EntityItem ei = new EntityItem(world, i, j, k, new ItemStack(TFCItems.RawBloom, 1, te.size));
 
 		int[] pos = getBloomery(world, i, j, k);
-		ei.posX = i + pos[0];
-		ei.posY = j + 0.5;
-		ei.posZ = k + pos[1];
 		ei.motionX = 0; ei.motionY = 0; ei.motionZ = 0;
+		ei.setPosition(i + 0.5 + pos[0], j + 0.5, k + 0.5 + pos[1]);
+		ei.delayBeforeCanPickup = 0;
 		world.spawnEntityInWorld(ei);
 	}
 
 	public int[] getBloomery(World world, int x, int y, int z)
 	{
 		if(world.getBlock(x + 1, y, z) == TFCBlocks.EarlyBloomery)
-			return new int[]{1, 0};
+			return new int[]{2, 0};
 		if(world.getBlock(x - 1, y, z) == TFCBlocks.EarlyBloomery)
-			return new int[]{-1, 0};
+			return new int[]{-2, 0};
 		if(world.getBlock(x, y, z + 1) == TFCBlocks.EarlyBloomery)
-			return new int[]{0, 1};
+			return new int[]{0, 2};
 		if(world.getBlock(x, y, z - 1) == TFCBlocks.EarlyBloomery)
-			return new int[]{0, -1};
+			return new int[]{0, -2};
 
 		return new int[]{0, 0};
 	}
