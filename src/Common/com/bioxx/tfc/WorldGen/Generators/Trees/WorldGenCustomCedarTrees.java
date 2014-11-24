@@ -82,9 +82,7 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 		//Here we crate the tree trunk
 		for (int l1 = 0; l1 < treeHeight; l1++)
 		{
-			Block k2 = world.getBlock(xCoord, yCoord + l1, zCoord);
-			if (k2 == Blocks.air || k2 == TFCBlocks.Leaves || k2.canBeReplacedByLeaves(world, xCoord, yCoord + l1, zCoord))
-				setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId);
+			setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId);
 		}
 		return true;
 	}

@@ -60,18 +60,10 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 
 		if (!flag)
 			return false;
-		if (treeId == 15)
-		{
-			int x = 0; // ???
-		}
 
-		Block var8 = world.getBlock(xCoord, yCoord - 1, zCoord);
-		if (!(TFC_Core.isSoil(var8)) || yCoord >= world.getHeight() - height - 1)
+		if (!(TFC_Core.isSoil(world.getBlock(xCoord, yCoord - 1, zCoord))) || yCoord >= world.getHeight() - height - 1)
 			return false;
 
-		//DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
-		//set the block below the tree to dirt.
-		//world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForDirt(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2));
 		for (int y = yCoord - 3 + height; y <= yCoord + height; y++)
 		{
 			int j2 = y - (yCoord + height);
@@ -92,9 +84,7 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 
 		for (int l1 = 0; l1 < height; l1++)
 		{
-			Block k2 = world.getBlock(xCoord, yCoord + l1, zCoord);
-			if (k2 == Blocks.air || k2 == TFCBlocks.Leaves || k2 == TFCBlocks.Leaves2 || k2.canBeReplacedByLeaves(world, xCoord, yCoord + l1, zCoord))
-				setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId);
+			setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId);
 		}
 
 		return true;

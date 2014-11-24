@@ -42,8 +42,6 @@ public class WorldGenPineTall extends WorldGenerator
 
 			for (y = yCoord; y <= yCoord + 1 + treeHeight && isValid; ++y)
 			{
-				boolean var12 = true;
-
 				if (y - yCoord < var7)
 					var18 = 0;
 				else
@@ -108,12 +106,7 @@ public class WorldGenPineTall extends WorldGenerator
 
 					for (x = 0; x < treeHeight - 1; ++x)
 					{
-						block = world.getBlock(xCoord, yCoord + x, zCoord);
-						if (block == Blocks.air || block == null || block.isLeaves(world, xCoord, yCoord + x, zCoord) || 
-								block.canBeReplacedByLeaves(world, xCoord, yCoord + x, zCoord))
-						{
-							this.setBlockAndNotifyAdequately(world, xCoord, yCoord + x, zCoord, blockWood, metaWood);
-						}
+						this.setBlockAndNotifyAdequately(world, xCoord, yCoord + x, zCoord, blockWood, metaWood);
 					}
 					return true;
 				}

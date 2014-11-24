@@ -8,9 +8,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.WorldGen.DataLayer;
 
 public class WorldGenCustomShortTrees extends WorldGenerator
 {
@@ -58,18 +56,9 @@ public class WorldGenCustomShortTrees extends WorldGenerator
 		if (!flag)
 			return false;
 
-		Block var3 = world.getBlock(xCoord, yCoord - 1, zCoord);
-		if (treeId == 15)
-		{
-			int x = 0; // ???
-		}
-
-		if (!(TFC_Core.isSoil(var3))|| yCoord >= world.getHeight() - l - 1)
+		if (!(TFC_Core.isSoil(world.getBlock(xCoord, yCoord - 1, zCoord)))|| yCoord >= world.getHeight() - l - 1)
 			return false;
 
-		DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt(xCoord, zCoord, 0);
-		//set the block below the tree to dirt.
-		//world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForDirt(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2));
 		for (int k1 = yCoord - 3 + l; k1 <= yCoord + l; k1++)
 		{
 			int j2 = k1 - (yCoord + l);
@@ -88,9 +77,7 @@ public class WorldGenCustomShortTrees extends WorldGenerator
 
 		for (int l1 = 0; l1 < l; l1++)
 		{
-			Block b = world.getBlock(xCoord, yCoord + l1, zCoord);
-			if (b == Blocks.air || b == TFCBlocks.Leaves || b == TFCBlocks.Leaves2 || b.canBeReplacedByLeaves(world, xCoord, yCoord + l1, zCoord))
-				setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId);
+			setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId);
 		}
 
 		return true;

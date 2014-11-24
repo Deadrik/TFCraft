@@ -9,9 +9,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.WorldGen.DataLayer;
 
 public class WorldGenCustomWillowTrees extends WorldGenerator
 {
@@ -56,24 +54,12 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 						for (int a = 0 ; a < random.nextInt (2) + 2 ; a++)
 						{
 							Block b = world.getBlock(x1, y1 - 1 - a + y, z1);
-							if (b.canBeReplacedByLeaves(world, x1, y1 - 1 - a + y, z1) && b == Blocks.air)
+							if (b.canBeReplacedByLeaves(world, x1, y1 - 1 - a + y, z1))
 								world.setBlock (x1, y1 - 1 - a + y, z1, TFCBlocks.Leaves, treeId, 0x2);
 						}
 					}
 				}
 			}
-		}
-	}
-
-	private void func_35265_a (World world, int i, int j, int k, int l)
-	{
-		if(world.isAirBlock(i, j, k) && TFCBlocks.Vine.canBlockStay(world, i, j, k))
-			world.setBlock(i, j, k, TFCBlocks.Vine, l, 0x2);
-
-		for (int i1 = 4 ; world.isAirBlock(i, --j, k) && i1 > 0 ; i1--)
-		{
-			if(world.isAirBlock(i, j, k) && TFCBlocks.Vine.canBlockStay(world, i, j, k))
-				world.setBlock (i, j, k, TFCBlocks.Vine, l, 0x2);
 		}
 	}
 
@@ -126,22 +112,11 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 		if (!flag)
 			return false;
 
-		Block var3 = world.getBlock(xCoord, yCoord - 1, zCoord);
-		if (!(TFC_Core.isSoil(var3))|| yCoord >= world.getHeight() - height - 1 ||
-				world.getBlock(xCoord, yCoord, zCoord).getMaterial() == Material.water)
-		{
+		if (!(TFC_Core.isSoil(world.getBlock(xCoord, yCoord - 1, zCoord))) || yCoord >= world.getHeight() - height - 1)
 			return false;
-		}
 
-		if(world.isAirBlock(xCoord, yCoord - 1, zCoord))
-		{
-			DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt(xCoord, zCoord, 0);
-			//set the block below the tree to dirt.
-			world.setBlock(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
-		}
-
-		int z1, x1, y,x,z;
-		y = height+yCoord;
+		int z1, x1, y, x, z;
+		y = height + yCoord;
 		x = xCoord;
 		z = zCoord;
 
@@ -169,43 +144,8 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 		createLeafGroup (xCoord, yCoord + height + 1, zCoord, random, world);
 		for (int l1 = 0 ; l1 < height ; l1++)
 		{
-			Block l2 = world.getBlock(xCoord, yCoord + l1, zCoord);
-			if (l2 == Blocks.air || l2 == TFCBlocks.Leaves || l2 == TFCBlocks.Leaves2 ||
-					l2.canBeReplacedByLeaves(world, xCoord, yCoord + l1, zCoord))
-			{
-				world.setBlock(xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId, 0x2);
-			}
+			world.setBlock(xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId, 0x2);
 		}
-
-		//		for (int i2 = yCoord + height ; i2 <= yCoord + height + 5 ; i2++)
-		//		{
-		//			for (int k4 = xCoord - 6 ; k4 <= xCoord + 6 ; k4++)
-		//			{
-		//				for (int i5 = zCoord - 6 ; i5 <= zCoord + 6 ; i5++)
-		//				{
-		//					if (world.getBlockId (k4, i2, i5) != Block.leaves)
-		//					{
-		//						continue;
-		//					}
-		//					if (random.nextInt (4) == 0 && world.getBlockId (k4 - 1, i2, i5) == 0)
-		//					{
-		//						func_35265_a (world, k4 - 1, i2, i5, 8);
-		//					}
-		//					if (random.nextInt (4) == 0 && world.getBlockId (k4 + 1, i2, i5) == 0)
-		//					{
-		//						func_35265_a (world, k4 + 1, i2, i5, 2);
-		//					}
-		//					if (random.nextInt (4) == 0 && world.getBlockId (k4, i2, i5 - 1) == 0)
-		//					{
-		//						func_35265_a (world, k4, i2, i5 - 1, 1);
-		//					}
-		//					if (random.nextInt (4) == 0 && world.getBlockId (k4, i2, i5 + 1) == 0)
-		//					{
-		//						func_35265_a (world, k4, i2, i5 + 1, 4);
-		//					}
-		//				}
-		//			}
-		//		}
 
 		return true;
 	}

@@ -23,13 +23,13 @@ public class WorldGenDouglasFir extends WorldGenerator
 	}
 
 	@Override
-	public boolean generate(World world, Random par2Random, int par3, int par4, int par5)
+	public boolean generate(World world, Random rand, int par3, int par4, int par5)
 	{
-		int i = par2Random.nextInt(10) + 10;
-		if(par2Random.nextInt(20)==0)
+		int i = rand.nextInt(10) + 10;
+		if(rand.nextInt(20)==0)
 			Tall=true;
 		if(Tall)
-			i += par2Random.nextInt(10);
+			i += rand.nextInt(10);
 		boolean flag = true;
 
 		if (par4 < 1 || par4 + i + 1 > 256)
@@ -68,17 +68,12 @@ public class WorldGenDouglasFir extends WorldGenerator
 		if (!flag)
 			return false;
 
-		Block b = world.getBlock(par3, par4 - 1, par5);
-		if (!TFC_Core.isSoil(b) || par4 >= 256 - i - 1)
+		if (!TFC_Core.isSoil(world.getBlock(par3, par4 - 1, par5)) || par4 >= 256 - i - 1)
 			return false;
-
-		byte byte1 = 3;
-		int i1 = 0;
 
 		for (int k1 = par4 + (i/3)-1; k1 <= par4 + i-1; k1++)
 		{
 			int k2 = k1 - (par4 + i);
-			int j3 = 1 - k2 / 2;
 			int z=i;
 			if (i>20)
 				z=20;
@@ -94,10 +89,9 @@ public class WorldGenDouglasFir extends WorldGenerator
 				for (int l4 = par5-x; l4 <= par5 +x; l4++)
 				{
 					int i5 = l4 - par5;
-					b = world.getBlock(l3, k1, l4);
 					if ((Math.abs(j4) != 0 || Math.abs(i5) != 0 && k2 != 0) && 
 							(Math.abs(j4) + Math.abs(i5) != x * 2 || (k1 - par4 > i / 2 && k1 - par4 < (4 * i / 5)) || 
-							k1 - par4 - (i / 3) + 2 == 2) && (par2Random.nextInt(12) != 0) && b == Blocks.air)
+							k1 - par4 - (i / 3) + 2 == 2) && (rand.nextInt(12) != 0) && world.isAirBlock(l3, k1, l4))
 					{
 						setBlockAndNotifyAdequately(world, l3, k1, l4, TFCBlocks.Leaves, metaID);
 					}
@@ -105,11 +99,8 @@ public class WorldGenDouglasFir extends WorldGenerator
 			}
 		}
 		setBlockAndNotifyAdequately(world, par3, par4+i, par5, TFCBlocks.Leaves, metaID);
-		for (int l1 = 0; l1 < i-1; l1++)
+		for (int l1 = 0; l1 < i; l1++)
 		{
-			Block l2 = world.getBlock(par3, par4 + l1, par5);
-			if (l2 != Blocks.air && !l2.isReplaceable(world, par3, par4 + l1, par5))
-				continue;
 			setBlockAndNotifyAdequately(world, par3, par4 + l1, par5, TFCBlocks.LogNatural, metaID);
 		}
 		return true;
