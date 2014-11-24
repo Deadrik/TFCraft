@@ -6,6 +6,7 @@ import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -56,62 +57,42 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 
 	public static void CreateStairs(World world, int x, int y, int z, Block id, int meta, float hitX, float hitY, float hitZ)
 	{
-		int rot = 0;
-
-		if( hitY > 0.5F ) {
-			if( hitX < 0.5F && hitZ > 0.5F ) rot = 4;
-			if( hitX > 0.5F && hitZ < 0.5F ) rot = 5;
-			if( hitX < 0.5F && hitZ < 0.5F ) rot = 6;
-			if( hitX > 0.5F && hitZ > 0.5F ) rot = 7;
+		int hit = 0;
+		TEPartial te = null;
+		if(id != TFCBlocks.stoneStairs)
+		{
+			world.setBlock(x, y, z, TFCBlocks.stoneStairs, 0, 0x3);
+			te = (TEPartial)world.getTileEntity(x, y, z);
+			te.TypeID = (short) Block.getIdFromBlock(id);
+			te.MetaID = (byte) meta;
+			te.extraData = hit;
+			te.setMaterial(world.getBlock(x, y, z).getMaterial());
+			te.validate();
 		}
 		else
 		{
-			if( hitX < 0.5F && hitZ > 0.5F ) rot = 12;
-			if( hitX > 0.5F && hitZ < 0.5F ) rot = 13;
-			if( hitX < 0.5F && hitZ < 0.5F ) rot = 14;
-			if( hitX > 0.5F && hitZ > 0.5F ) rot = 15;
+			te = (TEPartial)world.getTileEntity(x, y, z);
+			world.notifyBlockChange(x, y, z, id);
 		}
-
-		world.setBlock(x, y, z, TFCBlocks.stoneStairs, rot, 0x2);
-		TEPartial te = (TEPartial)world.getTileEntity(x, y, z);
-		te.TypeID = (short) Block.getIdFromBlock(id);
-		te.MetaID = (byte) meta;
-		te.extraData = 0;
-		te.setMaterial(world.getBlock(x, y, z).getMaterial());
-		te.validate();
-	}
-
-	public static void ChangeStairs(World world, int x, int y, int z, float hitX, float hitY, float hitZ)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
-		int newmeta = meta;
-
 		if( hitY > 0.5F ) {
-			if( ( meta == 4 && hitX < 0.5F && hitZ < 0.5F )
-					|| ( meta == 6 && hitX < 0.5F && hitZ > 0.5F ) ) newmeta = 0;
-			if( ( meta == 7 && hitX > 0.5F && hitZ < 0.5F )
-					|| ( meta == 5 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 1;
-			if( ( meta == 6 && hitX > 0.5F && hitZ < 0.5F )
-					|| ( meta == 5 && hitX < 0.5F && hitZ < 0.5F ) ) newmeta = 2;
-			if( ( meta == 7 && hitX < 0.5F && hitZ > 0.5F )
-					|| ( meta == 4 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 3;
+			if( hitX <= 0.5F && hitZ >= 0.5F && (te.extraData & 1) == 0) hit = 1;
+			if( hitX >= 0.5F && hitZ <= 0.5F && (te.extraData & 2) == 0) hit = 2;
+			if( hitX <= 0.5F && hitZ <= 0.5F && (te.extraData & 4) == 0) hit = 4;
+			if( hitX >= 0.5F && hitZ >= 0.5F && (te.extraData & 8) == 0) hit = 8;
 		}
 		else
 		{
-			if( ( meta == 12 && hitX < 0.5F && hitZ < 0.5F )
-					|| ( meta == 14 && hitX < 0.5F && hitZ > 0.5F ) ) newmeta = 8;
-			if( ( meta == 15 && hitX > 0.5F && hitZ < 0.5F )
-					|| ( meta == 13 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 9;
-			if( ( meta == 14 && hitX > 0.5F && hitZ < 0.5F )
-					|| ( meta == 13 && hitX < 0.5F && hitZ < 0.5F ) ) newmeta = 10;
-			if( ( meta == 15 && hitX < 0.5F && hitZ > 0.5F )
-					|| ( meta == 12 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 11;
+			if( hitX <= 0.5F && hitZ >= 0.5F && (te.extraData & 16) == 0) hit = 16;
+			if( hitX >= 0.5F && hitZ <= 0.5F && (te.extraData & 32) == 0) hit = 32;
+			if( hitX <= 0.5F && hitZ <= 0.5F && (te.extraData & 64) == 0) hit = 64;
+			if( hitX >= 0.5F && hitZ >= 0.5F && (te.extraData & 128) == 0) hit = 128;
 		}
 
-		if( meta == newmeta )
-			ItemChisel.StairToDetailed(world, x, y, z, meta, hitX, hitY, hitZ);
+		te.extraData |= hit;
+		if(te.extraData == 255)
+			world.setBlock(x, y, z, Blocks.air);
 		else
-			world.setBlockMetadataWithNotify(x, y, z, newmeta, 0x2);
+			te.broadcastPacketInRange();
 	}
 
 	public static void CreateSlab(World world, int x, int y, int z, Block id, int meta, int side, Block Slab)
