@@ -101,11 +101,11 @@ public class ItemBlueprint extends ItemTerra
 
 			TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 			BitSet blueprintData = TEDetailed.turnCube(
-							stack.stackTagCompound.getByteArray(tag_data),
-							stack.stackTagCompound.getInteger(tag_x_angle),
-							stack.stackTagCompound.getInteger(tag_y_angle),
-							stack.stackTagCompound.getInteger(tag_z_angle)
-			);
+					stack.stackTagCompound.getByteArray(tag_data),
+					stack.stackTagCompound.getInteger(tag_x_angle),
+					stack.stackTagCompound.getInteger(tag_y_angle),
+					stack.stackTagCompound.getInteger(tag_z_angle)
+					);
 
 			for(int c = 0; c < 512; c++)
 				if(te.data.get(c) && !blueprintData.get(c))
@@ -116,11 +116,6 @@ public class ItemBlueprint extends ItemTerra
 					{
 						if(player.inventory.mainInventory[hasChisel] != null)
 							player.inventory.mainInventory[hasChisel].damageItem(1, player);
-						else
-							break;
-
-						if(player.inventory.mainInventory[hasHammer] != null)
-							player.inventory.mainInventory[hasHammer].damageItem(1, player);
 						else
 							break;
 					}

@@ -71,7 +71,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 			if( hitX < 0.5F && hitZ < 0.5F ) rot = 14;
 			if( hitX > 0.5F && hitZ > 0.5F ) rot = 15;
 		}
-		
+
 		world.setBlock(x, y, z, TFCBlocks.stoneStairs, rot, 0x2);
 		TEPartial te = (TEPartial)world.getTileEntity(x, y, z);
 		te.TypeID = (short) Block.getIdFromBlock(id);
@@ -85,29 +85,29 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 	{
 		int meta = world.getBlockMetadata(x, y, z);
 		int newmeta = meta;
-		
+
 		if( hitY > 0.5F ) {
 			if( ( meta == 4 && hitX < 0.5F && hitZ < 0.5F )
-			 || ( meta == 6 && hitX < 0.5F && hitZ > 0.5F ) ) newmeta = 0;
+					|| ( meta == 6 && hitX < 0.5F && hitZ > 0.5F ) ) newmeta = 0;
 			if( ( meta == 7 && hitX > 0.5F && hitZ < 0.5F )
-			 || ( meta == 5 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 1;
+					|| ( meta == 5 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 1;
 			if( ( meta == 6 && hitX > 0.5F && hitZ < 0.5F )
-			 || ( meta == 5 && hitX < 0.5F && hitZ < 0.5F ) ) newmeta = 2;
+					|| ( meta == 5 && hitX < 0.5F && hitZ < 0.5F ) ) newmeta = 2;
 			if( ( meta == 7 && hitX < 0.5F && hitZ > 0.5F )
-			 || ( meta == 4 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 3;
+					|| ( meta == 4 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 3;
 		}
 		else
 		{
 			if( ( meta == 12 && hitX < 0.5F && hitZ < 0.5F )
-			 || ( meta == 14 && hitX < 0.5F && hitZ > 0.5F ) ) newmeta = 8;
+					|| ( meta == 14 && hitX < 0.5F && hitZ > 0.5F ) ) newmeta = 8;
 			if( ( meta == 15 && hitX > 0.5F && hitZ < 0.5F )
-			 || ( meta == 13 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 9;
+					|| ( meta == 13 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 9;
 			if( ( meta == 14 && hitX > 0.5F && hitZ < 0.5F )
-			 || ( meta == 13 && hitX < 0.5F && hitZ < 0.5F ) ) newmeta = 10;
+					|| ( meta == 13 && hitX < 0.5F && hitZ < 0.5F ) ) newmeta = 10;
 			if( ( meta == 15 && hitX < 0.5F && hitZ > 0.5F )
-			 || ( meta == 12 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 11;
+					|| ( meta == 12 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 11;
 		}
-		
+
 		if( meta == newmeta )
 			ItemChisel.StairToDetailed(world, x, y, z, meta, hitX, hitY, hitZ);
 		else
@@ -299,11 +299,11 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 
 		world.notifyBlocksOfNeighborChange(x, y, z, world.getBlock(x, y, z));
 	}
-	
+
 	public static void StairToDetailed(World world, int x, int y, int z, int meta, float hitX, float hitY, float hitZ)
 	{
 		world.notifyBlocksOfNeighborChange(x, y, z, world.getBlock(x, y, z));
-		
+
 		boolean xmymzm = hitX < 0.5F && hitY < 0.5F && hitZ < 0.5F;
 		boolean xpymzm = hitX > 0.5F && hitY < 0.5F && hitZ < 0.5F;
 		boolean xpymzp = hitX > 0.5F && hitY < 0.5F && hitZ > 0.5F;
@@ -312,7 +312,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 		boolean xpypzm = hitX > 0.5F && hitY > 0.5F && hitZ < 0.5F;
 		boolean xpypzp = hitX > 0.5F && hitY > 0.5F && hitZ > 0.5F;
 		boolean xmypzp = hitX < 0.5F && hitY > 0.5F && hitZ > 0.5F;
-		
+
 		if( ( meta ==  8 || meta == 10 || meta == 14 ) && xmymzm ) return;
 		if( ( meta == 10 || meta ==  9 || meta == 13 ) && xpymzm ) return;
 		if( ( meta ==  9 || meta == 11 || meta == 15 ) && xpymzp ) return;
@@ -321,19 +321,19 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 		if( ( meta ==  2 || meta ==  1 || meta ==  5 ) && xpypzm ) return;
 		if( ( meta ==  1 || meta ==  3 || meta ==  7 ) && xpypzp ) return;
 		if( ( meta ==  3 || meta ==  0 || meta ==  4 ) && xmypzp ) return;
-		
+
 		TEPartial tep = (TEPartial)world.getTileEntity(x, y, z);
 		world.setBlock(x, y, z, TFCBlocks.Detailed);
-		
+
 		TEDetailed te;
 		te = (TEDetailed)world.getTileEntity(x, y, z);
 		te.TypeID = tep.TypeID;
 		te.MetaID = tep.MetaID;
-		
+
 		System.out.println(meta);
-		
+
 		System.out.println( Math.round(hitY) + " " + Math.round(hitX) + " " + Math.round(hitZ) );
-		
+
 		if( meta != 8 && meta != 10 && meta != 14 && !xmymzm )
 			for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++) {
 				te.setBlock(subX, subY, subZ);
@@ -374,7 +374,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 				te.setBlock(subX, subY, subZ);
 				te.setQuad(subX, subY, subZ);
 			}
-		
+
 		return;
 	}
 
@@ -386,7 +386,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 
 		int hasChisel = -1;
 		int hasHammer = -1;
-		
+
 		for(int i = 0; i < 9;i++)
 		{
 			if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemHammer) {
@@ -435,7 +435,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 						TFC_Core.isNaturalStone(world.getBlock(x, y+2, z))) {
 					return false;
 				}
-				
+
 				ItemChisel.CreateStairs(world, x, y, z, block, meta, hitX, hitY, hitZ);
 
 				player.inventory.mainInventory[hasChisel].damageItem(1, player);
@@ -458,7 +458,8 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 			else if(mode == 3 && pi.lockMatches(x, y, z))
 			{
 				ItemChisel.CreateDetailed(world, x, y, z, block, meta, side, hitX, hitY, hitZ);
-				if (random.nextInt(4)==0){
+				if (random.nextInt(4) == 0)
+				{
 					player.inventory.mainInventory[hasChisel].damageItem(1, player);
 				}
 				return true;
