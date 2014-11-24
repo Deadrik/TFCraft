@@ -102,7 +102,7 @@ public class BlockDetailed extends BlockPartial
 		if (side == ForgeDirection.UNKNOWN)
 			return false;
 
-		int transpCount = 63;//TFCOptions.maxCountOfTranspSubBlocksOnSide;
+		int transpCount = TFCOptions.maxCountOfTranspSubBlocksOnSide;
 		if (transpCount < 0 || transpCount >= 64)
 			return false;
 
