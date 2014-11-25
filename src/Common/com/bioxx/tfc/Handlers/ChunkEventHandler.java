@@ -8,6 +8,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.event.world.ChunkEvent;
@@ -83,9 +84,10 @@ public class ChunkEventHandler
 		}
 		else
 		{
-			ChunkData data = new ChunkData().CreateNew(event.world, event.getChunk().xPosition, event.getChunk().zPosition);
+			Chunk chunk = event.getChunk();
+			ChunkData data = new ChunkData(chunk).CreateNew(event.world, chunk.xPosition, chunk.zPosition);
 			data.rainfallMap = TFC_Climate.getCacheManager(event.world).loadRainfallLayerGeneratorData(data.rainfallMap, event.getChunk().xPosition * 16, event.getChunk().zPosition * 16, 16, 16);
-			TFC_Core.getCDM(event.world).addData(event.getChunk(), data);
+			TFC_Core.getCDM(event.world).addData(chunk, data);
 		}
 	}
 
@@ -126,19 +128,20 @@ public class ChunkEventHandler
 		{
 			NBTTagCompound eventTag = event.getData();
 
+			Chunk chunk = event.getChunk();
 			if(eventTag.hasKey("ChunkData"))
 			{
 				NBTTagCompound spawnProtectionTag = eventTag.getCompoundTag("ChunkData");
-				ChunkData data = new ChunkData(spawnProtectionTag);
-				TFC_Core.getCDM(event.world).addData(event.getChunk(), data);
+				ChunkData data = new ChunkData(chunk, spawnProtectionTag);
+				TFC_Core.getCDM(event.world).addData(chunk, data);
 			}
 			else
 			{
 				/*if(TFC_Core.getCDM(event.world).hasData(event.getChunk()))
 					return;*/
 				NBTTagCompound levelTag = eventTag.getCompoundTag("Level");
-				ChunkData data = new ChunkData().CreateNew(event.world, levelTag.getInteger("xPos"), levelTag.getInteger("zPos"));
-				TFC_Core.getCDM(event.world).addData(event.getChunk(), data);
+				ChunkData data = new ChunkData(chunk).CreateNew(event.world, levelTag.getInteger("xPos"), levelTag.getInteger("zPos"));
+				TFC_Core.getCDM(event.world).addData(chunk, data);
 			}
 		}
 	}

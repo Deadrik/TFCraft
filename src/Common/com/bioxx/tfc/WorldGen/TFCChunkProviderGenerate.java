@@ -180,7 +180,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			}
 		}
 
-		ChunkData data = new ChunkData().CreateNew(worldObj, chunkX, chunkZ);
+		ChunkData data = new ChunkData(chunk).CreateNew(worldObj, chunkX, chunkZ);
 		data.heightmap = seaLevelOffsetMap;
 		data.rainfallMap = this.rainfallLayer;
 		TFC_Core.getCDM(worldObj).addData(chunk, data);
