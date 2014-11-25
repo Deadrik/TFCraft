@@ -354,7 +354,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 			this.setInLove(false);
 		}
 
-		if(this.getLeashed() && this.isAngry())
+		if(this.getLeashed() && this.isAngry() && getLeashedToEntity() == this.getOwner())
 		{
 			this.setAngry(false);
 			this.setPathToEntity((PathEntity)null);
