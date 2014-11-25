@@ -16,6 +16,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import cpw.mods.fml.relauncher.Side;
@@ -106,8 +107,10 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 				world.provider.canBlockFreeze(x, y, z, false);
 			}
 
-			// Play frog sound at night only in fresh water.
-			if(world.getBlock(x, y, z) == TFCBlocks.FreshWaterStationary && world.isAirBlock(x, y + 1, z))
+			// Play frog sound at night only in fresh water and above freezing temperature.
+			if(world.getBlock(x, y, z) == TFCBlocks.FreshWaterStationary
+					&& world.isAirBlock(x, y + 1, z)
+					&& TFC_Climate.getHeightAdjustedTemp(world, x, y + 1, z) > 2)
 			{
 				if(rand.nextInt(100) < 25 && world.getBlockLightValue(x, y, z) < 7)
 				{
