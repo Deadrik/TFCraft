@@ -44,7 +44,7 @@ public class ChatListenerTFC
 					}
 				}
 			}
-			event.component = new ChatComponentTranslation(event.username + ": " + msg);
+			event.component = new ChatComponentTranslation("<" + event.username + "> " + msg);
 		}
 	}
 }
