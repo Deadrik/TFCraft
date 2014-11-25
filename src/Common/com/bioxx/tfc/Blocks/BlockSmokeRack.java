@@ -147,6 +147,11 @@ public class BlockSmokeRack extends BlockTerraContainer
 			if(!Food.isCooked(is) && Food.isBrined(is))
 				return true;
 		}
+		else if(is.getItem() == TFCItems.Cheese)
+		{
+			if(!Food.isCooked(is))
+				return true;
+		}
 
 		return false;
 	}
