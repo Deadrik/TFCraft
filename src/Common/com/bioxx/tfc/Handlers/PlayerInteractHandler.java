@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.UUID;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -57,10 +56,6 @@ public class PlayerInteractHandler
 		MovingObjectPosition mop = Helper.getMovingObjectPositionFromPlayer(world, entityPlayer, true);
 		FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(entityPlayer);
 		Boolean canDrink = fs.getMaxWater(entityPlayer) - 500 > fs.waterLevel;
-
-		// you can't drink if you're under water thats silly. // Is it though?
-		if ( entityPlayer.isInsideOfMaterial(Material.water))
-			return;
 
 		// if we found a block, and we can drink proceed
 		if(mop != null && canDrink && mop.typeOfHit == MovingObjectType.BLOCK)
