@@ -4,6 +4,10 @@ import java.util.Random;
 
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraftforge.event.ServerChatEvent;
+
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class ChatListenerTFC
@@ -12,17 +16,18 @@ public class ChatListenerTFC
 	public void onServerChatEvent(ServerChatEvent event)
 	{
 		String msg = event.message;
-		long soberTime = event.player.getEntityData().hasKey("soberTime") ? event.player.getEntityData().getLong("soberTime") : 0;
-		if(soberTime > 0)
+		long soberTime = TFC_Core.getPlayerFoodStats(event.player).soberTime;
+		if(soberTime > TFC_Time.getTotalTicks())
 		{
 			String s = "aeiouywrsflzvbnmAEIOUYWRSFLZVBNM";
 			Random rand = new Random();
+			soberTime-=TFC_Time.getTotalTicks();
 			for(int i = 0; i < event.message.length()-1; i++)
 			{
 				String start = event.message.substring(0, i);
 				String s2 = event.message.substring(i, i+1);
 				String end = event.message.substring(i+1);
-				soberTime=Math.min(soberTime, 10999);
+
 				if(event.message.charAt(0) != '/')
 				{
 					if(s.indexOf(s2) != -1 && rand.nextInt(11-(int)(soberTime/1000)) == 0)
