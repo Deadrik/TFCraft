@@ -16,6 +16,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
@@ -258,13 +259,16 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	@Override
 	public void setTamed(boolean par1)
 	{
-		super.setTamed(par1);
+		if(this.familiarity > 80)
+		{
+			super.setTamed(par1);
 
-		double healthRatio = this.getHealth() / this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() ;
+			double healthRatio = this.getHealth() / this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() ;
 
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.WolfHealth);
-		float h = (float)(healthRatio * this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue());
-		this.setHealth(h);
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.WolfHealth);
+			float h = (float)(healthRatio * this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue());
+			this.setHealth(h);
+		}
 	}
 
 	/**
@@ -348,6 +352,14 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		}
 		else if(hunger < 144000 && super.isInLove()){
 			this.setInLove(false);
+		}
+
+		if(this.getLeashed() && this.isAngry())
+		{
+			this.setAngry(false);
+			this.setPathToEntity((PathEntity)null);
+			this.setTarget((Entity)null);
+			this.setAttackTarget((EntityLivingBase)null);
 		}
 	}
 
@@ -668,15 +680,41 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 			}
 			return true;
 		}
+		else if (itemstack != null && itemstack.getItem() == Items.bone && !this.isAngry())
+		{
+			if (!player.capabilities.isCreativeMode)
+			{
+				--itemstack.stackSize;
+			}
+
+			if (itemstack.stackSize <= 0)
+			{
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+			}
+
+			if (!this.worldObj.isRemote)
+			{
+				if (this.rand.nextInt(3) == 0)
+				{
+					this.setTamed(true);
+					this.setPathToEntity((PathEntity)null);
+					this.setAttackTarget((EntityLivingBase)null);
+					this.func_152115_b(player.getUniqueID().toString());
+					this.playTameEffect(true);
+					this.worldObj.setEntityState(this, (byte)7);
+				}
+				else
+				{
+					this.playTameEffect(false);
+					this.worldObj.setEntityState(this, (byte)6);
+				}
+			}
+
+			return true;
+		}
 		else
 		{		
-			boolean wasTamedBefore = this.isTamed();
 			boolean interactSuper = super.interact(player);
-
-			if (!worldObj.isRemote && wasTamedBefore == false && this.isTamed())
-			{
-				this.setHealth(TFC_MobData.WolfHealth);
-			}
 
 			return interactSuper;
 		}
