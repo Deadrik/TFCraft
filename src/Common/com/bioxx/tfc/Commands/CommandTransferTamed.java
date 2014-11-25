@@ -37,6 +37,12 @@ public class CommandTransferTamed extends CommandBase
 	}
 
 	@Override
+	public boolean canCommandSenderUseCommand(ICommandSender p_71519_1_)
+	{
+		return true;
+	}
+
+	@Override
 	public String getCommandUsage(ICommandSender p_71518_1_)
 	{
 		return "commands.transferTamed.usage";
