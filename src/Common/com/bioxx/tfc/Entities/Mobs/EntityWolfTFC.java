@@ -769,7 +769,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 			this.playLivingSound();
 			this.happyTicks = 40;
 		}
-		if(this.familiarity > 1 && this.getOwner() != null){
+		if(this.familiarity > 80 && this.getOwner() != null){
 			this.setTamed(true);
 		}
 	}
