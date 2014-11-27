@@ -1,24 +1,19 @@
 package com.bioxx.tfc.Handlers.Client;
 
-import org.lwjgl.opengl.GL11;
-
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.api.Entities.IAnimal;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.client.event.RenderLivingEvent.Specials.Post;
+
+import org.lwjgl.opengl.GL11;
+
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.Entities.IAnimal;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class FamiliarityHighlightHandler {
 
@@ -67,20 +62,20 @@ public class FamiliarityHighlightHandler {
 						//percentFam = Math.min((TFC_Time.getTotalTicks() % 45) / 40F, 1.0f);
 						GL11.glScalef(0.33F, 0.33F, 0.33F);
 						if(percentFam >= 0.3){
-							this.drawTexturedModalRect(-10, 0, 110, 38, 20, 20);
+							this.drawTexturedModalRect(-8, 0, 112, 40, 16, 16);
 						}
 						else
 						{
-							this.drawTexturedModalRect(-10, 0, 90, 38, 20, 20);
+							this.drawTexturedModalRect(-8, 0, 92, 40, 16, 16);
 						}
 						GL11.glTranslatef(0, 0, -0.001F);
 						if(percentFam == 1)
 						{
-							this.drawTexturedModalRect(-9, 19 - (int) (18*percentFam), 111, 77 - (int) (18*percentFam), 18, (int) (18*percentFam));
+							this.drawTexturedModalRect(-6, 14 - (int) (12 * percentFam), 114, 74 - (int) (12 * percentFam), 12, (int) (12 * percentFam));
 						}
 						else
 						{
-							this.drawTexturedModalRect(-9, 19 - (int) (18*percentFam), 91, 77 - (int) (18*percentFam), 18, (int) (18*percentFam));
+							this.drawTexturedModalRect(-6, 14 - (int) (12 * percentFam), 94, 74 - (int) (12 * percentFam), 12, (int) (12 * percentFam));
 						}
 						/*GL11.glDisable(GL11.GL_TEXTURE_2D);
                     tessellator.startDrawingQuads();
