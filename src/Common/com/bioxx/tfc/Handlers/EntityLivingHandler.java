@@ -34,6 +34,7 @@ import com.bioxx.tfc.Food.ItemMeal;
 import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
 import com.bioxx.tfc.Items.ItemArrow;
+import com.bioxx.tfc.Items.ItemBloom;
 import com.bioxx.tfc.Items.ItemLooseRock;
 import com.bioxx.tfc.Items.ItemOreSmall;
 import com.bioxx.tfc.Items.ItemQuiver;
@@ -271,6 +272,8 @@ public class EntityLivingHandler
 			player.triggerAchievement(TFC_Achievements.achLooseRock);
 		else if(item.getItem() instanceof ItemOreSmall)
 			player.triggerAchievement(TFC_Achievements.achSmallOre);
+		else if (item.getItem() instanceof ItemBloom)
+			player.triggerAchievement(TFC_Achievements.achIronAge);
 		else if(item.getItem().equals(TFCItems.GemDiamond))
 			player.triggerAchievement(TFC_Achievements.achDiamond);
 		else if(item.getItem().equals(TFCItems.Onion) && TFCOptions.iDontLikeOnions)
