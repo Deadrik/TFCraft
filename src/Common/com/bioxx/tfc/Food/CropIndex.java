@@ -195,5 +195,9 @@ public class CropIndex
 		return new ItemStack(seedItem, 1);
 	}
 
+	public int getCycleType()
+	{
+		return cycleType;
+	}
 	public void onCropGrow(float stage){}
 }
