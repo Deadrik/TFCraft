@@ -2,6 +2,7 @@ package com.bioxx.tfc.Blocks.Terrain;
 
 import java.util.List;
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,11 +14,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.api.Tools.IToolChisel;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -110,7 +113,7 @@ public class BlockStone extends BlockCollapsable
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, Block l)
 	{
-		DropCarvedStone(world, i, j, k);
+		dropCarvedStone(world, i, j, k);
 	}
 
 	@Override

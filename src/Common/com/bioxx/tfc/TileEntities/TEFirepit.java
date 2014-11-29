@@ -365,11 +365,11 @@ public class TEFirepit extends TEFireEntity implements IInventory
 				{
 					int[] cookedTasteProfile = new int[] {0,0,0,0,0};
 					Random R = new Random(((ICookableFood)is.getItem()).getFoodID()+(((int)Food.getCooked(is)-600)/120));
-					cookedTasteProfile[0] = R.nextInt(30)-15;
-					cookedTasteProfile[1] = R.nextInt(30)-15;
-					cookedTasteProfile[2] = R.nextInt(30)-15;
-					cookedTasteProfile[3] = R.nextInt(30)-15;
-					cookedTasteProfile[4] = R.nextInt(30)-15;
+					cookedTasteProfile[0] = R.nextInt(31) - 15;
+					cookedTasteProfile[1] = R.nextInt(31) - 15;
+					cookedTasteProfile[2] = R.nextInt(31) - 15;
+					cookedTasteProfile[3] = R.nextInt(31) - 15;
+					cookedTasteProfile[4] = R.nextInt(31) - 15;
 					Food.setCookedProfile(is, cookedTasteProfile);
 					Food.setFuelProfile(is, EnumFuelMaterial.getFuelProfile(fuelTasteProfile));
 				}

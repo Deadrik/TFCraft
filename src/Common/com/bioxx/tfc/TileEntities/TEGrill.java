@@ -141,11 +141,11 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 				int[] fuelTasteProfile = new int[] {0,0,0,0,0};
 				int[] cookedTasteProfile = new int[] {0,0,0,0,0};
 				R = new Random(((ICookableFood)storage[i].getItem()).getFoodID()+(((int)Food.getCooked(storage[i])-600)/120));
-				cookedTasteProfile[0] = R.nextInt(30)-15;
-				cookedTasteProfile[1] = R.nextInt(30)-15;
-				cookedTasteProfile[2] = R.nextInt(30)-15;
-				cookedTasteProfile[3] = R.nextInt(30)-15;
-				cookedTasteProfile[4] = R.nextInt(30)-15;
+				cookedTasteProfile[0] = R.nextInt(31) - 15;
+				cookedTasteProfile[1] = R.nextInt(31) - 15;
+				cookedTasteProfile[2] = R.nextInt(31) - 15;
+				cookedTasteProfile[3] = R.nextInt(31) - 15;
+				cookedTasteProfile[4] = R.nextInt(31) - 15;
 				Food.setCookedProfile(storage[i], cookedTasteProfile);
 				TileEntity te = worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
 				if(te instanceof TEFireEntity)

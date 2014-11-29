@@ -276,11 +276,11 @@ public class Food
 
 	public static void adjustFlavor(ItemStack is, Random R)
 	{
-		Food.setSweetMod(is, R.nextInt(16)-8);
-		Food.setSourMod(is, R.nextInt(16)-8);
-		Food.setSaltyMod(is, R.nextInt(16)-8);
-		Food.setBitterMod(is, R.nextInt(16)-8);
-		Food.setSavoryMod(is, R.nextInt(16)-8);
+		Food.setSweetMod(is, R.nextInt(17) - 8);
+		Food.setSourMod(is, R.nextInt(17) - 8);
+		Food.setSaltyMod(is, R.nextInt(17) - 8);
+		Food.setBitterMod(is, R.nextInt(17) - 8);
+		Food.setSavoryMod(is, R.nextInt(17) - 8);
 	}
 
 	public static void setMealSkill(ItemStack is, int val)
