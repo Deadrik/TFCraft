@@ -1804,7 +1804,7 @@ public class TFCItems
 		SeedsSquash = new ItemCustomSeeds(16).setUnlocalizedName("Seeds Squash");
 		SeedsJute = new ItemCustomSeeds(17).setUnlocalizedName("Seeds Jute");
 		SeedsSugarcane = new ItemCustomSeeds(18).setUnlocalizedName("Seeds Sugarcane");
-		SeedsHemp = new ItemCustomSeeds(22).setUnlocalizedName("Seeds Hemp");
+		//SeedsHemp = new ItemCustomSeeds(22).setUnlocalizedName("Seeds Hemp");
 
 
 
@@ -2709,7 +2709,7 @@ public class TFCItems
 		GameRegistry.registerItem(SeedsGarlic, SeedsGarlic.getUnlocalizedName());
 		GameRegistry.registerItem(SeedsCarrot, SeedsCarrot.getUnlocalizedName());
 		GameRegistry.registerItem(SeedsSugarcane, SeedsSugarcane.getUnlocalizedName());
-		GameRegistry.registerItem(SeedsHemp, SeedsHemp.getUnlocalizedName());
+		//GameRegistry.registerItem(SeedsHemp, SeedsHemp.getUnlocalizedName());
 		GameRegistry.registerItem(SeedsTomato, SeedsTomato.getUnlocalizedName());
 		GameRegistry.registerItem(SeedsYellowBellPepper, SeedsYellowBellPepper.getUnlocalizedName());
 		GameRegistry.registerItem(SeedsRedBellPepper, SeedsRedBellPepper.getUnlocalizedName());
