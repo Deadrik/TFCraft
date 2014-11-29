@@ -28,6 +28,7 @@ import com.bioxx.tfc.api.Interfaces.ICustomCollision;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockMetalSheet extends BlockTerraContainer implements ICustomCollision
 {
 	public IIcon[] icons;
@@ -37,7 +38,7 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 	public BlockMetalSheet()
 	{
 		super(Material.iron);
-		icons = new IIcon[21];
+		icons = new IIcon[metalNames.length];
 		this.setBlockBounds(0, 0, 0, 1, 1, 1);
 	}
 
@@ -56,7 +57,8 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
+	public boolean shouldSideBeRendered(IBlockAccess blockAccess, int x, int y, int z, int side)
+	{
 		return true;
 	}
 
@@ -140,6 +142,14 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 	}
 
 	@Override
+	public IIcon getIcon(int side, int meta)
+	{
+		if(meta >= 0 && meta < icons.length)
+			return icons[meta];
+		return icons[19];
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess access, int i, int j, int k, int meta)
 	{
@@ -150,6 +160,7 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 			return icons[19];
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void addCollisionBoxesToList(World world, int i, int j, int k, List list)
 	{
@@ -173,6 +184,7 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 			list.add(new Object[]{AxisAlignedBB.getBoundingBox(f1, yMin, 0, 1, yMax, 1), 5});
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB aabb, List list, Entity entity)
 	{

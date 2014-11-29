@@ -112,6 +112,9 @@ public class ItemTerra extends Item implements ISize
 			{
 				MetaIcons[i] = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + MetaNames[i]);
 			}
+			
+			//This will prevent NullPointerException errors with other mods like NEI
+			this.itemIcon = MetaIcons[0];
 		}
 	}
 

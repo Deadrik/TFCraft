@@ -66,7 +66,7 @@ public class FMLClientEventHandler
 		Slot slot = gui.getSlotAtPosition(mouseX, mouseY);
 		if (slot != null)
 		{
-			if (slot.getStack() != null && slot.getStack().getItem() instanceof ItemMeal)
+			if (slot.getHasStack() && slot.getStack().getItem() instanceof ItemMeal && slot.getStack().hasTagCompound())
 			{
 				int[] fg = slot.getStack().getTagCompound().getIntArray("FG");
 				TFC_Core.bindTexture(TextureMap.locationItemsTexture);
