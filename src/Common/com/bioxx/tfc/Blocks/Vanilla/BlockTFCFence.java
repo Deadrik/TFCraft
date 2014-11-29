@@ -229,4 +229,10 @@ public class BlockTFCFence extends BlockFence
 	{
 		return true;
 	}
+
+	@Override
+	public boolean canBeReplacedByLeaves(IBlockAccess world, int x, int y, int z)
+	{
+		return false;
+	}
 }
