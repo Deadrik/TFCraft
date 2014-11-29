@@ -4,7 +4,6 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -89,7 +88,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 					if (i1 >= 0 && i1 < world.getHeight())
 					{
 						Block i4 = world.getBlock(j2, i1, j3);
-						if (i4 == Blocks.air || i4 == TFCBlocks.Leaves || i4 == TFCBlocks.Leaves2)
+						if (i4.isAir(world, j2, i1, j3) || i4 == TFCBlocks.Leaves || i4 == TFCBlocks.Leaves2)
 							continue;
 						if (i4 == TFCBlocks.FreshWaterStationary)
 						{

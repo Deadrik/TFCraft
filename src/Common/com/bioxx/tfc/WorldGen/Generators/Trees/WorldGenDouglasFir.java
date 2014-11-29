@@ -3,7 +3,6 @@ package com.bioxx.tfc.WorldGen.Generators.Trees;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -52,7 +51,7 @@ public class WorldGenDouglasFir extends WorldGenerator
 					if (j >= 0 && j < 256)
 					{
 						Block j2 = world.getBlock(l, j, j1);
-						if (j2 != Blocks.air && !j2.isReplaceable(world, l, j, j1))
+						if (!j2.isAir(world, l, j, j1) && !j2.isReplaceable(world, l, j, j1))
 						{
 							flag = false;
 						}

@@ -225,7 +225,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 	public boolean canReplace(World world, int x, int y, int z)
 	{
 		Block b = world.getBlock(x, y, z);
-		if(canDestroy(b) && (b == Blocks.air || !worldObj.isSideSolid(x, y, z, ForgeDirection.UP)))
+		if (canDestroy(b) && (b.isAir(world, x, y, z) || !worldObj.isSideSolid(x, y, z, ForgeDirection.UP)))
 			return TFC_Core.setBlockWithDrops(worldObj, x, y, z, getBlock(), this.blockMeta);
 		return false;
 	}

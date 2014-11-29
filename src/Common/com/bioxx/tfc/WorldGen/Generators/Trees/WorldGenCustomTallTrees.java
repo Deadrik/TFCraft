@@ -3,7 +3,6 @@ package com.bioxx.tfc.WorldGen.Generators.Trees;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -47,7 +46,7 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 					if (y >= 0 && y+height < world.getHeight())
 					{
 						Block j3 = world.getBlock(x, y, z);
-						if (j3 != Blocks.air && !j3.canBeReplacedByLeaves(world, x, y, z))
+						if (!j3.isAir(world, x, y, z) && !j3.canBeReplacedByLeaves(world, x, y, z))
 							flag = false;
 					}
 					else

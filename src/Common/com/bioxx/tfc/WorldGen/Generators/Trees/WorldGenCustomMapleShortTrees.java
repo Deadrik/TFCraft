@@ -3,7 +3,6 @@ package com.bioxx.tfc.WorldGen.Generators.Trees;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -43,7 +42,7 @@ public class WorldGenCustomMapleShortTrees extends WorldGenerator
 					if (i1 >= 0 && i1 < world.getHeight())
 					{
 						Block j3 = world.getBlock(i2, i1, l2);
-						if (j3 != Blocks.air && !j3.canBeReplacedByLeaves(world, i2, i1, l2))
+						if (!j3.isAir(world, i2, i1, l2) && !j3.canBeReplacedByLeaves(world, i2, i1, l2))
 							flag = false;
 					}
 					else

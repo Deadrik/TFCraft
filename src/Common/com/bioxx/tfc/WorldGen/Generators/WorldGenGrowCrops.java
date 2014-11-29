@@ -3,7 +3,6 @@ package com.bioxx.tfc.WorldGen.Generators;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
@@ -47,7 +46,7 @@ public class WorldGenGrowCrops implements IWorldGenerator
 				if(temp > crop.minAliveTemp && month > 0 && month <= 6)
 				{
 					Block b = world.getBlock(i, j, k);
-					if (TFCBlocks.Crops.canBlockStay(world, i, j, k) && (b == Blocks.air || b == TFCBlocks.TallGrass))
+					if (TFCBlocks.Crops.canBlockStay(world, i, j, k) && (b.isAir(world, i, j, k) || b == TFCBlocks.TallGrass))
 					{
 						if(world.setBlock(i, j, k, TFCBlocks.Crops, 0, 0x2))
 						{

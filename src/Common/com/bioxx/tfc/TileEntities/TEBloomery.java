@@ -7,7 +7,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
@@ -179,7 +178,7 @@ public class TEBloomery extends NetworkTileEntity
 			{
 				Block bid = worldObj.getBlock(xCoord + direction[0], yCoord + i, zCoord + direction[1]);
 				/*The stack must be air or already be molten rock*/
-				if((bid == Blocks.air ||bid == TFCBlocks.Molten || bid == TFCBlocks.Charcoal) &&
+				if ((bid.isAir(worldObj, xCoord + direction[0], yCoord + i, zCoord + direction[1]) || bid == TFCBlocks.Molten || bid == TFCBlocks.Charcoal) &&
 						worldObj.getBlock(xCoord + direction[0], yCoord - 1, zCoord + direction[1]).getMaterial() == Material.rock)
 				{
 					//Make sure that the Stack is surrounded by rock
@@ -192,7 +191,7 @@ public class TEBloomery extends NetworkTileEntity
 						int m = j > 7 ? 7 : j;
 						if(this.bloomeryLit)
 						{
-							if((bid == TFCBlocks.Molten && (mMeta & 8) == 0) || bid == Blocks.air || bid == TFCBlocks.Charcoal)
+							if ((bid == TFCBlocks.Molten && (mMeta & 8) == 0) || bid.isAir(worldObj, xCoord + direction[0], yCoord + i, zCoord + direction[1]) || bid == TFCBlocks.Charcoal)
 							{
 								m += 8;
 								worldObj.setBlock(xCoord + direction[0], yCoord + i, zCoord + direction[1], TFCBlocks.Molten, m, 2);
