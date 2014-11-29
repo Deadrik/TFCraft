@@ -123,7 +123,7 @@ public class CommonProxy
 
 	public void registerTileEntities(boolean b)
 	{
-		GameRegistry.registerTileEntity(TELogPile.class, "TerraLogPile");
+		//GameRegistry.registerTileEntity(TELogPile.class, "TerraLogPile");
 		GameRegistry.registerTileEntity(TileEntityWorkbench.class, "TerraWorkbench");
 		GameRegistry.registerTileEntity(TEForge.class, "TerraForge");
 		GameRegistry.registerTileEntity(TEBlastFurnace.class, "TerraBloomery");
@@ -158,6 +158,7 @@ public class CommonProxy
 		{
 			GameRegistry.registerTileEntity(TEFirepit.class, "TerraFirepit");
 			GameRegistry.registerTileEntity(TEIngotPile.class, "ingotPile");
+			GameRegistry.registerTileEntity(TELogPile.class, "TerraLogPile");
 			GameRegistry.registerTileEntity(TEPottery.class, "Pottery");
 			GameRegistry.registerTileEntity(TEChest.class, "chest");
 			GameRegistry.registerTileEntity(TEFoodPrep.class, "FoodPrep");

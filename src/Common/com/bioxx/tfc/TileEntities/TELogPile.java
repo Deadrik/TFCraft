@@ -15,12 +15,17 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Vector3f;
 import com.bioxx.tfc.api.TFCOptions;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TELogPile extends TileEntity implements IInventory
 {
@@ -29,7 +34,12 @@ public class TELogPile extends TileEntity implements IInventory
 	public boolean isOnFire;
 	public int fireTimer;
 	Queue<Vector3f> blocksToBeSetOnFire;
-
+	
+	/**
+	 * Used to keep the rendering up to date, don't update manually (use getNumberOfLogs() instead)
+	 */
+	int numberOfLogs = 0;
+	
 	public TELogPile()
 	{
 		storage = new ItemStack[4];
@@ -74,7 +84,7 @@ public class TELogPile extends TileEntity implements IInventory
 	public void closeInventory()
 	{
 		--logPileOpeners;
-		if(logPileOpeners == 0 && storage[0] == null && storage[1] == null && storage[2] == null && storage[3] == null)
+		if(logPileOpeners == 0 && getNumberOfLogs() == 0)
 		{
 			extinguishFire();
 			worldObj.setBlockToAir(xCoord, yCoord, zCoord);
@@ -197,8 +207,57 @@ public class TELogPile extends TileEntity implements IInventory
 	}
 
 	@Override
-	public boolean canUpdate()
+	public void updateEntity()
 	{
+		if(!worldObj.isSideSolid(xCoord , yCoord-1, zCoord, ForgeDirection.UP))
+		{
+			if(!mergeDown())
+			{
+				worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+			}
+		}
+		
+		//Update the block so SMP clients stay in sync
+		if(this.numberOfLogs != getNumberOfLogs())
+		{
+			numberOfLogs = getNumberOfLogs();
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
+	}
+	
+	public boolean mergeDown()
+	{
+		TELogPile teBelow = (TELogPile)worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
+		if(teBelow != null && teBelow instanceof TELogPile)
+		{
+			for(int i = 0; i < teBelow.getSizeInventory(); i++)
+			{
+				for(int j = 0; j < getSizeInventory(); j++)
+				{
+					if(storage[j] != null)
+					{
+						if(teBelow.storage[i] == null)
+						{
+							teBelow.setInventorySlotContents(i, decrStackSize(j, storage[j].stackSize));
+						}
+						else
+						{
+							if(teBelow.contentsMatch(i, storage[j]))
+							{
+								int logs = teBelow .getInventoryStackLimit() - teBelow.storage[i].stackSize;
+								teBelow.injectContents(i, decrStackSize(j, logs).stackSize);
+							}
+						}
+					}
+				}
+			}
+			
+			if(teBelow.getNumberOfLogs() == 16)
+			{
+				return true;
+			}
+		}
+		
 		return false;
 	}
 
@@ -251,7 +310,6 @@ public class TELogPile extends TileEntity implements IInventory
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
 		readFromNBT(pkt.func_148857_g());
-		//TileEntityLogPile pile = this;
 	}
 
 	@Override
