@@ -17,7 +17,6 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
-import com.bioxx.tfc.Core.TFCTabs;
 
 public class BlockMoss extends BlockTerra
 {
@@ -25,7 +24,7 @@ public class BlockMoss extends BlockTerra
 	{
 		super(Material.vine);
 		this.setTickRandomly(true);
-		this.setCreativeTab(TFCTabs.TFCDecoration);
+		this.setCreativeTab(null);
 	}
 
 	/**

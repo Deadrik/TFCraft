@@ -2,6 +2,9 @@ package com.bioxx.tfc.Blocks.Vanilla;
 
 import net.minecraft.block.BlockPumpkin;
 import net.minecraft.util.IIcon;
+
+import com.bioxx.tfc.Core.TFCTabs;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -10,6 +13,7 @@ public class BlockCustomPumpkin extends BlockPumpkin
 	public BlockCustomPumpkin(boolean par2)
 	{
 		super(par2);
+		this.setCreativeTab(TFCTabs.TFCBuilding);
 	}
 
 	@Override

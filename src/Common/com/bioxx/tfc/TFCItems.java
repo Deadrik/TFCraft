@@ -3,7 +3,6 @@ package com.bioxx.tfc;
 import java.util.ArrayList;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -1589,7 +1588,7 @@ public class TFCItems
 		JuteFibre = new ItemTerra().setFolder("plants/").setUnlocalizedName("Jute Fibre").setCreativeTab(TFCTabs.TFCMaterials);
 
 		Items.reeds.setCreativeTab(null);
-		Reeds = new ItemReeds().setUnlocalizedName("Reeds").setCreativeTab(CreativeTabs.tabMaterials).setTextureName("reeds");
+		Reeds = new ItemReeds().setUnlocalizedName("Reeds").setCreativeTab(TFCTabs.TFCMaterials).setTextureName("reeds");
 		MetalLock = new ItemTerra().setUnlocalizedName("Metal Lock").setCreativeTab(TFCTabs.TFCMisc);
 		MudBrick = new ItemMudBrick().setUnlocalizedName("Mud Brick").setCreativeTab(TFCTabs.TFCMaterials).setTextureName("Mud Brick Base");
 

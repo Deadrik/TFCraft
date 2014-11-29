@@ -19,7 +19,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.CollisionRayTraceStandard;
-import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
@@ -33,7 +32,6 @@ public class BlockStair extends BlockPartial implements ICustomCollision
 	public BlockStair(Material m)
 	{
 		super(m);
-		this.setCreativeTab(TFCTabs.TFCBuilding);
 	}
 
 	@Override

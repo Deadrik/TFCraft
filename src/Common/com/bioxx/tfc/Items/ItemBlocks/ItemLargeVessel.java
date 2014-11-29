@@ -1,8 +1,8 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
 import java.util.List;
+
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,9 +16,12 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
+
 import org.lwjgl.opengl.GL11;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCFluid;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEPottery;
@@ -35,7 +38,7 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 		super(block);
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(TFCTabs.TFCPottery);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
 import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,6 +9,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TELoom;
 import com.bioxx.tfc.api.Constant.Global;
@@ -21,7 +24,7 @@ public class ItemLooms extends ItemTerraBlock
 		super(par1);
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(TFCTabs.TFCDevices);
 		this.MetaNames = Global.WOOD_ALL;
 	}
 

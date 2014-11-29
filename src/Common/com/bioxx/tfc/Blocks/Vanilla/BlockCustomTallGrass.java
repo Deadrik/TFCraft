@@ -23,6 +23,7 @@ import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.ColorizerFoliageTFC;
 import com.bioxx.tfc.Core.ColorizerGrassTFC;
 import com.bioxx.tfc.Core.Recipes;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
@@ -41,6 +42,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 		super();
 		float var3 = 0.4F;
 		this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.8F, 0.5F + var3);
+		this.setCreativeTab(TFCTabs.TFCDecoration);
 	}
 
 	@Override

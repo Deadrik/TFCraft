@@ -21,6 +21,7 @@ import net.minecraftforge.fluids.IFluidBlock;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Core.TFCFluid;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEBarrel;
@@ -37,7 +38,7 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 		super(par1);
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(TFCTabs.TFCDevices);
 		this.MetaNames = Global.WOOD_ALL;
 	}
 
