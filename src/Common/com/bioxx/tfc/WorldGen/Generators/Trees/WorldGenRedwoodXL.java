@@ -4,9 +4,11 @@
 package com.bioxx.tfc.WorldGen.Generators.Trees;
 
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
 
@@ -101,14 +103,13 @@ public class WorldGenRedwoodXL extends WorldGenerator
 				for (int z1 = z - l1; z1 <= z + l1; z1++)
 				{
 					final int i5 = z1 - z;
-					final Block block = world.getBlock(x1, y1, z1);
-					if ((Math.abs(k4) != l1 || Math.abs(i5) != l1 || l1 <= 0)
-							&& (block == null || block.canBeReplacedByLeaves(world, x1, y1, z1)))
+					if (Math.abs(k4) != l1 || Math.abs(i5) != l1 || l1 <= 0)
 					{
-						setBlockAndNotifyAdequately(world, x1, y1, z1, blockLeaf, metaLeaf);
-						setBlockAndNotifyAdequately(world, x1 - 1, y1, z1, blockLeaf, metaLeaf);
-						setBlockAndNotifyAdequately(world, x1, y1, z1 - 1, blockLeaf, metaLeaf);
-						setBlockAndNotifyAdequately(world, x1 - 1, y1, z1 - 1, blockLeaf, metaLeaf);
+						// Must use special method so that each block is checked for if it can be replaced. Using setBlockAndNotifyAdequately directly will remove the majority of the trunk. -K
+						setLeaf(world, x1, y1, z1);
+						setLeaf(world, x1 - 1, y1, z1);
+						setLeaf(world, x1, y1, z1 - 1);
+						setLeaf(world, x1 - 1, y1, z1 - 1);
 					}
 				}
 			}
@@ -126,6 +127,13 @@ public class WorldGenRedwoodXL extends WorldGenerator
 			}
 		}
 		return true;
+	}
+
+	private void setLeaf(World world, int x, int y, int z)
+	{
+		Block b = world.getBlock(x, y, z);
+		if (b.canBeReplacedByLeaves(world, x, y, z))
+			setBlockAndNotifyAdequately(world, x, y, z, blockLeaf, metaLeaf);
 	}
 
 }
