@@ -33,6 +33,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Entities.EntityJavelin;
@@ -531,5 +532,19 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 	@Override
 	public int GetPierceArmor() {
 		return 500000;//this is not an error. this makes piercing damage useless.
+	}
+
+	@Override
+	public boolean getCanSpawnHere()
+	{
+		int x = MathHelper.floor_double(this.posX);
+		int y = MathHelper.floor_double(this.boundingBox.minY);
+		int z = MathHelper.floor_double(this.posZ);
+		Block b = this.worldObj.getBlock(x, y, z);
+
+		if(b == TFCBlocks.Leaves || b == TFCBlocks.Leaves2 || b == TFCBlocks.Thatch)
+			return false;
+
+		return super.getCanSpawnHere();
 	}
 }

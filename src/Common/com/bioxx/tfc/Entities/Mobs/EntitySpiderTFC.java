@@ -1,14 +1,16 @@
 package com.bioxx.tfc.Entities.Mobs;
 
-import com.bioxx.tfc.Core.TFC_MobData;
-import com.bioxx.tfc.api.Enums.EnumDamageType;
-import com.bioxx.tfc.api.Interfaces.ICausesDamage;
-
-import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_MobData;
+import com.bioxx.tfc.api.Enums.EnumDamageType;
+import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 
 public class EntitySpiderTFC extends EntitySpider implements ICausesDamage
 {
@@ -41,5 +43,19 @@ public class EntitySpiderTFC extends EntitySpider implements ICausesDamage
 			es.dismountEntity(es.ridingEntity);
 			es.setDead();
 		}
+	}
+
+	@Override
+	public boolean getCanSpawnHere()
+	{
+		int x = MathHelper.floor_double(this.posX);
+		int y = MathHelper.floor_double(this.boundingBox.minY);
+		int z = MathHelper.floor_double(this.posZ);
+		Block b = this.worldObj.getBlock(x, y, z);
+
+		if(b == TFCBlocks.Leaves || b == TFCBlocks.Leaves2 || b == TFCBlocks.Thatch)
+			return false;
+
+		return super.getCanSpawnHere();
 	}
 }
