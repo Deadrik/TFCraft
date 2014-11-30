@@ -109,7 +109,7 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 	@Override
 	protected void addRandomArmor()
 	{
-		super.addRandomArmor();
+		this.setCurrentItemOrArmor(0, null);
 		this.setCurrentItemOrArmor(1, null);
 		this.setCurrentItemOrArmor(2, null);
 		this.setCurrentItemOrArmor(3, null);
