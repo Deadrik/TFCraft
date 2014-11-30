@@ -252,4 +252,16 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 	{
 		return false;
 	}
+
+	@Override
+	public int getItemStackLimit()
+	{
+		return 1;
+	}
+
+	@Override
+	public boolean canStack()
+	{
+		return false;
+	}
 }
