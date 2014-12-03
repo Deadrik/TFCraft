@@ -85,8 +85,9 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			workRecipe = null;
 			craftingValue = 0;
 		}
-		else if(anvilItemStacks[INPUT1_SLOT] != null || anvilItemStacks[INPUT2_SLOT] != null && workRecipe == null)
-			updateRecipe();
+		//Disabled auto plan selection until we can solve the issue of correctly determining the lastworker outside of the plan selection screen
+		/*else if(anvilItemStacks[INPUT1_SLOT] != null || anvilItemStacks[INPUT2_SLOT] != null && workRecipe == null)
+			updateRecipe();*/
 		//make sure that the world is not remote
 		if(!worldObj.isRemote)
 		{
