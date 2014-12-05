@@ -193,12 +193,10 @@ public class BlockToolRack extends BlockTerraContainer
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		TileEntity te = world.getTileEntity(x, y, z);
-		if((te != null) && (te instanceof TileEntityToolRack))
-		{
-			TileEntityToolRack rack = (TileEntityToolRack) te;
-			ret.add(new ItemStack(this, 1, rack.woodType));
-		}
+		
+		int damageValue = getDamageValue(world, x, y, z);
+		ret.add(new ItemStack(this, 1, damageValue));
+		
 		return ret;
 	}
 
@@ -352,5 +350,15 @@ public class BlockToolRack extends BlockTerraContainer
 	{
 		return true;
 	}
-
+	
+    /**
+     * Get the block's damage value (for use with pick block).
+     */
+    public int getDamageValue(World world, int x, int y, int z)
+    {
+		TileEntity te = world.getTileEntity(x, y, z);
+		if (te != null && te instanceof TileEntityToolRack)
+			return ((TileEntityToolRack)te).woodType;
+		return 0;
+    }
 }

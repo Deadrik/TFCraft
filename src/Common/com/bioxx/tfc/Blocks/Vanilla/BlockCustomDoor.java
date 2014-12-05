@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Blocks.Vanilla;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import com.bioxx.tfc.Reference;
@@ -15,6 +16,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
@@ -425,5 +427,27 @@ public class BlockCustomDoor extends BlockTerra
 	public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
 	{
 		return true;
+	}
+	
+    /**
+     * Get the block's damage value (for use with pick block).
+     */
+    public int getDamageValue(World world, int x, int y, int z)
+    {
+		return woodType / 2;
+    }
+
+    /**
+     * This returns a complete list of items dropped from this block.
+     */
+	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+				
+		int damageValue = getDamageValue(world, x, y, z);
+		ret.add(new ItemStack(Recipes.Doors[damageValue], 1, 0));
+		
+		return ret;
 	}
 }
