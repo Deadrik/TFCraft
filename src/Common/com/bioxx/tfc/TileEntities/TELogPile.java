@@ -217,6 +217,11 @@ public class TELogPile extends TileEntity implements IInventory
 			}
 		}
 		
+		if(getNumberOfLogs() == 0)
+		{
+			worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+		}
+		
 		//Update the block so SMP clients stay in sync
 		if(this.numberOfLogs != getNumberOfLogs())
 		{
