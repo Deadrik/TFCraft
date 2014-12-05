@@ -71,10 +71,6 @@ public class BlockChestTFC extends BlockTerraContainer
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		
-		int damageValue = getDamageValue(world, x, y, z);
-		ret.add(new ItemStack(this, 1, damageValue));
-		
 		return ret;
 	}
 
