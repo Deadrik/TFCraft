@@ -53,6 +53,12 @@ public class ItemGoldPan extends ItemTerra
 	}
 
 	@Override
+	public boolean canStack()
+	{
+		return false;
+	}
+
+	@Override
 	public IIcon getIconFromDamage(int i)
 	{
 		i = i & 15;
