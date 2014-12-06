@@ -12,6 +12,8 @@ key.ToolMode=Scorri la modalità dello strumento
 key.LockTool=Blocca localizzazione strumento
 
 effect.bleed=Emorragia
+death.attack.alcohol=
+death.attack.heatStroke=
 
 #==============
 #= Spawn Eggs =
@@ -95,6 +97,28 @@ commands.transferTamed.display.incoming=%s ti ha trasferito un animale!
 commands.transferTamed.display.outgoing=Hai trasferito un animale a %s!
 commands.transferTamed.wrongSender=Non puoi trasferire animali!
 
+#==========
+#= Fluids =
+#==========
+fluid.freshwater=Acqua dolce
+fluid.saltwater=Acqua salata
+fluid.lavatfc=Lava
+fluid.hotwater=Acqua calda
+fluid.beer=Birra
+fluid.cider=Sidro
+fluid.rum=Rum
+fluid.ryewhiskey=Uischi di segale
+fluid.sake=Saké
+fluid.vodka=Vodka
+fluid.whiskey=Uischi
+fluid.cornwhiskey=Uischi di granturco
+fluid.milk=Latte
+fluid.milkcurdled=Latte cagliato
+fluid.limewater=Acqua di calce
+fluid.tannin=Tannino
+fluid.vinegar=Aceto
+fluid.brine=Salamoia
+
 #========
 #= Food =
 #========
@@ -105,6 +129,11 @@ item.meal.decent=Passabile
 item.meal.good=Buono
 item.meal.great=Ottimo
 item.meal.fantastic=Superbo
+item.Sandwich.name=Panino
+item.Salad.name=Insalata
+item.Soup.name=
+item.Sugar.name=Zucchero
+item.Sea Weed.name=Alga
 
 #== Grains ==
 item.Barley Bread.name=S'oriattu
@@ -267,10 +296,10 @@ item.CornWhiskey.name=Uischi di granturco
 item.Clay.Clay.name=Zolla di argilla
 item.Clay.Fire Clay.name=Zolla di argilla refrattaria
 
-item.clay.clayflatlight.name=Creta chiara
-item.clay.clayflatdark.name=Creta nera
-item.clay.clayflatfire.name=Creta refrattaria
-item.clay.clayflatdarkfire.name=Creta refrattaria nera
+item.Flat Clay.clay flat light.name=Creta chiara
+item.Flat Clay.clay flat dark.name=Creta nera
+item.Flat Clay.clay flat fire.name=Creta refrattaria
+item.Flat Clay.clay flat dark fire.name=Creta refrattaria nera
 
 item.Jug.Clay Jug.name=Brocca di creta
 item.Jug.Ceramic Jug.name=Brocca di ceramica
@@ -386,6 +415,10 @@ item.Spindle Head.Spindle Head.name=Testa di fuso
 item.Fire Brick.Fire Brick.name=Mattone refrattario
 item.Fire Brick.Clay Fire Brick.name=Mattone d'argilla refrattaria
 tile.FireBrick.name=Laterizio refrattario
+tile.Pottery.name=
+
+item.ClayBowl.Ceramic Bowl.name=Tazza di ceramica
+item.ClayBowl.Clay Bowl.name=Tazza di creta
 
 #= Gems =
 item.Agate.Chipped.name=Agata scheggiata
@@ -824,6 +857,7 @@ item.Small Ore.Sphalerite.name=Sfalerite piccola
 item.Small Ore.Tetrahedrite.name=Tetraedrite piccola
 
 #== Ore Blocks ==
+tile.Ore.name=
 tile.Ore.Bituminous Coal.name=Carbone bituminoso
 tile.Ore.Borax.name=Borace
 tile.Ore.Cinnabar.name=Cinabro
@@ -956,7 +990,6 @@ item.Loom.White Elm.name=Telaio di olmo
 item.Loom.Willow.name=Telaio di salice
 
 #== Wood Blocks ==
-tile.log.Acacia.name=Ciocco di acacia
 tile.log2.Acacia.name=Ciocco di acacia
 tile.log.Ash.name=Ciocco di frassino
 tile.log.Aspen.name=Ciocco di pioppo
@@ -1029,7 +1062,8 @@ tile.sapling.White Cedar.name=Arboscello di tuia
 tile.sapling.White Elm.name=Arboscello di olmo
 tile.sapling.Willow.name=Arboscello di salice
 
-tile.leaves.Acacia.name=Foglie di acacia
+tile.leaves2.name=Foglie di acacia
+tile.leaves2.Acacia.name=Foglie di acacia
 tile.leaves.Ash.name=Foglie di frassino
 tile.leaves.Aspen.name=Foglie di pioppo
 tile.leaves.Birch.name=Foglie di betulla
@@ -1064,6 +1098,10 @@ tile.wood.Sycamore.name=Assi di platano
 tile.wood.White Cedar.name=Assi di tuia
 tile.wood.White Elm.name=Assi di olmo
 tile.wood.Willow.name=Assi di salice
+
+tile.fruitTreeWood.name=
+tile.fruitTreeLeaves.name=
+tile.fruitTreeLeaves2.name=
 
 tile.Door Acacia.name=Porta di acacia
 tile.Door Ash.name=Porta di frassino
@@ -1190,6 +1228,25 @@ tile.WoodSupportV.Sycamore.name=Pilastro di platano
 tile.WoodSupportV.White Cedar.name=Pilastro di tuia
 tile.WoodSupportV.White Elm.name=Pilastro di olmo
 tile.WoodSupportV.Willow.name=Pilastro di salice
+
+tile.WoodSupportH2.name=
+tile.WoodSupportH2.Acacia.name=Pilastro di acacia
+tile.WoodSupportH.Ash.name=Pilastro di frassino
+tile.WoodSupportH.Aspen.name=Pilastro di pioppo
+tile.WoodSupportH.Birch.name=Pilastro di betulla
+tile.WoodSupportH.Chestnut.name=Pilastro di castagno
+tile.WoodSupportH.Douglas Fir.name=Pilastro di abete di Douglas
+tile.WoodSupportH.Hickory.name=Pilastro di noce
+tile.WoodSupportH.Kapok.name=Pilastro di capòc
+tile.WoodSupportH.Maple.name=Pilastro di acero
+tile.WoodSupportH.Oak.name=Pilastro di quercia
+tile.WoodSupportH.Pine.name=Pilastro di pino
+tile.WoodSupportH.Sequoia.name=Pilastro di sequoia
+tile.WoodSupportH.Spruce.name=Pilastro di abete rosso
+tile.WoodSupportH.Sycamore.name=Pilastro di platano
+tile.WoodSupportH.White Cedar.name=Pilastro di tuia
+tile.WoodSupportH.White Elm.name=Pilastro di olmo
+tile.WoodSupportH.Willow.name=Pilastro di salice
 
 tile.Toolrack.Acacia.name=Rastrelliera di acacia
 tile.Toolrack.Ash.name=Rastrelliera di frassino
@@ -1794,6 +1851,9 @@ item.Tin Double Sheet.name=Doppia lamiera di stagno
 item.Wrought Iron Double Sheet.name=Doppia lamiera di ferro battuto
 item.Zinc Double Sheet.name=Doppia lamiera di zinco
 
+#== Misc ==
+item.Blueprint=Quotatura
+
 #===========
 #= Devices =
 #===========
@@ -1803,10 +1863,16 @@ tile.BlastFurnace.name=Altoforno
 tile.SpawnMeter.name=Indicatore di protezione
 tile.Quern.name=Base della macina
 tile.EarlyBloomery.name=Basso fuoco
+tile.Molten.name=
 tile.Crucible.name=Crogiolo
 tile.NestBox.name=Nido artificiale
 item.SluiceItem.name=Traversa
+tile.Sluice.name=Traversa
 tile.LeatherRack.name=Cavalletto da concia
+tile.FoodPrep.name=
+tile.MetalSheet.name=
+tile.ingotpile.name=
+tile.SmokeRack.name=
 
 #== Anvils ==
 tile.Anvil.Stone.name=Incudine di pietra
@@ -1905,17 +1971,35 @@ item.fishingRod.name=Canna da pesca
 
 item.Quiver.name=Faretra
 item.Rope.name=Corda
+item.Mud Brick.name=Mattone di terra
+item.Wet Mud Brick.name=Mattone di terra umido
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Pagliericcio
+tile.StrawHideBed.name=Pagliericcio
 tile.customBed.sleep=Questo giaciglio non basta per addormentarsi
 tile.BasicPipe.name=Tubo
 tile.ValvePipe.name=Valvola
+tile.Smoke.name=
 tile.Torch.name=Torcia
 tile.Chest.name=Baule
 tile.Bookshelf.name=Libreria
 tile.Workbench.name=Banco da lavoro
 tile.ButtonWood.name=Pulsante di legno
+tile.Firepit.name=
+tile.LogPile.name=
+tile.Charcoal.name=
+tile.StoneDetailed.name=
+tile.stoneStairs.name=
+tile.stoneSlabs.name=
+tile.stoneStalac.name=
+tile.WoodConstruct.name=
+tile.MetalTrapDoor.name=Botola
+tile.Vessel.name=Vasone
+tile.Grill.name=Griglia
+
+tile.Sulfur.name=Zolfo
+tile.Reeds.name=Canne
 
 #= Misc. Plants =
 item.Sugarcane.name=Canna da zucchero
@@ -2043,6 +2127,9 @@ gui.Armor.Crush=Concussione
 gui.Armor.Pierce=Penetrazione
 gui.Armor.Slash=Taglio
 
+word.stage1=Fase 1
+word.stage2=Fase 2
+
 gui.Bow.Advanced=Avanzato
 gui.Bow.Javelins=Giavellotti
 gui.Bow.Arrows=Frecce
@@ -2062,6 +2149,9 @@ gui.Barrel.ToggleOn=Immetti
 gui.Barrel.SealedOn=Sigillato
 gui.Barrel.Solid=Contenuto solido
 gui.Barrel.Liquid=Contenuto liquido
+gui.barrel.pickling=Sott'aceto
+gui.barrel.brining=Salamoia
+gui.barrel.preserving=
 
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Carbonella
@@ -2120,12 +2210,14 @@ gui.Calendar.1Week=1 settimana
 gui.Calendar.1Month=1 mese
 gui.Calendar.1Year=1 anno
 
-#== Food Prep GUI ==
+#== Food GUI ==
 gui.FoodPrep.CreateMeal=Crea pasto
 gui.FoodPrep.Effect=Effetto
 gui.FoodPrep.Energy=Energia
 gui.FoodPrep.Filling=Sazietà
 gui.FoodPrep.Power=Potenza
+gui.FoodPrep.Sandwich=Panino
+gui.FoodPrep.Salad=Insalata
 
 #== Metals ==
 gui.metal.Bismuth=Bismuto
@@ -2193,9 +2285,13 @@ gui.Inventory=Inventario
 gui.ClearSlot=Svuota uno slot di produzione.
 gui.LogPile=Pila di ciocchi
 gui.done=Finito
+gui.cancel=
 gui.Sluice.Soil=Suolo
-gui.Sluice=Traversa
+gui.Sluice.Overworked=
 gui.Workbench.Crafting=Lavorazione
+gui.overburdened=*Sovraccarico*
+gui.slot=Casella
+gui.slot.back=Indietro
 
 #== Tooltips ==
 gui.ShowHelp=§8Aiuto: (Tieni premuto §fShift§8)
@@ -2210,6 +2306,9 @@ gui.PotteryBase.Inst0=Accovacciati e §bClicca col destro §7per posizionare.
 gui.PotteryVesselSmall.Inst0=O §bClicca col destro §7per aprire l'inventario
 gui.RawHide.Inst0=????
 gui.Barrel.MoreItems=§8Altro... (Tieni premuto §fShift§8)
+gui.Nutrient.A=
+gui.Nutrient.B=
+gui.Nutrient.C=
 
 gui.Size.Tiny=Minuscolo
 gui.Size.VerySmall=Molto piccolo
@@ -2238,6 +2337,84 @@ gui.food.salted=Salato
 
 gui.FoodHeat.Cold=Freddo
 gui.FoodHeat.Warm=Tiepido
+
+gui.showtaste=§8Assaggia: (Tieni premuto §fL-Ctrl§8)
+gui.taste=§8Sapore:
+gui.taste.sweet=Dolce
+gui.taste.sour=Aspro
+gui.taste.salty=Salato
+gui.taste.bitter=Amaro
+gui.taste.savory=Saporito
+
+gui.taste.novice.sweet1=Dolce
+gui.taste.novice.sweet0=Non dolce
+gui.taste.novice.sour1=Aspro
+gui.taste.novice.sour0=Non aspro
+gui.taste.novice.salty1=Salato
+gui.taste.novice.salty0=Non salato
+gui.taste.novice.bitter1=Amaro
+gui.taste.novice.bitter0=Non amaro
+gui.taste.novice.savory1=Saporito
+gui.taste.novice.savory0=Non saporito
+
+gui.taste.adept.sweet0=Non dolce
+gui.taste.adept.sweet1=Poco dolce
+gui.taste.adept.sweet2=Dolce
+gui.taste.adept.sweet3=Alquanto dolce
+gui.taste.adept.sweet4=Dolcissimo
+gui.taste.adept.sweet5=Dolcissimissimo
+gui.taste.adept.sour0=Non aspro
+gui.taste.adept.sour1=Poco aspro
+gui.taste.adept.sour2=Aspro
+gui.taste.adept.sour3=Alquanto aspro
+gui.taste.adept.sour4=Asprissimo
+gui.taste.adept.sour5=Asprissimissimo
+gui.taste.adept.salty0=Non salato
+gui.taste.adept.salty1=Poco salato
+gui.taste.adept.salty2=Salato
+gui.taste.adept.salty3=Alquanto salato
+gui.taste.adept.salty4=Salatissimo
+gui.taste.adept.salty5=Salatissimissimo
+gui.taste.adept.bitter0=Non amaro
+gui.taste.adept.bitter1=Poco amaro
+gui.taste.adept.bitter2=Amaro
+gui.taste.adept.bitter3=Alquanto amaro
+gui.taste.adept.bitter4=Amarissimo
+gui.taste.adept.bitter5=Amarissimissimo
+gui.taste.adept.savory0=Non saporito
+gui.taste.adept.savory1=Poco saporito
+gui.taste.adept.savory2=Saporito
+gui.taste.adept.savory3=Alquanto saporito
+gui.taste.adept.savory4=Saporitissimo
+gui.taste.adept.savory5=Saporitissimissimo
+
+gui.taste.0=Non
+gui.taste.1=Non molto
+gui.taste.2=Un po'
+gui.taste.3=Moderatamente
+gui.taste.4=Perfettamente
+gui.taste.5=Troppo
+gui.taste.6=Molto
+gui.taste.7=Estremamente
+gui.taste.8=Assurdamente
+
+word.pickled=Sott'aceto
+word.brined=In salamoia
+word.cooked=Cotto
+word.salted=Salato
+word.smoked=Affumicato
+word.dried=Essiccato
+
+food.cooked.rare=Al sangue
+food.cooked.medrare=A puntino-al sangue
+food.cooked.med=A puntino
+food.cooked.medwell=A puntino-ben cotta
+food.cooked.well=Ben cotta
+food.cooked.0=Chiarissima
+food.cooked.1=Chiara
+food.cooked.2=Media
+food.cooked.3=Scura
+food.cooked.4=Scurissima
 
 gui.Torch.CatchingFire=Innesco
 gui.Torch.Lit=Accesa
@@ -2300,127 +2477,12 @@ skill.agriculture=Agricoltore
 skill.cooking=Cuoco
 skill.prospecting=Prospettore
 skill.butchering=Macellaio
-
-#=====================================================
-#========Add New Stuff Here To Be Sorted Later========
-#=====================================================
-fluid.freshwater=Acqua dolce
-fluid.saltwater=Acqua salata
-fluid.lavatfc=Lava
-fluid.hotwater=Acqua calda
-fluid.beer=Birra
-fluid.cider=Sidro
-fluid.rum=Rum
-fluid.ryewhiskey=Uischi di segale
-fluid.sake=Saké
-fluid.vodka=Vodka
-fluid.whiskey=Uischi
-fluid.cornwhiskey=Uischi di granturco
-fluid.milk=Latte
-fluid.milkcurdled=Latte cagliato
-fluid.limewater=Acqua di calce
-fluid.tannin=Tannino
-fluid.vinegar=Aceto
-fluid.brine=Salamoia
-
-gui.showtaste=§8Assaggia: (Tieni premuto §fL-Ctrl§8)
-gui.taste=§8Sapore:
-gui.taste.sweet=Dolce
-gui.taste.sour=Aspro
-gui.taste.salty=Salato
-gui.taste.bitter=Amaro
-gui.taste.savory=Saporito
-
-gui.taste.novice.sweet1=Dolce
-gui.taste.novice.sweet0=Non dolce
-gui.taste.novice.sour1=Aspro
-gui.taste.novice.sour0=Non aspro
-gui.taste.novice.salty1=Salato
-gui.taste.novice.salty0=Non salato
-gui.taste.novice.bitter1=Amaro
-gui.taste.novice.bitter0=Non amaro
-gui.taste.novice.savory1=Saporito
-gui.taste.novice.savory0=Non saporito
-
-gui.taste.adept.sweet0=Non dolce
-gui.taste.adept.sweet1=Poco dolce
-gui.taste.adept.sweet2=Dolce
-gui.taste.adept.sweet3=Alquanto dolce
-gui.taste.adept.sweet4=Dolcissimo
-gui.taste.adept.sweet5=Dolcissimissimo
-gui.taste.adept.sour0=Non aspro
-gui.taste.adept.sour1=Poco aspro
-gui.taste.adept.sour2=Aspro
-gui.taste.adept.sour3=Alquanto aspro
-gui.taste.adept.sour4=Asprissimo
-gui.taste.adept.sour5=Asprissimissimo
-gui.taste.adept.salty0=Non salato
-gui.taste.adept.salty1=Poco salato
-gui.taste.adept.salty2=Salato
-gui.taste.adept.salty3=Alquanto salato
-gui.taste.adept.salty4=Salatissimo
-gui.taste.adept.salty5=Salatissimissimo
-gui.taste.adept.bitter0=Non amaro
-gui.taste.adept.bitter1=Poco amaro
-gui.taste.adept.bitter2=Amaro
-gui.taste.adept.bitter3=Alquanto amaro
-gui.taste.adept.bitter4=Amarissimo
-gui.taste.adept.bitter5=Amarissimissimo
-gui.taste.adept.savory0=Non saporito
-gui.taste.adept.savory1=Poco saporito
-gui.taste.adept.savory2=Saporito
-gui.taste.adept.savory3=Alquanto saporito
-gui.taste.adept.savory4=Saporitissimo
-gui.taste.adept.savory5=Saporitissimissimo
-
-gui.taste.0=Non
-gui.taste.1=Non molto
-gui.taste.2=Un po'
-gui.taste.3=Moderatamente
-gui.taste.4=Perfettamente
-gui.taste.5=Troppo
-gui.taste.6=Molto
-gui.taste.7=Estremamente
-gui.taste.8=Assurdamente
-
 gui.skill.novice=Principiante
 gui.skill.adept=Abile
 gui.skill.expert=Esperto
 gui.skill.master=Maestro
 gui.skillpage=Abilità
-tile.MetalTrapDoor.name=Botola
-item.Mud Brick.name=Mattone di terra
-item.Wet Mud Brick.name=Mattone di terra umido
-gui.overburdened=*Sovraccarico*
-gui.slot=Casella
-gui.slot.back=Indietro
-word.pickled=Sott'aceto
-word.brined=In salamoia
-word.cooked=Cotto
-word.salted=Salato
-word.smoked=Affumicato
-word.dried=Essiccato
-gui.barrel.pickling=Sott'aceto
-gui.barrel.brining=Salamoia
-tile.Vessel.name=Vasone
-tile.Grill.name=Griglia
-food.cooked.rare=Al sangue
-food.cooked.medrare=A puntino-al sangue
-food.cooked.med=A puntino
-food.cooked.medwell=A puntino-ben cotta
-food.cooked.well=Ben cotta
-food.cooked.0=Chiarissima
-food.cooked.1=Chiara
-food.cooked.2=Media
-food.cooked.3=Scura
-food.cooked.4=Scurissima
-gui.FoodPrep.Sandwich=Panino
-gui.FoodPrep.Salad=Insalata
-item.Sandwich.name=Panino
-item.Salad.name=Insalata
-item.ClayBowl.Ceramic Bowl.name=Tazza di ceramica
-item.ClayBowl.Clay Bowl.name=Tazza di creta
-item.Sugar.name=Zucchero
-item.Sea Weed.name=Alga
-word.stage1=Fase 1
-word.stage2=Fase 2
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================
