@@ -14,6 +14,7 @@ import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.IconFlipped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -345,15 +346,6 @@ public class BlockCustomDoor extends BlockTerra
 	}
 
 	/**
-	 * Returns the Item to drop on destruction.
-	 */
-	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
-	{
-		return (par1 & 8) != 0 ? null : Recipes.Doors[woodType/2];
-	}
-
-	/**
 	 * Ray traces through the blocks collision from start vector to end vector returning a ray trace hit. Args: world,
 	 * x, y, z, startVec, endVec
 	 */
@@ -444,9 +436,27 @@ public class BlockCustomDoor extends BlockTerra
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-				
-		int damageValue = getDamageValue(world, x, y, z);
-		ret.add(new ItemStack(Recipes.Doors[damageValue], 1, 0));
+	
+		// check if the block is the bottom half of the door
+		if ((metadata & 8) == 0)
+		{
+			// get the wood type and return the door item
+			int damageValue = getDamageValue(world, x, y, z);
+			ret.add(new ItemStack(Recipes.Doors[damageValue], 1, 0));
+		}
+		else
+		{
+			// block is the top half of the door
+			// check if the bottom half of the door still exists
+			Block block = world.getBlock(x, y-1, z);
+			if (block != null && block != Blocks.air)
+			{
+				// bottom half of the door still exists
+				// return the door item (used to return the door item when mouse pointer over the top half of the door)
+				int damageValue = getDamageValue(world, x, y, z);
+				ret.add(new ItemStack(Recipes.Doors[damageValue], 1, 0));				
+			}
+		}
 		
 		return ret;
 	}
