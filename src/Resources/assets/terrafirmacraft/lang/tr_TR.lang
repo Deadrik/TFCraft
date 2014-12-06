@@ -1,5 +1,5 @@
 ﻿#tr_TR
-#This is the Turkish language configuration file.Translated by melihceku(CekuGaming)
+#This is the Turkish language configuration file.Translated by melihceku (CekuGaming)
 
 
 
@@ -12,6 +12,8 @@ key.ToolMode=Alet Modunu Değiştir
 key.LockTool=Alet Yerini Kitle
 
 effect.bleed=Kanama
+death.attack.alcohol=%1$s alkol zehirlenmesinden öldü
+death.attack.heatStroke=%1$s sıcak çarpmasından öldü
 
 #==============
 #= Spawn Eggs =
@@ -95,22 +97,49 @@ commands.transferTamed.display.incoming=Hayvan %s tarafından transfer edildi!
 commands.transferTamed.display.outgoing=Sen hayvanı %s ye transfer ettin!
 commands.transferTamed.wrongSender=Hayvanları transfer edemessin!
 
+#==========
+#= Fluids =
+#==========
+fluid.freshwater=Tatlı Su
+fluid.saltwater=Tuzlu Su
+fluid.lavatfc=Lav
+fluid.hotwater=Kaplıca Suyu
+fluid.beer=Bira
+fluid.cider=Elma Şarabı
+fluid.rum=Rom
+fluid.ryewhiskey=Çavdar Viskisi
+fluid.sake=Süt İçkisi
+fluid.vodka=Votka
+fluid.whiskey=Viski
+fluid.cornwhiskey=Mısır Viskisi
+fluid.milk=Süt
+fluid.milkcurdled=Pıhtılaşmış Süt
+fluid.limewater=Kireçli Su
+fluid.tannin=Tanen
+fluid.vinegar=Sirke
+fluid.brine=Salamura
+
 #========
 #= Food =
 #========
 item.MealGeneric.name=Yemek
 item.meal.terrible=Berbat
 item.meal.poor=Fakir
-item.meal.decent=İyi gibi(geçer not)
+item.meal.decent=İyi gibi
 item.meal.good=İyi
 item.meal.great=Çok iyi
 item.meal.fantastic=Fantastik!
+item.Sandwich.name=Ekmek Arası
+item.Salad.name=Salata
+item.Soup.name=Çorba
+item.Sugar.name=Şeker
+item.Sea Weed.name=Su Yosunu
 
 #== Grains ==
 item.Barley Bread.name=Arpa Ekmeği
 item.Corn Bread.name=Mısır Ekmeği
 item.Oat Bread.name=Yulat Ekmeği
-item.Rice Bread.name=Pirinç ekmeği
+item.Rice Bread.name=Pirinç Ekmeği
 item.Rye Bread.name=Çavdar ekmeği
 item.Wheat Bread.name=Buğday ekmeği
 
@@ -267,10 +296,10 @@ item.CornWhiskey.name=Mısır Viskisi
 item.Clay.Clay.name=Kil
 item.Clay.Fire Clay.name=Ateş Kili
 
-item.clay.clayflatlight.name=Düz Kil
-item.clay.clayflatdark.name=Düz Kil
-item.clay.clayflatfire.name=Düz Ateş Kili
-item.clay.clayflatdarkfire.name=Düz Ateş Kili
+item.Flat Clay.clay flat light.name=Düz Kil
+item.Flat Clay.clay flat dark.name=Düz Kil
+item.Flat Clay.clay flat fire.name=Düz Ateş Kili
+item.Flat Clay.clay flat dark fire.name=Düz Ateş Kili
 
 item.Jug.Clay Jug.name=Kil Sürahi
 item.Jug.Ceramic Jug.name=Seramik Sürahi
@@ -386,6 +415,10 @@ item.Spindle Head.Spindle Head.name=İğ Kafası
 item.Fire Brick.Fire Brick.name=Ateş Tuğlası
 item.Fire Brick.Clay Fire Brick.name=Kil Ateş Tuğlası
 tile.FireBrick.name=Ateş Tuğlası Bloğu
+tile.Pottery.name=Tabak Çanak
+
+item.ClayBowl.Ceramic Bowl.name=Çanak
+item.ClayBowl.Clay Bowl.name=Kil Çanak
 
 #= Gems =
 item.Agate.Chipped.name=Yontma Akik
@@ -824,6 +857,7 @@ item.Small Ore.Sphalerite.name=Küçük Sphalerit
 item.Small Ore.Tetrahedrite.name=Küçük Tetrahedrit
 
 #== Ore Blocks ==
+tile.Ore.name=Maden
 tile.Ore.Bituminous Coal.name=Bituminous Kömür
 tile.Ore.Borax.name=Boraks
 tile.Ore.Cinnabar.name=Cinnabar
@@ -916,7 +950,7 @@ item.Sequoia Door.name=Sekoya Kapı
 item.Spruce Door.name=Ladin Kapı
 item.Sycamore Door.name=Çınar Kapı
 item.White Cedar Door.name=Beyaz Sedir Kapı
-item.White Elm Door.name=Kara Ağaç Door
+item.White Elm Door.name=Kara Ağaç Kapı
 item.Willow Door.name=Söğüt Kapı
 
 item.Barrel.Acacia.name=Akasya Varil
@@ -956,7 +990,6 @@ item.Loom.White Elm.name=Kara Ağaç Dokumalık
 item.Loom.Willow.name=Söğüt Dokumalık
 
 #== Wood Blocks ==
-tile.log.Acacia.name=Akasya Kütük
 tile.log2.Acacia.name=Akasya Kütük
 tile.log.Ash.name=Ash Kütük
 tile.log.Aspen.name=Kavak Kütük
@@ -1029,7 +1062,8 @@ tile.sapling.White Cedar.name=Beyaz Sedir Fidanı
 tile.sapling.White Elm.name=Kara Ağaç Fidanı
 tile.sapling.Willow.name=Söğüt Fidanı
 
-tile.leaves.Acacia.name=Akasya Yaprağı
+tile.leaves2.name=Akasya Yaprağı
+tile.leaves2.Acacia.name=Akasya Yaprağı
 tile.leaves.Ash.name=Ash Yaprağı
 tile.leaves.Aspen.name=Kavak Yaprağı
 tile.leaves.Birch.name=Huş Yaprağı
@@ -1065,6 +1099,10 @@ tile.wood.White Cedar.name=Beyaz Sedir Tahtaları
 tile.wood.White Elm.name=Kara Ağaç Tahtaları
 tile.wood.Willow.name=Söğüt Tahtaları
 
+tile.fruitTreeWood.name=Meyve Ağacı
+tile.fruitTreeLeaves.name=Meyve Ağacı Yaprakları
+tile.fruitTreeLeaves2.name=Meyve Ağacı Yaprakları
+
 tile.Door Acacia.name=Akasya Kapı
 tile.Door Ash.name=Ash Kapı
 tile.Door Aspen.name=Kavak Kapı
@@ -1080,7 +1118,7 @@ tile.Door Sequoia.name=Sekoya Kapı
 tile.Door Spruce.name=Ladin Kapı
 tile.Door Sycamore.name=Çınar Kapı
 tile.Door White Cedar.name=Beyaz Sedir Kapı
-tile.Door White Elm.name=Kara Ağaç Door
+tile.Door White Elm.name=Kara Ağaç Kapı
 tile.Door Willow.name=Söğüt Kapı
 
 tile.Barrel.Acacia.name=Akasya Varil
@@ -1190,6 +1228,25 @@ tile.WoodSupportV.Sycamore.name=Çınar Destek Kirişi
 tile.WoodSupportV.White Cedar.name=Beyaz Sedir Destek Kirişi
 tile.WoodSupportV.White Elm.name=Kara Ağaç Destek Kirişi
 tile.WoodSupportV.Willow.name=Söğüt Destek Kirişi
+
+tile.WoodSupportH2.name=Tahta Destek Kirişi
+tile.WoodSupportH2.Acacia.name=Akasya Destek Kirişi
+tile.WoodSupportH.Ash.name=Ash Destek Kirişi
+tile.WoodSupportH.Aspen.name=Kavak Destek Kirişi
+tile.WoodSupportH.Birch.name=Huş Destek Kirişi
+tile.WoodSupportH.Chestnut.name=Kestane Destek Kirişi
+tile.WoodSupportH.Douglas Fir.name=Douglas Fir Destek Kirişi
+tile.WoodSupportH.Hickory.name=Ceviz Destek Kirişi
+tile.WoodSupportH.Kapok.name=Kapok Destek Kirişi
+tile.WoodSupportH.Maple.name=Akçaağaç Destek Kirişi
+tile.WoodSupportH.Oak.name=Meşe Destek Kirişi
+tile.WoodSupportH.Pine.name=Çam Destek Kirişi
+tile.WoodSupportH.Sequoia.name=Sekoya Destek Kirişi
+tile.WoodSupportH.Spruce.name=Ladin Destek Kirişi
+tile.WoodSupportH.Sycamore.name=Çınar Destek Kirişi
+tile.WoodSupportH.White Cedar.name=Beyaz Sedir Destek Kirişi
+tile.WoodSupportH.White Elm.name=Kara Ağaç Destek Kirişi
+tile.WoodSupportH.Willow.name=Söğüt Destek Kirişi
 
 tile.Toolrack.Acacia.name=Akasya Aletlik
 tile.Toolrack.Ash.name=Ash Aletlik
@@ -1794,6 +1851,9 @@ item.Tin Double Sheet.name=Kalay Çift Levha
 item.Wrought Iron Double Sheet.name=Demir Çift Levha
 item.Zinc Double Sheet.name=Zink Çift Levha
 
+#== Misc ==
+item.Blueprint=Taslak
+
 #===========
 #= Devices =
 #===========
@@ -1803,10 +1863,16 @@ tile.BlastFurnace.name=Çelik Fırını
 tile.SpawnMeter.name=Savunma Ölçer
 tile.Quern.name=Değirmen Zemini
 tile.EarlyBloomery.name=Demir Fırını
+tile.Molten.name=Erimiş Maden
 tile.Crucible.name=Metal Kazanı
 tile.NestBox.name=Tavuk Yatağı
 item.SluiceItem.name=Akıntı Süzgeci
+tile.Sluice.name=Akıntı Süzgeci
 tile.LeatherRack.name=Deri Soyma Zemini
+tile.FoodPrep.name=Yemek Hazırlama
+tile.MetalSheet.name=Metal Levha
+tile.ingotpile.name=Külçe Yığını
+tile.SmokeRack.name=Duman Bulutu
 
 #== Anvils ==
 tile.Anvil.Stone.name=Taş Örs
@@ -1905,17 +1971,35 @@ item.fishingRod.name=Olta
 
 item.Quiver.name=Ok Kılıfı
 item.Rope.name=Halat
+item.Mud Brick.name=Çamur Tuğla
+item.Wet Mud Brick.name=Islak Çamur Tuğla
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Saman & Deri Yatak
+tile.StrawHideBed.name=Saman & Deri Yatak
 tile.customBed.sleep=Bu yatak uyumak için çok rahatsız§f (ölürseniz burada doğarsınız)
 tile.BasicPipe.name=Boru
 tile.ValvePipe.name=Vanalı Boru
+tile.Smoke.name=Duman
 tile.Torch.name=Meşale
 tile.Chest.name=Sandık
 tile.Bookshelf.name=Kitaplık
 tile.Workbench.name=Çalışma Masası
 tile.ButtonWood.name=Tahta Düğme
+tile.Firepit.name=
+tile.LogPile.name=
+tile.Charcoal.name=
+tile.StoneDetailed.name=
+tile.stoneStairs.name=
+tile.stoneSlabs.name=
+tile.stoneStalac.name=
+tile.WoodConstruct.name=
+tile.MetalTrapDoor.name=Tuzak Kapı
+tile.Vessel.name=Büyük Vazo
+tile.Grill.name=Izgara
+
+tile.Sulfur.name=Sülfür
+tile.Reeds.name=Sazlık
 
 #= Misc. Plants =
 item.Sugarcane.name=Şekerkamışı
@@ -2043,6 +2127,9 @@ gui.Armor.Crush=Ezme
 gui.Armor.Pierce=Delme
 gui.Armor.Slash=Koparma
 
+word.stage1=Aşama 1
+word.stage2=Aşama 2
+
 gui.Bow.Advanced=Dahası
 gui.Bow.Javelins=Mızraklar
 gui.Bow.Arrows=Oklar
@@ -2062,6 +2149,9 @@ gui.Barrel.ToggleOn=İçe
 gui.Barrel.SealedOn=Kapatılan Tarih
 gui.Barrel.Solid=Katı Saklama
 gui.Barrel.Liquid=Sıvı Saklama
+gui.barrel.pickling=Sirkeleme
+gui.barrel.brining=Salamura Yapma
+gui.barrel.preserving=Konserveleme
 
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Odunkömürü
@@ -2120,12 +2210,14 @@ gui.Calendar.1Week=1 Hafta
 gui.Calendar.1Month=1 Ay
 gui.Calendar.1Year=1 Yıl
 
-#== Food Prep GUI ==
+#== Food GUI ==
 gui.FoodPrep.CreateMeal=Oluştur
 gui.FoodPrep.Effect=Etki
 gui.FoodPrep.Energy=Enerji
 gui.FoodPrep.Filling=Doldurmak
 gui.FoodPrep.Power=Güç
+gui.FoodPrep.Sandwich=Ekmek Arası
+gui.FoodPrep.Salad=Salata
 
 #== Metals ==
 gui.metal.Bismuth=Bismut
@@ -2193,9 +2285,13 @@ gui.Inventory=Envanter
 gui.ClearSlot=Çıkış Slotunu Boşalt.
 gui.LogPile=Kütük Yığını
 gui.done=Bitti
+gui.cancel=
 gui.Sluice.Soil=Çamur
-gui.Sluice=Akıntı Süzgeci
+gui.Sluice.Overworked=
 gui.Workbench.Crafting=Üretme
+gui.overburdened=*Aşırı Yüklenilmiş*
+gui.slot=Slot
+gui.slot.back=Sırt
 
 #== Tooltips ==
 gui.ShowHelp=§8Yardım: (§fShift §8Basılı Tut)
@@ -2210,6 +2306,9 @@ gui.PotteryBase.Inst0=Objeyi Yere koymak için Eğil ve ters tıkla
 gui.PotteryVesselSmall.Inst0=Yada açmak için Ters tıkla
 gui.RawHide.Inst0=????
 gui.Barrel.MoreItems=§8Daha fazla... (&fShifte basılı tut)
+gui.Nutrient.A=
+gui.Nutrient.B=
+gui.Nutrient.C=
 
 gui.Size.Tiny=Minik
 gui.Size.VerySmall=Çok Küçük
@@ -2238,90 +2337,6 @@ gui.food.salted=Tuzlanmış
 
 gui.FoodHeat.Cold=Soğuk
 gui.FoodHeat.Warm=Sıcak
-
-gui.Torch.CatchingFire=Yanmaya Başlıyor
-gui.Torch.Lit=Yanıyor
-
-gui.ItemHeat.Liquid=Sıvı
-gui.ItemHeat.Solidified=Donuk
-gui.ItemHeat.Caution=Uyarı!
-gui.ItemHeat.Warming=Isınıyor
-gui.ItemHeat.Hot=Sıcak
-gui.ItemHeat.VeryHot=Çok Sıcak
-gui.ItemHeat.FaintRed=Soluk Kırmızı
-gui.ItemHeat.DarkRed=Koyu Kırmızı
-gui.ItemHeat.BrightRed=Açık Kırmızı
-gui.ItemHeat.Orange=Turuncu
-gui.ItemHeat.Yellow=Sarı
-gui.ItemHeat.YellowWhite=Açık Sarı
-gui.ItemHeat.White=Beyaz
-gui.ItemHeat.BrilliantWhite=Parlak Beyaz
-
-gui.ingot.workable=Çalışılır
-gui.ingot.weldable=Birleştirilir
-gui.ingot.danger=**Tehlike**
-
-gui.milk.fresh=Taze
-gui.milk.old=Eski
-gui.milk.sour=Ekşi
-
-gui.units=Birimler
-
-#== Chat Messages ==
-gui.GoldPan.UseFull=Akan suyun altına tıklanmalı.
-gui.goldpan.overused=Bu alan çok çalışılmış. Maden bulunamaz.
-
-gui.ProPick.Found=Bulundu:
-gui.ProPick.FoundTraces=İzi Bulundu:
-gui.ProPick.FoundSmall=Kuçük Örnek Bulundu:
-gui.ProPick.FoundMedium=Orta Örnek Bulundu:
-gui.ProPick.FoundLarge=Büyük Örnek Bulundu:
-gui.ProPick.FoundVeryLarge=Çok Büyük Örnek Bulundu:
-gui.ProPick.FoundNothing=Önemli Birşey Bulunmadı.
-
-#== Creative Tabs ==
-itemGroup.TFCArmor=(Tfc) Zırh
-itemGroup.TFCMaterials=(Tfc) Metaryaller
-itemGroup.TFCMisc=(Tfc) Çeşitli
-itemGroup.TFCPottery=(Tfc) Tanak Çanak
-itemGroup.TFCTools=(Tfc) Aletler
-itemGroup.TFCWeapons=(Tfc) Silahlar
-itemGroup.TFCDevices=(Tfc) Cihazlar
-itemGroup.TFCFoods=(Tfc) Yemekle İlgili
-itemGroup.TFCBuilding=(Tfc) Yapı Blokları
-itemGroup.TFCDecoration=(Tfc) Dekorasyon Blokları
-
-#== Skill GUI ==
-skill.armorsmith=Zırh Demirciliği
-skill.gensmith=Genel Demircilik
-skill.toolsmith=Alet Demirciliği
-skill.weaponsmith=Silah Demirciliği
-skill.agriculture=Tarım
-skill.cooking=Yemek Pişirme
-skill.prospecting=Keşif Yapma (Maden)
-skill.butchering=Kasaplık
-
-#=====================================================
-#========Add New Stuff Here To Be Sorted Later========
-#=====================================================
-fluid.freshwater=Tatlı Su
-fluid.saltwater=Tuzlu Su
-fluid.lavatfc=Lav
-fluid.hotwater=Kaplıca Suyu
-fluid.beer=Bira
-fluid.cider=Elma Şarabı
-fluid.rum=Rom
-fluid.ryewhiskey=Çavdar Viskisi
-fluid.sake=Süt İçkisi
-fluid.vodka=Votka
-fluid.whiskey=Viski
-fluid.cornwhiskey=Mısır Viskisi
-fluid.milk=Süt
-fluid.milkcurdled=Pıhtılaşmış Süt
-fluid.limewater=Kireçli Su
-fluid.tannin=Tanen
-fluid.vinegar=Sirke
-fluid.brine=Salamura
 
 gui.showtaste=§8Tadı: (Basılı Tut §Fl-Ctrl§8)
 gui.taste=§8Tadı:
@@ -2383,44 +2398,91 @@ gui.taste.6=Çok
 gui.taste.7=Aşırı
 gui.taste.8=İnanılmaz
 
-gui.skill.novice=Acemi
-gui.skill.adept=Becerikli
-gui.skill.expert=Uzman
-gui.skill.master=Usta
-gui.skillpage=Yetenekler
-tile.MetalTrapDoor.name=Tuzak Kapı
-item.Mud Brick.name=Çamur Tuğla
-item.Wet Mud Brick.name=Islak Çamur Tuğla
-gui.overburdened=*Aşırı Yüklenilmiş*
-gui.slot=Slot
-gui.slot.back=Sırt
 word.pickled=Sirkelenmiş
 word.brined=Salamura
 word.cooked=Pişmiş
 word.salted=Tuzlanmış
 word.smoked=Tütsülenmiş
 word.dried=Kurutulmuş
-gui.barrel.pickling=Sirkeleme
-gui.barrel.brining=Salamura Yapma
-tile.Vessel.name=Büyük Vazo
-tile.Grill.name=Izgara
+
 food.cooked.rare=Çiğ
 food.cooked.medrare=Az Çiğ
-food.cooked.med=Orta Çiğ
-food.cooked.medwell=Biraz Çiğ
-food.cooked.well=Çok Az Çiğ
-food.cooked.0=Çok Az Pişmiş
-food.cooked.1=Az Pişmiş
-food.cooked.2=Orta Pişmiş
-food.cooked.3=Çok Pişmiş
-food.cooked.4=Aşırı Pişmiş
-gui.FoodPrep.Sandwich=Ekmek Arası
-gui.FoodPrep.Salad=Salata
-item.Sandwich.name=Ekmek Arası
-item.Salad.name=Salata
-item.ClayBowl.Ceramic Bowl.name=Çanak
-item.ClayBowl.Clay Bowl.name=Kil Çanak
-item.Sugar.name=Şeker
-item.Sea Weed.name=Su Yosunu
-word.stage1=Aşama 1
-word.stage2=Aşama 2
+food.cooked.med=Orta
+food.cooked.medwell=Orta iyi
+food.cooked.well=İyi Pişmiş
+food.cooked.0=Çok Hafif
+food.cooked.1=Hafif
+food.cooked.2=Orta
+food.cooked.3=Koyu
+food.cooked.4=Çok Koyu
+
+gui.Torch.CatchingFire=Yanmaya Başlıyor
+gui.Torch.Lit=Yanıyor
+
+gui.ItemHeat.Liquid=Sıvı
+gui.ItemHeat.Solidified=Donuk
+gui.ItemHeat.Caution=Uyarı!
+gui.ItemHeat.Warming=Isınıyor
+gui.ItemHeat.Hot=Sıcak
+gui.ItemHeat.VeryHot=Çok Sıcak
+gui.ItemHeat.FaintRed=Soluk Kırmızı
+gui.ItemHeat.DarkRed=Koyu Kırmızı
+gui.ItemHeat.BrightRed=Açık Kırmızı
+gui.ItemHeat.Orange=Turuncu
+gui.ItemHeat.Yellow=Sarı
+gui.ItemHeat.YellowWhite=Açık Sarı
+gui.ItemHeat.White=Beyaz
+gui.ItemHeat.BrilliantWhite=Parlak Beyaz
+
+gui.ingot.workable=Çalışılır
+gui.ingot.weldable=Birleştirilir
+gui.ingot.danger=**Tehlike**
+
+gui.milk.fresh=Taze
+gui.milk.old=Eski
+gui.milk.sour=Ekşi
+
+gui.units=Birimler
+
+#== Chat Messages ==
+gui.GoldPan.UseFull=Akan suyun altına tıklanmalı.
+gui.goldpan.overused=Bu alan çok çalışılmış. Maden bulunamaz.
+
+gui.ProPick.Found=Bulundu:
+gui.ProPick.FoundTraces=İzi Bulundu:
+gui.ProPick.FoundSmall=Kuçük Örnek Bulundu:
+gui.ProPick.FoundMedium=Orta Örnek Bulundu:
+gui.ProPick.FoundLarge=Büyük Örnek Bulundu:
+gui.ProPick.FoundVeryLarge=Çok Büyük Örnek Bulundu:
+gui.ProPick.FoundNothing=Önemli Birşey Bulunmadı.
+
+#== Creative Tabs ==
+itemGroup.TFCArmor=(TFC) Zırh
+itemGroup.TFCMaterials=(TFC) Metaryaller
+itemGroup.TFCMisc=(TFC) Çeşitli
+itemGroup.TFCPottery=(TFC) Tanak Çanak
+itemGroup.TFCTools=(TFC) Aletler
+itemGroup.TFCWeapons=(TFC) Silahlar
+itemGroup.TFCDevices=(TFC) Cihazlar
+itemGroup.TFCFoods=(TFC) Yemekle İlgili
+itemGroup.TFCBuilding=(TFC) Yapı Blokları
+itemGroup.TFCDecoration=(TFC) Dekorasyon Blokları
+
+#== Skill GUI ==
+skill.armorsmith=Zırh Demirciliği
+skill.gensmith=Genel Demircilik
+skill.toolsmith=Alet Demirciliği
+skill.weaponsmith=Silah Demirciliği
+skill.agriculture=Tarım
+skill.cooking=Yemek Pişirme
+skill.prospecting=Keşif Yapma (Maden)
+skill.butchering=Kasaplık
+gui.skill.novice=Acemi
+gui.skill.adept=Becerikli
+gui.skill.expert=Uzman
+gui.skill.master=Usta
+gui.skillpage=Yetenekler
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================
