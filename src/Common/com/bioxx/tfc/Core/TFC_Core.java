@@ -1266,6 +1266,7 @@ public class TFC_Core
 				|| isGrassType2(block)
 				|| isGravel(block)
 				|| block == Blocks.glass
+				|| block == Blocks.stained_glass
 				|| block == TFCBlocks.MetalTrapDoor;
 	}
 
