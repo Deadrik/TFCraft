@@ -21,4 +21,5 @@ out
 *.iml
 mods
 asm
-
+.metadata/
+usernamecache.json
