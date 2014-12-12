@@ -101,3 +101,7 @@ jar {
 			'FMLAT': 'tfc_at.cfg'
     )
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2.1'
+}
