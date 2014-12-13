@@ -1,4 +1,4 @@
-﻿#pt_BR
+﻿ #pt_BR
 #Este é o arquivo de configuração pt_BR, baseado no arquivo pt_PT (por Dimeborg e Michael), adaptado por Gil2455526
 
 
@@ -1986,14 +1986,14 @@ tile.Chest.name=Baú
 tile.Bookshelf.name=Estante de Livros
 tile.Workbench.name=Mesa de Trabalho
 tile.ButtonWood.name=Botão de Madeira
-tile.Firepit.name=
-tile.LogPile.name=
-tile.Charcoal.name=
-tile.StoneDetailed.name=
-tile.stoneStairs.name=
-tile.stoneSlabs.name=
-tile.stoneStalac.name=
-tile.WoodConstruct.name=
+tile.Firepit.name=Fogueira
+tile.LogPile.name=Pilha de Madeira
+tile.Charcoal.name=Carvão Vegetal
+tile.StoneDetailed.name=Detalhado
+tile.stoneStairs.name=Escada
+tile.stoneSlabs.name=Laje
+tile.stoneStalac.name=Estalactite
+tile.WoodConstruct.name=Tábua
 tile.MetalTrapDoor.name=Alçapão
 tile.Vessel.name=Vaso grande
 tile.Grill.name=Grelha
@@ -2285,9 +2285,9 @@ gui.Inventory=Inventário
 gui.ClearSlot=Limpe um espaço de saída.
 gui.LogPile=Pilha de Cavacas
 gui.done=Feito
-gui.cancel=
+gui.cancel=Cancelar
 gui.Sluice.Soil=Solo
-gui.Sluice.Overworked=
+gui.Sluice.Overworked=Excesso de Trabalho
 gui.Workbench.Crafting=Criando
 gui.overburdened=* Sobrecarregado *
 gui.slot=Espaço
@@ -2306,9 +2306,9 @@ gui.PotteryBase.Inst0=Agache e §bClique BD§7para colocar objeto.
 gui.PotteryVesselSmall.Inst0=Ou §bClique BD§7para abrir inventário.
 gui.RawHide.Inst0=????
 gui.Barrel.MoreItems=§8Mais... (Segure §fShift§8)
-gui.Nutrient.A=
-gui.Nutrient.B=
-gui.Nutrient.C=
+gui.Nutrient.A=Nutriente A
+gui.Nutrient.B=Nutriente B
+gui.Nutrient.C=Nutriente C
 
 gui.Size.Tiny=Minúsculo
 gui.Size.VerySmall=Muito Pequeno
