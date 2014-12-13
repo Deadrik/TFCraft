@@ -62,6 +62,13 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 	@Override
 	public void updateEntity()
 	{
+		
+		if(!worldObj.isRemote && !isValid() && straw > 0)
+		{
+			worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
+		
 		TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 		//If there are no logs for burning then we dont need to tick at all
 
@@ -169,36 +176,22 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 	{
 		if(wood < 8)
 		{
-			if (!player.capabilities.isCreativeMode)
+			for (int i = 4; i < 12; i++)
 			{
-				for (int i = 4; i < 12; i++)
+				if (this.inventory[i] == null)
 				{
-					if (this.inventory[i] == null)
+					wood++;
+					ItemStack _is = is.copy();
+					_is.stackSize = 1;
+					this.setInventorySlotContents(i, _is);
+					if(!player.capabilities.isCreativeMode)
 					{
-						wood++;
-						ItemStack _is = is.copy();
 						is.stackSize--;
-						_is.stackSize = 1;
-						this.setInventorySlotContents(i, _is);
-						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 						break;
 					}
 				}
-			}
-			else
-			{
-				for (int i = 4; i < 12; i++)
-				{
-					if (this.inventory[i] == null)
-					{
-						wood++;
-						ItemStack _is = is.copy();
-						_is.stackSize = 1;
-						this.setInventorySlotContents(i, _is);
-					}
-				}
-				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-			}
+			}				
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
 	}
 

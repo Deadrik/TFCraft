@@ -104,7 +104,6 @@ import com.bioxx.tfc.Render.Blocks.RenderMetalSheet;
 import com.bioxx.tfc.Render.Blocks.RenderMetalTrapDoor;
 import com.bioxx.tfc.Render.Blocks.RenderNestBox;
 import com.bioxx.tfc.Render.Blocks.RenderOre;
-import com.bioxx.tfc.Render.Blocks.RenderPottery;
 import com.bioxx.tfc.Render.Blocks.RenderSmoke;
 import com.bioxx.tfc.Render.Blocks.RenderSmokeRack;
 import com.bioxx.tfc.Render.Blocks.RenderStand;
@@ -248,7 +247,6 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.loomRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderLoom());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.standRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderStand());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.NestBoxRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderNestBox());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.potteryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderPottery());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.tuyereRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderTuyere());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.crucibleRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderCrucible());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.waterPlantRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
