@@ -171,36 +171,6 @@ public class BlockCrop extends BlockContainer
 		TECrop te = (TECrop) world.getTileEntity(x, y, z);
 		CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
 
-		/*if(crop != null && !world.isRemote)
-		{
-			if(crop.cropId == 4 && te.growth >= 7)
-			{
-				te.onHarvest(world, entityplayer, false);
-				te.growth = 4;
-				world.markBlockForUpdate(i, j, k);
-				te.broadcastPacketInRange();
-				return true;
-			}
-			else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 5 && te.growth < 6)
-			{
-				te.onHarvest(world, entityplayer, false);
-				te.growth = 3;
-				world.markBlockForUpdate(i, j, k);
-				te.broadcastPacketInRange();
-				return true;
-			}
-			else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 6)
-			{
-				te.onHarvest(world, entityplayer, false);
-				te.growth = 3;
-				world.markBlockForUpdate(i, j, k);
-				te.broadcastPacketInRange();
-				return true;
-			}
-
-			te.broadcastPacketInRange();
-		}*/
-
 		if(TFCOptions.enableDebugMode)
 		{
 			System.out.println("Crop ID: " + te.cropId);
