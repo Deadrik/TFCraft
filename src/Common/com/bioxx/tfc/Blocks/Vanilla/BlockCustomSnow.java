@@ -20,6 +20,7 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.TileEntities.TEPottery;
 
 public class BlockCustomSnow extends BlockTerra
 {
@@ -39,6 +40,14 @@ public class BlockCustomSnow extends BlockTerra
 			return false;
 		if (block == TFCBlocks.Leaves || block == TFCBlocks.Leaves2)
 			return true;
+		if(block == TFCBlocks.Pottery && World.doesBlockHaveSolidTopSurface(world, i, j-1, k))
+		{
+			TEPottery te = (TEPottery)world.getTileEntity(i, j - 1, k);
+			if(te != null)
+			{
+				return !te.isLit();
+			}
+		}		
 		if (World.doesBlockHaveSolidTopSurface(world, i, j-1, k))
 			return true;
 		
