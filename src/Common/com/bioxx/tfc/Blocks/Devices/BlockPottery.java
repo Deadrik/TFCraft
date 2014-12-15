@@ -189,10 +189,10 @@ public class BlockPottery extends BlockTerraContainer
 	}
 
 	@Override
-	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
+	public void breakBlock(World world, int x, int y, int z, Block block, int metadata)
 	{
 		Eject(world, x, y, z);
-		return world.setBlockToAir(x, y, z);
+		super.breakBlock(world, x, y, z, block, metadata);
 	}
 
 	@Override

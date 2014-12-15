@@ -63,24 +63,15 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 	public void updateEntity()
 	{
 		
-		if(!worldObj.isRemote && !isValid() && straw > 0)
-		{
-			worldObj.setBlockToAir(xCoord, yCoord, zCoord);
-			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		}
-		
 		TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
-		//If there are no logs for burning then we dont need to tick at all
 
-		if(!worldObj.isRemote && straw > 0 && wood < 8)
+		if(!worldObj.isRemote && straw > 0)
 		{
-			//If there is a fire nearby and the pitkiln is not valid
-			//eject all items and remove the TiteEntity
-			if(isFireNear())
+			//If the pit kiln is not valid or there is a fire near an incomplete
+			//pit kiln eject all items and set the block to air
+			if(!isValid() || (wood < 8 && isFireNear()))
 			{
-				ejectContents();
-				worldObj.removeTileEntity(xCoord, yCoord, zCoord);
-				worldObj.setBlock(xCoord, yCoord, zCoord, Blocks.air);
+				worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 		}
@@ -97,7 +88,9 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 			if(blockAbove != Blocks.fire && TFC_Time.getTotalTicks() - burnStart < TFC_Time.hourLength * TFCOptions.pitKilnBurnTime)
 			{
 				if ((blockAbove.isAir(worldObj, xCoord, yCoord + 1, zCoord) || worldObj.getBlock(xCoord, yCoord + 1, zCoord).getMaterial().getCanBurn()) && isValid())
+				{
 					worldObj.setBlock(xCoord, yCoord + 1, zCoord, Blocks.fire);
+				}
 				else
 				{
 					wood = 0;
@@ -105,6 +98,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 					inventory[8] = null;inventory[9] = null;inventory[10] = null;inventory[11] = null;
 					straw = 0;
 					burnStart = 0;
+					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				}
 			}
 
