@@ -161,6 +161,8 @@ public class BlockLogPile extends BlockTerraContainer
 			TELogPile TELogPile;
 			TELogPile = (TELogPile)world.getTileEntity(x, y, z);
 			TELogPile.ejectContents();
+			//Prevent a player trying to add wood to a removed logpile
+			TELogPile.forceCloseContainers();
 			world.removeTileEntity(x, y, z);
 		}
 	}
@@ -187,7 +189,6 @@ public class BlockLogPile extends BlockTerraContainer
 	public void breakBlock(World world, int x, int y, int z, Block block, int metadata)
 	{
 		Eject(world, x, y, z);
-		super.breakBlock(world, x, y, z, block, metadata);
 	}
 
 	@Override

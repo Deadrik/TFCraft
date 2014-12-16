@@ -1,6 +1,8 @@
 package com.bioxx.tfc.TileEntities;
 
 import java.util.ArrayDeque;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Queue;
 
 import net.minecraft.block.Block;
@@ -19,13 +21,11 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Containers.ContainerLogPile;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Vector3f;
 import com.bioxx.tfc.api.TFCOptions;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TELogPile extends TileEntity implements IInventory
 {
@@ -55,23 +55,6 @@ public class TELogPile extends TileEntity implements IInventory
 		}
 	}
 
-	public ItemStack takeLog(int slot)
-	{
-		if(storage[slot] == null)
-			return null;
-		else
-		{
-			ItemStack is = storage[slot].copy();
-			is.stackSize = 1;
-			storage[slot].stackSize--;
-			if(storage[slot].stackSize == 0)
-				storage[slot] = null;
-			if(this.getNumberOfLogs() == 0)
-				worldObj.setBlockToAir(xCoord, yCoord, zCoord);
-			return is;
-		}
-	}
-
 	public void clearContents()
 	{
 		storage[0] = null;
@@ -84,11 +67,6 @@ public class TELogPile extends TileEntity implements IInventory
 	public void closeInventory()
 	{
 		--logPileOpeners;
-		if(logPileOpeners == 0 && getNumberOfLogs() == 0)
-		{
-			extinguishFire();
-			worldObj.setBlockToAir(xCoord, yCoord, zCoord);
-		}
 	}
 
 	public boolean contentsMatch(int index, ItemStack is)
@@ -146,6 +124,31 @@ public class TELogPile extends TileEntity implements IInventory
 			}
 		}
 		extinguishFire();
+	}
+	
+	/**
+	 * Closes all open containers for this logpile
+	 */
+	public void forceCloseContainers()
+	{
+		float f = 5.0F;
+		List list = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(this.xCoord - f, this.yCoord - f, this.zCoord - f, this.xCoord + 1 + f, this.yCoord + 1 + f, this.zCoord + 1 + f));
+		Iterator iterator = list.iterator();
+
+		while (iterator.hasNext())
+		{
+			EntityPlayer entityplayer = (EntityPlayer)iterator.next();
+
+			if (entityplayer.openContainer instanceof ContainerLogPile)
+			{
+				if(((ContainerLogPile)entityplayer.openContainer).isLinkedLogPile(this))
+				{
+					entityplayer.closeScreen();
+				}
+			}
+		}
+		
+		logPileOpeners = 0;
 	}
 
 	@Override
@@ -216,8 +219,8 @@ public class TELogPile extends TileEntity implements IInventory
 				worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 			}
 		}
-		
-		if(getNumberOfLogs() == 0)
+	
+		if(getNumberOfLogs() == 0 && logPileOpeners == 0)
 		{
 			worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 		}
