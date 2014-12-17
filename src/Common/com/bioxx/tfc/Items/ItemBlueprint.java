@@ -6,7 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.Facing;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
@@ -74,12 +73,35 @@ public class ItemBlueprint extends ItemTerra
 
 		if(!stack.hasTagCompound() || !stack.stackTagCompound.getBoolean(tag_completed))
 		{
-			TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
+			BitSet data = ((TEDetailed) world.getTileEntity(x, y, z)).data;
 
-			byte[] data = TEDetailed.toByteArray(te.data);
+			Vec3 angles = Vec3.createVectorHelper(0, 0, 0);
+			int s = side;
+			if (s <= 1) {
+				int f = (int)player.rotationYaw;
+				f = (f + (f < 0 ? 360 : 0) + 45) % 360 / 90;
+				f += (f == 1 ? 4 : (f > 1 ? 1 : 2));
+				if (f > 1 && f < 6) {
+					s = f;
+				}
+			}
+			switch (s) {
+				default:
+					break;
+				case 3:
+					angles.yCoord = 180;
+					break;
+				case 4:
+					angles.yCoord = 270;
+					break;
+				case 5:
+					angles.yCoord = 90;
+					break;
+			}
+			data = TEDetailed.turnCube(data, (int)angles.xCoord, (int)angles.yCoord, (int)angles.zCoord);
 
 			NBTTagCompound nbt = new NBTTagCompound();
-			nbt.setByteArray(tag_data, data);
+			nbt.setByteArray(tag_data, TEDetailed.toByteArray(data));
 
 			stack.setTagCompound(nbt);
 		}
@@ -118,7 +140,7 @@ public class ItemBlueprint extends ItemTerra
 				}
 			}
 			switch (s) {
-				default:case 2:case 0:case 1:
+				default:
 					break;
 				case 3:
 					angles.yCoord = 180;
