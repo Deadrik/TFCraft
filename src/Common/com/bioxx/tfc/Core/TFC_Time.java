@@ -8,8 +8,6 @@ import com.bioxx.tfc.api.TFCOptions;
 
 public class TFC_Time
 {
-	private static World worldObj;
-
 	public static String[] SEASONS = { StatCollector.translateToLocal("gui.Calendar.EarlySpring"),
 		StatCollector.translateToLocal("gui.Calendar.Spring"), StatCollector.translateToLocal("gui.Calendar.LateSpring"),
 		StatCollector.translateToLocal("gui.Calendar.EarlySummer"), StatCollector.translateToLocal("gui.Calendar.Summer"),
@@ -100,32 +98,33 @@ public class TFC_Time
 		currentYear = getYear();
 	}
 
-	public static String getDateString(long ticks)
-	{
-		int tDays = (int) (ticks/dayLength);
-		int div = tDays/daysInMonth;
-		int rem = tDays-(div*daysInMonth);
-		int d = getDayOfMonth((int)(ticks/hourLength));
-		int tMonths = (int) (ticks/ticksInMonth);
-		div = tMonths/12;
-		rem = tMonths%12;
-		String m = TFC_Time.MONTHS[rem];
-		String date = d + " " + m + ", " + (1000+div);
-
-		return date;
-	}
-
 	public static String getDateStringFromHours(int tHours)
 	{
-		int tDays = tHours/hoursInDay;
-		int div = tDays/daysInMonth;
-		int rem = 0;
-		int d = getDayOfMonth(tDays);
-		int tMonths = div;
-		div = tMonths/12;
-		rem = tMonths%12;
-		String m = TFC_Time.MONTHS[rem];
-		String date = d + " " + m + ", " + (1000+div);
+		int tDays = tHours / hoursInDay;
+
+		int day = tDays % daysInMonth;
+		int tMonths = tDays / daysInMonth;
+
+		int month = tMonths % 12;
+		int year = tMonths / 12;
+
+		// time messed up by another mod?
+		if (tHours < 0) {
+		    day += daysInMonth - 1;  // -1 to compensate negative hour
+		    month += 12 - 1;  // -1 to compensate daysInMonth added above
+		    year -= 1;  // to compensate the 12 months added above
+		}
+
+		// year changes at January, not March
+		if (month >= January) {
+		    year += 1;
+		}
+
+		int d = day + 1;
+		String m = TFC_Time.MONTHS[month];
+		int y = 1000 + year;
+
+		String date = d + " " + m + ", " + y;
 
 		return date;
 	}
@@ -255,12 +254,6 @@ public class TFC_Time
 		return h;
 	}
 
-// TODO do we need this? same as getHour(), never used
-	public static int getHourOfDayFromTotalHours()
-	{
-		return  getHourOfDayFromTotalHours((int)getTotalHours());
-	}
-
 	public static int getHourOfDayFromTotalHours(int th)
 	{
 		int h = (th + 6) % hoursInDay;  //gives us the remainder, days start at 6:00
@@ -347,7 +340,7 @@ public class TFC_Time
 
 	public static int getMonthsSinceDay(int totalDay)
 	{
-		int days = (int) (TFC_Time.getTotalDays() - totalDay);
+		int days = TFC_Time.getTotalDays() - totalDay;
 		return days / TFC_Time.daysInMonth;
 	}
 

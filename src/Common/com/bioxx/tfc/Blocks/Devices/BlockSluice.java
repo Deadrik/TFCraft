@@ -193,16 +193,16 @@ public class BlockSluice extends BlockContainer
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
-		Block var5 = par1World.getBlock(par2, par3, par4);
+		Block block = world.getBlock(x, y, z);
 
-		int dir = getDirectionFromMetadata(par1World.getBlockMetadata(par2, par3, par4));
+		int dir = getDirectionFromMetadata(world.getBlockMetadata(x, y, z));
 		int[] offset = headBlockToFootBlockMap[dir];
 
-		boolean stay = (canStay(par1World, par2,par3,par4,false,dir) && 
-				canStay(par1World, par2+offset[0],par3,par4+offset[1],true,dir)) && 
-				(var5 == Blocks.air || var5.getMaterial().isReplaceable());
+		boolean stay = (canStay(world, x, y, z, false, dir) &&
+				canStay(world, x+offset[0],y,z+offset[1],true,dir)) && 
+				(block.isAir(world, x, y, z) || block.getMaterial().isReplaceable());
 
 		return stay;
 	}
@@ -214,8 +214,8 @@ public class BlockSluice extends BlockContainer
 		Block footBlock = world.getBlock(i+offset[0],j,k+offset[1]);
 		boolean stay = (canStay(world, i,j,k,false,dir) && 
 				canStay(world, i+offset[0],j,k+offset[1],true,dir)) && 
-				(topBlock == Blocks.air || topBlock.getMaterial().isReplaceable()) &&
-				(footBlock == Blocks.air || footBlock.getMaterial().isReplaceable());
+				(topBlock.isAir(world, i, j, k) || topBlock.getMaterial().isReplaceable()) &&
+				(footBlock.isAir(world, i+offset[0],j,k+offset[1]) || footBlock.getMaterial().isReplaceable());
 
 		return stay;
 	}

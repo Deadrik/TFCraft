@@ -14,6 +14,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 
 public class ItemCustomPotion extends ItemPotion
@@ -25,6 +26,7 @@ public class ItemCustomPotion extends ItemPotion
 	public ItemCustomPotion()
 	{
 		super();
+		this.setCreativeTab(TFCTabs.TFCFoods);
 	}
 
 	@Override

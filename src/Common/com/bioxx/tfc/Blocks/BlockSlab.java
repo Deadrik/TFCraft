@@ -215,6 +215,9 @@ public class BlockSlab extends BlockPartial
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
 		TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
+		if(te == null)
+			return false;
+
 		long data = te.extraData;
 
 		switch(side)

@@ -28,6 +28,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.storage.WorldInfo;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -320,7 +321,7 @@ public class TFC_Core
 	{
 		return isRawStone( block ) || isOreStone( block );
 	}
-	
+
 	public static boolean isCobbleStone(Block block)
 	{
 		return block == TFCBlocks.StoneIgExCobble
@@ -819,7 +820,7 @@ public class TFC_Core
 			if(te.TopExists())
 				return true;
 		}
-		return false;
+		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.UP);
 	}
 
 	public static boolean isBottomFaceSolid(World world, int x, int y, int z)
@@ -839,7 +840,7 @@ public class TFC_Core
 			if(te.BottomExists())
 				return true;
 		}
-		return false;
+		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.DOWN);
 	}
 
 	public static boolean isNorthFaceSolid(World world, int x, int y, int z)
@@ -860,7 +861,7 @@ public class TFC_Core
 			if(te.NorthExists())
 				return true;
 		}
-		return false;
+		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.NORTH);
 	}
 
 	public static boolean isSouthFaceSolid(World world, int x, int y, int z)
@@ -880,7 +881,7 @@ public class TFC_Core
 			if(te.SouthExists())
 				return true;
 		}
-		return false;
+		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.SOUTH);
 	}
 
 	public static boolean isEastFaceSolid(World world, int x, int y, int z)
@@ -899,7 +900,7 @@ public class TFC_Core
 			if(te.EastExists())
 				return true;
 		}
-		return false;
+		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.EAST);
 	}
 
 	public static boolean isWestFaceSolid(World world, int x, int y, int z)
@@ -919,7 +920,7 @@ public class TFC_Core
 			if(te.WestExists())
 				return true;
 		}
-		return false;
+		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.WEST);
 	}
 
 	public static boolean isOreIron(ItemStack is)
@@ -1025,14 +1026,14 @@ public class TFC_Core
 
 		}
 	}
-	
+
 	//Takes a small float in the range of 0.5 to 1.5. The resulting float would be of the form [0 0111111 [the byte] 0..0], such that the byte returned
 	//is the only unknown value
 	public static byte getByteFromSmallFloat(float f){
 		MathHelper.clamp_float(f, 0.5f, 1.5f);
 		return (byte)((Float.floatToIntBits(f) >> 16) & 0xff);
 	}
-	
+
 	public static float getSmallFloatFromByte(byte b)
 	{
 		return ByteBuffer.wrap(new byte[]{(byte)63, b,(byte)(0),(byte)0}).getFloat();
@@ -1265,6 +1266,7 @@ public class TFC_Core
 				|| isGrassType2(block)
 				|| isGravel(block)
 				|| block == Blocks.glass
+				|| block == Blocks.stained_glass
 				|| block == TFCBlocks.MetalTrapDoor;
 	}
 

@@ -3,12 +3,12 @@ package com.bioxx.tfc;
 import java.util.ArrayList;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.EnumHelper;
@@ -1020,7 +1020,7 @@ public class TFCItems
 		Coal = new ItemCoal().setUnlocalizedName("coal");
 		Stick = new ItemStick().setFull3D().setUnlocalizedName("stick");
 		Bow = new ItemCustomBow().setUnlocalizedName("bow").setTextureName("bow");
-		//Items.bow = (ItemBow) Bow;
+		Items.bow = (ItemBow) Bow;
 		Arrow = new ItemArrow().setUnlocalizedName("arrow").setCreativeTab(TFCTabs.TFCWeapons);
 		Dye = new ItemDyeCustom().setUnlocalizedName("dyePowder").setTextureName("dye_powder").setCreativeTab(TFCTabs.TFCMaterials);
 		GlassBottle = new ItemGlassBottle().setUnlocalizedName("Glass Bottle");
@@ -1588,7 +1588,7 @@ public class TFCItems
 		JuteFibre = new ItemTerra().setFolder("plants/").setUnlocalizedName("Jute Fibre").setCreativeTab(TFCTabs.TFCMaterials);
 
 		Items.reeds.setCreativeTab(null);
-		Reeds = new ItemReeds().setUnlocalizedName("Reeds").setCreativeTab(CreativeTabs.tabMaterials).setTextureName("reeds");
+		Reeds = new ItemReeds().setUnlocalizedName("Reeds").setCreativeTab(TFCTabs.TFCMaterials).setTextureName("reeds");
 		MetalLock = new ItemTerra().setUnlocalizedName("Metal Lock").setCreativeTab(TFCTabs.TFCMisc);
 		MudBrick = new ItemMudBrick().setUnlocalizedName("Mud Brick").setCreativeTab(TFCTabs.TFCMaterials).setTextureName("Mud Brick Base");
 
@@ -1687,11 +1687,11 @@ public class TFCItems
 		Cheese = new ItemFoodTFC(EnumFoodGroup.Dairy, 0, 10, 20, 0, 35).setDecayRate(0.5f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Cheese");
 
 		//Grains
-		WheatGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 5, 20).setUnlocalizedName("Wheat Grain");
-		BarleyGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 10, 20).setUnlocalizedName("Barley Grain");
-		OatGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 5, 20).setUnlocalizedName("Oat Grain");
-		RyeGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 15, 0, 5, 20).setUnlocalizedName("Rye Grain");
-		RiceGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 5, 20).setUnlocalizedName("Rice Grain");
+		WheatGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 5, 20).setDecayRate(0.5f).setUnlocalizedName("Wheat Grain");
+		BarleyGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 10, 20).setDecayRate(0.5f).setUnlocalizedName("Barley Grain");
+		OatGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 5, 20).setDecayRate(0.5f).setUnlocalizedName("Oat Grain");
+		RyeGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 15, 0, 5, 20).setDecayRate(0.5f).setUnlocalizedName("Rye Grain");
+		RiceGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 5, 20).setDecayRate(0.5f).setUnlocalizedName("Rice Grain");
 		MaizeEar = new ItemFoodTFC(EnumFoodGroup.Grain, 25, 0, 0, 5, 20, true).setUnlocalizedName("Maize Ear");
 
 		WheatWhole = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 5, 20, false, false).setFolder("food/").setUnlocalizedName("Wheat Whole");
@@ -1804,7 +1804,7 @@ public class TFCItems
 		SeedsSquash = new ItemCustomSeeds(16).setUnlocalizedName("Seeds Squash");
 		SeedsJute = new ItemCustomSeeds(17).setUnlocalizedName("Seeds Jute");
 		SeedsSugarcane = new ItemCustomSeeds(18).setUnlocalizedName("Seeds Sugarcane");
-		SeedsHemp = new ItemCustomSeeds(22).setUnlocalizedName("Seeds Hemp");
+		//SeedsHemp = new ItemCustomSeeds(22).setUnlocalizedName("Seeds Hemp");
 
 
 
@@ -2709,7 +2709,7 @@ public class TFCItems
 		GameRegistry.registerItem(SeedsGarlic, SeedsGarlic.getUnlocalizedName());
 		GameRegistry.registerItem(SeedsCarrot, SeedsCarrot.getUnlocalizedName());
 		GameRegistry.registerItem(SeedsSugarcane, SeedsSugarcane.getUnlocalizedName());
-		GameRegistry.registerItem(SeedsHemp, SeedsHemp.getUnlocalizedName());
+		//GameRegistry.registerItem(SeedsHemp, SeedsHemp.getUnlocalizedName());
 		GameRegistry.registerItem(SeedsTomato, SeedsTomato.getUnlocalizedName());
 		GameRegistry.registerItem(SeedsYellowBellPepper, SeedsYellowBellPepper.getUnlocalizedName());
 		GameRegistry.registerItem(SeedsRedBellPepper, SeedsRedBellPepper.getUnlocalizedName());

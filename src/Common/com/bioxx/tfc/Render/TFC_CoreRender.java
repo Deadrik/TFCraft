@@ -81,18 +81,30 @@ public class TFC_CoreRender
 		return true;
 	}
 
+	private static RenderBlocksLightCache renderer;
 	public static boolean renderBlockStairs(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
-		boolean breaking = renderblocks.overrideBlockTexture != null;
-		
-		int var5 = renderblocks.blockAccess.getBlockMetadata(x, y, z);
-		int var6 = var5 & 3;
+		if(renderer == null)
+			renderer = new RenderBlocksLightCache(renderblocks);
+		else
+			renderer.update(renderblocks);
+
+		// Capture full block lighting data...
+		renderer.disableRender();
+		renderer.setRenderAllFaces(true);
+		renderer.setRenderBounds(0,0,0,1,1,1);
+		renderer.renderStandardBlock(block, x, y, z);
+		renderer.setRenderAllFaces(false);
+		renderer.enableRender();
+
+		int meta = renderblocks.blockAccess.getBlockMetadata(x, y, z);
+		long rvmeta = meta & 7;
 		float var7 = 0.0F;
 		float var8 = 0.5F;
 		float var9 = 0.5F;
 		float var10 = 1.0F;
 
-		if ((var5 & 4) != 0)
+		if ((meta & 8) != 0)
 		{
 			var7 = 0.5F;
 			var8 = 1.0F;
@@ -104,41 +116,55 @@ public class TFC_CoreRender
 		if(te.TypeID <= 0)
 			return false;
 
+		rvmeta = te.extraData;
 		int type = te.TypeID;
-		int meta = te.MetaID;
-		IIcon tex = Block.getBlockById(type).getIcon(0, meta);
-		if(!breaking)
-		{
-			//ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
-			renderblocks.overrideBlockTexture = tex;
-		}
-		renderblocks.renderAllFaces = true;
-		renderblocks.setRenderBounds(0.0F, var7, 0.0F, 1.0F, var8, 1.0F);
-		renderblocks.renderStandardBlock(block, x, y, z);
+		int temeta = te.MetaID;
+		IIcon myTexture = renderblocks.overrideBlockTexture == null ? Block.getBlockById(te.TypeID).getIcon(0, te.MetaID) : renderblocks.overrideBlockTexture;
 
-		if (var6 == 0)
+		if ((rvmeta & 1) == 0)
 		{
-			renderblocks.setRenderBounds(0.5F, var9, 0.0F, 1.0F, var10, 1.0F);
-			renderblocks.renderStandardBlock(block, x, y, z);
+			renderer.setRenderBounds(0.0F, 0.5F, 0.5F, 0.5F, 1.0F, 1.0F);
+			renderer.renderCachedBlock(block, x, y, z, myTexture);
 		}
-		else if (var6 == 1)
+		if ((rvmeta & 2) == 0)
 		{
-			renderblocks.setRenderBounds(0.0F, var9, 0.0F, 0.5F, var10, 1.0F);
-			renderblocks.renderStandardBlock(block, x, y, z);
+			renderer.setRenderBounds(0.5F, 0.5F, 0.0F, 1.0F, 1.0F, 0.5F);
+			renderer.renderCachedBlock(block, x, y, z, myTexture);
 		}
-		else if (var6 == 2)
+		if ((rvmeta & 4) == 0)
 		{
-			renderblocks.setRenderBounds(0.0F, var9, 0.5F, 1.0F, var10, 1.0F);
-			renderblocks.renderStandardBlock(block, x, y, z);
+			renderer.setRenderBounds(0.0F, 0.5F, 0.0F, 0.5F, 1.0F, 0.5F);
+			renderer.renderCachedBlock(block, x, y, z, myTexture);
 		}
-		else if (var6 == 3)
+		if ((rvmeta & 8) == 0)
 		{
-			renderblocks.setRenderBounds(0.0F, var9, 0.0F, 1.0F, var10, 0.5F);
-			renderblocks.renderStandardBlock(block, x, y, z);
+			renderer.setRenderBounds(0.5F, 0.5F, 0.5F, 1.0F, 1.0F, 1.0F);
+			renderer.renderCachedBlock(block, x, y, z, myTexture);
 		}
-		renderblocks.clearOverrideBlockTexture();
-		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-		renderblocks.renderAllFaces = false;
+
+		if ((rvmeta & 16) == 0)
+		{
+			renderer.setRenderBounds(0.0F, 0.0F, 0.5F, 0.5F, 0.5F, 1.0F);
+			renderer.renderCachedBlock(block, x, y, z, myTexture);
+		}
+		if ((rvmeta & 32) == 0)
+		{
+			renderer.setRenderBounds(0.5F, 0.0F, 0.0F, 1.0F, 0.5F, 0.5F);
+			renderer.renderCachedBlock(block, x, y, z, myTexture);
+		}
+		if ((rvmeta & 64) == 0)
+		{
+			renderer.setRenderBounds(0.0F, 0.0F, 0.0F, 0.5F, 0.5F, 0.5F);
+			renderer.renderCachedBlock(block, x, y, z, myTexture);
+		}
+		if ((rvmeta & 128) == 0)
+		{
+			renderer.setRenderBounds(0.5F, 0.0F, 0.5F, 1.0F, 0.5F, 1.0F);
+			renderer.renderCachedBlock(block, x, y, z, myTexture);
+		}
+
+		renderer.clearOverrideBlockTexture();
+		renderer.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		return true;
 	}
 

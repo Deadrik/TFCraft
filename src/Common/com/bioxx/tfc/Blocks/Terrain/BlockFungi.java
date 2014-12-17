@@ -3,10 +3,6 @@ package com.bioxx.tfc.Blocks.Terrain;
 import java.util.List;
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockMushroom;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -17,6 +13,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.Constant.Global;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -31,11 +33,13 @@ public class BlockFungi extends BlockMushroom
 		float var3 = 0.2F;
 		this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var3 * 2.0F, 0.5F + var3);
 		this.setTickRandomly(true);
+		this.setCreativeTab(TFCTabs.TFCDecoration);
 	}
 
 	/**
 	 * Gets the block's texture. Args: side, meta
 	 */
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int par1, int par2)
 	{
@@ -43,6 +47,7 @@ public class BlockFungi extends BlockMushroom
 		return this.icons[par2];
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register)
 	{
@@ -57,6 +62,7 @@ public class BlockFungi extends BlockMushroom
 	/**
 	 * Determines the damage on the item the block drops. Used in cloth and wood.
 	 */
+	@Override
 	public int damageDropped(int par1)
 	{
 		return par1;
@@ -65,6 +71,7 @@ public class BlockFungi extends BlockMushroom
 	/**
 	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
 	 */
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item item, CreativeTabs tab, List list)
 	{

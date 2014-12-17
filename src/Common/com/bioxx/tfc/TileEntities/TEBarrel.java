@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidContainerItem;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
@@ -215,10 +216,6 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			storage[i] = is;
 			if(i == 0)
 			{
-				if(storage[0] == null)
-					System.out.println("Setting input to null" + " : " + worldObj.isRemote);
-				else
-					System.out.println("Setting input to "+storage[0].getDisplayName() + " : " + worldObj.isRemote);
 				ProcessItems();
 				if(!getSealed())
 					this.unsealtime = (int)TFC_Time.getTotalHours();
@@ -297,6 +294,15 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				return FluidContainerRegistry.drainFluidContainer(is);
 			}
 		}
+		else if(is.getItem() instanceof IFluidContainerItem)
+		{
+			FluidStack isfs = ((IFluidContainerItem) is.getItem()).getFluid(is);
+			if(isfs != null && addLiquid(isfs))
+			{
+				((IFluidContainerItem) is.getItem()).drain(is, is.getMaxDamage(), true);
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			}
+		}
 		return is;
 	}
 
@@ -321,6 +327,17 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				}
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				return out;
+			}
+		}
+		else if(fluid != null && is.getItem() instanceof IFluidContainerItem)
+		{
+			FluidStack isfs = ((IFluidContainerItem) is.getItem()).getFluid(is);
+			if(isfs == null || fluid.isFluidEqual(isfs))
+			{
+				fluid.amount -= ((IFluidContainerItem) is.getItem()).fill(is, fluid, true);
+				if(fluid.amount == 0)
+					fluid = null;
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 		}
 		return is;
@@ -643,7 +660,6 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				int count = 1;
 				while(this.getInputStack().stackSize > getInputStack().getMaxStackSize())
 				{
-					int ss = getInputStack().stackSize;
 					ItemStack is = getInputStack().splitStack(getInputStack().getMaxStackSize());
 					if(count < this.storage.length && this.getStackInSlot(count) == null)
 					{
@@ -692,12 +708,31 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 						}
 					}
 				}
+				else if(container != null && container.getItem() instanceof IFluidContainerItem)
+				{
+					FluidStack isfs = ((IFluidContainerItem)container.getItem()).getFluid(container);
+					if(isfs != null && addLiquid(isfs))
+					{
+						((IFluidContainerItem) container.getItem()).drain(container, container.getMaxDamage(), true);
+					}
+				}
 			}
 			else if(mode == MODE_OUT)
 			{
-				if(FluidContainerRegistry.isEmptyContainer(getInputStack()))
+				ItemStack container = getInputStack();
+				if(FluidContainerRegistry.isEmptyContainer(container))
 				{
 					this.setInventorySlotContents(0, this.removeLiquid(getInputStack()));
+				}
+				else if(container != null && fluid != null && container.getItem() instanceof IFluidContainerItem)
+				{
+					FluidStack isfs = ((IFluidContainerItem)container.getItem()).getFluid(container);
+					if(isfs == null || fluid.isFluidEqual(isfs))
+					{
+						fluid.amount -= ((IFluidContainerItem) container.getItem()).fill(container, fluid, true);
+						if(fluid.amount == 0)
+							fluid = null;
+					}
 				}
 			}
 		}
@@ -727,7 +762,10 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					FluidStack origFS = getFluidStack() != null ? getFluidStack().copy() : null;
 					if(fluid.isFluidEqual(recipe.getResultFluid(origIS, origFS, time)))
 					{
-						fluid.amount -= recipe.getResultFluid(origIS, origFS, time).amount;
+						if(fluid.getFluid() == TFCFluid.BRINE)
+							fluid.amount -= recipe.getResultFluid(origIS, origFS, time).amount * Food.getWeight(origIS);
+						else
+							fluid.amount -= recipe.getResultFluid(origIS, origFS, time).amount;
 					}
 					else
 					{
@@ -743,7 +781,8 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 						if(result != null && result.getItem() instanceof IFood && 
 								(((IFood)result.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable || 
 								((IFood)result.getItem()).getFoodGroup() == EnumFoodGroup.Fruit ||
-								((IFood)result.getItem()).getFoodGroup() == EnumFoodGroup.Protein))
+								((IFood)result.getItem()).getFoodGroup() == EnumFoodGroup.Protein ||
+								((IFood)result.getItem()) == TFCItems.Cheese))
 						{
 							if(!Food.isBrined(result))
 								Food.setBrined(result, true);

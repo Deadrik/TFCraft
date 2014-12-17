@@ -26,6 +26,23 @@ public class Food
 		is.getTagCompound().setTag("Processing Tag", nbt);
 	}
 
+	public static boolean areEqual(ItemStack is1, ItemStack is2)
+	{
+		if(isBrined(is1) != isBrined(is2))
+			return false;
+		if(isPickled(is1) != isPickled(is2))
+			return false;
+		if(isCooked(is1) != isCooked(is2))
+			return false;
+		if(isDried(is1) != isDried(is2))
+			return false;
+		if(isSmoked(is1) != isSmoked(is2))
+			return false;
+		if(isSalted(is1) != isSalted(is2))
+			return false;
+		return true;
+	}
+
 	public static boolean isBrined(ItemStack is)
 	{
 		NBTTagCompound nbt = getProcTag(is);
@@ -147,7 +164,9 @@ public class Food
 	public static float getDecay(ItemStack is)
 	{
 		NBTTagCompound nbt = is.getTagCompound();
-		return nbt.getFloat("foodDecay");
+		if(nbt != null)
+			return nbt.getFloat("foodDecay");
+		else return 0;
 	}
 
 	public static void setDecayTimer(ItemStack is, int value)
@@ -173,7 +192,9 @@ public class Food
 	public static float getWeight(ItemStack is)
 	{
 		NBTTagCompound nbt = is.getTagCompound();
-		return nbt.getFloat("foodWeight");
+		if(nbt != null)
+			return nbt.getFloat("foodWeight");
+		else return 0;
 	}
 
 	public static boolean isDried(ItemStack is)
@@ -255,11 +276,11 @@ public class Food
 
 	public static void adjustFlavor(ItemStack is, Random R)
 	{
-		Food.setSweetMod(is, R.nextInt(16)-8);
-		Food.setSourMod(is, R.nextInt(16)-8);
-		Food.setSaltyMod(is, R.nextInt(16)-8);
-		Food.setBitterMod(is, R.nextInt(16)-8);
-		Food.setSavoryMod(is, R.nextInt(16)-8);
+		Food.setSweetMod(is, R.nextInt(17) - 8);
+		Food.setSourMod(is, R.nextInt(17) - 8);
+		Food.setSaltyMod(is, R.nextInt(17) - 8);
+		Food.setBitterMod(is, R.nextInt(17) - 8);
+		Food.setSavoryMod(is, R.nextInt(17) - 8);
 	}
 
 	public static void setMealSkill(ItemStack is, int val)

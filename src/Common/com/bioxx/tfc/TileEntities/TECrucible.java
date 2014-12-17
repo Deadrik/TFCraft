@@ -145,7 +145,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				Item itemToSmelt = stackToSmelt.getItem();
 				if(itemToSmelt instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(storage[0]))
 				{
-					if(inputTick > 5)
+					if(inputTick > 10)
 					{
 						if(currentAlloy != null && currentAlloy.outputType != null && itemToSmelt == currentAlloy.outputType.MeltedItem)
 						{
@@ -189,7 +189,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			if(currentAlloy != null &&
 					storage[1] != null &&
 					currentAlloy.outputType != null &&
-					outputTick >= 3 &&
+					outputTick >= 2 &&
 					temperature >= TFC_ItemHeat.IsCookable(currentAlloy.outputType))
 			{
 				if(storage[1].getItem() == TFCItems.CeramicMold)
@@ -224,9 +224,9 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 			if(storage[1] != null && storage[1].stackSize <= 0)
 				storage[1].stackSize = 1;
-			if(inputTick > 5)
+			if (inputTick > 10)
 				inputTick = 0;
-			if(outputTick >= 3)
+			if (outputTick >= 2)
 				outputTick = 0;
 		}
 	}

@@ -1,16 +1,17 @@
 package com.bioxx.tfc.Containers;
 
-import com.bioxx.tfc.Containers.Slots.SlotQuiver;
-import com.bioxx.tfc.Core.Player.PlayerInventory;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
+import com.bioxx.tfc.Containers.Slots.SlotQuiver;
 
 public class ContainerQuiver extends ContainerTFC
 {
@@ -19,6 +20,7 @@ public class ContainerQuiver extends ContainerTFC
 	private int posY;
 	private int posZ;
 	public InventoryCrafting containerInv = new InventoryCrafting(this, 4, 2);
+	private ItemStack bagStack = null;
 
 	public ContainerQuiver(InventoryPlayer playerinv, World world, int x, int y, int z)
 	{
@@ -28,6 +30,17 @@ public class ContainerQuiver extends ContainerTFC
 		this.posY = y;
 		this.posZ = z;
 		bagsSlotNum = player.inventory.currentItem;
+		bagStack = player.inventory.getCurrentItem();
+
+		layoutContainer(playerinv, 0, 0);
+
+		if (!world.isRemote)
+			loadBagInventory();
+		this.doItemSaving = true;
+	}
+
+	protected void layoutContainer(IInventory playerInventory, int xSize, int ySize)
+	{
 		this.addSlotToContainer(new SlotQuiver(containerInv, 0, 53, 8));
 		this.addSlotToContainer(new SlotQuiver(containerInv, 1, 71, 8));
 		this.addSlotToContainer(new SlotQuiver(containerInv, 2, 89, 8));
@@ -36,11 +49,23 @@ public class ContainerQuiver extends ContainerTFC
 		this.addSlotToContainer(new SlotQuiver(containerInv, 5, 71, 26));
 		this.addSlotToContainer(new SlotQuiver(containerInv, 6, 89, 26));
 		this.addSlotToContainer(new SlotQuiver(containerInv, 7, 107, 26));
-		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 54, true);
 
-		if(!world.isRemote)
-			loadBagInventory();
-		this.doItemSaving = true;
+		int row;
+		int col;
+
+		for (row = 0; row < 9; ++row)
+		{
+			if (row == bagsSlotNum)
+				this.addSlotToContainer(new SlotForShowOnly(playerInventory, row, 8 + row * 18, 112));
+			else
+				this.addSlotToContainer(new Slot(playerInventory, row, 8 + row * 18, 112));
+		}
+
+		for (row = 0; row < 3; ++row)
+		{
+			for (col = 0; col < 9; ++col)
+				this.addSlotToContainer(new Slot(playerInventory, col + row * 9 + 9, 8 + col * 18, 54 + row * 18));
+		}
 	}
 
 	public void loadBagInventory()
@@ -52,6 +77,7 @@ public class ContainerQuiver extends ContainerTFC
 
 			for(int i = 0; i < nbttaglist.tagCount(); i++)
 			{
+				this.isLoading = true;
 				NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 				byte byte0 = nbttagcompound1.getByte("Slot");
 				if(byte0 >= 0 && byte0 < 8)
@@ -123,11 +149,15 @@ public class ContainerQuiver extends ContainerTFC
 			returnedStack = clickedStack.copy();
 
 			if (clickedIndex < 8)
+			{
 				if (!this.mergeItemStack(clickedStack, 8, inventorySlots.size(), true))
 					return null;
+			}
 			else if (clickedIndex >= 8 && clickedIndex < inventorySlots.size())
+			{
 				if (!this.mergeItemStack(clickedStack, 0, 8, false))
 					return null;
+			}
 
 			if (clickedStack.stackSize == 0)
 				clickedSlot.putStack((ItemStack)null);

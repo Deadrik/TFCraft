@@ -6,8 +6,8 @@ import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCBlocks;
@@ -55,15 +55,44 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 		}
 	}
 
-	public static void CreateStairs(World world, int x, int y, int z, Block id, int meta, byte m)
+	public static void CreateStairs(World world, int x, int y, int z, Block id, int meta, float hitX, float hitY, float hitZ)
 	{
-		world.setBlock(x, y, z, TFCBlocks.stoneStairs, m, 0x2);
-		TEPartial te = (TEPartial)world.getTileEntity(x, y, z);
-		te.TypeID = (short) Block.getIdFromBlock(id);
-		te.MetaID = (byte) meta;
-		te.extraData = 0;
-		te.setMaterial(world.getBlock(x, y, z).getMaterial());
-		te.validate();
+		int hit = 0;
+		TEPartial te = null;
+		if(id != TFCBlocks.stoneStairs)
+		{
+			world.setBlock(x, y, z, TFCBlocks.stoneStairs, 0, 0x3);
+			te = (TEPartial)world.getTileEntity(x, y, z);
+			te.TypeID = (short) Block.getIdFromBlock(id);
+			te.MetaID = (byte) meta;
+			te.extraData = hit;
+			te.setMaterial(world.getBlock(x, y, z).getMaterial());
+			te.validate();
+		}
+		else
+		{
+			te = (TEPartial)world.getTileEntity(x, y, z);
+			world.notifyBlockChange(x, y, z, id);
+		}
+		if( hitY > 0.5F ) {
+			if( hitX <= 0.5F && hitZ >= 0.5F && (te.extraData & 1) == 0) hit = 1;
+			if( hitX >= 0.5F && hitZ <= 0.5F && (te.extraData & 2) == 0) hit = 2;
+			if( hitX <= 0.5F && hitZ <= 0.5F && (te.extraData & 4) == 0) hit = 4;
+			if( hitX >= 0.5F && hitZ >= 0.5F && (te.extraData & 8) == 0) hit = 8;
+		}
+		else
+		{
+			if( hitX <= 0.5F && hitZ >= 0.5F && (te.extraData & 16) == 0) hit = 16;
+			if( hitX >= 0.5F && hitZ <= 0.5F && (te.extraData & 32) == 0) hit = 32;
+			if( hitX <= 0.5F && hitZ <= 0.5F && (te.extraData & 64) == 0) hit = 64;
+			if( hitX >= 0.5F && hitZ >= 0.5F && (te.extraData & 128) == 0) hit = 128;
+		}
+
+		te.extraData |= hit;
+		if(te.extraData == 255)
+			world.setBlock(x, y, z, Blocks.air);
+		else
+			te.broadcastPacketInRange();
 	}
 
 	public static void CreateSlab(World world, int x, int y, int z, Block id, int meta, int side, Block Slab)
@@ -252,36 +281,87 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 		world.notifyBlocksOfNeighborChange(x, y, z, world.getBlock(x, y, z));
 	}
 
+	public static void StairToDetailed(World world, int x, int y, int z, int meta, float hitX, float hitY, float hitZ)
+	{
+		world.notifyBlocksOfNeighborChange(x, y, z, world.getBlock(x, y, z));
+
+		boolean xmymzm = hitX < 0.5F && hitY < 0.5F && hitZ < 0.5F;
+		boolean xpymzm = hitX > 0.5F && hitY < 0.5F && hitZ < 0.5F;
+		boolean xpymzp = hitX > 0.5F && hitY < 0.5F && hitZ > 0.5F;
+		boolean xmymzp = hitX < 0.5F && hitY < 0.5F && hitZ > 0.5F;
+		boolean xmypzm = hitX < 0.5F && hitY > 0.5F && hitZ < 0.5F;
+		boolean xpypzm = hitX > 0.5F && hitY > 0.5F && hitZ < 0.5F;
+		boolean xpypzp = hitX > 0.5F && hitY > 0.5F && hitZ > 0.5F;
+		boolean xmypzp = hitX < 0.5F && hitY > 0.5F && hitZ > 0.5F;
+
+		if( ( meta ==  8 || meta == 10 || meta == 14 ) && xmymzm ) return;
+		if( ( meta == 10 || meta ==  9 || meta == 13 ) && xpymzm ) return;
+		if( ( meta ==  9 || meta == 11 || meta == 15 ) && xpymzp ) return;
+		if( ( meta == 11 || meta ==  8 || meta == 12 ) && xmymzp ) return;
+		if( ( meta ==  0 || meta ==  2 || meta ==  6 ) && xmypzm ) return;
+		if( ( meta ==  2 || meta ==  1 || meta ==  5 ) && xpypzm ) return;
+		if( ( meta ==  1 || meta ==  3 || meta ==  7 ) && xpypzp ) return;
+		if( ( meta ==  3 || meta ==  0 || meta ==  4 ) && xmypzp ) return;
+
+		TEPartial tep = (TEPartial)world.getTileEntity(x, y, z);
+		world.setBlock(x, y, z, TFCBlocks.Detailed);
+
+		TEDetailed te;
+		te = (TEDetailed)world.getTileEntity(x, y, z);
+		te.TypeID = tep.TypeID;
+		te.MetaID = tep.MetaID;
+
+		System.out.println(meta);
+
+		System.out.println( Math.round(hitY) + " " + Math.round(hitX) + " " + Math.round(hitZ) );
+
+		if( meta != 8 && meta != 10 && meta != 14 && !xmymzm )
+			for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++) {
+				te.setBlock(subX, subY, subZ);
+				te.setQuad(subX, subY, subZ);
+			}
+		if( meta != 10 && meta != 9 && meta != 13 && !xpymzm )
+			for(int subX = 4; subX < 8; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++) {
+				te.setBlock(subX, subY, subZ);
+				te.setQuad(subX, subY, subZ);
+			}
+		if( meta != 9 && meta != 11 && meta != 15 && !xpymzp )
+			for(int subX = 4; subX < 8; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 0; subY < 4; subY++) {
+				te.setBlock(subX, subY, subZ);
+				te.setQuad(subX, subY, subZ);
+			}
+		if( meta != 11 && meta != 8 && meta != 12 && !xmymzp )
+			for(int subX = 0; subX < 4; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 0; subY < 4; subY++) {
+				te.setBlock(subX, subY, subZ);
+				te.setQuad(subX, subY, subZ);
+			}
+		if( meta != 0 && meta != 2 && meta != 6 && !xmypzm )
+			for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 4; subY < 8; subY++) {
+				te.setBlock(subX, subY, subZ);
+				te.setQuad(subX, subY, subZ);
+			}
+		if( meta != 2 && meta != 1 && meta != 5 && !xpypzm )
+			for(int subX = 4; subX < 8; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 4; subY < 8; subY++) {
+				te.setBlock(subX, subY, subZ);
+				te.setQuad(subX, subY, subZ);
+			}
+		if( meta != 1 && meta != 3 && meta != 7 && !xpypzp )
+			for(int subX = 4; subX < 8; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 4; subY < 8; subY++) {
+				te.setBlock(subX, subY, subZ);
+				te.setQuad(subX, subY, subZ);
+			}
+		if( meta != 3 && meta != 0 && meta != 4 && !xmypzp )
+			for(int subX = 0; subX < 4; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 4; subY < 8; subY++) {
+				te.setBlock(subX, subY, subZ);
+				te.setQuad(subX, subY, subZ);
+			}
+
+		return;
+	}
+
 	@Override
 	public boolean onUsed(World world, EntityPlayer player, int x, int y, int z, Block block, int meta, int side, float hitX, float hitY, float hitZ)
 	{
-		byte newMeta = 0;
-		if (side == 0)
-		{
-			newMeta = (byte) (newMeta | 4);
-		}
-
-		int rot = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-		byte flip = (byte) (newMeta & 4);
-		byte rotation = 0;
-
-		if (rot == 0)
-		{
-			rotation = (byte) ( 2 | flip);
-		}
-		else if (rot == 1)
-		{
-			rotation = (byte) ( 1 | flip);
-		}
-		else if (rot == 2)
-		{
-			rotation = (byte) ( 3 | flip);
-		}
-		else if (rot == 3)
-		{
-			rotation = (byte) ( 0 | flip);
-		}
-
 		int mode = 0;
 		PlayerInfo pi = null;
 
@@ -337,7 +417,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 					return false;
 				}
 
-				ItemChisel.CreateStairs(world, x, y, z, block, meta, rotation);
+				ItemChisel.CreateStairs(world, x, y, z, block, meta, hitX, hitY, hitZ);
 
 				player.inventory.mainInventory[hasChisel].damageItem(1, player);
 
@@ -359,7 +439,8 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 			else if(mode == 3 && pi.lockMatches(x, y, z))
 			{
 				ItemChisel.CreateDetailed(world, x, y, z, block, meta, side, hitX, hitY, hitZ);
-				if (random.nextInt(4)==0){
+				if (random.nextInt(4) == 0)
+				{
 					player.inventory.mainInventory[hasChisel].damageItem(1, player);
 				}
 				return true;

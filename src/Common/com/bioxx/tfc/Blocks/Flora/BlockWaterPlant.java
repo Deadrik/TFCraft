@@ -1,18 +1,19 @@
 package com.bioxx.tfc.Blocks.Flora;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
@@ -22,7 +23,6 @@ import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.Tools.ItemKnife;
 import com.bioxx.tfc.TileEntities.TEWaterPlant;
 import com.bioxx.tfc.api.Util.Helper;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -43,6 +43,13 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 		super(texOff);
 		float var3 = 0.5F;
 		this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 1.0F, 0.5F + var3);
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
+	{
+		// Don't
 	}
 
 	@Override
@@ -77,7 +84,6 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 	{
 		if (!world.isRemote)
 		{
-			int meta = world.getBlockMetadata(x, y, z);
 			if (TFC_Core.isSaltWater(world.getBlock(x, y+1, z)) && entityplayer.inventory.getCurrentItem() != null && 
 					entityplayer.inventory.getCurrentItem().getItem() instanceof ItemKnife)
 			{

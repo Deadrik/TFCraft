@@ -669,6 +669,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			base += Food.getCookedProfile(is)[1];
 			base += Food.getFuelProfile(is)[1]*getSmokeAbsorbMultiplier();
 		}
+		if (Food.isBrined(is))
+			base += 5;
 		if(Food.isPickled(is))
 			base += 30;
 		return Math.max(base + getTasteSourMod(is), 0);
@@ -693,7 +695,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		}
 		if(Food.isSalted(is))
 			base += 40;
-		if(Food.isPickled(is))
+		if(Food.isBrined(is))
 			base += 10;
 
 		return Math.max(base + getTasteSaltyMod(is), 0);

@@ -2,6 +2,7 @@ package com.bioxx.tfc.Items;
 
 import java.util.BitSet;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -65,6 +66,12 @@ public class ItemCustomNameTag extends ItemTerra
 		}
 
 		return stack;
+	}
+	
+	@Override
+	public void registerIcons(IIconRegister registerer)
+	{
+		//Don't
 	}
 
 	@Override

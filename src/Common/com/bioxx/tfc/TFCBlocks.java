@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
-
 import com.bioxx.tfc.Blocks.BlockBloom;
 import com.bioxx.tfc.Blocks.BlockCharcoal;
 import com.bioxx.tfc.Blocks.BlockCrop;
@@ -123,7 +122,6 @@ import com.bioxx.tfc.Items.ItemBlocks.ItemStone;
 import com.bioxx.tfc.Items.ItemBlocks.ItemToolRack;
 import com.bioxx.tfc.Items.ItemBlocks.ItemTorch;
 import com.bioxx.tfc.api.Constant.Global;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TFCBlocks 
@@ -429,10 +427,10 @@ public class TFCBlocks
 		GameRegistry.registerBlock(WoodConstruct, "WoodConstruct");
 		GameRegistry.registerBlock(WoodVert, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood.class, "WoodVert");
 		GameRegistry.registerBlock(WoodVert2, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood2.class, "WoodVert2");
-		GameRegistry.registerBlock(WoodHoriz, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood.class, "WoodHoriz");
-		GameRegistry.registerBlock(WoodHoriz2, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood.class, "WoodHoriz2");
-		GameRegistry.registerBlock(WoodHoriz3, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood2.class, "WoodHoriz3");
-		GameRegistry.registerBlock(WoodHoriz4, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood2.class, "WoodHoriz4");
+		GameRegistry.registerBlock(WoodHoriz, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWoodH.class, "WoodHoriz");
+		GameRegistry.registerBlock(WoodHoriz2, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWoodH2.class, "WoodHoriz2");
+		GameRegistry.registerBlock(WoodHoriz3, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWoodH3.class, "WoodHoriz3");
+		GameRegistry.registerBlock(WoodHoriz4, "WoodHoriz4");
 
 		GameRegistry.registerBlock(ToolRack, ItemToolRack.class, "ToolRack");
 		GameRegistry.registerBlock(SpawnMeter, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "SpawnMeter");
@@ -656,7 +654,8 @@ public class TFCBlocks
 		WoodHoriz = new BlockLogHoriz(0).setBlockName("WoodHoriz").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
 		WoodHoriz2 = new BlockLogHoriz(8).setBlockName("WoodHoriz2").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
 		WoodHoriz3 = new BlockLogHoriz2(0).setBlockName("WoodHoriz3").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
-		WoodHoriz4 = new BlockLogHoriz2(8).setBlockName("WoodHoriz4").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
+		//Use 8 instead of 0 if Global.WOOD_ALL.length > 24
+		WoodHoriz4 = new BlockLogHoriz2(/*8*/0).setBlockName("WoodHoriz4").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
 
 		ToolRack = new BlockToolRack().setHardness(3F).setBlockName("Toolrack");
 		SpawnMeter = new BlockSpawnMeter().setHardness(3F).setBlockName("SpawnMeter");

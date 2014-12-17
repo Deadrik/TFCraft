@@ -6,6 +6,7 @@ import net.minecraftforge.common.IShearable;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.ColorizerFoliageTFC;
+import com.bioxx.tfc.Core.TFCTabs;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -15,6 +16,7 @@ public class BlockCustomVine extends BlockVine implements IShearable
 	public BlockCustomVine()
 	{
 		super();
+		this.setCreativeTab(TFCTabs.TFCDecoration);
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package com.bioxx.tfc.WorldGen.Generators.Trees;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -41,8 +40,6 @@ public class WorldGenPineShort extends WorldGenerator
 
 			for (int y = yCoord; y <= yCoord + 1 + treeHeight && isValid; ++y)
 			{
-				boolean var12 = true;
-
 				if (y - yCoord < var7)
 					var21 = 0;
 				else
@@ -55,7 +52,7 @@ public class WorldGenPineShort extends WorldGenerator
 						if (y >= 0 && y < 256)
 						{
 							block = world.getBlock(x, y, z);
-							if (block != Blocks.air && block != null && !block.isLeaves(world, x, y, z) && !block.isReplaceable(world, x, y, z))
+							if (!block.isAir(world, x, y, z) && block != null && !block.isLeaves(world, x, y, z) && !block.isReplaceable(world, x, y, z))
 								isValid = false;
 						}
 						else
@@ -117,15 +114,9 @@ public class WorldGenPineShort extends WorldGenerator
 						}
 					}
 
-					var15 = par2Random.nextInt(3);
-					for (y = 0; y < treeHeight - var15; ++y)
+					for (y = 0; y < treeHeight - 1; ++y)
 					{
-						block = world.getBlock(xCoord, yCoord + y, zCoord);
-						if (block == Blocks.air || block == null || block.isLeaves(world, xCoord, yCoord + y, zCoord) || 
-								block.canBeReplacedByLeaves(world, xCoord, yCoord + y, zCoord))
-						{
-							this.setBlockAndNotifyAdequately(world, xCoord, yCoord + y, zCoord, blockWood, metaWood);
-						}
+						this.setBlockAndNotifyAdequately(world, xCoord, yCoord + y, zCoord, blockWood, metaWood);
 					}
 					return true;
 				}

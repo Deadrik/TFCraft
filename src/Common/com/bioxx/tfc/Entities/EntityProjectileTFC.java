@@ -64,10 +64,6 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 				boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && player.capabilities.isCreativeMode;
 
 				EntityItem ei = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.pickupItem, 1, this.damageTaken));
-				EntityItemPickupEvent event = new EntityItemPickupEvent(player, ei);
-
-				if (MinecraftForge.EVENT_BUS.post(event))
-					return;
 
 				ItemStack itemstack = ei.getEntityItem();
 				if(itemstack.stackSize <= 0) 
@@ -77,6 +73,11 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 
 				if (flag)
 				{
+					EntityItemPickupEvent event = new EntityItemPickupEvent(player, ei);
+
+					if (MinecraftForge.EVENT_BUS.post(event))
+						return;
+
 					this.playSound("random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 					player.onItemPickup(this, 1);
 					this.setDead();

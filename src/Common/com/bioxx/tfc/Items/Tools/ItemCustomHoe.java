@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -82,7 +81,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 
 			boolean isDirt = TFC_Core.isDirt(var8);
 
-			if (side != 1 || var9 != Blocks.air || (!TFC_Core.isGrass(var8) && !isDirt))
+			if (side != 1 || !var9.isAir(world, x, y + 1, z) || (!TFC_Core.isGrass(var8) && !isDirt))
 				return false;
 			else
 			{

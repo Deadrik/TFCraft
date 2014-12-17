@@ -1,7 +1,6 @@
 package com.bioxx.tfc.Blocks.Flora;
 
 import java.util.List;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
@@ -9,10 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -25,7 +22,8 @@ public class BlockLogHoriz extends BlockLogVert
 		super();
 		offset = off;
 		woodNames = new String[16];
-		System.arraycopy(Global.WOOD_ALL, off, woodNames, 0, off);
+		System.arraycopy(Global.WOOD_ALL, off, woodNames, 0, 8);
+		System.arraycopy(Global.WOOD_ALL, off, woodNames, 8, 8);
 	}
 
 	@Override
@@ -59,6 +57,7 @@ public class BlockLogHoriz extends BlockLogVert
 		return (dmg & 7) + offset;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SideOnly(Side.CLIENT)
 	@Override
 	/**

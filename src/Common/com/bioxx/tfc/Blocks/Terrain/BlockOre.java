@@ -84,6 +84,8 @@ public class BlockOre extends BlockCollapsable
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
+		if(meta >= icons.length)
+			return icons[0];
 		return icons[meta];
 	}
 

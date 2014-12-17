@@ -81,7 +81,7 @@ public class BlockCollapsable extends BlockTerraContainer
 		return false;
 	}
 
-	public void DropCarvedStone(World world, int x, int y, int z)
+	public void dropCarvedStone(World world, int x, int y, int z)
 	{
 		if(world.getBlock(x + 1, y, z).isOpaqueCube())
 			return;
@@ -100,7 +100,7 @@ public class BlockCollapsable extends BlockTerraContainer
 		world.setBlockToAir(x, y, z);
 	}
 
-	public Boolean hasNaturalSupport(World world, int x, int y, int z)
+	/*public Boolean hasNaturalSupport(World world, int x, int y, int z)
 	{
 		//Make sure that the block beneath the one we're checking is not a solid, if it is then return true and don't waste time here.
 		if(!world.isAirBlock(x, y - 1, z))
@@ -156,7 +156,7 @@ public class BlockCollapsable extends BlockTerraContainer
 		}
 
 		return false;
-	}
+	}*/
 
 	public static Boolean isNearSupport(World world, int i, int j, int k, int range, float collapseChance)
 	{
@@ -261,20 +261,6 @@ public class BlockCollapsable extends BlockTerraContainer
 		if(this == TFCBlocks.StoneSed)
 			finalCollapseRatio -= finalCollapseRatio * softModifier;
 
-		//We do a scan for supports. if we find one close by then we dont collapse.
-		/*for(int scanY = -2; scanY < 2; scanY++)
-		{
-			for(int scanX = -5; scanX < 6; scanX++)
-			{
-				for(int scanZ = -5; scanZ < 6; scanZ++)
-				{
-					Block b = world.getBlock(x+scanX, y+scanY, z+scanZ);
-					if(b == TFCBlocks.WoodSupportH || b == TFCBlocks.WoodSupportH2)
-						return;
-				}
-			}
-		}*/
-
 		//First we check the rng to see if a collapse is going to occur
 		if (TFCOptions.enableCaveIns && world.rand.nextInt(finalCollapseRatio) == 0)
 		{
@@ -282,9 +268,9 @@ public class BlockCollapsable extends BlockTerraContainer
 			int counter = 0;
 			while(counter < 100)
 			{
-				int scanX = -4 + world.rand.nextInt(8);
-				int scanY = -2 + world.rand.nextInt(4);
-				int scanZ = -4 + world.rand.nextInt(8);
+				int scanX = -4 + world.rand.nextInt(9);
+				int scanY = -2 + world.rand.nextInt(5);
+				int scanZ = -4 + world.rand.nextInt(9);
 				if(world.getBlock(x+scanX, y+scanY, z+scanZ) instanceof BlockCollapsable && 
 						((BlockCollapsable)world.getBlock(x+scanX, y+scanY, z+scanZ)).tryToFall(world, x+scanX, y+scanY, z+scanZ, 0))
 				{
@@ -309,7 +295,7 @@ public class BlockCollapsable extends BlockTerraContainer
 	{
 		ArrayList<ByteCoord> collapseMap = getCollapseMap(world, i, j, k);
 		int height = 4;
-		int range = 5 + world.rand.nextInt(30);
+		int range = 5 + world.rand.nextInt(31);
 		for(int y = -4; y <= 1; y++)
 		{
 			for(int x = -range; x <= range; x++)

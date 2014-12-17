@@ -23,6 +23,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
@@ -244,22 +245,22 @@ public class BlockToolRack extends BlockTerraContainer
 
 		if(dir == 0)
 		{
-			if(!world.getBlock(x, y, z + 1).isOpaqueCube())
+			if (!world.getBlock(x, y, z + 1).isSideSolid(world, x, y, z + 1, ForgeDirection.NORTH))
 				removedByPlayer(world, null, x, y, z);
 		}
 		else if(dir == 1)
 		{
-			if(!world.getBlock(x - 1, y, z).isOpaqueCube())
+			if (!world.getBlock(x - 1, y, z).isSideSolid(world, x - 1, y, z, ForgeDirection.EAST))
 				removedByPlayer(world, null, x, y, z);
 		}
 		else if(dir == 2)
 		{
-			if(!world.getBlock(x, y, z - 1).isOpaqueCube())
+			if (!world.getBlock(x, y, z - 1).isSideSolid(world, x, y, z - 1, ForgeDirection.SOUTH))
 				removedByPlayer(world, null, x, y, z);
 		}
 		else if(dir == 3)
 		{
-			if(!world.getBlock(x + 1, y, z).isOpaqueCube())
+			if (!world.getBlock(x + 1, y, z).isSideSolid(world, x + 1, y, z, ForgeDirection.WEST))
 				removedByPlayer(world, null, x, y, z);
 		}
 	}
@@ -292,13 +293,13 @@ public class BlockToolRack extends BlockTerraContainer
 	{
 		if(this.canPlaceBlockAt(world, x, y, z))
 		{
-			if(side == 5 && world.getBlock(x - 1, y, z).isNormalCube())
+			if (side == 5 && world.getBlock(x - 1, y, z).isSideSolid(world, x - 1, y, z, ForgeDirection.EAST))
 				return true;
-			if(side == 4 && world.getBlock(x + 1, y, z).isNormalCube())
+			if (side == 4 && world.getBlock(x + 1, y, z).isSideSolid(world, x + 1, y, z, ForgeDirection.WEST))
 				return true;
-			if(side == 2 && world.getBlock(x, y, z + 1).isNormalCube())
+			if (side == 2 && world.getBlock(x, y, z + 1).isSideSolid(world, x, y, z + 1, ForgeDirection.NORTH))
 				return true;
-			if(side == 3 && world.getBlock(x, y, z - 1).isNormalCube())
+			if (side == 3 && world.getBlock(x, y, z - 1).isSideSolid(world, x, y, z - 1, ForgeDirection.SOUTH))
 				return true;
 		}
 		return false;

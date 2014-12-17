@@ -165,11 +165,6 @@ public class ItemBlueprint extends ItemTerra
 							player.inventory.mainInventory[hasChisel].damageItem(1, player);
 						else
 							break;
-
-						if(player.inventory.mainInventory[hasHammer] != null)
-							player.inventory.mainInventory[hasHammer].damageItem(1, player);
-						else
-							break;
 					}
 				}
 

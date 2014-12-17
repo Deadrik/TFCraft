@@ -11,6 +11,8 @@ public class TFCOptions
 	public static boolean enableOreTest;
 	public static boolean use2DGrill;
 	public static boolean generateSmoke;
+	public static boolean enableDetailedBlockSolidSide;
+	public static int maxCountOfTranspSubBlocksOnSide;
 
 	public static boolean enableCropsDie;
 

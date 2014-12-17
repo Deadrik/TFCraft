@@ -6,7 +6,6 @@ package com.bioxx.tfc.WorldGen.Generators.Trees;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -38,8 +37,11 @@ public class WorldGenRedwoodXL extends WorldGenerator
 		if (y < 1 || y + height + 1 > 256)
 			return false;
 
-		if (!TFC_Core.isSoil(world.getBlock(x, y - 1, z)) || !TFC_Core.isSoil(world.getBlock(x-1, y - 1, z)) || 
-				!TFC_Core.isSoil(world.getBlock(x, y - 1, z-1)) || !TFC_Core.isSoil(world.getBlock(x-1, y - 1, z-1)) || y >= 180)
+		if (!TFC_Core.isSoil(world.getBlock(x, y - 1, z))
+				|| !TFC_Core.isSoil(world.getBlock(x-1, y - 1, z))
+				|| !TFC_Core.isSoil(world.getBlock(x, y - 1, z-1))
+				|| !TFC_Core.isSoil(world.getBlock(x-1, y - 1, z-1))
+				|| y >= 180)
 		{
 			return false;
 		}
@@ -86,14 +88,10 @@ public class WorldGenRedwoodXL extends WorldGenerator
 
 		for (int y1 = 0; y1 < height - 3; y1++)
 		{
-			final Block j4 = world.getBlock(x, y + y1, z);
-			if (j4.isAir(world, x, y + y1, z) || j4.isLeaves(world, x, y + y1, z) || j4.canBeReplacedByLeaves(world, x, y + y1, z))
-			{
-				setBlockID(world, x, y+y1, z, blockWood, metaWood);
-				setBlockID(world, x-1, y+y1, z, blockWood, metaWood);
-				setBlockID(world, x, y+y1, z-1, blockWood, metaWood);
-				setBlockID(world, x-1, y+y1, z-1, blockWood, metaWood);
-			}
+			setBlockAndNotifyAdequately(world, x, y + y1, z, blockWood, metaWood);
+			setBlockAndNotifyAdequately(world, x - 1, y + y1, z, blockWood, metaWood);
+			setBlockAndNotifyAdequately(world, x, y + y1, z - 1, blockWood, metaWood);
+			setBlockAndNotifyAdequately(world, x - 1, y + y1, z - 1, blockWood, metaWood);
 		}
 
 		for (int i3 = 0; i3 <= k; i3++)
@@ -105,16 +103,13 @@ public class WorldGenRedwoodXL extends WorldGenerator
 				for (int z1 = z - l1; z1 <= z + l1; z1++)
 				{
 					final int i5 = z1 - z;
-					final Block block = world.getBlock(x1, y1, z1);
-					if ((Math.abs(k4) != l1 || Math.abs(i5) != l1 || l1 <= 0)
-							&& (block == null || block
-							.canBeReplacedByLeaves(world, x1,
-									y1, z1)))
+					if (Math.abs(k4) != l1 || Math.abs(i5) != l1 || l1 <= 0)
 					{
-						setBlockID(world, x1, y1, z1, blockLeaf, metaLeaf);
-						setBlockID(world, x1 - 1, y1, z1, blockLeaf, metaLeaf);
-						setBlockID(world, x1, y1, z1 - 1, blockLeaf, metaLeaf);
-						setBlockID(world, x1 - 1, y1, z1 - 1, blockLeaf, metaLeaf);
+						// Must use special method so that each block is checked for if it can be replaced. Using setBlockAndNotifyAdequately directly will remove the majority of the trunk. -K
+						setLeaf(world, x1, y1, z1);
+						setLeaf(world, x1 - 1, y1, z1);
+						setLeaf(world, x1, y1, z1 - 1);
+						setLeaf(world, x1 - 1, y1, z1 - 1);
 					}
 				}
 			}
@@ -134,16 +129,11 @@ public class WorldGenRedwoodXL extends WorldGenerator
 		return true;
 	}
 
-	/**
-	 * @param world
-	 * @param x
-	 * @param y
-	 * @param z
-	 */
-	private void setBlockID(World world, int x, int y, int z, Block block, int blockMeta)
+	private void setLeaf(World world, int x, int y, int z)
 	{
 		Block b = world.getBlock(x, y, z);
-		if(b == Blocks.air || b.canBeReplacedByLeaves(world, x, y, z) || b.getMaterial().isReplaceable())
-			setBlockAndNotifyAdequately(world, x, y, z, block, blockMeta);
+		if (b.canBeReplacedByLeaves(world, x, y, z))
+			setBlockAndNotifyAdequately(world, x, y, z, blockLeaf, metaLeaf);
 	}
+
 }

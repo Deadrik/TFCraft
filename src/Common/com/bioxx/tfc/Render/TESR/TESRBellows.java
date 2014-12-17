@@ -44,19 +44,14 @@ public class TESRBellows extends TESRBase
 	{
 		float i;
 		float j;
+		float l = 0.125F;
+		float m = 1-l;
 
-		if(meta == 0 || meta == 2)
+		if(meta == 0)
 		{
-			if(meta == 0)
-			{
-				i = pos;
-				j = 0.1F + pos;
-			}
-			else
-			{
-				i = 0.9F - pos;
-				j = 1.0F - pos;
-			}
+			i = pos;
+			j = 0.1F + pos;
+			
 			bindTexture(BACK_TEXTURE);
 			t.startDrawingQuads();
 			//back
@@ -69,40 +64,34 @@ public class TESRBellows extends TESRBase
 			t.addVertexWithUV(1, 0, j, 0, 1);
 			t.addVertexWithUV(1, 1, j, 1, 1);
 			t.addVertexWithUV(0, 1, j, 1, 0);
+			
 			// top
 			t.addVertexWithUV(0, 1, i, 0, 0);
-			t.addVertexWithUV(0, 1, j, 0, 1);
-			t.addVertexWithUV(1, 1, j, 1, 1);
+			t.addVertexWithUV(0, 1, j, 0, l);
+			t.addVertexWithUV(1, 1, j, 1, l);
 			t.addVertexWithUV(1, 1, i, 1, 0);
 			//right
 			t.addVertexWithUV(0, 0, i, 0, 0);
-			t.addVertexWithUV(0, 0, j, 0, 1);
-			t.addVertexWithUV(0, 1, j, 1, 1);
+			t.addVertexWithUV(0, 0, j, 0, l);
+			t.addVertexWithUV(0, 1, j, 1, l);
 			t.addVertexWithUV(0, 1, i, 1, 0);
 			//left
 			t.addVertexWithUV(1, 1, i, 0, 0);
-			t.addVertexWithUV(1, 1, j, 0, 1);
-			t.addVertexWithUV(1, 0, j, 1, 1);
+			t.addVertexWithUV(1, 1, j, 0, l);
+			t.addVertexWithUV(1, 0, j, 1, l);
 			t.addVertexWithUV(1, 0, i, 1, 0);
 			//bottom
 			t.addVertexWithUV(0, 0, i, 0, 0);
 			t.addVertexWithUV(1, 0, i, 0, 1);
-			t.addVertexWithUV(1, 0, j, 1, 1);
-			t.addVertexWithUV(0, 0, j, 1, 0);
+			t.addVertexWithUV(1, 0, j, l, 1);
+			t.addVertexWithUV(0, 0, j, l, 0);
 			t.draw();
 		}
-		else if(meta == 1 || meta == 3)
+		else if(meta == 1)
 		{
-			if(meta == 3)
-			{
-				i = pos;
-				j = 0.1F + pos;
-			}
-			else
-			{
-				i = 0.9F - pos;
-				j = 1.0F - pos;
-			}
+			i = 0.9F - pos;
+			j = 1.0F - pos;
+			
 			bindTexture(BACK_TEXTURE);
 			t.startDrawingQuads();
 			//front
@@ -115,26 +104,107 @@ public class TESRBellows extends TESRBase
 			t.addVertexWithUV(j, 1, 0, 0, 1);
 			t.addVertexWithUV(j, 1, 1, 1, 1);
 			t.addVertexWithUV(j, 0, 1, 1, 0);
+			
 			// top
-			t.addVertexWithUV(i, 1, 0, 0, 0);
-			t.addVertexWithUV(i, 1, 1, 0, 1);
+			t.addVertexWithUV(i, 1, 0, m, 0);
+			t.addVertexWithUV(i, 1, 1, m, 1);
 			t.addVertexWithUV(j, 1, 1, 1, 1);
 			t.addVertexWithUV(j, 1, 0, 1, 0);
 			//right
-			t.addVertexWithUV(i, 0, 0, 0, 0);
-			t.addVertexWithUV(i, 1, 0, 0, 1);
+			t.addVertexWithUV(i, 0, 0, m, 0);
+			t.addVertexWithUV(i, 1, 0, m, 1);
 			t.addVertexWithUV(j, 1, 0, 1, 1);
 			t.addVertexWithUV(j, 0, 0, 1, 0);
 			//bottom
-			t.addVertexWithUV(i, 0, 1, 0, 0);
-			t.addVertexWithUV(i, 0, 0, 0, 1);
+			t.addVertexWithUV(i, 0, 1, m, 0);
+			t.addVertexWithUV(i, 0, 0, m, 1);
 			t.addVertexWithUV(j, 0, 0, 1, 1);
 			t.addVertexWithUV(j, 0, 1, 1, 0);
 			//left
-			t.addVertexWithUV(i, 1, 1, 0, 0);
-			t.addVertexWithUV(i, 0, 1, 0, 1);
+			t.addVertexWithUV(i, 1, 1, m, 0);
+			t.addVertexWithUV(i, 0, 1, m, 1);
 			t.addVertexWithUV(j, 0, 1, 1, 1);
 			t.addVertexWithUV(j, 1, 1, 1, 0);
+			t.draw();
+		}
+		else if(meta == 2)
+		{
+			i = 0.9F - pos;
+			j = 1.0F - pos;
+			
+			bindTexture(BACK_TEXTURE);
+			t.startDrawingQuads();
+			//back
+			t.addVertexWithUV(0, 0, i, 0, 0);
+			t.addVertexWithUV(0, 1, i, 0, 1);
+			t.addVertexWithUV(1, 1, i, 1, 1);
+			t.addVertexWithUV(1, 0, i, 1, 0);
+			//front
+			t.addVertexWithUV(0, 0, j, 0, 0);
+			t.addVertexWithUV(1, 0, j, 0, 1);
+			t.addVertexWithUV(1, 1, j, 1, 1);
+			t.addVertexWithUV(0, 1, j, 1, 0);
+			
+			// top
+			t.addVertexWithUV(0, 1, i, 0, m);
+			t.addVertexWithUV(0, 1, j, 0, 1);
+			t.addVertexWithUV(1, 1, j, 1, 1);
+			t.addVertexWithUV(1, 1, i, 1, m);
+			//right
+			t.addVertexWithUV(0, 0, i, 0, 0);
+			t.addVertexWithUV(0, 0, j, 0, l);
+			t.addVertexWithUV(0, 1, j, 1, l);
+			t.addVertexWithUV(0, 1, i, 1, 0);
+			//left
+			t.addVertexWithUV(1, 1, i, 0, 0);
+			t.addVertexWithUV(1, 1, j, 0, l);
+			t.addVertexWithUV(1, 0, j, 1, l);
+			t.addVertexWithUV(1, 0, i, 1, 0);
+			//bottom
+			t.addVertexWithUV(0, 0, i, 0, 0);
+			t.addVertexWithUV(1, 0, i, 0, 1);
+			t.addVertexWithUV(1, 0, j, l, 1);
+			t.addVertexWithUV(0, 0, j, l, 0);
+			t.draw();
+		}
+		else if(meta == 3)
+		{
+			i = pos;
+			j = 0.1F + pos;
+			
+			bindTexture(BACK_TEXTURE);
+			t.startDrawingQuads();
+			//front
+			t.addVertexWithUV(i, 0, 0, 0, 0);
+			t.addVertexWithUV(i, 0, 1, 0, 1);
+			t.addVertexWithUV(i, 1, 1, 1, 1);
+			t.addVertexWithUV(i, 1, 0, 1, 0);
+			//back
+			t.addVertexWithUV(j, 0, 0, 0, 0);
+			t.addVertexWithUV(j, 1, 0, 0, 1);
+			t.addVertexWithUV(j, 1, 1, 1, 1);
+			t.addVertexWithUV(j, 0, 1, 1, 0);
+			
+			// top
+			t.addVertexWithUV(i, 1, 0, 0, 0);
+			t.addVertexWithUV(i, 1, 1, 0, 1);
+			t.addVertexWithUV(j, 1, 1, l, 1);
+			t.addVertexWithUV(j, 1, 0, l, 0);
+			//right
+			t.addVertexWithUV(i, 0, 0, 0, 0);
+			t.addVertexWithUV(i, 1, 0, 0, 1);
+			t.addVertexWithUV(j, 1, 0, l, 1);
+			t.addVertexWithUV(j, 0, 0, l, 0);
+			//bottom
+			t.addVertexWithUV(i, 0, 1, 0, 0);
+			t.addVertexWithUV(i, 0, 0, 0, 1);
+			t.addVertexWithUV(j, 0, 0, l, 1);
+			t.addVertexWithUV(j, 0, 1, l, 0);
+			//left
+			t.addVertexWithUV(i, 1, 1, 0, 0);
+			t.addVertexWithUV(i, 0, 1, 0, 1);
+			t.addVertexWithUV(j, 0, 1, l, 1);
+			t.addVertexWithUV(j, 1, 1, l, 0);
 			t.draw();
 		}
 	}
@@ -143,6 +213,8 @@ public class TESRBellows extends TESRBase
 	{
 		float i;
 		float j;
+		float k = 0.9F;
+		float l = 0.1F;
 
 		if(meta == 0 || meta == 2)
 		{
@@ -159,31 +231,31 @@ public class TESRBellows extends TESRBase
 				j = 0.95F - pos;
 			}
 			t.startDrawingQuads();
-			t.addVertexWithUV(0.9F, 0.9F, i, 0, 0);
-			t.addVertexWithUV(0.9F, 0.9F, j, 0, 1);
-			t.addVertexWithUV(0.9F, 0.1F, j, 1, 1);
-			t.addVertexWithUV(0.9F, 0.1F, i, 1, 0);
+			t.addVertexWithUV(k, k, i, 0, 0);
+			t.addVertexWithUV(k, k, j, 0, 1);
+			t.addVertexWithUV(k, l, j, 1, 1);
+			t.addVertexWithUV(k, l, i, 1, 0);
 			t.draw();
 
 			t.startDrawingQuads();
-			t.addVertexWithUV(0.1F, 0.9F, i, 0, 0);
-			t.addVertexWithUV(0.1F, 0.9F, j, 0, 1);
-			t.addVertexWithUV(0.9F, 0.9F, j, 1, 1);
-			t.addVertexWithUV(0.9F, 0.9F, i, 1, 0);
+			t.addVertexWithUV(l, k, i, 0, 0);
+			t.addVertexWithUV(l, k, j, 0, 1);
+			t.addVertexWithUV(k, k, j, 1, 1);
+			t.addVertexWithUV(k, k, i, 1, 0);
 			t.draw();
 
 			t.startDrawingQuads();
-			t.addVertexWithUV(0.1F, 0.1F, i, 0, 0);
-			t.addVertexWithUV(0.1F, 0.1F, j, 0, 1);
-			t.addVertexWithUV(0.1F, 0.9F, j, 1, 1);
-			t.addVertexWithUV(0.1F, 0.9F, i, 1, 0);
+			t.addVertexWithUV(l, l, i, 0, 0);
+			t.addVertexWithUV(l, l, j, 0, 1);
+			t.addVertexWithUV(l, k, j, 1, 1);
+			t.addVertexWithUV(l, k, i, 1, 0);
 			t.draw();
 
 			t.startDrawingQuads();
-			t.addVertexWithUV(0.9F, 0.1F, i, 0, 0);
-			t.addVertexWithUV(0.9F, 0.1F, j, 0, 1);
-			t.addVertexWithUV(0.1F, 0.1F, j, 1, 1);
-			t.addVertexWithUV(0.1F, 0.1F, i, 1, 0);
+			t.addVertexWithUV(k, l, i, 0, 0);
+			t.addVertexWithUV(k, l, j, 0, 1);
+			t.addVertexWithUV(l, l, j, 1, 1);
+			t.addVertexWithUV(l, l, i, 1, 0);
 			t.draw();
 		}
 		else if(meta == 1 || meta == 3)
@@ -201,37 +273,42 @@ public class TESRBellows extends TESRBase
 				j = 0.95F - pos;
 			}
 			t.startDrawingQuads();
-			t.addVertexWithUV(i, 0.1F, 0.1F, 0, 0);
-			t.addVertexWithUV(i, 0.9F, 0.1F, 0, 1);
-			t.addVertexWithUV(j, 0.9F, 0.1F, 1, 1);
-			t.addVertexWithUV(j, 0.1F, 0.1F, 1, 0);
+			t.addVertexWithUV(i, l, l, 0, 0);
+			t.addVertexWithUV(i, k, l, 0, 1);
+			t.addVertexWithUV(j, k, l, 1, 1);
+			t.addVertexWithUV(j, l, l, 1, 0);
 			t.draw();
 
 			t.startDrawingQuads();
-			t.addVertexWithUV(i, 0.1F, 0.9F, 0, 0);
-			t.addVertexWithUV(i, 0.1F, 0.1F, 0, 1);
-			t.addVertexWithUV(j, 0.1F, 0.1F, 1, 1);
-			t.addVertexWithUV(j, 0.1F, 0.9F, 1, 0);
+			t.addVertexWithUV(i, l, k, 0, 0);
+			t.addVertexWithUV(i, l, l, 0, 1);
+			t.addVertexWithUV(j, l, l, 1, 1);
+			t.addVertexWithUV(j, l, k, 1, 0);
 			t.draw();
 
 			t.startDrawingQuads();
-			t.addVertexWithUV(i, 0.9F, 0.9F, 0, 0);
-			t.addVertexWithUV(i, 0.1F, 0.9F, 0, 1);
-			t.addVertexWithUV(j, 0.1F, 0.9F, 1, 1);
-			t.addVertexWithUV(j, 0.9F, 0.9F, 1, 0);
+			t.addVertexWithUV(i, k, k, 0, 0);
+			t.addVertexWithUV(i, l, k, 0, 1);
+			t.addVertexWithUV(j, l, k, 1, 1);
+			t.addVertexWithUV(j, k, k, 1, 0);
 			t.draw();
 
 			t.startDrawingQuads();
-			t.addVertexWithUV(i, 0.9F, 0.1F, 0, 0);
-			t.addVertexWithUV(i, 0.9F, 0.9F, 0, 1);
-			t.addVertexWithUV(j, 0.9F, 0.9F, 1, 1);
-			t.addVertexWithUV(j, 0.9F, 0.1F, 1, 0);
+			t.addVertexWithUV(i, k, l, 0, 0);
+			t.addVertexWithUV(i, k, k, 0, 1);
+			t.addVertexWithUV(j, k, k, 1, 1);
+			t.addVertexWithUV(j, k, l, 1, 0);
 			t.draw();
 		}
 	}
 
 	private void renderFront(Tessellator t, int meta)
 	{
+		float i = 0.9F;
+		float j = 0.1F;
+		float l = 0.125F;
+		float m = 1-l;
+		
 		if(meta == 0)
 		{
 			bindTexture(FRONT_TEXTURE);
@@ -246,28 +323,29 @@ public class TESRBellows extends TESRBase
 			bindTexture(BACK_TEXTURE);
 			t.startDrawingQuads();
 			//back
-			t.addVertexWithUV(0, 0, 0.9F, 0, 0);
-			t.addVertexWithUV(0, 1, 0.9F, 0, 1);
-			t.addVertexWithUV(1, 1, 0.9F, 1, 1);
-			t.addVertexWithUV(1, 0, 0.9F, 1, 0);
+			t.addVertexWithUV(0, 0, i, 0, 0);
+			t.addVertexWithUV(0, 1, i, 0, 1);
+			t.addVertexWithUV(1, 1, i, 1, 1);
+			t.addVertexWithUV(1, 0, i, 1, 0);
+			
 			// top
-			t.addVertexWithUV(0, 1, 0.9F, 0, 0);
+			t.addVertexWithUV(0, 1, i, 0, m);
 			t.addVertexWithUV(0, 1, 1, 0, 1);
 			t.addVertexWithUV(1, 1, 1, 1, 1);
-			t.addVertexWithUV(1, 1, 0.9F, 1, 0);
+			t.addVertexWithUV(1, 1, i, 1, m);
 			//right
-			t.addVertexWithUV(0, 0, 0.9F, 0, 0);
+			t.addVertexWithUV(0, 0, i, 0, m);
 			t.addVertexWithUV(0, 0, 1, 0, 1);
 			t.addVertexWithUV(0, 1, 1, 1, 1);
-			t.addVertexWithUV(0, 1, 0.9F, 1, 0);
+			t.addVertexWithUV(0, 1, i, 1, m);
 			//left
-			t.addVertexWithUV(1, 1, 0.9F, 0, 0);
+			t.addVertexWithUV(1, 1, i, 0, m);
 			t.addVertexWithUV(1, 1, 1, 0, 1);
 			t.addVertexWithUV(1, 0, 1, 1, 1);
-			t.addVertexWithUV(1, 0, 0.9F, 1, 0);
+			t.addVertexWithUV(1, 0, i, 1, m);
 			//bottom
-			t.addVertexWithUV(0, 0, 0.9F, 0, 0);
-			t.addVertexWithUV(1, 0, 0.9F, 0, 1);
+			t.addVertexWithUV(0, 0, i, m, 0);
+			t.addVertexWithUV(1, 0, i, m, 1);
 			t.addVertexWithUV(1, 0, 1, 1, 1);
 			t.addVertexWithUV(0, 0, 1, 1, 0);
 			t.draw();
@@ -286,30 +364,31 @@ public class TESRBellows extends TESRBase
 			bindTexture(BACK_TEXTURE);
 			t.startDrawingQuads();
 			//back
-			t.addVertexWithUV(0.1F, 0, 0, 0, 0);
-			t.addVertexWithUV(0.1F, 1, 0, 0, 1);
-			t.addVertexWithUV(0.1F, 1, 1, 1, 1);
-			t.addVertexWithUV(0.1F, 0, 1, 1, 0);
+			t.addVertexWithUV(j, 0, 0, 0, 0);
+			t.addVertexWithUV(j, 1, 0, 0, 1);
+			t.addVertexWithUV(j, 1, 1, 1, 1);
+			t.addVertexWithUV(j, 0, 1, 1, 0);
+			
 			// top
 			t.addVertexWithUV(0, 1, 0, 0, 0);
 			t.addVertexWithUV(0, 1, 1, 0, 1);
-			t.addVertexWithUV(0.1F, 1, 1, 1, 1);
-			t.addVertexWithUV(0.1F, 1, 0, 1, 0);
+			t.addVertexWithUV(j, 1, 1, l, 1);
+			t.addVertexWithUV(j, 1, 0, l, 0);
 			//right
 			t.addVertexWithUV(0, 0, 0, 0, 0);
 			t.addVertexWithUV(0, 1, 0, 0, 1);
-			t.addVertexWithUV(0.1F, 1, 0, 1, 1);
-			t.addVertexWithUV(0.1F, 0, 0, 1, 0);
+			t.addVertexWithUV(j, 1, 0, l, 1);
+			t.addVertexWithUV(j, 0, 0, l, 0);
 			//bottom
 			t.addVertexWithUV(0, 0, 1, 0, 0);
 			t.addVertexWithUV(0, 0, 0, 0, 1);
-			t.addVertexWithUV(0.1F, 0, 0, 1, 1);
-			t.addVertexWithUV(0.1F, 0, 1, 1, 0);
+			t.addVertexWithUV(j, 0, 0, l, 1);
+			t.addVertexWithUV(j, 0, 1, l, 0);
 			//left
 			t.addVertexWithUV(0, 1, 1, 0, 0);
 			t.addVertexWithUV(0, 0, 1, 0, 1);
-			t.addVertexWithUV(0.1F, 0, 1, 1, 1);
-			t.addVertexWithUV(0.1F, 1, 1, 1, 0);
+			t.addVertexWithUV(j, 0, 1, l, 1);
+			t.addVertexWithUV(j, 1, 1, l, 0);
 			t.draw();
 		}
 		else if(meta == 2)
@@ -326,30 +405,31 @@ public class TESRBellows extends TESRBase
 			bindTexture(BACK_TEXTURE);
 			t.startDrawingQuads();
 			//front
-			t.addVertexWithUV(0, 0, 0.1F, 0, 0);
-			t.addVertexWithUV(1, 0, 0.1F, 0, 1);
-			t.addVertexWithUV(1, 1, 0.1F, 1, 1);
-			t.addVertexWithUV(0, 1, 0.1F, 1, 0);
+			t.addVertexWithUV(0, 0, j, 0, 0);
+			t.addVertexWithUV(1, 0, j, 0, 1);
+			t.addVertexWithUV(1, 1, j, 1, 1);
+			t.addVertexWithUV(0, 1, j, 1, 0);
+			
 			// top
 			t.addVertexWithUV(0, 1, 0, 0, 0);
-			t.addVertexWithUV(0, 1, 0.1F, 0, 1);
-			t.addVertexWithUV(1, 1, 0.1F, 1, 1);
+			t.addVertexWithUV(0, 1, j, 0, l);
+			t.addVertexWithUV(1, 1, j, 1, l);
 			t.addVertexWithUV(1, 1, 0, 1, 0);
 			//right
 			t.addVertexWithUV(0, 0, 0, 0, 0);
-			t.addVertexWithUV(0, 0, 0.1F, 0, 1);
-			t.addVertexWithUV(0, 1, 0.1F, 1, 1);
+			t.addVertexWithUV(0, 0, j, 0, l);
+			t.addVertexWithUV(0, 1, j, 1, l);
 			t.addVertexWithUV(0, 1, 0, 1, 0);
 			//left
 			t.addVertexWithUV(1, 1, 0, 0, 0);
-			t.addVertexWithUV(1, 1, 0.1F, 0, 1);
-			t.addVertexWithUV(1, 0, 0.1F, 1, 1);
+			t.addVertexWithUV(1, 1, j, 0, l);
+			t.addVertexWithUV(1, 0, j, 1, l);
 			t.addVertexWithUV(1, 0, 0, 1, 0);
 			//bottom
 			t.addVertexWithUV(0, 0, 0, 0, 0);
 			t.addVertexWithUV(1, 0, 0, 0, 1);
-			t.addVertexWithUV(1, 0, 0.1F, 1, 1);
-			t.addVertexWithUV(0, 0, 0.1F, 1, 0);
+			t.addVertexWithUV(1, 0, j, l, 1);
+			t.addVertexWithUV(0, 0, j, l, 0);
 			t.draw();
 		}
 		else if(meta == 3)
@@ -366,31 +446,31 @@ public class TESRBellows extends TESRBase
 			bindTexture(BACK_TEXTURE);
 			t.startDrawingQuads();
 			//front
-			t.addVertexWithUV(0.9F, 0, 0, 0, 0);
-			t.addVertexWithUV(0.9F, 0, 1, 0, 1);
-			t.addVertexWithUV(0.9F, 1, 1, 1, 1);
-			t.addVertexWithUV(0.9F, 1, 0, 1, 0);
+			t.addVertexWithUV(i, 0, 0, 0, 0);
+			t.addVertexWithUV(i, 0, 1, 0, 1);
+			t.addVertexWithUV(i, 1, 1, 1, 1);
+			t.addVertexWithUV(i, 1, 0, 1, 0);
 
 			// top
-			t.addVertexWithUV(0.9F, 1, 0, 0, 0);
-			t.addVertexWithUV(0.9F, 1, 1, 0, 1);
-			t.addVertexWithUV(1.0F, 1, 1, 1, 1);
-			t.addVertexWithUV(1.0F, 1, 0, 1, 0);
+			t.addVertexWithUV(i, 1, 0, m, 0);
+			t.addVertexWithUV(i, 1, 1, m, 1);
+			t.addVertexWithUV(1, 1, 1, 1, 1);
+			t.addVertexWithUV(1, 1, 0, 1, 0);
 			//right
-			t.addVertexWithUV(0.9F, 0, 0, 0, 0);
-			t.addVertexWithUV(0.9F, 1, 0, 0, 1);
-			t.addVertexWithUV(1.0F, 1, 0, 1, 1);
-			t.addVertexWithUV(1.0F, 0, 0, 1, 0);
+			t.addVertexWithUV(i, 0, 0, m, 0);
+			t.addVertexWithUV(i, 1, 0, m, 1);
+			t.addVertexWithUV(1, 1, 0, 1, 1);
+			t.addVertexWithUV(1, 0, 0, 1, 0);
 			//bottom
-			t.addVertexWithUV(0.9F, 0, 1, 0, 0);
-			t.addVertexWithUV(0.9F, 0, 0, 0, 1);
-			t.addVertexWithUV(1.0F, 0, 0, 1, 1);
-			t.addVertexWithUV(1.0F, 0, 1, 1, 0);
+			t.addVertexWithUV(i, 0, 1, m, 0);
+			t.addVertexWithUV(i, 0, 0, m, 1);
+			t.addVertexWithUV(1, 0, 0, 1, 1);
+			t.addVertexWithUV(1, 0, 1, 1, 0);
 			//left
-			t.addVertexWithUV(0.9F, 1, 1, 0, 0);
-			t.addVertexWithUV(0.9F, 0, 1, 0, 1);
-			t.addVertexWithUV(1.0F, 0, 1, 1, 1);
-			t.addVertexWithUV(1.0F, 1, 1, 1, 0);
+			t.addVertexWithUV(i, 1, 1, m, 0);
+			t.addVertexWithUV(i, 0, 1, m, 1);
+			t.addVertexWithUV(1, 0, 1, 1, 1);
+			t.addVertexWithUV(1, 1, 1, 1, 0);
 			t.draw();
 		}
 	}

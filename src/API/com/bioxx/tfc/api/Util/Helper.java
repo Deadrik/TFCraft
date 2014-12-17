@@ -45,7 +45,12 @@ public class Helper {
 		return result;
 	}
 
-	public static MovingObjectPosition getMovingObjectPositionFromPlayer(World par1World, EntityLivingBase entity, boolean par3)
+	public static MovingObjectPosition getMovingObjectPositionFromPlayer(World world, EntityLivingBase entity, boolean scanFluids)
+	{
+		return getMovingObjectPositionFromPlayer(world, entity, scanFluids, 4);
+	}
+
+	public static MovingObjectPosition getMovingObjectPositionFromPlayer(World world, EntityLivingBase entity, boolean scanFluids, int reach)
 	{
 		float var4 = 1.0F;
 		float var5 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * var4;
@@ -60,9 +65,9 @@ public class Helper {
 		float var17 = MathHelper.sin(-var5 * 0.017453292F);
 		float var18 = var15 * var16;
 		float var20 = var14 * var16;
-		double var21 = 4; /*ModLoader.getMinecraftInstance().playerController.getBlockReachDistance()*/
-		Vec3 var23 = var13.addVector(var18 * var21, var17 * var21, var20 * var21);
-		MovingObjectPosition var24 = par1World.rayTraceBlocks(var13, var23, par3);
+
+		Vec3 var23 = var13.addVector(var18 * reach, var17 * reach, var20 * reach);
+		MovingObjectPosition var24 = world.rayTraceBlocks(var13, var23, scanFluids);
 		return var24;
 	}
 

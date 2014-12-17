@@ -408,13 +408,16 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 			List list = worldObj.getEntitiesWithinAABB(EntityItem.class,
 					AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + moltenCount + 1.1, zCoord + 1));
 
+			/*Create a list of any players that are inside the chimney*/
+			List playerList = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + moltenCount + 1.1, zCoord + 1));
+
 			if (moltenCount == 0)
 				moltenCount = 1;
 			/*
 			 * Make sure the list isn't null or empty and that the stack is
 			 * valid 1 layer above the Molten Ore
 			 */
-			if (list != null && !list.isEmpty() && ((BlockBlastFurnace) TFCBlocks.BlastFurnace).checkStackAt(worldObj, xCoord, yCoord + moltenCount, zCoord))
+			if (list != null && !list.isEmpty() && ((BlockBlastFurnace) TFCBlocks.BlastFurnace).checkStackAt(worldObj, xCoord, yCoord + moltenCount, zCoord) && (playerList == null || playerList.isEmpty()))
 			{
 				/*
 				 * Iterate through the list and check for charcoal, coke, and

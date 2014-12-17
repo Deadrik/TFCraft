@@ -131,6 +131,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.RiceGrain, false));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.BarleyGrain, false));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.OatGrain, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.MaizeEar, false));
 		this.tasks.addTask(6, this.aiEatGrass);
 		this.tasks.addTask(1, new EntityAIPanicTFC(this, 1.2D,true));
 		this.updateChestSaddle();
@@ -1187,8 +1188,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		switch(interaction){
 		case MOUNT: flag = familiarity > 15;break;
 		case BREED: flag = familiarity > 20;break;
-		case SHEAR: flag = familiarity > 10;break;
-		case MILK: flag = familiarity > 10;break;
 		case NAME: flag = familiarity > 20;break;
 		default: break;
 		}

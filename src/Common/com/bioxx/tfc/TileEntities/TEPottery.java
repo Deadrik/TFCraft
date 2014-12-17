@@ -89,7 +89,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 			//Make sure to keep the fire going throughout the length of the burn
 			if(blockAbove != Blocks.fire && TFC_Time.getTotalTicks() - burnStart < TFC_Time.hourLength * TFCOptions.pitKilnBurnTime)
 			{
-				if((blockAbove == Blocks.air || worldObj.getBlock(xCoord, yCoord + 1, zCoord).getMaterial().getCanBurn()) && isValid())
+				if ((blockAbove.isAir(worldObj, xCoord, yCoord + 1, zCoord) || worldObj.getBlock(xCoord, yCoord + 1, zCoord).getMaterial().getCanBurn()) && isValid())
 					worldObj.setBlock(xCoord, yCoord + 1, zCoord, Blocks.fire);
 				else
 				{

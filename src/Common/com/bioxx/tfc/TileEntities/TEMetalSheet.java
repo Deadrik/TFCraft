@@ -139,7 +139,8 @@ public class TEMetalSheet extends NetworkTileEntity
 		super.writeToNBT(nbt);
 		nbt.setByte("sides", sides);
 		NBTTagCompound st = new NBTTagCompound();
-		sheetStack.writeToNBT(st);
+		if(sheetStack != null)
+			sheetStack.writeToNBT(st);
 		nbt.setTag("sheetType", st);
 		nbt.setInteger("metalID", metalID);
 	}

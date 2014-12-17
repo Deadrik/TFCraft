@@ -1,11 +1,11 @@
 package com.bioxx.tfc.GUI;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Containers.ContainerQuiver;
-
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Containers.ContainerQuiver;
 
 public class GuiQuiver extends GuiContainerTFC
 {
@@ -20,5 +20,21 @@ public class GuiQuiver extends GuiContainerTFC
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
 		this.drawGui(GuiTex);
+	}
+
+	/**
+	 * This function is what controls the hotbar shortcut check when you press a
+	 * number key when hovering a stack.
+	 */
+	@Override
+	protected boolean checkHotbarKeys(int par1)
+	{
+		if (this.mc.thePlayer.inventory.currentItem != par1 - 2)
+		{
+			super.checkHotbarKeys(par1);
+			return true;
+		}
+		else
+			return false;
 	}
 }

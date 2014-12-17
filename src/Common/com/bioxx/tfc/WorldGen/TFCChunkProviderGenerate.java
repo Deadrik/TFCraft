@@ -327,20 +327,20 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		return spawnableCreatureList;
 	}
 
-	public boolean canSnowAt(World world, int par1, int par2, int par3)
+	public boolean canSnowAt(World world, int x, int y, int z)
 	{
-		float var5 = TFC_Climate.getHeightAdjustedTemp(world, par1, par2, par3);
+		float var5 = TFC_Climate.getHeightAdjustedTemp(world, x, y, z);
 		if (var5 > 0F)
 		{
 			return false;
 		}
 		else
 		{
-			if (par2 >= 0 && par2 < 256 && world.getSavedLightValue(EnumSkyBlock.Block, par1, par2, par3) < 10 && TFC_Time.getTotalMonths() > 1)
+			if (y >= 0 && y < 256 && world.getSavedLightValue(EnumSkyBlock.Block, x, y, z) < 10 && TFC_Time.getTotalMonths() > 1)
 			{
-				Block var6 = world.getBlock(par1, par2 - 1, par3);
-				Block var7 = world.getBlock(par1, par2, par3);
-				if (var7 == Blocks.air && TFCBlocks.Snow.canPlaceBlockAt(world, par1, par2, par3) && var6 != Blocks.air && var6.getMaterial().blocksMovement())
+				Block var6 = world.getBlock(x, y - 1, z);
+				Block var7 = world.getBlock(x, y, z);
+				if (var7.isAir(world, x, y, z) && TFCBlocks.Snow.canPlaceBlockAt(world, x, y, z) && !var6.isAir(world, x, y - 1, z) && var6.getMaterial().blocksMovement())
 					return true;
 			}
 			return false;

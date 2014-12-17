@@ -34,7 +34,7 @@ public class BlockCrucible extends BlockTerraContainer
 	{
 		super();
 		this.setCreativeTab(TFCTabs.TFCDevices);
-		this.setBlockBounds(0.0625f, 0f, 0.0625f, 0.9375f, 0.9375f, 0.9375f);
+		this.setBlockBounds(0.0625f, 0.25f, 0.0625f, 0.9375f, 0.9375f, 0.9375f);
 	}
 
 	@Override

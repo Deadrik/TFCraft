@@ -53,7 +53,7 @@ public class BlockStone extends BlockCollapsable
 	@Override
 	public int damageDropped(int i)
 	{
-		return i+looseStart;
+		return i;
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class BlockStone extends BlockCollapsable
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, Block l)
 	{
-		DropCarvedStone(world, i, j, k);
+		dropCarvedStone(world, i, j, k);
 	}
 
 	@Override
@@ -137,8 +137,7 @@ public class BlockStone extends BlockCollapsable
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
-		Random R = new Random();
-		dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.LooseRock, R.nextInt(2) + 1, l + looseStart));
+		dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.LooseRock, world.rand.nextInt(2) + 1, l + looseStart));
 
 		super.harvestBlock(world, entityplayer, i, j, k, l);
 	}

@@ -89,7 +89,22 @@ public class ShapedRecipesTFC implements IRecipe
 		return recipeWidth * recipeHeight;
 	}
 
-	@Override
+    public int getRecipeWidth()
+    {
+        return recipeWidth;
+    }
+
+    public int getRecipeHeight()
+    {
+        return recipeHeight;
+    }
+
+    public ItemStack[] getRecipeItems()
+    {
+        return recipeItems;
+    }
+
+    @Override
 	public boolean matches(InventoryCrafting inventorycrafting, World world)
 	{
 		for (int i = 0; i <= 5 - recipeWidth; i++)

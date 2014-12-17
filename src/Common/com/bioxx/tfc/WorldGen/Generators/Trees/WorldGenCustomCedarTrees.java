@@ -3,7 +3,6 @@ package com.bioxx.tfc.WorldGen.Generators.Trees;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -42,7 +41,7 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 					if (y >= 0 && y < world.getHeight())
 					{
 						Block j3 = world.getBlock(x, y, z);
-						if (j3 != Blocks.air && !j3.canBeReplacedByLeaves(world, x, y, z))
+						if (!j3.isAir(world, x, y, z) && !j3.canBeReplacedByLeaves(world, x, y, z))
 							flag = false;
 					}
 					else
@@ -82,9 +81,7 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 		//Here we crate the tree trunk
 		for (int l1 = 0; l1 < treeHeight; l1++)
 		{
-			Block k2 = world.getBlock(xCoord, yCoord + l1, zCoord);
-			if (k2 == Blocks.air || k2 == TFCBlocks.Leaves || k2.canBeReplacedByLeaves(world, xCoord, yCoord + l1, zCoord))
-				setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId);
+			setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId);
 		}
 		return true;
 	}

@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
@@ -186,13 +187,14 @@ public class TFCProvider extends WorldProvider
 	@Override
 	public boolean canSnowAt(int x, int y, int z, boolean checkLight)
 	{
-		if(TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) <= 0 &&
-				TFCBlocks.Snow.canPlaceBlockAt(worldObj, x, y, z) &&
-				worldObj.getBlock(x, y, z).getMaterial().isReplaceable())
-		{
+		if (TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) > 0)
+			return false;
+		Material material = worldObj.getBlock(x, y, z).getMaterial();
+		if (material == Material.snow)  // avoid vanilla MC to replace snow
+			return false;
+		if(TFCBlocks.Snow.canPlaceBlockAt(worldObj, x, y, z) && material.isReplaceable())
 			return true;
-			//worldObj.setBlock(x, y, z, TFCBlocks.Snow);
-		}
+
 		return false;
 	}
 
