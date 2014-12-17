@@ -781,7 +781,8 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 						if(result != null && result.getItem() instanceof IFood && 
 								(((IFood)result.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable || 
 								((IFood)result.getItem()).getFoodGroup() == EnumFoodGroup.Fruit ||
-								((IFood)result.getItem()).getFoodGroup() == EnumFoodGroup.Protein))
+								((IFood)result.getItem()).getFoodGroup() == EnumFoodGroup.Protein ||
+								((IFood)result.getItem()) == TFCItems.Cheese))
 						{
 							if(!Food.isBrined(result))
 								Food.setBrined(result, true);

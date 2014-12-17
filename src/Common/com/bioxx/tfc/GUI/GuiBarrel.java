@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Containers.ContainerBarrel;
 import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -323,7 +324,8 @@ public class GuiBarrel extends GuiContainerTFC
 				if(barrel.getStackInSlot(0) != null && barrel.getStackInSlot(0).getItem() instanceof IFood && 
 						(((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Fruit ||
 						((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Vegetable ||
-						((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Protein) && !Food.isBrined(inStack))
+						((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Protein ||
+						((IFood)barrel.getStackInSlot(0).getItem()) == TFCItems.Cheese) && !Food.isBrined(inStack))
 				{
 					drawCenteredString(this.fontRendererObj,StatCollector.translateToLocal("gui.barrel.brining"), w+88, h+72, 0x555555);
 				}
@@ -335,7 +337,8 @@ public class GuiBarrel extends GuiContainerTFC
 				if(barrel.getStackInSlot(0) != null && inStack.getItem() instanceof IFood && 
 						(((IFood)inStack.getItem()).getFoodGroup() == EnumFoodGroup.Fruit ||
 						((IFood)inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable ||
-						((IFood)inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein) && 
+						((IFood)inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein ||
+						((IFood)inStack.getItem()) == TFCItems.Cheese) && 
 						!Food.isPickled(inStack) && Food.isBrined(inStack))
 				{
 					drawCenteredString(this.fontRendererObj,StatCollector.translateToLocal("gui.barrel.pickling"), w+88, h+72, 0x555555);
