@@ -199,7 +199,7 @@ public class GuiBlueprint extends GuiScreen
 
 
 		int axesNameLeft = left + 10;
-		int topShift = (20 - this.fontRendererObj.FONT_HEIGHT) / 2;
+		int topShift = 10 + this.fontRendererObj.FONT_HEIGHT + 4 + (20 - this.fontRendererObj.FONT_HEIGHT) / 2;
 
 		fontRendererObj.drawString(ItemBlueprint.suffix, axesNameLeft, top + topShift, 0x000000);
 		this.nameTextField.drawTextBox();
