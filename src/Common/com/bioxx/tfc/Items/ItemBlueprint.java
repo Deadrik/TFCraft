@@ -2,11 +2,14 @@ package com.bioxx.tfc.Items;
 
 import java.util.BitSet;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Facing;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCBlocks;
@@ -16,6 +19,7 @@ import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.TileEntities.TEDetailed;
 import com.bioxx.tfc.api.Util.Helper;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class ItemBlueprint extends ItemTerra
 {
@@ -24,9 +28,6 @@ public class ItemBlueprint extends ItemTerra
 	public static final String tag_completed = "Completed";
 	public static final String tag_item_name = "ItemName";
 	public static final String tag_data = "Data";
-	public static final String tag_x_angle = "xAngle";
-	public static final String tag_y_angle = "yAngle";
-	public static final String tag_z_angle = "zAngle";
 
 	public ItemBlueprint()
 	{
@@ -100,12 +101,36 @@ public class ItemBlueprint extends ItemTerra
 			}
 
 			TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
-			BitSet blueprintData = TEDetailed.turnCube(
-							stack.stackTagCompound.getByteArray(tag_data),
-							stack.stackTagCompound.getInteger(tag_x_angle),
-							stack.stackTagCompound.getInteger(tag_y_angle),
-							stack.stackTagCompound.getInteger(tag_z_angle)
-			);
+			BitSet blueprintData = TEDetailed.fromByteArray(stack.stackTagCompound.getByteArray(tag_data), 512);
+			Vec3 angles = Vec3.createVectorHelper(0, 0, 0);
+			int s = side;
+			if (s <= 1) {
+				int f = (int)player.rotationYaw;
+				f = (f + (f < 0 ? 360 : 0) + 45) % 360 / 90;
+				f += (f == 1 ? 4 : (f > 1 ? 1 : 2));
+				if (f > 1 && f < 6) {
+					if (s == 0)
+						if (f < 4)
+							blueprintData = TEDetailed.turnCube(blueprintData, 0, 0, 180);
+						else
+							blueprintData = TEDetailed.turnCube(blueprintData, 180, 180, 0);
+					s = f;
+				}
+			}
+			switch (s) {
+				default:case 2:case 0:case 1:
+					break;
+				case 3:
+					angles.yCoord = 180;
+					break;
+				case 4:
+					angles.yCoord = 90;
+					break;
+				case 5:
+					angles.yCoord = 270;
+					break;
+			}
+			blueprintData = TEDetailed.turnCube(blueprintData, (int)angles.xCoord, (int)angles.yCoord, (int)angles.zCoord);
 
 			for(int c = 0; c < 512; c++)
 				if(te.data.get(c) && !blueprintData.get(c))

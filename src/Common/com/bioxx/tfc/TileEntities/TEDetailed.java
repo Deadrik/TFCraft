@@ -185,13 +185,11 @@ public class TEDetailed extends NetworkTileEntity {
 		return bytes;
 	}
 
-	public static BitSet turnCube(byte[] bytes, int x_angle, int y_angle, int z_angle) {
+	public static BitSet turnCube(BitSet data, int x_angle, int y_angle, int z_angle) {
 		if (x_angle == 0 && y_angle == 0 && z_angle == 0)
-			return fromByteArray(bytes, 512);
+			return data;
 
-		BitSet data = fromByteArray(bytes, 512);
 		BitSet turned_data = new BitSet(512);
-
 		int _x, _y, _z;
 		for (int x = 0; x < 8; ++x)
 			for (int z = 0; z < 8; ++z)
