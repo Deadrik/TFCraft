@@ -93,6 +93,10 @@ public class BlockTorch extends BlockTerraContainer
 				    world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)-8, 3);
 				}
 			}
+			else if (world.getBlockMetadata(x, y, z) < 8)
+			{
+				world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)+8, 3);
+			}
 		}
 		else
 		{
