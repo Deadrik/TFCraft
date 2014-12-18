@@ -179,6 +179,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				abyte1[x*z] = (byte)getBiome(x, z).biomeID;
 			}
 		}
+		chunk.setBiomeArray(abyte1);
 
 		ChunkData data = new ChunkData().CreateNew(worldObj, chunkX, chunkZ);
 		data.heightmap = seaLevelOffsetMap;
