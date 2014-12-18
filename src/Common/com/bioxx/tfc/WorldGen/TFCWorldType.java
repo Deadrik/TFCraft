@@ -85,4 +85,12 @@ public class TFCWorldType extends WorldType
 		return Global.SEALEVEL;
 	}
 
+    /**
+     * Should world creation GUI show 'Customize' button for this world type?
+     * @return if this world type has customization parameters
+     */
+	@Override
+	public boolean isCustomizable() {
+		return false;
+	}
 }
