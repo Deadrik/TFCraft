@@ -160,6 +160,8 @@ public class TerraFirmaCraft
 
 			WorldType.DEFAULT = new TFCWorldType(0, "TFCDefault");
 			WorldType.FLAT = new TFCWorldType(1, "TFCFlat");
+			WorldType.LARGE_BIOMES = new TFCWorldType(2, "TFCLargeBiomes");
+			WorldType.AMPLIFIED = new TFCWorldType(3, "TFCAmplified");
 
 			DimensionManager.unregisterDimension(-1);
 			DimensionManager.unregisterDimension(0);
@@ -199,7 +201,7 @@ public class TerraFirmaCraft
 
 		// Register Player Interact Handler - for drinking water & item pickups.
 		MinecraftForge.EVENT_BUS.register(new PlayerInteractHandler());
-		
+
 		// Register the Entity Spawn Handler
 		MinecraftForge.EVENT_BUS.register(new EntitySpawnHandler());
 

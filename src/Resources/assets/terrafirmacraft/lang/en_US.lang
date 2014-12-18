@@ -6,7 +6,9 @@
 #This file needs to be UTF-8 encoded to work with MC 1.7+
 
 generator.TFCDefault=TFC Default
-generator.TFCFlat=TFC Flat
+generator.TFCFlat=TFC Flat(Unused)
+generator.TFCAmplified=TFC Amplified(Unused)
+generator.TFCLargeBiomes=TFC Large Biomes(Unused)
 
 key.ToolMode=Cycle Tool Mode
 key.LockTool=Lock Tool Location
