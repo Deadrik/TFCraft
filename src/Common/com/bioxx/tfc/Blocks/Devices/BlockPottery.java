@@ -95,7 +95,7 @@ public class BlockPottery extends BlockTerraContainer
 					&& (player.inventory.getCurrentItem().getItem() == TFCItems.FlintSteel || player.inventory.getCurrentItem().getItem() == TFCItems.FireStarter)))
 				return false;
 
-			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() == TFCItems.Straw && !player.isSneaking())
+			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() == TFCItems.Straw && !player.isSneaking() && te.isValid())
 			{
 				te.addStraw(player.inventory.getCurrentItem(), player);
 				return true;
@@ -162,7 +162,7 @@ public class BlockPottery extends BlockTerraContainer
 	@Override
 	public int getRenderType()
 	{
-		return TFCBlocks.potteryRenderId;
+		return -1;
 	}
 
 	@Override
@@ -189,10 +189,10 @@ public class BlockPottery extends BlockTerraContainer
 	}
 
 	@Override
-	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
+	public void breakBlock(World world, int x, int y, int z, Block block, int metadata)
 	{
 		Eject(world, x, y, z);
-		return world.setBlockToAir(x, y, z);
+		super.breakBlock(world, x, y, z, block, metadata);
 	}
 
 	@Override

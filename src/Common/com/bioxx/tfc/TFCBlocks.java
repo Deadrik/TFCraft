@@ -163,7 +163,6 @@ public class TFCBlocks
 	public static int quernRenderId;
 	public static int fluidRenderId;
 	public static int woodConstructRenderId;
-	public static int potteryRenderId;
 	public static int tuyereRenderId;
 	public static int crucibleRenderId;
 	public static int berryRenderId;
