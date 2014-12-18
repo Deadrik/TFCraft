@@ -263,6 +263,7 @@ public class BlockBarrel extends BlockTerraContainer
 			te.fluid.writeToNBT(fluidNBT);
 		nbt.setTag("fluidNBT", fluidNBT);
 		nbt.setInteger("barrelType", te.barrelType);
+		nbt.setInteger("SealTime", te.sealtime);
 		nbt.setBoolean("Sealed", te.getSealed());
 
 		NBTTagList nbttaglist = new NBTTagList();
@@ -420,7 +421,7 @@ public class BlockBarrel extends BlockTerraContainer
 						{
 							if(is.getItemDamage() == 0)
 								return false;
-							
+
 							FluidStack fs = te.getFluidStack().copy();
 							if(fs.amount > 5000)
 							{
@@ -471,29 +472,30 @@ public class BlockBarrel extends BlockTerraContainer
 	{
 		return true;
 	}
-	
-    /**
-     * Get the block's damage value (for use with pick block).
-     */
-    public int getDamageValue(World world, int x, int y, int z)
-    {
+
+	/**
+	 * Get the block's damage value (for use with pick block).
+	 */
+	@Override
+	public int getDamageValue(World world, int x, int y, int z)
+	{
 		TileEntity te = world.getTileEntity(x, y, z);
 		if (te != null && te instanceof TEBarrel)
 			return ((TEBarrel)te).barrelType;
 		return 0;
-    }
+	}
 
-    /**
-     * This returns a complete list of items dropped from this block.
-     */
+	/**
+	 * This returns a complete list of items dropped from this block.
+	 */
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		
+
 		int damageValue = getDamageValue(world, x, y, z);
 		ret.add(new ItemStack(this, 1, damageValue));
-		
+
 		return ret;
 	}
 }
