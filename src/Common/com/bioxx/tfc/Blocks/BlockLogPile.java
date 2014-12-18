@@ -11,9 +11,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -35,6 +37,24 @@ public class BlockLogPile extends BlockTerraContainer
 	{
 		super(Material.wood);
 		this.setTickRandomly(true);
+	}
+	
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
+
+	@Override
+	public int getRenderType()
+	{
+		return -1;
 	}
 
 	public static int getDirectionFromMetadata(int i)
@@ -141,6 +161,8 @@ public class BlockLogPile extends BlockTerraContainer
 			TELogPile TELogPile;
 			TELogPile = (TELogPile)world.getTileEntity(x, y, z);
 			TELogPile.ejectContents();
+			//Prevent a player trying to add wood to a removed logpile
+			TELogPile.forceCloseContainers();
 			world.removeTileEntity(x, y, z);
 		}
 	}
@@ -162,18 +184,11 @@ public class BlockLogPile extends BlockTerraContainer
 	{
 		Eject(world, x, y, z);
 	}
-
+	
 	@Override
-	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int i)
+	public void breakBlock(World world, int x, int y, int z, Block block, int metadata)
 	{
 		Eject(world, x, y, z);
-	}
-
-	@Override
-	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
-	{
-		Eject(world, x, y, z);
-		return super.removedByPlayer(world, player, x, y, z);
 	}
 
 	@Override
@@ -208,6 +223,16 @@ public class BlockLogPile extends BlockTerraContainer
 			te.createCharcoal(x, y, z, true);
 		}
 	}
+	
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
+	{
+		TELogPile te = (TELogPile)world.getTileEntity(x, y, z);
+		if(te != null &&  te.getNumberOfLogs() < 16)
+			return false;
+		
+		return true;
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -225,5 +250,48 @@ public class BlockLogPile extends BlockTerraContainer
 			world.spawnParticle("smoke", centerX+(rand.nextDouble()-0.5), centerY-1, centerZ+(rand.nextDouble()-0.5), 0.0D, 0.1D, 0.0D);
 			world.spawnParticle("smoke", centerX+(rand.nextDouble()-0.5), centerY-1, centerZ+(rand.nextDouble()-0.5), 0.0D, 0.15D, 0.0D);
 		}
+	}
+	
+	/**
+	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
+	 * cleared to be reused)
+	 */
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+	{
+		int meta = world.getBlockMetadata(x, y, z);
+		int direction = getDirectionFromMetadata(meta);
+		TELogPile te = (TELogPile)world.getTileEntity(x, y, z);
+
+		if (te != null && te.getNumberOfLogs() > 0)
+			return AxisAlignedBB.getBoundingBox(x, (double)y + 0, (double)z + 0, (double)x + 1, y + Math.min((Math.ceil(te.getNumberOfLogs() / 4f)) * 0.25, 1), (double)z + 1);
+		else
+			return AxisAlignedBB.getBoundingBox(x, (double)y + 0, (double)z + 0, (double)x + 1, y + 0.25, (double)z + 1);
+	}
+
+	@Override
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
+	{
+		int meta = world.getBlockMetadata(x, y, z);
+		int direction = getDirectionFromMetadata(meta);
+		TELogPile te = (TELogPile)world.getTileEntity(x, y, z);
+
+		if (te.getNumberOfLogs() > 0)
+			return AxisAlignedBB.getBoundingBox(x, (double)y + 0, (double)z + 0, (double)x + 1, y + Math.min((Math.ceil(te.getNumberOfLogs() / 4f)) * 0.25, 1), (double)z + 1);
+		else
+			return AxisAlignedBB.getBoundingBox(x, (double)y + 0, (double)z + 0, (double)x + 1, y + 0.25, (double)z + 1);
+	}
+
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess bAccess, int x, int y, int z)
+	{
+		int meta = bAccess.getBlockMetadata(x, y, z);
+		int direction = getDirectionFromMetadata(meta);
+		TELogPile te = (TELogPile)bAccess.getTileEntity(x, y, z);
+
+		if (te.getNumberOfLogs() > 0)
+			this.setBlockBounds(0f, 0f, 0f, 1f, (float) Math.min((Math.ceil(te.getNumberOfLogs()/4f))*0.25, 1f), 1f);
+		else
+			this.setBlockBounds(0f, 0f, 0f, 0f, 0.25f, 0f);
 	}
 }

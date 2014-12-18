@@ -21,19 +21,22 @@ public class ItemTorch extends ItemTerraBlock
 	{
 		if(entityItem.worldObj.getBlock((int)Math.floor(entityItem.posX), (int)Math.floor(entityItem.posY)-1, (int)Math.floor(entityItem.posZ)) == TFCBlocks.LogPile)
 		{
-			int count = entityItem.getEntityData().getInteger("torchCount");
-			if(count > 160)
+			TELogPile te = (TELogPile) entityItem.worldObj.getTileEntity((int)Math.floor(entityItem.posX), (int)Math.floor(entityItem.posY)-1, (int)Math.floor(entityItem.posZ));
+			if(te != null && te.getNumberOfLogs() == 16)
 			{
-				TELogPile te = (TELogPile) entityItem.worldObj.getTileEntity((int)Math.floor(entityItem.posX), (int)Math.floor(entityItem.posY)-1, (int)Math.floor(entityItem.posZ));
-				te.activateCharcoal();
-				te.neighborChanged();
-				entityItem.setDead();
-			}
-			else
-			{
-				if(entityItem.worldObj.rand.nextInt(10) < 2)
-					entityItem.worldObj.spawnParticle("lava", entityItem.posX, entityItem.posY, entityItem.posZ, -0.5F + entityItem.worldObj.rand.nextFloat(), -0.5F + entityItem.worldObj.rand.nextFloat(), -0.5F + entityItem.worldObj.rand.nextFloat());
-				entityItem.getEntityData().setInteger("torchCount", count+1);
+				int count = entityItem.getEntityData().getInteger("torchCount");
+				if(count > 160)
+				{
+					te.activateCharcoal();
+					te.neighborChanged();
+					entityItem.setDead();
+				}
+				else
+				{
+					if(entityItem.worldObj.rand.nextInt(10) < 2)
+						entityItem.worldObj.spawnParticle("lava", entityItem.posX, entityItem.posY, entityItem.posZ, -0.5F + entityItem.worldObj.rand.nextFloat(), -0.5F + entityItem.worldObj.rand.nextFloat(), -0.5F + entityItem.worldObj.rand.nextFloat());
+					entityItem.getEntityData().setInteger("torchCount", count+1);
+				}
 			}
 		}
 		if(entityItem.worldObj.getBlock((int)Math.floor(entityItem.posX), (int)Math.floor(entityItem.posY)-1, (int)Math.floor(entityItem.posZ)) == TFCBlocks.Pottery)

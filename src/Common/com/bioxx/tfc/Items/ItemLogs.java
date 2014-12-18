@@ -44,7 +44,7 @@ public class ItemLogs extends ItemTerra
 	private boolean CreatePile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, int l)
 	{
 		TELogPile te = null;
-		if(world.isAirBlock(x, y, z) && isValid(world, x, y, z))
+		if(world.isAirBlock(x, y, z) && world.isSideSolid(x, y-1, z, ForgeDirection.UP))
 		{
 			world.setBlock(x, y, z, TFCBlocks.LogPile, l, 3);
 			te = (TELogPile)world.getTileEntity(x, y, z);
@@ -67,37 +67,6 @@ public class ItemLogs extends ItemTerra
 		}
 
 		return true;
-	}
-
-	public boolean isValid(World world, int i, int j, int k)
-	{
-		if(world.isSideSolid(i, j-1, k, ForgeDirection.UP))
-		{
-			TileEntity te = world.getTileEntity(i, j-1, k);
-
-			if (te instanceof TELogPile)
-			{
-				TELogPile lp = (TELogPile)te;
-
-				if(lp != null)
-				{
-					if(lp.storage[0] == null || lp.storage[0].stackSize < 4) {
-						return false;
-					}
-					if(lp.storage[1] == null || lp.storage[1].stackSize < 4) {
-						return false;
-					}
-					if(lp.storage[2] == null || lp.storage[2].stackSize < 4) {
-						return false;
-					}
-					if(lp.storage[3] == null || lp.storage[3].stackSize < 4) {
-						return false;
-					}
-				}
-			}
-			return true;
-		}
-		return false;
 	}
 
 	@Override
@@ -189,6 +158,7 @@ public class ItemLogs extends ItemTerra
 					}
 					world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, TFCBlocks.LogNatural.stepSound.func_150496_b(), (TFCBlocks.LogNatural.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.LogNatural.stepSound.getPitch() * 0.8F);
 					itemstack.stackSize = itemstack.stackSize-1;
+					world.markBlockForUpdate(x, y, z);
 					return true;
 				}
 
