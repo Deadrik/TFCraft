@@ -122,7 +122,7 @@ public class GuiAnvil extends GuiContainer
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 		int w = (width - this.xSize) / 2;
 		int h = (height - this.ySize) / 2;
-		drawTexturedModalRect(w, h, 0, 0, this.xSize, this.ySize);
+		drawTexturedModalRect(w, h, 0, 0, this.xSize, this.ySize-PlayerInventory.invYSize+12);
 
 		if(AnvilEntity != null)
 		{

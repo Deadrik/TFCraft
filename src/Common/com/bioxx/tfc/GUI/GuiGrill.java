@@ -38,7 +38,7 @@ public class GuiGrill extends GuiContainer
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 		int w = (width - xSize) / 2;
 		int h = (height - ySize) / 2;
-		drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
+		drawTexturedModalRect(w, h, 0, 0, xSize, ySize - PlayerInventory.invYSize);
 		int tempScaled = 0;
 		if(fire != null)
 			tempScaled = fire.getTemperatureScaled(49);

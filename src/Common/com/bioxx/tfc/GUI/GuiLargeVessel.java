@@ -281,7 +281,7 @@ public class GuiLargeVessel extends GuiContainerTFC
 		int h = (height - ySize) / 2;
 		if(guiTab == 0)
 		{
-			drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
+			drawTexturedModalRect(w, h, 0, 0, xSize, ySize - PlayerInventory.invYSize);
 
 			int scale = 0;
 			if(barrel!=null && barrel.fluid != null)
@@ -319,7 +319,7 @@ public class GuiLargeVessel extends GuiContainerTFC
 		}
 		else if(guiTab == 1)
 		{
-			drawTexturedModalRect(w, h, 0, 86, xSize, ySize);
+			drawTexturedModalRect(w, h, 0, 86, xSize, ySize - PlayerInventory.invYSize);
 		}
 
 		PlayerInventory.drawInventory(this, width, height, ySize - PlayerInventory.invYSize);
