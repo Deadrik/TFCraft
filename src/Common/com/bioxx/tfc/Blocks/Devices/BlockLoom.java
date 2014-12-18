@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Blocks.Devices;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -258,5 +259,30 @@ public class BlockLoom extends BlockTerraContainer
 	public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
 	{
 		return true;
+	}
+	
+    /**
+     * Get the block's damage value (for use with pick block).
+     */
+    public int getDamageValue(World world, int x, int y, int z)
+    {
+		TileEntity te = world.getTileEntity(x, y, z);
+		if (te != null && te instanceof TELoom)
+			return ((TELoom)te).loomType;
+		return 0;
+    }
+
+    /**
+     * This returns a complete list of items dropped from this block.
+     */
+	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		
+		int damageValue = getDamageValue(world, x, y, z);
+		ret.add(new ItemStack(this, 1, damageValue));
+		
+		return ret;
 	}
 }

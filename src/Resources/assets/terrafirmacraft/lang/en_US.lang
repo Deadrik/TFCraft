@@ -992,6 +992,24 @@ item.Loom.White Elm.name=White Elm Loom
 item.Loom.Willow.name=Willow Loom
 
 #== Wood Blocks ==
+tile.Chest.Acacia.name=Acacia Chest
+tile.Chest.Ash.name=Ash Chest
+tile.Chest.Aspen.name=Aspen Chest
+tile.Chest.Birch.name=Birch Chest
+tile.Chest.Chestnut.name=Chestnut Chest
+tile.Chest.Douglas Fir.name=Douglas Fir Chest
+tile.Chest.Hickory.name=Hickory Chest
+tile.Chest.Kapok.name=Kapok Chest
+tile.Chest.Maple.name=Maple Chest
+tile.Chest.Oak.name=Oak Chest
+tile.Chest.Pine.name=Pine Chest
+tile.Chest.Sequoia.name=Sequoia Chest
+tile.Chest.Spruce.name=Spruce Chest
+tile.Chest.Sycamore.name=Sycamore Chest
+tile.Chest.White Cedar.name=White Cedar Chest
+tile.Chest.White Elm.name=White Elm Chest
+tile.Chest.Willow.name=Willow Chest
+
 tile.log2.Acacia.name=Acacia Log
 tile.log.Ash.name=Ash Log
 tile.log.Aspen.name=Aspen Log
