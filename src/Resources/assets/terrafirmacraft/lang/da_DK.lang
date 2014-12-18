@@ -12,8 +12,8 @@ key.ToolMode=Skift Værktøjstilstand
 key.LockTool=Lås Værktøjsplacering
 
 effect.bleed=Blødning
-death.attack.alcohol=
-death.attack.heatStroke=
+death.attack.alcohol=%1$s døde af alkoholforgiftning
+death.attack.heatStroke=%1$s døde af hedeslag
 
 #==============
 #= Spawn Eggs =
@@ -131,7 +131,7 @@ item.meal.great=Storartet
 item.meal.fantastic=Fantastisk
 item.Sandwich.name=Sandwich
 item.Salad.name=Salat
-item.Soup.name=
+item.Soup.name=Suppe
 item.Sugar.name=Sukker
 item.Sea Weed.name=Tang
 
@@ -415,7 +415,7 @@ item.Spindle Head.Spindle Head.name=Tenhoved
 item.Fire Brick.Fire Brick.name=Ildfast Mursten
 item.Fire Brick.Clay Fire Brick.name=Ubrændt Ildfast Mursten
 tile.FireBrick.name=Ildfast Murstensblok
-tile.Pottery.name=
+tile.Pottery.name=Lertøj
 
 item.ClayBowl.Ceramic Bowl.name=Keramikskål
 item.ClayBowl.Clay Bowl.name=Lerskål
@@ -857,7 +857,7 @@ item.Small Ore.Sphalerite.name=Lille Zinkblende
 item.Small Ore.Tetrahedrite.name=Lille Tetrahedrit
 
 #== Ore Blocks ==
-tile.Ore.name=
+tile.Ore.name=Malm
 tile.Ore.Bituminous Coal.name=Bituminøst Kul
 tile.Ore.Borax.name=Boraks
 tile.Ore.Cinnabar.name=Cinnabarit
@@ -1099,9 +1099,9 @@ tile.wood.White Cedar.name=Hvid Cedertræsplanker
 tile.wood.White Elm.name=Hvidelmetræsplanker
 tile.wood.Willow.name=Piletræsplanker
 
-tile.fruitTreeWood.name=
-tile.fruitTreeLeaves.name=
-tile.fruitTreeLeaves2.name=
+tile.fruitTreeWood.name=Frugttræ
+tile.fruitTreeLeaves.name=Frugttræsblade
+tile.fruitTreeLeaves2.name=Frugttræsblade
 
 tile.Door Acacia.name=Akacietræsdør
 tile.Door Ash.name=Asketræsdør
@@ -1229,7 +1229,7 @@ tile.WoodSupportV.White Cedar.name=Hvid Cedertræsunderstøttelsesbjælke
 tile.WoodSupportV.White Elm.name=Hvidelmetræsunderstøttelsesbjælke
 tile.WoodSupportV.Willow.name=Piletræsunderstøttelsesbjælke
 
-tile.WoodSupportH2.name=
+tile.WoodSupportH2.name=Træunderstøttelsesbjælke
 tile.WoodSupportH2.Acacia.name=Akacietræsunderstøttelsesbjælke
 tile.WoodSupportH.Ash.name=Asketræsunderstøttelsesbjælke
 tile.WoodSupportH.Aspen.name=Aspetræsunderstøttelsesbjælke
@@ -1862,17 +1862,17 @@ tile.Forge.name=Esse
 tile.BlastFurnace.name=Højovn
 tile.SpawnMeter.name=Beskyttelsesmåler
 tile.Quern.name=Kværnstensbase
-tile.EarlyBloomery.name=Grubeovn
-tile.Molten.name=
-tile.Crucible.name=Digel
+tile.EarlyBloomery.name=Blæsterovn
+tile.Molten.name=Smeltet Malm
+tile.Crucible.name=Smeltedigel
 tile.NestBox.name=Redekasse
 item.SluiceItem.name=Guldvaskningssliske
 tile.Sluice.name=Guldvaskningssliske
 tile.LeatherRack.name=Læderstativ
-tile.FoodPrep.name=
-tile.MetalSheet.name=
-tile.ingotpile.name=
-tile.SmokeRack.name=
+tile.FoodPrep.name=Madlavning
+tile.MetalSheet.name=Metalplade
+tile.ingotpile.name=Metalbarrestak
+tile.SmokeRack.name=Rygningsstativ
 
 #== Anvils ==
 tile.Anvil.Stone.name=Stenambolt
@@ -1980,21 +1980,21 @@ tile.StrawHideBed.name=Strå- & Skindseng
 tile.customBed.sleep=Denne seng er så ukomfortabel at du ikke kan falde i søvn
 tile.BasicPipe.name=Rør
 tile.ValvePipe.name=Rør Med Ventil
-tile.Smoke.name=
+tile.Smoke.name=Røg
 tile.Torch.name=Fakkel
 tile.Chest.name=Kiste
 tile.Bookshelf.name=Bogreol
 tile.Workbench.name=Arbejdsbord
 tile.ButtonWood.name=Træknap
-tile.Firepit.name=
-tile.LogPile.name=
-tile.Charcoal.name=
-tile.StoneDetailed.name=
-tile.stoneStairs.name=
-tile.stoneSlabs.name=
-tile.stoneStalac.name=
-tile.WoodConstruct.name=
-tile.MetalTrapDoor.name=Gulv-lem
+tile.Firepit.name=Bålplads
+tile.LogPile.name=Brændestabel
+tile.Charcoal.name=Trækul
+tile.StoneDetailed.name=Detaljeret
+tile.stoneStairs.name=Trappe
+tile.stoneSlabs.name=Plade
+tile.stoneStalac.name=Stalaktit
+tile.WoodConstruct.name=Tømmer
+tile.MetalTrapDoor.name=Gulvlem
 tile.Vessel.name=Stort Lerkar
 tile.Grill.name=Grill
 
@@ -2045,13 +2045,13 @@ tile.Flowers2.flower_tulip_white.name=Hvid Tulipan
 tile.Flowers2.flower_tulip_pink.name=Lyserød Tulipan
 tile.Flowers2.flower_oxeye_daisy.name=Marguerit
 
-tile.SaltWater.name=
+tile.SaltWater.name=Strømmende Saltvand
 tile.SaltWaterStationary.name=Saltvand
-tile.FreshWater.name=
+tile.FreshWater.name=Strømmende Ferskvand
 tile.FreshWaterStationary.name=Ferskvand
-tile.HotWater.name=
+tile.HotWater.name=Strømmende Varmt Vand
 tile.HotWaterStationary.name=Varmt Vand
-tile.Lava.name=
+tile.Lava.name=Strømmende Lava
 tile.LavaStationary.name=Lava
 
 #=======
@@ -2151,7 +2151,7 @@ gui.Barrel.Solid=Opbevaring af faste ting
 gui.Barrel.Liquid=Væskeopbevaring
 gui.barrel.pickling=Syltning
 gui.barrel.brining=Lagesaltning
-gui.barrel.preserving=
+gui.barrel.preserving=Konservering
 
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Trækul
@@ -2162,7 +2162,7 @@ gui.Bloomery.Output=Produkt
 gui.Calendar.Calendar=Kalender
 gui.Calendar.DateBioxx=Bioxx' Fødselsdag!
 gui.Calendar.DateDunk=Dunks Fødselsdag!
-gui.Calendar.DateKitty=Kittys Fødselsdag!
+gui.Calendar.DateKitty=Kittychanleys Fødselsdag!
 
 gui.Calendar.Hour=Time
 gui.Calendar.WitchHour=Ulvetimen
@@ -2275,7 +2275,7 @@ gui.plans.sword=Sværd
 gui.plans.tuyere=Indblæsningsrør
 gui.plans.grill=Grill
 gui.plans.shears=Saks
-gui.plans.trapdoor=Gulv-lem
+gui.plans.trapdoor=Gulvlem
 
 #== Misc GUI ==
 gui.Blueprint=Arbejdstegning
@@ -2285,9 +2285,9 @@ gui.Inventory=Beholdning
 gui.ClearSlot=Tøm et produktfelt
 gui.LogPile=Brændestabel
 gui.done=Færdig
-gui.cancel=
+gui.cancel=Annuler
 gui.Sluice.Soil=Jord
-gui.Sluice.Overworked=
+gui.Sluice.Overworked=Overbebyrdet
 gui.Workbench.Crafting=Fremstilling
 gui.overburdened=*Overbelastet*
 gui.slot=Felt
@@ -2306,9 +2306,9 @@ gui.PotteryBase.Inst0=Snig og §bHøjreklik §7for at placere objekt.
 gui.PotteryVesselSmall.Inst0=Eller §bHøjreklik §7for at åbne inventar.
 gui.RawHide.Inst0=?????
 gui.Barrel.MoreItems=§8Med mere... (Tryk §fSkift§8)
-gui.Nutrient.A=
-gui.Nutrient.B=
-gui.Nutrient.C=
+gui.Nutrient.A=Næringsstof A
+gui.Nutrient.B=Næringsstof B
+gui.Nutrient.C=Næringsstof C
 
 gui.Size.Tiny=Mini
 gui.Size.VerySmall=Meget Lille
