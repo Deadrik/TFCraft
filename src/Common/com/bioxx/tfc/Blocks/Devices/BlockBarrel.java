@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Blocks.Devices;
 
 import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
@@ -22,6 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
@@ -35,6 +37,7 @@ import com.bioxx.tfc.Items.ItemBlocks.ItemBarrels;
 import com.bioxx.tfc.Items.ItemBlocks.ItemLargeVessel;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.Constant.Global;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -134,6 +137,8 @@ public class BlockBarrel extends BlockTerraContainer
 					is.setTagCompound(nbt);
 					EntityItem ei = new EntityItem(world,x,y,z,is);
 					world.spawnEntityInWorld(ei);
+
+					te.fluid = null; //Drain Liquid before we clear out the inventory to prevent dupes.
 
 					for(int s = 0; s < te.getSizeInventory(); ++s)
 						te.setInventorySlotContents(s, null);
