@@ -548,7 +548,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	@Override
 	protected boolean canDespawn()
 	{
-		return ticksExisted > 20000 && !wasRoped && this.getOwner() == null;
+		return ticksExisted > 20000 && !wasRoped && this.getOwner() == null && this.isAdult();
 	}
 
 	@Override
