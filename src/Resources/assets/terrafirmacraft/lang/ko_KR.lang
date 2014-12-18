@@ -1,0 +1,2488 @@
+﻿#ko_KR
+#This is the Korean configuration file translated by SEIDN
+
+
+
+
+
+generator.TFCDefault=TFC 기본
+generator.TFCFlat=TFC 플랫
+
+key.ToolMode=도구모드로 바꿈
+key.LockTool=도구의 위치를 고정함
+
+effect.bleed=출혈
+death.attack.alcohol=%1$s 알콜중독으로 사망하다
+death.attack.heatStroke=%1$s 일사병으로 사망하다
+
+#==============
+#= Spawn Eggs =
+#==============
+entity.squidTFC.name=오징어
+entity.cowTFC.name=소
+entity.wolfTFC.name=늑대
+entity.bearTFC.name=곰
+entity.deerTFC.name=사슴
+entity.chickenTFC.name=닭
+entity.pigTFC.name=돼지
+entity.skeletonTFC.name=스켈레톤
+entity.zombieTFC.name=좀비
+entity.spiderTFC.name=거미
+entity.slimeTFC.name=슬라임
+entity.silverfishTFC.name=좀벌레
+entity.ghastTFC.name=가스트
+entity.caveSpiderTFC.name=동굴거미
+entity.blazeTFC.name=블레이즈
+entity.endermanTFC.name=엔더맨
+entity.pigZombieTFC.name=좀비 피그맨
+entity.creeperTFC.name=크리퍼
+entity.sheepTFC.name=양
+entity.pheasantTFC.name=꿩
+entity.horseTFC.name=말
+entity.irongolemTFC.name=철 골렘
+entity.fishTFC.name=농어
+
+
+#==========
+#= Entity =
+#==========
+entity.notFamiliar=동물이 그것을 허락하지 않습니다.
+fishingRod.lineTension=줄이 끊어질것 같습니다!
+fishingRod.lineSnap=줄이 끊어졌다!
+fishingRod.bite=걸렸다!
+fishingRod.gotAway=도망가 버렸다...
+
+#================
+#= Achievements =
+#================
+achievement.achLooseRock=틀림없는 돌멩이
+achievement.achLooseRock.desc=돌멩이를 줍다
+achievement.achSmallOre=모든 수단을 사용해서
+achievement.achSmallOre.desc=광석조각을 찾다
+achievement.achWildVegetable=수집가
+achievement.achWildVegetable.desc=야생의 작물을 찾다
+achievement.achRutabaga=바보같은 양파...
+achievement.achRutabaga.desc=순무를 찾다
+achievement.achQuern=돌려라! 돌려!
+achievement.achQuern.desc=멧돌을 사용하다
+achievement.achStoneAge=구석기 시대!
+achievement.achStoneAge.desc=뗀석기를 만들어 석기시대로
+achievement.achCopperAge=동기시대!
+achievement.achCopperAge.desc=금속으로 무언가를 만들어 동기시대로
+achievement.achSaw=목수
+achievement.achSaw.desc=톱을 만들다
+achievement.achAnvil=해머 타임
+achievement.achAnvil.desc=돌 모루를 만들다
+achievement.achPickaxe=채굴을 할 시간이야!
+achievement.achPickaxe.desc=곡괭이를 만들다
+achievement.achDiamond=다이아몬- 오, 잠깐만, 아냐
+achievement.achDiamond.desc=다이아몬드 찾았다!
+achievement.achLimonite=갈 철 광!
+achievement.achLimonite.desc=갈철광을 채굴하다
+achievement.achBronzeAge=청동기 시대
+achievement.achBronzeAge.desc=청동모루를 만들다
+achievement.achIronAge=철기 시대
+achievement.achIronAge.desc=괴철을 파내다
+achievement.achPokeCreeper=스티브 어윈
+achievement.achPokeCreeper.desc=막대기로 찔러봐
+
+#============
+#= Commands =
+#============
+commands.transferTamed.noTamed=범위안에 동물이 없습니다!
+commands.transferTamed.tooMany=범위안에 너무 많은 동물이 있습니다!
+commands.transferTamed.wrongOwner=당신은 그 동물의 주인이 아닙니다!
+commands.transferTamed.sameTarget=당신은 그 동물을 자신에게 전송할 수 없습니다!
+commands.transferTamed.display.incoming=동물이 %s에 의해서 전송되었습니다!
+commands.transferTamed.display.outgoing=당신은 동물을 %s로 전송하였습니다!
+commands.transferTamed.wrongSender=그 동물은 전송할 수 없습니다!
+
+#==========
+#= Fluids =
+#==========
+fluid.freshwater=신선한 물
+fluid.saltwater=소금 물
+fluid.lavatfc=용암
+fluid.hotwater=뜨거운 물
+fluid.beer=맥주
+fluid.cider=사과주
+fluid.rum=럼
+fluid.ryewhiskey=호밀 위스키
+fluid.sake=일본주
+fluid.vodka=보드카
+fluid.whiskey=위스키
+fluid.cornwhiskey=옥수수 위스키
+fluid.milk=우유
+fluid.milkcurdled=상한 우유
+fluid.limewater=석회수
+fluid.tannin=타닌
+fluid.vinegar=식초
+fluid.brine=바닷물
+
+#========
+#= Food =
+#========
+item.MealGeneric.name=식사
+item.meal.terrible=엉망인
+item.meal.poor=맛없는
+item.meal.decent=그럭저럭인
+item.meal.good=좋은
+item.meal.great=아주 좋은
+item.meal.fantastic=환상적인
+item.Sandwich.name=샌드위치
+item.Salad.name=샐러드
+item.Soup.name=수프
+item.Sugar.name=설탕
+item.Sea Weed.name=해초
+
+#== Grains ==
+item.Barley Bread.name=보리 빵
+item.Corn Bread.name=옥수수 빵
+item.Oat Bread.name=귀리 빵
+item.Rice Bread.name=쌀 빵
+item.Rye Bread.name=호밀 빵
+item.Wheat Bread.name=밀 빵
+
+item.Barley Whole.name=보리
+item.Maize Ear.name=옥수수
+item.Oat Whole.name=귀리
+item.Rice Whole.name=쌀
+item.Rye Whole.name=호밀
+item.Wheat Whole.name=밀
+
+item.Barley Grain.name=보리 곡물
+item.Oat Grain.name=귀리 곡물
+item.Rice Grain.name=쌀 곡물
+item.Rye Grain.name=호밀 곡물
+item.Wheat Grain.name=밀 곡물
+
+item.Barley Ground.name=보리 가루
+item.Cornmeal Ground.name=옥수수 가루
+item.Oat Ground.name=귀리 가루
+item.Rice Ground.name=쌀가루
+item.Rye Ground.name=호밀 가루
+item.Wheat Ground.name=밀가루
+
+item.Barley Dough.name=보리 반죽
+item.Cornmeal Dough.name=옥수수 가루 반죽
+item.Oat Dough.name=귀리 반죽
+item.Rice Dough.name=쌀 반죽
+item.Rye Dough.name=호밀 반죽
+item.Wheat Dough.name=밀 반죽
+
+item.Seeds Barley.name=보리 씨앗
+item.Seeds Maize.name=옥수수 씨앗
+item.Seeds Oat.name=귀리 씨앗
+item.Seeds Rice.name=쌀 씨앗
+item.Seeds Rye.name=호밀 씨앗
+item.Seeds Wheat.name=밀 씨앗
+
+#== Fruit ==
+item.Green Apple.name=풋사과
+item.Red Apple.name=사과
+item.Banana.name=바나나
+item.Cherry.name=체리
+item.Lemon.name=레몬
+item.Olive.name=올리브
+item.Orange.name=오렌지
+item.Peach.name=복숭아
+item.Plum.name=자두
+
+item.FruitSapling.Green Apple.name=풋사과나무 묘목
+item.FruitSapling.Red Apple.name=사과나무 묘목
+item.FruitSapling.Banana.name=바나나나무 묘목
+item.FruitSapling.Cherry.name=체리나무 묘목
+item.FruitSapling.Lemon.name=레몬나무 묘목
+item.FruitSapling.Olive.name=올리브나무 묘목
+item.FruitSapling.Orange.name=오렌지나무 묘목
+item.FruitSapling.Peach.name=복숭아나무 묘목
+item.FruitSapling.Plum.name=자두나무 묘목
+
+#=== Berry Bushes ===
+tile.BerryBush.Blackberry.name=블렉 베리 덤불
+tile.BerryBush.Blueberry.name=블루 베리 덤불
+tile.BerryBush.Bunchberry.name=풀산딸기 덤불
+tile.BerryBush.Cloudberry.name=진들딸기 덤불
+tile.BerryBush.Cranberry.name=넌출월귤 덤불
+tile.BerryBush.Elderberry.name=딱총나무 열매 덤불
+tile.BerryBush.Gooseberry.name=구스 베리 덤불
+tile.BerryBush.Raspberry.name=라즈 베리 덤불
+tile.BerryBush.Snowberry.name=스노우 베리 덤불
+tile.BerryBush.Strawberry.name=딸기 덤불
+tile.BerryBush.Wintergreen.name=윈터그린 덤불
+
+item.Blackberry.name=블랙 베리
+item.Blueberry.name=블루 베리
+item.Bunchberry.name=풀산딸기
+item.Cloudberry.name=진들딸기
+item.Cranberry.name=넌출 월귤
+item.Elderberry.name=딱총나무 열매
+item.Gooseberry.name=구스 베리
+item.Raspberry.name=라즈 베리
+item.Snowberry.name=스노우 베리
+item.Strawberry.name=딸기
+item.Wintergreen Berry.name=윈터그린
+
+item.Blackberry Leaf.name=블랙 베리 잎
+item.Blueberry Leaf.name=블루 베리 잎
+item.Bunchberry Leaf.name=풀산딸기 잎
+item.Cloudberry Leaf.name=진들딸기 잎
+item.Cranberry Leaf.name=넌출월귤 잎
+item.Elderberry Leaf.name=딱총나무 잎
+item.Gooseberry Leaf.name=구스베리 잎
+item.Raspberry Leaf.name=라즈베리 잎
+item.Snowberry Leaf.name=스노우 베리 잎
+item.Strawberry Leaf.name=딸기 잎
+item.Wintergreen Leaf.name=윈터그린 잎
+
+#== Protein ==
+item.Beef.name=쇠고기
+item.Calamari.name=오징어
+item.egg.name=달걀
+item.Fish.name=물고기
+item.Mutton.name=양고기
+item.Porkchop.name=돼지 고기
+item.Chicken.name=가금류
+item.Venison.name=사슴 고기
+item.HorseMeat.name=말 고기
+item.Egg Cooked.name=계란 프라이
+
+item.Soybeans.name=대두
+item.Seeds Soybean.name=대두 씨앗
+
+#== Dairy ==
+item.Cheese.name=치즈
+
+#== Vegetables ==
+item.Green Bell Pepper.name=녹색 피망
+item.Red Bell Pepper.name=붉은색 피망
+item.Yellow Bell Pepper.name=노란색 피망
+item.Cabbage.name=양배추
+item.Carrot.name=당근
+item.Garlic.name=마늘
+item.Greenbeans.name=강낭콩
+item.Onion.name=양파
+item.Potato.name=감자
+item.Rutabaga.name=순무
+item.Squash.name=스쿼시
+item.Tomato.name=토마토
+
+item.Seeds Red Bell Pepper.name=붉은색 피망 씨앗
+item.Seeds Yellow Bell Pepper.name=노란색 피망 씨앗
+item.Seeds Cabbage.name=양배추 씨앗
+item.Seeds Carrot.name=당근 씨앗
+item.Seeds Garlic.name=마늘 씨앗
+item.Seeds Greenbean.name=강낭콩 씨앗
+item.Seeds Onion.name=양파 씨앗
+item.Seeds Potato.name=감자 씨앗
+item.Seeds Rutabaga.name=순무 씨앗
+item.Seeds Squash.name=스쿼시 씨앗
+item.Seeds Tomato.name=토마토 씨앗
+
+#== Alcohol ==
+item.Glass Bottle.name=빈 유리 병
+item.Beer.name=맥주
+item.Cider.name=사과주
+item.Rum.name=럼
+item.RyeWhiskey.name=호밀 위스키
+item.Sake.name=일본주
+item.Vodka.name=보드카
+item.Whiskey.name=위스키
+item.CornWhiskey.name=옥수수 위스키
+
+#===========
+#= Pottery =
+#===========
+item.Clay.Clay.name=점토
+item.Clay.Fire Clay.name=내화 점토
+
+item.Flat Clay.clay flat light.name=평평한 밝은 점토
+item.Flat Clay.clay flat dark.name=평평한 어두운 점토
+item.Flat Clay.clay flat fire.name=평평한 밝은 내화 점토
+item.Flat Clay.clay flat dark fire.name=평평한 어두운 내화 점토
+
+item.Jug.Clay Jug.name=점토 단지
+item.Jug.Ceramic Jug.name=세라믹 단지
+item.Jug.Water Jug.name=물이 든 단지
+
+item.Pot.Clay Pot.name=항아리
+item.Pot.Ceramic Pot.name=세라믹 항아리
+
+item.Small Vessel.Clay Vessel.name=점토 용기
+item.Small Vessel.Ceramic Vessel.name=세라믹 용기
+
+item.Large Vessel.Clay Vessel [Large].name=점토 용기 [대형]
+item.Large Vessel.Ceramic Vessel [Large].name=세라믹 용기 [대형]
+
+item.Mold.Clay Mold.name=점토 거푸집
+item.Mold.Ceramic Mold.name=세라믹 거푸집
+
+item.Axe Mold.Clay Mold Axe.name=점토 도끼 거푸집
+item.Axe Mold.Ceramic Mold Axe.name=도끼 거푸집
+item.Axe Mold.Ceramic Mold Axe Copper.name=도끼 거푸집 (구리)
+item.Axe Mold.Ceramic Mold Axe Bronze.name=도끼 거푸집 (청동)
+item.Axe Mold.Ceramic Mold Axe Black Bronze.name=도끼 거푸집 (검은 청동)
+item.Axe Mold.Ceramic Mold Axe Bismuth Bronze.name=도끼 거푸집 (비스무트 청동)
+
+item.Chisel Mold.Clay Mold Chisel.name=점토 끌 거푸집
+item.Chisel Mold.Ceramic Mold Chisel.name=끌 거푸집
+item.Chisel Mold.Ceramic Mold Chisel Copper.name=끌 거푸집 (구리)
+item.Chisel Mold.Ceramic Mold Chisel Bronze.name=끌 거푸집 (청동)
+item.Chisel Mold.Ceramic Mold Chisel Black Bronze.name=끌 거푸집 (검은 청동)
+item.Chisel Mold.Ceramic Mold Chisel Bismuth Bronze.name=끌 거푸집 (비스무트 청동)
+
+item.Hammer Mold.Clay Mold Hammer.name=점토 망치 거푸집
+item.Hammer Mold.Ceramic Mold Hammer.name=망치 거푸집
+item.Hammer Mold.Ceramic Mold Hammer Copper.name=망치 거푸집 (구리)
+item.Hammer Mold.Ceramic Mold Hammer Bronze.name=망치 거푸집 (청동)
+item.Hammer Mold.Ceramic Mold Hammer Black Bronze.name=망치 거푸집 (검은 청동)
+item.Hammer Mold.Ceramic Mold Hammer Bismuth Bronze.name=망치 거푸집 (비스무트 청동)
+
+item.Hoe Mold.Clay Mold Hoe.name=점토 괭이 거푸집
+item.Hoe Mold.Ceramic Mold Hoe.name=괭이 거푸집
+item.Hoe Mold.Ceramic Mold Hoe Copper.name=괭이 거푸집 (구리)
+item.Hoe Mold.Ceramic Mold Hoe Bronze.name=괭이 거푸집 (청동)
+item.Hoe Mold.Ceramic Mold Hoe Black Bronze.name=괭이 거푸집 (검은 청동)
+item.Hoe Mold.Ceramic Mold Hoe Bismuth Bronze.name=괭이 거푸집 (비스무트 청동)
+
+item.Knife Mold.Clay Mold Knife.name=점토 단검 거푸집
+item.Knife Mold.Ceramic Mold Knife.name=단검 거푸집
+item.Knife Mold.Ceramic Mold Knife Copper.name=단검 거푸집 (구리)
+item.Knife Mold.Ceramic Mold Knife Bronze.name=단검 거푸집 (청동)
+item.Knife Mold.Ceramic Mold Knife Black Bronze.name=단검 거푸집 (검은 청동)
+item.Knife Mold.Ceramic Mold Knife Bismuth Bronze.name=단검 거푸집 (비스무트 청동)
+
+item.Javelin Mold.Clay Mold Javelin.name=점토 창 거푸집
+item.Javelin Mold.Ceramic Mold Javelin.name=창 거푸집
+item.Javelin Mold.Ceramic Mold Javelin Copper.name=창 거푸집 (구리)
+item.Javelin Mold.Ceramic Mold Javelin Bronze.name=창 거푸집 (청동)
+item.Javelin Mold.Ceramic Mold Javelin Black Bronze.name=창 거푸집 (검은 청동)
+item.Javelin Mold.Ceramic Mold Javelin Bismuth Bronze.name=창 거푸집 (비스무트 청동)
+
+item.Mace Mold.Clay Mold Mace.name=점토 메이스 거푸집
+item.Mace Mold.Ceramic Mold Mace.name=메이스 거푸집
+item.Mace Mold.Ceramic Mold Mace Copper.name=메이스 거푸집 (구리)
+item.Mace Mold.Ceramic Mold Mace Bronze.name=메이스 거푸집 (청동)
+item.Mace Mold.Ceramic Mold Mace Black Bronze.name=메이스 거푸집 (검은 청동)
+item.Mace Mold.Ceramic Mold Mace Bismuth Bronze.name=메이스 거푸집 (비스무트 청동)
+
+item.Pick Mold.Clay Mold Pick.name=점토 곡괭이 거푸집
+item.Pick Mold.Ceramic Mold Pick.name=곡괭이 거푸집
+item.Pick Mold.Ceramic Mold Pick Copper.name=곡괭이 거푸집 (구리)
+item.Pick Mold.Ceramic Mold Pick Bronze.name=곡괭이 거푸집 (청동)
+item.Pick Mold.Ceramic Mold Pick Black Bronze.name=곡괭이 거푸집 (검은 청동)
+item.Pick Mold.Ceramic Mold Pick Bismuth Bronze.name=곡괭이 거푸집 (비스무트 청동)
+
+item.ProPick Mold.Clay Mold ProPick.name=점토 탐사 곡괭이 거푸집
+item.ProPick Mold.Ceramic Mold ProPick.name=탐사 곡괭이 거푸집
+item.ProPick Mold.Ceramic Mold ProPick Copper.name=탐사 곡괭이 거푸집 (구리)
+item.ProPick Mold.Ceramic Mold ProPick Bronze.name=탐사 곡괭이 거푸집 (청동)
+item.ProPick Mold.Ceramic Mold ProPick Black Bronze.name=탐사 곡괭이 거푸집 (검은 청동)
+item.ProPick Mold.Ceramic Mold ProPick Bismuth Bronze.name=탐사 곡괭이 거푸집 (비스무트 청동)
+
+item.Saw Mold.Clay Mold Saw.name=점토 톱 거푸집
+item.Saw Mold.Ceramic Mold Saw.name=톱 거푸집
+item.Saw Mold.Ceramic Mold Saw Copper.name=톱 거푸집 (구리)
+item.Saw Mold.Ceramic Mold Saw Bronze.name=톱 거푸집 (청동)
+item.Saw Mold.Ceramic Mold Saw Black Bronze.name=톱 거푸집 (검은 청동)
+item.Saw Mold.Ceramic Mold Saw Bismuth Bronze.name=톱 거푸집 (비스무트 청동)
+
+item.Scythe Mold.Clay Mold Scythe.name=점토 낫 거푸집
+item.Scythe Mold.Ceramic Mold Scythe.name=낫 거푸집
+item.Scythe Mold.Ceramic Mold Scythe Copper.name=낫 거푸집 (구리)
+item.Scythe Mold.Ceramic Mold Scythe Bronze.name=낫 거푸집 (청동)
+item.Scythe Mold.Ceramic Mold Scythe Black Bronze.name=낫 거푸집 (검은 청동)
+item.Scythe Mold.Ceramic Mold Scythe Bismuth Bronze.name=낫 거푸집 (비스무트 청동)
+
+item.Shovel Mold.Clay Mold Shovel.name=점토 삽 거푸집
+item.Shovel Mold.Ceramic Mold Shovel.name=삽 거푸집
+item.Shovel Mold.Ceramic Mold Shovel Copper.name=삽 거푸집 (구리)
+item.Shovel Mold.Ceramic Mold Shovel Bronze.name=삽 거푸집 (청동)
+item.Shovel Mold.Ceramic Mold Shovel Black Bronze.name=삽 거푸집 (검은 청동)
+item.Shovel Mold.Ceramic Mold Shovel Bismuth Bronze.name=삽 거푸집 (비스무트 청동)
+
+item.Sword Mold.Clay Mold Sword.name=점토 검 거푸집
+item.Sword Mold.Ceramic Mold Sword.name=검 거푸집
+item.Sword Mold.Ceramic Mold Sword Copper.name=검 거푸집 (구리)
+item.Sword Mold.Ceramic Mold Sword Bronze.name=검 거푸집 (청동)
+item.Sword Mold.Ceramic Mold Sword Black Bronze.name=검 거푸집 (검은 청동)
+item.Sword Mold.Ceramic Mold Sword Bismuth Bronze.name=검 거푸집 (비스무트 청동)
+
+item.Spindle.name=물레가락 (Spindle)
+item.Spindle Head.Clay Spindle.name=점토 물레가락 (Spindle)
+item.Spindle Head.Spindle Head.name=물레가락 머리 (Spindle)
+
+item.Fire Brick.Fire Brick.name=내화 벽돌
+item.Fire Brick.Clay Fire Brick.name=내화 점토 벽돌
+tile.FireBrick.name=내화 벽돌 블록
+tile.Pottery.name=도자기
+
+item.ClayBowl.Ceramic Bowl.name=세라믹 그릇
+item.ClayBowl.Clay Bowl.name=점토 그릇
+
+#= Gems =
+item.Agate.Chipped.name=이빨 빠진 마노 (Agate)
+item.Amethyst.Chipped.name=이빨 빠진 자수정 (Amethyst)
+item.Beryl.Chipped.name=이빨 빠진 녹주석 (Beryl)
+item.Diamond.Chipped.name=이빨 빠진 다이아몬드
+item.Emerald.Chipped.name=이빨 빠진 에메랄드
+item.Garnet.Chipped.name=이빨 빠진 가넷
+item.Jade.Chipped.name=이빨 빠진 비취 (Jade)
+item.Jasper.Chipped.name=이빨 빠진 벽옥 (Jasper)
+item.Opal.Chipped.name=이빨 빠진 오팔
+item.Ruby.Chipped.name=이빨 빠진 루비
+item.Sapphire.Chipped.name=이빨 빠진 사파이어
+item.Topaz.Chipped.name=이빨 빠진 토파즈
+item.Tourmaline.Chipped.name=이빨 빠진 전기석 (Tourmaline)
+
+item.Agate.Flawed.name=금이 간 마노 (Agate)
+item.Amethyst.Flawed.name=금이 간 자수정 (Amethyst)
+item.Beryl.Flawed.name=금이 간 녹주석 (Beryl)
+item.Diamond.Flawed.name=금이 간 다이아몬드
+item.Emerald.Flawed.name=금이 간 에메랄드
+item.Garnet.Flawed.name=금이 간 가넷
+item.Jade.Flawed.name=금이 간 비취 (Jade)
+item.Jasper.Flawed.name=금이 간 벽옥 (Jasper)
+item.Opal.Flawed.name=금이 간 오팔
+item.Ruby.Flawed.name=금이 간 루비
+item.Sapphire.Flawed.name=금이 간 사파이어
+item.Topaz.Flawed.name=금이 간 토파즈
+item.Tourmaline.Flawed.name=금이 간 전기석 (Tourmaline)
+
+item.Agate.Normal.name=마노 (Agate)
+item.Amethyst.Normal.name=자수정 (Amethyst)
+item.Beryl.Normal.name=녹주석 (Beryl)
+item.Diamond.Normal.name=다이아몬드
+item.Emerald.Normal.name=에메랄드
+item.Garnet.Normal.name=가넷
+item.Jade.Normal.name=비취 (Jade)
+item.Jasper.Normal.name=벽옥 (Jasper)
+item.Opal.Normal.name=오팔
+item.Ruby.Normal.name=루비
+item.Sapphire.Normal.name=사파이어
+item.Topaz.Normal.name=토파즈
+item.Tourmaline.Normal.name=전기석 (Tourmaline)
+
+item.Agate.Flawless.name=완전한 마노 (Agate)
+item.Amethyst.Flawless.name=완전한 자수정 (Amethyst)
+item.Beryl.Flawless.name=완전한 녹주석 (Beryl)
+item.Diamond.Flawless.name=완전한 다이아몬드
+item.Emerald.Flawless.name=완전한 에메랄드
+item.Garnet.Flawless.name=완전한 가넷
+item.Jade.Flawless.name=완전한 비취 (Jade)
+item.Jasper.Flawless.name=완전한 벽옥 (Jasper)
+item.Opal.Flawless.name=완전한 오팔
+item.Ruby.Flawless.name=완전한 루비
+item.Sapphire.Flawless.name=완전한 사파이어
+item.Topaz.Flawless.name=완전한 토파즈
+item.Tourmaline.Flawless.name=완전한 전기석 (Tourmaline)
+
+item.Agate.Exquisite.name=최상의 마노 (Agate)
+item.Amethyst.Exquisite.name=최상의 자수정 (Amethyst)
+item.Beryl.Exquisite.name=최상의 녹주석 (Beryl)
+item.Diamond.Exquisite.name=최상의 다이아몬드
+item.Emerald.Exquisite.name=최상의 에메랄드
+item.Garnet.Exquisite.name=최상의 가넷
+item.Jade.Exquisite.name=최상의 비취 (Jade)
+item.Jasper.Exquisite.name=최상의 벽옥 (Jasper)
+item.Opal.Exquisite.name=최상의 오팔
+item.Ruby.Exquisite.name=최상의 루비
+item.Sapphire.Exquisite.name=최상의 사파이어
+item.Topaz.Exquisite.name=최상의 토파즈
+item.Tourmaline.Exquisite.name=최상의 전기석 (Tourmaline)
+
+#===========
+#= Powders =
+#===========
+item.dyePowder.black.name=먹물
+item.dyePowder.blue.name=청금석
+item.dyePowder.brown.name=코코아 콩
+item.dyePowder.cyan.name=청록색 염료
+item.dyePowder.gray.name=회색 염료
+item.dyePowder.green.name=녹색 염료
+item.dyePowder.lightBlue.name=하늘색 염료
+item.dyePowder.lime.name=연두색 염료
+item.dyePowder.magenta.name=주홍색 염료
+item.dyePowder.orange.name=주황색 염료
+item.dyePowder.pink.name=분홍색 염료
+item.dyePowder.purple.name=보라색 염료
+item.dyePowder.red.name=붉은색 염료
+item.dyePowder.silver.name=밝은 회색 염료
+item.dyePowder.white.name=뼛가루
+item.dyePowder.yellow.name=노란색 염료
+
+item.Coke.name=코크스 (Coke)
+item.Powder.Flux.name=플럭스
+item.Powder.Graphite Powder.name=흑연 가루 (Graphite)
+item.Powder.Hematite Powder.name=적철광 가루 (Hematite)
+item.Powder.Kaolinite Powder.name=고릉석 가루 (Kaolinite)
+item.Powder.Lapis Lazuli Powder.name=청금석 가루
+item.Powder.Limonite Powder.name=갈철광 가루 (Limonite)
+item.Powder.Malachite Powder.name=공작석 가루 (Malachite)
+item.Powder.Salt.name=소금
+item.Powder.Saltpeter Powder.name=초석 가루 (Saltpeter)
+item.Powder.Sulfur Powder.name=유황 가루 (Sulfur)
+
+#=========
+#= Stone =
+#=========
+#== Stone Items ==
+item.LooseRock.Andesite.name=안산암 돌멩이 (Andesite)
+item.LooseRock.Basalt.name=현무암 돌멩이 (Basalt)
+item.LooseRock.Chalk.name=백악 돌멩이 (Chalk)
+item.LooseRock.Chert.name=규질암 돌멩이 (Chert)
+item.LooseRock.Claystone.name=점토암 돌멩이 (Claystone)
+item.LooseRock.Conglomerate.name=역암 돌멩이 (Conglomerate)
+item.LooseRock.Dacite.name=석영 안산암 돌멩이 (Dacite)
+item.LooseRock.Diorite.name=섬록암 돌멩이 (Diorite)
+item.LooseRock.Dolomite.name=백운암 돌멩이 (Dolomite)
+item.LooseRock.Gabbro.name=반려암 돌멩이 (Gabbro)
+item.LooseRock.Gneiss.name=편마암 돌멩이 (Gneiss)
+item.LooseRock.Granite.name=화강암 돌멩이 (Granite)
+item.LooseRock.Limestone.name=석회암 돌멩이 (Limestone)
+item.LooseRock.Marble.name=대리석 돌멩이 (Marble)
+item.LooseRock.Phyllite.name=천매암 돌멩이 (Phyllite)
+item.LooseRock.Quartzite.name=규암 돌멩이 (Quartzite)
+item.LooseRock.Rhyolite.name=유문암 돌멩이 (Rhyolite)
+item.LooseRock.Rock Salt.name=암염 돌멩이 (Rock Salt)
+item.LooseRock.Schist.name=편암 돌멩이 (Schist)
+item.LooseRock.Shale.name=혈암 돌멩이 (Shale)
+item.LooseRock.Slate.name=점판암 돌멩이 (Slate)
+
+item.ItemStoneBrick.Andesite.name=안산암 벽돌 (Andesite)
+item.ItemStoneBrick.Basalt.name=현무암 벽돌 (Basalt)
+item.ItemStoneBrick.Chalk.name=백악 벽돌 (Chalk)
+item.ItemStoneBrick.Chert.name=규질암 벽돌 (Chert)
+item.ItemStoneBrick.Claystone.name=점토암 벽돌 (Claystone)
+item.ItemStoneBrick.Conglomerate.name=역암 벽돌 (Conglomerate)
+item.ItemStoneBrick.Dacite.name=석영 안산암 벽돌 (Dacite)
+item.ItemStoneBrick.Diorite.name=섬록암 벽돌 (Diorite)
+item.ItemStoneBrick.Dolomite.name=백운암 벽돌 (Dolomite)
+item.ItemStoneBrick.Gabbro.name=반려암 벽돌 (Gabbro)
+item.ItemStoneBrick.Gneiss.name=편마암 벽돌 (Gneiss)
+item.ItemStoneBrick.Granite.name=화강암 벽돌 (Granite)
+item.ItemStoneBrick.Limestone.name=석회암 벽돌 (Limestone)
+item.ItemStoneBrick.Marble.name=대리석 벽돌 (Marble)
+item.ItemStoneBrick.Phyllite.name=천매암 벽돌 (Phyllite)
+item.ItemStoneBrick.Quartzite.name=규암 벽돌 (Quartzite)
+item.ItemStoneBrick.Rhyolite.name=유문암 벽돌 (Rhyolite)
+item.ItemStoneBrick.Rock Salt.name=암염 벽돌 (Rock Salt)
+item.ItemStoneBrick.Schist.name=편암 벽돌 (Schist)
+item.ItemStoneBrick.Shale.name=혈암 벽돌 (Shale)
+item.ItemStoneBrick.Slate.name=점판암 벽돌 (Slate)
+
+item.FlatRock.Andesite.name=평평한 안산암 (Andesite)
+item.FlatRock.Basalt.name=평평한 현무암 (Basalt)
+item.FlatRock.Chalk.name=평평한 백악 (Chalk)
+item.FlatRock.Chert.name=평평한 규질암 (Chert)
+item.FlatRock.Claystone.name=평평한 점토암 (Claystone)
+item.FlatRock.Conglomerate.name=평평한 역암 (Conglomerate)
+item.FlatRock.Dacite.name=평평한 석영 안산암 (Dacite)
+item.FlatRock.Diorite.name=평평한 섬록암 (Diorite)
+item.FlatRock.Dolomite.name=평평한 백운암 (Dolomite)
+item.FlatRock.Gabbro.name=평평한 반려암 (Gabbro)
+item.FlatRock.Gneiss.name=평평한 편마암 (Gneiss)
+item.FlatRock.Granite.name=평평한 화강암 (Granite)
+item.FlatRock.Limestone.name=평평한 석회암 (Limestone)
+item.FlatRock.Marble.name=평평한 대리석 (Marble)
+item.FlatRock.Phyllite.name=평평한 천매암 (Phyllite)
+item.FlatRock.Quartzite.name=평평한 규암 (Quartzite)
+item.FlatRock.Rhyolite.name=평평한 유문암 (Rhyolite)
+item.FlatRock.Rock Salt.name=평평한 암염 (Rock Salt)
+item.FlatRock.Schist.name=평평한 편암 (Schist)
+item.FlatRock.Shale.name=평평한 혈암 (Shale)
+item.FlatRock.Slate=평평한 점판암 (Slate)
+
+#== Stone Blocks ==
+tile.WallCobble.Andesite.name=안산암 조약돌 담장 (Andesite)
+tile.WallCobble.Basalt.name=현무암 조약돌 담장 (Basalt)
+tile.WallCobble.Chalk.name=백악 조약돌 담장 (Chalk)
+tile.WallCobble.Chert.name=규질암 조약돌 담장 (Chert)
+tile.WallCobble.Claystone.name=점토암 조약돌 담장 (Claystone)
+tile.WallCobble.Conglomerate.name=역암 조약돌 담장 (Conglomerate)
+tile.WallCobble.Dacite.name=석영 안산암 조약돌 담장 (Dacite)
+tile.WallCobble.Diorite.name=섬록암 조약돌 담장 (Diorite)
+tile.WallCobble.Dolomite.name=백운암 조약돌 담장 (Dolomite)
+tile.WallCobble.Gabbro.name=반려암 조약돌 담장 (Gabbro)
+tile.WallCobble.Gneiss.name=편마암 조약돌 담장 (Gneiss)
+tile.WallCobble.Granite.name=화강암 조약돌 담장 (Granite)
+tile.WallCobble.Limestone.name=석회암 조약돌 담장 (Limestone)
+tile.WallCobble.Marble.name=대리석 조약돌 담장 (Marble)
+tile.WallCobble.Phyllite.name=천매암 조약돌 담장 (Phyllite)
+tile.WallCobble.Quartzite.name=규암 조약돌 담장 (Quartzite)
+tile.WallCobble.Rhyolite.name=유문암 조약돌 담장 (Rhyolite)
+tile.WallCobble.Rock Salt.name=암염 조약돌 담장 (Rock Salt)
+tile.WallCobble.Schist.name=편암 조약돌 담장 (Schist)
+tile.WallCobble.Shale.name=혈암 조약돌 담장 (Shale)
+tile.WallCobble.Slate.name=점판암 조약돌 담장 (Slate)
+
+tile.WallRaw.Andesite.name=안산암 담장 (Andesite)
+tile.WallRaw.Basalt.name=현무암 담장 (Basalt)
+tile.WallRaw.Chalk.name=백악 담장 (Chalk)
+tile.WallRaw.Chert.name=규질암 담장 (Chert)
+tile.WallRaw.Claystone.name=점토암 담장 (Claystone)
+tile.WallRaw.Conglomerate.name=역암 담장 (Conglomerate)
+tile.WallRaw.Dacite.name=석영 안산암 담장 (Dacite)
+tile.WallRaw.Diorite.name=섬록암 담장 (Diorite)
+tile.WallRaw.Dolomite.name=백운암 담장 (Dolomite)
+tile.WallRaw.Gabbro.name=반려암 담장 (Gabbro)
+tile.WallRaw.Gneiss.name=편마암 담장 (Gneiss)
+tile.WallRaw.Granite.name=화강암 담장 (Granite)
+tile.WallRaw.Limestone.name=석회암 담장 (Limestone)
+tile.WallRaw.Marble.name=대리석 담장 (Marble)
+tile.WallRaw.Phyllite.name=천매암 담장 (Phyllite)
+tile.WallRaw.Quartzite.name=규암 담장 (Quartzite)
+tile.WallRaw.Rhyolite.name=유문암 담장 (Rhyolite)
+tile.WallRaw.Rock Salt.name=암염 담장 (Rock Salt)
+tile.WallRaw.Schist.name=편암 담장 (Schist)
+tile.WallRaw.Shale.name=혈암 담장 (Shale)
+tile.WallRaw.Slate.name=점판암 담장 (Slate)
+
+tile.WallBrick.Andesite.name=안산암 벽돌 담장 (Andesite)
+tile.WallBrick.Basalt.name=현무암 벽돌 담장 (Basalt)
+tile.WallBrick.Chalk.name=백악 벽돌 담장 (Chalk)
+tile.WallBrick.Chert.name=규질암 벽돌 담장 (Chert)
+tile.WallBrick.Claystone.name=점토암 벽돌 담장 (Claystone)
+tile.WallBrick.Conglomerate.name=역암 벽돌 담장 (Conglomerate)
+tile.WallBrick.Dacite.name=석영 안산암 벽돌 담장 (Dacite)
+tile.WallBrick.Diorite.name=섬록암 벽돌 담장 (Diorite)
+tile.WallBrick.Dolomite.name=백운암 벽돌 담장 (Dolomite)
+tile.WallBrick.Gabbro.name=반려암 벽돌 담장 (Gabbro)
+tile.WallBrick.Gneiss.name=편마암 벽돌 담장 (Gneiss)
+tile.WallBrick.Granite.name=화강암 벽돌 담장 (Granite)
+tile.WallBrick.Limestone.name=석회암 벽돌 담장 (Limestone)
+tile.WallBrick.Marble.name=대리석 벽돌 담장 (Marble)
+tile.WallBrick.Phyllite.name=천매암 벽돌 담장 (Phyllite)
+tile.WallBrick.Quartzite.name=규암 벽돌 담장 (Quartzite)
+tile.WallBrick.Rhyolite.name=유문암 벽돌 담장 (Rhyolite)
+tile.WallBrick.Rock Salt.name=암염 벽돌 담장 (Rock Salt)
+tile.WallBrick.Schist.name=편암 벽돌 담장 (Schist)
+tile.WallBrick.Shale.name=혈암 벽돌 담장 (Shale)
+tile.WallBrick.Slate.name=점판암 벽돌 담장 (Slate)
+
+tile.WallSmooth.Andesite.name=안산암 부드러운 돌 담장 (Andesite)
+tile.WallSmooth.Basalt.name=현무암 부드러운 돌 담장 (Basalt)
+tile.WallSmooth.Chalk.name=백악 부드러운 돌 담장 (Chalk)
+tile.WallSmooth.Chert.name=규질암 부드러운 돌 담장 (Chert)
+tile.WallSmooth.Claystone.name=점토암 부드러운 돌 담장 (Claystone)
+tile.WallSmooth.Conglomerate.name=역암 부드러운 돌 담장 (Conglomerate)
+tile.WallSmooth.Dacite.name=석영 안산암 부드러운 돌 담장 (Dacite)
+tile.WallSmooth.Diorite.name=섬록암 부드러운 돌 담장 (Diorite)
+tile.WallSmooth.Dolomite.name=백운암 부드러운 돌 담장 (Dolomite)
+tile.WallSmooth.Gabbro.name=반려암 부드러운 돌 담장 (Gabbro)
+tile.WallSmooth.Gneiss.name=편마암 부드러운 돌 담장 (Gneiss)
+tile.WallSmooth.Granite.name=화강암 부드러운 돌 담장 (Granite)
+tile.WallSmooth.Limestone.name=석회암 부드러운 돌 담장 (Limestone)
+tile.WallSmooth.Marble.name=대리석 부드러운 돌 담장 (Marble)
+tile.WallSmooth.Phyllite.name=천매암 부드러운 돌 담장 (Phyllite)
+tile.WallSmooth.Quartzite.name=규암 부드러운 돌 담장 (Quartzite)
+tile.WallSmooth.Rhyolite.name=유문암 부드러운 돌 담장 (Rhyolite)
+tile.WallSmooth.Rock Salt.name=암염 부드러운 돌 담장 (Rock Salt)
+tile.WallSmooth.Schist.name=편암 부드러운 돌 담장 (Schist)
+tile.WallSmooth.Shale.name=혈암 부드러운 돌 담장 (Shale)
+tile.WallSmooth.Slate.name=점판암 부드러운 돌 담장 (Slate)
+
+tile.IgExRock.Andesite.name=안산암 (Andesite)
+tile.IgExRock.Basalt.name=현무암 (Basalt)
+tile.SedRock.Chalk.name=백악 (Chalk)
+tile.SedRock.Chert.name=규질암 (Chert)
+tile.SedRock.Claystone.name=점토암 (Claystone)
+tile.SedRock.Conglomerate.name=역암 (Conglomerate)
+tile.IgExRock.Dacite.name=석영 안산암 (Dacite)
+tile.IgInRock.Diorite.name=섬록암 (Diorite)
+tile.SedRock.Dolomite.name=백운암 (Dolomite)
+tile.IgInRock.Gabbro.name=반려암 (Gabbro)
+tile.MMRock.Gneiss.name=편마암 (Gneiss)
+tile.IgInRock.Granite.name=화강암 (Granite)
+tile.SedRock.Limestone.name=석회암 (Limestone)
+tile.MMRock.Marble.name=대리석 (Marble)
+tile.MMRock.Phyllite.name=천매암 (Phyllite)
+tile.MMRock.Quartzite.name=규암 (Quartzite)
+tile.IgExRock.Rhyolite.name=유문암 (Rhyolite)
+tile.SedRock.Rock Salt.name=암염 (Rock Salt)
+tile.MMRock.Schist.name=편암 (Schist)
+tile.SedRock.Shale.name=혈암 (Shale)
+tile.MMRock.Slate.name=점판암 (Slate)
+
+tile.IgExRockCobble.Andesite.name=안산암 조약돌 (Andesite)
+tile.IgExRockCobble.Basalt.name=현무암 조약돌 (Basalt)
+tile.SedRockCobble.Chalk.name=백악 조약돌 (Chalk)
+tile.SedRockCobble.Chert.name=규질암 조약돌 (Chert)
+tile.SedRockCobble.Claystone.name=점토암 조약돌 (Claystone)
+tile.SedRockCobble.Conglomerate.name=역암 조약돌 (Conglomerate)
+tile.IgExRockCobble.Dacite.name=석영 안산암 조약돌 (Dacite)
+tile.IgInRockCobble.Diorite.name=섬록암 조약돌 (Diorite)
+tile.SedRockCobble.Dolomite.name=백운암 조약돌 (Dolomite)
+tile.IgInRockCobble.Gabbro.name=반려암 조약돌 (Gabbro)
+tile.MMRockCobble.Gneiss.name=편마암 조약돌 (Gneiss)
+tile.IgInRockCobble.Granite.name=화강암 조약돌 (Granite)
+tile.SedRockCobble.Limestone.name=석회암 조약돌 (Limestone)
+tile.MMRockCobble.Marble.name=대리석 조약돌 (Marble)
+tile.MMRockCobble.Phyllite.name=천매암 조약돌 (Phyllite)
+tile.MMRockCobble.Quartzite.name=규암 조약돌 (Quartzite)
+tile.IgExRockCobble.Rhyolite.name=유문암 조약돌 (Rhyolite)
+tile.SedRockCobble.Rock Salt.name=암염 조약돌 (Rock Salt)
+tile.MMRockCobble.Schist.name=편암 조약돌 (Schist)
+tile.SedRockCobble.Shale.name=혈암 조약돌 (Shale)
+tile.MMRockCobble.Slate.name=점판암 조약돌 (Slate)
+
+tile.IgExRockSmooth.Andesite.name=부드러운 안산암 (Andesite)
+tile.IgExRockSmooth.Basalt.name=부드러운 현무암 (Basalt)
+tile.SedRockSmooth.Chalk.name=부드러운 백악 (Chalk)
+tile.SedRockSmooth.Chert.name=부드러운 규질암 (Chert)
+tile.SedRockSmooth.Claystone.name=부드러운 점토암 (Claystone)
+tile.SedRockSmooth.Conglomerate.name=부드러운 역암 (Conglomerate)
+tile.IgExRockSmooth.Dacite.name=부드러운 석영 안산암 (Dacite)
+tile.IgInRockSmooth.Diorite.name=부드러운 섬록암 (Diorite)
+tile.SedRockSmooth.Dolomite.name=부드러운 백운암 (Dolomite)
+tile.IgInRockSmooth.Gabbro.name=부드러운 반려암 (Gabbro)
+tile.MMRockSmooth.Gneiss.name=부드러운 편마암 (Gneiss)
+tile.IgInRockSmooth.Granite.name=부드러운 화강암 (Granite)
+tile.SedRockSmooth.Limestone.name=부드러운 석회암 (Limestone)
+tile.MMRockSmooth.Marble.name=부드러운 대리석 (Marble)
+tile.MMRockSmooth.Phyllite.name=부드러운 천매암 (Phyllite)
+tile.MMRockSmooth.Quartzite.name=부드러운 규암 (Quartzite)
+tile.IgExRockSmooth.Rhyolite.name=부드러운 유문암 (Rhyolite)
+tile.SedRockSmooth.Rock Salt.name=부드러운 암염 (Rock Salt)
+tile.MMRockSmooth.Schist.name=부드러운 편암 (Schist)
+tile.SedRockSmooth.Shale.name=부드러운 혈암 (Shale)
+tile.MMRockSmooth.Slate.name=부드러운 점판암 (Slate)
+
+tile.IgExRockBrick.Andesite.name=안산암 벽돌 블록 (Andesite)
+tile.IgExRockBrick.Basalt.name=현무암 벽돌 블록 (Basalt)
+tile.SedRockBrick.Chalk.name=백악 벽돌 블록 (Chalk)
+tile.SedRockBrick.Chert.name=규질암 벽돌 블록 (Chert)
+tile.SedRockBrick.Claystone.name=점토암 벽돌 블록 (Claystone)
+tile.SedRockBrick.Conglomerate.name=역암 벽돌 블록 (Conglomerate)
+tile.IgExRockBrick.Dacite.name=석영 안산암 벽돌 블록 (Dacite)
+tile.IgInRockBrick.Diorite.name=섬록암 벽돌 블록 (Diorite)
+tile.SedRockBrick.Dolomite.name=백운암 벽돌 블록 (Dolomite)
+tile.IgInRockBrick.Gabbro.name=반려암 벽돌 블록 (Gabbro)
+tile.MMRockBrick.Gneiss.name=편마암 벽돌 블록 (Gneiss)
+tile.IgInRockBrick.Granite.name=화강암 벽돌 블록 (Granite)
+tile.SedRockBrick.Limestone.name=석회암 벽돌 블록 (Limestone)
+tile.MMRockBrick.Marble.name=대리석 벽돌 블록 (Marble)
+tile.MMRockBrick.Phyllite.name=천매암 벽돌 블록 (Phyllite)
+tile.MMRockBrick.Quartzite.name=규암 벽돌 블록 (Quartzite)
+tile.IgExRockBrick.Rhyolite.name=유문암 벽돌 블록 (Rhyolite)
+tile.SedRockBrick.Rock Salt.name=암염 벽돌 블록 (Rock Salt)
+tile.MMRockBrick.Schist.name=편암 벽돌 블록 (Schist)
+tile.SedRockBrick.Shale.name=혈암 벽돌 블록 (Shale)
+tile.MMRockBrick.Slate.name=점판암 벽돌 블록 (Slate)
+
+#=======
+#= Ore =
+#=======
+#== Ore Items ==
+item.Ore.Bituminous Coal.name=역청탄 (Bituminous Coal)
+item.Ore.Borax.name=붕사 (Borax)
+item.Ore.Cinnabar.name=진사 (Cinnabar)
+item.Ore.Cryolite.name=빙정석 (Cryolite)
+item.Ore.Graphite.name=흑연 (Graphite)
+item.Ore.Gypsum.name=석고 (Gypsum)
+item.Ore.Jet.name=흑옥탄 (Jet)
+item.Ore.Kaolinite.name=고릉석 (Kaolinite)
+item.Ore.Kimberlite.name=킴벌라이트 (Kimberlite)
+item.Ore.Lapis Lazuli.name=청금석
+item.Ore.Lignite.name=갈탄 (Lignite)
+item.Ore.Microcline.name=미사장석 (Microcline)
+item.Ore.Olivine.name=감람석 (Olivine)
+item.Ore.Petrified Wood.name=규화목 (Petrified Wood)
+item.Ore.Pitchblende.name=역청 우라늄광 (Pitchblende)
+item.Ore.Saltpeter.name=초석 (Saltpeter)
+item.Ore.Satinspar.name=섬유 석고 (Saltpeter)
+item.Ore.Selenite.name=투명 석고 (Selenite)
+item.Ore.Serpentine.name=사문석 (Selenite)
+item.Ore.Sulfur.name=유황 (Sulfur)
+item.Ore.Sylvite.name=칼리암염 (Sylvite)
+
+item.Ore.Bismuthinite.name=휘창연광 (Bismuthinite)
+item.Ore.Cassiterite.name=주석석 (Cassiterite)
+item.Ore.Galena.name=방연광 (Galena)
+item.Ore.Garnierite.name=규니켈광 (Garnierite)
+item.Ore.Hematite.name=적철광 (Hematite)
+item.Ore.Limonite.name=갈철광 (Limonite)
+item.Ore.Magnetite.name=자철광 (Magnetite)
+item.Ore.Malachite.name=공작석 (Malachite)
+item.Ore.Native Copper.name=자연산 구리 (Native Copper)
+item.Ore.Native Gold.name=자연산 금 (Native Gold)
+item.Ore.Native Platinum.name=자연산 백금 (Native Platinum)
+item.Ore.Native Silver.name=자연산 은 (Native Silver)
+item.Ore.Sphalerite.name=섬아연광 (Sphalerite)
+item.Ore.Tetrahedrite.name=사면동광 (Tetrahedrite)
+
+item.Ore.Rich Bismuthinite.name=높은 순도의 휘창연광 (Bismuthinite)
+item.Ore.Rich Cassiterite.name=높은 순도의 주석석 (Cassiterite)
+item.Ore.Rich Galena.name=높은 순도의 방연광 (Galena)
+item.Ore.Rich Garnierite.name=높은 순도의 규니켈광 (Garnierite)
+item.Ore.Rich Hematite.name=높은 순도의 적철광 (Hematite)
+item.Ore.Rich Limonite.name=높은 순도의 갈철광 (Limonite)
+item.Ore.Rich Magnetite.name=높은 순도의 자철광 (Magnetite)
+item.Ore.Rich Malachite.name=높은 순도의 공작석 (Malachite)
+item.Ore.Rich Native Copper.name=높은 순도의 자연산 구리 (Native Copper)
+item.Ore.Rich Native Gold.name=높은 순도의 자연산 금 (Native Gold)
+item.Ore.Rich Native Platinum.name=높은 순도의 자연산 백금 (Native Platinum)
+item.Ore.Rich Native Silver.name=높은 순도의 자연산 은 (Native Silver)
+item.Ore.Rich Sphalerite.name=높은 순도의 섬아연광 (Sphalerite)
+item.Ore.Rich Tetrahedrite.name=높은 순도의 사면동광 (Tetrahedrite)
+
+item.Ore.Poor Bismuthinite.name=낮은 순도의 휘창연광 (Bismuthinite)
+item.Ore.Poor Cassiterite.name=낮은 순도의 주석석 (Cassiterite)
+item.Ore.Poor Galena.name=낮은 순도의 방연광 (Galena)
+item.Ore.Poor Garnierite.name=낮은 순도의 규니켈광 (Garnierite)
+item.Ore.Poor Hematite.name=낮은 순도의 적철광 (Hematite)
+item.Ore.Poor Limonite.name=낮은 순도의 갈철광 (Limonite)
+item.Ore.Poor Magnetite.name=낮은 순도의 자철광 (Magnetite)
+item.Ore.Poor Malachite.name=낮은 순도의 공작석 (Malachite)
+item.Ore.Poor Native Copper.name=낮은 순도의 자연산 구리 (Native Copper)
+item.Ore.Poor Native Gold.name=낮은 순도의 자연산 금 (Native Gold)
+item.Ore.Poor Native Platinum.name=낮은 순도의 자연산 백금 (Native Platinum)
+item.Ore.Poor Native Silver.name=낮은 순도의 자연산 은 (Native Silver)
+item.Ore.Poor Sphalerite.name=낮은 순도의 섬아연광 (Sphalerite)
+item.Ore.Poor Tetrahedrite.name=낮은 순도의 사면동광 (Tetrahedrite)
+
+item.Small Ore.Bismuthinite.name=휘창연광 조각 (Bismuthinite)
+item.Small Ore.Cassiterite.name=주석석 조각 (Cassiterite)
+item.Small Ore.Galena.name=방연광 조각 (Galena)
+item.Small Ore.Garnierite.name=규니켈광 조각 (Garnierite)
+item.Small Ore.Hematite.name=적철광 조각 (Hematite)
+item.Small Ore.Limonite.name=갈철광 조각 (Limonite)
+item.Small Ore.Magnetite.name=자철광 조각 (Magnetite)
+item.Small Ore.Malachite.name=공작석 조각 (Malachite)
+item.Small Ore.Native Copper.name=자연산 구리 조각 (Native Copper)
+item.Small Ore.Native Gold.name=자연산 금 조각 (Native Gold)
+item.Small Ore.Native Platinum.name=자연산 백금 조각 (Native Platinum)
+item.Small Ore.Native Silver.name=자연산 은 조각 (Native Silver)
+item.Small Ore.Sphalerite.name=섬아연광 조각 (Sphalerite)
+item.Small Ore.Tetrahedrite.name=사면동광 조각 (Tetrahedrite)
+
+#== Ore Blocks ==
+tile.Ore.name=광석
+tile.Ore.Bituminous Coal.name=역청탄 (Bituminous Coal)
+tile.Ore.Borax.name=붕사 (Borax)
+tile.Ore.Cinnabar.name=진사 (Cinnabar)
+tile.Ore.Cryolite.name=빙정석 (Cryolite)
+tile.Ore.Graphite.name=흑연 (Graphite)
+tile.Ore.Gypsum.name=석고 (Gypsum)
+tile.Ore.Jet.name=흑옥탄 (Jet)
+tile.Ore.Kaolinite.name=고릉석 (Kaolinite)
+tile.Ore.Kimberlite.name=킴벌라이트 (Kimberlite)
+tile.Ore.Lapis Lazuli.name=청금석
+tile.Ore.Lignite.name=갈탄 (Lignite)
+tile.Ore.Microcline.name=미사장석 (Microcline)
+tile.Ore.Olivine.name=감람석 (Olivine)
+tile.Ore.Petrified Wood.name=규화목 (Petrified Wood)
+tile.Ore.Pitchblende.name=역청 우라늄광 (Pitchblende)
+tile.Ore.Saltpeter.name=초석 (Saltpeter)
+tile.Ore.Satinspar.name=섬유 석고 (Saltpeter)
+tile.Ore.Selenite.name=투명 석고 (Selenite)
+tile.Ore.Serpentine.name=사문석 (Selenite)
+tile.Ore.Sulfur.name=유황 (Sulfur)
+tile.Ore.Sylvite.name=칼리암염 (Sylvite)
+
+tile.Ore.Bismuthinite.name=휘창연광 (Bismuthinite)
+tile.Ore.Cassiterite.name=주석석 (Cassiterite)
+tile.Ore.Galena.name=방연광 (Galena)
+tile.Ore.Garnierite.name=규니켈광 (Garnierite)
+tile.Ore.Hematite.name=적철광 (Hematite)
+tile.Ore.Limonite.name=갈철광 (Limonite)
+tile.Ore.Magnetite.name=자철광 (Magnetite)
+tile.Ore.Malachite.name=공작석 (Malachite)
+tile.Ore.Native Copper.name=자연산 구리 (Native Copper)
+tile.Ore.Native Gold.name=자연산 금 (Native Gold)
+tile.Ore.Native Platinum.name=자연산 백금 (Native Platinum)
+tile.Ore.Native Silver.name=자연산 은 (Native Silver)
+tile.Ore.Sphalerite.name=섬아연광 (Sphalerite)
+tile.Ore.Tetrahedrite.name=사면동광 (Tetrahedrite)
+
+#========
+#= Wood =
+#========
+#== Wood Items ==
+item.Log.Acacia.name=아카시아나무 (Acacia)
+item.Log.Ash.name=서양물푸레나무 (Ash)
+item.Log.Aspen.name=사시나무 (Aspen)
+item.Log.Birch.name=자작나무 (Birch)
+item.Log.Chestnut.name=밤나무 (Chestnut)
+item.Log.Douglas Fir.name=미송나무 (Douglas Fir)
+item.Log.Hickory.name=히코리 나무 (Hickory)
+item.Log.Kapok.name=케이폭 나무 (Kapok)
+item.Log.Maple.name=단풍나무 (Maple)
+item.Log.Oak.name=참나무 (Oak)
+item.Log.Pine.name=소나무 (Pine)
+item.Log.Sequoia.name=세쿼이아 나무 (Sequoia)
+item.Log.Spruce.name=가문비나무 (Spruce)
+item.Log.Sycamore.name=플라타너스 나무 (Sycamore)
+item.Log.White Cedar.name=편백나무 (White Cedar)
+item.Log.White Elm.name=미국느릅나무 (White Elm)
+item.Log.Willow.name=버드나무 (Willow)
+
+item.SinglePlank.Acacia.name=아카시아나무 목재 (Acacia)
+item.SinglePlank.Ash.name=서양물푸레나무 목재 (Ash)
+item.SinglePlank.Aspen.name=사시나무 목재 (Aspen)
+item.SinglePlank.Birch.name=자작나무 목재 (Birch)
+item.SinglePlank.Chestnut.name=밤나무 목재 (Chestnut)
+item.SinglePlank.Douglas Fir.name=미송나무 목재 (Douglas Fir)
+item.SinglePlank.Hickory.name=히코리 나무 목재 (Hickory)
+item.SinglePlank.Kapok.name=케이폭 나무 목재 (Kapok)
+item.SinglePlank.Maple.name=단풍나무 목재 (Maple)
+item.SinglePlank.Oak.name=참나무 목재 (Oak)
+item.SinglePlank.Pine.name=소나무 목재 (Pine)
+item.SinglePlank.Sequoia.name=세쿼이아 나무 목재 (Sequoia)
+item.SinglePlank.Spruce.name=가문비나무 목재 (Spruce)
+item.SinglePlank.Sycamore.name=플라타너스 나무 목재 (Sycamore)
+item.SinglePlank.White Cedar.name=편백나무 목재 (White Cedar)
+item.SinglePlank.White Elm.name=미국느릅나무 목재 (White Elm)
+item.SinglePlank.Willow.name=버드나무 목재 (Willow)
+
+item.Acacia Door.name=아카시아나무 문 (Acacia)
+item.Ash Door.name=서양물푸레나무 문 (Ash)
+item.Aspen Door.name=사시나무 문 (Aspen)
+item.Birch Door.name=자작나무 문 (Birch)
+item.Chestnut Door.name=밤나무 문 (Chestnut)
+item.Douglas Fir Door.name=미송나무 문 (Douglas Fir)
+item.Hickory Door.name=히코리 나무 문 (Hickory)
+item.Kapok Door.name=케이폭 나무 문 (Kapok)
+item.Maple Door.name=단풍나무 문 (Maple)
+item.Oak Door.name=참나무 문 (Oak)
+item.Pine Door.name=소나무 문 (Pine)
+item.Sequoia Door.name=세쿼이아 나무 문 (Sequoia)
+item.Spruce Door.name=가문비나무 문 (Spruce)
+item.Sycamore Door.name=플라타너스 나무 문 (Sycamore)
+item.White Cedar Door.name=편백나무 문 (White Cedar)
+item.White Elm Door.name=미국느릅나무 문 (White Elm)
+item.Willow Door.name=버드나무 문 (Willow)
+
+item.Barrel.Acacia.name=아카시아나무 통 (Acacia)
+item.Barrel.Ash.name=서양물푸레나무 통 (Ash)
+item.Barrel.Aspen.name=사시나무 통 (Aspen)
+item.Barrel.Birch.name=자작나무 통 (Birch)
+item.Barrel.Chestnut.name=밤나무 통 (Chestnut)
+item.Barrel.Douglas Fir.name=미송나무 통 (Douglas Fir)
+item.Barrel.Hickory.name=히코리 나무 통 (Hickory)
+item.Barrel.Kapok.name=케이폭 나무 통 (Kapok)
+item.Barrel.Maple.name=단풍나무 통 (Maple)
+item.Barrel.Oak.name=참나무 통 (Oak)
+item.Barrel.Pine.name=소나무 통 (Pine)
+item.Barrel.Sequoia.name=세쿼이아 나무 통 (Sequoia)
+item.Barrel.Spruce.name=가문비나무 통 (Spruce)
+item.Barrel.Sycamore.name=플라타너스 나무 통 (Sycamore)
+item.Barrel.White Cedar.name=편백나무 통 (White Cedar)
+item.Barrel.White Elm.name=미국느릅나무 통 (White Elm)
+item.Barrel.Willow.name=버드나무 통 (Willow)
+
+item.Loom.Acacia.name=아카시아나무 베틀 (Acacia)
+item.Loom.Ash.name=서양물푸레나무 베틀 (Ash)
+item.Loom.Aspen.name=사시나무 베틀 (Aspen)
+item.Loom.Birch.name=자작나무 베틀 (Birch)
+item.Loom.Chestnut.name=밤나무 베틀 (Chestnut)
+item.Loom.Douglas Fir.name=미송나무 베틀 (Douglas Fir)
+item.Loom.Hickory.name=히코리 나무 베틀 (Hickory)
+item.Loom.Kapok.name=케이폭 나무 베틀 (Kapok)
+item.Loom.Maple.name=단풍나무 베틀 (Maple)
+item.Loom.Oak.name=참나무 베틀 (Oak)
+item.Loom.Pine.name=소나무 베틀 (Pine)
+item.Loom.Sequoia.name=세쿼이아 나무 베틀 (Sequoia)
+item.Loom.Spruce.name=가문비나무 베틀 (Spruce)
+item.Loom.Sycamore.name=플라타너스 나무 베틀 (Sycamore)
+item.Loom.White Cedar.name=편백나무 베틀 (White Cedar)
+item.Loom.White Elm.name=미국느릅나무 베틀 (White Elm)
+item.Loom.Willow.name=버드나무 베틀 (Willow)
+
+#== Wood Blocks ==
+tile.log2.Acacia.name=아카시아나무 (Acacia)
+tile.log.Ash.name=서양물푸레나무 (Ash)
+tile.log.Aspen.name=사시나무 (Aspen)
+tile.log.Birch.name=자작나무 (Birch)
+tile.log.Chestnut.name=밤나무 (Chestnut)
+tile.log.Douglas Fir.name=미송나무 (Douglas Fir)
+tile.log.Hickory.name=히코리 나무 (Hickory)
+tile.log.Kapok.name=케이폭 나무 (Kapok)
+tile.log.Maple.name=단풍나무 (Maple)
+tile.log.Oak.name=참나무 (Oak)
+tile.log.Pine.name=소나무 (Pine)
+tile.log.Sequoia.name=세쿼이아 나무 (Sequoia)
+tile.log.Spruce.name=가문비나무 (Spruce)
+tile.log.Sycamore.name=플라타너스 나무 (Sycamore)
+tile.log.White Cedar.name=편백나무 (White Cedar)
+tile.log.White Elm.name=미국느릅나무 (White Elm)
+tile.log.Willow.name=버드나무 (Willow)
+
+tile.WoodVert2.Acacia.name=아카시아나무 (Acacia)
+tile.WoodVert.Ash.name=서양물푸레나무 (Ash)
+tile.WoodVert.Aspen.name=사시나무 (Aspen)
+tile.WoodVert.Birch.name=자작나무 (Birch)
+tile.WoodVert.Chestnut.name=밤나무 (Chestnut)
+tile.WoodVert.Douglas Fir.name=미송나무 (Douglas Fir)
+tile.WoodVert.Hickory.name=히코리 나무 (Hickory)
+tile.WoodVert.Kapok.name=케이폭 나무 (Kapok)
+tile.WoodVert.Maple.name=단풍나무 (Maple)
+tile.WoodVert.Oak.name=참나무 (Oak)
+tile.WoodVert.Pine.name=소나무 (Pine)
+tile.WoodVert.Sequoia.name=세쿼이아 나무 (Sequoia)
+tile.WoodVert.Spruce.name=가문비나무 (Spruce)
+tile.WoodVert.Sycamore.name=플라타너스 나무 (Sycamore)
+tile.WoodVert.White Cedar.name=편백나무 (White Cedar)
+tile.WoodVert.White Elm.name=미국느릅나무 (White Elm)
+tile.WoodVert.Willow.name=버드나무 (Willow)
+
+tile.WoodHoriz3.Acacia.name=아카시아나무 (Acacia)
+tile.WoodHoriz.Ash.name=서양물푸레나무 (Ash)
+tile.WoodHoriz.Aspen.name=사시나무 (Aspen)
+tile.WoodHoriz.Birch.name=자작나무 (Birch)
+tile.WoodHoriz.Chestnut.name=밤나무 (Chestnut)
+tile.WoodHoriz.Douglas Fir.name=미송나무 (Douglas Fir)
+tile.WoodHoriz.Hickory.name=히코리 나무 (Hickory)
+tile.WoodHoriz2.Kapok.name=케이폭 나무 (Kapok)
+tile.WoodHoriz.Maple.name=단풍나무 (Maple)
+tile.WoodHoriz.Oak.name=참나무 (Oak)
+tile.WoodHoriz2.Pine.name=소나무 (Pine)
+tile.WoodHoriz2.Sequoia.name=세쿼이아 나무 (Sequoia)
+tile.WoodHoriz2.Spruce.name=가문비나무 (Spruce)
+tile.WoodHoriz2.Sycamore.name=플라타너스 나무 (Sycamore)
+tile.WoodHoriz2.White Cedar.name=편백나무 (White Cedar)
+tile.WoodHoriz2.White Elm.name=미국느릅나무 (White Elm)
+tile.WoodHoriz2.Willow.name=버드나무 (Willow)
+
+tile.sapling2.Acacia.name=아카시아나무 묘목 (Acacia)
+tile.sapling.Ash.name=서양물푸레나무 묘목 (Ash)
+tile.sapling.Aspen.name=사시나무 묘목 (Aspen)
+tile.sapling.Birch.name=자작나무 묘목 (Birch)
+tile.sapling.Chestnut.name=밤나무 묘목 (Chestnut)
+tile.sapling.Douglas Fir.name=미송나무 묘목 (Douglas Fir)
+tile.sapling.Hickory.name=히코리 나무 묘목 (Hickory)
+tile.sapling.Kapok.name=케이폭 나무 묘목 (Kapok)
+tile.sapling.Maple.name=단풍나무 묘목 (Maple)
+tile.sapling.Oak.name=참나무 묘목 (Oak)
+tile.sapling.Pine.name=소나무 묘목 (Pine)
+tile.sapling.Sequoia.name=세쿼이아 나무 묘목 (Sequoia)
+tile.sapling.Spruce.name=가문비나무 묘목 (Spruce)
+tile.sapling.Sycamore.name=플라타너스 나무 묘목 (Sycamore)
+tile.sapling.White Cedar.name=편백나무 묘목 (White Cedar)
+tile.sapling.White Elm.name=미국느릅나무 묘목 (White Elm)
+tile.sapling.Willow.name=버드나무 묘목 (Willow)
+
+tile.leaves2.name=아카시아나무 잎 (Acacia)
+tile.leaves2.Acacia.name=아카시아나무 잎 (Acacia)
+tile.leaves.Ash.name=서양물푸레나무 잎 (Ash)
+tile.leaves.Aspen.name=사시나무 잎 (Aspen)
+tile.leaves.Birch.name=자작나무 잎 (Birch)
+tile.leaves.Chestnut.name=밤나무 잎 (Chestnut)
+tile.leaves.Douglas Fir.name=미송나무 잎 (Douglas Fir)
+tile.leaves.Hickory.name=히코리 나무 잎 (Hickory)
+tile.leaves.Kapok.name=케이폭 나무 잎 (Kapok)
+tile.leaves.Maple.name=단풍나무 잎 (Maple)
+tile.leaves.Oak.name=참나무 잎 (Oak)
+tile.leaves.Pine.name=소나무 잎 (Pine)
+tile.leaves.Sequoia.name=세쿼이아 나무 잎 (Sequoia)
+tile.leaves.Spruce.name=가문비나무 잎 (Spruce)
+tile.leaves.Sycamore.name=플라타너스 나무 잎 (Sycamore)
+tile.leaves.White Cedar.name=편백나무 잎 (White Cedar)
+tile.leaves.White Elm.name=미국느릅나무 잎 (White Elm)
+tile.leaves.Willow.name=버드나무 잎 (Willow)
+
+tile.wood2.Acacia.name=아카시아나무 널빤지 (Acacia)
+tile.wood.Ash.name=서양물푸레나무 널빤지 (Ash)
+tile.wood.Aspen.name=사시나무 널빤지 (Aspen)
+tile.wood.Birch.name=자작나무 널빤지 (Birch)
+tile.wood.Chestnut.name=밤나무 널빤지 (Chestnut)
+tile.wood.Douglas Fir.name=미송나무 널빤지 (Douglas Fir)
+tile.wood.Hickory.name=히코리 나무 널빤지 (Hickory)
+tile.wood.Kapok.name=케이폭 나무 널빤지 (Kapok)
+tile.wood.Maple.name=단풍나무 널빤지 (Maple)
+tile.wood.Oak.name=참나무 널빤지 (Oak)
+tile.wood.Pine.name=소나무 널빤지 (Pine)
+tile.wood.Sequoia.name=세쿼이아 나무 널빤지 (Sequoia)
+tile.wood.Spruce.name=가문비나무 널빤지 (Spruce)
+tile.wood.Sycamore.name=플라타너스 나무 널빤지 (Sycamore)
+tile.wood.White Cedar.name=편백나무 널빤지 (White Cedar)
+tile.wood.White Elm.name=미국느릅나무 널빤지 (White Elm)
+tile.wood.Willow.name=버드나무 널빤지 (Willow)
+
+tile.fruitTreeWood.name=과일 나무
+tile.fruitTreeLeaves.name=과일 나무 잎
+tile.fruitTreeLeaves2.name=과일 나무 잎
+
+tile.Door Acacia.name=아카시아나무 문 (Acacia)
+tile.Door Ash.name=서양물푸레나무 문 (Ash)
+tile.Door Aspen.name=사시나무 문 (Aspen)
+tile.Door Birch.name=자작나무 문 (Birch)
+tile.Door Chestnut.name=밤나무 문 (Chestnut)
+tile.Door Douglas Fir.name=미송나무 문 (Douglas Fir)
+tile.Door Hickory.name=히코리 나무 문 (Hickory)
+tile.Door Kapok.name=케이폭 나무 문 (Kapok)
+tile.Door Maple.name=단풍나무 문 (Maple)
+tile.Door Oak.name=참나무 문 (Oak)
+tile.Door Pine.name=소나무 문 (Pine)
+tile.Door Sequoia.name=세쿼이아 나무 문 (Sequoia)
+tile.Door Spruce.name=가문비나무 문 (Spruce)
+tile.Door Sycamore.name=플라타너스 나무 문 (Sycamore)
+tile.Door White Cedar.name=편백나무 문 (White Cedar)
+tile.Door White Elm.name=미국느릅나무 문 (White Elm)
+tile.Door Willow.name=버드나무 문 (Willow)
+
+tile.Barrel.Acacia.name=아카시아나무 통 (Acacia)
+tile.Barrel.Ash.name=서양물푸레나무 통 (Ash)
+tile.Barrel.Aspen.name=사시나무 통 (Aspen)
+tile.Barrel.Birch.name=자작나무 통 (Birch)
+tile.Barrel.Chestnut.name=밤나무 통 (Chestnut)
+tile.Barrel.Douglas Fir.name=미송나무 통 (Douglas Fir)
+tile.Barrel.Hickory.name=히코리 나무 통 (Hickory)
+tile.Barrel.Kapok.name=케이폭 나무 통 (Kapok)
+tile.Barrel.Maple.name=단풍나무 통 (Maple)
+tile.Barrel.Oak.name=참나무 통 (Oak)
+tile.Barrel.Pine.name=소나무 통 (Pine)
+tile.Barrel.Sequoia.name=세쿼이아 나무 통 (Sequoia)
+tile.Barrel.Spruce.name=가문비나무 통 (Spruce)
+tile.Barrel.Sycamore.name=플라타너스 나무 통 (Sycamore)
+tile.Barrel.White Cedar.name=편백나무 통 (White Cedar)
+tile.Barrel.White Elm.name=미국느릅나무 통 (White Elm)
+tile.Barrel.Willow.name=버드나무 통 (Willow)
+
+tile.Loom.Acacia.name=아카시아나무 베틀 (Acacia)
+tile.Loom.Ash.name=서양물푸레나무 베틀 (Ash)
+tile.Loom.Aspen.name=사시나무 베틀 (Aspen)
+tile.Loom.Birch.name=자작나무 베틀 (Birch)
+tile.Loom.Chestnut.name=밤나무 베틀 (Chestnut)
+tile.Loom.Douglas Fir.name=미송나무 베틀 (Douglas Fir)
+tile.Loom.Hickory.name=히코리 나무 베틀 (Hickory)
+tile.Loom.Kapok.name=케이폭 나무 베틀 (Kapok)
+tile.Loom.Maple.name=단풍나무 베틀 (Maple)
+tile.Loom.Oak.name=참나무 베틀 (Oak)
+tile.Loom.Pine.name=소나무 베틀 (Pine)
+tile.Loom.Sequoia.name=세쿼이아 나무 베틀 (Sequoia)
+tile.Loom.Spruce.name=가문비나무 베틀 (Spruce)
+tile.Loom.Sycamore.name=플라타너스 나무 베틀 (Sycamore)
+tile.Loom.White Cedar.name=편백나무 베틀 (White Cedar)
+tile.Loom.White Elm.name=미국느릅나무 베틀 (White Elm)
+tile.Loom.Willow.name=버드나무 베틀 (Willow)
+
+tile.FenceTFC.Acacia.name=아카시아나무 울타리 (Acacia)
+tile.FenceTFC.Ash.name=서양물푸레나무 울타리 (Ash)
+tile.FenceTFC.Aspen.name=사시나무 울타리 (Aspen)
+tile.FenceTFC.Birch.name=자작나무 울타리 (Birch)
+tile.FenceTFC.Chestnut.name=밤나무 울타리 (Chestnut)
+tile.FenceTFC.Douglas Fir.name=미송나무 울타리 (Douglas Fir)
+tile.FenceTFC.Hickory.name=히코리 나무 울타리 (Hickory)
+tile.FenceTFC.Kapok.name=케이폭 나무 울타리 (Kapok)
+tile.FenceTFC.Maple.name=단풍나무 울타리 (Maple)
+tile.FenceTFC.Oak.name=참나무 울타리 (Oak)
+tile.FenceTFC.Pine.name=소나무 울타리 (Pine)
+tile.FenceTFC.Sequoia.name=세쿼이아 나무 울타리 (Sequoia)
+tile.FenceTFC.Spruce.name=가문비나무 울타리 (Spruce)
+tile.FenceTFC.Sycamore.name=플라타너스 나무 울타리 (Sycamore)
+tile.FenceTFC.White Cedar.name=편백나무 울타리 (White Cedar)
+tile.FenceTFC.White Elm.name=미국느릅나무 울타리 (White Elm)
+tile.FenceTFC.Willow.name=버드나무 울타리 (Willow)
+
+tile.FenceGateTFC.Acacia.name=아카시아나무 울타리 문 (Acacia)
+tile.FenceGateTFC.Ash.name=서양물푸레나무 울타리 문 (Ash)
+tile.FenceGateTFC.Aspen.name=사시나무 울타리 문 (Aspen)
+tile.FenceGateTFC.Birch.name=자작나무 울타리 문 (Birch)
+tile.FenceGateTFC.Chestnut.name=밤나무 울타리 문 (Chestnut)
+tile.FenceGateTFC.Douglas Fir.name=미송나무 울타리 문 (Douglas Fir)
+tile.FenceGateTFC.Hickory.name=히코리 나무 울타리 문 (Hickory)
+tile.FenceGateTFC.Kapok.name=케이폭 나무 울타리 문 (Kapok)
+tile.FenceGateTFC.Maple.name=단풍나무 울타리 문 (Maple)
+tile.FenceGateTFC.Oak.name=참나무 울타리 문 (Oak)
+tile.FenceGateTFC.Pine.name=소나무 울타리 문 (Pine)
+tile.FenceGateTFC.Sequoia.name=세쿼이아 나무 울타리 문 (Sequoia)
+tile.FenceGateTFC.Spruce.name=가문비나무 울타리 문 (Spruce)
+tile.FenceGateTFC.Sycamore.name=플라타너스 나무 울타리 문 (Sycamore)
+tile.FenceGateTFC.White Cedar.name=편백나무 울타리 문 (White Cedar)
+tile.FenceGateTFC.White Elm.name=미국느릅나무 울타리 문 (White Elm)
+tile.FenceGateTFC.Willow.name=버드나무 울타리 문 (Willow)
+
+tile.ArmourStand.Acacia.name=아카시아나무 아머 스탠드 (Acacia)
+tile.ArmourStand.Ash.name=서양물푸레나무 아머 스탠드 (Ash)
+tile.ArmourStand.Aspen.name=사시나무 아머 스탠드 (Aspen)
+tile.ArmourStand.Birch.name=자작나무 아머 스탠드 (Birch)
+tile.ArmourStand.Chestnut.name=밤나무 아머 스탠드 (Chestnut)
+tile.ArmourStand.Douglas Fir.name=미송나무 아머 스탠드 (Douglas Fir)
+tile.ArmourStand.Hickory.name=히코리 나무 아머 스탠드 (Hickory)
+tile.ArmourStand.Kapok.name=케이폭 나무 아머 스탠드 (Kapok)
+tile.ArmourStand.Maple.name=단풍나무 아머 스탠드 (Maple)
+tile.ArmourStand.Oak.name=참나무 아머 스탠드 (Oak)
+tile.ArmourStand.Pine.name=소나무 아머 스탠드 (Pine)
+tile.ArmourStand.Sequoia.name=세쿼이아 나무 아머 스탠드 (Sequoia)
+tile.ArmourStand.Spruce.name=가문비나무 아머 스탠드 (Spruce)
+tile.ArmourStand.Sycamore.name=플라타너스 나무 아머 스탠드 (Sycamore)
+tile.ArmourStand.White Cedar.name=편백나무 아머 스탠드 (White Cedar)
+tile.ArmourStand.White Elm.name=미국느릅나무 아머 스탠드 (White Elm)
+tile.ArmourStand.Willow.name=버드나무 아머 스탠드 (Willow)
+
+tile.WoodSupportV2.Acacia.name=아카시아나무 버팀목 (Acacia)
+tile.WoodSupportV.Ash.name=서양물푸레나무 버팀목 (Ash)
+tile.WoodSupportV.Aspen.name=사시나무 버팀목 (Aspen)
+tile.WoodSupportV.Birch.name=자작나무 버팀목 (Birch)
+tile.WoodSupportV.Chestnut.name=밤나무 버팀목 (Chestnut)
+tile.WoodSupportV.Douglas Fir.name=미송나무 버팀목 (Douglas Fir)
+tile.WoodSupportV.Hickory.name=히코리 나무 버팀목 (Hickory)
+tile.WoodSupportV.Kapok.name=케이폭 나무 버팀목 (Kapok)
+tile.WoodSupportV.Maple.name=단풍나무 버팀목 (Maple)
+tile.WoodSupportV.Oak.name=참나무 버팀목 (Oak)
+tile.WoodSupportV.Pine.name=소나무 버팀목 (Pine)
+tile.WoodSupportV.Sequoia.name=세쿼이아 나무 버팀목 (Sequoia)
+tile.WoodSupportV.Spruce.name=가문비나무 버팀목 (Spruce)
+tile.WoodSupportV.Sycamore.name=플라타너스 나무 버팀목 (Sycamore)
+tile.WoodSupportV.White Cedar.name=편백나무 버팀목 (White Cedar)
+tile.WoodSupportV.White Elm.name=미국느릅나무 버팀목 (White Elm)
+tile.WoodSupportV.Willow.name=버드나무 버팀목 (Willow)
+
+tile.WoodSupportH2.name=버팀목
+tile.WoodSupportH2.Acacia.name=아카시아나무 버팀목 (Acacia)
+tile.WoodSupportH.Ash.name=서양물푸레나무 버팀목 (Ash)
+tile.WoodSupportH.Aspen.name=사시나무 버팀목 (Aspen)
+tile.WoodSupportH.Birch.name=자작나무 버팀목 (Birch)
+tile.WoodSupportH.Chestnut.name=밤나무 버팀목 (Chestnut)
+tile.WoodSupportH.Douglas Fir.name=미송나무 버팀목 (Douglas Fir)
+tile.WoodSupportH.Hickory.name=히코리 나무 버팀목 (Hickory)
+tile.WoodSupportH.Kapok.name=케이폭 나무 버팀목 (Kapok)
+tile.WoodSupportH.Maple.name=단풍나무 버팀목 (Maple)
+tile.WoodSupportH.Oak.name=참나무 버팀목 (Oak)
+tile.WoodSupportH.Pine.name=소나무 버팀목 (Pine)
+tile.WoodSupportH.Sequoia.name=세쿼이아 나무 버팀목 (Sequoia)
+tile.WoodSupportH.Spruce.name=가문비나무 버팀목 (Spruce)
+tile.WoodSupportH.Sycamore.name=플라타너스 나무 버팀목 (Sycamore)
+tile.WoodSupportH.White Cedar.name=편백나무 버팀목 (White Cedar)
+tile.WoodSupportH.White Elm.name=미국느릅나무 버팀목 (White Elm)
+tile.WoodSupportH.Willow.name=버드나무 버팀목 (Willow)
+
+tile.Toolrack.Acacia.name=아카시아나무 도구 선반 (Acacia)
+tile.Toolrack.Ash.name=서양물푸레나무 도구 선반 (Ash)
+tile.Toolrack.Aspen.name=사시나무 도구 선반 (Aspen)
+tile.Toolrack.Birch.name=자작나무 도구 선반 (Birch)
+tile.Toolrack.Chestnut.name=밤나무 도구 선반 (Chestnut)
+tile.Toolrack.Douglas Fir.name=미송나무 도구 선반 (Douglas Fir)
+tile.Toolrack.Hickory.name=히코리 나무 도구 선반 (Hickory)
+tile.Toolrack.Kapok.name=케이폭 나무 도구 선반 (Kapok)
+tile.Toolrack.Maple.name=단풍나무 도구 선반 (Maple)
+tile.Toolrack.Oak.name=참나무 도구 선반 (Oak)
+tile.Toolrack.Pine.name=소나무 도구 선반 (Pine)
+tile.Toolrack.Sequoia.name=세쿼이아 나무 도구 선반 (Sequoia)
+tile.Toolrack.Spruce.name=가문비나무 도구 선반 (Spruce)
+tile.Toolrack.Sycamore.name=플라타너스 나무 도구 선반 (Sycamore)
+tile.Toolrack.White Cedar.name=편백나무 도구 선반 (White Cedar)
+tile.Toolrack.White Elm.name=미국느릅나무 도구 선반 (White Elm)
+tile.Toolrack.Willow.name=버드나무 도구 선반 (Willow)
+
+#=======================
+#= Tools/Weapons/Armor =
+#=======================
+
+#== Stone Heads ==
+item.Stone Hammer Head.name=돌 망치 머리
+item.Stone Knife Blade.name=돌 단검 날
+
+item.IgIn Stone Axe Head.name=돌 도끼 날
+item.IgIn Stone Chisel Head.name=돌 끌 머리
+item.IgIn Stone Hoe Head.name=돌 괭이 머리
+item.IgIn Stone Javelin Head.name=돌 창 날
+item.IgIn Stone Shovel Head.name=돌 삽 머리
+
+item.Sed Stone Axe Head.name=돌 도끼 날
+item.Sed Stone Chisel Head.name=돌 끌 머리
+item.Sed Stone Hoe Head.name=돌 괭이 머리
+item.Sed Stone Javelin Head.name=돌 창 날
+item.Sed Stone Shovel Head.name=돌 삽 머리
+
+item.IgEx Stone Axe Head.name=돌 도끼 날
+item.IgEx Stone Chisel Head.name=돌 끌 머리
+item.IgEx Stone Hoe Head.name=돌 괭이 머리
+item.IgEx Stone Javelin Head.name=돌 창 날
+item.IgEx Stone Shovel Head.name=돌 삽 머리
+
+item.MM Stone Axe Head.name=돌 도끼 날
+item.MM Stone Chisel Head.name=돌 끌 머리
+item.MM Stone Hoe Head.name=돌 괭이 머리
+item.MM Stone Javelin Head.name=돌 창 날
+item.MM Stone Shovel Head.name=돌 삽 머리
+
+#== Stone Tools ==
+item.Stone Axe.name=돌 도끼
+item.IgIn Stone Axe.name=돌 도끼
+item.Sed Stone Axe.name=돌 도끼
+item.IgEx Stone Axe.name=돌 도끼
+item.MM Stone Axe.name=돌 도끼
+
+item.Stone Chisel.name=돌 끌
+
+item.Stone Hammer.name=돌 망치
+
+item.Stone Hoe.name=돌 괭이
+item.IgIn Stone Hoe.name=돌 괭이
+item.Sed Stone Hoe.name=돌 괭이
+item.IgEx Stone Hoe.name=돌 괭이
+item.MM Stone Hoe.name=돌 괭이
+
+item.Stone Javelin.name=돌 창
+item.IgIn Stone Javelin.name=돌 창
+item.Sed Stone Javelin.name=돌 창
+item.IgEx Stone Javelin.name=돌 창
+item.MM Stone Javelin.name=돌 창
+
+item.Stone Knife.name=돌 칼
+
+item.Stone Shovel.name=돌 삽
+item.IgIn Stone Shovel.name=돌 삽
+item.Sed Stone Shovel.name=돌 삽
+item.IgEx Stone Shovel.name=돌 삽
+item.MM Stone Shovel.name=돌 삽
+
+#== Metal Heads ==
+#=== Axe Head ===
+item.Bismuth Bronze Axe Head.name=비스무트 청동 도끼 날 (Bismuth Bronze)
+item.Black Bronze Axe Head.name=검은 청동 도끼 날 (Black Bronze)
+item.Black Steel Axe Head.name=검은 강철 도끼 날 (Black Steel)
+item.Blue Steel Axe Head.name=푸른 강철 도끼 날 (Blue Steel)
+item.Bronze Axe Head.name=청동 도끼 날 (Bronze)
+item.Copper Axe Head.name=구리 도끼 날 (Copper)
+item.Red Steel Axe Head.name=붉은 강철 도끼 날 (Red Steel)
+item.Steel Axe Head.name=강철 도끼 날 (Steel)
+item.Wrought Iron Axe Head.name=연철 도끼 날 (Wrought Iron)
+
+#=== Chisel Head ===
+item.Bismuth Bronze Chisel Head.name=비스무트 청동 끌 머리 (Bismuth Bronze)
+item.Black Bronze Chisel Head.name=검은 청동 끌 머리 (Black Bronze)
+item.Black Steel Chisel Head.name=검은 강철 끌 머리 (Black Steel)
+item.Blue Steel Chisel Head.name=푸른 강철 끌 머리 (Blue Steel)
+item.Bronze Chisel Head.name=청동 끌 머리 (Bronze)
+item.Copper Chisel Head.name=구리 끌 머리 (Copper)
+item.Red Steel Chisel Head.name=붉은 강철 끌 머리 (Red Steel)
+item.Steel Chisel Head.name=강철 끌 머리 (Steel)
+item.Wrought Iron Chisel Head.name=연철 끌 머리 (Wrought Iron)
+
+#=== Hammer Head ===
+item.Bismuth Bronze Hammer Head.name=비스무트 청동 망치 머리 (Bismuth Bronze)
+item.Black Bronze Hammer Head.name=검은 청동 망치 머리 (Black Bronze)
+item.Black Steel Hammer Head.name=검은 강철 망치 머리 (Black Steel)
+item.Blue Steel Hammer Head.name=푸른 강철 망치 머리 (Blue Steel)
+item.Bronze Hammer Head.name=청동 망치 머리 (Bronze)
+item.Copper Hammer Head.name=구리 망치 머리 (Copper)
+item.Red Steel Hammer Head.name=붉은 강철 망치 머리 (Red Steel)
+item.Steel Hammer Head.name=강철 망치 머리 (Steel)
+item.Wrought Iron Hammer Head.name=연철 망치 머리 (Wrought Iron)
+
+#=== Hoe Head ===
+item.Bismuth Bronze Hoe Head.name=비스무트 청동 괭이 머리 (Bismuth Bronze)
+item.Black Bronze Hoe Head.name=검은 청동 괭이 머리 (Black Bronze)
+item.Black Steel Hoe Head.name=검은 강철 괭이 머리 (Black Steel)
+item.Blue Steel Hoe Head.name=푸른 강철 괭이 머리 (Blue Steel)
+item.Bronze Hoe Head.name=청동 괭이 머리 (Bronze)
+item.Copper Hoe Head.name=구리 괭이 머리 (Copper)
+item.Red Steel Hoe Head.name=붉은 강철 괭이 머리 (Red Steel)
+item.Steel Hoe Head.name=강철 괭이 머리 (Steel)
+item.Wrought Iron Hoe Head.name=연철 괭이 머리 (Wrought Iron)
+
+#=== Javelin Head ===
+item.Bismuth Bronze Javelin Head.name=비스무트 청동 창 날 (Bismuth Bronze)
+item.Black Bronze Javelin Head.name=검은 청동 창 날 (Black Bronze)
+item.Black Steel Javelin Head.name=검은 강철 창 날 (Black Steel)
+item.Blue Steel Javelin Head.name=푸른 강철 창 날 (Blue Steel)
+item.Bronze Javelin Head.name=청동 창 날 (Bronze)
+item.Copper Javelin Head.name=구리 창 날 (Copper)
+item.Red Steel Javelin Head.name=붉은 강철 창 날 (Red Steel)
+item.Steel Javelin Head.name=강철 창 날 (Steel)
+item.Wrought Iron Javelin Head.name=연철 창 날 (Wrought Iron)
+
+#=== Knife Blade ===
+item.Bismuth Bronze Knife Blade.name=비스무트 청동 단검 날 (Bismuth Bronze)
+item.Black Bronze Knife Blade.name=검은 청동 단검 날 (Black Bronze)
+item.Black Steel Knife Blade.name=검은 강철 단검 날 (Black Steel)
+item.Blue Steel Knife Blade.name=푸른 강철 단검 날 (Blue Steel)
+item.Bronze Knife Blade.name=청동 단검 날 (Bronze)
+item.Copper Knife Blade.name=구리 단검 날 (Copper)
+item.Red Steel Knife Blade.name=붉은 강철 단검 날 (Red Steel)
+item.Steel Knife Blade.name=강철 단검 날 (Steel)
+item.Wrought Iron Knife Blade.name=연철 단검 날 (Wrought Iron)
+
+#=== Mace Head ===
+item.Bismuth Bronze Mace Head.name=비스무트 청동 메이스 머리 (Bismuth Bronze)
+item.Black Bronze Mace Head.name=검은 청동 메이스 머리 (Black Bronze)
+item.Black Steel Mace Head.name=검은 강철 메이스 머리 (Black Steel)
+item.Blue Steel Mace Head.name=푸른 강철 메이스 머리 (Blue Steel)
+item.Bronze Mace Head.name=청동 메이스 머리 (Bronze)
+item.Copper Mace Head.name=구리 메이스 머리 (Copper)
+item.Red Steel Mace Head.name=붉은 강철 메이스 머리 (Red Steel)
+item.Steel Mace Head.name=강철 메이스 머리 (Steel)
+item.Wrought Iron Mace Head.name=연철 메이스 머리 (Wrought Iron)
+
+#=== Pickaxe Head ===
+item.Bismuth Bronze Pick Head.name=비스무트 청동 곡괭이 머리 (Bismuth Bronze)
+item.Black Bronze Pick Head.name=검은 청동 곡괭이 머리 (Black Bronze)
+item.Black Steel Pick Head.name=검은 강철 곡괭이 머리 (Black Steel)
+item.Blue Steel Pick Head.name=푸른 강철 곡괭이 머리 (Blue Steel)
+item.Bronze Pick Head.name=청동 곡괭이 머리 (Bronze)
+item.Copper Pick Head.name=구리 곡괭이 머리 (Copper)
+item.Red Steel Pick Head.name=붉은 강철 곡괭이 머리 (Red Steel)
+item.Steel Pick Head.name=강철 곡괭이 머리 (Steel)
+item.Wrought Iron Pick Head.name=연철 곡괭이 머리 (Wrought Iron)
+
+#=== Prospector's Pick Head ===
+item.Bismuth Bronze ProPick Head.name=비스무트 청동 탐사 곡괭이 머리 (Bismuth Bronze)
+item.Black Bronze ProPick Head.name=검은 청동 탐사 곡괭이 머리 (Black Bronze)
+item.Black Steel ProPick Head.name=검은 강철 탐사 곡괭이 머리 (Black Steel)
+item.Blue Steel ProPick Head.name=푸른 강철 탐사 곡괭이 머리 (Blue Steel)
+item.Bronze ProPick Head.name=청동 탐사 곡괭이 머리 (Bronze)
+item.Copper ProPick Head.name=구리 탐사 곡괭이 머리 (Copper)
+item.Red Steel ProPick Head.name=붉은 강철 탐사 곡괭이 머리 (Red Steel)
+item.Steel ProPick Head.name=강철 탐사 곡괭이 머리 (Steel)
+item.Wrought Iron ProPick Head.name=연철 탐사 곡괭이 머리 (Wrought Iron)
+
+#=== Saw Blade ===
+item.Bismuth Bronze Saw Blade.name=비스무트 청동 톱 날 (Bismuth Bronze)
+item.Black Bronze Saw Blade.name=검은 청동 톱 날 (Black Bronze)
+item.Black Steel Saw Blade.name=검은 강철 톱 날 (Black Steel)
+item.Blue Steel Saw Blade.name=푸른 강철 톱 날 (Blue Steel)
+item.Bronze Saw Blade.name=청동 톱 날 (Bronze)
+item.Copper Saw Blade.name=구리 톱 날 (Copper)
+item.Red Steel Saw Blade.name=붉은 강철 톱 날 (Red Steel)
+item.Steel Saw Blade.name=강철 톱 날 (Steel)
+item.Wrought Iron Saw Blade.name=연철 톱 날 (Wrought Iron)
+
+#=== Scythe Blade ===
+item.Bismuth Bronze Scythe Blade.name=비스무트 청동 낫 날 (Bismuth Bronze)
+item.Black Bronze Scythe Blade.name=검은 청동 낫 날 (Black Bronze)
+item.Black Steel Scythe Blade.name=검은 강철 낫 날 (Black Steel)
+item.Blue Steel Scythe Blade.name=푸른 강철 낫 날 (Blue Steel)
+item.Bronze Scythe Blade.name=청동 낫 날 (Bronze)
+item.Copper Scythe Blade.name=구리 낫 날 (Copper)
+item.Red Steel Scythe Blade.name=붉은 강철 낫 날 (Red Steel)
+item.Steel Scythe Blade.name=강철 낫 날 (Steel)
+item.Wrought Iron Scythe Blade.name=연철 낫 날 (Wrought Iron)
+
+#=== Shovel Head ===
+item.Bismuth Bronze Shovel Head.name=비스무트 청동 삽 머리 (Bismuth Bronze)
+item.Black Bronze Shovel Head.name=검은 청동 삽 머리 (Black Bronze)
+item.Black Steel Shovel Head.name=검은 강철 삽 머리 (Black Steel)
+item.Blue Steel Shovel Head.name=푸른 강철 삽 머리 (Blue Steel)
+item.Bronze Shovel Head.name=청동 삽 머리 (Bronze)
+item.Copper Shovel Head.name=구리 삽 머리 (Copper)
+item.Red Steel Shovel Head.name=붉은 강철 삽 머리 (Red Steel)
+item.Steel Shovel Head.name=강철 삽 머리 (Steel)
+item.Wrought Iron Shovel Head.name=연철 삽 머리 (Wrought Iron)
+
+#=== Sword Blade ===
+item.Bismuth Bronze Sword Blade.name=비스무트 청동 검 날 (Bismuth Bronze)
+item.Black Bronze Sword Blade.name=검은 청동 검 날 (Black Bronze)
+item.Black Steel Sword Blade.name=검은 강철 검 날 (Black Steel)
+item.Blue Steel Sword Blade.name=푸른 강철 검 날 (Blue Steel)
+item.Bronze Sword Blade.name=청동 검 날 (Bronze)
+item.Copper Sword Blade.name=구리 검 날 (Copper)
+item.Red Steel Sword Blade.name=붉은 강철 검 날 (Red Steel)
+item.Steel Sword Blade.name=강철 검 날 (Steel)
+item.Wrought Iron Sword Blade.name=연철 검 날 (Wrought Iron)
+
+#== Metal Tools ==
+#=== Axe ===
+item.Bismuth Bronze Axe.name=비스무트 청동 도끼 (Bismuth Bronze)
+item.Black Bronze Axe.name=검은 청동 도끼 (Black Bronze)
+item.Black Steel Axe.name=검은 강철 도끼 (Black Steel)
+item.Blue Steel Axe.name=푸른 강철 도끼 (Blue Steel)
+item.Bronze Axe.name=청동 도끼 (Bronze)
+item.Copper Axe.name=구리 도끼 (Copper)
+item.Red Steel Axe.name=붉은 강철 도끼 (Red Steel)
+item.Steel Axe.name=강철 도끼 (Steel)
+item.Wrought Iron Axe.name=연철 도끼 (Wrought Iron)
+
+#=== Chisel ===
+item.Bismuth Bronze Chisel.name=비스무트 청동 끌 (Bismuth Bronze)
+item.Black Bronze Chisel.name=검은 청동 끌 (Black Bronze)
+item.Black Steel Chisel.name=검은 강철 끌 (Black Steel)
+item.Blue Steel Chisel.name=푸른 강철 끌 (Blue Steel)
+item.Bronze Chisel.name=청동 끌 (Bronze)
+item.Copper Chisel.name=구리 끌 (Copper)
+item.Red Steel Chisel.name=붉은 강철 끌 (Red Steel)
+item.Steel Chisel.name=강철 끌 (Steel)
+item.Wrought Iron Chisel.name=연철 끌 (Wrought Iron)
+
+#=== Hammer ===
+item.Bismuth Bronze Hammer.name=비스무트 청동 망치 (Bismuth Bronze)
+item.Black Bronze Hammer.name=검은 청동 망치 (Black Bronze)
+item.Black Steel Hammer.name=검은 강철 망치 (Black Steel)
+item.Blue Steel Hammer.name=푸른 강철 망치 (Blue Steel)
+item.Bronze Hammer.name=청동 망치 (Bronze)
+item.Copper Hammer.name=구리 망치 (Copper)
+item.Red Steel Hammer.name=붉은 강철 망치 (Red Steel)
+item.Steel Hammer.name=강철 망치 (Steel)
+item.Wrought Iron Hammer.name=연철 망치 (Wrought Iron)
+
+#=== Hoe ===
+item.Bismuth Bronze Hoe.name=비스무트 청동 괭이 (Bismuth Bronze)
+item.Black Bronze Hoe.name=검은 청동 괭이 (Black Bronze)
+item.Black Steel Hoe.name=검은 강철 괭이 (Black Steel)
+item.Blue Steel Hoe.name=푸른 강철 괭이 (Blue Steel)
+item.Bronze Hoe.name=청동 괭이 (Bronze)
+item.Copper Hoe.name=구리 괭이 (Copper)
+item.Red Steel Hoe.name=붉은 강철 괭이 (Red Steel)
+item.Steel Hoe.name=강철 괭이 (Steel)
+item.Wrought Iron Hoe.name=연철 괭이 (Wrought Iron)
+
+#=== Javelin ===
+item.Bismuth Bronze Javelin.name=비스무트 청동 창 (Bismuth Bronze)
+item.Black Bronze Javelin.name=검은 청동 창 (Black Bronze)
+item.Black Steel Javelin.name=검은 강철 창 (Black Steel)
+item.Blue Steel Javelin.name=푸른 강철 창 (Blue Steel)
+item.Bronze Javelin.name=청동 창 (Bronze)
+item.Copper Javelin.name=구리 창 (Copper)
+item.Red Steel Javelin.name=붉은 강철 창 (Red Steel)
+item.Steel Javelin.name=강철 창 (Steel)
+item.Wrought Iron Javelin.name=연철 창 (Wrought Iron)
+
+#=== Knife ===
+item.Bismuth Bronze Knife.name=비스무트 청동 단검 (Bismuth Bronze)
+item.Black Bronze Knife.name=검은 청동 단검 (Black Bronze)
+item.Black Steel Knife.name=검은 강철 단검 (Black Steel)
+item.Blue Steel Knife.name=푸른 강철 단검 (Blue Steel)
+item.Bronze Knife.name=청동 단검 (Bronze)
+item.Copper Knife.name=구리 단검 (Copper)
+item.Red Steel Knife.name=붉은 강철 단검 (Red Steel)
+item.Steel Knife.name=강철 단검 (Steel)
+item.Wrought Iron Knife.name=연철 단검 (Wrought Iron)
+
+#=== Mace ===
+item.Bismuth Bronze Mace.name=비스무트 청동 메이스 (Bismuth Bronze)
+item.Black Bronze Mace.name=검은 청동 메이스 (Black Bronze)
+item.Black Steel Mace.name=검은 강철 메이스 (Black Steel)
+item.Blue Steel Mace.name=푸른 강철 메이스 (Blue Steel)
+item.Bronze Mace.name=청동 메이스 (Bronze)
+item.Copper Mace.name=구리 메이스 (Copper)
+item.Red Steel Mace.name=붉은 강철 메이스 (Red Steel)
+item.Steel Mace.name=강철 메이스 (Steel)
+item.Wrought Iron Mace.name=연철 메이스 (Wrought Iron)
+
+#=== Pickaxe ===
+item.Bismuth Bronze Pick.name=비스무트 청동 곡괭이 (Bismuth Bronze)
+item.Black Bronze Pick.name=검은 청동 곡괭이 (Black Bronze)
+item.Black Steel Pick.name=검은 강철 곡괭이 (Black Steel)
+item.Blue Steel Pick.name=푸른 강철 곡괭이 (Blue Steel)
+item.Bronze Pick.name=청동 곡괭이 (Bronze)
+item.Copper Pick.name=구리 곡괭이 (Copper)
+item.Red Steel Pick.name=붉은 강철 곡괭이 (Red Steel)
+item.Steel Pick.name=강철 곡괭이 (Steel)
+item.Wrought Iron Pick.name=연철 곡괭이 (Wrought Iron)
+
+#=== Prospector's Pick ===
+item.Bismuth Bronze ProPick.name=비스무트 청동 탐사 곡괭이 (Bismuth Bronze)
+item.Black Bronze ProPick.name=검은 청동 탐사 곡괭이 (Black Bronze)
+item.Black Steel ProPick.name=검은 강철 탐사 곡괭이 (Black Steel)
+item.Blue Steel ProPick.name=푸른 강철 탐사 곡괭이 (Blue Steel)
+item.Bronze ProPick.name=청동 탐사 곡괭이 (Bronze)
+item.Copper ProPick.name=구리 탐사 곡괭이 (Copper)
+item.Red Steel ProPick.name=붉은 강철 탐사 곡괭이 (Red Steel)
+item.Steel ProPick.name=강철 탐사 곡괭이 (Steel)
+item.Wrought Iron ProPick.name=연철 탐사 곡괭이 (Wrought Iron)
+
+#=== Saw ===
+item.Bismuth Bronze Saw.name=비스무트 청동 톱 (Bismuth Bronze)
+item.Black Bronze Saw.name=검은 청동 톱 (Black Bronze)
+item.Black Steel Saw.name=검은 강철 톱 (Black Steel)
+item.Blue Steel Saw.name=푸른 강철 톱 (Blue Steel)
+item.Bronze Saw.name=청동 톱 (Bronze)
+item.Copper Saw.name=구리 톱 (Copper)
+item.Red Steel Saw.name=붉은 강철 톱 (Red Steel)
+item.Steel Saw.name=강철 톱 (Steel)
+item.Wrought Iron Saw.name=연철 톱 (Wrought Iron)
+
+#=== Scythe ===
+item.Bismuth Bronze Scythe.name=비스무트 청동 낫 (Bismuth Bronze)
+item.Black Bronze Scythe.name=검은 청동 낫 (Black Bronze)
+item.Black Steel Scythe.name=검은 강철 낫 (Black Steel)
+item.Blue Steel Scythe.name=푸른 강철 낫 (Blue Steel)
+item.Bronze Scythe.name=청동 낫 (Bronze)
+item.Copper Scythe.name=구리 낫 (Copper)
+item.Red Steel Scythe.name=붉은 강철 낫 (Red Steel)
+item.Steel Scythe.name=강철 낫 (Steel)
+item.Wrought Iron Scythe.name=연철 낫 (Wrought Iron)
+
+#=== Shovel ===
+item.Bismuth Bronze Shovel.name=비스무트 청동 삽 (Bismuth Bronze)
+item.Black Bronze Shovel.name=검은 청동 삽 (Black Bronze)
+item.Black Steel Shovel.name=검은 강철 삽 (Black Steel)
+item.Blue Steel Shovel.name=푸른 강철 삽 (Blue Steel)
+item.Bronze Shovel.name=청동 삽 (Bronze)
+item.Copper Shovel.name=구리 삽 (Copper)
+item.Red Steel Shovel.name=붉은 강철 삽 (Red Steel)
+item.Steel Shovel.name=강철 삽 (Steel)
+item.Wrought Iron Shovel.name=연철 삽 (Wrought Iron)
+
+#=== Sword ===
+item.Bismuth Bronze Sword.name=비스무트 청동 검 (Bismuth Bronze)
+item.Black Bronze Sword.name=검은 청동 검 (Black Bronze)
+item.Black Steel Sword.name=검은 강철 검 (Black Steel)
+item.Blue Steel Sword.name=푸른 강철 검 (Blue Steel)
+item.Bronze Sword.name=청동 검 (Bronze)
+item.Copper Sword.name=구리 검 (Copper)
+item.Red Steel Sword.name=붉은 강철 검 (Red Steel)
+item.Steel Sword.name=강철 검 (Steel)
+item.Wrought Iron Sword.name=연철 검 (Wrought Iron)
+
+#=== Tuyere ===
+item.Bismuth Bronze Tuyere.name=비스무트 청동 송풍구 (Bismuth Bronze)
+item.Black Bronze Tuyere.name=검은 청동 송풍구 (Black Bronze)
+item.Black Steel Tuyere.name=검은 강철 송풍구 (Black Steel)
+item.Blue Steel Tuyere.name=푸른 강철 송풍구 (Blue Steel)
+item.Bronze Tuyere.name=청동 송풍구 (Bronze)
+item.Copper Tuyere.name=구리 송풍구 (Copper)
+item.Red Steel Tuyere.name=붉은 강철 송풍구 (Red Steel)
+item.Steel Tuyere.name=강철 송풍구 (Steel)
+item.Wrought Iron Tuyere.name=연철 송풍구 (Wrought Iron)
+
+#== Armor ==
+#=== Helmet ===
+item.Bismuth Bronze Unfinished Helmet.name=완성되지 않은 비스무트 청동 투구 (Bismuth Bronze)
+item.Black Bronze Unfinished Helmet.name=완성되지 않은 검은 청동 투구 (Black Bronze)
+item.Black Steel Unfinished Helmet.name=완성되지 않은 검은 강철 투구 (Black Steel)
+item.Blue Steel Unfinished Helmet.name=완성되지 않은 푸른 강철 투구 (Blue Steel)
+item.Bronze Unfinished Helmet.name=완성되지 않은 청동 투구 (Bronze)
+item.Copper Unfinished Helmet.name=완성되지 않은 구리 투구 (Copper)
+item.Red Steel Unfinished Helmet.name=완성되지 않은 붉은 강철 투구 (Red Steel)
+item.Steel Unfinished Helmet.name=완성되지 않은 강철 투구 (Steel)
+item.Wrought Iron Unfinished Helmet.name=완성되지 않은 연철 투구 (Wrought Iron)
+item.Bismuth Bronze Helmet.name=비스무트 청동 투구 (Bismuth Bronze)
+item.Black Bronze Helmet.name=검은 청동 투구 (Black Bronze)
+item.Black Steel Helmet.name=검은 강철 투구 (Black Steel)
+item.Blue Steel Helmet.name=푸른 강철 투구 (Blue Steel)
+item.Bronze Helmet.name=청동 투구 (Bronze)
+item.Copper Helmet.name=구리 투구 (Copper)
+item.Red Steel Helmet.name=붉은 강철 투구 (Red Steel)
+item.Steel Helmet.name=강철 투구 (Steel)
+item.Wrought Iron Helmet.name=연철 투구 (Wrought Iron)
+item.helmetCloth.name=가죽 모자
+
+#=== Chestplate ===
+item.Bismuth Bronze Unfinished Chestplate.name=완성되지 않은 비스무트 청동 갑옷 (Bismuth Bronze)
+item.Black Bronze Unfinished Chestplate.name=완성되지 않은 검은 청동 갑옷 (Black Bronze)
+item.Black Steel Unfinished Chestplate.name=완성되지 않은 검은 강철 갑옷 (Black Steel)
+item.Blue Steel Unfinished Chestplate.name=완성되지 않은 푸른 강철 갑옷 (Blue Steel)
+item.Bronze Unfinished Chestplate.name=완성되지 않은 청동 갑옷 (Bronze)
+item.Copper Unfinished Chestplate.name=완성되지 않은 구리 갑옷 (Copper)
+item.Red Steel Unfinished Chestplate.name=완성되지 않은 붉은 강철 갑옷 (Red Steel)
+item.Steel Unfinished Chestplate.name=완성되지 않은 강철 갑옷 (Steel)
+item.Wrought Iron Unfinished Chestplate.name=완성되지 않은 연철 갑옷 (Wrought Iron)
+item.Bismuth Bronze Chestplate.name=비스무트 청동 갑옷 (Bismuth Bronze)
+item.Black Bronze Chestplate.name=검은 청동 갑옷 (Black Bronze)
+item.Black Steel Chestplate.name=검은 강철 갑옷 (Black Steel)
+item.Blue Steel Chestplate.name=푸른 강철 갑옷 (Blue Steel)
+item.Bronze Chestplate.name=청동 갑옷 (Bronze)
+item.Copper Chestplate.name=구리 갑옷 (Copper)
+item.Red Steel Chestplate.name=붉은 강철 갑옷 (Red Steel)
+item.Steel Chestplate.name=강철 갑옷 (Steel)
+item.Wrought Iron Chestplate.name=연철 갑옷 (Wrought Iron)
+item.chestplateCloth.name=가죽 튜닉
+
+#=== Greaves ===
+item.Bismuth Bronze Unfinished Greaves.name=완성되지 않은 비스무트 청동 레깅스 (Bismuth Bronze)
+item.Black Bronze Unfinished Greaves.name=완성되지 않은 검은 청동 레깅스 (Black Bronze)
+item.Black Steel Unfinished Greaves.name=완성되지 않은 검은 강철 레깅스 (Black Steel)
+item.Blue Steel Unfinished Greaves.name=완성되지 않은 푸른 강철 레깅스 (Blue Steel)
+item.Bronze Unfinished Greaves.name=완성되지 않은 청동 레깅스 (Bronze)
+item.Copper Unfinished Greaves.name=완성되지 않은 구리 레깅스 (Copper)
+item.Red Steel Unfinished Greaves.name=완성되지 않은 붉은 강철 레깅스 (Red Steel)
+item.Steel Unfinished Greaves.name=완성되지 않은 강철 레깅스 (Steel)
+item.Wrought Iron Unfinished Greaves.name=완성되지 않은 연철 레깅스 (Wrought Iron)
+item.Bismuth Bronze Greaves.name=비스무트 청동 레깅스 (Bismuth Bronze)
+item.Black Bronze Greaves.name=검은 청동 레깅스 (Black Bronze)
+item.Black Steel Greaves.name=검은 강철 레깅스 (Black Steel)
+item.Blue Steel Greaves.name=푸른 강철 레깅스 (Blue Steel)
+item.Bronze Greaves.name=청동 레깅스 (Bronze)
+item.Copper Greaves.name=구리 레깅스 (Copper)
+item.Red Steel Greaves.name=붉은 강철 레깅스 (Red Steel)
+item.Steel Greaves.name=강철 레깅스 (Steel)
+item.Wrought Iron Greaves.name=연철 레깅스 (Wrought Iron)
+item.leggingsCloth.name=가죽 바지
+
+#=== Boots ===
+item.Bismuth Bronze Unfinished Boots.name=완성되지 않은 비스무트 청동 부츠 (Bismuth Bronze)
+item.Black Bronze Unfinished Boots.name=완성되지 않은 검은 청동 부츠 (Black Bronze)
+item.Black Steel Unfinished Boots.name=완성되지 않은 검은 강철 부츠 (Black Steel)
+item.Blue Steel Unfinished Boots.name=완성되지 않은 푸른 강철 부츠 (Blue Steel)
+item.Bronze Unfinished Boots.name=완성되지 않은 청동 부츠 (Bronze)
+item.Copper Unfinished Boots.name=완성되지 않은 구리 부츠 (Copper)
+item.Red Steel Unfinished Boots.name=완성되지 않은 붉은 강철 부츠 (Red Steel)
+item.Steel Unfinished Boots.name=완성되지 않은 강철 부츠 (Steel)
+item.Wrought Iron Unfinished Boots.name=완성되지 않은 연철 부츠 (Wrought Iron)
+item.Bismuth Bronze Boots.name=비스무트 청동 부츠 (Bismuth Bronze)
+item.Black Bronze Boots.name=검은 청동 부츠 (Black Bronze)
+item.Black Steel Boots.name=검은 강철 부츠 (Black Steel)
+item.Blue Steel Boots.name=푸른 강철 부츠 (Blue Steel)
+item.Bronze Boots.name=청동 부츠 (Bronze)
+item.Copper Boots.name=구리 부츠 (Copper)
+item.Red Steel Boots.name=붉은 강철 부츠 (Red Steel)
+item.Steel Boots.name=강철 부츠 (Steel)
+item.Wrought Iron Boots.name=연철 부츠 (Wrought Iron)
+item.bootsCloth.name=가죽 장화
+
+#==========
+#= Metals =
+#==========
+item.Iron Bloom.name=제련된 괴철 (Iron Bloom)
+item.Raw Iron Bloom.name=제련되지 않은 괴철 (Iron Bloom)
+tile.Bloom.name=괴철 (Iron Bloom)
+
+#== Unshaped ==
+item.Bismuth Bronze Unshaped.name=무형의: 비스무트 청동 (Bismuth Bronze)
+item.Bismuth Unshaped.name=무형의: 창연 (Bismuth)
+item.Black Bronze Unshaped.name=무형의: 검은 청동 (Black Bronze)
+item.Black Steel Unshaped.name=무형의: 검은 강철 (Black Steel)
+item.Blue Steel Unshaped.name=무형의: 푸른 강철 (Blue Steel)
+item.Brass Unshaped.name=무형의: 황동 (Brass)
+item.Bronze Unshaped.name=무형의: 청동 (Bronze)
+item.Copper Unshaped.name=무형의: 구리 (Copper)
+item.Gold Unshaped.name=무형의: 금 (Gold)
+item.HC Black Steel Unshaped.name=무형의: 고탄소 검은 강철 (High Carbon Black Steel)
+item.HC Blue Steel Unshaped.name=무형의: 고탄소 푸른 강철 (High Carbon Blue Steel)
+item.HC Red Steel Unshaped.name=무형의: 고탄소 붉은 강철 (High Carbon Red Steel)
+item.HC Steel Unshaped.name=무형의: 고탄소 강철 (High Carbon Steel)
+item.Lead Unshaped.name=무형의: 납 (Lead)
+item.Nickel Unshaped.name=무형의: 니켈 (Nickel)
+item.Pig Iron Unshaped.name=무형의: 선철 (Pig Iron)
+item.Platinum Unshaped.name=무형의: 백금 (Platinum)
+item.Red Steel Unshaped.name=무형의: 붉은 강철 (Red Steel)
+item.Rose Gold Unshaped.name=무형의: 로즈 골드 (Rose Gold)
+item.Silver Unshaped.name=무형의: 은 (Silver)
+item.Steel Unshaped.name=무형의: 강철 (Steel)
+item.Sterling Silver Unshaped.name=무형의: 순은 (Sterling Silver)
+item.Tin Unshaped.name=무형의: 주석 (Tin)
+item.Unknown Unshaped.name=무형의: 알수 없는 (Unknown)
+item.Weak Blue Steel Unshaped.name=무형의: 무른 푸른 강철 (Weak Blue Steel)
+item.Weak Red Steel Unshaped.name=무형의: 무른 붉은 강철 (Weak Red Steel)
+item.Weak Steel Unshaped.name=무형의: 무른 강철 (Weak Steel)
+item.Wrought Iron Unshaped.name=무형의: 연철 (Wrought Iron)
+item.Zinc Unshaped.name=무형의: 아연 (Zinc)
+
+#== Ingot ==
+item.Bismuth Bronze Ingot.name=비스무트 청동 괴 (Bismuth Bronze)
+item.Bismuth Ingot.name=창연 괴 (Bismuth)
+item.Black Bronze Ingot.name=검은 청동 괴 (Black Bronze)
+item.Black Steel Ingot.name=검은 강철 괴 (Black Steel)
+item.Blue Steel Ingot.name=푸른 강철 괴 (Blue Steel)
+item.Brass Ingot.name=황동 괴 (Brass)
+item.Bronze Ingot.name=청동 괴 (Bronze)
+item.Copper Ingot.name=구리 괴 (Copper)
+item.Gold Ingot.name=금괴
+item.HC Black Steel Ingot.name=고탄소 검은 강철 괴 (High Carbon Black Steel)
+item.HC Blue Steel Ingot.name=고탄소 푸른 강철 괴 (High Carbon Blue Steel)
+item.HC Red Steel Ingot.name=고탄소 붉은 강철 괴 (High Carbon Red Steel)
+item.HC Steel Ingot.name=고탄소 강철 괴 (High Carbon Steel)
+item.Lead Ingot.name=납 괴 (Lead)
+item.Nickel Ingot.name=니켈 괴 (Nickel)
+item.Pig Iron Ingot.name=선철 괴 (Pig Iron)
+item.Platinum Ingot.name=백금 괴 (Platinum)
+item.Red Steel Ingot.name=붉은 강철 괴 (Red Steel)
+item.Rose Gold Ingot.name=로즈 골드 괴 (Rose Gold)
+item.Silver Ingot.name=은 괴 (Silver)
+item.Steel Ingot.name=강철 괴 (Steel)
+item.Sterling Silver Ingot.name=순은 괴 (Sterling Silver)
+item.Tin Ingot.name=주석 괴 (Tin)
+item.Unknown Ingot.name=알수 없는  괴 (Unknown)
+item.Weak Blue Steel Ingot.name=무른 푸른 강철 괴 (Weak Blue Steel)
+item.Weak Red Steel Ingot.name=무른 붉은 강철 괴 (Weak Red Steel)
+item.Weak Steel Ingot.name=무른 강철 괴 (Weak Steel)
+item.Wrought Iron Ingot.name=연철 괴 (Wrought Iron)
+item.Zinc Ingot.name=아연 괴 (Zinc)
+
+#== Double Ingot ==
+item.Bismuth Bronze Double Ingot.name=비스무트 청동 이중 괴 (Bismuth Bronze)
+item.Bismuth Double Ingot.name=창연 이중 괴 (Bismuth)
+item.Black Bronze Double Ingot.name=검은 청동 이중 괴 (Black Bronze)
+item.Black Steel Double Ingot.name=검은 강철 이중 괴 (Black Steel)
+item.Blue Steel Double Ingot.name=푸른 강철 이중 괴 (Blue Steel)
+item.Brass Double Ingot.name=황동 이중 괴 (Brass)
+item.Bronze Double Ingot.name=청동 이중 괴 (Bronze)
+item.Copper Double Ingot.name=구리 이중 괴 (Copper)
+item.Gold Double Ingot.name=금 이중 괴
+item.Lead Double Ingot.name=납 이중 괴 (Lead)
+item.Nickel Double Ingot.name=니켈 이중 괴 (Nickel)
+item.Pig Iron Double Ingot.name=선철 이중 괴 (Pig Iron)
+item.Platinum Double Ingot.name=백금 이중 괴 (Platinum)
+item.Red Steel Double Ingot.name=붉은 강철 이중 괴 (Red Steel)
+item.Rose Gold Double Ingot.name=로즈 골드 이중 괴 (Rose Gold)
+item.Silver Double Ingot.name=은 이중 괴 (Silver)
+item.Steel Double Ingot.name=강철 이중 괴 (Steel)
+item.Sterling Silver Double Ingot.name=순은 이중 괴 (Sterling Silver)
+item.Tin Double Ingot.name=주석 이중 괴 (Tin)
+item.Wrought Iron Double Ingot.name=연철 이중 괴 (Wrought Iron)
+item.Zinc Double Ingot.name=아연 이중 괴 (Zinc)
+
+#== Sheet ==
+item.Bismuth Bronze Sheet.name=비스무트 청동 판 (Bismuth Bronze)
+item.Bismuth Sheet.name=창연 판 (Bismuth)
+item.Black Bronze Sheet.name=검은 청동 판 (Black Bronze)
+item.Black Steel Sheet.name=검은 강철 판 (Black Steel)
+item.Blue Steel Sheet.name=푸른 강철 판 (Blue Steel)
+item.Brass Sheet.name=황동 판 (Brass)
+item.Bronze Sheet.name=청동 판 (Bronze)
+item.Copper Sheet.name=구리 판 (Copper)
+item.Gold Sheet.name=금 판
+item.Lead Sheet.name=납 판 (Lead)
+item.Nickel Sheet.name=니켈 판 (Nickel)
+item.Pig Iron Sheet.name=선철 판 (Pig Iron)
+item.Platinum Sheet.name=백금 판 (Platinum)
+item.Red Steel Sheet.name=붉은 강철 판 (Red Steel)
+item.Rose Gold Sheet.name=로즈 골드 판 (Rose Gold)
+item.Silver Sheet.name=은 판 (Silver)
+item.Steel Sheet.name=강철 판 (Steel)
+item.Sterling Silver Sheet.name=순은 판 (Sterling Silver)
+item.Tin Sheet.name=주석 판 (Tin)
+item.Wrought Iron Sheet.name=연철 판 (Wrought Iron)
+item.Zinc Sheet.name=아연 판 (Zinc)
+
+#== DoubleSheet ==
+item.Bismuth Bronze Double Sheet.name=비스무트 청동 이중 판 (Bismuth Bronze)
+item.Bismuth Double Sheet.name=창연 이중 판 (Bismuth)
+item.Black Bronze Double Sheet.name=검은 청동 이중 판 (Black Bronze)
+item.Black Steel Double Sheet.name=검은 강철 이중 판 (Black Steel)
+item.Blue Steel Double Sheet.name=푸른 강철 이중 판 (Blue Steel)
+item.Brass Double Sheet.name=황동 이중 판 (Brass)
+item.Bronze Double Sheet.name=청동 이중 판 (Bronze)
+item.Copper Double Sheet.name=구리 이중 판 (Copper)
+item.Gold Double Sheet.name=금 이중 판
+item.Lead Double Sheet.name=납 이중 판 (Lead)
+item.Nickel Double Sheet.name=니켈 이중 판 (Nickel)
+item.Pig Iron Double Sheet.name=선철 이중 판 (Pig Iron)
+item.Platinum Double Sheet.name=백금 이중 판 (Platinum)
+item.Red Steel Double Sheet.name=붉은 강철 이중 판 (Red Steel)
+item.Rose Gold Double Sheet.name=로즈 골드 이중 판 (Rose Gold)
+item.Silver Double Sheet.name=은 이중 판 (Silver)
+item.Steel Double Sheet.name=강철 이중 판 (Steel)
+item.Sterling Silver Double Sheet.name=순은 이중 판 (Sterling Silver)
+item.Tin Double Sheet.name=주석 이중 판 (Tin)
+item.Wrought Iron Double Sheet.name=연철 이중 판 (Wrought Iron)
+item.Zinc Double Sheet.name=아연 이중 판 (Zinc)
+
+#== Misc ==
+item.Blueprint=도면 (Blueprint)
+
+#===========
+#= Devices =
+#===========
+tile.Bellows.name=풀무 (Bellows)
+tile.Forge.name=노 (Forge)
+tile.BlastFurnace.name=용광로 (Blast Furnace)
+tile.SpawnMeter.name=스폰 보호 메터 (Protection Meter)
+tile.Quern.name=맷돌: 아랫돌 (Quern Base)
+tile.EarlyBloomery.name=연철로 (Bloomery)
+tile.Molten.name=녹은 광석 (Molten Ore)
+tile.Crucible.name=도가니 (Crucible)
+tile.NestBox.name=둥지 (Nest Box)
+item.SluiceItem.name=인공 수로 (Sluice)
+tile.Sluice.name=인공 수로 (Sluice)
+tile.LeatherRack.name=가죽 선반 (Leather Rack)
+tile.FoodPrep.name=식사 준비 (Food Prep)
+tile.MetalSheet.name=금속 판 (Metal Sheet)
+tile.ingotpile.name=괴 더미 (Ingot Pile)
+tile.SmokeRack.name=훈제 선반 (Smoke Rack)
+
+#== Anvils ==
+tile.Anvil.Stone.name=돌 모루
+tile.Anvil.Bismuth.name=창연 모루 (Bismuth)
+tile.Anvil2.Bismuth Bronze.name=비스무트 청동 모루 (Bismuth Bronze)
+tile.Anvil2.Black Bronze.name=검은 청동 모루 (Black Bronze)
+tile.Anvil.Black Steel.name=검은 강철 모루 (Black Steel)
+tile.Anvil.Blue Steel.name=푸른 강철 모루 (Blue Steel)
+tile.Anvil.Bronze.name=청동 모루 (Bronze)
+tile.Anvil.Copper.name=구리 모루 (Copper)
+tile.Anvil.Red Steel.name=붉은 강철 모루 (Red Steel)
+tile.Anvil2.Rose Gold.name=로즈 골드 모루 (Rose Gold)
+tile.Anvil.Steel.name=강철 모루 (Steel)
+tile.Anvil.Tin.name=주석 모루 (Tin)
+tile.Anvil.Wrought Iron.name=연철 모루 (Wrought Iron)
+tile.Anvil.Zinc.name=아연 모루 (Zinc)
+
+#==================
+#= Terrain Blocks =
+#==================
+tile.Grass.name=잔디
+tile.DryGrass.name=마른 잔디
+tile.PeatGrass.name=이탄 잔디 (Peat)
+tile.ClayGrass.name=점토 잔디
+tile.dirt.name=흙
+tile.sand.name=모래
+tile.Peat.name=이탄 (Peat)
+tile.tilledSoil.name=농지 (Farmland)
+tile.LooseRock.name=암석 조각 (Debris)
+tile.Ice.name=얼음
+
+#=================
+#= Miscellaneous =
+#=================
+#== Misc Items ==
+item.arrow.name=화살
+item.book.name=책
+item.stick.name=막대기
+item.coal.coal.name=석탄
+item.coal.charcoal.name=목탄
+item.Fertilizer.name=비료
+item.Reeds.name=갈대
+
+item.Wooden Bucket Empty.name=나무 양동이 (비어 있음)
+item.Wooden Bucket Water.name=나무 양동이 (신선한 물)
+item.Wooden Bucket Salt Water.name=나무 양동이 (소금 물)
+item.Wooden Bucket Milk.name=나무 양동이 (우유)
+item.Lime Water.name=석회수 (Limewater)
+
+item.Red Steel Bucket Empty.name=붉은 강철 양동이 (비어 있음)
+item.Red Steel Bucket Water.name=붉은 강철 양동이 (신선한 물)
+item.Red Steel Bucket Salt Water.name=붉은 강철 양동이 (소금 물)
+item.Blue Steel Bucket Empty.name=푸른 강철 양동이 (비어 있음)
+item.Blue Steel Bucket Lava.name=푸른 강철 양동이 (용암)
+
+item.GoldPan.name=야금 채 (Gold Pan)
+item.Gold Pan.Sand.name=야금 채 (Gold Pan) - 모래
+item.Gold Pan.Gravel.name=야금 채 (Gold Pan) - 자갈
+item.Gold Pan.Clay.name=야금 채 (Gold Pan) - 점토
+item.Gold Pan.Dirt.name=야금 채 (Gold Pan) - 흙
+item.Ink.name=먹 (Marking)
+item.Firestarter.name=발화도구 (Fire Starter)
+
+item.Quern.name=맷돌: 윗돌 (Handstone)
+item.Blueprint.name=도면 (Blueprint)
+item.Nametag.name=이름표
+item.WoolYarn.name=양모 실 (Wool Yarn)
+item.Wool.name=양털
+item.WoolCloth.name=양모 천 (Wool Cloth)
+item.SilkCloth.name=실크 천 (Silk Cloth)
+item.BurlapCloth.name=삼베 천 (Burlap Cloth)
+item.Mortar.name=모르타르 (Mortar)
+item.Vinegar.name=식초
+
+item.Hide.small.name=작은: 생가죽 (Raw Hide)
+item.Hide.medium.name=중간: 생가죽 (Raw Hide)
+item.Hide.large.name=큰: 생가죽 (Raw Hide)
+item.Soaked Hide.small.name=작은: 석회수에 젖은 가죽 (Soaked Hide)
+item.Soaked Hide.medium.name=중간: 석회수에 젖은 가죽 (Soaked Hide)
+item.Soaked Hide.large.name=큰: 석회수에 젖은 가죽 (Soaked Hide)
+item.Scraped Hide.small.name=작은: 무두질 된 가죽 (Scraped Hide)
+item.Scraped Hide.medium.name=중간: 무두질 된 가죽 (Scraped Hide)
+item.Scraped Hide.large.name=큰: 무두질 된 가죽 (Scraped Hide)
+item.Prep Hide.small.name=작은: 마무리 전의 가죽 (Prepared Hide)
+item.Prep Hide.medium.name=중간: 마무리 전의 가죽 (Prepared Hide)
+item.Prep Hide.large.name=큰: 마무리 전의 가죽 (Prepared Hide)
+item.Sheep Skin.small.name=작은: 양 가죽
+item.Sheep Skin.medium.name=중간: 양 가죽
+item.Sheep Skin.large.name=큰: 양 가죽
+item.TFC Leather.name=가죽
+item.Flat Leather.name=납작한 가죽 (Flat Leather)
+item.leather.name=가죽
+
+item.minecartChest.name=상자 마인카트
+item.fishingRod.name=낚싯대
+
+item.Quiver.name=화살통 (Quiver)
+item.Rope.name=로프
+item.Mud Brick.name=진흙 벽돌 (Mud Brick)
+item.Wet Mud Brick.name=젖은 진흙 벽돌 (Wet Mud Brick)
+
+#======== Misc. Blocks========
+tile.Straw Hide Bed.name=짚 & 가죽 침대 (Straw & Hide Bed)
+tile.StrawHideBed.name=짚 & 가죽 침대 (Straw & Hide Bed)
+tile.customBed.sleep=이 침대는 자기에는 너무 불편합니다.
+tile.BasicPipe.name=파이프
+tile.ValvePipe.name=밸브 파이프
+tile.Smoke.name=연기
+tile.Torch.name=횃불
+tile.Chest.name=상자
+tile.Bookshelf.name=책장
+tile.Workbench.name=작업대
+tile.ButtonWood.name=나무 버튼
+tile.Firepit.name=화덕 (Firepit)
+tile.LogPile.name=장작 더미 (Log Pile)
+tile.Charcoal.name=목탄
+tile.StoneDetailed.name=섬세한 (Detailed)
+tile.stoneStairs.name=계단 (Stair)
+tile.stoneSlabs.name=깍아내기 (Slab)
+tile.stoneStalac.name=종유석 (Stalactite)
+tile.WoodConstruct.name=목재 (Lumber)
+tile.MetalTrapDoor.name=함정 (Trap Door)
+tile.Vessel.name=대형 용기 (Vessel)
+tile.Grill.name=석쇠 (Grill)
+
+tile.Sulfur.name=유황 (Sulfur)
+tile.Reeds.name=갈대
+
+#= Misc. Plants =
+item.Sugarcane.name=사탕수수 (Sugarcane)
+item.Hemp.name=대마 (Hemp)
+item.Straw.name=짚 (Straw)
+item.Jute.name=황마 (Jute)
+item.Jute Fibre.name=황마 섬유 (Jute Fiber)
+
+tile.Fungi.mushroom_brown.name=푸른 버섯
+tile.Fungi.mushroom_red.name=붉은 버섯
+tile.Cactus.name=선인장
+tile.Pumpkin.name=호박
+tile.Moss.name=이끼
+tile.Thatch.name=초가 지붕 (Thatch)
+tile.Flora.Golden Rod.name=미역취 (Goldenrod)
+tile.Flora.Cat Tails.name=부들 (Cattails)
+
+item.Seeds Sugarcane.name=사탕수수 씨앗 (Sugarcane)
+item.Seeds Hemp.name=대마 씨앗 (Hemp)
+item.Seeds Jute.name=황마 씨앗 (Jute)
+
+tile.TallGrass.tallgrass.name=키 큰 잔디
+tile.TallGrass.fern.name=고사리
+tile.TallGrass.shortgrass.name=짧은 잔디
+tile.LilyPad.name=수련 잎
+tile.Vine.name=줄기
+tile.SeaGrassStill.name=해초
+tile.SeaGrassIce.name=얼은 해초
+
+tile.Flowers.flower_nasturtium.name=금련화 (Nasturtium)
+tile.Flowers.flower_dandelion.name=민들레
+tile.Flowers.flower_meads_milkweed.name=벌꿀술 밀크위드 (Meads Milkweed)
+tile.Flowers.flower_tropical_milkweed.name=열대 밀크위드 (Tropical Milkweed)
+tile.Flowers.flower_butterfly_milkweed.name=나비 밀크위드 (Butterfly Milkweed)
+tile.Flowers.flower_calendula.name=금잔화 (Calendula)
+tile.Flowers2.flower_rose.name=양귀비 (Poppy)
+tile.Flowers2.flower_blue_orchid.name=푸른 난초 (Blue Orchid)
+tile.Flowers2.flower_allium.name=백합과 (Allium)
+tile.Flowers2.flower_houstonia.name=호스토니아 (Houstonia)
+tile.Flowers2.flower_tulip_red.name=붉은 튤립 (Red Tulip)
+tile.Flowers2.flower_tulip_orange.name=주홍 튤립 (Orange Tulip)
+tile.Flowers2.flower_tulip_white.name=흰 튤립 (White Tulip)
+tile.Flowers2.flower_tulip_pink.name=분홍 튤립 (Pink Tulip)
+tile.Flowers2.flower_oxeye_daisy.name=데이지 (Daisy)
+
+tile.SaltWater.name=흐르는 소금 물
+tile.SaltWaterStationary.name=
+tile.FreshWater.name=흐르는 신선한 물
+tile.FreshWaterStationary.name=
+tile.HotWater.name=흐르는 뜨거운 물
+tile.HotWaterStationary.name=
+tile.Lava.name=흐르는 용암
+tile.LavaStationary.name=
+
+#=======
+#= GUI =
+#=======
+gui.badnbt=BAD info
+
+#== Anvil GUI ==
+gui.Anvil.Plans=도면
+gui.Anvil.Weld=용접
+
+gui.Anvil.LightHit=가볍게 치다 (Light)
+gui.Anvil.MediumHit=치다 (Medium)
+gui.Anvil.HeavyHit=강하게 치다 (Heavy)
+gui.Anvil.Draw=늘이다 (Draw)
+
+gui.Anvil.Punch=뚫다 (Punch)
+gui.Anvil.Bend=구부리다 (Bend)
+gui.Anvil.Upset=넓히다 (Upset)
+gui.Anvil.Shrink=줄이다 (Shrink)
+
+gui.Anvil.Rules=순서 (Rules)
+gui.Anvil.Rule1=어느것이든 가능
+gui.Anvil.Rule2=순서에 상관없이 치다
+gui.Anvil.Rule3=마지막 순서에 치다
+gui.Anvil.Rule4=마지막에서 두번째 순서에 치다
+gui.Anvil.Rule5=마지막에서 세번째 순서에 치다
+gui.Anvil.Rule6=마지막 두 번을 치다
+gui.Anvil.Rule7=마지막 세 번을 치다
+gui.Anvil.Rule8=마지막이 아닌 순서에서 치다
+gui.Anvil.Rule9=순서에 상관없이 뚫다
+gui.Anvil.Rule10=마지막 순서에 뚫다
+gui.Anvil.Rule11=마지막에서 두번째 순서에 뚫다
+gui.Anvil.Rule12=마지막에서 세번째 순서에 뚫다
+gui.Anvil.Rule13=마지막 두 번을 뚫다
+gui.Anvil.Rule14=마지막 세 번을 뚫다
+gui.Anvil.Rule15=마지막이 아닌 순서에서 뚫다
+gui.Anvil.Rule16=순서에 상관없이 줄이다
+gui.Anvil.Rule17=마지막 순서에 줄이다
+gui.Anvil.Rule18=마지막에서 두번째 순서에 줄이다
+gui.Anvil.Rule19=마지막에서 세번째 순서에 줄이다
+gui.Anvil.Rule20=마지막 두 번을 줄이다
+gui.Anvil.Rule21=마지막 세 번을 줄이다
+gui.Anvil.Rule22=마지막이 아닌 순서에서 줄이다
+gui.Anvil.Rule23=순서에 상관없이 늘이다
+gui.Anvil.Rule24=마지막 순서에 늘이다
+gui.Anvil.Rule25=마지막에서 두번째 순서에 늘이다
+gui.Anvil.Rule26=마지막에서 세번째 순서에 늘이다
+gui.Anvil.Rule27=마지막 두 번을 늘이다
+gui.Anvil.Rule28=마지막 세 번을 늘이다
+gui.Anvil.Rule29=마지막이 아닌 순서에서 늘이다
+gui.Anvil.Rule30=순서에 상관없이 넓히다
+gui.Anvil.Rule31=마지막 순서에 넓히다
+gui.Anvil.Rule32=마지막에서 두번째 순서에 넓히다
+gui.Anvil.Rule33=마지막에서 세번째 순서에 넓히다
+gui.Anvil.Rule34=마지막 두 번을 넓히다
+gui.Anvil.Rule35=마지막 세 번을 넓히다
+gui.Anvil.Rule36=마지막이 아닌 순서에서 넓히다
+gui.Anvil.Rule37=순서에 상관없이 구부리다
+gui.Anvil.Rule38=마지막 순서에 구부리다
+gui.Anvil.Rule39=마지막에서 두번째 순서에 구부리다
+gui.Anvil.Rule40=마지막에서 세번째 순서에 구부리다
+gui.Anvil.Rule41=마지막 두 번을 구부리다
+gui.Anvil.Rule42=마지막 세 번을 구부리다
+gui.Anvil.Rule43=마지막이 아닌 순서에서 구부리다
+
+#== Tools/Weapons/Armor GUI ==
+gui.Armor.Advanced=자세히
+gui.Armor.Shift=Shift
+gui.Armor.ForgedBy=제작자: 
+gui.Armor.Hold=누르다
+gui.Armor.Crush=충격 방어
+gui.Armor.Pierce=관통 방어
+gui.Armor.Slash=참격 방어
+
+word.stage1=Stage 1
+word.stage2=Stage 2
+
+gui.Bow.Advanced=자세히
+gui.Bow.Javelins=창
+gui.Bow.Arrows=화살
+gui.Bow.ForgedBy=제작자: 
+
+gui.DamageType.Error=Error: Bad Damage Type
+gui.DamageType.Crushing=충격
+gui.DamageType.Piercing=관통
+gui.DamageType.Slashing=참격
+
+#== Barrel GUI ==
+gui.Barrel.Empty=비우기
+gui.Barrel.Seal=밀봉
+gui.Barrel.Unseal=열기
+gui.Barrel.ToggleOff=내보내다
+gui.Barrel.ToggleOn=담다
+gui.Barrel.SealedOn=밀봉 중
+gui.Barrel.Solid=고체 보관함
+gui.Barrel.Liquid=액체 보관함
+gui.barrel.pickling=절임 중 (Pickling)
+gui.barrel.brining=염수처리 중 (Brining)
+gui.barrel.preserving=보존 중 (Preserving)
+
+#== Bloomery GUI ==
+gui.Bloomery.Charcoal=목탄
+gui.Bloomery.Ore=광석
+gui.Bloomery.Output=정제됨
+
+#== Calendar GUI ==
+gui.Calendar.Calendar=달력
+gui.Calendar.DateBioxx=Bioxx의 생일!
+gui.Calendar.DateDunk=Dunk의 생일!
+gui.Calendar.DateKitty=Kitty의 생일!
+
+gui.Calendar.Hour=시각
+gui.Calendar.WitchHour=한밤중
+
+gui.Calendar.Day=요일
+gui.Calendar.Sunday=일요일
+gui.Calendar.Monday=월요일
+gui.Calendar.Tuesday=화요일
+gui.Calendar.Wednesday=수요일
+gui.Calendar.Thursday=목요일
+gui.Calendar.Friday=금요일
+gui.Calendar.Saturday=토요일
+
+gui.Calendar.Season=계절
+gui.Calendar.EarlySpring=초 봄
+gui.Calendar.Spring=봄
+gui.Calendar.LateSpring=늦 봄
+gui.Calendar.EarlySummer=초 여름
+gui.Calendar.Summer=여름
+gui.Calendar.LateSummer=늦 여름
+gui.Calendar.EarlyAutumn=초 가을
+gui.Calendar.Autumn=가을
+gui.Calendar.LateAutumn=늦 가을
+gui.Calendar.EarlyWinter=초 겨울
+gui.Calendar.Winter=겨울
+gui.Calendar.LateWinter=늦 겨울
+
+gui.Calendar.Date=달
+gui.Calendar.January=1 월
+gui.Calendar.February=2 월
+gui.Calendar.March=3 월
+gui.Calendar.April=4 월
+gui.Calendar.May=5 월
+gui.Calendar.June=6 월
+gui.Calendar.July=7 월
+gui.Calendar.August=8 월
+gui.Calendar.September=9 월
+gui.Calendar.October=10 월
+gui.Calendar.November=11 월
+gui.Calendar.December=12 월
+
+gui.Calendar.1Hour=한 시간
+gui.Calendar.1Day=하루
+gui.Calendar.1Week=일주일
+gui.Calendar.1Month=한 달
+gui.Calendar.1Year=일 년
+
+#== Food GUI ==
+gui.FoodPrep.CreateMeal=조리
+gui.FoodPrep.Effect=효과
+gui.FoodPrep.Energy=에너지
+gui.FoodPrep.Filling=포만감
+gui.FoodPrep.Power=활력
+gui.FoodPrep.Sandwich=샌드위치
+gui.FoodPrep.Salad=샐러드
+
+#== Metals ==
+gui.metal.Bismuth=비스무트 청동 (Bismuth Bronze)
+gui.metal.BismuthBronze=창연 (Bismuth)
+gui.metal.BlackBronze=검은 청동 (Black Bronze)
+gui.metal.BlackSteel=검은 강철 (Black Steel)
+gui.metal.BlueSteel=푸른 강철 (Blue Steel)
+gui.metal.Brass=황동 (Brass)
+gui.metal.Bronze=청동 (Bronze)
+gui.metal.Copper=구리 (Copper)
+gui.metal.Gold=금 (Gold)
+gui.metal.HCBlackSteel=고탄소 검은 강철 (High Carbon Black Steel)
+gui.metal.HCBlueSteel=고탄소 푸른 강철 (High Carbon Blue Steel)
+gui.metal.HCRedSteel=고탄소 붉은 강철 (High Carbon Red Steel)
+gui.metal.Lead=납 (Lead)
+gui.metal.Nickel=니켈 (Nickel)
+gui.metal.PigIron=선철 (Pig Iron)
+gui.metal.Platinum=백금 (Platinum)
+gui.metal.RedSteel=붉은 강철 (Red Steel)
+gui.metal.RoseGold=로즈 골드 (Rose Gold)
+gui.metal.Silver=은 (Silver)
+gui.metal.Steel=강철 (Steel)
+gui.metal.SterlingSilver=순은 (Sterling Silver)
+gui.metal.Tin=주석 (Tin)
+gui.metal.Unknown=알수 없는 (Unknown)
+gui.metal.WeakBlueSteel=무른 푸른 강철 (Weak Blue Steel)
+gui.metal.WeakRedSteel=무른 붉은 강철 (Weak Red Steel)
+gui.metal.WeakSteel=무른 강철 (Weak Steel)
+gui.metal.WroughtIron=연철 (Wrought Iron)
+gui.metal.Zinc=아연 (Zinc)
+
+#== Plans GUI ==
+gui.plans.axe=도끼
+gui.plans.bootsplate=부츠
+gui.plans.bucket=양동이
+gui.plans.chestplate=갑옷
+gui.plans.chisel=끌
+gui.plans.hammer=망치
+gui.plans.helmplate=투구
+gui.plans.hoe=괭이
+gui.plans.ingot=괴
+gui.plans.javelin=창
+gui.plans.knife=단검
+gui.plans.legsplate=레깅스
+gui.plans.mace=메이스
+gui.plans.pickaxe=곡괭이
+gui.plans.propick=탐사 곡괭이
+gui.plans.refinebloom=
+gui.plans.saw=톱
+gui.plans.scythe=낫
+gui.plans.sheet=판
+gui.plans.shovel=삽
+gui.plans.splitbloom=
+gui.plans.sword=검
+gui.plans.tuyere=송풍구 (Tuyere)
+gui.plans.grill=석쇠
+gui.plans.shears=깍다 (Shears)
+gui.plans.trapdoor=함정 (Trap Door)
+
+#== Misc GUI ==
+gui.Blueprint=도면 (Blueprint)
+gui.Nametag=이름표
+gui.fertilized=비료
+gui.Inventory=인벤토리
+gui.ClearSlot=추출 슬롯을 비우기
+gui.LogPile=장작 더미
+gui.done=완료
+gui.cancel=취소
+gui.Sluice.Soil=흙
+gui.Sluice.Overworked=
+gui.Workbench.Crafting=크래프트
+gui.overburdened=* 중량 초과 *
+gui.slot=
+gui.slot.back=
+
+#== Tooltips ==
+gui.ShowHelp=
+gui.Help=
+gui.Clay.Inst0=
+gui.Knife.Inst0=
+gui.Knife.Inst1=식사준비 장소를 만들기
+gui.Leather.Inst0=
+gui.LooseRock.Inst0=
+gui.MeltedMetal.Inst0=
+gui.PotteryBase.Inst0=
+gui.PotteryVesselSmall.Inst0=
+gui.RawHide.Inst0=????
+gui.Barrel.MoreItems=
+gui.Nutrient.A=영양소 A
+gui.Nutrient.B=영양소 B
+gui.Nutrient.C=영양소 C
+
+gui.Size.Tiny=미세한
+gui.Size.VerySmall=매우 작은
+gui.Size.Small=작은
+gui.Size.Medium=중간
+gui.Size.Large=큰
+gui.Size.VeryLarge=매우 큰
+gui.Size.Huge=거대한
+
+gui.Weight.Light=가벼운
+gui.Weight.Medium=중간
+gui.Weight.Heavy=무거운
+
+gui.Reach.Short=짧은
+gui.Reach.Medium=중간
+gui.Reach.Far=먼
+
+gui.food.fruit=과일
+gui.food.vegetable=야채
+gui.food.grain=곡물
+gui.food.protein=단백질
+gui.food.dairy=유제품
+gui.food.amount=양
+gui.food.decay=부패도
+gui.food.salted=소금절임
+
+gui.FoodHeat.Cold=차가움
+gui.FoodHeat.Warm=따뜻함
+
+gui.showtaste=§8맛: (Hold §fL-Ctrl§8)
+gui.taste=§8맛:
+gui.taste.sweet=단맛
+gui.taste.sour=신맛
+gui.taste.salty=짠맛
+gui.taste.bitter=쓴맛
+gui.taste.savory=자극성
+
+gui.taste.novice.sweet1=달다
+gui.taste.novice.sweet0=달지 않다
+gui.taste.novice.sour1=시다
+gui.taste.novice.sour0=시지 않다
+gui.taste.novice.salty1=짜다
+gui.taste.novice.salty0=짜지 않다
+gui.taste.novice.bitter1=쓰다
+gui.taste.novice.bitter0=쓰지 않다
+gui.taste.novice.savory1=자극적이다
+gui.taste.novice.savory0=자극적이지 않다
+
+gui.taste.adept.sweet0=달지 않다
+gui.taste.adept.sweet1=적당히 달다
+gui.taste.adept.sweet2=달다
+gui.taste.adept.sweet3=꽤 달다
+gui.taste.adept.sweet4=매우 달다
+gui.taste.adept.sweet5=심하게 달다
+gui.taste.adept.sour0=시지 않다
+gui.taste.adept.sour1=적당히 시다
+gui.taste.adept.sour2=시다
+gui.taste.adept.sour3=꽤 시다
+gui.taste.adept.sour4=매우 시다
+gui.taste.adept.sour5=심하게 시다
+gui.taste.adept.salty0=짜지 않다
+gui.taste.adept.salty1=적당히 짜다
+gui.taste.adept.salty2=짜다
+gui.taste.adept.salty3=꽤 짜다
+gui.taste.adept.salty4=매우 짜다
+gui.taste.adept.salty5=심하게 짜다
+gui.taste.adept.bitter0=쓰지 않다
+gui.taste.adept.bitter1=적당히 쓰다
+gui.taste.adept.bitter2=쓰다
+gui.taste.adept.bitter3=꽤 쓰다
+gui.taste.adept.bitter4=매우 쓰다
+gui.taste.adept.bitter5=심하게 쓰다
+gui.taste.adept.savory0=자극적이지 않다
+gui.taste.adept.savory1=적당히 자극적이다
+gui.taste.adept.savory2=자극적이다
+gui.taste.adept.savory3=꽤 자극적이다
+gui.taste.adept.savory4=매우 자극적이다
+gui.taste.adept.savory5=심하게 자극적이다
+
+gui.taste.0=
+gui.taste.1=
+gui.taste.2=
+gui.taste.3=
+gui.taste.4=
+gui.taste.5=
+gui.taste.6=
+gui.taste.7=
+gui.taste.8=
+
+word.pickled=절인
+word.brined=염수 처리 된
+word.cooked=요리 된
+word.salted=소금에 절인
+word.smoked=훈제 된
+word.dried=말린
+
+food.cooked.rare=레어
+food.cooked.medrare=미디엄 레어
+food.cooked.med=미디엄
+food.cooked.medwell=미디엄 웰
+food.cooked.well=웰 던
+food.cooked.0=매우 밝은
+food.cooked.1=밝은
+food.cooked.2=미디엄
+food.cooked.3=어두운
+food.cooked.4=매우 어두운
+
+gui.Torch.CatchingFire=착화 (Catching Fire)
+gui.Torch.Lit=점화 (Lit)
+
+gui.ItemHeat.Liquid=Liquid
+gui.ItemHeat.Solidified=Solidified
+gui.ItemHeat.Caution=Caution
+gui.ItemHeat.Warming=Warming
+gui.ItemHeat.Hot=Hot
+gui.ItemHeat.VeryHot=Very Hot
+gui.ItemHeat.FaintRed=Faint Red
+gui.ItemHeat.DarkRed=Dark Red
+gui.ItemHeat.BrightRed=Bright Red
+gui.ItemHeat.Orange=Orange
+gui.ItemHeat.Yellow=Yellow
+gui.ItemHeat.YellowWhite=Yellow White
+gui.ItemHeat.White=White
+gui.ItemHeat.BrilliantWhite=Brilliant White
+
+gui.ingot.workable=제련 가능
+gui.ingot.weldable=용접 가능
+gui.ingot.danger=**위험**
+
+gui.milk.fresh=신선한
+gui.milk.old=오래된
+gui.milk.sour=시큼한
+
+gui.units=단위
+
+#== Chat Messages ==
+gui.GoldPan.UseFull=흐르는 물 속에서 사용해야 합니다.
+gui.goldpan.overused=이 장소에서는 더 이상 찾을 수 없을 것 같습니다.
+
+gui.ProPick.Found=발견함:
+gui.ProPick.FoundTraces=흔적을 발견함:
+gui.ProPick.FoundSmall=작은 덩어리를 발견함:
+gui.ProPick.FoundMedium=중간 덩어리를 발견함:
+gui.ProPick.FoundLarge=큰 덩어리를 발견함:
+gui.ProPick.FoundVeryLarge=거대한 덩어리를 발견함:
+gui.ProPick.FoundNothing=아무것도 찾지 못했습니다.
+
+#== Creative Tabs ==
+itemGroup.TFCArmor=(TFC) Armor
+itemGroup.TFCMaterials=(TFC) Materials
+itemGroup.TFCMisc=(TFC) Misc
+itemGroup.TFCPottery=(TFC) Pottery
+itemGroup.TFCTools=(TFC) Tools
+itemGroup.TFCWeapons=(TFC) Weapons
+itemGroup.TFCDevices=(TFC) Devices
+itemGroup.TFCFoods=(TFC) Foodstuffs
+itemGroup.TFCBuilding=(TFC) Building Blocks
+itemGroup.TFCDecoration=(TFC) Decoration Blocks
+
+#== Skill GUI ==
+skill.armorsmith=갑옷 제련
+skill.gensmith=일반 제련
+skill.toolsmith=도구 제련
+skill.weaponsmith=무기 제련
+skill.agriculture=농경
+skill.cooking=요리
+skill.prospecting=광물 탐사
+skill.butchering=도살
+gui.skill.novice=풋내기
+gui.skill.adept=숙련됨
+gui.skill.expert=전문가
+gui.skill.master=장인
+gui.skillpage=스킬
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================

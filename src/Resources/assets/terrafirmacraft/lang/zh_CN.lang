@@ -12,6 +12,8 @@ key.ToolMode=循环工具模式
 key.LockTool=锁定工具位置
 
 effect.bleed=流血
+death.attack.alcohol=
+death.attack.heatStroke=
 
 #==============
 #= Spawn Eggs =
@@ -47,7 +49,7 @@ entity.fishTFC.name=鲈鱼
 entity.notFamiliar=这只动物跟你还不熟.
 fishingRod.lineTension=绳子要绷断了.
 fishingRod.lineSnap=绳子绷断了.
-fishingRod.bite=嗷嗷,被咬了一口!
+fishingRod.bite=哇,上钩了!
 fishingRod.gotAway=它跑掉了...
 
 #================
@@ -95,6 +97,28 @@ commands.transferTamed.display.incoming=%s已将一只动物转交给你!
 commands.transferTamed.display.outgoing=你已将一只动物转交给%s!
 commands.transferTamed.wrongSender=你无法转交动物.
 
+#==========
+#= Fluids =
+#==========
+fluid.freshwater=淡水
+fluid.saltwater=盐水
+fluid.lavatfc=岩浆
+fluid.hotwater=热水
+fluid.beer=啤酒
+fluid.cider=苹果酒
+fluid.rum=朗姆酒
+fluid.ryewhiskey=黑麦威士忌
+fluid.sake=米酒
+fluid.vodka=伏特加
+fluid.whiskey=威士忌
+fluid.cornwhiskey=玉米威士忌
+fluid.milk=牛奶
+fluid.milkcurdled=凝乳
+fluid.limewater=石灰水
+fluid.tannin=鞣酸
+fluid.vinegar=醋
+fluid.brine=卤水
+
 #========
 #= Food =
 #========
@@ -105,6 +129,11 @@ item.meal.decent=乏善可陈
 item.meal.good=美味可口
 item.meal.great=垂涎欲滴
 item.meal.fantastic=回味无穷
+item.Sandwich.name=三明治
+item.Salad.name=色拉
+item.Soup.name=
+item.Sugar.name=砂糖
+item.Sea Weed.name=海苔
 
 #== Grains ==
 item.Barley Bread.name=大麦面包
@@ -267,10 +296,10 @@ item.CornWhiskey.name=玉米威士忌
 item.Clay.Clay.name=粘土
 item.Clay.Fire Clay.name=陶土
 
-item.clay.clayflatlight.name=压平的浅色粘土
-item.clay.clayflatdark.name=压平的深色粘土
-item.clay.clayflatfire.name=压平的耐火粘土
-item.clay.clayflatdarkfire.name=压平的深色耐火粘土
+item.Flat Clay.clay flat light.name=压平的浅色粘土
+item.Flat Clay.clay flat dark.name=压平的深色粘土
+item.Flat Clay.clay flat fire.name=压平的耐火粘土
+item.Flat Clay.clay flat dark fire.name=压平的深色耐火粘土
 
 item.Jug.Clay Jug.name=粘土壶
 item.Jug.Ceramic Jug.name=陶瓷壶
@@ -386,6 +415,10 @@ item.Spindle Head.Spindle Head.name=纺锤头
 item.Fire Brick.Fire Brick.name=耐火砖
 item.Fire Brick.Clay Fire Brick.name=耐火粘土砖
 tile.FireBrick.name=耐火砖方块
+tile.Pottery.name=
+
+item.ClayBowl.Ceramic Bowl.name=瓷碗
+item.ClayBowl.Clay Bowl.name=陶碗
 
 #= Gems =
 item.Agate.Chipped.name=破裂的玛瑙
@@ -824,6 +857,7 @@ item.Small Ore.Sphalerite.name=小型闪锌矿
 item.Small Ore.Tetrahedrite.name=小型黝铜矿
 
 #== Ore Blocks ==
+tile.Ore.name=
 tile.Ore.Bituminous Coal.name=烟煤
 tile.Ore.Borax.name=硼砂
 tile.Ore.Cinnabar.name=朱砂
@@ -956,7 +990,6 @@ item.Loom.White Elm.name=榆树织布机
 item.Loom.Willow.name=杨柳织布机
 
 #== Wood Blocks ==
-tile.log.Acacia.name=金合欢原木
 tile.log2.Acacia.name=金合欢原木
 tile.log.Ash.name=白蜡原木
 tile.log.Aspen.name=白杨原木
@@ -1029,7 +1062,8 @@ tile.sapling.White Cedar.name=北美香柏树苗
 tile.sapling.White Elm.name=榆树树苗
 tile.sapling.Willow.name=杨柳树苗
 
-tile.leaves.Acacia.name=金合欢树叶
+tile.leaves2.name=金合欢树叶
+tile.leaves2.Acacia.name=金合欢树叶
 tile.leaves.Ash.name=白蜡树叶
 tile.leaves.Aspen.name=白杨树叶
 tile.leaves.Birch.name=桦树叶
@@ -1064,6 +1098,10 @@ tile.wood.Sycamore.name=悬铃木板
 tile.wood.White Cedar.name=北美香柏木板
 tile.wood.White Elm.name=榆树木板
 tile.wood.Willow.name=杨柳木板
+
+tile.fruitTreeWood.name=
+tile.fruitTreeLeaves.name=
+tile.fruitTreeLeaves2.name=
 
 tile.Door Acacia.name=金合欢木门
 tile.Door Ash.name=白蜡木门
@@ -1190,6 +1228,25 @@ tile.WoodSupportV.Sycamore.name=悬铃木支撑柱
 tile.WoodSupportV.White Cedar.name=北美香柏树支撑柱
 tile.WoodSupportV.White Elm.name=榆树木支撑柱
 tile.WoodSupportV.Willow.name=杨柳木支撑柱
+
+tile.WoodSupportH2.name=
+tile.WoodSupportH2.Acacia.name=金合欢木支撑柱
+tile.WoodSupportH.Ash.name=白蜡木支撑柱
+tile.WoodSupportH.Aspen.name=白杨木支撑柱
+tile.WoodSupportH.Birch.name=桦木支撑柱
+tile.WoodSupportH.Chestnut.name=栗木支撑柱
+tile.WoodSupportH.Douglas Fir.name=花旗松支撑柱
+tile.WoodSupportH.Hickory.name=山核桃木支撑柱
+tile.WoodSupportH.Kapok.name=木棉木支撑柱
+tile.WoodSupportH.Maple.name=枫木支撑柱
+tile.WoodSupportH.Oak.name=橡木支撑柱
+tile.WoodSupportH.Pine.name=松木支撑柱
+tile.WoodSupportH.Sequoia.name=红杉木支撑柱
+tile.WoodSupportH.Spruce.name=云杉木支撑柱
+tile.WoodSupportH.Sycamore.name=悬铃木支撑柱
+tile.WoodSupportH.White Cedar.name=北美香柏树支撑柱
+tile.WoodSupportH.White Elm.name=榆树木支撑柱
+tile.WoodSupportH.Willow.name=杨柳木支撑柱
 
 tile.Toolrack.Acacia.name=金合欢木工具架
 tile.Toolrack.Ash.name=白蜡木工具架
@@ -1794,6 +1851,9 @@ item.Tin Double Sheet.name=锡双层薄板
 item.Wrought Iron Double Sheet.name=锻铁双层薄板
 item.Zinc Double Sheet.name=锌双层薄板
 
+#== Misc ==
+item.Blueprint=图纸
+
 #===========
 #= Devices =
 #===========
@@ -1803,10 +1863,16 @@ tile.BlastFurnace.name=高炉
 tile.SpawnMeter.name=保护计
 tile.Quern.name=磨石座
 tile.EarlyBloomery.name=锻铁炉
+tile.Molten.name=
 tile.Crucible.name=坩埚
 tile.NestBox.name=窝箱
 item.SluiceItem.name=洗矿槽
+tile.Sluice.name=洗矿槽
 tile.LeatherRack.name=鞣革架
+tile.FoodPrep.name=
+tile.MetalSheet.name=
+tile.ingotpile.name=
+tile.SmokeRack.name=
 
 #== Anvils ==
 tile.Anvil.Stone.name=石砧
@@ -1905,17 +1971,35 @@ item.fishingRod.name=鱼竿
 
 item.Quiver.name=箭袋
 item.Rope.name=绳子
+item.Mud Brick.name=泥砖
+item.Wet Mud Brick.name=湿泥砖
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=稻草兽皮床
+tile.StrawHideBed.name=稻草兽皮床
 tile.customBed.sleep=这张床太不舒服了，睡不着。
 tile.BasicPipe.name=管道
 tile.ValvePipe.name=阀门
+tile.Smoke.name=
 tile.Torch.name=火把
 tile.Chest.name=箱子
 tile.Bookshelf.name=书架
 tile.Workbench.name=工作台
 tile.ButtonWood.name=木头按钮
+tile.Firepit.name=
+tile.LogPile.name=
+tile.Charcoal.name=
+tile.StoneDetailed.name=
+tile.stoneStairs.name=
+tile.stoneSlabs.name=
+tile.stoneStalac.name=
+tile.WoodConstruct.name=
+tile.MetalTrapDoor.name=活板门
+tile.Vessel.name=大缸
+tile.Grill.name=烤架
+
+tile.Sulfur.name=硫磺
+tile.Reeds.name=芦苇
 
 #= Misc. Plants =
 item.Sugarcane.name=甘蔗
@@ -2043,6 +2127,9 @@ gui.Armor.Crush=碎裂
 gui.Armor.Pierce=穿刺
 gui.Armor.Slash=砍痕
 
+word.stage1=第一阶段
+word.stage2=第二阶段
+
 gui.Bow.Advanced=高级
 gui.Bow.Javelins=标枪
 gui.Bow.Arrows=箭
@@ -2062,6 +2149,9 @@ gui.Barrel.ToggleOn=进
 gui.Barrel.SealedOn=封闭
 gui.Barrel.Solid=存储固体
 gui.Barrel.Liquid=存储流体
+gui.barrel.pickling=腌制中的
+gui.barrel.brining=盐渍中的
+gui.barrel.preserving=
 
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=木炭
@@ -2120,12 +2210,14 @@ gui.Calendar.1Week=1周
 gui.Calendar.1Month=1月
 gui.Calendar.1Year=1年
 
-#== Food Prep GUI ==
+#== Food GUI ==
 gui.FoodPrep.CreateMeal=烹调
 gui.FoodPrep.Effect=效果
 gui.FoodPrep.Energy=能量
 gui.FoodPrep.Filling=果腹
 gui.FoodPrep.Power=力量
+gui.FoodPrep.Sandwich=三明治
+gui.FoodPrep.Salad=色拉
 
 #== Metals ==
 gui.metal.Bismuth=铋
@@ -2188,14 +2280,18 @@ gui.plans.trapdoor=活板门
 #== Misc GUI ==
 gui.Blueprint=蓝图
 gui.Nametag=命名牌
-gui.fertilized=已施肥
+gui.fertilized=已受精
 gui.Inventory=物品栏
 gui.ClearSlot=清理输出格
 gui.LogPile=原木垛
 gui.done=完成
+gui.cancel=
 gui.Sluice.Soil=土壤
-gui.Sluice=洗矿槽
+gui.Sluice.Overworked=
 gui.Workbench.Crafting=合成
+gui.overburdened=*超重*
+gui.slot=格子
+gui.slot.back=返回
 
 #== Tooltips ==
 gui.ShowHelp=§8帮助: (按住§fShift§8)
@@ -2210,6 +2306,9 @@ gui.PotteryBase.Inst0=潜行时§b右击§7以放置物体
 gui.PotteryVesselSmall.Inst0=或者§b右击§7以打开物品栏
 gui.RawHide.Inst0=????
 gui.Barrel.MoreItems=§8按住§fShift§8查看更多信息
+gui.Nutrient.A=
+gui.Nutrient.B=
+gui.Nutrient.C=
 
 gui.Size.Tiny=微小
 gui.Size.VerySmall=很小
@@ -2238,6 +2337,84 @@ gui.food.salted=盐腌
 
 gui.FoodHeat.Cold=寒冷
 gui.FoodHeat.Warm=温暖
+
+gui.showtaste=§8按住§fL-CTRL§8查看味道
+gui.taste=§8味道
+gui.taste.sweet=甜
+gui.taste.sour=酸
+gui.taste.salty=咸
+gui.taste.bitter=苦
+gui.taste.savory=鲜
+
+gui.taste.novice.sweet1=甜
+gui.taste.novice.sweet0=不甜
+gui.taste.novice.sour1=酸
+gui.taste.novice.sour0=不酸
+gui.taste.novice.salty1=咸
+gui.taste.novice.salty0=不咸
+gui.taste.novice.bitter1=苦
+gui.taste.novice.bitter0=不苦
+gui.taste.novice.savory1=鲜
+gui.taste.novice.savory0=不鲜
+
+gui.taste.adept.sweet0=不甜
+gui.taste.adept.sweet1=稍甜
+gui.taste.adept.sweet2=甜
+gui.taste.adept.sweet3=很甜
+gui.taste.adept.sweet4=非常甜
+gui.taste.adept.sweet5=敏甜
+gui.taste.adept.sour0=不酸
+gui.taste.adept.sour1=稍酸
+gui.taste.adept.sour2=酸
+gui.taste.adept.sour3=很酸
+gui.taste.adept.sour4=非常酸
+gui.taste.adept.sour5=揪酸
+gui.taste.adept.salty0=不咸
+gui.taste.adept.salty1=稍咸
+gui.taste.adept.salty2=咸
+gui.taste.adept.salty3=很咸
+gui.taste.adept.salty4=非常咸
+gui.taste.adept.salty5=超咸
+gui.taste.adept.bitter0=不苦
+gui.taste.adept.bitter1=稍苦
+gui.taste.adept.bitter2=苦
+gui.taste.adept.bitter3=很苦
+gui.taste.adept.bitter4=非常苦
+gui.taste.adept.bitter5=胺苦
+gui.taste.adept.savory0=不鲜
+gui.taste.adept.savory1=稍鲜
+gui.taste.adept.savory2=鲜
+gui.taste.adept.savory3=很鲜
+gui.taste.adept.savory4=非常鲜
+gui.taste.adept.savory5=极鲜
+
+gui.taste.0=毫无
+gui.taste.1=稍有
+gui.taste.2=略有
+gui.taste.3=适中
+gui.taste.4=完美
+gui.taste.5=过度
+gui.taste.6=非常
+gui.taste.7=极端
+gui.taste.8=离谱
+
+word.pickled=腌制
+word.brined=盐渍
+word.cooked=烤熟
+word.salted=抹盐
+word.smoked=熏制
+word.dried=风干
+
+food.cooked.rare=二分熟
+food.cooked.medrare=四分熟
+food.cooked.med=六分熟
+food.cooked.medwell=八分熟
+food.cooked.well=全熟
+food.cooked.0=漂烤
+food.cooked.1=半酥
+food.cooked.2=酥脆
+food.cooked.3=半焦
+food.cooked.4=烤焦
 
 gui.Torch.CatchingFire=生火
 gui.Torch.Lit=点着
@@ -2300,127 +2477,12 @@ skill.agriculture=稼穑技巧
 skill.cooking=美食料理
 skill.prospecting=矿产勘探
 skill.butchering=牲禽屠宰
-
-#=====================================================
-#========Add New Stuff Here To Be Sorted Later========
-#=====================================================
-fluid.freshwater=淡水
-fluid.saltwater=盐水
-fluid.lavatfc=岩浆
-fluid.hotwater=热水
-fluid.beer=啤酒
-fluid.cider=苹果酒
-fluid.rum=朗姆酒
-fluid.ryewhiskey=黑麦威士忌
-fluid.sake=米酒
-fluid.vodka=伏特加
-fluid.whiskey=威士忌
-fluid.cornwhiskey=玉米威士忌
-fluid.milk=牛奶
-fluid.milkcurdled=凝乳
-fluid.limewater=石灰水
-fluid.tannin=鞣酸
-fluid.vinegar=醋
-fluid.brine=卤水
-
-gui.showtaste=§8按住§fL-CTRL§8查看味道
-gui.taste=§8味道
-gui.taste.sweet=甜
-gui.taste.sour=酸
-gui.taste.salty=咸
-gui.taste.bitter=苦
-gui.taste.savory=鲜
-
-gui.taste.novice.sweet1=甜
-gui.taste.novice.sweet0=不甜
-gui.taste.novice.sour1=酸
-gui.taste.novice.sour0=不酸
-gui.taste.novice.salty1=咸
-gui.taste.novice.salty0=不咸
-gui.taste.novice.bitter1=苦
-gui.taste.novice.bitter0=不苦
-gui.taste.novice.savory1=鲜
-gui.taste.novice.savory0=不鲜
-
-gui.taste.adept.sweet0=不甜
-gui.taste.adept.sweet1=稍甜
-gui.taste.adept.sweet2=甜
-gui.taste.adept.sweet3=很甜
-gui.taste.adept.sweet4=非常甜
-gui.taste.adept.sweet5=敏甜
-gui.taste.adept.sour0=不酸
-gui.taste.adept.sour1=稍酸
-gui.taste.adept.sour2=酸
-gui.taste.adept.sour3=很酸
-gui.taste.adept.sour4=非常酸
-gui.taste.adept.sour5=揪酸
-gui.taste.adept.salty0=不咸
-gui.taste.adept.salty1=稍咸
-gui.taste.adept.salty2=咸
-gui.taste.adept.salty3=很咸
-gui.taste.adept.salty4=非常咸
-gui.taste.adept.salty5=超咸
-gui.taste.adept.bitter0=不苦
-gui.taste.adept.bitter1=稍苦
-gui.taste.adept.bitter2=苦
-gui.taste.adept.bitter3=很苦
-gui.taste.adept.bitter4=非常苦
-gui.taste.adept.bitter5=胺苦
-gui.taste.adept.savory0=不鲜
-gui.taste.adept.savory1=稍鲜
-gui.taste.adept.savory2=鲜
-gui.taste.adept.savory3=很鲜
-gui.taste.adept.savory4=非常鲜
-gui.taste.adept.savory5=极鲜
-
-gui.taste.0=毫无
-gui.taste.1=稍有
-gui.taste.2=略有
-gui.taste.3=适中
-gui.taste.4=完美
-gui.taste.5=过度
-gui.taste.6=非常
-gui.taste.7=极端
-gui.taste.8=离谱
-
 gui.skill.novice=新手
 gui.skill.adept=学徒
 gui.skill.expert=专家
 gui.skill.master=大师
 gui.skillpage=技能
-tile.MetalTrapDoor.name=活板门
-item.Mud Brick.name=泥砖
-item.Wet Mud Brick.name=湿泥砖
-gui.overburdened=*超重*
-gui.slot=格子
-gui.slot.back=返回
-word.pickled=腌制
-word.brined=盐渍
-word.cooked=烤熟
-word.salted=抹盐
-word.smoked=熏制
-word.dried=风干
-gui.barrel.pickling=腌制中的
-gui.barrel.brining=盐渍中的
-tile.Vessel.name=大缸
-tile.Grill.name=烤架
-food.cooked.rare=二分熟
-food.cooked.medrare=四分熟
-food.cooked.med=六分熟
-food.cooked.medwell=八分熟
-food.cooked.well=全熟
-food.cooked.0=漂烤
-food.cooked.1=半酥
-food.cooked.2=酥脆
-food.cooked.3=半焦
-food.cooked.4=烤焦
-gui.FoodPrep.Sandwich=三明治
-gui.FoodPrep.Salad=色拉
-item.Sandwich.name=三明治
-item.Salad.name=色拉
-item.ClayBowl.Ceramic Bowl.name=瓷碗
-item.ClayBowl.Clay Bowl.name=陶碗
-item.Sugar.name=砂糖
-item.Sea Weed.name=海苔
-word.stage1=第一阶段
-word.stage2=第二阶段
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================

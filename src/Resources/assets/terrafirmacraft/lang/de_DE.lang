@@ -12,6 +12,8 @@ key.ToolMode=Werkzeugmodus wechseln
 key.LockTool=Werkzeugposition sichern
 
 effect.bleed=Blutung
+death.attack.alcohol=
+death.attack.heatStroke=
 
 #==============
 #= Spawn Eggs =
@@ -87,13 +89,35 @@ achievement.achPokeCreeper.desc=Schlag es mit einem Stock
 #============
 #= Commands =
 #============
-commands.transferTamed.noTamed=Keine möglichene Tiere in Reichweite!
+commands.transferTamed.noTamed=Kein zahmes Tier in Reichweite!
 commands.transferTamed.tooMany=Zuviele Tiere in Reichweite!
 commands.transferTamed.wrongOwner=Das gehört nicht dir!
 commands.transferTamed.sameTarget=Du kannst Tiere nicht dir selbst übergeben!
 commands.transferTamed.display.incoming=Ein Tier wurde dir von %s übergeben!
 commands.transferTamed.display.outgoing=Du hast %s ein Tier übergeben!
 commands.transferTamed.wrongSender=Du kannst keine Tiere übergeben!
+
+#==========
+#= Fluids =
+#==========
+fluid.freshwater=Süßwasser
+fluid.saltwater=Salzwasser
+fluid.lavatfc=
+fluid.hotwater=Heißes Wasser
+fluid.beer=Bier
+fluid.cider=Apfelwein
+fluid.rum=Rum
+fluid.ryewhiskey=Roggen Whiskey
+fluid.sake=Wodka
+fluid.vodka=Wodka
+fluid.whiskey=Whiskey
+fluid.cornwhiskey=Maiswhiskey
+fluid.milk=Milch
+fluid.milkcurdled=Geronnene Milch
+fluid.limewater=Kalkwasser
+fluid.tannin=Gerbmittel
+fluid.vinegar=Essig
+fluid.brine=Sole
 
 #========
 #= Food =
@@ -105,6 +129,11 @@ item.meal.decent=Akzeptabel
 item.meal.good=Gut
 item.meal.great=Super
 item.meal.fantastic=Fantastisch
+item.Sandwich.name=Sandwich
+item.Salad.name=Salat
+item.Soup.name=
+item.Sugar.name=Zucker
+item.Sea Weed.name=Seetang
 
 #== Grains ==
 item.Barley Bread.name=Gerstenbrot
@@ -267,10 +296,10 @@ item.CornWhiskey.name=Maiswhiskey
 item.Clay.Clay.name=Ton
 item.Clay.Fire Clay.name=Schamotte
 
-item.clay.clayflatlight.name=Flaches Tonlicht
-item.clay.clayflatdark.name=Flaches Tondunkel
-item.clay.clayflatfire.name=Flache Schamotte
-item.clay.clayflatdarkfire.name=Flaches Schamottdunkel
+item.Flat Clay.clay flat light.name=Flaches Tonlicht
+item.Flat Clay.clay flat dark.name=Flaches Tondunkel
+item.Flat Clay.clay flat fire.name=Flache Schamotte
+item.Flat Clay.clay flat dark fire.name=Flaches Schamottdunkel
 
 item.Jug.Clay Jug.name=Tonkrug
 item.Jug.Ceramic Jug.name=Keramikkrug
@@ -386,6 +415,10 @@ item.Spindle Head.Spindle Head.name=Spindelkopf
 item.Fire Brick.Fire Brick.name=Schamottestein
 item.Fire Brick.Clay Fire Brick.name=Schamottetonstein
 tile.FireBrick.name=Schamottesteinblock
+tile.Pottery.name=
+
+item.ClayBowl.Ceramic Bowl.name=Tonschüssel
+item.ClayBowl.Clay Bowl.name=Keramikschüssel
 
 #= Gems =
 item.Agate.Chipped.name=Achatsplitter
@@ -824,6 +857,7 @@ item.Small Ore.Sphalerite.name=Kleines Stück Zinkblende
 item.Small Ore.Tetrahedrite.name=Kleines Stück Fahlerz
 
 #== Ore Blocks ==
+tile.Ore.name=
 tile.Ore.Bituminous Coal.name=Steinkohle
 tile.Ore.Borax.name=Borax
 tile.Ore.Cinnabar.name=Cinnabarit
@@ -956,7 +990,6 @@ item.Loom.White Elm.name=Weißulme-Webstuhl
 item.Loom.Willow.name=Weiden-Webstuhl
 
 #== Wood Blocks ==
-tile.log.Acacia.name=Akazie
 tile.log2.Acacia.name=Akazie
 tile.log.Ash.name=Esche
 tile.log.Aspen.name=Espe
@@ -1029,7 +1062,8 @@ tile.sapling.White Cedar.name=Weiße Zypressen-Setzling
 tile.sapling.White Elm.name=Weiße Ulmen-Setzling
 tile.sapling.Willow.name=Weiden-Setzling
 
-tile.leaves.Acacia.name=Akazienblätter
+tile.leaves2.name=Akazienblätter
+tile.leaves2.Acacia.name=Akazienblätter
 tile.leaves.Ash.name=Eschenblätter
 tile.leaves.Aspen.name=Espenblätter
 tile.leaves.Birch.name=Birkenblätter
@@ -1064,6 +1098,10 @@ tile.wood.Sycamore.name=Platanen-Bretter
 tile.wood.White Cedar.name=Weiße Zypressen-Bretter
 tile.wood.White Elm.name=Weiße Ulmen-Bretter
 tile.wood.Willow.name=Weiden-Bretter
+
+tile.fruitTreeWood.name=
+tile.fruitTreeLeaves.name=
+tile.fruitTreeLeaves2.name=
 
 tile.Door Acacia.name=Akazienholztür
 tile.Door Ash.name=Eschenholztür
@@ -1190,6 +1228,25 @@ tile.WoodSupportV.Sycamore.name=Platanen-Stützbalken
 tile.WoodSupportV.White Cedar.name=Weißer Zypressen-Stützbalken
 tile.WoodSupportV.White Elm.name=Weißer Ulmen-Stützbalken
 tile.WoodSupportV.Willow.name=Weiden-Stützbalken
+
+tile.WoodSupportH2.name=
+tile.WoodSupportH2.Acacia.name=Akazien-Stützbalken
+tile.WoodSupportH.Ash.name=Eschen-Stützbalken
+tile.WoodSupportH.Aspen.name=Espen-Stützbalken
+tile.WoodSupportH.Birch.name=Birken-Stützbalken
+tile.WoodSupportH.Chestnut.name=Kastanien-Stützbalken
+tile.WoodSupportH.Douglas Fir.name=Douglasien-Stützbalken
+tile.WoodSupportH.Hickory.name=Hickory-Stützbalken
+tile.WoodSupportH.Kapok.name=Kapok-Stützbalken
+tile.WoodSupportH.Maple.name=Ahorn-Stützbalken
+tile.WoodSupportH.Oak.name=Eichen-Stützbalken
+tile.WoodSupportH.Pine.name=Kiefern-Stützbalken
+tile.WoodSupportH.Sequoia.name=Mammutbaum-Stützbalken
+tile.WoodSupportH.Spruce.name=Fichten-Stützbalken
+tile.WoodSupportH.Sycamore.name=Platanen-Stützbalken
+tile.WoodSupportH.White Cedar.name=Weißer Zypressen-Stützbalken
+tile.WoodSupportH.White Elm.name=Weißer Ulmen-Stützbalken
+tile.WoodSupportH.Willow.name=Weiden-Stützbalken
 
 tile.Toolrack.Acacia.name=Akazien-Werkzeugregal
 tile.Toolrack.Ash.name=Eschen-Werkzeugregal
@@ -1794,6 +1851,9 @@ item.Tin Double Sheet.name=Doppelte Zinnplatte
 item.Wrought Iron Double Sheet.name=Doppelte Schmiedeeisenplatte
 item.Zinc Double Sheet.name=Doppelte Zinkplatte
 
+#== Misc ==
+item.Blueprint=Vorlage
+
 #===========
 #= Devices =
 #===========
@@ -1803,10 +1863,16 @@ tile.BlastFurnace.name=Hochofen
 tile.SpawnMeter.name=Schutzmessgerät
 tile.Quern.name=Mühlstein
 tile.EarlyBloomery.name=Rennofen
+tile.Molten.name=
 tile.Crucible.name=Schmelztiegel
 tile.NestBox.name=Nestbox
 item.SluiceItem.name=Waschrinne
+tile.Sluice.name=Waschrinne
 tile.LeatherRack.name=Lederregal
+tile.FoodPrep.name=
+tile.MetalSheet.name=
+tile.ingotpile.name=
+tile.SmokeRack.name=
 
 #== Anvils ==
 tile.Anvil.Stone.name=Stein-Amboss
@@ -1905,17 +1971,36 @@ item.fishingRod.name=Angel
 
 item.Quiver.name=Köcher
 item.Rope.name=Seil
+"item.Mud Brick.name=
+"
+item.Wet Mud Brick.name=
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Stroh- & Fellbett
+tile.StrawHideBed.name=Stroh- & Fellbett
 tile.customBed.sleep=Dieses Bett ist zu ungemütlich, um einzuschlafen.
 tile.BasicPipe.name=Röhre
 tile.ValvePipe.name=Röhre mit Ventil
+tile.Smoke.name=
 tile.Torch.name=Fackel
 tile.Chest.name=Truhe
 tile.Bookshelf.name=Bücherregal
 tile.Workbench.name=Werkbank
 tile.ButtonWood.name=Holzknopf
+tile.Firepit.name=
+tile.LogPile.name=
+tile.Charcoal.name=
+tile.StoneDetailed.name=
+tile.stoneStairs.name=
+tile.stoneSlabs.name=
+tile.stoneStalac.name=
+tile.WoodConstruct.name=
+tile.MetalTrapDoor.name=Falltür
+tile.Vessel.name=großes Gefäß
+tile.Grill.name=Grill
+
+tile.Sulfur.name=Schwefel
+tile.Reeds.name=Schilfrohr
 
 #= Misc. Plants =
 item.Sugarcane.name=Zuckerrohr
@@ -2043,6 +2128,9 @@ gui.Armor.Crush=gegen Stumpf-Schaden
 gui.Armor.Pierce=gegen Stich-Schaden
 gui.Armor.Slash=gegen Hieb-Schaden
 
+word.stage1=Schritt 1
+word.stage2=Schritt 2
+
 gui.Bow.Advanced=Erweitert
 gui.Bow.Javelins=Speer
 gui.Bow.Arrows=Pfeile
@@ -2062,6 +2150,9 @@ gui.Barrel.ToggleOn=Ein
 gui.Barrel.SealedOn=Verschlossen am:
 gui.Barrel.Solid=Fest
 gui.Barrel.Liquid=Flüssig
+gui.barrel.pickling=einlegen
+gui.barrel.brining=pökeln
+gui.barrel.preserving=
 
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Holzkohle
@@ -2120,12 +2211,14 @@ gui.Calendar.1Week=eine Woche
 gui.Calendar.1Month=ein Monat
 gui.Calendar.1Year=ein Jahr
 
-#== Food Prep GUI ==
+#== Food GUI ==
 gui.FoodPrep.CreateMeal=Mahlzeit zubereiten
 gui.FoodPrep.Effect=Wirkung
 gui.FoodPrep.Energy=Energie
 gui.FoodPrep.Filling=Sättigung
 gui.FoodPrep.Power=Stärke
+gui.FoodPrep.Sandwich=Sandwich
+gui.FoodPrep.Salad=Salat
 
 #== Metals ==
 gui.metal.Bismuth=Bismut
@@ -2193,9 +2286,13 @@ gui.Inventory=Inventar
 gui.ClearSlot=Einen Ausgangsslot zu leeren.
 gui.LogPile=Holzstapel
 gui.done=Erledigt
+gui.cancel=
 gui.Sluice.Soil=Erdreich
-gui.Sluice=Waschrinne
+gui.Sluice.Overworked=
 gui.Workbench.Crafting=Handwerk
+gui.overburdened=*überlastet*
+gui.slot=Platz
+gui.slot.back=Rücken
 
 #== Tooltips ==
 gui.ShowHelp=§8Hilfe: (Halte §fUmschalt-Taste§8)
@@ -2210,6 +2307,9 @@ gui.PotteryBase.Inst0=Kriechen und §bRechtsklicken§7, um Objekt zu platzieren.
 gui.PotteryVesselSmall.Inst0=Oder §bRechtsklick §7um Inventar zu öffnen.
 gui.RawHide.Inst0=
 gui.Barrel.MoreItems=§8Mehr... (§fShift§8 halten)
+gui.Nutrient.A=
+gui.Nutrient.B=
+gui.Nutrient.C=
 
 gui.Size.Tiny=Winzig
 gui.Size.VerySmall=Sehr klein
@@ -2238,6 +2338,84 @@ gui.food.salted=Gesalzen
 
 gui.FoodHeat.Cold=Kalt
 gui.FoodHeat.Warm=Warm
+
+gui.showtaste=§8Geschmack: (§fL-Ctrl§8 gedrückt halten)
+gui.taste=§8Geschmack:
+gui.taste.sweet=süß
+gui.taste.sour=sauer
+gui.taste.salty=salzig
+gui.taste.bitter=bitter
+gui.taste.savory=herzhaft
+
+gui.taste.novice.sweet1=süß
+gui.taste.novice.sweet0=nicht süß
+gui.taste.novice.sour1=sauer
+gui.taste.novice.sour0=nicht sauer
+gui.taste.novice.salty1=salzig
+gui.taste.novice.salty0=nicht salzig
+gui.taste.novice.bitter1=bitter
+gui.taste.novice.bitter0=nicht bitter
+gui.taste.novice.savory1=herzhaft
+gui.taste.novice.savory0=nicht herzhaft
+
+gui.taste.adept.sweet0=nicht süß
+gui.taste.adept.sweet1=mäßig süß
+gui.taste.adept.sweet2=süß
+gui.taste.adept.sweet3=ziemlich süß
+gui.taste.adept.sweet4=sehr süß
+gui.taste.adept.sweet5=extrem süß
+gui.taste.adept.sour0=nicht sauer
+gui.taste.adept.sour1=mäßig sauer
+gui.taste.adept.sour2=sauer
+gui.taste.adept.sour3=ziemlich sauer
+gui.taste.adept.sour4=sehr sauer
+gui.taste.adept.sour5=extrem sauer
+gui.taste.adept.salty0=nicht salzig
+gui.taste.adept.salty1=mäßig salzig
+gui.taste.adept.salty2=salzig
+gui.taste.adept.salty3=ziemlich salzig
+gui.taste.adept.salty4=sehr salzig
+gui.taste.adept.salty5=extrem salzig
+gui.taste.adept.bitter0=nicht bitter
+gui.taste.adept.bitter1=mäßig bitter
+gui.taste.adept.bitter2=bitter
+gui.taste.adept.bitter3=ziemlich bitter
+gui.taste.adept.bitter4=sehr bitter
+gui.taste.adept.bitter5=extrem bitter
+gui.taste.adept.savory0=nicht herzhaft
+gui.taste.adept.savory1=mäßig herzhaft
+gui.taste.adept.savory2=herzhaft
+gui.taste.adept.savory3=ziemlich herzhaft
+gui.taste.adept.savory4=sehr herzhaft
+gui.taste.adept.savory5=extrem herzhaft
+
+gui.taste.0=nicht
+gui.taste.1=nicht sehr
+gui.taste.2=etwas
+gui.taste.3=mäßig
+gui.taste.4=perfekt
+gui.taste.5=übermäßig
+gui.taste.6=sehr
+gui.taste.7=extrem
+gui.taste.8=lächerlich
+
+word.pickled=sauer eingelegt
+word.brined=gepökelt
+word.cooked=gekocht
+word.salted=gesalzen
+word.smoked=geräuchert
+word.dried=getrocknet
+
+food.cooked.rare=Roh
+food.cooked.medrare=
+food.cooked.med=
+food.cooked.medwell=
+food.cooked.well=
+food.cooked.0=
+food.cooked.1=
+food.cooked.2=
+food.cooked.3=
+food.cooked.4=
 
 gui.Torch.CatchingFire=Fängt Feuer
 gui.Torch.Lit=Entflammt
@@ -2300,128 +2478,12 @@ skill.agriculture=Landwirtschaft
 skill.cooking=Kochen
 skill.prospecting=Erzschürfen
 skill.butchering=Schlachten
-
-#=====================================================
-#========Add New Stuff Here To Be Sorted Later========
-#=====================================================
-fluid.freshwater=Süßwasser
-fluid.saltwater=Salzwasser
-fluid.lavatfc=
-fluid.hotwater=Heißes Wasser
-fluid.beer=Bier
-fluid.cider=Apfelwein
-fluid.rum=Rum
-fluid.ryewhiskey=Roggen Whiskey
-fluid.sake=Wodka
-fluid.vodka=Wodka
-fluid.whiskey=Whiskey
-fluid.cornwhiskey=Maiswhiskey
-fluid.milk=Milch
-fluid.milkcurdled=Geronnene Milch
-fluid.limewater=Kalkwasser
-fluid.tannin=Gerbmittel
-fluid.vinegar=Essig
-fluid.brine=Sole
-
-gui.showtaste=§8Geschmack: (§fL-Ctrl§8 gedrückt halten)
-gui.taste=§8Geschmack:
-gui.taste.sweet=süß
-gui.taste.sour=sauer
-gui.taste.salty=salzig
-gui.taste.bitter=bitter
-gui.taste.savory=herzhaft
-
-gui.taste.novice.sweet1=süß
-gui.taste.novice.sweet0=nicht süß
-gui.taste.novice.sour1=sauer
-gui.taste.novice.sour0=nicht sauer
-gui.taste.novice.salty1=salzig
-gui.taste.novice.salty0=nicht salzig
-gui.taste.novice.bitter1=bitter
-gui.taste.novice.bitter0=nicht bitter
-gui.taste.novice.savory1=herzhaft
-gui.taste.novice.savory0=nicht herzhaft
-
-gui.taste.adept.sweet0=nicht süß
-gui.taste.adept.sweet1=mäßig süß
-gui.taste.adept.sweet2=süß
-gui.taste.adept.sweet3=ziemlich süß
-gui.taste.adept.sweet4=sehr süß
-gui.taste.adept.sweet5=extrem süß
-gui.taste.adept.sour0=nicht sauer
-gui.taste.adept.sour1=mäßig sauer
-gui.taste.adept.sour2=sauer
-gui.taste.adept.sour3=ziemlich sauer
-gui.taste.adept.sour4=sehr sauer
-gui.taste.adept.sour5=extrem sauer
-gui.taste.adept.salty0=nicht salzig
-gui.taste.adept.salty1=mäßig salzig
-gui.taste.adept.salty2=salzig
-gui.taste.adept.salty3=ziemlich salzig
-gui.taste.adept.salty4=sehr salzig
-gui.taste.adept.salty5=extrem salzig
-gui.taste.adept.bitter0=nicht bitter
-gui.taste.adept.bitter1=mäßig bitter
-gui.taste.adept.bitter2=bitter
-gui.taste.adept.bitter3=ziemlich bitter
-gui.taste.adept.bitter4=sehr bitter
-gui.taste.adept.bitter5=extrem bitter
-gui.taste.adept.savory0=nicht herzhaft
-gui.taste.adept.savory1=mäßig herzhaft
-gui.taste.adept.savory2=herzhaft
-gui.taste.adept.savory3=ziemlich herzhaft
-gui.taste.adept.savory4=sehr herzhaft
-gui.taste.adept.savory5=extrem herzhaft
-
-gui.taste.0=nicht
-gui.taste.1=nicht sehr
-gui.taste.2=etwas
-gui.taste.3=mäßig
-gui.taste.4=perfekt
-gui.taste.5=übermäßig
-gui.taste.6=sehr
-gui.taste.7=extrem
-gui.taste.8=lächerlich
-
 gui.skill.novice=Anfänger
 gui.skill.adept=Kenner
 gui.skill.expert=Experte
 gui.skill.master=Meister
 gui.skillpage=Fertigkeiten
-tile.MetalTrapDoor.name=Falltür
-"item.Mud Brick.name=
-"
-item.Wet Mud Brick.name=
-gui.overburdened=*überlastet*
-gui.slot=Platz
-gui.slot.back=Rücken
-word.pickled=sauer eingelegt
-word.brined=gepökelt
-word.cooked=gekocht
-word.salted=gesalzen
-word.smoked=geräuchert
-word.dried=getrocknet
-gui.barrel.pickling=einlegen
-gui.barrel.brining=pökeln
-tile.Vessel.name=großes Gefäß
-tile.Grill.name=Grill
-food.cooked.rare=Roh
-food.cooked.medrare=
-food.cooked.med=
-food.cooked.medwell=
-food.cooked.well=
-food.cooked.0=
-food.cooked.1=
-food.cooked.2=
-food.cooked.3=
-food.cooked.4=
-gui.FoodPrep.Sandwich=Sandwich
-gui.FoodPrep.Salad=Salat
-item.Sandwich.name=Sandwich
-item.Salad.name=Salat
-item.ClayBowl.Ceramic Bowl.name=Tonschüssel
-item.ClayBowl.Clay Bowl.name=Keramikschüssel
-item.Sugar.name=Zucker
-item.Sea Weed.name=Seetang
-word.stage1=Schritt 1
-word.stage2=Schritt 2
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================
