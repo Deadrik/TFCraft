@@ -41,7 +41,7 @@ public class GSPVisualCommand extends CommandBase{
 			for(int x = 0; x < 16; x++)
 			{
 				for(int z = 0; z < 16; z++)
-					world.setBlock(x+(chunk.xPosition*16), (int)player.posY-1, z+(chunk.zPosition*16), Blocks.wool, getColor(d.spawnProtection), 2);
+					world.setBlock(x+(chunk.xPosition*16), (int)player.posY-1, z+(chunk.zPosition*16), Blocks.wool, getColor(d.getSpawnProtectionWithUpdate()), 2);
 			}
 		}
 		else if(params.length == 1)
@@ -55,7 +55,7 @@ public class GSPVisualCommand extends CommandBase{
 					for(int x = 0; x < 16; x++)
 					{
 						for(int z = 0; z < 16; z++)
-							world.setBlock(x + (chunk.xPosition * 16), (int)player.posY - 1, z + (chunk.zPosition * 16), Blocks.wool, getColor(d.spawnProtection), 2);
+							world.setBlock(x + (chunk.xPosition * 16), (int)player.posY - 1, z + (chunk.zPosition * 16), Blocks.wool, getColor(d.getSpawnProtectionWithUpdate()), 2);
 					}
 				}
 			}

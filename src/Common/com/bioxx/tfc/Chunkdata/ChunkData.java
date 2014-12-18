@@ -2,6 +2,7 @@ package com.bioxx.tfc.Chunkdata;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.WorldGen.DataLayer;
@@ -26,26 +27,27 @@ public class ChunkData
 	public int lastSpringGen;
 	public int cropInfestation = 0;
 	public boolean isUnloaded = false;
+	
+	private final Chunk chunk;
 
-	public ChunkData()
+	public ChunkData(Chunk chunk)
 	{
+		this.chunk = chunk;
+		
 		heightmap = new int[256];
 		rainfallMap = new DataLayer[256];
 	}
 
-	public ChunkData(NBTTagCompound tag)
+	public ChunkData(Chunk chunk, NBTTagCompound tag)
 	{
-		chunkX = tag.getInteger("chunkX");
+		this.chunk = chunk;
+		
+		chunkX = tag.getInteger("chunkX");  // could be removed, but that's too radical
 		chunkZ = tag.getInteger("chunkZ");
 		lastVisited = tag.getLong("lastVisited");
 		spawnProtection = tag.getInteger("spawnProtection");
 
-		long visit = (TFC_Time.getTotalTicks() - lastVisited) / TFC_Time.hourLength;
-		spawnProtection -= visit;
-		if (spawnProtection < protectionBuffer)
-			spawnProtection = protectionBuffer;
-
-		lastVisited = TFC_Time.getTotalTicks();
+		updateSpawnProtection();
 
 		heightmap = tag.getIntArray("heightmap");
 		if(heightmap.length == 0)
@@ -64,10 +66,9 @@ public class ChunkData
 
 		tag.setInteger("chunkX", chunkX);
 		tag.setInteger("chunkZ", chunkZ);
-		long visit = (TFC_Time.getTotalTicks() - lastVisited) / TFC_Time.hourLength;
-		spawnProtection -= visit;
-		if (spawnProtection < protectionBuffer)
-			spawnProtection = protectionBuffer;
+		
+		updateSpawnProtection();
+		
 		tag.setInteger("spawnProtection", spawnProtection);
 		tag.setLong("lastVisited", lastVisited);
 		tag.setIntArray("heightmap", heightmap);
@@ -90,12 +91,7 @@ public class ChunkData
 
 	public int getSpawnProtectionWithUpdate()
 	{
-		long visit = (TFC_Time.getTotalTicks() - lastVisited) / TFC_Time.hourLength;
-		spawnProtection -= visit;
-		if (spawnProtection < protectionBuffer)
-			spawnProtection = protectionBuffer;
-
-		lastVisited = TFC_Time.getTotalTicks();
+		updateSpawnProtection();
 
 		if(spawnProtection > 4320)
 			spawnProtection = 4320;
@@ -105,18 +101,29 @@ public class ChunkData
 
 	public void setSpawnProtectionWithUpdate(int amount)
 	{
-		long visit = (TFC_Time.getTotalTicks() - lastVisited) / TFC_Time.hourLength;
-		spawnProtection -= visit;
-
-		if (spawnProtection < protectionBuffer)
-			spawnProtection = protectionBuffer;
-
+		updateSpawnProtection();
+		
 		spawnProtection += amount;
 
 		if(spawnProtection > 4320)
 			spawnProtection = 4320;
+	}
+	
+	private void updateSpawnProtection()
+	{
+		long now = TFC_Time.getTotalTicks();
+		
+		if (lastVisited < now)
+		{
+			long visit = (now - lastVisited) / TFC_Time.hourLength;
+			spawnProtection -= visit;
+			lastVisited += visit * TFC_Time.hourLength;  // =now, but taking rounding from integer division above into account
 
-		lastVisited = TFC_Time.getTotalTicks();
+			if (spawnProtection < protectionBuffer)
+				spawnProtection = protectionBuffer;
+		
+			chunk.setChunkModified();
+		}
 	}
 
 	public void infest()
