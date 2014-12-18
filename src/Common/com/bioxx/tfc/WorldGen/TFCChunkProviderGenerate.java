@@ -170,15 +170,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		riverRavineGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 
 		Chunk chunk = new Chunk(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
-		byte[] abyte1 = chunk.getBiomeArray();
-
-		for (int x = 0; x < 16; ++x)
-		{
-			for (int z = 0; z < 16; ++z)
-			{
-				abyte1[x*z] = (byte)getBiome(x, z).biomeID;
-			}
-		}
 
 		ChunkData data = new ChunkData().CreateNew(worldObj, chunkX, chunkZ);
 		data.heightmap = seaLevelOffsetMap;
