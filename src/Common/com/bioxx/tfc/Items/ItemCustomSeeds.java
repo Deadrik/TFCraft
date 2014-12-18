@@ -5,12 +5,14 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Food.CropIndex;
@@ -54,6 +56,12 @@ public class ItemCustomSeeds extends ItemTerra
 				CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 				if(crop.needsSunlight && !TECrop.hasSunlight(world, x, y+1, z))
 					return false;
+
+				if(TFC_Climate.getHeightAdjustedTemp(world, x, y, z) <= crop.minAliveTemp)
+				{
+					player.addChatMessage(new ChatComponentTranslation("gui.ProPick.FoundNothing"));
+					return false;
+				}
 
 				world.setBlock(x, y + 1, z, TFCBlocks.Crops);
 

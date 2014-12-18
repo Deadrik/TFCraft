@@ -2486,3 +2486,4 @@ gui.skillpage=Skills
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+gui.seeds.failedTemp=It's too cold to plant this, it wouldn't survive very long.
