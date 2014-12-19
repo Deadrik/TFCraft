@@ -17,6 +17,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Sounds;
@@ -77,10 +78,26 @@ public class BlockSand extends BlockTerra
 		Block block = world.getBlock(x, y, z);
 		if (world.isAirBlock(x, y, z))
 			return true;
+		if (block == Blocks.bedrock)
+			return false;
 		if (block == Blocks.fire)
 			return true;
+		if (block == TFCBlocks.TallGrass)
+			return true;
+		if (block == TFCBlocks.Torch)
+			return true;
+		if (block == TFCBlocks.SmokeRack)
+			return true;
+		if (block == TFCBlocks.ToolRack)
+			return true;
+		if (block == TFCBlocks.Charcoal)
+			return false;
+		if (!block.isNormalCube())
+			return true;
 		Material material = block.getMaterial();
-		return material == Material.water ? true : material == Material.lava;
+		if (material == Material.water || material == Material.lava)
+			return true;
+		return false;
 	}
 
 	/**
