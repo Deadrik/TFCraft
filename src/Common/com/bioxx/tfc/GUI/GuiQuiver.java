@@ -9,7 +9,7 @@ import com.bioxx.tfc.Containers.ContainerQuiver;
 
 public class GuiQuiver extends GuiContainerTFC
 {
-	public static ResourceLocation GuiTex = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_quiver.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_quiver.png");
 
 	public GuiQuiver(InventoryPlayer inventoryplayer, World world, int i, int j, int k)
 	{
@@ -19,7 +19,7 @@ public class GuiQuiver extends GuiContainerTFC
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		this.drawGui(GuiTex);
+		this.drawGui(texture);
 	}
 
 	/**

@@ -67,12 +67,12 @@ public class GuiAnvilButton extends GuiButton
 			if(icon == null)
 			{
 				k = 0;
-				if(screen.AnvilEntity != null && screen.AnvilEntity.workRecipe != null)
+				if(screen.anvilTE != null && screen.anvilTE.workRecipe != null)
 				{
-					PlanRecipe p = AnvilManager.getInstance().getPlan(screen.AnvilEntity.craftingPlan);
+					PlanRecipe p = AnvilManager.getInstance().getPlan(screen.anvilTE.craftingPlan);
 					if(p == null) return;
 					RuleEnum[] Rules = p.rules;
-					int[] ItemRules = screen.AnvilEntity.getItemRules();
+					int[] ItemRules = screen.anvilTE.getItemRules();
 					this.displayString = StatCollector.translateToLocal(Rules[ruleIndex].Name);
 				}
 			}
