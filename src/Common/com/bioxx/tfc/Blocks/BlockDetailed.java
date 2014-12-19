@@ -2,6 +2,7 @@ package com.bioxx.tfc.Blocks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -10,6 +11,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -504,5 +506,11 @@ public class BlockDetailed extends BlockPartial
 		if(te.TypeID >= 0)
 			return Blocks.fire.getEncouragement(Block.getBlockById(te.TypeID));
 		else return 0;
+	}
+	
+	@Override
+	public Item getItemDropped(int metadata, Random rand, int fortune)
+	{
+		return null;
 	}
 }
