@@ -19,6 +19,9 @@ public class TESmokeRack extends NetworkTileEntity implements IInventory
 	public ItemStack[] storage = new ItemStack[2];
 	public int[] driedCounter = new int[]{0,0};
 
+	//temporary smoke timer that should not be saved
+	public int lastSmokedTime = 0;
+
 	public TESmokeRack()
 	{
 	}
@@ -35,9 +38,9 @@ public class TESmokeRack extends NetworkTileEntity implements IInventory
 		}
 
 
-		if(!worldObj.isRaining())
+		if(!worldObj.isRaining() && TFC_Time.getTotalHours() > this.lastSmokedTime+1)
 			TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord, env, base);
-		else
+		else if(TFC_Climate.getHeightAdjustedTemp(worldObj, xCoord, yCoord, zCoord) > 0)
 			TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord, env*2, base*2);
 	}
 

@@ -13,6 +13,7 @@ import net.minecraftforge.common.MinecraftForge;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.HeatIndex;
@@ -490,6 +491,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 		if(worldObj.getBlock(x, y, z) == TFCBlocks.SmokeRack)
 		{
 			TESmokeRack te = (TESmokeRack) worldObj.getTileEntity(x, y, z);
+			te.lastSmokedTime = (int)TFC_Time.getTotalHours();
 			if(te.getStackInSlot(0) != null)
 			{
 				ItemStack is = te.getStackInSlot(0);
