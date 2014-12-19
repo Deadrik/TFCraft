@@ -97,7 +97,7 @@ public class ContainerHorseInventoryTFC extends ContainerTFC
 			{
 				for (k = 0; k < 5; ++k)
 				{
-					this.addSlotToContainer(new SlotChest(horseInv, 2 + k + j * 5, 80 + k * 18, 18 + j * 18));
+					this.addSlotToContainer(new SlotChest(horseInv, 2 + k + j * 5, 80 + k * 18, 18 + j * 18).addItemException(ContainerChestTFC.getExceptions()));
 				}
 			}
 		}
