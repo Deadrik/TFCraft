@@ -16,6 +16,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Sounds;
@@ -96,17 +97,31 @@ public class BlockCobble extends BlockTerra
 		world.scheduleBlockUpdate(i, j, k, this, tickRate(world));
 	}
 
-	public boolean canFallBelow(World world, int i, int j, int k)
+	public static boolean canFallBelow(World world, int x, int y, int z)
 	{
-		Block l = world.getBlock(i, j, k);
-		if (world.isAirBlock(i, j, k))
+		Block block = world.getBlock(x, y, z);
+		if (world.isAirBlock(x, y, z))
 			return true;
-		if (l == Blocks.fire)
+		if (block == Blocks.bedrock)
+			return false;
+		if (block == Blocks.fire)
 			return true;
-		Material material = l.getMaterial();
-		if (material == Material.water)
+		if (block == TFCBlocks.TallGrass)
 			return true;
-		return material == Material.lava;
+		if (block == TFCBlocks.Torch)
+			return true;
+		if (block == TFCBlocks.SmokeRack)
+			return true;
+		if (block == TFCBlocks.ToolRack)
+			return true;
+		if (block == TFCBlocks.Charcoal)
+			return false;
+		if (!block.isNormalCube())
+			return true;
+		Material material = block.getMaterial();
+		if (material == Material.water || material == Material.lava)
+			return true;
+		return false;
 	}
 
 	/**
