@@ -609,6 +609,15 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		TFC_Core.animalDropMeat(this, TFCItems.horseMeatRaw, foodWeight);
 	}
 
+	@Override
+	public void dropChests()
+	{
+		if (!this.worldObj.isRemote && this.isChested())
+		{
+			this.setChested(false);
+		}
+	}
+
 	private boolean func_110200_cJ()
 	{
 		return this.riddenByEntity == null && this.ridingEntity == null && this.isTame() && this.isAdultHorse() && !this.func_110222_cv() && this.getHealth() >= this.getMaxHealth();
