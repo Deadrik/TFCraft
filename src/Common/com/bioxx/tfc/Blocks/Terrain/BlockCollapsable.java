@@ -12,6 +12,7 @@ import net.minecraft.stats.StatList;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
@@ -73,7 +74,7 @@ public class BlockCollapsable extends BlockTerraContainer
 			return true;
 		if(block == TFCBlocks.Charcoal)
 			return false;
-		if(!block.isNormalCube())
+		if(!block.isNormalCube() && !world.isSideSolid(x, y, z, ForgeDirection.UP))
 			return true;
 		Material material = block.getMaterial();
 		if (material == Material.water || material == Material.lava)
