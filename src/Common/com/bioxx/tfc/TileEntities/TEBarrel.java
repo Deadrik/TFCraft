@@ -578,63 +578,71 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		if(!worldObj.isRemote)
 		{
-			boolean shouldStandardTick = false;
-			if(fluid == null)
-				shouldStandardTick = true;
-			else
-			{
-				ItemStack itemstack = storage[0]; 
-				if(itemstack != null)
-				{
-					if(TFC_ItemHeat.HasTemp(itemstack))
-					{
-						float temp = TFC_ItemHeat.GetTemp(itemstack);
-						if(fluid.amount >= 1 && temp > 1)
-						{
-							temp -= 50;
-							fluid.amount -= 1;
-							TFC_ItemHeat.SetTemp(itemstack, temp);
-							TFC_ItemHeat.HandleItemHeat(itemstack);
-						}
-					}
-				}
-				if(itemstack != null && itemstack.getItem() instanceof IFood)
-				{
-					float w = ((IFood)itemstack.getItem()).getFoodWeight(itemstack);
-					if(fluid.getFluid() == TFCFluid.BRINE)
-					{
-						if(Food.isBrined(itemstack))
-						{
-							if(w/fluid.amount <= 0.016)
-								TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord, 0.75f);
-							else
-								shouldStandardTick = true;
-						}
-					}
-					else if(fluid.getFluid() == TFCFluid.VINEGAR)
-					{
-						if(Food.isBrined(itemstack))
-						{
-							if(!Food.isPickled(itemstack) && w/fluid.amount <= Global.FOOD_MAX_WEIGHT/this.getMaxLiquid() && this.getSealed() &&
-									sealtime != 0 && TFC_Time.getTotalHours() - sealtime >= 4)
-							{
-								fluid.amount -= 1 * w;
-								Food.setPickled(itemstack, true);
-							}
+			DecayTickType decayTickType = DecayTickType.Standard;
+			ItemStack itemstack = storage[0]; 
+			float liquidToFoodRatioBrine = Global.FOOD_MAX_WEIGHT/10000f;//0.016
+			float liquidToFoodRatioVinegar = Global.FOOD_MAX_WEIGHT/5000f;//0.032
 
-							if(Food.isPickled(itemstack) && w/fluid.amount <= Global.FOOD_MAX_WEIGHT/this.getMaxLiquid()*2)
-								TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord, 0.25f, 0.1f);
-							else
-								shouldStandardTick = true;
-						}
+			if(itemstack != null)
+			{
+				if(TFC_ItemHeat.HasTemp(itemstack))
+				{
+					float temp = TFC_ItemHeat.GetTemp(itemstack);
+					if(fluid.amount >= 1 && temp > 1)
+					{
+						temp -= 50;
+						fluid.amount -= 1;
+						TFC_ItemHeat.SetTemp(itemstack, temp);
+						TFC_ItemHeat.HandleItemHeat(itemstack);
 					}
 				}
 			}
-			if(shouldStandardTick)
+			if(fluid != null && itemstack != null && itemstack.getItem() instanceof IFood)
+			{
+				float w = ((IFood)itemstack.getItem()).getFoodWeight(itemstack);
+				if(fluid.getFluid() == TFCFluid.BRINE)
+				{
+					if(Food.isBrined(itemstack))
+					{
+						//Do a calculation to see if there is enough Brine here to cover the food. If there is then we perform our non-standard decay tick.
+						if(w/fluid.amount <= liquidToFoodRatioBrine)
+							decayTickType = DecayTickType.Brine;
+					}
+				}
+				else if(fluid.getFluid() == TFCFluid.VINEGAR)
+				{
+					//If the food is brined then we attempt to pickle it
+					if(Food.isBrined(itemstack) && !Food.isPickled(itemstack) && w/fluid.amount <= Global.FOOD_MAX_WEIGHT/this.getMaxLiquid() && this.getSealed() &&
+							sealtime != 0 && TFC_Time.getTotalHours() - sealtime >= 4)
+					{
+						fluid.amount -= 1 * w;
+						Food.setPickled(itemstack, true);
+					}
+					//Do a calculation to see if there is enough Vinegar here to cover the food. If there is and the item has been properly pickled 
+					//then we perform our non-standard decay tick. If the food is in the process of pickling then we decay as if we were in brine.
+					if(Food.isPickled(itemstack) && w/fluid.amount <= liquidToFoodRatioVinegar)
+						decayTickType = DecayTickType.Vinegar;
+					else if(Food.isBrined(itemstack) && w/fluid.amount <= liquidToFoodRatioBrine)
+						decayTickType = DecayTickType.Brine;
+				}
+			}
+
+
+			if(decayTickType == DecayTickType.Standard)
 			{
 				TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
 			}
+			else if(decayTickType == DecayTickType.Brine)
+			{
+				TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord, 0.75f);
+			}
+			else if(decayTickType == DecayTickType.Vinegar)
+			{
+				TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord, 0.25f, 0.1f);
+			}
 
+			//If lightning can strike here then it means that the barrel can see the sky, so rain can hit it. If true then we fill
+			//the barrel when its raining.
 			if(!this.getSealed() && worldObj.canLightningStrikeAt(xCoord, yCoord+1, zCoord))
 			{
 				int count = getInvCount();	
@@ -647,14 +655,18 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				}
 			}
 
-			processTimer++;
 
+			//We only want to bother ticking food once per 5 seconds to keep overhead low.
+			processTimer++;
 			if(processTimer > 100)
 			{
 				ProcessItems();
 				processTimer = 0;
 			}
 
+			//Here we handle item stacks that are too big for MC to handle such as when making mortar.
+			//If the stack is > its own max stack size then we split it and add it to the invisible solid storage area or 
+			//spawn the item in the world if there is no room left.
 			if(this.getFluidLevel() > 0 && getInputStack() != null)
 			{
 				int count = 1;
@@ -672,6 +684,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					count++;
 				}
 			}
+			//Move any items in the solid storage slots to the main slot if they exist and the barrel has liquid.
 			else if(this.getFluidLevel() > 0 && getInputStack() == null && this.getInvCount() > 0)
 			{
 				for(int i = 0; i < storage.length; i++)
@@ -686,9 +699,11 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				}
 			}
 
+			//Reset our fluid if all of the liquid is gone.
 			if(fluid != null && fluid.amount == 0)
 				fluid = null;
 
+			//Handle adding fluids to the barrel if the barrel is currently in input mode.
 			if(mode == MODE_IN)
 			{
 				ItemStack container = getInputStack();
@@ -717,6 +732,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					}
 				}
 			}
+			//Drain liquid from the barrel to a container if the barrel is in output mode.
 			else if(mode == MODE_OUT)
 			{
 				ItemStack container = getInputStack();
@@ -742,7 +758,10 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		if(this.getInvCount() == 0)
 		{
+			//Before we handle standard barrel processing we have to see if we are handling cheese and run that code first 
+			//since it has to be handled specially.
 			boolean isCheese = handleCheese();
+
 			if(getFluidStack() != null && !isCheese)
 			{
 				recipe = BarrelManager.getInstance().findMatchingRecipe(getInputStack(), getFluidStack(), this.sealed, getTechLevel());
@@ -760,7 +779,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 					ItemStack origIS = getInputStack() != null ? getInputStack().copy() : null;
 					FluidStack origFS = getFluidStack() != null ? getFluidStack().copy() : null;
-					if(fluid.isFluidEqual(recipe.getResultFluid(origIS, origFS, time)))
+					if(fluid.isFluidEqual(recipe.getResultFluid(origIS, origFS, time)) && recipe.removesLiquid)
 					{
 						if(fluid.getFluid() == TFCFluid.BRINE)
 							fluid.amount -= recipe.getResultFluid(origIS, origFS, time).amount * Food.getWeight(origIS);
@@ -773,6 +792,10 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 						if(fluid != null && !(recipe instanceof BarrelLiquidToLiquidRecipe))
 							this.fluid.amount = origFS.amount;
 					}
+
+					if(origFS.getFluid() != TFCFluid.MILKCURDLED && this.fluid.getFluid() == TFCFluid.MILKCURDLED)
+						this.sealtime = (int) TFC_Time.getTotalHours();
+
 					ItemStack result = recipe.getResult(origIS, origFS, time);
 					if(fluid != null && fluid.getFluid() == TFCFluid.BRINE)
 					{
@@ -801,7 +824,10 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	 */
 	private boolean handleCheese()
 	{
-		if(this.getSealed() && this.fluid != null && this.fluid.getFluid() == TFCFluid.MILKCURDLED && this.getInputStack() == null)
+		ItemStack inIS = this.getInputStack();
+		if(this.getSealed() && this.fluid != null && this.fluid.getFluid() == TFCFluid.MILKCURDLED && 
+				(inIS == null || (inIS.getItem() instanceof IFood && ((IFood)inIS.getItem()).getFoodGroup() != EnumFoodGroup.Dairy && 
+				((IFood)inIS.getItem()).isEdible(inIS) && Food.getWeight(inIS) <= 20.0f)))
 		{
 			recipe = new BarrelRecipe(null,new FluidStack(TFCFluid.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese, 1), 160), null).setMinTechLevel(0);
 			if(!worldObj.isRemote)
@@ -816,8 +842,24 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				if(time < recipe.sealTime)
 					return true;
 				float w = this.fluid.amount/62.5f;
-				this.setInventorySlotContents(0, ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese), w));
+
+				ItemStack is = ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese), w);
+
+				if(inIS != null && inIS.getItem() instanceof IFood)
+				{
+					int[] profile = Food.getFoodTasteProfile(inIS);
+					float ratio = Math.min((Food.getWeight(getInputStack())-Food.getDecay(inIS))/(Global.FOOD_MAX_WEIGHT/8), 1.0f);
+					Food.setSweetMod(is, (int)Math.floor(profile[0]*ratio));
+					Food.setSourMod(is, (int)Math.floor(profile[1]*ratio));
+					Food.setSaltyMod(is, (int)Math.floor(profile[2]*ratio));
+					Food.setBitterMod(is, (int)Math.floor(profile[3]*ratio));
+					Food.setSavoryMod(is, (int)Math.floor(profile[4]*ratio));
+					Food.setInfusion(is, inIS.getItem().getUnlocalizedName());
+					this.storage[0] = null;
+				}
+
 				this.actionEmpty();
+				this.setInventorySlotContents(0, is);
 			}
 			return true;
 		}
@@ -850,7 +892,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.RiceGround), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.SAKE, 10000)));
 		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.Sugar), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.RUM, 10000)));
 		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.CornmealGround), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.CORNWHISKEY, 10000)));
-		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluid.MILK, 9000), new FluidStack(TFCFluid.VINEGAR, 1000), new FluidStack(TFCFluid.MILKCURDLED, 10000)).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelRecipe(null, new FluidStack(TFCFluid.MILKVINEGAR, 10000), null, new FluidStack(TFCFluid.MILKCURDLED, 10000)).setMinTechLevel(0).setRemovesLiquid(false));
 		//BarrelManager.getInstance().addRecipe(new BarrelRecipeNoItem(new FluidStack(TFCFluid.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese), 160), null).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.Logs, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 1000), null, new FluidStack(TFCFluid.TANNIN, 1000)).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.Logs, 1, 2), new FluidStack(TFCFluid.FRESHWATER, 1000), null, new FluidStack(TFCFluid.TANNIN, 1000)).setMinTechLevel(0));
@@ -883,5 +925,14 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		BarrelManager.getInstance().addRecipe(new BarrelBriningRecipe(new FluidStack(TFCFluid.BRINE, 60), new FluidStack(TFCFluid.BRINE, 60)).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.Sugarcane), 1), new FluidStack(TFCFluid.FRESHWATER, 60), ItemFoodTFC.createTag(new ItemStack(TFCItems.Sugar), 0.1f), new FluidStack(TFCFluid.FRESHWATER, 60)).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.Jute, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 200), new ItemStack(TFCItems.JuteFibre, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 200)).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluid.MILK, 9000), new FluidStack(TFCFluid.VINEGAR, 1000), new FluidStack(TFCFluid.MILKVINEGAR, 10000)).setSealedRecipe(false).setMinTechLevel(0).setRemovesLiquid(false));
+		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluid.MILKVINEGAR, 9000), new FluidStack(TFCFluid.MILK, 1000), new FluidStack(TFCFluid.MILKVINEGAR, 10000)).setSealedRecipe(false).setMinTechLevel(0).setRemovesLiquid(false));
+	}
+
+	private enum DecayTickType
+	{
+		Standard,
+		Brine,
+		Vinegar;
 	}
 }

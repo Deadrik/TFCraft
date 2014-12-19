@@ -36,6 +36,7 @@ public class TFCFluid extends Fluid
 	public static final TFCFluid LIMEWATER = new TFCFluid("limewater").setBaseColor(0xb4b4b4);
 	public static final TFCFluid MILK = new TFCFluid("milk").setBaseColor(0xffffff);
 	public static final TFCFluid MILKCURDLED = new TFCFluid("milkcurdled").setBaseColor(0xfffbe8);
+	public static final TFCFluid MILKVINEGAR = new TFCFluid("milkvinegar").setBaseColor(0xfffbe8);
 
 	private int color = 0xffffff;
 
@@ -94,6 +95,7 @@ public class TFCFluid extends Fluid
 		FluidRegistry.registerFluid(LIMEWATER);
 		FluidRegistry.registerFluid(MILK);
 		FluidRegistry.registerFluid(MILKCURDLED);
+		FluidRegistry.registerFluid(MILKVINEGAR);
 	}
 
 	public static void registerFluidContainers()

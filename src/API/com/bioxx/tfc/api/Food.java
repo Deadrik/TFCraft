@@ -5,6 +5,8 @@ import java.util.Random;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import com.bioxx.tfc.api.Interfaces.IFood;
+
 public class Food 
 {
 	public static final int DRYHOURS = 4;
@@ -298,5 +300,32 @@ public class Food
 	public static boolean hasMealSkill(ItemStack is)
 	{
 		return is.getTagCompound().hasKey("mealSkill");
+	}
+
+	public static int[] getFoodTasteProfile(ItemStack is)
+	{
+		int[] profile = new int[5];
+		if(is != null && is.getItem() instanceof IFood)
+		{
+			profile[0] = ((IFood)is.getItem()).getTasteSweet(is);
+			profile[1] = ((IFood)is.getItem()).getTasteSour(is);
+			profile[2] = ((IFood)is.getItem()).getTasteSalty(is);
+			profile[3] = ((IFood)is.getItem()).getTasteBitter(is);
+			profile[4] = ((IFood)is.getItem()).getTasteSavory(is);
+		}
+		return profile;
+	}
+
+	public static boolean isInfused(ItemStack is)
+	{
+		NBTTagCompound nbt = getProcTag(is);
+		return nbt.hasKey("Infusion");
+	}
+
+	public static void setInfusion(ItemStack is, String val)
+	{
+		if(!is.hasTagCompound())
+			is.setTagCompound(new NBTTagCompound());
+		is.getTagCompound().setString("Infusion", val);
 	}
 }
