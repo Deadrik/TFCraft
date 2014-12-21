@@ -614,6 +614,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	{
 		if (!this.worldObj.isRemote && this.isChested())
 		{
+			this.dropItem(Item.getItemFromBlock(TFCBlocks.Chest), 1);
 			this.setChested(false);
 		}
 	}
@@ -621,6 +622,27 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	private boolean func_110200_cJ()
 	{
 		return this.riddenByEntity == null && this.ridingEntity == null && this.isTame() && this.isAdultHorse() && !this.func_110222_cv() && this.getHealth() >= this.getMaxHealth();
+	}
+	
+	@Override
+	public void dropChestItems()
+	{
+		this.dropItemsInChest(this, this.horseChest);
+		this.dropChests();
+	}
+	
+	private void dropItemsInChest(Entity entity, AnimalChest animalChest)
+	{
+		if (animalChest != null && !this.worldObj.isRemote)
+		{
+			for (int i = 0; i < animalChest.getSizeInventory(); ++i)
+			{
+				ItemStack itemstack = animalChest.getStackInSlot(i);
+				
+				if (itemstack != null)
+					this.entityDropItem(itemstack, 0.0F);
+			}
+		}
 	}
 
 	/**
