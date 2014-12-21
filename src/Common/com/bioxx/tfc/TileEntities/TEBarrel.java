@@ -583,7 +583,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			float liquidToFoodRatioBrine = Global.FOOD_MAX_WEIGHT/10000f;//0.016
 			float liquidToFoodRatioVinegar = Global.FOOD_MAX_WEIGHT/5000f;//0.032
 
-			if(itemstack != null)
+			if (itemstack != null && fluid != null && fluid.getFluid() == TFCFluid.FRESHWATER)
 			{
 				if(TFC_ItemHeat.HasTemp(itemstack))
 				{
