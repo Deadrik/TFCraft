@@ -316,6 +316,12 @@ public class Food
 		return profile;
 	}
 
+	public static String getInfusion(ItemStack is)
+	{
+		NBTTagCompound nbt = getProcTag(is);
+		return nbt.getString("Infusion");
+	}
+
 	public static boolean isInfused(ItemStack is)
 	{
 		NBTTagCompound nbt = getProcTag(is);

@@ -194,8 +194,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 		if(Food.isDried(is) && !Food.isCooked(is))
 			s += StatCollector.translateToLocal("word.dried") + " ";
-		if(is.getTagCompound().hasKey("Infusion"))
-			s += StatCollector.translateToLocal(is.getTagCompound().getString("Infusion") + ".name") + " ";
+		if(Food.isInfused(is))
+			s += StatCollector.translateToLocal(Food.getInfusion(is) + ".name") + " ";
 		s += StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(is) + ".name");
 		s += getCookedLevelString(is);
 		return s.trim();
