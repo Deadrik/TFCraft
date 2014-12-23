@@ -165,8 +165,8 @@ public class RenderOverlayHandler
 
 			float waterLevel = foodstats.waterLevel;
 
-			float percentFood = foodLevel/foodstats.getMaxStomach(mc.thePlayer);
-			float percentWater = waterLevel/foodstats.getMaxWater(mc.thePlayer);
+			float percentFood = Math.min(foodLevel / foodstats.getMaxStomach(mc.thePlayer), 1);
+			float percentWater = Math.min(waterLevel / foodstats.getMaxWater(mc.thePlayer), 1);
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.drawTexturedModalRect(mid+1, healthRowHeight, 0, 20, 90, 5);
@@ -177,6 +177,7 @@ public class RenderOverlayHandler
 				this.drawTexturedModalRect(mid+1, healthRowHeight, 0, 25, (int) (90*(percentFood2)), 5);
 			}
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+
 			this.drawTexturedModalRect(mid+1, healthRowHeight, 0, 25, (int) (90*percentFood), 5);
 
 			this.drawTexturedModalRect(mid+1, healthRowHeight+5, 90, 20, 90, 5);
