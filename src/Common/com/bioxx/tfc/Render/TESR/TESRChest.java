@@ -34,10 +34,20 @@ public class TESRChest extends TileEntitySpecialRenderer
 		{
 			texNormal = new ResourceLocation[Global.WOOD_ALL.length];
 			texNormalDouble = new ResourceLocation[Global.WOOD_ALL.length];
+			
+			/** X-mas stuff */
+			String suffix = "normal";
+			int buf = Calendar.getInstance().get(Calendar.MONTH);
+			if (buf == 12) {
+				buf = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+				if (buf >= 24 && buf <= 26)
+					suffix = "xmas";
+			}
+			
 			for(int i = 0; i < Global.WOOD_ALL.length; i++)
 			{
-				texNormal[i] = new ResourceLocation(Reference.ModID+":textures/models/chest/normal_" + Global.WOOD_ALL[i] + ".png");
-				texNormalDouble[i] = new ResourceLocation(Reference.ModID+":textures/models/chest/normal_double_" + Global.WOOD_ALL[i] + ".png");
+				texNormal[i] = new ResourceLocation(Reference.ModID+":textures/models/chest/" + suffix + "_" + Global.WOOD_ALL[i] + ".png");
+				texNormalDouble[i] = new ResourceLocation(Reference.ModID+":textures/models/chest/" + suffix + "_double_" + Global.WOOD_ALL[i] + ".png");
 			}
 		}
 	}
