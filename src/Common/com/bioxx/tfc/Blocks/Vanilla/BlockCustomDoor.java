@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.api.Constant.Global;
@@ -17,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -440,16 +442,23 @@ public class BlockCustomDoor extends BlockTerra
 		// check if the block is the bottom half of the door
 		if ((metadata & 8) == 0)
 		{
-			// get the wood type and return the door item
-			int damageValue = getDamageValue(world, x, y, z);
-			ret.add(new ItemStack(Recipes.Doors[damageValue], 1, 0));
+			// block is the bottom half of the door
+			// check if the top half of the door still exists (or is air)
+			Block block = world.getBlock(x, y+1, z);
+			if (block != null && (block instanceof BlockCustomDoor || block == Blocks.air)) // only return an item is the top half of the door exists, or the bottom half is air.
+			{
+				// top half of the door still exists or is air
+				// return the door item (used to return the door item when mouse pointer over the bottom half of the door)
+				int damageValue = getDamageValue(world, x, y, z);
+				ret.add(new ItemStack(Recipes.Doors[damageValue], 1, 0));				
+			}		
 		}
 		else
 		{
 			// block is the top half of the door
 			// check if the bottom half of the door still exists
 			Block block = world.getBlock(x, y-1, z);
-			if (block != null && block != Blocks.air)
+			if (block != null && block instanceof BlockCustomDoor)	// only return an item is the bottom half of the door exists
 			{
 				// bottom half of the door still exists
 				// return the door item (used to return the door item when mouse pointer over the top half of the door)
@@ -460,4 +469,11 @@ public class BlockCustomDoor extends BlockTerra
 		
 		return ret;
 	}
+	
+	@Override
+    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+    {
+		int damageValue = getDamageValue(world, x, y, z);
+		return new ItemStack(Recipes.Doors[damageValue], 1, 0);
+    }
 }
