@@ -317,7 +317,7 @@ public class BlockBarrel extends BlockTerraContainer
 
 	protected boolean handleInteraction(EntityPlayer player, TEBarrel te) 
 	{
-		if (!te.getSealed() && te.getInvCount() <= 1) 
+		if (!te.getSealed() && te.getInvCount() <= 1 && !te.getWorldObj().isRemote) 
 		{
 			ItemStack equippedItem = player.getCurrentEquippedItem();
 			if(equippedItem == null)

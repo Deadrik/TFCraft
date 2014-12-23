@@ -245,17 +245,12 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		return 10000;
 	}
 
-	public boolean addLiquid(int amount)
-	{
-		if(fluid.amount == getMaxLiquid())
-			return false;
-
-		fluid.amount = Math.min(fluid.amount+amount, getMaxLiquid());
-		return true;
-	}
-
 	public boolean addLiquid(FluidStack inFS)
 	{
+		//We dont want very hot liquids stored here so if they are much hotter than boiling water, we prevent it. 
+		if(inFS.getFluid().getTemperature(inFS) > 385)
+			return false;
+
 		if(fluid == null)
 		{
 			fluid = inFS.copy();
@@ -269,6 +264,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		}
 		else
 		{
+			//check if the barrel is full or if the fluid being added does not match the barrel liquid
 			if(fluid.amount == getMaxLiquid() || !fluid.isFluidEqual(inFS))
 				return false;
 
@@ -710,17 +706,9 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				FluidStack inLiquid = FluidContainerRegistry.getFluidForFilledItem(container);
 				if(inLiquid != null && container.stackSize == 1)
 				{
-					if(this.fluid == null)
+					if(addLiquid(inLiquid))
 					{
-						this.fluid = inLiquid.copy();
 						this.setInventorySlotContents(0, FluidContainerRegistry.drainFluidContainer(container));
-					}
-					else if(inLiquid.isFluidEqual(this.fluid))
-					{
-						if(addLiquid(inLiquid.amount))
-						{
-							this.setInventorySlotContents(0, FluidContainerRegistry.drainFluidContainer(container));
-						}
 					}
 				}
 				else if(container != null && container.getItem() instanceof IFluidContainerItem)
