@@ -55,7 +55,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 {
 	private static final IEntitySelector horseBreedingSelector = new EntityHorseBredSelector();
 	private static final IAttribute horseJumpStrength = (new RangedAttribute("horse.jumpStrengthTFC", 0.7D, 0.0D, 2.0D)).setDescription("Jump StrengthTFC").setShouldWatch(true);
-	private AnimalChest horseChest;
 
 	public int inLove;
 
