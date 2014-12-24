@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import java.util.LinkedList;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 
@@ -104,7 +105,12 @@ public class ItemNBTPacket extends AbstractPacket {
 
 	@Override
 	public void handleClientSide(EntityPlayer player) {
-		NBTTagCompound stackNBT = player.inventory.getCurrentItem().stackTagCompound;
+		NBTTagCompound stackNBT;
+    ItemStack stack = player.inventory.getCurrentItem();
+    if (stack.hasTagCompound())
+      stackNBT = stack.stackTagCompound;
+    else
+      stackNBT = new NBTTagCompound();
 		for (String tagName : tagNames)
 			stackNBT.setTag(tagName, tags.getTag(tagName));
 		for (String tagName : removeNames)
@@ -114,7 +120,12 @@ public class ItemNBTPacket extends AbstractPacket {
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
-		NBTTagCompound stackNBT = player.inventory.getCurrentItem().stackTagCompound;
+		NBTTagCompound stackNBT;
+    ItemStack stack = player.inventory.getCurrentItem();
+    if (stack.hasTagCompound())
+      stackNBT = stack.stackTagCompound;
+    else
+      stackNBT = new NBTTagCompound();
 		for (String tagName : tagNames)
 			stackNBT.setTag(tagName, tags.getTag(tagName));
 		for (String tagName : removeNames)
