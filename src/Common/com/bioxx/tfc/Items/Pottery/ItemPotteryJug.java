@@ -6,14 +6,18 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
@@ -92,6 +96,19 @@ public class ItemPotteryJug extends ItemPotteryBase
 			{
 				entity.setItemInUse(is, this.getMaxItemUseDuration(is));
 			}
+			else if(is.getItemDamage() == 1){
+				Vec3 lookVec = entity.getLookVec();
+				if(!is.hasTagCompound()){
+					entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
+					is.stackTagCompound = new NBTTagCompound();
+					is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
+				}
+				else if(is.stackTagCompound.hasKey("blowTime") &&	
+						(is.stackTagCompound.getLong("blowTime") + 10 < TFC_Time.getTotalTicks())){
+					entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
+					is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
+				}
+			}
 		}
 		else
 		{
@@ -100,16 +117,6 @@ public class ItemPotteryJug extends ItemPotteryBase
 				int x = mop.blockX;
 				int y = mop.blockY;
 				int z = mop.blockZ;
-
-				if(!world.canMineBlock(entity, x, y, z))
-				{
-					return is;
-				}
-
-				if(!entity.canPlayerEdit(x, y, z, mop.sideHit, is))
-				{
-					return is;
-				}
 
 				if(!world.isRemote && TFC_Core.isFreshWater(world.getBlock(x, y, z)) && !entity.isSneaking())
 				{
@@ -131,6 +138,29 @@ public class ItemPotteryJug extends ItemPotteryBase
 					{
 						entity.setItemInUse(is, this.getMaxItemUseDuration(is));
 					}
+					else if(is.getItemDamage() == 1){
+						Vec3 lookVec = entity.getLookVec();
+						if(!is.hasTagCompound()){
+							entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
+							is.stackTagCompound = new NBTTagCompound();
+							is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
+						}
+						else if(is.stackTagCompound.hasKey("blowTime") &&	
+								(is.stackTagCompound.getLong("blowTime") + 10 < TFC_Time.getTotalTicks())){
+							entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
+							is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
+						}
+					}
+				}
+
+				if(!world.canMineBlock(entity, x, y, z))
+				{
+					return is;
+				}
+
+				if(!entity.canPlayerEdit(x, y, z, mop.sideHit, is))
+				{
+					return is;
 				}
 			}
 		}
