@@ -1,7 +1,6 @@
 package com.bioxx.tfc.Render.TESR;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.model.ModelLargeChest;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -17,6 +16,8 @@ import com.bioxx.tfc.TileEntities.TEChest;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.common.FMLLog;
+
+import java.util.Calendar;
 
 public class TESRChest extends TileEntitySpecialRenderer
 {
@@ -38,7 +39,7 @@ public class TESRChest extends TileEntitySpecialRenderer
 			/** X-mas stuff */
 			String suffix = "normal";
 			int buf = Calendar.getInstance().get(Calendar.MONTH);
-			if (buf == 12) {
+			if (buf == 11) {
 				buf = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 				if (buf >= 24 && buf <= 26)
 					suffix = "xmas";
