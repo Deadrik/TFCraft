@@ -321,7 +321,7 @@ public class GuiBarrel extends GuiContainerTFC
 			}
 			if (barrelTE.recipe != null && !(barrelTE.recipe instanceof BarrelBriningRecipe))
 			{
-				drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.Bloomery.Output") + ": " + barrelTE.recipe.getRecipeName(), guiLeft + 88, guiTop + 72, 0x555555);
+				drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.Output") + ": " + barrelTE.recipe.getRecipeName(), guiLeft + 88, guiTop + 72, 0x555555);
 			}
 			else if (barrelTE.recipe != null && barrelTE.getSealed() && barrelTE.getFluidStack() != null && barrelTE.getFluidStack().getFluid() == TFCFluid.BRINE)
 			{

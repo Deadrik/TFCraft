@@ -4,7 +4,9 @@ import java.util.Random;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 
+import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class Food 
@@ -26,6 +28,20 @@ public class Food
 		if(!is.hasTagCompound())
 			is.setTagCompound(new NBTTagCompound());
 		is.getTagCompound().setTag("Processing Tag", nbt);
+	}
+
+	private static NBTTagCompound getNBT(ItemStack is)
+	{
+		if (is.hasTagCompound())
+		{
+			return is.getTagCompound();
+		}
+		else
+		{
+			System.out.println(StatCollector.translateToLocal("error.error") + " " + is.getUnlocalizedName() + " " +
+					StatCollector.translateToLocal("error.NBT") + " " + StatCollector.translateToLocal("error.Contact"));
+			return new NBTTagCompound();
+		}
 	}
 
 	public static boolean areEqual(ItemStack is1, ItemStack is2)
@@ -157,7 +173,7 @@ public class Food
 
 	public static void setDecay(ItemStack is, float value)
 	{
-		NBTTagCompound nbt = is.getTagCompound();
+		NBTTagCompound nbt = getNBT(is);
 		nbt.setFloat("foodDecay", value);
 		if(value > getWeight(is))
 			is.stackSize = 0;
@@ -165,27 +181,31 @@ public class Food
 
 	public static float getDecay(ItemStack is)
 	{
-		NBTTagCompound nbt = is.getTagCompound();
-		if(nbt != null)
+		NBTTagCompound nbt = getNBT(is);
+		if (nbt.hasKey("foodDecay"))
 			return nbt.getFloat("foodDecay");
-		else return 0;
+		else
+			return 0;
 	}
 
 	public static void setDecayTimer(ItemStack is, int value)
 	{
-		NBTTagCompound nbt = is.getTagCompound();
+		NBTTagCompound nbt = getNBT(is);
 		nbt.setInteger("decayTimer", value);
 	}
 
 	public static int getDecayTimer(ItemStack is)
 	{
-		NBTTagCompound nbt = is.getTagCompound();
-		return nbt.getInteger("decayTimer");
+		NBTTagCompound nbt = getNBT(is);
+		if (nbt.hasKey("decayTimer"))
+			return nbt.getInteger("decayTimer");
+		else
+			return (int) TFC_Time.getTotalHours();
 	}
 
 	public static void setWeight(ItemStack is, float value)
 	{
-		NBTTagCompound nbt = is.getTagCompound();
+		NBTTagCompound nbt = getNBT(is);
 		nbt.setFloat("foodWeight", value);
 		if(getDecay(is) > value || value <= 0)
 			is.stackSize = 0;
@@ -193,10 +213,11 @@ public class Food
 
 	public static float getWeight(ItemStack is)
 	{
-		NBTTagCompound nbt = is.getTagCompound();
-		if(nbt != null)
+		NBTTagCompound nbt = getNBT(is);
+		if (nbt.hasKey("foodWeight"))
 			return nbt.getFloat("foodWeight");
-		else return 0;
+		else
+			return 0;
 	}
 
 	public static boolean isDried(ItemStack is)
@@ -243,37 +264,32 @@ public class Food
 
 	public static void setSweetMod(ItemStack is, int val)
 	{
-		if(!is.hasTagCompound())
-			is.setTagCompound(new NBTTagCompound());
-		is.getTagCompound().setInteger("tasteSweetMod", val);
+		NBTTagCompound nbt = getNBT(is);
+		nbt.setInteger("tasteSweetMod", val);
 	}
 
 	public static void setSourMod(ItemStack is, int val)
 	{
-		if(!is.hasTagCompound())
-			is.setTagCompound(new NBTTagCompound());
-		is.getTagCompound().setInteger("tasteSourMod", val);
+		NBTTagCompound nbt = getNBT(is);
+		nbt.setInteger("tasteSourMod", val);
 	}
 
 	public static void setSaltyMod(ItemStack is, int val)
 	{
-		if(!is.hasTagCompound())
-			is.setTagCompound(new NBTTagCompound());
-		is.getTagCompound().setInteger("tasteSaltyMod", val);
+		NBTTagCompound nbt = getNBT(is);
+		nbt.setInteger("tasteSaltyMod", val);
 	}
 
 	public static void setBitterMod(ItemStack is, int val)
 	{
-		if(!is.hasTagCompound())
-			is.setTagCompound(new NBTTagCompound());
-		is.getTagCompound().setInteger("tasteBitterMod", val);
+		NBTTagCompound nbt = getNBT(is);
+		nbt.setInteger("tasteBitterMod", val);
 	}
 
 	public static void setSavoryMod(ItemStack is, int val)
 	{
-		if(!is.hasTagCompound())
-			is.setTagCompound(new NBTTagCompound());
-		is.getTagCompound().setInteger("tasteUmamiMod", val);
+		NBTTagCompound nbt = getNBT(is);
+		nbt.setInteger("tasteUmamiMod", val);
 	}
 
 	public static void adjustFlavor(ItemStack is, Random R)

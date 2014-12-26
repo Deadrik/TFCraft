@@ -2,10 +2,14 @@ package com.bioxx.tfc.Handlers.Network;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+
 import java.util.LinkedList;
+
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.StatCollector;
 
 public class ItemNBTPacket extends AbstractPacket {
 	private NBTTagCompound tags;
@@ -103,8 +107,22 @@ public class ItemNBTPacket extends AbstractPacket {
 	}
 
 	@Override
-	public void handleClientSide(EntityPlayer player) {
-		NBTTagCompound stackNBT = player.inventory.getCurrentItem().stackTagCompound;
+	public void handleClientSide(EntityPlayer player)
+	{
+		NBTTagCompound stackNBT;
+	    ItemStack stack = player.inventory.getCurrentItem();
+	    
+	    if (stack.hasTagCompound())
+	    {
+			stackNBT = stack.stackTagCompound;
+	    }
+	    else
+	    {
+			System.out.println(StatCollector.translateToLocal("error.error") + " " + stack.getUnlocalizedName() + " " + 
+					StatCollector.translateToLocal("error.NBT") + " " + StatCollector.translateToLocal("error.Contact"));
+			stackNBT = new NBTTagCompound();
+	    }
+
 		for (String tagName : tagNames)
 			stackNBT.setTag(tagName, tags.getTag(tagName));
 		for (String tagName : removeNames)
@@ -113,8 +131,21 @@ public class ItemNBTPacket extends AbstractPacket {
 	}
 
 	@Override
-	public void handleServerSide(EntityPlayer player) {
-		NBTTagCompound stackNBT = player.inventory.getCurrentItem().stackTagCompound;
+	public void handleServerSide(EntityPlayer player)
+	{
+		NBTTagCompound stackNBT;
+		ItemStack stack = player.inventory.getCurrentItem();
+
+		if (stack.hasTagCompound())
+		{
+			stackNBT = stack.stackTagCompound;
+		}
+		else
+		{
+			System.out.println(StatCollector.translateToLocal("error.error") + " " + stack.getUnlocalizedName() + " " +
+					StatCollector.translateToLocal("error.NBT") + " " + StatCollector.translateToLocal("error.Contact"));
+			stackNBT = new NBTTagCompound();
+		}
 		for (String tagName : tagNames)
 			stackNBT.setTag(tagName, tags.getTag(tagName));
 		for (String tagName : removeNames)

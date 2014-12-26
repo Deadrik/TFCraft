@@ -314,11 +314,11 @@ public class GuiLargeVessel extends GuiContainerTFC
 			}
 			if (vesselTE.recipe != null)
 			{
-				drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.Bloomery.Output") + ": " + vesselTE.recipe.getRecipeName(), w + 88, h + 72, 0x555555);
+				drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.Output") + ": " + vesselTE.recipe.getRecipeName(), w + 88, h + 72, 0x555555);
 			}
 			else
 			{
-				drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.Bloomery.Output") + ": N/A", w + 88, h + 72, 0x555555);
+				drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.Output") + ": N/A", w + 88, h + 72, 0x555555);
 			}
 		}
 		else if (guiTab == 1)

@@ -223,16 +223,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 	public static void addHeatInformation(ItemStack is, List arraylist)
 	{
-		if (is.hasTagCompound())
+		if (TFC_ItemHeat.HasTemp(is))
 		{
-			NBTTagCompound stackTagCompound = is.getTagCompound();
-
-			if(TFC_ItemHeat.HasTemp(is))
-			{
-				float meltTemp = TFC_ItemHeat.IsCookable(is);
-				if(meltTemp != -1)
-					arraylist.add(TFC_ItemHeat.getHeatColorFood(TFC_ItemHeat.GetTemp(is), meltTemp));
-			}
+			float meltTemp = TFC_ItemHeat.IsCookable(is);
+			if (meltTemp != -1)
+				arraylist.add(TFC_ItemHeat.getHeatColorFood(TFC_ItemHeat.GetTemp(is), meltTemp));
 		}
 	}
 
@@ -241,34 +236,39 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
 		arraylist.add(getFoodGroupName(this.getFoodGroup()));
-		addHeatInformation(is, arraylist);
 
 		if (is.hasTagCompound())
+		{
+			addHeatInformation(is, arraylist);
 			addFoodInformation(is, player, arraylist);
+		}
 		else
+		{
 			arraylist.add(StatCollector.translateToLocal("gui.badnbt"));
+			System.out.println(StatCollector.translateToLocal("error.error") + " " + is.getUnlocalizedName() + " " +
+					StatCollector.translateToLocal("error.NBT") + " " + StatCollector.translateToLocal("error.Contact"));
+		}
 	}
 
 	public void addFoodInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{
 		NBTTagCompound tag = is.getTagCompound();
-		/*if(tag.hasKey("isSalted"))
-			arraylist.add("\u2022" + StatCollector.translateToLocal("gui.food.salted"));*/
-		if(tag.hasKey("foodWeight") && tag.getFloat("foodWeight") != 999)
+
+		if (tag.hasKey("foodWeight") && tag.getFloat("foodWeight") != 999)
 		{
 			float ounces = Helper.roundNumber(tag.getFloat("foodWeight"), 100);
-			if(ounces > 0)
+			if (ounces > 0)
 				arraylist.add(StatCollector.translateToLocal("gui.food.amount") + " " + ounces + " oz / " + Global.FOOD_MAX_WEIGHT + " oz");
 			float decay = tag.getFloat("foodDecay");
-			if(decay > 0)
+			if (decay > 0)
 				arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.food.decay") + " " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
-			if(TFCOptions.enableDebugMode)
+			if (TFCOptions.enableDebugMode)
 			{
 				arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.food.decay") + ": " + decay);
-				arraylist.add(EnumChatFormatting.DARK_GRAY +  "Decay Rate: " + this.getDecayRate(is));
+				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay Rate: " + this.getDecayRate(is));
 			}
 
-			if (TFC_Core.showCtrlInformation()) 
+			if (TFC_Core.showCtrlInformation())
 				ItemFoodTFC.addTasteInformation(is, player, arraylist);
 			else
 				arraylist.add(StatCollector.translateToLocal("gui.showtaste"));
@@ -453,6 +453,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			else
 			{
 				foodstats.addNutrition(((IFood)(is.getItem())).getFoodGroup(), 1f);
+				System.out.println(StatCollector.translateToLocal("error.error") + " " + is.getUnlocalizedName() + " " +
+						StatCollector.translateToLocal("error.NBT") + " " + StatCollector.translateToLocal("error.Contact"));
 			}
 		}
 
@@ -770,7 +772,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	}
 
 	@Override
-	public float getSmokeAbsorbMultiplier() {
+	public float getSmokeAbsorbMultiplier()
+	{
 		return this.smokeAbsorb;
 	}
 

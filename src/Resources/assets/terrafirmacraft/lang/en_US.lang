@@ -116,6 +116,7 @@ fluid.whiskey=Whiskey
 fluid.cornwhiskey=Corn Whiskey
 fluid.milk=Milk
 fluid.milkcurdled=Curdled Milk
+fluid.milkvinegar=Milk + Vinegar Mix
 fluid.limewater=Limewater
 fluid.tannin=Tannin
 fluid.vinegar=Vinegar
@@ -2077,7 +2078,6 @@ tile.LavaStationary.name=Lava
 #=======
 #= GUI =
 #=======
-gui.badnbt=BAD Info
 
 #== Anvil GUI ==
 gui.Anvil.Plans=Plans
@@ -2146,9 +2146,6 @@ gui.Armor.Hold=Hold
 gui.Armor.Crush=Crush
 gui.Armor.Pierce=Pierce
 gui.Armor.Slash=Slash
-
-word.stage1=Stage 1
-word.stage2=Stage 2
 
 gui.Bow.Advanced=Advanced
 gui.Bow.Javelins=Javelins
@@ -2304,16 +2301,24 @@ gui.fertilized=Fertilized
 gui.Inventory=Inventory
 gui.ClearSlot=Clear an output slot.
 gui.LogPile=Log Pile
+gui.Output
 gui.done=Done
 gui.cancel=Cancel
 gui.Sluice.Soil=Soil
 gui.Sluice.Overworked=Overworked
 gui.Workbench.Crafting=Crafting
 gui.overburdened=*Overburdened*
+
+gui.badnbt=BAD Info
+
+#== Tooltips ==
+gui.Advanced=Advanced
+gui.Shift=Shift
+gui.Hold=Hold
+
 gui.slot=Slot
 gui.slot.back=Back
 
-#== Tooltips ==
 gui.ShowHelp=§8Help: (Hold §fShift§8)
 gui.Help=§8Help:
 gui.Clay.Inst0=§bRight Click §7with 5 in a stack to shape.
@@ -2326,9 +2331,13 @@ gui.PotteryBase.Inst0=Sneak and §bRight Click §7to place object.
 gui.PotteryVesselSmall.Inst0=Or §bRight Click §7to open inventory.
 gui.RawHide.Inst0=????
 gui.Barrel.MoreItems=§8More... (Hold §fShift§8)
+
 gui.Nutrient.A=Nutrient A
 gui.Nutrient.B=Nutrient B
 gui.Nutrient.C=Nutrient C
+
+gui.stage1=Stage 1
+gui.stage2=Stage 2
 
 gui.Size.Tiny=Tiny
 gui.Size.VerySmall=Very Small
@@ -2346,6 +2355,7 @@ gui.Reach.Short=Short
 gui.Reach.Medium=Medium
 gui.Reach.Far=Far
 
+#== Food ==
 gui.food.fruit=Fruit
 gui.food.vegetable=Vegetable
 gui.food.grain=Grain
@@ -2467,6 +2477,7 @@ gui.units=Units
 #== Chat Messages ==
 gui.GoldPan.UseFull=Must use under flowing water.
 gui.goldpan.overused=This area seems to be overworked. You probably wouldn't find much.
+gui.seeds.failedTemp=It's too cold to plant this, it wouldn't survive very long.
 
 gui.ProPick.Found=Found
 gui.ProPick.FoundTraces=Found traces of
@@ -2503,8 +2514,13 @@ gui.skill.expert=Expert
 gui.skill.master=Master
 gui.skillpage=Skills
 
+#==================
+#= Error Messages =
+#==================
+error.error=ERROR:
+error.NBT=is missing NBT information.
+error.Contact=Please report to TerraFirmaCraft Support.
+
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
-gui.seeds.failedTemp=It's too cold to plant this, it wouldn't survive very long.
-fluid.milkvinegar=Milk + Vinegar Mix
