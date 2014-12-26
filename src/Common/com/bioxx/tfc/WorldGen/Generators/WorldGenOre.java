@@ -2,6 +2,7 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -64,102 +65,108 @@ public class WorldGenOre implements IWorldGenerator
 		}
 	}
 
-	private void oreSmallVein(Block block, int meta, HashMap<Block, Integer> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private void oreSmallVein(Block block, int meta, HashMap<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOreVein(block, meta ,baseRocks,
 				/*rarity*/rarity,/*veinSize*/20,/*veinAmt*/30,/*height*/5,/*diameter*/40,/*vDensity*/vDensity,/*hDensity*/hDensity,
-				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
+				worldObj, random, ChunkX, ChunkZ, min, max);
 	}
 
-	private void oreMediumVein(Block block, int meta, HashMap<Block, Integer> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private void oreMediumVein(Block block, int meta, HashMap<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOreVein(block, meta ,baseRocks,
 				/*rarity*/rarity,/*veinSize*/30,/*veinAmt*/40,/*height*/10,/*diameter*/60,/*vDensity*/vDensity,/*hDensity*/hDensity,
-				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
+				worldObj, random, ChunkX, ChunkZ, min, max);
 	}
 
-	private void oreLargeVein(Block block, int meta, HashMap<Block, Integer> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private void oreLargeVein(Block block, int meta, HashMap<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOreVein(block, meta ,baseRocks,
 				/*rarity*/rarity,/*veinSize*/60,/*veinAmt*/45,/*height*/20,/*diameter*/80,/*vDensity*/vDensity,/*hDensity*/hDensity,
-				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
+				worldObj, random, ChunkX, ChunkZ, min, max);
 	}
 
-	private void oreSmall(Block block, int meta, HashMap<Block, Integer> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private void oreSmall(Block block, int meta, HashMap<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOreVein(block, meta ,baseRocks,
 				/*rarity*/rarity,/*veinSize*/20,/*veinAmt*/30,/*height*/5,/*diameter*/80,/*vDensity*/vDensity,/*hDensity*/hDensity,
-				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
+				worldObj, random, ChunkX, ChunkZ, min, max);
 	}
 
-	private void oreMedium(Block block, int meta, HashMap<Block, Integer> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private void oreMedium(Block block, int meta, HashMap<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOre(block, meta ,baseRocks,
 				/*rarity*/rarity,/*veinSize*/30,/*veinAmt*/40,/*height*/10,/*diameter*/120,/*vDensity*/vDensity,/*hDensity*/hDensity,
-				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
+				worldObj, random, ChunkX, ChunkZ, min, max);
 	}
 
-	private void oreLarge(Block block, int meta, HashMap<Block, Integer> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private void oreLarge(Block block, int meta, HashMap<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOre(block, meta ,baseRocks,
 				/*rarity*/rarity,/*veinSize*/60,/*veinAmt*/40,/*height*/5,/*diameter*/120,/*vDensity*/vDensity,/*hDensity*/hDensity,
-				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
+				worldObj, random, ChunkX, ChunkZ, min, max);
 	}
 
-	private static void createOre(Block block, int j, HashMap<Block, Integer> Layers, int rarity, int veinSize,
-			int veinAmount, int height, int diameter, int vDensity, int hDensity,World world, Random rand, int chunkX, int chunkZ, int min, int max, String name)
+	private static void createOre(Block block, int j, HashMap<Block, List<Integer>> Layers, int rarity, int veinSize,
+			int veinAmount, int height, int diameter, int vDensity, int hDensity, World world, Random rand, int chunkX, int chunkZ, int min, int max)
 	{
 		if(world.getWorldChunkManager() instanceof TFCWorldChunkManager)
 		{
 			for(Block B : Layers.keySet())
 			{
-				DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 0);
-				DataLayer rockLayer2 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 1);
-				DataLayer rockLayer3 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 2);
-				if((rockLayer1.block == B && (rockLayer1.data2 == Layers.get(B) || Layers.get(B) == -1)) ||
-						(rockLayer2.block == B && (rockLayer2.data2 == Layers.get(B) || Layers.get(B) == -1)) ||
-						(rockLayer3.block == B && (rockLayer3.data2 == Layers.get(B) || Layers.get(B) == -1)))
+				for(int metadata : Layers.get(B))
 				{
-					int grade = rand.nextInt(100);
-					if(grade<20)
-						grade = 1;
-					else if(grade <50)
-						grade = 2;
-					else
-						grade = 0;
+					DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 0);
+					DataLayer rockLayer2 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 1);
+					DataLayer rockLayer3 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 2);
+					if ((rockLayer1.block == B && (rockLayer1.data2 == metadata || metadata == -1)) ||
+							(rockLayer2.block == B && (rockLayer2.data2 == metadata || metadata == -1)) ||
+							(rockLayer3.block == B && (rockLayer3.data2 == metadata || metadata == -1)))
+					{
+						int grade = rand.nextInt(100);
+						if(grade<20)
+							grade = 1;
+						else if(grade <50)
+							grade = 2;
+						else
+							grade = 0;
 
-					new WorldGenMinable(block, j, B, Layers.get(B), rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, false, grade)
-					.generate(world, rand, chunkX, chunkZ, min, max, name);
+						new WorldGenMinable(block, j, B, metadata, rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, false, grade)
+								.generate(world, rand, chunkX, chunkZ, min, max);
+					}
 				}
 			}
 		}
 	}
 
 	// new int[]{TFCBlocks.StoneIgEx,-1,Blocks.sandstone,-1}
-	private static void createOreVein(Block block, int j, HashMap<Block, Integer> Layers, int rarity, int veinSize,
-			int veinAmount, int height, int diameter, int vDensity, int hDensity,World world, Random rand, int chunkX, int chunkZ, int min, int max, String name)
+	private static void createOreVein(Block block, int j, HashMap<Block, List<Integer>> Layers, int rarity, int veinSize,
+			int veinAmount, int height, int diameter, int vDensity, int hDensity, World world, Random rand, int chunkX, int chunkZ, int min, int max)
 	{
 		if(world.getWorldChunkManager() instanceof TFCWorldChunkManager)
 		{
 			for(Block B : Layers.keySet())
 			{
-				DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 0);
-				DataLayer rockLayer2 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 1);
-				DataLayer rockLayer3 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 2);
-				if((rockLayer1.block == B && (rockLayer1.data2 == Layers.get(B) || Layers.get(B) == -1)) ||
-						(rockLayer2.block == B && (rockLayer2.data2 == Layers.get(B) || Layers.get(B) == -1)) ||
-						(rockLayer3.block == B && (rockLayer3.data2 == Layers.get(B) || Layers.get(B) == -1)))
+				for (int metadata : Layers.get(B))
 				{
-					int grade = rand.nextInt(100);
-					if(grade<20)
-						grade = 1;
-					else if(grade <50)
-						grade = 2;
-					else
-						grade = 0;
+					DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 0);
+					DataLayer rockLayer2 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 1);
+					DataLayer rockLayer3 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 2);
+					if ((rockLayer1.block == B && (rockLayer1.data2 == metadata || metadata == -1)) ||
+							(rockLayer2.block == B && (rockLayer2.data2 == metadata || metadata == -1)) ||
+							(rockLayer3.block == B && (rockLayer3.data2 == metadata || metadata == -1)))
+					{
+						int grade = rand.nextInt(100);
+						if (grade < 20)
+							grade = 1;
+						else if (grade < 50)
+							grade = 2;
+						else
+							grade = 0;
 
-					new WorldGenMinable(block, j, B, Layers.get(B), rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, true, grade)
-					.generate(world, rand, chunkX, chunkZ, min, max, name);
+						new WorldGenMinable(block, j, B, metadata, rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, true, grade)
+								.generate(world, rand, chunkX, chunkZ, min, max);
+					}
 				}
 			}
 		}

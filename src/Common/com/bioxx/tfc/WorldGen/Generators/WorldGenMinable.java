@@ -120,7 +120,7 @@ public class WorldGenMinable extends WorldGenerator
 			createMine(worldObj, rand, x, z);
 	}
 
-	public boolean generate(World world, Random random, int x, int z, int min, int max, String n)//obsorb default system
+	public boolean generate(World world, Random random, int x, int z, int min, int max)//obsorb default system
 	{
 		MPChunk_X = x;// set output chunk x // snap to grid
 		MPChunk_Z = z;// set output chunk z    
