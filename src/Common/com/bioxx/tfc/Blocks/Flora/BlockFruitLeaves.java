@@ -5,9 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -111,11 +109,18 @@ public class BlockFruitLeaves extends BlockTerraContainer
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
+		this.lifeCycle(world, x, y, z);
+	}
+
+	private void lifeCycle(World world, int x, int y, int z)
+	{
 		if(!world.isRemote)
 		{
-			if(!canStay(world, x, y, z, this))
+			Random rand = new Random();
+
+			if (!canStay(world, x, y, z))
 			{
-				world.setBlockToAir(x, y, z);
+				destroyLeaves(world, x, y, z);
 				return;
 			}
 
@@ -134,7 +139,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 				{
 					if(temp >= fi2.minTemp && temp < fi2.maxTemp)
 					{
-						if(fi2.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) && !te.hasFruit && TFC_Time.getMonthsSinceDay(te.dayHarvested) > 2)
+						if (fi2.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) && !te.hasFruit && TFC_Time.getMonthsSinceDay(te.dayHarvested) > 1)
 						{
 							if(meta < 8)
 							{
@@ -173,22 +178,29 @@ public class BlockFruitLeaves extends BlockTerraContainer
 					}
 				}
 
-				if(rand.nextInt(100) > 50)
+				if (rand.nextInt(100) > 50)
 					world.markBlockForUpdate(x, y, z);
 			}
 		}
 	}
 
-	public static boolean canStay(World world, int x, int y, int z, Block block)
+	public static boolean canStay(World world, int x, int y, int z)
 	{
-		if((!world.isAirBlock(x, y + 1, z) && !world.isAirBlock(x, y + 2, z) &&
-				world.getBlock(x, y + 2, z) == block) ||
-				world.getBlock(x, y + 1, z) == TFCBlocks.fruitTreeWood ||
-				world.getBlock(x, y + 2, z) == TFCBlocks.fruitTreeWood)
+		//Only leaf blocks that are within one block and on the same level or 1 above a branch or the top of the trunk
+		for (int i = 1; i >= -1; i--)
 		{
-			return false;
+			for (int j = 0; j >= -1; j--)
+			{
+				for (int k = 1; k >= -1; k--)
+				{
+					if (world.getBlock(i + x, j + y, k + z) == TFCBlocks.fruitTreeWood &&
+							world.getBlock(i + x, j + y + 1, k + z) != TFCBlocks.fruitTreeWood) // Only branches or the top of the trunk
+						return true;
+				}
+			}
 		}
-		return true;
+
+		return false;
 	}
 
 	public static String getType(Block block, int meta)
@@ -220,89 +232,8 @@ public class BlockFruitLeaves extends BlockTerraContainer
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
 	{
-		if (!world.isRemote)
-		{
-			int var6 = world.getBlockMetadata(x, y, z);
-
-			if (true)
-			{
-				byte var7 = 1;
-				int var8 = var7 + 1;
-				byte var9 = 32;
-				int var10 = var9 * var9;
-				int var11 = var9 / 2;
-				adjacentTreeBlocks = null;
-				if (this.adjacentTreeBlocks == null)
-					this.adjacentTreeBlocks = new int[var9 * var9 * var9];
-
-				int var12;
-
-				if (world.checkChunksExist(x - var8, y - var8, z - var8, x + var8, y + var8, z + var8))
-				{
-					int var13;
-					int var14;
-					int var15;
-					Block block;
-
-					for (var12 = -var7; var12 <= var7; ++var12)
-					{
-						for (var13 = -var7; var13 <= var7; ++var13)
-						{
-							for (var14 = -var7; var14 <= var7; ++var14)
-							{
-								block = world.getBlock(x + var12, y + var13, z + var14);
-								if (block == TFCBlocks.fruitTreeWood)
-									this.adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = 0;
-								else if (block == this && var6 == world.getBlockMetadata(x + var12, y + var13, z + var14))
-									this.adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = -2;
-								else
-									this.adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = -1;
-							}
-						}
-					}
-
-					for (var12 = 1; var12 <= 4; ++var12)
-					{
-						for (var13 = -var7; var13 <= var7; ++var13)
-						{
-							for (var14 = -var7; var14 <= var7; ++var14)
-							{
-								for (var15 = -var7; var15 <= var7; ++var15)
-								{
-									if (this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + var15 + var11] == var12 - 1)
-									{
-										if (this.adjacentTreeBlocks[(var13 + var11 - 1) * var10 + (var14 + var11) * var9 + var15 + var11] == -2)
-											this.adjacentTreeBlocks[(var13 + var11 - 1) * var10 + (var14 + var11) * var9 + var15 + var11] = var12;
-
-										if (this.adjacentTreeBlocks[(var13 + var11 + 1) * var10 + (var14 + var11) * var9 + var15 + var11] == -2)
-											this.adjacentTreeBlocks[(var13 + var11 + 1) * var10 + (var14 + var11) * var9 + var15 + var11] = var12;
-
-										if (this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11 - 1) * var9 + var15 + var11] == -2)
-											this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11 - 1) * var9 + var15 + var11] = var12;
-
-										if (this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11 + 1) * var9 + var15 + var11] == -2)
-											this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11 + 1) * var9 + var15 + var11] = var12;
-
-										if (this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + (var15 + var11 - 1)] == -2)
-											this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + (var15 + var11 - 1)] = var12;
-
-										if (this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + var15 + var11 + 1] == -2)
-											this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + var15 + var11 + 1] = var12;
-									}
-								}
-							}
-						}
-					}
-				}
-
-				var12 = this.adjacentTreeBlocks[var11 * var10 + var11 * var9 + var11];
-
-				if (var12 >= 0)
-					;//par1World.setBlockMetadata(par2, par3, par4, var6 & -9);
-				else
-					this.destroyLeaves(world, x, y, z);
-			}
-		}
+		super.onNeighborBlockChange(world, x, y, z, b);
+		lifeCycle(world, x, y, z);
 	}
 
 	private void destroyLeaves(World world, int x, int y, int z)
@@ -310,34 +241,40 @@ public class BlockFruitLeaves extends BlockTerraContainer
 		world.setBlockToAir(x, y, z);
 	}
 
-	private void removeLeaves(World world, int x, int y, int z)
-	{
-		/*dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
-		if(new Random().nextInt(100) < 30)
-			dropBlockAsItem(world, i, j, k, new ItemStack(Item.stick, 1));*/
-		world.setBlockToAir(x, y, z);
-	}
-
-	@Override
-	public int quantityDropped(Random random)
-	{
-		return random.nextInt(20) != 0 ? 0 : 1;
-	}
-
-	@Override
-	public Item getItemDropped(int metadata, Random rand, int fortune)
-	{
-		return Item.getItemFromBlock(TFCBlocks.Sapling);
-	}
-
 	@Override
 	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float dropChance, int fortune)
 	{
 		if (!world.isRemote)
 		{
+			//Intentionally Blank
 		}
 	}
 
+	/* Left-Click Harvest Fruit */
+	@Override
+	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer entityplayer)
+	{
+		if (!world.isRemote)
+		{
+			int meta = world.getBlockMetadata(x, y, z);
+			FloraManager manager = FloraManager.getInstance();
+			FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(this, world.getBlockMetadata(x, y, z) & 7));
+
+			if (fi != null && (fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) || fi.inHarvest(((TFC_Time.getSeasonAdjustedMonth(z) - 1) + 12) % 12) && (meta & 8) == 8))
+			{
+				TEFruitLeaves te = (TEFruitLeaves) world.getTileEntity(x, y, z);
+				if (te != null && te.hasFruit)
+				{
+					te.hasFruit = false;
+					te.dayHarvested = (int) TFC_Time.getTotalDays();
+					world.setBlockMetadataWithNotify(x, y, z, meta - 8, 3);
+					dropBlockAsItem(world, x, y, z, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(4 + (world.rand.nextFloat() * 12), 10)));
+				}
+			}
+		}
+	}
+
+	/* Right-Click Harvest Fruit */
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
@@ -355,18 +292,12 @@ public class BlockFruitLeaves extends BlockTerraContainer
 					te.hasFruit = false;
 					te.dayHarvested = (int) TFC_Time.getTotalDays();
 					world.setBlockMetadataWithNotify(x, y, z, meta - 8, 3);
-					dropBlockAsItem(world, x, y, z, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(5 + (world.rand.nextFloat() * 20), 10)));
+					dropBlockAsItem(world, x, y, z, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(4 + (world.rand.nextFloat() * 12), 10)));
 					return true;
 				}
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public void onEntityWalking(World world, int x, int y, int z, Entity entity)
-	{
-		super.onEntityWalking(world, x, y, z, entity);
 	}
 
 	@Override
