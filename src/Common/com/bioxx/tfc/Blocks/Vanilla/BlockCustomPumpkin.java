@@ -23,7 +23,7 @@ public class BlockCustomPumpkin extends BlockPumpkin
 	 */
 	public IIcon getIcon(int par1, int par2)
 	{
-		return super.getIcon(par1, par2);
+		return par1 == 1 ? super.getIcon(par1, par2) : (par1 == 0 ? super.getIcon(par1, par2) : this.blockIcon); //Removes face from unlit pumpkins.
 	}
 
 }
