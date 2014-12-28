@@ -192,17 +192,12 @@ public class CraftingHandler
 			{
 				if(iinventory.getStackInSlot(i) == null)
 					continue;
-				/*if(iinventory.getStackInSlot(i).getItem() == TFCItems.WoodenBucketWater)
-				{
-					if(!e.player.inventory.addItemStackToInventory(new ItemStack(TFCItems.WoodenBucketEmpty,1)))
-						e.player.dropItem(TFCItems.WoodenBucketEmpty, 1);
-				}
-								else if(iinventory.getStackInSlot(i).getItem() == TFCItems.RedSteelBucketWater)
-									if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketEmpty,1)))
-										player.dropItem(TFCItems.RedSteelBucketEmpty, 1);*/
 
+				// Only transfer the tag when making something out of a tool head. Don't transfer when crafting things with the completed tool.
+				// Note: If crafting recipes with armor or completed tools to further refine them are ever added, the instanceof will need to be updated. -Kitty
 				if(iinventory.getStackInSlot(i).hasTagCompound() && 
-						iinventory.getStackInSlot(i).getTagCompound().hasKey("craftingTag"))
+						iinventory.getStackInSlot(i).getTagCompound().hasKey("craftingTag") &&
+						iinventory.getStackInSlot(i).getItem() instanceof ItemMiscToolHead)
 				{
 					AnvilManager.setCraftTag(itemstack, AnvilManager.getCraftTag(iinventory.getStackInSlot(i)));
 				}
