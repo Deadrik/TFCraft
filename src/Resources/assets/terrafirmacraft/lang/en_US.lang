@@ -2301,7 +2301,7 @@ gui.fertilized=Fertilized
 gui.Inventory=Inventory
 gui.ClearSlot=Clear an output slot.
 gui.LogPile=Log Pile
-gui.Output
+gui.Output=Output
 gui.done=Done
 gui.cancel=Cancel
 gui.Sluice.Soil=Soil
