@@ -59,7 +59,7 @@ public class ItemCustomSeeds extends ItemTerra
 
 				if(TFC_Climate.getHeightAdjustedTemp(world, x, y, z) <= crop.minAliveTemp)
 				{
-					player.addChatMessage(new ChatComponentTranslation("gui.ProPick.FoundNothing"));
+					player.addChatMessage(new ChatComponentTranslation("gui.seeds.failedTemp"));
 					return false;
 				}
 
