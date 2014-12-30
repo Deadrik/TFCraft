@@ -167,12 +167,14 @@ public class EntityStand extends EntityLiving
 		if(!worldObj.isRemote){
 			for(int i = 0; i < armor.length; i++){
 				if(armor[i]!=null){
-					this.entityDropItem(new ItemStack(armor[i].getItem()), 0);
+					ItemStack is = new ItemStack(armor[i].getItem(), 1, armor[i].getItemDamage());
+					this.entityDropItem(is, 0);
 				}
 			}
 			for(int i = 0; i < equipable.length; i++){
 				if(equipable[i]!=null){
-					this.entityDropItem(new ItemStack(equipable[i].getItem()), 0);
+					ItemStack is = new ItemStack(equipable[i].getItem(), 1, equipable[i].getItemDamage());
+					this.entityDropItem(is, 0);
 				}
 			}
 			Block blockToDrop = woodType < 16? TFCBlocks.ArmourStand : TFCBlocks.ArmourStand2;
