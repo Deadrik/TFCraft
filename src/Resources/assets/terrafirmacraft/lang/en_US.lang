@@ -2139,15 +2139,11 @@ gui.Anvil.Rule42=Bend, Last Three
 gui.Anvil.Rule43=Bend, Not Last
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=Advanced
-gui.Armor.Shift=Shift
 gui.Armor.ForgedBy=Forged By
-gui.Armor.Hold=Hold
 gui.Armor.Crush=Crush
 gui.Armor.Pierce=Pierce
 gui.Armor.Slash=Slash
 
-gui.Bow.Advanced=Advanced
 gui.Bow.Javelins=Javelins
 gui.Bow.Arrows=Arrows
 gui.Bow.ForgedBy=Made By
@@ -2173,7 +2169,6 @@ gui.barrel.preserving=Preserving
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Charcoal
 gui.Bloomery.Ore=Ore
-gui.Bloomery.Output=Output
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=Calendar
@@ -2301,7 +2296,7 @@ gui.fertilized=Fertilized
 gui.Inventory=Inventory
 gui.ClearSlot=Clear an output slot.
 gui.LogPile=Log Pile
-gui.Output
+gui.Output=Output
 gui.done=Done
 gui.cancel=Cancel
 gui.Sluice.Soil=Soil
