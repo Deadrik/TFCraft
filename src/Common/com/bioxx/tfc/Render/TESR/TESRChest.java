@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Render.TESR;
 
+import com.bioxx.tfc.Core.TFC_Time;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.model.ModelLargeChest;
@@ -38,13 +39,15 @@ public class TESRChest extends TileEntitySpecialRenderer
 			
 			/** X-mas stuff */
 			String suffix = "normal";
-			int buf = Calendar.getInstance().get(Calendar.MONTH);
-			if (buf == 11) {
-				buf = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-				if (buf >= 24 && buf <= 26)
-					suffix = "xmas";
-			}
-			
+			if (Calendar.getInstance().get(Calendar.MONTH) == Calendar.DECEMBER &&
+							Calendar.getInstance().get(Calendar.DAY_OF_MONTH) >= 24 &&
+							Calendar.getInstance().get(Calendar.DAY_OF_MONTH) <= 26)
+				suffix = "xmas";
+			else if (TFC_Time.currentMonth == TFC_Time.December &&
+							TFC_Time.daysInMonth >= 24 &&
+							TFC_Time.daysInMonth <= 26)
+				suffix = "xmas";
+
 			for(int i = 0; i < Global.WOOD_ALL.length; i++)
 			{
 				texNormal[i] = new ResourceLocation(Reference.ModID+":textures/models/chest/" + suffix + "_" + Global.WOOD_ALL[i] + ".png");
