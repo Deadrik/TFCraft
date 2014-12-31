@@ -164,8 +164,8 @@ public class TerraFirmaCraft
 		{
 			//Register Generators
 			//Underground Lava
-			GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.Lava, 2, true, 25).setUnderground(true, 20).setSeed(1), 0);
-			GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.FreshWaterStationary, 2, false, 90), 0);
+			GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.Lava, 2, true, TFCOptions.lavaFissureRarity).setUnderground(true, 20).setSeed(1), 0);
+			GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.FreshWaterStationary, 2, false, TFCOptions.waterFissureRarity), 0);
 			//Surface Hotsprings
 			GameRegistry.registerWorldGenerator(new WorldGenFissureCluster(), 1);
 			GameRegistry.registerWorldGenerator(new WorldGenOre(), 2);
@@ -353,6 +353,8 @@ public class TerraFirmaCraft
 		
 		// World Generation
 		TFCOptions.ravineRarity = TFCOptions.getIntFor(config, WORLD_GEN_HEADER, "ravineRarity", 100, "Controls the chance of a ravine to be created, smaller value is higher chance, more ravines. Default is 100, use 0 to disable ravines.");
+		TFCOptions.lavaFissureRarity = TFCOptions.getIntFor(config, WORLD_GEN_HEADER, "lavaFissureRarity", 25, "Controls the chance of a lava fissure to be created, smaller value is higher chance, more fissures. Default is 25, use 0 to disable lava fissures.");
+		TFCOptions.waterFissureRarity = TFCOptions.getIntFor(config, WORLD_GEN_HEADER, "waterFissureRarity", 90, "Controls the chance of a water fissure to be created, smaller value is higher chance, more fissures. Default is 90, use 0 to disable water fissures.");
 
 		TFCOptions.cropNutrientAColor[0] = (byte) TFCOptions.getIntFor(config, COLOR_NUTRIENT_A_HEADER, "Red", 237);
 		TFCOptions.cropNutrientAColor[1] = (byte) TFCOptions.getIntFor(config, COLOR_NUTRIENT_A_HEADER, "Green", 28);
