@@ -171,7 +171,7 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
 		boolean flag = false;
 		switch(interaction){
-		case NAME: flag = familiarity > 60;break;
+		case NAME: flag = familiarity > 40;break; // 5 Below adult cap since babies are impossible
 		default: break;
 		}
 		if(!flag && !player.worldObj.isRemote){

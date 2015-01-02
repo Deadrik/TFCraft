@@ -399,12 +399,11 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 					return true;
 				}
 			}
-			//player.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE ? "Female" : "Male"));
+
 			if(getGender()==GenderEnum.FEMALE && pregnant)
 			{
 				player.addChatMessage(new ChatComponentText("Pregnant"));
 			}
-			//player.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 
 			if(getGender() == GenderEnum.FEMALE && isAdult() && hasMilkTime < TFC_Time.getTotalTicks() && this.checkFamiliarity(InteractionEnum.MILK, player))
 			{
@@ -687,7 +686,8 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = (6 * obedience_mod / aggression_mod);
-				if(this.isAdult() && (familiarity > 30 && familiarity < 80)){
+				if (this.isAdult() && familiarity > 35) // Adult caps at 35
+				{
 					//Nothing
 				}
 				else if(this.isAdult()){
@@ -756,7 +756,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		switch(interaction){
 		case BREED: flag = familiarity > 20;break;
 		case MILK: flag = familiarity > 15;break;
-		case NAME: flag = familiarity > 35;break;
+		case NAME: flag = familiarity > 40;break; // 5 higher than adult cap
 		default: break;
 		}
 		if(!flag && player != null && !player.worldObj.isRemote){

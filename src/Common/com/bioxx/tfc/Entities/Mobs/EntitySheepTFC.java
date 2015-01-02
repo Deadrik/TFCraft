@@ -730,7 +730,8 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = (6 * obedience_mod / aggression_mod);
-				if(this.isAdult() && (familiarity > 30 && familiarity < 80)){
+				if (this.isAdult() && familiarity > 35) // Adult caps at 35
+				{
 					//Nothing
 				}
 				else if(this.isAdult()){
@@ -792,7 +793,9 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		switch(interaction){
 		case BREED: flag = familiarity > 20;break;
 		case SHEAR: flag = familiarity > 10;break;
-		case NAME: flag = familiarity > 40;break;
+		case NAME:
+			flag = familiarity > 40;
+			break; // 5 higher than adult cap
 		default: break;
 		}
 		if(!flag && player != null && !player.worldObj.isRemote){

@@ -717,7 +717,8 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = (6 * obedience_mod / aggression_mod);
-				if(this.isAdult() && (familiarity > 30 && familiarity < 80)){
+				if (this.isAdult() && familiarity > 35) // Adult caps at 35
+				{
 					//Nothing
 				}
 				else if(this.isAdult()){
@@ -776,7 +777,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		switch(interaction){
 		case MOUNT: flag = familiarity > 15;break;
 		case BREED: flag = familiarity > 10;break;
-		case NAME: flag = familiarity > 40;break;
+		case NAME: flag = familiarity > 40;break; // 5 higher than adult cap
 		default: break;
 		}
 		if(!flag && player != null && !player.worldObj.isRemote){

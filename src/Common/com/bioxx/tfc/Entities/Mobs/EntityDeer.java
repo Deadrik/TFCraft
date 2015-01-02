@@ -16,7 +16,6 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -370,7 +369,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	protected Item getDropItem()
 	{
-		return Item.getItemFromBlock(Blocks.wool);
+		return Items.leather;
 	}
 
 	/**
@@ -385,12 +384,10 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 				this.familiarize(player);
 				return true;
 			}
-			//par1EntityPlayer.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
 			if(getGender()==GenderEnum.FEMALE && pregnant)
 			{
 				player.addChatMessage(new ChatComponentText("Pregnant"));
 			}
-			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}
 		ItemStack itemstack = player.getHeldItem();
 		if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
@@ -740,7 +737,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = (6 * obedience_mod / aggression_mod);
-				if(this.isAdult() && (familiarity > 30 && familiarity < 80)){
+				if (this.isAdult() && familiarity > 70) // Adult caps at 70 since babies are currently impossible
+				{
 					//Nothing
 				}
 				else if(this.isAdult()){

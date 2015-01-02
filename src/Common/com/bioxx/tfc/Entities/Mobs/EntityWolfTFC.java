@@ -3,6 +3,7 @@ package com.bioxx.tfc.Entities.Mobs;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
+import net.minecraft.block.BlockColored;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLeashKnot;
@@ -336,7 +337,6 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 					worldObj.spawnEntityInWorld(baby);
 				}
 				pregnant = false;
-				timeOfConception = TFC_Time.getTotalTicks() + (TFC_Time.ticksInMonth);
 			}
 		}
 
@@ -418,7 +418,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = (6 * obedience_mod / aggression_mod);
-				if(this.isAdult() && (familiarity > 30 && familiarity < 80)){
+				if (this.isAdult() && familiarity > 35) // Adult caps at 35
+				{
 					//Nothing
 				}
 				else if(this.isAdult() && familiarity >= 5){
@@ -470,7 +471,9 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	@Override
 	public boolean isFood(ItemStack item) {
 		return item != null &&
-				(item.getItem() == TFCItems.porkchopRaw || item.getItem() == TFCItems.beefRaw || item.getItem() == TFCItems.muttonRaw || item.getItem() == TFCItems.horseMeatRaw);
+				(item.getItem() == TFCItems.beefRaw || item.getItem() == TFCItems.chickenRaw || item.getItem() == TFCItems.fishRaw || 
+					item.getItem() == TFCItems.horseMeatRaw || item.getItem() == TFCItems.muttonRaw || item.getItem() == TFCItems.porkchopRaw || 
+					item.getItem() == TFCItems.venisonRaw); // All meat except for calamari.
 	}
 
 	@Override
@@ -552,20 +555,21 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	}
 
 	@Override
-	public void mate(IAnimal otherAnimal) 
+	public void mate(IAnimal otherAnimal)
 	{
-		if (sex == 0)
+		if (getGender() == GenderEnum.MALE)
 		{
 			otherAnimal.mate(this);
+			setInLove(false);
+			resetInLove();
 			return;
 		}
-		if(timeOfConception < TFC_Time.getTotalTicks()){
-			timeOfConception = TFC_Time.getTotalTicks();
-			pregnant = true;
-			resetInLove();
-			otherAnimal.setInLove(false);
-			mateSizeMod = otherAnimal.getSize();
-		}
+		timeOfConception = TFC_Time.getTotalTicks();
+		pregnant = true;
+		resetInLove();
+		setInLove(false);
+		otherAnimal.setInLove(false);
+		mateSizeMod = otherAnimal.getSize();
 	}
 
 	@Override
@@ -638,7 +642,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	{
 		if(!worldObj.isRemote)
 		{
-			if(player.isSneaking()){
+			if (player.isSneaking())
+			{
 				this.familiarize(player);
 				return true;
 			}
@@ -664,60 +669,81 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 
 		ItemStack itemstack = player.inventory.getCurrentItem();
 
-		if (itemstack != null && this.isBreedingItemTFC(itemstack) && checkFamiliarity(InteractionEnum.BREED,player) && this.getGrowingAge() == 0 && !super.isInLove())
+		if (itemstack != null)
 		{
-			if (!player.capabilities.isCreativeMode)
+			if (this.isBreedingItemTFC(itemstack) && checkFamiliarity(InteractionEnum.BREED, player) && this.getGrowingAge() == 0 && !super.isInLove())
 			{
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, (((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
-			}
-
-			this.func_146082_f(player);
-			return true;
-		}
-		else if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
-			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"),player)){
-				itemstack.stackSize--;
-			}
-			return true;
-		}
-		else if (itemstack != null && itemstack.getItem() == Items.bone && !this.isAngry())
-		{
-			if (!player.capabilities.isCreativeMode)
-			{
-				--itemstack.stackSize;
-			}
-
-			if (itemstack.stackSize <= 0)
-			{
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
-			}
-
-			if (!this.worldObj.isRemote)
-			{
-				if (this.rand.nextInt(3) == 0)
+				if (!player.capabilities.isCreativeMode)
 				{
-					this.setTamed(true);
-					this.setPathToEntity((PathEntity)null);
-					this.setAttackTarget((EntityLivingBase)null);
-					this.func_152115_b(player.getUniqueID().toString());
-					this.playTameEffect(true);
-					this.worldObj.setEntityState(this, (byte)7);
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, (((ItemFoodTFC) itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
 				}
-				else
+
+				this.func_146082_f(player);
+				return true;
+			}
+			else if (itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName"))
+			{
+				if (this.trySetName(itemstack.stackTagCompound.getString("ItemName"), player))
 				{
-					this.playTameEffect(false);
-					this.worldObj.setEntityState(this, (byte)6);
+					itemstack.stackSize--;
 				}
+				return true;
+			}
+			else if (itemstack.getItem() == Items.bone && !this.isAngry())
+			{
+				if (this.getOwner() == null)
+				{
+					if (!player.capabilities.isCreativeMode)
+					{
+						--itemstack.stackSize;
+					}
+
+					if (itemstack.stackSize <= 0)
+					{
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack) null);
+					}
+
+					if (!this.worldObj.isRemote)
+					{
+						if (this.rand.nextInt(3) == 0)
+						{
+							this.setTamed(true);
+							this.setPathToEntity((PathEntity) null);
+							this.setAttackTarget((EntityLivingBase) null);
+							this.func_152115_b(player.getUniqueID().toString());
+							this.playTameEffect(true);
+							this.worldObj.setEntityState(this, (byte) 7);
+						}
+						else
+						{
+							this.playTameEffect(false);
+							this.worldObj.setEntityState(this, (byte) 6);
+						}
+					}
+				}
+
+				return true;
 			}
 
-			return true;
-		}
-		else
-		{		
-			boolean interactSuper = super.interact(player);
+			else if (isTamed() && (itemstack.getItem() == Items.dye || itemstack.getItem() == TFCItems.Dye))
+			{
+				int i = BlockColored.func_150032_b(itemstack.getItemDamage());
 
-			return interactSuper;
+				if (i != this.getCollarColor())
+				{
+					this.setCollarColor(i);
+
+					if (!player.capabilities.isCreativeMode && --itemstack.stackSize <= 0)
+					{
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack) null);
+					}
+				}
+
+				return true;
+			}
 		}
+
+		return super.interact(player);
 	}
 
 	@Override
@@ -828,7 +854,9 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		boolean flag = false;
 		switch(interaction){
 		case BREED: flag = familiarity > 20;break;
-		case NAME: flag = familiarity > 40;break;
+		case NAME:
+			flag = familiarity > 40;
+			break; // 5 higher than adult cap
 		default: break;
 		}
 		if(!flag && player != null && !player.worldObj.isRemote){

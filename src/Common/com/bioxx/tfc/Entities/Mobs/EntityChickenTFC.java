@@ -37,7 +37,6 @@ import com.bioxx.tfc.Entities.AI.EntityAIFindNest;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityChickenTFC extends EntityChicken implements IAnimal
@@ -545,23 +544,23 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public boolean interact(EntityPlayer player)
 	{
+		ItemStack itemstack = player.getHeldItem();
+
 		if(!worldObj.isRemote)
 		{
+			if (isAdult() && player.isSneaking() && !isFood(itemstack) && attackEntityFrom(DamageSource.generic, 5))
+			{
+				player.inventory.addItemStackToInventory(new ItemStack(Items.feather, 1));
+				familiarity -= 4; //Plucking feathers decreases familiarity
+				return true;
+			}
+
 			if(player.isSneaking() && !familiarizedToday){
 				this.familiarize(player);
 				return true;
 			}
-			/*if(!player.isSneaking())
-			{
-				player.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
-			}*/
 		}
-		//player.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
-		if(!worldObj.isRemote && isAdult()&& player.isSneaking() && attackEntityFrom(DamageSource.generic, 5))
-		{
-			player.inventory.addItemStackToInventory(new ItemStack(Items.feather, 1));
-		}
-		ItemStack itemstack = player.getHeldItem();
+
 		if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
 			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"), player)){
 				itemstack.stackSize--;
@@ -643,7 +642,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = (6 * obedience_mod / aggression_mod);
-				if(this.isAdult() && (familiarity > 30 && familiarity < 80)){
+				if (this.isAdult() && familiarity > 45) // Adult caps at 45
+				{
 					//Nothing
 				}
 				else if(this.isAdult()){
@@ -668,7 +668,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	
 	@Override
 	public boolean isFood(ItemStack item) {
-		return item != null && item.getItem() instanceof ItemFoodTFC && ((ItemFoodTFC)item.getItem()).getFoodGroup().equals(EnumFoodGroup.Grain);
+		return item != null && (item.getItem() == TFCItems.WheatGrain || item.getItem() == TFCItems.OatGrain || item.getItem() == TFCItems.RiceGrain ||
+				item.getItem() == TFCItems.BarleyGrain || item.getItem() == TFCItems.RyeGrain || item.getItem() == TFCItems.MaizeEar);
 	}
 
 	@Override
@@ -704,7 +705,9 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
 		boolean flag = false;
 		switch(interaction){
-		case NAME: flag = familiarity > 20;break;
+		case NAME:
+			flag = familiarity > 50;
+			break; //Set 5 higher than adult cap.
 		default: break;
 		}
 		if(!flag && player != null && !player.worldObj.isRemote){
