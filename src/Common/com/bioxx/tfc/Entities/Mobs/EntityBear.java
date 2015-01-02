@@ -413,6 +413,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		}
 
 		this.handleFamiliarityUpdate();
+		this.syncData();
 
 		/*if (TFC_Time.getTotalTicks() == birthTime + 60 && this instanceof EntityBear && this.sex == 1&& rand.nextInt(10) == 0 && getGrowingAge() >= 0){
 			int i = rand.nextInt(3);
@@ -688,7 +689,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
-			if(player.isSneaking()){
+			if (player.isSneaking() && !familiarizedToday)
+			{
 				this.familiarize(player);
 				return true;
 			}
@@ -799,7 +801,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			if(familiarizedToday && familiarity < 100){
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
-				float familiarityChange = (6 * obedience_mod / aggression_mod);
+				float familiarityChange = (3 * obedience_mod / aggression_mod); //Changed from 6 to 3 so bears are harder to tame by default. -Kitty
 				if(this.isAdult() && (familiarity > 30 && familiarity < 80)){
 					//Nothing
 				}
@@ -831,7 +833,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && isFood(stack)){
+		if (stack != null && isFood(stack) && !familiarizedToday)
+		{
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
