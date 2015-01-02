@@ -848,7 +848,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 
 	@Override
 	public boolean trySetName(String name, EntityPlayer player) {
-		if(this.checkFamiliarity(InteractionEnum.NAME,player) && !this.hasCustomNameTag()){
+		if (this.checkFamiliarity(InteractionEnum.NAME, player))
+		{
 			this.setCustomNameTag(name);
 			return true;
 		}

@@ -10,7 +10,6 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 
 public class EntitySquidTFC extends EntitySquid
 {
@@ -46,10 +45,10 @@ public class EntitySquidTFC extends EntitySquid
 		ItemStack itemstack = player.getHeldItem();
 		if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
 			String name = itemstack.stackTagCompound.getString("ItemName");
-			if(!this.hasCustomNameTag()){
-				this.setCustomNameTag(name);
-				itemstack.stackSize--;
-			}
+
+			this.setCustomNameTag(name);
+			itemstack.stackSize--;
+
 			return true;
 		}
 		return true;

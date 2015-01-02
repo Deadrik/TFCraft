@@ -1182,7 +1182,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 	@Override
 	public boolean trySetName(String name, EntityPlayer player) {
-		if(checkFamiliarity(InteractionEnum.NAME, player)&& !this.hasCustomNameTag()){
+		if (checkFamiliarity(InteractionEnum.NAME, player))
+		{
 			this.setCustomNameTag(name);
 			return true;
 		}

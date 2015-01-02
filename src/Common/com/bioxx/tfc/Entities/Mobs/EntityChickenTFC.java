@@ -691,7 +691,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	
 	@Override
 	public boolean trySetName(String name, EntityPlayer player) {
-		if(this.checkFamiliarity(InteractionEnum.NAME, player) && !this.hasCustomNameTag()){
+		if (this.checkFamiliarity(InteractionEnum.NAME, player))
+		{
 			this.setCustomNameTag(name);
 			return true;
 		}
