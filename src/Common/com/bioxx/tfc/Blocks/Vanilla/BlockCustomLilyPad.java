@@ -110,7 +110,7 @@ public class BlockCustomLilyPad extends BlockLilyPad
 
 	public boolean canThisPlantGrowOnThisBlock(Block par1, int meta)
 	{
-		return TFC_Core.isFreshWaterIncludeIce(par1,meta) && !TFC_Core.isWater(par1);
+		return TFC_Core.isFreshWaterIncludeIce(par1, meta) && !TFC_Core.isWaterFlowing(par1);
 	}
 
 	/**

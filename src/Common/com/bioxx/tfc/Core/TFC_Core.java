@@ -477,6 +477,11 @@ public class TFC_Core
 				|| isFreshWater(block);
 	}
 
+	public static boolean isWaterFlowing(Block block)
+	{
+		return block == TFCBlocks.SaltWater || block == TFCBlocks.FreshWater || block == TFCBlocks.HotWater;
+	}
+
 	public static boolean isSaltWater(Block block)
 	{
 		return block == TFCBlocks.SaltWater || block == TFCBlocks.SaltWaterStationary;

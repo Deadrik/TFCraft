@@ -559,7 +559,7 @@ public class TFC_Climate
 	{
 		float rain = getRainfall(world, x, y, z);
 		float evt = getCacheManager(world).getEVTLayerAt(x, z).floatdata1;
-		if(rain >= 1000 && evt < 0.25 && world.getBiomeGenForCoords(x, z).heightVariation < 0.15)
+		if (rain >= 1000 && evt <= 0.25 && world.getBiomeGenForCoords(x, z).heightVariation < 0.15)
 			return true;
 		return false;
 	}
