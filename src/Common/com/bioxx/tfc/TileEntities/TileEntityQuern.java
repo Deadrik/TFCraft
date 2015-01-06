@@ -130,13 +130,13 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 			}
 			else
 			{
-				if(storage[0].stackSize == 1)
+				if(storage[0].stackSize == qr.getInItem().stackSize)
 				{
 					storage[0] = null;
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				}
 				else
-					storage[0].stackSize--;
+					storage[0].stackSize -= qr.getInItem().stackSize;
 
 				if(storage[1] == null)
 					storage[1] = qr.getResult().copy();
