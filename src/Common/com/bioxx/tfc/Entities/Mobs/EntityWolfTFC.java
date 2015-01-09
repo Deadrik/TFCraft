@@ -642,7 +642,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	{
 		if(!worldObj.isRemote)
 		{
-			if (player.isSneaking())
+			if (player.isSneaking() && this.getOwner() != null)
 			{
 				this.familiarize(player);
 				return true;
