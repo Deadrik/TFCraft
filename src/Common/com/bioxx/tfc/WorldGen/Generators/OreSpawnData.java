@@ -18,6 +18,11 @@ public class OreSpawnData
 	public OreSpawnData(String T, String S, String BN, int M, int R, String[] baseRocks)
 	{
 		block = Block.getBlockFromName(BN);
+
+		if (null == block) {
+			throw new java.lang.NullPointerException(String.format("null block returned for '%s'", BN));
+		}
+		
 		meta = M;
 		rarity = R;
 		if(T.equals("default"))
