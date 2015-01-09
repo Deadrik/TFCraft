@@ -308,13 +308,25 @@ public class WorldGenMinable extends WorldGenerator
 
 				if(isCorrectRockType && isCorrectMeta)
 				{
-					world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2);
-					TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
-					if(te!= null)
-					{
-						te.baseBlockID = Block.getIdFromBlock(b);
-						te.baseBlockMeta = m;
-						te.extraData = (byte)grade;
+					try {
+						world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2);
+						TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
+						if(te!= null)
+						{
+							te.baseBlockID = Block.getIdFromBlock(b);
+							te.baseBlockMeta = m;
+							te.extraData = (byte)grade;
+						}
+					} catch (java.lang.NullPointerException e) {
+						System.err.println("Invalid entry in TFCOres.cfg or injected later.\n"
+								+ "Attempting to get block data:"
+								+ "\nWorld block: " + String.valueOf(b)
+								+ "\nWorld meta: " + String.valueOf(m)
+								+ "\nRequested block: " + String.valueOf(MPBlock)
+								+ "\nRequested as item: " + String.valueOf(Block.getIdFromBlock(MPBlock))
+								+ "\nRequested meta: " + String.valueOf(minableBlockMeta)
+								);
+						throw e;
 					}
 				}
 				blocksMade++;
