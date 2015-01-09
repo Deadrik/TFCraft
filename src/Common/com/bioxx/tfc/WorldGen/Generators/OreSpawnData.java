@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.util.StatCollector;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
@@ -18,6 +19,13 @@ public class OreSpawnData
 	public OreSpawnData(String T, String S, String BN, int M, int R, String[] baseRocks)
 	{
 		block = Block.getBlockFromName(BN);
+
+		if (block == null)
+		{
+			System.out.println(StatCollector.translateToLocal("error.error") + " " + StatCollector.translateToLocal("error.OreCFG") + " " + BN);
+			throw new java.lang.NullPointerException(StatCollector.translateToLocal("error.OreCFG") + " " + BN);
+		}
+
 		meta = M;
 		rarity = R;
 		if(T.equals("default"))

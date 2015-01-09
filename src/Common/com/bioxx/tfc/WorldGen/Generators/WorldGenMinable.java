@@ -275,9 +275,9 @@ public class WorldGenMinable extends WorldGenerator
 						isCorrectRockType = b == this.genInBlock;
 						isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
-						if(isCorrectRockType && isCorrectMeta)
+						if (isCorrectRockType && isCorrectMeta)
 						{
-							if(world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2))
+							if (MPBlock != null && world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2))
 							{
 								TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
 								if(te!= null)
@@ -286,7 +286,6 @@ public class WorldGenMinable extends WorldGenerator
 									te.baseBlockMeta = m;
 									te.extraData = (byte)(grade+8);
 								}
-
 							}
 						}
 						blocksMade++;
@@ -306,15 +305,17 @@ public class WorldGenMinable extends WorldGenerator
 				boolean isCorrectRockType = b == this.genInBlock;
 				boolean isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
-				if(isCorrectRockType && isCorrectMeta)
+				if (isCorrectRockType && isCorrectMeta)
 				{
-					world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2);
-					TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
-					if(te!= null)
+					if (MPBlock != null && world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2))
 					{
-						te.baseBlockID = Block.getIdFromBlock(b);
-						te.baseBlockMeta = m;
-						te.extraData = (byte)grade;
+						TEOre te = (TEOre) world.getTileEntity(posX, posY, posZ);
+						if (te != null)
+						{
+							te.baseBlockID = Block.getIdFromBlock(b);
+							te.baseBlockMeta = m;
+							te.extraData = (byte) grade;
+						}
 					}
 				}
 				blocksMade++;
@@ -384,17 +385,19 @@ public class WorldGenMinable extends WorldGenerator
 								boolean isCorrectRockType = b == this.genInBlock;
 								boolean isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
-								if(isCorrectRockType && isCorrectMeta)
+								if (isCorrectRockType && isCorrectMeta)
 								{
 									if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D)
 									{
-										world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2);
-										TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
-										if(te!= null)
+										if (MPBlock != null && world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2))
 										{
-											te.baseBlockID = Block.getIdFromBlock(b);
-											te.baseBlockMeta = m;
-											te.extraData = (byte)grade;
+											TEOre te = (TEOre) world.getTileEntity(posX, posY, posZ);
+											if (te != null)
+											{
+												te.baseBlockID = Block.getIdFromBlock(b);
+												te.baseBlockMeta = m;
+												te.extraData = (byte) grade;
+											}
 										}
 									}
 								}

@@ -2514,6 +2514,7 @@ gui.skillpage=Skills
 #==================
 error.error=ERROR:
 error.NBT=is missing NBT information.
+error.OreCFG=The following block entry in TFCOre.cfg is invalid:
 error.Contact=Please report to TerraFirmaCraft Support.
 
 #=====================================================
