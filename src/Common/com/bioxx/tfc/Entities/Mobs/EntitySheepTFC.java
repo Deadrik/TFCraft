@@ -389,7 +389,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 					return true;
 				}
 			}
-			//player.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
+
 			if(getGender() == GenderEnum.FEMALE && pregnant)
 				player.addChatMessage(new ChatComponentText("Pregnant"));
 
@@ -406,9 +406,11 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 					player.getHeldItem().damageItem(1, player);
 			}
 		}
+
 		ItemStack itemstack = player.inventory.getCurrentItem();
 
-		if (itemstack != null && this.isBreedingItemTFC(itemstack) && checkFamiliarity(InteractionEnum.BREED,player) &&this.familiarizedToday && this.getGrowingAge() == 0 && !super.isInLove())
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && checkFamiliarity(InteractionEnum.BREED, player) &&
+				this.familiarizedToday && this.getGrowingAge() == 0 && !super.isInLove())
 		{
 			if (!player.capabilities.isCreativeMode)
 			{
