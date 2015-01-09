@@ -1975,66 +1975,66 @@ item.Mud Brick.name=Adobe
 item.Wet Mud Brick.name=Adobe Húmedo
 
 #======== Misc. Blocks========
-tile.Straw Hide Bed.name=
-tile.StrawHideBed.name=
-tile.customBed.sleep=
-tile.BasicPipe.name=
-tile.ValvePipe.name=
-tile.Smoke.name=
+tile.Straw Hide Bed.name=Lecho de paja
+tile.StrawHideBed.name=Lecho de paja
+tile.customBed.sleep=Este lecho es muy incómodo para dormirse.
+tile.BasicPipe.name=Tubería
+tile.ValvePipe.name=Válvula de tubería
+tile.Smoke.name=Humo
 tile.Torch.name=Antorcha
 tile.Chest.name=Cofre
 tile.Bookshelf.name=Librería
 tile.Workbench.name=Mesa de trabajo
-tile.ButtonWood.name=
-tile.Firepit.name=
-tile.LogPile.name=
-tile.Charcoal.name=
-tile.StoneDetailed.name=
-tile.stoneStairs.name=
-tile.stoneSlabs.name=
-tile.stoneStalac.name=
-tile.WoodConstruct.name=
-tile.MetalTrapDoor.name=
-tile.Vessel.name=
-tile.Grill.name=
+tile.ButtonWood.name=Botón de madera
+tile.Firepit.name=Lumbre
+tile.LogPile.name=Leña apilada
+tile.Charcoal.name=Carbón vegetal
+tile.StoneDetailed.name=Detallada
+tile.stoneStairs.name=Escaleras
+tile.stoneSlabs.name=Losa
+tile.stoneStalac.name=Estalactita
+tile.WoodConstruct.name=Madero
+tile.MetalTrapDoor.name=Trampilla de metal
+tile.Vessel.name=Vasija
+tile.Grill.name=Parrilla
 
 tile.Sulfur.name=Azufre
-tile.Reeds.name=
+tile.Reeds.name=Juncos
 
 #= Misc. Plants =
 item.Sugarcane.name=Caña de Azúcar
 item.Hemp.name=Cáñamo
 item.Straw.name=Paja
-item.Jute.name=
-item.Jute Fibre.name=
+item.Jute.name=Yute
+item.Jute Fibre.name=Fibra de Yute
 
 tile.Fungi.mushroom_brown.name=Champiñón
-tile.Fungi.mushroom_red.name=
+tile.Fungi.mushroom_red.name=Amanita
 tile.Cactus.name=Cactus
 tile.Pumpkin.name=Calabaza
 tile.Moss.name=Musgo
 tile.Thatch.name=Techo de paja
-tile.Flora.Golden Rod.name=
-tile.Flora.Cat Tails.name=
+tile.Flora.Golden Rod.name=Vara de Oro
+tile.Flora.Cat Tails.name=Espadañas
 
 item.Seeds Sugarcane.name=Semillas de Caña de azúcar
 item.Seeds Hemp.name=Semillas de Cáñamo
-item.Seeds Jute.name=
+item.Seeds Jute.name=Semillas de Yute
 
-tile.TallGrass.tallgrass.name=Hierba
+tile.TallGrass.tallgrass.name=Hierba alta
 tile.TallGrass.fern.name=Helecho
-tile.TallGrass.shortgrass.name=
+tile.TallGrass.shortgrass.name=Hierba
 tile.LilyPad.name=Nenúfar
 tile.Vine.name=Enredadera
-tile.SeaGrassStill.name=
-tile.SeaGrassIce.name=
+tile.SeaGrassStill.name=Posidonia
+tile.SeaGrassIce.name=Posidonia congelada
 
-tile.Flowers.flower_nasturtium.name=
+tile.Flowers.flower_nasturtium.name=Capuchina
 tile.Flowers.flower_dandelion.name=Diente de león
-tile.Flowers.flower_meads_milkweed.name=
-tile.Flowers.flower_tropical_milkweed.name=
-tile.Flowers.flower_butterfly_milkweed.name=
-tile.Flowers.flower_calendula.name=
+tile.Flowers.flower_meads_milkweed.name=Algodoncillo
+tile.Flowers.flower_tropical_milkweed.name=Flor de Sangre
+tile.Flowers.flower_butterfly_milkweed.name=Algodoncillo mariposa
+tile.Flowers.flower_calendula.name=Caléndula
 tile.Flowers2.flower_rose.name=Amapola
 tile.Flowers2.flower_blue_orchid.name=Orquídea azul
 tile.Flowers2.flower_allium.name=Allium
@@ -2045,14 +2045,14 @@ tile.Flowers2.flower_tulip_white.name=Tulipán blanco
 tile.Flowers2.flower_tulip_pink.name=Tulipán rosa
 tile.Flowers2.flower_oxeye_daisy.name=Margarita
 
-tile.SaltWater.name=
-tile.SaltWaterStationary.name=
-tile.FreshWater.name=
-tile.FreshWaterStationary.name=
-tile.HotWater.name=
-tile.HotWaterStationary.name=
-tile.Lava.name=
-tile.LavaStationary.name=
+tile.SaltWater.name=Corriente de Agua Salada
+tile.SaltWaterStationary.name=Agua Salada
+tile.FreshWater.name=Corriente de Agua Dulce
+tile.FreshWaterStationary.name=Agua Dulce
+tile.HotWater.name=Corriente de Aguas Termales
+tile.HotWaterStationary.name=Aguas Termales
+tile.Lava.name=Río de Lava
+tile.LavaStationary.name=Lava
 
 #=======
 #= GUI =
@@ -2060,7 +2060,7 @@ tile.LavaStationary.name=
 gui.badnbt=
 
 #== Anvil GUI ==
-gui.Anvil.Plans=
+gui.Anvil.Plans=Plantillas
 gui.Anvil.Weld=Soldar
 
 gui.Anvil.LightHit=Golpe Liviano
@@ -2068,52 +2068,52 @@ gui.Anvil.MediumHit=Golpe Medio
 gui.Anvil.HeavyHit=Golpe Pesado
 gui.Anvil.Draw=Trazar
 
-gui.Anvil.Punch=Ponchar
+gui.Anvil.Punch=Punzar
 gui.Anvil.Bend=Doblar
 gui.Anvil.Upset=Alterar
-gui.Anvil.Shrink=Enocoger
+gui.Anvil.Shrink=Encoger
 
 gui.Anvil.Rules=Reglas
 gui.Anvil.Rule1=Cualquiera
 gui.Anvil.Rule2=Golpear, cualquiera
 gui.Anvil.Rule3=Golpear, último
-gui.Anvil.Rule4=Golpear, segundo luego del último
-gui.Anvil.Rule5=Golpear, tercero luego del último
+gui.Anvil.Rule4=Golpear, penúltimo
+gui.Anvil.Rule5=Golpear, antepenúltimo
 gui.Anvil.Rule6=Golpear, dos últimos
 gui.Anvil.Rule7=Golpear, tres últimos
 gui.Anvil.Rule8=Golpear, no último.
-gui.Anvil.Rule9=Ponchar, cualquiera
-gui.Anvil.Rule10=Ponchar, último
-gui.Anvil.Rule11=Ponchar, segundo luego del último
-gui.Anvil.Rule12=Ponchar, tercero luego del último
-gui.Anvil.Rule13=Ponchar, dos últimos
-gui.Anvil.Rule14=Ponchar, tres últimos
-gui.Anvil.Rule15=Ponchar, no último
+gui.Anvil.Rule9=Punzar, cualquiera
+gui.Anvil.Rule10=Punzar, último
+gui.Anvil.Rule11=Punzar, penúltimo
+gui.Anvil.Rule12=Punzar, antepenúltimo
+gui.Anvil.Rule13=Punzar, dos últimos
+gui.Anvil.Rule14=Punzar, tres últimos
+gui.Anvil.Rule15=Punzar, no último
 gui.Anvil.Rule16=Encoger, cualquiera
 gui.Anvil.Rule17=Encoger, último
-gui.Anvil.Rule18=Encoger, segundo luego del último
-gui.Anvil.Rule19=Encoger, tercero luego del último
+gui.Anvil.Rule18=Encoger, penúltimo
+gui.Anvil.Rule19=Encoger, antepenúltimo
 gui.Anvil.Rule20=Encoger, dos últimos
 gui.Anvil.Rule21=Encoger, tres últimos
 gui.Anvil.Rule22=Encoger, no último
 gui.Anvil.Rule23=Trazar, cualquiera
 gui.Anvil.Rule24=Trazar, último
-gui.Anvil.Rule25=Trazar, segundo luego del último
-gui.Anvil.Rule26=Trazar, tercero luego del último
+gui.Anvil.Rule25=Trazar, penúltimo
+gui.Anvil.Rule26=Trazar, antepenúltimo
 gui.Anvil.Rule27=Trazar, dos últimos
 gui.Anvil.Rule28=Trazar, tres últimos
 gui.Anvil.Rule29=Trazar, no último
 gui.Anvil.Rule30=Alterar, cualquiera
 gui.Anvil.Rule31=Alterar, último
-gui.Anvil.Rule32=Alterar, segundo luego del último
-gui.Anvil.Rule33=Alterar, tercero luego del último
+gui.Anvil.Rule32=Alterar, penúltimo
+gui.Anvil.Rule33=Alterar, antepenúltimo
 gui.Anvil.Rule34=Alterar, dos últimos
 gui.Anvil.Rule35=Alterar, tres últimos
 gui.Anvil.Rule36=Alterar, no último
 gui.Anvil.Rule37=Doblar, cualquiera
 gui.Anvil.Rule38=Doblar, último
-gui.Anvil.Rule39=Doblar, segundo luego del último
-gui.Anvil.Rule40=Doblar, tercero luego del último
+gui.Anvil.Rule39=Doblar, penúltimo
+gui.Anvil.Rule40=Doblar, antepenúltimo
 gui.Anvil.Rule41=Doblar, dos últimos
 gui.Anvil.Rule42=Doblar, tres últimos
 gui.Anvil.Rule43=Doblar, no último
@@ -2131,9 +2131,9 @@ word.stage1=Fase 1
 word.stage2=Fase 2
 
 gui.Bow.Advanced=
-gui.Bow.Javelins=
+gui.Bow.Javelins=Javalina
 gui.Bow.Arrows=Flecha
-gui.Bow.ForgedBy=
+gui.Bow.ForgedBy=Forjada por
 
 gui.DamageType.Error=Error: Tipo de Daño Inadecuado
 gui.DamageType.Crushing=Aplastar
@@ -2143,15 +2143,15 @@ gui.DamageType.Slashing=Cortar
 #== Barrel GUI ==
 gui.Barrel.Empty=Vaciar
 gui.Barrel.Seal=Cerrar
-gui.Barrel.Unseal=
-gui.Barrel.ToggleOff=
-gui.Barrel.ToggleOn=
-gui.Barrel.SealedOn=
-gui.Barrel.Solid=
-gui.Barrel.Liquid=
-gui.barrel.pickling=
-gui.barrel.brining=
-gui.barrel.preserving=
+gui.Barrel.Unseal=Abrir
+gui.Barrel.ToggleOff=Salida
+gui.Barrel.ToggleOn=Entrada
+gui.Barrel.SealedOn=Cerrado el
+gui.Barrel.Solid=Sólidos
+gui.Barrel.Liquid=Líquidos
+gui.barrel.pickling=Encurtiendo
+gui.barrel.brining=Poniendo en Salmuera
+gui.barrel.preserving=Conservando
 
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Carbón Vegetal
@@ -2162,7 +2162,7 @@ gui.Bloomery.Output=Salida
 gui.Calendar.Calendar=Calendario
 gui.Calendar.DateBioxx=Fecha: ¡Cumpleaños de Bioxx!
 gui.Calendar.DateDunk=Fecha: ¡Cumpleaños de Dunk!
-gui.Calendar.DateKitty=
+gui.Calendar.DateKitty=Fecha: ¡Cumpleaños de Kitty!
 
 gui.Calendar.Hour=Hora
 gui.Calendar.WitchHour=La Hora de las Brujas
@@ -2211,13 +2211,13 @@ gui.Calendar.1Month=1 Mes
 gui.Calendar.1Year=1 Año
 
 #== Food GUI ==
-gui.FoodPrep.CreateMeal=Crear Comida
+gui.FoodPrep.CreateMeal=Cocinar Comida
 gui.FoodPrep.Effect=Efecto
 gui.FoodPrep.Energy=Energía
 gui.FoodPrep.Filling=Llena
 gui.FoodPrep.Power=Poder
-gui.FoodPrep.Sandwich=
-gui.FoodPrep.Salad=
+gui.FoodPrep.Sandwich=Bocadillo
+gui.FoodPrep.Salad=Ensalada
 
 #== Metals ==
 gui.metal.Bismuth=Bismuto
