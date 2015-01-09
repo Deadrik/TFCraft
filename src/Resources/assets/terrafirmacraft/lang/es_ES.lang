@@ -12,8 +12,8 @@ key.ToolMode=Cambiar Modo Herramienta
 key.LockTool=Fijar Posición Herramienta
 
 effect.bleed=Sangrando
-death.attack.alcohol=
-death.attack.heatStroke=
+death.attack.alcohol=%1$s ha muerto por intoxicación etílica.
+death.attack.heatStroke=%1$s ha muerto por un golpe de calor.
 
 #==============
 #= Spawn Eggs =
@@ -34,23 +34,23 @@ entity.ghastTFC.name=Ghast
 entity.caveSpiderTFC.name=Araña de Cueva
 entity.blazeTFC.name=Blaze
 entity.endermanTFC.name=Enderman
-entity.pigZombieTFC.name=
+entity.pigZombieTFC.name=Zombie Cerdo
 entity.creeperTFC.name=Creeper
 entity.sheepTFC.name=Oveja
-entity.pheasantTFC.name=
+entity.pheasantTFC.name=Faisán
 entity.horseTFC.name=Caballo
 entity.irongolemTFC.name=Golem De Hierro
-entity.fishTFC.name=
+entity.fishTFC.name=Pez
 
 
 #==========
 #= Entity =
 #==========
-entity.notFamiliar=
-fishingRod.lineTension=
-fishingRod.lineSnap=
-fishingRod.bite=
-fishingRod.gotAway=
+entity.notFamiliar=El animal se niega.
+fishingRod.lineTension=¡El sedal se va a partir!
+fishingRod.lineSnap=¡El sedal se partió!
+fishingRod.bite=¡Han picado!
+fishingRod.gotAway=Se escapó...
 
 #================
 #= Achievements =
@@ -89,35 +89,35 @@ achievement.achPokeCreeper.desc=
 #============
 #= Commands =
 #============
-commands.transferTamed.noTamed=
-commands.transferTamed.tooMany=
-commands.transferTamed.wrongOwner=
-commands.transferTamed.sameTarget=
-commands.transferTamed.display.incoming=
-commands.transferTamed.display.outgoing=
-commands.transferTamed.wrongSender=
+commands.transferTamed.noTamed=No hay animales válidos cerca.
+commands.transferTamed.tooMany=Hay demasiados animales cerca.
+commands.transferTamed.wrongOwner=Ese animal no te pertenece.
+commands.transferTamed.sameTarget=No puedes traspasarte un animal a ti mismo.
+commands.transferTamed.display.incoming=%s te ha traspasado un animal.
+commands.transferTamed.display.outgoing=Has traspasado un animal a %s.
+commands.transferTamed.wrongSender=No puedes traspasar animales.
 
 #==========
 #= Fluids =
 #==========
-fluid.freshwater=
-fluid.saltwater=
-fluid.lavatfc=
-fluid.hotwater=
+fluid.freshwater=Agua fresca
+fluid.saltwater=Agua salada
+fluid.lavatfc=Lava
+fluid.hotwater=Aguas termales
 fluid.beer=Cerveza
 fluid.cider=Sidra
 fluid.rum=Ron
-fluid.ryewhiskey=Rye Whiskey
+fluid.ryewhiskey=Rye Whiskey (de centeno)
 fluid.sake=Sake
 fluid.vodka=Vodka
 fluid.whiskey=Whiskey
-fluid.cornwhiskey=
+fluid.cornwhiskey=Corn Whiskey (de maíz)
 fluid.milk=Leche
 fluid.milkcurdled=Leche Cuajada
 fluid.limewater=Agua de cal
 fluid.tannin=Tanino
 fluid.vinegar=Vinagre
-fluid.brine=
+fluid.brine=Salmuera
 
 #========
 #= Food =
@@ -129,11 +129,11 @@ item.meal.decent=Decente
 item.meal.good=Bueno
 item.meal.great=Genial
 item.meal.fantastic=Fantastico
-item.Sandwich.name=
-item.Salad.name=
-item.Soup.name=
-item.Sugar.name=
-item.Sea Weed.name=
+item.Sandwich.name=Bocadillo
+item.Salad.name=Ensalada
+item.Soup.name=Sopa
+item.Sugar.name=Azúcar
+item.Sea Weed.name=Alga
 
 #== Grains ==
 item.Barley Bread.name=Pan de Cebada
@@ -199,41 +199,41 @@ item.FruitSapling.Peach.name=Brote de Melocotonero
 item.FruitSapling.Plum.name=Brote de Ciruelo
 
 #=== Berry Bushes ===
-tile.BerryBush.Blackberry.name=
-tile.BerryBush.Blueberry.name=
-tile.BerryBush.Bunchberry.name=
-tile.BerryBush.Cloudberry.name=
-tile.BerryBush.Cranberry.name=
-tile.BerryBush.Elderberry.name=
-tile.BerryBush.Gooseberry.name=
-tile.BerryBush.Raspberry.name=
-tile.BerryBush.Snowberry.name=
-tile.BerryBush.Strawberry.name=
-tile.BerryBush.Wintergreen.name=
+tile.BerryBush.Blackberry.name=Zarzamora
+tile.BerryBush.Blueberry.name=Arándano azul
+tile.BerryBush.Bunchberry.name=Cornejo
+tile.BerryBush.Cloudberry.name=Moral de los pantanos
+tile.BerryBush.Cranberry.name=Arándano rojo
+tile.BerryBush.Elderberry.name=Saúco
+tile.BerryBush.Gooseberry.name=Grosellero
+tile.BerryBush.Raspberry.name=Frambueso
+tile.BerryBush.Snowberry.name=Arbusto de bolitas de nieve
+tile.BerryBush.Strawberry.name=Mata de fresas
+tile.BerryBush.Wintergreen.name=Gaultheria
 
-item.Blackberry.name=
-item.Blueberry.name=
-item.Bunchberry.name=
-item.Cloudberry.name=
-item.Cranberry.name=
-item.Elderberry.name=
-item.Gooseberry.name=
-item.Raspberry.name=
-item.Snowberry.name=
-item.Strawberry.name=
-item.Wintergreen Berry.name=
+item.Blackberry.name=Moras
+item.Blueberry.name=Arándanos azules
+item.Bunchberry.name=Cornejos
+item.Cloudberry.name=Moras de los pantanos
+item.Cranberry.name=Arándanos rojos
+item.Elderberry.name=Bayas de saúco
+item.Gooseberry.name=Grosellas
+item.Raspberry.name=Frambuesas
+item.Snowberry.name=Bolitas de nieve
+item.Strawberry.name=Fresas
+item.Wintergreen Berry.name=Bayas de gaultheria
 
-item.Blackberry Leaf.name=
-item.Blueberry Leaf.name=
-item.Bunchberry Leaf.name=
-item.Cloudberry Leaf.name=
-item.Cranberry Leaf.name=
-item.Elderberry Leaf.name=
-item.Gooseberry Leaf.name=
-item.Raspberry Leaf.name=
-item.Snowberry Leaf.name=
-item.Strawberry Leaf.name=
-item.Wintergreen Leaf.name=
+item.Blackberry Leaf.name=Hoja de mora
+item.Blueberry Leaf.name=Hoja de arándano azul
+item.Bunchberry Leaf.name=Hoja de cornejo
+item.Cloudberry Leaf.name=Hoja de moral de los pantanos
+item.Cranberry Leaf.name=Hoja de arándano rojo
+item.Elderberry Leaf.name=Hoja de Saúco
+item.Gooseberry Leaf.name=Hoja de grosellero
+item.Raspberry Leaf.name=Hoja de frambuesa
+item.Snowberry Leaf.name=Hoja de arbusto de bolitas de nieve
+item.Strawberry Leaf.name=Hoja de fresa
+item.Wintergreen Leaf.name=Hoja de Gaultheria
 
 #== Protein ==
 item.Beef.name=Ternera
@@ -280,7 +280,7 @@ item.Seeds Squash.name=Semillas de Calabacín
 item.Seeds Tomato.name=Semillas de Tomate
 
 #== Alcohol ==
-item.Glass Bottle.name=
+item.Glass Bottle.name=Botella
 item.Beer.name=Cerveza
 item.Cider.name=Sidra
 item.Rum.name=Ron
@@ -288,7 +288,7 @@ item.RyeWhiskey.name=Rye Whiskey
 item.Sake.name=Sake
 item.Vodka.name=Vodka
 item.Whiskey.name=Whiskey
-item.CornWhiskey.name=
+item.CornWhiskey.name=Bourbon
 
 #===========
 #= Pottery =
@@ -2420,9 +2420,9 @@ gui.Torch.CatchingFire=Quemado
 gui.Torch.Lit=Ecendido
 
 gui.ItemHeat.Liquid=Líquido
-gui.ItemHeat.Solidified=
-gui.ItemHeat.Caution=Cautela
-gui.ItemHeat.Warming=Calentando
+gui.ItemHeat.Solidified=Sólido
+gui.ItemHeat.Caution=Atención
+gui.ItemHeat.Warming=Templado
 gui.ItemHeat.Hot=Caliente
 gui.ItemHeat.VeryHot=Muy caliente
 gui.ItemHeat.FaintRed=Rojo débil
@@ -2434,54 +2434,55 @@ gui.ItemHeat.YellowWhite=Amarillo brillante
 gui.ItemHeat.White=Blanco
 gui.ItemHeat.BrilliantWhite=Blanco brillante
 
-gui.ingot.workable=
-gui.ingot.weldable=
-gui.ingot.danger=
+gui.ingot.workable=Maleable
+gui.ingot.weldable=Soldable
+gui.ingot.danger=Peligro
 
-gui.milk.fresh=
-gui.milk.old=
-gui.milk.sour=
+gui.milk.fresh=Fresca
+gui.milk.old=Cortada
+gui.milk.sour=Agria
 
-gui.units=
+gui.units=Unidades
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Se debe utilizar en una corriente de agua.
-gui.goldpan.overused=
+gui.goldpan.overused=Esta zona está consumida. No encontrarás gran cosa.
+gui.seeds.failedTemp=Hace demasiado frío para plantar esto, no sobreviviría.
 
-gui.ProPick.Found=Fundar
-gui.ProPick.FoundTraces=Rastros encontrados de
+gui.ProPick.Found=Has encontrado
+gui.ProPick.FoundTraces=Encontrados rastros de
 gui.ProPick.FoundSmall=Encontrada una pequeña muestra de
 gui.ProPick.FoundMedium=Encontrada una muestra mediana de
 gui.ProPick.FoundLarge=Encontrada una muestra grande de
-gui.ProPick.FoundVeryLarge=Encontrada una muetra muy grande de
-gui.ProPick.FoundNothing=No se ha encontrado nada interezante.
+gui.ProPick.FoundVeryLarge=Encontrada una muestra muy grande de
+gui.ProPick.FoundNothing=No se ha encontrado nada interesante.
 
 #== Creative Tabs ==
-itemGroup.TFCArmor=(TFC) Armadura
+itemGroup.TFCArmor=(TFC) Armaduras
 itemGroup.TFCMaterials=(TFC) Materiales
 itemGroup.TFCMisc=(TCF) Miscelánea
 itemGroup.TFCPottery=(TFC) Cerámica
 itemGroup.TFCTools=(TFC) Herramientas
 itemGroup.TFCWeapons=(TFC) Armas
-itemGroup.TFCDevices=
+itemGroup.TFCDevices=(TFC) Dispositivos
 itemGroup.TFCFoods=(TFC) Alimentación
 itemGroup.TFCBuilding=(TFC) Bloques de construcción
 itemGroup.TFCDecoration=(TFC) Bloques de decoración
 
 #== Skill GUI ==
-skill.armorsmith=
-skill.gensmith=
-skill.toolsmith=
-skill.weaponsmith=
-skill.agriculture=
-skill.cooking=
-skill.prospecting=
-skill.butchering=
-gui.skill.novice=
-gui.skill.adept=
-gui.skill.expert=
-gui.skill.master=
-gui.skillpage=
+skill.armorsmith=Forja de armaduras
+skill.gensmith=Herrería
+skill.toolsmith=Forja de herramientas
+skill.weaponsmith=Forja de armas
+skill.agriculture=Agricultura
+skill.cooking=Cocina
+skill.prospecting=Prospección
+skill.butchering=Matarife
+gui.skill.novice=Novato
+gui.skill.adept=Hábil
+gui.skill.expert=Experto
+gui.skill.master=Maestro
+gui.skillpage=Habilidades
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
