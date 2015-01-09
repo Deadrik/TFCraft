@@ -1716,9 +1716,9 @@ item.bootsCloth.name=Botas de Cuero
 #==========
 #= Metals =
 #==========
-item.Iron Bloom.name=Hierro esponja refinado
-item.Raw Iron Bloom.name=Hierro esponja bruto
-tile.Bloom.name=
+item.Iron Bloom.name=Hierro de forja refinado
+item.Raw Iron Bloom.name=Hierro de forja bruto
+tile.Bloom.name=Hierro de forja
 
 #== Unshaped ==
 item.Bismuth Bronze Unshaped.name=Bronce de Bismuto Sin Trabajar
@@ -1858,21 +1858,21 @@ item.Blueprint=Prototipo
 #= Devices =
 #===========
 tile.Bellows.name=Fuelle
-tile.Forge.name=Forja
+tile.Forge.name=Fragua
 tile.BlastFurnace.name=Alto horno
 tile.SpawnMeter.name=Medidor de Protección
 tile.Quern.name=Base de Molinillo
 tile.EarlyBloomery.name=Forja catalana
-tile.Molten.name=
+tile.Molten.name=Mena fundida
 tile.Crucible.name=Crisol
-tile.NestBox.name=
+tile.NestBox.name=Nidal
 item.SluiceItem.name=Esclusa
 tile.Sluice.name=Esclusa
-tile.LeatherRack.name=
-tile.FoodPrep.name=
-tile.MetalSheet.name=
-tile.ingotpile.name=
-tile.SmokeRack.name=
+tile.LeatherRack.name=Soporte para curtir
+tile.FoodPrep.name=Encimera
+tile.MetalSheet.name=Lámina de metal
+tile.ingotpile.name=Lingotes apilados
+tile.SmokeRack.name=Cuerda de ahumar
 
 #== Anvils ==
 tile.Anvil.Stone.name=Yunque Piedra
@@ -1900,8 +1900,8 @@ tile.ClayGrass.name=Hierba de Arcilla
 tile.dirt.name=Tierra
 tile.sand.name=Arena
 tile.Peat.name=Turba
-tile.tilledSoil.name=
-tile.LooseRock.name=
+tile.tilledSoil.name=Tierra de cultivo
+tile.LooseRock.name=Rocalla
 tile.Ice.name=Hielo
 
 #=================
@@ -1913,18 +1913,18 @@ item.book.name=Libro
 item.stick.name=Palo
 item.coal.coal.name=Carbón
 item.coal.charcoal.name=Carbón Vegetal
-item.Fertilizer.name=
-item.Reeds.name=
+item.Fertilizer.name=Fretilizante
+item.Reeds.name=Juncos
 
 item.Wooden Bucket Empty.name=Cubo de Madera (Vacío)
-item.Wooden Bucket Water.name=
-item.Wooden Bucket Salt Water.name=
+item.Wooden Bucket Water.name=Cubo de Madera (Agua)
+item.Wooden Bucket Salt Water.name=Cubo de Madera (Agua Salada)
 item.Wooden Bucket Milk.name=Cubo de Madera (Leche)
 item.Lime Water.name=Agua de Cal
 
 item.Red Steel Bucket Empty.name=Cubo de Acero Rojo (Vacío)
 item.Red Steel Bucket Water.name=Cubo de Acero Rojo (Agua)
-item.Red Steel Bucket Salt Water.name=
+item.Red Steel Bucket Salt Water.name=Cubo de Acero Rojo (Agua Salada)
 item.Blue Steel Bucket Empty.name=Cubo de Acero Azul (Vacío)
 item.Blue Steel Bucket Lava.name=Cubo de Acero Azul (Lava)
 
@@ -1938,41 +1938,41 @@ item.Firestarter.name=Encendedor
 
 item.Quern.name=Piedra de moler
 item.Blueprint.name=Prototipo
-item.Nametag.name=
+item.Nametag.name=Etiqueta
 item.WoolYarn.name=Hilo de Lana
 item.Wool.name=Lana
 item.WoolCloth.name=Tela de Lana
-item.SilkCloth.name=
-item.BurlapCloth.name=
+item.SilkCloth.name=Paño de Seda
+item.BurlapCloth.name=Tela de Arpillera
 item.Mortar.name=Mortero
 item.Vinegar.name=Vinagre
 
-item.Hide.small.name=Cuero Crudo
-item.Hide.medium.name=
-item.Hide.large.name=
-item.Soaked Hide.small.name=Cuero Empapado
-item.Soaked Hide.medium.name=
-item.Soaked Hide.large.name=
-item.Scraped Hide.small.name=Cuero Raspado
-item.Scraped Hide.medium.name=
-item.Scraped Hide.large.name=
-item.Prep Hide.small.name=Cuero Curado
-item.Prep Hide.medium.name=
-item.Prep Hide.large.name=
-item.Sheep Skin.small.name=
-item.Sheep Skin.medium.name=
-item.Sheep Skin.large.name=
+item.Hide.small.name=Cuero Crudo (Pequeño)
+item.Hide.medium.name=Cuero Crudo (Mediano)
+item.Hide.large.name=Cuero Crudo (Grande)
+item.Soaked Hide.small.name=Cuero Remojado (Pequeño)
+item.Soaked Hide.medium.name=Cuero Remojado (Mediano)
+item.Soaked Hide.large.name=Cuero Remojado (Grande)
+item.Scraped Hide.small.name=Cuero Raspado (Pequeño)
+item.Scraped Hide.medium.name=Cuero Raspado (Mediano)
+item.Scraped Hide.large.name=Cuero Raspado (Grande)
+item.Prep Hide.small.name=Cuero Curtido (Pequeño)
+item.Prep Hide.medium.name=Cuero Curtido (Mediano)
+item.Prep Hide.large.name=Cuero Curtido (Grande)
+item.Sheep Skin.small.name=Vellón (Pequeño)
+item.Sheep Skin.medium.name=Vellón (Mediano)
+item.Sheep Skin.large.name=Vellón (Grande)
 item.TFC Leather.name=Cuero
-item.Flat Leather.name=Cuero Lizo
+item.Flat Leather.name=Cuero Liso
 item.leather.name=Cuero
 
 item.minecartChest.name=Vagoneta con Cofre
 item.fishingRod.name=Caña de pescar
 
-item.Quiver.name=
-item.Rope.name=
-item.Mud Brick.name=
-item.Wet Mud Brick.name=
+item.Quiver.name=Carcaj
+item.Rope.name=Soga
+item.Mud Brick.name=Adobe
+item.Wet Mud Brick.name=Adobe Húmedo
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=
