@@ -68,13 +68,41 @@ public class Alloy
 
 	public Alloy matches(List<AlloyMetal> a)
 	{
+		//Find if the alloy searched is part of the ingredients mix. Only have sense for >1 ingredients alloys.
+		boolean isAlloyInMix = false;
+		float alloyPercentage = 0;
+		if(a.size() > 1)
+		{
+			for(AlloyMetal alloyMix: a)
+			{
+				if(alloyMix.metalType == this.outputType)
+				{
+					isAlloyInMix = true;
+					alloyPercentage = alloyMix.metal;
+					break;
+				}
+			}
+		}
+	
 		Iterator<AlloyMetal> iter = a.iterator();
 		boolean matches = true;
 		int amount = 0;
 		while(iter.hasNext() && matches == true)
 		{
 			AlloyMetal am = iter.next();
-			matches = searchForAlloyMetal(am);
+			if(isAlloyInMix)
+			{
+				//if the alloy is part of the mix don't search for it, else adjust ratio for search.
+				if(am.metalType == this.outputType)
+				{
+					matches = true;
+				} else {
+					float partialPercentage = 100f * am.metal / (100f - alloyPercentage);
+					matches = searchForAlloyMetal(new AlloyMetal(am.metalType, partialPercentage));
+				}
+			} else {
+				matches = searchForAlloyMetal(am);
+			}
 			amount += am.metal;
 		}
 
