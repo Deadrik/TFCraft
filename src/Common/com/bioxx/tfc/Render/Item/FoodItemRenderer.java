@@ -77,23 +77,27 @@ public class FoodItemRenderer implements IItemRenderer
 					}
 				}
 			
-				if(((IFood)is.getItem()).renderDecay())
-				{
-					if(decayPerc < 0.10)
-					{
-						decayTop = (decayTop*10);
-						renderQuad(1, 13, 13-decayTop, 1, 0x00ff00);
-					}
-					else
-						renderQuad(1, 13, 13-decayTop, 1, 0xff0000);
-				}
-				if(((IFood)is.getItem()).renderWeight())
-				{
-					renderQuad(1, 14, 13, 1, 0);
-					float weightPerc = ((IFood)is.getItem()).getFoodWeight(is) / ((IFood)is.getItem()).getFoodMaxWeight(is);
-					float weightTop = weightPerc * 13.0F;
+				float weightPerc = ((IFood) is.getItem()).getFoodWeight(is) / ((IFood) is.getItem()).getFoodMaxWeight(is);
 
-					renderQuad(1, 14, weightTop, 1, 0xffffff);
+				if (weightPerc <= 1) // Only draw bars if the weight is within the max weight. Food created using the blank createTag (weight = 999) will not have the bars.
+				{
+					if (((IFood) is.getItem()).renderDecay())
+					{
+						if (decayPerc < 0.10)
+						{
+							decayTop = (decayTop * 10);
+							renderQuad(1, 13, 13 - decayTop, 1, 0x00ff00);
+						}
+						else
+							renderQuad(1, 13, 13 - decayTop, 1, 0xff0000);
+					}
+					if (((IFood) is.getItem()).renderWeight())
+					{
+						renderQuad(1, 14, 13, 1, 0);
+						float weightTop = weightPerc * 13.0F;
+
+						renderQuad(1, 14, weightTop, 1, 0xffffff);
+					}
 				}
 			}
 

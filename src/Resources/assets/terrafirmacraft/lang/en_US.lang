@@ -2469,6 +2469,12 @@ gui.milk.sour=Sour
 
 gui.units=Units
 
+#== WAILA ==
+gui.useless=Useless
+gui.growth=Growth
+gui.mature=Mature
+gui.metal.Iron=Iron
+
 #== Chat Messages ==
 gui.GoldPan.UseFull=Must use under flowing water.
 gui.goldpan.overused=This area seems to be overworked. You probably wouldn't find much.

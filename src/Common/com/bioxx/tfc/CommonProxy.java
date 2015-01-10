@@ -395,6 +395,8 @@ public class CommonProxy
 	public void registerWailaClasses()
 	{
 		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.GUI.WAILA.TFCOre.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.GUI.WAILA.TFCCrop.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.GUI.WAILA.TFCBarrel.callbackRegister");
 		
 	}
 }
