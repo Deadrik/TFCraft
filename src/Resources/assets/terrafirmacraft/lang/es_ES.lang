@@ -1,5 +1,5 @@
 ﻿#es_ES
-#Este es el archivo de configuracion de idioma en español, traducido por SrNice & MiguelSnake & Mastropiero & Mangachit0 con una pequeña ayuda de Dimeborg
+#Este es el archivo de configuracion de idioma en español, traducido, en origen, por SrNice & MiguelSnake & Mastropiero & Mangachit0 con una pequeña ayuda de Dimeborg
 
 
 
@@ -12,8 +12,8 @@ key.ToolMode=Cambiar Modo Herramienta
 key.LockTool=Fijar Posición Herramienta
 
 effect.bleed=Sangrando
-death.attack.alcohol=
-death.attack.heatStroke=
+death.attack.alcohol=%1$s ha muerto por intoxicación etílica.
+death.attack.heatStroke=%1$s ha muerto por un golpe de calor.
 
 #==============
 #= Spawn Eggs =
@@ -34,23 +34,23 @@ entity.ghastTFC.name=Ghast
 entity.caveSpiderTFC.name=Araña de Cueva
 entity.blazeTFC.name=Blaze
 entity.endermanTFC.name=Enderman
-entity.pigZombieTFC.name=
+entity.pigZombieTFC.name=Zombie Cerdo
 entity.creeperTFC.name=Creeper
 entity.sheepTFC.name=Oveja
-entity.pheasantTFC.name=
+entity.pheasantTFC.name=Faisán
 entity.horseTFC.name=Caballo
 entity.irongolemTFC.name=Golem De Hierro
-entity.fishTFC.name=
+entity.fishTFC.name=Pez
 
 
 #==========
 #= Entity =
 #==========
-entity.notFamiliar=
-fishingRod.lineTension=
-fishingRod.lineSnap=
-fishingRod.bite=
-fishingRod.gotAway=
+entity.notFamiliar=El animal se niega.
+fishingRod.lineTension=¡El sedal se va a partir!
+fishingRod.lineSnap=¡El sedal se partió!
+fishingRod.bite=¡Han picado!
+fishingRod.gotAway=Se escapó...
 
 #================
 #= Achievements =
@@ -89,35 +89,35 @@ achievement.achPokeCreeper.desc=
 #============
 #= Commands =
 #============
-commands.transferTamed.noTamed=
-commands.transferTamed.tooMany=
-commands.transferTamed.wrongOwner=
-commands.transferTamed.sameTarget=
-commands.transferTamed.display.incoming=
-commands.transferTamed.display.outgoing=
-commands.transferTamed.wrongSender=
+commands.transferTamed.noTamed=No hay animales válidos cerca.
+commands.transferTamed.tooMany=Hay demasiados animales cerca.
+commands.transferTamed.wrongOwner=Ese animal no te pertenece.
+commands.transferTamed.sameTarget=No puedes traspasarte un animal a ti mismo.
+commands.transferTamed.display.incoming=%s te ha traspasado un animal.
+commands.transferTamed.display.outgoing=Has traspasado un animal a %s.
+commands.transferTamed.wrongSender=No puedes traspasar animales.
 
 #==========
 #= Fluids =
 #==========
-fluid.freshwater=
-fluid.saltwater=
-fluid.lavatfc=
-fluid.hotwater=
+fluid.freshwater=Agua fresca
+fluid.saltwater=Agua salada
+fluid.lavatfc=Lava
+fluid.hotwater=Aguas termales
 fluid.beer=Cerveza
 fluid.cider=Sidra
 fluid.rum=Ron
-fluid.ryewhiskey=Rye Whiskey
+fluid.ryewhiskey=Rye Whiskey (de centeno)
 fluid.sake=Sake
 fluid.vodka=Vodka
 fluid.whiskey=Whiskey
-fluid.cornwhiskey=
+fluid.cornwhiskey=Corn Whiskey (de maíz)
 fluid.milk=Leche
 fluid.milkcurdled=Leche Cuajada
 fluid.limewater=Agua de cal
 fluid.tannin=Tanino
 fluid.vinegar=Vinagre
-fluid.brine=
+fluid.brine=Salmuera
 
 #========
 #= Food =
@@ -129,11 +129,11 @@ item.meal.decent=Decente
 item.meal.good=Bueno
 item.meal.great=Genial
 item.meal.fantastic=Fantastico
-item.Sandwich.name=
-item.Salad.name=
-item.Soup.name=
-item.Sugar.name=
-item.Sea Weed.name=
+item.Sandwich.name=Bocadillo
+item.Salad.name=Ensalada
+item.Soup.name=Sopa
+item.Sugar.name=Azúcar
+item.Sea Weed.name=Alga
 
 #== Grains ==
 item.Barley Bread.name=Pan de Cebada
@@ -199,41 +199,41 @@ item.FruitSapling.Peach.name=Brote de Melocotonero
 item.FruitSapling.Plum.name=Brote de Ciruelo
 
 #=== Berry Bushes ===
-tile.BerryBush.Blackberry.name=
-tile.BerryBush.Blueberry.name=
-tile.BerryBush.Bunchberry.name=
-tile.BerryBush.Cloudberry.name=
-tile.BerryBush.Cranberry.name=
-tile.BerryBush.Elderberry.name=
-tile.BerryBush.Gooseberry.name=
-tile.BerryBush.Raspberry.name=
-tile.BerryBush.Snowberry.name=
-tile.BerryBush.Strawberry.name=
-tile.BerryBush.Wintergreen.name=
+tile.BerryBush.Blackberry.name=Zarzamora
+tile.BerryBush.Blueberry.name=Arándano azul
+tile.BerryBush.Bunchberry.name=Cornejo
+tile.BerryBush.Cloudberry.name=Moral de los pantanos
+tile.BerryBush.Cranberry.name=Arándano rojo
+tile.BerryBush.Elderberry.name=Saúco
+tile.BerryBush.Gooseberry.name=Grosellero
+tile.BerryBush.Raspberry.name=Frambueso
+tile.BerryBush.Snowberry.name=Arbusto de bolitas de nieve
+tile.BerryBush.Strawberry.name=Mata de fresas
+tile.BerryBush.Wintergreen.name=Gaultheria
 
-item.Blackberry.name=
-item.Blueberry.name=
-item.Bunchberry.name=
-item.Cloudberry.name=
-item.Cranberry.name=
-item.Elderberry.name=
-item.Gooseberry.name=
-item.Raspberry.name=
-item.Snowberry.name=
-item.Strawberry.name=
-item.Wintergreen Berry.name=
+item.Blackberry.name=Moras
+item.Blueberry.name=Arándanos azules
+item.Bunchberry.name=Cornejos
+item.Cloudberry.name=Moras de los pantanos
+item.Cranberry.name=Arándanos rojos
+item.Elderberry.name=Bayas de saúco
+item.Gooseberry.name=Grosellas
+item.Raspberry.name=Frambuesas
+item.Snowberry.name=Bolitas de nieve
+item.Strawberry.name=Fresas
+item.Wintergreen Berry.name=Bayas de gaultheria
 
-item.Blackberry Leaf.name=
-item.Blueberry Leaf.name=
-item.Bunchberry Leaf.name=
-item.Cloudberry Leaf.name=
-item.Cranberry Leaf.name=
-item.Elderberry Leaf.name=
-item.Gooseberry Leaf.name=
-item.Raspberry Leaf.name=
-item.Snowberry Leaf.name=
-item.Strawberry Leaf.name=
-item.Wintergreen Leaf.name=
+item.Blackberry Leaf.name=Hoja de mora
+item.Blueberry Leaf.name=Hoja de arándano azul
+item.Bunchberry Leaf.name=Hoja de cornejo
+item.Cloudberry Leaf.name=Hoja de moral de los pantanos
+item.Cranberry Leaf.name=Hoja de arándano rojo
+item.Elderberry Leaf.name=Hoja de Saúco
+item.Gooseberry Leaf.name=Hoja de grosellero
+item.Raspberry Leaf.name=Hoja de frambuesa
+item.Snowberry Leaf.name=Hoja de arbusto de bolitas de nieve
+item.Strawberry Leaf.name=Hoja de fresa
+item.Wintergreen Leaf.name=Hoja de Gaultheria
 
 #== Protein ==
 item.Beef.name=Ternera
@@ -280,7 +280,7 @@ item.Seeds Squash.name=Semillas de Calabacín
 item.Seeds Tomato.name=Semillas de Tomate
 
 #== Alcohol ==
-item.Glass Bottle.name=
+item.Glass Bottle.name=Botella
 item.Beer.name=Cerveza
 item.Cider.name=Sidra
 item.Rum.name=Ron
@@ -288,7 +288,7 @@ item.RyeWhiskey.name=Rye Whiskey
 item.Sake.name=Sake
 item.Vodka.name=Vodka
 item.Whiskey.name=Whiskey
-item.CornWhiskey.name=
+item.CornWhiskey.name=Bourbon
 
 #===========
 #= Pottery =
@@ -408,17 +408,17 @@ item.Sword Mold.Ceramic Mold Sword Bronze.name=Molde de Espada (Bronce)
 item.Sword Mold.Ceramic Mold Sword Black Bronze.name=Molde de Espada (Bronce oscuro)
 item.Sword Mold.Ceramic Mold Sword Bismuth Bronze.name=Molde de Espada (Bronce de Bismuto)
 
-item.Spindle.name=Husp
+item.Spindle.name=Huso
 item.Spindle Head.Clay Spindle.name=Huso de Arcilla
 item.Spindle Head.Spindle Head.name=Cabezal del Huso
 
-item.Fire Brick.Fire Brick.name=
-item.Fire Brick.Clay Fire Brick.name=
-tile.FireBrick.name=
-tile.Pottery.name=
+item.Fire Brick.Fire Brick.name=Arcilla refractaria
+item.Fire Brick.Clay Fire Brick.name=Ladrillo de arcilla refractaria
+tile.FireBrick.name=Bloque de arcilla refractaria
+tile.Pottery.name=Alfar
 
-item.ClayBowl.Ceramic Bowl.name=
-item.ClayBowl.Clay Bowl.name=
+item.ClayBowl.Ceramic Bowl.name=Cuenco de cerámica
+item.ClayBowl.Clay Bowl.name=Cuenco de arcilla
 
 #= Gems =
 item.Agate.Chipped.name=Ágata Rota
@@ -512,14 +512,14 @@ item.dyePowder.white.name=Polvo de Hueso
 item.dyePowder.yellow.name=Tinte Amarillo
 
 item.Coke.name=Coque
-item.Powder.Flux.name=Flujo
+item.Powder.Flux.name=Fundente
 item.Powder.Graphite Powder.name=Polvo de Grafito
-item.Powder.Hematite Powder.name=
+item.Powder.Hematite Powder.name=Polvo de Hematita
 item.Powder.Kaolinite Powder.name=Polvo de Caolinita
-item.Powder.Lapis Lazuli Powder.name=
-item.Powder.Limonite Powder.name=
-item.Powder.Malachite Powder.name=
-item.Powder.Salt.name=
+item.Powder.Lapis Lazuli Powder.name=Polvo de Lapis Lázuli
+item.Powder.Limonite Powder.name=Polvo de Limonita
+item.Powder.Malachite Powder.name=Polvo de Malaquita
+item.Powder.Salt.name=Sal
 item.Powder.Saltpeter Powder.name=Polvo de Salitre
 item.Powder.Sulfur Powder.name=Polvo de Azufre
 
@@ -857,7 +857,7 @@ item.Small Ore.Sphalerite.name=Pequeña Esfalerita
 item.Small Ore.Tetrahedrite.name=Pequeña Tetraedrita
 
 #== Ore Blocks ==
-tile.Ore.name=
+tile.Ore.name=Mena
 tile.Ore.Bituminous Coal.name=Hulla
 tile.Ore.Borax.name=Boráx
 tile.Ore.Cinnabar.name=Cinabrio
@@ -899,7 +899,7 @@ tile.Ore.Tetrahedrite.name=Tetraedrita
 #= Wood =
 #========
 #== Wood Items ==
-item.Log.Acacia.name=
+item.Log.Acacia.name=Acacia
 item.Log.Ash.name=Fresno
 item.Log.Aspen.name=Álamo
 item.Log.Birch.name=Abedul
@@ -917,7 +917,7 @@ item.Log.White Cedar.name=Cedro Blanco
 item.Log.White Elm.name=Olmo Blanco
 item.Log.Willow.name=Sauce
 
-item.SinglePlank.Acacia.name=
+item.SinglePlank.Acacia.name=Tabla de Acacia
 item.SinglePlank.Ash.name=Tabla de Fresno
 item.SinglePlank.Aspen.name=Tabla de Álamo
 item.SinglePlank.Birch.name=Tabla de Abedul
@@ -935,7 +935,7 @@ item.SinglePlank.White Cedar.name=Tabla de Cedro Blanco
 item.SinglePlank.White Elm.name=Tabla de Olmo Blanco
 item.SinglePlank.Willow.name=Tabla de Sauce
 
-item.Acacia Door.name=
+item.Acacia Door.name=Puerta de Acacia
 item.Ash Door.name=Puerta de Fresno
 item.Aspen Door.name=Puerta de Álamo
 item.Birch Door.name=Puerta de Abedul
@@ -953,7 +953,7 @@ item.White Cedar Door.name=Puerta de Cedro Blanco
 item.White Elm Door.name=Puerta de Olmo Blanco
 item.Willow Door.name=Puerta de Sauce
 
-item.Barrel.Acacia.name=
+item.Barrel.Acacia.name=Barril de Acacia
 item.Barrel.Ash.name=Barril de Fresno
 item.Barrel.Aspen.name=Barril de Álamo
 item.Barrel.Birch.name=Barril de Abedul
@@ -971,26 +971,26 @@ item.Barrel.White Cedar.name=Barril de Cedro Blanco
 item.Barrel.White Elm.name=Barril de Olmo Blanco
 item.Barrel.Willow.name=Barril de Sauce
 
-item.Loom.Acacia.name=
-item.Loom.Ash.name=
-item.Loom.Aspen.name=
-item.Loom.Birch.name=
-item.Loom.Chestnut.name=
-item.Loom.Douglas Fir.name=
-item.Loom.Hickory.name=
-item.Loom.Kapok.name=
-item.Loom.Maple.name=
-item.Loom.Oak.name=
-item.Loom.Pine.name=
-item.Loom.Sequoia.name=
-item.Loom.Spruce.name=
-item.Loom.Sycamore.name=
-item.Loom.White Cedar.name=
-item.Loom.White Elm.name=
-item.Loom.Willow.name=
+item.Loom.Acacia.name=Telar de Acacia
+item.Loom.Ash.name=Telar de Fresno
+item.Loom.Aspen.name=Telar de álamo
+item.Loom.Birch.name=Telar de Abedul
+item.Loom.Chestnut.name=Telar de Castaño
+item.Loom.Douglas Fir.name=Telar de Abeto
+item.Loom.Hickory.name=Telar de Nogal
+item.Loom.Kapok.name=Telar de Capoc
+item.Loom.Maple.name=Telar de Arce
+item.Loom.Oak.name=Telar de Roble
+item.Loom.Pine.name=Telar de Pino
+item.Loom.Sequoia.name=Telar de Secuoya
+item.Loom.Spruce.name=Telar de Pícea
+item.Loom.Sycamore.name=Telar de Sicomoro
+item.Loom.White Cedar.name=Telar de Cedro Blanco
+item.Loom.White Elm.name=Telar de Olmo Blanco
+item.Loom.Willow.name=Telar de Sauce
 
 #== Wood Blocks ==
-tile.log2.Acacia.name=
+tile.log2.Acacia.name=Acacia
 tile.log.Ash.name=Fresno
 tile.log.Aspen.name=Álamo
 tile.log.Birch.name=Abedul
@@ -1008,7 +1008,7 @@ tile.log.White Cedar.name=Cedro Blanco
 tile.log.White Elm.name=Olmo Blanco
 tile.log.Willow.name=Sauce
 
-tile.WoodVert2.Acacia.name=
+tile.WoodVert2.Acacia.name=Acacia
 tile.WoodVert.Ash.name=Fresno
 tile.WoodVert.Aspen.name=Álamo
 tile.WoodVert.Birch.name=Abedul
@@ -1026,7 +1026,7 @@ tile.WoodVert.White Cedar.name=Cedro Blanco
 tile.WoodVert.White Elm.name=Olmo Blanco
 tile.WoodVert.Willow.name=Sauce
 
-tile.WoodHoriz3.Acacia.name=
+tile.WoodHoriz3.Acacia.name=Acacia
 tile.WoodHoriz.Ash.name=Fresno
 tile.WoodHoriz.Aspen.name=Álamo
 tile.WoodHoriz.Birch.name=Abedul
@@ -1044,7 +1044,7 @@ tile.WoodHoriz2.White Cedar.name=Cedro Blanco
 tile.WoodHoriz2.White Elm.name=Olmo Blanco
 tile.WoodHoriz2.Willow.name=Sauce
 
-tile.sapling2.Acacia.name=
+tile.sapling2.Acacia.name=Brote de Acacia
 tile.sapling.Ash.name=Brote de Fresno
 tile.sapling.Aspen.name=Brote de Álamo
 tile.sapling.Birch.name=Brote de Abedul
@@ -1062,26 +1062,26 @@ tile.sapling.White Cedar.name=Brote de Cedro Blanco
 tile.sapling.White Elm.name=Brote de Olmo Blanco
 tile.sapling.Willow.name=Brote de Sauce
 
-tile.leaves2.name=
-tile.leaves2.Acacia.name=
-tile.leaves.Ash.name=
-tile.leaves.Aspen.name=
-tile.leaves.Birch.name=
-tile.leaves.Chestnut.name=
-tile.leaves.Douglas Fir.name=
-tile.leaves.Hickory.name=
-tile.leaves.Kapok.name=
-tile.leaves.Maple.name=
-tile.leaves.Oak.name=
-tile.leaves.Pine.name=
-tile.leaves.Sequoia.name=
-tile.leaves.Spruce.name=
-tile.leaves.Sycamore.name=
-tile.leaves.White Cedar.name=
-tile.leaves.White Elm.name=
-tile.leaves.Willow.name=
+tile.leaves2.name=Hojas de Acacia
+tile.leaves2.Acacia.name=Hojas de Acacia
+tile.leaves.Ash.name=Hojas de Fresno
+tile.leaves.Aspen.name=Hojas de Álamo
+tile.leaves.Birch.name=Hojas de Abedul
+tile.leaves.Chestnut.name=Hojas de Castaño
+tile.leaves.Douglas Fir.name=Hojas de Abeto
+tile.leaves.Hickory.name=Hojas de Nogal
+tile.leaves.Kapok.name=Hojas de Capoc
+tile.leaves.Maple.name=Hojas de Arce
+tile.leaves.Oak.name=Hojas de Roble
+tile.leaves.Pine.name=Hojas de Pino
+tile.leaves.Sequoia.name=Hojas de Secuoya
+tile.leaves.Spruce.name=Hojas de Pícea
+tile.leaves.Sycamore.name=Hojas de Sicomoro
+tile.leaves.White Cedar.name=Hojas de Cedro Blanco
+tile.leaves.White Elm.name=Hojas de Olmo Blanco
+tile.leaves.Willow.name=Hojas de Sauce
 
-tile.wood2.Acacia.name=
+tile.wood2.Acacia.name=Tablas de Acacia
 tile.wood.Ash.name=Tablas de Fresno
 tile.wood.Aspen.name=Tablas de Álamo
 tile.wood.Birch.name=Tablas de Abedul
@@ -1099,11 +1099,11 @@ tile.wood.White Cedar.name=Tablas de Cedro Blanco
 tile.wood.White Elm.name=Tablas de Olmo Blanco
 tile.wood.Willow.name=Tablas de Sauce
 
-tile.fruitTreeWood.name=
-tile.fruitTreeLeaves.name=
-tile.fruitTreeLeaves2.name=
+tile.fruitTreeWood.name=Árbol Frutal
+tile.fruitTreeLeaves.name=Hojas de Árbol Frutal
+tile.fruitTreeLeaves2.name=Hojas de Árbol Frutal
 
-tile.Door Acacia.name=
+tile.Door Acacia.name=Puerta de Acacia
 tile.Door Ash.name=Puerta de Fresno
 tile.Door Aspen.name=Puerta de Álamo
 tile.Door Birch.name=Puerta de Abedul
@@ -1121,7 +1121,7 @@ tile.Door White Cedar.name=Puerta de Cedro Blanco
 tile.Door White Elm.name=Puerta de Olmo Blanco
 tile.Door Willow.name=Puerta de Sauce
 
-tile.Barrel.Acacia.name=
+tile.Barrel.Acacia.name=Barril de Acacia
 tile.Barrel.Ash.name=Barril de Fresno
 tile.Barrel.Aspen.name=Barril de Álamo
 tile.Barrel.Birch.name=Barril de Abedul
@@ -1139,116 +1139,116 @@ tile.Barrel.White Cedar.name=Barril de Cedro Blanco
 tile.Barrel.White Elm.name=Barril de Olmo Blanco
 tile.Barrel.Willow.name=Barril de Sauce
 
-tile.Loom.Acacia.name=
-tile.Loom.Ash.name=
-tile.Loom.Aspen.name=
-tile.Loom.Birch.name=
-tile.Loom.Chestnut.name=
-tile.Loom.Douglas Fir.name=
-tile.Loom.Hickory.name=
-tile.Loom.Kapok.name=
-tile.Loom.Maple.name=
-tile.Loom.Oak.name=
-tile.Loom.Pine.name=
-tile.Loom.Sequoia.name=
-tile.Loom.Spruce.name=
-tile.Loom.Sycamore.name=
-tile.Loom.White Cedar.name=
-tile.Loom.White Elm.name=
-tile.Loom.Willow.name=
+tile.Loom.Acacia.name=Telar de Acacia
+tile.Loom.Ash.name=Telar de Fresno
+tile.Loom.Aspen.name=Telar de Álamo
+tile.Loom.Birch.name=Telar de Abedul
+tile.Loom.Chestnut.name=Telar de Castaño
+tile.Loom.Douglas Fir.name=Telar de Abeto
+tile.Loom.Hickory.name=Telar de Nogal
+tile.Loom.Kapok.name=Telar de Capoc
+tile.Loom.Maple.name=Telar de Arce
+tile.Loom.Oak.name=Telar de Roble
+tile.Loom.Pine.name=Telar de Pino
+tile.Loom.Sequoia.name=Telar de Secuoya
+tile.Loom.Spruce.name=Telar de Picea
+tile.Loom.Sycamore.name=Telar de Sicomoro
+tile.Loom.White Cedar.name=Telar de Cedro Blanco
+tile.Loom.White Elm.name=Telar de Olmo Blanco
+tile.Loom.Willow.name=Telar de Sauce
 
-tile.FenceTFC.Acacia.name=
-tile.FenceTFC.Ash.name=
-tile.FenceTFC.Aspen.name=
-tile.FenceTFC.Birch.name=
-tile.FenceTFC.Chestnut.name=
-tile.FenceTFC.Douglas Fir.name=
-tile.FenceTFC.Hickory.name=
-tile.FenceTFC.Kapok.name=
-tile.FenceTFC.Maple.name=
-tile.FenceTFC.Oak.name=
-tile.FenceTFC.Pine.name=
-tile.FenceTFC.Sequoia.name=
-tile.FenceTFC.Spruce.name=
-tile.FenceTFC.Sycamore.name=
-tile.FenceTFC.White Cedar.name=
-tile.FenceTFC.White Elm.name=
-tile.FenceTFC.Willow.name=
+tile.FenceTFC.Acacia.name=Valla de Acacia
+tile.FenceTFC.Ash.name=Valla de Fresno
+tile.FenceTFC.Aspen.name=Valla de Álamo
+tile.FenceTFC.Birch.name=Valla de Abedul
+tile.FenceTFC.Chestnut.name=Valla de Castaño
+tile.FenceTFC.Douglas Fir.name=Valla de Abeto
+tile.FenceTFC.Hickory.name=Valla de Nogal
+tile.FenceTFC.Kapok.name=Valla de Capoc
+tile.FenceTFC.Maple.name=Valla de Arce
+tile.FenceTFC.Oak.name=Valla de Roble
+tile.FenceTFC.Pine.name=Valla de Pino
+tile.FenceTFC.Sequoia.name=Valla de Secuoya
+tile.FenceTFC.Spruce.name=Valla de Picea
+tile.FenceTFC.Sycamore.name=Valla de Sicomoro
+tile.FenceTFC.White Cedar.name=Valla de Cedro Blanco
+tile.FenceTFC.White Elm.name=Valla de Olmo Blanco
+tile.FenceTFC.Willow.name=Valla de Sauce
 
-tile.FenceGateTFC.Acacia.name=
-tile.FenceGateTFC.Ash.name=
-tile.FenceGateTFC.Aspen.name=
-tile.FenceGateTFC.Birch.name=
-tile.FenceGateTFC.Chestnut.name=
-tile.FenceGateTFC.Douglas Fir.name=
-tile.FenceGateTFC.Hickory.name=
-tile.FenceGateTFC.Kapok.name=
-tile.FenceGateTFC.Maple.name=
-tile.FenceGateTFC.Oak.name=
-tile.FenceGateTFC.Pine.name=
-tile.FenceGateTFC.Sequoia.name=
-tile.FenceGateTFC.Spruce.name=
-tile.FenceGateTFC.Sycamore.name=
-tile.FenceGateTFC.White Cedar.name=
-tile.FenceGateTFC.White Elm.name=
-tile.FenceGateTFC.Willow.name=
+tile.FenceGateTFC.Acacia.name=Puerta de valla de Acacia
+tile.FenceGateTFC.Ash.name=Puerta de valla de Fresno
+tile.FenceGateTFC.Aspen.name=Puerta de valla de Álamo
+tile.FenceGateTFC.Birch.name=Puerta de valla de Abedul
+tile.FenceGateTFC.Chestnut.name=Puerta de valla de Castaño
+tile.FenceGateTFC.Douglas Fir.name=Puerta de valla de Abeto
+tile.FenceGateTFC.Hickory.name=Puerta de valla de Nogal
+tile.FenceGateTFC.Kapok.name=Puerta de valla de Capoc
+tile.FenceGateTFC.Maple.name=Puerta de valla de Arce
+tile.FenceGateTFC.Oak.name=Puerta de valla de Roble
+tile.FenceGateTFC.Pine.name=Puerta de valla de Pino
+tile.FenceGateTFC.Sequoia.name=Puerta de valla de Secuoya
+tile.FenceGateTFC.Spruce.name=Puerta de valla de Picea
+tile.FenceGateTFC.Sycamore.name=Puerta de valla de Sicomoro
+tile.FenceGateTFC.White Cedar.name=Puerta de valla de Cedro Blanco
+tile.FenceGateTFC.White Elm.name=Puerta de valla de Olmo Blanco
+tile.FenceGateTFC.Willow.name=Puerta de valla de Sauce
 
-tile.ArmourStand.Acacia.name=
-tile.ArmourStand.Ash.name=
-tile.ArmourStand.Aspen.name=
-tile.ArmourStand.Birch.name=
-tile.ArmourStand.Chestnut.name=
-tile.ArmourStand.Douglas Fir.name=
-tile.ArmourStand.Hickory.name=
-tile.ArmourStand.Kapok.name=
-tile.ArmourStand.Maple.name=
-tile.ArmourStand.Oak.name=
-tile.ArmourStand.Pine.name=
-tile.ArmourStand.Sequoia.name=
-tile.ArmourStand.Spruce.name=
-tile.ArmourStand.Sycamore.name=
-tile.ArmourStand.White Cedar.name=
-tile.ArmourStand.White Elm.name=
-tile.ArmourStand.Willow.name=
+tile.ArmourStand.Acacia.name=Soporte para armadura de Acacia
+tile.ArmourStand.Ash.name=Soporte para armadura de Fresno
+tile.ArmourStand.Aspen.name=Soporte para armadura de Álamo
+tile.ArmourStand.Birch.name=Soporte para armadura de Abedul
+tile.ArmourStand.Chestnut.name=Soporte para armadura de Castaño
+tile.ArmourStand.Douglas Fir.name=Soporte para armadura de Abeto
+tile.ArmourStand.Hickory.name=Soporte para armadura de Nogal
+tile.ArmourStand.Kapok.name=Soporte para armadura de Capoc
+tile.ArmourStand.Maple.name=Soporte para armadura de Arce
+tile.ArmourStand.Oak.name=Soporte para armadura de Roble
+tile.ArmourStand.Pine.name=Soporte para armadura de Pino
+tile.ArmourStand.Sequoia.name=Soporte para armadura de Secuoya
+tile.ArmourStand.Spruce.name=Soporte para armadura de Picea
+tile.ArmourStand.Sycamore.name=Soporte para armadura de Sicomoro
+tile.ArmourStand.White Cedar.name=Soporte para armadura de Cedro Blanco
+tile.ArmourStand.White Elm.name=Soporte para armadura de Olmo Blanco
+tile.ArmourStand.Willow.name=Soporte para armadura de Sauce
 
-tile.WoodSupportV2.Acacia.name=
-tile.WoodSupportV.Ash.name=
-tile.WoodSupportV.Aspen.name=
-tile.WoodSupportV.Birch.name=
-tile.WoodSupportV.Chestnut.name=
-tile.WoodSupportV.Douglas Fir.name=
-tile.WoodSupportV.Hickory.name=
-tile.WoodSupportV.Kapok.name=
-tile.WoodSupportV.Maple.name=
-tile.WoodSupportV.Oak.name=
-tile.WoodSupportV.Pine.name=
-tile.WoodSupportV.Sequoia.name=
-tile.WoodSupportV.Spruce.name=
-tile.WoodSupportV.Sycamore.name=
-tile.WoodSupportV.White Cedar.name=
-tile.WoodSupportV.White Elm.name=
-tile.WoodSupportV.Willow.name=
+tile.WoodSupportV2.Acacia.name=Soporte de Acacia
+tile.WoodSupportV.Ash.name=Soporte de Fresno
+tile.WoodSupportV.Aspen.name=Soporte de Álamo
+tile.WoodSupportV.Birch.name=Soporte de Abedul
+tile.WoodSupportV.Chestnut.name=Soporte de Castaño
+tile.WoodSupportV.Douglas Fir.name=Soporte de Abeto
+tile.WoodSupportV.Hickory.name=Soporte de Nogal
+tile.WoodSupportV.Kapok.name=Soporte de Capoc
+tile.WoodSupportV.Maple.name=Soporte de Arce
+tile.WoodSupportV.Oak.name=Soporte de Roble
+tile.WoodSupportV.Pine.name=Soporte de Pino
+tile.WoodSupportV.Sequoia.name=Soporte de Secuoya
+tile.WoodSupportV.Spruce.name=Soporte de Picea
+tile.WoodSupportV.Sycamore.name=Soporte de Sicomoro
+tile.WoodSupportV.White Cedar.name=Soporte de Cedro Blanco
+tile.WoodSupportV.White Elm.name=Soporte de Olmo Blanco
+tile.WoodSupportV.Willow.name=Soporte de Sauce
 
-tile.WoodSupportH2.name=
-tile.WoodSupportH2.Acacia.name=
-tile.WoodSupportH.Ash.name=
-tile.WoodSupportH.Aspen.name=
-tile.WoodSupportH.Birch.name=
-tile.WoodSupportH.Chestnut.name=
-tile.WoodSupportH.Douglas Fir.name=
-tile.WoodSupportH.Hickory.name=
-tile.WoodSupportH.Kapok.name=
-tile.WoodSupportH.Maple.name=
-tile.WoodSupportH.Oak.name=
-tile.WoodSupportH.Pine.name=
-tile.WoodSupportH.Sequoia.name=
-tile.WoodSupportH.Spruce.name=
-tile.WoodSupportH.Sycamore.name=
-tile.WoodSupportH.White Cedar.name=
-tile.WoodSupportH.White Elm.name=
-tile.WoodSupportH.Willow.name=
+tile.WoodSupportH2.name=Soporte de Madera
+tile.WoodSupportH2.Acacia.name=Soporte de Acacia
+tile.WoodSupportH.Ash.name=Soporte de Fresno
+tile.WoodSupportH.Aspen.name=Soporte de Álamo
+tile.WoodSupportH.Birch.name=Soporte de Abedul
+tile.WoodSupportH.Chestnut.name=Soporte de Castaño
+tile.WoodSupportH.Douglas Fir.name=Soporte de Abeto
+tile.WoodSupportH.Hickory.name=Soporte de Nogal
+tile.WoodSupportH.Kapok.name=Soporte de Capoc
+tile.WoodSupportH.Maple.name=Soporte de Arce
+tile.WoodSupportH.Oak.name=Soporte de Roble
+tile.WoodSupportH.Pine.name=Soporte de Pino
+tile.WoodSupportH.Sequoia.name=Soporte de Secuoya
+tile.WoodSupportH.Spruce.name=Soporte de Picea
+tile.WoodSupportH.Sycamore.name=Soporte de Sicomoro
+tile.WoodSupportH.White Cedar.name=Soporte de Cedro Blanco
+tile.WoodSupportH.White Elm.name=Soporte de Olmo Blanco
+tile.WoodSupportH.Willow.name=Soporte de Sauce
 
-tile.Toolrack.Acacia.name=
+tile.Toolrack.Acacia.name=Estante para Herramientas de Acacia
 tile.Toolrack.Ash.name=Estante para Herramientas de Fresno
 tile.Toolrack.Aspen.name=Estante para Herramientas de Álamo
 tile.Toolrack.Birch.name=Estante para Herramientas de Abedul
@@ -1648,7 +1648,7 @@ item.Copper Helmet.name=Casco de Cobre
 item.Red Steel Helmet.name=Casco de Acero Rojo
 item.Steel Helmet.name=Casco de Acero
 item.Wrought Iron Helmet.name=Casco de Hierro Forjado
-item.helmetCloth.name=
+item.helmetCloth.name=Casco de Cuero
 
 #=== Chestplate ===
 item.Bismuth Bronze Unfinished Chestplate.name=Peto sin Terminar de Bronce de Bismuto
@@ -1669,7 +1669,7 @@ item.Copper Chestplate.name=Peto de Cobre
 item.Red Steel Chestplate.name=Peto de Acero Rojo
 item.Steel Chestplate.name=Peto de Acero
 item.Wrought Iron Chestplate.name=Peto de Hierro Forjado
-item.chestplateCloth.name=
+item.chestplateCloth.name=Peto de Cuero
 
 #=== Greaves ===
 item.Bismuth Bronze Unfinished Greaves.name=Grebas sin Terminar de Bronce de Bismuto
@@ -1690,7 +1690,7 @@ item.Copper Greaves.name=Grebas de Cobre
 item.Red Steel Greaves.name=Grebas de Acero Rojo
 item.Steel Greaves.name=Grebas de Acero
 item.Wrought Iron Greaves.name=Grebas de Hierro Forjado
-item.leggingsCloth.name=
+item.leggingsCloth.name=Grebas de Cuero
 
 #=== Boots ===
 item.Bismuth Bronze Unfinished Boots.name=Botas sin Terminar de Bronce de Bismuto
@@ -1711,14 +1711,14 @@ item.Copper Boots.name=Botas Cobre
 item.Red Steel Boots.name=Botas Acero Rojo
 item.Steel Boots.name=Botas Acero
 item.Wrought Iron Boots.name=Botas Hierro Forjado
-item.bootsCloth.name=
+item.bootsCloth.name=Botas de Cuero
 
 #==========
 #= Metals =
 #==========
-item.Iron Bloom.name=Hierro esponja refinado
-item.Raw Iron Bloom.name=Hierro esponja bruto
-tile.Bloom.name=
+item.Iron Bloom.name=Hierro de forja refinado
+item.Raw Iron Bloom.name=Hierro de forja bruto
+tile.Bloom.name=Hierro de forja
 
 #== Unshaped ==
 item.Bismuth Bronze Unshaped.name=Bronce de Bismuto Sin Trabajar
@@ -1858,21 +1858,21 @@ item.Blueprint=Prototipo
 #= Devices =
 #===========
 tile.Bellows.name=Fuelle
-tile.Forge.name=Forja
+tile.Forge.name=Fragua
 tile.BlastFurnace.name=Alto horno
 tile.SpawnMeter.name=Medidor de Protección
 tile.Quern.name=Base de Molinillo
 tile.EarlyBloomery.name=Forja catalana
-tile.Molten.name=
+tile.Molten.name=Mena fundida
 tile.Crucible.name=Crisol
-tile.NestBox.name=
+tile.NestBox.name=Nidal
 item.SluiceItem.name=Esclusa
 tile.Sluice.name=Esclusa
-tile.LeatherRack.name=
-tile.FoodPrep.name=
-tile.MetalSheet.name=
-tile.ingotpile.name=
-tile.SmokeRack.name=
+tile.LeatherRack.name=Soporte para curtir
+tile.FoodPrep.name=Encimera
+tile.MetalSheet.name=Lámina de metal
+tile.ingotpile.name=Lingotes apilados
+tile.SmokeRack.name=Cuerda de ahumar
 
 #== Anvils ==
 tile.Anvil.Stone.name=Yunque Piedra
@@ -1900,8 +1900,8 @@ tile.ClayGrass.name=Hierba de Arcilla
 tile.dirt.name=Tierra
 tile.sand.name=Arena
 tile.Peat.name=Turba
-tile.tilledSoil.name=
-tile.LooseRock.name=
+tile.tilledSoil.name=Tierra de cultivo
+tile.LooseRock.name=Rocalla
 tile.Ice.name=Hielo
 
 #=================
@@ -1913,18 +1913,18 @@ item.book.name=Libro
 item.stick.name=Palo
 item.coal.coal.name=Carbón
 item.coal.charcoal.name=Carbón Vegetal
-item.Fertilizer.name=
-item.Reeds.name=
+item.Fertilizer.name=Fretilizante
+item.Reeds.name=Juncos
 
 item.Wooden Bucket Empty.name=Cubo de Madera (Vacío)
-item.Wooden Bucket Water.name=
-item.Wooden Bucket Salt Water.name=
+item.Wooden Bucket Water.name=Cubo de Madera (Agua)
+item.Wooden Bucket Salt Water.name=Cubo de Madera (Agua Salada)
 item.Wooden Bucket Milk.name=Cubo de Madera (Leche)
 item.Lime Water.name=Agua de Cal
 
 item.Red Steel Bucket Empty.name=Cubo de Acero Rojo (Vacío)
 item.Red Steel Bucket Water.name=Cubo de Acero Rojo (Agua)
-item.Red Steel Bucket Salt Water.name=
+item.Red Steel Bucket Salt Water.name=Cubo de Acero Rojo (Agua Salada)
 item.Blue Steel Bucket Empty.name=Cubo de Acero Azul (Vacío)
 item.Blue Steel Bucket Lava.name=Cubo de Acero Azul (Lava)
 
@@ -1938,103 +1938,103 @@ item.Firestarter.name=Encendedor
 
 item.Quern.name=Piedra de moler
 item.Blueprint.name=Prototipo
-item.Nametag.name=
+item.Nametag.name=Etiqueta
 item.WoolYarn.name=Hilo de Lana
 item.Wool.name=Lana
 item.WoolCloth.name=Tela de Lana
-item.SilkCloth.name=
-item.BurlapCloth.name=
+item.SilkCloth.name=Paño de Seda
+item.BurlapCloth.name=Tela de Arpillera
 item.Mortar.name=Mortero
 item.Vinegar.name=Vinagre
 
-item.Hide.small.name=Cuero Crudo
-item.Hide.medium.name=
-item.Hide.large.name=
-item.Soaked Hide.small.name=Cuero Empapado
-item.Soaked Hide.medium.name=
-item.Soaked Hide.large.name=
-item.Scraped Hide.small.name=Cuero Raspado
-item.Scraped Hide.medium.name=
-item.Scraped Hide.large.name=
-item.Prep Hide.small.name=Cuero Curado
-item.Prep Hide.medium.name=
-item.Prep Hide.large.name=
-item.Sheep Skin.small.name=
-item.Sheep Skin.medium.name=
-item.Sheep Skin.large.name=
+item.Hide.small.name=Cuero Crudo (Pequeño)
+item.Hide.medium.name=Cuero Crudo (Mediano)
+item.Hide.large.name=Cuero Crudo (Grande)
+item.Soaked Hide.small.name=Cuero Remojado (Pequeño)
+item.Soaked Hide.medium.name=Cuero Remojado (Mediano)
+item.Soaked Hide.large.name=Cuero Remojado (Grande)
+item.Scraped Hide.small.name=Cuero Raspado (Pequeño)
+item.Scraped Hide.medium.name=Cuero Raspado (Mediano)
+item.Scraped Hide.large.name=Cuero Raspado (Grande)
+item.Prep Hide.small.name=Cuero Curtido (Pequeño)
+item.Prep Hide.medium.name=Cuero Curtido (Mediano)
+item.Prep Hide.large.name=Cuero Curtido (Grande)
+item.Sheep Skin.small.name=Vellón (Pequeño)
+item.Sheep Skin.medium.name=Vellón (Mediano)
+item.Sheep Skin.large.name=Vellón (Grande)
 item.TFC Leather.name=Cuero
-item.Flat Leather.name=Cuero Lizo
+item.Flat Leather.name=Cuero Liso
 item.leather.name=Cuero
 
 item.minecartChest.name=Vagoneta con Cofre
 item.fishingRod.name=Caña de pescar
 
-item.Quiver.name=
-item.Rope.name=
-item.Mud Brick.name=
-item.Wet Mud Brick.name=
+item.Quiver.name=Carcaj
+item.Rope.name=Soga
+item.Mud Brick.name=Adobe
+item.Wet Mud Brick.name=Adobe Húmedo
 
 #======== Misc. Blocks========
-tile.Straw Hide Bed.name=
-tile.StrawHideBed.name=
-tile.customBed.sleep=
-tile.BasicPipe.name=
-tile.ValvePipe.name=
-tile.Smoke.name=
+tile.Straw Hide Bed.name=Lecho de paja
+tile.StrawHideBed.name=Lecho de paja
+tile.customBed.sleep=Este lecho es muy incómodo para dormirse.
+tile.BasicPipe.name=Tubería
+tile.ValvePipe.name=Válvula de tubería
+tile.Smoke.name=Humo
 tile.Torch.name=Antorcha
 tile.Chest.name=Cofre
 tile.Bookshelf.name=Librería
 tile.Workbench.name=Mesa de trabajo
-tile.ButtonWood.name=
-tile.Firepit.name=
-tile.LogPile.name=
-tile.Charcoal.name=
-tile.StoneDetailed.name=
-tile.stoneStairs.name=
-tile.stoneSlabs.name=
-tile.stoneStalac.name=
-tile.WoodConstruct.name=
-tile.MetalTrapDoor.name=
-tile.Vessel.name=
-tile.Grill.name=
+tile.ButtonWood.name=Botón de madera
+tile.Firepit.name=Lumbre
+tile.LogPile.name=Leña apilada
+tile.Charcoal.name=Carbón vegetal
+tile.StoneDetailed.name=Detallada
+tile.stoneStairs.name=Escaleras
+tile.stoneSlabs.name=Losa
+tile.stoneStalac.name=Estalactita
+tile.WoodConstruct.name=Madero
+tile.MetalTrapDoor.name=Trampilla de metal
+tile.Vessel.name=Vasija
+tile.Grill.name=Parrilla
 
 tile.Sulfur.name=Azufre
-tile.Reeds.name=
+tile.Reeds.name=Juncos
 
 #= Misc. Plants =
 item.Sugarcane.name=Caña de Azúcar
 item.Hemp.name=Cáñamo
 item.Straw.name=Paja
-item.Jute.name=
-item.Jute Fibre.name=
+item.Jute.name=Yute
+item.Jute Fibre.name=Fibra de Yute
 
 tile.Fungi.mushroom_brown.name=Champiñón
-tile.Fungi.mushroom_red.name=
+tile.Fungi.mushroom_red.name=Amanita
 tile.Cactus.name=Cactus
 tile.Pumpkin.name=Calabaza
 tile.Moss.name=Musgo
 tile.Thatch.name=Techo de paja
-tile.Flora.Golden Rod.name=
-tile.Flora.Cat Tails.name=
+tile.Flora.Golden Rod.name=Vara de Oro
+tile.Flora.Cat Tails.name=Espadañas
 
 item.Seeds Sugarcane.name=Semillas de Caña de azúcar
 item.Seeds Hemp.name=Semillas de Cáñamo
-item.Seeds Jute.name=
+item.Seeds Jute.name=Semillas de Yute
 
-tile.TallGrass.tallgrass.name=Hierba
+tile.TallGrass.tallgrass.name=Hierba alta
 tile.TallGrass.fern.name=Helecho
-tile.TallGrass.shortgrass.name=
+tile.TallGrass.shortgrass.name=Hierba
 tile.LilyPad.name=Nenúfar
 tile.Vine.name=Enredadera
-tile.SeaGrassStill.name=
-tile.SeaGrassIce.name=
+tile.SeaGrassStill.name=Posidonia
+tile.SeaGrassIce.name=Posidonia congelada
 
-tile.Flowers.flower_nasturtium.name=
+tile.Flowers.flower_nasturtium.name=Capuchina
 tile.Flowers.flower_dandelion.name=Diente de león
-tile.Flowers.flower_meads_milkweed.name=
-tile.Flowers.flower_tropical_milkweed.name=
-tile.Flowers.flower_butterfly_milkweed.name=
-tile.Flowers.flower_calendula.name=
+tile.Flowers.flower_meads_milkweed.name=Algodoncillo
+tile.Flowers.flower_tropical_milkweed.name=Flor de Sangre
+tile.Flowers.flower_butterfly_milkweed.name=Algodoncillo mariposa
+tile.Flowers.flower_calendula.name=Caléndula
 tile.Flowers2.flower_rose.name=Amapola
 tile.Flowers2.flower_blue_orchid.name=Orquídea azul
 tile.Flowers2.flower_allium.name=Allium
@@ -2045,14 +2045,14 @@ tile.Flowers2.flower_tulip_white.name=Tulipán blanco
 tile.Flowers2.flower_tulip_pink.name=Tulipán rosa
 tile.Flowers2.flower_oxeye_daisy.name=Margarita
 
-tile.SaltWater.name=
-tile.SaltWaterStationary.name=
-tile.FreshWater.name=
-tile.FreshWaterStationary.name=
-tile.HotWater.name=
-tile.HotWaterStationary.name=
-tile.Lava.name=
-tile.LavaStationary.name=
+tile.SaltWater.name=Corriente de Agua Salada
+tile.SaltWaterStationary.name=Agua Salada
+tile.FreshWater.name=Corriente de Agua Dulce
+tile.FreshWaterStationary.name=Agua Dulce
+tile.HotWater.name=Corriente de Aguas Termales
+tile.HotWaterStationary.name=Aguas Termales
+tile.Lava.name=Río de Lava
+tile.LavaStationary.name=Lava
 
 #=======
 #= GUI =
@@ -2060,7 +2060,7 @@ tile.LavaStationary.name=
 gui.badnbt=
 
 #== Anvil GUI ==
-gui.Anvil.Plans=
+gui.Anvil.Plans=Plantillas
 gui.Anvil.Weld=Soldar
 
 gui.Anvil.LightHit=Golpe Liviano
@@ -2068,52 +2068,52 @@ gui.Anvil.MediumHit=Golpe Medio
 gui.Anvil.HeavyHit=Golpe Pesado
 gui.Anvil.Draw=Trazar
 
-gui.Anvil.Punch=Ponchar
+gui.Anvil.Punch=Punzar
 gui.Anvil.Bend=Doblar
 gui.Anvil.Upset=Alterar
-gui.Anvil.Shrink=Enocoger
+gui.Anvil.Shrink=Encoger
 
 gui.Anvil.Rules=Reglas
 gui.Anvil.Rule1=Cualquiera
 gui.Anvil.Rule2=Golpear, cualquiera
 gui.Anvil.Rule3=Golpear, último
-gui.Anvil.Rule4=Golpear, segundo luego del último
-gui.Anvil.Rule5=Golpear, tercero luego del último
+gui.Anvil.Rule4=Golpear, penúltimo
+gui.Anvil.Rule5=Golpear, antepenúltimo
 gui.Anvil.Rule6=Golpear, dos últimos
 gui.Anvil.Rule7=Golpear, tres últimos
 gui.Anvil.Rule8=Golpear, no último.
-gui.Anvil.Rule9=Ponchar, cualquiera
-gui.Anvil.Rule10=Ponchar, último
-gui.Anvil.Rule11=Ponchar, segundo luego del último
-gui.Anvil.Rule12=Ponchar, tercero luego del último
-gui.Anvil.Rule13=Ponchar, dos últimos
-gui.Anvil.Rule14=Ponchar, tres últimos
-gui.Anvil.Rule15=Ponchar, no último
+gui.Anvil.Rule9=Punzar, cualquiera
+gui.Anvil.Rule10=Punzar, último
+gui.Anvil.Rule11=Punzar, penúltimo
+gui.Anvil.Rule12=Punzar, antepenúltimo
+gui.Anvil.Rule13=Punzar, dos últimos
+gui.Anvil.Rule14=Punzar, tres últimos
+gui.Anvil.Rule15=Punzar, no último
 gui.Anvil.Rule16=Encoger, cualquiera
 gui.Anvil.Rule17=Encoger, último
-gui.Anvil.Rule18=Encoger, segundo luego del último
-gui.Anvil.Rule19=Encoger, tercero luego del último
+gui.Anvil.Rule18=Encoger, penúltimo
+gui.Anvil.Rule19=Encoger, antepenúltimo
 gui.Anvil.Rule20=Encoger, dos últimos
 gui.Anvil.Rule21=Encoger, tres últimos
 gui.Anvil.Rule22=Encoger, no último
 gui.Anvil.Rule23=Trazar, cualquiera
 gui.Anvil.Rule24=Trazar, último
-gui.Anvil.Rule25=Trazar, segundo luego del último
-gui.Anvil.Rule26=Trazar, tercero luego del último
+gui.Anvil.Rule25=Trazar, penúltimo
+gui.Anvil.Rule26=Trazar, antepenúltimo
 gui.Anvil.Rule27=Trazar, dos últimos
 gui.Anvil.Rule28=Trazar, tres últimos
 gui.Anvil.Rule29=Trazar, no último
 gui.Anvil.Rule30=Alterar, cualquiera
 gui.Anvil.Rule31=Alterar, último
-gui.Anvil.Rule32=Alterar, segundo luego del último
-gui.Anvil.Rule33=Alterar, tercero luego del último
+gui.Anvil.Rule32=Alterar, penúltimo
+gui.Anvil.Rule33=Alterar, antepenúltimo
 gui.Anvil.Rule34=Alterar, dos últimos
 gui.Anvil.Rule35=Alterar, tres últimos
 gui.Anvil.Rule36=Alterar, no último
 gui.Anvil.Rule37=Doblar, cualquiera
 gui.Anvil.Rule38=Doblar, último
-gui.Anvil.Rule39=Doblar, segundo luego del último
-gui.Anvil.Rule40=Doblar, tercero luego del último
+gui.Anvil.Rule39=Doblar, penúltimo
+gui.Anvil.Rule40=Doblar, antepenúltimo
 gui.Anvil.Rule41=Doblar, dos últimos
 gui.Anvil.Rule42=Doblar, tres últimos
 gui.Anvil.Rule43=Doblar, no último
@@ -2131,9 +2131,9 @@ word.stage1=Fase 1
 word.stage2=Fase 2
 
 gui.Bow.Advanced=
-gui.Bow.Javelins=
+gui.Bow.Javelins=Javalina
 gui.Bow.Arrows=Flecha
-gui.Bow.ForgedBy=
+gui.Bow.ForgedBy=Forjada por
 
 gui.DamageType.Error=Error: Tipo de Daño Inadecuado
 gui.DamageType.Crushing=Aplastar
@@ -2143,15 +2143,15 @@ gui.DamageType.Slashing=Cortar
 #== Barrel GUI ==
 gui.Barrel.Empty=Vaciar
 gui.Barrel.Seal=Cerrar
-gui.Barrel.Unseal=
-gui.Barrel.ToggleOff=
-gui.Barrel.ToggleOn=
-gui.Barrel.SealedOn=
-gui.Barrel.Solid=
-gui.Barrel.Liquid=
-gui.barrel.pickling=
-gui.barrel.brining=
-gui.barrel.preserving=
+gui.Barrel.Unseal=Abrir
+gui.Barrel.ToggleOff=Salida
+gui.Barrel.ToggleOn=Entrada
+gui.Barrel.SealedOn=Cerrado el
+gui.Barrel.Solid=Sólidos
+gui.Barrel.Liquid=Líquidos
+gui.barrel.pickling=Encurtiendo
+gui.barrel.brining=Poniendo en Salmuera
+gui.barrel.preserving=Conservando
 
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Carbón Vegetal
@@ -2162,7 +2162,7 @@ gui.Bloomery.Output=Salida
 gui.Calendar.Calendar=Calendario
 gui.Calendar.DateBioxx=Fecha: ¡Cumpleaños de Bioxx!
 gui.Calendar.DateDunk=Fecha: ¡Cumpleaños de Dunk!
-gui.Calendar.DateKitty=
+gui.Calendar.DateKitty=Fecha: ¡Cumpleaños de Kitty!
 
 gui.Calendar.Hour=Hora
 gui.Calendar.WitchHour=La Hora de las Brujas
@@ -2211,13 +2211,13 @@ gui.Calendar.1Month=1 Mes
 gui.Calendar.1Year=1 Año
 
 #== Food GUI ==
-gui.FoodPrep.CreateMeal=Crear Comida
+gui.FoodPrep.CreateMeal=Cocinar Comida
 gui.FoodPrep.Effect=Efecto
 gui.FoodPrep.Energy=Energía
-gui.FoodPrep.Filling=Llena
+gui.FoodPrep.Filling=Sacia
 gui.FoodPrep.Power=Poder
-gui.FoodPrep.Sandwich=
-gui.FoodPrep.Salad=
+gui.FoodPrep.Sandwich=Bocadillo
+gui.FoodPrep.Salad=Ensalada
 
 #== Metals ==
 gui.metal.Bismuth=Bismuto
@@ -2265,50 +2265,50 @@ gui.plans.legsplate=Grebas
 gui.plans.mace=Maza
 gui.plans.pickaxe=Pico
 gui.plans.propick=Pico de Prospector
-gui.plans.refinebloom=
+gui.plans.refinebloom=Refinado
 gui.plans.saw=Sierra
 gui.plans.scythe=Guadaña
 gui.plans.sheet=Placa
 gui.plans.shovel=Pala
-gui.plans.splitbloom=
+gui.plans.splitbloom=Partido
 gui.plans.sword=Espada
 gui.plans.tuyere=Tuyere
-gui.plans.grill=
-gui.plans.shears=
-gui.plans.trapdoor=
+gui.plans.grill=Parrilla
+gui.plans.shears=Tijeras
+gui.plans.trapdoor=Trampilla
 
 #== Misc GUI ==
 gui.Blueprint=Prototipo
-gui.Nametag=
-gui.fertilized=
+gui.Nametag=Etiqueta
+gui.fertilized=Abonado
 gui.Inventory=Inventario
 gui.ClearSlot=Limpiar una ranura de salida.
 gui.LogPile=Pila de Madera
 gui.done=Hecho
-gui.cancel=
+gui.cancel=Calcelar
 gui.Sluice.Soil=Suelo
-gui.Sluice.Overworked=
+gui.Sluice.Overworked=Desgastado
 gui.Workbench.Crafting=Elaboración
-gui.overburdened=
-gui.slot=
-gui.slot.back=
+gui.overburdened=*Sobrecargado*
+gui.slot=Hueco
+gui.slot.back=Espalda
 
 #== Tooltips ==
 gui.ShowHelp=§8Ayuda: (Presionar §fShift§8)
 gui.Help=§8Ayuda;
 gui.Clay.Inst0=§bClick Derecho§7 con 5 en una casilla para dar forma
-gui.Knife.Inst0=
-gui.Knife.Inst1=
+gui.Knife.Inst0=§bClick Derecho§7 sobre un bloque que no sea de tierra
+gui.Knife.Inst1=para crear una superficie para preparar comidas.
 gui.Leather.Inst0=§bClick Derecho§7con un cuchillo en su inventario para cortar
 gui.LooseRock.Inst0=§bClick Derecho§7 con 2 en una casilla para pulir.
 gui.MeltedMetal.Inst0=§bClick Derecho§7para verter en un molde de la herramienta.
 gui.PotteryBase.Inst0=Agacharse y §bClick Derecho§7para colocar objeto
 gui.PotteryVesselSmall.Inst0=O §bClick Derecho§7para abrir el inventario
 gui.RawHide.Inst0=
-gui.Barrel.MoreItems=
-gui.Nutrient.A=
-gui.Nutrient.B=
-gui.Nutrient.C=
+gui.Barrel.MoreItems=§8Más... (Presionar §fShift§8)
+gui.Nutrient.A=Nutriente A
+gui.Nutrient.B=Nutriente B
+gui.Nutrient.C=Nutriente C
 
 gui.Size.Tiny=Minúsculo
 gui.Size.VerySmall=Muy Pequeño
@@ -2322,107 +2322,107 @@ gui.Weight.Light=Liviano
 gui.Weight.Medium=Medio
 gui.Weight.Heavy=Pesado
 
-gui.Reach.Short=
-gui.Reach.Medium=
-gui.Reach.Far=
+gui.Reach.Short=Corto alcance
+gui.Reach.Medium=Medio alcance
+gui.Reach.Far=Largo alcance
 
-gui.food.fruit=
-gui.food.vegetable=
-gui.food.grain=
-gui.food.protein=
-gui.food.dairy=
-gui.food.amount=
-gui.food.decay=
-gui.food.salted=
+gui.food.fruit=Fruta
+gui.food.vegetable=Vegetal
+gui.food.grain=Grano
+gui.food.protein=Proteínas
+gui.food.dairy=Lácteos
+gui.food.amount=Cantidad
+gui.food.decay=Deterioro
+gui.food.salted=Salado
 
 gui.FoodHeat.Cold=Frío
 gui.FoodHeat.Warm=Caliente
 
-gui.showtaste=
-gui.taste=
-gui.taste.sweet=
-gui.taste.sour=
-gui.taste.salty=
-gui.taste.bitter=
-gui.taste.savory=
+gui.showtaste=§8Gusto: (Presionar §fCtrl-Izq§8)
+gui.taste=§8Gusto:
+gui.taste.sweet=Dulce
+gui.taste.sour=Ágrio
+gui.taste.salty=Salado
+gui.taste.bitter=Amargo
+gui.taste.savory=Sabroso
 
-gui.taste.novice.sweet1=
-gui.taste.novice.sweet0=
-gui.taste.novice.sour1=
-gui.taste.novice.sour0=
-gui.taste.novice.salty1=
-gui.taste.novice.salty0=
-gui.taste.novice.bitter1=
-gui.taste.novice.bitter0=
-gui.taste.novice.savory1=
-gui.taste.novice.savory0=
+gui.taste.novice.sweet1=Dulce
+gui.taste.novice.sweet0=Para nada Dulce
+gui.taste.novice.sour1=Ágrio
+gui.taste.novice.sour0=Para nada Ágrio
+gui.taste.novice.salty1=Salado
+gui.taste.novice.salty0=Para nada Salado
+gui.taste.novice.bitter1=Amargo
+gui.taste.novice.bitter0=Para nada Amargo
+gui.taste.novice.savory1=Sabroso
+gui.taste.novice.savory0=Para nada Sabroso
 
-gui.taste.adept.sweet0=
-gui.taste.adept.sweet1=
-gui.taste.adept.sweet2=
-gui.taste.adept.sweet3=
-gui.taste.adept.sweet4=
-gui.taste.adept.sweet5=
-gui.taste.adept.sour0=
-gui.taste.adept.sour1=
-gui.taste.adept.sour2=
-gui.taste.adept.sour3=
-gui.taste.adept.sour4=
-gui.taste.adept.sour5=
-gui.taste.adept.salty0=
-gui.taste.adept.salty1=
-gui.taste.adept.salty2=
-gui.taste.adept.salty3=
-gui.taste.adept.salty4=
-gui.taste.adept.salty5=
-gui.taste.adept.bitter0=
-gui.taste.adept.bitter1=
-gui.taste.adept.bitter2=
-gui.taste.adept.bitter3=
-gui.taste.adept.bitter4=
-gui.taste.adept.bitter5=
-gui.taste.adept.savory0=
-gui.taste.adept.savory1=
-gui.taste.adept.savory2=
-gui.taste.adept.savory3=
-gui.taste.adept.savory4=
-gui.taste.adept.savory5=
+gui.taste.adept.sweet0=Para nada Dulce
+gui.taste.adept.sweet1=Medianamente Dulce
+gui.taste.adept.sweet2=Dulce
+gui.taste.adept.sweet3=Bastante Dulce
+gui.taste.adept.sweet4=Muy Dulce
+gui.taste.adept.sweet5=Extremadamente Dulce
+gui.taste.adept.sour0=Para nada Ágrio
+gui.taste.adept.sour1=Medianamente Ágrio
+gui.taste.adept.sour2=Ágrio
+gui.taste.adept.sour3=Bastante Ágrio
+gui.taste.adept.sour4=Muy Ágrio
+gui.taste.adept.sour5=Extremadamente Ágrio
+gui.taste.adept.salty0=Para nada Salado
+gui.taste.adept.salty1=Medianamente Salado
+gui.taste.adept.salty2=Salado
+gui.taste.adept.salty3=Bastante Salado
+gui.taste.adept.salty4=Muy Salado
+gui.taste.adept.salty5=Extremadamente Salado
+gui.taste.adept.bitter0=Para nada Amargo
+gui.taste.adept.bitter1=Medianamente Amargo
+gui.taste.adept.bitter2=Amargo
+gui.taste.adept.bitter3=Bastante Amargo
+gui.taste.adept.bitter4=Muy Amargo
+gui.taste.adept.bitter5=Extremadamente Amargo
+gui.taste.adept.savory0=Para nada Sabroso
+gui.taste.adept.savory1=Medianamente Sabroso
+gui.taste.adept.savory2=Sabroso
+gui.taste.adept.savory3=Bastante Sabroso
+gui.taste.adept.savory4=Muy Sabroso
+gui.taste.adept.savory5=Extremadamente Sabroso
 
-gui.taste.0=
-gui.taste.1=
-gui.taste.2=
-gui.taste.3=
-gui.taste.4=
-gui.taste.5=
-gui.taste.6=
-gui.taste.7=
-gui.taste.8=
+gui.taste.0=Para nada
+gui.taste.1=No muy
+gui.taste.2=Algo
+gui.taste.3=Moderadamente
+gui.taste.4=Perfectamente
+gui.taste.5=Demasiado
+gui.taste.6=Muy
+gui.taste.7=Extremadamente
+gui.taste.8=Ridículamente
 
-word.pickled=
-word.brined=
-word.cooked=
-word.salted=
-word.smoked=
-word.dried=
+word.pickled=Encurtido
+word.brined=Marinado
+word.cooked=Cocinado
+word.salted=Salado
+word.smoked=Ahumado
+word.dried=Seco
 
-food.cooked.rare=
-food.cooked.medrare=
-food.cooked.med=
-food.cooked.medwell=
-food.cooked.well=
-food.cooked.0=
-food.cooked.1=
-food.cooked.2=
-food.cooked.3=
-food.cooked.4=
+food.cooked.rare=Poco hecho
+food.cooked.medrare=Medio hecho
+food.cooked.med=Al punto
+food.cooked.medwell=Pasado
+food.cooked.well=Muy pasado
+food.cooked.0=Crudo
+food.cooked.1=Al dente
+food.cooked.2=Dorado
+food.cooked.3=Tostado
+food.cooked.4=Churruscado
 
-gui.Torch.CatchingFire=Quemado
-gui.Torch.Lit=Ecendido
+gui.Torch.CatchingFire=Prendiendo
+gui.Torch.Lit=Ecendiendo
 
 gui.ItemHeat.Liquid=Líquido
-gui.ItemHeat.Solidified=
-gui.ItemHeat.Caution=Cautela
-gui.ItemHeat.Warming=Calentando
+gui.ItemHeat.Solidified=Sólido
+gui.ItemHeat.Caution=Atención
+gui.ItemHeat.Warming=Templado
 gui.ItemHeat.Hot=Caliente
 gui.ItemHeat.VeryHot=Muy caliente
 gui.ItemHeat.FaintRed=Rojo débil
@@ -2434,54 +2434,55 @@ gui.ItemHeat.YellowWhite=Amarillo brillante
 gui.ItemHeat.White=Blanco
 gui.ItemHeat.BrilliantWhite=Blanco brillante
 
-gui.ingot.workable=
-gui.ingot.weldable=
-gui.ingot.danger=
+gui.ingot.workable=Maleable
+gui.ingot.weldable=Soldable
+gui.ingot.danger=Peligro
 
-gui.milk.fresh=
-gui.milk.old=
-gui.milk.sour=
+gui.milk.fresh=Fresca
+gui.milk.old=Cortada
+gui.milk.sour=Agria
 
-gui.units=
+gui.units=Unidades
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Se debe utilizar en una corriente de agua.
-gui.goldpan.overused=
+gui.goldpan.overused=Esta zona está consumida. No encontrarás gran cosa.
+gui.seeds.failedTemp=Hace demasiado frío para plantar esto, no sobreviviría.
 
-gui.ProPick.Found=Fundar
-gui.ProPick.FoundTraces=Rastros encontrados de
+gui.ProPick.Found=Has encontrado
+gui.ProPick.FoundTraces=Encontrados rastros de
 gui.ProPick.FoundSmall=Encontrada una pequeña muestra de
 gui.ProPick.FoundMedium=Encontrada una muestra mediana de
 gui.ProPick.FoundLarge=Encontrada una muestra grande de
-gui.ProPick.FoundVeryLarge=Encontrada una muetra muy grande de
-gui.ProPick.FoundNothing=No se ha encontrado nada interezante.
+gui.ProPick.FoundVeryLarge=Encontrada una muestra muy grande de
+gui.ProPick.FoundNothing=No se ha encontrado nada interesante.
 
 #== Creative Tabs ==
-itemGroup.TFCArmor=(TFC) Armadura
+itemGroup.TFCArmor=(TFC) Armaduras
 itemGroup.TFCMaterials=(TFC) Materiales
 itemGroup.TFCMisc=(TCF) Miscelánea
 itemGroup.TFCPottery=(TFC) Cerámica
 itemGroup.TFCTools=(TFC) Herramientas
 itemGroup.TFCWeapons=(TFC) Armas
-itemGroup.TFCDevices=
+itemGroup.TFCDevices=(TFC) Dispositivos
 itemGroup.TFCFoods=(TFC) Alimentación
 itemGroup.TFCBuilding=(TFC) Bloques de construcción
 itemGroup.TFCDecoration=(TFC) Bloques de decoración
 
 #== Skill GUI ==
-skill.armorsmith=
-skill.gensmith=
-skill.toolsmith=
-skill.weaponsmith=
-skill.agriculture=
-skill.cooking=
-skill.prospecting=
-skill.butchering=
-gui.skill.novice=
-gui.skill.adept=
-gui.skill.expert=
-gui.skill.master=
-gui.skillpage=
+skill.armorsmith=Forja de armaduras
+skill.gensmith=Herrería
+skill.toolsmith=Forja de herramientas
+skill.weaponsmith=Forja de armas
+skill.agriculture=Agricultura
+skill.cooking=Cocina
+skill.prospecting=Prospección
+skill.butchering=Matarife
+gui.skill.novice=Novato
+gui.skill.adept=Hábil
+gui.skill.expert=Experto
+gui.skill.master=Maestro
+gui.skillpage=Habilidades
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
