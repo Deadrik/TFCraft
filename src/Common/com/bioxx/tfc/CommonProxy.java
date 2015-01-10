@@ -85,6 +85,7 @@ import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
 import com.bioxx.tfc.WorldGen.TFCProvider;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -389,5 +390,11 @@ public class CommonProxy
 	public void registerGuiHandler()
 	{
 		NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaCraft.instance, new GuiHandler());
+	}
+	
+	public void registerWailaClasses()
+	{
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.GUI.WAILA.TFCOre.callbackRegister");
+		
 	}
 }

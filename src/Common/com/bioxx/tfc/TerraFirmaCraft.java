@@ -248,6 +248,9 @@ public class TerraFirmaCraft
 		//This is used by vanilla furnice and many other mods.
 		TFCItems.registerFurniceFuel();
 		GameRegistry.registerFuelHandler(new TFCFuelHandler());
+		
+		//WAILA stuff
+		proxy.registerWailaClasses();
 	}
 
 	@EventHandler
