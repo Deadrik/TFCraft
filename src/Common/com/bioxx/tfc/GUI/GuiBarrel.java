@@ -313,34 +313,52 @@ public class GuiBarrel extends GuiContainerTFC
 				GL11.glColor3f(0, 0, 0);
 			}
 			ItemStack inStack = barrelTE.getStackInSlot(0);
+
+			// Draw Fluid Name
 			if (barrelTE.getFluidStack() != null)
-				drawCenteredString(this.fontRendererObj, barrelTE.fluid.getFluid().getLocalizedName(), guiLeft + 88, guiTop + 7, 0x555555);
+				drawCenteredString(this.fontRendererObj, barrelTE.fluid.getFluid().getLocalizedName(barrelTE.getFluidStack()), guiLeft + 88, guiTop + 7, 0x555555);
+
+			// Draw Seal Date
 			if (barrelTE.sealtime != 0)
 			{
 				drawCenteredString(this.fontRendererObj, TFC_Time.getDateStringFromHours(barrelTE.sealtime), guiLeft + 88, guiTop + 17, 0x555555);
 			}
-			if (barrelTE.recipe != null && !(barrelTE.recipe instanceof BarrelBriningRecipe))
+
+			// Draw Output
+			if (barrelTE.recipe != null)
 			{
-				drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.Output") + ": " + barrelTE.recipe.getRecipeName(), guiLeft + 88, guiTop + 72, 0x555555);
-			}
-			else if (barrelTE.recipe != null && barrelTE.getSealed() && barrelTE.getFluidStack() != null && barrelTE.getFluidStack().getFluid() == TFCFluid.BRINE)
-			{
-				if (barrelTE.getStackInSlot(0) != null && barrelTE.getStackInSlot(0).getItem() instanceof IFood && (((IFood) barrelTE.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Fruit || ((IFood) barrelTE.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Vegetable || ((IFood) barrelTE.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Protein || ((IFood) barrelTE.getStackInSlot(0).getItem()) == TFCItems.Cheese) && !Food.isBrined(inStack))
+				if (!(barrelTE.recipe instanceof BarrelBriningRecipe))
 				{
-					drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.barrel.brining"), guiLeft + 88, guiTop + 72, 0x555555);
+					drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.Output") + ": " + barrelTE.recipe.getRecipeName(), guiLeft + 88, guiTop + 72, 0x555555);
+				}
+				else if (barrelTE.getSealed() && barrelTE.getFluidStack() != null && barrelTE.getFluidStack().getFluid() == TFCFluid.BRINE)
+				{
+					if (inStack != null && inStack.getItem() instanceof IFood && (((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Fruit ||
+							((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein ||
+							((IFood) inStack.getItem()) == TFCItems.Cheese) && !Food.isBrined(inStack))
+					{
+						drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.barrel.brining"), guiLeft + 88, guiTop + 72, 0x555555);
+					}
 				}
 			}
-			else if (inStack != null && barrelTE.recipe == null && barrelTE.getSealed() && barrelTE.getFluidStack() != null && !Food.isPickled(inStack) && Food.getWeight(inStack) / barrelTE.getFluidStack().amount <= Global.FOOD_MAX_WEIGHT / barrelTE.getMaxLiquid() && barrelTE.getFluidStack().getFluid() == TFCFluid.VINEGAR)
+			else if (barrelTE.recipe == null && barrelTE.getSealed() && barrelTE.getFluidStack() != null && inStack != null && inStack.getItem() instanceof IFood &&
+					barrelTE.getFluidStack().getFluid() == TFCFluid.VINEGAR)
 			{
-				if (barrelTE.getStackInSlot(0) != null && inStack.getItem() instanceof IFood && (((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Fruit || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein || ((IFood) inStack.getItem()) == TFCItems.Cheese) && !Food.isPickled(inStack) && Food.isBrined(inStack))
+				if (!Food.isPickled(inStack) && Food.getWeight(inStack) / barrelTE.getFluidStack().amount <= Global.FOOD_MAX_WEIGHT / barrelTE.getMaxLiquid())
 				{
-					drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.barrel.pickling"), guiLeft + 88, guiTop + 72, 0x555555);
+					if ((((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Fruit || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable ||
+							((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein || ((IFood) inStack.getItem()) == TFCItems.Cheese) &&
+							Food.isBrined(inStack))
+					{
+						drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.barrel.pickling"), guiLeft + 88, guiTop + 72, 0x555555);
+					}
+				}
+				else if (Food.isPickled(inStack) && Food.getWeight(inStack) / barrelTE.getFluidStack().amount <= Global.FOOD_MAX_WEIGHT / barrelTE.getMaxLiquid() * 2)
+				{
+					drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.barrel.preserving"), guiLeft + 88, guiTop + 72, 0x555555);
 				}
 			}
-			else if (inStack != null && barrelTE.recipe == null && barrelTE.getSealed() && barrelTE.getFluidStack() != null && Food.isPickled(inStack) && Food.getWeight(inStack) / barrelTE.getFluidStack().amount <= Global.FOOD_MAX_WEIGHT / barrelTE.getMaxLiquid() * 2 && barrelTE.getFluidStack().getFluid() == TFCFluid.VINEGAR)
-			{
-				drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.barrel.preserving"), guiLeft + 88, guiTop + 72, 0x555555);
-			}
+
 		}
 		else if (guiTab == 1)
 		{
