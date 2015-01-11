@@ -55,11 +55,12 @@ item.Jute Fibre.name=Jute Fibre
 itemGroup.TFCArmor=(TFC) Armour
 
 #== Chat Messages ==
-gui.GoldPan.UseEmpty=Sorry, must use on sand in or near a river. Or gravel from under a water source.
 gui.GoldPan.UseFull=Sorry, must use under flowing water.
 gui.goldpan.overused=Sorry, this area seems to be overworked. You probably wouldn't find much.
 
 gui.ProPick.FoundNothing=Sorry, found nothing of interest.
+gui.seeds.failedTemp=Sorry, it's too cold to plant this, it wouldn't survive very long.
+gui.seeds.failedSun=Sorry, there's not enough sunlight to plant this, it wouldn't survive very long.
 
 #== Skill GUI ==
 skill.Armoursmith=Armour Smithing

@@ -54,8 +54,11 @@ public class ItemCustomSeeds extends ItemTerra
 			if ((var8 == TFCBlocks.tilledSoil || var8 == TFCBlocks.tilledSoil2) && world.isAirBlock(x, y + 1, z))
 			{
 				CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
-				if(crop.needsSunlight && !TECrop.hasSunlight(world, x, y+1, z))
+				if (crop.needsSunlight && !TECrop.hasSunlight(world, x, y + 1, z))
+				{
+					player.addChatMessage(new ChatComponentTranslation("gui.seeds.failedSun"));
 					return false;
+				}
 
 				if(TFC_Climate.getHeightAdjustedTemp(world, x, y, z) <= crop.minAliveTemp)
 				{

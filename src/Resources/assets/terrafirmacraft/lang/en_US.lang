@@ -2479,6 +2479,7 @@ gui.metal.Iron=Iron
 gui.GoldPan.UseFull=Must use under flowing water.
 gui.goldpan.overused=This area seems to be overworked. You probably wouldn't find much.
 gui.seeds.failedTemp=It's too cold to plant this, it wouldn't survive very long.
+gui.seeds.failedSun=There's not enough sunlight to plant this, it wouldn't survive very long.
 
 gui.ProPick.Found=Found
 gui.ProPick.FoundTraces=Found traces of
