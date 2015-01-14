@@ -6,7 +6,9 @@
 
 
 generator.TFCDefault=TFC Standard
-generator.TFCFlat=TFC Plat
+generator.TFCFlat=
+generator.TFCAmplified=
+generator.TFCLargeBiomes=
 
 key.ToolMode=Schimbă modul instrumentului
 key.LockTool=Blochează poziția instrumentului
@@ -114,6 +116,7 @@ fluid.whiskey=Whisky
 fluid.cornwhiskey=Whisky de porumb
 fluid.milk=Lapte
 fluid.milkcurdled=Lapte prins
+fluid.milkvinegar=
 fluid.limewater=Var
 fluid.tannin=Tanin
 fluid.vinegar=Oțet
@@ -990,6 +993,24 @@ item.Loom.White Elm.name=Război de țesut de ulm
 item.Loom.Willow.name=Război de țesut de salcie
 
 #== Wood Blocks ==
+tile.Chest.Acacia.name=
+tile.Chest.Ash.name=
+tile.Chest.Aspen.name=
+tile.Chest.Birch.name=
+tile.Chest.Chestnut.name=
+tile.Chest.Douglas Fir.name=
+tile.Chest.Hickory.name=
+tile.Chest.Kapok.name=
+tile.Chest.Maple.name=
+tile.Chest.Oak.name=
+tile.Chest.Pine.name=
+tile.Chest.Sequoia.name=
+tile.Chest.Spruce.name=
+tile.Chest.Sycamore.name=
+tile.Chest.White Cedar.name=
+tile.Chest.White Elm.name=
+tile.Chest.Willow.name=
+
 tile.log2.Acacia.name=Buștean de salcâm
 tile.log.Ash.name=Buștean de frasin
 tile.log.Aspen.name=Buștean de plop
@@ -2057,7 +2078,6 @@ tile.LavaStationary.name=Lavă
 #=======
 #= GUI =
 #=======
-gui.badnbt=Informații RELE
 
 #== Anvil GUI ==
 gui.Anvil.Plans=Planuri
@@ -2119,18 +2139,11 @@ gui.Anvil.Rule42=Îndoaie, ultimele trei
 gui.Anvil.Rule43=Îndoaie, nu ultima
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=Avansat
-gui.Armor.Shift=Shift
 gui.Armor.ForgedBy=Forjat de
-gui.Armor.Hold=Ține apăsat pe
 gui.Armor.Crush=Zdrobire
 gui.Armor.Pierce=Străpungere
 gui.Armor.Slash=Tăiere
 
-word.stage1=Etapa 1
-word.stage2=Etapa 2
-
-gui.Bow.Advanced=Avansat
 gui.Bow.Javelins=Sulițe
 gui.Bow.Arrows=Săgeți
 gui.Bow.ForgedBy=Făcut de
@@ -2156,7 +2169,6 @@ gui.barrel.preserving=Conservare
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Mangal
 gui.Bloomery.Ore=Minereu
-gui.Bloomery.Output=Rezultat
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=Calendar
@@ -2284,16 +2296,24 @@ gui.fertilized=Fertilizat
 gui.Inventory=Inventar
 gui.ClearSlot=Golește un loc de rezultat.
 gui.LogPile=Grămadă de bușteni
+gui.Output=Rezultat
 gui.done=Gata
 gui.cancel=Renunță
 gui.Sluice.Soil=Sol
 gui.Sluice.Overworked=Epuizat
 gui.Workbench.Crafting=Fabricare
 gui.overburdened=*Supraîncărcat*
+
+gui.badnbt=Informații RELE
+
+#== Tooltips ==
+gui.Advanced=Avansat
+gui.Shift=Shift
+gui.Hold=Ține apăsat pe
+
 gui.slot=Loc
 gui.slot.back=Înapoi
 
-#== Tooltips ==
 gui.ShowHelp=§8Ajutor: (Ține apăsat pe §fShift§8)
 gui.Help=§8Help:
 gui.Clay.Inst0=§bDă clic dreapta §7cu 5 într-o stivă ca să modelezi.
@@ -2306,9 +2326,13 @@ gui.PotteryBase.Inst0=Furișează-te și §bdă clic dreapta §7ca să așezi ob
 gui.PotteryVesselSmall.Inst0=Sau §bdă clic dreapta §7ca să deschizi inventarul.
 gui.RawHide.Inst0=????
 gui.Barrel.MoreItems=§8Mai multe... (Ține apăsat pe §fShift§8)
+
 gui.Nutrient.A=Nutrient A
 gui.Nutrient.B=Nutrient B
 gui.Nutrient.C=Nutrient C
+
+gui.stage1=Etapa 1
+gui.stage2=Etapa 2
 
 gui.Size.Tiny=Minuscul
 gui.Size.VerySmall=Foarte mic
@@ -2326,6 +2350,7 @@ gui.Reach.Short=Scurt
 gui.Reach.Medium=Mediu
 gui.Reach.Far=Lung
 
+#== Food ==
 gui.food.fruit=Fructe
 gui.food.vegetable=Legume
 gui.food.grain=Cereale
@@ -2444,9 +2469,17 @@ gui.milk.sour=Acru
 
 gui.units=Unități
 
+#== WAILA ==
+gui.useless=
+gui.growth=
+gui.mature=
+gui.metal.Iron=
+
 #== Chat Messages ==
 gui.GoldPan.UseFull=Trebuie folosit sub apă curgătoare.
 gui.goldpan.overused=Această zonă pare să fi fost lucrată mult. Probabil nu vei găsi mare lucru.
+gui.seeds.failedTemp=
+gui.seeds.failedSun=
 
 gui.ProPick.Found=S-a găsit
 gui.ProPick.FoundTraces=S-au găsit urme de
@@ -2482,6 +2515,14 @@ gui.skill.adept=Inițiat
 gui.skill.expert=Expert
 gui.skill.master=Maestru
 gui.skillpage=Abilități
+
+#==================
+#= Error Messages =
+#==================
+error.error=
+error.NBT=
+error.OreCFG=
+error.Contact=
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========

@@ -6,7 +6,9 @@
 
 
 generator.TFCDefault=TFC 기본
-generator.TFCFlat=TFC 플랫
+generator.TFCFlat=
+generator.TFCAmplified=
+generator.TFCLargeBiomes=
 
 key.ToolMode=도구모드로 바꿈
 key.LockTool=도구의 위치를 고정함
@@ -114,6 +116,7 @@ fluid.whiskey=위스키
 fluid.cornwhiskey=옥수수 위스키
 fluid.milk=우유
 fluid.milkcurdled=상한 우유
+fluid.milkvinegar=
 fluid.limewater=석회수
 fluid.tannin=타닌
 fluid.vinegar=식초
@@ -990,6 +993,24 @@ item.Loom.White Elm.name=미국느릅나무 베틀 (White Elm)
 item.Loom.Willow.name=버드나무 베틀 (Willow)
 
 #== Wood Blocks ==
+tile.Chest.Acacia.name=
+tile.Chest.Ash.name=
+tile.Chest.Aspen.name=
+tile.Chest.Birch.name=
+tile.Chest.Chestnut.name=
+tile.Chest.Douglas Fir.name=
+tile.Chest.Hickory.name=
+tile.Chest.Kapok.name=
+tile.Chest.Maple.name=
+tile.Chest.Oak.name=
+tile.Chest.Pine.name=
+tile.Chest.Sequoia.name=
+tile.Chest.Spruce.name=
+tile.Chest.Sycamore.name=
+tile.Chest.White Cedar.name=
+tile.Chest.White Elm.name=
+tile.Chest.Willow.name=
+
 tile.log2.Acacia.name=아카시아나무 (Acacia)
 tile.log.Ash.name=서양물푸레나무 (Ash)
 tile.log.Aspen.name=사시나무 (Aspen)
@@ -2057,7 +2078,6 @@ tile.LavaStationary.name=
 #=======
 #= GUI =
 #=======
-gui.badnbt=BAD info
 
 #== Anvil GUI ==
 gui.Anvil.Plans=도면
@@ -2119,18 +2139,11 @@ gui.Anvil.Rule42=마지막 세 번을 구부리다
 gui.Anvil.Rule43=마지막이 아닌 순서에서 구부리다
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=자세히
-gui.Armor.Shift=Shift
 gui.Armor.ForgedBy=제작자: 
-gui.Armor.Hold=누르다
 gui.Armor.Crush=충격 방어
 gui.Armor.Pierce=관통 방어
 gui.Armor.Slash=참격 방어
 
-word.stage1=Stage 1
-word.stage2=Stage 2
-
-gui.Bow.Advanced=자세히
 gui.Bow.Javelins=창
 gui.Bow.Arrows=화살
 gui.Bow.ForgedBy=제작자: 
@@ -2156,7 +2169,6 @@ gui.barrel.preserving=보존 중 (Preserving)
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=목탄
 gui.Bloomery.Ore=광석
-gui.Bloomery.Output=정제됨
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=달력
@@ -2284,16 +2296,24 @@ gui.fertilized=비료
 gui.Inventory=인벤토리
 gui.ClearSlot=추출 슬롯을 비우기
 gui.LogPile=장작 더미
+gui.Output=정제됨
 gui.done=완료
 gui.cancel=취소
 gui.Sluice.Soil=흙
 gui.Sluice.Overworked=
 gui.Workbench.Crafting=크래프트
 gui.overburdened=* 중량 초과 *
+
+gui.badnbt=BAD info
+
+#== Tooltips ==
+gui.Advanced=자세히
+gui.Shift=Shift
+gui.Hold=누르다
+
 gui.slot=
 gui.slot.back=
 
-#== Tooltips ==
 gui.ShowHelp=
 gui.Help=
 gui.Clay.Inst0=
@@ -2306,9 +2326,13 @@ gui.PotteryBase.Inst0=
 gui.PotteryVesselSmall.Inst0=
 gui.RawHide.Inst0=????
 gui.Barrel.MoreItems=
+
 gui.Nutrient.A=영양소 A
 gui.Nutrient.B=영양소 B
 gui.Nutrient.C=영양소 C
+
+gui.stage1=Stage 1
+gui.stage2=Stage 2
 
 gui.Size.Tiny=미세한
 gui.Size.VerySmall=매우 작은
@@ -2326,6 +2350,7 @@ gui.Reach.Short=짧은
 gui.Reach.Medium=중간
 gui.Reach.Far=먼
 
+#== Food ==
 gui.food.fruit=과일
 gui.food.vegetable=야채
 gui.food.grain=곡물
@@ -2444,9 +2469,17 @@ gui.milk.sour=시큼한
 
 gui.units=단위
 
+#== WAILA ==
+gui.useless=
+gui.growth=
+gui.mature=
+gui.metal.Iron=
+
 #== Chat Messages ==
 gui.GoldPan.UseFull=흐르는 물 속에서 사용해야 합니다.
 gui.goldpan.overused=이 장소에서는 더 이상 찾을 수 없을 것 같습니다.
+gui.seeds.failedTemp=
+gui.seeds.failedSun=
 
 gui.ProPick.Found=발견함:
 gui.ProPick.FoundTraces=흔적을 발견함:
@@ -2482,6 +2515,14 @@ gui.skill.adept=숙련됨
 gui.skill.expert=전문가
 gui.skill.master=장인
 gui.skillpage=스킬
+
+#==================
+#= Error Messages =
+#==================
+error.error=
+error.NBT=
+error.OreCFG=
+error.Contact=
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========

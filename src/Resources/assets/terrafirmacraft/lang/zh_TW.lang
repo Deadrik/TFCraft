@@ -6,7 +6,9 @@
 
 
 generator.TFCDefault=TFC預設
-generator.TFCFlat=TFC平地
+generator.TFCFlat=TFC超平坦模式(無效)
+generator.TFCAmplified=TFC巨大化世界(無效)
+generator.TFCLargeBiomes=TFC超大型生態域(無效)
 
 key.ToolMode=切換工具狀態
 key.LockTool=固定工具位置
@@ -49,7 +51,7 @@ entity.fishTFC.name=鱸魚
 entity.notFamiliar=這隻動物不會理你。
 fishingRod.lineTension=線快被拉斷了！
 fishingRod.lineSnap=線被扯斷了！
-fishingRod.bite=噢！上钩啦！
+fishingRod.bite=噢！牠咬一口啦！
 fishingRod.gotAway=牠跑掉了...
 
 #================
@@ -114,6 +116,7 @@ fluid.whiskey=威士忌
 fluid.cornwhiskey=玉米威士忌
 fluid.milk=牛奶
 fluid.milkcurdled=凝固的牛奶
+fluid.milkvinegar=牛奶加醋
 fluid.limewater=石灰水
 fluid.tannin=單寧水
 fluid.vinegar=醋
@@ -990,6 +993,24 @@ item.Loom.White Elm.name=榆樹織布機
 item.Loom.Willow.name=柳樹織布機
 
 #== Wood Blocks ==
+tile.Chest.Acacia.name=金合歡木箱
+tile.Chest.Ash.name=梣樹木箱
+tile.Chest.Aspen.name=白楊木箱
+tile.Chest.Birch.name=樺木木箱
+tile.Chest.Chestnut.name=栗樹木箱
+tile.Chest.Douglas Fir.name=花旗松木箱
+tile.Chest.Hickory.name=山胡桃木箱
+tile.Chest.Kapok.name=木棉木箱
+tile.Chest.Maple.name=楓樹木箱
+tile.Chest.Oak.name=橡木木箱
+tile.Chest.Pine.name=松木木箱
+tile.Chest.Sequoia.name=加州紅木木箱
+tile.Chest.Spruce.name=雲杉木箱
+tile.Chest.Sycamore.name=梧桐木箱
+tile.Chest.White Cedar.name=香柏木箱
+tile.Chest.White Elm.name=榆樹木箱
+tile.Chest.Willow.name=柳樹木箱
+
 tile.log2.Acacia.name=金合歡原木
 tile.log.Ash.name=梣樹原木
 tile.log.Aspen.name=白楊原木
@@ -2057,7 +2078,6 @@ tile.LavaStationary.name=岩漿
 #=======
 #= GUI =
 #=======
-gui.badnbt=NBT資料損毀
 
 #== Anvil GUI ==
 gui.Anvil.Plans=設計圖
@@ -2119,18 +2139,11 @@ gui.Anvil.Rule42=最後三次彎曲
 gui.Anvil.Rule43=非最後一次彎曲
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=進階
-gui.Armor.Shift=Shift
 gui.Armor.ForgedBy=打造自
-gui.Armor.Hold=按住
 gui.Armor.Crush=破碎
 gui.Armor.Pierce=貫通
 gui.Armor.Slash=切斷
 
-word.stage1=第一階段
-word.stage2=第二階段
-
-gui.Bow.Advanced=進階
 gui.Bow.Javelins=標槍
 gui.Bow.Arrows=箭矢
 gui.Bow.ForgedBy=打造自
@@ -2156,7 +2169,6 @@ gui.barrel.preserving=貯存中
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=木炭
 gui.Bloomery.Ore=礦物
-gui.Bloomery.Output=取出
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=日曆
@@ -2284,16 +2296,24 @@ gui.fertilized=已受精
 gui.Inventory=物品欄
 gui.ClearSlot=清除輸出格
 gui.LogPile=原木堆
+gui.Output=取出
 gui.done=完成
 gui.cancel=取消
 gui.Sluice.Soil=砂土
 gui.Sluice.Overworked=過度勞累
 gui.Workbench.Crafting=製作
 gui.overburdened=*負擔過重*
+
+gui.badnbt=NBT資料損毀
+
+#== Tooltips ==
+gui.Advanced=進階
+gui.Shift=Shift
+gui.Hold=按住
+
 gui.slot=格子
 gui.slot.back=背部
 
-#== Tooltips ==
 gui.ShowHelp=§8幫助：(長按 §fShift§8)
 gui.Help=§8幫助：
 gui.Clay.Inst0=手持五塊§b右鍵§7來塑形
@@ -2306,9 +2326,13 @@ gui.PotteryBase.Inst0=按住§bShift(潛行)§7並§b右鍵§7以放置物品
 gui.PotteryVesselSmall.Inst0=或§b右鍵§7開啟隨身物品
 gui.RawHide.Inst0=????
 gui.Barrel.MoreItems=§8詳細… (按住§fShift§8)
+
 gui.Nutrient.A=養分A
 gui.Nutrient.B=養分B
 gui.Nutrient.C=養分C
+
+gui.stage1=第一階段
+gui.stage2=第二階段
 
 gui.Size.Tiny=非常小
 gui.Size.VerySmall=很小
@@ -2326,6 +2350,7 @@ gui.Reach.Short=近距
 gui.Reach.Medium=中距
 gui.Reach.Far=遠距
 
+#== Food ==
 gui.food.fruit=水 果
 gui.food.vegetable=蔬 菜
 gui.food.grain=穀 物
@@ -2444,9 +2469,17 @@ gui.milk.sour=酸化
 
 gui.units=單位
 
+#== WAILA ==
+gui.useless=無用
+gui.growth=成長中
+gui.mature=成熟
+gui.metal.Iron=金屬
+
 #== Chat Messages ==
 gui.GoldPan.UseFull=必須於流水中使用。
 gui.goldpan.overused=這範圍的礦物似乎已淘盡。你大概不會淘到更多的礦物了。
+gui.seeds.failedTemp=現在溫度不足以種植此作物，它活不了多久。
+gui.seeds.failedSun=此處日照不足，它活不了多久。
 
 gui.ProPick.Found=探勘到
 gui.ProPick.FoundTraces=探勘到微量的
@@ -2482,6 +2515,14 @@ gui.skill.adept=熟手
 gui.skill.expert=專家
 gui.skill.master=大師
 gui.skillpage=技術
+
+#==================
+#= Error Messages =
+#==================
+error.error=錯誤：
+error.NBT=NBT數據遺失
+error.OreCFG=方塊於TFCOre.cfg中的設定為無效
+error.Contact=請回報TFC支援
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========

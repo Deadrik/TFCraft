@@ -6,7 +6,9 @@
 
 
 generator.TFCDefault=TFC Varsayılan
-generator.TFCFlat=TFC Düz
+generator.TFCFlat=
+generator.TFCAmplified=
+generator.TFCLargeBiomes=
 
 key.ToolMode=Alet Modunu Değiştir
 key.LockTool=Alet Yerini Kitle
@@ -76,7 +78,7 @@ achievement.achAnvil.desc=Taş örs yap!
 achievement.achPickaxe=Maden zamanı! (sonunda!)
 achievement.achPickaxe.desc=Kazma yap!
 achievement.achDiamond=ELMA- hmm dur, hayır
-achievement.achDiamond.desc=Elmas bul
+achievement.achDiamond.desc=Elmas bul!
 achievement.achLimonite=LI-MO-NIIITE!(bir cins demir)
 achievement.achLimonite.desc=Biraz limonite kaz
 achievement.achBronzeAge=Bronz(tunç) çağı
@@ -114,6 +116,7 @@ fluid.whiskey=Viski
 fluid.cornwhiskey=Mısır Viskisi
 fluid.milk=Süt
 fluid.milkcurdled=Pıhtılaşmış Süt
+fluid.milkvinegar=
 fluid.limewater=Kireçli Su
 fluid.tannin=Tanen
 fluid.vinegar=Sirke
@@ -527,27 +530,27 @@ item.Powder.Sulfur Powder.name=Sülfür Tozu
 #= Stone =
 #=========
 #== Stone Items ==
-item.LooseRock.Andesite.name=Andesit Kaya
-item.LooseRock.Basalt.name=Bazalt Kaya
-item.LooseRock.Chalk.name=Kireç Taşı Kaya
-item.LooseRock.Chert.name=Chert Kaya
-item.LooseRock.Claystone.name=Kiltaşı Kaya
-item.LooseRock.Conglomerate.name=Çakılkayası Kaya
-item.LooseRock.Dacite.name=Dasit Kaya
-item.LooseRock.Diorite.name=Diyorit Kaya
-item.LooseRock.Dolomite.name=Dolomit Kaya
-item.LooseRock.Gabbro.name=Gabro Kaya
-item.LooseRock.Gneiss.name=Gnays Kaya
-item.LooseRock.Granite.name=Granit Kaya
-item.LooseRock.Limestone.name=Kalker Kaya
-item.LooseRock.Marble.name=Mermer Kaya
-item.LooseRock.Phyllite.name=Phyllit Kaya
-item.LooseRock.Quartzite.name=Kuvarsit Kaya
-item.LooseRock.Rhyolite.name=Rhyolite Kaya
-item.LooseRock.Rock Salt.name=Tuz Taşı Kaya
-item.LooseRock.Schist.name=Schist Kaya
-item.LooseRock.Shale.name=Shale Kaya
-item.LooseRock.Slate.name=Kayağantaş Kaya
+item.LooseRock.Andesite.name=Andesit Taş
+item.LooseRock.Basalt.name=Bazalt Taş
+item.LooseRock.Chalk.name=Kireç Taşı Taş
+item.LooseRock.Chert.name=Chert Taş
+item.LooseRock.Claystone.name=Kiltaşı Taş
+item.LooseRock.Conglomerate.name=Çakılkaya
+item.LooseRock.Dacite.name=Dasit Taş
+item.LooseRock.Diorite.name=Diyorit Taş
+item.LooseRock.Dolomite.name=Dolomit Taş
+item.LooseRock.Gabbro.name=Gabro Taş
+item.LooseRock.Gneiss.name=Gnays Taş
+item.LooseRock.Granite.name=Granit Taş
+item.LooseRock.Limestone.name=Kalker Taş
+item.LooseRock.Marble.name=Mermer Taş
+item.LooseRock.Phyllite.name=Phyllit Taş
+item.LooseRock.Quartzite.name=Kuvarsit Taş
+item.LooseRock.Rhyolite.name=Rhyolite Taş
+item.LooseRock.Rock Salt.name=Tuz Taşı Taş
+item.LooseRock.Schist.name=Şist Taş
+item.LooseRock.Shale.name=Shale Taş
+item.LooseRock.Slate.name=Taşğantaş Taş
 
 item.ItemStoneBrick.Andesite.name=Andesit Tuğla
 item.ItemStoneBrick.Basalt.name=Bazalt Tuğla
@@ -567,7 +570,7 @@ item.ItemStoneBrick.Phyllite.name=Phyllit Tuğla
 item.ItemStoneBrick.Quartzite.name=Kuvarsit Tuğla
 item.ItemStoneBrick.Rhyolite.name=Rhyolite Tuğla
 item.ItemStoneBrick.Rock Salt.name=Tuz Taşı Tuğla
-item.ItemStoneBrick.Schist.name=Schist Tuğla
+item.ItemStoneBrick.Schist.name=Şist Tuğla
 item.ItemStoneBrick.Shale.name=Shale Tuğla
 item.ItemStoneBrick.Slate.name=Kayağantaş Tuğla
 
@@ -589,7 +592,7 @@ item.FlatRock.Phyllite.name=Düz Phyllit
 item.FlatRock.Quartzite.name=Düz Kuvarsit
 item.FlatRock.Rhyolite.name=Düz Rhyolit
 item.FlatRock.Rock Salt.name=Düz Tuz Taşı
-item.FlatRock.Schist.name=Düz Schist
+item.FlatRock.Schist.name=Düz Şist
 item.FlatRock.Shale.name=Düz Shale
 item.FlatRock.Slate=Düz Kayağantaş
 
@@ -612,7 +615,7 @@ tile.WallCobble.Phyllite.name=Phyllit Kırıktaş Duvar
 tile.WallCobble.Quartzite.name=Kuvarsit Kırıktaş Duvar
 tile.WallCobble.Rhyolite.name=Rhyolite Kırıktaş Duvar
 tile.WallCobble.Rock Salt.name=Tuz Taşı Kırıktaş Duvar
-tile.WallCobble.Schist.name=Schist Kırıktaş Duvar
+tile.WallCobble.Schist.name=Şist Kırıktaş Duvar
 tile.WallCobble.Shale.name=Shale Kırıktaş Duvar
 tile.WallCobble.Slate.name=Kayağantaş Kırıktaş Duvar
 
@@ -634,7 +637,7 @@ tile.WallRaw.Phyllite.name=Phyllit Duvar
 tile.WallRaw.Quartzite.name=Kuvarsit Duvar
 tile.WallRaw.Rhyolite.name=Rhyolite Duvar
 tile.WallRaw.Rock Salt.name=Tuz Taşı Duvar
-tile.WallRaw.Schist.name=Schist Duvar
+tile.WallRaw.Schist.name=Şist Duvar
 tile.WallRaw.Shale.name=Shale Duvar
 tile.WallRaw.Slate.name=Kayağantaş Duvar
 
@@ -656,7 +659,7 @@ tile.WallBrick.Phyllite.name=Phyllit Tuğla Duvar
 tile.WallBrick.Quartzite.name=Kuvarsit Tuğla Duvar
 tile.WallBrick.Rhyolite.name=Rhyolite Tuğla Duvar
 tile.WallBrick.Rock Salt.name=Tuz Taşı Tuğla Duvar
-tile.WallBrick.Schist.name=Schist Tuğla Duvar
+tile.WallBrick.Schist.name=Şist Tuğla Duvar
 tile.WallBrick.Shale.name=Shale Tuğla Duvar
 tile.WallBrick.Slate.name=Kayağantaş Tuğla Duvar
 
@@ -678,7 +681,7 @@ tile.WallSmooth.Phyllite.name=Phyllit Yumuşak Duvar
 tile.WallSmooth.Quartzite.name=Kuvarsit Yumuşak Duvar
 tile.WallSmooth.Rhyolite.name=Rhyolite Yumuşak Duvar
 tile.WallSmooth.Rock Salt.name=Tuz Taşı Yumuşak Duvar
-tile.WallSmooth.Schist.name=Schist Yumuşak Duvar
+tile.WallSmooth.Schist.name=Şist Yumuşak Duvar
 tile.WallSmooth.Shale.name=Shale Yumuşak Duvar
 tile.WallSmooth.Slate.name=Kayağantaş Yumuşak Duvar
 
@@ -700,7 +703,7 @@ tile.MMRock.Phyllite.name=Phyllit
 tile.MMRock.Quartzite.name=Kuvarsit
 tile.IgExRock.Rhyolite.name=Rhyolite
 tile.SedRock.Rock Salt.name=Tuz Taşı
-tile.MMRock.Schist.name=Schist
+tile.MMRock.Schist.name=Şist
 tile.SedRock.Shale.name=Shale
 tile.MMRock.Slate.name=Kayağantaş
 
@@ -722,7 +725,7 @@ tile.MMRockCobble.Phyllite.name=Phyllit Kırıktaş
 tile.MMRockCobble.Quartzite.name=Kuvarsit Kırıktaş
 tile.IgExRockCobble.Rhyolite.name=Rhyolite Kırıktaş
 tile.SedRockCobble.Rock Salt.name=Tuz Taşı Kırıktaş
-tile.MMRockCobble.Schist.name=Schist Kırıktaş
+tile.MMRockCobble.Schist.name=Şist Kırıktaş
 tile.SedRockCobble.Shale.name=Shale Kırıktaş
 tile.MMRockCobble.Slate.name=Kayağantaş Kırıktaş
 
@@ -744,7 +747,7 @@ tile.MMRockSmooth.Phyllite.name=Yumuşak Phyllit
 tile.MMRockSmooth.Quartzite.name=Yumuşak Kuvarsit
 tile.IgExRockSmooth.Rhyolite.name=Yumuşak Rhyolite
 tile.SedRockSmooth.Rock Salt.name=Yumuşak Tuz Taşı
-tile.MMRockSmooth.Schist.name=Yumuşak Schist
+tile.MMRockSmooth.Schist.name=Yumuşak Şist
 tile.SedRockSmooth.Shale.name=Yumuşak Shale
 tile.MMRockSmooth.Slate.name=Yumuşak Kayağantaş
 
@@ -766,7 +769,7 @@ tile.MMRockBrick.Phyllite.name=Phyllitbricks
 tile.MMRockBrick.Quartzite.name=Kuvarsit Tuğlaları
 tile.IgExRockBrick.Rhyolite.name=Rhyolite Tuğlaları
 tile.SedRockBrick.Rock Salt.name=Tuz Taşı Tuğlaları
-tile.MMRockBrick.Schist.name=Schist Tuğlaları
+tile.MMRockBrick.Schist.name=Şist Tuğlaları
 tile.SedRockBrick.Shale.name=Shale Tuğlaları
 tile.MMRockBrick.Slate.name=Kayağantaş Tuğlaları
 
@@ -774,10 +777,10 @@ tile.MMRockBrick.Slate.name=Kayağantaş Tuğlaları
 #= Ore =
 #=======
 #== Ore Items ==
-item.Ore.Bituminous Coal.name=Bituminous Kömür
+item.Ore.Bituminous Coal.name=Bitümlü Kömür
 item.Ore.Borax.name=Boraks
 item.Ore.Cinnabar.name=Cinnabar
-item.Ore.Cryolite.name=Cryolit
+item.Ore.Cryolite.name=Kriyolit
 item.Ore.Graphite.name=Grafit
 item.Ore.Gypsum.name=Jips
 item.Ore.Jet.name=Oltu Taşı
@@ -791,19 +794,19 @@ item.Ore.Petrified Wood.name=Taşlaşmış Ağaç
 item.Ore.Pitchblende.name=Katranlıkarışım
 item.Ore.Saltpeter.name=Saltpeter
 item.Ore.Satinspar.name=Satinspar
-item.Ore.Selenite.name=Selenit
+item.Ore.Selenite.name=Selenite
 item.Ore.Serpentine.name=Yılan Taşı
 item.Ore.Sulfur.name=Sülfür
-item.Ore.Sylvite.name=Sylvit
+item.Ore.Sylvite.name=Sylvite
 
-item.Ore.Bismuthinite.name=Bismuthinit
-item.Ore.Cassiterite.name=Cassiterit
+item.Ore.Bismuthinite.name=Bizmutinit
+item.Ore.Cassiterite.name=Kasiterit
 item.Ore.Galena.name=Galena
 item.Ore.Garnierite.name=Garnierit
 item.Ore.Hematite.name=Hematit
 item.Ore.Limonite.name=Limonit
 item.Ore.Magnetite.name=Magnetit
-item.Ore.Malachite.name=Malachit
+item.Ore.Malachite.name=Bakırtaşı
 item.Ore.Native Copper.name=Doğal Bakır
 item.Ore.Native Gold.name=Doğal Altın
 item.Ore.Native Platinum.name=Doğal Platinyum
@@ -811,14 +814,14 @@ item.Ore.Native Silver.name=Doğal Gümüş
 item.Ore.Sphalerite.name=Sphalerit
 item.Ore.Tetrahedrite.name=Tetrahedrit
 
-item.Ore.Rich Bismuthinite.name=Zengin Bismuthinit
-item.Ore.Rich Cassiterite.name=Zengin Cassiterit
+item.Ore.Rich Bismuthinite.name=Zengin Bizmutinit
+item.Ore.Rich Cassiterite.name=Zengin Kasiterit
 item.Ore.Rich Galena.name=Zengin Galena
 item.Ore.Rich Garnierite.name=Zengin Garnierit
 item.Ore.Rich Hematite.name=Zengin Hematit
 item.Ore.Rich Limonite.name=Zengin Limonit
 item.Ore.Rich Magnetite.name=Zengin Magnetit
-item.Ore.Rich Malachite.name=Zengin Malachit
+item.Ore.Rich Malachite.name=Zengin Bakırtaşı
 item.Ore.Rich Native Copper.name=Zengin Doğal Bakır
 item.Ore.Rich Native Gold.name=Zengin Doğal Altın
 item.Ore.Rich Native Platinum.name=Zengin Doğal Platinyum
@@ -826,14 +829,14 @@ item.Ore.Rich Native Silver.name=Zengin Doğal Gümüş
 item.Ore.Rich Sphalerite.name=Zengin Sphalerit
 item.Ore.Rich Tetrahedrite.name=Zengin Tetrahedrit
 
-item.Ore.Poor Bismuthinite.name=Fakir Bismuthinit
-item.Ore.Poor Cassiterite.name=Fakir Cassiterit
+item.Ore.Poor Bismuthinite.name=Fakir Bizmutinit
+item.Ore.Poor Cassiterite.name=Fakir Kasiterit
 item.Ore.Poor Galena.name=Fakir Galena
 item.Ore.Poor Garnierite.name=Fakir Garnierit
 item.Ore.Poor Hematite.name=Fakir Hematit
 item.Ore.Poor Limonite.name=Fakir Limonit
 item.Ore.Poor Magnetite.name=Fakir Magnetit
-item.Ore.Poor Malachite.name=Fakir Malachit
+item.Ore.Poor Malachite.name=Fakir Bakırtaşı
 item.Ore.Poor Native Copper.name=Fakir Doğal Bakır
 item.Ore.Poor Native Gold.name=Fakir Doğal Altın
 item.Ore.Poor Native Platinum.name=Fakir Doğal Platinyum
@@ -841,14 +844,14 @@ item.Ore.Poor Native Silver.name=Fakir Doğal Gümüş
 item.Ore.Poor Sphalerite.name=Fakir Sphalerit
 item.Ore.Poor Tetrahedrite.name=Fakir Tetrahedrit
 
-item.Small Ore.Bismuthinite.name=Küçük Bismuthinit
-item.Small Ore.Cassiterite.name=Küçük Cassiterit
+item.Small Ore.Bismuthinite.name=Bismuthinit
+item.Small Ore.Cassiterite.name=Küçük Kasiterit
 item.Small Ore.Galena.name=Küçük Galena
 item.Small Ore.Garnierite.name=Küçük Garnierit
 item.Small Ore.Hematite.name=Küçük Hematit
 item.Small Ore.Limonite.name=Küçük Limonit
 item.Small Ore.Magnetite.name=Küçük Magnetit
-item.Small Ore.Malachite.name=Küçük Malachit
+item.Small Ore.Malachite.name=Küçük Malakit
 item.Small Ore.Native Copper.name=Doğal Bakır Parça
 item.Small Ore.Native Gold.name=Doğal Altın Parça
 item.Small Ore.Native Platinum.name=Doğal Platinyum Parça
@@ -858,10 +861,10 @@ item.Small Ore.Tetrahedrite.name=Küçük Tetrahedrit
 
 #== Ore Blocks ==
 tile.Ore.name=Maden
-tile.Ore.Bituminous Coal.name=Bituminous Kömür
+tile.Ore.Bituminous Coal.name=Bitümlü Kömür
 tile.Ore.Borax.name=Boraks
 tile.Ore.Cinnabar.name=Cinnabar
-tile.Ore.Cryolite.name=Cryolit
+tile.Ore.Cryolite.name=Kriyolit
 tile.Ore.Graphite.name=Grafit
 tile.Ore.Gypsum.name=Jips
 tile.Ore.Jet.name=Oltu Taşı
@@ -875,19 +878,19 @@ tile.Ore.Petrified Wood.name=Taşlaşmış Ağaç
 tile.Ore.Pitchblende.name=Katranlıkarışım
 tile.Ore.Saltpeter.name=Saltpeter
 tile.Ore.Satinspar.name=Satinspar
-tile.Ore.Selenite.name=Selenit
+tile.Ore.Selenite.name=Selenite
 tile.Ore.Serpentine.name=Yılan Taşı
 tile.Ore.Sulfur.name=Sülfür
-tile.Ore.Sylvite.name=Sylvit
+tile.Ore.Sylvite.name=Sylvite
 
-tile.Ore.Bismuthinite.name=Bismuthinit
-tile.Ore.Cassiterite.name=Cassiterit
+tile.Ore.Bismuthinite.name=Bizmutinit
+tile.Ore.Cassiterite.name=Kasiterit
 tile.Ore.Galena.name=Galena
 tile.Ore.Garnierite.name=Garnierit
 tile.Ore.Hematite.name=Hematit
 tile.Ore.Limonite.name=Limonit
 tile.Ore.Magnetite.name=Magnetit
-tile.Ore.Malachite.name=Malachit
+tile.Ore.Malachite.name=Bakırtaşı
 tile.Ore.Native Copper.name=Doğal Bakır
 tile.Ore.Native Gold.name=Doğal Altın
 tile.Ore.Native Platinum.name=Doğal Platinyum
@@ -990,6 +993,24 @@ item.Loom.White Elm.name=Kara Ağaç Dokumalık
 item.Loom.Willow.name=Söğüt Dokumalık
 
 #== Wood Blocks ==
+tile.Chest.Acacia.name=
+tile.Chest.Ash.name=
+tile.Chest.Aspen.name=
+tile.Chest.Birch.name=
+tile.Chest.Chestnut.name=
+tile.Chest.Douglas Fir.name=
+tile.Chest.Hickory.name=
+tile.Chest.Kapok.name=
+tile.Chest.Maple.name=
+tile.Chest.Oak.name=
+tile.Chest.Pine.name=
+tile.Chest.Sequoia.name=
+tile.Chest.Spruce.name=
+tile.Chest.Sycamore.name=
+tile.Chest.White Cedar.name=
+tile.Chest.White Elm.name=
+tile.Chest.Willow.name=
+
 tile.log2.Acacia.name=Akasya Kütük
 tile.log.Ash.name=Ash Kütük
 tile.log.Aspen.name=Kavak Kütük
@@ -2057,7 +2078,6 @@ tile.LavaStationary.name=Lav
 #=======
 #= GUI =
 #=======
-gui.badnbt=Kötü Açıklama
 
 #== Anvil GUI ==
 gui.Anvil.Plans=Planlar
@@ -2119,18 +2139,11 @@ gui.Anvil.Rule42=Bük, Son Üç
 gui.Anvil.Rule43=Bük, Son Değil
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=Dahası
-gui.Armor.Shift=Shift
 gui.Armor.ForgedBy=Döven Kişi:
-gui.Armor.Hold=Tutma
 gui.Armor.Crush=Ezme
 gui.Armor.Pierce=Delme
 gui.Armor.Slash=Koparma
 
-word.stage1=Aşama 1
-word.stage2=Aşama 2
-
-gui.Bow.Advanced=Dahası
 gui.Bow.Javelins=Mızraklar
 gui.Bow.Arrows=Oklar
 gui.Bow.ForgedBy=Yapan Kişi:
@@ -2146,7 +2159,7 @@ gui.Barrel.Seal=Kapat
 gui.Barrel.Unseal=Aç
 gui.Barrel.ToggleOff=Dışa
 gui.Barrel.ToggleOn=İçe
-gui.Barrel.SealedOn=Kapatılan Tarih
+gui.Barrel.SealedOn=Kapatılma Tarihi
 gui.Barrel.Solid=Katı Saklama
 gui.Barrel.Liquid=Sıvı Saklama
 gui.barrel.pickling=Turşu yapma
@@ -2156,7 +2169,6 @@ gui.barrel.preserving=Konserveleme
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Odun Kömürü
 gui.Bloomery.Ore=Maden
-gui.Bloomery.Output=Çıktı
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=Takvim
@@ -2284,16 +2296,24 @@ gui.fertilized=Gübrelenmiş
 gui.Inventory=Envanter
 gui.ClearSlot=Çıkış slotunu boşalt.
 gui.LogPile=Kütük Yığını
+gui.Output=Çıktı
 gui.done=Bitti
 gui.cancel=İptal
 gui.Sluice.Soil=Toprak
 gui.Sluice.Overworked=Aşırı Çalışılmış
 gui.Workbench.Crafting=Üretme
 gui.overburdened=*Aşırı Yüklenilmiş*
+
+gui.badnbt=Kötü Açıklama
+
+#== Tooltips ==
+gui.Advanced=Dahası
+gui.Shift=Shift
+gui.Hold=Tutma
+
 gui.slot=Slot
 gui.slot.back=Sırt
 
-#== Tooltips ==
 gui.ShowHelp=§8Yardım: (§fShift §8Basılı Tut)
 gui.Help=§8Yardım:
 gui.Clay.Inst0=Şekillendirmek İçin 5 taneye Ters tıkla 
@@ -2306,9 +2326,13 @@ gui.PotteryBase.Inst0=Objeyi Yere koymak için Eğil ve ters tıkla
 gui.PotteryVesselSmall.Inst0=Yada açmak için Ters tıkla
 gui.RawHide.Inst0=????
 gui.Barrel.MoreItems=§8Daha fazla... (&fShifte basılı tut)
+
 gui.Nutrient.A=Besin A
 gui.Nutrient.B=Besin B
 gui.Nutrient.C=Besin C
+
+gui.stage1=Aşama 1
+gui.stage2=Aşama 2
 
 gui.Size.Tiny=Minik
 gui.Size.VerySmall=Çok Küçük
@@ -2326,6 +2350,7 @@ gui.Reach.Short=Kısa
 gui.Reach.Medium=Orta
 gui.Reach.Far=Uzak
 
+#== Food ==
 gui.food.fruit=Meyve
 gui.food.vegetable=Sebze
 gui.food.grain=Tahıl
@@ -2389,14 +2414,14 @@ gui.taste.adept.savory4=Çok Kokulu
 gui.taste.adept.savory5=Aşırı Kokulu
 
 gui.taste.0=Değil
-gui.taste.1=Çok Değil
+gui.taste.1=Az
 gui.taste.2=Biraz
-gui.taste.3=Az Çok
+gui.taste.3=Orta
 gui.taste.4=Mükemmel
-gui.taste.5=Fazlaca
-gui.taste.6=Çok
-gui.taste.7=Aşırı
-gui.taste.8=Anlamsızca
+gui.taste.5=Biraz fazla
+gui.taste.6=Fazla
+gui.taste.7=Çok Fazla
+gui.taste.8=Aşırı
 
 word.pickled=Sirkelenmiş
 word.brined=Salamura
@@ -2444,17 +2469,25 @@ gui.milk.sour=Ekşi
 
 gui.units=Birimler
 
+#== WAILA ==
+gui.useless=
+gui.growth=
+gui.mature=
+gui.metal.Iron=
+
 #== Chat Messages ==
 gui.GoldPan.UseFull=Akan suyun altına tıklanmalı.
 gui.goldpan.overused=Bu alan çok çalışılmış. Maden bulunamaz.
+gui.seeds.failedTemp=
+gui.seeds.failedSun=
 
 gui.ProPick.Found=Bulundu:
-gui.ProPick.FoundTraces=İzi Bulundu:
-gui.ProPick.FoundSmall=Kuçük Örnek Bulundu:
-gui.ProPick.FoundMedium=Orta Örnek Bulundu:
-gui.ProPick.FoundLarge=Büyük Örnek Bulundu:
-gui.ProPick.FoundVeryLarge=Çok Büyük Örnek Bulundu:
-gui.ProPick.FoundNothing=Önemli Birşey Bulunmadı.
+gui.ProPick.FoundTraces=İzi bulundu:
+gui.ProPick.FoundSmall=Kuçük örnek bulundu:
+gui.ProPick.FoundMedium=Orta örnek bulundu:
+gui.ProPick.FoundLarge=Büyük örnek bulundu:
+gui.ProPick.FoundVeryLarge=Çok büyük örnek bulundu:
+gui.ProPick.FoundNothing=Önemli bir şey bulunmadı.
 
 #== Creative Tabs ==
 itemGroup.TFCArmor=(TFC) Zırh
@@ -2482,6 +2515,14 @@ gui.skill.adept=Becerikli
 gui.skill.expert=Uzman
 gui.skill.master=Usta
 gui.skillpage=Yetenekler
+
+#==================
+#= Error Messages =
+#==================
+error.error=
+error.NBT=
+error.OreCFG=
+error.Contact=
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
