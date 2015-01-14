@@ -6,14 +6,16 @@
 
 
 generator.TFCDefault=TFC Standard
-generator.TFCFlat=TFC Flach
+generator.TFCFlat=
+generator.TFCAmplified=
+generator.TFCLargeBiomes=
 
 key.ToolMode=Werkzeugmodus wechseln
 key.LockTool=Werkzeugposition sichern
 
 effect.bleed=Blutung
-death.attack.alcohol=
-death.attack.heatStroke=
+death.attack.alcohol=%1$s starb an Alkoholvergiftung
+death.attack.heatStroke=%1$s starb an Hitzeschlag
 
 #==============
 #= Spawn Eggs =
@@ -83,7 +85,7 @@ achievement.achBronzeAge=Die Bronzezeit
 achievement.achBronzeAge.desc=Fertige einen Bronzeamboss, um in das Bronzezeitalter vorzudringen
 achievement.achIronAge=Die Eisenzeit
 achievement.achIronAge.desc=Fertige eine Eisenluppe, um in die Eisenzeit vorzudringen
-achievement.achPokeCreeper=
+achievement.achPokeCreeper=Steve Irwin
 achievement.achPokeCreeper.desc=Schlag es mit einem Stock
 
 #============
@@ -102,7 +104,7 @@ commands.transferTamed.wrongSender=Du kannst keine Tiere übergeben!
 #==========
 fluid.freshwater=Süßwasser
 fluid.saltwater=Salzwasser
-fluid.lavatfc=
+fluid.lavatfc=Lava
 fluid.hotwater=Heißes Wasser
 fluid.beer=Bier
 fluid.cider=Apfelwein
@@ -114,6 +116,7 @@ fluid.whiskey=Whiskey
 fluid.cornwhiskey=Maiswhiskey
 fluid.milk=Milch
 fluid.milkcurdled=Geronnene Milch
+fluid.milkvinegar=
 fluid.limewater=Kalkwasser
 fluid.tannin=Gerbmittel
 fluid.vinegar=Essig
@@ -131,7 +134,7 @@ item.meal.great=Super
 item.meal.fantastic=Fantastisch
 item.Sandwich.name=Sandwich
 item.Salad.name=Salat
-item.Soup.name=
+item.Soup.name=Suppe
 item.Sugar.name=Zucker
 item.Sea Weed.name=Seetang
 
@@ -415,7 +418,7 @@ item.Spindle Head.Spindle Head.name=Spindelkopf
 item.Fire Brick.Fire Brick.name=Schamottestein
 item.Fire Brick.Clay Fire Brick.name=Schamottetonstein
 tile.FireBrick.name=Schamottesteinblock
-tile.Pottery.name=
+tile.Pottery.name=Tonbrenngrube
 
 item.ClayBowl.Ceramic Bowl.name=Tonschüssel
 item.ClayBowl.Clay Bowl.name=Keramikschüssel
@@ -857,7 +860,7 @@ item.Small Ore.Sphalerite.name=Kleines Stück Zinkblende
 item.Small Ore.Tetrahedrite.name=Kleines Stück Fahlerz
 
 #== Ore Blocks ==
-tile.Ore.name=
+tile.Ore.name=Erz
 tile.Ore.Bituminous Coal.name=Steinkohle
 tile.Ore.Borax.name=Borax
 tile.Ore.Cinnabar.name=Cinnabarit
@@ -990,6 +993,24 @@ item.Loom.White Elm.name=Weißulme-Webstuhl
 item.Loom.Willow.name=Weiden-Webstuhl
 
 #== Wood Blocks ==
+tile.Chest.Acacia.name=
+tile.Chest.Ash.name=
+tile.Chest.Aspen.name=
+tile.Chest.Birch.name=
+tile.Chest.Chestnut.name=
+tile.Chest.Douglas Fir.name=
+tile.Chest.Hickory.name=
+tile.Chest.Kapok.name=
+tile.Chest.Maple.name=
+tile.Chest.Oak.name=
+tile.Chest.Pine.name=
+tile.Chest.Sequoia.name=
+tile.Chest.Spruce.name=
+tile.Chest.Sycamore.name=
+tile.Chest.White Cedar.name=
+tile.Chest.White Elm.name=
+tile.Chest.Willow.name=
+
 tile.log2.Acacia.name=Akazie
 tile.log.Ash.name=Esche
 tile.log.Aspen.name=Espe
@@ -1099,9 +1120,9 @@ tile.wood.White Cedar.name=Weiße Zypressen-Bretter
 tile.wood.White Elm.name=Weiße Ulmen-Bretter
 tile.wood.Willow.name=Weiden-Bretter
 
-tile.fruitTreeWood.name=
-tile.fruitTreeLeaves.name=
-tile.fruitTreeLeaves2.name=
+tile.fruitTreeWood.name=Fruchtbaum
+tile.fruitTreeLeaves.name=Fruchtbaumblätter
+tile.fruitTreeLeaves2.name=Fruchtbaumblätter
 
 tile.Door Acacia.name=Akazienholztür
 tile.Door Ash.name=Eschenholztür
@@ -1229,7 +1250,7 @@ tile.WoodSupportV.White Cedar.name=Weißer Zypressen-Stützbalken
 tile.WoodSupportV.White Elm.name=Weißer Ulmen-Stützbalken
 tile.WoodSupportV.Willow.name=Weiden-Stützbalken
 
-tile.WoodSupportH2.name=
+tile.WoodSupportH2.name=Holz-Stützbalken
 tile.WoodSupportH2.Acacia.name=Akazien-Stützbalken
 tile.WoodSupportH.Ash.name=Eschen-Stützbalken
 tile.WoodSupportH.Aspen.name=Espen-Stützbalken
@@ -1863,16 +1884,16 @@ tile.BlastFurnace.name=Hochofen
 tile.SpawnMeter.name=Schutzmessgerät
 tile.Quern.name=Mühlstein
 tile.EarlyBloomery.name=Rennofen
-tile.Molten.name=
+tile.Molten.name=Geschmolzenes Erz
 tile.Crucible.name=Schmelztiegel
 tile.NestBox.name=Nestbox
 item.SluiceItem.name=Waschrinne
 tile.Sluice.name=Waschrinne
 tile.LeatherRack.name=Lederregal
-tile.FoodPrep.name=
-tile.MetalSheet.name=
-tile.ingotpile.name=
-tile.SmokeRack.name=
+tile.FoodPrep.name=Nahrungszubereitungplatz
+tile.MetalSheet.name=Blechverkleidung
+tile.ingotpile.name=Barrenstapel
+tile.SmokeRack.name=Räuchergitter
 
 #== Anvils ==
 tile.Anvil.Stone.name=Stein-Amboss
@@ -1938,7 +1959,7 @@ item.Firestarter.name=Feuerbohrzeug
 
 item.Quern.name=Läuferstein
 item.Blueprint.name=Vorlage
-item.Nametag.name=
+item.Nametag.name=Namensschild
 item.WoolYarn.name=Wollgarn
 item.Wool.name=Wolle
 item.WoolCloth.name=Wolltuch
@@ -1971,9 +1992,8 @@ item.fishingRod.name=Angel
 
 item.Quiver.name=Köcher
 item.Rope.name=Seil
-"item.Mud Brick.name=
-"
-item.Wet Mud Brick.name=
+item.Mud Brick.name=Schlamm-Ziegel
+item.Wet Mud Brick.name=Nasser Schlamm-Ziegel
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Stroh- & Fellbett
@@ -1981,20 +2001,20 @@ tile.StrawHideBed.name=Stroh- & Fellbett
 tile.customBed.sleep=Dieses Bett ist zu ungemütlich, um einzuschlafen.
 tile.BasicPipe.name=Röhre
 tile.ValvePipe.name=Röhre mit Ventil
-tile.Smoke.name=
+tile.Smoke.name=Rauch
 tile.Torch.name=Fackel
 tile.Chest.name=Truhe
 tile.Bookshelf.name=Bücherregal
 tile.Workbench.name=Werkbank
 tile.ButtonWood.name=Holzknopf
-tile.Firepit.name=
-tile.LogPile.name=
-tile.Charcoal.name=
-tile.StoneDetailed.name=
-tile.stoneStairs.name=
-tile.stoneSlabs.name=
-tile.stoneStalac.name=
-tile.WoodConstruct.name=
+tile.Firepit.name=Feuerstelle
+tile.LogPile.name=Holzstapel
+tile.Charcoal.name=Holzkohle
+tile.StoneDetailed.name=Detailiert
+tile.stoneStairs.name=Treppe
+tile.stoneSlabs.name=Stufe
+tile.stoneStalac.name=Stalaktit
+tile.WoodConstruct.name=Holz
 tile.MetalTrapDoor.name=Falltür
 tile.Vessel.name=großes Gefäß
 tile.Grill.name=Grill
@@ -2033,7 +2053,7 @@ tile.SeaGrassIce.name=gefrorenes Seegras
 tile.Flowers.flower_nasturtium.name=Kapuzinerkresse
 tile.Flowers.flower_dandelion.name=Löwenzahn
 tile.Flowers.flower_meads_milkweed.name=
-tile.Flowers.flower_tropical_milkweed.name= Indianer-Seidenpflanze
+tile.Flowers.flower_tropical_milkweed.name=Indianer-Seidenpflanze
 tile.Flowers.flower_butterfly_milkweed.name=Orange Seidenpflanze
 tile.Flowers.flower_calendula.name=Ringelblume
 tile.Flowers2.flower_rose.name=Mohn
@@ -2053,12 +2073,11 @@ tile.FreshWaterStationary.name=Süßwasser
 tile.HotWater.name=
 tile.HotWaterStationary.name=Heißes Wasser
 tile.Lava.name=
-tile.LavaStationary.name=
+tile.LavaStationary.name=Lava
 
 #=======
 #= GUI =
 #=======
-gui.badnbt=
 
 #== Anvil GUI ==
 gui.Anvil.Plans=Pläne
@@ -2120,18 +2139,11 @@ gui.Anvil.Rule42=Biegen, letzten drei
 gui.Anvil.Rule43=Biegen, nicht zuletzt
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=Fortgeschritten
-gui.Armor.Shift=Umschalt-Taste
 gui.Armor.ForgedBy=Geschmiedet von
-gui.Armor.Hold=Gedrückt halten:
 gui.Armor.Crush=gegen Stumpf-Schaden
 gui.Armor.Pierce=gegen Stich-Schaden
 gui.Armor.Slash=gegen Hieb-Schaden
 
-word.stage1=Schritt 1
-word.stage2=Schritt 2
-
-gui.Bow.Advanced=Erweitert
 gui.Bow.Javelins=Speer
 gui.Bow.Arrows=Pfeile
 gui.Bow.ForgedBy=von
@@ -2152,12 +2164,11 @@ gui.Barrel.Solid=Fest
 gui.Barrel.Liquid=Flüssig
 gui.barrel.pickling=einlegen
 gui.barrel.brining=pökeln
-gui.barrel.preserving=
+gui.barrel.preserving=Konservierung
 
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Holzkohle
 gui.Bloomery.Ore=Erz
-gui.Bloomery.Output=Ausgabe
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=Kalender
@@ -2285,16 +2296,24 @@ gui.fertilized=Gedüngt
 gui.Inventory=Inventar
 gui.ClearSlot=Einen Ausgangsslot zu leeren.
 gui.LogPile=Holzstapel
-gui.done=Erledigt
-gui.cancel=
+gui.Output=Ausgabe
+gui.done=Fertig
+gui.cancel=Abbrechen
 gui.Sluice.Soil=Erdreich
-gui.Sluice.Overworked=
+gui.Sluice.Overworked=Überarbeitet
 gui.Workbench.Crafting=Handwerk
 gui.overburdened=*überlastet*
+
+gui.badnbt=SCHLECHTE Info
+
+#== Tooltips ==
+gui.Advanced=Fortgeschritten
+gui.Shift=Umschalt-Taste
+gui.Hold=Gedrückt halten:
+
 gui.slot=Platz
 gui.slot.back=Rücken
 
-#== Tooltips ==
 gui.ShowHelp=§8Hilfe: (Halte §fUmschalt-Taste§8)
 gui.Help=§8Hilfe:
 gui.Clay.Inst0=§bRechtsklick §7mit 5er-Stapel. (formen)
@@ -2305,11 +2324,15 @@ gui.LooseRock.Inst0=§bRechtsklick §7mit 2er-Stapel. (Steinbearbeitung)
 gui.MeltedMetal.Inst0=§bRechtsklick §7zum gießen in eine Werkzeugform.
 gui.PotteryBase.Inst0=Kriechen und §bRechtsklicken§7, um Objekt zu platzieren.
 gui.PotteryVesselSmall.Inst0=Oder §bRechtsklick §7um Inventar zu öffnen.
-gui.RawHide.Inst0=
+gui.RawHide.Inst0=????
 gui.Barrel.MoreItems=§8Mehr... (§fShift§8 halten)
-gui.Nutrient.A=
-gui.Nutrient.B=
-gui.Nutrient.C=
+
+gui.Nutrient.A=Nährstoff A
+gui.Nutrient.B=Nährstoff B
+gui.Nutrient.C=Nährstoff C
+
+gui.stage1=Schritt 1
+gui.stage2=Schritt 2
 
 gui.Size.Tiny=Winzig
 gui.Size.VerySmall=Sehr klein
@@ -2327,6 +2350,7 @@ gui.Reach.Short=Gering
 gui.Reach.Medium=Mittel
 gui.Reach.Far=Weit
 
+#== Food ==
 gui.food.fruit=Frucht
 gui.food.vegetable=Gemüse
 gui.food.grain=Getreide
@@ -2408,14 +2432,14 @@ word.dried=getrocknet
 
 food.cooked.rare=Roh
 food.cooked.medrare=
-food.cooked.med=
+food.cooked.med=Durch
 food.cooked.medwell=
-food.cooked.well=
-food.cooked.0=
-food.cooked.1=
-food.cooked.2=
-food.cooked.3=
-food.cooked.4=
+food.cooked.well=Gut durch
+food.cooked.0=Sehr hell
+food.cooked.1=Hell
+food.cooked.2=Durch
+food.cooked.3=Dunkel
+food.cooked.4=Sehr dunkel
 
 gui.Torch.CatchingFire=Fängt Feuer
 gui.Torch.Lit=Entflammt
@@ -2445,9 +2469,17 @@ gui.milk.sour=Schlecht
 
 gui.units=Einheiten
 
+#== WAILA ==
+gui.useless=
+gui.growth=
+gui.mature=
+gui.metal.Iron=
+
 #== Chat Messages ==
 gui.GoldPan.UseFull=Muss unter fließendem Wasser verwendet werden.
 gui.goldpan.overused=Dieser Bereich sieht überlastet aus. Du wirst wahrscheinlich nicht viel finden
+gui.seeds.failedTemp=
+gui.seeds.failedSun=
 
 gui.ProPick.Found=Die Probe enthielt
 gui.ProPick.FoundTraces=Die Probe enthielt Spuren von
@@ -2483,6 +2515,14 @@ gui.skill.adept=Kenner
 gui.skill.expert=Experte
 gui.skill.master=Meister
 gui.skillpage=Fertigkeiten
+
+#==================
+#= Error Messages =
+#==================
+error.error=
+error.NBT=
+error.OreCFG=
+error.Contact=
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========

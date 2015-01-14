@@ -6,14 +6,16 @@
 
 
 generator.TFCDefault=TFC Standaard
-generator.TFCFlat=TFC Plat
+generator.TFCFlat=
+generator.TFCAmplified=
+generator.TFCLargeBiomes=
 
 key.ToolMode=Wissel Gereedschap Functie
 key.LockTool=Gereedschap Locatie Vergrendelen
 
 effect.bleed=Bloeden
-death.attack.alcohol=
-death.attack.heatStroke=
+death.attack.alcohol=%1$s stierf vanwege alcoholvergiftiging
+death.attack.heatStroke=%1$s stierf vanwege 'n hitteberoerte
 
 #==============
 #= Spawn Eggs =
@@ -40,17 +42,17 @@ entity.sheepTFC.name=Schaap
 entity.pheasantTFC.name=Fazant
 entity.horseTFC.name=Paard
 entity.irongolemTFC.name=IJzeren Golem
-entity.fishTFC.name=
+entity.fishTFC.name=Baars
 
 
 #==========
 #= Entity =
 #==========
-entity.notFamiliar=
-fishingRod.lineTension=
-fishingRod.lineSnap=
-fishingRod.bite=
-fishingRod.gotAway=
+entity.notFamiliar=Het dier werkt niet mee.
+fishingRod.lineTension=Het touw gaat breken!
+fishingRod.lineSnap=Het touw is gebroken!
+fishingRod.bite=Oh! Een beetwond!
+fishingRod.gotAway=Het rende weg....
 
 #================
 #= Achievements =
@@ -83,41 +85,42 @@ achievement.achBronzeAge=Het Bronzen tijdperk
 achievement.achBronzeAge.desc=Een bronzen aambeeld maken om de bronze tijdperk te betreden
 achievement.achIronAge=Het IJzeren tijdperk
 achievement.achIronAge.desc=Verzamel een blok gesinterd ijzer om de ijzertijd te betreden
-achievement.achPokeCreeper=
-achievement.achPokeCreeper.desc=
+achievement.achPokeCreeper=Steve Irwin
+achievement.achPokeCreeper.desc=Raak het aan met een stok
 
 #============
 #= Commands =
 #============
-commands.transferTamed.noTamed=
-commands.transferTamed.tooMany=
-commands.transferTamed.wrongOwner=
-commands.transferTamed.sameTarget=
-commands.transferTamed.display.incoming=
-commands.transferTamed.display.outgoing=
-commands.transferTamed.wrongSender=
+commands.transferTamed.noTamed=Geen juiste dieren in bereik!
+commands.transferTamed.tooMany=Te veel dieren in de buurt!
+commands.transferTamed.wrongOwner=Dit is niet van jou!
+commands.transferTamed.sameTarget=je kunt jezelf niet afgeven!
+commands.transferTamed.display.incoming=Het dier is nu overgedragen aan jou door %s!
+commands.transferTamed.display.outgoing=Je hebt het dier overgedragen aan %s!
+commands.transferTamed.wrongSender=Je kunt geen dieren overdragen
 
 #==========
 #= Fluids =
 #==========
-fluid.freshwater=
+fluid.freshwater=Zoet water
 fluid.saltwater=Zout water
-fluid.lavatfc=
-fluid.hotwater=
+fluid.lavatfc=Lava
+fluid.hotwater=Heet water
 fluid.beer=Bier
 fluid.cider=Cider
 fluid.rum=Rum
 fluid.ryewhiskey=Rogge Whiskey
 fluid.sake=Sake
 fluid.vodka=Vodka
-fluid.whiskey=Whiskey
-fluid.cornwhiskey=
+fluid.whiskey=Wiskey
+fluid.cornwhiskey=Mais Wiskey
 fluid.milk=Melk
 fluid.milkcurdled=Gewrongelde Melk
+fluid.milkvinegar=
 fluid.limewater=Kalk Water
 fluid.tannin=Tannine
 fluid.vinegar=Azijn
-fluid.brine=
+fluid.brine=Pekel
 
 #========
 #= Food =
@@ -129,11 +132,11 @@ item.meal.decent=Redelijk
 item.meal.good=Goed
 item.meal.great=Geweldig
 item.meal.fantastic=Fantastisch
-item.Sandwich.name=
-item.Salad.name=
-item.Soup.name=
-item.Sugar.name=
-item.Sea Weed.name=
+item.Sandwich.name=Boterham
+item.Salad.name=Salade
+item.Soup.name=Soep
+item.Sugar.name=Suiker
+item.Sea Weed.name=Zeewier
 
 #== Grains ==
 item.Barley Bread.name=Gerstebrood
@@ -280,15 +283,15 @@ item.Seeds Squash.name=Squash Zaden
 item.Seeds Tomato.name=Tomaten Zaden
 
 #== Alcohol ==
-item.Glass Bottle.name=
+item.Glass Bottle.name=Lege Glazen Fles
 item.Beer.name=Bier
 item.Cider.name=Cider
 item.Rum.name=Rum
 item.RyeWhiskey.name=Rogge Whiskey
 item.Sake.name=Sake
 item.Vodka.name=Vodka
-item.Whiskey.name=Whiskey
-item.CornWhiskey.name=
+item.Whiskey.name=Wiskey
+item.CornWhiskey.name=Mais Wiskey
 
 #===========
 #= Pottery =
@@ -415,10 +418,10 @@ item.Spindle Head.Spindle Head.name=Spil Hoofd
 item.Fire Brick.Fire Brick.name=Baksteen
 item.Fire Brick.Clay Fire Brick.name=Baksteen Klei
 tile.FireBrick.name=Baksteen Blok
-tile.Pottery.name=
+tile.Pottery.name=Aardewerk
 
-item.ClayBowl.Ceramic Bowl.name=
-item.ClayBowl.Clay Bowl.name=
+item.ClayBowl.Ceramic Bowl.name=Keramike Schaal
+item.ClayBowl.Clay Bowl.name=Kleien Schaal
 
 #= Gems =
 item.Agate.Chipped.name=Afgebroken Agaat
@@ -857,7 +860,7 @@ item.Small Ore.Sphalerite.name=Sfaleriet Klompje
 item.Small Ore.Tetrahedrite.name=Tetrahedriet Klompje
 
 #== Ore Blocks ==
-tile.Ore.name=
+tile.Ore.name=Erts
 tile.Ore.Bituminous Coal.name=Bitumineuze Kolen
 tile.Ore.Borax.name=Borax
 tile.Ore.Cinnabar.name=Cinnabar
@@ -917,23 +920,23 @@ item.Log.White Cedar.name=Witte Cederen Stam
 item.Log.White Elm.name=Witte Iepen Stam
 item.Log.Willow.name=Wilgen Stam
 
-item.SinglePlank.Acacia.name=Acacia Plank
-item.SinglePlank.Ash.name=Essen Plank
-item.SinglePlank.Aspen.name=Espen Plank
-item.SinglePlank.Birch.name=Berken Plank
-item.SinglePlank.Chestnut.name=Kastanje Plank
-item.SinglePlank.Douglas Fir.name=Douglas Sparren Plank
-item.SinglePlank.Hickory.name=Hickory Plank
-item.SinglePlank.Kapok.name=Kapok Plank
-item.SinglePlank.Maple.name=Esdoorne Plank
-item.SinglePlank.Oak.name=Eiken Plank
-item.SinglePlank.Pine.name=Dennen Plank
-item.SinglePlank.Sequoia.name=Sequiola Plank
-item.SinglePlank.Spruce.name=Sparren Plank
-item.SinglePlank.Sycamore.name=Ahornen Plank
-item.SinglePlank.White Cedar.name=Witte Cederen Plank
-item.SinglePlank.White Elm.name=Witte Iepen Plank
-item.SinglePlank.Willow.name=Wilgen Plank
+item.SinglePlank.Acacia.name=Acacia Timmerhout
+item.SinglePlank.Ash.name=Essen Timmerhout
+item.SinglePlank.Aspen.name=Espen Timmerhout
+item.SinglePlank.Birch.name=Berken Timmerhout
+item.SinglePlank.Chestnut.name=Kastanje Timmerhout
+item.SinglePlank.Douglas Fir.name=Douglas Sparren Timmerhout
+item.SinglePlank.Hickory.name=Hickory Timmerhout
+item.SinglePlank.Kapok.name=Kapok Timmerhout
+item.SinglePlank.Maple.name=Esdoorne Timmerhout
+item.SinglePlank.Oak.name=Eiken Timmerhout
+item.SinglePlank.Pine.name=Dennen Timmerhout
+item.SinglePlank.Sequoia.name=Sequiola Timmerhout
+item.SinglePlank.Spruce.name=Sparren Timmerhout
+item.SinglePlank.Sycamore.name=Ahornen Timmerhout
+item.SinglePlank.White Cedar.name=Witte Cederen Timmerhout
+item.SinglePlank.White Elm.name=Witte Iepen Timmerhout
+item.SinglePlank.Willow.name=Wilgen Timmerhout
 
 item.Acacia Door.name=Acacia Deur
 item.Ash Door.name=Essen Deur
@@ -971,25 +974,43 @@ item.Barrel.White Cedar.name=Witte Cederen Ton
 item.Barrel.White Elm.name=Witte Iepen Ton
 item.Barrel.Willow.name=Wilgen Ton
 
-item.Loom.Acacia.name=
-item.Loom.Ash.name=
-item.Loom.Aspen.name=
-item.Loom.Birch.name=
-item.Loom.Chestnut.name=
-item.Loom.Douglas Fir.name=
-item.Loom.Hickory.name=
-item.Loom.Kapok.name=
-item.Loom.Maple.name=
-item.Loom.Oak.name=
-item.Loom.Pine.name=
-item.Loom.Sequoia.name=
-item.Loom.Spruce.name=
-item.Loom.Sycamore.name=
-item.Loom.White Cedar.name=
-item.Loom.White Elm.name=
-item.Loom.Willow.name=
+item.Loom.Acacia.name=Acacia Weefgetouw
+item.Loom.Ash.name=Essen Weefgetouw
+item.Loom.Aspen.name=Espen Weefgetouw
+item.Loom.Birch.name=Berken Weefgetouw
+item.Loom.Chestnut.name=Kastanje Weefgetouw
+item.Loom.Douglas Fir.name=Douglas Sparren Weefgetouw
+item.Loom.Hickory.name=Hickory Weefgetouw
+item.Loom.Kapok.name=Kapok Weefgetouw
+item.Loom.Maple.name=Esdoorn Weefgetouw
+item.Loom.Oak.name=Eiken Weefgetouw
+item.Loom.Pine.name=Dennen Weefgetouw
+item.Loom.Sequoia.name=Sequoila Weefgetouw
+item.Loom.Spruce.name=Sparren Weefgetouw
+item.Loom.Sycamore.name=Ahornen Weefgetouw
+item.Loom.White Cedar.name=Witte Cederen Weefgetouw
+item.Loom.White Elm.name=Witte Iepen Weefgetouw
+item.Loom.Willow.name=Wilgen Weefgetouw
 
 #== Wood Blocks ==
+tile.Chest.Acacia.name=
+tile.Chest.Ash.name=
+tile.Chest.Aspen.name=
+tile.Chest.Birch.name=
+tile.Chest.Chestnut.name=
+tile.Chest.Douglas Fir.name=
+tile.Chest.Hickory.name=
+tile.Chest.Kapok.name=
+tile.Chest.Maple.name=
+tile.Chest.Oak.name=
+tile.Chest.Pine.name=
+tile.Chest.Sequoia.name=
+tile.Chest.Spruce.name=
+tile.Chest.Sycamore.name=
+tile.Chest.White Cedar.name=
+tile.Chest.White Elm.name=
+tile.Chest.Willow.name=
+
 tile.log2.Acacia.name=Acacia Stam
 tile.log.Ash.name=Essen Stam
 tile.log.Aspen.name=Espen Stam
@@ -1099,9 +1120,9 @@ tile.wood.White Cedar.name=Witte Ceder Planken
 tile.wood.White Elm.name=Witte Iep Planken
 tile.wood.Willow.name=Wilgen Planken
 
-tile.fruitTreeWood.name=
-tile.fruitTreeLeaves.name=
-tile.fruitTreeLeaves2.name=
+tile.fruitTreeWood.name=Fruit Boom
+tile.fruitTreeLeaves.name=Fruit Boom Bladeren
+tile.fruitTreeLeaves2.name=Fruit Boom Bladeren
 
 tile.Door Acacia.name=Acacia Deur
 tile.Door Ash.name=Essen Deur
@@ -1139,23 +1160,23 @@ tile.Barrel.White Cedar.name=Witte Cederen Ton
 tile.Barrel.White Elm.name=Witte Iepen Ton
 tile.Barrel.Willow.name=Wilgen Ton
 
-tile.Loom.Acacia.name=
-tile.Loom.Ash.name=
-tile.Loom.Aspen.name=
-tile.Loom.Birch.name=
-tile.Loom.Chestnut.name=
-tile.Loom.Douglas Fir.name=
-tile.Loom.Hickory.name=
-tile.Loom.Kapok.name=
-tile.Loom.Maple.name=
-tile.Loom.Oak.name=
-tile.Loom.Pine.name=
-tile.Loom.Sequoia.name=
-tile.Loom.Spruce.name=
-tile.Loom.Sycamore.name=
-tile.Loom.White Cedar.name=
-tile.Loom.White Elm.name=
-tile.Loom.Willow.name=
+tile.Loom.Acacia.name=Acacia Weefgetouw
+tile.Loom.Ash.name=Essen Weefgetouw
+tile.Loom.Aspen.name=Espen Weefgetouw
+tile.Loom.Birch.name=Berken Weefgetouw
+tile.Loom.Chestnut.name=Kastanje Weefgetouw
+tile.Loom.Douglas Fir.name=Douglas Sparren Weefgetouw
+tile.Loom.Hickory.name=Hickory Weefgetouw
+tile.Loom.Kapok.name=Kapok Weefgetouw
+tile.Loom.Maple.name=Esdoorn Weefgetouw
+tile.Loom.Oak.name=Eiken Weefgetouw
+tile.Loom.Pine.name=Dennen Weefgetouw
+tile.Loom.Sequoia.name=Sequoila Weefgetouw
+tile.Loom.Spruce.name=Sparren Weefgetouw
+tile.Loom.Sycamore.name=Ahornen Weefgetouw
+tile.Loom.White Cedar.name=Witte Cederen Weefgetouw
+tile.Loom.White Elm.name=Witte Iepen Weefgetouw
+tile.Loom.Willow.name=Wilgen Weefgetouw
 
 tile.FenceTFC.Acacia.name=Acacia Hek
 tile.FenceTFC.Ash.name=Es Hek
@@ -1211,42 +1232,42 @@ tile.ArmourStand.White Cedar.name=Witte Ceder Harnas Standaard
 tile.ArmourStand.White Elm.name=Witte Iep Harnas Standaard
 tile.ArmourStand.Willow.name=Wilgen Harnas Standaard
 
-tile.WoodSupportV2.Acacia.name=
-tile.WoodSupportV.Ash.name=
-tile.WoodSupportV.Aspen.name=
-tile.WoodSupportV.Birch.name=
-tile.WoodSupportV.Chestnut.name=
-tile.WoodSupportV.Douglas Fir.name=
-tile.WoodSupportV.Hickory.name=
-tile.WoodSupportV.Kapok.name=
-tile.WoodSupportV.Maple.name=
-tile.WoodSupportV.Oak.name=
-tile.WoodSupportV.Pine.name=
-tile.WoodSupportV.Sequoia.name=
-tile.WoodSupportV.Spruce.name=
-tile.WoodSupportV.Sycamore.name=
-tile.WoodSupportV.White Cedar.name=
-tile.WoodSupportV.White Elm.name=
-tile.WoodSupportV.Willow.name=
+tile.WoodSupportV2.Acacia.name=Steunbalk (Acacia)
+tile.WoodSupportV.Ash.name=Steunbalk (Es)
+tile.WoodSupportV.Aspen.name=Steunbalk (Espen)
+tile.WoodSupportV.Birch.name=Steunbalk (Berk)
+tile.WoodSupportV.Chestnut.name=Steunbalk (Kastanje)
+tile.WoodSupportV.Douglas Fir.name=Steunbalk (Douglas Spar)
+tile.WoodSupportV.Hickory.name=Steunbalk (Hickory)
+tile.WoodSupportV.Kapok.name=Steunbalk (Kapok)
+tile.WoodSupportV.Maple.name=Steunbalk (Esdoorn)
+tile.WoodSupportV.Oak.name=Steunbalk (Eiken)
+tile.WoodSupportV.Pine.name=Steunbalk (Dennen)
+tile.WoodSupportV.Sequoia.name=Steunbalk (Sequoila)
+tile.WoodSupportV.Spruce.name=Steunbalk (Sparren)
+tile.WoodSupportV.Sycamore.name=Steunbalk (Ahorne)
+tile.WoodSupportV.White Cedar.name=Steunbalk (Witte ceder)
+tile.WoodSupportV.White Elm.name=Steunbalk (Witte Iep)
+tile.WoodSupportV.Willow.name=Steunbalk (Wilgen)
 
-tile.WoodSupportH2.name=
-tile.WoodSupportH2.Acacia.name=
-tile.WoodSupportH.Ash.name=
-tile.WoodSupportH.Aspen.name=
-tile.WoodSupportH.Birch.name=
-tile.WoodSupportH.Chestnut.name=
-tile.WoodSupportH.Douglas Fir.name=
-tile.WoodSupportH.Hickory.name=
-tile.WoodSupportH.Kapok.name=
-tile.WoodSupportH.Maple.name=
-tile.WoodSupportH.Oak.name=
-tile.WoodSupportH.Pine.name=
-tile.WoodSupportH.Sequoia.name=
-tile.WoodSupportH.Spruce.name=
-tile.WoodSupportH.Sycamore.name=
-tile.WoodSupportH.White Cedar.name=
-tile.WoodSupportH.White Elm.name=
-tile.WoodSupportH.Willow.name=
+tile.WoodSupportH2.name=Steunbalk
+tile.WoodSupportH2.Acacia.name=Steunbalk (Acacia)
+tile.WoodSupportH.Ash.name=Steunbalk (Es)
+tile.WoodSupportH.Aspen.name=Steunbalk (Espen)
+tile.WoodSupportH.Birch.name=Steunbalk (Berk)
+tile.WoodSupportH.Chestnut.name=Steunbalk (Kastanje)
+tile.WoodSupportH.Douglas Fir.name=Steunbalk (Douglas Spar)
+tile.WoodSupportH.Hickory.name=Steunbalk (Hickory)
+tile.WoodSupportH.Kapok.name=Steunbalk (Kapok)
+tile.WoodSupportH.Maple.name=Steunbalk (Esdoorn)
+tile.WoodSupportH.Oak.name=Steunbalk (Eiken)
+tile.WoodSupportH.Pine.name=Steunbalk (Dennen)
+tile.WoodSupportH.Sequoia.name=Steunbalk (Sequoila)
+tile.WoodSupportH.Spruce.name=Steunbalk (Sparren)
+tile.WoodSupportH.Sycamore.name=Steunbalk (Ahorne)
+tile.WoodSupportH.White Cedar.name=Steunbalk (Witte ceder)
+tile.WoodSupportH.White Elm.name=Steunbalk (Witte Iep)
+tile.WoodSupportH.Willow.name=Steunbalk (Wilgen)
 
 tile.Toolrack.Acacia.name=Acacia Gereedschapsrek
 tile.Toolrack.Ash.name=Es Gereedschapsrek
@@ -1863,16 +1884,16 @@ tile.BlastFurnace.name=Hoog Oven
 tile.SpawnMeter.name=Beschermings Meter
 tile.Quern.name=Handmolen Onderstel
 tile.EarlyBloomery.name=SmeltOven
-tile.Molten.name=
+tile.Molten.name=Gesmolten Erts
 tile.Crucible.name=Smeltkroes
 tile.NestBox.name=Nestkist
 item.SluiceItem.name=Sluis
 tile.Sluice.name=Sluis
-tile.LeatherRack.name=
-tile.FoodPrep.name=
-tile.MetalSheet.name=
-tile.ingotpile.name=
-tile.SmokeRack.name=
+tile.LeatherRack.name=Leren Rek
+tile.FoodPrep.name=Voedsel Preperatie
+tile.MetalSheet.name=Metalen Plaat
+tile.ingotpile.name=Ingots Stapel
+tile.SmokeRack.name=Rook Rek
 
 #== Anvils ==
 tile.Anvil.Stone.name=Stenen Aambeeld
@@ -1900,9 +1921,9 @@ tile.ClayGrass.name=Klei Gras
 tile.dirt.name=Aarde
 tile.sand.name=Zand
 tile.Peat.name=Veen
-tile.tilledSoil.name=
-tile.LooseRock.name=
-tile.Ice.name=
+tile.tilledSoil.name=Boerenland
+tile.LooseRock.name=Brokstukken
+tile.Ice.name=IJs
 
 #=================
 #= Miscellaneous =
@@ -1914,7 +1935,7 @@ item.stick.name=Stok
 item.coal.coal.name=Steenkool
 item.coal.charcoal.name=Houtskool
 item.Fertilizer.name=Kunstmest
-item.Reeds.name=
+item.Reeds.name=Riet
 
 item.Wooden Bucket Empty.name=Houten Emmer (Leeg)
 item.Wooden Bucket Water.name=Houten Emmer (Zoet Water)
@@ -1938,12 +1959,12 @@ item.Firestarter.name=Vuur Aanmaakhout
 
 item.Quern.name=Handmolen
 item.Blueprint.name=Blauwdruk
-item.Nametag.name=
+item.Nametag.name=Naam Plaat
 item.WoolYarn.name=Wol Garen
 item.Wool.name=Wol
 item.WoolCloth.name=Wollen Doek
-item.SilkCloth.name=
-item.BurlapCloth.name=
+item.SilkCloth.name=Zijden Doek
+item.BurlapCloth.name=Jute Doek
 item.Mortar.name=Mortel
 item.Vinegar.name=Azijn
 
@@ -1971,8 +1992,8 @@ item.fishingRod.name=Vishengel
 
 item.Quiver.name=Pijlkoker
 item.Rope.name=Touw
-item.Mud Brick.name=
-item.Wet Mud Brick.name=
+item.Mud Brick.name=Modder Baksteen
+item.Wet Mud Brick.name=Natte Modder Baksteen
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Stro en Dierenhuid Bed
@@ -1980,26 +2001,26 @@ tile.StrawHideBed.name=Stro en Dierenhuid Bed
 tile.customBed.sleep=Dit bed is niet comfortabel genoeg om in te slapen
 tile.BasicPipe.name=Pijp
 tile.ValvePipe.name=Pijpventiel
-tile.Smoke.name=
-tile.Torch.name=
-tile.Chest.name=
-tile.Bookshelf.name=
-tile.Workbench.name=
-tile.ButtonWood.name=
-tile.Firepit.name=
-tile.LogPile.name=
-tile.Charcoal.name=
-tile.StoneDetailed.name=
-tile.stoneStairs.name=
-tile.stoneSlabs.name=
-tile.stoneStalac.name=
-tile.WoodConstruct.name=
-tile.MetalTrapDoor.name=
-tile.Vessel.name=
-tile.Grill.name=
+tile.Smoke.name=Rook
+tile.Torch.name=Toorts
+tile.Chest.name=Kist
+tile.Bookshelf.name=Boekenplank
+tile.Workbench.name=Werkbank
+tile.ButtonWood.name=Houten knop
+tile.Firepit.name=Vuurpit
+tile.LogPile.name=Houtstapel
+tile.Charcoal.name=Houtskool
+tile.StoneDetailed.name=Gedetaileerd
+tile.stoneStairs.name=Trede
+tile.stoneSlabs.name=Plak
+tile.stoneStalac.name=Stalactiet
+tile.WoodConstruct.name=Kaphout
+tile.MetalTrapDoor.name=Trap Deur
+tile.Vessel.name=Grote Pot
+tile.Grill.name=Gril
 
 tile.Sulfur.name=Zwavel
-tile.Reeds.name=
+tile.Reeds.name=Riet
 
 #= Misc. Plants =
 item.Sugarcane.name=Suikerriet
@@ -2008,9 +2029,9 @@ item.Straw.name=Stro
 item.Jute.name=Jute
 item.Jute Fibre.name=Jutevezel
 
-tile.Fungi.mushroom_brown.name=Paddestoel
-tile.Fungi.mushroom_red.name=
-tile.Cactus.name=
+tile.Fungi.mushroom_brown.name=Bruine Paddestoel
+tile.Fungi.mushroom_red.name=Rode Paddestoel
+tile.Cactus.name=Cactus
 tile.Pumpkin.name=Pompoen
 tile.Moss.name=Mos
 tile.Thatch.name=Riet
@@ -2021,43 +2042,42 @@ item.Seeds Sugarcane.name=Suikerriet Zaden
 item.Seeds Hemp.name=Hennep Zaden
 item.Seeds Jute.name=Jute Zaden
 
-tile.TallGrass.tallgrass.name=
-tile.TallGrass.fern.name=
-tile.TallGrass.shortgrass.name=
-tile.LilyPad.name=
-tile.Vine.name=
-tile.SeaGrassStill.name=
-tile.SeaGrassIce.name=
+tile.TallGrass.tallgrass.name=Lang Gras
+tile.TallGrass.fern.name=Vern
+tile.TallGrass.shortgrass.name=Kort Gras
+tile.LilyPad.name=Lelie blad
+tile.Vine.name=Wingerd
+tile.SeaGrassStill.name=Zeegrass
+tile.SeaGrassIce.name=Bevroren Zeegrass
 
-tile.Flowers.flower_nasturtium.name=
-tile.Flowers.flower_dandelion.name=
-tile.Flowers.flower_meads_milkweed.name=
-tile.Flowers.flower_tropical_milkweed.name=
-tile.Flowers.flower_butterfly_milkweed.name=
-tile.Flowers.flower_calendula.name=
+tile.Flowers.flower_nasturtium.name=Oostindische Kers
+tile.Flowers.flower_dandelion.name=Paardebloem
+tile.Flowers.flower_meads_milkweed.name=Zijdeplant (Weide)
+tile.Flowers.flower_tropical_milkweed.name=Zijdeplant (Tropisch)
+tile.Flowers.flower_butterfly_milkweed.name=Zijdeplant (Vlinder)
+tile.Flowers.flower_calendula.name=Goudsbloem
 tile.Flowers2.flower_rose.name=Klaproos
-tile.Flowers2.flower_blue_orchid.name=
-tile.Flowers2.flower_allium.name=
-tile.Flowers2.flower_houstonia.name=
-tile.Flowers2.flower_tulip_red.name=
-tile.Flowers2.flower_tulip_orange.name=
-tile.Flowers2.flower_tulip_white.name=
-tile.Flowers2.flower_tulip_pink.name=
-tile.Flowers2.flower_oxeye_daisy.name=
+tile.Flowers2.flower_blue_orchid.name=Blauwe Orchidee
+tile.Flowers2.flower_allium.name=Allium
+tile.Flowers2.flower_houstonia.name=Houstonia
+tile.Flowers2.flower_tulip_red.name=Rode Tulp
+tile.Flowers2.flower_tulip_orange.name=Oranje Tulp
+tile.Flowers2.flower_tulip_white.name=Witte Tulp
+tile.Flowers2.flower_tulip_pink.name=Roze Tulp
+tile.Flowers2.flower_oxeye_daisy.name=Madeliefje
 
-tile.SaltWater.name=
-tile.SaltWaterStationary.name=
-tile.FreshWater.name=
-tile.FreshWaterStationary.name=
-tile.HotWater.name=
-tile.HotWaterStationary.name=
-tile.Lava.name=
-tile.LavaStationary.name=
+tile.SaltWater.name=Stromend Zeewater
+tile.SaltWaterStationary.name=Zeewater
+tile.FreshWater.name=Stromend Zoet Water
+tile.FreshWaterStationary.name=Zoetwater
+tile.HotWater.name=Stromend Heet Water
+tile.HotWaterStationary.name=Heet Water
+tile.Lava.name=Stromend Lava
+tile.LavaStationary.name=Lava
 
 #=======
 #= GUI =
 #=======
-gui.badnbt=
 
 #== Anvil GUI ==
 gui.Anvil.Plans=Tekening
@@ -2119,18 +2139,11 @@ gui.Anvil.Rule42=Buigen, Laatste Drie
 gui.Anvil.Rule43=Buigen, Niet Laatste
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=Geavanceerd
-gui.Armor.Shift=Wisselen
 gui.Armor.ForgedBy=Gemaakt door:
-gui.Armor.Hold=Vasthouden
 gui.Armor.Crush=Verpletteren
 gui.Armor.Pierce=Doordringen
 gui.Armor.Slash=Snijden
 
-word.stage1=Stage 1
-word.stage2=Stage 2
-
-gui.Bow.Advanced=Geavanceerd
 gui.Bow.Javelins=Speren
 gui.Bow.Arrows=Pijlen
 gui.Bow.ForgedBy=Gemaakt door
@@ -2143,26 +2156,25 @@ gui.DamageType.Slashing=Snijdend
 #== Barrel GUI ==
 gui.Barrel.Empty=Leeg
 gui.Barrel.Seal=Verzegelen
-gui.Barrel.Unseal=
+gui.Barrel.Unseal=Ontzegelen
 gui.Barrel.ToggleOff=Legen
 gui.Barrel.ToggleOn=Vullen
-gui.Barrel.SealedOn=
-gui.Barrel.Solid=
-gui.Barrel.Liquid=
-gui.barrel.pickling=
-gui.barrel.brining=
-gui.barrel.preserving=
+gui.Barrel.SealedOn=Verzegeld Op
+gui.Barrel.Solid=Opslag (Vaste stoffen)
+gui.Barrel.Liquid=Opslag (Vloeistoffen)
+gui.barrel.pickling=Verzuren
+gui.barrel.brining=Pekelen
+gui.barrel.preserving=Conserveren
 
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Houtskool
 gui.Bloomery.Ore=Erts
-gui.Bloomery.Output=Opbrengst
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=Kalender
-gui.Calendar.DateBioxx=Bioxx's Verjaardag
-gui.Calendar.DateDunk=Dunk's Verjaardag
-gui.Calendar.DateKitty=
+gui.Calendar.DateBioxx=Bioxx's Verjaardag!
+gui.Calendar.DateDunk=Dunk's Verjaardag!
+gui.Calendar.DateKitty=Kitty's Verjaardag!
 
 gui.Calendar.Hour=Uur
 gui.Calendar.WitchHour=Heksen uur
@@ -2216,8 +2228,8 @@ gui.FoodPrep.Effect=Effect
 gui.FoodPrep.Energy=Energie
 gui.FoodPrep.Filling=Verzadegent
 gui.FoodPrep.Power=Kracht
-gui.FoodPrep.Sandwich=
-gui.FoodPrep.Salad=
+gui.FoodPrep.Sandwich=Boterham
+gui.FoodPrep.Salad=Salade
 
 #== Metals ==
 gui.metal.Bismuth=Bismut
@@ -2273,42 +2285,54 @@ gui.plans.shovel=Schep
 gui.plans.splitbloom=Splijten
 gui.plans.sword=Zwaard
 gui.plans.tuyere=Blaaspijp
-gui.plans.grill=
-gui.plans.shears=
-gui.plans.trapdoor=
+gui.plans.grill=Gril
+gui.plans.shears=Schaar
+gui.plans.trapdoor=Trap Deur
 
 #== Misc GUI ==
 gui.Blueprint=Blauwdruk
-gui.Nametag=
+gui.Nametag=Naam Plaat
 gui.fertilized=Kunstmest
 gui.Inventory=Inhoud
 gui.ClearSlot=Maak plaats voor de opbrengst
 gui.LogPile=Houtstapel
+gui.Output=Opbrengst
 gui.done=Klaar
-gui.cancel=
+gui.cancel=Anuleren
 gui.Sluice.Soil=Aarde
-gui.Sluice.Overworked=
+gui.Sluice.Overworked=Overwerkt
 gui.Workbench.Crafting=Maken
-gui.overburdened=
-gui.slot=
-gui.slot.back=
+gui.overburdened=* Overwerkt *
+
+gui.badnbt=Foute Info
 
 #== Tooltips ==
+gui.Advanced=Geavanceerd
+gui.Shift=Wisselen
+gui.Hold=Vasthouden
+
+gui.slot=Slot
+gui.slot.back=Terug
+
 gui.ShowHelp=§8Help: (Houd §fShift§8 vast)
 gui.Help=§8Help:
 gui.Clay.Inst0=§bRecht Klik §7met 5 in een stapel, om te vormen
-gui.Knife.Inst0=
-gui.Knife.Inst1=
+gui.Knife.Inst0=§bRecht Klik §7top van een blok om
+gui.Knife.Inst1=maak een aanrecht
 gui.Leather.Inst0=§bRecht Klik §7met een mes, in je inhoud, om te snijden
 gui.LooseRock.Inst0=§bRecht Klik §7met 2 in een stapel, om te knappen.
-gui.MeltedMetal.Inst0=§bRecht Klik §7om in een Mal te gieten
+gui.MeltedMetal.Inst0=§bRecht Klik §7om te gieten of combineren
 gui.PotteryBase.Inst0=Sluip en §bRecht Klik §7om een voorwerp te plaatsen
 gui.PotteryVesselSmall.Inst0=Of §bRecht Klik §7om te openen
-gui.RawHide.Inst0=
-gui.Barrel.MoreItems=
-gui.Nutrient.A=
-gui.Nutrient.B=
-gui.Nutrient.C=
+gui.RawHide.Inst0=????
+gui.Barrel.MoreItems=§8Meer... (Houd §fShift§8)
+
+gui.Nutrient.A=Grondstof A
+gui.Nutrient.B=Grondstof B
+gui.Nutrient.C=Grondstof C
+
+gui.stage1=Stage 1
+gui.stage2=Stage 2
 
 gui.Size.Tiny=Minuscuul
 gui.Size.VerySmall=Erg klein
@@ -2326,6 +2350,7 @@ gui.Reach.Short=Kort
 gui.Reach.Medium=Medium
 gui.Reach.Far=Ver
 
+#== Food ==
 gui.food.fruit=Fruit
 gui.food.vegetable=Groente
 gui.food.grain=Graan
@@ -2338,89 +2363,89 @@ gui.food.salted=Gezouten
 gui.FoodHeat.Cold=Koud
 gui.FoodHeat.Warm=Warm
 
-gui.showtaste=
-gui.taste=
-gui.taste.sweet=
-gui.taste.sour=
-gui.taste.salty=
-gui.taste.bitter=
-gui.taste.savory=
+gui.showtaste=§Smaak: (Houd §fL-Ctrl§8)
+gui.taste=§Smaak:
+gui.taste.sweet=Zoet
+gui.taste.sour=Zuur
+gui.taste.salty=Zout
+gui.taste.bitter=Bitter
+gui.taste.savory=Hartig
 
-gui.taste.novice.sweet1=
-gui.taste.novice.sweet0=
-gui.taste.novice.sour1=
-gui.taste.novice.sour0=
-gui.taste.novice.salty1=
-gui.taste.novice.salty0=
-gui.taste.novice.bitter1=
-gui.taste.novice.bitter0=
-gui.taste.novice.savory1=
-gui.taste.novice.savory0=
+gui.taste.novice.sweet1=Zoet
+gui.taste.novice.sweet0=Niet Zoet
+gui.taste.novice.sour1=Zuur
+gui.taste.novice.sour0=Niet Zuur
+gui.taste.novice.salty1=Zout
+gui.taste.novice.salty0=Niet Zout
+gui.taste.novice.bitter1=Bitter
+gui.taste.novice.bitter0=Niet Bitter
+gui.taste.novice.savory1=Hartig
+gui.taste.novice.savory0=Niet Hartig
 
-gui.taste.adept.sweet0=
-gui.taste.adept.sweet1=
-gui.taste.adept.sweet2=
-gui.taste.adept.sweet3=
-gui.taste.adept.sweet4=
-gui.taste.adept.sweet5=
-gui.taste.adept.sour0=
-gui.taste.adept.sour1=
-gui.taste.adept.sour2=
-gui.taste.adept.sour3=
-gui.taste.adept.sour4=
-gui.taste.adept.sour5=
-gui.taste.adept.salty0=
-gui.taste.adept.salty1=
-gui.taste.adept.salty2=
-gui.taste.adept.salty3=
-gui.taste.adept.salty4=
-gui.taste.adept.salty5=
-gui.taste.adept.bitter0=
-gui.taste.adept.bitter1=
-gui.taste.adept.bitter2=
-gui.taste.adept.bitter3=
-gui.taste.adept.bitter4=
-gui.taste.adept.bitter5=
-gui.taste.adept.savory0=
-gui.taste.adept.savory1=
-gui.taste.adept.savory2=
-gui.taste.adept.savory3=
-gui.taste.adept.savory4=
-gui.taste.adept.savory5=
+gui.taste.adept.sweet0=Niet Zoet
+gui.taste.adept.sweet1=Beetje Zoet
+gui.taste.adept.sweet2=Zoet
+gui.taste.adept.sweet3=Heel Zoet
+gui.taste.adept.sweet4=Erg Zoet
+gui.taste.adept.sweet5=Extreem Zoet
+gui.taste.adept.sour0=Niet Zuur
+gui.taste.adept.sour1=Beetje Zuur
+gui.taste.adept.sour2=Zuur
+gui.taste.adept.sour3=Heel Zuur
+gui.taste.adept.sour4=Erg Zuur
+gui.taste.adept.sour5=Extreem Zuur
+gui.taste.adept.salty0=Niet Zout
+gui.taste.adept.salty1=Beetje Zout
+gui.taste.adept.salty2=Zout
+gui.taste.adept.salty3=Heel Zout
+gui.taste.adept.salty4=Erg Zout
+gui.taste.adept.salty5=Extreem Zout
+gui.taste.adept.bitter0=Niet Bitter
+gui.taste.adept.bitter1=Beetje Bitter
+gui.taste.adept.bitter2=Bitter
+gui.taste.adept.bitter3=Heel Bitter
+gui.taste.adept.bitter4=Erg Bitter
+gui.taste.adept.bitter5=Extreem Bitter
+gui.taste.adept.savory0=Niet Hartig
+gui.taste.adept.savory1=Beetje Hartig
+gui.taste.adept.savory2=Hartig
+gui.taste.adept.savory3=Heel Hartig
+gui.taste.adept.savory4=Erg Hartig
+gui.taste.adept.savory5=Extreem Hartig
 
-gui.taste.0=
-gui.taste.1=
-gui.taste.2=
-gui.taste.3=
-gui.taste.4=
-gui.taste.5=
-gui.taste.6=
-gui.taste.7=
-gui.taste.8=
+gui.taste.0=Niet
+gui.taste.1=Niet Erg
+gui.taste.2=Enigzins
+gui.taste.3=Gemiddeld
+gui.taste.4=Perfect
+gui.taste.5=Al Te
+gui.taste.6=Erg
+gui.taste.7=Extreem
+gui.taste.8=Belachelijk
 
-word.pickled=
-word.brined=
-word.cooked=
-word.salted=
-word.smoked=
-word.dried=
+word.pickled=Gezuurd
+word.brined=Gepekeld
+word.cooked=Gekookt
+word.salted=Gezouten
+word.smoked=Geroookt
+word.dried=Gedroogt
 
-food.cooked.rare=
-food.cooked.medrare=
-food.cooked.med=
-food.cooked.medwell=
-food.cooked.well=
-food.cooked.0=
-food.cooked.1=
-food.cooked.2=
-food.cooked.3=
-food.cooked.4=
+food.cooked.rare=Rauw
+food.cooked.medrare=Medium Rauw
+food.cooked.med=Medium
+food.cooked.medwell=Medium Goed
+food.cooked.well=Doorgebakken
+food.cooked.0=Erg Licht
+food.cooked.1=Licht
+food.cooked.2=Gemiddeld
+food.cooked.3=Donker
+food.cooked.4=Erg Donker
 
 gui.Torch.CatchingFire=Vat Vlam
 gui.Torch.Lit=Brandend
 
 gui.ItemHeat.Liquid=Vloeibaar
-gui.ItemHeat.Solidified=
+gui.ItemHeat.Solidified=Gestold
 gui.ItemHeat.Caution=Waarschuwing
 gui.ItemHeat.Warming=Warmt op
 gui.ItemHeat.Hot=Heet
@@ -2444,9 +2469,17 @@ gui.milk.sour=Zure
 
 gui.units=Eenheden
 
+#== WAILA ==
+gui.useless=
+gui.growth=
+gui.mature=
+gui.metal.Iron=
+
 #== Chat Messages ==
 gui.GoldPan.UseFull=Kan alleen in stromend water gebruikt worden
 gui.goldpan.overused=Dit gebied is te veel bewerkt. Je zal er waarschijnlijk niets vinden.
+gui.seeds.failedTemp=
+gui.seeds.failedSun=
 
 gui.ProPick.Found=Gevonden:
 gui.ProPick.FoundTraces=Miniscule hoeveelheden gevonden van
@@ -2465,8 +2498,8 @@ itemGroup.TFCTools=(TFC) Gereedschappen
 itemGroup.TFCWeapons=(TFC) Wapens
 itemGroup.TFCDevices=(TFC) Machines
 itemGroup.TFCFoods=(TFC) Voedsel
-itemGroup.TFCBuilding=
-itemGroup.TFCDecoration=
+itemGroup.TFCBuilding=(TFC) Bouwblokken
+itemGroup.TFCDecoration=(TFC) Decoratieblokken
 
 #== Skill GUI ==
 skill.armorsmith=Harnas Smeden
@@ -2475,13 +2508,21 @@ skill.toolsmith=Gereedschap Smeden
 skill.weaponsmith=Wapen Smeden
 skill.agriculture=Landbouw
 skill.cooking=Koken
-skill.prospecting=
-skill.butchering=
-gui.skill.novice=
-gui.skill.adept=
-gui.skill.expert=
-gui.skill.master=
-gui.skillpage=
+skill.prospecting=Prospecting
+skill.butchering=Slachten
+gui.skill.novice=Beginner
+gui.skill.adept=Gevorderde
+gui.skill.expert=Expert
+gui.skill.master=Meester
+gui.skillpage=Vaardigheden
+
+#==================
+#= Error Messages =
+#==================
+error.error=
+error.NBT=
+error.OreCFG=
+error.Contact=
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========

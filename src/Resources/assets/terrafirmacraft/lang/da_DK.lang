@@ -1,12 +1,14 @@
 ﻿#da_DK
-#Dette er den danske sprog-konfigurationsfil, oversat af gufferdk og efterset af DukeJuke; This is the Danish language configuration file, translated by gufferdk and rewiewed by DukeJuke
+#Dette er den danske sprogkonfigurationsfil, oversat af gufferdk og korrekturlæst af DukeJuke.
 
 
 
 
 
 generator.TFCDefault=TFC Standard
-generator.TFCFlat=TFC Flad
+generator.TFCFlat=
+generator.TFCAmplified=
+generator.TFCLargeBiomes=
 
 key.ToolMode=Skift Værktøjstilstand
 key.LockTool=Lås Værktøjsplacering
@@ -58,7 +60,7 @@ fishingRod.gotAway=Den slap væk…
 achievement.achLooseRock=Tid til at stene!
 achievement.achLooseRock.desc=Saml en sten op
 achievement.achSmallOre=§oNo stone unturned
-achievement.achSmallOre.desc=Find en malm-klump
+achievement.achSmallOre.desc=Find en malmklump
 achievement.achWildVegetable=Samler
 achievement.achWildVegetable.desc=Find en vild grøntsag
 achievement.achRutabaga=Åndssvage løg...
@@ -114,6 +116,7 @@ fluid.whiskey=Whisky
 fluid.cornwhiskey=Majswhisky
 fluid.milk=Mælk
 fluid.milkcurdled=Syrnet Mælk
+fluid.milkvinegar=
 fluid.limewater=Kalkvand
 fluid.tannin=Tannin
 fluid.vinegar=Eddike
@@ -990,6 +993,24 @@ item.Loom.White Elm.name=Hvidelmetræsvæv
 item.Loom.Willow.name=Piletræsvæv
 
 #== Wood Blocks ==
+tile.Chest.Acacia.name=
+tile.Chest.Ash.name=
+tile.Chest.Aspen.name=
+tile.Chest.Birch.name=
+tile.Chest.Chestnut.name=
+tile.Chest.Douglas Fir.name=
+tile.Chest.Hickory.name=
+tile.Chest.Kapok.name=
+tile.Chest.Maple.name=
+tile.Chest.Oak.name=
+tile.Chest.Pine.name=
+tile.Chest.Sequoia.name=
+tile.Chest.Spruce.name=
+tile.Chest.Sycamore.name=
+tile.Chest.White Cedar.name=
+tile.Chest.White Elm.name=
+tile.Chest.Willow.name=
+
 tile.log2.Acacia.name=Akaciestamme
 tile.log.Ash.name=Askestamme
 tile.log.Aspen.name=Aspestamme
@@ -2057,7 +2078,6 @@ tile.LavaStationary.name=Lava
 #=======
 #= GUI =
 #=======
-gui.badnbt=DÅRLIGT Info
 
 #== Anvil GUI ==
 gui.Anvil.Plans=Planer
@@ -2119,18 +2139,11 @@ gui.Anvil.Rule42=Bøj, Sidste Tre
 gui.Anvil.Rule43=Bøj, Ikke Sidst
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=Avanceret
-gui.Armor.Shift=Skift
 gui.Armor.ForgedBy=Smedet af
-gui.Armor.Hold=Tryk
 gui.Armor.Crush=Smadrende
 gui.Armor.Pierce=Gennemtrængende
 gui.Armor.Slash=Skærende
 
-word.stage1=Trin 1
-word.stage2=Trin 2
-
-gui.Bow.Advanced=Avanceret
 gui.Bow.Javelins=Spyd
 gui.Bow.Arrows=Pile
 gui.Bow.ForgedBy=Lavet af
@@ -2156,7 +2169,6 @@ gui.barrel.preserving=Konservering
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Trækul
 gui.Bloomery.Ore=Malm
-gui.Bloomery.Output=Produkt
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=Kalender
@@ -2284,16 +2296,24 @@ gui.fertilized=Gødet
 gui.Inventory=Beholdning
 gui.ClearSlot=Tøm et produktfelt
 gui.LogPile=Brændestabel
+gui.Output=Produkt
 gui.done=Færdig
 gui.cancel=Annuler
 gui.Sluice.Soil=Jord
 gui.Sluice.Overworked=Overbebyrdet
 gui.Workbench.Crafting=Fremstilling
 gui.overburdened=*Overbelastet*
+
+gui.badnbt=DÅRLIGT Info
+
+#== Tooltips ==
+gui.Advanced=Avanceret
+gui.Shift=Skift
+gui.Hold=Tryk
+
 gui.slot=Felt
 gui.slot.back=Tilbage
 
-#== Tooltips ==
 gui.ShowHelp=§8Hjælp: (Hold §fSkift§8)
 gui.Help=§8Hjælp:
 gui.Clay.Inst0=§bHøjreklik §7med 5 i en bunke for at forme.
@@ -2306,9 +2326,13 @@ gui.PotteryBase.Inst0=Snig og §bHøjreklik §7for at placere objekt.
 gui.PotteryVesselSmall.Inst0=Eller §bHøjreklik §7for at åbne inventar.
 gui.RawHide.Inst0=?????
 gui.Barrel.MoreItems=§8Med mere... (Tryk §fSkift§8)
+
 gui.Nutrient.A=Næringsstof A
 gui.Nutrient.B=Næringsstof B
 gui.Nutrient.C=Næringsstof C
+
+gui.stage1=Trin 1
+gui.stage2=Trin 2
 
 gui.Size.Tiny=Mini
 gui.Size.VerySmall=Meget Lille
@@ -2326,6 +2350,7 @@ gui.Reach.Short=Kort
 gui.Reach.Medium=Medium
 gui.Reach.Far=Land
 
+#== Food ==
 gui.food.fruit=Frugt
 gui.food.vegetable=Grøntsag
 gui.food.grain=Korn
@@ -2444,9 +2469,17 @@ gui.milk.sour=Sur
 
 gui.units=Enheder
 
+#== WAILA ==
+gui.useless=
+gui.growth=
+gui.mature=
+gui.metal.Iron=
+
 #== Chat Messages ==
-gui.GoldPan.UseFull=Skal bruges under flydende vand
-gui.goldpan.overused=Dette område ser ud til at være udtømt for malm der kan udvindes på denne måde. Du vil sandsyneligvis ikke finde ret meget!
+gui.GoldPan.UseFull=Skal bruges under flydende vand.
+gui.goldpan.overused=Dette område ser ud til at være udtømt for malm der kan udvindes på denne måde. Du vil sandsynligvis ikke finde ret meget!
+gui.seeds.failedTemp=
+gui.seeds.failedSun=
 
 gui.ProPick.Found=Fandt
 gui.ProPick.FoundTraces=Fandt spor af
@@ -2482,6 +2515,14 @@ gui.skill.adept=Erfaren
 gui.skill.expert=Ekspert
 gui.skill.master=Mester
 gui.skillpage=Færdigheder
+
+#==================
+#= Error Messages =
+#==================
+error.error=
+error.NBT=
+error.OreCFG=
+error.Contact=
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========

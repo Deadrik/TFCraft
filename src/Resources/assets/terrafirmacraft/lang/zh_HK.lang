@@ -1,12 +1,14 @@
 ﻿#zh_HK
 #此檔案是繁體中文的設定檔案 Traditional Chinese. Translated by: diplo from Hong Kong
 # Terrafirmacraft -- 博厚傳說 (博厚載物 群巒疊翠)
-# Terrafirmacraft -- 博厚傳說 Extensive (博) Deep (厚) Legend (傳說) (Extensive and Deep Earth) 博厚所以載物也 (地博厚 天高明)摘自 中庸《中庸》
+# Terrafirmacraft -- 博厚傳說 Extensive (博) Deep (厚) Legend (傳說) (Extensive and Deep Earth) 博厚所以載物也 (地博厚 天高明)摘自 《中庸》
 # Thanks the developers for developing this game. :-) And thanks Alice_in_Game for keeping up this translation list.
 
 
 generator.TFCDefault=TFC 博厚傳說原設定
-generator.TFCFlat=TFC 博厚傳說平地設定
+generator.TFCFlat=
+generator.TFCAmplified=
+generator.TFCLargeBiomes=
 
 key.ToolMode=替換工具狀態
 key.LockTool=鎖定工具位置
@@ -39,7 +41,7 @@ entity.creeperTFC.name=苦力怕 Creeper
 entity.sheepTFC.name=羊 Sheep
 entity.pheasantTFC.name=野雞 Pheasant
 entity.horseTFC.name=馬 Horse
-entity.irongolemTFC.name=鐵巨人 Iron Golem
+entity.irongolemTFC.name=鐵巨人(鐵魔像) Iron Golem
 entity.fishTFC.name=鱸魚 Bass
 
 
@@ -114,6 +116,7 @@ fluid.whiskey=威士忌(Whiskey)
 fluid.cornwhiskey=玉米(粟米)威士忌(Corn Whiskey)
 fluid.milk=奶(Milk)
 fluid.milkcurdled=凝固的奶(Curdled Milk)
+fluid.milkvinegar=
 fluid.limewater=石灰水(LImewater)
 fluid.tannin=單寧酸(Tannin)
 fluid.vinegar=醋(Vinegar)
@@ -129,8 +132,8 @@ item.meal.decent=味道不錯(Decent)
 item.meal.good=美味可口(Good)
 item.meal.great=垂涎欲滴(Great)
 item.meal.fantastic=回味無窮(Fantastic)
-item.Sandwich.name=三文治
-item.Salad.name=沙律
+item.Sandwich.name=三文治(Sandwich)
+item.Salad.name=沙律(Salad)
 item.Soup.name=湯(Soup)
 item.Sugar.name=砂糖(Sugar)
 item.Sea Weed.name=海藻(Sea Weed)
@@ -408,17 +411,17 @@ item.Sword Mold.Ceramic Mold Sword Bronze.name=青銅劍鑄模(Sword Mold (Bronz
 item.Sword Mold.Ceramic Mold Sword Black Bronze.name=黑青銅劍鑄模(Sword Mold (Black Bronze))
 item.Sword Mold.Ceramic Mold Sword Bismuth Bronze.name=鉍青銅劍鑄模(Sword Mold (Bismuth Bronze))
 
-item.Spindle.name=紡紗軸
-item.Spindle Head.Clay Spindle.name=泥紡紗軸
-item.Spindle Head.Spindle Head.name=紡紗軸頭
+item.Spindle.name=紡紗軸(Spindle)
+item.Spindle Head.Clay Spindle.name=泥紡紗軸(Clay Spindle)
+item.Spindle Head.Spindle Head.name=紡紗軸頭(Spindle Head)
 
-item.Fire Brick.Fire Brick.name=耐火磚
-item.Fire Brick.Clay Fire Brick.name=陶泥耐火磚
-tile.FireBrick.name=耐火磚方塊
-tile.Pottery.name=陶器
+item.Fire Brick.Fire Brick.name=耐火磚(Fire Brick)
+item.Fire Brick.Clay Fire Brick.name=陶泥耐火磚(Clay Fire Brick)
+tile.FireBrick.name=耐火磚方塊(Fire Brick Block)
+tile.Pottery.name=陶器(Pottery)
 
-item.ClayBowl.Ceramic Bowl.name=陶碗
-item.ClayBowl.Clay Bowl.name=泥碗
+item.ClayBowl.Ceramic Bowl.name=陶碗(Ceramic Bowl)
+item.ClayBowl.Clay Bowl.name=泥碗(Clay Bowl)
 
 #= Gems =
 item.Agate.Chipped.name=碎瑪瑙(Agate)
@@ -494,22 +497,22 @@ item.Tourmaline.Exquisite.name=稀世電氣石(Tourmaline)
 #===========
 #= Powders =
 #===========
-item.dyePowder.black.name=墨囊
-item.dyePowder.blue.name=青金石
-item.dyePowder.brown.name=可可豆
-item.dyePowder.cyan.name=藍綠染料
-item.dyePowder.gray.name=灰染料
-item.dyePowder.green.name=綠染料
-item.dyePowder.lightBlue.name=淺藍染料
-item.dyePowder.lime.name=青綠染料
-item.dyePowder.magenta.name=紫紅染料
-item.dyePowder.orange.name=橙染料
-item.dyePowder.pink.name=粉紅染料
-item.dyePowder.purple.name=紫染料
-item.dyePowder.red.name=紅染料
-item.dyePowder.silver.name=淺灰染料
-item.dyePowder.white.name=骨粉
-item.dyePowder.yellow.name=黃染料
+item.dyePowder.black.name=墨囊(Ink Sac)
+item.dyePowder.blue.name=青金石(Lapis Lazuli)
+item.dyePowder.brown.name=可可豆(Cocoa Beans)
+item.dyePowder.cyan.name=藍綠染料(Cyan Dye)
+item.dyePowder.gray.name=灰染料(Gray Dye)
+item.dyePowder.green.name=綠染料(Green Dye)
+item.dyePowder.lightBlue.name=淺藍染料(Light Blue Dye)
+item.dyePowder.lime.name=青綠染料(Lime Dye)
+item.dyePowder.magenta.name=紫紅染料(Magenta Dye)
+item.dyePowder.orange.name=橙染料(Orange Dye)
+item.dyePowder.pink.name=粉紅染料(Pink Dye)
+item.dyePowder.purple.name=紫染料(Purple Dye)
+item.dyePowder.red.name=紅染料(Red Dye)
+item.dyePowder.silver.name=淺灰染料(Light Gray Dye)
+item.dyePowder.white.name=骨粉(Bone Meal)
+item.dyePowder.yellow.name=黃染料(Yellow Dye)
 
 item.Coke.name=焦炭(Coke)
 item.Powder.Flux.name=添加劑(焊劑 溶劑)(Flux)
@@ -857,7 +860,7 @@ item.Small Ore.Sphalerite.name=小塊閃鋅礦(Sphalerite)
 item.Small Ore.Tetrahedrite.name=小塊黝銅礦(Tetrahedrite)
 
 #== Ore Blocks ==
-tile.Ore.name=礦物
+tile.Ore.name=礦物(Ore)
 tile.Ore.Bituminous Coal.name=煙煤(瀝青煤)(Bituminous Coal)
 tile.Ore.Borax.name=硼砂(Borax)
 tile.Ore.Cinnabar.name=硃砂(Cinnabar)
@@ -990,6 +993,24 @@ item.Loom.White Elm.name=榆樹織布機(White Elm Loom)
 item.Loom.Willow.name=柳樹織布機(Willow Loom)
 
 #== Wood Blocks ==
+tile.Chest.Acacia.name=
+tile.Chest.Ash.name=
+tile.Chest.Aspen.name=
+tile.Chest.Birch.name=
+tile.Chest.Chestnut.name=
+tile.Chest.Douglas Fir.name=
+tile.Chest.Hickory.name=
+tile.Chest.Kapok.name=
+tile.Chest.Maple.name=
+tile.Chest.Oak.name=
+tile.Chest.Pine.name=
+tile.Chest.Sequoia.name=
+tile.Chest.Spruce.name=
+tile.Chest.Sycamore.name=
+tile.Chest.White Cedar.name=
+tile.Chest.White Elm.name=
+tile.Chest.Willow.name=
+
 tile.log2.Acacia.name=金合歡(相思樹)(Acacia)
 tile.log.Ash.name=梣樹(Ash)
 tile.log.Aspen.name=白楊木(Aspen)
@@ -1099,9 +1120,9 @@ tile.wood.White Cedar.name=香柏樹木板堆疊(雪松)(White Cedar)
 tile.wood.White Elm.name=榆樹木板堆疊(White Elm)
 tile.wood.Willow.name=柳樹木板堆疊(Willow)
 
-tile.fruitTreeWood.name=果樹
-tile.fruitTreeLeaves.name=果樹樹葉
-tile.fruitTreeLeaves2.name=果樹樹葉
+tile.fruitTreeWood.name=果樹(Fruit Tree)
+tile.fruitTreeLeaves.name=果樹樹葉(Fruit Tree Leaves)
+tile.fruitTreeLeaves2.name=果樹樹葉(Fruit Tree Leaves)
 
 tile.Door Acacia.name=金合歡門(相思樹)(Acacia)
 tile.Door Ash.name=梣樹門(Ash)
@@ -1229,7 +1250,7 @@ tile.WoodSupportV.White Cedar.name=香柏樹支柱(雪松)(White Cedar Support B
 tile.WoodSupportV.White Elm.name=榆樹支柱(White Elm Support Beam)
 tile.WoodSupportV.Willow.name=柳樹支柱(Willow Support Beam)
 
-tile.WoodSupportH2.name=木材支柱
+tile.WoodSupportH2.name=木材支柱(Wood Support Beam)
 tile.WoodSupportH2.Acacia.name=金合歡支柱(相思樹)(Acacia Support Beam)
 tile.WoodSupportH.Ash.name=梣樹支柱(Ash Support Beam)
 tile.WoodSupportH.Aspen.name=白楊木支柱(Aspen Support Beam)
@@ -1852,27 +1873,27 @@ item.Wrought Iron Double Sheet.name=熟鐵雙層板
 item.Zinc Double Sheet.name=鋅雙層板
 
 #== Misc ==
-item.Blueprint=藍圖
+item.Blueprint=藍圖(Blueprint)
 
 #===========
 #= Devices =
 #===========
-tile.Bellows.name=風箱
-tile.Forge.name=熔爐
-tile.BlastFurnace.name=冶煉高爐
-tile.SpawnMeter.name=保護錶
-tile.Quern.name=磨盤底座
-tile.EarlyBloomery.name=鍛鐵爐
-tile.Molten.name=熔化礦物
-tile.Crucible.name=坩堝
-tile.NestBox.name=鳥巢箱
-item.SluiceItem.name=洗礦槽
-tile.Sluice.name=洗礦槽
-tile.LeatherRack.name=鞣皮架
-tile.FoodPrep.name=食物準備
-tile.MetalSheet.name=金屬片
-tile.ingotpile.name=金屬磚堆
-tile.SmokeRack.name=煙熏架
+tile.Bellows.name=風箱(Bellows)
+tile.Forge.name=熔爐(Forge)
+tile.BlastFurnace.name=冶煉高爐(Blast Furnace)
+tile.SpawnMeter.name=保護錶(Protection Meter)
+tile.Quern.name=磨盤底座(Quern Base)
+tile.EarlyBloomery.name=鍛鐵爐(Bloomery)
+tile.Molten.name=熔化礦物(Molten Ore)
+tile.Crucible.name=坩堝(Crucible)
+tile.NestBox.name=鳥巢箱(Next Box)
+item.SluiceItem.name=洗礦槽(Sluice)
+tile.Sluice.name=洗礦槽(Sluice)
+tile.LeatherRack.name=鞣皮架(Leather Rack)
+tile.FoodPrep.name=食物準備(Food Prep)
+tile.MetalSheet.name=金屬片(Metal Sheet)
+tile.ingotpile.name=金屬磚堆(Ingot Pile)
+tile.SmokeRack.name=煙熏架(Smoke Rack)
 
 #== Anvils ==
 tile.Anvil.Stone.name=石砧
@@ -1928,106 +1949,106 @@ item.Red Steel Bucket Salt Water.name=盛了鹹水的紅鋼桶
 item.Blue Steel Bucket Empty.name=空藍鋼桶
 item.Blue Steel Bucket Lava.name=盛了溶岩的藍鋼桶
 
-item.GoldPan.name=淘金盤
-item.Gold Pan.Sand.name=淘金盤 - 沙
-item.Gold Pan.Gravel.name=淘金盤 - 碎石
-item.Gold Pan.Clay.name=淘金盤 - 陶泥
-item.Gold Pan.Dirt.name=淘金盤 - 泥
-item.Ink.name=記號
-item.Firestarter.name=生火工具
+item.GoldPan.name=淘金盤(Gold Pan)
+item.Gold Pan.Sand.name=淘金盤 - 沙 (Gold Pan - Sand)
+item.Gold Pan.Gravel.name=淘金盤 - 碎石 (Gold Pan - Gravel)
+item.Gold Pan.Clay.name=淘金盤 - 陶泥 (Gold Pan - Clay)
+item.Gold Pan.Dirt.name=淘金盤 - 泥 (Gold Pan - Dirt)
+item.Ink.name=記號 (Marking)
+item.Firestarter.name=生火工具 (Fire Starter)
 
-item.Quern.name=碾磨石
-item.Blueprint.name=藍圖
-item.Nametag.name=名牌
-item.WoolYarn.name=羊毛紗
-item.Wool.name=羊毛
-item.WoolCloth.name=羊毛布
-item.SilkCloth.name=絲絨布
-item.BurlapCloth.name=粗麻布
-item.Mortar.name=灰泥
-item.Vinegar.name=醋
+item.Quern.name=碾磨石(Handstone)
+item.Blueprint.name=藍圖(Blueprint)
+item.Nametag.name=名牌(Name Tag)
+item.WoolYarn.name=羊毛紗(Wool Yarn)
+item.Wool.name=羊毛(Wool)
+item.WoolCloth.name=羊毛布(Wool Cloth)
+item.SilkCloth.name=絲絨布(Silk Cloth)
+item.BurlapCloth.name=粗麻布(Burlap Cloth)
+item.Mortar.name=灰泥(Mortar)
+item.Vinegar.name=醋(Vinegar)
 
-item.Hide.small.name=小塊生皮
-item.Hide.medium.name=中塊生皮
-item.Hide.large.name=大塊生皮
-item.Soaked Hide.small.name=小塊浸泡過的皮
-item.Soaked Hide.medium.name=中塊浸泡過的皮
-item.Soaked Hide.large.name=大塊浸泡過的皮
-item.Scraped Hide.small.name=小塊刮製過的皮
-item.Scraped Hide.medium.name=中塊刮製過的皮
-item.Scraped Hide.large.name=大塊刮製過的皮
-item.Prep Hide.small.name=小塊鞣製過的皮
-item.Prep Hide.medium.name=中塊鞣製過的皮
-item.Prep Hide.large.name=大塊鞣製過的皮
-item.Sheep Skin.small.name=小塊羊皮
-item.Sheep Skin.medium.name=中塊羊皮
-item.Sheep Skin.large.name=大塊羊皮
-item.TFC Leather.name=皮革
-item.Flat Leather.name=攤平皮革
-item.leather.name=皮革
+item.Hide.small.name=小塊生皮(Small Raw Hide)
+item.Hide.medium.name=中塊生皮(Medium Raw Hide)
+item.Hide.large.name=大塊生皮(Large Raw HIde)
+item.Soaked Hide.small.name=小塊浸泡過的皮(Small Soaked Hide)
+item.Soaked Hide.medium.name=中塊浸泡過的皮(Medium Soaked Hide)
+item.Soaked Hide.large.name=大塊浸泡過的皮(Large Soaked Hide)
+item.Scraped Hide.small.name=小塊刮製過的皮(Small Scraped Hide)
+item.Scraped Hide.medium.name=中塊刮製過的皮(Medium Scraped Hide)
+item.Scraped Hide.large.name=大塊刮製過的皮(Large Scraped Hide)
+item.Prep Hide.small.name=小塊鞣製過的皮(Smaill Prepared Hide)
+item.Prep Hide.medium.name=中塊鞣製過的皮(Medium Prepared Hide)
+item.Prep Hide.large.name=大塊鞣製過的皮(Large Prepared Hide)
+item.Sheep Skin.small.name=小塊羊皮(Small Sheepskin)
+item.Sheep Skin.medium.name=中塊羊皮(Medium Sheepskin)
+item.Sheep Skin.large.name=大塊羊皮(Large Sheepskin)
+item.TFC Leather.name=皮革(Leather)
+item.Flat Leather.name=攤平皮革(Flat Leather)
+item.leather.name=皮革(Leather)
 
-item.minecartChest.name=木箱礦車
-item.fishingRod.name=魚竿
+item.minecartChest.name=木箱礦車(Minecart with Chest)
+item.fishingRod.name=魚竿(Fishing Rod)
 
-item.Quiver.name=箭袋 槍袋
-item.Rope.name=繩索
-item.Mud Brick.name=泥磚
-item.Wet Mud Brick.name=濕泥磚
+item.Quiver.name=箭袋 槍袋 (Quiver)
+item.Rope.name=繩索(Rope)
+item.Mud Brick.name=泥磚(Mud Brick)
+item.Wet Mud Brick.name=濕泥磚(Wet Mud Brick)
 
 #======== Misc. Blocks========
-tile.Straw Hide Bed.name=稻草獸皮床
-tile.StrawHideBed.name=稻草獸皮床
+tile.Straw Hide Bed.name=乾草獸皮床(Straw & Hide Bed)
+tile.StrawHideBed.name=乾草獸皮床(Straw & Hide Bed)
 tile.customBed.sleep=這床睡得不舒服
-tile.BasicPipe.name=輸送管
-tile.ValvePipe.name=閥門管
-tile.Smoke.name=煙
-tile.Torch.name=火把
-tile.Chest.name=木箱
-tile.Bookshelf.name=書櫃
-tile.Workbench.name=工作台
-tile.ButtonWood.name=木按鈕
-tile.Firepit.name=火堆
-tile.LogPile.name=木堆
-tile.Charcoal.name=木炭
-tile.StoneDetailed.name=詳細
-tile.stoneStairs.name=梯級
-tile.stoneSlabs.name=板層
-tile.stoneStalac.name=鐘乳石
-tile.WoodConstruct.name=木條
-tile.MetalTrapDoor.name=活板門
-tile.Vessel.name=大缸
-tile.Grill.name=烤架
+tile.BasicPipe.name=輸送管(Pipe)
+tile.ValvePipe.name=閥門管(Valve Pipe)
+tile.Smoke.name=煙(Smoke)
+tile.Torch.name=火把(Torch)
+tile.Chest.name=木箱(Chest)
+tile.Bookshelf.name=書櫃(Bookshelf)
+tile.Workbench.name=工作台(Workbench)
+tile.ButtonWood.name=木按鈕(Wooden Button)
+tile.Firepit.name=火堆(Firepit)
+tile.LogPile.name=木堆(Log Pile)
+tile.Charcoal.name=木炭(Charcoal)
+tile.StoneDetailed.name=詳細(Detailed)
+tile.stoneStairs.name=梯級(Stair)
+tile.stoneSlabs.name=板層(Slab)
+tile.stoneStalac.name=鐘乳石(Stalactite)
+tile.WoodConstruct.name=木條(Lumber)
+tile.MetalTrapDoor.name=活板門(Trap Door)
+tile.Vessel.name=大缸(Large Vessel)
+tile.Grill.name=烤架(Grill)
 
 tile.Sulfur.name=硫磺(Sulphur)
 tile.Reeds.name=蘆葦
 
 #= Misc. Plants =
-item.Sugarcane.name=甘蔗
-item.Hemp.name=麻
-item.Straw.name=乾草
+item.Sugarcane.name=甘蔗(Sugarcane)
+item.Hemp.name=麻(Hemp)
+item.Straw.name=乾草(Straw)
 item.Jute.name=黃麻(Jute)
 item.Jute Fibre.name=黃麻纖維(Jute Fiber)
 
-tile.Fungi.mushroom_brown.name=褐蘑菇
-tile.Fungi.mushroom_red.name=紅蘑菇
-tile.Cactus.name=仙人掌
-tile.Pumpkin.name=南瓜
-tile.Moss.name=青苔
-tile.Thatch.name=茅草
-tile.Flora.Golden Rod.name=秋麒麟草(一枝黃花)
-tile.Flora.Cat Tails.name=香蒲
+tile.Fungi.mushroom_brown.name=褐蘑菇(啡蘑菇)(Brown Mushroom)
+tile.Fungi.mushroom_red.name=紅蘑菇(Red Mushroom)
+tile.Cactus.name=仙人掌(Cactus)
+tile.Pumpkin.name=南瓜(Pumpkin)
+tile.Moss.name=青苔(Moss)
+tile.Thatch.name=茅草(乾草堆)(Thatch)
+tile.Flora.Golden Rod.name=秋麒麟草(一枝黃花)(Goldenrod)
+tile.Flora.Cat Tails.name=香蒲(Cattails)
 
-item.Seeds Sugarcane.name=甘庶種
-item.Seeds Hemp.name=麻種
-item.Seeds Jute.name=黃麻種
+item.Seeds Sugarcane.name=甘庶種子(Sugarcane Seeds)
+item.Seeds Hemp.name=麻種子(Hemp Seeds)
+item.Seeds Jute.name=黃麻種子(Jute Seeds)
 
-tile.TallGrass.tallgrass.name=長草
-tile.TallGrass.fern.name=蕨類植物
-tile.TallGrass.shortgrass.name=短草
-tile.LilyPad.name=荷葉
-tile.Vine.name=攀藤
-tile.SeaGrassStill.name=海草
-tile.SeaGrassIce.name=結冰海草
+tile.TallGrass.tallgrass.name=長草(Tall Grass)
+tile.TallGrass.fern.name=蕨類植物(Fern)
+tile.TallGrass.shortgrass.name=短草(Short Grass)
+tile.LilyPad.name=荷葉(Lilypad)
+tile.Vine.name=攀藤(Vine)
+tile.SeaGrassStill.name=海草(Seagrass)
+tile.SeaGrassIce.name=結冰海草(Frozen Seagrass)
 
 tile.Flowers.flower_nasturtium.name=金線蓮(Nasturtium)
 tile.Flowers.flower_dandelion.name=蒲公英(Dandelion)
@@ -2057,11 +2078,10 @@ tile.LavaStationary.name=熔岩
 #=======
 #= GUI =
 #=======
-gui.badnbt=NBT資料損毁
 
 #== Anvil GUI ==
-gui.Anvil.Plans=設計圖
-gui.Anvil.Weld=焊接
+gui.Anvil.Plans=設計圖(Plans)
+gui.Anvil.Weld=焊接(Weld)
 
 gui.Anvil.LightHit=輕輕捶打(Light Hit)
 gui.Anvil.MediumHit=捶打(Medium Hit)
@@ -2073,7 +2093,7 @@ gui.Anvil.Bend=屈曲(Bend)
 gui.Anvil.Upset=端壓(Upset)
 gui.Anvil.Shrink=收縮(Shrink)
 
-gui.Anvil.Rules=規則
+gui.Anvil.Rules=規則(Rules)
 gui.Anvil.Rule1=任意
 gui.Anvil.Rule2=任意捶打
 gui.Anvil.Rule3=最後捶打
@@ -2119,26 +2139,19 @@ gui.Anvil.Rule42=最後三次屈曲
 gui.Anvil.Rule43=須屈曲但最後一次並非屈曲
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=改進
-gui.Armor.Shift=變形
 gui.Armor.ForgedBy=打造自
-gui.Armor.Hold=完整
-gui.Armor.Crush=打碎
-gui.Armor.Pierce=刺穿
-gui.Armor.Slash=砍劈
+gui.Armor.Crush=打碎(Crush)
+gui.Armor.Pierce=刺穿(Pierce)
+gui.Armor.Slash=砍劈(Slash)
 
-word.stage1=第一階段
-word.stage2=第二階段
-
-gui.Bow.Advanced=改進
-gui.Bow.Javelins=標槍
-gui.Bow.Arrows=箭
+gui.Bow.Javelins=標槍(Javelins)
+gui.Bow.Arrows=箭(Arrows)
 gui.Bow.ForgedBy=打造自
 
 gui.DamageType.Error=出錯 : 用錯方法
-gui.DamageType.Crushing=打碎
-gui.DamageType.Piercing=刺穿
-gui.DamageType.Slashing=砍劈
+gui.DamageType.Crushing=打碎(Crushing)
+gui.DamageType.Piercing=刺穿(Piercing)
+gui.DamageType.Slashing=砍劈(Slashing)
 
 #== Barrel GUI ==
 gui.Barrel.Empty=清空
@@ -2154,9 +2167,8 @@ gui.barrel.brining=鹽鹵中
 gui.barrel.preserving=正在保存
 
 #== Bloomery GUI ==
-gui.Bloomery.Charcoal=木炭
-gui.Bloomery.Ore=礦物
-gui.Bloomery.Output=取出
+gui.Bloomery.Charcoal=木炭(Charcoal)
+gui.Bloomery.Ore=礦物(Ore)
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=日曆
@@ -2216,8 +2228,8 @@ gui.FoodPrep.Effect=功效
 gui.FoodPrep.Energy=能量
 gui.FoodPrep.Filling=飽肚
 gui.FoodPrep.Power=力量
-gui.FoodPrep.Sandwich=三文治
-gui.FoodPrep.Salad=沙律
+gui.FoodPrep.Sandwich=三文治(Sandwich)
+gui.FoodPrep.Salad=沙律(Salad)
 
 #== Metals ==
 gui.metal.Bismuth=鉍
@@ -2275,25 +2287,33 @@ gui.plans.sword=劍
 gui.plans.tuyere=風咀
 gui.plans.grill=烤架
 gui.plans.shears=剪刀
-gui.plans.trapdoor=活板門
+gui.plans.trapdoor=活板門(Trap Door)
 
 #== Misc GUI ==
-gui.Blueprint=藍圖
-gui.Nametag=名牌
+gui.Blueprint=藍圖(Blueprint)
+gui.Nametag=名牌(Name Tag)
 gui.fertilized=已受精
 gui.Inventory=物品欄
 gui.ClearSlot=清除取出格
 gui.LogPile=木頭堆
+gui.Output=取出(Output)
 gui.done=完成
 gui.cancel=取消
 gui.Sluice.Soil=土壤
 gui.Sluice.Overworked=過度篩取
 gui.Workbench.Crafting=製作
 gui.overburdened=*負擔太重*
+
+gui.badnbt=NBT資料損毁(BAD Info)
+
+#== Tooltips ==
+gui.Advanced=改進
+gui.Shift=變形
+gui.Hold=完整(Hold)
+
 gui.slot=位置
 gui.slot.back=背部
 
-#== Tooltips ==
 gui.ShowHelp=提示 : 長按 Shift
 gui.Help=提示 :
 gui.Clay.Inst0=手持 5 塊或以上 Right Click 製作
@@ -2301,14 +2321,18 @@ gui.Knife.Inst0=Right Click 方塊的上面
 gui.Knife.Inst1=造出一個準備食物的桌面
 gui.Leather.Inst0=用刀Right Click 來切 (隨身必須有刀)
 gui.LooseRock.Inst0=手持 2 塊或以上 Right Click 鑿擊
-gui.MeltedMetal.Inst0=Right Click 注入工具模
+gui.MeltedMetal.Inst0=§b右鍵§7以注入模具或混合金屬
 gui.PotteryBase.Inst0=按 Shift (Sneak) 及 Right Click 放置
 gui.PotteryVesselSmall.Inst0=或 Right Click以查看及更改載著的物品
 gui.RawHide.Inst0=????
 gui.Barrel.MoreItems=更多 (按著 Shift)
+
 gui.Nutrient.A=養份A
 gui.Nutrient.B=養份B
 gui.Nutrient.C=養份C
+
+gui.stage1=第一階段
+gui.stage2=第二階段
 
 gui.Size.Tiny=十分細小
 gui.Size.VerySmall=很細小
@@ -2326,6 +2350,7 @@ gui.Reach.Short=近距離
 gui.Reach.Medium=中距離
 gui.Reach.Far=遠距離
 
+#== Food ==
 gui.food.fruit=水果
 gui.food.vegetable=蔬菜
 gui.food.grain=穀物
@@ -2417,10 +2442,10 @@ food.cooked.3=微焦
 food.cooked.4=焦黑
 
 gui.Torch.CatchingFire=着火
-gui.Torch.Lit=點着
+gui.Torch.Lit=點燃
 
-gui.ItemHeat.Liquid=液體
-gui.ItemHeat.Solidified=凝固
+gui.ItemHeat.Liquid=液態
+gui.ItemHeat.Solidified=固態
 gui.ItemHeat.Caution=小心
 gui.ItemHeat.Warming=加熱
 gui.ItemHeat.Hot=熱
@@ -2434,9 +2459,9 @@ gui.ItemHeat.YellowWhite=黃白
 gui.ItemHeat.White=白
 gui.ItemHeat.BrilliantWhite=熾白
 
-gui.ingot.workable=可以打造
-gui.ingot.weldable=可以焊接
-gui.ingot.danger=**危險快熔**
+gui.ingot.workable=可锻
+gui.ingot.weldable=可焊
+gui.ingot.danger=**危險**
 
 gui.milk.fresh=新鮮
 gui.milk.old=舊
@@ -2444,9 +2469,17 @@ gui.milk.sour=酸
 
 gui.units=單位
 
+#== WAILA ==
+gui.useless=
+gui.growth=
+gui.mature=
+gui.metal.Iron=
+
 #== Chat Messages ==
 gui.GoldPan.UseFull=必須在流水中淘
 gui.goldpan.overused=這範圍的礦物似乎已淘盡。你大概不會淘到更多的礦物了。
+gui.seeds.failedTemp=
+gui.seeds.failedSun=
 
 gui.ProPick.Found=探到
 gui.ProPick.FoundTraces=探到微量的
@@ -2482,6 +2515,14 @@ gui.skill.adept=熟手
 gui.skill.expert=專家
 gui.skill.master=師傅
 gui.skillpage=技巧
+
+#==================
+#= Error Messages =
+#==================
+error.error=
+error.NBT=
+error.OreCFG=
+error.Contact=
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========

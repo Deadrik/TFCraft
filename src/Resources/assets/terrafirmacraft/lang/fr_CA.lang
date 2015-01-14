@@ -6,7 +6,9 @@
 
 
 generator.TFCDefault=TFC par défault
-generator.TFCFlat=TFC plat
+generator.TFCFlat=TFC plat (non utilisé)
+generator.TFCAmplified=TFC amplifié (non utilisé)
+generator.TFCLargeBiomes=TFC biomes larges (non utilisé)
 
 key.ToolMode=Changer le mode outil
 key.LockTool=Verouiller l'outil
@@ -114,6 +116,7 @@ fluid.whiskey=Whisky
 fluid.cornwhiskey=Whisky de maïs
 fluid.milk=Lait
 fluid.milkcurdled=Lait caillé
+fluid.milkvinegar=Mélange lait et vinaigre
 fluid.limewater=Eau de chaux
 fluid.tannin=Tanin
 fluid.vinegar=Vinaigre
@@ -495,7 +498,7 @@ item.Tourmaline.Exquisite.name=Tourmaline exquise
 #= Powders =
 #===========
 item.dyePowder.black.name=Sac d'encre
-item.dyePowder.blue.name=Lapis Lazuli
+item.dyePowder.blue.name=Teinture bleue
 item.dyePowder.brown.name=Fèves de cacao
 item.dyePowder.cyan.name=Teinture cyan
 item.dyePowder.gray.name=Teinture grise
@@ -990,6 +993,24 @@ item.Loom.White Elm.name=Métier à tisser en orme
 item.Loom.Willow.name=Métier à tisser en saule
 
 #== Wood Blocks ==
+tile.Chest.Acacia.name=Coffre en acacia
+tile.Chest.Ash.name=Coffre en frêne
+tile.Chest.Aspen.name=Coffre en tremble
+tile.Chest.Birch.name=Coffre en bouleau
+tile.Chest.Chestnut.name=Coffre en noisetier
+tile.Chest.Douglas Fir.name=Coffre en sapin de douglas
+tile.Chest.Hickory.name=Coffre en caryer
+tile.Chest.Kapok.name=Coffre en kapok
+tile.Chest.Maple.name=Coffre en érable
+tile.Chest.Oak.name=Coffre en chêne
+tile.Chest.Pine.name=Coffre en pin
+tile.Chest.Sequoia.name=Coffre en séquoia
+tile.Chest.Spruce.name=Coffre en épinette
+tile.Chest.Sycamore.name=Coffre en platane
+tile.Chest.White Cedar.name=Coffre en cèdre blanc
+tile.Chest.White Elm.name=Coffre en orme
+tile.Chest.Willow.name=Coffre en saule
+
 tile.log2.Acacia.name=Bûche d'acacia
 tile.log.Ash.name=Bûche de frêne
 tile.log.Aspen.name=Bûche de tremble
@@ -2057,7 +2078,6 @@ tile.LavaStationary.name=Lave
 #=======
 #= GUI =
 #=======
-gui.badnbt=MAUVAIS Info
 
 #== Anvil GUI ==
 gui.Anvil.Plans=Plan
@@ -2119,18 +2139,11 @@ gui.Anvil.Rule42=Courber, trois derniers
 gui.Anvil.Rule43=Courber, pas dernier
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=Avancé
-gui.Armor.Shift=Shift
 gui.Armor.ForgedBy=Forgé par
-gui.Armor.Hold=Tenir
 gui.Armor.Crush=Écraser
 gui.Armor.Pierce=Percer
 gui.Armor.Slash=Tailler
 
-word.stage1=Étape 1
-word.stage2=Étape 2
-
-gui.Bow.Advanced=Avancé
 gui.Bow.Javelins=Javelots
 gui.Bow.Arrows=Flèches
 gui.Bow.ForgedBy=Fabriqué par
@@ -2156,7 +2169,6 @@ gui.barrel.preserving=Préserver
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Charbon de bois
 gui.Bloomery.Ore=Minerai
-gui.Bloomery.Output=Résultat
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=Calendrier
@@ -2284,20 +2296,28 @@ gui.fertilized=Fertilisé
 gui.Inventory=Inventaire
 gui.ClearSlot=Vider un espace de sortie.
 gui.LogPile=Corde de bois
+gui.Output=Résultat
 gui.done=Terminé
 gui.cancel=Annuler
 gui.Sluice.Soil=Sol
 gui.Sluice.Overworked=Surtravaillé
 gui.Workbench.Crafting=Artisanat
 gui.overburdened=*Surchargé*
+
+gui.badnbt=MAUVAIS Info
+
+#== Tooltips ==
+gui.Advanced=Avancé
+gui.Shift=Shift
+gui.Hold=Tenir
+
 gui.slot=Emplacement
 gui.slot.back=Dos
 
-#== Tooltips ==
 gui.ShowHelp=§8Aide: (Tenir §fShift§8)
 gui.Help=§8Aide:
 gui.Clay.Inst0=§bClique droit §7avec 5 dans une pile pour façonner.
-gui.Knife.Inst0=§bClique droit §7sur le dessus d'un bloc
+gui.Knife.Inst0=§bClique droit §7sur le dessus d'un bloc (autre que sol)
 gui.Knife.Inst1=pour créer un surface de préparation.
 gui.Leather.Inst0=§bClique droit §7avec un couteau dans l'inventaire pour couper.
 gui.LooseRock.Inst0=§bClique droit §7avec 2 dans une pile pour façonner.
@@ -2306,9 +2326,13 @@ gui.PotteryBase.Inst0=S'accroupir et §bclique droit §7 pour placer l'objet.
 gui.PotteryVesselSmall.Inst0=Ou §bClique droit §7pour ouvrir l'inventaire.
 gui.RawHide.Inst0=????
 gui.Barrel.MoreItems=§8Plus... (Tenir §fShift§8)
+
 gui.Nutrient.A=Nutriment A
 gui.Nutrient.B=Nutriment B
 gui.Nutrient.C=Nutriment C
+
+gui.stage1=Étape 1
+gui.stage2=Étape 2
 
 gui.Size.Tiny=Minuscule
 gui.Size.VerySmall=Très petit
@@ -2326,6 +2350,7 @@ gui.Reach.Short=Court
 gui.Reach.Medium=Moyen
 gui.Reach.Far=Long
 
+#== Food ==
 gui.food.fruit=Fruit
 gui.food.vegetable=Légumes
 gui.food.grain=Céréales
@@ -2444,9 +2469,17 @@ gui.milk.sour=Caillé
 
 gui.units=unités
 
+#== WAILA ==
+gui.useless=Innutile
+gui.growth=Poussé
+gui.mature=Mature
+gui.metal.Iron=Fer
+
 #== Chat Messages ==
 gui.GoldPan.UseFull=Doit être utilisé sous de l'eau en mouvement.
 gui.goldpan.overused=Ce secteur semble avoir été beaucoup travaillé. Vous ne trouverez probablement rien.
+gui.seeds.failedTemp=C'est trop froit pour planter ici, ça ne survivrait pas longtemps.
+gui.seeds.failedSun=Il n'y a pas assez de soleil pour planter ici, ça ne survrait surement pas longtemps.
 
 gui.ProPick.Found=Trouvé
 gui.ProPick.FoundTraces=Trouvé des traces de
@@ -2482,6 +2515,14 @@ gui.skill.adept=Adepte
 gui.skill.expert=Expert
 gui.skill.master=Maître
 gui.skillpage=Compétence
+
+#==================
+#= Error Messages =
+#==================
+error.error=ERREUR : 
+error.NBT=les informations NBT sont manquantes.
+error.OreCFG=Le bloc suivant est invalide dans TFCOre.cfg :
+error.Contact=Merci de le rapporter dans la section Support du Forum de TerraFirmaCraft.
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========

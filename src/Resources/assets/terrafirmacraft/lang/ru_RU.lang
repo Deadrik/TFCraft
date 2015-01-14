@@ -6,7 +6,9 @@
 
 
 generator.TFCDefault=TFC по умолчанию
-generator.TFCFlat=TFC суперплоскость
+generator.TFCFlat=
+generator.TFCAmplified=
+generator.TFCLargeBiomes=
 
 key.ToolMode=Изменить способ применения инструмента
 key.LockTool=Ограничить место применения инструмента
@@ -114,6 +116,7 @@ fluid.whiskey=Виски
 fluid.cornwhiskey=Кукурузное виски
 fluid.milk=Молоко
 fluid.milkcurdled=Творог
+fluid.milkvinegar=
 fluid.limewater=Известковое молоко
 fluid.tannin=Таннин
 fluid.vinegar=Уксус
@@ -990,6 +993,24 @@ item.Loom.White Elm.name=Ткацкий станок из белого вяза
 item.Loom.Willow.name=Ивовый ткацкий станок
 
 #== Wood Blocks ==
+tile.Chest.Acacia.name=
+tile.Chest.Ash.name=
+tile.Chest.Aspen.name=
+tile.Chest.Birch.name=
+tile.Chest.Chestnut.name=
+tile.Chest.Douglas Fir.name=
+tile.Chest.Hickory.name=
+tile.Chest.Kapok.name=
+tile.Chest.Maple.name=
+tile.Chest.Oak.name=
+tile.Chest.Pine.name=
+tile.Chest.Sequoia.name=
+tile.Chest.Spruce.name=
+tile.Chest.Sycamore.name=
+tile.Chest.White Cedar.name=
+tile.Chest.White Elm.name=
+tile.Chest.Willow.name=
+
 tile.log2.Acacia.name=Бревно акации
 tile.log.Ash.name=Бревно ясеня
 tile.log.Aspen.name=Бревно осины
@@ -2057,7 +2078,6 @@ tile.LavaStationary.name=Лава
 #=======
 #= GUI =
 #=======
-gui.badnbt=Неверная информация
 
 #== Anvil GUI ==
 gui.Anvil.Plans=Чертежи
@@ -2119,18 +2139,11 @@ gui.Anvil.Rule42=Изгиб, три последних
 gui.Anvil.Rule43=Изгиб, не последний
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=Дополнительно:
-gui.Armor.Shift=Shift
 gui.Armor.ForgedBy=Автор:
-gui.Armor.Hold=Зажмите
 gui.Armor.Crush=Дробящий
 gui.Armor.Pierce=Колющий
 gui.Armor.Slash=Режущий
 
-word.stage1=Этап 1
-word.stage2=Этап 2
-
-gui.Bow.Advanced=Дополнительно:
 gui.Bow.Javelins=Копья
 gui.Bow.Arrows=Стрелы
 gui.Bow.ForgedBy=Изготовил
@@ -2156,7 +2169,6 @@ gui.barrel.preserving=Консервирование
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Древесный уголь
 gui.Bloomery.Ore=Руда
-gui.Bloomery.Output=Выработка
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=Календарь
@@ -2284,16 +2296,24 @@ gui.fertilized=Удобрено
 gui.Inventory=Инвентарь
 gui.ClearSlot=Освободите выходную ячейку.
 gui.LogPile=Поленница
+gui.Output=Выработка
 gui.done=Готово
 gui.cancel=Отменить
 gui.Sluice.Soil=Почва
 gui.Sluice.Overworked=Перегружено
 gui.Workbench.Crafting=Верстак
 gui.overburdened=Перегружен
+
+gui.badnbt=Неверная информация
+
+#== Tooltips ==
+gui.Advanced=Дополнительно:
+gui.Shift=Shift
+gui.Hold=Зажмите
+
 gui.slot=Слот
 gui.slot.back=Назад
 
-#== Tooltips ==
 gui.ShowHelp=§8Помощь: (Зажать §fShift§8)
 gui.Help=§8Помощь:
 gui.Clay.Inst0=§bПравый клик §7с 5 кусками глины для лепки.
@@ -2306,9 +2326,13 @@ gui.PotteryBase.Inst0=Shift + §bправый клик §7чтобы разме�
 gui.PotteryVesselSmall.Inst0=или §bправый клик §7чтобы открыть сосуд.
 gui.RawHide.Inst0=????
 gui.Barrel.MoreItems=§8Ещё... (Зажать §fShift§8)
+
 gui.Nutrient.A=Минерал A
 gui.Nutrient.B=Минерал B
 gui.Nutrient.C=Минерал C
+
+gui.stage1=Этап 1
+gui.stage2=Этап 2
 
 gui.Size.Tiny=Крошечный
 gui.Size.VerySmall=Очень маленький
@@ -2326,6 +2350,7 @@ gui.Reach.Short=Близкий
 gui.Reach.Medium=Средний
 gui.Reach.Far=Дальний
 
+#== Food ==
 gui.food.fruit=Фрукты
 gui.food.vegetable=Овощи
 gui.food.grain=Зерновые
@@ -2444,9 +2469,17 @@ gui.milk.sour=Кислое
 
 gui.units=Единицы
 
+#== WAILA ==
+gui.useless=
+gui.growth=
+gui.mature=
+gui.metal.Iron=
+
 #== Chat Messages ==
 gui.GoldPan.UseFull=Надо использовать под текущей водой.
 gui.goldpan.overused=Похоже, что руды здесь больше нет. Лучше поискать другое место.
+gui.seeds.failedTemp=
+gui.seeds.failedSun=
 
 gui.ProPick.Found=Обнаружено:
 gui.ProPick.FoundTraces=Найдены следы:
@@ -2482,6 +2515,14 @@ gui.skill.adept=Знаток
 gui.skill.expert=Эксперт
 gui.skill.master=Мастер
 gui.skillpage=Умения
+
+#==================
+#= Error Messages =
+#==================
+error.error=
+error.NBT=
+error.OreCFG=
+error.Contact=
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========

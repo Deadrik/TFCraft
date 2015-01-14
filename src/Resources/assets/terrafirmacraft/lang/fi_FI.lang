@@ -6,7 +6,9 @@
 
 
 generator.TFCDefault=TFC Oletus
-generator.TFCFlat=TFC Tasainen
+generator.TFCFlat=
+generator.TFCAmplified=
+generator.TFCLargeBiomes=
 
 key.ToolMode=Vaihda työkalumoodia
 key.LockTool=Lukitse työkalun paikka
@@ -114,6 +116,7 @@ fluid.whiskey=Viski
 fluid.cornwhiskey=
 fluid.milk=Maitoa
 fluid.milkcurdled=Hapantunutta Maitoa
+fluid.milkvinegar=
 fluid.limewater=Kalkkivettä
 fluid.tannin=Tanniinia
 fluid.vinegar=Viinietikkaa
@@ -990,6 +993,24 @@ item.Loom.White Elm.name=
 item.Loom.Willow.name=
 
 #== Wood Blocks ==
+tile.Chest.Acacia.name=
+tile.Chest.Ash.name=
+tile.Chest.Aspen.name=
+tile.Chest.Birch.name=
+tile.Chest.Chestnut.name=
+tile.Chest.Douglas Fir.name=
+tile.Chest.Hickory.name=
+tile.Chest.Kapok.name=
+tile.Chest.Maple.name=
+tile.Chest.Oak.name=
+tile.Chest.Pine.name=
+tile.Chest.Sequoia.name=
+tile.Chest.Spruce.name=
+tile.Chest.Sycamore.name=
+tile.Chest.White Cedar.name=
+tile.Chest.White Elm.name=
+tile.Chest.Willow.name=
+
 tile.log2.Acacia.name=
 tile.log.Ash.name=Saarni Pölkky
 tile.log.Aspen.name=Haapa Pölkky
@@ -2057,7 +2078,6 @@ tile.LavaStationary.name=
 #=======
 #= GUI =
 #=======
-gui.badnbt=
 
 #== Anvil GUI ==
 gui.Anvil.Plans=
@@ -2119,18 +2139,11 @@ gui.Anvil.Rule42=Taivuta, Kolme Viimeistä
 gui.Anvil.Rule43=Taivuta, Ei Viimeisenä
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=Kehittynyt
-gui.Armor.Shift=Vaihtoa
 gui.Armor.ForgedBy=Seppä:
-gui.Armor.Hold=Painava
 gui.Armor.Crush=Murskaa
 gui.Armor.Pierce=Läpäise
 gui.Armor.Slash=Viillä
 
-word.stage1=Ensimmäinen Vaihe
-word.stage2=Toinen Vaihe
-
-gui.Bow.Advanced=
 gui.Bow.Javelins=
 gui.Bow.Arrows=
 gui.Bow.ForgedBy=
@@ -2156,7 +2169,6 @@ gui.barrel.preserving=
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Puuhiili
 gui.Bloomery.Ore=Malmi
-gui.Bloomery.Output=Tuotto
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=Kalenteri
@@ -2284,16 +2296,24 @@ gui.fertilized=
 gui.Inventory=Tavaralista
 gui.ClearSlot=Tyhjennä tuoteruutu
 gui.LogPile=Halkopino
+gui.Output=Tuotto
 gui.done=Valmis
 gui.cancel=
 gui.Sluice.Soil=Maaperä
 gui.Sluice.Overworked=
 gui.Workbench.Crafting=Rakentaminen
 gui.overburdened=
+
+gui.badnbt=
+
+#== Tooltips ==
+gui.Advanced=Kehittynyt
+gui.Shift=Vaihtoa
+gui.Hold=Painava
+
 gui.slot=
 gui.slot.back=
 
-#== Tooltips ==
 gui.ShowHelp=§8Apu: (Paina pohjaan §fShift§8)
 gui.Help=§8Apu:
 gui.Clay.Inst0=§bHiiren Oikea §7kun viisi kasattuna muokataksesi.
@@ -2306,9 +2326,13 @@ gui.PotteryBase.Inst0=Hiivi ja §bKäytä Hiiren Oikeaa §7asettaaksesi esineen.
 gui.PotteryVesselSmall.Inst0=Tai §bHiiren Oikealla §7tarkkaillaksesi sisältöä.
 gui.RawHide.Inst0=
 gui.Barrel.MoreItems=
+
 gui.Nutrient.A=
 gui.Nutrient.B=
 gui.Nutrient.C=
+
+gui.stage1=Ensimmäinen Vaihe
+gui.stage2=Toinen Vaihe
 
 gui.Size.Tiny=Pienenpieni
 gui.Size.VerySmall=Erittäinpieni
@@ -2326,6 +2350,7 @@ gui.Reach.Short=
 gui.Reach.Medium=
 gui.Reach.Far=
 
+#== Food ==
 gui.food.fruit=
 gui.food.vegetable=
 gui.food.grain=
@@ -2444,9 +2469,17 @@ gui.milk.sour=
 
 gui.units=
 
+#== WAILA ==
+gui.useless=
+gui.growth=
+gui.mature=
+gui.metal.Iron=
+
 #== Chat Messages ==
 gui.GoldPan.UseFull=Pitää käyttää juoksevan veden alla.
 gui.goldpan.overused=
+gui.seeds.failedTemp=
+gui.seeds.failedSun=
 
 gui.ProPick.Found=Löytyi
 gui.ProPick.FoundTraces=Löytyi Hieman
@@ -2482,6 +2515,14 @@ gui.skill.adept=
 gui.skill.expert=
 gui.skill.master=
 gui.skillpage=
+
+#==================
+#= Error Messages =
+#==================
+error.error=
+error.NBT=
+error.OreCFG=
+error.Contact=
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========

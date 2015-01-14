@@ -6,7 +6,9 @@
 
 
 generator.TFCDefault=TFC Standara
-generator.TFCFlat=TFC Piana
+generator.TFCFlat=
+generator.TFCAmplified=
+generator.TFCLargeBiomes=
 
 key.ToolMode=Scorri la modalità dello strumento
 key.LockTool=Blocca localizzazione strumento
@@ -114,6 +116,7 @@ fluid.whiskey=Uischi
 fluid.cornwhiskey=Uischi di granturco
 fluid.milk=Latte
 fluid.milkcurdled=Latte cagliato
+fluid.milkvinegar=
 fluid.limewater=Acqua di calce
 fluid.tannin=Tannino
 fluid.vinegar=Aceto
@@ -990,6 +993,24 @@ item.Loom.White Elm.name=Telaio di olmo
 item.Loom.Willow.name=Telaio di salice
 
 #== Wood Blocks ==
+tile.Chest.Acacia.name=
+tile.Chest.Ash.name=
+tile.Chest.Aspen.name=
+tile.Chest.Birch.name=
+tile.Chest.Chestnut.name=
+tile.Chest.Douglas Fir.name=
+tile.Chest.Hickory.name=
+tile.Chest.Kapok.name=
+tile.Chest.Maple.name=
+tile.Chest.Oak.name=
+tile.Chest.Pine.name=
+tile.Chest.Sequoia.name=
+tile.Chest.Spruce.name=
+tile.Chest.Sycamore.name=
+tile.Chest.White Cedar.name=
+tile.Chest.White Elm.name=
+tile.Chest.Willow.name=
+
 tile.log2.Acacia.name=Ciocco di acacia
 tile.log.Ash.name=Ciocco di frassino
 tile.log.Aspen.name=Ciocco di pioppo
@@ -2057,7 +2078,6 @@ tile.LavaStationary.name=Lava
 #=======
 #= GUI =
 #=======
-gui.badnbt=Dati SBAGLIATI
 
 #== Anvil GUI ==
 gui.Anvil.Plans=Piani
@@ -2119,18 +2139,11 @@ gui.Anvil.Rule42=Piega, gli ultimi tre
 gui.Anvil.Rule43=Piega, non per ultimo
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=Avanzate
-gui.Armor.Shift=Shift
 gui.Armor.ForgedBy=A opera di
-gui.Armor.Hold=Resistenza
 gui.Armor.Crush=Concussione
 gui.Armor.Pierce=Penetrazione
 gui.Armor.Slash=Taglio
 
-word.stage1=Fase 1
-word.stage2=Fase 2
-
-gui.Bow.Advanced=Avanzato
 gui.Bow.Javelins=Giavellotti
 gui.Bow.Arrows=Frecce
 gui.Bow.ForgedBy=Costruito da
@@ -2156,7 +2169,6 @@ gui.barrel.preserving=
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Carbonella
 gui.Bloomery.Ore=Minerale
-gui.Bloomery.Output=Produzione
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=Calendario
@@ -2284,16 +2296,24 @@ gui.fertilized=Fertilizzato
 gui.Inventory=Inventario
 gui.ClearSlot=Svuota uno slot di produzione.
 gui.LogPile=Pila di ciocchi
+gui.Output=Produzione
 gui.done=Finito
 gui.cancel=
 gui.Sluice.Soil=Suolo
 gui.Sluice.Overworked=
 gui.Workbench.Crafting=Lavorazione
 gui.overburdened=*Sovraccarico*
+
+gui.badnbt=Dati SBAGLIATI
+
+#== Tooltips ==
+gui.Advanced=Avanzate
+gui.Shift=Shift
+gui.Hold=Resistenza
+
 gui.slot=Casella
 gui.slot.back=Indietro
 
-#== Tooltips ==
 gui.ShowHelp=§8Aiuto: (Tieni premuto §fShift§8)
 gui.Help=§8Aiuto:
 gui.Clay.Inst0=§bClicca col destro §7con almeno 5 per modellare.
@@ -2306,9 +2326,13 @@ gui.PotteryBase.Inst0=Accovacciati e §bClicca col destro §7per posizionare.
 gui.PotteryVesselSmall.Inst0=O §bClicca col destro §7per aprire l'inventario
 gui.RawHide.Inst0=????
 gui.Barrel.MoreItems=§8Altro... (Tieni premuto §fShift§8)
+
 gui.Nutrient.A=
 gui.Nutrient.B=
 gui.Nutrient.C=
+
+gui.stage1=Fase 1
+gui.stage2=Fase 2
 
 gui.Size.Tiny=Minuscolo
 gui.Size.VerySmall=Molto piccolo
@@ -2326,6 +2350,7 @@ gui.Reach.Short=Corto
 gui.Reach.Medium=Medio
 gui.Reach.Far=Lontano
 
+#== Food ==
 gui.food.fruit=Frutta
 gui.food.vegetable=Verdura
 gui.food.grain=Cereali
@@ -2444,9 +2469,17 @@ gui.milk.sour=Acido
 
 gui.units=Unità
 
+#== WAILA ==
+gui.useless=
+gui.growth=
+gui.mature=
+gui.metal.Iron=
+
 #== Chat Messages ==
 gui.GoldPan.UseFull=Da usare sotto acqua corrente.
 gui.goldpan.overused=Quest'area sembra già setacciata. Probabilmente non troverai granché.
+gui.seeds.failedTemp=
+gui.seeds.failedSun=
 
 gui.ProPick.Found=Trovato
 gui.ProPick.FoundTraces=Trovate tracce di
@@ -2482,6 +2515,14 @@ gui.skill.adept=Abile
 gui.skill.expert=Esperto
 gui.skill.master=Maestro
 gui.skillpage=Abilità
+
+#==================
+#= Error Messages =
+#==================
+error.error=
+error.NBT=
+error.OreCFG=
+error.Contact=
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========

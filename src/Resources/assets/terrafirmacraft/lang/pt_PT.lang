@@ -1,4 +1,4 @@
-﻿ #pt_PT
+﻿#pt_PT
 #Este é o arquivo de configuração de idioma português, traduzido por Dimeborg e Michael, revisão de Lvxferre
 
 
@@ -6,7 +6,9 @@
 
 
 generator.TFCDefault=TFC Padrão
-generator.TFCFlat=TFC Plano
+generator.TFCFlat=
+generator.TFCAmplified=
+generator.TFCLargeBiomes=
 
 key.ToolMode=Trocar Modo de Ferramenta
 key.LockTool=Fixar Modo de Ferramenta
@@ -114,6 +116,7 @@ fluid.whiskey=Uísque
 fluid.cornwhiskey=Uísque de Milho
 fluid.milk=Leite
 fluid.milkcurdled=Leite Coalhado
+fluid.milkvinegar=
 fluid.limewater=Água de Cal
 fluid.tannin=Tanino
 fluid.vinegar=Vinagre
@@ -990,6 +993,24 @@ item.Loom.White Elm.name=Tecelão de Olmo Branco
 item.Loom.Willow.name=Tecelão de Salgueiro
 
 #== Wood Blocks ==
+tile.Chest.Acacia.name=
+tile.Chest.Ash.name=
+tile.Chest.Aspen.name=
+tile.Chest.Birch.name=
+tile.Chest.Chestnut.name=
+tile.Chest.Douglas Fir.name=
+tile.Chest.Hickory.name=
+tile.Chest.Kapok.name=
+tile.Chest.Maple.name=
+tile.Chest.Oak.name=
+tile.Chest.Pine.name=
+tile.Chest.Sequoia.name=
+tile.Chest.Spruce.name=
+tile.Chest.Sycamore.name=
+tile.Chest.White Cedar.name=
+tile.Chest.White Elm.name=
+tile.Chest.Willow.name=
+
 tile.log2.Acacia.name=Acácia
 tile.log.Ash.name=Freixo
 tile.log.Aspen.name=Choupo
@@ -2057,7 +2078,6 @@ tile.LavaStationary.name=Lava
 #=======
 #= GUI =
 #=======
-gui.badnbt=Informação Ruim
 
 #== Anvil GUI ==
 gui.Anvil.Plans=Planos
@@ -2119,18 +2139,11 @@ gui.Anvil.Rule42=Dobrar, Últimos Três
 gui.Anvil.Rule43=Dobrar, Não por Último
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=Avançado
-gui.Armor.Shift=Mudar
 gui.Armor.ForgedBy=Forjado por
-gui.Armor.Hold=Manter
 gui.Armor.Crush=Esmagar
 gui.Armor.Pierce=Perfurar
 gui.Armor.Slash=Cortar
 
-word.stage1=Inacabadas I
-word.stage2=Inacabadas II
-
-gui.Bow.Advanced=Avançado
 gui.Bow.Javelins=Dardos
 gui.Bow.Arrows=Flechas
 gui.Bow.ForgedBy=Feito por
@@ -2156,7 +2169,6 @@ gui.barrel.preserving=Preservando
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Carvão Vegetal
 gui.Bloomery.Ore=Minério
-gui.Bloomery.Output=Saída
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=Calendário
@@ -2284,16 +2296,24 @@ gui.fertilized=Fertilizado
 gui.Inventory=Inventário
 gui.ClearSlot=Limpe um espaço de saída.
 gui.LogPile=Pilha de Cavacas
+gui.Output=Saída
 gui.done=Feito
 gui.cancel=Cancelar
 gui.Sluice.Soil=Solo
 gui.Sluice.Overworked=Excesso de Trabalho
 gui.Workbench.Crafting=Criando
 gui.overburdened=* Sobrecarregado *
+
+gui.badnbt=Informação Ruim
+
+#== Tooltips ==
+gui.Advanced=Avançado
+gui.Shift=Mudar
+gui.Hold=Manter
+
 gui.slot=Espaço
 gui.slot.back=Costas
 
-#== Tooltips ==
 gui.ShowHelp=§8Ajuda: (Segurar§fShift§8)
 gui.Help=§8Ajuda:
 gui.Clay.Inst0=§bClique BD§7com uma pilha de 5 para moldar.
@@ -2306,9 +2326,13 @@ gui.PotteryBase.Inst0=Agache e §bClique BD§7para colocar objeto.
 gui.PotteryVesselSmall.Inst0=Ou §bClique BD§7para abrir inventário.
 gui.RawHide.Inst0=????
 gui.Barrel.MoreItems=§8Mais... (Segure §fShift§8)
+
 gui.Nutrient.A=Nutriente A
 gui.Nutrient.B=Nutriente B
 gui.Nutrient.C=Nutriente C
+
+gui.stage1=Inacabadas I
+gui.stage2=Inacabadas II
 
 gui.Size.Tiny=Minúsculo
 gui.Size.VerySmall=Muito Pequeno
@@ -2326,6 +2350,7 @@ gui.Reach.Short=Curto
 gui.Reach.Medium=Médio
 gui.Reach.Far=Distante
 
+#== Food ==
 gui.food.fruit=Fruta
 gui.food.vegetable=Vegetal
 gui.food.grain=Grão
@@ -2444,9 +2469,17 @@ gui.milk.sour=Azedo
 
 gui.units=Unidades
 
+#== WAILA ==
+gui.useless=
+gui.growth=
+gui.mature=
+gui.metal.Iron=
+
 #== Chat Messages ==
 gui.GoldPan.UseFull=Deve ser usado sob água corrente
 gui.goldpan.overused=Esta área parece estar Esgotada. Provavelmente não iria encontrar nada aqui.
+gui.seeds.failedTemp=
+gui.seeds.failedSun=
 
 gui.ProPick.Found=Encontrado
 gui.ProPick.FoundTraces=Encontrado traços de
@@ -2482,6 +2515,14 @@ gui.skill.adept=Perito
 gui.skill.expert=Especialista
 gui.skill.master=Mestre
 gui.skillpage=Abilidades
+
+#==================
+#= Error Messages =
+#==================
+error.error=
+error.NBT=
+error.OreCFG=
+error.Contact=
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
