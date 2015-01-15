@@ -6,9 +6,9 @@
 
 
 generator.TFCDefault=TFC 博厚傳說原設定
-generator.TFCFlat=
-generator.TFCAmplified=
-generator.TFCLargeBiomes=
+generator.TFCFlat=TFC 博厚傳說平坦世界設定
+generator.TFCAmplified=TFC 博厚傳說放大世界設定
+generator.TFCLargeBiomes=TFC 博厚傳說巨大生態區域設定
 
 key.ToolMode=替換工具狀態
 key.LockTool=鎖定工具位置
@@ -116,7 +116,7 @@ fluid.whiskey=威士忌(Whiskey)
 fluid.cornwhiskey=玉米(粟米)威士忌(Corn Whiskey)
 fluid.milk=奶(Milk)
 fluid.milkcurdled=凝固的奶(Curdled Milk)
-fluid.milkvinegar=
+fluid.milkvinegar=奶與醋混合物(Milk + Vinegar Mix)
 fluid.limewater=石灰水(LImewater)
 fluid.tannin=單寧酸(Tannin)
 fluid.vinegar=醋(Vinegar)
@@ -993,23 +993,23 @@ item.Loom.White Elm.name=榆樹織布機(White Elm Loom)
 item.Loom.Willow.name=柳樹織布機(Willow Loom)
 
 #== Wood Blocks ==
-tile.Chest.Acacia.name=
-tile.Chest.Ash.name=
-tile.Chest.Aspen.name=
-tile.Chest.Birch.name=
-tile.Chest.Chestnut.name=
-tile.Chest.Douglas Fir.name=
-tile.Chest.Hickory.name=
-tile.Chest.Kapok.name=
-tile.Chest.Maple.name=
-tile.Chest.Oak.name=
-tile.Chest.Pine.name=
-tile.Chest.Sequoia.name=
-tile.Chest.Spruce.name=
-tile.Chest.Sycamore.name=
-tile.Chest.White Cedar.name=
-tile.Chest.White Elm.name=
-tile.Chest.Willow.name=
+tile.Chest.Acacia.name=金合歡木箱(相思樹)(Acacia Chest)
+tile.Chest.Ash.name=梣樹木箱(Ash Chest)
+tile.Chest.Aspen.name=白楊木木箱(Aspen Chest)
+tile.Chest.Birch.name=白樺木木箱(Birch Chest)
+tile.Chest.Chestnut.name=栗樹木箱(Chestnut Chest)
+tile.Chest.Douglas Fir.name=花旗松木箱(Douglas Fir Chest)
+tile.Chest.Hickory.name=胡桃木箱(Hickory Chest)
+tile.Chest.Kapok.name=木棉木箱(Kapok Chest)
+tile.Chest.Maple.name=楓樹木箱(Maple Chest)
+tile.Chest.Oak.name=橡木木箱(Oak Chest)
+tile.Chest.Pine.name=松樹木箱(Pine Chest)
+tile.Chest.Sequoia.name=巨杉木箱(紅杉)(Sequoia Chest)
+tile.Chest.Spruce.name=雲杉木箱(Spruce Chest)
+tile.Chest.Sycamore.name=梧桐木箱(Sycamore Chest)
+tile.Chest.White Cedar.name=香柏樹木箱(雪松)(White Cedar Chest)
+tile.Chest.White Elm.name=榆樹木箱(White Elm Chest)
+tile.Chest.Willow.name=柳樹木箱(Willow Chest)
 
 tile.log2.Acacia.name=金合歡(相思樹)(Acacia)
 tile.log.Ash.name=梣樹(Ash)
@@ -2470,16 +2470,16 @@ gui.milk.sour=酸
 gui.units=單位
 
 #== WAILA ==
-gui.useless=
-gui.growth=
-gui.mature=
-gui.metal.Iron=
+gui.useless=無用
+gui.growth=生長
+gui.mature=成熟
+gui.metal.Iron=鐵
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=必須在流水中淘
 gui.goldpan.overused=這範圍的礦物似乎已淘盡。你大概不會淘到更多的礦物了。
-gui.seeds.failedTemp=
-gui.seeds.failedSun=
+gui.seeds.failedTemp=這裡太寒冷，這農作物會枯死。
+gui.seeds.failedSun=這裡日照不足，這農作物會枯死。
 
 gui.ProPick.Found=探到
 gui.ProPick.FoundTraces=探到微量的
@@ -2519,10 +2519,10 @@ gui.skillpage=技巧
 #==================
 #= Error Messages =
 #==================
-error.error=
-error.NBT=
-error.OreCFG=
-error.Contact=
+error.error=錯誤:
+error.NBT=缺少NBT資料
+error.OreCFG=在TFCOre.cfg裡作以下的輸入是無效的:
+error.Contact=請向TerraFirmaCraft博厚傳說支援隊伍報告情況
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
