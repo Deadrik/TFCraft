@@ -6,9 +6,9 @@
 
 
 generator.TFCDefault=TFC Standaard
-generator.TFCFlat=
-generator.TFCAmplified=
-generator.TFCLargeBiomes=
+generator.TFCFlat=TFC Vlak (niet beschikbaar)
+generator.TFCAmplified=TFC Versterkt (niet beschikbaar)
+generator.TFCLargeBiomes=TFC Grote Biomen (niet beschikbaar)
 
 key.ToolMode=Wissel Gereedschap Functie
 key.LockTool=Gereedschap Locatie Vergrendelen
@@ -116,7 +116,7 @@ fluid.whiskey=Wiskey
 fluid.cornwhiskey=Mais Wiskey
 fluid.milk=Melk
 fluid.milkcurdled=Gewrongelde Melk
-fluid.milkvinegar=
+fluid.milkvinegar=Melk + Azijn Mix
 fluid.limewater=Kalk Water
 fluid.tannin=Tannine
 fluid.vinegar=Azijn
@@ -348,12 +348,12 @@ item.Hoe Mold.Ceramic Mold Hoe Bronze.name=Schoffelmal (Brons)
 item.Hoe Mold.Ceramic Mold Hoe Black Bronze.name=Schoffelmal (Zwart Brons)
 item.Hoe Mold.Ceramic Mold Hoe Bismuth Bronze.name=Schoffelmal (Bismut Brons)
 
-item.Knife Mold.Clay Mold Knife.name=Mesmal Klei
-item.Knife Mold.Ceramic Mold Knife.name=Mesmal
-item.Knife Mold.Ceramic Mold Knife Copper.name=Mesmal (Koper)
-item.Knife Mold.Ceramic Mold Knife Bronze.name=Mesmal (Brons)
-item.Knife Mold.Ceramic Mold Knife Black Bronze.name=Mesmal (Zwart Brons)
-item.Knife Mold.Ceramic Mold Knife Bismuth Bronze.name=Mesmal (Bismut Brons)
+item.Knife Mold.Clay Mold Knife.name=Mes Mal Klei
+item.Knife Mold.Ceramic Mold Knife.name=Mes Mal
+item.Knife Mold.Ceramic Mold Knife Copper.name=Mes Mal (Koper)
+item.Knife Mold.Ceramic Mold Knife Bronze.name=Mes Mal (Brons)
+item.Knife Mold.Ceramic Mold Knife Black Bronze.name=Mes Mal (Zwart Brons)
+item.Knife Mold.Ceramic Mold Knife Bismuth Bronze.name=Mes Mal (Bismut Brons)
 
 item.Javelin Mold.Clay Mold Javelin.name=Kleien Speerpunt Mal
 item.Javelin Mold.Ceramic Mold Javelin.name=Speerpunt Mal
@@ -993,23 +993,23 @@ item.Loom.White Elm.name=Witte Iepen Weefgetouw
 item.Loom.Willow.name=Wilgen Weefgetouw
 
 #== Wood Blocks ==
-tile.Chest.Acacia.name=
-tile.Chest.Ash.name=
-tile.Chest.Aspen.name=
-tile.Chest.Birch.name=
-tile.Chest.Chestnut.name=
-tile.Chest.Douglas Fir.name=
-tile.Chest.Hickory.name=
-tile.Chest.Kapok.name=
-tile.Chest.Maple.name=
-tile.Chest.Oak.name=
-tile.Chest.Pine.name=
-tile.Chest.Sequoia.name=
-tile.Chest.Spruce.name=
-tile.Chest.Sycamore.name=
-tile.Chest.White Cedar.name=
-tile.Chest.White Elm.name=
-tile.Chest.Willow.name=
+tile.Chest.Acacia.name=Acacia Kist
+tile.Chest.Ash.name=Essen kist
+tile.Chest.Aspen.name=Espen Kist
+tile.Chest.Birch.name=Berken Kist
+tile.Chest.Chestnut.name=Kastanje Kist
+tile.Chest.Douglas Fir.name=Douglas Sparren Kist
+tile.Chest.Hickory.name=Hickory Kist
+tile.Chest.Kapok.name=Kapok Kist
+tile.Chest.Maple.name=Esdoorn Kist
+tile.Chest.Oak.name=Eiken Kist
+tile.Chest.Pine.name=Dennen Kist
+tile.Chest.Sequoia.name=Sequoila Kist
+tile.Chest.Spruce.name=Sparren Kist
+tile.Chest.Sycamore.name=Ahornen Kist
+tile.Chest.White Cedar.name=Witte Cederen kist
+tile.Chest.White Elm.name=Witte Iepen Kist
+tile.Chest.Willow.name=Wilgen Kist
 
 tile.log2.Acacia.name=Acacia Stam
 tile.log.Ash.name=Essen Stam
@@ -2302,7 +2302,7 @@ gui.cancel=Anuleren
 gui.Sluice.Soil=Aarde
 gui.Sluice.Overworked=Overwerkt
 gui.Workbench.Crafting=Maken
-gui.overburdened=* Overwerkt *
+gui.overburdened=* Overgewicht *
 
 gui.badnbt=Foute Info
 
@@ -2470,16 +2470,16 @@ gui.milk.sour=Zure
 gui.units=Eenheden
 
 #== WAILA ==
-gui.useless=
-gui.growth=
-gui.mature=
-gui.metal.Iron=
+gui.useless=Nutteloos
+gui.growth=Groei
+gui.mature=Volgroeid
+gui.metal.Iron=IJzer
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Kan alleen in stromend water gebruikt worden
 gui.goldpan.overused=Dit gebied is te veel bewerkt. Je zal er waarschijnlijk niets vinden.
-gui.seeds.failedTemp=
-gui.seeds.failedSun=
+gui.seeds.failedTemp=Het is te koud om dit planten, zal niet lang leven anders.
+gui.seeds.failedSun=Niet genoeg zonlicht aanwezig, zal niet lang leven anders.
 
 gui.ProPick.Found=Gevonden:
 gui.ProPick.FoundTraces=Miniscule hoeveelheden gevonden van
@@ -2519,10 +2519,10 @@ gui.skillpage=Vaardigheden
 #==================
 #= Error Messages =
 #==================
-error.error=
-error.NBT=
-error.OreCFG=
-error.Contact=
+error.error=FOUT:
+error.NBT=mist NBT informatie
+error.OreCFG=Het volgende gegeven in TFCOre.cfg is ongeldig:
+error.Contact=Rapporteer dit aan TerraFirmaCraft Support
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
