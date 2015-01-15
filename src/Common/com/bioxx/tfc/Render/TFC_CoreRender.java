@@ -3,6 +3,7 @@ package com.bioxx.tfc.Render;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockWall;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;

@@ -113,6 +113,7 @@ import com.bioxx.tfc.Render.Blocks.RenderToolRack;
 import com.bioxx.tfc.Render.Blocks.RenderTorch;
 import com.bioxx.tfc.Render.Blocks.RenderTuyere;
 import com.bioxx.tfc.Render.Blocks.RenderVessel;
+import com.bioxx.tfc.Render.Blocks.RenderWall;
 import com.bioxx.tfc.Render.Blocks.RenderWoodConstruct;
 import com.bioxx.tfc.Render.Models.ModelBass;
 import com.bioxx.tfc.Render.Models.ModelBear;
@@ -238,6 +239,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.cookingPitRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.leavesRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.detailedRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.WallRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderWall());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.FenceRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderFence());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.FenceGateRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderFenceGate());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.toolRackRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderToolRack());

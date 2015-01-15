@@ -145,6 +145,7 @@ public class TFCBlocks
 	public static int barrelRenderId;
 	public static int loomRenderId;
 	public static int standRenderId;
+	public static int WallRenderId;
 	public static int FenceRenderId;
 	public static int FenceGateRenderId;
 	public static int NestBoxRenderId;
