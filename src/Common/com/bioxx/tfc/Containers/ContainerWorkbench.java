@@ -1,7 +1,7 @@
 package com.bioxx.tfc.Containers;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

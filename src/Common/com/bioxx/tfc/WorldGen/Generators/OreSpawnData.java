@@ -7,7 +7,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.util.StatCollector;
 
-import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 
 public class OreSpawnData

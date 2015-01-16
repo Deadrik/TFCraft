@@ -12,9 +12,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemTFCArmor;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class EntityStand extends EntityLiving
 {

@@ -2,8 +2,8 @@ package com.bioxx.tfc.Core;
 
 import java.util.ArrayList;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

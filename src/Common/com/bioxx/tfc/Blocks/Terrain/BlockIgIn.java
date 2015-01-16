@@ -1,6 +1,6 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
-import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 
 import net.minecraft.block.material.Material;

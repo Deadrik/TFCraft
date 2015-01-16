@@ -3,8 +3,8 @@ package com.bioxx.tfc.Blocks.Vanilla;
 import net.minecraft.block.BlockButtonWood;
 import net.minecraft.util.IIcon;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

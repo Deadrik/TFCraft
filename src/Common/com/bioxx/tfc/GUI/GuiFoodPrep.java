@@ -14,11 +14,11 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Containers.ContainerFoodPrep;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
+import com.bioxx.tfc.api.TFCItems;
 
 public class GuiFoodPrep extends GuiContainerTFC
 {

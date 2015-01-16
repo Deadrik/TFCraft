@@ -3,7 +3,7 @@ package com.bioxx.tfc.TileEntities;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class TEMetalTrapDoor extends NetworkTileEntity
 {

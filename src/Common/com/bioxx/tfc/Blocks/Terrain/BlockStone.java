@@ -16,9 +16,9 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Tools.IToolChisel;
 
 import cpw.mods.fml.relauncher.Side;

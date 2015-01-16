@@ -9,8 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TileEntities.TEBarrel;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class EntityBarrel extends Entity
 {

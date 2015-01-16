@@ -9,9 +9,9 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.EntityBarrel;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class RenderBarrelEntity extends Render {
 

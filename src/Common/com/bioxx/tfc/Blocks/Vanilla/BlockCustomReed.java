@@ -9,8 +9,8 @@ import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.TFCItems;
 
 public class BlockCustomReed extends BlockReed implements IPlantable
 {

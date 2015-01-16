@@ -19,9 +19,9 @@ import net.minecraftforge.common.MinecraftForge;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Entities.EntityStand;
 import com.bioxx.tfc.Items.ItemQuiver;
+import com.bioxx.tfc.api.TFCItems;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

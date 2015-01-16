@@ -8,8 +8,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Containers.Slots.SlotFirepit;
 import com.bioxx.tfc.Containers.Slots.SlotFirepitFuel;
 import com.bioxx.tfc.Containers.Slots.SlotFirepitIn;
@@ -19,6 +17,8 @@ import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.api.HeatRegistry;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 
 public class ContainerFirepit extends ContainerTFC
 {

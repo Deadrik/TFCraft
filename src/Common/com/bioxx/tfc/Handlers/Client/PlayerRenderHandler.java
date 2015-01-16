@@ -1,11 +1,11 @@
 package com.bioxx.tfc.Handlers.Client;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
 import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Render.RenderLargeItem;
 import com.bioxx.tfc.Render.RenderQuiver;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.RenderPlayer;

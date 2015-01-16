@@ -103,6 +103,7 @@ import com.bioxx.tfc.Render.Blocks.RenderLoom;
 import com.bioxx.tfc.Render.Blocks.RenderMetalSheet;
 import com.bioxx.tfc.Render.Blocks.RenderMetalTrapDoor;
 import com.bioxx.tfc.Render.Blocks.RenderNestBox;
+import com.bioxx.tfc.Render.Blocks.RenderOilLamp;
 import com.bioxx.tfc.Render.Blocks.RenderOre;
 import com.bioxx.tfc.Render.Blocks.RenderPottery;
 import com.bioxx.tfc.Render.Blocks.RenderSmoke;
@@ -153,6 +154,7 @@ import com.bioxx.tfc.TileEntities.TESmokeRack;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntityToolRack;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Enums.EnumTree;
 import com.bioxx.tfc.api.Util.KeyBindings;
 
@@ -264,6 +266,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.torchRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderTorch());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.smokeRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderSmoke());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.smokeRackRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderSmokeRack());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.oilLampRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderOilLamp());
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
 	}

@@ -3,13 +3,15 @@ package com.bioxx.tfc.Render.TESR;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockIngotPile;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Render.Models.ModelIngotPile;
 import com.bioxx.tfc.TileEntities.TEIngotPile;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class TESRIngotPile extends TESRBase
 {

@@ -31,7 +31,6 @@ import com.bioxx.tfc.Commands.SetPlayerStatsCommand;
 import com.bioxx.tfc.Commands.StripChunkCommand;
 import com.bioxx.tfc.Core.ItemHeat;
 import com.bioxx.tfc.Core.Recipes;
-import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_OreDictionary;
@@ -63,6 +62,7 @@ import com.bioxx.tfc.WorldGen.Generators.WorldGenOre;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenPlants;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenSoilPits;
 import com.bioxx.tfc.api.SkillsManager;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCCrafting;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
@@ -104,12 +104,11 @@ public class TerraFirmaCraft
 
 		proxy.registerTickHandler();
 
-		// Register Liquids
-		TFCFluid.register();
+		proxy.registerFluids();
 
-		TFCBlocks.LoadBlocks();
-		TFCBlocks.RegisterBlocks();
-		TFCBlocks.setupFire();
+		BlockSetup.LoadBlocks();
+		BlockSetup.RegisterBlocks();
+		BlockSetup.setupFire();
 		loadOre();
 
 		//Register Key Bindings(Client only)
@@ -135,7 +134,7 @@ public class TerraFirmaCraft
 		SkillsManager.instance.registerSkill(Global.SKILL_BUTCHERING, 100);
 
 		//Load Items
-		TFCItems.Setup();
+		ItemSetup.Setup();
 
 
 
@@ -230,7 +229,7 @@ public class TerraFirmaCraft
 		proxy.setupGuiIngameForge();
 
 		// Register Liquids
-		TFCFluid.registerFluidContainers();
+		proxy.setupFluids();
 		proxy.registerFluidIcons();
 
 		//Setup custom potion effects
@@ -246,7 +245,7 @@ public class TerraFirmaCraft
 
 		//Register TFC items with forge fuel handler.
 		//This is used by vanilla furnice and many other mods.
-		TFCItems.registerFurniceFuel();
+		ItemSetup.registerFurniceFuel();
 		GameRegistry.registerFuelHandler(new TFCFuelHandler());
 		
 		//WAILA stuff

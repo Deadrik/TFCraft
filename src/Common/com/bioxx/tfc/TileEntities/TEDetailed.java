@@ -4,9 +4,9 @@ import java.util.BitSet;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockDetailed;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class TEDetailed extends NetworkTileEntity {
 	public short TypeID = -1;

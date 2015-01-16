@@ -8,13 +8,13 @@ import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.Terrain.BlockCobble;
 import com.bioxx.tfc.Blocks.Terrain.BlockSmooth;
 import com.bioxx.tfc.Blocks.Terrain.BlockStone;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 

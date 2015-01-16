@@ -19,13 +19,12 @@ import net.minecraftforge.fluids.IFluidBlock;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEPottery;
 import com.bioxx.tfc.TileEntities.TEVessel;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.IEquipable;
@@ -145,14 +144,14 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 
 				if (is.stackSize == 1)
 				{
-					TFCFluid.fillItemBarrel(is, new FluidStack(fluid, 5000), 5000);
+					ItemBarrels.fillItemBarrel(is, new FluidStack(fluid, 5000), 5000);
 				}
 				else
 				{
 					is.stackSize--;
 					ItemStack outIS = is.copy();
 					outIS.stackSize = 1;
-					TFCFluid.fillItemBarrel(outIS, new FluidStack(fluid, 5000), 5000);
+					ItemBarrels.fillItemBarrel(outIS, new FluidStack(fluid, 5000), 5000);
 					if (!player.inventory.addItemStackToInventory(outIS))
 					{
 						player.entityDropItem(outIS, 0);

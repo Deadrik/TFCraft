@@ -1,8 +1,10 @@
 package com.bioxx.tfc.Blocks.Flora;
 
 import net.minecraft.util.IIcon;
-import com.bioxx.tfc.TFCBlocks;
+
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

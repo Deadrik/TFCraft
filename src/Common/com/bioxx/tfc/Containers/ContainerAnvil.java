@@ -7,7 +7,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Containers.Slots.SlotAnvilFlux;
 import com.bioxx.tfc.Containers.Slots.SlotAnvilHammer;
 import com.bioxx.tfc.Containers.Slots.SlotAnvilIn;
@@ -15,6 +14,7 @@ import com.bioxx.tfc.Containers.Slots.SlotAnvilWeldOut;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.TileEntities.TEAnvil;
+import com.bioxx.tfc.api.TFCItems;
 
 public class ContainerAnvil extends ContainerTFC
 {

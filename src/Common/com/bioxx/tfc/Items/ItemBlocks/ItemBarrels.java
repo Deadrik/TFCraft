@@ -20,9 +20,9 @@ import net.minecraftforge.fluids.IFluidBlock;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.Constant.Global;
@@ -145,14 +145,14 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 
 				if (is.stackSize == 1)
 				{
-					TFCFluid.fillItemBarrel(is, new FluidStack(fluid, 10000), 10000);	
+					ItemBarrels.fillItemBarrel(is, new FluidStack(fluid, 10000), 10000);	
 				}	
 				else
 				{
 					is.stackSize--;
 					ItemStack outIS = is.copy();
 					outIS.stackSize = 1;
-					TFCFluid.fillItemBarrel(outIS, new FluidStack(fluid, 10000), 10000);
+					ItemBarrels.fillItemBarrel(outIS, new FluidStack(fluid, 10000), 10000);
 					if (!player.inventory.addItemStackToInventory(outIS))
 					{
 						player.entityDropItem(outIS, 0);
@@ -212,6 +212,43 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 	public boolean getTooHeavyToCarry(ItemStack is)
 	{
 		return is.hasTagCompound() && is.getTagCompound().hasKey("Sealed");
+	}
+
+	public static ItemStack fillItemBarrel(ItemStack is, FluidStack fs, int maxFluid)
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		if(is.hasTagCompound())
+		{
+			nbt = is.getTagCompound();
+		}
+
+		if(nbt.hasKey("Sealed"))
+			return is;
+
+		//Attempt to merge fluidstacks first
+		if(nbt.hasKey("fluidNBT"))
+		{
+			FluidStack ifs = FluidStack.loadFluidStackFromNBT(nbt.getCompoundTag("fluidNBT"));
+			if(ifs.isFluidEqual(fs) && ifs.amount < maxFluid)
+			{
+				ifs.amount += fs.amount;
+				fs.amount = ifs.amount % maxFluid;
+				ifs.amount = Math.min(ifs.amount, maxFluid);
+				nbt.setTag("fluidNBT", ifs.writeToNBT(new NBTTagCompound()));
+				nbt.setBoolean("Sealed", true);
+				nbt.setInteger("SealTime", (int)TFC_Time.getTotalHours());
+			}
+			else return is;
+		}
+		else 
+		{
+			nbt.setTag("fluidNBT", fs.writeToNBT(new NBTTagCompound()));
+			nbt.setBoolean("Sealed", true);
+			nbt.setInteger("SealTime", (int)TFC_Time.getTotalHours());
+		}
+
+		is.setTagCompound(nbt);
+		return is;
 	}
 }
 

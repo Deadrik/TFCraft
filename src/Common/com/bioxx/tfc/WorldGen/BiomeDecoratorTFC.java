@@ -7,7 +7,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Food.CropIndex;
@@ -18,6 +17,7 @@ import com.bioxx.tfc.WorldGen.Generators.WorldGenCustomReed;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenCustomSand;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowCrops;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenWaterPlants;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class BiomeDecoratorTFC extends BiomeDecorator
 {

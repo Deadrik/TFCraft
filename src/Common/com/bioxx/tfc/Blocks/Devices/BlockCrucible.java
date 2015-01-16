@@ -3,12 +3,12 @@ package com.bioxx.tfc.Blocks.Devices;
 import java.util.Iterator;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.Metal.MetalPair;
 import com.bioxx.tfc.TileEntities.TECrucible;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;

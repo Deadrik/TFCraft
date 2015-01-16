@@ -16,12 +16,12 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TELoom;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCCrafting;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
@@ -194,7 +194,7 @@ public class Recipes
 				{ "# #", " # ", Character.valueOf('#'), new ItemStack(Blocks.glass) });
 
 		String[] dyes =
-		{ "White", "Orange", "Magenta", "LightBlue", "Yellow", "Lime", "Pink", "Gray", "LightGray", "Cyan", "Purple", "Blue", "Brown", "Green", "Red", "Black" };
+			{ "White", "Orange", "Magenta", "LightBlue", "Yellow", "Lime", "Pink", "Gray", "LightGray", "Cyan", "Purple", "Blue", "Brown", "Green", "Red", "Black" };
 		for (int i = 0; i < dyes.length; i++)
 		{
 			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Blocks.carpet, 1, i), "dye" + dyes[i], new ItemStack(Blocks.carpet, 1, WILD)));
@@ -1631,6 +1631,7 @@ public class Recipes
 		manager.addPlan("trapdoor", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.SHRINKNOTLAST, RuleEnum.UPSETNOTLAST}));
 		manager.addPlan("grill", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.DRAWSECONDFROMLAST, RuleEnum.DRAWTHIRDFROMLAST}));
 		manager.addPlan("shears", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.HITTHIRDFROMLAST}));
+		manager.addPlan("oillamp", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.BENDSECONDFROMLAST, RuleEnum.DRAWTHIRDFROMLAST}));
 
 		addWeldRecipes(manager);
 
@@ -1922,6 +1923,13 @@ public class Recipes
 
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot2x), new ItemStack(TFCItems.WroughtIronIngot2x),"grill", AnvilReq.WROUGHTIRON, new ItemStack(TFCBlocks.Grill, 1, 0)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronKnifeHead), new ItemStack(TFCItems.WroughtIronKnifeHead),"shears", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.Shears, 1, 0)));
+
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.GoldIngot), null,"oillamp", AnvilReq.COPPER, new ItemStack(TFCBlocks.OilLamp, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.PlatinumIngot), null,"oillamp", AnvilReq.COPPER, new ItemStack(TFCBlocks.OilLamp, 1, 1)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RoseGoldIngot), null,"oillamp", AnvilReq.COPPER, new ItemStack(TFCBlocks.OilLamp, 1, 2)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SilverIngot), null,"oillamp", AnvilReq.COPPER, new ItemStack(TFCBlocks.OilLamp, 1, 3)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SterlingSilverIngot), null,"oillamp", AnvilReq.COPPER, new ItemStack(TFCBlocks.OilLamp, 1, 4)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), null,"oillamp", AnvilReq.BLUESTEEL, new ItemStack(TFCBlocks.OilLamp, 1, 5)));
 
 	}
 

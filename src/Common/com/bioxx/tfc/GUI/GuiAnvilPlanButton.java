@@ -8,8 +8,8 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.TFCItems;
 
 public class GuiAnvilPlanButton extends GuiButton 
 {

@@ -1,8 +1,8 @@
 package com.bioxx.tfc.Render.Blocks;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.Devices.BlockEarlyBloomery;
 import com.bioxx.tfc.TileEntities.TEBloomery;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;

@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;

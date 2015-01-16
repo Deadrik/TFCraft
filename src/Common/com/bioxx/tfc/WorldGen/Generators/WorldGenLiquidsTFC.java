@@ -2,7 +2,7 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;

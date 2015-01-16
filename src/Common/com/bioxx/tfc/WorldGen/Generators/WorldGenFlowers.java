@@ -4,8 +4,8 @@ import java.util.Random;
 
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.Flora.BlockFlower;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class WorldGenFlowers
 {
