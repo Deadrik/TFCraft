@@ -65,7 +65,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		return sealed;
 	}
 
-	protected int getTechLevel()
+	public int getTechLevel()
 	{
 		return 1;
 	}

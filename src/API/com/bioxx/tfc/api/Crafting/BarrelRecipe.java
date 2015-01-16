@@ -121,7 +121,7 @@ public class BarrelRecipe
 			s += recipeOutIS.getDisplayName();
 		}
 		if(recipeOutFluid != null && !this.recipeFluid.isFluidEqual(recipeOutFluid))
-			s=recipeOutFluid.getFluid().getLocalizedName();
+			s = recipeOutFluid.getFluid().getLocalizedName(recipeOutFluid);
 		return s;
 	}
 

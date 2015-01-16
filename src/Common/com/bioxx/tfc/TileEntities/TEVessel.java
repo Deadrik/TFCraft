@@ -18,7 +18,7 @@ public class TEVessel extends TEBarrel implements IInventory
 	}
 
 	@Override
-	protected int getTechLevel()
+	public int getTechLevel()
 	{
 		return 0;
 	}

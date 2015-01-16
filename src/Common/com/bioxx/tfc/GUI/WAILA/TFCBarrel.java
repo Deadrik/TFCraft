@@ -9,17 +9,22 @@ import mcp.mobius.waila.api.IWailaRegistrar;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.BarrelBriningRecipe;
+import com.bioxx.tfc.api.Crafting.BarrelManager;
+import com.bioxx.tfc.api.Crafting.BarrelRecipe;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
@@ -38,10 +43,12 @@ public class TFCBarrel implements IWailaDataProvider
 		if (accessor.getTileEntity() instanceof TEBarrel)
 		{
 			TEBarrel te = (TEBarrel) accessor.getTileEntity();
+			NBTTagCompound tag = accessor.getNBTData();
+			FluidStack fluid = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("fluidNBT"));
 
-			if (te.getFluidStack() != null)
+			if (fluid != null)
 			{
-				head += " (" + te.fluid.getFluid().getLocalizedName(te.getFluidStack()) + ")";
+				head += " (" + fluid.getLocalizedName() + ")";
 				currenttip.set(0, head);
 			}
 		}
@@ -54,26 +61,47 @@ public class TFCBarrel implements IWailaDataProvider
 		if (accessor.getTileEntity() instanceof TEBarrel)
 		{
 			TEBarrel te = (TEBarrel) accessor.getTileEntity();
-			ItemStack inStack = te.getStackInSlot(0);
-			NBTTagCompound tag = accessor.getNBTData();
-			int sealTime = accessor.getNBTInteger(tag, "SealTime");
+			ItemStack inStack = null;
 
-			if (te.getFluidStack() != null)
+			NBTTagCompound tag = accessor.getNBTData();
+
+			NBTTagList nbttaglist = tag.getTagList("Items", 10);
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(0);
+			byte byte0 = nbttagcompound1.getByte("Slot");
+
+			if (byte0 >= 0 && byte0 < te.storage.length)
+				inStack = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+
+			Boolean sealed = te.getSealed();
+			int sealTime = accessor.getNBTInteger(tag, "SealTime");
+			FluidStack fluid = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("fluidNBT"));
+			BarrelRecipe recipe = BarrelManager.getInstance().findMatchingRecipe(inStack, fluid, sealed, te.getTechLevel());
+
+			if (sealed && fluid != null && fluid.getFluid() == TFCFluids.MILKCURDLED &&
+					(inStack == null || (inStack.getItem() instanceof IFood && ((IFood) inStack.getItem()).getFoodGroup() != EnumFoodGroup.Dairy &&
+							((IFood) inStack.getItem()).isEdible(inStack) && Food.getWeight(inStack) <= 20.0f)))
+				recipe = new BarrelRecipe(null, new FluidStack(TFCFluids.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese, 1), 160), null).setMinTechLevel(0);
+
+			// Fluid Amount
+			if (fluid != null)
 			{
-				currenttip.add(String.valueOf(te.getFluidLevel()) + "/" + String.valueOf(te.getMaxLiquid()) + " mB");
+				currenttip.add(String.valueOf(fluid.amount) + "/" + String.valueOf(te.getMaxLiquid()) + " mB");
 			}
-			if (te.getSealed() && sealTime != 0)
+
+			// Sealed Date
+			if (sealed && sealTime != 0)
 			{
 				currenttip.add(StatCollector.translateToLocal("gui.Barrel.SealedOn") + " : " + TFC_Time.getDateStringFromHours(sealTime));
 			}
 
-			if (te.recipe != null)
+			// Output
+			if (recipe != null)
 			{
-				if (!(te.recipe instanceof BarrelBriningRecipe))
+				if (!(recipe instanceof BarrelBriningRecipe))
 				{
-					currenttip.add(StatCollector.translateToLocal("gui.Output") + " : " + te.recipe.getRecipeName());
+					currenttip.add(StatCollector.translateToLocal("gui.Output") + " : " + recipe.getRecipeName());
 				}
-				else if (te.getSealed() && te.getFluidStack() != null && te.getFluidStack().getFluid() == TFCFluids.BRINE)
+				else if (sealed && fluid != null && fluid.getFluid() == TFCFluids.BRINE)
 				{
 					if (inStack != null && inStack.getItem() instanceof IFood && (((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Fruit ||
 							((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein ||
@@ -83,10 +111,10 @@ public class TFCBarrel implements IWailaDataProvider
 					}
 				}
 			}
-			else if (te.recipe == null && te.getSealed() && te.getFluidStack() != null && inStack != null && inStack.getItem() instanceof IFood &&
-					te.getFluidStack().getFluid() == TFCFluids.VINEGAR)
+			else if (recipe == null && sealed && fluid != null && inStack != null && inStack.getItem() instanceof IFood &&
+					fluid.getFluid() == TFCFluids.VINEGAR)
 			{
-				if (!Food.isPickled(inStack) && Food.getWeight(inStack) / te.getFluidStack().amount <= Global.FOOD_MAX_WEIGHT / te.getMaxLiquid())
+				if (!Food.isPickled(inStack) && Food.getWeight(inStack) / fluid.amount <= Global.FOOD_MAX_WEIGHT / te.getMaxLiquid())
 				{
 					if ((((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Fruit || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable ||
 							((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein || ((IFood) inStack.getItem()) == TFCItems.Cheese) &&
@@ -95,7 +123,7 @@ public class TFCBarrel implements IWailaDataProvider
 						currenttip.add(StatCollector.translateToLocal("gui.barrel.pickling"));
 					}
 				}
-				else if (Food.isPickled(inStack) && Food.getWeight(inStack) / te.getFluidStack().amount <= Global.FOOD_MAX_WEIGHT / te.getMaxLiquid() * 2)
+				else if (Food.isPickled(inStack) && Food.getWeight(inStack) / fluid.amount <= Global.FOOD_MAX_WEIGHT / te.getMaxLiquid() * 2)
 				{
 					currenttip.add(StatCollector.translateToLocal("gui.barrel.preserving"));
 				}
@@ -112,6 +140,8 @@ public class TFCBarrel implements IWailaDataProvider
 
 	@Override
 	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x, int y, int z) {
+		if (te != null)
+			te.writeToNBT(tag);
 		return tag;
 	}
 
@@ -119,5 +149,6 @@ public class TFCBarrel implements IWailaDataProvider
 	{
 		reg.registerHeadProvider(new TFCBarrel(), TEBarrel.class);
 		reg.registerBodyProvider(new TFCBarrel(), TEBarrel.class);
+		reg.registerNBTProvider(new TFCBarrel(), TEBarrel.class);
 	}
 }
