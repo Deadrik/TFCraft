@@ -13,11 +13,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.Food;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.BarrelBriningRecipe;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
@@ -71,7 +71,7 @@ public class TFCBarrel implements IWailaDataProvider
 			{
 				if (!(te.recipe instanceof BarrelBriningRecipe))
 				{
-				currenttip.add(StatCollector.translateToLocal("gui.Output") + " : " + te.recipe.getRecipeName());
+					currenttip.add(StatCollector.translateToLocal("gui.Output") + " : " + te.recipe.getRecipeName());
 				}
 				else if (te.getSealed() && te.getFluidStack() != null && te.getFluidStack().getFluid() == TFCFluid.BRINE)
 				{
@@ -79,7 +79,7 @@ public class TFCBarrel implements IWailaDataProvider
 							((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein ||
 							((IFood) inStack.getItem()) == TFCItems.Cheese) && !Food.isBrined(inStack))
 					{
-					currenttip.add(StatCollector.translateToLocal("gui.barrel.brining"));
+						currenttip.add(StatCollector.translateToLocal("gui.barrel.brining"));
 					}
 				}
 			}
@@ -92,12 +92,12 @@ public class TFCBarrel implements IWailaDataProvider
 							((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein || ((IFood) inStack.getItem()) == TFCItems.Cheese) &&
 							Food.isBrined(inStack))
 					{
-					currenttip.add(StatCollector.translateToLocal("gui.barrel.pickling"));
+						currenttip.add(StatCollector.translateToLocal("gui.barrel.pickling"));
 					}
 				}
 				else if (Food.isPickled(inStack) && Food.getWeight(inStack) / te.getFluidStack().amount <= Global.FOOD_MAX_WEIGHT / te.getMaxLiquid() * 2)
 				{
-				currenttip.add(StatCollector.translateToLocal("gui.barrel.preserving"));
+					currenttip.add(StatCollector.translateToLocal("gui.barrel.preserving"));
 				}
 			}
 		}

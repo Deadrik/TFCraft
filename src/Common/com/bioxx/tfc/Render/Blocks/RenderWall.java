@@ -7,10 +7,8 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Render.TESRChestHelper;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -36,7 +34,7 @@ public class RenderWall  implements ISimpleBlockRenderingHandler
 		boolean flag3Up = wallBlock.canConnectWallTo(renderblocks.blockAccess, x, y + 1, z + 1);
 		boolean flag4Up = flag2Up && flag3Up;
 		boolean flag5Up = flag0Up && flag1Up;
-		
+
 		if(((flag4 && flag4Up) || (flag5 && flag5Up)) && flagUp){
 			if (flag4)
 			{
@@ -124,10 +122,10 @@ public class RenderWall  implements ISimpleBlockRenderingHandler
 	{
 		float f = 0.3F;
 		float f1 = 0.7F;
-		
+
 		renderer.setRenderBounds(f, 0.0D, f, f1, 1.0D, f1);
 		renderInvBlock(block, metadata, renderer);
-		
+
 		f = 0.325F;
 		f1 = 0.675F;
 		float f2 = 0F;
@@ -164,7 +162,7 @@ public class RenderWall  implements ISimpleBlockRenderingHandler
 		}
 		return false;
 	}
-	
+
 	public static void renderInvBlock(Block block, int m, RenderBlocks renderer)
 	{
 		Tessellator var14 = Tessellator.instance;
