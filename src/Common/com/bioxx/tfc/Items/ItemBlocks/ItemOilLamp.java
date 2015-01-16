@@ -7,9 +7,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
-import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
@@ -115,7 +115,7 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable
 	public static ItemStack GetFullLamp(int meta)
 	{
 		ItemStack is = new ItemStack(TFCBlocks.OilLamp, 1, meta);
-		FluidStack fs = new FluidStack(TFCFluid.OLIVEOIL, 1000);
+		FluidStack fs = new FluidStack(TFCFluids.OLIVEOIL, 1000);
 		is.setTagCompound(fs.writeToNBT(new NBTTagCompound()));
 		return is;
 	}

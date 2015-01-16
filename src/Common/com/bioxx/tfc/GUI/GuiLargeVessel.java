@@ -20,7 +20,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerLargeVessel;
-import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -28,6 +27,7 @@ import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.api.Food;
+import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.BarrelBriningRecipe;
@@ -332,7 +332,7 @@ public class GuiLargeVessel extends GuiContainerTFC
 				{
 					drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.Output") + ": " + vesselTE.recipe.getRecipeName(), guiLeft + 88, guiTop + 72, 0x555555);
 				}
-				else if (vesselTE.getSealed() && vesselTE.getFluidStack() != null && vesselTE.getFluidStack().getFluid() == TFCFluid.BRINE)
+				else if (vesselTE.getSealed() && vesselTE.getFluidStack() != null && vesselTE.getFluidStack().getFluid() == TFCFluids.BRINE)
 				{
 					if (inStack != null && inStack.getItem() instanceof IFood && (((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Fruit ||
 							((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein ||
@@ -343,7 +343,7 @@ public class GuiLargeVessel extends GuiContainerTFC
 				}
 			}
 			else if (vesselTE.recipe == null && vesselTE.getSealed() && vesselTE.getFluidStack() != null && inStack != null && inStack.getItem() instanceof IFood &&
-					vesselTE.getFluidStack().getFluid() == TFCFluid.VINEGAR)
+					vesselTE.getFluidStack().getFluid() == TFCFluids.VINEGAR)
 			{
 				if (!Food.isPickled(inStack) && Food.getWeight(inStack) / vesselTE.getFluidStack().amount <= Global.FOOD_MAX_WEIGHT / vesselTE.getMaxLiquid())
 				{

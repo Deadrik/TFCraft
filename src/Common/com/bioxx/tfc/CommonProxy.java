@@ -13,7 +13,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-import com.bioxx.tfc.Core.TFCFluid;
+import com.bioxx.tfc.Core.FluidBaseTFC;
 import com.bioxx.tfc.Entities.EntityBarrel;
 import com.bioxx.tfc.Entities.EntityCustomMinecart;
 import com.bioxx.tfc.Entities.EntityFallingBlockTFC;
@@ -91,6 +91,7 @@ import com.bioxx.tfc.TileEntities.TileEntityWoodConstruct;
 import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
 import com.bioxx.tfc.WorldGen.TFCProvider;
 import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.TFCItems;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -256,73 +257,73 @@ public class CommonProxy
 
 	public void registerFluids()
 	{
-		TFCFluid.SALTWATER = new TFCFluid("saltwater").setBaseColor(0x354d35);
-		TFCFluid.FRESHWATER = new TFCFluid("freshwater").setBaseColor(0x354d35);
-		TFCFluid.HOTWATER = new TFCFluid("hotwater").setBaseColor(0x1f5099).setTemperature(372/*Kelvin*/);
-		TFCFluid.LAVA = new TFCFluid("lavatfc").setLuminosity(15).setDensity(3000).setViscosity(6000).setTemperature(1300).setUnlocalizedName(Blocks.lava.getUnlocalizedName());
-		TFCFluid.RUM = new TFCFluid("rum").setBaseColor(0x6e0123);
-		TFCFluid.BEER = new TFCFluid("beer").setBaseColor(0xc39e37);
-		TFCFluid.RYEWHISKEY = new TFCFluid("ryewhiskey").setBaseColor(0xc77d51);
-		TFCFluid.WHISKEY = new TFCFluid("whiskey").setBaseColor(0x583719);
-		TFCFluid.CORNWHISKEY = new TFCFluid("cornwhiskey").setBaseColor(0xd9c7b7);
-		TFCFluid.SAKE = new TFCFluid("sake").setBaseColor(0xb7d9bc);
-		TFCFluid.VODKA = new TFCFluid("vodka").setBaseColor(0xdcdcdc);
-		TFCFluid.CIDER = new TFCFluid("cider").setBaseColor(0xb0ae32);
-		TFCFluid.TANNIN = new TFCFluid("tannin").setBaseColor(0x63594e);
-		TFCFluid.VINEGAR = new TFCFluid("vinegar").setBaseColor(0xc7c2aa);
-		TFCFluid.BRINE = new TFCFluid("brine").setBaseColor(0xdcd3c9);
-		TFCFluid.LIMEWATER = new TFCFluid("limewater").setBaseColor(0xb4b4b4);
-		TFCFluid.MILK = new TFCFluid("milk").setBaseColor(0xffffff);
-		TFCFluid.MILKCURDLED = new TFCFluid("milkcurdled").setBaseColor(0xfffbe8);
-		TFCFluid.MILKVINEGAR = new TFCFluid("milkvinegar").setBaseColor(0xfffbe8);
-		TFCFluid.OLIVEOIL = new TFCFluid("oliveoil").setBaseColor(0x44B510);
+		TFCFluids.SALTWATER = new FluidBaseTFC("saltwater").setBaseColor(0x354d35);
+		TFCFluids.FRESHWATER = new FluidBaseTFC("freshwater").setBaseColor(0x354d35);
+		TFCFluids.HOTWATER = new FluidBaseTFC("hotwater").setBaseColor(0x1f5099).setTemperature(372/*Kelvin*/);
+		TFCFluids.LAVA = new FluidBaseTFC("lavatfc").setLuminosity(15).setDensity(3000).setViscosity(6000).setTemperature(1300).setUnlocalizedName(Blocks.lava.getUnlocalizedName());
+		TFCFluids.RUM = new FluidBaseTFC("rum").setBaseColor(0x6e0123);
+		TFCFluids.BEER = new FluidBaseTFC("beer").setBaseColor(0xc39e37);
+		TFCFluids.RYEWHISKEY = new FluidBaseTFC("ryewhiskey").setBaseColor(0xc77d51);
+		TFCFluids.WHISKEY = new FluidBaseTFC("whiskey").setBaseColor(0x583719);
+		TFCFluids.CORNWHISKEY = new FluidBaseTFC("cornwhiskey").setBaseColor(0xd9c7b7);
+		TFCFluids.SAKE = new FluidBaseTFC("sake").setBaseColor(0xb7d9bc);
+		TFCFluids.VODKA = new FluidBaseTFC("vodka").setBaseColor(0xdcdcdc);
+		TFCFluids.CIDER = new FluidBaseTFC("cider").setBaseColor(0xb0ae32);
+		TFCFluids.TANNIN = new FluidBaseTFC("tannin").setBaseColor(0x63594e);
+		TFCFluids.VINEGAR = new FluidBaseTFC("vinegar").setBaseColor(0xc7c2aa);
+		TFCFluids.BRINE = new FluidBaseTFC("brine").setBaseColor(0xdcd3c9);
+		TFCFluids.LIMEWATER = new FluidBaseTFC("limewater").setBaseColor(0xb4b4b4);
+		TFCFluids.MILK = new FluidBaseTFC("milk").setBaseColor(0xffffff);
+		TFCFluids.MILKCURDLED = new FluidBaseTFC("milkcurdled").setBaseColor(0xfffbe8);
+		TFCFluids.MILKVINEGAR = new FluidBaseTFC("milkvinegar").setBaseColor(0xfffbe8);
+		TFCFluids.OLIVEOIL = new FluidBaseTFC("oliveoil").setBaseColor(0x44B510);
 
-		FluidRegistry.registerFluid(TFCFluid.LAVA);
-		FluidRegistry.registerFluid(TFCFluid.SALTWATER);
-		FluidRegistry.registerFluid(TFCFluid.FRESHWATER);
-		FluidRegistry.registerFluid(TFCFluid.HOTWATER);
-		FluidRegistry.registerFluid(TFCFluid.RUM);
-		FluidRegistry.registerFluid(TFCFluid.BEER);
-		FluidRegistry.registerFluid(TFCFluid.RYEWHISKEY);
-		FluidRegistry.registerFluid(TFCFluid.CORNWHISKEY);
-		FluidRegistry.registerFluid(TFCFluid.WHISKEY);
-		FluidRegistry.registerFluid(TFCFluid.SAKE);
-		FluidRegistry.registerFluid(TFCFluid.VODKA);
-		FluidRegistry.registerFluid(TFCFluid.CIDER);
-		FluidRegistry.registerFluid(TFCFluid.TANNIN);
-		FluidRegistry.registerFluid(TFCFluid.VINEGAR);
-		FluidRegistry.registerFluid(TFCFluid.BRINE);
-		FluidRegistry.registerFluid(TFCFluid.LIMEWATER);
-		FluidRegistry.registerFluid(TFCFluid.MILK);
-		FluidRegistry.registerFluid(TFCFluid.MILKCURDLED);
-		FluidRegistry.registerFluid(TFCFluid.MILKVINEGAR);
-		FluidRegistry.registerFluid(TFCFluid.OLIVEOIL);
+		FluidRegistry.registerFluid(TFCFluids.LAVA);
+		FluidRegistry.registerFluid(TFCFluids.SALTWATER);
+		FluidRegistry.registerFluid(TFCFluids.FRESHWATER);
+		FluidRegistry.registerFluid(TFCFluids.HOTWATER);
+		FluidRegistry.registerFluid(TFCFluids.RUM);
+		FluidRegistry.registerFluid(TFCFluids.BEER);
+		FluidRegistry.registerFluid(TFCFluids.RYEWHISKEY);
+		FluidRegistry.registerFluid(TFCFluids.CORNWHISKEY);
+		FluidRegistry.registerFluid(TFCFluids.WHISKEY);
+		FluidRegistry.registerFluid(TFCFluids.SAKE);
+		FluidRegistry.registerFluid(TFCFluids.VODKA);
+		FluidRegistry.registerFluid(TFCFluids.CIDER);
+		FluidRegistry.registerFluid(TFCFluids.TANNIN);
+		FluidRegistry.registerFluid(TFCFluids.VINEGAR);
+		FluidRegistry.registerFluid(TFCFluids.BRINE);
+		FluidRegistry.registerFluid(TFCFluids.LIMEWATER);
+		FluidRegistry.registerFluid(TFCFluids.MILK);
+		FluidRegistry.registerFluid(TFCFluids.MILKCURDLED);
+		FluidRegistry.registerFluid(TFCFluids.MILKVINEGAR);
+		FluidRegistry.registerFluid(TFCFluids.OLIVEOIL);
 	}
 
 	public void setupFluids()
 	{
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluid.LAVA.getName()), new ItemStack(TFCItems.BlueSteelBucketLava), new ItemStack(TFCItems.BlueSteelBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluid.FRESHWATER.getName()), new ItemStack(TFCItems.RedSteelBucketWater), new ItemStack(TFCItems.RedSteelBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluid.SALTWATER.getName()), new ItemStack(TFCItems.RedSteelBucketSaltWater), new ItemStack(TFCItems.RedSteelBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluid.FRESHWATER.getName()), new ItemStack(TFCItems.WoodenBucketWater), new ItemStack(TFCItems.WoodenBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluid.SALTWATER.getName()), new ItemStack(TFCItems.WoodenBucketSaltWater), new ItemStack(TFCItems.WoodenBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluid.FRESHWATER, 1000), new ItemStack(TFCItems.PotteryJug, 1, 2), new ItemStack(TFCItems.PotteryJug,1, 1));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluid.RUM, 250), new ItemStack(TFCItems.Rum), new ItemStack(TFCItems.GlassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluid.BEER, 250), new ItemStack(TFCItems.Beer), new ItemStack(TFCItems.GlassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluid.RYEWHISKEY, 250), new ItemStack(TFCItems.RyeWhiskey), new ItemStack(TFCItems.GlassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluid.WHISKEY, 250), new ItemStack(TFCItems.Whiskey), new ItemStack(TFCItems.GlassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluid.CORNWHISKEY, 250), new ItemStack(TFCItems.CornWhiskey), new ItemStack(TFCItems.GlassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluid.SAKE, 250), new ItemStack(TFCItems.Sake), new ItemStack(TFCItems.GlassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluid.CIDER, 250), new ItemStack(TFCItems.Cider), new ItemStack(TFCItems.GlassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluid.VODKA, 250), new ItemStack(TFCItems.Vodka), new ItemStack(TFCItems.GlassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluid.MILK, 1000), new ItemStack(TFCItems.WoodenBucketMilk), new ItemStack(TFCItems.WoodenBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluid.VINEGAR, 1000), new ItemStack(TFCItems.Vinegar), new ItemStack(TFCItems.WoodenBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluid.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(0), new ItemStack(TFCBlocks.OilLamp, 1, 0));//Gold
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluid.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(1), new ItemStack(TFCBlocks.OilLamp, 1, 1));//Platinum
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluid.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(2), new ItemStack(TFCBlocks.OilLamp, 1, 2));//RoseGold
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluid.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(3), new ItemStack(TFCBlocks.OilLamp, 1, 3));//Silver
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluid.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(4), new ItemStack(TFCBlocks.OilLamp, 1, 4));//Sterling Silver
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluid.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(5), new ItemStack(TFCBlocks.OilLamp, 1, 5));//BlueSteel
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.LAVA.getName()), new ItemStack(TFCItems.BlueSteelBucketLava), new ItemStack(TFCItems.BlueSteelBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.FRESHWATER.getName()), new ItemStack(TFCItems.RedSteelBucketWater), new ItemStack(TFCItems.RedSteelBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.SALTWATER.getName()), new ItemStack(TFCItems.RedSteelBucketSaltWater), new ItemStack(TFCItems.RedSteelBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.FRESHWATER.getName()), new ItemStack(TFCItems.WoodenBucketWater), new ItemStack(TFCItems.WoodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.SALTWATER.getName()), new ItemStack(TFCItems.WoodenBucketSaltWater), new ItemStack(TFCItems.WoodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.FRESHWATER, 1000), new ItemStack(TFCItems.PotteryJug, 1, 2), new ItemStack(TFCItems.PotteryJug,1, 1));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.RUM, 250), new ItemStack(TFCItems.Rum), new ItemStack(TFCItems.GlassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.BEER, 250), new ItemStack(TFCItems.Beer), new ItemStack(TFCItems.GlassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.RYEWHISKEY, 250), new ItemStack(TFCItems.RyeWhiskey), new ItemStack(TFCItems.GlassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.WHISKEY, 250), new ItemStack(TFCItems.Whiskey), new ItemStack(TFCItems.GlassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.CORNWHISKEY, 250), new ItemStack(TFCItems.CornWhiskey), new ItemStack(TFCItems.GlassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.SAKE, 250), new ItemStack(TFCItems.Sake), new ItemStack(TFCItems.GlassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.CIDER, 250), new ItemStack(TFCItems.Cider), new ItemStack(TFCItems.GlassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.VODKA, 250), new ItemStack(TFCItems.Vodka), new ItemStack(TFCItems.GlassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.MILK, 1000), new ItemStack(TFCItems.WoodenBucketMilk), new ItemStack(TFCItems.WoodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.VINEGAR, 1000), new ItemStack(TFCItems.Vinegar), new ItemStack(TFCItems.WoodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(0), new ItemStack(TFCBlocks.OilLamp, 1, 0));//Gold
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(1), new ItemStack(TFCBlocks.OilLamp, 1, 1));//Platinum
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(2), new ItemStack(TFCBlocks.OilLamp, 1, 2));//RoseGold
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(3), new ItemStack(TFCBlocks.OilLamp, 1, 3));//Silver
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(4), new ItemStack(TFCBlocks.OilLamp, 1, 4));//Sterling Silver
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(5), new ItemStack(TFCBlocks.OilLamp, 1, 5));//BlueSteel
 	}
 
 	public void registerToolClasses()
@@ -471,12 +472,12 @@ public class CommonProxy
 	{
 		NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaCraft.instance, new GuiHandler());
 	}
-	
+
 	public void registerWailaClasses()
 	{
 		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.GUI.WAILA.TFCOre.callbackRegister");
 		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.GUI.WAILA.TFCCrop.callbackRegister");
 		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.GUI.WAILA.TFCBarrel.callbackRegister");
-		
+
 	}
 }

@@ -111,7 +111,6 @@ import com.bioxx.tfc.Blocks.Vanilla.BlockCustomWall;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFence;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFence2;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTorch;
-import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Items.ItemBlocks.ItemBarrels;
 import com.bioxx.tfc.Items.ItemBlocks.ItemGrill;
@@ -124,6 +123,7 @@ import com.bioxx.tfc.Items.ItemBlocks.ItemStone;
 import com.bioxx.tfc.Items.ItemBlocks.ItemToolRack;
 import com.bioxx.tfc.Items.ItemBlocks.ItemTorch;
 import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -499,17 +499,17 @@ public class BlockSetup extends TFCBlocks
 		Flowers2 = new BlockFlower2().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers2");
 		Fungi = new BlockFungi().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Fungi");
 
-		SaltWater = (new BlockSaltWater(TFCFluid.SALTWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWater");
-		SaltWaterStationary = (new BlockLiquidStatic(TFCFluid.SALTWATER, Material.water, SaltWater)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWaterStationary");
+		SaltWater = (new BlockSaltWater(TFCFluids.SALTWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWater");
+		SaltWaterStationary = (new BlockLiquidStatic(TFCFluids.SALTWATER, Material.water, SaltWater)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWaterStationary");
 
-		FreshWater = (new BlockFreshWater(TFCFluid.FRESHWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWater");
-		FreshWaterStationary = (new BlockLiquidStatic(TFCFluid.FRESHWATER, Material.water, FreshWater)).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWaterStationary");
+		FreshWater = (new BlockFreshWater(TFCFluids.FRESHWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWater");
+		FreshWaterStationary = (new BlockLiquidStatic(TFCFluids.FRESHWATER, Material.water, FreshWater)).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWaterStationary");
 
-		HotWater = (new BlockHotWater(TFCFluid.HOTWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWater");
-		HotWaterStationary = (new BlockHotWaterStatic(TFCFluid.HOTWATER, Material.water, HotWater)).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWaterStationary");
+		HotWater = (new BlockHotWater(TFCFluids.HOTWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWater");
+		HotWaterStationary = (new BlockHotWaterStatic(TFCFluids.HOTWATER, Material.water, HotWater)).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWaterStationary");
 
 		Lava = (new BlockLava()).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("Lava");
-		LavaStationary = (new BlockLiquidStatic(TFCFluid.LAVA, Material.lava, Lava)).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("LavaStationary");
+		LavaStationary = (new BlockLiquidStatic(TFCFluids.LAVA, Material.lava, Lava)).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("LavaStationary");
 		Ice = new BlockCustomIce().setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("Ice").setBlockTextureName("ice");
 
 		WaterPlant = new BlockWaterPlant(0).setBlockName("SeaGrassStill").setHardness(0.5f).setStepSound(Block.soundTypeGravel);

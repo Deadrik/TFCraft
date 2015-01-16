@@ -19,9 +19,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.TileEntities.TESluice;
 import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.TFCItems;
 
 import cpw.mods.fml.relauncher.Side;
@@ -96,7 +96,7 @@ public class BlockSluice extends BlockContainer
 	public IIcon getIcon(int side, int meta)
 	{
 		if((meta & 4) != 0 && side == 1)
-			return TFCFluid.SALTWATER.getFlowingIcon();
+			return TFCFluids.SALTWATER.getFlowingIcon();
 		else
 			return TFCBlocks.WoodSupportH.getIcon(side, 8);
 	}
