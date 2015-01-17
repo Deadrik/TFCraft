@@ -89,6 +89,8 @@ public class ItemPotteryJug extends ItemPotteryBase
 		FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(entity);
 		Boolean canDrink = fs.getMaxWater(entity) - 500 > fs.waterLevel;
 
+		boolean playNote = false;
+		float lookAngle = 0;
 		if(mop == null)
 		{
 			if(is.getItemDamage() > 1 && canDrink)
@@ -97,14 +99,22 @@ public class ItemPotteryJug extends ItemPotteryBase
 			}
 			else if(is.getItemDamage() == 1){
 				Vec3 lookVec = entity.getLookVec();
+				lookAngle = (float)(lookVec.yCoord/2d);
 				if(!is.hasTagCompound()){
-					entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
+					playNote = true;
+					//entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
 					is.stackTagCompound = new NBTTagCompound();
 					is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
 				}
 				else if(is.stackTagCompound.hasKey("blowTime") &&	
 						(is.stackTagCompound.getLong("blowTime") + 10 < TFC_Time.getTotalTicks())){
-					entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
+					playNote = true;
+					//entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
+					is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
+				}
+				else if(!is.stackTagCompound.hasKey("blowTime")){
+					playNote = true;
+					//entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
 					is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
 				}
 			}
@@ -122,6 +132,7 @@ public class ItemPotteryJug extends ItemPotteryBase
 					if(is.getItemDamage() == 1)
 					{
 						is.setItemDamage(2);
+						playNote = false;
 					}
 					else
 					{
@@ -139,14 +150,20 @@ public class ItemPotteryJug extends ItemPotteryBase
 					}
 					else if(is.getItemDamage() == 1){
 						Vec3 lookVec = entity.getLookVec();
+						lookAngle = (float)(lookVec.yCoord/2d);
 						if(!is.hasTagCompound()){
-							entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
+							//entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
 							is.stackTagCompound = new NBTTagCompound();
 							is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
 						}
 						else if(is.stackTagCompound.hasKey("blowTime") &&	
 								(is.stackTagCompound.getLong("blowTime") + 10 < TFC_Time.getTotalTicks())){
-							entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
+							//entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
+							is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
+						}
+						else if(!is.stackTagCompound.hasKey("blowTime")){
+							playNote = true;
+							//entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
 							is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
 						}
 					}
@@ -162,6 +179,9 @@ public class ItemPotteryJug extends ItemPotteryBase
 					return is;
 				}
 			}
+		}
+		if(playNote){
+			entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + lookAngle);
 		}
 		return is;
 	}
