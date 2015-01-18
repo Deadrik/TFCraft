@@ -81,7 +81,7 @@ public class ContainerFoodPrep extends ContainerTFC
 			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 107, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
 			/*this.addSlotToContainer(new SlotBlocked(chestInventory, 5, 16, 44));*/
 		}
-		this.addSlotToContainer(new SlotBlocked(chestInventory, 6, 57, 46));
+		this.addSlotToContainer(new SlotBlocked(chestInventory, 6, 53, 46));
 		this.addSlotToContainer(new SlotSize(chestInventory, 7, 145, 8).setSize(EnumSize.SMALL));
 		this.addSlotToContainer(new SlotSize(chestInventory, 8, 145, 26).setSize(EnumSize.SMALL));
 		this.addSlotToContainer(new SlotSize(chestInventory, 9, 145, 44).setSize(EnumSize.SMALL));
