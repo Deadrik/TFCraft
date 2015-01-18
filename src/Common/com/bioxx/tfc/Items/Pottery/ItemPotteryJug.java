@@ -102,19 +102,16 @@ public class ItemPotteryJug extends ItemPotteryBase
 				lookAngle = (float)(lookVec.yCoord/2d);
 				if(!is.hasTagCompound()){
 					playNote = true;
-					//entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
 					is.stackTagCompound = new NBTTagCompound();
 					is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
 				}
 				else if(is.stackTagCompound.hasKey("blowTime") &&	
 						(is.stackTagCompound.getLong("blowTime") + 10 < TFC_Time.getTotalTicks())){
 					playNote = true;
-					//entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
 					is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
 				}
 				else if(!is.stackTagCompound.hasKey("blowTime")){
 					playNote = true;
-					//entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
 					is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
 				}
 			}
@@ -152,18 +149,15 @@ public class ItemPotteryJug extends ItemPotteryBase
 						Vec3 lookVec = entity.getLookVec();
 						lookAngle = (float)(lookVec.yCoord/2d);
 						if(!is.hasTagCompound()){
-							//entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
 							is.stackTagCompound = new NBTTagCompound();
 							is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
 						}
 						else if(is.stackTagCompound.hasKey("blowTime") &&	
 								(is.stackTagCompound.getLong("blowTime") + 10 < TFC_Time.getTotalTicks())){
-							//entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
 							is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
 						}
 						else if(!is.stackTagCompound.hasKey("blowTime")){
 							playNote = true;
-							//entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + (float)(lookVec.yCoord/2d));
 							is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
 						}
 					}
@@ -181,7 +175,7 @@ public class ItemPotteryJug extends ItemPotteryBase
 			}
 		}
 		if(playNote){
-			entity.playSound(TFC_Sounds.JUGBLOW, 3, 0.5f + lookAngle);
+			entity.playSound(TFC_Sounds.JUGBLOW, 1.0f, 1.0f + lookAngle);
 		}
 		return is;
 	}
