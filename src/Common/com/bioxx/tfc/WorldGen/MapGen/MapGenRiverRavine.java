@@ -195,7 +195,7 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 		{
 			range = 32;
 			double x = chunkX * 16 + this.rand.nextInt(16);
-			Random r = new Random(world.getSeed());
+			//Random r = new Random(world.getSeed());
 			double y = 80;
 			double z = chunkZ * 16 + this.rand.nextInt(16);
 

@@ -303,8 +303,8 @@ public class BlockOilLamp extends BlockTerraContainer
 		double centerX = x + 0.5F;
 		double centerY = y + 0.5F;
 		double centerZ = z + 0.5F;
-		double d3 = 0.22;
-		double d4 = 0.27;
+		//double d3 = 0.22;
+		//double d4 = 0.27;
 
 		world.spawnParticle("smoke", centerX, centerY, centerZ, 0.0D, 0.0D, 0.0D);
 		world.spawnParticle("flame", centerX, centerY, centerZ, 0.0D, 0.0D, 0.0D);

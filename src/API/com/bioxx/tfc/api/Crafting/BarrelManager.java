@@ -14,11 +14,11 @@ public class BarrelManager
 		return instance;
 	}
 
-	private List recipes;
+	private List<BarrelRecipe> recipes;
 
 	private BarrelManager()
 	{
-		recipes = new ArrayList();
+		recipes = new ArrayList<BarrelRecipe>();
 	}
 
 	public void addRecipe(BarrelRecipe recipe)
@@ -38,7 +38,7 @@ public class BarrelManager
 		return null;
 	}
 
-	public List getRecipes()
+	public List<BarrelRecipe> getRecipes()
 	{
 		return recipes;
 	}

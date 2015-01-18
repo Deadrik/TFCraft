@@ -3,6 +3,7 @@ package com.bioxx.tfc.api.Crafting;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -14,12 +15,12 @@ public class LoomManager
 		return instance;
 	}
 
-	private List recipes;
+	private List<LoomRecipe> recipes;
 	private HashMap<LoomRecipe,ResourceLocation> textures;
 
 	private LoomManager()
 	{
-		recipes = new ArrayList();
+		recipes = new ArrayList<LoomRecipe>();
 		textures = new HashMap<LoomRecipe, ResourceLocation>();
 	}
 
@@ -75,7 +76,7 @@ public class LoomManager
 		return null;
 	}
 
-    public List getRecipes()
+	public List<LoomRecipe> getRecipes()
     {
         return recipes;
     }

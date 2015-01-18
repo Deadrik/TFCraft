@@ -121,7 +121,7 @@ public class BlockCharcoal extends BlockTerra
 	{
 		if(world.getBlockMetadata(x, y, z) > 0)
 			return false;
-		return super.removedByPlayer(world, player, x, y, z);
+		return super.removedByPlayer(world, player, x, y, z, true);
 	}
 
 	public void combineCharcoalDown(World world, int x, int y, int z)

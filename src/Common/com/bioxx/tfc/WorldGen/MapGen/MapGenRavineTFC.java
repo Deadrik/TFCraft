@@ -14,7 +14,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 public class MapGenRavineTFC extends MapGenBaseTFC
 {
 	private float[] field_35627_a = new float[1024];
-	private byte[] metaArray;
+	//private byte[] metaArray;
 	private int height = 0;
 	private int variability = 0;
 
@@ -26,7 +26,7 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 
 	public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, Block[] idsBig, byte[] metaBig)
 	{
-		metaArray = metaBig;
+		//metaArray = metaBig;
 		super.generate(par1IChunkProvider, par2World, par3, par4, idsBig);
 	}
 
@@ -37,7 +37,7 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 		double chunkMidZ = chunkZ * 16 + 8;
 		float var24 = 0.0F;
 		float var25 = 0.0F;
-		Block block;
+		//Block block;
 
 		if (par16 <= 0)
 		{

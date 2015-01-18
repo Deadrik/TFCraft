@@ -178,7 +178,7 @@ public class BlockToolRack extends BlockTerraContainer
 				dropBlockAsItem(world, x, y, z, new ItemStack(TFCBlocks.ToolRack, 1, rack.woodType));
 			}
 		}
-		return super.removedByPlayer(world, player, x, y, z);
+		return super.removedByPlayer(world, player, x, y, z, true);
 	}
 
 	@Override
@@ -354,7 +354,8 @@ public class BlockToolRack extends BlockTerraContainer
     /**
      * Get the block's damage value (for use with pick block).
      */
-    public int getDamageValue(World world, int x, int y, int z)
+    @Override
+	public int getDamageValue(World world, int x, int y, int z)
     {
 		TileEntity te = world.getTileEntity(x, y, z);
 		if (te != null && te instanceof TileEntityToolRack)

@@ -27,10 +27,10 @@ public class RenderTerraJavelin extends Render
 		float f3 = 0.5F;
 		float f4 = (0 + var11 * 10) / 32.0F;
 		float f5 = (5 + var11 * 10) / 32.0F;
-		float f6 = 0.0F;
-		float f7 = 0.15625F;
-		float f8 = (5 + var11 * 10) / 32.0F;
-		float f9 = (10 + var11 * 10) / 32.0F;
+		//float f6 = 0.0F;
+		//float f7 = 0.15625F;
+		//float f8 = (5 + var11 * 10) / 32.0F;
+		//float f9 = (10 + var11 * 10) / 32.0F;
 		float f10 = 0.05625F;
 
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);

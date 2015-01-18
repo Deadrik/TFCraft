@@ -384,7 +384,7 @@ public class FoodStatsTFC
 
 	public float getTasteFactor(ItemStack food)
 	{
-		Random R = new Random(getPlayerFoodSeed());
+		//Random R = new Random(getPlayerFoodSeed());
 		float tasteFactor = 0.85f;
 		int[] tastePref = getPrefTaste();
 

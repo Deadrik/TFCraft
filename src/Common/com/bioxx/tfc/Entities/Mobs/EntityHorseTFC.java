@@ -239,14 +239,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 	}
 
-	private float getPercentGrown(IAnimal animal)
-	{
-		float birth = animal.getBirthDay();
-		float time = (int) TFC_Time.getTotalDays();
-		float percent =(time - birth) / animal.getNumberOfDaysToAdult();
-		return Math.min(percent, 1f);
-	}
-
 	@Override
 	public int increaseTemper(int p_110198_1_)
 	{
@@ -570,7 +562,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		Entity entity = getLeashedToEntity();
 		if(entity!= null && entity instanceof EntityPlayer)
 		{
-			ItemStack item = ((EntityPlayer)entity).inventory.getCurrentItem();
+			//ItemStack item = ((EntityPlayer)entity).inventory.getCurrentItem();
 			if(entity.isSneaking())
 				super.clearLeashed(par1, true);
 		}

@@ -347,7 +347,7 @@ public class BlockDetailed extends BlockPartial
 				if (index >= 0 && te.data.get(index)) 
 				{
 					int d = TileEntityWoodConstruct.PlankDetailLevel;
-					int dd = d*d;
+					//int dd = d*d;
 					float div = 1f / d;
 
 					float minX = x + xSelected * div;
@@ -392,8 +392,8 @@ public class BlockDetailed extends BlockPartial
 			if(index >= 0 && te.data.get(index))
 			{
 				int d = 8;
-				int dd = d * d;
-				int dd2 = dd*2;
+				//int dd = d * d;
+				//int dd2 = dd*2;
 
 				float div = 1f / d;
 

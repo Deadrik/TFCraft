@@ -3,19 +3,15 @@ package com.bioxx.tfc.Render;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockWall;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Blocks.Devices.BlockSluice;
 import com.bioxx.tfc.Blocks.Flora.BlockFruitLeaves;
@@ -28,7 +24,6 @@ import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.TileEntities.TEWaterPlant;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
 import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 
@@ -37,7 +32,7 @@ public class TFC_CoreRender
 	public static boolean renderBlockSlab(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
 		TEPartial te = (TEPartial) renderblocks.blockAccess.getTileEntity(x, y, z);
-		int md = renderblocks.blockAccess.getBlockMetadata(x, y, z);
+		//int md = renderblocks.blockAccess.getBlockMetadata(x, y, z);
 
 		boolean breaking = renderblocks.overrideBlockTexture != null;
 
@@ -100,7 +95,7 @@ public class TFC_CoreRender
 
 		int meta = renderblocks.blockAccess.getBlockMetadata(x, y, z);
 		long rvmeta = meta & 7;
-		float var7 = 0.0F;
+		/*float var7 = 0.0F;
 		float var8 = 0.5F;
 		float var9 = 0.5F;
 		float var10 = 1.0F;
@@ -111,7 +106,7 @@ public class TFC_CoreRender
 			var8 = 1.0F;
 			var9 = 0.0F;
 			var10 = 0.5F;
-		}
+		}*/
 
 		TEPartial te = (TEPartial) renderblocks.blockAccess.getTileEntity(x, y, z);
 		if(te.TypeID <= 0)
@@ -120,7 +115,7 @@ public class TFC_CoreRender
 		rvmeta = te.extraData;
 		int type = te.TypeID;
 		int temeta = te.MetaID;
-		IIcon myTexture = renderblocks.overrideBlockTexture == null ? Block.getBlockById(te.TypeID).getIcon(0, te.MetaID) : renderblocks.overrideBlockTexture;
+		IIcon myTexture = renderblocks.overrideBlockTexture == null ? Block.getBlockById(type).getIcon(0, temeta) : renderblocks.overrideBlockTexture;
 
 		if ((rvmeta & 1) == 0)
 		{
@@ -278,9 +273,9 @@ public class TFC_CoreRender
         	breaking = true;
         }*/
 
-		int meta = renderblocks.blockAccess.getBlockMetadata(i, j, k);
+		//int meta = renderblocks.blockAccess.getBlockMetadata(i, j, k);
 		World w = Minecraft.getMinecraft().theWorld;
-		TFCWorldChunkManager wcm = ((TFCWorldChunkManager)w.getWorldChunkManager());
+		//TFCWorldChunkManager wcm = ((TFCWorldChunkManager)w.getWorldChunkManager());
 		renderblocks.renderAllFaces = true;
 
 		DataLayer rockLayer1 = TFC_Climate.getCacheManager(w).getRockLayerAt(i, k, 0);
@@ -355,7 +350,7 @@ public class TFC_CoreRender
 
 	public static boolean renderFirepit(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
-		IBlockAccess blockAccess = renderblocks.blockAccess;
+		//IBlockAccess blockAccess = renderblocks.blockAccess;
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);		
@@ -364,7 +359,7 @@ public class TFC_CoreRender
 
 	public static boolean renderForge(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
-		IBlockAccess blockAccess = renderblocks.blockAccess;
+		//IBlockAccess blockAccess = renderblocks.blockAccess;
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
@@ -374,7 +369,7 @@ public class TFC_CoreRender
 	public static boolean RenderSluice(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		IBlockAccess blockAccess = renderblocks.blockAccess;
-		Tessellator tessellator = Tessellator.instance;
+		//Tessellator tessellator = Tessellator.instance;
 		int meta = blockAccess.getBlockMetadata(i, j, k);
 		int dir = BlockSluice.getDirectionFromMetadata(meta);
 
@@ -579,7 +574,7 @@ public class TFC_CoreRender
 		return out;
 	}
 
-	private static void drawCrossedSquares(Block block, int x, int y, int z, RenderBlocks renderblocks)
+	/*private static void drawCrossedSquares(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
 		Tessellator var9 = Tessellator.instance;
 
@@ -617,5 +612,5 @@ public class TFC_CoreRender
 		var9.addVertexWithUV(xMax, y + 0.0D, zMin, minX, maxY);
 		var9.addVertexWithUV(xMin, y + 0.0D, zMax, maxX, maxY);
 		var9.addVertexWithUV(xMin, y + 0, zMax, maxX, minY);
-	}
+	}*/
 }

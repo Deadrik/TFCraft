@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -55,7 +54,7 @@ public class ItemMeltedMetal extends ItemTerra
 	}
 
 	@Override
-	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addItemInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{		
 		if (is.getItemDamage() > 1)
 		{
@@ -69,7 +68,7 @@ public class ItemMeltedMetal extends ItemTerra
 		super.onUpdate(is,world,entity,i,isSelected);
 		if (is.hasTagCompound())
 		{
-			NBTTagCompound stackTagCompound = is.getTagCompound();
+			//NBTTagCompound stackTagCompound = is.getTagCompound();
 			if(TFC_ItemHeat.HasTemp(is) && TFC_ItemHeat.GetTemp(is) >= TFC_ItemHeat.IsCookable(is))
 			{
 				if(is.getItemDamage()==0){

@@ -18,17 +18,17 @@ import com.bioxx.tfc.api.TFCItems;
 public class ContainerForge extends ContainerTFC
 {
 	private TEForge forge;
-	private int coolTime;
-	private int freezeTime;
-	private int itemFreezeTime;
+	//private int coolTime;
+	//private int freezeTime;
+	//private int itemFreezeTime;
 	private float firetemp;
 
 	public ContainerForge(InventoryPlayer inventoryplayer, TEForge tileentityforge, World world, int x, int y, int z)
 	{
 		forge = tileentityforge;
-		coolTime = 0;
-		freezeTime = 0;
-		itemFreezeTime = 0;
+		//coolTime = 0;
+		//freezeTime = 0;
+		//itemFreezeTime = 0;
 
 		//Input slot
 		addSlotToContainer(new SlotForge(inventoryplayer.player,tileentityforge, 0, 44, 8));

@@ -42,7 +42,6 @@ public class TFCBarrel implements IWailaDataProvider
 		String head = currenttip.get(0);
 		if (accessor.getTileEntity() instanceof TEBarrel)
 		{
-			TEBarrel te = (TEBarrel) accessor.getTileEntity();
 			NBTTagCompound tag = accessor.getNBTData();
 			FluidStack fluid = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("fluidNBT"));
 

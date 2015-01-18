@@ -62,7 +62,7 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 		return super.getItemStackLimit(is);
 	}
 
-	public void readFromItemNBT(NBTTagCompound nbt, List arraylist)
+	public void readFromItemNBT(NBTTagCompound nbt, List<String> arraylist)
 	{
 		if(nbt != null)
 		{

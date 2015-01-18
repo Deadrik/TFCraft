@@ -29,7 +29,7 @@ import com.bioxx.tfc.api.Interfaces.ISmeltable;
 
 public class TECrucible extends NetworkTileEntity implements IInventory
 {
-	public HashMap metals = new HashMap();
+	public HashMap<String, MetalPair> metals = new HashMap<String, MetalPair>();
 	public Alloy currentAlloy;
 	public int temperature = 0;
 	public ItemStack[] storage;
@@ -216,7 +216,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 			if(currentAlloy != null && this.getTotalMetal() < 1)
 			{
-				metals = new HashMap();
+				metals = new HashMap<String, MetalPair>();
 				updateCurrentAlloy();
 				this.updateGui((byte) 2);
 				currentAlloy = null;

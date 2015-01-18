@@ -47,12 +47,12 @@ public class ModelStand extends ModelBiped {
 
 		this.bipedRightArm.rotateAngleY = 0.0F;
 		this.bipedLeftArm.rotateAngleY = 0.0F;
-		float f6;
-		float f7;
+		//float f6;
+		//float f7;
 
 		if (this.onGround > -9990.0F)
 		{
-			f6 = this.onGround;
+			//f6 = this.onGround;
 			this.bipedBody.rotateAngleY = 0;
 			this.bipedRightArm.rotationPointZ = MathHelper.sin(this.bipedBody.rotateAngleY) * 5.0F;
 			this.bipedRightArm.rotationPointX = -MathHelper.cos(this.bipedBody.rotateAngleY) * 5.0F;

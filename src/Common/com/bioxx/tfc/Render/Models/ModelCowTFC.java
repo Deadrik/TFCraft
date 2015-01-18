@@ -77,7 +77,7 @@ public class ModelCowTFC extends ModelQuadruped
 		
 		float ageScale = 2.0F-percent;
 		float ageHeadScale = (float)Math.pow(1/ageScale,0.66);
-		float offset = 1.4f - percent;
+		//float offset = 1.4f - percent;
 		GL11.glPushMatrix ();
 
 		GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);

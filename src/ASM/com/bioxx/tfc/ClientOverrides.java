@@ -38,7 +38,7 @@ public class ClientOverrides
 		Object obj = Helper.getObject(renderG, "t", "field_72767_j", "worldRenderersToUpdate", TFCASMLoadingPlugin.runtimeDeobf);
 		if(!(obj instanceof List))
 			return;
-		List worldRenderersToUpdate = (List)(Helper.getObject(renderG, "t", "field_72767_j", "worldRenderersToUpdate", TFCASMLoadingPlugin.runtimeDeobf));
+		List<WorldRenderer> worldRenderersToUpdate = (List<WorldRenderer>) (Helper.getObject(renderG, "t", "field_72767_j", "worldRenderersToUpdate", TFCASMLoadingPlugin.runtimeDeobf));
 		World world = (World)(Helper.getObject(renderG, "r", "field_72769_h", "theWorld", TFCASMLoadingPlugin.runtimeDeobf));
 
 		worldRenderersToUpdate.clear();

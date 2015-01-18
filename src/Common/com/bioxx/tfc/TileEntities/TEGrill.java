@@ -35,7 +35,7 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 	public void updateEntity()
 	{
 		TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
-		boolean oven = isOven();
+		//boolean oven = isOven();
 		for (int i = 0; i < 6; i++)
 		{
 			careForInventorySlot(storage[i]);
@@ -138,7 +138,7 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 			HeatIndex index = manager.findMatchingIndex(storage[i]);
 			if(index != null && Food.isCooked(storage[i]))
 			{
-				int[] fuelTasteProfile = new int[] {0,0,0,0,0};
+				//int[] fuelTasteProfile = new int[] {0,0,0,0,0};
 				int[] cookedTasteProfile = new int[] {0,0,0,0,0};
 				R = new Random(((ICookableFood)storage[i].getItem()).getFoodID()+(((int)Food.getCooked(storage[i])-600)/120));
 				cookedTasteProfile[0] = R.nextInt(31) - 15;
@@ -231,7 +231,7 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 
 	public void ejectContents()
 	{
-		float f3 = 0.05F;
+		//float f3 = 0.05F;
 		EntityItem entityitem;
 		Random rand = new Random();
 		float f = rand.nextFloat() * 0.8F + 0.1F;
@@ -251,7 +251,7 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 
 	public void ejectItem(int index)
 	{
-		float f3 = 0.05F;
+		//float f3 = 0.05F;
 		EntityItem entityitem;
 		Random rand = new Random();
 		float f = rand.nextFloat() * 0.8F + 0.1F;

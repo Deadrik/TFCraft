@@ -10,7 +10,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -32,7 +31,7 @@ public class FMLClientEventHandler
 	public void renderTick(TickEvent.RenderTickEvent event)
 	{
 		Minecraft mc = FMLClientHandler.instance().getClient();
-		World world = mc.theWorld;
+		//World world = mc.theWorld;
 		if (event.phase != TickEvent.Phase.START)
 		{
 			GuiScreen gui = mc.currentScreen;
@@ -56,10 +55,10 @@ public class FMLClientEventHandler
 		GL11.glPushMatrix();
 		GL11.glPushAttrib(1048575);
 		//GL11.glDisable(GL11.GL_LIGHTING);
-		int xs = gui.width;
-		int ys = gui.height;
-		int shift = 0;
-		int shift2 = 0;
+		//int xs = gui.width;
+		//int ys = gui.height;
+		//int shift = 0;
+		//int shift2 = 0;
 		int shiftx = -8;
 		int shifty = 0;
 
@@ -110,8 +109,8 @@ public class FMLClientEventHandler
 		var9.draw();
 	}
 
-	private boolean isMouseOverSlot(Slot slot, int x, int y)
+	/*private boolean isMouseOverSlot(Slot slot, int x, int y)
 	{
 		return (x >= slot.xDisplayPosition - 1) && (x < slot.xDisplayPosition + 16 + 1) && (y >= slot.yDisplayPosition - 1) && (y < slot.yDisplayPosition + 16 + 1);
-	}
+	}*/
 }

@@ -86,11 +86,11 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 		}
 	}
 
-	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addItemInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 	}
 
-	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 	}
 

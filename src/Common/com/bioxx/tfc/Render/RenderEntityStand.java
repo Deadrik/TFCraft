@@ -25,7 +25,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderEntityStand extends RenderBiped
 {
-	private ModelBiped modelBipedMain;
+	//private ModelBiped modelBipedMain;
 	private ModelBiped modelArmorChestplate;
 	private ModelBiped modelArmor;
 	//private static final ResourceLocation Texture = new ResourceLocation("textures/entity/zombie/zombie.png");

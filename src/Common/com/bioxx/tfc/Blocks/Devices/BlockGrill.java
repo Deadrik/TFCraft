@@ -36,7 +36,7 @@ public class BlockGrill extends BlockTerraContainer
 		super.onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
 		if(entityplayer.inventory.getCurrentItem() != null && entityplayer.inventory.getCurrentItem().getItem() instanceof ItemMetalTrapDoor)
 			return false;
-		TEGrill teb = (TEGrill)world.getTileEntity(x, y, z);
+		//TEGrill teb = (TEGrill)world.getTileEntity(x, y, z);
 		entityplayer.openGui(TerraFirmaCraft.instance, 43, world, x, y, z);
 		return true;
 	}

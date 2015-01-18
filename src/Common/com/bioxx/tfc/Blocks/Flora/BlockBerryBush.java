@@ -193,7 +193,7 @@ public class BlockBerryBush extends BlockTerraContainer
 		{
 			int meta = world.getBlockMetadata(x, y, z);
 			FloraManager manager = FloraManager.getInstance();
-			FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(world.getBlockMetadata(x, y, z)));
+			FloraIndex fi = manager.findMatchingIndex(getType(meta));
 
 			TEBerryBush te = (TEBerryBush) world.getTileEntity(x, y, z);
 			if (te != null && te.hasFruit)
@@ -214,7 +214,7 @@ public class BlockBerryBush extends BlockTerraContainer
 		{
 			int meta = world.getBlockMetadata(x, y, z);
 			FloraManager manager = FloraManager.getInstance();
-			FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(world.getBlockMetadata(x, y, z)));
+			FloraIndex fi = manager.findMatchingIndex(getType(meta));
 
 			TEBerryBush te = (TEBerryBush) world.getTileEntity(x, y, z);
 			if(te != null && te.hasFruit)

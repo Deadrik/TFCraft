@@ -1,7 +1,6 @@
 package com.bioxx.tfc.GUI;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
@@ -48,7 +47,6 @@ public class GuiAnvilPlanButton extends GuiButton
 
 			if(field_146123_n)
 			{
-				FontRenderer fontrenderer = Minecraft.getMinecraft().fontRenderer;
 				screen.drawTooltip(x, y, this.displayString);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			}
@@ -63,12 +61,12 @@ public class GuiAnvilPlanButton extends GuiButton
 		}
 	}
 
-	private boolean isPointInRegion(int mouseX, int mouseY)
+	/*private boolean isPointInRegion(int mouseX, int mouseY)
 	{
 		int k1 = 0;//screen.getGuiLeft();
 		int l1 = 0;//screen.getGuiTop();
 		mouseX -= k1;
 		mouseY -= l1;
 		return mouseX >= xPosition - 1 && mouseX < xPosition + width + 1 && mouseY >= yPosition - 1 && mouseY < yPosition + height + 1;
-	}
+	}*/
 }

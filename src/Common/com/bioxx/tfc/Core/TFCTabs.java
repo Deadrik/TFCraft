@@ -20,7 +20,7 @@ public class TFCTabs extends CreativeTabs
 	public static CreativeTabs TFCArmor = new TFCTabs("TFCArmor");
 	public static CreativeTabs TFCMaterials = new TFCTabs("TFCMaterials");
 
-	private int itemIndex;
+	//private int itemIndex;
 	private ItemStack is;
 
 	public TFCTabs(String par2Str)
@@ -31,7 +31,7 @@ public class TFCTabs extends CreativeTabs
 	public TFCTabs(String par2Str, int icon)
 	{
 		super(par2Str);
-		itemIndex = icon;
+		//itemIndex = icon;
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -364,12 +364,12 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public int foliageColorMultiplier(IBlockAccess par1IBlockAccess, int i, int j, int k)
 	{
-		int var5 = 0;
-		int var6 = 0;
-		int var7 = 0;
+		//int var5 = 0;
+		//int var6 = 0;
+		//int var7 = 0;
 		int[] rgb = { 0, 0, 0 };
 		float temperature = TFC_Climate.getHeightAdjustedTempSpecificDay(getCurrentWorld(),TFC_Time.getDayOfYear(),i,j,k);
-		float rainfall = TFC_Climate.getRainfall(getCurrentWorld(),i,j,k);
+		//float rainfall = TFC_Climate.getRainfall(getCurrentWorld(),i,j,k);
 
 		int meta = par1IBlockAccess.getBlockMetadata(i, j, k);
 		if(par1IBlockAccess.getBlock(i, j, k) == TFCBlocks.fruitTreeLeaves)
@@ -538,11 +538,11 @@ public class ClientProxy extends CommonProxy
 		}
 	}
 
-	private float getTimeMult(long day, long start, long end)
+	/*private float getTimeMult(long day, long start, long end)
 	{
 		float total = end - start;
 		return total - (day - start) / total;
-	}
+	}*/
 
 	private int[] applyColor(int c, int[] rgb)
 	{

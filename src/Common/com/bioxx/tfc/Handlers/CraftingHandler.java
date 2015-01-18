@@ -41,7 +41,7 @@ public class CraftingHandler
 		int isDmg = e.crafting.getItemDamage();
 		IInventory iinventory = e.craftMatrix;
 
-		int index = 0;
+		//int index = 0;
 		if(iinventory != null)
 		{
 			if(item == TFCItems.StoneBrick)

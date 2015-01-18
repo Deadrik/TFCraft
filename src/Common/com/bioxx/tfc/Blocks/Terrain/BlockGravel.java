@@ -203,7 +203,7 @@ public class BlockGravel extends BlockTerra
 
 			boolean isBelowAir = BlockCollapsable.canFallBelow(world, i, j-1, k);
 			byte count = 0;
-			List sides = new ArrayList<Integer>();
+			List<Integer> sides = new ArrayList<Integer>();
 
 			if(world.isAirBlock(i+1, j, k))
 			{

@@ -39,7 +39,7 @@ public class TECrop extends NetworkTileEntity
 		sunLevel = 1;
 	}
 
-	private boolean checkedSun = false;
+	//private boolean checkedSun = false;
 	@Override
 	public void updateEntity()
 	{

@@ -4,13 +4,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Events.AnvilCraftEvent;
 import com.bioxx.tfc.api.Events.ItemCookEvent;
 import com.bioxx.tfc.api.Interfaces.IFood;
-import com.bioxx.tfc.api.Interfaces.ISmeltable;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -42,12 +40,12 @@ public class AnvilCraftingHandler
 		}
 	}
 
-	private boolean isMetal(ItemStack is, Metal m)
+	/*private boolean isMetal(ItemStack is, Metal m)
 	{
 		if(((ISmeltable)is.getItem()).GetMetalType(is) == m)
 			return true;
 		return false;
-	}
+	}*/
 
 	@SubscribeEvent
 	public void onItemMelt(ItemCookEvent event)

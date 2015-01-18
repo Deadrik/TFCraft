@@ -251,8 +251,8 @@ public class ModelUngulate extends ModelBase
 	{
 		float FRL = par1 + (float)(Math.PI*0.75F);
 		float FLL = par1 + (float)(Math.PI*2.25F);
-		float BRL = par1;
-		float BLL = par1;
+		//float BRL = par1;
+		//float BLL = par1;
 		float speedMod = Math.min(Math.abs(Math.max(Math.abs(par2),0.001F)),1F)*(par2!=0?par2/Math.abs(par2):1);
 		float rightArmInitAngle =  -2*0.52359877559829887307710723054658F;
 		float leftArmInitAngle =  -2*0.52359877559829887307710723054658F;
@@ -261,7 +261,7 @@ public class ModelUngulate extends ModelBase
 		float rightCalfInitAngle = (3*0.2617994F)+0.52359877559829887307710723054658F;
 		float leftCalfInitAngle = (3*0.2617994F)+0.52359877559829887307710723054658F;
 		float rightFootInitAngle = 3*-0.2617994F;
-		float leftFootInitAngle = 3*-0.2617994F;
+		//float leftFootInitAngle = 3*-0.2617994F;
 		RightWrist.rotateAngleX = Math.max(0,-MathHelper.cos(FRL*0.6662F)*1.8F*speedMod);
 		//LeftFoot.rotateAngleX = Math.max(0,-MathHelper.cos(FRL*0.6662F)*1.8F*speedMod)+leftFootInitAngle;
 		LeftWrist.rotateAngleX = Math.max(0,-MathHelper.cos(FLL*0.6662F)*1.8F*speedMod);

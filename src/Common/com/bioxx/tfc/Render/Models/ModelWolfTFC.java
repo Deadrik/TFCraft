@@ -4,7 +4,6 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelWolf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
@@ -83,7 +82,7 @@ public class ModelWolfTFC extends ModelWolf
 
 		float percent = TFC_Core.getPercentGrown((IAnimal)entity);
 		float ageScale = 2.0F-percent;
-		float offset = 1.4f - percent;
+		//float offset = 1.4f - percent;
 
 		this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 		if(entity instanceof IAnimal)

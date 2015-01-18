@@ -2,7 +2,6 @@ package com.bioxx.tfc.Blocks.Devices;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -37,7 +36,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockLoom extends BlockTerraContainer
 {
-	private final Random random = new Random();
 	private String[] woodNames;
 
 	public BlockLoom()
@@ -264,7 +262,8 @@ public class BlockLoom extends BlockTerraContainer
     /**
      * Get the block's damage value (for use with pick block).
      */
-    public int getDamageValue(World world, int x, int y, int z)
+    @Override
+	public int getDamageValue(World world, int x, int y, int z)
     {
 		TileEntity te = world.getTileEntity(x, y, z);
 		if (te != null && te instanceof TELoom)

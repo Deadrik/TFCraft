@@ -116,8 +116,8 @@ public class ModelBear extends ModelBase
 		setRotationAngles (f, f1, f2, f3, f4, f5, entity);
 
 		float age = 1;
-		long tempAge = 0;
-		int sex = 0;
+		//long tempAge = 0;
+		//int sex = 0;
 		/*if (entity instanceof EntityAnimalTFC)
 		{
 			tempAge = Math.min(TFC_Time.getTotalTicks()-((EntityAnimalTFC)entity).adultTime,0);

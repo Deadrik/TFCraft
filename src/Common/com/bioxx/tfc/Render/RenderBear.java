@@ -11,18 +11,18 @@ import org.lwjgl.opengl.GL11;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityBear;
-import com.bioxx.tfc.Render.Models.ModelBear;
 import com.bioxx.tfc.api.Entities.IAnimal;
 public class RenderBear extends RenderLiving
 {
 	private static final ResourceLocation Texture = new ResourceLocation(Reference.ModID, "textures/mob/Bear.png");
-	private float scale = 1.1f;
-	private ModelBear modelbear;
+
+	//private float scale = 1.1f;
+	//private ModelBear modelbear;
 
 	public RenderBear (ModelBase par1ModelBase, float par2)
 	{
 		super (par1ModelBase, par2);
-		modelbear = (ModelBear) par1ModelBase;
+		//modelbear = (ModelBear) par1ModelBase;
 	}
 
 

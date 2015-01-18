@@ -43,11 +43,12 @@ public class BlockIngotPile extends BlockTerraContainer
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
 		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
-		Item item;
 		if(equippedItem != null)
-			item = entityplayer.getCurrentEquippedItem().getItem();
+		{
+		}
 		else
-			item = null;
+		{
+		}
 
 		if(world.isRemote)
 		{
@@ -82,9 +83,6 @@ public class BlockIngotPile extends BlockTerraContainer
 					world.markBlockForUpdate(x, y, z);
 					//tileentityingotpile.broadcastPacketInRange(tileentityingotpile.createUpdatePacket());
 				}
-				//damage = tileentityingotpile.getStackInSlot(0).getItem().itemID - 16028 - 256;
-				//stack = tileentityingotpile.getStackInSlot(0).stackSize;
-				ItemStack is = entityplayer.getCurrentEquippedItem();
 			}
 			return true;
 		}
@@ -161,8 +159,8 @@ public class BlockIngotPile extends BlockTerraContainer
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
-		int direction = getDirectionFromMetadata(meta);
+		//int meta = world.getBlockMetadata(x, y, z);
+		//int direction = getDirectionFromMetadata(meta);
 		TEIngotPile te = (TEIngotPile)world.getTileEntity(x, y, z);
 
 		if (te != null && te.getStackInSlot(0) != null)
@@ -175,8 +173,8 @@ public class BlockIngotPile extends BlockTerraContainer
 	@Override
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
-		int direction = getDirectionFromMetadata(meta);
+		//int meta = world.getBlockMetadata(x, y, z);
+		//int direction = getDirectionFromMetadata(meta);
 		TEIngotPile te = (TEIngotPile)world.getTileEntity(x, y, z);
 
 		if (te.getStackInSlot(0)!=null)
@@ -188,8 +186,8 @@ public class BlockIngotPile extends BlockTerraContainer
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess bAccess, int x, int y, int z)
 	{
-		int meta = bAccess.getBlockMetadata(x, y, z);
-		int direction = getDirectionFromMetadata(meta);
+		//int meta = bAccess.getBlockMetadata(x, y, z);
+		//int direction = getDirectionFromMetadata(meta);
 		TEIngotPile te = (TEIngotPile)bAccess.getTileEntity(x, y, z);
 
 		if (te.getStackInSlot(0)!=null)

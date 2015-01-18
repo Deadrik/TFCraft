@@ -62,7 +62,7 @@ public class ContainerFirepit extends ContainerTFC
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
 		Slot slotinput = (Slot)inventorySlots.get(0);
-		Slot[] slotoutput = {(Slot)inventorySlots.get(7), (Slot)inventorySlots.get(8)};
+		//Slot[] slotoutput = {(Slot)inventorySlots.get(7), (Slot)inventorySlots.get(8)};
 		Slot[] slotfuel = {(Slot)inventorySlots.get(1), (Slot)inventorySlots.get(3), (Slot)inventorySlots.get(4), (Slot)inventorySlots.get(5)};
 		HeatRegistry manager = HeatRegistry.getInstance();
 

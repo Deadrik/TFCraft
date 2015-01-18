@@ -12,7 +12,6 @@ import net.minecraft.world.chunk.IChunkProvider;
 
 import com.bioxx.tfc.Blocks.Terrain.BlockOre;
 import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.Util.BlockMeta;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCBiome;
@@ -43,7 +42,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 				else
 				{
 					DataLayer dl = TFC_Climate.getRockLayer(world, i, j, k, 0);
-					BlockMeta rockLayer = new BlockMeta(dl.block, dl.data2);
+					//BlockMeta rockLayer = new BlockMeta(dl.block, dl.data2);
 					te.storage[0] = new ItemStack(TFCItems.LooseRock, 1, dl.data1);
 				}
 			}
@@ -53,8 +52,8 @@ public class WorldGenLooseRocks implements IWorldGenerator
 
 	private ItemStack getCoreSample(World world, int xCoord, int yCoord, int zCoord)
 	{
-		ArrayList coreSample = new ArrayList<Item>();
-		ArrayList coreSampleStacks = new ArrayList<ItemStack>();
+		ArrayList<Item> coreSample = new ArrayList<Item>();
+		ArrayList<ItemStack> coreSampleStacks = new ArrayList<ItemStack>();
 		int x1 = (xCoord >> 4) << 4;
 		int z1 = (zCoord >> 4) << 4;
 		for(int x = 0; x <= 15; x++)

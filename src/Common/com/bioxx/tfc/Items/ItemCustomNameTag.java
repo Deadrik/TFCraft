@@ -1,26 +1,16 @@
 package com.bioxx.tfc.Items;
 
-import java.util.BitSet;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Items.Tools.ItemChisel;
-import com.bioxx.tfc.Items.Tools.ItemHammer;
-import com.bioxx.tfc.TileEntities.TEDetailed;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Util.Helper;
 
 public class ItemCustomNameTag extends ItemTerra
 {

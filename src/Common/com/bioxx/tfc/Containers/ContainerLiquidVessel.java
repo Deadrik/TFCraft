@@ -23,9 +23,9 @@ import com.bioxx.tfc.api.TFC_ItemHeat;
 public class ContainerLiquidVessel extends ContainerTFC 
 {
 	private World world;
-	private int posX;
-	private int posY;
-	private int posZ;
+	//private int posX;
+	//private int posY;
+	//private int posZ;
 	private EntityPlayer player;
 	public InventoryCrafting containerInv = new InventoryCrafting(this, 1, 1);
 
@@ -36,9 +36,9 @@ public class ContainerLiquidVessel extends ContainerTFC
 	{
 		this.player = playerinv.player;
 		this.world = world;
-		this.posX = x;
-		this.posY = y;
-		this.posZ = z;
+		//this.posX = x;
+		//this.posY = y;
+		//this.posZ = z;
 		bagsSlotNum = player.inventory.currentItem;
 		layoutContainer(playerinv);
 	}

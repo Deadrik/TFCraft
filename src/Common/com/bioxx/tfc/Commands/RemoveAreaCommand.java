@@ -50,7 +50,7 @@ public class RemoveAreaCommand extends CommandBase
 		{
 			player.addChatMessage(new ChatComponentText("Removing Area"));
 			int radius = Integer.parseInt(params[0]);
-			for(int x = -Integer.parseInt(params[0]); x <= Integer.parseInt(params[0]); x++)
+			for (int x = -radius; x <= Integer.parseInt(params[0]); x++)
 			{
 				for(int z = -Integer.parseInt(params[2]); z <= Integer.parseInt(params[2]); z++)
 				{

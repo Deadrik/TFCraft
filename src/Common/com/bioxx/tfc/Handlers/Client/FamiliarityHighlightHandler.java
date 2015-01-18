@@ -1,7 +1,6 @@
 package com.bioxx.tfc.Handlers.Client;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
@@ -38,11 +37,10 @@ public class FamiliarityHighlightHandler {
 
 				if (d3 < (double)(f2 * f2))
 				{
-					String s = entity.func_145748_c_().getFormattedText();
+					//String s = entity.func_145748_c_().getFormattedText();
 
 					if (player.isSneaking())
 					{
-						FontRenderer fontrenderer = RenderManager.instance.getFontRenderer();
 						GL11.glPushMatrix();
 						GL11.glTranslatef((float)x + 0.0F, (float)y + entity.height + 0.75F, (float)z);
 						//GL11.glNormal3f(0.0F, 1.0F, 0.0F);

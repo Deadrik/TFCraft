@@ -99,7 +99,7 @@ public class Alloy
 	public float getPercentForMetal(Metal m)
 	{
 		Iterator<AlloyMetal> iter = AlloyIngred.iterator();
-		AlloyMetal am = new AlloyMetal(m, -1);
+		//AlloyMetal am = new AlloyMetal(m, -1);
 		while(iter.hasNext())
 		{
 			AlloyMetal amc = iter.next();

@@ -40,7 +40,7 @@ public class ContainerBarrel extends ContainerTFC
 	}
 
 	public static ArrayList<Item> getExceptions(){
-		ArrayList exceptions = new ArrayList<Item>();
+		ArrayList<Item> exceptions = new ArrayList<Item>();
 		exceptions.add(Item.getItemFromBlock(TFCBlocks.Barrel));
 		exceptions.add(Item.getItemFromBlock(TFCBlocks.Vessel));
 		return exceptions;
@@ -114,7 +114,7 @@ public class ContainerBarrel extends ContainerTFC
 		return null;
 	}
 
-	private int updatecounter = 0;
+	//private int updatecounter = 0;
 	@Override
 	public void detectAndSendChanges()
 	{

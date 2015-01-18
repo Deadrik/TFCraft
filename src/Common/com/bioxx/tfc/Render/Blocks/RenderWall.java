@@ -130,8 +130,8 @@ public class RenderWall  implements ISimpleBlockRenderingHandler
 		f1 = 0.675F;
 		float f2 = 0F;
 		float f3 = 0.8F;
-		float f4 = 0.0F;
-		float f5 = 1.0F;
+		//float f4 = 0.0F;
+		//float f5 = 1.0F;
 		float f6 =  0.0F;
 		float f7 = 1.5F;
 

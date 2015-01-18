@@ -144,7 +144,7 @@ public class GuiAnvil extends GuiContainerTFC
 	@Override
 	public void drawTooltip(int mx, int my, String text)
 	{
-		List list = new ArrayList();
+		List<String> list = new ArrayList<String>();
 		list.add(text);
 		this.drawHoveringText(list, mx, my + 15, this.fontRendererObj);
 		RenderHelper.disableStandardItemLighting();
@@ -197,7 +197,7 @@ public class GuiAnvil extends GuiContainerTFC
 			if (p == null)
 				return;
 			RuleEnum[] Rules = p.rules;
-			int[] ItemRules = anvilTE.getItemRules();
+			//int[] ItemRules = anvilTE.getItemRules();
 
 			TFC_Core.bindTexture(TextureMap.locationBlocksTexture);
 			this.drawTexturedModelRectFromIcon(w + 80, h + 10, getIconFromRule(Rules[0].Action), 10, 10);

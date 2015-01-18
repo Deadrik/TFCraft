@@ -24,7 +24,7 @@ import com.google.common.collect.Sets;
 
 public class ItemHammer extends ItemTerraTool implements ICausesDamage
 {
-	private static final Set blocks = Sets.newHashSet( new Block[] {});
+	private static final Set<Block> blocks = Sets.newHashSet(new Block[] {});
 	private float damageVsEntity;
 
 	public ItemHammer(ToolMaterial e, float damage)

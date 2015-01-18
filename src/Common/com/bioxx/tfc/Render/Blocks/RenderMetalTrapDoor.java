@@ -22,8 +22,8 @@ public class RenderMetalTrapDoor implements ISimpleBlockRenderingHandler
 		int side = te.data & 7;
 		int hinge = te.data >> 4;
 		float f = 0.0625f;
-		float f3 = f/2;
-		float f2 = 0.125f;
+		//float f3 = f/2;
+		//float f2 = 0.125f;
 
 		float fx = 0;
 		float fy = 0;
@@ -355,7 +355,7 @@ public class RenderMetalTrapDoor implements ISimpleBlockRenderingHandler
 	{
 		float f = 0.0625f;
 		float f3 = f/2;
-		float f2 = 0.125f;
+		//float f2 = 0.125f;
 		float hingeMin = 0;
 		float hingeMin2 = f+f3;
 		float hingeMax = 1-f-f3;

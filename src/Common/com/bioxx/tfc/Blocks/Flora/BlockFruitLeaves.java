@@ -128,8 +128,8 @@ public class BlockFruitLeaves extends BlockTerraContainer
 			int m = meta - 8;
 
 			FloraManager manager = FloraManager.getInstance();
-			FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(this, m));
-			FloraIndex fi2 = FloraManager.getInstance().findMatchingIndex(getType(this, meta));
+			FloraIndex fi = manager.findMatchingIndex(getType(this, m));
+			FloraIndex fi2 = manager.findMatchingIndex(getType(this, meta));
 
 			float temp = TFC_Climate.getHeightAdjustedTemp(world, x, y, z);
 			TEFruitLeaves te = (TEFruitLeaves) world.getTileEntity(x, y, z);
@@ -258,7 +258,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 		{
 			int meta = world.getBlockMetadata(x, y, z);
 			FloraManager manager = FloraManager.getInstance();
-			FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(this, world.getBlockMetadata(x, y, z) & 7));
+			FloraIndex fi = manager.findMatchingIndex(getType(this, world.getBlockMetadata(x, y, z) & 7));
 
 			if (fi != null && (fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) || fi.inHarvest(((TFC_Time.getSeasonAdjustedMonth(z) - 1) + 12) % 12) && (meta & 8) == 8))
 			{
@@ -282,7 +282,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 		{
 			int meta = world.getBlockMetadata(x, y, z);
 			FloraManager manager = FloraManager.getInstance();
-			FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(this, world.getBlockMetadata(x, y, z) & 7));
+			FloraIndex fi = manager.findMatchingIndex(getType(this, world.getBlockMetadata(x, y, z) & 7));
 
 			if(fi != null && (fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) || fi.inHarvest(((TFC_Time.getSeasonAdjustedMonth(z) - 1) + 12)%12) && (meta & 8) == 8))
 			{

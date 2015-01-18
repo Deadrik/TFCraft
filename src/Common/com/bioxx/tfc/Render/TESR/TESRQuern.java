@@ -76,7 +76,7 @@ public class TESRQuern extends TESRBase implements ISimpleBlockRenderingHandler
 		double i = 0.625; // where should top rendering start
 		double j = i + 0.2; // thickness of the quern stone
 		if(!renderSides) j = i + 0.201; // fixes the double render glitch when rendering the square top box
-		double k = j + 0.175; // height of the wooden handle
+		//double k = j + 0.175; // height of the wooden handle
 		double C = 0.5; // center
 		double rad = 0.5; // radius of the quern stone
 
@@ -120,7 +120,7 @@ public class TESRQuern extends TESRBase implements ISimpleBlockRenderingHandler
 		}
 	}
 
-	private void renderSquareTop(Tessellator t)
+	/*private void renderSquareTop(Tessellator t)
 	{
 		double i = 0.625; // bottom square point
 		double j = 0.825; // top square point
@@ -155,7 +155,7 @@ public class TESRQuern extends TESRBase implements ISimpleBlockRenderingHandler
 		t.addVertexWithUV(1, j, 1, 1, 1);
 		t.addVertexWithUV(1, j, 0, 1, 0);
 		t.draw();
-	}
+	}*/
 
 	private void renderWoodHandle(Tessellator t, int pos, Random rand, double angle)
 	{

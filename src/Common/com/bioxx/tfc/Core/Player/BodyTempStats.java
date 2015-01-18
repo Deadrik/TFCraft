@@ -208,12 +208,6 @@ public class BodyTempStats
 		 */
 	}
 
-	private void killPlayer(EntityPlayer player)
-	{
-		player.inventory.dropAllItems();
-		player.setHealth(0);
-	}
-
 	public void readNBT(NBTTagCompound nbt)
 	{
 		if (nbt.hasKey("tempCompound"))

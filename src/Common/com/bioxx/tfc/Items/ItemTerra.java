@@ -64,6 +64,7 @@ public class ItemTerra extends Item implements ISize
 		return this.craftingXP;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
@@ -150,7 +151,7 @@ public class ItemTerra extends Item implements ISize
 		return false;
 	}
 
-	public static void addSizeInformation(ItemStack object, List arraylist)
+	public static void addSizeInformation(ItemStack object, List<String> arraylist)
 	{
 		if(((ISize)object.getItem()).getSize(object)!= null && ((ISize)object.getItem()).getWeight(object) != null && ((ISize)object.getItem()).getReach(object)!= null)
 			arraylist.add("\u2696" + StatCollector.translateToLocal("gui.Weight." + ((ISize)object.getItem()).getWeight(object).getName()) + " \u21F2" + 
@@ -166,6 +167,7 @@ public class ItemTerra extends Item implements ISize
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
@@ -184,7 +186,7 @@ public class ItemTerra extends Item implements ISize
 		addExtraInformation(is, player, arraylist);
 	}
 
-	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addItemInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 		if(	is.getItem() instanceof ItemIngot ||
 				is.getItem() instanceof ItemMetalSheet ||
@@ -215,7 +217,7 @@ public class ItemTerra extends Item implements ISize
 		}
 	}
 
-	public static void addHeatInformation(ItemStack is, List arraylist)
+	public static void addHeatInformation(ItemStack is, List<String> arraylist)
 	{
 		if (is.hasTagCompound())
 		{
@@ -238,10 +240,11 @@ public class ItemTerra extends Item implements ISize
 		}
 	}
 
-	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Multimap getItemAttributeModifiers()
 	{

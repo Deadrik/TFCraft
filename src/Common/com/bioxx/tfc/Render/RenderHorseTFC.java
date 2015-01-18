@@ -91,6 +91,7 @@ public class RenderHorseTFC extends RenderHorse
 	 * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
 	 * entityLiving, partialTickTime
 	 */
+	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
 	{
 		float scale = ((EntityHorseTFC)par1EntityLivingBase).size_mod;
@@ -101,6 +102,7 @@ public class RenderHorseTFC extends RenderHorse
 	/**
 	 * Renders the model in RenderLiving
 	 */
+	@Override
 	protected void renderModel(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
 		this.func_110846_a((EntityHorse)par1EntityLivingBase, par2, par3, par4, par5, par6, par7);
@@ -109,6 +111,7 @@ public class RenderHorseTFC extends RenderHorse
 	/**
 	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
 	 */
+	@Override
 	protected ResourceLocation getEntityTexture(Entity par1Entity)
 	{
 		return this.func_110849_a((EntityHorse)par1Entity);

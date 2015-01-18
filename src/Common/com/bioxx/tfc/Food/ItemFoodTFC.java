@@ -250,7 +250,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		}
 	}
 
-	public void addFoodInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addFoodInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 		NBTTagCompound tag = is.getTagCompound();
 
@@ -275,7 +275,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		}
 	}
 
-	public static void addTasteInformation(ItemStack is, EntityPlayer player, List arraylist) 
+	public static void addTasteInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 		IFood food = (IFood) is.getItem();
 		int sweet = food.getTasteSweet(is);
@@ -435,7 +435,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		{
 			if(is.hasTagCompound())
 			{
-				NBTTagCompound nbt = is.getTagCompound();
+				//NBTTagCompound nbt = is.getTagCompound();
 				float weight = ((IFood)(is.getItem())).getFoodWeight(is);
 				float decay = Math.max(((IFood)(is.getItem())).getFoodDecay(is), 0);
 

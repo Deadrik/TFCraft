@@ -102,7 +102,7 @@ public class GuiContainerTFC extends GuiContainer
 
 	public void drawTooltip(int mx, int my, String text)
 	{
-		List list = new ArrayList();
+		List<String> list = new ArrayList<String>();
 		list.add(text);
 		this.drawHoveringText(list, mx, my + 15, this.fontRendererObj);
 		RenderHelper.disableStandardItemLighting();

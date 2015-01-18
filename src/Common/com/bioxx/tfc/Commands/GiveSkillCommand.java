@@ -24,11 +24,10 @@ public class GiveSkillCommand extends CommandBase{
 	@Override
 	public void processCommand(ICommandSender sender, String[] params) 
 	{
-		MinecraftServer var3 = MinecraftServer.getServer();
-		EntityPlayerMP var4;
+		//MinecraftServer var3 = MinecraftServer.getServer();
+		EntityPlayerMP var4 = getCommandSenderAsPlayer(sender);
 		EntityPlayerMP player;
 
-		var4 = getCommandSenderAsPlayer(sender);
 		if(params.length == 2)
 		{
 			TFC_Core.getSkillStats(var4).increaseSkill(params[0], Integer.parseInt(params[1]));

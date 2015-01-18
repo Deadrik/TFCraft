@@ -22,7 +22,6 @@ import com.bioxx.tfc.TileEntities.TELoom;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCCrafting;
 import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Crafting.AnvilRecipe;
@@ -56,12 +55,12 @@ public class Recipes
 	{
 		TEBarrel.registerRecipes();
 		TELoom.registerRecipes();
-		Item[] Ingots = {TFCItems.BismuthIngot, TFCItems.BismuthBronzeIngot,TFCItems.BlackBronzeIngot,
+		/*Item[] Ingots = {TFCItems.BismuthIngot, TFCItems.BismuthBronzeIngot,TFCItems.BlackBronzeIngot,
 				TFCItems.BlackSteelIngot,TFCItems.BlueSteelIngot,TFCItems.BrassIngot,TFCItems.BronzeIngot,
 				TFCItems.BronzeIngot,TFCItems.CopperIngot,TFCItems.GoldIngot,TFCItems.WroughtIronIngot,TFCItems.LeadIngot,
 				TFCItems.NickelIngot,TFCItems.PigIronIngot,TFCItems.PlatinumIngot,TFCItems.RedSteelIngot,
 				TFCItems.RoseGoldIngot,TFCItems.SilverIngot,TFCItems.SteelIngot,TFCItems.SterlingSilverIngot,
-				TFCItems.TinIngot,TFCItems.ZincIngot};
+				TFCItems.TinIngot,TFCItems.ZincIngot};*/
 
 		// Remove Vanilla recipes before adding TFC recipes for oredict compatibility
 		VanillaRecipes();
@@ -439,12 +438,12 @@ public class Recipes
 	}
 
 
-	private static ItemStack checkMelted(ItemStack is)
+	/*private static ItemStack checkMelted(ItemStack is)
 	{
 		if(TFC_ItemHeat.GetTemp(is) > TFC_ItemHeat.IsCookable(is))
 			return null;
 		return is;
-	}
+	}*/
 
 	private static void VanillaRecipes()
 	{

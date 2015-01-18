@@ -18,7 +18,7 @@ public class CropManager
 
 	public CropManager()
 	{
-		Crops = new ArrayList();
+		Crops = new ArrayList<CropIndex>();
 	}
 
 	public void addIndex(CropIndex index)

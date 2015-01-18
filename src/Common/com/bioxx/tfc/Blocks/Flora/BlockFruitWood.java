@@ -90,7 +90,7 @@ public class BlockFruitWood extends BlockTerraContainer
 			int x = i;
 			int y = 0;
 			int z = k;
-			int count = 0;
+			//int count = 0;
 
 			if(world.getBlock(i, j+1, k) == this || world.getBlock(i, j-1, k) == this)
 			{

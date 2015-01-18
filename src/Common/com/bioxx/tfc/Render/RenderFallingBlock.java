@@ -2,7 +2,6 @@ package com.bioxx.tfc.Render;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
@@ -42,7 +41,6 @@ public class RenderFallingBlock extends Render
 			GL11.glTranslatef((float)x, (float)y, (float)z);
 			this.bindEntityTexture(entity);
 			GL11.glDisable(GL11.GL_LIGHTING);
-			Tessellator tessellator;
 
 			this.field_147920_a.setRenderBoundsFromBlock(block);
 			this.field_147920_a.renderBlockSandFalling(block, world, i, j, k, entity.blockMeta);

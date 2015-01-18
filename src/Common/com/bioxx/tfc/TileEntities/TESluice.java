@@ -128,8 +128,6 @@ public class TESluice extends TileEntity implements IInventory
 		float f = random.nextFloat() * 0.8F + 0.1F;
 		float f1 = random.nextFloat() * 2.0F + 0.4F;
 		float f2 = random.nextFloat() * 0.8F + 0.1F;
-		int x = xCoord;
-
 		EntityItem entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, new ItemStack(is.getItem(), is.stackSize, is.getItemDamage()));
 		float f3 = 0.05F;
 		entityitem.motionX = (float)random.nextGaussian() * f3;
@@ -243,7 +241,6 @@ public class TESluice extends TileEntity implements IInventory
 				initialized = true;
 			}
 
-			int[] dir = BlockSluice.headBlockToFootBlockMap[BlockSluice.getDirectionFromMetadata(meta)];
 			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
 					xCoord, yCoord, zCoord,
 					xCoord + 1, yCoord + 1.1f, zCoord + 1));
@@ -309,7 +306,7 @@ public class TESluice extends TileEntity implements IInventory
 					else if(soilType == 2)
 						oreMod = 0.6f;
 
-					ArrayList items = new ArrayList<ItemStack>();
+					ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 					if(random.nextInt((int) (200 * oreMod)) == 0 && !coreSampleStacks.isEmpty())
 						addToInventory(coreSampleStacks.get(random.nextInt(coreSampleStacks.size())).copy());
 					else if(random.nextInt((int) (400 * gemMod)) == 0)

@@ -87,6 +87,8 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 		return n;
 	}
 
+	@SuppressWarnings("rawtypes")
+	// Storing both Strings and Integers in the same ArrayList
 	public ArrayList[] getQuiverJavelinTypes(ItemStack item)
 	{
 		ArrayList[] pair = new ArrayList[2];

@@ -89,9 +89,9 @@ public class RenderFenceGate  implements ISimpleBlockRenderingHandler
 			if (i1 == 2 || i1 == 0)
 				renderer.uvRotateTop = 1;
 
-			float f10;
-			float f11;
-			float f12;
+			//float f10;
+			//float f11;
+			//float f12;
 
 			if (i1 == 3)
 			{
@@ -99,9 +99,9 @@ public class RenderFenceGate  implements ISimpleBlockRenderingHandler
 				f8 = 0.125F;
 				f7 = 0.875F;
 				f9 = 1.0F;
-				f10 = 0.5625F;
-				f12 = 0.8125F;
-				f11 = 0.9375F;
+				//f10 = 0.5625F;
+				//f12 = 0.8125F;
+				//f11 = 0.9375F;
 				renderer.setRenderBounds(0.8125D, (double)f, 0.0D, 0.9375D, (double)f3, 0.125D);
 				renderer.renderStandardBlock(par1BlockFenceGate, par2, par3, par4);
 				renderer.setRenderBounds(0.8125D, (double)f, 0.875D, 0.9375D, (double)f3, 1.0D);
@@ -121,9 +121,9 @@ public class RenderFenceGate  implements ISimpleBlockRenderingHandler
 				f8 = 0.125F;
 				f7 = 0.875F;
 				f9 = 1.0F;
-				f10 = 0.0625F;
-				f12 = 0.1875F;
-				f11 = 0.4375F;
+				//f10 = 0.0625F;
+				//f12 = 0.1875F;
+				//f11 = 0.4375F;
 				renderer.setRenderBounds(0.0625D, (double)f, 0.0D, 0.1875D, (double)f3, 0.125D);
 				renderer.renderStandardBlock(par1BlockFenceGate, par2, par3, par4);
 				renderer.setRenderBounds(0.0625D, (double)f, 0.875D, 0.1875D, (double)f3, 1.0D);
@@ -143,9 +143,9 @@ public class RenderFenceGate  implements ISimpleBlockRenderingHandler
 				f8 = 0.125F;
 				f7 = 0.875F;
 				f9 = 1.0F;
-				f10 = 0.5625F;
-				f12 = 0.8125F;
-				f11 = 0.9375F;
+				//f10 = 0.5625F;
+				//f12 = 0.8125F;
+				//f11 = 0.9375F;
 				renderer.setRenderBounds(0.0D, (double)f, 0.8125D, 0.125D, (double)f3, 0.9375D);
 				renderer.renderStandardBlock(par1BlockFenceGate, par2, par3, par4);
 				renderer.setRenderBounds(0.875D, (double)f, 0.8125D, 1.0D, (double)f3, 0.9375D);
@@ -165,9 +165,9 @@ public class RenderFenceGate  implements ISimpleBlockRenderingHandler
 				f8 = 0.125F;
 				f7 = 0.875F;
 				f9 = 1.0F;
-				f10 = 0.0625F;
-				f12 = 0.1875F;
-				f11 = 0.4375F;
+				//f10 = 0.0625F;
+				//f12 = 0.1875F;
+				//f11 = 0.4375F;
 				renderer.setRenderBounds(0.0D, (double)f, 0.0625D, 0.125D, (double)f3, 0.1875D);
 				renderer.renderStandardBlock(par1BlockFenceGate, par2, par3, par4);
 				renderer.setRenderBounds(0.875D, (double)f, 0.0625D, 1.0D, (double)f3, 0.1875D);
@@ -243,7 +243,7 @@ public class RenderFenceGate  implements ISimpleBlockRenderingHandler
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
 		int l = 1;
-		boolean flag1 = false;
+		//boolean flag1 = false;
 		int i1 = BlockDirectional.getDirection(l);
 
 		float f = 0.375F;

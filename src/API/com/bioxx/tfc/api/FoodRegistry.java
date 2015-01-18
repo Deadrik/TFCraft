@@ -16,15 +16,15 @@ public class FoodRegistry
 	}
 
 	private int proteinCount = 0;
-	private Map proteinMap;
+	private Map<Integer, Item> proteinMap;
 	private int vegetableCount = 10000;
-	private Map vegetableMap;
+	private Map<Integer, Item> vegetableMap;
 	private int fruitCount = 20000;
-	private Map fruitMap;
+	private Map<Integer, Item> fruitMap;
 	private int grainCount = 30000;
-	private Map grainMap;
+	private Map<Integer, Item> grainMap;
 	private int dairyCount = 40000;
-	private Map dairyMap;
+	private Map<Integer, Item> dairyMap;
 
 	private FoodRegistry()
 	{

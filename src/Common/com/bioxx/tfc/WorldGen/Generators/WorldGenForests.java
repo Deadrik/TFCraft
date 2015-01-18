@@ -20,7 +20,7 @@ import cpw.mods.fml.common.IWorldGenerator;
 public class WorldGenForests implements IWorldGenerator
 {
 	/** The number of blocks to generate. */
-	private int numberOfBlocks;
+	//private int numberOfBlocks;
 
 	WorldGenerator gen0;
 	WorldGenerator gen1;
@@ -165,10 +165,10 @@ public class WorldGenForests implements IWorldGenerator
 		int xCoord = chunkX;
 		int yCoord = Global.SEALEVEL+1;
 		int zCoord = chunkZ;
-		int numTreesBase = 5;
+		/*int numTreesBase = 5;
 
 		if (random.nextInt(10) == 0)
-			numTreesBase -= 4;
+			numTreesBase -= 4;*/
 
 		int numTrees = 50;
 		for (int var2 = 0; var2 < numTrees; ++var2)
@@ -177,7 +177,7 @@ public class WorldGenForests implements IWorldGenerator
 			zCoord = chunkZ + 8 + random.nextInt(16);
 			yCoord = world.getHeightValue(xCoord, zCoord);
 
-			float temperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, world.getHeightValue(xCoord, zCoord), zCoord);
+			//float temperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, world.getHeightValue(xCoord, zCoord), zCoord);
 			float temperatureAvg = TFC_Climate.getBioTemperature(world, xCoord, zCoord);
 
 			try

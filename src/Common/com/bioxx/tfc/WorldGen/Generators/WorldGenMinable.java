@@ -8,8 +8,6 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.WorldChunkManager;
-import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.Chunkdata.ChunkData;
@@ -41,15 +39,15 @@ public class WorldGenMinable extends WorldGenerator
 	public static int mineCount;
 	public static int mineCountM;
 
-	private static Random randomOut;
+	//private static Random randomOut;
 	private static Random rand;
 	private static World worldObj;
 
-	private static WorldChunkManager worldChunkManager;
-	private static WorldChunkManagerHell worldChunkManagerHell;
+	//private static WorldChunkManager worldChunkManager;
+	//private static WorldChunkManagerHell worldChunkManagerHell;
 
-	private int mineGen = 1;
-	private int subMineGen = 1;
+	//private int mineGen = 1;
+	//private int subMineGen = 1;
 	private int rarity = 2;
 	private int veinSi = 2;
 	private int veinAm = 2;
@@ -70,8 +68,8 @@ public class WorldGenMinable extends WorldGenerator
 	public WorldGenMinable(Block block, int j, Block layerBlock, int layerMeta, int rarity, int veinSize,
 			int veinAmount, int height, int diameter, int vDensity, int hDensity, boolean vein, int oreGrade)
 	{
-		int emptyHolder = 0;
-		emptyHolder = j;
+		/*int emptyHolder = 0;
+		emptyHolder = j;*/
 
 		this.minableBlock = block;
 		this.minableBlockMeta = j;
@@ -173,9 +171,9 @@ public class WorldGenMinable extends WorldGenerator
 		int posX = parX;
 		int posY = parY;
 		int posZ = parZ;
-		int tempPosX = 0;
+		/*int tempPosX = 0;
 		int tempPosY = 0;
-		int tempPosZ = 0;
+		int tempPosZ = 0;*/
 		int posX2 = 0;
 		int posY2 = 0;
 		int posZ2 = 0;
@@ -185,9 +183,9 @@ public class WorldGenMinable extends WorldGenerator
 		int directionX2 = 0;
 		int directionY2 = 0;
 		int directionZ2 = 0;
-		int directionX3 = 0;
+		/*int directionX3 = 0;
 		int directionY3 = 0;
-		int directionZ3 = 0;
+		int directionZ3 = 0;*/
 		int directionChange = 0;
 		int directionChange2 = 0;
 		int blocksToUse = xyz;//input number of blocks per vein

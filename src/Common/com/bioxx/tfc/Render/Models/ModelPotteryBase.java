@@ -16,15 +16,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ModelPotteryBase extends ModelBox 
 {
-	/**
-	 * The (x,y,z) vertex positions and (u,v) texture coordinates for each of the 8 points on a cube
-	 */
-	private PositionTextureVertex[] vertexPositions;
 	private Object[] rings;
 	protected ArrayList<TexturedQuad> polygons;
-
-	/** An array of 6 TexturedQuads, one for each face of a cube */
-	private TexturedQuad[] quadList;
 
 	public ModelPotteryBase(ModelRenderer renderer, int textureOffsetX, int textureOffsetY,
 			float originX, float originY, float originZ, int width, int height, int depth,
@@ -111,7 +104,7 @@ public class ModelPotteryBase extends ModelBox
 			float originX, float originY, float originZ, int width, int height, int depth,
 			float scale, boolean connectTopFace){
 
-		ArrayList<TexturedQuad> aList = new ArrayList();
+		ArrayList<TexturedQuad> aList = new ArrayList<TexturedQuad>();
 		for(int i = 0; i < vertices.length-1;i++){
 			for(int j = 0; j < 8; j++){
 				aList.add(new TexturedQuad(new PositionTextureVertex[] {((PositionTextureVertex [])(vertices[i+1]))[j],((PositionTextureVertex [])(vertices[i+1]))[(j+1)%8], ((PositionTextureVertex [])(vertices[i]))[(j+1)%8], ((PositionTextureVertex [])(vertices[i]))[j]}, 

@@ -146,7 +146,7 @@ public class BlockSlab extends BlockPartial
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 	{
 		TEPartial te = (TEPartial) world.getTileEntity(i, j, k);
-		int md = world.getBlockMetadata(i, j, k);
+		//int md = world.getBlockMetadata(i, j, k);
 		if(te != null)
 		{
 			short type = te.TypeID;

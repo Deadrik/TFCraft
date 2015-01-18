@@ -8,7 +8,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
@@ -80,14 +79,14 @@ public class TEForge extends TEFireEntity implements IInventory
 		}
 	}
 
-	private class CoordDirection
+	/*private class CoordDirection
 	{
 		int x; int y; int z; ForgeDirection dir;
 		public CoordDirection(int x, int y, int z, ForgeDirection d)
 		{
 			this.x = x;this.y = y;this.z = z;this.dir = d;
 		}
-	}
+	}*/
 
 	@Override
 	public void closeInventory()
@@ -112,8 +111,8 @@ public class TEForge extends TEFireEntity implements IInventory
 			if(index != null && TFC_ItemHeat.GetTemp(fireItemStacks[i]) > index.meltTemp)
 			{
 				float temp = TFC_ItemHeat.GetTemp(fireItemStacks[i]);
-				int dam = fireItemStacks[i].getItemDamage();
-				ItemStack is = fireItemStacks[i].copy();
+				//int dam = fireItemStacks[i].getItemDamage();
+
 				//Morph the input
 				if(!(fireItemStacks[i].getItem() instanceof ItemMeltedMetal))
 					fireItemStacks[i] = index.getMorph();
@@ -174,7 +173,7 @@ public class TEForge extends TEFireEntity implements IInventory
 					}
 
 
-					HeatIndex index2 = manager.findMatchingIndex(fireItemStacks[i]);
+					//HeatIndex index2 = manager.findMatchingIndex(fireItemStacks[i]);
 					if(TFC_ItemHeat.IsCookable(fireItemStacks[i]) > -1)
 					{
 						//if the input is a new item, then apply the old temperature to it

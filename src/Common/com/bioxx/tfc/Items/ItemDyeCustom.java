@@ -85,8 +85,8 @@ public class ItemDyeCustom extends ItemTerra
 		else
 		{
 			Block var11;
-			int var12;
-			int var13;
+			//int var12;
+			//int var13;
 
 			if (par1ItemStack.getItemDamage() == 15)
 			{

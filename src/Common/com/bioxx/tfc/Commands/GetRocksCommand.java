@@ -5,7 +5,6 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
 
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Items.ItemLooseRock;
@@ -24,9 +23,8 @@ public class GetRocksCommand extends CommandBase
 	@Override
 	public void processCommand(ICommandSender sender, String[] params)
 	{
-		MinecraftServer var3 = MinecraftServer.getServer();
-		EntityPlayerMP var4;
-		var4 = getCommandSenderAsPlayer(sender);
+		//MinecraftServer var3 = MinecraftServer.getServer();
+		EntityPlayerMP var4 = getCommandSenderAsPlayer(sender);
 
 		DataLayer t0 = TFC_Climate.getRockLayer(var4.worldObj, (int)var4.posX, (int)var4.posY, (int)var4.posZ, 0);
 		DataLayer t1 = TFC_Climate.getRockLayer(var4.worldObj, (int)var4.posX, (int)var4.posY, (int)var4.posZ, 1);

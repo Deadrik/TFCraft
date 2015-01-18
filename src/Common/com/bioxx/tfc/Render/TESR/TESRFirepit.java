@@ -1,6 +1,5 @@
 package com.bioxx.tfc.Render.TESR;
 
-import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
@@ -8,30 +7,29 @@ import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Render.Models.ModelCookingPot;
 import com.bioxx.tfc.TileEntities.TEFirepit;
 
 public class TESRFirepit extends TESRBase
 {
 	/** The normal small chest model. */
-	private final ModelCookingPot potModel = new ModelCookingPot();
+	//private final ModelCookingPot potModel = new ModelCookingPot();
 	/**
 	 * Renders the TileEntity for the chest at a position.
 	 */
 	public void renderTileEntityFirepitAt(TEFirepit par1TileEntityPit, double d, double d1, double d2, float f)
 	{
-		int var9;
+		//int var9;
 
 		if (par1TileEntityPit.getWorldObj() == null)
 		{
-			var9 = 0;
+			//var9 = 0;
 		}
 		else
 		{
 			if(par1TileEntityPit.hasCookingPot)
 			{
-				Block var10 = par1TileEntityPit.getBlockType();
-				var9 = par1TileEntityPit.getBlockMetadata();
+				//Block var10 = par1TileEntityPit.getBlockType();
+				//var9 = par1TileEntityPit.getBlockMetadata();
 				TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, "textures/blocks/clay/Ceramic.png")); //texture
 				GL11.glPushMatrix(); //start
 				GL11.glTranslatef((float)d + 0.0F, (float)d1 + 0F, (float)d2 + 0.0F); //size

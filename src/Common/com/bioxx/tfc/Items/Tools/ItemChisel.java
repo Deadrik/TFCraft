@@ -4,7 +4,6 @@ import java.util.Random;
 import java.util.Set;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -28,7 +27,7 @@ import com.google.common.collect.Sets;
 public class ItemChisel extends ItemTerraTool implements IToolChisel
 {
 	static Random random = new Random();
-	private static final Set blocks = Sets.newHashSet( new Block[] {});
+	private static final Set<Block> blocks = Sets.newHashSet(new Block[] {});
 
 	public ItemChisel(ToolMaterial e)
 	{
@@ -258,7 +257,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 		}
 		else
 		{
-			Material m = world.getBlock(x, y, z).getMaterial();
+			//Material m = world.getBlock(x, y, z).getMaterial();
 			world.setBlock(x, y, z, TFCBlocks.Detailed);
 
 			te = (TEDetailed)world.getTileEntity(x, y, z);

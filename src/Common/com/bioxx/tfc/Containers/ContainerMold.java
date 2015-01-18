@@ -25,9 +25,9 @@ import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
 public class ContainerMold extends ContainerTFC
 {
 	private World world;
-	private int posX;
-	private int posY;
-	private int posZ;
+	//private int posX;
+	//private int posY;
+	//private int posZ;
 	private EntityPlayer player;
 	public InventoryCrafting containerInv = new InventoryCrafting(this, 2, 1);
 	public IInventory craftResult = new InventoryCraftResult();
@@ -36,9 +36,9 @@ public class ContainerMold extends ContainerTFC
 	{
 		this.player = playerinv.player;
 		this.world = world;
-		this.posX = x;
-		this.posY = y;
-		this.posZ = z;
+		//this.posX = x;
+		//this.posY = y;
+		//this.posZ = z;
 		layoutContainer(playerinv, 0, 0);
 		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90, false, true);
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(playerinv.player);
@@ -172,7 +172,7 @@ public class ContainerMold extends ContainerTFC
 		Slot slot = (Slot)inventorySlots.get(clickedSlot);
 		Slot slot1 = (Slot)inventorySlots.get(0);
 		Slot slot2 = (Slot)inventorySlots.get(1);
-		Slot slot3 = (Slot)inventorySlots.get(2);
+		//Slot slot3 = (Slot)inventorySlots.get(2);
 
 		if(slot != null && slot.getHasStack())
 		{

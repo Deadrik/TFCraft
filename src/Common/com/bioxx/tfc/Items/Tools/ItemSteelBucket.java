@@ -52,7 +52,7 @@ public class ItemSteelBucket extends ItemTerra
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
-		float var4 = 1.0F;
+		//float var4 = 1.0F;
 		boolean var11 = this.bucketContents == Blocks.air;
 		MovingObjectPosition mop = Helper.getMovingObjectPositionFromPlayer(world, player, var11);
 

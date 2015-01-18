@@ -28,7 +28,7 @@ public class WorldGenFlowers
 		{
 			int xx = xCoord-4 + random.nextInt(8);
 			int zz = zCoord-4 + random.nextInt(8);
-			int yy = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
+			int yy = yCoord;
 
 			if (world.isAirBlock(xx, yy, zz) && plantBlock.canBlockStay(world, xx, yy, zz))
 			{

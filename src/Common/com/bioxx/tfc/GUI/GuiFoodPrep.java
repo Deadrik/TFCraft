@@ -1,7 +1,6 @@
 package com.bioxx.tfc.GUI;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -136,7 +135,7 @@ public class GuiFoodPrep extends GuiContainerTFC
 		{
 			if (this.visible)
 			{
-				int k = this.getHoverState(this.field_146123_n) - 1;
+				//int k = this.getHoverState(this.field_146123_n) - 1;
 
 				TFC_Core.bindTexture(GuiFoodPrep.texture);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -155,7 +154,6 @@ public class GuiFoodPrep extends GuiContainerTFC
 
 				if (field_146123_n)
 				{
-					FontRenderer fontrenderer = Minecraft.getMinecraft().fontRenderer;
 					screen.drawTooltip(x, y, this.displayString);
 					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				}

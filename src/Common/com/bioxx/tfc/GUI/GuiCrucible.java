@@ -87,7 +87,7 @@ public class GuiCrucible extends GuiContainerTFC
 			{
 				String[] text =
 				{ String.format("%2.0f", crucibleTE.currentAlloy.outputAmount) };
-				List temp = Arrays.asList(text);
+				List<String> temp = Arrays.asList(text);
 				drawHoveringText(temp, par1, par2, fontRendererObj);
 			}
 		}

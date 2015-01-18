@@ -18,11 +18,11 @@ public class RenderLeatherRack implements ISimpleBlockRenderingHandler
 	{
 		TELeatherRack te = (TELeatherRack)world.getTileEntity(x, y, z);
 		BlockLeatherRack blk = (BlockLeatherRack)block;
-		float f0 = 0;
-		float f1 = 0.25f;
-		float f2 = 0.5f;
-		float f3 = 0.75f;
-		float f4 = 1f;
+		//float f0 = 0;
+		//float f1 = 0.25f;
+		//float f2 = 0.5f;
+		//float f3 = 0.75f;
+		//float f4 = 1f;
 		boolean breaking = renderer.overrideBlockTexture != null;
 		
 		for(int k = 0; k < 4; k++)

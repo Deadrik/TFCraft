@@ -94,9 +94,9 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 
 			if(is.hasTagCompound())
 			{
-				NBTTagCompound nbt = is.getTagCompound();
-				float weight = ((IFood)(is.getItem())).getFoodWeight(is);
-				float decay = Math.max(((IFood)(is.getItem())).getFoodDecay(is), 0);
+				//NBTTagCompound nbt = is.getTagCompound();
+				//float weight = ((IFood)(is.getItem())).getFoodWeight(is);
+				//float decay = Math.max(((IFood)(is.getItem())).getFoodDecay(is), 0);
 
 				float tasteFactor = foodstats.getTasteFactor(is);
 				foodstats.addNutrition(((IFood)(is.getItem())).getFoodGroup(), 20*tasteFactor);

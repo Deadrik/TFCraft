@@ -278,14 +278,6 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		}
 	}
 
-	private float getPercentGrown(IAnimal animal)
-	{
-		float birth = animal.getBirthDay();
-		float time = (int) TFC_Time.getTotalDays();
-		float percent =(time-birth)/animal.getNumberOfDaysToAdult();
-		return Math.min(percent, 1f);
-	}
-
 	@Override
 	protected void applyEntityAttributes()
 	{

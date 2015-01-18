@@ -1,7 +1,5 @@
 package com.bioxx.tfc.Blocks.Devices;
 
-import java.util.Random;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,8 +20,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockNestBox extends BlockTerraContainer
 {
-	private final Random random = new Random();
-
 	public BlockNestBox()
 	{
 		super(Material.wood);

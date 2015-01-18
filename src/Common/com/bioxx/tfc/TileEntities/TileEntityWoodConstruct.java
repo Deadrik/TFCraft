@@ -1,7 +1,6 @@
 package com.bioxx.tfc.TileEntities;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.BitSet;
 
 import net.minecraft.entity.item.EntityItem;
@@ -24,7 +23,7 @@ public class TileEntityWoodConstruct extends NetworkTileEntity
 		data = new BitSet(192);
 	}
 
-	private void updateClient()
+	/*private void updateClient()
 	{
 		int dd = PlankDetailLevel * PlankDetailLevel;
 		Arrays.fill(solidCheck, true);
@@ -51,7 +50,7 @@ public class TileEntityWoodConstruct extends NetworkTileEntity
 				type = woodTypes[in];
 			}
 		}
-	}
+	}*/
 
 	@Override
 	public boolean canUpdate()

@@ -35,9 +35,9 @@ public class FoodCraftingHandler
 	public void onFoodCrafting(ItemCraftedEvent e)
 	{
 		//EntityPlayer player = e.player;
-		Item item = e.crafting.getItem();
+		//Item item = e.crafting.getItem();
 		ItemStack craftResult = e.crafting;
-		int isDmg = e.crafting.getItemDamage();
+		//int isDmg = e.crafting.getItemDamage();
 		IInventory iinventory = e.craftMatrix;
 
 		if(FoodCraftingHandler.PreCrafted)

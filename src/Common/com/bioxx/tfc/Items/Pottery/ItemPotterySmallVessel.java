@@ -142,7 +142,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			}
 
 			int total = metalAmounts[0] + metalAmounts[1] + metalAmounts[2] + metalAmounts[3];
-			int numMetals = 0;
+			/*int numMetals = 0;
 			if(metalAmounts[0] > 0)
 				numMetals++;
 			if(metalAmounts[1] > 0)
@@ -150,7 +150,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			if(metalAmounts[2] > 0)
 				numMetals++;
 			if(metalAmounts[3] > 0)
-				numMetals++;
+				numMetals++;*/
 
 			if(total > 0)
 			{
@@ -279,7 +279,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	}
 
 	@Override
-	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addItemInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 		NBTTagCompound tag = is.stackTagCompound;
 		if(tag != null)
@@ -343,7 +343,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	}
 
 	@Override
-	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 		if (TFC_Core.showShiftInformation())
 		{

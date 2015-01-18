@@ -7,12 +7,11 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.Render.Models.ModelUrn;
 import com.bioxx.tfc.TileEntities.TEPottery;
 
 public class TESRPottery extends TESRBase
 {
-	private ModelUrn urnModel;
+	//private ModelUrn urnModel;
 
 	public TESRPottery()
 	{

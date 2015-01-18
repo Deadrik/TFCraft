@@ -31,7 +31,7 @@ public class ItemGoldPan extends ItemTerra
 	public static String[] MetaNames = {"", "Sand", "Gravel", "Clay", "Dirt"};
 	public IIcon[] icons = new IIcon[MetaNames.length];
 
-	private int useTimer = 0;
+	//private int useTimer = 0;
 	public ItemGoldPan() 
 	{
 		super();
@@ -89,7 +89,7 @@ public class ItemGoldPan extends ItemTerra
 		if(world.isRemote)
 			return is;
 
-		float distMod = 1.0F;
+		//float distMod = 1.0F;
 		MovingObjectPosition mop = getMovingObjectPositionFromPlayer(world, player, true);
 
 		if (mop == null)
@@ -117,7 +117,7 @@ public class ItemGoldPan extends ItemTerra
 
 					if(cd.sluicedAmount < 50)
 					{
-						if(world.getBlock(x, y, z) == TFCBlocks.Gravel || world.getBlock(x, y, z) == TFCBlocks.Gravel2)
+						if (blockHit == TFCBlocks.Gravel || blockHit == TFCBlocks.Gravel2)
 						{
 							is.setItemDamage((5 << 4) + 2);
 							if(world.rand.nextInt(10) == 0)
@@ -125,7 +125,7 @@ public class ItemGoldPan extends ItemTerra
 							TFC_Core.addPlayerExhaustion(player, 0.0005f);
 							cd.sluicedAmount++;
 						}
-						else if(world.getBlock(x, y, z) == TFCBlocks.Sand || world.getBlock(x, y, z) == TFCBlocks.Sand2)
+						else if (blockHit == TFCBlocks.Sand || blockHit == TFCBlocks.Sand2)
 						{
 							is.setItemDamage((5 << 4) + 1);
 							if(world.rand.nextInt(10) == 0)
@@ -133,7 +133,7 @@ public class ItemGoldPan extends ItemTerra
 							TFC_Core.addPlayerExhaustion(player, 0.0005f);
 							cd.sluicedAmount++;
 						}
-						else if(world.getBlock(x, y, z).getMaterial() == Material.water)
+						else if (blockHit.getMaterial() == Material.water)
 						{
 							/*if(world.getBlock(x, y-1, z) == Blocks.gravel)
 							{

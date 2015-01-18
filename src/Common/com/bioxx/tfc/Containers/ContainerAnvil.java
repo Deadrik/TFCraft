@@ -69,7 +69,7 @@ public class ContainerAnvil extends ContainerTFC
 		Slot slot = (Slot)inventorySlots.get(i);
 		Slot slothammer = (Slot)inventorySlots.get(0);
 		Slot[] slotinput = {(Slot)inventorySlots.get(1), (Slot)inventorySlots.get(2), (Slot)inventorySlots.get(3), (Slot)inventorySlots.get(5)};
-		Slot slotflux = (Slot)inventorySlots.get(6);
+		//Slot slotflux = (Slot)inventorySlots.get(6);
 
 		if(slot != null && slot.getHasStack())
 		{

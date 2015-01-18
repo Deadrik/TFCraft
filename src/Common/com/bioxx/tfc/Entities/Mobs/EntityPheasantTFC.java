@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIEatGrass;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,7 +19,7 @@ import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityPheasantTFC extends EntityChickenTFC
 {
-	private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
+	//private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
 	private boolean wasRoped = false;
 
 	public EntityPheasantTFC(World par1World)

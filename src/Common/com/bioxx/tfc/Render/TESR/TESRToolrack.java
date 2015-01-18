@@ -26,7 +26,7 @@ public class TESRToolrack extends TESRBase
 			EntityItem customitem = new EntityItem(field_147501_a.field_147550_f); //tileEntityRenderer.worldObj
 			customitem.hoverStart = 0f;
 			float blockScale = 1.0F;
-			float timeD = (float) (360.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
+			//float timeD = (float) (360.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 			for(int i = 0; i < 4; i++)
 			{
 				if (te.getStackInSlot(i) != null)

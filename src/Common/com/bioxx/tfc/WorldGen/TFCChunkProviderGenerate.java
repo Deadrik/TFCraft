@@ -244,9 +244,9 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		BlockCollapsable.fallInstantly = false;
 	}
 
-	public static List getCreatureSpawnsByChunk(World world, TFCBiome biome, int x, int z)
+	public static List<SpawnListEntry> getCreatureSpawnsByChunk(World world, TFCBiome biome, int x, int z)
 	{
-		List spawnableCreatureList = new ArrayList();
+		List<SpawnListEntry> spawnableCreatureList = new ArrayList<SpawnListEntry>();
 		spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 24, 0, 0));
 		float temp = TFC_Climate.getBioTemperatureHeight(world, x, world.getTopSolidOrLiquidBlock(x, z), z);
 		float rain = TFC_Climate.getRainfall(world, x, 150, z);
@@ -566,7 +566,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				DataLayer rock1 = rockLayer1[arrayIndexDL] == null ? DataLayer.Granite : rockLayer1[arrayIndexDL];
 				DataLayer rock2 = rockLayer2[arrayIndexDL] == null ? DataLayer.Granite : rockLayer2[arrayIndexDL];
 				DataLayer rock3 = rockLayer3[arrayIndexDL] == null ? DataLayer.Granite : rockLayer3[arrayIndexDL];
-				DataLayer evt = evtLayer[arrayIndexDL] == null ? DataLayer.EVT_0_125 : evtLayer[arrayIndexDL];
+				//DataLayer evt = evtLayer[arrayIndexDL] == null ? DataLayer.EVT_0_125 : evtLayer[arrayIndexDL];
 				float rain = rainfallLayer[arrayIndexDL] == null ? DataLayer.Rain_125.floatdata1 : rainfallLayer[arrayIndexDL].floatdata1;
 				DataLayer drainage = drainageLayer[arrayIndexDL] == null ? DataLayer.DrainageNormal : drainageLayer[arrayIndexDL];
 				int var12 = (int)(stoneNoise[arrayIndex2] / 3.0D + 6.0D);
@@ -761,10 +761,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		}*/
 	}
 
-	private int getIndex(int x, int z)
+	/*private int getIndex(int x, int z)
 	{
 		return x + z * 16;
-	}
+	}*/
 
 	private void replaceBlocksForBiomeLow(int par1, int par2, Random rand, Block[] idsBig, byte[] metaBig)
 	{
@@ -782,7 +782,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 				for (int height = 127; height >= 0; --height)
 				{
-					int index = ((arrayIndex) * 128 + height);
+					//int index = ((arrayIndex) * 128 + height);
 					int indexBig = ((arrayIndex) * 256 + height);
 					metaBig[indexBig] = 0;
 

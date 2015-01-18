@@ -100,9 +100,9 @@ public class TFCBiome extends BiomeGenBase
 		this.heightVariation = 0.3F;
 		temperatureTFC = 0.5F;
 		this.rainfall = 0.5F;
-		this.spawnableMonsterList = new ArrayList();
-		this.spawnableCreatureList = new ArrayList();
-		this.spawnableWaterCreatureList = new ArrayList();
+		this.spawnableMonsterList = new ArrayList<SpawnListEntry>();
+		this.spawnableCreatureList = new ArrayList<SpawnListEntry>();
+		this.spawnableWaterCreatureList = new ArrayList<SpawnListEntry>();
 
 		worldGenAcaciaKoaTrees = new WorldGenAcaciaKoaTrees(false,0);
 		worldGenAshTallTrees = new WorldGenCustomTallTrees(false,7);

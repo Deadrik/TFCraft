@@ -271,7 +271,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		int amnt;
-		int count;
+		//int count;
 
 		if (this.getSkeletonType() == 1)
 		{

@@ -20,10 +20,10 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class ContainerFoodPrep extends ContainerTFC
 {
-	private World world;
-	private int posX;
-	private int posY;
-	private int posZ;
+	//private World world;
+	//private int posX;
+	//private int posY;
+	//private int posZ;
 	private TEFoodPrep te;
 	private EntityPlayer player;
 	int guiTab = 0;
@@ -32,10 +32,10 @@ public class ContainerFoodPrep extends ContainerTFC
 	{
 		this.player = playerinv.player;
 		this.te = pile;
-		this.world = world;
-		this.posX = x;
-		this.posY = y;
-		this.posZ = z;
+		//this.world = world;
+		//this.posX = x;
+		//this.posY = y;
+		//this.posZ = z;
 		guiTab = tab;
 		pile.openInventory();
 		layoutContainer(playerinv, pile, 0, 0);

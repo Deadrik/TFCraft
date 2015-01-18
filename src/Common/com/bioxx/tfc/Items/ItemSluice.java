@@ -33,9 +33,9 @@ public class ItemSluice extends ItemTerra
 	{
 		if(!world.isRemote)
 		{
-			int xCoord = i;
-			int yCoord = j;
-			int zCoord = k;
+			//int xCoord = i;
+			//int yCoord = j;
+			//int zCoord = k;
 			int r = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
 			byte byte0 = 0;
 			byte byte1 = 0;

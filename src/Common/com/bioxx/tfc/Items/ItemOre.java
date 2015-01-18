@@ -63,7 +63,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 		if(GetMetalType(is) != null)
 		{

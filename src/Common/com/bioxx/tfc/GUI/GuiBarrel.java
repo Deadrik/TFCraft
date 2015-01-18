@@ -137,7 +137,7 @@ public class GuiBarrel extends GuiContainerTFC
 	@Override
 	public void drawTooltip(int mx, int my, String text)
 	{
-		List list = new ArrayList();
+		List<String> list = new ArrayList<String>();
 		list.add(text);
 		this.drawHoveringText(list, mx, my + 15, this.fontRendererObj);
 		RenderHelper.disableStandardItemLighting();
@@ -217,8 +217,6 @@ public class GuiBarrel extends GuiContainerTFC
 		{
 			if (this.visible)
 			{
-				int k = this.getHoverState(this.field_146123_n) - 1;
-
 				TFC_Core.bindTexture(GuiBarrel.texture);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				this.zLevel = 301f;
@@ -235,7 +233,6 @@ public class GuiBarrel extends GuiContainerTFC
 
 				if (field_146123_n)
 				{
-					FontRenderer fontrenderer = Minecraft.getMinecraft().fontRenderer;
 					screen.drawTooltip(x, y, this.displayString);
 					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				}
@@ -373,7 +370,7 @@ public class GuiBarrel extends GuiContainerTFC
 	{
 		if (guiTab == 0 && this.mouseInRegion(12, 15, 9, 50, mouseX, mouseY))
 		{
-			ArrayList list = new ArrayList();
+			ArrayList<String> list = new ArrayList<String>();
 			list.add(barrelTE.getFluidLevel() + "mB");
 			this.drawHoveringText(list, mouseX - guiLeft, mouseY - guiTop + 8, this.fontRendererObj);
 		}

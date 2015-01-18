@@ -43,7 +43,7 @@ public class ItemUnfinishedArmor extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 		if(is.getItemDamage() == 0)
 			arraylist.add(StatCollector.translateToLocal("gui.stage1"));

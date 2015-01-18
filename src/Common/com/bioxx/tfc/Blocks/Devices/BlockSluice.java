@@ -8,7 +8,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -56,11 +55,11 @@ public class BlockSluice extends BlockContainer
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
 		int meta = world.getBlockMetadata(i, j, k);
-		int xCoord = i;
-		int yCoord = j;
-		int zCoord = k;
+		//int xCoord = i;
+		//int yCoord = j;
+		//int zCoord = k;
 		//Minecraft mc = ModLoader.getMinecraftInstance();
-		TileEntity te = world.getTileEntity(i, j, k);
+		//TileEntity te = world.getTileEntity(i, j, k);
 
 		if(world.isRemote)
 			return true;

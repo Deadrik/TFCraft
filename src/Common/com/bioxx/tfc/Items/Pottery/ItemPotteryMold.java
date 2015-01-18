@@ -35,7 +35,7 @@ public class ItemPotteryMold extends ItemPotteryBase
 	}
 	
 	@Override
-	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addItemInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{		
 		if (is.getItemDamage() > 5)
 		{

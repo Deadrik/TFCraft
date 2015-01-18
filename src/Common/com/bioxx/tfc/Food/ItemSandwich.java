@@ -24,7 +24,7 @@ public class ItemSandwich extends ItemMeal
 	}
 
 	@Override
-	protected void addFGInformation(ItemStack is, List arraylist)
+	protected void addFGInformation(ItemStack is, List<String> arraylist)
 	{
 		if (is.hasTagCompound())
 		{

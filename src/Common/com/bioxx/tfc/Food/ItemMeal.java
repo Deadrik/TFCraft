@@ -34,7 +34,8 @@ import com.bioxx.tfc.api.Util.Helper;
 public class ItemMeal extends ItemTerra implements IFood
 {
 	PotionEffect foodEffect;
-	private boolean alwaysEdible = false;
+
+	//private boolean alwaysEdible = false;
 
 	public ItemMeal()
 	{
@@ -108,7 +109,7 @@ public class ItemMeal extends ItemTerra implements IFood
 		}
 	}
 
-	public void addFoodInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addFoodInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 		NBTTagCompound tag = is.getTagCompound();
 
@@ -133,7 +134,7 @@ public class ItemMeal extends ItemTerra implements IFood
 		}
 	}
 
-	protected void addFGInformation(ItemStack is, List arraylist)
+	protected void addFGInformation(ItemStack is, List<String> arraylist)
 	{
 		NBTTagCompound nbt = is.getTagCompound();
 		if (nbt.hasKey("FG"))
@@ -232,7 +233,7 @@ public class ItemMeal extends ItemTerra implements IFood
 		return is;
 	}
 
-	private float getMaxWeight(ItemStack is)
+	/*private float getMaxWeight(ItemStack is)
 	{
 		int[] fg = is.getTagCompound().getIntArray("FG");
 		float w = 0;
@@ -242,7 +243,7 @@ public class ItemMeal extends ItemTerra implements IFood
 				w += this.getFoodWeights()[i];
 		}
 		return w;
-	}
+	}*/
 
 	public static boolean isWarm(ItemStack is)
 	{

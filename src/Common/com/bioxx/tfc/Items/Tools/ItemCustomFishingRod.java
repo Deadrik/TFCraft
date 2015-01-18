@@ -2,8 +2,6 @@ package com.bioxx.tfc.Items.Tools;
 
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -113,6 +111,7 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 		return is;
 	}
 
+	@Override
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World p_77648_3_, int p_77648_4_, int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
 	{
 		if(player.fishEntity instanceof EntityFishHookTFC)
@@ -151,6 +150,7 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 	/**
 	 * How long it takes to use or consume an item
 	 */
+	@Override
 	public int getMaxItemUseDuration(ItemStack p_77626_1_)
 	{
 		return 72000;
@@ -241,6 +241,7 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 	/**
 	 * returns the action that specifies what animation to play when the items is being used
 	 */
+	@Override
 	public EnumAction getItemUseAction(ItemStack is)
 	{
 		if (is.stackTagCompound != null && is.stackTagCompound.hasKey("fishing") && is.stackTagCompound.getBoolean("fishing"))

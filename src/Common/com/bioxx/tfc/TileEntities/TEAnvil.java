@@ -47,13 +47,13 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 
 	public int[] stonePair;
 
-	private boolean isDone = false;
+	//private boolean isDone = false;
 	private byte workedRecently = 0;
 
 	//this is the fix the server receiving 3 packets whenever the player works an item.
 	private final byte LAG_FIX_DELAY = 5;
 	public AnvilRecipe workRecipe;
-	private AnvilRecipe workWeldRecipe;
+	//private AnvilRecipe workWeldRecipe;
 	public int AnvilTier;
 
 	public EntityPlayer lastWorker;
@@ -187,7 +187,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	{
 		AnvilManager manager = AnvilManager.getInstance();
 		Object[] plans = manager.getPlans().keySet().toArray();
-		Map<String, AnvilRecipe> planList = new HashMap();
+		Map<String, AnvilRecipe> planList = new HashMap<String, AnvilRecipe>();
 
 		for(Object p : plans)
 		{

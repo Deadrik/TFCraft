@@ -92,7 +92,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 						storage[0].getTagCompound().hasKey("foodWeight") &&
 						storage[0].getTagCompound().hasKey("foodDecay"))
 				{
-					float flourDecay = storage[0].getTagCompound().getFloat("foodDecay");
+					//float flourDecay = storage[0].getTagCompound().getFloat("foodDecay");
 					float slot0Weight = storage[0].getTagCompound().getFloat("foodWeight");
 					float slot1Weight = storage[1].getTagCompound().getFloat("foodWeight");
 					float newWeight = slot0Weight + slot1Weight;

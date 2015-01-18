@@ -46,7 +46,7 @@ public class BlockLogPile extends BlockTerraContainer
 	public boolean isFireSource(World world, int x, int y, int z, ForgeDirection side)
 	{
 		TELogPile te = (TELogPile) world.getTileEntity(x, y, z);
-		int time = (int) (TFC_Time.getTotalHours()-te.fireTimer);
+		//int time = (int) (TFC_Time.getTotalHours()-te.fireTimer);
 		if (te.isOnFire && side == UP)
 		{
 			return true;
@@ -65,8 +65,8 @@ public class BlockLogPile extends BlockTerraContainer
 		{
 			if((TELogPile)world.getTileEntity(i, j, k)!=null)
 			{
-				TELogPile te;
-				te = (TELogPile)world.getTileEntity(i, j, k);
+				//TELogPile te;
+				//te = (TELogPile)world.getTileEntity(i, j, k);
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
 				if(is != null && is.getItem() == TFCItems.Logs)
@@ -173,7 +173,7 @@ public class BlockLogPile extends BlockTerraContainer
 	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
 	{
 		Eject(world, x, y, z);
-		return super.removedByPlayer(world, player, x, y, z);
+		return super.removedByPlayer(world, player, x, y, z, true);
 	}
 
 	@Override
@@ -218,8 +218,8 @@ public class BlockLogPile extends BlockTerraContainer
 			double centerX = (double)((float)x + 0.5F);
 			double centerY = (double)((float)y + 2F);
 			double centerZ = (double)((float)z + 0.5F);
-			double d3 = 0.2199999988079071D;
-			double d4 = 0.27000001072883606D;
+			//double d3 = 0.2199999988079071D;
+			//double d4 = 0.27000001072883606D;
 			world.spawnParticle("smoke", centerX+(rand.nextDouble()-0.5), centerY, centerZ+(rand.nextDouble()-0.5), 0.0D, 0.1D, 0.0D);
 			world.spawnParticle("smoke", centerX+(rand.nextDouble()-0.5), centerY, centerZ+(rand.nextDouble()-0.5), 0.0D, 0.15D, 0.0D);
 			world.spawnParticle("smoke", centerX+(rand.nextDouble()-0.5), centerY-1, centerZ+(rand.nextDouble()-0.5), 0.0D, 0.1D, 0.0D);

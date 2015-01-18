@@ -11,7 +11,6 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -87,8 +86,8 @@ public class GuiCalendar extends GuiScreen
 
 		TFC_Core.bindTexture(texture);
 
-		int var4 = this.guiLeft;
-		int var5 = this.guiTop+6;
+		//int var4 = this.guiLeft;
+		//int var5 = this.guiTop+6;
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int l = (width - xSize) / 2;
@@ -118,7 +117,7 @@ public class GuiCalendar extends GuiScreen
 		}
         drawCenteredString(fontRendererObj, StatCollector.translateToLocal("gui.Calendar.Date") + " : " + dom + " " + TFC_Time.MONTHS[month] + ", " + year, l + 87, i1 + 46, 0x000000);
 
-		float temp = Math.round((TFC_Climate.getHeightAdjustedTemp(player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ)));
+		//float temp = Math.round((TFC_Climate.getHeightAdjustedTemp(player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ)));
 
 		//drawCenteredString(fontRenderer,"Temperature : " + (int)temp + "C", l + 87, i1+56, 0x000000);
 		//drawCenteredString(fontRenderer,"Month : " + , l + 87, i1+36, 0x000000);

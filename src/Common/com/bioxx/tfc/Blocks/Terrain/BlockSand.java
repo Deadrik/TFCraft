@@ -172,18 +172,18 @@ public class BlockSand extends BlockTerra
 		if(!world.isRemote && world.doChunksNearChunkExist(x, y, z, 1))
 		{
 			int meta = world.getBlockMetadata(x, y, z);
-			boolean PosXAir = false;
-			boolean NegXAir = false;
-			boolean PosZAir = false;
-			boolean NegZAir = false;
-			boolean PosXAir2 = false;
-			boolean NegXAir2 = false;
-			boolean PosZAir2 = false;
-			boolean NegZAir2 = false;
+			//boolean PosXAir = false;
+			//boolean NegXAir = false;
+			//boolean PosZAir = false;
+			//boolean NegZAir = false;
+			//boolean PosXAir2 = false;
+			//boolean NegXAir2 = false;
+			//boolean PosZAir2 = false;
+			//boolean NegZAir2 = false;
 
 			boolean isBelowAir = world.isAirBlock(x, y - 1, z);
 			byte count = 0;
-			List sides = new ArrayList<Integer>();
+			List<Integer> sides = new ArrayList<Integer>();
 
 			if(world.isAirBlock(x + 1, y, z))
 			{

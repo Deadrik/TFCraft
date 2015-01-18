@@ -28,7 +28,7 @@ public class EntityFishTFC extends EntitySquid
 	private float rotationVelocity;
 	private float field_70871_bB;
 
-	private float prevDirection = 0;
+	//private float prevDirection = 0;
 
 	private List<EntityPlayer> nearbyPlayers;
 
@@ -128,10 +128,10 @@ public class EntityFishTFC extends EntitySquid
 					pullY = temp.yCoord * 0.2;
 					pullZ = temp.zCoord * 0.2;
 				}
-				Vec3 pullVec = Vec3.createVectorHelper(pullX, pullY, pullZ);
+				//Vec3 pullVec = Vec3.createVectorHelper(pullX, pullY, pullZ);
 
 
-				double pullForce = pullVec.lengthVector();
+				//double pullForce = pullVec.lengthVector();
 
 				double randX, randY, randZ;
 				if(pullX != 0 && TFC_Core.isWater(worldObj.getBlock((int)(this.posX - (pullX / Math.abs(pullX))), (int)this.posY, (int)this.posZ))){

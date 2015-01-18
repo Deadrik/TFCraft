@@ -24,8 +24,8 @@ public class TEBloomery extends NetworkTileEntity
 {
 	public boolean isFlipped;
 	public boolean bloomeryLit;
-	private int prevStackSize;
-	private int numAirBlocks;
+	//private int prevStackSize;
+	//private int numAirBlocks;
 
 	private int validationCheck = 60;
 
@@ -39,7 +39,7 @@ public class TEBloomery extends NetworkTileEntity
 	{
 		isFlipped = false;
 		bloomeryLit = false;
-		numAirBlocks = 0;
+		//numAirBlocks = 0;
 		charcoalCount = 0;
 		oreCount = 0;
 		outCount = 0;

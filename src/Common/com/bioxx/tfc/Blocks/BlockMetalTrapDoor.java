@@ -37,8 +37,8 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 	public BlockMetalTrapDoor()
 	{
 		super(Material.iron);
-		float f = 0.5F;
-		float f1 = 1.0F;
+		//float f = 0.5F;
+		//float f1 = 1.0F;
 		this.setBlockBounds(0, 0, 0, 0.001f, 0.001f, 0.001f);
 		this.setCreativeTab(TFCTabs.TFCDevices);
 	}

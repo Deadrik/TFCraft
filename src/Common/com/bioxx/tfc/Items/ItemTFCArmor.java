@@ -38,7 +38,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	public Armor ArmorType;
 	public IIcon overlayIcon;
 	private int thermal = 0;
-	private int type = 0;
+	//private int type = 0;
 	private int trueType = 0;
 
 	public ItemTFCArmor(Armor armor, int renderIndex, int armorSlot, int thermal, int type)

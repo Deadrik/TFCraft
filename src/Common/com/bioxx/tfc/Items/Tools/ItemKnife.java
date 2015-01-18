@@ -73,7 +73,7 @@ public class ItemKnife extends ItemWeapon implements IKnife
 	}
 
 	@Override
-	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 		if (TFC_Core.showShiftInformation()) 
 		{

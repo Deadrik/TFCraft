@@ -20,7 +20,6 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Entities.EntityFallingBlockTFC;
 import com.bioxx.tfc.TileEntities.TEPartial;
-import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.TFCDirection;
@@ -246,9 +245,9 @@ public class BlockCollapsable extends BlockTerraContainer
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int meta)
 	{
-		float seismicModifier = 0.2f;
+		//float seismicModifier = 0.2f;
 		float softModifier = 0.1f;
-		TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(x, z);
+		//TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(x, z);
 		int finalCollapseRatio = TFCOptions.initialCollapseRatio > 0 ? TFCOptions.initialCollapseRatio : 10; //Set to default if invalid value is entered in config.
 
 		//Make sure that the player gets exhausted from harvesting this block since we override the vanilla method
@@ -294,7 +293,7 @@ public class BlockCollapsable extends BlockTerraContainer
 	 */
 	public void triggerCollapse(World world, EntityPlayer entityplayer, int i, int j, int k, int meta)
 	{
-		ArrayList<ByteCoord> collapseMap = getCollapseMap(world, i, j, k);
+		//ArrayList<ByteCoord> collapseMap = getCollapseMap(world, i, j, k);
 		int height = 4;
 		int range = 5 + world.rand.nextInt(31);
 		for(int y = -4; y <= 1; y++)

@@ -41,8 +41,8 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 	public ItemStack fireItemStacks[];
 	public ItemStack outputItemStacks[];
 
-	private int prevStackSize;
-	private int numAirBlocks;
+	//private int prevStackSize;
+	//private int numAirBlocks;
 
 	public String OreType;
 
@@ -71,7 +71,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 		fireItemStacks = new ItemStack[20];
 		outputItemStacks = new ItemStack[20];
 		storage = new ItemStack[2];
-		numAirBlocks = 0;
+		//numAirBlocks = 0;
 		airFromBellows = 0;
 		charcoalCount = 0;
 		oreCount = 0;

@@ -137,7 +137,7 @@ public class TFC_Core
 		ItemStack is = null;
 		if (random.nextInt(500) == 0)
 		{
-			ArrayList items = new ArrayList<ItemStack>();
+			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 			items.add(new ItemStack(TFCItems.GemAgate, 1, 0));
 			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 0));
 			items.add(new ItemStack(TFCItems.GemBeryl, 1, 0));
@@ -155,7 +155,7 @@ public class TFC_Core
 		}
 		else if (random.nextInt(1000) == 0)
 		{
-			ArrayList items = new ArrayList<ItemStack>();
+			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 			items.add(new ItemStack(TFCItems.GemAgate, 1, 1));
 			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 1));
 			items.add(new ItemStack(TFCItems.GemBeryl, 1, 1));
@@ -173,7 +173,7 @@ public class TFC_Core
 		}
 		else if (random.nextInt(2000) == 0)
 		{
-			ArrayList items = new ArrayList<ItemStack>();
+			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 			items.add(new ItemStack(TFCItems.GemAgate, 1, 2));
 			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 2));
 			items.add(new ItemStack(TFCItems.GemBeryl, 1, 2));
@@ -191,7 +191,7 @@ public class TFC_Core
 		}
 		else if (random.nextInt(4000) == 0)
 		{
-			ArrayList items = new ArrayList<ItemStack>();
+			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 			items.add(new ItemStack(TFCItems.GemAgate, 1, 3));
 			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 3));
 			items.add(new ItemStack(TFCItems.GemBeryl, 1, 3));
@@ -209,7 +209,7 @@ public class TFC_Core
 		}
 		else if (random.nextInt(8000) == 0)
 		{
-			ArrayList items = new ArrayList<ItemStack>();
+			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 			items.add(new ItemStack(TFCItems.GemAgate, 1, 4));
 			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 4));
 			items.add(new ItemStack(TFCItems.GemBeryl, 1, 4));
@@ -254,7 +254,6 @@ public class TFC_Core
 
 	public static void SetupWorld(World w, long seed)
 	{
-		World world = w;
 		try
 		{
 			// ReflectionHelper.setPrivateValue(WorldInfo.class,
@@ -1141,7 +1140,7 @@ public class TFC_Core
 			 * this before everything else so that its only done once per
 			 * inventory
 			 */
-			int day = TFC_Time.getDayOfYearFromDays(TFC_Time.getDayFromTotalHours(nbt.getInteger("decayTimer")));
+			//int day = TFC_Time.getDayOfYearFromDays(TFC_Time.getDayFromTotalHours(nbt.getInteger("decayTimer")));
 			//float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world,day,nbt.getInteger("decayTimer"), x, y, z);
 			float temp = getCachedTemp(world, x, y, z, nbt.getInteger("decayTimer"));
 			float environmentalDecay = getEnvironmentalDecay(temp) * environmentalDecayFactor;

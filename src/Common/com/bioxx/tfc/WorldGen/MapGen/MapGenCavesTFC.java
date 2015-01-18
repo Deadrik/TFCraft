@@ -185,7 +185,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 													metaArray[index] = 0;
 													if (isGrass && TFC_Core.isDirt(idArray[index - 1]))
 													{
-														int meta = metaArray[index - 1];
+														//int meta = metaArray[index - 1];
 														idArray[index - 1] = grassBlock;
 													}
 												}

@@ -2,14 +2,6 @@ package com.bioxx.tfc.Blocks.Devices;
 
 import java.util.Iterator;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.Metal.MetalPair;
-import com.bioxx.tfc.TileEntities.TECrucible;
-import com.bioxx.tfc.api.TFCBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,6 +15,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.Metal.MetalPair;
+import com.bioxx.tfc.TileEntities.TECrucible;
+import com.bioxx.tfc.api.TFCBlocks;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -42,8 +43,8 @@ public class BlockCrucible extends BlockTerraContainer
 	{
 		if(!world.isRemote && (TECrucible)world.getTileEntity(i, j, k) != null)
 		{
-			TECrucible te = (TECrucible)world.getTileEntity(i, j, k);
-			ItemStack is = entityplayer.getCurrentEquippedItem();
+			//TECrucible te = (TECrucible)world.getTileEntity(i, j, k);
+			//ItemStack is = entityplayer.getCurrentEquippedItem();
 
 			entityplayer.openGui(TerraFirmaCraft.instance, 37, world, i, j, k);
 		}

@@ -32,7 +32,7 @@ public class GenLayerVoronoiZoomTFC extends GenLayerTFC
 
 			for (int j3 = aint[l2 + 0 + (k2 + 1) * k1]; l2 < k1 - 1; ++l2)
 			{
-				double d0 = 3.6D;
+				//double d0 = 3.6D;
 				this.initChunkSeed(l2 + i1 << 2, k2 + j1 << 2);
 				double d1 = (this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D;
 				double d2 = (this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D;

@@ -74,8 +74,8 @@ public class EntityStand extends EntityLiving
 		for(int i = 0; i < defaultEquipableLength;i++){
 			this.dataWatcher.addObjectByDataType(start+i+defaultArmorLength,5);
 		}
-		this.dataWatcher.addObject(start + this.defaultEquipableLength + this.defaultArmorLength, new Float(1));
-		this.dataWatcher.addObject(start + this.defaultEquipableLength + this.defaultArmorLength + 1, new Integer(0));
+		this.dataWatcher.addObject(start + EntityStand.defaultEquipableLength + EntityStand.defaultArmorLength, new Float(1));
+		this.dataWatcher.addObject(start + EntityStand.defaultEquipableLength + EntityStand.defaultArmorLength + 1, new Integer(0));
 	}
 
 	@Override
@@ -107,8 +107,8 @@ public class EntityStand extends EntityLiving
 				for(int i = 0; i < defaultEquipableLength;i++){
 					equipable[i] = this.dataWatcher.getWatchableObjectItemStack(start+i+defaultArmorLength);
 				}
-				rotation = this.dataWatcher.getWatchableObjectFloat(start + this.defaultEquipableLength + this.defaultArmorLength);
-				woodType = this.dataWatcher.getWatchableObjectInt(start + this.defaultEquipableLength + this.defaultArmorLength + 1);
+				rotation = this.dataWatcher.getWatchableObjectFloat(start + EntityStand.defaultEquipableLength + EntityStand.defaultArmorLength);
+				woodType = this.dataWatcher.getWatchableObjectInt(start + EntityStand.defaultEquipableLength + EntityStand.defaultArmorLength + 1);
 			}
 			else
 			{
@@ -121,8 +121,8 @@ public class EntityStand extends EntityLiving
 					this.dataWatcher.updateObject(start+i+defaultArmorLength, equipable[i]);
 				}
 
-				this.dataWatcher.updateObject(start + this.defaultEquipableLength + this.defaultArmorLength, rotation);
-				this.dataWatcher.updateObject(start + this.defaultEquipableLength + this.defaultArmorLength + 1, woodType);
+				this.dataWatcher.updateObject(start + EntityStand.defaultEquipableLength + EntityStand.defaultArmorLength, rotation);
+				this.dataWatcher.updateObject(start + EntityStand.defaultEquipableLength + EntityStand.defaultArmorLength + 1, woodType);
 			}
 		}
 	}
@@ -285,7 +285,7 @@ public class EntityStand extends EntityLiving
 		{
 			nbttaglist = nbttagcompound.getTagList("Armor",10);
 
-			for (i = 0; i < this.defaultArmorLength; ++i)
+			for (i = 0; i < EntityStand.defaultArmorLength; ++i)
 			{
 				this.armor[i] = ItemStack.loadItemStackFromNBT(nbttaglist.getCompoundTagAt(i));
 			}
@@ -320,7 +320,7 @@ public class EntityStand extends EntityLiving
 		NBTTagList nbttaglist = new NBTTagList();
 		NBTTagCompound nbttagcompound1;
 
-		for (int i = 0; i < this.defaultArmorLength; ++i)
+		for (int i = 0; i < EntityStand.defaultArmorLength; ++i)
 		{
 			nbttagcompound1 = new NBTTagCompound();
 

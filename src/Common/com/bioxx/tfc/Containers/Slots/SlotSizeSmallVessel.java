@@ -19,7 +19,7 @@ import com.bioxx.tfc.api.Interfaces.ISize;
 public class SlotSizeSmallVessel extends Slot
 {
 	EnumSize size = EnumSize.SMALL;
-	List exceptions;
+	List<Item> exceptions;
 
 	public SlotSizeSmallVessel(IInventory iinventory, int i, int j, int k)
 	{

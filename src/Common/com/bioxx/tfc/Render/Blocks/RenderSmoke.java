@@ -17,7 +17,7 @@ public class RenderSmoke  implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
-		IBlockAccess blockAccess = renderer.blockAccess;
+		//IBlockAccess blockAccess = renderer.blockAccess;
 		renderer.enableAO = false;
 		Tessellator tessellator = Tessellator.instance;
 		boolean flag = false;
@@ -95,7 +95,7 @@ public class RenderSmoke  implements ISimpleBlockRenderingHandler
 			renderer.renderFaceXPos(block, (double)x, (double)y, (double)z, iicon);
 			flag = true;
 		}
-		return true;
+		return flag;
 	}
 
 	@Override

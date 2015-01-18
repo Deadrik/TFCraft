@@ -130,7 +130,7 @@ public class WorldGenKapokTrees extends WorldGenerator
 		{
 			this.generateLeafNodeList();
 			this.generateBranchPoints();
-			this.generateLeaves();
+			//this.generateLeaves();
 			this.generateTrunk();
 			this.generateLeafNodeBases();
 			return true;
@@ -185,7 +185,7 @@ public class WorldGenKapokTrees extends WorldGenerator
 		for (int[] var3 = new int[] {this.basePos[0], this.basePos[1], this.basePos[2]}; var1 < var2; ++var1)
 		{
 			int[] var4 = this.leafNodes[var1];
-			int[] var5 = new int[] {var4[0], var4[1], var4[2]};
+			//int[] var5 = new int[] {var4[0], var4[1], var4[2]};
 			var3[1] = var4[3];
 			int var6 = var3[1] - this.basePos[1];
 			if (this.leafNodeNeedsBase(var6))
@@ -273,7 +273,7 @@ public class WorldGenKapokTrees extends WorldGenerator
 	/**
 	 * Generates the leaf portion of the tree as specified by the leafNodes list.
 	 */
-	void generateLeaves()
+	/*void generateLeaves()
 	{
 		int var1 = 0;
 
@@ -291,7 +291,7 @@ public class WorldGenKapokTrees extends WorldGenerator
 			int[] node = {this.leafNodes[var1][0],this.leafNodes[var1][1]+2,this.leafNodes[var1][2]};
 			//this.placeBlockLine(trunkBottom, node, TFCBlocks.LogNatural2);
 		}
-	}
+	}*/
 
 	/**
 	 * Places the trunk for the big tree that is being generated. Able to generate double-sized trunks by changing a

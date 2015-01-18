@@ -1,21 +1,20 @@
 package com.bioxx.tfc.Entities.Mobs;
 
-import com.bioxx.tfc.Core.TFC_MobData;
-
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Core.TFC_MobData;
+
 public class EntityPigZombieTFC extends EntityZombieTFC
 {
 	/** Above zero if this PigZombie is Angry. */
-	private int angerLevel = 0;
+	//private int angerLevel = 0;
 
 	/** A random delay until this PigZombie next makes a sound. */
-	private int randomSoundDelay = 0;
+	//private int randomSoundDelay = 0;
 
 	public EntityPigZombieTFC(World par1World)
 	{
@@ -25,12 +24,12 @@ public class EntityPigZombieTFC extends EntityZombieTFC
 	/**
 	 * Causes this PigZombie to become angry at the supplied Entity (which will be a player).
 	 */
-	private void becomeAngryAt(Entity par1Entity)
+	/*private void becomeAngryAt(Entity par1Entity)
 	{
 		this.entityToAttack = par1Entity;
 		this.angerLevel = 400 + this.rand.nextInt(400);
 		this.randomSoundDelay = this.rand.nextInt(40);
-	}
+	}*/
 
 	/**
 	 * Drop 0-2 items of this living's type

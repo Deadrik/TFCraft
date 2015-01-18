@@ -22,7 +22,6 @@ import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.WorldGen.WorldCacheManager;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowCrops;
-import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -177,7 +176,7 @@ public class ChunkEventHandler
 		ChunkPosition chunkCoord = null;
 		int xOffset = 0;
 		int xCoord = 0;
-		int yCoord = Global.SEALEVEL+1;
+		//int yCoord = Global.SEALEVEL+1;
 		int zCoord = 10000;
 		int startingZ = 5000 + rand.nextInt(10000);
 

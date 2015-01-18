@@ -59,7 +59,7 @@ public class ContainerChestTFC extends ContainerTFC
 	}
 
 	public static ArrayList<Item> getExceptions(){
-		ArrayList exceptions = new ArrayList<Item>();
+		ArrayList<Item> exceptions = new ArrayList<Item>();
 		exceptions.add(TFCItems.Logs);
 		exceptions.add(TFCItems.BismuthIngot);
 		exceptions.add(TFCItems.BismuthBronzeIngot);

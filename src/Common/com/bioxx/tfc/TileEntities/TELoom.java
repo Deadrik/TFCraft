@@ -29,7 +29,7 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	public int loomType;
 	public ItemStack[] storage;
 
-	private int numStrings;
+	//private int numStrings;
 	private boolean weaving;
 	private boolean finished;
 

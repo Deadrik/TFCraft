@@ -42,9 +42,9 @@ public class TESRWorldItem extends TESRBase
 				float maxU = te.storage[0].getIconIndex().getMaxU();
 				float minV = te.storage[0].getIconIndex().getMinV();
 				float maxV = te.storage[0].getIconIndex().getMaxV();
-				float f6 = 1.0F;
-				float f7 = 0.5F;
-				float f8 = 0.25F;
+				//float f6 = 1.0F;
+				//float f7 = 0.5F;
+				//float f8 = 0.25F;
 
 				if (te.storage[0].getItemSpriteNumber() == 0)
 				{

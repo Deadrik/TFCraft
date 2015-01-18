@@ -112,9 +112,9 @@ public class GuiPlanSelection extends GuiContainerTFC
 	AnvilRecipe handleMatchingRecipe(AnvilRecipe ar)
 	{
 		if (ar != null)
-			if (anvilTE.anvilItemStacks[anvilTE.INPUT1_SLOT] != null && anvilTE.anvilItemStacks[anvilTE.INPUT1_SLOT].getItem() == TFCItems.Bloom && ar.getCraftingResult().getItem() == TFCItems.Bloom)
+			if (anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT] != null && anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT].getItem() == TFCItems.Bloom && ar.getCraftingResult().getItem() == TFCItems.Bloom)
 			{
-				if (anvilTE.anvilItemStacks[anvilTE.INPUT1_SLOT].getItemDamage() <= 100)
+				if (anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT].getItemDamage() <= 100)
 					return null;
 			}
 		return ar;
@@ -123,7 +123,7 @@ public class GuiPlanSelection extends GuiContainerTFC
 	@Override
 	public void drawTooltip(int mx, int my, String text)
 	{
-		List list = new ArrayList();
+		List<String> list = new ArrayList<String>();
 		list.add(text);
 		this.drawHoveringTextZLevel(list, mx, my + 15, this.fontRendererObj, 400);
 		RenderHelper.disableStandardItemLighting();

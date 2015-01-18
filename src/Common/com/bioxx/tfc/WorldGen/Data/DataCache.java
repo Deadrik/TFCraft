@@ -19,7 +19,7 @@ public class DataCache
 	/** The map of keys to BiomeCacheBlocks. Keys are based on the chunk x, z coordinates as (x | z << 32). */
 	private LongHashMap cacheMap = new LongHashMap();
 	/** The list of cached BiomeCacheBlocks */
-	private List cache = new ArrayList();
+	private List<DataCacheBlockTFC> cache = new ArrayList<DataCacheBlockTFC>();
 	private int index;
 
 	public DataCache(WorldCacheManager worldLayerManager)

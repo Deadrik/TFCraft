@@ -34,7 +34,7 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 		arraylist.add(is.getItemDamage() + "%");
 	}

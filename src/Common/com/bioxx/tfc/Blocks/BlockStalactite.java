@@ -49,7 +49,7 @@ public class BlockStalactite extends BlockTerra
 	{
 		boolean isStalac = isStalactite(access.getBlockMetadata(i, j, k));
 		boolean isStalag = isStalagmite(access.getBlockMetadata(i, j, k));
-		int style = access.getBlockMetadata(i, j, k) & 7;
+		//int style = access.getBlockMetadata(i, j, k) & 7;
 		float f = 0.125F;
 		R = new Random(i + (i * k));
 		if(isStalac)
@@ -79,7 +79,7 @@ public class BlockStalactite extends BlockTerra
 	{
 		boolean isStalac = isStalactite(world.getBlockMetadata(i, j, k));
 		boolean isStalag = isStalagmite(world.getBlockMetadata(i, j, k));
-		int style = world.getBlockMetadata(i, j, k) & 7;
+		//int style = world.getBlockMetadata(i, j, k) & 7;
 		float f = 0.125F;
 		R = new Random(i + (i * k));
 		if(isStalac)
