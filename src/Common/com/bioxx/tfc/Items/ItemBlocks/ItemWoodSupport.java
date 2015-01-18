@@ -102,7 +102,7 @@ public class ItemWoodSupport extends ItemTerraBlock
 					}
 				}
 			}
-			if(itemstack.stackSize >= dist)
+			if (itemstack.stackSize >= dist - 1)
 				for(int j = dist-1; j >= 1 && shouldGen; j--)
 				{
 					if(world.getBlock(x, y-j, z).isReplaceable(world, x, y-j, z))
