@@ -533,10 +533,9 @@ public class TFC_Core
 
 	public static boolean isGround(Block block)
 	{
-		return 	   isSoil(block)
+		return 	   isSoilOrGravel(block)
 				|| isRawStone(block)
-				|| isSand(block) 
-				|| isGravel(block);
+				|| isSand(block);
 	}
 
 	public static int getSoilMetaFromStone(Block inBlock, int inMeta)
@@ -1260,18 +1259,14 @@ public class TFC_Core
 		if(Blocks.fire.getFlammability(block) > 0 && block != TFCBlocks.LogPile) return false;
 
 		return block == TFCBlocks.LogPile
-				|| isRawStone(block)
 				|| isCobbleStone(block)
 				|| isBrickStone(block)
 				|| isSmoothStone(block)
-				|| isDirt(block)
-				|| isSand(block)
-				|| isGrassType1(block)
-				|| isGrassType2(block)
-				|| isGravel(block)
+				|| isGround(block)
 				|| block == Blocks.glass
 				|| block == Blocks.stained_glass
-				|| block == TFCBlocks.MetalTrapDoor;
+				|| block == TFCBlocks.MetalTrapDoor
+				|| block.isOpaqueCube();
 	}
 
 	public static void writeInventoryToNBT(NBTTagCompound nbt, ItemStack[] storage)
