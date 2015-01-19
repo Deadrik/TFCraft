@@ -121,7 +121,7 @@ public class BlockCharcoal extends BlockTerra
 	{
 		if(world.getBlockMetadata(x, y, z) > 0)
 			return false;
-		return world.setBlockToAir(x, y, z);
+		return world.setBlockToAir(x, y, z); // super.removedByPlayer is deprecated, and causes a loop.
 	}
 
 	public void combineCharcoalDown(World world, int x, int y, int z)

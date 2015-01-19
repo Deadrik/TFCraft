@@ -178,7 +178,7 @@ public class BlockToolRack extends BlockTerraContainer
 				dropBlockAsItem(world, x, y, z, new ItemStack(TFCBlocks.ToolRack, 1, rack.woodType));
 			}
 		}
-		return world.setBlockToAir(x, y, z);
+		return world.setBlockToAir(x, y, z); // super.removedByPlayer is deprecated, and causes a loop.
 	}
 
 	@Override

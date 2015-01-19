@@ -173,7 +173,7 @@ public class BlockLogPile extends BlockTerraContainer
 	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
 	{
 		Eject(world, x, y, z);
-		return super.removedByPlayer(world, player, x, y, z, true);
+		return world.setBlockToAir(x, y, z); // super.removedByPlayer is deprecated, and causes a loop.
 	}
 
 	@Override
