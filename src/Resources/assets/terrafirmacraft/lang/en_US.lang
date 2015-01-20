@@ -2474,6 +2474,9 @@ gui.useless=Useless
 gui.growth=Growth
 gui.mature=Mature
 gui.metal.Iron=Iron
+gui.tier=Tier
+gui.temperature=Temperature
+gui.melting=Melting
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Must use under flowing water.
