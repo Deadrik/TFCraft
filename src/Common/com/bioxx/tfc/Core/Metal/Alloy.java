@@ -77,8 +77,12 @@ public class Alloy
 			{
 				if(alloyMix.metalType == this.outputType)
 				{
-					isAlloyInMix = true;
 					alloyPercentage = alloyMix.metal;
+					//Alloy detected, if >= 100% don't trick -> Unknown alloy
+					if(alloyPercentage < 100f)
+					{
+						isAlloyInMix = true;
+					} 
 					break;
 				}
 			}
