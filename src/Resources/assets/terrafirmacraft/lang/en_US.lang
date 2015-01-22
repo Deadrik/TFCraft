@@ -2325,6 +2325,7 @@ gui.MeltedMetal.Inst0=§bRight Click §7to pour or combine.
 gui.PotteryBase.Inst0=Sneak and §bRight Click §7to place object.
 gui.PotteryVesselSmall.Inst0=Or §bRight Click §7to open inventory.
 gui.RawHide.Inst0=????
+gui.Chisel.Inst0=Requires a hammer on the hotbar.
 gui.Barrel.MoreItems=§8More... (Hold §fShift§8)
 
 gui.Nutrient.A=Nutrient A

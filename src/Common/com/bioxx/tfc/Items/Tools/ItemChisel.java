@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Items.Tools;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -7,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Blocks.BlockSlab;
@@ -39,6 +41,20 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 	public EnumSize getSize(ItemStack is)
 	{
 		return EnumSize.VERYSMALL;
+	}
+
+	@Override
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
+	{
+		if (TFC_Core.showShiftInformation())
+		{
+			arraylist.add(StatCollector.translateToLocal("gui.Help"));
+			arraylist.add(StatCollector.translateToLocal("gui.Chisel.Inst0"));
+		}
+		else
+		{
+			arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
+		}
 	}
 
 	public static void CreateSmooth(World world, int x, int y, int z, Block id, int meta)
