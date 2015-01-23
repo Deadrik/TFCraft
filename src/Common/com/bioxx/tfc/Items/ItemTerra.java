@@ -191,7 +191,8 @@ public class ItemTerra extends Item implements ISize
 		if(	is.getItem() instanceof ItemIngot ||
 				is.getItem() instanceof ItemMetalSheet ||
 				is.getItem() instanceof ItemUnfinishedArmor ||
-				is.getItem() instanceof ItemBloom)
+				is.getItem() instanceof ItemBloom ||
+				is.getItem() == TFCItems.WroughtIronKnifeHead)
 		{
 			if(TFC_ItemHeat.HasTemp(is))
 			{

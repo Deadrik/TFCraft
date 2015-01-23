@@ -649,6 +649,9 @@ public class Recipes
 			RemoveRecipe(new ItemStack(Items.dye, 2, 1));
 		}
 
+		if (TFCCrafting.shearsRecipe == false)
+			RemoveRecipe(new ItemStack(Items.shears));
+
 		if (TFCCrafting.signRecipe == false)
 			RemoveRecipe(new ItemStack(Items.sign, 3));
 
@@ -839,8 +842,6 @@ public class Recipes
 	private static void RegisterToolRecipes()
 	{
 		//Misc Tools
-		//GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.shears, 1), new Object[] { "P ", " P", Character.valueOf('P'), "ingotIron" }));
-
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.FlintSteel, 1), new Object[] { Items.flint, "ingotIron" }));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.FlintSteel, 1), new Object[] { Items.flint, "ingotSteel" }));
 
