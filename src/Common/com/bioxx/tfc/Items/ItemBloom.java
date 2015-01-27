@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
@@ -36,7 +37,7 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
-		arraylist.add(is.getItemDamage() + "%");
+		arraylist.add(TFC_Core.translate("gui.units") + ": " + is.getItemDamage());
 	}
 
 	@Override

@@ -2477,7 +2477,7 @@ gui.mature=Mature
 gui.metal.Iron=Iron
 gui.tier=Tier
 gui.temperature=Temperature
-gui.melting=Melting
+gui.progress=Progress
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Must use under flowing water.

@@ -1,4 +1,4 @@
-package com.bioxx.tfc.GUI.WAILA;
+package com.bioxx.tfc.WAILA;
 
 import java.util.List;
 
@@ -11,10 +11,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.TileEntities.TEBarrel;
@@ -28,7 +28,7 @@ import com.bioxx.tfc.api.Crafting.BarrelRecipe;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
-public class TFCBarrel implements IWailaDataProvider
+public class WBarrel implements IWailaDataProvider
 {
 	@Override
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
@@ -90,7 +90,7 @@ public class TFCBarrel implements IWailaDataProvider
 			// Sealed Date
 			if (sealed && sealTime != 0)
 			{
-				currenttip.add(StatCollector.translateToLocal("gui.Barrel.SealedOn") + " : " + TFC_Time.getDateStringFromHours(sealTime));
+				currenttip.add(TFC_Core.translate("gui.Barrel.SealedOn") + " : " + TFC_Time.getDateStringFromHours(sealTime));
 			}
 
 			// Output
@@ -98,7 +98,7 @@ public class TFCBarrel implements IWailaDataProvider
 			{
 				if (!(recipe instanceof BarrelBriningRecipe))
 				{
-					currenttip.add(StatCollector.translateToLocal("gui.Output") + " : " + recipe.getRecipeName());
+					currenttip.add(TFC_Core.translate("gui.Output") + " : " + recipe.getRecipeName());
 				}
 				else if (sealed && fluid != null && fluid.getFluid() == TFCFluids.BRINE)
 				{
@@ -106,7 +106,7 @@ public class TFCBarrel implements IWailaDataProvider
 							((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein ||
 							((IFood) inStack.getItem()) == TFCItems.Cheese) && !Food.isBrined(inStack))
 					{
-						currenttip.add(StatCollector.translateToLocal("gui.barrel.brining"));
+						currenttip.add(TFC_Core.translate("gui.barrel.brining"));
 					}
 				}
 			}
@@ -119,12 +119,12 @@ public class TFCBarrel implements IWailaDataProvider
 							((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein || ((IFood) inStack.getItem()) == TFCItems.Cheese) &&
 							Food.isBrined(inStack))
 					{
-						currenttip.add(StatCollector.translateToLocal("gui.barrel.pickling"));
+						currenttip.add(TFC_Core.translate("gui.barrel.pickling"));
 					}
 				}
 				else if (Food.isPickled(inStack) && Food.getWeight(inStack) / fluid.amount <= Global.FOOD_MAX_WEIGHT / te.getMaxLiquid() * 2)
 				{
-					currenttip.add(StatCollector.translateToLocal("gui.barrel.preserving"));
+					currenttip.add(TFC_Core.translate("gui.barrel.preserving"));
 				}
 			}
 		}
@@ -146,8 +146,8 @@ public class TFCBarrel implements IWailaDataProvider
 
 	public static void callbackRegister(IWailaRegistrar reg)
 	{
-		reg.registerHeadProvider(new TFCBarrel(), TEBarrel.class);
-		reg.registerBodyProvider(new TFCBarrel(), TEBarrel.class);
-		reg.registerNBTProvider(new TFCBarrel(), TEBarrel.class);
+		reg.registerHeadProvider(new WBarrel(), TEBarrel.class);
+		reg.registerBodyProvider(new WBarrel(), TEBarrel.class);
+		reg.registerNBTProvider(new WBarrel(), TEBarrel.class);
 	}
 }

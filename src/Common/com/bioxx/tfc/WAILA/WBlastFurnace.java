@@ -1,4 +1,4 @@
-package com.bioxx.tfc.GUI.WAILA;
+package com.bioxx.tfc.WAILA;
 
 import java.util.List;
 
@@ -12,15 +12,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TEBlastFurnace;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 
-public class TFCBlastFurnace implements IWailaDataProvider
+public class WBlastFurnace implements IWailaDataProvider
 {
 	@Override
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
@@ -67,17 +67,17 @@ public class TFCBlastFurnace implements IWailaDataProvider
 			}
 			String temp = TFC_ItemHeat.getHeatColor(temperature, te.maxFireTempScale);
 
-			currenttip.add(translate("gui.Bloomery.Charcoal") + " : " + charcoalCount + "/" + stackSize * 4);
-			currenttip.add(translate("gui.Bloomery.Ore") + " : " + oreCount + "/" + stackSize * 4);
+			currenttip.add(TFC_Core.translate("gui.Bloomery.Charcoal") + " : " + charcoalCount + "/" + stackSize * 4);
+			currenttip.add(TFC_Core.translate("gui.Bloomery.Ore") + " : " + oreCount + "/" + stackSize * 4);
 
 			if (te.storage[1] != null)
-				currenttip.add(translate("gui.plans.tuyere") + EnumChatFormatting.GREEN.toString() + " \u2714");
+				currenttip.add(TFC_Core.translate("gui.plans.tuyere") + EnumChatFormatting.GREEN.toString() + " \u2714");
 			else
-				currenttip.add(translate("gui.plans.tuyere") + EnumChatFormatting.RED.toString() + " \u2718");
+				currenttip.add(TFC_Core.translate("gui.plans.tuyere") + EnumChatFormatting.RED.toString() + " \u2718");
 
 			if (temperature > 0)
 			{
-				currenttip.add(translate("gui.temperature") + " : ");
+				currenttip.add(TFC_Core.translate("gui.temperature") + " : ");
 				currenttip.add(temp);
 			}
 		}
@@ -100,13 +100,7 @@ public class TFCBlastFurnace implements IWailaDataProvider
 
 	public static void callbackRegister(IWailaRegistrar reg)
 	{
-		reg.registerBodyProvider(new TFCBlastFurnace(), TEBlastFurnace.class);
-		reg.registerNBTProvider(new TFCBlastFurnace(), TEBlastFurnace.class);
-	}
-
-	// Ease of Use
-	private String translate(String input)
-	{
-		return StatCollector.translateToLocal(input);
+		reg.registerBodyProvider(new WBlastFurnace(), TEBlastFurnace.class);
+		reg.registerNBTProvider(new WBlastFurnace(), TEBlastFurnace.class);
 	}
 }

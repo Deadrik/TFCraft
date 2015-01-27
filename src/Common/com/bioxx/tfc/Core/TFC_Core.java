@@ -23,6 +23,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -1368,5 +1369,10 @@ public class TFC_Core
 	public static boolean isWaterBiome(BiomeGenBase b)
 	{
 		return TFC_Core.isBeachBiome(b.biomeID) || TFC_Core.isOceanicBiome(b.biomeID) || b == TFCBiome.lake || b == TFCBiome.river;
+	}
+
+	public static String translate(String s)
+	{
+		return StatCollector.translateToLocal(s);
 	}
 }

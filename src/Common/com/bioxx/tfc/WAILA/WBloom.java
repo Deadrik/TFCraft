@@ -1,4 +1,4 @@
-package com.bioxx.tfc.GUI.WAILA;
+package com.bioxx.tfc.WAILA;
 
 import java.util.List;
 
@@ -10,17 +10,18 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TileEntities.TEAnvil;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.TileEntities.TileEntityBloom;
+import com.bioxx.tfc.api.TFCItems;
 
-public class TFCAnvil implements IWailaDataProvider
+public class WBloom implements IWailaDataProvider
 {
 	@Override
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
-		return null;
+		return new ItemStack(TFCItems.RawBloom);
 	}
 
 	@Override
@@ -32,13 +33,10 @@ public class TFCAnvil implements IWailaDataProvider
 	@Override
 	public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
-		if (accessor.getTileEntity() instanceof TEAnvil)
-		{
-			TEAnvil te = (TEAnvil) accessor.getTileEntity();
-			int tier = te.AnvilTier;
-
-			currenttip.add(StatCollector.translateToLocal("gui.tier") + " : " + tier);
-		}
+		NBTTagCompound tag = accessor.getNBTData();
+		int size =  tag.getInteger("size");
+		
+		currenttip.add(TFC_Core.translate("gui.units") + " : " + size);
 		return currenttip;
 	}
 
@@ -51,11 +49,15 @@ public class TFCAnvil implements IWailaDataProvider
 	@Override
 	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x, int y, int z)
 	{
+		if (te != null)
+			te.writeToNBT(tag);
 		return tag;
 	}
 
 	public static void callbackRegister(IWailaRegistrar reg)
 	{
-		reg.registerBodyProvider(new TFCAnvil(), TEAnvil.class);
+		reg.registerStackProvider(new WBloom(), TileEntityBloom.class);
+		reg.registerBodyProvider(new WBloom(), TileEntityBloom.class);
+		reg.registerNBTProvider(new WBloom(), TileEntityBloom.class);
 	}
 }

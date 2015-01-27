@@ -1,4 +1,4 @@
-package com.bioxx.tfc.GUI.WAILA;
+package com.bioxx.tfc.WAILA;
 
 import java.util.List;
 
@@ -10,16 +10,16 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TEOre;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 
-public class TFCOre implements IWailaDataProvider
+public class WOre implements IWailaDataProvider
 {
 	@Override
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
@@ -66,22 +66,22 @@ public class TFCOre implements IWailaDataProvider
 		{
 			if (meta == 14)
 			{
-				currenttip.set(0, StatCollector.translateToLocal("item.Ore.Bituminous Coal.name"));
+				currenttip.set(0, TFC_Core.translate("item.Ore.Bituminous Coal.name"));
 			}
 			else if (meta == 15)
 			{
-				currenttip.set(0, StatCollector.translateToLocal("item.Ore.Lignite.name"));
+				currenttip.set(0, TFC_Core.translate("item.Ore.Lignite.name"));
 			}
 		}
 		else if (accessor.getBlock() == TFCBlocks.Ore2)
 		{
 			if (meta == 5)
 			{
-				currenttip.set(0, StatCollector.translateToLocal("item.Ore.Kimberlite.name"));
+				currenttip.set(0, TFC_Core.translate("item.Ore.Kimberlite.name"));
 			}
 			else if (meta == 13)
 			{
-				currenttip.set(0, StatCollector.translateToLocal("item.Ore.Saltpeter.name"));
+				currenttip.set(0, TFC_Core.translate("item.Ore.Saltpeter.name"));
 			}
 		}
 
@@ -102,40 +102,40 @@ public class TFCOre implements IWailaDataProvider
 				case 0:
 				case 9:
 				case 13:
-					currenttip.add(StatCollector.translateToLocal("gui.metal.Copper"));
+					currenttip.add(TFC_Core.translate("gui.metal.Copper"));
 					break;
 				case 1:
-					currenttip.add(StatCollector.translateToLocal("gui.metal.Gold"));
+					currenttip.add(TFC_Core.translate("gui.metal.Gold"));
 					break;
 				case 2:
-					currenttip.add(StatCollector.translateToLocal("gui.metal.Platinum") + " - " + StatCollector.translateToLocal("gui.useless"));
+					currenttip.add(TFC_Core.translate("gui.metal.Platinum") + " - " + TFC_Core.translate("gui.useless"));
 					break;
 				case 3:
 				case 10:
 				case 11:
-					currenttip.add(StatCollector.translateToLocal("gui.metal.Iron"));
+					currenttip.add(TFC_Core.translate("gui.metal.Iron"));
 					break;
 				case 4:
-					currenttip.add(StatCollector.translateToLocal("gui.metal.Silver"));
+					currenttip.add(TFC_Core.translate("gui.metal.Silver"));
 					break;
 				case 5:
-					currenttip.add(StatCollector.translateToLocal("gui.metal.Tin"));
+					currenttip.add(TFC_Core.translate("gui.metal.Tin"));
 					break;
 				case 6:
-					currenttip.add(StatCollector.translateToLocal("gui.metal.Lead") + " - " + StatCollector.translateToLocal("gui.useless"));
+					currenttip.add(TFC_Core.translate("gui.metal.Lead") + " - " + TFC_Core.translate("gui.useless"));
 					break;
 				case 7:
-					currenttip.add(StatCollector.translateToLocal("gui.metal.Bismuth"));
+					currenttip.add(TFC_Core.translate("gui.metal.Bismuth"));
 					break;
 				case 8:
-					currenttip.add(StatCollector.translateToLocal("gui.metal.Nickel"));
+					currenttip.add(TFC_Core.translate("gui.metal.Nickel"));
 					break;
 				case 12:
-					currenttip.add(StatCollector.translateToLocal("gui.metal.Zinc"));
+					currenttip.add(TFC_Core.translate("gui.metal.Zinc"));
 					break;
 				case 14:
 				case 15:
-					currenttip.add(StatCollector.translateToLocal("item.coal.coal.name"));
+					currenttip.add(TFC_Core.translate("item.coal.coal.name"));
 					return currenttip;
 				}
 
@@ -145,7 +145,7 @@ public class TFCOre implements IWailaDataProvider
 
 				int units = ore < 14 ? TFCOptions.normalOreUnits : ore < 49 ? TFCOptions.richOreUnits : ore < 63 ? TFCOptions.poorOreUnits : 0;
 				if (units > 0)
-					currenttip.add(StatCollector.translateToLocal("gui.units") + " : " + units);
+					currenttip.add(TFC_Core.translate("gui.units") + " : " + units);
 			}
 			else if (accessor.getBlock() == TFCBlocks.Ore2)
 			{
@@ -159,17 +159,17 @@ public class TFCOre implements IWailaDataProvider
 				case 9:
 				case 10:
 				case 14:
-					currenttip.add(StatCollector.translateToLocal("gui.useless"));
+					currenttip.add(TFC_Core.translate("gui.useless"));
 					break;
 				case 5:
-					currenttip.add(StatCollector.translateToLocal("item.Diamond.Normal.name"));
+					currenttip.add(TFC_Core.translate("item.Diamond.Normal.name"));
 					break;
 				case 11:
 				case 12:
-					currenttip.add(StatCollector.translateToLocal("item.redstone.name"));
+					currenttip.add(TFC_Core.translate("item.redstone.name"));
 					break;
 				case 15:
-					currenttip.add(StatCollector.translateToLocal("item.Fertilizer.name"));
+					currenttip.add(TFC_Core.translate("item.Fertilizer.name"));
 					break;
 				}
 			}
@@ -178,10 +178,10 @@ public class TFCOre implements IWailaDataProvider
 				switch (meta)
 				{
 				case 0:
-					currenttip.add(StatCollector.translateToLocal("item.Powder.Flux.name"));
+					currenttip.add(TFC_Core.translate("item.Powder.Flux.name"));
 					break;
 				case 1:
-					currenttip.add(StatCollector.translateToLocal("gui.useless"));
+					currenttip.add(TFC_Core.translate("gui.useless"));
 					break;
 				}
 			}
@@ -197,9 +197,9 @@ public class TFCOre implements IWailaDataProvider
 
 	public static void callbackRegister(IWailaRegistrar reg)
 	{
-		reg.registerStackProvider(new TFCOre(), TEOre.class);
-		reg.registerHeadProvider(new TFCOre(), TEOre.class);
-		reg.registerBodyProvider(new TFCOre(), TEOre.class);
+		reg.registerStackProvider(new WOre(), TEOre.class);
+		reg.registerHeadProvider(new WOre(), TEOre.class);
+		reg.registerBodyProvider(new WOre(), TEOre.class);
 	}
 
 	private int getOreGrade(TEOre te, int ore)

@@ -1,4 +1,4 @@
-package com.bioxx.tfc.GUI.WAILA;
+package com.bioxx.tfc.WAILA;
 
 import java.util.List;
 
@@ -10,15 +10,15 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.TileEntities.TECrop;
 
-public class TFCCrop implements IWailaDataProvider
+public class WCrop implements IWailaDataProvider
 {
 	@Override
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
@@ -58,9 +58,9 @@ public class TFCCrop implements IWailaDataProvider
 			int percentGrowth = (int) Math.min((te.growth / crop.numGrowthStages) * 100, 100);
 
 			if (percentGrowth < 100)
-				currenttip.add(StatCollector.translateToLocal("gui.growth") + " : " + String.valueOf(percentGrowth) + "%");
+				currenttip.add(TFC_Core.translate("gui.growth") + " : " + String.valueOf(percentGrowth) + "%");
 			else
-				currenttip.add(StatCollector.translateToLocal("gui.growth") + " : " + StatCollector.translateToLocal("gui.mature"));
+				currenttip.add(TFC_Core.translate("gui.growth") + " : " + TFC_Core.translate("gui.mature"));
 		}
 		return currenttip;
 	}
@@ -73,8 +73,8 @@ public class TFCCrop implements IWailaDataProvider
 
 	public static void callbackRegister(IWailaRegistrar reg)
 	{
-		reg.registerStackProvider(new TFCCrop(), TECrop.class);
-		reg.registerBodyProvider(new TFCCrop(), TECrop.class);
+		reg.registerStackProvider(new WCrop(), TECrop.class);
+		reg.registerBodyProvider(new WCrop(), TECrop.class);
 	}
 
 	@Override

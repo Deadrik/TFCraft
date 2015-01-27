@@ -475,10 +475,13 @@ public class CommonProxy
 
 	public void registerWailaClasses()
 	{
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.GUI.WAILA.TFCOre.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.GUI.WAILA.TFCCrop.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.GUI.WAILA.TFCBarrel.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.GUI.WAILA.TFCAnvil.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.GUI.WAILA.TFCBlastFurnace.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WOre.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WCrop.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WBarrel.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WAnvil.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WBlastFurnace.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WBerryBush.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WBloomery.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WBloom.callbackRegister");
 	}
 }
