@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.TileEntities.TELeatherRack;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Tools.IKnife;
@@ -31,7 +30,7 @@ public class BlockLeatherRack extends BlockTerraContainer
 	public BlockLeatherRack()
 	{
 		super(Material.wood);
-		this.setCreativeTab(TFCTabs.TFCDevices);
+		this.setCreativeTab(null);
 		this.setBlockBounds(0, 0, 0, 1, 0.001f, 1);
 	}
 
