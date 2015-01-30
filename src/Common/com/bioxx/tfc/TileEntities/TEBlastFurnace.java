@@ -2,7 +2,9 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Queue;
 import java.util.Random;
+import java.util.concurrent.ArrayBlockingQueue;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -143,6 +145,20 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 				}
 				cookDelay = 100;
 				fireItemStacks[i] = null;
+
+				//Treat fireItemStacks as a queue, and shift everything forward when an item is melted.
+				//This way the hottest item is always in the first slot - Kitty
+				Queue<ItemStack> buffer = new ArrayBlockingQueue<ItemStack>(fireItemStacks.length);
+				for (ItemStack is : fireItemStacks)
+				{
+					if (is != null)
+					{
+						buffer.offer(is);
+					}
+				}
+
+				fireItemStacks = buffer.toArray(new ItemStack[fireItemStacks.length]);
+
 				storage[1].setItemDamage(storage[1].getItemDamage() + 1);
 				if (storage[1] != null && storage[1].getItemDamage() == storage[1].getMaxDamage())
 				{
