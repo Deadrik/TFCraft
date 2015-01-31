@@ -356,32 +356,39 @@ public class TEFirepit extends TEFireEntity implements IInventory
 	{
 		if(is != null)
 		{
-			float temp = TFC_ItemHeat.GetTemp(is);
-			if(fuelTimeLeft > 0 && is.getItem() instanceof ICookableFood)
+			HeatRegistry manager = HeatRegistry.getInstance();
+			HeatIndex index = manager.findMatchingIndex(is);
+
+			if (index != null)
 			{
-				float inc = Food.getCooked(is)+Math.min((fireTemp/700), 2f);
-				Food.setCooked(is, inc);
-				temp = inc;
-				if(Food.isCooked(is))
+				float temp = TFC_ItemHeat.GetTemp(is);
+				if (fuelTimeLeft > 0 && is.getItem() instanceof ICookableFood)
 				{
-					int[] cookedTasteProfile = new int[] {0,0,0,0,0};
-					Random R = new Random(((ICookableFood)is.getItem()).getFoodID()+(((int)Food.getCooked(is)-600)/120));
-					cookedTasteProfile[0] = R.nextInt(31) - 15;
-					cookedTasteProfile[1] = R.nextInt(31) - 15;
-					cookedTasteProfile[2] = R.nextInt(31) - 15;
-					cookedTasteProfile[3] = R.nextInt(31) - 15;
-					cookedTasteProfile[4] = R.nextInt(31) - 15;
-					Food.setCookedProfile(is, cookedTasteProfile);
-					Food.setFuelProfile(is, EnumFuelMaterial.getFuelProfile(fuelTasteProfile));
+					float inc = Food.getCooked(is) + Math.min((fireTemp / 700), 2f);
+					Food.setCooked(is, inc);
+					temp = inc;
+					if (Food.isCooked(is))
+					{
+						int[] cookedTasteProfile = new int[]
+						{ 0, 0, 0, 0, 0 };
+						Random R = new Random(((ICookableFood) is.getItem()).getFoodID() + (((int) Food.getCooked(is) - 600) / 120));
+						cookedTasteProfile[0] = R.nextInt(31) - 15;
+						cookedTasteProfile[1] = R.nextInt(31) - 15;
+						cookedTasteProfile[2] = R.nextInt(31) - 15;
+						cookedTasteProfile[3] = R.nextInt(31) - 15;
+						cookedTasteProfile[4] = R.nextInt(31) - 15;
+						Food.setCookedProfile(is, cookedTasteProfile);
+						Food.setFuelProfile(is, EnumFuelMaterial.getFuelProfile(fuelTasteProfile));
+					}
 				}
+				else if (fireTemp > temp)
+				{
+					temp += TFC_ItemHeat.getTempIncrease(is);
+				}
+				else
+					temp -= TFC_ItemHeat.getTempDecrease(is);
+				TFC_ItemHeat.SetTemp(is, temp);
 			}
-			else if(fireTemp > temp)
-			{
-				temp += TFC_ItemHeat.getTempIncrease(is);
-			}
-			else
-				temp -= TFC_ItemHeat.getTempDecrease(is);
-			TFC_ItemHeat.SetTemp(is, temp);
 		}
 	}
 
