@@ -10,7 +10,6 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Containers.Slots.SlotForge;
 import com.bioxx.tfc.Containers.Slots.SlotForgeFuel;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFCItems;
@@ -118,7 +117,7 @@ public class ContainerForge extends ContainerTFC
 						}
 					}
 				}
-				else if(!(slotStack.getItem() instanceof ItemOre) && manager.findMatchingIndex(slotStack) != null)//Try to add the item to the input slots
+				else if (slotinput[0].isItemValid(slotStack))//Try to add the item to the input slots
 				{
 					int j = 0;
 					while(j < 5)
