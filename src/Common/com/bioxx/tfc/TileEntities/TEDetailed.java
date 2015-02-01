@@ -64,7 +64,7 @@ public class TEDetailed extends NetworkTileEntity {
 	}
 
 	public boolean isBlockEmpty() {
-		byte[] ba = data.toByteArray();
+		byte[] ba = toByteArray(data);
 		for (byte b : ba) {
 			if (b != -1)
 				return false;
