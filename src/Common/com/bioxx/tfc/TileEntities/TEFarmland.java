@@ -15,7 +15,8 @@ import com.bioxx.tfc.api.TFCBlocks;
 public class TEFarmland extends NetworkTileEntity
 {
 	public long nutrientTimer = -1;
-	public int[] nutrients = {6666,6666,6666, 0};
+	public int[] nutrients =
+	{ getSoilMax(), getSoilMax(), getSoilMax(), 0 };
 	public boolean isInfested = false;
 
 	/**
@@ -148,6 +149,9 @@ public class TEFarmland extends NetworkTileEntity
 	{
 		float timeMultiplier = 360f / TFC_Time.daysInYear;
 		nutrients[type] -= (100 * multiplier) * timeMultiplier;
+
+		if (nutrients[type] < 0)
+			nutrients[type] = 0;
 	}
 
 	public boolean fertilize(ItemStack is, boolean isOrganic)
