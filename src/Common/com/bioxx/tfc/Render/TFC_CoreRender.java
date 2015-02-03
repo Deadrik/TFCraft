@@ -167,32 +167,32 @@ public class TFC_CoreRender
 	public static boolean RenderSulfur(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
 		IBlockAccess world = renderblocks.blockAccess;
-		if(world.getBlock(x, y, z+1).isSideSolid(world, x, y, z, ForgeDirection.NORTH))
+		if (world.getBlock(x, y, z + 1).isSideSolid(world, x, y, z + 1, ForgeDirection.NORTH))
 		{
 			renderblocks.setRenderBounds(0.0F, 0.0F, 0.99F, 1.0F, 1.0F, 1.0F);
 			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		if(world.getBlock(x, y, z-1).isSideSolid(world, x, y, z, ForgeDirection.SOUTH))
+		if (world.getBlock(x, y, z - 1).isSideSolid(world, x, y, z - 1, ForgeDirection.SOUTH))
 		{
 			renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.01F);
 			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		if(world.getBlock(x+1, y, z).isSideSolid(world, x, y, z, ForgeDirection.EAST))
+		if (world.getBlock(x + 1, y, z).isSideSolid(world, x + 1, y, z, ForgeDirection.EAST))
 		{
 			renderblocks.setRenderBounds(0.99F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		if(world.getBlock(x-1, y, z).isSideSolid(world, x, y, z, ForgeDirection.WEST))
+		if (world.getBlock(x - 1, y, z).isSideSolid(world, x - 1, y, z, ForgeDirection.WEST))
 		{
 			renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 0.01F, 1.0F, 1.0F);
 			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		if(world.getBlock(x, y+1, z).isSideSolid(world, x, y, z, ForgeDirection.DOWN))
+		if (world.getBlock(x, y + 1, z).isSideSolid(world, x, y + 1, z, ForgeDirection.DOWN))
 		{
 			renderblocks.setRenderBounds(0.0F, 0.99F, 0.0F, 1.0F, 1.0F, 1.0F);
 			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		if(world.getBlock(x, y-1, z).isSideSolid(world, x, y, z, ForgeDirection.UP))
+		if (world.getBlock(x, y - 1, z).isSideSolid(world, x, y - 1, z, ForgeDirection.UP))
 		{
 			renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.01F, 1.0F);
 			renderblocks.renderStandardBlock(block, x, y, z);

@@ -55,7 +55,7 @@ public class ItemWoodSupport extends ItemTerraBlock
 			++x;
 
 		Block b = world.getBlock(x, y-1, z);
-		if(b == TFCBlocks.WoodSupportV || b == TFCBlocks.WoodSupportV2 || b.isSideSolid(world, x, y, z, ForgeDirection.UP))
+		if (b == TFCBlocks.WoodSupportV || b == TFCBlocks.WoodSupportV2 || b.isSideSolid(world, x, y - 1, z, ForgeDirection.UP))
 			return true;
 		return false;
 	}
@@ -91,7 +91,7 @@ public class ItemWoodSupport extends ItemTerraBlock
 				{
 					//Found a solid block and check if it is solid on top. If it is, then we allow gen and break. 
 					//Otherwise we stop scanning and dont allow gen.
-					if(world.getBlock(x, y-dist, z).isSideSolid(world, x, y, z, ForgeDirection.UP))
+					if (world.getBlock(x, y - dist, z).isSideSolid(world, x, y - dist, z, ForgeDirection.UP))
 					{
 						shouldGen = true;
 						break;
