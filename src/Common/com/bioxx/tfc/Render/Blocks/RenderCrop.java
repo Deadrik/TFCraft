@@ -133,7 +133,7 @@ public class RenderCrop
 		}
 		TileEntity _te = blockaccess.getTileEntity(x, y-1, z);
 		TEFarmland tef = null;
-		if(_te != null)
+		if (_te != null && _te instanceof TEFarmland)
 			tef = (TEFarmland) _te;
 		if(tef != null && tef.isInfested)
 		{
