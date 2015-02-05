@@ -1,5 +1,7 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -7,6 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
+import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCFluids;
@@ -110,6 +113,17 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable
 			return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
 
 		return false;
+	}
+
+	@Override
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
+	{
+		super.addInformation(is, player, arraylist, flag);
+		if(is.hasTagCompound())
+		{
+			FluidStack fs = FluidStack.loadFluidStackFromNBT(is.getTagCompound());
+			arraylist.add((fs.amount/(1000/TFC_Time.daysInYear))+" Days Remaining ("+(fs.amount/1000f)+")");
+		}
 	}
 
 	public static ItemStack GetFullLamp(int meta)
