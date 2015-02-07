@@ -7,13 +7,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.api.TFCItems;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -87,11 +90,10 @@ public class ItemAlcohol extends ItemTerra
 		{
 
 			Random rand = new Random();
-
-			TFC_Core.getPlayerFoodStats(player).restoreWater(player, 800);
-			long soberTime = player.getEntityData().hasKey("soberTime") ? player.getEntityData().getLong("soberTime") : 0;
-			int time = rand.nextInt(1000) + 400;
-			soberTime +=time;
+			FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(player);
+			fs.restoreWater(player, 800);
+			int time = 400+rand.nextInt(1000);
+			fs.consumeAlcohol();
 			if(rand.nextInt(100)==0){
 				player.addPotionEffect(new PotionEffect(8,time,4));
 			}
@@ -111,34 +113,33 @@ public class ItemAlcohol extends ItemTerra
 				player.addPotionEffect(new PotionEffect(13,time,4));
 			}
 			int levelMod = 250*player.experienceLevel;
-			if(soberTime >3000+levelMod){
+			if(fs.soberTime >TFC_Time.getTotalTicks()+3000+levelMod){
 				if(rand.nextInt(4)==0){
 					//player.addPotionEffect(new PotionEffect(9,time,4));
 				}
-				if(soberTime >5000+levelMod){
+				if(fs.soberTime >TFC_Time.getTotalTicks()+5000+levelMod){
 					if(rand.nextInt(4)==0){
 						player.addPotionEffect(new PotionEffect(18,time,4));
 					}
-					if(soberTime >7000+levelMod){
+					if(fs.soberTime >TFC_Time.getTotalTicks()+7000+levelMod){
 						if(rand.nextInt(2)==0){
 							player.addPotionEffect(new PotionEffect(15,time,4));
 						}
-						if(soberTime >8000+levelMod){
+						if(fs.soberTime >TFC_Time.getTotalTicks()+8000+levelMod){
 							if(rand.nextInt(10)==0){
 								player.addPotionEffect(new PotionEffect(20,time,4));
 							}
 						}
-						if(soberTime > 10000+levelMod && !player.capabilities.isCreativeMode){
-							soberTime = 0;
-							//((EntityPlayerMP)player).mcServer.getConfigurationManager().sendChatMsg(player.username+" died of alcohol poisoning.");
-							player.inventory.dropAllItems();
-							player.setHealth(0);
+						if(fs.soberTime > TFC_Time.getTotalTicks()+10000+levelMod && !player.capabilities.isCreativeMode){
+							fs.soberTime = 0;
+
+							player.attackEntityFrom((new DamageSource("alcohol")).setDamageBypassesArmor().setDamageIsAbsolute(), player.getMaxHealth());
 						}
 					}
 
 				}
 			}
-			player.getEntityData().setLong("soberTime",soberTime);
+			TFC_Core.setPlayerFoodStats(player, fs);
 		}
 
 		if (!player.capabilities.isCreativeMode)

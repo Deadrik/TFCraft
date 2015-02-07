@@ -19,9 +19,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.TileEntities.TileEntityFenceGate;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IMultipleBlock;
 
@@ -170,5 +170,11 @@ public class BlockCustomFenceGate extends BlockFenceGate implements ITileEntityP
 	public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
 	{
 		return true;
+	}
+
+	@Override
+	public boolean canBeReplacedByLeaves(IBlockAccess world, int x, int y, int z)
+	{
+		return false;
 	}
 }

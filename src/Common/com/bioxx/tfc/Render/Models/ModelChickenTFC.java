@@ -74,7 +74,7 @@ public class ModelChickenTFC extends ModelBase
 		this.setRotationAngles(par2, par3, par4, par5, par6, par7);
 		float percent = Math.max(TFC_Core.getPercentGrown((IAnimal)entity),0);
 		float ageScale = 2.0F-percent;
-		float offset = 1.4f - percent;
+		//float offset = 1.4f - percent;
 
 		GL11.glPushMatrix ();
 

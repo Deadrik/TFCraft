@@ -14,11 +14,11 @@ public class BarrelManager
 		return instance;
 	}
 
-	private List recipes;
+	private List<BarrelRecipe> recipes;
 
 	private BarrelManager()
 	{
-		recipes = new ArrayList();
+		recipes = new ArrayList<BarrelRecipe>();
 	}
 
 	public void addRecipe(BarrelRecipe recipe)
@@ -31,10 +31,15 @@ public class BarrelManager
 		for(Object recipe : recipes)
 		{
 			BarrelRecipe br = (BarrelRecipe) recipe;
-			if(item != null && fluid != null &&/*(br.inItemStack != null && item != null) && (br.inFluid != null && fluid != null) &&*/ br.matches(item, fluid))
+			if(/*item != null && */fluid != null &&/*(br.inItemStack != null && item != null) && (br.inFluid != null && fluid != null) &&*/ br.matches(item, fluid))
 				if(br.isSealedRecipe == sealed && br.minTechLevel <= techLevel)
 					return br;
 		}
 		return null;
+	}
+
+	public List<BarrelRecipe> getRecipes()
+	{
+		return recipes;
 	}
 }

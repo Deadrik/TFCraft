@@ -8,8 +8,6 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.WorldChunkManager;
-import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.Chunkdata.ChunkData;
@@ -41,15 +39,15 @@ public class WorldGenMinable extends WorldGenerator
 	public static int mineCount;
 	public static int mineCountM;
 
-	private static Random randomOut;
+	//private static Random randomOut;
 	private static Random rand;
 	private static World worldObj;
 
-	private static WorldChunkManager worldChunkManager;
-	private static WorldChunkManagerHell worldChunkManagerHell;
+	//private static WorldChunkManager worldChunkManager;
+	//private static WorldChunkManagerHell worldChunkManagerHell;
 
-	private int mineGen = 1;
-	private int subMineGen = 1;
+	//private int mineGen = 1;
+	//private int subMineGen = 1;
 	private int rarity = 2;
 	private int veinSi = 2;
 	private int veinAm = 2;
@@ -70,8 +68,8 @@ public class WorldGenMinable extends WorldGenerator
 	public WorldGenMinable(Block block, int j, Block layerBlock, int layerMeta, int rarity, int veinSize,
 			int veinAmount, int height, int diameter, int vDensity, int hDensity, boolean vein, int oreGrade)
 	{
-		int emptyHolder = 0;
-		emptyHolder = j;
+		/*int emptyHolder = 0;
+		emptyHolder = j;*/
 
 		this.minableBlock = block;
 		this.minableBlockMeta = j;
@@ -120,7 +118,7 @@ public class WorldGenMinable extends WorldGenerator
 			createMine(worldObj, rand, x, z);
 	}
 
-	public boolean generate(World world, Random random, int x, int z, int min, int max, String n)//obsorb default system
+	public boolean generate(World world, Random random, int x, int z, int min, int max)//obsorb default system
 	{
 		MPChunk_X = x;// set output chunk x // snap to grid
 		MPChunk_Z = z;// set output chunk z    
@@ -173,9 +171,9 @@ public class WorldGenMinable extends WorldGenerator
 		int posX = parX;
 		int posY = parY;
 		int posZ = parZ;
-		int tempPosX = 0;
+		/*int tempPosX = 0;
 		int tempPosY = 0;
-		int tempPosZ = 0;
+		int tempPosZ = 0;*/
 		int posX2 = 0;
 		int posY2 = 0;
 		int posZ2 = 0;
@@ -185,9 +183,9 @@ public class WorldGenMinable extends WorldGenerator
 		int directionX2 = 0;
 		int directionY2 = 0;
 		int directionZ2 = 0;
-		int directionX3 = 0;
+		/*int directionX3 = 0;
 		int directionY3 = 0;
-		int directionZ3 = 0;
+		int directionZ3 = 0;*/
 		int directionChange = 0;
 		int directionChange2 = 0;
 		int blocksToUse = xyz;//input number of blocks per vein
@@ -275,9 +273,9 @@ public class WorldGenMinable extends WorldGenerator
 						isCorrectRockType = b == this.genInBlock;
 						isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
-						if(isCorrectRockType && isCorrectMeta)
+						if (isCorrectRockType && isCorrectMeta)
 						{
-							if(world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2))
+							if (MPBlock != null && world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2))
 							{
 								TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
 								if(te!= null)
@@ -286,7 +284,6 @@ public class WorldGenMinable extends WorldGenerator
 									te.baseBlockMeta = m;
 									te.extraData = (byte)(grade+8);
 								}
-
 							}
 						}
 						blocksMade++;
@@ -306,15 +303,17 @@ public class WorldGenMinable extends WorldGenerator
 				boolean isCorrectRockType = b == this.genInBlock;
 				boolean isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
-				if(isCorrectRockType && isCorrectMeta)
+				if (isCorrectRockType && isCorrectMeta)
 				{
-					world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2);
-					TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
-					if(te!= null)
+					if (MPBlock != null && world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2))
 					{
-						te.baseBlockID = Block.getIdFromBlock(b);
-						te.baseBlockMeta = m;
-						te.extraData = (byte)grade;
+						TEOre te = (TEOre) world.getTileEntity(posX, posY, posZ);
+						if (te != null)
+						{
+							te.baseBlockID = Block.getIdFromBlock(b);
+							te.baseBlockMeta = m;
+							te.extraData = (byte) grade;
+						}
 					}
 				}
 				blocksMade++;
@@ -384,17 +383,19 @@ public class WorldGenMinable extends WorldGenerator
 								boolean isCorrectRockType = b == this.genInBlock;
 								boolean isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
-								if(isCorrectRockType && isCorrectMeta)
+								if (isCorrectRockType && isCorrectMeta)
 								{
 									if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D)
 									{
-										world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2);
-										TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
-										if(te!= null)
+										if (MPBlock != null && world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2))
 										{
-											te.baseBlockID = Block.getIdFromBlock(b);
-											te.baseBlockMeta = m;
-											te.extraData = (byte)grade;
+											TEOre te = (TEOre) world.getTileEntity(posX, posY, posZ);
+											if (te != null)
+											{
+												te.baseBlockID = Block.getIdFromBlock(b);
+												te.baseBlockMeta = m;
+												te.extraData = (byte) grade;
+											}
 										}
 									}
 								}

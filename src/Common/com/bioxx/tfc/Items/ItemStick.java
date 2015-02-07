@@ -1,10 +1,10 @@
 package com.bioxx.tfc.Items;
 
+import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
-
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
 
 public class ItemStick extends ItemTerra
 {
@@ -13,7 +13,7 @@ public class ItemStick extends ItemTerra
 		super();
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(TFCTabs.TFCMaterials);
 	}
 
 	@Override

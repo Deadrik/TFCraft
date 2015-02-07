@@ -1,11 +1,5 @@
 package com.bioxx.tfc.GUI;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Handlers.Network.AbstractPacket;
-import com.bioxx.tfc.Handlers.Network.ItemRenamePacket;
-import com.bioxx.tfc.Items.ItemCustomNameTag;
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TerraFirmaCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -17,8 +11,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Handlers.Network.AbstractPacket;
+import com.bioxx.tfc.Handlers.Network.ItemRenamePacket;
 
 public class GuiCustomNametag extends GuiScreen
 {
@@ -29,10 +30,10 @@ public class GuiCustomNametag extends GuiScreen
 	EntityPlayer player;
 
 	/** The X size of the inventory window in pixels. */
-	protected int xSize = 219;
+	protected int xSize = 220;
 
 	/** The Y size of the inventory window in pixels. */
-	protected int ySize = 103;
+	protected int ySize = 104;
 	/**
 	 * Starting X position for the Gui. Inconsistent use for Gui backgrounds.
 	 */
@@ -45,7 +46,6 @@ public class GuiCustomNametag extends GuiScreen
 
 	public GuiCustomNametag(EntityPlayer p, World world, int i, int j, int k)
 	{
-		//super(new ContainerBlueprint(p, world, i, j, k));
 		this.world = world;
 		this.guiLeft = (this.width - this.xSize) / 2;
 		this.guiTop = (this.height - this.ySize) / 2;
@@ -71,12 +71,14 @@ public class GuiCustomNametag extends GuiScreen
 	{
 		super.initGui();
 
+		this.guiTop = (this.height - this.ySize) / 2;
+
 		Keyboard.enableRepeatEvents(true);
 		this.buttonList.clear();
-		this.buttonList.add(new GuiButton(0, this.width / 2 - 100, guiTop + 180, StatCollector.translateToLocal("gui.done")));
+		this.buttonList.add(new GuiButton(0, this.width / 2 - 100, guiTop + 57, StatCollector.translateToLocal("gui.done")));
 		//this.controlList.add(new GuiButton(1, this.width / 2 - 100, guiTop + 210, var1.translateKey("gui.cancel")));
 
-		this.theGuiTextField = new GuiTextField(this.fontRendererObj, this.width / 2 - 90, guiTop + 150, 180, 20);
+		this.theGuiTextField = new GuiTextField(this.fontRendererObj, this.width / 2 - 90, guiTop + 27, 180, 20);
 		this.theGuiTextField.setFocused(true);
 		this.theGuiTextField.setText("");
 	}
@@ -135,9 +137,6 @@ public class GuiCustomNametag extends GuiScreen
 	public void drawScreen(int par1, int par2, float par3)
 	{
 		TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_nametag.png"));
-
-		int var4 = this.guiLeft;
-		int var5 = this.guiTop;
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int l = (width - xSize) / 2;

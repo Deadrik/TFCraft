@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
-import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 
@@ -61,16 +61,20 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 			boolean inground = nbt.hasKey("inGround") && nbt.getByte("inGround") == 1;
 			if(inground)
 			{
-				boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && player.capabilities.isCreativeMode;
+				boolean flag = this.canBePickedUp == 1 || (this.canBePickedUp == 2 && player.capabilities.isCreativeMode);
 
 				EntityItem ei = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.pickupItem, 1, this.damageTaken));
-				EntityItemPickupEvent event = new EntityItemPickupEvent(player, ei);
 
-				if (MinecraftForge.EVENT_BUS.post(event))
-					return;
+				if (this.canBePickedUp == 1)
+				{
+					EntityItemPickupEvent event = new EntityItemPickupEvent(player, ei);
+
+					if (MinecraftForge.EVENT_BUS.post(event))
+						return;
+				}
 
 				ItemStack itemstack = ei.getEntityItem();
-				if(itemstack.stackSize <= 0) 
+				if (itemstack.stackSize <= 0)
 					flag = true;
 				else if (this.canBePickedUp == 1 && !player.inventory.addItemStackToInventory(itemstack))
 					flag = false;

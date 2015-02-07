@@ -1,0 +1,2529 @@
+﻿#ro_RO
+#This is the Romanian language configuration file, translated by damnedsky and branzide
+
+
+
+
+
+generator.TFCDefault=TFC Standard
+generator.TFCFlat=
+generator.TFCAmplified=
+generator.TFCLargeBiomes=
+
+key.ToolMode=Schimbă modul instrumentului
+key.LockTool=Blochează poziția instrumentului
+
+effect.bleed=Sângerare
+death.attack.alcohol=%1$s a murit de intoxicație cu alcool
+death.attack.heatStroke=%1$s a murit de insolație
+
+#==============
+#= Spawn Eggs =
+#==============
+entity.squidTFC.name=Calmar
+entity.cowTFC.name=Vacă
+entity.wolfTFC.name=Lup
+entity.bearTFC.name=Urs
+entity.deerTFC.name=Cerb
+entity.chickenTFC.name=Găină
+entity.pigTFC.name=Porc
+entity.skeletonTFC.name=Schelet
+entity.zombieTFC.name=Zombi
+entity.spiderTFC.name=Păianjen
+entity.slimeTFC.name=Mâzgă
+entity.silverfishTFC.name=Peștișor argintiu
+entity.ghastTFC.name=Ghast
+entity.caveSpiderTFC.name=Păianjen de peșteră
+entity.blazeTFC.name=Dogoreală
+entity.endermanTFC.name=Enderman
+entity.pigZombieTFC.name=Zombi porc
+entity.creeperTFC.name=Creeper
+entity.sheepTFC.name=Oaie
+entity.pheasantTFC.name=Fazan
+entity.horseTFC.name=Cal
+entity.irongolemTFC.name=Golem de fier
+entity.fishTFC.name=Biban
+
+
+#==========
+#= Entity =
+#==========
+entity.notFamiliar=Animalul nu te lasă să faci asta!
+fishingRod.lineTension=Se va rupe firul!
+fishingRod.lineSnap=S-a rupt firul!
+fishingRod.bite=O! A mușcat!
+fishingRod.gotAway=A scăpat...
+
+#================
+#= Achievements =
+#================
+achievement.achLooseRock=Cu siguranță o piatră
+achievement.achLooseRock.desc=Ia o piatră de pe jos
+achievement.achSmallOre=Nicio piatră neîntoarsă
+achievement.achSmallOre.desc=Găsește o pepită de minereu
+achievement.achWildVegetable=Culegător
+achievement.achWildVegetable.desc=Găsește o legumă sălbatică
+achievement.achRutabaga=Ceapă stupidă!
+achievement.achRutabaga.desc=Găsește un nap
+achievement.achQuern=Măcinarea
+achievement.achQuern.desc=Folosește o râșniță
+achievement.achStoneAge=Paleolitic!
+achievement.achStoneAge.desc=Cioplește o unealtă de piatră ca să intri în Epoca de Piatră
+achievement.achCopperAge=Calcolitic!
+achievement.achCopperAge.desc=Toarnă ceva în metal ca să intri în Epoca Cuprului
+achievement.achSaw=Tâmplar
+achievement.achSaw.desc=Fabrică un fierăstrău
+achievement.achAnvil=Vremea ciocanului
+achievement.achAnvil.desc=Fă o nicovală de piatră
+achievement.achPickaxe=E timpul să minăm! (în sfârșit)
+achievement.achPickaxe.desc=Fă un târnăcop
+achievement.achDiamond=DIAM- a, stai, nu
+achievement.achDiamond.desc=Găsește un diamant
+achievement.achLimonite=LI-MO-NIIIT!
+achievement.achLimonite.desc=Minează niște limonit
+achievement.achBronzeAge=Epoca bronzului
+achievement.achBronzeAge.desc=Fabrică o nicovală de bronz ca să intri în Epoca Bronzului
+achievement.achIronAge=Epoca fierului
+achievement.achIronAge.desc=Minează o lupă de fier ca să intri în Epoca Fierului
+achievement.achPokeCreeper=Steve Irwin
+achievement.achPokeCreeper.desc=Înțeapă-l cu un băț
+
+#============
+#= Commands =
+#============
+commands.transferTamed.noTamed=Niciun animal valid în rază!
+commands.transferTamed.tooMany=Prea multe animale în rază!
+commands.transferTamed.wrongOwner=Nu îți aparține!
+commands.transferTamed.sameTarget=Nu-ți poți transfera ție însuți!
+commands.transferTamed.display.incoming=Ți-a fost transferat un animal de către %s!
+commands.transferTamed.display.outgoing=I-ai transferat un animal lui %s!
+commands.transferTamed.wrongSender=Nu poți transfera animale!
+
+#==========
+#= Fluids =
+#==========
+fluid.freshwater=Apă dulce
+fluid.saltwater=Apă sărată
+fluid.lavatfc=Lavă
+fluid.hotwater=Apă fierbinte
+fluid.beer=Bere
+fluid.cider=Cidru
+fluid.rum=Rom
+fluid.ryewhiskey=Whisky de secară
+fluid.sake=Sake
+fluid.vodka=Votcă
+fluid.whiskey=Whisky
+fluid.cornwhiskey=Whisky de porumb
+fluid.milk=Lapte
+fluid.milkcurdled=Lapte prins
+fluid.milkvinegar=
+fluid.limewater=Var
+fluid.tannin=Tanin
+fluid.vinegar=Oțet
+fluid.brine=Saramură
+
+#========
+#= Food =
+#========
+item.MealGeneric.name=Mâncare
+item.meal.terrible=Groaznic
+item.meal.poor=Rău
+item.meal.decent=Acceptabil
+item.meal.good=Bun
+item.meal.great=Grozav
+item.meal.fantastic=Fantastic
+item.Sandwich.name=Sandvici
+item.Salad.name=Salată
+item.Soup.name=Supă
+item.Sugar.name=Zahăr
+item.Sea Weed.name=Alge
+
+#== Grains ==
+item.Barley Bread.name=Pâine de orz
+item.Corn Bread.name=Pâine de porumb
+item.Oat Bread.name=Pâine de ovăz
+item.Rice Bread.name=Pâine de orez
+item.Rye Bread.name=Pâine de secară
+item.Wheat Bread.name=Pâine de grâu
+
+item.Barley Whole.name=Orz
+item.Maize Ear.name=Știulete de porumb
+item.Oat Whole.name=Ovăz
+item.Rice Whole.name=Orez
+item.Rye Whole.name=Secară
+item.Wheat Whole.name=Grâu
+
+item.Barley Grain.name=Grăunțe de orz
+item.Oat Grain.name=Grăunțe de ovăz
+item.Rice Grain.name=Grăunțe de orez
+item.Rye Grain.name=Grăunțe de secară
+item.Wheat Grain.name=Grăunțe de grâu
+
+item.Barley Ground.name=Făină de orz
+item.Cornmeal Ground.name=Mălai
+item.Oat Ground.name=Făină de ovăz
+item.Rice Ground.name=Făină de orez
+item.Rye Ground.name=Făină de secară
+item.Wheat Ground.name=Făină de grâu
+
+item.Barley Dough.name=Aluat de orz
+item.Cornmeal Dough.name=Aluat de porumb
+item.Oat Dough.name=Aluat de ovăz
+item.Rice Dough.name=Aluat de orez
+item.Rye Dough.name=Aluat de secară
+item.Wheat Dough.name=Aluat de grâu
+
+item.Seeds Barley.name=Semințe de orz
+item.Seeds Maize.name=Semințe de porumb
+item.Seeds Oat.name=Semințe de ovăz
+item.Seeds Rice.name=Semințe de orez
+item.Seeds Rye.name=Semințe de secară
+item.Seeds Wheat.name=Semințe de grâu
+
+#== Fruit ==
+item.Green Apple.name=Măr verde
+item.Red Apple.name=Măr roșu
+item.Banana.name=Banană
+item.Cherry.name=Cireașă
+item.Lemon.name=Lămâie
+item.Olive.name=Măslină
+item.Orange.name=Portocală
+item.Peach.name=Piersică
+item.Plum.name=Prună
+
+item.FruitSapling.Green Apple.name=Puiet de măr verde
+item.FruitSapling.Red Apple.name=Puiet de măr roșu
+item.FruitSapling.Banana.name=Puiet de bananier
+item.FruitSapling.Cherry.name=Puiet de cireș
+item.FruitSapling.Lemon.name=Puiet de lămâi
+item.FruitSapling.Olive.name=Puiet de măslin
+item.FruitSapling.Orange.name=Puiet de portocal
+item.FruitSapling.Peach.name=Puiet de piersic
+item.FruitSapling.Plum.name=Puiet de prun
+
+#=== Berry Bushes ===
+tile.BerryBush.Blackberry.name=Mur
+tile.BerryBush.Blueberry.name=Afin
+tile.BerryBush.Bunchberry.name=Corn
+tile.BerryBush.Cloudberry.name=Mur pitic
+tile.BerryBush.Cranberry.name=Merișor
+tile.BerryBush.Elderberry.name=Soc
+tile.BerryBush.Gooseberry.name=Agriș
+tile.BerryBush.Raspberry.name=Zmeur
+tile.BerryBush.Snowberry.name=Hurmuz
+tile.BerryBush.Strawberry.name=Căpșun
+tile.BerryBush.Wintergreen.name=Gaultheria
+
+item.Blackberry.name=Mure
+item.Blueberry.name=Afine
+item.Bunchberry.name=Coarne
+item.Cloudberry.name=Mure pitice
+item.Cranberry.name=Merișoare
+item.Elderberry.name=Fructe de soc
+item.Gooseberry.name=Agrișe
+item.Raspberry.name=Zmeură
+item.Snowberry.name=Fructe de hurmuz
+item.Strawberry.name=Căpșune
+item.Wintergreen Berry.name=Fructe de gaultheria
+
+item.Blackberry Leaf.name=Frunză de mur
+item.Blueberry Leaf.name=Frunză de afin
+item.Bunchberry Leaf.name=Frunză de corn
+item.Cloudberry Leaf.name=Frunză de mur pitic
+item.Cranberry Leaf.name=Frunză de merișor
+item.Elderberry Leaf.name=Frunză de soc
+item.Gooseberry Leaf.name=Frunză de agriș
+item.Raspberry Leaf.name=Frunză de zmeur
+item.Snowberry Leaf.name=Frunză de hurmuz
+item.Strawberry Leaf.name=Frunză de căpșun
+item.Wintergreen Leaf.name=Frunză de gaultheria
+
+#== Protein ==
+item.Beef.name=Vită
+item.Calamari.name=Calmar
+item.egg.name=Ou
+item.Fish.name=Pește
+item.Mutton.name=Oaie
+item.Porkchop.name=Porc
+item.Chicken.name=Pasăre
+item.Venison.name=Vânat
+item.HorseMeat.name=Carne de cal
+item.Egg Cooked.name=Ou ochi
+
+item.Soybeans.name=Soia
+item.Seeds Soybean.name=Semințe de soia
+
+#== Dairy ==
+item.Cheese.name=Brânză
+
+#== Vegetables ==
+item.Green Bell Pepper.name=Ardei gras verde
+item.Red Bell Pepper.name=Ardei gras roșu
+item.Yellow Bell Pepper.name=Ardei gras galben
+item.Cabbage.name=Varză
+item.Carrot.name=Morcov
+item.Garlic.name=Usturoi
+item.Greenbeans.name=Fasole verde
+item.Onion.name=Ceapă
+item.Potato.name=Cartof
+item.Rutabaga.name=Nap
+item.Squash.name=Dovlecel
+item.Tomato.name=Roșie
+
+item.Seeds Red Bell Pepper.name=Semințe de ardei gras roșu
+item.Seeds Yellow Bell Pepper.name=Semințe de ardei gras galben
+item.Seeds Cabbage.name=Semințe de varză
+item.Seeds Carrot.name=Semințe de morcov
+item.Seeds Garlic.name=Semințe de usturoi
+item.Seeds Greenbean.name=Semințe de fasole verde
+item.Seeds Onion.name=Semințe de ceapă
+item.Seeds Potato.name=Semințe de cartof
+item.Seeds Rutabaga.name=Semințe de nap
+item.Seeds Squash.name=Semințe de dovlecel
+item.Seeds Tomato.name=Semințe de roșie
+
+#== Alcohol ==
+item.Glass Bottle.name=Sticlă goală
+item.Beer.name=Bere
+item.Cider.name=Cidru
+item.Rum.name=Rom
+item.RyeWhiskey.name=Whisky de secară
+item.Sake.name=Sake
+item.Vodka.name=Votcă
+item.Whiskey.name=Whisky
+item.CornWhiskey.name=Whisky de porumb
+
+#===========
+#= Pottery =
+#===========
+item.Clay.Clay.name=Lut
+item.Clay.Fire Clay.name=Lut refractar
+
+item.Flat Clay.clay flat light.name=Lut plat
+item.Flat Clay.clay flat dark.name=Lut plat
+item.Flat Clay.clay flat fire.name=Lut refractar plat
+item.Flat Clay.clay flat dark fire.name=Lut refractar plat
+
+item.Jug.Clay Jug.name=Urcior de lut
+item.Jug.Ceramic Jug.name=Urcior de ceramică
+item.Jug.Water Jug.name=Urcior de apă
+
+item.Pot.Clay Pot.name=Oală de lut
+item.Pot.Ceramic Pot.name=Oală de ceramică
+
+item.Small Vessel.Clay Vessel.name=Vas de lut
+item.Small Vessel.Ceramic Vessel.name=Vas de ceramică
+
+item.Large Vessel.Clay Vessel [Large].name=Vas de lut [mare]
+item.Large Vessel.Ceramic Vessel [Large].name=Vas de ceramică [mare]
+
+item.Mold.Clay Mold.name=Formă de lut
+item.Mold.Ceramic Mold.name=Formă de ceramică
+
+item.Axe Mold.Clay Mold Axe.name=Formă de topor din lut
+item.Axe Mold.Ceramic Mold Axe.name=Formă de topor
+item.Axe Mold.Ceramic Mold Axe Copper.name=Formă de topor (cupru)
+item.Axe Mold.Ceramic Mold Axe Bronze.name=Formă de topor (bronz)
+item.Axe Mold.Ceramic Mold Axe Black Bronze.name=Formă de topor (bronz negru)
+item.Axe Mold.Ceramic Mold Axe Bismuth Bronze.name=Formă de topor (bronz de bismut)
+
+item.Chisel Mold.Clay Mold Chisel.name=Formă de daltă din lut
+item.Chisel Mold.Ceramic Mold Chisel.name=Formă de daltă
+item.Chisel Mold.Ceramic Mold Chisel Copper.name=Formă de daltă (cupru)
+item.Chisel Mold.Ceramic Mold Chisel Bronze.name=Formă de daltă (bronz)
+item.Chisel Mold.Ceramic Mold Chisel Black Bronze.name=Formă de daltă (bronz negru)
+item.Chisel Mold.Ceramic Mold Chisel Bismuth Bronze.name=Formă de daltă (bronz de bismut)
+
+item.Hammer Mold.Clay Mold Hammer.name=Formă de ciocan din lut
+item.Hammer Mold.Ceramic Mold Hammer.name=Formă de ciocan
+item.Hammer Mold.Ceramic Mold Hammer Copper.name=Formă de ciocan (cupru)
+item.Hammer Mold.Ceramic Mold Hammer Bronze.name=Formă de ciocan (bronz)
+item.Hammer Mold.Ceramic Mold Hammer Black Bronze.name=Formă de ciocan (bronz negru)
+item.Hammer Mold.Ceramic Mold Hammer Bismuth Bronze.name=Formă de ciocan (bronz de bismut)
+
+item.Hoe Mold.Clay Mold Hoe.name=Formă de sapă din lut
+item.Hoe Mold.Ceramic Mold Hoe.name=Formă de sapă
+item.Hoe Mold.Ceramic Mold Hoe Copper.name=Formă de sapă (cupru)
+item.Hoe Mold.Ceramic Mold Hoe Bronze.name=Formă de sapă (bronz)
+item.Hoe Mold.Ceramic Mold Hoe Black Bronze.name=Formă de sapă (bronz negru)
+item.Hoe Mold.Ceramic Mold Hoe Bismuth Bronze.name=Formă de sapă (bronz de bismut)
+
+item.Knife Mold.Clay Mold Knife.name=Formă de cuțit din lut
+item.Knife Mold.Ceramic Mold Knife.name=Formă de cuțit
+item.Knife Mold.Ceramic Mold Knife Copper.name=Formă de cuțit (cupru)
+item.Knife Mold.Ceramic Mold Knife Bronze.name=Formă de cuțit (bronz)
+item.Knife Mold.Ceramic Mold Knife Black Bronze.name=Formă de cuțit (bronz negru)
+item.Knife Mold.Ceramic Mold Knife Bismuth Bronze.name=Formă de cuțit (bronz de bismut)
+
+item.Javelin Mold.Clay Mold Javelin.name=Formă de suliță din lut
+item.Javelin Mold.Ceramic Mold Javelin.name=Formă de suliță
+item.Javelin Mold.Ceramic Mold Javelin Copper.name=Formă de suliță (cupru)
+item.Javelin Mold.Ceramic Mold Javelin Bronze.name=Formă de suliță (bronz)
+item.Javelin Mold.Ceramic Mold Javelin Black Bronze.name=Formă de suliță (bronz negru)
+item.Javelin Mold.Ceramic Mold Javelin Bismuth Bronze.name=Formă de suliță (bronz de bismut)
+
+item.Mace Mold.Clay Mold Mace.name=Formă de buzdugan din lut
+item.Mace Mold.Ceramic Mold Mace.name=Formă de buzdugan
+item.Mace Mold.Ceramic Mold Mace Copper.name=Formă de buzdugan (cupru)
+item.Mace Mold.Ceramic Mold Mace Bronze.name=Formă de buzdugan (bronz)
+item.Mace Mold.Ceramic Mold Mace Black Bronze.name=Formă de buzdugan (bronz negru)
+item.Mace Mold.Ceramic Mold Mace Bismuth Bronze.name=Formă de buzdugan (bronz de bismut)
+
+item.Pick Mold.Clay Mold Pick.name=Formă de târnăcop din lut
+item.Pick Mold.Ceramic Mold Pick.name=Formă de târnăcop
+item.Pick Mold.Ceramic Mold Pick Copper.name=Formă de târnăcop (cupru)
+item.Pick Mold.Ceramic Mold Pick Bronze.name=Formă de târnăcop (bronz)
+item.Pick Mold.Ceramic Mold Pick Black Bronze.name=Formă de târnăcop (bronz negru)
+item.Pick Mold.Ceramic Mold Pick Bismuth Bronze.name=Formă de târnăcop (bronz de bismut)
+
+item.ProPick Mold.Clay Mold ProPick.name=Formă de târnăcop de prospector din lut
+item.ProPick Mold.Ceramic Mold ProPick.name=Formă de târnăcop de prospector
+item.ProPick Mold.Ceramic Mold ProPick Copper.name=Formă de târnăcop de prospector (cupru)
+item.ProPick Mold.Ceramic Mold ProPick Bronze.name=Formă de târnăcop de prospector (bronz)
+item.ProPick Mold.Ceramic Mold ProPick Black Bronze.name=Formă de târnăcop de prospector (bronz negru)
+item.ProPick Mold.Ceramic Mold ProPick Bismuth Bronze.name=Formă de târnăcop de prospector (bronz de bismut)
+
+item.Saw Mold.Clay Mold Saw.name=Formă de fierăstrău din lut
+item.Saw Mold.Ceramic Mold Saw.name=Formă de fierăstrău
+item.Saw Mold.Ceramic Mold Saw Copper.name=Formă de fierăstrău (cupru)
+item.Saw Mold.Ceramic Mold Saw Bronze.name=Formă de fierăstrău (bronz)
+item.Saw Mold.Ceramic Mold Saw Black Bronze.name=Formă de fierăstrău (bronz negru)
+item.Saw Mold.Ceramic Mold Saw Bismuth Bronze.name=Formă de fierăstrău (bronz de bismut)
+
+item.Scythe Mold.Clay Mold Scythe.name=Formă de coasă din lut
+item.Scythe Mold.Ceramic Mold Scythe.name=Formă de coasă
+item.Scythe Mold.Ceramic Mold Scythe Copper.name=Formă de coasă (cupru)
+item.Scythe Mold.Ceramic Mold Scythe Bronze.name=Formă de coasă (bronz)
+item.Scythe Mold.Ceramic Mold Scythe Black Bronze.name=Formă de coasă (bronz negru)
+item.Scythe Mold.Ceramic Mold Scythe Bismuth Bronze.name=Formă de coasă (bronz de bismut)
+
+item.Shovel Mold.Clay Mold Shovel.name=Formă de lopată din lut
+item.Shovel Mold.Ceramic Mold Shovel.name=Formă de lopată
+item.Shovel Mold.Ceramic Mold Shovel Copper.name=Formă de lopată (cupru)
+item.Shovel Mold.Ceramic Mold Shovel Bronze.name=Formă de lopată (bronz)
+item.Shovel Mold.Ceramic Mold Shovel Black Bronze.name=Formă de lopată (bronz negru)
+item.Shovel Mold.Ceramic Mold Shovel Bismuth Bronze.name=Formă de lopată (bronz de bismut)
+
+item.Sword Mold.Clay Mold Sword.name=Formă de sabie din lut
+item.Sword Mold.Ceramic Mold Sword.name=Formă de sabie
+item.Sword Mold.Ceramic Mold Sword Copper.name=Formă de sabie (cupru)
+item.Sword Mold.Ceramic Mold Sword Bronze.name=Formă de sabie (bronz)
+item.Sword Mold.Ceramic Mold Sword Black Bronze.name=Formă de sabie (bronz negru)
+item.Sword Mold.Ceramic Mold Sword Bismuth Bronze.name=Formă de sabie (bronz de bismut)
+
+item.Spindle.name=Fus
+item.Spindle Head.Clay Spindle.name=Fus de lut
+item.Spindle Head.Spindle Head.name=Cap de fus
+
+item.Fire Brick.Fire Brick.name=Cărămidă refractară
+item.Fire Brick.Clay Fire Brick.name=Cărămidă de lut refractar
+tile.FireBrick.name=Bloc de cărămidă refractară
+tile.Pottery.name=Olărie
+
+item.ClayBowl.Ceramic Bowl.name=Bol de ceramică
+item.ClayBowl.Clay Bowl.name=Bol de lut
+
+#= Gems =
+item.Agate.Chipped.name=Agat ciobit
+item.Amethyst.Chipped.name=Ametist ciobit
+item.Beryl.Chipped.name=Beril ciobit
+item.Diamond.Chipped.name=Diamant ciobit
+item.Emerald.Chipped.name=Smarald ciobit
+item.Garnet.Chipped.name=Granat ciobit
+item.Jade.Chipped.name=Jad ciobit
+item.Jasper.Chipped.name=Jasp ciobit
+item.Opal.Chipped.name=Opal ciobit
+item.Ruby.Chipped.name=Rubin ciobit
+item.Sapphire.Chipped.name=Safir ciobit
+item.Topaz.Chipped.name=Topaz ciobit
+item.Tourmaline.Chipped.name=Turmalină ciobită
+
+item.Agate.Flawed.name=Agat imperfect
+item.Amethyst.Flawed.name=Ametist imperfect
+item.Beryl.Flawed.name=Beril imperfect
+item.Diamond.Flawed.name=Diamant imperfect
+item.Emerald.Flawed.name=Smarald imperfect
+item.Garnet.Flawed.name=Granat imperfect
+item.Jade.Flawed.name=Jad imperfect
+item.Jasper.Flawed.name=Jasp imperfect
+item.Opal.Flawed.name=Opal imperfect
+item.Ruby.Flawed.name=Rubin imperfect
+item.Sapphire.Flawed.name=Safir imperfect
+item.Topaz.Flawed.name=Topaz imperfect
+item.Tourmaline.Flawed.name=Turmalină imperfectă
+
+item.Agate.Normal.name=Agat
+item.Amethyst.Normal.name=Ametist
+item.Beryl.Normal.name=Beril
+item.Diamond.Normal.name=Diamant
+item.Emerald.Normal.name=Smarald
+item.Garnet.Normal.name=Granat
+item.Jade.Normal.name=Jad
+item.Jasper.Normal.name=Jasp
+item.Opal.Normal.name=Opal
+item.Ruby.Normal.name=Rubin
+item.Sapphire.Normal.name=Safir
+item.Topaz.Normal.name=Topaz
+item.Tourmaline.Normal.name=Turmalină
+
+item.Agate.Flawless.name=Agat impecabil
+item.Amethyst.Flawless.name=Ametist impecabil
+item.Beryl.Flawless.name=Beril impecabil
+item.Diamond.Flawless.name=Diamant impecabil
+item.Emerald.Flawless.name=Smarald impecabil
+item.Garnet.Flawless.name=Granat impecabil
+item.Jade.Flawless.name=Jad impecabil
+item.Jasper.Flawless.name=Jasp impecabil
+item.Opal.Flawless.name=Opal impecabil
+item.Ruby.Flawless.name=Rubin impecabil
+item.Sapphire.Flawless.name=Safir impecabil
+item.Topaz.Flawless.name=Topaz impecabil
+item.Tourmaline.Flawless.name=Turmalină impecabilă
+
+item.Agate.Exquisite.name=Agat excepțional
+item.Amethyst.Exquisite.name=Ametist excepțional
+item.Beryl.Exquisite.name=Beril excepțional
+item.Diamond.Exquisite.name=Diamant excepțional
+item.Emerald.Exquisite.name=Smarald excepțional
+item.Garnet.Exquisite.name=Granat excepțional
+item.Jade.Exquisite.name=Jad excepțional
+item.Jasper.Exquisite.name=Jasp excepțional
+item.Opal.Exquisite.name=Opal excepțional
+item.Ruby.Exquisite.name=Rubin excepțional
+item.Sapphire.Exquisite.name=Safir excepțional
+item.Topaz.Exquisite.name=Topaz excepțional
+item.Tourmaline.Exquisite.name=Turmalină excepțională
+
+#===========
+#= Powders =
+#===========
+item.dyePowder.black.name=Sac cu cerneală
+item.dyePowder.blue.name=Lapis lazuli
+item.dyePowder.brown.name=Boabe de cacao
+item.dyePowder.cyan.name=Vopsea turcoaz
+item.dyePowder.gray.name=Vopsea gri
+item.dyePowder.green.name=Vopsea verde
+item.dyePowder.lightBlue.name=Vopsea bleu
+item.dyePowder.lime.name=Vopsea verde-deschis
+item.dyePowder.magenta.name=Vopsea magenta
+item.dyePowder.orange.name=Vopsea portocalie
+item.dyePowder.pink.name=Vopsea roz
+item.dyePowder.purple.name=Vopsea  violetă
+item.dyePowder.red.name=Vopsea roșie
+item.dyePowder.silver.name=Vopsea gri-deschis
+item.dyePowder.white.name=Făină de oase
+item.dyePowder.yellow.name=Vopsea galbenă
+
+item.Coke.name=Cocs
+item.Powder.Flux.name=Fondant
+item.Powder.Graphite Powder.name=Praf de grafit
+item.Powder.Hematite Powder.name=Praf de hematit
+item.Powder.Kaolinite Powder.name=Praf de caolinit
+item.Powder.Lapis Lazuli Powder.name=Praf de lapis lazuli
+item.Powder.Limonite Powder.name=Praf de limonit
+item.Powder.Malachite Powder.name=Praf de malachit
+item.Powder.Salt.name=Sare
+item.Powder.Saltpeter Powder.name=Praf de salpetru
+item.Powder.Sulfur Powder.name=Praf de sulf
+
+#=========
+#= Stone =
+#=========
+#== Stone Items ==
+item.LooseRock.Andesite.name=Piatră de andezit
+item.LooseRock.Basalt.name=Piatră de bazalt
+item.LooseRock.Chalk.name=Piatră de cretă
+item.LooseRock.Chert.name=Piatră de silex
+item.LooseRock.Claystone.name=Piatră de argilit
+item.LooseRock.Conglomerate.name=Piatră de conglomerat
+item.LooseRock.Dacite.name=Piatră de dacit
+item.LooseRock.Diorite.name=Piatră de diorit
+item.LooseRock.Dolomite.name=Piatră de dolomit
+item.LooseRock.Gabbro.name=Piatră de gabro
+item.LooseRock.Gneiss.name=Piatră de gnais
+item.LooseRock.Granite.name=Piatră de granit
+item.LooseRock.Limestone.name=Piatră de calcar
+item.LooseRock.Marble.name=Piatră de marmură
+item.LooseRock.Phyllite.name=Piatră de filit
+item.LooseRock.Quartzite.name=Piatră de cuarțit
+item.LooseRock.Rhyolite.name=Piatră de riolit
+item.LooseRock.Rock Salt.name=Piatră de sare gemă
+item.LooseRock.Schist.name=Piatră de șist
+item.LooseRock.Shale.name=Piatră de șist argilos
+item.LooseRock.Slate.name=Piatră de ardezie
+
+item.ItemStoneBrick.Andesite.name=Cărămidă de andezit
+item.ItemStoneBrick.Basalt.name=Cărămidă de bazalt
+item.ItemStoneBrick.Chalk.name=Cărămidă de cretă
+item.ItemStoneBrick.Chert.name=Cărămidă de silex
+item.ItemStoneBrick.Claystone.name=Cărămidă de argilit
+item.ItemStoneBrick.Conglomerate.name=Cărămidă de conglomerat
+item.ItemStoneBrick.Dacite.name=Cărămidă de dacit
+item.ItemStoneBrick.Diorite.name=Cărămidă de diorit
+item.ItemStoneBrick.Dolomite.name=Cărămidă de dolomit
+item.ItemStoneBrick.Gabbro.name=Cărămidă de gabro
+item.ItemStoneBrick.Gneiss.name=Cărămidă de gnais
+item.ItemStoneBrick.Granite.name=Cărămidă de granit
+item.ItemStoneBrick.Limestone.name=Cărămidă de calcar
+item.ItemStoneBrick.Marble.name=Cărămidă de marmură
+item.ItemStoneBrick.Phyllite.name=Cărămidă de filit
+item.ItemStoneBrick.Quartzite.name=Cărămidă de cuarțit
+item.ItemStoneBrick.Rhyolite.name=Cărămidă de riolit
+item.ItemStoneBrick.Rock Salt.name=Cărămidă de sare gemă
+item.ItemStoneBrick.Schist.name=Cărămidă de șist
+item.ItemStoneBrick.Shale.name=Cărămidă de șist argilos
+item.ItemStoneBrick.Slate.name=Cărămidă de ardezie
+
+item.FlatRock.Andesite.name=Andezit plat
+item.FlatRock.Basalt.name=Bazalt plat
+item.FlatRock.Chalk.name=Cretă plată
+item.FlatRock.Chert.name=Silex plat
+item.FlatRock.Claystone.name=Argilit plat
+item.FlatRock.Conglomerate.name=Conglomerat plat
+item.FlatRock.Dacite.name=Dacit plat
+item.FlatRock.Diorite.name=Diorit plat
+item.FlatRock.Dolomite.name=Dolomit plat
+item.FlatRock.Gabbro.name=Gabro plat
+item.FlatRock.Gneiss.name=Gnais plat
+item.FlatRock.Granite.name=Granit plat
+item.FlatRock.Limestone.name=Calcar plat
+item.FlatRock.Marble.name=Marmură plată
+item.FlatRock.Phyllite.name=Filit plat
+item.FlatRock.Quartzite.name=Cuarțit plat
+item.FlatRock.Rhyolite.name=Riolit plat
+item.FlatRock.Rock Salt.name=Sare gemă plată
+item.FlatRock.Schist.name=Șist plat
+item.FlatRock.Shale.name=Șist argilos plat
+item.FlatRock.Slate=Ardezie plată
+
+#== Stone Blocks ==
+tile.WallCobble.Andesite.name=Zid de pietruială de andezit
+tile.WallCobble.Basalt.name=Zid de pietruială de bazalt
+tile.WallCobble.Chalk.name=Zid de pietruială de cretă
+tile.WallCobble.Chert.name=Zid de pietruială de silex
+tile.WallCobble.Claystone.name=Zid de pietruială de argilit
+tile.WallCobble.Conglomerate.name=Zid de pietruială de conglomerat
+tile.WallCobble.Dacite.name=Zid de pietruială de dacit
+tile.WallCobble.Diorite.name=Zid de pietruială de diorit
+tile.WallCobble.Dolomite.name=Zid de pietruială de dolomit
+tile.WallCobble.Gabbro.name=Zid de pietruială de gabro
+tile.WallCobble.Gneiss.name=Zid de pietruială de gnais
+tile.WallCobble.Granite.name=Zid de pietruială de granit
+tile.WallCobble.Limestone.name=Zid de pietruială de calcar
+tile.WallCobble.Marble.name=Zid de pietruială de marmură
+tile.WallCobble.Phyllite.name=Zid de pietruială de filit
+tile.WallCobble.Quartzite.name=Zid de pietruială de cuarțit
+tile.WallCobble.Rhyolite.name=Zid de pietruială de riolit
+tile.WallCobble.Rock Salt.name=Zid de pietruială de sare gemă
+tile.WallCobble.Schist.name=Zid de pietruială de șist
+tile.WallCobble.Shale.name=Zid de pietruială de șist argilos
+tile.WallCobble.Slate.name=Zid de pietruială de ardezie
+
+tile.WallRaw.Andesite.name=Zid de andezit
+tile.WallRaw.Basalt.name=Zid de bazalt
+tile.WallRaw.Chalk.name=Zid de cretă
+tile.WallRaw.Chert.name=Zid de silex
+tile.WallRaw.Claystone.name=Zid de argilit
+tile.WallRaw.Conglomerate.name=Zid de conglomerat
+tile.WallRaw.Dacite.name=Zid de dacit
+tile.WallRaw.Diorite.name=Zid de diorit
+tile.WallRaw.Dolomite.name=Zid de dolomit
+tile.WallRaw.Gabbro.name=Zid de gabro
+tile.WallRaw.Gneiss.name=Zid de gnais
+tile.WallRaw.Granite.name=Zid de granit
+tile.WallRaw.Limestone.name=Zid de calcar
+tile.WallRaw.Marble.name=Zid de marmură
+tile.WallRaw.Phyllite.name=Zid de filit
+tile.WallRaw.Quartzite.name=Zid de cuarțit
+tile.WallRaw.Rhyolite.name=Zid de riolit
+tile.WallRaw.Rock Salt.name=Zid de sare gemă
+tile.WallRaw.Schist.name=Zid de șist
+tile.WallRaw.Shale.name=Zid de șist argilos
+tile.WallRaw.Slate.name=Zid de ardezie
+
+tile.WallBrick.Andesite.name=Zid de cărămidă de andezit
+tile.WallBrick.Basalt.name=Zid de cărămidă de bazalt
+tile.WallBrick.Chalk.name=Zid de cărămidă de cretă
+tile.WallBrick.Chert.name=Zid de cărămidă de silex
+tile.WallBrick.Claystone.name=Zid de cărămidă de argilit
+tile.WallBrick.Conglomerate.name=Zid de cărămidă de conglomerat
+tile.WallBrick.Dacite.name=Zid de cărămidă de dacit
+tile.WallBrick.Diorite.name=Zid de cărămidă de diorit
+tile.WallBrick.Dolomite.name=Zid de cărămidă de dolomit
+tile.WallBrick.Gabbro.name=Zid de cărămidă de gabro
+tile.WallBrick.Gneiss.name=Zid de cărămidă de gnais
+tile.WallBrick.Granite.name=Zid de cărămidă de granit
+tile.WallBrick.Limestone.name=Zid de cărămidă de calcar
+tile.WallBrick.Marble.name=Zid de cărămidă de marmură
+tile.WallBrick.Phyllite.name=Zid de cărămidă de filit
+tile.WallBrick.Quartzite.name=Zid de cărămidă de cuarțit
+tile.WallBrick.Rhyolite.name=Zid de cărămidă de riolit
+tile.WallBrick.Rock Salt.name=Zid de cărămidă de sare gemă
+tile.WallBrick.Schist.name=Zid de cărămidă de șist
+tile.WallBrick.Shale.name=Zid de cărămidă de șist argilos
+tile.WallBrick.Slate.name=Zid de cărămidă de ardezie
+
+tile.WallSmooth.Andesite.name=Zid neted de andezit
+tile.WallSmooth.Basalt.name=Zid neted de bazalt
+tile.WallSmooth.Chalk.name=Zid neted de cretă
+tile.WallSmooth.Chert.name=Zid neted de silex
+tile.WallSmooth.Claystone.name=Zid neted de argilit
+tile.WallSmooth.Conglomerate.name=Zid neted de conglomerat
+tile.WallSmooth.Dacite.name=Zid neted de dacit
+tile.WallSmooth.Diorite.name=Zid neted de diorit
+tile.WallSmooth.Dolomite.name=Zid neted de dolomit
+tile.WallSmooth.Gabbro.name=Zid neted de gabro
+tile.WallSmooth.Gneiss.name=Zid neted de gnais
+tile.WallSmooth.Granite.name=Zid neted de granit
+tile.WallSmooth.Limestone.name=Zid neted de calcar
+tile.WallSmooth.Marble.name=Zid neted de marmură
+tile.WallSmooth.Phyllite.name=Zid neted de filit
+tile.WallSmooth.Quartzite.name=Zid neted de cuarțit
+tile.WallSmooth.Rhyolite.name=Zid neted de riolit
+tile.WallSmooth.Rock Salt.name=Zid neted de sare gemă
+tile.WallSmooth.Schist.name=Zid neted de șist
+tile.WallSmooth.Shale.name=Zid neted de șist argilos
+tile.WallSmooth.Slate.name=Zid neted de ardezie
+
+tile.IgExRock.Andesite.name=Andezit
+tile.IgExRock.Basalt.name=Bazalt
+tile.SedRock.Chalk.name=Cretă
+tile.SedRock.Chert.name=Silex
+tile.SedRock.Claystone.name=Argilit
+tile.SedRock.Conglomerate.name=Conglomerat
+tile.IgExRock.Dacite.name=Dacit
+tile.IgInRock.Diorite.name=Diorit
+tile.SedRock.Dolomite.name=Dolomit
+tile.IgInRock.Gabbro.name=Gabro
+tile.MMRock.Gneiss.name=Gnais
+tile.IgInRock.Granite.name=Granit
+tile.SedRock.Limestone.name=Calcar
+tile.MMRock.Marble.name=Marmură
+tile.MMRock.Phyllite.name=Filit
+tile.MMRock.Quartzite.name=Cuarțit
+tile.IgExRock.Rhyolite.name=Riolit
+tile.SedRock.Rock Salt.name=Sare gemă
+tile.MMRock.Schist.name=Șist
+tile.SedRock.Shale.name=Șist argilos
+tile.MMRock.Slate.name=Ardezie
+
+tile.IgExRockCobble.Andesite.name=Pietruială de andezit
+tile.IgExRockCobble.Basalt.name=Pietruială de bazalt
+tile.SedRockCobble.Chalk.name=Pietruială de cretă
+tile.SedRockCobble.Chert.name=Pietruială de silex
+tile.SedRockCobble.Claystone.name=Pietruială de argilit
+tile.SedRockCobble.Conglomerate.name=Pietruială de conglomerat
+tile.IgExRockCobble.Dacite.name=Pietruială de dacit
+tile.IgInRockCobble.Diorite.name=Pietruială de diorit
+tile.SedRockCobble.Dolomite.name=Pietruială de dolomit
+tile.IgInRockCobble.Gabbro.name=Pietruială de gabro
+tile.MMRockCobble.Gneiss.name=Pietruială de gnais
+tile.IgInRockCobble.Granite.name=Pietruială de granit
+tile.SedRockCobble.Limestone.name=Pietruială de calcar
+tile.MMRockCobble.Marble.name=Pietruială de marmură
+tile.MMRockCobble.Phyllite.name=Pietruială de filit
+tile.MMRockCobble.Quartzite.name=Pietruială de cuarțit
+tile.IgExRockCobble.Rhyolite.name=Pietruială de riolit
+tile.SedRockCobble.Rock Salt.name=Pietruială de sare gemă
+tile.MMRockCobble.Schist.name=Pietruială de șist
+tile.SedRockCobble.Shale.name=Pietruială de șist argilos
+tile.MMRockCobble.Slate.name=Pietruială de ardezie
+
+tile.IgExRockSmooth.Andesite.name=Andezit neted
+tile.IgExRockSmooth.Basalt.name=Bazalt neted
+tile.SedRockSmooth.Chalk.name=Cretă netedă
+tile.SedRockSmooth.Chert.name=Silex neted
+tile.SedRockSmooth.Claystone.name=Argilit neted
+tile.SedRockSmooth.Conglomerate.name=Conglomerat neted
+tile.IgExRockSmooth.Dacite.name=Dacit neted
+tile.IgInRockSmooth.Diorite.name=Diorit neted
+tile.SedRockSmooth.Dolomite.name=Dolomit neted
+tile.IgInRockSmooth.Gabbro.name=Gabro neted
+tile.MMRockSmooth.Gneiss.name=Gnais neted
+tile.IgInRockSmooth.Granite.name=Granit neted
+tile.SedRockSmooth.Limestone.name=Calcar neted
+tile.MMRockSmooth.Marble.name=Marmură netedă
+tile.MMRockSmooth.Phyllite.name=Filit neted
+tile.MMRockSmooth.Quartzite.name=Cuarțit neted
+tile.IgExRockSmooth.Rhyolite.name=Riolit neted
+tile.SedRockSmooth.Rock Salt.name=Sare gemă netedă
+tile.MMRockSmooth.Schist.name=Șist neted
+tile.SedRockSmooth.Shale.name=Șist argilos neted
+tile.MMRockSmooth.Slate.name=Ardezie netedă
+
+tile.IgExRockBrick.Andesite.name=Cărămizi de andezit
+tile.IgExRockBrick.Basalt.name=Cărămizi de bazalt
+tile.SedRockBrick.Chalk.name=Cărămizi de cretă
+tile.SedRockBrick.Chert.name=Cărămizi de silex
+tile.SedRockBrick.Claystone.name=Cărămizi de argilit
+tile.SedRockBrick.Conglomerate.name=Cărămizi de conglomerat
+tile.IgExRockBrick.Dacite.name=Cărămizi de dacit
+tile.IgInRockBrick.Diorite.name=Cărămizi de diorit
+tile.SedRockBrick.Dolomite.name=Cărămizi de dolomit
+tile.IgInRockBrick.Gabbro.name=Cărămizi de gabro
+tile.MMRockBrick.Gneiss.name=Cărămizi de gnais
+tile.IgInRockBrick.Granite.name=Cărămizi de granit
+tile.SedRockBrick.Limestone.name=Cărămizi de calcar
+tile.MMRockBrick.Marble.name=Cărămizi de marmură
+tile.MMRockBrick.Phyllite.name=Cărămizi de filit
+tile.MMRockBrick.Quartzite.name=Cărămizi de cuarțit
+tile.IgExRockBrick.Rhyolite.name=Cărămizi de riolit
+tile.SedRockBrick.Rock Salt.name=Cărămizi de sare gemă
+tile.MMRockBrick.Schist.name=Cărămizi de șist
+tile.SedRockBrick.Shale.name=Cărămizi de șist argilos
+tile.MMRockBrick.Slate.name=Cărămizi de ardezie
+
+#=======
+#= Ore =
+#=======
+#== Ore Items ==
+item.Ore.Bituminous Coal.name=Cărbune bituminos
+item.Ore.Borax.name=Borax
+item.Ore.Cinnabar.name=Cinabru
+item.Ore.Cryolite.name=Criolit
+item.Ore.Graphite.name=Grafit
+item.Ore.Gypsum.name=Ghips
+item.Ore.Jet.name=Jais
+item.Ore.Kaolinite.name=Caolinit
+item.Ore.Kimberlite.name=Kimberlit
+item.Ore.Lapis Lazuli.name=Lapis lazuli
+item.Ore.Lignite.name=Lignit
+item.Ore.Microcline.name=Microclin
+item.Ore.Olivine.name=Olivină
+item.Ore.Petrified Wood.name=Lemn pietrificat
+item.Ore.Pitchblende.name=Pehblendă
+item.Ore.Saltpeter.name=Salpetru
+item.Ore.Satinspar.name=Var de calcit
+item.Ore.Selenite.name=Selenit
+item.Ore.Serpentine.name=Serpentin
+item.Ore.Sulfur.name=Sulf
+item.Ore.Sylvite.name=Silvină
+
+item.Ore.Bismuthinite.name=Bismutină
+item.Ore.Cassiterite.name=Casiterit
+item.Ore.Galena.name=Galenă
+item.Ore.Garnierite.name=Garnierit
+item.Ore.Hematite.name=Hematit
+item.Ore.Limonite.name=Limonit
+item.Ore.Magnetite.name=Magnetit
+item.Ore.Malachite.name=Malahit
+item.Ore.Native Copper.name=Cupru nativ
+item.Ore.Native Gold.name=Aur nativ
+item.Ore.Native Platinum.name=Platină nativă
+item.Ore.Native Silver.name=Argint nativ
+item.Ore.Sphalerite.name=Blendă
+item.Ore.Tetrahedrite.name=Tetraedrit
+
+item.Ore.Rich Bismuthinite.name=Bismutină bogată
+item.Ore.Rich Cassiterite.name=Casiterit bogat
+item.Ore.Rich Galena.name=Galenă bogată
+item.Ore.Rich Garnierite.name=Garnierit bogat
+item.Ore.Rich Hematite.name=Hematit bogat
+item.Ore.Rich Limonite.name=Limonit bogat
+item.Ore.Rich Magnetite.name=Magnetit bogat
+item.Ore.Rich Malachite.name=Malahit bogat
+item.Ore.Rich Native Copper.name=Cupru nativ bogat
+item.Ore.Rich Native Gold.name=Aur nativ bogat
+item.Ore.Rich Native Platinum.name=Platină nativă bogată
+item.Ore.Rich Native Silver.name=Argint nativ bogat
+item.Ore.Rich Sphalerite.name=Blendă bogată
+item.Ore.Rich Tetrahedrite.name=Tetraedrit bogat
+
+item.Ore.Poor Bismuthinite.name=Bismutină săracă
+item.Ore.Poor Cassiterite.name=Casiterit sărac
+item.Ore.Poor Galena.name=Galenă săracă
+item.Ore.Poor Garnierite.name=Garnierit sărac
+item.Ore.Poor Hematite.name=Hematit sărac
+item.Ore.Poor Limonite.name=Limonit sărac
+item.Ore.Poor Magnetite.name=Magnetit sărac
+item.Ore.Poor Malachite.name=Malahit sărac
+item.Ore.Poor Native Copper.name=Cupru nativ sărac
+item.Ore.Poor Native Gold.name=Aur nativ sărac
+item.Ore.Poor Native Platinum.name=Platină nativă săracă
+item.Ore.Poor Native Silver.name=Argint nativ sărac
+item.Ore.Poor Sphalerite.name=Blendă săracă
+item.Ore.Poor Tetrahedrite.name=Tetraedrit sărac
+
+item.Small Ore.Bismuthinite.name=Bismutină mică
+item.Small Ore.Cassiterite.name=Casiterit mic
+item.Small Ore.Galena.name=Galenă mică
+item.Small Ore.Garnierite.name=Garnierit mic
+item.Small Ore.Hematite.name=Hematit mic
+item.Small Ore.Limonite.name=Limonit mic
+item.Small Ore.Magnetite.name=Magnetit mic
+item.Small Ore.Malachite.name=Malahit mic
+item.Small Ore.Native Copper.name=Pepită de cupru nativ
+item.Small Ore.Native Gold.name=Pepită de aur nativ
+item.Small Ore.Native Platinum.name=Pepită de platină nativă
+item.Small Ore.Native Silver.name=Pepită de argint nativ
+item.Small Ore.Sphalerite.name=Blendă mică
+item.Small Ore.Tetrahedrite.name=Tetraedrit mic
+
+#== Ore Blocks ==
+tile.Ore.name=Minereu
+tile.Ore.Bituminous Coal.name=Cărbune bituminos
+tile.Ore.Borax.name=Borax
+tile.Ore.Cinnabar.name=Cinabru
+tile.Ore.Cryolite.name=Criolit
+tile.Ore.Graphite.name=Grafit
+tile.Ore.Gypsum.name=Ghips
+tile.Ore.Jet.name=Jais
+tile.Ore.Kaolinite.name=Caolinit
+tile.Ore.Kimberlite.name=Kimberlit
+tile.Ore.Lapis Lazuli.name=Lapis lazuli
+tile.Ore.Lignite.name=Lignit
+tile.Ore.Microcline.name=Microclin
+tile.Ore.Olivine.name=Olivină
+tile.Ore.Petrified Wood.name=Lemn pietrificat
+tile.Ore.Pitchblende.name=Pehblendă
+tile.Ore.Saltpeter.name=Salpetru
+tile.Ore.Satinspar.name=Var de calcit
+tile.Ore.Selenite.name=Selenit
+tile.Ore.Serpentine.name=Serpentin
+tile.Ore.Sulfur.name=Sulf
+tile.Ore.Sylvite.name=Silvină
+
+tile.Ore.Bismuthinite.name=Bismutină
+tile.Ore.Cassiterite.name=Casiterit
+tile.Ore.Galena.name=Galenă
+tile.Ore.Garnierite.name=Garnierit
+tile.Ore.Hematite.name=Hematit
+tile.Ore.Limonite.name=Limonit
+tile.Ore.Magnetite.name=Magnetit
+tile.Ore.Malachite.name=Malahit
+tile.Ore.Native Copper.name=Cupru nativ
+tile.Ore.Native Gold.name=Aur nativ
+tile.Ore.Native Platinum.name=Platină nativă
+tile.Ore.Native Silver.name=Argint nativ
+tile.Ore.Sphalerite.name=Blendă
+tile.Ore.Tetrahedrite.name=Tetraedrit
+
+#========
+#= Wood =
+#========
+#== Wood Items ==
+item.Log.Acacia.name=Buștean de salcâm
+item.Log.Ash.name=Buștean de frasin
+item.Log.Aspen.name=Buștean de plop
+item.Log.Birch.name=Buștean de mesteacăn
+item.Log.Chestnut.name=Buștean de castan
+item.Log.Douglas Fir.name=Buștean de duglas
+item.Log.Hickory.name=Buștean de nuc
+item.Log.Kapok.name=Buștean de capoc
+item.Log.Maple.name=Buștean de arțar
+item.Log.Oak.name=Buștean de stejar
+item.Log.Pine.name=Buștean de pin
+item.Log.Sequoia.name=Buștean de sequoia
+item.Log.Spruce.name=Buștean de molid
+item.Log.Sycamore.name=Buștean de sicomor
+item.Log.White Cedar.name=Buștean de cedru alb
+item.Log.White Elm.name=Buștean de ulm
+item.Log.Willow.name=Buștean de salcie
+
+item.SinglePlank.Acacia.name=Cherestea de salcâm
+item.SinglePlank.Ash.name=Cherestea de frasin
+item.SinglePlank.Aspen.name=Cherestea de plop
+item.SinglePlank.Birch.name=Cherestea de mesteacăn
+item.SinglePlank.Chestnut.name=Cherestea de castan
+item.SinglePlank.Douglas Fir.name=Cherestea de duglas
+item.SinglePlank.Hickory.name=Cherestea de nuc
+item.SinglePlank.Kapok.name=Cherestea de capoc
+item.SinglePlank.Maple.name=Cherestea de arțar
+item.SinglePlank.Oak.name=Cherestea de stejar
+item.SinglePlank.Pine.name=Cherestea de pin
+item.SinglePlank.Sequoia.name=Cherestea de sequoia
+item.SinglePlank.Spruce.name=Cherestea de molid
+item.SinglePlank.Sycamore.name=Cherestea de sicomor
+item.SinglePlank.White Cedar.name=Cherestea de cedru alb
+item.SinglePlank.White Elm.name=Cherestea de ulm
+item.SinglePlank.Willow.name=Cherestea de salcie
+
+item.Acacia Door.name=Ușă de salcâm
+item.Ash Door.name=Ușă de frasin
+item.Aspen Door.name=Ușă de plop
+item.Birch Door.name=Ușă de mesteacăn
+item.Chestnut Door.name=Ușă de castan
+item.Douglas Fir Door.name=Ușă de duglas
+item.Hickory Door.name=Ușă de nuc
+item.Kapok Door.name=Ușă de capoc
+item.Maple Door.name=Ușă de arțar
+item.Oak Door.name=Ușă de stejar
+item.Pine Door.name=Ușă de pin
+item.Sequoia Door.name=Ușă de sequoia
+item.Spruce Door.name=Ușă de molid
+item.Sycamore Door.name=Ușă de sicomor
+item.White Cedar Door.name=Ușă de cedru alb
+item.White Elm Door.name=Ușă de ulm
+item.Willow Door.name=Ușă de salcie
+
+item.Barrel.Acacia.name=Butoi de salcâm
+item.Barrel.Ash.name=Butoi de frasin
+item.Barrel.Aspen.name=Butoi de plop
+item.Barrel.Birch.name=Butoi de mesteacăn
+item.Barrel.Chestnut.name=Butoi de castan
+item.Barrel.Douglas Fir.name=Butoi de duglas
+item.Barrel.Hickory.name=Butoi de nuc
+item.Barrel.Kapok.name=Butoi de capoc
+item.Barrel.Maple.name=Butoi de arțar
+item.Barrel.Oak.name=Butoi de stejar
+item.Barrel.Pine.name=Butoi de pin
+item.Barrel.Sequoia.name=Butoi de sequoia
+item.Barrel.Spruce.name=Butoi de molid
+item.Barrel.Sycamore.name=Butoi de sicomor
+item.Barrel.White Cedar.name=Butoi de cedru alb
+item.Barrel.White Elm.name=Butoi de ulm
+item.Barrel.Willow.name=Butoi de salcie
+
+item.Loom.Acacia.name=Război de țesut de salcâm
+item.Loom.Ash.name=Război de țesut de frasin
+item.Loom.Aspen.name=Război de țesut de plop
+item.Loom.Birch.name=Război de țesut de mesteacăn
+item.Loom.Chestnut.name=Război de țesut de castan
+item.Loom.Douglas Fir.name=Război de țesut de duglas
+item.Loom.Hickory.name=Război de țesut de nuc
+item.Loom.Kapok.name=Război de țesut de capoc
+item.Loom.Maple.name=Război de țesut de arțar
+item.Loom.Oak.name=Război de țesut de stejar
+item.Loom.Pine.name=Război de țesut de pin
+item.Loom.Sequoia.name=Război de țesut de sequoia
+item.Loom.Spruce.name=Război de țesut de molid
+item.Loom.Sycamore.name=Război de țesut de sicomor
+item.Loom.White Cedar.name=Război de țesut de cedru alb
+item.Loom.White Elm.name=Război de țesut de ulm
+item.Loom.Willow.name=Război de țesut de salcie
+
+#== Wood Blocks ==
+tile.Chest.Acacia.name=
+tile.Chest.Ash.name=
+tile.Chest.Aspen.name=
+tile.Chest.Birch.name=
+tile.Chest.Chestnut.name=
+tile.Chest.Douglas Fir.name=
+tile.Chest.Hickory.name=
+tile.Chest.Kapok.name=
+tile.Chest.Maple.name=
+tile.Chest.Oak.name=
+tile.Chest.Pine.name=
+tile.Chest.Sequoia.name=
+tile.Chest.Spruce.name=
+tile.Chest.Sycamore.name=
+tile.Chest.White Cedar.name=
+tile.Chest.White Elm.name=
+tile.Chest.Willow.name=
+
+tile.log2.Acacia.name=Buștean de salcâm
+tile.log.Ash.name=Buștean de frasin
+tile.log.Aspen.name=Buștean de plop
+tile.log.Birch.name=Buștean de mesteacăn
+tile.log.Chestnut.name=Buștean de castan
+tile.log.Douglas Fir.name=Buștean de duglas
+tile.log.Hickory.name=Buștean de nuc
+tile.log.Kapok.name=Buștean de capoc
+tile.log.Maple.name=Buștean de arțar
+tile.log.Oak.name=Buștean de stejar
+tile.log.Pine.name=Buștean de pin
+tile.log.Sequoia.name=Buștean de sequoia
+tile.log.Spruce.name=Buștean de molid
+tile.log.Sycamore.name=Buștean de sicomor
+tile.log.White Cedar.name=Buștean de cedru alb
+tile.log.White Elm.name=Buștean de ulm
+tile.log.Willow.name=Buștean de salcie
+
+tile.WoodVert2.Acacia.name=Buștean de salcâm
+tile.WoodVert.Ash.name=Buștean de frasin
+tile.WoodVert.Aspen.name=Buștean de plop
+tile.WoodVert.Birch.name=Buștean de mesteacăn
+tile.WoodVert.Chestnut.name=Buștean de castan
+tile.WoodVert.Douglas Fir.name=Buștean de duglas
+tile.WoodVert.Hickory.name=Buștean de nuc
+tile.WoodVert.Kapok.name=Buștean de capoc
+tile.WoodVert.Maple.name=Buștean de arțar
+tile.WoodVert.Oak.name=Buștean de stejar
+tile.WoodVert.Pine.name=Buștean de pin
+tile.WoodVert.Sequoia.name=Buștean de sequoia
+tile.WoodVert.Spruce.name=Buștean de molid
+tile.WoodVert.Sycamore.name=Buștean de sicomor
+tile.WoodVert.White Cedar.name=Buștean de cedru alb
+tile.WoodVert.White Elm.name=Buștean de ulm
+tile.WoodVert.Willow.name=Buștean de salcie
+
+tile.WoodHoriz3.Acacia.name=Buștean de salcâm
+tile.WoodHoriz.Ash.name=Buștean de frasin
+tile.WoodHoriz.Aspen.name=Buștean de plop
+tile.WoodHoriz.Birch.name=Buștean de mesteacăn
+tile.WoodHoriz.Chestnut.name=Buștean de castan
+tile.WoodHoriz.Douglas Fir.name=Buștean de duglas
+tile.WoodHoriz.Hickory.name=Buștean de nuc
+tile.WoodHoriz2.Kapok.name=Buștean de capoc
+tile.WoodHoriz.Maple.name=Buștean de arțar
+tile.WoodHoriz.Oak.name=Buștean de stejar
+tile.WoodHoriz2.Pine.name=Buștean de pin
+tile.WoodHoriz2.Sequoia.name=Buștean de sequoia
+tile.WoodHoriz2.Spruce.name=Buștean de molid
+tile.WoodHoriz2.Sycamore.name=Buștean de sicomor
+tile.WoodHoriz2.White Cedar.name=Buștean de cedru alb
+tile.WoodHoriz2.White Elm.name=Buștean de ulm
+tile.WoodHoriz2.Willow.name=Buștean de salcie
+
+tile.sapling2.Acacia.name=Puiet de salcâm
+tile.sapling.Ash.name=Puiet de frasin
+tile.sapling.Aspen.name=Puiet de plop
+tile.sapling.Birch.name=Puiet de mesteacăn
+tile.sapling.Chestnut.name=Puiet de castan
+tile.sapling.Douglas Fir.name=Puiet de duglas
+tile.sapling.Hickory.name=Puiet de nuc
+tile.sapling.Kapok.name=Puiet de capoc
+tile.sapling.Maple.name=Puiet de arțar
+tile.sapling.Oak.name=Puiet de stejar
+tile.sapling.Pine.name=Puiet de pin
+tile.sapling.Sequoia.name=Puiet de sequoia
+tile.sapling.Spruce.name=Puiet de molid
+tile.sapling.Sycamore.name=Puiet de sicomor
+tile.sapling.White Cedar.name=Puiet de cedru alb
+tile.sapling.White Elm.name=Puiet de ulm
+tile.sapling.Willow.name=Puiet de salcie
+
+tile.leaves2.name=Frunze de salcâm
+tile.leaves2.Acacia.name=Frunze de salcâm
+tile.leaves.Ash.name=Frunze de frasin
+tile.leaves.Aspen.name=Frunze de plop
+tile.leaves.Birch.name=Frunze de mesteacăn
+tile.leaves.Chestnut.name=Frunze de castan
+tile.leaves.Douglas Fir.name=Frunze de duglas
+tile.leaves.Hickory.name=Frunze de nuc
+tile.leaves.Kapok.name=Frunze de capoc
+tile.leaves.Maple.name=Frunze de arțar
+tile.leaves.Oak.name=Frunze de stejar
+tile.leaves.Pine.name=Frunze de pin
+tile.leaves.Sequoia.name=Frunze de sequoia
+tile.leaves.Spruce.name=Frunze de molid
+tile.leaves.Sycamore.name=Frunze de sicomor
+tile.leaves.White Cedar.name=Frunze de cedru alb
+tile.leaves.White Elm.name=Frunze de ulm
+tile.leaves.Willow.name=Frunze de salcie
+
+tile.wood2.Acacia.name=Scânduri de salcâm
+tile.wood.Ash.name=Scânduri de frasin
+tile.wood.Aspen.name=Scânduri de plop
+tile.wood.Birch.name=Scânduri de mesteacăn
+tile.wood.Chestnut.name=Scânduri de castan
+tile.wood.Douglas Fir.name=Scânduri de duglas
+tile.wood.Hickory.name=Scânduri de nuc
+tile.wood.Kapok.name=Scânduri de capoc
+tile.wood.Maple.name=Scânduri de arțar
+tile.wood.Oak.name=Scânduri de stejar
+tile.wood.Pine.name=Scânduri de pin
+tile.wood.Sequoia.name=Scânduri de sequoia
+tile.wood.Spruce.name=Scânduri de molid
+tile.wood.Sycamore.name=Scânduri de sicomor
+tile.wood.White Cedar.name=Scânduri de cedru alb
+tile.wood.White Elm.name=Scânduri de ulm
+tile.wood.Willow.name=Scânduri de salcie
+
+tile.fruitTreeWood.name=Pom fructifer
+tile.fruitTreeLeaves.name=Frunze de pom fructifer
+tile.fruitTreeLeaves2.name=Frunze de pom fructifer
+
+tile.Door Acacia.name=Ușă de salcâm
+tile.Door Ash.name=Ușă de frasin
+tile.Door Aspen.name=Ușă de plop
+tile.Door Birch.name=Ușă de mesteacăn
+tile.Door Chestnut.name=Ușă de castan
+tile.Door Douglas Fir.name=Ușă de duglas
+tile.Door Hickory.name=Ușă de nuc
+tile.Door Kapok.name=Ușă de capoc
+tile.Door Maple.name=Ușă de arțar
+tile.Door Oak.name=Ușă de stejar
+tile.Door Pine.name=Ușă de pin
+tile.Door Sequoia.name=Ușă de sequoia
+tile.Door Spruce.name=Ușă de molid
+tile.Door Sycamore.name=Ușă de sicomor
+tile.Door White Cedar.name=Ușă de cedru alb
+tile.Door White Elm.name=Ușă de ulm
+tile.Door Willow.name=Ușă de salcie
+
+tile.Barrel.Acacia.name=Butoi de salcâm
+tile.Barrel.Ash.name=Butoi de frasin
+tile.Barrel.Aspen.name=Butoi de plop
+tile.Barrel.Birch.name=Butoi de mesteacăn
+tile.Barrel.Chestnut.name=Butoi de castan
+tile.Barrel.Douglas Fir.name=Butoi de duglas
+tile.Barrel.Hickory.name=Butoi de nuc
+tile.Barrel.Kapok.name=Butoi de capoc
+tile.Barrel.Maple.name=Butoi de arțar
+tile.Barrel.Oak.name=Butoi de stejar
+tile.Barrel.Pine.name=Butoi de pin
+tile.Barrel.Sequoia.name=Butoi de sequoia
+tile.Barrel.Spruce.name=Butoi de molid
+tile.Barrel.Sycamore.name=Butoi de sicomor
+tile.Barrel.White Cedar.name=Butoi de cedru alb
+tile.Barrel.White Elm.name=Butoi de ulm
+tile.Barrel.Willow.name=Butoi de salcie
+
+tile.Loom.Acacia.name=Război de țesut de salcâm
+tile.Loom.Ash.name=Război de țesut de frasin
+tile.Loom.Aspen.name=Război de țesut de plop
+tile.Loom.Birch.name=Război de țesut de mesteacăn
+tile.Loom.Chestnut.name=Război de țesut de castan
+tile.Loom.Douglas Fir.name=Război de țesut de duglas
+tile.Loom.Hickory.name=Război de țesut de nuc
+tile.Loom.Kapok.name=Război de țesut de capoc
+tile.Loom.Maple.name=Război de țesut de arțar
+tile.Loom.Oak.name=Război de țesut de stejar
+tile.Loom.Pine.name=Război de țesut de pin
+tile.Loom.Sequoia.name=Război de țesut de sequoia
+tile.Loom.Spruce.name=Război de țesut de molid
+tile.Loom.Sycamore.name=Război de țesut de sicomor
+tile.Loom.White Cedar.name=Război de țesut de cedru alb
+tile.Loom.White Elm.name=Război de țesut de ulm
+tile.Loom.Willow.name=Război de țesut de salcie
+
+tile.FenceTFC.Acacia.name=Gard de salcâm
+tile.FenceTFC.Ash.name=Gard de frasin
+tile.FenceTFC.Aspen.name=Gard de plop
+tile.FenceTFC.Birch.name=Gard de mesteacăn
+tile.FenceTFC.Chestnut.name=Gard de castan
+tile.FenceTFC.Douglas Fir.name=Gard de duglas
+tile.FenceTFC.Hickory.name=Gard de nuc
+tile.FenceTFC.Kapok.name=Gard de capoc
+tile.FenceTFC.Maple.name=Gard de arțar
+tile.FenceTFC.Oak.name=Gard de stejar
+tile.FenceTFC.Pine.name=Gard de pin
+tile.FenceTFC.Sequoia.name=Gard de sequoia
+tile.FenceTFC.Spruce.name=Gard de molid
+tile.FenceTFC.Sycamore.name=Gard de sicomor
+tile.FenceTFC.White Cedar.name=Gard de cedru alb
+tile.FenceTFC.White Elm.name=Gard de ulm
+tile.FenceTFC.Willow.name=Gard de salcie
+
+tile.FenceGateTFC.Acacia.name=Portiță de salcâm
+tile.FenceGateTFC.Ash.name=Portiță de frasin
+tile.FenceGateTFC.Aspen.name=Portiță de plop
+tile.FenceGateTFC.Birch.name=Portiță de mesteacăn
+tile.FenceGateTFC.Chestnut.name=Portiță de castan
+tile.FenceGateTFC.Douglas Fir.name=Portiță de duglas
+tile.FenceGateTFC.Hickory.name=Portiță de nuc
+tile.FenceGateTFC.Kapok.name=Portiță de capoc
+tile.FenceGateTFC.Maple.name=Portiță de arțar
+tile.FenceGateTFC.Oak.name=Portiță de stejar
+tile.FenceGateTFC.Pine.name=Portiță de pin
+tile.FenceGateTFC.Sequoia.name=Portiță de sequoia
+tile.FenceGateTFC.Spruce.name=Portiță de molid
+tile.FenceGateTFC.Sycamore.name=Portiță de sicomor
+tile.FenceGateTFC.White Cedar.name=Portiță de cedru alb
+tile.FenceGateTFC.White Elm.name=Portiță de ulm
+tile.FenceGateTFC.Willow.name=Portiță de salcie
+
+tile.ArmourStand.Acacia.name=Suport de armură de salcâm
+tile.ArmourStand.Ash.name=Suport de armură de frasin
+tile.ArmourStand.Aspen.name=Suport de armură de plop
+tile.ArmourStand.Birch.name=Suport de armură de mesteacăn
+tile.ArmourStand.Chestnut.name=Suport de armură de castan
+tile.ArmourStand.Douglas Fir.name=Suport de armură de duglas
+tile.ArmourStand.Hickory.name=Suport de armură de nuc
+tile.ArmourStand.Kapok.name=Suport de armură de capoc
+tile.ArmourStand.Maple.name=Suport de armură de arțar
+tile.ArmourStand.Oak.name=Suport de armură de stejar
+tile.ArmourStand.Pine.name=Suport de armură de pin
+tile.ArmourStand.Sequoia.name=Suport de armură de sequoia
+tile.ArmourStand.Spruce.name=Suport de armură de molid
+tile.ArmourStand.Sycamore.name=Suport de armură de sicomor
+tile.ArmourStand.White Cedar.name=Suport de armură de cedru alb
+tile.ArmourStand.White Elm.name=Suport de armură de ulm
+tile.ArmourStand.Willow.name=Suport de armură de salcie
+
+tile.WoodSupportV2.Acacia.name=Grindă de salcâm
+tile.WoodSupportV.Ash.name=Grindă de frasin
+tile.WoodSupportV.Aspen.name=Grindă de plop
+tile.WoodSupportV.Birch.name=Grindă de mesteacăn
+tile.WoodSupportV.Chestnut.name=Grindă de castan
+tile.WoodSupportV.Douglas Fir.name=Grindă de duglas
+tile.WoodSupportV.Hickory.name=Grindă de nuc
+tile.WoodSupportV.Kapok.name=Grindă de capoc
+tile.WoodSupportV.Maple.name=Grindă de arțar
+tile.WoodSupportV.Oak.name=Grindă de stejar
+tile.WoodSupportV.Pine.name=Grindă de pin
+tile.WoodSupportV.Sequoia.name=Grindă de sequoia
+tile.WoodSupportV.Spruce.name=Grindă de molid
+tile.WoodSupportV.Sycamore.name=Grindă de sicomor
+tile.WoodSupportV.White Cedar.name=Grindă de cedru alb
+tile.WoodSupportV.White Elm.name=Grindă de ulm
+tile.WoodSupportV.Willow.name=Grindă de salcie
+
+tile.WoodSupportH2.name=Grindă de lemn
+tile.WoodSupportH2.Acacia.name=Grindă de salcâm
+tile.WoodSupportH.Ash.name=Grindă de frasin
+tile.WoodSupportH.Aspen.name=Grindă de plop
+tile.WoodSupportH.Birch.name=Grindă de mesteacăn
+tile.WoodSupportH.Chestnut.name=Grindă de castan
+tile.WoodSupportH.Douglas Fir.name=Grindă de duglas
+tile.WoodSupportH.Hickory.name=Grindă de nuc
+tile.WoodSupportH.Kapok.name=Grindă de capoc
+tile.WoodSupportH.Maple.name=Grindă de arțar
+tile.WoodSupportH.Oak.name=Grindă de stejar
+tile.WoodSupportH.Pine.name=Grindă de pin
+tile.WoodSupportH.Sequoia.name=Grindă de sequoia
+tile.WoodSupportH.Spruce.name=Grindă de molid
+tile.WoodSupportH.Sycamore.name=Grindă de sicomor
+tile.WoodSupportH.White Cedar.name=Grindă de cedru alb
+tile.WoodSupportH.White Elm.name=Grindă de ulm
+tile.WoodSupportH.Willow.name=Grindă de salcie
+
+tile.Toolrack.Acacia.name=Suport de salcâm pentru unelte
+tile.Toolrack.Ash.name=Suport de frasin pentru unelte
+tile.Toolrack.Aspen.name=Suport de plop pentru unelte
+tile.Toolrack.Birch.name=Suport de mesteacăn pentru unelte
+tile.Toolrack.Chestnut.name=Suport de castan pentru unelte
+tile.Toolrack.Douglas Fir.name=Suport de duglas pentru unelte
+tile.Toolrack.Hickory.name=Suport de nuc pentru unelte
+tile.Toolrack.Kapok.name=Suport de capoc pentru unelte
+tile.Toolrack.Maple.name=Suport de arțar pentru unelte
+tile.Toolrack.Oak.name=Suport de stejar pentru unelte
+tile.Toolrack.Pine.name=Suport de pin pentru unelte
+tile.Toolrack.Sequoia.name=Suport de sequoia pentru unelte
+tile.Toolrack.Spruce.name=Suport de molid pentru unelte
+tile.Toolrack.Sycamore.name=Suport de sicomor pentru unelte
+tile.Toolrack.White Cedar.name=Suport de cedru alb pentru unelte
+tile.Toolrack.White Elm.name=Suport de ulm pentru unelte
+tile.Toolrack.Willow.name=Suport de salcie pentru unelte
+
+#=======================
+#= Tools/Weapons/Armor =
+#=======================
+
+#== Stone Heads ==
+item.Stone Hammer Head.name=Cap de ciocan din piatră
+item.Stone Knife Blade.name=Lamă de cuțit din piatră
+
+item.IgIn Stone Axe Head.name=Cap de topor din piatră
+item.IgIn Stone Chisel Head.name=Cap de daltă din piatră
+item.IgIn Stone Hoe Head.name=Cap de sapă din piatră
+item.IgIn Stone Javelin Head.name=Vârf de suliță din piatră
+item.IgIn Stone Shovel Head.name=Cap de lopată din piatră
+
+item.Sed Stone Axe Head.name=Cap de topor din piatră
+item.Sed Stone Chisel Head.name=Cap de daltă din piatră
+item.Sed Stone Hoe Head.name=Cap de sapă din piatră
+item.Sed Stone Javelin Head.name=Vârf de suliță din piatră
+item.Sed Stone Shovel Head.name=Cap de lopată din piatră
+
+item.IgEx Stone Axe Head.name=Cap de topor din piatră
+item.IgEx Stone Chisel Head.name=Cap de daltă din piatră
+item.IgEx Stone Hoe Head.name=Cap de sapă din piatră
+item.IgEx Stone Javelin Head.name=Vârf de suliță din piatră
+item.IgEx Stone Shovel Head.name=Cap de lopată din piatră
+
+item.MM Stone Axe Head.name=Cap de topor din piatră
+item.MM Stone Chisel Head.name=Cap de daltă din piatră
+item.MM Stone Hoe Head.name=Cap de sapă din piatră
+item.MM Stone Javelin Head.name=Vârf de suliță din piatră
+item.MM Stone Shovel Head.name=Cap de lopată din piatră
+
+#== Stone Tools ==
+item.Stone Axe.name=Topor de piatră
+item.IgIn Stone Axe.name=Topor de piatră
+item.Sed Stone Axe.name=Topor de piatră
+item.IgEx Stone Axe.name=Topor de piatră
+item.MM Stone Axe.name=Topor de piatră
+
+item.Stone Chisel.name=Daltă de piatră
+
+item.Stone Hammer.name=Ciocan de piatră
+
+item.Stone Hoe.name=Sapă de piatră
+item.IgIn Stone Hoe.name=Sapă de piatră
+item.Sed Stone Hoe.name=Sapă de piatră
+item.IgEx Stone Hoe.name=Sapă de piatră
+item.MM Stone Hoe.name=Sapă de piatră
+
+item.Stone Javelin.name=Suliță de piatră
+item.IgIn Stone Javelin.name=Suliță de piatră
+item.Sed Stone Javelin.name=Suliță de piatră
+item.IgEx Stone Javelin.name=Suliță de piatră
+item.MM Stone Javelin.name=Suliță de piatră
+
+item.Stone Knife.name=Cuțit de piatră
+
+item.Stone Shovel.name=Lopată de piatră
+item.IgIn Stone Shovel.name=Lopată de piatră
+item.Sed Stone Shovel.name=Lopată de piatră
+item.IgEx Stone Shovel.name=Lopată de piatră
+item.MM Stone Shovel.name=Lopată de piatră
+
+#== Metal Heads ==
+#=== Axe Head ===
+item.Bismuth Bronze Axe Head.name=Cap de topor din bronz de bismut
+item.Black Bronze Axe Head.name=Cap de topor din bronz negru
+item.Black Steel Axe Head.name=Cap de topor din oțel negru
+item.Blue Steel Axe Head.name=Cap de topor din oțel albastru
+item.Bronze Axe Head.name=Cap de topor din bronz
+item.Copper Axe Head.name=Cap de topor din cupru
+item.Red Steel Axe Head.name=Cap de topor din oțel roșu
+item.Steel Axe Head.name=Cap de topor din oțel
+item.Wrought Iron Axe Head.name=Cap de topor din fier forjat
+
+#=== Chisel Head ===
+item.Bismuth Bronze Chisel Head.name=Cap de daltă din bronz de bismut
+item.Black Bronze Chisel Head.name=Cap de daltă din bronz negru
+item.Black Steel Chisel Head.name=Cap de daltă din oțel negru
+item.Blue Steel Chisel Head.name=Cap de daltă din oțel albastru
+item.Bronze Chisel Head.name=Cap de daltă din bronz
+item.Copper Chisel Head.name=Cap de daltă din cupru
+item.Red Steel Chisel Head.name=Cap de daltă din oțel roșu
+item.Steel Chisel Head.name=Cap de daltă din oțel
+item.Wrought Iron Chisel Head.name=Cap de daltă din fier forjat
+
+#=== Hammer Head ===
+item.Bismuth Bronze Hammer Head.name=Cap de ciocan din bronz de bismut
+item.Black Bronze Hammer Head.name=Cap de ciocan din bronz negru
+item.Black Steel Hammer Head.name=Cap de ciocan din oțel negru
+item.Blue Steel Hammer Head.name=Cap de ciocan din oțel albastru
+item.Bronze Hammer Head.name=Cap de ciocan din bronz
+item.Copper Hammer Head.name=Cap de ciocan din cupru
+item.Red Steel Hammer Head.name=Cap de ciocan din oțel roșu
+item.Steel Hammer Head.name=Cap de ciocan din oțel
+item.Wrought Iron Hammer Head.name=Cap de ciocan din fier forjat
+
+#=== Hoe Head ===
+item.Bismuth Bronze Hoe Head.name=Cap de sapă din bronz de bismut
+item.Black Bronze Hoe Head.name=Cap de sapă din bronz negru
+item.Black Steel Hoe Head.name=Cap de sapă din oțel negru
+item.Blue Steel Hoe Head.name=Cap de sapă din oțel albastru
+item.Bronze Hoe Head.name=Cap de sapă din bronz
+item.Copper Hoe Head.name=Cap de sapă din cupru
+item.Red Steel Hoe Head.name=Cap de sapă din oțel roșu
+item.Steel Hoe Head.name=Cap de sapă din oțel
+item.Wrought Iron Hoe Head.name=Cap de sapă din fier forjat
+
+#=== Javelin Head ===
+item.Bismuth Bronze Javelin Head.name=Vârf de suliță din bronz de bismut
+item.Black Bronze Javelin Head.name=Vârf de suliță din bronz negru
+item.Black Steel Javelin Head.name=Vârf de suliță din oțel negru
+item.Blue Steel Javelin Head.name=Vârf de suliță din oțel albastru
+item.Bronze Javelin Head.name=Vârf de suliță din bronz
+item.Copper Javelin Head.name=Vârf de suliță din cupru
+item.Red Steel Javelin Head.name=Vârf de suliță din oțel roșu
+item.Steel Javelin Head.name=Vârf de suliță din oțel
+item.Wrought Iron Javelin Head.name=Vârf de suliță din fier forjat
+
+#=== Knife Blade ===
+item.Bismuth Bronze Knife Blade.name=Lamă de cuțit din bronz de bismut
+item.Black Bronze Knife Blade.name=Lamă de cuțit din bronz negru
+item.Black Steel Knife Blade.name=Lamă de cuțit din oțel negru
+item.Blue Steel Knife Blade.name=Lamă de cuțit din oțel albastru
+item.Bronze Knife Blade.name=Lamă de cuțit din bronz
+item.Copper Knife Blade.name=Lamă de cuțit din cupru
+item.Red Steel Knife Blade.name=Lamă de cuțit din oțel roșu
+item.Steel Knife Blade.name=Lamă de cuțit din oțel
+item.Wrought Iron Knife Blade.name=Lamă de cuțit din fier forjat
+
+#=== Mace Head ===
+item.Bismuth Bronze Mace Head.name=Cap de buzdugan din bronz de bismut
+item.Black Bronze Mace Head.name=Cap de buzdugan din bronz negru
+item.Black Steel Mace Head.name=Cap de buzdugan din oțel negru
+item.Blue Steel Mace Head.name=Cap de buzdugan din oțel albastru
+item.Bronze Mace Head.name=Cap de buzdugan din bronz
+item.Copper Mace Head.name=Cap de buzdugan din cupru
+item.Red Steel Mace Head.name=Cap de buzdugan din oțel roșu
+item.Steel Mace Head.name=Cap de buzdugan din oțel
+item.Wrought Iron Mace Head.name=Cap de buzdugan din fier forjat
+
+#=== Pickaxe Head ===
+item.Bismuth Bronze Pick Head.name=Cap de târnăcop din bronz de bismut
+item.Black Bronze Pick Head.name=Cap de târnăcop din bronz negru
+item.Black Steel Pick Head.name=Cap de târnăcop din oțel negru
+item.Blue Steel Pick Head.name=Cap de târnăcop din oțel albastru
+item.Bronze Pick Head.name=Cap de târnăcop din bronz
+item.Copper Pick Head.name=Cap de târnăcop din cupru
+item.Red Steel Pick Head.name=Cap de târnăcop din oțel roșu
+item.Steel Pick Head.name=Cap de târnăcop din oțel
+item.Wrought Iron Pick Head.name=Cap de târnăcop din fier forjat
+
+#=== Prospector's Pick Head ===
+item.Bismuth Bronze ProPick Head.name=Cap de târnăcop de prospector din bronz de bismut
+item.Black Bronze ProPick Head.name=Cap de târnăcop de prospector din bronz negru
+item.Black Steel ProPick Head.name=Cap de târnăcop de prospector din oțel negru
+item.Blue Steel ProPick Head.name=Cap de târnăcop de prospector din oțel albastru
+item.Bronze ProPick Head.name=Cap de târnăcop de prospector din bronz
+item.Copper ProPick Head.name=Cap de târnăcop de prospector din cupru
+item.Red Steel ProPick Head.name=Cap de târnăcop de prospector din oțel roșu
+item.Steel ProPick Head.name=Cap de târnăcop de prospector din oțel
+item.Wrought Iron ProPick Head.name=Cap de târnăcop de prospector din fier forjat
+
+#=== Saw Blade ===
+item.Bismuth Bronze Saw Blade.name=Lamă de fierăstrău din bronz de bismut
+item.Black Bronze Saw Blade.name=Lamă de fierăstrău din bronz negru
+item.Black Steel Saw Blade.name=Lamă de fierăstrău din oțel negru
+item.Blue Steel Saw Blade.name=Lamă de fierăstrău din oțel albastru
+item.Bronze Saw Blade.name=Lamă de fierăstrău din bronz
+item.Copper Saw Blade.name=Lamă de fierăstrău din cupru
+item.Red Steel Saw Blade.name=Lamă de fierăstrău din oțel roșu
+item.Steel Saw Blade.name=Lamă de fierăstrău din oțel
+item.Wrought Iron Saw Blade.name=Lamă de fierăstrău din fier forjat
+
+#=== Scythe Blade ===
+item.Bismuth Bronze Scythe Blade.name=Lamă de coasă din bronz de bismut
+item.Black Bronze Scythe Blade.name=Lamă de coasă din bronz negru
+item.Black Steel Scythe Blade.name=Lamă de coasă din oțel negru
+item.Blue Steel Scythe Blade.name=Lamă de coasă din oțel albastru
+item.Bronze Scythe Blade.name=Lamă de coasă din bronz
+item.Copper Scythe Blade.name=Lamă de coasă din cupru
+item.Red Steel Scythe Blade.name=Lamă de coasă din oțel roșu
+item.Steel Scythe Blade.name=Lamă de coasă din oțel
+item.Wrought Iron Scythe Blade.name=Lamă de coasă din fier forjat
+
+#=== Shovel Head ===
+item.Bismuth Bronze Shovel Head.name=Cap de lopată din bronz de bismut
+item.Black Bronze Shovel Head.name=Cap de lopată din bronz negru
+item.Black Steel Shovel Head.name=Cap de lopată din oțel negru
+item.Blue Steel Shovel Head.name=Cap de lopată din oțel albastru
+item.Bronze Shovel Head.name=Cap de lopată din bronz
+item.Copper Shovel Head.name=Cap de lopată din cupru
+item.Red Steel Shovel Head.name=Cap de lopată din oțel roșu
+item.Steel Shovel Head.name=Cap de lopată din oțel
+item.Wrought Iron Shovel Head.name=Cap de lopată din fier forjat
+
+#=== Sword Blade ===
+item.Bismuth Bronze Sword Blade.name=Lamă de sabie din bronz de bismut
+item.Black Bronze Sword Blade.name=Lamă de sabie din bronz negru
+item.Black Steel Sword Blade.name=Lamă de sabie din oțel negru
+item.Blue Steel Sword Blade.name=Lamă de sabie din oțel albastru
+item.Bronze Sword Blade.name=Lamă de sabie din bronz
+item.Copper Sword Blade.name=Lamă de sabie din cupru
+item.Red Steel Sword Blade.name=Lamă de sabie din oțel roșu
+item.Steel Sword Blade.name=Lamă de sabie din oțel
+item.Wrought Iron Sword Blade.name=Lamă de sabie din fier forjat
+
+#== Metal Tools ==
+#=== Axe ===
+item.Bismuth Bronze Axe.name=Topor de bronz de bismut
+item.Black Bronze Axe.name=Topor de bronz negru
+item.Black Steel Axe.name=Topor de oțel negru
+item.Blue Steel Axe.name=Topor de oțel albastru
+item.Bronze Axe.name=Topor de bronz
+item.Copper Axe.name=Topor de cupru
+item.Red Steel Axe.name=Topor de oțel roșu
+item.Steel Axe.name=Topor de oțel
+item.Wrought Iron Axe.name=Topor de fier forjat
+
+#=== Chisel ===
+item.Bismuth Bronze Chisel.name=Daltă de bronz de bismut
+item.Black Bronze Chisel.name=Daltă de bronz negru
+item.Black Steel Chisel.name=Daltă de oțel negru
+item.Blue Steel Chisel.name=Daltă de oțel albastru
+item.Bronze Chisel.name=Daltă de bronz
+item.Copper Chisel.name=Daltă de cupru
+item.Red Steel Chisel.name=Daltă de oțel roșu
+item.Steel Chisel.name=Daltă de oțel
+item.Wrought Iron Chisel.name=Daltă de fier forjat
+
+#=== Hammer ===
+item.Bismuth Bronze Hammer.name=Ciocan de bronz de bismut
+item.Black Bronze Hammer.name=Ciocan de bronz negru
+item.Black Steel Hammer.name=Ciocan de oțel negru
+item.Blue Steel Hammer.name=Ciocan de oțel albastru
+item.Bronze Hammer.name=Ciocan de bronz
+item.Copper Hammer.name=Ciocan de cupru
+item.Red Steel Hammer.name=Ciocan de oțel roșu
+item.Steel Hammer.name=Ciocan de oțel
+item.Wrought Iron Hammer.name=Ciocan de fier forjat
+
+#=== Hoe ===
+item.Bismuth Bronze Hoe.name=Sapă de bronz de bismut
+item.Black Bronze Hoe.name=Sapă de bronz negru
+item.Black Steel Hoe.name=Sapă de oțel negru
+item.Blue Steel Hoe.name=Sapă de oțel albastru
+item.Bronze Hoe.name=Sapă de bronz
+item.Copper Hoe.name=Sapă de cupru
+item.Red Steel Hoe.name=Sapă de oțel roșu
+item.Steel Hoe.name=Sapă de oțel
+item.Wrought Iron Hoe.name=Sapă de fier forjat
+
+#=== Javelin ===
+item.Bismuth Bronze Javelin.name=Suliță de bronz de bismut
+item.Black Bronze Javelin.name=Suliță de bronz negru
+item.Black Steel Javelin.name=Suliță de oțel negru
+item.Blue Steel Javelin.name=Suliță de oțel albastru
+item.Bronze Javelin.name=Suliță de bronz
+item.Copper Javelin.name=Suliță de cupru
+item.Red Steel Javelin.name=Suliță de oțel roșu
+item.Steel Javelin.name=Suliță de oțel
+item.Wrought Iron Javelin.name=Suliță de fier forjat
+
+#=== Knife ===
+item.Bismuth Bronze Knife.name=Cuțit de bronz de bismut
+item.Black Bronze Knife.name=Cuțit de bronz negru
+item.Black Steel Knife.name=Cuțit de oțel negru
+item.Blue Steel Knife.name=Cuțit de oțel albastru
+item.Bronze Knife.name=Cuțit de bronz
+item.Copper Knife.name=Cuțit de cupru
+item.Red Steel Knife.name=Cuțit de oțel roșu
+item.Steel Knife.name=Cuțit de oțel
+item.Wrought Iron Knife.name=Cuțit de fier forjat
+
+#=== Mace ===
+item.Bismuth Bronze Mace.name=Buzdugan de bronz de bismut
+item.Black Bronze Mace.name=Buzdugan de bronz negru
+item.Black Steel Mace.name=Buzdugan de oțel negru
+item.Blue Steel Mace.name=Buzdugan de oțel albastru
+item.Bronze Mace.name=Buzdugan de bronz
+item.Copper Mace.name=Buzdugan de cupru
+item.Red Steel Mace.name=Buzdugan de oțel roșu
+item.Steel Mace.name=Buzdugan de oțel
+item.Wrought Iron Mace.name=Buzdugan de fier forjat
+
+#=== Pickaxe ===
+item.Bismuth Bronze Pick.name=Târnăcop de bronz de bismut
+item.Black Bronze Pick.name=Târnăcop de bronz negru
+item.Black Steel Pick.name=Târnăcop de oțel negru
+item.Blue Steel Pick.name=Târnăcop de oțel albastru
+item.Bronze Pick.name=Târnăcop de bronz
+item.Copper Pick.name=Târnăcop de cupru
+item.Red Steel Pick.name=Târnăcop de oțel roșu
+item.Steel Pick.name=Târnăcop de oțel
+item.Wrought Iron Pick.name=Târnăcop de fier forjat
+
+#=== Prospector's Pick ===
+item.Bismuth Bronze ProPick.name=Târnăcop de prospector de bronz de bismut
+item.Black Bronze ProPick.name=Târnăcop de prospector de bronz negru
+item.Black Steel ProPick.name=Târnăcop de prospector de oțel negru
+item.Blue Steel ProPick.name=Târnăcop de prospector de oțel albastru
+item.Bronze ProPick.name=Târnăcop de prospector de bronz
+item.Copper ProPick.name=Târnăcop de prospector de cupru
+item.Red Steel ProPick.name=Târnăcop de prospector de oțel roșu
+item.Steel ProPick.name=Târnăcop de prospector de oțel
+item.Wrought Iron ProPick.name=Târnăcop de prospector de fier forjat
+
+#=== Saw ===
+item.Bismuth Bronze Saw.name=Fierăstrău de bronz de bismut
+item.Black Bronze Saw.name=Fierăstrău de bronz negru
+item.Black Steel Saw.name=Fierăstrău de oțel negru
+item.Blue Steel Saw.name=Fierăstrău de oțel albastru
+item.Bronze Saw.name=Fierăstrău de bronz
+item.Copper Saw.name=Fierăstrău de cupru
+item.Red Steel Saw.name=Fierăstrău de oțel roșu
+item.Steel Saw.name=Fierăstrău de oțel
+item.Wrought Iron Saw.name=Fierăstrău de fier forjat
+
+#=== Scythe ===
+item.Bismuth Bronze Scythe.name=Coasă de bronz de bismut
+item.Black Bronze Scythe.name=Coasă de bronz negru
+item.Black Steel Scythe.name=Coasă de oțel negru
+item.Blue Steel Scythe.name=Coasă de oțel albastru
+item.Bronze Scythe.name=Coasă de bronz
+item.Copper Scythe.name=Coasă de cupru
+item.Red Steel Scythe.name=Coasă de oțel roșu
+item.Steel Scythe.name=Coasă de oțel
+item.Wrought Iron Scythe.name=Coasă de fier forjat
+
+#=== Shovel ===
+item.Bismuth Bronze Shovel.name=Lopată de bronz de bismut
+item.Black Bronze Shovel.name=Lopată de bronz negru
+item.Black Steel Shovel.name=Lopată de oțel negru
+item.Blue Steel Shovel.name=Lopată de oțel albastru
+item.Bronze Shovel.name=Lopată de bronz
+item.Copper Shovel.name=Lopată de cupru
+item.Red Steel Shovel.name=Lopată de oțel roșu
+item.Steel Shovel.name=Lopată de oțel
+item.Wrought Iron Shovel.name=Lopată de fier forjat
+
+#=== Sword ===
+item.Bismuth Bronze Sword.name=Sabie de bronz de bismut
+item.Black Bronze Sword.name=Sabie de bronz negru
+item.Black Steel Sword.name=Sabie de oțel negru
+item.Blue Steel Sword.name=Sabie de oțel albastru
+item.Bronze Sword.name=Sabie de bronz
+item.Copper Sword.name=Sabie de cupru
+item.Red Steel Sword.name=Sabie de oțel roșu
+item.Steel Sword.name=Sabie de oțel
+item.Wrought Iron Sword.name=Sabie de fier forjat
+
+#=== Tuyere ===
+item.Bismuth Bronze Tuyere.name=Gură de vânt de bronz de bismut
+item.Black Bronze Tuyere.name=Gură de vânt de bronz negru
+item.Black Steel Tuyere.name=Gură de vânt de oțel negru
+item.Blue Steel Tuyere.name=Gură de vânt de oțel albastru
+item.Bronze Tuyere.name=Gură de vânt de bronz
+item.Copper Tuyere.name=Gură de vânt de cupru
+item.Red Steel Tuyere.name=Gură de vânt de oțel roșu
+item.Steel Tuyere.name=Gură de vânt de oțel
+item.Wrought Iron Tuyere.name=Gură de vânt de fier forjat
+
+#== Armor ==
+#=== Helmet ===
+item.Bismuth Bronze Unfinished Helmet.name=Cască neterminată de bronz de bismut
+item.Black Bronze Unfinished Helmet.name=Cască neterminată de bronz negru
+item.Black Steel Unfinished Helmet.name=Cască neterminată de oțel negru
+item.Blue Steel Unfinished Helmet.name=Cască neterminată de oțel albastru
+item.Bronze Unfinished Helmet.name=Cască neterminată de bronz
+item.Copper Unfinished Helmet.name=Cască neterminată de cupru
+item.Red Steel Unfinished Helmet.name=Cască neterminată de oțel roșu
+item.Steel Unfinished Helmet.name=Cască neterminată de oțel
+item.Wrought Iron Unfinished Helmet.name=Cască neterminată de fier forjat
+item.Bismuth Bronze Helmet.name=Cască de bronz de bismut
+item.Black Bronze Helmet.name=Cască de bronz negru
+item.Black Steel Helmet.name=Cască de oțel negru
+item.Blue Steel Helmet.name=Cască de oțel albastru
+item.Bronze Helmet.name=Cască de bronz
+item.Copper Helmet.name=Cască de cupru
+item.Red Steel Helmet.name=Cască de oțel roșu
+item.Steel Helmet.name=Cască de oțel
+item.Wrought Iron Helmet.name=Cască de fier forjat
+item.helmetCloth.name=Cască de piele
+
+#=== Chestplate ===
+item.Bismuth Bronze Unfinished Chestplate.name=Platoșă neterminată de bronz de bismut
+item.Black Bronze Unfinished Chestplate.name=Platoșă neterminată de bronz negru
+item.Black Steel Unfinished Chestplate.name=Platoșă neterminată de oțel negru
+item.Blue Steel Unfinished Chestplate.name=Platoșă neterminată de oțel albastru
+item.Bronze Unfinished Chestplate.name=Platoșă neterminată de bronz
+item.Copper Unfinished Chestplate.name=Platoșă neterminată de cupru
+item.Red Steel Unfinished Chestplate.name=Platoșă neterminată de oțel roșu
+item.Steel Unfinished Chestplate.name=Platoșă neterminată de oțel
+item.Wrought Iron Unfinished Chestplate.name=Platoșă neterminată de fier forjat
+item.Bismuth Bronze Chestplate.name=Platoșă de bronz de bismut
+item.Black Bronze Chestplate.name=Platoșă de bronz negru
+item.Black Steel Chestplate.name=Platoșă de oțel negru
+item.Blue Steel Chestplate.name=Platoșă de oțel albastru
+item.Bronze Chestplate.name=Platoșă de bronz
+item.Copper Chestplate.name=Platoșă de cupru
+item.Red Steel Chestplate.name=Platoșă de oțel roșu
+item.Steel Chestplate.name=Platoșă de oțel
+item.Wrought Iron Chestplate.name=Platoșă de fier forjat
+item.chestplateCloth.name=Tunică de piele
+
+#=== Greaves ===
+item.Bismuth Bronze Unfinished Greaves.name=Jambiere neterminate de bronz de bismut
+item.Black Bronze Unfinished Greaves.name=Jambiere neterminate de bronz negru
+item.Black Steel Unfinished Greaves.name=Jambiere neterminate de oțel negru
+item.Blue Steel Unfinished Greaves.name=Jambiere neterminate de oțel albastru
+item.Bronze Unfinished Greaves.name=Jambiere neterminate de bronz
+item.Copper Unfinished Greaves.name=Jambiere neterminate de cupru
+item.Red Steel Unfinished Greaves.name=Jambiere neterminate de oțel roșu
+item.Steel Unfinished Greaves.name=Jambiere neterminate de oțel
+item.Wrought Iron Unfinished Greaves.name=Jambiere neterminate de fier forjat
+item.Bismuth Bronze Greaves.name=Jambiere de bronz de bismut
+item.Black Bronze Greaves.name=Jambiere de bronz negru
+item.Black Steel Greaves.name=Jambiere de oțel negru
+item.Blue Steel Greaves.name=Jambiere de oțel albastru
+item.Bronze Greaves.name=Jambiere de bronz
+item.Copper Greaves.name=Jambiere de cupru
+item.Red Steel Greaves.name=Jambiere de oțel roșu
+item.Steel Greaves.name=Jambiere de oțel
+item.Wrought Iron Greaves.name=Jambiere de fier forjat
+item.leggingsCloth.name=Pantaloni de piele
+
+#=== Boots ===
+item.Bismuth Bronze Unfinished Boots.name=Cizme neterminate de bronz de bismut
+item.Black Bronze Unfinished Boots.name=Cizme neterminate de bronz negru
+item.Black Steel Unfinished Boots.name=Cizme neterminate de oțel negru
+item.Blue Steel Unfinished Boots.name=Cizme neterminate de oțel albastru
+item.Bronze Unfinished Boots.name=Cizme neterminate de bronz
+item.Copper Unfinished Boots.name=Cizme neterminate de cupru
+item.Red Steel Unfinished Boots.name=Cizme neterminate de oțel roșu
+item.Steel Unfinished Boots.name=Cizme neterminate de oțel
+item.Wrought Iron Unfinished Boots.name=Cizme neterminate de fier forjat
+item.Bismuth Bronze Boots.name=Cizme de bronz de bismut
+item.Black Bronze Boots.name=Cizme de bronz negru
+item.Black Steel Boots.name=Cizme de oțel negru
+item.Blue Steel Boots.name=Cizme de oțel albastru
+item.Bronze Boots.name=Cizme de bronz
+item.Copper Boots.name=Cizme de cupru
+item.Red Steel Boots.name=Cizme de oțel roșu
+item.Steel Boots.name=Cizme de oțel
+item.Wrought Iron Boots.name=Cizme de fier forjat
+item.bootsCloth.name=Cizme de piele
+
+#==========
+#= Metals =
+#==========
+item.Iron Bloom.name=Lupă de fier rafinată
+item.Raw Iron Bloom.name=Lupă de fier brută
+tile.Bloom.name=Lupă de fier
+
+#== Unshaped ==
+item.Bismuth Bronze Unshaped.name=Neformat: bronz de bismut
+item.Bismuth Unshaped.name=Neformat: bismut
+item.Black Bronze Unshaped.name=Neformat: bronz negru
+item.Black Steel Unshaped.name=Neformat: oțel negru
+item.Blue Steel Unshaped.name=Neformat: oțel albastru
+item.Brass Unshaped.name=Neformat: alamă
+item.Bronze Unshaped.name=Neformat: bronz
+item.Copper Unshaped.name=Neformat: cupru
+item.Gold Unshaped.name=Neformat: aur
+item.HC Black Steel Unshaped.name=Neformat: oțel negru bogat în carbon
+item.HC Blue Steel Unshaped.name=Neformat: oțel albastru bogat în carbon
+item.HC Red Steel Unshaped.name=Neformat: oțel roșu bogat în carbon
+item.HC Steel Unshaped.name=Neformat: oțel bogat în carbon
+item.Lead Unshaped.name=Neformat: plumb
+item.Nickel Unshaped.name=Neformat: nichel
+item.Pig Iron Unshaped.name=Neformat: fontă
+item.Platinum Unshaped.name=Neformat: platină
+item.Red Steel Unshaped.name=Neformat: oțel roșu
+item.Rose Gold Unshaped.name=Neformat: aur roz
+item.Silver Unshaped.name=Neformat: argint
+item.Steel Unshaped.name=Neformat: oțel
+item.Sterling Silver Unshaped.name=Neformat: argint sterling
+item.Tin Unshaped.name=Neformat: staniu
+item.Unknown Unshaped.name=Neformat: necunoscut
+item.Weak Blue Steel Unshaped.name=Neformat: oțel albastru slab
+item.Weak Red Steel Unshaped.name=Neformat: oțel roșu slab
+item.Weak Steel Unshaped.name=Neformat: oțel slab
+item.Wrought Iron Unshaped.name=Neformat: fier forjat
+item.Zinc Unshaped.name=Neformat: zinc
+
+#== Ingot ==
+item.Bismuth Bronze Ingot.name=Lingou de bronz de bismut
+item.Bismuth Ingot.name=Lingou de bismut
+item.Black Bronze Ingot.name=Lingou de bronz negru
+item.Black Steel Ingot.name=Lingou de oțel negru
+item.Blue Steel Ingot.name=Lingou de oțel albastru
+item.Brass Ingot.name=Lingou de alamă
+item.Bronze Ingot.name=Lingou de bronz
+item.Copper Ingot.name=Lingou de cupru
+item.Gold Ingot.name=Lingou de aur
+item.HC Black Steel Ingot.name=Lingou de oțel negru bogat în carbon
+item.HC Blue Steel Ingot.name=Lingou de oțel albastru bogat în carbon
+item.HC Red Steel Ingot.name=Lingou de oțel roșu bogat în carbon
+item.HC Steel Ingot.name=Lingou de oțel bogat în carbon
+item.Lead Ingot.name=Lingou de plumb
+item.Nickel Ingot.name=Lingou de nichel
+item.Pig Iron Ingot.name=Lingou de fontă
+item.Platinum Ingot.name=Lingou de platină
+item.Red Steel Ingot.name=Lingou de oțel roșu
+item.Rose Gold Ingot.name=Lingou de aur roz
+item.Silver Ingot.name=Lingou de argint
+item.Steel Ingot.name=Lingou de oțel
+item.Sterling Silver Ingot.name=Lingou de argint sterling
+item.Tin Ingot.name=Lingou de staniu
+item.Unknown Ingot.name=Lingou de necunoscut
+item.Weak Blue Steel Ingot.name=Lingou de oțel albastru slab
+item.Weak Red Steel Ingot.name=Lingou de oțel roșu slab
+item.Weak Steel Ingot.name=Lingou de oțel slab
+item.Wrought Iron Ingot.name=Lingou de fier forjat
+item.Zinc Ingot.name=Lingou de zinc
+
+#== Double Ingot ==
+item.Bismuth Bronze Double Ingot.name=Lingou dublu de bronz de bismut
+item.Bismuth Double Ingot.name=Lingou dublu de bismut
+item.Black Bronze Double Ingot.name=Lingou dublu de bronz negru
+item.Black Steel Double Ingot.name=Lingou dublu de oțel negru
+item.Blue Steel Double Ingot.name=Lingou dublu de oțel albastru
+item.Brass Double Ingot.name=Lingou dublu de alamă
+item.Bronze Double Ingot.name=Lingou dublu de bronz
+item.Copper Double Ingot.name=Lingou dublu de cupru
+item.Gold Double Ingot.name=Lingou dublu de aur
+item.Lead Double Ingot.name=Lingou dublu de plumb
+item.Nickel Double Ingot.name=Lingou dublu de nichel
+item.Pig Iron Double Ingot.name=Lingou dublu de fontă
+item.Platinum Double Ingot.name=Lingou dublu de platină
+item.Red Steel Double Ingot.name=Lingou dublu de oțel roșu
+item.Rose Gold Double Ingot.name=Lingou dublu de aur roz
+item.Silver Double Ingot.name=Lingou dublu de argint
+item.Steel Double Ingot.name=Lingou dublu de oțel
+item.Sterling Silver Double Ingot.name=Lingou dublu de argint sterling
+item.Tin Double Ingot.name=Lingou dublu de staniu
+item.Wrought Iron Double Ingot.name=Lingou dublu de fier forjat
+item.Zinc Double Ingot.name=Lingou dublu de zinc
+
+#== Sheet ==
+item.Bismuth Bronze Sheet.name=Tablă de bronz de bismut
+item.Bismuth Sheet.name=Tablă de bismut
+item.Black Bronze Sheet.name=Tablă de bronz negru
+item.Black Steel Sheet.name=Tablă de oțel negru
+item.Blue Steel Sheet.name=Tablă de oțel albastru
+item.Brass Sheet.name=Tablă de alamă
+item.Bronze Sheet.name=Tablă de bronz
+item.Copper Sheet.name=Tablă de cupru
+item.Gold Sheet.name=Tablă de aur
+item.Lead Sheet.name=Tablă de plumb
+item.Nickel Sheet.name=Tablă de nichel
+item.Pig Iron Sheet.name=Tablă de fontă
+item.Platinum Sheet.name=Tablă de platină
+item.Red Steel Sheet.name=Tablă de oțel roșu
+item.Rose Gold Sheet.name=Tablă de aur roz
+item.Silver Sheet.name=Tablă de argint
+item.Steel Sheet.name=Tablă de oțel
+item.Sterling Silver Sheet.name=Tablă de argint sterling
+item.Tin Sheet.name=Tablă de staniu
+item.Wrought Iron Sheet.name=Tablă de fier forjat
+item.Zinc Sheet.name=Tablă de zinc
+
+#== DoubleSheet ==
+item.Bismuth Bronze Double Sheet.name=Tablă dublă de bronz de bismut
+item.Bismuth Double Sheet.name=Tablă dublă de bismut
+item.Black Bronze Double Sheet.name=Tablă dublă de bronz negru
+item.Black Steel Double Sheet.name=Tablă dublă de oțel negru
+item.Blue Steel Double Sheet.name=Tablă dublă de oțel albastru
+item.Brass Double Sheet.name=Tablă dublă de alamă
+item.Bronze Double Sheet.name=Tablă dublă de bronz
+item.Copper Double Sheet.name=Tablă dublă de cupru
+item.Gold Double Sheet.name=Tablă dublă de aur
+item.Lead Double Sheet.name=Tablă dublă de plumb
+item.Nickel Double Sheet.name=Tablă dublă de nichel
+item.Pig Iron Double Sheet.name=Tablă dublă de fontă
+item.Platinum Double Sheet.name=Tablă dublă de platină
+item.Red Steel Double Sheet.name=Tablă dublă de oțel roșu
+item.Rose Gold Double Sheet.name=Tablă dublă de aur roz
+item.Silver Double Sheet.name=Tablă dublă de argint
+item.Steel Double Sheet.name=Tablă dublă de oțel
+item.Sterling Silver Double Sheet.name=Tablă dublă de argint sterling
+item.Tin Double Sheet.name=Tablă dublă de staniu
+item.Wrought Iron Double Sheet.name=Tablă dublă de fier forjat
+item.Zinc Double Sheet.name=Tablă dublă de zinc
+
+#== Misc ==
+item.Blueprint=Schiță
+
+#===========
+#= Devices =
+#===========
+tile.Bellows.name=Foale
+tile.Forge.name=Forjă
+tile.BlastFurnace.name=Furnal
+tile.SpawnMeter.name=Indicator de protecție
+tile.Quern.name=Bază de râșniță
+tile.EarlyBloomery.name=Cuptor catalan
+tile.Molten.name=Minereu topit
+tile.Crucible.name=Creuzet
+tile.NestBox.name=Cuib de păsări
+item.SluiceItem.name=Sluis
+tile.Sluice.name=Sluis
+tile.LeatherRack.name=Suport pentru piele
+tile.FoodPrep.name=Loc de preparare
+tile.MetalSheet.name=Tablă de metal
+tile.ingotpile.name=Grămadă de lingouri
+tile.SmokeRack.name=Suport pentru afumat
+
+#== Anvils ==
+tile.Anvil.Stone.name=Nicovală de piatră
+tile.Anvil.Bismuth.name=Nicovală de bismut
+tile.Anvil2.Bismuth Bronze.name=Nicovală de bronz de bismut
+tile.Anvil2.Black Bronze.name=Nicovală de bronz negru
+tile.Anvil.Black Steel.name=Nicovală de oțel negru
+tile.Anvil.Blue Steel.name=Nicovală de oțel albastru
+tile.Anvil.Bronze.name=Nicovală de bronz
+tile.Anvil.Copper.name=Nicovală de cupru
+tile.Anvil.Red Steel.name=Nicovală de oțel roșu
+tile.Anvil2.Rose Gold.name=Nicovală de aur roz
+tile.Anvil.Steel.name=Nicovală de oțel
+tile.Anvil.Tin.name=Nicovală de staniu
+tile.Anvil.Wrought Iron.name=Nicovală de fier forjat
+tile.Anvil.Zinc.name=Nicovală de zinc
+
+#==================
+#= Terrain Blocks =
+#==================
+tile.Grass.name=Iarbă
+tile.DryGrass.name=Iarbă uscată
+tile.PeatGrass.name=Iarbă turboasă
+tile.ClayGrass.name=Iarbă argiloasă
+tile.dirt.name=Pământ
+tile.sand.name=Nisip
+tile.Peat.name=Turbă
+tile.tilledSoil.name=Teren agricol
+tile.LooseRock.name=Moloz
+tile.Ice.name=Gheață
+
+#=================
+#= Miscellaneous =
+#=================
+#== Misc Items ==
+item.arrow.name=Săgeată
+item.book.name=Carte
+item.stick.name=Băț
+item.coal.coal.name=Cărbune
+item.coal.charcoal.name=Mangal
+item.Fertilizer.name=Îngrășământ
+item.Reeds.name=Trestie
+
+item.Wooden Bucket Empty.name=Găleată de lemn (goală)
+item.Wooden Bucket Water.name=Găleată de lemn (apă dulce)
+item.Wooden Bucket Salt Water.name=Găleată de lemn (apă sărată)
+item.Wooden Bucket Milk.name=Găleată de lemn (lapte)
+item.Lime Water.name=Var
+
+item.Red Steel Bucket Empty.name=Găleată de oțel roșu (goală)
+item.Red Steel Bucket Water.name=Găleată de oțel roșu (apă dulce)
+item.Red Steel Bucket Salt Water.name=Găleată de oțel roșu (apă sărată)
+item.Blue Steel Bucket Empty.name=Găleată de oțel albastru (goală)
+item.Blue Steel Bucket Lava.name=Găleată de oțel albastru (lavă)
+
+item.GoldPan.name=Șaitroc
+item.Gold Pan.Sand.name=Șaitroc - nisip
+item.Gold Pan.Gravel.name=Șaitroc - pietriș
+item.Gold Pan.Clay.name=Șaitroc - lut
+item.Gold Pan.Dirt.name=Șaitroc - pământ
+item.Ink.name=Cerneală
+item.Firestarter.name=Aprinzător
+
+item.Quern.name=Piatră de râșniță
+item.Blueprint.name=Schiță
+item.Nametag.name=Etichetă de nume
+item.WoolYarn.name=Fir de lână
+item.Wool.name=Lână
+item.WoolCloth.name=Pânză de lână
+item.SilkCloth.name=Pânză de mătase
+item.BurlapCloth.name=Pânză de sac
+item.Mortar.name=Mortar
+item.Vinegar.name=Oțet
+
+item.Hide.small.name=Piele crudă mică
+item.Hide.medium.name=Piele crudă medie
+item.Hide.large.name=Piele crudă mare
+item.Soaked Hide.small.name=Piele înmuiată mică
+item.Soaked Hide.medium.name=Piele înmuiată medie
+item.Soaked Hide.large.name=Piele înmuiată mare
+item.Scraped Hide.small.name=Piele răzuită mică
+item.Scraped Hide.medium.name=Piele răzuită medie
+item.Scraped Hide.large.name=Piele răzuită mare
+item.Prep Hide.small.name=Piele pregătită mică
+item.Prep Hide.medium.name=Piele pregătită medie
+item.Prep Hide.large.name=Piele pregătită mare
+item.Sheep Skin.small.name=Piele de oaie mică
+item.Sheep Skin.medium.name=Piele de oaie medie
+item.Sheep Skin.large.name=Piele de oaie mare
+item.TFC Leather.name=Piele tăbăcită
+item.Flat Leather.name=Piele tăbăcită plată
+item.leather.name=Piele tăbăcită
+
+item.minecartChest.name=Vagonet cu cufăr
+item.fishingRod.name=Undiță
+
+item.Quiver.name=Tolbă
+item.Rope.name=Funie
+item.Mud Brick.name=Cărămidă de pământ
+item.Wet Mud Brick.name=Cărămidă de pământ udă
+
+#======== Misc. Blocks========
+tile.Straw Hide Bed.name=Pat din paie și piele
+tile.StrawHideBed.name=Pat din paie și piele
+tile.customBed.sleep=Acest pat nu este destul de comfortabil pentru dormit
+tile.BasicPipe.name=Țeavă
+tile.ValvePipe.name=Valvă
+tile.Smoke.name=Fum
+tile.Torch.name=Torță
+tile.Chest.name=Cufăr
+tile.Bookshelf.name=Bibliotecă
+tile.Workbench.name=Masă de lucru
+tile.ButtonWood.name=Buton de lemn
+tile.Firepit.name=Vatră
+tile.LogPile.name=Grămadă de bușteni
+tile.Charcoal.name=Mangal
+tile.StoneDetailed.name=Detaliat
+tile.stoneStairs.name=Trepte
+tile.stoneSlabs.name=Lespede
+tile.stoneStalac.name=Stalactită
+tile.WoodConstruct.name=Cherestea
+tile.MetalTrapDoor.name=Trapă
+tile.Vessel.name=Vas mare
+tile.Grill.name=Grătar
+
+tile.Sulfur.name=Sulf
+tile.Reeds.name=Trestie
+
+#= Misc. Plants =
+item.Sugarcane.name=Trestie de zahăr
+item.Hemp.name=Cânepă
+item.Straw.name=Paie
+item.Jute.name=Iută
+item.Jute Fibre.name=Fibră de iută
+
+tile.Fungi.mushroom_brown.name=Ciupercă maro
+tile.Fungi.mushroom_red.name=Ciupercă roșie
+tile.Cactus.name=Cactus
+tile.Pumpkin.name=Dovleac
+tile.Moss.name=Mușchi
+tile.Thatch.name=Balot de paie
+tile.Flora.Golden Rod.name=Splinuță
+tile.Flora.Cat Tails.name=Papură
+
+item.Seeds Sugarcane.name=Semințe de trestie de zahăr
+item.Seeds Hemp.name=Semințe de cânepă
+item.Seeds Jute.name=Semințe de iută
+
+tile.TallGrass.tallgrass.name=Iarbă înaltă
+tile.TallGrass.fern.name=Ferigă
+tile.TallGrass.shortgrass.name=Iarbă scurtă
+tile.LilyPad.name=Nufăr
+tile.Vine.name=Liane
+tile.SeaGrassStill.name=Iarbă de mare
+tile.SeaGrassIce.name=Iarbă de mare înghețată
+
+tile.Flowers.flower_nasturtium.name=Năsturel
+tile.Flowers.flower_dandelion.name=Păpădie
+tile.Flowers.flower_meads_milkweed.name=Asclepia lui Mead
+tile.Flowers.flower_tropical_milkweed.name=Floarea sângelui
+tile.Flowers.flower_butterfly_milkweed.name=Iarba fluturilor
+tile.Flowers.flower_calendula.name=Filimică
+tile.Flowers2.flower_rose.name=Mac
+tile.Flowers2.flower_blue_orchid.name=Orhidee albastră
+tile.Flowers2.flower_allium.name=Allium
+tile.Flowers2.flower_houstonia.name=Houstonia
+tile.Flowers2.flower_tulip_red.name=Lalea roșie
+tile.Flowers2.flower_tulip_orange.name=Lalea portocalie
+tile.Flowers2.flower_tulip_white.name=Lalea albă
+tile.Flowers2.flower_tulip_pink.name=Lalea roz
+tile.Flowers2.flower_oxeye_daisy.name=Margaretă
+
+tile.SaltWater.name=Apă sărată curgătoare
+tile.SaltWaterStationary.name=Apă sărată
+tile.FreshWater.name=Apă dulce curgătoare
+tile.FreshWaterStationary.name=Apă dulce
+tile.HotWater.name=Apă fierbinte curgătoare
+tile.HotWaterStationary.name=Apă fierbinte
+tile.Lava.name=Lavă curgătoare
+tile.LavaStationary.name=Lavă
+
+#=======
+#= GUI =
+#=======
+
+#== Anvil GUI ==
+gui.Anvil.Plans=Planuri
+gui.Anvil.Weld=Sudează
+
+gui.Anvil.LightHit=Lovește ușor
+gui.Anvil.MediumHit=Lovește mediu
+gui.Anvil.HeavyHit=Lovește tare
+gui.Anvil.Draw=Trage
+
+gui.Anvil.Punch=Împunge
+gui.Anvil.Bend=Îndoaie
+gui.Anvil.Upset=Îndeasă
+gui.Anvil.Shrink=Micșorează
+
+gui.Anvil.Rules=Reguli
+gui.Anvil.Rule1=Oricare
+gui.Anvil.Rule2=Lovește, oricare
+gui.Anvil.Rule3=Lovește, ultima
+gui.Anvil.Rule4=Lovește, penultima
+gui.Anvil.Rule5=Lovește, antepenultima
+gui.Anvil.Rule6=Lovește, ultimele două
+gui.Anvil.Rule7=Lovește, ultimele trei
+gui.Anvil.Rule8=Lovește, nu ultima
+gui.Anvil.Rule9=Împunge, oricare
+gui.Anvil.Rule10=Împunge, ultima
+gui.Anvil.Rule11=Împunge, penultima
+gui.Anvil.Rule12=Împunge, antepenultima
+gui.Anvil.Rule13=Împunge, ultimele două
+gui.Anvil.Rule14=Împunge, ultimele trei
+gui.Anvil.Rule15=Împunge, nu ultima
+gui.Anvil.Rule16=Micșorează, oricare
+gui.Anvil.Rule17=Micșorează, ultima
+gui.Anvil.Rule18=Micșorează, penultima
+gui.Anvil.Rule19=Micșorează, antepenultima
+gui.Anvil.Rule20=Micșorează, ultimele două
+gui.Anvil.Rule21=Micșorează, ultimele trei
+gui.Anvil.Rule22=Micșorează, nu ultima
+gui.Anvil.Rule23=Trage, oricare
+gui.Anvil.Rule24=Trage, ultima
+gui.Anvil.Rule25=Trage, penultima
+gui.Anvil.Rule26=Trage, antepenultima
+gui.Anvil.Rule27=Trage, ultimele două
+gui.Anvil.Rule28=Trage, ultimele trei
+gui.Anvil.Rule29=Trage, nu ultima
+gui.Anvil.Rule30=Îndeasă, oricare
+gui.Anvil.Rule31=Îndeasă, ultima
+gui.Anvil.Rule32=Îndeasă, penultima
+gui.Anvil.Rule33=Îndeasă, antepenultima
+gui.Anvil.Rule34=Îndeasă, ultimele două
+gui.Anvil.Rule35=Îndeasă, ultimele trei
+gui.Anvil.Rule36=Îndeasă, nu ultima
+gui.Anvil.Rule37=Îndoaie, oricare
+gui.Anvil.Rule38=Îndoaie, ultima
+gui.Anvil.Rule39=Îndoaie, penultima
+gui.Anvil.Rule40=Îndoaie, antepenultima
+gui.Anvil.Rule41=Îndoaie, ultimele două
+gui.Anvil.Rule42=Îndoaie, ultimele trei
+gui.Anvil.Rule43=Îndoaie, nu ultima
+
+#== Tools/Weapons/Armor GUI ==
+gui.Armor.ForgedBy=Forjat de
+gui.Armor.Crush=Zdrobire
+gui.Armor.Pierce=Străpungere
+gui.Armor.Slash=Tăiere
+
+gui.Bow.Javelins=Sulițe
+gui.Bow.Arrows=Săgeți
+gui.Bow.ForgedBy=Făcut de
+
+gui.DamageType.Error=Eroare: tip incorect de daune
+gui.DamageType.Crushing=Zdrobire
+gui.DamageType.Piercing=Străpungere
+gui.DamageType.Slashing=Tăiere
+
+#== Barrel GUI ==
+gui.Barrel.Empty=Golește
+gui.Barrel.Seal=Sigilează
+gui.Barrel.Unseal=Desigilează
+gui.Barrel.ToggleOff=Scoate
+gui.Barrel.ToggleOn=Pune
+gui.Barrel.SealedOn=Sigilat pe
+gui.Barrel.Solid=Conținut solid
+gui.Barrel.Liquid=Conținut lichid
+gui.barrel.pickling=Murat
+gui.barrel.brining=Saramurare
+gui.barrel.preserving=Conservare
+
+#== Bloomery GUI ==
+gui.Bloomery.Charcoal=Mangal
+gui.Bloomery.Ore=Minereu
+
+#== Calendar GUI ==
+gui.Calendar.Calendar=Calendar
+gui.Calendar.DateBioxx=Ziua lui Bioxx!
+gui.Calendar.DateDunk=Ziua lui Dunk!
+gui.Calendar.DateKitty=Ziua lui Kitty!
+
+gui.Calendar.Hour=Oră
+gui.Calendar.WitchHour=Miezul nopții
+
+gui.Calendar.Day=Zi
+gui.Calendar.Sunday=Duminică
+gui.Calendar.Monday=Luni
+gui.Calendar.Tuesday=Marți
+gui.Calendar.Wednesday=Miercuri
+gui.Calendar.Thursday=Joi
+gui.Calendar.Friday=Vineri
+gui.Calendar.Saturday=Sâmbătă
+
+gui.Calendar.Season=Anotimp
+gui.Calendar.EarlySpring=Primăvară timpurie
+gui.Calendar.Spring=Primăvară
+gui.Calendar.LateSpring=Primăvară târzie
+gui.Calendar.EarlySummer=Vară timpurie
+gui.Calendar.Summer=Vară
+gui.Calendar.LateSummer=Vară târzie
+gui.Calendar.EarlyAutumn=Toamnă timpurie
+gui.Calendar.Autumn=Toamnă
+gui.Calendar.LateAutumn=Toamnă târzie
+gui.Calendar.EarlyWinter=Iarnă timpurie
+gui.Calendar.Winter=Iarnă
+gui.Calendar.LateWinter=Iarnă târzie
+
+gui.Calendar.Date=Dată
+gui.Calendar.January=Ianuarie
+gui.Calendar.February=Februarie
+gui.Calendar.March=Martie
+gui.Calendar.April=Aprilie
+gui.Calendar.May=Mai
+gui.Calendar.June=Iunie
+gui.Calendar.July=Iulie
+gui.Calendar.August=August
+gui.Calendar.September=Septembrie
+gui.Calendar.October=Octombrie
+gui.Calendar.November=Noiembrie
+gui.Calendar.December=Decembrie
+
+gui.Calendar.1Hour=1 oră
+gui.Calendar.1Day=1 zi
+gui.Calendar.1Week=1 săptămână
+gui.Calendar.1Month=1 lună
+gui.Calendar.1Year=1 an
+
+#== Food GUI ==
+gui.FoodPrep.CreateMeal=Creează
+gui.FoodPrep.Effect=Efect
+gui.FoodPrep.Energy=Energie
+gui.FoodPrep.Filling=Săturare
+gui.FoodPrep.Power=Putere
+gui.FoodPrep.Sandwich=Sandvici
+gui.FoodPrep.Salad=Salată
+
+#== Metals ==
+gui.metal.Bismuth=Bismut
+gui.metal.BismuthBronze=Bronz de bismut
+gui.metal.BlackBronze=Bronz negru
+gui.metal.BlackSteel=Oțel negru
+gui.metal.BlueSteel=Oțel albastru
+gui.metal.Brass=Alamă
+gui.metal.Bronze=Bronz
+gui.metal.Copper=Cupru
+gui.metal.Gold=Aur
+gui.metal.HCBlackSteel=Oțel negru bogat în carbon
+gui.metal.HCBlueSteel=Oțel albastru bogat în carbon
+gui.metal.HCRedSteel=Oțel roșu bogat în carbon
+gui.metal.Lead=Plumb
+gui.metal.Nickel=Nichel
+gui.metal.PigIron=Fontă
+gui.metal.Platinum=Platină
+gui.metal.RedSteel=Oțel roșu
+gui.metal.RoseGold=Aur roz
+gui.metal.Silver=Argint
+gui.metal.Steel=Oțel
+gui.metal.SterlingSilver=Argint sterling
+gui.metal.Tin=Staniu
+gui.metal.Unknown=Necunoscut
+gui.metal.WeakBlueSteel=Oțel albastru slab
+gui.metal.WeakRedSteel=Oțel roșu slab
+gui.metal.WeakSteel=Oțel slab
+gui.metal.WroughtIron=Fier forjat
+gui.metal.Zinc=Zinc
+
+#== Plans GUI ==
+gui.plans.axe=Topor
+gui.plans.bootsplate=Cizme
+gui.plans.bucket=Găleată
+gui.plans.chestplate=Platoșă
+gui.plans.chisel=Daltă
+gui.plans.hammer=Ciocan
+gui.plans.helmplate=Cască
+gui.plans.hoe=Sapă
+gui.plans.ingot=Lingou
+gui.plans.javelin=Suliță
+gui.plans.knife=Cuțit
+gui.plans.legsplate=Jambiere
+gui.plans.mace=Buzdugan
+gui.plans.pickaxe=Târnăcop
+gui.plans.propick=Târnăcop de prospector
+gui.plans.refinebloom=Rafinează
+gui.plans.saw=Fierăstrău
+gui.plans.scythe=Coasă
+gui.plans.sheet=Tablă
+gui.plans.shovel=Lopată
+gui.plans.splitbloom=Împarte
+gui.plans.sword=Sabie
+gui.plans.tuyere=Gură de vânt
+gui.plans.grill=Grătar
+gui.plans.shears=Foarfece
+gui.plans.trapdoor=Trapă
+
+#== Misc GUI ==
+gui.Blueprint=Schiță
+gui.Nametag=Etichetă de nume
+gui.fertilized=Fertilizat
+gui.Inventory=Inventar
+gui.ClearSlot=Golește un loc de rezultat.
+gui.LogPile=Grămadă de bușteni
+gui.Output=Rezultat
+gui.done=Gata
+gui.cancel=Renunță
+gui.Sluice.Soil=Sol
+gui.Sluice.Overworked=Epuizat
+gui.Workbench.Crafting=Fabricare
+gui.overburdened=*Supraîncărcat*
+
+gui.badnbt=Informații RELE
+
+#== Tooltips ==
+gui.Advanced=Avansat
+gui.Shift=Shift
+gui.Hold=Ține apăsat pe
+
+gui.slot=Loc
+gui.slot.back=Înapoi
+
+gui.ShowHelp=§8Ajutor: (Ține apăsat pe §fShift§8)
+gui.Help=§8Help:
+gui.Clay.Inst0=§bDă clic dreapta §7cu 5 într-o stivă ca să modelezi.
+gui.Knife.Inst0=§bDă clic dreapta §7pe partea de sus a unui bloc ca să
+gui.Knife.Inst1=creezi un loc de preparare a mâncării.
+gui.Leather.Inst0=§bDă clic dreapta §7cu un cuțit în inventar ca să tai.
+gui.LooseRock.Inst0=§bDă clic dreapta §7cu 2 într-o stivă ca să cioplești.
+gui.MeltedMetal.Inst0=§bDă clic dreapta §7ca să torni sau să combini.
+gui.PotteryBase.Inst0=Furișează-te și §bdă clic dreapta §7ca să așezi obiectul.
+gui.PotteryVesselSmall.Inst0=Sau §bdă clic dreapta §7ca să deschizi inventarul.
+gui.RawHide.Inst0=????
+gui.Barrel.MoreItems=§8Mai multe... (Ține apăsat pe §fShift§8)
+
+gui.Nutrient.A=Nutrient A
+gui.Nutrient.B=Nutrient B
+gui.Nutrient.C=Nutrient C
+
+gui.stage1=Etapa 1
+gui.stage2=Etapa 2
+
+gui.Size.Tiny=Minuscul
+gui.Size.VerySmall=Foarte mic
+gui.Size.Small=Mic
+gui.Size.Medium=Mediu
+gui.Size.Large=Mare
+gui.Size.VeryLarge=Foarte mare
+gui.Size.Huge=Uriaș
+
+gui.Weight.Light=Ușor
+gui.Weight.Medium=Mediu
+gui.Weight.Heavy=Greu
+
+gui.Reach.Short=Scurt
+gui.Reach.Medium=Mediu
+gui.Reach.Far=Lung
+
+#== Food ==
+gui.food.fruit=Fructe
+gui.food.vegetable=Legume
+gui.food.grain=Cereale
+gui.food.protein=Proteine
+gui.food.dairy=Lactate
+gui.food.amount=Cantitate
+gui.food.decay=Stricat
+gui.food.salted=Sărat
+
+gui.FoodHeat.Cold=Rece
+gui.FoodHeat.Warm=Cald
+
+gui.showtaste=§8Gust: (Ține apăsat pe §fL-Ctrl§8)
+gui.taste=§8Gust:
+gui.taste.sweet=dulce
+gui.taste.sour=acru
+gui.taste.salty=sărat
+gui.taste.bitter=amar
+gui.taste.savory=savuros
+
+gui.taste.novice.sweet1=dulce
+gui.taste.novice.sweet0=nu dulce
+gui.taste.novice.sour1=acru
+gui.taste.novice.sour0=nu acru
+gui.taste.novice.salty1=sărat
+gui.taste.novice.salty0=nu sărat
+gui.taste.novice.bitter1=amar
+gui.taste.novice.bitter0=nu amar
+gui.taste.novice.savory1=savuros
+gui.taste.novice.savory0=nu savuros
+
+gui.taste.adept.sweet0=nu dulce
+gui.taste.adept.sweet1=moderat de dulce
+gui.taste.adept.sweet2=dulce
+gui.taste.adept.sweet3=destul de dulce
+gui.taste.adept.sweet4=foarte dulce
+gui.taste.adept.sweet5=extrem de dulce
+gui.taste.adept.sour0=nu acru
+gui.taste.adept.sour1=moderat de acru
+gui.taste.adept.sour2=acru
+gui.taste.adept.sour3=destul de acru
+gui.taste.adept.sour4=foarte acru
+gui.taste.adept.sour5=extrem de acru
+gui.taste.adept.salty0=nu sărat
+gui.taste.adept.salty1=moderat de sărat
+gui.taste.adept.salty2=sărat
+gui.taste.adept.salty3=destul de sărat
+gui.taste.adept.salty4=foarte sărat
+gui.taste.adept.salty5=extrem de sărat
+gui.taste.adept.bitter0=nu amar
+gui.taste.adept.bitter1=moderat de amar
+gui.taste.adept.bitter2=amar
+gui.taste.adept.bitter3=destul de amar
+gui.taste.adept.bitter4=foarte amar
+gui.taste.adept.bitter5=extrem de amar
+gui.taste.adept.savory0=nu savuros
+gui.taste.adept.savory1=moderat de savuros
+gui.taste.adept.savory2=savuros
+gui.taste.adept.savory3=destul de savuros
+gui.taste.adept.savory4=foarte savuros
+gui.taste.adept.savory5=extrem de savuros
+
+gui.taste.0=nu
+gui.taste.1=nu foarte
+gui.taste.2=oarecum
+gui.taste.3=moderat de
+gui.taste.4=perfect de
+gui.taste.5=prea
+gui.taste.6=foarte
+gui.taste.7=extrem de
+gui.taste.8=ridicol de
+
+word.pickled=Murat
+word.brined=Saramurat
+word.cooked=Copt
+word.salted=Sărat
+word.smoked=Afumat
+word.dried=Uscat
+
+food.cooked.rare=În sânge
+food.cooked.medrare=În sânge spre mediu
+food.cooked.med=Mediu
+food.cooked.medwell=Mediu spre bine făcut
+food.cooked.well=Bine făcut
+food.cooked.0=Foarte deschis
+food.cooked.1=Deschis
+food.cooked.2=Mediu
+food.cooked.3=Închis
+food.cooked.4=Foarte închis
+
+gui.Torch.CatchingFire=Ia foc
+gui.Torch.Lit=Aprinsă
+
+gui.ItemHeat.Liquid=Lichid
+gui.ItemHeat.Solidified=Solidificat
+gui.ItemHeat.Caution=Atenție
+gui.ItemHeat.Warming=Se încălzește
+gui.ItemHeat.Hot=Fierbinte
+gui.ItemHeat.VeryHot=Foarte fierbinte
+gui.ItemHeat.FaintRed=Roșu pal
+gui.ItemHeat.DarkRed=Roșu închis
+gui.ItemHeat.BrightRed=Roșu deschis
+gui.ItemHeat.Orange=Portocaliu
+gui.ItemHeat.Yellow=Galben
+gui.ItemHeat.YellowWhite=Alb-gălbui
+gui.ItemHeat.White=Alb
+gui.ItemHeat.BrilliantWhite=Alb strălucitor
+
+gui.ingot.workable=Se poate lucra
+gui.ingot.weldable=Se poate suda
+gui.ingot.danger=**Pericol**
+
+gui.milk.fresh=Proaspăt
+gui.milk.old=Vechi
+gui.milk.sour=Acru
+
+gui.units=Unități
+
+#== WAILA ==
+gui.useless=
+gui.growth=
+gui.mature=
+gui.metal.Iron=
+
+#== Chat Messages ==
+gui.GoldPan.UseFull=Trebuie folosit sub apă curgătoare.
+gui.goldpan.overused=Această zonă pare să fi fost lucrată mult. Probabil nu vei găsi mare lucru.
+gui.seeds.failedTemp=
+gui.seeds.failedSun=
+
+gui.ProPick.Found=S-a găsit
+gui.ProPick.FoundTraces=S-au găsit urme de
+gui.ProPick.FoundSmall=S-a găsit un eșantion mic de
+gui.ProPick.FoundMedium=S-a găsit un eșantion mediu de
+gui.ProPick.FoundLarge=S-a găsit un eșantion mare de
+gui.ProPick.FoundVeryLarge=S-a găsit un eșantion foarte mare de
+gui.ProPick.FoundNothing=Nu s-a găsit nimic de interes.
+
+#== Creative Tabs ==
+itemGroup.TFCArmor=(TFC) Armură
+itemGroup.TFCMaterials=(TFC) Materiale
+itemGroup.TFCMisc=(TFC) Diverse
+itemGroup.TFCPottery=(TFC) Olărit
+itemGroup.TFCTools=(TFC) Unelte
+itemGroup.TFCWeapons=(TFC) Arme
+itemGroup.TFCDevices=(TFC) Dispozitive
+itemGroup.TFCFoods=(TFC) Mâncare
+itemGroup.TFCBuilding=(TFC) Blocuri de construcție
+itemGroup.TFCDecoration=(TFC) Blocuri decorative
+
+#== Skill GUI ==
+skill.armorsmith=Fierărit de armură
+skill.gensmith=Fierărit general
+skill.toolsmith=Fierărit de unelte
+skill.weaponsmith=Fierărit de arme
+skill.agriculture=Agricultură
+skill.cooking=Gătit
+skill.prospecting=Prospectat
+skill.butchering=Măcelărit
+gui.skill.novice=Novice
+gui.skill.adept=Inițiat
+gui.skill.expert=Expert
+gui.skill.master=Maestru
+gui.skillpage=Abilități
+
+#==================
+#= Error Messages =
+#==================
+error.error=
+error.NBT=
+error.OreCFG=
+error.Contact=
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================

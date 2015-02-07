@@ -19,12 +19,12 @@ public class WeatherManager
 	{
 	}
 
-	private Random getRandom(World world)
+	/*private Random getRandom(World world)
 	{
 		if(world.isRemote)
 			return clientRand;
 		return rand;
-	}
+	}*/
 
 	public float getDailyTemp()
 	{

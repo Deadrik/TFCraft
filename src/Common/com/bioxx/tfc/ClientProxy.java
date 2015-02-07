@@ -24,7 +24,6 @@ import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.bioxx.tfc.Core.ColorizerFoliageTFC;
-import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.EntityBarrel;
@@ -103,6 +102,7 @@ import com.bioxx.tfc.Render.Blocks.RenderLoom;
 import com.bioxx.tfc.Render.Blocks.RenderMetalSheet;
 import com.bioxx.tfc.Render.Blocks.RenderMetalTrapDoor;
 import com.bioxx.tfc.Render.Blocks.RenderNestBox;
+import com.bioxx.tfc.Render.Blocks.RenderOilLamp;
 import com.bioxx.tfc.Render.Blocks.RenderOre;
 import com.bioxx.tfc.Render.Blocks.RenderPottery;
 import com.bioxx.tfc.Render.Blocks.RenderSmoke;
@@ -113,6 +113,7 @@ import com.bioxx.tfc.Render.Blocks.RenderToolRack;
 import com.bioxx.tfc.Render.Blocks.RenderTorch;
 import com.bioxx.tfc.Render.Blocks.RenderTuyere;
 import com.bioxx.tfc.Render.Blocks.RenderVessel;
+import com.bioxx.tfc.Render.Blocks.RenderWall;
 import com.bioxx.tfc.Render.Blocks.RenderWoodConstruct;
 import com.bioxx.tfc.Render.Models.ModelBass;
 import com.bioxx.tfc.Render.Models.ModelBear;
@@ -152,6 +153,8 @@ import com.bioxx.tfc.TileEntities.TESmokeRack;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntityToolRack;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.Enums.EnumTree;
 import com.bioxx.tfc.api.Util.KeyBindings;
 
@@ -169,9 +172,9 @@ public class ClientProxy extends CommonProxy
 	public void registerFluidIcons()
 	{
 		//Only bother adding fluids here if you don't want to use the default HotWater icons
-		TFCFluid.LAVA.setIcons(TFCBlocks.Lava.getIcon(0, 0), TFCBlocks.Lava.getIcon(2, 0));
-		TFCFluid.SALTWATER.setIcons(TFCBlocks.SaltWater.getIcon(0, 0), TFCBlocks.SaltWater.getIcon(2, 0));
-		TFCFluid.FRESHWATER.setIcons(TFCBlocks.FreshWater.getIcon(0, 0), TFCBlocks.FreshWater.getIcon(2, 0));
+		TFCFluids.LAVA.setIcons(TFCBlocks.Lava.getIcon(0, 0), TFCBlocks.Lava.getIcon(2, 0));
+		TFCFluids.SALTWATER.setIcons(TFCBlocks.SaltWater.getIcon(0, 0), TFCBlocks.SaltWater.getIcon(2, 0));
+		TFCFluids.FRESHWATER.setIcons(TFCBlocks.FreshWater.getIcon(0, 0), TFCBlocks.FreshWater.getIcon(2, 0));
 	}
 
 	@Override
@@ -238,6 +241,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.cookingPitRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.leavesRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.detailedRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.WallRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderWall());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.FenceRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderFence());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.FenceGateRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderFenceGate());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.toolRackRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderToolRack());
@@ -262,6 +266,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.torchRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderTorch());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.smokeRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderSmoke());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.smokeRackRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderSmokeRack());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.oilLampRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderOilLamp());
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
 	}
@@ -359,12 +364,12 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public int foliageColorMultiplier(IBlockAccess par1IBlockAccess, int i, int j, int k)
 	{
-		int var5 = 0;
-		int var6 = 0;
-		int var7 = 0;
+		//int var5 = 0;
+		//int var6 = 0;
+		//int var7 = 0;
 		int[] rgb = { 0, 0, 0 };
 		float temperature = TFC_Climate.getHeightAdjustedTempSpecificDay(getCurrentWorld(),TFC_Time.getDayOfYear(),i,j,k);
-		float rainfall = TFC_Climate.getRainfall(getCurrentWorld(),i,j,k);
+		//float rainfall = TFC_Climate.getRainfall(getCurrentWorld(),i,j,k);
 
 		int meta = par1IBlockAccess.getBlockMetadata(i, j, k);
 		if(par1IBlockAccess.getBlock(i, j, k) == TFCBlocks.fruitTreeLeaves)
@@ -533,11 +538,11 @@ public class ClientProxy extends CommonProxy
 		}
 	}
 
-	private float getTimeMult(long day, long start, long end)
+	/*private float getTimeMult(long day, long start, long end)
 	{
 		float total = end - start;
 		return total - (day - start) / total;
-	}
+	}*/
 
 	private int[] applyColor(int c, int[] rgb)
 	{

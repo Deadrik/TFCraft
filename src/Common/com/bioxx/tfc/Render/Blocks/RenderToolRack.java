@@ -38,10 +38,10 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 			if ( ! breaking )
 				renderblocks.overrideBlockTexture = block.getIcon(0, te.woodType);
 			
-			double minX = 0;
-			double maxX = 0.5;
-			double minZ = 0;
-			double maxZ = 0.5;
+			//double minX = 0;
+			//double maxX = 0.5;
+			//double minZ = 0;
+			//double maxZ = 0.5;
 			//First we render the rack itself.
 			if(dir == 0)
 			{

@@ -15,8 +15,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 
 import cpw.mods.fml.relauncher.Side;
@@ -71,7 +71,7 @@ public class BlockCustomWall extends BlockWall
 	@Override
 	public int getRenderType()
 	{
-		return 32;
+		return TFCBlocks.WallRenderId;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -91,6 +91,64 @@ public class BlockCustomWall extends BlockWall
 	{
 		return par1;
 	}
+	
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess p_149719_1_, int p_149719_2_, int p_149719_3_, int p_149719_4_)
+    {
+        boolean flag0 = this.canConnectWallTo(p_149719_1_, p_149719_2_, p_149719_3_, p_149719_4_ - 1);
+        boolean flag1 = this.canConnectWallTo(p_149719_1_, p_149719_2_, p_149719_3_, p_149719_4_ + 1);
+        boolean flag2 = this.canConnectWallTo(p_149719_1_, p_149719_2_ - 1, p_149719_3_, p_149719_4_);
+        boolean flag3 = this.canConnectWallTo(p_149719_1_, p_149719_2_ + 1, p_149719_3_, p_149719_4_);
+        //The up flags. These check if there is an adjacent block above us that would raise the height of the wall
+        boolean flag0Up = this.canConnectWallTo(p_149719_1_, p_149719_2_, p_149719_3_, p_149719_4_ - 1);
+        boolean flag1Up = this.canConnectWallTo(p_149719_1_, p_149719_2_, p_149719_3_, p_149719_4_ + 1);
+        boolean flag2Up = this.canConnectWallTo(p_149719_1_, p_149719_2_ - 1, p_149719_3_, p_149719_4_);
+        boolean flag3Up = this.canConnectWallTo(p_149719_1_, p_149719_2_ + 1, p_149719_3_, p_149719_4_);
+        float f = 0.25F;
+        float f1 = 0.75F;
+        float f2 = 0.25F;
+        float f3 = 0.75F;
+        float f4 = 1.0F;
+
+        if (flag0)
+        {
+            f2 = 0.0F;
+        }
+
+        if (flag1)
+        {
+            f3 = 1.0F;
+        }
+
+        if (flag2)
+        {
+            f = 0.0F;
+        }
+
+        if (flag3)
+        {
+            f1 = 1.0F;
+        }
+
+        if (flag0 && flag1 && !flag2 && !flag3)
+        {
+        	if(!(flag0Up && flag1Up)){
+        		f4 = 0.8125F;
+        	}
+            f = 0.3125F;
+            f1 = 0.6875F;
+        }
+        else if (!flag0 && !flag1 && flag2 && flag3)
+        {
+        	if(!(flag2Up && flag3Up)){
+        		f4 = 0.8125F;
+        	}
+            f2 = 0.3125F;
+            f3 = 0.6875F;
+        }
+
+        this.setBlockBounds(f, 0.0F, f2, f1, f4, f3);
+    }
 
 	@Override
 	public boolean canConnectWallTo(IBlockAccess access, int i, int j, int k)

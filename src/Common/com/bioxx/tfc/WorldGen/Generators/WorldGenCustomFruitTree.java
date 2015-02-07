@@ -6,9 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class WorldGenCustomFruitTree extends WorldGenerator
 {
@@ -52,26 +52,23 @@ public class WorldGenCustomFruitTree extends WorldGenerator
 				((TileEntityFruitTreeWood)world.getTileEntity(i, j+2, k)).setTrunk(true);
 				((TileEntityFruitTreeWood)world.getTileEntity(i, j+2, k)).setHeight(2);
 				((TileEntityFruitTreeWood)world.getTileEntity(i, j+2, k)).setBirth();
+				surroundWithLeaves(world, i, j + 2, k);
 
 				if(world.isAirBlock(i+1, j+2, k) || world.getBlock(i+1, j+2, k) == leavesBlock)
 				{
 					world.setBlock(i+1, j+2, k, TFCBlocks.fruitTreeWood, metaId, 0x2);
-					SurroundWithLeaves(world,i+1,j+2,k);
 				}
 				if(world.isAirBlock(i-1, j+2, k) || world.getBlock(i-1, j+2, k-1) == leavesBlock)
 				{
 					world.setBlock(i-1, j+2, k, TFCBlocks.fruitTreeWood, metaId, 0x2);
-					SurroundWithLeaves(world,i-1,j+2,k);
 				}
 				if(world.isAirBlock(i, j+2, k+1) || world.getBlock(i, j+2, k+1) == leavesBlock)
 				{
 					world.setBlock(i, j+2, k+1, TFCBlocks.fruitTreeWood, metaId, 0x2);
-					SurroundWithLeaves(world,i,j+2,k+1);
 				}
 				if(world.isAirBlock(i, j+2, k-1) || world.getBlock(i, j+2, k-1) == leavesBlock)
 				{
 					world.setBlock(i, j+2, k-1, TFCBlocks.fruitTreeWood, metaId, 0x2);
-					SurroundWithLeaves(world,i,j+2,k-1);
 				}
 
 				if(world.isAirBlock(i, j+3, k) || world.getBlock(i, j+3, k) == leavesBlock)
@@ -80,13 +77,14 @@ public class WorldGenCustomFruitTree extends WorldGenerator
 					((TileEntityFruitTreeWood)world.getTileEntity(i, j+3, k)).setTrunk(true);
 					((TileEntityFruitTreeWood)world.getTileEntity(i, j+3, k)).setHeight(3);
 					((TileEntityFruitTreeWood)world.getTileEntity(i, j+3, k)).setBirth();
-					SurroundWithLeaves(world,i,j+3,k);
+					if (world.isAirBlock(i, j + 4, k))
+						world.setBlock(i, j + 4, k, leavesBlock, metaId & 7, 0x2);
 				}
 			}
 		}
 	}
 
-	public void SurroundWithLeaves(World world, int i, int j, int k)
+	public void surroundWithLeaves(World world, int i, int j, int k)
 	{
 		for (int y = 1; y >= 0; y--)
 		{

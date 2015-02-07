@@ -5,6 +5,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.EnumChatFormatting;
+
 import com.bioxx.tfc.Core.Metal.Alloy;
 import com.bioxx.tfc.Core.Metal.AlloyManager;
 import com.bioxx.tfc.Core.Metal.AlloyMetal;
@@ -17,17 +25,9 @@ import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ISize;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.EnumChatFormatting;
-
 public class ItemCrucible extends ItemTerraBlock implements ISize
 {
-	public HashMap metals = new HashMap();
+	public HashMap<String, MetalPair> metals = new HashMap<String, MetalPair>();
 	private Alloy currentAlloy; 
 	public ItemCrucible(Block par1) 
 	{
@@ -42,10 +42,10 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 		readFromItemNBT(is.getTagCompound(), arraylist);
 	}
 
-	public void readFromItemNBT(NBTTagCompound nbt, List arraylist)
+	public void readFromItemNBT(NBTTagCompound nbt, List<String> arraylist)
 	{
 		currentAlloy = null;
-		metals = new HashMap();
+		metals = new HashMap<String, MetalPair>();
 		if(nbt != null && nbt.hasKey("Metals"))
 		{
 			NBTTagList nbttaglist = nbt.getTagList("Metals", 9);

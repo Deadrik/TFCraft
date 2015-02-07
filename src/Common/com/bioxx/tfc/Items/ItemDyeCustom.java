@@ -16,6 +16,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.BonemealEvent;
+
+import com.bioxx.tfc.Core.TFCTabs;
+
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -34,7 +37,7 @@ public class ItemDyeCustom extends ItemTerra
 		super();
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(TFCTabs.TFCMaterials);
 	}
 
 	@Override
@@ -82,8 +85,8 @@ public class ItemDyeCustom extends ItemTerra
 		else
 		{
 			Block var11;
-			int var12;
-			int var13;
+			//int var12;
+			//int var13;
 
 			if (par1ItemStack.getItemDamage() == 15)
 			{

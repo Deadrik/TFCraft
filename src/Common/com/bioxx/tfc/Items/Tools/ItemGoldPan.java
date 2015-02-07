@@ -15,13 +15,13 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -31,7 +31,7 @@ public class ItemGoldPan extends ItemTerra
 	public static String[] MetaNames = {"", "Sand", "Gravel", "Clay", "Dirt"};
 	public IIcon[] icons = new IIcon[MetaNames.length];
 
-	private int useTimer = 0;
+	//private int useTimer = 0;
 	public ItemGoldPan() 
 	{
 		super();
@@ -50,6 +50,12 @@ public class ItemGoldPan extends ItemTerra
 	public int getItemStackLimit()
 	{
 		return 1;
+	}
+
+	@Override
+	public boolean canStack()
+	{
+		return false;
 	}
 
 	@Override
@@ -83,7 +89,7 @@ public class ItemGoldPan extends ItemTerra
 		if(world.isRemote)
 			return is;
 
-		float distMod = 1.0F;
+		//float distMod = 1.0F;
 		MovingObjectPosition mop = getMovingObjectPositionFromPlayer(world, player, true);
 
 		if (mop == null)
@@ -111,7 +117,7 @@ public class ItemGoldPan extends ItemTerra
 
 					if(cd.sluicedAmount < 50)
 					{
-						if(world.getBlock(x, y, z) == TFCBlocks.Gravel || world.getBlock(x, y, z) == TFCBlocks.Gravel2)
+						if (blockHit == TFCBlocks.Gravel || blockHit == TFCBlocks.Gravel2)
 						{
 							is.setItemDamage((5 << 4) + 2);
 							if(world.rand.nextInt(10) == 0)
@@ -119,7 +125,7 @@ public class ItemGoldPan extends ItemTerra
 							TFC_Core.addPlayerExhaustion(player, 0.0005f);
 							cd.sluicedAmount++;
 						}
-						else if(world.getBlock(x, y, z) == TFCBlocks.Sand || world.getBlock(x, y, z) == TFCBlocks.Sand2)
+						else if (blockHit == TFCBlocks.Sand || blockHit == TFCBlocks.Sand2)
 						{
 							is.setItemDamage((5 << 4) + 1);
 							if(world.rand.nextInt(10) == 0)
@@ -127,7 +133,7 @@ public class ItemGoldPan extends ItemTerra
 							TFC_Core.addPlayerExhaustion(player, 0.0005f);
 							cd.sluicedAmount++;
 						}
-						else if(world.getBlock(x, y, z).getMaterial() == Material.water)
+						else if (blockHit.getMaterial() == Material.water)
 						{
 							/*if(world.getBlock(x, y-1, z) == Blocks.gravel)
 							{

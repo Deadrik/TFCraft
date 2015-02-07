@@ -14,8 +14,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Render.Models.ModelLoom;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.LoomManager;
 import com.bioxx.tfc.api.Crafting.LoomRecipe;
@@ -29,7 +29,7 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	public int loomType;
 	public ItemStack[] storage;
 
-	private int numStrings;
+	//private int numStrings;
 	private boolean weaving;
 	private boolean finished;
 

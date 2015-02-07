@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
@@ -15,13 +16,12 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TELoom;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCCrafting;
-import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Crafting.AnvilRecipe;
@@ -55,12 +55,12 @@ public class Recipes
 	{
 		TEBarrel.registerRecipes();
 		TELoom.registerRecipes();
-		Item[] Ingots = {TFCItems.BismuthIngot, TFCItems.BismuthBronzeIngot,TFCItems.BlackBronzeIngot,
+		/*Item[] Ingots = {TFCItems.BismuthIngot, TFCItems.BismuthBronzeIngot,TFCItems.BlackBronzeIngot,
 				TFCItems.BlackSteelIngot,TFCItems.BlueSteelIngot,TFCItems.BrassIngot,TFCItems.BronzeIngot,
 				TFCItems.BronzeIngot,TFCItems.CopperIngot,TFCItems.GoldIngot,TFCItems.WroughtIronIngot,TFCItems.LeadIngot,
 				TFCItems.NickelIngot,TFCItems.PigIronIngot,TFCItems.PlatinumIngot,TFCItems.RedSteelIngot,
 				TFCItems.RoseGoldIngot,TFCItems.SilverIngot,TFCItems.SteelIngot,TFCItems.SterlingSilverIngot,
-				TFCItems.TinIngot,TFCItems.ZincIngot};
+				TFCItems.TinIngot,TFCItems.ZincIngot};*/
 
 		// Remove Vanilla recipes before adding TFC recipes for oredict compatibility
 		VanillaRecipes();
@@ -127,11 +127,12 @@ public class Recipes
 		}
 
 		//Dyes
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Dye,1,4),new Object[]{new ItemStack(TFCItems.Powder,1,6)});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Dye,1,2),new Object[]{new ItemStack(TFCItems.Powder,1,8)});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Dye,1,1),new Object[]{new ItemStack(TFCItems.Powder,1,5)});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Dye,1,11),new Object[]{new ItemStack(TFCItems.Powder,1,7)});
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.Dye,1,12),new Object[]{new ItemStack(TFCItems.Powder,1,8),new ItemStack(TFCItems.Powder,1,0), "blockSand"}));
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Dye,1,4),new Object[]{new ItemStack(TFCItems.Powder,1,6)}); // Lapis - Blue
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Dye,1,2),new Object[]{new ItemStack(TFCItems.Powder,1,8)}); // Malachite - Green
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Dye,1,1),new Object[]{new ItemStack(TFCItems.Powder,1,5)}); // Hematite - Red
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Dye,1,11),new Object[]{new ItemStack(TFCItems.Powder,1,7)}); // Limonite - Yellow
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.Dye,1,12),new Object[]
+				{new ItemStack(TFCItems.Powder,1,8),new ItemStack(TFCItems.Powder,1,0), "blockSand"})); // Malachite, Flux & Sand - Light Blue
 
 		//Flux Powder
 		for (int i = 0; i < Global.STONE_FLUXINDEX.length; i++)
@@ -191,9 +192,12 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCItems.GlassBottle, 3), new Object[]
 				{ "# #", " # ", Character.valueOf('#'), new ItemStack(Blocks.glass) });
 
-		for (int i = 0; i < 16; i++)
-			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.carpet, 1, i), new Object[]
-					{ new ItemStack(TFCItems.Dye, 1, 15 - i), new ItemStack(Blocks.carpet, 1, WILD) });
+		String[] dyes =
+			{ "White", "Orange", "Magenta", "LightBlue", "Yellow", "Lime", "Pink", "Gray", "LightGray", "Cyan", "Purple", "Blue", "Brown", "Green", "Red", "Black" };
+		for (int i = 0; i < dyes.length; i++)
+		{
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Blocks.carpet, 1, i), "dye" + dyes[i], new ItemStack(Blocks.carpet, 1, WILD)));
+		}
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.rail, 64), new Object[] { "PsP","PsP", Character.valueOf('P'), "ingotIron", Character.valueOf('s'), "stickWood"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.golden_rail, 64), new Object[] { " r ","PsP","PsP", Character.valueOf('P'), "ingotGold", Character.valueOf('s'), "stickWood", Character.valueOf('r'), Items.redstone}));
@@ -434,12 +438,12 @@ public class Recipes
 	}
 
 
-	private static ItemStack checkMelted(ItemStack is)
+	/*private static ItemStack checkMelted(ItemStack is)
 	{
 		if(TFC_ItemHeat.GetTemp(is) > TFC_ItemHeat.IsCookable(is))
 			return null;
 		return is;
-	}
+	}*/
 
 	private static void VanillaRecipes()
 	{
@@ -447,7 +451,6 @@ public class Recipes
 		// Otherwise TFC can not use the 4 planks recipe to create its own crafting upgrade.
 		RemoveRecipe(new ItemStack(Blocks.crafting_table));
 		// Other Conflicting Recipes
-		RemoveRecipe(new ItemStack(Items.bow));
 		RemoveRecipe(new ItemStack(Items.fishing_rod));
 		RemoveRecipe(new ItemStack(Blocks.wooden_button));
 		RemoveRecipe(new ItemStack(Items.flint_and_steel));
@@ -455,6 +458,9 @@ public class Recipes
 		RemoveRecipe(new ItemStack(Items.sugar));
 		RemoveRecipe(new ItemStack(Items.glass_bottle, 3));
 		RemoveRecipe(new ItemStack(Items.paper, 3));
+
+		//Have to do this by class for some items that are overriden like the bow
+		RemoveRecipe(ItemBow.class);
 
 		//Recipe Configuration
 		if (TFCCrafting.anvilRecipe == false)
@@ -642,6 +648,9 @@ public class Recipes
 			RemoveRecipe(new ItemStack(Items.dye, 1, 1));
 			RemoveRecipe(new ItemStack(Items.dye, 2, 1));
 		}
+
+		if (TFCCrafting.shearsRecipe == false)
+			RemoveRecipe(new ItemStack(Items.shears));
 
 		if (TFCCrafting.signRecipe == false)
 			RemoveRecipe(new ItemStack(Items.sign, 3));
@@ -833,8 +842,6 @@ public class Recipes
 	private static void RegisterToolRecipes()
 	{
 		//Misc Tools
-		//GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.shears, 1), new Object[] { "P ", " P", Character.valueOf('P'), "ingotIron" }));
-
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.FlintSteel, 1), new Object[] { Items.flint, "ingotIron" }));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.FlintSteel, 1), new Object[] { Items.flint, "ingotSteel" }));
 
@@ -1624,6 +1631,7 @@ public class Recipes
 		manager.addPlan("trapdoor", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.SHRINKNOTLAST, RuleEnum.UPSETNOTLAST}));
 		manager.addPlan("grill", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.DRAWSECONDFROMLAST, RuleEnum.DRAWTHIRDFROMLAST}));
 		manager.addPlan("shears", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.HITTHIRDFROMLAST}));
+		manager.addPlan("oillamp", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.BENDSECONDFROMLAST, RuleEnum.DRAWTHIRDFROMLAST}));
 
 		addWeldRecipes(manager);
 
@@ -1915,6 +1923,13 @@ public class Recipes
 
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot2x), new ItemStack(TFCItems.WroughtIronIngot2x),"grill", AnvilReq.WROUGHTIRON, new ItemStack(TFCBlocks.Grill, 1, 0)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronKnifeHead), new ItemStack(TFCItems.WroughtIronKnifeHead),"shears", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.Shears, 1, 0)));
+
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.GoldIngot), null,"oillamp", AnvilReq.COPPER, new ItemStack(TFCBlocks.OilLamp, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.PlatinumIngot), null,"oillamp", AnvilReq.COPPER, new ItemStack(TFCBlocks.OilLamp, 1, 1)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RoseGoldIngot), null,"oillamp", AnvilReq.COPPER, new ItemStack(TFCBlocks.OilLamp, 1, 2)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SilverIngot), null,"oillamp", AnvilReq.COPPER, new ItemStack(TFCBlocks.OilLamp, 1, 3)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SterlingSilverIngot), null,"oillamp", AnvilReq.COPPER, new ItemStack(TFCBlocks.OilLamp, 1, 4)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), null,"oillamp", AnvilReq.BLUESTEEL, new ItemStack(TFCBlocks.OilLamp, 1, 5)));
 
 	}
 
@@ -2300,6 +2315,23 @@ public class Recipes
 				ItemStack recipeResult = recipe.getRecipeOutput();
 
 				if (ItemStack.areItemStacksEqual(resultItem, recipeResult))
+					recipes.remove(i--);
+			}
+		}
+	}
+
+	public static void RemoveRecipe(Class clazz)
+	{
+		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
+		for (int i = 0; i < recipes.size(); i++)
+		{
+			IRecipe tmpRecipe = recipes.get(i);
+			if (tmpRecipe instanceof IRecipe)
+			{
+				IRecipe recipe = tmpRecipe;
+				ItemStack recipeResult = recipe.getRecipeOutput();
+
+				if (recipeResult!= null && clazz.isInstance(recipeResult.getItem()))
 					recipes.remove(i--);
 			}
 		}

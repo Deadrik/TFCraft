@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class ItemReeds extends Item
 {

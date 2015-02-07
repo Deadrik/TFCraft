@@ -2,17 +2,16 @@ package com.bioxx.tfc.Blocks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-import com.bioxx.tfc.api.TFCOptions;
-import ibxm.Player;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -23,7 +22,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.CollisionRayTraceDetailed;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
@@ -31,6 +29,8 @@ import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.TileEntities.TEDetailed;
 import com.bioxx.tfc.TileEntities.TileEntityWoodConstruct;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCOptions;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -95,7 +95,7 @@ public class BlockDetailed extends BlockPartial
 	{
 		return false;
 	}
-	
+
 	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
@@ -173,7 +173,7 @@ public class BlockDetailed extends BlockPartial
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
 		if(pi!=null)
 			mode = pi.ChiselMode;
-		
+
 		TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 
 		int hasChisel = -1;
@@ -190,7 +190,7 @@ public class BlockDetailed extends BlockPartial
 		if(mode == 1)
 		{
 			int index = -10;
-			
+
 			if( xSelected < 4 && ySelected < 4 && zSelected < 4 )
 				for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++) {
 					index = (subX * 8 + subZ) * 8 + subY;
@@ -231,7 +231,7 @@ public class BlockDetailed extends BlockPartial
 					index = (subX * 8 + subZ) * 8 + subY;
 					deleteBox(world, x, y, z, player, te, index, hasChisel, hasHammer);
 				}
-			
+
 			return true;
 		}
 		else if(mode == 3 && xSelected != -10)
@@ -258,9 +258,6 @@ public class BlockDetailed extends BlockPartial
 		if(player.inventory.mainInventory[hasChisel] != null)
 			player.inventory.mainInventory[hasChisel].damageItem(1, player);
 
-		if(player.inventory.mainInventory[hasHammer] != null)
-			player.inventory.mainInventory[hasHammer].damageItem(1, player);
-		
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setByte("packetType", TEDetailed.Packet_Update);
 		nbt.setInteger("index", index);
@@ -350,7 +347,7 @@ public class BlockDetailed extends BlockPartial
 				if (index >= 0 && te.data.get(index)) 
 				{
 					int d = TileEntityWoodConstruct.PlankDetailLevel;
-					int dd = d*d;
+					//int dd = d*d;
 					float div = 1f / d;
 
 					float minX = x + xSelected * div;
@@ -395,8 +392,8 @@ public class BlockDetailed extends BlockPartial
 			if(index >= 0 && te.data.get(index))
 			{
 				int d = 8;
-				int dd = d * d;
-				int dd2 = dd*2;
+				//int dd = d * d;
+				//int dd2 = dd*2;
 
 				float div = 1f / d;
 
@@ -509,5 +506,11 @@ public class BlockDetailed extends BlockPartial
 		if(te.TypeID >= 0)
 			return Blocks.fire.getEncouragement(Block.getBlockById(te.TypeID));
 		else return 0;
+	}
+	
+	@Override
+	public Item getItemDropped(int metadata, Random rand, int fortune)
+	{
+		return null;
 	}
 }

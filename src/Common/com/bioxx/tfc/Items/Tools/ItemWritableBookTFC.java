@@ -2,8 +2,6 @@ package com.bioxx.tfc.Items.Tools;
 
 import java.util.List;
 
-import com.bioxx.tfc.Items.ItemTerra;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,6 +9,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Items.ItemTerra;
 
 public class ItemWritableBookTFC extends ItemTerra
 {
@@ -73,7 +73,7 @@ public class ItemWritableBookTFC extends ItemTerra
 		{
 			NBTTagCompound var2 = par1ItemStack.getTagCompound();
 			NBTTagString var3 = (NBTTagString)var2.getTag("title");
-			NBTTagString var4 = (NBTTagString)var2.getTag("author");
+			//NBTTagString var4 = (NBTTagString)var2.getTag("author");
 			if (var3 != null)
 			{
 				return var3.toString();

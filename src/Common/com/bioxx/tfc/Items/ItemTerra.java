@@ -13,10 +13,10 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -64,6 +64,7 @@ public class ItemTerra extends Item implements ISize
 		return this.craftingXP;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
@@ -112,13 +113,16 @@ public class ItemTerra extends Item implements ISize
 			{
 				MetaIcons[i] = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + MetaNames[i]);
 			}
+			
+			//This will prevent NullPointerException errors with other mods like NEI
+			this.itemIcon = MetaIcons[0];
 		}
 	}
 
 	@Override
 	public IIcon getIconFromDamage(int i)
 	{
-		if(MetaNames != null)
+		if(MetaNames != null && i < MetaNames.length)
 			return MetaIcons[i];
 		else
 			return this.itemIcon;
@@ -147,7 +151,7 @@ public class ItemTerra extends Item implements ISize
 		return false;
 	}
 
-	public static void addSizeInformation(ItemStack object, List arraylist)
+	public static void addSizeInformation(ItemStack object, List<String> arraylist)
 	{
 		if(((ISize)object.getItem()).getSize(object)!= null && ((ISize)object.getItem()).getWeight(object) != null && ((ISize)object.getItem()).getReach(object)!= null)
 			arraylist.add("\u2696" + StatCollector.translateToLocal("gui.Weight." + ((ISize)object.getItem()).getWeight(object).getName()) + " \u21F2" + 
@@ -163,6 +167,7 @@ public class ItemTerra extends Item implements ISize
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
@@ -181,12 +186,13 @@ public class ItemTerra extends Item implements ISize
 		addExtraInformation(is, player, arraylist);
 	}
 
-	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addItemInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 		if(	is.getItem() instanceof ItemIngot ||
 				is.getItem() instanceof ItemMetalSheet ||
 				is.getItem() instanceof ItemUnfinishedArmor ||
-				is.getItem() instanceof ItemBloom)
+				is.getItem() instanceof ItemBloom ||
+				is.getItem() == TFCItems.WroughtIronKnifeHead)
 		{
 			if(TFC_ItemHeat.HasTemp(is))
 			{
@@ -212,7 +218,7 @@ public class ItemTerra extends Item implements ISize
 		}
 	}
 
-	public static void addHeatInformation(ItemStack is, List arraylist)
+	public static void addHeatInformation(ItemStack is, List<String> arraylist)
 	{
 		if (is.hasTagCompound())
 		{
@@ -235,10 +241,11 @@ public class ItemTerra extends Item implements ISize
 		}
 	}
 
-	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Multimap getItemAttributeModifiers()
 	{

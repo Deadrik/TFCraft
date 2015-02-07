@@ -8,17 +8,18 @@ import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Food.CropIndex;
+import com.bioxx.tfc.Food.CropIndexPepper;
 import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.Items.Tools.ItemCustomHoe;
 import com.bioxx.tfc.TileEntities.TECrop;
 import com.bioxx.tfc.TileEntities.TEFarmland;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 
@@ -232,7 +233,7 @@ public class FarmlandHighlightHandler
 			{
 				TECrop te = (TECrop) world.getTileEntity(evt.target.blockX, evt.target.blockY, evt.target.blockZ);
 				CropIndex index = CropManager.getInstance().getCropFromId(te.cropId);
-				boolean fullyGrown = te.growth >= index.numGrowthStages;
+				boolean fullyGrown = index instanceof CropIndexPepper ? te.growth >= index.numGrowthStages - 1 : te.growth >= index.numGrowthStages;
 
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

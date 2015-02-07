@@ -1,0 +1,2529 @@
+﻿#tr_TR
+#This is the Turkish language configuration file.Being translated by melihceku (CekuGaming)
+#Eğer çeviriye devam etmek isterseniz serbestsiniz.
+
+
+
+
+generator.TFCDefault=TFC Varsayılan
+generator.TFCFlat=
+generator.TFCAmplified=
+generator.TFCLargeBiomes=
+
+key.ToolMode=Alet Modunu Değiştir
+key.LockTool=Alet Yerini Kitle
+
+effect.bleed=Kanama
+death.attack.alcohol=%1$s alkol zehirlenmesinden öldü
+death.attack.heatStroke=%1$s sıcak çarpmasından öldü
+
+#==============
+#= Spawn Eggs =
+#==============
+entity.squidTFC.name=Kalamar
+entity.cowTFC.name=İnek
+entity.wolfTFC.name=Kurt
+entity.bearTFC.name=Ayı
+entity.deerTFC.name=Geyik
+entity.chickenTFC.name=Tavuk
+entity.pigTFC.name=Domuz
+entity.skeletonTFC.name=İskelet
+entity.zombieTFC.name=Zombi
+entity.spiderTFC.name=Örümcek
+entity.slimeTFC.name=Sümük
+entity.silverfishTFC.name=Gümüş balığı
+entity.ghastTFC.name=Hayalet
+entity.caveSpiderTFC.name=Mağara örümceği
+entity.blazeTFC.name=Blaze
+entity.endermanTFC.name=Enderman
+entity.pigZombieTFC.name=Pig Zombie
+entity.creeperTFC.name=Creeper
+entity.sheepTFC.name=Koyun
+entity.pheasantTFC.name=Sülün
+entity.horseTFC.name=At
+entity.irongolemTFC.name=Iron Golem
+entity.fishTFC.name=Alabalık
+
+
+#==========
+#= Entity =
+#==========
+entity.notFamiliar=Hayvan onu yapmana izin vermez!
+fishingRod.lineTension=İp kopacak
+fishingRod.lineSnap=İp koptu
+fishingRod.bite=Balık ısırdı!
+fishingRod.gotAway=Kaçtı..
+
+#================
+#= Achievements =
+#================
+achievement.achLooseRock=Kesinlikle Taş
+achievement.achLooseRock.desc=Taşı eline almak
+achievement.achSmallOre=Taşa geri dönüş yok
+achievement.achSmallOre.desc=Bir maden parçası bul
+achievement.achWildVegetable=Çiftçi
+achievement.achWildVegetable.desc=Yabani bir sebze bul
+achievement.achRutabaga=Aptal soğanlar...
+achievement.achRutabaga.desc=Soğan bul..
+achievement.achQuern=Eziyet
+achievement.achQuern.desc=öğütme taşı kullan!
+achievement.achStoneAge=Paleolithik!
+achievement.achStoneAge.desc=Taş dönemi için taş şekillendir!
+achievement.achCopperAge=Calkolithik!
+achievement.achCopperAge.desc=Demir dönemi için bir şeyler erit!
+achievement.achSaw=Marangoz
+achievement.achSaw.desc=Testere üğret
+achievement.achAnvil=Hammer Time! (Çekiç zamanı!)
+achievement.achAnvil.desc=Taş örs yap!
+achievement.achPickaxe=Maden zamanı! (sonunda!)
+achievement.achPickaxe.desc=Kazma yap!
+achievement.achDiamond=ELMA- hmm dur, hayır
+achievement.achDiamond.desc=Elmas bul!
+achievement.achLimonite=LI-MO-NIIITE!(bir cins demir)
+achievement.achLimonite.desc=Biraz limonite kaz
+achievement.achBronzeAge=Bronz(tunç) çağı
+achievement.achBronzeAge.desc=Tunç çağına girmek için bronz örs yap
+achievement.achIronAge=Demir çağı
+achievement.achIronAge.desc=Demir kütlesi kaz (Demir fırınından çıkan bir ara madde)
+achievement.achPokeCreeper=Steve Irvin
+achievement.achPokeCreeper.desc=Creeperi cubukla dürt!
+
+#============
+#= Commands =
+#============
+commands.transferTamed.noTamed=Etrafta öyle bir hayvan yok!
+commands.transferTamed.tooMany=Etrafta çok fazla hayvan var!
+commands.transferTamed.wrongOwner=Bu sana ait değil!
+commands.transferTamed.sameTarget=Kendine transfer edemessin!
+commands.transferTamed.display.incoming=Hayvan %s tarafından transfer edildi!
+commands.transferTamed.display.outgoing=Sen hayvanı %s ye transfer ettin!
+commands.transferTamed.wrongSender=Hayvanları transfer edemessin!
+
+#==========
+#= Fluids =
+#==========
+fluid.freshwater=Tatlı Su
+fluid.saltwater=Tuzlu Su
+fluid.lavatfc=Lav
+fluid.hotwater=Kaplıca Suyu
+fluid.beer=Bira
+fluid.cider=Elma Şarabı
+fluid.rum=Rom
+fluid.ryewhiskey=Çavdar Viskisi
+fluid.sake=Süt İçkisi
+fluid.vodka=Votka
+fluid.whiskey=Viski
+fluid.cornwhiskey=Mısır Viskisi
+fluid.milk=Süt
+fluid.milkcurdled=Pıhtılaşmış Süt
+fluid.milkvinegar=
+fluid.limewater=Kireçli Su
+fluid.tannin=Tanen
+fluid.vinegar=Sirke
+fluid.brine=Salamura
+
+#========
+#= Food =
+#========
+item.MealGeneric.name=Yemek
+item.meal.terrible=Berbat
+item.meal.poor=Fakir
+item.meal.decent=İyi gibi
+item.meal.good=İyi
+item.meal.great=Çok iyi
+item.meal.fantastic=Fantastik!
+item.Sandwich.name=Ekmek Arası
+item.Salad.name=Salata
+item.Soup.name=Çorba
+item.Sugar.name=Şeker
+item.Sea Weed.name=Su Yosunu
+
+#== Grains ==
+item.Barley Bread.name=Arpa Ekmeği
+item.Corn Bread.name=Mısır Ekmeği
+item.Oat Bread.name=Yulat Ekmeği
+item.Rice Bread.name=Pirinç Ekmeği
+item.Rye Bread.name=Çavdar ekmeği
+item.Wheat Bread.name=Buğday ekmeği
+
+item.Barley Whole.name=Arpa
+item.Maize Ear.name=Mısır
+item.Oat Whole.name=Yulaf
+item.Rice Whole.name=Pirinç
+item.Rye Whole.name=Çavdar
+item.Wheat Whole.name=Buğday
+
+item.Barley Grain.name=Arpa Tanesi
+item.Oat Grain.name=Yulaf Tanesi
+item.Rice Grain.name=Pirinç Tanesi
+item.Rye Grain.name=Çavdar Tanesi
+item.Wheat Grain.name=Buğday Tanesi
+
+item.Barley Ground.name=Arpa Unu
+item.Cornmeal Ground.name=Mısır Unu
+item.Oat Ground.name=Yulaf Unu
+item.Rice Ground.name=Pirinç Unu
+item.Rye Ground.name=Çavdar Unu
+item.Wheat Ground.name=Buğday Unu
+
+item.Barley Dough.name=Arpa Hamuru
+item.Cornmeal Dough.name=Pirinç Hamuru
+item.Oat Dough.name=Yulaf Hamuru
+item.Rice Dough.name=Pirinç Hamuru
+item.Rye Dough.name=Çavdar Hamuru
+item.Wheat Dough.name=Buğday Hamuru
+
+item.Seeds Barley.name=Arpa Tohumu
+item.Seeds Maize.name=Mısır Tohumu
+item.Seeds Oat.name=Yulaf Tohumu
+item.Seeds Rice.name=Pirinç Tohumu
+item.Seeds Rye.name=Çavdar Tohumu
+item.Seeds Wheat.name=Buğday Tohumu
+
+#== Fruit ==
+item.Green Apple.name=Yeşil elma
+item.Red Apple.name=Kırmızı elma
+item.Banana.name=Muz
+item.Cherry.name=Kiraz
+item.Lemon.name=Limon
+item.Olive.name=Zeytin
+item.Orange.name=Portakal
+item.Peach.name=Şeftali
+item.Plum.name=Erik
+
+item.FruitSapling.Green Apple.name=Yeşil Elma Ağacı Fidanı
+item.FruitSapling.Red Apple.name=Kırmızı Elma Ağacı Fidanı
+item.FruitSapling.Banana.name=Muz Ağacı Fidanı
+item.FruitSapling.Cherry.name=Kiraz Ağacı Fidanı
+item.FruitSapling.Lemon.name=Limon Ağacı Fidanı
+item.FruitSapling.Olive.name=Zeytin Ağacı Fidanı
+item.FruitSapling.Orange.name=Portakal Ağacı Fidanı
+item.FruitSapling.Peach.name=Şeftali Ağacı Fidanı
+item.FruitSapling.Plum.name=Erik Ağacı Fidanı
+
+#=== Berry Bushes ===
+tile.BerryBush.Blackberry.name=Böğürtlen Çalısı
+tile.BerryBush.Blueberry.name=Yabanmersini Çalısı
+tile.BerryBush.Bunchberry.name=Bunchberry
+tile.BerryBush.Cloudberry.name=Cloudberry
+tile.BerryBush.Cranberry.name=Kızılcık Çalısı
+tile.BerryBush.Elderberry.name=Mürver Çalısı
+tile.BerryBush.Gooseberry.name=Altın Çilek Çalısı
+tile.BerryBush.Raspberry.name=Ahududu Çalısı
+tile.BerryBush.Snowberry.name=İnci Çiçeği Çalısı
+tile.BerryBush.Strawberry.name=Çilek Çalısı
+tile.BerryBush.Wintergreen.name=Keklik Çalısı
+
+item.Blackberry.name=Böğürtlen
+item.Blueberry.name=Yabanmersini
+item.Bunchberry.name=Bunchberries
+item.Cloudberry.name=Cloudberries
+item.Cranberry.name=Kızılcık
+item.Elderberry.name=Mürver
+item.Gooseberry.name=Altın Çilek
+item.Raspberry.name=Ahududu
+item.Snowberry.name=İnci Çiçeği
+item.Strawberry.name=Çilek
+item.Wintergreen Berry.name=Keklik
+
+item.Blackberry Leaf.name=Böğürtlen Yaprağı
+item.Blueberry Leaf.name=Yabanmersini Yaprağı
+item.Bunchberry Leaf.name=Bunchberry Yaprağı
+item.Cloudberry Leaf.name=Cloudberry Yaprağı
+item.Cranberry Leaf.name=Kızılcık Yaprağı
+item.Elderberry Leaf.name=Mürver Yaprağı
+item.Gooseberry Leaf.name=Altın çilek Yaprağı
+item.Raspberry Leaf.name=Ahududu Yaprağı
+item.Snowberry Leaf.name=İnci çiçeği Yaprağı
+item.Strawberry Leaf.name=Çilek Yaprağı
+item.Wintergreen Leaf.name=Keklik Yaprağı
+
+#== Protein ==
+item.Beef.name=Sığır Eti
+item.Calamari.name=Kalamar
+item.egg.name=Yumurta
+item.Fish.name=Balık
+item.Mutton.name=Koyun Eti
+item.Porkchop.name=Domuz Eti
+item.Chicken.name=Tavuk Eti
+item.Venison.name=Geyik Eti
+item.HorseMeat.name=At Eti
+item.Egg Cooked.name=Pişmiş Yumurta
+
+item.Soybeans.name=Soya Fasulyesi
+item.Seeds Soybean.name=Soya Fasulyesi Toğumu
+
+#== Dairy ==
+item.Cheese.name=Peynir
+
+#== Vegetables ==
+item.Green Bell Pepper.name=Yeşil Biber
+item.Red Bell Pepper.name=Kırmızı Biber
+item.Yellow Bell Pepper.name=Sarı Biber
+item.Cabbage.name=Marul
+item.Carrot.name=Havuç
+item.Garlic.name=Sarımsak
+item.Greenbeans.name=Yeşil Fasulye
+item.Onion.name=Soğan
+item.Potato.name=Patates
+item.Rutabaga.name=Rutabaga
+item.Squash.name=Kabak
+item.Tomato.name=Domates
+
+item.Seeds Red Bell Pepper.name=Yeşil Biber Tohumu
+item.Seeds Yellow Bell Pepper.name=Sarı Biber Tohumu
+item.Seeds Cabbage.name=Marul Tohumu
+item.Seeds Carrot.name=Havuç Tohumu
+item.Seeds Garlic.name=Sarımsak Tohumu
+item.Seeds Greenbean.name=Yeşil Fasulye Tohumu
+item.Seeds Onion.name=Soğan Tohumu
+item.Seeds Potato.name=Patates Tohumu
+item.Seeds Rutabaga.name=Rutabaga Tohumu
+item.Seeds Squash.name=Kabak Tohumu
+item.Seeds Tomato.name=Domates Tohumu
+
+#== Alcohol ==
+item.Glass Bottle.name=Boş Cam Şişesi
+item.Beer.name=Bira
+item.Cider.name=Elma Şarabı
+item.Rum.name=Rom
+item.RyeWhiskey.name=Çavdar Viskisi
+item.Sake.name=Sake(Süt İçkisi)
+item.Vodka.name=Votka
+item.Whiskey.name=Viski
+item.CornWhiskey.name=Mısır Viskisi
+
+#===========
+#= Pottery =
+#===========
+item.Clay.Clay.name=Kil
+item.Clay.Fire Clay.name=Ateş Kili
+
+item.Flat Clay.clay flat light.name=Düz Kil
+item.Flat Clay.clay flat dark.name=Düz Kil
+item.Flat Clay.clay flat fire.name=Düz Ateş Kili
+item.Flat Clay.clay flat dark fire.name=Düz Ateş Kili
+
+item.Jug.Clay Jug.name=Kil Sürahi
+item.Jug.Ceramic Jug.name=Seramik Sürahi
+item.Jug.Water Jug.name=Sürahi
+
+item.Pot.Clay Pot.name=Kil Çömlek
+item.Pot.Ceramic Pot.name=Seramik Çömlek
+
+item.Small Vessel.Clay Vessel.name=Kil Vazo
+item.Small Vessel.Ceramic Vessel.name=Seramik Vazo
+
+item.Large Vessel.Clay Vessel [Large].name=Kil Vazo [Büyük]
+item.Large Vessel.Ceramic Vessel [Large].name=Seramik Vazo [Büyük]
+
+item.Mold.Clay Mold.name=Kil Kalıp
+item.Mold.Ceramic Mold.name=Seramik Kalıp
+
+item.Axe Mold.Clay Mold Axe.name=Kil Balta Kalıbı
+item.Axe Mold.Ceramic Mold Axe.name=Balta Kalıbı
+item.Axe Mold.Ceramic Mold Axe Copper.name=Balta Kalıbı (Bakır)
+item.Axe Mold.Ceramic Mold Axe Bronze.name=Balta Kalıbı (Tunç)
+item.Axe Mold.Ceramic Mold Axe Black Bronze.name=Balta Kalıbı (Siyah Tunç)
+item.Axe Mold.Ceramic Mold Axe Bismuth Bronze.name=Balta Kalıbı (Bizmut Tunç)
+
+item.Chisel Mold.Clay Mold Chisel.name=Kil Keski Kalıbı
+item.Chisel Mold.Ceramic Mold Chisel.name=Keski Kalıbı
+item.Chisel Mold.Ceramic Mold Chisel Copper.name=Keski Kalıbı (Bakır)
+item.Chisel Mold.Ceramic Mold Chisel Bronze.name=Keski Kalıbı (Tunç)
+item.Chisel Mold.Ceramic Mold Chisel Black Bronze.name=Keski Kalıbı (Siyah Tunç)
+item.Chisel Mold.Ceramic Mold Chisel Bismuth Bronze.name=Keski Kalıbı (Bizmut Tunç)
+
+item.Hammer Mold.Clay Mold Hammer.name=Kil Çekiç Kalıbı
+item.Hammer Mold.Ceramic Mold Hammer.name=Çekiç Kalıbı
+item.Hammer Mold.Ceramic Mold Hammer Copper.name=Çekiç Kalıbı (Bakır)
+item.Hammer Mold.Ceramic Mold Hammer Bronze.name=Çekiç Kalıbı (Tunç)
+item.Hammer Mold.Ceramic Mold Hammer Black Bronze.name=Çekiç Kalıbı (Kara Tunç)
+item.Hammer Mold.Ceramic Mold Hammer Bismuth Bronze.name=Çekiç Kalıbı (Bizmut Tunç)
+
+item.Hoe Mold.Clay Mold Hoe.name=Kil Çapa Kalıbı
+item.Hoe Mold.Ceramic Mold Hoe.name=Çapa Kalıbı
+item.Hoe Mold.Ceramic Mold Hoe Copper.name=Çapa Kalıbı (Bakır)
+item.Hoe Mold.Ceramic Mold Hoe Bronze.name=Çapa Kalıbı (Tunç)
+item.Hoe Mold.Ceramic Mold Hoe Black Bronze.name=Çapa Kalıbı (Kara Tunç)
+item.Hoe Mold.Ceramic Mold Hoe Bismuth Bronze.name=Çapa Kalıbı (Bizmut Tunç)
+
+item.Knife Mold.Clay Mold Knife.name=Kil Bıçak Kalıbı
+item.Knife Mold.Ceramic Mold Knife.name=Bıçak Kalıbı
+item.Knife Mold.Ceramic Mold Knife Copper.name=Bıçak Kalıbı (Bakır)
+item.Knife Mold.Ceramic Mold Knife Bronze.name=Bıçak Kalıbı (Tunç)
+item.Knife Mold.Ceramic Mold Knife Black Bronze.name=Bıçak Kalıbı (Kara Tunç)
+item.Knife Mold.Ceramic Mold Knife Bismuth Bronze.name=Bıçak Kalıbı (Bizmut Tunç)
+
+item.Javelin Mold.Clay Mold Javelin.name=Kil Mızrak Kalıbı
+item.Javelin Mold.Ceramic Mold Javelin.name=Mızrak Kalıbı
+item.Javelin Mold.Ceramic Mold Javelin Copper.name=Mızrak Kalıbı (Bakır)
+item.Javelin Mold.Ceramic Mold Javelin Bronze.name=Mızrak Kalıbı (Tunç)
+item.Javelin Mold.Ceramic Mold Javelin Black Bronze.name=Mızrak Kalıbı (Kara Tunç)
+item.Javelin Mold.Ceramic Mold Javelin Bismuth Bronze.name=Mızrak Kalıbı (Bizmut Tunç)
+
+item.Mace Mold.Clay Mold Mace.name=Kil Topuz Kalıbı
+item.Mace Mold.Ceramic Mold Mace.name=Topuz Kalıbı
+item.Mace Mold.Ceramic Mold Mace Copper.name=Topuz Kalıbı (Bakır)
+item.Mace Mold.Ceramic Mold Mace Bronze.name=Topuz Kalıbı (Tunç)
+item.Mace Mold.Ceramic Mold Mace Black Bronze.name=Topuz Kalıbı (Kara Tunç)
+item.Mace Mold.Ceramic Mold Mace Bismuth Bronze.name=Topuz Kalıbı (Bizmut Tunç)
+
+item.Pick Mold.Clay Mold Pick.name=Kil Kazma Kalıbı
+item.Pick Mold.Ceramic Mold Pick.name=Kazma Kalıbı
+item.Pick Mold.Ceramic Mold Pick Copper.name=Kazma Kalıbı (Bakır)
+item.Pick Mold.Ceramic Mold Pick Bronze.name=Kazma Kalıbı (Tunç)
+item.Pick Mold.Ceramic Mold Pick Black Bronze.name=Kazma Kalıbı (Kara Tunç)
+item.Pick Mold.Ceramic Mold Pick Bismuth Bronze.name=Kazma Kalıbı (Bizmut Tunç)
+
+item.ProPick Mold.Clay Mold ProPick.name=Kil Keşifkazması Kalıbı
+item.ProPick Mold.Ceramic Mold ProPick.name=Keşifkazması Kalıbı
+item.ProPick Mold.Ceramic Mold ProPick Copper.name=Keşifkazması Kalıbı (Bakır)
+item.ProPick Mold.Ceramic Mold ProPick Bronze.name=Keşifkazması Kalıbı (Tunç)
+item.ProPick Mold.Ceramic Mold ProPick Black Bronze.name=Keşifkazması Kalıbı (Kara Tunç)
+item.ProPick Mold.Ceramic Mold ProPick Bismuth Bronze.name=Keşifkazması Kalıbı (Bizmut Tunç)
+
+item.Saw Mold.Clay Mold Saw.name=Kil Testere Kalıbı
+item.Saw Mold.Ceramic Mold Saw.name=Testere Kalıbı
+item.Saw Mold.Ceramic Mold Saw Copper.name=Testere Kalıbı (Bakır)
+item.Saw Mold.Ceramic Mold Saw Bronze.name=Testere Kalıbı (Tunç)
+item.Saw Mold.Ceramic Mold Saw Black Bronze.name=Testere Kalıbı (Kara Tunç)
+item.Saw Mold.Ceramic Mold Saw Bismuth Bronze.name=Testere Kalıbı (Bizmut Tunç)
+
+item.Scythe Mold.Clay Mold Scythe.name=Kil Tırpan Kalıbı
+item.Scythe Mold.Ceramic Mold Scythe.name=Tırpan Kalıbı
+item.Scythe Mold.Ceramic Mold Scythe Copper.name=Tırpan Kalıbı (Bakır)
+item.Scythe Mold.Ceramic Mold Scythe Bronze.name=Tırpan Kalıbı (Tunç)
+item.Scythe Mold.Ceramic Mold Scythe Black Bronze.name=Tırpan Kalıbı (Kara Tunç)
+item.Scythe Mold.Ceramic Mold Scythe Bismuth Bronze.name=Tırpan Kalıbı (Bizmut Tunç)
+
+item.Shovel Mold.Clay Mold Shovel.name=Kil Kürek Kalıbı
+item.Shovel Mold.Ceramic Mold Shovel.name=Kürek Kalıbı
+item.Shovel Mold.Ceramic Mold Shovel Copper.name=Kürek Kalıbı (Bakır)
+item.Shovel Mold.Ceramic Mold Shovel Bronze.name=Kürek Kalıbı (Tunç)
+item.Shovel Mold.Ceramic Mold Shovel Black Bronze.name=Kürek Kalıbı (Kara Tunç)
+item.Shovel Mold.Ceramic Mold Shovel Bismuth Bronze.name=Kürek Kalıbı (Bizmut Tunç)
+
+item.Sword Mold.Clay Mold Sword.name=Kil Kılıç Kalıbı
+item.Sword Mold.Ceramic Mold Sword.name=Kılıç Kalıbı
+item.Sword Mold.Ceramic Mold Sword Copper.name=Kılıç Kalıbı (Bakır)
+item.Sword Mold.Ceramic Mold Sword Bronze.name=Kılıç Kalıbı (Tunç)
+item.Sword Mold.Ceramic Mold Sword Black Bronze.name=Kılıç Kalıbı (Kara Tunç)
+item.Sword Mold.Ceramic Mold Sword Bismuth Bronze.name=Kılıç Kalıbı (Bizmut Tunç)
+
+item.Spindle.name=İğ
+item.Spindle Head.Clay Spindle.name=Kil İğ
+item.Spindle Head.Spindle Head.name=İğ Kafası
+
+item.Fire Brick.Fire Brick.name=Ateş Tuğlası
+item.Fire Brick.Clay Fire Brick.name=Kil Ateş Tuğlası
+tile.FireBrick.name=Ateş Tuğlası Bloğu
+tile.Pottery.name=Tabak Çanak
+
+item.ClayBowl.Ceramic Bowl.name=Çanak
+item.ClayBowl.Clay Bowl.name=Kil Çanak
+
+#= Gems =
+item.Agate.Chipped.name=Yontma Akik
+item.Amethyst.Chipped.name=Yontma Ametist
+item.Beryl.Chipped.name=Yontma Beril
+item.Diamond.Chipped.name=Yontma Elmas
+item.Emerald.Chipped.name=Yontma Zümrüt
+item.Garnet.Chipped.name=Yontma Lal Taşı
+item.Jade.Chipped.name=Yontma Yeşim Taşı
+item.Jasper.Chipped.name=Yontma Jasper
+item.Opal.Chipped.name=Yontma Opal
+item.Ruby.Chipped.name=Yontma Yakut
+item.Sapphire.Chipped.name=Yontma Safir
+item.Topaz.Chipped.name=Yontma Sarı Yakut
+item.Tourmaline.Chipped.name=Yontma Turmalin
+
+item.Agate.Flawed.name=Kusurlu Akik
+item.Amethyst.Flawed.name=Kusurlu Ametist
+item.Beryl.Flawed.name=Kusurlu Beril
+item.Diamond.Flawed.name=Kusurlu Elmas
+item.Emerald.Flawed.name=Kusurlu Zümrüt
+item.Garnet.Flawed.name=Kusurlu Lal Taşı
+item.Jade.Flawed.name=Kusurlu Yeşim Taşı
+item.Jasper.Flawed.name=Kusurlu Jasper
+item.Opal.Flawed.name=Kusurlu Opal
+item.Ruby.Flawed.name=Kusurlu Yakut
+item.Sapphire.Flawed.name=Kusurlu Safir
+item.Topaz.Flawed.name=Kusurlu Sarı Yakut
+item.Tourmaline.Flawed.name=Kusurlu Turmalin
+
+item.Agate.Normal.name=Akik
+item.Amethyst.Normal.name=Amethyst
+item.Beryl.Normal.name=Beryl
+item.Diamond.Normal.name=Diamond
+item.Emerald.Normal.name=Emerald
+item.Garnet.Normal.name=Garnet
+item.Jade.Normal.name=Jade
+item.Jasper.Normal.name=Jasper
+item.Opal.Normal.name=Opal
+item.Ruby.Normal.name=Ruby
+item.Sapphire.Normal.name=Sapphire
+item.Topaz.Normal.name=Topaz
+item.Tourmaline.Normal.name=Tourmaline
+
+item.Agate.Flawless.name=Kusursuz Akik
+item.Amethyst.Flawless.name=Kusursuz Ametist
+item.Beryl.Flawless.name=Kusursuz Beril
+item.Diamond.Flawless.name=Kusursuz Elmas
+item.Emerald.Flawless.name=Kusursuz Zümrüt
+item.Garnet.Flawless.name=Kusursuz Lal Taşı
+item.Jade.Flawless.name=Kusursuz Yeşim Taşı
+item.Jasper.Flawless.name=Kusursuz Jasper
+item.Opal.Flawless.name=Kusursuz Opal
+item.Ruby.Flawless.name=Kusursuz Yakut
+item.Sapphire.Flawless.name=Kusursuz Safir
+item.Topaz.Flawless.name=Kusursuz Sarı Yakut
+item.Tourmaline.Flawless.name=Kusursuz Turmalin
+
+item.Agate.Exquisite.name=Nefis Akik
+item.Amethyst.Exquisite.name=Nefis Ametist
+item.Beryl.Exquisite.name=Nefis Beril
+item.Diamond.Exquisite.name=Nefis Elmas
+item.Emerald.Exquisite.name=Nefis Zümrüt
+item.Garnet.Exquisite.name=Nefis Lal Taşı
+item.Jade.Exquisite.name=Nefis Yeşim Taşı
+item.Jasper.Exquisite.name=Nefis Jasper
+item.Opal.Exquisite.name=Nefis Opal
+item.Ruby.Exquisite.name=Nefis Yakut
+item.Sapphire.Exquisite.name=Nefis Safir
+item.Topaz.Exquisite.name=Nefis Sarı Yakut
+item.Tourmaline.Exquisite.name=Nefis Turmalin
+
+#===========
+#= Powders =
+#===========
+item.dyePowder.black.name=Mürekkepbalığı Kesesi
+item.dyePowder.blue.name=Lapis Lazuli
+item.dyePowder.brown.name=Kakao Tanesi
+item.dyePowder.cyan.name=Mavi Boya
+item.dyePowder.gray.name=Gri Boya
+item.dyePowder.green.name=Yeşil Boya
+item.dyePowder.lightBlue.name=Açık Mavi Boya
+item.dyePowder.lime.name=Kireç Boya
+item.dyePowder.magenta.name=Magenta Boya
+item.dyePowder.orange.name=Turuncu Boya
+item.dyePowder.pink.name=Pembe Boya
+item.dyePowder.purple.name=Mor Boya
+item.dyePowder.red.name=Kırmızı Boya
+item.dyePowder.silver.name=Açık Gri Boya
+item.dyePowder.white.name=Kemik Tozu
+item.dyePowder.yellow.name=Sarı Boya
+
+item.Coke.name=Coke
+item.Powder.Flux.name=Kireç
+item.Powder.Graphite Powder.name=Grafit Tozu
+item.Powder.Hematite Powder.name=Hematit Tozu
+item.Powder.Kaolinite Powder.name=Kaolinit Tozu
+item.Powder.Lapis Lazuli Powder.name=Lapis Lazuli Tozu
+item.Powder.Limonite Powder.name=Limonit Tozu
+item.Powder.Malachite Powder.name=Bakır Taşı Tozu
+item.Powder.Salt.name=Tuz
+item.Powder.Saltpeter Powder.name=Saltpeter Tozu
+item.Powder.Sulfur Powder.name=Sülfür Tozu
+
+#=========
+#= Stone =
+#=========
+#== Stone Items ==
+item.LooseRock.Andesite.name=Andesit Taş
+item.LooseRock.Basalt.name=Bazalt Taş
+item.LooseRock.Chalk.name=Kireç Taşı Taş
+item.LooseRock.Chert.name=Chert Taş
+item.LooseRock.Claystone.name=Kiltaşı Taş
+item.LooseRock.Conglomerate.name=Çakılkaya
+item.LooseRock.Dacite.name=Dasit Taş
+item.LooseRock.Diorite.name=Diyorit Taş
+item.LooseRock.Dolomite.name=Dolomit Taş
+item.LooseRock.Gabbro.name=Gabro Taş
+item.LooseRock.Gneiss.name=Gnays Taş
+item.LooseRock.Granite.name=Granit Taş
+item.LooseRock.Limestone.name=Kalker Taş
+item.LooseRock.Marble.name=Mermer Taş
+item.LooseRock.Phyllite.name=Phyllit Taş
+item.LooseRock.Quartzite.name=Kuvarsit Taş
+item.LooseRock.Rhyolite.name=Rhyolite Taş
+item.LooseRock.Rock Salt.name=Tuz Taşı Taş
+item.LooseRock.Schist.name=Şist Taş
+item.LooseRock.Shale.name=Shale Taş
+item.LooseRock.Slate.name=Taşğantaş Taş
+
+item.ItemStoneBrick.Andesite.name=Andesit Tuğla
+item.ItemStoneBrick.Basalt.name=Bazalt Tuğla
+item.ItemStoneBrick.Chalk.name=Kireç Taşı Tuğla
+item.ItemStoneBrick.Chert.name=Chert Tuğla
+item.ItemStoneBrick.Claystone.name=Kiltaşı Tuğla
+item.ItemStoneBrick.Conglomerate.name=Çakılkayası Tuğla
+item.ItemStoneBrick.Dacite.name=Dasit Tuğla
+item.ItemStoneBrick.Diorite.name=Diyorit Tuğla
+item.ItemStoneBrick.Dolomite.name=Dolomit Tuğla
+item.ItemStoneBrick.Gabbro.name=Gabro Tuğla
+item.ItemStoneBrick.Gneiss.name=Gnays Tuğla
+item.ItemStoneBrick.Granite.name=Granit Tuğla
+item.ItemStoneBrick.Limestone.name=Kalker Tuğla
+item.ItemStoneBrick.Marble.name=Mermer Tuğla
+item.ItemStoneBrick.Phyllite.name=Phyllit Tuğla
+item.ItemStoneBrick.Quartzite.name=Kuvarsit Tuğla
+item.ItemStoneBrick.Rhyolite.name=Rhyolite Tuğla
+item.ItemStoneBrick.Rock Salt.name=Tuz Taşı Tuğla
+item.ItemStoneBrick.Schist.name=Şist Tuğla
+item.ItemStoneBrick.Shale.name=Shale Tuğla
+item.ItemStoneBrick.Slate.name=Kayağantaş Tuğla
+
+item.FlatRock.Andesite.name=Düz Andesit
+item.FlatRock.Basalt.name=Düz Bazalt
+item.FlatRock.Chalk.name=Düz Kireç Taşı
+item.FlatRock.Chert.name=Düz Chert
+item.FlatRock.Claystone.name=Düz Kiltaşı
+item.FlatRock.Conglomerate.name=Düz Çakılkayası
+item.FlatRock.Dacite.name=Düz Dasit
+item.FlatRock.Diorite.name=Düz Diyorit
+item.FlatRock.Dolomite.name=Düz Dolomit
+item.FlatRock.Gabbro.name=Düz Gabro
+item.FlatRock.Gneiss.name=Düz Gnays
+item.FlatRock.Granite.name=Düz Granit
+item.FlatRock.Limestone.name=Düz Kalker
+item.FlatRock.Marble.name=Düz Mermer
+item.FlatRock.Phyllite.name=Düz Phyllit
+item.FlatRock.Quartzite.name=Düz Kuvarsit
+item.FlatRock.Rhyolite.name=Düz Rhyolit
+item.FlatRock.Rock Salt.name=Düz Tuz Taşı
+item.FlatRock.Schist.name=Düz Şist
+item.FlatRock.Shale.name=Düz Shale
+item.FlatRock.Slate=Düz Kayağantaş
+
+#== Stone Blocks ==
+tile.WallCobble.Andesite.name=Andesit Kırıktaş Duvar
+tile.WallCobble.Basalt.name=Bazalt Kırıktaş Duvar
+tile.WallCobble.Chalk.name=Kireç Taşı Kırıktaş Duvar
+tile.WallCobble.Chert.name=Chert Kırıktaş Duvar
+tile.WallCobble.Claystone.name=Kiltaşı Kırıktaş Duvar
+tile.WallCobble.Conglomerate.name=Çakılkayası Kırıktaş Duvar
+tile.WallCobble.Dacite.name=Dasit Kırıktaş Duvar
+tile.WallCobble.Diorite.name=Diyorit Kırıktaş Duvar
+tile.WallCobble.Dolomite.name=Dolomit Kırıktaş Duvar
+tile.WallCobble.Gabbro.name=Gabro Kırıktaş Duvar
+tile.WallCobble.Gneiss.name=Gnays Kırıktaş Duvar
+tile.WallCobble.Granite.name=Granit Kırıktaş Duvar
+tile.WallCobble.Limestone.name=Kalker Kırıktaş Duvar
+tile.WallCobble.Marble.name=Mermer Kırıktaş Duvar
+tile.WallCobble.Phyllite.name=Phyllit Kırıktaş Duvar
+tile.WallCobble.Quartzite.name=Kuvarsit Kırıktaş Duvar
+tile.WallCobble.Rhyolite.name=Rhyolite Kırıktaş Duvar
+tile.WallCobble.Rock Salt.name=Tuz Taşı Kırıktaş Duvar
+tile.WallCobble.Schist.name=Şist Kırıktaş Duvar
+tile.WallCobble.Shale.name=Shale Kırıktaş Duvar
+tile.WallCobble.Slate.name=Kayağantaş Kırıktaş Duvar
+
+tile.WallRaw.Andesite.name=Andesit Duvar
+tile.WallRaw.Basalt.name=Bazalt Duvar
+tile.WallRaw.Chalk.name=Kireç Taşı Duvar
+tile.WallRaw.Chert.name=Chert Duvar
+tile.WallRaw.Claystone.name=Kiltaşı Duvar
+tile.WallRaw.Conglomerate.name=Çakılkayası Duvar
+tile.WallRaw.Dacite.name=Dasit Duvar
+tile.WallRaw.Diorite.name=Diyorit Duvar
+tile.WallRaw.Dolomite.name=Dolomit Duvar
+tile.WallRaw.Gabbro.name=Gabro Duvar
+tile.WallRaw.Gneiss.name=Gnays Duvar
+tile.WallRaw.Granite.name=Granit Duvar
+tile.WallRaw.Limestone.name=Kalker Duvar
+tile.WallRaw.Marble.name=Mermer Duvar
+tile.WallRaw.Phyllite.name=Phyllit Duvar
+tile.WallRaw.Quartzite.name=Kuvarsit Duvar
+tile.WallRaw.Rhyolite.name=Rhyolite Duvar
+tile.WallRaw.Rock Salt.name=Tuz Taşı Duvar
+tile.WallRaw.Schist.name=Şist Duvar
+tile.WallRaw.Shale.name=Shale Duvar
+tile.WallRaw.Slate.name=Kayağantaş Duvar
+
+tile.WallBrick.Andesite.name=Andesit Tuğla Duvar
+tile.WallBrick.Basalt.name=Bazalt Tuğla Duvar
+tile.WallBrick.Chalk.name=Kireç Taşı Tuğla Duvar
+tile.WallBrick.Chert.name=Chert Tuğla Duvar
+tile.WallBrick.Claystone.name=Kiltaşı Tuğla Duvar
+tile.WallBrick.Conglomerate.name=Çakılkayası Tuğla Duvar
+tile.WallBrick.Dacite.name=Dasit Tuğla Duvar
+tile.WallBrick.Diorite.name=Diyorit Tuğla Duvar
+tile.WallBrick.Dolomite.name=Dolomit Tuğla Duvar
+tile.WallBrick.Gabbro.name=Gabro Tuğla Duvar
+tile.WallBrick.Gneiss.name=Gnays Tuğla Duvar
+tile.WallBrick.Granite.name=Granit Tuğla Duvar
+tile.WallBrick.Limestone.name=Kalker Tuğla Duvar
+tile.WallBrick.Marble.name=Mermer Tuğla Duvar
+tile.WallBrick.Phyllite.name=Phyllit Tuğla Duvar
+tile.WallBrick.Quartzite.name=Kuvarsit Tuğla Duvar
+tile.WallBrick.Rhyolite.name=Rhyolite Tuğla Duvar
+tile.WallBrick.Rock Salt.name=Tuz Taşı Tuğla Duvar
+tile.WallBrick.Schist.name=Şist Tuğla Duvar
+tile.WallBrick.Shale.name=Shale Tuğla Duvar
+tile.WallBrick.Slate.name=Kayağantaş Tuğla Duvar
+
+tile.WallSmooth.Andesite.name=Andesit Yumuşak Duvar
+tile.WallSmooth.Basalt.name=Bazalt Yumuşak Duvar
+tile.WallSmooth.Chalk.name=Kireç Taşı Yumuşak Duvar
+tile.WallSmooth.Chert.name=Chert Yumuşak Duvar
+tile.WallSmooth.Claystone.name=Kiltaşı Yumuşak Duvar
+tile.WallSmooth.Conglomerate.name=Çakılkayası Yumuşak Duvar
+tile.WallSmooth.Dacite.name=Dasit Yumuşak Duvar
+tile.WallSmooth.Diorite.name=Diyorit Yumuşak Duvar
+tile.WallSmooth.Dolomite.name=Dolomit Yumuşak Duvar
+tile.WallSmooth.Gabbro.name=Gabro Yumuşak Duvar
+tile.WallSmooth.Gneiss.name=Gnays Yumuşak Duvar
+tile.WallSmooth.Granite.name=Granit Yumuşak Duvar
+tile.WallSmooth.Limestone.name=Kalker Yumuşak Duvar
+tile.WallSmooth.Marble.name=Mermer Yumuşak Duvar
+tile.WallSmooth.Phyllite.name=Phyllit Yumuşak Duvar
+tile.WallSmooth.Quartzite.name=Kuvarsit Yumuşak Duvar
+tile.WallSmooth.Rhyolite.name=Rhyolite Yumuşak Duvar
+tile.WallSmooth.Rock Salt.name=Tuz Taşı Yumuşak Duvar
+tile.WallSmooth.Schist.name=Şist Yumuşak Duvar
+tile.WallSmooth.Shale.name=Shale Yumuşak Duvar
+tile.WallSmooth.Slate.name=Kayağantaş Yumuşak Duvar
+
+tile.IgExRock.Andesite.name=Andesit
+tile.IgExRock.Basalt.name=Bazalt
+tile.SedRock.Chalk.name=Kireç Taşı
+tile.SedRock.Chert.name=Chert
+tile.SedRock.Claystone.name=Kiltaşı
+tile.SedRock.Conglomerate.name=Çakılkayası
+tile.IgExRock.Dacite.name=Dasit
+tile.IgInRock.Diorite.name=Diyorit
+tile.SedRock.Dolomite.name=Dolomit
+tile.IgInRock.Gabbro.name=Gabro
+tile.MMRock.Gneiss.name=Gnays
+tile.IgInRock.Granite.name=Granit
+tile.SedRock.Limestone.name=Kalker
+tile.MMRock.Marble.name=Mermer
+tile.MMRock.Phyllite.name=Phyllit
+tile.MMRock.Quartzite.name=Kuvarsit
+tile.IgExRock.Rhyolite.name=Rhyolite
+tile.SedRock.Rock Salt.name=Tuz Taşı
+tile.MMRock.Schist.name=Şist
+tile.SedRock.Shale.name=Shale
+tile.MMRock.Slate.name=Kayağantaş
+
+tile.IgExRockCobble.Andesite.name=Andesit Kırıktaş
+tile.IgExRockCobble.Basalt.name=Bazalt Kırıktaş
+tile.SedRockCobble.Chalk.name=Kireç Taşı Kırıktaş
+tile.SedRockCobble.Chert.name=Chert Kırıktaş
+tile.SedRockCobble.Claystone.name=Kiltaşı Kırıktaş
+tile.SedRockCobble.Conglomerate.name=Çakılkayası Kırıktaş
+tile.IgExRockCobble.Dacite.name=Dasit Kırıktaş
+tile.IgInRockCobble.Diorite.name=Diyorit Kırıktaş
+tile.SedRockCobble.Dolomite.name=Dolomit Kırıktaş
+tile.IgInRockCobble.Gabbro.name=Gabro Kırıktaş
+tile.MMRockCobble.Gneiss.name=Gnays Kırıktaş
+tile.IgInRockCobble.Granite.name=Granit Kırıktaş
+tile.SedRockCobble.Limestone.name=Kalker Kırıktaş
+tile.MMRockCobble.Marble.name=Mermer Kırıktaş
+tile.MMRockCobble.Phyllite.name=Phyllit Kırıktaş
+tile.MMRockCobble.Quartzite.name=Kuvarsit Kırıktaş
+tile.IgExRockCobble.Rhyolite.name=Rhyolite Kırıktaş
+tile.SedRockCobble.Rock Salt.name=Tuz Taşı Kırıktaş
+tile.MMRockCobble.Schist.name=Şist Kırıktaş
+tile.SedRockCobble.Shale.name=Shale Kırıktaş
+tile.MMRockCobble.Slate.name=Kayağantaş Kırıktaş
+
+tile.IgExRockSmooth.Andesite.name=Yumuşak Andesit
+tile.IgExRockSmooth.Basalt.name=Yumuşak Bazalt
+tile.SedRockSmooth.Chalk.name=Yumuşak Kireç
+tile.SedRockSmooth.Chert.name=Yumuşak Chert
+tile.SedRockSmooth.Claystone.name=Yumuşak Kiltaşı
+tile.SedRockSmooth.Conglomerate.name=Yumuşak Çakılkayası
+tile.IgExRockSmooth.Dacite.name=Yumuşak Dasit
+tile.IgInRockSmooth.Diorite.name=Yumuşak Diyorit
+tile.SedRockSmooth.Dolomite.name=Yumuşak Dolomit
+tile.IgInRockSmooth.Gabbro.name=Yumuşak Gabro
+tile.MMRockSmooth.Gneiss.name=Yumuşak Gnays
+tile.IgInRockSmooth.Granite.name=Yumuşak Granit
+tile.SedRockSmooth.Limestone.name=Yumuşak Kalker
+tile.MMRockSmooth.Marble.name=Yumuşak Mermer
+tile.MMRockSmooth.Phyllite.name=Yumuşak Phyllit
+tile.MMRockSmooth.Quartzite.name=Yumuşak Kuvarsit
+tile.IgExRockSmooth.Rhyolite.name=Yumuşak Rhyolite
+tile.SedRockSmooth.Rock Salt.name=Yumuşak Tuz Taşı
+tile.MMRockSmooth.Schist.name=Yumuşak Şist
+tile.SedRockSmooth.Shale.name=Yumuşak Shale
+tile.MMRockSmooth.Slate.name=Yumuşak Kayağantaş
+
+tile.IgExRockBrick.Andesite.name=Andesit Tuğlaları
+tile.IgExRockBrick.Basalt.name=Bazalt Tuğlaları
+tile.SedRockBrick.Chalk.name=Kireç Taşı Tuğlaları
+tile.SedRockBrick.Chert.name=Chert Tuğlaları
+tile.SedRockBrick.Claystone.name=Kiltaşı Tuğlaları
+tile.SedRockBrick.Conglomerate.name=Çakılkayası Tuğlaları
+tile.IgExRockBrick.Dacite.name=Dasit Tuğlaları
+tile.IgInRockBrick.Diorite.name=Diyorit Tuğlaları
+tile.SedRockBrick.Dolomite.name=Dolomit Tuğlaları
+tile.IgInRockBrick.Gabbro.name=Gabro Tuğlaları
+tile.MMRockBrick.Gneiss.name=Gnays Tuğlaları
+tile.IgInRockBrick.Granite.name=Granit Tuğlaları
+tile.SedRockBrick.Limestone.name=Kalker Tuğlaları
+tile.MMRockBrick.Marble.name=Mermer Tuğlaları
+tile.MMRockBrick.Phyllite.name=Phyllitbricks
+tile.MMRockBrick.Quartzite.name=Kuvarsit Tuğlaları
+tile.IgExRockBrick.Rhyolite.name=Rhyolite Tuğlaları
+tile.SedRockBrick.Rock Salt.name=Tuz Taşı Tuğlaları
+tile.MMRockBrick.Schist.name=Şist Tuğlaları
+tile.SedRockBrick.Shale.name=Shale Tuğlaları
+tile.MMRockBrick.Slate.name=Kayağantaş Tuğlaları
+
+#=======
+#= Ore =
+#=======
+#== Ore Items ==
+item.Ore.Bituminous Coal.name=Bitümlü Kömür
+item.Ore.Borax.name=Boraks
+item.Ore.Cinnabar.name=Cinnabar
+item.Ore.Cryolite.name=Kriyolit
+item.Ore.Graphite.name=Grafit
+item.Ore.Gypsum.name=Jips
+item.Ore.Jet.name=Oltu Taşı
+item.Ore.Kaolinite.name=Kaolinit
+item.Ore.Kimberlite.name=Kimberlit
+item.Ore.Lapis Lazuli.name=Lapis Lazuli
+item.Ore.Lignite.name=Linyit Kömürü
+item.Ore.Microcline.name=Microcline
+item.Ore.Olivine.name=Olivin
+item.Ore.Petrified Wood.name=Taşlaşmış Ağaç
+item.Ore.Pitchblende.name=Katranlıkarışım
+item.Ore.Saltpeter.name=Saltpeter
+item.Ore.Satinspar.name=Satinspar
+item.Ore.Selenite.name=Selenite
+item.Ore.Serpentine.name=Yılan Taşı
+item.Ore.Sulfur.name=Sülfür
+item.Ore.Sylvite.name=Sylvite
+
+item.Ore.Bismuthinite.name=Bizmutinit
+item.Ore.Cassiterite.name=Kasiterit
+item.Ore.Galena.name=Galena
+item.Ore.Garnierite.name=Garnierit
+item.Ore.Hematite.name=Hematit
+item.Ore.Limonite.name=Limonit
+item.Ore.Magnetite.name=Magnetit
+item.Ore.Malachite.name=Bakırtaşı
+item.Ore.Native Copper.name=Doğal Bakır
+item.Ore.Native Gold.name=Doğal Altın
+item.Ore.Native Platinum.name=Doğal Platinyum
+item.Ore.Native Silver.name=Doğal Gümüş
+item.Ore.Sphalerite.name=Sphalerit
+item.Ore.Tetrahedrite.name=Tetrahedrit
+
+item.Ore.Rich Bismuthinite.name=Zengin Bizmutinit
+item.Ore.Rich Cassiterite.name=Zengin Kasiterit
+item.Ore.Rich Galena.name=Zengin Galena
+item.Ore.Rich Garnierite.name=Zengin Garnierit
+item.Ore.Rich Hematite.name=Zengin Hematit
+item.Ore.Rich Limonite.name=Zengin Limonit
+item.Ore.Rich Magnetite.name=Zengin Magnetit
+item.Ore.Rich Malachite.name=Zengin Bakırtaşı
+item.Ore.Rich Native Copper.name=Zengin Doğal Bakır
+item.Ore.Rich Native Gold.name=Zengin Doğal Altın
+item.Ore.Rich Native Platinum.name=Zengin Doğal Platinyum
+item.Ore.Rich Native Silver.name=Zengin Doğal Gümüş
+item.Ore.Rich Sphalerite.name=Zengin Sphalerit
+item.Ore.Rich Tetrahedrite.name=Zengin Tetrahedrit
+
+item.Ore.Poor Bismuthinite.name=Fakir Bizmutinit
+item.Ore.Poor Cassiterite.name=Fakir Kasiterit
+item.Ore.Poor Galena.name=Fakir Galena
+item.Ore.Poor Garnierite.name=Fakir Garnierit
+item.Ore.Poor Hematite.name=Fakir Hematit
+item.Ore.Poor Limonite.name=Fakir Limonit
+item.Ore.Poor Magnetite.name=Fakir Magnetit
+item.Ore.Poor Malachite.name=Fakir Bakırtaşı
+item.Ore.Poor Native Copper.name=Fakir Doğal Bakır
+item.Ore.Poor Native Gold.name=Fakir Doğal Altın
+item.Ore.Poor Native Platinum.name=Fakir Doğal Platinyum
+item.Ore.Poor Native Silver.name=Fakir Doğal Gümüş
+item.Ore.Poor Sphalerite.name=Fakir Sphalerit
+item.Ore.Poor Tetrahedrite.name=Fakir Tetrahedrit
+
+item.Small Ore.Bismuthinite.name=Bismuthinit
+item.Small Ore.Cassiterite.name=Küçük Kasiterit
+item.Small Ore.Galena.name=Küçük Galena
+item.Small Ore.Garnierite.name=Küçük Garnierit
+item.Small Ore.Hematite.name=Küçük Hematit
+item.Small Ore.Limonite.name=Küçük Limonit
+item.Small Ore.Magnetite.name=Küçük Magnetit
+item.Small Ore.Malachite.name=Küçük Malakit
+item.Small Ore.Native Copper.name=Doğal Bakır Parça
+item.Small Ore.Native Gold.name=Doğal Altın Parça
+item.Small Ore.Native Platinum.name=Doğal Platinyum Parça
+item.Small Ore.Native Silver.name=Doğal Gümüş Parça
+item.Small Ore.Sphalerite.name=Küçük Sphalerit
+item.Small Ore.Tetrahedrite.name=Küçük Tetrahedrit
+
+#== Ore Blocks ==
+tile.Ore.name=Maden
+tile.Ore.Bituminous Coal.name=Bitümlü Kömür
+tile.Ore.Borax.name=Boraks
+tile.Ore.Cinnabar.name=Cinnabar
+tile.Ore.Cryolite.name=Kriyolit
+tile.Ore.Graphite.name=Grafit
+tile.Ore.Gypsum.name=Jips
+tile.Ore.Jet.name=Oltu Taşı
+tile.Ore.Kaolinite.name=Kaolinit
+tile.Ore.Kimberlite.name=Kimberlit
+tile.Ore.Lapis Lazuli.name=Lapis Lazuli
+tile.Ore.Lignite.name=Linyit Kömürü
+tile.Ore.Microcline.name=Microcline
+tile.Ore.Olivine.name=Olivin
+tile.Ore.Petrified Wood.name=Taşlaşmış Ağaç
+tile.Ore.Pitchblende.name=Katranlıkarışım
+tile.Ore.Saltpeter.name=Saltpeter
+tile.Ore.Satinspar.name=Satinspar
+tile.Ore.Selenite.name=Selenite
+tile.Ore.Serpentine.name=Yılan Taşı
+tile.Ore.Sulfur.name=Sülfür
+tile.Ore.Sylvite.name=Sylvite
+
+tile.Ore.Bismuthinite.name=Bizmutinit
+tile.Ore.Cassiterite.name=Kasiterit
+tile.Ore.Galena.name=Galena
+tile.Ore.Garnierite.name=Garnierit
+tile.Ore.Hematite.name=Hematit
+tile.Ore.Limonite.name=Limonit
+tile.Ore.Magnetite.name=Magnetit
+tile.Ore.Malachite.name=Bakırtaşı
+tile.Ore.Native Copper.name=Doğal Bakır
+tile.Ore.Native Gold.name=Doğal Altın
+tile.Ore.Native Platinum.name=Doğal Platinyum
+tile.Ore.Native Silver.name=Doğal Gümüş
+tile.Ore.Sphalerite.name=Sphalerit
+tile.Ore.Tetrahedrite.name=Tetrahedrit
+
+#========
+#= Wood =
+#========
+#== Wood Items ==
+item.Log.Acacia.name=Akasya Kütük
+item.Log.Ash.name=Ash Kütük
+item.Log.Aspen.name=Kavak Kütük
+item.Log.Birch.name=Huş Kütük
+item.Log.Chestnut.name=Kestane Kütük
+item.Log.Douglas Fir.name=Douglas Fir Kütük
+item.Log.Hickory.name=Ceviz Kütük
+item.Log.Kapok.name=Kapok Kütük
+item.Log.Maple.name=Akçaağaç Kütük
+item.Log.Oak.name=Meşe Kütük
+item.Log.Pine.name=Çam Kütük
+item.Log.Sequoia.name=Sekoya Kütük
+item.Log.Spruce.name=Ladin Kütük
+item.Log.Sycamore.name=Çınar Kütük
+item.Log.White Cedar.name=Beyaz Sedir Kütük
+item.Log.White Elm.name=Kara Ağaç Kütük
+item.Log.Willow.name=Söğüt Kütük
+
+item.SinglePlank.Acacia.name=Akasya Kereste
+item.SinglePlank.Ash.name=Ash Kereste
+item.SinglePlank.Aspen.name=Kavak Kereste
+item.SinglePlank.Birch.name=Huş Kereste
+item.SinglePlank.Chestnut.name=Kestane Kereste
+item.SinglePlank.Douglas Fir.name=Douglas Fir Kereste
+item.SinglePlank.Hickory.name=Ceviz Kereste
+item.SinglePlank.Kapok.name=Kapok Kereste
+item.SinglePlank.Maple.name=Akçaağaç Kereste
+item.SinglePlank.Oak.name=Meşe Kereste
+item.SinglePlank.Pine.name=Çam Kereste
+item.SinglePlank.Sequoia.name=Sekoya Kereste
+item.SinglePlank.Spruce.name=Ladin Kereste
+item.SinglePlank.Sycamore.name=Çınar Kereste
+item.SinglePlank.White Cedar.name=Beyaz Sedir Kereste
+item.SinglePlank.White Elm.name=Kara Ağaç Kereste
+item.SinglePlank.Willow.name=Söğüt Kereste
+
+item.Acacia Door.name=Akasya Kapı
+item.Ash Door.name=Ash Kapı
+item.Aspen Door.name=Kavak Kapı
+item.Birch Door.name=Huş Kapı
+item.Chestnut Door.name=Kestane Kapı
+item.Douglas Fir Door.name=Douglas Fir Kapı
+item.Hickory Door.name=Ceviz Kapı
+item.Kapok Door.name=Kapok Kapı
+item.Maple Door.name=Akçaağaç Kapı
+item.Oak Door.name=Meşe Kapı
+item.Pine Door.name=Çam Kapı
+item.Sequoia Door.name=Sekoya Kapı
+item.Spruce Door.name=Ladin Kapı
+item.Sycamore Door.name=Çınar Kapı
+item.White Cedar Door.name=Beyaz Sedir Kapı
+item.White Elm Door.name=Kara Ağaç Kapı
+item.Willow Door.name=Söğüt Kapı
+
+item.Barrel.Acacia.name=Akasya Varil
+item.Barrel.Ash.name=Ash Varil
+item.Barrel.Aspen.name=Kavak Varil
+item.Barrel.Birch.name=Huş Varil
+item.Barrel.Chestnut.name=Kestane Varil
+item.Barrel.Douglas Fir.name=Douglas Fir Varil
+item.Barrel.Hickory.name=Ceviz Varil
+item.Barrel.Kapok.name=Kapok Varil
+item.Barrel.Maple.name=Akçaağaç Varil
+item.Barrel.Oak.name=Meşe Varil
+item.Barrel.Pine.name=Çam Varil
+item.Barrel.Sequoia.name=Sekoya Varil
+item.Barrel.Spruce.name=Ladin Varil
+item.Barrel.Sycamore.name=Çınar Varil
+item.Barrel.White Cedar.name=Beyaz Sedir Varil
+item.Barrel.White Elm.name=Kara Ağaç Varil
+item.Barrel.Willow.name=Söğüt Varil
+
+item.Loom.Acacia.name=Akasya Dokumalık
+item.Loom.Ash.name=Ash Dokumalık
+item.Loom.Aspen.name=Kavak Dokumalık
+item.Loom.Birch.name=Huş Dokumalık
+item.Loom.Chestnut.name=Kestane Dokumalık
+item.Loom.Douglas Fir.name=Douglas Fir Dokumalık
+item.Loom.Hickory.name=Ceviz Dokumalık
+item.Loom.Kapok.name=Kapok Dokumalık
+item.Loom.Maple.name=Akçaağaç Dokumalık
+item.Loom.Oak.name=Meşe Dokumalık
+item.Loom.Pine.name=Çam Dokumalık
+item.Loom.Sequoia.name=Sekoya Dokumalık
+item.Loom.Spruce.name=Ladin Dokumalık
+item.Loom.Sycamore.name=Çınar Dokumalık
+item.Loom.White Cedar.name=Beyaz Sedir Dokumalık
+item.Loom.White Elm.name=Kara Ağaç Dokumalık
+item.Loom.Willow.name=Söğüt Dokumalık
+
+#== Wood Blocks ==
+tile.Chest.Acacia.name=
+tile.Chest.Ash.name=
+tile.Chest.Aspen.name=
+tile.Chest.Birch.name=
+tile.Chest.Chestnut.name=
+tile.Chest.Douglas Fir.name=
+tile.Chest.Hickory.name=
+tile.Chest.Kapok.name=
+tile.Chest.Maple.name=
+tile.Chest.Oak.name=
+tile.Chest.Pine.name=
+tile.Chest.Sequoia.name=
+tile.Chest.Spruce.name=
+tile.Chest.Sycamore.name=
+tile.Chest.White Cedar.name=
+tile.Chest.White Elm.name=
+tile.Chest.Willow.name=
+
+tile.log2.Acacia.name=Akasya Kütük
+tile.log.Ash.name=Ash Kütük
+tile.log.Aspen.name=Kavak Kütük
+tile.log.Birch.name=Huş Kütük
+tile.log.Chestnut.name=Kestane Kütük
+tile.log.Douglas Fir.name=Douglas Fir Kütük
+tile.log.Hickory.name=Ceviz Kütük
+tile.log.Kapok.name=Kapok Kütük
+tile.log.Maple.name=Akçaağaç Kütük
+tile.log.Oak.name=Meşe Kütük
+tile.log.Pine.name=Çam Kütük
+tile.log.Sequoia.name=Sekoya Kütük
+tile.log.Spruce.name=Ladin Kütük
+tile.log.Sycamore.name=Çınar Kütük
+tile.log.White Cedar.name=Beyaz Sedir Kütük
+tile.log.White Elm.name=Kara Ağaç Kütük
+tile.log.Willow.name=Söğüt Kütük
+
+tile.WoodVert2.Acacia.name=Akasya Kütük
+tile.WoodVert.Ash.name=Ash Kütük
+tile.WoodVert.Aspen.name=Kavak Kütük
+tile.WoodVert.Birch.name=Huş Kütük
+tile.WoodVert.Chestnut.name=Kestane Kütük
+tile.WoodVert.Douglas Fir.name=Douglas Fir Kütük
+tile.WoodVert.Hickory.name=Ceviz Kütük
+tile.WoodVert.Kapok.name=Kapok Kütük
+tile.WoodVert.Maple.name=Akçaağaç Kütük
+tile.WoodVert.Oak.name=Meşe Kütük
+tile.WoodVert.Pine.name=Çam Kütük
+tile.WoodVert.Sequoia.name=Sekoya Kütük
+tile.WoodVert.Spruce.name=Ladin Kütük
+tile.WoodVert.Sycamore.name=Çınar Kütük
+tile.WoodVert.White Cedar.name=Beyaz Sedir Kütük
+tile.WoodVert.White Elm.name=Kara Ağaç Kütük
+tile.WoodVert.Willow.name=Söğüt Kütük
+
+tile.WoodHoriz3.Acacia.name=Akasya Kütük
+tile.WoodHoriz.Ash.name=Ash Kütük
+tile.WoodHoriz.Aspen.name=Kavak Kütük
+tile.WoodHoriz.Birch.name=Huş Kütük
+tile.WoodHoriz.Chestnut.name=Kestane Kütük
+tile.WoodHoriz.Douglas Fir.name=Douglas Fir Kütük
+tile.WoodHoriz.Hickory.name=Ceviz Kütük
+tile.WoodHoriz2.Kapok.name=Kapok Kütük
+tile.WoodHoriz.Maple.name=Akçaağaç Kütük
+tile.WoodHoriz.Oak.name=Meşe Kütük
+tile.WoodHoriz2.Pine.name=Çam Kütük
+tile.WoodHoriz2.Sequoia.name=Sekoya Kütük
+tile.WoodHoriz2.Spruce.name=Ladin Kütük
+tile.WoodHoriz2.Sycamore.name=Çınar Kütük
+tile.WoodHoriz2.White Cedar.name=Beyaz Sedir Kütük
+tile.WoodHoriz2.White Elm.name=Kara Ağaç Kütük
+tile.WoodHoriz2.Willow.name=Söğüt Kütük
+
+tile.sapling2.Acacia.name=Akasya Fidanı
+tile.sapling.Ash.name=Ash Fidanı
+tile.sapling.Aspen.name=Kavak Fidanı
+tile.sapling.Birch.name=Huş Fidanı
+tile.sapling.Chestnut.name=Kestane Fidanı
+tile.sapling.Douglas Fir.name=Douglas Fir Fidanı
+tile.sapling.Hickory.name=Ceviz Fidanı
+tile.sapling.Kapok.name=Kapok Fidanı
+tile.sapling.Maple.name=Akçaağaç Fidanı
+tile.sapling.Oak.name=Meşe Fidanı
+tile.sapling.Pine.name=Çam Fidanı
+tile.sapling.Sequoia.name=Sekoya Fidanı
+tile.sapling.Spruce.name=Ladin Fidanı
+tile.sapling.Sycamore.name=Çınar Fidanı
+tile.sapling.White Cedar.name=Beyaz Sedir Fidanı
+tile.sapling.White Elm.name=Kara Ağaç Fidanı
+tile.sapling.Willow.name=Söğüt Fidanı
+
+tile.leaves2.name=Akasya Yaprağı
+tile.leaves2.Acacia.name=Akasya Yaprağı
+tile.leaves.Ash.name=Ash Yaprağı
+tile.leaves.Aspen.name=Kavak Yaprağı
+tile.leaves.Birch.name=Huş Yaprağı
+tile.leaves.Chestnut.name=Kestane Yaprağı
+tile.leaves.Douglas Fir.name=Douglas Fir Yaprağı
+tile.leaves.Hickory.name=Ceviz Yaprağı
+tile.leaves.Kapok.name=Kapok Yaprağı
+tile.leaves.Maple.name=Akçaağaç Yaprağı
+tile.leaves.Oak.name=Meşe Yaprağı
+tile.leaves.Pine.name=Çam Yaprağı
+tile.leaves.Sequoia.name=Sekoya Yaprağı
+tile.leaves.Spruce.name=Ladin Yaprağı
+tile.leaves.Sycamore.name=Çınar Yaprağı
+tile.leaves.White Cedar.name=Beyaz Sedir Yaprağı
+tile.leaves.White Elm.name=Kara Ağaç Yaprağı
+tile.leaves.Willow.name=Söğüt Yaprağı
+
+tile.wood2.Acacia.name=Akasya Tahtaları
+tile.wood.Ash.name=Ash Tahtaları
+tile.wood.Aspen.name=Kavak Tahtaları
+tile.wood.Birch.name=Huş Tahtaları
+tile.wood.Chestnut.name=Kestane Tahtaları
+tile.wood.Douglas Fir.name=Douglas Fir Tahtaları
+tile.wood.Hickory.name=Ceviz Tahtaları
+tile.wood.Kapok.name=Kapok Tahtaları
+tile.wood.Maple.name=Akçaağaç Tahtaları
+tile.wood.Oak.name=Meşe Tahtaları
+tile.wood.Pine.name=Çam Tahtaları
+tile.wood.Sequoia.name=Sekoya Tahtaları
+tile.wood.Spruce.name=Ladin Tahtaları
+tile.wood.Sycamore.name=Çınar Tahtaları
+tile.wood.White Cedar.name=Beyaz Sedir Tahtaları
+tile.wood.White Elm.name=Kara Ağaç Tahtaları
+tile.wood.Willow.name=Söğüt Tahtaları
+
+tile.fruitTreeWood.name=Meyve Ağacı
+tile.fruitTreeLeaves.name=Meyve Ağacı Yaprakları
+tile.fruitTreeLeaves2.name=Meyve Ağacı Yaprakları
+
+tile.Door Acacia.name=Akasya Kapı
+tile.Door Ash.name=Ash Kapı
+tile.Door Aspen.name=Kavak Kapı
+tile.Door Birch.name=Huş Kapı
+tile.Door Chestnut.name=Kestane Kapı
+tile.Door Douglas Fir.name=Douglas Fir Kapı
+tile.Door Hickory.name=Ceviz Kapı
+tile.Door Kapok.name=Kapok Kapı
+tile.Door Maple.name=Akçaağaç Kapı
+tile.Door Oak.name=Meşe Kapı
+tile.Door Pine.name=Çam Kapı
+tile.Door Sequoia.name=Sekoya Kapı
+tile.Door Spruce.name=Ladin Kapı
+tile.Door Sycamore.name=Çınar Kapı
+tile.Door White Cedar.name=Beyaz Sedir Kapı
+tile.Door White Elm.name=Kara Ağaç Kapı
+tile.Door Willow.name=Söğüt Kapı
+
+tile.Barrel.Acacia.name=Akasya Varil
+tile.Barrel.Ash.name=Ash Varil
+tile.Barrel.Aspen.name=Kavak Varil
+tile.Barrel.Birch.name=Huş Varil
+tile.Barrel.Chestnut.name=Kestane Varil
+tile.Barrel.Douglas Fir.name=Douglas Fir Varil
+tile.Barrel.Hickory.name=Ceviz Varil
+tile.Barrel.Kapok.name=Kapok Varil
+tile.Barrel.Maple.name=Akçaağaç Varil
+tile.Barrel.Oak.name=Meşe Varil
+tile.Barrel.Pine.name=Çam Varil
+tile.Barrel.Sequoia.name=Sekoya Varil
+tile.Barrel.Spruce.name=Ladin Varil
+tile.Barrel.Sycamore.name=Çınar Varil
+tile.Barrel.White Cedar.name=Beyaz Sedir Varil
+tile.Barrel.White Elm.name=Kara Ağaç Varil
+tile.Barrel.Willow.name=Söğüt Varil
+
+tile.Loom.Acacia.name=Akasya Dokumalık
+tile.Loom.Ash.name=Ash Dokumalık
+tile.Loom.Aspen.name=Kavak Dokumalık
+tile.Loom.Birch.name=Huş Dokumalık
+tile.Loom.Chestnut.name=Kestane Dokumalık
+tile.Loom.Douglas Fir.name=Douglas Fir Dokumalık
+tile.Loom.Hickory.name=Ceviz Dokumalık
+tile.Loom.Kapok.name=Kapok Dokumalık
+tile.Loom.Maple.name=Akçaağaç Dokumalık
+tile.Loom.Oak.name=Meşe Dokumalık
+tile.Loom.Pine.name=Çam Dokumalık
+tile.Loom.Sequoia.name=Sekoya Dokumalık
+tile.Loom.Spruce.name=Ladin Dokumalık
+tile.Loom.Sycamore.name=Çınar Dokumalık
+tile.Loom.White Cedar.name=Beyaz Sedir Dokumalık
+tile.Loom.White Elm.name=Kara Ağaç Dokumalık
+tile.Loom.Willow.name=Söğüt Dokumalık
+
+tile.FenceTFC.Acacia.name=Akasya Çit
+tile.FenceTFC.Ash.name=Ash Çit
+tile.FenceTFC.Aspen.name=Kavak Çit
+tile.FenceTFC.Birch.name=Huş Çit
+tile.FenceTFC.Chestnut.name=Kestane Çit
+tile.FenceTFC.Douglas Fir.name=Douglas Fir Çit
+tile.FenceTFC.Hickory.name=Ceviz Çit
+tile.FenceTFC.Kapok.name=Kapok Çit
+tile.FenceTFC.Maple.name=Akçaağaç Çit
+tile.FenceTFC.Oak.name=Meşe Çit
+tile.FenceTFC.Pine.name=Çam Çit
+tile.FenceTFC.Sequoia.name=Sekoya Çit
+tile.FenceTFC.Spruce.name=Ladin Çit
+tile.FenceTFC.Sycamore.name=Çınar Çit
+tile.FenceTFC.White Cedar.name=Beyaz Sedir Çit
+tile.FenceTFC.White Elm.name=Kara Ağaç Çit
+tile.FenceTFC.Willow.name=Söğüt Çit
+
+tile.FenceGateTFC.Acacia.name=Akasya Çit Kapı
+tile.FenceGateTFC.Ash.name=Ash Çit Kapı
+tile.FenceGateTFC.Aspen.name=Kavak Çit Kapı
+tile.FenceGateTFC.Birch.name=Huş Çit Kapı
+tile.FenceGateTFC.Chestnut.name=Kestane Çit Kapı
+tile.FenceGateTFC.Douglas Fir.name=Douglas Fir Çit Kapı
+tile.FenceGateTFC.Hickory.name=Ceviz Çit Kapı
+tile.FenceGateTFC.Kapok.name=Kapok Çit Kapı
+tile.FenceGateTFC.Maple.name=Akçaağaç Çit Kapı
+tile.FenceGateTFC.Oak.name=Meşe Çit Kapı
+tile.FenceGateTFC.Pine.name=Çam Çit Kapı
+tile.FenceGateTFC.Sequoia.name=Sekoya Çit Kapı
+tile.FenceGateTFC.Spruce.name=Ladin Çit Kapı
+tile.FenceGateTFC.Sycamore.name=Çınar Çit Kapı
+tile.FenceGateTFC.White Cedar.name=Beyaz Sedir Çit Kapı
+tile.FenceGateTFC.White Elm.name=Kara Ağaç Çit Kapı
+tile.FenceGateTFC.Willow.name=Söğüt Çit Kapı
+
+tile.ArmourStand.Acacia.name=Akasya Zırhlık
+tile.ArmourStand.Ash.name=Ash Zırhlık
+tile.ArmourStand.Aspen.name=Kavak Zırhlık
+tile.ArmourStand.Birch.name=Huş Zırhlık
+tile.ArmourStand.Chestnut.name=Kestane Zırhlık
+tile.ArmourStand.Douglas Fir.name=Douglas Fir Zırhlık
+tile.ArmourStand.Hickory.name=Ceviz Zırhlık
+tile.ArmourStand.Kapok.name=Kapok Zırhlık
+tile.ArmourStand.Maple.name=Akçaağaç Zırhlık
+tile.ArmourStand.Oak.name=Meşe Zırhlık
+tile.ArmourStand.Pine.name=Çam Zırhlık
+tile.ArmourStand.Sequoia.name=Sekoya Zırhlık
+tile.ArmourStand.Spruce.name=Ladin Zırhlık
+tile.ArmourStand.Sycamore.name=Çınar Zırhlık
+tile.ArmourStand.White Cedar.name=Beyaz Sedir Zırhlık
+tile.ArmourStand.White Elm.name=Kara Ağaç Zırhlık
+tile.ArmourStand.Willow.name=Söğüt Zırhlık
+
+tile.WoodSupportV2.Acacia.name=Akasya Destek Kirişi
+tile.WoodSupportV.Ash.name=Ash Destek Kirişi
+tile.WoodSupportV.Aspen.name=Kavak Destek Kirişi
+tile.WoodSupportV.Birch.name=Huş Destek Kirişi
+tile.WoodSupportV.Chestnut.name=Kestane Destek Kirişi
+tile.WoodSupportV.Douglas Fir.name=Douglas Fir Destek Kirişi
+tile.WoodSupportV.Hickory.name=Ceviz Destek Kirişi
+tile.WoodSupportV.Kapok.name=Kapok Destek Kirişi
+tile.WoodSupportV.Maple.name=Akçaağaç Destek Kirişi
+tile.WoodSupportV.Oak.name=Meşe Destek Kirişi
+tile.WoodSupportV.Pine.name=Çam Destek Kirişi
+tile.WoodSupportV.Sequoia.name=Sekoya Destek Kirişi
+tile.WoodSupportV.Spruce.name=Ladin Destek Kirişi
+tile.WoodSupportV.Sycamore.name=Çınar Destek Kirişi
+tile.WoodSupportV.White Cedar.name=Beyaz Sedir Destek Kirişi
+tile.WoodSupportV.White Elm.name=Kara Ağaç Destek Kirişi
+tile.WoodSupportV.Willow.name=Söğüt Destek Kirişi
+
+tile.WoodSupportH2.name=Tahta Destek Kirişi
+tile.WoodSupportH2.Acacia.name=Akasya Destek Kirişi
+tile.WoodSupportH.Ash.name=Ash Destek Kirişi
+tile.WoodSupportH.Aspen.name=Kavak Destek Kirişi
+tile.WoodSupportH.Birch.name=Huş Destek Kirişi
+tile.WoodSupportH.Chestnut.name=Kestane Destek Kirişi
+tile.WoodSupportH.Douglas Fir.name=Douglas Fir Destek Kirişi
+tile.WoodSupportH.Hickory.name=Ceviz Destek Kirişi
+tile.WoodSupportH.Kapok.name=Kapok Destek Kirişi
+tile.WoodSupportH.Maple.name=Akçaağaç Destek Kirişi
+tile.WoodSupportH.Oak.name=Meşe Destek Kirişi
+tile.WoodSupportH.Pine.name=Çam Destek Kirişi
+tile.WoodSupportH.Sequoia.name=Sekoya Destek Kirişi
+tile.WoodSupportH.Spruce.name=Ladin Destek Kirişi
+tile.WoodSupportH.Sycamore.name=Çınar Destek Kirişi
+tile.WoodSupportH.White Cedar.name=Beyaz Sedir Destek Kirişi
+tile.WoodSupportH.White Elm.name=Kara Ağaç Destek Kirişi
+tile.WoodSupportH.Willow.name=Söğüt Destek Kirişi
+
+tile.Toolrack.Acacia.name=Akasya Aletlik
+tile.Toolrack.Ash.name=Ash Aletlik
+tile.Toolrack.Aspen.name=Kavak Aletlik
+tile.Toolrack.Birch.name=Huş Aletlik
+tile.Toolrack.Chestnut.name=Kestane Aletlik
+tile.Toolrack.Douglas Fir.name=Douglas Fir Aletlik
+tile.Toolrack.Hickory.name=Ceviz Aletlik
+tile.Toolrack.Kapok.name=Kapok Aletlik
+tile.Toolrack.Maple.name=Akçaağaç Aletlik
+tile.Toolrack.Oak.name=Meşe Aletlik
+tile.Toolrack.Pine.name=Çam Aletlik
+tile.Toolrack.Sequoia.name=Sekoya Aletlik
+tile.Toolrack.Spruce.name=Ladin Aletlik
+tile.Toolrack.Sycamore.name=Çınar Aletlik
+tile.Toolrack.White Cedar.name=Beyaz Sedir Aletlik
+tile.Toolrack.White Elm.name=Kara Ağaç Aletlik
+tile.Toolrack.Willow.name=Söğüt Aletlik
+
+#=======================
+#= Tools/Weapons/Armor =
+#=======================
+
+#== Stone Heads ==
+item.Stone Hammer Head.name=Taş Çekiç Kafası
+item.Stone Knife Blade.name=Taş Bıçak Kafası
+
+item.IgIn Stone Axe Head.name=Taş Balta Kafası
+item.IgIn Stone Chisel Head.name=Taş Keski Kafası
+item.IgIn Stone Hoe Head.name=Taş Çapa Kafası
+item.IgIn Stone Javelin Head.name=Taş Mızrak Kafası
+item.IgIn Stone Shovel Head.name=Taş Kürek Kafası
+
+item.Sed Stone Axe Head.name=Taş Balta Kafası
+item.Sed Stone Chisel Head.name=Taş Keski Kafası
+item.Sed Stone Hoe Head.name=Taş Çapa Kafası
+item.Sed Stone Javelin Head.name=Taş Mızrak Kafası
+item.Sed Stone Shovel Head.name=Taş Kürek Kafası
+
+item.IgEx Stone Axe Head.name=Taş Balta Kafası
+item.IgEx Stone Chisel Head.name=Taş Keski Kafası
+item.IgEx Stone Hoe Head.name=Taş Çapa Kafası
+item.IgEx Stone Javelin Head.name=Taş Mızrak Kafası
+item.IgEx Stone Shovel Head.name=Taş Kürek Kafası
+
+item.MM Stone Axe Head.name=Taş Balta Kafası
+item.MM Stone Chisel Head.name=Taş Keski Kafası
+item.MM Stone Hoe Head.name=Taş Çapa Kafası
+item.MM Stone Javelin Head.name=Taş Mızrak Kafası
+item.MM Stone Shovel Head.name=Taş Kürek Kafası
+
+#== Stone Tools ==
+item.Stone Axe.name=Taş Balta
+item.IgIn Stone Axe.name=Taş Balta
+item.Sed Stone Axe.name=Taş Balta
+item.IgEx Stone Axe.name=Taş Balta
+item.MM Stone Axe.name=Taş Balta
+
+item.Stone Chisel.name=Taş Keski
+
+item.Stone Hammer.name=Taş Çekiç
+
+item.Stone Hoe.name=Taş Çapa
+item.IgIn Stone Hoe.name=Taş Çapa
+item.Sed Stone Hoe.name=Taş Çapa
+item.IgEx Stone Hoe.name=Taş Çapa
+item.MM Stone Hoe.name=Taş Çapa
+
+item.Stone Javelin.name=Taş Mızrak
+item.IgIn Stone Javelin.name=Taş Mızrak
+item.Sed Stone Javelin.name=Taş Mızrak
+item.IgEx Stone Javelin.name=Taş Mızrak
+item.MM Stone Javelin.name=Taş Mızrak
+
+item.Stone Knife.name=Taş Bıçak
+
+item.Stone Shovel.name=Taş Kürek
+item.IgIn Stone Shovel.name=Taş Kürek
+item.Sed Stone Shovel.name=Taş Kürek
+item.IgEx Stone Shovel.name=Taş Kürek
+item.MM Stone Shovel.name=Taş Kürek
+
+#== Metal Heads ==
+#=== Axe Head ===
+item.Bismuth Bronze Axe Head.name=Bismut Tunç Balta Kafası
+item.Black Bronze Axe Head.name=Kara Tunç Balta Kafası
+item.Black Steel Axe Head.name=Kara Çelik Balta Kafası
+item.Blue Steel Axe Head.name=Mavi Çelik Balta Kafası
+item.Bronze Axe Head.name=Tunç Balta Kafası
+item.Copper Axe Head.name=Bakır Balta Kafası
+item.Red Steel Axe Head.name=Kırmızı Balta Kafası
+item.Steel Axe Head.name=Çelik Balta Kafası
+item.Wrought Iron Axe Head.name=Demir Balta Kafası
+
+#=== Chisel Head ===
+item.Bismuth Bronze Chisel Head.name=Bismut Tunç Keski Kafası
+item.Black Bronze Chisel Head.name=Kara Tunç Keski Kafası
+item.Black Steel Chisel Head.name=Kara Çelik Keski Kafası
+item.Blue Steel Chisel Head.name=Mavi Çelik Keski Kafası
+item.Bronze Chisel Head.name=Tunç Keski Kafası
+item.Copper Chisel Head.name=Bakır Keski Kafası
+item.Red Steel Chisel Head.name=Kırmızı Çelik Keski Kafası
+item.Steel Chisel Head.name=Çelik Keski Kafası
+item.Wrought Iron Chisel Head.name=Demir Keski Kafası
+
+#=== Hammer Head ===
+item.Bismuth Bronze Hammer Head.name=Bismut Tunç Çekiç Kafası
+item.Black Bronze Hammer Head.name=Kara Tunç Çekiç Kafası
+item.Black Steel Hammer Head.name=Kara Çelik Çekiç Kafası
+item.Blue Steel Hammer Head.name=Mavi Çelik Çekiç Kafası
+item.Bronze Hammer Head.name=Tunç Çekiç Kafası
+item.Copper Hammer Head.name=Bakır Çekiç Kafası
+item.Red Steel Hammer Head.name=Kırmızı Çelik Çekiç Kafası
+item.Steel Hammer Head.name=Çelik Çekiç Kafası
+item.Wrought Iron Hammer Head.name=Demir Çekiç Kafası
+
+#=== Hoe Head ===
+item.Bismuth Bronze Hoe Head.name=Bismut Tunç Çapa Kafası
+item.Black Bronze Hoe Head.name=Kara Tunç Çapa Kafası
+item.Black Steel Hoe Head.name=Kara Çelik Çapa Kafası
+item.Blue Steel Hoe Head.name=Mavi Çelik Çapa Kafası
+item.Bronze Hoe Head.name=Tunç Çapa Kafası
+item.Copper Hoe Head.name=Bakır Çapa Kafası
+item.Red Steel Hoe Head.name=Kırmızı Çelik Çapa Kafası
+item.Steel Hoe Head.name=Çelik Çapa Kafası
+item.Wrought Iron Hoe Head.name=Demir Çapa Kafası
+
+#=== Javelin Head ===
+item.Bismuth Bronze Javelin Head.name=Bismut Tunç Mızrak Kafası
+item.Black Bronze Javelin Head.name=Kara Tunç Mızrak Kafası
+item.Black Steel Javelin Head.name=Kara Çelik Mızrak Kafası
+item.Blue Steel Javelin Head.name=Mavi Çelik Mızrak Kafası
+item.Bronze Javelin Head.name=Tunç Mızrak Kafası
+item.Copper Javelin Head.name=Bakır Mızrak Kafası
+item.Red Steel Javelin Head.name=Kırmızı Çelik Mızrak Kafası
+item.Steel Javelin Head.name=Çelik Mızrak Kafası
+item.Wrought Iron Javelin Head.name=Demir Mızrak Kafası
+
+#=== Knife Blade ===
+item.Bismuth Bronze Knife Blade.name=Bismut Tunç Bıçak Ağzı
+item.Black Bronze Knife Blade.name=Kara Tunç Bıçak Ağzı
+item.Black Steel Knife Blade.name=Kara Çelik Bıçak Ağzı
+item.Blue Steel Knife Blade.name=Mavi Çelik Bıçak Ağzı
+item.Bronze Knife Blade.name=Tunç Bıçak Ağzı
+item.Copper Knife Blade.name=Bakır Bıçak Ağzı
+item.Red Steel Knife Blade.name=Kırmızı Çelik Bıçak Ağzı
+item.Steel Knife Blade.name=Çelik Bıçak Ağzı
+item.Wrought Iron Knife Blade.name=Demir Bıçak Ağzı
+
+#=== Mace Head ===
+item.Bismuth Bronze Mace Head.name=Bismut Tunç Topuz Kafası
+item.Black Bronze Mace Head.name=Kara Tunç Topuz Kafası
+item.Black Steel Mace Head.name=Kara Çelik Topuz Kafası
+item.Blue Steel Mace Head.name=Mavi Çelik Topuz Kafası
+item.Bronze Mace Head.name=Tunç Topuz Kafası
+item.Copper Mace Head.name=Bakır Topuz Kafası
+item.Red Steel Mace Head.name=Kırmızı Çelik Topuz Kafası
+item.Steel Mace Head.name=Çelik Topuz Kafası
+item.Wrought Iron Mace Head.name=Demir Topuz Kafası
+
+#=== Pickaxe Head ===
+item.Bismuth Bronze Pick Head.name=Bismut Tunç Kazma Kafası
+item.Black Bronze Pick Head.name=Kara Tunç Kazma Kafası
+item.Black Steel Pick Head.name=Kara Çelik Kazma Kafası
+item.Blue Steel Pick Head.name=Mavi Çelik Kazma Kafası
+item.Bronze Pick Head.name=Tunç Kazma Kafası
+item.Copper Pick Head.name=Bakır Kazma Kafası
+item.Red Steel Pick Head.name=Kırmızı Çelik Kazma Kafası
+item.Steel Pick Head.name=Çelik Kazma Kafası
+item.Wrought Iron Pick Head.name=Demir Kazma Kafası
+
+#=== Prospector's Pick Head ===
+item.Bismuth Bronze ProPick Head.name=Bismut Tunç Keşifkazması Kafası
+item.Black Bronze ProPick Head.name=Kara Tunç Keşifkazması Kafası
+item.Black Steel ProPick Head.name=Kara Çelik Keşifkazması Kafası
+item.Blue Steel ProPick Head.name=Mavi Çelik Keşifkazması Kafası
+item.Bronze ProPick Head.name=Tunç Keşifkazması Kafası
+item.Copper ProPick Head.name=Bakır Keşifkazması Kafası
+item.Red Steel ProPick Head.name=Kırmızı Çelik Keşifkazması Kafası
+item.Steel ProPick Head.name=Çelik Keşifkazması Kafası
+item.Wrought Iron ProPick Head.name=Demir Keşifkazması Kafası
+
+#=== Saw Blade ===
+item.Bismuth Bronze Saw Blade.name=Bismut Tunç Testere Kafası
+item.Black Bronze Saw Blade.name=Kara Tunç Testere Kafası
+item.Black Steel Saw Blade.name=Kara Çelik Testere Kafası
+item.Blue Steel Saw Blade.name=Mavi Çelik Testere Kafası
+item.Bronze Saw Blade.name=Tunç Testere Kafası
+item.Copper Saw Blade.name=Bakır Testere Kafası
+item.Red Steel Saw Blade.name=Kırmızı Çelik Testere Kafası
+item.Steel Saw Blade.name=Çelik Testere Kafası
+item.Wrought Iron Saw Blade.name=Demir Testere Kafası
+
+#=== Scythe Blade ===
+item.Bismuth Bronze Scythe Blade.name=Bismut Tunç Tırpan Kafası
+item.Black Bronze Scythe Blade.name=Kara Tunç Tırpan Kafası
+item.Black Steel Scythe Blade.name=Kara Çelik Tırpan Kafası
+item.Blue Steel Scythe Blade.name=Mavi Çelik Tırpan Kafası
+item.Bronze Scythe Blade.name=Tunç Tırpan Kafası
+item.Copper Scythe Blade.name=Bakır Tırpan Kafası
+item.Red Steel Scythe Blade.name=Kırmızı Çelik Tırpan Kafası
+item.Steel Scythe Blade.name=Çelik Tırpan Kafası
+item.Wrought Iron Scythe Blade.name=Demir Tırpan Kafası
+
+#=== Shovel Head ===
+item.Bismuth Bronze Shovel Head.name=Bismut Tunç Kürek Kafası
+item.Black Bronze Shovel Head.name=Kara Tunç Kürek Kafası
+item.Black Steel Shovel Head.name=Kara Çelik Kürek Kafası
+item.Blue Steel Shovel Head.name=Mavi Çelik Kürek Kafası
+item.Bronze Shovel Head.name=Tunç Kürek Kafası
+item.Copper Shovel Head.name=Bakır Kürek Kafası
+item.Red Steel Shovel Head.name=Kırmızı Çelik Kürek Kafası
+item.Steel Shovel Head.name=Çelik Kürek Kafası
+item.Wrought Iron Shovel Head.name=Demir Kürek Kafası
+
+#=== Sword Blade ===
+item.Bismuth Bronze Sword Blade.name=Bismut Tunç Kılıç Kafası
+item.Black Bronze Sword Blade.name=Kara Tunç Kılıç Kafası
+item.Black Steel Sword Blade.name=Kara Çelik Kılıç Kafası
+item.Blue Steel Sword Blade.name=Mavi Çelik Kılıç Kafası
+item.Bronze Sword Blade.name=Tunç Kılıç Kafası
+item.Copper Sword Blade.name=Bakır Kılıç Kafası
+item.Red Steel Sword Blade.name=Kırmızı Çelik Kılıç Kafası
+item.Steel Sword Blade.name=Çelik Kılıç Kafası
+item.Wrought Iron Sword Blade.name=Demir Kılıç Kafası
+
+#== Metal Tools ==
+#=== Axe ===
+item.Bismuth Bronze Axe.name=Bismut Tunç Balta
+item.Black Bronze Axe.name=Kara Tunç Balta
+item.Black Steel Axe.name=Kara Çelik Balta
+item.Blue Steel Axe.name=Mavi Çelik Balta
+item.Bronze Axe.name=Tunç Balta
+item.Copper Axe.name=Bakır Balta
+item.Red Steel Axe.name=Kırmızı Çelik Balta
+item.Steel Axe.name=Çelik Balta
+item.Wrought Iron Axe.name=Demir Balta
+
+#=== Chisel ===
+item.Bismuth Bronze Chisel.name=Bismut Tunç Keski
+item.Black Bronze Chisel.name=Kara Tunç Keski
+item.Black Steel Chisel.name=Kara Çelik Keski
+item.Blue Steel Chisel.name=Mavi Çelik Keski
+item.Bronze Chisel.name=Tunç Keski
+item.Copper Chisel.name=Bakır Keski
+item.Red Steel Chisel.name=Kırmızı Çelik Keski
+item.Steel Chisel.name=Çelik Keski
+item.Wrought Iron Chisel.name=Demir Keski
+
+#=== Hammer ===
+item.Bismuth Bronze Hammer.name=Bismut Tunç Çekiç
+item.Black Bronze Hammer.name=Kara Tunç Çekiç
+item.Black Steel Hammer.name=Kara Çelik Çekiç
+item.Blue Steel Hammer.name=Mavi Çelik Çekiç
+item.Bronze Hammer.name=Tunç Çekiç
+item.Copper Hammer.name=Bakır Çekiç
+item.Red Steel Hammer.name=Kırmızı Çelik Çekiç
+item.Steel Hammer.name=Çelik Çekiç
+item.Wrought Iron Hammer.name=Demir Çekiç
+
+#=== Hoe ===
+item.Bismuth Bronze Hoe.name=Bismut Tunç Çapa
+item.Black Bronze Hoe.name=Kara Tunç Çapa
+item.Black Steel Hoe.name=Kara Çelik Çapa
+item.Blue Steel Hoe.name=Mavi Çelik Çapa
+item.Bronze Hoe.name=Tunç Çapa
+item.Copper Hoe.name=Bakır Çapa
+item.Red Steel Hoe.name=Kırmızı Çelik Çapa
+item.Steel Hoe.name=Çelik Çapa
+item.Wrought Iron Hoe.name=Demir Çapa
+
+#=== Javelin ===
+item.Bismuth Bronze Javelin.name=Bismut Tunç Mızrak
+item.Black Bronze Javelin.name=Kara Tunç Mızrak
+item.Black Steel Javelin.name=Kara Çelik Mızrak
+item.Blue Steel Javelin.name=Mavi Çelik Mızrak
+item.Bronze Javelin.name=Tunç Mızrak
+item.Copper Javelin.name=Bakır Mızrak
+item.Red Steel Javelin.name=Kırmızı Çelik Mızrak
+item.Steel Javelin.name=Çelik Mızrak
+item.Wrought Iron Javelin.name=Demir Mızrak
+
+#=== Knife ===
+item.Bismuth Bronze Knife.name=Bismut Tunç Bıçak
+item.Black Bronze Knife.name=Kara Tunç Bıçak
+item.Black Steel Knife.name=Kara Çelik Bıçak
+item.Blue Steel Knife.name=Mavi Çelik Bıçak
+item.Bronze Knife.name=Tunç Bıçak
+item.Copper Knife.name=Bakır Bıçak
+item.Red Steel Knife.name=Kırmızı Çelik Bıçak
+item.Steel Knife.name=Çelik Bıçak
+item.Wrought Iron Knife.name=Demir Bıçak
+
+#=== Mace ===
+item.Bismuth Bronze Mace.name=Bismut Tunç Topuz
+item.Black Bronze Mace.name=Kara Tunç Topuz
+item.Black Steel Mace.name=Kara Çelik Topuz
+item.Blue Steel Mace.name=Mavi Çelik Topuz
+item.Bronze Mace.name=Tunç Topuz
+item.Copper Mace.name=Bakır Topuz
+item.Red Steel Mace.name=Kırmızı Çelik Topuz
+item.Steel Mace.name=Çelik Topuz
+item.Wrought Iron Mace.name=Demir Topuz
+
+#=== Pickaxe ===
+item.Bismuth Bronze Pick.name=Bismut Tunç Kazma
+item.Black Bronze Pick.name=Kara Tunç Kazma
+item.Black Steel Pick.name=Kara Çelik Kazma
+item.Blue Steel Pick.name=Mavi Çelik Kazma
+item.Bronze Pick.name=Tunç Kazma
+item.Copper Pick.name=Bakır Kazma
+item.Red Steel Pick.name=Kırmızı Çelik Kazma
+item.Steel Pick.name=Çelik Kazma
+item.Wrought Iron Pick.name=Demir Kazma
+
+#=== Prospector's Pick ===
+item.Bismuth Bronze ProPick.name=Bismut Tunç Keşifkazması
+item.Black Bronze ProPick.name=Kara Tunç Keşifkazması
+item.Black Steel ProPick.name=Kara Çelik Keşifkazması
+item.Blue Steel ProPick.name=Mavi Çelik Keşifkazması
+item.Bronze ProPick.name=Tunç Keşifkazması
+item.Copper ProPick.name=Bakır Keşifkazması
+item.Red Steel ProPick.name=Kırmızı Çelik Keşifkazması
+item.Steel ProPick.name=Çelik Keşifkazması
+item.Wrought Iron ProPick.name=Demir Keşifkazması
+
+#=== Saw ===
+item.Bismuth Bronze Saw.name=Bismut Tunç Testere
+item.Black Bronze Saw.name=Kara Tunç Testere
+item.Black Steel Saw.name=Kara Çelik Testere
+item.Blue Steel Saw.name=Mavi Çelik Testere
+item.Bronze Saw.name=Tunç Testere
+item.Copper Saw.name=Bakır Testere
+item.Red Steel Saw.name=Kırmızı Çelik Testere
+item.Steel Saw.name=Çelik Testere
+item.Wrought Iron Saw.name=Demir Testere
+
+#=== Scythe ===
+item.Bismuth Bronze Scythe.name=Bismut Tunç Tırpan
+item.Black Bronze Scythe.name=Kara Tunç Tırpan
+item.Black Steel Scythe.name=Kara Çelik Tırpan
+item.Blue Steel Scythe.name=Mavi Çelik Tırpan
+item.Bronze Scythe.name=Tunç Tırpan
+item.Copper Scythe.name=Bakır Tırpane
+item.Red Steel Scythe.name=Kırmızı Çelik Tırpan
+item.Steel Scythe.name=Çelik Tırpan
+item.Wrought Iron Scythe.name=Demir Tırpan
+
+#=== Shovel ===
+item.Bismuth Bronze Shovel.name=Bismut Tunç Kürek
+item.Black Bronze Shovel.name=Kara Tunç Kürek
+item.Black Steel Shovel.name=Kara Çelik Kürek
+item.Blue Steel Shovel.name=Mavi Çelik Kürek
+item.Bronze Shovel.name=Tunç Kürek
+item.Copper Shovel.name=Bakır Kürek
+item.Red Steel Shovel.name=Kırmızı Çelik Kürek
+item.Steel Shovel.name=Çelik Kürek
+item.Wrought Iron Shovel.name=Demir Kürek
+
+#=== Sword ===
+item.Bismuth Bronze Sword.name=Bismut Tunç Kılıç
+item.Black Bronze Sword.name=Kara Tunç Kılıç
+item.Black Steel Sword.name=Kara Çelik Kılıç
+item.Blue Steel Sword.name=Mavi Çelik Kılıç
+item.Bronze Sword.name=Tunç Kılıç
+item.Copper Sword.name=Bakır Kılıç
+item.Red Steel Sword.name=Kırmızı Çelik Kılıç
+item.Steel Sword.name=Çelik Kılıç
+item.Wrought Iron Sword.name=Demir Kılıç
+
+#=== Tuyere ===
+item.Bismuth Bronze Tuyere.name=Bismut Tunç Tuyere
+item.Black Bronze Tuyere.name=Kara Tunç Tuyere
+item.Black Steel Tuyere.name=Kara Çelik Tuyere
+item.Blue Steel Tuyere.name=Mavi Çelik Tuyere
+item.Bronze Tuyere.name=Tunç Tuyere
+item.Copper Tuyere.name=Bakır Tuyere
+item.Red Steel Tuyere.name=Kırmızı Çelik Tuyere
+item.Steel Tuyere.name=Çelik Tuyere
+item.Wrought Iron Tuyere.name=Demir Tuyere
+
+#== Armor ==
+#=== Helmet ===
+item.Bismuth Bronze Unfinished Helmet.name=Bitmemiş Bismut Tunç Miğfer
+item.Black Bronze Unfinished Helmet.name=Bitmemiş Kara Tunç Miğfer
+item.Black Steel Unfinished Helmet.name=Bitmemiş Kara Çelik Miğfer
+item.Blue Steel Unfinished Helmet.name=Bitmemiş Mavi Çelik Miğfer
+item.Bronze Unfinished Helmet.name=Bitmemiş Tunç Miğfer
+item.Copper Unfinished Helmet.name=Bitmemiş Bakır Miğfer
+item.Red Steel Unfinished Helmet.name=Bitmemiş Kırmızı Çelik Miğfer
+item.Steel Unfinished Helmet.name=Bitmemiş Çelik Miğfer
+item.Wrought Iron Unfinished Helmet.name=Bitmemiş Demir Miğfer
+item.Bismuth Bronze Helmet.name=Bismut Tunç Miğfer
+item.Black Bronze Helmet.name=Kara Tunç Miğfer
+item.Black Steel Helmet.name=Kara Çelik Miğfer
+item.Blue Steel Helmet.name=Mavi Çelik Miğfer
+item.Bronze Helmet.name=Tunç Miğfer
+item.Copper Helmet.name=Bakır Miğfer
+item.Red Steel Helmet.name=Kırmızı Çelik Miğfer
+item.Steel Helmet.name=Çelik Miğfer
+item.Wrought Iron Helmet.name=Demir Miğfer
+item.helmetCloth.name=Deri Başlık
+
+#=== Chestplate ===
+item.Bismuth Bronze Unfinished Chestplate.name=Bitmemiş Bismut Tunç Göğüs Zırhı
+item.Black Bronze Unfinished Chestplate.name=Bitmemiş Kara Tunç Göğüs Zırhı
+item.Black Steel Unfinished Chestplate.name=Bitmemiş Kara Çelik Göğüs Zırhı
+item.Blue Steel Unfinished Chestplate.name=Bitmemiş Mavi Çelik Göğüs Zırhı
+item.Bronze Unfinished Chestplate.name=Bitmemiş Tunç Göğüs Zırhı
+item.Copper Unfinished Chestplate.name=Bitmemiş Bakır Göğüs Zırhı
+item.Red Steel Unfinished Chestplate.name=Bitmemiş Kımızı Çelik Göğüs Zırhı
+item.Steel Unfinished Chestplate.name=Bitmemiş Çelik Göğüs Zırhı
+item.Wrought Iron Unfinished Chestplate.name=Bitmemiş Demir Göğüs Zırhı
+item.Bismuth Bronze Chestplate.name=Bismut Tunç Göğüs Zırhı
+item.Black Bronze Chestplate.name=Kara Tunç Göğüs Zırhı
+item.Black Steel Chestplate.name=Kara Çelik Göğüs Zırhı
+item.Blue Steel Chestplate.name=Mavi Çelik Göğüs Zırhı
+item.Bronze Chestplate.name=Tunç Göğüs Zırhı
+item.Copper Chestplate.name=Bakır Göğüs Zırhı
+item.Red Steel Chestplate.name=Kırmızı Çelik Göğüs Zırhı
+item.Steel Chestplate.name=Çelik Göğüs Zırhı
+item.Wrought Iron Chestplate.name=Demir Göğüs Zırhı
+item.chestplateCloth.name=Deri Ceket
+
+#=== Greaves ===
+item.Bismuth Bronze Unfinished Greaves.name=Bitmemiş Bismut Tunç Altzırh
+item.Black Bronze Unfinished Greaves.name=Bitmemiş Kara Tunç Altzırh
+item.Black Steel Unfinished Greaves.name=Bitmemiş Kara Çelik Altzırh
+item.Blue Steel Unfinished Greaves.name=Bitmemiş Mavi Çelik Altzırh
+item.Bronze Unfinished Greaves.name=Bitmemiş Tunç Altzırh
+item.Copper Unfinished Greaves.name=Bitmemiş Bakır Altzırh
+item.Red Steel Unfinished Greaves.name=Bitmemiş Kırmızı Çelik Altzırh
+item.Steel Unfinished Greaves.name=Bitmemiş Çelik Altzırh
+item.Wrought Iron Unfinished Greaves.name=Bitmemiş Demiraltzırh
+item.Bismuth Bronze Greaves.name=Bismut Tunç Altzırh
+item.Black Bronze Greaves.name=Kara Tunç Altzırh
+item.Black Steel Greaves.name=Kara Çelik Altzırh
+item.Blue Steel Greaves.name=Mavi Çelik Altzırh
+item.Bronze Greaves.name=Tunç Altzırh
+item.Copper Greaves.name=Bakır Altzırh
+item.Red Steel Greaves.name=Kırmızı Çelik Altzırh
+item.Steel Greaves.name=Çelik Altzırh
+item.Wrought Iron Greaves.name=Demir Altzırh
+item.leggingsCloth.name=Deri Pantolon
+
+#=== Boots ===
+item.Bismuth Bronze Unfinished Boots.name=Bitmemiş Bismut Tunç Ayakkabı
+item.Black Bronze Unfinished Boots.name=Bitmemiş Kara Tunç Ayakkabı
+item.Black Steel Unfinished Boots.name=Bitmemiş Kara Çelik Ayakkabı
+item.Blue Steel Unfinished Boots.name=Bitmemiş Mavi Çelik Ayakkabı
+item.Bronze Unfinished Boots.name=Bitmemiş Tunç Ayakkabı
+item.Copper Unfinished Boots.name=Bitmemiş Bakır Ayakkabı
+item.Red Steel Unfinished Boots.name=Bitmemiş Kırmızı Çelik Ayakkabı
+item.Steel Unfinished Boots.name=Bitmemiş Çelik Ayakkabı
+item.Wrought Iron Unfinished Boots.name=Bitmemiş Demir Ayakkabı
+item.Bismuth Bronze Boots.name=Bismut Tunç Ayakkabı
+item.Black Bronze Boots.name=Kara Tunç Ayakkabı
+item.Black Steel Boots.name=Kara Çelik Ayakkabı
+item.Blue Steel Boots.name=Mavi Çelik Ayakkabı
+item.Bronze Boots.name=Tunç Ayakkabı
+item.Copper Boots.name=Bakır Ayakkabı
+item.Red Steel Boots.name=Kırmızı Çelik Ayakkabı
+item.Steel Boots.name=Çelik Ayakkabı
+item.Wrought Iron Boots.name=Demir Ayakkabı
+item.bootsCloth.name=Leather Ayakkabı
+
+#==========
+#= Metals =
+#==========
+item.Iron Bloom.name=Rafine Demir Kütlesi
+item.Raw Iron Bloom.name=Sade Demir Kütlesi
+tile.Bloom.name=Demir Kütlesi
+
+#== Unshaped ==
+item.Bismuth Bronze Unshaped.name=Şekilsiz: Kara Tunç
+item.Bismuth Unshaped.name=Şekilsiz: Bismut
+item.Black Bronze Unshaped.name=Şekilsiz: Kara Tunç
+item.Black Steel Unshaped.name=Şekilsiz: Kara Çelik
+item.Blue Steel Unshaped.name=Şekilsiz: Mavi Çelik
+item.Brass Unshaped.name=Şekilsiz: Pirinç
+item.Bronze Unshaped.name=Şekilsiz: Tunç
+item.Copper Unshaped.name=Şekilsiz: Bakır
+item.Gold Unshaped.name=Şekilsiz: Altın
+item.HC Black Steel Unshaped.name=Şekilsiz: Yüksek Karbon Kara Çelik
+item.HC Blue Steel Unshaped.name=Şekilsiz: Yüksek Karbon Mavi Çelik
+item.HC Red Steel Unshaped.name=Şekilsiz: Yüksek Karbon Kırmızı Çelik
+item.HC Steel Unshaped.name=Şekilsiz: Yüksek Karbon Çeilk
+item.Lead Unshaped.name=Şekilsiz: Kurşun
+item.Nickel Unshaped.name=Şekilsiz: Nikel
+item.Pig Iron Unshaped.name=Şekilsiz: Pik Demiri
+item.Platinum Unshaped.name=Şekilsiz: Platinyum
+item.Red Steel Unshaped.name=Şekilsiz: Kırmızı Çelik
+item.Rose Gold Unshaped.name=Şekilsiz: Gül Altın
+item.Silver Unshaped.name=Şekilsiz: Gümüş
+item.Steel Unshaped.name=Şekilsiz: Çelik
+item.Sterling Silver Unshaped.name=Şekilsiz: Som Gümüş
+item.Tin Unshaped.name=Şekilsiz: Kalay
+item.Unknown Unshaped.name=Şekilsiz: Bilinmeyen
+item.Weak Blue Steel Unshaped.name=Şekilsiz: Zayıf Mavi Çelik
+item.Weak Red Steel Unshaped.name=Şekilsiz: Zayıf Kırmızı Çelik
+item.Weak Steel Unshaped.name=Şekilsiz: Zayıf Çelik
+item.Wrought Iron Unshaped.name=Şekilsiz: Demir
+item.Zinc Unshaped.name=Şekilsiz: Zink
+
+#== Ingot ==
+item.Bismuth Bronze Ingot.name=Bismut Tunç Külçe
+item.Bismuth Ingot.name=Bismuth Külçe
+item.Black Bronze Ingot.name=Kara Tunç Külçe
+item.Black Steel Ingot.name=Kara Çelik Külçe
+item.Blue Steel Ingot.name=Mavi Çelik Külçe
+item.Brass Ingot.name=Pirinç Külçe
+item.Bronze Ingot.name=Tunç Külçe
+item.Copper Ingot.name=Bakır Külçe
+item.Gold Ingot.name=Altın Külçe
+item.HC Black Steel Ingot.name=Yüksek Karbon Kara Çelik Külçe
+item.HC Blue Steel Ingot.name=Yüksek Karbon Mavi Çelik Külçe
+item.HC Red Steel Ingot.name=Yüksek Karbon Kırmızı Çelik Külçe
+item.HC Steel Ingot.name=Yüksek Karbon Çelik Külçe
+item.Lead Ingot.name=Kurşun Külçe
+item.Nickel Ingot.name=Nikel Külçe
+item.Pig Iron Ingot.name=Pik Demiri Külçe
+item.Platinum Ingot.name=Platinyum Külçe
+item.Red Steel Ingot.name=Kırmızı Çelik Külçe
+item.Rose Gold Ingot.name=Gül Altın Külçe
+item.Silver Ingot.name=Gümüş Külçe
+item.Steel Ingot.name=Çelik Külçe
+item.Sterling Silver Ingot.name=Som Gümüş Külçe
+item.Tin Ingot.name=Kalay Külçe
+item.Unknown Ingot.name=Bilinmeyen Külçe
+item.Weak Blue Steel Ingot.name=Zayıf Mavi Çelik Külçe
+item.Weak Red Steel Ingot.name=Zayıf Kırmızı Çelik Külçe
+item.Weak Steel Ingot.name=Zayıf Çelik Külçe
+item.Wrought Iron Ingot.name=Demir Külçe
+item.Zinc Ingot.name=Zink Külçe
+
+#== Double Ingot ==
+item.Bismuth Bronze Double Ingot.name=Bismut Tunç Çift Külçe
+item.Bismuth Double Ingot.name=Bismuth Çift Külçe
+item.Black Bronze Double Ingot.name=Kara Tunç Çift Külçe
+item.Black Steel Double Ingot.name=Kara Çelik Çift Külçe
+item.Blue Steel Double Ingot.name=Mavi Çelik Çift Külçe
+item.Brass Double Ingot.name=Pirinç Çift Külçe
+item.Bronze Double Ingot.name=Tunç Çift Külçe
+item.Copper Double Ingot.name=Bakır Çift Külçe
+item.Gold Double Ingot.name=Altın Çift Külçe
+item.Lead Double Ingot.name=Kurşun Çift Külçe
+item.Nickel Double Ingot.name=Nikel Çift Külçe
+item.Pig Iron Double Ingot.name=Pik Demiri Çift Külçe
+item.Platinum Double Ingot.name=Platinyum Çift Külçe
+item.Red Steel Double Ingot.name=Kırmızı Çelik Çift Külçe
+item.Rose Gold Double Ingot.name=Gül Altın Çift Külçe
+item.Silver Double Ingot.name=Gümüş Çift Külçe
+item.Steel Double Ingot.name=Çelik Çift Külçe
+item.Sterling Silver Double Ingot.name=Som Gümüş Çift Külçe
+item.Tin Double Ingot.name=Kalay Çift Külçe
+item.Wrought Iron Double Ingot.name=Demir Çift Külçe
+item.Zinc Double Ingot.name=Zink Çift Külçe
+
+#== Sheet ==
+item.Bismuth Bronze Sheet.name=Bismut Tunç Levha
+item.Bismuth Sheet.name=Bismuth Levha
+item.Black Bronze Sheet.name=Kara Tunç Levha
+item.Black Steel Sheet.name=Kara Çelik Levha
+item.Blue Steel Sheet.name=Mavi Çelik Levha
+item.Brass Sheet.name=Pirinç Levha
+item.Bronze Sheet.name=Tunç Levha
+item.Copper Sheet.name=Bakır Levha
+item.Gold Sheet.name=Altın Levha
+item.Lead Sheet.name=Kurşun Levha
+item.Nickel Sheet.name=Nikel Levha
+item.Pig Iron Sheet.name=Pik Demiri Levha
+item.Platinum Sheet.name=Platinyum Levha
+item.Red Steel Sheet.name=Kırmızı Çelik Levha
+item.Rose Gold Sheet.name=Gül Altın Levha
+item.Silver Sheet.name=Gümüş Levha
+item.Steel Sheet.name=Çelik Levha
+item.Sterling Silver Sheet.name=Som Gümüş Levha
+item.Tin Sheet.name=Kalay Levha
+item.Wrought Iron Sheet.name=Demir Levha
+item.Zinc Sheet.name=Zink Levha
+
+#== DoubleSheet ==
+item.Bismuth Bronze Double Sheet.name=Bismut Tunç Çift Levha
+item.Bismuth Double Sheet.name=Bismuth Çift Levha
+item.Black Bronze Double Sheet.name=Kara Tunç Çift Levha
+item.Black Steel Double Sheet.name=Kara Çelik Çift Levha
+item.Blue Steel Double Sheet.name=Mavi Çelik Çift Levha
+item.Brass Double Sheet.name=Pirinç Çift Levha
+item.Bronze Double Sheet.name=Tunç Çift Levha
+item.Copper Double Sheet.name=Bakır Çift Levha
+item.Gold Double Sheet.name=Altın Çift Levha
+item.Lead Double Sheet.name=Kurşun Çift Levha
+item.Nickel Double Sheet.name=Nikel Çift Levha
+item.Pig Iron Double Sheet.name=Pik Demiri Çift Levha
+item.Platinum Double Sheet.name=Platinyum Çift Levha
+item.Red Steel Double Sheet.name=Kırmızı Çelik Çift Levha
+item.Rose Gold Double Sheet.name=Gül Altın Çift Levha
+item.Silver Double Sheet.name=Gümüş Çift Levha
+item.Steel Double Sheet.name=Çelik Çift Levha
+item.Sterling Silver Double Sheet.name=Som Gümüş Çift Levha
+item.Tin Double Sheet.name=Kalay Çift Levha
+item.Wrought Iron Double Sheet.name=Demir Çift Levha
+item.Zinc Double Sheet.name=Zink Çift Levha
+
+#== Misc ==
+item.Blueprint=Taslak
+
+#===========
+#= Devices =
+#===========
+tile.Bellows.name=Üfleç(Puf Puf)
+tile.Forge.name=Ocak
+tile.BlastFurnace.name=Çelik Fırını
+tile.SpawnMeter.name=Savunma Ölçer
+tile.Quern.name=Değirmen Zemini
+tile.EarlyBloomery.name=Demir Fırını
+tile.Molten.name=Erimiş Maden
+tile.Crucible.name=Metal Kazanı
+tile.NestBox.name=Tavuk Yatağı
+item.SluiceItem.name=Akıntı Süzgeci
+tile.Sluice.name=Akıntı Süzgeci
+tile.LeatherRack.name=Deri Soyma Zemini
+tile.FoodPrep.name=Yemek Hazırlama
+tile.MetalSheet.name=Metal Levha
+tile.ingotpile.name=Külçe Yığını
+tile.SmokeRack.name=Duman Bulutu
+
+#== Anvils ==
+tile.Anvil.Stone.name=Taş Örs
+tile.Anvil.Bismuth.name=Bizmut Örs
+tile.Anvil2.Bismuth Bronze.name=Bismut Tunç Örs
+tile.Anvil2.Black Bronze.name=Kara Tunç Örs
+tile.Anvil.Black Steel.name=Kara Çelik Örs
+tile.Anvil.Blue Steel.name=Mavi Çelik Örs
+tile.Anvil.Bronze.name=Tunç Örs
+tile.Anvil.Copper.name=Bakır Örs
+tile.Anvil.Red Steel.name=Kırmızı Çelik Örs
+tile.Anvil2.Rose Gold.name=Gül Altın Örs
+tile.Anvil.Steel.name=Çelik Örs
+tile.Anvil.Tin.name=Kalay Örs
+tile.Anvil.Wrought Iron.name=Demir Örs
+tile.Anvil.Zinc.name=Zink Örs
+
+#==================
+#= Terrain Blocks =
+#==================
+tile.Grass.name=Çimen
+tile.DryGrass.name=Kuru Çimen
+tile.PeatGrass.name=Bataklık Çimeni
+tile.ClayGrass.name=Kil Çimeni
+tile.dirt.name=Toprak
+tile.sand.name=Kum
+tile.Peat.name=Bataklık Kömürü
+tile.tilledSoil.name=Tarım Alanı
+tile.LooseRock.name=Döküntü
+tile.Ice.name=Buz
+
+#=================
+#= Miscellaneous =
+#=================
+#== Misc Items ==
+item.arrow.name=Ok
+item.book.name=Kitap
+item.stick.name=Çubuk
+item.coal.coal.name=Kömür
+item.coal.charcoal.name=Odunkömürü
+item.Fertilizer.name=Gübre
+item.Reeds.name=Sazlık
+
+item.Wooden Bucket Empty.name=Tahta Kova (Boş)
+item.Wooden Bucket Water.name=Tahta Kova (Temiz Su)
+item.Wooden Bucket Salt Water.name=Tahta Kova (Tuzlu Su)
+item.Wooden Bucket Milk.name=Tahta Kova (Süt)
+item.Lime Water.name=Kireçli Su
+
+item.Red Steel Bucket Empty.name=Kırmızı Çelik Kova (Boş)
+item.Red Steel Bucket Water.name=Kırmızı Çelik Kova (Temiz Su)
+item.Red Steel Bucket Salt Water.name=Kırmızı Çelik Kova (Tuzlu Su)
+item.Blue Steel Bucket Empty.name=Mavi Çelik Kova (Boş)
+item.Blue Steel Bucket Lava.name=Mavi Çelik Kova (Lava)
+
+item.GoldPan.name=Elek
+item.Gold Pan.Sand.name=Elek - Kum
+item.Gold Pan.Gravel.name=Elek - Çakıl
+item.Gold Pan.Clay.name=Elek - Kil
+item.Gold Pan.Dirt.name=Elek - Toprak
+item.Ink.name=İşaretleyici(Mürekkep)
+item.Firestarter.name=Ateş Başlatıcı
+
+item.Quern.name=El Değirmeni
+item.Blueprint.name=Taslak
+item.Nametag.name=İsim Etiketi
+item.WoolYarn.name=Yün İplik
+item.Wool.name=Yün
+item.WoolCloth.name=Yün Kumaş
+item.SilkCloth.name=İpek Kumaş
+item.BurlapCloth.name=Kuval Kumaş
+item.Mortar.name=Çimento
+item.Vinegar.name=Sirke
+
+item.Hide.small.name=Küçük Çiğ Deri
+item.Hide.medium.name=Normal Çiğ Deri
+item.Hide.large.name=Geniş Çiğ Deri
+item.Soaked Hide.small.name=Küçük Islatılmış Deri
+item.Soaked Hide.medium.name=Normal Islatılmış Deri
+item.Soaked Hide.large.name=Geniş Islatılmış Deri
+item.Scraped Hide.small.name=Küçük Kazınmış Deri
+item.Scraped Hide.medium.name=Normal Kazınmış Deri
+item.Scraped Hide.large.name=Geniş Kazınmış Deri
+item.Prep Hide.small.name=Küçük Hazırlanmış Deri
+item.Prep Hide.medium.name=Normal Hazırlanmış Deri
+item.Prep Hide.large.name=Geniş Hazırlanmış Deri
+item.Sheep Skin.small.name=Küçük Koyun Derisi
+item.Sheep Skin.medium.name=Normal Koyun Derisi
+item.Sheep Skin.large.name=Geniş Koyun Derisi
+item.TFC Leather.name=Deri
+item.Flat Leather.name=Düz Deri
+item.leather.name=Deri
+
+item.minecartChest.name=Sandıklı Vagon
+item.fishingRod.name=Olta
+
+item.Quiver.name=Ok Kılıfı
+item.Rope.name=Halat
+item.Mud Brick.name=Çamur Tuğla
+item.Wet Mud Brick.name=Islak Çamur Tuğla
+
+#======== Misc. Blocks========
+tile.Straw Hide Bed.name=Saman & Deri Yatak
+tile.StrawHideBed.name=Saman & Deri Yatak
+tile.customBed.sleep=Bu yatak uyumak için çok rahatsız§f (ölürseniz burada doğarsınız)
+tile.BasicPipe.name=Boru
+tile.ValvePipe.name=Vanalı Boru
+tile.Smoke.name=Duman
+tile.Torch.name=Meşale
+tile.Chest.name=Sandık
+tile.Bookshelf.name=Kitaplık
+tile.Workbench.name=Çalışma Masası
+tile.ButtonWood.name=Tahta Düğme
+tile.Firepit.name=Mangal
+tile.LogPile.name=Kütük Yığını
+tile.Charcoal.name=Odun Kömürü
+tile.StoneDetailed.name=Detaylı
+tile.stoneStairs.name=Merdiven
+tile.stoneSlabs.name=Basamak
+tile.stoneStalac.name=Stalactit
+tile.WoodConstruct.name=Tahta
+tile.MetalTrapDoor.name=Tuzak Kapı
+tile.Vessel.name=Büyük Vazo
+tile.Grill.name=Izgara
+
+tile.Sulfur.name=Sülfür
+tile.Reeds.name=Sazlık
+
+#= Misc. Plants =
+item.Sugarcane.name=Şekerkamışı
+item.Hemp.name=Kenevir
+item.Straw.name=Saman
+item.Jute.name=Jüt
+item.Jute Fibre.name=Jüt Lifleri
+
+tile.Fungi.mushroom_brown.name=Kahverengi Mantar
+tile.Fungi.mushroom_red.name=Kırmızı Mantar
+tile.Cactus.name=Kaktüs
+tile.Pumpkin.name=Balkabağı
+tile.Moss.name=Yosun
+tile.Thatch.name=Saman Yığını
+tile.Flora.Golden Rod.name=Yahudi otu
+tile.Flora.Cat Tails.name=Sukamışı
+
+item.Seeds Sugarcane.name=Şeker Kamışı Tohumları
+item.Seeds Hemp.name=Kenevir Tohumları
+item.Seeds Jute.name=Jüt Tohumları
+
+tile.TallGrass.tallgrass.name=Uzun Çimen
+tile.TallGrass.fern.name=Eğreltiotu
+tile.TallGrass.shortgrass.name=Kısa Çimen
+tile.LilyPad.name=Zambak
+tile.Vine.name=Sarmaşık
+tile.SeaGrassStill.name=Deniz Otu
+tile.SeaGrassIce.name=Donmuş Deniz Otu
+
+tile.Flowers.flower_nasturtium.name=Lâtin Çiçeği
+tile.Flowers.flower_dandelion.name=Karahindiba
+tile.Flowers.flower_meads_milkweed.name=Çayır Sütlü Otu
+tile.Flowers.flower_tropical_milkweed.name=Tropik Sütlü Otu
+tile.Flowers.flower_butterfly_milkweed.name=Kelebek Otu
+tile.Flowers.flower_calendula.name=Kandil Çiçeği
+tile.Flowers2.flower_rose.name=Haşhaş
+tile.Flowers2.flower_blue_orchid.name=Mavi Orkide
+tile.Flowers2.flower_allium.name=Allium
+tile.Flowers2.flower_houstonia.name=Houstonia
+tile.Flowers2.flower_tulip_red.name=Kırmızı Lale
+tile.Flowers2.flower_tulip_orange.name=Turuncu Lale
+tile.Flowers2.flower_tulip_white.name=Beyaz Lale
+tile.Flowers2.flower_tulip_pink.name=Pembe Lale
+tile.Flowers2.flower_oxeye_daisy.name=Papatya
+
+tile.SaltWater.name=Akan Tuzlu Su
+tile.SaltWaterStationary.name=Tuzlu Su
+tile.FreshWater.name=Akan Tatlı Su
+tile.FreshWaterStationary.name=Tatlı Su
+tile.HotWater.name=Akan Kaplıca Suyu
+tile.HotWaterStationary.name=Kaplıca Suyu
+tile.Lava.name=Akan Lav
+tile.LavaStationary.name=Lav
+
+#=======
+#= GUI =
+#=======
+
+#== Anvil GUI ==
+gui.Anvil.Plans=Planlar
+gui.Anvil.Weld=Birleştir
+
+gui.Anvil.LightHit=Hafif Vuruş
+gui.Anvil.MediumHit=Normal Vuruş
+gui.Anvil.HeavyHit=Ağır Vuruş
+gui.Anvil.Draw=Ger
+
+gui.Anvil.Punch=Dokun
+gui.Anvil.Bend=Bük
+gui.Anvil.Upset=Devir
+gui.Anvil.Shrink=Daralt
+
+gui.Anvil.Rules=Kurallar
+gui.Anvil.Rule1=Herhangi
+gui.Anvil.Rule2=Vur, Herhangi
+gui.Anvil.Rule3=Vur, Son
+gui.Anvil.Rule4=Vur, Sondan İkinci
+gui.Anvil.Rule5=Vur, Sondan Üçüncü
+gui.Anvil.Rule6=Vur, Son İki
+gui.Anvil.Rule7=Vur, Son Üç
+gui.Anvil.Rule8=Vur, Son Değil
+gui.Anvil.Rule9=Dokun, Herhangi
+gui.Anvil.Rule10=Dokun, Son
+gui.Anvil.Rule11=Dokun, Sondan İkinci
+gui.Anvil.Rule12=Dokun, Sondan Üçüncü
+gui.Anvil.Rule13=Dokun, Son İki
+gui.Anvil.Rule14=Dokun, Son Üç
+gui.Anvil.Rule15=Dokun, Son Değil
+gui.Anvil.Rule16=Daralt, Herhangi
+gui.Anvil.Rule17=Daralt, Son
+gui.Anvil.Rule18=Daralt, Sondan İkinci
+gui.Anvil.Rule19=Daralt, Sondan Üçüncü
+gui.Anvil.Rule20=Daralt, Son İki
+gui.Anvil.Rule21=Daralt, Son Üç
+gui.Anvil.Rule22=Daralt, Son Değil
+gui.Anvil.Rule23=Ger, Herhangi
+gui.Anvil.Rule24=Ger, Son
+gui.Anvil.Rule25=Ger, Sondan İkinci
+gui.Anvil.Rule26=Ger, Sondan Üçüncü
+gui.Anvil.Rule27=Ger, Son İki
+gui.Anvil.Rule28=Ger, Son Üç
+gui.Anvil.Rule29=Ger, Son Değil
+gui.Anvil.Rule30=Devir, Herhangi
+gui.Anvil.Rule31=Devir, Son
+gui.Anvil.Rule32=Devir, Sondan İkinci
+gui.Anvil.Rule33=Devir, Sondan Üçüncü
+gui.Anvil.Rule34=Devir, Sondan Son iki
+gui.Anvil.Rule35=Devir, Son Üç
+gui.Anvil.Rule36=Devir, Son Değil
+gui.Anvil.Rule37=Bük, Herhangi
+gui.Anvil.Rule38=Bük, Son
+gui.Anvil.Rule39=Bük, Sondan İkinci
+gui.Anvil.Rule40=Bük, Sondan Üçüncü
+gui.Anvil.Rule41=Bük, Son İki
+gui.Anvil.Rule42=Bük, Son Üç
+gui.Anvil.Rule43=Bük, Son Değil
+
+#== Tools/Weapons/Armor GUI ==
+gui.Armor.ForgedBy=Döven Kişi:
+gui.Armor.Crush=Ezme
+gui.Armor.Pierce=Delme
+gui.Armor.Slash=Koparma
+
+gui.Bow.Javelins=Mızraklar
+gui.Bow.Arrows=Oklar
+gui.Bow.ForgedBy=Yapan Kişi:
+
+gui.DamageType.Error=Hata: Kötü Hasar Tipi
+gui.DamageType.Crushing=Ezici
+gui.DamageType.Piercing=Delici
+gui.DamageType.Slashing=Koparıcı
+
+#== Barrel GUI ==
+gui.Barrel.Empty=Boş
+gui.Barrel.Seal=Kapat
+gui.Barrel.Unseal=Aç
+gui.Barrel.ToggleOff=Dışa
+gui.Barrel.ToggleOn=İçe
+gui.Barrel.SealedOn=Kapatılma Tarihi
+gui.Barrel.Solid=Katı Saklama
+gui.Barrel.Liquid=Sıvı Saklama
+gui.barrel.pickling=Turşu yapma
+gui.barrel.brining=Salamura yapma
+gui.barrel.preserving=Konserveleme
+
+#== Bloomery GUI ==
+gui.Bloomery.Charcoal=Odun Kömürü
+gui.Bloomery.Ore=Maden
+
+#== Calendar GUI ==
+gui.Calendar.Calendar=Takvim
+gui.Calendar.DateBioxx=Bioxx'un Doğum Günü
+gui.Calendar.DateDunk=Dunk'un Doğum Günü
+gui.Calendar.DateKitty=Kitty'nin Doğum Günü
+
+gui.Calendar.Hour=Saat
+gui.Calendar.WitchHour=Gece Yarısı Sonrası
+
+gui.Calendar.Day=Gün
+gui.Calendar.Sunday=Pazar
+gui.Calendar.Monday=Pazartesi
+gui.Calendar.Tuesday=Salı
+gui.Calendar.Wednesday=Çarşamba
+gui.Calendar.Thursday=Perşembe
+gui.Calendar.Friday=Cuma
+gui.Calendar.Saturday=Cumartesi
+
+gui.Calendar.Season=Mevsim
+gui.Calendar.EarlySpring=Erken Bahar
+gui.Calendar.Spring=Bahar
+gui.Calendar.LateSpring=Geç Bahar
+gui.Calendar.EarlySummer=Erken Yaz
+gui.Calendar.Summer=Yaz
+gui.Calendar.LateSummer=Geç Yaz
+gui.Calendar.EarlyAutumn=Erken Sonbahar
+gui.Calendar.Autumn=Sonbahar
+gui.Calendar.LateAutumn=Geç Sonbahar
+gui.Calendar.EarlyWinter=Erken Kış
+gui.Calendar.Winter=Kış
+gui.Calendar.LateWinter=Geç Kış
+
+gui.Calendar.Date=Tarih
+gui.Calendar.January=Ocak
+gui.Calendar.February=Şubat
+gui.Calendar.March=Mart
+gui.Calendar.April=Nisan
+gui.Calendar.May=Mayıs
+gui.Calendar.June=Haziran
+gui.Calendar.July=Temmuz
+gui.Calendar.August=Agustos
+gui.Calendar.September=Eylül
+gui.Calendar.October=Ekim
+gui.Calendar.November=Kasım
+gui.Calendar.December=Aralık
+
+gui.Calendar.1Hour=1 Saat
+gui.Calendar.1Day=1 Gün
+gui.Calendar.1Week=1 Hafta
+gui.Calendar.1Month=1 Ay
+gui.Calendar.1Year=1 Yıl
+
+#== Food GUI ==
+gui.FoodPrep.CreateMeal=Oluştur
+gui.FoodPrep.Effect=Etki
+gui.FoodPrep.Energy=Enerji
+gui.FoodPrep.Filling=Doldurma
+gui.FoodPrep.Power=Güç
+gui.FoodPrep.Sandwich=Ekmek Arası
+gui.FoodPrep.Salad=Salata
+
+#== Metals ==
+gui.metal.Bismuth=Bismut
+gui.metal.BismuthBronze=Bismut Tunç
+gui.metal.BlackBronze=Kara Tunç
+gui.metal.BlackSteel=Kara Çelik
+gui.metal.BlueSteel=Mavi Çelik
+gui.metal.Brass=Pirinç
+gui.metal.Bronze=Tunç
+gui.metal.Copper=Bakır
+gui.metal.Gold=Altın
+gui.metal.HCBlackSteel=Yüksek Karbon Kara Çelik
+gui.metal.HCBlueSteel=Yüksek Karbon Mavi Çelik
+gui.metal.HCRedSteel=Yüksek Karbon Kırmızı Çelik
+gui.metal.Lead=Kurşun
+gui.metal.Nickel=Nikel
+gui.metal.PigIron=Pik Demir
+gui.metal.Platinum=Platinyum
+gui.metal.RedSteel=Kırmızı Çelik
+gui.metal.RoseGold=Gül Altın
+gui.metal.Silver=Gümüş
+gui.metal.Steel=Çelik
+gui.metal.SterlingSilver=Som Gümüş
+gui.metal.Tin=Kalay
+gui.metal.Unknown=Bilinmeyen
+gui.metal.WeakBlueSteel=Zayıf Mavi Çelik
+gui.metal.WeakRedSteel=Zayıf Kırmızı Çelik
+gui.metal.WeakSteel=Zayıf Çelik
+gui.metal.WroughtIron=Demir
+gui.metal.Zinc=Zink
+
+#== Plans GUI ==
+gui.plans.axe=Balta
+gui.plans.bootsplate=Ayakkabı
+gui.plans.bucket=Kova
+gui.plans.chestplate=Üstzırh
+gui.plans.chisel=Keski
+gui.plans.hammer=Çekiç
+gui.plans.helmplate=Miğfer
+gui.plans.hoe=Çapa
+gui.plans.ingot=Külçe
+gui.plans.javelin=Mızrak
+gui.plans.knife=Bıçak
+gui.plans.legsplate=Altzırh
+gui.plans.mace=Topuz
+gui.plans.pickaxe=Balta
+gui.plans.propick=Keşifkazması
+gui.plans.refinebloom=Rafine Et
+gui.plans.saw=Testere
+gui.plans.scythe=Tırpan
+gui.plans.sheet=Levha
+gui.plans.shovel=Kürek
+gui.plans.splitbloom=Ayır
+gui.plans.sword=Kılıç
+gui.plans.tuyere=Tuyere
+gui.plans.grill=Izgara
+gui.plans.shears=Makas
+gui.plans.trapdoor=Tuzak Kapı
+
+#== Misc GUI ==
+gui.Blueprint=Taslak
+gui.Nametag=Ad Etiketi
+gui.fertilized=Gübrelenmiş
+gui.Inventory=Envanter
+gui.ClearSlot=Çıkış slotunu boşalt.
+gui.LogPile=Kütük Yığını
+gui.Output=Çıktı
+gui.done=Bitti
+gui.cancel=İptal
+gui.Sluice.Soil=Toprak
+gui.Sluice.Overworked=Aşırı Çalışılmış
+gui.Workbench.Crafting=Üretme
+gui.overburdened=*Aşırı Yüklenilmiş*
+
+gui.badnbt=Kötü Açıklama
+
+#== Tooltips ==
+gui.Advanced=Dahası
+gui.Shift=Shift
+gui.Hold=Tutma
+
+gui.slot=Slot
+gui.slot.back=Sırt
+
+gui.ShowHelp=§8Yardım: (§fShift §8Basılı Tut)
+gui.Help=§8Yardım:
+gui.Clay.Inst0=Şekillendirmek İçin 5 taneye Ters tıkla 
+gui.Knife.Inst0=Yemek yapma alanı yapmak İçin
+gui.Knife.Inst1=Bloğun üzerine Ters tıkla.
+gui.Leather.Inst0=Kesmek İçin bıçakla Ters Tıkla
+gui.LooseRock.Inst0=Taşı yontmak İçin 2 taşa elindeyken Ters tıkla
+gui.MeltedMetal.Inst0=Metali dokmek ya da karıştırmak İçin Ters tıkla
+gui.PotteryBase.Inst0=Objeyi Yere koymak için Eğil ve ters tıkla
+gui.PotteryVesselSmall.Inst0=Yada açmak için Ters tıkla
+gui.RawHide.Inst0=????
+gui.Barrel.MoreItems=§8Daha fazla... (&fShifte basılı tut)
+
+gui.Nutrient.A=Besin A
+gui.Nutrient.B=Besin B
+gui.Nutrient.C=Besin C
+
+gui.stage1=Aşama 1
+gui.stage2=Aşama 2
+
+gui.Size.Tiny=Minik
+gui.Size.VerySmall=Çok Küçük
+gui.Size.Small=Küçük
+gui.Size.Medium=Orta
+gui.Size.Large=Büyük
+gui.Size.VeryLarge=Çok Büyük
+gui.Size.Huge=Kocaman
+
+gui.Weight.Light=Hafif
+gui.Weight.Medium=Orta
+gui.Weight.Heavy=Ağır
+
+gui.Reach.Short=Kısa
+gui.Reach.Medium=Orta
+gui.Reach.Far=Uzak
+
+#== Food ==
+gui.food.fruit=Meyve
+gui.food.vegetable=Sebze
+gui.food.grain=Tahıl
+gui.food.protein=Protein
+gui.food.dairy=Süt Ürünü
+gui.food.amount=Miktar
+gui.food.decay=Çürüme
+gui.food.salted=Tuzlanmış
+
+gui.FoodHeat.Cold=Soğuk
+gui.FoodHeat.Warm=Sıcak
+
+gui.showtaste=§8Tadı: (Basılı Tut §Fl-Ctrl§8)
+gui.taste=§8Tadı:
+gui.taste.sweet=Tatlı
+gui.taste.sour=Ekşi
+gui.taste.salty=Tuzlu
+gui.taste.bitter=Acı
+gui.taste.savory=Kokulu
+
+gui.taste.novice.sweet1=Tatlı
+gui.taste.novice.sweet0=Tatlı Değil
+gui.taste.novice.sour1=Ekşi
+gui.taste.novice.sour0=Ekşi Değil
+gui.taste.novice.salty1=Tuzlu
+gui.taste.novice.salty0=Tuzlu Değil
+gui.taste.novice.bitter1=Acı
+gui.taste.novice.bitter0=Acı Değil
+gui.taste.novice.savory1=Kokulu Değil
+gui.taste.novice.savory0=Kokulu Değil
+
+gui.taste.adept.sweet0=Tatlı Değil
+gui.taste.adept.sweet1=Az Tatlı
+gui.taste.adept.sweet2=Tatlı
+gui.taste.adept.sweet3=Epey Tatlı
+gui.taste.adept.sweet4=Çok Tatlı
+gui.taste.adept.sweet5=Aşırı Tatlı
+gui.taste.adept.sour0=Ekşi Değil
+gui.taste.adept.sour1=Az  Ekşi
+gui.taste.adept.sour2=Ekşi
+gui.taste.adept.sour3=Epey Ekşi
+gui.taste.adept.sour4=Çok Ekşi
+gui.taste.adept.sour5=Aşırı Ekşi
+gui.taste.adept.salty0=Tuzlu Değil
+gui.taste.adept.salty1=Az Tuzlu
+gui.taste.adept.salty2=Tuzlu
+gui.taste.adept.salty3=Epey Tuzlu
+gui.taste.adept.salty4=Çok Tuzlu
+gui.taste.adept.salty5=Aşırı Tuzlu
+gui.taste.adept.bitter0=Acı Değil
+gui.taste.adept.bitter1=Az Acı
+gui.taste.adept.bitter2=Acı
+gui.taste.adept.bitter3=Epey Acı
+gui.taste.adept.bitter4=Çok Acı
+gui.taste.adept.bitter5=Aşırı Acı
+gui.taste.adept.savory0=Kokusuz
+gui.taste.adept.savory1=Az Kokulu
+gui.taste.adept.savory2=Kokulu
+gui.taste.adept.savory3=Epey Kokulu
+gui.taste.adept.savory4=Çok Kokulu
+gui.taste.adept.savory5=Aşırı Kokulu
+
+gui.taste.0=Değil
+gui.taste.1=Az
+gui.taste.2=Biraz
+gui.taste.3=Orta
+gui.taste.4=Mükemmel
+gui.taste.5=Biraz fazla
+gui.taste.6=Fazla
+gui.taste.7=Çok Fazla
+gui.taste.8=Aşırı
+
+word.pickled=Sirkelenmiş
+word.brined=Salamura
+word.cooked=Pişmiş
+word.salted=Tuzlanmış
+word.smoked=Tütsülenmiş
+word.dried=Kurutulmuş
+
+food.cooked.rare=Çiğ
+food.cooked.medrare=Az Çiğ
+food.cooked.med=Orta
+food.cooked.medwell=Orta iyi
+food.cooked.well=İyi Pişmiş
+food.cooked.0=Çok Hafif
+food.cooked.1=Hafif
+food.cooked.2=Orta
+food.cooked.3=Koyu
+food.cooked.4=Çok Koyu
+
+gui.Torch.CatchingFire=Yanmaya Başlıyor
+gui.Torch.Lit=Yanıyor
+
+gui.ItemHeat.Liquid=Sıvı
+gui.ItemHeat.Solidified=Donuk
+gui.ItemHeat.Caution=Uyarı!
+gui.ItemHeat.Warming=Isınıyor
+gui.ItemHeat.Hot=Sıcak
+gui.ItemHeat.VeryHot=Çok Sıcak
+gui.ItemHeat.FaintRed=Soluk Kırmızı
+gui.ItemHeat.DarkRed=Koyu Kırmızı
+gui.ItemHeat.BrightRed=Açık Kırmızı
+gui.ItemHeat.Orange=Turuncu
+gui.ItemHeat.Yellow=Sarı
+gui.ItemHeat.YellowWhite=Açık Sarı
+gui.ItemHeat.White=Beyaz
+gui.ItemHeat.BrilliantWhite=Parlak Beyaz
+
+gui.ingot.workable=Çalışılır
+gui.ingot.weldable=Birleştirilir
+gui.ingot.danger=**Tehlike**
+
+gui.milk.fresh=Taze
+gui.milk.old=Eski
+gui.milk.sour=Ekşi
+
+gui.units=Birimler
+
+#== WAILA ==
+gui.useless=
+gui.growth=
+gui.mature=
+gui.metal.Iron=
+
+#== Chat Messages ==
+gui.GoldPan.UseFull=Akan suyun altına tıklanmalı.
+gui.goldpan.overused=Bu alan çok çalışılmış. Maden bulunamaz.
+gui.seeds.failedTemp=
+gui.seeds.failedSun=
+
+gui.ProPick.Found=Bulundu:
+gui.ProPick.FoundTraces=İzi bulundu:
+gui.ProPick.FoundSmall=Kuçük örnek bulundu:
+gui.ProPick.FoundMedium=Orta örnek bulundu:
+gui.ProPick.FoundLarge=Büyük örnek bulundu:
+gui.ProPick.FoundVeryLarge=Çok büyük örnek bulundu:
+gui.ProPick.FoundNothing=Önemli bir şey bulunmadı.
+
+#== Creative Tabs ==
+itemGroup.TFCArmor=(TFC) Zırh
+itemGroup.TFCMaterials=(TFC) Metaryaller
+itemGroup.TFCMisc=(TFC) Çeşitli
+itemGroup.TFCPottery=(TFC) Tanak Çanak
+itemGroup.TFCTools=(TFC) Aletler
+itemGroup.TFCWeapons=(TFC) Silahlar
+itemGroup.TFCDevices=(TFC) Cihazlar
+itemGroup.TFCFoods=(TFC) Yemekle İlgili
+itemGroup.TFCBuilding=(TFC) Yapı Blokları
+itemGroup.TFCDecoration=(TFC) Dekorasyon Blokları
+
+#== Skill GUI ==
+skill.armorsmith=Zırh Demirciliği
+skill.gensmith=Genel Demircilik
+skill.toolsmith=Alet Demirciliği
+skill.weaponsmith=Silah Demirciliği
+skill.agriculture=Tarım
+skill.cooking=Yemek Pişirme
+skill.prospecting=Keşif Yapma (Maden)
+skill.butchering=Kasaplık
+gui.skill.novice=Acemi
+gui.skill.adept=Becerikli
+gui.skill.expert=Uzman
+gui.skill.master=Usta
+gui.skillpage=Yetenekler
+
+#==================
+#= Error Messages =
+#==================
+error.error=
+error.NBT=
+error.OreCFG=
+error.Contact=
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================

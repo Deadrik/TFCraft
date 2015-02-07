@@ -64,7 +64,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 	 * Used to back up the ContainerCreativeTFC's inventory slots before filling it with the player's inventory slots for
 	 * the inventory tab.
 	 */
-	private List backupContainerSlots;
+	private List<Slot> backupContainerSlots;
 	private Slot field_74235_v;
 	private boolean field_74234_w;
 	private CreativeCrafting field_82324_x;
@@ -492,7 +492,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 			if (this.backupContainerSlots == null)
 				this.backupContainerSlots = containercreative.inventorySlots;
 
-			containercreative.inventorySlots = new ArrayList();
+			containercreative.inventorySlots = new ArrayList<Slot>();
 			for (int j = 0; j < container.inventorySlots.size(); ++j)
 			{
 				SlotCreativeInventoryTFC slotcreativeinventory = new SlotCreativeInventoryTFC(this, (Slot)container.inventorySlots.get(j), j);

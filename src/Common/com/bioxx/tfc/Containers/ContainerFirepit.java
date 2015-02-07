@@ -8,8 +8,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Containers.Slots.SlotFirepit;
 import com.bioxx.tfc.Containers.Slots.SlotFirepitFuel;
 import com.bioxx.tfc.Containers.Slots.SlotFirepitIn;
@@ -19,6 +17,8 @@ import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.api.HeatRegistry;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 
 public class ContainerFirepit extends ContainerTFC
 {
@@ -62,7 +62,7 @@ public class ContainerFirepit extends ContainerTFC
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
 		Slot slotinput = (Slot)inventorySlots.get(0);
-		Slot[] slotoutput = {(Slot)inventorySlots.get(7), (Slot)inventorySlots.get(8)};
+		//Slot[] slotoutput = {(Slot)inventorySlots.get(7), (Slot)inventorySlots.get(8)};
 		Slot[] slotfuel = {(Slot)inventorySlots.get(1), (Slot)inventorySlots.get(3), (Slot)inventorySlots.get(4), (Slot)inventorySlots.get(5)};
 		HeatRegistry manager = HeatRegistry.getInstance();
 

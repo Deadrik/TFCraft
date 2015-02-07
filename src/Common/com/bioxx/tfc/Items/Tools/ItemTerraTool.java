@@ -3,6 +3,7 @@ package com.bioxx.tfc.Items.Tools;
 import java.util.List;
 import java.util.Set;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -26,9 +27,9 @@ import com.bioxx.tfc.api.Interfaces.ISize;
 
 public class ItemTerraTool extends ItemTool implements ISize
 {
-	private static boolean registeredGlobalTex = false;
+	//private static boolean registeredGlobalTex = false;
 
-	public ItemTerraTool(float par2, ToolMaterial par3, Set par4)
+	public ItemTerraTool(float par2, ToolMaterial par3, Set<Block> par4)
 	{
 		super(par2, par3, par4);
 		this.setCreativeTab(TFCTabs.TFCTools);
@@ -56,11 +57,11 @@ public class ItemTerraTool extends ItemTool implements ISize
 		}
 	}
 
-	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addItemInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 	}
 
-	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 	}
 

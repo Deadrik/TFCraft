@@ -3,13 +3,14 @@ package com.bioxx.tfc.Containers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bioxx.tfc.GUI.GuiContainerCreativeTFC;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.GUI.GuiContainerCreativeTFC;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -40,7 +41,8 @@ public class ContainerCreativeTFC extends Container
         this.scrollTo(0.0F);
     }
 
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer)
+    @Override
+	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
     {
         return true;
     }
@@ -84,12 +86,14 @@ public class ContainerCreativeTFC extends Container
         return this.itemList.size() > 45;
     }
 
-    protected void retrySlotClick(int par1, int par2, boolean par3, EntityPlayer par4EntityPlayer) {}
+    @Override
+	protected void retrySlotClick(int par1, int par2, boolean par3, EntityPlayer par4EntityPlayer) {}
 
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+    @Override
+	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
     {
         if (par2 >= this.inventorySlots.size() - 9 && par2 < this.inventorySlots.size())
         {
@@ -104,7 +108,8 @@ public class ContainerCreativeTFC extends Container
         return null;
     }
 
-    public boolean func_94530_a(ItemStack par1ItemStack, Slot par2Slot)
+    @Override
+	public boolean func_94530_a(ItemStack par1ItemStack, Slot par2Slot)
     {
         return par2Slot.yDisplayPosition > 90;
     }
@@ -113,7 +118,8 @@ public class ContainerCreativeTFC extends Container
      * Returns true if the player can "drag-spilt" items into this slot,. returns true by default. Called to check if
      * the slot can be added to a list of Slots to split the held ItemStack across.
      */
-    public boolean canDragIntoSlot(Slot par1Slot)
+    @Override
+	public boolean canDragIntoSlot(Slot par1Slot)
     {
         return par1Slot.inventory instanceof InventoryPlayer || par1Slot.yDisplayPosition > 90 && par1Slot.xDisplayPosition <= 162;
     }

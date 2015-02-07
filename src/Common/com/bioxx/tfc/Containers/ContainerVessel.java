@@ -2,12 +2,6 @@ package com.bioxx.tfc.Containers;
 
 import java.util.ArrayList;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
-import com.bioxx.tfc.Containers.Slots.SlotSizeSmallVessel;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Interfaces.IFood;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
@@ -19,25 +13,24 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
+import com.bioxx.tfc.Containers.Slots.SlotSizeSmallVessel;
+import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Interfaces.IFood;
+
 public class ContainerVessel extends ContainerTFC
 {
 	private World world;
-	private int posX;
-	private int posY;
-	private int posZ;
 	public InventoryCrafting containerInv = new InventoryCrafting(this, 2, 2);
-	private ItemStack bagStack = null;
-	ArrayList exceptions;
+	ArrayList<Item> exceptions;
 	
 	public ContainerVessel(InventoryPlayer playerinv, World world, int x, int y, int z)
 	{
 		this.player = playerinv.player;
 		this.world = world;
-		this.posX = x;
-		this.posY = y;
-		this.posZ = z;
 		bagsSlotNum = player.inventory.currentItem;
-		bagStack = player.inventory.getCurrentItem();
+		player.inventory.getCurrentItem();
 		exceptions = new ArrayList<Item>();
 		exceptions.add(TFCItems.BismuthIngot);
 		exceptions.add(TFCItems.BismuthBronzeIngot);

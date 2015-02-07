@@ -347,8 +347,8 @@ public class ModelDeer extends ModelBase
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		running = false;
 		running = ((EntityDeer)entity).getRunning();
-		int sex = 0;
-		long tempAge = 0;
+		//int sex = 0;
+		//long tempAge = 0;
 		float age = 1f - TFC_Core.getPercentGrown((IAnimal)entity);
 		/*if (entity instanceof EntityAnimalTFC){
 			tempAge = Math.min(TFC_Time.getTotalTicks()-((EntityAnimalTFC)entity).adultTime,0);

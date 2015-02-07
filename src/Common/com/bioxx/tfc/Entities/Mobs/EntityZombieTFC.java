@@ -2,6 +2,7 @@ package com.bioxx.tfc.Entities.Mobs;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
@@ -20,11 +21,12 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.living.ZombieEvent.SummonAidEvent;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
@@ -46,6 +48,20 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(TFC_MobData.ZombieDamage);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.ZombieHealth);//MaxHealth
+	}
+
+	@Override
+	public boolean getCanSpawnHere()
+	{
+		int x = MathHelper.floor_double(this.posX);
+		int y = MathHelper.floor_double(this.boundingBox.minY);
+		int z = MathHelper.floor_double(this.posZ);
+		Block b = this.worldObj.getBlock(x, y, z);
+
+		if(b == TFCBlocks.Leaves || b == TFCBlocks.Leaves2 || b == TFCBlocks.Thatch)
+			return false;
+
+		return super.getCanSpawnHere();
 	}
 
 	/**
@@ -93,7 +109,7 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 	@Override
 	protected void addRandomArmor()
 	{
-		super.addRandomArmor();
+		this.setCurrentItemOrArmor(0, null);
 		this.setCurrentItemOrArmor(1, null);
 		this.setCurrentItemOrArmor(2, null);
 		this.setCurrentItemOrArmor(3, null);

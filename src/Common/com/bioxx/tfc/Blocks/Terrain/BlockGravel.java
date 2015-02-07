@@ -22,6 +22,7 @@ import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Entities.EntityFallingBlockTFC;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
@@ -100,10 +101,26 @@ public class BlockGravel extends BlockTerra
 		Block block = world.getBlock(x, y, z);
 		if (world.isAirBlock(x, y, z))
 			return true;
+		if (block == Blocks.bedrock)
+			return false;
 		if (block == Blocks.fire)
 			return true;
+		if (block == TFCBlocks.TallGrass)
+			return true;
+		if (block == TFCBlocks.Torch)
+			return true;
+		if (block == TFCBlocks.SmokeRack)
+			return true;
+		if (block == TFCBlocks.ToolRack)
+			return true;
+		if (block == TFCBlocks.Charcoal)
+			return false;
+		if (!block.isNormalCube())
+			return true;
 		Material material = block.getMaterial();
-		return material == Material.water ? true : material == Material.lava;
+		if (material == Material.water || material == Material.lava)
+			return true;
+		return false;
 	}
 
 	@Override
@@ -186,7 +203,7 @@ public class BlockGravel extends BlockTerra
 
 			boolean isBelowAir = BlockCollapsable.canFallBelow(world, i, j-1, k);
 			byte count = 0;
-			List sides = new ArrayList<Integer>();
+			List<Integer> sides = new ArrayList<Integer>();
 
 			if(world.isAirBlock(i+1, j, k))
 			{

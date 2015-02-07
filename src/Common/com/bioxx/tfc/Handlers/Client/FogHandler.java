@@ -41,8 +41,8 @@ public class FogHandler
 			if(renderRange != Minecraft.getMinecraft().gameSettings.renderDistanceChunks || fogEnd < 16)
 			{
 				renderRange = Minecraft.getMinecraft().gameSettings.renderDistanceChunks;
-				boolean rainLast = false;
-				boolean snowLast = false;
+				//boolean rainLast = false;
+				//boolean snowLast = false;
 				fogStart = event.farPlaneDistance * 0.75f;
 				fogEnd = event.farPlaneDistance;
 			}
@@ -55,7 +55,7 @@ public class FogHandler
 				if(lerpTimer >= lerpTime)
 					shouldLerp = false;
 
-				double lerpMult = lerpTimer/lerpTime;
+				//double lerpMult = lerpTimer/lerpTime;
 
 				fogStart = lerp(fogStartBegin, fogStartFinish, lerpTime, lerpTimer);
 				fogEnd = lerp(fogEndBegin, fogEndFinish, lerpTime, lerpTimer);

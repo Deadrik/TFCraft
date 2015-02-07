@@ -4,9 +4,9 @@ import java.util.BitSet;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockDetailed;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class TEDetailed extends NetworkTileEntity {
 	public short TypeID = -1;
@@ -64,7 +64,7 @@ public class TEDetailed extends NetworkTileEntity {
 	}
 
 	public boolean isBlockEmpty() {
-		byte[] ba = data.toByteArray();
+		byte[] ba = toByteArray(data);
 		for (byte b : ba) {
 			if (b != -1)
 				return false;
@@ -121,7 +121,7 @@ public class TEDetailed extends NetworkTileEntity {
 		packetType = nbt.getByte("packetType");
 		if (packetType == TEDetailed.Packet_Update) {
 			int index = nbt.getInteger("index");
-			data.flip(index);
+			data.set(index, false);
 
 			for (int subX = 0; subX < 8; subX++) {
 				for (int subZ = 0; subZ < 8; subZ++) {

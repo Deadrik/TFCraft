@@ -17,9 +17,9 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Containers.ContainerChestTFC;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

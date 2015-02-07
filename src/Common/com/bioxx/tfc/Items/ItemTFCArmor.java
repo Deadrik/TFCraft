@@ -38,7 +38,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	public Armor ArmorType;
 	public IIcon overlayIcon;
 	private int thermal = 0;
-	private int type = 0;
+	//private int type = 0;
 	private int trueType = 0;
 
 	public ItemTFCArmor(Armor armor, int renderIndex, int armorSlot, int thermal, int type)
@@ -129,7 +129,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 
 		if (TFC_Core.showShiftInformation()) 
 		{
-			arraylist.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.Armor.Advanced") + ":");
+			arraylist.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.Advanced") + ":");
 			arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Armor.Pierce") + ": " + EnumChatFormatting.AQUA + ArmorType.getPiercingAR());
 			arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Armor.Slash") + ": " + EnumChatFormatting.AQUA + ArmorType.getSlashingAR());
 			arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Armor.Crush") + ": " + EnumChatFormatting.AQUA + ArmorType.getCrushingAR());
@@ -143,8 +143,8 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 			}
 		}
 		else
-			arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.Armor.Advanced") + ": (" + StatCollector.translateToLocal("gui.Armor.Hold") + " " + 
-					EnumChatFormatting.GRAY + StatCollector.translateToLocal("gui.Armor.Shift") + 
+			arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.Advanced") + ": (" + StatCollector.translateToLocal("gui.Hold") + " " + 
+					EnumChatFormatting.GRAY + StatCollector.translateToLocal("gui.Shift") + 
 					EnumChatFormatting.DARK_GRAY + ")");
 
 	}

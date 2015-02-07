@@ -4,7 +4,6 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
 
 import com.bioxx.tfc.Core.TFC_Climate;
 
@@ -18,16 +17,11 @@ public class GetBioTempCommand extends CommandBase{
 	@Override
 	public void processCommand(ICommandSender sender, String[] params) 
 	{
-
-		MinecraftServer var3 = MinecraftServer.getServer();
-		EntityPlayerMP var4;
-
-		var4 = getCommandSenderAsPlayer(sender);
-
+		//MinecraftServer var3 = MinecraftServer.getServer();
+		EntityPlayerMP var4 = getCommandSenderAsPlayer(sender);
 
 		float t = TFC_Climate.getBioTemperatureHeight(var4.worldObj, (int)var4.posX, (int)var4.posY, (int)var4.posZ);
 		throw new PlayerNotFoundException("BioTemp: "+t);
-
 	}
 
 	@Override

@@ -1,12 +1,13 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.Items.ItemOre;
-import com.bioxx.tfc.api.HeatRegistry;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.Items.ItemOre;
+import com.bioxx.tfc.api.HeatRegistry;
 
 public class SlotForge extends Slot
 {
@@ -15,18 +16,20 @@ public class SlotForge extends Slot
 		super(iinventory, i, j, k);
 	}
 
+	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
 		HeatRegistry manager = HeatRegistry.getInstance();
-		if(manager.findMatchingIndex(itemstack) == null)
+		if (manager.findMatchingIndex(itemstack) == null
+				|| itemstack.getItem() instanceof ItemOre
+				|| itemstack.getItem() instanceof ItemFoodTFC)
 			return false;
 
-		if(!(itemstack.getItem() instanceof ItemOre))
-			return true;
 
-		return false;
+		return true;
 	}
 
+	@Override
 	public int getSlotStackLimit()
 	{
 		return 1;

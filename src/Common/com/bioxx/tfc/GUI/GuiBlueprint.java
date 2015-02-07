@@ -1,9 +1,10 @@
 package com.bioxx.tfc.GUI;
 
-import com.bioxx.tfc.Handlers.Network.ItemNBTPacket;
-import com.bioxx.tfc.Items.ItemBlueprint;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,10 +20,8 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Handlers.Network.AbstractPacket;
-import com.bioxx.tfc.Handlers.Network.ItemRenamePacket;
-
-import java.util.Arrays;
-import java.util.LinkedList;
+import com.bioxx.tfc.Handlers.Network.ItemNBTPacket;
+import com.bioxx.tfc.Items.ItemBlueprint;
 
 public class GuiBlueprint extends GuiScreen
 {

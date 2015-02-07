@@ -19,12 +19,12 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomDoor;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLilyPad;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -212,7 +212,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	public void setBlockforLava(World world, int par2, int par3, int par4, int typeOfLava)
 	{
 		DataLayer rockLayer3 = TFC_Climate.getCacheManager(world).getRockLayerAt(par2, par3, 2);
-		int blockId = rockLayer3.data1;
+		//int blockId = rockLayer3.data1;
 		int meta = rockLayer3.data2;
 		Random rand = new Random();
 		boolean felsicLava = true;

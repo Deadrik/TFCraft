@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIEatGrass;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,16 +11,15 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityPheasantTFC extends EntityChickenTFC
 {
-	private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
+	//private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
 	private boolean wasRoped = false;
 
 	public EntityPheasantTFC(World par1World)
@@ -159,7 +157,8 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	
 	@Override
 	public boolean trySetName(String name, EntityPlayer player) {
-		if(this.checkFamiliarity(InteractionEnum.NAME, player) && !this.hasCustomNameTag()){
+		if (this.checkFamiliarity(InteractionEnum.NAME, player))
+		{
 			this.setCustomNameTag(name);
 			return true;
 		}
@@ -171,11 +170,7 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
 		boolean flag = false;
 		switch(interaction){
-		case MOUNT: flag = familiarity > 15;break;
-		case BREED: flag = familiarity > 20;break;
-		case SHEAR: flag = familiarity > 10;break;
-		case MILK: flag = familiarity > 10;break;
-		case NAME: flag = familiarity > 60;break;
+		case NAME: flag = familiarity > 40;break; // 5 Below adult cap since babies are impossible
 		default: break;
 		}
 		if(!flag && !player.worldObj.isRemote){

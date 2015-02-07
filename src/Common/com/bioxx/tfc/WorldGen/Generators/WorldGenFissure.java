@@ -10,12 +10,12 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Util.BlockMeta;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCBiome;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Enums.TFCDirection;
 import com.bioxx.tfc.api.Util.ByteCoord;
 import com.bioxx.tfc.api.Util.CollapseData;

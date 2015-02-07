@@ -3,7 +3,7 @@ package com.bioxx.tfc.WorldGen;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
-import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class DataLayer
 {

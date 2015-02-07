@@ -139,8 +139,7 @@ public class HeatIndex
 			boolean b = is.getItem().getHasSubtypes();
 			if(is.getItem() != input.getItem())
 				return false;
-			else if(is.getItem().getHasSubtypes() && 
-					(input.getItemDamage() != 32767 && 
+			else if (b && (input.getItemDamage() != 32767 &&
 					is.getItemDamage() != input.getItemDamage()))
 				return false;
 		}

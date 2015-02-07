@@ -22,7 +22,7 @@ public class TF_EntityLeashKnot extends ClassTransformer
 		mcpClassName = "net.minecraft.entity.EntityLeashKnot";
 		obfClassName = "su";
 
-		List nodes = new ArrayList<InstrSet>();
+		List<InstrSet> nodes = new ArrayList<InstrSet>();
 		InsnList list = new InsnList();
 		/*list.add(new VarInsnNode(Opcodes.ALOAD, 0));
 		list.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/entity/EntityLeashKnot", "worldobj", "Lnet/minecraft/world/World;"));

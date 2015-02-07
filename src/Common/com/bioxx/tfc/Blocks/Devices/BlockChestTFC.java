@@ -3,10 +3,12 @@ package com.bioxx.tfc.Blocks.Devices;
 import static net.minecraftforge.common.util.ForgeDirection.DOWN;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,22 +22,26 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.TileEntities.TEChest;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockChestTFC extends BlockTerraContainer
 {
+	private String[] woodNames;
+	
 	public BlockChestTFC()
 	{
 		super(Material.wood);
 		this.setCreativeTab(TFCTabs.TFCDecoration);
 		this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
+		woodNames = Global.WOOD_ALL;
 	}
 
 	@Override
@@ -47,16 +53,10 @@ public class BlockChestTFC extends BlockTerraContainer
 	@Override
 	public int getDamageValue(World world, int x, int y, int z)
 	{
-		try
-		{
-			TEChest chest = (TEChest) world.getTileEntity(x, y, z);
-			return chest.type;
-		}
-		catch( Exception E)
-		{
-			return 0;
-
-		}
+		TileEntity te = world.getTileEntity(x, y, z);
+		if (te != null && te instanceof TEChest)
+			return ((TEChest)te).type;
+		return 0;
 	}
 
 	/*@Override
@@ -80,13 +80,22 @@ public class BlockChestTFC extends BlockTerraContainer
 		return null;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) 
+	{
+		for(int i = 0; i < woodNames.length; i++)
+			par3List.add(new ItemStack(this, 1, i));
+	}
+	
 	@Override
 	public void onBlockPreDestroy(World world, int i, int j, int k, int meta) 
 	{
 		if(!world.isRemote)
 		{
-			TEChest te = (TEChest)world.getTileEntity(i, j, k);
-			EntityItem ei = new EntityItem(world, i, j, k, new ItemStack(TFCBlocks.Chest, 1, te.type));
+			int damageValue = getDamageValue(world, i, j, k);
+			EntityItem ei = new EntityItem(world, i, j, k, new ItemStack(TFCBlocks.Chest, 1, damageValue));
 			world.spawnEntityInWorld(ei);
 		}
 	}

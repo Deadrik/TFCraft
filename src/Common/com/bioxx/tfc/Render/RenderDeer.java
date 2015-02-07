@@ -11,25 +11,25 @@ import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Entities.Mobs.EntityDeer;
-import com.bioxx.tfc.Render.Models.ModelDeer;
 import com.bioxx.tfc.api.Entities.IAnimal;
 public class RenderDeer extends RenderLiving
 {
 	private static final ResourceLocation DeerTexture = new ResourceLocation(Reference.ModID, "textures/mob/deer.png");
 	private static final ResourceLocation FawnTexture = new ResourceLocation(Reference.ModID, "textures/mob/deer_fawn.png");
-	private float scale = 1.0f;
-	private ModelDeer modeldeer;
+
+	//private float scale = 1.0f;
+	//private ModelDeer modeldeer;
 
 	public RenderDeer (ModelBase par1ModelBase, float par2)
 	{
 		super (par1ModelBase, par2);
-		modeldeer = (ModelDeer) par1ModelBase;
+		//modeldeer = (ModelDeer) par1ModelBase;
 	}
 
 	public void renderDeer(EntityDeer par1EntityDeer, double par2, double par4, double par6, float par8, float par9)
 	{
 		super.doRender(par1EntityDeer, par2, par4, par6, par8, par9);
-		scale = par1EntityDeer.size_mod;
+		//scale = par1EntityDeer.size_mod;
 	}
 
 	protected void func_25006_b (EntityDeer entitydeer, float f)

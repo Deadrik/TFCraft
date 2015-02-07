@@ -37,8 +37,6 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -48,6 +46,8 @@ import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIPanicTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -55,7 +55,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 {
 	private static final IEntitySelector horseBreedingSelector = new EntityHorseBredSelector();
 	private static final IAttribute horseJumpStrength = (new RangedAttribute("horse.jumpStrengthTFC", 0.7D, 0.0D, 2.0D)).setDescription("Jump StrengthTFC").setShouldWatch(true);
-	private AnimalChest horseChest;
 
 	public int inLove;
 
@@ -131,6 +130,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.RiceGrain, false));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.BarleyGrain, false));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.OatGrain, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.MaizeEar, false));
 		this.tasks.addTask(6, this.aiEatGrass);
 		this.tasks.addTask(1, new EntityAIPanicTFC(this, 1.2D,true));
 		this.updateChestSaddle();
@@ -237,14 +237,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		else if(hunger < 144000 && super.isInLove()){
 			this.setInLove(false);
 		}
-	}
-
-	private float getPercentGrown(IAnimal animal)
-	{
-		float birth = animal.getBirthDay();
-		float time = (int) TFC_Time.getTotalDays();
-		float percent =(time - birth) / animal.getNumberOfDaysToAdult();
-		return Math.min(percent, 1f);
 	}
 
 	@Override
@@ -420,7 +412,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			player.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
 			if(getGender()==GenderEnum.FEMALE && pregnant)
 				player.addChatMessage(new ChatComponentText("Pregnant"));
-			//player.addChatMessage("12: " + dataWatcher.getWatchableObjectInt(12) + ", 15: " + dataWatcher.getWatchableObjectInt(15));
 		}
 
 		if (itemstack != null && this.isBreedingItemTFC(itemstack) && checkFamiliarity(InteractionEnum.BREED,player) &&this.familiarizedToday && this.getGrowingAge() == 0 && !super.isInLove())
@@ -571,7 +562,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		Entity entity = getLeashedToEntity();
 		if(entity!= null && entity instanceof EntityPlayer)
 		{
-			ItemStack item = ((EntityPlayer)entity).inventory.getCurrentItem();
+			//ItemStack item = ((EntityPlayer)entity).inventory.getCurrentItem();
 			if(entity.isSneaking())
 				super.clearLeashed(par1, true);
 		}
@@ -606,6 +597,15 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		float foodWeight = ageMod*(this.size_mod * 4000);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
 
 		TFC_Core.animalDropMeat(this, TFCItems.horseMeatRaw, foodWeight);
+	}
+
+	@Override
+	public void dropChests()
+	{
+		if (!this.worldObj.isRemote && this.isChested())
+		{
+			this.setChested(false);
+		}
 	}
 
 	private boolean func_110200_cJ()
@@ -1125,7 +1125,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = (6 * obedience_mod / aggression_mod);
-				if(this.isAdult() && (familiarity > 30 && familiarity < 80)){
+				if (this.isAdult() && familiarity > 35) // Adult caps at 35
+				{
 					//Nothing
 				}
 				else if(this.isAdult()){
@@ -1173,7 +1174,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 	@Override
 	public boolean trySetName(String name, EntityPlayer player) {
-		if(checkFamiliarity(InteractionEnum.NAME, player)&& !this.hasCustomNameTag()){
+		if (checkFamiliarity(InteractionEnum.NAME, player))
+		{
 			this.setCustomNameTag(name);
 			return true;
 		}
@@ -1187,9 +1189,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		switch(interaction){
 		case MOUNT: flag = familiarity > 15;break;
 		case BREED: flag = familiarity > 20;break;
-		case SHEAR: flag = familiarity > 10;break;
-		case MILK: flag = familiarity > 10;break;
-		case NAME: flag = familiarity > 20;break;
+		case NAME: flag = familiarity > 40;break; // 5 Higher than adult cap
 		default: break;
 		}
 		if(!flag && player != null && !player.worldObj.isRemote){

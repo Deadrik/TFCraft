@@ -6,11 +6,11 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TECrop;
 import com.bioxx.tfc.api.Food;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class CropIndex
@@ -38,7 +38,6 @@ public class CropIndex
 	public boolean needsSunlight = true;
 	public float waterUsageMult = 1;
 	public Item seedItem;
-	public boolean isMultiUseCrop = false;
 
 	public CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, Item seed)
 	{
@@ -64,12 +63,6 @@ public class CropIndex
 		this(ID,name,type,growth,stages,minGTemp,minATemp,seed);
 		nutrientExtraRestore = nutriRestore;
 		nutrientUsageMult = nutrientUsageMultiplier;
-	}
-
-	public CropIndex setMultiUse()
-	{
-		this.isMultiUseCrop = true;
-		return this;
 	}
 
 	public CropIndex setOutput1(Item o, float oAvg)
@@ -100,7 +93,7 @@ public class CropIndex
 	}  
 	public ItemStack getOutput1(TECrop crop)
 	{
-		if(Output1 != null)
+		if (Output1 != null && crop.growth >= numGrowthStages)
 		{
 			ItemStack is = new ItemStack(Output1);
 			Random R = new Random();
@@ -115,7 +108,7 @@ public class CropIndex
 	}
 	public ItemStack getOutput2(TECrop crop)
 	{
-		if(Output2 != null)
+		if (Output2 != null && crop.growth >= numGrowthStages)
 		{
 			ItemStack is = new ItemStack(Output2);
 			Random R = new Random();
@@ -132,7 +125,7 @@ public class CropIndex
 	private Random getGrowthRand(TECrop te)
 	{
 		Block farmBlock = te.getWorldObj().getBlock(te.xCoord, te.yCoord-1, te.zCoord);
-		Block underFarmBlock = te.getWorldObj().getBlock(te.xCoord, te.yCoord-2, te.zCoord);
+		//Block underFarmBlock = te.getWorldObj().getBlock(te.xCoord, te.yCoord-2, te.zCoord);
 		if(!TFC_Core.isSoil(farmBlock))
 		{
 			int soilType1 = (farmBlock == TFCBlocks.tilledSoil ? te.getWorldObj().getBlockMetadata(te.xCoord, te.yCoord-1, te.zCoord) : 
@@ -195,5 +188,9 @@ public class CropIndex
 		return new ItemStack(seedItem, 1);
 	}
 
+	public int getCycleType()
+	{
+		return cycleType;
+	}
 	public void onCropGrow(float stage){}
 }

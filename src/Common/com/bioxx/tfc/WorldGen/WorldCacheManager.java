@@ -205,10 +205,10 @@ public class WorldCacheManager
 		return cache.getDataLayerAt(indexLayers, par1, par2);
 	}
 
-	private DataLayer[] loadDataLayerGeneratorData(DataCache[] cache, DataLayer[] layers, GenLayerTFC[] indexLayers, int par2, int par3, int par4, int par5, int layer)
+	/*private DataLayer[] loadDataLayerGeneratorData(DataCache[] cache, DataLayer[] layers, GenLayerTFC[] indexLayers, int par2, int par3, int par4, int par5, int layer)
 	{
 		return this.getDataLayerAt(cache, layers, indexLayers, par2, par3, par4, par5, true, layer);
-	}
+	}*/
 
 	public DataLayer[] getDataLayerAt(DataCache[] cache, DataLayer[] layers, GenLayerTFC[] indexLayers, int x, int y, int width, int height, boolean par6, int layer)
 	{

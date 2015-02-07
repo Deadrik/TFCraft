@@ -10,7 +10,7 @@ public class TreeSchematic extends Schematic
 	private int growthStage;
 	private int logCount;
 
-	public TreeSchematic(String p) 
+	public TreeSchematic(String p)
 	{
 		super(p);
 	}

@@ -2,6 +2,7 @@ package com.bioxx.tfc.Blocks.Flora;
 
 import java.util.List;
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -15,16 +16,18 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.Schematic;
 import com.bioxx.tfc.TileEntities.TETreeLog;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TreeRegistry;
 import com.bioxx.tfc.api.TreeSchematic;
 import com.bioxx.tfc.api.Constant.Global;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -238,6 +241,12 @@ public class BlockLogNatural extends BlockTerraContainer
 					return ProcessTree(world, player, teLog.baseX, teLog.baseY, teLog.baseZ, dropItem);
 
 				TreeSchematic schem = TreeRegistry.instance.getTreeSchematic(teLog.treeID, teLog.schemIndex, teLog.growthStage);
+				if(schem == null)
+				{
+					//And this would be a BUG!
+					System.out.println("Tree schematic is NULL, this is a BUG!!! -> ID:" + teLog.treeID + "  Index:" + teLog.schemIndex + "  Stage:" + teLog.growthStage);
+					return false;
+				}
 
 				if(player != null && !player.capabilities.isCreativeMode)
 				{

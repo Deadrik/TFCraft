@@ -99,7 +99,7 @@ public class BlockWorldItem extends BlockTerraContainer
 			world.setBlockToAir(x, y, z);
 			return;
 		}
-		if (!world.getBlock(x, y - 1, z).isSideSolid(world, x, y, z, ForgeDirection.UP))
+		if (!world.getBlock(x, y - 1, z).isSideSolid(world, x, y - 1, z, ForgeDirection.UP))
 		{
 			world.setBlockToAir(x, y, z);
 			return;

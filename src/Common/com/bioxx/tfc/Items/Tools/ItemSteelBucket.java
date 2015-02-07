@@ -15,8 +15,8 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Util.Helper;
@@ -52,7 +52,7 @@ public class ItemSteelBucket extends ItemTerra
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
-		float var4 = 1.0F;
+		//float var4 = 1.0F;
 		boolean var11 = this.bucketContents == Blocks.air;
 		MovingObjectPosition mop = Helper.getMovingObjectPositionFromPlayer(world, player, var11);
 

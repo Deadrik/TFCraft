@@ -26,15 +26,15 @@ public class GuiContainerTFC extends GuiContainer
 	{
 		super(Container);
 		xSize = xsize;
-		ySize = ysize+PlayerInventory.invYSize;
+		ySize = ysize + PlayerInventory.invYSize;
 	}
 
 	protected void setDrawInventory(boolean b)
 	{
-		if(!drawInventory && b)
-			ySize +=PlayerInventory.invYSize;
-		else if(drawInventory && !b)
-			ySize -=PlayerInventory.invYSize;
+		if (!drawInventory && b)
+			ySize += PlayerInventory.invYSize;
+		else if (drawInventory && !b)
+			ySize -= PlayerInventory.invYSize;
 		drawInventory = b;
 	}
 
@@ -44,7 +44,7 @@ public class GuiContainerTFC extends GuiContainer
 		super.drawScreen(par1, par2, par3);
 		for (int j1 = 0; j1 < this.inventorySlots.inventorySlots.size(); ++j1)
 		{
-			Slot slot = (Slot)this.inventorySlots.inventorySlots.get(j1);
+			Slot slot = (Slot) this.inventorySlots.inventorySlots.get(j1);
 			if (this.isMouseOverSlot(slot, par1, par2) && slot.func_111238_b())
 				this.activeSlot = slot;
 		}
@@ -63,15 +63,28 @@ public class GuiContainerTFC extends GuiContainer
 
 	protected void drawGui(ResourceLocation rl)
 	{
-		if(rl != null)
+		if (rl != null)
 		{
 			bindTexture(rl);
 			guiLeft = (width - xSize) / 2;
 			guiTop = (height - ySize) / 2;
-			drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+			int height = drawInventory ? this.getShiftedYSize() : ySize;
+
+			drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, height);
+
+			drawForeground(guiLeft, guiTop);
 		}
-		if(drawInventory)
-			PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
+		if (drawInventory)
+			PlayerInventory.drawInventory(this, width, height, this.getShiftedYSize());
+	}
+
+	/*
+	 * Draws extra pieces on a GUI such as moving gauges and arrows.
+	 * Must be called before PlayerInventory.drawInventory() to avoid extra binding of textures.
+	 */
+	protected void drawForeground(int guiLeft, int guiTop)
+	{
+		// Intentionally blank.
 	}
 
 	protected boolean mouseInRegion(int x, int y, int width, int height, int mouseX, int mouseY)
@@ -87,10 +100,11 @@ public class GuiContainerTFC extends GuiContainer
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
-	public void drawTooltip(int mx, int my, String text) {
-		List list = new ArrayList();
+	public void drawTooltip(int mx, int my, String text)
+	{
+		List<String> list = new ArrayList<String>();
 		list.add(text);
-		this.drawHoveringText(list, mx, my+15, this.fontRendererObj);
+		this.drawHoveringText(list, mx, my + 15, this.fontRendererObj);
 		RenderHelper.disableStandardItemLighting();
 		GL11.glDisable(GL11.GL_LIGHTING);
 		//GL11.glDisable(GL11.GL_DEPTH_TEST);
@@ -109,7 +123,7 @@ public class GuiContainerTFC extends GuiContainer
 
 			while (iterator.hasNext())
 			{
-				String s = (String)iterator.next();
+				String s = (String) iterator.next();
 				int l = font.getStringWidth(s);
 				if (l > k)
 					k = l;
@@ -145,7 +159,7 @@ public class GuiContainerTFC extends GuiContainer
 
 			for (int k2 = 0; k2 < par1List.size(); ++k2)
 			{
-				String s1 = (String)par1List.get(k2);
+				String s1 = (String) par1List.get(k2);
 				font.drawStringWithShadow(s1, i1, j1, -1);
 
 				if (k2 == 0)
@@ -159,6 +173,11 @@ public class GuiContainerTFC extends GuiContainer
 			RenderHelper.enableStandardItemLighting();
 			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		}
+	}
+
+	protected int getShiftedYSize()
+	{
+		return this.ySize - PlayerInventory.invYSize;
 	}
 
 }

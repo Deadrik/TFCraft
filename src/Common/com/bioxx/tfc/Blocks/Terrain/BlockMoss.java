@@ -17,7 +17,6 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
-import com.bioxx.tfc.Core.TFCTabs;
 
 public class BlockMoss extends BlockTerra
 {
@@ -25,7 +24,7 @@ public class BlockMoss extends BlockTerra
 	{
 		super(Material.vine);
 		this.setTickRandomly(true);
-		this.setCreativeTab(TFCTabs.TFCDecoration);
+		this.setCreativeTab(null);
 	}
 
 	/**
@@ -242,9 +241,9 @@ public class BlockMoss extends BlockTerra
 	 * Ticks the block if it's been scheduled
 	 */
 	@Override
-	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
-		if (!par1World.isRemote && par1World.rand.nextInt(4) == 0)
+		if (!world.isRemote && world.rand.nextInt(4) == 0)
 		{
 			byte b0 = 4;
 			int l = 5;
@@ -254,13 +253,13 @@ public class BlockMoss extends BlockTerra
 			int k1;
 
 			label138:
-				for (i1 = par2 - b0; i1 <= par2 + b0; ++i1)
+				for (i1 = x - b0; i1 <= x + b0; ++i1)
 				{
-					for (j1 = par4 - b0; j1 <= par4 + b0; ++j1)
+					for (j1 = z - b0; j1 <= z + b0; ++j1)
 					{
-						for (k1 = par3 - 1; k1 <= par3 + 1; ++k1)
+						for (k1 = y - 1; k1 <= y + 1; ++k1)
 						{
-							if (par1World.getBlock(i1, k1, j1) == this)
+							if (world.getBlock(i1, k1, j1) == this)
 							{
 								--l;
 								if (l <= 0)
@@ -273,29 +272,29 @@ public class BlockMoss extends BlockTerra
 					}
 				}
 
-			i1 = par1World.getBlockMetadata(par2, par3, par4);
-			j1 = par1World.rand.nextInt(6);
+			i1 = world.getBlockMetadata(x, y, z);
+			j1 = world.rand.nextInt(6);
 			k1 = Direction.facingToDirection[j1];
 			int l1;
 			int i2;
 			Block block;
 
-			if (j1 == 1 && par3 < 255 && par1World.isAirBlock(par2, par3 + 1, par4))
+			if (j1 == 1 && y < 255 && world.isAirBlock(x, y + 1, z))
 			{
 				if (flag)
 					return;
 
-				l1 = par1World.rand.nextInt(16) & i1;
+				l1 = world.rand.nextInt(16) & i1;
 				if (l1 > 0)
 				{
 					for (i2 = 0; i2 <= 3; ++i2)
 					{
-						if (!this.canBePlacedOn(par1World.getBlock(par2 + Direction.offsetX[i2], par3 + 1, par4 + Direction.offsetZ[i2])))
+						if (!this.canBePlacedOn(world.getBlock(x + Direction.offsetX[i2], y + 1, z + Direction.offsetZ[i2])))
 							l1 &= ~(1 << i2);
 					}
 
 					if (l1 > 0)
-						par1World.setBlock(par2, par3 + 1, par4, this, l1, 2);
+						world.setBlock(x, y + 1, z, this, l1, 2);
 				}
 			}
 			else
@@ -306,45 +305,45 @@ public class BlockMoss extends BlockTerra
 					if (flag)
 						return;
 
-					block = par1World.getBlock(par2 + Direction.offsetX[k1], par3, par4 + Direction.offsetZ[k1]);
-					if (block != Blocks.air)
+					block = world.getBlock(x + Direction.offsetX[k1], y, z + Direction.offsetZ[k1]);
+					if (!block.isAir(world, x + Direction.offsetX[k1], y, z + Direction.offsetZ[k1]))
 					{
 						if (block.getMaterial().isOpaque() && block.renderAsNormalBlock())
-							par1World.setBlockMetadataWithNotify(par2, par3, par4, i1 | 1 << k1, 2);
+							world.setBlockMetadataWithNotify(x, y, z, i1 | 1 << k1, 2);
 					}
 					else
 					{
 						i2 = k1 + 1 & 3;
 						j2 = k1 + 3 & 3;
 
-						if ((i1 & 1 << i2) != 0 && this.canBePlacedOn(par1World.getBlock(par2 + Direction.offsetX[k1] + Direction.offsetX[i2], par3, par4 + Direction.offsetZ[k1] + Direction.offsetZ[i2])))
-							par1World.setBlock(par2 + Direction.offsetX[k1], par3, par4 + Direction.offsetZ[k1], this, 1 << i2, 2);
-						else if ((i1 & 1 << j2) != 0 && this.canBePlacedOn(par1World.getBlock(par2 + Direction.offsetX[k1] + Direction.offsetX[j2], par3, par4 + Direction.offsetZ[k1] + Direction.offsetZ[j2])))
-							par1World.setBlock(par2 + Direction.offsetX[k1], par3, par4 + Direction.offsetZ[k1], this, 1 << j2, 2);
-						else if ((i1 & 1 << i2) != 0 && par1World.isAirBlock(par2 + Direction.offsetX[k1] + Direction.offsetX[i2], par3, par4 + Direction.offsetZ[k1] + Direction.offsetZ[i2]) && this.canBePlacedOn(par1World.getBlock(par2 + Direction.offsetX[i2], par3, par4 + Direction.offsetZ[i2])))
-							par1World.setBlock(par2 + Direction.offsetX[k1] + Direction.offsetX[i2], par3, par4 + Direction.offsetZ[k1] + Direction.offsetZ[i2], this, 1 << (k1 + 2 & 3), 2);
-						else if ((i1 & 1 << j2) != 0 && par1World.isAirBlock(par2 + Direction.offsetX[k1] + Direction.offsetX[j2], par3, par4 + Direction.offsetZ[k1] + Direction.offsetZ[j2]) && this.canBePlacedOn(par1World.getBlock(par2 + Direction.offsetX[j2], par3, par4 + Direction.offsetZ[j2])))
-							par1World.setBlock(par2 + Direction.offsetX[k1] + Direction.offsetX[j2], par3, par4 + Direction.offsetZ[k1] + Direction.offsetZ[j2], this, 1 << (k1 + 2 & 3), 2);
-						else if (this.canBePlacedOn(par1World.getBlock(par2 + Direction.offsetX[k1], par3 + 1, par4 + Direction.offsetZ[k1])))
-							par1World.setBlock(par2 + Direction.offsetX[k1], par3, par4 + Direction.offsetZ[k1], this, 0, 2);
+						if ((i1 & 1 << i2) != 0 && this.canBePlacedOn(world.getBlock(x + Direction.offsetX[k1] + Direction.offsetX[i2], y, z + Direction.offsetZ[k1] + Direction.offsetZ[i2])))
+							world.setBlock(x + Direction.offsetX[k1], y, z + Direction.offsetZ[k1], this, 1 << i2, 2);
+						else if ((i1 & 1 << j2) != 0 && this.canBePlacedOn(world.getBlock(x + Direction.offsetX[k1] + Direction.offsetX[j2], y, z + Direction.offsetZ[k1] + Direction.offsetZ[j2])))
+							world.setBlock(x + Direction.offsetX[k1], y, z + Direction.offsetZ[k1], this, 1 << j2, 2);
+						else if ((i1 & 1 << i2) != 0 && world.isAirBlock(x + Direction.offsetX[k1] + Direction.offsetX[i2], y, z + Direction.offsetZ[k1] + Direction.offsetZ[i2]) && this.canBePlacedOn(world.getBlock(x + Direction.offsetX[i2], y, z + Direction.offsetZ[i2])))
+							world.setBlock(x + Direction.offsetX[k1] + Direction.offsetX[i2], y, z + Direction.offsetZ[k1] + Direction.offsetZ[i2], this, 1 << (k1 + 2 & 3), 2);
+						else if ((i1 & 1 << j2) != 0 && world.isAirBlock(x + Direction.offsetX[k1] + Direction.offsetX[j2], y, z + Direction.offsetZ[k1] + Direction.offsetZ[j2]) && this.canBePlacedOn(world.getBlock(x + Direction.offsetX[j2], y, z + Direction.offsetZ[j2])))
+							world.setBlock(x + Direction.offsetX[k1] + Direction.offsetX[j2], y, z + Direction.offsetZ[k1] + Direction.offsetZ[j2], this, 1 << (k1 + 2 & 3), 2);
+						else if (this.canBePlacedOn(world.getBlock(x + Direction.offsetX[k1], y + 1, z + Direction.offsetZ[k1])))
+							world.setBlock(x + Direction.offsetX[k1], y, z + Direction.offsetZ[k1], this, 0, 2);
 					}
 				}
-				else if (par3 > 1)
+				else if (y > 1)
 				{
-					block = par1World.getBlock(par2, par3 - 1, par4);
+					block = world.getBlock(x, y - 1, z);
 
-					if (block == Blocks.air)
+					if (block.isAir(world, x, y - 1, z))
 					{
-						i2 = par1World.rand.nextInt(16) & i1;
+						i2 = world.rand.nextInt(16) & i1;
 						if (i2 > 0)
-							par1World.setBlock(par2, par3 - 1, par4, this, i2, 2);
+							world.setBlock(x, y - 1, z, this, i2, 2);
 					}
 					else if (block == this)
 					{
-						i2 = par1World.rand.nextInt(16) & i1;
-						j2 = par1World.getBlockMetadata(par2, par3 - 1, par4);
+						i2 = world.rand.nextInt(16) & i1;
+						j2 = world.getBlockMetadata(x, y - 1, z);
 						if (j2 != (j2 | i2))
-							par1World.setBlockMetadataWithNotify(par2, par3 - 1, par4, j2 | i2, 2);
+							world.setBlockMetadataWithNotify(x, y - 1, z, j2 | i2, 2);
 					}
 				}
 			}

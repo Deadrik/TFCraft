@@ -4,7 +4,6 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
@@ -65,7 +64,8 @@ public class ModelHorseTFC extends ModelBase
     private ModelRenderer horseRightFaceMetal;
     private ModelRenderer horseLeftRein;
     private ModelRenderer horseRightRein;
-    private static final String __OBFID = "CL_00000846";
+
+	// private static final String __OBFID = "CL_00000846";
 
     public ModelHorseTFC()
     {
@@ -212,11 +212,12 @@ public class ModelHorseTFC extends ModelBase
     /**
      * Sets the models various rotation angles then renders the model.
      */
-    public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_)
+    @Override
+	public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_)
     {
         EntityHorseTFC entityhorse = (EntityHorseTFC)p_78088_1_;
         int i = entityhorse.getHorseType();
-        float f6 = entityhorse.getGrassEatingAmount(0.0F);
+		//float f6 = entityhorse.getGrassEatingAmount(0.0F);
         boolean flag = entityhorse.isAdultHorse();
         boolean flag1 = flag && entityhorse.isHorseSaddled();
         boolean flag2 = flag && entityhorse.isChested();
@@ -247,7 +248,7 @@ public class ModelHorseTFC extends ModelBase
         float percent = TFC_Core.getPercentGrown((IAnimal)p_78088_1_);
 		float ageScale = 2.0F-percent;
 		float ageHeadScale = (float)Math.pow(1/ageScale,0.66);
-		float offset = 1.4f - percent;
+		//float offset = 1.4f - percent;
 
 		GL11.glPushMatrix();
 		GL11.glTranslatef (0.0F, (0.3f-(0.3f*percent)), 0f);
@@ -375,7 +376,8 @@ public class ModelHorseTFC extends ModelBase
      * Used for easily adding entity-dependent animations. The second and third float params here are the same second
      * and third as in the setRotationAngles method.
      */
-    public void setLivingAnimations(EntityLivingBase p_78086_1_, float p_78086_2_, float p_78086_3_, float p_78086_4_)
+    @Override
+	public void setLivingAnimations(EntityLivingBase p_78086_1_, float p_78086_2_, float p_78086_3_, float p_78086_4_)
     {
         super.setLivingAnimations(p_78086_1_, p_78086_2_, p_78086_3_, p_78086_4_);
         float f3 = this.updateHorseRotation(p_78086_1_.prevRenderYawOffset, p_78086_1_.renderYawOffset, p_78086_4_);
@@ -463,8 +465,8 @@ public class ModelHorseTFC extends ModelBase
         this.muleLeftChest.rotateAngleX = f14 / 5.0F;
         this.muleRightChest.rotateAngleX = -f14 / 5.0F;
         float f15 = ((float)Math.PI / 2F);
-        float f16 = ((float)Math.PI * 3F / 2F);
-        float f17 = -1.0471976F;
+		//float f16 = ((float)Math.PI * 3F / 2F);
+		//float f17 = -1.0471976F;
         float f18 = 0.2617994F * f9;
         float f19 = MathHelper.cos(f12 * 0.6F + (float)Math.PI);
         this.frontLeftLeg.rotationPointY = -2.0F * f9 + 9.0F * f10;

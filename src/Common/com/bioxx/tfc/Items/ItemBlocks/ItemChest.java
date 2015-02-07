@@ -17,6 +17,8 @@ public class ItemChest extends ItemTerraBlock
 	public ItemChest(Block par1) 
 	{
 		super(par1);
+		setHasSubtypes(true);
+		this.MetaNames = Global.WOOD_ALL;
 	}
 
 	@Override

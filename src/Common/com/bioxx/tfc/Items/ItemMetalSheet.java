@@ -2,15 +2,14 @@ package com.bioxx.tfc.Items;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
 import com.bioxx.tfc.api.Metal;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
@@ -144,7 +143,7 @@ public class ItemMetalSheet extends ItemTerra implements ISmeltable
 	public boolean isValid(World world, int i, int j, int k)
 	{
 		Block bid = world.getBlock(i, j, k);
-		if(bid == Blocks.air)
+		if (bid.isAir(world, i, j, k))
 			return true;
 		if(bid == TFCBlocks.MetalSheet)
 		{

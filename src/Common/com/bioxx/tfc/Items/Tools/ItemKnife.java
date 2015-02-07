@@ -10,10 +10,10 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -73,7 +73,7 @@ public class ItemKnife extends ItemWeapon implements IKnife
 	}
 
 	@Override
-	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 		if (TFC_Core.showShiftInformation()) 
 		{

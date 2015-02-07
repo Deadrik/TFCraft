@@ -14,16 +14,16 @@ public class RenderCrucible  implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int i, int j, int k, Block block, int modelId, RenderBlocks renderer)
 	{
-		int meta = world.getBlockMetadata(i, j, k);
+		//int meta = world.getBlockMetadata(i, j, k);
 		float s0 = 0f;
 		float s1 = 1f/16f;
-		float s2 = 2f/16f;
+		//float s2 = 2f/16f;
 		float s3 = 3f/16f;
-		float s12 = 12f/16f;
+		//float s12 = 12f/16f;
 		float s13 = 13f/16f;
-		float s14 = 14f/16f;
+		//float s14 = 14f/16f;
 		float s15 = 15f/16f;
-		float s16 = 1f;
+		//float s16 = 1f;
 		renderer.setRenderBounds(s1, s0, s1, s15, s1, s15);
 		renderer.renderStandardBlock(block, i, j, k);
 		renderer.setRenderBounds(s1, s1, s3, s3, s15, s13);
@@ -42,10 +42,10 @@ public class RenderCrucible  implements ISimpleBlockRenderingHandler
 	{
 		float s0 = 0f;
 		float s1 = 1f/16f;
-		float s2 = 2f/16f;
+		//float s2 = 2f/16f;
 		float s3 = 3f/16f;
 		float s13 = 13f/16f;
-		float s14 = 14f/16f;
+		//float s14 = 14f/16f;
 		float s15 = 15f/16f;
 
 		renderer.setRenderBounds(s1, s0, s1, s15, s1, s15);

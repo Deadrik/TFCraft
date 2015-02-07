@@ -87,6 +87,8 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 		return n;
 	}
 
+	@SuppressWarnings("rawtypes")
+	// Storing both Strings and Integers in the same ArrayList
 	public ArrayList[] getQuiverJavelinTypes(ItemStack item)
 	{
 		ArrayList[] pair = new ArrayList[2];
@@ -119,12 +121,12 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 
 		if (TFC_Core.showShiftInformation())
 		{
-			//arraylist.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.Armor.Advanced") + ":");
+			//arraylist.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.Advanced") + ":");
 			//arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Armor.Pierce") + ": " + EnumChatFormatting.AQUA + ArmorType.getPiercingAR());
 			//arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Armor.Slash") + ": " + EnumChatFormatting.AQUA + ArmorType.getSlashingAR());
 			//arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Armor.Crush") + ": " + EnumChatFormatting.AQUA + ArmorType.getCrushingAR());
 			//arraylist.add("");
-			arraylist.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.Bow.Advanced") + ":");
+			arraylist.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.Advanced") + ":");
 			arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Bow.Arrows") + ": " + EnumChatFormatting.YELLOW + getQuiverArrows(is));
 			arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Bow.Javelins") + ": " + EnumChatFormatting.YELLOW + getQuiverJavelins(is));
 			ArrayList[] javData = getQuiverJavelinTypes(is);
@@ -142,8 +144,7 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 			}
 		}
 		else
-			arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.Armor.Advanced") + ": (" + StatCollector.translateToLocal("gui.Armor.Hold") + " " + 
-					EnumChatFormatting.GRAY + StatCollector.translateToLocal("gui.Armor.Shift") + 
+			arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.Advanced") + ": (" + StatCollector.translateToLocal("gui.Hold") + " " + EnumChatFormatting.GRAY + StatCollector.translateToLocal("gui.Shift") +
 					EnumChatFormatting.DARK_GRAY + ")");
 
 	}
@@ -249,6 +250,18 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 
 	@Override
 	public boolean getTooHeavyToCarry(ItemStack is)
+	{
+		return false;
+	}
+
+	@Override
+	public int getItemStackLimit()
+	{
+		return 1;
+	}
+
+	@Override
+	public boolean canStack()
 	{
 		return false;
 	}

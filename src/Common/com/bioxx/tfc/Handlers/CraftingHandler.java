@@ -7,8 +7,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.TFC_Achievements;
@@ -24,6 +22,8 @@ import com.bioxx.tfc.Items.ItemBlocks.ItemAnvil2;
 import com.bioxx.tfc.Items.Tools.ItemCustomPickaxe;
 import com.bioxx.tfc.Items.Tools.ItemCustomSaw;
 import com.bioxx.tfc.Items.Tools.ItemMiscToolHead;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 
@@ -41,7 +41,7 @@ public class CraftingHandler
 		int isDmg = e.crafting.getItemDamage();
 		IInventory iinventory = e.craftMatrix;
 
-		int index = 0;
+		//int index = 0;
 		if(iinventory != null)
 		{
 			if(item == TFCItems.StoneBrick)
@@ -192,17 +192,12 @@ public class CraftingHandler
 			{
 				if(iinventory.getStackInSlot(i) == null)
 					continue;
-				/*if(iinventory.getStackInSlot(i).getItem() == TFCItems.WoodenBucketWater)
-				{
-					if(!e.player.inventory.addItemStackToInventory(new ItemStack(TFCItems.WoodenBucketEmpty,1)))
-						e.player.dropItem(TFCItems.WoodenBucketEmpty, 1);
-				}
-								else if(iinventory.getStackInSlot(i).getItem() == TFCItems.RedSteelBucketWater)
-									if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketEmpty,1)))
-										player.dropItem(TFCItems.RedSteelBucketEmpty, 1);*/
 
+				// Only transfer the tag when making something out of a tool head. Don't transfer when crafting things with the completed tool.
+				// Note: If crafting recipes with armor or completed tools to further refine them are ever added, the instanceof will need to be updated. -Kitty
 				if(iinventory.getStackInSlot(i).hasTagCompound() && 
-						iinventory.getStackInSlot(i).getTagCompound().hasKey("craftingTag"))
+						iinventory.getStackInSlot(i).getTagCompound().hasKey("craftingTag") &&
+						iinventory.getStackInSlot(i).getItem() instanceof ItemMiscToolHead)
 				{
 					AnvilManager.setCraftTag(itemstack, AnvilManager.getCraftTag(iinventory.getStackInSlot(i)));
 				}

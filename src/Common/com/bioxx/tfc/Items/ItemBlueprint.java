@@ -9,12 +9,12 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.TileEntities.TEDetailed;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class ItemBlueprint extends ItemTerra
@@ -101,11 +101,11 @@ public class ItemBlueprint extends ItemTerra
 
 			TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 			BitSet blueprintData = TEDetailed.turnCube(
-							stack.stackTagCompound.getByteArray(tag_data),
-							stack.stackTagCompound.getInteger(tag_x_angle),
-							stack.stackTagCompound.getInteger(tag_y_angle),
-							stack.stackTagCompound.getInteger(tag_z_angle)
-			);
+					stack.stackTagCompound.getByteArray(tag_data),
+					stack.stackTagCompound.getInteger(tag_x_angle),
+					stack.stackTagCompound.getInteger(tag_y_angle),
+					stack.stackTagCompound.getInteger(tag_z_angle)
+					);
 
 			for(int c = 0; c < 512; c++)
 				if(te.data.get(c) && !blueprintData.get(c))
@@ -116,11 +116,6 @@ public class ItemBlueprint extends ItemTerra
 					{
 						if(player.inventory.mainInventory[hasChisel] != null)
 							player.inventory.mainInventory[hasChisel].damageItem(1, player);
-						else
-							break;
-
-						if(player.inventory.mainInventory[hasHammer] != null)
-							player.inventory.mainInventory[hasHammer].damageItem(1, player);
 						else
 							break;
 					}

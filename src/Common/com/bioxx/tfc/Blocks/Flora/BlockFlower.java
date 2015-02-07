@@ -52,6 +52,7 @@ public class BlockFlower extends BlockTerra
 		return false;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SideOnly(Side.CLIENT)
 	@Override
 	/**

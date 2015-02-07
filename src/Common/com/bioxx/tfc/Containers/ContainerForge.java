@@ -7,28 +7,27 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Containers.Slots.SlotForge;
 import com.bioxx.tfc.Containers.Slots.SlotForgeFuel;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.api.HeatRegistry;
+import com.bioxx.tfc.api.TFCItems;
 
 public class ContainerForge extends ContainerTFC
 {
 	private TEForge forge;
-	private int coolTime;
-	private int freezeTime;
-	private int itemFreezeTime;
+	//private int coolTime;
+	//private int freezeTime;
+	//private int itemFreezeTime;
 	private float firetemp;
 
 	public ContainerForge(InventoryPlayer inventoryplayer, TEForge tileentityforge, World world, int x, int y, int z)
 	{
 		forge = tileentityforge;
-		coolTime = 0;
-		freezeTime = 0;
-		itemFreezeTime = 0;
+		//coolTime = 0;
+		//freezeTime = 0;
+		//itemFreezeTime = 0;
 
 		//Input slot
 		addSlotToContainer(new SlotForge(inventoryplayer.player,tileentityforge, 0, 44, 8));
@@ -118,7 +117,7 @@ public class ContainerForge extends ContainerTFC
 						}
 					}
 				}
-				else if(!(slotStack.getItem() instanceof ItemOre) && manager.findMatchingIndex(slotStack) != null)//Try to add the item to the input slots
+				else if (slotinput[0].isItemValid(slotStack))//Try to add the item to the input slots
 				{
 					int j = 0;
 					while(j < 5)

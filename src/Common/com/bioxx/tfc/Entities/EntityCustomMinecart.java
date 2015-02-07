@@ -1,6 +1,6 @@
 package com.bioxx.tfc.Entities;
 
-import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityMinecartChest;

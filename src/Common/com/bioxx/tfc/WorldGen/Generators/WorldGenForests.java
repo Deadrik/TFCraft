@@ -17,7 +17,7 @@ import cpw.mods.fml.common.IWorldGenerator;
 public class WorldGenForests implements IWorldGenerator
 {
 	/** The number of blocks to generate. */
-	private int numberOfBlocks;
+	//private int numberOfBlocks;
 
 	WorldGenerator gen0;
 	WorldGenerator gen1;

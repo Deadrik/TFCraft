@@ -4,8 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TileEntities.TileEntityWoodConstruct;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -26,7 +26,7 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 	private void renderOld(int i, int j, int k, Block block, RenderBlocks renderer)
 	{
 		TileEntityWoodConstruct te = (TileEntityWoodConstruct) renderer.blockAccess.getTileEntity(i, j, k);
-		int md = renderer.blockAccess.getBlockMetadata(i, j, k);
+		//int md = renderer.blockAccess.getBlockMetadata(i, j, k);
 
 		int d = TileEntityWoodConstruct.PlankDetailLevel;
 		int dd = TileEntityWoodConstruct.PlankDetailLevel * TileEntityWoodConstruct.PlankDetailLevel;

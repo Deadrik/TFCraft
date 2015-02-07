@@ -17,7 +17,7 @@ public class PlayerManagerTFC
 
 	private PlayerManagerTFC()
 	{
-		Players = new ArrayList();
+		Players = new ArrayList<PlayerInfo>();
 	}
 
 	public PlayerInfo getPlayerInfoFromPlayer(EntityPlayer player)

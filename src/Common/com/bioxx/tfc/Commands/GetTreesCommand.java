@@ -4,7 +4,6 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
 
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.api.Enums.EnumTree;
@@ -20,10 +19,8 @@ public class GetTreesCommand extends CommandBase{
 	public void processCommand(ICommandSender sender, String[] params) 
 	{
 
-		MinecraftServer var3 = MinecraftServer.getServer();
-		EntityPlayerMP var4;
-
-		var4 = getCommandSenderAsPlayer(sender);
+		//MinecraftServer var3 = MinecraftServer.getServer();
+		EntityPlayerMP var4 = getCommandSenderAsPlayer(sender);
 		int posX = (int)Math.floor(var4.posX);
 		int posY = (int)Math.floor(var4.posY);
 		int posZ = (int)Math.floor(var4.posZ);

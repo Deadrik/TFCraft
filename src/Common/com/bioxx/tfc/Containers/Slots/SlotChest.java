@@ -19,7 +19,7 @@ public class SlotChest extends Slot
 {
 	EnumSize size = EnumSize.LARGE;
 
-	List exceptions;
+	List<Item> exceptions;
 
 	public SlotChest(IInventory iinventory, int i, int j, int k)
 	{

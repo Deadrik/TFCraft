@@ -21,7 +21,7 @@ public class RenderGrill  implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int i, int j, int k, Block block, int modelId, RenderBlocks renderer)
 	{
-		IBlockAccess blockAccess = renderer.blockAccess;
+		//IBlockAccess blockAccess = renderer.blockAccess;
 		if(!TFCOptions.use2DGrill)
 		{
 			renderer.renderAllFaces = true;

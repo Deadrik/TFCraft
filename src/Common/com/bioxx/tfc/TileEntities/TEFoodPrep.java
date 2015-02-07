@@ -10,7 +10,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -19,6 +18,7 @@ import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.CreateMealPacket;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.Food;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Interfaces.IItemFoodBlock;
@@ -96,7 +96,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		{
 			NBTTagCompound nbt = new NBTTagCompound();
 			ItemStack is = new ItemStack(TFCItems.Sandwich, 1);
-			Random R = new Random(getFoodSeed());
+			//Random R = new Random(getFoodSeed());
 			int[] FG = new int[]{-1,-1,-1,-1,-1};
 			if(getStackInSlot(0) != null) FG[0] = ((IFood)(getStackInSlot(0).getItem())).getFoodID();
 			if(getStackInSlot(1) != null) FG[1] = ((IFood)(getStackInSlot(1).getItem())).getFoodID();
@@ -152,7 +152,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		{
 			NBTTagCompound nbt = new NBTTagCompound();
 			ItemStack is = new ItemStack(TFCItems.Salad, 1);
-			Random R = new Random(getFoodSeed());
+			//Random R = new Random(getFoodSeed());
 			int[] FG = new int[]{-1,-1,-1,-1};
 			if(getStackInSlot(1) != null) FG[0] = ((IFood)(getStackInSlot(1).getItem())).getFoodID();
 			if(getStackInSlot(2) != null) FG[1] = ((IFood)(getStackInSlot(2).getItem())).getFoodID();
@@ -192,11 +192,11 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		{
 			if(storage[0] == null || storage[6] != null)//Bread
 				return false;
-			int count = 0;
+			/*int count = 0;
 			if(storage[1] != null) count++;
 			if(storage[2] != null) count++;
 			if(storage[3] != null) count++;
-			if(storage[4] != null) count++;
+			if(storage[4] != null) count++;*/
 
 			if(!validateIngreds(storage[1],storage[2],storage[3],storage[4]))
 				return false;
@@ -224,11 +224,11 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 			if(storage[6] != null)//Bread
 				return false;
 
-			int count = 0;
+			/*int count = 0;
 			if(storage[1] != null) {count++;}
 			if(storage[2] != null) {count++;}
 			if(storage[3] != null) {count++;}
-			if(storage[4] != null) {count++;}
+			if(storage[4] != null) {count++;}*/
 
 
 			if(!validateIngreds(storage[1],storage[2],storage[3],storage[4]))
@@ -314,7 +314,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 			player.openGui(TerraFirmaCraft.instance, 45, worldObj, xCoord, yCoord, zCoord);
 	}
 
-	private long getFoodSeed()
+	/*private long getFoodSeed()
 	{
 		int seed = 1;
 
@@ -325,7 +325,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 				seed *= ((ItemFoodTFC) is.getItem()).getFoodID();
 		}
 		return seed + worldObj.getSeed();
-	}
+	}*/
 
 	private long getIconSeed()
 	{

@@ -13,7 +13,6 @@ import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -39,7 +38,7 @@ public class ClientOverrides
 		Object obj = Helper.getObject(renderG, "t", "field_72767_j", "worldRenderersToUpdate", TFCASMLoadingPlugin.runtimeDeobf);
 		if(!(obj instanceof List))
 			return;
-		List worldRenderersToUpdate = (List)(Helper.getObject(renderG, "t", "field_72767_j", "worldRenderersToUpdate", TFCASMLoadingPlugin.runtimeDeobf));
+		List<WorldRenderer> worldRenderersToUpdate = (List<WorldRenderer>) (Helper.getObject(renderG, "t", "field_72767_j", "worldRenderersToUpdate", TFCASMLoadingPlugin.runtimeDeobf));
 		World world = (World)(Helper.getObject(renderG, "r", "field_72769_h", "theWorld", TFCASMLoadingPlugin.runtimeDeobf));
 
 		worldRenderersToUpdate.clear();
@@ -119,7 +118,7 @@ public class ClientOverrides
 						float f1 = random.nextFloat();
 						float f2 = random.nextFloat();
 
-						if (b != Blocks.air)
+						if (!b.isAir(worldclient, x, y - 1, z))
 						{
 							if (b.getMaterial() == Material.lava)
 							{

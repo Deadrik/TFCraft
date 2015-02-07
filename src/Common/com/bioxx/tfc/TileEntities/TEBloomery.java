@@ -7,16 +7,15 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.Devices.BlockEarlyBloomery;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Items.ItemOre;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
@@ -25,8 +24,8 @@ public class TEBloomery extends NetworkTileEntity
 {
 	public boolean isFlipped;
 	public boolean bloomeryLit;
-	private int prevStackSize;
-	private int numAirBlocks;
+	//private int prevStackSize;
+	//private int numAirBlocks;
 
 	private int validationCheck = 60;
 
@@ -40,7 +39,7 @@ public class TEBloomery extends NetworkTileEntity
 	{
 		isFlipped = false;
 		bloomeryLit = false;
-		numAirBlocks = 0;
+		//numAirBlocks = 0;
 		charcoalCount = 0;
 		oreCount = 0;
 		outCount = 0;
@@ -179,7 +178,7 @@ public class TEBloomery extends NetworkTileEntity
 			{
 				Block bid = worldObj.getBlock(xCoord + direction[0], yCoord + i, zCoord + direction[1]);
 				/*The stack must be air or already be molten rock*/
-				if((bid == Blocks.air ||bid == TFCBlocks.Molten || bid == TFCBlocks.Charcoal) &&
+				if ((bid.isAir(worldObj, xCoord + direction[0], yCoord + i, zCoord + direction[1]) || bid == TFCBlocks.Molten || bid == TFCBlocks.Charcoal) &&
 						worldObj.getBlock(xCoord + direction[0], yCoord - 1, zCoord + direction[1]).getMaterial() == Material.rock)
 				{
 					//Make sure that the Stack is surrounded by rock
@@ -192,7 +191,7 @@ public class TEBloomery extends NetworkTileEntity
 						int m = j > 7 ? 7 : j;
 						if(this.bloomeryLit)
 						{
-							if((bid == TFCBlocks.Molten && (mMeta & 8) == 0) || bid == Blocks.air || bid == TFCBlocks.Charcoal)
+							if ((bid == TFCBlocks.Molten && (mMeta & 8) == 0) || bid.isAir(worldObj, xCoord + direction[0], yCoord + i, zCoord + direction[1]) || bid == TFCBlocks.Charcoal)
 							{
 								m += 8;
 								worldObj.setBlock(xCoord + direction[0], yCoord + i, zCoord + direction[1], TFCBlocks.Molten, m, 2);

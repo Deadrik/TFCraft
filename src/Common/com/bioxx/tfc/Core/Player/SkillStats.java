@@ -22,7 +22,7 @@ import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class SkillStats
 {
-	private HashMap skillsMap;
+	private HashMap<Skill, Integer> skillsMap;
 	private EntityPlayer player;
 
 	public SkillStats(EntityPlayer p)

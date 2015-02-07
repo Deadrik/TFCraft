@@ -12,8 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Metal.Alloy;
@@ -23,13 +21,15 @@ import com.bioxx.tfc.Core.Metal.MetalPair;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.api.Metal;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
 
 public class TECrucible extends NetworkTileEntity implements IInventory
 {
-	public HashMap metals = new HashMap();
+	public HashMap<String, MetalPair> metals = new HashMap<String, MetalPair>();
 	public Alloy currentAlloy;
 	public int temperature = 0;
 	public ItemStack[] storage;
@@ -145,7 +145,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				Item itemToSmelt = stackToSmelt.getItem();
 				if(itemToSmelt instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(storage[0]))
 				{
-					if(inputTick > 5)
+					if(inputTick > 10)
 					{
 						if(currentAlloy != null && currentAlloy.outputType != null && itemToSmelt == currentAlloy.outputType.MeltedItem)
 						{
@@ -189,7 +189,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			if(currentAlloy != null &&
 					storage[1] != null &&
 					currentAlloy.outputType != null &&
-					outputTick >= 3 &&
+					outputTick >= 2 &&
 					temperature >= TFC_ItemHeat.IsCookable(currentAlloy.outputType))
 			{
 				if(storage[1].getItem() == TFCItems.CeramicMold)
@@ -216,7 +216,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 			if(currentAlloy != null && this.getTotalMetal() < 1)
 			{
-				metals = new HashMap();
+				metals = new HashMap<String, MetalPair>();
 				updateCurrentAlloy();
 				this.updateGui((byte) 2);
 				currentAlloy = null;
@@ -224,9 +224,9 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 			if(storage[1] != null && storage[1].stackSize <= 0)
 				storage[1].stackSize = 1;
-			if(inputTick > 5)
+			if (inputTick > 10)
 				inputTick = 0;
-			if(outputTick >= 3)
+			if (outputTick >= 2)
 				outputTick = 0;
 		}
 	}

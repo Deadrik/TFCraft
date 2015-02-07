@@ -10,7 +10,7 @@ import net.minecraft.stats.StatList;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockOre2 extends BlockOre

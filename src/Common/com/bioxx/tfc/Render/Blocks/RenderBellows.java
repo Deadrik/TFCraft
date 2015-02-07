@@ -7,9 +7,7 @@ import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.Devices.BlockBellows;
-import com.bioxx.tfc.TileEntities.TEBellows;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -84,7 +82,7 @@ public class RenderBellows implements ISimpleBlockRenderingHandler
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 	}
 
-	private void renderBlock(int modelId, RenderBlocks renderer, Block block, int x, int y, int z)
+	/*private void renderBlock(int modelId, RenderBlocks renderer, Block block, int x, int y, int z)
 	{
 		if(modelId == TFCBlocks.BellowsRenderId)
 		{
@@ -169,5 +167,5 @@ public class RenderBellows implements ISimpleBlockRenderingHandler
 				renderer.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 			}
 		}
-	}
+	}*/
 }

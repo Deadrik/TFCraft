@@ -23,17 +23,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.storage.WorldInfo;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockSlab;
 import com.bioxx.tfc.Chunkdata.ChunkData;
@@ -50,6 +50,8 @@ import com.bioxx.tfc.TileEntities.TEMetalSheet;
 import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.Food;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
@@ -136,7 +138,7 @@ public class TFC_Core
 		ItemStack is = null;
 		if (random.nextInt(500) == 0)
 		{
-			ArrayList items = new ArrayList<ItemStack>();
+			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 			items.add(new ItemStack(TFCItems.GemAgate, 1, 0));
 			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 0));
 			items.add(new ItemStack(TFCItems.GemBeryl, 1, 0));
@@ -154,7 +156,7 @@ public class TFC_Core
 		}
 		else if (random.nextInt(1000) == 0)
 		{
-			ArrayList items = new ArrayList<ItemStack>();
+			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 			items.add(new ItemStack(TFCItems.GemAgate, 1, 1));
 			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 1));
 			items.add(new ItemStack(TFCItems.GemBeryl, 1, 1));
@@ -172,7 +174,7 @@ public class TFC_Core
 		}
 		else if (random.nextInt(2000) == 0)
 		{
-			ArrayList items = new ArrayList<ItemStack>();
+			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 			items.add(new ItemStack(TFCItems.GemAgate, 1, 2));
 			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 2));
 			items.add(new ItemStack(TFCItems.GemBeryl, 1, 2));
@@ -190,7 +192,7 @@ public class TFC_Core
 		}
 		else if (random.nextInt(4000) == 0)
 		{
-			ArrayList items = new ArrayList<ItemStack>();
+			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 			items.add(new ItemStack(TFCItems.GemAgate, 1, 3));
 			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 3));
 			items.add(new ItemStack(TFCItems.GemBeryl, 1, 3));
@@ -208,7 +210,7 @@ public class TFC_Core
 		}
 		else if (random.nextInt(8000) == 0)
 		{
-			ArrayList items = new ArrayList<ItemStack>();
+			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 			items.add(new ItemStack(TFCItems.GemAgate, 1, 4));
 			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 4));
 			items.add(new ItemStack(TFCItems.GemBeryl, 1, 4));
@@ -253,7 +255,6 @@ public class TFC_Core
 
 	public static void SetupWorld(World w, long seed)
 	{
-		World world = w;
 		try
 		{
 			// ReflectionHelper.setPrivateValue(WorldInfo.class,
@@ -320,7 +321,7 @@ public class TFC_Core
 	{
 		return isRawStone( block ) || isOreStone( block );
 	}
-	
+
 	public static boolean isCobbleStone(Block block)
 	{
 		return block == TFCBlocks.StoneIgExCobble
@@ -476,6 +477,11 @@ public class TFC_Core
 				|| isFreshWater(block);
 	}
 
+	public static boolean isWaterFlowing(Block block)
+	{
+		return block == TFCBlocks.SaltWater || block == TFCBlocks.FreshWater || block == TFCBlocks.HotWater;
+	}
+
 	public static boolean isSaltWater(Block block)
 	{
 		return block == TFCBlocks.SaltWater || block == TFCBlocks.SaltWaterStationary;
@@ -528,10 +534,9 @@ public class TFC_Core
 
 	public static boolean isGround(Block block)
 	{
-		return 	   isSoil(block)
+		return 	   isSoilOrGravel(block)
 				|| isRawStone(block)
-				|| isSand(block) 
-				|| isGravel(block);
+				|| isSand(block);
 	}
 
 	public static int getSoilMetaFromStone(Block inBlock, int inMeta)
@@ -819,7 +824,7 @@ public class TFC_Core
 			if(te.TopExists())
 				return true;
 		}
-		return false;
+		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.UP);
 	}
 
 	public static boolean isBottomFaceSolid(World world, int x, int y, int z)
@@ -839,7 +844,7 @@ public class TFC_Core
 			if(te.BottomExists())
 				return true;
 		}
-		return false;
+		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.DOWN);
 	}
 
 	public static boolean isNorthFaceSolid(World world, int x, int y, int z)
@@ -860,7 +865,7 @@ public class TFC_Core
 			if(te.NorthExists())
 				return true;
 		}
-		return false;
+		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.NORTH);
 	}
 
 	public static boolean isSouthFaceSolid(World world, int x, int y, int z)
@@ -880,7 +885,7 @@ public class TFC_Core
 			if(te.SouthExists())
 				return true;
 		}
-		return false;
+		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.SOUTH);
 	}
 
 	public static boolean isEastFaceSolid(World world, int x, int y, int z)
@@ -899,7 +904,7 @@ public class TFC_Core
 			if(te.EastExists())
 				return true;
 		}
-		return false;
+		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.EAST);
 	}
 
 	public static boolean isWestFaceSolid(World world, int x, int y, int z)
@@ -919,7 +924,7 @@ public class TFC_Core
 			if(te.WestExists())
 				return true;
 		}
-		return false;
+		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.WEST);
 	}
 
 	public static boolean isOreIron(ItemStack is)
@@ -1025,14 +1030,14 @@ public class TFC_Core
 
 		}
 	}
-	
+
 	//Takes a small float in the range of 0.5 to 1.5. The resulting float would be of the form [0 0111111 [the byte] 0..0], such that the byte returned
 	//is the only unknown value
 	public static byte getByteFromSmallFloat(float f){
 		MathHelper.clamp_float(f, 0.5f, 1.5f);
 		return (byte)((Float.floatToIntBits(f) >> 16) & 0xff);
 	}
-	
+
 	public static float getSmallFloatFromByte(byte b)
 	{
 		return ByteBuffer.wrap(new byte[]{(byte)63, b,(byte)(0),(byte)0}).getFloat();
@@ -1135,7 +1140,7 @@ public class TFC_Core
 			 * this before everything else so that its only done once per
 			 * inventory
 			 */
-			int day = TFC_Time.getDayOfYearFromDays(TFC_Time.getDayFromTotalHours(nbt.getInteger("decayTimer")));
+			//int day = TFC_Time.getDayOfYearFromDays(TFC_Time.getDayFromTotalHours(nbt.getInteger("decayTimer")));
 			//float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world,day,nbt.getInteger("decayTimer"), x, y, z);
 			float temp = getCachedTemp(world, x, y, z, nbt.getInteger("decayTimer"));
 			float environmentalDecay = getEnvironmentalDecay(temp) * environmentalDecayFactor;
@@ -1255,17 +1260,14 @@ public class TFC_Core
 		if(Blocks.fire.getFlammability(block) > 0 && block != TFCBlocks.LogPile) return false;
 
 		return block == TFCBlocks.LogPile
-				|| isRawStone(block)
 				|| isCobbleStone(block)
 				|| isBrickStone(block)
 				|| isSmoothStone(block)
-				|| isDirt(block)
-				|| isSand(block)
-				|| isGrassType1(block)
-				|| isGrassType2(block)
-				|| isGravel(block)
+				|| isGround(block)
 				|| block == Blocks.glass
-				|| block == TFCBlocks.MetalTrapDoor;
+				|| block == Blocks.stained_glass
+				|| block == TFCBlocks.MetalTrapDoor
+				|| block.isOpaqueCube();
 	}
 
 	public static void writeInventoryToNBT(NBTTagCompound nbt, ItemStack[] storage)
@@ -1367,5 +1369,10 @@ public class TFC_Core
 	public static boolean isWaterBiome(BiomeGenBase b)
 	{
 		return TFC_Core.isBeachBiome(b.biomeID) || TFC_Core.isOceanicBiome(b.biomeID) || b == TFCBiome.lake || b == TFCBiome.river;
+	}
+
+	public static String translate(String s)
+	{
+		return StatCollector.translateToLocal(s);
 	}
 }

@@ -67,10 +67,10 @@ public class TEBellows extends NetworkTileEntity
 		float f = (float) xCoord + x + 0.5F;
 		float f1 = yCoord + 0.1F + random.nextFloat() * 6F / 16F;
 		float f2 = (float) zCoord + z + 0.5F;
-		float f3 = 0.82F;
+		//float f3 = 0.82F;
 		float f4 = random.nextFloat() * 0.6F;
 		float f5 = random.nextFloat() * -0.6F;
-		float f6 = random.nextFloat() * -0.6F;
+		//float f6 = random.nextFloat() * -0.6F;
 		worldObj.spawnParticle("smoke", f + f4 - 0.3F, f1, f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
 	}
 

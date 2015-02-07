@@ -16,11 +16,10 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.TFCProvider;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -192,7 +191,7 @@ public class BlockCustomIce extends BlockIce
 		}
 	}
 
-	private boolean scanForOcean(World world, int i, int j, int k)
+	/*private boolean scanForOcean(World world, int i, int j, int k)
 	{
 		if(world.getBiomeGenForCoords(i + 5, k).biomeID == TFCBiome.ocean.biomeID ||
 				world.getBiomeGenForCoords(i + 10, k).biomeID == TFCBiome.ocean.biomeID ||
@@ -210,5 +209,5 @@ public class BlockCustomIce extends BlockIce
 			return true;
 		}
 		return false;
-	}
+	}*/
 }

@@ -16,12 +16,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Items.Tools.ItemFirestarter;
 import com.bioxx.tfc.Items.Tools.ItemFlintSteel;
 import com.bioxx.tfc.TileEntities.TEForge;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class BlockForge extends BlockTerraContainer
 {
@@ -37,10 +37,10 @@ public class BlockForge extends BlockTerraContainer
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
-		int meta = world.getBlockMetadata(i, j, k);
-		int xCoord = i;
-		int yCoord = j;
-		int zCoord = k;
+		//int meta = world.getBlockMetadata(i, j, k);
+		//int xCoord = i;
+		//int yCoord = j;
+		//int zCoord = k;
 		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
 
 		if(world.isRemote)
@@ -122,10 +122,10 @@ public class BlockForge extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			boolean surroundSolids = (world.getBlock(x+1, y, z).getMaterial() == Material.rock && world.getBlock(x-1, y, z).getMaterial() == Material.rock && 
+			/*boolean surroundSolids = (world.getBlock(x+1, y, z).getMaterial() == Material.rock && world.getBlock(x-1, y, z).getMaterial() == Material.rock && 
 					world.getBlock(x, y, z+1).getMaterial() == Material.rock && world.getBlock(x, y, z-1).getMaterial() == Material.rock &&
 					world.getBlock(x, y-1, z).isNormalCube() && (world.getBlock(x+1, y, z).isNormalCube() && world.getBlock(x-1, y, z).isNormalCube() && 
-							world.getBlock(x, y, z+1).isNormalCube() && world.getBlock(x, y, z-1).isNormalCube()));
+							world.getBlock(x, y, z+1).isNormalCube() && world.getBlock(x, y, z-1).isNormalCube()));*/
 
 			boolean rockXP = world.getBlock(x+1, y, z) == TFCBlocks.stoneSlabs || 
 					(world.getBlock(x+1, y, z).getMaterial() == Material.rock && world.getBlock(x+1, y, z).isNormalCube());
@@ -175,7 +175,7 @@ public class BlockForge extends BlockTerraContainer
 			float f = i + 0.5F;
 			float f1 = j + 0.9F + random.nextFloat() * 6F / 16F;
 			float f2 = k + 0.5F;
-			float f3 = 0.52F;
+			//float f3 = 0.52F;
 			float f4 = random.nextFloat() * 0.6F;
 			float f5 = random.nextFloat() * -0.6F;
 			float f6 = random.nextFloat() * -0.6F;

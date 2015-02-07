@@ -27,11 +27,11 @@ public class SetPlayerStatsCommand extends CommandBase{
 	public void processCommand(ICommandSender sender, String[] params) 
 	{
 
-		MinecraftServer var3 = MinecraftServer.getServer();
-		EntityPlayerMP var4;
+		//MinecraftServer var3 = MinecraftServer.getServer();
+		EntityPlayerMP var4 = getCommandSenderAsPlayer(sender);
 		EntityPlayerMP player;
 		double[] values = new double[3];
-		var4 = getCommandSenderAsPlayer(sender);
+
 		if(params.length == 4 || params.length == 3){
 			for(int i = 0;i<3;i++){
 				try{

@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,12 +14,12 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEFarmland;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
@@ -82,7 +81,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 
 			boolean isDirt = TFC_Core.isDirt(var8);
 
-			if (side != 1 || var9 != Blocks.air || (!TFC_Core.isGrass(var8) && !isDirt))
+			if (side != 1 || !var9.isAir(world, x, y + 1, z) || (!TFC_Core.isGrass(var8) && !isDirt))
 				return false;
 			else
 			{

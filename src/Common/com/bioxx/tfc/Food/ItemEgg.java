@@ -41,6 +41,12 @@ public class ItemEgg extends ItemFoodTFC implements IFood
 			else
 				addFoodInformation(is, player, arraylist);
 		}
+		else
+		{
+			arraylist.add(StatCollector.translateToLocal("gui.badnbt"));
+			System.out.println(StatCollector.translateToLocal("error.error") + " " + is.getUnlocalizedName() + " " +
+					StatCollector.translateToLocal("error.NBT") + " " + StatCollector.translateToLocal("error.Contact"));
+		}
 	}
 
 	@Override

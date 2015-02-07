@@ -2,14 +2,6 @@ package com.bioxx.tfc.Items;
 
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.Player.PlayerInfo;
-import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
-import com.bioxx.tfc.Items.Tools.ItemKnife;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -19,6 +11,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.Player.PlayerInfo;
+import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.Items.Tools.ItemKnife;
 
 public class ItemLeather extends ItemLooseRock
 {
@@ -57,7 +57,7 @@ public class ItemLeather extends ItemLooseRock
 	}
 
 	@Override
-	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 		if (TFC_Core.showShiftInformation()) 
 		{

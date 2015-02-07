@@ -1,7 +1,6 @@
 package com.bioxx.tfc.api.Crafting;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class LoomRecipe

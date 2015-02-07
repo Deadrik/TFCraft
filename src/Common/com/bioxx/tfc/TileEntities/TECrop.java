@@ -9,7 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockFarmland;
 import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Core.TFC_Achievements;
@@ -18,6 +17,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 
@@ -39,7 +39,7 @@ public class TECrop extends NetworkTileEntity
 		sunLevel = 1;
 	}
 
-	private boolean checkedSun = false;
+	//private boolean checkedSun = false;
 	@Override
 	public void updateEntity()
 	{
@@ -192,7 +192,7 @@ public class TECrop extends NetworkTileEntity
 	public static boolean hasSunlight(World world, int x, int y, int z)
 	{
 		int light = world.getBlockLightValue(x, y, z); 
-		boolean sky = world.canBlockSeeTheSky(x, y, z);
+		boolean sky = world.canBlockSeeTheSky(x, y + 1, z);
 		boolean precip = world.isRaining();
 		return sky || light > 13 || (light > 10 && precip);
 	}
@@ -207,10 +207,12 @@ public class TECrop extends NetworkTileEntity
 		if(!world.isRemote)
 		{
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
-			if(crop != null && growth >= crop.numGrowthStages - 1)
+
+			if (crop != null && growth >= crop.numGrowthStages - 1)
 			{
 				ItemStack is1 = crop.getOutput1(this);
 				ItemStack is2 = crop.getOutput2(this);
+				ItemStack seedStack = crop.getSeed();
 
 				if(is1 != null)
 					world.spawnEntityInWorld(new EntityItem(world, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, is1));
@@ -218,15 +220,15 @@ public class TECrop extends NetworkTileEntity
 				if(is2 != null)
 					world.spawnEntityInWorld(new EntityItem(world, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, is2));
 
-				ItemStack seedStack = crop.getSeed();
-				int skill = 20 - (int)(20 * TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_AGRICULTURE));
+				int skill = 20 - (int) (20 * TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_AGRICULTURE));
+
 				seedStack.stackSize = 1 + (world.rand.nextInt(1 + skill) == 0 ? 1 : 0);
-				if(seedStack != null && isBreaking)
+				if (seedStack != null && isBreaking)
 					world.spawnEntityInWorld(new EntityItem(world, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, seedStack));
 
 				TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_AGRICULTURE, 1);
 
-				if(TFC_Core.isSoil(world.getBlock(xCoord, yCoord - 1, zCoord)))
+				if (TFC_Core.isSoil(world.getBlock(xCoord, yCoord - 1, zCoord)))
 					player.addStat(TFC_Achievements.achWildVegetable, 1);
 			}
 			else if (crop != null)

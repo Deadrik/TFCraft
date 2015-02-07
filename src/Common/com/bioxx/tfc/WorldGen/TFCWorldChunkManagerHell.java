@@ -13,7 +13,7 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 {
 	/** The biome generator object. */
 	private TFCBiome biomeGenerator;
-	private float hellTemperature;
+	//private float hellTemperature;
 
 	/** The rainfall in the world */
 	private float rainfall;
@@ -21,10 +21,10 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 	public TFCWorldChunkManagerHell(TFCBiome par1, float par2, float par3, World world)
 	{
 		this.biomeGenerator = par1;
-		this.hellTemperature = par2;
+		//this.hellTemperature = par2;
 		this.rainfall = par3;
 		this.worldObj = world;
-		this.biomesToSpawnIn = new ArrayList();
+		this.biomesToSpawnIn = new ArrayList<BiomeGenBase>();
 		this.biomesToSpawnIn.add(TFCBiome.hell);
 	}
 
@@ -32,7 +32,7 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 	 * Gets the list of valid biomes for the player to spawn in.
 	 */
 	@Override
-	public List getBiomesToSpawnIn()
+	public List<BiomeGenBase> getBiomesToSpawnIn()
 	{
 		return this.biomesToSpawnIn;
 	}

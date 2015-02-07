@@ -6,12 +6,16 @@
 
 
 generator.TFCDefault=TFC Oletus
-generator.TFCFlat=TFC Tasainen
+generator.TFCFlat=
+generator.TFCAmplified=
+generator.TFCLargeBiomes=
 
 key.ToolMode=Vaihda työkalumoodia
 key.LockTool=Lukitse työkalun paikka
 
 effect.bleed=Verenvuoto
+death.attack.alcohol=
+death.attack.heatStroke=
 
 #==============
 #= Spawn Eggs =
@@ -95,6 +99,29 @@ commands.transferTamed.display.incoming=%s on siirtänyt sinulle eläimen!
 commands.transferTamed.display.outgoing=Olet siirtänyt eläimen pelaajalle %s!
 commands.transferTamed.wrongSender=Et voi siirtää eläimiä!
 
+#==========
+#= Fluids =
+#==========
+fluid.freshwater=
+fluid.saltwater=
+fluid.lavatfc=
+fluid.hotwater=
+fluid.beer=Olut
+fluid.cider=Siideri
+fluid.rum=Rommi
+fluid.ryewhiskey=Mallasviski
+fluid.sake=Riisiviini
+fluid.vodka=Vodka
+fluid.whiskey=Viski
+fluid.cornwhiskey=
+fluid.milk=Maitoa
+fluid.milkcurdled=Hapantunutta Maitoa
+fluid.milkvinegar=
+fluid.limewater=Kalkkivettä
+fluid.tannin=Tanniinia
+fluid.vinegar=Viinietikkaa
+fluid.brine=
+
 #========
 #= Food =
 #========
@@ -105,6 +132,11 @@ item.meal.decent=Melko hyvä
 item.meal.good=Hyvä
 item.meal.great=Mahtava
 item.meal.fantastic=Fantastinen
+item.Sandwich.name=
+item.Salad.name=
+item.Soup.name=
+item.Sugar.name=
+item.Sea Weed.name=
 
 #== Grains ==
 item.Barley Bread.name=Ohraleipä
@@ -267,10 +299,10 @@ item.CornWhiskey.name=
 item.Clay.Clay.name=Savi
 item.Clay.Fire Clay.name=Tulenkestävä savi
 
-item.clay.clayflatlight.name=Vaalea tasainen savi
-item.clay.clayflatdark.name=Tumma tasainen savi
-item.clay.clayflatfire.name=Tasainen tulenkestävä savi
-item.clay.clayflatdarkfire.name=Tumma tasainen tulenkestävä savi
+item.Flat Clay.clay flat light.name=Vaalea tasainen savi
+item.Flat Clay.clay flat dark.name=Tumma tasainen savi
+item.Flat Clay.clay flat fire.name=Tasainen tulenkestävä savi
+item.Flat Clay.clay flat dark fire.name=Tumma tasainen tulenkestävä savi
 
 item.Jug.Clay Jug.name=Savikannu
 item.Jug.Ceramic Jug.name=Keraaminen kannu
@@ -386,6 +418,10 @@ item.Spindle Head.Spindle Head.name=Värttinänpää
 item.Fire Brick.Fire Brick.name=
 item.Fire Brick.Clay Fire Brick.name=
 tile.FireBrick.name=
+tile.Pottery.name=
+
+item.ClayBowl.Ceramic Bowl.name=
+item.ClayBowl.Clay Bowl.name=
 
 #= Gems =
 item.Agate.Chipped.name=Lohjennut agaatti
@@ -824,6 +860,7 @@ item.Small Ore.Sphalerite.name=Sphaleriitti Kimpale
 item.Small Ore.Tetrahedrite.name=Tetrahedriitti Kimpale
 
 #== Ore Blocks ==
+tile.Ore.name=
 tile.Ore.Bituminous Coal.name=Bitumihiili
 tile.Ore.Borax.name=Booraksi
 tile.Ore.Cinnabar.name=Sinooperi
@@ -956,7 +993,24 @@ item.Loom.White Elm.name=
 item.Loom.Willow.name=
 
 #== Wood Blocks ==
-tile.log.Acacia.name=
+tile.Chest.Acacia.name=
+tile.Chest.Ash.name=
+tile.Chest.Aspen.name=
+tile.Chest.Birch.name=
+tile.Chest.Chestnut.name=
+tile.Chest.Douglas Fir.name=
+tile.Chest.Hickory.name=
+tile.Chest.Kapok.name=
+tile.Chest.Maple.name=
+tile.Chest.Oak.name=
+tile.Chest.Pine.name=
+tile.Chest.Sequoia.name=
+tile.Chest.Spruce.name=
+tile.Chest.Sycamore.name=
+tile.Chest.White Cedar.name=
+tile.Chest.White Elm.name=
+tile.Chest.Willow.name=
+
 tile.log2.Acacia.name=
 tile.log.Ash.name=Saarni Pölkky
 tile.log.Aspen.name=Haapa Pölkky
@@ -1029,7 +1083,8 @@ tile.sapling.White Cedar.name=Tuija Taimi
 tile.sapling.White Elm.name=Jalava Taimi
 tile.sapling.Willow.name=Paju Taimi
 
-tile.leaves.Acacia.name=
+tile.leaves2.name=
+tile.leaves2.Acacia.name=
 tile.leaves.Ash.name=
 tile.leaves.Aspen.name=
 tile.leaves.Birch.name=
@@ -1064,6 +1119,10 @@ tile.wood.Sycamore.name=Vuorivaahtera Lankkuja
 tile.wood.White Cedar.name=Tuija Lankkuja
 tile.wood.White Elm.name=Jalava Lankkuja
 tile.wood.Willow.name=Paju Lankkuja
+
+tile.fruitTreeWood.name=
+tile.fruitTreeLeaves.name=
+tile.fruitTreeLeaves2.name=
 
 tile.Door Acacia.name=
 tile.Door Ash.name=Saarni Ovi
@@ -1190,6 +1249,25 @@ tile.WoodSupportV.Sycamore.name=
 tile.WoodSupportV.White Cedar.name=
 tile.WoodSupportV.White Elm.name=
 tile.WoodSupportV.Willow.name=
+
+tile.WoodSupportH2.name=
+tile.WoodSupportH2.Acacia.name=
+tile.WoodSupportH.Ash.name=
+tile.WoodSupportH.Aspen.name=
+tile.WoodSupportH.Birch.name=
+tile.WoodSupportH.Chestnut.name=
+tile.WoodSupportH.Douglas Fir.name=
+tile.WoodSupportH.Hickory.name=
+tile.WoodSupportH.Kapok.name=
+tile.WoodSupportH.Maple.name=
+tile.WoodSupportH.Oak.name=
+tile.WoodSupportH.Pine.name=
+tile.WoodSupportH.Sequoia.name=
+tile.WoodSupportH.Spruce.name=
+tile.WoodSupportH.Sycamore.name=
+tile.WoodSupportH.White Cedar.name=
+tile.WoodSupportH.White Elm.name=
+tile.WoodSupportH.Willow.name=
 
 tile.Toolrack.Acacia.name=
 tile.Toolrack.Ash.name=Saarni Työkaluteline
@@ -1794,6 +1872,9 @@ item.Tin Double Sheet.name=Tina Kaksoislevy
 item.Wrought Iron Double Sheet.name=Valurauta Kaksoislevy
 item.Zinc Double Sheet.name=Sinkki Kaksoislevy
 
+#== Misc ==
+item.Blueprint=Suunnitelma
+
 #===========
 #= Devices =
 #===========
@@ -1803,10 +1884,16 @@ tile.BlastFurnace.name=Masuuni
 tile.SpawnMeter.name=Suojauslaite
 tile.Quern.name=Myllynpohja
 tile.EarlyBloomery.name=Sulatto
+tile.Molten.name=
 tile.Crucible.name=Sulatusastia
 tile.NestBox.name=
 item.SluiceItem.name=Malmiränni
+tile.Sluice.name=Malmiränni
 tile.LeatherRack.name=
+tile.FoodPrep.name=
+tile.MetalSheet.name=
+tile.ingotpile.name=
+tile.SmokeRack.name=
 
 #== Anvils ==
 tile.Anvil.Stone.name=Kivi Alasin
@@ -1905,17 +1992,35 @@ item.fishingRod.name=Onkivapa
 
 item.Quiver.name=
 item.Rope.name=
+item.Mud Brick.name=
+item.Wet Mud Brick.name=
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=
+tile.StrawHideBed.name=
 tile.customBed.sleep=
 tile.BasicPipe.name=
 tile.ValvePipe.name=
+tile.Smoke.name=
 tile.Torch.name=Soihtu
 tile.Chest.name=Arkku
 tile.Bookshelf.name=Kirjahylly
 tile.Workbench.name=Työpöytä
 tile.ButtonWood.name=
+tile.Firepit.name=
+tile.LogPile.name=
+tile.Charcoal.name=
+tile.StoneDetailed.name=
+tile.stoneStairs.name=
+tile.stoneSlabs.name=
+tile.stoneStalac.name=
+tile.WoodConstruct.name=
+tile.MetalTrapDoor.name=
+tile.Vessel.name=
+tile.Grill.name=
+
+tile.Sulfur.name=Rikki
+tile.Reeds.name=
 
 #= Misc. Plants =
 item.Sugarcane.name=Sokeriruoko
@@ -1973,7 +2078,6 @@ tile.LavaStationary.name=
 #=======
 #= GUI =
 #=======
-gui.badnbt=
 
 #== Anvil GUI ==
 gui.Anvil.Plans=
@@ -2035,15 +2139,11 @@ gui.Anvil.Rule42=Taivuta, Kolme Viimeistä
 gui.Anvil.Rule43=Taivuta, Ei Viimeisenä
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=Kehittynyt
-gui.Armor.Shift=Vaihtoa
 gui.Armor.ForgedBy=Seppä:
-gui.Armor.Hold=Painava
 gui.Armor.Crush=Murskaa
 gui.Armor.Pierce=Läpäise
 gui.Armor.Slash=Viillä
 
-gui.Bow.Advanced=
 gui.Bow.Javelins=
 gui.Bow.Arrows=
 gui.Bow.ForgedBy=
@@ -2062,11 +2162,13 @@ gui.Barrel.ToggleOn=
 gui.Barrel.SealedOn=
 gui.Barrel.Solid=
 gui.Barrel.Liquid=
+gui.barrel.pickling=
+gui.barrel.brining=
+gui.barrel.preserving=
 
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Puuhiili
 gui.Bloomery.Ore=Malmi
-gui.Bloomery.Output=Tuotto
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=Kalenteri
@@ -2120,12 +2222,14 @@ gui.Calendar.1Week=1 Viikko
 gui.Calendar.1Month=1 Kuukausi
 gui.Calendar.1Year=1 Vuosi
 
-#== Food Prep GUI ==
+#== Food GUI ==
 gui.FoodPrep.CreateMeal=Valmista Ateria
 gui.FoodPrep.Effect=Vaikutus
 gui.FoodPrep.Energy=Energia
 gui.FoodPrep.Filling=Täyttäyvyys
 gui.FoodPrep.Power=Teho
+gui.FoodPrep.Sandwich=
+gui.FoodPrep.Salad=
 
 #== Metals ==
 gui.metal.Bismuth=Vismutti
@@ -2192,12 +2296,24 @@ gui.fertilized=
 gui.Inventory=Tavaralista
 gui.ClearSlot=Tyhjennä tuoteruutu
 gui.LogPile=Halkopino
+gui.Output=Tuotto
 gui.done=Valmis
+gui.cancel=
 gui.Sluice.Soil=Maaperä
-gui.Sluice=Malmiränni
+gui.Sluice.Overworked=
 gui.Workbench.Crafting=Rakentaminen
+gui.overburdened=
+
+gui.badnbt=
 
 #== Tooltips ==
+gui.Advanced=Kehittynyt
+gui.Shift=Vaihtoa
+gui.Hold=Painava
+
+gui.slot=
+gui.slot.back=
+
 gui.ShowHelp=§8Apu: (Paina pohjaan §fShift§8)
 gui.Help=§8Apu:
 gui.Clay.Inst0=§bHiiren Oikea §7kun viisi kasattuna muokataksesi.
@@ -2210,6 +2326,13 @@ gui.PotteryBase.Inst0=Hiivi ja §bKäytä Hiiren Oikeaa §7asettaaksesi esineen.
 gui.PotteryVesselSmall.Inst0=Tai §bHiiren Oikealla §7tarkkaillaksesi sisältöä.
 gui.RawHide.Inst0=
 gui.Barrel.MoreItems=
+
+gui.Nutrient.A=
+gui.Nutrient.B=
+gui.Nutrient.C=
+
+gui.stage1=Ensimmäinen Vaihe
+gui.stage2=Toinen Vaihe
 
 gui.Size.Tiny=Pienenpieni
 gui.Size.VerySmall=Erittäinpieni
@@ -2227,6 +2350,7 @@ gui.Reach.Short=
 gui.Reach.Medium=
 gui.Reach.Far=
 
+#== Food ==
 gui.food.fruit=
 gui.food.vegetable=
 gui.food.grain=
@@ -2238,90 +2362,6 @@ gui.food.salted=
 
 gui.FoodHeat.Cold=Kylmä
 gui.FoodHeat.Warm=Lämmin
-
-gui.Torch.CatchingFire=Syttyy
-gui.Torch.Lit=Syttynyt
-
-gui.ItemHeat.Liquid=Nestemäinen
-gui.ItemHeat.Solidified=
-gui.ItemHeat.Caution=Varoitus
-gui.ItemHeat.Warming=Lämpenee
-gui.ItemHeat.Hot=Kuuma
-gui.ItemHeat.VeryHot=Erittäin Kuuma
-gui.ItemHeat.FaintRed=Heikon Punainen
-gui.ItemHeat.DarkRed=Tumman Punainen
-gui.ItemHeat.BrightRed=Kirkkaan Punainen
-gui.ItemHeat.Orange=Oranssi
-gui.ItemHeat.Yellow=Keltainen
-gui.ItemHeat.YellowWhite=Keltavalkoinen
-gui.ItemHeat.White=Valkoinen
-gui.ItemHeat.BrilliantWhite=Kirkkaan Valkoinen
-
-gui.ingot.workable=
-gui.ingot.weldable=
-gui.ingot.danger=
-
-gui.milk.fresh=
-gui.milk.old=
-gui.milk.sour=
-
-gui.units=
-
-#== Chat Messages ==
-gui.GoldPan.UseFull=Pitää käyttää juoksevan veden alla.
-gui.goldpan.overused=
-
-gui.ProPick.Found=Löytyi
-gui.ProPick.FoundTraces=Löytyi Hieman
-gui.ProPick.FoundSmall=Löytyi pieni näyte
-gui.ProPick.FoundMedium=Löytyi keskikokoinen näyte
-gui.ProPick.FoundLarge=Löytyi iso näyte
-gui.ProPick.FoundVeryLarge=Löytyi erittäin iso näyte
-gui.ProPick.FoundNothing=Ei löytynyt mitään kiinnostavaa.
-
-#== Creative Tabs ==
-itemGroup.TFCArmor=(TFC) Haarniskat
-itemGroup.TFCMaterials=(TFC) Materiaalit
-itemGroup.TFCMisc=(TFC) Sekalaiset
-itemGroup.TFCPottery=(TFC) Ruukut
-itemGroup.TFCTools=(TFC) Työkalut
-itemGroup.TFCWeapons=(TFC) Aseet
-itemGroup.TFCDevices=
-itemGroup.TFCFoods=(TFC) Rakennustarvikkeet
-itemGroup.TFCBuilding=(TFC) Elintarvikkeet
-itemGroup.TFCDecoration=(TFC) Koristekuutiot
-
-#== Skill GUI ==
-skill.armorsmith=
-skill.gensmith=
-skill.toolsmith=
-skill.weaponsmith=
-skill.agriculture=
-skill.cooking=
-skill.prospecting=
-skill.butchering=
-
-#=====================================================
-#========Add New Stuff Here To Be Sorted Later========
-#=====================================================
-fluid.freshwater=
-fluid.saltwater=
-fluid.lavatfc=
-fluid.hotwater=
-fluid.beer=Olut
-fluid.cider=Siideri
-fluid.rum=Rommi
-fluid.ryewhiskey=Mallasviski
-fluid.sake=Riisiviini
-fluid.vodka=Vodka
-fluid.whiskey=Viski
-fluid.cornwhiskey=
-fluid.milk=Maitoa
-fluid.milkcurdled=Hapantunutta Maitoa
-fluid.limewater=Kalkkivettä
-fluid.tannin=Tanniinia
-fluid.vinegar=Viinietikkaa
-fluid.brine=
 
 gui.showtaste=
 gui.taste=
@@ -2383,27 +2423,13 @@ gui.taste.6=
 gui.taste.7=
 gui.taste.8=
 
-gui.skill.novice=
-gui.skill.adept=
-gui.skill.expert=
-gui.skill.master=
-gui.skillpage=
-tile.MetalTrapDoor.name=
-item.Mud Brick.name=
-item.Wet Mud Brick.name=
-gui.overburdened=
-gui.slot=
-gui.slot.back=
 word.pickled=
 word.brined=
 word.cooked=
 word.salted=
 word.smoked=
 word.dried=
-gui.barrel.pickling=
-gui.barrel.brining=
-tile.Vessel.name=
-tile.Grill.name=
+
 food.cooked.rare=
 food.cooked.medrare=
 food.cooked.med=
@@ -2414,13 +2440,90 @@ food.cooked.1=
 food.cooked.2=
 food.cooked.3=
 food.cooked.4=
-gui.FoodPrep.Sandwich=
-gui.FoodPrep.Salad=
-item.Sandwich.name=
-item.Salad.name=
-item.ClayBowl.Ceramic Bowl.name=
-item.ClayBowl.Clay Bowl.name=
-item.Sugar.name=
-item.Sea Weed.name=
-word.stage1=Ensimmäinen Vaihe
-word.stage2=Toinen Vaihe
+
+gui.Torch.CatchingFire=Syttyy
+gui.Torch.Lit=Syttynyt
+
+gui.ItemHeat.Liquid=Nestemäinen
+gui.ItemHeat.Solidified=
+gui.ItemHeat.Caution=Varoitus
+gui.ItemHeat.Warming=Lämpenee
+gui.ItemHeat.Hot=Kuuma
+gui.ItemHeat.VeryHot=Erittäin Kuuma
+gui.ItemHeat.FaintRed=Heikon Punainen
+gui.ItemHeat.DarkRed=Tumman Punainen
+gui.ItemHeat.BrightRed=Kirkkaan Punainen
+gui.ItemHeat.Orange=Oranssi
+gui.ItemHeat.Yellow=Keltainen
+gui.ItemHeat.YellowWhite=Keltavalkoinen
+gui.ItemHeat.White=Valkoinen
+gui.ItemHeat.BrilliantWhite=Kirkkaan Valkoinen
+
+gui.ingot.workable=
+gui.ingot.weldable=
+gui.ingot.danger=
+
+gui.milk.fresh=
+gui.milk.old=
+gui.milk.sour=
+
+gui.units=
+
+#== WAILA ==
+gui.useless=
+gui.growth=
+gui.mature=
+gui.metal.Iron=
+
+#== Chat Messages ==
+gui.GoldPan.UseFull=Pitää käyttää juoksevan veden alla.
+gui.goldpan.overused=
+gui.seeds.failedTemp=
+gui.seeds.failedSun=
+
+gui.ProPick.Found=Löytyi
+gui.ProPick.FoundTraces=Löytyi Hieman
+gui.ProPick.FoundSmall=Löytyi pieni näyte
+gui.ProPick.FoundMedium=Löytyi keskikokoinen näyte
+gui.ProPick.FoundLarge=Löytyi iso näyte
+gui.ProPick.FoundVeryLarge=Löytyi erittäin iso näyte
+gui.ProPick.FoundNothing=Ei löytynyt mitään kiinnostavaa.
+
+#== Creative Tabs ==
+itemGroup.TFCArmor=(TFC) Haarniskat
+itemGroup.TFCMaterials=(TFC) Materiaalit
+itemGroup.TFCMisc=(TFC) Sekalaiset
+itemGroup.TFCPottery=(TFC) Ruukut
+itemGroup.TFCTools=(TFC) Työkalut
+itemGroup.TFCWeapons=(TFC) Aseet
+itemGroup.TFCDevices=
+itemGroup.TFCFoods=(TFC) Rakennustarvikkeet
+itemGroup.TFCBuilding=(TFC) Elintarvikkeet
+itemGroup.TFCDecoration=(TFC) Koristekuutiot
+
+#== Skill GUI ==
+skill.armorsmith=
+skill.gensmith=
+skill.toolsmith=
+skill.weaponsmith=
+skill.agriculture=
+skill.cooking=
+skill.prospecting=
+skill.butchering=
+gui.skill.novice=
+gui.skill.adept=
+gui.skill.expert=
+gui.skill.master=
+gui.skillpage=
+
+#==================
+#= Error Messages =
+#==================
+error.error=
+error.NBT=
+error.OreCFG=
+error.Contact=
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================

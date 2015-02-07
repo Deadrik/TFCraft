@@ -2,7 +2,9 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Queue;
 import java.util.Random;
+import java.util.concurrent.ArrayBlockingQueue;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -18,8 +20,6 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.Devices.BlockBlastFurnace;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
@@ -27,6 +27,8 @@ import com.bioxx.tfc.GUI.GuiBlastFurnace;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.Metal;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
@@ -41,8 +43,8 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 	public ItemStack fireItemStacks[];
 	public ItemStack outputItemStacks[];
 
-	private int prevStackSize;
-	private int numAirBlocks;
+	//private int prevStackSize;
+	//private int numAirBlocks;
 
 	public String OreType;
 
@@ -71,7 +73,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 		fireItemStacks = new ItemStack[20];
 		outputItemStacks = new ItemStack[20];
 		storage = new ItemStack[2];
-		numAirBlocks = 0;
+		//numAirBlocks = 0;
 		airFromBellows = 0;
 		charcoalCount = 0;
 		oreCount = 0;
@@ -143,6 +145,20 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 				}
 				cookDelay = 100;
 				fireItemStacks[i] = null;
+
+				//Treat fireItemStacks as a queue, and shift everything forward when an item is melted.
+				//This way the hottest item is always in the first slot - Kitty
+				Queue<ItemStack> buffer = new ArrayBlockingQueue<ItemStack>(fireItemStacks.length);
+				for (ItemStack is : fireItemStacks)
+				{
+					if (is != null)
+					{
+						buffer.offer(is);
+					}
+				}
+
+				fireItemStacks = buffer.toArray(new ItemStack[fireItemStacks.length]);
+
 				storage[1].setItemDamage(storage[1].getItemDamage() + 1);
 				if (storage[1] != null && storage[1].getItemDamage() == storage[1].getMaxDamage())
 				{
@@ -408,13 +424,16 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 			List list = worldObj.getEntitiesWithinAABB(EntityItem.class,
 					AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + moltenCount + 1.1, zCoord + 1));
 
+			/*Create a list of any players that are inside the chimney*/
+			List playerList = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + moltenCount + 1.1, zCoord + 1));
+
 			if (moltenCount == 0)
 				moltenCount = 1;
 			/*
 			 * Make sure the list isn't null or empty and that the stack is
 			 * valid 1 layer above the Molten Ore
 			 */
-			if (list != null && !list.isEmpty() && ((BlockBlastFurnace) TFCBlocks.BlastFurnace).checkStackAt(worldObj, xCoord, yCoord + moltenCount, zCoord))
+			if (list != null && !list.isEmpty() && ((BlockBlastFurnace) TFCBlocks.BlastFurnace).checkStackAt(worldObj, xCoord, yCoord + moltenCount, zCoord) && (playerList == null || playerList.isEmpty()))
 			{
 				/*
 				 * Iterate through the list and check for charcoal, coke, and

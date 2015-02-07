@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Blocks;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -9,24 +10,28 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.CollisionRayTraceStandard;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
+import com.bioxx.tfc.TileEntities.TEPartial;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.Interfaces.ICustomCollision;
 
-public class BlockStair extends BlockPartial
+public class BlockStair extends BlockPartial implements ICustomCollision
 {
 
 	public BlockStair(Material m)
 	{
 		super(m);
-		this.setCreativeTab(TFCTabs.TFCBuilding);
 	}
 
 	@Override
@@ -38,72 +43,6 @@ public class BlockStair extends BlockPartial
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-	}
-
-	@Override
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB AABB, List list, Entity entity)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
-		int rvmeta = meta & 7;
-		float var9 = 0.0F;
-		float var10 = 0.5F;
-		float var11 = 0.5F;
-		float var12 = 1.0F;
-
-		if ((meta & 8) != 0)
-		{
-			var9 = 0.5F;
-			var10 = 1.0F;
-			var11 = 0.0F;
-			var12 = 0.5F;
-		}
-
-		this.setBlockBounds(0.0F, var9, 0.0F, 1.0F, var10, 1.0F);
-		super.addCollisionBoxesToList(world, x, y, z, AABB, list, entity);
-
-		if (rvmeta == 0 || rvmeta == 4)
-		{
-			this.setBlockBounds(0.5F, var11, 0.0F, 1.0F, var12, 1.0F);
-			super.addCollisionBoxesToList(world, x, y, z, AABB, list, entity);
-		}
-		else if (rvmeta == 1 || rvmeta == 5)
-		{
-			this.setBlockBounds(0.0F, var11, 0.0F, 0.5F, var12, 1.0F);
-			super.addCollisionBoxesToList(world, x, y, z, AABB, list, entity);
-		}
-		else if (rvmeta == 2 || rvmeta == 6)
-		{
-			this.setBlockBounds(0.0F, var11, 0.5F, 1.0F, var12, 1.0F);
-			super.addCollisionBoxesToList(world, x, y, z, AABB, list, entity);
-		}
-		else if (rvmeta == 3 || rvmeta == 7)
-		{
-			this.setBlockBounds(0.0F, var11, 0.0F, 1.0F, var12, 0.5F);
-			super.addCollisionBoxesToList(world, x, y, z, AABB, list, entity);
-		}
-		
-		if (rvmeta == 4)
-		{
-			this.setBlockBounds(0.0F, var11, 0.0F, 0.5F, var12, 0.5F);
-			super.addCollisionBoxesToList(world, x, y, z, AABB, list, entity);
-		}
-		else if (rvmeta == 5)
-		{
-			this.setBlockBounds(0.5F, var11, 0.5F, 1.0F, var12, 1.0F);
-			super.addCollisionBoxesToList(world, x, y, z, AABB, list, entity);
-		}
-		else if (rvmeta == 6)
-		{
-			this.setBlockBounds(0.5F, var11, 0.0F, 1.0F, var12, 0.5F);
-			super.addCollisionBoxesToList(world, x, y, z, AABB, list, entity);
-		}
-		else if (rvmeta == 7)
-		{
-			this.setBlockBounds(0.0F, var11, 0.5F, 0.5F, var12, 1.0F);
-			super.addCollisionBoxesToList(world, x, y, z, AABB, list, entity);
-		}
-
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 	@Override
@@ -141,21 +80,20 @@ public class BlockStair extends BlockPartial
 	}
 
 	@Override
-	public boolean isBlockSolid(IBlockAccess world, int x, int y, int z, int side)
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
-		boolean solidSides[][] = {
-				{ true, false, false, false, false, true },
-				{ true, false, false, false, true, false },
-				{ true, false, false, true, false, false },
-				{ true, false, true, false, false, false },
-				{ false, true, false, false, false, true },
-				{ false, true, false, false, true, false },
-				{ false, true, false, true, false, false },
-				{ false, true, true, false, false, false }
-		};
-
-		int meta = world.getBlockMetadata(x, y, z);
-		return solidSides[meta][side];
+		TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
+		long rvmeta = te.extraData;
+		switch(side)
+		{
+		case DOWN:return (rvmeta & 15) == 15;
+		case UP:return (rvmeta & 240) == 240;
+		case NORTH:return (rvmeta & 102) == 102;
+		case SOUTH:return (rvmeta & 153) == 153;
+		case EAST:return (rvmeta & 170) == 170;
+		case WEST:return (rvmeta & 85) == 85;
+		default: return false;
+		}
 	}
 
 	/**
@@ -188,11 +126,71 @@ public class BlockStair extends BlockPartial
 
 			if(mode == 1)
 			{
-				ItemChisel.ChangeStairs(world, x, y, z, hitX, hitY, hitZ);
+				int meta = world.getBlockMetadata(x, y, z);
+				ItemChisel.CreateStairs(world, x, y, z, this, meta, hitX, hitY, hitZ);
 				entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
 				return true;
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void addCollisionBoxesToList(World world, int x, int y, int z, List list)
+	{
+		TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
+		long rvmeta = te.extraData;
+
+		if ((rvmeta & 1) == 0)
+		{
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.5F, 0.5F, 0.5F, 1.0F, 1.0F)});
+		}
+		if ((rvmeta & 2) == 0)
+		{
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.5F, 0.5F, 0.0F, 1.0F, 1.0F, 0.5F)});
+		}
+		if ((rvmeta & 4) == 0)
+		{
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.5F, 0.0F, 0.5F, 1.0F, 0.5F)});
+		}
+		if ((rvmeta & 8) == 0)
+		{
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.5F, 0.5F, 0.5F, 1.0F, 1.0F, 1.0F)});
+		}
+		if ((rvmeta & 16) == 0)
+		{
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.5F, 0.5F, 0.5F, 1.0F)});
+		}
+		if ((rvmeta & 32) == 0)
+		{
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.5F, 0.0F, 0.0F, 1.0F, 0.5F, 0.5F)});
+		}
+		if ((rvmeta & 64) == 0)
+		{
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.0F, 0.5F, 0.5F, 0.5F)});
+		}
+		if ((rvmeta & 128) == 0)
+		{
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.5F, 0.0F, 0.5F, 1.0F, 0.5F, 1.0F)});
+		}
+	}
+
+	@Override
+	public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB aabb, List list, Entity entity)
+	{
+		ArrayList<Object[]> l = new ArrayList<Object[]>();
+		addCollisionBoxesToList(world,i,j,k,l);
+		for(Object[] o : l)
+		{
+			AxisAlignedBB a = ((AxisAlignedBB)o[0]).getOffsetBoundingBox(i, j, k);
+			if (a != null && aabb.intersectsWith(a))
+				list.add(a);
+		}
+	}
+
+	@Override
+	public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 player, Vec3 view)
+	{
+		return CollisionRayTraceStandard.collisionRayTrace(this, world, x, y, z, player, view);
 	}
 }

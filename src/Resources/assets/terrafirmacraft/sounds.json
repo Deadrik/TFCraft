@@ -21,6 +21,13 @@
       "firestarter10"
     ]
   },
+  
+  "item.jug.blow": {
+    "category": "ambient",
+    "sounds": [
+      "jugblow1"
+    ]
+  },
 
   "mob.rooster.cry": {
     "category": "ambient",

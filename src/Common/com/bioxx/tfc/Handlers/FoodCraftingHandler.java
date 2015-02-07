@@ -6,11 +6,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.Tools.ItemKnife;
 import com.bioxx.tfc.api.Food;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Events.ItemCookEvent;
 import com.bioxx.tfc.api.Interfaces.IFood;
@@ -35,9 +35,9 @@ public class FoodCraftingHandler
 	public void onFoodCrafting(ItemCraftedEvent e)
 	{
 		//EntityPlayer player = e.player;
-		Item item = e.crafting.getItem();
+		//Item item = e.crafting.getItem();
 		ItemStack craftResult = e.crafting;
-		int isDmg = e.crafting.getItemDamage();
+		//int isDmg = e.crafting.getItemDamage();
 		IInventory iinventory = e.craftMatrix;
 
 		if(FoodCraftingHandler.PreCrafted)

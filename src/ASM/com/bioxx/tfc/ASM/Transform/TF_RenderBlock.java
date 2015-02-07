@@ -28,7 +28,7 @@ public class TF_RenderBlock extends ClassTransformer
 		/**
 		 * renderFaceZNeg
 		 */
-		List nodes = new ArrayList<InstrSet>();
+		List<InstrSet> nodes = new ArrayList<InstrSet>();
 
 		nodes.add(new InstrSet(new LdcInsnNode(16.0D), 7189, 2, InstrOpType.InsertAfter));
 		nodes.add(new InstrSet(new InsnNode(Opcodes.DSUB), 7189, 6, InstrOpType.InsertAfter));

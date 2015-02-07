@@ -1,30 +1,22 @@
 package com.bioxx.tfc.Render;
 
-import org.lwjgl.opengl.GL11;
-
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Render.Models.ModelQuiver;
-import com.bioxx.tfc.api.Interfaces.IEquipable;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.Interfaces.IEquipable;
 
 public class RenderLargeItem {
 
 	//private ModelQuiver quiver = new ModelQuiver();
-	private static final ResourceLocation tempTexture = new ResourceLocation(Reference.ModID, "textures/models/armor/leatherquiver_1.png");
+	//private static final ResourceLocation tempTexture = new ResourceLocation(Reference.ModID, "textures/models/armor/leatherquiver_1.png");
 
 	public RenderLargeItem(){
 

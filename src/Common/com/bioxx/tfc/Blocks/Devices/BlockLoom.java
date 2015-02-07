@@ -1,7 +1,7 @@
 package com.bioxx.tfc.Blocks.Devices;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -22,13 +22,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemBlocks.ItemBarrels;
 import com.bioxx.tfc.TileEntities.TELoom;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
@@ -36,7 +36,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockLoom extends BlockTerraContainer
 {
-	private final Random random = new Random();
 	private String[] woodNames;
 
 	public BlockLoom()
@@ -258,5 +257,31 @@ public class BlockLoom extends BlockTerraContainer
 	public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
 	{
 		return true;
+	}
+	
+    /**
+     * Get the block's damage value (for use with pick block).
+     */
+    @Override
+	public int getDamageValue(World world, int x, int y, int z)
+    {
+		TileEntity te = world.getTileEntity(x, y, z);
+		if (te != null && te instanceof TELoom)
+			return ((TELoom)te).loomType;
+		return 0;
+    }
+
+    /**
+     * This returns a complete list of items dropped from this block.
+     */
+	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		
+		int damageValue = getDamageValue(world, x, y, z);
+		ret.add(new ItemStack(this, 1, damageValue));
+		
+		return ret;
 	}
 }

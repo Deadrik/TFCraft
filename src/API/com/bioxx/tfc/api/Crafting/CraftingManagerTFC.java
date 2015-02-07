@@ -20,11 +20,11 @@ public class CraftingManagerTFC
 		return instance;
 	}
 
-	private List recipes;
+	private List<IRecipe> recipes;
 
 	private CraftingManagerTFC()
 	{
-		recipes = new ArrayList();
+		recipes = new ArrayList<IRecipe>();
 
 		Collections.sort(recipes, new RecipeSorterTFC(this));
 		System.out.println(new StringBuilder().append(recipes.size()).append(" recipes").toString());
@@ -57,7 +57,7 @@ public class CraftingManagerTFC
 				s = new StringBuilder().append(s).append(s1).toString();
 			}
 		}
-		HashMap hashmap = new HashMap();
+		HashMap<Character, ItemStack> hashmap = new HashMap<Character, ItemStack>();
 		for (; i < aobj.length; i += 2)
 		{
 			Character character = (Character)aobj[i];
@@ -96,7 +96,7 @@ public class CraftingManagerTFC
 
 	public void addShapelessRecipe(ItemStack itemstack, Object aobj[])
 	{
-		ArrayList arraylist = new ArrayList();
+		ArrayList<ItemStack> arraylist = new ArrayList<ItemStack>();
 		Object aobj1[] = aobj;
 		int i = aobj1.length;
 		for (int j = 0; j < i; j++)
@@ -173,7 +173,7 @@ public class CraftingManagerTFC
 		return null;
 	}
 
-	public List getRecipeList()
+	public List<IRecipe> getRecipeList()
 	{
 		return recipes;
 	}

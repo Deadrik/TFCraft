@@ -6,9 +6,10 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.WorldGen.TFCBiome;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenCustomFruitTree;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenFissure;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 
 public class GenCommand extends CommandBase
@@ -27,7 +28,18 @@ public class GenCommand extends CommandBase
 
 		EntityPlayerMP player = getCommandSenderAsPlayer(sender);
 
-		if(params.length == 2)
+		if (params.length == 1)
+		{
+			if (params[0].equalsIgnoreCase("fruittree"))
+			{
+				player.addChatMessage(new ChatComponentText("Generating Fruit Tree"));
+				WorldGenerator fruitGen = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves, 0);
+
+				if (!fruitGen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int) player.posX, (int) player.posY, (int) player.posZ))
+					player.addChatMessage(new ChatComponentText("Generation Failed"));
+			}
+		}
+		else if (params.length == 2)
 		{
 			if(params[0].equals("fissure"))
 			{

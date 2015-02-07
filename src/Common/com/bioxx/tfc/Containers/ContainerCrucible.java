@@ -7,11 +7,11 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Containers.Slots.SlotLiquidVessel;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.TileEntities.TECrucible;
+import com.bioxx.tfc.api.TFCItems;
 
 public class ContainerCrucible extends ContainerTFC
 {

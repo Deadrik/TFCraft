@@ -1,39 +1,33 @@
 package com.bioxx.tfc.Render;
 
 import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.client.event.RenderPlayerEvent;
-import net.minecraftforge.common.MinecraftForge;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Entities.EntityStand;
-import com.bioxx.tfc.Items.ItemQuiver;
+import com.bioxx.tfc.api.TFCItems;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.RenderPlayer
+public class RenderPlayerTFC extends RenderPlayer
 {
-	private ModelBiped modelBipedMain;
+	//private ModelBiped modelBipedMain;
 	private ModelBiped modelArmorChestplate;
 	private ModelBiped modelArmor;
 	//Should match RES_ITEM_GLINT in RenderLivingEntity
-	private static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
+	//private static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
 
 	public static String[] armorFilenamePrefix = new String[] {"cloth", "chain", "iron", "diamond", "gold"};
 	public static float NAME_TAG_RANGE = 64.0f;
@@ -166,7 +160,7 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 	 * to interpolate, par3 is probably a float between 0.0 and 1.0 that tells us where "between" the two angles we are.
 	 * Example: par1 = 30, par2 = 50, par3 = 0.5, then return = 40
 	 */
-	private float interpolateRotation(float par1, float par2, float par3)
+	/*private float interpolateRotation(float par1, float par2, float par3)
 	{
 		float f3;
 
@@ -181,7 +175,7 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 		}
 
 		return par1 + par3 * f3;
-	}
+	}*/
 
 	/**
 	 * Set the specified armor model as the player model. Args: player, armorSlot, partialTick

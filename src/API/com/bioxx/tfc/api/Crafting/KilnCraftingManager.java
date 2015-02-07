@@ -13,11 +13,11 @@ public class KilnCraftingManager
 		return instance;
 	}
 
-	private List recipes;
+	private List<KilnRecipe> recipes;
 
 	private KilnCraftingManager()
 	{
-		recipes = new ArrayList();
+		recipes = new ArrayList<KilnRecipe>();
 	}
 
 	public void addRecipe(KilnRecipe recipe)
@@ -53,7 +53,7 @@ public class KilnCraftingManager
         return recipe.input1;
     }
 
-	public List getRecipeList()
+	public List<KilnRecipe> getRecipeList()
 	{
 		return recipes;
 	}

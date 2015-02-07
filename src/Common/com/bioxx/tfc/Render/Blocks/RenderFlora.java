@@ -83,7 +83,7 @@ public class RenderFlora
 
 	public static void renderCatTails(Block block, int x, int y, int z, RenderBlocks renderer)
 	{
-		Tessellator tessellator = Tessellator.instance;
+		//Tessellator tessellator = Tessellator.instance;
 		IIcon icon = block.getIcon(0, 2);
 		renderer.drawCrossedSquares(icon, x, y, z, 2.0F);
 		/*

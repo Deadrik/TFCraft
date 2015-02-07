@@ -8,8 +8,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
-import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -68,9 +69,9 @@ public class BlockPeatGrass extends BlockGrass
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
-		if (world.getBlockLightValue(x, y + 1, z) < 4 && world.getBlock(x, y + 1, z).getLightOpacity() > 2)
+		if (world.getBlock(x, y + 1, z).isSideSolid(world, x, y + 1, z, ForgeDirection.DOWN))
 			world.setBlock(x, y, z, TFCBlocks.Peat);
-		else if (world.getBlockLightValue(x, y + 1, z) >= 4)
+		else if (world.canBlockSeeTheSky(x, y + 1, z))
 		{
 			spreadGrass(world, x, y, z, rand);
 		}

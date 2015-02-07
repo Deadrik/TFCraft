@@ -6,12 +6,16 @@
 
 
 generator.TFCDefault=TFC默认生成模式
-generator.TFCFlat=TFC超平坦模式
+generator.TFCFlat=
+generator.TFCAmplified=
+generator.TFCLargeBiomes=
 
 key.ToolMode=循环工具模式
 key.LockTool=锁定工具位置
 
 effect.bleed=流血
+death.attack.alcohol=%1$s死于酒精中毒
+death.attack.heatStroke=%1$s死于中暑
 
 #==============
 #= Spawn Eggs =
@@ -45,9 +49,9 @@ entity.fishTFC.name=鲈鱼
 #= Entity =
 #==========
 entity.notFamiliar=这只动物跟你还不熟.
-fishingRod.lineTension=绳子要绷断了.
-fishingRod.lineSnap=绳子绷断了.
-fishingRod.bite=嗷嗷,被咬了一口!
+fishingRod.lineTension=绳子要绷断了！
+fishingRod.lineSnap=绳子绷断了！
+fishingRod.bite=哇,上钩了!
 fishingRod.gotAway=它跑掉了...
 
 #================
@@ -95,6 +99,29 @@ commands.transferTamed.display.incoming=%s已将一只动物转交给你!
 commands.transferTamed.display.outgoing=你已将一只动物转交给%s!
 commands.transferTamed.wrongSender=你无法转交动物.
 
+#==========
+#= Fluids =
+#==========
+fluid.freshwater=淡水
+fluid.saltwater=盐水
+fluid.lavatfc=岩浆
+fluid.hotwater=热水
+fluid.beer=啤酒
+fluid.cider=苹果酒
+fluid.rum=朗姆酒
+fluid.ryewhiskey=黑麦威士忌
+fluid.sake=米酒
+fluid.vodka=伏特加
+fluid.whiskey=威士忌
+fluid.cornwhiskey=玉米威士忌
+fluid.milk=牛奶
+fluid.milkcurdled=凝乳
+fluid.milkvinegar=
+fluid.limewater=石灰水
+fluid.tannin=鞣酸
+fluid.vinegar=醋
+fluid.brine=卤水
+
 #========
 #= Food =
 #========
@@ -105,6 +132,11 @@ item.meal.decent=乏善可陈
 item.meal.good=美味可口
 item.meal.great=垂涎欲滴
 item.meal.fantastic=回味无穷
+item.Sandwich.name=三明治
+item.Salad.name=色拉
+item.Soup.name=汤
+item.Sugar.name=砂糖
+item.Sea Weed.name=海苔
 
 #== Grains ==
 item.Barley Bread.name=大麦面包
@@ -267,10 +299,10 @@ item.CornWhiskey.name=玉米威士忌
 item.Clay.Clay.name=粘土
 item.Clay.Fire Clay.name=陶土
 
-item.clay.clayflatlight.name=压平的浅色粘土
-item.clay.clayflatdark.name=压平的深色粘土
-item.clay.clayflatfire.name=压平的耐火粘土
-item.clay.clayflatdarkfire.name=压平的深色耐火粘土
+item.Flat Clay.clay flat light.name=压平的浅色粘土
+item.Flat Clay.clay flat dark.name=压平的深色粘土
+item.Flat Clay.clay flat fire.name=压平的耐火粘土
+item.Flat Clay.clay flat dark fire.name=压平的深色耐火粘土
 
 item.Jug.Clay Jug.name=粘土壶
 item.Jug.Ceramic Jug.name=陶瓷壶
@@ -386,6 +418,10 @@ item.Spindle Head.Spindle Head.name=纺锤头
 item.Fire Brick.Fire Brick.name=耐火砖
 item.Fire Brick.Clay Fire Brick.name=耐火粘土砖
 tile.FireBrick.name=耐火砖方块
+tile.Pottery.name=
+
+item.ClayBowl.Ceramic Bowl.name=瓷碗
+item.ClayBowl.Clay Bowl.name=陶碗
 
 #= Gems =
 item.Agate.Chipped.name=破裂的玛瑙
@@ -824,6 +860,7 @@ item.Small Ore.Sphalerite.name=小型闪锌矿
 item.Small Ore.Tetrahedrite.name=小型黝铜矿
 
 #== Ore Blocks ==
+tile.Ore.name=矿石
 tile.Ore.Bituminous Coal.name=烟煤
 tile.Ore.Borax.name=硼砂
 tile.Ore.Cinnabar.name=朱砂
@@ -956,7 +993,24 @@ item.Loom.White Elm.name=榆树织布机
 item.Loom.Willow.name=杨柳织布机
 
 #== Wood Blocks ==
-tile.log.Acacia.name=金合欢原木
+tile.Chest.Acacia.name=
+tile.Chest.Ash.name=
+tile.Chest.Aspen.name=
+tile.Chest.Birch.name=
+tile.Chest.Chestnut.name=
+tile.Chest.Douglas Fir.name=
+tile.Chest.Hickory.name=
+tile.Chest.Kapok.name=
+tile.Chest.Maple.name=
+tile.Chest.Oak.name=
+tile.Chest.Pine.name=
+tile.Chest.Sequoia.name=
+tile.Chest.Spruce.name=
+tile.Chest.Sycamore.name=
+tile.Chest.White Cedar.name=
+tile.Chest.White Elm.name=
+tile.Chest.Willow.name=
+
 tile.log2.Acacia.name=金合欢原木
 tile.log.Ash.name=白蜡原木
 tile.log.Aspen.name=白杨原木
@@ -1029,7 +1083,8 @@ tile.sapling.White Cedar.name=北美香柏树苗
 tile.sapling.White Elm.name=榆树树苗
 tile.sapling.Willow.name=杨柳树苗
 
-tile.leaves.Acacia.name=金合欢树叶
+tile.leaves2.name=金合欢树叶
+tile.leaves2.Acacia.name=金合欢树叶
 tile.leaves.Ash.name=白蜡树叶
 tile.leaves.Aspen.name=白杨树叶
 tile.leaves.Birch.name=桦树叶
@@ -1064,6 +1119,10 @@ tile.wood.Sycamore.name=悬铃木板
 tile.wood.White Cedar.name=北美香柏木板
 tile.wood.White Elm.name=榆树木板
 tile.wood.Willow.name=杨柳木板
+
+tile.fruitTreeWood.name=果树
+tile.fruitTreeLeaves.name=果树叶子
+tile.fruitTreeLeaves2.name=果树叶子
 
 tile.Door Acacia.name=金合欢木门
 tile.Door Ash.name=白蜡木门
@@ -1190,6 +1249,25 @@ tile.WoodSupportV.Sycamore.name=悬铃木支撑柱
 tile.WoodSupportV.White Cedar.name=北美香柏树支撑柱
 tile.WoodSupportV.White Elm.name=榆树木支撑柱
 tile.WoodSupportV.Willow.name=杨柳木支撑柱
+
+tile.WoodSupportH2.name=木材撑柱
+tile.WoodSupportH2.Acacia.name=金合欢木支撑柱
+tile.WoodSupportH.Ash.name=白蜡木支撑柱
+tile.WoodSupportH.Aspen.name=白杨木支撑柱
+tile.WoodSupportH.Birch.name=桦木支撑柱
+tile.WoodSupportH.Chestnut.name=栗木支撑柱
+tile.WoodSupportH.Douglas Fir.name=花旗松支撑柱
+tile.WoodSupportH.Hickory.name=山核桃木支撑柱
+tile.WoodSupportH.Kapok.name=木棉木支撑柱
+tile.WoodSupportH.Maple.name=枫木支撑柱
+tile.WoodSupportH.Oak.name=橡木支撑柱
+tile.WoodSupportH.Pine.name=松木支撑柱
+tile.WoodSupportH.Sequoia.name=红杉木支撑柱
+tile.WoodSupportH.Spruce.name=云杉木支撑柱
+tile.WoodSupportH.Sycamore.name=悬铃木支撑柱
+tile.WoodSupportH.White Cedar.name=北美香柏树支撑柱
+tile.WoodSupportH.White Elm.name=榆树木支撑柱
+tile.WoodSupportH.Willow.name=杨柳木支撑柱
 
 tile.Toolrack.Acacia.name=金合欢木工具架
 tile.Toolrack.Ash.name=白蜡木工具架
@@ -1794,6 +1872,9 @@ item.Tin Double Sheet.name=锡双层薄板
 item.Wrought Iron Double Sheet.name=锻铁双层薄板
 item.Zinc Double Sheet.name=锌双层薄板
 
+#== Misc ==
+item.Blueprint=图纸
+
 #===========
 #= Devices =
 #===========
@@ -1803,10 +1884,16 @@ tile.BlastFurnace.name=高炉
 tile.SpawnMeter.name=保护计
 tile.Quern.name=磨石座
 tile.EarlyBloomery.name=锻铁炉
+tile.Molten.name=熔化炉
 tile.Crucible.name=坩埚
 tile.NestBox.name=窝箱
 item.SluiceItem.name=洗矿槽
+tile.Sluice.name=洗矿槽
 tile.LeatherRack.name=鞣革架
+tile.FoodPrep.name=厨台
+tile.MetalSheet.name=金属板
+tile.ingotpile.name=金属锭
+tile.SmokeRack.name=烟熏架
 
 #== Anvils ==
 tile.Anvil.Stone.name=石砧
@@ -1905,17 +1992,35 @@ item.fishingRod.name=鱼竿
 
 item.Quiver.name=箭袋
 item.Rope.name=绳子
+item.Mud Brick.name=泥砖
+item.Wet Mud Brick.name=湿泥砖
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=稻草兽皮床
+tile.StrawHideBed.name=稻草兽皮床
 tile.customBed.sleep=这张床太不舒服了，睡不着。
 tile.BasicPipe.name=管道
 tile.ValvePipe.name=阀门
+tile.Smoke.name=烟
 tile.Torch.name=火把
 tile.Chest.name=箱子
 tile.Bookshelf.name=书架
 tile.Workbench.name=工作台
 tile.ButtonWood.name=木头按钮
+tile.Firepit.name=火堆
+tile.LogPile.name=原木垛
+tile.Charcoal.name=木炭
+tile.StoneDetailed.name=砾石
+tile.stoneStairs.name=楼梯
+tile.stoneSlabs.name=台阶
+tile.stoneStalac.name=钟乳石
+tile.WoodConstruct.name=木材
+tile.MetalTrapDoor.name=活板门
+tile.Vessel.name=大缸
+tile.Grill.name=烤架
+
+tile.Sulfur.name=硫磺
+tile.Reeds.name=芦苇
 
 #= Misc. Plants =
 item.Sugarcane.name=甘蔗
@@ -1930,7 +2035,7 @@ tile.Cactus.name=仙人掌
 tile.Pumpkin.name=南瓜
 tile.Moss.name=苔藓
 tile.Thatch.name=茅草
-tile.Flora.Golden Rod.name=秋麒麟(一枝黄花)
+tile.Flora.Golden Rod.name=秋麒麟
 tile.Flora.Cat Tails.name=香蒲
 
 item.Seeds Sugarcane.name=甘蔗种子
@@ -1973,7 +2078,6 @@ tile.LavaStationary.name=岩浆
 #=======
 #= GUI =
 #=======
-gui.badnbt=NBT信息损毁
 
 #== Anvil GUI ==
 gui.Anvil.Plans=设计图
@@ -2035,15 +2139,11 @@ gui.Anvil.Rule42=弯曲,最后三个
 gui.Anvil.Rule43=弯曲,非最末
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=高级
-gui.Armor.Shift=稍微变形
 gui.Armor.ForgedBy=锻造者：
-gui.Armor.Hold=未变形
 gui.Armor.Crush=碎裂
 gui.Armor.Pierce=穿刺
 gui.Armor.Slash=砍痕
 
-gui.Bow.Advanced=高级
 gui.Bow.Javelins=标枪
 gui.Bow.Arrows=箭
 gui.Bow.ForgedBy=锻造者
@@ -2062,11 +2162,13 @@ gui.Barrel.ToggleOn=进
 gui.Barrel.SealedOn=封闭
 gui.Barrel.Solid=存储固体
 gui.Barrel.Liquid=存储流体
+gui.barrel.pickling=腌制中的
+gui.barrel.brining=盐渍中的
+gui.barrel.preserving=调配中的
 
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=木炭
 gui.Bloomery.Ore=矿石
-gui.Bloomery.Output=出产
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=日历
@@ -2075,7 +2177,7 @@ gui.Calendar.DateDunk=日期:Dunk的生日!
 gui.Calendar.DateKitty=日期:Kitty的生日!
 
 gui.Calendar.Hour=时
-gui.Calendar.WitchHour=巫异时刻(午夜)
+gui.Calendar.WitchHour=巫异时刻
 
 gui.Calendar.Day=星期
 gui.Calendar.Sunday=星期日
@@ -2120,12 +2222,14 @@ gui.Calendar.1Week=1周
 gui.Calendar.1Month=1月
 gui.Calendar.1Year=1年
 
-#== Food Prep GUI ==
+#== Food GUI ==
 gui.FoodPrep.CreateMeal=烹调
 gui.FoodPrep.Effect=效果
 gui.FoodPrep.Energy=能量
 gui.FoodPrep.Filling=果腹
 gui.FoodPrep.Power=力量
+gui.FoodPrep.Sandwich=三明治
+gui.FoodPrep.Salad=色拉
 
 #== Metals ==
 gui.metal.Bismuth=铋
@@ -2188,16 +2292,28 @@ gui.plans.trapdoor=活板门
 #== Misc GUI ==
 gui.Blueprint=蓝图
 gui.Nametag=命名牌
-gui.fertilized=已施肥
+gui.fertilized=已受精
 gui.Inventory=物品栏
 gui.ClearSlot=清理输出格
 gui.LogPile=原木垛
+gui.Output=出产
 gui.done=完成
+gui.cancel=取消
 gui.Sluice.Soil=土壤
-gui.Sluice=洗矿槽
+gui.Sluice.Overworked=过度筛取
 gui.Workbench.Crafting=合成
+gui.overburdened=*超重*
+
+gui.badnbt=NBT信息损毁
 
 #== Tooltips ==
+gui.Advanced=高级
+gui.Shift=稍微变形
+gui.Hold=未变形
+
+gui.slot=格子
+gui.slot.back=返回
+
 gui.ShowHelp=§8帮助: (按住§fShift§8)
 gui.Help=§8帮助:
 gui.Clay.Inst0=至少手持5个§b右击§7来塑形
@@ -2210,6 +2326,13 @@ gui.PotteryBase.Inst0=潜行时§b右击§7以放置物体
 gui.PotteryVesselSmall.Inst0=或者§b右击§7以打开物品栏
 gui.RawHide.Inst0=????
 gui.Barrel.MoreItems=§8按住§fShift§8查看更多信息
+
+gui.Nutrient.A=营养成分A
+gui.Nutrient.B=营养成分B
+gui.Nutrient.C=营养成分C
+
+gui.stage1=第一阶段
+gui.stage2=第二阶段
 
 gui.Size.Tiny=微小
 gui.Size.VerySmall=很小
@@ -2227,6 +2350,7 @@ gui.Reach.Short=短程
 gui.Reach.Medium=中程
 gui.Reach.Far=远程
 
+#== Food ==
 gui.food.fruit=水 果
 gui.food.vegetable=蔬 菜
 gui.food.grain=粮 食
@@ -2238,90 +2362,6 @@ gui.food.salted=盐腌
 
 gui.FoodHeat.Cold=寒冷
 gui.FoodHeat.Warm=温暖
-
-gui.Torch.CatchingFire=生火
-gui.Torch.Lit=点着
-
-gui.ItemHeat.Liquid=液态
-gui.ItemHeat.Solidified=凝固
-gui.ItemHeat.Caution=警告
-gui.ItemHeat.Warming=暖
-gui.ItemHeat.Hot=烫
-gui.ItemHeat.VeryHot=灼热
-gui.ItemHeat.FaintRed=淡红
-gui.ItemHeat.DarkRed=暗红
-gui.ItemHeat.BrightRed=亮红
-gui.ItemHeat.Orange=橙色
-gui.ItemHeat.Yellow=黄
-gui.ItemHeat.YellowWhite=黄白
-gui.ItemHeat.White=白
-gui.ItemHeat.BrilliantWhite=炽白
-
-gui.ingot.workable=可加工
-gui.ingot.weldable=可焊接
-gui.ingot.danger=**危险**
-
-gui.milk.fresh=新鲜
-gui.milk.old=老
-gui.milk.sour=酸
-
-gui.units=单位
-
-#== Chat Messages ==
-gui.GoldPan.UseFull=必须在流动水中使用
-gui.goldpan.overused=这片区域资源似乎已经采尽,你可能不会再发现更多了.
-
-gui.ProPick.Found=发现了
-gui.ProPick.FoundTraces=发现了微量的
-gui.ProPick.FoundSmall=发现了少量的
-gui.ProPick.FoundMedium=发现了中等量的
-gui.ProPick.FoundLarge=发现了大量的
-gui.ProPick.FoundVeryLarge=发现了巨量的
-gui.ProPick.FoundNothing=没发现什么特别的
-
-#== Creative Tabs ==
-itemGroup.TFCArmor=群峦|装备
-itemGroup.TFCMaterials=群峦|材料
-itemGroup.TFCMisc=群峦|杂项
-itemGroup.TFCPottery=群峦|陶瓷
-itemGroup.TFCTools=群峦|工具
-itemGroup.TFCWeapons=群峦|武器
-itemGroup.TFCDevices=群峦|设备
-itemGroup.TFCFoods=群峦|食物
-itemGroup.TFCBuilding=群峦|建筑
-itemGroup.TFCDecoration=群峦|装饰
-
-#== Skill GUI ==
-skill.armorsmith=盔甲锻造
-skill.gensmith=普通锻造
-skill.toolsmith=工具锻造
-skill.weaponsmith=武器锻造
-skill.agriculture=稼穑技巧
-skill.cooking=美食料理
-skill.prospecting=矿产勘探
-skill.butchering=牲禽屠宰
-
-#=====================================================
-#========Add New Stuff Here To Be Sorted Later========
-#=====================================================
-fluid.freshwater=淡水
-fluid.saltwater=盐水
-fluid.lavatfc=岩浆
-fluid.hotwater=热水
-fluid.beer=啤酒
-fluid.cider=苹果酒
-fluid.rum=朗姆酒
-fluid.ryewhiskey=黑麦威士忌
-fluid.sake=米酒
-fluid.vodka=伏特加
-fluid.whiskey=威士忌
-fluid.cornwhiskey=玉米威士忌
-fluid.milk=牛奶
-fluid.milkcurdled=凝乳
-fluid.limewater=石灰水
-fluid.tannin=鞣酸
-fluid.vinegar=醋
-fluid.brine=卤水
 
 gui.showtaste=§8按住§fL-CTRL§8查看味道
 gui.taste=§8味道
@@ -2383,27 +2423,13 @@ gui.taste.6=非常
 gui.taste.7=极端
 gui.taste.8=离谱
 
-gui.skill.novice=新手
-gui.skill.adept=学徒
-gui.skill.expert=专家
-gui.skill.master=大师
-gui.skillpage=技能
-tile.MetalTrapDoor.name=活板门
-item.Mud Brick.name=泥砖
-item.Wet Mud Brick.name=湿泥砖
-gui.overburdened=*超重*
-gui.slot=格子
-gui.slot.back=返回
 word.pickled=腌制
 word.brined=盐渍
 word.cooked=烤熟
 word.salted=抹盐
 word.smoked=熏制
 word.dried=风干
-gui.barrel.pickling=腌制中的
-gui.barrel.brining=盐渍中的
-tile.Vessel.name=大缸
-tile.Grill.name=烤架
+
 food.cooked.rare=二分熟
 food.cooked.medrare=四分熟
 food.cooked.med=六分熟
@@ -2414,13 +2440,90 @@ food.cooked.1=半酥
 food.cooked.2=酥脆
 food.cooked.3=半焦
 food.cooked.4=烤焦
-gui.FoodPrep.Sandwich=三明治
-gui.FoodPrep.Salad=色拉
-item.Sandwich.name=三明治
-item.Salad.name=色拉
-item.ClayBowl.Ceramic Bowl.name=瓷碗
-item.ClayBowl.Clay Bowl.name=陶碗
-item.Sugar.name=砂糖
-item.Sea Weed.name=海苔
-word.stage1=第一阶段
-word.stage2=第二阶段
+
+gui.Torch.CatchingFire=生火
+gui.Torch.Lit=点着
+
+gui.ItemHeat.Liquid=液态
+gui.ItemHeat.Solidified=凝固
+gui.ItemHeat.Caution=警告
+gui.ItemHeat.Warming=暖
+gui.ItemHeat.Hot=烫
+gui.ItemHeat.VeryHot=灼热
+gui.ItemHeat.FaintRed=淡红
+gui.ItemHeat.DarkRed=暗红
+gui.ItemHeat.BrightRed=亮红
+gui.ItemHeat.Orange=橙色
+gui.ItemHeat.Yellow=黄
+gui.ItemHeat.YellowWhite=黄白
+gui.ItemHeat.White=白
+gui.ItemHeat.BrilliantWhite=炽白
+
+gui.ingot.workable=可加工
+gui.ingot.weldable=可焊接
+gui.ingot.danger=**危险**
+
+gui.milk.fresh=新鲜
+gui.milk.old=老
+gui.milk.sour=酸
+
+gui.units=单位
+
+#== WAILA ==
+gui.useless=
+gui.growth=
+gui.mature=
+gui.metal.Iron=
+
+#== Chat Messages ==
+gui.GoldPan.UseFull=必须在流动水中使用
+gui.goldpan.overused=这片区域资源似乎已经采尽,你可能不会再发现更多了.
+gui.seeds.failedTemp=
+gui.seeds.failedSun=
+
+gui.ProPick.Found=发现了
+gui.ProPick.FoundTraces=发现了微量的
+gui.ProPick.FoundSmall=发现了少量的
+gui.ProPick.FoundMedium=发现了中等量的
+gui.ProPick.FoundLarge=发现了大量的
+gui.ProPick.FoundVeryLarge=发现了巨量的
+gui.ProPick.FoundNothing=没发现什么特别的
+
+#== Creative Tabs ==
+itemGroup.TFCArmor=群峦|装备
+itemGroup.TFCMaterials=群峦|材料
+itemGroup.TFCMisc=群峦|杂项
+itemGroup.TFCPottery=群峦|陶瓷
+itemGroup.TFCTools=群峦|工具
+itemGroup.TFCWeapons=群峦|武器
+itemGroup.TFCDevices=群峦|设备
+itemGroup.TFCFoods=群峦|食物
+itemGroup.TFCBuilding=群峦|建筑
+itemGroup.TFCDecoration=群峦|装饰
+
+#== Skill GUI ==
+skill.armorsmith=盔甲锻造
+skill.gensmith=普通锻造
+skill.toolsmith=工具锻造
+skill.weaponsmith=武器锻造
+skill.agriculture=稼穑技巧
+skill.cooking=美食料理
+skill.prospecting=矿产勘探
+skill.butchering=牲禽屠宰
+gui.skill.novice=菜鸟
+gui.skill.adept=学徒
+gui.skill.expert=专家
+gui.skill.master=大师
+gui.skillpage=技能
+
+#==================
+#= Error Messages =
+#==================
+error.error=
+error.NBT=
+error.OreCFG=
+error.Contact=
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================

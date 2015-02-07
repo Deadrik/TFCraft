@@ -8,6 +8,7 @@ import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.TileEntities.TESmokeRack;
+import com.bioxx.tfc.api.Food;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -24,18 +25,24 @@ public class RenderSmokeRack implements ISimpleBlockRenderingHandler
 			if(te.getStackInSlot(0) != null)
 			{
 				double mid = 0.25;
+				float r = 1.0f; float g = 1.0f; float b = 1.0f;
+				if(Food.isSmoked(te.getStackInSlot(0)))
+				{r = 0.1f; g = 0.1f; b = 0.1f;}
 				renderer.setRenderBounds(0.43, 0.43, mid-0.07, 0.57, 0.57, mid+0.07);
-				renderer.renderStandardBlock(block, x, y, z);
+				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				renderer.setRenderBounds(0.491, 0.2, mid-0.009, 0.509, 0.5, mid+0.009);
-				renderer.renderStandardBlock(block, x, y, z);
+				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 			}
 			if(te.getStackInSlot(1) != null)
 			{
 				double mid = 0.75;
+				float r = 1.0f; float g = 1.0f; float b = 1.0f;
+				if(Food.isSmoked(te.getStackInSlot(1)))
+				{r = 0.1f; g = 0.1f; b = 0.1f;}
 				renderer.setRenderBounds(0.43, 0.43, mid-0.07, 0.57, 0.57, mid+0.07);
-				renderer.renderStandardBlock(block, x, y, z);
+				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				renderer.setRenderBounds(0.491, 0.2, mid-0.009, 0.509, 0.5, mid+0.009);
-				renderer.renderStandardBlock(block, x, y, z);
+				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 			}
 		}
 		else
@@ -43,18 +50,24 @@ public class RenderSmokeRack implements ISimpleBlockRenderingHandler
 			if(te.getStackInSlot(0) != null)
 			{
 				double mid = 0.25;
+				float r = 1.0f; float g = 1.0f; float b = 1.0f;
+				if(Food.isSmoked(te.getStackInSlot(0)))
+				{r = 0.1f; g = 0.1f; b = 0.1f;}
 				renderer.setRenderBounds(mid-0.07, 0.43, 0.43, mid+0.07, 0.57, 0.57);
-				renderer.renderStandardBlock(block, x, y, z);
+				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				renderer.setRenderBounds(mid-0.009, 0.2, 0.491, mid+0.009, 0.5, 0.509);
-				renderer.renderStandardBlock(block, x, y, z);
+				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 			}
 			if(te.getStackInSlot(1) != null)
 			{
 				double mid = 0.75;
+				float r = 1.0f; float g = 1.0f; float b = 1.0f;
+				if(Food.isSmoked(te.getStackInSlot(1)))
+				{r = 0.1f; g = 0.1f; b = 0.1f;}
 				renderer.setRenderBounds(mid-0.07, 0.43, 0.43, mid+0.07, 0.57, 0.57);
-				renderer.renderStandardBlock(block, x, y, z);
+				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				renderer.setRenderBounds(mid-0.009, 0.2, 0.491, mid+0.009, 0.5, 0.509);
-				renderer.renderStandardBlock(block, x, y, z);
+				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 			}
 		}
 		renderer.renderAllFaces = false;

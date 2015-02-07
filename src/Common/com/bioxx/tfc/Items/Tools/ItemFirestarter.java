@@ -16,12 +16,12 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEPottery;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 
@@ -72,6 +72,7 @@ public class ItemFirestarter extends ItemTerra
 	@Override
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count)
 	{
+		this.setFlags(player);
 		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(player.worldObj, player, true);
 		if(mop != null && mop.typeOfHit == MovingObjectType.BLOCK)
 		{
@@ -171,34 +172,7 @@ public class ItemFirestarter extends ItemTerra
 	@Override
 	public boolean onItemUseFirst(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
-		Block block = world.getBlock(x, y, z);
-		boolean surroundSolids = world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH)
-				&& world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH)
-				&& world.isSideSolid(x - 1, y, z, ForgeDirection.EAST)
-				&& world.isSideSolid(x + 1, y, z, ForgeDirection.WEST);
-		boolean surroundRock = world.getBlock(x, y - 1, z).getMaterial() == Material.rock
-				&& world.getBlock(x + 1, y, z).getMaterial() == Material.rock
-				&& world.getBlock(x - 1, y, z).getMaterial() == Material.rock
-				&& world.getBlock(x, y, z + 1).getMaterial() == Material.rock
-				&& world.getBlock(x, y, z - 1).getMaterial() == Material.rock
-				&& world.getBlock(x, y - 1, z).isNormalCube();
-		canBeUsed = side == 1
-				&& block.isNormalCube()
-				&& block.isOpaqueCube()
-				&& block.getMaterial() != Material.wood
-				&& block.getMaterial() != Material.cloth
-				&& world.isAirBlock(x, y + 1, z)
-				&& block != TFCBlocks.Charcoal
-				&& block != Blocks.coal_block;
-		isCoal = ((block == TFCBlocks.Charcoal && world.getBlockMetadata(x, y, z) > 6) || block == Blocks.coal_block) && surroundRock && surroundSolids;
-		isPottery = block == TFCBlocks.Pottery && surroundSolids;
-		if(isPottery)
-		{
-			isPottery = false;
-			TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
-			if(!te.isLit() && te.wood == 8)
-				isPottery = true;
-		}
+		this.setFlags(player);
 		// If the firestarter should be used with all flammable blocks, uncomment the next line.
 		//canBlockBurn = side == 1 && Blocks.fire.canCatchFire(world, x, y, z, ForgeDirection.UP);
 
@@ -209,5 +183,47 @@ public class ItemFirestarter extends ItemTerra
 	public EnumItemReach getReach(ItemStack is)
 	{
 		return EnumItemReach.SHORT;
+	}
+	
+	public void setFlags(EntityPlayer player)
+	{
+		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(player.worldObj, player, true);
+		if (mop != null && mop.typeOfHit == MovingObjectType.BLOCK)
+		{
+			World world = player.worldObj;
+			int x = mop.blockX;
+			int y = mop.blockY;
+			int z = mop.blockZ;
+			int side = mop.sideHit;
+
+			Block block = world.getBlock(x, y, z);
+			boolean surroundSolids = world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH)
+					&& world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH)
+					&& world.isSideSolid(x - 1, y, z, ForgeDirection.EAST)
+					&& world.isSideSolid(x + 1, y, z, ForgeDirection.WEST);
+			boolean surroundRock = world.getBlock(x, y - 1, z).getMaterial() == Material.rock
+					&& world.getBlock(x + 1, y, z).getMaterial() == Material.rock
+					&& world.getBlock(x - 1, y, z).getMaterial() == Material.rock
+					&& world.getBlock(x, y, z + 1).getMaterial() == Material.rock
+					&& world.getBlock(x, y, z - 1).getMaterial() == Material.rock
+					&& world.getBlock(x, y - 1, z).isNormalCube();
+			canBeUsed = side == 1
+					&& block.isNormalCube()
+					&& block.isOpaqueCube()
+					&& block.getMaterial() != Material.wood
+					&& block.getMaterial() != Material.cloth
+					&& world.isAirBlock(x, y + 1, z)
+					&& block != TFCBlocks.Charcoal
+					&& block != Blocks.coal_block;
+			isCoal = ((block == TFCBlocks.Charcoal && world.getBlockMetadata(x, y, z) > 6) || block == Blocks.coal_block) && surroundRock && surroundSolids;
+			isPottery = block == TFCBlocks.Pottery && surroundSolids;
+			if (isPottery)
+			{
+				isPottery = false;
+				TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
+				if (!te.isLit() && te.wood == 8)
+					isPottery = true;
+			}
+		}
 	}
 }

@@ -9,11 +9,11 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.Mobs.EntityChickenTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityPheasantTFC;
 import com.bioxx.tfc.TileEntities.TENestBox;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 
 public class EntityAIFindNest extends EntityAIBase

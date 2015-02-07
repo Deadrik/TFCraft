@@ -14,16 +14,16 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Containers.ContainerPlanSelection;
 import com.bioxx.tfc.TileEntities.TEAnvil;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Crafting.AnvilRecipe;
 import com.bioxx.tfc.api.Crafting.AnvilReq;
 
 public class GuiPlanSelection extends GuiContainerTFC
 {
-	TEAnvil AnvilEntity;
+	TEAnvil anvilTE;
 	EntityPlayer player;
 	World world;
 	ArrayList<Object[]> plans;
@@ -32,8 +32,8 @@ public class GuiPlanSelection extends GuiContainerTFC
 
 	public GuiPlanSelection(EntityPlayer p, TEAnvil te, World w, int x, int y, int z)
 	{
-		super(new ContainerPlanSelection(p, te, w, x, y, z), 175, 130);
-		AnvilEntity = te;
+		super(new ContainerPlanSelection(p, te, w, x, y, z), 176, 130);
+		anvilTE = te;
 		player = p;
 		world = w;
 		this.drawInventory = false;
@@ -53,19 +53,19 @@ public class GuiPlanSelection extends GuiContainerTFC
 		guiTop = (height - ySize) / 2;
 		int xOffset = 5;
 		int yOffset = 14;
-		int index = plans.size()-1;
-		for(Object[] o : plans)
+		int index = plans.size() - 1;
+		for (Object[] o : plans)
 		{
 			String p = (String) o[0];
 			AnvilRecipe a = (AnvilRecipe) o[1];
-			buttonList.add(0,new GuiPlanButton(plans.size()-1-index, guiLeft + xOffset, guiTop + yOffset, 16, 16, a.getCraftingResult(), this, StatCollector.translateToLocal("gui.plans."+p)));
+			buttonList.add(0, new GuiPlanButton(plans.size() - 1 - index, guiLeft + xOffset, guiTop + yOffset, 16, 16, a.getCraftingResult(), this, StatCollector.translateToLocal("gui.plans." + p)));
 			index--;
-			if(xOffset+36 < xSize)
-				xOffset+=18;
+			if (xOffset + 36 < xSize)
+				xOffset += 18;
 			else
 			{
 				xOffset = 5;
-				yOffset+=18;
+				yOffset += 18;
 			}
 		}
 	}
@@ -74,7 +74,7 @@ public class GuiPlanSelection extends GuiContainerTFC
 	protected void actionPerformed(GuiButton guibutton)
 	{
 		Object[] p = (Object[]) plans.toArray()[guibutton.id];
-		AnvilEntity.setPlan((String)p[0]);
+		anvilTE.setPlan((String) p[0]);
 	}
 
 	@Override
@@ -87,8 +87,8 @@ public class GuiPlanSelection extends GuiContainerTFC
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
 		drawGui(texture);
-		if(AnvilEntity.getStackInSlot(TEAnvil.INPUT1_SLOT) != null)
-			drawCenteredString(this.fontRendererObj, "Plans: "+ AnvilEntity.getStackInSlot(TEAnvil.INPUT1_SLOT).getDisplayName(), guiLeft+xSize/2, guiTop+5, 0x000000);
+		if (anvilTE.getStackInSlot(TEAnvil.INPUT1_SLOT) != null)
+			drawCenteredString(this.fontRendererObj, "Plans: " + anvilTE.getStackInSlot(TEAnvil.INPUT1_SLOT).getDisplayName(), guiLeft + xSize / 2, guiTop + 5, 0x000000);
 	}
 
 	private ArrayList<Object[]> getRecipes()
@@ -96,14 +96,14 @@ public class GuiPlanSelection extends GuiContainerTFC
 		AnvilManager manager = AnvilManager.getInstance();
 		Object[] plans = manager.getPlans().keySet().toArray();
 		ArrayList planList = new ArrayList();
-		for(Object p : plans)
+		for (Object p : plans)
 		{
-			AnvilRecipe ar = manager.findMatchingRecipe(new AnvilRecipe(AnvilEntity.anvilItemStacks[TEAnvil.INPUT1_SLOT], AnvilEntity.anvilItemStacks[TEAnvil.INPUT2_SLOT], 
-					(String)p,AnvilReq.getReqFromInt(AnvilEntity.AnvilTier), null));
+			AnvilRecipe ar = manager.findMatchingRecipe(new AnvilRecipe(anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT], anvilTE.anvilItemStacks[TEAnvil.INPUT2_SLOT], (String) p, AnvilReq.getReqFromInt(anvilTE.AnvilTier), null));
 
 			ar = handleMatchingRecipe(ar);
-			if(ar != null) 
-				planList.add(new Object[]{(String)p, ar});
+			if (ar != null)
+				planList.add(new Object[]
+				{ (String) p, ar });
 		}
 		return planList;
 
@@ -112,19 +112,20 @@ public class GuiPlanSelection extends GuiContainerTFC
 	AnvilRecipe handleMatchingRecipe(AnvilRecipe ar)
 	{
 		if (ar != null)
-			if (AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT] != null && AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT].getItem() == TFCItems.Bloom && ar.getCraftingResult().getItem() == TFCItems.Bloom)
+			if (anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT] != null && anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT].getItem() == TFCItems.Bloom && ar.getCraftingResult().getItem() == TFCItems.Bloom)
 			{
-				if (AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT].getItemDamage() <= 100)
+				if (anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT].getItemDamage() <= 100)
 					return null;
 			}
 		return ar;
 	}
 
 	@Override
-	public void drawTooltip(int mx, int my, String text) {
-		List list = new ArrayList();
+	public void drawTooltip(int mx, int my, String text)
+	{
+		List<String> list = new ArrayList<String>();
 		list.add(text);
-		this.drawHoveringTextZLevel(list, mx, my+15, this.fontRendererObj, 400);
+		this.drawHoveringTextZLevel(list, mx, my + 15, this.fontRendererObj, 400);
 		RenderHelper.disableStandardItemLighting();
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_DEPTH_TEST);

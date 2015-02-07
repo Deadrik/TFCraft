@@ -1,6 +1,6 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.api.TFCItems;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

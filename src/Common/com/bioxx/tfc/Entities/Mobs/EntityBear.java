@@ -31,18 +31,15 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.AI.EntityAITargetNonTamedTFC;
-import com.bioxx.tfc.Food.ItemFoodMeat;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
-import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
@@ -416,6 +413,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		}
 
 		this.handleFamiliarityUpdate();
+		this.syncData();
 
 		/*if (TFC_Time.getTotalTicks() == birthTime + 60 && this instanceof EntityBear && this.sex == 1&& rand.nextInt(10) == 0 && getGrowingAge() >= 0){
 			int i = rand.nextInt(3);
@@ -691,7 +689,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
-			if(player.isSneaking()){
+			if (player.isSneaking() && !familiarizedToday)
+			{
 				this.familiarize(player);
 				return true;
 			}
@@ -802,8 +801,9 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			if(familiarizedToday && familiarity < 100){
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
-				float familiarityChange = (6 * obedience_mod / aggression_mod);
-				if(this.isAdult() && (familiarity > 30 && familiarity < 80)){
+				float familiarityChange = (3 * obedience_mod / aggression_mod); //Changed from 6 to 3 so bears are harder to tame by default. -Kitty
+				if (this.isAdult() && familiarity > 80) //Adult bears cap out at 80 since it is currently impossible to get baby bears.
+				{
 					//Nothing
 				}
 				else if(this.isAdult()){
@@ -834,7 +834,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && isFood(stack)){
+		if (stack != null && isFood(stack) && !familiarizedToday)
+		{
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
@@ -851,7 +852,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 
 	@Override
 	public boolean trySetName(String name, EntityPlayer player) {
-		if(this.checkFamiliarity(InteractionEnum.NAME,player) && !this.hasCustomNameTag()){
+		if (this.checkFamiliarity(InteractionEnum.NAME, player))
+		{
 			this.setCustomNameTag(name);
 			return true;
 		}
@@ -865,8 +867,6 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		switch(interaction){
 		case MOUNT: flag = familiarity > 15;break;
 		case BREED: flag = familiarity > 20;break;
-		case SHEAR: flag = familiarity > 10;break;
-		case MILK: flag = familiarity > 10;break;
 		case NAME: flag = familiarity > 70;break;
 		case TOLERATEPLAYER: flag = familiarity > 75; break;
 		default: break;

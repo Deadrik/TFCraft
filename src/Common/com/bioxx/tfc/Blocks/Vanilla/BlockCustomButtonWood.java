@@ -1,9 +1,11 @@
 package com.bioxx.tfc.Blocks.Vanilla;
 
-import com.bioxx.tfc.TFCBlocks;
-
 import net.minecraft.block.BlockButtonWood;
 import net.minecraft.util.IIcon;
+
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.api.TFCBlocks;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -12,6 +14,7 @@ public class BlockCustomButtonWood extends BlockButtonWood
 	public BlockCustomButtonWood()
 	{
 		super();
+		this.setCreativeTab(TFCTabs.TFCDevices);
 	}
 
 	/**

@@ -8,7 +8,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -18,11 +17,11 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.TileEntities.TESluice;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCFluids;
+import com.bioxx.tfc.api.TFCItems;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -56,11 +55,11 @@ public class BlockSluice extends BlockContainer
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
 		int meta = world.getBlockMetadata(i, j, k);
-		int xCoord = i;
-		int yCoord = j;
-		int zCoord = k;
+		//int xCoord = i;
+		//int yCoord = j;
+		//int zCoord = k;
 		//Minecraft mc = ModLoader.getMinecraftInstance();
-		TileEntity te = world.getTileEntity(i, j, k);
+		//TileEntity te = world.getTileEntity(i, j, k);
 
 		if(world.isRemote)
 			return true;
@@ -96,7 +95,7 @@ public class BlockSluice extends BlockContainer
 	public IIcon getIcon(int side, int meta)
 	{
 		if((meta & 4) != 0 && side == 1)
-			return TFCFluid.SALTWATER.getFlowingIcon();
+			return TFCFluids.SALTWATER.getFlowingIcon();
 		else
 			return TFCBlocks.WoodSupportH.getIcon(side, 8);
 	}
@@ -193,16 +192,16 @@ public class BlockSluice extends BlockContainer
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
-		Block var5 = par1World.getBlock(par2, par3, par4);
+		Block block = world.getBlock(x, y, z);
 
-		int dir = getDirectionFromMetadata(par1World.getBlockMetadata(par2, par3, par4));
+		int dir = getDirectionFromMetadata(world.getBlockMetadata(x, y, z));
 		int[] offset = headBlockToFootBlockMap[dir];
 
-		boolean stay = (canStay(par1World, par2,par3,par4,false,dir) && 
-				canStay(par1World, par2+offset[0],par3,par4+offset[1],true,dir)) && 
-				(var5 == Blocks.air || var5.getMaterial().isReplaceable());
+		boolean stay = (canStay(world, x, y, z, false, dir) &&
+				canStay(world, x+offset[0],y,z+offset[1],true,dir)) && 
+				(block.isAir(world, x, y, z) || block.getMaterial().isReplaceable());
 
 		return stay;
 	}
@@ -214,8 +213,8 @@ public class BlockSluice extends BlockContainer
 		Block footBlock = world.getBlock(i+offset[0],j,k+offset[1]);
 		boolean stay = (canStay(world, i,j,k,false,dir) && 
 				canStay(world, i+offset[0],j,k+offset[1],true,dir)) && 
-				(topBlock == Blocks.air || topBlock.getMaterial().isReplaceable()) &&
-				(footBlock == Blocks.air || footBlock.getMaterial().isReplaceable());
+				(topBlock.isAir(world, i, j, k) || topBlock.getMaterial().isReplaceable()) &&
+				(footBlock.isAir(world, i+offset[0],j,k+offset[1]) || footBlock.getMaterial().isReplaceable());
 
 		return stay;
 	}

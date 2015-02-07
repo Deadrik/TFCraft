@@ -19,7 +19,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.BodyTempStats;
@@ -32,6 +31,7 @@ import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemCustomHoe;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.api.TFCAttributes;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -66,8 +66,9 @@ public class RenderOverlayHandler
 		ScaledResolution sr = event.resolution;
 		Minecraft mc = Minecraft.getMinecraft();
 
-		int healthRowHeight = sr.getScaledHeight() - 39;
+		int healthRowHeight = sr.getScaledHeight() - 40;
 		int armorRowHeight = healthRowHeight - 10;
+		int mid = sr.getScaledWidth() / 2;
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		TFC_Core.bindTexture(tfcicons);
@@ -77,13 +78,13 @@ public class RenderOverlayHandler
 				mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemCustomHoe)
 		{
 			int mode = PlayerManagerTFC.getInstance().getClientPlayer().hoeMode;
-			this.drawTexturedModalRect(sr.getScaledWidth() / 2 + 95, sr.getScaledHeight() - 21, 0+(20*mode), 38, 20, 20);
+			this.drawTexturedModalRect(mid + 95, sr.getScaledHeight() - 21, 0+(20*mode), 38, 20, 20);
 		}
 		else if(mc.thePlayer.inventory.getCurrentItem() != null && 
 				mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemChisel)
 		{
 			int mode = PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode;
-			this.drawTexturedModalRect(sr.getScaledWidth() / 2 + 95, sr.getScaledHeight() - 21, 0+(20*mode), 58, 20, 20);
+			this.drawTexturedModalRect(mid + 95, sr.getScaledHeight() - 21, 0+(20*mode), 58, 20, 20);
 		}
 
 		//Render Arrow and Javelin for Quiver
@@ -152,39 +153,39 @@ public class RenderOverlayHandler
 		if(mc.playerController.gameIsSurvivalOrAdventure())
 		{
 			//Draw Health
-			int mid = sr.getScaledWidth() / 2;
 			this.drawTexturedModalRect(mid-91, healthRowHeight, 0, 0, 90, 10);
 			float maxHealth = mc.thePlayer.getMaxHealth();
 			float percentHealth = Math.min(mc.thePlayer.getHealth()/maxHealth, 1.0f);
-			this.drawTexturedModalRect(mid-91, healthRowHeight, 0, 9, (int) (90*percentHealth), 9);
+			this.drawTexturedModalRect(mid-91, healthRowHeight, 0, 10, (int) (90*percentHealth), 10);
 
 			//Draw Food and Water
 			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(mc.thePlayer);
 			float foodLevel = foodstats.getFoodLevel();
-			float preFoodLevel = foodstats.getPrevFoodLevel();
+			//float preFoodLevel = foodstats.getPrevFoodLevel();
 
 			float waterLevel = foodstats.waterLevel;
 
-			float percentFood = foodLevel/foodstats.getMaxStomach(mc.thePlayer);
-			float percentWater = waterLevel/foodstats.getMaxWater(mc.thePlayer);
+			float percentFood = Math.min(foodLevel / foodstats.getMaxStomach(mc.thePlayer), 1);
+			float percentWater = Math.min(waterLevel / foodstats.getMaxWater(mc.thePlayer), 1);
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight, 0, 18, 90, 5);
+			this.drawTexturedModalRect(mid+1, healthRowHeight, 0, 20, 90, 5);
 			if(playerclient != null && playerclient.guishowFoodRestoreAmount)
 			{
 				float percentFood2 = Math.min(percentFood + playerclient.guiFoodRestoreAmount/foodstats.getMaxStomach(mc.thePlayer), 1);
 				GL11.glColor4f(0.0F, 0.6F, 0.0F, 0.3F);
-				this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight, 0, 23, (int) (90*(percentFood2)), 5);
+				this.drawTexturedModalRect(mid+1, healthRowHeight, 0, 25, (int) (90*(percentFood2)), 5);
 			}
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight, 0, 23, (int) (90*percentFood), 5);
 
-			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight+5, 0, 28, 90, 5);
-			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight+5, 0, 33, (int) (90*percentWater), 5);
+			this.drawTexturedModalRect(mid+1, healthRowHeight, 0, 25, (int) (90*percentFood), 5);
+
+			this.drawTexturedModalRect(mid+1, healthRowHeight+5, 90, 20, 90, 5);
+			this.drawTexturedModalRect(mid+1, healthRowHeight+5, 90, 25, (int) (90*percentWater), 5);
 
 			//Draw Notifications
 			String healthString = (int) Math.min(mc.thePlayer.getHealth(), maxHealth) + "/" + (int) maxHealth;
-			mc.fontRenderer.drawString(healthString, mid-45-(mc.fontRenderer.getStringWidth(healthString)/2), healthRowHeight+1, Color.white.getRGB());
+			mc.fontRenderer.drawString(healthString, mid-45-(mc.fontRenderer.getStringWidth(healthString)/2), healthRowHeight+2, Color.white.getRGB());
 			if(mc.thePlayer.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getModifier(TFCAttributes.overburdenedUUID) != null)
 				mc.fontRenderer.drawString(StatCollector.translateToLocal("gui.overburdened"), mid-(mc.fontRenderer.getStringWidth(StatCollector.translateToLocal("gui.overburdened"))/2), healthRowHeight-20, Color.red.getRGB());
 
@@ -195,13 +196,13 @@ public class RenderOverlayHandler
 			if(mc.thePlayer.ridingEntity == null)
 			{
 				cap = mc.thePlayer.xpBarCap();
-				int left = sr.getScaledWidth() / 2 - 91;
+				int left = mid - 91;
 
 				if (cap > 0)
 				{
 					short barWidth = 182;
 					int filled = (int)(mc.thePlayer.experience * (barWidth + 1));
-					int top = sr.getScaledHeight() - 28;
+					int top = sr.getScaledHeight() - 29;
 					drawTexturedModalRect(left, top, 0, 64, barWidth, 5);
 					if (filled > 0)
 						drawTexturedModalRect(left, top, 0, 69, filled, 5);
@@ -214,7 +215,7 @@ public class RenderOverlayHandler
 					int color = flag1 ? 16777215 : 8453920;
 					String text = "" + mc.thePlayer.experienceLevel;
 					int x = (sr.getScaledWidth() - fontrenderer.getStringWidth(text)) / 2;
-					int y = sr.getScaledHeight() - 29;
+					int y = sr.getScaledHeight() - 30;
 					fontrenderer.drawString(text, x + 1, y, 0);
 					fontrenderer.drawString(text, x - 1, y, 0);
 					fontrenderer.drawString(text, x, y + 1, 0);
@@ -233,7 +234,7 @@ public class RenderOverlayHandler
 				double mountMaxHealth = mount.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue();
 				double mountCurrentHealth = mount.getHealth();
 				float mountPercentHealth = (float)Math.min(mountCurrentHealth/mountMaxHealth, 1.0f);
-				this.drawTexturedModalRect(mid+1, armorRowHeight, 90, 9, (int) (90*mountPercentHealth), 9);
+				this.drawTexturedModalRect(mid+1, armorRowHeight, 90, 10, (int) (90*mountPercentHealth), 10);
 			}
 			TFC_Core.bindTexture(new ResourceLocation("minecraft:textures/gui/icons.png"));
 		}

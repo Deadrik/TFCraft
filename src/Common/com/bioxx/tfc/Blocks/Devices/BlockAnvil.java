@@ -1,7 +1,6 @@
 package com.bioxx.tfc.Blocks.Devices;
 
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -22,12 +21,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.TileEntities.TEAnvil;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Crafting.AnvilReq;
 
 import cpw.mods.fml.relauncher.Side;
@@ -39,7 +38,6 @@ public class BlockAnvil extends BlockTerraContainer
 	IIcon[] textureMapSide;
 	IIcon stoneAnvilIcon;
 	private int anvilId = 0;
-	private Random random = new Random();
 
 	public BlockAnvil()
 	{
@@ -53,13 +51,14 @@ public class BlockAnvil extends BlockTerraContainer
 		anvilId = offset;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List)
 	{
 		if(this == TFCBlocks.Anvil)
 		{
-			for(int i = 1; i < 8; i++) 
+			for(int i = 1; i < 8; i++)
 				par3List.add(new ItemStack(this, 1, i));
 		}
 
@@ -68,6 +67,12 @@ public class BlockAnvil extends BlockTerraContainer
 			for(int i = 0; i < 3; i++)
 				par3List.add(new ItemStack(this, 1, i));
 		}
+	}
+
+	@Override
+	public int damageDropped(int dmg)
+	{
+		return dmg & 7;
 	}
 
 	@Override
@@ -81,9 +86,9 @@ public class BlockAnvil extends BlockTerraContainer
 		{
 			if((TEAnvil)world.getTileEntity(i, j, k)!=null)
 			{
-				TEAnvil TEAnvil;
+				/*TEAnvil TEAnvil;
 				TEAnvil = (TEAnvil)world.getTileEntity(i, j, k);
-				ItemStack is = entityplayer.getCurrentEquippedItem();
+				ItemStack is = entityplayer.getCurrentEquippedItem();*/
 				entityplayer.openGui(TerraFirmaCraft.instance, 21, world, i, j, k);
 			}
 			return true;
@@ -275,22 +280,22 @@ public class BlockAnvil extends BlockTerraContainer
 
 				if (var7 != null)
 				{
-					float var8 = this.random.nextFloat() * 0.8F + 0.1F;
-					float var9 = this.random.nextFloat() * 0.8F + 0.1F;
+					float var8 = world.rand.nextFloat() * 0.8F + 0.1F;
+					float var9 = world.rand.nextFloat() * 0.8F + 0.1F;
 					EntityItem var12;
 
-					for (float var10 = this.random.nextFloat() * 0.8F + 0.1F; var7.stackSize > 0; world.spawnEntityInWorld(var12))
+					for (float var10 = world.rand.nextFloat() * 0.8F + 0.1F; var7.stackSize > 0; world.spawnEntityInWorld(var12))
 					{
-						int var11 = this.random.nextInt(21) + 10;
+						int var11 = world.rand.nextInt(21) + 10;
 
 						if (var11 > var7.stackSize)
 							var11 = var7.stackSize;
 						var7.stackSize -= var11;
 						var12 = new EntityItem(world, x + var8, y + var9, z + var10, new ItemStack(var7.getItem(), var11, var7.getItemDamage()));
 						float var13 = 0.05F;
-						var12.motionX = (float)this.random.nextGaussian() * var13;
-						var12.motionY = (float)this.random.nextGaussian() * var13 + 0.2F;
-						var12.motionZ = (float)this.random.nextGaussian() * var13;
+						var12.motionX = (float)world.rand.nextGaussian() * var13;
+						var12.motionY = (float)world.rand.nextGaussian() * var13 + 0.2F;
+						var12.motionZ = (float)world.rand.nextGaussian() * var13;
 						if (var7.hasTagCompound())
 							var12.getEntityItem().setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
 					}

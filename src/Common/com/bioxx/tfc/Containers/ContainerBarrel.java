@@ -11,11 +11,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Containers.Slots.SlotChest;
 import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEBarrel;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Enums.EnumSize;
 
 public class ContainerBarrel extends ContainerTFC
@@ -40,7 +40,7 @@ public class ContainerBarrel extends ContainerTFC
 	}
 
 	public static ArrayList<Item> getExceptions(){
-		ArrayList exceptions = new ArrayList<Item>();
+		ArrayList<Item> exceptions = new ArrayList<Item>();
 		exceptions.add(Item.getItemFromBlock(TFCBlocks.Barrel));
 		exceptions.add(Item.getItemFromBlock(TFCBlocks.Vessel));
 		return exceptions;
@@ -114,7 +114,7 @@ public class ContainerBarrel extends ContainerTFC
 		return null;
 	}
 
-	private int updatecounter = 0;
+	//private int updatecounter = 0;
 	@Override
 	public void detectAndSendChanges()
 	{

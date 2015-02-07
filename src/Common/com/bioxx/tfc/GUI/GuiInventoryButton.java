@@ -59,14 +59,14 @@ public class GuiInventoryButton extends GuiButton
 		}
 	}
 
-	private boolean isPointInRegion(int mouseX, int mouseY)
+	/*private boolean isPointInRegion(int mouseX, int mouseY)
 	{
 		int k1 = 0;//screen.getGuiLeft();
 		int l1 = 0;//screen.getGuiTop();
 		mouseX -= k1;
 		mouseY -= l1;
 		return mouseX >= xPosition - 1 && mouseX < xPosition + width + 1 && mouseY >= yPosition - 1 && mouseY < yPosition + height + 1;
-	}
+	}*/
 
 	/*public void drawTooltip(int mx, int my, String text) {
 		List list = new ArrayList();

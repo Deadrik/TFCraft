@@ -13,11 +13,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.Flora.BlockLogHoriz;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.TileEntities.TELeatherRack;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 
@@ -71,21 +71,6 @@ public class ItemRawHide extends ItemLooseRock
 	{
 		return itemstack;
 	}
-
-	@Override
-	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
-	{
-		/*if (TFC_Core.showExtraInformation() && is.getItem() == TFCItems.Hide) 
-		{
-			arraylist.add(StatCollector.translateToLocal("gui.Help"));
-			arraylist.add(StatCollector.translateToLocal("gui.RawHide.Inst0"));
-		}
-		else
-		{
-			arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
-		}*/
-	}
-
 
 	@Override
 	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5)

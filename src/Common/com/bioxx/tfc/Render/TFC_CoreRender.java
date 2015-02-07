@@ -7,16 +7,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import org.lwjgl.opengl.GL11;
-
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.Devices.BlockSluice;
 import com.bioxx.tfc.Blocks.Flora.BlockFruitLeaves;
 import com.bioxx.tfc.Core.TFC_Climate;
@@ -28,7 +24,7 @@ import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.TileEntities.TEWaterPlant;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
 import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 
 public class TFC_CoreRender
@@ -36,7 +32,7 @@ public class TFC_CoreRender
 	public static boolean renderBlockSlab(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
 		TEPartial te = (TEPartial) renderblocks.blockAccess.getTileEntity(x, y, z);
-		int md = renderblocks.blockAccess.getBlockMetadata(x, y, z);
+		//int md = renderblocks.blockAccess.getBlockMetadata(x, y, z);
 
 		boolean breaking = renderblocks.overrideBlockTexture != null;
 
@@ -81,13 +77,25 @@ public class TFC_CoreRender
 		return true;
 	}
 
+	private static RenderBlocksLightCache renderer;
 	public static boolean renderBlockStairs(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
-		boolean breaking = renderblocks.overrideBlockTexture != null;
-		
+		if(renderer == null)
+			renderer = new RenderBlocksLightCache(renderblocks);
+		else
+			renderer.update(renderblocks);
+
+		// Capture full block lighting data...
+		renderer.disableRender();
+		renderer.setRenderAllFaces(true);
+		renderer.setRenderBounds(0,0,0,1,1,1);
+		renderer.renderStandardBlock(block, x, y, z);
+		renderer.setRenderAllFaces(false);
+		renderer.enableRender();
+
 		int meta = renderblocks.blockAccess.getBlockMetadata(x, y, z);
-		int rvmeta = meta & 7;
-		float var7 = 0.0F;
+		long rvmeta = meta & 7;
+		/*float var7 = 0.0F;
 		float var8 = 0.5F;
 		float var9 = 0.5F;
 		float var10 = 1.0F;
@@ -98,101 +106,93 @@ public class TFC_CoreRender
 			var8 = 1.0F;
 			var9 = 0.0F;
 			var10 = 0.5F;
-		}
+		}*/
 
 		TEPartial te = (TEPartial) renderblocks.blockAccess.getTileEntity(x, y, z);
 		if(te.TypeID <= 0)
 			return false;
 
+		rvmeta = te.extraData;
 		int type = te.TypeID;
 		int temeta = te.MetaID;
-		IIcon tex = Block.getBlockById(type).getIcon(0, temeta);
-		if(!breaking)
-		{
-			//ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
-			renderblocks.overrideBlockTexture = tex;
-		}
-		renderblocks.renderAllFaces = true;
-		renderblocks.setRenderBounds(0.0F, var7, 0.0F, 1.0F, var8, 1.0F);
-		renderblocks.renderStandardBlock(block, x, y, z);
+		IIcon myTexture = renderblocks.overrideBlockTexture == null ? Block.getBlockById(type).getIcon(0, temeta) : renderblocks.overrideBlockTexture;
 
-		if (rvmeta == 0 || rvmeta == 4 )
+		if ((rvmeta & 1) == 0)
 		{
-			renderblocks.setRenderBounds(0.5F, var9, 0.0F, 1.0F, var10, 1.0F);
-			renderblocks.renderStandardBlock(block, x, y, z);
+			renderer.setRenderBounds(0.0F, 0.5F, 0.5F, 0.5F, 1.0F, 1.0F);
+			renderer.renderCachedBlock(block, x, y, z, myTexture);
 		}
-		else if (rvmeta == 1 || rvmeta == 5 )
+		if ((rvmeta & 2) == 0)
 		{
-			renderblocks.setRenderBounds(0.0F, var9, 0.0F, 0.5F, var10, 1.0F);
-			renderblocks.renderStandardBlock(block, x, y, z);
+			renderer.setRenderBounds(0.5F, 0.5F, 0.0F, 1.0F, 1.0F, 0.5F);
+			renderer.renderCachedBlock(block, x, y, z, myTexture);
 		}
-		else if (rvmeta == 2 || rvmeta == 6 )
+		if ((rvmeta & 4) == 0)
 		{
-			renderblocks.setRenderBounds(0.0F, var9, 0.5F, 1.0F, var10, 1.0F);
-			renderblocks.renderStandardBlock(block, x, y, z);
+			renderer.setRenderBounds(0.0F, 0.5F, 0.0F, 0.5F, 1.0F, 0.5F);
+			renderer.renderCachedBlock(block, x, y, z, myTexture);
 		}
-		else if (rvmeta == 3 || rvmeta == 7 )
+		if ((rvmeta & 8) == 0)
 		{
-			renderblocks.setRenderBounds(0.0F, var9, 0.0F, 1.0F, var10, 0.5F);
-			renderblocks.renderStandardBlock(block, x, y, z);
+			renderer.setRenderBounds(0.5F, 0.5F, 0.5F, 1.0F, 1.0F, 1.0F);
+			renderer.renderCachedBlock(block, x, y, z, myTexture);
 		}
-		
-		if (rvmeta == 4)
+
+		if ((rvmeta & 16) == 0)
 		{
-			renderblocks.setRenderBounds(0.0F, var9, 0.0F, 0.5F, var10, 0.5F);
-			renderblocks.renderStandardBlock(block, x, y, z);
+			renderer.setRenderBounds(0.0F, 0.0F, 0.5F, 0.5F, 0.5F, 1.0F);
+			renderer.renderCachedBlock(block, x, y, z, myTexture);
 		}
-		else if (rvmeta == 5)
+		if ((rvmeta & 32) == 0)
 		{
-			renderblocks.setRenderBounds(0.5F, var9, 0.5F, 1.0F, var10, 1.0F);
-			renderblocks.renderStandardBlock(block, x, y, z);
+			renderer.setRenderBounds(0.5F, 0.0F, 0.0F, 1.0F, 0.5F, 0.5F);
+			renderer.renderCachedBlock(block, x, y, z, myTexture);
 		}
-		else if (rvmeta == 6)
+		if ((rvmeta & 64) == 0)
 		{
-			renderblocks.setRenderBounds(0.5F, var9, 0.0F, 1.0F, var10, 0.5F);
-			renderblocks.renderStandardBlock(block, x, y, z);
+			renderer.setRenderBounds(0.0F, 0.0F, 0.0F, 0.5F, 0.5F, 0.5F);
+			renderer.renderCachedBlock(block, x, y, z, myTexture);
 		}
-		else if (rvmeta == 7)
+		if ((rvmeta & 128) == 0)
 		{
-			renderblocks.setRenderBounds(0.0F, var9, 0.5F, 0.5F, var10, 1.0F);
-			renderblocks.renderStandardBlock(block, x, y, z);
+			renderer.setRenderBounds(0.5F, 0.0F, 0.5F, 1.0F, 0.5F, 1.0F);
+			renderer.renderCachedBlock(block, x, y, z, myTexture);
 		}
-		
-		renderblocks.clearOverrideBlockTexture();
-		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-		renderblocks.renderAllFaces = false;
+
+		renderer.clearOverrideBlockTexture();
+		renderer.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		return true;
 	}
 
 	public static boolean RenderSulfur(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
 		IBlockAccess world = renderblocks.blockAccess;
-		if(world.getBlock(x, y, z+1).isSideSolid(world, x, y, z, ForgeDirection.NORTH))
+		if (world.getBlock(x, y, z + 1).isSideSolid(world, x, y, z + 1, ForgeDirection.NORTH))
 		{
 			renderblocks.setRenderBounds(0.0F, 0.0F, 0.99F, 1.0F, 1.0F, 1.0F);
 			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		if(world.getBlock(x, y, z-1).isSideSolid(world, x, y, z, ForgeDirection.SOUTH))
+		if (world.getBlock(x, y, z - 1).isSideSolid(world, x, y, z - 1, ForgeDirection.SOUTH))
 		{
 			renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.01F);
 			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		if(world.getBlock(x+1, y, z).isSideSolid(world, x, y, z, ForgeDirection.EAST))
+		if (world.getBlock(x + 1, y, z).isSideSolid(world, x + 1, y, z, ForgeDirection.EAST))
 		{
 			renderblocks.setRenderBounds(0.99F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		if(world.getBlock(x-1, y, z).isSideSolid(world, x, y, z, ForgeDirection.WEST))
+		if (world.getBlock(x - 1, y, z).isSideSolid(world, x - 1, y, z, ForgeDirection.WEST))
 		{
 			renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 0.01F, 1.0F, 1.0F);
 			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		if(world.getBlock(x, y+1, z).isSideSolid(world, x, y, z, ForgeDirection.DOWN))
+		if (world.getBlock(x, y + 1, z).isSideSolid(world, x, y + 1, z, ForgeDirection.DOWN))
 		{
 			renderblocks.setRenderBounds(0.0F, 0.99F, 0.0F, 1.0F, 1.0F, 1.0F);
 			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		if(world.getBlock(x, y-1, z).isSideSolid(world, x, y, z, ForgeDirection.UP))
+		if (world.getBlock(x, y - 1, z).isSideSolid(world, x, y - 1, z, ForgeDirection.UP))
 		{
 			renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.01F, 1.0F);
 			renderblocks.renderStandardBlock(block, x, y, z);
@@ -273,9 +273,9 @@ public class TFC_CoreRender
         	breaking = true;
         }*/
 
-		int meta = renderblocks.blockAccess.getBlockMetadata(i, j, k);
+		//int meta = renderblocks.blockAccess.getBlockMetadata(i, j, k);
 		World w = Minecraft.getMinecraft().theWorld;
-		TFCWorldChunkManager wcm = ((TFCWorldChunkManager)w.getWorldChunkManager());
+		//TFCWorldChunkManager wcm = ((TFCWorldChunkManager)w.getWorldChunkManager());
 		renderblocks.renderAllFaces = true;
 
 		DataLayer rockLayer1 = TFC_Climate.getCacheManager(w).getRockLayerAt(i, k, 0);
@@ -350,7 +350,7 @@ public class TFC_CoreRender
 
 	public static boolean renderFirepit(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
-		IBlockAccess blockAccess = renderblocks.blockAccess;
+		//IBlockAccess blockAccess = renderblocks.blockAccess;
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);		
@@ -359,7 +359,7 @@ public class TFC_CoreRender
 
 	public static boolean renderForge(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
-		IBlockAccess blockAccess = renderblocks.blockAccess;
+		//IBlockAccess blockAccess = renderblocks.blockAccess;
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
@@ -369,7 +369,7 @@ public class TFC_CoreRender
 	public static boolean RenderSluice(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		IBlockAccess blockAccess = renderblocks.blockAccess;
-		Tessellator tessellator = Tessellator.instance;
+		//Tessellator tessellator = Tessellator.instance;
 		int meta = blockAccess.getBlockMetadata(i, j, k);
 		int dir = BlockSluice.getDirectionFromMetadata(meta);
 
@@ -574,7 +574,7 @@ public class TFC_CoreRender
 		return out;
 	}
 
-	private static void drawCrossedSquares(Block block, int x, int y, int z, RenderBlocks renderblocks)
+	/*private static void drawCrossedSquares(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
 		Tessellator var9 = Tessellator.instance;
 
@@ -612,5 +612,5 @@ public class TFC_CoreRender
 		var9.addVertexWithUV(xMax, y + 0.0D, zMin, minX, maxY);
 		var9.addVertexWithUV(xMin, y + 0.0D, zMax, maxX, maxY);
 		var9.addVertexWithUV(xMin, y + 0, zMax, maxX, minY);
-	}
+	}*/
 }

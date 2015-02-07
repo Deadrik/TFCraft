@@ -8,8 +8,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class MapGenRiverRavine extends MapGenBaseTFC
 {
@@ -195,7 +195,7 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 		{
 			range = 32;
 			double x = chunkX * 16 + this.rand.nextInt(16);
-			Random r = new Random(world.getSeed());
+			//Random r = new Random(world.getSeed());
 			double y = 80;
 			double z = chunkZ * 16 + this.rand.nextInt(16);
 

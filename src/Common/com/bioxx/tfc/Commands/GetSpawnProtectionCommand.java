@@ -3,8 +3,8 @@ package com.bioxx.tfc.Commands;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
+import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
 
 import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -21,18 +21,32 @@ public class GetSpawnProtectionCommand extends CommandBase{
 	{
 		if(sender.canCommandSenderUseCommand(0, sender.getCommandSenderName()))
 		{
-			MinecraftServer var3 = MinecraftServer.getServer();
-			EntityPlayerMP var4;
+			EntityPlayerMP player = getCommandSenderAsPlayer(sender);
 
-			var4 = getCommandSenderAsPlayer(sender);
+			int x;
+			int z;
+			if (params.length >= 2)
+			{
+				try
+				{
+					x = Integer.parseInt(params[0]);
+					z = Integer.parseInt(params[1]);
+				} 
+				catch (NumberFormatException ex)
+				{
+					throw new WrongUsageException("invalid chunk coords: %d x %d", params[0], params[1]);
+				}
+			}
+			else
+			{
+				x = (int)player.posX >> 4;
+				z = (int)player.posZ >> 4;				
+			}
 
-			int x = (int)var4.posX >> 4;
-			int z = (int)var4.posZ >> 4;
-
-			ChunkData d = TFC_Core.getCDM(var4.worldObj).getData(x, z);
+			ChunkData d = TFC_Core.getCDM(player.worldObj).getData(x, z);
 
 			if(d != null)
-				throw new PlayerNotFoundException("SP: " + d.getSpawnProtectionWithUpdate());
+				throw new PlayerNotFoundException("SP (" + x + "," + z + "): " + d.getSpawnProtectionWithUpdate());
 			else
 				throw new PlayerNotFoundException("Unable to find ChunkData for "+x+","+z);
 		}

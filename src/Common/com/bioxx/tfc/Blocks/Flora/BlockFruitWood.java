@@ -12,12 +12,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.TFC_Climate;
@@ -26,6 +25,8 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.FloraIndex;
 import com.bioxx.tfc.Food.FloraManager;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockFruitWood extends BlockTerraContainer
@@ -35,6 +36,7 @@ public class BlockFruitWood extends BlockTerraContainer
 	public BlockFruitWood()
 	{
 		super(Material.wood);
+		this.setBlockBounds(0.3f, 0, 0.3f, 0.7f, 1, 0.7f); //Default block bounds set to trunk state
 	}
 
 	private boolean checkOut(World world, int i, int j, int k, int l)
@@ -88,7 +90,7 @@ public class BlockFruitWood extends BlockTerraContainer
 			int x = i;
 			int y = 0;
 			int z = k;
-			int count = 0;
+			//int count = 0;
 
 			if(world.getBlock(i, j+1, k) == this || world.getBlock(i, j-1, k) == this)
 			{
@@ -218,7 +220,7 @@ public class BlockFruitWood extends BlockTerraContainer
 	{
 		if(world.getBlock(i, j-1, k) == this || world.getBlock(i, j-1, k).isOpaqueCube())
 			return AxisAlignedBB.getBoundingBox(i+0.3, j, k+0.3, i+0.7, j+1, k+0.7);
-		return null;
+		return AxisAlignedBB.getBoundingBox(i, j + 0.4, k, i + 1, j + 0.6, k + 1);
 	}
 
 	@Override
@@ -227,6 +229,18 @@ public class BlockFruitWood extends BlockTerraContainer
 		if(world.getBlock(i, j-1, k) == this || world.getBlock(i, j-1, k).isOpaqueCube())
 			return AxisAlignedBB.getBoundingBox(i+0.3, j, k+0.3, i+0.7, j+1, k+0.7);
 		return AxisAlignedBB.getBoundingBox(i, j+0.4, k, i+1, j+0.6, k+1);
+	}
+
+	/**
+	 * Updates the blocks bounds based on its current state. Args: world, x, y, z
+	 */
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess world, int i, int j, int k)
+	{
+		if (world.getBlock(i, j - 1, k) == this || world.getBlock(i, j - 1, k).isOpaqueCube())
+			this.setBlockBounds(0.3f, 0, 0.3f, 0.7f, 1, 0.7f);
+		else
+			this.setBlockBounds(0, 0.4f, 0, 1, 0.6f, 1);
 	}
 
 	@Override
@@ -298,23 +312,23 @@ public class BlockFruitWood extends BlockTerraContainer
 			}
 			else if(te.birthTimeWood + 1 < TFC_Time.getTotalDays() && rand.nextInt(leafGrowthRate) == 0 && world.getBlock(i, j+2, k) != this)
 			{
-				if(world.isAirBlock(i, j+1, k) && world.isAirBlock(i, j+2, k) && BlockFruitLeaves.canStay(world, i, j+1, k, TFCBlocks.fruitTreeLeaves))//above
+				if (world.isAirBlock(i, j + 1, k) && world.isAirBlock(i, j + 2, k) && BlockFruitLeaves.canStay(world, i, j + 1, k))//above
 					world.setBlock(i, j+1, k, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
-				else if(world.isAirBlock(i+1, j, k) && world.isAirBlock(i+1, j+1, k) && BlockFruitLeaves.canStay(world, i+1, j, k, TFCBlocks.fruitTreeLeaves))//+x
+				else if (world.isAirBlock(i + 1, j, k) && world.isAirBlock(i + 1, j + 1, k) && BlockFruitLeaves.canStay(world, i + 1, j, k))//+x
 					world.setBlock(i+1, j, k, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
-				else if(world.isAirBlock(i-1, j, k) && world.isAirBlock(i-1, j+1, k) && BlockFruitLeaves.canStay(world, i-1, j, k, TFCBlocks.fruitTreeLeaves))//-x
+				else if (world.isAirBlock(i - 1, j, k) && world.isAirBlock(i - 1, j + 1, k) && BlockFruitLeaves.canStay(world, i - 1, j, k))//-x
 					world.setBlock(i-1, j, k, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
-				else if(world.isAirBlock(i, j, k+1) && world.isAirBlock(i, j+1, k+1) && BlockFruitLeaves.canStay(world, i, j, k+1, TFCBlocks.fruitTreeLeaves))//+z
+				else if (world.isAirBlock(i, j, k + 1) && world.isAirBlock(i, j + 1, k + 1) && BlockFruitLeaves.canStay(world, i, j, k + 1))//+z
 					world.setBlock(i, j, k+1, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
-				else if(world.isAirBlock(i, j, k-1) && world.isAirBlock(i, j+1, k-1) && BlockFruitLeaves.canStay(world, i, j, k-1, TFCBlocks.fruitTreeLeaves))//-z
+				else if (world.isAirBlock(i, j, k - 1) && world.isAirBlock(i, j + 1, k - 1) && BlockFruitLeaves.canStay(world, i, j, k - 1))//-z
 					world.setBlock(i, j, k-1, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
-				else if(world.isAirBlock(i+1, j, k-1) && world.isAirBlock(i+1, j+1, k-1) && BlockFruitLeaves.canStay(world, i+1, j, k-1, TFCBlocks.fruitTreeLeaves))//+x/-z
+				else if (world.isAirBlock(i + 1, j, k - 1) && world.isAirBlock(i + 1, j + 1, k - 1) && BlockFruitLeaves.canStay(world, i + 1, j, k - 1))//+x/-z
 					world.setBlock(i+1, j, k-1, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
-				else if(world.isAirBlock(i+1, j, k+1) && world.isAirBlock(i+1, j+1, k+1) && BlockFruitLeaves.canStay(world, i+1, j, k+1, TFCBlocks.fruitTreeLeaves))//+x/+z
+				else if (world.isAirBlock(i + 1, j, k + 1) && world.isAirBlock(i + 1, j + 1, k + 1) && BlockFruitLeaves.canStay(world, i + 1, j, k + 1))//+x/+z
 					world.setBlock(i+1, j, k+1, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
-				else if(world.isAirBlock(i-1, j, k-1) && world.isAirBlock(i-1, j+1, k-1) && BlockFruitLeaves.canStay(world, i-1, j, k-1, TFCBlocks.fruitTreeLeaves))//-x/-z
+				else if (world.isAirBlock(i - 1, j, k - 1) && world.isAirBlock(i - 1, j + 1, k - 1) && BlockFruitLeaves.canStay(world, i - 1, j, k - 1))//-x/-z
 					world.setBlock(i-1, j, k-1, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
-				else if(world.isAirBlock(i-1, j, k+1) && world.isAirBlock(i-1, j+1, k+1) && BlockFruitLeaves.canStay(world, i-1, j, k+1, TFCBlocks.fruitTreeLeaves))//-x/+z
+				else if (world.isAirBlock(i - 1, j, k + 1) && world.isAirBlock(i - 1, j + 1, k + 1) && BlockFruitLeaves.canStay(world, i - 1, j, k + 1))//-x/+z
 					world.setBlock(i-1, j, k+1, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
 			}
 		}
@@ -370,5 +384,11 @@ public class BlockFruitWood extends BlockTerraContainer
 		if(!world.isRemote && checkOut(world,x,y-1,z,metadata) && world.getTileEntity(x, y-1, z) != null)
 			((TileEntityFruitTreeWood)world.getTileEntity(x, y-1, z)).setBirth();
 		super.breakBlock(world, x, y, z, block, metadata);
+	}
+
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+	{
+		return null;
 	}
 }

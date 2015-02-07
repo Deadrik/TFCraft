@@ -18,14 +18,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.ColorizerFoliageTFC;
 import com.bioxx.tfc.Core.ColorizerGrassTFC;
 import com.bioxx.tfc.Core.Recipes;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.api.TFCItems;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -41,6 +42,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 		super();
 		float var3 = 0.4F;
 		this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.8F, 0.5F + var3);
+		this.setCreativeTab(TFCTabs.TFCDecoration);
 	}
 
 	@Override
@@ -88,7 +90,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 	public void harvestBlock(World world, EntityPlayer player, int i, int j, int k, int l)
 	{
 		super.harvestBlock(world, player, i, j, k, l);
-		Random rand = new Random();
+
 		ItemStack is = player.inventory.getCurrentItem();
 		for(int c = 0; c < Recipes.Knives.length && is != null; c++)
 		{
@@ -127,12 +129,6 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 	private void createStraw(World world, EntityPlayer player, int i, int j, int k)
 	{
 		EntityItem ei = new EntityItem(world, i+0.5F, j+0.5F, k+0.5F, new ItemStack(TFCItems.Straw, 1));
-		world.spawnEntityInWorld(ei);
-	}
-
-	private void createJute(World world, EntityPlayer player, int i, int j, int k)
-	{
-		EntityItem ei = new EntityItem(world, i + 0.5F, j + 0.5F, k + 0.5F, new ItemStack(TFCItems.Jute, 1));
 		world.spawnEntityInWorld(ei);
 	}
 

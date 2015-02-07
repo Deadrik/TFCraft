@@ -16,14 +16,14 @@ public class AnvilManager
 		return instance;
 	}
 
-	private List recipes;
-	private List recipesWeld;
-	private Map plans;
+	private List<AnvilRecipe> recipes;
+	private List<AnvilRecipe> recipesWeld;
+	private Map<String, PlanRecipe> plans;
 
 	private AnvilManager()
 	{
-		recipes = new ArrayList();
-		recipesWeld = new ArrayList();
+		recipes = new ArrayList<AnvilRecipe>();
+		recipesWeld = new ArrayList<AnvilRecipe>();
 		plans = new HashMap<String, PlanRecipe>();
 	}
 
@@ -109,15 +109,17 @@ public class AnvilManager
 		return null;
 	}
 
-	public List getRecipeList()
+	public List<AnvilRecipe> getRecipeList()
 	{
 		return recipes;
 	}
-	public List getWeldRecipeList()
+
+	public List<AnvilRecipe> getWeldRecipeList()
 	{
 		return recipesWeld;
 	}
-	public Map getPlans()
+
+	public Map<String, PlanRecipe> getPlans()
 	{
 		return plans;
 	}

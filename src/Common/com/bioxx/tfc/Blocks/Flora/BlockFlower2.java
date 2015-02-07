@@ -15,7 +15,7 @@ public class BlockFlower2 extends BlockFlower
 	@Override
 	public boolean canGrowConditions(World world, int x, int y, int z, int flowerMeta)
 	{
-		float evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(x, z).floatdata1;
+		//float evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(x, z).floatdata1;
 		float rain = TFC_Climate.getRainfall(world, x, 144, z);
 		float bioTemperature =TFC_Climate.getBioTemperatureHeight(world, x, y, z) ;
 		if(bioTemperature > 5 && rain > 250)

@@ -67,6 +67,7 @@ public class TFCCrafting
 	public static boolean railsRecipe;
 	public static boolean repeaterRecipe;
 	public static boolean roseRedRecipe;
+	public static boolean shearsRecipe;
 	public static boolean signRecipe;
 	public static boolean stickRecipe;
 	public static boolean stoneSlabsRecipe;

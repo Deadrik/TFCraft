@@ -2,7 +2,6 @@ package com.bioxx.tfc.Core.Player;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -175,43 +174,37 @@ public class FoodStatsTFC
 				}*/
 			}
 
-			/****************************************
-			 * Handle Alcohol
-			 ****************************************/
-			soberTime = player.getEntityData().hasKey("soberTime") ? player.getEntityData().getLong("soberTime") : 0;
-			if(soberTime > 0)
-			{
-				soberTime--;
-				shouldSendUpdate = true;
-			}
-			player.getEntityData().setLong("soberTime", soberTime);
-			long time = TFC_Time.getTotalTicks();
-
 			if(!player.capabilities.isCreativeMode)
 			{
-				for(;waterTimer < time;  waterTimer++)
+				for(;waterTimer < TFC_Time.getTotalTicks();  waterTimer++)
 				{
 					/**Reduce the player's water for normal living*/
 					waterLevel -= 1+(tempWaterMod/2);
 					if(waterLevel < 0)
 						waterLevel = 0;
 					if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0 && temp > 35)
-						player.attackEntityFrom(DamageSource.generic, 2);
+						player.attackEntityFrom((new DamageSource("heatStroke")).setDamageBypassesArmor().setDamageIsAbsolute(), 2);
 				}
 			}
 		}
-		else{
-			if(Minecraft.getMinecraft().entityRenderer instanceof EntityRendererTFC){
-				EntityRendererTFC erTFC = (EntityRendererTFC) Minecraft.getMinecraft().entityRenderer;
-				if((erTFC.getCurrentShaderLocation() == null || !erTFC.getCurrentShaderLocation().equals(wastedBlur)) && soberTime > 8000){
-					erTFC.setManualShader(wastedBlur);
-				}
-				else if((erTFC.getCurrentShaderLocation() == null || !erTFC.getCurrentShaderLocation().equals(drunkBlur)) && soberTime > 4000 && soberTime <=8000){
-					erTFC.setManualShader(drunkBlur);
-				}
-				else if(erTFC.getManualShaderBeingUsed() && soberTime <= 4000){
-					erTFC.deactivateManualShader();
-				}
+	}
+
+	public void clientUpdate()
+	{
+		if(Minecraft.getMinecraft().entityRenderer instanceof EntityRendererTFC)
+		{
+			EntityRendererTFC erTFC = (EntityRendererTFC) Minecraft.getMinecraft().entityRenderer;
+			if((erTFC.getCurrentShaderLocation() == null || !erTFC.getCurrentShaderLocation().equals(wastedBlur)) && soberTime > TFC_Time.getTotalTicks()+8000)
+			{
+				erTFC.setManualShader(wastedBlur);
+			}
+			else if((erTFC.getCurrentShaderLocation() == null || !erTFC.getCurrentShaderLocation().equals(drunkBlur)) && soberTime > TFC_Time.getTotalTicks()+4000 && soberTime <= TFC_Time.getTotalTicks()+8000)
+			{
+				erTFC.setManualShader(drunkBlur);
+			}
+			else if(erTFC.getManualShaderBeingUsed() && soberTime <= TFC_Time.getTotalTicks()+4000)
+			{
+				erTFC.deactivateManualShader();
 			}
 		}
 	}
@@ -391,7 +384,7 @@ public class FoodStatsTFC
 
 	public float getTasteFactor(ItemStack food)
 	{
-		Random R = new Random(getPlayerFoodSeed());
+		//Random R = new Random(getPlayerFoodSeed());
 		float tasteFactor = 0.85f;
 		int[] tastePref = getPrefTaste();
 
@@ -503,4 +496,13 @@ public class FoodStatsTFC
 		foodHealTimer = TFC_Time.getTotalTicks();
 	}
 
+	public void consumeAlcohol()
+	{
+		//TODO: Add a parameter for alcohol strength
+		if(soberTime <= TFC_Time.getTotalTicks())
+			soberTime = TFC_Time.getTotalTicks() + player.worldObj.rand.nextInt(1000) + 400;
+		else
+			soberTime += player.worldObj.rand.nextInt(1000) + 400;
+		shouldSendUpdate = true;
+	}
 }

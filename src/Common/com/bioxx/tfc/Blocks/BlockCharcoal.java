@@ -15,8 +15,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Items.Tools.ItemCustomShovel;
+import com.bioxx.tfc.api.TFCItems;
 
 public class BlockCharcoal extends BlockTerra
 {
@@ -121,7 +121,7 @@ public class BlockCharcoal extends BlockTerra
 	{
 		if(world.getBlockMetadata(x, y, z) > 0)
 			return false;
-		return super.removedByPlayer(world, player, x, y, z);
+		return world.setBlockToAir(x, y, z); // super.removedByPlayer is deprecated, and causes a loop.
 	}
 
 	public void combineCharcoalDown(World world, int x, int y, int z)

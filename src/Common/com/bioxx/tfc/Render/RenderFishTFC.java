@@ -13,7 +13,6 @@ import org.lwjgl.opengl.GL11;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityFishTFC;
-import com.bioxx.tfc.Render.Models.ModelBass;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,13 +21,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class RenderFishTFC extends RenderLiving
 {
 	private static final ResourceLocation Texture = new ResourceLocation(Reference.ModID, "textures/mob/Bass.png");
-	private float scale = 1f;
-	private ModelBass modelbass;
+
+	//private float scale = 1f;
+	//private ModelBass modelbass;
 
 	public RenderFishTFC (ModelBase par1ModelBase, float par2)
 	{
 		super (par1ModelBase, par2);
-		modelbass = (ModelBass) par1ModelBase;
+		//modelbass = (ModelBass) par1ModelBase;
 	}
 
 

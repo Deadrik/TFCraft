@@ -1,7 +1,5 @@
 package com.bioxx.tfc.Blocks;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -23,8 +21,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockThatch extends BlockTerra
 {
-	private final Random random = new Random();
-
 	public BlockThatch()
 	{
 		super(Material.grass);
@@ -86,7 +82,7 @@ public class BlockThatch extends BlockTerra
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
 	{
 		Block block = world.getBlock(x, y, z);
-		return side == 0 && this.minY > 0.0D ? true : (side == 1 && this.maxY < 1.0D ? true : (side == 2 && this.minZ > 0.0D ? true : (side == 3 && this.maxZ < 1.0D ? true : (side == 4 && this.minX > 0.0D ? true : (side == 5 && this.maxX < 1.0D ? true : !world.getBlock(x, y, z).isOpaqueCube())))));
+		return side == 0 && this.minY > 0.0D ? true : (side == 1 && this.maxY < 1.0D ? true : (side == 2 && this.minZ > 0.0D ? true : (side == 3 && this.maxZ < 1.0D ? true : (side == 4 && this.minX > 0.0D ? true : (side == 5 && this.maxX < 1.0D ? true : !block.isOpaqueCube())))));
 	}
 
 	@Override

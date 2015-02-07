@@ -7,7 +7,7 @@ import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -21,7 +21,7 @@ public class RenderNestBox  implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int i, int j, int k, Block block, int modelId, RenderBlocks renderer)
 	{
-		IBlockAccess blockAccess = renderer.blockAccess;
+		//IBlockAccess blockAccess = renderer.blockAccess;
 		renderer.renderAllFaces = true;
 		renderer.setRenderBounds(0.15F, 0.1F, 0.15F, 0.85F, 0.1F, 0.85F);
 		renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);

@@ -9,13 +9,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemBlocks.ItemMetalTrapDoor;
 import com.bioxx.tfc.TileEntities.TEGrill;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 
 import cpw.mods.fml.relauncher.Side;
@@ -36,7 +36,7 @@ public class BlockGrill extends BlockTerraContainer
 		super.onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
 		if(entityplayer.inventory.getCurrentItem() != null && entityplayer.inventory.getCurrentItem().getItem() instanceof ItemMetalTrapDoor)
 			return false;
-		TEGrill teb = (TEGrill)world.getTileEntity(x, y, z);
+		//TEGrill teb = (TEGrill)world.getTileEntity(x, y, z);
 		entityplayer.openGui(TerraFirmaCraft.instance, 43, world, x, y, z);
 		return true;
 	}

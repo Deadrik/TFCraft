@@ -21,6 +21,7 @@ import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Entities.EntityFallingBlockTFC;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
@@ -77,10 +78,26 @@ public class BlockSand extends BlockTerra
 		Block block = world.getBlock(x, y, z);
 		if (world.isAirBlock(x, y, z))
 			return true;
+		if (block == Blocks.bedrock)
+			return false;
 		if (block == Blocks.fire)
 			return true;
+		if (block == TFCBlocks.TallGrass)
+			return true;
+		if (block == TFCBlocks.Torch)
+			return true;
+		if (block == TFCBlocks.SmokeRack)
+			return true;
+		if (block == TFCBlocks.ToolRack)
+			return true;
+		if (block == TFCBlocks.Charcoal)
+			return false;
+		if (!block.isNormalCube())
+			return true;
 		Material material = block.getMaterial();
-		return material == Material.water ? true : material == Material.lava;
+		if (material == Material.water || material == Material.lava)
+			return true;
+		return false;
 	}
 
 	/**
@@ -155,18 +172,18 @@ public class BlockSand extends BlockTerra
 		if(!world.isRemote && world.doChunksNearChunkExist(x, y, z, 1))
 		{
 			int meta = world.getBlockMetadata(x, y, z);
-			boolean PosXAir = false;
-			boolean NegXAir = false;
-			boolean PosZAir = false;
-			boolean NegZAir = false;
-			boolean PosXAir2 = false;
-			boolean NegXAir2 = false;
-			boolean PosZAir2 = false;
-			boolean NegZAir2 = false;
+			//boolean PosXAir = false;
+			//boolean NegXAir = false;
+			//boolean PosZAir = false;
+			//boolean NegZAir = false;
+			//boolean PosXAir2 = false;
+			//boolean NegXAir2 = false;
+			//boolean PosZAir2 = false;
+			//boolean NegZAir2 = false;
 
 			boolean isBelowAir = world.isAirBlock(x, y - 1, z);
 			byte count = 0;
-			List sides = new ArrayList<Integer>();
+			List<Integer> sides = new ArrayList<Integer>();
 
 			if(world.isAirBlock(x + 1, y, z))
 			{

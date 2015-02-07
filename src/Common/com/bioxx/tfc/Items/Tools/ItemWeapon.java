@@ -16,10 +16,10 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
@@ -86,11 +86,11 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 		}
 	}
 
-	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addItemInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 	}
 
-	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 	}
 

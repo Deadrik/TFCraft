@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Items;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,12 +14,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
 import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.api.Metal;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
@@ -87,7 +88,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		return this;
 	}
 
-	public void addCreativeItems(java.util.ArrayList list)
+	public void addCreativeItems(ArrayList<ItemStack> list)
 	{
 		list.add(new ItemStack(this));
 	}

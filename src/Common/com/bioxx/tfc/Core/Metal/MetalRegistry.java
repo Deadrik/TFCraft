@@ -3,19 +3,19 @@ package com.bioxx.tfc.Core.Metal;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import com.bioxx.tfc.api.Metal;
-
 import net.minecraft.item.Item;
+
+import com.bioxx.tfc.api.Metal;
 
 public class MetalRegistry 
 {
 	public static MetalRegistry instance = new MetalRegistry();
 	
-	private HashMap hash;
+	private HashMap<String, Metal> hash;
 	
 	public MetalRegistry()
 	{
-		hash = new HashMap();
+		hash = new HashMap<String, Metal>();
 	}
 	
 	//Returns true if the metal was added or false if a metal with a similar name already exists;

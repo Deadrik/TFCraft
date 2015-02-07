@@ -2,8 +2,6 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -16,7 +14,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 	private int numberOfBlocks;
 	private Block LayerBlock;
 	private int LayerMeta;
-	private int BiomeId;
+	//private int BiomeId;
 
 	private int MPChunk_X;
 	private int MPChunk_Z;
@@ -39,22 +37,23 @@ public class WorldGenMinableTFC extends WorldGenerator
 	private int diameter = 2;
 	private int vDens = 2;
 	private int hDens = 2;
-	private String name;
+
+	//private String name;
 
 	public WorldGenMinableTFC(Block block, int j)
 	{
-		int emptyHolder = 0;
+		//int emptyHolder = 0;
 		minableBlock = block;
 		minableBlockMeta = 0;
-		emptyHolder = j;
-		BiomeId = -1;
+		//emptyHolder = j;
+		//BiomeId = -1;
 	}
 
 	public WorldGenMinableTFC(Block block, int j, Block layerB, int layerMeta, int rarity, int veinSize, 
 			int veinAmount, int height, int diameter, int vDensity, int hDensity)
 	{
-		int emptyHolder = 0;
-		emptyHolder = j;
+		/*int emptyHolder = 0;
+		emptyHolder = j;*/
 
 		this.minableBlock = block;
 		this.minableBlockMeta = j;
@@ -107,15 +106,15 @@ public class WorldGenMinableTFC extends WorldGenerator
 
 	public boolean BODgenerateVein(World world, Random rand, int parX, int parY, int parZ, int xyz)
 	{
-		boolean doOnce = true;
+		//boolean doOnce = true;
 
 		//==========================================mp mod
 		int posX = parX;
 		int posY = parY;
 		int posZ = parZ;
-		int tempPosX =0;
+		/*int tempPosX =0;
 		int tempPosY =0;
-		int tempPosZ =0;
+		int tempPosZ =0;*/
 		int posX2 = 0;
 		int posY2 = 0;
 		int posZ2 = 0;
@@ -125,9 +124,9 @@ public class WorldGenMinableTFC extends WorldGenerator
 		int directionX2 = 0;
 		int directionY2 = 0;
 		int directionZ2 = 0;
-		int directionX3 =0;
+		/*int directionX3 =0;
 		int directionY3 =0;
-		int directionZ3 =0;
+		int directionZ3 =0;*/
 		int directionChange =0;
 		int directionChange2 =0;
 		int blocksToUse = xyz;//input number of blocks per vein
@@ -214,7 +213,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 
 	public boolean BODgenerate(World world, Random rand, int x, int y, int z, int xyz)
 	{
-		boolean doOnce = true;
+		//boolean doOnce = true;
 		numberOfBlocks = xyz;
 		float f = rand.nextFloat() * (float)Math.PI;
 		double d = x + 8 + MathHelper.sin(f) * numberOfBlocks / 8F;
@@ -255,7 +254,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 						int m = world.getBlockMetadata(xCoord, yCoord, zCoord);
 						boolean isCorrectRockType = world.getBlock(xCoord, yCoord, zCoord) == LayerBlock;
 						boolean isCorrectMeta = (m == LayerMeta || LayerMeta == -1);
-						if(d12 * d12 + d13 * d13 + d14 * d14 < 1.0D && isCorrectRockType && (m == LayerMeta || LayerMeta == -1))
+						if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D && isCorrectRockType && isCorrectMeta)
 							world.setBlock(xCoord, yCoord, zCoord, MPBlock, MPBlockMeta, 0x2);
 					}
 				}
@@ -280,7 +279,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 			MPPrevZ = MPChunk_Z;
 			MPPrevBlock = MPBlock;
 			MPPrevMeta = MPBlockMeta;
-			this.name = n;
+			//this.name = n;
 			BetterOreDistribution(MPChunk_X, MPChunk_Z, MPBlock, MPBlockMeta, min, max,random);
 		}
 		return true;
@@ -302,7 +301,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 			MPPrevZ = MPChunk_Z;
 			MPPrevBlock = MPBlock;
 			MPPrevMeta = MPBlockMeta;
-			this.name = n;
+			//this.name = n;
 			BetterOreDistributionVein(MPChunk_X, MPChunk_Z, MPBlock, MPBlockMeta, min, max,random);
 		}
 		return true;
@@ -314,7 +313,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 		return true;
 	}
 
-	private boolean isRock(Block i)
+	/*private boolean isRock(Block i)
 	{
 		if(i == TFCBlocks.StoneIgIn || i == TFCBlocks.StoneIgEx || 
 				i == TFCBlocks.StoneMM || i == TFCBlocks.StoneSed ||
@@ -324,7 +323,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	//======================================================================================
 	public int mPCalculateDensity(Random rand, int oreDist, float oreDens) // returns the density value

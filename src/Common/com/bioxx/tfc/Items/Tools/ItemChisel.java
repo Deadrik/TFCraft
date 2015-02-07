@@ -1,21 +1,23 @@
 package com.bioxx.tfc.Items.Tools;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockSlab;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.TileEntities.TEDetailed;
 import com.bioxx.tfc.TileEntities.TEPartial;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -27,7 +29,7 @@ import com.google.common.collect.Sets;
 public class ItemChisel extends ItemTerraTool implements IToolChisel
 {
 	static Random random = new Random();
-	private static final Set blocks = Sets.newHashSet( new Block[] {});
+	private static final Set<Block> blocks = Sets.newHashSet(new Block[] {});
 
 	public ItemChisel(ToolMaterial e)
 	{
@@ -39,6 +41,20 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 	public EnumSize getSize(ItemStack is)
 	{
 		return EnumSize.VERYSMALL;
+	}
+
+	@Override
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
+	{
+		if (TFC_Core.showShiftInformation())
+		{
+			arraylist.add(StatCollector.translateToLocal("gui.Help"));
+			arraylist.add(StatCollector.translateToLocal("gui.Chisel.Inst0"));
+		}
+		else
+		{
+			arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
+		}
 	}
 
 	public static void CreateSmooth(World world, int x, int y, int z, Block id, int meta)
@@ -56,62 +72,42 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 
 	public static void CreateStairs(World world, int x, int y, int z, Block id, int meta, float hitX, float hitY, float hitZ)
 	{
-		int rot = 0;
-
-		if( hitY > 0.5F ) {
-			if( hitX < 0.5F && hitZ > 0.5F ) rot = 4;
-			if( hitX > 0.5F && hitZ < 0.5F ) rot = 5;
-			if( hitX < 0.5F && hitZ < 0.5F ) rot = 6;
-			if( hitX > 0.5F && hitZ > 0.5F ) rot = 7;
+		int hit = 0;
+		TEPartial te = null;
+		if(id != TFCBlocks.stoneStairs)
+		{
+			world.setBlock(x, y, z, TFCBlocks.stoneStairs, 0, 0x3);
+			te = (TEPartial)world.getTileEntity(x, y, z);
+			te.TypeID = (short) Block.getIdFromBlock(id);
+			te.MetaID = (byte) meta;
+			te.extraData = hit;
+			te.setMaterial(world.getBlock(x, y, z).getMaterial());
+			te.validate();
 		}
 		else
 		{
-			if( hitX < 0.5F && hitZ > 0.5F ) rot = 12;
-			if( hitX > 0.5F && hitZ < 0.5F ) rot = 13;
-			if( hitX < 0.5F && hitZ < 0.5F ) rot = 14;
-			if( hitX > 0.5F && hitZ > 0.5F ) rot = 15;
+			te = (TEPartial)world.getTileEntity(x, y, z);
+			world.notifyBlockChange(x, y, z, id);
 		}
-		
-		world.setBlock(x, y, z, TFCBlocks.stoneStairs, rot, 0x2);
-		TEPartial te = (TEPartial)world.getTileEntity(x, y, z);
-		te.TypeID = (short) Block.getIdFromBlock(id);
-		te.MetaID = (byte) meta;
-		te.extraData = 0;
-		te.setMaterial(world.getBlock(x, y, z).getMaterial());
-		te.validate();
-	}
-
-	public static void ChangeStairs(World world, int x, int y, int z, float hitX, float hitY, float hitZ)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
-		int newmeta = meta;
-		
 		if( hitY > 0.5F ) {
-			if( ( meta == 4 && hitX < 0.5F && hitZ < 0.5F )
-			 || ( meta == 6 && hitX < 0.5F && hitZ > 0.5F ) ) newmeta = 0;
-			if( ( meta == 7 && hitX > 0.5F && hitZ < 0.5F )
-			 || ( meta == 5 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 1;
-			if( ( meta == 6 && hitX > 0.5F && hitZ < 0.5F )
-			 || ( meta == 5 && hitX < 0.5F && hitZ < 0.5F ) ) newmeta = 2;
-			if( ( meta == 7 && hitX < 0.5F && hitZ > 0.5F )
-			 || ( meta == 4 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 3;
+			if( hitX <= 0.5F && hitZ >= 0.5F && (te.extraData & 1) == 0) hit = 1;
+			if( hitX >= 0.5F && hitZ <= 0.5F && (te.extraData & 2) == 0) hit = 2;
+			if( hitX <= 0.5F && hitZ <= 0.5F && (te.extraData & 4) == 0) hit = 4;
+			if( hitX >= 0.5F && hitZ >= 0.5F && (te.extraData & 8) == 0) hit = 8;
 		}
 		else
 		{
-			if( ( meta == 12 && hitX < 0.5F && hitZ < 0.5F )
-			 || ( meta == 14 && hitX < 0.5F && hitZ > 0.5F ) ) newmeta = 8;
-			if( ( meta == 15 && hitX > 0.5F && hitZ < 0.5F )
-			 || ( meta == 13 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 9;
-			if( ( meta == 14 && hitX > 0.5F && hitZ < 0.5F )
-			 || ( meta == 13 && hitX < 0.5F && hitZ < 0.5F ) ) newmeta = 10;
-			if( ( meta == 15 && hitX < 0.5F && hitZ > 0.5F )
-			 || ( meta == 12 && hitX > 0.5F && hitZ > 0.5F ) ) newmeta = 11;
+			if( hitX <= 0.5F && hitZ >= 0.5F && (te.extraData & 16) == 0) hit = 16;
+			if( hitX >= 0.5F && hitZ <= 0.5F && (te.extraData & 32) == 0) hit = 32;
+			if( hitX <= 0.5F && hitZ <= 0.5F && (te.extraData & 64) == 0) hit = 64;
+			if( hitX >= 0.5F && hitZ >= 0.5F && (te.extraData & 128) == 0) hit = 128;
 		}
-		
-		if( meta == newmeta )
-			ItemChisel.StairToDetailed(world, x, y, z, meta, hitX, hitY, hitZ);
+
+		te.extraData |= hit;
+		if(te.extraData == 255)
+			world.setBlock(x, y, z, Blocks.air);
 		else
-			world.setBlockMetadataWithNotify(x, y, z, newmeta, 0x2);
+			te.broadcastPacketInRange();
 	}
 
 	public static void CreateSlab(World world, int x, int y, int z, Block id, int meta, int side, Block Slab)
@@ -277,7 +273,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 		}
 		else
 		{
-			Material m = world.getBlock(x, y, z).getMaterial();
+			//Material m = world.getBlock(x, y, z).getMaterial();
 			world.setBlock(x, y, z, TFCBlocks.Detailed);
 
 			te = (TEDetailed)world.getTileEntity(x, y, z);
@@ -299,84 +295,6 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 
 		world.notifyBlocksOfNeighborChange(x, y, z, world.getBlock(x, y, z));
 	}
-	
-	public static void StairToDetailed(World world, int x, int y, int z, int meta, float hitX, float hitY, float hitZ)
-	{
-		world.notifyBlocksOfNeighborChange(x, y, z, world.getBlock(x, y, z));
-		
-		boolean xmymzm = hitX < 0.5F && hitY < 0.5F && hitZ < 0.5F;
-		boolean xpymzm = hitX > 0.5F && hitY < 0.5F && hitZ < 0.5F;
-		boolean xpymzp = hitX > 0.5F && hitY < 0.5F && hitZ > 0.5F;
-		boolean xmymzp = hitX < 0.5F && hitY < 0.5F && hitZ > 0.5F;
-		boolean xmypzm = hitX < 0.5F && hitY > 0.5F && hitZ < 0.5F;
-		boolean xpypzm = hitX > 0.5F && hitY > 0.5F && hitZ < 0.5F;
-		boolean xpypzp = hitX > 0.5F && hitY > 0.5F && hitZ > 0.5F;
-		boolean xmypzp = hitX < 0.5F && hitY > 0.5F && hitZ > 0.5F;
-		
-		if( ( meta ==  8 || meta == 10 || meta == 14 ) && xmymzm ) return;
-		if( ( meta == 10 || meta ==  9 || meta == 13 ) && xpymzm ) return;
-		if( ( meta ==  9 || meta == 11 || meta == 15 ) && xpymzp ) return;
-		if( ( meta == 11 || meta ==  8 || meta == 12 ) && xmymzp ) return;
-		if( ( meta ==  0 || meta ==  2 || meta ==  6 ) && xmypzm ) return;
-		if( ( meta ==  2 || meta ==  1 || meta ==  5 ) && xpypzm ) return;
-		if( ( meta ==  1 || meta ==  3 || meta ==  7 ) && xpypzp ) return;
-		if( ( meta ==  3 || meta ==  0 || meta ==  4 ) && xmypzp ) return;
-		
-		TEPartial tep = (TEPartial)world.getTileEntity(x, y, z);
-		world.setBlock(x, y, z, TFCBlocks.Detailed);
-		
-		TEDetailed te;
-		te = (TEDetailed)world.getTileEntity(x, y, z);
-		te.TypeID = tep.TypeID;
-		te.MetaID = tep.MetaID;
-		
-		System.out.println(meta);
-		
-		System.out.println( Math.round(hitY) + " " + Math.round(hitX) + " " + Math.round(hitZ) );
-		
-		if( meta != 8 && meta != 10 && meta != 14 && !xmymzm )
-			for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++) {
-				te.setBlock(subX, subY, subZ);
-				te.setQuad(subX, subY, subZ);
-			}
-		if( meta != 10 && meta != 9 && meta != 13 && !xpymzm )
-			for(int subX = 4; subX < 8; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 0; subY < 4; subY++) {
-				te.setBlock(subX, subY, subZ);
-				te.setQuad(subX, subY, subZ);
-			}
-		if( meta != 9 && meta != 11 && meta != 15 && !xpymzp )
-			for(int subX = 4; subX < 8; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 0; subY < 4; subY++) {
-				te.setBlock(subX, subY, subZ);
-				te.setQuad(subX, subY, subZ);
-			}
-		if( meta != 11 && meta != 8 && meta != 12 && !xmymzp )
-			for(int subX = 0; subX < 4; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 0; subY < 4; subY++) {
-				te.setBlock(subX, subY, subZ);
-				te.setQuad(subX, subY, subZ);
-			}
-		if( meta != 0 && meta != 2 && meta != 6 && !xmypzm )
-			for(int subX = 0; subX < 4; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 4; subY < 8; subY++) {
-				te.setBlock(subX, subY, subZ);
-				te.setQuad(subX, subY, subZ);
-			}
-		if( meta != 2 && meta != 1 && meta != 5 && !xpypzm )
-			for(int subX = 4; subX < 8; subX++) for(int subZ = 0; subZ < 4; subZ++) for(int subY = 4; subY < 8; subY++) {
-				te.setBlock(subX, subY, subZ);
-				te.setQuad(subX, subY, subZ);
-			}
-		if( meta != 1 && meta != 3 && meta != 7 && !xpypzp )
-			for(int subX = 4; subX < 8; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 4; subY < 8; subY++) {
-				te.setBlock(subX, subY, subZ);
-				te.setQuad(subX, subY, subZ);
-			}
-		if( meta != 3 && meta != 0 && meta != 4 && !xmypzp )
-			for(int subX = 0; subX < 4; subX++) for(int subZ = 4; subZ < 8; subZ++) for(int subY = 4; subY < 8; subY++) {
-				te.setBlock(subX, subY, subZ);
-				te.setQuad(subX, subY, subZ);
-			}
-		
-		return;
-	}
 
 	@Override
 	public boolean onUsed(World world, EntityPlayer player, int x, int y, int z, Block block, int meta, int side, float hitX, float hitY, float hitZ)
@@ -386,7 +304,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 
 		int hasChisel = -1;
 		int hasHammer = -1;
-		
+
 		for(int i = 0; i < 9;i++)
 		{
 			if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemHammer) {
@@ -435,7 +353,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 						TFC_Core.isNaturalStone(world.getBlock(x, y+2, z))) {
 					return false;
 				}
-				
+
 				ItemChisel.CreateStairs(world, x, y, z, block, meta, hitX, hitY, hitZ);
 
 				player.inventory.mainInventory[hasChisel].damageItem(1, player);
@@ -458,7 +376,8 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 			else if(mode == 3 && pi.lockMatches(x, y, z))
 			{
 				ItemChisel.CreateDetailed(world, x, y, z, block, meta, side, hitX, hitY, hitZ);
-				if (random.nextInt(4)==0){
+				if (random.nextInt(4) == 0)
+				{
 					player.inventory.mainInventory[hasChisel].damageItem(1, player);
 				}
 				return true;

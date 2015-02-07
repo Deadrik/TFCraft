@@ -19,12 +19,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Items.ItemLogs;
 import com.bioxx.tfc.TileEntities.TEFirepit;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 
 public class BlockFirepit extends BlockTerraContainer
 {
@@ -146,7 +146,7 @@ public class BlockFirepit extends BlockTerraContainer
 			float f = x + 0.5F;
 			float f1 = y + 0.1F + rand.nextFloat() * 6F / 16F;
 			float f2 = z + 0.5F;
-			float f3 = 0.52F;
+			//float f3 = 0.52F;
 			float f4 = rand.nextFloat() * 0.6F;
 			float f5 = rand.nextFloat() * -0.6F;
 			float f6 = rand.nextFloat() * -0.6F;

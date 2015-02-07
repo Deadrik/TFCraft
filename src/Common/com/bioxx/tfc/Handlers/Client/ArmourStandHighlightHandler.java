@@ -9,10 +9,8 @@ import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.Player.PlayerInfo;
-import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.TileEntities.TEStand;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -26,7 +24,7 @@ public class ArmourStandHighlightHandler
 		if(evt.currentItem == null && TFCBlocks.isArmourStand(world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ))
 				&& (Math.sqrt(evt.target.hitVec.squareDistanceTo(evt.player.posX, evt.player.posY, evt.player.posZ))) < 2.5)
 		{
-			PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
+			//PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
 			EntityPlayer player = evt.player;
 			Vec3 vectorTerm = player.getLookVec();
 			vectorTerm.xCoord*=0.5;
@@ -39,9 +37,9 @@ public class ArmourStandHighlightHandler
 			if(isTop)
 				stand = (TEStand) world.getTileEntity(evt.target.blockX, evt.target.blockY-1, evt.target.blockZ);
 			boolean NS = stand.yaw%360 == 0 || stand.yaw%360  == 180 ;
-			double var8 = evt.player.lastTickPosX + (evt.player.posX - evt.player.lastTickPosX) * (double)evt.partialTicks;
-			double var10 = evt.player.lastTickPosY + (evt.player.posY - evt.player.lastTickPosY) * (double)evt.partialTicks;
-			double var12 = evt.player.lastTickPosZ + (evt.player.posZ - evt.player.lastTickPosZ) * (double)evt.partialTicks;
+			double var8 = player.lastTickPosX + (player.posX - player.lastTickPosX) * (double) evt.partialTicks;
+			double var10 = player.lastTickPosY + (player.posY - player.lastTickPosY) * (double) evt.partialTicks;
+			double var12 = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * (double) evt.partialTicks;
 
 			//Head box
 			AxisAlignedBB head = AxisAlignedBB.getBoundingBox(
@@ -128,8 +126,8 @@ public class ArmourStandHighlightHandler
 		aabb.minY+=0.1;
 		aabb.maxY+=0.1;
 		Vec3 playerVec = Vec3.createVectorHelper(player.posX, player.posY + player.eyeHeight, player.posZ);
-		Vec3 negPlayerVec = Vec3.createVectorHelper(-player.lastTickPosX, -(player.lastTickPosY + player.eyeHeight), -player.lastTickPosZ);
-		Vec3 zeroVec = Vec3.createVectorHelper(0,0,0);
+		//Vec3 negPlayerVec = Vec3.createVectorHelper(-player.lastTickPosX, -(player.lastTickPosY + player.eyeHeight), -player.lastTickPosZ);
+		//Vec3 zeroVec = Vec3.createVectorHelper(0,0,0);
 		Vec3 distBlockxyz = (playerVec.subtract(Vec3.createVectorHelper(aabb.minX,aabb.minY,aabb.minZ))).normalize();
 		Vec3 distBlockXYZ = (playerVec.subtract(Vec3.createVectorHelper(aabb.maxX,aabb.maxY,aabb.maxZ))).normalize();
 

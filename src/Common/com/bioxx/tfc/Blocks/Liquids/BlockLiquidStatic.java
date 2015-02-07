@@ -1,13 +1,13 @@
 package com.bioxx.tfc.Blocks.Liquids;
 
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -15,9 +15,12 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
-import com.bioxx.tfc.TFCBlocks;
+
+import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.api.TFCBlocks;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -106,8 +109,10 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 				world.provider.canBlockFreeze(x, y, z, false);
 			}
 
-			// Play frog sound at night only in fresh water.
-			if(world.getBlock(x, y, z) == TFCBlocks.FreshWaterStationary && world.isAirBlock(x, y + 1, z))
+			// Play frog sound at night only in fresh water and above freezing temperature.
+			if(world.getBlock(x, y, z) == TFCBlocks.FreshWaterStationary
+					&& world.isAirBlock(x, y + 1, z)
+					&& TFC_Climate.getHeightAdjustedTemp(world, x, y + 1, z) > 2)
 			{
 				if(rand.nextInt(100) < 25 && world.getBlockLightValue(x, y, z) < 7)
 				{
@@ -129,12 +134,12 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 
 			if(this.getMaterial() == Material.lava)
 			{
-				if(world.getBlock(x, y + 1, z) == Blocks.air)
+				if (world.getBlock(x, y + 1, z).isAir(world, x, y + 1, z))
 				{
 					int i = x-2+rand.nextInt(5);
 					int j = y+1+rand.nextInt(4);
 					int k = z-2+rand.nextInt(5);
-					if(world.getBlock(i, j, k) == Blocks.air && 
+					if (world.getBlock(i, j, k).isAir(world, i, j, k) &&
 							(world.isSideSolid(i, j+1, k, ForgeDirection.DOWN) || world.isSideSolid(i, j-1, k, ForgeDirection.UP) ||
 									world.isSideSolid(i-1, j, k, ForgeDirection.EAST) || world.isSideSolid(i+1, j, k, ForgeDirection.WEST) ||
 									world.isSideSolid(i, j, k+1, ForgeDirection.NORTH) || world.isSideSolid(i, j, k-1, ForgeDirection.SOUTH)))

@@ -1,7 +1,7 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.ColorizerFoliageTFC;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;

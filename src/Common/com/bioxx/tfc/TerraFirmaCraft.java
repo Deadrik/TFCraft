@@ -32,7 +32,6 @@ import com.bioxx.tfc.Commands.SetPlayerStatsCommand;
 import com.bioxx.tfc.Commands.StripChunkCommand;
 import com.bioxx.tfc.Core.ItemHeat;
 import com.bioxx.tfc.Core.Recipes;
-import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_OreDictionary;
@@ -64,6 +63,7 @@ import com.bioxx.tfc.WorldGen.Generators.WorldGenOre;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenPlants;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenSoilPits;
 import com.bioxx.tfc.api.SkillsManager;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCCrafting;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TreeConfiguration;
@@ -108,12 +108,11 @@ public class TerraFirmaCraft
 
 		proxy.registerTickHandler();
 
-		// Register Liquids
-		TFCFluid.register();
+		proxy.registerFluids();
 
-		TFCBlocks.LoadBlocks();
-		TFCBlocks.RegisterBlocks();
-		TFCBlocks.setupFire();
+		BlockSetup.LoadBlocks();
+		BlockSetup.RegisterBlocks();
+		BlockSetup.setupFire();
 		loadOre();
 
 		//Register Key Bindings(Client only)
@@ -139,7 +138,7 @@ public class TerraFirmaCraft
 		SkillsManager.instance.registerSkill(Global.SKILL_BUTCHERING, 100);
 
 		//Load Items
-		TFCItems.Setup();
+		ItemSetup.Setup();
 
 		// Register Gui Handler
 		proxy.registerGuiHandler();
@@ -147,37 +146,42 @@ public class TerraFirmaCraft
 		//Register tree types and load tree schematics
 		loadTrees();
 
-		//Register Generators
-		//Underground Lava
-		GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.Lava, 2, true, 25).setUnderground(true, 20).setSeed(1), 0);
-		GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.FreshWaterStationary, 2, false, 90), 0);
-		//Surface Hotsprings
-		GameRegistry.registerWorldGenerator(new WorldGenFissureCluster(), 1);
-		GameRegistry.registerWorldGenerator(new WorldGenOre(), 2);
-		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor(), 3);
-		GameRegistry.registerWorldGenerator(new WorldGenForests(), 4);
-		GameRegistry.registerWorldGenerator(new WorldGenLooseRocks(), 5);
-		GameRegistry.registerWorldGenerator(new WorldGenSoilPits(), 6);
-		GameRegistry.registerWorldGenerator(new WorldGenLargeRock(), 7);
-		GameRegistry.registerWorldGenerator(new WorldGenPlants(), 8);
+		if(true)
+		{
+			//Register Generators
+			//Underground Lava
+			GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.Lava, 2, true, 25).setUnderground(true, 20).setSeed(1), 0);
+			GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.FreshWaterStationary, 2, false, 90), 0);
+			//Surface Hotsprings
+			GameRegistry.registerWorldGenerator(new WorldGenFissureCluster(), 1);
+			GameRegistry.registerWorldGenerator(new WorldGenOre(), 2);
+			GameRegistry.registerWorldGenerator(new WorldGenCaveDecor(), 3);
+			GameRegistry.registerWorldGenerator(new WorldGenForests(), 4);
+			GameRegistry.registerWorldGenerator(new WorldGenLooseRocks(), 5);
+			GameRegistry.registerWorldGenerator(new WorldGenSoilPits(), 6);
+			GameRegistry.registerWorldGenerator(new WorldGenLargeRock(), 7);
+			GameRegistry.registerWorldGenerator(new WorldGenPlants(), 8);
 
-		WorldType.DEFAULT = new TFCWorldType(0, "TFCDefault");
-		WorldType.FLAT = new TFCWorldType(1, "TFCFlat");
+			WorldType.DEFAULT = new TFCWorldType(0, "TFCDefault");
+			WorldType.FLAT = new TFCWorldType(1, "TFCFlat");
+			WorldType.LARGE_BIOMES = new TFCWorldType(2, "TFCLargeBiomes");
+			WorldType.AMPLIFIED = new TFCWorldType(3, "TFCAmplified");
 
-		DimensionManager.unregisterDimension(-1);
-		DimensionManager.unregisterDimension(0);
-		DimensionManager.unregisterDimension(1);
+			DimensionManager.unregisterDimension(-1);
+			DimensionManager.unregisterDimension(0);
+			DimensionManager.unregisterDimension(1);
 
-		DimensionManager.unregisterProviderType(-1);
-		DimensionManager.unregisterProviderType(0);
-		DimensionManager.unregisterProviderType(1);
-		DimensionManager.registerProviderType(-1, TFCProviderHell.class, false);
-		DimensionManager.registerProviderType(0, TFCProvider.class, true);
-		DimensionManager.registerProviderType(1, TFCProvider.class, false);
+			DimensionManager.unregisterProviderType(-1);
+			DimensionManager.unregisterProviderType(0);
+			DimensionManager.unregisterProviderType(1);
+			DimensionManager.registerProviderType(-1, TFCProviderHell.class, false);
+			DimensionManager.registerProviderType(0, TFCProvider.class, true);
+			DimensionManager.registerProviderType(1, TFCProvider.class, false);
 
-		DimensionManager.registerDimension(-1, -1);
-		DimensionManager.registerDimension(0, 0);
-		DimensionManager.registerDimension(1, 1);
+			DimensionManager.registerDimension(-1, -1);
+			DimensionManager.registerDimension(0, 0);
+			DimensionManager.registerDimension(1, 1);
+		}
 	}
 
 	@EventHandler
@@ -230,7 +234,7 @@ public class TerraFirmaCraft
 		proxy.setupGuiIngameForge();
 
 		// Register Liquids
-		TFCFluid.registerFluidContainers();
+		proxy.setupFluids();
 		proxy.registerFluidIcons();
 
 		//Setup custom potion effects
@@ -246,8 +250,11 @@ public class TerraFirmaCraft
 
 		//Register TFC items with forge fuel handler.
 		//This is used by vanilla furnice and many other mods.
-		TFCItems.registerFurniceFuel();
+		ItemSetup.registerFurniceFuel();
 		GameRegistry.registerFuelHandler(new TFCFuelHandler());
+		
+		//WAILA stuff
+		proxy.registerWailaClasses();
 	}
 
 	@EventHandler
@@ -467,6 +474,7 @@ public class TerraFirmaCraft
 		TFCCrafting.railsRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "railsRecipe", false);
 		TFCCrafting.repeaterRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "repeaterRecipe", true);
 		TFCCrafting.roseRedRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "roseRedRecipe", false);
+		TFCCrafting.shearsRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "shearsRecipe", false);
 		TFCCrafting.signRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "signRecipe", false);
 		TFCCrafting.stickRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "stickRecipe", false);
 		TFCCrafting.stoneSlabsRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "stoneSlabsRecipe", false);

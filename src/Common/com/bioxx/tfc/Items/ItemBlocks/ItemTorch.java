@@ -5,9 +5,10 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import com.bioxx.tfc.TFCBlocks;
+
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TEPottery;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class ItemTorch extends ItemTerraBlock
 {

@@ -46,7 +46,7 @@ public class ModelPigTFC extends ModelPig
 		float percent = TFC_Core.getPercentGrown((IAnimal)entity);
 		float ageScale = 2.0F-percent;
 		float ageHeadScale = (float)Math.pow(1/ageScale,0.66);
-		float offset = 1.4f - percent;
+		//float offset = 1.4f - percent;
 
 		this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 		if(entity instanceof IAnimal)

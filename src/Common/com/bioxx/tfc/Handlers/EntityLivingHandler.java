@@ -17,7 +17,6 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -34,12 +33,14 @@ import com.bioxx.tfc.Food.ItemMeal;
 import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
 import com.bioxx.tfc.Items.ItemArrow;
+import com.bioxx.tfc.Items.ItemBloom;
 import com.bioxx.tfc.Items.ItemLooseRock;
 import com.bioxx.tfc.Items.ItemOreSmall;
 import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Items.Tools.ItemJavelin;
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.TFCAttributes;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IEquipable;
@@ -150,10 +151,11 @@ public class EntityLivingHandler
 			else
 			{
 				PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
+				FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
+				foodstats.clientUpdate();
 				//onUpdate(player) still has a !worldObj.isRemote check, but this allows us to render drunkenness
 				if(pi != null && pi.PlayerUUID == player.getUniqueID())
 				{
-					FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 					foodstats.onUpdate(player);
 					if(pi != null && player.inventory.getCurrentItem() != null)
 					{
@@ -173,6 +175,7 @@ public class EntityLivingHandler
 					else if(pi != null)
 						pi.guishowFoodRestoreAmount = false;
 				}
+
 			}
 		}
 	}
@@ -269,6 +272,8 @@ public class EntityLivingHandler
 			player.triggerAchievement(TFC_Achievements.achLooseRock);
 		else if(item.getItem() instanceof ItemOreSmall)
 			player.triggerAchievement(TFC_Achievements.achSmallOre);
+		else if (item.getItem() instanceof ItemBloom)
+			player.triggerAchievement(TFC_Achievements.achIronAge);
 		else if(item.getItem().equals(TFCItems.GemDiamond))
 			player.triggerAchievement(TFC_Achievements.achDiamond);
 		else if(item.getItem().equals(TFCItems.Onion) && TFCOptions.iDontLikeOnions)

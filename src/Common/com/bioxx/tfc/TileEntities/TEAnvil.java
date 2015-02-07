@@ -14,7 +14,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.MinecraftForge;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
@@ -24,6 +23,7 @@ import com.bioxx.tfc.Items.ItemTFCArmor;
 import com.bioxx.tfc.Items.Tools.ItemMiscToolHead;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Crafting.AnvilRecipe;
@@ -47,13 +47,13 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 
 	public int[] stonePair;
 
-	private boolean isDone = false;
+	//private boolean isDone = false;
 	private byte workedRecently = 0;
 
 	//this is the fix the server receiving 3 packets whenever the player works an item.
 	private final byte LAG_FIX_DELAY = 5;
 	public AnvilRecipe workRecipe;
-	private AnvilRecipe workWeldRecipe;
+	//private AnvilRecipe workWeldRecipe;
 	public int AnvilTier;
 
 	public EntityPlayer lastWorker;
@@ -85,8 +85,9 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			workRecipe = null;
 			craftingValue = 0;
 		}
-		else if(anvilItemStacks[INPUT1_SLOT] != null || anvilItemStacks[INPUT2_SLOT] != null && workRecipe == null)
-			updateRecipe();
+		//Disabled auto plan selection until we can solve the issue of correctly determining the lastworker outside of the plan selection screen
+		/*else if(anvilItemStacks[INPUT1_SLOT] != null || anvilItemStacks[INPUT2_SLOT] != null && workRecipe == null)
+			updateRecipe();*/
 		//make sure that the world is not remote
 		if(!worldObj.isRemote)
 		{
@@ -186,7 +187,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	{
 		AnvilManager manager = AnvilManager.getInstance();
 		Object[] plans = manager.getPlans().keySet().toArray();
-		Map<String, AnvilRecipe> planList = new HashMap();
+		Map<String, AnvilRecipe> planList = new HashMap<String, AnvilRecipe>();
 
 		for(Object p : plans)
 		{

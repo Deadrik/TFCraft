@@ -14,11 +14,11 @@ public class HeatRegistry
 		return instance;
 	}
 
-	private List heatList;
+	private List<HeatIndex> heatList;
 
 	private HeatRegistry()
 	{
-		heatList = new ArrayList();
+		heatList = new ArrayList<HeatIndex>();
 	}
 
 	public void addIndex(HeatIndex index)

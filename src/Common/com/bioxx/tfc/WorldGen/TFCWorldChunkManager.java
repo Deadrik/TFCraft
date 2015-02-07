@@ -29,14 +29,14 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	protected BiomeCache biomeCache;
 
 	/** A list of biomes that the player can spawn in. */
-	protected List biomesToSpawnIn;
+	protected List<BiomeGenBase> biomesToSpawnIn;
 
 	public long seed = 0;
 	public TFCWorldChunkManager()
 	{
 		super();
 		biomeCache = new BiomeCache(this);
-		this.biomesToSpawnIn = new ArrayList();
+		this.biomesToSpawnIn = new ArrayList<BiomeGenBase>();
 		//this.biomesToSpawnIn.add(TFCBiome.beach);
 		this.biomesToSpawnIn.add(TFCBiome.forest);
 		this.biomesToSpawnIn.add(TFCBiome.plains);
@@ -72,7 +72,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	 * Gets the list of valid biomes for the player to spawn in.
 	 */
 	@Override
-	public List getBiomesToSpawnIn()
+	public List<BiomeGenBase> getBiomesToSpawnIn()
 	{
 		return this.biomesToSpawnIn;
 	}

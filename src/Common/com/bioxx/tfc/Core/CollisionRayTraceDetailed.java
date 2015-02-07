@@ -14,7 +14,7 @@ public class CollisionRayTraceDetailed
 	public static List<Object[]> rayTraceSubBlocks(BlockDetailed construct, Vec3 player, Vec3 view, int i, int j, int k, List<Object[]> returns, BitSet data, TEDetailed te)
 	{
 		int d = 8;
-		int dd = (d * d);
+		//int dd = (d * d);
 		float div = 1f / d;
 
 		for(int subX = 0; subX < 8; subX++)

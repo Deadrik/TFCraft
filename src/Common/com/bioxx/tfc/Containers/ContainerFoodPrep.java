@@ -8,22 +8,22 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Containers.Slots.SlotBlocked;
 import com.bioxx.tfc.Containers.Slots.SlotFoodOnly;
 import com.bioxx.tfc.Containers.Slots.SlotSize;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class ContainerFoodPrep extends ContainerTFC
 {
-	private World world;
-	private int posX;
-	private int posY;
-	private int posZ;
+	//private World world;
+	//private int posX;
+	//private int posY;
+	//private int posZ;
 	private TEFoodPrep te;
 	private EntityPlayer player;
 	int guiTab = 0;
@@ -32,10 +32,10 @@ public class ContainerFoodPrep extends ContainerTFC
 	{
 		this.player = playerinv.player;
 		this.te = pile;
-		this.world = world;
-		this.posX = x;
-		this.posY = y;
-		this.posZ = z;
+		//this.world = world;
+		//this.posX = x;
+		//this.posY = y;
+		//this.posZ = z;
 		guiTab = tab;
 		pile.openInventory();
 		layoutContainer(playerinv, pile, 0, 0);
@@ -81,7 +81,7 @@ public class ContainerFoodPrep extends ContainerTFC
 			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 107, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
 			/*this.addSlotToContainer(new SlotBlocked(chestInventory, 5, 16, 44));*/
 		}
-		this.addSlotToContainer(new SlotBlocked(chestInventory, 6, 57, 46));
+		this.addSlotToContainer(new SlotBlocked(chestInventory, 6, 53, 46));
 		this.addSlotToContainer(new SlotSize(chestInventory, 7, 145, 8).setSize(EnumSize.SMALL));
 		this.addSlotToContainer(new SlotSize(chestInventory, 8, 145, 26).setSize(EnumSize.SMALL));
 		this.addSlotToContainer(new SlotSize(chestInventory, 9, 145, 44).setSize(EnumSize.SMALL));

@@ -3,7 +3,7 @@ package com.bioxx.tfc.api;
 import java.util.Random;
 import java.util.Vector;
 
-public class TreeSchemManager 
+public class TreeSchemManager
 {
 	private int ID;
 	/**
@@ -13,15 +13,16 @@ public class TreeSchemManager
 
 	public TreeSchemManager(int id)
 	{
-		ID = id;
-		treeList = new Vector<Vector<TreeSchematic>>();
+		this.ID = id;
+		this.treeList = new Vector<Vector<TreeSchematic>>();
 	}
 
-	public void addSchem(TreeSchematic ts, int growth)
+	public void addSchem(TreeSchematic ts)
 	{
+		int growth = ts.getGrowthStage();
 		if(treeList.size() <= growth)
-			treeList.setSize(growth+1);
-		System.out.println("Adding "+ts.getIndex() + ": " + growth);
+			treeList.setSize(growth + 1);
+		System.out.println("Adding " + ts.getIndex() + ": " + growth);
 		if(treeList.get(growth) == null)
 			treeList.set(growth, new Vector<TreeSchematic>());
 

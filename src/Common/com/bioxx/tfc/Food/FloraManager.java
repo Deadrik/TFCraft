@@ -5,14 +5,14 @@ import java.util.List;
 
 import net.minecraft.item.ItemStack;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 
 public class FloraManager
 {
 	private static final FloraManager instance = new FloraManager();
-	private List floraList;
+	private List<FloraIndex> floraList;
 
 	public static final FloraManager getInstance()
 	{
@@ -21,7 +21,7 @@ public class FloraManager
 
 	public FloraManager()
 	{
-		floraList = new ArrayList();
+		floraList = new ArrayList<FloraIndex>();
 	}
 
 	public void addIndex(FloraIndex index)

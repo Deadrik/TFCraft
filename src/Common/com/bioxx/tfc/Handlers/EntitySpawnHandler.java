@@ -6,11 +6,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Containers.ContainerPlayerTFC;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;

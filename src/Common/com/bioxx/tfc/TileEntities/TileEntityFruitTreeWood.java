@@ -11,10 +11,10 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.Flora.BlockFruitLeaves;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 {
@@ -132,47 +132,47 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 				int m = meta & 7;
 				Block bid = meta < 8 ? TFCBlocks.fruitTreeLeaves : TFCBlocks.fruitTreeLeaves2;
 
-				if(worldObj.isAirBlock(xCoord, yCoord + 1, zCoord) && worldObj.isAirBlock(xCoord, yCoord+2, zCoord) && BlockFruitLeaves.canStay(worldObj, xCoord, yCoord + 1, zCoord, TFCBlocks.fruitTreeLeaves))//above
+				if (worldObj.isAirBlock(xCoord, yCoord + 1, zCoord) && worldObj.isAirBlock(xCoord, yCoord + 2, zCoord) && BlockFruitLeaves.canStay(worldObj, xCoord, yCoord + 1, zCoord))//above
 				{
 					worldObj.setBlock(xCoord, yCoord + 1, zCoord, bid, m, 0x2);
 					worldObj.markBlockForUpdate(xCoord, yCoord + 1, zCoord);
 				}
-				else if(worldObj.isAirBlock(xCoord + 1, yCoord, zCoord) && worldObj.isAirBlock(xCoord + 1, yCoord + 1, zCoord) && BlockFruitLeaves.canStay(worldObj, xCoord + 1, yCoord, zCoord, TFCBlocks.fruitTreeLeaves))//+x
+				else if (worldObj.isAirBlock(xCoord + 1, yCoord, zCoord) && worldObj.isAirBlock(xCoord + 1, yCoord + 1, zCoord) && BlockFruitLeaves.canStay(worldObj, xCoord + 1, yCoord, zCoord))//+x
 				{
 					worldObj.setBlock(xCoord + 1, yCoord, zCoord, bid, m, 0x2);
 					worldObj.markBlockForUpdate(xCoord + 1, yCoord, zCoord);
 				}
-				else if(worldObj.isAirBlock(xCoord - 1, yCoord, zCoord) && worldObj.isAirBlock(xCoord - 1, yCoord + 1, zCoord) && BlockFruitLeaves.canStay(worldObj, xCoord - 1, yCoord, zCoord, TFCBlocks.fruitTreeLeaves))//-x
+				else if (worldObj.isAirBlock(xCoord - 1, yCoord, zCoord) && worldObj.isAirBlock(xCoord - 1, yCoord + 1, zCoord) && BlockFruitLeaves.canStay(worldObj, xCoord - 1, yCoord, zCoord))//-x
 				{
 					worldObj.setBlock(xCoord - 1, yCoord, zCoord, bid, m, 0x2);
 					worldObj.markBlockForUpdate(xCoord - 1, yCoord, zCoord);
 				}
-				else if(worldObj.isAirBlock(xCoord, yCoord, zCoord + 1) && worldObj.isAirBlock(xCoord, yCoord + 1, zCoord + 1) && BlockFruitLeaves.canStay(worldObj, xCoord, yCoord, zCoord + 1, TFCBlocks.fruitTreeLeaves))//+z
+				else if (worldObj.isAirBlock(xCoord, yCoord, zCoord + 1) && worldObj.isAirBlock(xCoord, yCoord + 1, zCoord + 1) && BlockFruitLeaves.canStay(worldObj, xCoord, yCoord, zCoord + 1))//+z
 				{
 					worldObj.setBlock(xCoord, yCoord, zCoord + 1, bid, m, 0x2);
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord + 1);
 				}
-				else if(worldObj.isAirBlock(xCoord, yCoord, zCoord - 1) && worldObj.isAirBlock(xCoord, yCoord + 1, zCoord - 1) && BlockFruitLeaves.canStay(worldObj, xCoord, yCoord, zCoord - 1, TFCBlocks.fruitTreeLeaves))//-z
+				else if (worldObj.isAirBlock(xCoord, yCoord, zCoord - 1) && worldObj.isAirBlock(xCoord, yCoord + 1, zCoord - 1) && BlockFruitLeaves.canStay(worldObj, xCoord, yCoord, zCoord - 1))//-z
 				{
 					worldObj.setBlock(xCoord, yCoord, zCoord - 1, bid, m, 0x2);
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord - 1);
 				}
-				else if(worldObj.isAirBlock(xCoord + 1, yCoord, zCoord - 1) && worldObj.isAirBlock(xCoord + 1, yCoord + 1, zCoord - 1) && BlockFruitLeaves.canStay(worldObj, xCoord + 1, yCoord, zCoord - 1, TFCBlocks.fruitTreeLeaves))//+x/-z
+				else if (worldObj.isAirBlock(xCoord + 1, yCoord, zCoord - 1) && worldObj.isAirBlock(xCoord + 1, yCoord + 1, zCoord - 1) && BlockFruitLeaves.canStay(worldObj, xCoord + 1, yCoord, zCoord - 1))//+x/-z
 				{
 					worldObj.setBlock(xCoord + 1, yCoord, zCoord - 1, bid, m, 0x2);
 					worldObj.markBlockForUpdate(xCoord + 1, yCoord, zCoord - 1);
 				}
-				else if(worldObj.isAirBlock(xCoord + 1, yCoord, zCoord + 1) && worldObj.isAirBlock(xCoord + 1, yCoord + 1, zCoord + 1) && BlockFruitLeaves.canStay(worldObj, xCoord + 1, yCoord, zCoord + 1, TFCBlocks.fruitTreeLeaves))//+x/+z
+				else if (worldObj.isAirBlock(xCoord + 1, yCoord, zCoord + 1) && worldObj.isAirBlock(xCoord + 1, yCoord + 1, zCoord + 1) && BlockFruitLeaves.canStay(worldObj, xCoord + 1, yCoord, zCoord + 1))//+x/+z
 				{
 					worldObj.setBlock(xCoord + 1, yCoord, zCoord + 1, bid, m, 0x2);
 					worldObj.markBlockForUpdate(xCoord + 1, yCoord, zCoord + 1);
 				}
-				else if(worldObj.isAirBlock(xCoord - 1, yCoord, zCoord - 1) && worldObj.isAirBlock(xCoord - 1, yCoord + 1, zCoord - 1) && BlockFruitLeaves.canStay(worldObj, xCoord - 1, yCoord, zCoord - 1, TFCBlocks.fruitTreeLeaves))//-x/-z
+				else if (worldObj.isAirBlock(xCoord - 1, yCoord, zCoord - 1) && worldObj.isAirBlock(xCoord - 1, yCoord + 1, zCoord - 1) && BlockFruitLeaves.canStay(worldObj, xCoord - 1, yCoord, zCoord - 1))//-x/-z
 				{
 					worldObj.setBlock(xCoord - 1, yCoord, zCoord - 1, bid, m, 0x2);
 					worldObj.markBlockForUpdate(xCoord - 1, yCoord, zCoord - 1);
 				}
-				else if(worldObj.isAirBlock(xCoord - 1, yCoord, zCoord + 1) && worldObj.isAirBlock(xCoord - 1, yCoord + 1, zCoord + 1) && BlockFruitLeaves.canStay(worldObj, xCoord - 1, yCoord, zCoord + 1, TFCBlocks.fruitTreeLeaves))//-x/+z
+				else if (worldObj.isAirBlock(xCoord - 1, yCoord, zCoord + 1) && worldObj.isAirBlock(xCoord - 1, yCoord + 1, zCoord + 1) && BlockFruitLeaves.canStay(worldObj, xCoord - 1, yCoord, zCoord + 1))//-x/+z
 				{
 					worldObj.setBlock(xCoord - 1, yCoord, zCoord + 1, bid, m, 0x2);
 					worldObj.markBlockForUpdate(xCoord - 1, yCoord, zCoord + 1);

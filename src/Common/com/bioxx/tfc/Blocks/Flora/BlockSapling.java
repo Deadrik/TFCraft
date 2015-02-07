@@ -46,6 +46,7 @@ public class BlockSapling extends BlockTerraContainer
 		this.icons = new IIcon[woodNames.length];
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void getSubBlocks(Item item, CreativeTabs tabs, List list)

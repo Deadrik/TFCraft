@@ -8,10 +8,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class MapGenCavesTFC extends MapGenBaseTFC
 {
@@ -185,7 +185,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 													metaArray[index] = 0;
 													if (isGrass && TFC_Core.isDirt(idArray[index - 1]))
 													{
-														int meta = metaArray[index - 1];
+														//int meta = metaArray[index - 1];
 														idArray[index - 1] = grassBlock;
 													}
 												}

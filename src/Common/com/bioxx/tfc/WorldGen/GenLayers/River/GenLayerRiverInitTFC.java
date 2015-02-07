@@ -28,10 +28,10 @@ public class GenLayerRiverInitTFC extends GenLayerTFC
 			{
 				this.initChunkSeed(x + xCoord, z + zCoord);
 				int index = x + z * xSize;
-				int xn = index-1;
-				int xp = index+1;
-				int zn = index-zSize;
-				int zp = index+zSize;
+				//int xn = index-1;
+				//int xp = index+1;
+				//int zn = index-zSize;
+				//int zp = index+zSize;
 				int id = parentCache[index];
 				outCache[index] = !TFC_Core.isOceanicBiome(id) && !TFC_Core.isMountainBiome(id) ? 1 : 0;
 			}

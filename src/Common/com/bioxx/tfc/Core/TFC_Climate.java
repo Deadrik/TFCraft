@@ -21,7 +21,8 @@ public class TFC_Climate
 	private static final float[] zFactorCache = new float[30001];
 	private static final float[][] monthTempCache = new float[12][30001];
 	private static final float[][] monthTempFactorCache = new float[12][30001];
-	private static int[][] insolationMap;
+
+	//private static int[][] insolationMap;
 
 	/**
 	 * All Temperature related code
@@ -506,7 +507,7 @@ public class TFC_Climate
 	 */
 	public static int getFoliageColorEvergreen(World world, int x, int y, int z)
 	{
-		int month = TFC_Time.getSeasonAdjustedMonth(z);
+		//int month = TFC_Time.getSeasonAdjustedMonth(z);
 		float rainfall = getRainfall(world, x, y, z);
 		if(rainfall > 100)
 		{
@@ -559,7 +560,7 @@ public class TFC_Climate
 	{
 		float rain = getRainfall(world, x, y, z);
 		float evt = getCacheManager(world).getEVTLayerAt(x, z).floatdata1;
-		if(rain >= 1000 && evt < 0.25 && world.getBiomeGenForCoords(x, z).heightVariation < 0.15)
+		if (rain >= 1000 && evt <= 0.25 && world.getBiomeGenForCoords(x, z).heightVariation < 0.15)
 			return true;
 		return false;
 	}

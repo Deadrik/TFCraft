@@ -18,8 +18,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
@@ -178,7 +178,7 @@ public class BlockWoodSupport extends BlockTerra
 		return 0;
 	}
 
-	private Boolean isNearVerticalSupport(World world, int i, int j, int k)
+	/*private Boolean isNearVerticalSupport(World world, int i, int j, int k)
 	{
 		for(int y = -1; y < 0; y++)
 		{
@@ -192,7 +192,7 @@ public class BlockWoodSupport extends BlockTerra
 			}
 		}
 		return false;
-	}
+	}*/
 
 	@Override
 	public int damageDropped(int j)
@@ -238,7 +238,7 @@ public class BlockWoodSupport extends BlockTerra
 	private AxisAlignedBB getCollisionBoundingBoxFromPoolIBlockAccess(IBlockAccess blockAccess, int x, int y, int z)
 	{
 		Boolean isHorizontal = TFCBlocks.isBlockHSupport(blockAccess.getBlock(x, y, z));
-		Boolean isVertical = TFCBlocks.isBlockVSupport(blockAccess.getBlock(x, y, z));
+		//Boolean isVertical = TFCBlocks.isBlockVSupport(blockAccess.getBlock(x, y, z));
 
 		double minX = 0.25; double minY = 0.0; double minZ = 0.25;
 		double maxX = 0.75; double maxY = 0.75; double maxZ = 0.75;
@@ -295,7 +295,7 @@ public class BlockWoodSupport extends BlockTerra
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
 	{
 		Boolean isHorizontal = TFCBlocks.isBlockHSupport(world.getBlock(x, y, z));
-		Boolean isVertical = TFCBlocks.isBlockVSupport(world.getBlock(x, y, z));
+		//Boolean isVertical = TFCBlocks.isBlockVSupport(world.getBlock(x, y, z));
 
 		double minX = 0.25; double minY = 0.0; double minZ = 0.25;
 		double maxX = 0.75; double maxY = 0.75; double maxZ = 0.75;
@@ -381,7 +381,7 @@ public class BlockWoodSupport extends BlockTerra
 	public void onNeighborBlockChange(World world, int i, int j, int k, Block l)
 	{
 		boolean isOtherHorizontal = TFCBlocks.isBlockHSupport(l);
-		boolean isOtherVertical = TFCBlocks.isBlockVSupport(l);
+		//boolean isOtherVertical = TFCBlocks.isBlockVSupport(l);
 		boolean isHorizontal = TFCBlocks.isBlockHSupport(world.getBlock(i, j, k));
 		boolean isVertical = TFCBlocks.isBlockVSupport(world.getBlock(i, j, k));
 
@@ -418,7 +418,7 @@ public class BlockWoodSupport extends BlockTerra
 	public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int side)
 	{
 		Block downBlock = world.getBlock(x, y-1, z);
-		Block block = world.getBlock(x, y, z);
+		//Block block = world.getBlock(x, y, z);
 		//bottom
 		if(!TFCBlocks.isBlockVSupport(downBlock))
 		{
@@ -426,7 +426,7 @@ public class BlockWoodSupport extends BlockTerra
 			{
 				return true;
 			}
-			else if(side == 1 && world.getBlock(x, y-1, z).isOpaqueCube())
+			else if (side == 1 && downBlock.isOpaqueCube())
 			{
 				return true;
 			}

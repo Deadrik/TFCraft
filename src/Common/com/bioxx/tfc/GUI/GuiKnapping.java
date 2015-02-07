@@ -1,30 +1,25 @@
 package com.bioxx.tfc.GUI;
 
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import org.lwjgl.opengl.GL11;
-
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Containers.ContainerSpecialCrafting;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.KnappingUpdatePacket;
 
-public class GuiKnapping extends GuiContainer
+public class GuiKnapping extends GuiContainerTFC
 {
+	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_knapping.png");
+
 	public GuiKnapping(InventoryPlayer inventoryplayer, ItemStack is, World world, int x, int y, int z)
 	{
-		super(new ContainerSpecialCrafting(inventoryplayer, is, world, x, y, z));
-		this.xSize = 176;
-		this.ySize = 103 + PlayerInventory.invYSize;
+		super(new ContainerSpecialCrafting(inventoryplayer, is, world, x, y, z), 176, 103);
 	}
 
 	@Override
@@ -76,12 +71,6 @@ public class GuiKnapping extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int p, int j)
 	{
-		TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_knapping.png"));
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
-		int w = (width - xSize) / 2;
-		int h = (height - ySize) / 2;
-		drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
-
-		PlayerInventory.drawInventory(this, width, height, ySize - PlayerInventory.invYSize);
+		drawGui(texture);
 	}
 }

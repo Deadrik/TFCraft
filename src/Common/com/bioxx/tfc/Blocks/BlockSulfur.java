@@ -20,9 +20,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.CollisionRayTraceStandard;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.ICustomCollision;
 
@@ -101,17 +101,17 @@ public class BlockSulfur extends BlockTerra implements ICustomCollision
 	public void onNeighborBlockChange(World world, int i, int j, int k, Block l)
 	{
 		int num = 0;
-		if(world.getBlock(i, j, k+1).isSideSolid(world, i, j, k, ForgeDirection.NORTH))
+		if (world.getBlock(i, j, k + 1).isSideSolid(world, i, j, k + 1, ForgeDirection.NORTH))
 			num++;
-		if(world.getBlock(i, j, k-1).isSideSolid(world, i, j, k, ForgeDirection.SOUTH))
+		if (world.getBlock(i, j, k - 1).isSideSolid(world, i, j, k - 1, ForgeDirection.SOUTH))
 			num++;
-		if(world.getBlock(i+1, j, k).isSideSolid(world, i, j, k, ForgeDirection.WEST))
+		if (world.getBlock(i + 1, j, k).isSideSolid(world, i + 1, j, k, ForgeDirection.WEST))
 			num++;
-		if(world.getBlock(i-1, j, k).isSideSolid(world, i, j, k, ForgeDirection.EAST))
+		if (world.getBlock(i - 1, j, k).isSideSolid(world, i - 1, j, k, ForgeDirection.EAST))
 			num++;
-		if(world.getBlock(i, j+1, k).isSideSolid(world, i, j, k, ForgeDirection.DOWN))
+		if (world.getBlock(i, j + 1, k).isSideSolid(world, i, j + 1, k, ForgeDirection.DOWN))
 			num++;
-		if(world.getBlock(i, j-1, k).isSideSolid(world, i, j, k, ForgeDirection.UP))
+		if (world.getBlock(i, j - 1, k).isSideSolid(world, i, j - 1, k, ForgeDirection.UP))
 			num++;
 		if(num == 0)
 		{
@@ -193,27 +193,27 @@ public class BlockSulfur extends BlockTerra implements ICustomCollision
 	@Override
 	public void addCollisionBoxesToList(World world, int x, int y, int z, List list) 
 	{
-		if(world.getBlock(x, y, z+1).isSideSolid(world, x, y, z, ForgeDirection.NORTH))
+		if (world.getBlock(x, y, z + 1).isSideSolid(world, x, y, z + 1, ForgeDirection.NORTH))
 		{
 			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.99F, 1.0F, 1.0F, 1.0F)});
 		}
-		if(world.getBlock(x, y, z-1).isSideSolid(world, x, y, z, ForgeDirection.SOUTH))
+		if (world.getBlock(x, y, z - 1).isSideSolid(world, x, y, z - 1, ForgeDirection.SOUTH))
 		{
 			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.01F)});
 		}
-		if(world.getBlock(x+1, y, z).isSideSolid(world, x, y, z, ForgeDirection.EAST))
+		if (world.getBlock(x + 1, y, z).isSideSolid(world, x + 1, y, z, ForgeDirection.EAST))
 		{
 			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.99F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F)});
 		}
-		if(world.getBlock(x-1, y, z).isSideSolid(world, x, y, z, ForgeDirection.WEST))
+		if (world.getBlock(x - 1, y, z).isSideSolid(world, x - 1, y, z, ForgeDirection.WEST))
 		{
 			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.0F, 0.01F, 1.0F, 1.0F)});
 		}
-		if(world.getBlock(x, y+1, z).isSideSolid(world, x, y, z, ForgeDirection.DOWN))
+		if (world.getBlock(x, y + 1, z).isSideSolid(world, x, y + 1, z, ForgeDirection.DOWN))
 		{
 			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.99F, 0.0F, 1.0F, 1.0F, 1.0F)});
 		}
-		if(world.getBlock(x, y-1, z).isSideSolid(world, x, y, z, ForgeDirection.UP))
+		if (world.getBlock(x, y - 1, z).isSideSolid(world, x, y - 1, z, ForgeDirection.UP))
 		{
 			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.0F, 1.0F, 0.01F, 1.0F)});
 		}

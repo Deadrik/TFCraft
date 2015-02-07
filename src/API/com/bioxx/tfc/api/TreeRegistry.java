@@ -31,7 +31,7 @@ public class TreeRegistry
 			if(treeList.get(index) == null)
 				treeList.set(index, new TreeSchemManager(index));
 
-			treeList.get(index).addSchem(treeSchematic, treeSchematic.getGrowthStage());
+			treeList.get(index).addSchem(treeSchematic);
 		}
 	}
 

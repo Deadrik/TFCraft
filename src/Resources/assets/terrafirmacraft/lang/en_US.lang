@@ -6,12 +6,16 @@
 #This file needs to be UTF-8 encoded to work with MC 1.7+
 
 generator.TFCDefault=TFC Default
-generator.TFCFlat=TFC Flat
+generator.TFCFlat=TFC Flat(Unused)
+generator.TFCAmplified=TFC Amplified(Unused)
+generator.TFCLargeBiomes=TFC Large Biomes(Unused)
 
 key.ToolMode=Cycle Tool Mode
 key.LockTool=Lock Tool Location
 
 effect.bleed=Bleeding
+death.attack.alcohol=%1$s died of alcohol poisoning
+death.attack.heatStroke=%1$s died of heat stroke
 
 #==============
 #= Spawn Eggs =
@@ -95,6 +99,29 @@ commands.transferTamed.display.incoming=An animal has been transferred to you by
 commands.transferTamed.display.outgoing=You've transferred an animal to %s!
 commands.transferTamed.wrongSender=You can't transfer animals!
 
+#==========
+#= Fluids =
+#==========
+fluid.freshwater=Fresh Water
+fluid.saltwater=Salt Water
+fluid.lavatfc=Lava
+fluid.hotwater=Hot Water
+fluid.beer=Beer
+fluid.cider=Cider
+fluid.rum=Rum
+fluid.ryewhiskey=Rye Whiskey
+fluid.sake=Sake
+fluid.vodka=Vodka
+fluid.whiskey=Whiskey
+fluid.cornwhiskey=Corn Whiskey
+fluid.milk=Milk
+fluid.milkcurdled=Curdled Milk
+fluid.milkvinegar=Milk + Vinegar Mix
+fluid.limewater=Limewater
+fluid.tannin=Tannin
+fluid.vinegar=Vinegar
+fluid.brine=Brine
+
 #========
 #= Food =
 #========
@@ -105,6 +132,11 @@ item.meal.decent=Decent
 item.meal.good=Good
 item.meal.great=Great
 item.meal.fantastic=Fantastic
+item.Sandwich.name=Sandwich
+item.Salad.name=Salad
+item.Soup.name=Soup
+item.Sugar.name=Sugar
+item.Sea Weed.name=Sea Weed
 
 #== Grains ==
 item.Barley Bread.name=Barley Bread
@@ -388,6 +420,9 @@ item.Fire Brick.Clay Fire Brick.name=Clay Fire Brick
 tile.FireBrick.name=Fire Brick Block
 tile.Pottery.name=Pottery
 
+item.ClayBowl.Ceramic Bowl.name=Ceramic Bowl
+item.ClayBowl.Clay Bowl.name=Clay Bowl
+
 #= Gems =
 item.Agate.Chipped.name=Chipped Agate
 item.Amethyst.Chipped.name=Chipped Amethyst
@@ -463,7 +498,7 @@ item.Tourmaline.Exquisite.name=Exquisite Tourmaline
 #= Powders =
 #===========
 item.dyePowder.black.name=Ink Sac
-item.dyePowder.blue.name=Lapis Lazuli
+item.dyePowder.blue.name=Blue Dye
 item.dyePowder.brown.name=Cocoa Beans
 item.dyePowder.cyan.name=Cyan Dye
 item.dyePowder.gray.name=Gray Dye
@@ -958,6 +993,24 @@ item.Loom.White Elm.name=White Elm Loom
 item.Loom.Willow.name=Willow Loom
 
 #== Wood Blocks ==
+tile.Chest.Acacia.name=Acacia Chest
+tile.Chest.Ash.name=Ash Chest
+tile.Chest.Aspen.name=Aspen Chest
+tile.Chest.Birch.name=Birch Chest
+tile.Chest.Chestnut.name=Chestnut Chest
+tile.Chest.Douglas Fir.name=Douglas Fir Chest
+tile.Chest.Hickory.name=Hickory Chest
+tile.Chest.Kapok.name=Kapok Chest
+tile.Chest.Maple.name=Maple Chest
+tile.Chest.Oak.name=Oak Chest
+tile.Chest.Pine.name=Pine Chest
+tile.Chest.Sequoia.name=Sequoia Chest
+tile.Chest.Spruce.name=Spruce Chest
+tile.Chest.Sycamore.name=Sycamore Chest
+tile.Chest.White Cedar.name=White Cedar Chest
+tile.Chest.White Elm.name=White Elm Chest
+tile.Chest.Willow.name=Willow Chest
+
 tile.log2.Acacia.name=Acacia Log
 tile.log.Ash.name=Ash Log
 tile.log.Aspen.name=Aspen Log
@@ -1876,7 +1929,7 @@ tile.Ice.name=Ice
 #= Miscellaneous =
 #=================
 #==Misc Messages==
-msg.noTreeChop=This tool can not chop that tree!
+msg.noTreeChop=This tool can not chop down that tree!
 
 #== Misc Items ==
 item.arrow.name=Arrow
@@ -1942,6 +1995,8 @@ item.fishingRod.name=Fishing Rod
 
 item.Quiver.name=Quiver
 item.Rope.name=Rope
+item.Mud Brick.name=Mud Brick
+item.Wet Mud Brick.name=Wet Mud Brick
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Straw & Hide Bed
@@ -1963,6 +2018,9 @@ tile.stoneStairs.name=Stair
 tile.stoneSlabs.name=Slab
 tile.stoneStalac.name=Stalactite
 tile.WoodConstruct.name=Lumber
+tile.MetalTrapDoor.name=Trap Door
+tile.Vessel.name=Large Vessel
+tile.Grill.name=Grill
 
 tile.Sulfur.name=Sulfur
 tile.Reeds.name=Reeds
@@ -2023,7 +2081,6 @@ tile.LavaStationary.name=Lava
 #=======
 #= GUI =
 #=======
-gui.badnbt=BAD Info
 
 #== Anvil GUI ==
 gui.Anvil.Plans=Plans
@@ -2085,15 +2142,11 @@ gui.Anvil.Rule42=Bend, Last Three
 gui.Anvil.Rule43=Bend, Not Last
 
 #== Tools/Weapons/Armor GUI ==
-gui.Armor.Advanced=Advanced
-gui.Armor.Shift=Shift
 gui.Armor.ForgedBy=Forged By
-gui.Armor.Hold=Hold
 gui.Armor.Crush=Crush
 gui.Armor.Pierce=Pierce
 gui.Armor.Slash=Slash
 
-gui.Bow.Advanced=Advanced
 gui.Bow.Javelins=Javelins
 gui.Bow.Arrows=Arrows
 gui.Bow.ForgedBy=Made By
@@ -2112,11 +2165,13 @@ gui.Barrel.ToggleOn=In
 gui.Barrel.SealedOn=Sealed On
 gui.Barrel.Solid=Solid Storage
 gui.Barrel.Liquid=Liquid Storage
+gui.barrel.pickling=Pickling
+gui.barrel.brining=Brining
+gui.barrel.preserving=Preserving
 
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Charcoal
 gui.Bloomery.Ore=Ore
-gui.Bloomery.Output=Output
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=Calendar
@@ -2170,7 +2225,7 @@ gui.Calendar.1Week=1 Week
 gui.Calendar.1Month=1 Month
 gui.Calendar.1Year=1 Year
 
-#== Food Prep GUI ==
+#== Food GUI ==
 gui.FoodPrep.CreateMeal=Create
 gui.FoodPrep.Effect=Effect
 gui.FoodPrep.Energy=Energy
@@ -2244,17 +2299,28 @@ gui.fertilized=Fertilized
 gui.Inventory=Inventory
 gui.ClearSlot=Clear an output slot.
 gui.LogPile=Log Pile
+gui.Output=Output
 gui.done=Done
 gui.cancel=Cancel
 gui.Sluice.Soil=Soil
 gui.Sluice.Overworked=Overworked
 gui.Workbench.Crafting=Crafting
+gui.overburdened=*Overburdened*
+
+gui.badnbt=BAD Info
 
 #== Tooltips ==
+gui.Advanced=Advanced
+gui.Shift=Shift
+gui.Hold=Hold
+
+gui.slot=Slot
+gui.slot.back=Back
+
 gui.ShowHelp=§8Help: (Hold §fShift§8)
 gui.Help=§8Help:
 gui.Clay.Inst0=§bRight Click §7with 5 in a stack to shape.
-gui.Knife.Inst0=§bRight Click §7the top of a block to
+gui.Knife.Inst0=§bRight Click §7the top of a non-soil block to
 gui.Knife.Inst1=create a meal preparation area.
 gui.Leather.Inst0=§bRight Click §7with a knife in your inventory to cut.
 gui.LooseRock.Inst0=§bRight Click §7with 2 in a stack to knap.
@@ -2262,7 +2328,15 @@ gui.MeltedMetal.Inst0=§bRight Click §7to pour or combine.
 gui.PotteryBase.Inst0=Sneak and §bRight Click §7to place object.
 gui.PotteryVesselSmall.Inst0=Or §bRight Click §7to open inventory.
 gui.RawHide.Inst0=????
+gui.Chisel.Inst0=Requires a hammer on the hotbar.
 gui.Barrel.MoreItems=§8More... (Hold §fShift§8)
+
+gui.Nutrient.A=Nutrient A
+gui.Nutrient.B=Nutrient B
+gui.Nutrient.C=Nutrient C
+
+gui.stage1=Stage 1
+gui.stage2=Stage 2
 
 gui.Size.Tiny=Tiny
 gui.Size.VerySmall=Very Small
@@ -2280,6 +2354,7 @@ gui.Reach.Short=Short
 gui.Reach.Medium=Medium
 gui.Reach.Far=Far
 
+#== Food ==
 gui.food.fruit=Fruit
 gui.food.vegetable=Vegetable
 gui.food.grain=Grain
@@ -2291,90 +2366,6 @@ gui.food.salted=Salted
 
 gui.FoodHeat.Cold=Cold
 gui.FoodHeat.Warm=Warm
-
-gui.Torch.CatchingFire=Catching Fire
-gui.Torch.Lit=Lit
-
-gui.ItemHeat.Liquid=Liquid
-gui.ItemHeat.Solidified=Solidified
-gui.ItemHeat.Caution=Caution
-gui.ItemHeat.Warming=Warming
-gui.ItemHeat.Hot=Hot
-gui.ItemHeat.VeryHot=Very Hot
-gui.ItemHeat.FaintRed=Faint Red
-gui.ItemHeat.DarkRed=Dark Red
-gui.ItemHeat.BrightRed=Bright Red
-gui.ItemHeat.Orange=Orange
-gui.ItemHeat.Yellow=Yellow
-gui.ItemHeat.YellowWhite=Yellow White
-gui.ItemHeat.White=White
-gui.ItemHeat.BrilliantWhite=Brilliant White
-
-gui.ingot.workable=Can Work
-gui.ingot.weldable=Can Weld
-gui.ingot.danger=**Danger**
-
-gui.milk.fresh=Fresh
-gui.milk.old=Old
-gui.milk.sour=Sour
-
-gui.units=Units
-
-#== Chat Messages ==
-gui.GoldPan.UseFull=Must use under flowing water.
-gui.goldpan.overused=This area seems to be overworked. You probably wouldn't find much.
-
-gui.ProPick.Found=Found
-gui.ProPick.FoundTraces=Found traces of
-gui.ProPick.FoundSmall=Found a small sample of
-gui.ProPick.FoundMedium=Found a medium sample of
-gui.ProPick.FoundLarge=Found a large sample of
-gui.ProPick.FoundVeryLarge=Found a very large sample of
-gui.ProPick.FoundNothing=Found nothing of interest.
-
-#== Creative Tabs ==
-itemGroup.TFCArmor=(TFC) Armor
-itemGroup.TFCMaterials=(TFC) Materials
-itemGroup.TFCMisc=(TFC) Misc
-itemGroup.TFCPottery=(TFC) Pottery
-itemGroup.TFCTools=(TFC) Tools
-itemGroup.TFCWeapons=(TFC) Weapons
-itemGroup.TFCDevices=(TFC) Devices
-itemGroup.TFCFoods=(TFC) Foodstuffs
-itemGroup.TFCBuilding=(TFC) Building Blocks
-itemGroup.TFCDecoration=(TFC) Decoration Blocks
-
-#== Skill GUI ==
-skill.armorsmith=Armor Smithing
-skill.gensmith=General Smithing
-skill.toolsmith=Tool Smithing
-skill.weaponsmith=Weapon Smithing
-skill.agriculture=Agriculture
-skill.cooking=Cooking
-skill.prospecting=Prospecting
-skill.butchering=Butchering
-
-#=====================================================
-#========Add New Stuff Here To Be Sorted Later========
-#=====================================================
-fluid.freshwater=Fresh Water
-fluid.saltwater=Salt Water
-fluid.lavatfc=Lava
-fluid.hotwater=Hot Water
-fluid.beer=Beer
-fluid.cider=Cider
-fluid.rum=Rum
-fluid.ryewhiskey=Rye Whiskey
-fluid.sake=Sake
-fluid.vodka=Vodka
-fluid.whiskey=Whiskey
-fluid.cornwhiskey=Corn Whiskey
-fluid.milk=Milk
-fluid.milkcurdled=Curdled Milk
-fluid.limewater=Limewater
-fluid.tannin=Tannin
-fluid.vinegar=Vinegar
-fluid.brine=Brine
 
 gui.showtaste=§8Taste: (Hold §fL-Ctrl§8)
 gui.taste=§8Taste:
@@ -2436,27 +2427,13 @@ gui.taste.6=Very
 gui.taste.7=Extremely
 gui.taste.8=Ridiculously
 
-gui.skill.novice=Novice
-gui.skill.adept=Adept
-gui.skill.expert=Expert
-gui.skill.master=Master
-gui.skillpage=Skills
-tile.MetalTrapDoor.name=Trap Door
-item.Mud Brick.name=Mud Brick
-item.Wet Mud Brick.name=Wet Mud Brick
-gui.overburdened=*Overburdened*
-gui.slot=Slot
-gui.slot.back=Back
 word.pickled=Pickled
 word.brined=Brined
 word.cooked=Cooked
 word.salted=Salted
 word.smoked=Smoked
 word.dried=Dried
-gui.barrel.pickling=Pickling
-gui.barrel.brining=Brining
-tile.Vessel.name=Large Vessel
-tile.Grill.name=Grill
+
 food.cooked.rare=Rare
 food.cooked.medrare=Medium Rare
 food.cooked.med=Medium
@@ -2467,13 +2444,93 @@ food.cooked.1=Light
 food.cooked.2=Medium
 food.cooked.3=Dark
 food.cooked.4=Very Dark
-item.Sandwich.name=Sandwich
-item.Salad.name=Salad
-item.Soup.name=Soup
-item.ClayBowl.Ceramic Bowl.name=Ceramic Bowl
-item.ClayBowl.Clay Bowl.name=Clay Bowl
-item.Sugar.name=Sugar
-item.Sea Weed.name=Sea Weed
-word.stage1=Stage 1
-word.stage2=Stage 2
-gui.barrel.preserving=Preserving
+
+gui.Torch.CatchingFire=Catching Fire
+gui.Torch.Lit=Lit
+
+gui.ItemHeat.Liquid=Liquid
+gui.ItemHeat.Solidified=Solidified
+gui.ItemHeat.Caution=Caution
+gui.ItemHeat.Warming=Warming
+gui.ItemHeat.Hot=Hot
+gui.ItemHeat.VeryHot=Very Hot
+gui.ItemHeat.FaintRed=Faint Red
+gui.ItemHeat.DarkRed=Dark Red
+gui.ItemHeat.BrightRed=Bright Red
+gui.ItemHeat.Orange=Orange
+gui.ItemHeat.Yellow=Yellow
+gui.ItemHeat.YellowWhite=Yellow White
+gui.ItemHeat.White=White
+gui.ItemHeat.BrilliantWhite=Brilliant White
+
+gui.ingot.workable=Can Work
+gui.ingot.weldable=Can Weld
+gui.ingot.danger=**Danger**
+
+gui.milk.fresh=Fresh
+gui.milk.old=Old
+gui.milk.sour=Sour
+
+gui.units=Units
+
+#== WAILA ==
+gui.useless=Useless
+gui.growth=Growth
+gui.mature=Mature
+gui.metal.Iron=Iron
+gui.tier=Tier
+gui.temperature=Temperature
+gui.progress=Progress
+
+#== Chat Messages ==
+gui.GoldPan.UseFull=Must use under flowing water.
+gui.goldpan.overused=This area seems to be overworked. You probably wouldn't find much.
+gui.seeds.failedTemp=It's too cold to plant this, it wouldn't survive very long.
+gui.seeds.failedSun=There's not enough sunlight to plant this, it wouldn't survive very long.
+
+gui.ProPick.Found=Found
+gui.ProPick.FoundTraces=Found traces of
+gui.ProPick.FoundSmall=Found a small sample of
+gui.ProPick.FoundMedium=Found a medium sample of
+gui.ProPick.FoundLarge=Found a large sample of
+gui.ProPick.FoundVeryLarge=Found a very large sample of
+gui.ProPick.FoundNothing=Found nothing of interest.
+
+#== Creative Tabs ==
+itemGroup.TFCArmor=(TFC) Armor
+itemGroup.TFCMaterials=(TFC) Materials
+itemGroup.TFCMisc=(TFC) Misc
+itemGroup.TFCPottery=(TFC) Pottery
+itemGroup.TFCTools=(TFC) Tools
+itemGroup.TFCWeapons=(TFC) Weapons
+itemGroup.TFCDevices=(TFC) Devices
+itemGroup.TFCFoods=(TFC) Foodstuffs
+itemGroup.TFCBuilding=(TFC) Building Blocks
+itemGroup.TFCDecoration=(TFC) Decoration Blocks
+
+#== Skill GUI ==
+skill.armorsmith=Armor Smithing
+skill.gensmith=General Smithing
+skill.toolsmith=Tool Smithing
+skill.weaponsmith=Weapon Smithing
+skill.agriculture=Agriculture
+skill.cooking=Cooking
+skill.prospecting=Prospecting
+skill.butchering=Butchering
+gui.skill.novice=Novice
+gui.skill.adept=Adept
+gui.skill.expert=Expert
+gui.skill.master=Master
+gui.skillpage=Skills
+
+#==================
+#= Error Messages =
+#==================
+error.error=ERROR:
+error.NBT=is missing NBT information.
+error.OreCFG=The following block entry in TFCOre.cfg is invalid:
+error.Contact=Please report to TerraFirmaCraft Support.
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================

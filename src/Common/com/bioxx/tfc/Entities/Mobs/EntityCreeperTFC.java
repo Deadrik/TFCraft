@@ -1,14 +1,17 @@
 package com.bioxx.tfc.Entities.Mobs;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Achievements;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
 
 public class EntityCreeperTFC extends EntityCreeper implements IInnateArmor
@@ -49,4 +52,17 @@ public class EntityCreeperTFC extends EntityCreeper implements IInnateArmor
 		return -335;
 	}
 
+	@Override
+	public boolean getCanSpawnHere()
+	{
+		int x = MathHelper.floor_double(this.posX);
+		int y = MathHelper.floor_double(this.boundingBox.minY);
+		int z = MathHelper.floor_double(this.posZ);
+		Block b = this.worldObj.getBlock(x, y, z);
+
+		if(b == TFCBlocks.Leaves || b == TFCBlocks.Leaves2 || b == TFCBlocks.Thatch)
+			return false;
+
+		return super.getCanSpawnHere();
+	}
 }

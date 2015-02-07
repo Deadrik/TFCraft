@@ -19,10 +19,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.TileEntities.TEMetalTrapDoor;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -37,8 +37,8 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 	public BlockMetalTrapDoor()
 	{
 		super(Material.iron);
-		float f = 0.5F;
-		float f1 = 1.0F;
+		//float f = 0.5F;
+		//float f1 = 1.0F;
 		this.setBlockBounds(0, 0, 0, 0.001f, 0.001f, 0.001f);
 		this.setCreativeTab(TFCTabs.TFCDevices);
 	}

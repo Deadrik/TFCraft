@@ -23,11 +23,6 @@ public class BarrelLiquidToLiquidRecipe extends BarrelRecipe
 			if(10000-fluid.amount < itemLiquid.amount)
 				return false;
 
-			//Make sure that the liquid ratio is at least 1 for the recipe
-			/*float mult0 = fluid.amount / barrelFluid.amount;
-			float mult1 = itemLiquid.amount / inputfluid.amount;
-
-			if(mult0 >= 1 && mult1 >= 1)*/
 			return true;
 		}
 		return false;
@@ -36,7 +31,9 @@ public class BarrelLiquidToLiquidRecipe extends BarrelRecipe
 	@Override
 	public ItemStack getResult(ItemStack inIS, FluidStack inFS, int sealedTime)
 	{
-		return inIS.getItem().getContainerItem(inIS);
+		if(inIS != null)
+			return inIS.getItem().getContainerItem(inIS);
+		return null;
 	}
 
 	@Override
@@ -59,8 +56,8 @@ public class BarrelLiquidToLiquidRecipe extends BarrelRecipe
 		return null;
 	}
 
-    public FluidStack getInputfluid()
-    {
-        return inputfluid;
-    }
+	public FluidStack getInputfluid()
+	{
+		return inputfluid;
+	}
 }

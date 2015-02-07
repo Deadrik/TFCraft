@@ -33,12 +33,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Entities.EntityJavelin;
 import com.bioxx.tfc.Entities.EntityProjectileTFC;
 import com.bioxx.tfc.Items.Tools.ItemCustomBow;
 import com.bioxx.tfc.Items.Tools.ItemJavelin;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
@@ -270,7 +271,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		int amnt;
-		int count;
+		//int count;
 
 		if (this.getSkeletonType() == 1)
 		{
@@ -531,5 +532,19 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 	@Override
 	public int GetPierceArmor() {
 		return 500000;//this is not an error. this makes piercing damage useless.
+	}
+
+	@Override
+	public boolean getCanSpawnHere()
+	{
+		int x = MathHelper.floor_double(this.posX);
+		int y = MathHelper.floor_double(this.boundingBox.minY);
+		int z = MathHelper.floor_double(this.posZ);
+		Block b = this.worldObj.getBlock(x, y, z);
+
+		if(b == TFCBlocks.Leaves || b == TFCBlocks.Leaves2 || b == TFCBlocks.Thatch)
+			return false;
+
+		return super.getCanSpawnHere();
 	}
 }

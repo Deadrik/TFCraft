@@ -8,12 +8,12 @@ import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Render.TFC_CoreRender;
 import com.bioxx.tfc.Render.Blocks.RenderAnvil;
 import com.bioxx.tfc.Render.Blocks.RenderCrop;
 import com.bioxx.tfc.Render.Blocks.RenderDetailed;
 import com.bioxx.tfc.Render.Blocks.RenderGrass;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 

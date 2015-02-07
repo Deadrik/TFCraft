@@ -60,7 +60,7 @@ public class BarrelRecipe
 		boolean fStack = !removesLiquid ? true : (recipeFluid != null && item != null && fluid != null && recipeOutFluid != null && fluid.amount >= item.stackSize*recipeOutFluid.amount);
 
 		boolean anyStack = !removesLiquid && !isSealedRecipe && this.recipeOutIS == null && allowAnyStack;
-		boolean itemsEqual = OreDictionary.itemMatches(recipeIS, item, false);
+		boolean itemsEqual = (item == null && recipeIS == null) || OreDictionary.itemMatches(recipeIS, item, false);
 
 		return ((recipeIS != null && itemsEqual && (iStack || anyStack)) || recipeIS == null) &&
 				((recipeFluid != null && recipeFluid.isFluidEqual(fluid) && (fStack || anyStack)) || recipeFluid == null);
@@ -81,37 +81,37 @@ public class BarrelRecipe
 		return recipeFluid;
 	}
 
-    public ItemStack getRecipeOutIS()
-    {
-        return recipeOutIS;
-    }
+	public ItemStack getRecipeOutIS()
+	{
+		return recipeOutIS;
+	}
 
-    public FluidStack getRecipeOutFluid()
-    {
-        return recipeOutFluid;
-    }
+	public FluidStack getRecipeOutFluid()
+	{
+		return recipeOutFluid;
+	}
 
-    public int getSealTime()
-    {
-        return sealTime;
-    }
+	public int getSealTime()
+	{
+		return sealTime;
+	}
 
-    public boolean isRemovesLiquid()
-    {
-        return removesLiquid;
-    }
+	public boolean isRemovesLiquid()
+	{
+		return removesLiquid;
+	}
 
-    public int getMinTechLevel()
-    {
-        return minTechLevel;
-    }
+	public int getMinTechLevel()
+	{
+		return minTechLevel;
+	}
 
-    public boolean isAllowAnyStack()
-    {
-        return allowAnyStack;
-    }
+	public boolean isAllowAnyStack()
+	{
+		return allowAnyStack;
+	}
 
-    public String getRecipeName()
+	public String getRecipeName()
 	{
 		String s = "";
 		if(this.recipeOutIS != null)
@@ -121,7 +121,7 @@ public class BarrelRecipe
 			s += recipeOutIS.getDisplayName();
 		}
 		if(recipeOutFluid != null && !this.recipeFluid.isFluidEqual(recipeOutFluid))
-			s=recipeOutFluid.getFluid().getLocalizedName();
+			s = recipeOutFluid.getFluid().getLocalizedName(recipeOutFluid);
 		return s;
 	}
 
@@ -151,7 +151,7 @@ public class BarrelRecipe
 			is.stackSize*= this.getnumberOfRuns(inIS, inFS);
 			return is;
 		}
-		if(!removesLiquid)
+		if(!removesLiquid && inIS != null)
 		{
 			is = inIS;
 			is.stackSize -= inFS.amount/this.recipeOutFluid.amount;

@@ -1,16 +1,17 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
 import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import com.bioxx.tfc.TFCItems;
+
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -41,8 +42,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	{
 		try
 		{
-			//System.out.println(is.getItemDamage()+":"+MetaNames.length);
-			if(MetaNames != null)
+			if(MetaNames != null && is.getItemDamage() < MetaNames.length)
 				return getUnlocalizedName().concat("." + MetaNames[is.getItemDamage()]);
 		}
 		catch(Exception ex)
@@ -68,6 +68,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 		return i;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
@@ -75,8 +76,6 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 
 		if (is.hasTagCompound())
 		{
-			NBTTagCompound stackTagCompound = is.getTagCompound();
-
 			if(TFC_ItemHeat.HasTemp(is))
 			{
 				float temp = TFC_ItemHeat.GetTemp(is);

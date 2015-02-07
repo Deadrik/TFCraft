@@ -20,7 +20,7 @@ public class TF_EntityPlayer extends ClassTransformer
 		mcpClassName = "net.minecraft.entity.player.EntityPlayer";
 		obfClassName = "yz";
 
-		List nodes = new ArrayList();
+		List<InstrSet> nodes = new ArrayList<InstrSet>();
 		InsnList list = new InsnList();
 
 		/**
@@ -52,7 +52,7 @@ public class TF_EntityPlayer extends ClassTransformer
 		 * This is for correcting the bow animation speeds
 		 */
 		list = new InsnList();
-		nodes = new ArrayList();
+		nodes = new ArrayList<InstrSet>();
 		nodes.add(new InstrSet(list, 33, InstrOpType.Remove));
 		nodes.add(new InstrSet(list, 34, InstrOpType.Remove));
 		nodes.add(new InstrSet(list, 35, InstrOpType.Remove));

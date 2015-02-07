@@ -22,13 +22,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.Schematic;
 import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
 import com.bioxx.tfc.TileEntities.TETreeLog;
 import com.bioxx.tfc.api.TreeRegistry;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
@@ -87,11 +87,11 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable, ITileE
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
 	{
-		/*Block block = world.getBlock(x, y, z);
-		if(!Minecraft.isFancyGraphicsEnabled() && block == this) 
+		Block block = world.getBlock(x, y, z);
+		/*if(!Minecraft.isFancyGraphicsEnabled() && block == this)
 			return false;*/
 
-		return side == 0 && this.minY > 0.0D ? true : (side == 1 && this.maxY < 1.0D ? true : (side == 2 && this.minZ > 0.0D ? true : (side == 3 && this.maxZ < 1.0D ? true : (side == 4 && this.minX > 0.0D ? true : (side == 5 && this.maxX < 1.0D ? true : !world.getBlock(x, y, z).isOpaqueCube())))));
+		return side == 0 && this.minY > 0.0D ? true : (side == 1 && this.maxY < 1.0D ? true : (side == 2 && this.minZ > 0.0D ? true : (side == 3 && this.maxZ < 1.0D ? true : (side == 4 && this.minX > 0.0D ? true : (side == 5 && this.maxX < 1.0D ? true : !block.isOpaqueCube())))));
 	}
 
 	@Override
