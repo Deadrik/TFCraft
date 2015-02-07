@@ -62,7 +62,7 @@ public class Schematic implements ISchematic
 			dataArray = tree.getByteArray("Data");
 			te = tree.getTagList("TileEntities", 10);
 			int num = path.indexOf('_') + 1;
-			id = Integer.parseInt(path.substring(num, num + 3));
+			id = Integer.parseInt(path.substring(num, num + 2));
 		}
 		catch (FileNotFoundException e)
 		{

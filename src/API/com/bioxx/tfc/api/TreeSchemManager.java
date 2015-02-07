@@ -22,7 +22,7 @@ public class TreeSchemManager
 		int growth = ts.getGrowthStage();
 		if(treeList.size() <= growth)
 			treeList.setSize(growth + 1);
-		System.out.println("Adding " + ts.getIndex() + ": " + growth);
+		//System.out.println("Adding " + ts.getIndex() + ":" + ts.getPath() + ": Stage " + growth);
 		if(treeList.get(growth) == null)
 			treeList.set(growth, new Vector<TreeSchematic>());
 
