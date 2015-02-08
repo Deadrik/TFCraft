@@ -134,7 +134,7 @@ public class ContainerPlayerTFC extends ContainerPlayer
 						return null;
 				}
 			}
-			else if (par2 >= 9 && par2 < 45 && origStack.getItem() instanceof IFood && !(origStack.getItem() instanceof ItemMeal)&& !isCraftingGridFull())
+			else if (par2 >= 9 && par2 < 45 && origStack.getItem() instanceof IFood && !(origStack.getItem() instanceof ItemMeal) && !isCraftingGridFull())
 			{
 				if (!this.mergeItemStack(slotStack, 1, 5, false) && slotStack.stackSize == 0)
 					return null;
