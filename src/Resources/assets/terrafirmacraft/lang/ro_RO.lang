@@ -5,13 +5,13 @@
 
 
 
-generator.TFCDefault=TFC Standard
-generator.TFCFlat=
-generator.TFCAmplified=
-generator.TFCLargeBiomes=
+generator.TFCDefault=TFC standard
+generator.TFCFlat=TFC plat (nefolosit)
+generator.TFCAmplified=TFC amplificat (nefolosit)
+generator.TFCLargeBiomes=TFC biomuri mari (nefolosit)
 
-key.ToolMode=Schimbă modul instrumentului
-key.LockTool=Blochează poziția instrumentului
+key.ToolMode=Schimbă modul uneltei
+key.LockTool=Blochează poziția uneltei
 
 effect.bleed=Sângerare
 death.attack.alcohol=%1$s a murit de intoxicație cu alcool
@@ -116,7 +116,7 @@ fluid.whiskey=Whisky
 fluid.cornwhiskey=Whisky de porumb
 fluid.milk=Lapte
 fluid.milkcurdled=Lapte prins
-fluid.milkvinegar=
+fluid.milkvinegar=Amestec de lapte și oțet
 fluid.limewater=Var
 fluid.tannin=Tanin
 fluid.vinegar=Oțet
@@ -212,7 +212,7 @@ tile.BerryBush.Gooseberry.name=Agriș
 tile.BerryBush.Raspberry.name=Zmeur
 tile.BerryBush.Snowberry.name=Hurmuz
 tile.BerryBush.Strawberry.name=Căpșun
-tile.BerryBush.Wintergreen.name=Gaultheria
+tile.BerryBush.Wintergreen.name=Gaulterie
 
 item.Blackberry.name=Mure
 item.Blueberry.name=Afine
@@ -224,7 +224,7 @@ item.Gooseberry.name=Agrișe
 item.Raspberry.name=Zmeură
 item.Snowberry.name=Fructe de hurmuz
 item.Strawberry.name=Căpșune
-item.Wintergreen Berry.name=Fructe de gaultheria
+item.Wintergreen Berry.name=Fructe de gaulterie
 
 item.Blackberry Leaf.name=Frunză de mur
 item.Blueberry Leaf.name=Frunză de afin
@@ -236,7 +236,7 @@ item.Gooseberry Leaf.name=Frunză de agriș
 item.Raspberry Leaf.name=Frunză de zmeur
 item.Snowberry Leaf.name=Frunză de hurmuz
 item.Strawberry Leaf.name=Frunză de căpșun
-item.Wintergreen Leaf.name=Frunză de gaultheria
+item.Wintergreen Leaf.name=Frunză de gaulterie
 
 #== Protein ==
 item.Beef.name=Vită
@@ -306,7 +306,7 @@ item.Flat Clay.clay flat dark fire.name=Lut refractar plat
 
 item.Jug.Clay Jug.name=Urcior de lut
 item.Jug.Ceramic Jug.name=Urcior de ceramică
-item.Jug.Water Jug.name=Urcior de apă
+item.Jug.Water Jug.name=Urcior cu apă
 
 item.Pot.Clay Pot.name=Oală de lut
 item.Pot.Ceramic Pot.name=Oală de ceramică
@@ -314,8 +314,8 @@ item.Pot.Ceramic Pot.name=Oală de ceramică
 item.Small Vessel.Clay Vessel.name=Vas de lut
 item.Small Vessel.Ceramic Vessel.name=Vas de ceramică
 
-item.Large Vessel.Clay Vessel [Large].name=Vas de lut [mare]
-item.Large Vessel.Ceramic Vessel [Large].name=Vas de ceramică [mare]
+item.Large Vessel.Clay Vessel [Large].name=Vas de lut (mare)
+item.Large Vessel.Ceramic Vessel [Large].name=Vas de ceramică (mare)
 
 item.Mold.Clay Mold.name=Formă de lut
 item.Mold.Ceramic Mold.name=Formă de ceramică
@@ -498,7 +498,7 @@ item.Tourmaline.Exquisite.name=Turmalină excepțională
 #= Powders =
 #===========
 item.dyePowder.black.name=Sac cu cerneală
-item.dyePowder.blue.name=Lapis lazuli
+item.dyePowder.blue.name=Vopsea albastră
 item.dyePowder.brown.name=Boabe de cacao
 item.dyePowder.cyan.name=Vopsea turcoaz
 item.dyePowder.gray.name=Vopsea gri
@@ -508,7 +508,7 @@ item.dyePowder.lime.name=Vopsea verde-deschis
 item.dyePowder.magenta.name=Vopsea magenta
 item.dyePowder.orange.name=Vopsea portocalie
 item.dyePowder.pink.name=Vopsea roz
-item.dyePowder.purple.name=Vopsea  violetă
+item.dyePowder.purple.name=Vopsea violetă
 item.dyePowder.red.name=Vopsea roșie
 item.dyePowder.silver.name=Vopsea gri-deschis
 item.dyePowder.white.name=Făină de oase
@@ -993,23 +993,23 @@ item.Loom.White Elm.name=Război de țesut de ulm
 item.Loom.Willow.name=Război de țesut de salcie
 
 #== Wood Blocks ==
-tile.Chest.Acacia.name=
-tile.Chest.Ash.name=
-tile.Chest.Aspen.name=
-tile.Chest.Birch.name=
-tile.Chest.Chestnut.name=
-tile.Chest.Douglas Fir.name=
-tile.Chest.Hickory.name=
-tile.Chest.Kapok.name=
-tile.Chest.Maple.name=
-tile.Chest.Oak.name=
-tile.Chest.Pine.name=
-tile.Chest.Sequoia.name=
-tile.Chest.Spruce.name=
-tile.Chest.Sycamore.name=
-tile.Chest.White Cedar.name=
-tile.Chest.White Elm.name=
-tile.Chest.Willow.name=
+tile.Chest.Acacia.name=Cufăr de salcâm
+tile.Chest.Ash.name=Cufăr de frasin
+tile.Chest.Aspen.name=Cufăr de plop
+tile.Chest.Birch.name=Cufăr de mesteacăn
+tile.Chest.Chestnut.name=Cufăr de castan
+tile.Chest.Douglas Fir.name=Cufăr de duglas
+tile.Chest.Hickory.name=Cufăr de nuc
+tile.Chest.Kapok.name=Cufăr de capoc
+tile.Chest.Maple.name=Cufăr de arțar
+tile.Chest.Oak.name=Cufăr de stejar
+tile.Chest.Pine.name=Cufăr de pin
+tile.Chest.Sequoia.name=Cufăr de sequoia
+tile.Chest.Spruce.name=Cufăr de molid
+tile.Chest.Sycamore.name=Cufăr de sicomor
+tile.Chest.White Cedar.name=Cufăr de cedru alb
+tile.Chest.White Elm.name=Cufăr de ulm
+tile.Chest.Willow.name=Cufăr de salcie
 
 tile.log2.Acacia.name=Buștean de salcâm
 tile.log.Ash.name=Buștean de frasin
@@ -1998,7 +1998,7 @@ item.Wet Mud Brick.name=Cărămidă de pământ udă
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Pat din paie și piele
 tile.StrawHideBed.name=Pat din paie și piele
-tile.customBed.sleep=Acest pat nu este destul de comfortabil pentru dormit
+tile.customBed.sleep=Acest pat nu este destul de confortabil pentru dormit
 tile.BasicPipe.name=Țeavă
 tile.ValvePipe.name=Valvă
 tile.Smoke.name=Fum
@@ -2155,11 +2155,11 @@ gui.DamageType.Slashing=Tăiere
 
 #== Barrel GUI ==
 gui.Barrel.Empty=Golește
-gui.Barrel.Seal=Sigilează
-gui.Barrel.Unseal=Desigilează
+gui.Barrel.Seal=Închide
+gui.Barrel.Unseal=Deschide
 gui.Barrel.ToggleOff=Scoate
 gui.Barrel.ToggleOn=Pune
-gui.Barrel.SealedOn=Sigilat pe
+gui.Barrel.SealedOn=Închis pe
 gui.Barrel.Solid=Conținut solid
 gui.Barrel.Liquid=Conținut lichid
 gui.barrel.pickling=Murat
@@ -2203,18 +2203,18 @@ gui.Calendar.Winter=Iarnă
 gui.Calendar.LateWinter=Iarnă târzie
 
 gui.Calendar.Date=Dată
-gui.Calendar.January=Ianuarie
-gui.Calendar.February=Februarie
-gui.Calendar.March=Martie
-gui.Calendar.April=Aprilie
-gui.Calendar.May=Mai
-gui.Calendar.June=Iunie
-gui.Calendar.July=Iulie
-gui.Calendar.August=August
-gui.Calendar.September=Septembrie
-gui.Calendar.October=Octombrie
-gui.Calendar.November=Noiembrie
-gui.Calendar.December=Decembrie
+gui.Calendar.January=ianuarie
+gui.Calendar.February=februarie
+gui.Calendar.March=martie
+gui.Calendar.April=aprilie
+gui.Calendar.May=mai
+gui.Calendar.June=iunie
+gui.Calendar.July=iulie
+gui.Calendar.August=august
+gui.Calendar.September=septembrie
+gui.Calendar.October=octombrie
+gui.Calendar.November=noiembrie
+gui.Calendar.December=decembrie
 
 gui.Calendar.1Hour=1 oră
 gui.Calendar.1Day=1 zi
@@ -2312,24 +2312,25 @@ gui.Shift=Shift
 gui.Hold=Ține apăsat pe
 
 gui.slot=Loc
-gui.slot.back=Înapoi
+gui.slot.back=Spate
 
 gui.ShowHelp=§8Ajutor: (Ține apăsat pe §fShift§8)
 gui.Help=§8Help:
-gui.Clay.Inst0=§bDă clic dreapta §7cu 5 într-o stivă ca să modelezi.
-gui.Knife.Inst0=§bDă clic dreapta §7pe partea de sus a unui bloc ca să
+gui.Clay.Inst0=Dă §bclic dreapta §7cu 5 într-o stivă ca să modelezi.
+gui.Knife.Inst0=Dă §bclic dreapta §7pe partea de sus a unui bloc care nu este sol ca să
 gui.Knife.Inst1=creezi un loc de preparare a mâncării.
-gui.Leather.Inst0=§bDă clic dreapta §7cu un cuțit în inventar ca să tai.
-gui.LooseRock.Inst0=§bDă clic dreapta §7cu 2 într-o stivă ca să cioplești.
-gui.MeltedMetal.Inst0=§bDă clic dreapta §7ca să torni sau să combini.
-gui.PotteryBase.Inst0=Furișează-te și §bdă clic dreapta §7ca să așezi obiectul.
-gui.PotteryVesselSmall.Inst0=Sau §bdă clic dreapta §7ca să deschizi inventarul.
+gui.Leather.Inst0=Dă §bclic dreapta §7cu un cuțit în inventar ca să tai.
+gui.LooseRock.Inst0=Dă §bclic dreapta §7cu 2 într-o stivă ca să cioplești.
+gui.MeltedMetal.Inst0=Dă §bclic dreapta §7ca să torni sau să combini.
+gui.PotteryBase.Inst0=Furișează-te și dă §bclic dreapta §7ca să așezi obiectul.
+gui.PotteryVesselSmall.Inst0=Sau dă §bclic dreapta §7ca să deschizi inventarul.
 gui.RawHide.Inst0=????
+gui.Chisel.Inst0=
 gui.Barrel.MoreItems=§8Mai multe... (Ține apăsat pe §fShift§8)
 
-gui.Nutrient.A=Nutrient A
-gui.Nutrient.B=Nutrient B
-gui.Nutrient.C=Nutrient C
+gui.Nutrient.A=Nutrimentul A
+gui.Nutrient.B=Nutrimentul B
+gui.Nutrient.C=Nutrimentul C
 
 gui.stage1=Etapa 1
 gui.stage2=Etapa 2
@@ -2365,11 +2366,11 @@ gui.FoodHeat.Warm=Cald
 
 gui.showtaste=§8Gust: (Ține apăsat pe §fL-Ctrl§8)
 gui.taste=§8Gust:
-gui.taste.sweet=dulce
-gui.taste.sour=acru
-gui.taste.salty=sărat
-gui.taste.bitter=amar
-gui.taste.savory=savuros
+gui.taste.sweet=Dulce
+gui.taste.sour=Acru
+gui.taste.salty=Sărat
+gui.taste.bitter=Amar
+gui.taste.savory=Savuros
 
 gui.taste.novice.sweet1=dulce
 gui.taste.novice.sweet0=nu dulce
@@ -2470,23 +2471,26 @@ gui.milk.sour=Acru
 gui.units=Unități
 
 #== WAILA ==
-gui.useless=
-gui.growth=
-gui.mature=
-gui.metal.Iron=
+gui.useless=Inutil
+gui.growth=Creștere
+gui.mature=Matur
+gui.metal.Iron=Fier
+gui.tier=
+gui.temperature=
+gui.progress=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Trebuie folosit sub apă curgătoare.
 gui.goldpan.overused=Această zonă pare să fi fost lucrată mult. Probabil nu vei găsi mare lucru.
-gui.seeds.failedTemp=
-gui.seeds.failedSun=
+gui.seeds.failedTemp=Este prea frig pentru a planta asta, nu ar supraviețui prea mult.
+gui.seeds.failedSun=Nu este destulă lumină de la soare pentru a planta asta, nu ar supraviețui foarte mult.
 
 gui.ProPick.Found=S-a găsit
 gui.ProPick.FoundTraces=S-au găsit urme de
-gui.ProPick.FoundSmall=S-a găsit un eșantion mic de
-gui.ProPick.FoundMedium=S-a găsit un eșantion mediu de
-gui.ProPick.FoundLarge=S-a găsit un eșantion mare de
-gui.ProPick.FoundVeryLarge=S-a găsit un eșantion foarte mare de
+gui.ProPick.FoundSmall=S-a găsit o mostră mică de
+gui.ProPick.FoundMedium=S-a găsit o mostră medie de
+gui.ProPick.FoundLarge=S-a găsit o mostră mare de
+gui.ProPick.FoundVeryLarge=S-a găsit o mostră foarte mare de
 gui.ProPick.FoundNothing=Nu s-a găsit nimic de interes.
 
 #== Creative Tabs ==
@@ -2511,7 +2515,7 @@ skill.cooking=Gătit
 skill.prospecting=Prospectat
 skill.butchering=Măcelărit
 gui.skill.novice=Novice
-gui.skill.adept=Inițiat
+gui.skill.adept=Abil
 gui.skill.expert=Expert
 gui.skill.master=Maestru
 gui.skillpage=Abilități
@@ -2519,10 +2523,10 @@ gui.skillpage=Abilități
 #==================
 #= Error Messages =
 #==================
-error.error=
-error.NBT=
-error.OreCFG=
-error.Contact=
+error.error=EROARE:
+error.NBT=nu are unele date NBT
+error.OreCFG=Următoarea intrare de bloc în TFCOre.cfg este invalidă:
+error.Contact=Te rugăm să semnalezi la Asistență TerraFirmaCraft.
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========

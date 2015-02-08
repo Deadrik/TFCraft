@@ -2325,6 +2325,7 @@ gui.MeltedMetal.Inst0=§bClique droit §7pour verser dans un moule d'outil ou po
 gui.PotteryBase.Inst0=S'accroupir et §bclique droit §7 pour placer l'objet.
 gui.PotteryVesselSmall.Inst0=Ou §bClique droit §7pour ouvrir l'inventaire.
 gui.RawHide.Inst0=????
+gui.Chisel.Inst0=
 gui.Barrel.MoreItems=§8Plus... (Tenir §fShift§8)
 
 gui.Nutrient.A=Nutriment A
@@ -2474,6 +2475,9 @@ gui.useless=Innutile
 gui.growth=Poussé
 gui.mature=Mature
 gui.metal.Iron=Fer
+gui.tier=
+gui.temperature=
+gui.progress=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Doit être utilisé sous de l'eau en mouvement.

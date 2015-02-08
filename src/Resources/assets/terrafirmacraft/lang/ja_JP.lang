@@ -6,9 +6,9 @@
 
 
 generator.TFCDefault=TFC デフォルト
-generator.TFCFlat=
-generator.TFCAmplified=
-generator.TFCLargeBiomes=
+generator.TFCFlat=TFC フラット(未使用)
+generator.TFCAmplified=TFC アンプリファイド(未使用)
+generator.TFCLargeBiomes=TFC ラージバイオーム(未使用)
 
 key.ToolMode=ツールモード切替
 key.LockTool=ツールの位置をロックする
@@ -104,7 +104,7 @@ commands.transferTamed.wrongSender=その動物は転送できない！
 #==========
 fluid.freshwater=真水
 fluid.saltwater=海水
-fluid.lavatfc=マグマ
+fluid.lavatfc=溶岩
 fluid.hotwater=熱湯
 fluid.beer=ビール
 fluid.cider=リンゴ酒
@@ -116,7 +116,7 @@ fluid.whiskey=ウイスキー
 fluid.cornwhiskey=コーンウイスキー
 fluid.milk=ミルク
 fluid.milkcurdled=カード
-fluid.milkvinegar=
+fluid.milkvinegar=ミルク＋酢 混合
 fluid.limewater=石灰水
 fluid.tannin=タンニン
 fluid.vinegar=酢
@@ -2325,6 +2325,7 @@ gui.MeltedMetal.Inst0=§b右クリック §7で鋳型にそそぐ
 gui.PotteryBase.Inst0=スニークし§b右クリックで§7オブジェクトを設置
 gui.PotteryVesselSmall.Inst0=もしくは§b右クリックで§7インベントリーを開く
 gui.RawHide.Inst0=????
+gui.Chisel.Inst0=
 gui.Barrel.MoreItems=§8詳細... (押す §fShift§8)
 
 gui.Nutrient.A=
@@ -2474,6 +2475,9 @@ gui.useless=
 gui.growth=
 gui.mature=
 gui.metal.Iron=
+gui.tier=
+gui.temperature=
+gui.progress=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=流水の下で使用してください。
@@ -2519,10 +2523,10 @@ gui.skillpage=技術
 #==================
 #= Error Messages =
 #==================
-error.error=
-error.NBT=
+error.error=エラー：
+error.NBT=：NBT情報無し
 error.OreCFG=
-error.Contact=
+error.Contact=公式サポートに報告してください
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========

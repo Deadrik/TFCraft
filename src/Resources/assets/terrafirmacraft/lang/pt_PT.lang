@@ -6,9 +6,9 @@
 
 
 generator.TFCDefault=TFC Padrão
-generator.TFCFlat=
-generator.TFCAmplified=
-generator.TFCLargeBiomes=
+generator.TFCFlat=TFC Superplano (Não utilizado)
+generator.TFCAmplified=TFC Amplificado (Não utilizado)
+generator.TFCLargeBiomes=TFC Biomas Grandes (Não utilizado)
 
 key.ToolMode=Trocar Modo de Ferramenta
 key.LockTool=Fixar Modo de Ferramenta
@@ -116,7 +116,7 @@ fluid.whiskey=Uísque
 fluid.cornwhiskey=Uísque de Milho
 fluid.milk=Leite
 fluid.milkcurdled=Leite Coalhado
-fluid.milkvinegar=
+fluid.milkvinegar=Leite + Vinagre Misturado
 fluid.limewater=Água de Cal
 fluid.tannin=Tanino
 fluid.vinegar=Vinagre
@@ -902,23 +902,23 @@ tile.Ore.Tetrahedrite.name=Tetraedrita
 #= Wood =
 #========
 #== Wood Items ==
-item.Log.Acacia.name=Acácia
-item.Log.Ash.name=Freixo
-item.Log.Aspen.name=Choupo
-item.Log.Birch.name=Bétula
-item.Log.Chestnut.name=Castanheira
-item.Log.Douglas Fir.name=Abeto de Douglas
-item.Log.Hickory.name=Nogueira
-item.Log.Kapok.name=Mafumeira
-item.Log.Maple.name=Bordo
-item.Log.Oak.name=Carvalho
-item.Log.Pine.name=Pinheiro
-item.Log.Sequoia.name=Sequoia
-item.Log.Spruce.name=Espruce
-item.Log.Sycamore.name=Sicomoro
-item.Log.White Cedar.name=Cedro Branco
-item.Log.White Elm.name=Olmo Branco
-item.Log.Willow.name=Salgueiro
+item.Log.Acacia.name=Madeira de Acácia
+item.Log.Ash.name=Madeira de Freixo
+item.Log.Aspen.name=Madeira de Choupo
+item.Log.Birch.name=Madeira de Bétula
+item.Log.Chestnut.name=Madeira de Castanheira
+item.Log.Douglas Fir.name=Madeira de Abeto de Douglas
+item.Log.Hickory.name=Madeira de Nogueira
+item.Log.Kapok.name=Madeira de Mafumeira
+item.Log.Maple.name=Madeira de Bordo
+item.Log.Oak.name=Madeira de Carvalho
+item.Log.Pine.name=Madeira de Pinheiro
+item.Log.Sequoia.name=Madeira de Sequoia
+item.Log.Spruce.name=Madeira de Espruce
+item.Log.Sycamore.name=Madeira de Sicomoro
+item.Log.White Cedar.name=Madeira de Cedro Branco
+item.Log.White Elm.name=Madeira de Olmo Branco
+item.Log.Willow.name=Madeira de Salgueiro
 
 item.SinglePlank.Acacia.name=Tábua de Acácia
 item.SinglePlank.Ash.name=Tábua de Freixo
@@ -993,23 +993,23 @@ item.Loom.White Elm.name=Tecelão de Olmo Branco
 item.Loom.Willow.name=Tecelão de Salgueiro
 
 #== Wood Blocks ==
-tile.Chest.Acacia.name=
-tile.Chest.Ash.name=
-tile.Chest.Aspen.name=
-tile.Chest.Birch.name=
-tile.Chest.Chestnut.name=
-tile.Chest.Douglas Fir.name=
-tile.Chest.Hickory.name=
-tile.Chest.Kapok.name=
-tile.Chest.Maple.name=
-tile.Chest.Oak.name=
-tile.Chest.Pine.name=
-tile.Chest.Sequoia.name=
-tile.Chest.Spruce.name=
-tile.Chest.Sycamore.name=
-tile.Chest.White Cedar.name=
-tile.Chest.White Elm.name=
-tile.Chest.Willow.name=
+tile.Chest.Acacia.name=Baú de Acacia
+tile.Chest.Ash.name=Baú de Freixo
+tile.Chest.Aspen.name=Baú de Choupo
+tile.Chest.Birch.name=Baú de Bétula
+tile.Chest.Chestnut.name=Baú de Castanheira
+tile.Chest.Douglas Fir.name=Baú de Abeto de Douglas
+tile.Chest.Hickory.name=Baú de Nogueira
+tile.Chest.Kapok.name=Baú de Mafumeira
+tile.Chest.Maple.name=Baú de Bordo
+tile.Chest.Oak.name=Baú de Carvalho
+tile.Chest.Pine.name=Baú de Pinheiro
+tile.Chest.Sequoia.name=Baú de Sequoia
+tile.Chest.Spruce.name=Baú de Espruce
+tile.Chest.Sycamore.name=Baú de Sicomoro
+tile.Chest.White Cedar.name=Baú de Cedro Branco
+tile.Chest.White Elm.name=Baú de Olmo Branco
+tile.Chest.Willow.name=Baú de Salgueiro
 
 tile.log2.Acacia.name=Acácia
 tile.log.Ash.name=Freixo
@@ -2325,6 +2325,7 @@ gui.MeltedMetal.Inst0=§bClique BD§7para despejar num molde de ferramenta.
 gui.PotteryBase.Inst0=Agache e §bClique BD§7para colocar objeto.
 gui.PotteryVesselSmall.Inst0=Ou §bClique BD§7para abrir inventário.
 gui.RawHide.Inst0=????
+gui.Chisel.Inst0=
 gui.Barrel.MoreItems=§8Mais... (Segure §fShift§8)
 
 gui.Nutrient.A=Nutriente A
@@ -2470,16 +2471,19 @@ gui.milk.sour=Azedo
 gui.units=Unidades
 
 #== WAILA ==
-gui.useless=
-gui.growth=
-gui.mature=
-gui.metal.Iron=
+gui.useless=Inútil
+gui.growth=Crescimento
+gui.mature=Maduro
+gui.metal.Iron=Ferro
+gui.tier=
+gui.temperature=
+gui.progress=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Deve ser usado sob água corrente
 gui.goldpan.overused=Esta área parece estar Esgotada. Provavelmente não iria encontrar nada aqui.
-gui.seeds.failedTemp=
-gui.seeds.failedSun=
+gui.seeds.failedTemp=Está muito frio para plantar, ele não iria sobreviver muito tempo.
+gui.seeds.failedSun=Não há luz solar suficiente para plantar, ele não iria sobreviver muito tempo.
 
 gui.ProPick.Found=Encontrado
 gui.ProPick.FoundTraces=Encontrado traços de
@@ -2519,10 +2523,10 @@ gui.skillpage=Abilidades
 #==================
 #= Error Messages =
 #==================
-error.error=
-error.NBT=
-error.OreCFG=
-error.Contact=
+error.error=ERRO:
+error.NBT=está faltando informações NBT.
+error.OreCFG=A seguinte entrada de bloco em TFCOre.cfg é inválida:
+error.Contact=Por favor, fale com o suporte do TerraFirmaCraft.
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
