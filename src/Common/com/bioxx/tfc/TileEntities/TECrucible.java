@@ -52,7 +52,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		nbt.setInteger("temp", temperature);
 
 		NBTTagList nbttaglist = new NBTTagList();
-		Iterator iter = metals.values().iterator();
+		Iterator<MetalPair> iter = metals.values().iterator();
 		while(iter.hasNext())
 		{
 			MetalPair m = (MetalPair) iter.next();
@@ -262,7 +262,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 	public float getTotalMetal()
 	{
-		Iterator iter = metals.values().iterator();
+		Iterator<MetalPair> iter = metals.values().iterator();
 		float totalAmount = 0;
 		while(iter.hasNext())
 		{
@@ -276,7 +276,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	private void updateCurrentAlloy()
 	{
 		List<AlloyMetal> a = new ArrayList<AlloyMetal>();
-		Iterator iter = metals.values().iterator();
+		Iterator<MetalPair> iter = metals.values().iterator();
 		float totalAmount = getTotalMetal();
 		iter = metals.values().iterator();
 		while(iter.hasNext())

@@ -2476,7 +2476,6 @@ gui.growth=Growth
 gui.mature=Mature
 gui.metal.Iron=Iron
 gui.tier=Tier
-gui.temperature=Temperature
 gui.progress=Progress
 
 #== Chat Messages ==
