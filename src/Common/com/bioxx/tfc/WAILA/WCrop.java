@@ -25,9 +25,10 @@ public class WCrop implements IWailaDataProvider
 	{
 		if (accessor.getTileEntity() instanceof TECrop)
 		{
-			TECrop te = (TECrop) accessor.getTileEntity();
+			NBTTagCompound tag = accessor.getNBTData();
+			int cropId = tag.getInteger("cropId");
 
-			CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
+			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 			ItemStack itemstack;
 
 			if (crop.Output2 != null)
@@ -53,9 +54,12 @@ public class WCrop implements IWailaDataProvider
 	{
 		if (accessor.getTileEntity() instanceof TECrop)
 		{
-			TECrop te = (TECrop) accessor.getTileEntity();
-			CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
-			int percentGrowth = (int) Math.min((te.growth / crop.numGrowthStages) * 100, 100);
+			NBTTagCompound tag = accessor.getNBTData();
+			float growth = tag.getFloat("growth");
+			int cropId = tag.getInteger("cropId");
+
+			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
+			int percentGrowth = (int) Math.min((growth / crop.numGrowthStages) * 100, 100);
 
 			if (percentGrowth < 100)
 				currenttip.add(TFC_Core.translate("gui.growth") + " : " + String.valueOf(percentGrowth) + "%");
@@ -75,11 +79,14 @@ public class WCrop implements IWailaDataProvider
 	{
 		reg.registerStackProvider(new WCrop(), TECrop.class);
 		reg.registerBodyProvider(new WCrop(), TECrop.class);
+		reg.registerNBTProvider(new WCrop(), TECrop.class);
 	}
 
 	@Override
 	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x, int y, int z)
 	{
+		if (te != null)
+			te.writeToNBT(tag);
 		return tag;
 	}
 }

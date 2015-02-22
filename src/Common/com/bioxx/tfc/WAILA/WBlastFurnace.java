@@ -77,7 +77,6 @@ public class WBlastFurnace implements IWailaDataProvider
 
 			if (temperature > 0)
 			{
-				currenttip.add(TFC_Core.translate("gui.temperature") + " : ");
 				currenttip.add(temp);
 			}
 		}

@@ -222,6 +222,8 @@ public class BlockForge extends BlockTerraContainer
 				te.removeSmoke();
 			}
 		}
+
+		super.breakBlock(world, x, y, z, block, meta);
 	}
 
 	/**
