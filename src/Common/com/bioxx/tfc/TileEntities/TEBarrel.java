@@ -2,6 +2,8 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
 
+import scala.collection.script.End;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -29,6 +31,7 @@ import com.bioxx.tfc.api.Crafting.BarrelBriningRecipe;
 import com.bioxx.tfc.api.Crafting.BarrelLiquidToLiquidRecipe;
 import com.bioxx.tfc.api.Crafting.BarrelManager;
 import com.bioxx.tfc.api.Crafting.BarrelMultiItemRecipe;
+import com.bioxx.tfc.api.Crafting.BarrelPreservativeRecipe;
 import com.bioxx.tfc.api.Crafting.BarrelRecipe;
 import com.bioxx.tfc.api.Crafting.BarrelVinegarRecipe;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
@@ -575,11 +578,8 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		if(!worldObj.isRemote)
 		{
-			DecayTickType decayTickType = DecayTickType.Standard;
 			ItemStack itemstack = storage[0]; 
-			float liquidToFoodRatioBrine = Global.FOOD_MAX_WEIGHT/10000f;//0.016
-			float liquidToFoodRatioVinegar = Global.FOOD_MAX_WEIGHT/5000f;//0.032
-
+			BarrelPreservativeRecipe preservative = BarrelManager.getInstance().findMatchingPreservativeRepice(this, itemstack, fluid, sealed);
 			if (itemstack != null && fluid != null && fluid.getFluid() == TFCFluids.FRESHWATER)
 			{
 				if(TFC_ItemHeat.HasTemp(itemstack))
@@ -597,16 +597,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			if(fluid != null && itemstack != null && itemstack.getItem() instanceof IFood)
 			{
 				float w = ((IFood)itemstack.getItem()).getFoodWeight(itemstack);
-				if(fluid.getFluid() == TFCFluids.BRINE)
-				{
-					if(Food.isBrined(itemstack))
-					{
-						//Do a calculation to see if there is enough Brine here to cover the food. If there is then we perform our non-standard decay tick.
-						if(w/fluid.amount <= liquidToFoodRatioBrine)
-							decayTickType = DecayTickType.Brine;
-					}
-				}
-				else if(fluid.getFluid() == TFCFluids.VINEGAR)
+				if(fluid.getFluid() == TFCFluids.VINEGAR)
 				{
 					//If the food is brined then we attempt to pickle it
 					if(Food.isBrined(itemstack) && !Food.isPickled(itemstack) && w/fluid.amount <= Global.FOOD_MAX_WEIGHT/this.getMaxLiquid() && this.getSealed() &&
@@ -615,27 +606,30 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 						fluid.amount -= 1 * w;
 						Food.setPickled(itemstack, true);
 					}
-					//Do a calculation to see if there is enough Vinegar here to cover the food. If there is and the item has been properly pickled 
-					//then we perform our non-standard decay tick. If the food is in the process of pickling then we decay as if we were in brine.
-					if(Food.isPickled(itemstack) && w/fluid.amount <= liquidToFoodRatioVinegar)
-						decayTickType = DecayTickType.Vinegar;
-					else if(Food.isBrined(itemstack) && w/fluid.amount <= liquidToFoodRatioBrine)
-						decayTickType = DecayTickType.Brine;
 				}
 			}
 
-
-			if(decayTickType == DecayTickType.Standard)
+			if(preservative == null)
 			{
+				// No preservative was matched - decay normally
 				TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
 			}
-			else if(decayTickType == DecayTickType.Brine)
+			else
 			{
-				TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord, 0.75f);
-			}
-			else if(decayTickType == DecayTickType.Vinegar)
-			{
-				TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord, 0.25f, 0.1f);
+				float env = preservative.getEnvironmentalDecayFactor();
+				float base = preservative.getBaseDecayModifier();
+				if(env == Float.NaN || env < 0.0)
+				{
+					TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
+				}
+				else if(base == Float.NaN || base < 0.0)
+				{
+					TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord, env);
+				}
+				else
+				{
+					TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord, env, base);
+				}
 			}
 
 			//If lightning can strike here then it means that the barrel can see the sky, so rain can hit it. If true then we fill
@@ -916,12 +910,15 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.Jute, 1, 0), new FluidStack(TFCFluids.FRESHWATER, 200), new ItemStack(TFCItems.JuteFibre, 1, 0), new FluidStack(TFCFluids.FRESHWATER, 200)).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluids.MILK, 9000), new FluidStack(TFCFluids.VINEGAR, 1000), new FluidStack(TFCFluids.MILKVINEGAR, 10000)).setSealedRecipe(false).setMinTechLevel(0).setRemovesLiquid(false));
 		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluids.MILKVINEGAR, 9000), new FluidStack(TFCFluids.MILK, 1000), new FluidStack(TFCFluids.MILKVINEGAR, 10000)).setSealedRecipe(false).setMinTechLevel(0).setRemovesLiquid(false));
-	}
+		// 5000mb / 160oz = 31.25
+		// 10000mb / 160oz = 62.5
+		// FluidStack naturally only takes int so I rounded down
+		BarrelPreservativeRecipe picklePreservative = new BarrelPreservativeRecipe(new FluidStack(TFCFluids.VINEGAR,31),"gui.barrel.preserving").setAllowDairy(true).setAllowFruit(true).setAllowProtien(true).setAllowVegetable(true).setRequiresPickled(true).setEnvironmentalDecayFactor(0.25f).setBaseDecayModifier(0.1f).setRequiresSealed(true);
+		BarrelPreservativeRecipe brineInBrinePreservative = new BarrelPreservativeRecipe(new FluidStack(TFCFluids.BRINE,62),"gui.barrel.preserving").setAllowDairy(true).setAllowFruit(true).setAllowProtien(true).setAllowVegetable(true).setRequiresBrined(true).setEnvironmentalDecayFactor(0.75f).setRequiresSealed(true);
+		BarrelPreservativeRecipe brineInVinegarPreservative = new BarrelPreservativeRecipe(new FluidStack(TFCFluids.VINEGAR,62),"gui.barrel.preserving").setAllowDairy(true).setAllowFruit(true).setAllowProtien(true).setAllowVegetable(true).setRequiresBrined(true).setEnvironmentalDecayFactor(0.75f).setRequiresSealed(true);
+		BarrelManager.getInstance().addPreservative(picklePreservative);
+		BarrelManager.getInstance().addPreservative(brineInBrinePreservative);
+		BarrelManager.getInstance().addPreservative(brineInVinegarPreservative);
 
-	private enum DecayTickType
-	{
-		Standard,
-		Brine,
-		Vinegar;
 	}
 }
