@@ -159,26 +159,31 @@ public class BlockCustomSnow extends BlockTerra
 			if (R.nextInt(20) == 0)
 			{
 				int max = (world.getBlock(x, y - 1, z).getMaterial() == Material.leaves) ? 3 : 7;
-				if(meta < max)
+				if(meta < max && canAddSnow(world, x, y, z, meta))
 				{
-					if (canAddSnow(world, x, y, z, meta))
-						world.setBlockMetadataWithNotify(x, y, z, meta + 1, 2);
+					world.setBlockMetadataWithNotify(x, y, z, meta + 1, 2);
 				}
 			}
 		}
 		else if (world.isRaining() && temp > 0)  //Raining and above freezing
 		{
-			if (meta > 0)
-				world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
-			else
-				world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+			if (R.nextInt(5) == 0)
+			{
+				if (meta > 0)
+					world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
+				else
+					world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+			}
 		}
 		else if (temp > 0)  //Above freezing, not raining
 		{
-			if(meta > 0 )
-				world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
-			else
-				world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+			if (R.nextInt(20) == 0)
+			{
+				if(meta > 0)
+					world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
+				else
+					world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+			}
 		}
 	}
 
