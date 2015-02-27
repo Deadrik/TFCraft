@@ -101,8 +101,11 @@ public class GuiCalendar extends GuiScreen
 		int month = TFC_Time.currentMonth;
 		String day = TFC_Time.DAYS[TFC_Time.getDayOfWeek()];
 
-		if (month == 3 && dom == 18)
+		if (month == 3 && (dom == 18 || (TFC_Time.daysInMonth < 18 && dom == TFC_Time.daysInMonth)))
+		{
+			dom = 18;
 			day = StatCollector.translateToLocal("gui.Calendar.DateKitty");
+		}
 		else if(month == 4 && dom == 7)
 			day = StatCollector.translateToLocal("gui.Calendar.DateBioxx");
 		else if(month == 8 && dom == 2)
