@@ -5,17 +5,17 @@
 
 
 
-generator.TFCDefault=TFC Standara
-generator.TFCFlat=
-generator.TFCAmplified=
-generator.TFCLargeBiomes=
+generator.TFCDefault=TFC standara
+generator.TFCFlat=TFC piatta (inutilizzata)
+generator.TFCAmplified=TFC amplificata (inutilizzata)
+generator.TFCLargeBiomes=TFC biomi vasti (inutilizzata)
 
 key.ToolMode=Scorri la modalità dello strumento
 key.LockTool=Blocca localizzazione strumento
 
 effect.bleed=Emorragia
-death.attack.alcohol=
-death.attack.heatStroke=
+death.attack.alcohol=%1$s è morto d'intossicazione alcolica
+death.attack.heatStroke=%1$s ha preso un colpo di sole
 
 #==============
 #= Spawn Eggs =
@@ -116,7 +116,7 @@ fluid.whiskey=Uischi
 fluid.cornwhiskey=Uischi di granturco
 fluid.milk=Latte
 fluid.milkcurdled=Latte cagliato
-fluid.milkvinegar=
+fluid.milkvinegar=Latte mischiato ad aceto
 fluid.limewater=Acqua di calce
 fluid.tannin=Tannino
 fluid.vinegar=Aceto
@@ -134,7 +134,7 @@ item.meal.great=Ottimo
 item.meal.fantastic=Superbo
 item.Sandwich.name=Panino
 item.Salad.name=Insalata
-item.Soup.name=
+item.Soup.name=Zuppa
 item.Sugar.name=Zucchero
 item.Sea Weed.name=Alga
 
@@ -418,7 +418,7 @@ item.Spindle Head.Spindle Head.name=Testa di fuso
 item.Fire Brick.Fire Brick.name=Mattone refrattario
 item.Fire Brick.Clay Fire Brick.name=Mattone d'argilla refrattaria
 tile.FireBrick.name=Laterizio refrattario
-tile.Pottery.name=
+tile.Pottery.name=Ceramica
 
 item.ClayBowl.Ceramic Bowl.name=Tazza di ceramica
 item.ClayBowl.Clay Bowl.name=Tazza di creta
@@ -860,7 +860,7 @@ item.Small Ore.Sphalerite.name=Sfalerite piccola
 item.Small Ore.Tetrahedrite.name=Tetraedrite piccola
 
 #== Ore Blocks ==
-tile.Ore.name=
+tile.Ore.name=Minerale
 tile.Ore.Bituminous Coal.name=Carbone bituminoso
 tile.Ore.Borax.name=Borace
 tile.Ore.Cinnabar.name=Cinabro
@@ -993,23 +993,23 @@ item.Loom.White Elm.name=Telaio di olmo
 item.Loom.Willow.name=Telaio di salice
 
 #== Wood Blocks ==
-tile.Chest.Acacia.name=
-tile.Chest.Ash.name=
-tile.Chest.Aspen.name=
-tile.Chest.Birch.name=
-tile.Chest.Chestnut.name=
-tile.Chest.Douglas Fir.name=
-tile.Chest.Hickory.name=
-tile.Chest.Kapok.name=
-tile.Chest.Maple.name=
-tile.Chest.Oak.name=
-tile.Chest.Pine.name=
-tile.Chest.Sequoia.name=
-tile.Chest.Spruce.name=
-tile.Chest.Sycamore.name=
-tile.Chest.White Cedar.name=
-tile.Chest.White Elm.name=
-tile.Chest.Willow.name=
+tile.Chest.Acacia.name=Baule di acacia
+tile.Chest.Ash.name=Baule di frassino
+tile.Chest.Aspen.name=Baule di pioppo
+tile.Chest.Birch.name=Baule di betulla
+tile.Chest.Chestnut.name=Baule di castagno
+tile.Chest.Douglas Fir.name=Baule di abete di Douglas
+tile.Chest.Hickory.name=Baule di noce
+tile.Chest.Kapok.name=Baule di capòc
+tile.Chest.Maple.name=Baule di acero
+tile.Chest.Oak.name=Baule di quercia
+tile.Chest.Pine.name=Baule di pino
+tile.Chest.Sequoia.name=Baule di sequoia
+tile.Chest.Spruce.name=Baule di abete rosso
+tile.Chest.Sycamore.name=Baule di platano
+tile.Chest.White Cedar.name=Baule di tuia
+tile.Chest.White Elm.name=Baule di olmo
+tile.Chest.Willow.name=Baule di salice
 
 tile.log2.Acacia.name=Ciocco di acacia
 tile.log.Ash.name=Ciocco di frassino
@@ -1120,9 +1120,9 @@ tile.wood.White Cedar.name=Assi di tuia
 tile.wood.White Elm.name=Assi di olmo
 tile.wood.Willow.name=Assi di salice
 
-tile.fruitTreeWood.name=
-tile.fruitTreeLeaves.name=
-tile.fruitTreeLeaves2.name=
+tile.fruitTreeWood.name=Albero da frutta
+tile.fruitTreeLeaves.name=Fogliame di albero da frutta
+tile.fruitTreeLeaves2.name=Fogliame di albero da frutta
 
 tile.Door Acacia.name=Porta di acacia
 tile.Door Ash.name=Porta di frassino
@@ -1250,7 +1250,7 @@ tile.WoodSupportV.White Cedar.name=Pilastro di tuia
 tile.WoodSupportV.White Elm.name=Pilastro di olmo
 tile.WoodSupportV.Willow.name=Pilastro di salice
 
-tile.WoodSupportH2.name=
+tile.WoodSupportH2.name=Pilastro di legno
 tile.WoodSupportH2.Acacia.name=Pilastro di acacia
 tile.WoodSupportH.Ash.name=Pilastro di frassino
 tile.WoodSupportH.Aspen.name=Pilastro di pioppo
@@ -1884,16 +1884,16 @@ tile.BlastFurnace.name=Altoforno
 tile.SpawnMeter.name=Indicatore di protezione
 tile.Quern.name=Base della macina
 tile.EarlyBloomery.name=Basso fuoco
-tile.Molten.name=
+tile.Molten.name=Minerale fuso
 tile.Crucible.name=Crogiolo
 tile.NestBox.name=Nido artificiale
 item.SluiceItem.name=Traversa
 tile.Sluice.name=Traversa
 tile.LeatherRack.name=Cavalletto da concia
-tile.FoodPrep.name=
-tile.MetalSheet.name=
-tile.ingotpile.name=
-tile.SmokeRack.name=
+tile.FoodPrep.name=Cucina
+tile.MetalSheet.name=Lamiera
+tile.ingotpile.name=Pila di lingotti
+tile.SmokeRack.name=Griglia
 
 #== Anvils ==
 tile.Anvil.Stone.name=Incudine di pietra
@@ -2001,20 +2001,20 @@ tile.StrawHideBed.name=Pagliericcio
 tile.customBed.sleep=Questo giaciglio non basta per addormentarsi
 tile.BasicPipe.name=Tubo
 tile.ValvePipe.name=Valvola
-tile.Smoke.name=
+tile.Smoke.name=Fumo
 tile.Torch.name=Torcia
 tile.Chest.name=Baule
 tile.Bookshelf.name=Libreria
 tile.Workbench.name=Banco da lavoro
 tile.ButtonWood.name=Pulsante di legno
-tile.Firepit.name=
-tile.LogPile.name=
-tile.Charcoal.name=
-tile.StoneDetailed.name=
-tile.stoneStairs.name=
-tile.stoneSlabs.name=
-tile.stoneStalac.name=
-tile.WoodConstruct.name=
+tile.Firepit.name=Falò
+tile.LogPile.name=Pila di ciocchi
+tile.Charcoal.name=Carbonella
+tile.StoneDetailed.name=Scolpita
+tile.stoneStairs.name=Scala
+tile.stoneSlabs.name=Lastra
+tile.stoneStalac.name=Stalattite
+tile.WoodConstruct.name=Legname
 tile.MetalTrapDoor.name=Botola
 tile.Vessel.name=Vasone
 tile.Grill.name=Griglia
@@ -2164,7 +2164,7 @@ gui.Barrel.Solid=Contenuto solido
 gui.Barrel.Liquid=Contenuto liquido
 gui.barrel.pickling=Sott'aceto
 gui.barrel.brining=Salamoia
-gui.barrel.preserving=
+gui.barrel.preserving=Conservazione
 
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Carbonella
@@ -2298,9 +2298,9 @@ gui.ClearSlot=Svuota uno slot di produzione.
 gui.LogPile=Pila di ciocchi
 gui.Output=Produzione
 gui.done=Finito
-gui.cancel=
+gui.cancel=Annulla
 gui.Sluice.Soil=Suolo
-gui.Sluice.Overworked=
+gui.Sluice.Overworked=Esaurimento
 gui.Workbench.Crafting=Lavorazione
 gui.overburdened=*Sovraccarico*
 
@@ -2325,11 +2325,12 @@ gui.MeltedMetal.Inst0=§bClicca col destro §7per riempire uno stampo.
 gui.PotteryBase.Inst0=Accovacciati e §bClicca col destro §7per posizionare.
 gui.PotteryVesselSmall.Inst0=O §bClicca col destro §7per aprire l'inventario
 gui.RawHide.Inst0=????
+gui.Chisel.Inst0=
 gui.Barrel.MoreItems=§8Altro... (Tieni premuto §fShift§8)
 
-gui.Nutrient.A=
-gui.Nutrient.B=
-gui.Nutrient.C=
+gui.Nutrient.A=Nutrimento A
+gui.Nutrient.B=Nutrimento B
+gui.Nutrient.C=Nutrimento C
 
 gui.stage1=Fase 1
 gui.stage2=Fase 2
@@ -2470,16 +2471,19 @@ gui.milk.sour=Acido
 gui.units=Unità
 
 #== WAILA ==
-gui.useless=
-gui.growth=
-gui.mature=
-gui.metal.Iron=
+gui.useless=Inutile
+gui.growth=Crescita
+gui.mature=Maturo
+gui.metal.Iron=Ferro
+gui.tier=
+gui.temperature=
+gui.progress=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Da usare sotto acqua corrente.
 gui.goldpan.overused=Quest'area sembra già setacciata. Probabilmente non troverai granché.
-gui.seeds.failedTemp=
-gui.seeds.failedSun=
+gui.seeds.failedTemp=È troppo freddo per piantarli, non sopravviverebbero a lungo.
+gui.seeds.failedSun=Non c'è abbastanza luce per piantarli, non sopravviverebbero a lungo.
 
 gui.ProPick.Found=Trovato
 gui.ProPick.FoundTraces=Trovate tracce di
@@ -2519,10 +2523,10 @@ gui.skillpage=Abilità
 #==================
 #= Error Messages =
 #==================
-error.error=
-error.NBT=
-error.OreCFG=
-error.Contact=
+error.error=ERRORE:
+error.NBT=dati NBT mancanti.
+error.OreCFG=Il seguente blocco è invalido TFCOre.cfg :
+error.Contact=Per favore rivolgiti alla sezione supporto di TerraFirmaCraft.
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========

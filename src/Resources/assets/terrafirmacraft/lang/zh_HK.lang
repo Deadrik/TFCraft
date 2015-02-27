@@ -2325,6 +2325,7 @@ gui.MeltedMetal.Inst0=§b右鍵§7以注入模具或混合金屬
 gui.PotteryBase.Inst0=按 Shift (Sneak) 及 Right Click 放置
 gui.PotteryVesselSmall.Inst0=或 Right Click以查看及更改載著的物品
 gui.RawHide.Inst0=????
+gui.Chisel.Inst0=
 gui.Barrel.MoreItems=更多 (按著 Shift)
 
 gui.Nutrient.A=養份A
@@ -2459,8 +2460,8 @@ gui.ItemHeat.YellowWhite=黃白
 gui.ItemHeat.White=白
 gui.ItemHeat.BrilliantWhite=熾白
 
-gui.ingot.workable=可锻
-gui.ingot.weldable=可焊
+gui.ingot.workable=可打造
+gui.ingot.weldable=可焊接
 gui.ingot.danger=**危險**
 
 gui.milk.fresh=新鮮
@@ -2474,12 +2475,15 @@ gui.useless=無用
 gui.growth=生長
 gui.mature=成熟
 gui.metal.Iron=鐵
+gui.tier=
+gui.temperature=
+gui.progress=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=必須在流水中淘
 gui.goldpan.overused=這範圍的礦物似乎已淘盡。你大概不會淘到更多的礦物了。
-gui.seeds.failedTemp=這裡太寒冷，這農作物會枯死。
-gui.seeds.failedSun=這裡日照不足，這農作物會枯死。
+gui.seeds.failedTemp=這裡太寒冷，種在這裡的農作物會枯死。
+gui.seeds.failedSun=這裡日照不足，種在這裡的農作物會枯死。
 
 gui.ProPick.Found=探到
 gui.ProPick.FoundTraces=探到微量的

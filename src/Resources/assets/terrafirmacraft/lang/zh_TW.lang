@@ -2325,6 +2325,7 @@ gui.MeltedMetal.Inst0=§b右鍵§7以注入模具或混合金屬
 gui.PotteryBase.Inst0=按住§bShift(潛行)§7並§b右鍵§7以放置物品
 gui.PotteryVesselSmall.Inst0=或§b右鍵§7開啟隨身物品
 gui.RawHide.Inst0=????
+gui.Chisel.Inst0=
 gui.Barrel.MoreItems=§8詳細… (按住§fShift§8)
 
 gui.Nutrient.A=養分A
@@ -2473,7 +2474,10 @@ gui.units=單位
 gui.useless=無用
 gui.growth=成長中
 gui.mature=成熟
-gui.metal.Iron=金屬
+gui.metal.Iron=鐵
+gui.tier=
+gui.temperature=
+gui.progress=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=必須於流水中使用。

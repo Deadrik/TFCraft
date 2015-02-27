@@ -2325,6 +2325,7 @@ gui.MeltedMetal.Inst0=§bHiiren Oikea §7kaataaksesi työkalumuottiin.
 gui.PotteryBase.Inst0=Hiivi ja §bKäytä Hiiren Oikeaa §7asettaaksesi esineen.
 gui.PotteryVesselSmall.Inst0=Tai §bHiiren Oikealla §7tarkkaillaksesi sisältöä.
 gui.RawHide.Inst0=
+gui.Chisel.Inst0=
 gui.Barrel.MoreItems=
 
 gui.Nutrient.A=
@@ -2474,6 +2475,9 @@ gui.useless=
 gui.growth=
 gui.mature=
 gui.metal.Iron=
+gui.tier=
+gui.temperature=
+gui.progress=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Pitää käyttää juoksevan veden alla.

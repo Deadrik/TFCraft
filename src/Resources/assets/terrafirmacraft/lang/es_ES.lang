@@ -6,9 +6,9 @@
 
 
 generator.TFCDefault=TFC Por defecto
-generator.TFCFlat=
-generator.TFCAmplified=
-generator.TFCLargeBiomes=
+generator.TFCFlat=TFC Plano
+generator.TFCAmplified=TFC Amplificado
+generator.TFCLargeBiomes=TFC Biomas Grandes
 
 key.ToolMode=Cambiar Modo Herramienta
 key.LockTool=Fijar Posición Herramienta
@@ -42,7 +42,7 @@ entity.sheepTFC.name=Oveja
 entity.pheasantTFC.name=Faisán
 entity.horseTFC.name=Caballo
 entity.irongolemTFC.name=Golem De Hierro
-entity.fishTFC.name=Pez
+entity.fishTFC.name=Perca
 
 
 #==========
@@ -72,7 +72,7 @@ achievement.achStoneAge.desc=Golpea una piedra contra otra para entrar en la Eda
 achievement.achCopperAge=¡Calcolítico!
 achievement.achCopperAge.desc=Moldea algo de metal para entrar en la Edad del Cobre
 achievement.achSaw=Carpintero
-achievement.achSaw.desc=Arma una sierra
+achievement.achSaw.desc=Fabrica una sierra
 achievement.achAnvil=Hora de Martillar
 achievement.achAnvil.desc=Haz un yunque de piedra
 achievement.achPickaxe=¡A la mina! (por fín..)
@@ -82,7 +82,7 @@ achievement.achDiamond.desc=Encuentra un diamante
 achievement.achLimonite=¡LI-MO-NIIITA!
 achievement.achLimonite.desc=Excava una mena de Limonita
 achievement.achBronzeAge=La Edad del Bronce
-achievement.achBronzeAge.desc=Crea un yunque de bronce para entrar en la Edad del Bonce
+achievement.achBronzeAge.desc=Fabrica un yunque de bronce para entrar en la Edad del Bonce
 achievement.achIronAge=La Edad del Hierro
 achievement.achIronAge.desc=Pica el Hierro de Forja para entrar en la Edad del Hierro
 achievement.achPokeCreeper=Steve Irwin
@@ -91,9 +91,9 @@ achievement.achPokeCreeper.desc=Golpéalo con un palo
 #============
 #= Commands =
 #============
-commands.transferTamed.noTamed=No hay animales cerca para transferir.
+commands.transferTamed.noTamed=No hay animales cerca.
 commands.transferTamed.tooMany=Hay demasiados animales cerca.
-commands.transferTamed.wrongOwner=Ese animal no te pertenece.
+commands.transferTamed.wrongOwner=Esto no te pertenece.
 commands.transferTamed.sameTarget=No puedes transferirte un animal a ti mismo.
 commands.transferTamed.display.incoming=%s te ha hecho el amo de un animal.
 commands.transferTamed.display.outgoing=Has transferido un animal a %s.
@@ -113,10 +113,10 @@ fluid.ryewhiskey=Rye Whiskey (de centeno)
 fluid.sake=Sake
 fluid.vodka=Vodka
 fluid.whiskey=Whiskey
-fluid.cornwhiskey=Corn Whiskey (de maíz)
+fluid.cornwhiskey=Whiskey de maíz
 fluid.milk=Leche
 fluid.milkcurdled=Leche Cuajada
-fluid.milkvinegar=
+fluid.milkvinegar=Mezcla de leche y vinagre
 fluid.limewater=Agua de cal
 fluid.tannin=Tanino
 fluid.vinegar=Vinagre
@@ -132,7 +132,7 @@ item.meal.decent=Decente
 item.meal.good=Bueno
 item.meal.great=Genial
 item.meal.fantastic=Fantástico
-item.Sandwich.name=Bocadillo
+item.Sandwich.name=Sandwich
 item.Salad.name=Ensalada
 item.Soup.name=Sopa
 item.Sugar.name=Azúcar
@@ -283,11 +283,11 @@ item.Seeds Squash.name=Semillas de Calabacín
 item.Seeds Tomato.name=Semillas de Tomate
 
 #== Alcohol ==
-item.Glass Bottle.name=Botella
+item.Glass Bottle.name=Botella vacia
 item.Beer.name=Cerveza
 item.Cider.name=Sidra
 item.Rum.name=Ron
-item.RyeWhiskey.name=Rye Whiskey
+item.RyeWhiskey.name=Whiskey de centeno
 item.Sake.name=Sake
 item.Vodka.name=Vodka
 item.Whiskey.name=Whiskey
@@ -976,7 +976,7 @@ item.Barrel.Willow.name=Barril de Sauce
 
 item.Loom.Acacia.name=Telar de Acacia
 item.Loom.Ash.name=Telar de Fresno
-item.Loom.Aspen.name=Telar de álamo
+item.Loom.Aspen.name=Telar de Álamo
 item.Loom.Birch.name=Telar de Abedul
 item.Loom.Chestnut.name=Telar de Castaño
 item.Loom.Douglas Fir.name=Telar de Abeto
@@ -993,23 +993,23 @@ item.Loom.White Elm.name=Telar de Olmo Blanco
 item.Loom.Willow.name=Telar de Sauce
 
 #== Wood Blocks ==
-tile.Chest.Acacia.name=
-tile.Chest.Ash.name=
-tile.Chest.Aspen.name=
-tile.Chest.Birch.name=
-tile.Chest.Chestnut.name=
-tile.Chest.Douglas Fir.name=
-tile.Chest.Hickory.name=
-tile.Chest.Kapok.name=
-tile.Chest.Maple.name=
-tile.Chest.Oak.name=
-tile.Chest.Pine.name=
-tile.Chest.Sequoia.name=
-tile.Chest.Spruce.name=
-tile.Chest.Sycamore.name=
-tile.Chest.White Cedar.name=
-tile.Chest.White Elm.name=
-tile.Chest.Willow.name=
+tile.Chest.Acacia.name=Cofre de Acacia
+tile.Chest.Ash.name=Cofre de Fresno
+tile.Chest.Aspen.name=Cofre de Álamo
+tile.Chest.Birch.name=Cofre de Abedul
+tile.Chest.Chestnut.name=Cofre de Castaño
+tile.Chest.Douglas Fir.name=Cofre de Abeto
+tile.Chest.Hickory.name=Cofre de Nogal
+tile.Chest.Kapok.name=Cofre de Capoc
+tile.Chest.Maple.name=Cofre de Arce
+tile.Chest.Oak.name=Cofre de Roble
+tile.Chest.Pine.name=Cofre de Pino
+tile.Chest.Sequoia.name=Cofre de Secuoya
+tile.Chest.Spruce.name=Cofre de Pícea
+tile.Chest.Sycamore.name=Cofre de Sicomoro
+tile.Chest.White Cedar.name=Cofre de Cedro Blanco
+tile.Chest.White Elm.name=Cofre de Olmo Blanco
+tile.Chest.Willow.name=Cofre de Sauce
 
 tile.log2.Acacia.name=Acacia
 tile.log.Ash.name=Fresno
@@ -2223,7 +2223,7 @@ gui.Calendar.1Month=1 Mes
 gui.Calendar.1Year=1 Año
 
 #== Food GUI ==
-gui.FoodPrep.CreateMeal=Cocinar Comida
+gui.FoodPrep.CreateMeal=Cocinar
 gui.FoodPrep.Effect=Efecto
 gui.FoodPrep.Energy=Energía
 gui.FoodPrep.Filling=Sacia
@@ -2304,7 +2304,7 @@ gui.Sluice.Overworked=Desgastado
 gui.Workbench.Crafting=Elaboración
 gui.overburdened=*Sobrecargado*
 
-gui.badnbt=MALA Info
+gui.badnbt=Informacion incorrecta.
 
 #== Tooltips ==
 gui.Advanced=Avanzado
@@ -2325,6 +2325,7 @@ gui.MeltedMetal.Inst0=§bClick Derecho§7para verter en un molde de la herramien
 gui.PotteryBase.Inst0=Agacharse y §bClick Derecho§7para colocar objeto
 gui.PotteryVesselSmall.Inst0=O §bClick Derecho§7para abrir el inventario
 gui.RawHide.Inst0=????
+gui.Chisel.Inst0=
 gui.Barrel.MoreItems=§8Más... (Presionar §fShift§8)
 
 gui.Nutrient.A=Nutriente A
@@ -2470,16 +2471,19 @@ gui.milk.sour=Agria
 gui.units=Unidades
 
 #== WAILA ==
-gui.useless=
-gui.growth=
-gui.mature=
-gui.metal.Iron=
+gui.useless=Inútil
+gui.growth=Maduración
+gui.mature=Maduro
+gui.metal.Iron=Hierro
+gui.tier=
+gui.temperature=
+gui.progress=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Se debe utilizar en una corriente de agua.
-gui.goldpan.overused=Esta zona está consumida. No encontrarás gran cosa. Hace demasiado frío para plantar esto, no sobreviviría.
-gui.seeds.failedTemp=
-gui.seeds.failedSun=
+gui.goldpan.overused=Esta zona está consumida. No encontrarás gran cosa.
+gui.seeds.failedTemp=Hace demasiado para plantar esto, no sobreviviría mucho tiempo.
+gui.seeds.failedSun=No hay suficiente luz solar para plantarr esto, no sobreviviría mucho tiempo.
 
 gui.ProPick.Found=Has encontrado
 gui.ProPick.FoundTraces=Encontrados rastros de
@@ -2519,10 +2523,10 @@ gui.skillpage=Habilidades
 #==================
 #= Error Messages =
 #==================
-error.error=
-error.NBT=
-error.OreCFG=
-error.Contact=
+error.error=ERROR
+error.NBT=no se encuentra informacion NBT
+error.OreCFG=El siguiente bloque definido en TFCOre.cfg no es válido:
+error.Contact=Porfavor reporta este error al soporte de TerraFirmaCraft.
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========

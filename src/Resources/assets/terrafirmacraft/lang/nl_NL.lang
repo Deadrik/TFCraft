@@ -2325,6 +2325,7 @@ gui.MeltedMetal.Inst0=§bRecht Klik §7om te gieten of combineren
 gui.PotteryBase.Inst0=Sluip en §bRecht Klik §7om een voorwerp te plaatsen
 gui.PotteryVesselSmall.Inst0=Of §bRecht Klik §7om te openen
 gui.RawHide.Inst0=????
+gui.Chisel.Inst0=
 gui.Barrel.MoreItems=§8Meer... (Houd §fShift§8)
 
 gui.Nutrient.A=Grondstof A
@@ -2474,6 +2475,9 @@ gui.useless=Nutteloos
 gui.growth=Groei
 gui.mature=Volgroeid
 gui.metal.Iron=IJzer
+gui.tier=
+gui.temperature=
+gui.progress=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Kan alleen in stromend water gebruikt worden
