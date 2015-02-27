@@ -442,7 +442,7 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("bucketSaltWater", new ItemStack(TFCItems.RedSteelBucketSaltWater, 1, WILD));
 
 		OreDictionary.registerOre("bucketLava", new ItemStack(Items.lava_bucket));
-		OreDictionary.registerOre("bucketLava", new ItemStack(TFCItems.BlueSteelBucketEmpty));
+		OreDictionary.registerOre("bucketLava", new ItemStack(TFCItems.BlueSteelBucketLava));
 
 		OreDictionary.registerOre("bucketMilk", new ItemStack(Items.milk_bucket));
 		OreDictionary.registerOre("bucketMilk", new ItemStack(TFCItems.WoodenBucketMilk));
