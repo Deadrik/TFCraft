@@ -137,10 +137,7 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("dustGraphite", new ItemStack(TFCItems.Powder, 1, 2)); //Graphite
 		OreDictionary.registerOre("dustSulfur", new ItemStack(TFCItems.Powder, 1, 3)); //Sulfur
 		OreDictionary.registerOre("dustSaltpeter", new ItemStack(TFCItems.Powder, 1, 4)); //Saltpeter
-		OreDictionary.registerOre("dustIron", new ItemStack(TFCItems.Powder, 1, 5)); //Hematite
 		OreDictionary.registerOre("dustLapis", new ItemStack(TFCItems.Powder, 1, 6)); //Lapis
-		OreDictionary.registerOre("dustIron", new ItemStack(TFCItems.Powder, 1, 7)); //Limonite
-		OreDictionary.registerOre("dustCopper", new ItemStack(TFCItems.Powder, 1, 8)); //Malachite
 		OreDictionary.registerOre("dustSalt", new ItemStack(TFCItems.Powder, 1, 9)); //Salt
 
 		//Ingots
