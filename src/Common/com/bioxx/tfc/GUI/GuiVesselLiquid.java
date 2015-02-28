@@ -3,6 +3,7 @@ package com.bioxx.tfc.GUI;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -34,7 +35,8 @@ public class GuiVesselLiquid extends GuiContainerTFC
 	@Override
 	protected void drawForeground(int guiLeft, int guiTop)
 	{
-		NBTTagCompound tags = player.inventory.mainInventory[this.bagsSlotNum].getTagCompound();
+		ItemStack stack = player.inventory.mainInventory[this.bagsSlotNum];
+		NBTTagCompound tags = (stack != null && stack.hasTagCompound()) ? stack.getTagCompound() : null;
 		if ((tags != null) && tags.hasKey("MetalType"))
 		{
 			drawCenteredString(this.fontRendererObj, tags.getString("MetalType"), guiLeft + 87, guiTop + 13, 0);

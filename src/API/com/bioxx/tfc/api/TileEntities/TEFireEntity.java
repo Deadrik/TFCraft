@@ -12,7 +12,7 @@ public class TEFireEntity extends NetworkTileEntity
 {
 	public int airFromBellows = 0;
 	public float fireTemp = 0;
-	public int maxFireTempScale;
+	public int maxFireTempScale = 2000; // Fixes NPE
 	public int fuelTimeLeft = 0;
 	public int fuelBurnTemp = 0;
 	public int fuelTasteProfile = 0;

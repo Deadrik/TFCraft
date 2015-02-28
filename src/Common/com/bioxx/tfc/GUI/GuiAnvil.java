@@ -73,8 +73,11 @@ public class GuiAnvil extends GuiContainerTFC
 	public void updateScreen()
 	{
 		super.updateScreen();
+		String craftingPlan = this.anvilTE.craftingPlan;
+		ItemStack stack1 = this.anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT];
+		ItemStack stack2 = this.anvilTE.anvilItemStacks[TEAnvil.INPUT2_SLOT];
 
-		if (this.anvilTE.craftingPlan != plan || this.anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT] != input || this.anvilTE.anvilItemStacks[TEAnvil.INPUT2_SLOT] != input2)
+		if ((craftingPlan != null && craftingPlan != plan) || (stack1 != null && stack1 != input) || (stack2 != null && stack2 != input2)) // Fixes NPE
 		{
 			plan = this.anvilTE.craftingPlan;
 			this.anvilTE.updateRecipe();

@@ -205,7 +205,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 			for(int i = 0; i < 5; i++)
 			{
 				ItemStack f = getStackInSlot(i);
-				if(f != null && ((IFood)f.getItem()).getFoodWeight(f) - ((IFood)f.getItem()).getFoodDecay(f) >= sandwichWeights[i])
+				if (f != null && f.getItem() instanceof IFood && ((IFood) f.getItem()).getFoodWeight(f) - ((IFood) f.getItem()).getFoodDecay(f) >= sandwichWeights[i])
 				{
 					weight += sandwichWeights[i];
 				}

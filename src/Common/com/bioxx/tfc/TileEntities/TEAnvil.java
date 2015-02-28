@@ -54,7 +54,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	private final byte LAG_FIX_DELAY = 5;
 	public AnvilRecipe workRecipe;
 	//private AnvilRecipe workWeldRecipe;
-	public int AnvilTier;
+	public int AnvilTier = AnvilReq.STONE.Tier; // Initialize to avoid NPE
 
 	public EntityPlayer lastWorker;
 

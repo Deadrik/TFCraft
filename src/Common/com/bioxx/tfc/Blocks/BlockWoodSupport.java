@@ -61,14 +61,17 @@ public class BlockWoodSupport extends BlockTerra
 	public static ForgeDirection getSupportDirection(World world, int x, int y, int z)
 	{
 		int[] r = getSupportsInRangeDir(world, x, y, z, 5, false);
-		if(r[2] > r[3])
-			return ForgeDirection.NORTH;
-		if(r[3] > r[2])
-			return ForgeDirection.SOUTH;
-		if(r[5] > r[4])
-			return ForgeDirection.EAST;
-		if(r[4] > r[5])
-			return ForgeDirection.WEST;
+		if (r != null) // Fixes NPE
+		{
+			if (r[2] > r[3])
+				return ForgeDirection.NORTH;
+			if (r[3] > r[2])
+				return ForgeDirection.SOUTH;
+			if (r[5] > r[4])
+				return ForgeDirection.EAST;
+			if (r[4] > r[5])
+				return ForgeDirection.WEST;
+		}
 
 		return ForgeDirection.UNKNOWN;
 	}

@@ -247,7 +247,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 	public boolean addMetal(Metal m, float amt)
 	{
-		if(getTotalMetal() + amt <= 3000 && m.Name != "Unknown")
+		if (getTotalMetal() + amt <= 3000 && m.Name != null && m.Name != "Unknown")
 		{
 			if(metals.containsKey(m.Name))
 				((MetalPair)metals.get(m.Name)).amount += amt;

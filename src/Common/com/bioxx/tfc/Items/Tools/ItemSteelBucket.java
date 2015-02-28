@@ -108,22 +108,25 @@ public class ItemSteelBucket extends ItemTerra
 					}
 
 					Fluid fluid = ((IFluidBlock)world.getBlock(i, j, k)).getFluid();
-					ItemStack filledIS = FluidContainerRegistry.fillFluidContainer(new FluidStack(fluid, 1000), is);
-					if(filledIS != null)
+					if (fluid != null)
 					{
-						world.setBlockToAir(i, j, k);
-
-						if (--is.stackSize <= 0)
+						ItemStack filledIS = FluidContainerRegistry.fillFluidContainer(new FluidStack(fluid, 1000), is);
+						if (filledIS != null)
 						{
-							return filledIS;
-						}
+							world.setBlockToAir(i, j, k);
 
-						if (!player.inventory.addItemStackToInventory(filledIS))
-						{
-							player.entityDropItem(filledIS, 0);
-						}
+							if (--is.stackSize <= 0)
+							{
+								return filledIS;
+							}
 
-						return is;
+							if (!player.inventory.addItemStackToInventory(filledIS))
+							{
+								player.entityDropItem(filledIS, 0);
+							}
+
+							return is;
+						}
 					}
 				}
 				else

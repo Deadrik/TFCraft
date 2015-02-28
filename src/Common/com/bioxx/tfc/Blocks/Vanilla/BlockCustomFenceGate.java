@@ -42,11 +42,13 @@ public class BlockCustomFenceGate extends BlockFenceGate implements ITileEntityP
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		int l = (par1World.getTileEntity(par2, par3, par4)!=null)?(((TileEntityFenceGate)(par1World.getTileEntity(par2, par3, par4))).getDirection()):0;
-		boolean open = (par1World.getTileEntity(par2, par3, par4)!=null)?(((TileEntityFenceGate)(par1World.getTileEntity(par2, par3, par4))).getOpen()):false;
-		return open ? null : (l != 2 && l != 0 ? AxisAlignedBB.getBoundingBox((double)((float)par2 + 0.375F), (double)par3, (double)par4, (double)((float)par2 + 0.625F), (double)((float)par3 + 1.5F), (double)(par4 + 1)) : AxisAlignedBB.getBoundingBox((double)par2, (double)par3, (double)((float)par4 + 0.375F), (double)(par2 + 1), (double)((float)par3 + 1.5F), (double)((float)par4 + 0.625F)));
+		TileEntity te = world.getTileEntity(x, y, z);
+
+		int l = (te != null && te instanceof TileEntityFenceGate /*Fixes ClassCastException*/) ? (((TileEntityFenceGate) (te)).getDirection()) : 0;
+		boolean open = (te != null) ? (((TileEntityFenceGate) (te)).getOpen()) : false;
+		return open ? null : (l != 2 && l != 0 ? AxisAlignedBB.getBoundingBox((double) ((float) x + 0.375F), (double) y, (double) z, (double) ((float) x + 0.625F), (double) ((float) y + 1.5F), (double) (z + 1)) : AxisAlignedBB.getBoundingBox((double) x, (double) y, (double) ((float) z + 0.375F), (double) (x + 1), (double) ((float) y + 1.5F), (double) ((float) z + 0.625F)));
 	}
 
 	@SideOnly(Side.CLIENT)
