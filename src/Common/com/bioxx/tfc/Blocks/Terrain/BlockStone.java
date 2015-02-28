@@ -24,7 +24,7 @@ import com.bioxx.tfc.api.Tools.IToolChisel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockStone extends BlockCollapsable
+public class BlockStone extends BlockCollapsible
 {
 	public BlockStone(Material material)
 	{

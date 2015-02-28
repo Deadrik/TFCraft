@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -25,7 +26,7 @@ import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 
-public class BlockOre extends BlockCollapsable
+public class BlockOre extends BlockCollapsible
 {
 	public String[] blockNames = Global.ORE_METAL;
 
@@ -53,15 +54,21 @@ public class BlockOre extends BlockCollapsable
 	@Override
 	public int[] getDropBlock(World world, int x, int y, int z)
 	{
-		int[] data = new int[2];
+		int[] data = new int[]{ -1, -1 };
 		DataLayer dl = TFC_Climate.getCacheManager(world).getRockLayerAt(x, z, TFC_Core.getRockLayerFromHeight(world, x, y, z));
+
 		if(dl != null)
 		{
-			data[0] = Block.getIdFromBlock(this.dropBlock);
-			data[1] = dl.data2;
+			BlockStone stone = null;
+			if (dl.block instanceof BlockStone)
+				stone = (BlockStone) dl.block;
+
+			if (stone != null)
+			{
+				data[0] = Block.getIdFromBlock(stone.dropBlock); // Cobblestone version of rock in that layer.
+				data[1] = dl.data2; // Metadata
+			}
 		}
-		data[0] = -1;
-		data[1] = -1;
 		return data;
 	}
 
@@ -133,14 +140,31 @@ public class BlockOre extends BlockCollapsable
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int meta)
 	{
+		//Intentionally empty so that mining ore blocks cannot trigger a cave in.
 	}
 
 	@Override
-	public Item getItemDropped(int metadata, Random rand, int fortune)
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
-		if (metadata == 14 || metadata == 15) // coal
-			return TFCItems.Coal;
-		return TFCItems.OreChunk;
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		TEOre te = (TEOre) world.getTileEntity(x, y, z);
+		int ore = getOreGrade(te, metadata);
+
+		int count = quantityDropped(metadata, fortune, world.rand);
+		for (int i = 0; i < count; i++)
+		{
+			ItemStack itemstack;
+			if (metadata == 14 || metadata == 15)
+				itemstack = new ItemStack(TFCItems.Coal);
+			else
+				itemstack = new ItemStack(TFCItems.OreChunk, 1, damageDropped(ore));
+
+			if (itemstack != null)
+			{
+				ret.add(itemstack);
+			}
+		}
+		return ret;
 	}
 
 	public static Item getDroppedItem(int meta)

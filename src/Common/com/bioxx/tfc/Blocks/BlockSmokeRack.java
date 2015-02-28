@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Blocks.Terrain.BlockCollapsable;
+import com.bioxx.tfc.Blocks.Terrain.BlockCollapsible;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Food.ItemFoodMeat;
 import com.bioxx.tfc.TileEntities.TESmokeRack;
@@ -189,7 +189,7 @@ public class BlockSmokeRack extends BlockTerraContainer
 				}
 			}
 
-			if(world.getBlock(x, y+1, z) instanceof BlockCollapsable)
+			if(world.getBlock(x, y+1, z) instanceof BlockCollapsible)
 			{
 				TFC_Core.DestroyBlock(world, x, y, z);
 			}

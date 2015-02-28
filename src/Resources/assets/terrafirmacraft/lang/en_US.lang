@@ -18,36 +18,38 @@ death.attack.alcohol=%1$s died of alcohol poisoning
 death.attack.heatStroke=%1$s died of heat stroke
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=Squid
-entity.cowTFC.name=Cow
-entity.wolfTFC.name=Wolf
 entity.bearTFC.name=Bear
-entity.deerTFC.name=Deer
 entity.chickenTFC.name=Chicken
-entity.pigTFC.name=Pig
-entity.skeletonTFC.name=Skeleton
-entity.zombieTFC.name=Zombie
-entity.spiderTFC.name=Spider
-entity.slimeTFC.name=Slime
-entity.silverfishTFC.name=Silver Fish
-entity.ghastTFC.name=Ghast
-entity.caveSpiderTFC.name=Cave Spider
-entity.blazeTFC.name=Blaze
-entity.endermanTFC.name=Enderman
-entity.pigZombieTFC.name=Pig Zombie
-entity.creeperTFC.name=Creeper
-entity.sheepTFC.name=Sheep
-entity.pheasantTFC.name=Pheasant
-entity.horseTFC.name=Horse
-entity.irongolemTFC.name=Iron Golem
+entity.cowTFC.name=Cow
+entity.deerTFC.name=Deer
 entity.fishTFC.name=Bass
+entity.horseTFC.name=Horse
+entity.pheasantTFC.name=Pheasant
+entity.pigTFC.name=Pig
+entity.sheepTFC.name=Sheep
+entity.squidTFC.name=Squid
+entity.wolfTFC.name=Wolf
 
+entity.blazeTFC.name=Blaze
+entity.caveSpiderTFC.name=Cave Spider
+entity.creeperTFC.name=Creeper
+entity.endermanTFC.name=Enderman
+entity.ghastTFC.name=Ghast
+entity.irongolemTFC.name=Iron Golem
+entity.pigZombieTFC.name=Pig Zombie
+entity.silverfishTFC.name=Silverfish
+entity.skeletonTFC.name=Skeleton
+entity.slimeTFC.name=Slime
+entity.spiderTFC.name=Spider
+entity.zombieTFC.name=Zombie
 
-#==========
-#= Entity =
-#==========
+entity.arrowTFC.name=Arrow
+entity.standTFC.name=Armor Stand
+entity.barrel.name=Barrel
+entity.fallingBlock.name=Falling Block
+
 entity.notFamiliar=The animal won't let you do that.
 fishingRod.lineTension=The line is going to snap!
 fishingRod.lineSnap=The line snapped!

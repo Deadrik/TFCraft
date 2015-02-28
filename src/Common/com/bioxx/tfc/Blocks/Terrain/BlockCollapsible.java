@@ -12,7 +12,6 @@ import net.minecraft.stats.StatList;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
@@ -27,19 +26,19 @@ import com.bioxx.tfc.api.Util.ByteCoord;
 import com.bioxx.tfc.api.Util.CollapseData;
 import com.bioxx.tfc.api.Util.CollapseList;
 
-public class BlockCollapsable extends BlockTerraContainer
+public class BlockCollapsible extends BlockTerraContainer
 {
 	public Block dropBlock;
 	public static boolean fallInstantly = false;
 
-	protected BlockCollapsable(Material material, Block block)
+	protected BlockCollapsible(Material material, Block block)
 	{
 		super(material);
 		this.dropBlock = block;
 		this.setCreativeTab(TFCTabs.TFCBuilding);
 	}
 
-	protected BlockCollapsable(Material material)
+	protected BlockCollapsible(Material material)
 	{
 		super(material);
 		this.dropBlock = Blocks.air;
@@ -54,13 +53,12 @@ public class BlockCollapsable extends BlockTerraContainer
 		return data;
 	}
 
+
 	public static boolean canFallBelow(World world, int x, int y, int z)
 	{
 		Block block = world.getBlock(x, y, z);
 		if (world.isAirBlock(x, y, z))
 			return true;
-		if (block == Blocks.bedrock)
-			return false;
 		if (block == Blocks.fire)
 			return true;
 		if (block == TFCBlocks.TallGrass)
@@ -71,13 +69,21 @@ public class BlockCollapsable extends BlockTerraContainer
 			return true;
 		if (block == TFCBlocks.ToolRack)
 			return true;
-		if(block == TFCBlocks.Charcoal)
+
+		if (block == Blocks.bedrock)
 			return false;
-		if(!block.isNormalCube() && !world.isSideSolid(x, y, z, ForgeDirection.UP))
+		if (block == TFCBlocks.Charcoal)
+			return false;
+		if (block == TFCBlocks.Molten)
+			return false;
+
+		if (!block.isNormalCube())
 			return true;
+
 		Material material = block.getMaterial();
 		if (material == Material.water || material == Material.lava)
 			return true;
+
 		return false;
 	}
 
@@ -192,47 +198,44 @@ public class BlockCollapsable extends BlockTerraContainer
 		return true;
 	}
 
-	public Boolean tryToFall(World world, int i, int j, int k, float collapseChance)
+	public Boolean tryToCollapse(World world, int x, int y, int z, float collapseChance)
 	{
-		int xCoord = i;
-		int yCoord = j;
-		int zCoord = k;
-		int[] drop = getDropBlock(world, i, j, k);
+		int[] drop = getDropBlock(world, x, y, z);
 		Block fallingBlock = Block.getBlockById(drop[0]);
 		int fallingBlockMeta = drop[1];
 
-		if(world.getBlock(xCoord, yCoord, zCoord) == Blocks.bedrock || world.getBlock(xCoord, yCoord, zCoord) == fallingBlock)
+		if (world.getBlock(x, y, z) == Blocks.bedrock || world.getBlock(x, y, z) == fallingBlock)
 			return false;
 
-		if (canFallBelow(world, xCoord, yCoord - 1, zCoord)  && !isNearSupport(world, i, j, k, 4, collapseChance)  && isUnderLoad(world, i, j, k))
+		if (canFallBelow(world, x, y - 1, z) && !isNearSupport(world, x, y, z, 4, collapseChance) && isUnderLoad(world, x, y, z))
 		{
 			if (!world.isRemote && fallingBlock != Blocks.air)
 			{
 				if(fallingBlock != null)
 				{
-					EntityFallingBlockTFC ent = new EntityFallingBlockTFC(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), fallingBlock, fallingBlockMeta+8);
+					EntityFallingBlockTFC ent = new EntityFallingBlockTFC(world, (double) (x + 0.5F), (double) (y + 0.5F), (double) (z + 0.5F), fallingBlock, fallingBlockMeta/*+8*/); // Not sure what this +8 was for, but it was causing the resulting block to not be recognized by WAILA/NEI.
 					ent.aliveTimer/*fallTime*/ = -5000;
 					world.spawnEntityInWorld(ent);
-					Random R = new Random(i*j+k);
+					Random R = new Random(x*y+z);
 					if(R.nextInt(100) > 90)
 						world.playSoundAtEntity(ent, TFC_Sounds.FALLININGROCKLONG, 1.0F, 0.8F + (R.nextFloat()/2));
 				}
 
-				world.setBlockToAir(i, j, k);
+				world.setBlockToAir(x, y, z);
 
-				if(world.getBlock(i, j-1, k) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(i, j-1, k)).blockType == this && 
-						((TEPartial)world.getTileEntity(i, j-1, k)).MetaID == fallingBlockMeta)
+				if(world.getBlock(x, y-1, z) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(x, y-1, z)).blockType == this && 
+						((TEPartial)world.getTileEntity(x, y-1, z)).MetaID == fallingBlockMeta)
 				{
-					world.setBlockToAir(i, j-1, k);
+					world.setBlockToAir(x, y-1, z);
 
-					if(world.getBlock(i, j-2, k) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(i, j-2, k)).blockType == this && 
-							((TEPartial)world.getTileEntity(i, j-2, k)).MetaID == fallingBlockMeta)
+					if(world.getBlock(x, y-2, z) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(x, y-2, z)).blockType == this && 
+							((TEPartial)world.getTileEntity(x, y-2, z)).MetaID == fallingBlockMeta)
 					{
-						world.setBlockToAir(i, j-2, k);
+						world.setBlockToAir(x, y-2, z);
 
-						if(world.getBlock(i, j-3, k) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(i, j-3, k)).blockType == this && 
-								((TEPartial)world.getTileEntity(i, j-3, k)).MetaID == fallingBlockMeta)
-							world.setBlockToAir(i, j-3, k);
+						if(world.getBlock(x, y-3, z) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(x, y-3, z)).blockType == this && 
+								((TEPartial)world.getTileEntity(x, y-3, z)).MetaID == fallingBlockMeta)
+							world.setBlockToAir(x, y-3, z);
 					}
 				}
 
@@ -240,6 +243,46 @@ public class BlockCollapsable extends BlockTerraContainer
 			}
 		}
 		return false;
+	}
+
+	public static void tryToFall(World world, int x, int y, int z, Block block)
+	{
+		if (!world.isRemote)
+		{
+
+			int meta = world.getBlockMetadata(x, y, z);
+			if (canFallBelow(world, x, y - 1, z) && y >= 0 && (!isNearSupport(world, x, y, z, 4, 0) || block instanceof BlockSand))
+			{
+				byte byte0 = 32;
+
+				if (!fallInstantly && world.checkChunksExist(x - byte0, y - byte0, z - byte0, x + byte0, y + byte0, z + byte0))
+				{
+					if (!world.isRemote)
+					{
+						EntityFallingBlockTFC entityfallingblock = new EntityFallingBlockTFC(world, (double) ((float) x + 0.5F), (double) ((float) y + 0.5F), (double) ((float) z + 0.5F), block, meta);
+						world.spawnEntityInWorld(entityfallingblock);
+						if (block instanceof BlockCobble)
+							world.playSoundAtEntity(entityfallingblock, TFC_Sounds.FALLININGROCKSHORT, 1.0F, 0.8F + (world.rand.nextFloat() / 2));
+						else
+							world.playSoundAtEntity(entityfallingblock, TFC_Sounds.FALLININGDIRTSHORT, 1.0F, 0.8F + (world.rand.nextFloat() / 2));
+					}
+				}
+				else
+				{
+					world.setBlockToAir(x, y, z);
+
+					while (canFallBelow(world, x, y - 1, z) && y > 0)
+					{
+						--y;
+					}
+
+					if (y > 0)
+					{
+						world.setBlock(x, y, z, block, meta, 0x2);
+					}
+				}
+			}
+		}
 	}
 
 	@Override
@@ -271,8 +314,8 @@ public class BlockCollapsable extends BlockTerraContainer
 				int scanX = -4 + world.rand.nextInt(9);
 				int scanY = -2 + world.rand.nextInt(5);
 				int scanZ = -4 + world.rand.nextInt(9);
-				if(world.getBlock(x+scanX, y+scanY, z+scanZ) instanceof BlockCollapsable && 
-						((BlockCollapsable)world.getBlock(x+scanX, y+scanY, z+scanZ)).tryToFall(world, x+scanX, y+scanY, z+scanZ, 0))
+				if(world.getBlock(x+scanX, y+scanY, z+scanZ) instanceof BlockCollapsible && 
+						((BlockCollapsible)world.getBlock(x+scanX, y+scanY, z+scanZ)).tryToCollapse(world, x+scanX, y+scanY, z+scanZ, 0))
 				{
 					triggerCollapse(world, entityplayer, x+scanX, y+scanY, z+scanZ, meta);
 					return;
@@ -306,15 +349,15 @@ public class BlockCollapsable extends BlockTerraContainer
 
 					if(world.rand.nextInt(100) < TFCOptions.propogateCollapseChance && distSqrd < 1225)
 					{
-						if(world.getBlock(i+x, j+y, k+z) instanceof BlockCollapsable && 
-								((BlockCollapsable)world.getBlock(i+x, j+y, k+z)).tryToFall(world, i+x, j+y, k+z, 1))
+						if(world.getBlock(i+x, j+y, k+z) instanceof BlockCollapsible && 
+								((BlockCollapsible)world.getBlock(i+x, j+y, k+z)).tryToCollapse(world, i+x, j+y, k+z, 1))
 						{
 							int done = 0;
 							while(done < height)
 							{
 								done++;
-								if(world.getBlock(i+x, j+y, k+z) instanceof BlockCollapsable && world.rand.nextInt(100) < TFCOptions.propogateCollapseChance) {
-									((BlockCollapsable)world.getBlock(i+x, j+y, k+z)).tryToFall(world, i+x, j+y+done, k+z, 1);
+								if(world.getBlock(i+x, j+y, k+z) instanceof BlockCollapsible && world.rand.nextInt(100) < TFCOptions.propogateCollapseChance) {
+									((BlockCollapsible)world.getBlock(i+x, j+y, k+z)).tryToCollapse(world, i+x, j+y+done, k+z, 1);
 								} else {
 									done = height;
 								}
@@ -372,8 +415,8 @@ public class BlockCollapsable extends BlockTerraContainer
 				localZ = block.coords.z;
 				if((world.isAirBlock(worldX, worldY, worldZ)) /*&& localY < 4*/)
 					checkQueue.add(checkedmap, new CollapseData(new ByteCoord(localX + 0, localY + 1, localZ + 0), block.collapseChance - incrementChance*4, TFCDirection.UP));
-				else if(world.getBlock(worldX, worldY, worldZ) instanceof BlockCollapsable && 
-						((BlockCollapsable)world.getBlock(worldX, worldY, worldZ)).tryToFall(world, worldX, worldY, worldZ, block.collapseChance))
+				else if(world.getBlock(worldX, worldY, worldZ) instanceof BlockCollapsible && 
+						((BlockCollapsible)world.getBlock(worldX, worldY, worldZ)).tryToCollapse(world, worldX, worldY, worldZ, block.collapseChance))
 				{
 					map.add(block.coords);
 
