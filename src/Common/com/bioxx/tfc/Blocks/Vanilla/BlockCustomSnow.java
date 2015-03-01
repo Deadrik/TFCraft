@@ -154,7 +154,7 @@ public class BlockCustomSnow extends BlockTerra
 		
 		float temp = TFC_Climate.getHeightAdjustedTemp(world, x, y, z);
 		
-		if (world.isRaining() && temp <= 0)  //Raining and Below Freezing
+		if (temp <= 0 && world.isRaining())  //Raining and Below Freezing
 		{
 			if (R.nextInt(20) == 0)
 			{
@@ -165,7 +165,11 @@ public class BlockCustomSnow extends BlockTerra
 				}
 			}
 		}
-		else if (world.isRaining() && temp > 0)  //Raining and above freezing
+		else if (temp > 10)  // to hot for snow (probably chunk loading error)
+		{
+			world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+		}
+		else if (temp > 0 && world.isRaining())  //Raining and above freezing
 		{
 			if (R.nextInt(5) == 0)
 			{
