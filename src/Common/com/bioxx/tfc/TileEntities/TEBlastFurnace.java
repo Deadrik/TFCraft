@@ -30,6 +30,7 @@ import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
@@ -271,8 +272,9 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 		{
 			charcoalCount--;
 
-			fuelTimeLeft = 1875;
-			fuelBurnTemp = 1400;
+			EnumFuelMaterial m = EnumFuelMaterial.CHARCOAL;
+			fuelTimeLeft = m.burnTimeMax;
+			fuelBurnTemp = m.burnTempMax;
 		}
 		else
 		{
@@ -735,4 +737,8 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
+	public int getMaxValidStackSize()
+	{
+		return maxValidStackSize;
+	}
 }
