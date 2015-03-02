@@ -29,6 +29,8 @@ import com.bioxx.tfc.api.Interfaces.ISmeltable;
 
 public class TECrucible extends NetworkTileEntity implements IInventory
 {
+	public static int MAX_AMOUNT = 3000;
+	
 	public HashMap<String, MetalPair> metals = new HashMap<String, MetalPair>();
 	public Alloy currentAlloy;
 	public int temperature = 0;
@@ -247,7 +249,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 	public boolean addMetal(Metal m, float amt)
 	{
-		if (getTotalMetal() + amt <= 3000 && m.Name != null && m.Name != "Unknown")
+		if (getTotalMetal() + amt <= MAX_AMOUNT && m.Name != null && m.Name != "Unknown")
 		{
 			if(metals.containsKey(m.Name))
 				((MetalPair)metals.get(m.Name)).amount += amt;
@@ -388,7 +390,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	public int getOutCountScaled(int length)
 	{
 		if(currentAlloy != null)
-			return ((int)this.currentAlloy.outputAmount * length)/3000;
+			return ((int)this.currentAlloy.outputAmount * length)/MAX_AMOUNT;
 		else
 			return 0;
 	}
@@ -425,7 +427,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	public void handleDataPacket(NBTTagCompound nbt) {
 		byte action = nbt.getByte("action");
 		if(action == 0)
-			this.currentAlloy = new Alloy().fromNBT(nbt);
+			this.currentAlloy = Alloy.loadFromNBT(nbt);
 		else if(action == 1 && currentAlloy != null)
 		{
 			currentAlloy.outputAmount = nbt.getFloat("outputAmount");

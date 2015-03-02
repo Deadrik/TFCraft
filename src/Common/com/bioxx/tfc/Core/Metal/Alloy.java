@@ -186,7 +186,7 @@ public class Alloy
 
 	public void toNBT(NBTTagCompound nbt)
 	{
-		nbt.setString("outputType", outputType.Name);
+		nbt.setString("outputType", outputType != null ? outputType.Name : "");
 		nbt.setFloat("outputAmount", outputAmount);
 		NBTTagList nbtlist = new NBTTagList();
 		for(int i = 0; i < AlloyIngred.size(); i++)
@@ -217,5 +217,23 @@ public class Alloy
     public EnumTier getFurnaceTier()
     {
         return furnaceTier;
+    }
+    
+    /**
+     * This provides a safe method for retrieving an Alloy - if the tag is invalid, the alloy
+     * will return as null.
+     */
+    public static Alloy loadFromNBT(NBTTagCompound nbt)
+    {
+        if (nbt == null)
+        {
+            return null;
+        }
+        
+        Alloy alloy = new Alloy();
+        alloy.fromNBT(nbt);
+        
+        // only return an alloy instance, if it is valid.
+        return (alloy.outputType != null ? alloy : null);
     }
 }
