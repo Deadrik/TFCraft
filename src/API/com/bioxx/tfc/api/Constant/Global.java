@@ -107,6 +107,7 @@ public class Global
 	public static Metal TIN;
 	public static Metal ZINC;
 	public static Metal WEAKSTEEL;
+	public static Metal HCSTEEL;
 	public static Metal HCBLACKSTEEL;
 	public static Metal WEAKREDSTEEL;
 	public static Metal HCREDSTEEL;
