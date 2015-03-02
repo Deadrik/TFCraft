@@ -966,6 +966,7 @@ public class ItemSetup extends TFCItems {
 		Global.TIN = new Metal("Tin", TinUnshaped, TinIngot);
 		Global.ZINC = new Metal("Zinc", ZincUnshaped, ZincIngot);
 		Global.WEAKSTEEL = new Metal("Weak Steel", WeakSteelUnshaped, WeakSteelIngot);
+		Global.HCSTEEL = new Metal("HC Steel", HCSteelUnshaped, HCSteelIngot);
 		Global.HCBLACKSTEEL = new Metal("HC Black Steel", HCBlackSteelUnshaped, HCBlackSteelIngot);
 		Global.WEAKREDSTEEL = new Metal("Weak Red Steel", WeakRedSteelUnshaped, WeakRedSteelIngot);
 		Global.HCREDSTEEL = new Metal("HC Red Steel", HCRedSteelUnshaped, HCRedSteelIngot);
@@ -995,6 +996,7 @@ public class ItemSetup extends TFCItems {
 		MetalRegistry.instance.addMetal(Global.TIN, Alloy.EnumTier.TierI);
 		MetalRegistry.instance.addMetal(Global.ZINC, Alloy.EnumTier.TierI);
 		MetalRegistry.instance.addMetal(Global.WEAKSTEEL, Alloy.EnumTier.TierV);
+		MetalRegistry.instance.addMetal(Global.HCSTEEL, Alloy.EnumTier.TierV);
 		MetalRegistry.instance.addMetal(Global.HCBLACKSTEEL, Alloy.EnumTier.TierV);
 		MetalRegistry.instance.addMetal(Global.WEAKREDSTEEL, Alloy.EnumTier.TierV);
 		MetalRegistry.instance.addMetal(Global.HCREDSTEEL, Alloy.EnumTier.TierV);
