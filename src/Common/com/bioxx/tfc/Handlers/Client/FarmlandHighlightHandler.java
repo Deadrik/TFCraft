@@ -312,37 +312,37 @@ public class FarmlandHighlightHandler
 			}
 			else
 			{
-			Block b = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
-			if(b == TFCBlocks.Crops && (
-					world.getBlock(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil ||
-					world.getBlock(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil2))
-			{
-				TECrop te = (TECrop) world.getTileEntity(evt.target.blockX, evt.target.blockY, evt.target.blockZ);
-				CropIndex index = CropManager.getInstance().getCropFromId(te.cropId);
-				boolean fullyGrown = index instanceof CropIndexPepper ? te.growth >= index.numGrowthStages - 1 : te.growth >= index.numGrowthStages;
-
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				if(fullyGrown)
-					GL11.glColor4ub((byte)64, (byte)200, (byte)37, (byte)200);
-				else
-					GL11.glColor4ub((byte)200, (byte)37, (byte)37, (byte)200);
-				GL11.glDisable(GL11.GL_CULL_FACE);
-				//GL11.glLineWidth(6.0F);
-				GL11.glDisable(GL11.GL_TEXTURE_2D);
-				GL11.glDepthMask(false);
-
-				drawFace(AxisAlignedBB.getBoundingBox(
-						evt.target.blockX,
-						evt.target.blockY + 0.01,
-						evt.target.blockZ,
-						evt.target.blockX+1,
-						evt.target.blockY + 0.02,
-						evt.target.blockZ+1
-						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
-
-				GL11.glEnable(GL11.GL_CULL_FACE);
-			}
+				Block b = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
+				if(b == TFCBlocks.Crops && (
+						world.getBlock(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil ||
+						world.getBlock(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil2))
+				{
+					TECrop te = (TECrop) world.getTileEntity(evt.target.blockX, evt.target.blockY, evt.target.blockZ);
+					CropIndex index = CropManager.getInstance().getCropFromId(te.cropId);
+					boolean fullyGrown = index instanceof CropIndexPepper ? te.growth >= index.numGrowthStages - 1 : te.growth >= index.numGrowthStages;
+	
+					GL11.glEnable(GL11.GL_BLEND);
+					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+					if(fullyGrown)
+						GL11.glColor4ub((byte)64, (byte)200, (byte)37, (byte)200);
+					else
+						GL11.glColor4ub((byte)200, (byte)37, (byte)37, (byte)200);
+					GL11.glDisable(GL11.GL_CULL_FACE);
+					//GL11.glLineWidth(6.0F);
+					GL11.glDisable(GL11.GL_TEXTURE_2D);
+					GL11.glDepthMask(false);
+	
+					drawFace(AxisAlignedBB.getBoundingBox(
+							evt.target.blockX,
+							evt.target.blockY + 0.01,
+							evt.target.blockZ,
+							evt.target.blockX+1,
+							evt.target.blockY + 0.02,
+							evt.target.blockZ+1
+							).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
+	
+					GL11.glEnable(GL11.GL_CULL_FACE);
+				}
 			}
 		}
 	}
