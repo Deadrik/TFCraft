@@ -39,6 +39,8 @@ public class BlockCustomSnow extends BlockTerra
 			return false;
 		if (block == TFCBlocks.Leaves || block == TFCBlocks.Leaves2)
 			return true;
+		if (block == TFCBlocks.Thatch)
+			return true;
 		if (World.doesBlockHaveSolidTopSurface(world, i, j-1, k))
 			return true;
 		
