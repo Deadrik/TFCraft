@@ -23,9 +23,9 @@ import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
+import com.bioxx.tfc.TileEntities.TESluice;
 import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
-import com.bioxx.tfc.TileEntities.TESluice;
 import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -97,16 +97,18 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 			return new GuiNestBox(player.inventory, ((TENestBox)te), world, x, y, z);
 		case 42:
 		{
-			List list = player.worldObj.getEntitiesWithinAABB(EntityHorseTFC.class, player.boundingBox.expand(2, 2, 2));
+			if (player.isRiding() && player.ridingEntity instanceof EntityHorseTFC)
+			{
+				EntityHorseTFC horse = (EntityHorseTFC) player.ridingEntity;
+				horse.updateChestSaddle();
+				return new GuiScreenHorseInventoryTFC(player.inventory, horse.getHorseChest(), horse);
+			}
+
+			List<EntityHorseTFC> list = player.worldObj.getEntitiesWithinAABB(EntityHorseTFC.class, player.boundingBox.expand(2, 2, 2));
 			if(list.size() > 0)
 			{
 				EntityHorseTFC horse = (EntityHorseTFC) list.get(0);
 				horse.updateChestSaddle();
-				//NBTTagCompound nbt = new NBTTagCompound();
-				//System.out.println(horse.isChested() + ", " + horse.getHorseType() + ", " + horse.getHorseChest().getSizeInventory());
-				//horse.writeEntityToNBT(nbt);
-				//horse.readEntityFromNBT(nbt);
-				//System.out.println(horse.isChested() + ", " + horse.getHorseType() + ", " + horse.getHorseChest().getSizeInventory());
 				return new GuiScreenHorseInventoryTFC(player.inventory, horse.getHorseChest(), horse);
 			}
 			return null;
