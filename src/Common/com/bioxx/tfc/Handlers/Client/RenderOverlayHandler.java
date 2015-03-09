@@ -29,6 +29,7 @@ import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemCustomHoe;
+import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.api.TFCAttributes;
 import com.bioxx.tfc.api.TFCItems;
@@ -65,6 +66,7 @@ public class RenderOverlayHandler
 
 		ScaledResolution sr = event.resolution;
 		Minecraft mc = Minecraft.getMinecraft();
+		EntityPlayer player = mc.thePlayer;
 
 		int healthRowHeight = sr.getScaledHeight() - 40;
 		int armorRowHeight = healthRowHeight - 10;
@@ -74,17 +76,30 @@ public class RenderOverlayHandler
 		TFC_Core.bindTexture(tfcicons);
 
 		//Render Tool Mode
-		if(mc.thePlayer.inventory.getCurrentItem() != null && 
-				mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemCustomHoe)
+		if (player.inventory.getCurrentItem() != null &&
+				player.inventory.getCurrentItem().getItem() instanceof ItemCustomHoe)
 		{
 			int mode = PlayerManagerTFC.getInstance().getClientPlayer().hoeMode;
 			this.drawTexturedModalRect(mid + 95, sr.getScaledHeight() - 21, 0+(20*mode), 38, 20, 20);
 		}
-		else if(mc.thePlayer.inventory.getCurrentItem() != null && 
-				mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemChisel)
+		else if (player.inventory.getCurrentItem() != null &&
+				player.inventory.getCurrentItem().getItem() instanceof ItemChisel)
 		{
-			int mode = PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode;
-			this.drawTexturedModalRect(mid + 95, sr.getScaledHeight() - 21, 0+(20*mode), 58, 20, 20);
+			boolean hasHammer = false;
+
+			for (int i = 0; i < 9; i++)
+			{
+				if (player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemHammer)
+				{
+					hasHammer = true;
+					break;
+				}
+			}
+			if (hasHammer)
+			{
+				int mode = PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode;
+				this.drawTexturedModalRect(mid + 95, sr.getScaledHeight() - 21, 0 + (20 * mode), 58, 20, 20);
+			}
 		}
 
 		//Render Arrow and Javelin for Quiver
@@ -154,25 +169,25 @@ public class RenderOverlayHandler
 		{
 			//Draw Health
 			this.drawTexturedModalRect(mid-91, healthRowHeight, 0, 0, 90, 10);
-			float maxHealth = mc.thePlayer.getMaxHealth();
-			float percentHealth = Math.min(mc.thePlayer.getHealth()/maxHealth, 1.0f);
+			float maxHealth = player.getMaxHealth();
+			float percentHealth = Math.min(player.getHealth() / maxHealth, 1.0f);
 			this.drawTexturedModalRect(mid-91, healthRowHeight, 0, 10, (int) (90*percentHealth), 10);
 
 			//Draw Food and Water
-			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(mc.thePlayer);
+			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 			float foodLevel = foodstats.getFoodLevel();
 			//float preFoodLevel = foodstats.getPrevFoodLevel();
 
 			float waterLevel = foodstats.waterLevel;
 
-			float percentFood = Math.min(foodLevel / foodstats.getMaxStomach(mc.thePlayer), 1);
-			float percentWater = Math.min(waterLevel / foodstats.getMaxWater(mc.thePlayer), 1);
+			float percentFood = Math.min(foodLevel / foodstats.getMaxStomach(player), 1);
+			float percentWater = Math.min(waterLevel / foodstats.getMaxWater(player), 1);
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.drawTexturedModalRect(mid+1, healthRowHeight, 0, 20, 90, 5);
 			if(playerclient != null && playerclient.guishowFoodRestoreAmount)
 			{
-				float percentFood2 = Math.min(percentFood + playerclient.guiFoodRestoreAmount/foodstats.getMaxStomach(mc.thePlayer), 1);
+				float percentFood2 = Math.min(percentFood + playerclient.guiFoodRestoreAmount / foodstats.getMaxStomach(player), 1);
 				GL11.glColor4f(0.0F, 0.6F, 0.0F, 0.3F);
 				this.drawTexturedModalRect(mid+1, healthRowHeight, 0, 25, (int) (90*(percentFood2)), 5);
 			}
@@ -184,36 +199,36 @@ public class RenderOverlayHandler
 			this.drawTexturedModalRect(mid+1, healthRowHeight+5, 90, 25, (int) (90*percentWater), 5);
 
 			//Draw Notifications
-			String healthString = (int) Math.min(mc.thePlayer.getHealth(), maxHealth) + "/" + (int) maxHealth;
+			String healthString = (int) Math.min(player.getHealth(), maxHealth) + "/" + (int) maxHealth;
 			mc.fontRenderer.drawString(healthString, mid-45-(mc.fontRenderer.getStringWidth(healthString)/2), healthRowHeight+2, Color.white.getRGB());
-			if(mc.thePlayer.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getModifier(TFCAttributes.overburdenedUUID) != null)
+			if (player.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getModifier(TFCAttributes.overburdenedUUID) != null)
 				mc.fontRenderer.drawString(StatCollector.translateToLocal("gui.overburdened"), mid-(mc.fontRenderer.getStringWidth(StatCollector.translateToLocal("gui.overburdened"))/2), healthRowHeight-20, Color.red.getRGB());
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			TFC_Core.bindTexture(new ResourceLocation("minecraft:textures/gui/icons.png"));
 			//Draw experience bar
 			int cap = 0;
-			if(mc.thePlayer.ridingEntity == null)
+			if (player.ridingEntity == null)
 			{
-				cap = mc.thePlayer.xpBarCap();
+				cap = player.xpBarCap();
 				int left = mid - 91;
 
 				if (cap > 0)
 				{
 					short barWidth = 182;
-					int filled = (int)(mc.thePlayer.experience * (barWidth + 1));
+					int filled = (int) (player.experience * (barWidth + 1));
 					int top = sr.getScaledHeight() - 29;
 					drawTexturedModalRect(left, top, 0, 64, barWidth, 5);
 					if (filled > 0)
 						drawTexturedModalRect(left, top, 0, 69, filled, 5);
 				}
 
-				if (mc.thePlayer.experienceLevel > 0)
+				if (player.experienceLevel > 0)
 				{
 					fontrenderer = mc.fontRenderer;
 					boolean flag1 = false;
 					int color = flag1 ? 16777215 : 8453920;
-					String text = "" + mc.thePlayer.experienceLevel;
+					String text = "" + player.experienceLevel;
 					int x = (sr.getScaledWidth() - fontrenderer.getStringWidth(text)) / 2;
 					int y = sr.getScaledHeight() - 30;
 					fontrenderer.drawString(text, x + 1, y, 0);
@@ -226,10 +241,11 @@ public class RenderOverlayHandler
 				// We have to reset the color back to white
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			}
-			else if(mc.thePlayer.ridingEntity instanceof EntityLivingBase){
+			else if (player.ridingEntity instanceof EntityLivingBase)
+			{
 				GuiIngameForge.renderHealthMount = false;
 				TFC_Core.bindTexture(tfcicons);
-				EntityLivingBase mount = ((EntityLivingBase) mc.thePlayer.ridingEntity);
+				EntityLivingBase mount = ((EntityLivingBase) player.ridingEntity);
 				this.drawTexturedModalRect(mid+1, armorRowHeight, 90, 0, 90, 10);
 				double mountMaxHealth = mount.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue();
 				double mountCurrentHealth = mount.getHealth();
