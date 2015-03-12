@@ -17,13 +17,15 @@ public class RenderOilLamp implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
-		renderer.setRenderBounds(0.41, 0.0, 0.41, 0.59, 0.05F, 0.59);
+		renderer.setRenderBounds(0.3125, 0.0, 0.3125, 0.6875, 0.0625F, 0.6875);
 		renderer.renderStandardBlock(block, x, y, z);
-		renderer.setRenderBounds(0.4, 0.05, 0.4, 0.6, 0.3F, 0.6);
+		renderer.setRenderBounds(0.25, 0.0625, 0.25, 0.75, 0.375F, 0.75);
 		renderer.renderStandardBlock(block, x, y, z);
-		renderer.setRenderBounds(0.45, 0.3, 0.45, 0.55, 0.35F, 0.55);
+		renderer.setRenderBounds(0.3125, 0.375, 0.3125, 0.6875, 0.4375, 0.6875);
 		renderer.renderStandardBlock(block, x, y, z);
-		renderer.setRenderBounds(0.48, 0.35, 0.48, 0.52, 0.42F, 0.52);
+		renderer.setRenderBounds(0.375, 0.4375, 0.375, 0.625, 0.5, 0.625);
+		renderer.renderStandardBlock(block, x, y, z);
+		renderer.setRenderBounds(0.46875, 0.5, 0.46875, 0.53125, 0.5625F, 0.53125);
 		renderer.renderStandardBlock(block, x, y, z);
 		return true;
 	}
@@ -31,13 +33,13 @@ public class RenderOilLamp implements ISimpleBlockRenderingHandler
 	@Override
 	public void renderInventoryBlock(Block block, int meta, int modelID, RenderBlocks renderer)
 	{
-		renderer.setRenderBounds(0.45, 0.0, 0.45, 0.55, 0.05F, 0.55);
+		renderer.setRenderBounds(0.3125, 0.0, 0.3125, 0.6875, 0.0625F, 0.6875);
 		renderInvBlock(block, meta, renderer);
-		renderer.setRenderBounds(0.4, 0.05, 0.4, 0.6, 0.3F, 0.6);
+		renderer.setRenderBounds(0.25, 0.0625, 0.25, 0.75, 0.4375F, 0.75);
 		renderInvBlock(block, meta, renderer);
-		renderer.setRenderBounds(0.45, 0.3, 0.45, 0.55, 0.35F, 0.55);
+		renderer.setRenderBounds(0.375, 0.4375, 0.375, 0.625, 0.5F, 0.625);
 		renderInvBlock(block, meta, renderer);
-		renderer.setRenderBounds(0.48, 0.35, 0.48, 0.52, 0.42F, 0.52);
+		renderer.setRenderBounds(0.46875, 0.5, 0.46875, 0.53125, 0.5625F, 0.53125);
 		renderInvBlock(block, meta, renderer);
 	}
 

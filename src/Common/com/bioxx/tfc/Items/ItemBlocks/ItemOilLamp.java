@@ -6,10 +6,12 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.TileEntities.TEOilLamp;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCFluids;
@@ -109,8 +111,18 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable
 		if (side == 4) --xCoord;
 		if (side == 5) ++xCoord;
 		Block block = world.getBlock(xCoord, yCoord, zCoord);
-		if(block != TFCBlocks.Torch)
-			return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
+		if(world.isAirBlock(xCoord, yCoord, zCoord))
+		{
+			if(super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ))
+			{
+				TileEntity _t =  world.getTileEntity(xCoord, yCoord, zCoord);
+				if(_t != null && _t instanceof TEOilLamp)
+				{
+					((TEOilLamp)_t).fuel = FluidStack.loadFluidStackFromNBT(is.getTagCompound());
+					((TEOilLamp)_t).hourPlaced = (int)TFC_Time.getTotalHours();
+				}
+			}
+		}
 
 		return false;
 	}

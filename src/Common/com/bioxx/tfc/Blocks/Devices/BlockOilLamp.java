@@ -24,6 +24,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
+import com.bioxx.tfc.Items.ItemBlocks.ItemOilLamp;
 import com.bioxx.tfc.TileEntities.TEOilLamp;
 import com.bioxx.tfc.api.TFCBlocks;
 
@@ -52,10 +53,12 @@ public class BlockOilLamp extends BlockTerraContainer
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List)
+	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		for(int i = 0; i < 6; i++)
-			par3List.add(new ItemStack(this, 1, i+8));
+		{
+			list.add(ItemOilLamp.GetFullLamp(i));
+		}
 	}
 
 	@Override
@@ -106,15 +109,6 @@ public class BlockOilLamp extends BlockTerraContainer
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-
-		if(metadata >= 8)
-			return ret;
-
-		Item item = getItemDropped(metadata, world.rand, fortune);
-		if (item != null)
-		{
-			ret.add(new ItemStack(item, 1, damageDropped(metadata)));
-		}
 		return ret;
 	}
 
@@ -275,8 +269,6 @@ public class BlockOilLamp extends BlockTerraContainer
 		}
 	}
 
-
-
 	/**
 	 * Ray traces through the blocks collision from start vector to end vector returning a ray trace hit. Args: world,
 	 * x, y, z, startVec, endVec
@@ -301,7 +293,7 @@ public class BlockOilLamp extends BlockTerraContainer
 
 
 		double centerX = x + 0.5F;
-		double centerY = y + 0.5F;
+		double centerY = y + 0.6F;
 		double centerZ = z + 0.5F;
 		//double d3 = 0.22;
 		//double d4 = 0.27;
