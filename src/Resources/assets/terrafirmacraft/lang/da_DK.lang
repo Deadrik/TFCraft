@@ -18,36 +18,38 @@ death.attack.alcohol=%1$s døde af alkoholforgiftning
 death.attack.heatStroke=%1$s døde af hedeslag
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=Blæksprutte
-entity.cowTFC.name=Ko
-entity.wolfTFC.name=Ulv
 entity.bearTFC.name=Bjørn
-entity.deerTFC.name=Rådyr
 entity.chickenTFC.name=Kylling
-entity.pigTFC.name=Gris
-entity.skeletonTFC.name=Skelet
-entity.zombieTFC.name=Zombie
-entity.spiderTFC.name=Edderkop
-entity.slimeTFC.name=Slim
-entity.silverfishTFC.name=Sølvfisk
-entity.ghastTFC.name=Ghast
-entity.caveSpiderTFC.name=Huleedderkop
-entity.blazeTFC.name=Ildånd
-entity.endermanTFC.name=Endermand
-entity.pigZombieTFC.name=Grisezombie
-entity.creeperTFC.name=Creeper
-entity.sheepTFC.name=Får
-entity.pheasantTFC.name=Fasan
-entity.horseTFC.name=Hest
-entity.irongolemTFC.name=Jerngolem
+entity.cowTFC.name=Ko
+entity.deerTFC.name=Rådyr
 entity.fishTFC.name=Aborre
+entity.horseTFC.name=Hest
+entity.pheasantTFC.name=Fasan
+entity.pigTFC.name=Gris
+entity.sheepTFC.name=Får
+entity.squidTFC.name=Blæksprutte
+entity.wolfTFC.name=Ulv
 
+entity.blazeTFC.name=Ildånd
+entity.caveSpiderTFC.name=Huleedderkop
+entity.creeperTFC.name=Creeper
+entity.endermanTFC.name=Endermand
+entity.ghastTFC.name=Ghast
+entity.irongolemTFC.name=Jerngolem
+entity.pigZombieTFC.name=Grisezombie
+entity.silverfishTFC.name=Sølvfisk
+entity.skeletonTFC.name=Skelet
+entity.slimeTFC.name=Slim
+entity.spiderTFC.name=Edderkop
+entity.zombieTFC.name=Zombie
 
-#==========
-#= Entity =
-#==========
+entity.arrowTFC.name=Pil
+entity.standTFC.name=
+entity.barrel.name=
+entity.fallingBlock.name=
+
 entity.notFamiliar=Det der vil dyret ikke være med til.
 fishingRod.lineTension=Linen er ved at knække!
 fishingRod.lineSnap=Linen knækkede!
@@ -2325,7 +2327,7 @@ gui.MeltedMetal.Inst0=§bHøjreklik §7for at hælde i en anden støbeform.
 gui.PotteryBase.Inst0=Snig og §bHøjreklik §7for at placere objekt.
 gui.PotteryVesselSmall.Inst0=Eller §bHøjreklik §7for at åbne inventar.
 gui.RawHide.Inst0=?????
-gui.Chisel.Inst0=
+gui.Chisel.Inst0=Den handling kræver en hammer i den altid tilgængelige del af inventaret.
 gui.Barrel.MoreItems=§8Med mere... (Tryk §fSkift§8)
 
 gui.Nutrient.A=Næringsstof A
@@ -2475,9 +2477,8 @@ gui.useless=Ubrugelig
 gui.growth=Vækst
 gui.mature=Moden
 gui.metal.Iron=Jern
-gui.tier=
-gui.temperature=
-gui.progress=
+gui.tier=Niveau
+gui.progress=Fremskridt
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Skal bruges under flydende vand.
@@ -2525,7 +2526,7 @@ gui.skillpage=Færdigheder
 #==================
 error.error=FEJL:
 error.NBT=mangler NBT-information!
-error.OreCFG=Den følgende blok-indtastning i TFCOre.cfg indeholder fejl:
+error.OreCFG=Den følgende blok-indtastning i TFCOre.cfg er ugyldig:
 error.Contact=Rapporter venligst dette i Support-sektionen på TerraFirmaCrafts forum.
 
 #=====================================================

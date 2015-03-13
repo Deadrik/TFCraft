@@ -18,36 +18,38 @@ death.attack.alcohol=%1$s死于酒精中毒
 death.attack.heatStroke=%1$s死于中暑
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=乌贼
-entity.cowTFC.name=牛
-entity.wolfTFC.name=狼
 entity.bearTFC.name=熊
-entity.deerTFC.name=鹿
 entity.chickenTFC.name=鸡
-entity.pigTFC.name=猪
-entity.skeletonTFC.name=骷髅
-entity.zombieTFC.name=僵尸
-entity.spiderTFC.name=蜘蛛
-entity.slimeTFC.name=史莱姆
-entity.silverfishTFC.name=蠹虫
-entity.ghastTFC.name=幽魂
-entity.caveSpiderTFC.name=洞穴蜘蛛
-entity.blazeTFC.name=烈焰人
-entity.endermanTFC.name=末影人
-entity.pigZombieTFC.name=僵尸猪人
-entity.creeperTFC.name=爬行者
-entity.sheepTFC.name=羊
-entity.pheasantTFC.name=野鸡
-entity.horseTFC.name=马
-entity.irongolemTFC.name=铁傀儡
+entity.cowTFC.name=牛
+entity.deerTFC.name=鹿
 entity.fishTFC.name=鲈鱼
+entity.horseTFC.name=马
+entity.pheasantTFC.name=野鸡
+entity.pigTFC.name=猪
+entity.sheepTFC.name=羊
+entity.squidTFC.name=乌贼
+entity.wolfTFC.name=狼
 
+entity.blazeTFC.name=烈焰人
+entity.caveSpiderTFC.name=洞穴蜘蛛
+entity.creeperTFC.name=爬行者
+entity.endermanTFC.name=末影人
+entity.ghastTFC.name=幽魂
+entity.irongolemTFC.name=铁傀儡
+entity.pigZombieTFC.name=僵尸猪人
+entity.silverfishTFC.name=蠹虫
+entity.skeletonTFC.name=骷髅
+entity.slimeTFC.name=史莱姆
+entity.spiderTFC.name=蜘蛛
+entity.zombieTFC.name=僵尸
 
-#==========
-#= Entity =
-#==========
+entity.arrowTFC.name=箭
+entity.standTFC.name=
+entity.barrel.name=
+entity.fallingBlock.name=
+
 entity.notFamiliar=这只动物跟你还不熟.
 fishingRod.lineTension=绳子要绷断了！
 fishingRod.lineSnap=绳子绷断了！
@@ -2476,7 +2478,6 @@ gui.growth=
 gui.mature=
 gui.metal.Iron=
 gui.tier=
-gui.temperature=
 gui.progress=
 
 #== Chat Messages ==
