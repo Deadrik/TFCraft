@@ -144,7 +144,7 @@ public class ItemLogs extends ItemTerra
 					if (CreatePile(itemstack, entityplayer, world, x, y, z, side, dir)) 
 					{
 						itemstack.stackSize = itemstack.stackSize-1;
-						world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, TFCBlocks.LogNatural.stepSound.func_150496_b(), (TFCBlocks.LogNatural.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.LogNatural.stepSound.getPitch() * 0.8F);
+						playSound(world, x, y, z);
 					}
 				return true;
 			}
@@ -189,7 +189,7 @@ public class ItemLogs extends ItemTerra
 						}
 
 					}
-					world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, TFCBlocks.LogNatural.stepSound.func_150496_b(), (TFCBlocks.LogNatural.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.LogNatural.stepSound.getPitch() * 0.8F);
+					playSound(world, x, y, z);
 					itemstack.stackSize = itemstack.stackSize-1;
 					return true;
 				}
@@ -204,11 +204,13 @@ public class ItemLogs extends ItemTerra
 				{
 					world.setBlock(x, y-1, z, block, m,0x2);
 					itemstack.stackSize = itemstack.stackSize-1;
+					playSound(world, x, y, z);
 				}
 				else if(side == 1 && block.canPlaceBlockAt(world, x, y+1, z) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y+1, z, false, side, null, itemstack))
 				{
 					world.setBlock(x, y+1, z, block, m,0x2);
 					itemstack.stackSize = itemstack.stackSize-1;
+					playSound(world, x, y, z);
 				}
 				else if(side == 2 && block.canPlaceBlockAt(world, x, y, z-1) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y, z-1, false, side, null, itemstack))
 				{
@@ -226,7 +228,6 @@ public class ItemLogs extends ItemTerra
 				{
 					setSide(world, itemstack, m, side, x+1, y, z);
 				}
-				world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, TFCBlocks.LogNatural.stepSound.func_150496_b(), (TFCBlocks.LogNatural.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.LogNatural.stepSound.getPitch() * 0.8F);
 				return true;
 			}
 		}
@@ -254,10 +255,17 @@ public class ItemLogs extends ItemTerra
 		if (side == 2 || side == 3) {
 			world.setBlock(x, y, z, log, meta, 0x2);
 			itemstack.stackSize = itemstack.stackSize-1;
+			playSound(world, x, y, z);
 		}
 		else if (side == 4 || side == 5) {
 			world.setBlock(x, y, z, log, meta | 8, 0x2);
 			itemstack.stackSize = itemstack.stackSize-1;
+			playSound(world, x, y, z);
 		}
+	}
+
+	private void playSound(World world, int x, int y, int z)
+	{
+		world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, TFCBlocks.LogNatural.stepSound.func_150496_b(), (TFCBlocks.LogNatural.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.LogNatural.stepSound.getPitch() * 0.8F);
 	}
 }
