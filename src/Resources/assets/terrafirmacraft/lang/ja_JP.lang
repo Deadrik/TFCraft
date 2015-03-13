@@ -18,36 +18,38 @@ death.attack.alcohol=%1$s は急性アル中で死んでしまった
 death.attack.heatStroke=%1$s は熱中症で死んでしまった
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=イカ
-entity.cowTFC.name=牛
-entity.wolfTFC.name=狼
 entity.bearTFC.name=熊
-entity.deerTFC.name=鹿
 entity.chickenTFC.name=ニワトリ
-entity.pigTFC.name=豚
-entity.skeletonTFC.name=スケルトン
-entity.zombieTFC.name=ゾンビ
-entity.spiderTFC.name=蜘蛛
-entity.slimeTFC.name=スライム
-entity.silverfishTFC.name=シルバーフィッシュ
-entity.ghastTFC.name=ガスト
-entity.caveSpiderTFC.name=洞窟グモ
-entity.blazeTFC.name=ブレイズ
-entity.endermanTFC.name=エンダーマン
-entity.pigZombieTFC.name=ゾンビピッグマン
-entity.creeperTFC.name=クリーパー
-entity.sheepTFC.name=羊
-entity.pheasantTFC.name=雉
-entity.horseTFC.name=馬
-entity.irongolemTFC.name=アイアンゴーレム
+entity.cowTFC.name=牛
+entity.deerTFC.name=鹿
 entity.fishTFC.name=バス
+entity.horseTFC.name=馬
+entity.pheasantTFC.name=雉
+entity.pigTFC.name=豚
+entity.sheepTFC.name=羊
+entity.squidTFC.name=イカ
+entity.wolfTFC.name=狼
 
+entity.blazeTFC.name=ブレイズ
+entity.caveSpiderTFC.name=洞窟グモ
+entity.creeperTFC.name=クリーパー
+entity.endermanTFC.name=エンダーマン
+entity.ghastTFC.name=ガスト
+entity.irongolemTFC.name=アイアンゴーレム
+entity.pigZombieTFC.name=ゾンビピッグマン
+entity.silverfishTFC.name=シルバーフィッシュ
+entity.skeletonTFC.name=スケルトン
+entity.slimeTFC.name=スライム
+entity.spiderTFC.name=蜘蛛
+entity.zombieTFC.name=ゾンビ
 
-#==========
-#= Entity =
-#==========
+entity.arrowTFC.name=矢
+entity.standTFC.name=
+entity.barrel.name=
+entity.fallingBlock.name=
+
 entity.notFamiliar=動物は嫌がっている
 fishingRod.lineTension=糸が切れそうだ！
 fishingRod.lineSnap=糸が切れてしまった
@@ -2476,7 +2478,6 @@ gui.growth=
 gui.mature=
 gui.metal.Iron=
 gui.tier=
-gui.temperature=
 gui.progress=
 
 #== Chat Messages ==

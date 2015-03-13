@@ -18,36 +18,38 @@ death.attack.alcohol=%1$s ушёл в запой и не вернулся
 death.attack.heatStroke=%1$s получил тепловой удар
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=Кальмар
-entity.cowTFC.name=Корова
-entity.wolfTFC.name=Волк
 entity.bearTFC.name=Медведь
-entity.deerTFC.name=Олень
 entity.chickenTFC.name=Курица
-entity.pigTFC.name=Свинья
-entity.skeletonTFC.name=Скелет
-entity.zombieTFC.name=Зомби
-entity.spiderTFC.name=Паук
-entity.slimeTFC.name=Слизень
-entity.silverfishTFC.name=Чешуйница
-entity.ghastTFC.name=Гаст
-entity.caveSpiderTFC.name=Пещерный паук
-entity.blazeTFC.name=Ифрит
-entity.endermanTFC.name=Странник Края
-entity.pigZombieTFC.name=Зомби-свиночеловек
-entity.creeperTFC.name=Крипер
-entity.sheepTFC.name=Овца
-entity.pheasantTFC.name=Фазан
-entity.horseTFC.name=Лашадь
-entity.irongolemTFC.name=Железный голем
+entity.cowTFC.name=Корова
+entity.deerTFC.name=Олень
 entity.fishTFC.name=Окунь
+entity.horseTFC.name=Лашадь
+entity.pheasantTFC.name=Фазан
+entity.pigTFC.name=Свинья
+entity.sheepTFC.name=Овца
+entity.squidTFC.name=Кальмар
+entity.wolfTFC.name=Волк
 
+entity.blazeTFC.name=Ифрит
+entity.caveSpiderTFC.name=Пещерный паук
+entity.creeperTFC.name=Крипер
+entity.endermanTFC.name=Странник Края
+entity.ghastTFC.name=Гаст
+entity.irongolemTFC.name=Железный голем
+entity.pigZombieTFC.name=Зомби-свиночеловек
+entity.silverfishTFC.name=Чешуйница
+entity.skeletonTFC.name=Скелет
+entity.slimeTFC.name=Слизень
+entity.spiderTFC.name=Паук
+entity.zombieTFC.name=Зомби
 
-#==========
-#= Entity =
-#==========
+entity.arrowTFC.name=Стрела
+entity.standTFC.name=
+entity.barrel.name=
+entity.fallingBlock.name=
+
 entity.notFamiliar=Животное не даст вам сделать это.
 fishingRod.lineTension=Леска вот-вот оборвется!
 fishingRod.lineSnap=Леска оборвалась!
@@ -2325,7 +2327,7 @@ gui.MeltedMetal.Inst0=§bПравый клик §7чтобы залить жид
 gui.PotteryBase.Inst0=Shift + §bправый клик §7чтобы разместить предмет.
 gui.PotteryVesselSmall.Inst0=или §bправый клик §7чтобы открыть сосуд.
 gui.RawHide.Inst0=????
-gui.Chisel.Inst0=
+gui.Chisel.Inst0=Требуется молот в панели быстрого выбора.
 gui.Barrel.MoreItems=§8Ещё... (Зажать §fShift§8)
 
 gui.Nutrient.A=Минерал A
@@ -2475,9 +2477,8 @@ gui.useless=Хлам
 gui.growth=Рост
 gui.mature=Зрелость
 gui.metal.Iron=Железо
-gui.tier=
-gui.temperature=
-gui.progress=
+gui.tier=Уровень
+gui.progress=Прогресс
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Надо использовать под текущей водой.

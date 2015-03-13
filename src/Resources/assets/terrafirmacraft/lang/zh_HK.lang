@@ -2,10 +2,10 @@
 #此檔案是繁體中文的設定檔案 Traditional Chinese. Translated by: diplo from Hong Kong
 # Terrafirmacraft -- 博厚傳說 (博厚載物 群巒疊翠)
 # Terrafirmacraft -- 博厚傳說 Extensive (博) Deep (厚) Legend (傳說) (Extensive and Deep Earth) 博厚所以載物也 (地博厚 天高明)摘自 《中庸》
-# Thanks the developers for developing this game. :-) And thanks Alice_in_Game for keeping up this translation list.
+# Thanks the developers for developing this game. :-) And thanks Alice_in_Game for keeping up this translation list.     # Player can use BetterFonts Mod for better truetype fonts and size
 
 
-generator.TFCDefault=TFC 博厚傳說原設定
+generator.TFCDefault=TFC 博厚傳說原設定(博厚載物 群巒疊翠)
 generator.TFCFlat=TFC 博厚傳說平坦世界設定
 generator.TFCAmplified=TFC 博厚傳說放大世界設定
 generator.TFCLargeBiomes=TFC 博厚傳說巨大生態區域設定
@@ -18,36 +18,38 @@ death.attack.alcohol=%1$s 死於酒精中毒
 death.attack.heatStroke=%1$s 死於中暑
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=烏賊(魷魚) Squid
-entity.cowTFC.name=牛 Cow
-entity.wolfTFC.name=狼 Wolf
 entity.bearTFC.name=熊 Bear
-entity.deerTFC.name=鹿 Deer
 entity.chickenTFC.name=雞 Chicken
-entity.pigTFC.name=豬 Pig
-entity.skeletonTFC.name=骷髏 Skeleton
-entity.zombieTFC.name=殭屍 Zombie
-entity.spiderTFC.name=蜘蛛 Spider
-entity.slimeTFC.name=史萊姆 Slime
-entity.silverfishTFC.name=蠹魚 Silver Fish
-entity.ghastTFC.name=地獄幽靈(地獄水母) Ghast
-entity.caveSpiderTFC.name=洞穴蜘蛛 Cave Spider
-entity.blazeTFC.name=烈焰使者 Blaze
-entity.endermanTFC.name=終界使者 Enderman
-entity.pigZombieTFC.name=殭屍豬人 Pig Zombie
-entity.creeperTFC.name=苦力怕 Creeper
-entity.sheepTFC.name=羊 Sheep
-entity.pheasantTFC.name=野雞 Pheasant
-entity.horseTFC.name=馬 Horse
-entity.irongolemTFC.name=鐵巨人(鐵魔像) Iron Golem
+entity.cowTFC.name=牛 Cow
+entity.deerTFC.name=鹿 Deer
 entity.fishTFC.name=鱸魚 Bass
+entity.horseTFC.name=馬 Horse
+entity.pheasantTFC.name=野雞 Pheasant
+entity.pigTFC.name=豬 Pig
+entity.sheepTFC.name=羊 Sheep
+entity.squidTFC.name=烏賊(魷魚) Squid
+entity.wolfTFC.name=狼 Wolf
 
+entity.blazeTFC.name=烈焰使者 Blaze
+entity.caveSpiderTFC.name=洞穴蜘蛛 Cave Spider
+entity.creeperTFC.name=苦力怕 Creeper
+entity.endermanTFC.name=終界使者 Enderman
+entity.ghastTFC.name=地獄幽靈(地獄水母) Ghast
+entity.irongolemTFC.name=鐵巨人(鐵魔像) Iron Golem
+entity.pigZombieTFC.name=殭屍豬人 Pig Zombie
+entity.silverfishTFC.name=蠹魚 Silver Fish
+entity.skeletonTFC.name=骷髏 Skeleton
+entity.slimeTFC.name=史萊姆 Slime
+entity.spiderTFC.name=蜘蛛 Spider
+entity.zombieTFC.name=殭屍 Zombie
 
-#==========
-#= Entity =
-#==========
+entity.arrowTFC.name=箭
+entity.standTFC.name=
+entity.barrel.name=
+entity.fallingBlock.name=
+
 entity.notFamiliar=這隻動物不讓你這樣做。
 fishingRod.lineTension=快要扯斷魚絲線了!
 fishingRod.lineSnap=魚絲線斷了!
@@ -102,10 +104,10 @@ commands.transferTamed.wrongSender=你不能把動物交給別人!
 #==========
 #= Fluids =
 #==========
-fluid.freshwater=淡水
-fluid.saltwater=鹹水
-fluid.lavatfc=熔岩
-fluid.hotwater=熱水
+fluid.freshwater=淡水(Fresh Water)
+fluid.saltwater=鹹水(Salt Water)
+fluid.lavatfc=熔岩(Lava)
+fluid.hotwater=熱水(Hot Water)
 fluid.beer=啤酒(Beer)
 fluid.cider=蘋果酒(Cider)
 fluid.rum=冧酒(蘭姆酒)(Rum)
@@ -2300,7 +2302,7 @@ gui.Output=取出(Output)
 gui.done=完成
 gui.cancel=取消
 gui.Sluice.Soil=土壤
-gui.Sluice.Overworked=過度篩取
+gui.Sluice.Overworked=過度淘取
 gui.Workbench.Crafting=製作
 gui.overburdened=*負擔太重*
 
@@ -2314,19 +2316,19 @@ gui.Hold=完整(Hold)
 gui.slot=位置
 gui.slot.back=背部
 
-gui.ShowHelp=提示 : 長按 Shift
+gui.ShowHelp=提示 : 長按 §fShift§7
 gui.Help=提示 :
-gui.Clay.Inst0=手持 5 塊或以上 Right Click 製作
-gui.Knife.Inst0=Right Click 方塊的上面
+gui.Clay.Inst0=手持 5 塊或以上 §bRight Click§7 製作
+gui.Knife.Inst0=§bRight Click§7 方塊的上面
 gui.Knife.Inst1=造出一個準備食物的桌面
-gui.Leather.Inst0=用刀Right Click 來切 (隨身必須有刀)
-gui.LooseRock.Inst0=手持 2 塊或以上 Right Click 鑿擊
+gui.Leather.Inst0=用刀§bRight Click§7 來切 (隨身必須有刀)
+gui.LooseRock.Inst0=手持 2 塊或以上 §bRight Click§7 鑿擊
 gui.MeltedMetal.Inst0=§b右鍵§7以注入模具或混合金屬
-gui.PotteryBase.Inst0=按 Shift (Sneak) 及 Right Click 放置
-gui.PotteryVesselSmall.Inst0=或 Right Click以查看及更改載著的物品
+gui.PotteryBase.Inst0=按 §bShift (Sneak)§7 及 §bRight Click§7 放置
+gui.PotteryVesselSmall.Inst0=或 §bRight Click§7以查看及更改載著的物品
 gui.RawHide.Inst0=????
-gui.Chisel.Inst0=
-gui.Barrel.MoreItems=更多 (按著 Shift)
+gui.Chisel.Inst0=快捷列(hotbar)上要有鎚
+gui.Barrel.MoreItems=§8更多... (按著 §fShift§7)
 
 gui.Nutrient.A=養份A
 gui.Nutrient.B=養份B
@@ -2364,8 +2366,8 @@ gui.food.salted=鹽醃
 gui.FoodHeat.Cold=涼
 gui.FoodHeat.Warm=溫暖
 
-gui.showtaste=味道: (按著 L-CTRL)
-gui.taste=味道:
+gui.showtaste=§8味道: (按著 §fL-CTRL§8)
+gui.taste=§8味道:
 gui.taste.sweet=甜
 gui.taste.sour=酸
 gui.taste.salty=鹹
@@ -2475,9 +2477,8 @@ gui.useless=無用
 gui.growth=生長
 gui.mature=成熟
 gui.metal.Iron=鐵
-gui.tier=
-gui.temperature=
-gui.progress=
+gui.tier=級別
+gui.progress=進度
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=必須在流水中淘
