@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
+import com.bioxx.tfc.Items.Tools.ItemJavelin;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
@@ -94,8 +95,11 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 	{
 		super.onUpdate();
 		if(!worldObj.isRemote && this.isDead)
-			if(this.ticksExisted < 1200)
+		{
+			int maxDamage = this.pickupItem instanceof ItemJavelin ? this.pickupItem.getMaxDamage() : 1;
+			if (this.ticksExisted < 1200 && maxDamage > this.damageTaken)
 				this.isDead = false;
+		}
 	}
 
 	@Override
