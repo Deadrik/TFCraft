@@ -1,8 +1,5 @@
 package com.bioxx.tfc.Handlers.Client;
 
-import java.util.List;
-
-import com.bioxx.tfc.GUI.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +9,32 @@ import net.minecraftforge.client.event.GuiOpenEvent;
 
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
+import com.bioxx.tfc.GUI.GuiAnvil;
+import com.bioxx.tfc.GUI.GuiBarrel;
+import com.bioxx.tfc.GUI.GuiBlastFurnace;
+import com.bioxx.tfc.GUI.GuiBlueprint;
+import com.bioxx.tfc.GUI.GuiCalendar;
+import com.bioxx.tfc.GUI.GuiChestTFC;
+import com.bioxx.tfc.GUI.GuiCrucible;
+import com.bioxx.tfc.GUI.GuiCustomNametag;
+import com.bioxx.tfc.GUI.GuiFirepit;
+import com.bioxx.tfc.GUI.GuiFoodPrep;
+import com.bioxx.tfc.GUI.GuiForge;
+import com.bioxx.tfc.GUI.GuiGrill;
+import com.bioxx.tfc.GUI.GuiInventoryTFC;
+import com.bioxx.tfc.GUI.GuiKnapping;
+import com.bioxx.tfc.GUI.GuiLargeVessel;
+import com.bioxx.tfc.GUI.GuiLogPile;
+import com.bioxx.tfc.GUI.GuiMold;
+import com.bioxx.tfc.GUI.GuiNestBox;
+import com.bioxx.tfc.GUI.GuiPlanSelection;
+import com.bioxx.tfc.GUI.GuiQuern;
+import com.bioxx.tfc.GUI.GuiQuiver;
+import com.bioxx.tfc.GUI.GuiScreenHorseInventoryTFC;
+import com.bioxx.tfc.GUI.GuiSluice;
+import com.bioxx.tfc.GUI.GuiVessel;
+import com.bioxx.tfc.GUI.GuiVesselLiquid;
+import com.bioxx.tfc.GUI.GuiWorkbench;
 import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEBlastFurnace;
@@ -97,20 +120,13 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 			return new GuiNestBox(player.inventory, ((TENestBox)te), world, x, y, z);
 		case 42:
 		{
-			if (player.isRiding() && player.ridingEntity instanceof EntityHorseTFC)
+			if (player.ridingEntity instanceof EntityHorseTFC)
 			{
 				EntityHorseTFC horse = (EntityHorseTFC) player.ridingEntity;
 				horse.updateChestSaddle();
 				return new GuiScreenHorseInventoryTFC(player.inventory, horse.getHorseChest(), horse);
 			}
 
-			List<EntityHorseTFC> list = player.worldObj.getEntitiesWithinAABB(EntityHorseTFC.class, player.boundingBox.expand(2, 2, 2));
-			if(list.size() > 0)
-			{
-				EntityHorseTFC horse = (EntityHorseTFC) list.get(0);
-				horse.updateChestSaddle();
-				return new GuiScreenHorseInventoryTFC(player.inventory, horse.getHorseChest(), horse);
-			}
 			return null;
 		}
 		case 43:

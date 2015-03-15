@@ -1,7 +1,5 @@
 package com.bioxx.tfc.Handlers;
 
-import java.util.List;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -151,18 +149,12 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 42:
 		{
-			if (player.isRiding() && player.ridingEntity instanceof EntityHorseTFC)
+			if (player.ridingEntity instanceof EntityHorseTFC)
 			{
 				EntityHorseTFC horse = (EntityHorseTFC) player.ridingEntity;
 				return new ContainerHorseInventoryTFC(player.inventory, horse.getHorseChest(), horse);
 			}
 
-			List<EntityHorseTFC> list = player.worldObj.getEntitiesWithinAABB(EntityHorseTFC.class, player.boundingBox.expand(2, 2, 2));
-			if(list.size() > 0)
-			{
-				EntityHorseTFC horse = (EntityHorseTFC) list.get(0);
-				return new ContainerHorseInventoryTFC(player.inventory, horse.getHorseChest(), horse);
-			}
 			return null;
 		}
 		case 43:
