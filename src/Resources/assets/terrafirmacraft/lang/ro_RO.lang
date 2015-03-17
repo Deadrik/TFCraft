@@ -18,36 +18,38 @@ death.attack.alcohol=%1$s a murit de intoxicație cu alcool
 death.attack.heatStroke=%1$s a murit de insolație
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=Calmar
-entity.cowTFC.name=Vacă
-entity.wolfTFC.name=Lup
 entity.bearTFC.name=Urs
-entity.deerTFC.name=Cerb
 entity.chickenTFC.name=Găină
-entity.pigTFC.name=Porc
-entity.skeletonTFC.name=Schelet
-entity.zombieTFC.name=Zombi
-entity.spiderTFC.name=Păianjen
-entity.slimeTFC.name=Mâzgă
-entity.silverfishTFC.name=Peștișor argintiu
-entity.ghastTFC.name=Ghast
-entity.caveSpiderTFC.name=Păianjen de peșteră
-entity.blazeTFC.name=Dogoreală
-entity.endermanTFC.name=Enderman
-entity.pigZombieTFC.name=Zombi porc
-entity.creeperTFC.name=Creeper
-entity.sheepTFC.name=Oaie
-entity.pheasantTFC.name=Fazan
-entity.horseTFC.name=Cal
-entity.irongolemTFC.name=Golem de fier
+entity.cowTFC.name=Vacă
+entity.deerTFC.name=Cerb
 entity.fishTFC.name=Biban
+entity.horseTFC.name=Cal
+entity.pheasantTFC.name=Fazan
+entity.pigTFC.name=Porc
+entity.sheepTFC.name=Oaie
+entity.squidTFC.name=Calmar
+entity.wolfTFC.name=Lup
 
+entity.blazeTFC.name=Dogoreală
+entity.caveSpiderTFC.name=Păianjen de peșteră
+entity.creeperTFC.name=Creeper
+entity.endermanTFC.name=Enderman
+entity.ghastTFC.name=Ghast
+entity.irongolemTFC.name=Golem de fier
+entity.pigZombieTFC.name=Zombi porc
+entity.silverfishTFC.name=Peștișor argintiu
+entity.skeletonTFC.name=Schelet
+entity.slimeTFC.name=Mâzgă
+entity.spiderTFC.name=Păianjen
+entity.zombieTFC.name=Zombi
 
-#==========
-#= Entity =
-#==========
+entity.arrowTFC.name=Săgeată
+entity.standTFC.name=
+entity.barrel.name=
+entity.fallingBlock.name=
+
 entity.notFamiliar=Animalul nu te lasă să faci asta!
 fishingRod.lineTension=Se va rupe firul!
 fishingRod.lineSnap=S-a rupt firul!
@@ -2325,7 +2327,7 @@ gui.MeltedMetal.Inst0=Dă §bclic dreapta §7ca să torni sau să combini.
 gui.PotteryBase.Inst0=Furișează-te și dă §bclic dreapta §7ca să așezi obiectul.
 gui.PotteryVesselSmall.Inst0=Sau dă §bclic dreapta §7ca să deschizi inventarul.
 gui.RawHide.Inst0=????
-gui.Chisel.Inst0=
+gui.Chisel.Inst0=Necesită un ciocan în bara de acțiune.
 gui.Barrel.MoreItems=§8Mai multe... (Ține apăsat pe §fShift§8)
 
 gui.Nutrient.A=Nutrimentul A
@@ -2475,9 +2477,8 @@ gui.useless=Inutil
 gui.growth=Creștere
 gui.mature=Matur
 gui.metal.Iron=Fier
-gui.tier=
-gui.temperature=
-gui.progress=
+gui.tier=Nivel
+gui.progress=Progres
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Trebuie folosit sub apă curgătoare.

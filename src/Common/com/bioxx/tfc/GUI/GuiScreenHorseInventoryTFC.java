@@ -1,13 +1,11 @@
 package com.bioxx.tfc.GUI;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
-import org.lwjgl.opengl.GL11;
-
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
 
@@ -15,22 +13,20 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiScreenHorseInventoryTFC extends GuiContainer
+public class GuiScreenHorseInventoryTFC extends GuiContainerTFC
 {
-	private static final ResourceLocation horseGuiTextures = new ResourceLocation("textures/gui/container/horse.png");
-	private IInventory field_110413_u;
-	private IInventory field_110412_v;
+	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_horse.png");
+	private IInventory invHorse;
 	private EntityHorseTFC horse;
 	private float field_110416_x;
 	private float field_110415_y;
 
-	public GuiScreenHorseInventoryTFC(IInventory playerInv, IInventory horseInv, EntityHorseTFC horse)
+	public GuiScreenHorseInventoryTFC(InventoryPlayer playerInv, IInventory horseInv, EntityHorseTFC entityHorse)
 	{
-		super(new ContainerHorseInventoryTFC(playerInv, horseInv, horse));
-		this.field_110413_u = playerInv;
-		this.field_110412_v = horseInv;
-		this.horse = horse;
-		this.allowUserInput = false;
+		super(new ContainerHorseInventoryTFC(playerInv, horseInv, entityHorse), 176, 85);
+		this.invHorse = horseInv;
+		this.horse = entityHorse;
+		this.allowUserInput = false; // Not sure why this is here
 	}
 	/**
 	 * Draw the foreground layer for the GuiContainer (everything in front of the items)
@@ -38,8 +34,9 @@ public class GuiScreenHorseInventoryTFC extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		this.fontRendererObj.drawString(this.field_110412_v.hasCustomInventoryName() ? this.field_110412_v.getInventoryName() : I18n.format(this.field_110412_v.getInventoryName(), new Object[0]), 8, 6, 4210752);
-		this.fontRendererObj.drawString(this.field_110413_u.hasCustomInventoryName() ? this.field_110413_u.getInventoryName() : I18n.format(this.field_110413_u.getInventoryName(), new Object[0]), 8, this.ySize - 96 + 2, 4210752);
+		// Draw name at the top of the inventory for named horses.
+		if (this.horse.hasCustomNameTag())
+			this.fontRendererObj.drawString(this.horse.getCustomNameTag(), 8, 6, 4210752);
 	}
 
 	/**
@@ -48,30 +45,31 @@ public class GuiScreenHorseInventoryTFC extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
 	{
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.getTextureManager().bindTexture(horseGuiTextures);
-		int k = (this.width - this.xSize) / 2;
-		int l = (this.height - this.ySize) / 2;
-		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
+		this.drawGui(texture);
+	}
 
-		if (this.horse.isChested())
+	@Override
+	protected void drawForeground(int guiLeft, int guiTop)
+	{
+		if (this.horse.isChested()) // Draw chest slots for chested donkeys
 		{
-			this.drawTexturedModalRect(k + 79, l + 17, 0, this.ySize, 90, 54);
+			this.drawTexturedModalRect(guiLeft + 79, guiTop + 17, 0, this.getShiftedYSize() + 1, 90, 54);
 		}
 
-		if (this.horse.func_110259_cr())
+		if (this.horse.func_110259_cr()) // Draw armor slot for standard horses
 		{
-			this.drawTexturedModalRect(k + 7, l + 35, 0, this.ySize + 54, 18, 18);
+			this.drawTexturedModalRect(guiLeft + 7, guiTop + 35, 0, this.getShiftedYSize() + 55, 18, 18);
 		}
 
-		GuiInventory.func_147046_a(k + 51, l + 60, 17, (float)(k + 51) - this.field_110416_x, (float)(l + 75 - 50) - this.field_110415_y, this.horse);
+		// Draw the horse in the box.
+		GuiInventory.func_147046_a(guiLeft + 51, guiTop + 60, 17, (float) (guiLeft + 51) - this.field_110416_x, (float) (guiTop + 75 - 50) - this.field_110415_y, this.horse);
 	}
 
 	/**
 	 * Draws the screen and all the components in it.
 	 */
 	@Override
-	public void drawScreen(int par1, int par2, float par3)
+	public void drawScreen(int par1, int par2, float par3) // Don't know what this does, but not removing it
 	{
 		this.field_110416_x = (float)par1;
 		this.field_110415_y = (float)par2;

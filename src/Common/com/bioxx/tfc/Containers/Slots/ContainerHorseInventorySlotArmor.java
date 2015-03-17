@@ -1,38 +1,42 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
-
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
+import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ContainerHorseInventorySlotArmor extends Slot
 {
-    final EntityHorse theHorse;
+    final EntityHorse horse;
 
-    final ContainerHorseInventoryTFC field_111240_b;
+    final ContainerHorseInventoryTFC horseContainer;
 
-    public ContainerHorseInventorySlotArmor(ContainerHorseInventoryTFC par1ContainerHorseInventory, IInventory par2IInventory, int par3, int par4, int par5, EntityHorse par6EntityHorse)
+    public ContainerHorseInventorySlotArmor(ContainerHorseInventoryTFC containerHorseInv, IInventory horseInv, int i, int j, int k, EntityHorse entityHorse)
     {
-        super(par2IInventory, par3, par4, par5);
-        this.field_111240_b = par1ContainerHorseInventory;
-        this.theHorse = par6EntityHorse;
+        super(horseInv, i, j, k);
+        this.horseContainer = containerHorseInv;
+        this.horse = entityHorse;
     }
 
     /**
      * Check if the stack is a valid item for this slot. Always true beside for the armor slots.
      */
-    public boolean isItemValid(ItemStack par1ItemStack)
+	@Override
+	public boolean isItemValid(ItemStack itemStack)
     {
-        return false;// && this.theHorse.func_110259_cr(); // && EntityHorse.func_110211_v(par1ItemStack);
+		return super.isItemValid(itemStack) && horse.func_110259_cr()/*Standard Horse*/&& EntityHorseTFC.func_146085_a(itemStack.getItem()/*Item is Horse Armor*/);
     }
 
-    @SideOnly(Side.CLIENT)
-    public boolean func_111238_b()
+    @Override
+	@SideOnly(Side.CLIENT)
+	public boolean func_111238_b() // No clue what this is for
     {
-        return this.theHorse.func_110259_cr();
+        return this.horse.func_110259_cr();
     }
 }

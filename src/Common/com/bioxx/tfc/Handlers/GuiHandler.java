@@ -1,7 +1,5 @@
 package com.bioxx.tfc.Handlers;
 
-import java.util.List;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -43,9 +41,9 @@ import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
+import com.bioxx.tfc.TileEntities.TESluice;
 import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
-import com.bioxx.tfc.TileEntities.TESluice;
 import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
 
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -151,12 +149,12 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 42:
 		{
-			List list = player.worldObj.getEntitiesWithinAABB(EntityHorseTFC.class, player.boundingBox.expand(2, 2, 2));
-			if(list.size() > 0)
+			if (player.ridingEntity instanceof EntityHorseTFC)
 			{
-				EntityHorseTFC horse = (EntityHorseTFC) list.get(0);
+				EntityHorseTFC horse = (EntityHorseTFC) player.ridingEntity;
 				return new ContainerHorseInventoryTFC(player.inventory, horse.getHorseChest(), horse);
 			}
+
 			return null;
 		}
 		case 43:

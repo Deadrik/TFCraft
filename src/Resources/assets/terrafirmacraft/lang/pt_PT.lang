@@ -18,36 +18,38 @@ death.attack.alcohol=%1$s morreu de envenenamento por álcool
 death.attack.heatStroke=%1$s morreu de insolação
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=Lula
-entity.cowTFC.name=Vaca
-entity.wolfTFC.name=Lobo
 entity.bearTFC.name=Urso
-entity.deerTFC.name=Veado
 entity.chickenTFC.name=Galinha
-entity.pigTFC.name=Porco
-entity.skeletonTFC.name=Esqueleto
-entity.zombieTFC.name=Zombi
-entity.spiderTFC.name=Aranha
-entity.slimeTFC.name=Slime
-entity.silverfishTFC.name=Bicho-da-prata
-entity.ghastTFC.name=Ghast
-entity.caveSpiderTFC.name=Aranha da Caverna
-entity.blazeTFC.name=Blaze
-entity.endermanTFC.name=Enderman
-entity.pigZombieTFC.name=Porco Zombi
-entity.creeperTFC.name=Creeper
-entity.sheepTFC.name=Ovelha
-entity.pheasantTFC.name=Faisão
-entity.horseTFC.name=Cavalo
-entity.irongolemTFC.name=Golem de Ferro
+entity.cowTFC.name=Vaca
+entity.deerTFC.name=Veado
 entity.fishTFC.name=Peixe
+entity.horseTFC.name=Cavalo
+entity.pheasantTFC.name=Faisão
+entity.pigTFC.name=Porco
+entity.sheepTFC.name=Ovelha
+entity.squidTFC.name=Lula
+entity.wolfTFC.name=Lobo
 
+entity.blazeTFC.name=Blaze
+entity.caveSpiderTFC.name=Aranha da Caverna
+entity.creeperTFC.name=Creeper
+entity.endermanTFC.name=Enderman
+entity.ghastTFC.name=Ghast
+entity.irongolemTFC.name=Golem de Ferro
+entity.pigZombieTFC.name=Porco Zombi
+entity.silverfishTFC.name=Bicho-da-prata
+entity.skeletonTFC.name=Esqueleto
+entity.slimeTFC.name=Slime
+entity.spiderTFC.name=Aranha
+entity.zombieTFC.name=Zombi
 
-#==========
-#= Entity =
-#==========
+entity.arrowTFC.name=Flecha
+entity.standTFC.name=
+entity.barrel.name=
+entity.fallingBlock.name=
+
 entity.notFamiliar=O animal não vai deixar você fazer isso.
 fishingRod.lineTension=A corda vai se romper!
 fishingRod.lineSnap=A corda rompeu!
@@ -906,7 +908,7 @@ item.Log.Acacia.name=Madeira de Acácia
 item.Log.Ash.name=Madeira de Freixo
 item.Log.Aspen.name=Madeira de Choupo
 item.Log.Birch.name=Madeira de Bétula
-item.Log.Chestnut.name=Madeira de Castanheira
+item.Log.Chestnut.name=Madeira de Castanheiro
 item.Log.Douglas Fir.name=Madeira de Abeto de Douglas
 item.Log.Hickory.name=Madeira de Nogueira
 item.Log.Kapok.name=Madeira de Mafumeira
@@ -997,7 +999,7 @@ tile.Chest.Acacia.name=Baú de Acacia
 tile.Chest.Ash.name=Baú de Freixo
 tile.Chest.Aspen.name=Baú de Choupo
 tile.Chest.Birch.name=Baú de Bétula
-tile.Chest.Chestnut.name=Baú de Castanheira
+tile.Chest.Chestnut.name=Baú de Castanheiro
 tile.Chest.Douglas Fir.name=Baú de Abeto de Douglas
 tile.Chest.Hickory.name=Baú de Nogueira
 tile.Chest.Kapok.name=Baú de Mafumeira
@@ -2314,7 +2316,7 @@ gui.Hold=Manter
 gui.slot=Espaço
 gui.slot.back=Costas
 
-gui.ShowHelp=§8Ajuda: (Segurar§fShift§8)
+gui.ShowHelp=§8Ajuda: (Segurar §fShift§8)
 gui.Help=§8Ajuda:
 gui.Clay.Inst0=§bClique BD§7com uma pilha de 5 para moldar.
 gui.Knife.Inst0=§bRight Click §7em cima do bloco para
@@ -2325,7 +2327,7 @@ gui.MeltedMetal.Inst0=§bClique BD§7para despejar num molde de ferramenta.
 gui.PotteryBase.Inst0=Agache e §bClique BD§7para colocar objeto.
 gui.PotteryVesselSmall.Inst0=Ou §bClique BD§7para abrir inventário.
 gui.RawHide.Inst0=????
-gui.Chisel.Inst0=
+gui.Chisel.Inst0=Requer um martelo na hotbar.
 gui.Barrel.MoreItems=§8Mais... (Segure §fShift§8)
 
 gui.Nutrient.A=Nutriente A
@@ -2475,9 +2477,8 @@ gui.useless=Inútil
 gui.growth=Crescimento
 gui.mature=Maduro
 gui.metal.Iron=Ferro
-gui.tier=
-gui.temperature=
-gui.progress=
+gui.tier=Camada
+gui.progress=Progresso
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Deve ser usado sob água corrente
@@ -2489,7 +2490,7 @@ gui.ProPick.Found=Encontrado
 gui.ProPick.FoundTraces=Encontrado traços de
 gui.ProPick.FoundSmall=Encontrada uma amostra pequena de
 gui.ProPick.FoundMedium=Encontrada uma amostra média de
-gui.ProPick.FoundLarge=Encontrado uma amostra grande de
+gui.ProPick.FoundLarge=Encontrada uma amostra grande de
 gui.ProPick.FoundVeryLarge=Encontrada uma amostra muito grande de
 gui.ProPick.FoundNothing=Nada foi encontrado de interesse.
 

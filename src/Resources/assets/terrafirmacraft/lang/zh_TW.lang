@@ -18,36 +18,38 @@ death.attack.alcohol=%1$s 死於酒精中毒
 death.attack.heatStroke=%1$s 死於中暑
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=烏賊
-entity.cowTFC.name=牛
-entity.wolfTFC.name=狼
 entity.bearTFC.name=熊
-entity.deerTFC.name=鹿
 entity.chickenTFC.name=雞
-entity.pigTFC.name=豬
-entity.skeletonTFC.name=骷髏
-entity.zombieTFC.name=殭屍
-entity.spiderTFC.name=蜘蛛
-entity.slimeTFC.name=史萊姆
-entity.silverfishTFC.name=蠹魚
-entity.ghastTFC.name=地獄幽靈
-entity.caveSpiderTFC.name=洞穴蜘蛛
-entity.blazeTFC.name=烈焰使者
-entity.endermanTFC.name=終界使者
-entity.pigZombieTFC.name=殭屍豬人
-entity.creeperTFC.name=苦力怕
-entity.sheepTFC.name=羊
-entity.pheasantTFC.name=野雞
-entity.horseTFC.name=馬
-entity.irongolemTFC.name=鐵巨人
+entity.cowTFC.name=牛
+entity.deerTFC.name=鹿
 entity.fishTFC.name=鱸魚
+entity.horseTFC.name=馬
+entity.pheasantTFC.name=野雞
+entity.pigTFC.name=豬
+entity.sheepTFC.name=羊
+entity.squidTFC.name=烏賊
+entity.wolfTFC.name=狼
 
+entity.blazeTFC.name=烈焰使者
+entity.caveSpiderTFC.name=洞穴蜘蛛
+entity.creeperTFC.name=苦力怕
+entity.endermanTFC.name=終界使者
+entity.ghastTFC.name=地獄幽靈
+entity.irongolemTFC.name=鐵巨人
+entity.pigZombieTFC.name=殭屍豬人
+entity.silverfishTFC.name=蠹魚
+entity.skeletonTFC.name=骷髏
+entity.slimeTFC.name=史萊姆
+entity.spiderTFC.name=蜘蛛
+entity.zombieTFC.name=殭屍
 
-#==========
-#= Entity =
-#==========
+entity.arrowTFC.name=箭矢
+entity.standTFC.name=
+entity.barrel.name=
+entity.fallingBlock.name=
+
 entity.notFamiliar=這隻動物不會理你。
 fishingRod.lineTension=線快被拉斷了！
 fishingRod.lineSnap=線被扯斷了！
@@ -2300,7 +2302,7 @@ gui.Output=取出
 gui.done=完成
 gui.cancel=取消
 gui.Sluice.Soil=砂土
-gui.Sluice.Overworked=過度勞累
+gui.Sluice.Overworked=過度淘取
 gui.Workbench.Crafting=製作
 gui.overburdened=*負擔過重*
 
@@ -2325,7 +2327,7 @@ gui.MeltedMetal.Inst0=§b右鍵§7以注入模具或混合金屬
 gui.PotteryBase.Inst0=按住§bShift(潛行)§7並§b右鍵§7以放置物品
 gui.PotteryVesselSmall.Inst0=或§b右鍵§7開啟隨身物品
 gui.RawHide.Inst0=????
-gui.Chisel.Inst0=
+gui.Chisel.Inst0=快捷列(hotbar)上要有鎚子
 gui.Barrel.MoreItems=§8詳細… (按住§fShift§8)
 
 gui.Nutrient.A=養分A
@@ -2475,9 +2477,8 @@ gui.useless=無用
 gui.growth=成長中
 gui.mature=成熟
 gui.metal.Iron=鐵
-gui.tier=
-gui.temperature=
-gui.progress=
+gui.tier=級別
+gui.progress=進度
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=必須於流水中使用。

@@ -18,36 +18,38 @@ death.attack.alcohol=%1$s ha muerto por intoxicación etílica.
 death.attack.heatStroke=%1$s ha muerto por un golpe de calor.
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=Calamar
-entity.cowTFC.name=Vaca
-entity.wolfTFC.name=Lobo
 entity.bearTFC.name=Oso
-entity.deerTFC.name=Ciervo
 entity.chickenTFC.name=Pollo
-entity.pigTFC.name=Cerdo
-entity.skeletonTFC.name=Esqueleto
-entity.zombieTFC.name=Zombi
-entity.spiderTFC.name=Araña
-entity.slimeTFC.name=Slime
-entity.silverfishTFC.name=Lepisma
-entity.ghastTFC.name=Ghast
-entity.caveSpiderTFC.name=Araña de Cueva
-entity.blazeTFC.name=Blaze
-entity.endermanTFC.name=Enderman
-entity.pigZombieTFC.name=Hombrecerdo Zombie
-entity.creeperTFC.name=Creeper
-entity.sheepTFC.name=Oveja
-entity.pheasantTFC.name=Faisán
-entity.horseTFC.name=Caballo
-entity.irongolemTFC.name=Golem De Hierro
+entity.cowTFC.name=Vaca
+entity.deerTFC.name=Ciervo
 entity.fishTFC.name=Perca
+entity.horseTFC.name=Caballo
+entity.pheasantTFC.name=Faisán
+entity.pigTFC.name=Cerdo
+entity.sheepTFC.name=Oveja
+entity.squidTFC.name=Calamar
+entity.wolfTFC.name=Lobo
 
+entity.blazeTFC.name=Blaze
+entity.caveSpiderTFC.name=Araña de Cueva
+entity.creeperTFC.name=Creeper
+entity.endermanTFC.name=Enderman
+entity.ghastTFC.name=Ghast
+entity.irongolemTFC.name=Golem De Hierro
+entity.pigZombieTFC.name=Hombrecerdo Zombie
+entity.silverfishTFC.name=Lepisma
+entity.skeletonTFC.name=Esqueleto
+entity.slimeTFC.name=Slime
+entity.spiderTFC.name=Araña
+entity.zombieTFC.name=Zombi
 
-#==========
-#= Entity =
-#==========
+entity.arrowTFC.name=Flecha
+entity.standTFC.name=
+entity.barrel.name=
+entity.fallingBlock.name=
+
 entity.notFamiliar=El animal se niega.
 fishingRod.lineTension=¡El sedal se va a partir!
 fishingRod.lineSnap=¡El sedal se partió!
@@ -2476,7 +2478,6 @@ gui.growth=Maduración
 gui.mature=Maduro
 gui.metal.Iron=Fierro
 gui.tier=
-gui.temperature=
 gui.progress=
 
 #== Chat Messages ==
