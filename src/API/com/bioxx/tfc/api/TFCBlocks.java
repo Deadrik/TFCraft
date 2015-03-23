@@ -62,6 +62,7 @@ public class TFCBlocks
 	public static int smokeRackRenderId;
 	public static int oilLampRenderId;
 	public static int WallRenderId;
+	public static int HopperRenderId;
 
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -226,6 +227,7 @@ public class TFCBlocks
 	public static Block SmokeRack;
 	public static Block Snow;
 	public static Block OilLamp;
+	public static Block Hopper;
 
 
 	public static boolean isBlockVSupport(Block block)

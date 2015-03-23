@@ -62,6 +62,7 @@ import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEFruitLeaves;
 import com.bioxx.tfc.TileEntities.TEGrill;
+import com.bioxx.tfc.TileEntities.TEHopper;
 import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.TileEntities.TELeatherRack;
 import com.bioxx.tfc.TileEntities.TELightEmitter;
@@ -165,6 +166,8 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TELightEmitter.class, "LightEmitter");
 		GameRegistry.registerTileEntity(TESmokeRack.class, "Smoke Rack");
 		GameRegistry.registerTileEntity(TEOilLamp.class, "Oil Lamp");
+		GameRegistry.registerTileEntity(TEHopper.class, "HopperTFC");
+
 		if(b)
 		{
 			GameRegistry.registerTileEntity(TEFirepit.class, "TerraFirepit");

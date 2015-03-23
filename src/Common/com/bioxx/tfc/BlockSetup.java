@@ -35,6 +35,7 @@ import com.bioxx.tfc.Blocks.Devices.BlockEarlyBloomery;
 import com.bioxx.tfc.Blocks.Devices.BlockFirepit;
 import com.bioxx.tfc.Blocks.Devices.BlockForge;
 import com.bioxx.tfc.Blocks.Devices.BlockGrill;
+import com.bioxx.tfc.Blocks.Devices.BlockHopper;
 import com.bioxx.tfc.Blocks.Devices.BlockLargeVessel;
 import com.bioxx.tfc.Blocks.Devices.BlockLeatherRack;
 import com.bioxx.tfc.Blocks.Devices.BlockLoom;
@@ -301,6 +302,7 @@ public class BlockSetup extends TFCBlocks
 		GameRegistry.registerBlock(SmokeRack, "SmokeRack");
 		GameRegistry.registerBlock(Snow, "Snow");
 		GameRegistry.registerBlock(OilLamp, ItemOilLamp.class, "OilLamp");
+		GameRegistry.registerBlock(Hopper, "Hopper");
 	}
 
 	public static void LoadBlocks()
@@ -528,6 +530,7 @@ public class BlockSetup extends TFCBlocks
 		SmokeRack = new BlockSmokeRack().setHardness(0F).setBlockName("SmokeRack");
 
 		OilLamp = new BlockOilLamp().setHardness(1F).setBlockName("OilLamp");
+		Hopper = new BlockHopper().setHardness(2F).setBlockName("Hopper");
 
 		StoneIgIn.setHarvestLevel("pickaxe", 0);
 		StoneIgEx.setHarvestLevel("pickaxe", 0);
