@@ -684,6 +684,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			{
 				worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			}
+			this.hunger += 24000;
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();

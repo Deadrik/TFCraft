@@ -17,7 +17,6 @@ import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -383,7 +382,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 			{
 				player.inventory.setInventorySlotContents(player.inventory.currentItem,(((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
 			}
-
+			this.hunger += 24000;
 			this.func_146082_f(player);
 			return true;
 		}
@@ -459,13 +458,9 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	@Override
 	public void onStruckByLightning(EntityLightningBolt par1EntityLightningBolt)
 	{
-		if (!this.worldObj.isRemote)
-		{
-			EntityPigZombie var2 = new EntityPigZombie(this.worldObj);
-			var2.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-			this.worldObj.spawnEntityInWorld(var2);
-			this.setDead();
-		}
+		// Dealing standard fire damage to override vanilla pig's zombie pigman conversion.
+		this.dealFireDamage(5);
+		this.setFire(8);
 	}
 
 	/**
@@ -755,6 +750,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 			{
 				worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			}
+			this.hunger += 24000;
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();

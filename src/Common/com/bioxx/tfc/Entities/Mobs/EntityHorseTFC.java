@@ -451,7 +451,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		{
 			if (!player.capabilities.isCreativeMode)
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, (((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
-
+			this.hunger += 24000;
 			this.setInLove(true);
 			return true;
 		}
@@ -1169,6 +1169,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			{
 				worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			}
+			this.hunger += 24000;
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();

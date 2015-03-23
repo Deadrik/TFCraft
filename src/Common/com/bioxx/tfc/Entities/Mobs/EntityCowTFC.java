@@ -421,7 +421,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			{
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, (((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
 			}
-
+			this.hunger += 24000;
 			this.func_146082_f(player);
 			return true;
 		}
@@ -714,6 +714,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			{
 				worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			}
+			this.hunger += 24000;
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();
