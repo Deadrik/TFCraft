@@ -20,6 +20,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.TileEntities.TEHopper;
@@ -131,8 +132,7 @@ public class BlockHopper extends BlockTerraContainer
 
 			if (tileentityhopper != null)
 			{
-				//Open Gui
-				//player.func_146093_a(tileentityhopper);
+				player.openGui(TerraFirmaCraft.instance, 49, world, x, y, z);
 			}
 
 			return true;

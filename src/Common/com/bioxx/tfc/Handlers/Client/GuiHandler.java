@@ -21,6 +21,7 @@ import com.bioxx.tfc.GUI.GuiFirepit;
 import com.bioxx.tfc.GUI.GuiFoodPrep;
 import com.bioxx.tfc.GUI.GuiForge;
 import com.bioxx.tfc.GUI.GuiGrill;
+import com.bioxx.tfc.GUI.GuiHopper;
 import com.bioxx.tfc.GUI.GuiInventoryTFC;
 import com.bioxx.tfc.GUI.GuiKnapping;
 import com.bioxx.tfc.GUI.GuiLargeVessel;
@@ -44,6 +45,7 @@ import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEGrill;
+import com.bioxx.tfc.TileEntities.TEHopper;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
 import com.bioxx.tfc.TileEntities.TESluice;
@@ -141,6 +143,10 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 			return new GuiLargeVessel(player.inventory, ((TEVessel) te), world, x, y, z, 1);
 		case 48:
 			return new GuiCustomNametag(player, world, x, y, z);
+		case 49:
+		{
+			return new GuiHopper(player.inventory, ((TEHopper) te), world, x, y, z);
+		}
 		default:
 			return null;
 		}

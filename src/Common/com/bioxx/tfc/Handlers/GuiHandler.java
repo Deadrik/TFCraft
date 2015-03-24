@@ -13,6 +13,7 @@ import com.bioxx.tfc.Containers.ContainerFirepit;
 import com.bioxx.tfc.Containers.ContainerFoodPrep;
 import com.bioxx.tfc.Containers.ContainerForge;
 import com.bioxx.tfc.Containers.ContainerGrill;
+import com.bioxx.tfc.Containers.ContainerHopper;
 import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
 import com.bioxx.tfc.Containers.ContainerLargeVessel;
 import com.bioxx.tfc.Containers.ContainerLiquidVessel;
@@ -39,6 +40,7 @@ import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEGrill;
+import com.bioxx.tfc.TileEntities.TEHopper;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
 import com.bioxx.tfc.TileEntities.TESluice;
@@ -169,6 +171,14 @@ public class GuiHandler implements IGuiHandler
 			return new ContainerLargeVessel(player.inventory, ((TEVessel) te), world, x, y, z, 0);
 		case 47:
 			return new ContainerLargeVessel(player.inventory, ((TEVessel) te), world, x, y, z, 1);
+		case 48:
+		{
+			return null;//guinametag
+		}
+		case 49:
+		{
+			return new ContainerHopper(player.inventory, ((TEHopper) te));
+		}
 		default:
 		{
 			return null;
