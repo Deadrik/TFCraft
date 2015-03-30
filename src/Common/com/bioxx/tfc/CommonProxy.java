@@ -166,7 +166,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TELightEmitter.class, "LightEmitter");
 		GameRegistry.registerTileEntity(TESmokeRack.class, "Smoke Rack");
 		GameRegistry.registerTileEntity(TEOilLamp.class, "Oil Lamp");
-		GameRegistry.registerTileEntity(TEHopper.class, "HopperTFC");
+
 
 		if(b)
 		{
@@ -182,6 +182,7 @@ public class CommonProxy
 			GameRegistry.registerTileEntity(TileEntityQuern.class, "Quern");
 			GameRegistry.registerTileEntity(TELoom.class, "Loom");
 			GameRegistry.registerTileEntity(TEGrill.class, "grill");
+			GameRegistry.registerTileEntity(TEHopper.class, "HopperTFC");
 		}
 
 		EntityRegistry.registerGlobalEntityID(EntitySquidTFC.class, "squidTFC", EntityRegistry.findGlobalUniqueEntityId(), 0x3c5466, 0x260026);

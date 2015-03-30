@@ -134,6 +134,7 @@ import com.bioxx.tfc.Render.TESR.TESRChest;
 import com.bioxx.tfc.Render.TESR.TESRFirepit;
 import com.bioxx.tfc.Render.TESR.TESRFoodPrep;
 import com.bioxx.tfc.Render.TESR.TESRGrill;
+import com.bioxx.tfc.Render.TESR.TESRHopper;
 import com.bioxx.tfc.Render.TESR.TESRIngotPile;
 import com.bioxx.tfc.Render.TESR.TESRLoom;
 import com.bioxx.tfc.Render.TESR.TESRPottery;
@@ -147,6 +148,7 @@ import com.bioxx.tfc.TileEntities.TEChest;
 import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEGrill;
+import com.bioxx.tfc.TileEntities.TEHopper;
 import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.TileEntities.TELoom;
 import com.bioxx.tfc.TileEntities.TEPottery;
@@ -309,6 +311,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.registerTileEntity(TileEntityQuern.class, "Quern", new TESRQuern());
 		ClientRegistry.registerTileEntity(TEGrill.class, "GrillTESR", new TESRGrill());
 		ClientRegistry.registerTileEntity(TESmokeRack.class, "SmokeRackTESR", new TESRSmokeRack());
+		ClientRegistry.registerTileEntity(TEHopper.class, "HopperTESR", new TESRHopper());
 	}
 
 	@Override

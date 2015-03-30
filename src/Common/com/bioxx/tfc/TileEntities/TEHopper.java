@@ -21,6 +21,8 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Blocks.Devices.BlockChestTFC;
 import com.bioxx.tfc.Blocks.Devices.BlockHopper;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.TFCBlocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -30,24 +32,27 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	private ItemStack[] storage = new ItemStack[5];
 	private String customName;
 	private int cooldown = -1;
+	private int pressCooldown = -1;
+	public ItemStack pressBlock;
+
 	public TEHopper()
 	{
 
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound p_145839_1_)
+	public void readFromNBT(NBTTagCompound nbt)
 	{
-		super.readFromNBT(p_145839_1_);
-		NBTTagList nbttaglist = p_145839_1_.getTagList("Items", 10);
+		super.readFromNBT(nbt);
+		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 		this.storage = new ItemStack[this.getSizeInventory()];
 
-		if (p_145839_1_.hasKey("CustomName", 8))
+		if (nbt.hasKey("CustomName", 8))
 		{
-			this.customName = p_145839_1_.getString("CustomName");
+			this.customName = nbt.getString("CustomName");
 		}
 
-		this.cooldown = p_145839_1_.getInteger("TransferCooldown");
+		this.cooldown = nbt.getInteger("TransferCooldown");
 
 		for (int i = 0; i < nbttaglist.tagCount(); ++i)
 		{
@@ -59,12 +64,15 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 				this.storage[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 			}
 		}
+
+		this.pressCooldown = nbt.getInteger("pressCooldown");
+		this.pressBlock = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("pressBlock"));
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound p_145841_1_)
+	public void writeToNBT(NBTTagCompound nbt)
 	{
-		super.writeToNBT(p_145841_1_);
+		super.writeToNBT(nbt);
 		NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < this.storage.length; ++i)
@@ -78,12 +86,21 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 			}
 		}
 
-		p_145841_1_.setTag("Items", nbttaglist);
-		p_145841_1_.setInteger("TransferCooldown", this.cooldown);
+		nbt.setTag("Items", nbttaglist);
+		nbt.setInteger("TransferCooldown", this.cooldown);
 
 		if (this.hasCustomInventoryName())
 		{
-			p_145841_1_.setString("CustomName", this.customName);
+			nbt.setString("CustomName", this.customName);
+		}
+
+		nbt.setInteger("pressCooldown", this.pressCooldown);
+
+		if(pressBlock != null)
+		{
+			NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+			pressBlock.writeToNBT(nbttagcompound1);
+			nbt.setTag("pressBlock", nbttagcompound1);
 		}
 	}
 
@@ -243,11 +260,27 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		if (this.worldObj != null && !this.worldObj.isRemote)
 		{
 			--this.cooldown;
+			--this.pressCooldown;
 
 			if (!this.isCoolingDown())
 			{
 				this.setCooldown(0);
 				this.feed();
+			}
+			Block blockAbove = worldObj.getBlock(xCoord, yCoord+1, zCoord);
+			if(blockAbove != null)
+			{
+				if(pressBlock != null)
+				{
+					TFC_Core.setBlockToAirWithDrops(worldObj, xCoord, yCoord+1, zCoord);
+				}
+				else if (blockAbove == TFCBlocks.StoneIgInSmooth || blockAbove == TFCBlocks.StoneSedSmooth ||
+						blockAbove == TFCBlocks.StoneMMSmooth || blockAbove == TFCBlocks.StoneIgExSmooth)
+				{
+					pressBlock = new ItemStack(blockAbove, 1, worldObj.getBlockMetadata(xCoord, yCoord+1, zCoord));
+					worldObj.setBlockToAir(xCoord, yCoord+1, zCoord);
+					this.broadcastPacketInRange();
+				}
 			}
 		}
 	}
@@ -690,14 +723,41 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 
 	@Override
 	public void handleInitPacket(NBTTagCompound nbt) {
-		// TODO Auto-generated method stub
-
+		if(nbt.hasKey("pressBlock"))
+		{
+			this.pressBlock = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("pressBlock"));
+		}
 	}
 
 	@Override
-	public void createInitNBT(NBTTagCompound nbt) {
-		// TODO Auto-generated method stub
+	public void createInitNBT(NBTTagCompound nbt) 
+	{
+		if(pressBlock != null)
+		{
+			NBTTagCompound pb = new NBTTagCompound();
+			pressBlock.writeToNBT(pb);
+			nbt.setTag("pressBlock", pb);
+		}
+	}
 
+	@Override
+	public void handleDataPacket(NBTTagCompound nbt)
+	{
+		if(nbt.hasKey("pressBlock"))
+		{
+			this.pressBlock = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("pressBlock"));
+		}
+	}
+
+	@Override
+	public void createDataNBT(NBTTagCompound nbt)
+	{
+		if(pressBlock != null)
+		{
+			NBTTagCompound pb = new NBTTagCompound();
+			pressBlock.writeToNBT(pb);
+			nbt.setTag("pressBlock", pb);
+		}
 	}
 
 	@Override

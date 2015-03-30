@@ -165,13 +165,13 @@ public class BlockHopper extends BlockTerraContainer
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
 	{
-		TEHopper tileentityhopper = (TEHopper)world.getTileEntity(x, y, z);
+		TEHopper te = (TEHopper)world.getTileEntity(x, y, z);
 
-		if (tileentityhopper != null)
+		if (te != null)
 		{
-			for (int i1 = 0; i1 < tileentityhopper.getSizeInventory(); ++i1)
+			for (int i1 = 0; i1 < te.getSizeInventory(); ++i1)
 			{
-				ItemStack itemstack = tileentityhopper.getStackInSlot(i1);
+				ItemStack itemstack = te.getStackInSlot(i1);
 
 				if (itemstack != null)
 				{
@@ -204,7 +204,11 @@ public class BlockHopper extends BlockTerraContainer
 					}
 				}
 			}
-
+			if(te.pressBlock != null)
+			{
+				EntityItem entityitem = new EntityItem(world, (double)((float)x+0.5), (double)((float)y + 0.5), (double)((float)z + 0.5), te.pressBlock);
+				world.spawnEntityInWorld(entityitem);
+			}
 			world.func_147453_f(x, y, z, block);
 		}
 
