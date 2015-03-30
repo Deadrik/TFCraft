@@ -8,17 +8,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidContainerItem;
 
-import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCFluids;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
+import com.bioxx.tfc.api.Util.Helper;
 
-public class ItemOilLamp extends ItemTerraBlock implements ISmeltable
+public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidContainerItem
 {
 	public ItemOilLamp(Block par1)
 	{
@@ -30,7 +32,7 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable
 	public int getDisplayDamage(ItemStack is)
 	{
 		FluidStack fuel = FluidStack.loadFluidStackFromNBT(is.getTagCompound());
-		return fuel.amount;
+		return getMaxDamage(is) - fuel.amount;
 	}
 
 	@Override
@@ -121,7 +123,7 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable
 		if(is.hasTagCompound())
 		{
 			FluidStack fs = FluidStack.loadFluidStackFromNBT(is.getTagCompound());
-			arraylist.add((fs.amount/(250/TFC_Time.daysInYear))+" Days Remaining ("+(fs.amount/250f)+")");
+			arraylist.add(((fs.amount)*TFCOptions.oilLampFuelMult)+" Hours Remaining ("+Helper.roundNumber((fs.amount/250f)*100f, 10)+"%)");
 		}
 	}
 
@@ -131,5 +133,76 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable
 		FluidStack fs = new FluidStack(TFCFluids.OLIVEOIL, 250);
 		is.setTagCompound(fs.writeToNBT(new NBTTagCompound()));
 		return is;
+	}
+
+	@Override
+	public FluidStack getFluid(ItemStack container) 
+	{
+		return FluidStack.loadFluidStackFromNBT(container.getTagCompound());
+	}
+
+	@Override
+	public int getCapacity(ItemStack container) 
+	{
+		return 250;
+	}
+
+	@Override
+	public int fill(ItemStack container, FluidStack resource, boolean doSim) 
+	{
+		FluidStack fs = getFluid(container);
+		int inAmt = 0;
+		if(fs != null)
+		{
+			int max = getCapacity(container) - fs.amount;
+			if(max > 0)
+			{
+				inAmt = Math.min(max, resource.amount);
+				if(doSim)
+				{
+					fs.amount += inAmt;
+					if(container.getTagCompound() == null)
+						container.setTagCompound(new NBTTagCompound());
+					fs.writeToNBT(container.getTagCompound());
+				}
+			}
+		}
+		else 
+		{
+			inAmt = Math.min(getCapacity(container), resource.amount);
+			if(doSim)
+			{
+				fs = resource.copy();
+				fs.amount = inAmt;
+				if(container.getTagCompound() == null)
+					container.setTagCompound(new NBTTagCompound());
+				fs.writeToNBT(container.getTagCompound());
+			}
+		}
+		return inAmt;
+	}
+
+	@Override
+	public FluidStack drain(ItemStack container, int maxDrain, boolean doSim) 
+	{
+		FluidStack fs = getFluid(container);
+		FluidStack fsOut = fs.copy();
+		if(fs != null)
+			fsOut.amount = Math.min(maxDrain, fs.amount);
+		if(doSim && fsOut != null)
+		{
+			if(fs.amount - fsOut.amount <= 0)
+			{
+				container.stackTagCompound = null;
+			}
+			else
+			{
+				fs.amount -= fsOut.amount;
+				if(container.getTagCompound() == null)
+					container.setTagCompound(new NBTTagCompound());
+				fs.writeToNBT(container.getTagCompound());
+			}
+		}
+		return fsOut;
 	}
 }
