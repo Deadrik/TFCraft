@@ -1632,6 +1632,7 @@ public class Recipes
 		manager.addPlan("grill", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.DRAWSECONDFROMLAST, RuleEnum.DRAWTHIRDFROMLAST}));
 		manager.addPlan("shears", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.HITTHIRDFROMLAST}));
 		manager.addPlan("oillamp", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.BENDSECONDFROMLAST, RuleEnum.DRAWTHIRDFROMLAST}));
+		manager.addPlan("hopper", new PlanRecipe(new RuleEnum[]{RuleEnum.UPSETLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.BENDTHIRDFROMLAST}));
 
 		addWeldRecipes(manager);
 
@@ -1931,6 +1932,7 @@ public class Recipes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SterlingSilverIngot), null,"oillamp", AnvilReq.COPPER, new ItemStack(TFCBlocks.OilLamp, 1, 4)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), null,"oillamp", AnvilReq.BLUESTEEL, new ItemStack(TFCBlocks.OilLamp, 1, 5)));
 
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronSheet2x), new ItemStack(TFCItems.WroughtIronSheet2x),"hopper", AnvilReq.WROUGHTIRON, new ItemStack(TFCBlocks.Hopper, 1, 0)));
 	}
 
 	private static void addTrapDoor(Item sheet, int index)

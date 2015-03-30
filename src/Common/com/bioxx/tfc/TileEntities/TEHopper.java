@@ -272,6 +272,8 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		{
 			--this.cooldown;
 
+			TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
+
 			if(pressCooldown > 0)
 			{
 				--this.pressCooldown;

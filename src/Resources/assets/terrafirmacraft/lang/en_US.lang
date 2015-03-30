@@ -2541,3 +2541,4 @@ tile.OilLamp.RoseGold.name=Rose Gold Oil Lamp
 tile.OilLamp.Silver.name=Silver Oil Lamp
 tile.OilLamp.SterlingSilver.name=Sterling Silver Oil Lamp
 tile.OilLamp.BlueSteel.name=Blue Steel Oil Lamp
+gui.plans.hopper=Hopper
