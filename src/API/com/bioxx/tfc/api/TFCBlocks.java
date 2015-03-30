@@ -213,6 +213,7 @@ public class TFCBlocks
 	public static Block Cactus;
 	public static Block Reeds;
 	public static Block Pumpkin;
+	public static Block LitPumpkin;
 	public static Block ButtonWood;
 	public static Block Vine;
 	public static Block LeatherRack;

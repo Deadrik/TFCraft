@@ -187,7 +187,7 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.carpet, 2, 0), new Object[] { "$$", Character.valueOf('$'), "materialCloth" }));
 
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Blocks.lit_pumpkin, 1), "blockTorch", "blockPumpkin"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCBlocks.LitPumpkin, 1), "blockTorch", "blockPumpkin"));
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.GlassBottle, 3), new Object[]
 				{ "# #", " # ", Character.valueOf('#'), new ItemStack(Blocks.glass) });

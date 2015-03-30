@@ -2035,6 +2035,7 @@ tile.Fungi.mushroom_brown.name=Brown Mushroom
 tile.Fungi.mushroom_red.name=Red Mushroom
 tile.Cactus.name=Cactus
 tile.Pumpkin.name=Pumpkin
+tile.LitPumpkin.name=Jack o'Lantern
 tile.Moss.name=Moss
 tile.Thatch.name=Thatch
 tile.Flora.Golden Rod.name=Goldenrod

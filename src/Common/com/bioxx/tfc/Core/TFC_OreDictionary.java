@@ -458,5 +458,7 @@ public class TFC_OreDictionary
 
 		OreDictionary.registerOre("blockPumpkin", new ItemStack(Blocks.pumpkin));
 		OreDictionary.registerOre("blockPumpkin", new ItemStack(TFCBlocks.Pumpkin));
+		OreDictionary.registerOre("blockLitPumpkin", new ItemStack(Blocks.lit_pumpkin));
+		OreDictionary.registerOre("blockLitPumpkin", new ItemStack(TFCBlocks.LitPumpkin));
 	}
 }
