@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TEHopper;
 import com.bioxx.tfc.api.TFCBlocks;
 
@@ -122,17 +123,27 @@ public class BlockHopper extends BlockTerraContainer
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
 	{
+		TEHopper te = getHopperTE(world, x, y, z);
 		if (world.isRemote)
 		{
+			if (te != null && te.pressBlock != null && player.isSneaking())
+			{
+				te.pressBlock = null;
+				te.pressCooldown = 0;
+			}
 			return true;
 		}
 		else
 		{
-			TEHopper tileentityhopper = getHopperTE(world, x, y, z);
-
-			if (tileentityhopper != null)
+			if (te != null && te.pressCooldown == 0)
 			{
 				player.openGui(TerraFirmaCraft.instance, 49, world, x, y, z);
+			}
+			else if (te != null && te.pressBlock != null && player.isSneaking())
+			{
+				TFC_Core.giveItemToPlayer(te.pressBlock, player);
+				te.pressBlock = null;
+				te.pressCooldown = 0;
 			}
 
 			return true;
@@ -175,10 +186,6 @@ public class BlockHopper extends BlockTerraContainer
 
 				if (itemstack != null)
 				{
-					float f = this.random.nextFloat() * 0.8F + 0.1F;
-					float f1 = this.random.nextFloat() * 0.8F + 0.1F;
-					float f2 = this.random.nextFloat() * 0.8F + 0.1F;
-
 					while (itemstack.stackSize > 0)
 					{
 						int j1 = this.random.nextInt(21) + 10;
@@ -189,7 +196,7 @@ public class BlockHopper extends BlockTerraContainer
 						}
 
 						itemstack.stackSize -= j1;
-						EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
+						EntityItem entityitem = new EntityItem(world, (double)((float)x + 0.5f), (double)((float)y + 0.5f), (double)((float)z + 0.5f), new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
 
 						if (itemstack.hasTagCompound())
 						{
@@ -197,9 +204,6 @@ public class BlockHopper extends BlockTerraContainer
 						}
 
 						float f3 = 0.05F;
-						entityitem.motionX = (double)((float)this.random.nextGaussian() * f3);
-						entityitem.motionY = (double)((float)this.random.nextGaussian() * f3 + 0.2F);
-						entityitem.motionZ = (double)((float)this.random.nextGaussian() * f3);
 						world.spawnEntityInWorld(entityitem);
 					}
 				}

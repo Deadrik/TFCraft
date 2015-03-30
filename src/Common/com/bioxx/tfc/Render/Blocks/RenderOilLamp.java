@@ -17,7 +17,8 @@ public class RenderOilLamp implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
-		renderer.setRenderBounds(0.3125, 0.0, 0.3125, 0.6875, 0.0625F, 0.6875);
+		renderer.renderAllFaces = true;
+		renderer.setRenderBounds(0.275, 0.0, 0.275, 0.725, 0.0625F, 0.725);
 		renderer.renderStandardBlock(block, x, y, z);
 		renderer.setRenderBounds(0.25, 0.0625, 0.25, 0.75, 0.375F, 0.75);
 		renderer.renderStandardBlock(block, x, y, z);
@@ -27,6 +28,7 @@ public class RenderOilLamp implements ISimpleBlockRenderingHandler
 		renderer.renderStandardBlock(block, x, y, z);
 		renderer.setRenderBounds(0.46875, 0.5, 0.46875, 0.53125, 0.5625F, 0.53125);
 		renderer.renderStandardBlock(block, x, y, z);
+		renderer.renderAllFaces = false;
 		return true;
 	}
 

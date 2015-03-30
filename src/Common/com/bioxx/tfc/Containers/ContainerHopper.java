@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 
@@ -24,6 +25,31 @@ public class ContainerHopper extends ContainerTFC
 		}
 
 		PlayerInventory.buildInventoryLayout(this, playerInv, 8, 54, false, true);
+	}
+
+	@Override
+	public ItemStack transferStackInSlotTFC(EntityPlayer entityplayer, int i)
+	{
+		Slot slot = (Slot)inventorySlots.get(i);
+		if(slot != null && slot.getHasStack())
+		{
+			ItemStack itemstack1 = slot.getStack();
+			if(i < 5)
+			{
+				if(!this.mergeItemStack(itemstack1, 5, this.inventorySlots.size(), true))
+					return null;
+			}
+			else
+			{
+				if(!this.mergeItemStack(itemstack1, 0, 5, false)){return null;}
+			}
+
+			if(itemstack1.stackSize == 0)
+				slot.putStack(null);
+			else
+				slot.onSlotChanged();
+		}
+		return null;
 	}
 
 	@Override

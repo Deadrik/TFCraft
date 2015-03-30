@@ -2532,3 +2532,11 @@ error.Contact=Please report to TerraFirmaCraft Support.
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+tile.Hopper.name=Hopper
+fluid.oliveoil=Olive Oil
+tile.OilLamp.Gold.name=Gold Oil Lamp
+tile.OilLamp.Platinum.name=Platinum Oil Lamp
+tile.OilLamp.RoseGold.name=Rose Gold Oil Lamp
+tile.OilLamp.Silver.name=Silver Oil Lamp
+tile.OilLamp.SterlingSilver.name=Sterling Silver Oil Lamp
+tile.OilLamp.BlueSteel.name=Blue Steel Oil Lamp

@@ -386,6 +386,8 @@ public class TerraFirmaCraft
 
 		TFCOptions.simSpeedNoPlayers = TFCOptions.getIntFor(config, "Server", "simSpeedNoPlayers", 100, "For every X number of ticks provided here, when there are no players online the server will only progress by 1 tick. (Default: 100) Time advances 100 times slower than normal. Setting this to less than 1 will turn this feature off.");
 
+		TFCOptions.oilLampFuelMult = TFCOptions.getIntFor(config, "General", "oilLampFuelMult", 8, "This determines how much fuel is used over time from oil lamps. Setting this higher will make fuel last longer. A mult of 1 = 250 hours, 4 = 1000 hours, 8 = 2000 hours.");
+
 		/**Always end with this*/
 		if (config != null)
 			config.save();

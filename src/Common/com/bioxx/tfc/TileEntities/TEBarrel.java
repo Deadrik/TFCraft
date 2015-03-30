@@ -197,6 +197,11 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		return count;
 	}
 
+	public boolean canAcceptLiquids()
+	{
+		return this.getInvCount() == 0;
+	}
+
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer)
 	{

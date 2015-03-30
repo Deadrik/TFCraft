@@ -6,12 +6,10 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.TileEntities.TEOilLamp;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCFluids;
@@ -25,7 +23,7 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable
 	public ItemOilLamp(Block par1)
 	{
 		super(par1);
-		this.MetaNames = new String[]{"Gold", "Platinum", "Rose Gold", "Silver", "Sterling Silver", "Blue Steel"};
+		this.MetaNames = new String[]{"Gold", "Platinum", "RoseGold", "Silver", "SterlingSilver", "BlueSteel"};
 	}
 
 	@Override
@@ -47,7 +45,7 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable
 	@Override
 	public int getMaxDamage(ItemStack is)
 	{
-		return 1000;
+		return 250;
 	}
 
 	@Override
@@ -104,24 +102,13 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		int xCoord = x; int yCoord = y; int zCoord = z;
-		if (side == 0) --zCoord;
-		if (side == 1) ++zCoord;
-		if (side == 2) --zCoord;
-		if (side == 3) ++zCoord;
-		if (side == 4) --xCoord;
-		if (side == 5) ++xCoord;
+		if (side == 0) --yCoord;
+		else if (side == 1) ++yCoord;
+		else return false;
 		Block block = world.getBlock(xCoord, yCoord, zCoord);
 		if(world.isAirBlock(xCoord, yCoord, zCoord))
 		{
-			if(super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ))
-			{
-				TileEntity _t =  world.getTileEntity(xCoord, yCoord, zCoord);
-				if(_t != null && _t instanceof TEOilLamp)
-				{
-					((TEOilLamp)_t).fuel = FluidStack.loadFluidStackFromNBT(is.getTagCompound());
-					((TEOilLamp)_t).hourPlaced = (int)TFC_Time.getTotalHours();
-				}
-			}
+			return super.onItemUse(is, player, world, xCoord, yCoord, zCoord, side, hitX, hitY, hitZ);
 		}
 
 		return false;
@@ -134,14 +121,14 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable
 		if(is.hasTagCompound())
 		{
 			FluidStack fs = FluidStack.loadFluidStackFromNBT(is.getTagCompound());
-			arraylist.add((fs.amount/(1000/TFC_Time.daysInYear))+" Days Remaining ("+(fs.amount/1000f)+")");
+			arraylist.add((fs.amount/(250/TFC_Time.daysInYear))+" Days Remaining ("+(fs.amount/250f)+")");
 		}
 	}
 
 	public static ItemStack GetFullLamp(int meta)
 	{
 		ItemStack is = new ItemStack(TFCBlocks.OilLamp, 1, meta);
-		FluidStack fs = new FluidStack(TFCFluids.OLIVEOIL, 1000);
+		FluidStack fs = new FluidStack(TFCFluids.OLIVEOIL, 250);
 		is.setTagCompound(fs.writeToNBT(new NBTTagCompound()));
 		return is;
 	}

@@ -18,12 +18,14 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Facing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.Blocks.Devices.BlockChestTFC;
 import com.bioxx.tfc.Blocks.Devices.BlockHopper;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.TFCItems;
 
 import cpw.mods.fml.relauncher.Side;
@@ -259,12 +261,38 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	@Override
 	public void updateEntity()
 	{
-		if(pressCooldown > 0)
-			--this.pressCooldown;
-
-		if (this.worldObj != null && !this.worldObj.isRemote)
+		if (this.worldObj.isRemote)
+		{
+			if(pressCooldown > 0)
+				--this.pressCooldown;
+			else
+				this.pressBlock = null;
+		}
+		else if (this.worldObj != null && !this.worldObj.isRemote)
 		{
 			--this.cooldown;
+
+			if(pressCooldown > 0)
+			{
+				--this.pressCooldown;
+				if(pressCooldown % 20 == 0)
+					press();
+			}
+			else if(pressCooldown == 0 && pressBlock != null)
+			{
+				for(int i = 0; i < storage.length; i++)
+				{
+					if(storage[i] == null || (ItemStack.areItemStacksEqual(storage[i], pressBlock) && storage[i].stackSize < storage[i].getMaxStackSize()))
+					{
+						if(storage[i] == null)
+							storage[i] = pressBlock;
+						else
+							storage[i].stackSize++;
+						this.pressBlock = null;
+						break;
+					}
+				}
+			}
 
 			if (!this.isCoolingDown())
 			{
@@ -272,7 +300,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 				this.feed();
 			}
 			Block blockAbove = worldObj.getBlock(xCoord, yCoord+1, zCoord);
-			if(blockAbove != null)
+			if(blockAbove != null && this.hasPressableItem() > 0)
 			{
 				if(pressBlock != null)
 				{
@@ -290,17 +318,36 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		}
 	}
 
-	private void beginPressing()
+	private void press()
 	{
-		int pressWeight = hasPressable();
-		if(pressWeight > 0)
+		TEBarrel barrel = null;
+		if(worldObj.getBlock(xCoord, yCoord-1, zCoord) == TFCBlocks.Barrel)
+			barrel = (TEBarrel) worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
+
+		ItemStack item = getPressableItem();
+		if(item != null)
 		{
-			this.pressCooldown += pressWeight * 20;
-			sendCooldownPacket();
+			if(item.stackSize > 0)
+				Food.setWeight(item, Food.getWeight(item) - 0.64f);//0.64 per cycle leads to 250mB per stack of olives
+
+			if(barrel != null && barrel.canAcceptLiquids() && !barrel.getSealed())
+			{
+				barrel.addLiquid(new FluidStack(TFCFluids.OLIVEOIL, 1));
+			}
 		}
 	}
 
-	public int hasPressable()
+	private void beginPressing()
+	{
+		int pressWeight = hasPressableItem();
+		if(pressWeight > 0)
+		{
+			this.pressCooldown += pressWeight/0.64f * 20;
+			sendCooldownPacket();	
+		}
+	}
+
+	public int hasPressableItem()
 	{
 		int amount = 0;
 		for(int i = 0; i < storage.length; i++)
@@ -311,6 +358,18 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 			}
 		}
 		return amount;
+	}
+
+	public ItemStack getPressableItem()
+	{
+		for(int i = 0; i < storage.length; i++)
+		{
+			if(storage[i] != null && storage[i].getItem() == TFCItems.Olive)
+			{
+				return storage[i];
+			}
+		}
+		return null;
 	}
 
 	public boolean feed()

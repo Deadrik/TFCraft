@@ -280,7 +280,7 @@ public class CommonProxy
 		TFCFluids.MILK = new FluidBaseTFC("milk").setBaseColor(0xffffff);
 		TFCFluids.MILKCURDLED = new FluidBaseTFC("milkcurdled").setBaseColor(0xfffbe8);
 		TFCFluids.MILKVINEGAR = new FluidBaseTFC("milkvinegar").setBaseColor(0xfffbe8);
-		TFCFluids.OLIVEOIL = new FluidBaseTFC("oliveoil").setBaseColor(0x44B510);
+		TFCFluids.OLIVEOIL = new FluidBaseTFC("oliveoil").setBaseColor(0x6a7537);
 
 		FluidRegistry.registerFluid(TFCFluids.LAVA);
 		FluidRegistry.registerFluid(TFCFluids.SALTWATER);
@@ -322,12 +322,13 @@ public class CommonProxy
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.VODKA, 250), new ItemStack(TFCItems.Vodka), new ItemStack(TFCItems.GlassBottle));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.MILK, 1000), new ItemStack(TFCItems.WoodenBucketMilk), new ItemStack(TFCItems.WoodenBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.VINEGAR, 1000), new ItemStack(TFCItems.Vinegar), new ItemStack(TFCItems.WoodenBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(0), new ItemStack(TFCBlocks.OilLamp, 1, 0));//Gold
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(1), new ItemStack(TFCBlocks.OilLamp, 1, 1));//Platinum
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(2), new ItemStack(TFCBlocks.OilLamp, 1, 2));//RoseGold
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(3), new ItemStack(TFCBlocks.OilLamp, 1, 3));//Silver
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(4), new ItemStack(TFCBlocks.OilLamp, 1, 4));//Sterling Silver
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(5), new ItemStack(TFCBlocks.OilLamp, 1, 5));//BlueSteel
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(0), new ItemStack(TFCBlocks.OilLamp, 1, 0));//Gold
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(1), new ItemStack(TFCBlocks.OilLamp, 1, 1));//Platinum
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(2), new ItemStack(TFCBlocks.OilLamp, 1, 2));//RoseGold
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(3), new ItemStack(TFCBlocks.OilLamp, 1, 3));//Silver
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(4), new ItemStack(TFCBlocks.OilLamp, 1, 4));//Sterling Silver
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(5), new ItemStack(TFCBlocks.OilLamp, 1, 5));//BlueSteel
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.LAVA, 250), ItemOilLamp.GetFullLamp(5), new ItemStack(TFCBlocks.OilLamp, 1, 5));//BlueSteel
 	}
 
 	public void registerToolClasses()
