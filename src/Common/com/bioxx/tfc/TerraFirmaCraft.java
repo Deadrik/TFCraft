@@ -109,7 +109,7 @@ public class TerraFirmaCraft
 		BlockSetup.LoadBlocks();
 		BlockSetup.RegisterBlocks();
 		BlockSetup.setupFire();
-		loadOre();
+
 
 		//Register Key Bindings(Client only)
 		proxy.registerKeys();
@@ -247,7 +247,7 @@ public class TerraFirmaCraft
 		//This is used by vanilla furnice and many other mods.
 		ItemSetup.registerFurniceFuel();
 		GameRegistry.registerFuelHandler(new TFCFuelHandler());
-		
+
 		//WAILA stuff
 		proxy.registerWailaClasses();
 	}
@@ -256,6 +256,7 @@ public class TerraFirmaCraft
 	public void postInit (FMLPostInitializationEvent evt)
 	{
 		packetPipeline.postInitialise();
+		loadOre();
 	}
 
 	@EventHandler
