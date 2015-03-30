@@ -61,7 +61,8 @@ public class ItemSluice extends ItemTerra
 				if(world.getBlock(i, j+1, k) == TFCBlocks.Sluice)
 				{
 					world.setBlock(i + byte0, j+1, k + byte1, TFCBlocks.Sluice, r + 8, 0x2);
-					entityplayer.inventory.decrStackSize(entityplayer.inventory.currentItem, 1);
+					if (!entityplayer.capabilities.isCreativeMode)
+						entityplayer.inventory.decrStackSize(entityplayer.inventory.currentItem, 1);
 				}
 				return true;
 			}
