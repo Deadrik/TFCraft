@@ -66,7 +66,7 @@ public class AnvilManager
 		for (int k = 0; k < recipes.size(); k++)
 		{
 			AnvilRecipe irecipe = (AnvilRecipe)recipes.get(k);
-			if (irecipe.matches(recipe))
+			if (irecipe != null && irecipe.matches(recipe))
 				return irecipe;
 		}
 
@@ -78,7 +78,7 @@ public class AnvilManager
 		for (int k = 0; k < recipesWeld.size(); k++)
 		{
 			AnvilRecipe irecipe = (AnvilRecipe)recipesWeld.get(k);
-			if (irecipe.matches(recipe))
+			if (irecipe != null && irecipe.matches(recipe))
 				return irecipe;
 		}
 
@@ -90,7 +90,7 @@ public class AnvilManager
 		for (int k = 0; k < recipes.size(); k++)
 		{
 			AnvilRecipe irecipe = (AnvilRecipe)recipes.get(k);
-			if (irecipe.isComplete(instance, recipe, rules))
+			if (irecipe != null && irecipe.isComplete(instance, recipe, rules))
 				return new Object[] {irecipe, irecipe.getCraftingResult(recipe.input1)};
 		}
 
@@ -102,7 +102,7 @@ public class AnvilManager
 		for (int k = 0; k < recipesWeld.size(); k++)
 		{
 			AnvilRecipe irecipe = (AnvilRecipe)recipesWeld.get(k);
-			if (irecipe.matches(recipe))
+			if (irecipe != null && irecipe.matches(recipe))
 				return irecipe.getCraftingResult(recipe.input1);
 		}
 
