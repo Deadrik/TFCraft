@@ -22,7 +22,9 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Blocks.Devices.BlockChestTFC;
 import com.bioxx.tfc.Blocks.Devices.BlockHopper;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -32,7 +34,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	private ItemStack[] storage = new ItemStack[5];
 	private String customName;
 	private int cooldown = -1;
-	private int pressCooldown = -1;
+	public int pressCooldown = 0;
 	public ItemStack pressBlock;
 
 	public TEHopper()
@@ -257,10 +259,12 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	@Override
 	public void updateEntity()
 	{
+		if(pressCooldown > 0)
+			--this.pressCooldown;
+
 		if (this.worldObj != null && !this.worldObj.isRemote)
 		{
 			--this.cooldown;
-			--this.pressCooldown;
 
 			if (!this.isCoolingDown())
 			{
@@ -279,10 +283,34 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 				{
 					pressBlock = new ItemStack(blockAbove, 1, worldObj.getBlockMetadata(xCoord, yCoord+1, zCoord));
 					worldObj.setBlockToAir(xCoord, yCoord+1, zCoord);
-					this.broadcastPacketInRange();
+					sendPressPacket();
+					beginPressing();
 				}
 			}
 		}
+	}
+
+	private void beginPressing()
+	{
+		int pressWeight = hasPressable();
+		if(pressWeight > 0)
+		{
+			this.pressCooldown += pressWeight * 20;
+			sendCooldownPacket();
+		}
+	}
+
+	public int hasPressable()
+	{
+		int amount = 0;
+		for(int i = 0; i < storage.length; i++)
+		{
+			if(storage[i] != null && storage[i].getItem() == TFCItems.Olive)
+			{
+				amount += Math.floor(Food.getWeight(storage[i]));
+			}
+		}
+		return amount;
 	}
 
 	public boolean feed()
@@ -727,6 +755,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		{
 			this.pressBlock = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("pressBlock"));
 		}
+		this.pressCooldown = nbt.getInteger("pressCooldown");
 	}
 
 	@Override
@@ -738,6 +767,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 			pressBlock.writeToNBT(pb);
 			nbt.setTag("pressBlock", pb);
 		}
+		nbt.setInteger("pressCooldown", pressCooldown);
 	}
 
 	@Override
@@ -747,17 +777,31 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		{
 			this.pressBlock = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("pressBlock"));
 		}
+		if(nbt.hasKey("pressCooldown"))
+		{
+			this.pressCooldown = nbt.getInteger("pressCooldown");
+		}
 	}
 
-	@Override
-	public void createDataNBT(NBTTagCompound nbt)
+	@SideOnly(Side.CLIENT)
+	private void sendPressPacket() 
 	{
+		NBTTagCompound nbt = new NBTTagCompound();
 		if(pressBlock != null)
 		{
 			NBTTagCompound pb = new NBTTagCompound();
 			pressBlock.writeToNBT(pb);
 			nbt.setTag("pressBlock", pb);
 		}
+		this.broadcastPacketInRange(this.createDataPacket(nbt));
+	}
+
+	@SideOnly(Side.CLIENT)
+	private void sendCooldownPacket()
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setInteger("pressCooldown", pressCooldown);
+		this.broadcastPacketInRange(this.createDataPacket(nbt));
 	}
 
 	@Override

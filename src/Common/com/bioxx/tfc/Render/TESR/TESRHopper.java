@@ -35,17 +35,15 @@ public class TESRHopper extends TESRBase
 		{
 			if(te.pressBlock != null)
 			{
-
+				float sink = -0.34f + (te.pressCooldown/20/800f)*0.34f;
 				GL11.glPushMatrix(); //start
-				GL11.glTranslatef((float)d + 0.5F, (float)d1 + 1.5F, (float)d2 + 0.5F); //size
+				GL11.glTranslatef((float)d + 0.5F, (float)d1 + 1.33F, (float)d2 + 0.5F); //starting location
 				GL11.glScalef(0.75f, 0.75f, 0.75f);
-				GL11.glTranslatef(0,-0.17f,0); //size
+				GL11.glTranslatef(0,sink,0); //
 				TFC_Core.bindTexture(TextureMap.locationBlocksTexture);
-				//press.render(null, (float)d, (float)d1, (float)d2, 1f, 1f, 1f);
 				GL11.glDisable(GL11.GL_LIGHTING);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				this.renderBlocks.setRenderBoundsFromBlock(TFCBlocks.StoneIgInSmooth);
-				//this.renderBlocks.setRenderBounds(0.125, 0.125, 0.125, 0.875, 0.875, 0.875);
 				renderPress(Block.getBlockFromItem(te.pressBlock.getItem()), te.getWorldObj(), (int)d, (int)d1, (int)d2, te.pressBlock.getItemDamage());
 				GL11.glEnable(GL11.GL_LIGHTING);
 				GL11.glPopMatrix(); //end
