@@ -86,7 +86,7 @@ public class BlockOilLamp extends BlockTerraContainer
 				return TFC_Textures.SheetBlueSteel;
 			else return TFC_Textures.SheetGold;
 		}
-		else return icons[meta];
+		else return icons[m];
 	}
 
 	@Override
