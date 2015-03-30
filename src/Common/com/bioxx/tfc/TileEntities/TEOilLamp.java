@@ -23,6 +23,8 @@ public class TEOilLamp extends TELightEmitter
 
 	public FluidStack getFuel()
 	{
+		if(fuel == null)
+			return null;
 		FluidStack f = fuel.copy();
 		f.amount /= TFCOptions.oilLampFuelMult;
 		return f;
