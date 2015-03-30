@@ -32,7 +32,8 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 	public int getDisplayDamage(ItemStack is)
 	{
 		FluidStack fuel = FluidStack.loadFluidStackFromNBT(is.getTagCompound());
-		return getMaxDamage(is) - fuel.amount;
+		int amt = fuel != null ? fuel.amount : 0;
+		return getMaxDamage(is) - amt;
 	}
 
 	@Override
