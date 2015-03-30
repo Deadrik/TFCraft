@@ -299,7 +299,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 			if (!this.isCoolingDown())
 			{
 				this.setCooldown(0);
-				this.feed();
+				//this.feed();
 			}
 			Block blockAbove = worldObj.getBlock(xCoord, yCoord+1, zCoord);
 			if(blockAbove != null && this.hasPressableItem() > 0)
