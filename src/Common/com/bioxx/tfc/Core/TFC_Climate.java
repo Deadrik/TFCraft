@@ -135,19 +135,23 @@ public class TFC_Climate
 
 	protected static float getTemp(World world,int x, int z)
 	{
-		return getTemp(world, TFC_Time.currentDay,TFC_Time.getHour(), x, z);
+		return getTemp0(world, TFC_Time.currentDay,TFC_Time.getHour(), x, z, false);
 	}
 
 	protected static float getTemp(World world, int day, int hour, int x, int z)
 	{
+		return getTemp0(world, day, hour, x, z, false);
+	}
+	
+	protected static float getBioTemp(World world,int day, int x, int z)
+	{
+		return getTemp0(world, day, 0, x, z, true);
+	}
+	
+	private static float getTemp0(World world, int day, int hour, int x, int z, boolean bio)
+	{
 		if(TFC_Climate.getCacheManager(world) != null)
 		{
-			/*float cacheTemp = TFC_Climate.getCacheManager(world).getTemp(x, z, th);
-			if(cacheTemp != Float.MIN_VALUE)
-			{
-				return cacheTemp;
-			}*/
-
 			float zMod = getZFactor(z);
 			float zTemp = (zMod * getMaxTemperature())-20 + ((zMod - 0.5f)*10);
 
@@ -162,57 +166,29 @@ public class TFC_Climate
 
 			int dayOfMonth = TFC_Time.getDayOfMonthFromDayOfYear(day);
 
-			int h = (hour - 6) % TFC_Time.hoursInDay;
-			if (h < 0) {
-				h += TFC_Time.hoursInDay;
-			}
-			
 			float hourMod;
-			if(h < 12)
-				hourMod = ((float)h / 11) * 0.3F;
-			else
-				hourMod = 0.3F - ((((float)h-12) / 11) * 0.3F);
+			float dailyTemp;
+			if (bio) {
+				hourMod = 0.2f;
+				dailyTemp = 0;
+			} else {
+				int h = (hour - 6) % TFC_Time.hoursInDay;
+				if (h < 0) {
+					h += TFC_Time.hoursInDay;
+				}
 
-			float dailyTemp = WeatherManager.getInstance().getDailyTemp(day);
+				if(h < 12)
+					hourMod = ((float)h / 11) * 0.3F;
+				else
+					hourMod = 0.3F - ((((float)h-12) / 11) * 0.3F);
+				
+				dailyTemp = WeatherManager.getInstance().getDailyTemp(day);
+			}
 
 			float monthDelta = ((monthTemp-lastMonthTemp) * dayOfMonth) / TFC_Time.daysInMonth;
 			float temp = lastMonthTemp + monthDelta;
 
 			temp += dailyTemp + (hourMod*(zTemp + dailyTemp));
-
-			if(temp >= 12)
-				temp += (8*rainMod)*zMod;
-			else
-				temp -= (8*rainMod)*zMod;
-				
-			//TFC_Climate.getCacheManager(world).addTemp(x, z, th, temp);
-			return temp;
-		}
-		return -10;
-	}
-
-	protected static float getBioTemp(World world,int day, int x, int z)
-	{
-		if(TFC_Climate.getCacheManager(world) != null)
-		{
-			float zMod = getZFactor(z);
-			float zTemp = (zMod * getMaxTemperature())-20 + ((zMod - 0.5f)*10);
-
-			float rain = getRainfall(world, x, Global.SEALEVEL, z);
-			float rainMod = (1-(rain/4000))*zMod;
-
-			int month = TFC_Time.getSeasonFromDayOfYear(day,z);
-			int lastMonth = TFC_Time.getSeasonFromDayOfYear(day-TFC_Time.daysInMonth,z);
-			
-			float monthTemp = getMonthTemp(month, z);
-			float lastMonthTemp = getMonthTemp(lastMonth, z);
-
-			int dayOfMonth =  TFC_Time.getDayOfMonthFromDayOfYear(day);
-
-			float hourMod = 0.2f;
-
-			float monthDelta = ((monthTemp-lastMonthTemp) * dayOfMonth) / TFC_Time.daysInMonth;
-			float temp = lastMonthTemp + monthDelta;
 
 			if(temp >= 12)
 				temp += (8*rainMod)*zMod;
@@ -234,7 +210,7 @@ public class TFC_Climate
 
 	protected static float getTempSpecificDay(World world,int day, int x, int z)
 	{
-		return getTemp(world, day,12, x, z);
+		return getTemp(world, day, 12, x, z);
 	}
 
 	public static float getHeightAdjustedTemp(World world, int x, int y, int z)
