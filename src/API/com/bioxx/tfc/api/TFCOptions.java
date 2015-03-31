@@ -20,6 +20,10 @@ public class TFCOptions
 	public static int initialCollapseRatio;
 	public static int propogateCollapseChance;
 	public static boolean enableCaveIns;
+	
+	public static int ravineRarity;
+	public static int lavaFissureRarity;
+	public static int waterFissureRarity;
 
 	public static int yearLength;
 	public static float pitKilnBurnTime = 8.0f;
