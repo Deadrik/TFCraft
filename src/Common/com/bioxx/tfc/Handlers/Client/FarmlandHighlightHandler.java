@@ -226,36 +226,123 @@ public class FarmlandHighlightHandler
 		else if(evt.currentItem != null && evt.currentItem.getItem() instanceof ItemCustomHoe && 
 				PlayerManagerTFC.getInstance().getClientPlayer().hoeMode == 3)
 		{
-			Block b = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
-			if(b == TFCBlocks.Crops && (
-					world.getBlock(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil ||
-					world.getBlock(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil2))
+			SkillRank sr = TFC_Core.getSkillStats(evt.player).getSkillRank(Global.SKILL_AGRICULTURE);
+			if (sr == SkillRank.Expert || sr == SkillRank.Master)
 			{
-				TECrop te = (TECrop) world.getTileEntity(evt.target.blockX, evt.target.blockY, evt.target.blockZ);
-				CropIndex index = CropManager.getInstance().getCropFromId(te.cropId);
-				boolean fullyGrown = index instanceof CropIndexPepper ? te.growth >= index.numGrowthStages - 1 : te.growth >= index.numGrowthStages;
-
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				if(fullyGrown)
-					GL11.glColor4ub((byte)64, (byte)200, (byte)37, (byte)200);
-				else
-					GL11.glColor4ub((byte)200, (byte)37, (byte)37, (byte)200);
-				GL11.glDisable(GL11.GL_CULL_FACE);
-				//GL11.glLineWidth(6.0F);
-				GL11.glDisable(GL11.GL_TEXTURE_2D);
-				GL11.glDepthMask(false);
-
-				drawFace(AxisAlignedBB.getBoundingBox(
-						evt.target.blockX,
-						evt.target.blockY + 0.01,
-						evt.target.blockZ,
-						evt.target.blockX+1,
-						evt.target.blockY + 0.02,
-						evt.target.blockZ+1
-						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
-
-				GL11.glEnable(GL11.GL_CULL_FACE);
+				Block b = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
+				if (b == TFCBlocks.Crops)
+				{
+					TECrop te = (TECrop) world.getTileEntity(evt.target.blockX, evt.target.blockY, evt.target.blockZ);
+					CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
+					
+					int growthStages = crop.numGrowthStages + 1;
+					int growthStage = (int) Math.floor(te.growth) + 1;
+					if (growthStage > growthStages)
+						growthStage = growthStages;
+					
+					double xSize = 1.0 / growthStages;
+					double ySize = growthStages > 8 ? 0.05 : 0.1;
+					double xOffset = 0;
+					double yOffset = ySize;
+	
+					double blockX = evt.target.blockX;
+					double blockY = evt.target.blockY;
+					double blockZ = evt.target.blockZ;				
+	
+					//Setup GL for the depthbox
+					GL11.glEnable(GL11.GL_BLEND);
+					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+	
+					GL11.glDisable(GL11.GL_CULL_FACE);
+					GL11.glDisable(GL11.GL_TEXTURE_2D);
+					GL11.glDepthMask(false);
+	
+					/**
+					 * Draw the stage boxes
+					 **/
+					
+					for (int stage = 1; stage <= growthStages; stage++)
+					{
+						if (stage <= growthStage)
+							GL11.glColor4ub((byte)64, (byte)200, (byte)37, (byte)200);
+						else
+							GL11.glColor4ub((byte)200, (byte)37, (byte)37, (byte)200);
+							
+						drawBox(AxisAlignedBB.getBoundingBox(
+								blockX + xOffset,
+								blockY,
+								blockZ,
+								blockX + xOffset + xSize,
+								blockY + yOffset,
+								blockZ + 1.0
+								).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
+		
+						xOffset += xSize;
+						yOffset += ySize;
+					}
+	
+					GL11.glEnable(GL11.GL_CULL_FACE);
+	
+					/**
+					 * Draw the outlines around the stage boxes
+					 **/
+	
+					GL11.glColor4f(0.1F, 0.1F, 0.1F, 1.0F);
+					GL11.glLineWidth(3.0F);
+					GL11.glDepthMask(false);
+	
+					xOffset = 0;
+					yOffset = 0.1;
+	
+					for (int stage = 0; stage < growthStages; stage++)
+					{
+						drawOutlinedBoundingBox(AxisAlignedBB.getBoundingBox(
+								blockX + xOffset,
+								blockY,
+								blockZ,
+								blockX + xOffset + xSize,
+								blockY + yOffset,
+								blockZ + 1.0
+								).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
+		
+						xOffset += xSize;
+						yOffset += ySize;
+					}
+				}
+			}
+			else
+			{
+				Block b = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
+				if(b == TFCBlocks.Crops && (
+						world.getBlock(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil ||
+						world.getBlock(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil2))
+				{
+					TECrop te = (TECrop) world.getTileEntity(evt.target.blockX, evt.target.blockY, evt.target.blockZ);
+					CropIndex index = CropManager.getInstance().getCropFromId(te.cropId);
+					boolean fullyGrown = index instanceof CropIndexPepper ? te.growth >= index.numGrowthStages - 1 : te.growth >= index.numGrowthStages;
+	
+					GL11.glEnable(GL11.GL_BLEND);
+					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+					if(fullyGrown)
+						GL11.glColor4ub((byte)64, (byte)200, (byte)37, (byte)200);
+					else
+						GL11.glColor4ub((byte)200, (byte)37, (byte)37, (byte)200);
+					GL11.glDisable(GL11.GL_CULL_FACE);
+					//GL11.glLineWidth(6.0F);
+					GL11.glDisable(GL11.GL_TEXTURE_2D);
+					GL11.glDepthMask(false);
+	
+					drawFace(AxisAlignedBB.getBoundingBox(
+							evt.target.blockX,
+							evt.target.blockY + 0.01,
+							evt.target.blockZ,
+							evt.target.blockX+1,
+							evt.target.blockY + 0.02,
+							evt.target.blockZ+1
+							).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
+	
+					GL11.glEnable(GL11.GL_CULL_FACE);
+				}
 			}
 		}
 	}
