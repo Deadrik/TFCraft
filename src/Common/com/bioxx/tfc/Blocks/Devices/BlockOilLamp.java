@@ -26,6 +26,7 @@ import net.minecraftforge.fluids.FluidStack;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Items.ItemBlocks.ItemOilLamp;
@@ -284,7 +285,8 @@ public class BlockOilLamp extends BlockTerraContainer
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
 	{
-		//this.checkValidity(world, x, y, z, b);
+		if(!World.doesBlockHaveSolidTopSurface(world, x, y-1, z))
+			TFC_Core.setBlockToAirWithDrops(world, x, y, z);
 	}
 
 	@Override
