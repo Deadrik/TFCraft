@@ -133,10 +133,9 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 	public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
 	{
 		FluidStack fs = FluidStack.loadFluidStackFromNBT(stack.getTagCompound());
-		if(fs == null || fs.getFluid() != TFCFluids.OLIVEOIL)
+		if(fs == null || (fs.getFluid() != TFCFluids.OLIVEOIL && fs.getFluid() != TFCFluids.LAVA))
 		{
-			if(fs.getFluid() != TFCFluids.LAVA)
-				metadata += 8;
+			metadata += 8;
 		}
 
 		return super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata);
@@ -149,7 +148,10 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 		if(is.hasTagCompound())
 		{
 			FluidStack fs = FluidStack.loadFluidStackFromNBT(is.getTagCompound());
-			arraylist.add(((fs.amount)*TFCOptions.oilLampFuelMult)+" Hours Remaining ("+Helper.roundNumber((fs.amount/250f)*100f, 10)+"%)");
+			if(fs.getFluid() == TFCFluids.OLIVEOIL)
+				arraylist.add(((fs.amount)*TFCOptions.oilLampFuelMult)+" Hours Remaining ("+Helper.roundNumber((fs.amount/250f)*100f, 10)+"%)");
+			if(fs.getFluid() == TFCFluids.LAVA)
+				arraylist.add("Infinite Hours Remaining");
 		}
 	}
 
