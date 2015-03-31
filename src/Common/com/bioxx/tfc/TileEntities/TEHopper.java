@@ -323,7 +323,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	private void press()
 	{
 		TEBarrel barrel = null;
-		if(worldObj.getBlock(xCoord, yCoord-1, zCoord) == TFCBlocks.Barrel)
+		if(worldObj.getTileEntity(xCoord, yCoord-1, zCoord) instanceof TEBarrel)
 			barrel = (TEBarrel) worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
 
 		ItemStack item = getPressableItem();
