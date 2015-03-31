@@ -37,7 +37,7 @@ public class TEOilLamp extends TELightEmitter
 			int diff = (int)TFC_Time.getTotalHours() - this.hourPlaced;
 			this.hourPlaced = (int)TFC_Time.getTotalHours();
 
-			if(fuel != null && fuel.fluidID != TFCFluids.LAVA.getID() && this.getFuelAmount() > 0)
+			if(fuel != null && getFuel().getFluid() != TFCFluids.LAVA && this.getFuelAmount() > 0)
 			{
 				fuel.amount -= diff;
 				if(fuel.amount <= 0)
@@ -50,6 +50,20 @@ public class TEOilLamp extends TELightEmitter
 	{
 		fuel = fs;
 		fuel.amount *= TFCOptions.oilLampFuelMult;
+	}
+
+	public boolean isFuelValid()
+	{
+		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+		if(getFuel() != null && getFuel().getFluid() == TFCFluids.OLIVEOIL)
+		{
+			return true;
+		}
+		else if((meta & 7) == 5 && getFuel().getFluid() == TFCFluids.LAVA)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	@Override

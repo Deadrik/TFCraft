@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
@@ -105,6 +106,17 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		int xCoord = x; int yCoord = y; int zCoord = z;
+		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, player, !is.hasTagCompound());
+		if(is.getItemDamage() == 5 && world.getBlock(mop.blockX, mop.blockY, mop.blockZ) == TFCBlocks.LavaStationary)
+		{
+			if(!is.hasTagCompound())
+			{
+				FluidStack fs = new FluidStack(TFCFluids.LAVA, 250);
+				is.setTagCompound(fs.writeToNBT(new NBTTagCompound()));
+			}
+			return false;
+		}
+
 		if (side == 0) --yCoord;
 		else if (side == 1) ++yCoord;
 		else return false;
@@ -115,6 +127,19 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 		}
 
 		return false;
+	}
+
+	@Override
+	public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
+	{
+		FluidStack fs = FluidStack.loadFluidStackFromNBT(stack.getTagCompound());
+		if(fs == null || fs.getFluid() != TFCFluids.OLIVEOIL)
+		{
+			if(fs.getFluid() != TFCFluids.LAVA)
+				metadata += 8;
+		}
+
+		return super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata);
 	}
 
 	@Override
@@ -156,7 +181,7 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 		if(fs != null)
 		{
 			int max = getCapacity(container) - fs.amount;
-			if(max > 0)
+			if(max > 0 && fs.isFluidEqual(resource))
 			{
 				inAmt = Math.min(max, resource.amount);
 				if(doSim)

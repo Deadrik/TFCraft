@@ -35,7 +35,7 @@ public class TESRHopper extends TESRBase
 		{
 			if(te.pressBlock != null)
 			{
-				float sink = -0.34f + (te.pressCooldown/20/800f)*0.34f;
+				float sink = -0.34f + (te.pressCooldown/20/800f)*0.25f;
 				GL11.glPushMatrix(); //start
 				GL11.glTranslatef((float)d + 0.5F, (float)d1 + 1.33F, (float)d2 + 0.5F); //starting location
 				GL11.glScalef(0.75f, 0.75f, 0.75f);

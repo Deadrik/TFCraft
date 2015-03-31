@@ -114,7 +114,36 @@ public class BlockOilLamp extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
+			int meta = world.getBlockMetadata(x, y, z);
+			if(!isLampLit(meta))
+			{
+				TEOilLamp te = (TEOilLamp) world.getTileEntity(x, y, z);
+				if (te != null)
+				{
+					te.updateLampFuel();
+					if(te.isFuelValid())
+						if(te.getFuelTimeLeft() > 0)
+							world.setBlockMetadataWithNotify(x, y, z, meta-8, 3);
+				}
+			}
+			else
+			{
+				TEOilLamp te = (TEOilLamp) world.getTileEntity(x, y, z);
+				if (te != null)
+				{
+					te.updateLampFuel();
+				}
+				world.setBlockMetadataWithNotify(x, y, z, meta+8, 3);
+			}
+		}
+		return true;
+	}
 
+	public static boolean isLampLit(int meta)
+	{
+		if((meta & 8) > 0)
+		{
+			return false;
 		}
 		return true;
 	}
@@ -236,8 +265,15 @@ public class BlockOilLamp extends BlockTerraContainer
 			((TEOilLamp)_t).create();
 			FluidStack fs = FluidStack.loadFluidStackFromNBT(is.getTagCompound());
 			if(fs != null)
+			{
 				((TEOilLamp)_t).setFuelFromStack(fs);
+			}
+			else
+			{
+				//world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)+8, 0x3);
+			}
 			((TEOilLamp)_t).hourPlaced = (int)TFC_Time.getTotalHours();
+
 		}
 	}
 
@@ -281,6 +317,8 @@ public class BlockOilLamp extends BlockTerraContainer
 		if (!world.isRemote)
 		{
 			TEOilLamp te = (TEOilLamp)world.getTileEntity(x, y, z);
+			if((meta & 8) != 0)
+				meta -=8;
 			if (te != null)
 			{
 				if(te.getFuel() != null)
