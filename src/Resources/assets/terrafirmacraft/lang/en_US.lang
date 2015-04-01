@@ -2480,6 +2480,7 @@ gui.mature=Mature
 gui.metal.Iron=Iron
 gui.tier=Tier
 gui.progress=Progress
+gui.fuel=Fuel
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Must use under flowing water.
