@@ -22,6 +22,7 @@ public class ItemWritableBookTFC extends ItemTerra
 	public ItemWritableBookTFC(String tex){
 		super();
 		stackable = false;
+		this.setCreativeTab(null);
 	}
 
 	/**

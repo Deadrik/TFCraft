@@ -27,7 +27,7 @@ public class CraftingManagerTFC
 		recipes = new ArrayList<IRecipe>();
 
 		Collections.sort(recipes, new RecipeSorterTFC(this));
-		System.out.println(new StringBuilder().append(recipes.size()).append(" recipes").toString());
+		//System.out.println(new StringBuilder().append(recipes.size()).append(" recipes").toString());
 	}
 
 	public void addRecipe(ItemStack itemstack, Object aobj[])

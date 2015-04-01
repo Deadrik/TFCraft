@@ -434,7 +434,7 @@ public class BlockSetup extends TFCBlocks
 
 		Planks = (new BlockPlanks(Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood");
 		Planks2 = (new com.bioxx.tfc.Blocks.BlockPlanks2(Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood2");
-		Leaves = (new BlockCustomLeaves()).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves");
+		Leaves = (new BlockCustomLeaves()).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves").setCreativeTab(TFCTabs.TFCDecoration);
 		Leaves2 = (new BlockCustomLeaves2()).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves2");
 		Sapling = (new BlockSapling()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling");
 		Sapling2 = (new BlockSapling2()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling2");
@@ -493,7 +493,7 @@ public class BlockSetup extends TFCBlocks
 		FenceGate = new BlockCustomFenceGate().setBlockName("FenceGateTFC").setHardness(2);
 		Fence2 = new BlockTFCFence2("Fence2", Material.wood).setBlockName("FenceTFC").setHardness(2);
 		FenceGate2 = new BlockCustomFenceGate2().setBlockName("FenceGateTFC").setHardness(2);
-		StrawHideBed = new BlockBed().setBlockName("StrawHideBed").setHardness(1);
+		StrawHideBed = new BlockBed().setBlockName("StrawHideBed").setHardness(1).setCreativeTab(null);
 		ArmourStand = new BlockStand().setBlockName("ArmourStand").setHardness(2);
 		ArmourStand2 = new BlockStand2().setBlockName("ArmourStand").setHardness(2);
 

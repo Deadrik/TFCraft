@@ -269,6 +269,7 @@ public class TerraFirmaCraft
 
 		//WAILA stuff
 		proxy.registerWailaClasses();
+		proxy.hideNEIItems();
 	}
 
 	@EventHandler

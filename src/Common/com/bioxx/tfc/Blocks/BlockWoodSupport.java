@@ -44,8 +44,10 @@ public class BlockWoodSupport extends BlockTerra
 	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
 		if(TFCBlocks.isBlockVSupport(this))
+		{
 			for(int i = 0; i < woodNames.length; i++)
 				list.add(new ItemStack(this, 1, i));
+		}
 	}
 
 	public static boolean hasSupportsInRange(World world, int x, int y, int z, int range)

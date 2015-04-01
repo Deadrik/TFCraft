@@ -45,6 +45,7 @@ public class ItemMeal extends ItemTerra implements IFood
 		this.MetaIcons = new IIcon[11];
 		this.setFolder("food/");
 		this.stackable = false;
+		this.setCreativeTab(null);
 	}
 
 	@Override

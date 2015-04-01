@@ -2,6 +2,7 @@ package com.bioxx.tfc;
 
 import java.io.File;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.entity.RenderArrow;
@@ -18,10 +19,14 @@ import net.minecraft.client.renderer.entity.RenderZombie;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.bioxx.tfc.Core.ColorizerFoliageTFC;
 import com.bioxx.tfc.Core.TFC_Climate;
@@ -158,12 +163,14 @@ import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntityToolRack;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCFluids;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumTree;
 import com.bioxx.tfc.api.Util.KeyBindings;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -646,5 +653,111 @@ public class ClientProxy extends CommonProxy
 	{
 		Minecraft.getMinecraft();
 		return Minecraft.isFancyGraphicsEnabled();
+	}
+
+	@Override
+	public void hideNEIItems()
+	{
+		String mod = "NotEnoughItems";
+		if (Loader.isModLoaded(mod))
+		{
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Bloom));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.writabeBookTFC)); // Book
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Charcoal));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.Coke));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Crops));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Detailed));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.worldItem)); // Debris
+			for (Block door : TFCBlocks.Doors)
+			{
+				codechicken.nei.api.API.hideItem(new ItemStack(door));
+			}
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Firepit));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.FlatClay, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.FlatLeather));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.FlatRock, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.FoodPrep));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Forge));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.fruitTreeLeaves, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.fruitTreeLeaves2, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.fruitTreeWood, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.Hemp));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.IngotPile));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.LeatherRack));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Leaves, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Leaves2, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.LogNatural, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.LogNatural2, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.LogPile));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodConstruct)); // Lumber Block
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.MetalSheet));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Molten));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Moss));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.MudBrick, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Ore));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Ore2));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Ore3));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Pottery));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.PotteryPot, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Reeds));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.Salad, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.Sandwich, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Sluice));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Smoke));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.SmokeRack));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.Soup, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.stoneSlabs));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.stoneStairs));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.stoneStalac));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.StrawHideBed));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Sulfur));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WaterPlant));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodHoriz, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodHoriz2, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodHoriz3, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodHoriz4, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodSupportH, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodSupportH2, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodVert, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodVert2, 1, OreDictionary.WILDCARD_VALUE));
+			
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.WintergreenLeaf));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.BlueberryLeaf));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.RaspberryLeaf));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.StrawberryLeaf));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.BlackberryLeaf));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.BunchberryLeaf));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.CranberryLeaf));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.SnowberryLeaf));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.ElderberryLeaf));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.GooseberryLeaf));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.CloudberryLeaf));
+
+			// Vanilla Blocks & Items
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.double_wooden_slab));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.wooden_slab));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.spruce_stairs));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.birch_stairs));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.jungle_stairs));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.waterlily));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.tallgrass));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.yellow_flower));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.red_flower));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.brown_mushroom));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.red_mushroom));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.bookshelf));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.torch));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.chest));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.planks));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.crafting_table));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.cactus));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.reeds));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.pumpkin));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.lit_pumpkin));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.wooden_button));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.ice));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.vine));
+			codechicken.nei.api.API.hideItem(new ItemStack(Items.reeds));
+		}
 	}
 }
