@@ -24,7 +24,7 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityQuern extends NetworkTileEntity implements IInventory
+public class TEQuern extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[3];
 	public int rotation = 0;

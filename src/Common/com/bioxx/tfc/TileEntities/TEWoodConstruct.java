@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import com.bioxx.tfc.api.TFCItems;
 
-public class TileEntityWoodConstruct extends NetworkTileEntity
+public class TEWoodConstruct extends NetworkTileEntity
 {
 	public byte[] woodTypes = new byte[192];
 	public BitSet data;
@@ -18,7 +18,7 @@ public class TileEntityWoodConstruct extends NetworkTileEntity
 	//This should not be stored and are calculated at runtime on the client only for faster subsequent rendering operations
 	public boolean[] solidCheck = new boolean[48];
 
-	public TileEntityWoodConstruct()
+	public TEWoodConstruct()
 	{
 		data = new BitSet(192);
 	}

@@ -45,8 +45,8 @@ import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
 import com.bioxx.tfc.TileEntities.TESluice;
 import com.bioxx.tfc.TileEntities.TEVessel;
-import com.bioxx.tfc.TileEntities.TileEntityQuern;
-import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
+import com.bioxx.tfc.TileEntities.TEQuern;
+import com.bioxx.tfc.TileEntities.TEWorkbench;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 
@@ -66,7 +66,7 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 1:
 		{
-			return new ContainerWorkbench(player.inventory, (TileEntityWorkbench) te, world, x, y, z);
+			return new ContainerWorkbench(player.inventory, (TEWorkbench) te, world, x, y, z);
 		}
 		case 19:
 		{
@@ -115,7 +115,7 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 33:
 		{
-			return new ContainerQuern(player.inventory, (TileEntityQuern) te, world, x, y, z);
+			return new ContainerQuern(player.inventory, (TEQuern) te, world, x, y, z);
 		}
 		case 34:
 		{

@@ -13,7 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.TileEntities.TileEntityBloom;
+import com.bioxx.tfc.TileEntities.TEBloom;
 import com.bioxx.tfc.api.TFCItems;
 
 public class WBloom implements IWailaDataProvider
@@ -56,8 +56,8 @@ public class WBloom implements IWailaDataProvider
 
 	public static void callbackRegister(IWailaRegistrar reg)
 	{
-		reg.registerStackProvider(new WBloom(), TileEntityBloom.class);
-		reg.registerBodyProvider(new WBloom(), TileEntityBloom.class);
-		reg.registerNBTProvider(new WBloom(), TileEntityBloom.class);
+		reg.registerStackProvider(new WBloom(), TEBloom.class);
+		reg.registerBodyProvider(new WBloom(), TEBloom.class);
+		reg.registerNBTProvider(new WBloom(), TEBloom.class);
 	}
 }

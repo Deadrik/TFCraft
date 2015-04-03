@@ -10,11 +10,11 @@ import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Containers.ContainerWorkbench;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
+import com.bioxx.tfc.TileEntities.TEWorkbench;
 
 public class GuiWorkbench extends GuiContainer
 {
-	public GuiWorkbench(InventoryPlayer inventoryplayer, TileEntityWorkbench wb, World world, int i, int j, int k)
+	public GuiWorkbench(InventoryPlayer inventoryplayer, TEWorkbench wb, World world, int i, int j, int k)
 	{
 		super(new ContainerWorkbench(inventoryplayer, wb,world, i, j, k));
 	}

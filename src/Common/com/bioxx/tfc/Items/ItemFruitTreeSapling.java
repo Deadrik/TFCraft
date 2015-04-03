@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
+import com.bioxx.tfc.TileEntities.TEFruitTreeWood;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 
@@ -45,9 +45,9 @@ public class ItemFruitTreeSapling extends ItemTerra
 
 			world.setBlock(x, y + 1, z, TFCBlocks.fruitTreeWood, stack.getItemDamage(), 0x2);
 
-			((TileEntityFruitTreeWood)world.getTileEntity(x, y + 1, z)).setTrunk(true);
-			((TileEntityFruitTreeWood)world.getTileEntity(x, y + 1, z)).setHeight(0);
-			((TileEntityFruitTreeWood)world.getTileEntity(x, y + 1, z)).setBirth();
+			((TEFruitTreeWood)world.getTileEntity(x, y + 1, z)).setTrunk(true);
+			((TEFruitTreeWood)world.getTileEntity(x, y + 1, z)).setHeight(0);
+			((TEFruitTreeWood)world.getTileEntity(x, y + 1, z)).setBirth();
 
 			stack.stackSize = stack.stackSize - 1;
 			return true;

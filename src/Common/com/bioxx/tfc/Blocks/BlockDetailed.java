@@ -28,7 +28,7 @@ import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.TileEntities.TEDetailed;
-import com.bioxx.tfc.TileEntities.TileEntityWoodConstruct;
+import com.bioxx.tfc.TileEntities.TEWoodConstruct;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 
@@ -346,7 +346,7 @@ public class BlockDetailed extends BlockPartial
 
 				if (index >= 0 && te.data.get(index)) 
 				{
-					int d = TileEntityWoodConstruct.PlankDetailLevel;
+					int d = TEWoodConstruct.PlankDetailLevel;
 					//int dd = d*d;
 					float div = 1f / d;
 

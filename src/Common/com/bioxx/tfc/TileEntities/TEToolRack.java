@@ -15,12 +15,12 @@ import com.bioxx.tfc.Core.TFC_Core;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityToolRack extends NetworkTileEntity implements IInventory
+public class TEToolRack extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage;
 	public byte woodType;
 
-	public TileEntityToolRack()
+	public TEToolRack()
 	{
 		storage = new ItemStack[4];
 		woodType = 0;

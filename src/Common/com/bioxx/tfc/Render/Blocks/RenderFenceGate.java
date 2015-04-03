@@ -8,7 +8,7 @@ import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.TileEntities.TileEntityFenceGate;
+import com.bioxx.tfc.TileEntities.TEFenceGate;
 import com.bioxx.tfc.api.Interfaces.IMultipleBlock;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -25,8 +25,8 @@ public class RenderFenceGate  implements ISimpleBlockRenderingHandler
 	{
 		Block par1BlockFenceGate = ((IMultipleBlock)block).getBlockTypeForRender();
 		boolean flag = true;
-		int l = ((TileEntityFenceGate)renderer.blockAccess.getTileEntity(par2, par3, par4)).getDirection();
-		boolean flag1 = ((TileEntityFenceGate)renderer.blockAccess.getTileEntity(par2, par3, par4)).getOpen();
+		int l = ((TEFenceGate)renderer.blockAccess.getTileEntity(par2, par3, par4)).getDirection();
+		boolean flag1 = ((TEFenceGate)renderer.blockAccess.getTileEntity(par2, par3, par4)).getOpen();
 		int i1 = BlockDirectional.getDirection(l);
 		float f = 0.375F;
 		float f1 = 0.5625F;

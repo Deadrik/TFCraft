@@ -3,7 +3,7 @@ package com.bioxx.tfc.Blocks.Devices;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.TileEntities.TileEntitySpawnMeter;
+import com.bioxx.tfc.TileEntities.TESpawnMeter;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -62,6 +62,6 @@ public class BlockSpawnMeter extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
-		return new TileEntitySpawnMeter();
+		return new TESpawnMeter();
 	}
 }

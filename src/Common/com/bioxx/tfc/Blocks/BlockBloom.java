@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TileEntities.TileEntityBloom;
+import com.bioxx.tfc.TileEntities.TEBloom;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 
@@ -43,7 +43,7 @@ public class BlockBloom extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World w, int meta)
 	{
-		return new TileEntityBloom();
+		return new TEBloom();
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class BlockBloom extends BlockTerraContainer
 	@Override
 	public void onBlockPreDestroy(World world, int i, int j, int k, int meta) 
 	{
-		TileEntityBloom te = (TileEntityBloom)world.getTileEntity(i, j, k);
+		TEBloom te = (TEBloom)world.getTileEntity(i, j, k);
 		EntityItem ei = new EntityItem(world, i, j, k, new ItemStack(TFCItems.RawBloom, 1, te.size));
 
 		int[] pos = getBloomery(world, i, j, k);

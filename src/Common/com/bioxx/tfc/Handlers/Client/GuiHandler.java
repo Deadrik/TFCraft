@@ -50,8 +50,8 @@ import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
 import com.bioxx.tfc.TileEntities.TESluice;
 import com.bioxx.tfc.TileEntities.TEVessel;
-import com.bioxx.tfc.TileEntities.TileEntityQuern;
-import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
+import com.bioxx.tfc.TileEntities.TEQuern;
+import com.bioxx.tfc.TileEntities.TEWorkbench;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -75,7 +75,7 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 		case 0:
 			return new GuiLogPile(player.inventory, (TELogPile) te, world, x, y, z);
 		case 1:
-			return new GuiWorkbench(player.inventory, (TileEntityWorkbench) te, world, x, y, z);
+			return new GuiWorkbench(player.inventory, (TEWorkbench) te, world, x, y, z);
 		case 19:
 			return new GuiVesselLiquid(player.inventory, world, x, y, z);
 		case 20:
@@ -103,7 +103,7 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 		case 32:
 			//return new GuiFoodPrep(player.inventory, ((TEFoodPrep) te), world, x, y, z, 0);
 		case 33:
-			return new GuiQuern(player.inventory, ((TileEntityQuern) te), world, x, y, z);
+			return new GuiQuern(player.inventory, ((TEQuern) te), world, x, y, z);
 		case 34:
 			return new GuiBlueprint(player, world, x, y, z);
 		case 35:

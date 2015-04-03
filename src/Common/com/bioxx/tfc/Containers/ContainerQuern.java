@@ -11,7 +11,7 @@ import com.bioxx.tfc.Containers.Slots.SlotBlocked;
 import com.bioxx.tfc.Containers.Slots.SlotQuern;
 import com.bioxx.tfc.Containers.Slots.SlotQuernGrain;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.TileEntities.TileEntityQuern;
+import com.bioxx.tfc.TileEntities.TEQuern;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Crafting.QuernManager;
 
@@ -21,10 +21,10 @@ public class ContainerQuern extends ContainerTFC
 	private int posX;
 	private int posY;
 	private int posZ;
-	private TileEntityQuern te;
+	private TEQuern te;
 	private EntityPlayer player;
 
-	public ContainerQuern(InventoryPlayer playerinv, TileEntityQuern pile, World world, int x, int y, int z)
+	public ContainerQuern(InventoryPlayer playerinv, TEQuern pile, World world, int x, int y, int z)
 	{
 		this.player = playerinv.player;
 		this.te = pile;

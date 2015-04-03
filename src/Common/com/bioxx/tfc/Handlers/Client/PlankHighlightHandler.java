@@ -51,7 +51,7 @@ public class PlankHighlightHandler{
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 
 			boolean isConstruct = world.getBlock(evt.target.blockX, evt.target.blockY, evt.target.blockZ) == TFCBlocks.WoodConstruct;
-			//float div = 1f / TileEntityWoodConstruct.PlankDetailLevel;
+			//float div = 1f / TEWoodConstruct.PlankDetailLevel;
 			//Get the hit location in local box coords
 			double hitX = Math.round((evt.target.hitVec.xCoord - evt.target.blockX)*100)/100.0d;
 			double hitY = Math.round((evt.target.hitVec.yCoord - evt.target.blockY)*100)/100.0d;

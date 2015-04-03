@@ -1,4 +1,4 @@
-package com.bioxx.tfc.Blocks;
+package com.bioxx.tfc.Blocks.Devices;
 
 import java.util.ArrayList;
 
@@ -15,6 +15,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 

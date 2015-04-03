@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 
-import com.bioxx.tfc.TileEntities.TileEntityToolRack;
+import com.bioxx.tfc.TileEntities.TEToolRack;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -30,7 +30,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 	public boolean renderWorldBlock(IBlockAccess world, int i, int j, int k, Block block, int modelId, RenderBlocks renderblocks)
 	{
 		IBlockAccess blockAccess = renderblocks.blockAccess;
-		TileEntityToolRack te = (TileEntityToolRack)blockAccess.getTileEntity(i, j, k);
+		TEToolRack te = (TEToolRack)blockAccess.getTileEntity(i, j, k);
 		int dir = blockAccess.getBlockMetadata(i, j, k);
 		boolean breaking = renderblocks.overrideBlockTexture != null;
 		if(te != null)

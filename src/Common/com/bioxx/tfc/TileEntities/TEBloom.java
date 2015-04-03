@@ -3,11 +3,11 @@ package com.bioxx.tfc.TileEntities;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityBloom extends TileEntity
+public class TEBloom extends TileEntity
 {
 	public int size;
 
-	public TileEntityBloom()
+	public TEBloom()
 	{
 		size = 0;
 	}
