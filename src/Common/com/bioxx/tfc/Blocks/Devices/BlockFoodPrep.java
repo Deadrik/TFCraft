@@ -15,6 +15,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
@@ -150,5 +151,15 @@ public class BlockFoodPrep extends BlockTerraContainer
 	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
 	{
 		return null;
+	}
+
+	/**
+	 * Displays a flat icon image for an ItemStack containing the block, instead of a render. Using primarily for WAILA HUD.
+	 */
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getItemIconName()
+	{
+		return Reference.ModID + ":" + "devices/foodprep";
 	}
 }

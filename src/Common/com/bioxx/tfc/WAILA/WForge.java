@@ -7,19 +7,19 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.TileEntities.TEFirepit;
-import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.Items.ItemCoal;
+import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.api.TFCItems;
 
-public class WFirepit implements IWailaDataProvider
+public class WForge implements IWailaDataProvider
 {
 	@Override
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
@@ -36,11 +36,11 @@ public class WFirepit implements IWailaDataProvider
 	@Override
 	public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
-		if (accessor.getTileEntity() instanceof TEFirepit)
+		if (accessor.getTileEntity() instanceof TEForge)
 		{
 			NBTTagCompound tag = accessor.getNBTData();
 			NBTTagList taglist = tag.getTagList("Items", 10);
-			ItemStack fireItemStacks[] = new ItemStack[11];
+			ItemStack fireItemStacks[] = new ItemStack[14];
 			for (int i = 0; i < taglist.tagCount(); i++)
 			{
 				NBTTagCompound nbt = taglist.getCompoundTagAt(i);
@@ -52,14 +52,26 @@ public class WFirepit implements IWailaDataProvider
 			if (fireItemStacks != null)
 			{
 				int fuelCount = 0;
-				for (ItemStack is : fireItemStacks)
+				boolean hasMold = false;
+
+				for (int i = 5; i <= 9; i++) // Fuels are stored in slots 5 through 9 per te.HandleFuelStack()
 				{
-					if (is != null && is.getItem() != null && (is.getItem() == TFCItems.Logs || is.getItem() == Item.getItemFromBlock(TFCBlocks.Peat)))
+					if (fireItemStacks[i] != null && fireItemStacks[i].getItem() != null && fireItemStacks[i].getItem() instanceof ItemCoal)
 						fuelCount++;
 				}
 
 				if (fuelCount > 0)
-					currenttip.add(TFC_Core.translate("gui.fuel") + " : " + fuelCount + "/4");
+					currenttip.add(TFC_Core.translate("gui.fuel") + " : " + fuelCount + "/5");
+
+				for (int j = 10; j <= 13; j++) // Molds are stored in slots 7 through 9 per te.getMold()
+				{
+					if (fireItemStacks[j] != null && fireItemStacks[j].getItem() == TFCItems.CeramicMold && fireItemStacks[j].stackSize > 0)
+						hasMold = true;
+				}
+				if (hasMold)
+					currenttip.add(TFC_Core.translate("item.Mold.Ceramic Mold.name") + EnumChatFormatting.GREEN.toString() + " \u2714");
+				else
+					currenttip.add(TFC_Core.translate("item.Mold.Ceramic Mold.name") + EnumChatFormatting.RED.toString() + " \u2718");
 			}
 		}
 
@@ -82,7 +94,7 @@ public class WFirepit implements IWailaDataProvider
 
 	public static void callbackRegister(IWailaRegistrar reg)
 	{
-		reg.registerBodyProvider(new WFirepit(), TEFirepit.class);
-		reg.registerNBTProvider(new WFirepit(), TEFirepit.class);
+		reg.registerBodyProvider(new WForge(), TEForge.class);
+		reg.registerNBTProvider(new WForge(), TEForge.class);
 	}
 }
