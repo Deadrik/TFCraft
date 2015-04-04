@@ -60,6 +60,7 @@ import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.BarrelBriningRecipe;
 import com.bioxx.tfc.api.Crafting.BarrelManager;
+import com.bioxx.tfc.api.Crafting.BarrelPreservativeRecipe;
 import com.bioxx.tfc.api.Crafting.BarrelRecipe;
 import com.bioxx.tfc.api.Crafting.LoomManager;
 import com.bioxx.tfc.api.Crafting.LoomRecipe;
@@ -521,7 +522,11 @@ public class WAILADataTE implements IWailaDataProvider
 			currenttip.add(TFC_Core.translate("gui.Barrel.SealedOn") + " : " + TFC_Time.getDateStringFromHours(sealTime));
 		}
 
+		
 		// Output
+		BarrelPreservativeRecipe preservative = BarrelManager.getInstance().findMatchingPreservativeRepice(te, inStack, fluid, sealed);
+
+		
 		if (recipe != null)
 		{
 			if (!(recipe instanceof BarrelBriningRecipe))
@@ -549,6 +554,8 @@ public class WAILADataTE implements IWailaDataProvider
 			{
 				currenttip.add(TFC_Core.translate("gui.barrel.preserving"));
 			}
+		}else if(preservative!=null){
+			currenttip.add(TFC_Core.translate(preservative.getPreservingString()));
 		}
 
 		return currenttip;
