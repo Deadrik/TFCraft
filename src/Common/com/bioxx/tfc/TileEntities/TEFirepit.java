@@ -1,13 +1,17 @@
 package com.bioxx.tfc.TileEntities;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.bioxx.tfc.Core.TFC_Core;
@@ -397,6 +401,40 @@ public class TEFirepit extends TEFireEntity implements IInventory
 	{
 		if(!worldObj.isRemote)
 		{
+			// Create a list of all the items that are falling onto the firepit
+			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1.1, zCoord + 1));
+
+			if (list != null && !list.isEmpty() && fireItemStacks[0] == null) // Only go through the list if more fuel can fit.
+			{
+				// Iterate through the list and check for logs and peat
+				for (Iterator iterator = list.iterator(); iterator.hasNext();)
+				{
+					EntityItem entity = (EntityItem) iterator.next();
+					ItemStack is = entity.getEntityItem();
+					Item item = is.getItem();
+
+					if (item == TFCItems.Logs || item == Item.getItemFromBlock(TFCBlocks.Peat))
+					{
+						for (int c = 0; c < is.stackSize; c++)
+						{
+							if (fireItemStacks[0] == null) // Secondary check for empty input slot.
+							{
+								/**
+								 * Place a copy of only one of the logs into the fuel slot, due to the stack limitation of the fuel slots.
+								 * Do not change to fireItemStacks[0] = is;
+								 */
+								setInventorySlotContents(0, new ItemStack(item, 1, is.getItemDamage()));
+								is.stackSize--;
+								HandleFuelStack(); // Attempt to shift the fuel down so more fuel can be added within the same for loop.
+							}
+						}
+
+						if (is.stackSize == 0)
+							entity.setDead();
+					}
+				}
+			}
+
 			//Here we take care of the item that we are cooking in the fire
 			careForInventorySlot(fireItemStacks[1]);
 			careForInventorySlot(fireItemStacks[7]);

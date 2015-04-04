@@ -5,8 +5,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -84,31 +82,6 @@ public class BlockFirepit extends BlockTerraContainer
 		if(j > 0)
 			return textureOn;
 		return textureOff;
-	}
-
-	@Override
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
-	{
-		if (entity instanceof EntityItem && ((EntityItem) entity).getEntityItem() != null)
-		{
-			ItemStack is = ((EntityItem) entity).getEntityItem();
-			Item item = is.getItem();
-			if (item == TFCItems.Logs || item == Item.getItemFromBlock(TFCBlocks.Peat))
-			{
-				if ((TEFirepit) world.getTileEntity(x, y, z) != null)
-				{
-					TEFirepit te = (TEFirepit) world.getTileEntity(x, y, z);
-					if (te.fireItemStacks[0] == null)
-					{
-						if (is.stackSize == 1)
-						{
-							te.fireItemStacks[0] = is;
-							entity.setDead();
-						}
-					}
-				}
-			}
-		}
 	}
 
 	@Override
