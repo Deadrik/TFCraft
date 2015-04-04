@@ -187,7 +187,7 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.carpet, 2, 0), new Object[] { "$$", Character.valueOf('$'), "materialCloth" }));
 
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Blocks.lit_pumpkin, 1), "blockTorch", "blockPumpkin"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCBlocks.LitPumpkin, 1), "blockTorch", "blockPumpkin"));
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.GlassBottle, 3), new Object[]
 				{ "# #", " # ", Character.valueOf('#'), new ItemStack(Blocks.glass) });
@@ -1632,6 +1632,7 @@ public class Recipes
 		manager.addPlan("grill", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.DRAWSECONDFROMLAST, RuleEnum.DRAWTHIRDFROMLAST}));
 		manager.addPlan("shears", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.HITTHIRDFROMLAST}));
 		manager.addPlan("oillamp", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.BENDSECONDFROMLAST, RuleEnum.DRAWTHIRDFROMLAST}));
+		manager.addPlan("hopper", new PlanRecipe(new RuleEnum[]{RuleEnum.UPSETLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.BENDTHIRDFROMLAST}));
 
 		addWeldRecipes(manager);
 
@@ -1931,6 +1932,7 @@ public class Recipes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SterlingSilverIngot), null,"oillamp", AnvilReq.COPPER, new ItemStack(TFCBlocks.OilLamp, 1, 4)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), null,"oillamp", AnvilReq.BLUESTEEL, new ItemStack(TFCBlocks.OilLamp, 1, 5)));
 
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronSheet2x), new ItemStack(TFCItems.WroughtIronSheet2x),"hopper", AnvilReq.WROUGHTIRON, new ItemStack(TFCBlocks.Hopper, 1, 0)));
 	}
 
 	private static void addTrapDoor(Item sheet, int index)
@@ -2308,9 +2310,10 @@ public class Recipes
 		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
 		for (int i = 0; i < recipes.size(); i++)
 		{
-			IRecipe tmpRecipe = recipes.get(i);
-			if (tmpRecipe instanceof IRecipe)
+			if (recipes.get(i) != null)
 			{
+				IRecipe tmpRecipe = recipes.get(i);
+
 				IRecipe recipe = tmpRecipe;
 				ItemStack recipeResult = recipe.getRecipeOutput();
 
@@ -2326,7 +2329,7 @@ public class Recipes
 		for (int i = 0; i < recipes.size(); i++)
 		{
 			IRecipe tmpRecipe = recipes.get(i);
-			if (tmpRecipe instanceof IRecipe)
+			if (tmpRecipe != null)
 			{
 				IRecipe recipe = tmpRecipe;
 				ItemStack recipeResult = recipe.getRecipeOutput();

@@ -21,10 +21,12 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Items.ItemLogs;
 import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFirepit extends BlockTerraContainer
 {
@@ -87,18 +89,22 @@ public class BlockFirepit extends BlockTerraContainer
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
 	{
-		if(entity instanceof EntityItem && ((EntityItem)entity).getEntityItem().getItem() instanceof ItemLogs)
+		if (entity instanceof EntityItem && ((EntityItem) entity).getEntityItem() != null)
 		{
-			if((TEFirepit)world.getTileEntity(x, y, z) != null)
+			ItemStack is = ((EntityItem) entity).getEntityItem();
+			Item item = is.getItem();
+			if (item == TFCItems.Logs || item == Item.getItemFromBlock(TFCBlocks.Peat))
 			{
-				ItemStack is = ((EntityItem)entity).getEntityItem();
-				TEFirepit te = (TEFirepit)world.getTileEntity(x, y, z);
-				if(te.fireItemStacks[0] == null)
+				if ((TEFirepit) world.getTileEntity(x, y, z) != null)
 				{
-					if(is.stackSize == 1)
+					TEFirepit te = (TEFirepit) world.getTileEntity(x, y, z);
+					if (te.fireItemStacks[0] == null)
 					{
-						te.fireItemStacks[0] = is;
-						entity.setDead();
+						if (is.stackSize == 1)
+						{
+							te.fireItemStacks[0] = is;
+							entity.setDead();
+						}
 					}
 				}
 			}
@@ -243,5 +249,15 @@ public class BlockFirepit extends BlockTerraContainer
 	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
 	{
 		return null;
+	}
+
+	/**
+	 * Displays a flat icon image for an ItemStack containing the block, instead of a render. Using primarily for WAILA HUD.
+	 */
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getItemIconName()
+	{
+		return Reference.ModID + ":" + "devices/firepit";
 	}
 }

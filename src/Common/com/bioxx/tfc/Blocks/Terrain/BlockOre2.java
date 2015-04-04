@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
@@ -33,6 +34,29 @@ public class BlockOre2 extends BlockOre
 		if (meta == 13) // saltpeter
 			return 1 + random.nextInt(3);
 		return 1;
+	}
+
+	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+
+		int count = quantityDropped(metadata, fortune, world.rand);
+		for (int i = 0; i < count; i++)
+		{
+			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, damageDropped(metadata));
+
+			if (metadata == 5)
+				itemstack = KimberliteGemSpawn(); //Drop diamonds
+			else if (metadata == 13)
+				itemstack = new ItemStack(TFCItems.Powder, 1, 4);
+
+			if (itemstack != null)
+			{
+				ret.add(itemstack);
+			}
+		}
+		return ret;
 	}
 
 	@Override

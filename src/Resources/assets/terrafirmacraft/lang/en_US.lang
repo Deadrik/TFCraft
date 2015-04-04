@@ -18,36 +18,38 @@ death.attack.alcohol=%1$s died of alcohol poisoning
 death.attack.heatStroke=%1$s died of heat stroke
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=Squid
-entity.cowTFC.name=Cow
-entity.wolfTFC.name=Wolf
 entity.bearTFC.name=Bear
-entity.deerTFC.name=Deer
 entity.chickenTFC.name=Chicken
-entity.pigTFC.name=Pig
-entity.skeletonTFC.name=Skeleton
-entity.zombieTFC.name=Zombie
-entity.spiderTFC.name=Spider
-entity.slimeTFC.name=Slime
-entity.silverfishTFC.name=Silver Fish
-entity.ghastTFC.name=Ghast
-entity.caveSpiderTFC.name=Cave Spider
-entity.blazeTFC.name=Blaze
-entity.endermanTFC.name=Enderman
-entity.pigZombieTFC.name=Pig Zombie
-entity.creeperTFC.name=Creeper
-entity.sheepTFC.name=Sheep
-entity.pheasantTFC.name=Pheasant
-entity.horseTFC.name=Horse
-entity.irongolemTFC.name=Iron Golem
+entity.cowTFC.name=Cow
+entity.deerTFC.name=Deer
 entity.fishTFC.name=Bass
+entity.horseTFC.name=Horse
+entity.pheasantTFC.name=Pheasant
+entity.pigTFC.name=Pig
+entity.sheepTFC.name=Sheep
+entity.squidTFC.name=Squid
+entity.wolfTFC.name=Wolf
 
+entity.blazeTFC.name=Blaze
+entity.caveSpiderTFC.name=Cave Spider
+entity.creeperTFC.name=Creeper
+entity.endermanTFC.name=Enderman
+entity.ghastTFC.name=Ghast
+entity.irongolemTFC.name=Iron Golem
+entity.pigZombieTFC.name=Pig Zombie
+entity.silverfishTFC.name=Silverfish
+entity.skeletonTFC.name=Skeleton
+entity.slimeTFC.name=Slime
+entity.spiderTFC.name=Spider
+entity.zombieTFC.name=Zombie
 
-#==========
-#= Entity =
-#==========
+entity.arrowTFC.name=Arrow
+entity.standTFC.name=Armor Stand
+entity.barrel.name=Barrel
+entity.fallingBlock.name=Falling Block
+
 entity.notFamiliar=The animal won't let you do that.
 fishingRod.lineTension=The line is going to snap!
 fishingRod.lineSnap=The line snapped!
@@ -2033,6 +2035,7 @@ tile.Fungi.mushroom_brown.name=Brown Mushroom
 tile.Fungi.mushroom_red.name=Red Mushroom
 tile.Cactus.name=Cactus
 tile.Pumpkin.name=Pumpkin
+tile.LitPumpkin.name=Jack o'Lantern
 tile.Moss.name=Moss
 tile.Thatch.name=Thatch
 tile.Flora.Golden Rod.name=Goldenrod
@@ -2477,6 +2480,18 @@ gui.mature=Mature
 gui.metal.Iron=Iron
 gui.tier=Tier
 gui.progress=Progress
+gui.fuel=Fuel
+gui.Green Apple=Green Apple Tree
+gui.Red Apple=Red Apple Tree
+gui.Banana=Banana Tree
+gui.Cherry=Cherry Tree
+gui.Lemon=Lemon Tree
+gui.Olive=Olive Tree
+gui.Orange=Orange Tree
+gui.Peach=Peach Tree
+gui.Plum=Plum Tree
+gui.pile=Pile
+gui.weaving=Weaving
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Must use under flowing water.
@@ -2530,3 +2545,13 @@ error.Contact=Please report to TerraFirmaCraft Support.
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+tile.Hopper.name=Hopper
+fluid.oliveoil=Olive Oil
+tile.OilLamp.Gold.name=Gold Oil Lamp
+tile.OilLamp.Platinum.name=Platinum Oil Lamp
+tile.OilLamp.RoseGold.name=Rose Gold Oil Lamp
+tile.OilLamp.Silver.name=Silver Oil Lamp
+tile.OilLamp.SterlingSilver.name=Sterling Silver Oil Lamp
+tile.OilLamp.BlueSteel.name=Blue Steel Oil Lamp
+gui.plans.hopper=Hopper
+gui.plans.oillamp=Oil Lamp

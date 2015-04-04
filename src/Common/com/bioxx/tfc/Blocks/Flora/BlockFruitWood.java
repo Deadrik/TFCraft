@@ -24,7 +24,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.FloraIndex;
 import com.bioxx.tfc.Food.FloraManager;
-import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
+import com.bioxx.tfc.TileEntities.TEFruitTreeWood;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
@@ -255,7 +255,7 @@ public class BlockFruitWood extends BlockTerraContainer
 				TFC_Time.getSeasonAdjustedMonth(k) < 6 &&
 				fi != null && temp >= fi.minTemp && temp < fi.maxTemp)
 		{
-			TileEntityFruitTreeWood te = (TileEntityFruitTreeWood)world.getTileEntity(i, j, k);
+			TEFruitTreeWood te = (TEFruitTreeWood)world.getTileEntity(i, j, k);
 			int t = 1;
 			if(TFC_Time.getSeasonAdjustedMonth(k) < 3)
 				t = 2;
@@ -270,10 +270,10 @@ public class BlockFruitWood extends BlockTerraContainer
 					(world.isAirBlock(i, j+1, k) || world.getBlock(i, j+1, k) == TFCBlocks.fruitTreeLeaves))
 			{
 				world.setBlock(i, j+1, k, this, world.getBlockMetadata(i, j, k), 0x2);
-				((TileEntityFruitTreeWood)world.getTileEntity(i, j+1, k)).setTrunk(true);
-				((TileEntityFruitTreeWood)world.getTileEntity(i, j+1, k)).setHeight(te.height+1);
-				((TileEntityFruitTreeWood)world.getTileEntity(i, j+1, k)).setBirth();
-				((TileEntityFruitTreeWood)world.getTileEntity(i, j, k)).setBirthWood(trunkGrowTime);
+				((TEFruitTreeWood)world.getTileEntity(i, j+1, k)).setTrunk(true);
+				((TEFruitTreeWood)world.getTileEntity(i, j+1, k)).setHeight(te.height+1);
+				((TEFruitTreeWood)world.getTileEntity(i, j+1, k)).setBirth();
+				((TEFruitTreeWood)world.getTileEntity(i, j, k)).setBirthWood(trunkGrowTime);
 			}
 			else if(te.birthTimeWood + branchGrowTime < TFC_Time.getTotalDays() && te.height == 2 && te.isTrunk && rand.nextInt(16/t) == 0 &&
 					world.getBlock(i, j+1, k) != this)
@@ -282,33 +282,33 @@ public class BlockFruitWood extends BlockTerraContainer
 				if(r == 0 && world.isAirBlock(i+1, j, k) || world.getBlock(i+1, j, k) == TFCBlocks.fruitTreeLeaves)
 				{
 					world.setBlock(i+1, j, k, this, world.getBlockMetadata(i, j, k), 0x2);
-					((TileEntityFruitTreeWood)world.getTileEntity(i+1, j, k)).setTrunk(false);
-					((TileEntityFruitTreeWood)world.getTileEntity(i+1, j, k)).setHeight(te.height);
-					((TileEntityFruitTreeWood)world.getTileEntity(i+1, j, k)).setBirth();
+					((TEFruitTreeWood)world.getTileEntity(i+1, j, k)).setTrunk(false);
+					((TEFruitTreeWood)world.getTileEntity(i+1, j, k)).setHeight(te.height);
+					((TEFruitTreeWood)world.getTileEntity(i+1, j, k)).setBirth();
 				}
 				else if(r == 1 && world.isAirBlock(i, j, k-1) || world.getBlock(i, j, k-1) == TFCBlocks.fruitTreeLeaves)
 				{
 					world.setBlock(i, j, k-1, this, world.getBlockMetadata(i, j, k), 0x2);
-					((TileEntityFruitTreeWood)world.getTileEntity(i, j, k-1)).setTrunk(false);
-					((TileEntityFruitTreeWood)world.getTileEntity(i, j, k-1)).setHeight(te.height);
-					((TileEntityFruitTreeWood)world.getTileEntity(i, j, k-1)).setBirth();
+					((TEFruitTreeWood)world.getTileEntity(i, j, k-1)).setTrunk(false);
+					((TEFruitTreeWood)world.getTileEntity(i, j, k-1)).setHeight(te.height);
+					((TEFruitTreeWood)world.getTileEntity(i, j, k-1)).setBirth();
 				}
 				else if(r == 2 && world.isAirBlock(i-1, j, k) || world.getBlock(i-1, j, k) == TFCBlocks.fruitTreeLeaves)
 				{
 					world.setBlock(i-1, j, k, this, world.getBlockMetadata(i, j, k), 0x2);
-					((TileEntityFruitTreeWood)world.getTileEntity(i-1, j, k)).setTrunk(false);
-					((TileEntityFruitTreeWood)world.getTileEntity(i-1, j, k)).setHeight(te.height);
-					((TileEntityFruitTreeWood)world.getTileEntity(i-1, j, k)).setBirth();
+					((TEFruitTreeWood)world.getTileEntity(i-1, j, k)).setTrunk(false);
+					((TEFruitTreeWood)world.getTileEntity(i-1, j, k)).setHeight(te.height);
+					((TEFruitTreeWood)world.getTileEntity(i-1, j, k)).setBirth();
 				}
 				else if(r == 3 && world.isAirBlock(i, j, k+1) || world.getBlock(i, j, k+1) == TFCBlocks.fruitTreeLeaves)
 				{
 					world.setBlock(i, j, k+1, this, world.getBlockMetadata(i, j, k), 0x2);
-					((TileEntityFruitTreeWood)world.getTileEntity(i, j, k+1)).setTrunk(false);
-					((TileEntityFruitTreeWood)world.getTileEntity(i, j, k+1)).setHeight(te.height);
-					((TileEntityFruitTreeWood)world.getTileEntity(i, j, k+1)).setBirth();
+					((TEFruitTreeWood)world.getTileEntity(i, j, k+1)).setTrunk(false);
+					((TEFruitTreeWood)world.getTileEntity(i, j, k+1)).setHeight(te.height);
+					((TEFruitTreeWood)world.getTileEntity(i, j, k+1)).setBirth();
 				}
 
-				((TileEntityFruitTreeWood)world.getTileEntity(i, j, k)).setBirthWood(branchGrowTime);
+				((TEFruitTreeWood)world.getTileEntity(i, j, k)).setBirthWood(branchGrowTime);
 			}
 			else if(te.birthTimeWood + 1 < TFC_Time.getTotalDays() && rand.nextInt(leafGrowthRate) == 0 && world.getBlock(i, j+2, k) != this)
 			{
@@ -355,7 +355,7 @@ public class BlockFruitWood extends BlockTerraContainer
 		}
 	}
 
-	public String getType(int meta)
+	public static String getType(int meta)
 	{
 		switch(meta)
 		{
@@ -375,14 +375,14 @@ public class BlockFruitWood extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
-		return new TileEntityFruitTreeWood();
+		return new TEFruitTreeWood();
 	}
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int metadata)
 	{
 		if(!world.isRemote && checkOut(world,x,y-1,z,metadata) && world.getTileEntity(x, y-1, z) != null)
-			((TileEntityFruitTreeWood)world.getTileEntity(x, y-1, z)).setBirth();
+			((TEFruitTreeWood)world.getTileEntity(x, y-1, z)).setBirth();
 		super.breakBlock(world, x, y, z, block, metadata);
 	}
 

@@ -106,8 +106,11 @@ public class BlockPottery extends BlockTerraContainer
 			}
 			else if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemLogs && !player.isSneaking() && te.straw == 8)
 			{
-				te.addLog(player.inventory.getCurrentItem(), player);
-				return true;
+				if (te.addLog(player.inventory.getCurrentItem(), player))
+				{
+					world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, TFCBlocks.LogNatural.stepSound.func_150496_b(), (TFCBlocks.LogNatural.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.LogNatural.stepSound.getPitch() * 0.8F);
+					return true;
+				}
 			}
 			else if((player.inventory.getCurrentItem() != null && !(player.inventory.getCurrentItem().getItem() instanceof ItemPotteryBase)) || (te.getStackInSlot(0) != null && 
 					te.getStackInSlot(1) != null && te.getStackInSlot(2) != null && te.getStackInSlot(3) != null) || player.inventory.getCurrentItem() == null)

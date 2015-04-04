@@ -19,7 +19,7 @@ import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 
-import com.bioxx.tfc.Blocks.Terrain.BlockCollapsable;
+import com.bioxx.tfc.Blocks.Terrain.BlockCollapsible;
 import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -108,7 +108,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	int[] seaLevelOffsetMap = new int[256];
 	int[] chunkHeightMap = new int[256];
 
-	WorldGenFissure fissureGen = new WorldGenFissure(TFCBlocks.FreshWater, 1, false, 10);
 	MapGenCavesTFC caveGen = new MapGenCavesTFC();
 	MapGenRavineTFC surfaceRavineGen = new MapGenRavineTFC(125, 30);//surface
 	MapGenRavineTFC ravineGen = new MapGenRavineTFC(20, 50);//deep
@@ -195,7 +194,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	@Override
 	public void populate(IChunkProvider chunkProvider, int chunkX, int chunkZ)
 	{
-		BlockCollapsable.fallInstantly = true;
+		BlockCollapsible.fallInstantly = true;
 		int xCoord = chunkX * 16;
 		int zCoord = chunkZ * 16;
 		TFCBiome biome = (TFCBiome) this.worldObj.getBiomeGenForCoords(xCoord + 16, zCoord + 16);
@@ -241,7 +240,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		}
 
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(chunkProvider, worldObj, rand, chunkX, chunkZ, var11));
-		BlockCollapsable.fallInstantly = false;
+		BlockCollapsible.fallInstantly = false;
 	}
 
 	public static List<SpawnListEntry> getCreatureSpawnsByChunk(World world, TFCBiome biome, int x, int z)

@@ -74,15 +74,15 @@ public class FoodRegistry
 	public Item getFood(int id)
 	{
 		if(proteinMap.containsKey(id))
-			return (Item) proteinMap.get(id);
+			return proteinMap.get(id);
 		if(vegetableMap.containsKey(id))
-			return (Item) vegetableMap.get(id);
+			return vegetableMap.get(id);
 		if(fruitMap.containsKey(id))
-			return (Item) fruitMap.get(id);
+			return fruitMap.get(id);
 		if(grainMap.containsKey(id))
-			return (Item) grainMap.get(id);
+			return grainMap.get(id);
 		if(dairyMap.containsKey(id))
-			return (Item) dairyMap.get(id);
+			return dairyMap.get(id);
 		return null;
 	}
 

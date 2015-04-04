@@ -1,7 +1,9 @@
 package com.bioxx.tfc.Blocks.Vanilla;
 
 import net.minecraft.block.BlockPumpkin;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFCTabs;
 
@@ -10,20 +12,48 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCustomPumpkin extends BlockPumpkin
 {
-	public BlockCustomPumpkin(boolean par2)
+	private boolean isLit;
+	@SideOnly(Side.CLIENT)
+	private IIcon topIcon;
+	@SideOnly(Side.CLIENT)
+	private IIcon faceIcon;
+
+	public BlockCustomPumpkin(boolean lit)
 	{
-		super(par2);
+		super(lit);
+		this.isLit = lit;
 		this.setCreativeTab(TFCTabs.TFCBuilding);
+	}
+
+	/**
+	 * Gets the block's texture. Args: side, meta
+	 */
+	@Override
+	@SideOnly(Side.CLIENT)
+    public IIcon getIcon(int side, int meta)
+    {
+        return side == 1 ? this.topIcon : (side == 0 ? this.topIcon : // Top or Bottom Side
+        	(meta == 2 && side == 2 ? this.faceIcon : (meta == 3 && side == 5 ? this.faceIcon : // Face Side
+        		(meta == 0 && side == 3 ? this.faceIcon : (meta == 1 && side == 4 ? this.faceIcon : // Face Side
+        			this.blockIcon))))); // Blank Side
+    }
+
+	/**
+	 * Called whenever the block is added into the world. Args: world, x, y, z
+	 */
+	@Override
+	public void onBlockAdded(World world, int x, int y, int z)
+	{
+		// Intentionally blank to override the creation of snow and iron golems.
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	/**
-	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-	 */
-	public IIcon getIcon(int par1, int par2)
+	public void registerBlockIcons(IIconRegister iconRegister)
 	{
-		return par1 == 1 ? super.getIcon(par1, par2) : (par1 == 0 ? super.getIcon(par1, par2) : this.blockIcon); //Removes face from unlit pumpkins.
+		this.topIcon = iconRegister.registerIcon(this.getTextureName() + "_top");
+		this.blockIcon = iconRegister.registerIcon(this.getTextureName() + "_side");
+		this.faceIcon = this.isLit ? iconRegister.registerIcon(this.getTextureName() + "_face_on") : this.blockIcon; // Only have a face when lit.
 	}
 
 }

@@ -104,7 +104,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		//	animals to be adults, so we set their birthdays far enough back
 		//	in time such that they reach adulthood now.
 		//
-		this.setAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
+		this.setAge(TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 		//For Testing Only(makes spawned animals into babies)
 		//this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
@@ -145,7 +145,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
-		this.setAge((int) TFC_Time.getTotalDays());
+		this.setAge(TFC_Time.getTotalDays());
 	}
 
 	public EntityChickenTFC(World world, double posX, double posY, double posZ, NBTTagCompound genes)
@@ -162,7 +162,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
-		this.setAge((int) TFC_Time.getTotalDays());
+		this.setAge(TFC_Time.getTotalDays());
 	}
 
 	public void addAI()
@@ -684,6 +684,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			{
 				worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			}
+			this.hunger += 24000;
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();

@@ -18,36 +18,38 @@ death.attack.alcohol=%1$s ist an Alkoholvergiftung gestorben
 death.attack.heatStroke=%1$s ist an Hitzeschlag gestorben
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=Tintenfisch
-entity.cowTFC.name=Kuh
-entity.wolfTFC.name=Wolf
 entity.bearTFC.name=Bär
-entity.deerTFC.name=Hirsch
 entity.chickenTFC.name=Huhn
-entity.pigTFC.name=Schwein
-entity.skeletonTFC.name=Skelett
-entity.zombieTFC.name=Zombie
-entity.spiderTFC.name=Spinne
-entity.slimeTFC.name=Schleim
-entity.silverfishTFC.name=Silberfisch
-entity.ghastTFC.name=Ghast
-entity.caveSpiderTFC.name=Höhlenspinne
-entity.blazeTFC.name=Lohe
-entity.endermanTFC.name=Enderman
-entity.pigZombieTFC.name=Zombie Pigman
-entity.creeperTFC.name=Creeper
-entity.sheepTFC.name=Schaf
-entity.pheasantTFC.name=Fasan
-entity.horseTFC.name=Pferd
-entity.irongolemTFC.name=Eisengolem
+entity.cowTFC.name=Kuh
+entity.deerTFC.name=Hirsch
 entity.fishTFC.name=Barsch
+entity.horseTFC.name=Pferd
+entity.pheasantTFC.name=Fasan
+entity.pigTFC.name=Schwein
+entity.sheepTFC.name=Schaf
+entity.squidTFC.name=Tintenfisch
+entity.wolfTFC.name=Wolf
 
+entity.blazeTFC.name=Lohe
+entity.caveSpiderTFC.name=Höhlenspinne
+entity.creeperTFC.name=Creeper
+entity.endermanTFC.name=Enderman
+entity.ghastTFC.name=Ghast
+entity.irongolemTFC.name=Eisengolem
+entity.pigZombieTFC.name=Zombie Pigman
+entity.silverfishTFC.name=Silberfisch
+entity.skeletonTFC.name=Skelett
+entity.slimeTFC.name=Schleim
+entity.spiderTFC.name=Spinne
+entity.zombieTFC.name=Zombie
 
-#==========
-#= Entity =
-#==========
+entity.arrowTFC.name=Pfeil
+entity.standTFC.name=
+entity.barrel.name=
+entity.fallingBlock.name=
+
 entity.notFamiliar=Das Tier ist nicht zahm genug.
 fishingRod.lineTension=Die Angelschnur wird bald reißen.
 fishingRod.lineSnap=Die Angelschnur ist gerissen.
@@ -2325,6 +2327,7 @@ gui.MeltedMetal.Inst0=§bRechtsklick §7zum gießen in Werkzeugform.
 gui.PotteryBase.Inst0=Kriechen und §bRechtsklicken§7, um Objekt zu platzieren.
 gui.PotteryVesselSmall.Inst0=Oder §bRechtsklick §7um Inventar zu öffnen.
 gui.RawHide.Inst0=????
+gui.Chisel.Inst0=
 gui.Barrel.MoreItems=§8Mehr... (§fUmschalt-Taste§8 halten)
 
 gui.Nutrient.A=Nährstoff A
@@ -2474,6 +2477,8 @@ gui.useless=Nutzlos
 gui.growth=Reife
 gui.mature=ausgereift
 gui.metal.Iron=Eisen
+gui.tier=
+gui.progress=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Muss unter fließendem Wasser verwendet werden.

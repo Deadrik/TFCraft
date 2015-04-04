@@ -24,6 +24,7 @@ import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.AnimalChest;
 import net.minecraft.inventory.IInvBasic;
@@ -31,6 +32,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.play.server.S1BPacketEntityAttach;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
@@ -80,6 +82,11 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	protected float mateColMod = 0;
 	protected float mateClimMod = 0;
 	protected float mateHardMod = 0;
+	protected int mateType = 0;
+	protected int mateVariant = 0;
+	protected double mateMaxHealth = this.calcMaxHealth();
+	protected double mateJumpStrength = this.calcJumpStrength();
+	protected double mateMoveSpeed = this.calcMoveSpeed();
 	public boolean isInLove;
 	public Vec3 attackedVec = null;
 	public Entity fearSource = null;
@@ -141,12 +148,12 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		//	in time such that they reach adulthood now.
 		//
 		//this.setGrowingAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
-		this.setAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
+		this.setAge(TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 		//For Testing Only(makes spawned animals into babies)
 		//this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
 
-	public EntityHorseTFC(World par1World, IAnimal mother,  ArrayList<Float> data)
+	public EntityHorseTFC(World par1World, IAnimal mother, ArrayList<Float> data, int type, int variant)
 	{
 		this(par1World);
 		float father_size = 1;
@@ -180,12 +187,13 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		hard_mod = (float)Math.sqrt(hard_mod * hard_mod * (float)Math.sqrt((mother.getHardiness() + father_hard) * 0.5F));
 		climate_mod = (float)Math.sqrt(climate_mod * climate_mod * (float)Math.sqrt((mother.getClimateAdaptation() + father_clim) * 0.5F));
 
-
 		this.familiarity = (int) (mother.getFamiliarity()<90?mother.getFamiliarity()/2:mother.getFamiliarity()*0.9f);
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
-		this.setAge((int) TFC_Time.getTotalDays());
+		this.setAge(TFC_Time.getTotalDays());
+		this.setHorseType(type);
+		this.setHorseVariant(variant);
 	}
 
 	@Override
@@ -207,7 +215,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		else
 			setGrowingAge(-1);
 
-
 		this.handleFamiliarityUpdate();
 		if(isPregnant())
 		{
@@ -218,7 +225,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				baby.rotationYawHead = baby.rotationYaw;
 				baby.renderYawOffset = baby.rotationYaw;
 				worldObj.spawnEntityInWorld(baby);
-				baby.setAge((int)TFC_Time.getTotalDays());
+				baby.setAge(TFC_Time.getTotalDays());
 				pregnant = false;
 			}
 		}
@@ -309,17 +316,16 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.dataWatcher.addObject(23, Integer.valueOf(0));	//Colour, climate, hardiness, familiarity
 	}
 
-	private int func_110225_cC()
+	private int getNumChestSlots()
 	{
 		int i = this.getHorseType();
-		return this.isChested() && (i == 1 || i == 2) ? 17 : 2;
+		return this.isChested() && (i == 1 || i == 2) ? 17 : 2; // 2 (Armor & Saddle) + 15 Donkey Chest Slots
 	}
 
 	public void updateChestSaddle()
 	{
 		AnimalChest animalchest = this.horseChest;
-		this.horseChest = new AnimalChest("HorseChest", this.func_110225_cC());
-		this.horseChest.func_110133_a(this.getCommandSenderName());
+		this.horseChest = new AnimalChest("HorseChest", this.getNumChestSlots());
 
 		if (animalchest != null)
 		{
@@ -335,39 +341,39 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 
 		this.horseChest.func_110134_a(this);
-		this.func_110232_cE();
+		this.updateSaddle();
 	}
 
-	private void func_110232_cE()
+	private void updateSaddle()
 	{
 		if (!this.worldObj.isRemote)
 		{
 			this.setHorseSaddled(this.horseChest.getStackInSlot(0) != null);
-			if (this.func_110259_cr())
+			if (this.getHorseType() == 0)
 				this.func_146086_d(this.horseChest.getStackInSlot(1));
 		}
 	}
 
 	@Override
-	protected EntityHorseTFC getClosestHorse(Entity entity, double par2)
+	protected EntityHorseTFC getClosestHorse(Entity entity, double range)
 	{
-		double d1 = Double.MAX_VALUE;
-		Entity entity1 = null;
-		List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(entity, entity.boundingBox.addCoord(par2, par2, par2), horseBreedingSelector);
-		Iterator iterator = list.iterator();
+		double maxDistance = Double.MAX_VALUE;
+		EntityHorseTFC closestHorse = null;
+		List<EntityHorseTFC> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(entity, entity.boundingBox.addCoord(range, range, range), horseBreedingSelector);
+		Iterator<EntityHorseTFC> iterator = list.iterator();
 
 		while (iterator.hasNext())
 		{
-			Entity entity2 = (Entity)iterator.next();
-			double d2 = entity2.getDistanceSq(entity.posX, entity.posY, entity.posZ);
-			if (d2 < d1)
+			EntityHorseTFC nearbyHorse = iterator.next();
+			double distance = nearbyHorse.getDistanceSq(entity.posX, entity.posY, entity.posZ);
+			if (distance < maxDistance)
 			{
-				entity1 = entity2;
-				d1 = d2;
+				closestHorse = nearbyHorse;
+				maxDistance = distance;
 			}
 		}
 
-		return (EntityHorseTFC)entity1;
+		return closestHorse;
 	}
 
 	@Override
@@ -383,11 +389,36 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	@Override
 	public void openGUI(EntityPlayer player)
 	{
+		Entity temp = player.ridingEntity; // Trick the player into thinking they are riding the horse so we can track that specific horse
+
+		if (temp == null) // Shift-right click while not riding to open inventory
+		{
+			player.ridingEntity = this; // Only applies to EntityPlayerSP
+			if (player instanceof EntityPlayerMP)
+			{
+				EntityPlayerMP playerMP = (EntityPlayerMP) player;
+				playerMP.playerNetServerHandler.sendPacket(new S1BPacketEntityAttach(0, playerMP, this)); // Sets ridingEntity to this for playerMP
+				openHorseContainer(player);
+				playerMP.playerNetServerHandler.sendPacket(new S1BPacketEntityAttach(0, playerMP, temp)); // Resets ridingEntity for playerMP
+			}
+			else
+			{
+				openHorseContainer(player);
+			}
+			player.ridingEntity = null; // Reset EntityPlayerSP
+		}
+
+		if (temp != null && temp == this) // Opening the inventory while riding
+		{
+			openHorseContainer(player);
+		}
+	}
+
+	private void openHorseContainer(EntityPlayer player)
+	{
 		if (!this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == player) && this.isTame())
 		{
-			this.horseChest.func_110133_a(this.getCommandSenderName());
-			//player.displayGUIHorse(this, this.horseChest);
-			player.openGui(TerraFirmaCraft.instance, 42, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+			player.openGui(TerraFirmaCraft.instance, 42, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
 		}
 	}
 
@@ -405,20 +436,22 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		ItemStack itemstack = player.inventory.getCurrentItem();
 		if(!worldObj.isRemote)
 		{
-			if(player.isSneaking() && !familiarizedToday && itemstack != null){
+			if (player.isSneaking() && !familiarizedToday && itemstack != null)
+			{
 				this.familiarize(player);
 				return true;
 			}
 			player.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
-			if(getGender()==GenderEnum.FEMALE && pregnant)
+			if (getGender() == GenderEnum.FEMALE && pregnant)
 				player.addChatMessage(new ChatComponentText("Pregnant"));
+
 		}
 
 		if (itemstack != null && this.isBreedingItemTFC(itemstack) && checkFamiliarity(InteractionEnum.BREED,player) &&this.familiarizedToday && this.getGrowingAge() == 0 && !super.isInLove())
 		{
 			if (!player.capabilities.isCreativeMode)
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, (((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
-
+			this.hunger += 24000;
 			this.setInLove(true);
 			return true;
 		}
@@ -428,12 +461,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			}
 			return true;
 		}
-
-		if (itemstack != null && itemstack.getItem() == Items.spawn_egg)
-		{
-			return super.interact(player);
-		}
-		else if (!this.isTame() && this.func_110256_cu())
+		else if (!this.isTame() && this.func_110256_cu()) // Zombie or Skeleton Horse
 		{
 			return false;
 		}
@@ -447,7 +475,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			this.clearLeashed(true, true);
 			return true;
 		}
-		else if (this.func_110253_bW() && this.riddenByEntity != null)
+		else if (this.isAdultHorse() && this.riddenByEntity != null)
 		{
 			return super.interact(player);
 		}
@@ -457,37 +485,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			{
 				boolean flag = false;
 
-				if (this.func_110259_cr())
-				{
-					byte b0 = -1;
-
-					if (itemstack.getItem() == Items.iron_horse_armor)
-					{
-						b0 = 1;
-					}
-					else if (itemstack.getItem() == Items.golden_horse_armor)
-					{
-						b0 = 2;
-					}
-					else if (itemstack.getItem() == Items.diamond_horse_armor)
-					{
-						b0 = 3;
-					}
-
-					if (b0 >= 0)
-					{
-						if (!this.isTame())
-						{
-							this.makeHorseRearWithSound();
-							return true;
-						}
-
-						this.openGUI(player);
-						return true;
-					}
-				}
-
-				if (!this.isTame() && !flag)
+				if (!this.isTame())
 				{
 					if (itemstack != null && itemstack.interactWithEntity(player, this))
 					{
@@ -497,18 +495,12 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 					this.makeHorseRearWithSound();
 				}
 
-				if (!flag && this.func_110229_cs() && !this.isChested() && itemstack.getItem() == Item.getItemFromBlock(TFCBlocks.Chest))
+				if (this.func_110229_cs()/*Donkey or Mule*/&& !this.isChested() && itemstack.getItem() == Item.getItemFromBlock(TFCBlocks.Chest))
 				{
 					this.setChested(true);
 					this.playSound("mob.chickenplop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
 					flag = true;
 					this.updateChestSaddle();
-				}
-
-				if (!flag && this.func_110253_bW() && !this.isHorseSaddled() && itemstack.getItem() == Items.saddle)
-				{
-					this.openGUI(player);
-					return true;
 				}
 
 				if (flag)
@@ -521,7 +513,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 					return true;
 				}
 			}
-			if (this.func_110253_bW() && this.riddenByEntity == null)
+			if (this.isAdultHorse() && this.riddenByEntity == null)
 			{
 				if (itemstack != null && itemstack.interactWithEntity(player, this))
 				{
@@ -529,12 +521,9 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				}
 				else
 				{
-
-					if(this.getLeashedToEntity() != null &&
-							this.getLeashedToEntity() instanceof EntityPlayer &&
-							this.getLeashedToEntity() == player)
+					if (this.getLeashedToEntity() instanceof EntityPlayer && this.getLeashedToEntity() == player)
 					{
-						this.func_110237_h(player);
+						this.mountHorse(player);
 					}
 					return true;
 				}
@@ -549,7 +538,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	public boolean getLeashed()
 	{
 		if(super.getLeashed() && getLeashedToEntity() instanceof EntityPlayer &&
-				((EntityPlayer)getLeashedToEntity()).inventory.getCurrentItem() == null && func_110174_bM() != -1)
+				((EntityPlayer) getLeashedToEntity()).inventory.getCurrentItem() == null && func_110174_bM()/*maximumHomeDistance*/!= -1)
 		{
 			return false;
 		}
@@ -572,7 +561,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 	}
 
-	private void func_110237_h(EntityPlayer player)
+	private void mountHorse(EntityPlayer player)
 	{
 		player.rotationYaw = this.rotationYaw;
 		player.rotationPitch = this.rotationPitch;
@@ -591,10 +580,10 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.entityDropItem(new ItemStack(TFCItems.Hide, 1, Math.max(0, Math.min(2, (int)(ageMod * 3 - 1)))), 0);
 		this.dropItem(Items.bone, (int) ((rand.nextInt(8) + 3) * ageMod));
 		if(this.getLeashed()){
-			this.entityDropItem(new ItemStack(Items.lead,1,0),0);
+			this.entityDropItem(new ItemStack(TFCItems.Rope), 0);
 		}
 
-		float foodWeight = ageMod*(this.size_mod * 4000);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+		float foodWeight = ageMod * (this.size_mod * 4000);
 
 		TFC_Core.animalDropMeat(this, TFCItems.horseMeatRaw, foodWeight);
 	}
@@ -608,9 +597,10 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 	}
 
-	private boolean func_110200_cJ()
+	private boolean getBreedable()
 	{
-		return this.riddenByEntity == null && this.ridingEntity == null && this.isTame() && this.isAdultHorse() && !this.func_110222_cv() && this.getHealth() >= this.getMaxHealth();
+		return this.riddenByEntity == null && this.ridingEntity == null && this.isTame() && this.isAdultHorse() && 
+				!this.func_110222_cv()/*Not a Mule, Zombie or Skeleton*/&& this.getHealth() >= this.getMaxHealth();
 	}
 
 	/**
@@ -623,7 +613,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		nbttc.setInteger ("Sex", sex);
 		nbttc.setLong ("Animal ID", animalID);
 		nbttc.setFloat ("Size Modifier", size_mod);
-
 
 		nbttc.setInteger("Familiarity", familiarity);
 		nbttc.setLong("lastFamUpdate", lastFamiliarityUpdate);
@@ -646,6 +635,11 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		nbttc.setFloat("MateCol", mateColMod);
 		nbttc.setFloat("MateClim", mateClimMod);
 		nbttc.setFloat("MateHard", mateHardMod);
+		nbttc.setInteger("MateType", mateType);
+		nbttc.setInteger("MateVariant", mateVariant);
+		nbttc.setDouble("MateHealth", mateMaxHealth);
+		nbttc.setDouble("MateJump", mateJumpStrength);
+		nbttc.setDouble("MateSpeed", mateMoveSpeed);
 		nbttc.setLong("ConceptionTime",conception);
 		nbttc.setInteger("Age", getBirthDay());
 
@@ -712,6 +706,11 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		mateColMod = nbt.getFloat("MateCol");
 		mateClimMod = nbt.getFloat("MateClim");
 		mateHardMod = nbt.getFloat("MateHard");
+		mateType = nbt.getInteger("MateType");
+		mateVariant = nbt.getInteger("MateVariant");
+		mateMaxHealth = nbt.getDouble("MateHealth");
+		mateJumpStrength = nbt.getDouble("MateJump");
+		mateMoveSpeed = nbt.getDouble("MateSpeed");
 		conception = nbt.getLong("ConceptionTime");
 		this.setAge(nbt.getInteger ("Age"));
 
@@ -738,7 +737,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		{
 			itemstack = ItemStack.loadItemStackFromNBT(nbttc.getCompoundTag("ArmorItem"));
 
-			if (itemstack != null && func_146085_a(itemstack.getItem()))
+			if (itemstack != null && func_146085_a/*isHorseArmor*/(itemstack.getItem()))
 			{
 				this.horseChest.setInventorySlotContents(1, itemstack);
 			}
@@ -757,7 +756,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			this.horseChest.setInventorySlotContents(0, new ItemStack(Items.saddle));
 		}
 
-		this.func_110232_cE();
+		this.updateSaddle();
 	}
 
 	/**
@@ -778,7 +777,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		{
 			EntityHorseTFC entityhorse = (EntityHorseTFC) animal;
 
-			if (this.func_110200_cJ() && entityhorse.func_110200_cJ())
+			if (this.getBreedable() && entityhorse.getBreedable())
 			{
 				int i = this.getHorseType();
 				int j = entityhorse.getHorseType();
@@ -791,17 +790,17 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 	}
 
-	private float func_110267_cL()
+	private float calcMaxHealth()
 	{
 		return 1000 + (float)this.rand.nextInt(101) + this.rand.nextInt(151);
 	}
 
-	private double func_110245_cM()
+	private double calcJumpStrength()
 	{
 		return 0.4000000059604645D + this.rand.nextDouble() * 0.2D + this.rand.nextDouble() * 0.2D + this.rand.nextDouble() * 0.2D;
 	}
 
-	private double func_110203_cN()
+	private double calcMoveSpeed()
 	{
 		return (0.44999998807907104D + this.rand.nextDouble() * 0.3D + this.rand.nextDouble() * 0.3D + this.rand.nextDouble() * 0.3D) * 0.25D;
 	}
@@ -837,6 +836,11 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		mateColMod = otherAnimal.getColour();
 		mateClimMod = otherAnimal.getClimateAdaptation();
 		mateHardMod = otherAnimal.getHardiness();
+		mateType = ((EntityHorse) otherAnimal).getHorseType();
+		mateVariant = ((EntityHorse) otherAnimal).getHorseVariant();
+		mateMaxHealth = ((EntityLivingBase) otherAnimal).getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue();
+		mateJumpStrength = ((EntityLivingBase) otherAnimal).getEntityAttribute(horseJumpStrength).getBaseValue();
+		mateMoveSpeed = ((EntityLivingBase) otherAnimal).getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue();
 	}
 
 	@Override
@@ -936,74 +940,78 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	@Override
 	public EntityAgeable createChildTFC(EntityAgeable eAgeable)
 	{
-		EntityHorseTFC entityhorse = (EntityHorseTFC) eAgeable;
 		ArrayList<Float> data = new ArrayList<Float>();
-		data.add(eAgeable.getEntityData().getFloat("MateSize"));
-		data.add(eAgeable.getEntityData().getFloat("MateStrength"));
-		data.add(eAgeable.getEntityData().getFloat("MateAggro"));
-		data.add(eAgeable.getEntityData().getFloat("MateObed"));
-		data.add(eAgeable.getEntityData().getFloat("MateCol"));
-		data.add(eAgeable.getEntityData().getFloat("MateClim"));
-		data.add(eAgeable.getEntityData().getFloat("MateHard"));
-		EntityHorseTFC entityhorse1 = new EntityHorseTFC(worldObj, this, data);
-		int i = this.getHorseType();
-		int j = entityhorse.getHorseType();
-		int k = 0;
+		data.add(this.mateSizeMod);
+		data.add(this.mateStrengthMod);
+		data.add(this.mateAggroMod);
+		data.add(this.mateObedMod);
+		data.add(this.mateColMod);
+		data.add(this.mateClimMod);
+		data.add(this.mateHardMod);
+		
+		int momType = this.getHorseType();
+		int dadType = this.mateType;
+		int babyType = 0;
+		int babyVariant = 0;
 
-		if (i == j)
+		if (momType == dadType)
 		{
-			k = i;
+			babyType = momType;
 		}
-		else if (i == 0 && j == 1 || i == 1 && j == 0)
+		else if (momType == 0 && dadType == 1 || momType == 1 && dadType == 0)
 		{
-			k = 2;
+			babyType = 2; // Create Mule
 		}
 
-		if (k == 0)
+		if (babyType == 0)
 		{
 			int l = this.rand.nextInt(9);
-			int i1;
 
 			if (l < 4)
 			{
-				i1 = this.getHorseVariant() & 255;
+				babyVariant = this.getHorseVariant() & 255;
 			}
 			else if (l < 8)
 			{
-				i1 = entityhorse.getHorseVariant() & 255;
+				babyVariant = this.mateVariant & 255;
 			}
 			else
 			{
-				i1 = this.rand.nextInt(7);
+				babyVariant = this.rand.nextInt(7);
 			}
 
 			int j1 = this.rand.nextInt(5);
 
 			if (j1 < 4)
 			{
-				i1 |= this.getHorseVariant() & 65280;
+				babyVariant |= this.getHorseVariant() & 65280;
 			}
 			else if (j1 < 8)
 			{
-				i1 |= entityhorse.getHorseVariant() & 65280;
+				babyVariant |= this.mateVariant & 65280;
 			}
 			else
 			{
-				i1 |= this.rand.nextInt(5) << 8 & 65280;
+				babyVariant |= this.rand.nextInt(5) << 8 & 65280;
 			}
-
-			entityhorse1.setHorseVariant(i1);
 		}
 
-		entityhorse1.setHorseType(k);
-		double d0 = this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + eAgeable.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + this.func_110267_cL();
-		entityhorse1.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(d0 / 3.0D);
-		double d1 = this.getEntityAttribute(horseJumpStrength).getBaseValue() + eAgeable.getEntityAttribute(horseJumpStrength).getBaseValue() + this.func_110245_cM();
-		entityhorse1.getEntityAttribute(horseJumpStrength).setBaseValue(d1 / 3.0D);
-		double d2 = this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + eAgeable.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + this.func_110203_cN();
-		entityhorse1.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(d2 / 3.0D);
-		entityhorse1.setHealth((float)entityhorse1.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue());
-		return entityhorse1;
+		EntityHorseTFC baby = new EntityHorseTFC(worldObj, this, data, babyType, babyVariant);
+
+		// Average Mom + Dad + Random Max Health
+		double healthSum = this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + this.mateMaxHealth + this.calcMaxHealth();
+		baby.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(healthSum / 3.0D);
+
+		// Average Mom + Dad + Random Jump Strength
+		double jumpSum = this.getEntityAttribute(horseJumpStrength).getBaseValue() + this.mateJumpStrength + this.calcJumpStrength();
+		baby.getEntityAttribute(horseJumpStrength).setBaseValue(jumpSum / 3.0D);
+
+		// Average Mom + Dad + Random Move Speed
+		double speedSum = this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + this.mateMoveSpeed + this.calcMoveSpeed();
+		baby.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(speedSum / 3.0D);
+
+		baby.setHealth((float)baby.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue());
+		return baby;
 	}
 
 	@Override
@@ -1161,6 +1169,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			{
 				worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			}
+			this.hunger += 24000;
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();
@@ -1197,4 +1206,5 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 		return flag;
 	}
+
 }

@@ -92,7 +92,7 @@ public class BlockChestTFC extends BlockTerraContainer
 	@Override
 	public void onBlockPreDestroy(World world, int i, int j, int k, int meta) 
 	{
-		if(!world.isRemote)
+		if(!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops"))
 		{
 			int damageValue = getDamageValue(world, i, j, k);
 			EntityItem ei = new EntityItem(world, i, j, k, new ItemStack(TFCBlocks.Chest, 1, damageValue));

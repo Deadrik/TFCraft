@@ -23,6 +23,9 @@ import com.bioxx.tfc.Items.Tools.ItemFlintSteel;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.api.TFCBlocks;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockForge extends BlockTerraContainer
 {
 	IIcon textureOn;
@@ -249,5 +252,15 @@ public class BlockForge extends BlockTerraContainer
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
 		return new TEForge();
+	}
+
+	/**
+	 * Displays a flat icon image for an ItemStack containing the block, instead of a render. Using primarily for WAILA HUD.
+	 */
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getItemIconName()
+	{
+		return Reference.ModID + ":" + "devices/forge";
 	}
 }

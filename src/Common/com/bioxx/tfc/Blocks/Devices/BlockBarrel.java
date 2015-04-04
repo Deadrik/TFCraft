@@ -129,7 +129,7 @@ public class BlockBarrel extends BlockTerraContainer
 		if (!world.isRemote)
 		{
 			TEBarrel te = (TEBarrel)world.getTileEntity(x, y, z);
-			if (te != null && te.shouldDropItem)
+			if (te != null && te.shouldDropItem && world.getGameRules().getGameRuleBooleanValue("doTileDrops"))
 			{
 				if(te.getSealed())
 				{

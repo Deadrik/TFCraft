@@ -45,23 +45,26 @@ import com.bioxx.tfc.Entities.Mobs.EntityWolfTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityZombieTFC;
 import com.bioxx.tfc.Handlers.GuiHandler;
 import com.bioxx.tfc.Handlers.ServerTickHandler;
-import com.bioxx.tfc.Items.ItemBlocks.ItemOilLamp;
 import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEBellows;
 import com.bioxx.tfc.TileEntities.TEBerryBush;
 import com.bioxx.tfc.TileEntities.TEBlastFurnace;
+import com.bioxx.tfc.TileEntities.TEBloom;
 import com.bioxx.tfc.TileEntities.TEBloomery;
 import com.bioxx.tfc.TileEntities.TEChest;
 import com.bioxx.tfc.TileEntities.TECrop;
 import com.bioxx.tfc.TileEntities.TECrucible;
 import com.bioxx.tfc.TileEntities.TEDetailed;
 import com.bioxx.tfc.TileEntities.TEFarmland;
+import com.bioxx.tfc.TileEntities.TEFenceGate;
 import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEFruitLeaves;
+import com.bioxx.tfc.TileEntities.TEFruitTreeWood;
 import com.bioxx.tfc.TileEntities.TEGrill;
+import com.bioxx.tfc.TileEntities.TEHopper;
 import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.TileEntities.TELeatherRack;
 import com.bioxx.tfc.TileEntities.TELightEmitter;
@@ -74,23 +77,19 @@ import com.bioxx.tfc.TileEntities.TEOilLamp;
 import com.bioxx.tfc.TileEntities.TEOre;
 import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.TileEntities.TEPottery;
+import com.bioxx.tfc.TileEntities.TEQuern;
+import com.bioxx.tfc.TileEntities.TESapling;
 import com.bioxx.tfc.TileEntities.TESluice;
 import com.bioxx.tfc.TileEntities.TESmokeRack;
+import com.bioxx.tfc.TileEntities.TESpawnMeter;
 import com.bioxx.tfc.TileEntities.TEStand;
+import com.bioxx.tfc.TileEntities.TEToolRack;
 import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.TileEntities.TEWaterPlant;
+import com.bioxx.tfc.TileEntities.TEWoodConstruct;
+import com.bioxx.tfc.TileEntities.TEWorkbench;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
-import com.bioxx.tfc.TileEntities.TileEntityBloom;
-import com.bioxx.tfc.TileEntities.TileEntityFenceGate;
-import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
-import com.bioxx.tfc.TileEntities.TileEntityQuern;
-import com.bioxx.tfc.TileEntities.TileEntitySapling;
-import com.bioxx.tfc.TileEntities.TileEntitySpawnMeter;
-import com.bioxx.tfc.TileEntities.TileEntityToolRack;
-import com.bioxx.tfc.TileEntities.TileEntityWoodConstruct;
-import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
 import com.bioxx.tfc.WorldGen.TFCProvider;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.TFCItems;
 
@@ -135,22 +134,22 @@ public class CommonProxy
 	public void registerTileEntities(boolean b)
 	{
 		GameRegistry.registerTileEntity(TELogPile.class, "TerraLogPile");
-		GameRegistry.registerTileEntity(TileEntityWorkbench.class, "TerraWorkbench");
+		GameRegistry.registerTileEntity(TEWorkbench.class, "TerraWorkbench");
 		GameRegistry.registerTileEntity(TEForge.class, "TerraForge");
 		GameRegistry.registerTileEntity(TEBlastFurnace.class, "TerraBloomery");
 		GameRegistry.registerTileEntity(TEBloomery.class, "TerraEarlyBloomery");
 		GameRegistry.registerTileEntity(TESluice.class, "TerraSluice");
 		GameRegistry.registerTileEntity(TEFarmland.class, "TileEntityFarmland");
 		GameRegistry.registerTileEntity(TECrop.class, "TileEntityCrop");
-		GameRegistry.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
+		GameRegistry.registerTileEntity(TEFruitTreeWood.class, "FruitTreeWood");
 		GameRegistry.registerTileEntity(TEPartial.class, "Partial");
 		GameRegistry.registerTileEntity(TEDetailed.class, "Detailed");
-		GameRegistry.registerTileEntity(TileEntitySpawnMeter.class, "SpawnMeter");
-		GameRegistry.registerTileEntity(TileEntitySapling.class, "Sapling");
-		GameRegistry.registerTileEntity(TileEntityWoodConstruct.class, "WoodConstruct");
+		GameRegistry.registerTileEntity(TESpawnMeter.class, "SpawnMeter");
+		GameRegistry.registerTileEntity(TESapling.class, "Sapling");
+		GameRegistry.registerTileEntity(TEWoodConstruct.class, "WoodConstruct");
 		GameRegistry.registerTileEntity(TEBarrel.class, "Barrel");
-		GameRegistry.registerTileEntity(TileEntityFenceGate.class, "FenceGate");
-		GameRegistry.registerTileEntity(TileEntityBloom.class, "IronBloom");
+		GameRegistry.registerTileEntity(TEFenceGate.class, "FenceGate");
+		GameRegistry.registerTileEntity(TEBloom.class, "IronBloom");
 		GameRegistry.registerTileEntity(TECrucible.class, "Crucible");
 		GameRegistry.registerTileEntity(TENestBox.class, "Nest Box");
 		GameRegistry.registerTileEntity(TEStand.class, "Armour Stand");
@@ -165,6 +164,8 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TELightEmitter.class, "LightEmitter");
 		GameRegistry.registerTileEntity(TESmokeRack.class, "Smoke Rack");
 		GameRegistry.registerTileEntity(TEOilLamp.class, "Oil Lamp");
+
+
 		if(b)
 		{
 			GameRegistry.registerTileEntity(TEFirepit.class, "TerraFirepit");
@@ -173,12 +174,13 @@ public class CommonProxy
 			GameRegistry.registerTileEntity(TEChest.class, "chest");
 			GameRegistry.registerTileEntity(TEFoodPrep.class, "FoodPrep");
 			GameRegistry.registerTileEntity(TEBellows.class, "Bellows");
-			GameRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack");
+			GameRegistry.registerTileEntity(TEToolRack.class, "ToolRack");
 			GameRegistry.registerTileEntity(TEAnvil.class, "TerraAnvil");
 			GameRegistry.registerTileEntity(TEWorldItem.class, "worldItem");
-			GameRegistry.registerTileEntity(TileEntityQuern.class, "Quern");
+			GameRegistry.registerTileEntity(TEQuern.class, "Quern");
 			GameRegistry.registerTileEntity(TELoom.class, "Loom");
 			GameRegistry.registerTileEntity(TEGrill.class, "grill");
+			GameRegistry.registerTileEntity(TEHopper.class, "HopperTFC");
 		}
 
 		EntityRegistry.registerGlobalEntityID(EntitySquidTFC.class, "squidTFC", EntityRegistry.findGlobalUniqueEntityId(), 0x3c5466, 0x260026);
@@ -276,7 +278,7 @@ public class CommonProxy
 		TFCFluids.MILK = new FluidBaseTFC("milk").setBaseColor(0xffffff);
 		TFCFluids.MILKCURDLED = new FluidBaseTFC("milkcurdled").setBaseColor(0xfffbe8);
 		TFCFluids.MILKVINEGAR = new FluidBaseTFC("milkvinegar").setBaseColor(0xfffbe8);
-		TFCFluids.OLIVEOIL = new FluidBaseTFC("oliveoil").setBaseColor(0x44B510);
+		TFCFluids.OLIVEOIL = new FluidBaseTFC("oliveoil").setBaseColor(0x6a7537);
 
 		FluidRegistry.registerFluid(TFCFluids.LAVA);
 		FluidRegistry.registerFluid(TFCFluids.SALTWATER);
@@ -318,12 +320,13 @@ public class CommonProxy
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.VODKA, 250), new ItemStack(TFCItems.Vodka), new ItemStack(TFCItems.GlassBottle));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.MILK, 1000), new ItemStack(TFCItems.WoodenBucketMilk), new ItemStack(TFCItems.WoodenBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.VINEGAR, 1000), new ItemStack(TFCItems.Vinegar), new ItemStack(TFCItems.WoodenBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(0), new ItemStack(TFCBlocks.OilLamp, 1, 0));//Gold
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(1), new ItemStack(TFCBlocks.OilLamp, 1, 1));//Platinum
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(2), new ItemStack(TFCBlocks.OilLamp, 1, 2));//RoseGold
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(3), new ItemStack(TFCBlocks.OilLamp, 1, 3));//Silver
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(4), new ItemStack(TFCBlocks.OilLamp, 1, 4));//Sterling Silver
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 1000), ItemOilLamp.GetFullLamp(5), new ItemStack(TFCBlocks.OilLamp, 1, 5));//BlueSteel
+		//FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(0), new ItemStack(TFCBlocks.OilLamp, 1, 0));//Gold
+		//FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(1), new ItemStack(TFCBlocks.OilLamp, 1, 1));//Platinum
+		//FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(2), new ItemStack(TFCBlocks.OilLamp, 1, 2));//RoseGold
+		//FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(3), new ItemStack(TFCBlocks.OilLamp, 1, 3));//Silver
+		//FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(4), new ItemStack(TFCBlocks.OilLamp, 1, 4));//Sterling Silver
+		//FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(5), new ItemStack(TFCBlocks.OilLamp, 1, 5));//BlueSteel
+		//FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.LAVA, 250), ItemOilLamp.GetFullLamp(5), new ItemStack(TFCBlocks.OilLamp, 1, 5));//BlueSteel
 	}
 
 	public void registerToolClasses()
@@ -475,17 +478,9 @@ public class CommonProxy
 
 	public void registerWailaClasses()
 	{
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WOre.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WCrop.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WBarrel.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WAnvil.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WBlastFurnace.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WBerryBush.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WBloomery.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WBloom.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WCrucible.callbackRegister");
-
-		// I haven't decided if this is OP or not. Useful for debugging though, so uncomment when needing to check farmland nutrient %.
-		//FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WFarmland.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WAILADataTE.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WCrucible.callbackRegister"); // Crucible has it's own file due to extra calculations.
 	}
+	
+	public void hideNEIItems() {}
 }

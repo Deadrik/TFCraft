@@ -18,36 +18,38 @@ death.attack.alcohol=
 death.attack.heatStroke=
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=Kalmari
-entity.cowTFC.name=Lehmä
-entity.wolfTFC.name=Susi
 entity.bearTFC.name=Karhu
-entity.deerTFC.name=Peura
 entity.chickenTFC.name=Kana
-entity.pigTFC.name=Sika
-entity.skeletonTFC.name=Luuranko
-entity.zombieTFC.name=Zombi
-entity.spiderTFC.name=Hämähäkki
-entity.slimeTFC.name=Limakuutio
-entity.silverfishTFC.name=Sokeritoukka
-entity.ghastTFC.name=Hornanhenki
-entity.caveSpiderTFC.name=Kaivoshämähäkki
-entity.blazeTFC.name=Roihu
-entity.endermanTFC.name=Ääreläinen
-entity.pigZombieTFC.name=Sika-Zombi
-entity.creeperTFC.name=Lurkki
-entity.sheepTFC.name=Lammas
-entity.pheasantTFC.name=Fasaani
-entity.horseTFC.name=Hevonen
-entity.irongolemTFC.name=Rautagolemi
+entity.cowTFC.name=Lehmä
+entity.deerTFC.name=Peura
 entity.fishTFC.name=Kala
+entity.horseTFC.name=Hevonen
+entity.pheasantTFC.name=Fasaani
+entity.pigTFC.name=Sika
+entity.sheepTFC.name=Lammas
+entity.squidTFC.name=Kalmari
+entity.wolfTFC.name=Susi
 
+entity.blazeTFC.name=Roihu
+entity.caveSpiderTFC.name=Kaivoshämähäkki
+entity.creeperTFC.name=Lurkki
+entity.endermanTFC.name=Ääreläinen
+entity.ghastTFC.name=Hornanhenki
+entity.irongolemTFC.name=Rautagolemi
+entity.pigZombieTFC.name=Sika-Zombi
+entity.silverfishTFC.name=Sokeritoukka
+entity.skeletonTFC.name=Luuranko
+entity.slimeTFC.name=Limakuutio
+entity.spiderTFC.name=Hämähäkki
+entity.zombieTFC.name=Zombi
 
-#==========
-#= Entity =
-#==========
+entity.arrowTFC.name=Nuoli
+entity.standTFC.name=
+entity.barrel.name=
+entity.fallingBlock.name=
+
 entity.notFamiliar=
 fishingRod.lineTension=
 fishingRod.lineSnap=
@@ -2325,6 +2327,7 @@ gui.MeltedMetal.Inst0=§bHiiren Oikea §7kaataaksesi työkalumuottiin.
 gui.PotteryBase.Inst0=Hiivi ja §bKäytä Hiiren Oikeaa §7asettaaksesi esineen.
 gui.PotteryVesselSmall.Inst0=Tai §bHiiren Oikealla §7tarkkaillaksesi sisältöä.
 gui.RawHide.Inst0=
+gui.Chisel.Inst0=
 gui.Barrel.MoreItems=
 
 gui.Nutrient.A=
@@ -2474,6 +2477,8 @@ gui.useless=
 gui.growth=
 gui.mature=
 gui.metal.Iron=
+gui.tier=
+gui.progress=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Pitää käyttää juoksevan veden alla.

@@ -33,7 +33,7 @@ public class FloraManager
 	{
 		for (int k = 0; k < floraList.size(); k++)
 		{
-			FloraIndex tempIndex = (FloraIndex)floraList.get(k);
+			FloraIndex tempIndex = floraList.get(k);
 			if (tempIndex.type.equalsIgnoreCase(input))
 			{
 				return tempIndex;

@@ -18,36 +18,38 @@ death.attack.alcohol=%1$s est mort d'intoxication alcoolique
 death.attack.heatStroke= est mort d'un coup de chaleur
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=Calmar
-entity.cowTFC.name=Vache
-entity.wolfTFC.name=Loup
 entity.bearTFC.name=Ours
-entity.deerTFC.name=Chevreuil
 entity.chickenTFC.name=Poulet
-entity.pigTFC.name=Cochon
-entity.skeletonTFC.name=Squelette
-entity.zombieTFC.name=Zombie
-entity.spiderTFC.name=Araignée
-entity.slimeTFC.name=Slime
-entity.silverfishTFC.name=Lépisme
-entity.ghastTFC.name=Ghast
-entity.caveSpiderTFC.name=Araignée des cavernes
-entity.blazeTFC.name=Blaze
-entity.endermanTFC.name=Enderman
-entity.pigZombieTFC.name=Homme-cochon zombie
-entity.creeperTFC.name=Creeper
-entity.sheepTFC.name=Mouton
-entity.pheasantTFC.name=Faisan
-entity.horseTFC.name=Cheval
-entity.irongolemTFC.name=Golem de fer
+entity.cowTFC.name=Vache
+entity.deerTFC.name=Chevreuil
 entity.fishTFC.name=Bar
+entity.horseTFC.name=Cheval
+entity.pheasantTFC.name=Faisan
+entity.pigTFC.name=Cochon
+entity.sheepTFC.name=Mouton
+entity.squidTFC.name=Calmar
+entity.wolfTFC.name=Loup
 
+entity.blazeTFC.name=Blaze
+entity.caveSpiderTFC.name=Araignée des cavernes
+entity.creeperTFC.name=Creeper
+entity.endermanTFC.name=Enderman
+entity.ghastTFC.name=Ghast
+entity.irongolemTFC.name=Golem de fer
+entity.pigZombieTFC.name=Homme-cochon zombie
+entity.silverfishTFC.name=Lépisme
+entity.skeletonTFC.name=Squelette
+entity.slimeTFC.name=Slime
+entity.spiderTFC.name=Araignée
+entity.zombieTFC.name=Zombie
 
-#==========
-#= Entity =
-#==========
+entity.arrowTFC.name=Flèche
+entity.standTFC.name=Support à armure
+entity.barrel.name=Baril
+entity.fallingBlock.name=Bloc en chute
+
 entity.notFamiliar=L'animal ne vous laissera pas faire ça
 fishingRod.lineTension=La ligne va briser !
 fishingRod.lineSnap=La ligne a brisé !
@@ -2325,6 +2327,7 @@ gui.MeltedMetal.Inst0=§bClique droit §7pour verser dans un moule d'outil ou po
 gui.PotteryBase.Inst0=S'accroupir et §bclique droit §7 pour placer l'objet.
 gui.PotteryVesselSmall.Inst0=Ou §bClique droit §7pour ouvrir l'inventaire.
 gui.RawHide.Inst0=????
+gui.Chisel.Inst0=Nécéssite un marteau dans la barre d'outils.
 gui.Barrel.MoreItems=§8Plus... (Tenir §fShift§8)
 
 gui.Nutrient.A=Nutriment A
@@ -2474,6 +2477,8 @@ gui.useless=Innutile
 gui.growth=Poussé
 gui.mature=Mature
 gui.metal.Iron=Fer
+gui.tier=Rang
+gui.progress=Progrès
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Doit être utilisé sous de l'eau en mouvement.

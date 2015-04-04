@@ -9,11 +9,11 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityWorkbench extends TileEntity implements IInventory
+public class TEWorkbench extends TileEntity implements IInventory
 {
 	public ItemStack[] craftingMatrix;
 
-	public TileEntityWorkbench()
+	public TEWorkbench()
 	{
 		craftingMatrix = new ItemStack[9];
 	}

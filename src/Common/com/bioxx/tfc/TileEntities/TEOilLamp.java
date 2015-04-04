@@ -4,10 +4,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.api.TFCFluids;
+import com.bioxx.tfc.api.TFCOptions;
 
 public class TEOilLamp extends TELightEmitter
 {
-	public FluidStack fuel;
+	private FluidStack fuel;
+
 	public TEOilLamp()
 	{
 	}
@@ -18,17 +21,49 @@ public class TEOilLamp extends TELightEmitter
 		super.create();
 	}
 
+	public FluidStack getFuel()
+	{
+		if(fuel == null)
+			return null;
+		FluidStack f = fuel.copy();
+		f.amount /= TFCOptions.oilLampFuelMult;
+		return f;
+	}
+
 	public void updateLampFuel()
 	{
-		int diff = (int)TFC_Time.getTotalHours() - this.hourPlaced;
-		this.hourPlaced = (int)TFC_Time.getTotalHours();
-
-		if(fuel!= null && this.getFuelAmount() > 0)
+		if((int)TFC_Time.getTotalHours() - TFCOptions.oilLampFuelMult >= hourPlaced)
 		{
-			fuel.amount -= (diff*(1000/TFC_Time.daysInYear));
-			if(fuel.amount <= 0)
-				fuel = null;
+			int diff = (int)TFC_Time.getTotalHours() - this.hourPlaced;
+			this.hourPlaced = (int)TFC_Time.getTotalHours();
+
+			if(fuel != null && getFuel().getFluid() != TFCFluids.LAVA && this.getFuelAmount() > 0)
+			{
+				fuel.amount -= diff;
+				if(fuel.amount <= 0)
+					fuel = null;
+			}
 		}
+	}
+
+	public void setFuelFromStack(FluidStack fs)
+	{
+		fuel = fs;
+		fuel.amount *= TFCOptions.oilLampFuelMult;
+	}
+
+	public boolean isFuelValid()
+	{
+		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+		if(getFuel() != null && getFuel().getFluid() == TFCFluids.OLIVEOIL)
+		{
+			return true;
+		}
+		else if((meta & 7) == 5 && getFuel().getFluid() == TFCFluids.LAVA)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -63,7 +98,7 @@ public class TEOilLamp extends TELightEmitter
 	public int getFuelTimeLeft()
 	{
 		int f = getFuelAmount();
-		float perc = f/1000f;
+		float perc = f/250f;
 		return (int)((TFC_Time.daysInYear*24)*perc);
 	}
 }

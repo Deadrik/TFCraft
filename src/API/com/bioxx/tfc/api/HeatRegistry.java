@@ -30,7 +30,7 @@ public class HeatRegistry
 	{
 		for (int k = 0; k < heatList.size(); k++)
 		{
-			HeatIndex tempIndex = (HeatIndex)heatList.get(k);
+			HeatIndex tempIndex = heatList.get(k);
 			if (tempIndex.matches(input))
 			{
 				return tempIndex;

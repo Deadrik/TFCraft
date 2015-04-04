@@ -205,7 +205,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			NBTTagList nbttaglist = is.getTagCompound().getTagList("Items", 10);
 			for(int i = 0; i < nbttaglist.tagCount(); i++)
 			{
-				NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+				NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 				byte byte0 = nbttagcompound1.getByte("Slot");
 				if(byte0 >= 0 && byte0 < 4)
 					bag[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
@@ -315,7 +315,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				NBTTagList nbttaglist = tag.getTagList("Items", 10);
 				for(int i = 0; i < nbttaglist.tagCount(); i++)
 				{
-					NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+					NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 					byte byte0 = nbttagcompound1.getByte("Slot");
 					if(byte0 >= 0 && byte0 < 4)
 					{

@@ -137,7 +137,7 @@ public class TEBloomery extends NetworkTileEntity
 
 						oreCount = 0;
 						charcoalCount = 0;
-						((TileEntityBloom)(worldObj.getTileEntity(xCoord + direction[0], yCoord, zCoord + direction[1]))).setSize(outCount);
+						((TEBloom)(worldObj.getTileEntity(xCoord + direction[0], yCoord, zCoord + direction[1]))).setSize(outCount);
 						outCount = 0;
 					}
 				}

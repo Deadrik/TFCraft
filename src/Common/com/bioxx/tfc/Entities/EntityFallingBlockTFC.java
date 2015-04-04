@@ -22,6 +22,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.bioxx.tfc.Blocks.Terrain.BlockOre;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.TFCBlocks;
 
@@ -227,6 +228,8 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 		Block b = world.getBlock(x, y, z);
 		if (canDestroy(b) && (b.isAir(world, x, y, z) || !worldObj.isSideSolid(x, y, z, ForgeDirection.UP)))
 			return TFC_Core.setBlockWithDrops(worldObj, x, y, z, getBlock(), this.blockMeta);
+		else if (b instanceof BlockOre)
+			return world.setBlockToAir(x, y, z);
 		return false;
 	}
 
@@ -234,6 +237,9 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 	{
 		if(b == TFCBlocks.Charcoal)
 			return false;
+		if (b == TFCBlocks.Molten)
+			return false;
+
 		return true;
 	}
 
@@ -257,23 +263,23 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 				while (iterator.hasNext())
 				{
 					Entity entity = (Entity)iterator.next();
-					entity.attackEntityFrom(damagesource, (float)Math.min(MathHelper.floor_float((float)i * this.damage), this.maxDamage));
+					entity.attackEntityFrom(damagesource, Math.min(MathHelper.floor_float(i * this.damage), this.maxDamage));
 				}
 
-				if (flag && (double)this.rand.nextFloat() < 0.05000000074505806D + (double)i * 0.05D)
+				if (flag && this.rand.nextFloat() < 0.05000000074505806D + i * 0.05D)
 				{
 					int j = this.blockMeta >> 2;
-				int k = this.blockMeta & 3;
-				++j;
+					int k = this.blockMeta & 3;
+					++j;
 
-				if (j > 2)
-				{
+					if (j > 2)
+					{
 					this.field_145808_f = true;
-				}
-				else
-				{
+					}
+					else
+					{
 					this.blockMeta = k | j << 2;
-				}
+					}
 				}
 			}
 		}

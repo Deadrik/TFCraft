@@ -6,9 +6,9 @@
 
 
 generator.TFCDefault=TFC デフォルト
-generator.TFCFlat=
-generator.TFCAmplified=
-generator.TFCLargeBiomes=
+generator.TFCFlat=TFC フラット(未使用)
+generator.TFCAmplified=TFC アンプリファイド(未使用)
+generator.TFCLargeBiomes=TFC ラージバイオーム(未使用)
 
 key.ToolMode=ツールモード切替
 key.LockTool=ツールの位置をロックする
@@ -18,36 +18,38 @@ death.attack.alcohol=%1$s は急性アル中で死んでしまった
 death.attack.heatStroke=%1$s は熱中症で死んでしまった
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=イカ
-entity.cowTFC.name=牛
-entity.wolfTFC.name=狼
 entity.bearTFC.name=熊
-entity.deerTFC.name=鹿
 entity.chickenTFC.name=ニワトリ
-entity.pigTFC.name=豚
-entity.skeletonTFC.name=スケルトン
-entity.zombieTFC.name=ゾンビ
-entity.spiderTFC.name=蜘蛛
-entity.slimeTFC.name=スライム
-entity.silverfishTFC.name=シルバーフィッシュ
-entity.ghastTFC.name=ガスト
-entity.caveSpiderTFC.name=洞窟グモ
-entity.blazeTFC.name=ブレイズ
-entity.endermanTFC.name=エンダーマン
-entity.pigZombieTFC.name=ゾンビピッグマン
-entity.creeperTFC.name=クリーパー
-entity.sheepTFC.name=羊
-entity.pheasantTFC.name=雉
-entity.horseTFC.name=馬
-entity.irongolemTFC.name=アイアンゴーレム
+entity.cowTFC.name=牛
+entity.deerTFC.name=鹿
 entity.fishTFC.name=バス
+entity.horseTFC.name=馬
+entity.pheasantTFC.name=雉
+entity.pigTFC.name=豚
+entity.sheepTFC.name=羊
+entity.squidTFC.name=イカ
+entity.wolfTFC.name=狼
 
+entity.blazeTFC.name=ブレイズ
+entity.caveSpiderTFC.name=洞窟グモ
+entity.creeperTFC.name=クリーパー
+entity.endermanTFC.name=エンダーマン
+entity.ghastTFC.name=ガスト
+entity.irongolemTFC.name=アイアンゴーレム
+entity.pigZombieTFC.name=ゾンビピッグマン
+entity.silverfishTFC.name=シルバーフィッシュ
+entity.skeletonTFC.name=スケルトン
+entity.slimeTFC.name=スライム
+entity.spiderTFC.name=蜘蛛
+entity.zombieTFC.name=ゾンビ
 
-#==========
-#= Entity =
-#==========
+entity.arrowTFC.name=矢
+entity.standTFC.name=
+entity.barrel.name=
+entity.fallingBlock.name=
+
 entity.notFamiliar=動物は嫌がっている
 fishingRod.lineTension=糸が切れそうだ！
 fishingRod.lineSnap=糸が切れてしまった
@@ -104,7 +106,7 @@ commands.transferTamed.wrongSender=その動物は転送できない！
 #==========
 fluid.freshwater=真水
 fluid.saltwater=海水
-fluid.lavatfc=マグマ
+fluid.lavatfc=溶岩
 fluid.hotwater=熱湯
 fluid.beer=ビール
 fluid.cider=リンゴ酒
@@ -116,7 +118,7 @@ fluid.whiskey=ウイスキー
 fluid.cornwhiskey=コーンウイスキー
 fluid.milk=ミルク
 fluid.milkcurdled=カード
-fluid.milkvinegar=
+fluid.milkvinegar=ミルク＋酢 混合
 fluid.limewater=石灰水
 fluid.tannin=タンニン
 fluid.vinegar=酢
@@ -2325,6 +2327,7 @@ gui.MeltedMetal.Inst0=§b右クリック §7で鋳型にそそぐ
 gui.PotteryBase.Inst0=スニークし§b右クリックで§7オブジェクトを設置
 gui.PotteryVesselSmall.Inst0=もしくは§b右クリックで§7インベントリーを開く
 gui.RawHide.Inst0=????
+gui.Chisel.Inst0=
 gui.Barrel.MoreItems=§8詳細... (押す §fShift§8)
 
 gui.Nutrient.A=
@@ -2474,6 +2477,8 @@ gui.useless=
 gui.growth=
 gui.mature=
 gui.metal.Iron=
+gui.tier=
+gui.progress=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=流水の下で使用してください。
@@ -2519,10 +2524,10 @@ gui.skillpage=技術
 #==================
 #= Error Messages =
 #==================
-error.error=
-error.NBT=
+error.error=エラー：
+error.NBT=：NBT情報無し
 error.OreCFG=
-error.Contact=
+error.Contact=公式サポートに報告してください
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========

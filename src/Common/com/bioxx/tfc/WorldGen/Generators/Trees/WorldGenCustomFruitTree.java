@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
+import com.bioxx.tfc.TileEntities.TEFruitTreeWood;
 import com.bioxx.tfc.api.TFCBlocks;
 
 public class WorldGenCustomFruitTree extends WorldGenerator
@@ -35,23 +35,23 @@ public class WorldGenCustomFruitTree extends WorldGenerator
 	public void gen(World world, Random random, int i, int j, int k)
 	{
 		world.setBlock(i, j, k, TFCBlocks.fruitTreeWood, metaId, 0x2);
-		((TileEntityFruitTreeWood)world.getTileEntity(i, j, k)).setTrunk(true);
-		((TileEntityFruitTreeWood)world.getTileEntity(i, j, k)).setHeight(0);
-		((TileEntityFruitTreeWood)world.getTileEntity(i, j, k)).setBirth();
+		((TEFruitTreeWood)world.getTileEntity(i, j, k)).setTrunk(true);
+		((TEFruitTreeWood)world.getTileEntity(i, j, k)).setHeight(0);
+		((TEFruitTreeWood)world.getTileEntity(i, j, k)).setBirth();
 
 		if(world.isAirBlock(i, j+1, k))
 		{
 			world.setBlock(i, j+1, k, TFCBlocks.fruitTreeWood, metaId, 0x2);
-			((TileEntityFruitTreeWood)world.getTileEntity(i, j+1, k)).setTrunk(true);
-			((TileEntityFruitTreeWood)world.getTileEntity(i, j+1, k)).setHeight(1);
-			((TileEntityFruitTreeWood)world.getTileEntity(i, j+1, k)).setBirth();
+			((TEFruitTreeWood)world.getTileEntity(i, j+1, k)).setTrunk(true);
+			((TEFruitTreeWood)world.getTileEntity(i, j+1, k)).setHeight(1);
+			((TEFruitTreeWood)world.getTileEntity(i, j+1, k)).setBirth();
 
 			if(world.isAirBlock(i, j+2, k))
 			{
 				world.setBlock(i, j+2, k, TFCBlocks.fruitTreeWood, metaId, 0x2);
-				((TileEntityFruitTreeWood)world.getTileEntity(i, j+2, k)).setTrunk(true);
-				((TileEntityFruitTreeWood)world.getTileEntity(i, j+2, k)).setHeight(2);
-				((TileEntityFruitTreeWood)world.getTileEntity(i, j+2, k)).setBirth();
+				((TEFruitTreeWood)world.getTileEntity(i, j+2, k)).setTrunk(true);
+				((TEFruitTreeWood)world.getTileEntity(i, j+2, k)).setHeight(2);
+				((TEFruitTreeWood)world.getTileEntity(i, j+2, k)).setBirth();
 				surroundWithLeaves(world, i, j + 2, k);
 
 				if(world.isAirBlock(i+1, j+2, k) || world.getBlock(i+1, j+2, k) == leavesBlock)
@@ -74,9 +74,9 @@ public class WorldGenCustomFruitTree extends WorldGenerator
 				if(world.isAirBlock(i, j+3, k) || world.getBlock(i, j+3, k) == leavesBlock)
 				{
 					world.setBlock(i, j+3, k, TFCBlocks.fruitTreeWood, metaId, 0x2);
-					((TileEntityFruitTreeWood)world.getTileEntity(i, j+3, k)).setTrunk(true);
-					((TileEntityFruitTreeWood)world.getTileEntity(i, j+3, k)).setHeight(3);
-					((TileEntityFruitTreeWood)world.getTileEntity(i, j+3, k)).setBirth();
+					((TEFruitTreeWood)world.getTileEntity(i, j+3, k)).setTrunk(true);
+					((TEFruitTreeWood)world.getTileEntity(i, j+3, k)).setHeight(3);
+					((TEFruitTreeWood)world.getTileEntity(i, j+3, k)).setBirth();
 					if (world.isAirBlock(i, j + 4, k))
 						world.setBlock(i, j + 4, k, leavesBlock, metaId & 7, 0x2);
 				}

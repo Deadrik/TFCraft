@@ -111,7 +111,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		//	animals to be adults, so we set their birthdays far enough back
 		//	in time such that they reach adulthood now.
 		//
-		this.setAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
+		this.setAge(TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 
 	}
 	public EntityWolfTFC(World par1World, IAnimal mother,  ArrayList<Float> data)
@@ -152,7 +152,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
-		this.setAge((int) TFC_Time.getTotalDays());
+		this.setAge(TFC_Time.getTotalDays());
 	}
 
 
@@ -331,7 +331,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 					baby.setLocationAndAngles (posX+(rand.nextFloat()-0.5F)*2F,posY,posZ+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
 					baby.rotationYawHead = baby.rotationYaw;
 					baby.renderYawOffset = baby.rotationYaw;
-					baby.setAge((int)TFC_Time.getTotalDays());
+					baby.setAge(TFC_Time.getTotalDays());
 					//baby.func_152115_b(this.func_152113_b());//setOwner
 					//baby.setTamed(true);
 					worldObj.spawnEntityInWorld(baby);

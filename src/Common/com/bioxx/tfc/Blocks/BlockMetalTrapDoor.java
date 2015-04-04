@@ -32,7 +32,7 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 	public IIcon[] icons;
 	public String[] metalNames = {"Bismuth","Bismuth Bronze","Black Bronze","Black Steel","Blue Steel","Brass","Bronze",
 			"Copper","Gold","Wrought Iron","Lead","Nickel","Pig Iron","Platinum","Red Steel","Rose Gold","Silver","Steel",
-			"Sterling Silver","Tin","Zinc","Unknown"};
+			"Sterling Silver","Tin","Zinc"/*,"Unknown"*/}; // There is no trapdoor anvil recipe involving unknown ingots.
 
 	public BlockMetalTrapDoor()
 	{
@@ -56,9 +56,11 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 	 */
 	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int j = 0; j < metalNames.length; j++)
-			for(int i = 0; i < metalNames.length; i++)
-				list.add(new ItemStack(this,1,i+(j<<5)));
+		for (int i = 0; i < metalNames.length; i++)
+		{
+			// Only add trap doors where both pieces are the same metal to reduce clutter from the creative menu and NEI. Other combinations can still be created.
+			list.add(new ItemStack(this, 1, i + (i << 5)));
+		}
 	}
 
 	@Override

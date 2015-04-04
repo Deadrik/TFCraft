@@ -25,6 +25,7 @@ public class ItemMudBrick extends ItemTerra
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
 		this.setFolder("pottery/");
+		this.setCreativeTab(null);
 	}
 
 	@Override

@@ -58,7 +58,7 @@ public class ItemMeltedMetal extends ItemTerra
 	{		
 		if (is.getItemDamage() > 1)
 		{
-			arraylist.add(StatCollector.translateToLocal("gui.units") + ": " + (100 - (int) is.getItemDamage()) + " / 100");
+			arraylist.add(StatCollector.translateToLocal("gui.units") + ": " + (100 - is.getItemDamage()) + " / 100");
 		}
 	}
 

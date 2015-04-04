@@ -39,6 +39,8 @@ public class BlockCustomSnow extends BlockTerra
 			return false;
 		if (block == TFCBlocks.Leaves || block == TFCBlocks.Leaves2)
 			return true;
+		if (block == TFCBlocks.Thatch)
+			return true;
 		if (World.doesBlockHaveSolidTopSurface(world, i, j-1, k))
 			return true;
 		
@@ -154,31 +156,40 @@ public class BlockCustomSnow extends BlockTerra
 		
 		float temp = TFC_Climate.getHeightAdjustedTemp(world, x, y, z);
 		
-		if (world.isRaining() && temp <= 0)  //Raining and Below Freezing
+		if (temp <= 0 && world.isRaining())  //Raining and Below Freezing
 		{
 			if (R.nextInt(20) == 0)
 			{
 				int max = (world.getBlock(x, y - 1, z).getMaterial() == Material.leaves) ? 3 : 7;
-				if(meta < max)
+				if(meta < max && canAddSnow(world, x, y, z, meta))
 				{
-					if (canAddSnow(world, x, y, z, meta))
-						world.setBlockMetadataWithNotify(x, y, z, meta + 1, 2);
+					world.setBlockMetadataWithNotify(x, y, z, meta + 1, 2);
 				}
 			}
 		}
-		else if (world.isRaining() && temp > 0)  //Raining and above freezing
+		else if (temp > 10)  // to hot for snow (probably chunk loading error)
 		{
-			if (meta > 0)
-				world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
-			else
-				world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+			world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+		}
+		else if (temp > 0 && world.isRaining())  //Raining and above freezing
+		{
+			if (R.nextInt(5) == 0)
+			{
+				if (meta > 0)
+					world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
+				else
+					world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+			}
 		}
 		else if (temp > 0)  //Above freezing, not raining
 		{
-			if(meta > 0 )
-				world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
-			else
-				world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+			if (R.nextInt(20) == 0)
+			{
+				if(meta > 0)
+					world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
+				else
+					world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+			}
 		}
 	}
 

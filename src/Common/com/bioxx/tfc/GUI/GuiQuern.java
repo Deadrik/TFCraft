@@ -6,13 +6,13 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerQuern;
-import com.bioxx.tfc.TileEntities.TileEntityQuern;
+import com.bioxx.tfc.TileEntities.TEQuern;
 
 public class GuiQuern extends GuiContainerTFC
 {
 	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_quern.png");
 
-	public GuiQuern(InventoryPlayer inventoryplayer, TileEntityQuern te, World world, int x, int y, int z)
+	public GuiQuern(InventoryPlayer inventoryplayer, TEQuern te, World world, int x, int y, int z)
 	{
 		super(new ContainerQuern(inventoryplayer, te, world, x, y, z), 176, 85);
 	}

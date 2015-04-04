@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEPottery;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
@@ -52,16 +53,13 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 
 				List list = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(x, y + 1, z, x + 1, y + 2, z + 1));
 				int numsticks = 0;
-				int hasPaper = 0;
 
 				if (list != null && !list.isEmpty())
 				{
 					for (Iterator iterator = list.iterator(); iterator.hasNext();)
 					{
 						EntityItem entity = (EntityItem)iterator.next();
-						if(entity.getEntityItem().getItem() == Items.paper)
-							hasPaper = 20;
-						else if(entity.getEntityItem().getItem() == TFCItems.Stick)
+						if (entity.getEntityItem().getItem() == TFCItems.Stick)
 							numsticks+=entity.getEntityItem().stackSize;
 					}
 				}
@@ -142,5 +140,11 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 	public EnumItemReach getReach(ItemStack is)
 	{
 		return EnumItemReach.SHORT;
+	}
+
+	@Override
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
+	{
+		ItemTerra.addSizeInformation(is, arraylist);
 	}
 }

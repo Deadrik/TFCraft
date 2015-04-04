@@ -126,7 +126,6 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 
 	}
 
-	@Override
 	protected void doBeforeFall(World world, int x, int y, int z){
 		TileEntity te = world.getTileEntity(x, y, z);
 		if(te instanceof TEWaterPlant){

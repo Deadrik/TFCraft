@@ -6,9 +6,9 @@
 
 
 generator.TFCDefault=TFC Standard
-generator.TFCFlat=
-generator.TFCAmplified=
-generator.TFCLargeBiomes=
+generator.TFCFlat=TFC Flad (ubenyttet)
+generator.TFCAmplified=TFC Opløftet(ubenyttet)
+generator.TFCLargeBiomes=TFC Store biotoper (ubenyttet)
 
 key.ToolMode=Skift Værktøjstilstand
 key.LockTool=Lås Værktøjsplacering
@@ -18,37 +18,39 @@ death.attack.alcohol=%1$s døde af alkoholforgiftning
 death.attack.heatStroke=%1$s døde af hedeslag
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=Blæksprutte
-entity.cowTFC.name=Ko
-entity.wolfTFC.name=Ulv
 entity.bearTFC.name=Bjørn
-entity.deerTFC.name=Rådyr
 entity.chickenTFC.name=Kylling
-entity.pigTFC.name=Gris
-entity.skeletonTFC.name=Skelet
-entity.zombieTFC.name=Zombie
-entity.spiderTFC.name=Edderkop
-entity.slimeTFC.name=Slim
-entity.silverfishTFC.name=Sølvfisk
-entity.ghastTFC.name=Ghast
-entity.caveSpiderTFC.name=Huleedderkop
-entity.blazeTFC.name=Ildånd
-entity.endermanTFC.name=Endermand
-entity.pigZombieTFC.name=Grisezombie
-entity.creeperTFC.name=Creeper
-entity.sheepTFC.name=Får
-entity.pheasantTFC.name=Fasan
-entity.horseTFC.name=Hest
-entity.irongolemTFC.name=Jerngolem
+entity.cowTFC.name=Ko
+entity.deerTFC.name=Rådyr
 entity.fishTFC.name=Aborre
+entity.horseTFC.name=Hest
+entity.pheasantTFC.name=Fasan
+entity.pigTFC.name=Gris
+entity.sheepTFC.name=Får
+entity.squidTFC.name=Blæksprutte
+entity.wolfTFC.name=Ulv
 
+entity.blazeTFC.name=Ildånd
+entity.caveSpiderTFC.name=Huleedderkop
+entity.creeperTFC.name=Creeper
+entity.endermanTFC.name=Endermand
+entity.ghastTFC.name=Ghast
+entity.irongolemTFC.name=Jerngolem
+entity.pigZombieTFC.name=Grisezombie
+entity.silverfishTFC.name=Sølvfisk
+entity.skeletonTFC.name=Skelet
+entity.slimeTFC.name=Slim
+entity.spiderTFC.name=Edderkop
+entity.zombieTFC.name=Zombie
 
-#==========
-#= Entity =
-#==========
-entity.notFamiliar=Dyret vil ikke være med til det der.
+entity.arrowTFC.name=Pil
+entity.standTFC.name=
+entity.barrel.name=
+entity.fallingBlock.name=
+
+entity.notFamiliar=Det der vil dyret ikke være med til.
 fishingRod.lineTension=Linen er ved at knække!
 fishingRod.lineSnap=Linen knækkede!
 fishingRod.bite=Bid!
@@ -94,10 +96,10 @@ achievement.achPokeCreeper.desc=Slå den med en pind
 commands.transferTamed.noTamed=Ingen gyldige dyr inden for rækkevidde!
 commands.transferTamed.tooMany=For mange dyr inden for rækkevidde!
 commands.transferTamed.wrongOwner=Det/den tilhører ikke dig!
-commands.transferTamed.sameTarget=Du kan ikke overdrage dig selv!
+commands.transferTamed.sameTarget=Du kan ikke overdrage til dig selv!
 commands.transferTamed.display.incoming=Et dyr er blevet overdraget til dig af %s!
 commands.transferTamed.display.outgoing=Du har overdraget et dyr til %s!
-commands.transferTamed.wrongSender=Du kan ikke overføre dyr!
+commands.transferTamed.wrongSender=Du kan ikke overdrage dyr!
 
 #==========
 #= Fluids =
@@ -116,7 +118,7 @@ fluid.whiskey=Whisky
 fluid.cornwhiskey=Majswhisky
 fluid.milk=Mælk
 fluid.milkcurdled=Syrnet Mælk
-fluid.milkvinegar=
+fluid.milkvinegar=Mælk/Eddike-blanding
 fluid.limewater=Kalkvand
 fluid.tannin=Tannin
 fluid.vinegar=Eddike
@@ -128,7 +130,7 @@ fluid.brine=Lage
 item.MealGeneric.name=Måltid
 item.meal.terrible=Forfærdeligt
 item.meal.poor=Ringe
-item.meal.decent=Middelmådigt
+item.meal.decent=Acceptabelt
 item.meal.good=Godt
 item.meal.great=Storartet
 item.meal.fantastic=Fantastisk
@@ -136,7 +138,7 @@ item.Sandwich.name=Sandwich
 item.Salad.name=Salat
 item.Soup.name=Suppe
 item.Sugar.name=Sukker
-item.Sea Weed.name=Tang
+item.Sea Weed.name=Havtang
 
 #== Grains ==
 item.Barley Bread.name=Bygbrød
@@ -144,7 +146,7 @@ item.Corn Bread.name=Majsbrød
 item.Oat Bread.name=Havrebrød
 item.Rice Bread.name=Risbrød
 item.Rye Bread.name=Rugbrød
-item.Wheat Bread.name=Hvedebrød
+item.Wheat Bread.name=Franskbrød
 
 item.Barley Whole.name=Byg
 item.Maize Ear.name=Majskolbe
@@ -244,8 +246,8 @@ item.Calamari.name=Blækspruttekød
 item.egg.name=Æg
 item.Fish.name=Fisk
 item.Mutton.name=Fårekød
-item.Porkchop.name=Svinekotelet
-item.Chicken.name=Kylling
+item.Porkchop.name=Svinekød
+item.Chicken.name=Fjerkræ
 item.Venison.name=Vildtkød
 item.HorseMeat.name=Hestekød
 item.Egg Cooked.name=Spejlæg
@@ -498,19 +500,19 @@ item.Tourmaline.Exquisite.name=Udsøgt Turmalin
 #= Powders =
 #===========
 item.dyePowder.black.name=Blæksæk
-item.dyePowder.blue.name=Lapis Lazuli
+item.dyePowder.blue.name=Blå Farve
 item.dyePowder.brown.name=Kakaobønner
 item.dyePowder.cyan.name=Cyan Farve
 item.dyePowder.gray.name=Grå Farve
-item.dyePowder.green.name=Grøn farve
-item.dyePowder.lightBlue.name=Lyseblå farve
+item.dyePowder.green.name=Grøn Farve
+item.dyePowder.lightBlue.name=Lyseblå Farve
 item.dyePowder.lime.name=Limegrøn Farve
-item.dyePowder.magenta.name=Magenta farve
+item.dyePowder.magenta.name=Magenta Farve
 item.dyePowder.orange.name=Orange Farve
 item.dyePowder.pink.name=Lyserød Farve
 item.dyePowder.purple.name=Lilla Farve
-item.dyePowder.red.name=Rød farve
-item.dyePowder.silver.name=Lysegrå farve
+item.dyePowder.red.name=Rød Farve
+item.dyePowder.silver.name=Lysegrå Farve
 item.dyePowder.white.name=Benmel
 item.dyePowder.yellow.name=Gul Farve
 
@@ -993,23 +995,23 @@ item.Loom.White Elm.name=Hvidelmetræsvæv
 item.Loom.Willow.name=Piletræsvæv
 
 #== Wood Blocks ==
-tile.Chest.Acacia.name=
-tile.Chest.Ash.name=
-tile.Chest.Aspen.name=
-tile.Chest.Birch.name=
-tile.Chest.Chestnut.name=
-tile.Chest.Douglas Fir.name=
-tile.Chest.Hickory.name=
-tile.Chest.Kapok.name=
-tile.Chest.Maple.name=
-tile.Chest.Oak.name=
-tile.Chest.Pine.name=
-tile.Chest.Sequoia.name=
-tile.Chest.Spruce.name=
-tile.Chest.Sycamore.name=
-tile.Chest.White Cedar.name=
-tile.Chest.White Elm.name=
-tile.Chest.Willow.name=
+tile.Chest.Acacia.name=Akacietræskiste
+tile.Chest.Ash.name=Asketræskiste
+tile.Chest.Aspen.name=Aspetræskiste
+tile.Chest.Birch.name=Birketræskiste
+tile.Chest.Chestnut.name=Kastanjetræskiste
+tile.Chest.Douglas Fir.name=Douglasgrantræskiste
+tile.Chest.Hickory.name=Valnøddetræskiste
+tile.Chest.Kapok.name=Kapoktræskiste
+tile.Chest.Maple.name=Ahorntræskiste
+tile.Chest.Oak.name=Egetræskiste
+tile.Chest.Pine.name=Fyrretræskiste
+tile.Chest.Sequoia.name=Kæmpefyrretræskiste
+tile.Chest.Spruce.name=Grantræskiste
+tile.Chest.Sycamore.name=Morbærtræskiste
+tile.Chest.White Cedar.name=Hvid Cedertræskiste
+tile.Chest.White Elm.name=Hvidelmetræskiste
+tile.Chest.Willow.name=Piletræskiste
 
 tile.log2.Acacia.name=Akaciestamme
 tile.log.Ash.name=Askestamme
@@ -2174,7 +2176,7 @@ gui.Bloomery.Ore=Malm
 gui.Calendar.Calendar=Kalender
 gui.Calendar.DateBioxx=Bioxx' Fødselsdag!
 gui.Calendar.DateDunk=Dunks Fødselsdag!
-gui.Calendar.DateKitty=Kittychanleys Fødselsdag!
+gui.Calendar.DateKitty=Kittys Fødselsdag!
 
 gui.Calendar.Hour=Time
 gui.Calendar.WitchHour=Ulvetimen
@@ -2317,7 +2319,7 @@ gui.slot.back=Tilbage
 gui.ShowHelp=§8Hjælp: (Hold §fSkift§8)
 gui.Help=§8Hjælp:
 gui.Clay.Inst0=§bHøjreklik §7med 5 i en bunke for at forme.
-gui.Knife.Inst0=§bHøjreklik §7 toppen af en blok for
+gui.Knife.Inst0=§bHøjreklik §7 toppen af en blok (ikke jord) for
 gui.Knife.Inst1=at lave et måltidsforberedelsesområde
 gui.Leather.Inst0=§bHøjreklik §7 med en kniv i dit inventar for at skære.
 gui.LooseRock.Inst0=§bHøjreklik §7med 2 i en bunke for at tilsnitte.
@@ -2325,6 +2327,7 @@ gui.MeltedMetal.Inst0=§bHøjreklik §7for at hælde i en anden støbeform.
 gui.PotteryBase.Inst0=Snig og §bHøjreklik §7for at placere objekt.
 gui.PotteryVesselSmall.Inst0=Eller §bHøjreklik §7for at åbne inventar.
 gui.RawHide.Inst0=?????
+gui.Chisel.Inst0=Den handling kræver en hammer i den altid tilgængelige del af inventaret.
 gui.Barrel.MoreItems=§8Med mere... (Tryk §fSkift§8)
 
 gui.Nutrient.A=Næringsstof A
@@ -2470,16 +2473,18 @@ gui.milk.sour=Sur
 gui.units=Enheder
 
 #== WAILA ==
-gui.useless=
-gui.growth=
-gui.mature=
-gui.metal.Iron=
+gui.useless=Ubrugelig
+gui.growth=Vækst
+gui.mature=Moden
+gui.metal.Iron=Jern
+gui.tier=Niveau
+gui.progress=Fremskridt
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Skal bruges under flydende vand.
 gui.goldpan.overused=Dette område ser ud til at være udtømt for malm der kan udvindes på denne måde. Du vil sandsynligvis ikke finde ret meget!
-gui.seeds.failedTemp=
-gui.seeds.failedSun=
+gui.seeds.failedTemp=Det er for koldt for denne plante, den ville ikke have overlevet længe.
+gui.seeds.failedSun=Der er ikke tilstrækkeligt med sollys for denne plante, den ville ikke have overlevet længe.
 
 gui.ProPick.Found=Fandt
 gui.ProPick.FoundTraces=Fandt spor af
@@ -2519,10 +2524,10 @@ gui.skillpage=Færdigheder
 #==================
 #= Error Messages =
 #==================
-error.error=
-error.NBT=
-error.OreCFG=
-error.Contact=
+error.error=FEJL:
+error.NBT=mangler NBT-information!
+error.OreCFG=Den følgende blok-indtastning i TFCOre.cfg er ugyldig:
+error.Contact=Rapporter venligst dette i Support-sektionen på TerraFirmaCrafts forum.
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========

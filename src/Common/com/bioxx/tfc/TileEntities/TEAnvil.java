@@ -54,7 +54,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	private final byte LAG_FIX_DELAY = 5;
 	public AnvilRecipe workRecipe;
 	//private AnvilRecipe workWeldRecipe;
-	public int AnvilTier;
+	public int AnvilTier = AnvilReq.STONE.Tier; // Initialize to avoid NPE
 
 	public EntityPlayer lastWorker;
 
@@ -486,7 +486,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 					workedRecently == 0 && anvilItemStacks[WELDOUT_SLOT] == null)
 			{
 				AnvilManager manager = AnvilManager.getInstance();
-				new Random(worldObj.getSeed());
+				//new Random(worldObj.getSeed());  // Why is this here?
 				AnvilRecipe recipe = new AnvilRecipe(anvilItemStacks[WELD1_SLOT],anvilItemStacks[WELD2_SLOT],"", 
 						0,
 						anvilItemStacks[FLUX_SLOT] != null ? true : false, AnvilTier, null);

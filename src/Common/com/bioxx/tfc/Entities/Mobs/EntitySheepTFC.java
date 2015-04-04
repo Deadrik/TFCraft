@@ -123,7 +123,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		//	animals to be adults, so we set their birthdays far enough back
 		//	in time such that they reach adulthood now.
 		//
-		this.setAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
+		this.setAge(TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 		//For Testing Only(makes spawned animals into babies)
 		//this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
@@ -167,7 +167,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
-		this.setAge((int) TFC_Time.getTotalDays());
+		this.setAge(TFC_Time.getTotalDays());
 	}
 
 	@Override
@@ -201,7 +201,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	private float getPercentGrown(IAnimal animal)
 	{
 		float birth = animal.getBirthDay();
-		float time = (int) TFC_Time.getTotalDays();
+		float time = TFC_Time.getTotalDays();
 		float percent =(time-birth)/animal.getNumberOfDaysToAdult();
 		return Math.min(percent, 1f);
 	}
@@ -249,7 +249,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 					baby.rotationYawHead = baby.rotationYaw;
 					baby.renderYawOffset = baby.rotationYaw;
 					worldObj.spawnEntityInWorld(baby);
-					baby.setAge((int)TFC_Time.getTotalDays());
+					baby.setAge(TFC_Time.getTotalDays());
 				}
 				pregnant = false;
 			}
@@ -417,6 +417,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 				player.inventory.setInventorySlotContents(player.inventory.currentItem,(((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
 			}
 
+			this.hunger += 24000;
 			this.func_146082_f(player);
 			return true;
 		}
@@ -767,6 +768,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 			{
 				worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			}
+			this.hunger += 24000;
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();

@@ -24,7 +24,7 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityQuern extends NetworkTileEntity implements IInventory
+public class TEQuern extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[3];
 	public int rotation = 0;
@@ -130,13 +130,13 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 			}
 			else
 			{
-				if(storage[0].stackSize == 1)
+				if(storage[0].stackSize == qr.getInItem().stackSize)
 				{
 					storage[0] = null;
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				}
 				else
-					storage[0].stackSize--;
+					storage[0].stackSize -= qr.getInItem().stackSize;
 
 				if(storage[1] == null)
 					storage[1] = qr.getResult().copy();

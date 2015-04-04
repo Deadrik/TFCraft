@@ -246,7 +246,7 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 					}
 					else
 					{
-						this.attackedAtYaw = (float)((int)(Math.random() * 2.0D) * 180);
+						this.attackedAtYaw = (int) (Math.random() * 2.0D) * 180;
 					}
 				}
 
@@ -292,7 +292,7 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 		{
 			return;
 		}
-		else if (summonAid.getResult() == Result.ALLOW || entitylivingbase != null && this.worldObj.difficultySetting == EnumDifficulty.HARD && (double)this.rand.nextFloat() < this.getEntityAttribute(field_110186_bp).getAttributeValue())
+		else if (summonAid.getResult() == Result.ALLOW || entitylivingbase != null && this.worldObj.difficultySetting == EnumDifficulty.HARD && this.rand.nextFloat() < this.getEntityAttribute(field_110186_bp).getAttributeValue())
 		{
 			EntityZombie entityzombie;
 			if (summonAid.customSummonedAid != null && summonAid.getResult() == Result.ALLOW)
@@ -312,7 +312,7 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 
 				if (World.doesBlockHaveSolidTopSurface(this.worldObj, i1, j1 - 1, k1) && this.worldObj.getBlockLightValue(i1, j1, k1) < 10 && TFC_Core.getCDM(worldObj).getData(i1 >> 4, k1 >> 4).getSpawnProtectionWithUpdate() <= 0)
 				{
-					entityzombie.setPosition((double)i1, (double)j1, (double)k1);
+					entityzombie.setPosition(i1, j1, k1);
 
 					if (this.worldObj.checkNoEntityCollision(entityzombie.boundingBox) && this.worldObj.getCollidingBoundingBoxes(entityzombie, entityzombie.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(entityzombie.boundingBox))
 					{

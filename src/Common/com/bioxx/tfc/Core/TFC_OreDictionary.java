@@ -137,10 +137,7 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("dustGraphite", new ItemStack(TFCItems.Powder, 1, 2)); //Graphite
 		OreDictionary.registerOre("dustSulfur", new ItemStack(TFCItems.Powder, 1, 3)); //Sulfur
 		OreDictionary.registerOre("dustSaltpeter", new ItemStack(TFCItems.Powder, 1, 4)); //Saltpeter
-		OreDictionary.registerOre("dustIron", new ItemStack(TFCItems.Powder, 1, 5)); //Hematite
 		OreDictionary.registerOre("dustLapis", new ItemStack(TFCItems.Powder, 1, 6)); //Lapis
-		OreDictionary.registerOre("dustIron", new ItemStack(TFCItems.Powder, 1, 7)); //Limonite
-		OreDictionary.registerOre("dustCopper", new ItemStack(TFCItems.Powder, 1, 8)); //Malachite
 		OreDictionary.registerOre("dustSalt", new ItemStack(TFCItems.Powder, 1, 9)); //Salt
 
 		//Ingots
@@ -442,7 +439,7 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("bucketSaltWater", new ItemStack(TFCItems.RedSteelBucketSaltWater, 1, WILD));
 
 		OreDictionary.registerOre("bucketLava", new ItemStack(Items.lava_bucket));
-		OreDictionary.registerOre("bucketLava", new ItemStack(TFCItems.BlueSteelBucketEmpty));
+		OreDictionary.registerOre("bucketLava", new ItemStack(TFCItems.BlueSteelBucketLava));
 
 		OreDictionary.registerOre("bucketMilk", new ItemStack(Items.milk_bucket));
 		OreDictionary.registerOre("bucketMilk", new ItemStack(TFCItems.WoodenBucketMilk));
@@ -461,5 +458,7 @@ public class TFC_OreDictionary
 
 		OreDictionary.registerOre("blockPumpkin", new ItemStack(Blocks.pumpkin));
 		OreDictionary.registerOre("blockPumpkin", new ItemStack(TFCBlocks.Pumpkin));
+		OreDictionary.registerOre("blockLitPumpkin", new ItemStack(Blocks.lit_pumpkin));
+		OreDictionary.registerOre("blockLitPumpkin", new ItemStack(TFCBlocks.LitPumpkin));
 	}
 }

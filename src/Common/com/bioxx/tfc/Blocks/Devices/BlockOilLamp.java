@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -20,10 +21,15 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Items.ItemBlocks.ItemOilLamp;
 import com.bioxx.tfc.TileEntities.TEOilLamp;
 import com.bioxx.tfc.api.TFCBlocks;
 
@@ -52,10 +58,12 @@ public class BlockOilLamp extends BlockTerraContainer
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List)
+	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		for(int i = 0; i < 6; i++)
-			par3List.add(new ItemStack(this, 1, i+8));
+		{
+			list.add(ItemOilLamp.GetFullLamp(i));
+		}
 	}
 
 	@Override
@@ -63,19 +71,23 @@ public class BlockOilLamp extends BlockTerraContainer
 	public IIcon getIcon(int side, int meta)
 	{
 		int m = meta & 7;
-		if(m == 0)
-			return TFC_Textures.SheetGold;
-		else if(m == 1)
-			return TFC_Textures.SheetPlatinum;
-		else if(m == 2)
-			return TFC_Textures.SheetRoseGold;
-		else if(m == 3)
-			return TFC_Textures.SheetSilver;
-		else if(m == 4)
-			return TFC_Textures.SheetSterlingSilver;
-		else if(m == 5)
-			return TFC_Textures.SheetBlueSteel;
-		else return TFC_Textures.SheetGold;
+		if(side == 0 || side == 1)
+		{
+			if(m == 0)
+				return TFC_Textures.SheetGold;
+			else if(m == 1)
+				return TFC_Textures.SheetPlatinum;
+			else if(m == 2)
+				return TFC_Textures.SheetRoseGold;
+			else if(m == 3)
+				return TFC_Textures.SheetSilver;
+			else if(m == 4)
+				return TFC_Textures.SheetSterlingSilver;
+			else if(m == 5)
+				return TFC_Textures.SheetBlueSteel;
+			else return TFC_Textures.SheetGold;
+		}
+		else return icons[m];
 	}
 
 	@Override
@@ -89,7 +101,13 @@ public class BlockOilLamp extends BlockTerraContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-
+		icons = new IIcon[6];
+		icons[0] = registerer.registerIcon(Reference.ModID + ":" + "metal/GoldLamp");
+		icons[1] = registerer.registerIcon(Reference.ModID + ":" + "metal/PlatinumLamp");
+		icons[2] = registerer.registerIcon(Reference.ModID + ":" + "metal/RoseGoldLamp");
+		icons[3] = registerer.registerIcon(Reference.ModID + ":" + "metal/SilverLamp");
+		icons[4] = registerer.registerIcon(Reference.ModID + ":" + "metal/SterlingSilverLamp");
+		icons[5] = registerer.registerIcon(Reference.ModID + ":" + "metal/BlueSteelLamp");
 	}
 
 	@Override
@@ -97,7 +115,36 @@ public class BlockOilLamp extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
+			int meta = world.getBlockMetadata(x, y, z);
+			if(!isLampLit(meta))
+			{
+				TEOilLamp te = (TEOilLamp) world.getTileEntity(x, y, z);
+				if (te != null)
+				{
+					te.updateLampFuel();
+					if(te.isFuelValid())
+						if(te.getFuelTimeLeft() > 0)
+							world.setBlockMetadataWithNotify(x, y, z, meta-8, 3);
+				}
+			}
+			else
+			{
+				TEOilLamp te = (TEOilLamp) world.getTileEntity(x, y, z);
+				if (te != null)
+				{
+					te.updateLampFuel();
+				}
+				world.setBlockMetadataWithNotify(x, y, z, meta+8, 3);
+			}
+		}
+		return true;
+	}
 
+	public static boolean isLampLit(int meta)
+	{
+		if((meta & 8) > 0)
+		{
+			return false;
 		}
 		return true;
 	}
@@ -106,15 +153,6 @@ public class BlockOilLamp extends BlockTerraContainer
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-
-		if(metadata >= 8)
-			return ret;
-
-		Item item = getItemDropped(metadata, world.rand, fortune);
-		if (item != null)
-		{
-			ret.add(new ItemStack(item, 1, damageDropped(metadata)));
-		}
 		return ret;
 	}
 
@@ -204,15 +242,40 @@ public class BlockOilLamp extends BlockTerraContainer
 		}
 	}
 
+	@Override
+	public int tickRate(World world)
+	{
+		return 20;
+	}
+
 	/**
 	 * Called whenever the block is added into the world. Args: world, x, y, z
 	 */
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z)
 	{
-		((TEOilLamp) world.getTileEntity(x, y, z)).create();
-
 		this.func_150109_e(world, x, y, z);
+	}
+
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z,  EntityLivingBase entity, ItemStack is) 
+	{
+		TileEntity _t =  world.getTileEntity(x, y, z);
+		if(_t != null && _t instanceof TEOilLamp)
+		{
+			((TEOilLamp)_t).create();
+			FluidStack fs = FluidStack.loadFluidStackFromNBT(is.getTagCompound());
+			if(fs != null)
+			{
+				((TEOilLamp)_t).setFuelFromStack(fs);
+			}
+			else
+			{
+				//world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)+8, 0x3);
+			}
+			((TEOilLamp)_t).hourPlaced = (int)TFC_Time.getTotalHours();
+
+		}
 	}
 
 	/**
@@ -222,7 +285,8 @@ public class BlockOilLamp extends BlockTerraContainer
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
 	{
-		//this.checkValidity(world, x, y, z, b);
+		if(!World.doesBlockHaveSolidTopSurface(world, x, y-1, z))
+			TFC_Core.setBlockToAirWithDrops(world, x, y, z);
 	}
 
 	@Override
@@ -255,27 +319,27 @@ public class BlockOilLamp extends BlockTerraContainer
 		if (!world.isRemote)
 		{
 			TEOilLamp te = (TEOilLamp)world.getTileEntity(x, y, z);
+			if((meta & 8) != 0)
+				meta -=8;
 			if (te != null)
 			{
-				if(te.fuel != null)
+				if(te.getFuel() != null)
 				{
-					ItemStack is = new ItemStack(Item.getItemFromBlock(this), 1, meta);
-					NBTTagCompound nbt = te.fuel.writeToNBT(new NBTTagCompound());
+					ItemStack is = new ItemStack(this, 1, meta);
+					NBTTagCompound nbt = te.getFuel().writeToNBT(new NBTTagCompound());
 					is.setTagCompound(nbt);
 					EntityItem ei = new EntityItem(world,x,y,z,is);
 					world.spawnEntityInWorld(ei);
 				}
 				else
 				{
-					ItemStack is = new ItemStack(Item.getItemFromBlock(this), 1, meta);
+					ItemStack is = new ItemStack(this, 1, meta);
 					EntityItem ei = new EntityItem(world,x,y,z,is);
 					world.spawnEntityInWorld(ei);
 				}
 			}
 		}
 	}
-
-
 
 	/**
 	 * Ray traces through the blocks collision from start vector to end vector returning a ray trace hit. Args: world,
@@ -284,7 +348,7 @@ public class BlockOilLamp extends BlockTerraContainer
 	@Override
 	public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 startVec, Vec3 endVec)
 	{
-		this.setBlockBounds(0.4F, 0.0F, 0.4f, 0.6f, 0.5F, 0.6f);
+		this.setBlockBounds(0.25F, 0.0F, 0.25f, 0.75f, 0.5F, 0.75f);
 		return super.collisionRayTrace(world, x, y, z, startVec, endVec);
 	}
 
@@ -301,7 +365,7 @@ public class BlockOilLamp extends BlockTerraContainer
 
 
 		double centerX = x + 0.5F;
-		double centerY = y + 0.5F;
+		double centerY = y + 0.6F;
 		double centerZ = z + 0.5F;
 		//double d3 = 0.22;
 		//double d4 = 0.27;

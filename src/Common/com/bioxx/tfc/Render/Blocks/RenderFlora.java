@@ -40,9 +40,9 @@ public class RenderFlora
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.setBrightness(block.getMixedBrightnessForBlock(renderer.blockAccess, x, y, z));
 		int l = block.colorMultiplier(renderer.blockAccess, x, y, z);
-		float f = (float)(l >> 16 & 255) / 255.0F;
-		float f1 = (float)(l >> 8 & 255) / 255.0F;
-		float f2 = (float)(l & 255) / 255.0F;
+		float f = (l >> 16 & 255) / 255.0F;
+		float f1 = (l >> 8 & 255) / 255.0F;
+		float f2 = (l & 255) / 255.0F;
 
 		if (EntityRenderer.anaglyphEnable)
 		{
@@ -55,25 +55,25 @@ public class RenderFlora
 		}
 
 		tessellator.setColorOpaque_F(f, f1, f2);
-		double d1 = (double)x;
-		double d2 = (double)y;
-		double d0 = (double)z;
+		double d1 = x;
+		double d2 = y;
+		double d0 = z;
 		long i1;
 
 		if (block == Blocks.tallgrass)
 		{
-			i1 = (long)(x * 3129871) ^ (long)z * 116129781L ^ (long)y;
+			i1 = x * 3129871 ^ z * 116129781L ^ y;
 			i1 = i1 * i1 * 42317861L + i1 * 11L;
-			d1 += ((double)((float)(i1 >> 16 & 15L) / 15.0F) - 0.5D) * 0.5D;
-			d2 += ((double)((float)(i1 >> 20 & 15L) / 15.0F) - 1.0D) * 0.2D;
-			d0 += ((double)((float)(i1 >> 24 & 15L) / 15.0F) - 0.5D) * 0.5D;
+			d1 += ((i1 >> 16 & 15L) / 15.0F - 0.5D) * 0.5D;
+			d2 += ((i1 >> 20 & 15L) / 15.0F - 1.0D) * 0.2D;
+			d0 += ((i1 >> 24 & 15L) / 15.0F - 0.5D) * 0.5D;
 		}
 		else if (block == Blocks.red_flower || block == Blocks.yellow_flower)
 		{
-			i1 = (long)(x * 3129871) ^ (long)z * 116129781L ^ (long)y;
+			i1 = x * 3129871 ^ z * 116129781L ^ y;
 			i1 = i1 * i1 * 42317861L + i1 * 11L;
-			d1 += ((double)((float)(i1 >> 16 & 15L) / 15.0F) - 0.5D) * 0.3D;
-			d0 += ((double)((float)(i1 >> 24 & 15L) / 15.0F) - 0.5D) * 0.3D;
+			d1 += ((i1 >> 16 & 15L) / 15.0F - 0.5D) * 0.3D;
+			d0 += ((i1 >> 24 & 15L) / 15.0F - 0.5D) * 0.3D;
 		}
 
 		IIcon iicon = block.getIcon(0, plantType);

@@ -6,7 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.TileEntities.TileEntityToolRack;
+import com.bioxx.tfc.TileEntities.TEToolRack;
 
 public class TESRToolrack extends TESRBase
 {
@@ -17,7 +17,7 @@ public class TESRToolrack extends TESRBase
 	/**
 	 * Renders the TileEntity for the chest at a position.
 	 */
-	public void renderAt(TileEntityToolRack te, double d, double d1, double d2, float f)
+	public void renderAt(TEToolRack te, double d, double d1, double d2, float f)
 	{
 		if (te.getWorldObj() != null)
 		{
@@ -168,6 +168,6 @@ public class TESRToolrack extends TESRBase
 	@Override
 	public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8)
 	{
-		this.renderAt((TileEntityToolRack)par1TileEntity, par2, par4, par6, par8);
+		this.renderAt((TEToolRack)par1TileEntity, par2, par4, par6, par8);
 	}
 }

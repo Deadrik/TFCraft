@@ -10,6 +10,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCOptions;
 
 public class MapGenRavineTFC extends MapGenBaseTFC
 {
@@ -191,7 +192,7 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 	@Override
 	protected void recursiveGenerate(World par1World, int chunkX, int chunkZ, int par4, int par5, Block[] par6)
 	{
-		if (this.rand.nextInt(100) == 0)
+		if (TFCOptions.ravineRarity > 0 && this.rand.nextInt(TFCOptions.ravineRarity) == 0)
 		{
 			double startX = chunkX * 16 + this.rand.nextInt(16);
 			double startY = this.rand.nextInt(variability) + height;

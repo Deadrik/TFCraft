@@ -6,31 +6,49 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntitySapling extends TileEntity
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+
+public class TESpawnMeter extends TileEntity
 {
-	public long growTime;
-	
-	public TileEntitySapling()
+	private long timer;
+	public TESpawnMeter()
 	{
+		timer = TFC_Time.getTotalTicks();
 	}
-	
-	public boolean canUpdate()
+
+	@Override
+	public void updateEntity()
 	{
-		return false;
+		if(!worldObj.isRemote)
+		{
+			if(timer < TFC_Time.getTotalTicks())
+			{
+				timer += TFC_Time.hourLength;
+				com.bioxx.tfc.Chunkdata.ChunkData cd = TFC_Core.getCDM(worldObj).getData(xCoord >> 4, zCoord >> 4);
+				if(cd != null)
+				{
+					int protection = cd.spawnProtection;
+					int meta = 0;
+					meta = protection > 384 ? 8 : protection / 48;
+					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta, 0x2);
+				}
+			}
+		}
 	}
-	
+
+	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
 		super.readFromNBT(nbttagcompound);
-		growTime = nbttagcompound.getLong("growTime");
 	}
 
+	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
-		nbttagcompound.setLong("growTime", growTime);
 	}
-	
+
 	@Override
 	public Packet getDescriptionPacket()
 	{
@@ -44,5 +62,4 @@ public class TileEntitySapling extends TileEntity
 	{
 		readFromNBT(pkt.func_148857_g());
 	}
-
 }

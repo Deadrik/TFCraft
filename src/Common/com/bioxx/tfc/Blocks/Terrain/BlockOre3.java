@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
@@ -30,6 +31,24 @@ public class BlockOre3 extends BlockOre
 	public int quantityDropped(int meta, int fortune, Random random)
 	{
 		return 1;
+	}
+
+	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+
+		int count = quantityDropped(metadata, fortune, world.rand);
+		for (int i = 0; i < count; i++)
+		{
+			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, damageDropped(metadata));
+
+			if (itemstack != null)
+			{
+				ret.add(itemstack);
+			}
+		}
+		return ret;
 	}
 
 	@Override

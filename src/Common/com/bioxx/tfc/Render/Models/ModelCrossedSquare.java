@@ -25,9 +25,9 @@ public class ModelCrossedSquare extends ModelBox
 		
         this.vertexPositions = new PositionTextureVertex[8];
         this.quadList = new TexturedQuad[4];
-        float maxX = originX + (float)width;
-        float maxY = originY + (float)height;
-        float maxZ = originZ + (float)depth;
+		float maxX = originX + width;
+		float maxY = originY + height;
+		float maxZ = originZ + depth;
         originX -= scale;
         originY -= scale;
         originZ -= scale;
@@ -63,6 +63,7 @@ public class ModelCrossedSquare extends ModelBox
         		textureOffsetX + depth + width + depth, textureOffsetY + depth, textureOffsetX + depth + width + depth + width, textureOffsetY + depth + height, renderer.textureWidth, renderer.textureHeight);
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
     public void render(Tessellator par1Tessellator, float par2)
     {

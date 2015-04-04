@@ -200,6 +200,11 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		return count;
 	}
 
+	public boolean canAcceptLiquids()
+	{
+		return this.getInvCount() == 0;
+	}
+
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer)
 	{
@@ -699,19 +704,20 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			{
 				ItemStack container = getInputStack();
 				FluidStack inLiquid = FluidContainerRegistry.getFluidForFilledItem(container);
-				if(inLiquid != null && container.stackSize == 1)
-				{
-					if(addLiquid(inLiquid))
-					{
-						this.setInventorySlotContents(0, FluidContainerRegistry.drainFluidContainer(container));
-					}
-				}
-				else if(container != null && container.getItem() instanceof IFluidContainerItem)
+
+				if(container != null && container.getItem() instanceof IFluidContainerItem)
 				{
 					FluidStack isfs = ((IFluidContainerItem)container.getItem()).getFluid(container);
 					if(isfs != null && addLiquid(isfs))
 					{
-						((IFluidContainerItem) container.getItem()).drain(container, container.getMaxDamage(), true);
+						((IFluidContainerItem) container.getItem()).drain(container, ((IFluidContainerItem)container.getItem()).getCapacity(container), true);
+					}
+				}
+				else if(inLiquid != null && container.stackSize == 1)
+				{
+					if(addLiquid(inLiquid))
+					{
+						this.setInventorySlotContents(0, FluidContainerRegistry.drainFluidContainer(container));
 					}
 				}
 			}
@@ -719,11 +725,8 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			else if(mode == MODE_OUT)
 			{
 				ItemStack container = getInputStack();
-				if(FluidContainerRegistry.isEmptyContainer(container))
-				{
-					this.setInventorySlotContents(0, this.removeLiquid(getInputStack()));
-				}
-				else if(container != null && fluid != null && container.getItem() instanceof IFluidContainerItem)
+
+				if(container != null && fluid != null && container.getItem() instanceof IFluidContainerItem)
 				{
 					FluidStack isfs = ((IFluidContainerItem)container.getItem()).getFluid(container);
 					if(isfs == null || fluid.isFluidEqual(isfs))
@@ -732,6 +735,10 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 						if(fluid.amount == 0)
 							fluid = null;
 					}
+				}
+				else if(FluidContainerRegistry.isEmptyContainer(container))
+				{
+					this.setInventorySlotContents(0, this.removeLiquid(getInputStack()));
 				}
 			}
 		}

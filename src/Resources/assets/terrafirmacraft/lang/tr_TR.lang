@@ -18,36 +18,38 @@ death.attack.alcohol=%1$s alkol zehirlenmesinden öldü
 death.attack.heatStroke=%1$s sıcak çarpmasından öldü
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=Kalamar
-entity.cowTFC.name=İnek
-entity.wolfTFC.name=Kurt
 entity.bearTFC.name=Ayı
-entity.deerTFC.name=Geyik
 entity.chickenTFC.name=Tavuk
-entity.pigTFC.name=Domuz
-entity.skeletonTFC.name=İskelet
-entity.zombieTFC.name=Zombi
-entity.spiderTFC.name=Örümcek
-entity.slimeTFC.name=Sümük
-entity.silverfishTFC.name=Gümüş balığı
-entity.ghastTFC.name=Hayalet
-entity.caveSpiderTFC.name=Mağara örümceği
-entity.blazeTFC.name=Blaze
-entity.endermanTFC.name=Enderman
-entity.pigZombieTFC.name=Pig Zombie
-entity.creeperTFC.name=Creeper
-entity.sheepTFC.name=Koyun
-entity.pheasantTFC.name=Sülün
-entity.horseTFC.name=At
-entity.irongolemTFC.name=Iron Golem
+entity.cowTFC.name=İnek
+entity.deerTFC.name=Geyik
 entity.fishTFC.name=Alabalık
+entity.horseTFC.name=At
+entity.pheasantTFC.name=Sülün
+entity.pigTFC.name=Domuz
+entity.sheepTFC.name=Koyun
+entity.squidTFC.name=Kalamar
+entity.wolfTFC.name=Kurt
 
+entity.blazeTFC.name=Blaze
+entity.caveSpiderTFC.name=Mağara örümceği
+entity.creeperTFC.name=Creeper
+entity.endermanTFC.name=Enderman
+entity.ghastTFC.name=Hayalet
+entity.irongolemTFC.name=Iron Golem
+entity.pigZombieTFC.name=Pig Zombie
+entity.silverfishTFC.name=Gümüş balığı
+entity.skeletonTFC.name=İskelet
+entity.slimeTFC.name=Sümük
+entity.spiderTFC.name=Örümcek
+entity.zombieTFC.name=Zombi
 
-#==========
-#= Entity =
-#==========
+entity.arrowTFC.name=Ok
+entity.standTFC.name=
+entity.barrel.name=
+entity.fallingBlock.name=
+
 entity.notFamiliar=Hayvan onu yapmana izin vermez!
 fishingRod.lineTension=İp kopacak
 fishingRod.lineSnap=İp koptu
@@ -2325,6 +2327,7 @@ gui.MeltedMetal.Inst0=Metali dokmek ya da karıştırmak İçin Ters tıkla
 gui.PotteryBase.Inst0=Objeyi Yere koymak için Eğil ve ters tıkla
 gui.PotteryVesselSmall.Inst0=Yada açmak için Ters tıkla
 gui.RawHide.Inst0=????
+gui.Chisel.Inst0=
 gui.Barrel.MoreItems=§8Daha fazla... (&fShifte basılı tut)
 
 gui.Nutrient.A=Besin A
@@ -2474,6 +2477,8 @@ gui.useless=
 gui.growth=
 gui.mature=
 gui.metal.Iron=
+gui.tier=
+gui.progress=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Akan suyun altına tıklanmalı.

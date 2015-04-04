@@ -113,19 +113,6 @@ public class BlockGrass extends BlockTerra
 		return side == 1 ? GrassTopTexture : (side == 0 ? TFC_Textures.InvisibleTexture : iconGrassSideOverlay);
 	}
 
-	@Override
-	public void onBlockAdded(World world, int x, int y, int z)
-	{
-		if(world.isAirBlock(x, y - 1, z))
-		{
-			int meta = world.getBlockMetadata(x, y, z);
-			int yNew = y - 1;
-			while(!world.getBlock(x, yNew--, z).isOpaqueCube()){}
-			world.setBlock(x, yNew, z, this, meta, 0x2);
-			world.setBlockToAir(x, y, z);
-		}
-	}
-
 	/**
 	 * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
 	 */
@@ -299,7 +286,7 @@ public class BlockGrass extends BlockTerra
 		if (!world.isRemote && this != TFCBlocks.ClayGrass2 && this != TFCBlocks.ClayGrass && this != TFCBlocks.PeatGrass)
 		{
 			Random R = new Random();
-			if(!BlockCollapsable.isNearSupport(world, x, y, z, 4, 0) && BlockDirt.canFallBelow(world, x, y - 1, z) && R.nextInt(10) == 0)
+			if (BlockCollapsible.canFallBelow(world, x, y - 1, z) && R.nextInt(10) == 0 && !BlockCollapsible.isNearSupport(world, x, y, z, 4, 0))
 			{
 				int meta = world.getBlockMetadata(x, y, z);
 				world.setBlock(x, y, z, TFC_Core.getTypeForDirtFromGrass(this), meta, 0x2);

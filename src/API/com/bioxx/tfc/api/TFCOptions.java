@@ -20,6 +20,10 @@ public class TFCOptions
 	public static int initialCollapseRatio;
 	public static int propogateCollapseChance;
 	public static boolean enableCaveIns;
+	
+	public static int ravineRarity;
+	public static int lavaFissureRarity;
+	public static int waterFissureRarity;
 
 	public static int yearLength;
 	public static float pitKilnBurnTime = 8.0f;
@@ -61,6 +65,8 @@ public class TFCOptions
 	public static int richOreUnits = 35;
 
 	public static String quiverHUDPosition = "bottomleft";
+
+	public static int oilLampFuelMult = 4;
 
 	public static boolean getBooleanFor(Configuration config,String heading, String item, boolean value)
 	{

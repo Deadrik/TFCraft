@@ -19,9 +19,6 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.Entities.EntityFallingBlockTFC;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
@@ -73,33 +70,6 @@ public class BlockSand extends BlockTerra
 		onBlockDestroyedByExplosion(world, x, y, z, explosion);
 	}
 
-	public static boolean canFallBelow(World world, int x, int y, int z)
-	{
-		Block block = world.getBlock(x, y, z);
-		if (world.isAirBlock(x, y, z))
-			return true;
-		if (block == Blocks.bedrock)
-			return false;
-		if (block == Blocks.fire)
-			return true;
-		if (block == TFCBlocks.TallGrass)
-			return true;
-		if (block == TFCBlocks.Torch)
-			return true;
-		if (block == TFCBlocks.SmokeRack)
-			return true;
-		if (block == TFCBlocks.ToolRack)
-			return true;
-		if (block == TFCBlocks.Charcoal)
-			return false;
-		if (!block.isNormalCube())
-			return true;
-		Material material = block.getMaterial();
-		if (material == Material.water || material == Material.lava)
-			return true;
-		return false;
-	}
-
 	/**
 	 * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
 	 */
@@ -136,129 +106,79 @@ public class BlockSand extends BlockTerra
 		world.scheduleBlockUpdate(x, y, z, this, tickRate(world));
 	}
 
-	private void tryToFall(World world, int x, int y, int z)
-	{
-		if(!world.isRemote)
-		{
-			int meta = world.getBlockMetadata(x, y, z);
-			if (canFallBelow(world, x, y - 1, z) && y >= 0)
-			{
-				byte byte0 = 32;
-				if (!world.checkChunksExist(x - byte0, y - byte0, z - byte0, x + byte0, y + byte0, z + byte0))
-				{
-					world.setBlockToAir(x, y, z);
-					for (; canFallBelow(world, x, y - 1, z) && y > 0; y--) { }
-					if (y > 0)
-						world.setBlock(x, y, z, this, meta, 2);
-				}
-				else
-				{
-					doBeforeFall(world,x,y,z);
-					EntityFallingBlockTFC ent = new EntityFallingBlockTFC(world, (double)(x + 0.5F), (double)(y + 0.5F), (double)(z + 0.5F), this, meta);
-					world.spawnEntityInWorld(ent);
-					Random R = new Random(x * y + z);
-					world.playSoundAtEntity(ent, TFC_Sounds.FALLININGDIRTSHORT, 1.0F, 0.8F + (R.nextFloat() / 2));
-				}
-			}
-		}
-	}
-
-	protected void doBeforeFall(World world, int x, int y, int z){
-	}
-
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
-		if(!world.isRemote && world.doChunksNearChunkExist(x, y, z, 1))
+		if (!world.isRemote && world.doChunksNearChunkExist(x, y, z, 1))
 		{
 			int meta = world.getBlockMetadata(x, y, z);
-			//boolean PosXAir = false;
-			//boolean NegXAir = false;
-			//boolean PosZAir = false;
-			//boolean NegZAir = false;
-			//boolean PosXAir2 = false;
-			//boolean NegXAir2 = false;
-			//boolean PosZAir2 = false;
-			//boolean NegZAir2 = false;
 
-			boolean isBelowAir = world.isAirBlock(x, y - 1, z);
+			boolean canFallOneBelow = BlockCollapsible.canFallBelow(world, x, y - 1, z);
 			byte count = 0;
 			List<Integer> sides = new ArrayList<Integer>();
 
-			if(world.isAirBlock(x + 1, y, z))
+			if (world.isAirBlock(x + 1, y, z))
 			{
 				count++;
-				if(world.isAirBlock(x + 1, y - 1, z))
-				{
-					//PosXAir = true;
+				if (BlockCollapsible.canFallBelow(world, x + 1, y - 1, z))
 					sides.add(0);
-				}
 			}
-			if(world.isAirBlock(x, y, z + 1))
+			if (world.isAirBlock(x, y, z + 1))
 			{
 				count++;
-				if(world.isAirBlock(x, y - 1, z + 1))
-				{
-					//PosZAir = true;
+				if (BlockCollapsible.canFallBelow(world, x, y - 1, z + 1))
 					sides.add(1);
-				}
 			}
-			if(world.isAirBlock(x - 1, y, z))
+			if (world.isAirBlock(x - 1, y, z))
 			{
 				count++;
-				if(world.isAirBlock(x - 1, y - 1, z))
-				{
-					//NegXAir = true;
+				if (BlockCollapsible.canFallBelow(world, x - 1, y - 1, z))
 					sides.add(2);
-				}
 			}
-			if(world.isAirBlock(x, y, z - 1))
+			if (world.isAirBlock(x, y, z - 1))
 			{
 				count++;
-				if(world.isAirBlock(x, y - 1, z - 1))
-				{
-					//NegZAir = true; 
+				if (BlockCollapsible.canFallBelow(world, x, y - 1, z - 1))
 					sides.add(3);
-				}
 			}
 
-			if(!isBelowAir && (count > 2) && sides.size() >= 1)
+			if (!canFallOneBelow && (count > 2) && sides.size() >= 1)
 			{
-				switch((Integer)sides.get(random.nextInt(sides.size())))
+				switch (sides.get(random.nextInt(sides.size())))
 				{
 				case 0:
 				{
 					world.setBlockToAir(x, y, z);
 					world.setBlock(x + 1, y, z, this, meta, 0x2);
-					tryToFall(world, x + 1, y, z);
+					BlockCollapsible.tryToFall(world, x + 1, y, z, this);
 					break;
 				}
 				case 1:
 				{
 					world.setBlockToAir(x, y, z);
 					world.setBlock(x, y, z + 1, this, meta, 0x2);
-					tryToFall(world, x, y, z + 1);
+					BlockCollapsible.tryToFall(world, x, y, z + 1, this);
 					break;
 				}
 				case 2:
 				{
 					world.setBlockToAir(x, y, z);
-					world.setBlock(x - 1, y, z, this, meta, 3);
-					tryToFall(world, x - 1, y, z);
+					world.setBlock(x - 1, y, z, this, meta, 0x2);
+					BlockCollapsible.tryToFall(world, x - 1, y, z, this);
 					break;
 				}
 				case 3:
 				{
 					world.setBlockToAir(x, y, z);
-					world.setBlock(x, y, z - 1, this, meta, 3);
-					tryToFall(world, x, y, z - 1);
+					world.setBlock(x, y, z - 1, this, meta, 0x2);
+					BlockCollapsible.tryToFall(world, x, y, z - 1, this);
 					break;
 				}
 				}
 			}
-			else if(isBelowAir)
+			else if (canFallOneBelow)
 			{
-				tryToFall(world, x, y, z);
+				BlockCollapsible.tryToFall(world, x, y, z, this);
 			}
 		}
 	}
@@ -268,7 +188,7 @@ public class BlockSand extends BlockTerra
 	{
 		if(!world.isRemote)
 		{
-			tryToFall(world, x, y, z);
+			BlockCollapsible.tryToFall(world, x, y, z, this);
 			world.scheduleBlockUpdate(x, y, z, this, tickRate(world));
 		}
 	}

@@ -29,7 +29,7 @@ public class KilnCraftingManager
 	{
 		for (int k = 0; k < recipes.size(); k++)
 		{
-			KilnRecipe irecipe = (KilnRecipe)recipes.get(k);
+			KilnRecipe irecipe = recipes.get(k);
 			if (irecipe.matches(recipe))
 			{
 				return irecipe;
@@ -43,7 +43,7 @@ public class KilnCraftingManager
     {
         for (int k = 0; k < recipes.size(); k++)
         {
-        	KilnRecipe irecipe = (KilnRecipe)recipes.get(k);
+			KilnRecipe irecipe = recipes.get(k);
             if (irecipe.isComplete(recipe))
             {
                 return irecipe.getCraftingResult();

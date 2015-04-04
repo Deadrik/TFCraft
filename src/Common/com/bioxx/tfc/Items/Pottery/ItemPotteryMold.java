@@ -39,7 +39,7 @@ public class ItemPotteryMold extends ItemPotteryBase
 	{		
 		if (is.getItemDamage() > 5)
 		{
-			int units = (int) (100 - ((is.getItemDamage() - 2) / 4));
+			int units = 100 - ((is.getItemDamage() - 2) / 4);
 			arraylist.add(StatCollector.translateToLocal("gui.units") + ": " + units + " / 100");
 		}
 	}

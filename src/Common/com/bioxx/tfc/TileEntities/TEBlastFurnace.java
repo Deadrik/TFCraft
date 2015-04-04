@@ -683,7 +683,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 		fireItemStacks = new ItemStack[20];
 		for (int i = 0; i < nbttaglist.tagCount(); i++)
 		{
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			byte byte0 = nbttagcompound1.getByte("Slot");
 			if(byte0 >= 0 && byte0 < fireItemStacks.length)
 				fireItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
@@ -693,7 +693,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 		storage = new ItemStack[2];
 		for (int i = 0; i < nbttaglist2.tagCount(); i++)
 		{
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist2.getCompoundTagAt(i);
+			NBTTagCompound nbttagcompound1 = nbttaglist2.getCompoundTagAt(i);
 			byte byte0 = nbttagcompound1.getByte("Slot");
 			if (byte0 >= 0 && byte0 < storage.length)
 			{
@@ -705,7 +705,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 		outputItemStacks = new ItemStack[20];
 		for (int i = 0; i < nbttaglist3.tagCount(); i++)
 		{
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist3.getCompoundTagAt(i);
+			NBTTagCompound nbttagcompound1 = nbttaglist3.getCompoundTagAt(i);
 			byte byte0 = nbttagcompound1.getByte("Slot");
 			if(byte0 >= 0 && byte0 < outputItemStacks.length)
 				outputItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);

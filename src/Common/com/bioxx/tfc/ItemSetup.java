@@ -501,7 +501,7 @@ public class ItemSetup extends TFCItems {
 		HCRedSteelUnshaped = new ItemMeltedMetal().setUnlocalizedName("HC Red Steel Unshaped");
 		WeakSteelUnshaped = new ItemMeltedMetal().setUnlocalizedName("Weak Steel Unshaped");
 		HCSteelUnshaped = new ItemMeltedMetal().setUnlocalizedName("HC Steel Unshaped");
-		Coke = (new ItemTerra().setUnlocalizedName("Coke").setCreativeTab(TFCTabs.TFCMaterials));
+		Coke = (new ItemTerra().setUnlocalizedName("Coke").setCreativeTab(null));
 
 		BismuthBronzeProPickHead = new ItemMiscToolHead().setUnlocalizedName("Bismuth Bronze ProPick Head");
 		BlackBronzeProPickHead = new ItemMiscToolHead().setUnlocalizedName("Black Bronze ProPick Head");
@@ -706,7 +706,7 @@ public class ItemSetup extends TFCItems {
 		Items.reeds.setCreativeTab(null);
 		Reeds = new ItemReeds().setUnlocalizedName("Reeds").setCreativeTab(TFCTabs.TFCMaterials).setTextureName("reeds");
 		MetalLock = new ItemTerra().setUnlocalizedName("Metal Lock").setCreativeTab(TFCTabs.TFCMisc);
-		MudBrick = new ItemMudBrick().setUnlocalizedName("Mud Brick").setCreativeTab(TFCTabs.TFCMaterials).setTextureName("Mud Brick Base");
+		MudBrick = new ItemMudBrick().setUnlocalizedName("Mud Brick").setTextureName("Mud Brick Base");
 
 		// Food related items
 		SetupFood();
@@ -899,7 +899,7 @@ public class ItemSetup extends TFCItems {
 		Soup = new ItemSoup().setUnlocalizedName("Soup");
 
 		Sugarcane = new ItemFoodTFC(EnumFoodGroup.None, 30, 0, 0, 0, 0, false, false).setDecayRate(0.75f).setFolder("plants/").setUnlocalizedName("Sugarcane");
-		Hemp = new ItemTerra().setFolder("plants/").setUnlocalizedName("Hemp");
+		Hemp = new ItemTerra().setFolder("plants/").setUnlocalizedName("Hemp").setCreativeTab(null);
 
 		SeedsWheat = new ItemCustomSeeds(0).setUnlocalizedName("Seeds Wheat");
 		SeedsMaize = new ItemCustomSeeds(1).setUnlocalizedName("Seeds Maize");
@@ -929,17 +929,17 @@ public class ItemSetup extends TFCItems {
 		//mushroom is a food now, with foodID 61
 		//pumpkin is a food now, id = 61
 		//melon is a food, not currently obtainable. id = 62. See ItemFoodBlock
-		WintergreenLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Wintergreen Leaf");
-		BlueberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Blueberry Leaf");
-		RaspberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Raspberry Leaf");
-		StrawberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Strawberry Leaf");
-		BlackberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Blackberry Leaf");
-		BunchberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Bunchberry Leaf");
-		CranberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Cranberry Leaf");
-		SnowberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Snowberry Leaf");
-		ElderberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Elderberry Leaf");
-		GooseberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Gooseberry Leaf");
-		CloudberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Cloudberry Leaf");
+		WintergreenLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Wintergreen Leaf").setCreativeTab(null);
+		BlueberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Blueberry Leaf").setCreativeTab(null);
+		RaspberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Raspberry Leaf").setCreativeTab(null);
+		StrawberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Strawberry Leaf").setCreativeTab(null);
+		BlackberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Blackberry Leaf").setCreativeTab(null);
+		BunchberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Bunchberry Leaf").setCreativeTab(null);
+		CranberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Cranberry Leaf").setCreativeTab(null);
+		SnowberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Snowberry Leaf").setCreativeTab(null);
+		ElderberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Elderberry Leaf").setCreativeTab(null);
+		GooseberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Gooseberry Leaf").setCreativeTab(null);
+		CloudberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Cloudberry Leaf").setCreativeTab(null);
 	}
 
 	private static void registerMetals()

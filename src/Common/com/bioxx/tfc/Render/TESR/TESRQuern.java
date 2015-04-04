@@ -15,7 +15,7 @@ import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TileEntities.TileEntityQuern;
+import com.bioxx.tfc.TileEntities.TEQuern;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -29,7 +29,7 @@ public class TESRQuern extends TESRBase implements ISimpleBlockRenderingHandler
 	@Override
 	public void renderTileEntityAt(TileEntity te, double xDis, double yDis, double zDis, float f)
 	{
-		TileEntityQuern teq = (TileEntityQuern) te;
+		TEQuern teq = (TEQuern) te;
 
 		Tessellator tess = Tessellator.instance;
 		GL11.glPushMatrix();
@@ -72,7 +72,7 @@ public class TESRQuern extends TESRBase implements ISimpleBlockRenderingHandler
 	private void renderRoundTop(Tessellator t, int pos, Random rand, double angle, Boolean renderSides)
 	{
 		int sides = 4; // how many sides should the quern stone have
-		double speed = pos * 4; // * 4 will make 2 turns, * 1 will make 1 turn, also look at TileEntityQuern
+		double speed = pos * 4; // * 4 will make 2 turns, * 1 will make 1 turn, also look at TEQuern
 		double i = 0.625; // where should top rendering start
 		double j = i + 0.2; // thickness of the quern stone
 		if(!renderSides) j = i + 0.201; // fixes the double render glitch when rendering the square top box
@@ -159,7 +159,7 @@ public class TESRQuern extends TESRBase implements ISimpleBlockRenderingHandler
 
 	private void renderWoodHandle(Tessellator t, int pos, Random rand, double angle)
 	{
-		double speed = pos * 4; // * 4 will make 2 turns, * 1 will make 1 turn, also look at TileEntityQuern
+		double speed = pos * 4; // * 4 will make 2 turns, * 1 will make 1 turn, also look at TEQuern
 		double j = 0.825; // where should wood handle rendering start
 		double k = j + 0.175; // height of the wooden handle
 		double C = 0.5; // center

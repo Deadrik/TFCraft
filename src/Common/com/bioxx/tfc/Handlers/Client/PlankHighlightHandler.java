@@ -18,9 +18,9 @@ public class PlankHighlightHandler{
 	public void DrawBlockHighlightEvent(DrawBlockHighlightEvent evt) 
 	{
 		World world = evt.player.worldObj;
-		double var8 = evt.player.lastTickPosX + (evt.player.posX - evt.player.lastTickPosX) * (double)evt.partialTicks;
-		double var10 = evt.player.lastTickPosY + (evt.player.posY - evt.player.lastTickPosY) * (double)evt.partialTicks;
-		double var12 = evt.player.lastTickPosZ + (evt.player.posZ - evt.player.lastTickPosZ) * (double)evt.partialTicks;
+		double var8 = evt.player.lastTickPosX + (evt.player.posX - evt.player.lastTickPosX) * evt.partialTicks;
+		double var10 = evt.player.lastTickPosY + (evt.player.posY - evt.player.lastTickPosY) * evt.partialTicks;
+		double var12 = evt.player.lastTickPosZ + (evt.player.posZ - evt.player.lastTickPosZ) * evt.partialTicks;
 
 		if(evt.currentItem != null && evt.currentItem.getItem() instanceof ItemPlank)
 		{
@@ -51,7 +51,7 @@ public class PlankHighlightHandler{
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 
 			boolean isConstruct = world.getBlock(evt.target.blockX, evt.target.blockY, evt.target.blockZ) == TFCBlocks.WoodConstruct;
-			//float div = 1f / TileEntityWoodConstruct.PlankDetailLevel;
+			//float div = 1f / TEWoodConstruct.PlankDetailLevel;
 			//Get the hit location in local box coords
 			double hitX = Math.round((evt.target.hitVec.xCoord - evt.target.blockX)*100)/100.0d;
 			double hitY = Math.round((evt.target.hitVec.yCoord - evt.target.blockY)*100)/100.0d;

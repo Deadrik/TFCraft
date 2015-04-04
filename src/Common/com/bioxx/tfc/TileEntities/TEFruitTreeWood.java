@@ -16,7 +16,7 @@ import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.api.TFCBlocks;
 
-public class TileEntityFruitTreeWood extends TileEntity implements IInventory
+public class TEFruitTreeWood extends TileEntity implements IInventory
 {
 	public boolean isTrunk;
 	public int height;
@@ -26,7 +26,7 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 	final long GrowTime = 30;
 	final long branchGrowTime = 20;
 
-	public TileEntityFruitTreeWood()
+	public TEFruitTreeWood()
 	{
 		height = 0;
 		isTrunk = false;
@@ -94,7 +94,7 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 						worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.fruitTreeLeaves2))
 				{
 					worldObj.setBlock(xCoord, yCoord + 1, zCoord, TFCBlocks.fruitTreeWood, meta, 0x2);
-					((TileEntityFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord + 1, zCoord)).setup(true, height + 1, GrowTime);
+					((TEFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord + 1, zCoord)).setup(true, height + 1, GrowTime);
 
 					setBirthWood(GrowTime);
 				}
@@ -105,25 +105,25 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 					if(r == 0 && BlockFalling.func_149831_e(worldObj, xCoord + 1, yCoord, zCoord) || worldObj.getBlock(xCoord + 1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves)
 					{
 						worldObj.setBlock(xCoord + 1, yCoord, zCoord, TFCBlocks.fruitTreeWood, meta, 0x2);
-						((TileEntityFruitTreeWood)worldObj.getTileEntity(xCoord + 1, yCoord, zCoord)).setupBirth(false, height);
+						((TEFruitTreeWood)worldObj.getTileEntity(xCoord + 1, yCoord, zCoord)).setupBirth(false, height);
 					}
 					else if(r == 1 && BlockFalling.func_149831_e(worldObj, xCoord, yCoord, zCoord - 1) || worldObj.getBlock(xCoord, yCoord, zCoord - 1) == TFCBlocks.fruitTreeLeaves)
 					{
 						worldObj.setBlock(xCoord, yCoord, zCoord - 1, TFCBlocks.fruitTreeWood, meta, 0x2);
-						((TileEntityFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord, zCoord - 1)).setupBirth(false, height);
+						((TEFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord, zCoord - 1)).setupBirth(false, height);
 					}
 					else if(r == 2 && BlockFalling.func_149831_e(worldObj, xCoord - 1, yCoord, zCoord) || worldObj.getBlock(xCoord - 1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves)
 					{
 						worldObj.setBlock(xCoord - 1, yCoord, zCoord, TFCBlocks.fruitTreeWood, meta, 0x2);
-						((TileEntityFruitTreeWood)worldObj.getTileEntity(xCoord - 1, yCoord, zCoord)).setupBirth(false, height);
+						((TEFruitTreeWood)worldObj.getTileEntity(xCoord - 1, yCoord, zCoord)).setupBirth(false, height);
 					}
 					else if(r == 3 && BlockFalling.func_149831_e(worldObj, xCoord, yCoord, zCoord + 1) || worldObj.getBlock(xCoord, yCoord, zCoord + 1) == TFCBlocks.fruitTreeLeaves)
 					{
 						worldObj.setBlock(xCoord, yCoord, zCoord + 1, TFCBlocks.fruitTreeWood, meta, 0x2);
-						((TileEntityFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord, zCoord + 1)).setupBirth(false, height);
+						((TEFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord, zCoord + 1)).setupBirth(false, height);
 					}
 
-					((TileEntityFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord, zCoord)).setBirthWood(branchGrowTime);
+					((TEFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord, zCoord)).setBirthWood(branchGrowTime);
 				}
 			}
 
@@ -248,7 +248,7 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
 		readFromNBT(pkt.func_148857_g());
-		//TileEntityFruitTreeWood pile = this;
+		//TEFruitTreeWood pile = this;
 	}
 
 	@Override

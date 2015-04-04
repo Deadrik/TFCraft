@@ -19,7 +19,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.CollisionRayTraceStandard;
-import com.bioxx.tfc.TileEntities.TileEntityWoodConstruct;
+import com.bioxx.tfc.TileEntities.TEWoodConstruct;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Interfaces.ICustomCollision;
 
@@ -37,7 +37,7 @@ public class BlockWoodConstruct extends BlockTerraContainer implements ICustomCo
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
-		return new TileEntityWoodConstruct();
+		return new TEWoodConstruct();
 	}
 
 	@Override
@@ -81,9 +81,9 @@ public class BlockWoodConstruct extends BlockTerraContainer implements ICustomCo
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 
-		if(!world.isRemote && (TileEntityWoodConstruct)world.getTileEntity(x, y, z)!=null)
+		if(!world.isRemote && (TEWoodConstruct)world.getTileEntity(x, y, z)!=null)
 		{
-			TileEntityWoodConstruct te = (TileEntityWoodConstruct)world.getTileEntity(x, y, z);
+			TEWoodConstruct te = (TEWoodConstruct)world.getTileEntity(x, y, z);
 			ret = te.getDrops();
 		}
 		return ret;
@@ -139,10 +139,10 @@ public class BlockWoodConstruct extends BlockTerraContainer implements ICustomCo
 	@Override
 	public void addCollisionBoxesToList(World world, int i, int j, int k, List list) 
 	{
-		TileEntityWoodConstruct te = (TileEntityWoodConstruct) world.getTileEntity(i, j, k);
+		TEWoodConstruct te = (TEWoodConstruct) world.getTileEntity(i, j, k);
 
-		int d = TileEntityWoodConstruct.PlankDetailLevel;
-		int dd = TileEntityWoodConstruct.PlankDetailLevel * TileEntityWoodConstruct.PlankDetailLevel;
+		int d = TEWoodConstruct.PlankDetailLevel;
+		int dd = TEWoodConstruct.PlankDetailLevel * TEWoodConstruct.PlankDetailLevel;
 
 		float div = 1f / d;
 

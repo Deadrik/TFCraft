@@ -1,8 +1,5 @@
 package com.bioxx.tfc.Handlers.Client;
 
-import java.util.List;
-
-import com.bioxx.tfc.GUI.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +9,33 @@ import net.minecraftforge.client.event.GuiOpenEvent;
 
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
+import com.bioxx.tfc.GUI.GuiAnvil;
+import com.bioxx.tfc.GUI.GuiBarrel;
+import com.bioxx.tfc.GUI.GuiBlastFurnace;
+import com.bioxx.tfc.GUI.GuiBlueprint;
+import com.bioxx.tfc.GUI.GuiCalendar;
+import com.bioxx.tfc.GUI.GuiChestTFC;
+import com.bioxx.tfc.GUI.GuiCrucible;
+import com.bioxx.tfc.GUI.GuiCustomNametag;
+import com.bioxx.tfc.GUI.GuiFirepit;
+import com.bioxx.tfc.GUI.GuiFoodPrep;
+import com.bioxx.tfc.GUI.GuiForge;
+import com.bioxx.tfc.GUI.GuiGrill;
+import com.bioxx.tfc.GUI.GuiHopper;
+import com.bioxx.tfc.GUI.GuiInventoryTFC;
+import com.bioxx.tfc.GUI.GuiKnapping;
+import com.bioxx.tfc.GUI.GuiLargeVessel;
+import com.bioxx.tfc.GUI.GuiLogPile;
+import com.bioxx.tfc.GUI.GuiMold;
+import com.bioxx.tfc.GUI.GuiNestBox;
+import com.bioxx.tfc.GUI.GuiPlanSelection;
+import com.bioxx.tfc.GUI.GuiQuern;
+import com.bioxx.tfc.GUI.GuiQuiver;
+import com.bioxx.tfc.GUI.GuiScreenHorseInventoryTFC;
+import com.bioxx.tfc.GUI.GuiSluice;
+import com.bioxx.tfc.GUI.GuiVessel;
+import com.bioxx.tfc.GUI.GuiVesselLiquid;
+import com.bioxx.tfc.GUI.GuiWorkbench;
 import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEBlastFurnace;
@@ -21,12 +45,13 @@ import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEGrill;
+import com.bioxx.tfc.TileEntities.TEHopper;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
-import com.bioxx.tfc.TileEntities.TEVessel;
-import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TESluice;
-import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
+import com.bioxx.tfc.TileEntities.TEVessel;
+import com.bioxx.tfc.TileEntities.TEQuern;
+import com.bioxx.tfc.TileEntities.TEWorkbench;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -50,7 +75,7 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 		case 0:
 			return new GuiLogPile(player.inventory, (TELogPile) te, world, x, y, z);
 		case 1:
-			return new GuiWorkbench(player.inventory, (TileEntityWorkbench) te, world, x, y, z);
+			return new GuiWorkbench(player.inventory, (TEWorkbench) te, world, x, y, z);
 		case 19:
 			return new GuiVesselLiquid(player.inventory, world, x, y, z);
 		case 20:
@@ -78,7 +103,7 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 		case 32:
 			//return new GuiFoodPrep(player.inventory, ((TEFoodPrep) te), world, x, y, z, 0);
 		case 33:
-			return new GuiQuern(player.inventory, ((TileEntityQuern) te), world, x, y, z);
+			return new GuiQuern(player.inventory, ((TEQuern) te), world, x, y, z);
 		case 34:
 			return new GuiBlueprint(player, world, x, y, z);
 		case 35:
@@ -97,18 +122,13 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 			return new GuiNestBox(player.inventory, ((TENestBox)te), world, x, y, z);
 		case 42:
 		{
-			List list = player.worldObj.getEntitiesWithinAABB(EntityHorseTFC.class, player.boundingBox.expand(2, 2, 2));
-			if(list.size() > 0)
+			if (player.ridingEntity instanceof EntityHorseTFC)
 			{
-				EntityHorseTFC horse = (EntityHorseTFC) list.get(0);
+				EntityHorseTFC horse = (EntityHorseTFC) player.ridingEntity;
 				horse.updateChestSaddle();
-				//NBTTagCompound nbt = new NBTTagCompound();
-				//System.out.println(horse.isChested() + ", " + horse.getHorseType() + ", " + horse.getHorseChest().getSizeInventory());
-				//horse.writeEntityToNBT(nbt);
-				//horse.readEntityFromNBT(nbt);
-				//System.out.println(horse.isChested() + ", " + horse.getHorseType() + ", " + horse.getHorseChest().getSizeInventory());
 				return new GuiScreenHorseInventoryTFC(player.inventory, horse.getHorseChest(), horse);
 			}
+
 			return null;
 		}
 		case 43:
@@ -123,6 +143,10 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 			return new GuiLargeVessel(player.inventory, ((TEVessel) te), world, x, y, z, 1);
 		case 48:
 			return new GuiCustomNametag(player, world, x, y, z);
+		case 49:
+		{
+			return new GuiHopper(player.inventory, ((TEHopper) te), world, x, y, z);
+		}
 		default:
 			return null;
 		}

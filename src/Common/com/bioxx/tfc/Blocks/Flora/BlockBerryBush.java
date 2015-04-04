@@ -199,7 +199,7 @@ public class BlockBerryBush extends BlockTerraContainer
 			if (te != null && te.hasFruit)
 			{
 				te.hasFruit = false;
-				te.dayHarvested = (int) TFC_Time.getTotalDays();
+				te.dayHarvested = TFC_Time.getTotalDays();
 				world.markBlockForUpdate(x, y, z);
 				dropBlockAsItem(world, x, y, z, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(3 + world.rand.nextFloat() * 5, 10)));
 			}
@@ -220,7 +220,7 @@ public class BlockBerryBush extends BlockTerraContainer
 			if(te != null && te.hasFruit)
 			{
 				te.hasFruit = false;
-				te.dayHarvested = (int) TFC_Time.getTotalDays();
+				te.dayHarvested = TFC_Time.getTotalDays();
 				world.markBlockForUpdate(x, y, z);
 				dropBlockAsItem(world, x, y, z, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(3 + world.rand.nextFloat() * 5, 10)));
 				return true;
@@ -260,7 +260,7 @@ public class BlockBerryBush extends BlockTerraContainer
 					if(!tebb.hasFruit && _fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) && TFC_Time.getMonthsSinceDay(tebb.dayHarvested) > 0)
 					{
 						tebb.hasFruit = true;
-						tebb.dayFruited = (int) TFC_Time.getTotalDays();
+						tebb.dayFruited = TFC_Time.getTotalDays();
 						world.markBlockForUpdate(x, y, z);
 					}
 				}
@@ -359,7 +359,7 @@ public class BlockBerryBush extends BlockTerraContainer
 		else
 		{
 			TEBerryBush te = (TEBerryBush)world.getTileEntity(x, y, z);
-			te.dayHarvested = (int)TFC_Time.getTotalDays();
+			te.dayHarvested = TFC_Time.getTotalDays();
 		}
 	}
 

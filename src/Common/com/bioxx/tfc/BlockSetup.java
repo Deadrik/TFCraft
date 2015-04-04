@@ -9,7 +9,6 @@ import com.bioxx.tfc.Blocks.BlockCharcoal;
 import com.bioxx.tfc.Blocks.BlockCrop;
 import com.bioxx.tfc.Blocks.BlockDetailed;
 import com.bioxx.tfc.Blocks.BlockFireBrick;
-import com.bioxx.tfc.Blocks.BlockFoodPrep;
 import com.bioxx.tfc.Blocks.BlockIngotPile;
 import com.bioxx.tfc.Blocks.BlockLogPile;
 import com.bioxx.tfc.Blocks.BlockMetalSheet;
@@ -33,8 +32,10 @@ import com.bioxx.tfc.Blocks.Devices.BlockChestTFC;
 import com.bioxx.tfc.Blocks.Devices.BlockCrucible;
 import com.bioxx.tfc.Blocks.Devices.BlockEarlyBloomery;
 import com.bioxx.tfc.Blocks.Devices.BlockFirepit;
+import com.bioxx.tfc.Blocks.Devices.BlockFoodPrep;
 import com.bioxx.tfc.Blocks.Devices.BlockForge;
 import com.bioxx.tfc.Blocks.Devices.BlockGrill;
+import com.bioxx.tfc.Blocks.Devices.BlockHopper;
 import com.bioxx.tfc.Blocks.Devices.BlockLargeVessel;
 import com.bioxx.tfc.Blocks.Devices.BlockLeatherRack;
 import com.bioxx.tfc.Blocks.Devices.BlockLoom;
@@ -288,6 +289,7 @@ public class BlockSetup extends TFCBlocks
 		GameRegistry.registerBlock(Cactus, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Cactus");
 		GameRegistry.registerBlock(Reeds, "Reeds");
 		GameRegistry.registerBlock(Pumpkin, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Pumpkin");
+		GameRegistry.registerBlock(LitPumpkin, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "LitPumpkin");
 		GameRegistry.registerBlock(ButtonWood, "ButtonWood");
 		GameRegistry.registerBlock(Vine, com.bioxx.tfc.Items.ItemBlocks.ItemVine.class, "Vine");
 		GameRegistry.registerBlock(LeatherRack, "LeatherRack");
@@ -301,6 +303,7 @@ public class BlockSetup extends TFCBlocks
 		GameRegistry.registerBlock(SmokeRack, "SmokeRack");
 		GameRegistry.registerBlock(Snow, "Snow");
 		GameRegistry.registerBlock(OilLamp, ItemOilLamp.class, "OilLamp");
+		GameRegistry.registerBlock(Hopper, "Hopper");
 	}
 
 	public static void LoadBlocks()
@@ -327,6 +330,7 @@ public class BlockSetup extends TFCBlocks
 		Blocks.cactus.setCreativeTab(null);
 		Blocks.reeds.setCreativeTab(null);
 		Blocks.pumpkin.setCreativeTab(null);
+		Blocks.lit_pumpkin.setCreativeTab(null);
 		Blocks.wooden_button.setCreativeTab(null);
 		Blocks.ice.setCreativeTab(null);
 		Blocks.vine.setCreativeTab(null);
@@ -338,6 +342,7 @@ public class BlockSetup extends TFCBlocks
 		Cactus = new BlockCustomCactus().setHardness(0.4F).setStepSound(Block.soundTypeCloth).setBlockName("Cactus").setBlockTextureName("cactus");
 		Reeds = new BlockCustomReed().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Reeds").setBlockTextureName("reeds");
 		Pumpkin = new BlockCustomPumpkin(false).setHardness(1.0F).setStepSound(Block.soundTypeWood).setBlockName("Pumpkin").setBlockTextureName("pumpkin");
+		LitPumpkin = new BlockCustomPumpkin(true).setHardness(1.0F).setStepSound(Block.soundTypeWood).setLightLevel(1.0F).setBlockName("LitPumpkin").setBlockTextureName("pumpkin");
 		ButtonWood = new BlockCustomButtonWood().setHardness(0.5F).setStepSound(Block.soundTypeWood).setBlockName("ButtonWood");
 		Vine = new BlockCustomVine().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("Vine").setBlockTextureName("vine");
 
@@ -429,7 +434,7 @@ public class BlockSetup extends TFCBlocks
 
 		Planks = (new BlockPlanks(Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood");
 		Planks2 = (new com.bioxx.tfc.Blocks.BlockPlanks2(Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood2");
-		Leaves = (new BlockCustomLeaves()).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves");
+		Leaves = (new BlockCustomLeaves()).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves").setCreativeTab(TFCTabs.TFCDecoration);
 		Leaves2 = (new BlockCustomLeaves2()).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves2");
 		Sapling = (new BlockSapling()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling");
 		Sapling2 = (new BlockSapling2()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling2");
@@ -488,7 +493,7 @@ public class BlockSetup extends TFCBlocks
 		FenceGate = new BlockCustomFenceGate().setBlockName("FenceGateTFC").setHardness(2);
 		Fence2 = new BlockTFCFence2("Fence2", Material.wood).setBlockName("FenceTFC").setHardness(2);
 		FenceGate2 = new BlockCustomFenceGate2().setBlockName("FenceGateTFC").setHardness(2);
-		StrawHideBed = new BlockBed().setBlockName("StrawHideBed").setHardness(1);
+		StrawHideBed = new BlockBed().setBlockName("StrawHideBed").setHardness(1).setCreativeTab(null);
 		ArmourStand = new BlockStand().setBlockName("ArmourStand").setHardness(2);
 		ArmourStand2 = new BlockStand2().setBlockName("ArmourStand").setHardness(2);
 
@@ -528,6 +533,7 @@ public class BlockSetup extends TFCBlocks
 		SmokeRack = new BlockSmokeRack().setHardness(0F).setBlockName("SmokeRack");
 
 		OilLamp = new BlockOilLamp().setHardness(1F).setBlockName("OilLamp");
+		Hopper = new BlockHopper().setHardness(2F).setBlockName("Hopper");
 
 		StoneIgIn.setHarvestLevel("pickaxe", 0);
 		StoneIgEx.setHarvestLevel("pickaxe", 0);

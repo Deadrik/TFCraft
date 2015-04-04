@@ -15,7 +15,7 @@ import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.TileEntities.TileEntityQuern;
+import com.bioxx.tfc.TileEntities.TEQuern;
 import com.bioxx.tfc.api.TFCBlocks;
 
 import cpw.mods.fml.relauncher.Side;
@@ -37,7 +37,7 @@ public class BlockQuern extends BlockTerraContainer
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
 		super.onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
-		TileEntityQuern te = (TileEntityQuern) world.getTileEntity(x, y, z);
+		TEQuern te = (TEQuern) world.getTileEntity(x, y, z);
 
 		//System.out.println("----X:"+hitX+" Z:"+hitZ+" Y:"+hitY+" Side:"+side); //Nice way to find out where the mouse is pointing at
 		Boolean hit = (side == 1 && hitX >= 0.70 && hitX <= 90 && hitZ >= 0.70 && hitZ <= 0.90) ||
@@ -128,6 +128,6 @@ public class BlockQuern extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World world, int var2)
 	{
-		return new TileEntityQuern();
+		return new TEQuern();
 	}
 }

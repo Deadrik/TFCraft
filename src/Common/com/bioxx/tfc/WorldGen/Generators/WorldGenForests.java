@@ -36,28 +36,31 @@ public class WorldGenForests implements IWorldGenerator
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
 	{
-		chunkX *= 16;
-		chunkZ *= 16;
+		if (world.getBiomeGenForCoords(chunkX, chunkZ) instanceof TFCBiome) // Fixes ClassCastException
+		{
+			chunkX *= 16;
+			chunkZ *= 16;
 
-		TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(chunkX, chunkZ);
-		if(biome == TFCBiome.ocean)
-			return;
+			TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(chunkX, chunkZ);
+			if (biome == TFCBiome.ocean)
+				return;
 
-		rainfall = TFC_Climate.getRainfall(world, chunkX, 0, chunkZ);
-		evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(chunkX+8, chunkZ+8).floatdata1;
-		TreeType0 = TFC_Climate.getTreeLayer(world, chunkX, Global.SEALEVEL, chunkZ, 0);
-		TreeType1 = TFC_Climate.getTreeLayer(world, chunkX, Global.SEALEVEL, chunkZ, 1);
-		TreeType2 = TFC_Climate.getTreeLayer(world, chunkX, Global.SEALEVEL, chunkZ, 2);
+			rainfall = TFC_Climate.getRainfall(world, chunkX, 0, chunkZ);
+			evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(chunkX + 8, chunkZ + 8).floatdata1;
+			TreeType0 = TFC_Climate.getTreeLayer(world, chunkX, Global.SEALEVEL, chunkZ, 0);
+			TreeType1 = TFC_Climate.getTreeLayer(world, chunkX, Global.SEALEVEL, chunkZ, 1);
+			TreeType2 = TFC_Climate.getTreeLayer(world, chunkX, Global.SEALEVEL, chunkZ, 2);
 
-		gen0 = TFCBiome.getTreeGen(TreeType0, random.nextBoolean());
-		gen1 = TFCBiome.getTreeGen(TreeType1, random.nextBoolean());
-		gen2 = TFCBiome.getTreeGen(TreeType2, random.nextBoolean());
-		//gen0 = new WorldGenTrees(false, 4, 1, 1, false);
-		//gen1 = new WorldGenTrees(false, 4, 1, 1, false);
-		//gen2 = new WorldGenTrees(false, 4, 1, 1, false);
+			gen0 = TFCBiome.getTreeGen(TreeType0, random.nextBoolean());
+			gen1 = TFCBiome.getTreeGen(TreeType1, random.nextBoolean());
+			gen2 = TFCBiome.getTreeGen(TreeType2, random.nextBoolean());
+			//gen0 = new WorldGenTrees(false, 4, 1, 1, false);
+			//gen1 = new WorldGenTrees(false, 4, 1, 1, false);
+			//gen2 = new WorldGenTrees(false, 4, 1, 1, false);
 
-		if(!generateJungle(random, chunkX, chunkZ, world))
-			generateForest(random, chunkX, chunkZ, world);
+			if (!generateJungle(random, chunkX, chunkZ, world))
+				generateForest(random, chunkX, chunkZ, world);
+		}
 	}
 
 	private void generateForest(Random random, int chunkX, int chunkZ, World world)

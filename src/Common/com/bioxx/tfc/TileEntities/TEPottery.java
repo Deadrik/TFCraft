@@ -165,7 +165,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 		}
 	}
 
-	public void addLog(ItemStack is, EntityPlayer player)
+	public boolean addLog(ItemStack is, EntityPlayer player)
 	{
 		if(wood < 8)
 		{
@@ -181,7 +181,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 						_is.stackSize = 1;
 						this.setInventorySlotContents(i, _is);
 						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-						break;
+						return true;
 					}
 				}
 			}
@@ -198,8 +198,10 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 					}
 				}
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	public void addStraw(ItemStack is, EntityPlayer player)
@@ -279,7 +281,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 	public void ejectItem(int index)
 	{
 		EntityItem entityitem;
-		new Random();
+		//new Random();
 
 		if(inventory[index] != null)
 		{

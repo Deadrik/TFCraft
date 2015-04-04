@@ -125,8 +125,8 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 
 						for (int var13 = 0; var13 < 5; ++var13)
 						{
-							tempZ = xCoord + (int)(1.5F + MathHelper.cos(var15) * (float)var13);
-							var12 = zCoord + (int)(1.5F + MathHelper.sin(var15) * (float)var13);
+							tempZ = xCoord + (int) (1.5F + MathHelper.cos(var15) * var13);
+							var12 = zCoord + (int) (1.5F + MathHelper.sin(var15) * var13);
 							this.setBlockAndNotifyAdequately(world, tempZ, var14 - 3 + var13 / 2, var12, TFCBlocks.LogNatural, this.woodMetadata);
 						}
 					}

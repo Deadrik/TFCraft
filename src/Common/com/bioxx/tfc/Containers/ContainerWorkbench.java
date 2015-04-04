@@ -1,6 +1,6 @@
 package com.bioxx.tfc.Containers;
 
-import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
+import com.bioxx.tfc.TileEntities.TEWorkbench;
 import com.bioxx.tfc.api.TFCBlocks;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,9 +25,9 @@ public class ContainerWorkbench extends ContainerTFC
 	private int posX;
 	private int posY;
 	private int posZ;
-	private TileEntityWorkbench workbench;
+	private TEWorkbench workbench;
 
-	public ContainerWorkbench(InventoryPlayer par1InventoryPlayer, TileEntityWorkbench wb, World par2World, int par3, int par4, int par5)
+	public ContainerWorkbench(InventoryPlayer par1InventoryPlayer, TEWorkbench wb, World par2World, int par3, int par4, int par5)
 	{
 		this.worldObj = par2World;
 		this.posX = par3;

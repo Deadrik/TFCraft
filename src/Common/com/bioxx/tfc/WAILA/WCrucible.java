@@ -132,7 +132,7 @@ public class WCrucible implements IWailaDataProvider
 		if (getTotalMetal() + amt <= 3000 && m.Name != "Unknown")
 		{
 			if (metals.containsKey(m.Name))
-				((MetalPair) metals.get(m.Name)).amount += amt;
+				metals.get(m.Name).amount += amt;
 			else
 				metals.put(m.Name, new MetalPair(m, amt));
 
@@ -148,7 +148,7 @@ public class WCrucible implements IWailaDataProvider
 		float totalAmount = 0;
 		while (iter.hasNext())
 		{
-			MetalPair m = (MetalPair) iter.next();
+			MetalPair m = iter.next();
 			if (m != null)
 				totalAmount += m.amount;
 		}
@@ -162,7 +162,7 @@ public class WCrucible implements IWailaDataProvider
 		float totalAmount = getTotalMetal();
 		while (iter.hasNext())
 		{
-			MetalPair m = (MetalPair) iter.next();
+			MetalPair m = iter.next();
 			if (m != null)
 				a.add(new AlloyMetal(m.type, (m.amount / totalAmount) * 100f));
 		}

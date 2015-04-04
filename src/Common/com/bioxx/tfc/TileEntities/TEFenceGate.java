@@ -2,7 +2,7 @@ package com.bioxx.tfc.TileEntities;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityFenceGate extends NetworkTileEntity
+public class TEFenceGate extends NetworkTileEntity
 {
 	private boolean open = false;
 	private byte direction = 0;

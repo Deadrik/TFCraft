@@ -21,7 +21,7 @@ import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.TileEntities.TileEntitySapling;
+import com.bioxx.tfc.TileEntities.TESapling;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
@@ -112,7 +112,7 @@ public class BlockSapling extends BlockTerraContainer
 		else if(meta == 9 || meta == 14|| meta == 15)
 			growSpeed = 1.6f;
 
-		TileEntitySapling te = (TileEntitySapling) world.getTileEntity(i, j, k);
+		TESapling te = (TESapling) world.getTileEntity(i, j, k);
 
 		if(te != null && te.growTime == 0)
 			te.growTime = (long) (((TFC_Time.getTotalTicks() + (TFC_Time.dayLength * 7) * growSpeed) + (world.rand.nextFloat() * TFC_Time.dayLength)) * TFCOptions.saplingTimerMultiplier);
@@ -197,7 +197,7 @@ public class BlockSapling extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
-		return new TileEntitySapling();
+		return new TESapling();
 	}
 
 	protected void checkChange(World world, int x, int y, int z)

@@ -18,36 +18,38 @@ death.attack.alcohol=%1$s stierf vanwege alcoholvergiftiging
 death.attack.heatStroke=%1$s stierf vanwege 'n hitteberoerte
 
 #==============
-#= Spawn Eggs =
+#= Entities = 
 #==============
-entity.squidTFC.name=Inktvis
-entity.cowTFC.name=Koe
-entity.wolfTFC.name=Wolf
 entity.bearTFC.name=Beer
-entity.deerTFC.name=Hert
 entity.chickenTFC.name=Kip
-entity.pigTFC.name=Varken
-entity.skeletonTFC.name=Skelet
-entity.zombieTFC.name=Zombie
-entity.spiderTFC.name=Spin
-entity.slimeTFC.name=Slijm
-entity.silverfishTFC.name=Zilvervis
-entity.ghastTFC.name=Ghast
-entity.caveSpiderTFC.name=Grotspin
-entity.blazeTFC.name=Blaze
-entity.endermanTFC.name=Enderman
-entity.pigZombieTFC.name=Zombie Varken
-entity.creeperTFC.name=Creeper
-entity.sheepTFC.name=Schaap
-entity.pheasantTFC.name=Fazant
-entity.horseTFC.name=Paard
-entity.irongolemTFC.name=IJzeren Golem
+entity.cowTFC.name=Koe
+entity.deerTFC.name=Hert
 entity.fishTFC.name=Baars
+entity.horseTFC.name=Paard
+entity.pheasantTFC.name=Fazant
+entity.pigTFC.name=Varken
+entity.sheepTFC.name=Schaap
+entity.squidTFC.name=Inktvis
+entity.wolfTFC.name=Wolf
 
+entity.blazeTFC.name=Blaze
+entity.caveSpiderTFC.name=Grotspin
+entity.creeperTFC.name=Creeper
+entity.endermanTFC.name=Enderman
+entity.ghastTFC.name=Ghast
+entity.irongolemTFC.name=IJzeren Golem
+entity.pigZombieTFC.name=Zombie Varken
+entity.silverfishTFC.name=Zilvervis
+entity.skeletonTFC.name=Skelet
+entity.slimeTFC.name=Slijm
+entity.spiderTFC.name=Spin
+entity.zombieTFC.name=Zombie
 
-#==========
-#= Entity =
-#==========
+entity.arrowTFC.name=Pijl
+entity.standTFC.name=
+entity.barrel.name=
+entity.fallingBlock.name=
+
 entity.notFamiliar=Het dier werkt niet mee.
 fishingRod.lineTension=Het touw gaat breken!
 fishingRod.lineSnap=Het touw is gebroken!
@@ -2325,6 +2327,7 @@ gui.MeltedMetal.Inst0=§bRecht Klik §7om te gieten of combineren
 gui.PotteryBase.Inst0=Sluip en §bRecht Klik §7om een voorwerp te plaatsen
 gui.PotteryVesselSmall.Inst0=Of §bRecht Klik §7om te openen
 gui.RawHide.Inst0=????
+gui.Chisel.Inst0=
 gui.Barrel.MoreItems=§8Meer... (Houd §fShift§8)
 
 gui.Nutrient.A=Grondstof A
@@ -2474,6 +2477,8 @@ gui.useless=Nutteloos
 gui.growth=Groei
 gui.mature=Volgroeid
 gui.metal.Iron=IJzer
+gui.tier=
+gui.progress=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Kan alleen in stromend water gebruikt worden

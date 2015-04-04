@@ -78,8 +78,10 @@ public class EntityDamageHandler
 				if(e instanceof EntityJavelin)
 				{
 					((EntityJavelin)e).setDamageTaken((short) (((EntityJavelin) e).damageTaken+10));
-					if(((EntityJavelin)e).damageTaken >= ((EntityJavelin)e).getDamage())
+					if (((EntityJavelin) e).damageTaken >= ((EntityJavelin) e).pickupItem.getMaxDamage())
+					{
 						e.setDead();
+					}
 				}
 			}
 		}

@@ -45,6 +45,7 @@ public class ItemMeal extends ItemTerra implements IFood
 		this.MetaIcons = new IIcon[11];
 		this.setFolder("food/");
 		this.stackable = false;
+		this.setCreativeTab(null);
 	}
 
 	@Override
@@ -359,14 +360,14 @@ public class ItemMeal extends ItemTerra implements IFood
 	@Override
 	public int getTasteSweet(ItemStack is) {
 		int base = 0;
-		if(is != null && is.getTagCompound().hasKey("tasteSweet"))
+		if (is != null && is.hasTagCompound() && is.getTagCompound().hasKey("tasteSweet"))
 			base = is.getTagCompound().getInteger("tasteSweet");
 		return base + getTasteSweetMod(is);
 	}
 
 	public int getTasteSweetMod(ItemStack is) {
 		int mod = 0;
-		if(is != null && is.getTagCompound().hasKey("tasteSweetMod"))
+		if (is != null && is.hasTagCompound() && is.getTagCompound().hasKey("tasteSweetMod"))
 			mod = is.getTagCompound().getInteger("tasteSweetMod");
 		return mod;
 	}
@@ -374,14 +375,14 @@ public class ItemMeal extends ItemTerra implements IFood
 	@Override
 	public int getTasteSour(ItemStack is) {
 		int base = 0;
-		if(is != null && is.getTagCompound().hasKey("tasteSour"))
+		if (is != null && is.hasTagCompound() && is.getTagCompound().hasKey("tasteSour"))
 			base = is.getTagCompound().getInteger("tasteSour");
 		return base + getTasteSourMod(is);
 	}
 
 	public int getTasteSourMod(ItemStack is) {
 		int mod = 0;
-		if(is != null && is.getTagCompound().hasKey("tasteSourMod"))
+		if (is != null && is.hasTagCompound() && is.getTagCompound().hasKey("tasteSourMod"))
 			mod = is.getTagCompound().getInteger("tasteSourMod");
 		return mod;
 	}
@@ -389,14 +390,14 @@ public class ItemMeal extends ItemTerra implements IFood
 	@Override
 	public int getTasteSalty(ItemStack is) {
 		int base = 0;
-		if(is != null && is.getTagCompound().hasKey("tasteSalty"))
+		if (is != null && is.hasTagCompound() && is.getTagCompound().hasKey("tasteSalty"))
 			base = is.getTagCompound().getInteger("tasteSalty");;
 			return base + getTasteSaltyMod(is);
 	}
 
 	public int getTasteSaltyMod(ItemStack is) {
 		int mod = 0;
-		if(is != null && is.getTagCompound().hasKey("tasteSaltyMod"))
+		if (is != null && is.hasTagCompound() && is.getTagCompound().hasKey("tasteSaltyMod"))
 			mod = is.getTagCompound().getInteger("tasteSaltyMod");
 		return mod;
 	}
@@ -404,14 +405,14 @@ public class ItemMeal extends ItemTerra implements IFood
 	@Override
 	public int getTasteBitter(ItemStack is) {
 		int base = 0;
-		if(is != null && is.getTagCompound().hasKey("tasteBitter"))
+		if (is != null && is.hasTagCompound() && is.getTagCompound().hasKey("tasteBitter"))
 			base = is.getTagCompound().getInteger("tasteBitter");
 		return base + getTasteBitterMod(is);
 	}
 
 	public int getTasteBitterMod(ItemStack is) {
 		int mod = 0;
-		if(is != null && is.getTagCompound().hasKey("tasteBitterMod"))
+		if (is != null && is.hasTagCompound() && is.getTagCompound().hasKey("tasteBitterMod"))
 			mod = is.getTagCompound().getInteger("tasteBitterMod");
 		return mod;
 	}
@@ -419,14 +420,14 @@ public class ItemMeal extends ItemTerra implements IFood
 	@Override
 	public int getTasteSavory(ItemStack is) {
 		int base = 0;
-		if(is != null && is.getTagCompound().hasKey("tasteUmami"))
+		if (is != null && is.hasTagCompound() && is.getTagCompound().hasKey("tasteUmami"))
 			base = is.getTagCompound().getInteger("tasteUmami");
 		return base + getTasteSavoryMod(is);
 	}
 
 	public int getTasteSavoryMod(ItemStack is) {
 		int mod = 0;
-		if(is != null && is.getTagCompound().hasKey("tasteUmamiMod"))
+		if (is != null && is.hasTagCompound() && is.getTagCompound().hasKey("tasteUmamiMod"))
 			mod = is.getTagCompound().getInteger("tasteUmamiMod");
 		return mod;
 	}
