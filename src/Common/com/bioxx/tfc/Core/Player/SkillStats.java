@@ -64,7 +64,7 @@ public class SkillStats
 			if(skillsMap.containsKey(sk))
 			{
 				//First get what the skill level currently is
-				int i = (Integer) skillsMap.get(sk);
+				int i = skillsMap.get(sk);
 				//The put method replaces the old identical entry.
 				skillsMap.put(sk, i+amount);
 			}
@@ -74,7 +74,7 @@ public class SkillStats
 			}
 		}
 
-		int i = (Integer) skillsMap.get(sk);
+		int i = skillsMap.get(sk);
 		if(player instanceof EntityPlayerMP)
 		{
 			AbstractPacket pkt = new PlayerUpdatePacket(1, skillName, i);
@@ -87,7 +87,7 @@ public class SkillStats
 	{
 		Skill sk = SkillsManager.instance.getSkill(skillName);
 		if(skillsMap.containsKey(sk))
-			return (Integer) skillsMap.get(sk);
+			return skillsMap.get(sk);
 		else
 			return 0;
 	}
@@ -172,7 +172,7 @@ public class SkillStats
 		for(Object o : keys)
 		{
 			Skill k = (Skill)o;
-			int f = (Integer) skillsMap.get(k);
+			int f = skillsMap.get(k);
 			skillCompound.setInteger(k.skillName, f);
 		}
 		nbt.setTag("skillCompound", skillCompound);
@@ -185,7 +185,7 @@ public class SkillStats
 		for(Object o : keys)
 		{
 			Skill k = (Skill)o;
-			int f = (Integer) skillsMap.get(k);
+			int f = skillsMap.get(k);
 			ByteBufUtils.writeUTF8String(buffer, k.skillName);
 			buffer.writeInt(f);
 		}

@@ -148,7 +148,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		//	in time such that they reach adulthood now.
 		//
 		//this.setGrowingAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
-		this.setAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
+		this.setAge(TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 		//For Testing Only(makes spawned animals into babies)
 		//this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
@@ -191,7 +191,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
-		this.setAge((int) TFC_Time.getTotalDays());
+		this.setAge(TFC_Time.getTotalDays());
 		this.setHorseType(type);
 		this.setHorseVariant(variant);
 	}
@@ -225,7 +225,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				baby.rotationYawHead = baby.rotationYaw;
 				baby.renderYawOffset = baby.rotationYaw;
 				worldObj.spawnEntityInWorld(baby);
-				baby.setAge((int)TFC_Time.getTotalDays());
+				baby.setAge(TFC_Time.getTotalDays());
 				pregnant = false;
 			}
 		}

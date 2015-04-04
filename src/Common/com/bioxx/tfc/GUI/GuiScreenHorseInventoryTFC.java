@@ -62,7 +62,7 @@ public class GuiScreenHorseInventoryTFC extends GuiContainerTFC
 		}
 
 		// Draw the horse in the box.
-		GuiInventory.func_147046_a(guiLeft + 51, guiTop + 60, 17, (float) (guiLeft + 51) - this.field_110416_x, (float) (guiTop + 75 - 50) - this.field_110415_y, this.horse);
+		GuiInventory.func_147046_a(guiLeft + 51, guiTop + 60, 17, guiLeft + 51 - this.field_110416_x, guiTop + 75 - 50 - this.field_110415_y, this.horse);
 	}
 
 	/**
@@ -71,8 +71,8 @@ public class GuiScreenHorseInventoryTFC extends GuiContainerTFC
 	@Override
 	public void drawScreen(int par1, int par2, float par3) // Don't know what this does, but not removing it
 	{
-		this.field_110416_x = (float)par1;
-		this.field_110415_y = (float)par2;
+		this.field_110416_x = par1;
+		this.field_110415_y = par2;
 		super.drawScreen(par1, par2, par3);
 	}
 }

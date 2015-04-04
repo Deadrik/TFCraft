@@ -77,16 +77,16 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 	}
 
 	@Override
-	public void drawTexturedModelRectFromIcon(int p_94065_1_, int p_94065_2_, IIcon p_94065_3_, int p_94065_4_, int p_94065_5_)
+	public void drawTexturedModelRectFromIcon(int i, int j, IIcon icon, int w, int h)
 	{
 		Tessellator tessellator = Tessellator.instance;
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV((double)(p_94065_1_ + 0), (double)(p_94065_2_ + p_94065_5_), (double)this.zLevel, (double)p_94065_3_.getMinU(), (double)p_94065_3_.getMaxV());
-		tessellator.addVertexWithUV((double)(p_94065_1_ + p_94065_4_), (double)(p_94065_2_ + p_94065_5_), (double)this.zLevel, (double)p_94065_3_.getMaxU(), (double)p_94065_3_.getMaxV());
-		tessellator.addVertexWithUV((double)(p_94065_1_ + p_94065_4_), (double)(p_94065_2_ + 0), (double)this.zLevel, (double)p_94065_3_.getMaxU(), (double)p_94065_3_.getMinV());
-		tessellator.addVertexWithUV((double)(p_94065_1_ + 0), (double)(p_94065_2_ + 0), (double)this.zLevel, (double)p_94065_3_.getMinU(), (double)p_94065_3_.getMinV());
+		tessellator.addVertexWithUV(i + 0, j + h, this.zLevel, icon.getMinU(), icon.getMaxV());
+		tessellator.addVertexWithUV(i + w, j + h, this.zLevel, icon.getMaxU(), icon.getMaxV());
+		tessellator.addVertexWithUV(i + w, j + 0, this.zLevel, icon.getMaxU(), icon.getMinV());
+		tessellator.addVertexWithUV(i + 0, j + 0, this.zLevel, icon.getMinU(), icon.getMinV());
 		tessellator.draw();
 		GL11.glDisable(GL11.GL_BLEND);
 	}

@@ -302,16 +302,17 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 		int mode = 0;
 		PlayerInfo pi = null;
 
-		int hasChisel = -1;
-		int hasHammer = -1;
+		// Unused Check. Not sure where we are doing the hammer check, but it is being done elsewhere.
+		/*int hasHammer = -1;
 
 		for(int i = 0; i < 9;i++)
 		{
 			if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemHammer) {
 				hasHammer = i;
 			}
-		}
+		}*/
 
+		int hasChisel = -1;
 		if(player.inventory.mainInventory[player.inventory.currentItem] != null && player.inventory.mainInventory[player.inventory.currentItem].getItem() instanceof ItemChisel) {
 			hasChisel = player.inventory.currentItem;
 		}

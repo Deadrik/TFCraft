@@ -75,7 +75,7 @@ public class BlockCustomCactus extends Block implements IPlantable
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
 		float var5 = 0.0625F;
-		return AxisAlignedBB.getBoundingBox((double)((float)par2 + var5), (double)par3, (double)((float)par4 + var5), (double)((float)(par2 + 1) - var5), (double)((float)(par3 + 1) - var5), (double)((float)(par4 + 1) - var5));
+		return AxisAlignedBB.getBoundingBox(par2 + var5, par3, par4 + var5, par2 + 1 - var5, par3 + 1 - var5, par4 + 1 - var5);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -86,7 +86,7 @@ public class BlockCustomCactus extends Block implements IPlantable
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
 		float var5 = 0.0625F;
-		return AxisAlignedBB.getBoundingBox((double)((float)par2 + var5), (double)par3, (double)((float)par4 + var5), (double)((float)(par2 + 1) - var5), (double)(par3 + 1), (double)((float)(par4 + 1) - var5));
+		return AxisAlignedBB.getBoundingBox(par2 + var5, par3, par4 + var5, par2 + 1 - var5, par3 + 1, par4 + 1 - var5);
 	}
 
 	/**

@@ -198,7 +198,7 @@ public class EntityStand extends EntityLiving
 			f2 = MathHelper.sin(-entity.rotationYaw * 0.017453292F - (float)Math.PI);
 			f3 = -MathHelper.cos(-entity.rotationPitch * 0.017453292F);
 			f4 = MathHelper.sin(-entity.rotationPitch * 0.017453292F);
-			return Vec3.createVectorHelper((double)(f2 * f3), (double)f4, (double)(f1 * f3));
+			return Vec3.createVectorHelper(f2 * f3, f4, f1 * f3);
 		}
 		else
 		{
@@ -208,7 +208,7 @@ public class EntityStand extends EntityLiving
 			f4 = MathHelper.sin(-f2 * 0.017453292F - (float)Math.PI);
 			float f5 = -MathHelper.cos(-f1 * 0.017453292F);
 			float f6 = MathHelper.sin(-f1 * 0.017453292F);
-			return Vec3.createVectorHelper((double)(f4 * f5), (double)f6, (double)(f3 * f5));
+			return Vec3.createVectorHelper(f4 * f5, f6, f3 * f5);
 		}
 	}
 

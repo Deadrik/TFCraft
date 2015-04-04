@@ -297,14 +297,14 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 	}
 
 	@Override
-	protected void dropEquipment(boolean p_82160_1_, int p_82160_2_)
+	protected void dropEquipment(boolean forceDrop, int dropChance)
 	{
 		for (int j = 0; j < this.getLastActiveItems().length; ++j)
 		{
 			ItemStack itemstack = this.getEquipmentInSlot(j);
 			boolean flag1 = this.equipmentDropChances[j] > 1.0F;
 
-			if (itemstack != null && (p_82160_1_ || flag1) && this.rand.nextFloat() - (float)p_82160_2_ * 0.01F < this.equipmentDropChances[j])
+			if (itemstack != null && (forceDrop || flag1) && this.rand.nextFloat() - dropChance * 0.01F < this.equipmentDropChances[j])
 			{
 				if (!flag1 && itemstack.isItemStackDamageable())
 				{

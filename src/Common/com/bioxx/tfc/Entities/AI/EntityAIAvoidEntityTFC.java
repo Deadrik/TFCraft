@@ -2,9 +2,6 @@ package com.bioxx.tfc.Entities.AI;
 
 import java.util.List;
 
-import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
-
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -15,6 +12,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.Vec3;
+
+import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 
 public class EntityAIAvoidEntityTFC extends EntityAIBase
 {
@@ -64,7 +64,7 @@ public class EntityAIAvoidEntityTFC extends EntityAIBase
 			}
 		}
 
-		List list = this.theEntity.worldObj.selectEntitiesWithinAABB(this.targetEntityClass, this.theEntity.boundingBox.expand((double)this.distanceFromEntity, 3.0D, (double)this.distanceFromEntity), this.field_98218_a);
+		List list = this.theEntity.worldObj.selectEntitiesWithinAABB(this.targetEntityClass, this.theEntity.boundingBox.expand(this.distanceFromEntity, 3.0D, this.distanceFromEntity), this.field_98218_a);
 
 		if (list.isEmpty())
 			return false;

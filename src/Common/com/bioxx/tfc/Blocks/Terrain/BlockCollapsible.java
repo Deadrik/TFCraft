@@ -213,7 +213,7 @@ public class BlockCollapsible extends BlockTerraContainer
 			{
 				if(fallingBlock != null)
 				{
-					EntityFallingBlockTFC ent = new EntityFallingBlockTFC(world, (double) (x + 0.5F), (double) (y + 0.5F), (double) (z + 0.5F), fallingBlock, fallingBlockMeta/*+8*/); // Not sure what this +8 was for, but it was causing the resulting block to not be recognized by WAILA/NEI.
+					EntityFallingBlockTFC ent = new EntityFallingBlockTFC(world, x + 0.5F, y + 0.5F, z + 0.5F, fallingBlock, fallingBlockMeta/*+8*/); // Not sure what this +8 was for, but it was causing the resulting block to not be recognized by WAILA/NEI.
 					ent.aliveTimer/*fallTime*/ = -5000;
 					world.spawnEntityInWorld(ent);
 					Random R = new Random(x*y+z);
@@ -259,7 +259,7 @@ public class BlockCollapsible extends BlockTerraContainer
 				{
 					if (!world.isRemote)
 					{
-						EntityFallingBlockTFC entityfallingblock = new EntityFallingBlockTFC(world, (double) ((float) x + 0.5F), (double) ((float) y + 0.5F), (double) ((float) z + 0.5F), block, meta);
+						EntityFallingBlockTFC entityfallingblock = new EntityFallingBlockTFC(world, x + 0.5F, y + 0.5F, z + 0.5F, block, meta);
 						world.spawnEntityInWorld(entityfallingblock);
 						if (block instanceof BlockCobble)
 							world.playSoundAtEntity(entityfallingblock, TFC_Sounds.FALLININGROCKSHORT, 1.0F, 0.8F + (world.rand.nextFloat() / 2));

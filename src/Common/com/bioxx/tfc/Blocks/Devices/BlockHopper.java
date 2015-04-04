@@ -196,7 +196,7 @@ public class BlockHopper extends BlockTerraContainer
 						}
 
 						itemstack.stackSize -= j1;
-						EntityItem entityitem = new EntityItem(world, (double)((float)x + 0.5f), (double)((float)y + 0.5f), (double)((float)z + 0.5f), new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
+						EntityItem entityitem = new EntityItem(world, x + 0.5f, y + 0.5f, z + 0.5f, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
 
 						if (itemstack.hasTagCompound())
 						{
@@ -210,7 +210,7 @@ public class BlockHopper extends BlockTerraContainer
 			}
 			if(te.pressBlock != null)
 			{
-				EntityItem entityitem = new EntityItem(world, (double)((float)x+0.5), (double)((float)y + 0.5), (double)((float)z + 0.5), te.pressBlock);
+				EntityItem entityitem = new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, te.pressBlock);
 				world.spawnEntityInWorld(entityitem);
 			}
 			world.func_147453_f(x, y, z, block);

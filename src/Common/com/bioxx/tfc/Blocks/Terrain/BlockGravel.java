@@ -167,7 +167,7 @@ public class BlockGravel extends BlockTerra
 
 			if(!canFallOneBelow && (count > 2) && sides.size() >= 1)
 			{
-				switch((Integer)sides.get(random.nextInt(sides.size())))
+				switch (sides.get(random.nextInt(sides.size())))
 				{
 				case 0:
 				{

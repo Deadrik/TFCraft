@@ -581,7 +581,7 @@ public class TerraFirmaCraft
 
 		while(oreIter.hasNext())
 		{
-			String s = (String)oreIter.next();
+			String s = oreIter.next();
 			OreSpawnData data = new OreSpawnData(
 					config.get(s, "type", "default").getString(),
 					config.get(s, "size", "small").getString(),

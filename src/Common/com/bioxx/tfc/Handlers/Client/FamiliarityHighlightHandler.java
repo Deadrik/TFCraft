@@ -35,7 +35,7 @@ public class FamiliarityHighlightHandler {
 				double d3 = entity.getDistanceSqToEntity(RenderManager.instance.livingPlayer);
 				float f2 = 8;
 
-				if (d3 < (double)(f2 * f2))
+				if (d3 < f2 * f2)
 				{
 					//String s = entity.func_145748_c_().getFormattedText();
 

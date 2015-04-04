@@ -37,8 +37,8 @@ public class WorldGenMegaJungle extends WorldGenHugeTrees
 
 				for (l1 = 0; l1 < 5; ++l1)
 				{
-					j1 = x + (int)(1.5F + MathHelper.cos(f) * (float)l1);
-					k1 = z + (int)(1.5F + MathHelper.sin(f) * (float)l1);
+					j1 = x + (int) (1.5F + MathHelper.cos(f) * l1);
+					k1 = z + (int) (1.5F + MathHelper.sin(f) * l1);
 					this.setBlockAndNotifyAdequately(world, j1, i1 - 3 + l1 / 2, k1, Blocks.log, this.woodMetadata);
 				}
 

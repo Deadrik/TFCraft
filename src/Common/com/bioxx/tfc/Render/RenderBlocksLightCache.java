@@ -230,7 +230,7 @@ public class RenderBlocksLightCache extends RenderBlocksFixUV
 		colorBlueBottomLeft		= rpd.b;
 		brightnessBottomLeft	= rpd.brightness;
 		
-		renderFaceXPos(block, (double)i, (double)j, (double)k, myTexture );
+		renderFaceXPos(block, i, j, k, myTexture);
 		
 		
 		rpd = sides[ ForgeDirection.WEST.ordinal() ].getCachedValue( renderMaxY, renderMaxZ );
@@ -257,7 +257,7 @@ public class RenderBlocksLightCache extends RenderBlocksFixUV
 		colorBlueTopRight	= rpd.b;
 		brightnessTopRight	= rpd.brightness;
 		
-		renderFaceXNeg(block, (double)i, (double)j, (double)k, myTexture );
+		renderFaceXNeg(block, i, j, k, myTexture);
 		
 		
 		rpd = sides[ ForgeDirection.SOUTH.ordinal() ].getCachedValue( 1.0d - renderMinX, renderMaxY );
@@ -284,7 +284,7 @@ public class RenderBlocksLightCache extends RenderBlocksFixUV
 		colorBlueTopRight	= rpd.b;
 		brightnessTopRight	= rpd.brightness;
 		
-		renderFaceZPos(block, (double)i, (double)j, (double)k, myTexture );
+		renderFaceZPos(block, i, j, k, myTexture);
 		
 		
 		rpd = sides[ ForgeDirection.NORTH.ordinal() ].getCachedValue( renderMaxY, 1.0d - renderMinX );
@@ -311,7 +311,7 @@ public class RenderBlocksLightCache extends RenderBlocksFixUV
 		colorBlueBottomLeft		= rpd.b;
 		brightnessBottomLeft	= rpd.brightness;
 		
-		renderFaceZNeg(block, (double)i, (double)j, (double)k, myTexture );
+		renderFaceZNeg(block, i, j, k, myTexture);
 		
 		
 		rpd = sides[ ForgeDirection.UP.ordinal() ].getCachedValue( renderMaxX, renderMaxZ );
@@ -338,7 +338,7 @@ public class RenderBlocksLightCache extends RenderBlocksFixUV
 		colorBlueTopRight	= rpd.b;
 		brightnessTopRight	= rpd.brightness;
 		
-		renderFaceYPos(block, (double)i, (double)j, (double)k, myTexture );
+		renderFaceYPos(block, i, j, k, myTexture);
 		
 		
 		rpd = sides[ ForgeDirection.DOWN.ordinal() ].getCachedValue( 1.0d - renderMinX, renderMaxZ );
@@ -365,7 +365,7 @@ public class RenderBlocksLightCache extends RenderBlocksFixUV
 		colorBlueTopRight	= rpd.b;
 		brightnessTopRight	= rpd.brightness;
 		
-		renderFaceYNeg(block, (double)i, (double)j, (double)k, myTexture );
+		renderFaceYNeg(block, i, j, k, myTexture);
 		
 		
 		enableAO = false;

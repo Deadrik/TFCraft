@@ -214,7 +214,7 @@ public class EntityFishTFC extends EntitySquid
 					f = this.squidRotation / (float)Math.PI;
 					this.tentacleAngle = MathHelper.sin(f * f * (float)Math.PI) * (float)Math.PI * 0.25F;
 
-					if ((double)f > 0.75D)
+					if (f > 0.75D)
 					{
 						this.randomMotionSpeed = 1.0F;
 						this.field_70871_bB = 1.0F;
@@ -233,9 +233,9 @@ public class EntityFishTFC extends EntitySquid
 
 				if (!this.worldObj.isRemote)
 				{
-					this.motionX = (double)(this.randomMotionVecX * (hooked?1:this.randomMotionSpeed));
-					this.motionY = (double)(this.randomMotionVecY * (hooked?1:this.randomMotionSpeed));
-					this.motionZ = (double)(this.randomMotionVecZ * (hooked?1:this.randomMotionSpeed));
+					this.motionX = this.randomMotionVecX * (hooked ? 1 : this.randomMotionSpeed);
+					this.motionY = this.randomMotionVecY * (hooked ? 1 : this.randomMotionSpeed);
+					this.motionZ = this.randomMotionVecZ * (hooked ? 1 : this.randomMotionSpeed);
 					this.randomMotionVecX = this.randomMotionVecY = this.randomMotionVecZ = 0;
 				}
 
@@ -243,7 +243,7 @@ public class EntityFishTFC extends EntitySquid
 				this.renderYawOffset += (-((float)Math.atan2(this.motionX, this.motionZ)) * 180.0F / (float)Math.PI - this.renderYawOffset) * 0.1F;
 				this.rotationYaw = this.renderYawOffset;
 				this.squidYaw += (float)Math.PI * this.field_70871_bB * 1.5F;
-				this.squidPitch += (-((float)Math.atan2((double)f, this.motionY)) * 180.0F / (float)Math.PI - this.squidPitch) * 0.1F;
+				this.squidPitch += (-((float) Math.atan2(f, this.motionY)) * 180.0F / (float) Math.PI - this.squidPitch) * 0.1F;
 			}
 			else
 			{
@@ -273,7 +273,7 @@ public class EntityFishTFC extends EntitySquid
 					}
 				}
 
-				this.squidPitch = (float)((double)this.squidPitch + (double)(-90.0F - this.squidPitch) * 0.02D);
+				this.squidPitch = (float) (this.squidPitch + (-90.0F - this.squidPitch) * 0.02D);
 			}
 			if(!hooked || !isInWater()){
 				renderMotionX = motionX;
@@ -361,7 +361,7 @@ public class EntityFishTFC extends EntitySquid
 				speedCoef *= 1f / minPlayerDistance;
 				speedCoef = MathHelper.clamp_float(speedCoef, 1f, 8f);
 			}
-			double distance = this.getDistance((double)destination[0], (double)destination[1],(double) destination[2]);
+			double distance = this.getDistance(destination[0], destination[1], destination[2]);
 			if(distance!=0){
 				this.randomMotionVecX = (float) ((destination[0]-this.posX)/distance)*0.2f*speedCoef;
 				this.randomMotionVecY = (float) ((destination[1]-this.posY)/distance)*0.2f*speedCoef;
@@ -386,7 +386,8 @@ public class EntityFishTFC extends EntitySquid
 		nearbyPlayers = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, this.boundingBox.expand(16, 8, 16));
 		boolean tooCloseToPlayer = false;
 		for(EntityPlayer p : nearbyPlayers){
-			if(p.getDistance((double)destX, (double)destY, (double)destZ)<8){
+			if (p.getDistance(destX, destY, destZ) < 8)
+			{
 				tooCloseToPlayer = true;
 			}
 		}
@@ -406,7 +407,8 @@ public class EntityFishTFC extends EntitySquid
 			int tempY = 0;
 			int tempZ = 0;
 			for(EntityPlayer p : nearbyPlayers){
-				if(p.getDistance((double)destX, (double)destY, (double)destZ)<8){
+				if (p.getDistance(destX, destY, destZ) < 8)
+				{
 					tempX+= p.posX;
 					tempY+= p.posY;
 					tempZ+= p.posZ;
@@ -420,9 +422,9 @@ public class EntityFishTFC extends EntitySquid
 				tempY /= nearbyPlayers.size();
 				tempZ /= nearbyPlayers.size();
 				
-				destX -= (int) (tempX*3);
+				destX -= tempX * 3;
 				//destY -= (int) (tempY*2);
-				destZ -= (int) (tempZ*3);
+				destZ -= tempZ * 3;
 			}
 			
 			while((TFC_Core.isWater(this.worldObj.getBlock(destX, destY+1, destZ)))){
@@ -430,7 +432,7 @@ public class EntityFishTFC extends EntitySquid
 			}
 			
 			for(EntityPlayer p : nearbyPlayers){
-				double p_dist = p.getDistance((double)destX, (double)destY, (double)destZ);
+				double p_dist = p.getDistance(destX, destY, destZ);
 				if(p_dist < currentPlayerDistance || (p_dist < 8 && currentPlayerDistance == 16)){
 					currentPlayerDistance = p_dist;
 					tooCloseToPlayer = true;

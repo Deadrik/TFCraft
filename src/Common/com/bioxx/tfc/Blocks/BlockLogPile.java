@@ -215,9 +215,9 @@ public class BlockLogPile extends BlockTerraContainer
 	{
 		if(((TELogPile)world.getTileEntity(x, y, z)).isOnFire)
 		{
-			double centerX = (double)((float)x + 0.5F);
-			double centerY = (double)((float)y + 2F);
-			double centerZ = (double)((float)z + 0.5F);
+			double centerX = x + 0.5F;
+			double centerY = y + 2F;
+			double centerZ = z + 0.5F;
 			//double d3 = 0.2199999988079071D;
 			//double d4 = 0.27000001072883606D;
 			world.spawnParticle("smoke", centerX+(rand.nextDouble()-0.5), centerY, centerZ+(rand.nextDouble()-0.5), 0.0D, 0.1D, 0.0D);

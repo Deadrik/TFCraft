@@ -58,6 +58,7 @@ public class EntityAIFindNest extends EntityAIBase
 	/**
 	 * Returns whether the EntityAIBase should begin execution.
 	 */
+	@Override
 	public boolean shouldExecute()
 	{
 		if(theCreature instanceof EntityChickenTFC && !(theCreature instanceof EntityPheasantTFC))
@@ -85,9 +86,10 @@ public class EntityAIFindNest extends EntityAIBase
 		return false;
 	}
 
+	@Override
 	public boolean continueExecuting()
 	{
-		if(this.theCreature.getDistanceSq((double)sitableBlockX + 0.5, (double)sitableBlockY, (double)sitableBlockZ + 0.5) < 0.2)
+		if (this.theCreature.getDistanceSq(sitableBlockX + 0.5, sitableBlockY, sitableBlockZ + 0.5) < 0.2)
 			this.theCreature.getNavigator().clearPathEntity();
 
 		if(this.end)
@@ -103,15 +105,15 @@ public class EntityAIFindNest extends EntityAIBase
 		int i = (int)this.theCreature.posY;
 		double d0 = 2.147483647E9D;
 
-		for (int j = (int)this.theCreature.posX - 16; (double)j < this.theCreature.posX + 16.0D; ++j)
+		for (int j = (int) this.theCreature.posX - 16; j < this.theCreature.posX + 16.0D; ++j)
 		{
-			for (int k = (int)this.theCreature.posZ - 16; (double)k < this.theCreature.posZ + 16.0D; ++k)
+			for (int k = (int) this.theCreature.posZ - 16; k < this.theCreature.posZ + 16.0D; ++k)
 			{
 				for(int l = i; l < i+4; l++)
 				{
 					if (this.isSittableBlock(this.theCreature.worldObj, j, l, k) && this.theCreature.worldObj.isAirBlock(j, l + 1, k))
 					{
-						double d1 = this.theCreature.getDistanceSq((double)j, (double)l, (double)k);
+						double d1 = this.theCreature.getDistanceSq(j, l, k);
 
 						if (d1 < d0)
 						{
@@ -129,9 +131,10 @@ public class EntityAIFindNest extends EntityAIBase
 	/**
 	 * Execute a one shot task or start executing a continuous task
 	 */
+	@Override
 	public void startExecuting()
 	{
-		this.theCreature.getNavigator().tryMoveToXYZ((double)((float)this.sitableBlockX) + 0.5D, (double)(this.sitableBlockY + 1), (double)((float)this.sitableBlockZ) + 0.5D, this.field_75404_b);
+		this.theCreature.getNavigator().tryMoveToXYZ((this.sitableBlockX) + 0.5D, this.sitableBlockY + 1, (this.sitableBlockZ) + 0.5D, this.field_75404_b);
 		this.currentTick = 0;
 		this.field_75402_d = 0;
 		this.compoundDistance = 0;
@@ -140,13 +143,14 @@ public class EntityAIFindNest extends EntityAIBase
 		this.maxSittingTicks = this.theCreature.getRNG().nextInt(this.theCreature.getRNG().nextInt(1200) + 1200) + 1200;
 	}
 
+	@Override
 	public void updateTask()
 	{
 		++this.currentTick;
 		
-		if (this.theCreature.getDistanceSq((double)this.sitableBlockX, (double)(this.sitableBlockY + 1), (double)this.sitableBlockZ) > 1.0D)
+		if (this.theCreature.getDistanceSq(this.sitableBlockX, this.sitableBlockY + 1, this.sitableBlockZ) > 1.0D)
 		{
-			this.theCreature.getNavigator().tryMoveToXYZ((double)((float)this.sitableBlockX) + 0.5D, (double)(this.sitableBlockY + 1), (double)((float)this.sitableBlockZ) + 0.5D, this.field_75404_b);
+			this.theCreature.getNavigator().tryMoveToXYZ((this.sitableBlockX) + 0.5D, this.sitableBlockY + 1, (this.sitableBlockZ) + 0.5D, this.field_75404_b);
 			++this.field_75402_d;
 			this.compoundDistance += this.theCreature.getDistance(this.theCreature.lastTickPosX, this.theCreature.lastTickPosY, this.theCreature.lastTickPosZ);
 			if(this.currentTick - 40 > this.lastCheckedTick)
@@ -183,7 +187,7 @@ public class EntityAIFindNest extends EntityAIBase
 	protected boolean isSittableBlock(World world, int x, int y, int z)
 	{
 		Block block = world.getBlock(x, y, z);
-		int i1 = world.getBlockMetadata(x, y, z);
+		//int meta = world.getBlockMetadata(x, y, z);
 
 		if(failureDepressionMap.containsKey((x + "," + y + "," + z)))
 		{

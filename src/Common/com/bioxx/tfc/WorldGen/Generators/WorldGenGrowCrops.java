@@ -40,7 +40,7 @@ public class WorldGenGrowCrops implements IWorldGenerator
 
 			if(crop != null)
 			{
-				float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world, (int)TFC_Time.getTotalDays(), i, j, k);
+				float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world, TFC_Time.getTotalDays(), i, j, k);
 				int month = TFC_Time.getSeasonAdjustedMonth(k);
 
 				if(temp > crop.minAliveTemp && month > 0 && month <= 6)

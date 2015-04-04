@@ -2310,9 +2310,10 @@ public class Recipes
 		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
 		for (int i = 0; i < recipes.size(); i++)
 		{
-			IRecipe tmpRecipe = recipes.get(i);
-			if (tmpRecipe instanceof IRecipe)
+			if (recipes.get(i) != null)
 			{
+				IRecipe tmpRecipe = recipes.get(i);
+
 				IRecipe recipe = tmpRecipe;
 				ItemStack recipeResult = recipe.getRecipeOutput();
 
@@ -2328,7 +2329,7 @@ public class Recipes
 		for (int i = 0; i < recipes.size(); i++)
 		{
 			IRecipe tmpRecipe = recipes.get(i);
-			if (tmpRecipe instanceof IRecipe)
+			if (tmpRecipe != null)
 			{
 				IRecipe recipe = tmpRecipe;
 				ItemStack recipeResult = recipe.getRecipeOutput();

@@ -145,7 +145,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 							{
 								meta += 8;
 								te.hasFruit = true;
-								te.dayFruited = (int) TFC_Time.getTotalDays();
+								te.dayFruited = TFC_Time.getTotalDays();
 							}
 							world.setBlockMetadataWithNotify(x, y, z, meta, 0x2);
 						}
@@ -266,7 +266,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 				if (te != null && te.hasFruit)
 				{
 					te.hasFruit = false;
-					te.dayHarvested = (int) TFC_Time.getTotalDays();
+					te.dayHarvested = TFC_Time.getTotalDays();
 					world.setBlockMetadataWithNotify(x, y, z, meta - 8, 3);
 					dropBlockAsItem(world, x, y, z, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(4 + (world.rand.nextFloat() * 12), 10)));
 				}
@@ -290,7 +290,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 				if(te != null && te.hasFruit)
 				{
 					te.hasFruit = false;
-					te.dayHarvested = (int) TFC_Time.getTotalDays();
+					te.dayHarvested = TFC_Time.getTotalDays();
 					world.setBlockMetadataWithNotify(x, y, z, meta - 8, 3);
 					dropBlockAsItem(world, x, y, z, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(4 + (world.rand.nextFloat() * 12), 10)));
 					return true;

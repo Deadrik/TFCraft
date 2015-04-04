@@ -585,7 +585,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 			if (i < 0)
 				i = -1;
 
-			this.currentScroll = (float)((double)this.currentScroll - (double)i / (double)j);
+			this.currentScroll = (float) (this.currentScroll - (double) i / (double) j);
 
 			if (this.currentScroll < 0.0F)
 				this.currentScroll = 0.0F;
@@ -621,7 +621,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 
 		if (this.isScrolling)
 		{
-			this.currentScroll = ((float)(par2 - j1) - 7.5F) / ((float)(l1 - j1) - 15.0F);
+			this.currentScroll = (par2 - j1 - 7.5F) / (l1 - j1 - 15.0F);
 
 			if (this.currentScroll < 0.0F)
 				this.currentScroll = 0.0F;
@@ -772,7 +772,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 		this.mc.getTextureManager().bindTexture(field_110424_t);
 
 		if (creativetabs.shouldHidePlayerInventory())
-			this.drawTexturedModalRect(i1, k + (int)((float)(l - k - 17) * this.currentScroll), 232 + (this.needsScrollBars() ? 0 : 12), 0, 12, 15);
+			this.drawTexturedModalRect(i1, k + (int) ((l - k - 17) * this.currentScroll), 232 + (this.needsScrollBars() ? 0 : 12), 0, 12, 15);
 
 		if (creativetabs == null || creativetabs.getTabPage() != tabPage)
 			if (creativetabs != CreativeTabs.tabAllSearch && creativetabs != CreativeTabs.tabInventory)
@@ -781,7 +781,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 		this.renderCreativeTab(creativetabs);
 
 		if (creativetabs == CreativeTabs.tabInventory)
-			GuiInventoryTFC.drawPlayerModel(this.guiLeft + 43, this.guiTop + 45, 20, (float)(this.guiLeft + 43 - par2), (float)(this.guiTop + 45 - 30 - par3), this.mc.thePlayer);
+			GuiInventoryTFC.drawPlayerModel(this.guiLeft + 43, this.guiTop + 45, 20, this.guiLeft + 43 - par2, this.guiTop + 45 - 30 - par3, this.mc.thePlayer);
 	}
 
 	protected boolean func_74232_a(CreativeTabs par1CreativeTabs, int par2, int par3)

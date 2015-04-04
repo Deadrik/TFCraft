@@ -942,7 +942,7 @@ public class TFC_Core
 	public static float getPercentGrown(IAnimal animal)
 	{
 		float birth = animal.getBirthDay();
-		float time = (int) TFC_Time.getTotalDays();
+		float time = TFC_Time.getTotalDays();
 		float percent = (time - birth) / animal.getNumberOfDaysToAdult();
 		return Math.min(percent, 1f);
 	}

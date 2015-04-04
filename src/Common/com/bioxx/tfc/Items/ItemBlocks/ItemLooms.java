@@ -61,24 +61,26 @@ public class ItemLooms extends ItemTerraBlock
 			field_150939_a.onBlockPlacedBy(world, x, y, z, player, stack);
 			field_150939_a.onPostBlockPlaced(world, x, y, z, 0);
 
-			TELoom te = (TELoom) world.getTileEntity(x, y, z);	
-			if (te != null && te instanceof TELoom)
+			if (world.getTileEntity(x, y, z) instanceof TELoom)
 			{
-				te.loomType = metadata;
-				te = (TELoom) te;
-				world.markBlockForUpdate(x, y, z);
-				
-				int l = MathHelper.floor_double(player.rotationYaw * 4F / 360F + 0.5D) & 3;
-				byte byte0 = 0;
-				if(l == 0)//+z
-					byte0 = 0;
-				if(l == 1)//-x
-					byte0 = 1;
-				if(l == 2)//-z
-					byte0 = 2;
-				if(l == 3)//+x
-					byte0 = 3;
-				te.rotation = byte0;
+				TELoom te = (TELoom) world.getTileEntity(x, y, z);
+				if (te != null)
+				{
+					te.loomType = metadata;
+					world.markBlockForUpdate(x, y, z);
+
+					int l = MathHelper.floor_double(player.rotationYaw * 4F / 360F + 0.5D) & 3;
+					byte byte0 = 0;
+					if (l == 0)//+z
+						byte0 = 0;
+					if (l == 1)//-x
+						byte0 = 1;
+					if (l == 2)//-z
+						byte0 = 2;
+					if (l == 3)//+x
+						byte0 = 3;
+					te.rotation = byte0;
+				}
 			}
 		}
 		return true;

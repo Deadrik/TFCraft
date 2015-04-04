@@ -26,23 +26,23 @@ public class RenderTorch  implements ISimpleBlockRenderingHandler
 
 		if ((meta & 7) == 1)
 		{
-			renderer.renderTorchAtAngle(block, (double)x - d1, (double)y + d2, (double)z, -d0, 0.0D, meta);
+			renderer.renderTorchAtAngle(block, x - d1, y + d2, z, -d0, 0.0D, meta);
 		}
 		else if ((meta & 7) == 2)
 		{
-			renderer.renderTorchAtAngle(block, (double)x + d1, (double)y + d2, (double)z, d0, 0.0D, meta);
+			renderer.renderTorchAtAngle(block, x + d1, y + d2, z, d0, 0.0D, meta);
 		}
 		else if ((meta & 7) == 3)
 		{
-			renderer.renderTorchAtAngle(block, (double)x, (double)y + d2, (double)z - d1, 0.0D, -d0, meta);
+			renderer.renderTorchAtAngle(block, x, y + d2, z - d1, 0.0D, -d0, meta);
 		}
 		else if ((meta & 7) == 4)
 		{
-			renderer.renderTorchAtAngle(block, (double)x, (double)y + d2, (double)z + d1, 0.0D, d0, meta);
+			renderer.renderTorchAtAngle(block, x, y + d2, z + d1, 0.0D, d0, meta);
 		}
 		else
 		{
-			renderer.renderTorchAtAngle(block, (double)x, (double)y, (double)z, 0.0D, 0.0D, meta);
+			renderer.renderTorchAtAngle(block, x, y, z, 0.0D, 0.0D, meta);
 		}
 
 		return true;

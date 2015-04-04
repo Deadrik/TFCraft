@@ -78,7 +78,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 			}
 		}
 		if(coreSampleStacks.size() > 0)
-			return (ItemStack)coreSampleStacks.get(world.rand.nextInt(coreSampleStacks.size()));
+			return coreSampleStacks.get(world.rand.nextInt(coreSampleStacks.size()));
 		return null;
 	}
 

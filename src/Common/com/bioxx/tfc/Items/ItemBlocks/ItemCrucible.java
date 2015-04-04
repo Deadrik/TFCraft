@@ -82,7 +82,7 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 		{
 			if(metals.containsKey(m.Name))
 			{
-				((MetalPair)metals.get(m.Name)).amount += amt;
+				metals.get(m.Name).amount += amt;
 			}
 			else
 			{

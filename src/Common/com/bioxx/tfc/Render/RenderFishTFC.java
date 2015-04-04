@@ -62,7 +62,7 @@ public class RenderFishTFC extends RenderLiving
         
         if (par1EntityLivingBase.deathTime > 0)
         {
-            float f3 = ((float)par1EntityLivingBase.deathTime + par4 - 1.0F) / 20.0F * 1.6F;
+			float f3 = (par1EntityLivingBase.deathTime + par4 - 1.0F) / 20.0F * 1.6F;
             f3 = MathHelper.sqrt_float(f3);
 
             if (f3 > 1.0F)

@@ -47,7 +47,7 @@ public class BlockCustomFenceGate2 extends BlockFenceGate implements ITileEntity
 	{
 		int l = (par1World.getTileEntity(par2, par3, par4)!=null)?(((TEFenceGate)(par1World.getTileEntity(par2, par3, par4))).getDirection()):0;
 		boolean open = (par1World.getTileEntity(par2, par3, par4)!=null)?(((TEFenceGate)(par1World.getTileEntity(par2, par3, par4))).getOpen()):false;
-		return open ? null : (l != 2 && l != 0 ? AxisAlignedBB.getBoundingBox((double)((float)par2 + 0.375F), (double)par3, (double)par4, (double)((float)par2 + 0.625F), (double)((float)par3 + 1.5F), (double)(par4 + 1)) : AxisAlignedBB.getBoundingBox((double)par2, (double)par3, (double)((float)par4 + 0.375F), (double)(par2 + 1), (double)((float)par3 + 1.5F), (double)((float)par4 + 0.625F)));
+		return open ? null : (l != 2 && l != 0 ? AxisAlignedBB.getBoundingBox(par2 + 0.375F, par3, par4, par2 + 0.625F, par3 + 1.5F, par4 + 1) : AxisAlignedBB.getBoundingBox(par2, par3, par4 + 0.375F, par2 + 1, par3 + 1.5F, par4 + 0.625F));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -109,7 +109,7 @@ public class BlockCustomFenceGate2 extends BlockFenceGate implements ITileEntity
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
 	{
-		int l = (MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) % 4;
+		int l = (MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3) % 4;
 		((TEFenceGate)(par1World.getTileEntity(par2, par3, par4))).setDirection((byte)l);
 
 		//par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);

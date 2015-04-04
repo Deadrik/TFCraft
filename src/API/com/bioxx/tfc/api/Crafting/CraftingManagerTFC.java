@@ -83,7 +83,7 @@ public class CraftingManagerTFC
 			char c = s.charAt(i1);
 			if (hashmap.containsKey(Character.valueOf(c)))
 			{
-				aitemstack[i1] = ((ItemStack)hashmap.get(Character.valueOf(c))).copy();
+				aitemstack[i1] = hashmap.get(Character.valueOf(c)).copy();
 			}
 			else
 			{
@@ -163,7 +163,7 @@ public class CraftingManagerTFC
 		}
 		for (int k = 0; k < recipes.size(); k++)
 		{
-			IRecipe irecipe = (IRecipe)recipes.get(k);
+			IRecipe irecipe = recipes.get(k);
 			if (irecipe.matches(inventorycrafting, world))
 			{
 				return irecipe.getCraftingResult(inventorycrafting);

@@ -409,7 +409,7 @@ public class ModelHorseTFC extends ModelBase
         boolean flag = entityhorse.field_110278_bp != 0;
         boolean flag1 = entityhorse.isHorseSaddled();
         boolean flag2 = entityhorse.riddenByEntity != null;
-        float f12 = (float)p_78086_1_.ticksExisted + p_78086_4_;
+		float f12 = p_78086_1_.ticksExisted + p_78086_4_;
         float f13 = MathHelper.cos(p_78086_2_ * 0.6662F + (float)Math.PI);
         float f14 = f13 * 0.8F * p_78086_3_;
         this.head.rotationPointY = 4.0F;

@@ -263,10 +263,10 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 				while (iterator.hasNext())
 				{
 					Entity entity = (Entity)iterator.next();
-					entity.attackEntityFrom(damagesource, (float)Math.min(MathHelper.floor_float((float)i * this.damage), this.maxDamage));
+					entity.attackEntityFrom(damagesource, Math.min(MathHelper.floor_float(i * this.damage), this.maxDamage));
 				}
 
-				if (flag && (double)this.rand.nextFloat() < 0.05000000074505806D + (double)i * 0.05D)
+				if (flag && this.rand.nextFloat() < 0.05000000074505806D + i * 0.05D)
 				{
 					int j = this.blockMeta >> 2;
 					int k = this.blockMeta & 3;

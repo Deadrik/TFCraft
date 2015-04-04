@@ -240,7 +240,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer p_70300_1_)
 	{
-		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : p_70300_1_.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : p_70300_1_.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -754,7 +754,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	private IInventory getOutputInventory()
 	{
 		int i = BlockHopper.getDirectionFromMetadata(this.getBlockMetadata());
-		return searchForOutputInventory(this.getWorldObj(), (double)(this.xCoord + Facing.offsetsXForSide[i]), (double)(this.yCoord + Facing.offsetsYForSide[i]), (double)(this.zCoord + Facing.offsetsZForSide[i]));
+		return searchForOutputInventory(this.getWorldObj(), this.xCoord + Facing.offsetsXForSide[i], this.yCoord + Facing.offsetsYForSide[i], this.zCoord + Facing.offsetsZForSide[i]);
 	}
 
 	public static IInventory getInputInventory(IHopper p_145884_0_)

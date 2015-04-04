@@ -22,6 +22,7 @@ public class ItemReeds extends Item
 	 * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
 	 * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
 	 */
+	@Override
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float par8, float par9, float par10)
 	{
 		Block block = world.getBlock(x, y, z);
@@ -60,7 +61,7 @@ public class ItemReeds extends Item
 						this.reeds.onBlockPlacedBy(world, x, y, z, player, is);
 						this.reeds.onPostBlockPlaced(world, x, y, z, i1);
 					}
-					world.playSoundEffect((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), this.reeds.stepSound.func_150496_b(), (this.reeds.stepSound.getVolume() + 1.0F) / 2.0F, this.reeds.stepSound.getPitch() * 0.8F);
+					world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, this.reeds.stepSound.func_150496_b(), (this.reeds.stepSound.getVolume() + 1.0F) / 2.0F, this.reeds.stepSound.getPitch() * 0.8F);
 					--is.stackSize;
 				}
 			}

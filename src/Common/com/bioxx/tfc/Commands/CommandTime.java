@@ -109,7 +109,7 @@ public class CommandTime extends CommandBase
 	{
 		for (int j = 0; j < MinecraftServer.getServer().worldServers.length; ++j)
 		{
-			MinecraftServer.getServer().worldServers[j].setWorldTime((long)par2);
+			MinecraftServer.getServer().worldServers[j].setWorldTime(par2);
 		}
 	}
 
@@ -121,7 +121,7 @@ public class CommandTime extends CommandBase
 		for (int j = 0; j < MinecraftServer.getServer().worldServers.length; ++j)
 		{
 			WorldServer worldserver = MinecraftServer.getServer().worldServers[j];
-			worldserver.setWorldTime(worldserver.getWorldTime() + (long)par2);
+			worldserver.setWorldTime(worldserver.getWorldTime() + par2);
 		}
 	}
 }

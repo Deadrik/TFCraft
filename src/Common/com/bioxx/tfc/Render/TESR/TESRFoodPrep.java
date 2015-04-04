@@ -3,7 +3,6 @@ package com.bioxx.tfc.Render.TESR;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
@@ -113,7 +112,7 @@ public class TESRFoodPrep extends TESRBase
 
 	public void drawItem(TEFoodPrep te, int index, double minX, double maxX, double minZ, double maxZ)
 	{
-		if(te.storage[index] != null && te.storage[index].getItem() instanceof Item)
+		if (te.storage[index] != null /*&& te.storage[index].getItem() instanceof Item*/) //That will always ben an instanceof Item, perhaps this is supposed to check somethign else?
 		{
 			float minU = te.storage[index].getIconIndex().getMinU();
 			float maxU = te.storage[index].getIconIndex().getMaxU();

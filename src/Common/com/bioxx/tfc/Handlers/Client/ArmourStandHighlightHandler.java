@@ -37,9 +37,9 @@ public class ArmourStandHighlightHandler
 			if(isTop)
 				stand = (TEStand) world.getTileEntity(evt.target.blockX, evt.target.blockY-1, evt.target.blockZ);
 			boolean NS = stand.yaw%360 == 0 || stand.yaw%360  == 180 ;
-			double var8 = player.lastTickPosX + (player.posX - player.lastTickPosX) * (double) evt.partialTicks;
-			double var10 = player.lastTickPosY + (player.posY - player.lastTickPosY) * (double) evt.partialTicks;
-			double var12 = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * (double) evt.partialTicks;
+			double var8 = player.lastTickPosX + (player.posX - player.lastTickPosX) * evt.partialTicks;
+			double var10 = player.lastTickPosY + (player.posY - player.lastTickPosY) * evt.partialTicks;
+			double var12 = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * evt.partialTicks;
 
 			//Head box
 			AxisAlignedBB head = AxisAlignedBB.getBoundingBox(

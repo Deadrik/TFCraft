@@ -18,9 +18,9 @@ public class PlankHighlightHandler{
 	public void DrawBlockHighlightEvent(DrawBlockHighlightEvent evt) 
 	{
 		World world = evt.player.worldObj;
-		double var8 = evt.player.lastTickPosX + (evt.player.posX - evt.player.lastTickPosX) * (double)evt.partialTicks;
-		double var10 = evt.player.lastTickPosY + (evt.player.posY - evt.player.lastTickPosY) * (double)evt.partialTicks;
-		double var12 = evt.player.lastTickPosZ + (evt.player.posZ - evt.player.lastTickPosZ) * (double)evt.partialTicks;
+		double var8 = evt.player.lastTickPosX + (evt.player.posX - evt.player.lastTickPosX) * evt.partialTicks;
+		double var10 = evt.player.lastTickPosY + (evt.player.posY - evt.player.lastTickPosY) * evt.partialTicks;
+		double var12 = evt.player.lastTickPosZ + (evt.player.posZ - evt.player.lastTickPosZ) * evt.partialTicks;
 
 		if(evt.currentItem != null && evt.currentItem.getItem() instanceof ItemPlank)
 		{

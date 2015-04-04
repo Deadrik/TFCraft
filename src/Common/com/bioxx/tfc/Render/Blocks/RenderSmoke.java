@@ -47,7 +47,7 @@ public class RenderSmoke  implements ISimpleBlockRenderingHandler
 		{
 			tessellator.setBrightness(renderer.renderMinY > 0.0D ? l : block.getMixedBrightnessForBlock(renderer.blockAccess, x, y - 1, z));
 			tessellator.setColorRGBA_F(f10, f13, f16, alpha);
-			renderer.renderFaceYNeg(block, (double)x, (double)y, (double)z, renderer.getBlockIcon(block, renderer.blockAccess, x, y, z, 0));
+			renderer.renderFaceYNeg(block, x, y, z, renderer.getBlockIcon(block, renderer.blockAccess, x, y, z, 0));
 			flag = true;
 		}
 
@@ -55,7 +55,7 @@ public class RenderSmoke  implements ISimpleBlockRenderingHandler
 		{
 			tessellator.setBrightness(renderer.renderMaxY < 1.0D ? l : block.getMixedBrightnessForBlock(renderer.blockAccess, x, y + 1, z));
 			tessellator.setColorRGBA_F(f7, f8, f9, alpha);
-			renderer.renderFaceYPos(block, (double)x, (double)y, (double)z, renderer.getBlockIcon(block, renderer.blockAccess, x, y, z, 1));
+			renderer.renderFaceYPos(block, x, y, z, renderer.getBlockIcon(block, renderer.blockAccess, x, y, z, 1));
 			flag = true;
 		}
 
@@ -65,7 +65,7 @@ public class RenderSmoke  implements ISimpleBlockRenderingHandler
 			tessellator.setBrightness(renderer.renderMinZ > 0.0D ? l : block.getMixedBrightnessForBlock(renderer.blockAccess, x, y, z - 1));
 			tessellator.setColorRGBA_F(f11, f14, f17, alpha);
 			iicon = renderer.getBlockIcon(block, renderer.blockAccess, x, y, z, 2);
-			renderer.renderFaceZNeg(block, (double)x, (double)y, (double)z, iicon);
+			renderer.renderFaceZNeg(block, x, y, z, iicon);
 			flag = true;
 		}
 
@@ -74,7 +74,7 @@ public class RenderSmoke  implements ISimpleBlockRenderingHandler
 			tessellator.setBrightness(renderer.renderMaxZ < 1.0D ? l : block.getMixedBrightnessForBlock(renderer.blockAccess, x, y, z + 1));
 			tessellator.setColorRGBA_F(f11, f14, f17, alpha);
 			iicon = renderer.getBlockIcon(block, renderer.blockAccess, x, y, z, 3);
-			renderer.renderFaceZPos(block, (double)x, (double)y, (double)z, iicon);
+			renderer.renderFaceZPos(block, x, y, z, iicon);
 			flag = true;
 		}
 
@@ -83,7 +83,7 @@ public class RenderSmoke  implements ISimpleBlockRenderingHandler
 			tessellator.setBrightness(renderer.renderMinX > 0.0D ? l : block.getMixedBrightnessForBlock(renderer.blockAccess, x - 1, y, z));
 			tessellator.setColorRGBA_F(f12, f15, f18, alpha);
 			iicon = renderer.getBlockIcon(block, renderer.blockAccess, x, y, z, 4);
-			renderer.renderFaceXNeg(block, (double)x, (double)y, (double)z, iicon);
+			renderer.renderFaceXNeg(block, x, y, z, iicon);
 			flag = true;
 		}
 
@@ -92,7 +92,7 @@ public class RenderSmoke  implements ISimpleBlockRenderingHandler
 			tessellator.setBrightness(renderer.renderMaxX < 1.0D ? l : block.getMixedBrightnessForBlock(renderer.blockAccess, x + 1, y, z));
 			tessellator.setColorRGBA_F(f12, f15, f18, alpha);
 			iicon = renderer.getBlockIcon(block, renderer.blockAccess, x, y, z, 5);
-			renderer.renderFaceXPos(block, (double)x, (double)y, (double)z, iicon);
+			renderer.renderFaceXPos(block, x, y, z, iicon);
 			flag = true;
 		}
 		return flag;

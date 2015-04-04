@@ -53,16 +53,13 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 
 				List list = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(x, y + 1, z, x + 1, y + 2, z + 1));
 				int numsticks = 0;
-				int hasPaper = 0;
 
 				if (list != null && !list.isEmpty())
 				{
 					for (Iterator iterator = list.iterator(); iterator.hasNext();)
 					{
 						EntityItem entity = (EntityItem)iterator.next();
-						if(entity.getEntityItem().getItem() == Items.paper)
-							hasPaper = 20;
-						else if(entity.getEntityItem().getItem() == TFCItems.Stick)
+						if (entity.getEntityItem().getItem() == TFCItems.Stick)
 							numsticks+=entity.getEntityItem().stackSize;
 					}
 				}

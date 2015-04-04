@@ -133,7 +133,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		//	animals to be adults, so we set their birthdays far enough back
 		//	in time such that they reach adulthood now.
 		//
-		this.setAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
+		this.setAge(TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 	}
 
 
@@ -176,7 +176,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
-		this.setAge((int) TFC_Time.getTotalDays());
+		this.setAge(TFC_Time.getTotalDays());
 	}
 
 

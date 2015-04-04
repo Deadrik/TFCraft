@@ -119,7 +119,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		//	animals to be adults, so we set their birthdays far enough back
 		//	in time such that they reach adulthood now.
 		//
-		this.setAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
+		this.setAge(TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 	}
 
 	public EntityDeer(World par1World, IAnimal mother,  ArrayList<Float> data)
@@ -161,7 +161,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
-		this.setAge((int) TFC_Time.getTotalDays());
+		this.setAge(TFC_Time.getTotalDays());
 	}
 	
 
@@ -295,7 +295,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 				baby.rotationYawHead = baby.rotationYaw;
 				baby.renderYawOffset = baby.rotationYaw;
 				worldObj.spawnEntityInWorld(baby);
-				baby.setAge((int)TFC_Time.getTotalDays());
+				baby.setAge(TFC_Time.getTotalDays());
 				pregnant = false;
 			}
 		}

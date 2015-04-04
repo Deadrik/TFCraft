@@ -35,7 +35,7 @@ public class GenLayerFuzzyZoomTFC extends GenLayerTFC
 
 			for (int var17 = 0; var17 < var7 - 1; ++var17)
 			{
-				this.initChunkSeed((long)(var17 + var5 << 1), (long)(var12 + var6 << 1));
+				this.initChunkSeed(var17 + var5 << 1, var12 + var6 << 1);
 				int var18 = var9[var17 + 1 + (var12 + 0) * var7];
 				int var19 = var9[var17 + 1 + (var12 + 1) * var7];
 				var10[var14] = var15;

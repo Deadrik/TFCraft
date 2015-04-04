@@ -53,7 +53,7 @@ public class ContainerCreativeTFC extends Container
     public void scrollTo(float par1)
     {
         int i = this.itemList.size() / 9 - 5 + 1;
-        int j = (int)((double)(par1 * (float)i) + 0.5D);
+		int j = (int) (par1 * i + 0.5D);
 
         if (j < 0)
         {

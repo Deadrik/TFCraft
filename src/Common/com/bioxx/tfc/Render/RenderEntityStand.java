@@ -158,9 +158,9 @@ public class RenderEntityStand extends RenderBiped
 				int j = itemarmor.getColor(itemstack);
 				if (j != -1)
 				{
-					float f2 = (float)(j >> 16 & 255) / 255.0F;
-					float f3 = (float)(j >> 8 & 255) / 255.0F;
-					float f4 = (float)(j & 255) / 255.0F;
+					float f2 = (j >> 16 & 255) / 255.0F;
+					float f3 = (j >> 8 & 255) / 255.0F;
+					float f4 = (j & 255) / 255.0F;
 					GL11.glColor3f(f1 * f2, f1 * f3, f1 * f4);
 
 					if (itemstack.isItemEnchanted())

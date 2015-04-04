@@ -486,7 +486,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 					workedRecently == 0 && anvilItemStacks[WELDOUT_SLOT] == null)
 			{
 				AnvilManager manager = AnvilManager.getInstance();
-				new Random(worldObj.getSeed());
+				//new Random(worldObj.getSeed());  // Why is this here?
 				AnvilRecipe recipe = new AnvilRecipe(anvilItemStacks[WELD1_SLOT],anvilItemStacks[WELD2_SLOT],"", 
 						0,
 						anvilItemStacks[FLUX_SLOT] != null ? true : false, AnvilTier, null);

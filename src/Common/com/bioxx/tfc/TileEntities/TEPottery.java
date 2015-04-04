@@ -281,7 +281,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 	public void ejectItem(int index)
 	{
 		EntityItem entityitem;
-		new Random();
+		//new Random();
 
 		if(inventory[index] != null)
 		{

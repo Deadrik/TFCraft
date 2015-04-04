@@ -37,7 +37,7 @@ public class DataCache
 	{
 		x >>= 4;
 		y >>= 4;
-		long var3 = (long)x & 4294967295L | ((long)y & 4294967295L) << 32;
+		long var3 = x & 4294967295L | (y & 4294967295L) << 32;
 		DataCacheBlockTFC var5 = (DataCacheBlockTFC)this.cacheMap.getValueByKey(var3);
 		if (var5 == null)
 		{
@@ -63,14 +63,14 @@ public class DataCache
 			this.lastCleanupTime = var1;
 			for (int var5 = 0; var5 < this.cache.size(); ++var5)
 			{
-				DataCacheBlockTFC var6 = (DataCacheBlockTFC)this.cache.get(var5);
+				DataCacheBlockTFC var6 = this.cache.get(var5);
 				if(var6 != null)
 				{
 					long var7 = var1 - var6.lastAccessTime;
 					if (var7 > 30000L || var7 < 0L)
 					{
 						this.cache.remove(var5--);
-						long var9 = (long)var6.xPosition & 4294967295L | ((long)var6.zPosition & 4294967295L) << 32;
+						long var9 = var6.xPosition & 4294967295L | (var6.zPosition & 4294967295L) << 32;
 						this.cacheMap.remove(var9);
 					}
 				}
