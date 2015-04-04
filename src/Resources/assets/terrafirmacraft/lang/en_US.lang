@@ -2491,6 +2491,7 @@ gui.Orange=Orange Tree
 gui.Peach=Peach Tree
 gui.Plum=Plum Tree
 gui.pile=Pile
+gui.weaving=Weaving
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Must use under flowing water.

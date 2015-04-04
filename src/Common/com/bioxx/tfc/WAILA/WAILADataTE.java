@@ -43,6 +43,9 @@ import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEFruitLeaves;
 import com.bioxx.tfc.TileEntities.TEFruitTreeWood;
 import com.bioxx.tfc.TileEntities.TEIngotPile;
+import com.bioxx.tfc.TileEntities.TELogPile;
+import com.bioxx.tfc.TileEntities.TELoom;
+import com.bioxx.tfc.TileEntities.TEMetalSheet;
 import com.bioxx.tfc.TileEntities.TEOre;
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.HeatIndex;
@@ -56,6 +59,8 @@ import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.BarrelBriningRecipe;
 import com.bioxx.tfc.api.Crafting.BarrelManager;
 import com.bioxx.tfc.api.Crafting.BarrelRecipe;
+import com.bioxx.tfc.api.Crafting.LoomManager;
+import com.bioxx.tfc.api.Crafting.LoomRecipe;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
@@ -87,6 +92,12 @@ public class WAILADataTE implements IWailaDataProvider
 
 		else if (accessor.getTileEntity() instanceof TEOre)
 			return oreStack(accessor, config);
+
+		else if (accessor.getTileEntity() instanceof TELoom)
+			return loomStack(accessor, config);
+
+		else if (accessor.getTileEntity() instanceof TEMetalSheet)
+			return metalSheetStack(accessor, config);
 		
 		return null;
 	}
@@ -148,6 +159,12 @@ public class WAILADataTE implements IWailaDataProvider
 
 		else if (accessor.getTileEntity() instanceof TEOre)
 			currenttip = oreBody(itemStack, currenttip, accessor, config);
+
+		else if (accessor.getTileEntity() instanceof TELogPile)
+			currenttip = logPileBody(itemStack, currenttip, accessor, config);
+
+		else if (accessor.getTileEntity() instanceof TELoom)
+			currenttip = loomBody(itemStack, currenttip, accessor, config);
 
 		return currenttip;
 	}
@@ -218,6 +235,16 @@ public class WAILADataTE implements IWailaDataProvider
 		reg.registerStackProvider(new WAILADataTE(), TEOre.class);
 		reg.registerHeadProvider(new WAILADataTE(), TEOre.class);
 		reg.registerBodyProvider(new WAILADataTE(), TEOre.class);
+
+		reg.registerBodyProvider(new WAILADataTE(), TELogPile.class);
+		reg.registerNBTProvider(new WAILADataTE(), TELogPile.class);
+
+		reg.registerStackProvider(new WAILADataTE(), TELoom.class);
+		reg.registerBodyProvider(new WAILADataTE(), TELoom.class);
+		reg.registerNBTProvider(new WAILADataTE(), TELoom.class);
+
+		reg.registerStackProvider(new WAILADataTE(), TEMetalSheet.class);
+		reg.registerNBTProvider(new WAILADataTE(), TEMetalSheet.class);
 	}
 
 	// Stacks
@@ -328,6 +355,34 @@ public class WAILADataTE implements IWailaDataProvider
 		}
 
 		return null;
+	}
+
+	public ItemStack loomStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		boolean finished = tag.getBoolean("finished");
+		NBTTagList tagList = tag.getTagList("Items", 10);
+		ItemStack storage[] = new ItemStack[2];
+
+		for (int i = 0; i < tagList.tagCount(); i++)
+		{
+			NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
+			byte slot = itemTag.getByte("Slot");
+			if (slot >= 0 && slot < storage.length)
+				storage[slot] = ItemStack.loadItemStackFromNBT(itemTag);
+		}
+		
+		if (finished && storage[1] != null)
+		{
+			return storage[1];
+		}
+		return null;
+	}
+
+	public ItemStack metalSheetStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		return ItemStack.loadItemStackFromNBT(tag.getCompoundTag("sheetType"));
 	}
 
 	// Heads
@@ -782,6 +837,85 @@ public class WAILADataTE implements IWailaDataProvider
 			case 1:
 				currenttip.add(TFC_Core.translate("gui.useless"));
 				break;
+			}
+		}
+
+		return currenttip;
+	}
+
+	public List<String> logPileBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		NBTTagList tagList = tag.getTagList("Items", 10);
+		ItemStack storage[] = new ItemStack[4];
+		boolean counted[] = new boolean[] {false, false, false, false}; // Used to keep track of which slots have already been combined into others.
+
+		for (int i = 0; i < tagList.tagCount(); i++)
+		{
+			NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
+			byte slot = itemTag.getByte("Slot");
+			if (slot >= 0 && slot < storage.length)
+				storage[slot] = ItemStack.loadItemStackFromNBT(itemTag);
+		}
+
+		/**
+		 * Rather than just display the number of logs in each slot, I wanted to display the total number of each type of log in the pile.
+		 * There's very likely a much better way to do this, but it's all I could come up with for now.
+		 * Optimization PRs welcome. :) Kitty
+		 */
+		for (int j = 0; j < storage.length; j++) // Loop through the 4 storage slots
+		{
+			if (storage[j] != null && !counted[j]) // Make sure the slot is not empty, and has not already been accounted for
+			{
+				String log = storage[j].getItem().getItemStackDisplayName(storage[j]) + " : "; // Have to pass the ItemStack in again, since translating getUnlocalizedName() doesn't work. :(
+				int count = storage[j].stackSize;
+				for (int k = j + 1; k < storage.length; k++) // Loop through all slots after the one being checked
+				{
+					if (storage[k] != null && storage[j].isItemEqual(storage[k])) // Make sure the comparison slot isn't empty, and see if it's the same type of log
+					{
+						count += storage[k].stackSize; // Increase the count for that log type
+						counted[k] = true; // Mark the combined slot as accounted for
+					}
+				}
+				currenttip.add(log + count); // Add to the HUD display
+				counted[j] = true; // Mark the initial slot as accounted for
+			}
+		}
+		return currenttip;
+	}
+
+	public List<String> loomBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		boolean finished = tag.getBoolean("finished");
+		int wovenStrings = tag.getInteger("cloth");
+		NBTTagList tagList = tag.getTagList("Items", 10);
+		ItemStack storage[] = new ItemStack[2];
+
+		for (int i = 0; i < tagList.tagCount(); i++)
+		{
+			NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
+			byte slot = itemTag.getByte("Slot");
+			if (slot >= 0 && slot < storage.length)
+				storage[slot] = ItemStack.loadItemStackFromNBT(itemTag);
+		}
+		
+		if (!finished && storage[0] != null)
+		{
+			LoomRecipe recipe = LoomManager.getInstance().findPotentialRecipes(storage[0]);
+			int maxStrings = recipe.getReqSize();
+
+			if (storage[0].stackSize < maxStrings) // The loom isn't full yet
+			{
+				String name = storage[0].getItem().getItemStackDisplayName(storage[0]) + " : ";
+				currenttip.add(name + storage[0].stackSize + "/" + maxStrings);
+			}
+			else // Weaving in progress
+			{
+				Item cloth = recipe.getOutItemStack().getItem();
+				String clothName = cloth.getItemStackDisplayName(recipe.getOutItemStack()) + " : ";
+				int percent = (int) (100.0 * wovenStrings / maxStrings);
+				currenttip.add(TFC_Core.translate("gui.weaving") + " " + clothName + String.valueOf(percent) + "%");
 			}
 		}
 
