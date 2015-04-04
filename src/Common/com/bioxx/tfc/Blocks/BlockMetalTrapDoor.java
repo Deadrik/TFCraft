@@ -30,7 +30,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockMetalTrapDoor extends BlockTerraContainer
 {
 	public IIcon[] icons;
-	public String[] metalNames = {"Bismuth","Bismuth Bronze","Black Bronze","Black Steel","Blue Steel","Brass","Bronze",
+	public static String[] metalNames = {"Bismuth","Bismuth Bronze","Black Bronze","Black Steel","Blue Steel","Brass","Bronze",
 			"Copper","Gold","Wrought Iron","Lead","Nickel","Pig Iron","Platinum","Red Steel","Rose Gold","Silver","Steel",
 			"Sterling Silver","Tin","Zinc"/*,"Unknown"*/}; // There is no trapdoor anvil recipe involving unknown ingots.
 

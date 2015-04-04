@@ -17,6 +17,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
+import com.bioxx.tfc.Blocks.BlockMetalTrapDoor;
 import com.bioxx.tfc.Blocks.Devices.BlockAnvil;
 import com.bioxx.tfc.Blocks.Flora.BlockBerryBush;
 import com.bioxx.tfc.Blocks.Flora.BlockFruitLeaves;
@@ -46,6 +47,7 @@ import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TELoom;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
+import com.bioxx.tfc.TileEntities.TEMetalTrapDoor;
 import com.bioxx.tfc.TileEntities.TEOre;
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.HeatIndex;
@@ -98,6 +100,9 @@ public class WAILADataTE implements IWailaDataProvider
 
 		else if (accessor.getTileEntity() instanceof TEMetalSheet)
 			return metalSheetStack(accessor, config);
+
+		else if (accessor.getTileEntity() instanceof TEMetalTrapDoor)
+			return metalTrapDoorStack(accessor, config);
 		
 		return null;
 	}
@@ -165,6 +170,9 @@ public class WAILADataTE implements IWailaDataProvider
 
 		else if (accessor.getTileEntity() instanceof TELoom)
 			currenttip = loomBody(itemStack, currenttip, accessor, config);
+
+		else if (accessor.getTileEntity() instanceof TEMetalTrapDoor)
+			currenttip = metalTrapDoorBody(itemStack, currenttip, accessor, config);
 
 		return currenttip;
 	}
@@ -245,6 +253,10 @@ public class WAILADataTE implements IWailaDataProvider
 
 		reg.registerStackProvider(new WAILADataTE(), TEMetalSheet.class);
 		reg.registerNBTProvider(new WAILADataTE(), TEMetalSheet.class);
+
+		reg.registerStackProvider(new WAILADataTE(), TEMetalTrapDoor.class);
+		reg.registerBodyProvider(new WAILADataTE(), TEMetalTrapDoor.class);
+		reg.registerNBTProvider(new WAILADataTE(), TEMetalTrapDoor.class);
 	}
 
 	// Stacks
@@ -380,6 +392,12 @@ public class WAILADataTE implements IWailaDataProvider
 	}
 
 	public ItemStack metalSheetStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		return ItemStack.loadItemStackFromNBT(tag.getCompoundTag("sheetType"));
+	}
+
+	public ItemStack metalTrapDoorStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		NBTTagCompound tag = accessor.getNBTData();
 		return ItemStack.loadItemStackFromNBT(tag.getCompoundTag("sheetType"));
@@ -919,6 +937,16 @@ public class WAILADataTE implements IWailaDataProvider
 			}
 		}
 
+		return currenttip;
+	}
+
+	public List<String> metalTrapDoorBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		ItemStack sheetStack = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("sheetType"));
+
+		String metalType = BlockMetalTrapDoor.metalNames[sheetStack.getItemDamage() & 31];
+		currenttip.add(TFC_Core.translate("gui.metal." + metalType.replaceAll("\\s", "")));
 		return currenttip;
 	}
 
