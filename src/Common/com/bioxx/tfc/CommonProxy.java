@@ -478,22 +478,8 @@ public class CommonProxy
 
 	public void registerWailaClasses()
 	{
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WOre.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WAnvil.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WBarrel.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WBlastFurnace.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WBerryBush.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WBloomery.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WBloom.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WCrop.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WCrucible.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WFirepit.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WForge.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WFruitLeaves.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WFruitTreeWood.callbackRegister");
-
-		// I haven't decided if this is OP or not. Useful for debugging though, so uncomment when needing to check farmland nutrient %.
-		//FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WFarmland.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WAILADataTE.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WCrucible.callbackRegister"); // Crucible has it's own file due to extra calculations.
 	}
 	
 	public void hideNEIItems() {}

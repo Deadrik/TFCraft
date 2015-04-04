@@ -2490,6 +2490,7 @@ gui.Olive=Olive Tree
 gui.Orange=Orange Tree
 gui.Peach=Peach Tree
 gui.Plum=Plum Tree
+gui.pile=Pile
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Must use under flowing water.
