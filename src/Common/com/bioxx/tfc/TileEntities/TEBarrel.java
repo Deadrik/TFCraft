@@ -623,11 +623,11 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			{
 				float env = preservative.getEnvironmentalDecayFactor();
 				float base = preservative.getBaseDecayModifier();
-				if(env == Float.NaN || env < 0.0)
+				if(Float.isNaN(env) || env < 0.0)
 				{
 					TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
 				}
-				else if(base == Float.NaN || base < 0.0)
+				else if(Float.isNaN(base) || base < 0.0)
 				{
 					TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord, env);
 				}
@@ -907,7 +907,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluids.CIDER, 100), new FluidStack(TFCFluids.VINEGAR, 100)));
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluids.WHISKEY, 100), new FluidStack(TFCFluids.VINEGAR, 100)));
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluids.RYEWHISKEY, 100), new FluidStack(TFCFluids.VINEGAR, 100)));
-		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluids.BEER, 100), new FluidStack(TFCFluids.VINEGAR, 100)));
+		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluids.BEER, 100), new FluidStack(TFCFluids.VINEGAR, 100)));	
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluids.SAKE, 100), new FluidStack(TFCFluids.VINEGAR, 100)));
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluids.RUM, 100), new FluidStack(TFCFluids.VINEGAR, 100)));
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluids.CORNWHISKEY, 100), new FluidStack(TFCFluids.VINEGAR, 100)));
@@ -920,12 +920,11 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		// 5000mb / 160oz = 31.25
 		// 10000mb / 160oz = 62.5
 		// FluidStack naturally only takes int so I rounded down
-		BarrelPreservativeRecipe picklePreservative = new BarrelPreservativeRecipe(new FluidStack(TFCFluids.VINEGAR,31),"gui.barrel.preserving").setAllowGrains(false).setEnvironmentalDecayFactor(0.25f).setBaseDecayModifier(0.1f).setRequiresSealed(true);
-		BarrelPreservativeRecipe brineInBrinePreservative = new BarrelPreservativeRecipe(new FluidStack(TFCFluids.BRINE,62),"gui.barrel.preserving").setAllowGrains(false).setEnvironmentalDecayFactor(0.75f).setRequiresSealed(true);
+		BarrelPreservativeRecipe picklePreservative = new BarrelPreservativeRecipe(new FluidStack(TFCFluids.VINEGAR,31),"gui.barrel.preserving").setAllowGrains(false).setRequiresPickled(true).setEnvironmentalDecayFactor(0.25f).setBaseDecayModifier(0.1f).setRequiresSealed(true);
+		BarrelPreservativeRecipe brineInBrinePreservative = new BarrelPreservativeRecipe(new FluidStack(TFCFluids.BRINE,62),"gui.barrel.preserving").setAllowGrains(false).setRequiresBrined(true).setEnvironmentalDecayFactor(0.75f).setRequiresSealed(true);
 		BarrelPreservativeRecipe brineInVinegarPreservative = new BarrelPreservativeRecipe(new FluidStack(TFCFluids.VINEGAR,62),"gui.barrel.preserving").setAllowGrains(false).setRequiresBrined(true).setEnvironmentalDecayFactor(0.75f).setRequiresSealed(true);
 		BarrelManager.getInstance().addPreservative(picklePreservative);
 		BarrelManager.getInstance().addPreservative(brineInBrinePreservative);
 		BarrelManager.getInstance().addPreservative(brineInVinegarPreservative);
-
 	}
 }

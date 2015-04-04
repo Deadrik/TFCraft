@@ -26,8 +26,8 @@ public class BarrelPreservativeRecipe {
 	
 	private FluidStack liquidPerOz = null;
 	
-	private float environmentalDecayFactor = Float.NaN;
-	private float baseDecayModifier = Float.NaN;
+	private float environmentalDecayFactor = -1;
+	private float baseDecayModifier = -1;
 	private String preservingString;
 	
 	/***
