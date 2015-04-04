@@ -3,6 +3,8 @@ package com.bioxx.tfc.api.Crafting;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bioxx.tfc.TileEntities.TEBarrel;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -15,15 +17,21 @@ public class BarrelManager
 	}
 
 	private List<BarrelRecipe> recipes;
+	private List<BarrelPreservativeRecipe> preservativeRecipes;
 
 	private BarrelManager()
 	{
 		recipes = new ArrayList<BarrelRecipe>();
+		preservativeRecipes = new ArrayList<BarrelPreservativeRecipe>();
 	}
 
 	public void addRecipe(BarrelRecipe recipe)
 	{
 		recipes.add(recipe);
+	}
+	
+	public void addPreservative(BarrelPreservativeRecipe recipe) {
+		preservativeRecipes.add(recipe);
 	}
 
 	public BarrelRecipe findMatchingRecipe(ItemStack item, FluidStack fluid, boolean sealed, int techLevel)
@@ -37,9 +45,25 @@ public class BarrelManager
 		}
 		return null;
 	}
+	
+	public BarrelPreservativeRecipe findMatchingPreservativeRepice(TEBarrel barrel, ItemStack item, FluidStack fluid, boolean sealed)
+	{
+		for(BarrelPreservativeRecipe recipe : preservativeRecipes){
+			if(recipe.checkForPreservation(barrel, fluid, item, sealed))
+				return recipe;
+		}
+		return null;
+	}
 
 	public List<BarrelRecipe> getRecipes()
 	{
 		return recipes;
 	}
+	
+	public List<BarrelPreservativeRecipe> getPreservatives()
+	{
+		return preservativeRecipes;
+	}
+
+
 }

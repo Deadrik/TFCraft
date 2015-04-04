@@ -31,6 +31,8 @@ import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.BarrelBriningRecipe;
+import com.bioxx.tfc.api.Crafting.BarrelManager;
+import com.bioxx.tfc.api.Crafting.BarrelPreservativeRecipe;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
@@ -340,20 +342,20 @@ public class GuiLargeVessel extends GuiContainerTFC
 				}
 			}
 			else if (vesselTE.recipe == null && vesselTE.getSealed() && vesselTE.getFluidStack() != null && inStack != null && inStack.getItem() instanceof IFood &&
-					vesselTE.getFluidStack().getFluid() == TFCFluids.VINEGAR)
+					vesselTE.getFluidStack().getFluid() == TFCFluids.VINEGAR && !Food.isPickled(inStack) && Food.getWeight(inStack) / vesselTE.getFluidStack().amount <= Global.FOOD_MAX_WEIGHT / vesselTE.getMaxLiquid())
 			{
-				if (!Food.isPickled(inStack) && Food.getWeight(inStack) / vesselTE.getFluidStack().amount <= Global.FOOD_MAX_WEIGHT / vesselTE.getMaxLiquid())
+				if ((((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Fruit || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable ||
+						((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein || ((IFood) inStack.getItem()) == TFCItems.Cheese) &&
+						Food.isBrined(inStack))
 				{
-					if ((((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Fruit || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable ||
-							((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein || ((IFood) inStack.getItem()) == TFCItems.Cheese) &&
-							Food.isBrined(inStack))
-					{
-						drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.barrel.pickling"), guiLeft + 88, guiTop + 72, 0x555555);
-					}
+					drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.barrel.pickling"), guiLeft + 88, guiTop + 72, 0x555555);
 				}
-				else if (Food.isPickled(inStack) && Food.getWeight(inStack) / vesselTE.getFluidStack().amount <= Global.FOOD_MAX_WEIGHT / vesselTE.getMaxLiquid() * 2)
-				{
-					drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.barrel.preserving"), guiLeft + 88, guiTop + 72, 0x555555);
+			}
+			else
+			{
+				BarrelPreservativeRecipe preservative = BarrelManager.getInstance().findMatchingPreservativeRepice(vesselTE, inStack, vesselTE.getFluidStack(), vesselTE.getSealed());
+				if(preservative!=null){
+					drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal(preservative.getPreservingString()), guiLeft+88, guiTop+72, 0x555555);
 				}
 			}
 		}
