@@ -920,9 +920,9 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		// 5000mb / 160oz = 31.25
 		// 10000mb / 160oz = 62.5
 		// FluidStack naturally only takes int so I rounded down
-		BarrelPreservativeRecipe picklePreservative = new BarrelPreservativeRecipe(new FluidStack(TFCFluids.VINEGAR,31),"gui.barrel.preserving").setAllowDairy(true).setAllowFruit(true).setAllowProtien(true).setAllowVegetable(true).setRequiresPickled(true).setEnvironmentalDecayFactor(0.25f).setBaseDecayModifier(0.1f).setRequiresSealed(true);
-		BarrelPreservativeRecipe brineInBrinePreservative = new BarrelPreservativeRecipe(new FluidStack(TFCFluids.BRINE,62),"gui.barrel.preserving").setAllowDairy(true).setAllowFruit(true).setAllowProtien(true).setAllowVegetable(true).setRequiresBrined(true).setEnvironmentalDecayFactor(0.75f).setRequiresSealed(true);
-		BarrelPreservativeRecipe brineInVinegarPreservative = new BarrelPreservativeRecipe(new FluidStack(TFCFluids.VINEGAR,62),"gui.barrel.preserving").setAllowDairy(true).setAllowFruit(true).setAllowProtien(true).setAllowVegetable(true).setRequiresBrined(true).setEnvironmentalDecayFactor(0.75f).setRequiresSealed(true);
+		BarrelPreservativeRecipe picklePreservative = new BarrelPreservativeRecipe(new FluidStack(TFCFluids.VINEGAR,31),"gui.barrel.preserving").setAllowGrains(false).setEnvironmentalDecayFactor(0.25f).setBaseDecayModifier(0.1f).setRequiresSealed(true);
+		BarrelPreservativeRecipe brineInBrinePreservative = new BarrelPreservativeRecipe(new FluidStack(TFCFluids.BRINE,62),"gui.barrel.preserving").setAllowGrains(false).setEnvironmentalDecayFactor(0.75f).setRequiresSealed(true);
+		BarrelPreservativeRecipe brineInVinegarPreservative = new BarrelPreservativeRecipe(new FluidStack(TFCFluids.VINEGAR,62),"gui.barrel.preserving").setAllowGrains(false).setRequiresBrined(true).setEnvironmentalDecayFactor(0.75f).setRequiresSealed(true);
 		BarrelManager.getInstance().addPreservative(picklePreservative);
 		BarrelManager.getInstance().addPreservative(brineInBrinePreservative);
 		BarrelManager.getInstance().addPreservative(brineInVinegarPreservative);

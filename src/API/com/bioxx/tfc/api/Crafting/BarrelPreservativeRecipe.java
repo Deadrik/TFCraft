@@ -18,11 +18,11 @@ public class BarrelPreservativeRecipe {
 	
 	private boolean requiresSealed = false;
 	
-	private boolean allowGrains = false;
-	private boolean allowProteins = false;
-	private boolean allowVegetables = false;
-	private boolean allowFruit = false;
-	private boolean allowDairy = false;
+	private boolean allowGrains = true;
+	private boolean allowProteins = true;
+	private boolean allowVegetables = true;
+	private boolean allowFruit = true;
+	private boolean allowDairy = true;
 	
 	private FluidStack liquidPerOz = null;
 	
