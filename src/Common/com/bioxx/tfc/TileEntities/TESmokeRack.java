@@ -110,6 +110,7 @@ public class TESmokeRack extends NetworkTileEntity implements IInventory
 				driedCounter[i] = (int) (TFC_Time.getTotalHours() - Food.getDried(itemstack));
 			else
 				driedCounter[i] = (int)TFC_Time.getTotalHours();//Reset the counter if its a new item
+			flag = true;
 		}
 		if(flag)
 		{
