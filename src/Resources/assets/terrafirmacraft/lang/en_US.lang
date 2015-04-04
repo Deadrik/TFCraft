@@ -2481,6 +2481,15 @@ gui.metal.Iron=Iron
 gui.tier=Tier
 gui.progress=Progress
 gui.fuel=Fuel
+gui.Green Apple=Green Apple Tree
+gui.Red Apple=Red Apple Tree
+gui.Banana=Banana Tree
+gui.Cherry=Cherry Tree
+gui.Lemon=Lemon Tree
+gui.Olive=Olive Tree
+gui.Orange=Orange Tree
+gui.Peach=Peach Tree
+gui.Plum=Plum Tree
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Must use under flowing water.

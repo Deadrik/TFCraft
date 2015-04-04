@@ -355,7 +355,7 @@ public class BlockFruitWood extends BlockTerraContainer
 		}
 	}
 
-	public String getType(int meta)
+	public static String getType(int meta)
 	{
 		switch(meta)
 		{

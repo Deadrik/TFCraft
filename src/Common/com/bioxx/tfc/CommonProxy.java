@@ -489,6 +489,8 @@ public class CommonProxy
 		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WCrucible.callbackRegister");
 		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WFirepit.callbackRegister");
 		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WForge.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WFruitLeaves.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WFruitTreeWood.callbackRegister");
 
 		// I haven't decided if this is OP or not. Useful for debugging though, so uncomment when needing to check farmland nutrient %.
 		//FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WFarmland.callbackRegister");
