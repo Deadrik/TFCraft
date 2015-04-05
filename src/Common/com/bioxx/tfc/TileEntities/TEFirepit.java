@@ -540,7 +540,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			if(te.getStackInSlot(0) != null)
 			{
 				ItemStack is = te.getStackInSlot(0);
-				if(Food.getSmokeCounter(is) < 12)
+				if (Food.getSmokeCounter(is) < Food.SMOKEHOURS)
 					Food.setSmokeCounter(is, Food.getSmokeCounter(is)+1);
 				else
 					Food.setFuelProfile(is, EnumFuelMaterial.getFuelProfile(fuelTasteProfile));
@@ -548,7 +548,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			if(te.getStackInSlot(1) != null)
 			{
 				ItemStack is = te.getStackInSlot(1);
-				if(Food.getSmokeCounter(is) < 12)
+				if (Food.getSmokeCounter(is) < Food.SMOKEHOURS)
 					Food.setSmokeCounter(is, Food.getSmokeCounter(is)+1);
 				else
 					Food.setFuelProfile(is, EnumFuelMaterial.getFuelProfile(fuelTasteProfile));

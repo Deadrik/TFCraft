@@ -12,6 +12,7 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 public class Food 
 {
 	public static final int DRYHOURS = 4;
+	public static final int SMOKEHOURS = 12;
 
 	private static NBTTagCompound getProcTag(ItemStack is)
 	{

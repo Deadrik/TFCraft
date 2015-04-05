@@ -18,6 +18,7 @@ public class TESmokeRack extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[2];
 	public int[] driedCounter = new int[]{0,0};
+	private int dryTimer = 0;
 
 	//temporary smoke timer that should not be saved
 	public int lastSmokedTime = 0;
@@ -37,6 +38,12 @@ public class TESmokeRack extends NetworkTileEntity implements IInventory
 			env = 0.75f; base = 0.75f;
 		}
 
+		this.dryTimer++;
+		if (dryTimer > 1000)
+		{
+			dryTimer = 0;
+			dryFoods();
+		}
 
 		if(!worldObj.isRaining() && TFC_Time.getTotalHours() > this.lastSmokedTime+1)
 			TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord, env, base);
@@ -125,6 +132,20 @@ public class TESmokeRack extends NetworkTileEntity implements IInventory
 		Food.setDried(is, (int)TFC_Time.getTotalHours()-this.driedCounter[i]);
 		this.setInventorySlotContents(i, null);
 		return is;
+	}
+
+	public void dryFoods()
+	{
+		for (int i = 0; i < storage.length; i++)
+		{
+			if (getStackInSlot(i) != null)
+			{
+				ItemStack is = getStackInSlot(i);
+				Food.setDried(is, (int) TFC_Time.getTotalHours() - this.driedCounter[i]);
+				driedCounter[i] = (int) (TFC_Time.getTotalHours() - Food.getDried(is));
+			}
+
+		}
 	}
 
 	@Override

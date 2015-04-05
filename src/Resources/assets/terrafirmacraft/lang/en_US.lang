@@ -2355,6 +2355,7 @@ gui.Reach.Medium=Medium
 gui.Reach.Far=Far
 
 gui.hoursRemaining=Hours Remaining
+gui.daysRemaining=Days Remaining
 gui.infinite=Infinite
 
 #== Food ==
@@ -2497,6 +2498,7 @@ gui.weaving=Weaving
 gui.eggs=Eggs
 gui.fertEggs=Fertilized Eggs
 gui.logs=Logs
+gui.gems=Gems
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Must use under flowing water.

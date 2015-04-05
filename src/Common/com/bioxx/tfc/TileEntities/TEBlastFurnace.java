@@ -43,6 +43,8 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 	public ItemStack fireItemStacks[];
 	public ItemStack outputItemStacks[];
 
+	public static final int ORE_SLOT1 = 0;
+
 	//private int prevStackSize;
 	//private int numAirBlocks;
 

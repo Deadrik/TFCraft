@@ -2,8 +2,6 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
 
-import scala.collection.script.End;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -54,6 +52,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	public static final int MODE_IN = 0;
 	public static final int MODE_OUT = 1;
+	public static final int INPUT_SLOT = 0;
 	public BarrelRecipe recipe;
 	//temporary field. No need to save
 	public boolean shouldDropItem = true;
@@ -184,7 +183,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			if(is != null)
 				count++;
 		}
-		if(storage[0] != null && count == 1)
+		if (storage[INPUT_SLOT] != null && count == 1)
 			return 0;
 		return count;
 	}
@@ -240,7 +239,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	public ItemStack getInputStack()
 	{
-		return storage[0];
+		return storage[INPUT_SLOT];
 	}
 
 	public FluidStack getFluidStack()
@@ -583,7 +582,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		if(!worldObj.isRemote)
 		{
-			ItemStack itemstack = storage[0]; 
+			ItemStack itemstack = storage[INPUT_SLOT];
 			BarrelPreservativeRecipe preservative = BarrelManager.getInstance().findMatchingPreservativeRepice(this, itemstack, fluid, sealed);
 			if (itemstack != null && fluid != null && fluid.getFluid() == TFCFluids.FRESHWATER)
 			{
@@ -687,7 +686,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				{
 					if(storage[i] != null)
 					{
-						storage[0] = storage[i].copy();
+						storage[INPUT_SLOT] = storage[i].copy();
 						storage[i] = null;
 						break;
 					}
@@ -839,13 +838,13 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				{
 					int[] profile = Food.getFoodTasteProfile(inIS);
 					float ratio = Math.min((Food.getWeight(getInputStack())-Food.getDecay(inIS))/(Global.FOOD_MAX_WEIGHT/8), 1.0f);
-					Food.setSweetMod(is, (int)Math.floor(profile[0]*ratio));
+					Food.setSweetMod(is, (int) Math.floor(profile[INPUT_SLOT] * ratio));
 					Food.setSourMod(is, (int)Math.floor(profile[1]*ratio));
 					Food.setSaltyMod(is, (int)Math.floor(profile[2]*ratio));
 					Food.setBitterMod(is, (int)Math.floor(profile[3]*ratio));
 					Food.setSavoryMod(is, (int)Math.floor(profile[4]*ratio));
 					Food.setInfusion(is, inIS.getItem().getUnlocalizedName());
-					this.storage[0] = null;
+					this.storage[INPUT_SLOT] = null;
 				}
 
 				this.actionEmpty();

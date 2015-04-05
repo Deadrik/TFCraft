@@ -8,6 +8,7 @@ import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -33,6 +34,8 @@ import com.bioxx.tfc.Food.FloraIndex;
 import com.bioxx.tfc.Food.FloraManager;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCoal;
+import com.bioxx.tfc.Items.ItemGem;
+import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEBerryBush;
@@ -54,6 +57,10 @@ import com.bioxx.tfc.TileEntities.TENestBox;
 import com.bioxx.tfc.TileEntities.TEOilLamp;
 import com.bioxx.tfc.TileEntities.TEOre;
 import com.bioxx.tfc.TileEntities.TEPottery;
+import com.bioxx.tfc.TileEntities.TESapling;
+import com.bioxx.tfc.TileEntities.TESluice;
+import com.bioxx.tfc.TileEntities.TESmokeRack;
+import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
@@ -117,6 +124,9 @@ public class WAILAData implements IWailaDataProvider
 		else if (accessor.getBlock() instanceof BlockPartial)
 			return partialStack(accessor, config);
 		
+		else if (accessor.getTileEntity() instanceof TEWorldItem)
+			return worldItemStack(accessor, config);
+
 		return null;
 	}
 
@@ -134,6 +144,9 @@ public class WAILAData implements IWailaDataProvider
 
 		else if (accessor.getTileEntity() instanceof TEOre)
 			currenttip = oreHead(itemStack, currenttip, accessor, config);
+
+		else if (accessor.getTileEntity() instanceof TESmokeRack)
+			currenttip.set(0, EnumChatFormatting.WHITE.toString() + TFC_Core.translate("tile.SmokeRack.name"));
 
 		return currenttip;
 	}
@@ -195,6 +208,15 @@ public class WAILAData implements IWailaDataProvider
 
 		else if (accessor.getTileEntity() instanceof TEPottery)
 			currenttip = potteryBody(itemStack, currenttip, accessor, config);
+
+		else if (accessor.getTileEntity() instanceof TESapling)
+			currenttip = saplingBody(itemStack, currenttip, accessor, config);
+
+		else if (accessor.getTileEntity() instanceof TESluice)
+			currenttip = sluiceBody(itemStack, currenttip, accessor, config);
+
+		else if (accessor.getTileEntity() instanceof TESmokeRack)
+			currenttip = smokeRackBody(itemStack, currenttip, accessor, config);
 
 		else if (accessor.getBlock() == TFCBlocks.Torch)
 			currenttip = torchBody(itemStack, currenttip, accessor, config);
@@ -290,14 +312,27 @@ public class WAILAData implements IWailaDataProvider
 		reg.registerBodyProvider(new WAILAData(), TEOilLamp.class);
 		reg.registerNBTProvider(new WAILAData(), TEOilLamp.class);
 
-		reg.registerBodyProvider(new WAILAData(), BlockTorch.class);
-		reg.registerNBTProvider(new WAILAData(), BlockTorch.class);
-
 		reg.registerStackProvider(new WAILAData(), BlockPartial.class);
 		reg.registerNBTProvider(new WAILAData(), BlockPartial.class);
 
 		reg.registerBodyProvider(new WAILAData(), TEPottery.class);
 		reg.registerNBTProvider(new WAILAData(), TEPottery.class);
+
+		reg.registerBodyProvider(new WAILAData(), TESapling.class);
+		reg.registerNBTProvider(new WAILAData(), TESapling.class);
+
+		reg.registerBodyProvider(new WAILAData(), TESluice.class);
+		reg.registerNBTProvider(new WAILAData(), TESluice.class);
+
+		reg.registerHeadProvider(new WAILAData(), TESmokeRack.class);
+		reg.registerBodyProvider(new WAILAData(), TESmokeRack.class);
+		reg.registerNBTProvider(new WAILAData(), TESmokeRack.class);
+
+		reg.registerBodyProvider(new WAILAData(), BlockTorch.class);
+		reg.registerNBTProvider(new WAILAData(), BlockTorch.class);
+
+		reg.registerStackProvider(new WAILAData(), TEWorldItem.class);
+		reg.registerNBTProvider(new WAILAData(), TEWorldItem.class);
 	}
 
 	// Stacks
@@ -362,15 +397,7 @@ public class WAILAData implements IWailaDataProvider
 	public ItemStack ingotPileStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		NBTTagCompound tag = accessor.getNBTData();
-		NBTTagList tagList = tag.getTagList("Items", 10);
-		ItemStack storage[] = new ItemStack[1];
-		for (int i = 0; i < tagList.tagCount(); i++)
-		{
-			NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
-			byte slot = itemTag.getByte("Slot");
-			if (slot >= 0 && slot < storage.length)
-				storage[slot] = ItemStack.loadItemStackFromNBT(itemTag);
-		}
+		ItemStack storage[] = getStorage(tag, accessor.getTileEntity());
 
 		if (storage[0] != null)
 			return storage[0];
@@ -382,17 +409,8 @@ public class WAILAData implements IWailaDataProvider
 	{
 		NBTTagCompound tag = accessor.getNBTData();
 		boolean finished = tag.getBoolean("finished");
-		NBTTagList tagList = tag.getTagList("Items", 10);
-		ItemStack storage[] = new ItemStack[2];
+		ItemStack storage[] = getStorage(tag, accessor.getTileEntity());
 
-		for (int i = 0; i < tagList.tagCount(); i++)
-		{
-			NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
-			byte slot = itemTag.getByte("Slot");
-			if (slot >= 0 && slot < storage.length)
-				storage[slot] = ItemStack.loadItemStackFromNBT(itemTag);
-		}
-		
 		if (finished && storage[1] != null)
 		{
 			return storage[1];
@@ -460,6 +478,13 @@ public class WAILAData implements IWailaDataProvider
 		int typeID = tag.getShort("typeID");
 
 		return new ItemStack(Block.getBlockById(typeID), 1, metaID);
+	}
+
+	public ItemStack worldItemStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		ItemStack storage[] = getStorage(tag, accessor.getTileEntity());
+		return storage[0];
 	}
 
 	// Heads
@@ -543,15 +568,8 @@ public class WAILAData implements IWailaDataProvider
 		int tier = tag.getInteger("Tier");
 		currenttip.add(TFC_Core.translate("gui.tier") + " : " + tier);
 
-		NBTTagList tagList = tag.getTagList("Items", 10);
-		ItemStack flux = null;
-		for (int i = 0; i < tagList.tagCount(); i++)
-		{
-			NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
-			byte slot = itemTag.getByte("Slot");
-			if (slot == TEAnvil.FLUX_SLOT)
-				flux = ItemStack.loadItemStackFromNBT(itemTag);
-		}
+		ItemStack storage[] = getStorage(tag, accessor.getTileEntity());
+		ItemStack flux = storage[TEAnvil.FLUX_SLOT];
 
 		if (flux != null && flux.getItem() == TFCItems.Powder && flux.getItemDamage() == 0 && flux.stackSize > 0)
 			currenttip.add(TFC_Core.translate("item.Powder.Flux.name") + " : " + flux.stackSize);
@@ -562,16 +580,9 @@ public class WAILAData implements IWailaDataProvider
 	public List<String> barrelBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		TEBarrel te = (TEBarrel) accessor.getTileEntity();
-		ItemStack inStack = null;
-
 		NBTTagCompound tag = accessor.getNBTData();
-
-		NBTTagList tagList = tag.getTagList("Items", 10);
-		NBTTagCompound itemTag = tagList.getCompoundTagAt(0);
-		byte slot = itemTag.getByte("Slot");
-
-		if (slot >= 0 && slot < te.storage.length)
-			inStack = ItemStack.loadItemStackFromNBT(itemTag);
+		ItemStack storage[] = getStorage(tag, te);
+		ItemStack inStack = storage[te.INPUT_SLOT];
 
 		Boolean sealed = te.getSealed();
 		int sealTime = accessor.getNBTInteger(tag, "SealTime");
@@ -648,14 +659,9 @@ public class WAILAData implements IWailaDataProvider
 		int oreCount = tag.getByte("oreCount");
 		int stackSize = tag.getInteger("maxValidStackSize");
 		float temperature = 0;
-		ItemStack oreStack = null;
 
-		NBTTagList tagList = tag.getTagList("Items", 10);
-		NBTTagCompound itemTag = tagList.getCompoundTagAt(0);
-		byte slot = itemTag.getByte("Slot");
-
-		if (slot >= 0 && slot < te.fireItemStacks.length)
-			oreStack = ItemStack.loadItemStackFromNBT(itemTag);
+		ItemStack storage[] = getStorage(tag, te);
+		ItemStack oreStack = storage[TEBlastFurnace.ORE_SLOT1];
 
 		HeatRegistry manager = HeatRegistry.getInstance();
 
@@ -767,20 +773,12 @@ public class WAILAData implements IWailaDataProvider
 	public List<String> firepitBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		NBTTagCompound tag = accessor.getNBTData();
-		NBTTagList tagList = tag.getTagList("Items", 10);
-		ItemStack fireItemStacks[] = new ItemStack[11];
-		for (int i = 0; i < tagList.tagCount(); i++)
-		{
-			NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
-			byte slot = itemTag.getByte("Slot");
-			if (slot >= 0 && slot < fireItemStacks.length)
-				fireItemStacks[slot] = ItemStack.loadItemStackFromNBT(itemTag);
-		}
+		ItemStack storage[] = getStorage(tag, accessor.getTileEntity());
 
-		if (fireItemStacks != null)
+		if (storage != null)
 		{
 			int fuelCount = 0;
-			for (ItemStack is : fireItemStacks)
+			for (ItemStack is : storage)
 			{
 				if (is != null && is.getItem() != null && (is.getItem() == TFCItems.Logs || is.getItem() == Item.getItemFromBlock(TFCBlocks.Peat)))
 					fuelCount++;
@@ -796,24 +794,16 @@ public class WAILAData implements IWailaDataProvider
 	public List<String> forgeBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		NBTTagCompound tag = accessor.getNBTData();
-		NBTTagList tagList = tag.getTagList("Items", 10);
-		ItemStack fireItemStacks[] = new ItemStack[14];
-		for (int i = 0; i < tagList.tagCount(); i++)
-		{
-			NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
-			byte slot = itemTag.getByte("Slot");
-			if (slot >= 0 && slot < fireItemStacks.length)
-				fireItemStacks[slot] = ItemStack.loadItemStackFromNBT(itemTag);
-		}
+		ItemStack storage[] = getStorage(tag, accessor.getTileEntity());
 
-		if (fireItemStacks != null)
+		if (storage != null)
 		{
 			int fuelCount = 0;
 			boolean hasMold = false;
 
 			for (int i = 5; i <= 9; i++) // Fuels are stored in slots 5 through 9 per te.HandleFuelStack()
 			{
-				if (fireItemStacks[i] != null && fireItemStacks[i].getItem() != null && fireItemStacks[i].getItem() instanceof ItemCoal)
+				if (storage[i] != null && storage[i].getItem() != null && storage[i].getItem() instanceof ItemCoal)
 					fuelCount++;
 			}
 
@@ -822,7 +812,7 @@ public class WAILAData implements IWailaDataProvider
 
 			for (int j = 10; j <= 13; j++) // Molds are stored in slots 7 through 9 per te.getMold()
 			{
-				if (fireItemStacks[j] != null && fireItemStacks[j].getItem() == TFCItems.CeramicMold && fireItemStacks[j].stackSize > 0)
+				if (storage[j] != null && storage[j].getItem() == TFCItems.CeramicMold && storage[j].stackSize > 0)
 					hasMold = true;
 			}
 			if (hasMold)
@@ -845,17 +835,8 @@ public class WAILAData implements IWailaDataProvider
 	public List<String> logPileBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		NBTTagCompound tag = accessor.getNBTData();
-		NBTTagList tagList = tag.getTagList("Items", 10);
-		ItemStack storage[] = new ItemStack[4];
+		ItemStack storage[] = getStorage(tag, accessor.getTileEntity());
 		boolean counted[] = new boolean[] {false, false, false, false}; // Used to keep track of which slots have already been combined into others.
-
-		for (int i = 0; i < tagList.tagCount(); i++)
-		{
-			NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
-			byte slot = itemTag.getByte("Slot");
-			if (slot >= 0 && slot < storage.length)
-				storage[slot] = ItemStack.loadItemStackFromNBT(itemTag);
-		}
 
 		/**
 		 * Rather than just display the number of logs in each slot, I wanted to display the total number of each type of log in the pile.
@@ -866,7 +847,7 @@ public class WAILAData implements IWailaDataProvider
 		{
 			if (storage[j] != null && !counted[j]) // Make sure the slot is not empty, and has not already been accounted for
 			{
-				String log = storage[j].getItem().getItemStackDisplayName(storage[j]) + " : "; // Have to pass the ItemStack in again, since translating getUnlocalizedName() doesn't work. :(
+				String log = storage[j].getDisplayName() + " : ";
 				int count = storage[j].stackSize;
 				for (int k = j + 1; k < storage.length; k++) // Loop through all slots after the one being checked
 				{
@@ -888,16 +869,7 @@ public class WAILAData implements IWailaDataProvider
 		NBTTagCompound tag = accessor.getNBTData();
 		boolean finished = tag.getBoolean("finished");
 		int wovenStrings = tag.getInteger("cloth");
-		NBTTagList tagList = tag.getTagList("Items", 10);
-		ItemStack storage[] = new ItemStack[2];
-
-		for (int i = 0; i < tagList.tagCount(); i++)
-		{
-			NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
-			byte slot = itemTag.getByte("Slot");
-			if (slot >= 0 && slot < storage.length)
-				storage[slot] = ItemStack.loadItemStackFromNBT(itemTag);
-		}
+		ItemStack storage[] = getStorage(tag, accessor.getTileEntity());
 		
 		if (!finished && storage[0] != null)
 		{
@@ -906,15 +878,14 @@ public class WAILAData implements IWailaDataProvider
 
 			if (storage[0].stackSize < maxStrings) // The loom isn't full yet
 			{
-				String name = storage[0].getItem().getItemStackDisplayName(storage[0]) + " : ";
+				String name = storage[0].getDisplayName() + " : ";
 				currenttip.add(name + storage[0].stackSize + "/" + maxStrings);
 			}
 			else // Weaving in progress
 			{
-				Item cloth = recipe.getOutItemStack().getItem();
-				String clothName = cloth.getItemStackDisplayName(recipe.getOutItemStack()) + " : ";
+				String name = recipe.getOutItemStack().getDisplayName() + " : ";
 				int percent = (int) (100.0 * wovenStrings / maxStrings);
-				currenttip.add(TFC_Core.translate("gui.weaving") + " " + clothName + String.valueOf(percent) + "%");
+				currenttip.add(TFC_Core.translate("gui.weaving") + " " + name + String.valueOf(percent) + "%");
 			}
 		}
 
@@ -934,16 +905,9 @@ public class WAILAData implements IWailaDataProvider
 	public List<String> nestBoxBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		NBTTagCompound tag = accessor.getNBTData();
-		NBTTagList tagList = tag.getTagList("Items", 10);
-		ItemStack storage[] = new ItemStack[4];
-		for (int i = 0; i < tagList.tagCount(); i++)
-		{
-			NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
-			byte slot = itemTag.getByte("Slot");
-			if (slot >= 0 && slot < storage.length)
-				storage[slot] = ItemStack.loadItemStackFromNBT(itemTag);
-		}
+		ItemStack storage[] = getStorage(tag, accessor.getTileEntity());
 		int eggCount = 0, fertEggCount = 0;
+
 		for (ItemStack is : storage)
 		{
 			if (is != null && is.getItem() == TFCItems.Egg)
@@ -1096,6 +1060,83 @@ public class WAILAData implements IWailaDataProvider
 		return currenttip;
 	}
 
+	public List<String> saplingBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		Long growTime = tag.getLong("growTime");
+		int days = (int) ((growTime - TFC_Time.getTotalTicks()) / TFC_Time.dayLength);
+		if (days > 0)
+			currenttip.add(days + " " + TFC_Core.translate("gui.daysRemaining"));
+
+		return currenttip;
+	}
+
+	public List<String> sluiceBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		ItemStack storage[] = getStorage(tag, accessor.getTileEntity());
+		int soilAmount = tag.getInteger("soilAmount");
+		
+		if (soilAmount == -1)
+			currenttip.add(TFC_Core.translate("gui.Sluice.Overworked"));
+		else if (soilAmount > 0)
+		{
+			currenttip.add(TFC_Core.translate("gui.Sluice.Soil") + " : " + soilAmount + "/50");
+		}
+		
+		int gemCount = 0, oreCount = 0;
+		for (ItemStack is : storage)
+		{
+			if (is != null)
+			{
+				if (is.getItem() instanceof ItemGem)
+					gemCount++;
+				else if (is.getItem() instanceof ItemOre)
+					oreCount++;
+			}
+		}
+		
+		if (gemCount > 0)
+			currenttip.add(TFC_Core.translate("gui.gems") + " : " + gemCount);
+		if (oreCount > 0)
+			currenttip.add(TFC_Core.translate("gui.Bloomery.Ore") + " : " + oreCount);
+
+		return currenttip;
+	}
+
+	public List<String> smokeRackBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		ItemStack storage[] = getStorage(tag, accessor.getTileEntity());
+
+		for (int i = 0; i < storage.length; i++)
+		{
+			if (storage[i] != null)
+			{
+				int dryHours = Food.DRYHOURS - Food.getDried(storage[i]);
+				int smokeHours = Food.SMOKEHOURS - Food.getSmokeCounter(storage[i]);
+
+				if (smokeHours > 0 && smokeHours < Food.SMOKEHOURS)
+				{
+					float percent = Helper.roundNumber(100 - (100f * smokeHours) / Food.SMOKEHOURS, 10);
+					currenttip.add(TFC_Core.translate("word.smoked") + " " + storage[i].getDisplayName());
+					currenttip.add("\u00B7 " + smokeHours + " " + TFC_Core.translate("gui.hoursRemaining") + " (" + percent + "%)");
+				}
+				else if (dryHours > 0 && dryHours < Food.DRYHOURS)
+				{
+					float percent = Helper.roundNumber(100 - (100f * dryHours) / Food.DRYHOURS, 10);
+					currenttip.add(TFC_Core.translate("word.dried") + " " + storage[i].getDisplayName());
+					currenttip.add("\u00B7 " + dryHours + " " + TFC_Core.translate("gui.hoursRemaining") + " (" + percent + "%)");
+				}
+				else
+					currenttip.add(storage[i].getDisplayName());
+			}
+
+		}
+
+		return currenttip;
+	}
+
 	public List<String> torchBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		if (accessor.getMetadata() < 8 && TFCOptions.torchBurnTime != 0)
@@ -1110,6 +1151,27 @@ public class WAILAData implements IWailaDataProvider
 	}
 
 	// Other
+	private ItemStack[] getStorage(NBTTagCompound tag, TileEntity te)
+	{
+		if (te instanceof IInventory)
+		{
+			IInventory inv = (IInventory) te;
+			NBTTagList tagList = tag.getTagList("Items", 10);
+			ItemStack storage[] = new ItemStack[inv.getSizeInventory()];
+			for (int i = 0; i < tagList.tagCount(); i++)
+			{
+				NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
+				byte slot = itemTag.getByte("Slot");
+				if (slot >= 0 && slot < storage.length)
+					storage[slot] = ItemStack.loadItemStackFromNBT(itemTag);
+			}
+
+			return storage;
+		}
+
+		return null;
+	}
+
 	private int getOreGrade(TEOre te, int ore)
 	{
 		if (te != null)
