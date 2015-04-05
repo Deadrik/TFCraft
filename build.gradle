@@ -55,7 +55,7 @@ repositories {
  
 dependencies {
     // I dont have to specify NEI.. because gradle magic. aka: transitive dependency resolution
-    compile "mcp.mobius.waila:Waila:1.5.8a_1.7.10"
+    compile "mcp.mobius.waila:Waila:1.5.10_1.7.10"
 }
 }
 
