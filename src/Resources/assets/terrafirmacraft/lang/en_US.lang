@@ -2354,6 +2354,9 @@ gui.Reach.Short=Short
 gui.Reach.Medium=Medium
 gui.Reach.Far=Far
 
+gui.hoursRemaining=Hours Remaining
+gui.infinite=Infinite
+
 #== Food ==
 gui.food.fruit=Fruit
 gui.food.vegetable=Vegetable
@@ -2479,7 +2482,6 @@ gui.growth=Growth
 gui.mature=Mature
 gui.metal.Iron=Iron
 gui.tier=Tier
-gui.progress=Progress
 gui.fuel=Fuel
 gui.Green Apple=Green Apple Tree
 gui.Red Apple=Red Apple Tree
@@ -2492,6 +2494,9 @@ gui.Peach=Peach Tree
 gui.Plum=Plum Tree
 gui.pile=Pile
 gui.weaving=Weaving
+gui.eggs=Eggs
+gui.fertEggs=Fertilized Eggs
+gui.logs=Logs
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Must use under flowing water.

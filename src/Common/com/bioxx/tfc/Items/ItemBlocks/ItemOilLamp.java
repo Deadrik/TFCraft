@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCFluids;
@@ -149,9 +150,9 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 		{
 			FluidStack fs = FluidStack.loadFluidStackFromNBT(is.getTagCompound());
 			if(fs.getFluid() == TFCFluids.OLIVEOIL)
-				arraylist.add(((fs.amount)*TFCOptions.oilLampFuelMult)+" Hours Remaining ("+Helper.roundNumber((fs.amount/250f)*100f, 10)+"%)");
+				arraylist.add(((fs.amount) * TFCOptions.oilLampFuelMult) + " " + TFC_Core.translate("gui.hoursRemaining") + " (" + Helper.roundNumber((fs.amount / 250f) * 100f, 10) + "%)");
 			if(fs.getFluid() == TFCFluids.LAVA)
-				arraylist.add("Infinite Hours Remaining");
+				arraylist.add(TFC_Core.translate("gui.infinite") + " " + TFC_Core.translate("gui.hoursRemaining"));
 		}
 	}
 

@@ -18,10 +18,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.Blocks.BlockMetalTrapDoor;
+import com.bioxx.tfc.Blocks.BlockPartial;
 import com.bioxx.tfc.Blocks.Devices.BlockAnvil;
 import com.bioxx.tfc.Blocks.Flora.BlockBerryBush;
 import com.bioxx.tfc.Blocks.Flora.BlockFruitLeaves;
 import com.bioxx.tfc.Blocks.Flora.BlockFruitWood;
+import com.bioxx.tfc.Blocks.Vanilla.BlockTorch;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
@@ -48,7 +50,10 @@ import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TELoom;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
 import com.bioxx.tfc.TileEntities.TEMetalTrapDoor;
+import com.bioxx.tfc.TileEntities.TENestBox;
+import com.bioxx.tfc.TileEntities.TEOilLamp;
 import com.bioxx.tfc.TileEntities.TEOre;
+import com.bioxx.tfc.TileEntities.TEPottery;
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
@@ -66,8 +71,9 @@ import com.bioxx.tfc.api.Crafting.LoomManager;
 import com.bioxx.tfc.api.Crafting.LoomRecipe;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.Util.Helper;
 
-public class WAILADataTE implements IWailaDataProvider
+public class WAILAData implements IWailaDataProvider
 {
 	@Override
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
@@ -93,9 +99,6 @@ public class WAILADataTE implements IWailaDataProvider
 		else if (accessor.getTileEntity() instanceof TEIngotPile)
 			return ingotPileStack(accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEOre)
-			return oreStack(accessor, config);
-
 		else if (accessor.getTileEntity() instanceof TELoom)
 			return loomStack(accessor, config);
 
@@ -104,6 +107,15 @@ public class WAILADataTE implements IWailaDataProvider
 
 		else if (accessor.getTileEntity() instanceof TEMetalTrapDoor)
 			return metalTrapDoorStack(accessor, config);
+
+		else if (accessor.getTileEntity() instanceof TEOilLamp)
+			return oilLampStack(accessor, config);
+
+		else if (accessor.getTileEntity() instanceof TEOre)
+			return oreStack(accessor, config);
+
+		else if (accessor.getBlock() instanceof BlockPartial)
+			return partialStack(accessor, config);
 		
 		return null;
 	}
@@ -163,9 +175,6 @@ public class WAILADataTE implements IWailaDataProvider
 		else if (accessor.getTileEntity() instanceof TEFruitLeaves)
 			currenttip = fruitLeavesBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEOre)
-			currenttip = oreBody(itemStack, currenttip, accessor, config);
-
 		else if (accessor.getTileEntity() instanceof TELogPile)
 			currenttip = logPileBody(itemStack, currenttip, accessor, config);
 
@@ -174,6 +183,21 @@ public class WAILADataTE implements IWailaDataProvider
 
 		else if (accessor.getTileEntity() instanceof TEMetalTrapDoor)
 			currenttip = metalTrapDoorBody(itemStack, currenttip, accessor, config);
+
+		else if (accessor.getTileEntity() instanceof TENestBox)
+			currenttip = nestBoxBody(itemStack, currenttip, accessor, config);
+
+		else if (accessor.getTileEntity() instanceof TEOilLamp)
+			currenttip = oilLampBody(itemStack, currenttip, accessor, config);
+
+		else if (accessor.getTileEntity() instanceof TEOre)
+			currenttip = oreBody(itemStack, currenttip, accessor, config);
+
+		else if (accessor.getTileEntity() instanceof TEPottery)
+			currenttip = potteryBody(itemStack, currenttip, accessor, config);
+
+		else if (accessor.getBlock() == TFCBlocks.Torch)
+			currenttip = torchBody(itemStack, currenttip, accessor, config);
 
 		return currenttip;
 	}
@@ -194,70 +218,86 @@ public class WAILADataTE implements IWailaDataProvider
 
 	public static void callbackRegister(IWailaRegistrar reg)
 	{
-		reg.registerStackProvider(new WAILADataTE(), BlockAnvil.class);
-		reg.registerBodyProvider(new WAILADataTE(), TEAnvil.class);
-		reg.registerNBTProvider(new WAILADataTE(), TEAnvil.class);
+		reg.registerStackProvider(new WAILAData(), BlockAnvil.class);
+		reg.registerBodyProvider(new WAILAData(), TEAnvil.class);
+		reg.registerNBTProvider(new WAILAData(), TEAnvil.class);
 
-		reg.registerHeadProvider(new WAILADataTE(), TEBarrel.class);
-		reg.registerBodyProvider(new WAILADataTE(), TEBarrel.class);
-		reg.registerNBTProvider(new WAILADataTE(), TEBarrel.class);
+		reg.registerHeadProvider(new WAILAData(), TEBarrel.class);
+		reg.registerBodyProvider(new WAILAData(), TEBarrel.class);
+		reg.registerNBTProvider(new WAILAData(), TEBarrel.class);
 
-		reg.registerStackProvider(new WAILADataTE(), TEBerryBush.class);
-		reg.registerBodyProvider(new WAILADataTE(), TEBerryBush.class);
-		reg.registerNBTProvider(new WAILADataTE(), TEBerryBush.class);
+		reg.registerStackProvider(new WAILAData(), TEBerryBush.class);
+		reg.registerBodyProvider(new WAILAData(), TEBerryBush.class);
+		reg.registerNBTProvider(new WAILAData(), TEBerryBush.class);
 
-		reg.registerBodyProvider(new WAILADataTE(), TEBlastFurnace.class);
-		reg.registerNBTProvider(new WAILADataTE(), TEBlastFurnace.class);
+		reg.registerBodyProvider(new WAILAData(), TEBlastFurnace.class);
+		reg.registerNBTProvider(new WAILAData(), TEBlastFurnace.class);
 
-		reg.registerStackProvider(new WAILADataTE(), TEBloom.class);
-		reg.registerBodyProvider(new WAILADataTE(), TEBloom.class);
-		reg.registerNBTProvider(new WAILADataTE(), TEBloom.class);
+		reg.registerStackProvider(new WAILAData(), TEBloom.class);
+		reg.registerBodyProvider(new WAILAData(), TEBloom.class);
+		reg.registerNBTProvider(new WAILAData(), TEBloom.class);
 
-		reg.registerBodyProvider(new WAILADataTE(), TEBloomery.class);
-		reg.registerNBTProvider(new WAILADataTE(), TEBloomery.class);
+		reg.registerBodyProvider(new WAILAData(), TEBloomery.class);
+		reg.registerNBTProvider(new WAILAData(), TEBloomery.class);
 
-		reg.registerStackProvider(new WAILADataTE(), TECrop.class);
-		reg.registerBodyProvider(new WAILADataTE(), TECrop.class);
-		reg.registerNBTProvider(new WAILADataTE(), TECrop.class);
+		reg.registerStackProvider(new WAILAData(), TECrop.class);
+		reg.registerBodyProvider(new WAILAData(), TECrop.class);
+		reg.registerNBTProvider(new WAILAData(), TECrop.class);
 
-		reg.registerBodyProvider(new WAILADataTE(), TEFarmland.class);
-		reg.registerNBTProvider(new WAILADataTE(), TEFarmland.class);
+		reg.registerBodyProvider(new WAILAData(), TEFarmland.class);
+		reg.registerNBTProvider(new WAILAData(), TEFarmland.class);
 
-		reg.registerBodyProvider(new WAILADataTE(), TEFirepit.class);
-		reg.registerNBTProvider(new WAILADataTE(), TEFirepit.class);
+		reg.registerBodyProvider(new WAILAData(), TEFirepit.class);
+		reg.registerNBTProvider(new WAILAData(), TEFirepit.class);
 
-		reg.registerBodyProvider(new WAILADataTE(), TEForge.class);
-		reg.registerNBTProvider(new WAILADataTE(), TEForge.class);
+		reg.registerBodyProvider(new WAILAData(), TEForge.class);
+		reg.registerNBTProvider(new WAILAData(), TEForge.class);
 
-		reg.registerStackProvider(new WAILADataTE(), TEFruitLeaves.class);
-		reg.registerHeadProvider(new WAILADataTE(), TEFruitLeaves.class);
-		reg.registerBodyProvider(new WAILADataTE(), TEFruitLeaves.class);
-		reg.registerNBTProvider(new WAILADataTE(), TEFruitLeaves.class);
+		reg.registerStackProvider(new WAILAData(), TEFruitLeaves.class);
+		reg.registerHeadProvider(new WAILAData(), TEFruitLeaves.class);
+		reg.registerBodyProvider(new WAILAData(), TEFruitLeaves.class);
+		reg.registerNBTProvider(new WAILAData(), TEFruitLeaves.class);
 
-		reg.registerStackProvider(new WAILADataTE(), TEFruitTreeWood.class);
-		reg.registerHeadProvider(new WAILADataTE(), TEFruitTreeWood.class);
+		reg.registerStackProvider(new WAILAData(), TEFruitTreeWood.class);
+		reg.registerHeadProvider(new WAILAData(), TEFruitTreeWood.class);
 
-		reg.registerStackProvider(new WAILADataTE(), TEIngotPile.class);
-		reg.registerHeadProvider(new WAILADataTE(), TEIngotPile.class);
-		reg.registerNBTProvider(new WAILADataTE(), TEIngotPile.class);
+		reg.registerStackProvider(new WAILAData(), TEIngotPile.class);
+		reg.registerHeadProvider(new WAILAData(), TEIngotPile.class);
+		reg.registerNBTProvider(new WAILAData(), TEIngotPile.class);
 
-		reg.registerStackProvider(new WAILADataTE(), TEOre.class);
-		reg.registerHeadProvider(new WAILADataTE(), TEOre.class);
-		reg.registerBodyProvider(new WAILADataTE(), TEOre.class);
+		reg.registerStackProvider(new WAILAData(), TEOre.class);
+		reg.registerHeadProvider(new WAILAData(), TEOre.class);
+		reg.registerBodyProvider(new WAILAData(), TEOre.class);
 
-		reg.registerBodyProvider(new WAILADataTE(), TELogPile.class);
-		reg.registerNBTProvider(new WAILADataTE(), TELogPile.class);
+		reg.registerBodyProvider(new WAILAData(), TELogPile.class);
+		reg.registerNBTProvider(new WAILAData(), TELogPile.class);
 
-		reg.registerStackProvider(new WAILADataTE(), TELoom.class);
-		reg.registerBodyProvider(new WAILADataTE(), TELoom.class);
-		reg.registerNBTProvider(new WAILADataTE(), TELoom.class);
+		reg.registerStackProvider(new WAILAData(), TELoom.class);
+		reg.registerBodyProvider(new WAILAData(), TELoom.class);
+		reg.registerNBTProvider(new WAILAData(), TELoom.class);
 
-		reg.registerStackProvider(new WAILADataTE(), TEMetalSheet.class);
-		reg.registerNBTProvider(new WAILADataTE(), TEMetalSheet.class);
+		reg.registerStackProvider(new WAILAData(), TEMetalSheet.class);
+		reg.registerNBTProvider(new WAILAData(), TEMetalSheet.class);
 
-		reg.registerStackProvider(new WAILADataTE(), TEMetalTrapDoor.class);
-		reg.registerBodyProvider(new WAILADataTE(), TEMetalTrapDoor.class);
-		reg.registerNBTProvider(new WAILADataTE(), TEMetalTrapDoor.class);
+		reg.registerStackProvider(new WAILAData(), TEMetalTrapDoor.class);
+		reg.registerBodyProvider(new WAILAData(), TEMetalTrapDoor.class);
+		reg.registerNBTProvider(new WAILAData(), TEMetalTrapDoor.class);
+
+		reg.registerBodyProvider(new WAILAData(), TENestBox.class);
+		reg.registerNBTProvider(new WAILAData(), TENestBox.class);
+
+		reg.registerStackProvider(new WAILAData(), TEOilLamp.class);
+		reg.registerBodyProvider(new WAILAData(), TEOilLamp.class);
+		reg.registerNBTProvider(new WAILAData(), TEOilLamp.class);
+
+		reg.registerBodyProvider(new WAILAData(), BlockTorch.class);
+		reg.registerNBTProvider(new WAILAData(), BlockTorch.class);
+
+		reg.registerStackProvider(new WAILAData(), BlockPartial.class);
+		reg.registerNBTProvider(new WAILAData(), BlockPartial.class);
+
+		reg.registerBodyProvider(new WAILAData(), TEPottery.class);
+		reg.registerNBTProvider(new WAILAData(), TEPottery.class);
 	}
 
 	// Stacks
@@ -338,38 +378,6 @@ public class WAILADataTE implements IWailaDataProvider
 		return null;
 	}
 
-	public ItemStack oreStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
-	{
-		int meta = accessor.getMetadata();
-		TEOre te = (TEOre) accessor.getTileEntity();
-
-		if (accessor.getBlock() == TFCBlocks.Ore) // Metals & Coal
-		{
-			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, getOreGrade(te, meta));
-			if (meta == 14 || meta == 15) // Bituminous Coal & Lignite
-				itemstack = new ItemStack(TFCItems.Coal);
-
-			return itemstack;
-		}
-		else if (accessor.getBlock() == TFCBlocks.Ore2) // Minerals
-		{
-			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length);
-			if (meta == 5)
-				itemstack = new ItemStack(TFCItems.GemDiamond); // Kaolinite
-			else if (meta == 13)
-				itemstack = new ItemStack(TFCItems.Powder, 1, 4); // Saltpeter
-
-			return itemstack;
-		}
-		else if (accessor.getBlock() == TFCBlocks.Ore3) // Minerals
-		{
-			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length);
-			return itemstack;
-		}
-
-		return null;
-	}
-
 	public ItemStack loomStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		NBTTagCompound tag = accessor.getNBTData();
@@ -402,6 +410,56 @@ public class WAILADataTE implements IWailaDataProvider
 	{
 		NBTTagCompound tag = accessor.getNBTData();
 		return ItemStack.loadItemStackFromNBT(tag.getCompoundTag("sheetType"));
+	}
+
+	public ItemStack oilLampStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		int meta = accessor.getMetadata();
+		if ((meta & 8) != 0)
+			meta -= 8;
+
+		return new ItemStack(TFCBlocks.OilLamp, 1, meta);
+	}
+
+	public ItemStack oreStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		int meta = accessor.getMetadata();
+		TEOre te = (TEOre) accessor.getTileEntity();
+
+		if (accessor.getBlock() == TFCBlocks.Ore) // Metals & Coal
+		{
+			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, getOreGrade(te, meta));
+			if (meta == 14 || meta == 15) // Bituminous Coal & Lignite
+				itemstack = new ItemStack(TFCItems.Coal);
+
+			return itemstack;
+		}
+		else if (accessor.getBlock() == TFCBlocks.Ore2) // Minerals
+		{
+			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length);
+			if (meta == 5)
+				itemstack = new ItemStack(TFCItems.GemDiamond); // Kaolinite
+			else if (meta == 13)
+				itemstack = new ItemStack(TFCItems.Powder, 1, 4); // Saltpeter
+
+			return itemstack;
+		}
+		else if (accessor.getBlock() == TFCBlocks.Ore3) // Minerals
+		{
+			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length);
+			return itemstack;
+		}
+
+		return null;
+	}
+
+	public ItemStack partialStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		byte metaID = tag.getByte("metaID");
+		int typeID = tag.getShort("typeID");
+
+		return new ItemStack(Block.getBlockById(typeID), 1, metaID);
 	}
 
 	// Heads
@@ -481,9 +539,22 @@ public class WAILADataTE implements IWailaDataProvider
 	public List<String> anvilBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		NBTTagCompound tag = accessor.getNBTData();
-		int tier = tag.getInteger("Tier");
 
+		int tier = tag.getInteger("Tier");
 		currenttip.add(TFC_Core.translate("gui.tier") + " : " + tier);
+
+		NBTTagList tagList = tag.getTagList("Items", 10);
+		ItemStack flux = null;
+		for (int i = 0; i < tagList.tagCount(); i++)
+		{
+			NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
+			byte slot = itemTag.getByte("Slot");
+			if (slot == TEAnvil.FLUX_SLOT)
+				flux = ItemStack.loadItemStackFromNBT(itemTag);
+		}
+
+		if (flux != null && flux.getItem() == TFCItems.Powder && flux.getItemDamage() == 0 && flux.stackSize > 0)
+			currenttip.add(TFC_Core.translate("item.Powder.Flux.name") + " : " + flux.stackSize);
 
 		return currenttip;
 	}
@@ -635,12 +706,13 @@ public class WAILADataTE implements IWailaDataProvider
 
 		if (isLit)
 		{
-			long timeLeft = tag.getLong("fuelTimeLeft");
-			long currentTime = TFC_Time.getTotalTicks();
-			long timeProcessed = (int) Math.max(timeLeft - currentTime, 0);
-			int percent = (int) Math.min(100 - ((timeProcessed / (TFC_Time.hourLength * TFCOptions.bloomeryBurnTime)) * 100), 100);
+			long hours = (tag.getLong("fuelTimeLeft") / TFC_Time.hourLength) - TFC_Time.getTotalHours();
 
-			currenttip.add(TFC_Core.translate("gui.progress") + " : " + String.valueOf(percent) + "%");
+			if (hours > 0)
+			{
+				float percent = Helper.roundNumber(Math.min(100 - ((hours / TFCOptions.bloomeryBurnTime) * 100), 100), 10);
+				currenttip.add(hours + " " + TFC_Core.translate("gui.hoursRemaining") + " (" + String.valueOf(percent) + "%)");
+			}
 		}
 
 		return currenttip;
@@ -770,6 +842,142 @@ public class WAILADataTE implements IWailaDataProvider
 		return currenttip;
 	}
 
+	public List<String> logPileBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		NBTTagList tagList = tag.getTagList("Items", 10);
+		ItemStack storage[] = new ItemStack[4];
+		boolean counted[] = new boolean[] {false, false, false, false}; // Used to keep track of which slots have already been combined into others.
+
+		for (int i = 0; i < tagList.tagCount(); i++)
+		{
+			NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
+			byte slot = itemTag.getByte("Slot");
+			if (slot >= 0 && slot < storage.length)
+				storage[slot] = ItemStack.loadItemStackFromNBT(itemTag);
+		}
+
+		/**
+		 * Rather than just display the number of logs in each slot, I wanted to display the total number of each type of log in the pile.
+		 * There's very likely a much better way to do this, but it's all I could come up with for now.
+		 * Optimization PRs welcome. :) Kitty
+		 */
+		for (int j = 0; j < storage.length; j++) // Loop through the 4 storage slots
+		{
+			if (storage[j] != null && !counted[j]) // Make sure the slot is not empty, and has not already been accounted for
+			{
+				String log = storage[j].getItem().getItemStackDisplayName(storage[j]) + " : "; // Have to pass the ItemStack in again, since translating getUnlocalizedName() doesn't work. :(
+				int count = storage[j].stackSize;
+				for (int k = j + 1; k < storage.length; k++) // Loop through all slots after the one being checked
+				{
+					if (storage[k] != null && storage[j].isItemEqual(storage[k])) // Make sure the comparison slot isn't empty, and see if it's the same type of log
+					{
+						count += storage[k].stackSize; // Increase the count for that log type
+						counted[k] = true; // Mark the combined slot as accounted for
+					}
+				}
+				currenttip.add(log + count); // Add to the HUD display
+				counted[j] = true; // Mark the initial slot as accounted for
+			}
+		}
+		return currenttip;
+	}
+
+	public List<String> loomBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		boolean finished = tag.getBoolean("finished");
+		int wovenStrings = tag.getInteger("cloth");
+		NBTTagList tagList = tag.getTagList("Items", 10);
+		ItemStack storage[] = new ItemStack[2];
+
+		for (int i = 0; i < tagList.tagCount(); i++)
+		{
+			NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
+			byte slot = itemTag.getByte("Slot");
+			if (slot >= 0 && slot < storage.length)
+				storage[slot] = ItemStack.loadItemStackFromNBT(itemTag);
+		}
+		
+		if (!finished && storage[0] != null)
+		{
+			LoomRecipe recipe = LoomManager.getInstance().findPotentialRecipes(storage[0]);
+			int maxStrings = recipe.getReqSize();
+
+			if (storage[0].stackSize < maxStrings) // The loom isn't full yet
+			{
+				String name = storage[0].getItem().getItemStackDisplayName(storage[0]) + " : ";
+				currenttip.add(name + storage[0].stackSize + "/" + maxStrings);
+			}
+			else // Weaving in progress
+			{
+				Item cloth = recipe.getOutItemStack().getItem();
+				String clothName = cloth.getItemStackDisplayName(recipe.getOutItemStack()) + " : ";
+				int percent = (int) (100.0 * wovenStrings / maxStrings);
+				currenttip.add(TFC_Core.translate("gui.weaving") + " " + clothName + String.valueOf(percent) + "%");
+			}
+		}
+
+		return currenttip;
+	}
+
+	public List<String> metalTrapDoorBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		ItemStack sheetStack = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("sheetType"));
+
+		String metalType = BlockMetalTrapDoor.metalNames[sheetStack.getItemDamage() & 31];
+		currenttip.add(TFC_Core.translate("gui.metal." + metalType.replaceAll("\\s", "")));
+		return currenttip;
+	}
+
+	public List<String> nestBoxBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		NBTTagList tagList = tag.getTagList("Items", 10);
+		ItemStack storage[] = new ItemStack[4];
+		for (int i = 0; i < tagList.tagCount(); i++)
+		{
+			NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
+			byte slot = itemTag.getByte("Slot");
+			if (slot >= 0 && slot < storage.length)
+				storage[slot] = ItemStack.loadItemStackFromNBT(itemTag);
+		}
+		int eggCount = 0, fertEggCount = 0;
+		for (ItemStack is : storage)
+		{
+			if (is != null && is.getItem() == TFCItems.Egg)
+			{
+				if (is.hasTagCompound() && is.getTagCompound().hasKey("Fertilized"))
+					fertEggCount++;
+				else
+					eggCount++;
+			}
+		}
+
+		if (eggCount > 0)
+			currenttip.add(TFC_Core.translate("gui.eggs") + " : " + eggCount);
+		if (fertEggCount > 0)
+			currenttip.add(TFC_Core.translate("gui.fertEggs") + " : " + fertEggCount);
+
+		return currenttip;
+	}
+
+	public List<String> oilLampBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		if (tag.hasKey("Fuel"))
+		{
+			FluidStack fuel = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("Fuel"));
+			int hours = fuel.amount * TFCOptions.oilLampFuelMult / 8;
+			if (fuel.getFluid() == TFCFluids.OLIVEOIL)
+				currenttip.add(hours + " " + TFC_Core.translate("gui.hoursRemaining") + " (" + Helper.roundNumber((hours / (250f * TFCOptions.oilLampFuelMult)) * 100f, 10) + "%)");
+			else if (fuel.getFluid() == TFCFluids.LAVA)
+				currenttip.add(TFC_Core.translate("gui.infinite") + " " + TFC_Core.translate("gui.hoursRemaining"));
+		}
+		return currenttip;
+	}
+
 	public List<String> oreBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		int meta = accessor.getMetadata();
@@ -868,92 +1076,36 @@ public class WAILADataTE implements IWailaDataProvider
 		return currenttip;
 	}
 
-	public List<String> logPileBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	public List<String> potteryBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		NBTTagCompound tag = accessor.getNBTData();
-		NBTTagList tagList = tag.getTagList("Items", 10);
-		ItemStack storage[] = new ItemStack[4];
-		boolean counted[] = new boolean[] {false, false, false, false}; // Used to keep track of which slots have already been combined into others.
+		long burnStart = tag.getLong("burnStart");
+		int wood = tag.getInteger("wood");
+		int straw = tag.getInteger("straw");
 
-		for (int i = 0; i < tagList.tagCount(); i++)
+		if (straw > 0 && straw < 8)
+			currenttip.add(TFC_Core.translate("item.Straw.name") + " : " + straw + "/8");
+		else if (wood > 0 && wood < 8)
+			currenttip.add(TFC_Core.translate("gui.logs") + " : " + wood + "/8");
+		else if (burnStart > 0)
 		{
-			NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
-			byte slot = itemTag.getByte("Slot");
-			if (slot >= 0 && slot < storage.length)
-				storage[slot] = ItemStack.loadItemStackFromNBT(itemTag);
-		}
-
-		/**
-		 * Rather than just display the number of logs in each slot, I wanted to display the total number of each type of log in the pile.
-		 * There's very likely a much better way to do this, but it's all I could come up with for now.
-		 * Optimization PRs welcome. :) Kitty
-		 */
-		for (int j = 0; j < storage.length; j++) // Loop through the 4 storage slots
-		{
-			if (storage[j] != null && !counted[j]) // Make sure the slot is not empty, and has not already been accounted for
-			{
-				String log = storage[j].getItem().getItemStackDisplayName(storage[j]) + " : "; // Have to pass the ItemStack in again, since translating getUnlocalizedName() doesn't work. :(
-				int count = storage[j].stackSize;
-				for (int k = j + 1; k < storage.length; k++) // Loop through all slots after the one being checked
-				{
-					if (storage[k] != null && storage[j].isItemEqual(storage[k])) // Make sure the comparison slot isn't empty, and see if it's the same type of log
-					{
-						count += storage[k].stackSize; // Increase the count for that log type
-						counted[k] = true; // Mark the combined slot as accounted for
-					}
-				}
-				currenttip.add(log + count); // Add to the HUD display
-				counted[j] = true; // Mark the initial slot as accounted for
-			}
-		}
-		return currenttip;
-	}
-
-	public List<String> loomBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
-	{
-		NBTTagCompound tag = accessor.getNBTData();
-		boolean finished = tag.getBoolean("finished");
-		int wovenStrings = tag.getInteger("cloth");
-		NBTTagList tagList = tag.getTagList("Items", 10);
-		ItemStack storage[] = new ItemStack[2];
-
-		for (int i = 0; i < tagList.tagCount(); i++)
-		{
-			NBTTagCompound itemTag = tagList.getCompoundTagAt(i);
-			byte slot = itemTag.getByte("Slot");
-			if (slot >= 0 && slot < storage.length)
-				storage[slot] = ItemStack.loadItemStackFromNBT(itemTag);
-		}
-		
-		if (!finished && storage[0] != null)
-		{
-			LoomRecipe recipe = LoomManager.getInstance().findPotentialRecipes(storage[0]);
-			int maxStrings = recipe.getReqSize();
-
-			if (storage[0].stackSize < maxStrings) // The loom isn't full yet
-			{
-				String name = storage[0].getItem().getItemStackDisplayName(storage[0]) + " : ";
-				currenttip.add(name + storage[0].stackSize + "/" + maxStrings);
-			}
-			else // Weaving in progress
-			{
-				Item cloth = recipe.getOutItemStack().getItem();
-				String clothName = cloth.getItemStackDisplayName(recipe.getOutItemStack()) + " : ";
-				int percent = (int) (100.0 * wovenStrings / maxStrings);
-				currenttip.add(TFC_Core.translate("gui.weaving") + " " + clothName + String.valueOf(percent) + "%");
-			}
+			int hours = (int) (TFCOptions.pitKilnBurnTime - (TFC_Time.getTotalHours() - (burnStart / TFC_Time.hourLength)));
+			currenttip.add(hours + " " + TFC_Core.translate("gui.hoursRemaining") + " (" + Helper.roundNumber(100 - (hours / TFCOptions.pitKilnBurnTime) * 100, 10) + "%)");
 		}
 
 		return currenttip;
 	}
 
-	public List<String> metalTrapDoorBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	public List<String> torchBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
-		NBTTagCompound tag = accessor.getNBTData();
-		ItemStack sheetStack = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("sheetType"));
+		if (accessor.getMetadata() < 8 && TFCOptions.torchBurnTime != 0)
+		{
+			NBTTagCompound tag = accessor.getNBTData();
+			long hours = TFCOptions.torchBurnTime - (TFC_Time.getTotalHours() - tag.getInteger("hourPlaced"));
 
-		String metalType = BlockMetalTrapDoor.metalNames[sheetStack.getItemDamage() & 31];
-		currenttip.add(TFC_Core.translate("gui.metal." + metalType.replaceAll("\\s", "")));
+			if (hours > 0)
+				currenttip.add(hours + " " + TFC_Core.translate("gui.hoursRemaining") + " (" + Helper.roundNumber((100f * hours) / TFCOptions.torchBurnTime, 10) + "%)");
+		}
 		return currenttip;
 	}
 

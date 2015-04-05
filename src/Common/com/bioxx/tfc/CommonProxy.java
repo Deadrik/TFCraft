@@ -478,7 +478,7 @@ public class CommonProxy
 
 	public void registerWailaClasses()
 	{
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WAILADataTE.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WAILAData.callbackRegister");
 		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WCrucible.callbackRegister"); // Crucible has it's own file due to extra calculations.
 	}
 	
