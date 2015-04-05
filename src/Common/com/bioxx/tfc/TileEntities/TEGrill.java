@@ -30,6 +30,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TEGrill extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[6];
+	public byte data = 0;
 
 	@Override
 	public void updateEntity()
@@ -181,10 +182,27 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 		}
 	}
 
+	public int getSide()
+	{
+		return data & 7;
+	}
+
+	public boolean isEmpty()
+	{
+		for (ItemStack is : storage)
+		{
+			if (is != null)
+				return false;
+		}
+
+		return true;
+	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
+		data = nbt.getByte("data");
 		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 		storage = new ItemStack[getSizeInventory()];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
@@ -200,6 +218,7 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
+		nbt.setByte("data", data);
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < storage.length; i++)
 		{
@@ -343,6 +362,7 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 	@Override
 	public void handleInitPacket(NBTTagCompound nbt) {
 		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
+		data = nbt.getByte("data");
 		storage = new ItemStack[getSizeInventory()];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
@@ -356,6 +376,7 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 	@Override
 	public void createInitNBT(NBTTagCompound nbt) {
 		NBTTagList nbttaglist = new NBTTagList();
+		nbt.setByte("data", this.data);
 		for(int i = 0; i < storage.length; i++)
 		{
 			if(storage[i] != null)

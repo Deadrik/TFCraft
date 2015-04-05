@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
@@ -27,11 +28,40 @@ public class ItemGrill extends ItemTerraBlock
 		{
 			if(side == 1 && world.isAirBlock(x, y+1, z))
 			{
-				TileEntity te = world.getTileEntity(x, y, z);
-				if(te != null && te instanceof TEFireEntity && checkSides(world, x, y, z))
-					world.setBlock( x, y+1, z, TFCBlocks.Grill, itemstack.getItemDamage(), 0x2);
+				int out = side;
+				int hinge = 0;
+
+				if (hitX < 0.2)
+					hinge = 0;
+				else if (hitZ < 0.2)
+					hinge = 1;
+				else if (hitX > 0.8)
+					hinge = 2;
+				else if (hitZ > 0.8)
+					hinge = 3;
+				else
+					hinge = 0; //Default
+
+				out += hinge << 4;
+
+				TileEntity teFire = world.getTileEntity(x, y, z);
+				if(teFire != null && teFire instanceof TEFireEntity && checkSides(world, x, y, z))
+				{
+					if (world.setBlock( x, y+1, z, TFCBlocks.Grill, itemstack.getItemDamage(), 0x2))
+					{
+						TEGrill teGrill = (TEGrill) world.getTileEntity(x, y+1, z);
+						teGrill.data = (byte) out;
+					}
+					
+				}
 				else if(world.isAirBlock(x, y+2, z) && checkSides(world, x, y+1, z))
-					world.setBlock( x, y+2, z, TFCBlocks.Grill, itemstack.getItemDamage(), 0x2);
+				{
+					if (world.setBlock( x, y+2, z, TFCBlocks.Grill, itemstack.getItemDamage(), 0x2))
+					{
+						TEGrill teGrill = (TEGrill) world.getTileEntity(x, y + 2, z);
+						teGrill.data = (byte) out;
+					}
+				}
 				else
 					return false;  // don't delete misplaced Grill
 				player.inventory.mainInventory[player.inventory.currentItem].stackSize--;

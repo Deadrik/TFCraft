@@ -9,7 +9,7 @@ public class TFCOptions
 	public static boolean enableDebugMode;
 	public static boolean iDontLikeOnions;
 	public static boolean enableOreTest;
-	public static boolean use2DGrill;
+	//public static boolean use2DGrill;
 	public static boolean generateSmoke;
 	public static boolean enableDetailedBlockSolidSide;
 	public static int maxCountOfTranspSubBlocksOnSide;

@@ -322,7 +322,7 @@ public class TerraFirmaCraft
 
 		//General
 		TFCOptions.enableBetterGrass = TFCOptions.getBooleanFor(config, GENERAL_HEADER, "enableBetterGrass", true, "If true, then the side of a grass block which has another grass block adjacent and one block lower than it will show as completely grass.");
-		TFCOptions.use2DGrill = TFCOptions.getBooleanFor(config, GENERAL_HEADER, "use2DGrill", true);
+		//TFCOptions.use2DGrill = TFCOptions.getBooleanFor(config, GENERAL_HEADER, "use2DGrill", true);
 		TFCOptions.enableDebugMode = TFCOptions.getBooleanFor(config,GENERAL_HEADER,"enableDebugMode",false, "Set this to true if you want to turn on debug mode which is useful for bug hunting");
 		TFCOptions.iDontLikeOnions = TFCOptions.getBooleanFor(config, GENERAL_HEADER, "enableNotOnions", false,"Set this to true if you don't like onions.");
 		TFCOptions.enableOreTest = TFCOptions.getBooleanFor(config, GENERAL_HEADER,"enableOreTest", false, "This will generate only ore in your world with nothing else. *Caution Unsupported*");
