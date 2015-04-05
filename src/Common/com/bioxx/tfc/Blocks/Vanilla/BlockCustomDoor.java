@@ -29,7 +29,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCustomDoor extends BlockTerra
 {
-	int woodType;
+	private int woodType;
 	String[] WoodNames = {"Oak Door Lower","Oak Door Upper","Aspen Door Lower","Aspen Door Upper","Birch Door Lower","Birch Door Upper",
 			"Chestnut Door Lower","Chestnut Door Upper","Douglas Fir Door Lower","Douglas Fir Door Upper","Hickory Door Lower","Hickory Door Upper",
 			"Maple Door Lower","Maple Door Upper","Ash Door Lower","Ash Door Upper","Pine Door Lower","Pine Door Upper",
@@ -46,14 +46,14 @@ public class BlockCustomDoor extends BlockTerra
 		float var3 = 0.5F;
 		float var4 = 1.0F;
 		this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var4, 0.5F + var3);
-		woodType = woodId;
+		setWoodType(woodId);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int par1, int par2)
 	{
-		return this.icons[woodType];
+		return this.icons[getWoodType()];
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -94,11 +94,11 @@ public class BlockCustomDoor extends BlockTerra
 					flag1 = !flag1;
 			}
 
-			return icons[woodType + (flag1 ? WoodNames.length : 0) + (flag2 ? 1 : 0)];
+			return icons[getWoodType() + (flag1 ? WoodNames.length : 0) + (flag2 ? 1 : 0)];
 		}
 		else
 		{
-			return icons[woodType];
+			return icons[getWoodType()];
 		}
 	}
 
@@ -427,7 +427,7 @@ public class BlockCustomDoor extends BlockTerra
     @Override
 	public int getDamageValue(World world, int x, int y, int z)
     {
-		return woodType / 2;
+		return getWoodType() / 2;
     }
 
     /**
@@ -475,4 +475,14 @@ public class BlockCustomDoor extends BlockTerra
 		int damageValue = getDamageValue(world, x, y, z);
 		return new ItemStack(Recipes.Doors[damageValue], 1, 0);
     }
+
+	public int getWoodType()
+	{
+		return woodType;
+	}
+
+	private void setWoodType(int woodType)
+	{
+		this.woodType = woodType;
+	}
 }

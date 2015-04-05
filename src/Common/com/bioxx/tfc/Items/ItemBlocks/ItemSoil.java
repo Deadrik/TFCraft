@@ -25,6 +25,9 @@ public class ItemSoil extends ItemTerraBlock
 		super.addInformation(is, player, arraylist, flag);
 
 		Block b = Block.getBlockFromItem(is.getItem());
+		if (TFC_Core.isPeat(b) || TFC_Core.isPeatGrass(b))
+			return;
+
 		int dam = is.getItemDamage();
 		if (b == TFCBlocks.Dirt2
 				|| b == TFCBlocks.Sand2

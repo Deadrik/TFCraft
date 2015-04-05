@@ -401,6 +401,13 @@ public class TFC_Core
 				|| block == TFCBlocks.DryGrass2;
 	}
 
+	public static boolean isGrassNormal(Block block)
+	{
+		return block == TFCBlocks.Grass
+				|| block == TFCBlocks.Grass2;
+	}
+
+
 	public static boolean isLushGrass(Block block)
 	{
 		return block == TFCBlocks.Grass
@@ -537,6 +544,11 @@ public class TFC_Core
 		return 	   isSoilOrGravel(block)
 				|| isRawStone(block)
 				|| isSand(block);
+	}
+
+	public static boolean isSoilWAILA(Block block)
+	{
+		return isDirt(block) || isGravel(block) || isSand(block) || isGrassNormal(block) || isDryGrass(block);
 	}
 
 	public static int getSoilMetaFromStone(Block inBlock, int inMeta)

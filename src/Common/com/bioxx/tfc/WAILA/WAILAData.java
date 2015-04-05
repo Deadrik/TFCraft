@@ -18,13 +18,20 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
+import com.bioxx.tfc.Blocks.BlockCharcoal;
 import com.bioxx.tfc.Blocks.BlockMetalTrapDoor;
 import com.bioxx.tfc.Blocks.BlockPartial;
 import com.bioxx.tfc.Blocks.Devices.BlockAnvil;
 import com.bioxx.tfc.Blocks.Flora.BlockBerryBush;
 import com.bioxx.tfc.Blocks.Flora.BlockFruitLeaves;
 import com.bioxx.tfc.Blocks.Flora.BlockFruitWood;
+import com.bioxx.tfc.Blocks.Terrain.BlockDirt;
+import com.bioxx.tfc.Blocks.Terrain.BlockGrass;
+import com.bioxx.tfc.Blocks.Terrain.BlockGravel;
+import com.bioxx.tfc.Blocks.Terrain.BlockSand;
+import com.bioxx.tfc.Blocks.Vanilla.BlockCustomDoor;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTorch;
+import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
@@ -94,8 +101,14 @@ public class WAILAData implements IWailaDataProvider
 		else if (accessor.getTileEntity() instanceof TEBloom)
 			return new ItemStack(TFCItems.RawBloom);
 
+		else if (accessor.getBlock() instanceof BlockCharcoal)
+			return new ItemStack(TFCItems.Coal, accessor.getMetadata(), 1);
+
 		else if (accessor.getTileEntity() instanceof TECrop)
 			return cropStack(accessor, config);
+		
+		else if (accessor.getBlock() instanceof BlockCustomDoor)
+			return new ItemStack(Recipes.Doors[((BlockCustomDoor) accessor.getBlock()).getWoodType() / 2]);
 
 		else if (accessor.getTileEntity() instanceof TEFruitLeaves)
 			return fruitLeavesStack(accessor, config);
@@ -217,6 +230,9 @@ public class WAILAData implements IWailaDataProvider
 
 		else if (accessor.getTileEntity() instanceof TESmokeRack)
 			currenttip = smokeRackBody(itemStack, currenttip, accessor, config);
+		
+		else if (TFC_Core.isSoilWAILA(accessor.getBlock()))
+			currenttip = soilBody(itemStack, currenttip, accessor, config);
 
 		else if (accessor.getBlock() == TFCBlocks.Torch)
 			currenttip = torchBody(itemStack, currenttip, accessor, config);
@@ -265,6 +281,8 @@ public class WAILAData implements IWailaDataProvider
 		reg.registerStackProvider(new WAILAData(), TECrop.class);
 		reg.registerBodyProvider(new WAILAData(), TECrop.class);
 		reg.registerNBTProvider(new WAILAData(), TECrop.class);
+
+		reg.registerStackProvider(new WAILAData(), BlockCustomDoor.class);
 
 		reg.registerBodyProvider(new WAILAData(), TEFarmland.class);
 		reg.registerNBTProvider(new WAILAData(), TEFarmland.class);
@@ -328,11 +346,18 @@ public class WAILAData implements IWailaDataProvider
 		reg.registerBodyProvider(new WAILAData(), TESmokeRack.class);
 		reg.registerNBTProvider(new WAILAData(), TESmokeRack.class);
 
+		reg.registerBodyProvider(new WAILAData(), BlockDirt.class);
+		reg.registerBodyProvider(new WAILAData(), BlockSand.class);
+		reg.registerBodyProvider(new WAILAData(), BlockGrass.class);
+		reg.registerBodyProvider(new WAILAData(), BlockGravel.class);
+
 		reg.registerBodyProvider(new WAILAData(), BlockTorch.class);
 		reg.registerNBTProvider(new WAILAData(), BlockTorch.class);
 
 		reg.registerStackProvider(new WAILAData(), TEWorldItem.class);
 		reg.registerNBTProvider(new WAILAData(), TEWorldItem.class);
+
+		reg.registerStackProvider(new WAILAData(), BlockCharcoal.class);
 	}
 
 	// Stacks
@@ -1133,6 +1158,23 @@ public class WAILAData implements IWailaDataProvider
 			}
 
 		}
+
+		return currenttip;
+	}
+
+	public List<String> soilBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		Block b = accessor.getBlock();
+		int dam = itemStack.getItemDamage();
+		if (b == TFCBlocks.Dirt2 || b == TFCBlocks.Sand2 || TFC_Core.isGrassType2(b) || b == TFCBlocks.Gravel2)
+		{
+			dam += 16;
+		}
+
+		if (dam < Global.STONE_ALL.length)
+			currenttip.add(Global.STONE_ALL[dam]);
+		else
+			currenttip.add(EnumChatFormatting.DARK_RED + "Unknown");
 
 		return currenttip;
 	}
