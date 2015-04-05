@@ -25,6 +25,8 @@ import com.bioxx.tfc.Blocks.Devices.BlockAnvil;
 import com.bioxx.tfc.Blocks.Flora.BlockBerryBush;
 import com.bioxx.tfc.Blocks.Flora.BlockFruitLeaves;
 import com.bioxx.tfc.Blocks.Flora.BlockFruitWood;
+import com.bioxx.tfc.Blocks.Terrain.BlockClay;
+import com.bioxx.tfc.Blocks.Terrain.BlockClayGrass;
 import com.bioxx.tfc.Blocks.Terrain.BlockDirt;
 import com.bioxx.tfc.Blocks.Terrain.BlockGrass;
 import com.bioxx.tfc.Blocks.Terrain.BlockGravel;
@@ -92,52 +94,58 @@ public class WAILAData implements IWailaDataProvider
 	@Override
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
+		Block block = accessor.getBlock();
+		TileEntity tileEntity = accessor.getTileEntity();
+
 		if (accessor.getBlock() instanceof BlockAnvil)
 			return anvilStack(accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEBerryBush)
+		else if (tileEntity instanceof TEBerryBush)
 			return berryBushStack(accessor, config);
 		
-		else if (accessor.getTileEntity() instanceof TEBloom)
+		else if (tileEntity instanceof TEBloom)
 			return new ItemStack(TFCItems.RawBloom);
 
-		else if (accessor.getBlock() instanceof BlockCharcoal)
+		else if (block instanceof BlockCharcoal)
 			return new ItemStack(TFCItems.Coal, accessor.getMetadata(), 1);
 
-		else if (accessor.getTileEntity() instanceof TECrop)
+		else if (TFC_Core.isClay(block) || TFC_Core.isClayGrass(block))
+			return new ItemStack(TFCItems.ClayBall);
+
+		else if (tileEntity instanceof TECrop)
 			return cropStack(accessor, config);
 		
-		else if (accessor.getBlock() instanceof BlockCustomDoor)
-			return new ItemStack(Recipes.Doors[((BlockCustomDoor) accessor.getBlock()).getWoodType() / 2]);
+		else if (block instanceof BlockCustomDoor)
+			return new ItemStack(Recipes.Doors[((BlockCustomDoor) block).getWoodType() / 2]);
 
-		else if (accessor.getTileEntity() instanceof TEFruitLeaves)
+		else if (tileEntity instanceof TEFruitLeaves)
 			return fruitLeavesStack(accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEFruitTreeWood)
+		else if (tileEntity instanceof TEFruitTreeWood)
 			return fruitTreeWoodStack(accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEIngotPile)
+		else if (tileEntity instanceof TEIngotPile)
 			return ingotPileStack(accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TELoom)
+		else if (tileEntity instanceof TELoom)
 			return loomStack(accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEMetalSheet)
+		else if (tileEntity instanceof TEMetalSheet)
 			return metalSheetStack(accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEMetalTrapDoor)
+		else if (tileEntity instanceof TEMetalTrapDoor)
 			return metalTrapDoorStack(accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEOilLamp)
+		else if (tileEntity instanceof TEOilLamp)
 			return oilLampStack(accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEOre)
+		else if (tileEntity instanceof TEOre)
 			return oreStack(accessor, config);
 
-		else if (accessor.getBlock() instanceof BlockPartial)
+		else if (block instanceof BlockPartial)
 			return partialStack(accessor, config);
 		
-		else if (accessor.getTileEntity() instanceof TEWorldItem)
+		else if (tileEntity instanceof TEWorldItem)
 			return worldItemStack(accessor, config);
 
 		return null;
@@ -146,19 +154,20 @@ public class WAILAData implements IWailaDataProvider
 	@Override
 	public List<String> getWailaHead(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
+		TileEntity tileEntity = accessor.getTileEntity();
 		if (accessor.getTileEntity() instanceof TEBarrel)
 			currenttip = barrelHead(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEFruitLeaves)
+		else if (tileEntity instanceof TEFruitLeaves)
 			currenttip = fruitLeavesHead(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEFruitTreeWood)
+		else if (tileEntity instanceof TEFruitTreeWood)
 			currenttip = fruitTreeWoodHead(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEOre)
+		else if (tileEntity instanceof TEOre)
 			currenttip = oreHead(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TESmokeRack)
+		else if (tileEntity instanceof TESmokeRack)
 			currenttip.set(0, EnumChatFormatting.WHITE.toString() + TFC_Core.translate("tile.SmokeRack.name"));
 
 		return currenttip;
@@ -167,74 +176,76 @@ public class WAILAData implements IWailaDataProvider
 	@Override
 	public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
-		if (accessor.getTileEntity() instanceof TEAnvil)
+		Block block = accessor.getBlock();
+		TileEntity tileEntity = accessor.getTileEntity();
+		if (tileEntity instanceof TEAnvil)
 			currenttip = anvilBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEBarrel)
+		else if (tileEntity instanceof TEBarrel)
 			currenttip = barrelBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEBerryBush)
+		else if (tileEntity instanceof TEBerryBush)
 			currenttip = berryBushBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEBlastFurnace)
+		else if (tileEntity instanceof TEBlastFurnace)
 			currenttip = blastFurnaceBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEBloom)
+		else if (tileEntity instanceof TEBloom)
 			currenttip = bloomBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEBloomery)
+		else if (tileEntity instanceof TEBloomery)
 			currenttip = bloomeryBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TECrop)
+		else if (tileEntity instanceof TECrop)
 			currenttip = cropBody(itemStack, currenttip, accessor, config);
 
 		// I haven't decided if this is OP or not. Useful for debugging though, so uncomment when needing to check farmland nutrient %.
-		/*else if (accessor.getTileEntity() instanceof TEFarmland)
+		/*else if (tileEntity instanceof TEFarmland)
 			currenttip = farmlandBody(itemStack, currenttip, accessor, config);*/
 
-		else if (accessor.getTileEntity() instanceof TEFirepit)
+		else if (tileEntity instanceof TEFirepit)
 			currenttip = firepitBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEForge)
+		else if (tileEntity instanceof TEForge)
 			currenttip = forgeBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEFruitLeaves)
+		else if (tileEntity instanceof TEFruitLeaves)
 			currenttip = fruitLeavesBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TELogPile)
+		else if (tileEntity instanceof TELogPile)
 			currenttip = logPileBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TELoom)
+		else if (tileEntity instanceof TELoom)
 			currenttip = loomBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEMetalTrapDoor)
+		else if (tileEntity instanceof TEMetalTrapDoor)
 			currenttip = metalTrapDoorBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TENestBox)
+		else if (tileEntity instanceof TENestBox)
 			currenttip = nestBoxBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEOilLamp)
+		else if (tileEntity instanceof TEOilLamp)
 			currenttip = oilLampBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEOre)
+		else if (tileEntity instanceof TEOre)
 			currenttip = oreBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TEPottery)
+		else if (tileEntity instanceof TEPottery)
 			currenttip = potteryBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TESapling)
+		else if (tileEntity instanceof TESapling)
 			currenttip = saplingBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TESluice)
+		else if (tileEntity instanceof TESluice)
 			currenttip = sluiceBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getTileEntity() instanceof TESmokeRack)
+		else if (tileEntity instanceof TESmokeRack)
 			currenttip = smokeRackBody(itemStack, currenttip, accessor, config);
 		
-		else if (TFC_Core.isSoilWAILA(accessor.getBlock()))
+		else if (TFC_Core.isSoilWAILA(block))
 			currenttip = soilBody(itemStack, currenttip, accessor, config);
 
-		else if (accessor.getBlock() == TFCBlocks.Torch)
+		else if (block == TFCBlocks.Torch)
 			currenttip = torchBody(itemStack, currenttip, accessor, config);
 
 		return currenttip;
@@ -278,6 +289,10 @@ public class WAILAData implements IWailaDataProvider
 		reg.registerBodyProvider(new WAILAData(), TEBloomery.class);
 		reg.registerNBTProvider(new WAILAData(), TEBloomery.class);
 
+		reg.registerStackProvider(new WAILAData(), BlockCharcoal.class);
+		reg.registerStackProvider(new WAILAData(), BlockClay.class);
+		reg.registerStackProvider(new WAILAData(), BlockClayGrass.class);
+
 		reg.registerStackProvider(new WAILAData(), TECrop.class);
 		reg.registerBodyProvider(new WAILAData(), TECrop.class);
 		reg.registerNBTProvider(new WAILAData(), TECrop.class);
@@ -305,10 +320,6 @@ public class WAILAData implements IWailaDataProvider
 		reg.registerHeadProvider(new WAILAData(), TEIngotPile.class);
 		reg.registerNBTProvider(new WAILAData(), TEIngotPile.class);
 
-		reg.registerStackProvider(new WAILAData(), TEOre.class);
-		reg.registerHeadProvider(new WAILAData(), TEOre.class);
-		reg.registerBodyProvider(new WAILAData(), TEOre.class);
-
 		reg.registerBodyProvider(new WAILAData(), TELogPile.class);
 		reg.registerNBTProvider(new WAILAData(), TELogPile.class);
 
@@ -330,6 +341,10 @@ public class WAILAData implements IWailaDataProvider
 		reg.registerBodyProvider(new WAILAData(), TEOilLamp.class);
 		reg.registerNBTProvider(new WAILAData(), TEOilLamp.class);
 
+		reg.registerStackProvider(new WAILAData(), TEOre.class);
+		reg.registerHeadProvider(new WAILAData(), TEOre.class);
+		reg.registerBodyProvider(new WAILAData(), TEOre.class);
+
 		reg.registerStackProvider(new WAILAData(), BlockPartial.class);
 		reg.registerNBTProvider(new WAILAData(), BlockPartial.class);
 
@@ -346,6 +361,7 @@ public class WAILAData implements IWailaDataProvider
 		reg.registerBodyProvider(new WAILAData(), TESmokeRack.class);
 		reg.registerNBTProvider(new WAILAData(), TESmokeRack.class);
 
+		// Soil
 		reg.registerBodyProvider(new WAILAData(), BlockDirt.class);
 		reg.registerBodyProvider(new WAILAData(), BlockSand.class);
 		reg.registerBodyProvider(new WAILAData(), BlockGrass.class);
@@ -356,8 +372,6 @@ public class WAILAData implements IWailaDataProvider
 
 		reg.registerStackProvider(new WAILAData(), TEWorldItem.class);
 		reg.registerNBTProvider(new WAILAData(), TEWorldItem.class);
-
-		reg.registerStackProvider(new WAILAData(), BlockCharcoal.class);
 	}
 
 	// Stacks

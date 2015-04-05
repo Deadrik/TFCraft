@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -14,7 +13,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Core;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -75,11 +74,11 @@ public class BlockFlora extends BlockTerra
 	}
 
 	@Override
-	public boolean canBlockStay(World par1World, int par2, int par3, int par4)
+	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return (par1World.getFullBlockLightValue(par2, par3, par4) >= 8 || 
-				par1World.canBlockSeeTheSky(par2, par3, par4)) && 
-				this.canThisPlantGrowOnThisBlock(par1World.getBlock(par2, par3 - 1, par4));
+		return (world.getFullBlockLightValue(x, y, z) >= 8 || 
+				world.canBlockSeeTheSky(x, y, z)) && 
+				this.canThisPlantGrowOnThisBlock(world.getBlock(x, y - 1, z));
 	}
 
 	@Override
@@ -90,12 +89,16 @@ public class BlockFlora extends BlockTerra
 			world.setBlockToAir(i, j, k);
 	}
 
-	protected boolean canThisPlantGrowOnThisBlock(Block par1)
+	@Override
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
-		return par1 == TFCBlocks.Grass || par1 == TFCBlocks.Grass2 || 
-				par1 == TFCBlocks.Dirt || par1 == TFCBlocks.Dirt2 ||
-				par1 == TFCBlocks.ClayGrass || par1 == TFCBlocks.ClayGrass2 ||
-				par1 == TFCBlocks.PeatGrass || par1 == Blocks.farmland;
+		Block block = world.getBlock(x, y, z);
+		return (world.isAirBlock(x, y, z) || block.getMaterial().isReplaceable()) && this.canThisPlantGrowOnThisBlock(world.getBlock(x, y - 1, z));
+	}
+
+	protected boolean canThisPlantGrowOnThisBlock(Block block)
+	{
+		return TFC_Core.isSoil(block);
 	}
 
 	@Override
