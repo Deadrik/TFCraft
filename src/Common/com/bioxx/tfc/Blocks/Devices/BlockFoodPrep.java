@@ -3,6 +3,7 @@ package com.bioxx.tfc.Blocks.Devices;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -161,5 +162,22 @@ public class BlockFoodPrep extends BlockTerraContainer
 	public String getItemIconName()
 	{
 		return Reference.ModID + ":" + "devices/foodprep";
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
+	{
+		return true;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean addDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
+	{
+		if (world.getBlock(x, y, z) == this)
+			return true;
+		else
+			return false;
 	}
 }
