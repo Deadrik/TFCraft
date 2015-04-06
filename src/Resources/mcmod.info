@@ -8,7 +8,7 @@
     "mcversion": "${minecraft_version}",
     "url" : "http://terrafirmacraft.com/change_log.html",
     "updateUrl": "http://terrafirmacraft.com/download.html",
-    "authorList": [ "Bioxx", "Dunkleosteus" ],
+    "authorList": [ "Bioxx", "Dunkleosteus", "Kittychanley" ],
     "credits": "http://terrafirmacraft.com/credits.html",
     "logoFile": "/assets/textures/gui/TFCLogo.png",
     "screenshots": [  ],
