@@ -20,6 +20,7 @@ public class TFCOptions
 	public static int initialCollapseRatio;
 	public static int propogateCollapseChance;
 	public static boolean enableCaveIns;
+	public static boolean enableCaveInsDestroyOre;
 	
 	public static int ravineRarity;
 	public static int lavaFissureRarity;

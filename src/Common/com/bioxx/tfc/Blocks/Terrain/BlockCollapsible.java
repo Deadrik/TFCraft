@@ -221,7 +221,12 @@ public class BlockCollapsible extends BlockTerraContainer
 						world.playSoundAtEntity(ent, TFC_Sounds.FALLININGROCKLONG, 1.0F, 0.8F + (R.nextFloat()/2));
 				}
 
-				world.setBlockToAir(x, y, z);
+				if (world.getBlock(x, y, z) instanceof BlockOre && !TFCOptions.enableCaveInsDestroyOre)
+				{
+					TFC_Core.setBlockToAirWithDrops(world, x, y, z);
+				}
+				else
+					world.setBlockToAir(x, y, z);
 
 				if(world.getBlock(x, y-1, z) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(x, y-1, z)).blockType == this && 
 						((TEPartial)world.getTileEntity(x, y-1, z)).MetaID == fallingBlockMeta)

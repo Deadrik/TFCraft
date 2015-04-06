@@ -25,6 +25,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import com.bioxx.tfc.Blocks.Terrain.BlockOre;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCOptions;
 
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
@@ -228,7 +229,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 		Block b = world.getBlock(x, y, z);
 		if (canDestroy(b) && (b.isAir(world, x, y, z) || !worldObj.isSideSolid(x, y, z, ForgeDirection.UP)))
 			return TFC_Core.setBlockWithDrops(worldObj, x, y, z, getBlock(), this.blockMeta);
-		else if (b instanceof BlockOre)
+		else if (b instanceof BlockOre && TFCOptions.enableCaveInsDestroyOre)
 			return world.setBlockToAir(x, y, z);
 		return false;
 	}

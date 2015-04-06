@@ -352,6 +352,7 @@ public class TerraFirmaCraft
 		TFCOptions.initialCollapseRatio = TFCOptions.getIntFor(config,CAVEIN_OPTIONS_HEADER,"initialCollapseRatio",10, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");
 		TFCOptions.propogateCollapseChance = TFCOptions.getIntFor(config,CAVEIN_OPTIONS_HEADER,"propogateCollapseChance",55, "This number is the likelihood for each block to propagate the collapse farther.");
 		TFCOptions.enableCaveIns = TFCOptions.getBooleanFor(config, CAVEIN_OPTIONS_HEADER, "enableCaveIns", true, "Set this to false to disable cave ins.");
+		TFCOptions.enableCaveInsDestroyOre = TFCOptions.getBooleanFor(config, CAVEIN_OPTIONS_HEADER, "enableCaveInsDestroyOre", true, "Set this to false to make cave ins drop the ore item instead of destroy it.");
 		
 		// World Generation
 		TFCOptions.ravineRarity = TFCOptions.getIntFor(config, WORLD_GEN_HEADER, "ravineRarity", 100, "Controls the chance of a ravine to be created, smaller value is higher chance, more ravines. Default is 100, use 0 to disable ravines.");
