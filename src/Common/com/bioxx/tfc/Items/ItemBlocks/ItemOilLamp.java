@@ -149,9 +149,9 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 		if(is.hasTagCompound())
 		{
 			FluidStack fs = FluidStack.loadFluidStackFromNBT(is.getTagCompound());
-			if(fs.getFluid() == TFCFluids.OLIVEOIL)
+			if(fs != null && fs.getFluid() == TFCFluids.OLIVEOIL)
 				arraylist.add(((fs.amount) * TFCOptions.oilLampFuelMult) + " " + TFC_Core.translate("gui.hoursRemaining") + " (" + Helper.roundNumber((fs.amount / 250f) * 100f, 10) + "%)");
-			if(fs.getFluid() == TFCFluids.LAVA)
+			if(fs != null && fs.getFluid() == TFCFluids.LAVA)
 				arraylist.add(TFC_Core.translate("gui.infinite") + " " + TFC_Core.translate("gui.hoursRemaining"));
 		}
 	}
