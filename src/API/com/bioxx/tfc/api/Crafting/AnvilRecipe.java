@@ -26,12 +26,14 @@ public class AnvilRecipe
 
 	public AnvilRecipe(ItemStack in, ItemStack in2, String p, boolean flux, AnvilReq req, ItemStack result)
 	{
-		this(in, in2, p.toLowerCase(), flux, req.Tier, result);
+		this(in, in2, p.toLowerCase(), 0, flux, req.Tier, result);
+		this.craftingValue = 70 + new Random(AnvilManager.world.getSeed()+(in != null ? Item.getIdFromItem(in.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(craftingBoundDefault);
 	}
 
 	public AnvilRecipe(ItemStack in, ItemStack in2, String p, AnvilReq req, ItemStack result)
 	{
-		this(in, in2, p.toLowerCase(), false, req.Tier, result);
+		this(in, in2, p.toLowerCase(), 0, false, req.Tier, result);
+		this.craftingValue = 70 + new Random(AnvilManager.world.getSeed()+(in != null ? Item.getIdFromItem(in.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(craftingBoundDefault);
 	}
 
 	public AnvilRecipe SetCraftingBound(int max)
@@ -40,12 +42,12 @@ public class AnvilRecipe
 		return this;
 	}
 
-	public AnvilRecipe(ItemStack in, ItemStack in2, String p, boolean flux, int req, ItemStack result)
+	public AnvilRecipe(ItemStack in, ItemStack in2, String p, int cv, boolean flux, int req, ItemStack result)
 	{
 		input1 = in;
 		input2 = in2;
 		this.flux = flux;
-		this.craftingValue = 70 + new Random(AnvilManager.world.getSeed()+(in != null ? Item.getIdFromItem(in.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(craftingBoundDefault);
+		this.craftingValue = cv;
 		anvilreq = req;
 		this.result = result;
 		inheritsDamage = false;
