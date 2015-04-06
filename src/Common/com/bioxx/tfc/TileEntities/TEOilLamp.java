@@ -59,7 +59,7 @@ public class TEOilLamp extends TELightEmitter
 		{
 			return true;
 		}
-		else if((meta & 7) == 5 && getFuel().getFluid() == TFCFluids.LAVA)
+		else if((meta & 7) == 5 && getFuel() != null && getFuel().getFluid() == TFCFluids.LAVA)
 		{
 			return true;
 		}
