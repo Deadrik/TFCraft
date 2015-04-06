@@ -844,7 +844,6 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	private void sendPressPacket() 
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
@@ -857,7 +856,6 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		this.broadcastPacketInRange(this.createDataPacket(nbt));
 	}
 
-	@SideOnly(Side.CLIENT)
 	private void sendCooldownPacket()
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
