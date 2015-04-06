@@ -26,12 +26,12 @@ public class AnvilRecipe
 
 	public AnvilRecipe(ItemStack in, ItemStack in2, String p, boolean flux, AnvilReq req, ItemStack result)
 	{
-		this(in, in2, p.toLowerCase(), 70 + new Random((in != null ? Item.getIdFromItem(in.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(craftingBoundDefault), flux, req.Tier, result);
+		this(in, in2, p.toLowerCase(), flux, req.Tier, result);
 	}
 
 	public AnvilRecipe(ItemStack in, ItemStack in2, String p, AnvilReq req, ItemStack result)
 	{
-		this(in, in2, p.toLowerCase(), 70 + new Random((in != null ? Item.getIdFromItem(in.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(craftingBoundDefault), false, req.Tier, result);
+		this(in, in2, p.toLowerCase(), false, req.Tier, result);
 	}
 
 	public AnvilRecipe SetCraftingBound(int max)
@@ -40,12 +40,12 @@ public class AnvilRecipe
 		return this;
 	}
 
-	public AnvilRecipe(ItemStack in, ItemStack in2, String p, int cv, boolean flux, int req, ItemStack result)
+	public AnvilRecipe(ItemStack in, ItemStack in2, String p, boolean flux, int req, ItemStack result)
 	{
 		input1 = in;
 		input2 = in2;
 		this.flux = flux;
-		this.craftingValue = cv;
+		this.craftingValue = 70 + new Random(AnvilManager.world.getSeed()+(in != null ? Item.getIdFromItem(in.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(craftingBoundDefault);
 		anvilreq = req;
 		this.result = result;
 		inheritsDamage = false;
@@ -212,45 +212,45 @@ public class AnvilRecipe
 		return 0;
 	}
 
-    public String getPlan()
-    {
-        return plan;
-    }
+	public String getPlan()
+	{
+		return plan;
+	}
 
-    public ItemStack getInput1()
-    {
-        return input1;
-    }
+	public ItemStack getInput1()
+	{
+		return input1;
+	}
 
-    public ItemStack getInput2()
-    {
-        return input2;
-    }
+	public ItemStack getInput2()
+	{
+		return input2;
+	}
 
-    public boolean isFlux()
-    {
-        return flux;
-    }
+	public boolean isFlux()
+	{
+		return flux;
+	}
 
-    public int getAnvilreq()
-    {
-        return anvilreq;
-    }
+	public int getAnvilreq()
+	{
+		return anvilreq;
+	}
 
-    public boolean isInheritsDamage()
-    {
-        return inheritsDamage;
-    }
+	public boolean isInheritsDamage()
+	{
+		return inheritsDamage;
+	}
 
-    public int getCraftingXP()
-    {
-        return craftingXP;
-    }
+	public int getCraftingXP()
+	{
+		return craftingXP;
+	}
 
-    public ArrayList<String> getSkillsList()
-    {
-        return skillsList;
-    }
+	public ArrayList<String> getSkillsList()
+	{
+		return skillsList;
+	}
 }
 
 

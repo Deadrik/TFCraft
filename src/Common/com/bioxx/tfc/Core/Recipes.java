@@ -1600,6 +1600,8 @@ public class Recipes
 	public static void registerAnvilRecipes(Random R, World world)
 	{
 		AnvilManager manager = AnvilManager.getInstance();
+		//We need to set the world ref so that all anvil recipes can generate correctly
+		AnvilManager.world = world;
 
 		manager.addPlan("ingot", new PlanRecipe(
 				new RuleEnum[] {RuleEnum.HITLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.HITTHIRDFROMLAST}));

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class AnvilManager
 {
@@ -15,6 +16,7 @@ public class AnvilManager
 	{
 		return instance;
 	}
+	public static World world;
 
 	private List<AnvilRecipe> recipes;
 	private List<AnvilRecipe> recipesWeld;
