@@ -96,4 +96,10 @@ public class ItemRawHide extends ItemLooseRock
 		list.add(new ItemStack(this, 1, 1));
 		list.add(new ItemStack(this, 1, 2));
 	}
+
+	@Override
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
+	{
+		// Blank to override ItemLooseRock's help tooltip.
+	}
 }

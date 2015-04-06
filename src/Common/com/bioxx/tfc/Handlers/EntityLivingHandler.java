@@ -34,7 +34,6 @@ import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
 import com.bioxx.tfc.Items.ItemArrow;
 import com.bioxx.tfc.Items.ItemBloom;
-import com.bioxx.tfc.Items.ItemLooseRock;
 import com.bioxx.tfc.Items.ItemOreSmall;
 import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Items.Tools.ItemJavelin;
@@ -268,7 +267,7 @@ public class EntityLivingHandler
 			}
 		}
 
-		if(item.getItem() instanceof ItemLooseRock)
+		if (item.getItem() == TFCItems.LooseRock)
 			player.triggerAchievement(TFC_Achievements.achLooseRock);
 		else if(item.getItem() instanceof ItemOreSmall)
 			player.triggerAchievement(TFC_Achievements.achSmallOre);
