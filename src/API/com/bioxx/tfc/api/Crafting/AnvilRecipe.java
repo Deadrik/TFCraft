@@ -36,7 +36,7 @@ public class AnvilRecipe
 
 	public AnvilRecipe SetCraftingBound(int max)
 	{
-		craftingValue = 70 + new Random((input1 != null ? Item.getIdFromItem(input1.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(max);
+		craftingValue = 70 + new Random(AnvilManager.world.getSeed()+(input1 != null ? Item.getIdFromItem(input1.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(max);
 		return this;
 	}
 
