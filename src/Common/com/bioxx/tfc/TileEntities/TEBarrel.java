@@ -1,6 +1,7 @@
 package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
+import java.util.Stack;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -662,7 +663,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			//Here we handle item stacks that are too big for MC to handle such as when making mortar.
 			//If the stack is > its own max stack size then we split it and add it to the invisible solid storage area or 
 			//spawn the item in the world if there is no room left.
-			if(this.getFluidLevel() > 0 && getInputStack() != null)
+			if (this.getFluidLevel() > 0 && getInputStack() != null)
 			{
 				int count = 1;
 				while(this.getInputStack().stackSize > getInputStack().getMaxStackSize())
@@ -679,6 +680,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					count++;
 				}
 			}
+
 			//Move any items in the solid storage slots to the main slot if they exist and the barrel has liquid.
 			else if(this.getFluidLevel() > 0 && getInputStack() == null && this.getInvCount() > 0)
 			{
@@ -770,7 +772,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					FluidStack origFS = getFluidStack() != null ? getFluidStack().copy() : null;
 					if(fluid.isFluidEqual(recipe.getResultFluid(origIS, origFS, time)) && recipe.removesLiquid)
 					{
-						if(fluid.getFluid() == TFCFluids.BRINE)
+						if (fluid.getFluid() == TFCFluids.BRINE && origIS.getItem() instanceof IFood)
 							fluid.amount -= recipe.getResultFluid(origIS, origFS, time).amount * Food.getWeight(origIS);
 						else
 							fluid.amount -= recipe.getResultFluid(origIS, origFS, time).amount;
@@ -778,30 +780,41 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					else
 					{
 						this.fluid = recipe.getResultFluid(origIS, origFS, time);
-						if(fluid != null && !(recipe instanceof BarrelLiquidToLiquidRecipe))
+						if (fluid != null && !(recipe instanceof BarrelLiquidToLiquidRecipe) && origFS != null)
 							this.fluid.amount = origFS.amount;
 					}
 
-					if(origFS.getFluid() != TFCFluids.MILKCURDLED && this.fluid.getFluid() == TFCFluids.MILKCURDLED)
+					if (origFS != null && origFS.getFluid() != TFCFluids.MILKCURDLED && this.fluid.getFluid() == TFCFluids.MILKCURDLED)
 						this.sealtime = (int) TFC_Time.getTotalHours();
 
-					ItemStack result = recipe.getResult(origIS, origFS, time);
-					if(fluid != null && fluid.getFluid() == TFCFluids.BRINE)
+					Stack<ItemStack> resultStacks = recipe.getResult(origIS, origFS, time);
+					if (!resultStacks.isEmpty())
 					{
-						if(result == null)
-							result = origIS.copy();
-						if(result != null && result.getItem() instanceof IFood && 
-								(((IFood)result.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable || 
-								((IFood)result.getItem()).getFoodGroup() == EnumFoodGroup.Fruit ||
-								((IFood)result.getItem()).getFoodGroup() == EnumFoodGroup.Protein ||
-								((IFood)result.getItem()) == TFCItems.Cheese))
+						ItemStack result = resultStacks.pop();
+						if (fluid != null && fluid.getFluid() == TFCFluids.BRINE)
 						{
-							if(!Food.isBrined(result))
-								Food.setBrined(result, true);
+							if (result == null)
+								result = origIS.copy();
+							if (result != null && result.getItem() instanceof IFood && (result.getItem() == TFCItems.Cheese || ((IFood) result.getItem()).getFoodGroup() != EnumFoodGroup.Grain))
+							{
+								if (!Food.isBrined(result))
+									Food.setBrined(result, true);
+							}
 						}
-					}
 
-					this.setInventorySlotContents(0, result);
+						storage[INPUT_SLOT] = result;
+
+						for (int i = 1; i < storage.length; i++)
+						{
+							if (storage[i] == null && !resultStacks.isEmpty())
+								this.setInventorySlotContents(i, resultStacks.pop());
+						}
+
+						while (!resultStacks.isEmpty())
+							worldObj.spawnEntityInWorld(new EntityItem(worldObj, xCoord, yCoord, zCoord, resultStacks.pop()));
+
+						this.setInventorySlotContents(0, result);
+					}
 				}
 			}
 			else if(getFluidStack() == null && !isCheese)recipe = null;

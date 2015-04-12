@@ -1,5 +1,7 @@
 package com.bioxx.tfc.api.Crafting;
 
+import java.util.Stack;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
@@ -17,9 +19,11 @@ public class BarrelAlcoholRecipe extends BarrelRecipe
 	}
 
 	@Override
-	public ItemStack getResult(ItemStack inIS, FluidStack inFS, int sealedTime)
+	public Stack<ItemStack> getResult(ItemStack inIS, FluidStack inFS, int sealedTime)
 	{
-		return recipeOutIS;
+		Stack<ItemStack> result = new Stack<ItemStack>();
+		result.push(recipeOutIS);
+		return result;
 	}
 
 	@Override

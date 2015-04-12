@@ -1,5 +1,8 @@
 package com.bioxx.tfc.api.Crafting;
 
+import java.util.Stack;
+
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -142,21 +145,48 @@ public class BarrelRecipe
 		return Math.min(runs, div);
 	}
 
-	public ItemStack getResult(ItemStack inIS, FluidStack inFS, int sealedTime)
+	public Stack<ItemStack> getResult(ItemStack inIS, FluidStack inFS, int sealedTime)
 	{
-		ItemStack is = null;
-		if(recipeOutIS != null)
+		Stack<ItemStack> stackList = new Stack();
+		ItemStack outStack = null;
+
+		if (recipeOutIS != null)
 		{
-			is = recipeOutIS.copy();
-			is.stackSize*= this.getnumberOfRuns(inIS, inFS);
-			return is;
+			stackList.clear();
+			outStack = recipeOutIS.copy();
+			int outputCount = outStack.stackSize * this.getnumberOfRuns(inIS, inFS);
+			int maxStackSize = outStack.getMaxStackSize();
+			Item item = outStack.getItem();
+			int damage = outStack.getItemDamage();
+
+			int remainder = outputCount % maxStackSize; // The amount remaining after making full-sized stacks.
+			if (remainder > 0)
+			{
+				stackList.push(new ItemStack(item, remainder, damage)); // Push this on first, so it doesn't end up in the input slot.
+				outputCount -= remainder;
+			}
+
+			while (outputCount >= maxStackSize) // Add as many full-sized stacks as possible to stackList.
+			{
+				stackList.push(new ItemStack(item, maxStackSize, damage));
+				outputCount -= maxStackSize;
+			}
+			return stackList;
+
 		}
-		if(!removesLiquid && inIS != null)
+		if (!removesLiquid && inIS != null && inFS != null)
 		{
-			is = inIS;
-			is.stackSize -= inFS.amount/this.recipeOutFluid.amount;
+			stackList.clear();
+			outStack = inIS.copy();
+			outStack.stackSize -= inFS.amount / this.recipeOutFluid.amount;
+			stackList.push(outStack);
 		}
-		return is;
+		if (outStack == null)
+		{
+			stackList.clear();
+			stackList.push(outStack);
+		}
+		return stackList;
 	}
 
 	public FluidStack getResultFluid(ItemStack inIS, FluidStack inFS, int sealedTime)
@@ -164,13 +194,13 @@ public class BarrelRecipe
 		if(recipeOutFluid != null)
 		{
 			FluidStack fs = recipeOutFluid.copy();
-			if(!removesLiquid && fs != null)
+			if (!removesLiquid && fs != null && inFS != null)
 			{
 				fs.amount = inFS.amount;
 			}
-			else if(fs != null && recipeOutIS != null)
+			else if (fs != null && inIS != null)
 			{
-				fs.amount*=recipeOutIS.stackSize;
+				fs.amount *= inIS.stackSize;
 			}
 			return fs;
 		}

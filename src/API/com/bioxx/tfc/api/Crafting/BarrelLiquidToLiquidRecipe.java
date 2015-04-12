@@ -1,5 +1,7 @@
 package com.bioxx.tfc.api.Crafting;
 
+import java.util.Stack;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -29,11 +31,15 @@ public class BarrelLiquidToLiquidRecipe extends BarrelRecipe
 	}
 
 	@Override
-	public ItemStack getResult(ItemStack inIS, FluidStack inFS, int sealedTime)
+	public Stack<ItemStack> getResult(ItemStack inIS, FluidStack inFS, int sealedTime)
 	{
+		Stack<ItemStack> result = new Stack<ItemStack>();
 		if(inIS != null)
-			return inIS.getItem().getContainerItem(inIS);
-		return null;
+			result.push(inIS.getItem().getContainerItem(inIS));
+		else
+			result.push(null);
+
+		return result;
 	}
 
 	@Override

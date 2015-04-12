@@ -1,5 +1,7 @@
 package com.bioxx.tfc.api.Crafting;
 
+import java.util.Stack;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -21,7 +23,7 @@ public class BarrelMultiItemRecipe extends BarrelRecipe
 	}
 
 	@Override
-	public ItemStack getResult(ItemStack inIS, FluidStack inFS, int sealedTime)
+	public Stack<ItemStack> getResult(ItemStack inIS, FluidStack inFS, int sealedTime)
 	{
 		ItemStack out = recipeOutIS.copy();
 		if(inIS != null && inIS.getItem() instanceof IFood)
@@ -39,7 +41,11 @@ public class BarrelMultiItemRecipe extends BarrelRecipe
 			else
 				out.stackSize *= inIS.stackSize;
 		}
-		return out;
+
+		Stack<ItemStack> result = new Stack<ItemStack>();
+		result.push(out);
+
+		return result;
 	}
 
 	@Override
@@ -66,4 +72,20 @@ public class BarrelMultiItemRecipe extends BarrelRecipe
     {
         return keepstacksize;
     }
+
+	@Override
+	public Boolean matches(ItemStack inIS, FluidStack inFS)
+	{
+		if (inIS != null && inFS != null && inIS.getItem() instanceof IFood)
+		{
+			float w = ((IFood) inIS.getItem()).getFoodWeight(inIS);
+			if (inFS.isFluidEqual(recipeFluid) && (w * recipeOutFluid.amount <= inFS.amount))
+			{
+				return true;
+			}
+			else
+				return false;
+		}
+		return super.matches(inIS, inFS);
+	}
 }
