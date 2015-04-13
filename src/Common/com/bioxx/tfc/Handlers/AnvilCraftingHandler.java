@@ -1,7 +1,10 @@
 package com.bioxx.tfc.Handlers;
 
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.TFCItems;
@@ -19,6 +22,8 @@ public class AnvilCraftingHandler
 	{
 		if(event.input1.getItem() == TFCItems.Bloom && event.input1.getItemDamage() > 100)
 		{
+			TileEntity te = event.anvilTE;
+			World world = te.getWorldObj();
 			int dam = event.input1.getItemDamage();
 			float temp = event.input1.getTagCompound()!=null?TFC_ItemHeat.GetTemp(event.input1):0;
 			int count = dam/100;
@@ -27,14 +32,21 @@ public class AnvilCraftingHandler
 			{
 				ItemStack out1 = new ItemStack(TFCItems.Bloom, 1, 100);
 				TFC_ItemHeat.SetTemp(out1, temp);
-				TFC_Core.giveItemToPlayer(out1, (EntityPlayer)event.entity);
+
+				EntityItem ei = new EntityItem(world, te.xCoord + 0.5, te.yCoord + 1.5, te.zCoord + 0.5, out1);
+				ei.motionX = 0; ei.motionY = 0; ei.motionZ = 0; ei.delayBeforeCanPickup = 0;
+				world.spawnEntityInWorld(ei);
+
 				count--;
 			}
 			if(rem > 0)
 			{
 				ItemStack out2 = new ItemStack(TFCItems.Bloom, 1, rem);
 				TFC_ItemHeat.SetTemp(out2, temp);
-				TFC_Core.giveItemToPlayer(out2, (EntityPlayer)event.entity);
+
+				EntityItem ei = new EntityItem(world, te.xCoord + 0.5, te.yCoord + 1.5, te.zCoord + 0.5, out2);
+				ei.motionX = 0; ei.motionY = 0; ei.motionZ = 0; ei.delayBeforeCanPickup = 0;
+				world.spawnEntityInWorld(ei);
 			}
 			event.result = null;
 		}
