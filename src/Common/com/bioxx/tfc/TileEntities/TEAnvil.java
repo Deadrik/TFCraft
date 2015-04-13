@@ -111,8 +111,9 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 				ItemStack result = r != null && r[1] !=  null ? (ItemStack) r[1] : null;
 
 				//This is where the crafting is completed and the result is added to the anvil
-				if(result != null && lastWorker != null)
+				if(result != null)
 				{
+
 					AnvilCraftEvent eventCraft = new AnvilCraftEvent(lastWorker, this, anvilItemStacks[INPUT1_SLOT], anvilItemStacks[INPUT2_SLOT], result);
 					MinecraftForge.EVENT_BUS.post(eventCraft);
 					if(!eventCraft.isCanceled())
@@ -121,7 +122,8 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 						TFC_ItemHeat.SetTemp(eventCraft.result, TFC_ItemHeat.GetTemp(anvilItemStacks[INPUT1_SLOT]));
 
 						this.setInventorySlotContents(INPUT1_SLOT, eventCraft.result);
-						if(anvilItemStacks[INPUT1_SLOT] != null)
+						//If the lastWorker is not null, then we attempt to apply some crafting buffs to items based on the players skills
+						if(anvilItemStacks[INPUT1_SLOT] != null && lastWorker != null)
 						{
 							if(anvilItemStacks[INPUT1_SLOT].getItem() instanceof ItemMiscToolHead)
 							{
@@ -142,7 +144,9 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 
 					}
 					workRecipe = null;
+					craftingPlan = "";
 					craftingValue = 0;
+					lastWorker = null;
 				}
 			}
 		}
@@ -177,6 +181,9 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		return out;
 	}
 
+	/**
+	 * Called whenever an inventory slot changes
+	 */
 	public void onSlotChanged(int slot)
 	{
 		if(slot == INPUT1_SLOT || slot == INPUT2_SLOT || slot == FLUX_SLOT)
@@ -188,7 +195,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		AnvilManager manager = AnvilManager.getInstance();
 		Object[] plans = manager.getPlans().keySet().toArray();
 		Map<String, AnvilRecipe> planList = new HashMap<String, AnvilRecipe>();
-
+		//Here we go through and assemble a list of all possible recipes using the input parameters
 		for(Object p : plans)
 		{
 			AnvilRecipe ar = manager.findMatchingRecipe(new AnvilRecipe(anvilItemStacks[INPUT1_SLOT], anvilItemStacks[INPUT2_SLOT], 
@@ -198,25 +205,32 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 				planList.put((String)p, ar);
 		}
 
+		//We need to pre-emptively remove split blooms from the plan list if the input bloom is too small
 		if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].getItem() == TFCItems.Bloom)
 		{
 			if(anvilItemStacks[INPUT1_SLOT].getItemDamage() <= 100 && planList.containsKey("splitbloom"))
 				planList.remove("splitbloom");
 		}
 
+		//If there are no recipes found then we need to null everything to prevent any crafting from occurring
 		if (planList.size() == 0)
 		{
 			workRecipe = null;
+			craftingPlan = "";
+			this.lastWorker = null;
 			return;
 		}
 
-		if (planList.size() == 1)
+		//If there is only one possible recipe then we auto-select it on the client's side
+		/*if (worldObj.isRemote && planList.size() == 1)
 		{
 			workRecipe = (AnvilRecipe)(planList.values().toArray())[0];
 			craftingPlan = (String)planList.keySet().toArray()[0];
+			this.setPlan(craftingPlan);
 			return;
-		}
+		}*/
 
+		//This is the core of the process. If the plan list for the input items contains our crafting plan, then we've found our recipe.
 		if (planList.containsKey(craftingPlan))
 			workRecipe = planList.get(craftingPlan);
 		else
@@ -225,6 +239,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			return;
 		}
 
+		//We dont want to allow blooms of <100 units to be refined so we null the recipe unless the amount == 100
 		if (anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].getItem() == TFCItems.Bloom && workRecipe.getCraftingResult().getItem() == TFCItems.Bloom)
 		{
 			if (anvilItemStacks[INPUT1_SLOT].getItemDamage() < 100)
@@ -867,6 +882,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 				setPlan(nbt.getString("plan"));
 				this.lastWorker = worldObj.getPlayerEntityByName(nbt.getString("playername"));
 				this.lastWorker.openGui(TerraFirmaCraft.instance, 21, worldObj, xCoord, yCoord, zCoord);
+				this.updateRecipe();
 			}
 			return;
 		}
