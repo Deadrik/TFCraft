@@ -239,7 +239,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			return;
 		}
 
-		//We dont want to allow blooms of <100 units to be refined so we null the recipe unless the amount == 100
+		//We don't want to allow refined blooms of < 100 units to be refined into wrought iron ingots so we null the recipe unless the amount == 100
 		if (anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].getItem() == TFCItems.Bloom && workRecipe.getCraftingResult().getItem() == TFCItems.Bloom)
 		{
 			if (anvilItemStacks[INPUT1_SLOT].getItemDamage() < 100)
