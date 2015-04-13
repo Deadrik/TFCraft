@@ -52,6 +52,9 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	@Override
 	public Metal GetMetalType(ItemStack is)
 	{
+		if (this == TFCItems.RawBloom)
+			return Global.UNKNOWN;
+
 		return Global.WROUGHTIRON;
 	}
 

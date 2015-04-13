@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Items.ItemBloom;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
@@ -108,62 +109,62 @@ public class TEForge extends TEFireEntity implements IInventory
 		{
 			HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
 			ItemStack inputCopy = fireItemStacks[i].copy();
+			
 			if(index != null && TFC_ItemHeat.GetTemp(fireItemStacks[i]) > index.meltTemp)
 			{
-				float temp = TFC_ItemHeat.GetTemp(fireItemStacks[i]);
+				float temperature = TFC_ItemHeat.GetTemp(fireItemStacks[i]);
 				//int dam = fireItemStacks[i].getItemDamage();
 
-				//Morph the input
+				// If not unshaped metal, morph the input to the output. If not an input with direct morph (sand, sticks, etc) this deletes the input item from the slot.
 				if(!(fireItemStacks[i].getItem() instanceof ItemMeltedMetal))
 					fireItemStacks[i] = index.getMorph();
 
+				// Handle items that had a direct morph.
 				if(fireItemStacks[i] != null)
 				{
-					HeatIndex index2 = manager.findMatchingIndex(fireItemStacks[i]);
-					if(index2 != null)
+					HeatIndex morphIndex = manager.findMatchingIndex(fireItemStacks[i]);
+					if(morphIndex != null)
 					{
-						//if the input is a new item, then apply the old temperature to it
-						TFC_ItemHeat.SetTemp(fireItemStacks[i], TFC_ItemHeat.GetTemp(fireItemStacks[i]));
+						// Apply old temperature to direct morphs that can continue to be heated.
+						TFC_ItemHeat.SetTemp(fireItemStacks[i], temperature);
 					}
 				}
 				else if(index.hasOutput())
 				{
 					ItemStack output = index.getOutput(inputCopy, R);
-
-					if(inputCopy.getItem() instanceof ISmeltable)
+					if (inputCopy.getItem() instanceof ISmeltable)
 					{
-						ISmeltable sm = (ISmeltable)inputCopy.getItem();
-						ItemStack out = new ItemStack(sm.GetMetalType(inputCopy).MeltedItem);
-						TFC_ItemHeat.SetTemp(out, TFC_ItemHeat.GetTemp(inputCopy));
-						int amt = sm.GetMetalReturnAmount(inputCopy);
+						ISmeltable smelt = (ISmeltable)inputCopy.getItem();
+						ItemStack meltedItem = new ItemStack(smelt.GetMetalType(inputCopy).MeltedItem);
+						TFC_ItemHeat.SetTemp(meltedItem, temperature);
 
-						while(amt > 0 && getMold() != null)
+						int units = smelt.GetMetalReturnAmount(inputCopy);
+						// Raw/Refined Blooms give at max 100 units to force players to split using the anvil
+						if (inputCopy.getItem() instanceof ItemBloom)
+							units = Math.min(100, units);
+
+						while(units > 0 && getMold() != null)
 						{
 							ItemStack moldIS = this.getMold();
-							if(amt >= 100)
+							ItemStack outputCopy = meltedItem.copy();
+
+							if (units > 100)
 							{
-								amt-= 100;
+								units-= 100;
 								moldIS.stackSize--;
-								ItemStack _out = out.copy();
-								if(!addToStorage(_out.copy()))
+								if(!addToStorage(outputCopy.copy()))
 								{
-									EntityItem ei = new EntityItem(worldObj, xCoord+0.5,yCoord+1.5,zCoord+0.5, _out);
-									ei.motionX = 0;ei.motionY = 0;ei.motionZ = 0;
+									EntityItem ei = new EntityItem(worldObj, xCoord + 0.5, yCoord + 1.5, zCoord + 0.5, outputCopy);
+									ei.motionX = 0; ei.motionY = 0; ei.motionZ = 0;
 									worldObj.spawnEntityInWorld(ei);
 								}
 							}
-							else if(amt > 0)
+							else if (units > 0) // Put the last item in the forge cooking slot, replacing the input.
 							{
-								ItemStack _out = out.copy();
-								_out.setItemDamage(100-amt);
-								amt = 0;
+								outputCopy.setItemDamage(100-units);
+								units = 0;
 								moldIS.stackSize--;
-								if(!addToStorage(_out.copy()))
-								{
-									EntityItem ei = new EntityItem(worldObj, xCoord+0.5,yCoord+1.5,zCoord+0.5, _out);
-									ei.motionX = 0;ei.motionY = 0;ei.motionZ = 0;
-									worldObj.spawnEntityInWorld(ei);
-								}
+								fireItemStacks[i] = outputCopy.copy();
 							}
 						}
 					}
@@ -173,11 +174,10 @@ public class TEForge extends TEFireEntity implements IInventory
 					}
 
 
-					//HeatIndex index2 = manager.findMatchingIndex(fireItemStacks[i]);
 					if(TFC_ItemHeat.IsCookable(fireItemStacks[i]) > -1)
 					{
 						//if the input is a new item, then apply the old temperature to it
-						TFC_ItemHeat.SetTemp(fireItemStacks[i], temp);
+						TFC_ItemHeat.SetTemp(fireItemStacks[i], temperature);
 					}
 				}
 			}

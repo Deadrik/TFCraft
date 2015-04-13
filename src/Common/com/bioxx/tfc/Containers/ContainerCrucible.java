@@ -23,7 +23,16 @@ public class ContainerCrucible extends ContainerTFC
 		te = tileentityforge;
 		firetemp = 0;
 		//Input slot
-		addSlotToContainer(new Slot(tileentityforge, 0, 152, 7));
+		addSlotToContainer(new Slot(tileentityforge, 0, 152, 7)
+		{
+			@Override
+			public boolean isItemValid(ItemStack itemstack)
+			{
+				if (itemstack.getItem() == TFCItems.RawBloom || (itemstack.getItem() == TFCItems.Bloom && itemstack.getItemDamage() > 100))
+					return false;
+				return true;
+			}
+		});
 
 		addSlotToContainer(new SlotLiquidVessel(tileentityforge, 1, 152, 90));
 

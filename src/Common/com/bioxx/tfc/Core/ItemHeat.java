@@ -2,6 +2,7 @@ package com.bioxx.tfc.Core;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRaw;
@@ -19,6 +20,8 @@ public class ItemHeat
 		 * Heat now increases at a base rate of 1C per tick. Specific heat is now just a multiplier on this rate. 
 		 * This means that a metlTemp of 100C will be reached in 5 seconds with a Specific Heat of 1.0 and 10 seconds at 2.0
 		 */
+
+		final int WILDCARD_VALUE = OreDictionary.WILDCARD_VALUE;
 
 		HeatRaw BismuthRaw = new HeatRaw(0.14, 270);
 		HeatRaw BismuthBronzeRaw = new HeatRaw(0.35, 985);
@@ -233,8 +236,8 @@ public class ItemHeat
 		//Wrought Iron
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronIngot,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,1)));
 
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.Bloom, 1, 32767), IronRaw, new ItemStack(TFCItems.WroughtIronUnshaped,1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RawBloom, 1, 32767), IronRaw, new ItemStack(TFCItems.UnknownUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.Bloom, 1, WILDCARD_VALUE), IronRaw, new ItemStack(TFCItems.WroughtIronUnshaped, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RawBloom, 1, WILDCARD_VALUE), IronRaw, new ItemStack(TFCItems.UnknownUnshaped, 1)));
 
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronIngot2x,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnshaped,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,1)));
@@ -335,8 +338,8 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincSheet,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincSheet2x,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,4,0)));
 		//Ceramics
-		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand, 1, 32767), 1, 600, new ItemStack(Blocks.glass, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand2, 1, 32767), 1, 600, new ItemStack(Blocks.glass, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand, 1, WILDCARD_VALUE), 1, 600, new ItemStack(Blocks.glass, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand2, 1, WILDCARD_VALUE), 1, 600, new ItemStack(Blocks.glass, 1)));
 
 		//Food
 		//Proteins
@@ -410,9 +413,9 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.Gooseberry, 1), 1, 1200, null));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.Cloudberry, 1), 1, 1200, null));
 
-		//manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1, 32767), 0.2, 200, new ItemStack(Items.bowl, 1)));
+		//manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1, WILDCARD_VALUE), 0.2, 200, new ItemStack(Items.bowl, 1)));
 
 		//Other
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.Stick, 1, 32767), 1, 40, new ItemStack(TFCBlocks.Torch, 2)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.Stick, 1, WILDCARD_VALUE), 1, 40, new ItemStack(TFCBlocks.Torch, 2)));
 	}
 }
