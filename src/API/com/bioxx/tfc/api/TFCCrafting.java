@@ -5,6 +5,7 @@ import net.minecraftforge.common.config.Property;
 
 public class TFCCrafting
 {
+	public static boolean enableNEIHiding;
 	public static boolean appleConversion;
 	public static boolean arrowConversion;
 	public static boolean bowConversion;

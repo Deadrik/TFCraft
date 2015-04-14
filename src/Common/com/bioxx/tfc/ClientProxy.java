@@ -157,11 +157,12 @@ import com.bioxx.tfc.TileEntities.TEHopper;
 import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.TileEntities.TELoom;
 import com.bioxx.tfc.TileEntities.TEPottery;
-import com.bioxx.tfc.TileEntities.TESmokeRack;
-import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.TileEntities.TEQuern;
+import com.bioxx.tfc.TileEntities.TESmokeRack;
 import com.bioxx.tfc.TileEntities.TEToolRack;
+import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCCrafting;
 import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumTree;
@@ -659,7 +660,7 @@ public class ClientProxy extends CommonProxy
 	public void hideNEIItems()
 	{
 		String mod = "NotEnoughItems";
-		if (Loader.isModLoaded(mod))
+		if (Loader.isModLoaded(mod) && TFCCrafting.enableNEIHiding)
 		{
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Bloom));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.writabeBookTFC)); // Book
@@ -734,30 +735,33 @@ public class ClientProxy extends CommonProxy
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.CloudberryLeaf));
 
 			// Vanilla Blocks & Items
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.double_wooden_slab));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.wooden_slab));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.spruce_stairs));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.birch_stairs));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.jungle_stairs));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.waterlily));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.tallgrass));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.yellow_flower));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.red_flower));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.brown_mushroom));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.red_mushroom));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.bookshelf));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.torch));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.chest));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.planks));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.crafting_table));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.cactus));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.reeds));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.pumpkin));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.lit_pumpkin));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.wooden_button));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.ice));
-			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.vine));
-			codechicken.nei.api.API.hideItem(new ItemStack(Items.reeds));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.double_wooden_slab, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.wooden_slab, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.oak_stairs, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.acacia_stairs, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.dark_oak_stairs, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.spruce_stairs, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.birch_stairs, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.jungle_stairs, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.waterlily, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.tallgrass, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.yellow_flower, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.red_flower, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.brown_mushroom, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.red_mushroom, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.bookshelf, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.torch, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.chest, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.crafting_table, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.cactus, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.reeds, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.pumpkin, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.lit_pumpkin, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.wooden_button, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.ice, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.vine, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Items.reeds, 1, OreDictionary.WILDCARD_VALUE));
 		}
 	}
 }

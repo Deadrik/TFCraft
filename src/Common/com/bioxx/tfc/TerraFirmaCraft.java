@@ -433,6 +433,7 @@ public class TerraFirmaCraft
 		}
 		System.out.println(new StringBuilder().append("[TFC] Loading Crafting Settings").toString());
 		/**Start setup here*/
+		TFCCrafting.enableNEIHiding = TFCCrafting.getBooleanFor(config, "NEI Hiding", "enableNEIHiding", true, "Set to false to show hidden items in NEI. Note that most of these items were hidden to prevent players from cheating them in and crashing their game.");
 
 		//Conversions
 		TFCCrafting.appleConversion = TFCCrafting.getBooleanFor(config, "Conversion", "appleConversion", false, "Conversions for food are irreversible.");
