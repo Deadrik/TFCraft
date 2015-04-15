@@ -96,13 +96,11 @@ public class BlockSapling extends BlockTerraContainer
 		}
 	}
 
-	@Override
-	public void updateTick(World world, int i, int j, int k, Random rand)
-	{
-		if (world.isRemote)
-			return;
 
-		super.updateTick(world, i, j, k, rand);
+	// Set the sapling growth timer the moment it is planted, instead of the first random tick it gets after being planted.
+	@Override
+	public void onBlockAdded(World world, int i, int j, int k)
+	{
 		int meta = world.getBlockMetadata(i, j, k);
 		float growSpeed = 1;
 		if(meta == 1 || meta == 11)
@@ -114,8 +112,20 @@ public class BlockSapling extends BlockTerraContainer
 
 		TESapling te = (TESapling) world.getTileEntity(i, j, k);
 
+		// Set the growTime tick timestamp to be 7-11.2 days times config multiplier from now, plus up to an extra day.
 		if(te != null && te.growTime == 0)
-			te.growTime = (long) (((TFC_Time.getTotalTicks() + (TFC_Time.dayLength * 7) * growSpeed) + (world.rand.nextFloat() * TFC_Time.dayLength)) * TFCOptions.saplingTimerMultiplier);
+			te.growTime = (long) (TFC_Time.getTotalTicks() + (TFC_Time.dayLength * 7 * growSpeed * TFCOptions.saplingTimerMultiplier) + (world.rand.nextFloat() * TFC_Time.dayLength));
+	}
+
+	@Override
+	public void updateTick(World world, int i, int j, int k, Random rand)
+	{
+		if (world.isRemote)
+			return;
+
+		super.updateTick(world, i, j, k, rand);
+
+		TESapling te = (TESapling) world.getTileEntity(i, j, k);
 
 		if (world.getBlockLightValue(i, j + 1, k) >= 9 && te!= null && TFC_Time.getTotalTicks() > te.growTime)
 			growTree(world, i, j, k, rand);
