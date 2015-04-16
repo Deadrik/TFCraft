@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -75,6 +76,38 @@ public class BlockStone extends BlockCollapsible
 	public Item getItemDropped(int i, Random random, int j)
 	{
 		return TFCItems.LooseRock;
+	}
+
+	/**
+	 * Returns the quantity of items to drop on block destruction.
+	 */
+	@Override
+	public int quantityDropped(Random rand)
+	{
+		return rand.nextInt(2) + 1;
+	}
+
+	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		int meta = looseStart + metadata;
+
+		int count = this.quantityDropped(world.rand);
+		for (int i = 0; i < count; i++)
+		{
+			Item item = getItemDropped(meta, world.rand, fortune);
+			if (item != null)
+			{
+				ret.add(new ItemStack(item, 1, damageDropped(meta)));
+			}
+		}
+
+		ItemStack gemStack = TFC_Core.RandomGem(world.rand, gemChance);
+		if (gemStack != null)
+			ret.add(gemStack);
+
+		return ret;
 	}
 
 	@Override
