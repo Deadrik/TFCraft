@@ -60,8 +60,8 @@ public class ItemTorch extends ItemTerraBlock
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		int xCoord = x; int yCoord = y; int zCoord = z;
-		if (side == 0) --zCoord;
-		if (side == 1) ++zCoord;
+		if (side == 0) --yCoord;
+		if (side == 1) ++yCoord;
 		if (side == 2) --zCoord;
 		if (side == 3) ++zCoord;
 		if (side == 4) --xCoord;
