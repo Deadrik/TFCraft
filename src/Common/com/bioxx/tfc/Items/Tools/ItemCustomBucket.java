@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
@@ -118,12 +119,29 @@ public class ItemCustomBucket extends ItemTerra
 		boolean isEmpty = this.bucketContents == Blocks.air;
 		int[][] map = {{0,-1,0},{0,1,0},{0,0,-1},{0,0,1},{-1,0,0},{1,0,0}};
 
-		if (!isEmpty && world.isAirBlock( x + map[side][0], y + map[side][1], z + map[side][2] ) ) {
+		if (!isEmpty && world.getBlock(x, y, z) != Blocks.cauldron && world.isAirBlock(x + map[side][0], y + map[side][1], z + map[side][2]))
+		{
 			world.setBlock( x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.FreshWater, 2, 0x1 );
 			player.setCurrentItemOrArmor(0, new ItemStack(TFCItems.WoodenBucketEmpty));
 			return true;
 		}
-		
+
+		if (!isEmpty && world.getBlock(x, y, z) == Blocks.cauldron)
+		{
+			int meta = world.getBlockMetadata(x, y, z);
+			if (meta < 3)
+			{
+				if (!player.capabilities.isCreativeMode)
+				{
+					player.setCurrentItemOrArmor(0, new ItemStack(TFCItems.WoodenBucketEmpty));
+				}
+				world.setBlockMetadataWithNotify(x, y, z, MathHelper.clamp_int(3, 0, 3), 2);
+				world.func_147453_f(x, y, z, Blocks.cauldron);
+
+				return true;
+			}
+		}
+
 		return false;
 	}
 
