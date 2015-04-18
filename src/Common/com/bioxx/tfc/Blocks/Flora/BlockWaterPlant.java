@@ -81,7 +81,7 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 		return ret;
 	}
 
-	/* Left-Click Harvest Berries */
+	/* Left-Click Harvest */
 	@Override
 	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer entityplayer)
 	{
@@ -94,6 +94,23 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 				doBeforeFall(world, x, y, z);
 			}
 		}
+	}
+
+	/* Right-Click Harvest */
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
+	{
+		if (!world.isRemote)
+		{
+			if (TFC_Core.isSaltWater(world.getBlock(x, y + 1, z)) && entityplayer.inventory.getCurrentItem() != null && 
+					entityplayer.inventory.getCurrentItem().getItem() instanceof ItemKnife)
+			{
+				dropBlockAsItem(world, x, y, z, getSeaWeed(world.rand));
+				doBeforeFall(world, x, y, z);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private ItemStack getSeaWeed(Random r)
