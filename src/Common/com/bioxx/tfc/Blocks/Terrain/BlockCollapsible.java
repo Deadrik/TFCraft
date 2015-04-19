@@ -12,6 +12,7 @@ import net.minecraft.stats.StatList;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
@@ -77,7 +78,7 @@ public class BlockCollapsible extends BlockTerraContainer
 		if (block == TFCBlocks.Molten)
 			return false;
 
-		if (!block.isNormalCube())
+		if (!block.isOpaqueCube() && !block.renderAsNormalBlock() && !world.isSideSolid(x, y, z, ForgeDirection.UP))
 			return true;
 
 		Material material = block.getMaterial();
