@@ -330,6 +330,7 @@ public class TerraFirmaCraft
 		TFCOptions.generateSmoke = TFCOptions.getBooleanFor(config, GENERAL_HEADER, "generateSmoke", false, "Should forges generate smoke blocks? *Caution Unsupported*");
 		TFCOptions.enableDetailedBlockSolidSide = TFCOptions.getBooleanFor(config, GENERAL_HEADER, "enableDetailedBlockSolidSide", true, "Should sides of Detailed blocks be considered as solid?");
 		TFCOptions.maxCountOfTranspSubBlocksOnSide = TFCOptions.getIntFor(config, GENERAL_HEADER, "maxCountOfTranspSubBlocksOnSide", 12, "Maximum count of transparent sub-blocks on side: 0..64");
+		TFCOptions.enablePowderKegs = TFCOptions.getBooleanFor(config, GENERAL_HEADER, "enablePowderKegs", true, "Set this to false to disable powder keg explosions.");
 
 		//Time
 		TFCOptions.yearLength = TFCOptions.getIntFor(config, TIME_HEADER, "yearLength", 96, "This is how many days are in a year. Keep this to multiples of 12.");
@@ -340,6 +341,7 @@ public class TerraFirmaCraft
 		TFCOptions.saplingTimerMultiplier = (float) TFCOptions.getDoubleFor(config, TIME_HEADER, "saplingTimerMultiplier", 1.0, "This is a global multiplier for the number of days required before a sapling can grow into a tree. Decrease for faster sapling growth.");
 		TFCOptions.tempIncreaseMultiplier = (float) TFCOptions.getDoubleFor(config, TIME_HEADER, "tempIncreaseMultiplier", 1.0, "This is a global multiplier for the rate at which items heat up. Increase to make items heat up faster.");
 		TFCOptions.tempDecreaseMultiplier = (float) TFCOptions.getDoubleFor(config, TIME_HEADER, "tempDecreaseMultiplier", 1.0, "This is a global multiplier for the rate at which items cool down. Increase to make items cool down faster.");
+		TFCOptions.oilLampFuelMult = TFCOptions.getIntFor(config, TIME_HEADER, "oilLampFuelMult", 8, "This determines how much fuel is used over time from oil lamps. Setting this higher will make fuel last longer. A mult of 1 = 250 hours, 4 = 1000 hours, 8 = 2000 hours.");
 
 		//Food Decay
 		Global.FOOD_DECAY_RATE = TFCOptions.getDoubleFor(config,FOOD_DECAY_HEADER,"FoodDecayRate", 1.0170378966055869517978300569768, "This number causes base decay to equal 50% gain per day. If you wish to change, I recommend you look up a y-root calculator 1.0170378966055869517978300569768^24 = 1.5");
@@ -411,8 +413,6 @@ public class TerraFirmaCraft
 		TFCOptions.richOreUnits = TFCOptions.getIntFor(config, MATERIALS_HEADER, "richOreUnits", 35, "The metal units provided by a single piece of rich ore");
 
 		TFCOptions.simSpeedNoPlayers = TFCOptions.getIntFor(config, SERVER_HEADER, "simSpeedNoPlayers", 100, "For every X number of ticks provided here, when there are no players online the server will only progress by 1 tick. (Default: 100) Time advances 100 times slower than normal. Setting this to less than 1 will turn this feature off.");
-
-		TFCOptions.oilLampFuelMult = TFCOptions.getIntFor(config, "General", "oilLampFuelMult", 8, "This determines how much fuel is used over time from oil lamps. Setting this higher will make fuel last longer. A mult of 1 = 250 hours, 4 = 1000 hours, 8 = 2000 hours.");
 
 		/**Always end with this*/
 		if (config != null)

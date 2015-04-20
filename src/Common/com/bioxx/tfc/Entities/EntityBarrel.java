@@ -16,6 +16,7 @@ public class EntityBarrel extends Entity
 {
 	public int fuse;
 	public ItemStack origBarrel;
+	private int gunpowder = 0;
 
 	public EntityBarrel(World par1World)
 	{
@@ -27,17 +28,18 @@ public class EntityBarrel extends Entity
 		this.yOffset = this.height / 2.0F;
 	}
 
-	public EntityBarrel(World par1World, double par2, double par4, double par6, ItemStack is)
+	public EntityBarrel(World world, double x, double y, double z, ItemStack is, int gunpowderCount)
 	{
-		this(par1World);
-		this.setPosition(par2, par4, par6);
+		this(world);
+		this.gunpowder = gunpowderCount;
+		this.setPosition(x, y, z);
 		float f = (float)(Math.random() * Math.PI * 2.0D);
 		this.motionX = -((float)Math.sin(f)) * 0.02F;
 		this.motionY = 0.20000000298023224D;
 		this.motionZ = -((float)Math.cos(f)) * 0.02F;
-		this.prevPosX = par2;
-		this.prevPosY = par4;
-		this.prevPosZ = par6;
+		this.prevPosX = x;
+		this.prevPosY = y;
+		this.prevPosZ = z;
 		origBarrel = is;
 		this.dataWatcher.updateObject(20, origBarrel.getItemDamage());
 	}
@@ -68,7 +70,7 @@ public class EntityBarrel extends Entity
 
 	public void explode()
 	{
-		float f = 16.0F;
+		float f = gunpowder / 12.0F; // Full barrel = the old large strength of 64
 		this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, f, true);
 	}
 

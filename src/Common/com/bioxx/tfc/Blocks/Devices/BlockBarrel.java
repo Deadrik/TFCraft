@@ -37,6 +37,7 @@ import com.bioxx.tfc.Items.ItemBlocks.ItemLargeVessel;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
@@ -164,23 +165,26 @@ public class BlockBarrel extends BlockTerraContainer
 	@Override
 	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion exp)
 	{
-		TEBarrel te = (TEBarrel)world.getTileEntity(x, y, z);
-		if(te != null && te.getGunPowderCount() >= 256 && te.getSealed())
+		if (world.getTileEntity(x, y, z) instanceof TEBarrel && TFCOptions.enablePowderKegs)
 		{
-			ItemStack is = new ItemStack(this, 1, te.barrelType);
-			NBTTagCompound nbt = writeBarrelToNBT(te);
-			is.setTagCompound(nbt);
-			EntityBarrel BE = new EntityBarrel(world, x, y, z, is);
-			BE.setFuse(1);
-			te.clearInventory();
-			te.shouldDropItem = false;
-			world.spawnEntityInWorld(BE);
+			TEBarrel te = (TEBarrel) world.getTileEntity(x, y, z);
+			// Only barrels, no large vessels. Requires at least 12 gunpowder for minimum blast strength of 1.
+			if (this == TFCBlocks.Barrel && te != null && te.getGunPowderCount() >= 12 && te.getSealed())
+			{
+				ItemStack is = new ItemStack(this, 1, te.barrelType);
+				NBTTagCompound nbt = writeBarrelToNBT(te);
+				is.setTagCompound(nbt);
+				EntityBarrel BE = new EntityBarrel(world, x, y, z, is, te.getGunPowderCount());
+				BE.setFuse(1);
+				te.clearInventory();
+				te.shouldDropItem = false;
+				world.spawnEntityInWorld(BE);
 
+				return; // Don't call super if we're going to explode so the barrel is properly destroyed.
+			}
 		}
-		else
-		{
-			super.onBlockDestroyedByExplosion(world, x, y, z, exp);
-		}
+
+		super.onBlockDestroyedByExplosion(world, x, y, z, exp);
 	}
 
 	/**
@@ -229,21 +233,20 @@ public class BlockBarrel extends BlockTerraContainer
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
-		if (world.isBlockIndirectlyGettingPowered(x, y, z))
+		if (world.isBlockIndirectlyGettingPowered(x, y, z) && world.getTileEntity(x, y, z) instanceof TEBarrel && TFCOptions.enablePowderKegs)
 		{
 			TEBarrel te = (TEBarrel)world.getTileEntity(x, y, z);
-			if(te.getGunPowderCount() >= 256 && te.getSealed())
+			// Only barrels, no large vessels. Requires at least 12 gunpowder for minimum blast strength of 1.
+			if (this == TFCBlocks.Barrel && te != null && te.getGunPowderCount() >= 12 && te.getSealed())
 			{
 				ItemStack is = new ItemStack(this, 1, te.barrelType);
 				NBTTagCompound nbt = writeBarrelToNBT(te);
 				is.setTagCompound(nbt);
-				EntityBarrel BE = new EntityBarrel(world, x, y, z, is);
+				EntityBarrel BE = new EntityBarrel(world, x, y, z, is, te.getGunPowderCount());
 				te.clearInventory();
 				te.shouldDropItem = false;
 				world.spawnEntityInWorld(BE);
 				world.playSoundAtEntity(BE, "game.tnt.primed", 1.0F, 1.0F);
-				//float f = 16.0F;
-				//EI.worldObj.createExplosion(EI, EI.posX, EI.posY, EI.posZ, f, true);
 				world.setBlockToAir(x, y, z);
 			}
 		}

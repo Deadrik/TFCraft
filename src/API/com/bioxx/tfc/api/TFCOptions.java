@@ -5,6 +5,7 @@ import net.minecraftforge.common.config.Property;
 
 public class TFCOptions
 {
+	public static boolean enablePowderKegs = true;
 	public static boolean enableBetterGrass;
 	public static boolean enableDebugMode;
 	public static boolean iDontLikeOnions;
