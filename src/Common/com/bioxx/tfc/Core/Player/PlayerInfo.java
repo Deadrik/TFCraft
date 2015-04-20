@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 
 public class PlayerInfo
@@ -54,8 +55,19 @@ public class PlayerInfo
 			return;*/
 		if(lastChange+3 < TFC_Time.getTotalTicks())
 		{
+			boolean isMetalHoe = true;
+
+			if(player.getCurrentEquippedItem() != null &&
+					(player.getCurrentEquippedItem().getItem() == TFCItems.IgInHoe ||
+							player.getCurrentEquippedItem().getItem() == TFCItems.IgExHoe ||
+									player.getCurrentEquippedItem().getItem() == TFCItems.SedHoe ||
+											player.getCurrentEquippedItem().getItem() == TFCItems.MMHoe))
+			{
+				isMetalHoe = false;
+			}
+			
 			hoeMode = hoeMode == 3 ? 0 : ++hoeMode;
-			if(hoeMode == MODE_NUTRIENT && Agrank != SkillRank.Expert && Agrank != SkillRank.Master)
+			if (hoeMode == MODE_NUTRIENT && (!isMetalHoe || (isMetalHoe && Agrank != SkillRank.Expert && Agrank != SkillRank.Master)))
 				hoeMode++;
 
 			lastChange = TFC_Time.getTotalTicks();

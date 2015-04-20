@@ -912,7 +912,13 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCItems.SedHoe, 1, 0), new Object[] { "1", "2", Character.valueOf('1'), TFCItems.SedStoneHoeHead, Character.valueOf('2'), new ItemStack(Items.bone) });
 		GameRegistry.addRecipe(new ItemStack(TFCItems.IgExHoe, 1, 0), new Object[] { "1", "2", Character.valueOf('1'), TFCItems.IgExStoneHoeHead, Character.valueOf('2'), new ItemStack(Items.bone) });
 		GameRegistry.addRecipe(new ItemStack(TFCItems.MMHoe, 1, 0), new Object[] { "1", "2", Character.valueOf('1'), TFCItems.MMStoneHoeHead, Character.valueOf('2'), new ItemStack(Items.bone) });
+		//bone javelins
+		GameRegistry.addRecipe(new ItemStack(TFCItems.IgInStoneJavelin, 1, 0), new Object[] { "1", "2", Character.valueOf('1'), TFCItems.IgInStoneJavelinHead, Character.valueOf('2'), new ItemStack(Items.bone) });
+		GameRegistry.addRecipe(new ItemStack(TFCItems.SedStoneJavelin, 1, 0), new Object[] { "1", "2", Character.valueOf('1'), TFCItems.SedStoneJavelinHead, Character.valueOf('2'), new ItemStack(Items.bone) });
+		GameRegistry.addRecipe(new ItemStack(TFCItems.IgExStoneJavelin, 1, 0), new Object[] { "1", "2", Character.valueOf('1'), TFCItems.IgExStoneJavelinHead, Character.valueOf('2'), new ItemStack(Items.bone) });
+		GameRegistry.addRecipe(new ItemStack(TFCItems.MMStoneJavelin, 1, 0), new Object[] { "1", "2", Character.valueOf('1'), TFCItems.MMStoneJavelinHead, Character.valueOf('2'), new ItemStack(Items.bone) });
 
+		
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.StoneHammer, 1, 0), new Object[] { "1","2", Character.valueOf('1'), TFCItems.StoneHammerHead,Character.valueOf('2'), "stickWood"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.StoneHammer, 1, 0), new Object[] { "1", "2", Character.valueOf('1'), TFCItems.StoneHammerHead, Character.valueOf('2'), new ItemStack(Items.bone) }));
 
