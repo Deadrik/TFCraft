@@ -59,7 +59,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	@Override
 	public IIcon getIcon(ItemStack stack, int pass)
 	{
-		if(stack.getItemDamage() > 0 && pass == 1 && stack.getTagCompound() != null && stack.getTagCompound().hasKey("color"))
+		if (pass == 1 && stack.getTagCompound() != null && stack.getTagCompound().hasKey("color"))
 			return overlayIcon;
 
 		return super.getIcon(stack, pass);
@@ -232,42 +232,42 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack is, int pass)
 	{
-		if (is.getItemDamage() == 0 || pass != 1)
+		if (pass != 1)
 		{
-			return 16777215;
+			return 0xFFFFFF; // White multiplier does not change the color.
 		}
 		else
 		{
 			int j = this.getColor(is);
 
-			if (j < 0)
+			if (j < 0) // No NBT flag for color
 			{
-				j = 16777215;
+				return 0xFFFFFF; // White multiplier does not change the color.
 			}
 
-			return j;
+			if (is.getItemDamage() == 0) // Unfired Vessels
+			{
+				/*
+				 * Increase each color value by 0x60 so the overlay on unfired vessels is lighter.
+				 * Make sure that none of the color values go above 0xFF or else it bleeds into
+				 * the other colors.
+				 */
+				int r = Math.min((j >> 16) + 0x60, 0xFF);
+				int b = Math.min(((j >> 8) & 0x00FF) + 0x60, 0xFF);
+				int g = Math.min((j & 0x0000FF) + 0x60, 0xFF);
+				return (r << 16) | (b << 8) | g;
+			}
+			else
+				return j;
 		}
 	}
 
 	public int getColor(ItemStack is)
 	{
 		if (!is.hasTagCompound() || !is.getTagCompound().hasKey("color"))
-		{
 			return -1;
-		}
 		else
-		{
-			NBTTagCompound nbt = is.getTagCompound();
-
-			if (nbt == null)
-			{
-				return 10511680;
-			}
-			else
-			{
-				return nbt == null ? 10511680 : (nbt.hasKey("color", 3) ? nbt.getInteger("color") : 10511680);
-			}
-		}
+			return is.getTagCompound().getInteger("color");
 	}
 
 	@Override
@@ -358,10 +358,6 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		NBTTagCompound tag = is.stackTagCompound;
 		if(tag != null)
 		{
-			if(tag.hasKey("color") && is.getItemDamage() == 0)
-			{
-				arraylist.add(StatCollector.translateToLocal("word.dyed"));
-			}
 			if(tag.hasKey("MetalType"))
 			{
 				String name = tag.getString("MetalType");
