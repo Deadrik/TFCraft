@@ -44,7 +44,7 @@ public class BlockOilLamp extends BlockTerraContainer
 		super(Material.circuits);
 		this.setTickRandomly(true);
 		this.setCreativeTab(TFCTabs.TFCDecoration);
-		setLightLevel(0.9375F);
+		setLightLevel(1.0F);
 	}
 
 	@Override

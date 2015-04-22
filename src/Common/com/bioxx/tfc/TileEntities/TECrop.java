@@ -7,7 +7,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
 import com.bioxx.tfc.Blocks.BlockFarmland;
 import com.bioxx.tfc.Chunkdata.ChunkData;
@@ -191,10 +193,10 @@ public class TECrop extends NetworkTileEntity
 
 	public static boolean hasSunlight(World world, int x, int y, int z)
 	{
-		int light = world.getBlockLightValue(x, y, z); 
+		Chunk chunk = world.getChunkFromBlockCoords(x, z);
+		int skylight = chunk.getSavedLightValue(EnumSkyBlock.Sky, x & 15, y, z & 15);
 		boolean sky = world.canBlockSeeTheSky(x, y + 1, z);
-		boolean precip = world.isRaining();
-		return sky || light > 13 || (light > 10 && precip);
+		return sky || skylight > 13;
 	}
 
 	public float getEstimatedGrowth(CropIndex crop)
