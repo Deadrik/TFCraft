@@ -3,6 +3,7 @@ package com.bioxx.tfc.Items.Pottery;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -10,9 +11,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -29,8 +32,14 @@ import com.bioxx.tfc.api.Interfaces.IBag;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
 import com.bioxx.tfc.api.Util.Helper;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 {
+	@SideOnly(Side.CLIENT)
+	private IIcon overlayIcon;
+
 	public ItemPotterySmallVessel()
 	{
 		super();
@@ -38,6 +47,29 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		this.setMaxStackSize(1);
 		this.setWeight(EnumWeight.MEDIUM);
 		this.setSize(EnumSize.SMALL);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean requiresMultipleRenderPasses()
+	{
+		return true;
+	}
+
+	@Override
+	public IIcon getIcon(ItemStack stack, int pass)
+	{
+		if(stack.getItemDamage() > 0 && pass == 1 && stack.getTagCompound() != null && stack.getTagCompound().hasKey("color"))
+			return overlayIcon;
+
+		return super.getIcon(stack, pass);
+	}
+
+	@Override
+	public void registerIcons(IIconRegister registerer)
+	{
+		super.registerIcons(registerer);
+		this.overlayIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + "Ceramic Vessel Overlay");
 	}
 
 	@Override
@@ -197,6 +229,48 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+	public int getColorFromItemStack(ItemStack is, int pass)
+	{
+		if (is.getItemDamage() == 0 || pass != 1)
+		{
+			return 16777215;
+		}
+		else
+		{
+			int j = this.getColor(is);
+
+			if (j < 0)
+			{
+				j = 16777215;
+			}
+
+			return j;
+		}
+	}
+
+	public int getColor(ItemStack is)
+	{
+		if (!is.hasTagCompound() || !is.getTagCompound().hasKey("color"))
+		{
+			return -1;
+		}
+		else
+		{
+			NBTTagCompound nbt = is.getTagCompound();
+
+			if (nbt == null)
+			{
+				return 10511680;
+			}
+			else
+			{
+				return nbt == null ? 10511680 : (nbt.hasKey("color", 3) ? nbt.getInteger("color") : 10511680);
+			}
+		}
+	}
+
+	@Override
 	public ItemStack[] loadBagInventory(ItemStack is)
 	{
 		ItemStack[] bag = new ItemStack[4];
@@ -284,12 +358,16 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		NBTTagCompound tag = is.stackTagCompound;
 		if(tag != null)
 		{
+			if(tag.hasKey("color") && is.getItemDamage() == 0)
+			{
+				arraylist.add(StatCollector.translateToLocal("word.dyed"));
+			}
 			if(tag.hasKey("MetalType"))
 			{
 				String name = tag.getString("MetalType");
 				name = name.replace(" ", "");
 				name = StatCollector.translateToLocal("gui.metal." + name);
-				
+
 				// check if the vessel contains an amount of metal.
 				if(tag.hasKey("MetalAmount"))
 				{

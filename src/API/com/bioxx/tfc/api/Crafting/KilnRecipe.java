@@ -7,6 +7,7 @@ public class KilnRecipe
 	ItemStack result;
 	ItemStack input1;
 	int KilnLevel;
+	boolean inheritsTag = true;
 
 	public KilnRecipe(ItemStack in, int kl, ItemStack res)
 	{
@@ -14,7 +15,7 @@ public class KilnRecipe
 		this.result = res;
 		this.KilnLevel = kl;
 	}
-	
+
 	public KilnRecipe(ItemStack in, int kl)
 	{
 		this.input1 = in;
@@ -42,6 +43,11 @@ public class KilnRecipe
 		return false;
 	}
 
+	public boolean getInheritsTag()
+	{
+		return this.inheritsTag;
+	}
+
 	private boolean areItemStacksEqual(ItemStack is1, ItemStack is2)
 	{
 		if(is1 == null && is2 == null)
@@ -62,7 +68,7 @@ public class KilnRecipe
 	/**
 	 * Returns an Item that is the result of this recipe
 	 */
-	 public ItemStack getCraftingResult()
+	public ItemStack getCraftingResult()
 	{
 		return result;
 	}
@@ -72,10 +78,10 @@ public class KilnRecipe
 		return KilnLevel;
 	}
 
-    public ItemStack getInput1()
-    {
-        return input1;
-    }
+	public ItemStack getInput1()
+	{
+		return input1;
+	}
 }
 
 

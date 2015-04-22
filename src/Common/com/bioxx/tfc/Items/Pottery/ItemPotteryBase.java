@@ -7,6 +7,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -64,6 +65,20 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 			return this.ClayIcon;
 		else
 			return this.CeramicIcon;
+	}
+
+	@Override
+	public void addItemInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
+	{
+		super.addItemInformation(is, player, arraylist);
+		NBTTagCompound tag = is.stackTagCompound;
+		if(tag != null)
+		{
+			if(tag.hasKey("color") && is.getItemDamage() == 0)
+			{
+				arraylist.add(StatCollector.translateToLocal("word.dyed"));
+			}
+		}
 	}
 
 	@Override

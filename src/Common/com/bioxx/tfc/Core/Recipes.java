@@ -430,6 +430,11 @@ public class Recipes
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.UnknownIngot, 1, 0), 
 				new Object[] {getStackNoTemp(new ItemStack(TFCItems.UnknownUnshaped, 1))});
 
+		for(int i = 0; i < 16; i++)
+		{
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.PotterySmallVessel, 1, 0), new Object[] { new ItemStack(TFCItems.PotterySmallVessel, 1, 0), "dye"+dyes[i] }));
+		}
+
 		RegisterToolRecipes();
 		registerFoodRecipes();
 		registerKilnRecipes();
@@ -918,7 +923,7 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCItems.IgExStoneJavelin, 1, 0), new Object[] { "1", "2", Character.valueOf('1'), TFCItems.IgExStoneJavelinHead, Character.valueOf('2'), new ItemStack(Items.bone) });
 		GameRegistry.addRecipe(new ItemStack(TFCItems.MMStoneJavelin, 1, 0), new Object[] { "1", "2", Character.valueOf('1'), TFCItems.MMStoneJavelinHead, Character.valueOf('2'), new ItemStack(Items.bone) });
 
-		
+
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.StoneHammer, 1, 0), new Object[] { "1","2", Character.valueOf('1'), TFCItems.StoneHammerHead,Character.valueOf('2'), "stickWood"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.StoneHammer, 1, 0), new Object[] { "1", "2", Character.valueOf('1'), TFCItems.StoneHammerHead, Character.valueOf('2'), new ItemStack(Items.bone) }));
 

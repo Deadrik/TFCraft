@@ -1,11 +1,14 @@
 package com.bioxx.tfc.Handlers;
 
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.Recipes;
@@ -186,6 +189,80 @@ public class CraftingHandler
 					((ItemMiscToolHead)(itemstack.getItem())).getMaterial() == TFCItems.MMToolMaterial))
 			{
 				e.player.triggerAchievement(TFC_Achievements.achStoneAge);
+			}
+			else if(itemstack.getItem() == TFCItems.PotterySmallVessel && itemstack.getItemDamage() == 0)
+			{
+				String[] dyes =
+					{ "White", "Orange", "Magenta", "LightBlue", "Yellow", "Lime", "Pink", "Gray", "LightGray", "Cyan", "Purple", "Blue", "Brown", "Green", "Red", "Black" };
+				int color = -1;
+				for(int i = 0; i < iinventory.getSizeInventory(); i++)
+				{
+					if(iinventory.getStackInSlot(i) == null)
+						continue;
+
+					int[] ids = OreDictionary.getOreIDs(iinventory.getStackInSlot(i));
+					float[] c = null;
+					for(int id : ids)
+					{
+						String name = OreDictionary.getOreName(id);
+						if(name.equals("dyeWhite"))
+							c = EntitySheep.fleeceColorTable[0];
+						else if(name.equals("dyeOrange"))
+							c = EntitySheep.fleeceColorTable[1];
+						else if(name.equals("dyeMagenta"))
+							c = EntitySheep.fleeceColorTable[2];
+						else if(name.equals("dyeLightBlue"))
+							c = EntitySheep.fleeceColorTable[3];
+						else if(name.equals("dyeYellow"))
+							c = EntitySheep.fleeceColorTable[4];
+						else if(name.equals("dyeLime"))
+							c = EntitySheep.fleeceColorTable[5];
+						else if(name.equals("dyePink"))
+							c = EntitySheep.fleeceColorTable[6];
+						else if(name.equals("dyeGray"))
+							c = EntitySheep.fleeceColorTable[7];
+						else if(name.equals("dyeLightGray"))
+							c = EntitySheep.fleeceColorTable[8];
+						else if(name.equals("dyeCyan"))
+							c = EntitySheep.fleeceColorTable[9];
+						else if(name.equals("dyePurple"))
+							c = EntitySheep.fleeceColorTable[10];
+						else if(name.equals("dyeBlue"))
+							c = EntitySheep.fleeceColorTable[11];
+						else if(name.equals("dyeBrown"))
+							c = EntitySheep.fleeceColorTable[12];
+						else if(name.equals("dyeGreen"))
+							c = EntitySheep.fleeceColorTable[13];
+						else if(name.equals("dyeRed"))
+							c = EntitySheep.fleeceColorTable[14];
+						else if(name.equals("dyeBlack"))
+							c = EntitySheep.fleeceColorTable[15];
+					}
+
+					if(c != null)
+					{
+						int r = (int)(c[0]*255);
+						int g = (int)(c[1]*255);
+						int b = (int)(c[2]*255);
+						r = r << 16;
+						g = g << 8;
+
+						color += r += g += b;
+					}
+
+				}
+
+				if(color != -1)
+				{
+					NBTTagCompound nbt = null;
+					if(itemstack.hasTagCompound())
+						nbt = itemstack.getTagCompound();
+					else
+						nbt = new NBTTagCompound();
+
+					nbt.setInteger("color", color);
+					itemstack.setTagCompound(nbt);
+				}
 			}
 
 			for(int i = 0; i < iinventory.getSizeInventory(); i++)
