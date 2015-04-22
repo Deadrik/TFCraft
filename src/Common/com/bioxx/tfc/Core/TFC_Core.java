@@ -1387,4 +1387,9 @@ public class TFC_Core
 	{
 		return StatCollector.translateToLocal(s);
 	}
+
+	public static long getSuperSeed(World w)
+	{
+		return w.getSeed()+w.getWorldInfo().getNBTTagCompound().getLong("superseed");
+	}
 }

@@ -207,6 +207,8 @@ public class ChunkEventHandler
 
 		WorldInfo info = world.getWorldInfo();
 		info.setSpawnPosition(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
+		if(!info.getNBTTagCompound().hasKey("superseed"))
+			info.getNBTTagCompound().setLong("superseed", System.currentTimeMillis());
 		return new ChunkCoordinates(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
 	}
 }

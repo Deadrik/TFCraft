@@ -27,18 +27,18 @@ public class AnvilRecipe
 	public AnvilRecipe(ItemStack in, ItemStack in2, String p, boolean flux, AnvilReq req, ItemStack result)
 	{
 		this(in, in2, p.toLowerCase(), 0, flux, req.Tier, result);
-		this.craftingValue = 70 + new Random(AnvilManager.world.getSeed()+(in != null ? Item.getIdFromItem(in.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(craftingBoundDefault);
+		this.craftingValue = 70 + new Random(TFC_Core.getSuperSeed(AnvilManager.world)+(in != null ? Item.getIdFromItem(in.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(craftingBoundDefault);
 	}
 
 	public AnvilRecipe(ItemStack in, ItemStack in2, String p, AnvilReq req, ItemStack result)
 	{
 		this(in, in2, p.toLowerCase(), 0, false, req.Tier, result);
-		this.craftingValue = 70 + new Random(AnvilManager.world.getSeed()+(in != null ? Item.getIdFromItem(in.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(craftingBoundDefault);
+		this.craftingValue = 70 + new Random(TFC_Core.getSuperSeed(AnvilManager.world)+(in != null ? Item.getIdFromItem(in.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(craftingBoundDefault);
 	}
 
 	public AnvilRecipe SetCraftingBound(int max)
 	{
-		craftingValue = 70 + new Random(AnvilManager.world.getSeed()+(input1 != null ? Item.getIdFromItem(input1.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(max);
+		craftingValue = 70 + new Random(TFC_Core.getSuperSeed(AnvilManager.world)+(input1 != null ? Item.getIdFromItem(input1.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(max);
 		return this;
 	}
 
