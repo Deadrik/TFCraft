@@ -28,6 +28,7 @@ import com.bioxx.tfc.Items.Tools.ItemMiscToolHead;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -192,8 +193,6 @@ public class CraftingHandler
 			}
 			else if(itemstack.getItem() == TFCItems.PotterySmallVessel && itemstack.getItemDamage() == 0)
 			{
-				String[] dyes =
-					{ "White", "Orange", "Magenta", "LightBlue", "Yellow", "Lime", "Pink", "Gray", "LightGray", "Cyan", "Purple", "Blue", "Brown", "Green", "Red", "Black" };
 				int color = -1;
 				for(int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
@@ -205,38 +204,14 @@ public class CraftingHandler
 					for(int id : ids)
 					{
 						String name = OreDictionary.getOreName(id);
-						if(name.equals("dyeWhite"))
-							c = EntitySheep.fleeceColorTable[0];
-						else if(name.equals("dyeOrange"))
-							c = EntitySheep.fleeceColorTable[1];
-						else if(name.equals("dyeMagenta"))
-							c = EntitySheep.fleeceColorTable[2];
-						else if(name.equals("dyeLightBlue"))
-							c = EntitySheep.fleeceColorTable[3];
-						else if(name.equals("dyeYellow"))
-							c = EntitySheep.fleeceColorTable[4];
-						else if(name.equals("dyeLime"))
-							c = EntitySheep.fleeceColorTable[5];
-						else if(name.equals("dyePink"))
-							c = EntitySheep.fleeceColorTable[6];
-						else if(name.equals("dyeGray"))
-							c = EntitySheep.fleeceColorTable[7];
-						else if(name.equals("dyeLightGray"))
-							c = EntitySheep.fleeceColorTable[8];
-						else if(name.equals("dyeCyan"))
-							c = EntitySheep.fleeceColorTable[9];
-						else if(name.equals("dyePurple"))
-							c = EntitySheep.fleeceColorTable[10];
-						else if(name.equals("dyeBlue"))
-							c = EntitySheep.fleeceColorTable[11];
-						else if(name.equals("dyeBrown"))
-							c = EntitySheep.fleeceColorTable[12];
-						else if(name.equals("dyeGreen"))
-							c = EntitySheep.fleeceColorTable[13];
-						else if(name.equals("dyeRed"))
-							c = EntitySheep.fleeceColorTable[14];
-						else if(name.equals("dyeBlack"))
-							c = EntitySheep.fleeceColorTable[15];
+						for(int j = 1; j < Global.DYE_NAMES.length; j++)
+						{
+							if (name.equals(Global.DYE_NAMES[j]))
+							{
+								c = EntitySheep.fleeceColorTable[j];
+								break;
+							}
+						}
 					}
 
 					if(c != null)
@@ -244,17 +219,15 @@ public class CraftingHandler
 						int r = (int)(c[0]*255);
 						int g = (int)(c[1]*255);
 						int b = (int)(c[2]*255);
-						r = r << 16;
-						g = g << 8;
 
-						color += r += g += b;
+						color = (r << 16) + (g << 8) + b;
 					}
 
 				}
 
 				if(color != -1)
 				{
-					NBTTagCompound nbt = null;
+					NBTTagCompound nbt;
 					if(itemstack.hasTagCompound())
 						nbt = itemstack.getTagCompound();
 					else

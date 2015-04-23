@@ -31,6 +31,14 @@ public class Global
 		"Flux", "Kaolinite Powder", "Graphite Powder", "Sulfur Powder", "Saltpeter Powder",
 		"Hematite Powder", "Lapis Lazuli Powder", "Limonite Powder", "Malachite Powder", "Salt"
 	};
+	
+	/* Dyes, used for carpets and small vessels */
+	/* Colors MUST be in the same order as in EntitySheep.fleeceColorTable! */
+	public static final String[] DYE_NAMES = { 
+		"dyeWhite", "dyeOrange", "dyeMagenta", "dyeLightBlue", "dyeYellow",
+		"dyeLime", "dyePink", "dyeGray", "dyeLightGray", "dyeCyan", 
+		"dyePurple", "dyeBlue", "dyeBrown", "dyeGreen", "dyeRed", "dyeBlack" };
+
 
 	/* Stone Types */
 	public static final String[] STONE_IGIN = {"Granite", "Diorite", "Gabbro"};
