@@ -121,24 +121,27 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 						//Set the item temp if possible
 						TFC_ItemHeat.SetTemp(eventCraft.result, TFC_ItemHeat.GetTemp(anvilItemStacks[INPUT1_SLOT]));
 
-						this.setInventorySlotContents(INPUT1_SLOT, eventCraft.result);
+						ItemStack output = eventCraft.result;
 						//If the lastWorker is not null, then we attempt to apply some crafting buffs to items based on the players skills
-						if(anvilItemStacks[INPUT1_SLOT] != null && lastWorker != null)
+						if (output != null && lastWorker != null)
 						{
-							if(anvilItemStacks[INPUT1_SLOT].getItem() instanceof ItemMiscToolHead)
+							if (output.getItem() instanceof ItemMiscToolHead)
 							{
-								AnvilManager.setDurabilityBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillMult(lastWorker));
-								AnvilManager.setDamageBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillMult(lastWorker));
+								AnvilManager.setDurabilityBuff(output, recipe.getSkillMult(lastWorker));
+								AnvilManager.setDamageBuff(output, recipe.getSkillMult(lastWorker));
 
 							}
-							else if(anvilItemStacks[INPUT1_SLOT].getItem() instanceof ItemTFCArmor)
+							else if (output.getItem() instanceof ItemTFCArmor)
 							{
-								AnvilManager.setDurabilityBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillMult(lastWorker));
+								AnvilManager.setDurabilityBuff(output, recipe.getSkillMult(lastWorker));
 							}
 
 							increaseSkills(recipe);
 							removeRules(INPUT1_SLOT);
 						}
+						// We need to call this after the NBT is set, since this call sets lastWorker to null if the output has no further recipes.
+						this.setInventorySlotContents(INPUT1_SLOT, output);
+
 						if(anvilItemStacks[INPUT2_SLOT] != null)
 							anvilItemStacks[INPUT2_SLOT].stackSize--;
 
