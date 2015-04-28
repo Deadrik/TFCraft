@@ -192,11 +192,10 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCItems.GlassBottle, 3), new Object[]
 				{ "# #", " # ", Character.valueOf('#'), new ItemStack(Blocks.glass) });
 
-		String[] dyes =
-			{ "White", "Orange", "Magenta", "LightBlue", "Yellow", "Lime", "Pink", "Gray", "LightGray", "Cyan", "Purple", "Blue", "Brown", "Green", "Red", "Black" };
-		for (int i = 0; i < dyes.length; i++)
+		for (int i = 0; i < Global.DYE_NAMES.length; i++)
 		{
-			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Blocks.carpet, 1, i), "dye" + dyes[i], new ItemStack(Blocks.carpet, 1, WILD)));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Blocks.carpet, 1, i), Global.DYE_NAMES[i], new ItemStack(Blocks.carpet, 1, WILD)));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.PotterySmallVessel, 1, 0), new Object[] { new ItemStack(TFCItems.PotterySmallVessel, 1, 0), Global.DYE_NAMES[i] }));
 		}
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.rail, 64), new Object[] { "PsP","PsP", Character.valueOf('P'), "ingotIron", Character.valueOf('s'), "stickWood"}));
@@ -429,11 +428,6 @@ public class Recipes
 				new Object[] {getStackNoTemp(new ItemStack(TFCItems.WeakRedSteelUnshaped, 1))});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.UnknownIngot, 1, 0), 
 				new Object[] {getStackNoTemp(new ItemStack(TFCItems.UnknownUnshaped, 1))});
-
-		for(int i = 0; i < 16; i++)
-		{
-			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.PotterySmallVessel, 1, 0), new Object[] { new ItemStack(TFCItems.PotterySmallVessel, 1, 0), "dye"+dyes[i] }));
-		}
 
 		RegisterToolRecipes();
 		registerFoodRecipes();
