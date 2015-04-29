@@ -46,9 +46,9 @@ entity.spiderTFC.name=Паук
 entity.zombieTFC.name=Зомби
 
 entity.arrowTFC.name=Стрела
-entity.standTFC.name=
-entity.barrel.name=
-entity.fallingBlock.name=
+entity.standTFC.name=Стойка для брони
+entity.barrel.name=Бочка
+entity.fallingBlock.name=Падающий блок
 
 entity.notFamiliar=Животное не даст вам сделать это.
 fishingRod.lineTension=Леска вот-вот оборвется!
@@ -2035,6 +2035,7 @@ tile.Fungi.mushroom_brown.name=Коричневый гриб
 tile.Fungi.mushroom_red.name=Красный гриб
 tile.Cactus.name=Кактус
 tile.Pumpkin.name=Тыква
+tile.LitPumpkin.name=Светильник Джека
 tile.Moss.name=Мох
 tile.Thatch.name=Солома
 tile.Flora.Golden Rod.name=Золотарник
@@ -2353,6 +2354,10 @@ gui.Reach.Short=Близкий
 gui.Reach.Medium=Средний
 gui.Reach.Far=Дальний
 
+gui.hoursRemaining=Часов осталось 
+gui.daysRemaining=Дней осталось
+gui.infinite=Бесконечный
+
 #== Food ==
 gui.food.fruit=Фрукты
 gui.food.vegetable=Овощи
@@ -2478,7 +2483,22 @@ gui.growth=Рост
 gui.mature=Зрелость
 gui.metal.Iron=Железо
 gui.tier=Уровень
-gui.progress=Прогресс
+gui.fuel=Топливо
+gui.Green Apple=Зеленая яблоня
+gui.Red Apple=Красная яблоня
+gui.Banana=Банановое дерево
+gui.Cherry=Вишневое дерево
+gui.Lemon=Лимонное дерево
+gui.Olive=Оливковое дерево
+gui.Orange=Апельсиновое дерево
+gui.Peach=Персиковое дерево
+gui.Plum=Сливовое дерево
+gui.pile=Куча
+gui.weaving=Ткачество
+gui.eggs=Яйца
+gui.fertEggs=Оплодотворенные яйца
+gui.logs=Бревна
+gui.gems=Самоцветы
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Надо использовать под текущей водой.
@@ -2532,3 +2552,13 @@ error.Contact=Пожалуйста, свяжитесь с поддержкой T
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+tile.Hopper.name=Загрузочная воронка
+fluid.oliveoil=Оливковое масло
+tile.OilLamp.Gold.name=Золотая масляная лампа
+tile.OilLamp.Platinum.name=Платиновая масляная лампа
+tile.OilLamp.RoseGold.name=Масляная лампа розового золота
+tile.OilLamp.Silver.name=Серебряная масляная лампа
+tile.OilLamp.SterlingSilver.name=Стерлинговая масляная лампа
+tile.OilLamp.BlueSteel.name=Масляная лампа синей стали
+gui.plans.hopper=Загрузочная воронка
+gui.plans.oillamp=Масляная лампа

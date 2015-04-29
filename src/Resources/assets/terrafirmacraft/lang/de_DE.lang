@@ -1,5 +1,5 @@
 ﻿#de_DE
-#Das ist die deutsche Sprachkonfigurationsdatei, erstellt von Three_Pounds (Items) und Emris (GUI). Überarbeitet von _Tsigje_.
+#Das ist die deutsche Sprachkonfigurationsdatei, erstellt von Three_Pounds (Items) und Emris (GUI). Überarbeitet von _Tsigje_, Strohtaler.
 
 
 
@@ -46,9 +46,9 @@ entity.spiderTFC.name=Spinne
 entity.zombieTFC.name=Zombie
 
 entity.arrowTFC.name=Pfeil
-entity.standTFC.name=
-entity.barrel.name=
-entity.fallingBlock.name=
+entity.standTFC.name=Rüstungsständer
+entity.barrel.name=Fass
+entity.fallingBlock.name=Fallender Block
 
 entity.notFamiliar=Das Tier ist nicht zahm genug.
 fishingRod.lineTension=Die Angelschnur wird bald reißen.
@@ -60,7 +60,7 @@ fishingRod.gotAway=Es hat sich losgerissen....
 #= Achievements =
 #================
 achievement.achLooseRock=Es ist ein Stein
-achievement.achLooseRock.desc=Sammle einen Stein auf
+achievement.achLooseRock.desc=Nehme einen Stein auf
 achievement.achSmallOre=Kein Stein auf dem anderen
 achievement.achSmallOre.desc=Finde einen Erzbrocken
 achievement.achWildVegetable=Sammler
@@ -111,11 +111,11 @@ fluid.hotwater=Heißes Wasser
 fluid.beer=Bier
 fluid.cider=Apfelwein
 fluid.rum=Rum
-fluid.ryewhiskey=Roggen Whiskey
+fluid.ryewhiskey=Roggen-Whisky
 fluid.sake=Wodka
 fluid.vodka=Wodka
-fluid.whiskey=Whiskey
-fluid.cornwhiskey=Maiswhiskey
+fluid.whiskey=Whisky
+fluid.cornwhiskey=Mais-Whisky
 fluid.milk=Milch
 fluid.milkcurdled=Geronnene Milch
 fluid.milkvinegar=Milch-Essig Gemisch
@@ -289,11 +289,11 @@ item.Glass Bottle.name=Glasflasche
 item.Beer.name=Bier
 item.Cider.name=Apfelwein
 item.Rum.name=Rum
-item.RyeWhiskey.name=Roggen Whiskey
+item.RyeWhiskey.name=Roggen-Whisky
 item.Sake.name=Sake
 item.Vodka.name=Wodka
-item.Whiskey.name=Whiskey
-item.CornWhiskey.name=Maiswhiskey
+item.Whiskey.name=Whisky
+item.CornWhiskey.name=Mais-Whisky
 
 #===========
 #= Pottery =
@@ -301,10 +301,10 @@ item.CornWhiskey.name=Maiswhiskey
 item.Clay.Clay.name=Ton
 item.Clay.Fire Clay.name=Schamotte
 
-item.Flat Clay.clay flat light.name=Flaches Tonlicht
-item.Flat Clay.clay flat dark.name=Flaches Tondunkel
+item.Flat Clay.clay flat light.name=Flaches Ton
+item.Flat Clay.clay flat dark.name=Flaches Ton
 item.Flat Clay.clay flat fire.name=Flache Schamotte
-item.Flat Clay.clay flat dark fire.name=Flaches Schamottdunkel
+item.Flat Clay.clay flat dark fire.name=Flache Schamotte
 
 item.Jug.Clay Jug.name=Tonkrug
 item.Jug.Ceramic Jug.name=Keramikkrug
@@ -2035,6 +2035,7 @@ tile.Fungi.mushroom_brown.name=Pilz
 tile.Fungi.mushroom_red.name=Fliegenpilz
 tile.Cactus.name=Kaktus
 tile.Pumpkin.name=Kürbis
+tile.LitPumpkin.name=Kürbislaterne
 tile.Moss.name=Moos
 tile.Thatch.name=Strohballen
 tile.Flora.Golden Rod.name=Goldruten
@@ -2327,7 +2328,7 @@ gui.MeltedMetal.Inst0=§bRechtsklick §7zum gießen in Werkzeugform.
 gui.PotteryBase.Inst0=Kriechen und §bRechtsklicken§7, um Objekt zu platzieren.
 gui.PotteryVesselSmall.Inst0=Oder §bRechtsklick §7um Inventar zu öffnen.
 gui.RawHide.Inst0=????
-gui.Chisel.Inst0=
+gui.Chisel.Inst0=Benötigt einen Hammer in der Aktionsleiste.
 gui.Barrel.MoreItems=§8Mehr... (§fUmschalt-Taste§8 halten)
 
 gui.Nutrient.A=Nährstoff A
@@ -2352,6 +2353,10 @@ gui.Weight.Heavy=Schwer
 gui.Reach.Short=Gering
 gui.Reach.Medium=Mittel
 gui.Reach.Far=Weit
+
+gui.hoursRemaining=Stunden übrig
+gui.daysRemaining=Tage übrig
+gui.infinite=unbegrenzt
 
 #== Food ==
 gui.food.fruit=Frucht
@@ -2477,14 +2482,29 @@ gui.useless=Nutzlos
 gui.growth=Reife
 gui.mature=ausgereift
 gui.metal.Iron=Eisen
-gui.tier=
-gui.progress=
+gui.tier=Stufe
+gui.fuel=Treibstoff
+gui.Green Apple=Grüner Apfelbaum
+gui.Red Apple=Roter Apfelbaum
+gui.Banana=Bananenstaude
+gui.Cherry=Kirschbaum
+gui.Lemon=Zitronenbaum
+gui.Olive=Olivenbaum
+gui.Orange=Orangenbaum
+gui.Peach=Pfirsichbaum
+gui.Plum=Pflaumenbaum
+gui.pile=Stapel
+gui.weaving=webend
+gui.eggs=Eier
+gui.fertEggs=Befruchtete Eier
+gui.logs=Baumstämme
+gui.gems=Edelsteine
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Muss unter fließendem Wasser verwendet werden.
 gui.goldpan.overused=Dieser Bereich sieht überarbeitet aus. Du wirst wahrscheinlich nicht viel finden
-gui.seeds.failedTemp=Es ist zu kalt, um das zu pflanzen, es wird nicht lange überleben.
-gui.seeds.failedSun=Es fehlt Sonnenlicht, um das zu pflanzen, es wird nicht lange überleben.
+gui.seeds.failedTemp=Es ist zu kalt, um das zu pflanzen, es würde nicht lange überleben.
+gui.seeds.failedSun=Es fehlt Sonnenlicht, um das zu pflanzen, es würde nicht lange überleben.
 
 gui.ProPick.Found=Die Probe enthielt
 gui.ProPick.FoundTraces=Die Probe enthielt Spuren von
@@ -2532,3 +2552,13 @@ error.Contact=Bitte TerraFirmaCraft-Support benachrichtigen.
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+tile.Hopper.name=Trichter
+fluid.oliveoil=Olivenöl
+tile.OilLamp.Gold.name=Goldene Öllampe
+tile.OilLamp.Platinum.name=Platin-Öllampe
+tile.OilLamp.RoseGold.name=Rotgold-Öllampe
+tile.OilLamp.Silver.name=Silberne Öllampe
+tile.OilLamp.SterlingSilver.name=Sterlingsilber-Öllampe
+tile.OilLamp.BlueSteel.name=Blau-Stahl-Öllampe
+gui.plans.hopper=Trichter
+gui.plans.oillamp=Öllampe

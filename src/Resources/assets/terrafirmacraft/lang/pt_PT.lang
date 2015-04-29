@@ -46,9 +46,9 @@ entity.spiderTFC.name=Aranha
 entity.zombieTFC.name=Zombi
 
 entity.arrowTFC.name=Flecha
-entity.standTFC.name=
-entity.barrel.name=
-entity.fallingBlock.name=
+entity.standTFC.name=Suporte de Armadura
+entity.barrel.name=Barril
+entity.fallingBlock.name=Bloco Caindo
 
 entity.notFamiliar=O animal não vai deixar você fazer isso.
 fishingRod.lineTension=A corda vai se romper!
@@ -2035,6 +2035,7 @@ tile.Fungi.mushroom_brown.name=Cogumelo
 tile.Fungi.mushroom_red.name=Cogumelo Vermelho
 tile.Cactus.name=Cacto
 tile.Pumpkin.name=Abóbora
+tile.LitPumpkin.name=Abóbora Iluminada
 tile.Moss.name=Musgo
 tile.Thatch.name=Colmo
 tile.Flora.Golden Rod.name=Solidago
@@ -2353,6 +2354,10 @@ gui.Reach.Short=Curto
 gui.Reach.Medium=Médio
 gui.Reach.Far=Distante
 
+gui.hoursRemaining=
+gui.daysRemaining=
+gui.infinite=
+
 #== Food ==
 gui.food.fruit=Fruta
 gui.food.vegetable=Vegetal
@@ -2478,7 +2483,22 @@ gui.growth=Crescimento
 gui.mature=Maduro
 gui.metal.Iron=Ferro
 gui.tier=Camada
-gui.progress=Progresso
+gui.fuel=
+gui.Green Apple=
+gui.Red Apple=
+gui.Banana=
+gui.Cherry=
+gui.Lemon=
+gui.Olive=
+gui.Orange=
+gui.Peach=
+gui.Plum=
+gui.pile=
+gui.weaving=
+gui.eggs=
+gui.fertEggs=
+gui.logs=
+gui.gems=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Deve ser usado sob água corrente
@@ -2532,3 +2552,13 @@ error.Contact=Por favor, fale com o suporte do TerraFirmaCraft.
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+tile.Hopper.name=
+fluid.oliveoil=
+tile.OilLamp.Gold.name=
+tile.OilLamp.Platinum.name=
+tile.OilLamp.RoseGold.name=
+tile.OilLamp.Silver.name=
+tile.OilLamp.SterlingSilver.name=
+tile.OilLamp.BlueSteel.name=
+gui.plans.hopper=
+gui.plans.oillamp=

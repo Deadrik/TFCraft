@@ -14,8 +14,8 @@ key.ToolMode=도구모드 전환
 key.LockTool=도구 위치 고정
 
 effect.bleed=출혈
-death.attack.alcohol=%1$s이(가) 알콜중독으로 사망하였습니다
-death.attack.heatStroke=%1$s이(가) 일사병으로 사망하였습니다
+death.attack.alcohol=%1$s이(가) 알코올 중독으로 사망하였습니다
+death.attack.heatStroke=%1$s이(가) 열사병으로 사망하였습니다
 
 #==============
 #= Entities = 
@@ -24,7 +24,7 @@ entity.bearTFC.name=곰
 entity.chickenTFC.name=닭
 entity.cowTFC.name=소
 entity.deerTFC.name=사슴
-entity.fishTFC.name=농어
+entity.fishTFC.name=물고기
 entity.horseTFC.name=말
 entity.pheasantTFC.name=꿩
 entity.pigTFC.name=돼지
@@ -33,7 +33,7 @@ entity.squidTFC.name=오징어
 entity.wolfTFC.name=늑대
 
 entity.blazeTFC.name=블레이즈
-entity.caveSpiderTFC.name=동굴거미
+entity.caveSpiderTFC.name=동굴 거미
 entity.creeperTFC.name=크리퍼
 entity.endermanTFC.name=엔더맨
 entity.ghastTFC.name=가스트
@@ -46,9 +46,9 @@ entity.spiderTFC.name=거미
 entity.zombieTFC.name=좀비
 
 entity.arrowTFC.name=화살
-entity.standTFC.name=
-entity.barrel.name=
-entity.fallingBlock.name=
+entity.standTFC.name=아머 스탠드
+entity.barrel.name=통
+entity.fallingBlock.name=블록 (낙하중)
 
 entity.notFamiliar=동물이 그것을 허락하지 않습니다.
 fishingRod.lineTension=줄이 끊어질 것 같다!
@@ -107,7 +107,7 @@ commands.transferTamed.wrongSender=당신은 동물을 양도할 수 없습니�
 fluid.freshwater=담수
 fluid.saltwater=해수
 fluid.lavatfc=용암
-fluid.hotwater=뜨거운 물
+fluid.hotwater=온천수
 fluid.beer=맥주
 fluid.cider=사과주
 fluid.rum=럼
@@ -887,7 +887,7 @@ tile.Ore.Sylvite.name=칼리암염 (Sylvite)
 
 tile.Ore.Bismuthinite.name=휘창연석 (Bismuthinite)
 tile.Ore.Cassiterite.name=주석석 (Cassiterite)
-tile.Ore.Galena.name=
+tile.Ore.Galena.name=방연석 (Galena)
 tile.Ore.Garnierite.name=규니켈석 (Garnierite)
 tile.Ore.Hematite.name=적철석 (Hematite)
 tile.Ore.Limonite.name=갈철석 (Limonite)
@@ -2035,6 +2035,7 @@ tile.Fungi.mushroom_brown.name=푸른 버섯
 tile.Fungi.mushroom_red.name=붉은 버섯
 tile.Cactus.name=선인장
 tile.Pumpkin.name=호박
+tile.LitPumpkin.name=잭 오 랜턴
 tile.Moss.name=이끼
 tile.Thatch.name=초가 지붕 (Thatch)
 tile.Flora.Golden Rod.name=미역취 (Goldenrod)
@@ -2072,8 +2073,8 @@ tile.SaltWater.name=흐르는 해수
 tile.SaltWaterStationary.name=해수
 tile.FreshWater.name=흐르는 담수
 tile.FreshWaterStationary.name=담수
-tile.HotWater.name=흐르는 뜨거운 물
-tile.HotWaterStationary.name=뜨거운 물
+tile.HotWater.name=흐르는 온천수
+tile.HotWaterStationary.name=온천수
 tile.Lava.name=흐르는 용암
 tile.LavaStationary.name=용암
 
@@ -2313,8 +2314,8 @@ gui.Advanced=자세히
 gui.Shift=Shift
 gui.Hold=누르다
 
-gui.slot=
-gui.slot.back=
+gui.slot=슬롯
+gui.slot.back=등
 
 gui.ShowHelp=§8도움말: (§fShift§8를 누르기)
 gui.Help=§8도움말:
@@ -2352,6 +2353,10 @@ gui.Weight.Heavy=무거운
 gui.Reach.Short=짧은
 gui.Reach.Medium=중간
 gui.Reach.Far=먼
+
+gui.hoursRemaining=시간 남음
+gui.daysRemaining=일 남음
+gui.infinite=영원히 지속
 
 #== Food ==
 gui.food.fruit=과일
@@ -2478,7 +2483,22 @@ gui.growth=성장도
 gui.mature=성숙함
 gui.metal.Iron=철
 gui.tier=단계
-gui.progress=진행도
+gui.fuel=연료
+gui.Green Apple=풋사과나무
+gui.Red Apple=사과나무
+gui.Banana=바나나나무
+gui.Cherry=체리나무
+gui.Lemon=레몬나무
+gui.Olive=올리브나무
+gui.Orange=오렌지나무
+gui.Peach=복숭아나무
+gui.Plum=자두나무
+gui.pile=더미
+gui.weaving=천
+gui.eggs=계란
+gui.fertEggs=유정란
+gui.logs=장작
+gui.gems=보석
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=흐르는 물 속에서 사용해야 합니다.
@@ -2532,3 +2552,13 @@ error.Contact=TerraFirmaCraft 서포트에 보고하십시오.
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+tile.Hopper.name=깔때기
+fluid.oliveoil=올리브유
+tile.OilLamp.Gold.name=금 램프
+tile.OilLamp.Platinum.name=백금 램프 (Platinum)
+tile.OilLamp.RoseGold.name=로즈 골드 램프 (Rose Gold)
+tile.OilLamp.Silver.name=은 램프 (Silver)
+tile.OilLamp.SterlingSilver.name=순은 램프 (Sterling Silver)
+tile.OilLamp.BlueSteel.name=푸른 강철 램프 (Blue Steel)
+gui.plans.hopper=깔때기
+gui.plans.oillamp=램프

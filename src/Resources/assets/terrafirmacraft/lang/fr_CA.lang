@@ -2035,6 +2035,7 @@ tile.Fungi.mushroom_brown.name=Champignon brun
 tile.Fungi.mushroom_red.name=Champignon rouge
 tile.Cactus.name=Cactus
 tile.Pumpkin.name=Citrouille
+tile.LitPumpkin.name=Citrouille-lanterne
 tile.Moss.name=Mousse
 tile.Thatch.name=Thatch
 tile.Flora.Golden Rod.name=Verge d'or
@@ -2353,6 +2354,10 @@ gui.Reach.Short=Court
 gui.Reach.Medium=Moyen
 gui.Reach.Far=Long
 
+gui.hoursRemaining=heures restantes
+gui.daysRemaining=jours restants
+gui.infinite=Infinit
+
 #== Food ==
 gui.food.fruit=Fruit
 gui.food.vegetable=Légumes
@@ -2478,7 +2483,22 @@ gui.growth=Poussé
 gui.mature=Mature
 gui.metal.Iron=Fer
 gui.tier=Rang
-gui.progress=Progrès
+gui.fuel=Essence
+gui.Green Apple=Pommier (vert)
+gui.Red Apple=Pommier (rouge)
+gui.Banana=Bananier
+gui.Cherry=Cerisier
+gui.Lemon=Citronier
+gui.Olive=Olivier
+gui.Orange=Oranger
+gui.Peach=Pêcher
+gui.Plum=Prunier
+gui.pile=Pile
+gui.weaving=Tisser
+gui.eggs=Oeufs
+gui.fertEggs=Oeufs fertilisé
+gui.logs=Bûches
+gui.gems=Pierre précieuse
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Doit être utilisé sous de l'eau en mouvement.
@@ -2532,3 +2552,13 @@ error.Contact=Merci de le rapporter dans la section Support du Forum de TerraFir
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+tile.Hopper.name=Entonnoir
+fluid.oliveoil=Huile d'olive
+tile.OilLamp.Gold.name=Lampe à huile en or
+tile.OilLamp.Platinum.name=Lampe à huile en platine
+tile.OilLamp.RoseGold.name=Lampe à huile en or rose
+tile.OilLamp.Silver.name=Lampe à huile en argent
+tile.OilLamp.SterlingSilver.name=Lampe à huile en argent sterling
+tile.OilLamp.BlueSteel.name=Lampe à huile en acier bleu
+gui.plans.hopper=Entonnoir
+gui.plans.oillamp=Lampe à huile

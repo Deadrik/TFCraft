@@ -46,9 +46,9 @@ entity.spiderTFC.name=Edderkop
 entity.zombieTFC.name=Zombie
 
 entity.arrowTFC.name=Pil
-entity.standTFC.name=
-entity.barrel.name=
-entity.fallingBlock.name=
+entity.standTFC.name=Rustningsstativ
+entity.barrel.name=Tønde
+entity.fallingBlock.name=Fallende Blok
 
 entity.notFamiliar=Det der vil dyret ikke være med til.
 fishingRod.lineTension=Linen er ved at knække!
@@ -2035,6 +2035,7 @@ tile.Fungi.mushroom_brown.name=Brun Svamp
 tile.Fungi.mushroom_red.name=Rød Svamp
 tile.Cactus.name=Kaktus
 tile.Pumpkin.name=Græskar
+tile.LitPumpkin.name=
 tile.Moss.name=Mos
 tile.Thatch.name=Høballe
 tile.Flora.Golden Rod.name=Gyldenris
@@ -2353,6 +2354,10 @@ gui.Reach.Short=Kort
 gui.Reach.Medium=Medium
 gui.Reach.Far=Land
 
+gui.hoursRemaining=
+gui.daysRemaining=
+gui.infinite=
+
 #== Food ==
 gui.food.fruit=Frugt
 gui.food.vegetable=Grøntsag
@@ -2478,7 +2483,22 @@ gui.growth=Vækst
 gui.mature=Moden
 gui.metal.Iron=Jern
 gui.tier=Niveau
-gui.progress=Fremskridt
+gui.fuel=
+gui.Green Apple=
+gui.Red Apple=
+gui.Banana=
+gui.Cherry=
+gui.Lemon=
+gui.Olive=
+gui.Orange=
+gui.Peach=
+gui.Plum=
+gui.pile=
+gui.weaving=
+gui.eggs=
+gui.fertEggs=
+gui.logs=
+gui.gems=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Skal bruges under flydende vand.
@@ -2532,3 +2552,13 @@ error.Contact=Rapporter venligst dette i Support-sektionen på TerraFirmaCrafts 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+tile.Hopper.name=
+fluid.oliveoil=
+tile.OilLamp.Gold.name=
+tile.OilLamp.Platinum.name=
+tile.OilLamp.RoseGold.name=
+tile.OilLamp.Silver.name=
+tile.OilLamp.SterlingSilver.name=
+tile.OilLamp.BlueSteel.name=
+gui.plans.hopper=
+gui.plans.oillamp=
