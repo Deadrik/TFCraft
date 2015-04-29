@@ -1,14 +1,14 @@
 ﻿#zh_HK
 #此檔案是繁體中文的設定檔案 Traditional Chinese. Translated by: diplo from Hong Kong
-# Terrafirmacraft -- 博厚傳說 (博厚載物 群巒疊翠)
-# Terrafirmacraft -- 博厚傳說 Extensive (博) Deep (厚) Legend (傳說) (Extensive and Deep Earth) 博厚所以載物也 (地博厚 天高明)摘自 《中庸》
+# Terrafirmacraft -- 厚德傳說 (博厚載物 群巒疊翠)
+# Terrafirmacraft -- 博厚所以載物也 (地博厚 天高明)摘自 《中庸》；地勢坤 君子以厚德載物 摘自《周易》
 # Thanks the developers for developing this game. :-) And thanks Alice_in_Game for keeping up this translation list.     # Player can use BetterFonts Mod for better truetype fonts and size
 
 
-generator.TFCDefault=TFC 博厚傳說原設定(博厚載物 群巒疊翠)
-generator.TFCFlat=TFC 博厚傳說平坦世界設定
-generator.TFCAmplified=TFC 博厚傳說放大世界設定
-generator.TFCLargeBiomes=TFC 博厚傳說巨大生態區域設定
+generator.TFCDefault=TFC 厚德傳說原設定(博厚載物 群巒疊翠)
+generator.TFCFlat=TFC 厚德傳說平坦世界設定
+generator.TFCAmplified=TFC 厚德傳說放大世界設定
+generator.TFCLargeBiomes=TFC 厚德傳說巨大生態區域設定
 
 key.ToolMode=替換工具狀態
 key.LockTool=鎖定工具位置
@@ -46,9 +46,9 @@ entity.spiderTFC.name=蜘蛛 Spider
 entity.zombieTFC.name=殭屍 Zombie
 
 entity.arrowTFC.name=箭
-entity.standTFC.name=
-entity.barrel.name=
-entity.fallingBlock.name=
+entity.standTFC.name=盔甲架
+entity.barrel.name=木桶
+entity.fallingBlock.name=落下的方塊
 
 entity.notFamiliar=這隻動物不讓你這樣做。
 fishingRod.lineTension=快要扯斷魚絲線了!
@@ -2035,6 +2035,7 @@ tile.Fungi.mushroom_brown.name=褐蘑菇(啡蘑菇)(Brown Mushroom)
 tile.Fungi.mushroom_red.name=紅蘑菇(Red Mushroom)
 tile.Cactus.name=仙人掌(Cactus)
 tile.Pumpkin.name=南瓜(Pumpkin)
+tile.LitPumpkin.name=恐佈南瓜燈(Jack o'Lantern)
 tile.Moss.name=青苔(Moss)
 tile.Thatch.name=茅草(乾草堆)(Thatch)
 tile.Flora.Golden Rod.name=秋麒麟草(一枝黃花)(Goldenrod)
@@ -2353,6 +2354,10 @@ gui.Reach.Short=近距離
 gui.Reach.Medium=中距離
 gui.Reach.Far=遠距離
 
+gui.hoursRemaining=餘下小時
+gui.daysRemaining=餘下日子
+gui.infinite=永遠
+
 #== Food ==
 gui.food.fruit=水果
 gui.food.vegetable=蔬菜
@@ -2478,7 +2483,22 @@ gui.growth=生長
 gui.mature=成熟
 gui.metal.Iron=鐵
 gui.tier=級別
-gui.progress=進度
+gui.fuel=燃料
+gui.Green Apple=青蘋果樹(Green Apple)
+gui.Red Apple=紅蘋果樹(Red Apple)
+gui.Banana=香蕉樹(Banana)
+gui.Cherry=櫻桃樹(車厘子樹)(Cherry)
+gui.Lemon=檸檬樹(Lemon)
+gui.Olive=橄欖樹(Olive)
+gui.Orange=橙樹(Orange)
+gui.Peach=桃樹(Peach)
+gui.Plum=梅樹(Plum)
+gui.pile=堆疊(Pile)
+gui.weaving=編織(Weaving)
+gui.eggs=雞蛋(Eggs)
+gui.fertEggs=已受精雞蛋(Fertilized Eggs)
+gui.logs=木頭(Logs)
+gui.gems=寶石(Gems)
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=必須在流水中淘
@@ -2495,16 +2515,16 @@ gui.ProPick.FoundVeryLarge=探到很大量的
 gui.ProPick.FoundNothing=探不到任何感興趣的東西
 
 #== Creative Tabs ==
-itemGroup.TFCArmor=(博厚傳說) 盔甲
-itemGroup.TFCMaterials=(博厚傳說) 物料
-itemGroup.TFCMisc=(博厚傳說) 其他
-itemGroup.TFCPottery=(博厚傳說) 陶瓷
-itemGroup.TFCTools=(博厚傳說) 工具
-itemGroup.TFCWeapons=(博厚傳說) 武器
-itemGroup.TFCDevices=(博厚傳說) 裝置
-itemGroup.TFCFoods=(博厚傳說) 食物
-itemGroup.TFCBuilding=(博厚傳說) 建築方塊
-itemGroup.TFCDecoration=(博厚傳說) 裝飾方塊
+itemGroup.TFCArmor=(厚德傳說) 盔甲
+itemGroup.TFCMaterials=(厚德傳說) 物料
+itemGroup.TFCMisc=(厚德傳說) 其他
+itemGroup.TFCPottery=(厚德傳說) 陶瓷
+itemGroup.TFCTools=(厚德傳說) 工具
+itemGroup.TFCWeapons=(厚德傳說) 武器
+itemGroup.TFCDevices=(厚德傳說) 裝置
+itemGroup.TFCFoods=(厚德傳說) 食物
+itemGroup.TFCBuilding=(厚德傳說) 建築方塊
+itemGroup.TFCDecoration=(厚德傳說) 裝飾方塊
 
 #== Skill GUI ==
 skill.armorsmith=盔甲打造技巧
@@ -2527,8 +2547,18 @@ gui.skillpage=技巧
 error.error=錯誤:
 error.NBT=缺少NBT資料
 error.OreCFG=在TFCOre.cfg裡作以下的輸入是無效的:
-error.Contact=請向TerraFirmaCraft博厚傳說支援隊伍報告情況
+error.Contact=請向TerraFirmaCraft厚德傳說支援隊伍報告情況
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+tile.Hopper.name=漏斗(Hopper)
+fluid.oliveoil=橄欖油(Olive Oil)
+tile.OilLamp.Gold.name=黃金油燈(Gold Oil Lamp)
+tile.OilLamp.Platinum.name=白金油燈(Platinum Oil Lamp)
+tile.OilLamp.RoseGold.name=玫瑰金油燈(Rose Gold Oil Lamp)
+tile.OilLamp.Silver.name=銀油燈(Silver Oil Lamp)
+tile.OilLamp.SterlingSilver.name=紋銀油燈(Sterling Oil Lamp)
+tile.OilLamp.BlueSteel.name=藍鋼油燈(Blue Steel Oil Lamp)
+gui.plans.hopper=漏斗(Hopper)
+gui.plans.oillamp=油燈(Oil Lamp)

@@ -1,4 +1,4 @@
-﻿#es_AR
+﻿#es-419
 #This is the configuration file for Latin American Spanish
 
 
@@ -6,12 +6,12 @@
 
 
 generator.TFCDefault=TFC Por defecto
-generator.TFCFlat=
-generator.TFCAmplified=
-generator.TFCLargeBiomes=
+generator.TFCFlat=TFC Plano (Sin usar)
+generator.TFCAmplified=TFC Amplificado (Sin usar)
+generator.TFCLargeBiomes=TFC Biomas Grandes (Sin usar)
 
-key.ToolMode=Cambiar Modo Herramienta
-key.LockTool=Fijar Posición Herramienta
+key.ToolMode=Cambiar Modo de Herramienta
+key.LockTool=Fijar Posición de Herramienta
 
 effect.bleed=Sangrando
 death.attack.alcohol=%1$s ha muerto por intoxicación etílica.
@@ -24,7 +24,7 @@ entity.bearTFC.name=Oso
 entity.chickenTFC.name=Pollo
 entity.cowTFC.name=Vaca
 entity.deerTFC.name=Ciervo
-entity.fishTFC.name=Perca
+entity.fishTFC.name=Róbalo
 entity.horseTFC.name=Caballo
 entity.pheasantTFC.name=Faisán
 entity.pigTFC.name=Cerdo
@@ -46,11 +46,11 @@ entity.spiderTFC.name=Araña
 entity.zombieTFC.name=Zombi
 
 entity.arrowTFC.name=Flecha
-entity.standTFC.name=
-entity.barrel.name=
-entity.fallingBlock.name=
+entity.standTFC.name=Soporte de Armadura
+entity.barrel.name=Barril
+entity.fallingBlock.name=Bloque Cayendo
 
-entity.notFamiliar=El animal se niega.
+entity.notFamiliar=El animal no te deja hacer eso.
 fishingRod.lineTension=¡El sedal se va a partir!
 fishingRod.lineSnap=¡El sedal se partió!
 fishingRod.bite=¡Han picado!
@@ -500,11 +500,11 @@ item.Tourmaline.Exquisite.name=Turmalina Excelente
 #= Powders =
 #===========
 item.dyePowder.black.name=Saco de Tinta
-item.dyePowder.blue.name=Lapis Lázuli
+item.dyePowder.blue.name=Tinte Azul
 item.dyePowder.brown.name=Semillas de Cacao
 item.dyePowder.cyan.name=Tinte Cyan
 item.dyePowder.gray.name=Tinte Gris
-item.dyePowder.green.name=Cactus
+item.dyePowder.green.name=Tinte Verde
 item.dyePowder.lightBlue.name=Tinte Azul Claro
 item.dyePowder.lime.name=Tinte Lima
 item.dyePowder.magenta.name=Tinte Magenta
@@ -791,7 +791,7 @@ item.Ore.Kimberlite.name=Kinberlita
 item.Ore.Lapis Lazuli.name=Lapis Lázuli
 item.Ore.Lignite.name=Lignita
 item.Ore.Microcline.name=Microlita
-item.Ore.Olivine.name=Olivina
+item.Ore.Olivine.name=Olivino
 item.Ore.Petrified Wood.name=Madera Petrificada
 item.Ore.Pitchblende.name=Pechblenda
 item.Ore.Saltpeter.name=Salitre
@@ -875,7 +875,7 @@ tile.Ore.Kimberlite.name=Kinberlita
 tile.Ore.Lapis Lazuli.name=Lapis Lázuli
 tile.Ore.Lignite.name=Lignita
 tile.Ore.Microcline.name=Microlita
-tile.Ore.Olivine.name=Olivina
+tile.Ore.Olivine.name=Olivino
 tile.Ore.Petrified Wood.name=Madera Petrificada
 tile.Ore.Pitchblende.name=Pechblenda
 tile.Ore.Saltpeter.name=Salitre
@@ -1299,25 +1299,25 @@ item.Stone Knife Blade.name=Hoja de Cuchillo de Piedra
 
 item.IgIn Stone Axe Head.name=Cabezal de Hacha de Piedra
 item.IgIn Stone Chisel Head.name=Cabezal de Cincel de Piedra
-item.IgIn Stone Hoe Head.name=Cabezal de Hazada de Piedra
+item.IgIn Stone Hoe Head.name=Cabezal de Azada de Piedra
 item.IgIn Stone Javelin Head.name=Punta de jabalina de Piedra
 item.IgIn Stone Shovel Head.name=Cabezal de Pala de Piedra
 
 item.Sed Stone Axe Head.name=Cabezal de Hacha de Piedra
 item.Sed Stone Chisel Head.name=Cabezal de Cincel de Piedra
-item.Sed Stone Hoe Head.name=Cabezal de Hazada de Piedra
+item.Sed Stone Hoe Head.name=Cabezal de Azada de Piedra
 item.Sed Stone Javelin Head.name=Punta de jabalina de Piedra
 item.Sed Stone Shovel Head.name=Cabezal de Pala de Piedra
 
 item.IgEx Stone Axe Head.name=Cabezal de Hacha de Piedra
 item.IgEx Stone Chisel Head.name=Cabezal de Cincel de Piedra
-item.IgEx Stone Hoe Head.name=Cabezal de Hazada de Piedra
+item.IgEx Stone Hoe Head.name=Cabezal de Azada de Piedra
 item.IgEx Stone Javelin Head.name=Punta de jabalina de Piedra
 item.IgEx Stone Shovel Head.name=Cabezal de Pala de Piedra
 
 item.MM Stone Axe Head.name=Cabezal de Hacha de Piedra
 item.MM Stone Chisel Head.name=Cabezal de Cincel de Piedra
-item.MM Stone Hoe Head.name=Cabezal de Hazada de Piedra
+item.MM Stone Hoe Head.name=Cabezal de Azada de Piedra
 item.MM Stone Javelin Head.name=Punta de jabalina de Piedra
 item.MM Stone Shovel Head.name=Cabezal de Pala de Piedra
 
@@ -1332,11 +1332,11 @@ item.Stone Chisel.name=Cincel de Piedra
 
 item.Stone Hammer.name=Martillo de Piedra
 
-item.Stone Hoe.name=Hazada de Piedra
-item.IgIn Stone Hoe.name=Hazada de Piedra
-item.Sed Stone Hoe.name=Hazada de Piedra
-item.IgEx Stone Hoe.name=Hazada de Piedra
-item.MM Stone Hoe.name=Hazada de Piedra
+item.Stone Hoe.name=Azada de Piedra
+item.IgIn Stone Hoe.name=Azada de Piedra
+item.Sed Stone Hoe.name=Azada de Piedra
+item.IgEx Stone Hoe.name=Azada de Piedra
+item.MM Stone Hoe.name=Azada de Piedra
 
 item.Stone Javelin.name=Jabalina de Piedra
 item.IgIn Stone Javelin.name=Jabalina de Piedra
@@ -2035,6 +2035,7 @@ tile.Fungi.mushroom_brown.name=Champiñón
 tile.Fungi.mushroom_red.name=Amanita
 tile.Cactus.name=Cactus
 tile.Pumpkin.name=Calabaza
+tile.LitPumpkin.name=Calabaza de Halloween
 tile.Moss.name=Musgo
 tile.Thatch.name=Techo de paja
 tile.Flora.Golden Rod.name=Vara de Oro
@@ -2306,28 +2307,28 @@ gui.Sluice.Overworked=Desgastado
 gui.Workbench.Crafting=Elaboración
 gui.overburdened=*Sobrecargado*
 
-gui.badnbt=Informacion incorrecta.
+gui.badnbt=Informacion incorrecta
 
 #== Tooltips ==
 gui.Advanced=Avanzado
 gui.Shift=Cambiar
 gui.Hold=Mantener
 
-gui.slot=Hueco
+gui.slot=Espacio
 gui.slot.back=Espalda
 
 gui.ShowHelp=§8Ayuda: (Presionar §fShift§8)
 gui.Help=§8Ayuda;
-gui.Clay.Inst0=§bClick Derecho§7 con 5 en una casilla para dar forma
+gui.Clay.Inst0=§bClick Derecho§7 con 5 en una casilla para dar forma.
 gui.Knife.Inst0=§bClick Derecho§7 sobre un bloque que no sea de tierra
 gui.Knife.Inst1=para crear una superficie para preparar comidas.
-gui.Leather.Inst0=§bClick Derecho§7con un cuchillo en su inventario para cortar
+gui.Leather.Inst0=§bClick Derecho§7con un cuchillo en su inventario para cortar.
 gui.LooseRock.Inst0=§bClick Derecho§7 con 2 en una casilla para pulir.
 gui.MeltedMetal.Inst0=§bClick Derecho§7para verter en un molde de la herramienta.
-gui.PotteryBase.Inst0=Agacharse y §bClick Derecho§7para colocar objeto
-gui.PotteryVesselSmall.Inst0=O §bClick Derecho§7para abrir el inventario
+gui.PotteryBase.Inst0=Agacharse y §bClick Derecho§7para colocar objeto.
+gui.PotteryVesselSmall.Inst0=O §bClick Derecho§7para abrir el inventario.
 gui.RawHide.Inst0=????
-gui.Chisel.Inst0=
+gui.Chisel.Inst0=Requiere un martillo en la barra de acceso rapido.
 gui.Barrel.MoreItems=§8Más... (Presionar §fShift§8)
 
 gui.Nutrient.A=Nutriente A
@@ -2352,6 +2353,10 @@ gui.Weight.Heavy=Pesado
 gui.Reach.Short=Corto alcance
 gui.Reach.Medium=Medio alcance
 gui.Reach.Far=Largo alcance
+
+gui.hoursRemaining=Horas Restantes
+gui.daysRemaining=Dias Restantes
+gui.infinite=Infinito
 
 #== Food ==
 gui.food.fruit=Fruta
@@ -2477,14 +2482,29 @@ gui.useless=Inútil
 gui.growth=Maduración
 gui.mature=Maduro
 gui.metal.Iron=Fierro
-gui.tier=
-gui.progress=
+gui.tier=Nivel
+gui.fuel=Combustible
+gui.Green Apple=Árbol de Manzana Verde
+gui.Red Apple=Árbol de Manzana Roja
+gui.Banana=Árbol de Plátano
+gui.Cherry=Árbol de Cereza
+gui.Lemon=Árbol de Limón
+gui.Olive=Árbol de Olivo
+gui.Orange=Árbol de Naranja
+gui.Peach=Árbol de Durazno
+gui.Plum=Árbol de Ciruela
+gui.pile=Pila
+gui.weaving=Tejeduría
+gui.eggs=Huevos
+gui.fertEggs=Huevos Fecundados
+gui.logs=Troncos
+gui.gems=Gemas
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Se debe utilizar en una corriente de agua.
 gui.goldpan.overused=Esta zona está consumida. No encontrarás gran cosa.
-gui.seeds.failedTemp=
-gui.seeds.failedSun=
+gui.seeds.failedTemp=Hace demasiado para plantar esto, no sobreviviría mucho tiempo.
+gui.seeds.failedSun=No hay suficiente luz solar para plantarr esto, no sobreviviría mucho tiempo.
 
 gui.ProPick.Found=Has encontrado
 gui.ProPick.FoundTraces=Encontrados rastros de
@@ -2524,11 +2544,21 @@ gui.skillpage=Habilidades
 #==================
 #= Error Messages =
 #==================
-error.error=
-error.NBT=
-error.OreCFG=
-error.Contact=
+error.error=ERROR:
+error.NBT=no se encuentra informacion NBT
+error.OreCFG=El siguiente bloque definido en TFCOre.cfg no es válido:
+error.Contact=Porfavor reporta este error al soporte de TerraFirmaCraft.
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+tile.Hopper.name=Tolva
+fluid.oliveoil=Aceite de Oliva
+tile.OilLamp.Gold.name=Lámpara de Aceite de Oro
+tile.OilLamp.Platinum.name=Lámpara de Aceite de Platino
+tile.OilLamp.RoseGold.name=Lámpara de Aceite de Oro Rojo
+tile.OilLamp.Silver.name=Lámpara de Aceite de Plata
+tile.OilLamp.SterlingSilver.name=Lámpara de Aceite de Plata de Ley
+tile.OilLamp.BlueSteel.name=Lámpara de Aceite de Acero Azul
+gui.plans.hopper=Tolva
+gui.plans.oillamp=Lámpara de Aceite

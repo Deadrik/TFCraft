@@ -5,7 +5,7 @@
 
 
 
-generator.TFCDefault=TFC standara
+generator.TFCDefault=TFC normale
 generator.TFCFlat=TFC piatta (inutilizzata)
 generator.TFCAmplified=TFC amplificata (inutilizzata)
 generator.TFCLargeBiomes=TFC biomi vasti (inutilizzata)
@@ -46,9 +46,9 @@ entity.spiderTFC.name=Ragno
 entity.zombieTFC.name=Zombi
 
 entity.arrowTFC.name=Freccia
-entity.standTFC.name=
-entity.barrel.name=
-entity.fallingBlock.name=
+entity.standTFC.name=Supporto per armatura
+entity.barrel.name=Barile
+entity.fallingBlock.name=Blocco in caduta
 
 entity.notFamiliar=L'animale non te lo permette.
 fishingRod.lineTension=La lenza si sta strappando!
@@ -152,7 +152,7 @@ item.Barley Whole.name=Spiga d'orzo
 item.Maize Ear.name=Pannocchia
 item.Oat Whole.name=Spiga d'avena
 item.Rice Whole.name=Spiga di riso
-item.Rye Whole.name=Spiga di riso
+item.Rye Whole.name=Spiga di segale
 item.Wheat Whole.name=Spiga di frumento
 
 item.Barley Grain.name=Chicchi d'orzo
@@ -162,21 +162,21 @@ item.Rye Grain.name=Chicchi di segale
 item.Wheat Grain.name=Chicchi di frumento
 
 item.Barley Ground.name=Farina d'orzo
-item.Cornmeal Ground.name=Farina di mais
+item.Cornmeal Ground.name=Farina di granturco
 item.Oat Ground.name=Farina d'avena
 item.Rice Ground.name=Farina di riso
 item.Rye Ground.name=Farina di segale
 item.Wheat Ground.name=Farina di frumento
 
 item.Barley Dough.name=Impasto d'orzo
-item.Cornmeal Dough.name=Impasto di mais
+item.Cornmeal Dough.name=Impasto di granturco
 item.Oat Dough.name=Impasto d'avena
 item.Rice Dough.name=Impasto di riso
 item.Rye Dough.name=Impasto di segale
 item.Wheat Dough.name=Impasto di frumento
 
 item.Seeds Barley.name=Semi d'orzo
-item.Seeds Maize.name=Semi di mais
+item.Seeds Maize.name=Semi di granturco
 item.Seeds Oat.name=Semi d'avena
 item.Seeds Rice.name=Semi di riso
 item.Seeds Rye.name=Semi di segale
@@ -2035,6 +2035,7 @@ tile.Fungi.mushroom_brown.name=Fungo marrone
 tile.Fungi.mushroom_red.name=Fungo rosso
 tile.Cactus.name=Cactus
 tile.Pumpkin.name=Zucca
+tile.LitPumpkin.name=
 tile.Moss.name=Muschio
 tile.Thatch.name=Blocco di paglia
 tile.Flora.Golden Rod.name=Verga d'oro
@@ -2327,7 +2328,7 @@ gui.MeltedMetal.Inst0=§bClicca col destro §7per riempire uno stampo.
 gui.PotteryBase.Inst0=Accovacciati e §bClicca col destro §7per posizionare.
 gui.PotteryVesselSmall.Inst0=O §bClicca col destro §7per aprire l'inventario
 gui.RawHide.Inst0=????
-gui.Chisel.Inst0=
+gui.Chisel.Inst0=Richiede un martello nella barra rapida.
 gui.Barrel.MoreItems=§8Altro... (Tieni premuto §fShift§8)
 
 gui.Nutrient.A=Nutrimento A
@@ -2352,6 +2353,10 @@ gui.Weight.Heavy=Pesante
 gui.Reach.Short=Corto
 gui.Reach.Medium=Medio
 gui.Reach.Far=Lontano
+
+gui.hoursRemaining=Ore rimanenti
+gui.daysRemaining=Giorni rimanenti
+gui.infinite=Infinito
 
 #== Food ==
 gui.food.fruit=Frutta
@@ -2477,14 +2482,33 @@ gui.useless=Inutile
 gui.growth=Crescita
 gui.mature=Maturo
 gui.metal.Iron=Ferro
-gui.tier=
-gui.progress=
+gui.tier=Grado
+"gui.fuel=Combustibile
+"
+gui.Green Apple=Melo verde
+gui.Red Apple=Melo rosso
+gui.Banana=Banano
+gui.Cherry=Ciliegio
+gui.Lemon=Limone
+"gui.Olive=Ulivo
+"
+gui.Orange=Arancio
+gui.Peach=Pesco
+gui.Plum=Prugnolo
+gui.pile=Cumulo
+gui.weaving=Tessitura
+"gui.eggs=Uova
+"
+"gui.fertEggs=Uova fecondate
+"
+gui.logs=Tronchi
+gui.gems=Gemme
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Da usare sotto acqua corrente.
 gui.goldpan.overused=Quest'area sembra già setacciata. Probabilmente non troverai granché.
 gui.seeds.failedTemp=È troppo freddo per piantarli, non sopravviverebbero a lungo.
-gui.seeds.failedSun=Non c'è abbastanza luce per piantarli, non sopravviverebbero a lungo.
+gui.seeds.failedSun=Non c'è abbastanza sole per piantarli, non sopravviverebbero a lungo.
 
 gui.ProPick.Found=Trovato
 gui.ProPick.FoundTraces=Trovate tracce di
@@ -2526,9 +2550,19 @@ gui.skillpage=Abilità
 #==================
 error.error=ERRORE:
 error.NBT=dati NBT mancanti.
-error.OreCFG=Il seguente blocco è invalido TFCOre.cfg :
+error.OreCFG=Il seguente blocco è invalido su TFCOre.cfg :
 error.Contact=Per favore rivolgiti alla sezione supporto di TerraFirmaCraft.
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+tile.Hopper.name=Tramoggia
+fluid.oliveoil=Olio d'oliva
+tile.OilLamp.Gold.name=Lampada ad olio d'oro
+tile.OilLamp.Platinum.name=Lampada ad olio di platino
+tile.OilLamp.RoseGold.name=Lampada ad olio d'oro rosa
+tile.OilLamp.Silver.name=Lampada ad olio d'argento
+tile.OilLamp.SterlingSilver.name=Lampada ad olio d'argento sterling
+tile.OilLamp.BlueSteel.name=Lampada ad olio d'acciao blu
+gui.plans.hopper=Tramoggia
+gui.plans.oillamp=Lampada ad olio

@@ -1,14 +1,14 @@
 ﻿#zh_CN
 #本文件为简体中文语言配置文件,翻译者:crafteverywhere, moshee
-
+#Terrafirmcraft 群峦传说
 
 
 
 
 generator.TFCDefault=TFC默认生成模式
-generator.TFCFlat=
-generator.TFCAmplified=
-generator.TFCLargeBiomes=
+generator.TFCFlat=TFC平坦世界
+generator.TFCAmplified=TFC巨大世界
+generator.TFCLargeBiomes=TFC超大世界
 
 key.ToolMode=循环工具模式
 key.LockTool=锁定工具位置
@@ -46,20 +46,20 @@ entity.spiderTFC.name=蜘蛛
 entity.zombieTFC.name=僵尸
 
 entity.arrowTFC.name=箭
-entity.standTFC.name=
-entity.barrel.name=
-entity.fallingBlock.name=
+entity.standTFC.name=装备架
+entity.barrel.name=桶
+entity.fallingBlock.name=下落方块
 
 entity.notFamiliar=这只动物跟你还不熟.
-fishingRod.lineTension=绳子要绷断了！
-fishingRod.lineSnap=绳子绷断了！
+fishingRod.lineTension=鱼线要绷断了！
+fishingRod.lineSnap=鱼线绷断了！
 fishingRod.bite=哇,上钩了!
 fishingRod.gotAway=它跑掉了...
 
 #================
 #= Achievements =
 #================
-achievement.achLooseRock=明显是块岩石
+achievement.achLooseRock=确凿无疑是块岩石
 achievement.achLooseRock.desc=拾取岩石
 achievement.achSmallOre=无石不翻
 achievement.achSmallOre.desc=找到矿石颗粒
@@ -118,7 +118,7 @@ fluid.whiskey=威士忌
 fluid.cornwhiskey=玉米威士忌
 fluid.milk=牛奶
 fluid.milkcurdled=凝乳
-fluid.milkvinegar=
+fluid.milkvinegar=奶醋
 fluid.limewater=石灰水
 fluid.tannin=鞣酸
 fluid.vinegar=醋
@@ -420,7 +420,7 @@ item.Spindle Head.Spindle Head.name=纺锤头
 item.Fire Brick.Fire Brick.name=耐火砖
 item.Fire Brick.Clay Fire Brick.name=耐火粘土砖
 tile.FireBrick.name=耐火砖方块
-tile.Pottery.name=
+tile.Pottery.name=陶器
 
 item.ClayBowl.Ceramic Bowl.name=瓷碗
 item.ClayBowl.Clay Bowl.name=陶碗
@@ -995,23 +995,23 @@ item.Loom.White Elm.name=榆树织布机
 item.Loom.Willow.name=杨柳织布机
 
 #== Wood Blocks ==
-tile.Chest.Acacia.name=
-tile.Chest.Ash.name=
-tile.Chest.Aspen.name=
-tile.Chest.Birch.name=
-tile.Chest.Chestnut.name=
-tile.Chest.Douglas Fir.name=
-tile.Chest.Hickory.name=
-tile.Chest.Kapok.name=
-tile.Chest.Maple.name=
-tile.Chest.Oak.name=
-tile.Chest.Pine.name=
-tile.Chest.Sequoia.name=
-tile.Chest.Spruce.name=
-tile.Chest.Sycamore.name=
-tile.Chest.White Cedar.name=
-tile.Chest.White Elm.name=
-tile.Chest.Willow.name=
+tile.Chest.Acacia.name=金合欢箱子
+tile.Chest.Ash.name=白蜡树箱子
+tile.Chest.Aspen.name=白杨树箱子
+tile.Chest.Birch.name=桦木箱子
+tile.Chest.Chestnut.name=栗树箱子
+tile.Chest.Douglas Fir.name=花旗松箱子
+tile.Chest.Hickory.name=山核桃箱子
+tile.Chest.Kapok.name=木棉箱子
+tile.Chest.Maple.name=枫树箱子
+tile.Chest.Oak.name=橡树箱子
+tile.Chest.Pine.name=松树箱子
+tile.Chest.Sequoia.name=红杉箱子
+tile.Chest.Spruce.name=云杉箱子
+tile.Chest.Sycamore.name=悬铃木箱子
+tile.Chest.White Cedar.name=北美香柏树箱子
+tile.Chest.White Elm.name=榆树箱子
+tile.Chest.Willow.name=杨柳箱子
 
 tile.log2.Acacia.name=金合欢原木
 tile.log.Ash.name=白蜡原木
@@ -1998,8 +1998,8 @@ item.Mud Brick.name=泥砖
 item.Wet Mud Brick.name=湿泥砖
 
 #======== Misc. Blocks========
-tile.Straw Hide Bed.name=稻草兽皮床
-tile.StrawHideBed.name=稻草兽皮床
+tile.Straw Hide Bed.name=干草兽皮床
+tile.StrawHideBed.name=干草兽皮床
 tile.customBed.sleep=这张床太不舒服了，睡不着。
 tile.BasicPipe.name=管道
 tile.ValvePipe.name=阀门
@@ -2035,6 +2035,7 @@ tile.Fungi.mushroom_brown.name=棕蘑菇
 tile.Fungi.mushroom_red.name=红蘑菇
 tile.Cactus.name=仙人掌
 tile.Pumpkin.name=南瓜
+tile.LitPumpkin.name=南瓜灯
 tile.Moss.name=苔藓
 tile.Thatch.name=茅草
 tile.Flora.Golden Rod.name=秋麒麟
@@ -2327,7 +2328,7 @@ gui.MeltedMetal.Inst0=§b右击§7以倒入工具模具中或者混合起来
 gui.PotteryBase.Inst0=潜行时§b右击§7以放置物体
 gui.PotteryVesselSmall.Inst0=或者§b右击§7以打开物品栏
 gui.RawHide.Inst0=????
-gui.Chisel.Inst0=
+gui.Chisel.Inst0=需要将锤子放在快捷栏中
 gui.Barrel.MoreItems=§8按住§fShift§8查看更多信息
 
 gui.Nutrient.A=营养成分A
@@ -2352,6 +2353,10 @@ gui.Weight.Heavy=沉重
 gui.Reach.Short=短程
 gui.Reach.Medium=中程
 gui.Reach.Far=远程
+
+gui.hoursRemaining=剩余小时
+gui.daysRemaining=剩余天数
+gui.infinite=永远
 
 #== Food ==
 gui.food.fruit=水 果
@@ -2473,18 +2478,33 @@ gui.milk.sour=酸
 gui.units=单位
 
 #== WAILA ==
-gui.useless=
-gui.growth=
-gui.mature=
-gui.metal.Iron=
-gui.tier=
-gui.progress=
+gui.useless=无用
+gui.growth=生成中
+gui.mature=成熟
+gui.metal.Iron=铁
+gui.tier=级别
+gui.fuel=燃料
+gui.Green Apple=青苹果树
+gui.Red Apple=红苹果树
+gui.Banana=橡胶树
+gui.Cherry=樱桃树
+gui.Lemon=柠檬树
+gui.Olive=橄榄树
+gui.Orange=橘子树
+gui.Peach=桃树
+gui.Plum=梅树
+gui.pile=堆叠
+gui.weaving=纺织
+gui.eggs=鸡蛋
+gui.fertEggs=已受精的鸡蛋
+gui.logs=原木
+gui.gems=宝石
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=必须在流动水中使用
 gui.goldpan.overused=这片区域资源似乎已经采尽,你可能不会再发现更多了.
-gui.seeds.failedTemp=
-gui.seeds.failedSun=
+gui.seeds.failedTemp=这里太冷了，无法进行种植，作物活不长。
+gui.seeds.failedSun=这里日照不足，无法进行种植，作物活不长。
 
 gui.ProPick.Found=发现了
 gui.ProPick.FoundTraces=发现了微量的
@@ -2524,11 +2544,21 @@ gui.skillpage=技能
 #==================
 #= Error Messages =
 #==================
-error.error=
-error.NBT=
-error.OreCFG=
-error.Contact=
+error.error=错误:
+error.NBT=缺少NBT数据
+error.OreCFG=TFCOre.cfg中的下列方块条目无效:
+error.Contact=请向群峦传说支持提供方报告.
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+tile.Hopper.name=漏斗
+fluid.oliveoil=橄榄油
+tile.OilLamp.Gold.name=黄金油灯
+tile.OilLamp.Platinum.name=白金油灯
+tile.OilLamp.RoseGold.name=玫瑰金油灯
+tile.OilLamp.Silver.name=白银油灯
+tile.OilLamp.SterlingSilver.name=纯银油灯
+tile.OilLamp.BlueSteel.name=蓝钢油灯
+gui.plans.hopper=漏斗
+gui.plans.oillamp=油灯

@@ -46,9 +46,9 @@ entity.spiderTFC.name=Păianjen
 entity.zombieTFC.name=Zombi
 
 entity.arrowTFC.name=Săgeată
-entity.standTFC.name=
-entity.barrel.name=
-entity.fallingBlock.name=
+entity.standTFC.name=Suport de armură
+entity.barrel.name=Butoi
+entity.fallingBlock.name=Bloc în cădere
 
 entity.notFamiliar=Animalul nu te lasă să faci asta!
 fishingRod.lineTension=Se va rupe firul!
@@ -1216,23 +1216,23 @@ tile.FenceGateTFC.White Cedar.name=Portiță de cedru alb
 tile.FenceGateTFC.White Elm.name=Portiță de ulm
 tile.FenceGateTFC.Willow.name=Portiță de salcie
 
-tile.ArmourStand.Acacia.name=Suport de armură de salcâm
-tile.ArmourStand.Ash.name=Suport de armură de frasin
-tile.ArmourStand.Aspen.name=Suport de armură de plop
-tile.ArmourStand.Birch.name=Suport de armură de mesteacăn
-tile.ArmourStand.Chestnut.name=Suport de armură de castan
-tile.ArmourStand.Douglas Fir.name=Suport de armură de duglas
-tile.ArmourStand.Hickory.name=Suport de armură de nuc
-tile.ArmourStand.Kapok.name=Suport de armură de capoc
-tile.ArmourStand.Maple.name=Suport de armură de arțar
-tile.ArmourStand.Oak.name=Suport de armură de stejar
-tile.ArmourStand.Pine.name=Suport de armură de pin
-tile.ArmourStand.Sequoia.name=Suport de armură de sequoia
-tile.ArmourStand.Spruce.name=Suport de armură de molid
-tile.ArmourStand.Sycamore.name=Suport de armură de sicomor
-tile.ArmourStand.White Cedar.name=Suport de armură de cedru alb
-tile.ArmourStand.White Elm.name=Suport de armură de ulm
-tile.ArmourStand.Willow.name=Suport de armură de salcie
+tile.ArmourStand.Acacia.name=Suport de armură din salcâm
+tile.ArmourStand.Ash.name=Suport de armură din frasin
+tile.ArmourStand.Aspen.name=Suport de armură din plop
+tile.ArmourStand.Birch.name=Suport de armură din mesteacăn
+tile.ArmourStand.Chestnut.name=Suport de armură din castan
+tile.ArmourStand.Douglas Fir.name=Suport de armură din duglas
+tile.ArmourStand.Hickory.name=Suport de armură din nuc
+tile.ArmourStand.Kapok.name=Suport de armură din capoc
+tile.ArmourStand.Maple.name=Suport de armură din arțar
+tile.ArmourStand.Oak.name=Suport de armură din stejar
+tile.ArmourStand.Pine.name=Suport de armură din pin
+tile.ArmourStand.Sequoia.name=Suport de armură din sequoia
+tile.ArmourStand.Spruce.name=Suport de armură din molid
+tile.ArmourStand.Sycamore.name=Suport de armură din sicomor
+tile.ArmourStand.White Cedar.name=Suport de armură din cedru alb
+tile.ArmourStand.White Elm.name=Suport de armură din ulm
+tile.ArmourStand.Willow.name=Suport de armură din salcie
 
 tile.WoodSupportV2.Acacia.name=Grindă de salcâm
 tile.WoodSupportV.Ash.name=Grindă de frasin
@@ -1271,23 +1271,23 @@ tile.WoodSupportH.White Cedar.name=Grindă de cedru alb
 tile.WoodSupportH.White Elm.name=Grindă de ulm
 tile.WoodSupportH.Willow.name=Grindă de salcie
 
-tile.Toolrack.Acacia.name=Suport de salcâm pentru unelte
-tile.Toolrack.Ash.name=Suport de frasin pentru unelte
-tile.Toolrack.Aspen.name=Suport de plop pentru unelte
-tile.Toolrack.Birch.name=Suport de mesteacăn pentru unelte
-tile.Toolrack.Chestnut.name=Suport de castan pentru unelte
-tile.Toolrack.Douglas Fir.name=Suport de duglas pentru unelte
-tile.Toolrack.Hickory.name=Suport de nuc pentru unelte
-tile.Toolrack.Kapok.name=Suport de capoc pentru unelte
-tile.Toolrack.Maple.name=Suport de arțar pentru unelte
-tile.Toolrack.Oak.name=Suport de stejar pentru unelte
-tile.Toolrack.Pine.name=Suport de pin pentru unelte
-tile.Toolrack.Sequoia.name=Suport de sequoia pentru unelte
-tile.Toolrack.Spruce.name=Suport de molid pentru unelte
-tile.Toolrack.Sycamore.name=Suport de sicomor pentru unelte
-tile.Toolrack.White Cedar.name=Suport de cedru alb pentru unelte
-tile.Toolrack.White Elm.name=Suport de ulm pentru unelte
-tile.Toolrack.Willow.name=Suport de salcie pentru unelte
+tile.Toolrack.Acacia.name=Suport de unelte din salcâm
+tile.Toolrack.Ash.name=Suport de unelte din frasin
+tile.Toolrack.Aspen.name=Suport de unelte din plop
+tile.Toolrack.Birch.name=Suport de unelte din mesteacăn
+tile.Toolrack.Chestnut.name=Suport de unelte din castan
+tile.Toolrack.Douglas Fir.name=Suport de unelte din duglas
+tile.Toolrack.Hickory.name=Suport de unelte din nuc
+tile.Toolrack.Kapok.name=Suport de unelte din capoc
+tile.Toolrack.Maple.name=Suport de unelte din arțar
+tile.Toolrack.Oak.name=Suport de unelte din stejar
+tile.Toolrack.Pine.name=Suport de unelte din pin
+tile.Toolrack.Sequoia.name=Suport de unelte din sequoia
+tile.Toolrack.Spruce.name=Suport de unelte din molid
+tile.Toolrack.Sycamore.name=Suport de unelte din sicomor
+tile.Toolrack.White Cedar.name=Suport de unelte din cedru alb
+tile.Toolrack.White Elm.name=Suport de unelte din ulm
+tile.Toolrack.Willow.name=Suport de unelte din salcie
 
 #=======================
 #= Tools/Weapons/Armor =
@@ -1895,7 +1895,7 @@ tile.LeatherRack.name=Suport pentru piele
 tile.FoodPrep.name=Loc de preparare
 tile.MetalSheet.name=Tablă de metal
 tile.ingotpile.name=Grămadă de lingouri
-tile.SmokeRack.name=Suport pentru afumat
+tile.SmokeRack.name=Afumătoare
 
 #== Anvils ==
 tile.Anvil.Stone.name=Nicovală de piatră
@@ -2035,6 +2035,7 @@ tile.Fungi.mushroom_brown.name=Ciupercă maro
 tile.Fungi.mushroom_red.name=Ciupercă roșie
 tile.Cactus.name=Cactus
 tile.Pumpkin.name=Dovleac
+tile.LitPumpkin.name=Felinar din dovleac
 tile.Moss.name=Mușchi
 tile.Thatch.name=Balot de paie
 tile.Flora.Golden Rod.name=Splinuță
@@ -2353,6 +2354,10 @@ gui.Reach.Short=Scurt
 gui.Reach.Medium=Mediu
 gui.Reach.Far=Lung
 
+gui.hoursRemaining=ore rămase
+gui.daysRemaining=zile rămase
+gui.infinite=infinit
+
 #== Food ==
 gui.food.fruit=Fructe
 gui.food.vegetable=Legume
@@ -2478,7 +2483,22 @@ gui.growth=Creștere
 gui.mature=Matur
 gui.metal.Iron=Fier
 gui.tier=Nivel
-gui.progress=Progres
+gui.fuel=Combustibil
+gui.Green Apple=Măr verde
+gui.Red Apple=Măr roșu
+gui.Banana=Bananier
+gui.Cherry=Cireș
+gui.Lemon=Lămâi
+gui.Olive=Măslin
+gui.Orange=Portocal
+gui.Peach=Piersic
+gui.Plum=Prun
+gui.pile=Grămadă
+gui.weaving=Tors
+gui.eggs=Ouă
+gui.fertEggs=Ouă fertilizate
+gui.logs=Bușteni
+gui.gems=Nestemate
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Trebuie folosit sub apă curgătoare.
@@ -2501,7 +2521,7 @@ itemGroup.TFCMisc=(TFC) Diverse
 itemGroup.TFCPottery=(TFC) Olărit
 itemGroup.TFCTools=(TFC) Unelte
 itemGroup.TFCWeapons=(TFC) Arme
-itemGroup.TFCDevices=(TFC) Dispozitive
+itemGroup.TFCDevices=(TFC) Aparate
 itemGroup.TFCFoods=(TFC) Mâncare
 itemGroup.TFCBuilding=(TFC) Blocuri de construcție
 itemGroup.TFCDecoration=(TFC) Blocuri decorative
@@ -2525,10 +2545,20 @@ gui.skillpage=Abilități
 #= Error Messages =
 #==================
 error.error=EROARE:
-error.NBT=nu are unele date NBT
+error.NBT=nu are toate datele NBT
 error.OreCFG=Următoarea intrare de bloc în TFCOre.cfg este invalidă:
 error.Contact=Te rugăm să semnalezi la Asistență TerraFirmaCraft.
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+tile.Hopper.name=Pâlnie
+fluid.oliveoil=Ulei de măsline
+tile.OilLamp.Gold.name=Lampă cu ulei din aur
+tile.OilLamp.Platinum.name=Lampă cu ulei din platină
+tile.OilLamp.RoseGold.name=Lampă cu ulei din aur roz
+tile.OilLamp.Silver.name=Lampă cu ulei din argint
+tile.OilLamp.SterlingSilver.name=Lampă cu ulei din argint sterling
+tile.OilLamp.BlueSteel.name=Lampă cu ulei din oțel albastru
+gui.plans.hopper=Pâlnie
+gui.plans.oillamp=Lampă cu ulei

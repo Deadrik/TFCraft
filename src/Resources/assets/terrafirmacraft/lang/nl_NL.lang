@@ -46,15 +46,15 @@ entity.spiderTFC.name=Spin
 entity.zombieTFC.name=Zombie
 
 entity.arrowTFC.name=Pijl
-entity.standTFC.name=
-entity.barrel.name=
-entity.fallingBlock.name=
+entity.standTFC.name=Harnas Standaard
+entity.barrel.name=Ton
+entity.fallingBlock.name=Vallende blok
 
 entity.notFamiliar=Het dier werkt niet mee.
-fishingRod.lineTension=Het touw gaat breken!
-fishingRod.lineSnap=Het touw is gebroken!
-fishingRod.bite=Oh! Een beetwond!
-fishingRod.gotAway=Het rende weg....
+fishingRod.lineTension=Het lijn gaat breken!
+fishingRod.lineSnap=Het lijn is gebroken!
+fishingRod.bite=Ja! Een bijt!
+fishingRod.gotAway=Hij is ontsnapt....
 
 #================
 #= Achievements =
@@ -2035,6 +2035,7 @@ tile.Fungi.mushroom_brown.name=Bruine Paddestoel
 tile.Fungi.mushroom_red.name=Rode Paddestoel
 tile.Cactus.name=Cactus
 tile.Pumpkin.name=Pompoen
+tile.LitPumpkin.name=Pompoenlantaarn
 tile.Moss.name=Mos
 tile.Thatch.name=Riet
 tile.Flora.Golden Rod.name=Guldenroede
@@ -2049,8 +2050,8 @@ tile.TallGrass.fern.name=Vern
 tile.TallGrass.shortgrass.name=Kort Gras
 tile.LilyPad.name=Lelie blad
 tile.Vine.name=Wingerd
-tile.SeaGrassStill.name=Zeegrass
-tile.SeaGrassIce.name=Bevroren Zeegrass
+tile.SeaGrassStill.name=Zeegras
+tile.SeaGrassIce.name=Bevroren Zeegras
 
 tile.Flowers.flower_nasturtium.name=Oostindische Kers
 tile.Flowers.flower_dandelion.name=Paardebloem
@@ -2310,32 +2311,32 @@ gui.badnbt=Foute Info
 
 #== Tooltips ==
 gui.Advanced=Geavanceerd
-gui.Shift=Wisselen
+gui.Shift=Shift
 gui.Hold=Vasthouden
 
 gui.slot=Slot
-gui.slot.back=Terug
+gui.slot.back=Rug
 
 gui.ShowHelp=§8Help: (Houd §fShift§8 vast)
 gui.Help=§8Help:
 gui.Clay.Inst0=§bRecht Klik §7met 5 in een stapel, om te vormen
 gui.Knife.Inst0=§bRecht Klik §7top van een blok om
 gui.Knife.Inst1=maak een aanrecht
-gui.Leather.Inst0=§bRecht Klik §7met een mes, in je inhoud, om te snijden
+gui.Leather.Inst0=§bRecht Klik §7met een mes in je inhoud, om te snijden
 gui.LooseRock.Inst0=§bRecht Klik §7met 2 in een stapel, om te knappen.
 gui.MeltedMetal.Inst0=§bRecht Klik §7om te gieten of combineren
 gui.PotteryBase.Inst0=Sluip en §bRecht Klik §7om een voorwerp te plaatsen
 gui.PotteryVesselSmall.Inst0=Of §bRecht Klik §7om te openen
 gui.RawHide.Inst0=????
-gui.Chisel.Inst0=
+gui.Chisel.Inst0=Hamer op de hotbar vereist
 gui.Barrel.MoreItems=§8Meer... (Houd §fShift§8)
 
 gui.Nutrient.A=Grondstof A
 gui.Nutrient.B=Grondstof B
 gui.Nutrient.C=Grondstof C
 
-gui.stage1=Stage 1
-gui.stage2=Stage 2
+gui.stage1=Fase 1
+gui.stage2=Fase 2
 
 gui.Size.Tiny=Minuscuul
 gui.Size.VerySmall=Erg klein
@@ -2352,6 +2353,10 @@ gui.Weight.Heavy=Zwaar
 gui.Reach.Short=Kort
 gui.Reach.Medium=Medium
 gui.Reach.Far=Ver
+
+gui.hoursRemaining=Uren over
+gui.daysRemaining=Dagen over
+gui.infinite=Oneindig
 
 #== Food ==
 gui.food.fruit=Fruit
@@ -2477,8 +2482,23 @@ gui.useless=Nutteloos
 gui.growth=Groei
 gui.mature=Volgroeid
 gui.metal.Iron=IJzer
-gui.tier=
-gui.progress=
+gui.tier=Rang
+gui.fuel=Brandstof
+gui.Green Apple=Groene Appelboom
+gui.Red Apple=Rode Appelboom
+gui.Banana=Bananenboom
+gui.Cherry=Kersenboom
+gui.Lemon=Citroenboom
+gui.Olive=Olijfboom
+gui.Orange=Sinaasappelboom
+gui.Peach=Perzikboom
+gui.Plum=Pruimenboom
+gui.pile=Stapel
+gui.weaving=Weven
+gui.eggs=Eieren
+gui.fertEggs=Bevruchte Eieren
+gui.logs=Houtblok
+gui.gems=Edelstenen
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Kan alleen in stromend water gebruikt worden
@@ -2532,3 +2552,13 @@ error.Contact=Rapporteer dit aan TerraFirmaCraft Support
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+tile.Hopper.name=Trechter
+fluid.oliveoil=Olijfolie
+tile.OilLamp.Gold.name=Gouden Olielamp
+tile.OilLamp.Platinum.name=Platina Olielamp
+tile.OilLamp.RoseGold.name=Rose Gouden Olielamp
+tile.OilLamp.Silver.name=Zilveren Olielamp
+tile.OilLamp.SterlingSilver.name=Sterling Zilveren Olielamp
+tile.OilLamp.BlueSteel.name=Blauw Stalen Olielamp
+gui.plans.hopper=Trechter
+gui.plans.oillamp=Olielamp

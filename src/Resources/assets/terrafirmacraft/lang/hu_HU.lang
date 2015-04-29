@@ -1,0 +1,2565 @@
+﻿#hu_HU
+#This is the Hungarian language configuration file translated by AnonCrafter
+
+
+
+
+
+generator.TFCDefault=TFC Standard
+generator.TFCFlat=TFC Sima(Nem használt)
+generator.TFCAmplified=TFC Amplifikált(Nem használt)
+generator.TFCLargeBiomes=TFC Nagy Biomok(Nem használt)
+
+key.ToolMode=
+key.LockTool=
+
+effect.bleed=
+death.attack.alcohol=
+death.attack.heatStroke=
+
+#==============
+#= Entities = 
+#==============
+entity.bearTFC.name=Medve
+entity.chickenTFC.name=Baromfi
+entity.cowTFC.name=Szarvasmarha
+entity.deerTFC.name=Szarvas
+entity.fishTFC.name=Sügér
+entity.horseTFC.name=Ló
+entity.pheasantTFC.name=Fácán
+entity.pigTFC.name=Sertés
+entity.sheepTFC.name=Birka
+entity.squidTFC.name=Tintahal
+entity.wolfTFC.name=Farkas
+
+entity.blazeTFC.name=Láng
+entity.caveSpiderTFC.name=Barlangi pók
+entity.creeperTFC.name=Kreeper
+entity.endermanTFC.name=Enderman
+entity.ghastTFC.name=Ghast
+entity.irongolemTFC.name=Vasgólem
+entity.pigZombieTFC.name=Zombi sertés
+entity.silverfishTFC.name=Ezüsthal
+entity.skeletonTFC.name=Csontváz
+entity.slimeTFC.name=Nyálka
+entity.spiderTFC.name=Pók
+entity.zombieTFC.name=Zombi
+
+entity.arrowTFC.name=Nyíl
+entity.standTFC.name=
+entity.barrel.name=Hordó
+entity.fallingBlock.name=
+
+entity.notFamiliar=Az állat nem engedi neked.
+fishingRod.lineTension=El fog szakadni a zsinór!
+fishingRod.lineSnap=Elszakította a zsinórt!
+fishingRod.bite=Oh! Egy falat!
+fishingRod.gotAway=Ez meglépett...
+
+#================
+#= Achievements =
+#================
+achievement.achLooseRock=Határozottan egy kő
+achievement.achLooseRock.desc=Kapj fel egy követ
+achievement.achSmallOre=Minden követ megmozgat
+achievement.achSmallOre.desc=Keress egy érc rögöt
+achievement.achWildVegetable=Gyűjtögető
+achievement.achWildVegetable.desc=Keress egy vadnövényt
+achievement.achRutabaga=Ostoba hagymák
+achievement.achRutabaga.desc=Keress egy karórépát
+achievement.achQuern=Az Daráló
+achievement.achQuern.desc=Használj kézimalmot
+achievement.achStoneAge=Paleolit!
+achievement.achStoneAge.desc=Pattints egy kőeszközt a kőkorszakba lépéshez
+achievement.achCopperAge=Kőrézkor!
+achievement.achCopperAge.desc=Önts valamit fémből a rézkorba lépéshez
+achievement.achSaw=Ács
+achievement.achSaw.desc=Kraftolj egy fűrészt
+achievement.achAnvil=Üsd a vasat
+achievement.achAnvil.desc=Készíts egy kőöllőt
+achievement.achPickaxe=Itta az ideje a bányászatnak! (végre)
+achievement.achPickaxe.desc=Készíts egy csákányt
+achievement.achDiamond=DIAM - ó várj, ne
+achievement.achDiamond.desc=Keress egy gyémántot
+achievement.achLimonite=LI-MO-NIIITE!
+achievement.achLimonite.desc=Bányássz limonitot
+achievement.achBronzeAge=A Bronzkor
+achievement.achBronzeAge.desc=Kraftolj egy bronzüllőt a Bronzkorba lépéshez
+achievement.achIronAge=A Vaskor
+achievement.achIronAge.desc=Bányássz egy vasvirágot a Vaskorba lépéshez
+achievement.achPokeCreeper=Steve Irvin
+achievement.achPokeCreeper.desc=Piszkáld meg egy bottal
+
+#============
+#= Commands =
+#============
+commands.transferTamed.noTamed=Nincsen állat a környéken.
+commands.transferTamed.tooMany=Túl sok állat van a környéken!
+commands.transferTamed.wrongOwner=Az nem a tiéd!
+commands.transferTamed.sameTarget=Nem viheted át magadhoz!
+commands.transferTamed.display.incoming=Egy állat került át hozzád %s által!
+commands.transferTamed.display.outgoing=Átvittél egy állatot %hoz!
+commands.transferTamed.wrongSender=Nem vihetsz át állatokat!
+
+#==========
+#= Fluids =
+#==========
+fluid.freshwater=Friss víz
+fluid.saltwater=Sós víz
+fluid.lavatfc=Láva
+fluid.hotwater=Forró víz
+fluid.beer=Sör
+fluid.cider=Almabor
+fluid.rum=Rum
+fluid.ryewhiskey=Rozs whisky
+fluid.sake=Szaké
+fluid.vodka=Vodka
+fluid.whiskey=Whisky
+fluid.cornwhiskey=Kukorica whisky
+fluid.milk=Tej
+fluid.milkcurdled=Aludttej
+fluid.milkvinegar=Tej és ecet mix
+fluid.limewater=Meszes víz
+fluid.tannin=Csersav
+fluid.vinegar=Ecet
+fluid.brine=Sóoldat
+
+#========
+#= Food =
+#========
+item.MealGeneric.name=Étel
+item.meal.terrible=Borzasztó
+item.meal.poor=Gyenge
+item.meal.decent=Megfelelő
+item.meal.good=Jó
+item.meal.great=Nagyszerű
+item.meal.fantastic=Fantasztikus
+item.Sandwich.name=Szendvics
+item.Salad.name=Saláta
+item.Soup.name=Leves
+item.Sugar.name=Cukor
+item.Sea Weed.name=Hínár
+
+#== Grains ==
+item.Barley Bread.name=Árpakenyér
+item.Corn Bread.name=Kukoricakenyér
+item.Oat Bread.name=Zabkenyér
+item.Rice Bread.name=Rizskenyér
+item.Rye Bread.name=Rozskenyér
+item.Wheat Bread.name=Búzakenyér
+
+item.Barley Whole.name=Árpa
+item.Maize Ear.name=Kukorica
+item.Oat Whole.name=Zab
+item.Rice Whole.name=Rizs
+item.Rye Whole.name=Rozs
+item.Wheat Whole.name=Búza
+
+item.Barley Grain.name=Árpaszemek
+item.Oat Grain.name=Zabszemek
+item.Rice Grain.name=Rizsszemek
+item.Rye Grain.name=Rozsszemek
+item.Wheat Grain.name=Búzaszemek
+
+item.Barley Ground.name=Árpaliszt
+item.Cornmeal Ground.name=Kukoricaliszt
+item.Oat Ground.name=Zabliszt
+item.Rice Ground.name=Rizsliszt
+item.Rye Ground.name=Rozsliszt
+item.Wheat Ground.name=Búzaliszt
+
+item.Barley Dough.name=Árpatészta
+item.Cornmeal Dough.name=Kukoricaliszt tészta
+item.Oat Dough.name=Zabtészta
+item.Rice Dough.name=Rizstészta
+item.Rye Dough.name=Rozstészta
+item.Wheat Dough.name=Búzatészta
+
+item.Seeds Barley.name=Árpamagok
+item.Seeds Maize.name=Kukoricamagok
+item.Seeds Oat.name=Zabmagok
+item.Seeds Rice.name=Rizsmagok
+item.Seeds Rye.name=Rozsmagok
+item.Seeds Wheat.name=Búzamagok
+
+#== Fruit ==
+item.Green Apple.name=Zöld alma
+item.Red Apple.name=Piros alma
+item.Banana.name=Banán
+item.Cherry.name=Meggy
+item.Lemon.name=Citrom
+item.Olive.name=Olivabogyó
+item.Orange.name=Narancs
+item.Peach.name=Barack
+item.Plum.name=Szilva
+
+item.FruitSapling.Green Apple.name=Zöldalmafa csemete
+item.FruitSapling.Red Apple.name=Pirosalmafa csemete
+item.FruitSapling.Banana.name=Banánfa csemete
+item.FruitSapling.Cherry.name=Meggyfa csemete
+item.FruitSapling.Lemon.name=Citromfa csemete
+item.FruitSapling.Olive.name=Olivafa csemete
+item.FruitSapling.Orange.name=Narancsfa csemete
+item.FruitSapling.Peach.name=Barackfa csemete
+item.FruitSapling.Plum.name=Szilvafa csemete
+
+#=== Berry Bushes ===
+tile.BerryBush.Blackberry.name=Fekete szeder bokor
+tile.BerryBush.Blueberry.name=Áfonya bokor
+tile.BerryBush.Bunchberry.name=Som bokor
+tile.BerryBush.Cloudberry.name=Törpemálna bokor
+tile.BerryBush.Cranberry.name=Tőzegáfonya bokor
+tile.BerryBush.Elderberry.name=Bodza bokor
+tile.BerryBush.Gooseberry.name=Egres bokor
+tile.BerryBush.Raspberry.name=Málna bokor
+tile.BerryBush.Snowberry.name=Hóbogyó bokor
+tile.BerryBush.Strawberry.name=Szamóca bokor
+tile.BerryBush.Wintergreen.name=Kúszó fajdbogyó bokor
+
+item.Blackberry.name=Szeder
+item.Blueberry.name=Áfonya
+item.Bunchberry.name=Som
+item.Cloudberry.name=Törpemálna
+item.Cranberry.name=Tőzegáfonya
+item.Elderberry.name=Bodza
+item.Gooseberry.name=Egres
+item.Raspberry.name=Málna
+item.Snowberry.name=Amerikai hóbogyó
+item.Strawberry.name=Szamóca
+item.Wintergreen Berry.name=Kúszó fajdbogyó
+
+item.Blackberry Leaf.name=Szederlevél
+item.Blueberry Leaf.name=Áfonyalevél
+item.Bunchberry Leaf.name=Somlevél
+item.Cloudberry Leaf.name=Törpemálnalevél
+item.Cranberry Leaf.name=Tőzegáfonyalevél
+item.Elderberry Leaf.name=Bodzalevél
+item.Gooseberry Leaf.name=Egreslevél
+item.Raspberry Leaf.name=Málnalevél
+item.Snowberry Leaf.name=Hóbogyó levél
+item.Strawberry Leaf.name=Szamóca levél
+item.Wintergreen Leaf.name=Kúszó fajdbogyó levél
+
+#== Protein ==
+item.Beef.name=Marhahús
+item.Calamari.name=Tintahal
+item.egg.name=Tojás
+item.Fish.name=Hal
+item.Mutton.name=Birkahús
+item.Porkchop.name=Sertéshús
+item.Chicken.name=Baromfi
+item.Venison.name=Szarvashús
+item.HorseMeat.name=Lóhús
+item.Egg Cooked.name=Főtt tojás
+
+item.Soybeans.name=Szójabab
+item.Seeds Soybean.name=Szójabab magok
+
+#== Dairy ==
+item.Cheese.name=Sajt
+
+#== Vegetables ==
+item.Green Bell Pepper.name=Zöld kaliforniai paprika
+item.Red Bell Pepper.name=Piros kaliforniai paprika
+item.Yellow Bell Pepper.name=Sárga kaliforniai paprika
+item.Cabbage.name=Káposzta
+item.Carrot.name=Répa
+item.Garlic.name=Fokhagyma
+item.Greenbeans.name=Zöldbab
+item.Onion.name=Hagyma
+item.Potato.name=Burgonya
+item.Rutabaga.name=Krórépa
+item.Squash.name=Tök
+item.Tomato.name=Paradicsom
+
+item.Seeds Red Bell Pepper.name=Zöld kaliforniai paprika magok
+item.Seeds Yellow Bell Pepper.name=Piros kaliforniai paprika magok
+item.Seeds Cabbage.name=Sárga kaliforniai paprika magok
+item.Seeds Carrot.name=Répamagok
+item.Seeds Garlic.name=Fokhagymamagok
+item.Seeds Greenbean.name=Zöldbabmagok
+item.Seeds Onion.name=Hagymamagok
+item.Seeds Potato.name=Vetőburgonya
+item.Seeds Rutabaga.name=Karórépamagok
+item.Seeds Squash.name=Tökmagok
+item.Seeds Tomato.name=Paradicsommagok
+
+#== Alcohol ==
+item.Glass Bottle.name=Üres üveg
+item.Beer.name=Sör
+item.Cider.name=Almabor
+item.Rum.name=Rum
+item.RyeWhiskey.name=Rozs-whisky
+item.Sake.name=Száke
+item.Vodka.name=Vodka
+item.Whiskey.name=Whisky
+item.CornWhiskey.name=Kukorica-whisky
+
+#===========
+#= Pottery =
+#===========
+item.Clay.Clay.name=Agyag
+item.Clay.Fire Clay.name=Samot
+
+item.Flat Clay.clay flat light.name=Simított agyag
+item.Flat Clay.clay flat dark.name=Simított agyag
+item.Flat Clay.clay flat fire.name=Simított samot
+item.Flat Clay.clay flat dark fire.name=Simított samot
+
+item.Jug.Clay Jug.name=Agyagkancsó
+item.Jug.Ceramic Jug.name=Kerámiakancsó
+item.Jug.Water Jug.name=Vizeskancsó
+
+item.Pot.Clay Pot.name=Agyagtároló
+item.Pot.Ceramic Pot.name=Kerámiatároló
+
+item.Small Vessel.Clay Vessel.name=Agyagedény
+item.Small Vessel.Ceramic Vessel.name=Kerámiaedény
+
+item.Large Vessel.Clay Vessel [Large].name=Agyagedény (nagy)
+item.Large Vessel.Ceramic Vessel [Large].name=Kerámiaedény (nagy)
+
+item.Mold.Clay Mold.name=Agyag öntőforma
+item.Mold.Ceramic Mold.name=Kerámia öntőforma
+
+item.Axe Mold.Clay Mold Axe.name=Agyag balta öntőforma
+item.Axe Mold.Ceramic Mold Axe.name=Balta öntőforma
+item.Axe Mold.Ceramic Mold Axe Copper.name=Balta öntőforma (réz)
+item.Axe Mold.Ceramic Mold Axe Bronze.name=Balta öntőforma (bronz)
+item.Axe Mold.Ceramic Mold Axe Black Bronze.name=Balta öntőforma (feketbronz)
+item.Axe Mold.Ceramic Mold Axe Bismuth Bronze.name=Balta öntőforma (bizmutbronz)
+
+item.Chisel Mold.Clay Mold Chisel.name=Agyag véső öntőforma
+item.Chisel Mold.Ceramic Mold Chisel.name=Véső öntőforma
+item.Chisel Mold.Ceramic Mold Chisel Copper.name=Véső öntőforma (réz)
+item.Chisel Mold.Ceramic Mold Chisel Bronze.name=Véső öntőforma (bronz)
+item.Chisel Mold.Ceramic Mold Chisel Black Bronze.name=Véső öntőforma (feketbronz)
+item.Chisel Mold.Ceramic Mold Chisel Bismuth Bronze.name=Véső öntőforma (bizmutbronz)
+
+item.Hammer Mold.Clay Mold Hammer.name=Agyag kalapács öntőforma
+item.Hammer Mold.Ceramic Mold Hammer.name=Kalapács öntőforma
+item.Hammer Mold.Ceramic Mold Hammer Copper.name=Kalapács öntőforma (réz)
+item.Hammer Mold.Ceramic Mold Hammer Bronze.name=Kalapács öntőforma (bronz)
+item.Hammer Mold.Ceramic Mold Hammer Black Bronze.name=Kalapács öntőforma (feketebronz)
+item.Hammer Mold.Ceramic Mold Hammer Bismuth Bronze.name=Kalapács öntőforma (bizmutbronz)
+
+item.Hoe Mold.Clay Mold Hoe.name=Agyag kapa öntőforma
+item.Hoe Mold.Ceramic Mold Hoe.name=Kapa öntőforma
+item.Hoe Mold.Ceramic Mold Hoe Copper.name=Kapa öntőforma (réz)
+item.Hoe Mold.Ceramic Mold Hoe Bronze.name=Kapa öntőforma (bronz)
+item.Hoe Mold.Ceramic Mold Hoe Black Bronze.name=Kapa öntőforma (feketebronz)
+item.Hoe Mold.Ceramic Mold Hoe Bismuth Bronze.name=Kapa öntőforma (bizmutbronz)
+
+item.Knife Mold.Clay Mold Knife.name=Agyag kés öntőforma
+item.Knife Mold.Ceramic Mold Knife.name=Kés öntőforma
+item.Knife Mold.Ceramic Mold Knife Copper.name=Kés öntőforma (réz)
+item.Knife Mold.Ceramic Mold Knife Bronze.name=Kés öntőforma (bronz)
+item.Knife Mold.Ceramic Mold Knife Black Bronze.name=Kés öntőforma (feketebronz)
+item.Knife Mold.Ceramic Mold Knife Bismuth Bronze.name=Kés öntőforma (bizmutbronz)
+
+item.Javelin Mold.Clay Mold Javelin.name=Agyag kés öntőforma
+item.Javelin Mold.Ceramic Mold Javelin.name=Kés öntőforma
+item.Javelin Mold.Ceramic Mold Javelin Copper.name=Kés öntőforma (réz)
+item.Javelin Mold.Ceramic Mold Javelin Bronze.name=Kés öntőforma (bronz)
+item.Javelin Mold.Ceramic Mold Javelin Black Bronze.name=Kés öntőforma (feketebronz)
+item.Javelin Mold.Ceramic Mold Javelin Bismuth Bronze.name=Kés öntőforma (bizmutbronz)
+
+item.Mace Mold.Clay Mold Mace.name=Agyag buzogány öntőforma
+item.Mace Mold.Ceramic Mold Mace.name=Buzogány öntőforma
+item.Mace Mold.Ceramic Mold Mace Copper.name=Buzogány öntőforma (réz)
+item.Mace Mold.Ceramic Mold Mace Bronze.name=Buzogány öntőforma (bronz)
+item.Mace Mold.Ceramic Mold Mace Black Bronze.name=Buzogány öntőforma (feketebronz)
+item.Mace Mold.Ceramic Mold Mace Bismuth Bronze.name=Buzogány öntőforma (bizmutbronz)
+
+item.Pick Mold.Clay Mold Pick.name=Agyag csákány öntőforma
+item.Pick Mold.Ceramic Mold Pick.name=Csákány öntőforma
+item.Pick Mold.Ceramic Mold Pick Copper.name=Csákány öntőforma (réz)
+item.Pick Mold.Ceramic Mold Pick Bronze.name=Csákány öntőforma (bronz)
+item.Pick Mold.Ceramic Mold Pick Black Bronze.name=Csákány öntőforma (feketebronz)
+item.Pick Mold.Ceramic Mold Pick Bismuth Bronze.name=Csákány öntőforma (bizmutbronz)
+
+item.ProPick Mold.Clay Mold ProPick.name=öntőforma
+item.ProPick Mold.Ceramic Mold ProPick.name=öntőforma
+item.ProPick Mold.Ceramic Mold ProPick Copper.name=öntőforma (réz)
+item.ProPick Mold.Ceramic Mold ProPick Bronze.name=öntőforma (bronz)
+item.ProPick Mold.Ceramic Mold ProPick Black Bronze.name=öntőforma (feketebronz)
+item.ProPick Mold.Ceramic Mold ProPick Bismuth Bronze.name=öntőforma (bizmutbronz)
+
+item.Saw Mold.Clay Mold Saw.name=Agyag fűrész öntőforma
+item.Saw Mold.Ceramic Mold Saw.name=Fűrész öntőforma
+item.Saw Mold.Ceramic Mold Saw Copper.name=Fűrész öntőforma (réz)
+item.Saw Mold.Ceramic Mold Saw Bronze.name=Fűrész öntőforma (bronz)
+item.Saw Mold.Ceramic Mold Saw Black Bronze.name=Fűrész öntőforma (feketebronz)
+item.Saw Mold.Ceramic Mold Saw Bismuth Bronze.name=Fűrész öntőforma (bizmutbronz)
+
+item.Scythe Mold.Clay Mold Scythe.name=Agyag kasza öntőforma
+item.Scythe Mold.Ceramic Mold Scythe.name=Kasza öntőforma
+item.Scythe Mold.Ceramic Mold Scythe Copper.name=Kasza öntőforma (réz)
+item.Scythe Mold.Ceramic Mold Scythe Bronze.name=Kasza öntőforma (bronz)
+item.Scythe Mold.Ceramic Mold Scythe Black Bronze.name=Kasza öntőforma (feketebronz)
+item.Scythe Mold.Ceramic Mold Scythe Bismuth Bronze.name=Kasza öntőforma (bizmutbronz)
+
+item.Shovel Mold.Clay Mold Shovel.name=Agyag ásó öntőforma
+item.Shovel Mold.Ceramic Mold Shovel.name=Ásó öntőforma
+item.Shovel Mold.Ceramic Mold Shovel Copper.name=Ásó öntőforma (réz)
+item.Shovel Mold.Ceramic Mold Shovel Bronze.name=Ásó öntőforma (bronz)
+item.Shovel Mold.Ceramic Mold Shovel Black Bronze.name=Ásó öntőforma (feketebronz)
+item.Shovel Mold.Ceramic Mold Shovel Bismuth Bronze.name=Ásó öntőforma (bizmutbronz)
+
+item.Sword Mold.Clay Mold Sword.name=Agyag kard öntőforma
+item.Sword Mold.Ceramic Mold Sword.name=Kard öntőforma
+item.Sword Mold.Ceramic Mold Sword Copper.name=Kard öntőforma (réz)
+item.Sword Mold.Ceramic Mold Sword Bronze.name=Kard öntőforma (bronz)
+item.Sword Mold.Ceramic Mold Sword Black Bronze.name=Kard öntőforma (feketebronz)
+item.Sword Mold.Ceramic Mold Sword Bismuth Bronze.name=Kard öntőforma (bizmutbronz)
+
+item.Spindle.name=Orsó
+item.Spindle Head.Clay Spindle.name=Agyag orsó
+item.Spindle Head.Spindle Head.name=Orsófej
+
+item.Fire Brick.Fire Brick.name=
+item.Fire Brick.Clay Fire Brick.name=
+tile.FireBrick.name=
+tile.Pottery.name=Kerámia
+
+item.ClayBowl.Ceramic Bowl.name=Kerámiatál
+item.ClayBowl.Clay Bowl.name=Agyagtál
+
+#= Gems =
+item.Agate.Chipped.name=Pattintott achát
+item.Amethyst.Chipped.name=Pattintott ametiszt
+item.Beryl.Chipped.name=Pattintott berill
+item.Diamond.Chipped.name=Pattintott gyémánt
+item.Emerald.Chipped.name=Pattintott smaragd
+item.Garnet.Chipped.name=Pattintott gránit
+item.Jade.Chipped.name=Pattintott jáde
+item.Jasper.Chipped.name=Pattintott jasper
+item.Opal.Chipped.name=Pattintott opál
+item.Ruby.Chipped.name=Pattintott rubin
+item.Sapphire.Chipped.name=Pattintott zafír
+item.Topaz.Chipped.name=Pattintott topáz
+item.Tourmaline.Chipped.name=Pattintott tourmalin
+
+item.Agate.Flawed.name=Hibás achát
+item.Amethyst.Flawed.name=Hibás ametiszt
+item.Beryl.Flawed.name=Hibás berill
+item.Diamond.Flawed.name=Hibás gyémánt
+item.Emerald.Flawed.name=Hibás smaragd
+item.Garnet.Flawed.name=Hibás gránit
+item.Jade.Flawed.name=Hibás jáde
+item.Jasper.Flawed.name=Hibás jasper
+item.Opal.Flawed.name=Hibás opál
+item.Ruby.Flawed.name=Hibás rubin
+item.Sapphire.Flawed.name=Hibás zafír
+item.Topaz.Flawed.name=Hibás topáz
+item.Tourmaline.Flawed.name=Hibás turmalin
+
+item.Agate.Normal.name=Achát
+item.Amethyst.Normal.name=Ametiszt
+item.Beryl.Normal.name=Berill
+item.Diamond.Normal.name=Gyémánt
+item.Emerald.Normal.name=Smaragd
+item.Garnet.Normal.name=Gránit
+item.Jade.Normal.name=Jáde
+item.Jasper.Normal.name=Jasper
+item.Opal.Normal.name=Opál
+item.Ruby.Normal.name=Rubin
+item.Sapphire.Normal.name=Zafír
+item.Topaz.Normal.name=Topáz
+item.Tourmaline.Normal.name=Turmalin
+
+item.Agate.Flawless.name=Hibátlan achát
+item.Amethyst.Flawless.name=Hibátlan ametiszt
+item.Beryl.Flawless.name=Hibátlan berill
+item.Diamond.Flawless.name=Hibátlan gyémánt
+item.Emerald.Flawless.name=Hibátlan smaragd
+item.Garnet.Flawless.name=Hibátlan gránit
+item.Jade.Flawless.name=Hibátlan jáde
+item.Jasper.Flawless.name=Hibátlan jasper
+item.Opal.Flawless.name=Hibátlan opál
+item.Ruby.Flawless.name=Hibátlan rubin
+item.Sapphire.Flawless.name=Hibátlan zafír
+item.Topaz.Flawless.name=Hibátlan topáz
+item.Tourmaline.Flawless.name=Hibátlan turmalin
+
+item.Agate.Exquisite.name=Tökéletes achát
+item.Amethyst.Exquisite.name=Tökéletes ametiszt
+item.Beryl.Exquisite.name=Tökéletes berill
+item.Diamond.Exquisite.name=Tökéletes gyémánt
+item.Emerald.Exquisite.name=Tökéletes smaragd
+item.Garnet.Exquisite.name=Tökéletes gránit
+item.Jade.Exquisite.name=Tökéletes jáde
+item.Jasper.Exquisite.name=Tökéletes jasper
+item.Opal.Exquisite.name=Tökéletes opál
+item.Ruby.Exquisite.name=Tökéletes rubin
+item.Sapphire.Exquisite.name=Tökéletes zafír
+item.Topaz.Exquisite.name=Tökéletes topáz
+item.Tourmaline.Exquisite.name=Tökéletes turmalin
+
+#===========
+#= Powders =
+#===========
+item.dyePowder.black.name=Tintazacskó
+item.dyePowder.blue.name=Kék festék
+item.dyePowder.brown.name=Kakaóbab
+item.dyePowder.cyan.name=Ciánszínű festék
+item.dyePowder.gray.name=Szürke festék
+item.dyePowder.green.name=Zöld festék
+item.dyePowder.lightBlue.name=Világoskék festék
+item.dyePowder.lime.name=Lime festék
+item.dyePowder.magenta.name=Magenta festék
+item.dyePowder.orange.name=Narancssárga festék
+item.dyePowder.pink.name=Rózsaszín festék
+item.dyePowder.purple.name=Lila festék
+item.dyePowder.red.name=Piros festék
+item.dyePowder.silver.name=Világosszürke festék
+item.dyePowder.white.name=Csontliszt
+item.dyePowder.yellow.name=Sárga festék
+
+item.Coke.name=Koksz
+item.Powder.Flux.name=Olvasztó
+item.Powder.Graphite Powder.name=Grafitpor
+item.Powder.Hematite Powder.name=por
+item.Powder.Kaolinite Powder.name=por
+item.Powder.Lapis Lazuli Powder.name=por
+item.Powder.Limonite Powder.name=por
+item.Powder.Malachite Powder.name=por
+item.Powder.Salt.name=Só
+item.Powder.Saltpeter Powder.name=por
+item.Powder.Sulfur Powder.name=Kénpor
+
+#=========
+#= Stone =
+#=========
+#== Stone Items ==
+item.LooseRock.Andesite.name=Andezit
+item.LooseRock.Basalt.name=Bazalt
+item.LooseRock.Chalk.name=Krétakő
+item.LooseRock.Chert.name=Kovakő
+item.LooseRock.Claystone.name=Agyagkő
+item.LooseRock.Conglomerate.name=Kavicskő
+item.LooseRock.Dacite.name=Dácitkő
+item.LooseRock.Diorite.name=Dioritkő
+item.LooseRock.Dolomite.name=Dolomitkő
+item.LooseRock.Gabbro.name=Gabbrokő
+item.LooseRock.Gneiss.name=Gneiszkő
+item.LooseRock.Granite.name=Gránitkő
+item.LooseRock.Limestone.name=Mészkő
+item.LooseRock.Marble.name=Márványkő
+item.LooseRock.Phyllite.name=Fillitkő
+item.LooseRock.Quartzite.name=Kvarckő
+item.LooseRock.Rhyolite.name=Riolitkő
+item.LooseRock.Rock Salt.name=Kősókő
+item.LooseRock.Schist.name=Kristályos palakő
+item.LooseRock.Shale.name=Palakő
+item.LooseRock.Slate.name=Agyagpalakő
+
+item.ItemStoneBrick.Andesite.name=Andezit tégla
+item.ItemStoneBrick.Basalt.name=Bazalt tégla
+item.ItemStoneBrick.Chalk.name=Krétakő tégla
+item.ItemStoneBrick.Chert.name=Kovakő tégla
+item.ItemStoneBrick.Claystone.name=Agyagkő tégla
+item.ItemStoneBrick.Conglomerate.name=Kavicskő tégla
+item.ItemStoneBrick.Dacite.name=Dácittégla
+item.ItemStoneBrick.Diorite.name=Diorittégla
+item.ItemStoneBrick.Dolomite.name=Dolomittégla
+item.ItemStoneBrick.Gabbro.name=Gabbrotégla
+item.ItemStoneBrick.Gneiss.name=Gneisztégla
+item.ItemStoneBrick.Granite.name=Gránittégla
+item.ItemStoneBrick.Limestone.name=Mészkőtégla
+item.ItemStoneBrick.Marble.name=Márványtégla
+item.ItemStoneBrick.Phyllite.name=Fillittégla
+item.ItemStoneBrick.Quartzite.name=Kvarctégla
+item.ItemStoneBrick.Rhyolite.name=Riolittégla
+item.ItemStoneBrick.Rock Salt.name=Kősótégla
+item.ItemStoneBrick.Schist.name=Kristályos palakőtégla
+item.ItemStoneBrick.Shale.name=Palakőtégla
+item.ItemStoneBrick.Slate.name=Agyagpalakőtégla
+
+item.FlatRock.Andesite.name=Simított
+item.FlatRock.Basalt.name=Simított
+item.FlatRock.Chalk.name=Simított
+item.FlatRock.Chert.name=Simított
+item.FlatRock.Claystone.name=Simított
+item.FlatRock.Conglomerate.name=Simított
+item.FlatRock.Dacite.name=Simított
+item.FlatRock.Diorite.name=Simított
+item.FlatRock.Dolomite.name=Simított
+item.FlatRock.Gabbro.name=Simított
+item.FlatRock.Gneiss.name=Simított
+item.FlatRock.Granite.name=Simított
+item.FlatRock.Limestone.name=Simított
+item.FlatRock.Marble.name=Simított
+item.FlatRock.Phyllite.name=Simított
+item.FlatRock.Quartzite.name=Simított
+item.FlatRock.Rhyolite.name=Simított
+item.FlatRock.Rock Salt.name=Simított
+item.FlatRock.Schist.name=Simított
+item.FlatRock.Shale.name=Simított
+item.FlatRock.Slate=Simított
+
+#== Stone Blocks ==
+tile.WallCobble.Andesite.name=macskakőfal
+tile.WallCobble.Basalt.name=macskakőfal
+tile.WallCobble.Chalk.name=macskakőfal
+tile.WallCobble.Chert.name=macskakőfal
+tile.WallCobble.Claystone.name=macskakőfal
+tile.WallCobble.Conglomerate.name=macskakőfal
+tile.WallCobble.Dacite.name=macskakőfal
+tile.WallCobble.Diorite.name=macskakőfal
+tile.WallCobble.Dolomite.name=macskakőfal
+tile.WallCobble.Gabbro.name=macskakőfal
+tile.WallCobble.Gneiss.name=macskakőfal
+tile.WallCobble.Granite.name=macskakőfal
+tile.WallCobble.Limestone.name=macskakőfal
+tile.WallCobble.Marble.name=macskakőfal
+tile.WallCobble.Phyllite.name=macskakőfal
+tile.WallCobble.Quartzite.name=macskakőfal
+tile.WallCobble.Rhyolite.name=macskakőfal
+tile.WallCobble.Rock Salt.name=macskakőfal
+tile.WallCobble.Schist.name=macskakőfal
+tile.WallCobble.Shale.name=macskakőfal
+tile.WallCobble.Slate.name=macskakőfal
+
+tile.WallRaw.Andesite.name=fal
+tile.WallRaw.Basalt.name=fal
+tile.WallRaw.Chalk.name=fal
+tile.WallRaw.Chert.name=fal
+tile.WallRaw.Claystone.name=fal
+tile.WallRaw.Conglomerate.name=fal
+tile.WallRaw.Dacite.name=fal
+tile.WallRaw.Diorite.name=fal
+tile.WallRaw.Dolomite.name=fal
+tile.WallRaw.Gabbro.name=fal
+tile.WallRaw.Gneiss.name=fal
+tile.WallRaw.Granite.name=fal
+tile.WallRaw.Limestone.name=fal
+tile.WallRaw.Marble.name=fal
+tile.WallRaw.Phyllite.name=fal
+tile.WallRaw.Quartzite.name=fal
+tile.WallRaw.Rhyolite.name=fal
+tile.WallRaw.Rock Salt.name=fal
+tile.WallRaw.Schist.name=fal
+tile.WallRaw.Shale.name=fal
+tile.WallRaw.Slate.name=fal
+
+tile.WallBrick.Andesite.name=téglafal
+tile.WallBrick.Basalt.name=téglafal
+tile.WallBrick.Chalk.name=téglafal
+tile.WallBrick.Chert.name=téglafal
+tile.WallBrick.Claystone.name=téglafal
+tile.WallBrick.Conglomerate.name=téglafal
+tile.WallBrick.Dacite.name=téglafal
+tile.WallBrick.Diorite.name=téglafal
+tile.WallBrick.Dolomite.name=téglafal
+tile.WallBrick.Gabbro.name=téglafal
+tile.WallBrick.Gneiss.name=téglafal
+tile.WallBrick.Granite.name=téglafal
+tile.WallBrick.Limestone.name=téglafal
+tile.WallBrick.Marble.name=téglafal
+tile.WallBrick.Phyllite.name=téglafal
+tile.WallBrick.Quartzite.name=téglafal
+tile.WallBrick.Rhyolite.name=téglafal
+tile.WallBrick.Rock Salt.name=téglafal
+tile.WallBrick.Schist.name=téglafal
+tile.WallBrick.Shale.name=téglafal
+tile.WallBrick.Slate.name=téglafal
+
+tile.WallSmooth.Andesite.name=Simított fal
+tile.WallSmooth.Basalt.name=Simított fal
+tile.WallSmooth.Chalk.name=Simított fal
+tile.WallSmooth.Chert.name=Simított fal
+tile.WallSmooth.Claystone.name=Simított fal
+tile.WallSmooth.Conglomerate.name=Simított fal
+tile.WallSmooth.Dacite.name=Simított fal
+tile.WallSmooth.Diorite.name=Simított fal
+tile.WallSmooth.Dolomite.name=Simított fal
+tile.WallSmooth.Gabbro.name=Simított fal
+tile.WallSmooth.Gneiss.name=Simított fal
+tile.WallSmooth.Granite.name=Simított fal
+tile.WallSmooth.Limestone.name=Simított fal
+tile.WallSmooth.Marble.name=Simított fal
+tile.WallSmooth.Phyllite.name=Simított fal
+tile.WallSmooth.Quartzite.name=Simított fal
+tile.WallSmooth.Rhyolite.name=Simított fal
+tile.WallSmooth.Rock Salt.name=Simított fal
+tile.WallSmooth.Schist.name=Simított fal
+tile.WallSmooth.Shale.name=Simított fal
+tile.WallSmooth.Slate.name=Simított fal
+
+tile.IgExRock.Andesite.name=Andezit
+tile.IgExRock.Basalt.name=Bazalt
+tile.SedRock.Chalk.name=Kréta
+tile.SedRock.Chert.name=Kovakő
+tile.SedRock.Claystone.name=Agyagkő
+tile.SedRock.Conglomerate.name=Konglomerátum
+tile.IgExRock.Dacite.name=Dácit
+tile.IgInRock.Diorite.name=Diorit
+tile.SedRock.Dolomite.name=Dolomit
+tile.IgInRock.Gabbro.name=Gabbro
+tile.MMRock.Gneiss.name=Gneisz
+tile.IgInRock.Granite.name=Gránit
+tile.SedRock.Limestone.name=Mészkő
+tile.MMRock.Marble.name=Márvány
+tile.MMRock.Phyllite.name=Fillit
+tile.MMRock.Quartzite.name=Kvartz
+tile.IgExRock.Rhyolite.name=Riolit
+tile.SedRock.Rock Salt.name=Kősó
+tile.MMRock.Schist.name=Pala
+tile.SedRock.Shale.name=Agyagpala
+tile.MMRock.Slate.name=Pala
+
+tile.IgExRockCobble.Andesite.name=Andezit macskakő
+tile.IgExRockCobble.Basalt.name=Bazalt macskakő
+tile.SedRockCobble.Chalk.name=Kréta macskakő
+tile.SedRockCobble.Chert.name=Kova macskakő
+tile.SedRockCobble.Claystone.name=Agyag macskakő
+tile.SedRockCobble.Conglomerate.name=Konglomerátum macskakő
+tile.IgExRockCobble.Dacite.name=macskakő
+tile.IgInRockCobble.Diorite.name=macskakő
+tile.SedRockCobble.Dolomite.name=macskakő
+tile.IgInRockCobble.Gabbro.name=macskakő
+tile.MMRockCobble.Gneiss.name=macskakő
+tile.IgInRockCobble.Granite.name=macskakő
+tile.SedRockCobble.Limestone.name=macskakő
+tile.MMRockCobble.Marble.name=macskakő
+tile.MMRockCobble.Phyllite.name=macskakő
+tile.MMRockCobble.Quartzite.name=macskakő
+tile.IgExRockCobble.Rhyolite.name=macskakő
+tile.SedRockCobble.Rock Salt.name=macskakő
+tile.MMRockCobble.Schist.name=macskakő
+tile.SedRockCobble.Shale.name=macskakő
+tile.MMRockCobble.Slate.name=macskakő
+
+tile.IgExRockSmooth.Andesite.name=Simított
+tile.IgExRockSmooth.Basalt.name=Simított
+tile.SedRockSmooth.Chalk.name=Simított
+tile.SedRockSmooth.Chert.name=Simított
+tile.SedRockSmooth.Claystone.name=Simított
+tile.SedRockSmooth.Conglomerate.name=Simított
+tile.IgExRockSmooth.Dacite.name=Simított
+tile.IgInRockSmooth.Diorite.name=Simított
+tile.SedRockSmooth.Dolomite.name=Simított
+tile.IgInRockSmooth.Gabbro.name=Simított
+tile.MMRockSmooth.Gneiss.name=Simított
+tile.IgInRockSmooth.Granite.name=Simított
+tile.SedRockSmooth.Limestone.name=Simított
+tile.MMRockSmooth.Marble.name=Simított
+tile.MMRockSmooth.Phyllite.name=Simított
+tile.MMRockSmooth.Quartzite.name=Simított
+tile.IgExRockSmooth.Rhyolite.name=Simított
+tile.SedRockSmooth.Rock Salt.name=Simított
+tile.MMRockSmooth.Schist.name=Simított
+tile.SedRockSmooth.Shale.name=Simított
+tile.MMRockSmooth.Slate.name=Simított
+
+tile.IgExRockBrick.Andesite.name=téglák
+tile.IgExRockBrick.Basalt.name=téglák
+tile.SedRockBrick.Chalk.name=téglák
+tile.SedRockBrick.Chert.name=téglák
+tile.SedRockBrick.Claystone.name=téglák
+tile.SedRockBrick.Conglomerate.name=téglák
+tile.IgExRockBrick.Dacite.name=téglák
+tile.IgInRockBrick.Diorite.name=téglák
+tile.SedRockBrick.Dolomite.name=téglák
+tile.IgInRockBrick.Gabbro.name=téglák
+tile.MMRockBrick.Gneiss.name=téglák
+tile.IgInRockBrick.Granite.name=téglák
+tile.SedRockBrick.Limestone.name=téglák
+tile.MMRockBrick.Marble.name=téglák
+tile.MMRockBrick.Phyllite.name=téglák
+tile.MMRockBrick.Quartzite.name=téglák
+tile.IgExRockBrick.Rhyolite.name=téglák
+tile.SedRockBrick.Rock Salt.name=téglák
+tile.MMRockBrick.Schist.name=téglák
+tile.SedRockBrick.Shale.name=téglák
+tile.MMRockBrick.Slate.name=téglák
+
+#=======
+#= Ore =
+#=======
+#== Ore Items ==
+item.Ore.Bituminous Coal.name=Bitumenes szén
+item.Ore.Borax.name=Bórax
+item.Ore.Cinnabar.name=Cinóber
+item.Ore.Cryolite.name=Jégkő
+item.Ore.Graphite.name=Grafit
+item.Ore.Gypsum.name=Gipsz
+item.Ore.Jet.name=Lignit
+item.Ore.Kaolinite.name=Kaolinit
+item.Ore.Kimberlite.name=Kimberlit
+item.Ore.Lapis Lazuli.name=Lazurit
+item.Ore.Lignite.name=Barnaszén
+item.Ore.Microcline.name=Mikrolin
+item.Ore.Olivine.name=Olivin
+item.Ore.Petrified Wood.name=Megkövesedett fa
+item.Ore.Pitchblende.name=Szurokérc
+item.Ore.Saltpeter.name=Salétrom
+item.Ore.Satinspar.name=Satinspar
+item.Ore.Selenite.name=Szelenit
+item.Ore.Serpentine.name=Szerpentin
+item.Ore.Sulfur.name=Kén
+item.Ore.Sylvite.name=Szilvit
+
+item.Ore.Bismuthinite.name=Bizmut
+item.Ore.Cassiterite.name=Kassziterit
+item.Ore.Galena.name=Galenit
+item.Ore.Garnierite.name=Garnierit
+item.Ore.Hematite.name=Vörösvasérc
+item.Ore.Limonite.name=Limonit
+item.Ore.Magnetite.name=Magnetit
+item.Ore.Malachite.name=Malachit
+item.Ore.Native Copper.name=Natív réz
+item.Ore.Native Gold.name=Natív arany
+item.Ore.Native Platinum.name=Natív platina
+item.Ore.Native Silver.name=Natív ezüst
+item.Ore.Sphalerite.name=Szfalerit
+item.Ore.Tetrahedrite.name=Tetrahedrit
+
+item.Ore.Rich Bismuthinite.name=Dús bizmut
+item.Ore.Rich Cassiterite.name=Dús kassziterit
+item.Ore.Rich Galena.name=Dús galenit
+item.Ore.Rich Garnierite.name=Dús garnierit
+item.Ore.Rich Hematite.name=Dús vörösvasérc
+item.Ore.Rich Limonite.name=Dús limonit
+item.Ore.Rich Magnetite.name=Dús magnetit
+item.Ore.Rich Malachite.name=Dús malachit
+item.Ore.Rich Native Copper.name=Dús natív réz
+item.Ore.Rich Native Gold.name=Dús natív arany
+item.Ore.Rich Native Platinum.name=Dús natív platina
+item.Ore.Rich Native Silver.name=Dús natív ezüst
+item.Ore.Rich Sphalerite.name=Dús szfalerit
+item.Ore.Rich Tetrahedrite.name=Dús tetrahedrit
+
+item.Ore.Poor Bismuthinite.name=Gyenge bizmut
+item.Ore.Poor Cassiterite.name=Gyenge kassziterit
+item.Ore.Poor Galena.name=Gyenge galenit
+item.Ore.Poor Garnierite.name=Gyenge garnierit
+item.Ore.Poor Hematite.name=Gyenge vörösvasérc
+item.Ore.Poor Limonite.name=Gyenge limonit
+item.Ore.Poor Magnetite.name=Gyenge magnetit
+item.Ore.Poor Malachite.name=Gyenge malachit
+item.Ore.Poor Native Copper.name=Gyenge natív réz
+item.Ore.Poor Native Gold.name=Gyenge natív arany
+item.Ore.Poor Native Platinum.name=Gyenge natív platina
+item.Ore.Poor Native Silver.name=Gyenge natív ezüst
+item.Ore.Poor Sphalerite.name=Gyenge szfalerit
+item.Ore.Poor Tetrahedrite.name=Gyenge tetrahedrit
+
+item.Small Ore.Bismuthinite.name=Kis bizmut
+item.Small Ore.Cassiterite.name=Kis kassziterit
+item.Small Ore.Galena.name=Kis galenit
+item.Small Ore.Garnierite.name=Kis garnierit
+item.Small Ore.Hematite.name=Kis vörösvasérc
+item.Small Ore.Limonite.name=Kis limonit
+item.Small Ore.Magnetite.name=Kis magnetit
+item.Small Ore.Malachite.name=Kis malachit
+item.Small Ore.Native Copper.name=Natív rézrög
+item.Small Ore.Native Gold.name=Natív aranyrög
+item.Small Ore.Native Platinum.name=Natív platinarög
+item.Small Ore.Native Silver.name=Natív ezüströg
+item.Small Ore.Sphalerite.name=Kis szfalerit
+item.Small Ore.Tetrahedrite.name=Kis tetrahedrit
+
+#== Ore Blocks ==
+tile.Ore.name=Érc
+tile.Ore.Bituminous Coal.name=Bitumenes szén
+tile.Ore.Borax.name=Bórax
+tile.Ore.Cinnabar.name=Cinóber
+tile.Ore.Cryolite.name=Jégkő
+tile.Ore.Graphite.name=Grafit
+tile.Ore.Gypsum.name=Gipsz
+tile.Ore.Jet.name=Lignit
+tile.Ore.Kaolinite.name=Kaolinit
+tile.Ore.Kimberlite.name=Kimberlit
+tile.Ore.Lapis Lazuli.name=Lazurit
+tile.Ore.Lignite.name=Barnaszén
+tile.Ore.Microcline.name=Mikrolin
+tile.Ore.Olivine.name=Olivin
+tile.Ore.Petrified Wood.name=Megkövesedett fa
+tile.Ore.Pitchblende.name=Szurokérc
+tile.Ore.Saltpeter.name=Salétrom
+tile.Ore.Satinspar.name=Satinspar
+tile.Ore.Selenite.name=Szelenit
+tile.Ore.Serpentine.name=Szerpentin
+tile.Ore.Sulfur.name=Kén
+tile.Ore.Sylvite.name=Szilvit
+
+tile.Ore.Bismuthinite.name=Bizmut
+tile.Ore.Cassiterite.name=Kassziterit
+tile.Ore.Galena.name=Galenit
+tile.Ore.Garnierite.name=Garnierit
+tile.Ore.Hematite.name=Vörösvasérc
+tile.Ore.Limonite.name=Limonit
+tile.Ore.Magnetite.name=Magnetit
+tile.Ore.Malachite.name=Malachit
+tile.Ore.Native Copper.name=Natív réz
+tile.Ore.Native Gold.name=Natív arany
+tile.Ore.Native Platinum.name=Natív platina
+tile.Ore.Native Silver.name=Natív ezüst
+tile.Ore.Sphalerite.name=Szfalerit
+tile.Ore.Tetrahedrite.name=Tetrahedrit
+
+#========
+#= Wood =
+#========
+#== Wood Items ==
+item.Log.Acacia.name=rönk
+item.Log.Ash.name=rönk
+item.Log.Aspen.name=rönk
+item.Log.Birch.name=rönk
+item.Log.Chestnut.name=rönk
+item.Log.Douglas Fir.name=rönk
+item.Log.Hickory.name=rönk
+item.Log.Kapok.name=rönk
+item.Log.Maple.name=rönk
+item.Log.Oak.name=rönk
+item.Log.Pine.name=rönk
+item.Log.Sequoia.name=rönk
+item.Log.Spruce.name=rönk
+item.Log.Sycamore.name=rönk
+item.Log.White Cedar.name=rönk
+item.Log.White Elm.name=rönk
+item.Log.Willow.name=rönk
+
+item.SinglePlank.Acacia.name=faanyag
+item.SinglePlank.Ash.name=faanyag
+item.SinglePlank.Aspen.name=faanyag
+item.SinglePlank.Birch.name=faanyag
+item.SinglePlank.Chestnut.name=faanyag
+item.SinglePlank.Douglas Fir.name=faanyag
+item.SinglePlank.Hickory.name=faanyag
+item.SinglePlank.Kapok.name=faanyag
+item.SinglePlank.Maple.name=faanyag
+item.SinglePlank.Oak.name=faanyag
+item.SinglePlank.Pine.name=faanyag
+item.SinglePlank.Sequoia.name=faanyag
+item.SinglePlank.Spruce.name=faanyag
+item.SinglePlank.Sycamore.name=faanyag
+item.SinglePlank.White Cedar.name=faanyag
+item.SinglePlank.White Elm.name=faanyag
+item.SinglePlank.Willow.name=faanyag
+
+item.Acacia Door.name=ajtó
+item.Ash Door.name=ajtó
+item.Aspen Door.name=ajtó
+item.Birch Door.name=ajtó
+item.Chestnut Door.name=ajtó
+item.Douglas Fir Door.name=ajtó
+item.Hickory Door.name=ajtó
+item.Kapok Door.name=ajtó
+item.Maple Door.name=ajtó
+item.Oak Door.name=ajtó
+item.Pine Door.name=ajtó
+item.Sequoia Door.name=ajtó
+item.Spruce Door.name=ajtó
+item.Sycamore Door.name=ajtó
+item.White Cedar Door.name=ajtó
+item.White Elm Door.name=ajtó
+item.Willow Door.name=ajtó
+
+item.Barrel.Acacia.name=hordó
+item.Barrel.Ash.name=hordó
+item.Barrel.Aspen.name=hordó
+item.Barrel.Birch.name=hordó
+item.Barrel.Chestnut.name=hordó
+item.Barrel.Douglas Fir.name=hordó
+item.Barrel.Hickory.name=hordó
+item.Barrel.Kapok.name=hordó
+item.Barrel.Maple.name=hordó
+item.Barrel.Oak.name=hordó
+item.Barrel.Pine.name=hordó
+item.Barrel.Sequoia.name=hordó
+item.Barrel.Spruce.name=hordó
+item.Barrel.Sycamore.name=hordó
+item.Barrel.White Cedar.name=hordó
+item.Barrel.White Elm.name=hordó
+item.Barrel.Willow.name=hordó
+
+item.Loom.Acacia.name=szövőszék
+item.Loom.Ash.name=szövőszék
+item.Loom.Aspen.name=szövőszék
+item.Loom.Birch.name=szövőszék
+item.Loom.Chestnut.name=szövőszék
+item.Loom.Douglas Fir.name=szövőszék
+item.Loom.Hickory.name=szövőszék
+item.Loom.Kapok.name=szövőszék
+item.Loom.Maple.name=szövőszék
+item.Loom.Oak.name=szövőszék
+item.Loom.Pine.name=szövőszék
+item.Loom.Sequoia.name=szövőszék
+item.Loom.Spruce.name=szövőszék
+item.Loom.Sycamore.name=szövőszék
+item.Loom.White Cedar.name=szövőszék
+item.Loom.White Elm.name=szövőszék
+item.Loom.Willow.name=szövőszék
+
+#== Wood Blocks ==
+tile.Chest.Acacia.name=Akácia láda
+tile.Chest.Ash.name=Köris láda
+tile.Chest.Aspen.name=láda
+tile.Chest.Birch.name=láda
+tile.Chest.Chestnut.name=láda
+tile.Chest.Douglas Fir.name=láda
+tile.Chest.Hickory.name=láda
+tile.Chest.Kapok.name=láda
+tile.Chest.Maple.name=láda
+tile.Chest.Oak.name=láda
+tile.Chest.Pine.name=láda
+tile.Chest.Sequoia.name=láda
+tile.Chest.Spruce.name=láda
+tile.Chest.Sycamore.name=láda
+tile.Chest.White Cedar.name=láda
+tile.Chest.White Elm.name=láda
+tile.Chest.Willow.name=láda
+
+tile.log2.Acacia.name=rönk
+tile.log.Ash.name=rönk
+tile.log.Aspen.name=rönk
+tile.log.Birch.name=rönk
+tile.log.Chestnut.name=rönk
+tile.log.Douglas Fir.name=rönk
+tile.log.Hickory.name=rönk
+tile.log.Kapok.name=rönk
+tile.log.Maple.name=rönk
+tile.log.Oak.name=rönk
+tile.log.Pine.name=rönk
+tile.log.Sequoia.name=rönk
+tile.log.Spruce.name=rönk
+tile.log.Sycamore.name=rönk
+tile.log.White Cedar.name=rönk
+tile.log.White Elm.name=rönk
+tile.log.Willow.name=rönk
+
+tile.WoodVert2.Acacia.name=rönk
+tile.WoodVert.Ash.name=rönk
+tile.WoodVert.Aspen.name=rönk
+tile.WoodVert.Birch.name=rönk
+tile.WoodVert.Chestnut.name=rönk
+tile.WoodVert.Douglas Fir.name=rönk
+tile.WoodVert.Hickory.name=rönk
+tile.WoodVert.Kapok.name=rönk
+tile.WoodVert.Maple.name=rönk
+tile.WoodVert.Oak.name=rönk
+tile.WoodVert.Pine.name=rönk
+tile.WoodVert.Sequoia.name=rönk
+tile.WoodVert.Spruce.name=rönk
+tile.WoodVert.Sycamore.name=rönk
+tile.WoodVert.White Cedar.name=rönk
+tile.WoodVert.White Elm.name=rönk
+tile.WoodVert.Willow.name=rönk
+
+tile.WoodHoriz3.Acacia.name=rönk
+tile.WoodHoriz.Ash.name=rönk
+tile.WoodHoriz.Aspen.name=rönk
+tile.WoodHoriz.Birch.name=rönk
+tile.WoodHoriz.Chestnut.name=rönk
+tile.WoodHoriz.Douglas Fir.name=rönk
+tile.WoodHoriz.Hickory.name=rönk
+tile.WoodHoriz2.Kapok.name=rönk
+tile.WoodHoriz.Maple.name=rönk
+tile.WoodHoriz.Oak.name=rönk
+tile.WoodHoriz2.Pine.name=rönk
+tile.WoodHoriz2.Sequoia.name=rönk
+tile.WoodHoriz2.Spruce.name=rönk
+tile.WoodHoriz2.Sycamore.name=rönk
+tile.WoodHoriz2.White Cedar.name=rönk
+tile.WoodHoriz2.White Elm.name=rönk
+tile.WoodHoriz2.Willow.name=rönk
+
+tile.sapling2.Acacia.name=csemete
+tile.sapling.Ash.name=csemete
+tile.sapling.Aspen.name=csemete
+tile.sapling.Birch.name=csemete
+tile.sapling.Chestnut.name=csemete
+tile.sapling.Douglas Fir.name=csemete
+tile.sapling.Hickory.name=csemete
+tile.sapling.Kapok.name=csemete
+tile.sapling.Maple.name=csemete
+tile.sapling.Oak.name=csemete
+tile.sapling.Pine.name=csemete
+tile.sapling.Sequoia.name=csemete
+tile.sapling.Spruce.name=csemete
+tile.sapling.Sycamore.name=csemete
+tile.sapling.White Cedar.name=csemete
+tile.sapling.White Elm.name=csemete
+tile.sapling.Willow.name=csemete
+
+tile.leaves2.name=levelek
+tile.leaves2.Acacia.name=levelek
+tile.leaves.Ash.name=levelek
+tile.leaves.Aspen.name=levelek
+tile.leaves.Birch.name=levelek
+tile.leaves.Chestnut.name=levelek
+tile.leaves.Douglas Fir.name=levelek
+tile.leaves.Hickory.name=levelek
+tile.leaves.Kapok.name=levelek
+tile.leaves.Maple.name=levelek
+tile.leaves.Oak.name=levelek
+tile.leaves.Pine.name=levelek
+tile.leaves.Sequoia.name=levelek
+tile.leaves.Spruce.name=levelek
+tile.leaves.Sycamore.name=levelek
+tile.leaves.White Cedar.name=levelek
+tile.leaves.White Elm.name=levelek
+tile.leaves.Willow.name=levelek
+
+tile.wood2.Acacia.name=deszka
+tile.wood.Ash.name=deszka
+tile.wood.Aspen.name=deszka
+tile.wood.Birch.name=deszka
+tile.wood.Chestnut.name=deszka
+tile.wood.Douglas Fir.name=deszka
+tile.wood.Hickory.name=deszka
+tile.wood.Kapok.name=deszka
+tile.wood.Maple.name=deszka
+tile.wood.Oak.name=deszka
+tile.wood.Pine.name=deszka
+tile.wood.Sequoia.name=deszka
+tile.wood.Spruce.name=deszka
+tile.wood.Sycamore.name=deszka
+tile.wood.White Cedar.name=deszka
+tile.wood.White Elm.name=deszka
+tile.wood.Willow.name=deszka
+
+tile.fruitTreeWood.name=Gyümölcsfa
+tile.fruitTreeLeaves.name=Gyümölcsfa levél
+tile.fruitTreeLeaves2.name=Gyümölcsfa levél
+
+tile.Door Acacia.name=ajtó
+tile.Door Ash.name=ajtó
+tile.Door Aspen.name=ajtó
+tile.Door Birch.name=ajtó
+tile.Door Chestnut.name=ajtó
+tile.Door Douglas Fir.name=ajtó
+tile.Door Hickory.name=ajtó
+tile.Door Kapok.name=ajtó
+tile.Door Maple.name=ajtó
+tile.Door Oak.name=ajtó
+tile.Door Pine.name=ajtó
+tile.Door Sequoia.name=ajtó
+tile.Door Spruce.name=ajtó
+tile.Door Sycamore.name=ajtó
+tile.Door White Cedar.name=ajtó
+tile.Door White Elm.name=ajtó
+tile.Door Willow.name=ajtó
+
+tile.Barrel.Acacia.name=hordó
+tile.Barrel.Ash.name=hordó
+tile.Barrel.Aspen.name=hordó
+tile.Barrel.Birch.name=hordó
+tile.Barrel.Chestnut.name=hordó
+tile.Barrel.Douglas Fir.name=hordó
+tile.Barrel.Hickory.name=hordó
+tile.Barrel.Kapok.name=hordó
+tile.Barrel.Maple.name=hordó
+tile.Barrel.Oak.name=hordó
+tile.Barrel.Pine.name=hordó
+tile.Barrel.Sequoia.name=hordó
+tile.Barrel.Spruce.name=hordó
+tile.Barrel.Sycamore.name=hordó
+tile.Barrel.White Cedar.name=hordó
+tile.Barrel.White Elm.name=hordó
+tile.Barrel.Willow.name=hordó
+
+tile.Loom.Acacia.name=szövőszék
+tile.Loom.Ash.name=szövőszék
+tile.Loom.Aspen.name=szövőszék
+tile.Loom.Birch.name=szövőszék
+tile.Loom.Chestnut.name=szövőszék
+tile.Loom.Douglas Fir.name=szövőszék
+tile.Loom.Hickory.name=szövőszék
+tile.Loom.Kapok.name=szövőszék
+tile.Loom.Maple.name=szövőszék
+tile.Loom.Oak.name=szövőszék
+tile.Loom.Pine.name=szövőszék
+tile.Loom.Sequoia.name=szövőszék
+tile.Loom.Spruce.name=szövőszék
+tile.Loom.Sycamore.name=szövőszék
+tile.Loom.White Cedar.name=szövőszék
+tile.Loom.White Elm.name=szövőszék
+tile.Loom.Willow.name=szövőszék
+
+tile.FenceTFC.Acacia.name=kerités
+tile.FenceTFC.Ash.name=kerités
+tile.FenceTFC.Aspen.name=kerités
+tile.FenceTFC.Birch.name=kerités
+tile.FenceTFC.Chestnut.name=kerités
+tile.FenceTFC.Douglas Fir.name=kerités
+tile.FenceTFC.Hickory.name=kerités
+tile.FenceTFC.Kapok.name=kerités
+tile.FenceTFC.Maple.name=kerités
+tile.FenceTFC.Oak.name=kerités
+tile.FenceTFC.Pine.name=kerités
+tile.FenceTFC.Sequoia.name=kerités
+tile.FenceTFC.Spruce.name=kerités
+tile.FenceTFC.Sycamore.name=kerités
+tile.FenceTFC.White Cedar.name=kerités
+tile.FenceTFC.White Elm.name=kerités
+tile.FenceTFC.Willow.name=kerités
+
+tile.FenceGateTFC.Acacia.name=kapu
+tile.FenceGateTFC.Ash.name=kapu
+tile.FenceGateTFC.Aspen.name=kapu
+tile.FenceGateTFC.Birch.name=kapu
+tile.FenceGateTFC.Chestnut.name=kapu
+tile.FenceGateTFC.Douglas Fir.name=kapu
+tile.FenceGateTFC.Hickory.name=kapu
+tile.FenceGateTFC.Kapok.name=kapu
+tile.FenceGateTFC.Maple.name=kapu
+tile.FenceGateTFC.Oak.name=kapu
+tile.FenceGateTFC.Pine.name=kapu
+tile.FenceGateTFC.Sequoia.name=kapu
+tile.FenceGateTFC.Spruce.name=kapu
+tile.FenceGateTFC.Sycamore.name=kapu
+tile.FenceGateTFC.White Cedar.name=kapu
+tile.FenceGateTFC.White Elm.name=kapu
+tile.FenceGateTFC.Willow.name=kapu
+
+tile.ArmourStand.Acacia.name=páncélzat állvány
+tile.ArmourStand.Ash.name=páncélzat állvány
+tile.ArmourStand.Aspen.name=páncélzat állvány
+tile.ArmourStand.Birch.name=páncélzat állvány
+tile.ArmourStand.Chestnut.name=páncélzat állvány
+tile.ArmourStand.Douglas Fir.name=páncélzat állvány
+tile.ArmourStand.Hickory.name=páncélzat állvány
+tile.ArmourStand.Kapok.name=páncélzat állvány
+tile.ArmourStand.Maple.name=páncélzat állvány
+tile.ArmourStand.Oak.name=páncélzat állvány
+tile.ArmourStand.Pine.name=páncélzat állvány
+tile.ArmourStand.Sequoia.name=páncélzat állvány
+tile.ArmourStand.Spruce.name=páncélzat állvány
+tile.ArmourStand.Sycamore.name=páncélzat állvány
+tile.ArmourStand.White Cedar.name=páncélzat állvány
+tile.ArmourStand.White Elm.name=páncélzat állvány
+tile.ArmourStand.Willow.name=páncélzat állvány
+
+tile.WoodSupportV2.Acacia.name=támaszgerenda
+tile.WoodSupportV.Ash.name=támaszgerenda
+tile.WoodSupportV.Aspen.name=támaszgerenda
+tile.WoodSupportV.Birch.name=támaszgerenda
+tile.WoodSupportV.Chestnut.name=támaszgerenda
+tile.WoodSupportV.Douglas Fir.name=támaszgerenda
+tile.WoodSupportV.Hickory.name=támaszgerenda
+tile.WoodSupportV.Kapok.name=támaszgerenda
+tile.WoodSupportV.Maple.name=támaszgerenda
+tile.WoodSupportV.Oak.name=támaszgerenda
+tile.WoodSupportV.Pine.name=támaszgerenda
+tile.WoodSupportV.Sequoia.name=támaszgerenda
+tile.WoodSupportV.Spruce.name=támaszgerenda
+tile.WoodSupportV.Sycamore.name=támaszgerenda
+tile.WoodSupportV.White Cedar.name=támaszgerenda
+tile.WoodSupportV.White Elm.name=támaszgerenda
+tile.WoodSupportV.Willow.name=támaszgerenda
+
+tile.WoodSupportH2.name=támaszgerenda
+tile.WoodSupportH2.Acacia.name=támaszgerenda
+tile.WoodSupportH.Ash.name=támaszgerenda
+tile.WoodSupportH.Aspen.name=támaszgerenda
+tile.WoodSupportH.Birch.name=támaszgerenda
+tile.WoodSupportH.Chestnut.name=támaszgerenda
+tile.WoodSupportH.Douglas Fir.name=támaszgerenda
+tile.WoodSupportH.Hickory.name=támaszgerenda
+tile.WoodSupportH.Kapok.name=támaszgerenda
+tile.WoodSupportH.Maple.name=támaszgerenda
+tile.WoodSupportH.Oak.name=támaszgerenda
+tile.WoodSupportH.Pine.name=támaszgerenda
+tile.WoodSupportH.Sequoia.name=támaszgerenda
+tile.WoodSupportH.Spruce.name=támaszgerenda
+tile.WoodSupportH.Sycamore.name=támaszgerenda
+tile.WoodSupportH.White Cedar.name=támaszgerenda
+tile.WoodSupportH.White Elm.name=támaszgerenda
+tile.WoodSupportH.Willow.name=támaszgerenda
+
+tile.Toolrack.Acacia.name=szerszám állvány
+tile.Toolrack.Ash.name=szerszám állvány
+tile.Toolrack.Aspen.name=szerszám állvány
+tile.Toolrack.Birch.name=szerszám állvány
+tile.Toolrack.Chestnut.name=szerszám állvány
+tile.Toolrack.Douglas Fir.name=szerszám állvány
+tile.Toolrack.Hickory.name=szerszám állvány
+tile.Toolrack.Kapok.name=szerszám állvány
+tile.Toolrack.Maple.name=szerszám állvány
+tile.Toolrack.Oak.name=szerszám állvány
+tile.Toolrack.Pine.name=szerszám állvány
+tile.Toolrack.Sequoia.name=szerszám állvány
+tile.Toolrack.Spruce.name=szerszám állvány
+tile.Toolrack.Sycamore.name=szerszám állvány
+tile.Toolrack.White Cedar.name=szerszám állvány
+tile.Toolrack.White Elm.name=szerszám állvány
+tile.Toolrack.Willow.name=szerszám állvány
+
+#=======================
+#= Tools/Weapons/Armor =
+#=======================
+
+#== Stone Heads ==
+item.Stone Hammer Head.name=fej
+item.Stone Knife Blade.name=fej
+
+item.IgIn Stone Axe Head.name=fej
+item.IgIn Stone Chisel Head.name=fej
+item.IgIn Stone Hoe Head.name=fej
+item.IgIn Stone Javelin Head.name=fej
+item.IgIn Stone Shovel Head.name=fej
+
+item.Sed Stone Axe Head.name=fej
+item.Sed Stone Chisel Head.name=fej
+item.Sed Stone Hoe Head.name=fej
+item.Sed Stone Javelin Head.name=fej
+item.Sed Stone Shovel Head.name=fej
+
+item.IgEx Stone Axe Head.name=fej
+item.IgEx Stone Chisel Head.name=fej
+item.IgEx Stone Hoe Head.name=fej
+item.IgEx Stone Javelin Head.name=fej
+item.IgEx Stone Shovel Head.name=fej
+
+item.MM Stone Axe Head.name=fej
+item.MM Stone Chisel Head.name=fej
+item.MM Stone Hoe Head.name=fej
+item.MM Stone Javelin Head.name=fej
+item.MM Stone Shovel Head.name=fej
+
+#== Stone Tools ==
+item.Stone Axe.name=Kőbalta
+item.IgIn Stone Axe.name=Kőbalta
+item.Sed Stone Axe.name=Kőbalta
+item.IgEx Stone Axe.name=Kőbalta
+item.MM Stone Axe.name=Kőbalta
+
+item.Stone Chisel.name=Kő véső
+
+item.Stone Hammer.name=Kőkalapács
+
+item.Stone Hoe.name=Kőkapa
+item.IgIn Stone Hoe.name=Kőkapa
+item.Sed Stone Hoe.name=Kőkapa
+item.IgEx Stone Hoe.name=Kőkapa
+item.MM Stone Hoe.name=Kőkapa
+
+item.Stone Javelin.name=Kődárda
+item.IgIn Stone Javelin.name=Kődárda
+item.Sed Stone Javelin.name=Kődárda
+item.IgEx Stone Javelin.name=Kődárda
+item.MM Stone Javelin.name=Kődárda
+
+item.Stone Knife.name=Kőkés
+
+item.Stone Shovel.name=Kőásó
+item.IgIn Stone Shovel.name=Kőásó
+item.Sed Stone Shovel.name=Kőásó
+item.IgEx Stone Shovel.name=Kőásó
+item.MM Stone Shovel.name=Kőásó
+
+#== Metal Heads ==
+#=== Axe Head ===
+item.Bismuth Bronze Axe Head.name=Bizmutbronz baltafej
+item.Black Bronze Axe Head.name=Feketebronz baltafej
+item.Black Steel Axe Head.name=Feketeacél baltafej
+item.Blue Steel Axe Head.name=Kékacél baltafej
+item.Bronze Axe Head.name=Bronz baltafej
+item.Copper Axe Head.name=Réz baltafej
+item.Red Steel Axe Head.name=Vörösacél baltafej
+item.Steel Axe Head.name=Acél baltafej
+item.Wrought Iron Axe Head.name=Kovácsoltvas baltafej
+
+#=== Chisel Head ===
+item.Bismuth Bronze Chisel Head.name=Bizmutbronz vésőpenge
+item.Black Bronze Chisel Head.name=Feketebronz vésőpenge
+item.Black Steel Chisel Head.name=Feketeacél vésőpenge
+item.Blue Steel Chisel Head.name=Kékacél vésőpenge
+item.Bronze Chisel Head.name=Bronz vésőpenge
+item.Copper Chisel Head.name=Réz vésőpenge
+item.Red Steel Chisel Head.name=Vörösacél vésőpenge
+item.Steel Chisel Head.name=Acél vésőpenge
+item.Wrought Iron Chisel Head.name=Kovácsoltvas vésőpenge
+
+#=== Hammer Head ===
+item.Bismuth Bronze Hammer Head.name=Bizmutbronz kalapácsfej
+item.Black Bronze Hammer Head.name=Feketebronz kalapácsfej
+item.Black Steel Hammer Head.name=Feketeacél kalapácsfej
+item.Blue Steel Hammer Head.name=Kékacél kalapácsfej
+item.Bronze Hammer Head.name=Bronz kalapácsfej
+item.Copper Hammer Head.name=Réz kalapácsfej
+item.Red Steel Hammer Head.name=Vörösacél kalapácsfej
+item.Steel Hammer Head.name=Acél kalapácsfej
+item.Wrought Iron Hammer Head.name=Kovácsoltvas kalapácsfej
+
+#=== Hoe Head ===
+item.Bismuth Bronze Hoe Head.name=Bizmutbronz kapafej
+item.Black Bronze Hoe Head.name=Feketebronz kapafej
+item.Black Steel Hoe Head.name=Feketeacél kapafej
+item.Blue Steel Hoe Head.name=Kékacél kapafej
+item.Bronze Hoe Head.name=Bronz kapafej
+item.Copper Hoe Head.name=Réz kapafej
+item.Red Steel Hoe Head.name=Vörösacél kapafej
+item.Steel Hoe Head.name=Acél kapafej
+item.Wrought Iron Hoe Head.name=Kovácsoltvas kapafej
+
+#=== Javelin Head ===
+item.Bismuth Bronze Javelin Head.name=Bizmutbronz dárdahegy
+item.Black Bronze Javelin Head.name=Feketebronz dárdahegy
+item.Black Steel Javelin Head.name=Feketeacél dárdahegy
+item.Blue Steel Javelin Head.name=Kékacél dárdahegy
+item.Bronze Javelin Head.name=Bronz dárdahegy
+item.Copper Javelin Head.name=Réz dárdahegy
+item.Red Steel Javelin Head.name=Vörösacél dárdahegy
+item.Steel Javelin Head.name=Acél dárdahegy
+item.Wrought Iron Javelin Head.name=Kovácsoltvas dárdahegy
+
+#=== Knife Blade ===
+item.Bismuth Bronze Knife Blade.name=Bizmutbronz késpenge
+item.Black Bronze Knife Blade.name=Feketebronz késpenge
+item.Black Steel Knife Blade.name=Feketeacél késpenge
+item.Blue Steel Knife Blade.name=Kékacél késpenge
+item.Bronze Knife Blade.name=Bronz késpenge
+item.Copper Knife Blade.name=Réz késpenge
+item.Red Steel Knife Blade.name=Vörösacél késpenge
+item.Steel Knife Blade.name=Acél késpenge
+item.Wrought Iron Knife Blade.name=Kovácsoltvas késpenge
+
+#=== Mace Head ===
+item.Bismuth Bronze Mace Head.name=Bizmutbronz buzogányfej
+item.Black Bronze Mace Head.name=Feketebronz buzogányfej
+item.Black Steel Mace Head.name=Feketeacél buzogányfej
+item.Blue Steel Mace Head.name=Kékacél buzogányfej
+item.Bronze Mace Head.name=Bronz buzogányfej
+item.Copper Mace Head.name=Réz buzogányfej
+item.Red Steel Mace Head.name=Vörösacél buzogányfej
+item.Steel Mace Head.name=Acél buzogányfej
+item.Wrought Iron Mace Head.name=Kovácsoltvas buzogányfej
+
+#=== Pickaxe Head ===
+item.Bismuth Bronze Pick Head.name=Bizmutbronz csákányfej
+item.Black Bronze Pick Head.name=Feketebronz csákányfej
+item.Black Steel Pick Head.name=Feketeacél csákányfej
+item.Blue Steel Pick Head.name=Kékacél csákányfej
+item.Bronze Pick Head.name=Bronz csákányfej
+item.Copper Pick Head.name=Réz csákányfej
+item.Red Steel Pick Head.name=Vörösacél csákányfej
+item.Steel Pick Head.name=Acél csákányfej
+item.Wrought Iron Pick Head.name=Kovácsoltvas csákányfej
+
+#=== Prospector's Pick Head ===
+item.Bismuth Bronze ProPick Head.name=Bizmutbronz mintavevőfej
+item.Black Bronze ProPick Head.name=Feketebronz mintavevőfej
+item.Black Steel ProPick Head.name=Feketeacél mintavevőfej
+item.Blue Steel ProPick Head.name=Kékacél mintavevőfej
+item.Bronze ProPick Head.name=Bronz mintavevőfej
+item.Copper ProPick Head.name=Réz mintavevőfej
+item.Red Steel ProPick Head.name=Vörösacél mintavevőfej
+item.Steel ProPick Head.name=Acél mintavevőfej
+item.Wrought Iron ProPick Head.name=Kovácsoltvas mintavevőfej
+
+#=== Saw Blade ===
+item.Bismuth Bronze Saw Blade.name=Bizmutbronz fűrészlap
+item.Black Bronze Saw Blade.name=Feketebronz fűrészlap
+item.Black Steel Saw Blade.name=Feketeacél fűrészlap
+item.Blue Steel Saw Blade.name=Kékacél fűrészlap
+item.Bronze Saw Blade.name=Bronz fűrészlap
+item.Copper Saw Blade.name=Réz fűrészlap
+item.Red Steel Saw Blade.name=Vörösacél fűrészlap
+item.Steel Saw Blade.name=Acél fűrészlap
+item.Wrought Iron Saw Blade.name=Kovácsoltvas fűrészlap
+
+#=== Scythe Blade ===
+item.Bismuth Bronze Scythe Blade.name=Bizmutbronz kaszapenge
+item.Black Bronze Scythe Blade.name=Feketebronz kaszapenge
+item.Black Steel Scythe Blade.name=Feketeacél kaszapenge
+item.Blue Steel Scythe Blade.name=Kékacél kaszapenge
+item.Bronze Scythe Blade.name=Bronz kaszapenge
+item.Copper Scythe Blade.name=Réz kaszapenge
+item.Red Steel Scythe Blade.name=Vörösacél kaszapenge
+item.Steel Scythe Blade.name=Acél kaszapenge
+item.Wrought Iron Scythe Blade.name=Kovácsoltvas kaszapenge
+
+#=== Shovel Head ===
+item.Bismuth Bronze Shovel Head.name=Bizmutbronz ásófej
+item.Black Bronze Shovel Head.name=Feketebronz ásófej
+item.Black Steel Shovel Head.name=Feketeacél ásófej
+item.Blue Steel Shovel Head.name=Kékacél ásófej
+item.Bronze Shovel Head.name=Bronz ásófej
+item.Copper Shovel Head.name=Réz ásófej
+item.Red Steel Shovel Head.name=Vörösacél ásófej
+item.Steel Shovel Head.name=Acél ásófej
+item.Wrought Iron Shovel Head.name=Kovácsoltvas ásófej
+
+#=== Sword Blade ===
+item.Bismuth Bronze Sword Blade.name=Bizmutbronz kardpenge
+item.Black Bronze Sword Blade.name=Feketebronz kardpenge
+item.Black Steel Sword Blade.name=Feketeacél kardpenge
+item.Blue Steel Sword Blade.name=Kékacél kardpenge
+item.Bronze Sword Blade.name=Bronz kardpenge
+item.Copper Sword Blade.name=Réz kardpenge
+item.Red Steel Sword Blade.name=Vörösacél kardpenge
+item.Steel Sword Blade.name=Acél kardpenge
+item.Wrought Iron Sword Blade.name=Kovácsoltvas kardpenge
+
+#== Metal Tools ==
+#=== Axe ===
+item.Bismuth Bronze Axe.name=Bizmutbronz balta
+item.Black Bronze Axe.name=Feketebronz balta
+item.Black Steel Axe.name=Feketeacél balta
+item.Blue Steel Axe.name=Kékacél balta
+item.Bronze Axe.name=Bronz balta
+item.Copper Axe.name=Réz balta
+item.Red Steel Axe.name=Vörösacél balta
+item.Steel Axe.name=Acél balta
+item.Wrought Iron Axe.name=Kovácsoltvas balta
+
+#=== Chisel ===
+item.Bismuth Bronze Chisel.name=Bizmutbronz véső
+item.Black Bronze Chisel.name=Feketeabronz véső
+item.Black Steel Chisel.name=Feketeacél véső
+item.Blue Steel Chisel.name=Kékacél véső
+item.Bronze Chisel.name=Bronz véső
+item.Copper Chisel.name=Réz véső
+item.Red Steel Chisel.name=Vörösacél véső
+item.Steel Chisel.name=Acél véső
+item.Wrought Iron Chisel.name=Kovácsoltvas véső
+
+#=== Hammer ===
+item.Bismuth Bronze Hammer.name=Bizmutbronz kalapács
+item.Black Bronze Hammer.name=Feketebronz kalapács
+item.Black Steel Hammer.name=Feketeacél kalapács
+item.Blue Steel Hammer.name=Kékacél kalapács
+item.Bronze Hammer.name=Bronz kalapács
+item.Copper Hammer.name=Réz kalapács
+item.Red Steel Hammer.name=Vörösacél kalapács
+item.Steel Hammer.name=Acél kalapács
+item.Wrought Iron Hammer.name=Kovácsoltvas kalapács
+
+#=== Hoe ===
+item.Bismuth Bronze Hoe.name=Bizmutbronz kapa
+item.Black Bronze Hoe.name=Feketebronz kapa
+item.Black Steel Hoe.name=Feketeacél kapa
+item.Blue Steel Hoe.name=Kékacél kapa
+item.Bronze Hoe.name=Bronz kapa
+item.Copper Hoe.name=Réz kapa
+item.Red Steel Hoe.name=Vörösacél kapa
+item.Steel Hoe.name=Acél kapa
+item.Wrought Iron Hoe.name=Kovácsoltvas kapa
+
+#=== Javelin ===
+item.Bismuth Bronze Javelin.name=Bizmutbronz dárda
+item.Black Bronze Javelin.name=Feketebronz dárda
+item.Black Steel Javelin.name=Feketeacél dárda
+item.Blue Steel Javelin.name=Kékacél dárda
+item.Bronze Javelin.name=Bronz dárda
+item.Copper Javelin.name=Réz dárda
+item.Red Steel Javelin.name=Vörösacél dárda
+item.Steel Javelin.name=Acél dárda
+item.Wrought Iron Javelin.name=Kovácsoltvas dárda
+
+#=== Knife ===
+item.Bismuth Bronze Knife.name=Bizmutbronz kés
+item.Black Bronze Knife.name=Feketebronz kés
+item.Black Steel Knife.name=Feketeacél kés
+item.Blue Steel Knife.name=Kékacél kés
+item.Bronze Knife.name=Bronz kés
+item.Copper Knife.name=Réz kés
+item.Red Steel Knife.name=Vörösacél kés
+item.Steel Knife.name=Acél kés
+item.Wrought Iron Knife.name=Kovácsoltvas kés
+
+#=== Mace ===
+item.Bismuth Bronze Mace.name=Bizmutbronz buzogány
+item.Black Bronze Mace.name=Feketebronz buzogány
+item.Black Steel Mace.name=Feketeacél buzogány
+item.Blue Steel Mace.name=Kékacél buzogány
+item.Bronze Mace.name=Bronz buzogány
+item.Copper Mace.name=Réz buzogány
+item.Red Steel Mace.name=Vörösacél buzogány
+item.Steel Mace.name=buzogány
+item.Wrought Iron Mace.name=Kovácsoltvas buzogány
+
+#=== Pickaxe ===
+item.Bismuth Bronze Pick.name=Bizmutbronz csákány
+item.Black Bronze Pick.name=Feketebronz csákány
+item.Black Steel Pick.name=Feketeacél csákány
+item.Blue Steel Pick.name=Kékacél csákány
+item.Bronze Pick.name=Bronz csákány
+item.Copper Pick.name=Réz csákány
+item.Red Steel Pick.name=Vörösacél csákány
+item.Steel Pick.name=Acél csákány
+item.Wrought Iron Pick.name=Kovácsoltvas csákány
+
+#=== Prospector's Pick ===
+item.Bismuth Bronze ProPick.name=Bizmutbronz mintavevő
+item.Black Bronze ProPick.name=Feketebronz mintavevő
+item.Black Steel ProPick.name=Feketeacél mintavevő
+item.Blue Steel ProPick.name=Kékacél mintavevő
+item.Bronze ProPick.name=Bronz mintavevő
+item.Copper ProPick.name=Réz mintavevő
+item.Red Steel ProPick.name=Vörösacél mintavevő
+item.Steel ProPick.name=mintavevő
+item.Wrought Iron ProPick.name=Kovácsoltvas mintavevő
+
+#=== Saw ===
+item.Bismuth Bronze Saw.name=Bizmutbronz fűrész
+item.Black Bronze Saw.name=Feketebronz fűrész
+item.Black Steel Saw.name=Feketeacél fűrész
+item.Blue Steel Saw.name=Kékacél fűrész
+item.Bronze Saw.name=Bronz fűrész
+item.Copper Saw.name=Réz fűrész
+item.Red Steel Saw.name=Vörösacél fűrész
+item.Steel Saw.name=Acél fűrész
+item.Wrought Iron Saw.name=Kovácsoltvas fűrész
+
+#=== Scythe ===
+item.Bismuth Bronze Scythe.name=Bizmutbronz kasza
+item.Black Bronze Scythe.name=Feketebronz kasza
+item.Black Steel Scythe.name=Feketeacél kasza
+item.Blue Steel Scythe.name=Kékacél kasza
+item.Bronze Scythe.name=Bronz kasza
+item.Copper Scythe.name=Réz kasza
+item.Red Steel Scythe.name=Vörösacél kasza
+item.Steel Scythe.name=Acél kasza
+item.Wrought Iron Scythe.name=Kovácsoltvas kasza
+
+#=== Shovel ===
+item.Bismuth Bronze Shovel.name=Bizmutbronz ásó
+item.Black Bronze Shovel.name=Feketebronz ásó
+item.Black Steel Shovel.name=Feketeacél ásó
+item.Blue Steel Shovel.name=Kékacél ásó
+item.Bronze Shovel.name=Bronz ásó
+item.Copper Shovel.name=Réz ásó
+item.Red Steel Shovel.name=Vörösacél ásó
+item.Steel Shovel.name=Acél ásó
+item.Wrought Iron Shovel.name=Kovácsoltvas ásó
+
+#=== Sword ===
+item.Bismuth Bronze Sword.name=Bizmutbronz kard
+item.Black Bronze Sword.name=Feketebronz kard
+item.Black Steel Sword.name=Feketeacél kard
+item.Blue Steel Sword.name=Kékacél kard
+item.Bronze Sword.name=Bronz kard
+item.Copper Sword.name=Réz kard
+item.Red Steel Sword.name=Vörösacél kard
+item.Steel Sword.name=Acél kard
+item.Wrought Iron Sword.name=Kovácsoltvas kard
+
+#=== Tuyere ===
+item.Bismuth Bronze Tuyere.name=Bizmutbronz fúvóka
+item.Black Bronze Tuyere.name=Feketebronz fúvóka
+item.Black Steel Tuyere.name=Feketeacél fúvóka
+item.Blue Steel Tuyere.name=Kékacél fúvóka
+item.Bronze Tuyere.name=Bronz fúvóka
+item.Copper Tuyere.name=Réz fúvóka
+item.Red Steel Tuyere.name=Vörösacél fúvóka
+item.Steel Tuyere.name=Acél fúvóka
+item.Wrought Iron Tuyere.name=Kovácsoltvas fúvóka
+
+#== Armor ==
+#=== Helmet ===
+item.Bismuth Bronze Unfinished Helmet.name=sisak
+item.Black Bronze Unfinished Helmet.name=sisak
+item.Black Steel Unfinished Helmet.name=sisak
+item.Blue Steel Unfinished Helmet.name=sisak
+item.Bronze Unfinished Helmet.name=sisak
+item.Copper Unfinished Helmet.name=sisak
+item.Red Steel Unfinished Helmet.name=sisak
+item.Steel Unfinished Helmet.name=sisak
+item.Wrought Iron Unfinished Helmet.name=sisak
+item.Bismuth Bronze Helmet.name=Bizmutbronz sisak
+item.Black Bronze Helmet.name=Feketebronz sisak
+item.Black Steel Helmet.name=Feketeacél sisak
+item.Blue Steel Helmet.name=Kékacél sisak
+item.Bronze Helmet.name=Bronz sisak
+item.Copper Helmet.name=Réz sisak
+item.Red Steel Helmet.name=Vörösacél sisak
+item.Steel Helmet.name=Acél sisak
+item.Wrought Iron Helmet.name=Kovácsoltvas sisak
+item.helmetCloth.name=sapka
+
+#=== Chestplate ===
+item.Bismuth Bronze Unfinished Chestplate.name=mellvért
+item.Black Bronze Unfinished Chestplate.name=mellvért
+item.Black Steel Unfinished Chestplate.name=mellvért
+item.Blue Steel Unfinished Chestplate.name=mellvért
+item.Bronze Unfinished Chestplate.name=mellvért
+item.Copper Unfinished Chestplate.name=mellvért
+item.Red Steel Unfinished Chestplate.name=mellvért
+item.Steel Unfinished Chestplate.name=mellvért
+item.Wrought Iron Unfinished Chestplate.name=mellvért
+item.Bismuth Bronze Chestplate.name=Bizmutbronz mellvért
+item.Black Bronze Chestplate.name=Feketebronz mellvért
+item.Black Steel Chestplate.name=Feketeacél mellvért
+item.Blue Steel Chestplate.name=Kékacél mellvért
+item.Bronze Chestplate.name=Bronz mellvért
+item.Copper Chestplate.name=Réz mellvért
+item.Red Steel Chestplate.name=Vörösacél mellvért
+item.Steel Chestplate.name=Acél mellvért
+item.Wrought Iron Chestplate.name=Kovácsoltvas mellvért
+item.chestplateCloth.name=mellény
+
+#=== Greaves ===
+item.Bismuth Bronze Unfinished Greaves.name=lábvért
+item.Black Bronze Unfinished Greaves.name=lábvért
+item.Black Steel Unfinished Greaves.name=lábvért
+item.Blue Steel Unfinished Greaves.name=lábvért
+item.Bronze Unfinished Greaves.name=lábvért
+item.Copper Unfinished Greaves.name=lábvért
+item.Red Steel Unfinished Greaves.name=lábvért
+item.Steel Unfinished Greaves.name=lábvért
+item.Wrought Iron Unfinished Greaves.name=lábvért
+item.Bismuth Bronze Greaves.name=Bizmutbronz lábvért
+item.Black Bronze Greaves.name=Feketebronz lábvért
+item.Black Steel Greaves.name=Feketeacél lábvért
+item.Blue Steel Greaves.name=Kékacél lábvért
+item.Bronze Greaves.name=Bronz lábvért
+item.Copper Greaves.name=Réz lábvért
+item.Red Steel Greaves.name=Vörösacél lábvért
+item.Steel Greaves.name=Acél lábvért
+item.Wrought Iron Greaves.name=Kovácsoltvas lábvért
+item.leggingsCloth.name=nadrág
+
+#=== Boots ===
+item.Bismuth Bronze Unfinished Boots.name=csizma
+item.Black Bronze Unfinished Boots.name=csizma
+item.Black Steel Unfinished Boots.name=csizma
+item.Blue Steel Unfinished Boots.name=csizma
+item.Bronze Unfinished Boots.name=csizma
+item.Copper Unfinished Boots.name=csizma
+item.Red Steel Unfinished Boots.name=csizma
+item.Steel Unfinished Boots.name=csizma
+item.Wrought Iron Unfinished Boots.name=csizma
+item.Bismuth Bronze Boots.name=Bizmutbronz csizma
+item.Black Bronze Boots.name=Feketebronz csizma
+item.Black Steel Boots.name=Feketeacél csizma
+item.Blue Steel Boots.name=Kékacél csizma
+item.Bronze Boots.name=Bronz csizma
+item.Copper Boots.name=Réz csizma
+item.Red Steel Boots.name=Vörösacél csizma
+item.Steel Boots.name=Acél csizma
+item.Wrought Iron Boots.name=Kovácsoltvas csizma
+item.bootsCloth.name=csizma
+
+#==========
+#= Metals =
+#==========
+item.Iron Bloom.name=
+item.Raw Iron Bloom.name=
+tile.Bloom.name=
+
+#== Unshaped ==
+item.Bismuth Bronze Unshaped.name=
+item.Bismuth Unshaped.name=
+item.Black Bronze Unshaped.name=
+item.Black Steel Unshaped.name=
+item.Blue Steel Unshaped.name=
+item.Brass Unshaped.name=
+item.Bronze Unshaped.name=
+item.Copper Unshaped.name=
+item.Gold Unshaped.name=
+item.HC Black Steel Unshaped.name=
+item.HC Blue Steel Unshaped.name=
+item.HC Red Steel Unshaped.name=
+item.HC Steel Unshaped.name=
+item.Lead Unshaped.name=
+item.Nickel Unshaped.name=
+item.Pig Iron Unshaped.name=
+item.Platinum Unshaped.name=
+item.Red Steel Unshaped.name=
+item.Rose Gold Unshaped.name=
+item.Silver Unshaped.name=
+item.Steel Unshaped.name=
+item.Sterling Silver Unshaped.name=
+item.Tin Unshaped.name=
+item.Unknown Unshaped.name=
+item.Weak Blue Steel Unshaped.name=
+item.Weak Red Steel Unshaped.name=
+item.Weak Steel Unshaped.name=
+item.Wrought Iron Unshaped.name=
+item.Zinc Unshaped.name=
+
+#== Ingot ==
+item.Bismuth Bronze Ingot.name=Bizmutbronz öntvény
+item.Bismuth Ingot.name=Bizmut öntvény
+item.Black Bronze Ingot.name=Feketebronz öntvény
+item.Black Steel Ingot.name=Feketeacél öntvény
+item.Blue Steel Ingot.name=Kékacél öntvény
+item.Brass Ingot.name=Sárgaréz öntvény
+item.Bronze Ingot.name=Bronz öntvény
+item.Copper Ingot.name=Réz öntvény
+item.Gold Ingot.name=Arany öntvény
+item.HC Black Steel Ingot.name=öntvény
+item.HC Blue Steel Ingot.name=öntvény
+item.HC Red Steel Ingot.name=öntvény
+item.HC Steel Ingot.name=öntvény
+item.Lead Ingot.name=Ólom öntvény
+item.Nickel Ingot.name=Nikkel öntvény
+item.Pig Iron Ingot.name=Nyresvas öntvény
+item.Platinum Ingot.name=Platina öntvény
+item.Red Steel Ingot.name=Vörösacél öntvény
+item.Rose Gold Ingot.name=Vörösarany öntvény
+item.Silver Ingot.name=Ezüst öntvény
+item.Steel Ingot.name=Acél öntvény
+item.Sterling Silver Ingot.name=Sterling ezüst öntvény
+item.Tin Ingot.name=Ón öntvény
+item.Unknown Ingot.name=Ismeretlen öntvény
+item.Weak Blue Steel Ingot.name=öntvény
+item.Weak Red Steel Ingot.name=öntvény
+item.Weak Steel Ingot.name=öntvény
+item.Wrought Iron Ingot.name=Kovácsoltvas öntvény
+item.Zinc Ingot.name=Cink öntvény
+
+#== Double Ingot ==
+item.Bismuth Bronze Double Ingot.name=Dupla bizmutbronz öntvény
+item.Bismuth Double Ingot.name=Dupla bizmut öntvény
+item.Black Bronze Double Ingot.name=Dupla feketebronz öntvény
+item.Black Steel Double Ingot.name=Dupla feketeacél öntvény
+item.Blue Steel Double Ingot.name=Dupla kékacél öntvény
+item.Brass Double Ingot.name=Dupla sárgaréz öntvény
+item.Bronze Double Ingot.name=Dupla bronz öntvény
+item.Copper Double Ingot.name=Dupla réz öntvény
+item.Gold Double Ingot.name=Dupla arany öntvény
+item.Lead Double Ingot.name=Dupla ólom öntvény
+item.Nickel Double Ingot.name=Dupla nikkel öntvény
+item.Pig Iron Double Ingot.name=Dupla nyersvas öntvény
+item.Platinum Double Ingot.name=Dupla öntvény
+item.Red Steel Double Ingot.name=Dupla öntvény
+item.Rose Gold Double Ingot.name=Dupla öntvény
+item.Silver Double Ingot.name=Dupla öntvény
+item.Steel Double Ingot.name=Dupla öntvény
+item.Sterling Silver Double Ingot.name=Dupla öntvény
+item.Tin Double Ingot.name=Dupla öntvény
+item.Wrought Iron Double Ingot.name=Dupla öntvény
+item.Zinc Double Ingot.name=Dupla öntvény
+
+#== Sheet ==
+item.Bismuth Bronze Sheet.name=Bizmutbronz lemez
+item.Bismuth Sheet.name=Bizmut lemez
+item.Black Bronze Sheet.name=Feketebronz lemez
+item.Black Steel Sheet.name=lemez
+item.Blue Steel Sheet.name=lemez
+item.Brass Sheet.name=lemez
+item.Bronze Sheet.name=lemez
+item.Copper Sheet.name=lemez
+item.Gold Sheet.name=lemez
+item.Lead Sheet.name=lemez
+item.Nickel Sheet.name=lemez
+item.Pig Iron Sheet.name=lemez
+item.Platinum Sheet.name=lemez
+item.Red Steel Sheet.name=lemez
+item.Rose Gold Sheet.name=lemez
+item.Silver Sheet.name=lemez
+item.Steel Sheet.name=lemez
+item.Sterling Silver Sheet.name=lemez
+item.Tin Sheet.name=lemez
+item.Wrought Iron Sheet.name=Kovácsoltvas lemez
+item.Zinc Sheet.name=lemez
+
+#== DoubleSheet ==
+item.Bismuth Bronze Double Sheet.name=Bizmutbronz dupla lemez
+item.Bismuth Double Sheet.name=Bizmut dupla lemez
+item.Black Bronze Double Sheet.name=Feketebronz dupla lemez
+item.Black Steel Double Sheet.name=Feketeacél dupla lemez
+item.Blue Steel Double Sheet.name=Kékacél dupla lemez
+item.Brass Double Sheet.name=Sárgaréz dupla lemez
+item.Bronze Double Sheet.name=Bronz dupla lemez
+item.Copper Double Sheet.name=Réz dupla lemez
+item.Gold Double Sheet.name=Arany dupla lemez
+item.Lead Double Sheet.name=Ólom dupla lemez
+item.Nickel Double Sheet.name=Nikkel dupla lemez
+item.Pig Iron Double Sheet.name=Nyersvas dupla lemez
+item.Platinum Double Sheet.name=Platina dupla lemez
+item.Red Steel Double Sheet.name=Vörösacél dupla lemez
+item.Rose Gold Double Sheet.name=Vörösarany dupla lemez
+item.Silver Double Sheet.name=Ezüst dupla lemez
+item.Steel Double Sheet.name=Acél dupla lemez
+item.Sterling Silver Double Sheet.name=Sterling ezüst dupla lemez
+item.Tin Double Sheet.name=Ón dupla lemez
+item.Wrought Iron Double Sheet.name=Kovácsoltvas dupla lemez
+item.Zinc Double Sheet.name=Cink dupla lemez
+
+#== Misc ==
+item.Blueprint=Tervrajz
+
+#===========
+#= Devices =
+#===========
+tile.Bellows.name=Fújtató
+tile.Forge.name=Kovácstűzhely
+tile.BlastFurnace.name=Nagyolvasztó kemence
+tile.SpawnMeter.name=Védelem mérő
+tile.Quern.name=Kézimalom alap
+tile.EarlyBloomery.name=Olvasztó
+tile.Molten.name=Olvadt érc
+tile.Crucible.name=Olvasztótégely
+tile.NestBox.name=Tojóláda
+item.SluiceItem.name=Zsilip
+tile.Sluice.name=Zsilip
+tile.LeatherRack.name=Bőrállvány
+tile.FoodPrep.name=Élelmiszer előkészítő
+tile.MetalSheet.name=Fémlemez
+tile.ingotpile.name=Öntvényrakás
+tile.SmokeRack.name=Füstölőállvány
+
+#== Anvils ==
+tile.Anvil.Stone.name=Kő üllő
+tile.Anvil.Bismuth.name=Bizmut üllő
+tile.Anvil2.Bismuth Bronze.name=Bizmutbronz üllő
+tile.Anvil2.Black Bronze.name=Feketebronz üllő
+tile.Anvil.Black Steel.name=Feketeacél üllő
+tile.Anvil.Blue Steel.name=Kékacél üllő
+tile.Anvil.Bronze.name=Bronz üllő
+tile.Anvil.Copper.name=Réz üllő
+tile.Anvil.Red Steel.name=Vörösacél üllő
+tile.Anvil2.Rose Gold.name=Rózsarany üllő
+tile.Anvil.Steel.name=Acél üllő
+tile.Anvil.Tin.name=Ón üllő
+tile.Anvil.Wrought Iron.name=Kovácsoltvas üllő
+tile.Anvil.Zinc.name=Cink üllő
+
+#==================
+#= Terrain Blocks =
+#==================
+tile.Grass.name=Fű
+tile.DryGrass.name=Száraz fű
+tile.PeatGrass.name=Tőzegfű
+tile.ClayGrass.name=Agyagfű
+tile.dirt.name=Föld
+tile.sand.name=Homok
+tile.Peat.name=Tőzeg
+tile.tilledSoil.name=Gazdaság
+tile.LooseRock.name=Törmelék
+tile.Ice.name=Jég
+
+#=================
+#= Miscellaneous =
+#=================
+#== Misc Items ==
+item.arrow.name=Nyíl
+item.book.name=Könyv
+item.stick.name=Bot
+item.coal.coal.name=Szén
+item.coal.charcoal.name=Faszén
+item.Fertilizer.name=Trágya
+item.Reeds.name=Nádas
+
+item.Wooden Bucket Empty.name=Fa vödör (üres)
+item.Wooden Bucket Water.name=Fa vödör (friss víz)
+item.Wooden Bucket Salt Water.name=Fa vödör (sós víz)
+item.Wooden Bucket Milk.name=Fa vödör (tej)
+item.Lime Water.name=Meszes víz
+
+item.Red Steel Bucket Empty.name=
+item.Red Steel Bucket Water.name=
+item.Red Steel Bucket Salt Water.name=
+item.Blue Steel Bucket Empty.name=
+item.Blue Steel Bucket Lava.name=
+
+item.GoldPan.name=Aranymosó tál
+item.Gold Pan.Sand.name=Aranymosó tál - Homok
+item.Gold Pan.Gravel.name=Aranymosó tál - Kavics
+item.Gold Pan.Clay.name=Aranymosó tál - Agyag
+item.Gold Pan.Dirt.name=Aranymosó tál - Talaj
+item.Ink.name=Tinta
+item.Firestarter.name=Tűzgyújtó
+
+item.Quern.name=Kézi daráló
+item.Blueprint.name=Tervrajz
+item.Nametag.name=Névtábla
+item.WoolYarn.name=Gyapjúfonal
+item.Wool.name=Gyapjú
+item.WoolCloth.name=Gyapjúruha
+item.SilkCloth.name=Selyemruha
+item.BurlapCloth.name=Vászonruha
+item.Mortar.name=Habarcs
+item.Vinegar.name=Ecet
+
+item.Hide.small.name=Kis irha
+item.Hide.medium.name=Közepes irha
+item.Hide.large.name=Nagy irha
+item.Soaked Hide.small.name=Kis áztatott irha
+item.Soaked Hide.medium.name=Közepes áztatott irha
+item.Soaked Hide.large.name=Nagy áztatott irha
+item.Scraped Hide.small.name=Kicsi kapart irha
+item.Scraped Hide.medium.name=Közepes kapart irha
+item.Scraped Hide.large.name=Nagy kapart irha
+item.Prep Hide.small.name=Kis előkészített irha
+item.Prep Hide.medium.name=Közepes előkészített irha
+item.Prep Hide.large.name=Nagy előkészített irha
+item.Sheep Skin.small.name=Kis birkabőr
+item.Sheep Skin.medium.name=Közepes birkabőr
+item.Sheep Skin.large.name=Nagy birkabőr
+item.TFC Leather.name=Bőr
+item.Flat Leather.name=Sima bőr
+item.leather.name=Bőr
+
+item.minecartChest.name=
+item.fishingRod.name=Horgászbot
+
+item.Quiver.name=Tegez
+item.Rope.name=Kötél
+item.Mud Brick.name=
+item.Wet Mud Brick.name=
+
+#======== Misc. Blocks========
+tile.Straw Hide Bed.name=
+tile.StrawHideBed.name=
+tile.customBed.sleep=
+tile.BasicPipe.name=Cső
+tile.ValvePipe.name=
+tile.Smoke.name=Füst
+tile.Torch.name=Fáklya
+tile.Chest.name=
+tile.Bookshelf.name=
+tile.Workbench.name=
+tile.ButtonWood.name=
+tile.Firepit.name=
+tile.LogPile.name=
+tile.Charcoal.name=
+tile.StoneDetailed.name=
+tile.stoneStairs.name=Lépcső
+tile.stoneSlabs.name=
+tile.stoneStalac.name=
+tile.WoodConstruct.name=
+tile.MetalTrapDoor.name=
+tile.Vessel.name=Nagy edény
+tile.Grill.name=
+
+tile.Sulfur.name=Kén
+tile.Reeds.name=Nádas
+
+#= Misc. Plants =
+item.Sugarcane.name=Cukornád
+item.Hemp.name=Kender
+item.Straw.name=Szalma
+item.Jute.name=Juta
+item.Jute Fibre.name=Jutarost
+
+tile.Fungi.mushroom_brown.name=
+tile.Fungi.mushroom_red.name=
+tile.Cactus.name=
+tile.Pumpkin.name=
+tile.LitPumpkin.name=
+tile.Moss.name=
+tile.Thatch.name=
+tile.Flora.Golden Rod.name=
+tile.Flora.Cat Tails.name=
+
+item.Seeds Sugarcane.name=
+item.Seeds Hemp.name=
+item.Seeds Jute.name=
+
+tile.TallGrass.tallgrass.name=
+tile.TallGrass.fern.name=
+tile.TallGrass.shortgrass.name=
+tile.LilyPad.name=
+tile.Vine.name=
+tile.SeaGrassStill.name=
+tile.SeaGrassIce.name=
+
+tile.Flowers.flower_nasturtium.name=
+tile.Flowers.flower_dandelion.name=
+tile.Flowers.flower_meads_milkweed.name=
+tile.Flowers.flower_tropical_milkweed.name=
+tile.Flowers.flower_butterfly_milkweed.name=
+tile.Flowers.flower_calendula.name=
+tile.Flowers2.flower_rose.name=
+tile.Flowers2.flower_blue_orchid.name=
+tile.Flowers2.flower_allium.name=
+tile.Flowers2.flower_houstonia.name=
+tile.Flowers2.flower_tulip_red.name=
+tile.Flowers2.flower_tulip_orange.name=
+tile.Flowers2.flower_tulip_white.name=
+tile.Flowers2.flower_tulip_pink.name=
+tile.Flowers2.flower_oxeye_daisy.name=
+
+tile.SaltWater.name=
+tile.SaltWaterStationary.name=
+tile.FreshWater.name=
+tile.FreshWaterStationary.name=
+tile.HotWater.name=
+tile.HotWaterStationary.name=
+tile.Lava.name=Lávafolyam
+tile.LavaStationary.name=Láva
+
+#=======
+#= GUI =
+#=======
+
+#== Anvil GUI ==
+gui.Anvil.Plans=
+gui.Anvil.Weld=
+
+gui.Anvil.LightHit=
+gui.Anvil.MediumHit=
+gui.Anvil.HeavyHit=
+gui.Anvil.Draw=
+
+gui.Anvil.Punch=
+gui.Anvil.Bend=
+gui.Anvil.Upset=
+gui.Anvil.Shrink=
+
+gui.Anvil.Rules=
+gui.Anvil.Rule1=
+gui.Anvil.Rule2=
+gui.Anvil.Rule3=
+gui.Anvil.Rule4=
+gui.Anvil.Rule5=
+gui.Anvil.Rule6=
+gui.Anvil.Rule7=
+gui.Anvil.Rule8=
+gui.Anvil.Rule9=
+gui.Anvil.Rule10=
+gui.Anvil.Rule11=
+gui.Anvil.Rule12=
+gui.Anvil.Rule13=
+gui.Anvil.Rule14=
+gui.Anvil.Rule15=
+gui.Anvil.Rule16=
+gui.Anvil.Rule17=
+gui.Anvil.Rule18=
+gui.Anvil.Rule19=
+gui.Anvil.Rule20=
+gui.Anvil.Rule21=
+gui.Anvil.Rule22=
+gui.Anvil.Rule23=
+gui.Anvil.Rule24=
+gui.Anvil.Rule25=
+gui.Anvil.Rule26=
+gui.Anvil.Rule27=
+gui.Anvil.Rule28=
+gui.Anvil.Rule29=
+gui.Anvil.Rule30=
+gui.Anvil.Rule31=
+gui.Anvil.Rule32=
+gui.Anvil.Rule33=
+gui.Anvil.Rule34=
+gui.Anvil.Rule35=
+gui.Anvil.Rule36=
+gui.Anvil.Rule37=
+gui.Anvil.Rule38=
+gui.Anvil.Rule39=
+gui.Anvil.Rule40=
+gui.Anvil.Rule41=
+gui.Anvil.Rule42=
+gui.Anvil.Rule43=
+
+#== Tools/Weapons/Armor GUI ==
+gui.Armor.ForgedBy=
+gui.Armor.Crush=
+gui.Armor.Pierce=
+gui.Armor.Slash=
+
+gui.Bow.Javelins=
+gui.Bow.Arrows=
+gui.Bow.ForgedBy=
+
+gui.DamageType.Error=
+gui.DamageType.Crushing=
+gui.DamageType.Piercing=
+gui.DamageType.Slashing=
+
+#== Barrel GUI ==
+gui.Barrel.Empty=
+gui.Barrel.Seal=
+gui.Barrel.Unseal=
+gui.Barrel.ToggleOff=
+gui.Barrel.ToggleOn=
+gui.Barrel.SealedOn=
+gui.Barrel.Solid=
+gui.Barrel.Liquid=
+gui.barrel.pickling=
+gui.barrel.brining=
+gui.barrel.preserving=
+
+#== Bloomery GUI ==
+gui.Bloomery.Charcoal=Faszén
+gui.Bloomery.Ore=Érc
+
+#== Calendar GUI ==
+gui.Calendar.Calendar=Naptár
+gui.Calendar.DateBioxx=
+gui.Calendar.DateDunk=
+gui.Calendar.DateKitty=
+
+gui.Calendar.Hour=Óra
+gui.Calendar.WitchHour=
+
+gui.Calendar.Day=Nap
+gui.Calendar.Sunday=Hétfő
+gui.Calendar.Monday=Kedd
+gui.Calendar.Tuesday=Szerda
+gui.Calendar.Wednesday=Csütörtök
+gui.Calendar.Thursday=Péntek
+gui.Calendar.Friday=Szombat
+gui.Calendar.Saturday=Vasárnap
+
+gui.Calendar.Season=Évszak
+gui.Calendar.EarlySpring=Kora tavasz
+gui.Calendar.Spring=Tavasz
+gui.Calendar.LateSpring=Késő tavasz
+gui.Calendar.EarlySummer=Kora nyár
+gui.Calendar.Summer=Nyár
+gui.Calendar.LateSummer=Késő nyár
+gui.Calendar.EarlyAutumn=Kora ősz
+gui.Calendar.Autumn=Ősz
+gui.Calendar.LateAutumn=Késő ősz
+gui.Calendar.EarlyWinter=Kora tél
+gui.Calendar.Winter=Tél
+gui.Calendar.LateWinter=Késő tél
+
+gui.Calendar.Date=Dátum
+gui.Calendar.January=Január
+gui.Calendar.February=Február
+gui.Calendar.March=Március
+gui.Calendar.April=Április
+gui.Calendar.May=Május
+gui.Calendar.June=Június
+gui.Calendar.July=Július
+gui.Calendar.August=Augusztus
+gui.Calendar.September=Szeptember
+gui.Calendar.October=Október
+gui.Calendar.November=November
+gui.Calendar.December=December
+
+gui.Calendar.1Hour=1 óra
+gui.Calendar.1Day=1 nap
+gui.Calendar.1Week=1 hét
+gui.Calendar.1Month=1 hónap
+gui.Calendar.1Year=1 év
+
+#== Food GUI ==
+gui.FoodPrep.CreateMeal=
+gui.FoodPrep.Effect=
+gui.FoodPrep.Energy=
+gui.FoodPrep.Filling=
+gui.FoodPrep.Power=
+gui.FoodPrep.Sandwich=Szendvics
+gui.FoodPrep.Salad=Saláta
+
+#== Metals ==
+gui.metal.Bismuth=
+gui.metal.BismuthBronze=
+gui.metal.BlackBronze=
+gui.metal.BlackSteel=
+gui.metal.BlueSteel=
+gui.metal.Brass=
+gui.metal.Bronze=
+gui.metal.Copper=
+gui.metal.Gold=
+gui.metal.HCBlackSteel=
+gui.metal.HCBlueSteel=
+gui.metal.HCRedSteel=
+gui.metal.Lead=
+gui.metal.Nickel=
+gui.metal.PigIron=
+gui.metal.Platinum=
+gui.metal.RedSteel=
+gui.metal.RoseGold=
+gui.metal.Silver=
+gui.metal.Steel=
+gui.metal.SterlingSilver=
+gui.metal.Tin=
+gui.metal.Unknown=
+gui.metal.WeakBlueSteel=
+gui.metal.WeakRedSteel=
+gui.metal.WeakSteel=
+gui.metal.WroughtIron=
+gui.metal.Zinc=
+
+#== Plans GUI ==
+gui.plans.axe=Balta
+gui.plans.bootsplate=Csizma
+gui.plans.bucket=Vödör
+gui.plans.chestplate=Mellvért
+gui.plans.chisel=Véső
+gui.plans.hammer=Kalapács
+gui.plans.helmplate=Sisak
+gui.plans.hoe=Kapa
+gui.plans.ingot=Öntvény
+gui.plans.javelin=Dárda
+gui.plans.knife=Knife
+gui.plans.legsplate=Lábszárvédő
+gui.plans.mace=Buzogány
+gui.plans.pickaxe=Csákány
+gui.plans.propick=
+gui.plans.refinebloom=Finomít
+gui.plans.saw=Fűrész
+gui.plans.scythe=Kasza
+gui.plans.sheet=Lemez
+gui.plans.shovel=Ásó
+gui.plans.splitbloom=
+gui.plans.sword=Kard
+gui.plans.tuyere=Fúvóka
+gui.plans.grill=Grill
+gui.plans.shears=Olló
+gui.plans.trapdoor=Csapóajtó
+
+#== Misc GUI ==
+gui.Blueprint=
+gui.Nametag=
+gui.fertilized=
+gui.Inventory=
+gui.ClearSlot=
+gui.LogPile=
+gui.Output=
+gui.done=
+gui.cancel=
+gui.Sluice.Soil=
+gui.Sluice.Overworked=
+gui.Workbench.Crafting=
+gui.overburdened=
+
+gui.badnbt=
+
+#== Tooltips ==
+gui.Advanced=
+gui.Shift=
+gui.Hold=
+
+gui.slot=
+gui.slot.back=
+
+gui.ShowHelp=
+gui.Help=
+gui.Clay.Inst0=
+gui.Knife.Inst0=
+gui.Knife.Inst1=
+gui.Leather.Inst0=
+gui.LooseRock.Inst0=
+gui.MeltedMetal.Inst0=
+gui.PotteryBase.Inst0=
+gui.PotteryVesselSmall.Inst0=
+gui.RawHide.Inst0=
+gui.Chisel.Inst0=
+gui.Barrel.MoreItems=
+
+gui.Nutrient.A=
+gui.Nutrient.B=
+gui.Nutrient.C=
+
+gui.stage1=
+gui.stage2=
+
+gui.Size.Tiny=Pici
+gui.Size.VerySmall=Nagyon kicsi
+gui.Size.Small=Kicsi
+gui.Size.Medium=Közepes
+gui.Size.Large=Nagy
+gui.Size.VeryLarge=Nagyon nagy
+gui.Size.Huge=Hatalmas
+
+gui.Weight.Light=Könnyű
+gui.Weight.Medium=Közepes
+gui.Weight.Heavy=Nehéz
+
+gui.Reach.Short=Rövid
+gui.Reach.Medium=Közepes
+gui.Reach.Far=Hosszú
+
+gui.hoursRemaining=
+gui.daysRemaining=
+gui.infinite=
+
+#== Food ==
+gui.food.fruit=Gyümölcs
+gui.food.vegetable=Zöldségek
+gui.food.grain=Gabona
+gui.food.protein=Protein
+gui.food.dairy=Tejtermék
+gui.food.amount=Mennyiség
+gui.food.decay=Romlott
+gui.food.salted=Sózott
+
+gui.FoodHeat.Cold=Hideg
+gui.FoodHeat.Warm=Meleg
+
+gui.showtaste=§8Ízlel: (Tartsd nyomva §fL-Ctrl§8)
+gui.taste=§8Taste:
+gui.taste.sweet=Édes
+gui.taste.sour=Savanyú
+gui.taste.salty=Sós
+gui.taste.bitter=Keserű
+gui.taste.savory=Ízletes
+
+gui.taste.novice.sweet1=Édes
+gui.taste.novice.sweet0=Nem édes
+gui.taste.novice.sour1=Savanyú
+gui.taste.novice.sour0=Nem savanyú
+gui.taste.novice.salty1=Sós
+gui.taste.novice.salty0=Nem sós
+gui.taste.novice.bitter1=Keserű
+gui.taste.novice.bitter0=Keserű
+gui.taste.novice.savory1=Ízletes
+gui.taste.novice.savory0=Nem ízletes
+
+gui.taste.adept.sweet0=Nem édes
+gui.taste.adept.sweet1=Enyhén édes
+gui.taste.adept.sweet2=Édes
+gui.taste.adept.sweet3=Elég édes
+gui.taste.adept.sweet4=Nagyon édes
+gui.taste.adept.sweet5=Rendkívül édes
+gui.taste.adept.sour0=Nem savanyú
+gui.taste.adept.sour1=Enyhén savanyú
+gui.taste.adept.sour2=Savanyú
+gui.taste.adept.sour3=Elég savanyú
+gui.taste.adept.sour4=Nagyon savanyú
+gui.taste.adept.sour5=Rendkívül savanyú
+gui.taste.adept.salty0=Nem sós
+gui.taste.adept.salty1=Enyhén sós
+gui.taste.adept.salty2=Sós
+gui.taste.adept.salty3=Elég sós
+gui.taste.adept.salty4=Nagyon sós
+gui.taste.adept.salty5=Rendkívül sós
+gui.taste.adept.bitter0=Nem keserű
+gui.taste.adept.bitter1=Enyhén keserű
+gui.taste.adept.bitter2=Keserű
+gui.taste.adept.bitter3=Elég keserű
+gui.taste.adept.bitter4=Nagyon keserű
+gui.taste.adept.bitter5=Rendkívül keserű
+gui.taste.adept.savory0=Nem ízletes
+gui.taste.adept.savory1=Enyhén ízletes
+gui.taste.adept.savory2=Ízletes
+gui.taste.adept.savory3=Elég ízletes
+gui.taste.adept.savory4=Nagyon ízletes
+gui.taste.adept.savory5=Rendkívül ízletes
+
+gui.taste.0=Nem
+gui.taste.1=Nem nagyon
+gui.taste.2=Némileg
+gui.taste.3=Mérsékelten
+gui.taste.4=Teljesen
+gui.taste.5=Túlzottan
+gui.taste.6=Nagyon
+gui.taste.7=Rendkívüli módon
+gui.taste.8=Nevetségesen
+
+word.pickled=Pácolt
+word.brined=Sós vízben pácolt
+word.cooked=Főtt
+word.salted=Sózott
+word.smoked=Füstölt
+word.dried=Szárított
+
+food.cooked.rare=Félig sült
+food.cooked.medrare=Félig átsült
+food.cooked.med=Közepesen sült
+food.cooked.medwell=Közepesen jól átsült
+food.cooked.well=Jól átsült
+food.cooked.0=Nagyon könnyű
+food.cooked.1=Könnyű
+food.cooked.2=Közepes
+food.cooked.3=Sötét
+food.cooked.4=Nagyon sötét
+
+gui.Torch.CatchingFire=Futótűz
+gui.Torch.Lit=Megvilágított
+
+gui.ItemHeat.Liquid=Folyékony
+gui.ItemHeat.Solidified=Megszilárdult.
+gui.ItemHeat.Caution=Óvatosság
+gui.ItemHeat.Warming=Figyelmeztetés
+gui.ItemHeat.Hot=Meleg
+gui.ItemHeat.VeryHot=Forró
+gui.ItemHeat.FaintRed=Halványvörös
+gui.ItemHeat.DarkRed=Sötétvörös
+gui.ItemHeat.BrightRed=Élénkvörös
+gui.ItemHeat.Orange=Narancs
+gui.ItemHeat.Yellow=Sárga
+gui.ItemHeat.YellowWhite=Sárgásfehér
+gui.ItemHeat.White=Fehér
+gui.ItemHeat.BrilliantWhite=Ragyogófehér
+
+gui.ingot.workable=Megmunkálható
+gui.ingot.weldable=Hegeszthető
+gui.ingot.danger=**Veszély**
+
+gui.milk.fresh=Friss
+gui.milk.old=Régi
+gui.milk.sour=Savanyú
+
+gui.units=Egység
+
+#== WAILA ==
+gui.useless=Hasztalan
+gui.growth=Növekedés
+gui.mature=Érett
+gui.metal.Iron=Vas
+gui.tier=
+gui.fuel=
+gui.Green Apple=
+gui.Red Apple=
+gui.Banana=
+gui.Cherry=
+gui.Lemon=
+gui.Olive=
+gui.Orange=
+gui.Peach=
+gui.Plum=
+gui.pile=
+gui.weaving=
+gui.eggs=
+gui.fertEggs=
+gui.logs=
+gui.gems=
+
+#== Chat Messages ==
+gui.GoldPan.UseFull=Folyó vízben kell használni.
+gui.goldpan.overused=
+gui.seeds.failedTemp=
+gui.seeds.failedSun=
+
+gui.ProPick.Found=Talált
+gui.ProPick.FoundTraces=
+gui.ProPick.FoundSmall=
+gui.ProPick.FoundMedium=
+gui.ProPick.FoundLarge=
+"gui.ProPick.FoundVeryLarge=
+"
+gui.ProPick.FoundNothing=Nem talál semmi érdekeset.
+
+#== Creative Tabs ==
+itemGroup.TFCArmor=(TFC) Pajzs
+itemGroup.TFCMaterials=(TFC) Anyagok
+itemGroup.TFCMisc=(TFC) Egyéb
+itemGroup.TFCPottery=(TFC) Fazekasság
+itemGroup.TFCTools=(TFC) Szerszámok
+itemGroup.TFCWeapons=(TFC) Fegyverek
+itemGroup.TFCDevices=(TFC) Eszközök
+itemGroup.TFCFoods=(TFC) Élelmiszerek
+itemGroup.TFCBuilding=(TFC) Építő blokkok
+itemGroup.TFCDecoration=(TFC) Dekorációs blokkok
+
+#== Skill GUI ==
+skill.armorsmith=Pajzs kovácsolás
+skill.gensmith=Általános kovácsolás
+skill.toolsmith=Szerszám kovácsolás
+skill.weaponsmith=Fegyer kovácsolás
+skill.agriculture=Mezőgazdaság
+skill.cooking=Főzés
+skill.prospecting=Kutatás
+skill.butchering=Hentesség
+gui.skill.novice=Kezdő
+gui.skill.adept=Hozzáértő
+gui.skill.expert=Szakértő
+gui.skill.master=Mester
+gui.skillpage=Szakértelem
+
+#==================
+#= Error Messages =
+#==================
+error.error=HIBA:
+error.NBT=hiányzó NBT információ.
+error.OreCFG=A következő blokk mező a TFCOre.cfg -ben érvénytelen:
+error.Contact=Kérjük, hogy jelentsd a TerraFirmaCraft Support -nak.
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================
+tile.Hopper.name=
+fluid.oliveoil=
+tile.OilLamp.Gold.name=
+tile.OilLamp.Platinum.name=
+tile.OilLamp.RoseGold.name=
+tile.OilLamp.Silver.name=
+tile.OilLamp.SterlingSilver.name=
+tile.OilLamp.BlueSteel.name=
+gui.plans.hopper=
+gui.plans.oillamp=

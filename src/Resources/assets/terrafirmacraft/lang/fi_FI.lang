@@ -2035,6 +2035,7 @@ tile.Fungi.mushroom_brown.name=
 tile.Fungi.mushroom_red.name=
 tile.Cactus.name=Kaktus
 tile.Pumpkin.name=Kurpitsa
+tile.LitPumpkin.name=
 tile.Moss.name=Sammalta
 tile.Thatch.name=Olki
 tile.Flora.Golden Rod.name=
@@ -2353,6 +2354,10 @@ gui.Reach.Short=
 gui.Reach.Medium=
 gui.Reach.Far=
 
+gui.hoursRemaining=
+gui.daysRemaining=
+gui.infinite=
+
 #== Food ==
 gui.food.fruit=
 gui.food.vegetable=
@@ -2478,7 +2483,22 @@ gui.growth=
 gui.mature=
 gui.metal.Iron=
 gui.tier=
-gui.progress=
+gui.fuel=
+gui.Green Apple=
+gui.Red Apple=
+gui.Banana=
+gui.Cherry=
+gui.Lemon=
+gui.Olive=
+gui.Orange=
+gui.Peach=
+gui.Plum=
+gui.pile=
+gui.weaving=
+gui.eggs=
+gui.fertEggs=
+gui.logs=
+gui.gems=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Pitää käyttää juoksevan veden alla.
@@ -2532,3 +2552,13 @@ error.Contact=
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+tile.Hopper.name=
+fluid.oliveoil=
+tile.OilLamp.Gold.name=
+tile.OilLamp.Platinum.name=
+tile.OilLamp.RoseGold.name=
+tile.OilLamp.Silver.name=
+tile.OilLamp.SterlingSilver.name=
+tile.OilLamp.BlueSteel.name=
+gui.plans.hopper=
+gui.plans.oillamp=

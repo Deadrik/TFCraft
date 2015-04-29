@@ -995,23 +995,23 @@ item.Loom.White Elm.name=楡の織機
 item.Loom.Willow.name=柳の織機
 
 #== Wood Blocks ==
-tile.Chest.Acacia.name=
-tile.Chest.Ash.name=
-tile.Chest.Aspen.name=
-tile.Chest.Birch.name=
-tile.Chest.Chestnut.name=
-tile.Chest.Douglas Fir.name=
-tile.Chest.Hickory.name=
-tile.Chest.Kapok.name=
-tile.Chest.Maple.name=
-tile.Chest.Oak.name=
-tile.Chest.Pine.name=
-tile.Chest.Sequoia.name=
-tile.Chest.Spruce.name=
-tile.Chest.Sycamore.name=
-tile.Chest.White Cedar.name=
-tile.Chest.White Elm.name=
-tile.Chest.Willow.name=
+tile.Chest.Acacia.name=アカシアのチェスト
+tile.Chest.Ash.name=トネリコのチェスト
+tile.Chest.Aspen.name=アスペンのチェスト
+tile.Chest.Birch.name=白樺のチェスト
+tile.Chest.Chestnut.name=栗の木のチェスト
+tile.Chest.Douglas Fir.name=ダグラス・ファーのチェスト
+tile.Chest.Hickory.name=クルミのチェスト
+tile.Chest.Kapok.name=パンヤのチェスト
+tile.Chest.Maple.name=楓のチェスト
+tile.Chest.Oak.name=樫のチェスト
+tile.Chest.Pine.name=松のチェスト
+tile.Chest.Sequoia.name=セコイアのチェスト
+tile.Chest.Spruce.name=トウヒのチェスト
+tile.Chest.Sycamore.name=サイカモアのチェスト
+tile.Chest.White Cedar.name=栴檀のチェスト
+tile.Chest.White Elm.name=楡のチェスト
+tile.Chest.Willow.name=柳のチェスト
 
 tile.log2.Acacia.name=アカシアの丸太
 tile.log.Ash.name=トネリコの丸太
@@ -2035,6 +2035,7 @@ tile.Fungi.mushroom_brown.name=茶キノコ
 tile.Fungi.mushroom_red.name=赤キノコ
 tile.Cactus.name=サボテン
 tile.Pumpkin.name=カボチャ
+tile.LitPumpkin.name=
 tile.Moss.name=苔
 tile.Thatch.name=ふきわら
 tile.Flora.Golden Rod.name=麒麟草
@@ -2353,6 +2354,10 @@ gui.Reach.Short=近
 gui.Reach.Medium=中
 gui.Reach.Far=遠
 
+gui.hoursRemaining=
+gui.daysRemaining=
+gui.infinite=
+
 #== Food ==
 gui.food.fruit=果物
 gui.food.vegetable=野菜
@@ -2478,7 +2483,22 @@ gui.growth=
 gui.mature=
 gui.metal.Iron=
 gui.tier=
-gui.progress=
+gui.fuel=
+gui.Green Apple=
+gui.Red Apple=
+gui.Banana=
+gui.Cherry=
+gui.Lemon=
+gui.Olive=
+gui.Orange=
+gui.Peach=
+gui.Plum=
+gui.pile=
+gui.weaving=
+gui.eggs=
+gui.fertEggs=
+gui.logs=
+gui.gems=
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=流水の下で使用してください。
@@ -2532,3 +2552,13 @@ error.Contact=公式サポートに報告してください
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+tile.Hopper.name=ホッパー
+fluid.oliveoil=オリーブオイル
+tile.OilLamp.Gold.name=金のランプ
+tile.OilLamp.Platinum.name=白金のランプ
+tile.OilLamp.RoseGold.name=
+tile.OilLamp.Silver.name=銀のランプ
+tile.OilLamp.SterlingSilver.name=
+tile.OilLamp.BlueSteel.name=青鋼のランプ
+gui.plans.hopper=ホッパー
+gui.plans.oillamp=オイルランプ

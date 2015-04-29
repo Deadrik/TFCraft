@@ -46,9 +46,9 @@ entity.spiderTFC.name=蜘蛛
 entity.zombieTFC.name=殭屍
 
 entity.arrowTFC.name=箭矢
-entity.standTFC.name=
-entity.barrel.name=
-entity.fallingBlock.name=
+entity.standTFC.name=盔甲架
+entity.barrel.name=桶子
+entity.fallingBlock.name=落下的方塊
 
 entity.notFamiliar=這隻動物不會理你。
 fishingRod.lineTension=線快被拉斷了！
@@ -1892,7 +1892,7 @@ tile.NestBox.name=巢箱
 item.SluiceItem.name=洗礦閘
 tile.Sluice.name=洗礦閘
 tile.LeatherRack.name=皮革架
-tile.FoodPrep.name=食物準備
+tile.FoodPrep.name=食物調理台
 tile.MetalSheet.name=金屬片
 tile.ingotpile.name=金屬錠堆
 tile.SmokeRack.name=煙燻架
@@ -2035,6 +2035,7 @@ tile.Fungi.mushroom_brown.name=褐蘑菇
 tile.Fungi.mushroom_red.name=紅蘑菇
 tile.Cactus.name=仙人掌
 tile.Pumpkin.name=南瓜
+tile.LitPumpkin.name=
 tile.Moss.name=青苔
 tile.Thatch.name=茅草
 tile.Flora.Golden Rod.name=一枝黃
@@ -2353,6 +2354,10 @@ gui.Reach.Short=近距
 gui.Reach.Medium=中距
 gui.Reach.Far=遠距
 
+gui.hoursRemaining=
+gui.daysRemaining=
+gui.infinite=
+
 #== Food ==
 gui.food.fruit=水 果
 gui.food.vegetable=蔬 菜
@@ -2478,10 +2483,25 @@ gui.growth=成長中
 gui.mature=成熟
 gui.metal.Iron=鐵
 gui.tier=級別
-gui.progress=進度
+gui.fuel=
+gui.Green Apple=
+gui.Red Apple=
+gui.Banana=
+gui.Cherry=
+gui.Lemon=
+gui.Olive=
+gui.Orange=
+gui.Peach=
+gui.Plum=
+gui.pile=
+gui.weaving=
+gui.eggs=
+gui.fertEggs=
+gui.logs=
+gui.gems=
 
 #== Chat Messages ==
-gui.GoldPan.UseFull=必須於流水中使用。
+gui.GoldPan.UseFull=必須用於流水下。
 gui.goldpan.overused=這範圍的礦物似乎已淘盡。你大概不會淘到更多的礦物了。
 gui.seeds.failedTemp=現在溫度不足以種植此作物，它活不了多久。
 gui.seeds.failedSun=此處日照不足，它活不了多久。
@@ -2526,9 +2546,19 @@ gui.skillpage=技術
 #==================
 error.error=錯誤：
 error.NBT=NBT數據遺失
-error.OreCFG=方塊於TFCOre.cfg中的設定為無效
+error.OreCFG=以下方塊於TFCOre.cfg中的設定為無效
 error.Contact=請回報TFC支援
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+tile.Hopper.name=
+fluid.oliveoil=
+tile.OilLamp.Gold.name=
+tile.OilLamp.Platinum.name=
+tile.OilLamp.RoseGold.name=
+tile.OilLamp.Silver.name=
+tile.OilLamp.SterlingSilver.name=
+tile.OilLamp.BlueSteel.name=
+gui.plans.hopper=
+gui.plans.oillamp=
