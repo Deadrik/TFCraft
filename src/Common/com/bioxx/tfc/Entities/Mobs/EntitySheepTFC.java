@@ -486,7 +486,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		hard_mod = nbt.getFloat ("Hardiness Modifier");
 
 		familiarity = nbt.getInteger("Familiarity");
-		lastFamiliarityUpdate = nbt.getLong("lastFamiliarityUpdate");
+		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
 		familiarizedToday = nbt.getBoolean("Familiarized Today");
 
 		hunger = nbt.getInteger ("Hunger");
