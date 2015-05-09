@@ -47,11 +47,15 @@ public class ItemMetalSheet extends ItemTerra implements ISmeltable
 		boolean isSuccessful = false;
 		if(!world.isRemote)
 		{
+			// Sheets that have temperature or have been worked cannot be placed.
 			if(itemstack.hasTagCompound())
 				return false;
+
 			TEMetalSheet te = null;
 			int[] sides = sidesMap[side];
-			if(world.getBlock(x, y, z) == TFCBlocks.MetalSheet)
+
+			// Adding to a sheet block with the same type of sheet
+			if (world.getBlock(x, y, z) == TFCBlocks.MetalSheet && isValid(world, x, y, z))
 			{
 				te = (TEMetalSheet)world.getTileEntity(x, y, z);
 				switch(side)
@@ -61,57 +65,59 @@ public class ItemMetalSheet extends ItemTerra implements ISmeltable
 					{
 						te.toggleBottom(true);
 						isSuccessful = true;
-						break;
 					}
+					break; // Break must always be called so it doesn't loop through all the sides
 				case 1:
 					if(!te.TopExists())
 					{
 						te.toggleTop(true);
 						isSuccessful = true;
-						break;
 					}
+					break;
 				case 2:
 					if(!te.NorthExists())
 					{
 						te.toggleNorth(true);
 						isSuccessful = true;
-						break;
 					}
+					break;
 				case 3:
 					if(!te.SouthExists())
 					{
 						te.toggleSouth(true);
 						isSuccessful = true;
-						break;
 					}
+					break;
 				case 4:
 					if(!te.EastExists())
 					{
 						te.toggleEast(true);
 						isSuccessful = true;
-						break;
 					}
+					break;
 				case 5:
 					if(!te.WestExists())
 					{
 						te.toggleWest(true);
 						isSuccessful = true;
-						break;
 					}
+					break;
 				}
+
+				// Update block so it properly renders the newly placed side.
+				if (isSuccessful)
+					world.markBlockForUpdate(x, y, z);
 			}
-			else if(isValid(world, sides[0] + x, sides[1] + y, sides[2] + z))
+			// Creating a new sheet block. Cannot click on a sheet block to make a new adjacent one.
+			else if (world.getBlock(x, y, z) != TFCBlocks.MetalSheet && isValid(world, sides[0] + x, sides[1] + y, sides[2] + z))
 			{
-				if(world.getBlock(x, y, z) != TFCBlocks.MetalSheet)
-				{
-					world.setBlock( sides[0] + x, sides[1] + y, sides[2] + z, TFCBlocks.MetalSheet);
-					te = (TEMetalSheet)world.getTileEntity( sides[0] + x, sides[1] + y, sides[2] + z);
-					te.metalID = this.metalID;
-					te.sheetStack = itemstack.copy();
-					te.sheetStack.stackSize = 1;
-					te.toggleBySide(flipSide(side), true);
-					isSuccessful = true;
-				}
+				world.setBlock(sides[0] + x, sides[1] + y, sides[2] + z, TFCBlocks.MetalSheet);
+				te = (TEMetalSheet) world.getTileEntity(sides[0] + x, sides[1] + y, sides[2] + z); //isValid prevents ClassCastException
+				te.metalID = this.metalID;
+				te.sheetStack = itemstack.copy();
+				te.sheetStack.stackSize = 1; // stackSize is always 1 until the block is broken, and then updated based on the sides.
+				te.toggleBySide(flipSide(side), true);
+				isSuccessful = true;
 			}
 			else
 			{
@@ -142,10 +148,10 @@ public class ItemMetalSheet extends ItemTerra implements ISmeltable
 
 	public boolean isValid(World world, int i, int j, int k)
 	{
-		Block bid = world.getBlock(i, j, k);
-		if (bid.isAir(world, i, j, k))
+		Block block = world.getBlock(i, j, k);
+		if (block.isAir(world, i, j, k))
 			return true;
-		if(bid == TFCBlocks.MetalSheet)
+		if (block == TFCBlocks.MetalSheet && world.getTileEntity(i, j, k) instanceof TEMetalSheet)
 		{
 			TEMetalSheet te = (TEMetalSheet)world.getTileEntity(i, j, k);
 			if(te.metalID == this.metalID)
