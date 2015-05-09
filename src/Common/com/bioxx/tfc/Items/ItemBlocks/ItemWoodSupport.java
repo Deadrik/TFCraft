@@ -109,6 +109,7 @@ public class ItemWoodSupport extends ItemTerraBlock
 					{
 						placeBlockAt(getBlock(), itemstack, player, world, x, y-j, z, itemstack.getItemDamage(), 3);
 						--itemstack.stackSize;
+						world.markBlockForUpdate(x, y - j, z);
 					}
 					else break;
 				}
