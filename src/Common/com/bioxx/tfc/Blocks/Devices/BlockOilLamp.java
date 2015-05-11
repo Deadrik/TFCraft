@@ -121,7 +121,7 @@ public class BlockOilLamp extends BlockTerraContainer
 				TEOilLamp te = (TEOilLamp) world.getTileEntity(x, y, z);
 				if (te != null)
 				{
-					te.updateLampFuel();
+					te.updateLampFuel(false); // Update lamp fuel, but don't burn fuel for time passed while lamp was off before turning the lamp on.
 					if(te.isFuelValid())
 						if(te.getFuelTimeLeft() > 0)
 							world.setBlockMetadataWithNotify(x, y, z, meta-8, 3);
@@ -132,7 +132,7 @@ public class BlockOilLamp extends BlockTerraContainer
 				TEOilLamp te = (TEOilLamp) world.getTileEntity(x, y, z);
 				if (te != null)
 				{
-					te.updateLampFuel();
+					te.updateLampFuel(true); // Update lamp fuel and burn fuel for time passed before turning the lamp off.
 				}
 				world.setBlockMetadataWithNotify(x, y, z, meta+8, 3);
 			}
@@ -235,7 +235,7 @@ public class BlockOilLamp extends BlockTerraContainer
 			TEOilLamp te = (TEOilLamp) world.getTileEntity(x, y, z);
 			if (te != null)
 			{
-				te.updateLampFuel();
+				te.updateLampFuel(true); // Burn fuel for time passed while lamp is on.
 				if(te.getFuelTimeLeft() == 0)
 					world.setBlockMetadataWithNotify(x, y, z, meta+8, 3);
 			}

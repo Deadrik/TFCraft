@@ -30,11 +30,15 @@ public class TEOilLamp extends TELightEmitter
 		return f;
 	}
 
-	public void updateLampFuel()
+	/**
+	 *  Updates the fuel timer of the lamp. Set burn to false to update the timer without consuming fuel, for when the lamp was off.
+	 * @param burn
+	 */
+	public void updateLampFuel(Boolean burn)
 	{
 		if((int)TFC_Time.getTotalHours() - TFCOptions.oilLampFuelMult >= hourPlaced)
 		{
-			int diff = (int)TFC_Time.getTotalHours() - this.hourPlaced;
+			int diff = burn ? (int) TFC_Time.getTotalHours() - this.hourPlaced : 0; // Don't burn any fuel if set to false.
 			this.hourPlaced = (int)TFC_Time.getTotalHours();
 
 			if(fuel != null && getFuel().getFluid() != TFCFluids.LAVA && this.getFuelAmount() > 0)
