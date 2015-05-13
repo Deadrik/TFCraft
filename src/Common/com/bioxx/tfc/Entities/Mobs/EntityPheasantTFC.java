@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -41,7 +42,10 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	@Override
 	protected boolean canDespawn()
 	{
-		return this.ticksExisted > 3000 && !wasRoped;
+		if (!TFCOptions.enablePheasants)
+			return true;
+		else
+			return this.ticksExisted > 3000 && !wasRoped;
 	}
 
 	@Override

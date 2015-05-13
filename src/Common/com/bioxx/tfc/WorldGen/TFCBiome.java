@@ -30,6 +30,7 @@ import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenDouglasFir;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenPineShort;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenPineTall;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenRedwoodXL;
+import com.bioxx.tfc.api.TFCOptions;
 
 public class TFCBiome extends BiomeGenBase
 {
@@ -144,9 +145,12 @@ public class TFCBiome extends BiomeGenBase
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 8, 2, 4));
 		 */
 		//This is to balance out the spawning, so that entities with weight 1 spawn less
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 16, 0, 0));
+		if (TFCOptions.enablePheasants)
+		{
+			this.spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 16, 0, 0));
 
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 2, 1, 4));
+			this.spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 2, 1, 4));
+		}
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 1, 1, 4));
 
 		this.spawnableWaterCreatureList.clear();
