@@ -2176,8 +2176,8 @@ gui.Bloomery.Ore=Руда
 #== Calendar GUI ==
 gui.Calendar.Calendar=Календарь
 gui.Calendar.DateBioxx=День рождения Bioxx'а!
-gui.Calendar.DateDunk=Артемьев день
-gui.Calendar.DateKitty=Битва при Ватерлоо
+gui.Calendar.DateDunk=
+gui.Calendar.DateKitty=
 
 gui.Calendar.Hour=Час
 gui.Calendar.WitchHour=Ведьмин час
