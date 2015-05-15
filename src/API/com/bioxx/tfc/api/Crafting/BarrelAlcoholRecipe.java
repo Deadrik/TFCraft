@@ -5,6 +5,7 @@ import java.util.Stack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.api.Food;
@@ -39,27 +40,27 @@ public class BarrelAlcoholRecipe extends BarrelRecipe
 	}
 
 	@Override
-	public Boolean matches(ItemStack inIS, FluidStack inFluid)
+	public Boolean matches(ItemStack itemstack, FluidStack inFluid)
 	{
 		if(recipeIS.hasTagCompound())
 		{
-			if(inIS == null || !inIS.hasTagCompound())
+			if(itemstack == null || !itemstack.hasTagCompound())
 			{
 				return false;
 			}
 			if(recipeIS.getItem() instanceof ItemFoodTFC)
 			{
-				if(!(inIS.getItem() instanceof ItemFoodTFC))
+				if(!(itemstack.getItem() instanceof ItemFoodTFC))
 				{
 					return false;
 				}
-				float inW = recipeIS.getTagCompound().getFloat("foodWeight");
-				float itW = inIS.getTagCompound().getFloat("foodWeight");
-				float percent = itW/(inW * ((float)inFluid.amount/(float)recipeFluid.amount));
-				if(percent < 0.25f)
+				float recipeWeight = recipeIS.getTagCompound().getFloat("foodWeight");
+				float itemstackWeight = itemstack.getTagCompound().getFloat("foodWeight");
+				float percent = itemstackWeight/(recipeWeight * ((float)inFluid.amount/(float)recipeFluid.amount));
+				if (percent < 0.25f || percent > 0.75f)
 					return false;
 			}
 		}
-		return inIS.getItem() == recipeIS.getItem() && inFluid.isFluidEqual(recipeFluid);
+		return OreDictionary.itemMatches(recipeIS, itemstack, false) && inFluid.isFluidEqual(recipeFluid);
 	}
 }

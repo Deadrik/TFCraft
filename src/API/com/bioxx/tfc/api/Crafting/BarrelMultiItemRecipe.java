@@ -4,6 +4,7 @@ import java.util.Stack;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Interfaces.IFood;
@@ -81,7 +82,7 @@ public class BarrelMultiItemRecipe extends BarrelRecipe
 			float w = ((IFood) inIS.getItem()).getFoodWeight(inIS);
 			if (inFS.isFluidEqual(recipeFluid) && (w * recipeOutFluid.amount <= inFS.amount))
 			{
-				return true;
+				return OreDictionary.itemMatches(recipeIS, inIS, false);
 			}
 			else
 				return false;
