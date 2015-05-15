@@ -88,9 +88,13 @@ public class WorldGenLooseRocks implements IWorldGenerator
 	{
 		chunkX *= 16;
 		chunkZ *= 16;
-		TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(chunkX, chunkZ);
-		if(biome == TFCBiome.ocean)
-			return;
+
+		if (world.getBiomeGenForCoords(chunkX, chunkZ) instanceof TFCBiome) // Fixes ClassCastException
+		{
+			TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(chunkX, chunkZ);
+			if (biome == TFCBiome.ocean)
+				return;
+		}
 
 		//rocks/ore
 		for (int var2 = 0; var2 < 8; var2++)

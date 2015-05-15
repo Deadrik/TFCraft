@@ -110,11 +110,14 @@ public class BlockSapling extends BlockTerraContainer
 		else if(meta == 9 || meta == 14|| meta == 15)
 			growSpeed = 1.6f;
 
-		TESapling te = (TESapling) world.getTileEntity(i, j, k);
+		if (world.getTileEntity(i, j, k) instanceof TESapling)
+		{
+			TESapling te = (TESapling) world.getTileEntity(i, j, k);
 
-		// Set the growTime tick timestamp to be 7-11.2 days times config multiplier from now, plus up to an extra day.
-		if(te != null && te.growTime == 0)
-			te.growTime = (long) (TFC_Time.getTotalTicks() + (TFC_Time.dayLength * 7 * growSpeed * TFCOptions.saplingTimerMultiplier) + (world.rand.nextFloat() * TFC_Time.dayLength));
+			// Set the growTime tick timestamp to be 7-11.2 days times config multiplier from now, plus up to an extra day.
+			if (te != null && te.growTime == 0)
+				te.growTime = (long) (TFC_Time.getTotalTicks() + (TFC_Time.dayLength * 7 * growSpeed * TFCOptions.saplingTimerMultiplier) + (world.rand.nextFloat() * TFC_Time.dayLength));
+		}
 	}
 
 	@Override

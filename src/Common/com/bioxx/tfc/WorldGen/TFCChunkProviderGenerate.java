@@ -196,7 +196,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		BlockCollapsible.fallInstantly = true;
 		int xCoord = chunkX * 16;
 		int zCoord = chunkZ * 16;
-		TFCBiome biome = (TFCBiome) this.worldObj.getBiomeGenForCoords(xCoord + 16, zCoord + 16);
+		TFCBiome biome = null;
+
+		if (this.worldObj.getBiomeGenForCoords(xCoord + 16, zCoord + 16) instanceof TFCBiome) // Fixes ClassCastException
+		{
+			biome = (TFCBiome) this.worldObj.getBiomeGenForCoords(xCoord + 16, zCoord + 16);
+		}
+
 		this.rand.setSeed(this.worldObj.getSeed());
 		long var7 = this.rand.nextLong() / 2L * 2L + 1L;
 		long var9 = this.rand.nextLong() / 2L * 2L + 1L;
@@ -223,8 +229,11 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			//fissureGen.generate(this.worldObj, this.rand, x, y, z);
 		}
 
-		biome.decorate(this.worldObj, this.rand, xCoord, zCoord);
-		SpawnerAnimalsTFC.performWorldGenSpawning(this.worldObj, biome, xCoord + 8, zCoord + 8, 16, 16, this.rand);
+		if (biome != null)
+		{
+			biome.decorate(this.worldObj, this.rand, xCoord, zCoord);
+			SpawnerAnimalsTFC.performWorldGenSpawning(this.worldObj, biome, xCoord + 8, zCoord + 8, 16, 16, this.rand);
+		}
 
 		for (x = 0; x < 16; x++)
 		{

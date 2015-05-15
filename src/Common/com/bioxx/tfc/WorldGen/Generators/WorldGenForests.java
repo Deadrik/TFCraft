@@ -41,7 +41,6 @@ public class WorldGenForests implements IWorldGenerator
 
 		if (world.getBiomeGenForCoords(chunkX, chunkZ) instanceof TFCBiome) // Fixes ClassCastException
 		{
-
 			TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(chunkX, chunkZ);
 			if (biome == TFCBiome.ocean)
 				return;

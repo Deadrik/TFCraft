@@ -30,7 +30,8 @@ public class ChatListenerTFC
 
 				if(event.message.charAt(0) != '/')
 				{
-					if(s.indexOf(s2) != -1 && rand.nextInt(11-(int)(soberTime/1000)) == 0)
+					int chance = Math.max(1, 11 - (int) (soberTime / 1000)); // Can't run rand.nextInt on a negative number.
+					if (s.indexOf(s2) != -1 && rand.nextInt(chance) == 0)
 					{
 						int n = rand.nextInt(2);
 						int m = 0;

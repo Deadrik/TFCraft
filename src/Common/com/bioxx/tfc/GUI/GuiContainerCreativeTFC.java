@@ -885,8 +885,11 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		ItemStack itemstack = par1CreativeTabs.getIconItemStack();
-		itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.getTextureManager(), itemstack, l, i1);
-		itemRender.renderItemOverlayIntoGUI(this.fontRendererObj, this.mc.getTextureManager(), itemstack, l, i1);
+		if (itemstack != null)
+		{
+			itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.getTextureManager(), itemstack, l, i1);
+			itemRender.renderItemOverlayIntoGUI(this.fontRendererObj, this.mc.getTextureManager(), itemstack, l, i1);
+		}
 		GL11.glDisable(GL11.GL_LIGHTING);
 		itemRender.zLevel = 0.0F;
 		this.zLevel = 0.0F;
