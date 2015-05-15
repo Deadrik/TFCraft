@@ -36,10 +36,11 @@ public class WorldGenForests implements IWorldGenerator
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
 	{
+		chunkX *= 16;
+		chunkZ *= 16;
+
 		if (world.getBiomeGenForCoords(chunkX, chunkZ) instanceof TFCBiome) // Fixes ClassCastException
 		{
-			chunkX *= 16;
-			chunkZ *= 16;
 
 			TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(chunkX, chunkZ);
 			if (biome == TFCBiome.ocean)
