@@ -156,20 +156,19 @@ public class TEBloomery extends NetworkTileEntity
 				charcoalCount = 0;
 
 			/* Calculate how much ore the bloomery can hold. */
-			if(isStackValid(xCoord + direction[0], yCoord + 3, zCoord + direction[1]) && 
-					isStackValid(xCoord + direction[0], yCoord + 2, zCoord + direction[1]) && 
-					isStackValid(xCoord + direction[0], yCoord + 1, zCoord + direction[1]))
-			{
-				maxCount = 24;
-			}
-			else if(isStackValid(xCoord + direction[0], yCoord + 2, zCoord + direction[1]) &&
-					isStackValid(xCoord + direction[0], yCoord + 1, zCoord + direction[1]))
-			{
-				maxCount = 16;
-			}
-			else if(isStackValid(xCoord + direction[0], yCoord + 1, zCoord + direction[1]))
+			if (isStackValid(xCoord + direction[0], yCoord + 1, zCoord + direction[1]))
 			{
 				maxCount = 8;
+
+				if (isStackValid(xCoord + direction[0], yCoord + 2, zCoord + direction[1]))
+				{
+					maxCount = 16;
+
+					if (isStackValid(xCoord + direction[0], yCoord + 3, zCoord + direction[1]))
+					{
+						maxCount = 24;
+					}
+				}
 			}
 
 			int moltenHeight = Math.max((count/2) - 1, 0);
@@ -326,7 +325,10 @@ public class TEBloomery extends NetworkTileEntity
 				if(((BlockEarlyBloomery)worldObj.getBlock(xCoord, yCoord, zCoord)).canBlockStay(worldObj, xCoord, yCoord, zCoord))
 					validationCheck = 600;
 				else
+				{
 					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+					worldObj.spawnEntityInWorld(new EntityItem(worldObj, xCoord, yCoord, zCoord, new ItemStack(TFCBlocks.EarlyBloomery, 1)));
+				}
 			}
 			else
 				validationCheck--;
