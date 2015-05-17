@@ -2499,6 +2499,7 @@ gui.eggs=Eggs
 gui.fertEggs=Fertilized Eggs
 gui.logs=Logs
 gui.gems=Gems
+option.tfc.oreQuality=Show ore quality
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=Must use under flowing water.

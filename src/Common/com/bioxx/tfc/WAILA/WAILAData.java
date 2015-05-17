@@ -267,6 +267,8 @@ public class WAILAData implements IWailaDataProvider
 
 	public static void callbackRegister(IWailaRegistrar reg)
 	{
+		reg.addConfig("TerraFirmaCraft", "tfc.oreQuality");
+
 		reg.registerStackProvider(new WAILAData(), BlockAnvil.class);
 		reg.registerBodyProvider(new WAILAData(), TEAnvil.class);
 		reg.registerNBTProvider(new WAILAData(), TEAnvil.class);
@@ -482,10 +484,15 @@ public class WAILAData implements IWailaDataProvider
 	{
 		int meta = accessor.getMetadata();
 		TEOre te = (TEOre) accessor.getTileEntity();
+		ItemStack itemstack = null;
 
 		if (accessor.getBlock() == TFCBlocks.Ore) // Metals & Coal
 		{
-			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, getOreGrade(te, meta));
+			if (config.getConfig("tfc.oreQuality"))
+				itemstack = new ItemStack(TFCItems.OreChunk, 1, getOreGrade(te, meta)); // Shows specific quality ore.
+			else
+				itemstack = new ItemStack(TFCItems.OreChunk, 1, meta); // All normal quality ores.
+
 			if (meta == 14 || meta == 15) // Bituminous Coal & Lignite
 				itemstack = new ItemStack(TFCItems.Coal);
 
@@ -493,7 +500,7 @@ public class WAILAData implements IWailaDataProvider
 		}
 		else if (accessor.getBlock() == TFCBlocks.Ore2) // Minerals
 		{
-			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length);
+			itemstack = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length);
 			if (meta == 5)
 				itemstack = new ItemStack(TFCItems.GemDiamond); // Kaolinite
 			else if (meta == 13)
@@ -503,7 +510,7 @@ public class WAILAData implements IWailaDataProvider
 		}
 		else if (accessor.getBlock() == TFCBlocks.Ore3) // Minerals
 		{
-			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length);
+			itemstack = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length);
 			return itemstack;
 		}
 
@@ -1029,13 +1036,17 @@ public class WAILAData implements IWailaDataProvider
 				return currenttip;
 			}
 
-			TEOre te = (TEOre) accessor.getTileEntity();
+			if (config.getConfig("tfc.oreQuality"))
+			{
+				TEOre te = (TEOre) accessor.getTileEntity();
 
-			int ore = getOreGrade(te, meta);
+				int ore = getOreGrade(te, meta);
 
-			int units = ore < 14 ? TFCOptions.normalOreUnits : ore < 49 ? TFCOptions.richOreUnits : ore < 63 ? TFCOptions.poorOreUnits : 0;
-			if (units > 0)
-				currenttip.add(TFC_Core.translate("gui.units") + " : " + units);
+				int units = ore < 14 ? TFCOptions.normalOreUnits : ore < 49 ? TFCOptions.richOreUnits : ore < 63 ? TFCOptions.poorOreUnits : 0;
+				if (units > 0)
+					currenttip.add(TFC_Core.translate("gui.units") + " : " + units);
+			}
+
 		}
 		else if (accessor.getBlock() == TFCBlocks.Ore2)
 		{
