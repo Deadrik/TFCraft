@@ -18,6 +18,7 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.TFCBlocks;
@@ -182,7 +183,15 @@ public class ItemGoldPan extends ItemTerra
 							if(uses > 0)
 								is.setItemDamage((is.getItemDamage() & 15) + (uses << 4));
 							else
-								is.setItemDamage(0);
+							{
+								if (world.rand.nextInt(100) == 0)
+								{
+									world.playSoundAtEntity(player, TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
+									is.stackSize--;
+								}
+								else
+									is.setItemDamage(0);
+							}
 						}
 					}
 				}

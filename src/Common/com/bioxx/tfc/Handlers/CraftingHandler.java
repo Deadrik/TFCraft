@@ -239,7 +239,7 @@ public class CraftingHandler
 				{
 					temperature = TFC_ItemHeat.GetTemp(iinventory.getStackInSlot(i));
 					if(player.worldObj.rand.nextInt(20) == 0)
-						player.playSound(TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
+						player.worldObj.playSoundAtEntity(player, TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
 					else
 						TFC_Core.giveItemToPlayer(new ItemStack(TFCItems.CeramicMold, 1, 1), player);
 					iinventory.setInventorySlotContents(i, null);
