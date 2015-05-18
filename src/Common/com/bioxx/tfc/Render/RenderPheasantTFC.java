@@ -17,7 +17,7 @@ public class RenderPheasantTFC extends RenderChicken
 {
 	private static final ResourceLocation FemaleTexture = new ResourceLocation(Reference.ModID, "textures/mob/PheasantF.png");
 	private static final ResourceLocation MaleTexture = new ResourceLocation(Reference.ModID, "textures/mob/PheasantM.png");
-	private static final ResourceLocation ChickTexture = new ResourceLocation(Reference.ModID, "textures/mob/chick.png");
+	private static final ResourceLocation ChickTexture = new ResourceLocation(Reference.ModID, "textures/mob/pheasant_chick.png");
 
 	public RenderPheasantTFC(ModelBase par1ModelBase, float par2)
 	{

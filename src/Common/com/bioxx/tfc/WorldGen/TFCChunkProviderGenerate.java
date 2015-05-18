@@ -33,6 +33,7 @@ import com.bioxx.tfc.Entities.Mobs.EntityPheasantTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityPigTFC;
 import com.bioxx.tfc.Entities.Mobs.EntitySheepTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityWolfTFC;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenFissure;
 import com.bioxx.tfc.WorldGen.MapGen.MapGenCavesTFC;
 import com.bioxx.tfc.WorldGen.MapGen.MapGenRavineTFC;
 import com.bioxx.tfc.WorldGen.MapGen.MapGenRiverRavine;
@@ -294,10 +295,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 1, 1, 2 + mountainousAreaModifier));
 			spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 1, 1, 1));
 			spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 2 + mountainousAreaModifier, 1, 3 + mountainousAreaModifier));
-			if (TFCOptions.enablePheasants)
-			{
-				spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 3 + mountainousAreaModifier, 1, 3));
-			}
+			spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 3 + mountainousAreaModifier, 1, 3));
 
 		}
 		//colder climate
@@ -310,10 +308,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 2 + mountainousAreaModifier, 1, 2 + mountainousAreaModifier));
 				spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 2 + mountainousAreaModifier, 1, 1));
 				spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 1 + mountainousAreaModifier, 2, 3));
-				if (TFCOptions.enablePheasants)
-				{
-					spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 1 + mountainousAreaModifier, 1, 2));
-				}
+				spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 1 + mountainousAreaModifier, 1, 2));
 				spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 2, 2, 4));
 			}
 			//closer to tundra or taiga
@@ -333,10 +328,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		if(TFC_Climate.isSwamp(world, x,150,z))
 		{
 			spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1, 1, 2));
-			if (TFCOptions.enablePheasants)
-			{
-				spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 1 + mountainousAreaModifier, 1, 1));
-			}
+			spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 1 + mountainousAreaModifier, 1, 1));
 		}
 		return spawnableCreatureList;
 	}

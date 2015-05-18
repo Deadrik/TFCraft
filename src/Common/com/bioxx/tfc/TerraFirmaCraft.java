@@ -331,7 +331,6 @@ public class TerraFirmaCraft
 		TFCOptions.enableDetailedBlockSolidSide = TFCOptions.getBooleanFor(config, GENERAL_HEADER, "enableDetailedBlockSolidSide", true, "Should sides of Detailed blocks be considered as solid?");
 		TFCOptions.maxCountOfTranspSubBlocksOnSide = TFCOptions.getIntFor(config, GENERAL_HEADER, "maxCountOfTranspSubBlocksOnSide", 12, "Maximum count of transparent sub-blocks on side: 0..64");
 		TFCOptions.enablePowderKegs = TFCOptions.getBooleanFor(config, GENERAL_HEADER, "enablePowderKegs", true, "Set this to false to disable powder keg explosions.");
-		TFCOptions.enablePheasants = TFCOptions.getBooleanFor(config, GENERAL_HEADER, "enablePheasants", true, "Set this to false to disable pheasants. Disabling pheasants is only recommended for players who have older computers and issues with pheasant rendering.");
 
 		//Time
 		TFCOptions.yearLength = TFCOptions.getIntFor(config, TIME_HEADER, "yearLength", 96, "This is how many days are in a year. Keep this to multiples of 12.");
