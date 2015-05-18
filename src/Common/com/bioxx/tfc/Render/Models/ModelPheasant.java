@@ -36,97 +36,96 @@ public class ModelPheasant extends ModelBase
 
 	public ModelPheasant()
 	{
-		textureWidth = 42;
-		textureHeight = 30;
+		textureWidth = 64;
+		textureHeight = 32;
 
 		Body = new ModelRenderer(this, 0, 7);
 		Body.addBox(-4F, 0F, -2.5F, 9, 6, 5);
 		Body.setRotationPoint(0F, 12F, 0F);
-		Body.setTextureSize(64, 32);
 		Body.mirror = true;
 		setRotation(Body, 0F, 0F, -0.5235988F);
+
 		Tail = new ModelRenderer(this, 0, 0);
 		Tail.addBox(-7F, 2F, -2F, 6, 3, 4);
 		Tail.setRotationPoint(0F, 12F, 0F);
-		Tail.setTextureSize(64, 32);
 		Tail.mirror = true;
 		setRotation(Tail, 0F, 0F, -0.1745329F);
+
 		LeftLeg = new ModelRenderer(this, 16, 24);
 		LeftLeg.addBox(1F, 4F, 1F, 3, 4, 2);
 		LeftLeg.setRotationPoint(0F, 12F, 0F);
-		LeftLeg.setTextureSize(64, 32);
 		LeftLeg.mirror = true;
 		setRotation(LeftLeg, 0F, 0F, 0.3490659F);
+
 		RightLeg = new ModelRenderer(this, 26, 24);
 		RightLeg.addBox(1F, 4F, -3F, 3, 4, 2);
 		RightLeg.setRotationPoint(0F, 12F, 0F);
-		RightLeg.setTextureSize(64, 32);
 		RightLeg.mirror = true;
 		setRotation(RightLeg, 0F, 0F, 0.3490659F);
+
 		TailFeather = new ModelRenderer(this, 20, 0);
 		TailFeather.addBox(-14.96F, 3F, -1F, 9, 1, 2);
 		TailFeather.setRotationPoint(0F, 12F, 0F);
-		TailFeather.setTextureSize(64, 32);
 		TailFeather.mirror = true;
 		setRotation(TailFeather, 0F, 0F, -0.0872665F);
+
 		LeftLowerLeg = new ModelRenderer(this, 34, 19);
 		LeftLowerLeg.addBox(-1F, 8F, 1.5F, 1, 4, 1);
 		LeftLowerLeg.setRotationPoint(0F, 0F, 0F);
-		LeftLowerLeg.setTextureSize(64, 32);
 		LeftLowerLeg.mirror = true;
 		setRotation(LeftLowerLeg, 0F, 0F, 0F);
+
 		RightLowerLeg = new ModelRenderer(this, 38, 19);
 		RightLowerLeg.addBox(-1F, 8F, -2.5F, 1, 4, 1);
 		RightLowerLeg.setRotationPoint(0F, 0F, 0F);
-		RightLowerLeg.setTextureSize(64, 32);
 		RightLowerLeg.mirror = true;
 		setRotation(RightLowerLeg, 0F, 0F, 0F);
+
 		Neck = new ModelRenderer(this, 28, 13);
 		Neck.addBox(4F, 2F, -1.5F, 4, 3, 3,0.05F);
 		Neck.setRotationPoint(-4F, 2F, 0F);
-		Neck.setTextureSize(64, 32);
 		Neck.mirror = true;
 		setRotation(Neck, 0F, 0F, -0.8726646F);
+
 		Head = new ModelRenderer(this, 16, 18);
 		Head.addBox(2.5F, -3F, -1.5F, 3, 3, 3,0.1F);
 		Head.setRotationPoint(4F, 10F, 0F);
-		Head.setTextureSize(64, 32);
 		Head.mirror = true;
 		setRotation(Head, 0F, 0F, 0F);
+
 		Beak = new ModelRenderer(this, 28, 19);
 		Beak.addBox(5F, -2F, -0.5F, 2, 1, 1);
 		Beak.setRotationPoint(4F, 10F, 0F);
-		Beak.setTextureSize(64, 32);
 		Beak.mirror = true;
 		setRotation(Beak, 0F, 0F, 0F);
+
 		Chest = new ModelRenderer(this, 28, 7);
 		Chest.addBox(-1F, 4.5F, -1.5F, 4, 3, 3);
 		Chest.setRotationPoint(-4F, 2F, 0F);
-		Chest.setTextureSize(64, 32);
 		Chest.mirror = true;
 		setRotation(Chest, 0F, 0F, -1.396263F);
+
 		LeftWing = new ModelRenderer(this, 0, 23);
 		LeftWing.addBox(-3F, 1F, 2.5F, 7, 4, 1);
 		LeftWing.setRotationPoint(0F, 12F, 0F);
-		LeftWing.setTextureSize(64, 32);
 		LeftWing.mirror = true;
 		setRotation(LeftWing, 0F, 0F, -0.5235988F);
+
 		RightWing = new ModelRenderer(this, 0, 18);
 		RightWing.addBox(-3F, 1F, -3.5F, 7, 4, 1);
 		RightWing.setRotationPoint(0F, 12F, 0F);
-		RightWing.setTextureSize(64, 32);
 		RightWing.mirror = true;
 		setRotation(RightWing, 0F, 0F, -0.5235988F);
+
 		LeftFoot = new ModelRenderer(this, 20, 3);
 		LeftFoot.addBox(-2F, 11.9F, 0.5F, 4, 0, 3,0.001F);
 		LeftFoot.setRotationPoint(0F, 0F, 0F);
-		LeftFoot.setTextureSize(64, 32);
 		LeftFoot.mirror = true;
 		setRotation(LeftFoot, 0F, 0F, 0F);
+
 		RightFoot = new ModelRenderer(this, 20, 3);
 		RightFoot.addBox(-2F, 11.9F, -3.5F, 4, 0, 3,0.001F);
 		RightFoot.setRotationPoint(0F, 0F, 0F);
-		RightFoot.setTextureSize(64, 32);
 		RightFoot.mirror = true;
 		setRotation(RightFoot, 0F, 0F, 0F);
 		
@@ -156,7 +155,6 @@ public class ModelPheasant extends ModelBase
 		this.Beak.render(par7);
 		//this.Neck.render(par7);
 		//this.Chest.render(par7);
-
 
 		GL11.glPopMatrix();
 
