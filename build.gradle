@@ -54,8 +54,11 @@ repositories {
 }
  
 dependencies {
-    // I dont have to specify NEI.. because gradle magic. aka: transitive dependency resolution
-    compile "mcp.mobius.waila:Waila:1.5.10_1.7.10"
+	// Forcing version numbers for everything and using NO-NEI WAILA since the "transitive dependency resolution (gradle magic)" is currently borked.
+	compile "codechicken:CodeChickenCore:1.7.10-1.0.4.35:dev"
+	compile "codechicken:CodeChickenLib:1.7.10-1.1.3.127:dev"
+	compile "codechicken:NotEnoughItems:1.7.10-1.0.4.95:dev"
+	compile "mcp.mobius.waila:Waila:1.5.11-RC2-NONEI_1.7.10"
 }
 }
 
