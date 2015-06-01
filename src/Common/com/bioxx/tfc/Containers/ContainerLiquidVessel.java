@@ -94,12 +94,17 @@ public class ContainerLiquidVessel extends ContainerTFC
 
 		if (nbt != null)
 		{
+			ItemStack input = containerInv.getStackInSlot(0);
+
+			// Trigger the copper age achievement simply when there is a full tool mold in the input slot.
+			if (input != null && input.getItem() instanceof ItemPotteryMold && input.getItemDamage() > 1 /*Ceramic*/ && input.getItemDamage() <= 5 /*Full of Metal*/)
+				player.triggerAchievement(TFC_Achievements.achCopperAge);
+
 			Metal m = MetalRegistry.instance.getMetalFromString((nbt.getString("MetalType")));
 			metalAmount = nbt.getInteger("MetalAmount");
 
 			if (!world.isRemote && m != null)
 			{
-				ItemStack input = containerInv.getStackInSlot(0);
 				if (input != null && input.getItem() == TFCItems.CeramicMold && input.getItemDamage() == 1 && input.stackSize == 1 && metalAmount > 0)
 				{
 					int amt = 99;
@@ -189,16 +194,11 @@ public class ContainerLiquidVessel extends ContainerTFC
 								nbt.removeTag("MetalAmount");
 								nbt.removeTag("TempTimer");
 								stack.setItemDamage(1);
-								//player.triggerAchievement(TFC_Achievements.achCopperAge);
 							}
 							else
 							{
 								nbt.setInteger("MetalAmount", metalAmount - 1);
 							}
-						}
-						else
-						{
-							player.triggerAchievement(TFC_Achievements.achCopperAge);
 						}
 					}
 				}
