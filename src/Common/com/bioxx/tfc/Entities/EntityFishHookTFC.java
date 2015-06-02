@@ -12,11 +12,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -497,7 +496,7 @@ public class EntityFishHookTFC extends EntityFishHook
 		}
 		if(lineTension > maxLineTension * 0.8 && !lineTensionSnap){
 			lineTensionSnap = true;
-			this.field_146042_b.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("fishingRod.lineTension")));
+			TFC_Core.sendInfoMessage(this.field_146042_b, new ChatComponentTranslation("fishingRod.lineTension"));
 		}
 		else if(lineTension < maxLineTension * 0.8){
 			lineTensionSnap = false;
@@ -507,7 +506,7 @@ public class EntityFishHookTFC extends EntityFishHook
 			this.ridingEntity.riddenByEntity = null;
 			this.ridingEntity = null;
 			//((EntityLiving)this.ridingEntity).dismountEntity(this);
-			this.field_146042_b.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("fishingRod.lineSnap")));
+			TFC_Core.sendInfoMessage(this.field_146042_b, new ChatComponentTranslation("fishingRod.lineSnap"));
 			this.setDead();
 		}
 		this.pullX = 0;
@@ -638,15 +637,15 @@ public class EntityFishHookTFC extends EntityFishHook
 		}
 		else
 		{
+			EntityPlayer player = this.field_146042_b;
 			EntityFishTFC fish = new EntityFishTFC(this.worldObj);
 			fish.setPosition(posX, posY-0.3, posZ);
 			this.worldObj.spawnEntityInWorld(fish);
-			this.field_146042_b.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("fishingRod.bite")));
+			TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("fishingRod.bite"));
 			this.mountEntity(fish);
 
 			this.canCatchFish = false;
 
-			EntityPlayer player = this.field_146042_b;
 			int lastChunkX = (((int)Math.floor(player.posX)) >> 4);
 			int lastChunkZ = (((int)Math.floor(player.posZ)) >> 4);
 			int maxChunksVisitable = 20;

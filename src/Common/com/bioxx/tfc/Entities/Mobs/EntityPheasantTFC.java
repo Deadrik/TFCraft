@@ -7,8 +7,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFC_Core;
@@ -174,7 +173,7 @@ public class EntityPheasantTFC extends EntityChickenTFC
 		default: break;
 		}
 		if(!flag && !player.worldObj.isRemote){
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
+			TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.notFamiliar"));
 		}
 		return flag;
 	}

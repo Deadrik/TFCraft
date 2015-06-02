@@ -26,6 +26,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
@@ -694,10 +695,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 				this.familiarize(player);
 				return true;
 			}
-			player.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
+			TFC_Core.sendInfoMessage(player, new ChatComponentTranslation(getGender() == GenderEnum.FEMALE ? "entity.female" : "entity.male"));
 			if(getGender()==GenderEnum.FEMALE && pregnant)
 			{
-				player.addChatMessage(new ChatComponentText("Pregnant"));
+				TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.pregnant"));
 			}
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}
@@ -873,7 +874,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		default: break;
 		}
 		if(!flag && player != null && !player.worldObj.isRemote){
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
+			TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.notFamiliar"));
 		}
 		return flag;
 	}

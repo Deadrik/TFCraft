@@ -19,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
@@ -669,9 +670,9 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 				}
 			}
 
-			player.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
+			TFC_Core.sendInfoMessage(player, new ChatComponentTranslation(getGender() == GenderEnum.FEMALE ? "entity.female" : "entity.male"));
 			if(getGender() == GenderEnum.FEMALE && pregnant)
-				player.addChatMessage(new ChatComponentText("Pregnant"));
+				TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.pregnant"));
 		}
 
 		ItemStack itemstack = player.inventory.getCurrentItem();
@@ -867,7 +868,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		default: break;
 		}
 		if(!flag && player != null && !player.worldObj.isRemote){
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
+			TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.notFamiliar"));
 		}
 		return flag;
 	}

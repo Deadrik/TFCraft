@@ -8,10 +8,10 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
@@ -112,7 +112,7 @@ public class ItemGoldPan extends ItemTerra
 					// Make sure our chunk data isn't null.
 					if(cd == null)
 					{
-						player.addChatMessage(new ChatComponentText("The ChunkData returned null, please report this to the developer."));
+						TFC_Core.sendInfoMessage(player, new ChatComponentText("The ChunkData returned null, please report this to the developer."));
 						return is;
 					}
 
@@ -156,7 +156,7 @@ public class ItemGoldPan extends ItemTerra
 					}
 					else
 					{
-						player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("gui.goldpan.overused")));
+						TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("gui.goldpan.overused"));
 					}
 				}
 				else

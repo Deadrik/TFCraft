@@ -51,6 +51,10 @@ entity.barrel.name=Barrel
 entity.fallingBlock.name=Falling Block
 
 entity.notFamiliar=The animal won't let you do that.
+entity.pregnant=Pregnant
+entity.male=Male
+entity.female=Female
+
 fishingRod.lineTension=The line is going to snap!
 fishingRod.lineSnap=The line snapped!
 fishingRod.bite=Oh! A bite!
@@ -2506,6 +2510,7 @@ gui.GoldPan.UseFull=Must use under flowing water.
 gui.goldpan.overused=This area seems to be overworked. You probably wouldn't find much.
 gui.seeds.failedTemp=It's too cold to plant this, it wouldn't survive very long.
 gui.seeds.failedSun=There's not enough sunlight to plant this, it wouldn't survive very long.
+gui.forge.badChimney=There isn't enough ventilation to use this.
 
 gui.ProPick.Found=Found
 gui.ProPick.FoundTraces=Found traces of

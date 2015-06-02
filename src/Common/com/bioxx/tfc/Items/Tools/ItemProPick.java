@@ -156,7 +156,7 @@ public class ItemProPick extends ItemTerra
 	 */
 	private void TellNothingFound(EntityPlayer player)
 	{
-		player.addChatMessage(new ChatComponentTranslation("gui.ProPick.FoundNothing"));
+		TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("gui.ProPick.FoundNothing"));
 	}
 
 	/*
@@ -165,7 +165,7 @@ public class ItemProPick extends ItemTerra
 	private void TellResult(EntityPlayer player, ItemStack ore)
 	{
 		String oreName = ore.getUnlocalizedName() + ".name";
-		player.addChatMessage(
+		TFC_Core.sendInfoMessage(player,
 				new ChatComponentTranslation("gui.ProPick.Found")
 				.appendText(" ")
 				.appendSibling(new ChatComponentTranslation(oreName)));
@@ -194,7 +194,7 @@ public class ItemProPick extends ItemTerra
 		else
 			quantityMsg = "gui.ProPick.FoundVeryLarge";
 		
-		player.addChatMessage(
+		TFC_Core.sendInfoMessage(player,
 				new ChatComponentTranslation(quantityMsg)
 				.appendText(" ")
 				.appendSibling(new ChatComponentTranslation(oreName)));

@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenFissure;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomFruitTree;
@@ -23,20 +24,23 @@ public class GenCommand extends CommandBase
 	@Override
 	public void processCommand(ICommandSender sender, String[] params)
 	{
-		if(!TFCOptions.enableDebugMode)
-			return;
-
 		EntityPlayerMP player = getCommandSenderAsPlayer(sender);
+
+		if(!TFCOptions.enableDebugMode)
+		{
+			TFC_Core.sendInfoMessage(player, new ChatComponentText("Debug Mode Required"));
+			return;
+		}
 
 		if (params.length == 1)
 		{
 			if (params[0].equalsIgnoreCase("fruittree"))
 			{
-				player.addChatMessage(new ChatComponentText("Generating Fruit Tree"));
+				TFC_Core.sendInfoMessage(player, new ChatComponentText("Generating Fruit Tree"));
 				WorldGenerator fruitGen = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves, 0);
 
 				if (!fruitGen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int) player.posX, (int) player.posY, (int) player.posZ))
-					player.addChatMessage(new ChatComponentText("Generation Failed"));
+					TFC_Core.sendInfoMessage(player, new ChatComponentText("Generation Failed"));
 			}
 		}
 		else if (params.length == 2)
@@ -48,19 +52,19 @@ public class GenCommand extends CommandBase
 				{
 					gen = new WorldGenFissure(TFCBlocks.FreshWater);
 					gen.checkStability = false;
-					player.addChatMessage(new ChatComponentText("Generating Water"));
+					TFC_Core.sendInfoMessage(player, new ChatComponentText("Generating Water"));
 				}
 				else if(params[1].equals("hotwater"))
 				{
 					gen = new WorldGenFissure(TFCBlocks.HotWater);
 					gen.checkStability = false;
-					player.addChatMessage(new ChatComponentText("Generating Hot Springs"));
+					TFC_Core.sendInfoMessage(player, new ChatComponentText("Generating Hot Springs"));
 				}
 				else
 				{
 					gen = new WorldGenFissure(null);
 					gen.checkStability = false;
-					player.addChatMessage(new ChatComponentText("Generating Fissure"));
+					TFC_Core.sendInfoMessage(player, new ChatComponentText("Generating Fissure"));
 				}
 				gen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int)player.posX, (int)player.posY - 1, (int)player.posZ);
 			}
@@ -70,13 +74,13 @@ public class GenCommand extends CommandBase
 
 				if (i != -1)
 				{
-					player.addChatMessage(new ChatComponentText("Generating Small " + params[1] + " Tree"));
+					TFC_Core.sendInfoMessage(player, new ChatComponentText("Generating Small " + params[1] + " Tree"));
 					WorldGenerator treeGen = TFCBiome.getTreeGen(i, false);
 					if (!treeGen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int) player.posX, (int) player.posY, (int) player.posZ))
-						player.addChatMessage(new ChatComponentText("Generation Failed"));
+						TFC_Core.sendInfoMessage(player, new ChatComponentText("Generation Failed"));
 				}
 				else
-					player.addChatMessage(new ChatComponentText("Invalid Tree"));
+					TFC_Core.sendInfoMessage(player, new ChatComponentText("Invalid Tree"));
 			}
 		}
 		else if (params.length == 3 && (params[0].equalsIgnoreCase("tree") && params[2].equalsIgnoreCase("big")))
@@ -85,13 +89,13 @@ public class GenCommand extends CommandBase
 
 			if (i != -1)
 			{
-				player.addChatMessage(new ChatComponentText("Generating Big " + params[1] + " Tree"));
+				TFC_Core.sendInfoMessage(player, new ChatComponentText("Generating Big " + params[1] + " Tree"));
 				WorldGenerator treeGen = TFCBiome.getTreeGen(i, false);
 				if (!treeGen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int) player.posX, (int) player.posY, (int) player.posZ))
-					player.addChatMessage(new ChatComponentText("Generation Failed"));
+					TFC_Core.sendInfoMessage(player, new ChatComponentText("Generation Failed"));
 			}
 			else
-				player.addChatMessage(new ChatComponentText("Invalid Tree"));
+				TFC_Core.sendInfoMessage(player, new ChatComponentText("Invalid Tree"));
 		}
 	}
 

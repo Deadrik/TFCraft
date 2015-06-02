@@ -13,6 +13,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 
+import com.bioxx.tfc.Core.TFC_Core;
+
 public class CommandTransferTamed extends CommandBase
 {
 	@Override
@@ -95,7 +97,7 @@ public class CommandTransferTamed extends CommandBase
 				ChatComponentTranslation chatcomponenttranslation1 = new ChatComponentTranslation("commands.transferTamed.display.outgoing", new Object[] {entityplayermp.func_145748_c_()});
 				chatcomponenttranslation.getChatStyle().setColor(EnumChatFormatting.GRAY).setItalic(Boolean.valueOf(true));
 				chatcomponenttranslation1.getChatStyle().setColor(EnumChatFormatting.GRAY).setItalic(Boolean.valueOf(true));
-				entityplayermp.addChatMessage(chatcomponenttranslation);
+				TFC_Core.sendInfoMessage(entityplayermp, chatcomponenttranslation);
 				sender.addChatMessage(chatcomponenttranslation1);
 			}
 		}

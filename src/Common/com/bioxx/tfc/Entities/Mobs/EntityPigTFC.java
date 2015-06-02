@@ -25,6 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -370,7 +371,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 				return true;
 			}
 			if(getGender() == GenderEnum.FEMALE && pregnant)
-				player.addChatMessage(new ChatComponentText("Pregnant"));
+				TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.pregnant"));
 		}
 
 		ItemStack itemstack = player.inventory.getCurrentItem();
@@ -778,7 +779,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		default: break;
 		}
 		if(!flag && player != null && !player.worldObj.isRemote){
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
+			TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.notFamiliar"));
 		}
 		return flag;
 	}

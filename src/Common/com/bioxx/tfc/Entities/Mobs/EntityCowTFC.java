@@ -17,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -394,7 +395,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 
 			if(getGender()==GenderEnum.FEMALE && pregnant)
 			{
-				player.addChatMessage(new ChatComponentText("Pregnant"));
+				TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.pregnant"));
 			}
 
 			if(getGender() == GenderEnum.FEMALE && isAdult() && hasMilkTime < TFC_Time.getTotalTicks() && this.checkFamiliarity(InteractionEnum.MILK, player))
@@ -753,7 +754,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		default: break;
 		}
 		if(!flag && player != null && !player.worldObj.isRemote){
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
+			TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.notFamiliar"));
 		}
 		return flag;
 	}

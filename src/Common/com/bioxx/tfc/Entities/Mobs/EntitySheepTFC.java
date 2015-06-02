@@ -16,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
@@ -391,7 +392,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 			}
 
 			if(getGender() == GenderEnum.FEMALE && pregnant)
-				player.addChatMessage(new ChatComponentText("Pregnant"));
+				TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.pregnant"));
 
 			shearer = player;
 
@@ -803,7 +804,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		default: break;
 		}
 		if(!flag && player != null && !player.worldObj.isRemote){
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
+			TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.notFamiliar"));
 		}
 		return flag;
 	}

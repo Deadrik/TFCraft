@@ -9,6 +9,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.TFCOptions;
 
 public class RemoveChunkCommand extends CommandBase
@@ -22,24 +23,27 @@ public class RemoveChunkCommand extends CommandBase
 	@Override
 	public void processCommand(ICommandSender sender, String[] params)
 	{
-		if(!TFCOptions.enableDebugMode)
-		{
-			return;
-		}
 		MinecraftServer server = MinecraftServer.getServer();
 		EntityPlayerMP player = getCommandSenderAsPlayer(sender);
 		WorldServer world = server.worldServerForDimension(player.getEntityWorld().provider.dimensionId);
 
+		if(!TFCOptions.enableDebugMode)
+		{
+			TFC_Core.sendInfoMessage(player, new ChatComponentText("Debug Mode Required"));
+			return;
+		}
+
 		if(params.length == 0)
 		{
-			player.addChatMessage(new ChatComponentText("Removing Chunk"));
+			TFC_Core.sendInfoMessage(player, new ChatComponentText("Removing Chunk"));
 			Chunk chunk = world.getChunkFromBlockCoords((int)player.posX, (int)player.posZ);
 			chunk.setStorageArrays(new ExtendedBlockStorage[16]);
 			chunk.setChunkModified();
+			TFC_Core.sendInfoMessage(player, new ChatComponentText("Removing Chunk Complete"));
 		}
 		else if(params.length == 1)
 		{
-			player.addChatMessage(new ChatComponentText("Removing Chunks Within a Radius of " + Integer.parseInt(params[0])));
+			TFC_Core.sendInfoMessage(player, new ChatComponentText("Removing Chunks Within a Radius of " + Integer.parseInt(params[0])));
 			int radius = Integer.parseInt(params[0]);
 			for(int i = -radius; i <= radius; i++)
 			{
@@ -50,6 +54,8 @@ public class RemoveChunkCommand extends CommandBase
 					chunk.setChunkModified();
 				}
 			}
+
+			TFC_Core.sendInfoMessage(player, new ChatComponentText("Removing Chunk Complete"));
 		}
 	}
 

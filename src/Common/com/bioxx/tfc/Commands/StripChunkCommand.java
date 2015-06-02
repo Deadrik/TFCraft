@@ -10,6 +10,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 
@@ -24,17 +25,19 @@ public class StripChunkCommand extends CommandBase
 	@Override
 	public void processCommand(ICommandSender sender, String[] params)
 	{
-		if(!TFCOptions.enableDebugMode)
-		{
-			return;
-		}
 		MinecraftServer server = MinecraftServer.getServer();
 		EntityPlayerMP player = getCommandSenderAsPlayer(sender);
 		WorldServer world = server.worldServerForDimension(player.getEntityWorld().provider.dimensionId);
+		
+		if(!TFCOptions.enableDebugMode)
+		{
+			TFC_Core.sendInfoMessage(player, new ChatComponentText("Debug Mode Required"));
+			return;
+		}
 
 		if(params.length == 0)
 		{
-			player.addChatMessage(new ChatComponentText("Stripping Chunk"));
+			TFC_Core.sendInfoMessage(player, new ChatComponentText("Stripping Chunk"));
 			Chunk chunk = world.getChunkFromBlockCoords((int)player.posX, (int)player.posZ);
 			for(int x = 0; x < 16; x++)
 			{
@@ -48,10 +51,12 @@ public class StripChunkCommand extends CommandBase
 					}
 				}
 			}
+
+			TFC_Core.sendInfoMessage(player, new ChatComponentText("Stripping Chunk Complete"));
 		}
 		else if(params.length == 1)
 		{
-			player.addChatMessage(new ChatComponentText("Stripping Chunks Within a Radius of " + Integer.parseInt(params[0])));
+			TFC_Core.sendInfoMessage(player, new ChatComponentText("Stripping Chunks Within a Radius of " + Integer.parseInt(params[0])));
 			int radius = Integer.parseInt(params[0]);
 			for(int i = -radius; i <= radius; i++)
 			{
@@ -72,6 +77,8 @@ public class StripChunkCommand extends CommandBase
 					}
 				}
 			}
+
+			TFC_Core.sendInfoMessage(player, new ChatComponentText("Stripping Chunk Complete"));
 		}
 	}
 

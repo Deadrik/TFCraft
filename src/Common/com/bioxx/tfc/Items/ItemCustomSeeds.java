@@ -56,13 +56,13 @@ public class ItemCustomSeeds extends ItemTerra
 				CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 				if (crop.needsSunlight && !TECrop.hasSunlight(world, x, y + 1, z))
 				{
-					player.addChatMessage(new ChatComponentTranslation("gui.seeds.failedSun"));
+					TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("gui.seeds.failedSun"));
 					return false;
 				}
 
 				if(TFC_Climate.getHeightAdjustedTemp(world, x, y, z) <= crop.minAliveTemp)
 				{
-					player.addChatMessage(new ChatComponentTranslation("gui.seeds.failedTemp"));
+					TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("gui.seeds.failedTemp"));
 					return false;
 				}
 

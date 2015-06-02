@@ -11,10 +11,12 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
 import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.TFCOptions;
@@ -30,13 +32,15 @@ public class PrintImageMapCommand extends CommandBase
 	@Override
 	public void processCommand(ICommandSender sender, String[] params)
 	{
-		if(!TFCOptions.enableDebugMode)
-		{
-			return;
-		}
 		MinecraftServer server = MinecraftServer.getServer();
 		EntityPlayerMP player = getCommandSenderAsPlayer(sender);
 		WorldServer world = server.worldServerForDimension(player.getEntityWorld().provider.dimensionId);
+
+		if(!TFCOptions.enableDebugMode)
+		{
+			TFC_Core.sendInfoMessage(player, new ChatComponentText("Debug Mode Required"));
+			return;
+		}
 
 		if(params.length >= 2)
 		{

@@ -14,16 +14,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayer.EnumStatus;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
@@ -99,7 +99,7 @@ public class BlockBed extends BlockDirectional
 
 					if (entityplayer1 != null)
 					{
-						player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tile.bed.occupied")));
+						TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("tile.bed.occupied"));
 						return true;
 					}
 
@@ -110,16 +110,16 @@ public class BlockBed extends BlockDirectional
 
 				if (enumstatus == EnumStatus.OK)
 				{
-					player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tile.customBed.sleep")));
+					TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("tile.customBed.sleep"));
 					setBedOccupied(world, x, y, z, true);
 					return true;
 				}
 				else
 				{
 					if (enumstatus == EnumStatus.NOT_POSSIBLE_NOW)
-						player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tile.bed.noSleep")));
+						TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("tile.bed.noSleep"));
 					else if (enumstatus == EnumStatus.NOT_SAFE)
-						player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tile.bed.notSafe")));
+						TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("tile.bed.notSafe"));
 
 					return true;
 				}

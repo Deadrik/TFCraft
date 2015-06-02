@@ -21,6 +21,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -1386,6 +1388,12 @@ public class TFC_Core
 	public static String translate(String s)
 	{
 		return StatCollector.translateToLocal(s);
+	}
+
+	public static void sendInfoMessage(EntityPlayer player, IChatComponent text)
+	{
+		text.getChatStyle().setColor(EnumChatFormatting.GRAY).setItalic(true);
+		player.addChatComponentMessage(text);
 	}
 
 	public static long getSuperSeed(World w)

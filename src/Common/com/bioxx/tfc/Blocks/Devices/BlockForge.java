@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -18,6 +19,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.Tools.ItemFirestarter;
 import com.bioxx.tfc.Items.Tools.ItemFlintSteel;
 import com.bioxx.tfc.TileEntities.TEForge;
@@ -55,7 +57,13 @@ public class BlockForge extends BlockTerraContainer
 			if((TEForge)world.getTileEntity(i, j, k) != null)
 			{
 				TEForge tef = (TEForge)world.getTileEntity(i, j, k);
-				if(tef.fireTemp <= 0 && tef.fireItemStacks[7] != null && tef.isSmokeStackValid)
+				if (!tef.isSmokeStackValid)
+				{
+					TFC_Core.sendInfoMessage(entityplayer, new ChatComponentTranslation("gui.forge.badChimney"));
+					return true;
+				}
+
+				if (tef.fireTemp <= 0 && tef.fireItemStacks[7] != null)
 				{
 					tef.fireTemp = 10;
 					tef.fuelBurnTemp = 20;
@@ -81,8 +89,9 @@ public class BlockForge extends BlockTerraContainer
 				if(tef.isSmokeStackValid)
 				{
 					entityplayer.openGui(TerraFirmaCraft.instance, 23, world, i, j, k);
-					//ModLoader.openGUI(entityplayer, new GuiTerraForge(entityplayer.inventory, TEForge));
 				}
+				else
+					TFC_Core.sendInfoMessage(entityplayer, new ChatComponentTranslation("gui.forge.badChimney"));
 			}
 			return true;
 		}
