@@ -158,6 +158,7 @@ public class BlockBarrel extends BlockTerraContainer
 	@Override
 	public void onBlockExploded(World world, int x, int y, int z, Explosion explosion)
 	{
+		// Order is reverse of the vanilla method. I'm assuming this is so the TE stuff works? -Kitty
 		onBlockDestroyedByExplosion(world, x, y, z, explosion);
 		world.setBlockToAir(x, y, z);
 	}

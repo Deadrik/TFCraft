@@ -133,7 +133,8 @@ public class BlockStone extends BlockCollapsible
 	@Override
 	public void onBlockExploded(World world, int x, int y, int z, Explosion explosion)
 	{
-		if(world.rand .nextInt(100) < 30)
+		// 30% chance to turn to cobble instead of being completely destroyed.
+		if (world.rand.nextInt(100) < 30)
 		{
 			world.setBlock(x, y, z, dropBlock, world.getBlockMetadata(x, y, z), 0x2);
 		}
