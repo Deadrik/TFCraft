@@ -31,6 +31,7 @@ public class BlockLogNatural extends BlockTerra
 	String[] woodNames;
 	int searchDist = 10;
 	static int damage = 0;
+	static int logs = 0;
 	boolean isStone = false;
 	public IIcon[] sideIcons;
 	public IIcon[] innerIcons;
@@ -163,6 +164,18 @@ public class BlockLogNatural extends BlockTerra
 				}
 				else
 					equip.damageItem(damage, entityplayer);
+
+				int smallStack = logs % 16;
+				dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Logs, smallStack, damageDropped(meta)));
+				logs -= smallStack;
+
+				// In theory this section should never be triggered since the full stacks are dropped higher up the tree, but keeping it here just in case.
+				while (logs > 0)
+				{
+					dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Logs, 16, damageDropped(meta)));
+					logs -= 16;
+				}
+
 			}
 			else if(isHammer)
 			{
@@ -242,7 +255,7 @@ public class BlockLogNatural extends BlockTerra
 	}
 
 
-	private void scanLogs(World world, int i, int j, int k, int l, boolean[][][] checkArray, byte x, byte y, byte z, ItemStack stack)
+	private void scanLogs(World world, int i, int j, int k, int meta, boolean[][][] checkArray, byte x, byte y, byte z, ItemStack stack)
 	{
 		if(y >= 0 && j + y < 256)
 		{
@@ -257,10 +270,10 @@ public class BlockLogNatural extends BlockTerra
 					{
 						if(Math.abs(x + offsetX) <= searchDist && j + y + offsetY < 256 && Math.abs(z + offsetZ) <= searchDist)
 						{
-							if(checkOut(world, i + x + offsetX, j + y + offsetY, k + z + offsetZ, l)
+							if(checkOut(world, i + x + offsetX, j + y + offsetY, k + z + offsetZ, meta)
 									&& !(offsetX == 0 && offsetY == 0 && offsetZ == 0)
 									&& !checkArray[x + offsetX + searchDist][y + offsetY][z + offsetZ + searchDist])
-								scanLogs(world,i, j, k, l, checkArray, (byte)(x + offsetX),(byte)(y + offsetY),(byte)(z + offsetZ), stack);
+								scanLogs(world,i, j, k, meta, checkArray, (byte)(x + offsetX),(byte)(y + offsetY),(byte)(z + offsetZ), stack);
 						}
 					}
 				}
@@ -273,14 +286,24 @@ public class BlockLogNatural extends BlockTerra
 				{
 					world.setBlock(i + x, j + y, k + z, Blocks.air, 0, 0x2);
 					if((isStone && world.rand.nextInt(10) != 0) || !isStone)
-						dropBlockAsItem(world, i + x, j + y, k + z, new ItemStack(TFCItems.Logs, 1, damageDropped(l)));
+						logs++;
+					if (logs >= 16)
+					{
+						dropBlockAsItem(world, i + x, j + y, k + z, new ItemStack(TFCItems.Logs, 16, damageDropped(meta)));
+						logs -= 16;						
+					}
 					notifyLeaves(world, i + x, j + y, k + z);
 				}
 			}
 			else
 			{
 				world.setBlockToAir(i, j, k);
-				dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.Logs, 1, damageDropped(l)));
+				logs++;
+				if (logs >= 16)
+				{
+					dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.Logs, 16, damageDropped(meta)));
+					logs -= 16;						
+				}
 				notifyLeaves(world, i + x, j + y, k + z);
 			}
 		}
