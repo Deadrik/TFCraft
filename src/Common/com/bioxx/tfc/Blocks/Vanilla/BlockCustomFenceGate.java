@@ -44,11 +44,20 @@ public class BlockCustomFenceGate extends BlockFenceGate implements ITileEntityP
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
+		int direction = 0;
+		boolean open = false;
 		TileEntity te = world.getTileEntity(x, y, z);
 
-		int l = (te != null && te instanceof TEFenceGate /*Fixes ClassCastException*/) ? (((TEFenceGate) (te)).getDirection()) : 0;
-		boolean open = (te != null) ? (((TEFenceGate) (te)).getOpen()) : false;
-		return open ? null : (l != 2 && l != 0 ? AxisAlignedBB.getBoundingBox(x + 0.375F, y, z, x + 0.625F, y + 1.5F, z + 1) : AxisAlignedBB.getBoundingBox(x, y, z + 0.375F, x + 1, y + 1.5F, z + 0.625F));
+		if (te != null && te instanceof TEFenceGate) // Fixes any possible ClassCastExceptions
+		{
+			direction = ((TEFenceGate) te).getDirection();
+			open = ((TEFenceGate) te).getOpen();
+		}
+
+		if (open)
+			return null; // Gate is open so it has no bounding box.
+		else
+			return (direction != 2 && direction != 0 ? AxisAlignedBB.getBoundingBox(x + 0.375F, y, z, x + 0.625F, y + 1.5F, z + 1) : AxisAlignedBB.getBoundingBox(x, y, z + 0.375F, x + 1, y + 1.5F, z + 0.625F));
 	}
 
 	@SideOnly(Side.CLIENT)
