@@ -27,7 +27,7 @@ public class TELoom extends NetworkTileEntity implements IInventory
 {
 	public byte rotation = 0;
 	public int loomType;
-	public ItemStack[] storage;
+	private ItemStack[] storage;
 
 	//private int numStrings;
 	private boolean weaving;
@@ -70,7 +70,7 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	{
 		if(storage[i] != null)
 		{
-			if(storage[i] .stackSize <= j)
+			if (storage[i].stackSize <= j)
 			{
 				ItemStack is = storage[i];
 				storage[i] = null;
@@ -93,8 +93,9 @@ public class TELoom extends NetworkTileEntity implements IInventory
 
 	public ItemStack addString(ItemStack i){
 		if(!isFinished() &&  i != null && !this.worldObj.isRemote){
-			recipe =LoomManager.getInstance().findPotentialRecipes(this.getStackInSlot(0));
-			if(this.getStackInSlot(0) != null){
+			recipe = LoomManager.getInstance().findPotentialRecipes(storage[0]);
+			if (storage[0] != null)
+			{
 				LoomRecipe lr = LoomManager.getInstance().findPotentialRecipes(i);
 				if(lr != null && lr.equals(recipe))
 				{
@@ -117,14 +118,13 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	}
 
 	public ItemStack takeFinishedCloth(){
-		recipe = LoomManager.getInstance().findMatchingRecipe(getStackInSlot(0));
-		if(finished && recipe != null){
-			this.setString(null);
+		if (finished)
+		{
 			this.finished = false;
 			this.clothCompletionCount = 0;
-			updateLoom();
 			ItemStack is = storage[1].copy();
 			storage[1] = null;
+			updateLoom();
 			return is;
 		}
 		return null;
@@ -189,9 +189,15 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	}
 
 	public ResourceLocation getStringResource(){
-		recipe = LoomManager.getInstance().findPotentialRecipes(getStackInSlot(0));
-		ResourceLocation rl = LoomManager.getInstance().findMatchingTexture(recipe);
-		return (recipe != null && rl != null)?rl:this.defaultTexture;
+		LoomRecipe resource = null;
+
+		if (storage[1] != null)
+			resource = LoomManager.getInstance().findMatchingResult(storage[1]);
+		else
+			resource = LoomManager.getInstance().findPotentialRecipes(storage[0]);
+
+		ResourceLocation rl = LoomManager.getInstance().findMatchingTexture(resource);
+		return (resource != null && rl != null) ? rl : this.defaultTexture;
 	}
 
 	public Item getStringType(){
@@ -295,9 +301,18 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	}
 
 	public int getRequiredStringCount(){
-		if(storage[0] != null){
+		if (storage[0] != null)
+		{
 			recipe = LoomManager.getInstance().findPotentialRecipes(storage[0]);
 			if(recipe != null){
+				return recipe.getReqSize();
+			}
+		}
+		else if (storage[1] != null)
+		{
+			recipe = LoomManager.getInstance().findMatchingResult(storage[1]);
+			if (recipe != null)
+			{
 				return recipe.getReqSize();
 			}
 		}
@@ -313,6 +328,7 @@ public class TELoom extends NetworkTileEntity implements IInventory
 			//nbt.setBoolean("finished", this.finished);
 			recipe = LoomManager.getInstance().findMatchingRecipe(storage[0]);
 			this.storage[1] = recipe.getResult(storage[0]);
+			this.setString(null);
 			this.writeToNBT(nbt);
 			this.broadcastPacketInRange(this.createDataPacket(nbt));
 		}

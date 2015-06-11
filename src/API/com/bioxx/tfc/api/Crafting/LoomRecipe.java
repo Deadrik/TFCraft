@@ -24,6 +24,15 @@ public class LoomRecipe
 
 		return iStack && itemsEqual;
 	}
+
+	public Boolean resultMatches(ItemStack item)
+	{
+		boolean iStack = outItemStack != null && item != null && item.stackSize == outItemStack.stackSize;
+
+		boolean itemsEqual = OreDictionary.itemMatches(outItemStack, item, false);
+
+		return iStack && itemsEqual;
+	}
 	
 	public Boolean partiallyMatches(ItemStack item)
 	{

@@ -44,6 +44,17 @@ public class LoomManager
 		return null;
 	}
 
+	public LoomRecipe findMatchingResult(ItemStack item)
+	{
+		for (Object recipe : recipes)
+		{
+			LoomRecipe lr = (LoomRecipe) recipe;
+			if (item != null && lr.resultMatches(item))
+				return lr;
+		}
+		return null;
+	}
+
 	public boolean hasPotentialRecipes(ItemStack item){
 		for(Object recipe : recipes)
 		{

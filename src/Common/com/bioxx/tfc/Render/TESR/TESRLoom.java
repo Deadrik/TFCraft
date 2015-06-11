@@ -21,36 +21,48 @@ public class TESRLoom extends TESRBase
 		}
 		else
 		{
-			if(te.getModel() ==null){
+			int stringCount = te.getStringCount();
+			int reqStringCount = te.getRequiredStringCount();
+
+			if (te.getModel() == null)
+			{
 				te.setModel(new ModelLoom());
 			}
 			TFC_Core.bindTexture(te.getWoodResource()); //texture
 			GL11.glPushMatrix(); //start
 			GL11.glTranslatef((float)d + 0.0F, (float)d1 + 0F, (float)d2 + 0.0F); //size
-			if(te.getStringCount()< te.getRequiredStringCount()){
+			if (stringCount < reqStringCount)
+			{
 				te.getModel().updateCloth(te.getCloth());
 			}
-			if(te.getIsWeaving() || te.getModel().stillWeaving){
-				if(TFC_Time.getTotalTicks() > te.getModel().tempTime){
-					te.getModel().tempNum = (te.getModel().tempNum+(int)(TFC_Time.getTotalTicks()-te.getModel().tempTime));
+			if (te.getIsWeaving() || te.getModel().stillWeaving)
+			{
+				if (TFC_Time.getTotalTicks() > te.getModel().tempTime)
+				{
+					te.getModel().tempNum = (te.getModel().tempNum + (int) (TFC_Time.getTotalTicks() - te.getModel().tempTime));
 					te.getModel().tempTime = TFC_Time.getTotalTicks();
-					if(te.getModel().tempNum >= (te.getModel().lastClothIncrease + (te.getModel().mod/2))){
+					if (te.getModel().tempNum >= (te.getModel().lastClothIncrease + (te.getModel().mod / 2)))
+					{
 						te.getModel().clothIncrease = true;
-						te.getModel().lastClothIncrease = (te.getModel().lastClothIncrease + (te.getModel().mod/2))%te.getModel().mod;
+						te.getModel().lastClothIncrease = (te.getModel().lastClothIncrease + (te.getModel().mod / 2)) % te.getModel().mod;
 						
 						te.finishWeaveCycle();
 						te.getModel().stillWeaving = te.getIsWeaving();
 					}
-					te.getModel().tempNum = te.getModel().tempNum%te.getModel().mod;
+					te.getModel().tempNum = te.getModel().tempNum % te.getModel().mod;
 				}
 			}
 			else{
 				te.getModel().tempTime = TFC_Time.getTotalTicks();
 			}
-			te.getModel().render(te.getStringCount(),te.getRequiredStringCount(),te.getModel().tempNum,te.getModel().clothIncrease,te.getModel().mod,te.getStringResource(), te.getIsWeaving(), te.getModel().stillWeaving, te);
+			
+			if (te.getStackInSlot(1) != null) // Render completed cloth
+				te.getModel().render(reqStringCount, reqStringCount, te.getModel().tempNum, false, te.getModel().mod, te.getStringResource(), false, false, te);
+			else // Render based on string, or empty loom
+				te.getModel().render(stringCount, reqStringCount, te.getModel().tempNum, te.getModel().clothIncrease, te.getModel().mod, te.getStringResource(), te.getIsWeaving(), te.getModel().stillWeaving, te);
+
 			te.getModel().clothIncrease = false;
 			GL11.glPopMatrix(); //end
-
 		}
 	}
 
