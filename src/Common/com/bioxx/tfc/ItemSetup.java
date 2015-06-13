@@ -135,7 +135,7 @@ public class ItemSetup extends TFCItems {
 		FishingRod = new ItemCustomFishingRod().setUnlocalizedName("fishingRod").setTextureName("tools/fishing_rod");
 		Coal = new ItemCoal().setUnlocalizedName("coal");
 		Stick = new ItemStick().setFull3D().setUnlocalizedName("stick");
-		Bow = new ItemCustomBow().setUnlocalizedName("bow").setTextureName("bow");
+		Bow = new ItemCustomBow().setUnlocalizedName("bow").setTextureName("tools/bow");
 		Items.bow = (ItemBow) Bow;
 		Arrow = new ItemArrow().setUnlocalizedName("arrow").setCreativeTab(TFCTabs.TFCWeapons);
 		Dye = new ItemDyeCustom().setUnlocalizedName("dyePowder").setTextureName("dye_powder").setCreativeTab(TFCTabs.TFCMaterials);
