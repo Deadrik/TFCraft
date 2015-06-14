@@ -30,7 +30,7 @@ public class WorldGenWaterPlants extends WorldGenerator
 			//Effectively makes sea grass grow less frequently as depth increases beyond 6 m.
 			boolean isTooDeep = false;
 			boolean isFreshWater = TFC_Core.isFreshWater(world.getBlock(x, y, z));
-			int maxDepth = !isFreshWater ? 10 : 1;
+			int maxDepth = !isFreshWater ? 10 : 4;
 
 			//travel down until a solid surface is reached
 			while(y > 0 && TFC_Core.isWater(world.getBlock(x, --y, z)) && !isTooDeep)
@@ -46,7 +46,8 @@ public class WorldGenWaterPlants extends WorldGenerator
 			{
 				int meta = world.getBlockMetadata(x, y, z);
 				Block oldBlock = world.getBlock(x, y, z);
-				if(TFC_Core.isSoil(oldBlock) || TFC_Core.isGravel(oldBlock) || TFC_Core.isSand(oldBlock)){
+				if (TFC_Core.isSoilOrGravel(oldBlock) || TFC_Core.isSand(oldBlock))
+				{
 					world.setBlock(x, y, z, this.plantBlock, meta, 2);
 					TileEntity te = world.getTileEntity(x, y, z);
 					if(te instanceof TEWaterPlant){

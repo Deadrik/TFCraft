@@ -257,18 +257,21 @@ public class BlockGrass extends BlockTerra
 			int z = k + rand.nextInt(3) - 1;
 			int y = world.getTopSolidOrLiquidBlock(x, z) - 1;
 
-			float rain = TFC_Climate.getRainfall(world, x, y, z);
+			if (world.getBlock(x, y + 1, z).getMaterial() != Material.water)
+			{
+				float rain = TFC_Climate.getRainfall(world, x, y, z);
 
-			Block id = world.getBlock(x, y, z);
-			int meta = world.getBlockMetadata(x, y, z);
+				Block id = world.getBlock(x, y, z);
+				int meta = world.getBlockMetadata(x, y, z);
 
-			//Spread to other blocks
-			if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0)
-				world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRainByBlock(id, rain), meta, 0x2);
-			else if (TFC_Core.isClay(id) && rand.nextInt(10) == 0)
-				world.setBlock(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta, 0x2);
-			else if (TFC_Core.isPeat(id) && rand.nextInt(10) == 0)
-				world.setBlock(x, y, z, TFCBlocks.PeatGrass, 0, 0x2);
+				//Spread to other blocks
+				if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0)
+					world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRainByBlock(id, rain), meta, 0x2);
+				else if (TFC_Core.isClay(id) && rand.nextInt(10) == 0)
+					world.setBlock(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta, 0x2);
+				else if (TFC_Core.isPeat(id) && rand.nextInt(10) == 0)
+					world.setBlock(x, y, z, TFCBlocks.PeatGrass, 0, 0x2);
+			}
 		}
 	}
 

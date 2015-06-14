@@ -49,7 +49,7 @@ public class TFCBiome extends BiomeGenBase
 	public static final TFCBiome gravelbeach = (new TFCBiome(17)).setColor(0xfade55).setBiomeName("Gravel Beach").setMinMaxHeight(0.01F, 0.02F).setBiomeColor(0x8f7963);
 	public static final TFCBiome HighHills = (new TFCBiome(3)).setBiomeName("High Hills").setMinMaxHeight(0.8F, 1.6F).setBiomeColor(0x044f27);
 	public static final TFCBiome plains = (new TFCBiome(1)).setBiomeName("Plains").setMinMaxHeight(0.1F, 0.16F).setBiomeColor(0x69dfa0);
-	public static final TFCBiome swampland = (new TFCBiome(6)).setBiomeName("Swamp").setMinMaxHeight(-0.1F, 0.1F).setBiomeColor(0x1f392b).setLilyPads(8);
+	public static final TFCBiome swampland = (new TFCBiome(6)).setBiomeName("Swamp").setMinMaxHeight(-0.1F, 0.1F).setBiomeColor(0x1f392b).setLilyPads(8).setWaterPlants(45);
 	public static final TFCBiome HighHillsEdge = (new TFCBiome(20)).setBiomeName("High Hills Edge").setMinMaxHeight(0.2F, 0.4F).setBiomeColor(0x30a767);
 	public static final TFCBiome rollingHills = (new TFCBiome(30)).setBiomeName("Rolling Hills").setMinMaxHeight(0.1F, 0.4F).setBiomeColor(0x87b434);
 	public static final TFCBiome Mountains = (new TFCBiome(31)).setBiomeName("Mountains").setMinMaxHeight(0.8F, 1.6F).setBiomeColor(0x707960);
@@ -403,6 +403,12 @@ public class TFCBiome extends BiomeGenBase
 	public TFCBiome setLilyPads(int i)
 	{
 		this.theBiomeDecorator.lilyPadPerChunk = i;
+		return this;
+	}
+
+	public TFCBiome setWaterPlants(int i)
+	{
+		this.theBiomeDecorator.waterPlantsPerChunk = i;
 		return this;
 	}
 }

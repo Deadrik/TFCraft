@@ -33,7 +33,6 @@ import com.bioxx.tfc.Entities.Mobs.EntityPheasantTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityPigTFC;
 import com.bioxx.tfc.Entities.Mobs.EntitySheepTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityWolfTFC;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenFissure;
 import com.bioxx.tfc.WorldGen.MapGen.MapGenCavesTFC;
 import com.bioxx.tfc.WorldGen.MapGen.MapGenRavineTFC;
 import com.bioxx.tfc.WorldGen.MapGen.MapGenRiverRavine;
@@ -243,8 +242,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				y = this.worldObj.getPrecipitationHeight(xCoord + x, zCoord + z);
 
 				worldObj.isBlockFreezable(x + xCoord, y - 1, z + zCoord);
-				if (worldObj.provider.canSnowAt(x + xCoord, y, z + zCoord, false))
-					this.worldObj.setBlock(x + xCoord, y, z + zCoord,  TFCBlocks.Snow, 0, 0x2);
+				if (this.canSnowAt(worldObj, x + xCoord, y, z + zCoord))
+					this.worldObj.setBlock(x + xCoord, y, z + zCoord, TFCBlocks.Snow, 0, 0x2);
 			}
 		}
 
@@ -336,7 +335,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	public boolean canSnowAt(World world, int x, int y, int z)
 	{
 		float var5 = TFC_Climate.getHeightAdjustedTemp(world, x, y, z);
-		if (var5 > 0F)
+		if (var5 >= 0F)
 		{
 			return false;
 		}
@@ -738,14 +737,23 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 								}
 							}
 						}
-						if(!(biome == TFCBiome.swampland))
+
+						if (((height > seaLevel - 2 && height < seaLevel && idsTop[index + 1] == TFCBlocks.SaltWaterStationary)) || (height < seaLevel && idsTop[index + 1] == TFCBlocks.SaltWaterStationary))
 						{
-							if(((height > seaLevel - 2 && height < seaLevel && idsTop[index + 1] == TFCBlocks.SaltWaterStationary)) || (height < seaLevel && idsTop[index + 1] == TFCBlocks.SaltWaterStationary))
+							if (biome != TFCBiome.swampland) // Most areas have gravel and sand bottoms
 							{
-								if(idsBig[indexBig] != TFC_Core.getTypeForSand(rock1.data1) && rand.nextInt(5) != 0)
+								if (idsBig[indexBig] != TFC_Core.getTypeForSand(rock1.data1) && rand.nextInt(5) != 0)
 								{
 									idsBig[indexBig] = TFC_Core.getTypeForGravel(rock1.data1);
 									metaBig[indexBig] = (byte)TFC_Core.getSoilMeta(rock1.data1);
+								}
+							}
+							else // Swamp biomes have bottoms that are mostly dirt
+							{
+								if (idsBig[indexBig] != TFC_Core.getTypeForGravel(rock1.data1))
+								{
+									idsBig[indexBig] = TFC_Core.getTypeForDirt(rock1.data1);
+									metaBig[indexBig] = (byte) TFC_Core.getSoilMeta(rock1.data1);
 								}
 							}
 						}
