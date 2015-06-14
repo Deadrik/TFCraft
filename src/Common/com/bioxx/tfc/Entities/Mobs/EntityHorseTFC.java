@@ -33,10 +33,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.play.server.S1BPacketEntityAttach;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -532,6 +530,23 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 
 		return super.interact(player);
+	}
+
+	/**
+	 * Returns the Y offset from the entity's position for any entity riding this one.
+	 */
+	@Override
+	public double getMountedYOffset()
+	{
+		float offset = this.size_mod * this.height * 0.75F;
+		int type = this.getHorseType();
+
+		if (type == 1) // Donkey
+			offset *= 0.87F;
+		else if (type == 2) // Mule
+			offset *= 0.92F;
+		
+		return offset;
 	}
 
 	//We use this to catch the EntityLiving check, so that other interactions can be performed on leashed animals
