@@ -47,9 +47,19 @@ public class GuiCrucible extends GuiContainerTFC
 	@Override
 	protected void drawGuiContainerForegroundLayer(int i, int j)
 	{
+		if (TFCOptions.enableDebugMode)
+		{
+			this.fontRendererObj.drawString("Temp: " + crucibleTE.temperature, 178, 8, 0xffffff);
+		}
+
 		if (crucibleTE.currentAlloy != null)
 		{
-			if (crucibleTE.currentAlloy.outputType != null)
+			if (crucibleTE.currentAlloy.outputAmount == 0)
+			{
+				this.fontRendererObj.drawString(EnumChatFormatting.UNDERLINE + StatCollector.translateToLocal("gui.empty"), 7, 7, 0x000000);
+				return;
+			}
+			else if (crucibleTE.currentAlloy.outputType != null)
 			{
 				this.fontRendererObj.drawString(EnumChatFormatting.UNDERLINE + StatCollector.translateToLocal("gui.metal." + crucibleTE.currentAlloy.outputType.Name.replace(" ", "")), 7, 7, 0x000000);
 			}
@@ -67,11 +77,6 @@ public class GuiCrucible extends GuiContainerTFC
 					this.fontRendererObj.drawString(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.metal." + crucibleTE.currentAlloy.AlloyIngred.get(c).metalType.Name.replace(" ", "")) + ": " + EnumChatFormatting.DARK_GREEN + m + "%", 7, 18 + 10 * (c), 0x000000);
 				}
 			}
-		}
-
-		if (TFCOptions.enableDebugMode)
-		{
-			this.fontRendererObj.drawString("Temp: " + crucibleTE.temperature, 178, 8, 0xffffff);
 		}
 	}
 

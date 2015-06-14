@@ -37,6 +37,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	public byte outputTick = 0;
 	public byte tempTick = 0;
 	private int cookDelay = 0;
+	public static final int MAX_UNITS = 3000;
 
 	public TECrucible()
 	{
@@ -247,7 +248,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 	public boolean addMetal(Metal m, float amt)
 	{
-		if (getTotalMetal() + amt <= 3000 && m.Name != null && m.Name != "Unknown")
+		if (getTotalMetal() + amt <= MAX_UNITS && m.Name != null && m.Name != "Unknown")
 		{
 			if(metals.containsKey(m.Name))
 				metals.get(m.Name).amount += amt;
@@ -388,7 +389,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	public int getOutCountScaled(int length)
 	{
 		if(currentAlloy != null)
-			return ((int)this.currentAlloy.outputAmount * length)/3000;
+			return ((int) this.currentAlloy.outputAmount * length) / MAX_UNITS;
 		else
 			return 0;
 	}

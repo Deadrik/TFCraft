@@ -12,6 +12,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -118,38 +119,54 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 
 	public void CookItem(int i)
 	{
-		HeatRegistry manager = HeatRegistry.getInstance();
-		Random R = new Random();
-		TECrucible te = (TECrucible) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
+		ItemStack cookingItemStack = fireItemStacks[i];
+		TECrucible crucibleTE = (worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof TECrucible) ?
+				(TECrucible) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) : null;
 
-		// Only allow the ore to smelt if there is a valid Tuyere associated
-		// with the furnace
-		if (fireItemStacks[i] != null && te != null && storage[1] != null && cookDelay == 0)
+		/*
+		 * Only allow the ore to be smelted if there is a tuyere in the blast furnace, 
+		 * a crucible below the blast furnace that isn't full, and the delay timer has completed.
+		 */
+		if (cookingItemStack != null && crucibleTE != null && crucibleTE.getTotalMetal() < crucibleTE.MAX_UNITS
+				&& storage[1] != null /*Tuyere*/ && cookDelay == 0)
 		{
-			HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
-			if (index != null && TFC_ItemHeat.GetTemp(fireItemStacks[i]) >= index.meltTemp)
-			{
-				oreCount--;
-				charcoalCount--;
+			Random R = new Random();
+			HeatRegistry manager = HeatRegistry.getInstance();
+			HeatIndex index = manager.findMatchingIndex(cookingItemStack);
 
+			if (index != null && TFC_ItemHeat.GetTemp(cookingItemStack) >= index.meltTemp)
+			{
 				int output = 0;
-				if (fireItemStacks[i].getItem() instanceof ISmeltable)
+				Item cookingItem = cookingItemStack.getItem();
+
+				if (cookingItem instanceof ISmeltable)
 				{
-					output = ((ISmeltable) fireItemStacks[i].getItem()).GetMetalReturnAmount(fireItemStacks[i]);
-					te.addMetal(((ISmeltable) fireItemStacks[i].getItem()).GetMetalType(fireItemStacks[i]), output);
+					output = ((ISmeltable) cookingItem).GetMetalReturnAmount(cookingItemStack);
+					// Attempt to add metal to crucible.
+					if (!crucibleTE.addMetal(((ISmeltable) cookingItem).GetMetalType(cookingItemStack), output))
+						return; // Do not decrease fuel or ore if the crucible is too full.
 				}
 				else
 				{
-					Metal m = MetalRegistry.instance.getMetalFromItem(fireItemStacks[i].getItem());
-					output = index.getOutput(fireItemStacks[i], R).getItemDamage();
+					Metal m = MetalRegistry.instance.getMetalFromItem(cookingItem);
+					output = index.getOutput(cookingItemStack, R).getItemDamage();
 					if(m != null)
-						te.addMetal(m, (short)(100-output));
+					{
+						// Attempt to add metal to crucible.
+						if (!crucibleTE.addMetal(m, (short) (100 - output)))
+							return; // Do not decrease fuel or ore if the crucible is too full.		
+					}					
 				}
-				cookDelay = 100;
-				fireItemStacks[i] = null;
 
-				//Treat fireItemStacks as a queue, and shift everything forward when an item is melted.
-				//This way the hottest item is always in the first slot - Kitty
+				oreCount--;
+				charcoalCount--;
+				cookDelay = 100; // Five seconds (20 tps) until the next piece of ore can be smelted
+				fireItemStacks[i] = null; // Delete cooked item
+
+				/*
+				 * Treat fireItemStacks as a queue, and shift everything forward when an item is melted.
+				 * This way the hottest item is always in the first slot - Kitty
+				 */
 				Queue<ItemStack> buffer = new ArrayBlockingQueue<ItemStack>(fireItemStacks.length);
 				for (ItemStack is : fireItemStacks)
 				{
@@ -161,12 +178,15 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 
 				fireItemStacks = buffer.toArray(new ItemStack[fireItemStacks.length]);
 
+				// Damage the tuyere 1 point per item (not metal unit) smelted.
 				storage[1].setItemDamage(storage[1].getItemDamage() + 1);
 				if (storage[1] != null && storage[1].getItemDamage() == storage[1].getMaxDamage())
 				{
 					setInventorySlotContents(1, null);
 				}
-				te.temperature = (int)fireTemp;
+
+				// Update crucible temperature
+				crucibleTE.temperature = (int)fireTemp;
 			}
 		}
 	}

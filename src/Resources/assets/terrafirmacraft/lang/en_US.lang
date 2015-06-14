@@ -2306,6 +2306,7 @@ gui.LogPile=Log Pile
 gui.Output=Output
 gui.done=Done
 gui.cancel=Cancel
+gui.empty=Empty
 gui.Sluice.Soil=Soil
 gui.Sluice.Overworked=Overworked
 gui.Workbench.Crafting=Crafting
