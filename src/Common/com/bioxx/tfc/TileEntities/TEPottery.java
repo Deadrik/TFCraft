@@ -87,7 +87,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 				StartPitFire();
 
 			//Make sure to keep the fire going throughout the length of the burn
-			if(blockAbove != Blocks.fire && TFC_Time.getTotalTicks() - burnStart < TFC_Time.hourLength * TFCOptions.pitKilnBurnTime)
+			if(blockAbove != Blocks.fire && TFC_Time.getTotalTicks() - burnStart <= TFC_Time.hourLength * TFCOptions.pitKilnBurnTime)
 			{
 				if ((blockAbove.isAir(worldObj, xCoord, yCoord + 1, zCoord) || worldObj.getBlock(xCoord, yCoord + 1, zCoord).getMaterial().getCanBurn()) && isValid())
 					worldObj.setBlock(xCoord, yCoord + 1, zCoord, Blocks.fire);
@@ -102,7 +102,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 			}
 
 			//If the total time passes then we complete the burn and turn the clay into ceramic
-			if(blockAbove == Blocks.fire && TFC_Time.getTotalTicks() > burnStart + (TFCOptions.pitKilnBurnTime * TFC_Time.hourLength))
+			if (blockAbove == Blocks.fire && TFC_Time.getTotalTicks() >= burnStart + (TFCOptions.pitKilnBurnTime * TFC_Time.hourLength))
 			{
 				worldObj.setBlockToAir(xCoord, yCoord + 1, zCoord);
 				if(inventory[0] != null)
