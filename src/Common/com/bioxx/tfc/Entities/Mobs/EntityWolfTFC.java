@@ -18,10 +18,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -261,7 +259,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	@Override
 	public void setTamed(boolean par1)
 	{
-		if(this.familiarity > 80)
+		if (this.familiarity > 80 && !this.isTamed())
 		{
 			super.setTamed(par1);
 
@@ -447,7 +445,13 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	@SideOnly(Side.CLIENT)
 	public float getTailRotation()
 	{
-		return this.isAngry() ? 1.5393804F : (this.isTamed() ? (0.55F - (this.getMaxHealth() - this.dataWatcher.getWatchableObjectFloat(18)) * 0.02F) * (float)Math.PI : ((float)Math.PI / 5F));
+		float scale = this.getMaxHealth() / 20.0F; // Vanilla wolves use a value of 20.0F
+		if (this.isAngry())
+			return 1.5393804F;
+		else if (this.getOwner() != null)
+			return (0.55F - ((this.getMaxHealth() - this.dataWatcher.getWatchableObjectFloat(18)) / scale) * 0.02F) * (float) Math.PI;
+		else
+			return (float) Math.PI / 5F;
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package com.bioxx.tfc.Render.Models;
 
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.model.ModelWolf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
@@ -12,7 +12,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityWolfTFC;
 import com.bioxx.tfc.api.Entities.IAnimal;
 
-public class ModelWolfTFC extends ModelWolf
+public class ModelWolfTFC extends ModelBase
 {
 	/** main box for the wolf head */
 	public ModelRenderer wolfHeadMain;
@@ -77,14 +77,13 @@ public class ModelWolfTFC extends ModelWolf
 	@Override
 	public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
-		//super.render(entity, par2, par3, par4, par5, par6, par7);
-		//this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
+		super.render(entity, par2, par3, par4, par5, par6, par7);
+		this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
 		float percent = TFC_Core.getPercentGrown((IAnimal)entity);
 		float ageScale = 2.0F-percent;
 		//float offset = 1.4f - percent;
 
-		this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 		if(entity instanceof IAnimal)
 		{
 			GL11.glPushMatrix();
@@ -105,7 +104,7 @@ public class ModelWolfTFC extends ModelWolf
 	@Override
 	public void setLivingAnimations(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
 	{
-		EntityWolfTFC entitywolf = (EntityWolfTFC)par1EntityLivingBase;
+		EntityWolfTFC entitywolf = (EntityWolfTFC) par1EntityLivingBase;
 
 		if (entitywolf.isAngry())
 		{
@@ -162,6 +161,9 @@ public class ModelWolfTFC extends ModelWolf
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
         this.wolfHeadMain.rotateAngleX = par5 / (180F / (float)Math.PI);
         this.wolfHeadMain.rotateAngleY = par4 / (180F / (float)Math.PI);
-        this.wolfTail.rotateAngleX = (float) (Math.PI/4f) * ((par7Entity instanceof EntityWolfTFC && ((EntityWolfTFC)par7Entity).happyTicks > 0)?2.5F:1);
+		if (par7Entity instanceof EntityWolfTFC && ((EntityWolfTFC) par7Entity).happyTicks > 0)
+			this.wolfTail.rotateAngleX = (float) (Math.PI / 4f) * 2.5F;
+		else
+			this.wolfTail.rotateAngleX = par3;
     }
 }
