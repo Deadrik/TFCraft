@@ -5,7 +5,9 @@ import java.awt.Color;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,6 +28,8 @@ import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.Entities.Mobs.EntityPigTFC;
+import com.bioxx.tfc.GUI.GuiScreenHorseInventoryTFC;
 import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemCustomHoe;
@@ -41,6 +45,7 @@ public class RenderOverlayHandler
 {
 	public static ResourceLocation tfcicons = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "icons.png");
 	private FontRenderer fontrenderer = null;
+	public int recordTimer = 0;
 
 	@SubscribeEvent
 	public void renderText(RenderGameOverlayEvent.Chat event)
@@ -206,10 +211,11 @@ public class RenderOverlayHandler
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			TFC_Core.bindTexture(new ResourceLocation("minecraft:textures/gui/icons.png"));
-			//Draw experience bar
-			int cap = 0;
-			if (player.ridingEntity == null)
+
+			//Draw experience bar when not riding anything, riding a non-living entity such as a boat/minecart, or riding a pig.
+			if (!(player.ridingEntity instanceof EntityLiving) || player.ridingEntity instanceof EntityPigTFC)
 			{
+				int cap = 0;
 				cap = player.xpBarCap();
 				int left = mid - 91;
 
@@ -241,7 +247,16 @@ public class RenderOverlayHandler
 				// We have to reset the color back to white
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			}
-			else if (player.ridingEntity instanceof EntityLivingBase)
+
+			// Don't show the dismount message if it was triggered by the "mounting" from opening a horse inventory.
+			if (mc.currentScreen instanceof GuiScreenHorseInventoryTFC)
+			{
+				recordTimer = 0;
+				mc.ingameGUI.recordPlayingUpFor = 0;
+			}
+
+			// Draw mount's health bar
+			if (player.ridingEntity instanceof EntityLivingBase)
 			{
 				GuiIngameForge.renderHealthMount = false;
 				TFC_Core.bindTexture(tfcicons);
@@ -251,8 +266,49 @@ public class RenderOverlayHandler
 				double mountCurrentHealth = mount.getHealth();
 				float mountPercentHealth = (float)Math.min(mountCurrentHealth/mountMaxHealth, 1.0f);
 				this.drawTexturedModalRect(mid+1, armorRowHeight, 90, 10, (int) (90*mountPercentHealth), 10);
+
+				String mountHealthString = (int) Math.min(mountCurrentHealth, mountMaxHealth) + "/" + (int) mountMaxHealth;
+				mc.fontRenderer.drawString(mountHealthString, mid + 47 - (mc.fontRenderer.getStringWidth(mountHealthString) / 2), armorRowHeight + 2, Color.white.getRGB());
+				renderDismountOverlay(mc, mid, sr.getScaledHeight(), event.partialTicks);
 			}
+
 			TFC_Core.bindTexture(new ResourceLocation("minecraft:textures/gui/icons.png"));
+		}
+	}
+
+	/*
+	 * Based on net.minecraftforge.client.GuiIngameForge.renderRecordOverlay
+	 * which is used to render both the pop-up from playing a record,
+	 * and the "Press 'sneak' to dismount" message.
+	 * We only care about dismounting, and not record playing for this method.
+	 */
+	protected void renderDismountOverlay(Minecraft mc, int midpoint, int height, float partialTicks)
+	{
+		if (recordTimer == 0)
+		{
+			recordTimer = mc.ingameGUI.recordPlayingUpFor; // Copy the vanilla timer
+			mc.ingameGUI.recordPlayingUpFor = 0; // Reset the vanilla timer so the vanilla overlay doesn't appear
+		}
+
+		if (recordTimer > 0)
+		{
+			float hue = recordTimer - partialTicks;
+			int opacity = (int) (hue * 256.0F / 20.0F);
+			if (opacity > 255)
+				opacity = 255;
+
+			if (opacity > 0)
+			{
+				GL11.glPushMatrix();
+				GL11.glTranslatef(midpoint, height - 48, 0.0F);
+				GL11.glEnable(GL11.GL_BLEND);
+				OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
+				mc.fontRenderer.drawString(mc.ingameGUI.recordPlaying, -mc.fontRenderer.getStringWidth(mc.ingameGUI.recordPlaying) / 2, -12, 0xFFFFFF | (opacity << 24));
+				GL11.glDisable(GL11.GL_BLEND);
+				GL11.glPopMatrix();
+			}
+
+			recordTimer--;
 		}
 	}
 
