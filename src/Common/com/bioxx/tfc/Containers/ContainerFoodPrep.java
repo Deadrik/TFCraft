@@ -14,7 +14,6 @@ import com.bioxx.tfc.Containers.Slots.SlotSize;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
@@ -65,10 +64,10 @@ public class ContainerFoodPrep extends ContainerTFC
 		{
 			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 0, 44, 24).addItemInclusion(TFCItems.WheatBread, TFCItems.BarleyBread, TFCItems.OatBread,
 					TFCItems.RyeBread, TFCItems.RiceBread, TFCItems.CornBread).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 62, 24).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 80, 24).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 98, 24).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 116, 24).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 62, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 80, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 98, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 116, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
 			/*this.addSlotToContainer(new SlotFoodOnly(chestInventory, 5, 125, 11).addItemInclusion(TFCItems.WheatBread, TFCItems.BarleyBread, TFCItems.OatBread, 
 					TFCItems.RyeBread, TFCItems.RiceBread, TFCItems.CornBread).setSize(EnumSize.HUGE));*/
 		}
