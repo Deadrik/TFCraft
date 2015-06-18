@@ -208,7 +208,7 @@ public class BlockOre extends BlockCollapsible
 		}
 	}
 
-	private int getOreGrade(TEOre te, int ore)
+	public int getOreGrade(TEOre te, int ore)
 	{
 		if(te != null)
 		{

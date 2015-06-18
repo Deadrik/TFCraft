@@ -13,11 +13,13 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Blocks.Terrain.BlockOre;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.TileEntities.TEOre;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
@@ -69,11 +71,15 @@ public class ItemProPick extends ItemTerra
 			// Getting the meta data only when we actually need it.
 			int meta = world.getBlockMetadata(x, y, z);
 
+			SkillRank rank = TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_PROSPECTING);
+
 			// If an ore block is targeted directly, it'll tell you what it is.
-			if (block == TFCBlocks.Ore ||
-					block == TFCBlocks.Ore2 ||
-					block == TFCBlocks.Ore3)
+			if ((block == TFCBlocks.Ore ||	block == TFCBlocks.Ore2 || block == TFCBlocks.Ore3) && 
+					world.getTileEntity(x, y, z) instanceof TEOre)
 			{
+				TEOre te = (TEOre) world.getTileEntity(x, y, z);
+				if (block == TFCBlocks.Ore && rank == SkillRank.Master)
+					meta = ((BlockOre) block).getOreGrade(te, meta);
 				if (block == TFCBlocks.Ore2) meta = meta + Global.ORE_METAL.length;
 				if (block == TFCBlocks.Ore3) meta = meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length;
 				TellResult(player, new ItemStack(TFCItems.OreChunk, 1, meta));
@@ -81,8 +87,6 @@ public class ItemProPick extends ItemTerra
 			}
 
 			random = new Random(x * z + y);
-
-			SkillRank rank = TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_PROSPECTING);
 			int chance = 60 + ((rank.ordinal()+1)*10);
 
 			results.clear();
@@ -110,8 +114,14 @@ public class ItemProPick extends ItemTerra
 						block = world.getBlock(blockX, blockY, blockZ);
 						meta = world.getBlockMetadata(blockX, blockY, blockZ);
 						ItemStack ore;
-						if (block == TFCBlocks.Ore)
-							ore = new ItemStack(TFCItems.OreChunk, 1, meta);
+						if (block == TFCBlocks.Ore && world.getTileEntity(blockX, blockY, blockZ) instanceof TEOre)
+						{
+							TEOre te = (TEOre) world.getTileEntity(blockX, blockY, blockZ);
+							if (rank == SkillRank.Master)
+								ore = new ItemStack(TFCItems.OreChunk, 1, ((BlockOre) block).getOreGrade(te, meta));
+							else
+								ore = new ItemStack(TFCItems.OreChunk, 1, meta);
+						}
 						else if (block == TFCBlocks.Ore2)
 							ore = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length);
 						else if (block == TFCBlocks.Ore3)
