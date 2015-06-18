@@ -87,7 +87,6 @@ public class ItemLooseRock extends ItemTerra
 
 		if(is.stackSize > 1)
 		{
-			is.stackSize--;
 			player.openGui(TerraFirmaCraft.instance, 28, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
 		}
 		return is;

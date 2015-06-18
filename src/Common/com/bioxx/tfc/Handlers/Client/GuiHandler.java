@@ -7,6 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.GuiOpenEvent;
 
+import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
 import com.bioxx.tfc.GUI.GuiAnvil;
@@ -48,9 +49,9 @@ import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.TileEntities.TEHopper;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
+import com.bioxx.tfc.TileEntities.TEQuern;
 import com.bioxx.tfc.TileEntities.TESluice;
 import com.bioxx.tfc.TileEntities.TEVessel;
-import com.bioxx.tfc.TileEntities.TEQuern;
 import com.bioxx.tfc.TileEntities.TEWorkbench;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -95,7 +96,8 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 		case 27:
 			return new GuiCalendar(player);
 		case 28:
-			return new GuiKnapping(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).specialCraftingType , world, x, y, z);
+			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
+			return new GuiKnapping(player.inventory, pi.specialCraftingTypeAlternate == null ? pi.specialCraftingType : null, world, x, y, z);
 		case 29:
 			return new GuiChestTFC(player.inventory, ((TEChest) te), world, x, y, z);
 		case 31:

@@ -45,7 +45,6 @@ public class ItemLeather extends ItemLooseRock
 
 		if(hasKnife)
 		{
-			itemstack.stackSize--;
 			if(specialCraftingTypeAlternate != null)
 				pi.specialCraftingTypeAlternate = specialCraftingTypeAlternate;
 			else

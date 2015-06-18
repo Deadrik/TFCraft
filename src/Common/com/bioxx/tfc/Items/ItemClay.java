@@ -43,7 +43,6 @@ public class ItemClay extends ItemLooseRock
 				pi.specialCraftingTypeAlternate = new ItemStack(specialCraftingType, 1, 3);
 			}
 
-			itemstack.stackSize -= 5;
 			entityplayer.openGui(TerraFirmaCraft.instance, 28, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
 		}
 		return itemstack;
