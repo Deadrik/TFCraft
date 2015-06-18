@@ -11,13 +11,13 @@ import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Containers.ContainerSpecialCrafting;
 import com.bioxx.tfc.GUI.GuiKnapping;
 
-public class SlotCraftingMetal extends Slot
+public class SlotSpecialCraftingOutput extends Slot
 {
 	private final IInventory craftMatrix;
 	private EntityPlayer thePlayer;
 	private Container container;
 
-	public SlotCraftingMetal(Container container, EntityPlayer entityplayer, IInventory iinventory, IInventory iinventory1, int i, int j, int k)
+	public SlotSpecialCraftingOutput(Container container, EntityPlayer entityplayer, IInventory iinventory, IInventory iinventory1, int i, int j, int k)
 	{
 		super(iinventory1, i, j, k);
 		this.container = container;

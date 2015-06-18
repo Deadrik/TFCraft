@@ -9,7 +9,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Containers.Slots.SlotCraftingMetal;
+import com.bioxx.tfc.Containers.Slots.SlotSpecialCraftingOutput;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
@@ -22,7 +22,7 @@ public class ContainerSpecialCrafting extends ContainerTFC
 	 *  Used for knapping and leather working */
 	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 5, 5);
 
-	private SlotCraftingMetal outputSlot;
+	private SlotSpecialCraftingOutput outputSlot;
 	private boolean decreasedStack = false;
 
 	/** The crafting result, size 1. */
@@ -42,7 +42,7 @@ public class ContainerSpecialCrafting extends ContainerTFC
 				craftMatrix.setInventorySlotContents(j1, is.copy());
 		}
 
-		outputSlot = new SlotCraftingMetal(this, inventoryplayer.player, craftMatrix, craftResult, 0, 128, 44);
+		outputSlot = new SlotSpecialCraftingOutput(this, inventoryplayer.player, craftMatrix, craftResult, 0, 128, 44);
 		addSlotToContainer(outputSlot);
 
 		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 108, false, true);
