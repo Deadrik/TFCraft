@@ -29,13 +29,13 @@ public class ContainerSpecialCrafting extends ContainerTFC
 	public IInventory craftResult = new InventoryCraftResult();
 	private World worldObj;
 	InventoryPlayer invPlayer;
-
+	boolean isConstructing = false;
 	public ContainerSpecialCrafting(InventoryPlayer inventoryplayer, ItemStack is, World world, int x, int y, int z)
 	{
 		invPlayer = inventoryplayer;
 		this.worldObj = world; // Must be set before inventorySlotContents to prevent NPE
 		decreasedStack = false;
-
+		isConstructing = true;
 		for (int j1 = 0; j1 < 25; j1++)
 		{
 			if(is != null)
@@ -48,6 +48,7 @@ public class ContainerSpecialCrafting extends ContainerTFC
 		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 108, false, true);
 
 		this.onCraftMatrixChanged(this.craftMatrix);
+		isConstructing = false;
 	}
 
 	@Override
@@ -71,7 +72,7 @@ public class ContainerSpecialCrafting extends ContainerTFC
 		this.craftResult.setInventorySlotContents(0, CraftingManagerTFC.getInstance().findMatchingRecipe(this.craftMatrix, worldObj));
 
 		// Handle decreasing the stack of the held item used to open the interface.
-		if (!decreasedStack)
+		if (!decreasedStack && !isConstructing)
 		{
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(invPlayer.player);
 			// A valid clay recipe has been formed.
@@ -80,14 +81,16 @@ public class ContainerSpecialCrafting extends ContainerTFC
 				if (craftResult.getStackInSlot(0) != null)
 				{
 					setDecreasedStack(true); // Mark container so it won't decrease again.
-					invPlayer.decrStackSize(invPlayer.currentItem, 5);
+					if (!this.worldObj.isRemote) // Server only to prevent it removing multiple times.
+						invPlayer.decrStackSize(invPlayer.currentItem, 5);
 				}
 			}
 			// A piece of rock or leather has been removed.
 			else if (hasPieceBeenRemoved(pi))
 			{
 				setDecreasedStack(true); // Mark container so it won't decrease again.
-				invPlayer.consumeInventoryItem(invPlayer.getCurrentItem().getItem());
+				if (!this.worldObj.isRemote) // Server only to prevent it removing multiple times.
+					invPlayer.consumeInventoryItem(invPlayer.getCurrentItem().getItem());
 			}
 		}
 	}
@@ -107,7 +110,7 @@ public class ContainerSpecialCrafting extends ContainerTFC
 			ItemStack isFromSlot = grabbedSlot.getStack();
 			isTemp = isFromSlot.copy();
 
-			if (!this.mergeItemStack(isFromSlot, 0, 36, true))
+			if (!this.mergeItemStack(isFromSlot, 1, 37, true))
 				return null;
 
 			if (isFromSlot.stackSize == 0)
@@ -132,9 +135,9 @@ public class ContainerSpecialCrafting extends ContainerTFC
 	public boolean hasPieceBeenRemoved(PlayerInfo pi)
 	{
 		// Knapping interface is a boolean array where the value is true if that button has been pushed.
-		for (int i = 0; i < pi.knappingInterface.length; i++)
+		for (int i = 0; i < this.craftMatrix.getSizeInventory(); i++)
 		{
-			if (pi.knappingInterface[i])
+			if (this.craftMatrix.getStackInSlot(i) == null)
 				return true;
 		}
 
