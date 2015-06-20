@@ -80,16 +80,14 @@ public class ContainerSpecialCrafting extends ContainerTFC
 				if (craftResult.getStackInSlot(0) != null)
 				{
 					setDecreasedStack(true); // Mark container so it won't decrease again.
-					if (!this.worldObj.isRemote) // Server only to prevent it removing multiple times.
-						invPlayer.decrStackSize(invPlayer.currentItem, 5);
+					invPlayer.decrStackSize(invPlayer.currentItem, 5);
 				}
 			}
 			// A piece of rock or leather has been removed.
 			else if (hasPieceBeenRemoved(pi))
 			{
 				setDecreasedStack(true); // Mark container so it won't decrease again.
-				if (!this.worldObj.isRemote) // Server only to prevent it removing multiple times.
-					invPlayer.consumeInventoryItem(invPlayer.getCurrentItem().getItem());
+				invPlayer.consumeInventoryItem(invPlayer.getCurrentItem().getItem());
 			}
 		}
 	}
@@ -104,26 +102,13 @@ public class ContainerSpecialCrafting extends ContainerTFC
 		ItemStack isTemp = null;
 		Slot grabbedSlot = (Slot)this.inventorySlots.get(clickedIndex);
 
-		if(grabbedSlot != null && grabbedSlot.getHasStack())
+		if (grabbedSlot != null && grabbedSlot instanceof SlotSpecialCraftingOutput && grabbedSlot.getHasStack())
 		{
 			ItemStack isFromSlot = grabbedSlot.getStack();
 			isTemp = isFromSlot.copy();
 
-			if(clickedIndex < 10)
-			{
-				if (!this.mergeItemStack(isFromSlot, 10, 36, true))
-					return null;
-			}
-			else if(clickedIndex >= 10 && clickedIndex < 37)
-			{
-				if (!this.mergeItemStack(isFromSlot, 0, 9, true))
-					return null;
-			}
-			else if(clickedIndex >= 37 && clickedIndex < 62)
-			{
-				if (!this.mergeItemStack(isFromSlot, 0, 36, true))
-					return null;
-			}
+			if (!this.mergeItemStack(isFromSlot, 0, 36, true))
+				return null;
 
 			if (isFromSlot.stackSize == 0)
 				grabbedSlot.putStack((ItemStack)null);
@@ -135,7 +120,6 @@ public class ContainerSpecialCrafting extends ContainerTFC
 
 			grabbedSlot.onPickupFromSlot(player, isFromSlot);
 		}
-		this.onCraftMatrixChanged(this.craftMatrix);
 		return isTemp;
 	}
 
