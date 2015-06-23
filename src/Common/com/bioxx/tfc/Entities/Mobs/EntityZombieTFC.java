@@ -82,7 +82,9 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 		switch (this.rand.nextInt(3))
 		{
 		case 0:
-			this.dropItem(TFCItems.WroughtIronIngot, 1);
+			Random R0 = new Random();
+			if (R0.nextInt(3) == 0)
+				this.dropItem(TFCItems.WroughtIronIngot, 1);
 			break;
 		case 1:
 			ItemStack is1 = new ItemStack(TFCItems.Carrot);
