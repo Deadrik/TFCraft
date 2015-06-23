@@ -1,9 +1,11 @@
 package com.bioxx.tfc.Handlers.Client;
 
 import java.awt.Color;
+import java.lang.reflect.Field;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
@@ -40,12 +42,15 @@ import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class RenderOverlayHandler
 {
 	public static ResourceLocation tfcicons = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "icons.png");
 	private FontRenderer fontrenderer = null;
 	public int recordTimer = 0;
+	private final Field _recordPlayingUpFor = ReflectionHelper.findField(GuiIngame.class, "recordPlayingUpFor", "field_73845_h");
+	private final Field _recordPlaying = ReflectionHelper.findField(GuiIngame.class, "recordPlaying", "field_73838_g");
 
 	@SubscribeEvent
 	public void renderText(RenderGameOverlayEvent.Chat event)
@@ -252,7 +257,13 @@ public class RenderOverlayHandler
 			if (mc.currentScreen instanceof GuiScreenHorseInventoryTFC)
 			{
 				recordTimer = 0;
-				mc.ingameGUI.recordPlayingUpFor = 0;
+				try
+				{
+					_recordPlayingUpFor.setInt(mc.ingameGUI, 0);
+				} catch (Exception e)
+				{
+					throw new RuntimeException(e);
+				}
 			}
 
 			// Draw mount's health bar
@@ -286,8 +297,15 @@ public class RenderOverlayHandler
 	{
 		if (recordTimer == 0)
 		{
-			recordTimer = mc.ingameGUI.recordPlayingUpFor; // Copy the vanilla timer
-			mc.ingameGUI.recordPlayingUpFor = 0; // Reset the vanilla timer so the vanilla overlay doesn't appear
+			try
+			{
+				recordTimer = _recordPlayingUpFor.getInt(mc.ingameGUI); // Copy the vanilla timer
+				_recordPlayingUpFor.setInt(mc.ingameGUI, 0); // Reset the vanilla timer so the vanilla overlay doesn't appear
+
+			} catch (Exception e)
+			{
+				throw new RuntimeException(e);
+			}
 		}
 
 		if (recordTimer > 0)
@@ -299,13 +317,22 @@ public class RenderOverlayHandler
 
 			if (opacity > 0)
 			{
-				GL11.glPushMatrix();
-				GL11.glTranslatef(midpoint, height - 48, 0.0F);
-				GL11.glEnable(GL11.GL_BLEND);
-				OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
-				mc.fontRenderer.drawString(mc.ingameGUI.recordPlaying, -mc.fontRenderer.getStringWidth(mc.ingameGUI.recordPlaying) / 2, -12, 0xFFFFFF | (opacity << 24));
-				GL11.glDisable(GL11.GL_BLEND);
-				GL11.glPopMatrix();
+				try
+				{
+					String recordPlaying = (String) _recordPlaying.get(mc.ingameGUI);
+
+					GL11.glPushMatrix();
+					GL11.glTranslatef(midpoint, height - 48, 0.0F);
+					GL11.glEnable(GL11.GL_BLEND);
+					OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
+					mc.fontRenderer.drawString(recordPlaying, -mc.fontRenderer.getStringWidth(recordPlaying) / 2, -12, 0xFFFFFF | (opacity << 24));
+					GL11.glDisable(GL11.GL_BLEND);
+					GL11.glPopMatrix();
+
+				} catch (Exception e)
+				{
+					throw new RuntimeException(e);
+				}
 			}
 
 			recordTimer--;
