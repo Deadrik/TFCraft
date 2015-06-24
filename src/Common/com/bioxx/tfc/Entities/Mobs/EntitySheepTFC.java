@@ -15,9 +15,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -488,7 +486,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		hard_mod = nbt.getFloat ("Hardiness Modifier");
 
 		familiarity = nbt.getInteger("Familiarity");
-		lastFamiliarityUpdate = nbt.getLong("lastFamiliarityUpdate");
+		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
 		familiarizedToday = nbt.getBoolean("Familiarized Today");
 
 		hunger = nbt.getInteger ("Hunger");
