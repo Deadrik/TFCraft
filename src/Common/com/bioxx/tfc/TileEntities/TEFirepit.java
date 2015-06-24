@@ -385,7 +385,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 						Food.setFuelProfile(is, EnumFuelMaterial.getFuelProfile(fuelTasteProfile));
 					}
 				}
-				else if (fireTemp > temp)
+				else if (fireTemp > temp && index.hasOutput())
 				{
 					temp += TFC_ItemHeat.getTempIncrease(is);
 				}

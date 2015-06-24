@@ -30,7 +30,7 @@ public class TEFireEntity extends NetworkTileEntity
 			HeatRegistry manager = HeatRegistry.getInstance();
 			HeatIndex index = manager.findMatchingIndex(is);
 
-			if (index != null)
+			if (index != null && index.hasOutput())
 			{
 				float temp = TFC_ItemHeat.GetTemp(is);
 				if (fireTemp > temp)

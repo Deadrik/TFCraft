@@ -77,8 +77,11 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 
 	@Override
 	public boolean isSmeltable(ItemStack is) {
-		// TODO Auto-generated method stub
-		return true;
+		FluidStack fuel = FluidStack.loadFluidStackFromNBT(is.getTagCompound());
+		if (fuel == null || fuel.amount == 0)
+			return true;
+		else
+			return false;
 	}
 
 	@Override
@@ -93,12 +96,12 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 		int meta = is.getItemDamage();
 		switch(meta)
 		{
-		case 1: return Global.GOLD;
-		case 2: return Global.PLATINUM;
-		case 3: return Global.ROSEGOLD;
-		case 4: return Global.SILVER;
-		case 5: return Global.STERLINGSILVER;
-		case 6: return Global.BLUESTEEL;
+		case 0: return Global.GOLD;
+		case 1: return Global.PLATINUM;
+		case 2: return Global.ROSEGOLD;
+		case 3: return Global.SILVER;
+		case 4: return Global.STERLINGSILVER;
+		case 5: return Global.BLUESTEEL;
 		default : return Global.UNKNOWN;
 		}
 	}
