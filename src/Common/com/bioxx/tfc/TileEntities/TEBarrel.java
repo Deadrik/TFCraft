@@ -525,7 +525,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		nbt.setByte("rotation", rotation);
 		nbt.setBoolean("sealed", sealed);
-		nbt.setInteger("fluid", fluid != null ? fluid.fluidID : -1);
+		nbt.setInteger("fluid", fluid != null ? fluid.getFluidID() : -1);
 		nbt.setInteger("fluidAmount", fluid != null ? fluid.amount : 0);
 		nbt.setInteger("barrelType", barrelType);
 	}

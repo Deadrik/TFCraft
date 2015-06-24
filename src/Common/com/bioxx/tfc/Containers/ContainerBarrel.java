@@ -124,10 +124,10 @@ public class ContainerBarrel extends ContainerTFC
 		{
 			ICrafting var2 = (ICrafting)this.crafters.get(var1);
 
-			if (this.barrel.getFluidStack() != null && this.liquidID != this.barrel.getFluidStack().fluidID)
+			if (this.barrel.getFluidStack() != null && this.liquidID != this.barrel.getFluidStack().getFluidID())
 			{
-				liquidID = barrel.getFluidStack().fluidID;
-				var2.sendProgressBarUpdate(this, 0, this.barrel.getFluidStack().fluidID);
+				liquidID = barrel.getFluidStack().getFluidID();
+				var2.sendProgressBarUpdate(this, 0, this.barrel.getFluidStack().getFluidID());
 			}
 			if (this.liquidLevel != this.barrel.getFluidLevel())
 			{
