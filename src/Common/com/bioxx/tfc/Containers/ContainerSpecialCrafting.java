@@ -36,6 +36,7 @@ public class ContainerSpecialCrafting extends ContainerTFC
 		this.worldObj = world; // Must be set before inventorySlotContents to prevent NPE
 		decreasedStack = false;
 		isConstructing = true;
+		bagsSlotNum = inventoryplayer.currentItem;
 		for (int j1 = 0; j1 < 25; j1++)
 		{
 			if(is != null)
@@ -45,7 +46,7 @@ public class ContainerSpecialCrafting extends ContainerTFC
 		outputSlot = new SlotSpecialCraftingOutput(this, inventoryplayer.player, craftMatrix, craftResult, 0, 128, 44);
 		addSlotToContainer(outputSlot);
 
-		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 108, false, true);
+		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 108, true, true);
 
 		this.onCraftMatrixChanged(this.craftMatrix);
 		isConstructing = false;

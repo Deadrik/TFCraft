@@ -95,4 +95,20 @@ public class GuiKnapping extends GuiContainerTFC
 	{
 		drawGui(texture);
 	}
+
+	/**
+	 * This function is what controls the hotbar shortcut check when you press a
+	 * number key when hovering a stack.
+	 */
+	@Override
+	protected boolean checkHotbarKeys(int par1)
+	{
+		if (this.mc.thePlayer.inventory.currentItem != par1 - 2)
+		{
+			super.checkHotbarKeys(par1);
+			return true;
+		}
+		else
+			return false;
+	}
 }
