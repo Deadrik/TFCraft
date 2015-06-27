@@ -45,11 +45,10 @@ public class BlockLogPile extends BlockTerraContainer
 	@Override
 	public boolean isFireSource(World world, int x, int y, int z, ForgeDirection side)
 	{
-		TELogPile te = (TELogPile) world.getTileEntity(x, y, z);
-		//int time = (int) (TFC_Time.getTotalHours()-te.fireTimer);
-		if (te.isOnFire && side == UP)
+		if (world.getTileEntity(x,y,z) instanceof TELogPile && side == UP)
 		{
-			return true;
+			if (((TELogPile) world.getTileEntity(x, y, z)).isOnFire)
+				return true;
 		}
 		return false;
 	}
@@ -185,11 +184,9 @@ public class BlockLogPile extends BlockTerraContainer
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
-		if(!world.isRemote)
+		if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TELogPile)
 		{
-			TELogPile teLogPile = (TELogPile)world.getTileEntity(x, y, z);
-			if(teLogPile != null)
-				teLogPile.neighborChanged();
+			((TELogPile) world.getTileEntity(x, y, z)).lightNeighbors();
 		}
 	}
 
@@ -202,10 +199,14 @@ public class BlockLogPile extends BlockTerraContainer
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
-		TELogPile te = (TELogPile)world.getTileEntity(x, y, z);
-		if(te.isOnFire && te.fireTimer+TFCOptions.charcoalPitBurnTime < TFC_Time.getTotalHours())
+		if (world.getTileEntity(x, y, z) instanceof TELogPile)
 		{
-			te.createCharcoal(x, y, z, true);
+			TELogPile te = (TELogPile) world.getTileEntity(x, y, z);
+
+			if (te.isOnFire && te.fireTimer + TFCOptions.charcoalPitBurnTime < TFC_Time.getTotalHours())
+			{
+				te.createCharcoal(x, y, z, true);
+			}
 		}
 	}
 
@@ -213,7 +214,7 @@ public class BlockLogPile extends BlockTerraContainer
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand)
 	{
-		if(((TELogPile)world.getTileEntity(x, y, z)).isOnFire)
+		if (world.getTileEntity(x, y, z) instanceof TELogPile && ((TELogPile) world.getTileEntity(x, y, z)).isOnFire)
 		{
 			double centerX = x + 0.5F;
 			double centerY = y + 2F;

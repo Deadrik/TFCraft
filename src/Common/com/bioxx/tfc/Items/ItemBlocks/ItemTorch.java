@@ -27,7 +27,7 @@ public class ItemTorch extends ItemTerraBlock
 			{
 				TELogPile te = (TELogPile) entityItem.worldObj.getTileEntity((int)Math.floor(entityItem.posX), (int)Math.floor(entityItem.posY)-1, (int)Math.floor(entityItem.posZ));
 				te.activateCharcoal();
-				te.neighborChanged();
+				te.lightNeighbors();
 				entityItem.setDead();
 			}
 			else

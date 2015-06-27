@@ -266,7 +266,7 @@ public class TELogPile extends TileEntity implements IInventory
 		return false;
 	}
 
-	public void neighborChanged()
+	public void lightNeighbors()
 	{
 		if(!isOnFire)
 			return;
@@ -304,9 +304,12 @@ public class TELogPile extends TileEntity implements IInventory
 	{
 		while(blocksOnFire.size() > 0)
 		{
-			Vector3f blockOnFire = blocksOnFire.poll(); 
-			worldObj.setBlock((int)blockOnFire.X, (int)blockOnFire.Y, (int)blockOnFire.Z, Blocks.fire);
-			worldObj.markBlockForUpdate((int)blockOnFire.X, (int)blockOnFire.Y, (int)blockOnFire.Z);
+			Vector3f blockOnFire = blocksOnFire.poll();
+			if (worldObj.getBlock((int) blockOnFire.X, (int) blockOnFire.Y, (int) blockOnFire.Z) != Blocks.fire)
+			{
+				worldObj.setBlock((int) blockOnFire.X, (int) blockOnFire.Y, (int) blockOnFire.Z, Blocks.fire);
+				worldObj.markBlockForUpdate((int) blockOnFire.X, (int) blockOnFire.Y, (int) blockOnFire.Z);
+			}
 		}
 	}
 
@@ -352,16 +355,21 @@ public class TELogPile extends TileEntity implements IInventory
 	{
 		this.fireTimer = (int) TFC_Time.getTotalHours();
 		this.isOnFire = true;
-		//Activate the surrounding log piles
-		spreadFire(xCoord+1, yCoord, zCoord); spreadFire(xCoord-1, yCoord, zCoord);
-		spreadFire(xCoord, yCoord+1, zCoord); spreadFire(xCoord, yCoord-1, zCoord);
-		spreadFire(xCoord, yCoord, zCoord+1); spreadFire(xCoord, yCoord, zCoord-1);
 
+		//Activate the adjacent log piles
+		spreadFire(xCoord + 1, yCoord, zCoord); // East
+		spreadFire(xCoord - 1, yCoord, zCoord); // West
+		spreadFire(xCoord, yCoord + 1, zCoord); // Up
+		spreadFire(xCoord, yCoord - 1, zCoord); // Down
+		spreadFire(xCoord, yCoord, zCoord + 1); // South
+		spreadFire(xCoord, yCoord, zCoord - 1); // North
+
+		lightNeighbors();
 	}	
 
 	private void spreadFire(int x, int y, int z)
 	{
-		if(worldObj.getBlock(x, y, z) == TFCBlocks.LogPile)
+		if (worldObj.getBlock(x, y, z) == TFCBlocks.LogPile && worldObj.getTileEntity(x, y, z) instanceof TELogPile)
 		{
 			TELogPile te = (TELogPile) worldObj.getTileEntity(x, y, z);
 			if(!te.isOnFire)

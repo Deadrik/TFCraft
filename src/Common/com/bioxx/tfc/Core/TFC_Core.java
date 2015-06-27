@@ -1281,6 +1281,7 @@ public class TFC_Core
 				|| block == Blocks.glass
 				|| block == Blocks.stained_glass
 				|| block == TFCBlocks.MetalTrapDoor
+				|| block == Blocks.iron_door
 				|| block.isOpaqueCube();
 	}
 
