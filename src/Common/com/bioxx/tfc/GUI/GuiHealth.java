@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerSkills;
@@ -28,11 +27,11 @@ public class GuiHealth extends GuiContainerTFC
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		fontRendererObj.drawString(StatCollector.translateToLocal("gui.food.fruit"), 5, 13, 0, false);
-		fontRendererObj.drawString(StatCollector.translateToLocal("gui.food.vegetable"), 5, 23, 0, false);
-		fontRendererObj.drawString(StatCollector.translateToLocal("gui.food.grain"), 5, 33, 0, false);
-		fontRendererObj.drawString(StatCollector.translateToLocal("gui.food.protein"), 5, 43, 0, false);
-		fontRendererObj.drawString(StatCollector.translateToLocal("gui.food.dairy"), 5, 53, 0, false);
+		fontRendererObj.drawString(TFC_Core.translate("gui.food.fruit"), 5, 13, 0, false);
+		fontRendererObj.drawString(TFC_Core.translate("gui.food.vegetable"), 5, 23, 0, false);
+		fontRendererObj.drawString(TFC_Core.translate("gui.food.grain"), 5, 33, 0, false);
+		fontRendererObj.drawString(TFC_Core.translate("gui.food.protein"), 5, 43, 0, false);
+		fontRendererObj.drawString(TFC_Core.translate("gui.food.dairy"), 5, 53, 0, false);
 		if (TFCOptions.enableDebugMode)
 		{
 			FoodStatsTFC food = TFC_Core.getPlayerFoodStats(player);
@@ -79,10 +78,10 @@ public class GuiHealth extends GuiContainerTFC
 		this.guiLeft = (this.width - this.xSize) / 2;
 		this.guiTop = (this.height - this.ySize) / 2;
 		buttonList.clear();
-		buttonList.add(new GuiInventoryButton(0, guiLeft + 176, guiTop - 31, 25, 20, 0, 86, 25, 20, StatCollector.translateToLocal("gui.Inventory.Inventory"), TFC_Textures.GuiInventory));
-		buttonList.add(new GuiInventoryButton(1, guiLeft + 176, guiTop - 12, 25, 20, 0, 86, 25, 20, StatCollector.translateToLocal("gui.Inventory.Skills"), TFC_Textures.GuiSkills));
-		buttonList.add(new GuiInventoryButton(2, guiLeft + 176, guiTop + 7, 25, 20, 0, 86, 25, 20, StatCollector.translateToLocal("gui.Calendar.Calendar"), TFC_Textures.GuiCalendar));
-		buttonList.add(new GuiInventoryButton(3, guiLeft + 176, guiTop + 26, 25, 20, 0, 86, 25, 20, StatCollector.translateToLocal("gui.Inventory.Health"), TFC_Textures.GuiHealth));
+		buttonList.add(new GuiInventoryButton(0, guiLeft + 176, guiTop - 31, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Inventory"), TFC_Textures.GuiInventory));
+		buttonList.add(new GuiInventoryButton(1, guiLeft + 176, guiTop - 12, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Skills"), TFC_Textures.GuiSkills));
+		buttonList.add(new GuiInventoryButton(2, guiLeft + 176, guiTop + 7, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Calendar.Calendar"), TFC_Textures.GuiCalendar));
+		buttonList.add(new GuiInventoryButton(3, guiLeft + 176, guiTop + 26, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Health"), TFC_Textures.GuiHealth));
 	}
 
 	@Override

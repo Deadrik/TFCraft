@@ -6,11 +6,11 @@ import java.util.List;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerCrucible;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TECrucible;
 import com.bioxx.tfc.api.TFCOptions;
 
@@ -56,16 +56,16 @@ public class GuiCrucible extends GuiContainerTFC
 		{
 			if (crucibleTE.currentAlloy.outputAmount == 0)
 			{
-				this.fontRendererObj.drawString(EnumChatFormatting.UNDERLINE + StatCollector.translateToLocal("gui.empty"), 7, 7, 0x000000);
+				this.fontRendererObj.drawString(EnumChatFormatting.UNDERLINE + TFC_Core.translate("gui.empty"), 7, 7, 0x000000);
 				return;
 			}
 			else if (crucibleTE.currentAlloy.outputType != null)
 			{
-				this.fontRendererObj.drawString(EnumChatFormatting.UNDERLINE + StatCollector.translateToLocal("gui.metal." + crucibleTE.currentAlloy.outputType.Name.replace(" ", "")), 7, 7, 0x000000);
+				this.fontRendererObj.drawString(EnumChatFormatting.UNDERLINE + TFC_Core.translate("gui.metal." + crucibleTE.currentAlloy.outputType.Name.replace(" ", "")), 7, 7, 0x000000);
 			}
 			else
 			{
-				this.fontRendererObj.drawString(EnumChatFormatting.UNDERLINE + StatCollector.translateToLocal("gui.metal.Unknown"), 7, 7, 0x000000);
+				this.fontRendererObj.drawString(EnumChatFormatting.UNDERLINE + TFC_Core.translate("gui.metal.Unknown"), 7, 7, 0x000000);
 			}
 
 			for (int c = 0; c < crucibleTE.currentAlloy.AlloyIngred.size(); c++)
@@ -74,7 +74,7 @@ public class GuiCrucible extends GuiContainerTFC
 				m = Math.round(m * 100d) / 100d;
 				if (crucibleTE.currentAlloy.AlloyIngred.get(c).metalType != null)
 				{
-					this.fontRendererObj.drawString(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.metal." + crucibleTE.currentAlloy.AlloyIngred.get(c).metalType.Name.replace(" ", "")) + ": " + EnumChatFormatting.DARK_GREEN + m + "%", 7, 18 + 10 * (c), 0x000000);
+					this.fontRendererObj.drawString(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.metal." + crucibleTE.currentAlloy.AlloyIngred.get(c).metalType.Name.replace(" ", "")) + ": " + EnumChatFormatting.DARK_GREEN + m + "%", 7, 18 + 10 * (c), 0x000000);
 				}
 			}
 		}

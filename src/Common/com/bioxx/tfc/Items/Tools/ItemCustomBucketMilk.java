@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFCTabs;
@@ -58,11 +57,11 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 			if(decay > 0)
 			{
 				float perc = decay/ounces;
-				String s = EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.milk.fresh");
+				String s = EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.milk.fresh");
 				if(perc > 50)
-					s = EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.milk.old");
+					s = EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.milk.old");
 				if(perc > 70)
-					s = EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.milk.sour");
+					s = EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.milk.sour");
 
 				arraylist.add(s);
 			}

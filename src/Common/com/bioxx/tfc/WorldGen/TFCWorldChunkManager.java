@@ -38,7 +38,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		biomeCache = new BiomeCache(this);
 		this.biomesToSpawnIn = new ArrayList<BiomeGenBase>();
 		//this.biomesToSpawnIn.add(TFCBiome.beach);
-		this.biomesToSpawnIn.add(TFCBiome.forest);
+		this.biomesToSpawnIn.add(BiomeGenBase.forest); // There is no TFCBiome.forest
 		this.biomesToSpawnIn.add(TFCBiome.plains);
 		this.biomesToSpawnIn.add(TFCBiome.rollingHills);
 		this.biomesToSpawnIn.add(TFCBiome.swampland);

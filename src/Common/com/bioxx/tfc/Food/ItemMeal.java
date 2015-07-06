@@ -12,7 +12,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -104,9 +103,9 @@ public class ItemMeal extends ItemTerra implements IFood
 		}
 		else
 		{
-			arraylist.add(StatCollector.translateToLocal("gui.badnbt"));
-			System.out.println(StatCollector.translateToLocal("error.error") + " " + is.getUnlocalizedName() + " " +
-					StatCollector.translateToLocal("error.NBT") + " " + StatCollector.translateToLocal("error.Contact"));
+			arraylist.add(TFC_Core.translate("gui.badnbt"));
+			System.out.println(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
+					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 		}
 	}
 
@@ -118,20 +117,20 @@ public class ItemMeal extends ItemTerra implements IFood
 		{
 			float ounces = Helper.roundNumber(tag.getFloat("foodWeight"), 100);
 			if (ounces > 0)
-				arraylist.add(StatCollector.translateToLocal("gui.food.amount") + " " + ounces + " oz / " + Global.FOOD_MAX_WEIGHT + " oz");
+				arraylist.add(TFC_Core.translate("gui.food.amount") + " " + ounces + " oz / " + Global.FOOD_MAX_WEIGHT + " oz");
 			float decay = tag.getFloat("foodDecay");
 			if (decay > 0)
-				arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.food.decay") + " " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
+				arraylist.add(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.food.decay") + " " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
 			if (TFCOptions.enableDebugMode)
 			{
-				arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.food.decay") + ": " + decay);
+				arraylist.add(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.food.decay") + ": " + decay);
 				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay Rate: " + this.getDecayRate(is));
 			}
 
 			if (TFC_Core.showCtrlInformation())
 				ItemFoodTFC.addTasteInformation(is, player, arraylist);
 			else
-				arraylist.add(StatCollector.translateToLocal("gui.showtaste"));
+				arraylist.add(TFC_Core.translate("gui.showtaste"));
 		}
 	}
 
@@ -152,7 +151,7 @@ public class ItemMeal extends ItemTerra implements IFood
 	protected String localize(int id)
 	{
 		return ItemFoodTFC.getFoodGroupColor(FoodRegistry.getInstance().getFoodGroup(id)) + 
-				StatCollector.translateToLocal(FoodRegistry.getInstance().getFood(id).getUnlocalizedName() + ".name");
+				TFC_Core.translate(FoodRegistry.getInstance().getFood(id).getUnlocalizedName() + ".name");
 	}
 
 	protected float[] getNutritionalWeights(int[] FG)

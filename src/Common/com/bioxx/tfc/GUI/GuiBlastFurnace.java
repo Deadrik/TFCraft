@@ -2,11 +2,11 @@ package com.bioxx.tfc.GUI;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerBlastFurnace;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TEBlastFurnace;
 import com.bioxx.tfc.api.TFCOptions;
 
@@ -46,8 +46,8 @@ public class GuiBlastFurnace extends GuiContainerTFC
 	@Override
 	protected void drawGuiContainerForegroundLayer(int i, int j)
 	{
-		this.fontRendererObj.drawString(StatCollector.translateToLocal("gui.Bloomery.Ore"), 40, 17, 0x000000);
-		this.fontRendererObj.drawString(StatCollector.translateToLocal("gui.Bloomery.Charcoal"), 40, 35, 0x000000);
+		this.fontRendererObj.drawString(TFC_Core.translate("gui.Bloomery.Ore"), 40, 17, 0x000000);
+		this.fontRendererObj.drawString(TFC_Core.translate("gui.Bloomery.Charcoal"), 40, 35, 0x000000);
 
 		if (TFCOptions.enableDebugMode)
 		{

@@ -2,11 +2,11 @@ package com.bioxx.tfc.GUI;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerSluice;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TESluice;
 
 public class GuiSluice extends GuiContainerTFC
@@ -43,8 +43,8 @@ public class GuiSluice extends GuiContainerTFC
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		if (sluiceTE.soilAmount != -1)
-			fontRendererObj.drawString(StatCollector.translateToLocal("gui.Sluice.Soil") + ": " + sluiceTE.soilAmount + "/50", 15, 39, 0x404040);
+			fontRendererObj.drawString(TFC_Core.translate("gui.Sluice.Soil") + ": " + sluiceTE.soilAmount + "/50", 15, 39, 0x404040);
 		else
-			fontRendererObj.drawString(StatCollector.translateToLocal("gui.Sluice.Overworked"), 10, 39, 0x404040);
+			fontRendererObj.drawString(TFC_Core.translate("gui.Sluice.Overworked"), 10, 39, 0x404040);
 	}
 }

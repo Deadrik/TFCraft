@@ -1,6 +1,5 @@
 package com.bioxx.tfc.Core;
 
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.api.TFCOptions;
@@ -8,24 +7,24 @@ import com.bioxx.tfc.api.TFCOptions;
 
 public class TFC_Time
 {
-	public static String[] SEASONS = { StatCollector.translateToLocal("gui.Calendar.EarlySpring"),
-		StatCollector.translateToLocal("gui.Calendar.Spring"), StatCollector.translateToLocal("gui.Calendar.LateSpring"),
-		StatCollector.translateToLocal("gui.Calendar.EarlySummer"), StatCollector.translateToLocal("gui.Calendar.Summer"),
-		StatCollector.translateToLocal("gui.Calendar.LateSummer"), StatCollector.translateToLocal("gui.Calendar.EarlyAutumn"),
-		StatCollector.translateToLocal("gui.Calendar.Autumn"), StatCollector.translateToLocal("gui.Calendar.LateAutumn"),
-		StatCollector.translateToLocal("gui.Calendar.EarlyWinter"), StatCollector.translateToLocal("gui.Calendar.Winter"),
-		StatCollector.translateToLocal("gui.Calendar.LateWinter")};
-	public static String[] MONTHS  = { StatCollector.translateToLocal("gui.Calendar.March"),
-		StatCollector.translateToLocal("gui.Calendar.April"),StatCollector.translateToLocal("gui.Calendar.May"),
-		StatCollector.translateToLocal("gui.Calendar.June"), StatCollector.translateToLocal("gui.Calendar.July"),
-		StatCollector.translateToLocal("gui.Calendar.August"), StatCollector.translateToLocal("gui.Calendar.September"),
-		StatCollector.translateToLocal("gui.Calendar.October"), StatCollector.translateToLocal("gui.Calendar.November"),
-		StatCollector.translateToLocal("gui.Calendar.December"), StatCollector.translateToLocal("gui.Calendar.January"),
-		StatCollector.translateToLocal("gui.Calendar.February")};
-	public static String[] DAYS = { StatCollector.translateToLocal("gui.Calendar.Sunday"),
-		StatCollector.translateToLocal("gui.Calendar.Monday"), StatCollector.translateToLocal("gui.Calendar.Tuesday"),
-		StatCollector.translateToLocal("gui.Calendar.Wednesday"), StatCollector.translateToLocal("gui.Calendar.Thursday"),
-		StatCollector.translateToLocal("gui.Calendar.Friday"), StatCollector.translateToLocal("gui.Calendar.Saturday")};
+	public static String[] SEASONS = { TFC_Core.translate("gui.Calendar.EarlySpring"),
+		TFC_Core.translate("gui.Calendar.Spring"), TFC_Core.translate("gui.Calendar.LateSpring"),
+		TFC_Core.translate("gui.Calendar.EarlySummer"), TFC_Core.translate("gui.Calendar.Summer"),
+		TFC_Core.translate("gui.Calendar.LateSummer"), TFC_Core.translate("gui.Calendar.EarlyAutumn"),
+		TFC_Core.translate("gui.Calendar.Autumn"), TFC_Core.translate("gui.Calendar.LateAutumn"),
+		TFC_Core.translate("gui.Calendar.EarlyWinter"), TFC_Core.translate("gui.Calendar.Winter"),
+		TFC_Core.translate("gui.Calendar.LateWinter")};
+	public static String[] MONTHS  = { TFC_Core.translate("gui.Calendar.March"),
+		TFC_Core.translate("gui.Calendar.April"),TFC_Core.translate("gui.Calendar.May"),
+		TFC_Core.translate("gui.Calendar.June"), TFC_Core.translate("gui.Calendar.July"),
+		TFC_Core.translate("gui.Calendar.August"), TFC_Core.translate("gui.Calendar.September"),
+		TFC_Core.translate("gui.Calendar.October"), TFC_Core.translate("gui.Calendar.November"),
+		TFC_Core.translate("gui.Calendar.December"), TFC_Core.translate("gui.Calendar.January"),
+		TFC_Core.translate("gui.Calendar.February")};
+	public static String[] DAYS = { TFC_Core.translate("gui.Calendar.Sunday"),
+		TFC_Core.translate("gui.Calendar.Monday"), TFC_Core.translate("gui.Calendar.Tuesday"),
+		TFC_Core.translate("gui.Calendar.Wednesday"), TFC_Core.translate("gui.Calendar.Thursday"),
+		TFC_Core.translate("gui.Calendar.Friday"), TFC_Core.translate("gui.Calendar.Saturday")};
 
 	public static int currentDay = 0;
 	public static int lastMonth = 11;

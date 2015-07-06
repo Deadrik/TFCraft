@@ -9,11 +9,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFCItems;
@@ -154,15 +154,15 @@ public class ItemTerra extends Item implements ISize
 	public static void addSizeInformation(ItemStack object, List<String> arraylist)
 	{
 		if(((ISize)object.getItem()).getSize(object)!= null && ((ISize)object.getItem()).getWeight(object) != null && ((ISize)object.getItem()).getReach(object)!= null)
-			arraylist.add("\u2696" + StatCollector.translateToLocal("gui.Weight." + ((ISize)object.getItem()).getWeight(object).getName()) + " \u21F2" + 
-					StatCollector.translateToLocal("gui.Size." + ((ISize)object.getItem()).getSize(object).getName().replace(" ", "")));
+			arraylist.add("\u2696" + TFC_Core.translate("gui.Weight." + ((ISize)object.getItem()).getWeight(object).getName()) + " \u21F2" + 
+					TFC_Core.translate("gui.Size." + ((ISize)object.getItem()).getSize(object).getName().replace(" ", "")));
 		if(object.getItem() instanceof IEquipable)
 		{
 			if(((IEquipable)object.getItem()).getEquipType(object) == IEquipable.EquipType.BACK)
 			{
-				arraylist.add(EnumChatFormatting.LIGHT_PURPLE.toString()+StatCollector.translateToLocal("gui.slot")+ 
+				arraylist.add(EnumChatFormatting.LIGHT_PURPLE.toString()+TFC_Core.translate("gui.slot")+ 
 						EnumChatFormatting.GRAY.toString()+": " + 
-						EnumChatFormatting.WHITE.toString() + StatCollector.translateToLocal("gui.slot.back"));
+						EnumChatFormatting.WHITE.toString() + TFC_Core.translate("gui.slot.back"));
 			}
 		}
 	}
@@ -174,7 +174,7 @@ public class ItemTerra extends Item implements ISize
 		//Minecraft.getMinecraft().gameSettings.advancedItemTooltips = false;
 		ItemTerra.addSizeInformation(is, arraylist);
 
-		addHeatInformation(is, arraylist);
+		ItemTerra.addHeatInformation(is, arraylist);
 
 		if (is.hasTagCompound())
 		{
@@ -199,17 +199,17 @@ public class ItemTerra extends Item implements ISize
 				String s = "";
 				if(HeatRegistry.getInstance().isTemperatureDanger(is))
 				{
-					s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.danger") + " | ";
+					s += EnumChatFormatting.WHITE + TFC_Core.translate("gui.ingot.danger") + " | ";
 				}
 
 				if(HeatRegistry.getInstance().isTemperatureWeldable(is))
 				{
-					s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.weldable") + " | ";
+					s += EnumChatFormatting.WHITE + TFC_Core.translate("gui.ingot.weldable") + " | ";
 				}
 
 				if(HeatRegistry.getInstance().isTemperatureWorkable(is))
 				{
-					s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.workable");
+					s += EnumChatFormatting.WHITE + TFC_Core.translate("gui.ingot.workable");
 				}
 
 				if(!s.equals(""))

@@ -13,7 +13,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -88,13 +87,13 @@ public class GuiLargeVessel extends GuiContainerTFC
 
 		if (vesselTE.getSealed() && guiTab == 0)
 		{
-			((GuiButton) buttonList.get(0)).displayString = StatCollector.translateToLocal("gui.Barrel.Unseal");
+			((GuiButton) buttonList.get(0)).displayString = TFC_Core.translate("gui.Barrel.Unseal");
 			((GuiButton) buttonList.get(1)).enabled = false;
 			((GuiButton) buttonList.get(2)).enabled = false;
 		}
 		else if (!vesselTE.getSealed() && guiTab == 0)
 		{
-			((GuiButton) buttonList.get(0)).displayString = StatCollector.translateToLocal("gui.Barrel.Seal");
+			((GuiButton) buttonList.get(0)).displayString = TFC_Core.translate("gui.Barrel.Seal");
 			((GuiButton) buttonList.get(1)).enabled = true;
 			((GuiButton) buttonList.get(2)).enabled = true;
 		}
@@ -113,27 +112,27 @@ public class GuiLargeVessel extends GuiContainerTFC
 		if (guiTab == 0)
 		{
 			if (!vesselTE.getSealed())
-				buttonList.add(new GuiButton(0, guiLeft + 38, guiTop + 50, 50, 20, StatCollector.translateToLocal("gui.Barrel.Seal")));
+				buttonList.add(new GuiButton(0, guiLeft + 38, guiTop + 50, 50, 20, TFC_Core.translate("gui.Barrel.Seal")));
 			else
-				buttonList.add(new GuiButton(0, guiLeft + 38, guiTop + 50, 50, 20, StatCollector.translateToLocal("gui.Barrel.Unseal")));
-			buttonList.add(new GuiButton(1, guiLeft + 88, guiTop + 50, 50, 20, StatCollector.translateToLocal("gui.Barrel.Empty")));
+				buttonList.add(new GuiButton(0, guiLeft + 38, guiTop + 50, 50, 20, TFC_Core.translate("gui.Barrel.Unseal")));
+			buttonList.add(new GuiButton(1, guiLeft + 88, guiTop + 50, 50, 20, TFC_Core.translate("gui.Barrel.Empty")));
 			if (vesselTE.mode == TEBarrel.MODE_IN)
-				buttonList.add(new GuiBarrelTabButton(2, guiLeft + 39, guiTop + 29, 16, 16, this, StatCollector.translateToLocal("gui.Barrel.ToggleOn"), 0, 204, 16, 16));
+				buttonList.add(new GuiBarrelTabButton(2, guiLeft + 39, guiTop + 29, 16, 16, this, TFC_Core.translate("gui.Barrel.ToggleOn"), 0, 204, 16, 16));
 			else if (vesselTE.mode == TEBarrel.MODE_OUT)
-				buttonList.add(new GuiBarrelTabButton(2, guiLeft + 39, guiTop + 29, 16, 16, this, StatCollector.translateToLocal("gui.Barrel.ToggleOff"), 0, 188, 16, 16));
-			buttonList.add(new GuiBarrelTabButton(3, guiLeft + 36, guiTop - 12, 31, 15, this, TFC_Textures.GuiSolidStorage, StatCollector.translateToLocal("gui.Barrel.Solid")));
-			buttonList.add(new GuiBarrelTabButton(4, guiLeft + 5, guiTop - 12, 31, 15, this, TFC_Textures.GuiLiquidStorage, StatCollector.translateToLocal("gui.Barrel.Liquid")));
+				buttonList.add(new GuiBarrelTabButton(2, guiLeft + 39, guiTop + 29, 16, 16, this, TFC_Core.translate("gui.Barrel.ToggleOff"), 0, 188, 16, 16));
+			buttonList.add(new GuiBarrelTabButton(3, guiLeft + 36, guiTop - 12, 31, 15, this, TFC_Textures.GuiSolidStorage, TFC_Core.translate("gui.Barrel.Solid")));
+			buttonList.add(new GuiBarrelTabButton(4, guiLeft + 5, guiTop - 12, 31, 15, this, TFC_Textures.GuiLiquidStorage, TFC_Core.translate("gui.Barrel.Liquid")));
 
 		}
 		else if (guiTab == 1)
 		{
-			buttonList.add(new GuiBarrelTabButton(0, guiLeft + 36, guiTop - 12, 31, 15, this, TFC_Textures.GuiSolidStorage, StatCollector.translateToLocal("gui.Barrel.Solid")));
-			buttonList.add(new GuiBarrelTabButton(1, guiLeft + 5, guiTop - 12, 31, 15, this, TFC_Textures.GuiLiquidStorage, StatCollector.translateToLocal("gui.Barrel.Liquid")));
+			buttonList.add(new GuiBarrelTabButton(0, guiLeft + 36, guiTop - 12, 31, 15, this, TFC_Textures.GuiSolidStorage, TFC_Core.translate("gui.Barrel.Solid")));
+			buttonList.add(new GuiBarrelTabButton(1, guiLeft + 5, guiTop - 12, 31, 15, this, TFC_Textures.GuiLiquidStorage, TFC_Core.translate("gui.Barrel.Liquid")));
 
 			if (!vesselTE.getSealed())
-				buttonList.add(new GuiButton(2, guiLeft + 6, guiTop + 33, 44, 20, StatCollector.translateToLocal("gui.Barrel.Seal")));
+				buttonList.add(new GuiButton(2, guiLeft + 6, guiTop + 33, 44, 20, TFC_Core.translate("gui.Barrel.Seal")));
 			else
-				buttonList.add(new GuiButton(2, guiLeft + 6, guiTop + 33, 44, 20, StatCollector.translateToLocal("gui.Barrel.Unseal")));
+				buttonList.add(new GuiButton(2, guiLeft + 6, guiTop + 33, 44, 20, TFC_Core.translate("gui.Barrel.Unseal")));
 		}
 	}
 
@@ -183,7 +182,7 @@ public class GuiLargeVessel extends GuiContainerTFC
 					l = 16777120;
 				}
 
-				this.drawCenteredString(fontrenderer, vesselTE.mode == 0 ? StatCollector.translateToLocal("gui.Barrel.ToggleOn") : StatCollector.translateToLocal("gui.Barrel.ToggleOff"), this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, l);
+				this.drawCenteredString(fontrenderer, vesselTE.mode == 0 ? TFC_Core.translate("gui.Barrel.ToggleOn") : TFC_Core.translate("gui.Barrel.ToggleOff"), this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, l);
 			}
 		}
 	}
@@ -329,7 +328,7 @@ public class GuiLargeVessel extends GuiContainerTFC
 			{
 				if (!(vesselTE.recipe instanceof BarrelBriningRecipe))
 				{
-					drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.Output") + ": " + vesselTE.recipe.getRecipeName(), guiLeft + 88, guiTop + 72, 0x555555);
+					drawCenteredString(this.fontRendererObj, TFC_Core.translate("gui.Output") + ": " + vesselTE.recipe.getRecipeName(), guiLeft + 88, guiTop + 72, 0x555555);
 				}
 				else if (vesselTE.getSealed() && vesselTE.getFluidStack() != null && vesselTE.getFluidStack().getFluid() == TFCFluids.BRINE)
 				{
@@ -337,7 +336,7 @@ public class GuiLargeVessel extends GuiContainerTFC
 							((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein ||
 							((IFood) inStack.getItem()) == TFCItems.Cheese) && !Food.isBrined(inStack))
 					{
-						drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.barrel.brining"), guiLeft + 88, guiTop + 72, 0x555555);
+						drawCenteredString(this.fontRendererObj, TFC_Core.translate("gui.barrel.brining"), guiLeft + 88, guiTop + 72, 0x555555);
 					}
 				}
 			}
@@ -348,14 +347,14 @@ public class GuiLargeVessel extends GuiContainerTFC
 						((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein || ((IFood) inStack.getItem()) == TFCItems.Cheese) &&
 						Food.isBrined(inStack))
 				{
-					drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.barrel.pickling"), guiLeft + 88, guiTop + 72, 0x555555);
+					drawCenteredString(this.fontRendererObj, TFC_Core.translate("gui.barrel.pickling"), guiLeft + 88, guiTop + 72, 0x555555);
 				}
 			}
 			else
 			{
 				BarrelPreservativeRecipe preservative = BarrelManager.getInstance().findMatchingPreservativeRepice(vesselTE, inStack, vesselTE.getFluidStack(), vesselTE.getSealed());
 				if(preservative!=null){
-					drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal(preservative.getPreservingString()), guiLeft+88, guiTop+72, 0x555555);
+					drawCenteredString(this.fontRendererObj, TFC_Core.translate(preservative.getPreservingString()), guiLeft+88, guiTop+72, 0x555555);
 				}
 			}
 		}

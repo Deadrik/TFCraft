@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
@@ -58,7 +57,7 @@ public class ItemMeltedMetal extends ItemTerra
 	{		
 		if (is.getItemDamage() > 1)
 		{
-			arraylist.add(StatCollector.translateToLocal("gui.units") + ": " + (100 - is.getItemDamage()) + " / 100");
+			arraylist.add(TFC_Core.translate("gui.units") + ": " + (100 - is.getItemDamage()) + " / 100");
 		}
 	}
 
@@ -95,12 +94,12 @@ public class ItemMeltedMetal extends ItemTerra
 	{	
 		if (TFC_Core.showShiftInformation())
 		{
-			arraylist.add(StatCollector.translateToLocal("gui.Help"));
-			arraylist.add(StatCollector.translateToLocal("gui.MeltedMetal.Inst0"));
+			arraylist.add(TFC_Core.translate("gui.Help"));
+			arraylist.add(TFC_Core.translate("gui.MeltedMetal.Inst0"));
 		}
 		else
 		{
-			arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
+			arraylist.add(TFC_Core.translate("gui.ShowHelp"));
 		}
 	}
 

@@ -112,7 +112,7 @@ public class BlockGrill extends BlockTerraContainer
 		return !isGrillOpen(par1IBlockAccess.getBlockMetadata(par2, par3, par4));
 	}
 
-	public static boolean isGrillOpen(int meta)
+	public boolean isGrillOpen(int meta)
 	{
 		return (meta & 4) != 0;
 	}

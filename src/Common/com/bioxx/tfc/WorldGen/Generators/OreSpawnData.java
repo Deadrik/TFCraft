@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.util.StatCollector;
 
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 
@@ -22,8 +22,8 @@ public class OreSpawnData
 
 		if (block == null)
 		{
-			System.out.println(StatCollector.translateToLocal("error.error") + " " + StatCollector.translateToLocal("error.OreCFG") + " " + BN);
-			throw new java.lang.NullPointerException(StatCollector.translateToLocal("error.OreCFG") + " " + BN);
+			System.out.println(TFC_Core.translate("error.error") + " " + TFC_Core.translate("error.OreCFG") + " " + BN);
+			throw new java.lang.NullPointerException(TFC_Core.translate("error.OreCFG") + " " + BN);
 		}
 
 		meta = M;

@@ -12,7 +12,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
@@ -362,13 +361,13 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			{
 				String name = tag.getString("MetalType");
 				name = name.replace(" ", "");
-				name = StatCollector.translateToLocal("gui.metal." + name);
+				name = TFC_Core.translate("gui.metal." + name);
 
 				// check if the vessel contains an amount of metal.
 				if(tag.hasKey("MetalAmount"))
 				{
 					// suffix the amount of metal to the metal name.
-					name += " (" + tag.getInteger("MetalAmount")+" "+StatCollector.translateToLocal("gui.units")+")";
+					name += " (" + tag.getInteger("MetalAmount")+" "+TFC_Core.translate("gui.units")+")";
 				}
 
 				arraylist.add(EnumChatFormatting.DARK_GREEN + name);
@@ -379,9 +378,9 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				long total = TFC_Time.getTotalHours();
 				long temp = tag.getLong("TempTimer");
 				if(total - temp < 11)
-					arraylist.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ItemHeat.Liquid"));
+					arraylist.add(EnumChatFormatting.WHITE + TFC_Core.translate("gui.ItemHeat.Liquid"));
 				else
-					arraylist.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ItemHeat.Solidified"));
+					arraylist.add(EnumChatFormatting.WHITE + TFC_Core.translate("gui.ItemHeat.Solidified"));
 			}
 
 			if(tag.hasKey("Items"))
@@ -421,8 +420,8 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	{
 		if (TFC_Core.showShiftInformation())
 		{
-			arraylist.add(StatCollector.translateToLocal("gui.Help"));
-			arraylist.add(StatCollector.translateToLocal("gui.PotteryBase.Inst0"));
+			arraylist.add(TFC_Core.translate("gui.Help"));
+			arraylist.add(TFC_Core.translate("gui.PotteryBase.Inst0"));
 
 			NBTTagCompound tag = is.stackTagCompound;
 			if (tag != null && tag.hasKey("TempTimer"))
@@ -430,14 +429,14 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				long total = TFC_Time.getTotalHours();
 				long temp = tag.getLong("TempTimer");
 				if (total - temp < 11)
-					arraylist.add(StatCollector.translateToLocal("gui.PotteryVesselSmall.Inst0"));
+					arraylist.add(TFC_Core.translate("gui.PotteryVesselSmall.Inst0"));
 			}
 			else
-				arraylist.add(StatCollector.translateToLocal("gui.PotteryVesselSmall.Inst0"));
+				arraylist.add(TFC_Core.translate("gui.PotteryVesselSmall.Inst0"));
 		}
 		else
 		{
-			arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
+			arraylist.add(TFC_Core.translate("gui.ShowHelp"));
 		}
 	}
 

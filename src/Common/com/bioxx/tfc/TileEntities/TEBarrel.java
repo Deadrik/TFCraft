@@ -53,7 +53,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	public static final int MODE_IN = 0;
 	public static final int MODE_OUT = 1;
-	public static final int INPUT_SLOT = 0;
+	public final int INPUT_SLOT = 0;
 	public BarrelRecipe recipe;
 	//temporary field. No need to save
 	public boolean shouldDropItem = true;

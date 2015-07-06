@@ -37,7 +37,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	public byte outputTick = 0;
 	public byte tempTick = 0;
 	private int cookDelay = 0;
-	public static final int MAX_UNITS = 3000;
+	public final int MAX_UNITS = 3000;
 
 	public TECrucible()
 	{

@@ -6,6 +6,6 @@ public class ItemGlassBottle extends ItemTerra
 {
 	public ItemGlassBottle()
 	{
-		this.setCreativeTab(TFCTabs.tabFood);
+		this.setCreativeTab(TFCTabs.TFCFoods);
 	}
 }

@@ -247,7 +247,7 @@ public class BlockFruitWood extends BlockTerraContainer
 	public void updateTick(World world, int i, int j, int k, Random rand)
 	{
 		FloraManager manager = FloraManager.getInstance();
-		FloraIndex fi = manager.findMatchingIndex(this.getType(world.getBlockMetadata(i, j, k)));
+		FloraIndex fi = manager.findMatchingIndex(BlockFruitWood.getType(world.getBlockMetadata(i, j, k)));
 
 		float temp = TFC_Climate.getHeightAdjustedTemp(world, i, j, k);
 

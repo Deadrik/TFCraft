@@ -1,8 +1,8 @@
 package com.bioxx.tfc.Food;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 
@@ -23,11 +23,11 @@ public class ItemFoodMeat extends ItemFoodTFC {
 			int cookedLevel = ((int)Food.getCooked(is)-600)/120;
 			switch(cookedLevel)
 			{
-			case 0: s+=StatCollector.translateToLocal("food.cooked.rare");break;
-			case 1: s+=StatCollector.translateToLocal("food.cooked.medrare");break;
-			case 2: s+=StatCollector.translateToLocal("food.cooked.med");break;
-			case 3: s+=StatCollector.translateToLocal("food.cooked.medwell");break;
-			default: s+=StatCollector.translateToLocal("food.cooked.well");break;
+			case 0: s+=TFC_Core.translate("food.cooked.rare");break;
+			case 1: s+=TFC_Core.translate("food.cooked.medrare");break;
+			case 2: s+=TFC_Core.translate("food.cooked.med");break;
+			case 3: s+=TFC_Core.translate("food.cooked.medwell");break;
+			default: s+=TFC_Core.translate("food.cooked.well");break;
 			}
 			s+= ")";
 		}

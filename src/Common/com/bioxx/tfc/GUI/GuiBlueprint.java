@@ -10,7 +10,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -131,21 +130,21 @@ public class GuiBlueprint extends GuiScreen
 		this.buttonList.add(new GuiButton(z_p_bt_ind, buttonsLeftS, buttonsTop, buttonsA, buttonsA, ">"));
 
 		// done
-		int doneWidth = fontRendererObj.getStringWidth(StatCollector.translateToLocal(done_bt_name)) + 20;
+		int doneWidth = fontRendererObj.getStringWidth(TFC_Core.translate(done_bt_name)) + 20;
 		this.buttonList.add(new GuiButton(
 						done_bt_ind,
 						(width + xSize) / 2 - 10 - doneWidth, (height + ySize) / 2 - 10 - buttonsA,
 						doneWidth, buttonsA,
-						StatCollector.translateToLocal(done_bt_name)
+						TFC_Core.translate(done_bt_name)
 		));
 
 		// cancel
-		int cancelWidth = fontRendererObj.getStringWidth(StatCollector.translateToLocal(cancel_bt_name)) + 20;
+		int cancelWidth = fontRendererObj.getStringWidth(TFC_Core.translate(cancel_bt_name)) + 20;
 		this.buttonList.add(new GuiButton(
 						cancel_bt_ind,
 						(width + xSize) / 2 - 10 - doneWidth - cancelWidth - 4, (height + ySize) / 2 - 10 - buttonsA,
 						cancelWidth, buttonsA,
-						StatCollector.translateToLocal(cancel_bt_name)
+						TFC_Core.translate(cancel_bt_name)
 		));
 	}
 
@@ -244,7 +243,7 @@ public class GuiBlueprint extends GuiScreen
 		int top = guiTop();
 		drawTexturedModalRect(left, top, 0, 0, xSize, ySize);
 
-		drawCenteredString(fontRendererObj, StatCollector.translateToLocal("gui.Blueprint"), this.width / 2, top + 10, 0x000000);
+		drawCenteredString(fontRendererObj, TFC_Core.translate("gui.Blueprint"), this.width / 2, top + 10, 0x000000);
 
 		int axesNameLeft = left + 10;
 		int axesAngleLeft = axesNameLeft + fontRendererObj.getStringWidth("X: ") + 4 + 20 + fontRendererObj.getStringWidth("360") / 2;

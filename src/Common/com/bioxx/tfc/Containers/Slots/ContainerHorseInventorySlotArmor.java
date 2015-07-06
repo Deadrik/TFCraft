@@ -6,7 +6,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -30,7 +29,7 @@ public class ContainerHorseInventorySlotArmor extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemStack)
     {
-		return super.isItemValid(itemStack) && horse.func_110259_cr()/*Standard Horse*/&& EntityHorseTFC.func_146085_a(itemStack.getItem()/*Item is Horse Armor*/);
+		return super.isItemValid(itemStack) && horse.func_110259_cr()/*Standard Horse*/&& EntityHorse.func_146085_a(itemStack.getItem()/*Item is Horse Armor*/);
     }
 
     @Override

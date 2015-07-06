@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -77,14 +76,14 @@ public class ItemKnife extends ItemWeapon implements IKnife
 	{
 		if (TFC_Core.showShiftInformation()) 
 		{
-			arraylist.add(StatCollector.translateToLocal("gui.Help"));
-			arraylist.add(StatCollector.translateToLocal("gui.Knife.Inst0"));
-			arraylist.add(StatCollector.translateToLocal("gui.Knife.Inst1"));
-			//arraylist.add(StatCollector.translateToLocal("gui.Knife.Inst2"));
+			arraylist.add(TFC_Core.translate("gui.Help"));
+			arraylist.add(TFC_Core.translate("gui.Knife.Inst0"));
+			arraylist.add(TFC_Core.translate("gui.Knife.Inst1"));
+			//arraylist.add(TFC_Core.translate("gui.Knife.Inst2"));
 		}
 		else
 		{
-			arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
+			arraylist.add(TFC_Core.translate("gui.ShowHelp"));
 		}
 	}
 

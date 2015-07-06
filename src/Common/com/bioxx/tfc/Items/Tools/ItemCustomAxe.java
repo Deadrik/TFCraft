@@ -11,10 +11,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.TFCOptions;
@@ -66,7 +66,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
-		arraylist.add(EnumChatFormatting.AQUA + StatCollector.translateToLocal(GetDamageType().toString()));
+		arraylist.add(EnumChatFormatting.AQUA + TFC_Core.translate(GetDamageType().toString()));
 
 		if(TFCOptions.enableDebugMode)
 			arraylist.add("Damage: " + is.getItemDamage());

@@ -6,7 +6,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -61,21 +60,21 @@ public class GuiCalendar extends GuiScreen
 		guiTop = (height - ySize) / 2;
 		if(TFCOptions.enableDebugMode)
 		{
-			buttonList.add(new GuiButton(0, guiLeft+20, guiTop + 118, 66, 20, StatCollector.translateToLocal("gui.Calendar.1Hour")));
-			buttonList.add(new GuiButton(1, guiLeft+20, guiTop + 137, 66, 20, StatCollector.translateToLocal("gui.Calendar.1Day")));
-			buttonList.add(new GuiButton(2, guiLeft+20, guiTop + 156, 66, 20, StatCollector.translateToLocal("gui.Calendar.1Week")));
-			buttonList.add(new GuiButton(3, guiLeft+85, guiTop + 118, 66, 20, StatCollector.translateToLocal("gui.Calendar.1Month")));
-			buttonList.add(new GuiButton(4, guiLeft+85, guiTop + 137, 66, 20, StatCollector.translateToLocal("gui.Calendar.1Year")));
+			buttonList.add(new GuiButton(0, guiLeft+20, guiTop + 118, 66, 20, TFC_Core.translate("gui.Calendar.1Hour")));
+			buttonList.add(new GuiButton(1, guiLeft+20, guiTop + 137, 66, 20, TFC_Core.translate("gui.Calendar.1Day")));
+			buttonList.add(new GuiButton(2, guiLeft+20, guiTop + 156, 66, 20, TFC_Core.translate("gui.Calendar.1Week")));
+			buttonList.add(new GuiButton(3, guiLeft+85, guiTop + 118, 66, 20, TFC_Core.translate("gui.Calendar.1Month")));
+			buttonList.add(new GuiButton(4, guiLeft+85, guiTop + 137, 66, 20, TFC_Core.translate("gui.Calendar.1Year")));
 		}
 
 		buttonList.add(new GuiInventoryButton(5, guiLeft+176, guiTop + 9, 25, 20, 
-				0, 86, 25, 20, StatCollector.translateToLocal("gui.Inventory.Inventory"), TFC_Textures.GuiInventory));
+				0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Inventory"), TFC_Textures.GuiInventory));
 		buttonList.add(new GuiInventoryButton(6, guiLeft+176, guiTop + 28, 25, 20, 
-				0, 86, 25, 20, StatCollector.translateToLocal("gui.Inventory.Skills"), TFC_Textures.GuiSkills));
+				0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Skills"), TFC_Textures.GuiSkills));
 		buttonList.add(new GuiInventoryButton(7, guiLeft+176, guiTop + 47, 25, 20, 
-				0, 86, 25, 20, StatCollector.translateToLocal("gui.Calendar.Calendar"), TFC_Textures.GuiCalendar));
+				0, 86, 25, 20, TFC_Core.translate("gui.Calendar.Calendar"), TFC_Textures.GuiCalendar));
 		buttonList.add(new GuiInventoryButton(8, guiLeft+176, guiTop + 66, 25, 20, 
-				0, 86, 25, 20, StatCollector.translateToLocal("gui.Inventory.Health"), TFC_Textures.GuiHealth));
+				0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Health"), TFC_Textures.GuiHealth));
 	}
 
 	@Override
@@ -94,28 +93,28 @@ public class GuiCalendar extends GuiScreen
 		int i1 = (height - ySize) / 2;
 		drawTexturedModalRect(l, i1+6, 0, 0, xSize, ySize);
 
-		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Calendar"), l+87, i1+16, 0xFFFFFF);
-		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Season") + " : " + TFC_Time.SEASONS[TFC_Time.getSeasonAdjustedMonth((int)(player.posZ))], l + 87, i1+26, 0x000000);
+		drawCenteredString(fontRendererObj,TFC_Core.translate("gui.Calendar.Calendar"), l+87, i1+16, 0xFFFFFF);
+		drawCenteredString(fontRendererObj,TFC_Core.translate("gui.Calendar.Season") + " : " + TFC_Time.SEASONS[TFC_Time.getSeasonAdjustedMonth((int)(player.posZ))], l + 87, i1+26, 0x000000);
 
 		int dom = TFC_Time.getDayOfMonth();
 		int month = TFC_Time.currentMonth;
 		String day = TFC_Time.DAYS[TFC_Time.getDayOfWeek()];
 
 		if (month == 3 && dom == 18)
-			day = StatCollector.translateToLocal("gui.Calendar.DateKitty");
+			day = TFC_Core.translate("gui.Calendar.DateKitty");
 		else if(month == 4 && dom == 7)
-			day = StatCollector.translateToLocal("gui.Calendar.DateBioxx");
+			day = TFC_Core.translate("gui.Calendar.DateBioxx");
 		else if(month == 8 && dom == 2)
-			day = StatCollector.translateToLocal("gui.Calendar.DateDunk");
+			day = TFC_Core.translate("gui.Calendar.DateDunk");
 
-		drawCenteredString(fontRendererObj, StatCollector.translateToLocal("gui.Calendar.Day") + " : " + day, l + 87, i1 + 36, 0x000000);
+		drawCenteredString(fontRendererObj, TFC_Core.translate("gui.Calendar.Day") + " : " + day, l + 87, i1 + 36, 0x000000);
 
 		int year = 1000 + TFC_Time.getYear();
         // year changes at January, not March
 		if (month >= TFC_Time.January) {
 		    year += 1;
 		}
-        drawCenteredString(fontRendererObj, StatCollector.translateToLocal("gui.Calendar.Date") + " : " + dom + " " + TFC_Time.MONTHS[month] + ", " + year, l + 87, i1 + 46, 0x000000);
+        drawCenteredString(fontRendererObj, TFC_Core.translate("gui.Calendar.Date") + " : " + dom + " " + TFC_Time.MONTHS[month] + ", " + year, l + 87, i1 + 46, 0x000000);
 
 		//float temp = Math.round((TFC_Climate.getHeightAdjustedTemp(player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ)));
 
@@ -126,10 +125,10 @@ public class GuiCalendar extends GuiScreen
 		long h = TFC_Time.getHour();
 		String hour = "";
 		if(h == 0)
-			hour = StatCollector.translateToLocal("gui.Calendar.WitchHour");
+			hour = TFC_Core.translate("gui.Calendar.WitchHour");
 		else
 			hour+=h;
-		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Hour") + " : " + hour, l + 87, i1+56, 0x000000);
+		drawCenteredString(fontRendererObj,TFC_Core.translate("gui.Calendar.Hour") + " : " + hour, l + 87, i1+56, 0x000000);
 		//drawCenteredString(fontRenderer,"EVT : " + ((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt((int) player.posX, (int) player.posZ).floatdata1, l + 87, i1+76, 0x000000);
 
 		//int rain = (int) TFC_Climate.getRainfall((int) player.posX,(int) player.posY, (int) player.posZ);

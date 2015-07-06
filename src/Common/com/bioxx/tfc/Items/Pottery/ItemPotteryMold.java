@@ -8,9 +8,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Core.TFC_Core;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -40,7 +40,7 @@ public class ItemPotteryMold extends ItemPotteryBase
 		if (is.getItemDamage() > 5)
 		{
 			int units = 100 - ((is.getItemDamage() - 2) / 4);
-			arraylist.add(StatCollector.translateToLocal("gui.units") + ": " + units + " / 100");
+			arraylist.add(TFC_Core.translate("gui.units") + ": " + units + " / 100");
 		}
 	}
 

@@ -6,11 +6,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class ItemCustomNameTag extends ItemTerra
 {
@@ -75,6 +75,6 @@ public class ItemCustomNameTag extends ItemTerra
 	{
 		if(is.hasTagCompound() && is.stackTagCompound.hasKey("ItemName"))
 			return is.stackTagCompound.getString("ItemName");
-		else return StatCollector.translateToLocal("gui.Nametag");
+		else return TFC_Core.translate("gui.Nametag");
 	}
 }

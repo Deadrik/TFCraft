@@ -4,7 +4,6 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -66,8 +65,8 @@ public class GuiChestTFC extends GuiContainer
 	 */
 	protected void drawGuiContainerForegroundLayer()
 	{
-		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.lowerChestInventory.getInventoryName()), 8, 6, 4210752);
-		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.upperChestInventory.getInventoryName()), 8, this.ySize - 96 + 2, 4210752);
+		this.fontRendererObj.drawString(TFC_Core.translate(this.lowerChestInventory.getInventoryName()), 8, 6, 4210752);
+		this.fontRendererObj.drawString(TFC_Core.translate(this.upperChestInventory.getInventoryName()), 8, this.ySize - 96 + 2, 4210752);
 	}
 
 	/**

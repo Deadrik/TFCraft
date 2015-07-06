@@ -5,7 +5,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
@@ -34,7 +33,7 @@ public class GuiSkills extends GuiContainerTFC
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		fontRendererObj.drawString(StatCollector.translateToLocal("gui.skillpage"), this.xSize / 2 - fontRendererObj.getStringWidth(StatCollector.translateToLocal("gui.skillpage")) / 2, 4, 4210752, false);
+		fontRendererObj.drawString(TFC_Core.translate("gui.skillpage"), this.xSize / 2 - fontRendererObj.getStringWidth(TFC_Core.translate("gui.skillpage")) / 2, 4, 4210752, false);
 		SkillStats ss = TFC_Core.getSkillStats(player);
 		int y = 10;
 		int count = -1;
@@ -50,7 +49,7 @@ public class GuiSkills extends GuiContainerTFC
 				drawTexturedModalRect(4, y, 4, 168, 168, 4);
 				drawTexturedModalRect(4, y, 4, 172, (int) Math.floor(168 * perc), 4);
 
-				fontRendererObj.drawString(StatCollector.translateToLocal(o.skillName) + ": " + EnumChatFormatting.DARK_BLUE + ss.getSkillRank(o.skillName).getLocalizedName(), 6, y - 9, 0, false);
+				fontRendererObj.drawString(TFC_Core.translate(o.skillName) + ": " + EnumChatFormatting.DARK_BLUE + ss.getSkillRank(o.skillName).getLocalizedName(), 6, y - 9, 0, false);
 				y += 3;
 			}
 		}
@@ -119,10 +118,10 @@ public class GuiSkills extends GuiContainerTFC
 		this.guiLeft = (this.width - this.xSize) / 2;
 		this.guiTop = (this.height - this.ySize) / 2;
 		buttonList.clear();
-		buttonList.add(new GuiInventoryButton(0, guiLeft + 176, guiTop, 25, 20, 0, 86, 25, 20, StatCollector.translateToLocal("gui.Inventory.Inventory"), TFC_Textures.GuiInventory));
-		buttonList.add(new GuiInventoryButton(1, guiLeft + 176, guiTop + 19, 25, 20, 0, 86, 25, 20, StatCollector.translateToLocal("gui.Inventory.Skills"), TFC_Textures.GuiSkills));
-		buttonList.add(new GuiInventoryButton(2, guiLeft + 176, guiTop + 38, 25, 20, 0, 86, 25, 20, StatCollector.translateToLocal("gui.Calendar.Calendar"), TFC_Textures.GuiCalendar));
-		buttonList.add(new GuiInventoryButton(3, guiLeft + 176, guiTop + 57, 25, 20, 0, 86, 25, 20, StatCollector.translateToLocal("gui.Inventory.Health"), TFC_Textures.GuiHealth));
+		buttonList.add(new GuiInventoryButton(0, guiLeft + 176, guiTop, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Inventory"), TFC_Textures.GuiInventory));
+		buttonList.add(new GuiInventoryButton(1, guiLeft + 176, guiTop + 19, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Skills"), TFC_Textures.GuiSkills));
+		buttonList.add(new GuiInventoryButton(2, guiLeft + 176, guiTop + 38, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Calendar.Calendar"), TFC_Textures.GuiCalendar));
+		buttonList.add(new GuiInventoryButton(3, guiLeft + 176, guiTop + 57, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Health"), TFC_Textures.GuiHealth));
 		buttonList.add(new GuiButtonPage(4, guiLeft + 4, guiTop + 144, 30, 15, 0, 177));
 		buttonList.add(new GuiButtonPage(5, guiLeft + 142, guiTop + 144, 30, 15, 0, 192));
 	}
@@ -151,7 +150,7 @@ public class GuiSkills extends GuiContainerTFC
 				//this.drawTexturedModalRect(this.xPosition + this.width / 2, this.yPosition, 200 - this.width / 2, 46 + k * 20, this.width / 2, this.height);
 				this.mouseDragged(par1Minecraft, xPos, yPos);
 
-				//this.drawCenteredString(fontrenderer,  barrel.mode==0?StatCollector.translateToLocal("gui.Barrel.ToggleOn"):StatCollector.translateToLocal("gui.Barrel.ToggleOff"), this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, l);
+				//this.drawCenteredString(fontrenderer,  barrel.mode==0?TFC_Core.translate("gui.Barrel.ToggleOn"):TFC_Core.translate("gui.Barrel.ToggleOff"), this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, l);
 			}
 		}
 	}

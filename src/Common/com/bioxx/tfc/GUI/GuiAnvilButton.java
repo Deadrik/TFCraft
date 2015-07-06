@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
@@ -70,7 +69,7 @@ public class GuiAnvilButton extends GuiButton
 					if(p == null) return;
 					RuleEnum[] Rules = p.rules;
 					//int[] ItemRules = screen.anvilTE.getItemRules();
-					this.displayString = StatCollector.translateToLocal(Rules[ruleIndex].Name);
+					this.displayString = TFC_Core.translate(Rules[ruleIndex].Name);
 				}
 			}
 

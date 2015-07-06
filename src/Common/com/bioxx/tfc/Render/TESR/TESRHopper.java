@@ -43,7 +43,7 @@ public class TESRHopper extends TESRBase
 				TFC_Core.bindTexture(TextureMap.locationBlocksTexture);
 				GL11.glDisable(GL11.GL_LIGHTING);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				this.renderBlocks.setRenderBoundsFromBlock(TFCBlocks.StoneIgInSmooth);
+				TESRBase.renderBlocks.setRenderBoundsFromBlock(TFCBlocks.StoneIgInSmooth);
 				renderPress(Block.getBlockFromItem(te.pressBlock.getItem()), te.getWorldObj(), (int)d, (int)d1, (int)d2, te.pressBlock.getItemDamage());
 				GL11.glEnable(GL11.GL_LIGHTING);
 				GL11.glPopMatrix(); //end

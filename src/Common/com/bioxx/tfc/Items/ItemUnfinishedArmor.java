@@ -5,10 +5,10 @@ import java.util.List;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -46,9 +46,9 @@ public class ItemUnfinishedArmor extends ItemTerra implements ISmeltable
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 		if(is.getItemDamage() == 0)
-			arraylist.add(StatCollector.translateToLocal("gui.stage1"));
+			arraylist.add(TFC_Core.translate("gui.stage1"));
 		else
-			arraylist.add(StatCollector.translateToLocal("gui.stage2"));
+			arraylist.add(TFC_Core.translate("gui.stage2"));
 	}
 
 	@Override

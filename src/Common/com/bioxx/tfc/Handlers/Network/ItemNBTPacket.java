@@ -9,7 +9,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.StatCollector;
+
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class ItemNBTPacket extends AbstractPacket {
 	private NBTTagCompound tags;
@@ -118,8 +119,8 @@ public class ItemNBTPacket extends AbstractPacket {
 	    }
 	    else
 	    {
-			System.out.println(StatCollector.translateToLocal("error.error") + " " + stack.getUnlocalizedName() + " " + 
-					StatCollector.translateToLocal("error.NBT") + " " + StatCollector.translateToLocal("error.Contact"));
+			System.out.println(TFC_Core.translate("error.error") + " " + stack.getUnlocalizedName() + " " + 
+					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 			stackNBT = new NBTTagCompound();
 	    }
 
@@ -142,8 +143,8 @@ public class ItemNBTPacket extends AbstractPacket {
 		}
 		else
 		{
-			System.out.println(StatCollector.translateToLocal("error.error") + " " + stack.getUnlocalizedName() + " " +
-					StatCollector.translateToLocal("error.NBT") + " " + StatCollector.translateToLocal("error.Contact"));
+			System.out.println(TFC_Core.translate("error.error") + " " + stack.getUnlocalizedName() + " " +
+					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 			stackNBT = new NBTTagCompound();
 		}
 		for (String tagName : tagNames)

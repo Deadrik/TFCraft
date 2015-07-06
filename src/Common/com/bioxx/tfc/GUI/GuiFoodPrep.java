@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -60,15 +59,15 @@ public class GuiFoodPrep extends GuiContainerTFC
 		buttonList.clear();
 		if (guiTab == 0)
 		{
-			buttonList.add(new GuiButton(0, guiLeft + 74, guiTop + 44, 50, 20, StatCollector.translateToLocal("gui.FoodPrep.CreateMeal")));
-			buttonList.add(new GuiFoodPrepTabButton(2, guiLeft + 36, guiTop - 21, 31, 21, this, new ItemStack(TFCItems.Salad), StatCollector.translateToLocal("gui.FoodPrep.Salad")).setButtonCoord(31, 172));
-			buttonList.add(new GuiFoodPrepTabButton(1, guiLeft + 5, guiTop - 21, 31, 21, this, new ItemStack(TFCItems.Sandwich), StatCollector.translateToLocal("gui.FoodPrep.Sandwich")));
+			buttonList.add(new GuiButton(0, guiLeft + 74, guiTop + 44, 50, 20, TFC_Core.translate("gui.FoodPrep.CreateMeal")));
+			buttonList.add(new GuiFoodPrepTabButton(2, guiLeft + 36, guiTop - 21, 31, 21, this, new ItemStack(TFCItems.Salad), TFC_Core.translate("gui.FoodPrep.Salad")).setButtonCoord(31, 172));
+			buttonList.add(new GuiFoodPrepTabButton(1, guiLeft + 5, guiTop - 21, 31, 21, this, new ItemStack(TFCItems.Sandwich), TFC_Core.translate("gui.FoodPrep.Sandwich")));
 		}
 		else if (guiTab == 1)
 		{
-			buttonList.add(new GuiButton(0, guiLeft + 74, guiTop + 44, 50, 20, StatCollector.translateToLocal("gui.FoodPrep.CreateMeal")));
-			buttonList.add(new GuiFoodPrepTabButton(2, guiLeft + 36, guiTop - 21, 31, 21, this, new ItemStack(TFCItems.Salad), StatCollector.translateToLocal("gui.FoodPrep.Salad")));
-			buttonList.add(new GuiFoodPrepTabButton(1, guiLeft + 5, guiTop - 21, 31, 21, this, new ItemStack(TFCItems.Sandwich), StatCollector.translateToLocal("gui.FoodPrep.Sandwich")).setButtonCoord(31, 172));
+			buttonList.add(new GuiButton(0, guiLeft + 74, guiTop + 44, 50, 20, TFC_Core.translate("gui.FoodPrep.CreateMeal")));
+			buttonList.add(new GuiFoodPrepTabButton(2, guiLeft + 36, guiTop - 21, 31, 21, this, new ItemStack(TFCItems.Salad), TFC_Core.translate("gui.FoodPrep.Salad")));
+			buttonList.add(new GuiFoodPrepTabButton(1, guiLeft + 5, guiTop - 21, 31, 21, this, new ItemStack(TFCItems.Sandwich), TFC_Core.translate("gui.FoodPrep.Sandwich")).setButtonCoord(31, 172));
 		}
 	}
 

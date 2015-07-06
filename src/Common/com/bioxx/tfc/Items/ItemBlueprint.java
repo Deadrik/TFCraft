@@ -6,11 +6,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.TileEntities.TEDetailed;
@@ -137,6 +137,6 @@ public class ItemBlueprint extends ItemTerra
 		if(is.hasTagCompound() && is.stackTagCompound.hasKey(tag_completed))
 			return suffix + is.stackTagCompound.getString(tag_item_name);
 		else
-			return StatCollector.translateToLocal(this.getUnlocalizedName());
+			return TFC_Core.translate(this.getUnlocalizedName());
 	}
 }

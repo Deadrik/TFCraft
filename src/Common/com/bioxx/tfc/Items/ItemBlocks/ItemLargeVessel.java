@@ -10,7 +10,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -101,7 +100,7 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 					}
 					if( showMoreText )
 					{
-						arraylist.add(StatCollector.translateToLocal("gui.Barrel.MoreItems"));
+						arraylist.add(TFC_Core.translate("gui.Barrel.MoreItems"));
 					}
 				}
 			}

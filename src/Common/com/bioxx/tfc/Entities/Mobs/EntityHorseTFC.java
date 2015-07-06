@@ -753,7 +753,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		{
 			itemstack = ItemStack.loadItemStackFromNBT(nbttc.getCompoundTag("ArmorItem"));
 
-			if (itemstack != null && func_146085_a/*isHorseArmor*/(itemstack.getItem()))
+			if (itemstack != null && EntityHorse.func_146085_a/*isHorseArmor*/(itemstack.getItem()))
 			{
 				this.horseChest.setInventorySlotContents(1, itemstack);
 			}

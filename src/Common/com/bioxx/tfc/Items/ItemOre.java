@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
@@ -69,11 +68,11 @@ public class ItemOre extends ItemTerra implements ISmeltable
 		{
 			if (TFC_Core.showShiftInformation())
 			{
-				arraylist.add(StatCollector.translateToLocal("gui.units") + ": " + GetMetalReturnAmount(is));
+				arraylist.add(TFC_Core.translate("gui.units") + ": " + GetMetalReturnAmount(is));
 			}
 			else
 			{
-				arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
+				arraylist.add(TFC_Core.translate("gui.ShowHelp"));
 			}
 		}
 	}

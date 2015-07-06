@@ -6,11 +6,11 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerLiquidVessel;
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class GuiVesselLiquid extends GuiContainerTFC
 {
@@ -43,7 +43,7 @@ public class GuiVesselLiquid extends GuiContainerTFC
 		}
 		if ((tags != null) && tags.hasKey("MetalAmount"))
 		{
-			drawCenteredString(this.fontRendererObj, tags.getInteger("MetalAmount") + " " + StatCollector.translateToLocal("gui.units"), guiLeft + 87, guiTop + 23, 0);
+			drawCenteredString(this.fontRendererObj, tags.getInteger("MetalAmount") + " " + TFC_Core.translate("gui.units"), guiLeft + 87, guiTop + 23, 0);
 		}
 	}
 

@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -173,7 +172,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	@Override
 	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
-		list.add(createTag(new ItemStack(this, 1), Global.FOOD_MAX_WEIGHT));
+		list.add(ItemFoodTFC.createTag(new ItemStack(this, 1), Global.FOOD_MAX_WEIGHT));
 	}
 
 	@Override
@@ -181,22 +180,22 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	{
 		String s = "";
 		if(Food.isPickled(is))
-			s += StatCollector.translateToLocal("word.pickled") + " ";
+			s += TFC_Core.translate("word.pickled") + " ";
 		else if(Food.isBrined(is) && !Food.isDried(is))
-			s += StatCollector.translateToLocal("word.brined") + " ";
+			s += TFC_Core.translate("word.brined") + " ";
 
 		if(Food.isSalted(is))
-			s += StatCollector.translateToLocal("word.salted") + " ";
+			s += TFC_Core.translate("word.salted") + " ";
 		if(Food.isCooked(is))
-			s += StatCollector.translateToLocal("word.cooked") + " ";
+			s += TFC_Core.translate("word.cooked") + " ";
 		else if(Food.isSmoked(is))
-			s += StatCollector.translateToLocal("word.smoked") + " ";
+			s += TFC_Core.translate("word.smoked") + " ";
 
 		if(Food.isDried(is) && !Food.isCooked(is))
-			s += StatCollector.translateToLocal("word.dried") + " ";
+			s += TFC_Core.translate("word.dried") + " ";
 		if(Food.isInfused(is))
-			s += StatCollector.translateToLocal(Food.getInfusion(is) + ".name") + " ";
-		s += StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(is) + ".name");
+			s += TFC_Core.translate(Food.getInfusion(is) + ".name") + " ";
+		s += TFC_Core.translate(this.getUnlocalizedNameInefficiently(is) + ".name");
 		s += getCookedLevelString(is);
 		return s.trim();
 	}
@@ -210,18 +209,18 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			int cookedLevel = ((int)Food.getCooked(is)-600)/120;
 			switch(cookedLevel)
 			{
-			case 0: s+=StatCollector.translateToLocal("food.cooked.0");break;
-			case 1: s+=StatCollector.translateToLocal("food.cooked.1");break;
-			case 2: s+=StatCollector.translateToLocal("food.cooked.2");break;
-			case 3: s+=StatCollector.translateToLocal("food.cooked.3");break;
-			default: s+=StatCollector.translateToLocal("food.cooked.4");break;
+			case 0: s+=TFC_Core.translate("food.cooked.0");break;
+			case 1: s+=TFC_Core.translate("food.cooked.1");break;
+			case 2: s+=TFC_Core.translate("food.cooked.2");break;
+			case 3: s+=TFC_Core.translate("food.cooked.3");break;
+			default: s+=TFC_Core.translate("food.cooked.4");break;
 			}
 			s+= ")";
 		}
 		return s;
 	}
 
-	public static void addHeatInformation(ItemStack is, List arraylist)
+	public static void addHeatInformation(ItemStack is, List<String> arraylist)
 	{
 		if (TFC_ItemHeat.HasTemp(is))
 		{
@@ -235,18 +234,18 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
-		arraylist.add(getFoodGroupName(this.getFoodGroup()));
+		arraylist.add(ItemFoodTFC.getFoodGroupName(this.getFoodGroup()));
 
 		if (is.hasTagCompound())
 		{
-			addHeatInformation(is, arraylist);
+			ItemFoodTFC.addHeatInformation(is, arraylist);
 			addFoodInformation(is, player, arraylist);
 		}
 		else
 		{
-			arraylist.add(StatCollector.translateToLocal("gui.badnbt"));
-			System.out.println(StatCollector.translateToLocal("error.error") + " " + is.getUnlocalizedName() + " " +
-					StatCollector.translateToLocal("error.NBT") + " " + StatCollector.translateToLocal("error.Contact"));
+			arraylist.add(TFC_Core.translate("gui.badnbt"));
+			System.out.println(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
+					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 		}
 	}
 
@@ -258,20 +257,20 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		{
 			float ounces = Helper.roundNumber(tag.getFloat("foodWeight"), 100);
 			if (ounces > 0)
-				arraylist.add(StatCollector.translateToLocal("gui.food.amount") + " " + ounces + " oz / " + Global.FOOD_MAX_WEIGHT + " oz");
+				arraylist.add(TFC_Core.translate("gui.food.amount") + " " + ounces + " oz / " + Global.FOOD_MAX_WEIGHT + " oz");
 			float decay = tag.getFloat("foodDecay");
 			if (decay > 0)
-				arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.food.decay") + " " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
+				arraylist.add(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.food.decay") + " " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
 			if (TFCOptions.enableDebugMode)
 			{
-				arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.food.decay") + ": " + decay);
+				arraylist.add(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.food.decay") + ": " + decay);
 				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay Rate: " + this.getDecayRate(is));
 			}
 
 			if (TFC_Core.showCtrlInformation())
 				ItemFoodTFC.addTasteInformation(is, player, arraylist);
 			else
-				arraylist.add(StatCollector.translateToLocal("gui.showtaste"));
+				arraylist.add(TFC_Core.translate("gui.showtaste"));
 		}
 	}
 
@@ -289,43 +288,43 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 		int[] prefs = TFC_Core.getPlayerFoodStats(player).getPrefTaste();
 
-		String sSweet = EnumChatFormatting.DARK_GRAY + translate("gui.taste.sweet") + ": " + EnumChatFormatting.WHITE;
-		String sSour = EnumChatFormatting.DARK_GRAY + translate("gui.taste.sour") + ": " + EnumChatFormatting.WHITE;
-		String sSalty = EnumChatFormatting.DARK_GRAY + translate("gui.taste.salty") + ": " + EnumChatFormatting.WHITE;
-		String sBitter = EnumChatFormatting.DARK_GRAY + translate("gui.taste.bitter") + ": " + EnumChatFormatting.WHITE;
-		String sSavory = EnumChatFormatting.DARK_GRAY + translate("gui.taste.savory") + ": " + EnumChatFormatting.WHITE;
+		String sSweet = EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.taste.sweet") + ": " + EnumChatFormatting.WHITE;
+		String sSour = EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.taste.sour") + ": " + EnumChatFormatting.WHITE;
+		String sSalty = EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.taste.salty") + ": " + EnumChatFormatting.WHITE;
+		String sBitter = EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.taste.bitter") + ": " + EnumChatFormatting.WHITE;
+		String sSavory = EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.taste.savory") + ": " + EnumChatFormatting.WHITE;
 
 		if(rank == SkillRank.Novice)
 		{
-			sSweet += (sweet > prefs[0] ? translate("gui.taste.novice.sweet1") : translate("gui.taste.novice.sweet0"));
-			sSour += (sour > prefs[1] ? translate("gui.taste.novice.sour1") : translate("gui.taste.novice.sour0"));
-			sSalty += (salty > prefs[2] ? translate("gui.taste.novice.salty1") : translate("gui.taste.novice.salty0"));
-			sBitter += (bitter > prefs[3] ? translate("gui.taste.novice.bitter1") : translate("gui.taste.novice.bitter0"));
-			sSavory += (savory > prefs[4] ? translate("gui.taste.novice.savory1") : translate("gui.taste.novice.savory0"));
+			sSweet += (sweet > prefs[0] ? TFC_Core.translate("gui.taste.novice.sweet1") : TFC_Core.translate("gui.taste.novice.sweet0"));
+			sSour += (sour > prefs[1] ? TFC_Core.translate("gui.taste.novice.sour1") : TFC_Core.translate("gui.taste.novice.sour0"));
+			sSalty += (salty > prefs[2] ? TFC_Core.translate("gui.taste.novice.salty1") : TFC_Core.translate("gui.taste.novice.salty0"));
+			sBitter += (bitter > prefs[3] ? TFC_Core.translate("gui.taste.novice.bitter1") : TFC_Core.translate("gui.taste.novice.bitter0"));
+			sSavory += (savory > prefs[4] ? TFC_Core.translate("gui.taste.novice.savory1") : TFC_Core.translate("gui.taste.novice.savory0"));
 		}
 		else if(rank == SkillRank.Adept)
 		{
-			sSweet += createBasicString(sweet, prefs[0], "sweet");
-			sSour += createBasicString(sour, prefs[1], "sour");
-			sSalty += createBasicString(salty, prefs[2], "salty");
-			sBitter += createBasicString(bitter, prefs[3], "bitter");
-			sSavory += createBasicString(savory, prefs[4], "savory");
+			sSweet += ItemFoodTFC.createBasicString(sweet, prefs[0], "sweet");
+			sSour += ItemFoodTFC.createBasicString(sour, prefs[1], "sour");
+			sSalty += ItemFoodTFC.createBasicString(salty, prefs[2], "salty");
+			sBitter += ItemFoodTFC.createBasicString(bitter, prefs[3], "bitter");
+			sSavory += ItemFoodTFC.createBasicString(savory, prefs[4], "savory");
 		}
 		else if(rank == SkillRank.Expert)
 		{
-			sSweet += createExpertString(sweet, prefs[0], "sweet");
-			sSour += createExpertString(sour, prefs[1], "sour");
-			sSalty += createExpertString(salty, prefs[2], "salty");
-			sBitter += createExpertString(bitter, prefs[3], "bitter");
-			sSavory += createExpertString(savory, prefs[4], "savory");
+			sSweet += ItemFoodTFC.createExpertString(sweet, prefs[0], "sweet");
+			sSour += ItemFoodTFC.createExpertString(sour, prefs[1], "sour");
+			sSalty += ItemFoodTFC.createExpertString(salty, prefs[2], "salty");
+			sBitter += ItemFoodTFC.createExpertString(bitter, prefs[3], "bitter");
+			sSavory += ItemFoodTFC.createExpertString(savory, prefs[4], "savory");
 		}
 		else if(rank == SkillRank.Master)
 		{
-			sSweet += createBasicString(sweet, prefs[0], "sweet") + " (" + (sweet-prefs[0]) + ")";
-			sSour += createBasicString(sour, prefs[1], "sour") + " (" + (sour-prefs[1]) + ")";
-			sSalty += createBasicString(salty, prefs[2], "salty") + " (" + (salty - prefs[2]) + ")";
-			sBitter += createBasicString(bitter, prefs[3], "bitter") + " (" + (bitter - prefs[3]) + ")";
-			sSavory += createBasicString(savory, prefs[4], "savory") + " (" + (savory - prefs[4]) + ")";
+			sSweet += ItemFoodTFC.createBasicString(sweet, prefs[0], "sweet") + " (" + (sweet - prefs[0]) + ")";
+			sSour += ItemFoodTFC.createBasicString(sour, prefs[1], "sour") + " (" + (sour - prefs[1]) + ")";
+			sSalty += ItemFoodTFC.createBasicString(salty, prefs[2], "salty") + " (" + (salty - prefs[2]) + ")";
+			sBitter += ItemFoodTFC.createBasicString(bitter, prefs[3], "bitter") + " (" + (bitter - prefs[3]) + ")";
+			sSavory += ItemFoodTFC.createBasicString(savory, prefs[4], "savory") + " (" + (savory - prefs[4]) + ")";
 		}
 
 		arraylist.add(sSweet);
@@ -339,7 +338,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	{
 		int abs = Math.abs(val - pref);
 
-		String out = createBasicString(val, pref, name);
+		String out = ItemFoodTFC.createBasicString(val, pref, name);
 
 		if(abs <= 5)
 			out += " (+-5)";
@@ -358,45 +357,39 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		int dif = val - pref;
 
 		if(dif >= -5 && dif <= 5)
-			return translate("gui.taste.4") + " " + translate("gui.taste."+name);
+			return TFC_Core.translate("gui.taste.4") + " " + TFC_Core.translate("gui.taste." + name);
 		else if(dif >= -10 && dif < -5)
-			return translate("gui.taste.3") + " " + translate("gui.taste."+name);
+			return TFC_Core.translate("gui.taste.3") + " " + TFC_Core.translate("gui.taste." + name);
 		else if(dif >= -15 && dif < -10)
-			return translate("gui.taste.2") + " " + translate("gui.taste."+name);
+			return TFC_Core.translate("gui.taste.2") + " " + TFC_Core.translate("gui.taste." + name);
 		else if(dif >= -20 && dif < -15)
-			return translate("gui.taste.1") + " " + translate("gui.taste."+name);
+			return TFC_Core.translate("gui.taste.1") + " " + TFC_Core.translate("gui.taste." + name);
 		else if(dif < -20)
-			return translate("gui.taste.0") + " " + translate("gui.taste."+name);
+			return TFC_Core.translate("gui.taste.0") + " " + TFC_Core.translate("gui.taste." + name);
 		else if(dif > 5 && dif <= 10)
-			return translate("gui.taste.5") + " " + translate("gui.taste."+name);
+			return TFC_Core.translate("gui.taste.5") + " " + TFC_Core.translate("gui.taste." + name);
 		else if(dif > 10 && dif <= 15)
-			return translate("gui.taste.6") + " " + translate("gui.taste."+name);
+			return TFC_Core.translate("gui.taste.6") + " " + TFC_Core.translate("gui.taste." + name);
 		else if(dif > 15 && dif <= 20)
-			return translate("gui.taste.7") + " " + translate("gui.taste."+name);
+			return TFC_Core.translate("gui.taste.7") + " " + TFC_Core.translate("gui.taste." + name);
 		else if(dif > 20)
-			return translate("gui.taste.8") + " " + translate("gui.taste."+name);
+			return TFC_Core.translate("gui.taste.8") + " " + TFC_Core.translate("gui.taste." + name);
 
 		return "";
-	}
-
-	//For ease of use
-	private static String translate(String s)
-	{
-		return StatCollector.translateToLocal(s);
 	}
 
 	public static String getFoodGroupName(EnumFoodGroup fg)
 	{
 		if(fg == EnumFoodGroup.Dairy)
-			return (EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.food.dairy"));
+			return (EnumChatFormatting.WHITE + TFC_Core.translate("gui.food.dairy"));
 		else if(fg == EnumFoodGroup.Fruit)
-			return (EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("gui.food.fruit"));
+			return (EnumChatFormatting.DARK_PURPLE + TFC_Core.translate("gui.food.fruit"));
 		else if(fg == EnumFoodGroup.Vegetable)
-			return (EnumChatFormatting.DARK_GREEN + StatCollector.translateToLocal("gui.food.vegetable"));
+			return (EnumChatFormatting.DARK_GREEN + TFC_Core.translate("gui.food.vegetable"));
 		else if(fg == EnumFoodGroup.Protein)
-			return (EnumChatFormatting.DARK_RED + StatCollector.translateToLocal("gui.food.protein"));
+			return (EnumChatFormatting.DARK_RED + TFC_Core.translate("gui.food.protein"));
 		else if(fg == EnumFoodGroup.Grain)
-			return (EnumChatFormatting.YELLOW + StatCollector.translateToLocal("gui.food.grain"));
+			return (EnumChatFormatting.YELLOW + TFC_Core.translate("gui.food.grain"));
 		else
 			return "N/A";
 	}
@@ -453,8 +446,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			else
 			{
 				foodstats.addNutrition(((IFood)(is.getItem())).getFoodGroup(), 1f);
-				System.out.println(StatCollector.translateToLocal("error.error") + " " + is.getUnlocalizedName() + " " +
-						StatCollector.translateToLocal("error.NBT") + " " + StatCollector.translateToLocal("error.Contact"));
+				System.out.println(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
+						TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 			}
 		}
 
@@ -517,7 +510,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 	public static ItemStack createTag(ItemStack is, float weight, float decay)
 	{
-		is = createTag(is, weight);
+		is = ItemFoodTFC.createTag(is, weight);
 		is.getTagCompound().setFloat("foodDecay", decay);
 		return is;
 	}

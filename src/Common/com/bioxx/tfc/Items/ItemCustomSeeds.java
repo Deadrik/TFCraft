@@ -7,7 +7,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFCTabs;
@@ -95,13 +94,13 @@ public class ItemCustomSeeds extends ItemTerra
 			switch (nutrient)
 			{
 			case 0:
-				arraylist.add(EnumChatFormatting.RED + StatCollector.translateToLocal("gui.Nutrient.A"));
+				arraylist.add(EnumChatFormatting.RED + TFC_Core.translate("gui.Nutrient.A"));
 				break;
 			case 1:
-				arraylist.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("gui.Nutrient.B"));
+				arraylist.add(EnumChatFormatting.GOLD + TFC_Core.translate("gui.Nutrient.B"));
 				break;
 			case 2:
-				arraylist.add(EnumChatFormatting.YELLOW + StatCollector.translateToLocal("gui.Nutrient.C"));
+				arraylist.add(EnumChatFormatting.YELLOW + TFC_Core.translate("gui.Nutrient.C"));
 				break;
 			default:
 				break;

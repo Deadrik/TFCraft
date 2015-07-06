@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -75,7 +74,7 @@ public class GuiCustomNametag extends GuiScreen
 
 		Keyboard.enableRepeatEvents(true);
 		this.buttonList.clear();
-		this.buttonList.add(new GuiButton(0, this.width / 2 - 100, guiTop + 57, StatCollector.translateToLocal("gui.done")));
+		this.buttonList.add(new GuiButton(0, this.width / 2 - 100, guiTop + 57, TFC_Core.translate("gui.done")));
 		//this.controlList.add(new GuiButton(1, this.width / 2 - 100, guiTop + 210, var1.translateKey("gui.cancel")));
 
 		this.theGuiTextField = new GuiTextField(this.fontRendererObj, this.width / 2 - 90, guiTop + 27, 180, 20);
@@ -143,7 +142,7 @@ public class GuiCustomNametag extends GuiScreen
 		int i1 = (height - ySize) / 2;
 		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
 
-		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Nametag"), this.width / 2, i1+8, 0x000000);
+		drawCenteredString(fontRendererObj,TFC_Core.translate("gui.Nametag"), this.width / 2, i1+8, 0x000000);
 		this.theGuiTextField.drawTextBox();
 
 		super.drawScreen(par1, par2, par3);
