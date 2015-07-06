@@ -117,7 +117,7 @@ public class ItemGoldPan extends ItemTerra
 						return is;
 					}
 
-					if(cd.sluicedAmount < TFCOptions.goldPanSluicingLimit && TFCOptions.enableSluiceOverworking)
+					if(cd.sluicedAmount < TFCOptions.goldPanSluicingLimit || !TFCOptions.enableSluiceOverworking)
 					{
 						if (blockHit == TFCBlocks.Gravel || blockHit == TFCBlocks.Gravel2)
 						{
