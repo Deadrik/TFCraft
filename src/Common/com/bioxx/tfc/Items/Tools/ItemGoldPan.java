@@ -23,6 +23,7 @@ import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -116,7 +117,7 @@ public class ItemGoldPan extends ItemTerra
 						return is;
 					}
 
-					if(cd.sluicedAmount < 50)
+					if(cd.sluicedAmount < TFCOptions.goldPanSluicingLimit && TFCOptions.enableSluiceOverworking)
 					{
 						if (blockHit == TFCBlocks.Gravel || blockHit == TFCBlocks.Gravel2)
 						{
