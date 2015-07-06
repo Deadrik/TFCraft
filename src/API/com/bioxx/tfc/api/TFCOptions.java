@@ -65,6 +65,10 @@ public class TFCOptions
 	public static int poorOreUnits = 15;
 	public static int normalOreUnits = 25;
 	public static int richOreUnits = 35;
+	
+	public static boolean enableSluiceOverworking = true;
+	public static int goldPanSluicingLimit = 50;
+	public static int sluiceSluicingLimit = 300;
 
 	public static String quiverHUDPosition = "bottomleft";
 
