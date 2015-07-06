@@ -91,7 +91,6 @@ public class ItemCustomLeash extends ItemLead implements ISize
 	{
 		//Minecraft.getMinecraft().gameSettings.advancedItemTooltips = false;
 		ItemTerra.addSizeInformation(is, arraylist);
-		ItemTerra.addHeatInformation(is, arraylist);
 	}
 
 	@Override

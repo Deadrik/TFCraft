@@ -116,7 +116,6 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
-		ItemTerra.addHeatInformation(is, arraylist);
 
 		if (TFC_Core.showShiftInformation())
 		{
