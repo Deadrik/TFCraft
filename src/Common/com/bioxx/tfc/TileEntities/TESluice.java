@@ -28,6 +28,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 
 public class TESluice extends TileEntity implements IInventory
 {
@@ -290,7 +291,7 @@ public class TESluice extends TileEntity implements IInventory
 				}
 
 				ChunkData cd = TFC_Core.getCDM(worldObj).getData(xCoord >> 4, zCoord >> 4);
-				if (cd.sluicedAmount > 300)
+				if (cd.sluicedAmount > TFCOptions.sluiceSluicingLimit && TFCOptions.enableSluiceOverworking)
 				{
 					processTimeRemaining = 0;
 					soilAmount = -1;

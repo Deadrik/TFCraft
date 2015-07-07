@@ -98,6 +98,7 @@ public class TerraFirmaCraft
 	private static final String PROTECTION_HEADER = "Protection";
 	private static final String PLAYER_HEADER = "Player";
 	private static final String MATERIALS_HEADER = "Materials";
+	private static final String SLUICING_HEADER = "Sluicing";
 	private static final String SERVER_HEADER = "Server";
 	
 	@Instance("TerraFirmaCraft")
@@ -411,6 +412,11 @@ public class TerraFirmaCraft
 		TFCOptions.poorOreUnits = TFCOptions.getIntFor(config, MATERIALS_HEADER, "poorOreUnits", 15, "The metal units provided by a single piece of poor ore.");
 		TFCOptions.normalOreUnits = TFCOptions.getIntFor(config, MATERIALS_HEADER, "normalOreUnits", 25, "The metal units provided by a single piece of normal ore.");
 		TFCOptions.richOreUnits = TFCOptions.getIntFor(config, MATERIALS_HEADER, "richOreUnits", 35, "The metal units provided by a single piece of rich ore");
+
+		//Sluicing
+		TFCOptions.enableSluiceOverworking = TFCOptions.getBooleanFor(config, SLUICING_HEADER, "enableSluiceOverworking", true, "Whether a given chunk can become overworked and unusable for sluicing. (Default true)");
+		TFCOptions.goldPanSluicingLimit = TFCOptions.getIntFor(config, SLUICING_HEADER, "goldPanSluicingLimit", 50, "How many times a gold pan can be used in a chunk before it is overworked. (Default 50)");
+		TFCOptions.sluiceSluicingLimit = TFCOptions.getIntFor(config, SLUICING_HEADER, "sluiceSluicingLimit", 300, "How many times a sluice can be used in a chunk before it becomes overworked. (Default 300)");
 
 		TFCOptions.simSpeedNoPlayers = TFCOptions.getIntFor(config, SERVER_HEADER, "simSpeedNoPlayers", 100, "For every X number of ticks provided here, when there are no players online the server will only progress by 1 tick. (Default: 100) Time advances 100 times slower than normal. Setting this to less than 1 will turn this feature off.");
 
