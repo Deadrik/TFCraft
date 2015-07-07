@@ -99,6 +99,7 @@ public class TerraFirmaCraft
 	private static final String PLAYER_HEADER = "Player";
 	private static final String MATERIALS_HEADER = "Materials";
 	private static final String SERVER_HEADER = "Server";
+	private static final String OVERWORKED_HEADER = "Overworked Chunks";
 	
 	@Instance("TerraFirmaCraft")
 	public static TerraFirmaCraft instance;
@@ -413,6 +414,11 @@ public class TerraFirmaCraft
 		TFCOptions.richOreUnits = TFCOptions.getIntFor(config, MATERIALS_HEADER, "richOreUnits", 35, "The metal units provided by a single piece of rich ore");
 
 		TFCOptions.simSpeedNoPlayers = TFCOptions.getIntFor(config, SERVER_HEADER, "simSpeedNoPlayers", 100, "For every X number of ticks provided here, when there are no players online the server will only progress by 1 tick. (Default: 100) Time advances 100 times slower than normal. Setting this to less than 1 will turn this feature off.");
+
+		// Overworked Chunks
+		TFCOptions.enableOverworkingChunks = TFCOptions.getBooleanFor(config, OVERWORKED_HEADER, "enableOverworkingChunks", true, "Set this to false to disable the overworking of chunks when using a gold pan or sluice.");
+		TFCOptions.goldPanLimit = TFCOptions.getIntFor(config, OVERWORKED_HEADER, "goldPanLimit", 50, "The overworked cap for filling a gold pan in a specific chunk. Both filling a gold pan or using a sluice in the chunk count towards this value.");
+		TFCOptions.sluiceLimit = TFCOptions.getIntFor(config, OVERWORKED_HEADER, "sluiceLimit", 300, "The overworked cap for a sluice scanning one soil unit in a specific chunk. Both filling a gold pan or using a sluice in the chunk count towards this value");
 
 		/**Always end with this*/
 		if (config != null)

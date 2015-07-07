@@ -21,8 +21,8 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -107,6 +107,12 @@ public class ItemGoldPan extends ItemTerra
 			{
 				if(is.getItemDamage() == 0)
 				{
+					// Prevents "quick-panning"
+					if (world.getBlock(x, y + 1, z).getMaterial() == Material.water)
+					{
+						return is;
+					}
+
 					ChunkData cd = TFC_Core.getCDM(world).getData(x >> 4, z >> 4);
 
 					// Make sure our chunk data isn't null.
@@ -116,9 +122,16 @@ public class ItemGoldPan extends ItemTerra
 						return is;
 					}
 
-					if(cd.sluicedAmount < 50)
+					int goldPanCap = 50;
+					if (TFCOptions.goldPanLimit < 0)
+						TFC_Core.sendInfoMessage(player, new ChatComponentText("An invalid value has been entered for goldPanLimit in the config file. Using default value instead."));
+					else
+						goldPanCap = TFCOptions.goldPanLimit;
+
+					// Overworking is disabled, or the cap has not yet been reached.
+					if (cd.sluicedAmount < goldPanCap || !TFCOptions.enableOverworkingChunks)
 					{
-						if (blockHit == TFCBlocks.Gravel || blockHit == TFCBlocks.Gravel2)
+						if (TFC_Core.isGravel(blockHit))
 						{
 							is.setItemDamage((5 << 4) + 2);
 							if(world.rand.nextInt(10) == 0)
@@ -126,32 +139,13 @@ public class ItemGoldPan extends ItemTerra
 							TFC_Core.addPlayerExhaustion(player, 0.0005f);
 							cd.sluicedAmount++;
 						}
-						else if (blockHit == TFCBlocks.Sand || blockHit == TFCBlocks.Sand2)
+						else if (TFC_Core.isSand(blockHit))
 						{
 							is.setItemDamage((5 << 4) + 1);
 							if(world.rand.nextInt(10) == 0)
 								world.setBlockToAir(x, y, z);
 							TFC_Core.addPlayerExhaustion(player, 0.0005f);
 							cd.sluicedAmount++;
-						}
-						else if (blockHit.getMaterial() == Material.water)
-						{
-							/*if(world.getBlock(x, y-1, z) == Blocks.gravel)
-							{
-								is.setItemDamage((5 << 4) + 2);
-								if(world.rand.nextInt(10) == 0)
-									world.setBlockToAir(x, y-1, z);
-								TFC_Core.addPlayerExhaustion(player, 0.0005f);
-								cd.sluicedAmount++;
-							}
-							else if(world.getBlock(x, y-1, z) == TFCBlocks.Sand || world.getBlock(x, y-1, z) == TFCBlocks.Sand2)
-							{
-								is.setItemDamage((5 << 4) + 1);
-								if(world.rand.nextInt(10) == 0)
-									world.setBlockToAir(x, y-1, z);
-								TFC_Core.addPlayerExhaustion(player, 0.0005f);
-								cd.sluicedAmount++;
-							}*/
 						}
 					}
 					else
@@ -193,6 +187,10 @@ public class ItemGoldPan extends ItemTerra
 									is.setItemDamage(0);
 							}
 						}
+					}
+					else
+					{
+						TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("gui.goldpan.useFlowing"));
 					}
 				}
 			}

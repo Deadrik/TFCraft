@@ -69,6 +69,10 @@ public class TFCOptions
 	public static String quiverHUDPosition = "bottomleft";
 
 	public static int oilLampFuelMult = 4;
+	
+	public static boolean enableOverworkingChunks = true;
+	public static int goldPanLimit = 50;
+	public static int sluiceLimit = 300;
 
 	public static boolean getBooleanFor(Configuration config,String heading, String item, boolean value)
 	{

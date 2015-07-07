@@ -28,6 +28,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 
 public class TESluice extends TileEntity implements IInventory
 {
@@ -290,11 +291,22 @@ public class TESluice extends TileEntity implements IInventory
 				}
 
 				ChunkData cd = TFC_Core.getCDM(worldObj).getData(xCoord >> 4, zCoord >> 4);
-				if (cd.sluicedAmount > 300)
+
+				if (TFCOptions.enableOverworkingChunks)
 				{
-					processTimeRemaining = 0;
-					soilAmount = -1;
-					return;
+					int sluiceCap = 300;
+
+					if (TFCOptions.sluiceLimit < 0)
+						System.out.println("An invalid value has been entered for sluiceLimit in the config file. Using default value instead.");
+					else
+						sluiceCap = TFCOptions.sluiceLimit;
+
+					if (cd.sluicedAmount > sluiceCap)
+					{
+						processTimeRemaining = 0;
+						soilAmount = -1;
+						return;
+					}
 				}
 
 				while (processTimeRemaining > 100 && soilAmount > 0)

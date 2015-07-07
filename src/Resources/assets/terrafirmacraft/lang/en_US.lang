@@ -2501,7 +2501,7 @@ gui.gems=Gems
 option.tfc.oreQuality=Show ore quality
 
 #== Chat Messages ==
-gui.GoldPan.UseFull=Must use under flowing water.
+gui.goldpan.useFlowing=This must be used under flowing water.
 gui.goldpan.overused=This area seems to be overworked. You probably wouldn't find much.
 gui.seeds.failedTemp=It's too cold to plant this, it wouldn't survive very long.
 gui.seeds.failedSun=There's not enough sunlight to plant this, it wouldn't survive very long.

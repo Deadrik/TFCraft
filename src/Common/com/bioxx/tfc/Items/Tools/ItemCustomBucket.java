@@ -83,17 +83,57 @@ public class ItemCustomBucket extends ItemTerra
 					if (event.getResult() == Event.Result.ALLOW)
 						return event.result;
 
-					if (TFC_Core.isFreshWater(world.getBlock(x, y, z)) && world.getBlockMetadata(x, y, z) <= 2)
+					if (TFC_Core.isFreshWater(world.getBlock(x, y, z)))
 					{
 						world.setBlockToAir(x, y, z);
 						if (player.capabilities.isCreativeMode)
 							return is;
-
 						return new ItemStack(TFCItems.WoodenBucketWater);
 					}
-					else if (TFC_Core.isSaltWater(world.getBlock(x, y, z)) && world.getBlockMetadata(x, y, z) <= 2)
+					else if (TFC_Core.isSaltWater(world.getBlock(x, y, z)))
 					{
 						world.setBlockToAir(x, y, z);
+						if (player.capabilities.isCreativeMode)
+							return is;
+						return new ItemStack(TFCItems.WoodenBucketSaltWater);
+					}
+					
+					// Handle flowing water
+					int flowX = x;
+					int flowY = y;
+					int flowZ = z;
+					switch(mop.sideHit)
+					{
+					case 0:
+						flowY = y - 1;
+						break;
+					case 1:
+						flowY = y + 1;
+						break;
+					case 2:
+						flowZ = z - 1;
+						break;
+					case 3:
+						flowZ = z + 1;
+						break;
+					case 4:
+						flowX = x - 1;
+						break;
+					case 5:
+						flowX = x + 1;
+						break;
+					}
+					
+					if (TFC_Core.isFreshWater(world.getBlock(flowX, flowY, flowZ)))
+					{
+						world.setBlockToAir(flowX, flowY, flowZ);
+						if (player.capabilities.isCreativeMode)
+							return is;
+						return new ItemStack(TFCItems.WoodenBucketWater);
+					}
+					else if (TFC_Core.isSaltWater(world.getBlock(flowX, flowY, flowZ)))
+					{
+						world.setBlockToAir(flowX, flowY, flowZ);
 						if (player.capabilities.isCreativeMode)
 							return is;
 						return new ItemStack(TFCItems.WoodenBucketSaltWater);

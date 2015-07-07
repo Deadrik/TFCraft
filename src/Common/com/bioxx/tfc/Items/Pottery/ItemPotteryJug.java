@@ -123,8 +123,35 @@ public class ItemPotteryJug extends ItemPotteryBase
 				int x = mop.blockX;
 				int y = mop.blockY;
 				int z = mop.blockZ;
+				
+				// Handle flowing water
+				int flowX = x;
+				int flowY = y;
+				int flowZ = z;
+				switch(mop.sideHit)
+				{
+				case 0:
+					flowY = y - 1;
+					break;
+				case 1:
+					flowY = y + 1;
+					break;
+				case 2:
+					flowZ = z - 1;
+					break;
+				case 3:
+					flowZ = z + 1;
+					break;
+				case 4:
+					flowX = x - 1;
+					break;
+				case 5:
+					flowX = x + 1;
+					break;
+				}
 
-				if(!world.isRemote && TFC_Core.isFreshWater(world.getBlock(x, y, z)) && !entity.isSneaking())
+				if (!entity.isSneaking() && !world.isRemote && 
+						TFC_Core.isFreshWater(world.getBlock(x, y, z)) || TFC_Core.isFreshWater(world.getBlock(flowX, flowY, flowZ)))
 				{
 					if(is.getItemDamage() == 1)
 					{
