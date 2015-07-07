@@ -21,6 +21,7 @@ public class ModelRendererTFC extends ModelRenderer {
         this.setTextureOffset(par2, par3);
     }
 	
+	@Override
 	public ModelRendererTFC setTextureOffset(int par1, int par2)
     {
         this.textureOffsetX = par1;
@@ -31,7 +32,8 @@ public class ModelRendererTFC extends ModelRenderer {
 	/**
      * Creates a textured box. Args: originX, originY, originZ, width, height, depth, scaleFactor.
      */
-    public void addBox(float par1, float par2, float par3, int par4, int par5, int par6, float par7)
+    @Override
+	public void addBox(float par1, float par2, float par3, int par4, int par5, int par6, float par7)
     {
         this.cubeList.add(new ModelBox(this, this.textureOffsetX, this.textureOffsetY, par1, par2, par3, par4, par5, par6, par7));
     }

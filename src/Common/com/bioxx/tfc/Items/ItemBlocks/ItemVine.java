@@ -17,12 +17,14 @@ public class ItemVine extends ItemTerraBlock
 		super(b);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack is, int par2)
 	{
 		return ColorizerFoliageTFC.getFoliageColorBasic();
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int par1)
 	{

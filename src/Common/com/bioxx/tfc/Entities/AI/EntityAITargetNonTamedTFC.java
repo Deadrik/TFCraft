@@ -23,7 +23,8 @@ public class EntityAITargetNonTamedTFC extends EntityAITargetNonTamed
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
+    @Override
+	public boolean shouldExecute()
     {
     	if(theTameable instanceof IAnimal && this.targetClass == EntityPlayer.class && ((IAnimal)theTameable).checkFamiliarity(InteractionEnum.TOLERATEPLAYER, null))
     	{

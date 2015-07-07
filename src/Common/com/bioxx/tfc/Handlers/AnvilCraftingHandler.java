@@ -1,12 +1,10 @@
 package com.bioxx.tfc.Handlers;
 
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Events.AnvilCraftEvent;

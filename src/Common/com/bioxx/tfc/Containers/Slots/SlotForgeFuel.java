@@ -14,6 +14,7 @@ public class SlotForgeFuel extends Slot
 		super(iinventory, i, j, k);
 	}
 
+	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
 		if(itemstack.getItem() == TFCItems.Coal)
@@ -21,6 +22,7 @@ public class SlotForgeFuel extends Slot
 		return false;
 	}
 
+	@Override
 	public int getSlotStackLimit()
 	{
 		return 1;

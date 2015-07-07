@@ -19,7 +19,8 @@ public class EntityAISitTFC extends EntityAISit {
 	  /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
+    @Override
+	public boolean shouldExecute()
     {
     	boolean superResult = super.shouldExecute();
         if (!this.theEntity.isTamed() && !this.theEntity.isSitting())
@@ -44,7 +45,8 @@ public class EntityAISitTFC extends EntityAISit {
     /**
      * Execute a one shot task or start executing a continuous task
      */
-    public void startExecuting()
+    @Override
+	public void startExecuting()
     {
     	super.startExecuting();
         this.theEntity.getNavigator().clearPathEntity();
@@ -54,7 +56,8 @@ public class EntityAISitTFC extends EntityAISit {
     /**
      * Resets the task
      */
-    public void resetTask()
+    @Override
+	public void resetTask()
     {
     	super.resetTask();
         this.theEntity.setSitting(false);
@@ -63,7 +66,8 @@ public class EntityAISitTFC extends EntityAISit {
     /**
      * Sets the sitting flag.
      */
-    public void setSitting(boolean sitting)
+    @Override
+	public void setSitting(boolean sitting)
     {
     	super.setSitting(sitting);
         this.isSitting = sitting;

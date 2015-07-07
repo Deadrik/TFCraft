@@ -21,6 +21,7 @@ public class WorldGenFungi extends WorldGenerator
 		return this.generate(world, rnd, x, y, z);
 	}
 
+	@Override
 	public boolean generate(World world, Random rnd, int x, int y, int z)
 	{
 		for (int l = 0; l < 2; ++l)

@@ -20,7 +20,8 @@ public class ContainerHorseInventorySlotSaddle extends Slot
     /**
      * Check if the stack is a valid item for this slot. Always true beside for the armor slots.
      */
-    public boolean isItemValid(ItemStack par1ItemStack)
+    @Override
+	public boolean isItemValid(ItemStack par1ItemStack)
     {
         return super.isItemValid(par1ItemStack) && par1ItemStack.getItem() == Items.saddle && !this.getHasStack();
     }

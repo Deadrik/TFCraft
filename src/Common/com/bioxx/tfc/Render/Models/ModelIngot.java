@@ -73,6 +73,7 @@ public class ModelIngot extends ModelBox
         		x3, y4, x2, y3, renderer.textureWidth, renderer.textureHeight); // long
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
     public void render(Tessellator par1Tessellator, float par2)
     {

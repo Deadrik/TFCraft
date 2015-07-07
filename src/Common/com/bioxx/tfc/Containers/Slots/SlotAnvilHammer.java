@@ -14,6 +14,7 @@ public class SlotAnvilHammer extends Slot
 		super(iinventory, i, j, k);
 	}
 
+	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
 		if(itemstack.getItem() instanceof ItemHammer) {
