@@ -15,7 +15,7 @@ public class KeyPressPacket extends AbstractPacket
 
 	public KeyPressPacket(){}
 
-	public KeyPressPacket(int t)
+	public KeyPressPacket(byte t)
 	{
 		type = t;
 	}
@@ -43,12 +43,8 @@ public class KeyPressPacket extends AbstractPacket
 		if(keyTimer + 1 < TFC_Time.getTotalTicks())
 		{
 			keyTimer = TFC_Time.getTotalTicks();
-			if(type == 0)//ChiselMode
-			{
-				PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
-				if(pi != null)
-					pi.switchChiselMode();
-			}
+			//Set the ChiselMode on the server.
+			PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).setChiselMode((byte)type);
 		}
 	}
 

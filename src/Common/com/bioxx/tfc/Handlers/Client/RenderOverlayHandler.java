@@ -3,6 +3,7 @@ package com.bioxx.tfc.Handlers.Client;
 import java.awt.Color;
 import java.lang.reflect.Field;
 
+import com.bioxx.tfc.api.Tools.ChiselManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiIngame;
@@ -107,7 +108,9 @@ public class RenderOverlayHandler
 			if (hasHammer)
 			{
 				int mode = PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode;
-				this.drawTexturedModalRect(mid + 95, sr.getScaledHeight() - 21, 0 + (20 * mode), 58, 20, 20);
+				TFC_Core.bindTexture(ChiselManager.getInstance().getResourceLocation(mode));
+				this.drawTexturedModalRect(mid + 95, sr.getScaledHeight() - 21, ChiselManager.getInstance().getTextureU(mode), ChiselManager.getInstance().getTextureV(mode), 20, 20);
+				TFC_Core.bindTexture(tfcicons);
 			}
 		}
 

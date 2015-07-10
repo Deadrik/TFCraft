@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Handlers.Client;
 
+import com.bioxx.tfc.api.Tools.ChiselManager;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
@@ -45,54 +46,20 @@ public class ChiselHighlightHandler
 			{
 				MovingObjectPosition target = evt.target;
 				Block id = world.getBlock(target.blockX, target.blockY, target.blockZ);
-				PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
+				int mode = PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode;
 				//double depth = (double)pi.ChiselDetailZoom/8D;
 
-				//isChiselable
-				boolean isChiselable = id == TFCBlocks.Planks
-						|| id instanceof BlockCobble
-						|| id instanceof BlockStone
-						|| id instanceof BlockSmooth;
-
-				if (pi.ChiselMode > -1)
+				if (mode > -1)
 				{
 					//Get the hit location in local box coords
 					double hitX = Math.round((target.hitVec.xCoord - target.blockX) * 100) / 100.0d;
 					double hitY = Math.round((target.hitVec.yCoord - target.blockY) * 100) / 100.0d;
 					double hitZ = Math.round((target.hitVec.zCoord - target.blockZ) * 100) / 100.0d;
 
-					int divX = 0, divY = 0, divZ = 0;
-
-					if (pi.ChiselMode == 0 && id instanceof BlockStone)
-					{
-						divX = divY = divZ = 1;
-					}
-					else if (pi.ChiselMode == 1 && (id == TFCBlocks.stoneStairs || isChiselable))
-					{
-						divX = divY = divZ = 2;
-					}
-					else if (pi.ChiselMode == 2 && (id == TFCBlocks.stoneSlabs || isChiselable))
-					{
-						if (target.sideHit == 5 || target.sideHit == 4)
-						{
-							divY = divZ = 1;
-							divX = 8;
-						}
-						else if (target.sideHit == 1 || target.sideHit == 0)
-						{
-							divX = divZ = 1;
-							divY = 8;
-						}
-						else if (target.sideHit == 3 || target.sideHit == 2)
-						{
-							divY = divX = 1;
-							divZ = 8;
-						}
-					}
-					else if (pi.ChiselMode == 3 && (id == TFCBlocks.Detailed || isChiselable))
-					{
-						divX = divY = divZ = 8;
-					}
+					ChiselManager.getInstance().setDivision(mode, target.sideHit);
+					int divX = ChiselManager.getInstance().getDivX(mode, id);
+					int divY = ChiselManager.getInstance().getDivY(mode, id);
+					int divZ = ChiselManager.getInstance().getDivZ(mode, id);
 
 					if (divX > 0)
 					{

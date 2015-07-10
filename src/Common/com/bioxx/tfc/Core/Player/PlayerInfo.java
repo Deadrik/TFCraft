@@ -2,6 +2,7 @@ package com.bioxx.tfc.Core.Player;
 
 import java.util.UUID;
 
+import com.bioxx.tfc.api.Tools.ChiselManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -76,15 +77,25 @@ public class PlayerInfo
 
 	public void switchChiselMode()
 	{
-		boolean allowDetailed = true;
-		boolean allowSuperDetailed = false;
 		if(lastChange+3 < TFC_Time.getTotalTicks())
 		{
-			ChiselMode = (byte) (ChiselMode == 0 ? 1 : ChiselMode == 1 ? 2 : 
-				ChiselMode == 2 && allowDetailed ? 3 : 
-					ChiselMode == 3 && allowSuperDetailed ? 4 : 0);
+			//Bump ChiselMode on switchChiselMode,
+			//reset to zero when the last mode is reached.
+			if(ChiselMode == ChiselManager.getInstance().getSize() - 1)
+			{
+				ChiselMode = 0;
+			}
+			else
+			{
+				ChiselMode = ++ChiselMode;
+			}
 			lastChange = TFC_Time.getTotalTicks();
 		}
+	}
+
+	//Set the ChiselMode directly on the server side.
+	public void setChiselMode(byte chiselMode){
+		ChiselMode = chiselMode;
 	}
 
 	public boolean lockMatches(int x, int y, int z)

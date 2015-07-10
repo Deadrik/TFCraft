@@ -273,6 +273,9 @@ public class TerraFirmaCraft
 		ItemSetup.registerFurniceFuel();
 		GameRegistry.registerFuelHandler(new TFCFuelHandler());
 
+		//Register ChiselModes
+		proxy.registerChiselModes();
+
 		//WAILA stuff
 		proxy.registerWailaClasses();
 		proxy.hideNEIItems();

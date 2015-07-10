@@ -1,5 +1,7 @@
 package com.bioxx.tfc.Blocks;
 
+import com.bioxx.tfc.Items.Tools.ItemHammer;
+import com.bioxx.tfc.api.Tools.IToolChisel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
@@ -66,6 +68,25 @@ public class BlockPartial extends BlockTerraContainer
 		if(!world.isRemote)
 		{
 		}
+	}
+
+	/**
+	 * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
+	 */
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ) {
+		boolean hasHammer = false;
+		for (int i = 0; i < 9; i++)
+			if (entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer)
+				hasHammer = true;
+
+		if (entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof IToolChisel &&
+				hasHammer && !world.isRemote && ((IToolChisel) entityplayer.getCurrentEquippedItem().getItem()).canChisel(entityplayer, x, y, z)) {
+			Block id = world.getBlock(x, y, z);
+			byte meta = (byte) world.getBlockMetadata(x, y, z);
+			return ((IToolChisel) entityplayer.getCurrentEquippedItem().getItem()).onUsed(world, entityplayer, x, y, z, id, meta, side, hitX, hitY, hitZ);
+		}
+		return false;
 	}
 
 	@Override
