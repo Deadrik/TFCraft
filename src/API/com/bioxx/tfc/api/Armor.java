@@ -24,7 +24,7 @@ public class Armor
 	public int[] baseDurability = new int[] {2500, 3750, 3000, 2500,0};//Helm,Chest,Legs,Boots,back
 	public int armorId;
 
-	private Armor(int id, int ARP, int ARS, int ARC, String material)
+	public Armor(int id, int ARP, int ARS, int ARC, String material)
 	{
 		armorArray[id] = this;
 		armorId = id;
@@ -34,7 +34,7 @@ public class Armor
 		metaltype = material;
 	}
 
-	private Armor(int id, int ARP, int ARS, int ARC, int[] dura, String material)
+	public Armor(int id, int ARP, int ARS, int ARC, int[] dura, String material)
 	{
 		armorArray[id] = this;
 		armorId = id;
