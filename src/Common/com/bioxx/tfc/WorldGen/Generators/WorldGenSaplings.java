@@ -9,7 +9,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Enums.EnumTree;
 
-public class WorldGenGrowTrees
+public class WorldGenSaplings
 {
 	public void generate(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
