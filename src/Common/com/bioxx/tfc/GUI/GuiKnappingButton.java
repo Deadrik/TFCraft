@@ -8,6 +8,7 @@ import net.minecraft.util.IIcon;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 
 public class GuiKnappingButton extends GuiButton 
@@ -22,22 +23,28 @@ public class GuiKnappingButton extends GuiButton
 	{
 		if (this.visible)
 		{
-			IIcon icon = PlayerManagerTFC.getInstance().getClientPlayer().specialCraftingType.getIconIndex();
-			if(!this.enabled && PlayerManagerTFC.getInstance().getClientPlayer().specialCraftingTypeAlternate != null)
-				icon = PlayerManagerTFC.getInstance().getClientPlayer().specialCraftingTypeAlternate.getIconIndex();
+			PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
+			IIcon icon = null;
+
+			if (pi.specialCraftingType != null)
+				icon = pi.specialCraftingType.getIconIndex();
+			if (!this.enabled && pi.specialCraftingTypeAlternate != null)
+				icon = pi.specialCraftingTypeAlternate.getIconIndex();
+
 			TFC_Core.bindTexture(TextureMap.locationItemsTexture);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.field_146123_n = xPos >= this.xPosition && yPos >= this.yPosition && xPos < this.xPosition + this.width && yPos < this.yPosition + this.height;
-			int k = this.getHoverState(this.field_146123_n);
-			this.drawTexturedModelRectFromIcon(this.xPosition, this.yPosition, icon, this.width, this.height);
+			//int k = this.getHoverState(this.field_146123_n);
+			if (icon != null)
+				this.drawTexturedModelRectFromIcon(this.xPosition, this.yPosition, icon, this.width, this.height);
 			//this.drawTexturedModalRect(this.xPosition + this.width / 2, this.yPosition, 200 - this.width / 2, 46 + k * 20, this.width / 2, this.height);
 			this.mouseDragged(par1Minecraft, xPos, yPos);
-			int l = 14737632;
+			/*int l = 14737632;
 
 			if (!this.enabled)
 				l = -6250336;
 			else if (this.field_146123_n)
-				l = 16777120;
+				l = 16777120;*/
 		}
 	}
 

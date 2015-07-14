@@ -247,7 +247,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		{
 			if (anvilItemStacks[INPUT1_SLOT].getItemDamage() < 100)
 			{
-				craftingPlan = null;
+				craftingPlan = "";
 				workRecipe = null;
 			}
 			else if (anvilItemStacks[INPUT1_SLOT].getItemDamage() == 100)

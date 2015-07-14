@@ -37,7 +37,7 @@ public class GuiAnvilPlanButton extends GuiButton
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			//TFC_Core.bindTexture(TextureMap.locationItemsTexture);
 
-			if(!screen.anvilTE.craftingPlan.equals("") && screen.anvilTE.workRecipe != null) 
+			if (screen.anvilTE != null && !screen.anvilTE.craftingPlan.equals("") && screen.anvilTE.workRecipe != null)
 				renderInventorySlot(screen.anvilTE.workRecipe.getCraftingResult(),this.xPosition+1, this.yPosition+1);
 			else
 				renderInventorySlot(new ItemStack(TFCItems.Blueprint),this.xPosition+1, this.yPosition+1);

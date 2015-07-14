@@ -29,8 +29,11 @@ public class GuiForge extends GuiContainerTFC
 	@Override
 	protected void drawForeground(int guiLeft, int guiTop)
 	{
-		int scale = forgeTE.getTemperatureScaled(49);
-		drawTexturedModalRect(guiLeft + 8, guiTop + 65 - scale, 185, 31, 15, 6);
+		if (forgeTE != null)
+		{
+			int scale = forgeTE.getTemperatureScaled(49);
+			drawTexturedModalRect(guiLeft + 8, guiTop + 65 - scale, 185, 31, 15, 6);
+		}
 	}
 
 	@Override
