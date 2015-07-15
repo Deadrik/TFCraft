@@ -37,7 +37,7 @@ public class RenderLeatherRack implements ISimpleBlockRenderingHandler
 					renderer.clearOverrideBlockTexture();
 			}
 		}
-		return false;
+		return true;
 	}
 
 	@Override

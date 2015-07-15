@@ -34,7 +34,7 @@ public class RenderCrucible  implements ISimpleBlockRenderingHandler
 		renderer.renderStandardBlock(block, i, j, k);
 		renderer.setRenderBounds(s1, s1, s13, s15, s15, s15);
 		renderer.renderStandardBlock(block, i, j, k);
-		return false;
+		return true;
 	}
 
 	@Override
