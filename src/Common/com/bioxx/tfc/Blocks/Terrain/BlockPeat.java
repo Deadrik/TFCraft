@@ -45,4 +45,14 @@ public class BlockPeat extends BlockTerra
 	{
 		return false;
 	}
+
+	/**
+	 * Displays a flat icon image for an ItemStack containing the block, instead of a render.
+	 */
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getItemIconName()
+	{
+		return Reference.ModID + ":" + "peat";
+	}
 }
