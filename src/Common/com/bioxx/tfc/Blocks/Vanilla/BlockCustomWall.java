@@ -164,4 +164,10 @@ public class BlockCustomWall extends BlockWall
 	public boolean canPlaceTorchOnTop(World world, int x, int y, int z) {
 		return true;
 	}
+
+	@Override
+	public boolean canBeReplacedByLeaves(IBlockAccess world, int x, int y, int z)
+	{
+		return false;
+	}
 }
