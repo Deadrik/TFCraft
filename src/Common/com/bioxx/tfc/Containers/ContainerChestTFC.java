@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Containers.Slots.SlotChest;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEChest;
+import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 
@@ -60,29 +61,11 @@ public class ContainerChestTFC extends ContainerTFC
 
 	public static ArrayList<Item> getExceptions(){
 		ArrayList<Item> exceptions = new ArrayList<Item>();
+		for (Item ingot : TEIngotPile.getIngots())
+		{
+			exceptions.add(ingot);
+		}
 		exceptions.add(TFCItems.Logs);
-		exceptions.add(TFCItems.BismuthIngot);
-		exceptions.add(TFCItems.BismuthBronzeIngot);
-		exceptions.add(TFCItems.BlackBronzeIngot);
-		exceptions.add(TFCItems.BlackSteelIngot);
-		exceptions.add(TFCItems.BlueSteelIngot);
-		exceptions.add(TFCItems.BrassIngot);
-		exceptions.add(TFCItems.BronzeIngot);
-		exceptions.add(TFCItems.CopperIngot);
-		exceptions.add(TFCItems.GoldIngot);
-		exceptions.add(TFCItems.WroughtIronIngot);
-		exceptions.add(TFCItems.LeadIngot);
-		exceptions.add(TFCItems.NickelIngot);
-		exceptions.add(TFCItems.PigIronIngot);
-		exceptions.add(TFCItems.PlatinumIngot);
-		exceptions.add(TFCItems.RedSteelIngot);
-		exceptions.add(TFCItems.RoseGoldIngot);
-		exceptions.add(TFCItems.SilverIngot);
-		exceptions.add(TFCItems.SteelIngot);
-		exceptions.add(TFCItems.BismuthIngot);
-		exceptions.add(TFCItems.SterlingSilverIngot);
-		exceptions.add(TFCItems.TinIngot);
-		exceptions.add(TFCItems.ZincIngot);
 		exceptions.add(Item.getItemFromBlock(TFCBlocks.Barrel));
 		exceptions.add(Item.getItemFromBlock(TFCBlocks.Vessel));
 		return exceptions;
