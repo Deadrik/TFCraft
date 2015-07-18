@@ -1276,6 +1276,12 @@ public class Recipes
 			"     ",
 			"     ",
 			"#   #", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
+		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCBlocks.FlowerPot), new Object[] { 
+			"#   #",
+			" ### ",
+			" ### ",
+			" ### ",
+			"#   #", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
 		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCBlocks.Crucible, 1), new Object[] { 
 			" ### ",
 			" ### ",

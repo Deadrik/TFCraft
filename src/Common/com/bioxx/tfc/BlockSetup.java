@@ -99,6 +99,7 @@ import com.bioxx.tfc.Blocks.Vanilla.BlockCustomCactus;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomDoor;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFenceGate;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFenceGate2;
+import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFlowerPot;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomIce;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLeaves;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLeaves2;
@@ -304,6 +305,7 @@ public class BlockSetup extends TFCBlocks
 		GameRegistry.registerBlock(Snow, "Snow");
 		GameRegistry.registerBlock(OilLamp, ItemOilLamp.class, "OilLamp");
 		GameRegistry.registerBlock(Hopper, "Hopper");
+		GameRegistry.registerBlock(FlowerPot, "FlowerPot");
 	}
 
 	public static void LoadBlocks()
@@ -334,6 +336,7 @@ public class BlockSetup extends TFCBlocks
 		Blocks.wooden_button.setCreativeTab(null);
 		Blocks.ice.setCreativeTab(null);
 		Blocks.vine.setCreativeTab(null);
+		Blocks.flower_pot.setCreativeTab(null);
 
 		Bookshelf = new BlockCustomBookshelf().setHardness(1.5F).setStepSound(Block.soundTypeWood).setBlockName("Bookshelf").setBlockTextureName("bookshelf");
 		Torch = new BlockTorch().setHardness(0.0F).setStepSound(Block.soundTypeWood).setBlockName("Torch").setBlockTextureName("torch_on");
@@ -534,6 +537,7 @@ public class BlockSetup extends TFCBlocks
 
 		OilLamp = new BlockOilLamp().setHardness(1F).setBlockName("OilLamp");
 		Hopper = new BlockHopper().setHardness(2F).setBlockName("Hopper");
+		FlowerPot = new BlockCustomFlowerPot().setHardness(0.0F).setStepSound(Block.soundTypeStone).setBlockName("FlowerPot").setBlockTextureName("flower_pot");
 
 		StoneIgIn.setHarvestLevel("pickaxe", 0);
 		StoneIgEx.setHarvestLevel("pickaxe", 0);

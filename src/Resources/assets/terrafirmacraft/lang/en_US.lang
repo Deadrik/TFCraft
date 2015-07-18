@@ -1894,6 +1894,7 @@ tile.FoodPrep.name=Food Prep
 tile.MetalSheet.name=Metal Sheet
 tile.ingotpile.name=Ingot Pile
 tile.SmokeRack.name=Smoke Rack
+tile.FlowerPot.name=Flower Pot
 
 #== Anvils ==
 tile.Anvil.Stone.name=Stone Anvil

@@ -101,6 +101,7 @@ import com.bioxx.tfc.Render.Blocks.RenderChest;
 import com.bioxx.tfc.Render.Blocks.RenderCrucible;
 import com.bioxx.tfc.Render.Blocks.RenderFence;
 import com.bioxx.tfc.Render.Blocks.RenderFenceGate;
+import com.bioxx.tfc.Render.Blocks.RenderFlowerPot;
 import com.bioxx.tfc.Render.Blocks.RenderGrill;
 import com.bioxx.tfc.Render.Blocks.RenderHopper;
 import com.bioxx.tfc.Render.Blocks.RenderLeatherRack;
@@ -279,6 +280,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.smokeRackRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderSmokeRack());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.oilLampRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderOilLamp());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.HopperRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderHopper());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.flowerPotRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderFlowerPot());
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
 	}
@@ -761,6 +763,8 @@ public class ClientProxy extends CommonProxy
 			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.wooden_button, 1, OreDictionary.WILDCARD_VALUE));
 			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.ice, 1, OreDictionary.WILDCARD_VALUE));
 			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.vine, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.flower_pot, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(Items.flower_pot, 1, OreDictionary.WILDCARD_VALUE));
 			codechicken.nei.api.API.hideItem(new ItemStack(Items.reeds, 1, OreDictionary.WILDCARD_VALUE));
 		}
 	}
