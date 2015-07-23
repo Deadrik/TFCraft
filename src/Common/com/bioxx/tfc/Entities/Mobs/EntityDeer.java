@@ -33,6 +33,7 @@ import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIPanicTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
@@ -86,7 +87,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
 		hunger = 168000;
 		pregnant = false;
-		pregnancyRequiredTime = 7 * TFC_Time.daysInMonth;
+		pregnancyRequiredTime = (int) (TFCOptions.animalTimeMultiplier * TFC_Time.daysInMonth * 7);
 		timeOfConception = 0;
 		mateSizeMod = 0;
 		sex = rand.nextInt(2);
@@ -301,7 +302,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 
 		if(attackedVec != null)
 		{
-			//System.out.println(this.entityId+", Vec: "+attackedVec.xCoord+", "+attackedVec.yCoord+", "+attackedVec.zCoord);
+			//TerraFirmaCraft.log.info(this.entityId+", Vec: "+attackedVec.xCoord+", "+attackedVec.yCoord+", "+attackedVec.zCoord);
 			Vec3 positionVec = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
 			if(this.getFearSource() != null && this.getDistanceSqToEntity(this.getFearSource()) > Global.SEALEVEL)
 			{
@@ -542,7 +543,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public int getNumberOfDaysToAdult()
 	{
-		return TFC_Time.daysInMonth * 24;
+		return (int) (TFCOptions.animalTimeMultiplier * TFC_Time.daysInMonth * 24);
 	}
 
 	@Override

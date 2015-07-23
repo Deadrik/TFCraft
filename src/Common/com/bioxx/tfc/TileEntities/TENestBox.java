@@ -16,6 +16,7 @@ import net.minecraft.util.AxisAlignedBB;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.Mobs.EntityChickenTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -197,7 +198,7 @@ public class TENestBox extends TileEntity implements IInventory
 						if(father != null)
 						{
 							NBTTagCompound nbt = item.getTagCompound();
-							nbt.setLong("Fertilized", TFC_Time.getTotalTicks()+(long)(TFC_Time.ticksInMonth*0.75f));
+							nbt.setLong("Fertilized", TFC_Time.getTotalTicks() + (long) (TFCOptions.animalTimeMultiplier * TFC_Time.ticksInMonth * 0.75f));
 							nbt.setTag("Genes", this.createGenes((EntityChickenTFC) bird, father));
 							item.setTagCompound(nbt);
 						}

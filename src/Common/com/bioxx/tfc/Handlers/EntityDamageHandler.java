@@ -153,7 +153,7 @@ public class EntityDamageHandler
 			//6. Apply the damage to the player
 			EntityArmorCalcEvent eventPost = new EntityArmorCalcEvent(entity, damage, EntityArmorCalcEvent.EventType.POST);
 			MinecraftForge.EVENT_BUS.post(eventPost);
-			//System.out.println(entity.getClass()+", "+eventPre.incomingDamage+", "+eventPost.incomingDamage);
+			//TerraFirmaCraft.log.info(entity.getClass()+", "+eventPre.incomingDamage+", "+eventPost.incomingDamage);
 			entity.setHealth(entity.getHealth()-eventPost.incomingDamage);
 		}
 		return 0;

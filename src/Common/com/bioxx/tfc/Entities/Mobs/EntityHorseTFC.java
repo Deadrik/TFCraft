@@ -49,6 +49,7 @@ import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -109,7 +110,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
 		hunger = 168000;
 		pregnant = false;
-		pregnancyRequiredTime =(int)(11.17 * TFC_Time.ticksInMonth);
+		pregnancyRequiredTime = (int) (TFCOptions.animalTimeMultiplier * 11.17 * TFC_Time.ticksInMonth);
 		conception = 0;
 		sex = rand.nextInt(2);
 		size_mod =(float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion + 1)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1F) * (1.0F - dimorphism * sex));
@@ -1039,7 +1040,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	@Override
 	public int getNumberOfDaysToAdult()
 	{
-		return TFC_Time.daysInMonth * 30;
+		return (int) (TFCOptions.animalTimeMultiplier * TFC_Time.daysInMonth * 30);
 	}
 
 	@Override

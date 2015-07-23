@@ -412,7 +412,7 @@ public class BlockCollapsible extends BlockTerraContainer
 			if(!checkedmap.contains(block) && world.rand.nextFloat() < block.collapseChance/100f)
 			{
 				checks++;
-				//System.out.println("Number of block checks: " + checks + " | Queue Length: " + checkQueue.size());
+				//TerraFirmaCraft.log.info("Number of block checks: " + checks + " | Queue Length: " + checkQueue.size());
 				worldX = block.coords.x + i;
 				worldY = block.coords.y + j;
 				worldZ = block.coords.z + k;

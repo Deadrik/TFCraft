@@ -23,6 +23,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -103,7 +104,7 @@ public class BlockTorch extends BlockTerraContainer
 		    if(TFCOptions.enableDebugMode)
 		    {
 		        int metadata = world.getBlockMetadata(x, y, z);
-		        System.out.println("Meta = "+(new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
+				TerraFirmaCraft.log.info("Meta = " + (new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
 		    }
 		}
 		return true;

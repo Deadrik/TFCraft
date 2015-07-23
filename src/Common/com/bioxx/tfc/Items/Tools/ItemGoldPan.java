@@ -122,14 +122,8 @@ public class ItemGoldPan extends ItemTerra
 						return is;
 					}
 
-					int goldPanCap = 50;
-					if (TFCOptions.goldPanLimit < 0)
-						TFC_Core.sendInfoMessage(player, new ChatComponentText("An invalid value has been entered for goldPanLimit in the config file. Using default value instead."));
-					else
-						goldPanCap = TFCOptions.goldPanLimit;
-
 					// Overworking is disabled, or the cap has not yet been reached.
-					if (cd.sluicedAmount < goldPanCap || !TFCOptions.enableOverworkingChunks)
+					if (cd.sluicedAmount < TFCOptions.goldPanLimit || !TFCOptions.enableOverworkingChunks)
 					{
 						if (TFC_Core.isGravel(blockHit))
 						{

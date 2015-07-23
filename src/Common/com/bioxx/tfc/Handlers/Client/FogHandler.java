@@ -51,7 +51,7 @@ public class FogHandler
 			if(shouldLerp)
 			{
 				lerpTimer += event.renderPartialTicks;
-				//System.out.println(event.renderPartialTicks + " | " +(lerpTime - lerpTimer)/20 + ": " + fogStartBegin + " of " + fogStartFinish + " | " + fogEndBegin + " of " + fogEndFinish);
+				//TerraFirmaCraft.log.info(event.renderPartialTicks + " | " +(lerpTime - lerpTimer)/20 + ": " + fogStartBegin + " of " + fogStartFinish + " | " + fogEndBegin + " of " + fogEndFinish);
 				if(lerpTimer >= lerpTime)
 					shouldLerp = false;
 

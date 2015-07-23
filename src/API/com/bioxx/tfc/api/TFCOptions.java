@@ -3,6 +3,8 @@ package com.bioxx.tfc.api;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
+import com.bioxx.tfc.TerraFirmaCraft;
+
 public class TFCOptions
 {
 	public static boolean enablePowderKegs = true;
@@ -37,6 +39,7 @@ public class TFCOptions
 	public static float saplingTimerMultiplier = 1.0f;
 	public static float tempIncreaseMultiplier = 1.0f;
 	public static float tempDecreaseMultiplier = 1.0f;
+	public static float animalTimeMultiplier = 1.0f;
 
 	public static int maxProtectionMonths;
 	public static int protectionGain;
@@ -85,7 +88,7 @@ public class TFCOptions
 		}
 		catch (Exception e)
 		{
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to add Integer, config wasn't loaded properly!").toString());
+			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to add Integer, config wasn't loaded properly!").toString());
 		}
 		return value;
 	}
@@ -102,7 +105,7 @@ public class TFCOptions
 		}
 		catch (Exception e)
 		{
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to add Integer, config wasn't loaded properly!").toString());
+			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to add Integer, config wasn't loaded properly!").toString());
 		}
 		return value;
 	}
@@ -118,7 +121,7 @@ public class TFCOptions
 		}
 		catch (Exception e)
 		{
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to add Integer, config wasn't loaded properly!").toString());
+			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to add Integer, config wasn't loaded properly!").toString());
 		}
 		return value;
 	}
@@ -135,7 +138,7 @@ public class TFCOptions
 		}
 		catch (Exception e)
 		{
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to add Integer, config wasn't loaded properly!").toString());
+			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to add Integer, config wasn't loaded properly!").toString());
 		}
 		return value;
 	}
@@ -152,7 +155,7 @@ public class TFCOptions
 		}
 		catch (Exception e)
 		{
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to add Double, config wasn't loaded properly!").toString());
+			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to add Double, config wasn't loaded properly!").toString());
 		}
 		return value;
 	}
@@ -167,7 +170,7 @@ public class TFCOptions
 			return prop.getString();
 		} catch (Exception e)
 		{
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to add String, config wasn't loaded properly!").toString());
+			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to add String, config wasn't loaded properly!").toString());
 		}
 		return value;
 	}
@@ -183,7 +186,7 @@ public class TFCOptions
 			return prop.getString();
 		} catch (Exception e)
 		{
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to add String, config wasn't loaded properly!").toString());
+			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to add String, config wasn't loaded properly!").toString());
 		}
 		return value;
 	}

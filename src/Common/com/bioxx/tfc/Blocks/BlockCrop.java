@@ -19,6 +19,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
@@ -173,9 +174,9 @@ public class BlockCrop extends BlockContainer
 
 		if(TFCOptions.enableDebugMode)
 		{
-			System.out.println("Crop ID: " + te.cropId);
-			System.out.println("Growth: " + te.growth);
-			System.out.println("Est Growth: " + te.getEstimatedGrowth(crop));
+			TerraFirmaCraft.log.info("Crop ID: " + te.cropId);
+			TerraFirmaCraft.log.info("Growth: " + te.growth);
+			TerraFirmaCraft.log.info("Est Growth: " + te.getEstimatedGrowth(crop));
 		}
 
 		return false;

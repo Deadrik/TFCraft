@@ -40,7 +40,7 @@ public class ModelBarrel extends ModelBase
 		this.barrel2.setRotationPoint(0,0,0);
 		this.barrel3.setRotationPoint(0,0,0);
 		//drawBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(d1,d2,d3,d1+1+x,d2+1+y,d3+1+z));
-		//System.out.println("COORDS: "+d1+", "+d2+", "+d3);
+		//TerraFirmaCraft.log.info("COORDS: "+d1+", "+d2+", "+d3);
 		this.barrel.addBox(1F,0f,1f, 14, 16, 14,0f);
 		barrel.rotateAngleZ =-(float)Math.PI;
 		this.barrel2.addBox(2, 0f, 2, 12, 16, 0,0f);

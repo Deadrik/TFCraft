@@ -29,6 +29,7 @@ import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -76,7 +77,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
 		hunger = 168000;
 		pregnant = false;
-		pregnancyRequiredTime =(int)(9 * TFC_Time.ticksInMonth);
+		pregnancyRequiredTime = (int) (TFCOptions.animalTimeMultiplier * 9 * TFC_Time.ticksInMonth);
 		conception = 0;
 		mateSizeMod = 0;
 		sex = rand.nextInt(2);
@@ -516,7 +517,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	public int getNumberOfDaysToAdult() 
 	{
-		return TFC_Time.daysInMonth * 36;
+		return (int) (TFCOptions.animalTimeMultiplier * TFC_Time.daysInMonth * 36);
 	}
 
 	@Override

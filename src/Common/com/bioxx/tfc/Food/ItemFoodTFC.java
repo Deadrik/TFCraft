@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -244,7 +245,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		else
 		{
 			arraylist.add(TFC_Core.translate("gui.badnbt"));
-			System.out.println(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
+			TerraFirmaCraft.log.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 		}
 	}
@@ -446,7 +447,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			else
 			{
 				foodstats.addNutrition(((IFood)(is.getItem())).getFoodGroup(), 1f);
-				System.out.println(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
+				TerraFirmaCraft.log.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
 						TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 			}
 		}

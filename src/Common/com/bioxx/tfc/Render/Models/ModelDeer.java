@@ -487,7 +487,7 @@ public class ModelDeer extends ModelBase
 	{
 		super.setRotationAngles (f, f1, f2, f3, f4, f5, entity);
 
-		//System.out.println("f: "+f+"; f1: "+f1+"; f2: "+f2+"; f3: "+f3+"; f4: "+f4+"; f5: "+f5);
+		//TerraFirmaCraft.log.info("f: "+f+"; f1: "+f1+"; f2: "+f2+"; f3: "+f3+"; f4: "+f4+"; f5: "+f5);
 		f1 = Math.min(f1*7.5f, 0.75f);
 		f*=0.95f;
 

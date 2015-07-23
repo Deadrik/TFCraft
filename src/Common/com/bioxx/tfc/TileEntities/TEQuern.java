@@ -13,6 +13,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
@@ -71,7 +72,7 @@ public class TEQuern extends NetworkTileEntity implements IInventory
 			QuernRecipe qr = QuernManager.getInstance().findMatchingRecipe(storage[0]);
 			if(qr == null)
 			{
-				System.out.println("QUERN RECIPE NOT FOUND! This is a BUG! -- " + storage[0].getItem().getUnlocalizedName());
+				TerraFirmaCraft.log.warn("QUERN RECIPE NOT FOUND! This is a BUG! -- " + storage[0].getItem().getUnlocalizedName());
 				return false; // If this happens, it's a bug!
 			}
 

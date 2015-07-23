@@ -63,13 +63,13 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 			return RenderAnvil.renderAnvil(block, i, j, k, renderer);
 		}
 		/* else if (modelId == TFCBlocks.IngotPileRenderId)
-        {
-        	if(((BlockIngotPile)block).stack < 10){
-        		System.out.println(((BlockIngotPile)block).stack+" is the stack");
-            return RenderIngotPile.renderIngotPile(block, i, j, k, renderer);
-        	}
-        	return TFC_CoreRender.RenderSluice(block, i, j, k, renderer);
-        }*/
+		{
+			if(((BlockIngotPile)block).stack < 10){
+				TerraFirmaCraft.log.info(((BlockIngotPile)block).stack+" is the stack");
+		    return RenderIngotPile.renderIngotPile(block, i, j, k, renderer);
+			}
+			return TFC_CoreRender.RenderSluice(block, i, j, k, renderer);
+		}*/
 		else if (modelId == TFCBlocks.sluiceRenderId)
 		{
 			return TFC_CoreRender.RenderSluice(block, i, j, k, renderer);

@@ -207,7 +207,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 					float inTemp = TFC_ItemHeat.GetTemp(storage[1]);
 					float temp = (temperature - inTemp) / 2;
 					TFC_ItemHeat.SetTemp(storage[1], inTemp+temp);
-					//System.out.println(temperature +", "+inTemp+", "+temp);
+					//TerraFirmaCraft.log.info(temperature +", "+inTemp+", "+temp);
 					drainOutput(1.0f);
 					storage[1].stackSize = 1;
 					updateGui((byte) 1);

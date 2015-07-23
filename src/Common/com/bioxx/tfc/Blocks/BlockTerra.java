@@ -14,6 +14,7 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.TFCOptions;
 
@@ -36,7 +37,7 @@ public abstract class BlockTerra extends Block
 		if(TFCOptions.enableDebugMode && world.isRemote)
 		{
 			int metadata = world.getBlockMetadata(x, y, z);
-			System.out.println("Meta="+(new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
+			TerraFirmaCraft.log.info("Meta=" + (new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
 		}
 	}
 
@@ -52,7 +53,7 @@ public abstract class BlockTerra extends Block
 		if(TFCOptions.enableDebugMode && world.isRemote)
 		{
 			int metadata = world.getBlockMetadata(x, y, z);
-			System.out.println("Meta = "+(new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
+			TerraFirmaCraft.log.info("Meta = " + (new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
 		}
 		return false;
 	}

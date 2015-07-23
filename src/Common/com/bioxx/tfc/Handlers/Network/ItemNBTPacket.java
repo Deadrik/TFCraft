@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 
 public class ItemNBTPacket extends AbstractPacket {
@@ -119,7 +120,7 @@ public class ItemNBTPacket extends AbstractPacket {
 	    }
 	    else
 	    {
-			System.out.println(TFC_Core.translate("error.error") + " " + stack.getUnlocalizedName() + " " + 
+			TerraFirmaCraft.log.error(TFC_Core.translate("error.error") + " " + stack.getUnlocalizedName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 			stackNBT = new NBTTagCompound();
 	    }
@@ -143,7 +144,7 @@ public class ItemNBTPacket extends AbstractPacket {
 		}
 		else
 		{
-			System.out.println(TFC_Core.translate("error.error") + " " + stack.getUnlocalizedName() + " " +
+			TerraFirmaCraft.log.error(TFC_Core.translate("error.error") + " " + stack.getUnlocalizedName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 			stackNBT = new NBTTagCompound();
 		}

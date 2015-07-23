@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Handlers.Client;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Time;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,14 +16,14 @@ public class ClientTickHandler// implements ITickHandler
 	{
 		if(event.phase == Phase.START)
 		{
-//			System.out.println("-------------PLAYER CLIENT TICK START--------------");
+//			TerraFirmaCraft.log.info("-------------PLAYER CLIENT TICK START--------------");
 //			EntityPlayer player = event.player;
 //			World world = player.worldObj;
 		}
 		
 		if(event.phase == Phase.END)
 		{
-//			System.out.println("-------------PLAYER CLIENT TICK END--------------");
+//			TerraFirmaCraft.log.info("-------------PLAYER CLIENT TICK END--------------");
 			EntityPlayer player = event.player;
 			World world = player.worldObj;
 

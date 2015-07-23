@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Entities.Mobs.EntityCreeperTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityDeer;
 import com.bioxx.tfc.Entities.Mobs.EntityEndermanTFC;
@@ -368,7 +369,7 @@ public class TFCBiome extends BiomeGenBase
 	{
 		if(biomeList[id] == null)
 		{
-			System.out.println("Biome ID is null: " + id);
+			TerraFirmaCraft.log.warn("Biome ID is null: " + id);
 		}
 		if (id >= 0 && id <= biomeList.length && biomeList[id] != null)
 		{
@@ -376,7 +377,7 @@ public class TFCBiome extends BiomeGenBase
 		}
 		else
 		{
-			System.out.println("Biome ID is out of bounds: " + id + ", defaulting to 0 (Ocean)");
+			TerraFirmaCraft.log.warn("Biome ID is out of bounds: " + id + ", defaulting to 0 (Ocean)");
 			return ocean;
 		}
 	}

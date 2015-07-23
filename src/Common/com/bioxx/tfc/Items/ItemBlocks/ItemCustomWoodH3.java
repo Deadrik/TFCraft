@@ -2,6 +2,8 @@ package com.bioxx.tfc.Items.ItemBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.api.Constant.Global;
 
 public class ItemCustomWoodH3 extends ItemTerraBlock
@@ -27,7 +29,7 @@ public class ItemCustomWoodH3 extends ItemTerraBlock
 		}
 		catch(Exception ex)
 		{
-			System.out.println(ex.getLocalizedMessage());
+			TerraFirmaCraft.log.error(ex.getLocalizedMessage());
 		}
 		return "Unknown";
 	}

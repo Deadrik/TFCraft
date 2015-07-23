@@ -31,6 +31,7 @@ import com.bioxx.tfc.Entities.AI.EntityAISitTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
@@ -93,7 +94,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
 		pregnant = false;
-		pregnancyRequiredTime = (int) (2.25 * TFC_Time.ticksInMonth);		//accurate to real life
+		pregnancyRequiredTime = (int) (TFCOptions.animalTimeMultiplier * 2.25 * TFC_Time.ticksInMonth); //accurate to real life
 		timeOfConception = 0;
 		mateSizeMod = 1f;
 		sex = rand.nextInt(2);
@@ -458,7 +459,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
 		int var2 = (int)(TFC_MobData.WolfDamage * getStrength() * getAggression() * (getSize()/2 + 0.5F));
-		//System.out.println(var2+", s: "+getStrength()+", a: "+ getAggression());
+		//TerraFirmaCraft.log.info(var2+", s: "+getStrength()+", a: "+ getAggression());
 		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
 	}
 
@@ -509,7 +510,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	@Override
 	public int getNumberOfDaysToAdult()
 	{
-		return TFC_Time.daysInMonth * 9;
+		return (int) (TFCOptions.animalTimeMultiplier * TFC_Time.daysInMonth * 9);
 	}
 
 	@Override

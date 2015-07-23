@@ -22,8 +22,8 @@ public class PlayerTracker
 	@SubscribeEvent
 	public void onPlayerLoggedIn(PlayerLoggedInEvent event)
 	{
-		//		System.out.println("-----------------------------PLAYER LOGGIN EVENT-------------------");
-		//		System.out.println("------"+event.player.getDisplayName()+" : "+ event.player.getUniqueID().toString()+"--------");
+		//		TerraFirmaCraft.log.info("-----------------------------PLAYER LOGGIN EVENT-------------------");
+		//		TerraFirmaCraft.log.info("------"+event.player.getDisplayName()+" : "+ event.player.getUniqueID().toString()+"--------");
 
 		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
 				event.player.getDisplayName(),
@@ -31,7 +31,7 @@ public class PlayerTracker
 		AbstractPacket pkt = new InitClientWorldPacket(event.player);
 		TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) event.player);
 
-		//		System.out.println("-----------------------------Sending TestPacket");
+		//		TerraFirmaCraft.log.info("-----------------------------Sending TestPacket");
 		//AbstractPacket pkt2 = new TestPacket("Sent to Player: "+event.player.getDisplayName());
 		//TerraFirmaCraft.packetPipeline.sendTo(pkt2, (EntityPlayerMP) event.player);
 	}
@@ -40,7 +40,7 @@ public class PlayerTracker
 	public void onClientConnect(ClientConnectedToServerEvent event)
 	{
 
-		//		System.out.println("-----"+FMLClientHandler.instance().getClientPlayerEntity().getDisplayName()+" : "+
+		//		TerraFirmaCraft.log.info("-----"+FMLClientHandler.instance().getClientPlayerEntity().getDisplayName()+" : "+
 		//				FMLClientHandler.instance().getClientPlayerEntity().getUniqueID().toString()+"-------");
 		//
 		TerraFirmaCraft.proxy.onClientLogin();

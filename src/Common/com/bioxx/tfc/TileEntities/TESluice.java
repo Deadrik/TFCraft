@@ -292,21 +292,11 @@ public class TESluice extends TileEntity implements IInventory
 
 				ChunkData cd = TFC_Core.getCDM(worldObj).getData(xCoord >> 4, zCoord >> 4);
 
-				if (TFCOptions.enableOverworkingChunks)
+				if (TFCOptions.enableOverworkingChunks && cd.sluicedAmount > TFCOptions.sluiceLimit)
 				{
-					int sluiceCap = 300;
-
-					if (TFCOptions.sluiceLimit < 0)
-						System.out.println("An invalid value has been entered for sluiceLimit in the config file. Using default value instead.");
-					else
-						sluiceCap = TFCOptions.sluiceLimit;
-
-					if (cd.sluicedAmount > sluiceCap)
-					{
-						processTimeRemaining = 0;
-						soilAmount = -1;
-						return;
-					}
+					processTimeRemaining = 0;
+					soilAmount = -1;
+					return;
 				}
 
 				while (processTimeRemaining > 100 && soilAmount > 0)

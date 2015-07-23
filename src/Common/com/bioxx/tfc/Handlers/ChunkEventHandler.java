@@ -191,7 +191,7 @@ public class ChunkEventHandler
 			else
 			{
 				xOffset += 64;
-				//System.out.println("Unable to find spawn biome");
+				//TerraFirmaCraft.log.warn("Unable to find spawn biome");
 			}
 		}
 

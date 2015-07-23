@@ -405,7 +405,7 @@ public class WorldGenMinable extends WorldGenerator
 				}
 			}
 		}
-		//System.out.println("a vein was placed " + minableBlockId + "." + minableBlockMeta+ " at " + par3 +" "+par4+" "+par5); /// for debugging
+		//TerraFirmaCraft.log.info("a vein was placed " + minableBlockId + "." + minableBlockMeta+ " at " + par3 +" "+par4+" "+par5); /// for debugging
 		return true;
 	}
 

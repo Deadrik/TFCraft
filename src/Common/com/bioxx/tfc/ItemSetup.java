@@ -130,7 +130,7 @@ public class ItemSetup extends TFCItems {
 		BlueSteelToolMaterial = EnumHelper.addToolMaterial("BlueSteel", 3, 			BlueSteelUses, 		BlueSteelEff, 		240, 22);
 		RedSteelToolMaterial = EnumHelper.addToolMaterial("RedSteel", 3, 			RedSteelUses, 		RedSteelEff, 		240, 22);
 
-		System.out.println(new StringBuilder().append("[TFC] Loading Items").toString());
+		TerraFirmaCraft.log.info(new StringBuilder().append("Loading Items").toString());
 
 		FishingRod = new ItemCustomFishingRod().setUnlocalizedName("fishingRod").setTextureName("tools/fishing_rod");
 		Coal = new ItemCoal().setUnlocalizedName("coal");
@@ -773,7 +773,7 @@ public class ItemSetup extends TFCItems {
 		registerMetals();
 
 		registerItems();
-		System.out.println(new StringBuilder().append("[TFC] Done Loading Items").toString());
+		TerraFirmaCraft.log.info(new StringBuilder().append("Done Loading Items").toString());
 	}
 
 	/**

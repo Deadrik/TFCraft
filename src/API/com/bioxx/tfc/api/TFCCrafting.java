@@ -3,6 +3,8 @@ package com.bioxx.tfc.api;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
+import com.bioxx.tfc.TerraFirmaCraft;
+
 public class TFCCrafting
 {
 	public static boolean enableNEIHiding;
@@ -94,7 +96,7 @@ public class TFCCrafting
 		}
 		catch (Exception e)
 		{
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to add Integer, config wasn't loaded properly!").toString());
+			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to add Integer, config wasn't loaded properly!").toString());
 		}
 		return value;
 	}
@@ -111,7 +113,7 @@ public class TFCCrafting
 		}
 		catch (Exception e)
 		{
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to add Integer, config wasn't loaded properly!").toString());
+			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to add Integer, config wasn't loaded properly!").toString());
 		}
 		return value;
 	}

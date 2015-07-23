@@ -1,9 +1,12 @@
 package com.bioxx.tfc.Handlers.Network;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
+
+import com.bioxx.tfc.TerraFirmaCraft;
+
+import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class TestPacket extends AbstractPacket
 {
@@ -32,13 +35,13 @@ public class TestPacket extends AbstractPacket
 	@Override
 	public void handleClientSide(EntityPlayer player)
 	{
-		System.out.println("++++++++++++Client: "+msg);
+		TerraFirmaCraft.log.info("++++++++++++Client: " + msg);
 	}
 
 	@Override
 	public void handleServerSide(EntityPlayer player)
 	{
-		System.out.println("++++++++++++Server: "+msg);
+		TerraFirmaCraft.log.info("++++++++++++Server: " + msg);
 	}
 
 }

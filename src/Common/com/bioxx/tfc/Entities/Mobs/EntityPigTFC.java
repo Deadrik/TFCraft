@@ -35,6 +35,7 @@ import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -99,7 +100,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
 		pregnant = false;
-		pregnancyRequiredTime = (int) (3.7 * TFC_Time.ticksInMonth);
+		pregnancyRequiredTime = (int) (TFCOptions.animalTimeMultiplier * 3.7 * TFC_Time.ticksInMonth);
 		timeOfConception = 0;
 		mateSizeMod = 0;
 		sex = rand.nextInt(2);
@@ -552,7 +553,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	@Override
 	public int getNumberOfDaysToAdult()
 	{
-		return TFC_Time.daysInMonth * 15;
+		return (int) (TFCOptions.animalTimeMultiplier * TFC_Time.daysInMonth * 15);
 	}
 
 	@Override

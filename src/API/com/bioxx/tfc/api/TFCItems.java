@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+
+import com.bioxx.tfc.TerraFirmaCraft;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TFCItems
@@ -893,7 +896,7 @@ public class TFCItems
 
 	public static void registerItems()
 	{
-		System.out.println(new StringBuilder().append("[TFC] Registering Items").toString());
+		TerraFirmaCraft.log.info(new StringBuilder().append("Registering Items").toString());
 
 		GameRegistry.registerItem(GoldPan, GoldPan.getUnlocalizedName());
 		GameRegistry.registerItem(SluiceItem, SluiceItem.getUnlocalizedName());
@@ -1435,7 +1438,7 @@ public class TFCItems
 		GameRegistry.registerItem(Fertilizer, Fertilizer.getUnlocalizedName());
 
 
-		System.out.println(new StringBuilder().append("[TFC] Registering Food").toString());
+		TerraFirmaCraft.log.info(new StringBuilder().append("Registering Food").toString());
 		GameRegistry.registerItem(FruitTreeSapling, FruitTreeSapling.getUnlocalizedName());
 		GameRegistry.registerItem(RedApple, RedApple.getUnlocalizedName());
 		GameRegistry.registerItem(Banana, Banana.getUnlocalizedName());
@@ -1545,7 +1548,7 @@ public class TFCItems
 		GameRegistry.registerItem(GooseberryLeaf, GooseberryLeaf.getUnlocalizedName());
 		GameRegistry.registerItem(CloudberryLeaf, CloudberryLeaf.getUnlocalizedName());
 
-		System.out.println(new StringBuilder().append("[TFC] Registering Armor").toString());
+		TerraFirmaCraft.log.info(new StringBuilder().append("Registering Armor").toString());
 		GameRegistry.registerItem(BismuthSheet, BismuthSheet.getUnlocalizedName());
 		GameRegistry.registerItem(BismuthBronzeSheet, BismuthBronzeSheet.getUnlocalizedName());
 		GameRegistry.registerItem(BlackBronzeSheet, BlackBronzeSheet.getUnlocalizedName());
@@ -1676,7 +1679,7 @@ public class TFCItems
 
 		GameRegistry.registerItem(Shears, Shears.getUnlocalizedName());
 
-		System.out.println(new StringBuilder().append("[TFC] All Items Registered").toString());
+		TerraFirmaCraft.log.info(new StringBuilder().append("All Items Registered").toString());
 	}
 
 

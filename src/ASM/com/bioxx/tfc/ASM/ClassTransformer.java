@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
@@ -25,6 +27,7 @@ import cpw.mods.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
 
 public class ClassTransformer implements net.minecraft.launchwrapper.IClassTransformer
 {
+	public Logger log = LogManager.getLogger("TerraFirmaCraft ASM");
 	protected HashMap<String, Patch> mcpMethodNodes = new HashMap<String, Patch>();
 	protected HashMap<String, Patch> obfMethodNodes = new HashMap<String, Patch>();
 	protected String mcpClassName;
@@ -34,7 +37,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 	@Override
 	public byte[] transform(String name, String transformedName, byte[] bytes)
 	{
-		// System.out.println("transforming: " + name);
+		// log.info("transforming: " + name);
 		if (name.equals(obfClassName))
 		{
 			return transform(bytes);
@@ -53,7 +56,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 		ClassNode classNode = new ClassNode();
 		ClassReader classReader = new ClassReader(bytes);
 		classReader.accept(classNode, 0);
-		System.out.println("Attempting to Transform: "+ classNode.name + " | Found " + getMethodNodeList().size() + " injections");
+		log.info("Attempting to Transform: " + classNode.name + " | Found " + getMethodNodeList().size() + " injections");
 		// find method to inject into
 		Iterator<MethodNode> methods = classNode.methods.iterator();
 		while (methods.hasNext())
@@ -68,7 +71,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 				if(instructions.size() > 0) {
 					target = instructions.get(0);
 				} else {
-					System.out.println("Error in: {"+m.name + " | " + m.desc+"} No Instructions");
+					log.error("Error in: {" + m.name + " | " + m.desc + "} No Instructions");
 				}
 				//Run this is we plan to just modify the method
 				if(mPatch.opType == PatchOpType.Modify)
@@ -145,10 +148,10 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 						m.instructions.add(new InsnNode(Opcodes.RETURN));
 					}
 				}
-				System.out.println("Inserted: "+ classNode.name +" : {"+m.name + " | " + m.desc+"}");
+				log.info("Inserted: " + classNode.name + " : {" + m.name + " | " + m.desc + "}");
 			}
 		}
-		System.out.println("Attempting to Transform: "+ classNode.name + " Complete");
+		log.info("Attempting to Transform: " + classNode.name + " Complete");
 		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		classNode.accept(writer);
 		return writer.toByteArray();

@@ -2,13 +2,13 @@ package com.bioxx.tfc.Entities.AI;
 
 import java.util.List;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.Entities.IAnimal;
-
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.Vec3;
+
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.Entities.IAnimal;
 
 public class EntityAIPanicTFC extends EntityAIBase
 {
@@ -42,7 +42,7 @@ public class EntityAIPanicTFC extends EntityAIBase
 		else
 		{
 			Vec3 attackedVec = this.theEntityCreature instanceof IAnimal ? ((IAnimal) this.theEntityCreature).getAttackedVec() : null;
-			//System.out.println(attackedVec != null);
+			//TerraFirmaCraft.log.info(attackedVec != null);
 			Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.theEntityCreature, 5, 4);
 			if (attackedVec != null)
 			{
@@ -65,7 +65,7 @@ public class EntityAIPanicTFC extends EntityAIBase
 							this.theEntityCreature.boundingBox.expand(8, 8, 8));
 					for (Object entity : list)
 					{
-						//System.out.println(entity);
+						//TerraFirmaCraft.log.info(entity);
 						((IAnimal) entity).setAttackedVec(attackedVec);
 					}
 				}

@@ -1,7 +1,5 @@
 package com.bioxx.tfc.Blocks;
 
-import com.bioxx.tfc.api.TFCOptions;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -13,6 +11,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.api.TFCOptions;
 
 public abstract class BlockTerraContainer extends BlockContainer
 {
@@ -33,7 +34,7 @@ public abstract class BlockTerraContainer extends BlockContainer
 		if(TFCOptions.enableDebugMode && world.isRemote)
 		{
 			int metadata = world.getBlockMetadata(i, j, k);
-			System.out.println("Meta="+(new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
+			TerraFirmaCraft.log.info("Meta=" + (new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
 		}
 	}
 
@@ -49,7 +50,7 @@ public abstract class BlockTerraContainer extends BlockContainer
 		if(TFCOptions.enableDebugMode && world.isRemote)
 		{
 			int metadata = world.getBlockMetadata(x, y, z);
-			System.out.println("Meta = "+(new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
+			TerraFirmaCraft.log.info("Meta = " + (new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
 		}
 		return false;
 	}

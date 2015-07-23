@@ -27,7 +27,7 @@ public class ItemClay extends ItemLooseRock
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
-		//System.out.println(itemstack.stackSize+", "+itemstack.getItem().getClass() +": "+Items.clay_ball.getClass());
+		//TerraFirmaCraft.log.info(itemstack.stackSize+", "+itemstack.getItem().getClass() +": "+Items.clay_ball.getClass());
 		if(itemstack.stackSize >= 5)
 		{
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);

@@ -15,6 +15,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
@@ -50,7 +51,7 @@ public class BlockCustomWall extends BlockWall
 		if(TFCOptions.enableDebugMode && world.isRemote)
 		{
 			int metadata = world.getBlockMetadata(i, j, k);
-			System.out.println("Meta="+(new StringBuilder()).append(this.getUnlocalizedName()).append(":").append(metadata).toString());
+			TerraFirmaCraft.log.info("Meta=" + (new StringBuilder()).append(this.getUnlocalizedName()).append(":").append(metadata).toString());
 		}
 	}
 
@@ -60,7 +61,7 @@ public class BlockCustomWall extends BlockWall
 		if(TFCOptions.enableDebugMode && world.isRemote)
 		{
 			int metadata = world.getBlockMetadata(x, y, z);
-			System.out.println("Meta = "+(new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
+			TerraFirmaCraft.log.info("Meta = " + (new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
 		}
 		return false;
 	}

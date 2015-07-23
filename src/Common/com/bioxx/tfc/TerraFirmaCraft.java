@@ -4,6 +4,7 @@
 package com.bioxx.tfc;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -12,6 +13,9 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.bioxx.tfc.Commands.CommandTime;
 import com.bioxx.tfc.Commands.CommandTransferTamed;
@@ -81,6 +85,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 @Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.ModVersion, dependencies = Reference.ModDependencies)
 public class TerraFirmaCraft
 {
+	public static Logger log = LogManager.getLogger("TerraFirmaCraft");
 	// Configuration headers
 	private static final String GENERAL_HEADER = "General";
 	private static final String TIME_HEADER = "Time";
@@ -315,10 +320,10 @@ public class TerraFirmaCraft
 			config = new Configuration(new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFCOptions.cfg"));
 			config.load();
 		} catch (Exception e) {
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to access settings configuration!").toString());
+			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to access settings configuration!").toString());
 			config = null;
 		}
-		System.out.println(new StringBuilder().append("[TFC] Loading Settings").toString());
+		TerraFirmaCraft.log.info(new StringBuilder().append("Loading Settings").toString());
 		/**Start setup here*/
 
 		//General
@@ -343,6 +348,7 @@ public class TerraFirmaCraft
 		TFCOptions.tempIncreaseMultiplier = (float) TFCOptions.getDoubleFor(config, TIME_HEADER, "tempIncreaseMultiplier", 1.0, "This is a global multiplier for the rate at which items heat up. Increase to make items heat up faster.");
 		TFCOptions.tempDecreaseMultiplier = (float) TFCOptions.getDoubleFor(config, TIME_HEADER, "tempDecreaseMultiplier", 1.0, "This is a global multiplier for the rate at which items cool down. Increase to make items cool down faster.");
 		TFCOptions.oilLampFuelMult = TFCOptions.getIntFor(config, TIME_HEADER, "oilLampFuelMult", 8, "This determines how much fuel is used over time from oil lamps. Setting this higher will make fuel last longer. A mult of 1 = 250 hours, 4 = 1000 hours, 8 = 2000 hours.");
+		TFCOptions.animalTimeMultiplier = (float) TFCOptions.getDoubleFor(config, TIME_HEADER, "animalTimeMultiplier", 1.0, "This is a global multiplier for the gestation period of animals, as well as how long it takes for them to reach adulthood. Decrease for faster times.");
 
 		//Food Decay
 		Global.FOOD_DECAY_RATE = TFCOptions.getDoubleFor(config,FOOD_DECAY_HEADER,"FoodDecayRate", 1.0170378966055869517978300569768, "This number causes base decay to equal 50% gain per day. If you wish to change, I recommend you look up a y-root calculator 1.0170378966055869517978300569768^24 = 1.5");
@@ -413,16 +419,192 @@ public class TerraFirmaCraft
 		TFCOptions.normalOreUnits = TFCOptions.getIntFor(config, MATERIALS_HEADER, "normalOreUnits", 25, "The metal units provided by a single piece of normal ore.");
 		TFCOptions.richOreUnits = TFCOptions.getIntFor(config, MATERIALS_HEADER, "richOreUnits", 35, "The metal units provided by a single piece of rich ore");
 
-		TFCOptions.simSpeedNoPlayers = TFCOptions.getIntFor(config, SERVER_HEADER, "simSpeedNoPlayers", 100, "For every X number of ticks provided here, when there are no players online the server will only progress by 1 tick. (Default: 100) Time advances 100 times slower than normal. Setting this to less than 1 will turn this feature off.");
+		TFCOptions.simSpeedNoPlayers = TFCOptions.getIntFor(config, SERVER_HEADER, "simSpeedNoPlayers", 100, "For every X number of ticks provided here, when there are no players online the server will only progress by 1 tick. (Default: 100) Time advances 100 times slower than normal. Setting this to 0 will turn this feature off.");
 
 		// Overworked Chunks
 		TFCOptions.enableOverworkingChunks = TFCOptions.getBooleanFor(config, OVERWORKED_HEADER, "enableOverworkingChunks", true, "Set this to false to disable the overworking of chunks when using a gold pan or sluice.");
 		TFCOptions.goldPanLimit = TFCOptions.getIntFor(config, OVERWORKED_HEADER, "goldPanLimit", 50, "The overworked cap for filling a gold pan in a specific chunk. Both filling a gold pan or using a sluice in the chunk count towards this value.");
 		TFCOptions.sluiceLimit = TFCOptions.getIntFor(config, OVERWORKED_HEADER, "sluiceLimit", 300, "The overworked cap for a sluice scanning one soil unit in a specific chunk. Both filling a gold pan or using a sluice in the chunk count towards this value");
 
+		validateSettings();
 		/**Always end with this*/
 		if (config != null)
 			config.save();
+	}
+
+	public void validateSettings()
+	{
+		TerraFirmaCraft.log.info(new StringBuilder().append("Validating Settings").toString());
+		ArrayList<String> configList = new ArrayList<String>();
+
+		if (TFCOptions.maxCountOfTranspSubBlocksOnSide < 0 || TFCOptions.maxCountOfTranspSubBlocksOnSide > 64)
+		{
+			configList.add("maxCountOfTranspSubBlocksOnSide");
+			TFCOptions.maxCountOfTranspSubBlocksOnSide = 12;
+		}
+		if (TFCOptions.yearLength < 12 || TFCOptions.yearLength % 12 != 0)
+		{
+			configList.add("yearLength");
+			TFCOptions.yearLength = 96;
+		}
+		if (TFCOptions.pitKilnBurnTime <= 0f)
+		{
+			configList.add("pitKilnBurnTime");
+			TFCOptions.pitKilnBurnTime = 8.0f;
+		}
+		if (TFCOptions.bloomeryBurnTime <= 0f)
+		{
+			configList.add("bloomeryBurnTime");
+			TFCOptions.bloomeryBurnTime = 14.4f;
+		}
+		if (TFCOptions.charcoalPitBurnTime <= 0f)
+		{
+			configList.add("charcoalPitBurnTime");
+			TFCOptions.charcoalPitBurnTime = 18.0f;
+		}
+		if (TFCOptions.torchBurnTime < 0)
+		{
+			configList.add("torchBurnTime");
+			TFCOptions.torchBurnTime = 48;
+		}
+		if (TFCOptions.saplingTimerMultiplier <= 0)
+		{
+			configList.add("saplingTimerMultiplier");
+			TFCOptions.saplingTimerMultiplier = 1.0f;
+		}
+		if (TFCOptions.tempIncreaseMultiplier <= 0)
+		{
+			configList.add("tempIncreaseMultiplier");
+			TFCOptions.tempIncreaseMultiplier = 1.0f;
+		}
+		if (TFCOptions.tempDecreaseMultiplier <= 0)
+		{
+			configList.add("tempDecreaseMultiplier");
+			TFCOptions.tempDecreaseMultiplier = 1.0f;
+		}
+		if (TFCOptions.animalTimeMultiplier <= 0)
+		{
+			configList.add("animalTimeMultiplier");
+			TFCOptions.animalTimeMultiplier = 1.0f;
+		}
+		if (Global.FOOD_DECAY_RATE <= 0)
+		{
+			configList.add("FoodDecayRate");
+			Global.FOOD_DECAY_RATE = 1.0170378966055869517978300569768;
+		}
+		if (TFCOptions.decayProtectionDays <= 0)
+		{
+			configList.add("decayProtectionDays");
+			TFCOptions.decayProtectionDays = 24;
+		}
+		if (TFCOptions.decayMultiplier < 0)
+		{
+			configList.add("FoodDecayMultiplier");
+			TFCOptions.decayMultiplier = 1.0f;
+		}
+		if (TFCOptions.minimumRockLoad < 0)
+		{
+			configList.add("minimumRockLoad");
+			TFCOptions.minimumRockLoad = 1;
+		}
+		if (TFCOptions.initialCollapseRatio <= 0)
+		{
+			configList.add("initialCollapseRatio");
+			TFCOptions.initialCollapseRatio = 10;
+		}
+		if (TFCOptions.propogateCollapseChance <= 0)
+		{
+			configList.add("propogateCollapseChance");
+			TFCOptions.propogateCollapseChance = 55;
+		}
+		if (TFCOptions.ravineRarity < 0)
+		{
+			configList.add("ravineRarity");
+			TFCOptions.ravineRarity = 100;
+		}
+		if (TFCOptions.lavaFissureRarity < 0)
+		{
+			configList.add("lavaFissureRarity");
+			TFCOptions.lavaFissureRarity = 25;
+		}
+		if (TFCOptions.waterFissureRarity < 0)
+		{
+			configList.add("waterFissureRarity");
+			TFCOptions.waterFissureRarity = 90;
+		}
+		if (TFCOptions.cropGrowthMultiplier <= 0)
+		{
+			configList.add("cropGrowthMultiplier");
+			TFCOptions.cropGrowthMultiplier = 1.0f;
+		}
+		if (TFCOptions.maxProtectionMonths <= 0)
+		{
+			configList.add("maxProtectionMonths");
+			TFCOptions.maxProtectionMonths = 10;
+		}
+		if (TFCOptions.protectionGain < 0)
+		{
+			configList.add("protectionGain");
+			TFCOptions.protectionGain = 8;
+		}
+		if (TFCOptions.protectionBuffer < 0)
+		{
+			configList.add("protectionBuffer");
+			TFCOptions.protectionBuffer = 24;
+		}
+		if (TFCOptions.HealthGainRate < 0)
+		{
+			configList.add("HealthGainRate");
+			TFCOptions.HealthGainRate = 20;
+		}
+		if (TFCOptions.HealthGainCap < 1000)
+		{
+			configList.add("HealthGainCap");
+			TFCOptions.HealthGainCap = 3000;
+		}
+		if (TFCOptions.smallOreUnits <= 0)
+		{
+			configList.add("smallOreUnits");
+			TFCOptions.smallOreUnits = 10;
+		}
+		if (TFCOptions.poorOreUnits <= 0)
+		{
+			configList.add("poorOreUnits");
+			TFCOptions.poorOreUnits = 15;
+		}
+		if (TFCOptions.normalOreUnits <= 0)
+		{
+			configList.add("normalOreUnits");
+			TFCOptions.normalOreUnits = 25;
+		}
+		if (TFCOptions.richOreUnits <= 0)
+		{
+			configList.add("richOreUnits");
+			TFCOptions.richOreUnits = 35;
+		}
+		if (TFCOptions.simSpeedNoPlayers < 0)
+		{
+			configList.add("simSpeedNoPlayers");
+			TFCOptions.simSpeedNoPlayers = 100;
+		}
+		if (TFCOptions.goldPanLimit < 0)
+		{
+			configList.add("goldPanLimit");
+			TFCOptions.goldPanLimit = 50;
+		}
+		if (TFCOptions.sluiceLimit < 0)
+		{
+			configList.add("sluiceLimit");
+			TFCOptions.sluiceLimit = 300;
+		}
+
+		if (!configList.isEmpty())
+		{
+			String badConfigs = "";
+			for (String s : configList)
+				badConfigs += s + " ";
+			TerraFirmaCraft.log.warn("An invalid value has been entered for " + badConfigs + "in the config file. Using default value(s) instead.");
+		}
 	}
 
 	public void loadCraftingSettings()
@@ -434,10 +616,10 @@ public class TerraFirmaCraft
 			config.load();
 		} catch (Exception e)
 		{
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to access crafting settings configuration!").toString());
+			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to access crafting settings configuration!").toString());
 			config = null;
 		}
-		System.out.println(new StringBuilder().append("[TFC] Loading Crafting Settings").toString());
+		TerraFirmaCraft.log.info(new StringBuilder().append("Loading Crafting Settings").toString());
 		/**Start setup here*/
 		TFCCrafting.enableNEIHiding = TFCCrafting.getBooleanFor(config, "NEI Hiding", "enableNEIHiding", true, "Set to false to show hidden items in NEI. Note that most of these items were hidden to prevent players from cheating them in and crashing their game.");
 
@@ -533,10 +715,10 @@ public class TerraFirmaCraft
 			config = new Configuration(new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFCOre.cfg"));
 			config.load();
 		} catch (Exception e) {
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to access Ore configuration!").toString());
+			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to access Ore configuration!").toString());
 			config = null;
 		}
-		System.out.println(new StringBuilder().append("[TFC] Loading Ore").toString());
+		TerraFirmaCraft.log.info(new StringBuilder().append("Loading Ore").toString());
 
 		WorldGenOre.OreList.put("Native Copper", getOreData(config, "Native Copper", "veins", "large", Reference.ModID + ":Ore1", 0, 120, new String[]{"igneous extrusive"}, 5, 128, 80, 60));
 		WorldGenOre.OreList.put("Native Gold", getOreData(config, "Native Gold", "veins", "large", Reference.ModID + ":Ore1", 1, 120, new String[]{"igneous extrusive", "igneous intrusive"}, 5, 128, 80, 60));

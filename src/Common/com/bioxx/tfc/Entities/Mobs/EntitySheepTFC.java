@@ -31,6 +31,7 @@ import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.Items.Tools.ItemKnife;
 import com.bioxx.tfc.Items.Tools.ItemShears;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -105,7 +106,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
 		pregnant = false;
-		pregnancyRequiredTime = (int) (5 * TFC_Time.ticksInMonth);
+		pregnancyRequiredTime = (int) (TFCOptions.animalTimeMultiplier * 5 * TFC_Time.ticksInMonth);
 		timeOfConception = 0;
 		mateSizeMod = 0;
 		sex = rand.nextInt(2);
@@ -547,7 +548,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public int getNumberOfDaysToAdult()
 	{
-		return TFC_Time.daysInMonth * 12;
+		return (int) (TFCOptions.animalTimeMultiplier * TFC_Time.daysInMonth * 12);
 	}
 
 	@Override

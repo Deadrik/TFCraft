@@ -23,7 +23,7 @@ public class ItemSluice extends ItemTerra
 
 	public int getPlacedBlockMetadata(int i) {
 
-		//System.out.println(new StringBuilder().append(this.getItemStackDisplayName(new ItemStack(this,1,i))).toString());
+		//TerraFirmaCraft.log.info(new StringBuilder().append(this.getItemStackDisplayName(new ItemStack(this,1,i))).toString());
 
 		return i;
 	}

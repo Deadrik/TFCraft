@@ -56,7 +56,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	{
 		this();
 		seed = Seed;
-		//System.out.println("================= "+worldtype.getWorldTypeName()+" =================");
+		//TerraFirmaCraft.log.info("================= "+worldtype.getWorldTypeName()+" =================");
 		// Making sure that only TFC World Types can be used
 		GenLayerTFC[] var4;
 		if(worldtype == TFCWorldType.FLAT)

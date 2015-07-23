@@ -120,9 +120,9 @@ public class CraftingHandler
 							TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
 						} catch (Exception e1)
 						{
-							System.out.println("--------------------------------------------------");
+							TerraFirmaCraft.log.info("--------------------------------------------------");
 							e1.printStackTrace();
-							System.out.println("--------------------------------------------------");
+							TerraFirmaCraft.log.info("--------------------------------------------------");
 						}
 						PlayerInventory.upgradePlayerCrafting(player);
 					}

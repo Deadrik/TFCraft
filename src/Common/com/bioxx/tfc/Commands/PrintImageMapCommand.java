@@ -15,6 +15,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
@@ -79,7 +80,7 @@ public class PrintImageMapCommand extends CommandBase
 			BufferedImage outBitmap = new BufferedImage(size,size,BufferedImage.TYPE_INT_RGB);
 			Graphics2D graphics = (Graphics2D) outBitmap.getGraphics();
 			graphics.clearRect(0, 0, size, size);
-			System.out.println(name+".bmp");
+			TerraFirmaCraft.log.info(name+".bmp");
 			float perc = 0.1f;
 			int sizeHalf = size/2;
 			float count = 0;
@@ -94,12 +95,12 @@ public class PrintImageMapCommand extends CommandBase
 					graphics.drawRect(x+sizeHalf, z+sizeHalf, 1, 1);
 					if(count / (size*size) > perc)
 					{
-						System.out.println((int)(perc*100)+"%");
+						TerraFirmaCraft.log.info((int)(perc*100)+"%");
 						perc+=0.1f;
 					}
 				}
 			}
-			System.out.println(name+".bmp Done!");
+			TerraFirmaCraft.log.info(name+".bmp Done!");
 			ImageIO.write(outBitmap, "BMP", outFile);
 		}
 		catch (Exception e) 
@@ -115,7 +116,7 @@ public class PrintImageMapCommand extends CommandBase
 			BufferedImage outBitmap = new BufferedImage(size,size,BufferedImage.TYPE_INT_RGB);
 			Graphics2D graphics = (Graphics2D) outBitmap.getGraphics();
 			graphics.clearRect(0, 0, size, size);
-			System.out.println(name+".bmp");
+			TerraFirmaCraft.log.info(name+".bmp");
 			float perc = 0.1f;
 			int sizeHalf = size/2;
 			float count = 0;
@@ -132,12 +133,12 @@ public class PrintImageMapCommand extends CommandBase
 					graphics.drawRect(x+sizeHalf, z+sizeHalf, 1, 1);
 					if(count / (size*size) > perc)
 					{
-						System.out.println((int)(perc*100)+"%");
+						TerraFirmaCraft.log.info((int)(perc*100)+"%");
 						perc+=0.1f;
 					}
 				}
 			}
-			System.out.println(name+".bmp Done!");
+			TerraFirmaCraft.log.info(name+".bmp Done!");
 			ImageIO.write(outBitmap, "BMP", outFile);
 		}
 		catch (Exception e) 
@@ -153,7 +154,7 @@ public class PrintImageMapCommand extends CommandBase
 			BufferedImage outBitmap = new BufferedImage(size,size,BufferedImage.TYPE_INT_RGB);
 			Graphics2D graphics = (Graphics2D) outBitmap.getGraphics();
 			graphics.clearRect(0, 0, size, size);
-			System.out.println(name+".bmp");
+			TerraFirmaCraft.log.info(name+".bmp");
 			float perc = 0.1f;
 			int sizeHalf = size/2;
 			float count = 0;
@@ -167,12 +168,12 @@ public class PrintImageMapCommand extends CommandBase
 					graphics.drawRect(x+sizeHalf, z+sizeHalf, 1, 1);
 					if(count / (size*size) > perc)
 					{
-						System.out.println((int)(perc*100)+"%");
+						TerraFirmaCraft.log.info((int)(perc*100)+"%");
 						perc+=0.1f;
 					}
 				}
 			}
-			System.out.println(name+".bmp Done!");
+			TerraFirmaCraft.log.info(name+".bmp Done!");
 			ImageIO.write(outBitmap, "BMP", outFile);
 		}
 		catch (Exception e) 
@@ -188,7 +189,7 @@ public class PrintImageMapCommand extends CommandBase
 			BufferedImage outBitmap = new BufferedImage(size,size,BufferedImage.TYPE_INT_RGB);
 			Graphics2D graphics = (Graphics2D) outBitmap.getGraphics();
 			graphics.clearRect(0, 0, size, size);
-			System.out.println(name+".bmp");
+			TerraFirmaCraft.log.info(name+".bmp");
 			float perc = 0.1f;
 			float count = 0;
 			for(int x = -size/2; x < size/2; x++)
@@ -200,12 +201,12 @@ public class PrintImageMapCommand extends CommandBase
 					graphics.drawRect(x+size/2, z+size/2, 1, 1);
 					if(count / (size*size) > perc)
 					{
-						System.out.println((int)(perc*100)+"%");
+						TerraFirmaCraft.log.info((int)(perc*100)+"%");
 						perc+=0.1f;
 					}
 				}
 			}
-			System.out.println(name+".bmp Done!");
+			TerraFirmaCraft.log.info(name+".bmp Done!");
 			ImageIO.write(outBitmap, "BMP", outFile);
 		}
 		catch (Exception e) 

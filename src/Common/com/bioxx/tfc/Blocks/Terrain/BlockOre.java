@@ -17,6 +17,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TEOre;
@@ -43,10 +44,10 @@ public class BlockOre extends BlockCollapsible
 		if(TFCOptions.enableDebugMode && world.isRemote)
 		{
 			int metadata = world.getBlockMetadata(x, y, z);
-			System.out.println("Meta = "+(new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
+			TerraFirmaCraft.log.info("Meta = " + (new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
 			TEOre te = (TEOre)world.getTileEntity(x, y, z);
 			if(te != null)
-				System.out.println("Ore  BaseID = " + te.baseBlockID + "| BaseMeta =" + te.baseBlockMeta);
+				TerraFirmaCraft.log.info("Ore  BaseID = " + te.baseBlockID + "| BaseMeta =" + te.baseBlockMeta);
 		}
 		return false;
 	}

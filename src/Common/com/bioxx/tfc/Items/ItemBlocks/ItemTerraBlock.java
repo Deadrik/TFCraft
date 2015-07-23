@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
@@ -47,7 +48,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 		}
 		catch(Exception ex)
 		{
-			System.out.println(ex.getLocalizedMessage());
+			TerraFirmaCraft.log.error(ex.getLocalizedMessage());
 		}
 
 		return super.getUnlocalizedName(is);

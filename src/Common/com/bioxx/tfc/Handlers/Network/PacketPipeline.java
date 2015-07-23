@@ -19,6 +19,7 @@ import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetHandlerPlayServer;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
@@ -57,19 +58,19 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	{
 		if (this.packets.size() > 256)
 		{
-			System.out.println("Error Registering Packet, Too Big: "+clazz.getName());
+			TerraFirmaCraft.log.error("Error Registering Packet, Too Big: " + clazz.getName());
 			return false;
 		}
 
 		if (this.packets.contains(clazz))
 		{
-			System.out.println("Error Registering Packet, Already Exists: "+clazz.getName());
+			TerraFirmaCraft.log.error("Error Registering Packet, Already Exists: " + clazz.getName());
 			return false;
 		}
 
 		if (this.isPostInitialised)
 		{
-			System.out.println("Error Registering Packet, Initialization Already Completed: "+clazz.getName());
+			TerraFirmaCraft.log.error("Error Registering Packet, Initialization Already Completed: " + clazz.getName());
 			return false;
 		}
 

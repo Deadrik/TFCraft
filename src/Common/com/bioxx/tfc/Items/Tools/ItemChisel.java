@@ -10,6 +10,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockSlab;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
@@ -128,7 +129,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 		}
 
 		if(TFCOptions.enableDebugMode)
-			System.out.println(side);
+			TerraFirmaCraft.log.info(side);
 
 		long extraX = (te.extraData) & 0xf;
 		long extraY = (te.extraData >> 4) & 0xf;
@@ -218,7 +219,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 
 		if(TFCOptions.enableDebugMode)
 		{
-			System.out.println("Extra ="+te.extraData);  
+			TerraFirmaCraft.log.info("Extra ="+te.extraData);  
 		}
 
 		te = (TEPartial)world.getTileEntity(x, y, z);

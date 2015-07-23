@@ -310,7 +310,7 @@ public class BlockSetup extends TFCBlocks
 
 	public static void LoadBlocks()
 	{
-		System.out.println(new StringBuilder().append("[TFC] Loading Blocks").toString());
+		TerraFirmaCraft.log.info(new StringBuilder().append("Loading Blocks").toString());
 
 		// Remove Items from Creative Tabs
 		Blocks.double_wooden_slab.setCreativeTab(null);

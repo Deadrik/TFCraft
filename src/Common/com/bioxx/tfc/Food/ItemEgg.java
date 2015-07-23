@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
@@ -44,7 +45,7 @@ public class ItemEgg extends ItemFoodTFC implements IFood
 		else
 		{
 			arraylist.add(TFC_Core.translate("gui.badnbt"));
-			System.out.println(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
+			TerraFirmaCraft.log.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 		}
 	}

@@ -1,6 +1,8 @@
 
 package com.bioxx.tfc.Render.Models;
 
+import com.bioxx.tfc.TerraFirmaCraft;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -284,7 +286,7 @@ public class ModelUngulate extends ModelBase
 		LeftFoot.rotateAngleX = MathHelper.sin(FRL * 0.6662F)*0.7F*(MathHelper.sin(FLL*0.6662F)*speedMod>0?2:1)*speedMod + rightFootInitAngle;
 		/*
 	  else if(MathHelper.cos(FRL*0.6662F)*1.4F*par2 + rightArmInitAngle < RightArm.rotateAngleX){
-		  //System.out.println("Check2");
+		  //TerraFirmaCraft.log.info("Check2");
 		  RightArm.rotateAngleX = MathHelper.cos(FRL*0.6662F)*1.4F*par2+ rightArmInitAngle;
 	  }
 	  if(2*MathHelper.cos(FLL*0.6662F)*1.4F*par2 + leftArmInitAngle >= LeftArm.rotateAngleX){ 

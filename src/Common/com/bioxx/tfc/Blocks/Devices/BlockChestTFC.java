@@ -127,7 +127,7 @@ public class BlockChestTFC extends BlockTerraContainer
 		byte chestSide = 0;
 		int facingDir    = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5) & 3;
 		int secFacingDir = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F ) & 3;
-		//System.out.println( facingDir );
+		//TerraFirmaCraft.log.info( facingDir );
 		final int facingN  = 0;
 		final int facingE  = 1;
 		final int facingS  = 2;
@@ -158,7 +158,7 @@ public class BlockChestTFC extends BlockTerraContainer
 				{
 					if( secFacingDir == facingE || secFacingDir == facingN ) chestSide = sideE;
 					if( secFacingDir == facingW || secFacingDir == facingS ) chestSide = sideW;
-					//System.out.println( secFacingDir );
+					//TerraFirmaCraft.log.info( secFacingDir );
 				}
 				break;
 			default:
@@ -169,7 +169,7 @@ public class BlockChestTFC extends BlockTerraContainer
 					chestSide = sideN;
 					if( secFacingDir == facingN || secFacingDir == facingW ) chestSide = sideN;
 					if( secFacingDir == facingS || secFacingDir == facingE ) chestSide = sideS;
-					//System.out.println( secFacingDir );
+					//TerraFirmaCraft.log.info( secFacingDir );
 				}
 				break;
 			}

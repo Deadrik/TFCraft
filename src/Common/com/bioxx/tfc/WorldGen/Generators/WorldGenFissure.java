@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Util.BlockMeta;
@@ -251,7 +252,7 @@ public class WorldGenFissure implements IWorldGenerator
 							world.rand.nextFloat() < block.collapseChance/100f)
 					{
 						checks++;
-						//System.out.println("Number of block checks: " + checks + " | Queue Length: " + checkQueue.size());
+						//TerraFirmaCraft.log.info("Number of block checks: " + checks + " | Queue Length: " + checkQueue.size());
 
 						map.add(block.coords);
 

@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 
 import net.minecraft.world.WorldType;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerFuzzyZoomTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerSmoothTFC;
@@ -85,7 +86,7 @@ public abstract class GenDrainageLayer extends GenLayerTFC
 			BufferedImage outBitmap = new BufferedImage(size,size,BufferedImage.TYPE_INT_RGB);
 			Graphics2D graDrainageics = (Graphics2D) outBitmap.getGraphics();
 			graDrainageics.clearRect(0, 0, size, size);
-			System.out.println("Starting "+name+".bmp");
+			TerraFirmaCraft.log.info("Starting " + name + ".bmp");
 			for(int x = 0; x < size; x++)
 			{
 				for(int z = 0; z < size; z++)
@@ -100,7 +101,7 @@ public abstract class GenDrainageLayer extends GenLayerTFC
 					graDrainageics.drawRect(x, z, 1, 1);
 				}
 			}
-			System.out.println("Finished "+name+".bmp");
+			TerraFirmaCraft.log.info("Finished " + name + ".bmp");
 			ImageIO.write(outBitmap, "BMP", outFile);
 		}
 		catch (Exception e) 

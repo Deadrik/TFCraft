@@ -59,7 +59,7 @@ public class WorldGenBerryBush extends WorldGenerator
 				if(createBush(world, random, i - spawnRadius+x, world.getHeightValue(i - spawnRadius+x, k - spawnRadius+z), k - spawnRadius+z, _fi))
 					count++;
 			}
-			//System.out.println(_fi.type + ": " + count + " bushes spawned of " + _cluster + " expected. [" + i +"]" + "[" + j +"]" + "[" + k +"]");
+			//TerraFirmaCraft.log.info(_fi.type + ": " + count + " bushes spawned of " + _cluster + " expected. [" + i +"]" + "[" + j +"]" + "[" + k +"]");
 		}
 		return true;
 	}

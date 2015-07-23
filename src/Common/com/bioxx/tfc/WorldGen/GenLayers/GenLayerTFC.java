@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 
 import net.minecraft.world.gen.layer.GenLayer;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.TFCWorldType;
 import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerAddIslandTFC;
@@ -122,7 +123,7 @@ public abstract class GenLayerTFC extends GenLayer
 			BufferedImage outBitmap = new BufferedImage(size,size,BufferedImage.TYPE_INT_RGB);
 			Graphics2D graphics = (Graphics2D) outBitmap.getGraphics();
 			graphics.clearRect(0, 0, size, size);
-			System.out.println(name+".bmp");
+			TerraFirmaCraft.log.info(name + ".bmp");
 			for(int x = 0; x < size; x++)
 			{
 				for(int z = 0; z < size; z++)
@@ -134,7 +135,7 @@ public abstract class GenLayerTFC extends GenLayer
 					}
 				}
 			}
-			System.out.println(name+".bmp");
+			TerraFirmaCraft.log.info(name + ".bmp");
 			ImageIO.write(outBitmap, "BMP", outFile);
 		}
 		catch (Exception e) 
@@ -216,7 +217,7 @@ public abstract class GenLayerTFC extends GenLayer
 	public static int validateInt(int[] array, int index)
 	{
 		/*if(TFCBiome.biomeList[array[index]] == null)
-			System.out.println("Error garbage data: "+array[index]);*/
+			TerraFirmaCraft.log.error("Error garbage data: "+array[index]);*/
 		return array[index];
 	}
 
@@ -228,7 +229,7 @@ public abstract class GenLayerTFC extends GenLayer
 			{
 				if(TFCBiome.biomeList[array[x+z*xSize]] == null)
 				{
-					System.out.println("Error Array garbage data: "+array[x+z*xSize]);
+					TerraFirmaCraft.log.error("Error Array garbage data: " + array[x + z * xSize]);
 					return;
 				}
 			}

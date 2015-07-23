@@ -35,6 +35,7 @@ import com.bioxx.tfc.Entities.AI.EntityAIFindNest;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -441,7 +442,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public int getNumberOfDaysToAdult()
 	{
-		return (int)(TFC_Time.daysInMonth * 4.14);
+		return (int) (TFCOptions.animalTimeMultiplier * TFC_Time.daysInMonth * 4.14);
 	}
 
 	@Override

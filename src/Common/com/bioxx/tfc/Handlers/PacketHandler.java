@@ -1,5 +1,7 @@
 package com.bioxx.tfc.Handlers;
 
+import com.bioxx.tfc.TerraFirmaCraft;
+
 
 public class PacketHandler// implements IPacketHandler, IConnectionHandler
 {
@@ -112,7 +114,7 @@ public class PacketHandler// implements IPacketHandler, IConnectionHandler
 //					}
 //			}catch(Exception e)
 //			{
-//				System.out.println("PacketHandler error in Packet Type: " + type + ", "+x + ", "+y + ", "+z);
+//				TerraFirmaCraft.log.error("PacketHandler error in Packet Type: " + type + ", "+x + ", "+y + ", "+z);
 //			}
 //			else if(type == Packet_Init_Block_Server)//Server builds the init packet and sends it to the client.
 //			{
@@ -287,8 +289,8 @@ public class PacketHandler// implements IPacketHandler, IConnectionHandler
 //							throw new IOException("Invalid book tag!");
 //
 //						var4 = new ItemStack(Item.getItemById(0),1,0);//player.inventory.getCurrentItem();
-////						System.out.println("Tags: "+var3.getTagCompound().getTags());
-////						System.out.println(var3);
+////						TerraFirmaCraft.log.info("Tags: "+var3.getTagCompound().getTags());
+////						TerraFirmaCraft.log.info(var3);
 //						if (var3 != null && var3.getItem() == TFCItems.writabeBookTFC)
 //						{
 //							var4.setTagInfo("author", new NBTTagString("author", player.getDisplayName()));
@@ -416,7 +418,7 @@ public class PacketHandler// implements IPacketHandler, IConnectionHandler
 //			playerToRemove = players.get(i);
 //			if(playerToRemove.networkManager == manager)
 //			{
-//				System.out.println("PlayerManager Successfully removed player " + playerToRemove.Name);
+//				TerraFirmaCraft.log.info("PlayerManager Successfully removed player " + playerToRemove.Name);
 //				players.remove(i);
 //			}  
 //		}
@@ -426,7 +428,7 @@ public class PacketHandler// implements IPacketHandler, IConnectionHandler
 //			for(int i = 0; i < players.size(); i++)
 //				if(playerToRemove.Name == players.get(i).Name)
 //				{
-//					System.out.println("PlayerManager Successfully removed player " + players.get(i).Name);
+//					TerraFirmaCraft.log.info("PlayerManager Successfully removed player " + players.get(i).Name);
 //					players.remove(i);
 //				}
 //

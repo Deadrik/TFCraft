@@ -27,7 +27,7 @@ public class SlotExtraEquipable extends Slot
 
 	@Override
 	public ItemStack getStack(){
-		//System.out.println("getting itemstack " + super.getStack());
+		//TerraFirmaCraft.log.info("getting itemstack " + super.getStack());
 		return super.getStack();
 	}
 
