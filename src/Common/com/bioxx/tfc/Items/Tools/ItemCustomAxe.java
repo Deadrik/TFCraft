@@ -17,7 +17,6 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
@@ -67,9 +66,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
 		arraylist.add(EnumChatFormatting.AQUA + TFC_Core.translate(GetDamageType().toString()));
-
-		if(TFCOptions.enableDebugMode)
-			arraylist.add("Damage: " + is.getItemDamage());
+		ItemTerraTool.addDurabilityInformation(is, arraylist);
 	}
 
 	@Override

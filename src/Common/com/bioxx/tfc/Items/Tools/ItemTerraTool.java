@@ -17,13 +17,13 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 import com.bioxx.tfc.api.Interfaces.ISize;
+import com.bioxx.tfc.api.Util.Helper;
 
 public class ItemTerraTool extends ItemTool implements ISize
 {
@@ -44,21 +44,17 @@ public class ItemTerraTool extends ItemTool implements ISize
 		ItemTerra.addSizeInformation(is, arraylist);
 		ItemTerra.addHeatInformation(is, arraylist);
 
-
 		if(is.getItem() instanceof ICausesDamage)
 			arraylist.add(EnumChatFormatting.AQUA + TFC_Core.translate(((ICausesDamage)this).GetDamageType().toString()));
 
-		addItemInformation(is, player, arraylist);
+		ItemTerraTool.addDurabilityInformation(is, arraylist);
 		addExtraInformation(is, player, arraylist);
-
-		if(TFCOptions.enableDebugMode)
-		{
-			arraylist.add("durabuff=" + AnvilManager.getDurabilityBuff(is));
-		}
 	}
 
-	public void addItemInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
+	public static void addDurabilityInformation(ItemStack is, List<String> arraylist)
 	{
+		if (AnvilManager.getDurabilityBuff(is) > 0)
+			arraylist.add(TFC_Core.translate("gui.Durability") + " : +" + Helper.roundNumber(AnvilManager.getDurabilityBuff(is) * 100, 10) + "%");
 	}
 
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)

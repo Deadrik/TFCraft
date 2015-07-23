@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Items.Tools.ItemTerraTool;
 import com.bioxx.tfc.api.Armor;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
@@ -125,6 +126,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
 		ItemTerra.addHeatInformation(is, arraylist);
+		ItemTerraTool.addDurabilityInformation(is, arraylist);
 
 		if (TFC_Core.showShiftInformation()) 
 		{
@@ -144,7 +146,6 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 		else
 			arraylist.add(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.Advanced") + ": (" + TFC_Core.translate("gui.Hold") + " " + EnumChatFormatting.GRAY + TFC_Core.translate("gui.Shift") +
 					EnumChatFormatting.DARK_GRAY + ")");
-
 	}
 
 	/**

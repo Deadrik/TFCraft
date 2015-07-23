@@ -2313,6 +2313,7 @@ gui.badnbt=BAD Info
 gui.Advanced=Advanced
 gui.Shift=Shift
 gui.Hold=Hold
+gui.Durability=Durability
 
 gui.slot=Slot
 gui.slot.back=Back

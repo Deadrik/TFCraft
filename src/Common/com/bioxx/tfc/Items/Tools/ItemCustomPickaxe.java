@@ -13,7 +13,6 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -49,8 +48,7 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
-		if(TFCOptions.enableDebugMode)
-			arraylist.add("Damage: "+is.getItemDamage() + "/" + is.getMaxDamage());
+		ItemTerraTool.addDurabilityInformation(is, arraylist);
 	}
 
 	@Override

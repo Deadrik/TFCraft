@@ -20,7 +20,6 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
@@ -74,20 +73,8 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 
 		if(is.getItem() instanceof ICausesDamage)
 			arraylist.add(EnumChatFormatting.AQUA + TFC_Core.translate(((ICausesDamage) this).GetDamageType().toString()));
-
-		addItemInformation(is, player, arraylist);
+		ItemTerraTool.addDurabilityInformation(is, arraylist);
 		addExtraInformation(is, player, arraylist);
-
-		if(TFCOptions.enableDebugMode)
-		{
-			NBTTagCompound nbt = is.getTagCompound();
-			if(nbt != null && nbt.hasKey("craftingTag") && nbt.getCompoundTag("craftingTag").hasKey("durabuff"))
-				arraylist.add("durabuff=" + is.getMaxDamage()+ "/" + is.getItem().getMaxDamage(is));
-		}
-	}
-
-	public void addItemInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
-	{
 	}
 
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
