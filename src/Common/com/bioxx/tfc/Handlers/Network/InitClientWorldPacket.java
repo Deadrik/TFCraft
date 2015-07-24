@@ -29,6 +29,7 @@ public class InitClientWorldPacket extends AbstractPacket
 	private SkillStats playerSkills;
 	private int daysInYear, HGRate, HGCap;
 	private HashMap<String, Integer> skillMap = new HashMap<String, Integer>();
+	private byte chiselMode;
 
 	public InitClientWorldPacket() {}
 
@@ -54,6 +55,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		if(P.getEntityData().hasKey("craftingTable"))
 			this.craftingTable = true;
 		this.playerSkills = TFC_Core.getSkillStats(P);
+		this.chiselMode = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(P).ChiselMode;
 	}
 
 	@Override
@@ -73,6 +75,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		buffer.writeInt(this.HGCap);
 		buffer.writeBoolean(this.craftingTable);
 		this.playerSkills.toOutBuffer(buffer);
+		buffer.writeByte(this.chiselMode);
 	}
 
 	@Override
@@ -102,6 +105,8 @@ public class InitClientWorldPacket extends AbstractPacket
 			lvl = buffer.readInt();
 			this.skillMap.put(name, lvl);
 		}
+
+		this.chiselMode = buffer.readByte();
 	}
 
 	@Override
@@ -133,6 +138,8 @@ public class InitClientWorldPacket extends AbstractPacket
 			playerSkills.setSkillSave(skill, skillMap.get(skill));
 		}
 		skillMap.clear();
+
+		PlayerManagerTFC.getInstance().getClientPlayer().setChiselMode(this.chiselMode);
 
 		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
 				player.getDisplayName(),

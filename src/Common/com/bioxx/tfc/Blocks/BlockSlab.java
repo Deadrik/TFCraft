@@ -13,10 +13,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.bioxx.tfc.Core.Player.PlayerInfo;
-import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
-import com.bioxx.tfc.Items.Tools.ItemChisel;
-import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.api.TFCBlocks;
 
@@ -90,52 +86,6 @@ public class BlockSlab extends BlockPartial
 	public static int getSouthChiselLevel(long data)
 	{
 		return (int) ((data >> 20) & 0xf);
-	}
-
-	/**
-	 * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
-	 */
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float par7, float par8, float par9)  
-	{
-		boolean hasHammer = false;
-		for(int i = 0; i < 9;i++)
-		{
-			if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer) {
-				hasHammer = true;
-			}
-		}
-		if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer && !world.isRemote)
-		{
-			Block block = world.getBlock(x, y, z);
-			byte meta = (byte) world.getBlockMetadata(x, y, z);
-
-			int mode = 0;
-			if(!world.isRemote)
-			{
-				PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
-
-				if(pi!=null) {
-					mode = pi.ChiselMode;
-				}
-			} else {
-				mode = PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode;
-			}
-
-			if(mode == 2)
-			{
-				ItemChisel.CreateSlab(world, x, y, z, block, meta, side);
-				entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
-				return true;
-			}
-			else if(mode == 3)
-			{
-				ItemChisel.CreateDetailed(world, x, y, z, block, meta, side, par7, par8, par9);
-				entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
-				return true;
-			}
-		}
-		return false;
 	}
 
 	/**

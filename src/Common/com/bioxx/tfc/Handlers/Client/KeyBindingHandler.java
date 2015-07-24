@@ -40,7 +40,9 @@ public class KeyBindingHandler
 				if(player.getCurrentEquippedItem().getItem() instanceof ItemChisel)
 				{
 					pi.switchChiselMode();
-					AbstractPacket pkt = new KeyPressPacket(0);
+					//Let's send the actual ChiselMode so the server/client does not
+					//come out of sync.
+					AbstractPacket pkt = new KeyPressPacket(pi.ChiselMode);
 					TerraFirmaCraft.packetPipeline.sendToServer(pkt);
 				}
 				else if(player.getCurrentEquippedItem().getItem() instanceof ItemCustomHoe)

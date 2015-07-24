@@ -18,10 +18,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Core.CollisionRayTraceStandard;
-import com.bioxx.tfc.Core.Player.PlayerInfo;
-import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
-import com.bioxx.tfc.Items.Tools.ItemChisel;
-import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Interfaces.ICustomCollision;
@@ -94,45 +90,6 @@ public class BlockStair extends BlockPartial implements ICustomCollision
 		case WEST:return (rvmeta & 85) == 85;
 		default: return false;
 		}
-	}
-
-	/**
-	 * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
-	 */
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)  
-	{
-		boolean hasHammer = false;
-		for(int i = 0; i < 9;i++)
-		{
-			if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer) {
-				hasHammer = true;
-			}
-		}
-		if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer && !world.isRemote)
-		{
-
-			int mode = 0;
-			if(!world.isRemote)
-			{
-				PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
-
-				if(pi!=null) {
-					mode = pi.ChiselMode;
-				}
-			} else {
-				mode = PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode;
-			}
-
-			if(mode == 1)
-			{
-				int meta = world.getBlockMetadata(x, y, z);
-				ItemChisel.CreateStairs(world, x, y, z, this, meta, hitX, hitY, hitZ);
-				entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
-				return true;
-			}
-		}
-		return false;
 	}
 
 	@Override

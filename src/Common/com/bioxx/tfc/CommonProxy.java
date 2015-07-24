@@ -2,11 +2,17 @@ package com.bioxx.tfc;
 
 import java.io.File;
 
+import com.bioxx.tfc.Tools.ChiselMode_Detailed;
+import com.bioxx.tfc.Tools.ChiselMode_Slab;
+import com.bioxx.tfc.Tools.ChiselMode_Smooth;
+import com.bioxx.tfc.Tools.ChiselMode_Stair;
+import com.bioxx.tfc.api.Tools.ChiselManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -481,6 +487,14 @@ public class CommonProxy
 		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WAILAData.callbackRegister");
 		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WCrucible.callbackRegister"); // Crucible has it's own file due to extra calculations.
 	}
-	
+
+	public void registerChiselModes()
+	{
+		ChiselManager.getInstance().addChiselMode(new ChiselMode_Smooth("Smooth"));
+		ChiselManager.getInstance().addChiselMode(new ChiselMode_Stair("Stairs"));
+		ChiselManager.getInstance().addChiselMode(new ChiselMode_Slab("Slabs"));
+		ChiselManager.getInstance().addChiselMode(new ChiselMode_Detailed("Detailed"));
+	}
+
 	public void hideNEIItems() {}
 }
