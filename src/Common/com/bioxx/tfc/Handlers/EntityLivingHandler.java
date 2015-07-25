@@ -2,6 +2,7 @@ package com.bioxx.tfc.Handlers;
 
 import java.util.ArrayList;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
@@ -43,6 +44,7 @@ import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IEquipable;
+import com.bioxx.tfc.api.Interfaces.IEquipable.EquipType;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -220,31 +222,36 @@ public class EntityLivingHandler
 	public void handleItemPickup(EntityItemPickupEvent event)
 	{
 		EntityPlayer player = event.entityPlayer;
-		ItemStack quiver = null;
 		ItemStack item = event.item.getEntityItem();
-		boolean foundJav = false;
-		if(player.inventory instanceof InventoryPlayerTFC){
+		if (player.inventory instanceof InventoryPlayerTFC)
+		{
+			ItemStack backItem = ((InventoryPlayerTFC) player.inventory).extraEquipInventory[0];
 
-			quiver = ((InventoryPlayerTFC)player.inventory).extraEquipInventory[0];
-			if(quiver != null && !(quiver.getItem() instanceof ItemQuiver)){
-				quiver = null;
-			}
-			for(int i = 0; i < 9; i++)
+			// Back slot is empty, and the player is picking up an item that can be equipped in the back slot.
+			if (backItem == null && item.getItem() instanceof IEquipable)
 			{
-				if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof ItemJavelin)
-					foundJav = true;
+				IEquipable equipment = (IEquipable) item.getItem();
+				if (equipment.getEquipType(item) == EquipType.BACK)
+				{
+					player.inventory.setInventorySlotContents(36, item.copy());
+					item.stackSize = 0;
+					event.item.setEntityItemStack(item);
+				}
 			}
+			// Back slot contains a quiver, handle picking up arrows and javelins.
+			else if (backItem != null && backItem.getItem() instanceof ItemQuiver)
+			{
+				ItemQuiver quiver = (ItemQuiver) backItem.getItem();
 
-			if(quiver != null)
-			{
+				// Attempt to add arrows that are picked up to the quiver instead of standard inventory.
 				if(item.getItem() instanceof ItemArrow)
 				{
-					ItemStack is = ((ItemQuiver)quiver.getItem()).addItem(quiver, item);
+					ItemStack is = quiver.addItem(backItem, item);
 					if(is != null)
 						event.item.setEntityItemStack(is);
 					else
 					{
-						is = event.item.getEntityItem();
+						is = item;
 						is.stackSize = 0;
 						event.item.setEntityItemStack(is);
 						event.setResult(Result.DENY);
@@ -252,12 +259,21 @@ public class EntityLivingHandler
 				}
 				else if(item.getItem() instanceof ItemJavelin)
 				{
+					// Check to see if the player has at least 1 javelin on their hotbar.
+					boolean foundJav = false;
+					for (int i = 0; i < 9; i++)
+					{
+						if (player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof ItemJavelin)
+							foundJav = true;
+					}
+
+					// If there is already a javelin on the hotbar, attempt to put the picked up javelin into the quiver.
 					if(foundJav)
 					{
-						ItemStack is = ((ItemQuiver)quiver.getItem()).addItem(quiver, item);
+						ItemStack is = quiver.addItem(backItem, item);
 						if(is == null)
 						{
-							is = event.item.getEntityItem();
+							is = item;
 							is.stackSize = 0;
 							event.item.setEntityItemStack(is);
 							event.setResult(Result.DENY);
@@ -284,11 +300,20 @@ public class EntityLivingHandler
 	@SubscribeEvent
 	public void onEntityDeath(LivingDeathEvent event)
 	{
-		if(event.entityLiving instanceof EntityPlayer)
+		EntityLivingBase entity = event.entityLiving;
+
+		if (entity instanceof EntityPlayer)
 		{
-			SkillStats skills = TFC_Core.getSkillStats((EntityPlayer) event.entityLiving);
-			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer((EntityPlayer) event.entityLiving);
+			EntityPlayer player = (EntityPlayer) entity;
+			SkillStats skills = TFC_Core.getSkillStats(player);
+			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
 			pi.tempSkills = skills;
+
+			// Save the item in the back slot if keepInventory is set to true.
+			if (entity.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && player.inventory instanceof InventoryPlayerTFC)
+			{
+				pi.tempEquipment = ((InventoryPlayerTFC) player.inventory).extraEquipInventory.clone();
+			}
 		}
 	}
 

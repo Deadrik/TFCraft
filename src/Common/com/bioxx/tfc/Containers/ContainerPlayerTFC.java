@@ -11,11 +11,13 @@ import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Containers.Slots.SlotArmorTFC;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.Food.ItemMeal;
 import com.bioxx.tfc.Handlers.CraftingHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
 import com.bioxx.tfc.Items.ItemTFCArmor;
+import com.bioxx.tfc.api.Interfaces.IEquipable;
+import com.bioxx.tfc.api.Interfaces.IEquipable.EquipType;
 import com.bioxx.tfc.api.Interfaces.IFood;
-import com.bioxx.tfc.Food.ItemMeal;
 
 public class ContainerPlayerTFC extends ContainerPlayer
 {
@@ -86,17 +88,19 @@ public class ContainerPlayerTFC extends ContainerPlayer
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int par2)
+	public ItemStack transferStackInSlot(EntityPlayer player, int slotNum)
 	{
 		ItemStack origStack = null;
-		Slot slot = (Slot)this.inventorySlots.get(par2);
+		Slot slot = (Slot) this.inventorySlots.get(slotNum);
+		Slot equipmentSlot = (Slot) this.inventorySlots.get(50);
 
 		if (slot != null && slot.getHasStack())
 		{
 			ItemStack slotStack = slot.getStack(); 
 			origStack = slotStack.copy();
 
-			if (par2 == 0)
+			// Crafting Grid Output
+			if (slotNum == 0)
 			{
 				FoodCraftingHandler.preCraft(player, slotStack, craftMatrix);
 				CraftingHandler.preCraft(player, slotStack, craftMatrix);
@@ -106,61 +110,81 @@ public class ContainerPlayerTFC extends ContainerPlayer
 
 				slot.onSlotChange(slotStack, origStack);
 			}
-			else if ((par2 >= 1 && par2 < 5) || (player.getEntityData().hasKey("craftingTable") && (par2 >= 45 && par2 < 50)))
+			// From crafting grid input to inventory
+			else if ((slotNum >= 1 && slotNum < 5) || (player.getEntityData().hasKey("craftingTable") && (slotNum >= 45 && slotNum < 50)))
 			{
-				if (!this.mergeItemStack(slotStack, 9, 45, false))
+				if (!this.mergeItemStack(slotStack, 9, 45, true))
 					return null;
 			}
-			else if (par2 >= 5 && par2 < 9 || par2 == 50)
+			// From armor or equipment slot to inventory
+			else if (slotNum >= 5 && slotNum < 9 || slotNum == 50)
 			{
-				if (!this.mergeItemStack(slotStack, 9, 45, false))
+				if (!this.mergeItemStack(slotStack, 9, 45, true))
 					return null;
 			}
+			// From inventory to armor slots
 			else if (origStack.getItem() instanceof ItemArmor)
 			{
-				if(origStack.getItem() instanceof ItemTFCArmor &&
-						((!((Slot)this.inventorySlots.get(5 + ((ItemTFCArmor)origStack.getItem()).getUnadjustedArmorType())).getHasStack() && ((ItemTFCArmor)origStack.getItem()).getUnadjustedArmorType() != 4)||
-								(!((Slot)this.inventorySlots.get(50)).getHasStack())))
+				int armorSlotNum = 5 + ((ItemArmor) origStack.getItem()).armorType;
+				if (origStack.getItem() instanceof ItemTFCArmor)
 				{
-					int j = ((ItemTFCArmor)origStack.getItem()).getUnadjustedArmorType() != 4 ? 5 + ((ItemTFCArmor)origStack.getItem()).getUnadjustedArmorType() : 50;
-					if (!this.mergeItemStack(slotStack, j, j + 1, false))
-						return null;
+					armorSlotNum = 5 + ((ItemTFCArmor) origStack.getItem()).getUnadjustedArmorType();
+
+					if (!((Slot) this.inventorySlots.get(armorSlotNum)).getHasStack())
+					{
+						if (!this.mergeItemStack(slotStack, armorSlotNum, armorSlotNum + 1, false))
+							return null;
+					}
 				}
-				else if(((!((Slot)this.inventorySlots.get(5 + ((ItemArmor)origStack.getItem()).armorType)).getHasStack() && ((ItemArmor)origStack.getItem()).armorType != 4)||
-						(!((Slot)this.inventorySlots.get(50)).getHasStack())))
+				else if (!((Slot) this.inventorySlots.get(armorSlotNum)).getHasStack())
 				{
-					int j = ((ItemArmor)origStack.getItem()).armorType != 4 ? 5 + ((ItemArmor)origStack.getItem()).armorType : 50;
-					if (!this.mergeItemStack(slotStack, j, j + 1, false))
+					if (!this.mergeItemStack(slotStack, armorSlotNum, armorSlotNum + 1, false))
 						return null;
 				}
 			}
-			else if (par2 >= 9 && par2 < 45 && origStack.getItem() instanceof IFood && !(origStack.getItem() instanceof ItemMeal) && !isCraftingGridFull())
+			// From inventory to back slot
+			else if (origStack.getItem() instanceof IEquipable)
+			{
+				IEquipable equipment = (IEquipable) origStack.getItem();
+				if (!equipmentSlot.getHasStack() && equipment.getEquipType(origStack) == EquipType.BACK)
+				{
+					ItemStack backStack = slotStack.copy();
+					backStack.stackSize = 1;
+					equipmentSlot.putStack(backStack);
+					slotStack.stackSize--;
+				}
+			}
+			// Food from inventory/hotbar to crafting grid
+			else if (slotNum >= 9 && slotNum < 45 && origStack.getItem() instanceof IFood && !(origStack.getItem() instanceof ItemMeal) && !isCraftingGridFull())
 			{
 				if (!this.mergeItemStack(slotStack, 1, 5, false) && slotStack.stackSize == 0)
 					return null;
 				else if (slotStack.stackSize > 0 && player.getEntityData().hasKey("craftingTable") && !this.mergeItemStack(slotStack, 45, 50, false))
 					return null;
-				else if (slotStack.stackSize > 0 && par2 >= 9 && par2 < 36)
+				else if (slotStack.stackSize > 0 && slotNum >= 9 && slotNum < 36)
 				{
 					if (!this.mergeItemStack(slotStack, 36, 45, false))
 						return null;
 				}
-				else if (slotStack.stackSize > 0 && par2 >= 36 && par2 < 45)
+				else if (slotStack.stackSize > 0 && slotNum >= 36 && slotNum < 45)
 				{
 					if (!this.mergeItemStack(slotStack, 9, 36, false))
 						return null;
 				}
 			}
-			else if (par2 >= 9 && par2 < 36)
+			// From inventory to hotbar
+			else if (slotNum >= 9 && slotNum < 36)
 			{
 				if (!this.mergeItemStack(slotStack, 36, 45, false))
 					return null;
 			}
-			else if (par2 >= 36 && par2 < 45)
+			// From hotbar to inventory
+			else if (slotNum >= 36 && slotNum < 45)
 			{
 				if (!this.mergeItemStack(slotStack, 9, 36, false))
 					return null;
 			}
+			// Anything else
 			else if (!this.mergeItemStack(slotStack, 9, 45, false))
 				return null;
 
@@ -181,16 +205,26 @@ public class ContainerPlayerTFC extends ContainerPlayer
 	@Override
 	public ItemStack slotClick(int sourceSlotID, int destSlotID, int clickType, EntityPlayer p)
 	{
-		if (clickType == 7 && sourceSlotID >= 9 && sourceSlotID < 45)
+		if (sourceSlotID >= 0 && sourceSlotID < this.inventorySlots.size())
 		{
-			Slot sourceSlot = (Slot)this.inventorySlots.get(sourceSlotID);
+			Slot sourceSlot = (Slot) this.inventorySlots.get(sourceSlotID);
+			ItemStack slotStack = sourceSlot.getStack();
 
-			if (sourceSlot != null && sourceSlot.canTakeStack(p))
+			// Hotbar press to remove from crafting output
+			if (clickType == 2 && sourceSlotID == 0 && slotStack != null)
 			{
-				Slot destSlot = (Slot)this.inventorySlots.get(destSlotID);
-				destSlot.putStack(sourceSlot.getStack());
-				sourceSlot.putStack(null);
-				return null;
+				CraftingHandler.preCraft(p, slotStack, craftMatrix);
+			}
+			// Don't know what this is
+			else if (clickType == 7 && sourceSlotID >= 9 && sourceSlotID < 45)
+			{
+				if (sourceSlot != null && sourceSlot.canTakeStack(p))
+				{
+					Slot destSlot = (Slot) this.inventorySlots.get(destSlotID);
+					destSlot.putStack(slotStack);
+					sourceSlot.putStack(null);
+					return null;
+				}
 			}
 		}
 		return super.slotClick(sourceSlotID, destSlotID, clickType, p);

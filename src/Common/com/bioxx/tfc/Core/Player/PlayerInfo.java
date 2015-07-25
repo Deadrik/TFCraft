@@ -35,6 +35,7 @@ public class PlayerInfo
 	public boolean[] knappingInterface;
 
 	public SkillStats tempSkills;
+	public ItemStack[] tempEquipment = new ItemStack[TFC_Core.getExtraEquipInventorySize()];
 
 	public PlayerInfo(String name, UUID uuid)
 	{

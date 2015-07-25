@@ -228,6 +228,13 @@ public class InventoryPlayerTFC extends InventoryPlayer {
 		aitemstack[par1] = par2ItemStack;
 	}
 
+	/*
+	 * This method is currently never being called properly.
+	 * The copying of the extraEquipment is being handled with 
+	 * com.bioxx.tfc.Core.Player.PlayerInfo.tempEquipment
+	 * com.bioxx.tfc.Core.Player.PlayerTracker.onPlayerRespawn(PlayerRespawnEvent)
+	 * and com.bioxx.tfc.Handlers.EntityLivingHandler.onEntityDeath(LivingDeathEvent)
+	 */
 	@Override
 	public void copyInventory(InventoryPlayer par1InventoryPlayer)
 	{

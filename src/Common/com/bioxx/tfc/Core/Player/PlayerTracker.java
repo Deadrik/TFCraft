@@ -65,6 +65,14 @@ public class PlayerTracker
 		if( pi.tempSkills != null)
 			TFC_Core.setSkillStats(event.player, pi.tempSkills);
 
+		// Load the item in the back slot if keepInventory was set to true.
+		if (pi.tempEquipment != null && event.player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory"))
+		{
+			InventoryPlayerTFC invPlayer = (InventoryPlayerTFC) event.player.inventory;
+			invPlayer.extraEquipInventory = pi.tempEquipment.clone();
+			pi.tempEquipment = null;
+		}
+
 		//Send a request to the server for the skills data.
 		AbstractPacket pkt = new PlayerUpdatePacket(event.player, 3);
 		TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) event.player);
