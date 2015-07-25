@@ -30,7 +30,7 @@ public class ContainerNestBox extends ContainerTFC
 		this.addSlotToContainer(new SlotOutputOnly(te, 2, 71, 43));
 		this.addSlotToContainer(new SlotOutputOnly(te, 3, 89, 43));
 
-		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90);
+		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90, false, true);
 	}
 
 	@Override
@@ -40,33 +40,39 @@ public class ContainerNestBox extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlotTFC(EntityPlayer player, int clickedIndex)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
-		ItemStack returnedStack = null;
-		Slot clickedSlot = (Slot)this.inventorySlots.get(clickedIndex);
+		ItemStack origStack = null;
+		Slot slot = (Slot)this.inventorySlots.get(slotNum);
 
-		if (clickedSlot != null && clickedSlot.getHasStack())
+		if (slot != null && slot.getHasStack())
 		{
-			ItemStack clickedStack = clickedSlot.getStack();
-			returnedStack = clickedStack.copy();
+			ItemStack slotStack = slot.getStack();
+			origStack = slotStack.copy();
 
-			if (clickedIndex < 4)
-				if (!this.mergeItemStack(clickedStack, 4, inventorySlots.size(), true))
+			if (slotNum < 4)
+			{
+				if (!this.mergeItemStack(slotStack, 4, inventorySlots.size(), true))
 					return null;
-			else if (clickedIndex >= 4 && clickedIndex < inventorySlots.size())
-				if (!this.mergeItemStack(clickedStack, 0, 4, false))
+			}
+			// Slots are output only, so there's no need to do input logic.
+			/*else 
+			{
+				if (!this.mergeItemStack(slotStack, 0, 4, false))
 					return null;
+			}*/
 
-			if (clickedStack.stackSize == 0)
-				clickedSlot.putStack((ItemStack)null);
+			if (slotStack.stackSize <= 0)
+				slot.putStack(null);
 			else
-				clickedSlot.onSlotChanged();
+				slot.onSlotChanged();
 
-			if (clickedStack.stackSize == returnedStack.stackSize)
+			if (slotStack.stackSize == origStack.stackSize)
 				return null;
 
-			clickedSlot.onPickupFromSlot(player, clickedStack);
+			slot.onPickupFromSlot(player, slotStack);
 		}
-		return returnedStack;
+
+		return origStack;
 	}
 }

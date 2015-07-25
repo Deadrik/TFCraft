@@ -101,30 +101,31 @@ public class ContainerSpecialCrafting extends ContainerTFC
 	 * @return 
 	 */
 	@Override
-	public ItemStack transferStackInSlotTFC(EntityPlayer player, int clickedIndex)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
-		ItemStack isTemp = null;
-		Slot grabbedSlot = (Slot)this.inventorySlots.get(clickedIndex);
+		ItemStack origStack = null;
+		Slot slot = (Slot)this.inventorySlots.get(slotNum);
 
-		if (grabbedSlot != null && grabbedSlot instanceof SlotSpecialCraftingOutput && grabbedSlot.getHasStack())
+		if (slot != null && slot instanceof SlotSpecialCraftingOutput && slot.getHasStack())
 		{
-			ItemStack isFromSlot = grabbedSlot.getStack();
-			isTemp = isFromSlot.copy();
+			ItemStack slotStack = slot.getStack();
+			origStack = slotStack.copy();
 
-			if (!this.mergeItemStack(isFromSlot, 1, 37, true))
+			if (slotNum < 1 && !this.mergeItemStack(slotStack, 1, inventorySlots.size(), true))
 				return null;
 
-			if (isFromSlot.stackSize == 0)
-				grabbedSlot.putStack((ItemStack)null);
+			if (slotStack.stackSize <= 0)
+				slot.putStack(null);
 			else
-				grabbedSlot.onSlotChanged();
+				slot.onSlotChanged();
 
-			if (isFromSlot.stackSize == isTemp.stackSize)
+			if (slotStack.stackSize == origStack.stackSize)
 				return null;
 
-			grabbedSlot.onPickupFromSlot(player, isFromSlot);
+			slot.onPickupFromSlot(player, slotStack);
 		}
-		return isTemp;
+
+		return origStack;
 	}
 
 	@Override

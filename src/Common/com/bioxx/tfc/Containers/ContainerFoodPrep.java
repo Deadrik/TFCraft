@@ -2,7 +2,6 @@ package com.bioxx.tfc.Containers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -15,7 +14,6 @@ import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class ContainerFoodPrep extends ContainerTFC
 {
@@ -93,41 +91,40 @@ public class ContainerFoodPrep extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlotTFC(EntityPlayer player, int clickedIndex)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
-		ItemStack returnedStack = null;
-		Slot clickedSlot = (Slot)this.inventorySlots.get(clickedIndex);
+		ItemStack origStack = null;
+		Slot slot = (Slot)this.inventorySlots.get(slotNum);
 
-		if (clickedSlot != null
-				&& clickedSlot.getHasStack()
-				&& (clickedSlot.getStack().getItem() instanceof IFood || clickedSlot.getStack().getItem() == Items.bowl))
+		if (slot != null && slot.getHasStack())
 		{
-			ItemStack clickedStack = clickedSlot.getStack();
-			returnedStack = clickedStack.copy();
+			ItemStack slotStack = slot.getStack();
+			origStack = slotStack.copy();
 
-			if (clickedIndex < 11)
+			// From food prep to inventory
+			if (slotNum < 10)
 			{
-				if (!this.mergeItemStack(clickedStack, 11, inventorySlots.size(), true))
+				if (!this.mergeItemStack(slotStack, 10, inventorySlots.size(), true))
 					return null;
 			}
-			else if (clickedIndex >= 11 && clickedIndex < inventorySlots.size())
-			{
-				//if (!this.mergeItemStack(clickedStack, 0, 11, false))
-				return null;
-			}
-			else if (!this.mergeItemStack(clickedStack, 11, inventorySlots.size(), false))
-				return null;
-
-			if (clickedStack.stackSize == 0)
-				clickedSlot.putStack((ItemStack)null);
+			// Slot exception lists already handle what should go where
 			else
-				clickedSlot.onSlotChanged();
+			{
+				if (!this.mergeItemStack(slotStack, 0, 10, false))
+					return null;
+			}
 
-			if (clickedStack.stackSize == returnedStack.stackSize)
+			if (slotStack.stackSize <= 0)
+				slot.putStack(null);
+			else
+				slot.onSlotChanged();
+
+			if (slotStack.stackSize == origStack.stackSize)
 				return null;
 
-			clickedSlot.onPickupFromSlot(player, clickedStack);
+			slot.onPickupFromSlot(player, slotStack);
 		}
-		return returnedStack;
+
+		return origStack;
 	}
 }

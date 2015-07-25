@@ -78,40 +78,56 @@ public class ContainerBarrel extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlotTFC(EntityPlayer entityplayer, int i)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
-		Slot slot = (Slot)inventorySlots.get(i);
-		if(slot != null && slot.getHasStack())
+		ItemStack origStack = null;
+		Slot slot = (Slot) inventorySlots.get(slotNum);
+
+		if (!barrel.getSealed() && slot != null && slot.getHasStack())
 		{
-			ItemStack itemstack1 = slot.getStack();
-			if(i == 0 && guiTab == 0 && !barrel.getSealed())
+			ItemStack slotStack = slot.getStack();
+			origStack = slotStack.copy();
+
+			// From liquid input slot to inventory
+			if (slotNum < 1 && guiTab == 0)
 			{
-				if(!this.mergeItemStack(itemstack1, 1, this.inventorySlots.size(), true))
+				if(!this.mergeItemStack(slotStack, 1, this.inventorySlots.size(), true))
 					return null;
 			}
-			else if(i < 12 && guiTab == 1)
+			// From solid storage slots to inventory
+			else if (slotNum < 12 && guiTab == 1)
 			{
-				if(!this.mergeItemStack(itemstack1, 12, this.inventorySlots.size(), true))
+				if(!this.mergeItemStack(slotStack, 12, this.inventorySlots.size(), true))
 					return null;
 			}
 			else
 			{
-				if (!barrel.getSealed() && guiTab == 1)
+				// To solid storage
+				if (guiTab == 1)
 				{
-					if(!this.mergeItemStack(itemstack1, 0, 12, false)){return null;}
+					if (!this.mergeItemStack(slotStack, 0, 12, false))
+						return null;
 				}
-				else if (!barrel.getSealed() && guiTab == 0)
+				// To liquid input slot
+				else if (guiTab == 0)
 				{
-					if(!this.mergeItemStack(itemstack1, 0, 1, false)){return null;}
+					if (!this.mergeItemStack(slotStack, 0, 1, false))
+						return null;
 				}
 			}
 
-			if(itemstack1.stackSize == 0)
+			if (slotStack.stackSize <= 0)
 				slot.putStack(null);
 			else
 				slot.onSlotChanged();
+
+			if (slotStack.stackSize == origStack.stackSize)
+				return null;
+
+			slot.onPickupFromSlot(player, slotStack);
 		}
-		return null;
+
+		return origStack;
 	}
 
 	//private int updatecounter = 0;

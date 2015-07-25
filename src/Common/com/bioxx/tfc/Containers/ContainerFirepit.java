@@ -58,51 +58,62 @@ public class ContainerFirepit extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlotTFC(EntityPlayer p, int i)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
-		Slot slot = (Slot)inventorySlots.get(i);
+		ItemStack origStack = null;
+		Slot slot = (Slot) inventorySlots.get(slotNum);
 		Slot slotinput = (Slot)inventorySlots.get(0);
-		//Slot[] slotoutput = {(Slot)inventorySlots.get(7), (Slot)inventorySlots.get(8)};
 		Slot[] slotfuel = {(Slot)inventorySlots.get(1), (Slot)inventorySlots.get(3), (Slot)inventorySlots.get(4), (Slot)inventorySlots.get(5)};
-		HeatRegistry manager = HeatRegistry.getInstance();
 
 		if(slot != null && slot.getHasStack())
 		{
-			ItemStack itemstack1 = slot.getStack();
-			if(i <= 10)
+			ItemStack slotStack = slot.getStack();
+			origStack = slotStack.copy();
+
+			// From firepit to inventory
+			if (slotNum < 11)
 			{
-				if(!this.mergeItemStack(itemstack1, 11, this.inventorySlots.size(), true))
+				if (!this.mergeItemStack(slotStack, 11, this.inventorySlots.size(), true))
 					return null;
 			}
 			else
 			{
-				if(itemstack1.getItem() == TFCItems.Logs || itemstack1.getItem() == Item.getItemFromBlock(TFCBlocks.Peat))
+				HeatRegistry manager = HeatRegistry.getInstance();
+
+				// Fuel to the fuel input slot
+				if (slotStack.getItem() == TFCItems.Logs || slotStack.getItem() == Item.getItemFromBlock(TFCBlocks.Peat))
 				{
 					if(slotfuel[0].getHasStack())
 						return null;
-					ItemStack stack = itemstack1.copy();
+					ItemStack stack = slotStack.copy();
 					stack.stackSize = 1;
 					slotfuel[0].putStack(stack);
-					itemstack1.stackSize--;
+					slotStack.stackSize--;
 				}
-				else if(!(itemstack1.getItem() instanceof ItemOre) && manager.findMatchingIndex(itemstack1) != null)
+				// No ores, but anything else with a heat index to the input slot
+				else if (!(slotStack.getItem() instanceof ItemOre) && manager.findMatchingIndex(slotStack) != null)
 				{
 					if(slotinput.getHasStack())
 						return null;
-					ItemStack stack = itemstack1.copy();
+					ItemStack stack = slotStack.copy();
 					stack.stackSize = 1;
 					slotinput.putStack(stack);
-					itemstack1.stackSize--;
+					slotStack.stackSize--;
 				}
 			}
 
-			if(itemstack1.stackSize <= 0)
+			if (slotStack.stackSize <= 0)
 				slot.putStack(null);
 			else
 				slot.onSlotChanged();
+
+			if (slotStack.stackSize == origStack.stackSize)
+				return null;
+
+			slot.onPickupFromSlot(player, slotStack);
 		}
-		detectAndSendChanges();
-		return null;
+
+		return origStack;
 	}
 
 	@Override

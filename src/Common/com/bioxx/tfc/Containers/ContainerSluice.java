@@ -41,25 +41,35 @@ public class ContainerSluice extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlotTFC(EntityPlayer player, int i)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
-		Slot slot = (Slot)inventorySlots.get(i);
-		//Slot slotpaper = (Slot)inventorySlots.get(1);
+		ItemStack origStack = null;
+		Slot slot = (Slot) inventorySlots.get(slotNum);
+
 		if(slot != null && slot.getHasStack())
 		{
-			ItemStack itemstack1 = slot.getStack();
-			if(i <= 8)
+			ItemStack slotStack = slot.getStack();
+			origStack = slotStack.copy();
+
+			// Slots are output only, so there's no need to do input logic.
+			if (slotNum < 9)
 			{
-				if(!this.mergeItemStack(itemstack1, 9, this.inventorySlots.size(), true))
+				if (!this.mergeItemStack(slotStack, 9, this.inventorySlots.size(), true))
 					return null;
 			}
 
-			if(itemstack1.stackSize == 0)
+			if (slotStack.stackSize <= 0)
 				slot.putStack(null);
 			else
 				slot.onSlotChanged();
+
+			if (slotStack.stackSize == origStack.stackSize)
+				return null;
+
+			slot.onPickupFromSlot(player, slotStack);
 		}
-		return null;
+
+		return origStack;
 	}
 
 	@Override

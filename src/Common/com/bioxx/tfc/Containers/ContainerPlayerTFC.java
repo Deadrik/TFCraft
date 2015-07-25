@@ -184,12 +184,9 @@ public class ContainerPlayerTFC extends ContainerPlayer
 				if (!this.mergeItemStack(slotStack, 9, 36, false))
 					return null;
 			}
-			// Anything else
-			else if (!this.mergeItemStack(slotStack, 9, 45, false))
-				return null;
 
-			if (slotStack.stackSize == 0)
-				slot.putStack((ItemStack)null);
+			if (slotStack.stackSize <= 0)
+				slot.putStack(null);
 			else
 				slot.onSlotChanged();
 
@@ -215,7 +212,7 @@ public class ContainerPlayerTFC extends ContainerPlayer
 			{
 				CraftingHandler.preCraft(p, slotStack, craftMatrix);
 			}
-			// Don't know what this is
+			// S and D hotkeys for trimming/combining food
 			else if (clickType == 7 && sourceSlotID >= 9 && sourceSlotID < 45)
 			{
 				if (sourceSlot != null && sourceSlot.canTakeStack(p))

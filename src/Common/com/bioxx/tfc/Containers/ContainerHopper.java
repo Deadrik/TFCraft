@@ -16,7 +16,6 @@ public class ContainerHopper extends ContainerTFC
 	{
 		this.hopperInv = inv;
 		inv.openInventory();
-		byte b0 = 51;
 		int i;
 
 		for (i = 0; i < inv.getSizeInventory(); ++i)
@@ -28,28 +27,39 @@ public class ContainerHopper extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlotTFC(EntityPlayer entityplayer, int i)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
-		Slot slot = (Slot)inventorySlots.get(i);
+		ItemStack origStack = null;
+		Slot slot = (Slot)inventorySlots.get(slotNum);
+
 		if(slot != null && slot.getHasStack())
 		{
-			ItemStack itemstack1 = slot.getStack();
-			if(i < 5)
+			ItemStack slotStack = slot.getStack();
+			origStack = slotStack.copy();
+
+			if(slotNum < 5)
 			{
-				if(!this.mergeItemStack(itemstack1, 5, this.inventorySlots.size(), true))
+				if(!this.mergeItemStack(slotStack, 5, this.inventorySlots.size(), true))
 					return null;
 			}
 			else
 			{
-				if(!this.mergeItemStack(itemstack1, 0, 5, false)){return null;}
+				if (!this.mergeItemStack(slotStack, 0, 5, false))
+					return null;
 			}
 
-			if(itemstack1.stackSize == 0)
+			if (slotStack.stackSize <= 0)
 				slot.putStack(null);
 			else
 				slot.onSlotChanged();
+
+			if (slotStack.stackSize == origStack.stackSize)
+				return null;
+
+			slot.onPickupFromSlot(player, slotStack);
 		}
-		return null;
+
+		return origStack;
 	}
 
 	@Override

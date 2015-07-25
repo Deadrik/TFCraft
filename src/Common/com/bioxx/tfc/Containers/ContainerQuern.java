@@ -12,8 +12,6 @@ import com.bioxx.tfc.Containers.Slots.SlotQuern;
 import com.bioxx.tfc.Containers.Slots.SlotQuernGrain;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEQuern;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.Crafting.QuernManager;
 
 public class ContainerQuern extends ContainerTFC
 {
@@ -69,50 +67,38 @@ public class ContainerQuern extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlotTFC(EntityPlayer player, int clickedIndex)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
-		ItemStack returnedStack = null;
-		Slot clickedSlot = (Slot)this.inventorySlots.get(clickedIndex);
+		ItemStack origStack = null;
+		Slot slot = (Slot)this.inventorySlots.get(slotNum);
 
-		if (clickedSlot != null && clickedSlot.getHasStack())
+		if (slot != null && slot.getHasStack())
 		{
-			ItemStack clickedStack = clickedSlot.getStack();
-			returnedStack = clickedStack.copy();
+			ItemStack slotStack = slot.getStack();
+			origStack = slotStack.copy();
 
-			if (clickedIndex < 3)
+			if (slotNum < 3)
 			{
-				if (!this.mergeItemStack(clickedStack, 3, inventorySlots.size(), true))
+				if (!this.mergeItemStack(slotStack, 3, inventorySlots.size(), true))
 					return null;
 			}
-			else if (clickedIndex >= 3
-					&& clickedIndex < inventorySlots.size()
-					&& QuernManager.getInstance().isValidItem(clickedStack))
-			{
-				if (!this.mergeItemStack(clickedStack, 0, 1, false))
-					return null;
-			}
-			else if (clickedIndex >= 3
-					&& clickedIndex < inventorySlots.size()
-					&& clickedStack.getItem() == TFCItems.Quern)
-			{
-				if (!this.mergeItemStack(clickedStack, 2, 3, false))
-					return null;
-			}
-			else if (clickedIndex >= 3 && clickedIndex < inventorySlots.size())
-			{
-				return null;
-			}
-
-			if (clickedStack.stackSize == 0)
-				clickedSlot.putStack((ItemStack)null);
 			else
-				clickedSlot.onSlotChanged();
+			{
+				if (!this.mergeItemStack(slotStack, 0, 3, false))
+					return null;
+			}
 
-			if (clickedStack.stackSize == returnedStack.stackSize)
+			if (slotStack.stackSize <= 0)
+				slot.putStack(null);
+			else
+				slot.onSlotChanged();
+
+			if (slotStack.stackSize == origStack.stackSize)
 				return null;
 
-			clickedSlot.onPickupFromSlot(player, clickedStack);
+			slot.onPickupFromSlot(player, slotStack);
 		}
-		return returnedStack;
+
+		return origStack;
 	}
 }

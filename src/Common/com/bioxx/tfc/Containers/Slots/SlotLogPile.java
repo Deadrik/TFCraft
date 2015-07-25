@@ -1,11 +1,11 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.api.TFCItems;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.api.TFCItems;
 
 public class SlotLogPile extends Slot
 {
@@ -20,5 +20,11 @@ public class SlotLogPile extends Slot
 		if(itemstack.getItem() == TFCItems.Logs)
 			return true;
 		return false;
+	}
+
+	@Override
+	public int getSlotStackLimit()
+	{
+		return 4;
 	}
 }

@@ -83,29 +83,40 @@ public class ContainerChestTFC extends ContainerTFC
 	@Override
 	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
-		ItemStack var2 = null;
+		ItemStack origStack = null;
 		Slot slot = (Slot)this.inventorySlots.get(slotNum);
 
 		if (slot != null && slot.getHasStack())
 		{
-			ItemStack var4 = slot.getStack();
-			var2 = var4.copy();
+			ItemStack slotStack = slot.getStack();
+			origStack = slotStack.copy();
+			int chestSlotCount = this.numRows * 9;
 
-			if (slotNum < this.numRows * 9)//First try to merge into the player's inventory
+			// From chest to inventory
+			if (slotNum < chestSlotCount)
 			{
-				if (!this.mergeItemStack(var4, this.numRows * 9, this.inventorySlots.size(), true))
+				if (!this.mergeItemStack(slotStack, chestSlotCount, this.inventorySlots.size(), true))
 					return null;
 			}
-			else if (!this.mergeItemStack(var4, 0, this.numRows * 9, false))//Merge into chest if possible
-				return null;
+			// From inventory to chest
+			else
+			{
+				if (!this.mergeItemStack(slotStack, 0, chestSlotCount, false))
+					return null;
+			}
 
-			if (var4.stackSize == 0)
-				slot.putStack((ItemStack)null);
+			if (slotStack.stackSize <= 0)
+				slot.putStack(null);
 			else
 				slot.onSlotChanged();
+
+			if (slotStack.stackSize == origStack.stackSize)
+				return null;
+
+			slot.onPickupFromSlot(player, slotStack);
 		}
 
-		return var2;
+		return origStack;
 	}
 
 	/**

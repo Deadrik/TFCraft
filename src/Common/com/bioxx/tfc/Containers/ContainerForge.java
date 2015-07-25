@@ -11,7 +11,6 @@ import com.bioxx.tfc.Containers.Slots.SlotForge;
 import com.bioxx.tfc.Containers.Slots.SlotForgeFuel;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEForge;
-import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFCItems;
 
 public class ContainerForge extends ContainerTFC
@@ -57,33 +56,34 @@ public class ContainerForge extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlotTFC(EntityPlayer entityplayer, int slotNum)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
 		ItemStack origStack = null;
 		Slot slot = (Slot)inventorySlots.get(slotNum);
-		Slot[] slotinput = {(Slot)inventorySlots.get(2), (Slot)inventorySlots.get(1), (Slot)inventorySlots.get(3), (Slot)inventorySlots.get(0), (Slot)inventorySlots.get(4)};
-		Slot[] slotstorage = {(Slot)inventorySlots.get(10), (Slot)inventorySlots.get(11), (Slot)inventorySlots.get(12), (Slot)inventorySlots.get(13)};
-		Slot[] slotfuel = {(Slot)inventorySlots.get(7), (Slot)inventorySlots.get(6), (Slot)inventorySlots.get(8), (Slot)inventorySlots.get(5), (Slot)inventorySlots.get(9)};
-		HeatRegistry manager = HeatRegistry.getInstance();
+		Slot[] slotfuel =
+		{ (Slot) inventorySlots.get(7), (Slot) inventorySlots.get(6), (Slot) inventorySlots.get(8), (Slot) inventorySlots.get(5), (Slot) inventorySlots.get(9) };
 
 		if(slot != null && slot.getHasStack())
 		{
 			ItemStack slotStack = slot.getStack();
 			origStack = slotStack.copy();
 
-			if(slotNum <= 13)//If the player shift clicked one of the forge slots
+			// From forge to inventory
+			if (slotNum < 14)
 			{
-				if(!this.mergeItemStack(slotStack, 14, this.inventorySlots.size(), true))
+				if (!this.mergeItemStack(slotStack, 14, this.inventorySlots.size(), true))
 					return null;
 			}
-			else //Otherwise the shift clicked an item in their inventory and are trying to put it in the forge.
+			// From Inventory to forge
+			else
 			{
+				// Fill the fuel slots, and put the remaining stack in storage
 				if(slotStack.getItem() == TFCItems.Coal)
 				{
 					int j = 0;
-					while(j < 5)
+					while (j < 5)
 					{
-						if(slotfuel[j].getHasStack())
+						if (slotfuel[j].getHasStack())
 						{
 							j++;
 						}
@@ -97,87 +97,15 @@ public class ContainerForge extends ContainerTFC
 							break;
 						}
 					}
-					if (j > 0)
-					{
-						j = 0;
-						while(j < 4)
-						{
-							if(slotstorage[j].getHasStack())
-							{
-								j++;
-							}
-							else
-							{
-								ItemStack stack = slotStack.copy();
-								stack.stackSize = 1;
-								slotstorage[j].putStack(stack);
-								slotStack.stackSize--;
-								break;
-							}
-						}
-					}
+					if (j > 0 && !this.mergeItemStack(slotStack, 10, 14, false))
+						return null;
 				}
-				else if (slotinput[0].isItemValid(slotStack))//Try to add the item to the input slots
-				{
-					int j = 0;
-					while(j < 5)
-					{
-						if(slotinput[j].getHasStack())
-						{
-							j++;
-						}
-						else if(slotStack != null)
-						{
-							ItemStack stack = slotStack.copy();
-							stack.stackSize = 1;
-							slotinput[j].putStack(stack);
-							slotStack.stackSize--;
-							j = -1;
-							break;
-						}
-					}
-					if (j > 0)
-					{
-						j = 0;
-						while(j < 4)
-						{
-							if(slotstorage[j].getHasStack())
-							{
-								j++;
-							}
-							else
-							{
-								ItemStack stack = slotStack.copy();
-								stack.stackSize = 1;
-								slotstorage[j].putStack(stack);
-								slotStack.stackSize--;
-								break;
-							}
-						}
-					}
-				}
-				else//Try to store the item in the side storage slots.
-				{
-					int j = 0;
-					while(j < 4)
-					{
-						if(slotstorage[j].getHasStack())
-						{
-							j++;
-						}
-						else
-						{
-							ItemStack stack = slotStack.copy();
-							stack.stackSize = 1;
-							slotstorage[j].putStack(stack);
-							slotStack.stackSize--;
-							break;
-						}
-					}
-				}
+				// First try input slots, then storage
+				else if (!this.mergeItemStack(slotStack, 0, 5, false) && !this.mergeItemStack(slotStack, 10, 14, false))
+					return null;
 			}
 
-			if(slotStack.stackSize <= 0)
+			if (slotStack.stackSize <= 0)
 				slot.putStack(null);
 			else
 				slot.onSlotChanged();
@@ -187,6 +115,7 @@ public class ContainerForge extends ContainerTFC
 
 			slot.onPickupFromSlot(player, slotStack);
 		}
+
 		return origStack;
 	}
 

@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
 import com.bioxx.tfc.Containers.Slots.SlotSizeSmallVessel;
-import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
@@ -30,30 +30,11 @@ public class ContainerVessel extends ContainerTFC
 		this.player = playerinv.player;
 		this.world = world;
 		bagsSlotNum = player.inventory.currentItem;
-		player.inventory.getCurrentItem();
 		exceptions = new ArrayList<Item>();
-		exceptions.add(TFCItems.BismuthIngot);
-		exceptions.add(TFCItems.BismuthBronzeIngot);
-		exceptions.add(TFCItems.BlackBronzeIngot);
-		exceptions.add(TFCItems.BlackSteelIngot);
-		exceptions.add(TFCItems.BlueSteelIngot);
-		exceptions.add(TFCItems.BrassIngot);
-		exceptions.add(TFCItems.BronzeIngot);
-		exceptions.add(TFCItems.CopperIngot);
-		exceptions.add(TFCItems.GoldIngot);
-		exceptions.add(TFCItems.WroughtIronIngot);
-		exceptions.add(TFCItems.LeadIngot);
-		exceptions.add(TFCItems.NickelIngot);
-		exceptions.add(TFCItems.PigIronIngot);
-		exceptions.add(TFCItems.PlatinumIngot);
-		exceptions.add(TFCItems.RedSteelIngot);
-		exceptions.add(TFCItems.RoseGoldIngot);
-		exceptions.add(TFCItems.SilverIngot);
-		exceptions.add(TFCItems.SteelIngot);
-		exceptions.add(TFCItems.BismuthIngot);
-		exceptions.add(TFCItems.SterlingSilverIngot);
-		exceptions.add(TFCItems.TinIngot);
-		exceptions.add(TFCItems.ZincIngot);
+		for (Item ingot : TEIngotPile.getIngots())
+		{
+			exceptions.add(ingot);
+		}
 		layoutContainer(playerinv, 0, 0);
 
 		if(!world.isRemote)
@@ -184,36 +165,37 @@ public class ContainerVessel extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlotTFC(EntityPlayer player, int clickedIndex)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
-		ItemStack returnedStack = null;
-		Slot clickedSlot = (Slot)this.inventorySlots.get(clickedIndex);
+		ItemStack origStack = null;
+		Slot slot = (Slot)this.inventorySlots.get(slotNum);
 
-		if (clickedSlot != null && clickedSlot.getHasStack())
+		if (slot != null && slot.getHasStack())
 		{
-			ItemStack clickedStack = clickedSlot.getStack();
-			returnedStack = clickedStack.copy();
+			ItemStack slotStack = slot.getStack();
+			origStack = slotStack.copy();
 
-			if (clickedIndex < 4) {
-				if (!this.mergeItemStack(clickedStack, 4, inventorySlots.size(), true))
+			if (slotNum < 4) {
+				if (!this.mergeItemStack(slotStack, 4, inventorySlots.size(), true))
 					return null;
 			}
-			else if (clickedIndex >= 4 && clickedIndex < inventorySlots.size()) {
-				if (!this.mergeItemStack(clickedStack, 0, 4, false))
+			else 
+			{
+				if (!this.mergeItemStack(slotStack, 0, 4, false))
 					return null;
 			}
 
-			if (clickedStack.stackSize == 0)
-				clickedSlot.putStack((ItemStack)null);
+			if (slotStack.stackSize <= 0)
+				slot.putStack(null);
 			else
-				clickedSlot.onSlotChanged();
+				slot.onSlotChanged();
 
-			if (clickedStack.stackSize == returnedStack.stackSize)
+			if (slotStack.stackSize == origStack.stackSize)
 				return null;
 
-			clickedSlot.onPickupFromSlot(player, clickedStack);
+			slot.onPickupFromSlot(player, slotStack);
 		}
-		detectAndSendChanges();
-		return returnedStack;
+
+		return origStack;
 	}
 }

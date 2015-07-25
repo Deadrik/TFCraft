@@ -138,37 +138,38 @@ public class ContainerQuiver extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlotTFC(EntityPlayer player, int clickedIndex)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
-		ItemStack returnedStack = null;
-		Slot clickedSlot = (Slot)this.inventorySlots.get(clickedIndex);
+		ItemStack origStack = null;
+		Slot slot = (Slot)this.inventorySlots.get(slotNum);
 
-		if (clickedSlot != null && clickedSlot.getHasStack())
+		if (slot != null && slot.getHasStack())
 		{
-			ItemStack clickedStack = clickedSlot.getStack();
-			returnedStack = clickedStack.copy();
+			ItemStack slotStack = slot.getStack();
+			origStack = slotStack.copy();
 
-			if (clickedIndex < 8)
+			if (slotNum < 8)
 			{
-				if (!this.mergeItemStack(clickedStack, 8, inventorySlots.size(), true))
+				if (!this.mergeItemStack(slotStack, 8, inventorySlots.size(), true))
 					return null;
 			}
-			else if (clickedIndex >= 8 && clickedIndex < inventorySlots.size())
-			{
-				if (!this.mergeItemStack(clickedStack, 0, 8, false))
-					return null;
-			}
-
-			if (clickedStack.stackSize == 0)
-				clickedSlot.putStack((ItemStack)null);
 			else
-				clickedSlot.onSlotChanged();
+			{
+				if (!this.mergeItemStack(slotStack, 0, 8, false))
+					return null;
+			}
 
-			if (clickedStack.stackSize == returnedStack.stackSize)
+			if (slotStack.stackSize <= 0)
+				slot.putStack(null);
+			else
+				slot.onSlotChanged();
+
+			if (slotStack.stackSize == origStack.stackSize)
 				return null;
 
-			clickedSlot.onPickupFromSlot(player, clickedStack);
+			slot.onPickupFromSlot(player, slotStack);
 		}
-		return returnedStack;
+
+		return origStack;
 	}
 }

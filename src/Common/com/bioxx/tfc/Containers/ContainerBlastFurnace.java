@@ -1,16 +1,16 @@
 package com.bioxx.tfc.Containers;
 
-import com.bioxx.tfc.Containers.Slots.SlotTuyere;
-import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.Items.ItemTuyere;
-import com.bioxx.tfc.TileEntities.TEBlastFurnace;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Containers.Slots.SlotTuyere;
+import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.Items.ItemTuyere;
+import com.bioxx.tfc.TileEntities.TEBlastFurnace;
 
 public class ContainerBlastFurnace extends ContainerTFC
 {
@@ -40,38 +40,48 @@ public class ContainerBlastFurnace extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlotTFC(EntityPlayer entityplayer, int i)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
-		Slot slot = (Slot)inventorySlots.get(i);
-		Slot slot1 = (Slot)inventorySlots.get(0);
+		ItemStack origStack = null;
+		Slot slot = (Slot) inventorySlots.get(slotNum);
+		Slot slotTuyere = (Slot)inventorySlots.get(0);
+
 		if(slot != null && slot.getHasStack())
 		{
-			ItemStack itemstack1 = slot.getStack();
-			if(i <= 0)
+			ItemStack slotStack = slot.getStack();
+			origStack = slotStack.copy();
+
+			// From tuyere slot to inventory
+			if (slotNum < 1)
 			{
-				if(!entityplayer.inventory.addItemStackToInventory(itemstack1.copy()))
+				if (!this.mergeItemStack(slotStack, 1, this.inventorySlots.size(), true))
 					return null;
-				slot.putStack(null);
 			}
 			else
 			{
-				if(itemstack1.getItem() instanceof ItemTuyere)
+				if (slotStack.getItem() instanceof ItemTuyere)
 				{
-					if(slot1.getHasStack())
+					if(slotTuyere.getHasStack())
 						return null;
-					ItemStack stack = itemstack1.copy();
+					ItemStack stack = slotStack.copy();
 					stack.stackSize = 1;
-					slot1.putStack(stack);
-					itemstack1.stackSize--;
+					slotTuyere.putStack(stack);
+					slotStack.stackSize--;
 				}
 			}
 
-			if(itemstack1.stackSize == 0)
+			if (slotStack.stackSize <= 0)
 				slot.putStack(null);
 			else
 				slot.onSlotChanged();
+
+			if (slotStack.stackSize == origStack.stackSize)
+				return null;
+
+			slot.onPickupFromSlot(player, slotStack);
 		}
-		return null;
+
+		return origStack;
 	}
 
 	private int updatecounter = 0;

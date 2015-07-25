@@ -208,45 +208,45 @@ public class ContainerLiquidVessel extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlotTFC(EntityPlayer player, int clickedIndex)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
-		ItemStack returnedStack = null;
-		Slot clickedSlot = (Slot)this.inventorySlots.get(clickedIndex);
-		Slot slot1 = (Slot)inventorySlots.get(0);
+		ItemStack origStack = null;
+		Slot slot = (Slot)this.inventorySlots.get(slotNum);
+		Slot outputSlot = (Slot)inventorySlots.get(0);
 
-		if (clickedSlot != null && clickedSlot.getHasStack())
+		if (slot != null && slot.getHasStack())
 		{
-			ItemStack clickedStack = clickedSlot.getStack();
-			returnedStack = clickedStack.copy();
+			ItemStack slotStack = slot.getStack();
+			origStack = slotStack.copy();
 
-			if (clickedIndex == 0)
+			// From vessel to inventory
+			if (slotNum < 1)
 			{
-				if (!this.mergeItemStack(clickedStack, 1, inventorySlots.size(), true))
+				if (!this.mergeItemStack(slotStack, 1, inventorySlots.size(), true))
 					return null;
 			}
-			else if (clickedIndex > 0 && clickedIndex < inventorySlots.size() &&
-					((clickedStack.getItem() == TFCItems.CeramicMold && clickedStack.getItemDamage() == 1) ||
-					(clickedStack.getItem() instanceof ItemMeltedMetal && clickedStack.getItemDamage() > 1) ||
-					(clickedStack.getItem() instanceof ItemPotteryMold && clickedStack.getItemDamage() > 0)))
+			else if (!outputSlot.getHasStack() &&
+					((slotStack.getItem() == TFCItems.CeramicMold && slotStack.getItemDamage() == 1) ||
+					(slotStack.getItem() instanceof ItemMeltedMetal && slotStack.getItemDamage() > 1) ||
+					(slotStack.getItem() instanceof ItemPotteryMold && slotStack.getItemDamage() > 0)))
 			{
-				if(slot1.getHasStack())
-					return null;
-				ItemStack stack = clickedStack.copy();
+				ItemStack stack = slotStack.copy();
 				stack.stackSize = 1;
-				slot1.putStack(stack);
-				clickedStack.stackSize--;
+				outputSlot.putStack(stack);
+				slotStack.stackSize--;
 			}
 
-			if (clickedStack.stackSize == 0)
-				clickedSlot.putStack((ItemStack)null);
+			if (slotStack.stackSize <= 0)
+				slot.putStack(null);
 			else
-				clickedSlot.onSlotChanged();
+				slot.onSlotChanged();
 
-			if (clickedStack.stackSize == returnedStack.stackSize)
+			if (slotStack.stackSize == origStack.stackSize)
 				return null;
 
-			clickedSlot.onPickupFromSlot(player, clickedStack);
+			slot.onPickupFromSlot(player, slotStack);
 		}
-		return returnedStack;
+
+		return origStack;
 	}
 }

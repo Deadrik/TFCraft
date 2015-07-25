@@ -17,7 +17,6 @@ import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
-import com.bioxx.tfc.Items.Pottery.ItemPotteryMold;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
@@ -167,56 +166,39 @@ public class ContainerMold extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlotTFC(EntityPlayer entityplayer, int clickedSlot)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
-		Slot slot = (Slot)inventorySlots.get(clickedSlot);
-		Slot slot1 = (Slot)inventorySlots.get(0);
-		Slot slot2 = (Slot)inventorySlots.get(1);
-		//Slot slot3 = (Slot)inventorySlots.get(2);
+		ItemStack origStack = null;
+		Slot slot = (Slot)inventorySlots.get(slotNum);
 
 		if(slot != null && slot.getHasStack())
 		{
-			ItemStack itemstack1 = slot.getStack();
-			if(clickedSlot <= 2)
+			ItemStack slotStack = slot.getStack();
+			origStack = slotStack.copy();
+
+			// To inventory
+			if (slotNum < 3)
 			{
-				if(!entityplayer.inventory.addItemStackToInventory(itemstack1.copy()))
+				if (!this.mergeItemStack(slotStack, 3, inventorySlots.size(), true))
 					return null;
-				slot.putStack(null);
 			}
 			else
 			{
-				if(itemstack1.getItem() instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(itemstack1))
-				{
-					ItemStack stack = itemstack1.copy();
-					stack.stackSize = 1;
-					if (!slot1.getHasStack())
-					{
-						slot1.putStack(stack);
-						itemstack1.stackSize--;
-					}
-					else if (!slot2.getHasStack())
-					{
-						slot2.putStack(stack);
-						itemstack1.stackSize--;
-					}
-				}
-				else if ((itemstack1.getItem() instanceof ItemPotteryMold || itemstack1.getItem() == TFCItems.CeramicMold) && itemstack1.getItemDamage() == 1)
-				{
-					if (!slot2.getHasStack())
-					{
-						ItemStack stack = itemstack1.copy();
-						stack.stackSize = 1;
-						slot2.putStack(stack);
-						itemstack1.stackSize--;
-					}
-				}
+				if (!this.mergeItemStack(slotStack, 0, 3, false))
+					return null;
 			}
 
-			if(itemstack1.stackSize == 0)
+			if (slotStack.stackSize <= 0)
 				slot.putStack(null);
 			else
 				slot.onSlotChanged();
+
+			if (slotStack.stackSize == origStack.stackSize)
+				return null;
+
+			slot.onPickupFromSlot(player, slotStack);
 		}
-		return null;
+
+		return origStack;
 	}
 }

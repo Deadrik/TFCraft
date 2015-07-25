@@ -50,53 +50,55 @@ public class ContainerHorseInventoryTFC extends ContainerTFC
 	 * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
 	 */
 	@Override
-	public ItemStack transferStackInSlotTFC(EntityPlayer player, int i)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
-		ItemStack itemstack = null;
-		Slot slot = (Slot)this.inventorySlots.get(i);
+		ItemStack origStack = null;
+		Slot slot = (Slot)this.inventorySlots.get(slotNum);
 
 		if (slot != null && slot.getHasStack())
 		{
-			ItemStack itemstack1 = slot.getStack();
-			itemstack = itemstack1.copy();
+			ItemStack slotStack = slot.getStack();
+			origStack = slotStack.copy();
+			int inventorySize = this.horseInv.getSizeInventory();
 
-			if (i < this.horseInv.getSizeInventory())
+			if (slotNum < inventorySize)
 			{
-				if (!this.mergeItemStack(itemstack1, this.horseInv.getSizeInventory(), this.inventorySlots.size(), true))
+				if (!this.mergeItemStack(slotStack, inventorySize, this.inventorySlots.size(), true))
 				{
 					return null;
 				}
 			}
-			else if (this.getSlot(1).isItemValid(itemstack1) && !this.getSlot(1).getHasStack())
+			else if (this.getSlot(1).isItemValid(slotStack) && !this.getSlot(1).getHasStack())
 			{
-				if (!this.mergeItemStack(itemstack1, 1, 2, false))
+				if (!this.mergeItemStack(slotStack, 1, 2, false))
 				{
 					return null;
 				}
 			}
-			else if (this.getSlot(0).isItemValid(itemstack1))
+			else if (this.getSlot(0).isItemValid(slotStack))
 			{
-				if (!this.mergeItemStack(itemstack1, 0, 1, false))
+				if (!this.mergeItemStack(slotStack, 0, 1, false))
 				{
 					return null;
 				}
 			}
-			else if (this.horseInv.getSizeInventory() <= 2 || !this.mergeItemStack(itemstack1, 2, this.horseInv.getSizeInventory(), false))
+			else if (inventorySize <= 2 || !this.mergeItemStack(slotStack, 2, inventorySize, false))
 			{
 				return null;
 			}
 
-			if (itemstack1.stackSize == 0)
-			{
-				slot.putStack((ItemStack)null);
-			}
+			if (slotStack.stackSize <= 0)
+				slot.putStack(null);
 			else
-			{
 				slot.onSlotChanged();
-			}
+
+			if (slotStack.stackSize == origStack.stackSize)
+				return null;
+
+			slot.onPickupFromSlot(player, slotStack);
 		}
 
-		return itemstack;
+		return origStack;
 	}
 
 	/**

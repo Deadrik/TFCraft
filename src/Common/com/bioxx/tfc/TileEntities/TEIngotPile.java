@@ -21,7 +21,12 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage;
 	public String type;
-	public static Item[] INGOTS;
+	public static Item[] INGOTS = new Item[]{(TFCItems.BismuthIngot),(TFCItems.BismuthBronzeIngot),(TFCItems.BlackBronzeIngot),
+		(TFCItems.BlackSteelIngot),(TFCItems.BlueSteelIngot),(TFCItems.BrassIngot),(TFCItems.BronzeIngot),
+		(TFCItems.CopperIngot),(TFCItems.GoldIngot),(TFCItems.WroughtIronIngot),(TFCItems.LeadIngot),
+		(TFCItems.NickelIngot),(TFCItems.PigIronIngot),(TFCItems.PlatinumIngot),(TFCItems.RedSteelIngot),
+		(TFCItems.RoseGoldIngot),(TFCItems.SilverIngot),(TFCItems.SteelIngot),(TFCItems.SterlingSilverIngot),
+		(TFCItems.TinIngot),(TFCItems.ZincIngot), TFCItems.UnknownIngot};
 
 	@Override
 	public boolean canUpdate()
@@ -33,12 +38,6 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 	{
 		storage = new ItemStack[1];
 		type = "Copper";
-		INGOTS = new Item[]{(TFCItems.BismuthIngot),(TFCItems.BismuthBronzeIngot),(TFCItems.BlackBronzeIngot),
-				(TFCItems.BlackSteelIngot),(TFCItems.BlueSteelIngot),(TFCItems.BrassIngot),(TFCItems.BronzeIngot),
-				(TFCItems.CopperIngot),(TFCItems.GoldIngot),(TFCItems.WroughtIronIngot),(TFCItems.LeadIngot),
-				(TFCItems.NickelIngot),(TFCItems.PigIronIngot),(TFCItems.PlatinumIngot),(TFCItems.RedSteelIngot),
-				(TFCItems.RoseGoldIngot),(TFCItems.SilverIngot),(TFCItems.SteelIngot),(TFCItems.SterlingSilverIngot),
-				(TFCItems.TinIngot),(TFCItems.ZincIngot), TFCItems.UnknownIngot};
 	}
 	public static Item[] getIngots()
 	{
