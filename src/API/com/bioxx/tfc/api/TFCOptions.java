@@ -41,6 +41,8 @@ public class TFCOptions
 	public static float tempDecreaseMultiplier = 1.0f;
 	public static float animalTimeMultiplier = 1.0f;
 
+	public static float animalsSpawnMultiplier = 1.0f;
+
 	public static int maxProtectionMonths;
 	public static int protectionGain;
 	public static int protectionBuffer;

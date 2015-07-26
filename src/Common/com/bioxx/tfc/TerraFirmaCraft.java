@@ -92,6 +92,7 @@ public class TerraFirmaCraft
 	private static final String FOOD_DECAY_HEADER = "Food Decay";
 	private static final String CAVEIN_OPTIONS_HEADER = "Cavein Options";
 	private static final String WORLD_GEN_HEADER = "World Generation";
+	private static final String WORLD_SPAWN_HEADER = "Spawn";
 	private static final String COLOR_NUTRIENT_A_HEADER = "ColorNutrientA";
 	private static final String COLOR_NUTRIENT_B_HEADER = "ColorNutrientB";
 	private static final String COLOR_NUTRIENT_C_HEADER = "ColorNutrientC";
@@ -402,6 +403,8 @@ public class TerraFirmaCraft
 		TFCOptions.anvilRuleColor2[0] = (byte) TFCOptions.getIntFor(config, ANVIL_RULE_COLOR2_HEADER, "Red", 247);
 		TFCOptions.anvilRuleColor2[1] = (byte) TFCOptions.getIntFor(config, ANVIL_RULE_COLOR2_HEADER, "Green", 148);
 		TFCOptions.anvilRuleColor2[2] = (byte) TFCOptions.getIntFor(config, ANVIL_RULE_COLOR2_HEADER, "Blue", 49);
+
+		TFCOptions.animalsSpawnMultiplier = (float) TFCOptions.getDoubleFor(config, WORLD_SPAWN_HEADER, "animalsSpawnMultiplier", 1.0, "This is a global multiplier for the chance of animals spawn.");
 
 		//Crops
 		TFCOptions.enableCropsDie = TFCOptions.getBooleanFor(config, CROPS_HEADER, "enableCropsDie", false, "Whether or not crops will die of old age.");

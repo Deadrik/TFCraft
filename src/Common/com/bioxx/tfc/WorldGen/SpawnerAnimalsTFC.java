@@ -16,6 +16,7 @@ import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityFishTFC;
+import com.bioxx.tfc.api.TFCOptions;
 
 public final class SpawnerAnimalsTFC
 {
@@ -53,7 +54,7 @@ public final class SpawnerAnimalsTFC
 		List list = TFCChunkProviderGenerate.getCreatureSpawnsByChunk(world, biome, par2, par3);//par1BiomeGenBase.getSpawnableList(EnumCreatureType.creature);
 		if (!list.isEmpty())
 		{
-			while (par6Random.nextFloat() < biome.getSpawningChance())
+			while (par6Random.nextFloat() < biome.getSpawningChance() * TFCOptions.animalsSpawnMultiplier)
 			{
 				SpawnListEntry spawnlistentry = (SpawnListEntry)WeightedRandom.getRandomItem(world.rand, list);
 				IEntityLivingData entitylivingdata = null;
