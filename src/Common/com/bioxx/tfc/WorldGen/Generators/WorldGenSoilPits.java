@@ -108,12 +108,12 @@ public class WorldGenSoilPits implements IWorldGenerator
 							DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt(xCoord, zCoord, 0);
 							if (block == TFCBlocks.Dirt || block == TFCBlocks.Dirt2)
 							{
-								world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForClay(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
+								world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForClay(block), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
 								flag = true;
 							}
 							else if(block == TFCBlocks.Grass || block == TFCBlocks.Grass2)
 							{
-								world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForClayGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
+								world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForClayGrass(block), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
 								flag = true;
 							}
 						}

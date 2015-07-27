@@ -548,6 +548,11 @@ public class TFC_Core
 				|| isSand(block);
 	}
 
+	public static boolean isGroundType1(Block block)
+	{
+		return isGrassType1(block) || block == TFCBlocks.Dirt || block == TFCBlocks.Gravel || block == TFCBlocks.Sand;
+	}
+
 	public static boolean isSoilWAILA(Block block)
 	{
 		return isDirt(block) || isGravel(block) || isSand(block) || isGrassNormal(block) || isDryGrass(block);
@@ -650,6 +655,13 @@ public class TFC_Core
 		return TFCBlocks.ClayGrass2;
 	}
 
+	public static Block getTypeForClayGrass(Block block)
+	{
+		if (TFC_Core.isGroundType1(block))
+			return TFCBlocks.ClayGrass;
+		return TFCBlocks.ClayGrass2;
+	}
+
 	public static Block getTypeForDirt(int inMeta)
 	{
 		if(inMeta < 16)
@@ -669,6 +681,13 @@ public class TFC_Core
 	public static Block getTypeForClay(int inMeta)
 	{
 		if(inMeta < 16)
+			return TFCBlocks.Clay;
+		return TFCBlocks.Clay2;
+	}
+
+	public static Block getTypeForClay(Block block)
+	{
+		if (TFC_Core.isGroundType1(block))
 			return TFCBlocks.Clay;
 		return TFCBlocks.Clay2;
 	}
