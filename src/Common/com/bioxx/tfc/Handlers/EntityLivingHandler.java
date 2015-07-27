@@ -231,7 +231,7 @@ public class EntityLivingHandler
 			if (backItem == null && item.getItem() instanceof IEquipable)
 			{
 				IEquipable equipment = (IEquipable) item.getItem();
-				if (equipment.getEquipType(item) == EquipType.BACK)
+				if (equipment.getEquipType(item) == EquipType.BACK && (equipment == TFCItems.Quiver || equipment.getTooHeavyToCarry(item)))
 				{
 					player.inventory.setInventorySlotContents(36, item.copy());
 					item.stackSize = 0;
