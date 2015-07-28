@@ -113,6 +113,13 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
 		createTooltip(is.getTagCompound(), arraylist);
+		if (TFC_Core.showShiftInformation())
+		{
+			arraylist.add(TFC_Core.translate("gui.Help"));
+			arraylist.add(TFC_Core.translate("gui.PotteryBase.Inst0"));
+		}
+		else
+			arraylist.add(TFC_Core.translate("gui.ShowHelp"));
 	}
 
 	@Override
