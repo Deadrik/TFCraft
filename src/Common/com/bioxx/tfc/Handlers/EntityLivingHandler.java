@@ -291,7 +291,7 @@ public class EntityLivingHandler
 			player.triggerAchievement(TFC_Achievements.achIronAge);
 		else if(item.getItem().equals(TFCItems.GemDiamond))
 			player.triggerAchievement(TFC_Achievements.achDiamond);
-		else if(item.getItem().equals(TFCItems.Onion) && TFCOptions.iDontLikeOnions)
+		else if(item.getItem().equals(TFCItems.Onion) && TFCOptions.onionsAreGross)
 			player.triggerAchievement(TFC_Achievements.achRutabaga);
 		else if(item.getItem().equals(TFCItems.OreChunk) && (item.getItemDamage() == 11 || item.getItemDamage()== 46 || item.getItemDamage() == 60))
 			player.triggerAchievement(TFC_Achievements.achLimonite);

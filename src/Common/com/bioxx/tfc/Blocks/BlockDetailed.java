@@ -99,12 +99,12 @@ public class BlockDetailed extends BlockPartial
 	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
-		if (!TFCOptions.enableDetailedBlockSolidSide)
+		if (!TFCOptions.enableSolidDetailed)
 			return false;
 		if (side == ForgeDirection.UNKNOWN)
 			return false;
 
-		int transpCount = TFCOptions.maxCountOfTranspSubBlocksOnSide;
+		int transpCount = TFCOptions.maxRemovedSolidDetailed;
 		if (transpCount < 0 || transpCount >= 64)
 			return false;
 

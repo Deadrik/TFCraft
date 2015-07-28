@@ -17,6 +17,25 @@ effect.bleed=Bleeding
 death.attack.alcohol=%1$s died of alcohol poisoning
 death.attack.heatStroke=%1$s died of heat stroke
 
+com.bioxx.tfc.Core.TFC_ConfigGUI.GeneralConfig.tooltip=Miscellaneous options
+com.bioxx.tfc.Core.TFC_ConfigGUI.TimeConfig.tooltip=Options related to time
+com.bioxx.tfc.Core.TFC_ConfigGUI.FoodDecayConfig.tooltip=Options related to food decay
+com.bioxx.tfc.Core.TFC_ConfigGUI.CaveInConfig.tooltip=Options related to cave-ins
+com.bioxx.tfc.Core.TFC_ConfigGUI.WorldGenConfig.tooltip=Options related to world generation
+com.bioxx.tfc.Core.TFC_ConfigGUI.ColorAConfig.tooltip=Nutrient A Hoe Overlay Color
+com.bioxx.tfc.Core.TFC_ConfigGUI.ColorBConfig.tooltip=Nutrient B Hoe Overlay Color
+com.bioxx.tfc.Core.TFC_ConfigGUI.ColorCConfig.tooltip=Nutrient C Hoe Overlay Color
+com.bioxx.tfc.Core.TFC_ConfigGUI.ColorFertConfig.tooltip=Fertilizer Hoe Overlay Color
+com.bioxx.tfc.Core.TFC_ConfigGUI.Color0Config.tooltip=Anvil Rule 0 Color
+com.bioxx.tfc.Core.TFC_ConfigGUI.Color1Config.tooltip=Anvil Rule 1 Color
+com.bioxx.tfc.Core.TFC_ConfigGUI.Color2Config.tooltip=Anvil Rule 2 Color
+com.bioxx.tfc.Core.TFC_ConfigGUI.CropConfig.tooltip=Options related to crop growth
+com.bioxx.tfc.Core.TFC_ConfigGUI.ProtectionConfig.tooltip=Options related to mob spawning protection
+com.bioxx.tfc.Core.TFC_ConfigGUI.PlayerConfig.tooltip=Options related to the player
+com.bioxx.tfc.Core.TFC_ConfigGUI.MaterialConfig.tooltip=Options related to materials
+com.bioxx.tfc.Core.TFC_ConfigGUI.ServerConfig.tooltip=Options related to servers
+com.bioxx.tfc.Core.TFC_ConfigGUI.OverworkedConfig.tooltip=Options related to overworking chunks with sluices and gold pans
+
 #==============
 #= Entities = 
 #==============

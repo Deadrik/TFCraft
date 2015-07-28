@@ -71,6 +71,7 @@ import com.bioxx.tfc.api.TFCCrafting;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 
+import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -80,31 +81,34 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.ModVersion, dependencies = Reference.ModDependencies)
+@Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.ModVersion, dependencies = Reference.ModDependencies, guiFactory = Reference.GUIFactory)
 public class TerraFirmaCraft
 {
 	public static Logger log = LogManager.getLogger("TerraFirmaCraft");
-	// Configuration headers
-	private static final String GENERAL_HEADER = "General";
-	private static final String TIME_HEADER = "Time";
-	private static final String FOOD_DECAY_HEADER = "Food Decay";
-	private static final String CAVEIN_OPTIONS_HEADER = "Cavein Options";
-	private static final String WORLD_GEN_HEADER = "World Generation";
-	private static final String COLOR_NUTRIENT_A_HEADER = "ColorNutrientA";
-	private static final String COLOR_NUTRIENT_B_HEADER = "ColorNutrientB";
-	private static final String COLOR_NUTRIENT_C_HEADER = "ColorNutrientC";
-	private static final String CROP_FERTILIZER_COLOR_HEADER = "cropFertilizerColor";
-	private static final String ANVIL_RULE_COLOR0_HEADER = "anvilRuleColor0";
-	private static final String ANVIL_RULE_COLOR1_HEADER = "anvilRuleColor1";
-	private static final String ANVIL_RULE_COLOR2_HEADER = "anvilRuleColor2";
-	private static final String CROPS_HEADER = "Crops";
-	private static final String PROTECTION_HEADER = "Protection";
-	private static final String PLAYER_HEADER = "Player";
-	private static final String MATERIALS_HEADER = "Materials";
-	private static final String SERVER_HEADER = "Server";
-	private static final String OVERWORKED_HEADER = "Overworked Chunks";
+	public static Configuration config;
+	// Configuration Headers -- Must be entirely lowercase!
+	public static final String GENERAL_HEADER = "general";
+	public static final String TIME_HEADER = "time";
+	public static final String FOOD_DECAY_HEADER = "food decay";
+	public static final String CAVEIN_OPTIONS_HEADER = "cave-ins";
+	public static final String WORLD_GEN_HEADER = "world generation";
+	public static final String COLOR_HEADER = "colors";
+	public static final String COLOR_NUTRIENT_A_HEADER = "color nutrient a";
+	public static final String COLOR_NUTRIENT_B_HEADER = "color nutrient b";
+	public static final String COLOR_NUTRIENT_C_HEADER = "color nutrient c";
+	public static final String CROP_FERTILIZER_COLOR_HEADER = "color fertilizer";
+	public static final String ANVIL_RULE_COLOR0_HEADER = "color anvil rule 0";
+	public static final String ANVIL_RULE_COLOR1_HEADER = "color anvil rule 1";
+	public static final String ANVIL_RULE_COLOR2_HEADER = "color anvil rule 2";
+	public static final String CROPS_HEADER = "crops";
+	public static final String PROTECTION_HEADER = "spawn protection";
+	public static final String PLAYER_HEADER = "player";
+	public static final String MATERIALS_HEADER = "materials";
+	public static final String SERVER_HEADER = "server";
+	public static final String OVERWORKED_HEADER = "overworked chunks";
 	
 	@Instance("TerraFirmaCraft")
 	public static TerraFirmaCraft instance;
@@ -124,6 +128,15 @@ public class TerraFirmaCraft
 	{
 		instance = this;
 		//Load our settings from the TFCOptions file
+		try
+		{
+			config = new Configuration(new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFCOptions.cfg"));
+			config.load();
+		} catch (Exception e)
+		{
+			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to access settings configuration!").toString());
+			config = null;
+		}
 		loadSettings();
 		loadCraftingSettings();
 
@@ -222,6 +235,7 @@ public class TerraFirmaCraft
 		// Register Crafting Handler
 		FMLCommonHandler.instance().bus().register(new CraftingHandler());
 		FMLCommonHandler.instance().bus().register(new FoodCraftingHandler());
+		FMLCommonHandler.instance().bus().register(instance);
 
 		// Register Player Interact Handler - for drinking water & item pickups.
 		MinecraftForge.EVENT_BUS.register(new PlayerInteractHandler());
@@ -315,123 +329,121 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new CommandTransferTamed());
 	}	
 
+	@SubscribeEvent
+	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs)
+	{
+		if (eventArgs.modID.equals(Reference.ModID))
+			loadSettings();
+	}
+
 	public void loadSettings()
 	{
-		Configuration config;
-		try
-		{
-			config = new Configuration(new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFCOptions.cfg"));
-			config.load();
-		} catch (Exception e) {
-			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to access settings configuration!").toString());
-			config = null;
-		}
 		TerraFirmaCraft.log.info(new StringBuilder().append("Loading Settings").toString());
 		/**Start setup here*/
 
 		//General
-		TFCOptions.enableBetterGrass = TFCOptions.getBooleanFor(config, GENERAL_HEADER, "enableBetterGrass", true, "If true, then the side of a grass block which has another grass block adjacent and one block lower than it will show as completely grass.");
-		//TFCOptions.use2DGrill = TFCOptions.getBooleanFor(config, GENERAL_HEADER, "use2DGrill", true);
-		TFCOptions.enableDebugMode = TFCOptions.getBooleanFor(config,GENERAL_HEADER,"enableDebugMode",false, "Set this to true if you want to turn on debug mode which is useful for bug hunting");
-		TFCOptions.iDontLikeOnions = TFCOptions.getBooleanFor(config, GENERAL_HEADER, "enableNotOnions", false,"Set this to true if you don't like onions.");
-		TFCOptions.enableOreTest = TFCOptions.getBooleanFor(config, GENERAL_HEADER,"enableOreTest", false, "This will generate only ore in your world with nothing else. *Caution Unsupported*");
-		TFCOptions.quiverHUDPosition = TFCOptions.getStringFor(config, GENERAL_HEADER, "quiverHUDPosition", "bottomleft", "Valid position strings are: bottomleft, left, topleft, bottomright, right, topright");
-		TFCOptions.generateSmoke = TFCOptions.getBooleanFor(config, GENERAL_HEADER, "generateSmoke", false, "Should forges generate smoke blocks? *Caution Unsupported*");
-		TFCOptions.enableDetailedBlockSolidSide = TFCOptions.getBooleanFor(config, GENERAL_HEADER, "enableDetailedBlockSolidSide", true, "Should sides of Detailed blocks be considered as solid?");
-		TFCOptions.maxCountOfTranspSubBlocksOnSide = TFCOptions.getIntFor(config, GENERAL_HEADER, "maxCountOfTranspSubBlocksOnSide", 12, "Maximum count of transparent sub-blocks on side: 0..64");
-		TFCOptions.enablePowderKegs = TFCOptions.getBooleanFor(config, GENERAL_HEADER, "enablePowderKegs", true, "Set this to false to disable powder keg explosions.");
+		TFCOptions.enableBetterGrass = config.getBoolean("enableBetterGrass", GENERAL_HEADER, true, "If true, then the side of a grass block which has another grass block adjacent and one block lower than it will show as completely grass.");
+		TFCOptions.enableDebugMode = config.getBoolean("enableDebugMode", GENERAL_HEADER, false, "Set this to true if you want to turn on debug mode which is useful for bug hunting.");
+		TFCOptions.onionsAreGross = config.getBoolean("onionsAreGross", GENERAL_HEADER, false, "Set this to true if you don't like onions.");
+		TFCOptions.quiverHUDPosition = config.getString("quiverHUDPosition", GENERAL_HEADER, "bottomleft", "Valid position strings are: bottomleft, left, topleft, bottomright, right, topright");
+		TFCOptions.enableSolidDetailed = config.getBoolean("enableSolidDetailed", GENERAL_HEADER, true, "Should sides of detailed blocks be considered solid?");
+		TFCOptions.maxRemovedSolidDetailed = config.getInt("maxRemovedSolidDetailed", GENERAL_HEADER, 12, 0, 64, "Maximum count of removed sub-blocks on one side for the detailed block side to still be solid.");
+		TFCOptions.enablePowderKegs = config.getBoolean("enablePowderKegs", GENERAL_HEADER, true, "Set this to false to disable powder keg explosions.");
+
+		//TFCOptions.generateSmoke = config.getBoolean("generateSmoke", GENERAL_HEADER, false, "Should forges generate smoke blocks? *Caution Unsupported*");
+		//TFCOptions.use2DGrill = config.getBoolean("use2DGrill", GENERAL_HEADER, true);
 
 		//Time
-		TFCOptions.yearLength = TFCOptions.getIntFor(config, TIME_HEADER, "yearLength", 96, "This is how many days are in a year. Keep this to multiples of 12.");
-		TFCOptions.pitKilnBurnTime = (float) TFCOptions.getDoubleFor(config, TIME_HEADER, "pitKilnBurnTime", 8.0, "This is the number of hours that the pit kiln should burn before being completed.");
-		TFCOptions.bloomeryBurnTime = (float) TFCOptions.getDoubleFor(config, TIME_HEADER, "bloomeryBurnTime", 14.4, "This is the number of hours that the bloomery should burn before being completed.");
-		TFCOptions.charcoalPitBurnTime = (float) TFCOptions.getDoubleFor(config, TIME_HEADER, "charcoalPitBurnTime", 18.0, "This is the number of hours that the charcoal pit should burn before being completed.");
-		TFCOptions.torchBurnTime = TFCOptions.getIntFor(config, TIME_HEADER, "torchBurnTime", 48, "This is how many in-game hours torches will last before burning out. Set to 0 for infinitely burning torches.");
-		TFCOptions.saplingTimerMultiplier = (float) TFCOptions.getDoubleFor(config, TIME_HEADER, "saplingTimerMultiplier", 1.0, "This is a global multiplier for the number of days required before a sapling can grow into a tree. Decrease for faster sapling growth.");
-		TFCOptions.tempIncreaseMultiplier = (float) TFCOptions.getDoubleFor(config, TIME_HEADER, "tempIncreaseMultiplier", 1.0, "This is a global multiplier for the rate at which items heat up. Increase to make items heat up faster.");
-		TFCOptions.tempDecreaseMultiplier = (float) TFCOptions.getDoubleFor(config, TIME_HEADER, "tempDecreaseMultiplier", 1.0, "This is a global multiplier for the rate at which items cool down. Increase to make items cool down faster.");
-		TFCOptions.oilLampFuelMult = TFCOptions.getIntFor(config, TIME_HEADER, "oilLampFuelMult", 8, "This determines how much fuel is used over time from oil lamps. Setting this higher will make fuel last longer. A mult of 1 = 250 hours, 4 = 1000 hours, 8 = 2000 hours.");
-		TFCOptions.animalTimeMultiplier = (float) TFCOptions.getDoubleFor(config, TIME_HEADER, "animalTimeMultiplier", 1.0, "This is a global multiplier for the gestation period of animals, as well as how long it takes for them to reach adulthood. Decrease for faster times.");
+		TFCOptions.yearLength = config.getInt("yearLength", TIME_HEADER, 96, 0, 12000, "This is how many days are in a year. Keep this to multiples of 12.");
+		TFCOptions.pitKilnBurnTime = config.getFloat("pitKilnBurnTime", TIME_HEADER, 8.0f, 1.0f, 2304.0f, "This is the number of hours that the pit kiln should burn before being completed.");
+		TFCOptions.bloomeryBurnTime = config.getFloat("bloomeryBurnTime", TIME_HEADER, 14.4f, 1.0f, 2304.0f, "This is the number of hours that the bloomery should burn before being completed.");
+		TFCOptions.charcoalPitBurnTime = config.getFloat("charcoalPitBurnTime", TIME_HEADER, 18.0f, 1.0f, 2304.0f, "This is the number of hours that the charcoal pit should burn before being completed.");
+		TFCOptions.torchBurnTime = config.getInt("torchBurnTime", TIME_HEADER, 48, 0, 2304, "This is how many in-game hours torches will last before burning out. Set to 0 for infinitely burning torches.");
+		TFCOptions.saplingTimerMultiplier = config.getFloat("saplingTimerMultiplier", TIME_HEADER, 1.0f, 0.01f, 100.0f, "This is a global multiplier for the number of days required before a sapling can grow into a tree. Decrease for faster sapling growth.");
+		TFCOptions.tempIncreaseMultiplier = config.getFloat("tempIncreaseMultiplier", TIME_HEADER, 1.0f, 0.01f, 100.0f, "This is a global multiplier for the rate at which items heat up. Increase to make items heat up faster.");
+		TFCOptions.tempDecreaseMultiplier = config.getFloat("tempDecreaseMultiplier", TIME_HEADER, 1.0f, 0.01f, 100.0f, "This is a global multiplier for the rate at which items cool down. Increase to make items cool down faster.");
+		TFCOptions.oilLampFuelMult = config.getInt("oilLampFuelMult", TIME_HEADER, 8, 1, 50, "This determines how much fuel is used over time from oil lamps. Setting this higher will make fuel last longer. A mult of 1 = 250 hours, 4 = 1000 hours, 8 = 2000 hours.");
+		TFCOptions.animalTimeMultiplier = config.getFloat("animalTimeMultiplier", TIME_HEADER, 1.0f, 0.01f, 100.0f, "This is a global multiplier for the gestation period of animals, as well as how long it takes for them to reach adulthood. Decrease for faster times.");
 
 		//Food Decay
-		Global.FOOD_DECAY_RATE = TFCOptions.getDoubleFor(config,FOOD_DECAY_HEADER,"FoodDecayRate", 1.0170378966055869517978300569768, "This number causes base decay to equal 50% gain per day. If you wish to change, I recommend you look up a y-root calculator 1.0170378966055869517978300569768^24 = 1.5");
-		TFCOptions.useDecayProtection = TFCOptions.getBooleanFor(config, FOOD_DECAY_HEADER, "useDecayProtection", true,"Set this to false if you want food to auto decay when a chunk is loaded instead of limiting decay when a chunk has been unloaded for a long period.");
-		TFCOptions.decayProtectionDays = TFCOptions.getIntFor(config,FOOD_DECAY_HEADER,"decayProtectionDays",24, "If a food item has not been ticked for >= this number of days than when it is ticked for the first time, only a small amount of decay will occur.");
-		TFCOptions.decayMultiplier = (float)TFCOptions.getDoubleFor(config,FOOD_DECAY_HEADER,"FoodDecayMultiplier", 1.0, "This is a global multiplier for food decay. Unlike FoodDecayRate which only modifies the base decay and not the environmental effect upon decay, this multiplier will multiply against the entire amount. Set to 0 to turn decay off.");
+		Global.FOOD_DECAY_RATE = config.getFloat("foodDecayRate", FOOD_DECAY_HEADER, 1.0170378966055869517978300569768f, 1.0f, 2.0f, "This number causes base decay to equal 50% gain per day. If you wish to change, I recommend you look up a y-root calculator 1.0170378966055869517978300569768^24 = 1.5");
+		TFCOptions.useDecayProtection = config.getBoolean("useDecayProtection", FOOD_DECAY_HEADER, true, "Set this to false if you want food to auto decay when a chunk is loaded instead of limiting decay when a chunk has been unloaded for a long period.");
+		TFCOptions.decayProtectionDays = config.getInt("decayProtectionDays", FOOD_DECAY_HEADER, 24, 1, 12000, "If a food item has not been ticked for >= this number of days than when it is ticked for the first time, only a small amount of decay will occur.");
+		TFCOptions.decayMultiplier = config.getFloat("foodDecayMultiplier", FOOD_DECAY_HEADER, 1.0f, 0.01f, 100.0f, "This is a global multiplier for food decay. Unlike FoodDecayRate which only modifies the base decay and not the environmental effect upon decay, this multiplier will multiply against the entire amount. Set to 0 to turn decay off.");
 
 		//Cavein Options
-		TFCOptions.minimumRockLoad = TFCOptions.getIntFor(config,CAVEIN_OPTIONS_HEADER,"minimumRockLoad",1, "This is the minimum number of solid blocks that must be over a section in order for it to collapse.");
-		TFCOptions.initialCollapseRatio = TFCOptions.getIntFor(config,CAVEIN_OPTIONS_HEADER,"initialCollapseRatio",10, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");
-		TFCOptions.propogateCollapseChance = TFCOptions.getIntFor(config,CAVEIN_OPTIONS_HEADER,"propogateCollapseChance",55, "This number is the likelihood for each block to propagate the collapse farther.");
-		TFCOptions.enableCaveIns = TFCOptions.getBooleanFor(config, CAVEIN_OPTIONS_HEADER, "enableCaveIns", true, "Set this to false to disable cave ins.");
-		TFCOptions.enableCaveInsDestroyOre = TFCOptions.getBooleanFor(config, CAVEIN_OPTIONS_HEADER, "enableCaveInsDestroyOre", true, "Set this to false to make cave ins drop the ore item instead of destroy it.");
+		TFCOptions.minimumRockLoad = config.getInt("minimumRockLoad", CAVEIN_OPTIONS_HEADER, 1, 0, 256, "This is the minimum number of solid blocks that must be over a section in order for it to collapse.");
+		TFCOptions.initialCollapseRatio = config.getInt("initialCollapseRatio", CAVEIN_OPTIONS_HEADER, 10, 1, 1000, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");
+		TFCOptions.propogateCollapseChance = config.getInt("propogateCollapseChance", CAVEIN_OPTIONS_HEADER, 55, 1, 100, "This number is the likelihood for each block to propagate the collapse farther.");
+		TFCOptions.enableCaveIns = config.getBoolean("enableCaveIns", CAVEIN_OPTIONS_HEADER, true, "Set this to false to disable cave-ins.");
+		TFCOptions.enableCaveInsDestroyOre = config.getBoolean("enableCaveInsDestroyOre", CAVEIN_OPTIONS_HEADER, true, "Set this to false to make cave-ins drop the ore item instead of destroy it.");
 		
 		// World Generation
-		TFCOptions.ravineRarity = TFCOptions.getIntFor(config, WORLD_GEN_HEADER, "ravineRarity", 100, "Controls the chance of a ravine to be created, smaller value is higher chance, more ravines. Default is 100, use 0 to disable ravines.");
-		TFCOptions.lavaFissureRarity = TFCOptions.getIntFor(config, WORLD_GEN_HEADER, "lavaFissureRarity", 25, "Controls the chance of a lava fissure to be created, smaller value is higher chance, more fissures. Default is 25, use 0 to disable lava fissures.");
-		TFCOptions.waterFissureRarity = TFCOptions.getIntFor(config, WORLD_GEN_HEADER, "waterFissureRarity", 90, "Controls the chance of a water fissure to be created, smaller value is higher chance, more fissures. Default is 90, use 0 to disable water fissures.");
+		TFCOptions.ravineRarity = config.getInt("ravineRarity", WORLD_GEN_HEADER, 100, 0, 1000, "Controls the chance of a ravine generating, smaller value is higher chance, more ravines. Set to 0 to disable ravines.");
+		TFCOptions.lavaFissureRarity = config.getInt("lavaFissureRarity", WORLD_GEN_HEADER, 25, 0, 1000, "Controls the chance of a lava fissure generating, smaller value is higher chance, more fissures. Set to 0 to disable lava fissures.");
+		TFCOptions.waterFissureRarity = config.getInt("waterFissureRarity", WORLD_GEN_HEADER, 90, 0, 1000, "Controls the chance of a water fissure generating, smaller value is higher chance, more fissures. Set to 0 to disable water fissures.");
 
-		TFCOptions.cropNutrientAColor[0] = (byte) TFCOptions.getIntFor(config, COLOR_NUTRIENT_A_HEADER, "Red", 237);
-		TFCOptions.cropNutrientAColor[1] = (byte) TFCOptions.getIntFor(config, COLOR_NUTRIENT_A_HEADER, "Green", 28);
-		TFCOptions.cropNutrientAColor[2] = (byte) TFCOptions.getIntFor(config, COLOR_NUTRIENT_A_HEADER, "Blue", 36);
-		TFCOptions.cropNutrientAColor[3] = (byte) TFCOptions.getIntFor(config, COLOR_NUTRIENT_A_HEADER, "Alpha", 200);
+		TFCOptions.cropNutrientAColor[0] = (byte) config.getInt("Red", COLOR_NUTRIENT_A_HEADER, 237, 0, 255, "");
+		TFCOptions.cropNutrientAColor[1] = (byte) config.getInt("Green", COLOR_NUTRIENT_A_HEADER, 28, 0, 255, "");
+		TFCOptions.cropNutrientAColor[2] = (byte) config.getInt("Blue", COLOR_NUTRIENT_A_HEADER, 36, 0, 255, "");
+		TFCOptions.cropNutrientAColor[3] = (byte) config.getInt("Alpha", COLOR_NUTRIENT_A_HEADER, 200, 0, 255, "");
 
-		TFCOptions.cropNutrientBColor[0] = (byte) TFCOptions.getIntFor(config, COLOR_NUTRIENT_B_HEADER, "Red", 242);
-		TFCOptions.cropNutrientBColor[1] = (byte) TFCOptions.getIntFor(config, COLOR_NUTRIENT_B_HEADER, "Green", 101);
-		TFCOptions.cropNutrientBColor[2] = (byte) TFCOptions.getIntFor(config, COLOR_NUTRIENT_B_HEADER, "Blue", 34);
-		TFCOptions.cropNutrientBColor[3] = (byte) TFCOptions.getIntFor(config, COLOR_NUTRIENT_B_HEADER, "Alpha", 200);
+		TFCOptions.cropNutrientBColor[0] = (byte) config.getInt("Red", COLOR_NUTRIENT_B_HEADER, 242, 0, 255, "");
+		TFCOptions.cropNutrientBColor[1] = (byte) config.getInt("Green", COLOR_NUTRIENT_B_HEADER, 101, 0, 255, "");
+		TFCOptions.cropNutrientBColor[2] = (byte) config.getInt("Blue", COLOR_NUTRIENT_B_HEADER, 34, 0, 255, "");
+		TFCOptions.cropNutrientBColor[3] = (byte) config.getInt("Alpha", COLOR_NUTRIENT_B_HEADER, 200, 0, 255, "");
 
-		TFCOptions.cropNutrientCColor[0] = (byte) TFCOptions.getIntFor(config, COLOR_NUTRIENT_C_HEADER, "Red", 247);
-		TFCOptions.cropNutrientCColor[1] = (byte) TFCOptions.getIntFor(config, COLOR_NUTRIENT_C_HEADER, "Green", 148);
-		TFCOptions.cropNutrientCColor[2] = (byte) TFCOptions.getIntFor(config, COLOR_NUTRIENT_C_HEADER, "Blue", 49);
-		TFCOptions.cropNutrientCColor[3] = (byte) TFCOptions.getIntFor(config, COLOR_NUTRIENT_C_HEADER, "Alpha", 200);
+		TFCOptions.cropNutrientCColor[0] = (byte) config.getInt("Red", COLOR_NUTRIENT_C_HEADER, 247, 0, 255, "");
+		TFCOptions.cropNutrientCColor[1] = (byte) config.getInt("Green", COLOR_NUTRIENT_C_HEADER, 148, 0, 255, "");
+		TFCOptions.cropNutrientCColor[2] = (byte) config.getInt("Blue", COLOR_NUTRIENT_C_HEADER, 49, 0, 255, "");
+		TFCOptions.cropNutrientCColor[3] = (byte) config.getInt("Alpha", COLOR_NUTRIENT_C_HEADER, 200, 0, 255, "");
 
-		TFCOptions.cropFertilizerColor[0] = (byte) TFCOptions.getIntFor(config, CROP_FERTILIZER_COLOR_HEADER, "Red", 255);
-		TFCOptions.cropFertilizerColor[1] = (byte) TFCOptions.getIntFor(config, CROP_FERTILIZER_COLOR_HEADER, "Green", 255);
-		TFCOptions.cropFertilizerColor[2] = (byte) TFCOptions.getIntFor(config, CROP_FERTILIZER_COLOR_HEADER, "Blue", 0);
-		TFCOptions.cropFertilizerColor[3] = (byte) TFCOptions.getIntFor(config, CROP_FERTILIZER_COLOR_HEADER, "Alpha", 200);
+		TFCOptions.cropFertilizerColor[0] = (byte) config.getInt("Red", CROP_FERTILIZER_COLOR_HEADER, 255, 0, 255, "");
+		TFCOptions.cropFertilizerColor[1] = (byte) config.getInt("Green", CROP_FERTILIZER_COLOR_HEADER, 255, 0, 255, "");
+		TFCOptions.cropFertilizerColor[2] = (byte) config.getInt("Blue", CROP_FERTILIZER_COLOR_HEADER, 0, 0, 255, "");
+		TFCOptions.cropFertilizerColor[3] = (byte) config.getInt("Alpha", CROP_FERTILIZER_COLOR_HEADER, 200, 0, 255, "");
 
-		TFCOptions.anvilRuleColor0[0] = (byte) TFCOptions.getIntFor(config, ANVIL_RULE_COLOR0_HEADER, "Red", 237);
-		TFCOptions.anvilRuleColor0[1] = (byte) TFCOptions.getIntFor(config, ANVIL_RULE_COLOR0_HEADER, "Green", 28);
-		TFCOptions.anvilRuleColor0[2] = (byte) TFCOptions.getIntFor(config, ANVIL_RULE_COLOR0_HEADER, "Blue", 36);
+		TFCOptions.anvilRuleColor0[0] = (byte) config.getInt("Red", ANVIL_RULE_COLOR0_HEADER, 237, 0, 255, "");
+		TFCOptions.anvilRuleColor0[1] = (byte) config.getInt("Green", ANVIL_RULE_COLOR0_HEADER, 28, 0, 255, "");
+		TFCOptions.anvilRuleColor0[2] = (byte) config.getInt("Blue", ANVIL_RULE_COLOR0_HEADER, 36, 0, 255, "");
 
-		TFCOptions.anvilRuleColor1[0] = (byte) TFCOptions.getIntFor(config, ANVIL_RULE_COLOR1_HEADER, "Red", 242);
-		TFCOptions.anvilRuleColor1[1] = (byte) TFCOptions.getIntFor(config, ANVIL_RULE_COLOR1_HEADER, "Green", 101);
-		TFCOptions.anvilRuleColor1[2] = (byte) TFCOptions.getIntFor(config, ANVIL_RULE_COLOR1_HEADER, "Blue", 34);
+		TFCOptions.anvilRuleColor1[0] = (byte) config.getInt("Red", ANVIL_RULE_COLOR1_HEADER, 242, 0, 255, "");
+		TFCOptions.anvilRuleColor1[1] = (byte) config.getInt("Green", ANVIL_RULE_COLOR1_HEADER, 101, 0, 255, "");
+		TFCOptions.anvilRuleColor1[2] = (byte) config.getInt("Blue", ANVIL_RULE_COLOR1_HEADER, 34, 0, 255, "");
 
-		TFCOptions.anvilRuleColor2[0] = (byte) TFCOptions.getIntFor(config, ANVIL_RULE_COLOR2_HEADER, "Red", 247);
-		TFCOptions.anvilRuleColor2[1] = (byte) TFCOptions.getIntFor(config, ANVIL_RULE_COLOR2_HEADER, "Green", 148);
-		TFCOptions.anvilRuleColor2[2] = (byte) TFCOptions.getIntFor(config, ANVIL_RULE_COLOR2_HEADER, "Blue", 49);
+		TFCOptions.anvilRuleColor2[0] = (byte) config.getInt("Red", ANVIL_RULE_COLOR2_HEADER, 247, 0, 255, "");
+		TFCOptions.anvilRuleColor2[1] = (byte) config.getInt("Green", ANVIL_RULE_COLOR2_HEADER, 148, 0, 255, "");
+		TFCOptions.anvilRuleColor2[2] = (byte) config.getInt("Blue", ANVIL_RULE_COLOR2_HEADER, 49, 0, 255, "");
 
 		//Crops
-		TFCOptions.enableCropsDie = TFCOptions.getBooleanFor(config, CROPS_HEADER, "enableCropsDie", false, "Whether or not crops will die of old age.");
-		TFCOptions.cropGrowthMultiplier = (float) TFCOptions.getDoubleFor(config, CROPS_HEADER, "cropGrowthModifier", 1.0, "This is a global multiplier for the rate at which crops will grow. Increase to make crops grow faster.");
+		TFCOptions.enableCropsDie = config.getBoolean("enableCropsDie", CROPS_HEADER, false, "Set to true to enable crop death from old age.");
+		TFCOptions.cropGrowthMultiplier = config.getFloat("cropGrowthModifier", CROPS_HEADER, 1.0f, 0.01f, 100.0f, "This is a global multiplier for the rate at which crops will grow. Increase to make crops grow faster.");
 
 		//Protection
-		TFCOptions.maxProtectionMonths = TFCOptions.getIntFor(config,PROTECTION_HEADER,"maxProtectionMonths", 10, "The maximum number of months of spawn protection that can accumulate.");
-		TFCOptions.protectionGain = TFCOptions.getIntFor(config, PROTECTION_HEADER, "protectionGain", 8, "The number of hours of protection gained in the 5x5 chunk area for spending 1 hour in that chunk.");
-		TFCOptions.protectionBuffer = TFCOptions.getIntFor(config, PROTECTION_HEADER, "protectionBuffer", 24, "The minimum number of hours of protection that must be accumulated in a chunk in order to bypass the buffer and prevent hostile mob spawning.");
+		TFCOptions.maxProtectionMonths = config.getInt("maxProtectionMonths", PROTECTION_HEADER, 10, 0, 120, "The maximum number of months of spawn protection that can accumulate.");
+		TFCOptions.protectionGain = config.getInt("protectionGain", PROTECTION_HEADER, 8, 0, 24, "The number of hours of protection gained in the 5x5 chunk area for spending 1 hour in that chunk.");
+		TFCOptions.protectionBuffer = config.getInt("protectionBuffer", PROTECTION_HEADER, 24, 0, 2304, "The minimum number of hours of protection that must be accumulated in a chunk in order to bypass the buffer and prevent hostile mob spawning.");
 
 		//Player
-		TFCOptions.HealthGainRate = TFCOptions.getIntFor(config, PLAYER_HEADER, "HealthGainRate", 20, "The rate of Health Gain per experience level. Set to 0 to turn off.");
-		TFCOptions.HealthGainCap = TFCOptions.getIntFor(config, PLAYER_HEADER, "HealthGainCap", 3000, "The maximum achievable health pool total.");
+		TFCOptions.HealthGainRate = config.getInt("healthGainRate", PLAYER_HEADER, 20, 0, 100, "The rate of Health Gain per experience level. Set to 0 to turn off.");
+		TFCOptions.HealthGainCap = config.getInt("healthGainCap", PLAYER_HEADER, 3000, 1000, 50000, "The maximum achievable health pool total.");
 
 		//Materials
-		TFCOptions.smallOreUnits = TFCOptions.getIntFor(config, MATERIALS_HEADER, "smallOreUnits", 10, "The metal units provided by a single piece of small ore or nugget.");
-		TFCOptions.poorOreUnits = TFCOptions.getIntFor(config, MATERIALS_HEADER, "poorOreUnits", 15, "The metal units provided by a single piece of poor ore.");
-		TFCOptions.normalOreUnits = TFCOptions.getIntFor(config, MATERIALS_HEADER, "normalOreUnits", 25, "The metal units provided by a single piece of normal ore.");
-		TFCOptions.richOreUnits = TFCOptions.getIntFor(config, MATERIALS_HEADER, "richOreUnits", 35, "The metal units provided by a single piece of rich ore");
+		TFCOptions.smallOreUnits = config.getInt("smallOreUnits", MATERIALS_HEADER, 10, 1, 100, "The metal units provided by a single piece of small ore or nugget.");
+		TFCOptions.poorOreUnits = config.getInt("poorOreUnits", MATERIALS_HEADER, 15, 1, 150, "The metal units provided by a single piece of poor ore.");
+		TFCOptions.normalOreUnits = config.getInt("normalOreUnits", MATERIALS_HEADER, 25, 1, 250, "The metal units provided by a single piece of normal ore.");
+		TFCOptions.richOreUnits = config.getInt("richOreUnits", MATERIALS_HEADER, 35, 1, 350, "The metal units provided by a single piece of rich ore");
 
-		TFCOptions.simSpeedNoPlayers = TFCOptions.getIntFor(config, SERVER_HEADER, "simSpeedNoPlayers", 100, "For every X number of ticks provided here, when there are no players online the server will only progress by 1 tick. (Default: 100) Time advances 100 times slower than normal. Setting this to 0 will turn this feature off.");
+		TFCOptions.simSpeedNoPlayers = config.getInt("simSpeedNoPlayers", SERVER_HEADER, 100, 0, Integer.MAX_VALUE, "For every X number of ticks provided here, when there are no players online the server will only progress by 1 tick. (Default: 100) Time advances 100 times slower than normal. Setting this to 0 will turn this feature off.");
 
 		// Overworked Chunks
-		TFCOptions.enableOverworkingChunks = TFCOptions.getBooleanFor(config, OVERWORKED_HEADER, "enableOverworkingChunks", true, "Set this to false to disable the overworking of chunks when using a gold pan or sluice.");
-		TFCOptions.goldPanLimit = TFCOptions.getIntFor(config, OVERWORKED_HEADER, "goldPanLimit", 50, "The overworked cap for filling a gold pan in a specific chunk. Both filling a gold pan or using a sluice in the chunk count towards this value.");
-		TFCOptions.sluiceLimit = TFCOptions.getIntFor(config, OVERWORKED_HEADER, "sluiceLimit", 300, "The overworked cap for a sluice scanning one soil unit in a specific chunk. Both filling a gold pan or using a sluice in the chunk count towards this value");
+		TFCOptions.enableOverworkingChunks = config.getBoolean("enableOverworkingChunks", OVERWORKED_HEADER, true, "Set this to false to disable the overworking of chunks when using a gold pan or sluice.");
+		TFCOptions.goldPanLimit = config.getInt("goldPanLimit", OVERWORKED_HEADER, 50, 1, 500, "The overworked cap for filling a gold pan in a specific chunk. Both filling a gold pan or using a sluice in the chunk count towards this value.");
+		TFCOptions.sluiceLimit = config.getInt("sluiceLimit", OVERWORKED_HEADER, 300, 1, 3000, "The overworked cap for a sluice scanning one soil unit in a specific chunk. Both filling a gold pan or using a sluice in the chunk count towards this value");
 
 		validateSettings();
 		/**Always end with this*/
-		if (config != null)
+		if (config.hasChanged())
 			config.save();
 	}
 
@@ -440,10 +452,10 @@ public class TerraFirmaCraft
 		TerraFirmaCraft.log.info(new StringBuilder().append("Validating Settings").toString());
 		ArrayList<String> configList = new ArrayList<String>();
 
-		if (TFCOptions.maxCountOfTranspSubBlocksOnSide < 0 || TFCOptions.maxCountOfTranspSubBlocksOnSide > 64)
+		if (TFCOptions.maxRemovedSolidDetailed < 0 || TFCOptions.maxRemovedSolidDetailed > 64)
 		{
-			configList.add("maxCountOfTranspSubBlocksOnSide");
-			TFCOptions.maxCountOfTranspSubBlocksOnSide = 12;
+			configList.add("maxRemovedSolidDetailed");
+			TFCOptions.maxRemovedSolidDetailed = 12;
 		}
 		if (TFCOptions.yearLength < 12 || TFCOptions.yearLength % 12 != 0)
 		{
@@ -490,7 +502,7 @@ public class TerraFirmaCraft
 			configList.add("animalTimeMultiplier");
 			TFCOptions.animalTimeMultiplier = 1.0f;
 		}
-		if (Global.FOOD_DECAY_RATE <= 0)
+		if (Global.FOOD_DECAY_RATE < 1)
 		{
 			configList.add("FoodDecayRate");
 			Global.FOOD_DECAY_RATE = 1.0170378966055869517978300569768;

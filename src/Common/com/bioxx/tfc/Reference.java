@@ -18,4 +18,6 @@ public class Reference
 
 	public static final String AssetPath = "/assets/" + ModID + "/";
 	public static final String AssetPathGui = "textures/gui/";
+
+	public static final String GUIFactory = "com.bioxx.tfc.Core.TFC_GuiFactory";
 }

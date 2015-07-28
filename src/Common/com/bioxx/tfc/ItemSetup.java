@@ -859,7 +859,7 @@ public class ItemSetup extends TFCItems {
 					return this.MetaIcons[1];
 				return super.getIconFromDamage(i);
 			}
-		}.setUnlocalizedName(TFCOptions.iDontLikeOnions ? "Rutabaga" : "Onion");
+		}.setUnlocalizedName(TFCOptions.onionsAreGross ? "Rutabaga" : "Onion");
 		Cabbage = new ItemFoodTFC(EnumFoodGroup.Vegetable, 10, 0, 0, 0, 30, true).setUnlocalizedName("Cabbage");
 		Garlic = new ItemFoodTFC(EnumFoodGroup.Vegetable, 0, 0, 0, 10, 20, true).setUnlocalizedName("Garlic");
 		Carrot = new ItemFoodTFC(EnumFoodGroup.Vegetable, 20, 0, 0, 0, 20, true).setUnlocalizedName("Carrot");
@@ -909,7 +909,7 @@ public class ItemSetup extends TFCItems {
 		SeedsOat = new ItemCustomSeeds(5).setUnlocalizedName("Seeds Oat");
 		SeedsRice = new ItemCustomSeeds(6).setUnlocalizedName("Seeds Rice");
 		SeedsPotato = new ItemCustomSeeds(7).setUnlocalizedName("Seeds Potato");
-		SeedsOnion = new ItemCustomSeeds(8).setUnlocalizedName(TFCOptions.iDontLikeOnions?"Seeds Rutabaga":"Seeds Onion");
+		SeedsOnion = new ItemCustomSeeds(8).setUnlocalizedName(TFCOptions.onionsAreGross?"Seeds Rutabaga":"Seeds Onion");
 		SeedsCabbage = new ItemCustomSeeds(9).setUnlocalizedName("Seeds Cabbage");
 		SeedsGarlic = new ItemCustomSeeds(10).setUnlocalizedName("Seeds Garlic");
 		SeedsCarrot = new ItemCustomSeeds(11).setUnlocalizedName("Seeds Carrot");

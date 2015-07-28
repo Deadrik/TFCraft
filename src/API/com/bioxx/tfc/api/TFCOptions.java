@@ -1,21 +1,16 @@
 package com.bioxx.tfc.api;
 
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
-
-import com.bioxx.tfc.TerraFirmaCraft;
 
 public class TFCOptions
 {
 	public static boolean enablePowderKegs = true;
 	public static boolean enableBetterGrass;
 	public static boolean enableDebugMode;
-	public static boolean iDontLikeOnions;
-	public static boolean enableOreTest;
+	public static boolean onionsAreGross;
 	//public static boolean use2DGrill;
-	public static boolean generateSmoke;
-	public static boolean enableDetailedBlockSolidSide;
-	public static int maxCountOfTranspSubBlocksOnSide;
+	public static boolean generateSmoke = false;
+	public static boolean enableSolidDetailed;
+	public static int maxRemovedSolidDetailed;
 
 	public static boolean enableCropsDie;
 
@@ -76,118 +71,4 @@ public class TFCOptions
 	public static boolean enableOverworkingChunks = true;
 	public static int goldPanLimit = 50;
 	public static int sluiceLimit = 300;
-
-	public static boolean getBooleanFor(Configuration config,String heading, String item, boolean value)
-	{
-		if (config == null)
-			return value;
-		try
-		{
-			Property prop = config.get(heading, item, value);
-			return prop.getBoolean(value);
-		}
-		catch (Exception e)
-		{
-			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to add Integer, config wasn't loaded properly!").toString());
-		}
-		return value;
-	}
-
-	public static boolean getBooleanFor(Configuration config,String heading, String item, boolean value, String comment)
-	{
-		if (config == null)
-			return value;
-		try
-		{
-			Property prop = config.get(heading, item, value);
-			prop.comment = comment;
-			return prop.getBoolean(value);
-		}
-		catch (Exception e)
-		{
-			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to add Integer, config wasn't loaded properly!").toString());
-		}
-		return value;
-	}
-
-	public static int getIntFor(Configuration config, String heading, String item, int value)
-	{
-		if (config == null)
-			return value;
-		try
-		{
-			Property prop = config.get(heading, item, value);
-			return prop.getInt(value);
-		}
-		catch (Exception e)
-		{
-			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to add Integer, config wasn't loaded properly!").toString());
-		}
-		return value;
-	}
-
-	public static int getIntFor(Configuration config,String heading, String item, int value, String comment)
-	{
-		if (config == null)
-			return value;
-		try
-		{
-			Property prop = config.get(heading, item, value);
-			prop.comment = comment;
-			return prop.getInt(value);
-		}
-		catch (Exception e)
-		{
-			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to add Integer, config wasn't loaded properly!").toString());
-		}
-		return value;
-	}
-
-	public static double getDoubleFor(Configuration config,String heading, String item, double value, String comment)
-	{
-		if (config == null)
-			return value;
-		try
-		{
-			Property prop = config.get(heading, item, value);
-			prop.comment = comment;
-			return prop.getDouble(value);
-		}
-		catch (Exception e)
-		{
-			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to add Double, config wasn't loaded properly!").toString());
-		}
-		return value;
-	}
-
-	public static String getStringFor(Configuration config, String heading, String item, String value)
-	{
-		if (config == null)
-			return value;
-		try
-		{
-			Property prop = config.get(heading, item, value);
-			return prop.getString();
-		} catch (Exception e)
-		{
-			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to add String, config wasn't loaded properly!").toString());
-		}
-		return value;
-	}
-
-	public static String getStringFor(Configuration config, String heading, String item, String value, String comment)
-	{
-		if (config == null)
-			return value;
-		try
-		{
-			Property prop = config.get(heading, item, value);
-			prop.comment = comment;
-			return prop.getString();
-		} catch (Exception e)
-		{
-			TerraFirmaCraft.log.error(new StringBuilder().append("Error while trying to add String, config wasn't loaded properly!").toString());
-		}
-		return value;
-	}
 }
