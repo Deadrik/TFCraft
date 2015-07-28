@@ -94,7 +94,7 @@ public class ItemMeal extends ItemTerra implements IFood
 		if (is.hasTagCompound())
 		{		
 
-			ItemFoodTFC.addHeatInformation(is, arraylist);
+			ItemFoodTFC.addFoodHeatInformation(is, arraylist);
 			addFoodInformation(is, player, arraylist);
 
 			if(TFC_Core.showShiftInformation())

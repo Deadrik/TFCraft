@@ -33,7 +33,7 @@ public class ItemEgg extends ItemFoodTFC implements IFood
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
 		arraylist.add(getFoodGroupName(this.getFoodGroup()));
-		addHeatInformation(is, arraylist);
+		addFoodHeatInformation(is, arraylist);
 
 		if(is.hasTagCompound())
 		{

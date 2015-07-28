@@ -221,7 +221,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		return s;
 	}
 
-	public static void addHeatInformation(ItemStack is, List<String> arraylist)
+	public static void addFoodHeatInformation(ItemStack is, List<String> arraylist)
 	{
 		if (TFC_ItemHeat.HasTemp(is))
 		{
@@ -239,7 +239,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 		if (is.hasTagCompound())
 		{
-			ItemFoodTFC.addHeatInformation(is, arraylist);
+			ItemFoodTFC.addFoodHeatInformation(is, arraylist);
 			addFoodInformation(is, player, arraylist);
 		}
 		else
