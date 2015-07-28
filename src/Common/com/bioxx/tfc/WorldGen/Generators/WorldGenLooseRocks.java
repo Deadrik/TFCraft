@@ -92,7 +92,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 		if (world.getBiomeGenForCoords(chunkX, chunkZ) instanceof TFCBiome) // Fixes ClassCastException
 		{
 			TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(chunkX, chunkZ);
-			if (biome == TFCBiome.ocean)
+			if (biome == TFCBiome.ocean || biome == TFCBiome.DeepOcean)
 				return;
 		}
 
@@ -122,7 +122,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 			if (world.getBiomeGenForCoords(i, k) instanceof TFCBiome) // Fixes ClassCastException
 			{
 				TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(i, k);
-				if ((biome == TFCBiome.beach || biome == TFCBiome.gravelbeach || biome == TFCBiome.ocean || biome == TFCBiome.river || isNearTree(world, i, j, k)) &&
+				if ((biome == TFCBiome.DeepOcean || biome == TFCBiome.beach || biome == TFCBiome.gravelbeach || biome == TFCBiome.ocean || biome == TFCBiome.river || isNearTree(world, i, j, k)) &&
 						world.setBlock(i, j + 1, k, TFCBlocks.worldItem, 0, 2))
 				{
 					TEWorldItem te = (TEWorldItem) world.getTileEntity(i, j + 1, k);

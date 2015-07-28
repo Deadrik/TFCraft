@@ -78,7 +78,7 @@ public class WorldGenFissure implements IWorldGenerator
 		BiomeGenBase biome = world.getBiomeGenForCoords(startX, startZ);
 
 		if(rarity <= 0 || rand.nextInt(rarity) != 0 || biome == TFCBiome.beach || biome == TFCBiome.ocean || 
-				biome == TFCBiome.gravelbeach || biome == TFCBiome.lake || biome == TFCBiome.river)
+				biome == TFCBiome.gravelbeach || biome == TFCBiome.lake || biome == TFCBiome.river || biome == TFCBiome.DeepOcean)
 			return;
 
 		if(underground)

@@ -42,7 +42,7 @@ public class WorldGenForests implements IWorldGenerator
 		if (world.getBiomeGenForCoords(chunkX, chunkZ) instanceof TFCBiome) // Fixes ClassCastException
 		{
 			TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(chunkX, chunkZ);
-			if (biome == TFCBiome.ocean)
+			if (biome == TFCBiome.ocean || biome == TFCBiome.DeepOcean)
 				return;
 
 			rainfall = TFC_Climate.getRainfall(world, chunkX, 0, chunkZ);
