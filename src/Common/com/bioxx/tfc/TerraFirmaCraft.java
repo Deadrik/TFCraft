@@ -130,7 +130,7 @@ public class TerraFirmaCraft
 		//Load our settings from the TFCOptions file
 		try
 		{
-			config = new Configuration(new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFCOptions.cfg"));
+			config = new Configuration(new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFCConfig.cfg"));
 			config.load();
 		} catch (Exception e)
 		{
