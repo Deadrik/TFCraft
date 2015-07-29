@@ -17,7 +17,7 @@ public class TFC_ConfigGUI extends GuiConfig
 {
 	public TFC_ConfigGUI(GuiScreen parent)
 	{
-		super(parent, getConfigElements(), Reference.ModID, false, false, "TFCOptions.cfg");
+		super(parent, getConfigElements(), Reference.ModID, false, false, "TFCConfig.cfg");
 	}
 
 	/** Compiles a list of config elements */
