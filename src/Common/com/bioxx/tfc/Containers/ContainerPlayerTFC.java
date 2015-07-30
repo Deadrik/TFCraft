@@ -15,6 +15,7 @@ import com.bioxx.tfc.Food.ItemMeal;
 import com.bioxx.tfc.Handlers.CraftingHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
 import com.bioxx.tfc.Items.ItemTFCArmor;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Interfaces.IEquipable;
 import com.bioxx.tfc.api.Interfaces.IEquipable.EquipType;
 import com.bioxx.tfc.api.Interfaces.IFood;
@@ -143,10 +144,10 @@ public class ContainerPlayerTFC extends ContainerPlayer
 				}
 			}
 			// From inventory to back slot
-			else if (origStack.getItem() instanceof IEquipable)
+			else if (!equipmentSlot.getHasStack() && origStack.getItem() instanceof IEquipable)
 			{
 				IEquipable equipment = (IEquipable) origStack.getItem();
-				if (!equipmentSlot.getHasStack() && equipment.getEquipType(origStack) == EquipType.BACK)
+				if (equipment.getEquipType(origStack) == EquipType.BACK && (equipment == TFCItems.Quiver || equipment.getTooHeavyToCarry(origStack)))
 				{
 					ItemStack backStack = slotStack.copy();
 					backStack.stackSize = 1;
