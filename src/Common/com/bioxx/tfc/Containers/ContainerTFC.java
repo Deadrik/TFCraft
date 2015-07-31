@@ -1,7 +1,5 @@
 package com.bioxx.tfc.Containers;
 
-import com.bioxx.tfc.api.TFC_ItemHeat;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
@@ -9,6 +7,8 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+
+import com.bioxx.tfc.api.TFC_ItemHeat;
 
 public class ContainerTFC extends Container
 {
@@ -83,10 +83,10 @@ public class ContainerTFC extends Container
 						slot.onSlotChanged();
 						var5 = true;
 					}
-					else if (slotstack.stackSize < is.getMaxStackSize())
+					else if (slotstack.stackSize < is.getMaxStackSize() && slotstack.stackSize < slot.getSlotStackLimit())
 					{
-						is.stackSize -= is.getMaxStackSize() - slotstack.stackSize;
-						slotstack.stackSize = is.getMaxStackSize();
+						is.stackSize -= slot.getSlotStackLimit() - slotstack.stackSize;
+						slotstack.stackSize = slot.getSlotStackLimit();
 						slot.onSlotChanged();
 						var5 = true;
 					}
