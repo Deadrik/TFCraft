@@ -333,12 +333,18 @@ public class BlockBarrel extends BlockTerraContainer
 			{
 				ItemStack tmp = equippedItem.copy();
 				tmp.stackSize = 1;
+				ItemStack is = te.addLiquid(tmp);
+
+				// If we cannot add the liquid to the barrel, open the interface.
+				if (ItemStack.areItemStacksEqual(tmp, is))
+				{
+					return false;
+				}
+
 				equippedItem.stackSize--;
 
-				if ( equippedItem.stackSize == 0 )
+				if (equippedItem.stackSize == 0)
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-
-				ItemStack is = te.addLiquid(tmp);
 
 				if ( equippedItem.stackSize == 0 && ( is.getMaxStackSize() == 1 || ! player.inventory.hasItemStack(is) ) ) // put buckets in the slot you used them from.
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
@@ -360,12 +366,18 @@ public class BlockBarrel extends BlockTerraContainer
 			{
 				ItemStack tmp = equippedItem.copy();
 				tmp.stackSize = 1;
+				ItemStack is = te.removeLiquid(tmp);
+
+				// If we cannot remove the liquid from the barrel, open the interface.
+				if (ItemStack.areItemStacksEqual(tmp, is))
+				{
+					return false;
+				}
+
 				equippedItem.stackSize--;
 
-				if ( equippedItem.stackSize == 0 )
+				if (equippedItem.stackSize == 0)
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-
-				ItemStack is = te.removeLiquid(tmp);
 
 				if ( equippedItem.stackSize == 0 && ( is.getMaxStackSize() == 1 || ! player.inventory.hasItemStack(is) ) ) // put buckets in the slot you used them from.
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
