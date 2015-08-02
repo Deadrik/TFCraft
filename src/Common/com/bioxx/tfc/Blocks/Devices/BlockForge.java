@@ -6,6 +6,8 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -271,5 +273,19 @@ public class BlockForge extends BlockTerraContainer
 	public String getItemIconName()
 	{
 		return Reference.ModID + ":" + "devices/forge";
+	}
+
+	/**
+	 * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
+	 */
+	@Override
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
+	{
+		// We'll be nice and do EntityLivingBase so it won't burn up dropped items.
+		if (world.getBlockMetadata(x, y, z) >= 1 && !entity.isImmuneToFire() && entity instanceof EntityLivingBase)
+		{
+			// Five ticks of fire damage will deal 250 HP of damage.
+			entity.setFire(5);
+		}
 	}
 }

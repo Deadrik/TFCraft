@@ -5,6 +5,8 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -233,4 +235,18 @@ public class BlockFirepit extends BlockTerraContainer
 	{
 		return Reference.ModID + ":" + "devices/firepit";
 	}
+	
+	/**
+     * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
+     */
+    @Override
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) 
+    {
+		// We'll be nice and do EntityLivingBase so it won't burn up dropped items.
+		if (world.getBlockMetadata(x, y, z) >= 1 && !entity.isImmuneToFire() && entity instanceof EntityLivingBase)
+		{
+			// Two ticks of fire damage will deal 100 HP of damage.
+			entity.setFire(2);
+		}
+    }
 }
