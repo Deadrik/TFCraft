@@ -63,11 +63,14 @@ public class DataBlockPacket extends AbstractPacket
 	@Override
 	public void handleClientSide(EntityPlayer player)
 	{
-		NetworkTileEntity te = (NetworkTileEntity)player.worldObj.getTileEntity(x, y, z);
-		if (te != null)
+		if (player.worldObj.getTileEntity(x, y, z) instanceof NetworkTileEntity)
 		{
-			te.entityplayer = player;
-			te.handleDataPacket(nbtData);
+			NetworkTileEntity te = (NetworkTileEntity) player.worldObj.getTileEntity(x, y, z);
+			if (te != null)
+			{
+				te.entityplayer = player;
+				te.handleDataPacket(nbtData);
+			}
 		}
 	}
 
