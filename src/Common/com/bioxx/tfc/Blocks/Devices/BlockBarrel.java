@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFire;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -12,6 +13,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -166,21 +168,13 @@ public class BlockBarrel extends BlockTerraContainer
 	@Override
 	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion exp)
 	{
-		if (world.getTileEntity(x, y, z) instanceof TEBarrel && TFCOptions.enablePowderKegs)
+		if (world.getTileEntity(x, y, z) instanceof TEBarrel)
 		{
 			TEBarrel te = (TEBarrel) world.getTileEntity(x, y, z);
 			// Only barrels, no large vessels. Requires at least 12 gunpowder for minimum blast strength of 1.
 			if (this == TFCBlocks.Barrel && te != null && te.getGunPowderCount() >= 12 && te.getSealed())
 			{
-				ItemStack is = new ItemStack(this, 1, te.barrelType);
-				NBTTagCompound nbt = writeBarrelToNBT(te);
-				is.setTagCompound(nbt);
-				EntityBarrel BE = new EntityBarrel(world, x, y, z, is, te.getGunPowderCount());
-				BE.setFuse(1);
-				te.clearInventory();
-				te.shouldDropItem = false;
-				world.spawnEntityInWorld(BE);
-
+				spawnPowderKeg(world, x, y, z, te, true);
 				return; // Don't call super if we're going to explode so the barrel is properly destroyed.
 			}
 		}
@@ -234,21 +228,27 @@ public class BlockBarrel extends BlockTerraContainer
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
-		if (world.isBlockIndirectlyGettingPowered(x, y, z) && world.getTileEntity(x, y, z) instanceof TEBarrel && TFCOptions.enablePowderKegs)
+		if (world.getTileEntity(x, y, z) instanceof TEBarrel)
 		{
-			TEBarrel te = (TEBarrel)world.getTileEntity(x, y, z);
+			TEBarrel te = (TEBarrel) world.getTileEntity(x, y, z);
 			// Only barrels, no large vessels. Requires at least 12 gunpowder for minimum blast strength of 1.
 			if (this == TFCBlocks.Barrel && te != null && te.getGunPowderCount() >= 12 && te.getSealed())
 			{
-				ItemStack is = new ItemStack(this, 1, te.barrelType);
-				NBTTagCompound nbt = writeBarrelToNBT(te);
-				is.setTagCompound(nbt);
-				EntityBarrel BE = new EntityBarrel(world, x, y, z, is, te.getGunPowderCount());
-				te.clearInventory();
-				te.shouldDropItem = false;
-				world.spawnEntityInWorld(BE);
-				world.playSoundAtEntity(BE, "game.tnt.primed", 1.0F, 1.0F);
-				world.setBlockToAir(x, y, z);
+				boolean fireNearby = false;
+				if (world.getBlock(x - 1, y, z) instanceof BlockFire)
+					fireNearby = true;
+				if (world.getBlock(x + 1, y, z) instanceof BlockFire)
+					fireNearby = true;
+				if (world.getBlock(x, y, z - 1) instanceof BlockFire)
+					fireNearby = true;
+				if (world.getBlock(x, y, z + 1) instanceof BlockFire)
+					fireNearby = true;
+
+				if (fireNearby || world.isBlockIndirectlyGettingPowered(x, y, z))
+				{
+					spawnPowderKeg(world, x, y, z, te, false);
+					world.setBlockToAir(x, y, z);
+				}
 			}
 		}
 	}
@@ -297,14 +297,24 @@ public class BlockBarrel extends BlockTerraContainer
 		}
 		else
 		{
+
 			if (player.isSneaking())
 			{
 				return false;
 			}
 
-			if(world.getTileEntity(x, y, z) != null)
+			if (world.getTileEntity(x, y, z) instanceof TEBarrel)
 			{
-				TEBarrel te = (TEBarrel)(world.getTileEntity(x, y, z));
+				TEBarrel te = (TEBarrel) (world.getTileEntity(x, y, z));
+
+				if (te != null && this == TFCBlocks.Barrel && te.getSealed() && te.getGunPowderCount() >= 12
+						&& player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemFlintAndSteel)
+				{
+					spawnPowderKeg(world, x, y, z, te, false);
+					world.setBlockToAir(x, y, z);
+					return true;
+				}
+
 				if(!handleInteraction(player, te))
 				{
 					if(te.getFluidLevel() > 0 || te.getInvCount() == 0)
@@ -513,5 +523,28 @@ public class BlockBarrel extends BlockTerraContainer
 		ret.add(new ItemStack(this, 1, damageValue));
 
 		return ret;
+	}
+
+	public void spawnPowderKeg(World world, int x, int y, int z, TEBarrel te, boolean shortFuse)
+	{
+		if (TFCOptions.enablePowderKegs)
+		{
+			ItemStack is = new ItemStack(this, 1, te.barrelType);
+			NBTTagCompound nbt = writeBarrelToNBT(te);
+			is.setTagCompound(nbt);
+			EntityBarrel BE = new EntityBarrel(world, x, y, z, is, te.getGunPowderCount());
+			te.clearInventory();
+			te.shouldDropItem = false;
+			if (shortFuse)
+			{
+				BE.setFuse(1);
+				world.spawnEntityInWorld(BE);
+			}
+			else
+			{
+				world.spawnEntityInWorld(BE);
+				world.playSoundAtEntity(BE, "game.tnt.primed", 1.0F, 1.0F);
+			}
+		}
 	}
 }
