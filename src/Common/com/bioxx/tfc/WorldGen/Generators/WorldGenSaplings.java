@@ -66,10 +66,13 @@ public class WorldGenSaplings
 
 			boolean canSpawnTemp0 = false,
 			        canSpawnTemp1 = false,
-			        canSpawnTemp2 = false;
-			int canSpawnEVTRain0 = 0,
-			    canSpawnEVTRain1 = 0,
-			    canSpawnEVTRain2 = 0;
+			        canSpawnTemp2 = false,
+			        canSpawnRain0 = false,
+			        canSpawnRain1 = false,
+			        canSpawnRain2 = false,
+			        canSpawnEVT0 = false,
+			        canSpawnEVT1 = false,
+			        canSpawnEVT2 = false;
 
 			if (TreeType0 != -1)
 			{
@@ -81,9 +84,8 @@ public class WorldGenSaplings
 				float tree0TempMax = EnumTree.values()[TreeType0].maxTemp;
 
 				canSpawnTemp0 = (temperature >= tree0TempMin && temperature <= tree0TempMax);
-				canSpawnEVTRain0 = (evt >= tree0EVTMin && evt <= tree0EVTMax && 
-				    rainfall >= tree0RainMin && rainfall <= tree0RainMax) ? 2 : 
-				      (evt >= tree0EVTMin && evt <= tree0EVTMax) || (rainfall >= tree0RainMin && rainfall <= tree0RainMax) ? 1 : 0;
+				canSpawnRain0 = (rainfall >= tree0RainMin && rainfall <= tree0RainMax);
+				canSpawnEVT0 = (evt >= tree0EVTMin && evt <= tree0EVTMax);
 			}
 
 			if (TreeType1 != -1)
@@ -96,9 +98,8 @@ public class WorldGenSaplings
 				float tree1TempMax = EnumTree.values()[TreeType1].maxTemp;
 
 				canSpawnTemp1 = (temperature >= tree1TempMin && temperature <= tree1TempMax);
-				canSpawnEVTRain1 = (evt >= tree1EVTMin && evt <= tree1EVTMax &&
-						rainfall >= tree1RainMin && rainfall <= tree1RainMax) ? 2 :
-							(evt >= tree1EVTMin && evt <= tree1EVTMax) || (rainfall >= tree1RainMin && rainfall <= tree1RainMax) ? 1 : 0;
+				canSpawnRain0 = (rainfall >= tree1RainMin && rainfall <= tree1RainMax);
+				canSpawnEVT0 = (evt >= tree1EVTMin && evt <= tree1EVTMax);
 			}
 
 			if (TreeType2 != -1)
@@ -111,28 +112,17 @@ public class WorldGenSaplings
 				float tree2TempMax = EnumTree.values()[TreeType2].maxTemp;
 
 				canSpawnTemp2 = (temperature >= tree2TempMin && temperature <= tree2TempMax);
-				canSpawnEVTRain2 = (evt >= tree2EVTMin && evt <= tree2EVTMax && 
-				    rainfall >= tree2RainMin && rainfall <= tree2RainMax) ? 2 : 
-				      (evt >= tree2EVTMin && evt <= tree2EVTMax) || (rainfall >= tree2RainMin && rainfall <= tree2RainMax) ? 1 : 0;
+				canSpawnRain0 = (rainfall >= tree2RainMin && rainfall <= tree2RainMax);
+				canSpawnEVT0 = (evt >= tree2EVTMin && evt <= tree2EVTMax);
 			}
 
 			int randomNumber = random.nextInt(100);
-
-			if(!canSpawnTemp2 || canSpawnEVTRain2 == 0)
-				randomNumber -= 20;
-			else if(canSpawnTemp2 && canSpawnEVTRain2 == 1)
-				randomNumber -= 10;
-
-			if(!canSpawnTemp1 || canSpawnEVTRain1 == 0)
-				randomNumber -= 30;
-			else if(canSpawnTemp1 && canSpawnEVTRain1 == 1)
-				randomNumber -= 15;
 
 			//if at least one of the trees is within the temperature zone otherewise no trees
 			if(canSpawnTemp0 || canSpawnTemp1 || canSpawnTemp2)
 			{
 				//if the evt makes the location harsh for all of the trees
-				if(canSpawnEVTRain0 <= 1 && canSpawnEVTRain1 <= 1 && canSpawnEVTRain2 <= 1)
+				if(!canSpawnEVT0 && !canSpawnEVT1 && !canSpawnEVT2)
 				{
 					//there is a 1 in 10 chance for a tree otherwise no trees
 					if(random.nextInt(10) > 0)
@@ -146,17 +136,17 @@ public class WorldGenSaplings
 
 			if(randomNumber < 40)
 			{
-				if(canSpawnTemp0 && canSpawnEVTRain0 > 0)
+				if(canSpawnTemp0 && canSpawnRain0)
 					world.setBlock(xCoord, yCoord + 1, zCoord, TFCBlocks.Sapling, TreeType0, 0x2);
 			}
 			else if(randomNumber < 70)
 			{
-				if(canSpawnTemp1)
+				if(canSpawnTemp1 && canSpawnRain1)
 					world.setBlock(xCoord, yCoord + 1, zCoord, TFCBlocks.Sapling, TreeType1, 0x2);
 			}
 			else if(randomNumber < 100)
 			{
-				if(canSpawnTemp2)
+				if(canSpawnTemp2 && canSpawnRain2)
 					world.setBlock(xCoord, yCoord + 1, zCoord, TFCBlocks.Sapling, TreeType2, 0x2);
 			}
 		}

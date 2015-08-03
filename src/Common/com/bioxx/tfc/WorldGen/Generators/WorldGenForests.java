@@ -120,15 +120,15 @@ public class WorldGenForests implements IWorldGenerator
 					return;
 				}
 
-				if(randomNumber < 50 && gen0 != null && spawnParam0 > 1)
+				if (randomNumber < 50 && gen0 != null && (spawnParam0 == 5 || spawnParam0 == 7))
 				{
 					gen0.generate(world, random, xCoord, yCoord, zCoord);
 				}
-				else if(randomNumber < 80 && gen1 != null && spawnParam0 > 1)
+				else if (randomNumber < 80 && gen1 != null && (spawnParam1 == 5 || spawnParam1 == 7))
 				{
 					gen1.generate(world, random, xCoord, yCoord, zCoord);
 				}
-				else if(randomNumber < 100 && gen2 != null && spawnParam0 > 1)
+				else if (randomNumber < 100 && gen2 != null && (spawnParam2 == 5 || spawnParam2 == 7))
 				{
 					gen2.generate(world, random, xCoord, yCoord, zCoord);
 				}
