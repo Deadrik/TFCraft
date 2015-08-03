@@ -2,17 +2,11 @@ package com.bioxx.tfc;
 
 import java.io.File;
 
-import com.bioxx.tfc.Tools.ChiselMode_Detailed;
-import com.bioxx.tfc.Tools.ChiselMode_Slab;
-import com.bioxx.tfc.Tools.ChiselMode_Smooth;
-import com.bioxx.tfc.Tools.ChiselMode_Stair;
-import com.bioxx.tfc.api.Tools.ChiselManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -95,9 +89,14 @@ import com.bioxx.tfc.TileEntities.TEWaterPlant;
 import com.bioxx.tfc.TileEntities.TEWoodConstruct;
 import com.bioxx.tfc.TileEntities.TEWorkbench;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
+import com.bioxx.tfc.Tools.ChiselMode_Detailed;
+import com.bioxx.tfc.Tools.ChiselMode_Slab;
+import com.bioxx.tfc.Tools.ChiselMode_Smooth;
+import com.bioxx.tfc.Tools.ChiselMode_Stair;
 import com.bioxx.tfc.WorldGen.TFCProvider;
 import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.Tools.ChiselManager;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInterModComms;
@@ -484,8 +483,9 @@ public class CommonProxy
 
 	public void registerWailaClasses()
 	{
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WAILAData.callbackRegister");
-		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WCrucible.callbackRegister"); // Crucible has it's own file due to extra calculations.
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WAILAData.callbackRegister"); // Blocks
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WMobs.callbackRegister"); // Entities
+		FMLInterModComms.sendMessage("Waila", "register", "com.bioxx.tfc.WAILA.WCrucible.callbackRegister"); // Crucible has its own file due to extra calculations.
 	}
 
 	public void registerChiselModes()

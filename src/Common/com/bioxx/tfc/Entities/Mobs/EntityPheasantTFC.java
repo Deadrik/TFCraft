@@ -1,7 +1,5 @@
 package com.bioxx.tfc.Entities.Mobs;
 
-import java.util.ArrayList;
-
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,9 +24,9 @@ public class EntityPheasantTFC extends EntityChickenTFC
 		super(par1World);
 	}
 
-	public EntityPheasantTFC(World world, IAnimal mother,  ArrayList<Float> data)
+	public EntityPheasantTFC(World world, double posX, double posY, double posZ, NBTTagCompound genes)
 	{
-		super(world, mother, data);
+		super(world, posX, posY, posZ, genes);
 	}
 
 	@Override
@@ -113,14 +111,6 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	}
 
 	@Override
-	public EntityPheasantTFC createChild(EntityAgeable entityageable)
-	{
-		ArrayList<Float> data = new ArrayList<Float>();
-		data.add(mateSizeMod);
-		return new EntityPheasantTFC(worldObj, this, data);
-	}
-
-	@Override
 	public boolean canMateWith(IAnimal animal) 
 	{
 		return false;
@@ -129,9 +119,16 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	@Override
 	public EntityAgeable createChildTFC(EntityAgeable entityageable)
 	{
-		ArrayList<Float> data = new ArrayList<Float>();
-		data.add(entityageable.getEntityData().getFloat("MateSize"));
-		return new EntityPheasantTFC(worldObj, this, data);
+		if (entityageable instanceof IAnimal)
+		{
+			IAnimal animal = (IAnimal) entityageable;
+			NBTTagCompound nbt = new NBTTagCompound();
+			nbt.setFloat("m_size", animal.getSize());
+			nbt.setFloat("f_size", animal.getSize());
+			return new EntityPheasantTFC(worldObj, posX, posY, posZ, nbt);
+		}
+
+		return null;
 	}
 
 	@Override

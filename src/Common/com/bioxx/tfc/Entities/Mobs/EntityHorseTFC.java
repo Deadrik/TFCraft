@@ -61,27 +61,22 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	public int inLove;
 
 	private final AIEatGrass aiEatGrass = new AIEatGrass(this);
+	private final float GESTATION_PERIOD = 11.17f;
 	protected long animalID;
 	protected int sex = 0;
 	protected int hunger = 0;
 	protected boolean pregnant;
 	protected int pregnancyRequiredTime;
-	protected long conception;
+	protected long timeOfConception;
 	public float size_mod;			//How large the animal is
 	public float strength_mod;		//how strong the animal is
 	public float aggression_mod = 1;//How aggressive / obstinate the animal is
 	public float obedience_mod = 1;	//How well the animal responds to commands.
-	public float colour_mod = 1;	//what the animal looks like
-	public float climate_mod = 1;	//climate adaptability
-	public float hard_mod = 1;		//hardiness
 
 	protected float mateSizeMod = 0;
 	protected float mateStrengthMod = 0;
 	protected float mateAggroMod = 0;
 	protected float mateObedMod = 0;
-	protected float mateColMod = 0;
-	protected float mateClimMod = 0;
-	protected float mateHardMod = 0;
 	protected int mateType = 0;
 	protected int mateVariant = 0;
 	protected double mateMaxHealth = this.calcMaxHealth();
@@ -110,16 +105,13 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
 		hunger = 168000;
 		pregnant = false;
-		pregnancyRequiredTime = (int) (TFCOptions.animalTimeMultiplier * 11.17 * TFC_Time.ticksInMonth);
-		conception = 0;
+		pregnancyRequiredTime = (int) (TFCOptions.animalTimeMultiplier * GESTATION_PERIOD * TFC_Time.ticksInMonth);
+		timeOfConception = 0;
 		sex = rand.nextInt(2);
 		size_mod =(float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion + 1)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1F) * (1.0F - dimorphism * sex));
 		strength_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
 		aggression_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
 		obedience_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + (1f/aggression_mod)));
-		colour_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion+2)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
-		hard_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
-		climate_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + hard_mod));
 		this.setSize(1.4F, 1.6F);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.taskEntries.clear();
@@ -142,12 +134,10 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.tasks.addTask(1, new EntityAIPanicTFC(this, 1.2D,true));
 		this.updateChestSaddle();
 
-		//	We hijack the growingAge to hold the day of birth rather
-		//	than number of ticks to next growth event. We want spawned
-		//	animals to be adults, so we set their birthdays far enough back
-		//	in time such that they reach adulthood now.
-		//
-		//this.setGrowingAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
+		/*
+		 * We hijack the growingAge to hold the day of birth rather than the number of ticks to the next growth event.
+		 * We want spawned animals to be adults, so we set their birthdays far enough back in time such that they reach adulthood now.
+		 */
 		this.setAge(TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 		//For Testing Only(makes spawned animals into babies)
 		//this.setGrowingAge((int) TFC_Time.getTotalDays());
@@ -160,18 +150,12 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		float father_str = 1;
 		float father_aggro = 1;
 		float father_obed = 1;
-		float father_col = 1;
-		float father_clim = 1;
-		float father_hard = 1;
 		for(int i = 0; i < data.size(); i++){
 			switch(i){
 			case 0:father_size = data.get(i);break;
 			case 1:father_str = data.get(i);break;
 			case 2:father_aggro = data.get(i);break;
 			case 3:father_obed = data.get(i);break;
-			case 4:father_col = data.get(i);break;
-			case 5:father_clim = data.get(i);break;
-			case 6:father_hard = data.get(i);break;
 			default:break;
 			}
 		}
@@ -183,14 +167,10 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		strength_mod = (float)Math.sqrt(strength_mod * strength_mod * (float)Math.sqrt((mother.getStrength() + father_str) * 0.5F));
 		aggression_mod = (float)Math.sqrt(aggression_mod * aggression_mod * (float)Math.sqrt((mother.getAggression() + father_aggro) * 0.5F));
 		obedience_mod = (float)Math.sqrt(obedience_mod * obedience_mod * (float)Math.sqrt((mother.getObedience() + father_obed) * 0.5F));
-		colour_mod = (float)Math.sqrt(colour_mod * colour_mod * (float)Math.sqrt((mother.getColour() + father_col) * 0.5F));
-		hard_mod = (float)Math.sqrt(hard_mod * hard_mod * (float)Math.sqrt((mother.getHardiness() + father_hard) * 0.5F));
-		climate_mod = (float)Math.sqrt(climate_mod * climate_mod * (float)Math.sqrt((mother.getClimateAdaptation() + father_clim) * 0.5F));
 
 		this.familiarity = (int) (mother.getFamiliarity()<90?mother.getFamiliarity()/2:mother.getFamiliarity()*0.9f);
-		//	We hijack the growingAge to hold the day of birth rather
-		//	than number of ticks to next growth event.
-		//
+
+		// We hijack the growingAge to hold the day of birth rather than number of ticks to next growth event.
 		this.setAge(TFC_Time.getTotalDays());
 		this.setHorseType(type);
 		this.setHorseVariant(variant);
@@ -216,9 +196,9 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			setGrowingAge(-1);
 
 		this.handleFamiliarityUpdate();
-		if(isPregnant())
+		if (!this.worldObj.isRemote && isPregnant())
 		{
-			if(TFC_Time.getTotalTicks() >= conception + pregnancyRequiredTime)
+			if (TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
 			{
 				EntityHorseTFC baby = (EntityHorseTFC) createChildTFC(this);
 				baby.setLocationAndAngles (posX + (rand.nextFloat() - 0.5F) * 2F, posY, posZ + (rand.nextFloat() - 0.5F) * 2F, 0.0F, 0.0F);
@@ -274,33 +254,38 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 						TFC_Core.getByteFromSmallFloat(strength_mod),
 						TFC_Core.getByteFromSmallFloat(aggression_mod),
 						TFC_Core.getByteFromSmallFloat(obedience_mod),
-						TFC_Core.getByteFromSmallFloat(colour_mod),
-						TFC_Core.getByteFromSmallFloat(climate_mod),
-						TFC_Core.getByteFromSmallFloat(hard_mod),
-						(byte)familiarity
+						(byte) familiarity,
+						(byte) (familiarizedToday ? 1 : 0),
+						(byte) (pregnant ? 1 : 0),
+						(byte) 0 // Empty
 				};
 				ByteBuffer buf = ByteBuffer.wrap(values);
-				this.dataWatcher.updateObject(24, buf.getInt());
 				this.dataWatcher.updateObject(23, buf.getInt());
+				this.dataWatcher.updateObject(24, buf.getInt());
+				this.dataWatcher.updateObject(25, String.valueOf(timeOfConception));
 			}
 			else
 			{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
-
+				
 				ByteBuffer buf = ByteBuffer.allocate(Long.SIZE / Byte.SIZE);
-				buf.putInt(this.dataWatcher.getWatchableObjectInt(24));
 				buf.putInt(this.dataWatcher.getWatchableObjectInt(23));
+				buf.putInt(this.dataWatcher.getWatchableObjectInt(24));
 				byte[] values = buf.array();
-
+				
 				size_mod = TFC_Core.getSmallFloatFromByte(values[0]);
 				strength_mod = TFC_Core.getSmallFloatFromByte(values[1]);
 				aggression_mod = TFC_Core.getSmallFloatFromByte(values[2]);
 				obedience_mod = TFC_Core.getSmallFloatFromByte(values[3]);
-				colour_mod = TFC_Core.getSmallFloatFromByte(values[4]);
-				climate_mod = TFC_Core.getSmallFloatFromByte(values[5]);
-				hard_mod = TFC_Core.getSmallFloatFromByte(values[6]);
-
-				familiarity = values[7];
+				
+				familiarity = values[4];
+				familiarizedToday = (values[5] == 1);
+				pregnant = (values[6] == 1);
+				
+				try
+				{
+					timeOfConception = Long.parseLong(this.dataWatcher.getWatchableObjectString(25));
+				} catch (NumberFormatException e){}
 			}
 		}
 	}
@@ -311,9 +296,11 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		super.entityInit();	
 		this.dataWatcher.addObject(13, new Integer(0)); //sex (1 or 0)
 		this.dataWatcher.addObject(15, Integer.valueOf(0));		//age
+		// EntityHorse uses object 22
+		this.dataWatcher.addObject(23, Integer.valueOf(0)); //Size, strength, aggression, obedience
+		this.dataWatcher.addObject(24, Integer.valueOf(0)); //familiarity, familiarizedToday, pregnant, empty slot
+		this.dataWatcher.addObject(25, String.valueOf("0")); // Time of conception, stored as a string since we can't do long
 
-		this.dataWatcher.addObject(24, Integer.valueOf(0));	//Size, strength, aggression, obedience. EntityHorse uses 22
-		this.dataWatcher.addObject(23, Integer.valueOf(0));	//Colour, climate, hardiness, familiarity
 	}
 
 	private int getNumChestSlots()
@@ -381,8 +368,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	{
 		super.applyEntityAttributes();
 		this.getAttributeMap().registerAttribute(horseJumpStrength);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1250 * size_mod * strength_mod * hard_mod);//MaxHealth
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.22499999403953552D * strength_mod * obedience_mod * hard_mod / (size_mod * size_mod));
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1250 * size_mod * strength_mod);//MaxHealth
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.22499999403953552D * strength_mod * obedience_mod / (size_mod * size_mod));
 		this.setHealth(this.getMaxHealth());
 	}
 
@@ -461,9 +448,9 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			}
 			return true;
 		}
-		else if (!this.isTame() && this.func_110256_cu()) // Zombie or Skeleton Horse
+		else if (itemstack != null && itemstack.getItem() == Items.spawn_egg)
 		{
-			return false;
+			return super.interact(player);
 		}
 		else if (this.isTame() && this.isAdultHorse() && player.isSneaking() && !this.getLeashed())
 		{
@@ -639,9 +626,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		nbt.setFloat ("Strength Modifier", strength_mod);
 		nbt.setFloat ("Aggression Modifier", aggression_mod);
 		nbt.setFloat ("Obedience Modifier", obedience_mod);
-		nbt.setFloat ("Colour Modifier", colour_mod);
-		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
-		nbt.setFloat ("Hardiness Modifier", hard_mod);
 
 		nbttc.setInteger ("Hunger", hunger);
 		nbttc.setBoolean("Pregnant", pregnant);
@@ -649,15 +633,12 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		nbttc.setFloat("MateStrength", mateStrengthMod);
 		nbttc.setFloat("MateAggro", mateAggroMod);
 		nbttc.setFloat("MateObed", mateObedMod);
-		nbttc.setFloat("MateCol", mateColMod);
-		nbttc.setFloat("MateClim", mateClimMod);
-		nbttc.setFloat("MateHard", mateHardMod);
 		nbttc.setInteger("MateType", mateType);
 		nbttc.setInteger("MateVariant", mateVariant);
 		nbttc.setDouble("MateHealth", mateMaxHealth);
 		nbttc.setDouble("MateJump", mateJumpStrength);
 		nbttc.setDouble("MateSpeed", mateMoveSpeed);
-		nbttc.setLong("ConceptionTime",conception);
+		nbttc.setLong("ConceptionTime", timeOfConception);
 		nbttc.setInteger("Age", getBirthDay());
 
 		if (this.isChested())
@@ -710,9 +691,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
 		obedience_mod = nbt.getFloat ("Obedience Modifier");
-		colour_mod = nbt.getFloat ("Colour Modifier");
-		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
-		hard_mod = nbt.getFloat ("Hardiness Modifier");
 
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
@@ -720,15 +698,12 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		mateStrengthMod = nbt.getFloat("MateStrength");
 		mateAggroMod = nbt.getFloat("MateAggro");
 		mateObedMod = nbt.getFloat("MateObed");
-		mateColMod = nbt.getFloat("MateCol");
-		mateClimMod = nbt.getFloat("MateClim");
-		mateHardMod = nbt.getFloat("MateHard");
 		mateType = nbt.getInteger("MateType");
 		mateVariant = nbt.getInteger("MateVariant");
 		mateMaxHealth = nbt.getDouble("MateHealth");
 		mateJumpStrength = nbt.getDouble("MateJump");
 		mateMoveSpeed = nbt.getDouble("MateSpeed");
-		conception = nbt.getLong("ConceptionTime");
+		timeOfConception = nbt.getLong("ConceptionTime");
 		this.setAge(nbt.getInteger ("Age"));
 
 		if (this.isChested())
@@ -841,7 +816,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			resetInLove();
 			return;
 		}
-		conception = TFC_Time.getTotalTicks();
+		timeOfConception = TFC_Time.getTotalTicks();
 		pregnant = true;
 		resetInLove();
 		setInLove(false);
@@ -850,9 +825,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		mateStrengthMod = otherAnimal.getStrength();
 		mateAggroMod = otherAnimal.getAggression();
 		mateObedMod = otherAnimal.getObedience();
-		mateColMod = otherAnimal.getColour();
-		mateClimMod = otherAnimal.getClimateAdaptation();
-		mateHardMod = otherAnimal.getHardiness();
 		mateType = ((EntityHorse) otherAnimal).getHorseType();
 		mateVariant = ((EntityHorse) otherAnimal).getHorseVariant();
 		mateMaxHealth = ((EntityLivingBase) otherAnimal).getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue();
@@ -938,19 +910,13 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	@Override
 	public GenderEnum getGender()
 	{
-		return GenderEnum.genders[getSex()];
-	}
-
-	@Override
-	public int getSex()
-	{
-		return dataWatcher.getWatchableObjectInt(13);
+		return GenderEnum.genders[dataWatcher.getWatchableObjectInt(13)];
 	}
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable eAgeable)
 	{
-		return null;
+		return createChildTFC(eAgeable);
 	}
 
 
@@ -962,9 +928,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		data.add(this.mateStrengthMod);
 		data.add(this.mateAggroMod);
 		data.add(this.mateObedMod);
-		data.add(this.mateColMod);
-		data.add(this.mateClimMod);
-		data.add(this.mateHardMod);
 		
 		int momType = this.getHorseType();
 		int dadType = this.mateType;
@@ -1086,24 +1049,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	}
 
 	@Override
-	public float getColour()
-	{
-		return colour_mod;
-	}
-
-	@Override
-	public float getClimateAdaptation()
-	{
-		return climate_mod;
-	}
-
-	@Override
-	public float getHardiness()
-	{
-		return hard_mod;
-	}
-
-	@Override
 	public Vec3 getAttackedVec()
 	{
 		return this.attackedVec;
@@ -1138,8 +1083,13 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 	@Override
 	public int getFamiliarity() {
-		// TODO Auto-generated method stub
 		return familiarity;
+	}
+
+	@Override
+	public boolean getFamiliarizedToday()
+	{
+		return familiarizedToday;
 	}
 
 	@Override
@@ -1224,4 +1174,9 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		return flag;
 	}
 
+	@Override
+	public int getDueDay()
+	{
+		return TFC_Time.getDayFromTotalHours((timeOfConception + pregnancyRequiredTime) / 1000);
+	}
 }

@@ -23,9 +23,10 @@ public interface IAnimal
 
 	public GenderEnum getGender();
 
-	public int getSex();
-
 	public int getBirthDay();
+
+	public int getDueDay();
+
 	/**
 	 * @return The length of time (in days) until this type of animal reatures maturity
 	 */
@@ -65,28 +66,6 @@ public interface IAnimal
 	 * Obedience and Aggression collectively determine whether an animal is domesticated.
 	 */
 	public float getObedience();
-
-	/**
-	 * @return Colour modifier of the animal. Used for rendering and various other purposes.
-	 * Colour is generally unrelated to animal traits, and is determined either by the biome the animal lives in or from the animal's parents.
-	 */
-	public float getColour();
-
-	/**
-	 * @return Climate Adaptation modifier of the animal. Used for rendering and various other purposes.
-	 * Climate Adaptation refers to the temperature and wetness range the animal is best suited to; 
-	 * and defines what climates the animal does more poorly in.
-	 */
-	public float getClimateAdaptation();
-
-	/**
-	 * @return Hardiness modifier of the animal. Used for rendering and various other purposes.
-	 * Hardiness is a derivative of Climate Adaptation, and refers to how well the animal survives with limited resources. 
-	 * Hardier animals thrive with abundant resources.
-	 */
-	public float getHardiness();
-
-
 
 	public boolean isPregnant();
 
@@ -141,4 +120,6 @@ public interface IAnimal
 	public void familiarize(EntityPlayer ep);
 	
 	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player);
+
+	public boolean getFamiliarizedToday();
 }

@@ -2519,7 +2519,14 @@ gui.eggs=Eggs
 gui.fertEggs=Fertilized Eggs
 gui.logs=Logs
 gui.gems=Gems
+gui.familiarized=Familiarized
+gui.familiarity=Familiarity
+gui.baby=Baby
 option.tfc.oreQuality=Show ore quality
+option.tfc.gender=Show animal gender
+option.tfc.familiarToday=Show animal familiarized
+option.tfc.familiarity=Show animal familarity
+option.tfc.baby=Show if animal is a baby
 
 #== Chat Messages ==
 gui.goldpan.useFlowing=This must be used under flowing water.

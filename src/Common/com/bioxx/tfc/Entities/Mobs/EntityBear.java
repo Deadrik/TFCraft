@@ -38,6 +38,7 @@ import com.bioxx.tfc.Entities.AI.EntityAITargetNonTamedTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
@@ -57,6 +58,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 
 	/** true is the wolf is wet else false */
 	private boolean field_25052_g;
+	private final float GESTATION_PERIOD = 7.0f;
 
 	protected long animalID;
 	protected int sex;
@@ -69,16 +71,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	protected float mateStrengthMod = 0;
 	protected float mateAggroMod = 0;
 	protected float mateObedMod = 0;
-	protected float mateColMod = 0;
-	protected float mateClimMod = 0;
-	protected float mateHardMod = 0;
 	public float size_mod;			//How large the animal is
 	public float strength_mod;		//how strong the animal is
 	public float aggression_mod = 1;//How aggressive / obstinate the animal is
 	public float obedience_mod = 1;	//How well the animal responds to commands.
-	public float colour_mod = 1;	//what the animal looks like
-	public float climate_mod = 1;	//climate adaptability
-	public float hard_mod = 1;		//hardiness
 	public boolean inLove;
 	private int degreeOfDiversion = 4;
 	
@@ -104,9 +100,6 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		strength_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
 		aggression_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
 		obedience_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + (1f/aggression_mod)));
-		colour_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion+2)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
-		hard_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
-		climate_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + hard_mod));
 		sex = rand.nextInt(2);
 		if (getGender() == GenderEnum.MALE)
 			tasks.addTask (6, new EntityAIMate (this, moveSpeed));
@@ -122,16 +115,12 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		//targetTasks.addTask(2, new EntityAIPanic(this,moveSpeed*1.5F));
 
-		pregnancyRequiredTime = (int) (7 * TFC_Time.ticksInMonth);
-		/*fooditems.add(Item.beefRaw.itemID);
-		fooditems.add(Item.porkRaw.itemID);
-		fooditems.add(Item.fishRaw.itemID);*/
+		pregnancyRequiredTime = (int) (TFCOptions.animalTimeMultiplier * GESTATION_PERIOD * TFC_Time.ticksInMonth);
 
-		//	We hijack the growingAge to hold the day of birth rather
-		//	than number of ticks to next growth event. We want spawned
-		//	animals to be adults, so we set their birthdays far enough back
-		//	in time such that they reach adulthood now.
-		//
+		/*
+		 * We hijack the growingAge to hold the day of birth rather than the number of ticks to the next growth event.
+		 * We want spawned animals to be adults, so we set their birthdays far enough back in time such that they reach adulthood now.
+		 */
 		this.setAge(TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 	}
 
@@ -143,18 +132,12 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		float father_str = 1;
 		float father_aggro = 1;
 		float father_obed = 1;
-		float father_col = 1;
-		float father_clim = 1;
-		float father_hard = 1;
 		for(int i = 0; i < data.size(); i++){
 			switch(i){
 			case 0:father_size = data.get(i);break;
 			case 1:father_str = data.get(i);break;
 			case 2:father_aggro = data.get(i);break;
 			case 3:father_obed = data.get(i);break;
-			case 4:father_col = data.get(i);break;
-			case 5:father_clim = data.get(i);break;
-			case 6:father_hard = data.get(i);break;
 			default:break;
 			}
 		}
@@ -166,15 +149,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		strength_mod = (float)Math.sqrt(strength_mod * strength_mod * (float)Math.sqrt((mother.getStrength() + father_str) * 0.5F));
 		aggression_mod = (float)Math.sqrt(aggression_mod * aggression_mod * (float)Math.sqrt((mother.getAggression() + father_aggro) * 0.5F));
 		obedience_mod = (float)Math.sqrt(obedience_mod * obedience_mod * (float)Math.sqrt((mother.getObedience() + father_obed) * 0.5F));
-		colour_mod = (float)Math.sqrt(colour_mod * colour_mod * (float)Math.sqrt((mother.getColour() + father_col) * 0.5F));
-		hard_mod = (float)Math.sqrt(hard_mod * hard_mod * (float)Math.sqrt((mother.getHardiness() + father_hard) * 0.5F));
-		climate_mod = (float)Math.sqrt(climate_mod * climate_mod * (float)Math.sqrt((mother.getClimateAdaptation() + father_clim) * 0.5F));
 		
 		this.familiarity = (int) (mother.getFamiliarity()<90?mother.getFamiliarity()/2:mother.getFamiliarity()*0.9f);
 
-		//	We hijack the growingAge to hold the day of birth rather
-		//	than number of ticks to next growth event.
-		//
+		// We hijack the growingAge to hold the day of birth rather than number of ticks to next growth event.
 		this.setAge(TFC_Time.getTotalDays());
 	}
 
@@ -204,9 +182,9 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		dataWatcher.addObject (18, getHealth());
 		this.dataWatcher.addObject(13, new Integer(0)); //sex (1 or 0)
 		this.dataWatcher.addObject(15, Integer.valueOf(0));		//age
-		
-		this.dataWatcher.addObject(22, Integer.valueOf(0));	//Size, strength, aggression, obedience
-		this.dataWatcher.addObject(23, Integer.valueOf(0));	//Colour, climate, hardiness, familiarity
+		this.dataWatcher.addObject(22, Integer.valueOf(0)); //Size, strength, aggression, obedience
+		this.dataWatcher.addObject(23, Integer.valueOf(0)); //familiarity, familiarizedToday, pregnant, empty slot
+		this.dataWatcher.addObject(24, String.valueOf("0")); // Time of conception, stored as a string since we can't do long
 	}
 
 
@@ -245,9 +223,6 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		nbt.setFloat ("Strength Modifier", strength_mod);
 		nbt.setFloat ("Aggression Modifier", aggression_mod);
 		nbt.setFloat ("Obedience Modifier", obedience_mod);
-		nbt.setFloat ("Colour Modifier", colour_mod);
-		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
-		nbt.setFloat ("Hardiness Modifier", hard_mod);
 		
 		nbt.setBoolean("wasRoped", wasRoped);
 
@@ -257,9 +232,6 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		nbt.setFloat("MateStrength", mateStrengthMod);
 		nbt.setFloat("MateAggro", mateAggroMod);
 		nbt.setFloat("MateObed", mateObedMod);
-		nbt.setFloat("MateCol", mateColMod);
-		nbt.setFloat("MateClim", mateClimMod);
-		nbt.setFloat("MateHard", mateHardMod);
 		nbt.setLong("ConceptionTime",timeOfConception);
 		nbt.setInteger("Age", getBirthDay());
 	}
@@ -283,9 +255,6 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
 		obedience_mod = nbt.getFloat ("Obedience Modifier");
-		colour_mod = nbt.getFloat ("Colour Modifier");
-		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
-		hard_mod = nbt.getFloat ("Hardiness Modifier");
 
 		wasRoped = nbt.getBoolean("wasRoped");
 		
@@ -295,9 +264,6 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		mateStrengthMod = nbt.getFloat("MateStrength");
 		mateAggroMod = nbt.getFloat("MateAggro");
 		mateObedMod = nbt.getFloat("MateObed");
-		mateColMod = nbt.getFloat("MateCol");
-		mateClimMod = nbt.getFloat("MateClim");
-		mateHardMod = nbt.getFloat("MateHard");
 		timeOfConception = nbt.getLong("ConceptionTime");
 		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
 	}
@@ -397,7 +363,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		
 		if(this.getLeashed()&&!wasRoped)wasRoped=true;
 		
-		if(this.isPregnant())
+		if (!this.worldObj.isRemote && isPregnant())
 		{
 			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
 			{
@@ -413,16 +379,6 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 
 		this.handleFamiliarityUpdate();
 		this.syncData();
-
-		/*if (TFC_Time.getTotalTicks() == birthTime + 60 && this instanceof EntityBear && this.sex == 1&& rand.nextInt(10) == 0 && getGrowingAge() >= 0){
-			int i = rand.nextInt(3);
-			if (mateSizeMod == 0){
-				this.mateSizeMod = ((rand.nextInt (5) - 2) / 10f) + 1F;
-			}
-			for (int x = 0; x<i;x++){
-				giveBirth(new EntityBear(this.worldObj,this,this.mateSizeMod));
-			}
-		}*/
 	}
 
 
@@ -476,14 +432,15 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 						TFC_Core.getByteFromSmallFloat(strength_mod),
 						TFC_Core.getByteFromSmallFloat(aggression_mod),
 						TFC_Core.getByteFromSmallFloat(obedience_mod),
-						TFC_Core.getByteFromSmallFloat(colour_mod),
-						TFC_Core.getByteFromSmallFloat(climate_mod),
-						TFC_Core.getByteFromSmallFloat(hard_mod),
-						(byte)familiarity
+						(byte) familiarity,
+						(byte) (familiarizedToday ? 1 : 0),
+						(byte) (pregnant ? 1 : 0),
+						(byte) 0 // Empty
 				};
 				ByteBuffer buf = ByteBuffer.wrap(values);
 				this.dataWatcher.updateObject(22, buf.getInt());
 				this.dataWatcher.updateObject(23, buf.getInt());
+				this.dataWatcher.updateObject(24, String.valueOf(timeOfConception));
 			}
 			else
 			{
@@ -498,11 +455,15 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 				strength_mod = TFC_Core.getSmallFloatFromByte(values[1]);
 				aggression_mod = TFC_Core.getSmallFloatFromByte(values[2]);
 				obedience_mod = TFC_Core.getSmallFloatFromByte(values[3]);
-				colour_mod = TFC_Core.getSmallFloatFromByte(values[4]);
-				climate_mod = TFC_Core.getSmallFloatFromByte(values[5]);
-				hard_mod = TFC_Core.getSmallFloatFromByte(values[6]);
 				
-				familiarity = values[7];
+				familiarity = values[4];
+				familiarizedToday = (values[5] == 1);
+				pregnant = (values[6] == 1);
+				
+				try
+				{
+					timeOfConception = Long.parseLong(this.dataWatcher.getWatchableObjectString(24));
+				} catch (NumberFormatException e){}
 			}
 		}
 	}
@@ -550,10 +511,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) 
 	{
-		/*ArrayList<Float> data = new ArrayList<Float>();
-		data.add(mateSizeMod);
-		return new EntityBear(worldObj, this,data);*/
-		return null;
+		return createChildTFC(entityageable);
 	}
 
 	@Override
@@ -617,9 +575,6 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		mateStrengthMod = otherAnimal.getStrength();
 		mateAggroMod = otherAnimal.getAggression();
 		mateObedMod = otherAnimal.getObedience();
-		mateColMod = otherAnimal.getColour();
-		mateClimMod = otherAnimal.getClimateAdaptation();
-		mateHardMod = otherAnimal.getHardiness();
 	}
 
 	@Override
@@ -655,12 +610,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public GenderEnum getGender() 
 	{
-		return GenderEnum.genders[getSex()];
-	}
-
-	@Override
-	public int getSex() {
-		return dataWatcher.getWatchableObjectInt(13);
+		return GenderEnum.genders[dataWatcher.getWatchableObjectInt(13)];
 	}
 
 	@Override
@@ -671,9 +621,6 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		data.add(eAgeable.getEntityData().getFloat("MateStrength"));
 		data.add(eAgeable.getEntityData().getFloat("MateAggro"));
 		data.add(eAgeable.getEntityData().getFloat("MateObed"));
-		data.add(eAgeable.getEntityData().getFloat("MateCol"));
-		data.add(eAgeable.getEntityData().getFloat("MateClim"));
-		data.add(eAgeable.getEntityData().getFloat("MateHard"));
 		return new EntityBear(worldObj, this, data);
 	}
 
@@ -698,16 +645,17 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			{
 				TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.pregnant"));
 			}
-			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}
 		ItemStack itemstack = player.getHeldItem();
-		if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
-			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"),player)){
+		if (itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName"))
+		{
+			if (this.trySetName(itemstack.stackTagCompound.getString("ItemName"), player))
+			{
 				itemstack.stackSize--;
 			}
 			return true;
 		}
-		return true;
+		return super.interact(player);
 	}
 
 	@Override
@@ -726,24 +674,6 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	public float getObedience()
 	{
 		return obedience_mod;
-	}
-
-	@Override
-	public float getColour()
-	{
-		return colour_mod;
-	}
-
-	@Override
-	public float getClimateAdaptation()
-	{
-		return climate_mod;
-	}
-
-	@Override
-	public float getHardiness()
-	{
-		return hard_mod;
 	}
 
 	@Override
@@ -792,6 +722,11 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		return familiarity;
 	}
 
+	@Override
+	public boolean getFamiliarizedToday()
+	{
+		return familiarizedToday;
+	}
 
 	@Override
 	public void handleFamiliarityUpdate() {
@@ -875,5 +810,11 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.notFamiliar"));
 		}
 		return flag;
+	}
+
+	@Override
+	public int getDueDay()
+	{
+		return TFC_Time.getDayFromTotalHours((timeOfConception + pregnancyRequiredTime) / 1000);
 	}
 }

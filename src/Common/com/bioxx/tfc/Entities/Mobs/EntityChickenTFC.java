@@ -1,7 +1,6 @@
 package com.bioxx.tfc.Entities.Mobs;
 
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -45,16 +44,11 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 
 	protected int sex;
 	protected int hunger;
-	protected long hasMilkTime;
 	protected int age;
-	protected float mateSizeMod;
 	public float size_mod;			//How large the animal is
 	public float strength_mod;		//how strong the animal is
 	public float aggression_mod = 1;//How aggressive / obstinate the animal is
 	public float obedience_mod = 1;	//How well the animal responds to commands.
-	public float colour_mod = 1;	//what the animal looks like
-	public float climate_mod = 1;	//climate adaptability
-	public float hard_mod = 1;		//hardiness
 	public boolean inLove;
 
 	int degreeOfDiversion = 2;
@@ -77,7 +71,6 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		this.timeUntilNextEgg = 9999;//Here we set the vanilla egg timer to 9999
 		this.nextEgg = TFC_Time.getTotalTicks() + EggTime;
 		hunger = 168000;
-		mateSizeMod = 1f;
 		sex = rand.nextInt(2);
 
 		this.tasks.taskEntries.clear();
@@ -95,59 +88,17 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		strength_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
 		aggression_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
 		obedience_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + (1f/aggression_mod)));
-		colour_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion+2)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
-		hard_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
-		climate_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + hard_mod));
 
-		//	We hijack the growingAge to hold the day of birth rather
-		//	than number of ticks to next growth event. We want spawned
-		//	animals to be adults, so we set their birthdays far enough back
-		//	in time such that they reach adulthood now.
-		//
+		/*
+		 * We hijack the growingAge to hold the day of birth rather than the number of ticks to the next growth event.
+		 * We want spawned animals to be adults, so we set their birthdays far enough back in time such that they reach adulthood now.
+		 */
 		this.setAge(TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 		//For Testing Only(makes spawned animals into babies)
 		//this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
 
-	public EntityChickenTFC(World world, IAnimal mother,  ArrayList<Float> data)
-	{
-		this(world);
-		float father_size = 1;
-		float father_str = 1;
-		float father_aggro = 1;
-		float father_obed = 1;
-		float father_col = 1;
-		float father_clim = 1;
-		float father_hard = 1;
-		for(int i = 0; i < data.size(); i++){
-			switch(i){
-			case 0:father_size = data.get(i);break;
-			case 1:father_str = data.get(i);break;
-			case 2:father_aggro = data.get(i);break;
-			case 3:father_obed = data.get(i);break;
-			case 4:father_col = data.get(i);break;
-			case 5:father_clim = data.get(i);break;
-			case 6:father_hard = data.get(i);break;
-			default:break;
-			}
-		}
-		float invSizeRatio = 1f / (2 - dimorphism);
-		size_mod = (float)Math.sqrt(size_mod * size_mod * (float)Math.sqrt((mother.getSize() + father_size) * invSizeRatio));
-		strength_mod = (float)Math.sqrt(strength_mod * strength_mod * (float)Math.sqrt((mother.getStrength() + father_str) * 0.5F));
-		aggression_mod = (float)Math.sqrt(aggression_mod * aggression_mod * (float)Math.sqrt((mother.getAggression() + father_aggro) * 0.5F));
-		obedience_mod = (float)Math.sqrt(obedience_mod * obedience_mod * (float)Math.sqrt((mother.getObedience() + father_obed) * 0.5F));
-		colour_mod = (float)Math.sqrt(colour_mod * colour_mod * (float)Math.sqrt((mother.getColour() + father_col) * 0.5F));
-		hard_mod = (float)Math.sqrt(hard_mod * hard_mod * (float)Math.sqrt((mother.getHardiness() + father_hard) * 0.5F));
-		climate_mod = (float)Math.sqrt(climate_mod * climate_mod * (float)Math.sqrt((mother.getClimateAdaptation() + father_clim) * 0.5F));
-
-		this.familiarity = (int) (mother.getFamiliarity()<90?mother.getFamiliarity()/2:mother.getFamiliarity()*0.9f);
-		
-		//	We hijack the growingAge to hold the day of birth rather
-		//	than number of ticks to next growth event.
-		//
-		this.setAge(TFC_Time.getTotalDays());
-	}
-
+	// Chickens hatching from a nestbox
 	public EntityChickenTFC(World world, double posX, double posY, double posZ, NBTTagCompound genes)
 	{
 		this(world);
@@ -157,11 +108,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		float m_size = genes.getFloat("m_size");
 		float f_size = genes.getFloat("f_size");
 		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((m_size + f_size)/1.9F);
-		//size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
 
-		//	We hijack the growingAge to hold the day of birth rather
-		//	than number of ticks to next growth event.
-		//
+		// We hijack the growingAge to hold the day of birth rather than number of ticks to next growth event.
 		this.setAge(TFC_Time.getTotalDays());
 	}
 
@@ -197,8 +145,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		this.dataWatcher.addObject(13, new Integer(0)); //sex (1 or 0)
 		this.dataWatcher.addObject(15, Integer.valueOf(0));		//age
 		
-		this.dataWatcher.addObject(22, Integer.valueOf(0));	//Size, strength, aggression, obedience
-		this.dataWatcher.addObject(23, Integer.valueOf(0));	//Colour, climate, hardiness, familiarity
+		this.dataWatcher.addObject(22, Integer.valueOf(0)); //Size, strength, aggression, obedience
+		this.dataWatcher.addObject(23, Integer.valueOf(0)); //familiarity, familiarizedToday, empty slot, empty slot
 	}
 
 	/**
@@ -290,10 +238,10 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 						TFC_Core.getByteFromSmallFloat(strength_mod),
 						TFC_Core.getByteFromSmallFloat(aggression_mod),
 						TFC_Core.getByteFromSmallFloat(obedience_mod),
-						TFC_Core.getByteFromSmallFloat(colour_mod),
-						TFC_Core.getByteFromSmallFloat(climate_mod),
-						TFC_Core.getByteFromSmallFloat(hard_mod),
-						(byte)familiarity
+						(byte) familiarity,
+						(byte) (familiarizedToday ? 1 : 0),
+						(byte) 0, // Empty
+						(byte) 0 // Empty
 				};
 				ByteBuffer buf = ByteBuffer.wrap(values);
 				this.dataWatcher.updateObject(22, buf.getInt());
@@ -312,11 +260,9 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 				strength_mod = TFC_Core.getSmallFloatFromByte(values[1]);
 				aggression_mod = TFC_Core.getSmallFloatFromByte(values[2]);
 				obedience_mod = TFC_Core.getSmallFloatFromByte(values[3]);
-				colour_mod = TFC_Core.getSmallFloatFromByte(values[4]);
-				climate_mod = TFC_Core.getSmallFloatFromByte(values[5]);
-				hard_mod = TFC_Core.getSmallFloatFromByte(values[6]);
 				
-				familiarity = values[7];
+				familiarity = values[4];
+				familiarizedToday = (values[5] == 1);
 			}
 		}
 	}
@@ -338,12 +284,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		nbt.setFloat ("Strength Modifier", strength_mod);
 		nbt.setFloat ("Aggression Modifier", aggression_mod);
 		nbt.setFloat ("Obedience Modifier", obedience_mod);
-		nbt.setFloat ("Colour Modifier", colour_mod);
-		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
-		nbt.setFloat ("Hardiness Modifier", hard_mod);
 
 		nbt.setInteger ("Hunger", hunger);
-		nbt.setFloat("MateSize", mateSizeMod);
 		nbt.setInteger("Age", getBirthDay());
 		nbt.setLong("nextEgg", nextEgg);
 	}
@@ -365,12 +307,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
 		obedience_mod = nbt.getFloat ("Obedience Modifier");
-		colour_mod = nbt.getFloat ("Colour Modifier");
-		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
-		hard_mod = nbt.getFloat ("Hardiness Modifier");
 
 		hunger = nbt.getInteger ("Hunger");
-		mateSizeMod = nbt.getFloat("MateSize");
 		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
 		nextEgg = nbt.getLong("nextEgg");
 	}
@@ -425,12 +363,9 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	}
 
 	@Override
-	public EntityChicken createChild(EntityAgeable EntityAgeable)
+	public EntityChicken createChild(EntityAgeable entityAgeable)
 	{
-		ArrayList<Float> data = new ArrayList<Float>();
-		data.add(mateSizeMod);
-		return new EntityChickenTFC(worldObj, this, data);
-//		return super.createChild(EntityAgeable);
+		return (EntityChicken) createChildTFC(entityAgeable);
 	}
 
 	@Override
@@ -515,21 +450,23 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public GenderEnum getGender()
 	{
-		return GenderEnum.genders[getSex()];
+		return GenderEnum.genders[dataWatcher.getWatchableObjectInt(13)];
 	}
 
-	@Override
-	public int getSex()
-	{
-		return dataWatcher.getWatchableObjectInt(13);
-	}
-
+	// This should only be called when spawning baby chickens with a spawn egg, so both size values come from the animal clicked on.
 	@Override
 	public EntityAgeable createChildTFC(EntityAgeable entityageable)
 	{
-		ArrayList<Float> data = new ArrayList<Float>();
-		data.add(entityageable.getEntityData().getFloat("MateSize"));
-		return new EntityChickenTFC(worldObj, this, data);
+		if (entityageable instanceof IAnimal)
+		{
+			IAnimal animal = (IAnimal) entityageable;
+			NBTTagCompound nbt = new NBTTagCompound();
+			nbt.setFloat("m_size", animal.getSize());
+			nbt.setFloat("f_size", animal.getSize());
+			return new EntityChickenTFC(worldObj, posX, posY, posZ, nbt);
+		}
+
+		return null;
 	}
 
 	@Override
@@ -589,24 +526,6 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	}
 
 	@Override
-	public float getColour()
-	{
-		return colour_mod;
-	}
-
-	@Override
-	public float getClimateAdaptation()
-	{
-		return climate_mod;
-	}
-
-	@Override
-	public float getHardiness()
-	{
-		return hard_mod;
-	}
-
-	@Override
 	public Vec3 getAttackedVec()
 	{
 		return null;
@@ -630,8 +549,13 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 
 	@Override
 	public int getFamiliarity() {
-		// TODO Auto-generated method stub
 		return familiarity;
+	}
+
+	@Override
+	public boolean getFamiliarizedToday()
+	{
+		return familiarizedToday;
 	}
 
 	@Override
@@ -715,5 +639,11 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.notFamiliar"));
 		}
 		return flag;
+	}
+
+	@Override
+	public int getDueDay()
+	{
+		return 0; // Chickens don't get pregnant
 	}
 }
