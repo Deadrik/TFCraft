@@ -89,7 +89,7 @@ public abstract class BlockTerra extends Block
 		switch (plantType)
 		{
 		case Cave:   return isSideSolid(world, x, y, z, UP);
-		case Plains: return TFC_Core.isSoil(this);
+		case Plains: return TFC_Core.isSoil(this) || TFC_Core.isFarmland(this);
 		case Water:  return world.getBlock(x, y, z).getMaterial() == Material.water && world.getBlockMetadata(x, y, z) == 0;
 		case Beach:
 			boolean isBeach = TFC_Core.isSand(this) || TFC_Core.isGravel(this);

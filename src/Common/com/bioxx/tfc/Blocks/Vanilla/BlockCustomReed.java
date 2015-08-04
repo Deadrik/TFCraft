@@ -26,7 +26,7 @@ public class BlockCustomReed extends BlockReed implements IPlantable
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
 	{
 		Block var5 = par1World.getBlock(par2, par3 - 1, par4);
-		boolean correctSoil = TFC_Core.isSoil(var5) || TFC_Core.isSand(var5);
+		boolean correctSoil = TFC_Core.isSoil(var5) || TFC_Core.isSand(var5) || TFC_Core.isFarmland(var5);
 		return var5 == this ? true : !correctSoil ? false : par1World.getBlock(par2 - 1, par3 - 1, par4).getMaterial() == Material.water ? true : par1World.getBlock(par2 + 1, par3 - 1, par4).getMaterial() == Material.water ? true : par1World.getBlock(par2, par3 - 1, par4 - 1).getMaterial() == Material.water ? true : par1World.getBlock(par2, par3 - 1, par4 + 1).getMaterial() == Material.water;
 	}
 

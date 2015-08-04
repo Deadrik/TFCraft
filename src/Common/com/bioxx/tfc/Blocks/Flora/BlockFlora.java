@@ -98,7 +98,7 @@ public class BlockFlora extends BlockTerra
 
 	protected boolean canThisPlantGrowOnThisBlock(Block block)
 	{
-		return TFC_Core.isSoil(block);
+		return TFC_Core.isSoil(block) || TFC_Core.isFarmland(block);
 	}
 
 	@Override

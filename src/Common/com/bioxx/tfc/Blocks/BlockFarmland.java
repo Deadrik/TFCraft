@@ -2,11 +2,13 @@ package com.bioxx.tfc.Blocks;
 
 import java.util.List;
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -14,12 +16,16 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TEFarmland;
 import com.bioxx.tfc.api.Constant.Global;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -178,5 +184,20 @@ public class BlockFarmland extends BlockContainer
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TEFarmland();
+	}
+
+	@Override
+	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
+	{
+		Block plant = plantable.getPlant(world, x, y + 1, z);
+		EnumPlantType plantType = plantable.getPlantType(world, x, y + 1, z);
+
+		if (plant == Blocks.pumpkin_stem || plant == Blocks.melon_stem)
+			return false;
+
+		if (plantType == EnumPlantType.Crop)
+			return true;
+
+		return super.canSustainPlant(world, x, y, z, direction, plantable);
 	}
 }

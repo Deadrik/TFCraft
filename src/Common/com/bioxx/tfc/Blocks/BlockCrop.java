@@ -266,7 +266,7 @@ public class BlockCrop extends BlockContainer
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		if (!(world.getBlock(x, y - 1, z) == TFCBlocks.tilledSoil || world.getBlock(x, y - 1, z) == TFCBlocks.tilledSoil2 || TFC_Core.isSoil(world.getBlock(x, y - 1, z))))
+		if (!(TFC_Core.isFarmland(world.getBlock(x, y - 1, z)) || TFC_Core.isSoil(world.getBlock(x, y - 1, z))))
 			return false;
 		return true;
 	}
