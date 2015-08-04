@@ -15,8 +15,10 @@ import net.minecraft.util.AxisAlignedBB;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.QuernManager;
 import com.bioxx.tfc.api.Crafting.QuernRecipe;
@@ -83,48 +85,55 @@ public class TEQuern extends NetworkTileEntity implements IInventory
 				storage[1] = null;
 			}
 
-			if (qr.getInItem().getItem() instanceof IFood)
-			{
-				if(storage[1] != null &&
-						storage[1].hasTagCompound() &&
-						storage[1].getTagCompound().hasKey("foodWeight") &&
-						storage[1].getTagCompound().hasKey("foodDecay") &&
-						storage[0].hasTagCompound() &&
-						storage[0].getTagCompound().hasKey("foodWeight") &&
-						storage[0].getTagCompound().hasKey("foodDecay"))
-				{
-					//float flourDecay = storage[0].getTagCompound().getFloat("foodDecay");
-					float slot0Weight = storage[0].getTagCompound().getFloat("foodWeight");
-					float slot1Weight = storage[1].getTagCompound().getFloat("foodWeight");
-					float newWeight = slot0Weight + slot1Weight;
-
-					if(newWeight > Global.FOOD_MAX_WEIGHT)
-					{
-						storage[1].getTagCompound().setFloat("foodWeight", newWeight - Global.FOOD_MAX_WEIGHT);
-
-						ItemStack tossStack = storage[1].copy();
-						tossStack.getTagCompound().setFloat("foodWeight", Global.FOOD_MAX_WEIGHT);
-						ejectItem(tossStack);
+			if (qr.getInItem().getItem() instanceof IFood) {
+				if (Food.hasWeight(storage[0]) && Food.hasDecay(storage[0])) {
+					float inputWeight = Food.getWeight(storage[0]);
+					float inputDecay = Food.getDecay(storage[0]);
+					// Available weight for recipe depends on decay.
+					if(inputDecay > 0){
+						inputWeight -= inputDecay;
 					}
-					else
-					{
-						storage[1].getTagCompound().setFloat("foodWeight", newWeight);
+					float usedInputWeight = inputWeight;
+					float resultWeight = inputWeight;
+					
+					// Determines result weight based on recipe weight if available
+					if (Food.hasWeight(qr.getResult()) && Food.hasWeight(qr.getInItem())) {
+						float recipeResultWeight = Food.getWeight(qr.getResult());
+						float recipeInputWeight = Food.getWeight(qr.getInItem());
+						if (recipeInputWeight < inputWeight) {
+							resultWeight = recipeResultWeight;
+							usedInputWeight = recipeInputWeight;
+						}else{
+							float ratio = inputWeight/recipeInputWeight;
+							resultWeight = recipeResultWeight * ratio;
+						}
 					}
-					storage[0] = null;
-					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-					return true;
-				}
 
-				if(storage[1] == null &&
-						storage[0].hasTagCompound() &&
-						storage[0].getTagCompound().hasKey("foodWeight") &&
-						storage[0].getTagCompound().hasKey("foodDecay"))
-				{
-					storage[1] = qr.getResult().copy();
-					float flourWeight = storage[0].getTagCompound().getFloat("foodWeight");
-					float flourDecay = storage[0].getTagCompound().getFloat("foodDecay");
-					ItemFoodTFC.createTag(storage[1], flourWeight, flourDecay);
-					storage[0] = null;
+					// Output slot is empty, create new item
+					if (storage[1] == null) {
+						storage[1] = qr.getResult().copy();
+						ItemFoodTFC.createTag(storage[1], resultWeight);
+						// Output slot already has item, add weight to it.
+					} else if (Food.hasWeight(storage[1]) && Food.hasDecay(storage[1])) {
+						float outputWeight = Food.getWeight(storage[1]);
+						float newWeight = outputWeight + resultWeight;
+						if (newWeight > Global.FOOD_MAX_WEIGHT) {
+							Food.setWeight(storage[1], newWeight - Global.FOOD_MAX_WEIGHT);
+							Food.setDecay(storage[1], 0); // Decay goes to tossed stack.
+							ItemStack tossStack = storage[1].copy();
+							Food.setWeight(tossStack, Global.FOOD_MAX_WEIGHT);
+							ejectItem(tossStack);
+						} else {
+							Food.setWeight(storage[1], newWeight);
+						}
+					} else {
+						return false;
+					}
+
+					// Consume weight from input.
+					if(FoodStatsTFC.reduceFood(storage[0], usedInputWeight)){
+						storage[0] = null;
+					}
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 					return true;
 				}
