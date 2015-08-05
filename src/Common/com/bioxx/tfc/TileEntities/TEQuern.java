@@ -118,11 +118,11 @@ public class TEQuern extends NetworkTileEntity implements IInventory
 						float outputWeight = Food.getWeight(storage[1]);
 						float newWeight = outputWeight + resultWeight;
 						if (newWeight > Global.FOOD_MAX_WEIGHT) {
-							Food.setWeight(storage[1], newWeight - Global.FOOD_MAX_WEIGHT);
-							Food.setDecay(storage[1], 0); // Decay goes to tossed stack.
 							ItemStack tossStack = storage[1].copy();
 							Food.setWeight(tossStack, Global.FOOD_MAX_WEIGHT);
 							ejectItem(tossStack);
+							// This reset decay on the output itemStack.
+							ItemFoodTFC.createTag(storage[1],newWeight - Global.FOOD_MAX_WEIGHT);
 						} else {
 							Food.setWeight(storage[1], newWeight);
 						}
