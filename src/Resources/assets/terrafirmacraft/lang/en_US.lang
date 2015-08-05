@@ -84,10 +84,12 @@ fishingRod.gotAway=It got away....
 #================
 achievement.achLooseRock=Definitely a rock
 achievement.achLooseRock.desc=Pick up a rock
+achievement.achTwoKnives=Double Trouble
+achievement.achTwoKnives.desc=Make two stone knife heads at once
 achievement.achSmallOre=No stone unturned
 achievement.achSmallOre.desc=Find an ore nugget
 achievement.achWildVegetable=Gatherer
-achievement.achWildVegetable.desc=Find a wild vegetable
+achievement.achWildVegetable.desc=Find a wild crop
 achievement.achRutabaga=Stupid onions...
 achievement.achRutabaga.desc=Find a rutabaga
 achievement.achQuern=The Grind
@@ -112,6 +114,24 @@ achievement.achIronAge=The Iron Age
 achievement.achIronAge.desc=Mine an iron bloom to enter the Iron Age
 achievement.achPokeCreeper=Steve Irwin
 achievement.achPokeCreeper.desc=Poke it with a stick
+achievement.achBlastFurnace=Blast Off
+achievement.achBlastFurnace.desc=Craft a blast furnace
+achievement.achFireClay=Into the Fire
+achievement.achFireClay.desc=Craft fire clay
+achievement.achCrucible=Metallurgy Table
+achievement.achCrucible.desc=Create a crucible
+achievement.achUnknown=Oops
+achievement.achUnknown.desc=Craft an unknown ingot
+achievement.achBlackSteel=Any color you like
+achievement.achBlackSteel.desc=Create a black steel ingot
+achievement.achBlueSteel=Zoolander
+achievement.achBlueSteel.desc=Create a blue steel ingot
+achievement.achRedSteel=Vermillion Dollar Metal
+achievement.achRedSteel.desc=Create a red steel ingot
+achievement.achBlueBucket=Lava Bucket HO!
+achievement.achBlueBucket.desc=Create a blue steel bucket
+achievement.achRedBucket=Tsunami
+achievement.achRedBucket.desc=Create a red steel bucket
 
 #============
 #= Commands =

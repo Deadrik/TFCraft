@@ -21,4 +21,4 @@ out
 *.iml
 mods
 asm
-
+*Thumbs.db

@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -15,12 +16,15 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.Items.ItemIngot;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.Items.ItemTFCArmor;
 import com.bioxx.tfc.Items.Tools.ItemMiscToolHead;
+import com.bioxx.tfc.Items.Tools.ItemSteelBucket;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFCItems;
@@ -134,6 +138,25 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 							else if (output.getItem() instanceof ItemTFCArmor)
 							{
 								AnvilManager.setDurabilityBuff(output, recipe.getSkillMult(lastWorker));
+							}
+
+							if (output.getItem() instanceof ItemIngot)
+							{
+								Item ingot = output.getItem();
+								if (ingot == TFCItems.BlackSteelIngot)
+									lastWorker.triggerAchievement(TFC_Achievements.achBlackSteel);
+								else if (ingot == TFCItems.BlueSteelIngot)
+									lastWorker.triggerAchievement(TFC_Achievements.achBlueSteel);
+								else if (ingot == TFCItems.RedSteelIngot)
+									lastWorker.triggerAchievement(TFC_Achievements.achRedSteel);
+							}
+							else if (output.getItem() instanceof ItemSteelBucket)
+							{
+								Item bucket = output.getItem();
+								if (bucket == TFCItems.BlueSteelBucketEmpty)
+									lastWorker.triggerAchievement(TFC_Achievements.achBlueBucket);
+								else if (bucket == TFCItems.RedSteelBucketEmpty)
+									lastWorker.triggerAchievement(TFC_Achievements.achRedBucket);
 							}
 
 							increaseSkills(recipe);

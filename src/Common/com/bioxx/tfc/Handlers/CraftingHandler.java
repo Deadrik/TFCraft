@@ -101,7 +101,20 @@ public class CraftingHandler
 					((ItemMiscToolHead) (item)).getMaterial() == TFCItems.IgExToolMaterial || ((ItemMiscToolHead) (item)).getMaterial() == TFCItems.MMToolMaterial))
 			{
 				player.triggerAchievement(TFC_Achievements.achStoneAge);
+
+				if (item == TFCItems.StoneKnifeHead && itemstack.stackSize == 2)
+				{
+					player.triggerAchievement(TFC_Achievements.achTwoKnives);
+				}
 			}
+			else if (item == Item.getItemFromBlock(TFCBlocks.BlastFurnace))
+				player.triggerAchievement(TFC_Achievements.achBlastFurnace);
+			else if (item == TFCItems.ClayBall && itemstack.getItemDamage() == 1)
+				player.triggerAchievement(TFC_Achievements.achFireClay);
+			else if (item == Item.getItemFromBlock(TFCBlocks.Crucible))
+				player.triggerAchievement(TFC_Achievements.achCrucible);
+			else if (item == TFCItems.UnknownIngot)
+				player.triggerAchievement(TFC_Achievements.achUnknown);
 
 			// Packet Sending
 			else if (item == Item.getItemFromBlock(TFCBlocks.Workbench))
