@@ -79,14 +79,14 @@ public class ItemAlcohol extends ItemTerra
 
 
 	@Override
-	public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer player)
+	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
 		if (!player.capabilities.isCreativeMode)
 		{
-			--par1ItemStack.stackSize;
+			--is.stackSize;
 		}
 
-		if (!par2World.isRemote)
+		if (!world.isRemote)
 		{
 
 			Random rand = new Random();
@@ -142,17 +142,18 @@ public class ItemAlcohol extends ItemTerra
 			TFC_Core.setPlayerFoodStats(player, fs);
 		}
 
-		if (!player.capabilities.isCreativeMode)
+		// First try to add the empty bottle to an existing stack of bottles in the inventory
+		if (!player.capabilities.isCreativeMode && !player.inventory.addItemStackToInventory(new ItemStack(TFCItems.GlassBottle)))
 		{
-			if (par1ItemStack.stackSize <= 0)
-			{
+			// If we couldn't fit the empty bottle in the inventory, and we drank the last alcohol bottle, put the empty bottle in the empty held slot
+			if (is.stackSize == 0)
 				return new ItemStack(TFCItems.GlassBottle);
-			}
-
-			player.inventory.addItemStackToInventory(new ItemStack(TFCItems.GlassBottle));
+			// If we couldn't fit the empty bottle in the inventory, and there is more alcohol left in the stack, drop the bottle on the ground
+			else
+				player.dropPlayerItemWithRandomChoice(new ItemStack(TFCItems.GlassBottle), false);
 		}
 
-		return par1ItemStack;
+		return is;
 	}
 
 }

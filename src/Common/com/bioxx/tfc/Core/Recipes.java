@@ -1294,7 +1294,8 @@ public class Recipes
 			" ### ",
 			" ### ",
 			"     ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
-		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.PotteryBowl, 4), new Object[] { 
+		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.PotteryBowl, 2), new Object[]
+		{
 			"#####",
 			"#####",
 			"#####",
