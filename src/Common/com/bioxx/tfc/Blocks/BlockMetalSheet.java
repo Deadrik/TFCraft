@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.CollisionRayTraceStandard;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
@@ -66,17 +67,25 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 	@Override
 	public void onBlockPreDestroy(World world, int i, int j, int k, int meta) 
 	{
-		TEMetalSheet te = (TEMetalSheet)world.getTileEntity(i, j, k);
-		int stack = 0;
-		if(te.TopExists()) stack++;
-		if(te.BottomExists()) stack++;
-		if(te.NorthExists()) stack++;
-		if(te.SouthExists()) stack++;
-		if(te.EastExists()) stack++;
-		if(te.WestExists()) stack++;
-		te.sheetStack.stackSize = stack;
-		EntityItem ei = new EntityItem(world, i, j, k, te.sheetStack);
-		world.spawnEntityInWorld(ei);
+		if (world.getTileEntity(i, j, k) instanceof TEMetalSheet)
+		{
+			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(i, j, k);
+			if (te.sheetStack != null)
+			{
+				int stack = 0;
+				if(te.TopExists()) stack++;
+				if(te.BottomExists()) stack++;
+				if(te.NorthExists()) stack++;
+				if(te.SouthExists()) stack++;
+				if(te.EastExists()) stack++;
+				if(te.WestExists()) stack++;
+				te.sheetStack.stackSize = stack;
+				EntityItem ei = new EntityItem(world, i, j, k, te.sheetStack);
+				world.spawnEntityInWorld(ei);					
+			}
+			else
+				TerraFirmaCraft.log.error("Metal sheet block (" + i + ", " + j + ", " + k + ") being broken contains null sheetstack. Please report this on the forums.");
+		}
 	}
 
 	@Override
