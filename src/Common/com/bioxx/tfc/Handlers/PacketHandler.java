@@ -1,8 +1,5 @@
 package com.bioxx.tfc.Handlers;
 
-import com.bioxx.tfc.TerraFirmaCraft;
-
-
 public class PacketHandler// implements IPacketHandler, IConnectionHandler
 {
 	/**

@@ -11,12 +11,7 @@ import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenCustomCactus;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenCustomPumpkin;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenCustomReed;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenCustomSand;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowCrops;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenWaterPlants;
+import com.bioxx.tfc.WorldGen.Generators.*;
 import com.bioxx.tfc.api.TFCBlocks;
 
 public class BiomeDecoratorTFC extends BiomeDecorator

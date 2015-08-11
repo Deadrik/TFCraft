@@ -12,8 +12,8 @@ import com.bioxx.tfc.Containers.Slots.SlotFoodOnly;
 import com.bioxx.tfc.Containers.Slots.SlotSize;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
-import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.TFCItems;
 
 public class ContainerFoodPrep extends ContainerTFC
 {

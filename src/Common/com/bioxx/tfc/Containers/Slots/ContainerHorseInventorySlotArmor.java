@@ -4,11 +4,10 @@ import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
-import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
 
 public class ContainerHorseInventorySlotArmor extends Slot
 {

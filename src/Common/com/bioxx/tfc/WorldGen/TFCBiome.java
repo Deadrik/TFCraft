@@ -8,29 +8,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+import com.bioxx.tfc.Entities.Mobs.*;
 import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Entities.Mobs.EntityCreeperTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityDeer;
-import com.bioxx.tfc.Entities.Mobs.EntityEndermanTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityFishTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityPheasantTFC;
-import com.bioxx.tfc.Entities.Mobs.EntitySkeletonTFC;
-import com.bioxx.tfc.Entities.Mobs.EntitySlimeTFC;
-import com.bioxx.tfc.Entities.Mobs.EntitySpiderTFC;
-import com.bioxx.tfc.Entities.Mobs.EntitySquidTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityZombieTFC;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenAcaciaKoaTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomBigTree;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomCedarTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomMapleShortTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomMapleTallTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomTallTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomWillowTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenDouglasFir;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenPineShort;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenPineTall;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenRedwoodXL;
+import com.bioxx.tfc.WorldGen.Generators.Trees.*;
 
 public class TFCBiome extends BiomeGenBase
 {

@@ -4,10 +4,9 @@ import java.util.ArrayList;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 import com.bioxx.tfc.TerraFirmaCraft;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TFCItems
 {
@@ -896,7 +895,7 @@ public class TFCItems
 
 	public static void registerItems()
 	{
-		TerraFirmaCraft.log.info(new StringBuilder().append("Registering Items").toString());
+		TerraFirmaCraft.log.info("Registering Items");
 
 		GameRegistry.registerItem(GoldPan, GoldPan.getUnlocalizedName());
 		GameRegistry.registerItem(SluiceItem, SluiceItem.getUnlocalizedName());
@@ -1438,7 +1437,7 @@ public class TFCItems
 		GameRegistry.registerItem(Fertilizer, Fertilizer.getUnlocalizedName());
 
 
-		TerraFirmaCraft.log.info(new StringBuilder().append("Registering Food").toString());
+		TerraFirmaCraft.log.info("Registering Food");
 		GameRegistry.registerItem(FruitTreeSapling, FruitTreeSapling.getUnlocalizedName());
 		GameRegistry.registerItem(RedApple, RedApple.getUnlocalizedName());
 		GameRegistry.registerItem(Banana, Banana.getUnlocalizedName());
@@ -1548,7 +1547,7 @@ public class TFCItems
 		GameRegistry.registerItem(GooseberryLeaf, GooseberryLeaf.getUnlocalizedName());
 		GameRegistry.registerItem(CloudberryLeaf, CloudberryLeaf.getUnlocalizedName());
 
-		TerraFirmaCraft.log.info(new StringBuilder().append("Registering Armor").toString());
+		TerraFirmaCraft.log.info("Registering Armor");
 		GameRegistry.registerItem(BismuthSheet, BismuthSheet.getUnlocalizedName());
 		GameRegistry.registerItem(BismuthBronzeSheet, BismuthBronzeSheet.getUnlocalizedName());
 		GameRegistry.registerItem(BlackBronzeSheet, BlackBronzeSheet.getUnlocalizedName());
@@ -1679,7 +1678,7 @@ public class TFCItems
 
 		GameRegistry.registerItem(Shears, Shears.getUnlocalizedName());
 
-		TerraFirmaCraft.log.info(new StringBuilder().append("All Items Registered").toString());
+		TerraFirmaCraft.log.info("All Items Registered");
 	}
 
 

@@ -3,14 +3,10 @@ package com.bioxx.tfc;
 import java.io.File;
 import java.util.Map;
 
-import com.bioxx.tfc.ASM.Transform.TF_EntityLeashKnot;
-import com.bioxx.tfc.ASM.Transform.TF_EntityPlayer;
-import com.bioxx.tfc.ASM.Transform.TF_EntityPlayerMP;
-import com.bioxx.tfc.ASM.Transform.TF_EntityRenderer;
-import com.bioxx.tfc.ASM.Transform.TF_RenderGlobal;
-
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
+
+import com.bioxx.tfc.ASM.Transform.*;
 
 @TransformerExclusions({ "com.bioxx.tfc.ASM" })
 public class TFCASMLoadingPlugin implements IFMLLoadingPlugin

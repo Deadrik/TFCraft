@@ -4,11 +4,10 @@ import net.minecraft.block.BlockPumpkin;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import com.bioxx.tfc.Core.TFCTabs;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Core.TFCTabs;
 
 public class BlockCustomPumpkin extends BlockPumpkin
 {

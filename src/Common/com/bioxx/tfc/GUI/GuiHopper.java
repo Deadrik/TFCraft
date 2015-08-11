@@ -4,8 +4,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerHopper;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TileEntities.TEHopper;
 
 public class GuiHopper extends GuiContainerTFC

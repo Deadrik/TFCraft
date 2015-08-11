@@ -18,14 +18,13 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Blocks.BlockTerra;
-import com.bioxx.tfc.Core.Recipes;
-import com.bioxx.tfc.api.Constant.Global;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Blocks.BlockTerra;
+import com.bioxx.tfc.Core.Recipes;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockCustomDoor extends BlockTerra
 {

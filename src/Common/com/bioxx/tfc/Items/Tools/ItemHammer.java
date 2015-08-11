@@ -12,12 +12,12 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.TileEntities.TEAnvil;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;

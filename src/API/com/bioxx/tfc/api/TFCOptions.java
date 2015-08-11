@@ -1,74 +1,95 @@
 package com.bioxx.tfc.api;
 
+import com.bioxx.tfc.Core.Config.TFC_ConfigFiles;
 
+/**
+ * Values in here are default, for bounds look in:
+ * @see TFC_ConfigFiles
+ */
 public class TFCOptions
 {
+	// General
 	public static boolean enablePowderKegs = true;
-	public static boolean enableBetterGrass;
+	public static boolean enableBetterGrass = true;
 	public static boolean enableDebugMode;
 	public static boolean onionsAreGross;
-	//public static boolean use2DGrill;
 	public static boolean generateSmoke = false;
-	public static boolean enableSolidDetailed;
-	public static int maxRemovedSolidDetailed;
+	public static String quiverHUDPosition = "bottomleft";
+	public static boolean enableSolidDetailed = true;
+	public static int maxRemovedSolidDetailed = 12;
 
-	public static boolean enableCropsDie;
-
-	public static int minimumRockLoad;
-	public static int initialCollapseRatio;
-	public static int propogateCollapseChance;
-	public static boolean enableCaveIns;
-	public static boolean enableCaveInsDestroyOre;
-	
-	public static int ravineRarity;
-	public static int lavaFissureRarity;
-	public static int waterFissureRarity;
-
-	public static int yearLength;
+	// Time
+	public static int yearLength = 96;
 	public static float pitKilnBurnTime = 8.0f;
 	public static float bloomeryBurnTime = 14.4f;
 	public static float charcoalPitBurnTime = 18.0f;
 	public static int torchBurnTime = 48;
-
-	public static float cropGrowthMultiplier = 1.0f;
 	public static float saplingTimerMultiplier = 1.0f;
 	public static float tempIncreaseMultiplier = 1.0f;
 	public static float tempDecreaseMultiplier = 1.0f;
+	public static int oilLampFuelMult = 8;
 	public static float animalTimeMultiplier = 1.0f;
 
-	public static int maxProtectionMonths;
-	public static int protectionGain;
-	public static int protectionBuffer;
-	//////////////////Features////////////////////
-	public static int RockLayer2Height = 110;
-	public static int RockLayer3Height = 55;
+	// Food decay
+	/**
+	 * This is the nth root of 1.5 where the root is 24. This means that, excluding
+	 * environmental factors, food will decay at 50% per 24 hours.
+	 * Easy calculator here: http://www.basic-mathematics.com/nth-root-calculator.html
+	 */
+	public static float foodDecayRate = 1.0170378966055869517978300569768f;
+	public static boolean useDecayProtection = true;
+	public static int decayProtectionDays = 24;
+	public static float decayMultiplier = 1.0f;
 
+	// Cave-in
+	public static int minimumRockLoad = 1;
+	public static int initialCollapseRatio = 10;
+	public static int propogateCollapseChance = 55;
+	public static boolean enableCaveIns = true;
+	public static boolean enableCaveInsDestroyOre = true;
+
+	// World gen
+	public static int ravineRarity = 100;
+	public static int lavaFissureRarity = 25;
+	public static int waterFissureRarity = 90;
+
+	// Crops
+	public static boolean enableCropsDie;
+	public static float cropGrowthMultiplier = 1.0f;
+
+	// Protection
+	public static int maxProtectionMonths = 10;
+	public static int protectionGain = 8;
+	public static int protectionBuffer = 24;
+
+	// Player
 	public static int HealthGainRate = 20;
 	public static int HealthGainCap = 3000;
 
-	public static byte[] cropNutrientAColor = {(byte) 237, (byte) 28, (byte) 36, (byte) 200};
-	public static byte[] cropNutrientBColor = {(byte) 242, (byte) 101, (byte) 34, (byte) 200};
-	public static byte[] cropNutrientCColor = {(byte) 247, (byte) 148, (byte) 49, (byte) 200};
-	public static byte[] cropFertilizerColor = {(byte) 255, (byte) 255, (byte) 0, (byte) 200};
-
-	public static byte[] anvilRuleColor0 = {(byte) 237, (byte) 28, (byte) 36, (byte) 255};
-	public static byte[] anvilRuleColor1 = {(byte) 242, (byte) 101, (byte) 34, (byte) 255};
-	public static byte[] anvilRuleColor2 = {(byte) 247, (byte) 148, (byte) 49, (byte) 255};
-	public static boolean useDecayProtection = true;
-	public static int decayProtectionDays = 18;
-	public static float decayMultiplier = 1.0f;
-	public static int simSpeedNoPlayers = 1000;
-
+	// Materials
 	public static int smallOreUnits = 10;
 	public static int poorOreUnits = 15;
 	public static int normalOreUnits = 25;
 	public static int richOreUnits = 35;
 
-	public static String quiverHUDPosition = "bottomleft";
+	// Server
+	public static int simSpeedNoPlayers = 100;
 
-	public static int oilLampFuelMult = 4;
-	
+	// Overworked
 	public static boolean enableOverworkingChunks = true;
 	public static int goldPanLimit = 50;
 	public static int sluiceLimit = 300;
+
+	// Colors
+	public static byte[] cropNutrientAColor = {(byte) 237, (byte) 28, (byte) 36, (byte) 200};
+	public static byte[] cropNutrientBColor = {(byte) 242, (byte) 101, (byte) 34, (byte) 200};
+	public static byte[] cropNutrientCColor = {(byte) 247, (byte) 148, (byte) 49, (byte) 200};
+	public static byte[] cropFertilizerColor = {(byte) 255, (byte) 255, (byte) 0, (byte) 200};
+	public static byte[] anvilRuleColor0 = {(byte) 237, (byte) 28, (byte) 36, (byte) 255};
+	public static byte[] anvilRuleColor1 = {(byte) 242, (byte) 101, (byte) 34, (byte) 255};
+	public static byte[] anvilRuleColor2 = {(byte) 247, (byte) 148, (byte) 49, (byte) 255};
+
+	// Not actual option
+	public static int RockLayer2Height = 110;
+	public static int RockLayer3Height = 55;
 }

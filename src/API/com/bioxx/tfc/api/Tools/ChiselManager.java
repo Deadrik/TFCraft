@@ -1,13 +1,14 @@
 package com.bioxx.tfc.api.Tools;
 
-import com.bioxx.tfc.Core.Player.PlayerInfo;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.bioxx.tfc.Core.Player.PlayerInfo;
 
 /**
  * Created by raymondbh on 08.07.2015.

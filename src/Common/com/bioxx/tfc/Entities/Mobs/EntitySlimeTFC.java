@@ -1,12 +1,12 @@
 package com.bioxx.tfc.Entities.Mobs;
 
-import com.bioxx.tfc.Core.TFC_MobData;
-
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Core.TFC_MobData;
 
 public class EntitySlimeTFC extends EntitySlime
 {

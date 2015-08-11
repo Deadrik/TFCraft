@@ -1,15 +1,15 @@
 package com.bioxx.tfc.Entities.AI;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.Entities.IAnimal;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class AIEatGrass extends EntityAIBase
 {

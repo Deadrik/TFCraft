@@ -3,8 +3,6 @@ package com.bioxx.tfc.TileEntities;
 import java.util.List;
 import java.util.Random;
 
-import com.bioxx.tfc.Entities.EntityStand;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -16,6 +14,8 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+
+import com.bioxx.tfc.Entities.EntityStand;
 
 public class TEStand extends TileEntity implements IInventory
 {

@@ -1,27 +1,19 @@
 package com.bioxx.tfc.WorldGen.GenLayers;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-
 import javax.imageio.ImageIO;
 
 import net.minecraft.world.gen.layer.GenLayer;
 
 import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.WorldGen.TFCWorldType;
-import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerAddIslandTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerBiomeEdge;
-import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerBiomeTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerDeepOcean;
-import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerIslandTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerLakes;
-import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerShoreTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.Biome.*;
 import com.bioxx.tfc.WorldGen.GenLayers.River.GenLayerRiverInitTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.River.GenLayerRiverMixTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.River.GenLayerRiverTFC;
+import com.bioxx.tfc.WorldGen.TFCBiome;
+import com.bioxx.tfc.WorldGen.TFCWorldType;
 
 public abstract class GenLayerTFC extends GenLayer
 {

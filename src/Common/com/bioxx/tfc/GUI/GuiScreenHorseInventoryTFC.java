@@ -4,13 +4,12 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
-
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
+import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
+import com.bioxx.tfc.Reference;
 
 @SideOnly(Side.CLIENT)
 public class GuiScreenHorseInventoryTFC extends GuiContainerTFC

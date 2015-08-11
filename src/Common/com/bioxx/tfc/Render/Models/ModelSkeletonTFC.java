@@ -1,13 +1,13 @@
 package com.bioxx.tfc.Render.Models;
 
-import com.bioxx.tfc.Entities.Mobs.EntitySkeletonTFC;
-
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Entities.Mobs.EntitySkeletonTFC;
 
 @SideOnly(Side.CLIENT)
 public class ModelSkeletonTFC extends ModelZombie

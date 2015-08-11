@@ -12,12 +12,11 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
-
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Effects.GasFX;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Effects.GasFX;
+import com.bioxx.tfc.Reference;
 
 public class BlockHotWaterStatic extends BlockLiquidStatic
 {

@@ -4,8 +4,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerGrill;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 

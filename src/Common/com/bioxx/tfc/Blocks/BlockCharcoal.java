@@ -15,8 +15,8 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Items.Tools.ItemCustomShovel;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.api.TFCItems;
 
 public class BlockCharcoal extends BlockTerra

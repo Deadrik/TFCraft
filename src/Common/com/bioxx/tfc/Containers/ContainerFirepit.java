@@ -8,11 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Containers.Slots.SlotFirepit;
-import com.bioxx.tfc.Containers.Slots.SlotFirepitFuel;
-import com.bioxx.tfc.Containers.Slots.SlotFirepitIn;
-import com.bioxx.tfc.Containers.Slots.SlotFirepitOut;
-import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
+import com.bioxx.tfc.Containers.Slots.*;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.TileEntities.TEFirepit;

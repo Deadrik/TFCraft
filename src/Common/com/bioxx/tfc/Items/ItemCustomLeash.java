@@ -15,11 +15,11 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ISize;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class ItemCustomLeash extends ItemLead implements ISize
 {
