@@ -15,12 +15,12 @@ import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.ItemNBTPacket;
 import com.bioxx.tfc.Items.ItemBlueprint;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
 
 public class GuiBlueprint extends GuiScreen
 {

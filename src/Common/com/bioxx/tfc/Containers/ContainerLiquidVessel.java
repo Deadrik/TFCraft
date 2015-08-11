@@ -11,8 +11,8 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
 import com.bioxx.tfc.Containers.Slots.SlotLiquidVessel;
-import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
+import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryMold;
 import com.bioxx.tfc.api.HeatRegistry;

@@ -3,6 +3,23 @@
 //=======================================================
 package com.bioxx.tfc;
 
+import net.minecraft.world.WorldType;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.ForgeModContainer;
+import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
+
 import com.bioxx.tfc.Commands.*;
 import com.bioxx.tfc.Core.*;
 import com.bioxx.tfc.Core.Player.PlayerTracker;
@@ -17,22 +34,6 @@ import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.SkillsManager;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.world.WorldType;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.ForgeModContainer;
-import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -61,8 +62,6 @@ public class TerraFirmaCraft
 
 		TFC_ConfigFiles.preInit(event.getModConfigurationDirectory());
 		TFC_ConfigFiles.reloadGeneral(); // No special needs
-		TFC_ConfigFiles.reloadCrafting(); // Require sync from server
-		// No world gen here, other mods may need to load first!
 
 		proxy.registerTickHandler();
 
@@ -198,6 +197,9 @@ public class TerraFirmaCraft
 		//Register all of the recipes
 		TFC_OreDictionary.registerOreDict();
 		Recipes.registerRecipes();
+
+		// Needs items to be available
+		TFC_ConfigFiles.reloadCrafting();
 
 		ItemHeat.SetupItemHeat();
 

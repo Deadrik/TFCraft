@@ -7,9 +7,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Containers.ContainerSpecialCrafting;
 import com.bioxx.tfc.GUI.GuiKnapping;
+import com.bioxx.tfc.TerraFirmaCraft;
 
 public class SlotSpecialCraftingOutput extends Slot
 {

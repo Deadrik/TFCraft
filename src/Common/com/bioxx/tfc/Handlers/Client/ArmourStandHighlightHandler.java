@@ -6,13 +6,12 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.TileEntities.TEStand;
 import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class ArmourStandHighlightHandler
 {

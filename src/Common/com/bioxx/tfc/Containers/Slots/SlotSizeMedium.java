@@ -1,9 +1,9 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.api.Interfaces.ISize;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.api.Interfaces.ISize;
 
 public class SlotSizeMedium extends SlotSize
 {

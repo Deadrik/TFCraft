@@ -3,52 +3,13 @@ package com.bioxx.tfc.Handlers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.network.IGuiHandler;
 
-import com.bioxx.tfc.Containers.ContainerAnvil;
-import com.bioxx.tfc.Containers.ContainerBarrel;
-import com.bioxx.tfc.Containers.ContainerBlastFurnace;
-import com.bioxx.tfc.Containers.ContainerChestTFC;
-import com.bioxx.tfc.Containers.ContainerCrucible;
-import com.bioxx.tfc.Containers.ContainerFirepit;
-import com.bioxx.tfc.Containers.ContainerFoodPrep;
-import com.bioxx.tfc.Containers.ContainerForge;
-import com.bioxx.tfc.Containers.ContainerGrill;
-import com.bioxx.tfc.Containers.ContainerHopper;
-import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
-import com.bioxx.tfc.Containers.ContainerLargeVessel;
-import com.bioxx.tfc.Containers.ContainerLiquidVessel;
-import com.bioxx.tfc.Containers.ContainerLogPile;
-import com.bioxx.tfc.Containers.ContainerMold;
-import com.bioxx.tfc.Containers.ContainerNestBox;
-import com.bioxx.tfc.Containers.ContainerPlanSelection;
-import com.bioxx.tfc.Containers.ContainerPlayerTFC;
-import com.bioxx.tfc.Containers.ContainerQuern;
-import com.bioxx.tfc.Containers.ContainerQuiver;
-import com.bioxx.tfc.Containers.ContainerSluice;
-import com.bioxx.tfc.Containers.ContainerSpecialCrafting;
-import com.bioxx.tfc.Containers.ContainerVessel;
-import com.bioxx.tfc.Containers.ContainerWorkbench;
+import com.bioxx.tfc.Containers.*;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
-import com.bioxx.tfc.TileEntities.TEAnvil;
-import com.bioxx.tfc.TileEntities.TEBarrel;
-import com.bioxx.tfc.TileEntities.TEBlastFurnace;
-import com.bioxx.tfc.TileEntities.TEChest;
-import com.bioxx.tfc.TileEntities.TECrucible;
-import com.bioxx.tfc.TileEntities.TEFirepit;
-import com.bioxx.tfc.TileEntities.TEFoodPrep;
-import com.bioxx.tfc.TileEntities.TEForge;
-import com.bioxx.tfc.TileEntities.TEGrill;
-import com.bioxx.tfc.TileEntities.TEHopper;
-import com.bioxx.tfc.TileEntities.TELogPile;
-import com.bioxx.tfc.TileEntities.TENestBox;
-import com.bioxx.tfc.TileEntities.TESluice;
-import com.bioxx.tfc.TileEntities.TEVessel;
-import com.bioxx.tfc.TileEntities.TEQuern;
-import com.bioxx.tfc.TileEntities.TEWorkbench;
-
-import cpw.mods.fml.common.network.IGuiHandler;
+import com.bioxx.tfc.TileEntities.*;
 
 public class GuiHandler implements IGuiHandler
 {

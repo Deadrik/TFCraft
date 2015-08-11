@@ -1,6 +1,5 @@
 package com.bioxx.tfc.Handlers.Client;
 
-import com.bioxx.tfc.api.Tools.ChiselManager;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,19 +7,14 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.Blocks.Terrain.BlockCobble;
-import com.bioxx.tfc.Blocks.Terrain.BlockSmooth;
-import com.bioxx.tfc.Blocks.Terrain.BlockStone;
-import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
-import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import com.bioxx.tfc.api.Tools.ChiselManager;
 
 public class ChiselHighlightHandler
 {

@@ -1,19 +1,13 @@
 package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-
 import javax.imageio.ImageIO;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerFuzzyZoomTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerSmoothTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerVoronoiZoomTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerZoomTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.*;
 
 public abstract class GenRockLayer extends GenLayerTFC
 {

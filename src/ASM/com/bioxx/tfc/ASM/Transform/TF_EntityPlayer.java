@@ -3,14 +3,9 @@ package com.bioxx.tfc.ASM.Transform;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.tree.InsnList;
-import org.objectweb.asm.tree.InsnNode;
-import org.objectweb.asm.tree.LabelNode;
-import org.objectweb.asm.tree.MethodInsnNode;
-import org.objectweb.asm.tree.VarInsnNode;
-
 import com.bioxx.tfc.ASM.ClassTransformer;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.tree.*;
 
 public class TF_EntityPlayer extends ClassTransformer
 {

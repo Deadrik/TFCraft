@@ -9,15 +9,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.Terrain.BlockCobble;
 import com.bioxx.tfc.Blocks.Terrain.BlockSand;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import com.bioxx.tfc.Reference;
 
 public class BlockThatch extends BlockTerra
 {

@@ -1,11 +1,11 @@
 package com.bioxx.tfc.Items;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
+
 import com.bioxx.tfc.api.Enums.EnumAmmo;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.IQuiverAmmo;
-
-import net.minecraft.client.renderer.texture.IIconRegister;
 
 public class ItemArrow extends ItemTerra implements IQuiverAmmo
 {

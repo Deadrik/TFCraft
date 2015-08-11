@@ -7,10 +7,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Blocks.BlockWoodSupport;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class ItemWoodSupport extends ItemTerraBlock
 {

@@ -8,9 +8,9 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Entities.Mobs.EntitySkeletonTFC;
 import com.bioxx.tfc.Items.ItemQuiver;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Render.Models.ModelQuiver;
 import com.bioxx.tfc.api.Interfaces.IEquipable;
 

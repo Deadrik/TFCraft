@@ -3,15 +3,14 @@ package com.bioxx.tfc.Core;
 import java.util.HashMap;
 
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.WorldCacheManager;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Util.Helper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFC_Climate
 {

@@ -8,12 +8,11 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+import cpw.mods.fml.common.IWorldGenerator;
 
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
-
-import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenOre implements IWorldGenerator
 {

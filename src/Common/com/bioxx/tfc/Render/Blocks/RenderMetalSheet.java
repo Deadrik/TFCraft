@@ -1,12 +1,12 @@
 package com.bioxx.tfc.Render.Blocks;
 
-import com.bioxx.tfc.TileEntities.TEMetalSheet;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+
+import com.bioxx.tfc.TileEntities.TEMetalSheet;
 
 public class RenderMetalSheet implements ISimpleBlockRenderingHandler
 {

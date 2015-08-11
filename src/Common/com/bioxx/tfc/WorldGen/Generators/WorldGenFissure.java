@@ -9,20 +9,18 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
+import cpw.mods.fml.common.IWorldGenerator;
 
-import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Util.BlockMeta;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Enums.TFCDirection;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Util.ByteCoord;
 import com.bioxx.tfc.api.Util.CollapseData;
 import com.bioxx.tfc.api.Util.CollapseList;
-
-import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenFissure implements IWorldGenerator
 {

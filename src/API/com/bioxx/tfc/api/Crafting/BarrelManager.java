@@ -3,10 +3,10 @@ package com.bioxx.tfc.api.Crafting;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bioxx.tfc.TileEntities.TEBarrel;
-
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import com.bioxx.tfc.TileEntities.TEBarrel;
 
 public class BarrelManager
 {

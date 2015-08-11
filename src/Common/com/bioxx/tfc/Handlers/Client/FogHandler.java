@@ -2,13 +2,12 @@ package com.bioxx.tfc.Handlers.Client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.EntityViewRenderEvent.RenderFogEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.WeatherManager;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class FogHandler 
 {

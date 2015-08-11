@@ -19,17 +19,16 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.CollisionRayTraceStandard;
-import com.bioxx.tfc.Core.TFC_Textures;
-import com.bioxx.tfc.TileEntities.TEMetalSheet;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.Interfaces.ICustomCollision;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Core.CollisionRayTraceStandard;
+import com.bioxx.tfc.Core.TFC_Textures;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.TileEntities.TEMetalSheet;
+import com.bioxx.tfc.api.Interfaces.ICustomCollision;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class BlockMetalSheet extends BlockTerraContainer implements ICustomCollision
 {

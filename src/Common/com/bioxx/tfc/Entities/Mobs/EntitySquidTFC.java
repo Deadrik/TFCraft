@@ -8,8 +8,8 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
-import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.TFCItems;
 
 public class EntitySquidTFC extends EntitySquid
 {

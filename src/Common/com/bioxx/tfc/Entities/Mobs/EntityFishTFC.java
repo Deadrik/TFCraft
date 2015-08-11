@@ -12,8 +12,8 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.EntityFishHookTFC;
-import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.TFCItems;
 
 public class EntityFishTFC extends EntitySquid
 {

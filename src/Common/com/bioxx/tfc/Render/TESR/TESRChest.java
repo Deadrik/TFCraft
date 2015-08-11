@@ -6,16 +6,15 @@ import net.minecraft.client.model.ModelLargeChest;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import cpw.mods.fml.common.FMLLog;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.Devices.BlockChestTFC;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TileEntities.TEChest;
 import com.bioxx.tfc.api.Constant.Global;
-
-import cpw.mods.fml.common.FMLLog;
 
 public class TESRChest extends TileEntitySpecialRenderer
 {

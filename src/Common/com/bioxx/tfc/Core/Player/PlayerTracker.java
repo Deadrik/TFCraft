@@ -3,19 +3,18 @@ package com.bioxx.tfc.Core.Player;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
-
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Handlers.Network.AbstractPacket;
-import com.bioxx.tfc.Handlers.Network.InitClientWorldPacket;
-import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ServerDisconnectionFromClientEvent;
+
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Handlers.Network.AbstractPacket;
+import com.bioxx.tfc.Handlers.Network.InitClientWorldPacket;
+import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
+import com.bioxx.tfc.TerraFirmaCraft;
 
 public class PlayerTracker
 {

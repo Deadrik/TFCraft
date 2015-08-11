@@ -15,8 +15,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
+import com.bioxx.tfc.Reference;
 
 public class BlockMoss extends BlockTerra
 {

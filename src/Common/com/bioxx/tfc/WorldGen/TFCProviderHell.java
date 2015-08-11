@@ -5,11 +5,10 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderHell;
 import net.minecraft.world.storage.WorldInfo;
-
-import com.bioxx.tfc.Core.TFC_Climate;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Core.TFC_Climate;
 
 public class TFCProviderHell extends TFCProvider
 {

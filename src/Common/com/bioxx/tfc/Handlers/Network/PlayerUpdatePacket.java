@@ -1,20 +1,18 @@
 package com.bioxx.tfc.Handlers.Network;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
-
 import java.util.HashMap;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import cpw.mods.fml.common.network.ByteBufUtils;
 
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.Player.SkillStats;
-
-import cpw.mods.fml.common.network.ByteBufUtils;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.TerraFirmaCraft;
 
 public class PlayerUpdatePacket extends AbstractPacket
 {

@@ -7,8 +7,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.google.common.collect.Sets;
 
 public class ItemCustomScythe extends ItemTerraTool

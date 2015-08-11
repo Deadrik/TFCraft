@@ -16,9 +16,9 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.api.TFCBlocks;
 
 public class BlockCustomSnow extends BlockTerra

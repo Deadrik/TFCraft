@@ -4,10 +4,9 @@ import java.util.ArrayList;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 import com.bioxx.tfc.TerraFirmaCraft;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TFCItems
 {

@@ -1,9 +1,9 @@
 package com.bioxx.tfc.Food;
 
-import com.bioxx.tfc.TileEntities.TECrop;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.TileEntities.TECrop;
 
 public class CropIndexJute extends CropIndex
 {

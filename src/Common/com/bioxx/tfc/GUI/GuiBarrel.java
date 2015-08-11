@@ -17,22 +17,22 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerBarrel;
+import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TileEntities.TEBarrel;
-import com.bioxx.tfc.api.Food;
-import com.bioxx.tfc.api.TFCFluids;
-import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.BarrelBriningRecipe;
 import com.bioxx.tfc.api.Crafting.BarrelManager;
 import com.bioxx.tfc.api.Crafting.BarrelPreservativeRecipe;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.TFCFluids;
+import com.bioxx.tfc.api.TFCItems;
 
 public class GuiBarrel extends GuiContainerTFC
 {

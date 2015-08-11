@@ -1,7 +1,5 @@
 package com.bioxx.tfc.Blocks.Devices;
 
-import static net.minecraftforge.common.util.ForgeDirection.UP;
-
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -18,17 +16,18 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Items.ItemLogs;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryBase;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TileEntities.TEPottery;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import static net.minecraftforge.common.util.ForgeDirection.UP;
 
 public class BlockPottery extends BlockTerraContainer
 {

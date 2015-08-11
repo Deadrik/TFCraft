@@ -4,8 +4,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerVessel;
+import com.bioxx.tfc.Reference;
 
 public class GuiVessel extends GuiContainerTFC
 {

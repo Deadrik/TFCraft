@@ -14,11 +14,11 @@ import net.minecraft.util.AxisAlignedBB;
 import com.bioxx.tfc.Blocks.Devices.BlockEarlyBloomery;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Items.ItemOre;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Interfaces.ISmeltable;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Interfaces.ISmeltable;
 
 public class TEBloomery extends NetworkTileEntity
 {

@@ -24,15 +24,15 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Food.ItemMeal;
 import com.bioxx.tfc.Food.TFCPotion;
-import com.bioxx.tfc.api.Food;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Tools.IKnife;
 

@@ -19,8 +19,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Core.CollisionRayTraceStandard;
 import com.bioxx.tfc.TileEntities.TEPartial;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Interfaces.ICustomCollision;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class BlockStair extends BlockPartial implements ICustomCollision
 {

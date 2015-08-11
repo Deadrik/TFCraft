@@ -9,9 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.TFCOptions;
 
 public class ItemOreSmall extends ItemOre
 {

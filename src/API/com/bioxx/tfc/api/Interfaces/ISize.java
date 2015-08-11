@@ -1,10 +1,10 @@
 package com.bioxx.tfc.api.Interfaces;
 
+import net.minecraft.item.ItemStack;
+
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
-
-import net.minecraft.item.ItemStack;
 
 public interface ISize 
 {

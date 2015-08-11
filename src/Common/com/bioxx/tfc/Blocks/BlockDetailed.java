@@ -21,6 +21,8 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Core.CollisionRayTraceDetailed;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
@@ -31,9 +33,6 @@ import com.bioxx.tfc.TileEntities.TEDetailed;
 import com.bioxx.tfc.TileEntities.TEWoodConstruct;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockDetailed extends BlockPartial
 {

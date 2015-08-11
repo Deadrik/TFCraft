@@ -15,10 +15,10 @@ import com.bioxx.tfc.Food.ItemMeal;
 import com.bioxx.tfc.Handlers.CraftingHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
 import com.bioxx.tfc.Items.ItemTFCArmor;
-import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Interfaces.IEquipable;
 import com.bioxx.tfc.api.Interfaces.IEquipable.EquipType;
 import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.TFCItems;
 
 public class ContainerPlayerTFC extends ContainerPlayer
 {

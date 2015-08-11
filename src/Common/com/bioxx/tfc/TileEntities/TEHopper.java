@@ -19,6 +19,8 @@ import net.minecraft.util.Facing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Blocks.Devices.BlockChestTFC;
 import com.bioxx.tfc.Blocks.Devices.BlockHopper;
@@ -27,9 +29,6 @@ import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.TFCItems;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TEHopper extends NetworkTileEntity implements IHopper
 {

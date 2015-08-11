@@ -3,8 +3,8 @@ package com.bioxx.tfc.WorldGen.GenLayers.River;
 import net.minecraft.world.gen.layer.GenLayer;
 
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
+import com.bioxx.tfc.WorldGen.TFCBiome;
 
 public class GenLayerRiverMixTFC extends GenLayerTFC
 {

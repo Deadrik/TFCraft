@@ -1,8 +1,8 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
-import com.bioxx.tfc.Reference;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
+
+import com.bioxx.tfc.Reference;
 
 public class BlockMMBrick extends BlockMMSmooth
 {

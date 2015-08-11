@@ -9,8 +9,8 @@ import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.api.Food;
-import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.TFC_ItemHeat;
 
 public class FoodItemRenderer implements IItemRenderer
 {

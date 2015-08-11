@@ -16,16 +16,16 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Containers.ContainerAnvil;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.TileEntities.TEAnvil;
-import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Crafting.PlanRecipe;
 import com.bioxx.tfc.api.Enums.RuleEnum;
+import com.bioxx.tfc.api.TFCOptions;
 
 public class GuiAnvil extends GuiContainerTFC
 {

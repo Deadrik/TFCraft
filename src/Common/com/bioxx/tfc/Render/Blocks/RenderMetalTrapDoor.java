@@ -5,13 +5,12 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 import com.bioxx.tfc.Blocks.BlockMetalSheet;
 import com.bioxx.tfc.Blocks.BlockMetalTrapDoor;
 import com.bioxx.tfc.TileEntities.TEMetalTrapDoor;
 import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderMetalTrapDoor implements ISimpleBlockRenderingHandler
 {

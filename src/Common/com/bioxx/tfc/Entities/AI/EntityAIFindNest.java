@@ -13,8 +13,8 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.Mobs.EntityChickenTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityPheasantTFC;
 import com.bioxx.tfc.TileEntities.TENestBox;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class EntityAIFindNest extends EntityAIBase
 {
