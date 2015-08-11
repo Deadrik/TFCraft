@@ -1,8 +1,10 @@
 package com.bioxx.tfc.api;
 
+import com.bioxx.tfc.Core.Config.TFC_ConfigFiles;
+
 /**
  * Values in here are default, for bounds look in:
- * @see com.bioxx.tfc.Core.TFC_ConfigFiles
+ * @see TFC_ConfigFiles
  */
 public class TFCOptions
 {

@@ -1,8 +1,11 @@
 package com.bioxx.tfc.api;
 
 /**
- * These values are only valid on our side. They can be overwritten internally by the servers current settings and are synced making connection with the server.
+ * These values are updated and read with via reflection.
+ * Put default values in here.
+ * For other mods: Only up to date after the client has recieved the proper packet. todo: add event after sync is done
  */
+@SuppressWarnings("unused")
 public class TFCCrafting
 {
 	public static boolean appleConversion;

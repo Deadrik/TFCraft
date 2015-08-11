@@ -1,4 +1,4 @@
-package com.bioxx.tfc.Core;
+package com.bioxx.tfc.Core.Config;
 
 import java.util.ArrayList;
 import java.util.List;
