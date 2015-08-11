@@ -11,13 +11,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TileEntities.TEQuern;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class TESRQuern extends TESRBase implements ISimpleBlockRenderingHandler
 {

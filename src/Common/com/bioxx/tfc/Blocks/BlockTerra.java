@@ -1,6 +1,5 @@
 package com.bioxx.tfc.Blocks;
 
-import static net.minecraftforge.common.util.ForgeDirection.UP;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
@@ -14,9 +13,11 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.api.TFCOptions;
+
+import static net.minecraftforge.common.util.ForgeDirection.UP;
 
 public abstract class BlockTerra extends Block
 {

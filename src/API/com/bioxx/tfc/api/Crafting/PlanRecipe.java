@@ -1,8 +1,8 @@
 package com.bioxx.tfc.api.Crafting;
 
-import com.bioxx.tfc.api.Enums.RuleEnum;
-
 import net.minecraft.util.IIcon;
+
+import com.bioxx.tfc.api.Enums.RuleEnum;
 
 public class PlanRecipe 
 {

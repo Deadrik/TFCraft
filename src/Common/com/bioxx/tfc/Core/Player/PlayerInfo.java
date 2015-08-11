@@ -2,15 +2,15 @@ package com.bioxx.tfc.Core.Player;
 
 import java.util.UUID;
 
-import com.bioxx.tfc.api.Tools.ChiselManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
+import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
-import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.Tools.ChiselManager;
 
 public class PlayerInfo
 {

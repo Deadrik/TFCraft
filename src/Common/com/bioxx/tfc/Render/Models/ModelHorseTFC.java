@@ -5,15 +5,14 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
 import com.bioxx.tfc.api.Entities.IAnimal;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelHorseTFC extends ModelBase

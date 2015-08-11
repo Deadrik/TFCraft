@@ -3,7 +3,6 @@ package com.bioxx.tfc.Items.Tools;
 import java.util.List;
 import java.util.Set;
 
-import com.bioxx.tfc.api.Tools.ChiselManager;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,6 +11,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Tools.ChiselManager;
 import com.bioxx.tfc.api.Tools.IToolChisel;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;

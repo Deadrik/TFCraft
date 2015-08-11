@@ -6,9 +6,9 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockIngotPile;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Render.Models.ModelIngotPile;
 import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.api.TFCBlocks;

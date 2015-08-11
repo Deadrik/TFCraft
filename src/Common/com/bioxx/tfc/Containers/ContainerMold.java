@@ -2,11 +2,7 @@ package com.bioxx.tfc.Containers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryCraftResult;
-import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -17,9 +13,9 @@ import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
+import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
-import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
 
 public class ContainerMold extends ContainerTFC
 {

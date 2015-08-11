@@ -4,10 +4,9 @@ import java.util.Random;
 
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+import cpw.mods.fml.common.IWorldGenerator;
 
 import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenFissureCluster implements IWorldGenerator
 {

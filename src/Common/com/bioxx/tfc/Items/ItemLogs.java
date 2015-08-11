@@ -14,13 +14,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TileEntities.TELogPile;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class ItemLogs extends ItemTerra
 {

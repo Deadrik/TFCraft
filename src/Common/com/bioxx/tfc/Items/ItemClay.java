@@ -8,12 +8,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
 
 public class ItemClay extends ItemLooseRock
 {

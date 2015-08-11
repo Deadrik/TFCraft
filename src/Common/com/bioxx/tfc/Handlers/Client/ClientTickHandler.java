@@ -1,13 +1,12 @@
 package com.bioxx.tfc.Handlers.Client;
 
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.TFC_Time;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
+
+import com.bioxx.tfc.Core.TFC_Time;
 
 public class ClientTickHandler// implements ITickHandler
 {

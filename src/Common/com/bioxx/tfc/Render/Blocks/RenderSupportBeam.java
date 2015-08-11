@@ -5,10 +5,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 {

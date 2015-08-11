@@ -1,12 +1,11 @@
 package com.bioxx.tfc.Handlers.Network;
 
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Core.Player.PlayerInfo;
-import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
+
+import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.Core.TFC_Time;
 
 public class KeyPressPacket extends AbstractPacket
 {

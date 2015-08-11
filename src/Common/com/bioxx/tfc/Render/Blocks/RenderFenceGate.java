@@ -5,13 +5,12 @@ import net.minecraft.block.BlockDirectional;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.TileEntities.TEFenceGate;
 import com.bioxx.tfc.api.Interfaces.IMultipleBlock;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderFenceGate  implements ISimpleBlockRenderingHandler 
 {

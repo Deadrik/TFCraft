@@ -7,9 +7,9 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenFissure;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomFruitTree;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenFissure;
+import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 

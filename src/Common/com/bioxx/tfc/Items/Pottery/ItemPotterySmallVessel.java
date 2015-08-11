@@ -13,26 +13,25 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Metal.Alloy;
 import com.bioxx.tfc.Core.Metal.AlloyManager;
 import com.bioxx.tfc.Core.Metal.AlloyMetal;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.Items.ItemOreSmall;
-import com.bioxx.tfc.api.Metal;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.IBag;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
+import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.Util.Helper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 {

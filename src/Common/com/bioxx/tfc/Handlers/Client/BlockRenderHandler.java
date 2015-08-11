@@ -5,17 +5,16 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.Render.TFC_CoreRender;
 import com.bioxx.tfc.Render.Blocks.RenderAnvil;
 import com.bioxx.tfc.Render.Blocks.RenderCrop;
 import com.bioxx.tfc.Render.Blocks.RenderDetailed;
 import com.bioxx.tfc.Render.Blocks.RenderGrass;
+import com.bioxx.tfc.Render.TFC_CoreRender;
 import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 {

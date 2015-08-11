@@ -3,13 +3,12 @@ package com.bioxx.tfc.Blocks.Devices;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockWorkbench extends BlockTerra
 {

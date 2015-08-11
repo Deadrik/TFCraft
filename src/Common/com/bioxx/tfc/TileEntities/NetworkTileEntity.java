@@ -7,14 +7,13 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Handlers.Network.AbstractPacket;
-import com.bioxx.tfc.Handlers.Network.DataBlockPacket;
-
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Handlers.Network.AbstractPacket;
+import com.bioxx.tfc.Handlers.Network.DataBlockPacket;
+import com.bioxx.tfc.TerraFirmaCraft;
 
 public abstract class NetworkTileEntity extends TileEntity
 {

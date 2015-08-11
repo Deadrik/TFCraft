@@ -9,8 +9,8 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Entities.EntityJavelin;
+import com.bioxx.tfc.Reference;
 
 public class RenderTerraJavelin extends Render
 {

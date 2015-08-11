@@ -3,12 +3,12 @@ package com.bioxx.tfc.Entities.AI;
 import java.util.Iterator;
 import java.util.List;
 
-import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 
 public class EntityAIMateTFC extends EntityAIBase
 {

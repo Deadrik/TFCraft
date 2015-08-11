@@ -17,17 +17,15 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.Player.*;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Core.Player.BodyTempStats;
-import com.bioxx.tfc.Core.Player.FoodStatsTFC;
-import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
-import com.bioxx.tfc.Core.Player.PlayerInfo;
-import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
-import com.bioxx.tfc.Core.Player.SkillStats;
 import com.bioxx.tfc.Entities.EntityProjectileTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Food.ItemMeal;
@@ -38,20 +36,16 @@ import com.bioxx.tfc.Items.ItemBloom;
 import com.bioxx.tfc.Items.ItemOreSmall;
 import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Items.Tools.ItemJavelin;
-import com.bioxx.tfc.api.Food;
-import com.bioxx.tfc.api.TFCAttributes;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Interfaces.IEquipable;
 import com.bioxx.tfc.api.Interfaces.IEquipable.EquipType;
 import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.TFCAttributes;
+import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Util.Helper;
-
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityLivingHandler
 {

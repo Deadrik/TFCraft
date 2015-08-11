@@ -7,9 +7,9 @@ import net.minecraft.util.IIcon;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class GuiKnappingButton extends GuiButton 
 {

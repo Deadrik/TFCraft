@@ -8,19 +8,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Render.EntityRendererTFC;
-import com.bioxx.tfc.api.FoodRegistry;
-import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
+import com.bioxx.tfc.api.FoodRegistry;
 import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Util.Helper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class FoodStatsTFC
 {

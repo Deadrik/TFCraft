@@ -5,8 +5,6 @@ package com.bioxx.tfc;
 
 import java.util.Arrays;
 
-import com.google.common.eventbus.EventBus;
-
 import cpw.mods.fml.common.DummyModContainer;
 import cpw.mods.fml.common.LoadController;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -18,6 +16,8 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.MCVersion;
+
+import com.google.common.eventbus.EventBus;
 
 @MCVersion(value = "1.7.10")
 public class TerraFirmaCraftCore extends DummyModContainer

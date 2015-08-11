@@ -7,15 +7,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.Metal;
-import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
+import com.bioxx.tfc.api.Metal;
+import com.bioxx.tfc.api.TFCOptions;
 
 public class ItemOre extends ItemTerra implements ISmeltable
 {

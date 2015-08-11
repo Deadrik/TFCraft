@@ -17,12 +17,12 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEPottery;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ISize;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 
 public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 {

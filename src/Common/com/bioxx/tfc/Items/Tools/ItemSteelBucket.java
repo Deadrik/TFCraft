@@ -14,14 +14,13 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
+import cpw.mods.fml.common.eventhandler.Event;
 
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Util.Helper;
-
-import cpw.mods.fml.common.eventhandler.Event;
 
 public class ItemSteelBucket extends ItemTerra
 {

@@ -3,11 +3,7 @@ package com.bioxx.tfc.Handlers;
 import java.util.Random;
 
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityMultiPart;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -22,18 +18,17 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
+import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_MobData;
-import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Entities.EntityJavelin;
 import com.bioxx.tfc.Items.ItemTFCArmor;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Events.EntityArmorCalcEvent;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class EntityDamageHandler
 {

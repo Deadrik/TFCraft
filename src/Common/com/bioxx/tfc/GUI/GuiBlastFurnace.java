@@ -4,9 +4,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerBlastFurnace;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TileEntities.TEBlastFurnace;
 import com.bioxx.tfc.api.TFCOptions;
 

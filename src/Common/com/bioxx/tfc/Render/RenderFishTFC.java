@@ -7,15 +7,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityFishTFC;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import com.bioxx.tfc.Reference;
 
 @SideOnly(Side.CLIENT)
 public class RenderFishTFC extends RenderLiving

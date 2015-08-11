@@ -3,17 +3,8 @@ package com.bioxx.tfc.Entities.Mobs;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIEatGrass;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -32,10 +23,10 @@ import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIPanicTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityDeer extends EntityAnimal implements IAnimal

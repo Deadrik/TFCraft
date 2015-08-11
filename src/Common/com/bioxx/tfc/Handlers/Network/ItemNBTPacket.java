@@ -1,17 +1,16 @@
 package com.bioxx.tfc.Handlers.Network;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
-
 import java.util.LinkedList;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 
-import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.TerraFirmaCraft;
 
 public class ItemNBTPacket extends AbstractPacket {
 	private NBTTagCompound tags;

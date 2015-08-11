@@ -9,9 +9,9 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntitySheepTFC;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.api.Entities.IAnimal;
 
 public class RenderSheepTFC extends RenderSheep

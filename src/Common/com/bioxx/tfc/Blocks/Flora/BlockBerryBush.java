@@ -18,8 +18,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Climate;
@@ -28,11 +29,9 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.FloraIndex;
 import com.bioxx.tfc.Food.FloraManager;
 import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TileEntities.TEBerryBush;
 import com.bioxx.tfc.api.Util.Helper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBerryBush extends BlockTerraContainer
 {

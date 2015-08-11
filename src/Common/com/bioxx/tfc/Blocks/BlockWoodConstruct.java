@@ -17,14 +17,13 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Core.CollisionRayTraceStandard;
 import com.bioxx.tfc.TileEntities.TEWoodConstruct;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Interfaces.ICustomCollision;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class BlockWoodConstruct extends BlockTerraContainer implements ICustomCollision
 {

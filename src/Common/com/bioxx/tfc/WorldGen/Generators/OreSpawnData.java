@@ -6,10 +6,10 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 
-import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class OreSpawnData
 {

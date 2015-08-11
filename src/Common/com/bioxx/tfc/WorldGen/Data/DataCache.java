@@ -7,8 +7,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.LongHashMap;
 
 import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.WorldCacheManager;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
+import com.bioxx.tfc.WorldGen.WorldCacheManager;
 
 public class DataCache
 {

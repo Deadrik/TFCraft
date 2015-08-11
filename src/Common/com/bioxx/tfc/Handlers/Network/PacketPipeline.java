@@ -1,26 +1,17 @@
 package com.bioxx.tfc.Handlers.Network;
 
+import java.util.*;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageCodec;
-
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.EnumMap;
-import java.util.LinkedList;
-import java.util.List;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetHandlerPlayServer;
-
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TerraFirmaCraft;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.FMLOutboundHandler;
@@ -28,6 +19,9 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
 
 /**
  * Packet pipeline class. Directs all registered packet data to be handled by

@@ -1,12 +1,14 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
 import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import com.bioxx.tfc.api.Constant.Global;
 
 public class ItemLeatherRack extends ItemTerraBlock

@@ -12,13 +12,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TileEntities.TEWoodConstruct;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class ItemPlank extends ItemTerra
 {

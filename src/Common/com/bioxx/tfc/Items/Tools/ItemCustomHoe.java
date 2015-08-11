@@ -12,21 +12,20 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
+import cpw.mods.fml.common.eventhandler.Event.Result;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TileEntities.TEFarmland;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ISize;
-
-import cpw.mods.fml.common.eventhandler.Event.Result;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class ItemCustomHoe extends ItemHoe implements ISize
 {

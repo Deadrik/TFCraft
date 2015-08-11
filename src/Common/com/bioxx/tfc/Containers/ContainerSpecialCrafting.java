@@ -13,8 +13,8 @@ import com.bioxx.tfc.Containers.Slots.SlotSpecialCraftingOutput;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
-import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
+import com.bioxx.tfc.api.TFCItems;
 
 public class ContainerSpecialCrafting extends ContainerTFC
 {

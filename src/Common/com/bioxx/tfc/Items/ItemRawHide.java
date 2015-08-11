@@ -12,14 +12,14 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.Flora.BlockLogHoriz;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TileEntities.TELeatherRack;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 
 public class ItemRawHide extends ItemLooseRock
 {

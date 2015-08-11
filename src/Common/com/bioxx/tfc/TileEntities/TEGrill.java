@@ -11,21 +11,16 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.Food;
-import com.bioxx.tfc.api.HeatIndex;
-import com.bioxx.tfc.api.HeatRegistry;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Events.ItemCookEvent;
+import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Interfaces.ICookableFood;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TEGrill extends NetworkTileEntity implements IInventory
 {

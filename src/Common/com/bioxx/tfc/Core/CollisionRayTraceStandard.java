@@ -3,13 +3,13 @@ package com.bioxx.tfc.Core;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bioxx.tfc.api.Interfaces.ICustomCollision;
-
 import net.minecraft.block.Block;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.api.Interfaces.ICustomCollision;
 
 public class CollisionRayTraceStandard
 {

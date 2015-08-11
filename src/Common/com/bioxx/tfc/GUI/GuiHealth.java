@@ -5,11 +5,11 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerSkills;
+import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
-import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.api.TFCOptions;
 
 public class GuiHealth extends GuiContainerTFC

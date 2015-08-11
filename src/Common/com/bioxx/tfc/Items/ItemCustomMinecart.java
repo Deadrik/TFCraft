@@ -2,10 +2,6 @@ package com.bioxx.tfc.Items;
 
 import java.util.List;
 
-import com.bioxx.tfc.Entities.EntityCustomMinecart;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,6 +9,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Entities.EntityCustomMinecart;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemCustomMinecart extends ItemTerra
 {
