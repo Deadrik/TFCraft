@@ -182,7 +182,7 @@ public class FoodStatsTFC
 					waterLevel -= 1+(tempWaterMod/2);
 					if(waterLevel < 0)
 						waterLevel = 0;
-					if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0 && temp > 35)
+					if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0 && temp > 35 && !player.isInWater())
 						player.attackEntityFrom((new DamageSource("heatStroke")).setDamageBypassesArmor().setDamageIsAbsolute(), 2);
 				}
 			}
