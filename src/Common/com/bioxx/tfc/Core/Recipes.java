@@ -15,26 +15,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import cpw.mods.fml.common.registry.GameRegistry;
 
+import com.bioxx.tfc.Core.Config.TFC_ConfigFiles;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TELoom;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Crafting.*;
+import com.bioxx.tfc.api.Enums.RuleEnum;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCCrafting;
 import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Crafting.AnvilManager;
-import com.bioxx.tfc.api.Crafting.AnvilRecipe;
-import com.bioxx.tfc.api.Crafting.AnvilReq;
-import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
-import com.bioxx.tfc.api.Crafting.KilnCraftingManager;
-import com.bioxx.tfc.api.Crafting.KilnRecipe;
-import com.bioxx.tfc.api.Crafting.PlanRecipe;
-import com.bioxx.tfc.api.Crafting.QuernManager;
-import com.bioxx.tfc.api.Crafting.QuernRecipe;
-import com.bioxx.tfc.api.Enums.RuleEnum;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Recipes 
 {
@@ -450,381 +442,8 @@ public class Recipes
 		//Have to do this by class for some items that are overriden like the bow
 		RemoveRecipe(ItemBow.class);
 
-		//Recipe Configuration
-		if (!TFCCrafting.anvilRecipe)
-			RemoveRecipe(new ItemStack(Blocks.anvil));
-
-		if (!TFCCrafting.arrowsRecipe)
-			RemoveRecipe(new ItemStack(Items.arrow, 4));
-
-		if (!TFCCrafting.bedRecipe)
-			RemoveRecipe(new ItemStack(Items.bed));
-
-		if (!TFCCrafting.bonemealRecipe)
-			RemoveRecipe(new ItemStack(Items.dye, 3, 15));
-
-		if (!TFCCrafting.bowlRecipe)
-			RemoveRecipe(new ItemStack(Items.bowl, 4));
-
-		if (!TFCCrafting.brewingRecipe)
-			RemoveRecipe(new ItemStack(Items.brewing_stand));
-
-		if (!TFCCrafting.bucketRecipe)
-			RemoveRecipe(new ItemStack(Items.bucket));
-
-		if (!TFCCrafting.cauldronRecipe)
-			RemoveRecipe(new ItemStack(Items.cauldron));
-
-		if (!TFCCrafting.chestRecipe)
-			RemoveRecipe(new ItemStack(Blocks.chest));
-
-		if (!TFCCrafting.clockRecipe)
-			RemoveRecipe(new ItemStack(Items.clock));
-
-		if (!TFCCrafting.compassRecipe)
-			RemoveRecipe(new ItemStack(Items.compass));
-
-		if (!TFCCrafting.dandelionYellowRecipe)
-		{
-			RemoveRecipe(new ItemStack(Items.dye, 1, 11));
-			RemoveRecipe(new ItemStack(Items.dye, 2, 11));
-		}
-
-		if (!TFCCrafting.diamondArmorRecipe)
-		{
-			RemoveRecipe(new ItemStack(Items.diamond_helmet));
-			RemoveRecipe(new ItemStack(Items.diamond_chestplate));
-			RemoveRecipe(new ItemStack(Items.diamond_leggings));
-			RemoveRecipe(new ItemStack(Items.diamond_boots));
-		}
-
-		if (!TFCCrafting.diamondBlockRecipe)
-			RemoveRecipe(new ItemStack(Blocks.diamond_block));
-
-		if (!TFCCrafting.diamondToolsRecipe)
-		{
-			RemoveRecipe(new ItemStack(Items.diamond_pickaxe));
-			RemoveRecipe(new ItemStack(Items.diamond_axe));
-			RemoveRecipe(new ItemStack(Items.diamond_shovel));
-			RemoveRecipe(new ItemStack(Items.diamond_hoe));
-			RemoveRecipe(new ItemStack(Items.diamond_sword));
-		}
-
-		if (!TFCCrafting.dispenserRecipe)
-			RemoveRecipe(new ItemStack(Blocks.dispenser));
-
-		if (!TFCCrafting.dropperRecipe)
-			RemoveRecipe(new ItemStack(Blocks.dropper));
-
-		if (!TFCCrafting.enchantTableRecipe)
-			RemoveRecipe(new ItemStack(Blocks.enchanting_table));
-
-		if (!TFCCrafting.fenceGateRecipe)
-			RemoveRecipe(new ItemStack(Blocks.fence_gate));
-
-		if (!TFCCrafting.fenceRecipe)
-			RemoveRecipe(new ItemStack(Blocks.fence, 2));
-
-		if (!TFCCrafting.furnaceRecipe)
-			RemoveRecipe(new ItemStack(Blocks.furnace));
-
-		if (!TFCCrafting.goldAppleRecipe)
-			RemoveRecipe(new ItemStack(Items.golden_apple));
-
-		if (!TFCCrafting.goldArmorRecipe)
-		{
-			RemoveRecipe(new ItemStack(Items.golden_helmet));
-			RemoveRecipe(new ItemStack(Items.golden_chestplate));
-			RemoveRecipe(new ItemStack(Items.golden_leggings));
-			RemoveRecipe(new ItemStack(Items.golden_boots));
-		}
-
-		if (!TFCCrafting.goldBlockRecipe)
-			RemoveRecipe(new ItemStack(Blocks.gold_block));
-
-		if (!TFCCrafting.goldNuggetRecipe)
-			RemoveRecipe(new ItemStack(Items.gold_nugget, 9));
-
-		if (!TFCCrafting.goldPlateRecipe)
-			RemoveRecipe(new ItemStack(Blocks.light_weighted_pressure_plate));
-
-		if (!TFCCrafting.goldToolsRecipe)
-		{
-			RemoveRecipe(new ItemStack(Items.golden_pickaxe));
-			RemoveRecipe(new ItemStack(Items.golden_axe));
-			RemoveRecipe(new ItemStack(Items.golden_shovel));
-			RemoveRecipe(new ItemStack(Items.golden_hoe));
-			RemoveRecipe(new ItemStack(Items.golden_sword));
-		}
-
-		if (!TFCCrafting.hopperRecipe)
-			RemoveRecipe(new ItemStack(Blocks.hopper));
-
-		if (!TFCCrafting.ironArmorRecipe)
-		{
-			RemoveRecipe(new ItemStack(Items.iron_helmet));
-			RemoveRecipe(new ItemStack(Items.iron_chestplate));
-			RemoveRecipe(new ItemStack(Items.iron_leggings));
-			RemoveRecipe(new ItemStack(Items.iron_boots));
-		}
-
-		if (!TFCCrafting.ironBarsRecipe)
-			RemoveRecipe(new ItemStack(Blocks.iron_bars, 16));
-
-		if (!TFCCrafting.ironBlockRecipe)
-			RemoveRecipe(new ItemStack(Blocks.iron_block));
-
-		if (!TFCCrafting.ironDoorRecipe)
-			RemoveRecipe(new ItemStack(Items.iron_door));
-
-		if (!TFCCrafting.ironPlateRecipe)
-			RemoveRecipe(new ItemStack(Blocks.heavy_weighted_pressure_plate));
-
-		if (!TFCCrafting.ironToolsRecipe)
-		{
-			RemoveRecipe(new ItemStack(Items.iron_pickaxe));
-			RemoveRecipe(new ItemStack(Items.iron_axe));
-			RemoveRecipe(new ItemStack(Items.iron_shovel));
-			RemoveRecipe(new ItemStack(Items.iron_hoe));
-			RemoveRecipe(new ItemStack(Items.iron_sword));
-		}
-
-		if (!TFCCrafting.jukeboxRecipe)
-			RemoveRecipe(new ItemStack(Blocks.jukebox));
-
-		if (!TFCCrafting.leatherArmorRecipe)
-		{
-			RemoveRecipe(new ItemStack(Items.leather_helmet));
-			RemoveRecipe(new ItemStack(Items.leather_chestplate));
-			RemoveRecipe(new ItemStack(Items.leather_leggings));
-			RemoveRecipe(new ItemStack(Items.leather_boots));
-		}
-
-		if (!TFCCrafting.leverRecipe)
-			RemoveRecipe(new ItemStack(Blocks.lever));
-
-		if (!TFCCrafting.minecartChestRecipe)
-			RemoveRecipe(new ItemStack(Items.chest_minecart));
-
-		if (!TFCCrafting.minecartRecipe)
-			RemoveRecipe(new ItemStack(Items.minecart));
-
-		if (!TFCCrafting.pistonRecipe)
-			RemoveRecipe(new ItemStack(Blocks.piston));
-
-		if (!TFCCrafting.plankBlockRecipe)
-		{
-			RemoveRecipe(new ItemStack(Blocks.planks, 4, 0));
-			RemoveRecipe(new ItemStack(Blocks.planks, 4, 1));
-			RemoveRecipe(new ItemStack(Blocks.planks, 4, 2));
-			RemoveRecipe(new ItemStack(Blocks.planks, 4, 3));
-			RemoveRecipe(new ItemStack(Blocks.planks, 4, 4));
-			RemoveRecipe(new ItemStack(Blocks.planks, 4, 5));
-		}
-
-		if (!TFCCrafting.poweredRailsRecipe)
-			RemoveRecipe(new ItemStack(Blocks.golden_rail, 6));
-
-		if (!TFCCrafting.railsRecipe)
-			RemoveRecipe(new ItemStack(Blocks.rail, 16));
-
-		if (!TFCCrafting.repeaterRecipe)
-			RemoveRecipe(new ItemStack(Items.repeater));
-
-		if (!TFCCrafting.roseRedRecipe)
-		{
-			RemoveRecipe(new ItemStack(Items.dye, 1, 1));
-			RemoveRecipe(new ItemStack(Items.dye, 2, 1));
-		}
-
-		if (!TFCCrafting.shearsRecipe)
-			RemoveRecipe(new ItemStack(Items.shears));
-
-		if (!TFCCrafting.signRecipe)
-			RemoveRecipe(new ItemStack(Items.sign, 3));
-
-		if (!TFCCrafting.stickRecipe)
-			RemoveRecipe(new ItemStack(Items.stick, 4));
-
-		if (!TFCCrafting.stoneSlabsRecipe)
-		{
-			RemoveRecipe(new ItemStack(Blocks.stone_slab, 6));
-			RemoveRecipe(new ItemStack(Blocks.stone_slab, 6, 3));
-		}
-
-		if (!TFCCrafting.stoneStairsRecipe)
-			RemoveRecipe(new ItemStack(Blocks.stone_stairs, 4));
-
-		if (!TFCCrafting.stoneToolsRecipe)
-		{
-			RemoveRecipe(new ItemStack(Items.stone_pickaxe));
-			RemoveRecipe(new ItemStack(Items.stone_axe));
-			RemoveRecipe(new ItemStack(Items.stone_shovel));
-			RemoveRecipe(new ItemStack(Items.stone_hoe));
-			RemoveRecipe(new ItemStack(Items.stone_sword));
-		}
-
-		if (!TFCCrafting.torchRecipe)
-			RemoveRecipe(new ItemStack(Blocks.torch, 4));
-
-		if (!TFCCrafting.trapDoorRecipe)
-			RemoveRecipe(new ItemStack(Blocks.trapdoor, 2));
-
-		if (!TFCCrafting.tripwireRecipe)
-			RemoveRecipe(new ItemStack(Blocks.tripwire_hook, 2));
-
-		if (!TFCCrafting.woodDoorRecipe)
-			RemoveRecipe(new ItemStack(Items.wooden_door));
-
-		if (!TFCCrafting.woodSlabsRecipe)
-		{
-			RemoveRecipe(new ItemStack(Blocks.wooden_slab, 6, 0));
-			RemoveRecipe(new ItemStack(Blocks.wooden_slab, 6, 1));
-			RemoveRecipe(new ItemStack(Blocks.wooden_slab, 6, 2));
-			RemoveRecipe(new ItemStack(Blocks.wooden_slab, 6, 3));
-			RemoveRecipe(new ItemStack(Blocks.wooden_slab, 6, 4));
-			RemoveRecipe(new ItemStack(Blocks.wooden_slab, 6, 5));
-		}
-
-		if (!TFCCrafting.woodStairsRecipe)
-		{
-			RemoveRecipe(new ItemStack(Blocks.birch_stairs, 4));
-			RemoveRecipe(new ItemStack(Blocks.jungle_stairs, 4));
-			RemoveRecipe(new ItemStack(Blocks.oak_stairs, 4));
-			RemoveRecipe(new ItemStack(Blocks.spruce_stairs, 4));
-			RemoveRecipe(new ItemStack(Blocks.acacia_stairs, 4));
-			RemoveRecipe(new ItemStack(Blocks.dark_oak_stairs, 4));
-		}
-
-		if (!TFCCrafting.woodToolsRecipe)
-		{
-			RemoveRecipe(new ItemStack(Items.wooden_pickaxe));
-			RemoveRecipe(new ItemStack(Items.wooden_axe));
-			RemoveRecipe(new ItemStack(Items.wooden_shovel));
-			RemoveRecipe(new ItemStack(Items.wooden_hoe));
-			RemoveRecipe(new ItemStack(Items.wooden_sword));
-		}
-
-		if (!TFCCrafting.woolRecipe)
-			RemoveRecipe(new ItemStack(Blocks.wool));
-
-		//Conversion Configuration
-		if (TFCCrafting.appleConversion)
-		{
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.apple, 1), new ItemStack(TFCItems.RedApple, 1));
-		}
-
-		if (TFCCrafting.arrowConversion)
-		{
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.arrow, 1), new ItemStack(TFCItems.Arrow, 1));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Arrow, 1), new ItemStack(Items.arrow, 1));
-		}
-
-		if (TFCCrafting.bowConversion)
-		{
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.bow, 1), new ItemStack(TFCItems.Bow, 1, 0));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Bow, 1, 0), new ItemStack(Items.bow, 1));
-		}
-
-		if (TFCCrafting.coalConversion)
-		{
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.coal, 1), new ItemStack(TFCItems.Coal, 1));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Coal, 1), new ItemStack(Items.coal, 1));
-		}
-
-		if (TFCCrafting.diamondConversion)
-		{
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.diamond, 1), new ItemStack(TFCItems.GemDiamond,1,2));
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.diamond, 2), new ItemStack(TFCItems.GemDiamond,1,3));
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.diamond, 3), new ItemStack(TFCItems.GemDiamond,1,4));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.GemDiamond,1,2), new ItemStack(Items.diamond));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.GemDiamond,1,3), new ItemStack(Items.diamond), new ItemStack(Items.diamond));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.GemDiamond,1,4), new ItemStack(Items.diamond), new ItemStack(Items.diamond), new ItemStack(Items.diamond));
-		}
-
-		if (TFCCrafting.emeraldConversion)
-		{
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.emerald, 1), new ItemStack(TFCItems.GemEmerald,1,2));
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.emerald, 2), new ItemStack(TFCItems.GemEmerald,1,3));
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.emerald, 3), new ItemStack(TFCItems.GemEmerald,1,4));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.GemEmerald,1,2), new ItemStack(Items.emerald));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.GemEmerald,1,3), new ItemStack(Items.emerald), new ItemStack(Items.emerald));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.GemEmerald,1,4), new ItemStack(Items.emerald), new ItemStack(Items.emerald), new ItemStack(Items.emerald));
-		}
-
-		if (TFCCrafting.fishConversion)
-		{
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.fish, 1), new ItemStack(TFCItems.fishRaw, 1));
-		}
-
-		if (TFCCrafting.fishingRodConversion)
-		{
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.fishing_rod, 1), new ItemStack(TFCItems.FishingRod, 1, 0));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.FishingRod, 1, 0), new ItemStack(Items.fishing_rod, 1));
-		}
-
-		if (TFCCrafting.flintSteelConversion)
-		{
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.flint_and_steel, 1, 0), new ItemStack(TFCItems.FlintSteel, 1, 0));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.FlintSteel, 1, 0), new ItemStack(Items.flint_and_steel, 1, 0));
-		}
-
-		if (TFCCrafting.leatherArmorConversion)
-		{
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.leather_helmet, 1, 0), new ItemStack(TFCItems.LeatherHelmet, 1, 0));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.LeatherHelmet, 1, 0), new ItemStack(Items.leather_helmet, 1, 0));
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.leather_chestplate, 1, 0), new ItemStack(TFCItems.LeatherChestplate, 1, 0));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.LeatherChestplate, 1, 0), new ItemStack(Items.leather_chestplate, 1, 0));
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.leather_leggings, 1, 0), new ItemStack(TFCItems.LeatherLeggings, 1, 0));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.LeatherLeggings, 1, 0), new ItemStack(Items.leather_leggings, 1, 0));
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.leather_boots, 1, 0), new ItemStack(TFCItems.LeatherBoots, 1, 0));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.LeatherBoots, 1, 0), new ItemStack(Items.leather_boots, 1, 0));
-		}
-
-		if (TFCCrafting.leatherConversion)
-		{
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.leather, 1), new ItemStack(TFCItems.Leather, 1));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Leather, 1), new ItemStack(Items.leather, 1));
-		}
-
-		if (TFCCrafting.stoneAxeConversion)
-		{
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_axe, 1, 0), TFCItems.IgInAxe);
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_axe, 1, 0), TFCItems.IgExAxe);
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_axe, 1, 0), TFCItems.SedAxe);
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_axe, 1, 0), TFCItems.MMAxe);
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.IgExAxe, 1, 0), Items.stone_axe);
-		}
-
-		if (TFCCrafting.stoneHoeConversion)
-		{
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_hoe, 1, 0), TFCItems.IgInHoe);
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_hoe, 1, 0), TFCItems.IgExHoe);
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_hoe, 1, 0), TFCItems.SedHoe);
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_hoe, 1, 0), TFCItems.MMHoe);
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.IgExHoe, 1, 0), Items.stone_hoe);
-		}
-
-		if (TFCCrafting.stoneShovelConversion)
-		{
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_shovel, 1, 0), TFCItems.IgInShovel);
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_shovel, 1, 0), TFCItems.IgExShovel);
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_shovel, 1, 0), TFCItems.SedShovel);
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_shovel, 1, 0), TFCItems.MMShovel);
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.IgExShovel, 1, 0), Items.stone_shovel);
-		}
-
-		if (TFCCrafting.woodButtonConversion)
-		{
-			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.wooden_button, 1), new ItemStack(TFCBlocks.ButtonWood, 1));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCBlocks.ButtonWood, 1), new ItemStack(Blocks.wooden_button, 1));
-		}
-
-		if (TFCCrafting.workbenchConversion)
-		{
-			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.crafting_table, 1), new ItemStack(TFCBlocks.Workbench, 1));
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCBlocks.Workbench, 1), new ItemStack(Blocks.crafting_table, 1));
-		}
+		// Needs items to be available, but the TFC recipes can't yet be registerd
+		TFC_ConfigFiles.firstLoadCrafting();
 	}
 
 	private static void RegisterToolRecipes()
@@ -1295,33 +914,33 @@ public class Recipes
 				new Object[] {  new ItemStack(TFCItems.SteelUnshaped),new ItemStack(TFCItems.SteelUnshaped),
 			new ItemStack(TFCItems.NickelUnshaped), new ItemStack(TFCItems.BlackBronzeUnshaped)});
 
-		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(TFCItems.WeakBlueSteelUnshaped, 4), 
-				new Object[] {  new ItemStack(TFCItems.BlackSteelUnshaped), new ItemStack(TFCItems.BismuthBronzeUnshaped), 
-			new ItemStack(TFCItems.SterlingSilverUnshaped),new ItemStack(TFCItems.SteelUnshaped)});
+		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(TFCItems.WeakBlueSteelUnshaped, 4),
+				new Object[]{new ItemStack(TFCItems.BlackSteelUnshaped), new ItemStack(TFCItems.BismuthBronzeUnshaped),
+						new ItemStack(TFCItems.SterlingSilverUnshaped), new ItemStack(TFCItems.SteelUnshaped)});
 
-		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(TFCItems.BrassUnshaped, 4), 
-				new Object[] {  new ItemStack(TFCItems.CopperUnshaped),new ItemStack(TFCItems.CopperUnshaped),
-			new ItemStack(TFCItems.CopperUnshaped), new ItemStack(TFCItems.ZincUnshaped)});
+		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(TFCItems.BrassUnshaped, 4),
+				new Object[]{new ItemStack(TFCItems.CopperUnshaped), new ItemStack(TFCItems.CopperUnshaped),
+						new ItemStack(TFCItems.CopperUnshaped), new ItemStack(TFCItems.ZincUnshaped)});
 
-		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(TFCItems.BronzeUnshaped, 4), 
-				new Object[] {  new ItemStack(TFCItems.CopperUnshaped),new ItemStack(TFCItems.CopperUnshaped),
-			new ItemStack(TFCItems.CopperUnshaped), new ItemStack(TFCItems.TinUnshaped)});
+		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(TFCItems.BronzeUnshaped, 4),
+				new Object[]{new ItemStack(TFCItems.CopperUnshaped), new ItemStack(TFCItems.CopperUnshaped),
+						new ItemStack(TFCItems.CopperUnshaped), new ItemStack(TFCItems.TinUnshaped)});
 
-		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(TFCItems.WeakRedSteelUnshaped, 4), 
-				new Object[] {  new ItemStack(TFCItems.BlackSteelUnshaped), new ItemStack(TFCItems.RoseGoldUnshaped),  
-			new ItemStack(TFCItems.BrassUnshaped), new ItemStack(TFCItems.SteelUnshaped)});
+		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(TFCItems.WeakRedSteelUnshaped, 4),
+				new Object[]{new ItemStack(TFCItems.BlackSteelUnshaped), new ItemStack(TFCItems.RoseGoldUnshaped),
+						new ItemStack(TFCItems.BrassUnshaped), new ItemStack(TFCItems.SteelUnshaped)});
 
-		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(TFCItems.RoseGoldUnshaped, 4), 
-				new Object[] {  new ItemStack(TFCItems.CopperUnshaped),new ItemStack(TFCItems.GoldUnshaped),
-			new ItemStack(TFCItems.GoldUnshaped), new ItemStack(TFCItems.GoldUnshaped)});
+		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(TFCItems.RoseGoldUnshaped, 4),
+				new Object[]{new ItemStack(TFCItems.CopperUnshaped), new ItemStack(TFCItems.GoldUnshaped),
+						new ItemStack(TFCItems.GoldUnshaped), new ItemStack(TFCItems.GoldUnshaped)});
 
-		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(TFCItems.HCSteelUnshaped, 4), 
-				new Object[] {  new ItemStack(TFCItems.PigIronUnshaped),new ItemStack(TFCItems.WroughtIronUnshaped),
-			new ItemStack(TFCItems.WroughtIronUnshaped), new ItemStack(TFCItems.WroughtIronUnshaped)});
+		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(TFCItems.HCSteelUnshaped, 4),
+				new Object[]{new ItemStack(TFCItems.PigIronUnshaped), new ItemStack(TFCItems.WroughtIronUnshaped),
+						new ItemStack(TFCItems.WroughtIronUnshaped), new ItemStack(TFCItems.WroughtIronUnshaped)});
 
-		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(TFCItems.SterlingSilverUnshaped, 4), 
-				new Object[] {  new ItemStack(TFCItems.CopperUnshaped),new ItemStack(TFCItems.SilverUnshaped),
-			new ItemStack(TFCItems.SilverUnshaped), new ItemStack(TFCItems.SilverUnshaped)});
+		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(TFCItems.SterlingSilverUnshaped, 4),
+				new Object[]{new ItemStack(TFCItems.CopperUnshaped), new ItemStack(TFCItems.SilverUnshaped),
+						new ItemStack(TFCItems.SilverUnshaped), new ItemStack(TFCItems.SilverUnshaped)});
 	}
 
 	private static void registerToolMolds()

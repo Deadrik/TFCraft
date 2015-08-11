@@ -22,6 +22,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 import com.bioxx.tfc.Commands.*;
 import com.bioxx.tfc.Core.*;
+import com.bioxx.tfc.Core.Config.TFC_ConfigFiles;
 import com.bioxx.tfc.Core.Player.PlayerTracker;
 import com.bioxx.tfc.Food.TFCPotion;
 import com.bioxx.tfc.Handlers.*;
@@ -198,9 +199,6 @@ public class TerraFirmaCraft
 		TFC_OreDictionary.registerOreDict();
 		Recipes.registerRecipes();
 
-		// Needs items to be available
-		TFC_ConfigFiles.reloadCrafting();
-
 		ItemHeat.SetupItemHeat();
 
 		TFC_Climate.initCache();
@@ -222,6 +220,7 @@ public class TerraFirmaCraft
 	public void postInit (FMLPostInitializationEvent evt)
 	{
 		packetPipeline.postInitialise();
+
 		// Now that blocks are resisted, go ahead and do worldgen configs
 		TFC_ConfigFiles.reloadOres();
 
