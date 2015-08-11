@@ -2,8 +2,10 @@ package com.bioxx.tfc.Core.Player;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -182,8 +184,15 @@ public class FoodStatsTFC
 					waterLevel -= 1+(tempWaterMod/2);
 					if(waterLevel < 0)
 						waterLevel = 0;
-					if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0 && temp > 35 && !player.isInWater())
-						player.attackEntityFrom((new DamageSource("heatStroke")).setDamageBypassesArmor().setDamageIsAbsolute(), 2);
+					if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0 && temp > 35)
+					{
+						int x = (int) player.posX;
+						int y = (int) player.posY;
+						int z = (int) player.posZ;
+						Block block = player.worldObj.getBlock(x, y, z);
+						if (!(TFC_Core.isWater(block)))
+							player.attackEntityFrom((new DamageSource("heatStroke")).setDamageBypassesArmor().setDamageIsAbsolute(), 2);
+					}
 				}
 			}
 		}
