@@ -48,7 +48,6 @@ public class TECrop extends NetworkTileEntity
 		Random R = new Random();
 		if(!worldObj.isRemote)
 		{
-			float timeMultiplier = 360 / TFC_Time.daysInYear;
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 			long time = TFC_Time.getTotalTicks();
 			ChunkData cd = TFC_Core.getCDM(worldObj).getData(xCoord >> 4, zCoord >> 4);
@@ -155,7 +154,7 @@ public class TECrop extends NetworkTileEntity
 						tef.DrainNutrients(3, crop.nutrientUsageMult);
 				}
 
-				float growthRate = ((((crop.numGrowthStages / (crop.growthTime * TFC_Time.timeRatio96)) + tempAdded) * nutriMult) * timeMultiplier) * TFCOptions.cropGrowthMultiplier;
+				float growthRate = ((((crop.numGrowthStages / (crop.growthTime + TFC_Time.timeRatio96)) + tempAdded) * nutriMult) * 3) * TFCOptions.cropGrowthMultiplier;
 				if(tef!= null && tef.isInfested)
 					growthRate /= 2;
 				int oldGrowth = (int) Math.floor(growth);
