@@ -1192,7 +1192,7 @@ public class TFC_Core
 			}
 			else
 			{
-				double fdr = Global.FOOD_DECAY_RATE - 1;
+				double fdr = TFCOptions.foodDecayRate - 1;
 				fdr *= thisDecayRate * baseDecayMod * environmentalDecay * protMult * TFCOptions.decayMultiplier;
 				decay *= 1 + fdr;
 			}

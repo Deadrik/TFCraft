@@ -38,7 +38,7 @@ allprojects {
 	if(file('../run').exists()){
 	runDir = "../run"
 	} else {
-    runDir = ""
+    runDir = "run"
 	}
 }
 
