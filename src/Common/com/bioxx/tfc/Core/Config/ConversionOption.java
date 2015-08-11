@@ -1,66 +1,36 @@
 package com.bioxx.tfc.Core.Config;
 
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.item.crafting.IRecipe;
 
-import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.api.TFCCrafting;
 import com.google.common.collect.ImmutableList;
 
 /**
+ * Used to represent the "conversion" option
+ * When the value (config or from server, depending on context) is true the recipes are (re)added to the recipe list.
+ * Also keeps the static values from the TFCCrafting class in sync with the actual status of things.
  * @author Dries007
  */
 public class ConversionOption extends SyncingOption
 {
-	private boolean ourConfigValue;
-	private boolean currentValue;
-	public final ImmutableList<ShapelessRecipes> shapelessRecipes;
+	public final ImmutableList<IRecipe> recipes;
 
-	public ConversionOption(String name, ShapelessRecipes... shapelessRecipes) throws NoSuchFieldException, IllegalAccessException
+	public ConversionOption(String name, IRecipe... shapelessRecipes) throws NoSuchFieldException, IllegalAccessException
 	{
-		super(name, TFCCrafting.class);
+		super(name, TFCCrafting.class, TFC_ConfigFiles.getCraftingConfig(), TFC_ConfigFiles.CONVERSION);
 		if (shapelessRecipes.length == 0) throw new IllegalArgumentException("No recipes for conversion " + name);
-
-		this.shapelessRecipes = ImmutableList.copyOf(shapelessRecipes);
-		this.ourConfigValue = TFC_ConfigFiles.getCraftingConfig().getBoolean(name, TFC_ConfigFiles.CONVERSION, defaultValue, "");
-		this.field.setBoolean(null, ourConfigValue);
-
-		apply(ourConfigValue);
-	}
-
-	@SuppressWarnings("unchecked")
-	public void apply(boolean enabled) throws IllegalAccessException
-	{
-		if (currentValue != enabled) // if we need to change states
-		{
-			boolean result = enabled ? CraftingManager.getInstance().getRecipeList().addAll(shapelessRecipes) : CraftingManager.getInstance().getRecipeList().removeAll(shapelessRecipes);
-			TerraFirmaCraft.log.info("Conversion option {} changed from {} to {}. Result: {}", name, currentValue, enabled, result);
-			field.setBoolean(null, enabled); // Keep the field up to date as well
-			currentValue = enabled;
-		}
+		this.recipes = ImmutableList.copyOf(shapelessRecipes);
 	}
 
 	@Override
-	public boolean inConfig()
+	public ImmutableList<IRecipe> getRecipes()
 	{
-		return ourConfigValue;
-	}
-
-	public boolean isAplied()
-	{
-		return currentValue;
-	}
-
-	@Override
-	public void reloadFromConfig() throws IllegalAccessException
-	{
-		this.ourConfigValue = TFC_ConfigFiles.getCraftingConfig().getBoolean(name, TFC_ConfigFiles.CONVERSION, defaultValue, "");
-		apply(this.ourConfigValue);
+		return recipes;
 	}
 
 	@Override
 	public String toString()
 	{
-		return name + "[default:" + defaultValue + " current:" + currentValue + " config:" + ourConfigValue + " #ofRecipes:" + shapelessRecipes.size() + "]";
+		return name + "[default:" + defaultValue + " current:" + isAplied() + " config:" + inConfig() + " #ofRecipes:" + recipes.size() + "]";
 	}
 }

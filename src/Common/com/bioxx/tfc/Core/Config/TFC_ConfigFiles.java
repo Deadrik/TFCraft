@@ -121,15 +121,15 @@ public class TFC_ConfigFiles
 		{
 			for (SyncingOption option : STRING_SYNCING.values())
 			{
-				option.reloadFromConfig();
+				option.loadFromConfig();
 			}
-			if (craftingConfig.hasChanged()) craftingConfig.save();
 		}
 		catch (IllegalAccessException e)
 		{
 			TerraFirmaCraft.log.fatal("Fatal error reloading TFCCrafting config", e);
 			Throwables.propagate(e);
 		}
+		if (craftingConfig.hasChanged()) craftingConfig.save();
 	}
 
 	public static void firstLoadCrafting()
@@ -261,6 +261,11 @@ public class TFC_ConfigFiles
 			new VanillaRecipeOption("woodStairsRecipe", new ItemStack(Blocks.birch_stairs, 4), new ItemStack(Blocks.jungle_stairs, 4), new ItemStack(Blocks.oak_stairs, 4), new ItemStack(Blocks.spruce_stairs, 4), new ItemStack(Blocks.acacia_stairs, 4), new ItemStack(Blocks.dark_oak_stairs, 4));
 			new VanillaRecipeOption("woodToolsRecipe", new ItemStack(Items.wooden_pickaxe), new ItemStack(Items.wooden_axe), new ItemStack(Items.wooden_shovel), new ItemStack(Items.wooden_hoe), new ItemStack(Items.wooden_sword));
 			new VanillaRecipeOption("woolRecipe", new ItemStack(Blocks.wool));
+
+			for (SyncingOption option : STRING_SYNCING.values())
+			{
+				option.loadFromConfig();
+			}
 		}
 		catch (NoSuchFieldException e)
 		{

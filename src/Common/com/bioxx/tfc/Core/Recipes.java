@@ -25,7 +25,6 @@ import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.*;
 import com.bioxx.tfc.api.Enums.RuleEnum;
 import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCCrafting;
 import com.bioxx.tfc.api.TFCItems;
 
 public class Recipes 

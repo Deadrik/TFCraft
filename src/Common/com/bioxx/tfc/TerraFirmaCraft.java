@@ -21,8 +21,8 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import com.bioxx.tfc.Commands.*;
-import com.bioxx.tfc.Core.*;
 import com.bioxx.tfc.Core.Config.TFC_ConfigFiles;
+import com.bioxx.tfc.Core.*;
 import com.bioxx.tfc.Core.Player.PlayerTracker;
 import com.bioxx.tfc.Food.TFCPotion;
 import com.bioxx.tfc.Handlers.*;
@@ -35,15 +35,14 @@ import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.SkillsManager;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.ModVersion, dependencies = Reference.ModDependencies, guiFactory = Reference.GUIFactory)
 public class TerraFirmaCraft
 {
-	public static Logger log = LogManager.getLogger("TerraFirmaCraft");
+	public static Logger log;
 
-	@Instance("TerraFirmaCraft")
+	@Instance(Reference.ModID)
 	public static TerraFirmaCraft instance;
 
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
@@ -59,7 +58,7 @@ public class TerraFirmaCraft
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		instance = this;
+		log = event.getModLog();
 
 		TFC_ConfigFiles.preInit(event.getModConfigurationDirectory());
 		TFC_ConfigFiles.reloadGeneral(); // No special needs
