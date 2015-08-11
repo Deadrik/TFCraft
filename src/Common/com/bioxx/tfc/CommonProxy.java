@@ -402,11 +402,6 @@ public class CommonProxy
 	{
 	}
 
-	public File getMinecraftDir()
-	{
-		return FMLCommonHandler.instance().getMinecraftServerInstance().getFile("");/*new File(".");*/
-	}
-
 	public void registerSkyProvider(TFCProvider P)
 	{
 	}
