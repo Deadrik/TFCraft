@@ -3,6 +3,7 @@
 //=======================================================
 package com.bioxx.tfc;
 
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ForgeModContainer;
@@ -18,13 +19,16 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import com.bioxx.tfc.Commands.*;
+import com.bioxx.tfc.Core.Config.TFC_ConfigFiles;
 import com.bioxx.tfc.Core.*;
 import com.bioxx.tfc.Core.Player.PlayerTracker;
 import com.bioxx.tfc.Food.TFCPotion;
 import com.bioxx.tfc.Handlers.*;
+import com.bioxx.tfc.Handlers.Network.ConfigSyncPacket;
 import com.bioxx.tfc.Handlers.Network.PacketPipeline;
 import com.bioxx.tfc.WorldGen.Generators.*;
 import com.bioxx.tfc.WorldGen.TFCProvider;
@@ -34,15 +38,14 @@ import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.SkillsManager;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.ModVersion, dependencies = Reference.ModDependencies, guiFactory = Reference.GUIFactory)
 public class TerraFirmaCraft
 {
-	public static Logger log = LogManager.getLogger("TerraFirmaCraft");
+	public static Logger log;
 
-	@Instance("TerraFirmaCraft")
+	@Instance(Reference.ModID)
 	public static TerraFirmaCraft instance;
 
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
@@ -58,7 +61,7 @@ public class TerraFirmaCraft
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		instance = this;
+		log = event.getModLog();
 
 		TFC_ConfigFiles.preInit(event.getModConfigurationDirectory());
 		TFC_ConfigFiles.reloadGeneral(); // No special needs
@@ -224,6 +227,7 @@ public class TerraFirmaCraft
 	public void postInit (FMLPostInitializationEvent evt)
 	{
 		packetPipeline.postInitialise();
+
 		// Now that blocks are resisted, go ahead and do worldgen configs
 		TFC_ConfigFiles.reloadOres();
 
@@ -255,5 +259,12 @@ public class TerraFirmaCraft
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs)
 	{
 		if (eventArgs.modID.equals(Reference.ModID)) TFC_ConfigFiles.reloadAll();
+	}
+
+	@SubscribeEvent
+	public void onLogin(PlayerEvent.PlayerLoggedInEvent event)
+	{
+		TerraFirmaCraft.log.info("Sending config sync to {}", event.player.getCommandSenderName());
+		packetPipeline.sendTo(new ConfigSyncPacket(), (EntityPlayerMP) event.player);
 	}
 }
