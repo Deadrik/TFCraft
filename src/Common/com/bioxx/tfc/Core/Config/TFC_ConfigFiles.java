@@ -65,7 +65,7 @@ public class TFC_ConfigFiles
 	private static final String[] ALLOWED_SIZES = new String[] {"small", "medium", "large"};
 	private static final String[] ALLOWED_BASE_ROCKS = ObjectArrays.concat(Global.STONE_ALL, new String[] {"igneous intrusive", "igneous extrusive", "sedimentary", "metamorphic"}, String.class);
 
-	public static final Map<String, SyncingOption> STRING_SYNCING = new HashMap<String, SyncingOption>();
+	public static final Map<String, SyncingOption> SYNCING_OPTION_MAP = new HashMap<String, SyncingOption>();
 
 	private static Configuration generalConfig;
 	private static Configuration craftingConfig;
@@ -119,7 +119,7 @@ public class TFC_ConfigFiles
 		TerraFirmaCraft.log.info("reloading the crafting config (TFCCrafting) settings...");
 		try
 		{
-			for (SyncingOption option : STRING_SYNCING.values())
+			for (SyncingOption option : SYNCING_OPTION_MAP.values())
 			{
 				option.loadFromConfig();
 			}
@@ -262,7 +262,7 @@ public class TFC_ConfigFiles
 			new VanillaRecipeOption("woodToolsRecipe", new ItemStack(Items.wooden_pickaxe), new ItemStack(Items.wooden_axe), new ItemStack(Items.wooden_shovel), new ItemStack(Items.wooden_hoe), new ItemStack(Items.wooden_sword));
 			new VanillaRecipeOption("woolRecipe", new ItemStack(Blocks.wool));
 
-			for (SyncingOption option : STRING_SYNCING.values())
+			for (SyncingOption option : SYNCING_OPTION_MAP.values())
 			{
 				option.loadFromConfig();
 			}

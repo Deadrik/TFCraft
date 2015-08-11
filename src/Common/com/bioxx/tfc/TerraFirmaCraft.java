@@ -3,6 +3,7 @@
 //=======================================================
 package com.bioxx.tfc;
 
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ForgeModContainer;
@@ -18,6 +19,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import com.bioxx.tfc.Commands.*;
@@ -26,6 +28,7 @@ import com.bioxx.tfc.Core.*;
 import com.bioxx.tfc.Core.Player.PlayerTracker;
 import com.bioxx.tfc.Food.TFCPotion;
 import com.bioxx.tfc.Handlers.*;
+import com.bioxx.tfc.Handlers.Network.ConfigSyncPacket;
 import com.bioxx.tfc.Handlers.Network.PacketPipeline;
 import com.bioxx.tfc.WorldGen.Generators.*;
 import com.bioxx.tfc.WorldGen.TFCProvider;
@@ -251,5 +254,12 @@ public class TerraFirmaCraft
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs)
 	{
 		if (eventArgs.modID.equals(Reference.ModID)) TFC_ConfigFiles.reloadAll();
+	}
+
+	@SubscribeEvent
+	public void onLogin(PlayerEvent.PlayerLoggedInEvent event)
+	{
+		TerraFirmaCraft.log.info("Sending config sync to {}", event.player.getCommandSenderName());
+		packetPipeline.sendTo(new ConfigSyncPacket(), (EntityPlayerMP) event.player);
 	}
 }

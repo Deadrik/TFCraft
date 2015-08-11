@@ -7,9 +7,10 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.config.Configuration;
 
 import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.api.TFCOptions;
 import com.google.common.collect.ImmutableList;
 
-import static com.bioxx.tfc.Core.Config.TFC_ConfigFiles.STRING_SYNCING;
+import static com.bioxx.tfc.Core.Config.TFC_ConfigFiles.SYNCING_OPTION_MAP;
 
 /**
  * @author Dries007
@@ -27,8 +28,8 @@ public abstract class SyncingOption
 
 	public SyncingOption(String name, Class<?> clazz, Configuration cfg, String cat) throws NoSuchFieldException, IllegalAccessException
 	{
-		if (STRING_SYNCING.containsKey(name)) throw new IllegalArgumentException("Duplicate key: " + name);
-		STRING_SYNCING.put(name, this);
+		if (SYNCING_OPTION_MAP.containsKey(name)) throw new IllegalArgumentException("Duplicate key: " + name);
+		SYNCING_OPTION_MAP.put(name, this);
 		this.name = name;
 		this.field = clazz.getDeclaredField(name);
 		this.cfg = cfg;
@@ -42,7 +43,7 @@ public abstract class SyncingOption
 		if (currentValue != enabled) // if we need to change states
 		{
 			boolean result = enabled ? CraftingManager.getInstance().getRecipeList().addAll(getRecipes()) : CraftingManager.getInstance().getRecipeList().removeAll(getRecipes());
-			TerraFirmaCraft.log.debug("Conversion option {} changed from {} to {}. Result: {}", name, currentValue, enabled, result);
+			if (TFCOptions.enableDebugMode) TerraFirmaCraft.log.info("Conversion option {} changed from {} to {}. Result: {}", name, currentValue, enabled, result);
 			field.setBoolean(null, enabled); // Keep the field up to date as well
 			currentValue = enabled;
 		}
