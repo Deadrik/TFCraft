@@ -271,6 +271,9 @@ public class TerraFirmaCraft
 		// Register the Entity Living Update Handler
 		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
 
+		// Fully qualified name, so it doesn't conflict with other branches's import changes.
+		MinecraftForge.EVENT_BUS.register(new com.bioxx.tfc.Handlers.ItemEventsHandler());
+
 		// Register all the render stuff for the client
 		proxy.registerRenderInformation();
 
