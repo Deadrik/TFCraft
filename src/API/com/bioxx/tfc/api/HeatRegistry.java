@@ -26,6 +26,11 @@ public class HeatRegistry
 		heatList.add(index);
 	}
 
+	public List<HeatIndex> getHeatList()
+	{
+		return heatList;
+	}
+
 	public HeatIndex findMatchingIndex(ItemStack input)
 	{
 		for (int k = 0; k < heatList.size(); k++)
