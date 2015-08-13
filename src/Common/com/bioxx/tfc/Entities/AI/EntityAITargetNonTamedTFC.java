@@ -1,11 +1,11 @@
 package com.bioxx.tfc.Entities.AI;
 
-import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
-
+import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.ai.EntityAITargetNonTamed;
+
+import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 
 public class EntityAITargetNonTamedTFC extends EntityAITargetNonTamed
 {

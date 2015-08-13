@@ -16,7 +16,6 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.TFC_Climate;
@@ -24,10 +23,11 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.FloraIndex;
 import com.bioxx.tfc.Food.FloraManager;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TileEntities.TEFruitTreeWood;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockFruitWood extends BlockTerraContainer
 {

@@ -1,11 +1,11 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
-
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
 
 public class ContainerHorseInventorySlotSaddle extends Slot
 {

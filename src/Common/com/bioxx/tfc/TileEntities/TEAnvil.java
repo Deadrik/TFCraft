@@ -14,29 +14,28 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Items.ItemIngot;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.Items.ItemTFCArmor;
 import com.bioxx.tfc.Items.Tools.ItemMiscToolHead;
 import com.bioxx.tfc.Items.Tools.ItemSteelBucket;
-import com.bioxx.tfc.api.HeatIndex;
-import com.bioxx.tfc.api.HeatRegistry;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Crafting.AnvilRecipe;
 import com.bioxx.tfc.api.Crafting.AnvilReq;
 import com.bioxx.tfc.api.Enums.RuleEnum;
 import com.bioxx.tfc.api.Events.AnvilCraftEvent;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import com.bioxx.tfc.api.HeatIndex;
+import com.bioxx.tfc.api.HeatRegistry;
+import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFC_ItemHeat;
 
 public class TEAnvil extends NetworkTileEntity implements IInventory
 {

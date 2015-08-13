@@ -9,8 +9,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.TileEntities.TEGrill;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 public class ItemGrill extends ItemTerraBlock

@@ -5,11 +5,10 @@ import java.util.Random;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-
-import com.bioxx.tfc.api.TileEntities.TEFireEntity;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 public class TEBellows extends NetworkTileEntity
 {

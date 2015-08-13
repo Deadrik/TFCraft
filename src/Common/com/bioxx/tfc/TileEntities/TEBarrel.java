@@ -14,30 +14,18 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.api.Food;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCFluids;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Crafting.BarrelAlcoholRecipe;
-import com.bioxx.tfc.api.Crafting.BarrelBriningRecipe;
-import com.bioxx.tfc.api.Crafting.BarrelLiquidToLiquidRecipe;
-import com.bioxx.tfc.api.Crafting.BarrelManager;
-import com.bioxx.tfc.api.Crafting.BarrelMultiItemRecipe;
-import com.bioxx.tfc.api.Crafting.BarrelPreservativeRecipe;
-import com.bioxx.tfc.api.Crafting.BarrelRecipe;
-import com.bioxx.tfc.api.Crafting.BarrelVinegarRecipe;
+import com.bioxx.tfc.api.Crafting.*;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
+import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Interfaces.IFood;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TEBarrel extends NetworkTileEntity implements IInventory
 {

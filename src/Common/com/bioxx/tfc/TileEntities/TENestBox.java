@@ -16,8 +16,8 @@ import net.minecraft.util.AxisAlignedBB;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.Mobs.EntityChickenTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class TENestBox extends TileEntity implements IInventory

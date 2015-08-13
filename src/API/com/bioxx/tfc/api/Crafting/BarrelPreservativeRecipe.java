@@ -1,12 +1,12 @@
 package com.bioxx.tfc.api.Crafting;
 
-import com.bioxx.tfc.TileEntities.TEBarrel;
-import com.bioxx.tfc.api.Food;
-import com.bioxx.tfc.api.Enums.EnumFoodGroup;
-import com.bioxx.tfc.api.Interfaces.IFood;
-
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import com.bioxx.tfc.TileEntities.TEBarrel;
+import com.bioxx.tfc.api.Enums.EnumFoodGroup;
+import com.bioxx.tfc.api.Food;
+import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class BarrelPreservativeRecipe {
 	private boolean requiresBrined = false;

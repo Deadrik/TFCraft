@@ -12,18 +12,17 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.QuernManager;
 import com.bioxx.tfc.api.Crafting.QuernRecipe;
 import com.bioxx.tfc.api.Interfaces.IFood;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TEQuern extends NetworkTileEntity implements IInventory
 {

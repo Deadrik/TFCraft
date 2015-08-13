@@ -2,9 +2,9 @@ package com.bioxx.tfc.Items.Tools;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 public class ItemMiscToolHead extends ItemTerra

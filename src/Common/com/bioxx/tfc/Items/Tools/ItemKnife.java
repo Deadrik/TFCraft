@@ -11,11 +11,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Tools.IKnife;
 
 public class ItemKnife extends ItemWeapon implements IKnife

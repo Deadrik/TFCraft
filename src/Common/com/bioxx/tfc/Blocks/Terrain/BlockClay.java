@@ -13,11 +13,11 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.TFCItems;
 
 public class BlockClay extends BlockTerra
 {

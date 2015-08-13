@@ -1,5 +1,10 @@
 package com.bioxx.tfc.api.Tools;
 
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+
 import com.bioxx.tfc.Blocks.Terrain.BlockCobble;
 import com.bioxx.tfc.Blocks.Terrain.BlockSmooth;
 import com.bioxx.tfc.Blocks.Terrain.BlockStone;
@@ -7,10 +12,6 @@ import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.api.TFCBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 
 
 /**

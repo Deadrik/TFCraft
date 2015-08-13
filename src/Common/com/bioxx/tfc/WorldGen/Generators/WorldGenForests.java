@@ -5,17 +5,16 @@ import java.util.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import cpw.mods.fml.common.IWorldGenerator;
 
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenAcaciaKoaTrees;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenKapokTrees;
+import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumTree;
-
-import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenForests implements IWorldGenerator
 {

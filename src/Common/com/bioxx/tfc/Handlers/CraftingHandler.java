@@ -8,30 +8,29 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 
-import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
-import com.bioxx.tfc.Items.ItemIngot;
-import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.Items.ItemBlocks.ItemAnvil1;
 import com.bioxx.tfc.Items.ItemBlocks.ItemAnvil2;
+import com.bioxx.tfc.Items.ItemIngot;
+import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.Items.Tools.ItemCustomPickaxe;
 import com.bioxx.tfc.Items.Tools.ItemCustomSaw;
 import com.bioxx.tfc.Items.Tools.ItemMiscToolHead;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Crafting.AnvilManager;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 
 public class CraftingHandler
 {

@@ -12,14 +12,14 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.Metal;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCFluids;
-import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
+import com.bioxx.tfc.api.Metal;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCFluids;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidContainerItem

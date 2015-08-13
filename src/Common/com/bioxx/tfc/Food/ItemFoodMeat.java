@@ -3,8 +3,8 @@ package com.bioxx.tfc.Food;
 import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
+import com.bioxx.tfc.api.Food;
 
 public class ItemFoodMeat extends ItemFoodTFC {
 

@@ -2,8 +2,8 @@ package com.bioxx.tfc.WorldGen.GenLayers.Biome;
 
 import net.minecraft.world.gen.layer.IntCache;
 
-import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
+import com.bioxx.tfc.WorldGen.TFCBiome;
 
 public class GenLayerDeepOcean extends GenLayerTFC
 {

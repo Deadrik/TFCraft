@@ -8,9 +8,9 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerCrucible;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TileEntities.TECrucible;
 import com.bioxx.tfc.api.TFCOptions;
 

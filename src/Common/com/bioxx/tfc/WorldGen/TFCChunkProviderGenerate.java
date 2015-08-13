@@ -24,21 +24,13 @@ import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Entities.Mobs.EntityBear;
-import com.bioxx.tfc.Entities.Mobs.EntityChickenTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityDeer;
-import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityPheasantTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityPigTFC;
-import com.bioxx.tfc.Entities.Mobs.EntitySheepTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityWolfTFC;
+import com.bioxx.tfc.Entities.Mobs.*;
 import com.bioxx.tfc.WorldGen.MapGen.MapGenCavesTFC;
 import com.bioxx.tfc.WorldGen.MapGen.MapGenRavineTFC;
 import com.bioxx.tfc.WorldGen.MapGen.MapGenRiverRavine;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Constant.Global;
 
 public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 {

@@ -1,13 +1,13 @@
 package com.bioxx.tfc.Items;
 
-import com.bioxx.tfc.Reference;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
 
 public class ItemFlatGeneric extends ItemTerra
 {

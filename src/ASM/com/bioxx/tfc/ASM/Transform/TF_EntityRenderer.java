@@ -7,13 +7,12 @@ package com.bioxx.tfc.ASM.Transform;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bioxx.tfc.ASM.ClassTransformer;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.FieldInsnNode;
 import org.objectweb.asm.tree.InsnList;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.VarInsnNode;
-
-import com.bioxx.tfc.ASM.ClassTransformer;
 
 public class TF_EntityRenderer extends ClassTransformer
 {

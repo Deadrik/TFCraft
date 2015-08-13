@@ -10,14 +10,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ISize;
+import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFC_ItemHeat;
 
 public class ItemTerraBlock extends ItemBlock implements ISize
 {

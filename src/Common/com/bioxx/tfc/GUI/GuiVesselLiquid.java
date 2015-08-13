@@ -8,9 +8,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerLiquidVessel;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Reference;
 
 public class GuiVesselLiquid extends GuiContainerTFC
 {

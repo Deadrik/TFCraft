@@ -4,11 +4,10 @@ import java.util.Random;
 
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraftforge.event.ServerChatEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class ChatListenerTFC
 {

@@ -1,21 +1,15 @@
 package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Stability;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-
 import javax.imageio.ImageIO;
 
 import net.minecraft.world.WorldType;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerFuzzyZoomTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerSmoothTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerVoronoiZoomTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerZoomTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.*;
 
 public abstract class GenStabilityLayer extends GenLayerTFC
 {

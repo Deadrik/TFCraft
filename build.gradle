@@ -35,10 +35,11 @@ allprojects {
 
     minecraft {
     version = config.minecraft_version + "-" + config.forge_version
-	if(file('../run').exists()){
-	runDir = "../run"
+	if(file('../run').exists()) {
+		runDir = "../run"
 	} else {
-    runDir = ""
+		runDir = "run"
+		if (!file(runDir).exists()) file(runDir).mkdir()
 	}
 }
 

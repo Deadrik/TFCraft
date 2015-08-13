@@ -14,8 +14,8 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class GuiContainerTFC extends GuiContainer
 {

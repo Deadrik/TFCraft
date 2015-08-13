@@ -1,13 +1,13 @@
 package com.bioxx.tfc.api.Crafting;
 
-import com.bioxx.tfc.api.HeatRegistry;
-import com.bioxx.tfc.api.TFC_ItemHeat;
-
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.api.HeatRegistry;
+import com.bioxx.tfc.api.TFC_ItemHeat;
 
 public class ShapedRecipesTFC implements IRecipe
 {

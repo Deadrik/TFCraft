@@ -1,11 +1,11 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.Items.Tools.ItemHammer;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.Items.Tools.ItemHammer;
 
 public class SlotAnvilHammer extends Slot
 {

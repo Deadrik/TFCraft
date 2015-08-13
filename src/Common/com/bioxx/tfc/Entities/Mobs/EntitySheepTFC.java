@@ -3,11 +3,7 @@ package com.bioxx.tfc.Entities.Mobs;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,9 +26,9 @@ import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.Items.Tools.ItemKnife;
 import com.bioxx.tfc.Items.Tools.ItemShears;
+import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal

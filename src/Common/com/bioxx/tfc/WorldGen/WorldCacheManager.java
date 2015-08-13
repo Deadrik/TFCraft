@@ -8,7 +8,6 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.layer.IntCache;
 
 import com.bioxx.tfc.WorldGen.Data.DataCache;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Drainage.GenDrainageLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.EVT.GenEVTLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.PH.GenPHLayer;
@@ -16,6 +15,7 @@ import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rain.GenRainLayerTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock.GenRockLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Stability.GenStabilityLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Tree.GenTreeLayer;
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 public class WorldCacheManager 
 {	

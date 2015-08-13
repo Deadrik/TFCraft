@@ -1,10 +1,10 @@
 package com.bioxx.tfc.Handlers;
 
-import com.bioxx.tfc.WorldGen.BiomeDecoratorTFC;
-import com.bioxx.tfc.WorldGen.TFCBiome;
-
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+
+import com.bioxx.tfc.WorldGen.BiomeDecoratorTFC;
+import com.bioxx.tfc.WorldGen.TFCBiome;
 
 public class BiomeEventHandler
 {

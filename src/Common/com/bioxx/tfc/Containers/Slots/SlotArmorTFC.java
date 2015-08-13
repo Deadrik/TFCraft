@@ -6,11 +6,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-
-import com.bioxx.tfc.Containers.ContainerPlayerTFC;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Containers.ContainerPlayerTFC;
 
 public class SlotArmorTFC extends Slot 
 {

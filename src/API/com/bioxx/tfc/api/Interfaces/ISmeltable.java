@@ -1,8 +1,8 @@
 package com.bioxx.tfc.api.Interfaces;
 
-import com.bioxx.tfc.api.Metal;
-
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.api.Metal;
 
 public interface ISmeltable 
 {

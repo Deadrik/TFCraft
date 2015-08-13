@@ -1,10 +1,8 @@
 package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Drainage;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-
 import javax.imageio.ImageIO;
 
 import net.minecraft.world.WorldType;

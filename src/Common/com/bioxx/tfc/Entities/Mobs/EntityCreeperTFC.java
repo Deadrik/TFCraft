@@ -10,9 +10,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFC_Achievements;
+import com.bioxx.tfc.api.Interfaces.IInnateArmor;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.Interfaces.IInnateArmor;
 
 public class EntityCreeperTFC extends EntityCreeper implements IInnateArmor
 {

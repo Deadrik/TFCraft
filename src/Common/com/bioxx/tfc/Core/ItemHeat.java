@@ -4,11 +4,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.bioxx.tfc.api.HeatIndex;
-import com.bioxx.tfc.api.HeatRaw;
-import com.bioxx.tfc.api.HeatRegistry;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.*;
 
 public class ItemHeat
 {

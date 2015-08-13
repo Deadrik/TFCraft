@@ -8,8 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 
-import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.Core.TFC_Time;
 
 public class ItemSandwich extends ItemMeal
 {

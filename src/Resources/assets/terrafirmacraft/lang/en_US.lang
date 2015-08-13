@@ -17,24 +17,69 @@ effect.bleed=Bleeding
 death.attack.alcohol=%1$s died of alcohol poisoning
 death.attack.heatStroke=%1$s died of heat stroke
 
-com.bioxx.tfc.Core.TFC_ConfigGUI.GeneralConfig.tooltip=Miscellaneous options
-com.bioxx.tfc.Core.TFC_ConfigGUI.TimeConfig.tooltip=Options related to time
-com.bioxx.tfc.Core.TFC_ConfigGUI.FoodDecayConfig.tooltip=Options related to food decay
-com.bioxx.tfc.Core.TFC_ConfigGUI.CaveInConfig.tooltip=Options related to cave-ins
-com.bioxx.tfc.Core.TFC_ConfigGUI.WorldGenConfig.tooltip=Options related to world generation
-com.bioxx.tfc.Core.TFC_ConfigGUI.ColorAConfig.tooltip=Nutrient A Hoe Overlay Color
-com.bioxx.tfc.Core.TFC_ConfigGUI.ColorBConfig.tooltip=Nutrient B Hoe Overlay Color
-com.bioxx.tfc.Core.TFC_ConfigGUI.ColorCConfig.tooltip=Nutrient C Hoe Overlay Color
-com.bioxx.tfc.Core.TFC_ConfigGUI.ColorFertConfig.tooltip=Fertilizer Hoe Overlay Color
-com.bioxx.tfc.Core.TFC_ConfigGUI.Color0Config.tooltip=Anvil Rule 0 Color
-com.bioxx.tfc.Core.TFC_ConfigGUI.Color1Config.tooltip=Anvil Rule 1 Color
-com.bioxx.tfc.Core.TFC_ConfigGUI.Color2Config.tooltip=Anvil Rule 2 Color
-com.bioxx.tfc.Core.TFC_ConfigGUI.CropConfig.tooltip=Options related to crop growth
-com.bioxx.tfc.Core.TFC_ConfigGUI.ProtectionConfig.tooltip=Options related to mob spawning protection
-com.bioxx.tfc.Core.TFC_ConfigGUI.PlayerConfig.tooltip=Options related to the player
-com.bioxx.tfc.Core.TFC_ConfigGUI.MaterialConfig.tooltip=Options related to materials
-com.bioxx.tfc.Core.TFC_ConfigGUI.ServerConfig.tooltip=Options related to servers
-com.bioxx.tfc.Core.TFC_ConfigGUI.OverworkedConfig.tooltip=Options related to overworking chunks with sluices and gold pans
+#==============
+#= Gui config =
+#==============
+# --- General Config File ---
+# ---------------------------
+config.gui.TFCConfig=TFCConfig.cfg
+config.gui.TFCConfig.tooltip=General configuration file
+
+config.gui.TFCConfig.general=General
+config.gui.TFCConfig.general.tooltip=Miscellaneous options
+
+config.gui.TFCConfig.time=Time
+config.gui.TFCConfig.time.tooltip=Time and Calendar related options
+
+config.gui.TFCConfig.fooddecay=Food decay
+config.gui.TFCConfig.fooddecay.tooltip=Food decay related options
+
+config.gui.TFCConfig.caveins=Cave-ins
+config.gui.TFCConfig.caveins.tooltip=Cave-in related options
+
+config.gui.TFCConfig.worldgen=World generation
+config.gui.TFCConfig.worldgen.tooltip=World gen options
+
+config.gui.TFCConfig.crops=Crops
+config.gui.TFCConfig.crops.tooltip=Crop related options
+
+config.gui.TFCConfig.protection=Spawn protection
+config.gui.TFCConfig.protection.tooltip=Spawn protection related options
+
+config.gui.TFCConfig.player=Player
+config.gui.TFCConfig.player.tooltip=Options related to 'the player'
+
+config.gui.TFCConfig.materials=Materials
+config.gui.TFCConfig.materials.tooltip=Material related options
+
+config.gui.TFCConfig.server=Server
+config.gui.TFCConfig.server.tooltip=Server only options
+
+config.gui.TFCConfig.overworked=Overworked
+config.gui.TFCConfig.overworked.tooltip=Overworked chunks options
+
+config.gui.TFCConfig.colors=Colors
+config.gui.TFCConfig.colors.tooltip=Ingame color settings
+
+config.gui.TFCConfig.colors.r=Red
+config.gui.TFCConfig.colors.g=Green
+config.gui.TFCConfig.colors.b=Blue
+config.gui.TFCConfig.colors.a=Alpha
+
+config.gui.TFCConfig.colors.nutrient_a.tooltip=Nutrient A Hoe Overlay Color
+config.gui.TFCConfig.colors.nutrient_b.tooltip=Nutrient B Hoe Overlay Color
+config.gui.TFCConfig.colors.nutrient_c.tooltip=Nutrient C Hoe Overlay Color
+config.gui.TFCConfig.colors.fertilizer.tooltip=Fertilizer Hoe Overlay Color
+config.gui.TFCConfig.colors.anvil.0.tooltip=Anvil Rule 0 Color
+config.gui.TFCConfig.colors.anvil.1.tooltip=Anvil Rule 1 Color
+config.gui.TFCConfig.colors.anvil.2.tooltip=Anvil Rule 2 Color
+
+# --- Crafting Config File ---
+# ----------------------------
+config.gui.TFCCrafting.conversion=Vanilla Conversions
+config.gui.TFCCrafting.conversion.tooltip=WARNING: Conversions for food are irreversible!
+
+config.gui.TFCCrafting.vanilla=Vanilla Crafting Recipes
 
 #==============
 #= Entities = 

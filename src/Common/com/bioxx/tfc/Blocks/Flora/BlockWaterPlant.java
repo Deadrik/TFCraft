@@ -15,19 +15,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.Terrain.BlockSand;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.Tools.ItemKnife;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TileEntities.TEWaterPlant;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Util.Helper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 {

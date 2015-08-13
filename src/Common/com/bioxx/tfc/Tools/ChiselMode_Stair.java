@@ -1,15 +1,16 @@
 package com.bioxx.tfc.Tools;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TileEntities.TEPartial;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.Tools.ChiselMode;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TileEntities.TEPartial;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.Tools.ChiselMode;
 
 /**
  * Created by raymondbh on 08.07.2015.

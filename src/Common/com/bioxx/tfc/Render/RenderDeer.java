@@ -9,8 +9,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Entities.Mobs.EntityDeer;
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.api.Entities.IAnimal;
 public class RenderDeer extends RenderLiving
 {

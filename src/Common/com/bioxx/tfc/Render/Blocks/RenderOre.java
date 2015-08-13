@@ -1,7 +1,5 @@
 package com.bioxx.tfc.Render.Blocks;
 
-import com.bioxx.tfc.TileEntities.TEOre;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -10,6 +8,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+
+import com.bioxx.tfc.TileEntities.TEOre;
 
 public class RenderOre implements ISimpleBlockRenderingHandler
 {

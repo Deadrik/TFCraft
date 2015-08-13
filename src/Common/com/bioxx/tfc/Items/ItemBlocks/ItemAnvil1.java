@@ -1,10 +1,10 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
-import com.bioxx.tfc.api.Metal;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Metal;
 
 public class ItemAnvil1 extends ItemAnvil
 {

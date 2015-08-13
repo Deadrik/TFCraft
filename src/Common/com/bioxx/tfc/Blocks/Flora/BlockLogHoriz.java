@@ -9,12 +9,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.Constant.Global;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class BlockLogHoriz extends BlockLogVert
 {

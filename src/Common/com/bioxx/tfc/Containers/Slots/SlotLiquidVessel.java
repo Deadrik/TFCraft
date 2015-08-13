@@ -1,12 +1,12 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.Items.ItemMeltedMetal;
-import com.bioxx.tfc.Items.Pottery.ItemPotteryMold;
-import com.bioxx.tfc.api.TFCItems;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.Items.ItemMeltedMetal;
+import com.bioxx.tfc.Items.Pottery.ItemPotteryMold;
+import com.bioxx.tfc.api.TFCItems;
 
 public class SlotLiquidVessel extends Slot
 {
