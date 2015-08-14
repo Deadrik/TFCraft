@@ -48,7 +48,7 @@ public class TECrop extends NetworkTileEntity
 		Random R = new Random();
 		if(!worldObj.isRemote)
 		{
-			float timeMultiplier = 360 / TFC_Time.daysInYear;
+			float timeMultiplier = 360f / TFC_Time.daysInYear;
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 			long time = TFC_Time.getTotalTicks();
 			ChunkData cd = TFC_Core.getCDM(worldObj).getData(xCoord >> 4, zCoord >> 4);
