@@ -128,11 +128,13 @@ public class BlockSapling extends BlockTerraContainer
 
 		super.updateTick(world, i, j, k, rand);
 
-		TESapling te = (TESapling) world.getTileEntity(i, j, k);
+		if (world.getTileEntity(i, j, k) instanceof TESapling)
+		{
+			TESapling te = (TESapling) world.getTileEntity(i, j, k);
 
-		if (world.getBlockLightValue(i, j + 1, k) >= 9 && te!= null && TFC_Time.getTotalTicks() > te.growTime)
-			growTree(world, i, j, k, rand);
-
+			if (world.getBlockLightValue(i, j + 1, k) >= 9 && te != null && TFC_Time.getTotalTicks() > te.growTime)
+				growTree(world, i, j, k, rand);
+		}
 		//this.checkChange(world, i, j, k);
 	}
 

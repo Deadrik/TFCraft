@@ -374,7 +374,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setBoolean("seal", true);
 		nbt.setByte("tab", (byte)tab);
-		nbt.setString("player", player.getDisplayName());
+		nbt.setString("player", player.getCommandSenderName());
 		this.broadcastPacketInRange(this.createDataPacket(nbt));
 		sealed = true;
 		this.worldObj.func_147479_m(xCoord, yCoord, zCoord);
@@ -386,7 +386,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setBoolean("seal", false);
 		nbt.setByte("tab", (byte)tab);
-		nbt.setString("player", player.getDisplayName());
+		nbt.setString("player", player.getCommandSenderName());
 		this.broadcastPacketInRange(this.createDataPacket(nbt));
 		sealed = false;
 		this.worldObj.func_147479_m(xCoord, yCoord, zCoord);
@@ -413,7 +413,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setByte("tab", (byte)tab);
-		nbt.setString("player", player.getDisplayName());
+		nbt.setString("player", player.getCommandSenderName());
 		this.broadcastPacketInRange(this.createDataPacket(nbt));
 	}
 

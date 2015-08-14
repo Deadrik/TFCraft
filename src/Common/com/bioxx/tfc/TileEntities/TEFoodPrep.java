@@ -530,7 +530,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setByte("tab", (byte)tab);
-		nbt.setString("player", player.getDisplayName());
+		nbt.setString("player", player.getCommandSenderName());
 		this.broadcastPacketInRange(this.createDataPacket(nbt));
 	}
 

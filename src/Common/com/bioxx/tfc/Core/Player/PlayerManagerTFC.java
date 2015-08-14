@@ -24,7 +24,7 @@ public class PlayerManagerTFC
 	{
 		for(PlayerInfo pi : Players)
 		{
-			if(pi.Name.equals(player.getDisplayName()) && pi.PlayerUUID.equals(player.getUniqueID()))
+			if (pi.Name.equals(player.getCommandSenderName()) && pi.PlayerUUID.equals(player.getUniqueID()))
 				return pi;
 		}
 		return null;

@@ -144,7 +144,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		skillMap.clear();
 
 		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
-				player.getDisplayName(),
+				player.getCommandSenderName(),
 				player.getUniqueID()));
 
 		PlayerManagerTFC.getInstance().getClientPlayer().setChiselMode(this.chiselMode);
