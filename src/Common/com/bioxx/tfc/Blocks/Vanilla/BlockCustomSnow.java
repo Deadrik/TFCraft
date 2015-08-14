@@ -88,13 +88,14 @@ public class BlockCustomSnow extends BlockTerra
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
 	{
+		// meta  speed
+		//    0  0.98   -  one layer
+		//    7  0.10   -  eight layers = like leaves
+		
 		int meta = world.getBlockMetadata(x, y, z) & 7;
-		if(meta > 0)
-		{
-			double speed = 0.58D + 0.4D * (15 / meta / 15);  // CH: intentional? same as  = (meta == 1) ? 0.98 : 0.58;
-			entity.motionX *= speed;
-			entity.motionZ *= speed;
-		}
+		double speed = 0.98 - 0.125 * meta;
+		entity.motionX *= speed;
+		entity.motionZ *= speed;
 	}
 
 	@Override
@@ -199,18 +200,18 @@ public class BlockCustomSnow extends BlockTerra
 		this.blockIcon = registerer.registerIcon(Reference.ModID + ":snow");
 	}
 
-	// CH: this is confusing me: snow accumulates on the top of a step (one block higher than another)
-	// but not on the bottom of the step
 	private boolean canAddSnowCheckNeighbors(World world, int x, int y, int z, int meta)
 	{
-		if (!this.canPlaceBlockAt(world, x, y, z))
-			return true;
-		if (world.getBlock(x, y, z).getMaterial() != Material.snow)
+ 		Block block = world.getBlock(x, y, z);
+ 		
+ 		if (block.getMaterial() == Material.snow)  // if neighbor is snow, allow up to one additional level
+ 			return meta <= (world.getBlockMetadata(x, y, z) & 7);
+		else if (block == TFCBlocks.Leaves || block == TFCBlocks.Leaves2)  // 4 levels if adjacent to leaves (instead of just one level)
+			return meta < 3;  
+		else if (block.isNormalCube())  // if neighbor is a normal block (opaque, render as normal, not power),
+			return meta < 6;            // up to 7 - leave the top layer empty so we just can see the block
+ 		else
 			return false;
-		if (meta > (world.getBlockMetadata(x, y, z) & 7))
-			return false;
-
-		return true;
 	}
 
 	private boolean canAddSnow(World world, int x, int y, int z, int meta)

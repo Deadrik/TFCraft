@@ -31,6 +31,7 @@ import com.bioxx.tfc.Commands.GiveSkillCommand;
 import com.bioxx.tfc.Commands.PrintImageMapCommand;
 import com.bioxx.tfc.Commands.RemoveAreaCommand;
 import com.bioxx.tfc.Commands.RemoveChunkCommand;
+import com.bioxx.tfc.Commands.RemoveSnowCommand;
 import com.bioxx.tfc.Commands.SetPlayerStatsCommand;
 import com.bioxx.tfc.Commands.StripChunkCommand;
 import com.bioxx.tfc.Core.ItemHeat;
@@ -337,6 +338,7 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new PrintImageMapCommand());
 		evt.registerServerCommand(new GiveSkillCommand());
 		evt.registerServerCommand(new CommandTransferTamed());
+		evt.registerServerCommand(new RemoveSnowCommand());
 	}	
 
 	@SubscribeEvent
