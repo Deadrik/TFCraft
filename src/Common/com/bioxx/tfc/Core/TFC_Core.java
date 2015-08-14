@@ -468,22 +468,16 @@ public class TFC_Core
 		return block == TFCBlocks.Peat;
 	}
 
-	public static boolean isNotWater(Block block)
-	{
-		return !isSaltWater(block)
-				|| !isFreshWater(block)
-				|| !isHotWater(block);
-	}
-
 	public static boolean isHotWater(Block block)
 	{
-		return block == TFCBlocks.HotWater;
+		return block == TFCBlocks.HotWater || block == TFCBlocks.HotWaterStationary;
 	}
 
 	public static boolean isWater(Block block)
 	{
 		return isSaltWater(block)
-				|| isFreshWater(block);
+				|| isFreshWater(block)
+				|| isHotWater(block);
 	}
 
 	public static boolean isWaterFlowing(Block block)
