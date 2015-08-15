@@ -50,7 +50,7 @@ public class ContainerTFC extends Container
 	@Override
 	protected boolean mergeItemStack(ItemStack is, int slotStart, int slotFinish, boolean par4)
 	{
-		boolean var5 = false;
+		boolean merged = false;
 		int slotIndex = slotStart;
 
 		if (par4)
@@ -81,14 +81,26 @@ public class ContainerTFC extends Container
 						is.stackSize = 0;
 						slotstack.stackSize = mergedStackSize;
 						slot.onSlotChanged();
-						var5 = true;
+						merged = true;
 					}
 					else if (slotstack.stackSize < is.getMaxStackSize() && slotstack.stackSize < slot.getSlotStackLimit())
 					{
-						is.stackSize -= slot.getSlotStackLimit() - slotstack.stackSize;
-						slotstack.stackSize = slot.getSlotStackLimit();
-						slot.onSlotChanged();
-						var5 = true;
+						// Slot stack size is greater than or equal to the item's max stack size. Most containers are this case.
+						if (slot.getSlotStackLimit() >= is.getMaxStackSize())
+						{
+							is.stackSize -= is.getMaxStackSize() - slotstack.stackSize;
+							slotstack.stackSize = is.getMaxStackSize();
+							slot.onSlotChanged();
+							merged = true;
+						}
+						// Slot stack size is smaller than the item's normal max stack size. Example: Log Piles
+						else if (slot.getSlotStackLimit() < is.getMaxStackSize())
+						{
+							is.stackSize -= slot.getSlotStackLimit() - slotstack.stackSize;
+							slotstack.stackSize = slot.getSlotStackLimit();
+							slot.onSlotChanged();
+							merged = true;
+						}
 					}
 				}
 
@@ -117,7 +129,7 @@ public class ContainerTFC extends Container
 					is.stackSize -= slot.getSlotStackLimit();
 					slot.putStack(copy);
 					slot.onSlotChanged();
-					var5 = true;
+					merged = true;
 					//this.bagsSlotNum = slotIndex;
 					break;
 				}
@@ -126,7 +138,7 @@ public class ContainerTFC extends Container
 					slot.putStack(is.copy());
 					slot.onSlotChanged();
 					is.stackSize = 0;
-					var5 = true;
+					merged = true;
 					break;
 				}
 
@@ -137,7 +149,7 @@ public class ContainerTFC extends Container
 			}
 		}
 
-		return var5;
+		return merged;
 	}
 
 	protected int getSmaller(int i, int j)
