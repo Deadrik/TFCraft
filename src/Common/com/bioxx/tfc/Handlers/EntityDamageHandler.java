@@ -154,7 +154,9 @@ public class EntityDamageHandler
 			EntityArmorCalcEvent eventPost = new EntityArmorCalcEvent(entity, damage, EntityArmorCalcEvent.EventType.POST);
 			MinecraftForge.EVENT_BUS.post(eventPost);
 			//TerraFirmaCraft.log.info(entity.getClass()+", "+eventPre.incomingDamage+", "+eventPost.incomingDamage);
+			float hasHealth = entity.getHealth();
 			entity.setHealth(entity.getHealth()-eventPost.incomingDamage);
+			entity.func_110142_aN().func_94547_a(source, hasHealth, eventPost.incomingDamage);
 		}
 		return 0;
 	}
@@ -267,83 +269,82 @@ public class EntityDamageHandler
 		{
 			if (!target.hitByEntity(target))
 			{
-				float i = TFC_MobData.SteveDamage;
+				float damageAmount = TFC_MobData.SteveDamage;
 				if(stack != null)
 				{
-					i = (float)player.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+					damageAmount = (float)player.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
 					//player.addChatMessage("Damage: " + i);
-					if(i == 1.0f)
+					if(damageAmount == 1.0f)
 					{
-						i = TFC_MobData.SteveDamage;
+						damageAmount = TFC_MobData.SteveDamage;
 						//i = player.inventory.getCurrentItem().getItem().getDamageVsEntity(target, player.inventory.getCurrentItem());
 					}
 				}
 
 				if (player.isPotionActive(Potion.damageBoost))
-					i += 3 << player.getActivePotionEffect(Potion.damageBoost).getAmplifier();
+					damageAmount += 3 << player.getActivePotionEffect(Potion.damageBoost).getAmplifier();
 
 				if (player.isPotionActive(Potion.weakness))
-					i -= 2 << player.getActivePotionEffect(Potion.weakness).getAmplifier();
+					damageAmount -= 2 << player.getActivePotionEffect(Potion.weakness).getAmplifier();
 
-				int j = 0;
-				float k = 0;
+				int knockback = 0;
+				float enchantmentDamage = 0;
 
 				if (target instanceof EntityLiving)
 				{
-					k = EnchantmentHelper.getEnchantmentModifierLiving(player, (EntityLiving) target);
-					j += EnchantmentHelper.getKnockbackModifier(player, (EntityLiving) target);
+					enchantmentDamage = EnchantmentHelper.getEnchantmentModifierLiving(player, (EntityLiving) target);
+					knockback += EnchantmentHelper.getKnockbackModifier(player, (EntityLiving) target);
 				}
 
 				if (player.isSprinting())
-					++j;
+					++knockback;
 
-				if (i > 0 || k > 0)
+				if (damageAmount > 0 || enchantmentDamage > 0)
 				{
-					boolean flag = player.fallDistance > 0.0F && !player.onGround && 
+					boolean criticalHit = player.fallDistance > 0.0F && !player.onGround && 
 							!player.isOnLadder() && !player.isInWater() && 
 							!player.isPotionActive(Potion.blindness) && player.ridingEntity == null && 
 							target instanceof EntityLiving;
 
-					if (flag && i > 0)
-						i += event.entity.worldObj.rand.nextInt((int) (i / 2 + 2));
+					if (criticalHit && damageAmount > 0)
+						damageAmount += event.entity.worldObj.rand.nextInt((int) (damageAmount / 2 + 2));
 
-					i += k;
-					boolean flag1 = false;
-					int l = EnchantmentHelper.getFireAspectModifier(player);
+					damageAmount += enchantmentDamage;
+					boolean onFire = false;
+					int fireAspect = EnchantmentHelper.getFireAspectModifier(player);
 
-					if (target instanceof EntityLiving && l > 0 && !target.isBurning())
+					if (target instanceof EntityLiving && fireAspect > 0 && !target.isBurning())
 					{
-						flag1 = true;
+						onFire = true;
 						target.setFire(1);
 					}
 
-					boolean flag2 = target.attackEntityFrom(DamageSource.causePlayerDamage(player), i);
+					boolean entityAttacked = target.attackEntityFrom(DamageSource.causePlayerDamage(player), damageAmount);
 
-					if (flag2)
+					if (entityAttacked)
 					{
-						if (j > 0)
+						if (knockback > 0)
 						{
-							target.addVelocity(-MathHelper.sin(player.rotationYaw * (float)Math.PI / 180.0F) * j * 0.5F, 0.1D, 
-									MathHelper.cos(player.rotationYaw * (float)Math.PI / 180.0F) * j * 0.5F);
+							target.addVelocity(-MathHelper.sin(player.rotationYaw * (float)Math.PI / 180.0F) * knockback * 0.5F, 0.1D, 
+									MathHelper.cos(player.rotationYaw * (float)Math.PI / 180.0F) * knockback * 0.5F);
 							player.motionX *= 0.6D;
 							player.motionZ *= 0.6D;
 							player.setSprinting(false);
 						}
 
-						if (flag)
+						if (criticalHit)
 							player.onCriticalHit(target);
 
-						if (k > 0)
+						if (enchantmentDamage > 0)
 							player.onEnchantmentCritical(target);
 
-						if (i >= 18)
+						if (damageAmount >= 18)
 							player.triggerAchievement(AchievementList.overkill);
 
 						player.setLastAttacker(target);
 
 						if (target instanceof EntityLiving)
-							// EnchantmentThorns.func_151367_b(attacker, target, (int)i);
-							target.attackEntityFrom(DamageSource.causeThornsDamage(attacker), i);
+							target.attackEntityFrom(DamageSource.causeThornsDamage(attacker), damageAmount);
 					}
 
 					ItemStack itemstack = player.getCurrentEquippedItem();
@@ -365,10 +366,10 @@ public class EntityDamageHandler
 
 					if (target instanceof EntityLivingBase)
 					{
-						player.addStat(StatList.damageDealtStat,Math.round(i * 10.0f));
-						if (l > 0 && flag2)
-							target.setFire(l * 4);
-						else if (flag1)
+						player.addStat(StatList.damageDealtStat,Math.round(damageAmount * 10.0f));
+						if (fireAspect > 0 && entityAttacked)
+							target.setFire(fireAspect * 4);
+						else if (onFire)
 							target.extinguish();
 					}
 
