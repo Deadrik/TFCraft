@@ -30,6 +30,7 @@ public class InitClientWorldPacket extends AbstractPacket
 	private float nutrProtein;
 	private float nutrDairy;
 	private boolean craftingTable = false;
+	private boolean debugMode = false;
 	private SkillStats playerSkills;
 	private int daysInYear, HGRate, HGCap;
 	private HashMap<String, Integer> skillMap = new HashMap<String, Integer>();
@@ -56,6 +57,8 @@ public class InitClientWorldPacket extends AbstractPacket
 		this.daysInYear = TFC_Time.daysInYear;
 		this.HGRate = TFCOptions.HealthGainRate;
 		this.HGCap = TFCOptions.HealthGainCap;
+		this.debugMode = TFCOptions.enableDebugMode;
+
 		if(P.getEntityData().hasKey("craftingTable"))
 			this.craftingTable = true;
 		this.playerSkills = TFC_Core.getSkillStats(P);
@@ -80,6 +83,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		buffer.writeBoolean(this.craftingTable);
 		this.playerSkills.toOutBuffer(buffer);
 		buffer.writeByte(this.chiselMode);
+		buffer.writeBoolean(this.debugMode);
 	}
 
 	@Override
@@ -111,6 +115,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		}
 
 		this.chiselMode = buffer.readByte();
+		this.debugMode = buffer.readBoolean();
 	}
 
 	@Override
@@ -129,6 +134,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		TFC_Time.setYearLength(this.daysInYear);
 		TFCOptions.HealthGainRate = this.HGRate;
 		TFCOptions.HealthGainCap = this.HGCap;
+		TFCOptions.enableDebugMode = this.debugMode;
 		if(this.craftingTable)
 		{
 			player.getEntityData().setBoolean("craftingTable", this.craftingTable);
