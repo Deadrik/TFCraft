@@ -214,7 +214,12 @@ public class BlockCollapsible extends BlockTerraContainer
 			{
 				if(fallingBlock != null)
 				{
-					EntityFallingBlockTFC ent = new EntityFallingBlockTFC(world, x + 0.5F, y + 0.5F, z + 0.5F, fallingBlock, fallingBlockMeta/*+8*/); // Not sure what this +8 was for, but it was causing the resulting block to not be recognized by WAILA/NEI.
+					EntityFallingBlockTFC ent = new EntityFallingBlockTFC(world, x + 0.5F, y + 0.5F, z + 0.5F, fallingBlock, fallingBlockMeta);
+
+					// Cobble generated from caving in raw stone has different metadata for different drops/hardness.
+					if (this instanceof BlockStone)
+						ent = new EntityFallingBlockTFC(world, x + 0.5F, y + 0.5F, z + 0.5F, fallingBlock, fallingBlockMeta + 8);
+
 					ent.aliveTimer/*fallTime*/ = -5000;
 					world.spawnEntityInWorld(ent);
 					Random R = new Random(x*y+z);

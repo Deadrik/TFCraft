@@ -18,6 +18,7 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Tools.IToolChisel;
 
 import cpw.mods.fml.relauncher.Side;
@@ -33,6 +34,7 @@ public class BlockCobble extends BlockTerra
 
 	protected String[] names;
 	protected IIcon[] icons;
+	protected int looseStart = 0;
 
 	@SideOnly(Side.CLIENT)
 	@Override
@@ -46,10 +48,62 @@ public class BlockCobble extends BlockTerra
 	}
 
 	@Override
-	protected void dropBlockAsItem(World par1World, int par2, int par3, int par4, ItemStack is)
+	public Item getItemDropped(int meta, Random random, int fortune)
 	{
-		if(is.getItemDamage() < 8)
-			super.dropBlockAsItem(par1World, par2, par3, par4, is);
+		// Cobblestone generated from cave ins drops loose rocks instead of the block.
+		if (meta > 7)
+			return TFCItems.LooseRock;
+		else
+			return Item.getItemFromBlock(this);
+	}
+
+	/**
+	 * Returns the quantity of items to drop on block destruction.
+	 */
+	@Override
+	public int quantityDropped(Random rand)
+	{
+		return rand.nextInt(2) + 1;
+	}
+	
+	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+
+		// Natural cobblestone drops multiple rocks, crafted cobblestone drops one block.
+		int count = metadata > 7 ? this.quantityDropped(world.rand) : 1;
+
+		for (int i = 0; i < count; i++)
+		{
+			Item item = getItemDropped(metadata, world.rand, fortune);
+			
+			if (item != null)
+			{
+				if (metadata > 7)
+				{
+					// Need to take the "natural cobble" metadata mod 8 to get the correct rock item.
+					int meta = looseStart + (metadata % 8);
+					ret.add(new ItemStack(item, 1, meta));
+				}
+				else
+					ret.add(new ItemStack(item, 1, damageDropped(metadata)));
+			}
+		}
+		return ret;
+	}
+	
+	/**
+	 * Returns the block hardness at a location. Args: world, x, y, z
+	 */
+	@Override
+	public float getBlockHardness(World world, int x, int y, int z)
+	{
+		// Cobblestone generated from cave ins have half the block hardness, same as raw stone.
+		if (world.getBlockMetadata(x, y, z) > 7)
+			return this.blockHardness / 2;
+		else
+			return this.blockHardness;
 	}
 
 	/*

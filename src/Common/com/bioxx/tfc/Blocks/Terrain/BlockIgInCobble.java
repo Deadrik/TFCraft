@@ -12,5 +12,6 @@ public class BlockIgInCobble extends BlockCobble
 		super(material);
 		names = Global.STONE_IGIN;
 		icons = new IIcon[names.length];
+		looseStart = Global.STONE_IGIN_START;
 	}
 }

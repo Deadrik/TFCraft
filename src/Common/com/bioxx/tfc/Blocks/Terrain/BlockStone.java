@@ -136,7 +136,8 @@ public class BlockStone extends BlockCollapsible
 		// 30% chance to turn to cobble instead of being completely destroyed.
 		if (world.rand.nextInt(100) < 30)
 		{
-			world.setBlock(x, y, z, dropBlock, world.getBlockMetadata(x, y, z), 0x2);
+			// +8 Metadata for natural cobblestone that drops rocks instead of the block
+			world.setBlock(x, y, z, dropBlock, world.getBlockMetadata(x, y, z) + 8, 0x2);
 		}
 		else
 		{

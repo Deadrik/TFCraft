@@ -13,6 +13,7 @@ public class BlockIgExCobble extends BlockCobble
 		super(material);
 		names = Global.STONE_IGEX;
 		icons = new IIcon[names.length];
+		looseStart = Global.STONE_IGEX_START;
 	}
 
 	@Override

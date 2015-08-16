@@ -27,6 +27,7 @@ import com.bioxx.tfc.Blocks.Flora.BlockFruitLeaves;
 import com.bioxx.tfc.Blocks.Flora.BlockFruitWood;
 import com.bioxx.tfc.Blocks.Terrain.BlockClay;
 import com.bioxx.tfc.Blocks.Terrain.BlockClayGrass;
+import com.bioxx.tfc.Blocks.Terrain.BlockCobble;
 import com.bioxx.tfc.Blocks.Terrain.BlockDirt;
 import com.bioxx.tfc.Blocks.Terrain.BlockGrass;
 import com.bioxx.tfc.Blocks.Terrain.BlockGravel;
@@ -111,6 +112,9 @@ public class WAILAData implements IWailaDataProvider
 
 		else if (TFC_Core.isClay(block) || TFC_Core.isClayGrass(block))
 			return new ItemStack(TFCItems.ClayBall);
+
+		else if (block instanceof BlockCobble)
+			return new ItemStack(block, 1, accessor.getMetadata() % 8);
 
 		else if (tileEntity instanceof TECrop)
 			return cropStack(accessor, config);
@@ -294,6 +298,7 @@ public class WAILAData implements IWailaDataProvider
 		reg.registerStackProvider(new WAILAData(), BlockCharcoal.class);
 		reg.registerStackProvider(new WAILAData(), BlockClay.class);
 		reg.registerStackProvider(new WAILAData(), BlockClayGrass.class);
+		reg.registerStackProvider(new WAILAData(), BlockCobble.class);
 
 		reg.registerStackProvider(new WAILAData(), TECrop.class);
 		reg.registerBodyProvider(new WAILAData(), TECrop.class);

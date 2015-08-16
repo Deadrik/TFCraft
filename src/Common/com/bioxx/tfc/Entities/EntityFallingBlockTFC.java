@@ -22,6 +22,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.bioxx.tfc.Blocks.Terrain.BlockCobble;
 import com.bioxx.tfc.Blocks.Terrain.BlockOre;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.TFCBlocks;
@@ -37,15 +38,14 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 	public int blockMeta;
 	public int aliveTimer;
 	public boolean shouldDropItem;
-	private boolean field_145808_f;
-	private boolean field_145809_g;
+	private boolean hurtEntities;
 	public int maxDamage;
 	public float damage;
 	public NBTTagCompound tileEntityData;
 
-	public EntityFallingBlockTFC(World p_i1706_1_)
+	public EntityFallingBlockTFC(World world)
 	{
-		super(p_i1706_1_);
+		super(world);
 		this.shouldDropItem = true;
 		this.maxDamage = 2000;
 		this.damage = 100F;
@@ -60,8 +60,6 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 	{
 		this(world);
 		this.shouldDropItem = false;
-		this.maxDamage = 40;
-		this.damage = 2.0F;
 		this.block = b;
 		this.blockMeta = meta;
 		this.preventEntitySpawning = true;
@@ -74,6 +72,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 		this.prevPosX = x;
 		this.prevPosY = y;
 		this.prevPosZ = z;
+		this.hurtEntities = b instanceof BlockCobble;
 	}
 
 	/**
@@ -162,7 +161,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 						this.setDead();
 
 
-						if (!this.field_145808_f && canPlaceEntityOnSide(worldObj, this.block, i, j, k, true, 1, (Entity)null, (ItemStack)null) && !BlockFalling.func_149831_e(this.worldObj, i, j - 1, k))
+						if (canPlaceEntityOnSide(worldObj, this.block, i, j, k, true, 1, (Entity) null, (ItemStack) null) && !BlockFalling.func_149831_e(this.worldObj, i, j - 1, k))
 						{
 
 							if (this.tileEntityData != null && this.block instanceof ITileEntityProvider)
@@ -191,7 +190,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 								}
 							}
 						}
-						else if (this.shouldDropItem && !this.field_145808_f)
+						else if (this.shouldDropItem)
 						{
 							this.entityDropItem(new ItemStack(this.block, 1, this.block.damageDropped(this.blockMeta)), 0.0F);
 						}
@@ -248,39 +247,22 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 	 * Called when the mob is falling. Calculates and applies fall damage.
 	 */
 	@Override
-	protected void fall(float p_70069_1_)
+	protected void fall(float fallDistance)
 	{
-		if (this.field_145809_g)
+		if (this.hurtEntities)
 		{
-			int i = MathHelper.ceiling_float_int(p_70069_1_ - 1.0F);
+			int height = MathHelper.ceiling_float_int(fallDistance - 1.0F);
 
-			if (i > 0)
+			if (height > 0)
 			{
 				ArrayList arraylist = new ArrayList(this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox));
-				boolean flag = this.block == Blocks.anvil;
-				DamageSource damagesource = flag ? DamageSource.anvil : DamageSource.fallingBlock;
+				DamageSource damagesource = new DamageSource("caveIn").setDamageBypassesArmor().setDamageIsAbsolute();
 				Iterator iterator = arraylist.iterator();
 
 				while (iterator.hasNext())
 				{
 					Entity entity = (Entity)iterator.next();
-					entity.attackEntityFrom(damagesource, Math.min(MathHelper.floor_float(i * this.damage), this.maxDamage));
-				}
-
-				if (flag && this.rand.nextFloat() < 0.05000000074505806D + i * 0.05D)
-				{
-					int j = this.blockMeta >> 2;
-					int k = this.blockMeta & 3;
-					++j;
-
-					if (j > 2)
-					{
-					this.field_145808_f = true;
-					}
-					else
-					{
-					this.blockMeta = k | j << 2;
-					}
+					entity.attackEntityFrom(damagesource, Math.min(MathHelper.floor_float(height * this.damage), this.maxDamage));
 				}
 			}
 		}
@@ -297,7 +279,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 		nbt.setByte("Data", (byte)this.blockMeta);
 		nbt.setByte("Time", (byte)this.aliveTimer);
 		nbt.setBoolean("DropItem", this.shouldDropItem);
-		nbt.setBoolean("HurtEntities", this.field_145809_g);
+		nbt.setBoolean("HurtEntities", this.hurtEntities);
 		nbt.setFloat("FallHurtAmount", this.damage);
 		nbt.setInteger("FallHurtMax", this.maxDamage);
 
@@ -311,39 +293,39 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound p_70037_1_)
+	protected void readEntityFromNBT(NBTTagCompound nbt)
 	{
-		if (p_70037_1_.hasKey("TileID", 99))
+		if (nbt.hasKey("TileID", 99))
 		{
-			this.block = Block.getBlockById(p_70037_1_.getInteger("TileID"));
+			this.block = Block.getBlockById(nbt.getInteger("TileID"));
 		}
 		else
 		{
-			this.block = Block.getBlockById(p_70037_1_.getByte("Tile") & 255);
+			this.block = Block.getBlockById(nbt.getByte("Tile") & 255);
 		}
 
-		this.blockMeta = p_70037_1_.getByte("Data") & 255;
-		this.aliveTimer = p_70037_1_.getByte("Time") & 255;
+		this.blockMeta = nbt.getByte("Data") & 255;
+		this.aliveTimer = nbt.getByte("Time") & 255;
 
-		if (p_70037_1_.hasKey("HurtEntities", 99))
+		if (nbt.hasKey("HurtEntities", 99))
 		{
-			this.field_145809_g = p_70037_1_.getBoolean("HurtEntities");
-			this.damage = p_70037_1_.getFloat("FallHurtAmount");
-			this.maxDamage = p_70037_1_.getInteger("FallHurtMax");
+			this.hurtEntities = nbt.getBoolean("HurtEntities");
+			this.damage = nbt.getFloat("FallHurtAmount");
+			this.maxDamage = nbt.getInteger("FallHurtMax");
 		}
-		else if (this.block == Blocks.anvil)
+		else if (this.block instanceof BlockCobble)
 		{
-			this.field_145809_g = true;
-		}
-
-		if (p_70037_1_.hasKey("DropItem", 99))
-		{
-			this.shouldDropItem = p_70037_1_.getBoolean("DropItem");
+			this.hurtEntities = true;
 		}
 
-		if (p_70037_1_.hasKey("TileEntityData", 10))
+		if (nbt.hasKey("DropItem", 99))
 		{
-			this.tileEntityData = p_70037_1_.getCompoundTag("TileEntityData");
+			this.shouldDropItem = nbt.getBoolean("DropItem");
+		}
+
+		if (nbt.hasKey("TileEntityData", 10))
+		{
+			this.tileEntityData = nbt.getCompoundTag("TileEntityData");
 		}
 
 		if (this.block.getMaterial() == Material.air)
@@ -352,9 +334,9 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 		}
 	}
 
-	public void func_145806_a(boolean p_145806_1_)
+	public void setHurt(boolean hurt)
 	{
-		this.field_145809_g = p_145806_1_;
+		this.hurtEntities = hurt;
 	}
 
 	@Override

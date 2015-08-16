@@ -12,6 +12,7 @@ public class BlockSedCobble extends BlockCobble
 		super(material);
 		names = Global.STONE_SED;
 		icons = new IIcon[names.length];
+		looseStart = Global.STONE_SED_START;
 	}
 
 	@Override

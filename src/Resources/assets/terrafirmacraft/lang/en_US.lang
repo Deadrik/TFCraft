@@ -16,6 +16,7 @@ key.LockTool=Lock Tool Location
 effect.bleed=Bleeding
 death.attack.alcohol=%1$s died of alcohol poisoning
 death.attack.heatStroke=%1$s died of heat stroke
+death.attack.caveIn=%1$s was crushed by falling cobblestone
 
 com.bioxx.tfc.Core.TFC_ConfigGUI.GeneralConfig.tooltip=Miscellaneous options
 com.bioxx.tfc.Core.TFC_ConfigGUI.TimeConfig.tooltip=Options related to time
