@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Items.Tools;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -241,5 +242,12 @@ public class ItemProPick extends ItemTerra
 	public int getMaxDamage(ItemStack stack)
 	{
 		return (int) (getMaxDamage()+(getMaxDamage() * AnvilManager.getDurabilityBuff(stack)));
+	}
+
+	@Override
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
+	{
+		ItemTerra.addSizeInformation(is, arraylist);
+		ItemTerraTool.addDurabilityInformation(is, arraylist);
 	}
 }
