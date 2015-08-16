@@ -38,6 +38,7 @@ import com.bioxx.tfc.Items.ItemArrow;
 import com.bioxx.tfc.Items.ItemBloom;
 import com.bioxx.tfc.Items.ItemOreSmall;
 import com.bioxx.tfc.Items.ItemQuiver;
+import com.bioxx.tfc.Items.Tools.ItemCustomBow;
 import com.bioxx.tfc.Items.Tools.ItemJavelin;
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.TFCAttributes;
@@ -216,7 +217,36 @@ public class EntityLivingHandler
 	@SideOnly(Side.CLIENT)
 	public void handleFOV(FOVUpdateEvent event)
 	{
-		event.newfov = 1.0f;
+		EntityPlayer player = event.entity;
+
+		// Force FOV to 1.0f if the player is overburdened to prevent the screen from zooming in a lot.
+		IAttributeInstance iattributeinstance = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
+		if (iattributeinstance.getModifier(TFCAttributes.overburdenedUUID) != null)
+		{
+			event.newfov = 1.0f;
+			return;
+		}
+
+		// Calculate FOV based on the variable draw speed of the bow depending on player armor.
+		if (player.isUsingItem() && player.getItemInUse().getItem() instanceof ItemCustomBow)
+		{
+			float fov = 1.0F;
+			int duration = player.getItemInUseDuration();
+			float speed = ItemCustomBow.getUseSpeed(player);
+			float force = duration / speed;
+
+			if (force > 1.0F)
+			{
+				force = 1.0F;
+			}
+			else
+			{
+				force *= force;
+			}
+
+			fov *= 1.0F - force * 0.15F;
+			event.newfov = fov;
+		}
 	}
 
 	@SubscribeEvent

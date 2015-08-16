@@ -142,7 +142,7 @@ public class ItemCustomBow extends ItemBow implements ISize
 		}
 	}
 
-	public float getUseSpeed(EntityPlayer player)
+	public static float getUseSpeed(EntityPlayer player)
 	{
 		float speed = 60.0f;
 		ItemStack[] armor = player.inventory.armorInventory;
