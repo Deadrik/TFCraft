@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -321,7 +322,7 @@ public class EntityLivingHandler
 	public void onLivingDrop(LivingDropsEvent event)
 	{
 		boolean processed = false;
-		if(!event.entity.worldObj.isRemote && event.recentlyHit && !(event.entity instanceof EntityPlayer))
+		if (!event.entity.worldObj.isRemote && event.recentlyHit && !(event.entity instanceof EntityPlayer) && !(event.entity instanceof EntityZombie))
 		{
 			if(event.source.getSourceOfDamage() instanceof EntityPlayer || event.source.isProjectile())
 			{
@@ -339,7 +340,7 @@ public class EntityLivingHandler
 				}
 				for(EntityItem ei : event.drops)
 				{
-					if(ei.getEntityItem().getItem() instanceof IFood)
+					if (ei.getEntityItem().getItem() instanceof IFood)
 					{
 						if(p == null)
 							continue;
@@ -371,7 +372,7 @@ public class EntityLivingHandler
 			}
 		}
 
-		if(!processed && !(event.entity instanceof EntityPlayer))
+		if (!processed && !(event.entity instanceof EntityPlayer) && !(event.entity instanceof EntityZombie))
 		{
 			ArrayList<EntityItem> drop = new ArrayList<EntityItem>();
 			for(EntityItem ei : event.drops)
