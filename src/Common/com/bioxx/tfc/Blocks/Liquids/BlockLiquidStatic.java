@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -134,17 +135,70 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 
 			if(this.getMaterial() == Material.lava)
 			{
-				if (world.getBlock(x, y + 1, z).isAir(world, x, y + 1, z))
+				if (world.getBlock(x, y + 1, z).getMaterial() == Material.air)
 				{
 					int i = x-2+rand.nextInt(5);
 					int j = y+1+rand.nextInt(4);
 					int k = z-2+rand.nextInt(5);
-					if (world.getBlock(i, j, k).isAir(world, i, j, k) &&
-							(world.isSideSolid(i, j+1, k, ForgeDirection.DOWN) || world.isSideSolid(i, j-1, k, ForgeDirection.UP) ||
-									world.isSideSolid(i-1, j, k, ForgeDirection.EAST) || world.isSideSolid(i+1, j, k, ForgeDirection.WEST) ||
-									world.isSideSolid(i, j, k+1, ForgeDirection.NORTH) || world.isSideSolid(i, j, k-1, ForgeDirection.SOUTH)))
+
+					if (world.getBlock(i, j, k).getMaterial() == Material.air)
 					{
-						world.setBlock(i, j, k, TFCBlocks.Sulfur, world.rand.nextInt(4), 3);
+						if (this.isFlammable(world, i - 1, j, k) || this.isFlammable(world, i + 1, j, k) || 
+								this.isFlammable(world, i, j, k - 1) || this.isFlammable(world, i, j, k + 1) || 
+								this.isFlammable(world, i, j - 1, k) || this.isFlammable(world, i, j + 1, k))
+						{
+							world.setBlock(i, j, k, Blocks.fire);
+						}
+						else if (world.isSideSolid(i, j + 1, k, ForgeDirection.DOWN) || world.isSideSolid(i, j - 1, k, ForgeDirection.UP) ||
+									world.isSideSolid(i-1, j, k, ForgeDirection.EAST) || world.isSideSolid(i+1, j, k, ForgeDirection.WEST) ||
+									world.isSideSolid(i, j, k + 1, ForgeDirection.NORTH) || world.isSideSolid(i, j, k - 1, ForgeDirection.SOUTH))
+						{
+							world.setBlock(i, j, k, TFCBlocks.Sulfur, world.rand.nextInt(4), 3);
+						}
+
+					}
+
+					int distance = rand.nextInt(3);
+					int xCoord;
+
+					for (xCoord = 0; xCoord < distance; ++xCoord)
+					{
+						x += rand.nextInt(3) - 1;
+						++y;
+						z += rand.nextInt(3) - 1;
+						Block block = world.getBlock(x, y, z);
+
+						if (block.getMaterial() == Material.air)
+						{
+							if (this.isFlammable(world, x - 1, y, z) || this.isFlammable(world, x + 1, y, z) || 
+									this.isFlammable(world, x, y, z - 1) || this.isFlammable(world, x, y, z + 1) || 
+									this.isFlammable(world, x, y - 1, z) || this.isFlammable(world, x, y + 1, z))
+							{
+								world.setBlock(x, y, z, Blocks.fire);
+								return;
+							}
+						}
+						else if (block.getMaterial().blocksMovement())
+						{
+							return;
+						}
+					}
+
+					if (distance == 0)
+					{
+						xCoord = x;
+						int zCoord = z;
+
+						for (int c = 0; c < 3; ++c)
+						{
+							x = xCoord + rand.nextInt(3) - 1;
+							z = zCoord + rand.nextInt(3) - 1;
+
+							if (world.isAirBlock(x, y + 1, z) && this.isFlammable(world, x, y, z))
+							{
+								world.setBlock(x, y + 1, z, Blocks.fire);
+							}
+						}
 					}
 				}
 			}
@@ -152,6 +206,15 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 
 		super.updateTick(world, x, y, z, rand);
 	}
+	
+
+    /**
+     * Checks to see if the block is flammable.
+     */
+	private boolean isFlammable(World world, int x, int y, int z)
+    {
+		return Blocks.fire.getFlammability(world.getBlock(x, y, z)) > 0;
+    }
 
 	/**
 	 * Changes the block ID to that of an updating fluid.
