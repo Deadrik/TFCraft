@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Handlers.Network;
 
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
@@ -13,6 +14,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.Player.SkillStats;
+import com.bioxx.tfc.api.TFCOptions;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
 
@@ -32,6 +34,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 	private int skillLevel;
 	private boolean craftingTable = false;
 	private HashMap<String, Integer> skillMap = new HashMap<String, Integer>();
+	private boolean debugMode = false;
 
 	public PlayerUpdatePacket() {}
 
@@ -49,6 +52,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 			this.nutrGrain = fs.nutrGrain;
 			this.nutrProtein = fs.nutrProtein;
 			this.nutrDairy = fs.nutrDairy;
+			this.debugMode = TFCOptions.enableDebugMode;
 		}
 		else if(this.flag == 2)
 		{
@@ -88,6 +92,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 			buffer.writeFloat(this.nutrGrain);
 			buffer.writeFloat(this.nutrProtein);
 			buffer.writeFloat(this.nutrDairy);
+			buffer.writeBoolean(this.debugMode);
 		}
 		else if(this.flag == 1)
 		{
@@ -122,6 +127,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 			this.nutrGrain = buffer.readFloat();
 			this.nutrProtein = buffer.readFloat();
 			this.nutrDairy = buffer.readFloat();
+			this.debugMode = buffer.readBoolean();
 		}
 		else if(this.flag == 1)
 		{
@@ -165,6 +171,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 			fs.nutrGrain = this.nutrGrain;
 			fs.nutrProtein = this.nutrProtein;
 			fs.nutrDairy = this.nutrDairy;
+			TFCOptions.enableDebugMode = this.debugMode && TFCOptions.enableDebugMode;
 			TFC_Core.setPlayerFoodStats(player, fs);
 		}
 		else if(this.flag == 1)

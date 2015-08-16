@@ -35,6 +35,7 @@ public class InitClientWorldPacket extends AbstractPacket
 	private int daysInYear, HGRate, HGCap;
 	private HashMap<String, Integer> skillMap = new HashMap<String, Integer>();
 	private byte chiselMode;
+	private boolean debugMode = false;
 
 	public InitClientWorldPacket() {}
 
@@ -63,6 +64,7 @@ public class InitClientWorldPacket extends AbstractPacket
 			this.craftingTable = true;
 		this.playerSkills = TFC_Core.getSkillStats(P);
 		this.chiselMode = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(P).ChiselMode;
+		this.debugMode = TFCOptions.enableDebugMode;
 	}
 
 	@Override
@@ -130,7 +132,6 @@ public class InitClientWorldPacket extends AbstractPacket
 		fs.nutrProtein = this.nutrProtein;
 		fs.nutrDairy = this.nutrDairy;
 		TFC_Core.setPlayerFoodStats(player, fs);
-
 		TFC_Time.setYearLength(this.daysInYear);
 		TFCOptions.HealthGainRate = this.HGRate;
 		TFCOptions.HealthGainCap = this.HGCap;
@@ -154,7 +155,7 @@ public class InitClientWorldPacket extends AbstractPacket
 				player.getUniqueID()));
 
 		PlayerManagerTFC.getInstance().getClientPlayer().setChiselMode(this.chiselMode);
-
+		TFCOptions.enableDebugMode = this.debugMode && TFCOptions.enableDebugMode;
 
 	}
 
