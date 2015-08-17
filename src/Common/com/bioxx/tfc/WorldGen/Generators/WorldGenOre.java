@@ -11,6 +11,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
 
 import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.Util.CaseInsensitiveHashMap;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 
@@ -23,7 +24,7 @@ public class WorldGenOre implements IWorldGenerator
 	World worldObj;
 	Random random;
 
-	public static HashMap<String, OreSpawnData> OreList = new HashMap<String, OreSpawnData>();
+	public static HashMap<String, OreSpawnData> OreList = new CaseInsensitiveHashMap<OreSpawnData>();
 
 	public WorldGenOre()
 	{
