@@ -80,7 +80,7 @@ public class TESRToolrack extends TESRBase
 		}
 		else if(dir == 1)
 		{
-			out[3] = 90f;
+			out[3] = 270f;
 			if(slot == 0)
 			{
 				out[0] = 0.06f; 
@@ -136,7 +136,7 @@ public class TESRToolrack extends TESRBase
 		}
 		else if(dir == 3)
 		{
-			out[3] = 270f;
+			out[3] = 90f;
 			if(slot == 0)
 			{
 				out[0] = 0.94f; 
