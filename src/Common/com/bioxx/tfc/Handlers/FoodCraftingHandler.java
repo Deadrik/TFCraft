@@ -121,6 +121,7 @@ public class FoodCraftingHandler
 		int[] fuelTasteProfile = new int[] {0,0,0,0,0};
 		int[] cookedTasteProfile = new int[] {0,0,0,0,0};
 		float cookedTime = 0;
+		String infusion = null;
 		boolean salted = true;
 		boolean pickled = true;
 		boolean brined = true;
@@ -143,6 +144,8 @@ public class FoodCraftingHandler
 					fuelTasteProfile = Food.getFuelProfile(is);
 					cookedTasteProfile = Food.getCookedProfile(is);
 					cookedTime = Food.getCooked(is);
+					infusion = Food.getInfusion(is);
+					driedAmt = Food.getDried(is);
 				}
 				if(sweetMod == -1)
 					sweetMod = ((ItemFoodTFC)is.getItem()).getTasteSweetMod(is);
@@ -230,21 +233,48 @@ public class FoodCraftingHandler
 				}
 			}
 		}
-		craftResult = ItemFoodTFC.createTag(craftResult, Helper.roundNumber(finalWeight,10), Helper.roundNumber(finalDecay,100));
-		if(sweetMod > 0) craftResult.getTagCompound().setInteger("tasteSweetMod", sweetMod);
-		if(sourMod > 0) craftResult.getTagCompound().setInteger("tasteSourMod", sourMod);
-		if(saltyMod > 0) craftResult.getTagCompound().setInteger("tasteSaltyMod", saltyMod);
-		if(bitterMod > 0) craftResult.getTagCompound().setInteger("tasteBitterMod", bitterMod);
-		if(umamiMod > 0) craftResult.getTagCompound().setInteger("tasteUmamiMod", umamiMod);	
 
-		Food.setCooked(craftResult, cookedTime);
-		Food.setFuelProfile(craftResult, fuelTasteProfile);
-		Food.setCookedProfile(craftResult, cookedTasteProfile);
-		Food.setSalted(craftResult, salted);
-		Food.setPickled(craftResult, pickled);
-		Food.setBrined(craftResult, brined);
-		if(dried)
+		craftResult = ItemFoodTFC.createTag(craftResult, Helper.roundNumber(finalWeight,10), Helper.roundNumber(finalDecay,100));
+		if(sweetMod != 0) craftResult.getTagCompound().setInteger("tasteSweetMod", sweetMod);
+		if(sourMod != 0) craftResult.getTagCompound().setInteger("tasteSourMod", sourMod);
+		if(saltyMod != 0) craftResult.getTagCompound().setInteger("tasteSaltyMod", saltyMod);
+		if(bitterMod != 0) craftResult.getTagCompound().setInteger("tasteBitterMod", bitterMod);
+		if(umamiMod != 0) craftResult.getTagCompound().setInteger("tasteUmamiMod", umamiMod);	
+
+		if (cookedTime > 0)
+			Food.setCooked(craftResult, cookedTime);
+
+		for (int fuelTaste : fuelTasteProfile)
+		{
+			if (fuelTaste > 0)
+			{
+				Food.setFuelProfile(craftResult, fuelTasteProfile);
+				break;
+			}
+		}
+		for (int cookedTaste : cookedTasteProfile)
+		{
+			if (cookedTaste > 0)
+			{
+				Food.setCookedProfile(craftResult, cookedTasteProfile);
+				break;
+			}
+		}
+
+		if (salted)
+			Food.setSalted(craftResult, salted);
+		if (pickled)
+			Food.setPickled(craftResult, pickled);
+		if (brined)
+			Food.setBrined(craftResult, brined);
+
+		if (dried) // Fully Dried
 			Food.setDried(craftResult, Food.DRYHOURS);
+		else if (driedAmt > 0) // Partially Dried
+			Food.setDried(craftResult, driedAmt);
+
+		if (infusion != null)
+			Food.setInfusion(craftResult, infusion);
 
 		if(craftResult.stackSize == 0)
 			craftResult.stackSize = 1;

@@ -370,13 +370,21 @@ public class EntityLivingHandler
 				}
 				for(EntityItem ei : event.drops)
 				{
-					if (ei.getEntityItem().getItem() instanceof IFood)
+					ItemStack is = ei.getEntityItem();
+					if (is.getItem() instanceof IFood)
 					{
 						if(p == null)
 							continue;
 						foundFood = true;
-						float oldWeight = Food.getWeight(ei.getEntityItem());
-						Food.setWeight(ei.getEntityItem(), 0);
+
+						int sweetMod = ((ItemFoodTFC) is.getItem()).getTasteSweetMod(is);
+						int sourMod = ((ItemFoodTFC) is.getItem()).getTasteSourMod(is);
+						int saltyMod = ((ItemFoodTFC) is.getItem()).getTasteSaltyMod(is);
+						int bitterMod = ((ItemFoodTFC) is.getItem()).getTasteBitterMod(is);
+						int umamiMod = ((ItemFoodTFC) is.getItem()).getTasteSavoryMod(is);
+
+						float oldWeight = Food.getWeight(is);
+						Food.setWeight(is, 0);
 						float newWeight = oldWeight * (TFC_Core.getSkillStats(p).getSkillMultiplier(Global.SKILL_BUTCHERING)+0.01f);
 						while (newWeight >= Global.FOOD_MIN_DROP_WEIGHT)
 						{
@@ -384,8 +392,16 @@ public class EntityLivingHandler
 							if (fw < Global.FOOD_MAX_WEIGHT)
 								newWeight = 0;
 							newWeight -= fw;
-							ItemStack is = ItemFoodTFC.createTag(new ItemStack(ei.getEntityItem().getItem(), 1), fw);
-							drop.add(new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ, is));
+
+							ItemStack result = ItemFoodTFC.createTag(new ItemStack(is.getItem(), 1), fw);
+
+							if(sweetMod != 0) result.getTagCompound().setInteger("tasteSweetMod", sweetMod);
+							if(sourMod != 0) result.getTagCompound().setInteger("tasteSourMod", sourMod);
+							if(saltyMod != 0) result.getTagCompound().setInteger("tasteSaltyMod", saltyMod);
+							if(bitterMod != 0) result.getTagCompound().setInteger("tasteBitterMod", bitterMod);
+							if(umamiMod != 0) result.getTagCompound().setInteger("tasteUmamiMod", umamiMod);	
+
+							drop.add(new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ, result));
 						}
 					}
 					else

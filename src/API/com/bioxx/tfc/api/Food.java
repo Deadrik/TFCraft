@@ -60,6 +60,8 @@ public class Food
 			return false;
 		if(isSalted(is1) != isSalted(is2))
 			return false;
+		if (isInfused(is1) != isInfused(is2))
+			return false;
 		return true;
 	}
 
@@ -344,7 +346,9 @@ public class Food
 
 	public static String getInfusion(ItemStack is)
 	{
-		return is.getTagCompound().getString("Infusion");
+		if (is.hasTagCompound() && is.getTagCompound().hasKey("Infusion"))
+			return is.getTagCompound().getString("Infusion");
+		return null;
 	}
 
 	public static void setInfusion(ItemStack is, String val)
