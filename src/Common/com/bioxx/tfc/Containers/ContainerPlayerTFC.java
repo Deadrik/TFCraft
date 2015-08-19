@@ -224,6 +224,9 @@ public class ContainerPlayerTFC extends ContainerPlayer
 					return null;
 				}
 			}
+			// Couldn't figure out what was causing the food dupe with a full inventory, so we're just going to block shift clicking for that case.
+			else if (clickType == 1 && sourceSlotID == 0 && isInventoryFull() && slotStack != null && slotStack.getItem() instanceof IFood)
+				return null;
 		}
 		return super.slotClick(sourceSlotID, destSlotID, clickType, p);
 	}
@@ -233,6 +236,17 @@ public class ContainerPlayerTFC extends ContainerPlayer
 		for(int i = 0; i < this.craftMatrix.getSizeInventory(); i++)
 		{
 			if(this.craftMatrix.getStackInSlot(i) == null)
+				return false;
+		}
+		return true;
+	}
+
+	protected boolean isInventoryFull()
+	{
+		// Slots 9 through 44 are the standard inventory and hotbar.
+		for (int i = 9; i < 45; i++)
+		{
+			if (((Slot) inventorySlots.get(i)).getStack() == null)
 				return false;
 		}
 		return true;
