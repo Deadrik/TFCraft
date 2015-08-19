@@ -4,6 +4,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 
+import com.bioxx.tfc.Handlers.Network.ConfigSyncPacket;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Handlers.Network.AbstractPacket;
@@ -30,6 +31,7 @@ public class PlayerTracker
 				event.player.getUniqueID()));
 		AbstractPacket pkt = new InitClientWorldPacket(event.player);
 		TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) event.player);
+		TerraFirmaCraft.packetPipeline.sendTo(new ConfigSyncPacket(), (EntityPlayerMP) event.player);
 
 		//		TerraFirmaCraft.log.info("-----------------------------Sending TestPacket");
 		//AbstractPacket pkt2 = new TestPacket("Sent to Player: "+event.player.getDisplayName());
