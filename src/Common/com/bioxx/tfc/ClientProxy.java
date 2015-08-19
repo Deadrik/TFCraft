@@ -12,9 +12,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
+
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -30,16 +32,17 @@ import com.bioxx.tfc.Entities.*;
 import com.bioxx.tfc.Entities.Mobs.*;
 import com.bioxx.tfc.Handlers.BiomeEventHandler;
 import com.bioxx.tfc.Handlers.Client.*;
-import com.bioxx.tfc.Render.Blocks.*;
 import com.bioxx.tfc.Render.*;
-import com.bioxx.tfc.Render.Models.*;
 import com.bioxx.tfc.Render.RenderFallingBlock;
+import com.bioxx.tfc.Render.Blocks.*;
+import com.bioxx.tfc.Render.Models.*;
 import com.bioxx.tfc.Render.TESR.*;
 import com.bioxx.tfc.TileEntities.*;
-import com.bioxx.tfc.api.Enums.EnumTree;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Enums.EnumTree;
 import com.bioxx.tfc.api.Util.KeyBindings;
 
 public class ClientProxy extends CommonProxy
@@ -520,7 +523,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void hideNEIItems()
 	{
-		if (Loader.isModLoaded("NotEnoughItems") && !System.getProperties().containsKey("tfc.disableNEIhiding"))
+		if (Loader.isModLoaded("NotEnoughItems") && TFCOptions.enableNEIHiding)
 		{
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Bloom));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.writabeBookTFC)); // Book
