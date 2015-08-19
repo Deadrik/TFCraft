@@ -5,7 +5,6 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.WorldServer;
@@ -13,6 +12,7 @@ import net.minecraft.world.chunk.Chunk;
 
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
+
 
 public class RemoveSnowCommand extends CommandBase
 {
@@ -31,7 +31,7 @@ public class RemoveSnowCommand extends CommandBase
 	@Override
 	public void processCommand(ICommandSender sender, String[] params) {
 		if(!TFCOptions.enableDebugMode)
-			throw new WrongUsageException("sorry, unable to comply, gamemode need to be active");
+			throw new WrongUsageException("sorry, unable to comply, debugmode must be active");
 		
 		MinecraftServer server = MinecraftServer.getServer();
 		EntityPlayerMP player = getCommandSenderAsPlayer(sender);
