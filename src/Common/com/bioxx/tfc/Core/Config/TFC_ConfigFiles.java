@@ -14,6 +14,7 @@ import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 
+import com.bioxx.tfc.Core.Util.CaseInsensitiveHashMap;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.WorldGen.Generators.OreSpawnData;
 import com.bioxx.tfc.api.Constant.Global;
@@ -65,7 +66,7 @@ public class TFC_ConfigFiles
 	private static final String[] ALLOWED_SIZES = new String[] {"small", "medium", "large"};
 	private static final String[] ALLOWED_BASE_ROCKS = ObjectArrays.concat(Global.STONE_ALL, new String[] {"igneous intrusive", "igneous extrusive", "sedimentary", "metamorphic"}, String.class);
 
-	public static final Map<String, SyncingOption> SYNCING_OPTION_MAP = new HashMap<String, SyncingOption>();
+	public static final Map<String, SyncingOption> SYNCING_OPTION_MAP = new CaseInsensitiveHashMap<SyncingOption>();
 
 	private static Configuration generalConfig;
 	private static Configuration craftingConfig;
