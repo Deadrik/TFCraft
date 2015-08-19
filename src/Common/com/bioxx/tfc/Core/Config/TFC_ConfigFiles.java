@@ -138,13 +138,12 @@ public class TFC_ConfigFiles
 		if (craftingConfig == null) throw new IllegalStateException("Config reload attempt before preinit.");
 		TerraFirmaCraft.log.info("loading the crafting config (TFCCrafting) settings...");
 
-		// Replaced by 'tfc.disableNEIhiding' system property, mainly because of server client syncing. Enable by adding -Dtfc.disableNEIhiding to your startup line.
-		if (craftingConfig.hasCategory("nei hiding")) craftingConfig.removeCategory(craftingConfig.getCategory("nei hiding"));
+		if (craftingConfig.hasCategory("nei hiding"))
+		{
+			craftingConfig.removeCategory(craftingConfig.getCategory("nei hiding"));
+		}
 
-		craftingConfig.addCustomCategoryComment(CONVERSION, "Conversions for food are irreversible! The server overrides the client on this.");
 		craftingConfig.setCategoryLanguageKey(CONVERSION, "config.gui.TFCCrafting.conversion");
-
-		craftingConfig.addCustomCategoryComment(ENABLE_VANILLA_RECIPES, "Enable Vanilla recipes, the server overrides the client on this.");
 		craftingConfig.setCategoryLanguageKey(ENABLE_VANILLA_RECIPES, "config.gui.TFCCrafting.vanilla");
 
 		try
@@ -302,9 +301,11 @@ public class TFC_ConfigFiles
 		if (generalConfig == null) throw new IllegalStateException("Config reload attempt before preinit.");
 		TerraFirmaCraft.log.info("(re)loading the general config (TFCConfig) settings...");
 
-		generalConfig.addCustomCategoryComment(GENERAL, "Miscellaneous options");
 		generalConfig.setCategoryLanguageKey(GENERAL, "config.gui.TFCConfig.general");
 
+		if (craftingConfig.hasCategory("nei hiding")) generalConfig.get(GENERAL, "enableNEIHiding", enableNEIHiding).set(craftingConfig.getBoolean("enableNEIHiding", "nei hiding", enableNEIHiding, ""));
+
+		enableNEIHiding = generalConfig.getBoolean("enableNEIHiding", GENERAL, enableNEIHiding, "Set to false to show hidden items in NEI. Note that most of these items were hidden to prevent players from cheating them in and crashing their game.");
 		enablePowderKegs = generalConfig.getBoolean("enablePowderKegs", GENERAL, enablePowderKegs, "Set this to false to disable powder keg explosions.", "config.gui.TFCConfig.general.enablePowderKegs");
 		enableBetterGrass = generalConfig.getBoolean("enableBetterGrass", GENERAL, enableBetterGrass, "If true, then the side of a grass block which has another grass block adjacent and one block lower than it will show as completely grass.", "config.gui.TFCConfig.general.enableBetterGrass");
 		enableDebugMode = generalConfig.getBoolean("enableDebugMode", GENERAL, enableDebugMode, "Set this to true if you want to turn on debug mode which is useful for bug hunting.", "config.gui.TFCConfig.general.enableDebugMode");
@@ -313,7 +314,6 @@ public class TFC_ConfigFiles
 		enableSolidDetailed = generalConfig.getBoolean("enableSolidDetailed", GENERAL, enableSolidDetailed, "Should sides of detailed blocks be considered solid?", "config.gui.TFCConfig.general.enableSolidDetailed");
 		maxRemovedSolidDetailed = generalConfig.getInt("maxRemovedSolidDetailed", GENERAL, maxRemovedSolidDetailed, 0, 64, "Maximum count of removed sub-blocks on one side for the detailed block side to still be solid.", "config.gui.TFCConfig.general.maxRemovedSolidDetailed");
 
-		generalConfig.addCustomCategoryComment(TIME, "Time and Calendar related options");
 		generalConfig.setCategoryLanguageKey(TIME, "config.gui.TFCConfig.time");
 
 		yearLength = generalConfig.getInt("yearLength", TIME, yearLength, 12, 12000, "This is how many days are in a year. Keep this to multiples of 12.", "config.gui.TFCConfig.time.yearLength");
@@ -328,7 +328,6 @@ public class TFC_ConfigFiles
 		oilLampFuelMult = generalConfig.getInt("oilLampFuelMult", TIME, oilLampFuelMult, 1, 50, "This determines how much fuel is used over time from oil lamps. Setting this higher will make fuel last longer. A mult of 1 = 250 hours, 4 = 1000 hours, 8 = 2000 hours.", "config.gui.TFCConfig.time.oilLampFuelMult");
 		animalTimeMultiplier = generalConfig.getFloat("animalTimeMultiplier", TIME, animalTimeMultiplier, 0.01f, 100.0f, "This is a global multiplier for the gestation period of animals, as well as how long it takes for them to reach adulthood. Decrease for faster times.", "config.gui.TFCConfig.time.animalTimeMultiplier");
 
-		generalConfig.addCustomCategoryComment(FOOD_DECAY, "Food decay related options");
 		generalConfig.setCategoryLanguageKey(FOOD_DECAY, "config.gui.TFCConfig.fooddecay");
 
 		foodDecayRate = generalConfig.getFloat("foodDecayRate", FOOD_DECAY, foodDecayRate, 1.0f, 2.0f, "This number causes base decay to equal 50% gain per day. If you wish to change, I recommend you look up a y-root calculator 1.0170378966055869517978300569768^24 = 1.5", "config.gui.TFCConfig.fooddecay.foodDecayRate");
@@ -336,7 +335,6 @@ public class TFC_ConfigFiles
 		decayProtectionDays = generalConfig.getInt("decayProtectionDays", FOOD_DECAY, decayProtectionDays, 1, 12000, "If a food item has not been ticked for >= this number of days than when it is ticked for the first time, only a small amount of decay will occur.", "config.gui.TFCConfig.fooddecay.decayProtectionDays");
 		decayMultiplier = generalConfig.getFloat("foodDecayMultiplier", FOOD_DECAY, decayMultiplier, 0.01f, 100.0f, "This is a global multiplier for food decay. Unlike FoodDecayRate which only modifies the base decay and not the environmental effect upon decay, this multiplier will multiply against the entire amount. Set to 0 to turn decay off.", "config.gui.TFCConfig.fooddecay.foodDecayMultiplier");
 
-		generalConfig.addCustomCategoryComment(CAVEIN_OPTIONS, "Cave-in related options");
 		generalConfig.setCategoryLanguageKey(CAVEIN_OPTIONS, "config.gui.TFCConfig.caveins");
 
 		minimumRockLoad = generalConfig.getInt("minimumRockLoad", CAVEIN_OPTIONS, minimumRockLoad, 0, 256, "This is the minimum number of solid blocks that must be over a section in order for it to collapse.", "config.gui.TFCConfig.caveins.minimumRockLoad");
@@ -345,33 +343,28 @@ public class TFC_ConfigFiles
 		enableCaveIns = generalConfig.getBoolean("enableCaveIns", CAVEIN_OPTIONS, enableCaveIns, "Set this to false to disable cave-ins.", "config.gui.TFCConfig.caveins.enableCaveIns");
 		enableCaveInsDestroyOre = generalConfig.getBoolean("enableCaveInsDestroyOre", CAVEIN_OPTIONS, enableCaveInsDestroyOre, "Set this to false to make cave-ins drop the ore item instead of destroy it.", "config.gui.TFCConfig.caveins.enableCaveInsDestroyOre");
 
-		generalConfig.addCustomCategoryComment(WORLD_GEN, "World gen options");
 		generalConfig.setCategoryLanguageKey(WORLD_GEN, "config.gui.TFCConfig.worldgen");
 
 		ravineRarity = generalConfig.getInt("ravineRarity", WORLD_GEN, ravineRarity, 0, 1000, "Controls the chance of a ravine generating, smaller value is higher chance, more ravines. Set to 0 to disable ravines.", "config.gui.TFCConfig.worldgen.ravineRarity");
 		lavaFissureRarity = generalConfig.getInt("lavaFissureRarity", WORLD_GEN, lavaFissureRarity, 0, 1000, "Controls the chance of a lava fissure generating, smaller value is higher chance, more fissures. Set to 0 to disable lava fissures.", "config.gui.TFCConfig.worldgen.lavaFissureRarity");
 		waterFissureRarity = generalConfig.getInt("waterFissureRarity", WORLD_GEN, waterFissureRarity, 0, 1000, "Controls the chance of a water fissure generating, smaller value is higher chance, more fissures. Set to 0 to disable water fissures.", "config.gui.TFCConfig.worldgen.waterFissureRarity");
 
-		generalConfig.addCustomCategoryComment(CROPS, "Crop related options");
 		generalConfig.setCategoryLanguageKey(CROPS, "config.gui.TFCConfig.crops");
 
 		enableCropsDie = generalConfig.getBoolean("enableCropsDie", CROPS, enableCropsDie, "Set to true to enable crop death from old age.", "config.gui.TFCConfig.crops.enableCropsDie");
 		cropGrowthMultiplier = generalConfig.getFloat("cropGrowthModifier", CROPS, cropGrowthMultiplier, 0.01f, 100.0f, "This is a global multiplier for the rate at which crops will grow. Increase to make crops grow faster.", "config.gui.TFCConfig.crops.cropGrowthModifier");
 
-		generalConfig.addCustomCategoryComment(PROTECTION, "Spawn protection related options");
 		generalConfig.setCategoryLanguageKey(PROTECTION, "config.gui.TFCConfig.protection");
 
 		maxProtectionMonths = generalConfig.getInt("maxProtectionMonths", PROTECTION, maxProtectionMonths, 0, 120, "The maximum number of months of spawn protection that can accumulate.", "config.gui.TFCConfig.protection.maxProtectionMonths");
 		protectionGain = generalConfig.getInt("protectionGain", PROTECTION, protectionGain, 0, 24, "The number of hours of protection gained in the 5x5 chunk area for spending 1 hour in that chunk.", "config.gui.TFCConfig.protection.protectionGain");
 		protectionBuffer = generalConfig.getInt("protectionBuffer", PROTECTION, protectionBuffer, 0, 2304, "The minimum number of hours of protection that must be accumulated in a chunk in order to bypass the buffer and prevent hostile mob spawning.", "config.gui.TFCConfig.protection.protectionBuffer");
 
-		generalConfig.addCustomCategoryComment(PLAYER, "Options related to 'the player'");
 		generalConfig.setCategoryLanguageKey(PLAYER, "config.gui.TFCConfig.player");
 
 		HealthGainRate = generalConfig.getInt("healthGainRate", PLAYER, HealthGainRate, 0, 100, "The rate of Health Gain per experience level. Set to 0 to turn off.", "config.gui.TFCConfig.player.healthGainRate");
 		HealthGainCap = generalConfig.getInt("healthGainCap", PLAYER, HealthGainCap, 1000, 50000, "The maximum achievable health pool total.", "config.gui.TFCConfig.player.healthGainCap");
 
-		generalConfig.addCustomCategoryComment(MATERIALS, "Material related options");
 		generalConfig.setCategoryLanguageKey(MATERIALS, "config.gui.TFCConfig.materials");
 
 		smallOreUnits = generalConfig.getInt("smallOreUnits", MATERIALS, smallOreUnits, 1, 100, "The metal units provided by a single piece of small ore or nugget.", "config.gui.TFCConfig.materials.smallOreUnits");
@@ -379,12 +372,10 @@ public class TFC_ConfigFiles
 		normalOreUnits = generalConfig.getInt("normalOreUnits", MATERIALS, normalOreUnits, 1, 250, "The metal units provided by a single piece of normal ore.", "config.gui.TFCConfig.materials.normalOreUnits");
 		richOreUnits = generalConfig.getInt("richOreUnits", MATERIALS, richOreUnits, 1, 350, "The metal units provided by a single piece of rich ore", "config.gui.TFCConfig.materials.richOreUnits");
 
-		generalConfig.addCustomCategoryComment(SERVER, "Server only options");
 		generalConfig.setCategoryLanguageKey(SERVER, "config.gui.TFCConfig.server");
 
 		simSpeedNoPlayers = generalConfig.getInt("simSpeedNoPlayers", SERVER, simSpeedNoPlayers, 0, Integer.MAX_VALUE, "For every X number of ticks provided here, when there are no players online the server will only progress by 1 tick. Time advances 100 times slower than normal. Setting this to 0 will turn this feature off.", "config.gui.TFCConfig.server.simSpeedNoPlayers");
 
-		generalConfig.addCustomCategoryComment(OVERWORKED, "Overworked chunks options");
 		generalConfig.setCategoryLanguageKey(OVERWORKED, "config.gui.TFCConfig.overworked");
 
 		enableOverworkingChunks = generalConfig.getBoolean("enableOverworkingChunks", OVERWORKED, enableOverworkingChunks, "Set this to false to disable the overworking of chunks when using a gold pan or sluice.", "config.gui.TFCConfig.overworked.enableOverworkingChunks");
@@ -404,7 +395,6 @@ public class TFC_ConfigFiles
 			}
 		}
 
-		generalConfig.addCustomCategoryComment(COLORS, "Ingame color overlay things");
 		generalConfig.setCategoryLanguageKey(COLORS, "config.gui.TFCConfig.colors");
 
 		getColor(generalConfig, COLOR_NUTRIENT_A, cropNutrientAColor, "config.gui.TFCConfig.colors.nutrient_a");

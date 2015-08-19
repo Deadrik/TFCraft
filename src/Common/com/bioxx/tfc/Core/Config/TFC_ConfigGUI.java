@@ -23,7 +23,7 @@ public class TFC_ConfigGUI extends GuiConfig
 	{
 		List<IConfigElement> root = new ArrayList<IConfigElement>();
 		root.add(new DummyCategoryElement("TFCOptions.cfg", "config.gui.TFCConfig", getAllFrom(TFC_ConfigFiles.getGeneralConfig())));
-		root.add(new DummyCategoryElement("TFCCrafting.cfg", "config.gui.TFCCrafting", getAllFrom(TFC_ConfigFiles.getCraftingConfig())).setRequiresMcRestart(true)); //todo: Remove setRequiresMcRestart
+		root.add(new DummyCategoryElement("TFCCrafting.cfg", "config.gui.TFCCrafting", getAllFrom(TFC_ConfigFiles.getCraftingConfig())));
 		root.add(new DummyCategoryElement("TFCOre.cfg", "config.gui.TFCOre", getAllFrom(TFC_ConfigFiles.getOresConfig())));
 		return root;
 	}
