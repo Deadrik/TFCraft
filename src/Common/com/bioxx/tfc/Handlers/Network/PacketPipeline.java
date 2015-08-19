@@ -148,6 +148,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 		registerPacket(TestPacket.class);
 		registerPacket(ItemNBTPacket.class);
 		registerPacket(DebugModePacket.class);
+		registerPacket(ConfigSyncPacket.class);
 	}
 
 	// Method to call from FMLPostInitializationEvent

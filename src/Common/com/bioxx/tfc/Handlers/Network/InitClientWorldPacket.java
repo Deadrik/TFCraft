@@ -54,7 +54,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		this.nutrGrain = fs.nutrGrain;
 		this.nutrProtein = fs.nutrProtein;
 		this.nutrDairy = fs.nutrDairy;
-		this.daysInYear = TFC_Time.daysInYear;
+		this.daysInYear = TFCOptions.yearLength;
 		this.HGRate = TFCOptions.HealthGainRate;
 		this.HGCap = TFCOptions.HealthGainCap;
 		this.debugMode = TFCOptions.enableDebugMode;
