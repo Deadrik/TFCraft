@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Render.TESR;
 
+import com.bioxx.tfc.Core.TFC_Time;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.model.ModelLargeChest;
@@ -17,6 +18,8 @@ import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.common.FMLLog;
 
+import java.util.Calendar;
+
 public class TESRChest extends TileEntitySpecialRenderer
 {
 	private static ResourceLocation[] texNormal;
@@ -33,10 +36,22 @@ public class TESRChest extends TileEntitySpecialRenderer
 		{
 			texNormal = new ResourceLocation[Global.WOOD_ALL.length];
 			texNormalDouble = new ResourceLocation[Global.WOOD_ALL.length];
+			
+			/** X-mas stuff */
+			String suffix = "normal";
+			if (Calendar.getInstance().get(Calendar.MONTH) == Calendar.DECEMBER &&
+							Calendar.getInstance().get(Calendar.DAY_OF_MONTH) >= 24 &&
+							Calendar.getInstance().get(Calendar.DAY_OF_MONTH) <= 26)
+				suffix = "xmas";
+			else if (TFC_Time.currentMonth == TFC_Time.December &&
+							TFC_Time.daysInMonth >= 24 &&
+							TFC_Time.daysInMonth <= 26)
+				suffix = "xmas";
+
 			for(int i = 0; i < Global.WOOD_ALL.length; i++)
 			{
-				texNormal[i] = new ResourceLocation(Reference.ModID+":textures/models/chest/normal_" + Global.WOOD_ALL[i] + ".png");
-				texNormalDouble[i] = new ResourceLocation(Reference.ModID+":textures/models/chest/normal_double_" + Global.WOOD_ALL[i] + ".png");
+				texNormal[i] = new ResourceLocation(Reference.ModID+":textures/models/chest/" + suffix + "_" + Global.WOOD_ALL[i] + ".png");
+				texNormalDouble[i] = new ResourceLocation(Reference.ModID+":textures/models/chest/" + suffix + "_double_" + Global.WOOD_ALL[i] + ".png");
 			}
 		}
 	}
