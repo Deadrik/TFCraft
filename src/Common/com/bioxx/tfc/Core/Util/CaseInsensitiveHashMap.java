@@ -40,7 +40,10 @@ public class CaseInsensitiveHashMap<V> extends HashMap<String, V>
 	private static Map<String, Object> toLowercase(Map<? extends String, ?> m)
 	{
 		ImmutableMap.Builder<String, Object> temp = ImmutableMap.builder();
-		for (Entry<? extends String, ?> entry : m.entrySet())
+		// Must use Map.Entry here, not (Hashmap.)Entry, as the latter is a private inner class on some JDK's.
+		// (Hashmap.)Entry has been replaced by (Hashmap.)Node in Oracle's JDK, wich is why it likely won't error in a dev env.
+		// Thanks Stackoverflow & Grepcode
+		for (Map.Entry<? extends String, ?> entry : m.entrySet())
 		{
 			temp.put(toLowercase(entry.getKey()), entry.getValue());
 		}
