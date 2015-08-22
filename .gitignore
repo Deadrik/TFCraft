@@ -77,3 +77,6 @@ local.properties
 
 # TeXlipse plugin
 .texlipse
+
+# Other
+*Thumbs.db

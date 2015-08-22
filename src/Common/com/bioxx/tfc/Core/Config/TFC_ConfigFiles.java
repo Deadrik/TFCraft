@@ -2,7 +2,6 @@ package com.bioxx.tfc.Core.Config;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.block.Block;
@@ -11,15 +10,17 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapelessRecipes;
+
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 
-import com.bioxx.tfc.Core.Util.CaseInsensitiveHashMap;
 import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.Util.CaseInsensitiveHashMap;
 import com.bioxx.tfc.WorldGen.Generators.OreSpawnData;
-import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.Constant.Global;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -104,7 +105,7 @@ public class TFC_ConfigFiles
 				oldConfigFile.delete();
 			}
 		}
-		generalConfig = new Configuration(generalConfigFile);
+		generalConfig = new TFC_Configuration(generalConfigFile);
 		craftingConfig = new Configuration(new File(configFolder, "TFCCrafting.cfg"));
 		oresConfig = new Configuration(new File(configFolder, "TFCOre.cfg"));
 	}
@@ -117,7 +118,7 @@ public class TFC_ConfigFiles
 	{
 		reloadGeneral(); // No special needs
 		reloadOres(); // World gen voo-doo
-		TerraFirmaCraft.log.info("reloading the crafting config (TFCCrafting) settings...");
+		TerraFirmaCraft.log.info("Reloading TFCCrafting");
 		try
 		{
 			for (SyncingOption option : SYNCING_OPTION_MAP.values())
@@ -127,7 +128,7 @@ public class TFC_ConfigFiles
 		}
 		catch (IllegalAccessException e)
 		{
-			TerraFirmaCraft.log.fatal("Fatal error reloading TFCCrafting config", e);
+			TerraFirmaCraft.log.fatal("Fatal error reloading TFCCrafting", e);
 			Throwables.propagate(e);
 		}
 		if (craftingConfig.hasChanged()) craftingConfig.save();
@@ -136,7 +137,7 @@ public class TFC_ConfigFiles
 	public static void firstLoadCrafting()
 	{
 		if (craftingConfig == null) throw new IllegalStateException("Config reload attempt before preinit.");
-		TerraFirmaCraft.log.info("loading the crafting config (TFCCrafting) settings...");
+		TerraFirmaCraft.log.info("Loading TFCCrafting");
 
 		if (craftingConfig.hasCategory("nei hiding"))
 		{
@@ -269,12 +270,12 @@ public class TFC_ConfigFiles
 		}
 		catch (NoSuchFieldException e)
 		{
-			TerraFirmaCraft.log.fatal("Fatal error setting up TFCCrafting config", e);
+			TerraFirmaCraft.log.fatal("Fatal error loading TFCCrafting", e);
 			Throwables.propagate(e);
 		}
 		catch (IllegalAccessException e)
 		{
-			TerraFirmaCraft.log.fatal("Fatal error setting up TFCCrafting config", e);
+			TerraFirmaCraft.log.fatal("Fatal error loading TFCCrafting ", e);
 			Throwables.propagate(e);
 		}
 
@@ -299,7 +300,7 @@ public class TFC_ConfigFiles
 	public static void reloadGeneral()
 	{
 		if (generalConfig == null) throw new IllegalStateException("Config reload attempt before preinit.");
-		TerraFirmaCraft.log.info("(re)loading the general config (TFCConfig) settings...");
+		TerraFirmaCraft.log.info("Loading TFCConfig");
 
 		generalConfig.setCategoryLanguageKey(GENERAL, "config.gui.TFCConfig.general");
 
@@ -316,8 +317,14 @@ public class TFC_ConfigFiles
 
 		generalConfig.setCategoryLanguageKey(TIME, "config.gui.TFCConfig.time");
 
-		yearLength = generalConfig.getInt("yearLength", TIME, yearLength, 12, 12000, "This is how many days are in a year. Keep this to multiples of 12.", "config.gui.TFCConfig.time.yearLength");
-		if (yearLength % 12 != 0) yearLength = 12 + (12 * (yearLength / 12)); // Extra validation, because we need multiples of 12. Rounds up so it can never be 0.
+		yearLength = generalConfig.getInt("yearLength", TIME, yearLength, 96, 12000, "This is how many days are in a year. Keep this to multiples of 12.", "config.gui.TFCConfig.time.yearLength");
+		if (yearLength % 12 != 0) 
+		{
+			Property prop = generalConfig.get(TIME, "yearLength", 96);
+			TerraFirmaCraft.log.warn("Invalid yearLength in the config file. Changing to the next multiple of 12.");
+			yearLength = 12 + (12 * (yearLength / 12)); // Extra validation, because we need multiples of 12. Rounds up so it can never be 0.
+			prop.set(yearLength);
+		}
 		pitKilnBurnTime = generalConfig.getFloat("pitKilnBurnTime", TIME, pitKilnBurnTime, 1.0f, 2304.0f, "This is the number of hours that the pit kiln should burn before being completed.", "config.gui.TFCConfig.time.pitKilnBurnTime");
 		bloomeryBurnTime = generalConfig.getFloat("bloomeryBurnTime", TIME, bloomeryBurnTime, 1.0f, 2304.0f, "This is the number of hours that the bloomery should burn before being completed.", "config.gui.TFCConfig.time.bloomeryBurnTime");
 		charcoalPitBurnTime = generalConfig.getFloat("charcoalPitBurnTime", TIME, charcoalPitBurnTime, 1.0f, 2304.0f, "This is the number of hours that the charcoal pit should burn before being completed.", "config.gui.TFCConfig.time.charcoalPitBurnTime");
@@ -430,7 +437,7 @@ public class TFC_ConfigFiles
 	public static void reloadOres()
 	{
 		if (oresConfig == null) throw new IllegalStateException("Config reload attempt before preinit.");
-		TerraFirmaCraft.log.info("(re)loading the crafting config (TFCCrafting) settings...");
+		TerraFirmaCraft.log.info("Loading TFCOres");
 
 		OreList.put("Native Copper", getOreData("Native Copper", "veins", "large", ModID + ":Ore1", 0, 120, new String[]{"igneous extrusive"}, 5, 128, 80, 60));
 		OreList.put("Native Gold", getOreData("Native Gold", "veins", "large", ModID + ":Ore1", 1, 120, new String[]{"igneous extrusive", "igneous intrusive"}, 5, 128, 80, 60));

@@ -35,6 +35,8 @@ import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.SkillsManager;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
+
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.ModVersion, dependencies = Reference.ModDependencies, guiFactory = Reference.GUIFactory)
@@ -58,7 +60,7 @@ public class TerraFirmaCraft
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		log = event.getModLog();
+		log = LogManager.getLogger(Reference.ModName);
 
 		TFC_ConfigFiles.preInit(event.getModConfigurationDirectory());
 		TFC_ConfigFiles.reloadGeneral(); // No special needs

@@ -62,18 +62,17 @@ public class GuiCalendar extends GuiScreen
 		{
 			buttonList.add(new GuiButton(0, guiLeft+20, guiTop + 118, 66, 20, TFC_Core.translate("gui.Calendar.1Hour")));
 			buttonList.add(new GuiButton(1, guiLeft+20, guiTop + 137, 66, 20, TFC_Core.translate("gui.Calendar.1Day")));
-			buttonList.add(new GuiButton(2, guiLeft+20, guiTop + 156, 66, 20, TFC_Core.translate("gui.Calendar.1Week")));
-			buttonList.add(new GuiButton(3, guiLeft+85, guiTop + 118, 66, 20, TFC_Core.translate("gui.Calendar.1Month")));
-			buttonList.add(new GuiButton(4, guiLeft+85, guiTop + 137, 66, 20, TFC_Core.translate("gui.Calendar.1Year")));
+			buttonList.add(new GuiButton(2, guiLeft + 85, guiTop + 118, 66, 20, TFC_Core.translate("gui.Calendar.1Month")));
+			buttonList.add(new GuiButton(3, guiLeft + 85, guiTop + 137, 66, 20, TFC_Core.translate("gui.Calendar.1Year")));
 		}
 
-		buttonList.add(new GuiInventoryButton(5, guiLeft+176, guiTop + 9, 25, 20, 
+		buttonList.add(new GuiInventoryButton(4, guiLeft + 176, guiTop + 9, 25, 20, 
 				0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Inventory"), TFC_Textures.GuiInventory));
-		buttonList.add(new GuiInventoryButton(6, guiLeft+176, guiTop + 28, 25, 20, 
+		buttonList.add(new GuiInventoryButton(5, guiLeft + 176, guiTop + 28, 25, 20, 
 				0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Skills"), TFC_Textures.GuiSkills));
-		buttonList.add(new GuiInventoryButton(7, guiLeft+176, guiTop + 47, 25, 20, 
+		buttonList.add(new GuiInventoryButton(6, guiLeft + 176, guiTop + 47, 25, 20, 
 				0, 86, 25, 20, TFC_Core.translate("gui.Calendar.Calendar"), TFC_Textures.GuiCalendar));
-		buttonList.add(new GuiInventoryButton(8, guiLeft+176, guiTop + 66, 25, 20, 
+		buttonList.add(new GuiInventoryButton(7, guiLeft + 176, guiTop + 66, 25, 20, 
 				0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Health"), TFC_Textures.GuiHealth));
 	}
 
@@ -140,8 +139,6 @@ public class GuiCalendar extends GuiScreen
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			var7.drawButton(this.mc, par1, par2);
 		}
-
-
 	}
 
 	@Override
@@ -172,16 +169,14 @@ public class GuiCalendar extends GuiScreen
 			else if (guibutton.id == 1)
 				this.mc.thePlayer.sendChatMessage("/time add " + (TFC_Time.dayLength));
 			else if (guibutton.id == 2)
-				this.mc.thePlayer.sendChatMessage("/time add " + (TFC_Time.dayLength*7));
-			else if (guibutton.id == 3)
 				this.mc.thePlayer.sendChatMessage("/time add " + (TFC_Time.dayLength * TFC_Time.daysInMonth));
-			else if (guibutton.id == 4)
+			else if (guibutton.id == 3)
 				this.mc.thePlayer.sendChatMessage("/time add " + (TFC_Time.dayLength * TFC_Time.daysInYear));
-			else if (guibutton.id == 5)
+			else if (guibutton.id == 4)
 				this.mc.displayGuiScreen(new GuiInventoryTFC(Minecraft.getMinecraft().thePlayer));
-			else if (guibutton.id == 6)
+			else if (guibutton.id == 5)
 				Minecraft.getMinecraft().displayGuiScreen(new GuiSkills(Minecraft.getMinecraft().thePlayer));
-			else if (guibutton.id == 8)
+			else if (guibutton.id == 7)
 				Minecraft.getMinecraft().displayGuiScreen(new GuiHealth(Minecraft.getMinecraft().thePlayer));
 	}
 }

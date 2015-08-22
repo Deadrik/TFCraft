@@ -5,11 +5,13 @@ import java.util.Map;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+
 import net.minecraft.entity.player.EntityPlayer;
+
 import cpw.mods.fml.common.network.ByteBufUtils;
 
-import com.bioxx.tfc.Core.Config.SyncingOption;
 import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.Config.SyncingOption;
 
 import static com.bioxx.tfc.Core.Config.TFC_ConfigFiles.SYNCING_OPTION_MAP;
 
@@ -51,7 +53,7 @@ public class ConfigSyncPacket extends AbstractPacket
 	public void handleClientSide(EntityPlayer player)
 	{
 		if (map == null) throw new IllegalStateException("Packet was not decoded");
-		TerraFirmaCraft.log.info("Applying server recipe config...");
+		TerraFirmaCraft.log.info("Applying server TFCCrafting settings");
 		try
 		{
 			for (Map.Entry<String, Boolean> entry : map.entrySet())
@@ -61,7 +63,7 @@ public class ConfigSyncPacket extends AbstractPacket
 		}
 		catch (IllegalAccessException e)
 		{
-			TerraFirmaCraft.log.fatal("Error loading crafting config from server!", e);
+			TerraFirmaCraft.log.fatal("Error loading TFCCrafting settings from server!", e);
 		}
 	}
 
