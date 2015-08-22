@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
@@ -22,16 +23,17 @@ public class SlotFoodOnly extends SlotSize
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(itemstack.getItem() instanceof IFood)
+		Item item = itemstack.getItem();
+		if (item instanceof IFood && ((IFood) item).isUsable(itemstack))
 		{
-			EnumFoodGroup efg = ((IFood)itemstack.getItem()).getFoodGroup();
+			EnumFoodGroup efg = ((IFood) item).getFoodGroup();
 			if(efg == null)
 				return false;
 			boolean except = excpetionsFG.contains(efg);
 			boolean include = inclusionsFG.contains(efg) || inclusionsFG.size() == 0;
 			if (except || !include)
 				return false;
-			if (itemstack.getItem() instanceof ISize && ((ISize) itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize)
+			if (item instanceof ISize && ((ISize) item).getSize(itemstack).stackSize >= size.stackSize)
 				return super.isItemValid(itemstack);
 		}
 		return false;

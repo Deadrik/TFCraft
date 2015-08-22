@@ -11,18 +11,18 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Food.ItemMeal;
 import com.bioxx.tfc.api.FoodRegistry;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class FMLClientEventHandler 
 {
@@ -74,7 +74,7 @@ public class FMLClientEventHandler
 				{
 					Item food = FoodRegistry.getInstance().getFood(fg[i]);
 					if(food == null)
-						break;
+						continue; // We need to continue the loop for when a middle slot was left empty
 					int x = mouseX + 19;
 					int y = mouseY + 11;
 					GL11.glDisable(GL11.GL_DEPTH_TEST);
