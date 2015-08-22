@@ -24,6 +24,18 @@ import com.bioxx.tfc.api.Enums.EnumWeight;
 public class ItemPotteryJug extends ItemPotteryBase
 {
 	IIcon WaterIcon;
+	// The amount of time to wait between playing notes.
+	private static int PlayNoteCoolDown = 6;
+
+
+	// A number of keys too high will cause the pitchMult to go beyond the 0.5 - 2.0 limit of playsound.
+	// A possible (and extraneous?) fix for this is to use different sound samples every couple keys
+	// and pitch them accordingly.
+	// The number of keys in our instruments range. This should be even.
+	private static int NumKeys = 18;
+	// The base key for our instrument, to sound correct this should match the pitch that the sample is.
+	// The jug sample is approx. key E4.
+	private static int BaseKey = 44; // (1-88 represents keys A0-C8)
 
 	public ItemPotteryJug()
 	{
@@ -97,7 +109,7 @@ public class ItemPotteryJug extends ItemPotteryBase
 			{
 				entity.setItemInUse(is, this.getMaxItemUseDuration(is));
 			}
-			else if(is.getItemDamage() == 1){
+			else if(!world.isRemote && is.getItemDamage() == 1){
 				Vec3 lookVec = entity.getLookVec();
 				lookAngle = (float)(lookVec.yCoord/2d);
 				if(!is.hasTagCompound()){
@@ -105,8 +117,8 @@ public class ItemPotteryJug extends ItemPotteryBase
 					is.stackTagCompound = new NBTTagCompound();
 					is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
 				}
-				else if(is.stackTagCompound.hasKey("blowTime") &&	
-						(is.stackTagCompound.getLong("blowTime") + 10 < TFC_Time.getTotalTicks())){
+				else if(is.stackTagCompound.hasKey("blowTime") &&
+						(is.stackTagCompound.getLong("blowTime") + PlayNoteCoolDown < TFC_Time.getTotalTicks())){
 					playNote = true;
 					is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
 				}
@@ -168,20 +180,29 @@ public class ItemPotteryJug extends ItemPotteryBase
 				}
 				else
 				{
+
+					// Must be done one client and server or drinking animation will not be shown on client.
 					if(is.getItemDamage() == 2 && canDrink)
 					{
 						entity.setItemInUse(is, this.getMaxItemUseDuration(is));
 					}
-					else if(is.getItemDamage() == 1){
+					// Only do NBT on server.
+					else if(!world.isRemote && is.getItemDamage() == 1){
 						Vec3 lookVec = entity.getLookVec();
 						lookAngle = (float)(lookVec.yCoord/2d);
+
+						// If we don't have a tag compound in NBT, add it.
 						if(!is.hasTagCompound()){
 							is.stackTagCompound = new NBTTagCompound();
 							is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
 						}
-						else if(is.stackTagCompound.hasKey("blowTime") &&	
-								(is.stackTagCompound.getLong("blowTime") + 10 < TFC_Time.getTotalTicks())){
+
+						if(is.stackTagCompound.hasKey("blowTime") &&
+								(is.stackTagCompound.getLong("blowTime") + PlayNoteCoolDown < TFC_Time.getTotalTicks())){
+
 							is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
+
+							playNote = true;
 						}
 						else if(!is.stackTagCompound.hasKey("blowTime")){
 							playNote = true;
@@ -201,10 +222,42 @@ public class ItemPotteryJug extends ItemPotteryBase
 				}
 			}
 		}
+
+		// We are playing a note if blowTime + 10 is still in the future.
+		// When the cooldown is done we can play another note.
+		/*
+		if(is.stackTagCompound.getLong("blowTime") + PlayNoteCoolDown > TFC_Time.getTotalTicks())
+		{
+
+		}
+		*/
+
 		if(playNote){
-			entity.playSound(TFC_Sounds.JUGBLOW, 1.0f, 1.0f + lookAngle);
+
+			// The target key on the 88 key piano scale. 40th key is C4, 49th key is A4.
+			// The target key is decided by taking our look angle and multiplying it by the number of keys,
+			// so we will get a key within NumKeys keys above or below BaseKey
+			// (but the sound will actually depend on the audio samples pitch).
+			int targetKey = (int) (lookAngle * NumKeys) + BaseKey;
+
+			// The frequency of our target key.
+			double keyFreqHz = pianoKeyToHertz(targetKey);
+
+			// The number we must multiply by to get the target pitch. 440hz is the frequency of the A4 key.
+			double pitchMult = keyFreqHz / pianoKeyToHertz(BaseKey);
+
+			//System.out.println("look angle: " + lookAngle + " pitch multiplier: " + pitchMult + "target key: " + targetKey + " target key in hz: " + keyFreqHz);
+
+
+			world.playSoundAtEntity(entity, TFC_Sounds.JUGBLOW, 1.3f, (float)pitchMult);
 		}
 		return is;
+	}
+
+	// Converts a piano key (1-88) into its frequency in hz.
+	private double pianoKeyToHertz(int key)
+	{
+		return Math.pow(2, (key - 49) / 12d) * 440d;
 	}
 
 	@Override
@@ -218,7 +271,7 @@ public class ItemPotteryJug extends ItemPotteryBase
 			return this.WaterIcon;
 		}
 
-		return this.WaterIcon; 
+		return this.WaterIcon;
 	}
 
 	@Override
