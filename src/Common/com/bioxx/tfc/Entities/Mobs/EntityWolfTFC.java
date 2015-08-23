@@ -4,12 +4,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import net.minecraft.block.BlockColored;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLeashKnot;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +16,11 @@ import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_MobData;
@@ -37,9 +36,6 @@ import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
 import com.bioxx.tfc.api.Util.Helper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, ICausesDamage
 {
@@ -67,6 +63,14 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	public int happyTicks;
 	private boolean wasRoped = false;
 
+	private EntityAITargetNonTamed targetChicken;
+	private EntityAITargetNonTamed targetPheasant;
+	private EntityAITargetNonTamed targetPig;
+	private EntityAITargetNonTamed targetCow;
+	private EntityAITargetNonTamed targetDeer;
+	private EntityAITargetNonTamed targetHorse;
+	private boolean isPeacefulAI;
+
 	protected float avgAdultWeight = 44f;	//The average weight of adult males in kg
 	protected float dimorphism = 0.0786f;	//1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
 	//the square root of the ratio of female mass : male mass
@@ -79,12 +83,24 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		this.targetTasks.removeTask(this.aiSit);
 		this.aiSit = new EntityAISitTFC(this);
 		this.tasks.addTask(2, this.aiSit);
-		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityChickenTFC.class, 200, false));
-		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityPheasantTFC.class, 200, false));
-		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false));
-		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityCowTFC.class, 200, false));
-		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityDeer.class, 200, false));
-		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityHorseTFC.class, 200, false));
+		this.targetChicken = new EntityAITargetNonTamed(this, EntityChickenTFC.class, 200, false);
+		this.targetPheasant = new EntityAITargetNonTamed(this, EntityPheasantTFC.class, 200, false);
+		this.targetPig = new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false);
+		this.targetCow = new EntityAITargetNonTamed(this, EntityCowTFC.class, 200, false);
+		this.targetDeer = new EntityAITargetNonTamed(this, EntityDeer.class, 200, false);
+		this.targetHorse = new EntityAITargetNonTamed(this, EntityHorseTFC.class, 200, false);
+		if (this.worldObj.difficultySetting != EnumDifficulty.PEACEFUL)
+		{
+			isPeacefulAI = false;
+			this.targetTasks.addTask(7, targetChicken);
+			this.targetTasks.addTask(7, targetPheasant);
+			this.targetTasks.addTask(7, targetPig);
+			this.targetTasks.addTask(7, targetCow);
+			this.targetTasks.addTask(7, targetDeer);
+			this.targetTasks.addTask(7, targetHorse);
+		}
+		else
+			isPeacefulAI = true;
 
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
@@ -282,20 +298,18 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 
 		if (!this.worldObj.isRemote && isPregnant())
 		{
-			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
+			if (TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
 			{
 				int i = rand.nextInt(2) + 1;
-				for (int x = 0; x<i;x++)
+				for (int x = 0; x < i; x++)
 				{
 					ArrayList<Float> data = new ArrayList<Float>();
 					data.add(mateSizeMod);
 					EntityWolfTFC baby = (EntityWolfTFC) this.createChildTFC(this);
-					baby.setLocationAndAngles (posX+(rand.nextFloat()-0.5F)*2F,posY,posZ+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
+					baby.setLocationAndAngles(posX + (rand.nextFloat() - 0.5F) * 2F, posY, posZ + (rand.nextFloat() - 0.5F) * 2F, 0.0F, 0.0F);
 					baby.rotationYawHead = baby.rotationYaw;
 					baby.renderYawOffset = baby.rotationYaw;
 					baby.setAge(TFC_Time.getTotalDays());
-					//baby.func_152115_b(this.func_152113_b());//setOwner
-					//baby.setTamed(true);
 					worldObj.spawnEntityInWorld(baby);
 				}
 				pregnant = false;
@@ -322,6 +336,35 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 			this.setPathToEntity((PathEntity)null);
 			this.setTarget((Entity)null);
 			this.setAttackTarget((EntityLivingBase)null);
+		}
+	}
+
+	@Override
+	public void onUpdate()
+	{
+		super.onUpdate();
+		if (!this.worldObj.isRemote)
+		{
+			if (!isPeacefulAI && this.worldObj.difficultySetting == EnumDifficulty.PEACEFUL)
+			{
+				isPeacefulAI = true;
+				this.targetTasks.removeTask(targetChicken);
+				this.targetTasks.removeTask(targetPheasant);
+				this.targetTasks.removeTask(targetPig);
+				this.targetTasks.removeTask(targetCow);
+				this.targetTasks.removeTask(targetDeer);
+				this.targetTasks.removeTask(targetHorse);
+			}
+			else if (isPeacefulAI && this.worldObj.difficultySetting != EnumDifficulty.PEACEFUL)
+			{
+				isPeacefulAI = false;
+				this.targetTasks.addTask(7, targetChicken);
+				this.targetTasks.addTask(7, targetPheasant);
+				this.targetTasks.addTask(7, targetPig);
+				this.targetTasks.addTask(7, targetCow);
+				this.targetTasks.addTask(7, targetDeer);
+				this.targetTasks.addTask(7, targetHorse);
+			}
 		}
 	}
 

@@ -4,20 +4,8 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Random;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITargetNonTamed;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,6 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFC_Core;
@@ -78,6 +67,16 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	public boolean inLove;
 	private int degreeOfDiversion = 4;
 	
+	private EntityAIAttackOnCollide attackAI;
+	private EntityAILeapAtTarget leapAI;
+	private EntityAITargetNonTamed targetSheep;
+	private EntityAITargetNonTamed targetDeer;
+	private EntityAITargetNonTamed targetPig;
+	private EntityAITargetNonTamed targetHorse;
+	private EntityAITargetNonTamedTFC targetPlayer;
+	private EntityAIHurtByTarget hurtAI;
+	private boolean isPeacefulAI;
+
 	private boolean wasRoped = false;
 	
 	private int familiarity = 0;
@@ -95,7 +94,6 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		moveSpeed = 0.2F;
 		getNavigator ().setAvoidsWater (true);
 		tasks.addTask (1, new EntityAISwimming (this));
-		tasks.addTask (4, new EntityAIAttackOnCollide (this, moveSpeed * 1.5F, true));
 		size_mod =(float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion + 1)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1F) * (1.0F - dimorphism * sex));
 		strength_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
 		aggression_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
@@ -106,13 +104,29 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		tasks.addTask (7, new EntityAIWander (this, moveSpeed));
 		tasks.addTask (8, new EntityAIWatchClosest (this, EntityPlayer.class, 8F));
 		tasks.addTask (9, new EntityAILookIdle (this));
-		tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntitySheepTFC.class,200, false));
-		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityDeer.class,200, false));
-		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false));
-		targetTasks.addTask (4, new EntityAITargetNonTamedTFC(this, EntityPlayer.class, 200, false));
-		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityHorseTFC.class, 200, false));
-		targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
+		this.attackAI = new EntityAIAttackOnCollide(this, moveSpeed * 1.5F, true);
+		this.leapAI = new EntityAILeapAtTarget(this, 0.4F);
+		this.targetSheep = new EntityAITargetNonTamed(this, EntitySheepTFC.class, 200, false);
+		this.targetDeer = new EntityAITargetNonTamed(this, EntityDeer.class, 200, false);
+		this.targetPig = new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false);
+		this.targetHorse = new EntityAITargetNonTamed(this, EntityHorseTFC.class, 200, false);
+		this.targetPlayer = new EntityAITargetNonTamedTFC(this, EntityPlayer.class, 200, false);
+		this.hurtAI = new EntityAIHurtByTarget(this, true);
+
+		if (par1World.difficultySetting != EnumDifficulty.PEACEFUL)
+		{
+			isPeacefulAI = false;
+			tasks.addTask(4, attackAI);
+			tasks.addTask(3, leapAI);
+			targetTasks.addTask(4, targetSheep);
+			targetTasks.addTask(4, targetDeer);
+			targetTasks.addTask(4, targetPig);
+			targetTasks.addTask(4, targetHorse);
+			targetTasks.addTask(4, targetPlayer);
+			targetTasks.addTask(3, hurtAI);
+		}
+		else
+			isPeacefulAI = true;
 		//targetTasks.addTask(2, new EntityAIPanic(this,moveSpeed*1.5F));
 
 		pregnancyRequiredTime = (int) (TFCOptions.animalTimeMultiplier * GESTATION_PERIOD * TFC_Time.ticksInMonth);
@@ -349,48 +363,78 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	 * use this to react to sunlight and start to burn.
 	 */
 	@Override
-	public void onLivingUpdate ()
+	public void onLivingUpdate()
 	{
 		TFC_Core.PreventEntityDataUpdate = true;
 		super.onLivingUpdate();
 		TFC_Core.PreventEntityDataUpdate = false;
-		//		float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
-		if (!worldObj.isRemote && !field_25052_g && !hasPath () && onGround)
+
+		if (!worldObj.isRemote)
 		{
-			field_25052_g = true;
-			worldObj.setEntityState (this, (byte) 8);
-		}
-		
-		if(this.getLeashed()&&!wasRoped)wasRoped=true;
-		
-		if (!this.worldObj.isRemote && isPregnant())
-		{
-			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
+			if (!field_25052_g && !hasPath() && onGround)
 			{
-				int i = rand.nextInt(3) + 1;
-				for (int x = 0; x<i;x++)
+				field_25052_g = true;
+				worldObj.setEntityState(this, (byte) 8);
+			}
+
+			if (isPregnant())
+			{
+				if (TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
 				{
-					EntityBear baby = (EntityBear) createChildTFC(this);//new EntityBear(worldObj, this,data);
-					worldObj.spawnEntityInWorld(baby);
+					int i = rand.nextInt(3) + 1;
+					for (int x = 0; x < i; x++)
+					{
+						EntityBear baby = (EntityBear) createChildTFC(this);//new EntityBear(worldObj, this,data);
+						worldObj.spawnEntityInWorld(baby);
+					}
+					pregnant = false;
 				}
-				pregnant = false;
 			}
 		}
+
+		if (this.getLeashed() && !wasRoped)
+			wasRoped = true;
 
 		this.handleFamiliarityUpdate();
 		this.syncData();
 	}
 
-
 	/**
 	 * Called to update the entity's position/logic.
 	 */
 	@Override
-	public void onUpdate ()
+	public void onUpdate()
 	{
-		super.onUpdate ();
+		super.onUpdate();
 		field_25054_c = field_25048_b;
 		field_25048_b = field_25048_b + (0.0F - field_25048_b) * 0.4F;
+		if (!this.worldObj.isRemote)
+		{
+			if (!isPeacefulAI && this.worldObj.difficultySetting == EnumDifficulty.PEACEFUL)
+			{
+				isPeacefulAI = true;
+				tasks.removeTask(attackAI);
+				tasks.removeTask(leapAI);
+				targetTasks.removeTask(targetSheep);
+				targetTasks.removeTask(targetDeer);
+				targetTasks.removeTask(targetPig);
+				targetTasks.removeTask(targetHorse);
+				targetTasks.removeTask(targetPlayer);
+				targetTasks.removeTask(hurtAI);
+			}
+			else if (isPeacefulAI && this.worldObj.difficultySetting != EnumDifficulty.PEACEFUL)
+			{
+				isPeacefulAI = false;
+				tasks.addTask(4, attackAI);
+				tasks.addTask(3, leapAI);
+				targetTasks.addTask(4, targetSheep);
+				targetTasks.addTask(4, targetDeer);
+				targetTasks.addTask(4, targetPig);
+				targetTasks.addTask(4, targetHorse);
+				targetTasks.addTask(4, targetPlayer);
+				targetTasks.addTask(3, hurtAI);
+			}
+		}
 	}
 
 	@Override
