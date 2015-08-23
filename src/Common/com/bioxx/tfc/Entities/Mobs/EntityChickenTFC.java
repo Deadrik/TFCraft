@@ -6,15 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIEatGrass;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -407,9 +399,11 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal)
 	{
-		if(animal.getGender() != this.getGender() && animal.isAdult() && animal.getAnimalTypeID() == this.getAnimalTypeID()) 
+		if (animal.getGender() != this.getGender() && this.isAdult() && animal.isAdult() && 
+				animal.getAnimalTypeID() == this.getAnimalTypeID())
 			return true;
-		return false;
+		else
+			return false;
 	}
 
 	@Override

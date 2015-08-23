@@ -3,11 +3,7 @@ package com.bioxx.tfc.Entities.Mobs;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.passive.EntityCow;
@@ -521,11 +517,11 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal) 
 	{
-		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityCowTFC && this.isAdult()) {
+		if(animal.getGender() != this.getGender() && this.isAdult() && animal.isAdult() && 
+				animal instanceof EntityCowTFC)
 			return true;
-		} else {
+		else
 			return false;
-		}
 	}
 
 	@Override

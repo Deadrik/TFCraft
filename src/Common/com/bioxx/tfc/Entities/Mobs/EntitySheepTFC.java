@@ -537,7 +537,8 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal)
 	{
-		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntitySheepTFC)
+		if(animal.getGender() != this.getGender() && this.isAdult() && animal.isAdult() && 
+				animal instanceof EntitySheepTFC)
 			return true;
 		else
 			return false;

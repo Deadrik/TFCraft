@@ -556,7 +556,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	@Override
 	public boolean canMateWith(IAnimal animal) 
 	{
-		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityWolfTFC)
+		if(animal.getGender() != this.getGender() && this.isAdult() && animal.isAdult() && 
+				animal instanceof EntityWolfTFC)
 			return true;
 		else
 			return false;

@@ -800,7 +800,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal)
 	{
-		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityHorseTFC && this.isAdult())
+		if(animal.getGender() != this.getGender() && this.isAdult() && animal.isAdult() && 
+				animal instanceof EntityHorseTFC)
 			return true;
 		else
 			return false;

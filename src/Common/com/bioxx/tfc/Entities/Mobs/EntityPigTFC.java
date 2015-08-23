@@ -548,7 +548,8 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal)
 	{
-		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityPigTFC)
+		if(animal.getGender() != this.getGender() && this.isAdult() && animal.isAdult() && 
+				animal instanceof EntityPigTFC)
 			return true;
 		else
 			return false;

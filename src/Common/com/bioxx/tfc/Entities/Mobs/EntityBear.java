@@ -597,7 +597,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal) 
 	{
-		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityBear)
+		if (animal.getGender() != this.getGender() && this.isAdult() && animal.isAdult() && 
+				animal instanceof EntityBear)
 			return true;
 		else
 			return false;

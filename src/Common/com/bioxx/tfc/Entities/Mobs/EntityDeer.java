@@ -526,7 +526,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal)
 	{
-		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityDeer)
+		if(animal.getGender() != this.getGender() && this.isAdult() && animal.isAdult() && 
+				animal instanceof EntityDeer)
 			return true;
 		else
 			return false;
