@@ -23,9 +23,13 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
@@ -41,9 +45,6 @@ import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBarrel extends BlockTerraContainer
 {
@@ -346,7 +347,7 @@ public class BlockBarrel extends BlockTerraContainer
 				ItemStack is = te.addLiquid(tmp);
 
 				// If we cannot add the liquid to the barrel, open the interface.
-				if (ItemStack.areItemStacksEqual(tmp, is))
+				if (ItemStack.areItemStacksEqual(equippedItem, is))
 				{
 					return false;
 				}
@@ -379,7 +380,7 @@ public class BlockBarrel extends BlockTerraContainer
 				ItemStack is = te.removeLiquid(tmp);
 
 				// If we cannot remove the liquid from the barrel, open the interface.
-				if (ItemStack.areItemStacksEqual(tmp, is))
+				if (ItemStack.areItemStacksEqual(equippedItem, is))
 				{
 					return false;
 				}
