@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
@@ -81,20 +82,21 @@ public class ItemLogs extends ItemTerra
 			{
 				TELogPile lp = (TELogPile)te;
 
-				if(lp != null)
+				if (lp.storage[0] == null || lp.storage[0].stackSize < 4)
 				{
-					if(lp.storage[0] == null || lp.storage[0].stackSize < 4) {
-						return false;
-					}
-					if(lp.storage[1] == null || lp.storage[1].stackSize < 4) {
-						return false;
-					}
-					if(lp.storage[2] == null || lp.storage[2].stackSize < 4) {
-						return false;
-					}
-					if(lp.storage[3] == null || lp.storage[3].stackSize < 4) {
-						return false;
-					}
+					return false;
+				}
+				if (lp.storage[1] == null || lp.storage[1].stackSize < 4)
+				{
+					return false;
+				}
+				if (lp.storage[2] == null || lp.storage[2].stackSize < 4)
+				{
+					return false;
+				}
+				if (lp.storage[3] == null || lp.storage[3].stackSize < 4)
+				{
+					return false;
 				}
 			}
 			return true;

@@ -20,7 +20,11 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Core.CollisionRayTraceDetailed;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
@@ -31,9 +35,6 @@ import com.bioxx.tfc.TileEntities.TEDetailed;
 import com.bioxx.tfc.TileEntities.TEWoodConstruct;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockDetailed extends BlockPartial
 {
@@ -416,6 +417,7 @@ public class BlockDetailed extends BlockPartial
 		}
 	}
 
+	@SuppressWarnings("null")
 	public Object[] rayTraceBound(AxisAlignedBB bound, int i, int j, int k, Vec3 player, Vec3 view) {
 		Vec3 minX = player.getIntermediateWithXValue(view, bound.minX);
 		Vec3 maxX = player.getIntermediateWithXValue(view, bound.maxX);

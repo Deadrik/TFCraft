@@ -52,7 +52,7 @@ public class WorldGenPineShort extends WorldGenerator
 						if (y >= 0 && y < 256)
 						{
 							block = world.getBlock(x, y, z);
-							if (!block.isAir(world, x, y, z) && block != null && !block.isLeaves(world, x, y, z) && !block.isReplaceable(world, x, y, z))
+							if (!block.isAir(world, x, y, z) && !block.isLeaves(world, x, y, z) && !block.isReplaceable(world, x, y, z))
 								isValid = false;
 						}
 						else

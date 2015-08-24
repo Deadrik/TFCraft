@@ -17,14 +17,14 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockLogNatural extends BlockTerra
 {
@@ -150,37 +150,38 @@ public class BlockLogNatural extends BlockTerra
 					if(equip.getItem() == Recipes.Hammers[cnt])
 						isHammer = true;
 				}
-			}
-			if(isAxeorSaw)
-			{
-				damage = -1;
-				ProcessTree(world, x, y, z, meta, equip);
 
-				if(damage + equip.getItemDamage() > equip.getMaxDamage())
+				if (isAxeorSaw)
 				{
-					int ind = entityplayer.inventory.currentItem;
-					entityplayer.inventory.setInventorySlotContents(ind, null);
-					world.setBlock(x, y, z, this, meta, 0x2);
+					damage = -1;
+					ProcessTree(world, x, y, z, meta, equip);
+
+					if (damage + equip.getItemDamage() > equip.getMaxDamage())
+					{
+						int ind = entityplayer.inventory.currentItem;
+						entityplayer.inventory.setInventorySlotContents(ind, null);
+						world.setBlock(x, y, z, this, meta, 0x2);
+					}
+					else
+						equip.damageItem(damage, entityplayer);
+
+					int smallStack = logs % 16;
+					dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Logs, smallStack, damageDropped(meta)));
+					logs -= smallStack;
+
+					// In theory this section should never be triggered since the full stacks are dropped higher up the tree, but keeping it here just in case.
+					while (logs > 0)
+					{
+						dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Logs, 16, damageDropped(meta)));
+						logs -= 16;
+					}
+
 				}
-				else
-					equip.damageItem(damage, entityplayer);
-
-				int smallStack = logs % 16;
-				dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Logs, smallStack, damageDropped(meta)));
-				logs -= smallStack;
-
-				// In theory this section should never be triggered since the full stacks are dropped higher up the tree, but keeping it here just in case.
-				while (logs > 0)
+				else if (isHammer)
 				{
-					dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Logs, 16, damageDropped(meta)));
-					logs -= 16;
+					EntityItem item = new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, new ItemStack(TFCItems.Stick, 1 + world.rand.nextInt(3)));
+					world.spawnEntityInWorld(item);
 				}
-
-			}
-			else if(isHammer)
-			{
-				EntityItem item = new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, new ItemStack(TFCItems.Stick, 1 + world.rand.nextInt(3)));
-				world.spawnEntityInWorld(item);
 			}
 			else
 				world.setBlock(x, y, z, this, meta, 0x2);

@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Blocks.Devices.BlockSluice;
@@ -20,9 +21,9 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.FloraIndex;
 import com.bioxx.tfc.Food.FloraManager;
 import com.bioxx.tfc.Render.Blocks.RenderFlora;
+import com.bioxx.tfc.TileEntities.TEFruitTreeWood;
 import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.TileEntities.TEWaterPlant;
-import com.bioxx.tfc.TileEntities.TEFruitTreeWood;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
@@ -530,7 +531,7 @@ public class TFC_CoreRender
 		FloraIndex index = manager.findMatchingIndex(BlockFruitLeaves.getType(block, meta));
 
 		renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
-		if(index!= null && index.inBloom(TFC_Time.getSeasonAdjustedMonth(zCoord)) || index.inHarvest(TFC_Time.getSeasonAdjustedMonth(zCoord)))
+		if (index != null && (index.inBloom(TFC_Time.getSeasonAdjustedMonth(zCoord)) || index.inHarvest(TFC_Time.getSeasonAdjustedMonth(zCoord))))
 		{
 			renderblocks.overrideBlockTexture = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
 			if(renderblocks.overrideBlockTexture != null)

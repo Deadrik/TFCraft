@@ -18,13 +18,13 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Core.CollisionRayTraceStandard;
 import com.bioxx.tfc.TileEntities.TEWoodConstruct;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Interfaces.ICustomCollision;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockWoodConstruct extends BlockTerraContainer implements ICustomCollision
 {
@@ -123,7 +123,7 @@ public class BlockWoodConstruct extends BlockTerraContainer implements ICustomCo
 			plankAABB.minX += i; plankAABB.maxX += i;
 			plankAABB.minY += j; plankAABB.maxY += j;
 			plankAABB.minZ += k; plankAABB.maxZ += k;
-			if (plankAABB != null && aabb.intersectsWith(plankAABB))
+			if (aabb.intersectsWith(plankAABB))
 			{
 				list.add(plankAABB);
 			}

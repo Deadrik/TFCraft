@@ -22,7 +22,7 @@ public class EntityAISitTFC extends EntityAISit {
     @Override
 	public boolean shouldExecute()
     {
-    	boolean superResult = super.shouldExecute();
+		//boolean superResult = super.shouldExecute();
         if (!this.theEntity.isTamed() && !this.theEntity.isSitting())
         {
             return false;

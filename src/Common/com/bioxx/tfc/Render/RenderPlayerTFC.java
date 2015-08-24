@@ -10,15 +10,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+
 import net.minecraftforge.client.ForgeHooksClient;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Entities.EntityStand;
 import com.bioxx.tfc.api.TFCItems;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderPlayerTFC extends RenderPlayer
@@ -212,20 +213,9 @@ public class RenderPlayerTFC extends RenderPlayer
 				modelbiped.bipedLeftLeg.showModel = slotIndex == 2 || slotIndex == 3;
 				this.setRenderPassModel(modelbiped);
 
-				if (modelbiped != null)
-				{
-					modelbiped.onGround = this.mainModel.onGround;
-				}
-
-				if (modelbiped != null)
-				{
-					modelbiped.isRiding = this.mainModel.isRiding;
-				}
-
-				if (modelbiped != null)
-				{
-					modelbiped.isChild = this.mainModel.isChild;
-				}
+				modelbiped.onGround = this.mainModel.onGround;
+				modelbiped.isRiding = this.mainModel.isRiding;
+				modelbiped.isChild = this.mainModel.isChild;
 
 				float f1 = 1.0F;
 

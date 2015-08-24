@@ -11,33 +11,23 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
+
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.api.Food;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCFluids;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Crafting.BarrelAlcoholRecipe;
-import com.bioxx.tfc.api.Crafting.BarrelBriningRecipe;
-import com.bioxx.tfc.api.Crafting.BarrelLiquidToLiquidRecipe;
-import com.bioxx.tfc.api.Crafting.BarrelManager;
-import com.bioxx.tfc.api.Crafting.BarrelMultiItemRecipe;
-import com.bioxx.tfc.api.Crafting.BarrelPreservativeRecipe;
-import com.bioxx.tfc.api.Crafting.BarrelRecipe;
-import com.bioxx.tfc.api.Crafting.BarrelVinegarRecipe;
+import com.bioxx.tfc.api.Crafting.*;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TEBarrel extends NetworkTileEntity implements IInventory
 {
@@ -714,7 +704,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 						((IFluidContainerItem) container.getItem()).drain(container, ((IFluidContainerItem)container.getItem()).getCapacity(container), true);
 					}
 				}
-				else if(inLiquid != null && container.stackSize == 1)
+				else if (inLiquid != null && container != null && container.stackSize == 1)
 				{
 					if(addLiquid(inLiquid))
 					{
@@ -772,7 +762,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					FluidStack origFS = getFluidStack() != null ? getFluidStack().copy() : null;
 					if(fluid.isFluidEqual(recipe.getResultFluid(origIS, origFS, time)) && recipe.removesLiquid)
 					{
-						if (fluid.getFluid() == TFCFluids.BRINE && origIS.getItem() instanceof IFood)
+						if (fluid.getFluid() == TFCFluids.BRINE && origIS != null && origIS.getItem() instanceof IFood)
 							fluid.amount -= recipe.getResultFluid(origIS, origFS, time).amount * Food.getWeight(origIS);
 						else
 							fluid.amount -= recipe.getResultFluid(origIS, origFS, time).amount;
@@ -793,7 +783,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 						ItemStack result = resultStacks.pop();
 						if (fluid != null && fluid.getFluid() == TFCFluids.BRINE)
 						{
-							if (result == null)
+							if (result == null && origIS != null)
 								result = origIS.copy();
 							if (result != null && result.getItem() instanceof IFood && (result.getItem() == TFCItems.Cheese || ((IFood) result.getItem()).getFoodGroup() != EnumFoodGroup.Grain))
 							{

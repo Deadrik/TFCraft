@@ -4,26 +4,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import cpw.mods.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
+
+import com.bioxx.tfc.TFCASMLoadingPlugin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.tree.AbstractInsnNode;
-import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.FieldInsnNode;
-import org.objectweb.asm.tree.InsnList;
-import org.objectweb.asm.tree.InsnNode;
-import org.objectweb.asm.tree.JumpInsnNode;
-import org.objectweb.asm.tree.LabelNode;
-import org.objectweb.asm.tree.LineNumberNode;
-import org.objectweb.asm.tree.MethodInsnNode;
-import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.tree.TypeInsnNode;
-
-import com.bioxx.tfc.TFCASMLoadingPlugin;
-
-import cpw.mods.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
+import org.objectweb.asm.tree.*;
 
 public class ClassTransformer implements net.minecraft.launchwrapper.IClassTransformer
 {
@@ -107,8 +96,8 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 				}
 				else if(mPatch.opType == PatchOpType.Replace)
 				{
-					InsnList old = new InsnList();
-					if(target.offset != -1)
+					//InsnList old = new InsnList();
+					if (target != null && target.offset != -1)
 					{
 						for (int index = 0; index < m.instructions.size();)
 						{

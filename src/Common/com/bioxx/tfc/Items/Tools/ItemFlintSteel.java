@@ -62,28 +62,29 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 						if (entity.getEntityItem().getItem() == TFCItems.Stick)
 							numsticks+=entity.getEntityItem().stackSize;
 					}
+
+					if (numsticks >= 3)
+					{
+						for (Iterator iterator = list.iterator(); iterator.hasNext();)
+						{
+							EntityItem entity = (EntityItem) iterator.next();
+							if (entity.getEntityItem().getItem() == TFCItems.Stick)
+								entity.setDead();
+							if (entity.getEntityItem().getItem() == Items.paper)
+								entity.setDead();
+						}
+						itemstack.damageItem(1, entityplayer);
+						world.setBlock(x, y + 1, z, TFCBlocks.Firepit, 1, 0x2);
+						if (world.isRemote)
+							world.markBlockForUpdate(x, y + 1, z);
+						return true;
+					}
 				}
 
 				itemstack.setItemDamage(itemstack.getItemDamage() + 1);
 				if(itemstack.getItemDamage() >= itemstack.getMaxDamage())
 					itemstack.stackSize = 0;
 
-				if(numsticks >= 3)
-				{
-					for (Iterator iterator = list.iterator(); iterator.hasNext();)
-					{
-						EntityItem entity = (EntityItem)iterator.next();
-						if(entity.getEntityItem().getItem() == TFCItems.Stick)
-							entity.setDead();
-						if(entity.getEntityItem().getItem() == Items.paper)
-							entity.setDead();
-					}
-					itemstack.damageItem(1, entityplayer);
-					world.setBlock(x, y + 1, z, TFCBlocks.Firepit, 1, 0x2);
-					if(world.isRemote)
-						world.markBlockForUpdate(x, y + 1, z);
-					return true;
-				}
 				return true;
 			}
 			else if((world.getBlock(x, y, z) == TFCBlocks.Charcoal && world.getBlockMetadata(x, y, z) > 6) || world.getBlock(x, y, z) == Blocks.coal_block)

@@ -404,13 +404,13 @@ public class EntityFishTFC extends EntitySquid
 			numAttempts++;
 			double currentPlayerDistance = 16;
 			int tempX = 0;
-			int tempY = 0;
+			//int tempY = 0;
 			int tempZ = 0;
 			for(EntityPlayer p : nearbyPlayers){
 				if (p.getDistance(destX, destY, destZ) < 8)
 				{
 					tempX+= p.posX;
-					tempY+= p.posY;
+					//tempY+= p.posY;
 					tempZ+= p.posZ;
 				}
 			}
@@ -419,7 +419,7 @@ public class EntityFishTFC extends EntitySquid
 			destZ = (int) z + (this.rand.nextInt(10) * (this.rand.nextBoolean()?(validDirs[5]?-1:validDirs[4]?1:0):validDirs[4]?1:validDirs[5]?-1:0));
 			if(nearbyPlayers.size() >0){
 				tempX /= nearbyPlayers.size();
-				tempY /= nearbyPlayers.size();
+				//tempY /= nearbyPlayers.size();
 				tempZ /= nearbyPlayers.size();
 				
 				destX -= tempX * 3;

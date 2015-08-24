@@ -198,7 +198,8 @@ public class ContainerTFC extends Container
 		for (int i = 0; i < this.inventorySlots.size()-36; ++i)
 		{
 			ItemStack itemstack = this.loadContents(i);
-			ItemStack itemstack1 = (ItemStack)this.inventoryItemStacks.get(i);//the real invisible item
+			ItemStack itemstack1 = (ItemStack) this.inventoryItemStacks.get(i);//the real invisible item
+			if (!areItemStacksEqual(itemstack1, itemstack) && player.inventory.getItemStack() == null)
 			{
 				_shouldReload = true;
 			}

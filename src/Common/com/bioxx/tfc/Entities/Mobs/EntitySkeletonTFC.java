@@ -3,23 +3,8 @@ package com.bioxx.tfc.Entities.Mobs;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIArrowAttack;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIFleeSun;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIRestrictSun;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -380,6 +365,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 				return TFCItems.WroughtIronHelmet;
 			else if (par1 == 4)
 				return TFCItems.SteelHelmet;
+			break;
 		case 3:
 			if (par1 == 0)
 				return TFCItems.LeatherChestplate;
@@ -391,6 +377,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 				return TFCItems.WroughtIronChestplate;
 			else if (par1 == 4)
 				return TFCItems.SteelChestplate;
+			break;
 		case 2:
 			if (par1 == 0)
 				return TFCItems.LeatherLeggings;
@@ -402,6 +389,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 				return TFCItems.WroughtIronGreaves;
 			else if (par1 == 4)
 				return TFCItems.SteelGreaves;
+			break;
 		case 1:
 			if (par1 == 0)
 				return TFCItems.LeatherBoots;
@@ -413,9 +401,12 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 				return TFCItems.WroughtIronBoots;
 			else if (par1 == 4)
 				return TFCItems.SteelBoots;
+			break;
 		default:
 			return null;
 		}
+
+		return null;
 	}
 
 	private void superAddRandomArmor()

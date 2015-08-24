@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
@@ -124,7 +125,7 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 		if (side == 0) --yCoord;
 		else if (side == 1) ++yCoord;
 		else return false;
-		Block block = world.getBlock(xCoord, yCoord, zCoord);
+		//Block block = world.getBlock(xCoord, yCoord, zCoord);
 		if(world.isAirBlock(xCoord, yCoord, zCoord))
 		{
 			return super.onItemUse(is, player, world, xCoord, yCoord, zCoord, side, hitX, hitY, hitZ);
@@ -219,9 +220,9 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 	{
 		FluidStack fs = getFluid(container);
 		FluidStack fsOut = fs.copy();
-		if(fs != null)
-			fsOut.amount = Math.min(maxDrain, fs.amount);
-		if(doSim && fsOut != null)
+		fsOut.amount = Math.min(maxDrain, fs.amount);
+
+		if (doSim)
 		{
 			if(fs.amount - fsOut.amount <= 0)
 			{

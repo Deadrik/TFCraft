@@ -127,7 +127,7 @@ public class CraftingManagerTFC
 
 	public ItemStack findMatchingRecipe(InventoryCrafting inventorycrafting, World world)
 	{
-		int i = 0;
+		/*int i = 0;
 		ItemStack itemstack = null;
 		ItemStack itemstack1 = null;
 		for (int j = 0; j < inventorycrafting.getSizeInventory(); j++)
@@ -147,7 +147,7 @@ public class CraftingManagerTFC
 			}
 			i++;
 		}
-
+		
 		if (i == 2 && itemstack.getItem() == itemstack1.getItem() && itemstack.stackSize == 1 && itemstack1.stackSize == 1 && itemstack.getItem().isRepairable())
 		{
 			//            Item item = Item.itemsList[itemstack.itemID];
@@ -160,7 +160,7 @@ public class CraftingManagerTFC
 			//                k1 = 0;
 			//            }
 			//            return new ItemStack(itemstack.itemID, 1, k1);
-		}
+		}*/
 		for (int k = 0; k < recipes.size(); k++)
 		{
 			IRecipe irecipe = recipes.get(k);

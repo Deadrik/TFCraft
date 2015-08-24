@@ -216,7 +216,7 @@ public class ContainerPlayerTFC extends ContainerPlayer
 			// S and D hotkeys for trimming/combining food
 			else if (clickType == 7 && sourceSlotID >= 9 && sourceSlotID < 45)
 			{
-				if (sourceSlot != null && sourceSlot.canTakeStack(p))
+				if (sourceSlot.canTakeStack(p))
 				{
 					Slot destSlot = (Slot) this.inventorySlots.get(destSlotID);
 					destSlot.putStack(slotStack);

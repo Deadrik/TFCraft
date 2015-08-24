@@ -132,8 +132,7 @@ public class BlockOre extends BlockCollapsible
 			else
 				itemstack  = new ItemStack(TFCItems.OreChunk, 1, damageDropped(ore));
 
-			if (itemstack != null)
-				dropBlockAsItem(world, x, y, z, itemstack);
+			dropBlockAsItem(world, x, y, z, itemstack);
 		}
 		return world.setBlockToAir(x, y, z);
 	}
@@ -160,10 +159,7 @@ public class BlockOre extends BlockCollapsible
 			else
 				itemstack = new ItemStack(TFCItems.OreChunk, 1, damageDropped(ore));
 
-			if (itemstack != null)
-			{
-				ret.add(itemstack);
-			}
+			ret.add(itemstack);
 		}
 		return ret;
 	}
@@ -203,8 +199,8 @@ public class BlockOre extends BlockCollapsible
 				itemstack = new ItemStack(TFCItems.Coal, 1 + random.nextInt(2));
 			else
 				itemstack = new ItemStack(TFCItems.OreChunk, 1, ore);
-			if (itemstack != null)
-				dropBlockAsItem(world, x, y, z, itemstack);
+
+			dropBlockAsItem(world, x, y, z, itemstack);
 			onBlockDestroyedByExplosion(world, x, y, z, exp);
 		}
 	}

@@ -103,7 +103,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 			Metal m = MetalRegistry.instance.getMetalFromString((nbt.getString("MetalType")));
 			metalAmount = nbt.getInteger("MetalAmount");
 
-			if (!world.isRemote && m != null)
+			if (!world.isRemote && m != null && stack != null)
 			{
 				if (input != null && input.getItem() == TFCItems.CeramicMold && input.getItemDamage() == 1 && input.stackSize == 1 && metalAmount > 0)
 				{

@@ -6,9 +6,9 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 
-import com.bioxx.tfc.api.TFCBlocks;
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 {
@@ -183,8 +183,8 @@ public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 		IBlockAccess blockAccess = renderblocks.blockAccess;
 
 		Boolean hasVerticalBeam = false;
-		Boolean hasHorizontalBeamX = false;
-		Boolean hasHorizontalBeamZ = false;
+		/*Boolean hasHorizontalBeamX = false;
+		Boolean hasHorizontalBeamZ = false;*/
 
 		/*boolean inWater = isSurroundedByWater(blockAccess, i, j, k);
 
@@ -225,7 +225,7 @@ public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 					renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
 					renderblocks.renderStandardBlock(block, i, j, k);
 				}
-				hasHorizontalBeamX = true;
+				//hasHorizontalBeamX = true;
 			}
 			else//if there is only a beam at the negative x and not the positive x
 			{
@@ -239,7 +239,7 @@ public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 					renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 0.75F, 1.0F, 0.75F);// 3/4 block
 					renderblocks.renderStandardBlock(block, i, j, k);
 				}
-				hasHorizontalBeamX = true;
+				//hasHorizontalBeamX = true;
 			}
 		}
 		else if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && */TFCBlocks.isBlockVSupport(blockAccess.getBlock(i+1, j, k)) || TFCBlocks.isBlockHSupport(blockAccess.getBlock(i+1, j, k)))
@@ -254,7 +254,7 @@ public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 				renderblocks.setRenderBounds(0.25F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);// 3/4 block
 				renderblocks.renderStandardBlock(block, i, j, k);
 			}
-			hasHorizontalBeamX = true;
+			//hasHorizontalBeamX = true;
 		}
 		//Z
 		if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && */TFCBlocks.isBlockVSupport(blockAccess.getBlock(i, j, k-1)) || TFCBlocks.isBlockHSupport(blockAccess.getBlock(i, j, k-1)))
@@ -273,7 +273,7 @@ public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 					renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 1.0F);
 					renderblocks.renderStandardBlock(block, i, j, k);
 				}
-				hasHorizontalBeamZ = true;
+				//hasHorizontalBeamZ = true;
 			}
 			else//if there is only a beam at the negative x and not the positive x
 			{
@@ -287,7 +287,7 @@ public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 					renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.75F);// 3/4 block
 					renderblocks.renderStandardBlock(block, i, j, k);
 				}
-				hasHorizontalBeamZ = true;
+				//hasHorizontalBeamZ = true;
 			}
 		}
 		else if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && */TFCBlocks.isBlockVSupport(blockAccess.getBlock(i, j, k+1)) || TFCBlocks.isBlockHSupport(blockAccess.getBlock(i, j, k+1)))//Top is solid and positive Z is support
@@ -302,7 +302,7 @@ public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 				renderblocks.setRenderBounds(0.25F, 0.50F, 0.25F, 0.75F, 1.0F, 1.0F);
 				renderblocks.renderStandardBlock(block, i, j, k);
 			}
-			hasHorizontalBeamZ = true;
+			//hasHorizontalBeamZ = true;
 		}
 
 		float minX = 0.25F;

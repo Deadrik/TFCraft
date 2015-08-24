@@ -12,24 +12,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
+
 import net.minecraftforge.common.MinecraftForge;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
-import com.bioxx.tfc.api.Food;
-import com.bioxx.tfc.api.HeatIndex;
-import com.bioxx.tfc.api.HeatRegistry;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Events.ItemCookEvent;
 import com.bioxx.tfc.api.Interfaces.ICookableFood;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TEFirepit extends TEFireEntity implements IInventory
 {
@@ -122,7 +118,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 					int leftover = 0;
 					boolean addLeftover = false;
 					int fromSide = 0;
-					if(fireItemStacks[7] != null && output != null && output.getItem() == fireItemStacks[7].getItem() && fireItemStacks[7].getItemDamage() > 0)
+					if (fireItemStacks[7] != null && output.getItem() == fireItemStacks[7].getItem() && fireItemStacks[7].getItemDamage() > 0)
 					{
 						int amt1 = 100 - damage;//the percentage of the output
 						int amt2 = 100 - fireItemStacks[7].getItemDamage();//the percentage currently in the out slot
@@ -141,7 +137,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 						if(fireItemStacks[1] == null && mold != null)
 							fireItemStacks[1] = mold;
 					}
-					else if(fireItemStacks[8] != null && output != null && output.getItem() == fireItemStacks[8].getItem() && fireItemStacks[8].getItemDamage() > 0)
+					else if (fireItemStacks[8] != null && output.getItem() == fireItemStacks[8].getItem() && fireItemStacks[8].getItemDamage() > 0)
 					{
 						int amt1 = 100 - damage;//the percentage of the output
 						int amt2 = 100 - fireItemStacks[8].getItemDamage();//the percentage currently in the out slot
@@ -161,14 +157,14 @@ public class TEFirepit extends TEFireEntity implements IInventory
 						if(fireItemStacks[1] == null && mold != null)
 							fireItemStacks[1] = mold;
 					}
-					else if(output != null && fireItemStacks[7] != null && fireItemStacks[7].getItem() == TFCItems.CeramicMold)
+					else if (fireItemStacks[7] != null && fireItemStacks[7].getItem() == TFCItems.CeramicMold)
 					{
 						fireItemStacks[7] = output.copy();
 						fireItemStacks[7].setItemDamage(damage);
 
 						TFC_ItemHeat.SetTemp(fireItemStacks[7], temp);
 					}
-					else if(output != null && fireItemStacks[8] != null && fireItemStacks[8].getItem() == TFCItems.CeramicMold)
+					else if (fireItemStacks[8] != null && fireItemStacks[8].getItem() == TFCItems.CeramicMold)
 					{
 						fireItemStacks[8] = output.copy();
 						fireItemStacks[8].setItemDamage(damage);
@@ -176,7 +172,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 						TFC_ItemHeat.SetTemp(fireItemStacks[8], temp);
 					}
 
-					if(addLeftover)
+					if (addLeftover)
 					{
 						int dest = fromSide == 1 ? 7 : 8;
 						if(fireItemStacks[dest] != null && output.getItem() == fireItemStacks[dest].getItem() && fireItemStacks[dest].getItemDamage() > 0)

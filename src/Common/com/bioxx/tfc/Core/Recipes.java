@@ -12,21 +12,22 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import com.bioxx.tfc.Core.Config.TFC_ConfigFiles;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TELoom;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.*;
 import com.bioxx.tfc.api.Enums.RuleEnum;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCCrafting;
-import com.bioxx.tfc.api.TFCItems;
 
 public class Recipes 
 {

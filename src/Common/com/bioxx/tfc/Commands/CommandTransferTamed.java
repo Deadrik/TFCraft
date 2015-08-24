@@ -59,7 +59,7 @@ public class CommandTransferTamed extends CommandBase
 				entityplayermp = getPlayer(sender, chars[0]);
 			}
 
-			EntityTameable theEntity = null;
+			EntityTameable tamedEntity = null;
 			List<EntityTameable> entitiesInRange =	((EntityPlayer)sender).worldObj.getEntitiesWithinAABB(EntityTameable.class, ((EntityPlayer)sender).boundingBox.expand(3, 1, 3));
 
 			if(entitiesInRange.size() == 0){
@@ -69,17 +69,17 @@ public class CommandTransferTamed extends CommandBase
 				throw new WrongUsageException("commands.transferTamed.tooMany");
 			}
 			else if(entitiesInRange.size() == 1){
-				theEntity = entitiesInRange.get(0);
-				if(theEntity.getOwner() == null || !theEntity.getOwner().equals(sender)){
+				tamedEntity = entitiesInRange.get(0);
+				if(tamedEntity.getOwner() == null || !tamedEntity.getOwner().equals(sender)){
 					throw new WrongUsageException("commands.transferTamed.wrongOwner");
 				}
 			}
 
 			if (entityplayermp == null)
 			{
-				if(theEntity != null && chars.length == 0){
-					theEntity.setTamed(false);
-					theEntity.func_152115_b("");
+				if(tamedEntity != null && chars.length == 0){
+					tamedEntity.setTamed(false);
+					tamedEntity.func_152115_b("");
 				}
 				else{
 					throw new PlayerNotFoundException();
@@ -89,9 +89,9 @@ public class CommandTransferTamed extends CommandBase
 			{
 				throw new PlayerNotFoundException("commands.transferTamed.sameTarget", new Object[0]);
 			}
-			else
+			else if (tamedEntity != null)
 			{
-				theEntity.func_152115_b(entityplayermp.getUniqueID().toString());
+				tamedEntity.func_152115_b(entityplayermp.getUniqueID().toString());
 
 				ChatComponentTranslation chatcomponenttranslation = new ChatComponentTranslation("commands.transferTamed.display.incoming", new Object[] {sender.func_145748_c_()});
 				ChatComponentTranslation chatcomponenttranslation1 = new ChatComponentTranslation("commands.transferTamed.display.outgoing", new Object[] {entityplayermp.func_145748_c_()});

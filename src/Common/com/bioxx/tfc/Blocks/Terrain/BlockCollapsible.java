@@ -12,6 +12,7 @@ import net.minecraft.stats.StatList;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
@@ -386,7 +387,7 @@ public class BlockCollapsible extends BlockTerraContainer
 	 */
 	public ArrayList<ByteCoord> getCollapseMap(World world, int i, int j, int k)
 	{
-		int checks = 0;
+		//int checks = 0;
 		ArrayList<ByteCoord> map = new ArrayList<ByteCoord>();
 		ArrayList<ByteCoord> checkedmap = new ArrayList<ByteCoord>();
 		CollapseList<CollapseData> checkQueue = new CollapseList<CollapseData>();
@@ -416,7 +417,7 @@ public class BlockCollapsible extends BlockTerraContainer
 			CollapseData block = checkQueue.peek();	
 			if(!checkedmap.contains(block) && world.rand.nextFloat() < block.collapseChance/100f)
 			{
-				checks++;
+				//checks++;
 				//TerraFirmaCraft.log.info("Number of block checks: " + checks + " | Queue Length: " + checkQueue.size());
 				worldX = block.coords.x + i;
 				worldY = block.coords.y + j;

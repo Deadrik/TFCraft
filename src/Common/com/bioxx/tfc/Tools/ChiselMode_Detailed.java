@@ -1,18 +1,19 @@
 package com.bioxx.tfc.Tools;
 
-import com.bioxx.tfc.Core.Player.PlayerInfo;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TileEntities.TEDetailed;
-import com.bioxx.tfc.TileEntities.TEPartial;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.Tools.ChiselMode;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import java.util.Random;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.Player.PlayerInfo;
+import com.bioxx.tfc.TileEntities.TEDetailed;
+import com.bioxx.tfc.TileEntities.TEPartial;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.Tools.ChiselMode;
 
 /**
  * Created by raymondbh on 08.07.2015.
@@ -31,31 +32,44 @@ public class ChiselMode_Detailed extends ChiselMode {
         div = 8;
     }
 
-    public ResourceLocation getResourceLocation(){
+	@Override
+	public ResourceLocation getResourceLocation()
+	{
         return resourcelocation;
     }
 
-    public int getTexture_u(){
+	@Override
+	public int getTexture_u()
+	{
         return texture_u;
     }
 
-    public int getTexture_v(){
+	@Override
+	public int getTexture_v()
+	{
         return texture_v;
     }
 
-    public int getDivX(Block block){
+	@Override
+	public int getDivX(Block block)
+	{
         return div;
     }
 
-    public int getDivY(Block block){
+	@Override
+	public int getDivY(Block block)
+	{
         return div;
     }
 
-    public int getDivZ(Block block){
+	@Override
+	public int getDivZ(Block block)
+	{
         return div;
     }
 
-    public boolean onUsedHandler(World world, EntityPlayer player, int x, int y, int z, Block id, int meta, int side, float hitX, float hitY, float hitZ)
+	@Override
+	public boolean onUsedHandler(World world, EntityPlayer player, int x, int y, int z, Block id, int meta, int side, float hitX, float hitY, float hitZ)
     {
         if(TFC_Core.isNaturalStone(id) && TFC_Core.isNaturalStone(world.getBlock(x, y+1, z)) &&
                 TFC_Core.isNaturalStone(world.getBlock(x, y + 2, z)) || id == TFCBlocks.stoneStairs ) {

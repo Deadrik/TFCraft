@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.bioxx.tfc.api.HeatRegistry;
-import com.bioxx.tfc.api.TFC_ItemHeat;
-
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.api.HeatRegistry;
+import com.bioxx.tfc.api.TFC_ItemHeat;
 
 public class ShapelessRecipesTFC implements IRecipe
 {
@@ -103,7 +103,7 @@ public class ShapelessRecipesTFC implements IRecipe
 
 		if(rnbt != null && rnbt.hasKey("noTemp"))
 		{
-			if(inbt == null || (inbt != null && !TFC_ItemHeat.HasTemp(inputIS)))
+			if (inbt == null || !TFC_ItemHeat.HasTemp(inputIS))
 			{
 				return true;//Recipe expects a cold item and either the input has not tag at all or at the least is missing a temperature tag
 			}

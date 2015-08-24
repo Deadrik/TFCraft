@@ -159,16 +159,15 @@ public class AnvilRecipe
 
 	private boolean areItemStacksEqual(ItemStack is1, ItemStack is2)
 	{
-		if(is1 == null && is2 == null)
-			return true;
+		if (is1 != null && is2 != null)
+		{
+			if (is1.getItem() != is2.getItem())
+				return false;
 
-		if((is1 == null && is2 != null) || (is1 != null && is2 == null)) 
-			return false;
-
-		if(is1.getItem() != is2.getItem())
-			return false;
-
-		if(is1.getItemDamage() != 32767 && is1.getItemDamage() != is2.getItemDamage())
+			if (is1.getItemDamage() != 32767 && is1.getItemDamage() != is2.getItemDamage())
+				return false;
+		}
+		else if ((is1 == null && is2 != null) || (is1 != null && is2 == null))
 			return false;
 
 		return true;

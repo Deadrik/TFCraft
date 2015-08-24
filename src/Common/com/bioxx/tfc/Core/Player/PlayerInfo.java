@@ -2,7 +2,6 @@ package com.bioxx.tfc.Core.Player;
 
 import java.util.UUID;
 
-import com.bioxx.tfc.api.Tools.ChiselManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -11,6 +10,7 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Tools.ChiselManager;
 
 public class PlayerInfo
 {
@@ -51,7 +51,9 @@ public class PlayerInfo
 
 	public void switchHoeMode(EntityPlayer player)
 	{
-		final int MODE_NORMAL = 0; final int MODE_NUTRIENT = 1; final int MODE_WATER= 2; final int MODE_HARVEST = 3;
+		//final int MODE_NORMAL = 0; 
+		final int MODE_NUTRIENT = 1;
+		//final int MODE_WATER= 2; final int MODE_HARVEST = 3;
 		SkillRank Agrank = TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_AGRICULTURE);
 		/*if(Agrank != SkillRank.Expert && Agrank != SkillRank.Master)
 			return;*/
@@ -88,7 +90,7 @@ public class PlayerInfo
 			}
 			else
 			{
-				ChiselMode = ++ChiselMode;
+				ChiselMode++;
 			}
 			lastChange = TFC_Time.getTotalTicks();
 		}

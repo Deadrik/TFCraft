@@ -225,7 +225,7 @@ public class TECrop extends NetworkTileEntity
 				int skill = 20 - (int) (20 * TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_AGRICULTURE));
 
 				seedStack.stackSize = 1 + (world.rand.nextInt(1 + skill) == 0 ? 1 : 0);
-				if (seedStack != null && isBreaking)
+				if (isBreaking)
 					world.spawnEntityInWorld(new EntityItem(world, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, seedStack));
 
 				TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_AGRICULTURE, 1);
@@ -237,8 +237,7 @@ public class TECrop extends NetworkTileEntity
 			{
 				ItemStack is = crop.getSeed();
 				is.stackSize = 1;
-				if(is != null)
-					world.spawnEntityInWorld(new EntityItem(world, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, is));
+				world.spawnEntityInWorld(new EntityItem(world, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, is));
 			}
 		}
 	}
@@ -247,7 +246,7 @@ public class TECrop extends NetworkTileEntity
 	{
 		ItemStack is = crop.getSeed();
 		is.stackSize = 1;
-		if (is != null && TFC_Core.isFarmland(worldObj.getBlock(xCoord, yCoord-1, zCoord)))
+		if (TFC_Core.isFarmland(worldObj.getBlock(xCoord, yCoord - 1, zCoord)))
 		{
 			if(worldObj.setBlock(xCoord, yCoord, zCoord, TFCBlocks.worldItem))
 			{

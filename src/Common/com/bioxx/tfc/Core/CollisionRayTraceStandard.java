@@ -3,13 +3,13 @@ package com.bioxx.tfc.Core;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bioxx.tfc.api.Interfaces.ICustomCollision;
-
 import net.minecraft.block.Block;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.api.Interfaces.ICustomCollision;
 
 public class CollisionRayTraceStandard
 {
@@ -52,6 +52,7 @@ public class CollisionRayTraceStandard
 		return null;
 	}
 
+	@SuppressWarnings("null")
 	public static Object[] rayTraceBound(AxisAlignedBB bound, int i, int j, int k, Vec3 player, Vec3 view)
 	{
 		Vec3 minX = player.getIntermediateWithXValue(view, bound.minX);

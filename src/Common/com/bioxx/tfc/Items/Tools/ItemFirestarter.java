@@ -14,6 +14,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Core.TFCTabs;
@@ -119,22 +120,22 @@ public class ItemFirestarter extends ItemTerra
 							else if(entity.getEntityItem().getItem() == TFCItems.Stick)
 								numsticks+=entity.getEntityItem().stackSize;
 						}
+
+						if ((chance > 70 - hasStraw) && numsticks >= 3)
+						{
+							for (Iterator iterator = list.iterator(); iterator.hasNext();)
+							{
+								EntityItem entity = (EntityItem) iterator.next();
+								if (entity.getEntityItem().getItem() == TFCItems.Stick || entity.getEntityItem().getItem() == TFCItems.Straw)
+									entity.setDead();
+							}
+							world.setBlock(x, y + 1, z, TFCBlocks.Firepit, 1, 2);
+						}
 					}
 
 					stack.damageItem(1, player);
 					if(stack.getItemDamage() >= stack.getMaxDamage())
 						stack.stackSize = 0;
-
-					if((chance > 70 - hasStraw) && numsticks >= 3)
-					{
-						for (Iterator iterator = list.iterator(); iterator.hasNext();)
-						{
-							EntityItem entity = (EntityItem)iterator.next();
-							if(entity.getEntityItem().getItem() == TFCItems.Stick || entity.getEntityItem().getItem() == TFCItems.Straw)
-								entity.setDead();
-						}
-						world.setBlock(x, y + 1, z, TFCBlocks.Firepit, 1, 2);
-					}
 				}
 				else if(isCoal)
 				{

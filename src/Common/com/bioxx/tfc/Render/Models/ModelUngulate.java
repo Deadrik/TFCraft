@@ -1,8 +1,6 @@
 
 package com.bioxx.tfc.Render.Models;
 
-import com.bioxx.tfc.TerraFirmaCraft;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;

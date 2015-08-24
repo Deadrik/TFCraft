@@ -29,15 +29,15 @@ import net.minecraft.stats.AchievementList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.bioxx.tfc.Containers.ContainerCreativeTFC;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiContainerCreativeTFC extends InventoryEffectRenderer
@@ -164,7 +164,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 						this.mc.thePlayer.inventoryContainer.detectAndSendChanges();
 					}
 				}
-				else if (par4 != 5 && par1Slot.inventory == inventory)
+				else if (par4 != 5 && par1Slot != null && par1Slot.inventory == inventory)
 				{
 					inventoryplayer = this.mc.thePlayer.inventory;
 					itemstack = inventoryplayer.getItemStack();
@@ -774,7 +774,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 		if (creativetabs.shouldHidePlayerInventory())
 			this.drawTexturedModalRect(i1, k + (int) ((l - k - 17) * this.currentScroll), 232 + (this.needsScrollBars() ? 0 : 12), 0, 12, 15);
 
-		if (creativetabs == null || creativetabs.getTabPage() != tabPage)
+		if (creativetabs.getTabPage() != tabPage)
 			if (creativetabs != CreativeTabs.tabAllSearch && creativetabs != CreativeTabs.tabInventory)
 				return;
 

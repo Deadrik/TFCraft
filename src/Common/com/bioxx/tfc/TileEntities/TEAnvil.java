@@ -13,7 +13,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
+
 import net.minecraftforge.common.MinecraftForge;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Achievements;
@@ -34,9 +38,6 @@ import com.bioxx.tfc.api.Crafting.AnvilRecipe;
 import com.bioxx.tfc.api.Crafting.AnvilReq;
 import com.bioxx.tfc.api.Enums.RuleEnum;
 import com.bioxx.tfc.api.Events.AnvilCraftEvent;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TEAnvil extends NetworkTileEntity implements IInventory
 {
@@ -127,7 +128,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 
 						ItemStack output = eventCraft.result;
 						//If the lastWorker is not null, then we attempt to apply some crafting buffs to items based on the players skills
-						if (output != null && lastWorker != null)
+						if (output != null && lastWorker != null && recipe != null)
 						{
 							if (output.getItem() instanceof ItemMiscToolHead)
 							{

@@ -306,9 +306,9 @@ public class BlockBarrel extends BlockTerraContainer
 
 			if (world.getTileEntity(x, y, z) instanceof TEBarrel)
 			{
-				TEBarrel te = (TEBarrel) (world.getTileEntity(x, y, z));
+				TEBarrel te = (TEBarrel) world.getTileEntity(x, y, z);
 
-				if (te != null && this == TFCBlocks.Barrel && te.getSealed() && te.getGunPowderCount() >= 12
+				if (this == TFCBlocks.Barrel && te.getSealed() && te.getGunPowderCount() >= 12
 						&& player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemFlintAndSteel)
 				{
 					spawnPowderKeg(world, x, y, z, te, false);

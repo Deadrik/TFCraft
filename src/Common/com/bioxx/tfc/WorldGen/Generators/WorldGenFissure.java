@@ -10,7 +10,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 
-import com.bioxx.tfc.TerraFirmaCraft;
+import cpw.mods.fml.common.IWorldGenerator;
+
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Util.BlockMeta;
@@ -21,8 +22,6 @@ import com.bioxx.tfc.api.Enums.TFCDirection;
 import com.bioxx.tfc.api.Util.ByteCoord;
 import com.bioxx.tfc.api.Util.CollapseData;
 import com.bioxx.tfc.api.Util.CollapseList;
-
-import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenFissure implements IWorldGenerator
 {
@@ -214,7 +213,7 @@ public class WorldGenFissure implements IWorldGenerator
 
 	public ArrayList<ByteCoord> getCollapseMap(World world, int i, int j, int k)
 	{
-		int checks = 0;
+		//int checks = 0;
 		ArrayList<ByteCoord> map = new ArrayList<ByteCoord>();
 		ArrayList<ByteCoord> checkedmap = new ArrayList<ByteCoord>();
 		CollapseList<CollapseData> checkQueue = new CollapseList<CollapseData>();
@@ -251,7 +250,7 @@ public class WorldGenFissure implements IWorldGenerator
 					if(!checkedmap.contains(block) && TFC_Core.isGround(id) && 
 							world.rand.nextFloat() < block.collapseChance/100f)
 					{
-						checks++;
+				//checks++;
 						//TerraFirmaCraft.log.info("Number of block checks: " + checks + " | Queue Length: " + checkQueue.size());
 
 						map.add(block.coords);

@@ -6,9 +6,9 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+
+import org.lwjgl.opengl.GL11;
 
 public class RenderOilLamp implements ISimpleBlockRenderingHandler
 {
@@ -19,7 +19,7 @@ public class RenderOilLamp implements ISimpleBlockRenderingHandler
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
 		renderer.renderAllFaces = true;
-		Tessellator tessellator = Tessellator.instance;
+		//Tessellator tessellator = Tessellator.instance;
 		renderer.setRenderBounds(0.275, 0.0, 0.275, 0.725, 0.0625F, 0.725);
 		renderer.renderStandardBlock(block, x, y, z);
 		renderer.setRenderBounds(0.25, 0.0625, 0.25, 0.75, 0.375F, 0.75);

@@ -42,11 +42,7 @@ public class BlockOre3 extends BlockOre
 		for (int i = 0; i < count; i++)
 		{
 			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, damageDropped(metadata));
-
-			if (itemstack != null)
-			{
-				ret.add(itemstack);
-			}
+			ret.add(itemstack);
 		}
 		return ret;
 	}
@@ -64,8 +60,7 @@ public class BlockOre3 extends BlockOre
 			}
 
 			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, damageDropped(meta));
-			if (itemstack != null)
-				dropBlockAsItem(world, x, y, z, itemstack);
+			dropBlockAsItem(world, x, y, z, itemstack);
 		}
 		return world.setBlockToAir(x, y, z);
 	}
@@ -121,10 +116,7 @@ public class BlockOre3 extends BlockOre
 		ItemStack itemstack;
 		int meta = world.getBlockMetadata(x, y, z);
 		itemstack  = new ItemStack(TFCItems.OreChunk, 1, meta + 32);
-
-		if (itemstack != null)
-			dropBlockAsItem(world, x, y, z, itemstack);
-
+		dropBlockAsItem(world, x, y, z, itemstack);
 		onBlockDestroyedByExplosion(world, x, y, z, exp);
 	}
 }

@@ -140,7 +140,7 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 							{
 								double var45 = (z + chunkZ * 16 + 0.5D - par10) / var53;
 								int var47 = (x * 16 + z) * 256 + var37;
-								boolean var48 = false;
+								//boolean var48 = false;
 								if (var59 * var59 + var45 * var45 < 1.0D)
 								{
 									for (int var49 = var37 - 1; var49 >= var55; --var49)
@@ -149,8 +149,8 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 										if ((var59 * var59 + var45 * var45) * this.field_35627_a[var49] + var50 * var50 / 6.0D < 1.0D)
 										{
 											block = blockArray[var47];
-											if (TFC_Core.isGrass(block))
-												var48 = true;
+											/*if (TFC_Core.isGrass(block))
+												var48 = true;*/
 											if (TFC_Core.isRawStone(block) || TFC_Core.isSoil(block))
 											{
 												if (var49 < 10)

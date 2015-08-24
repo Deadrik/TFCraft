@@ -17,6 +17,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
@@ -177,7 +178,7 @@ public class BlockSulfur extends BlockTerra implements ICustomCollision
 			plankAABB.minX += i; plankAABB.maxX += i;
 			plankAABB.minY += j; plankAABB.maxY += j;
 			plankAABB.minZ += k; plankAABB.maxZ += k;
-			if (plankAABB != null && aabb.intersectsWith(plankAABB))
+			if (aabb.intersectsWith(plankAABB))
 			{
 				list.add(plankAABB);
 			}

@@ -3,6 +3,7 @@ package com.bioxx.tfc.api.Crafting;
 import java.util.Stack;
 
 import net.minecraft.item.ItemStack;
+
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -35,7 +36,7 @@ public class BarrelMultiItemRecipe extends BarrelRecipe
 				Food.setWeight(out, w*Food.getWeight(recipeOutIS));
 			}
 		}
-		else
+		else if (inIS != null)
 		{
 			if(keepstacksize)
 				out.stackSize = inIS.stackSize;
@@ -62,7 +63,7 @@ public class BarrelMultiItemRecipe extends BarrelRecipe
 				fs.amount = (w * recipeOutFluid.amount);
 			}
 		}
-		else
+		else if (inIS != null)
 		{
 			fs.amount *= inIS.stackSize;
 		}

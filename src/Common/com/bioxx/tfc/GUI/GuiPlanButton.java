@@ -1,7 +1,6 @@
 package com.bioxx.tfc.GUI;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
@@ -45,7 +44,7 @@ public class GuiPlanButton extends GuiButton
 
 			if(field_146123_n)
 			{
-				FontRenderer fontrenderer = Minecraft.getMinecraft().fontRenderer;
+				//FontRenderer fontrenderer = Minecraft.getMinecraft().fontRenderer;
 				screen.drawTooltip(x, y, this.displayString);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			}

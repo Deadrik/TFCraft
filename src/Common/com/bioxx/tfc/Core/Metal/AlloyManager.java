@@ -39,7 +39,7 @@ public class AlloyManager
 	{
 		Iterator<Alloy> iter = Alloys.iterator();
 		Alloy match = null;
-		while(iter.hasNext() && match == null)
+		while (iter.hasNext())
 		{
 			match = iter.next();
 			if(furnaceTier.tier >= match.furnaceTier.tier)

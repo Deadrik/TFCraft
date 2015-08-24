@@ -13,22 +13,23 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+
 import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Core.Player.BodyTempStats;
-import com.bioxx.tfc.Core.Player.FoodStatsTFC;
-import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
-import com.bioxx.tfc.Core.Player.PlayerInfo;
-import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
-import com.bioxx.tfc.Core.Player.SkillStats;
+import com.bioxx.tfc.Core.Player.*;
 import com.bioxx.tfc.Entities.EntityProjectileTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Food.ItemMeal;
@@ -49,11 +50,6 @@ import com.bioxx.tfc.api.Interfaces.IEquipable;
 import com.bioxx.tfc.api.Interfaces.IEquipable.EquipType;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Util.Helper;
-
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityLivingHandler
 {
@@ -160,7 +156,7 @@ public class EntityLivingHandler
 				if (pi != null && pi.PlayerUUID.equals(player.getUniqueID()))
 				{
 					foodstats.onUpdate(player);
-					if(pi != null && player.inventory.getCurrentItem() != null)
+					if (player.inventory.getCurrentItem() != null)
 					{
 						if(player.inventory.getCurrentItem().getItem() instanceof ItemMeal)
 						{
@@ -175,7 +171,7 @@ public class EntityLivingHandler
 						else
 							pi.guishowFoodRestoreAmount = false;
 					}
-					else if(pi != null)
+					else
 						pi.guishowFoodRestoreAmount = false;
 				}
 
