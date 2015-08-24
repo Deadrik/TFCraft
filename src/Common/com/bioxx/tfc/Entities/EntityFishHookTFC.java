@@ -461,7 +461,7 @@ public class EntityFishHookTFC extends EntityFishHook
 
 		double force = pullVec.distanceTo(entityForce);
 		Vec3 netForceVec = entityForce.addVector(pullX, pullY, pullZ);
-		double forceRatio = ((force*30 ) / (netForceVec.lengthVector()));
+		double forceRatio = (force * 30) / netForceVec.lengthVector();
 
 		if(TFC_Time.getTotalTicks()%40 == 0){
 			force += 0d;
@@ -539,7 +539,8 @@ public class EntityFishHookTFC extends EntityFishHook
 			int maxValue = (int)(ChunkData.fishPopMax * 1.2f);
 			int minValue = 0;
 			int hour = TFC_Time.getHour();
-			if((hour >= 3 && hour <=9)||(hour >= 17 && hour <22)){
+			if (hour >= 3 && hour <= 9 || hour >= 17 && hour < 22)
+			{
 				minValue = 1;
 			}
 			if(this.rand.nextInt(maxValue - fishPopulation) <= minValue){
@@ -593,8 +594,8 @@ public class EntityFishHookTFC extends EntityFishHook
 		else
 		{
 			EntityPlayer player = this.field_146042_b;
-			int lastChunkX = (((int)Math.floor(player.posX)) >> 4);
-			int lastChunkZ = (((int)Math.floor(player.posZ)) >> 4);
+			int lastChunkX = ((int) Math.floor(player.posX)) >> 4;
+			int lastChunkZ = ((int) Math.floor(player.posZ)) >> 4;
 			int maxChunksVisitable = 20;
 
 			int chunksVisited = 0;
@@ -641,8 +642,8 @@ public class EntityFishHookTFC extends EntityFishHook
 
 			this.canCatchFish = false;
 
-			int lastChunkX = (((int)Math.floor(player.posX)) >> 4);
-			int lastChunkZ = (((int)Math.floor(player.posZ)) >> 4);
+			int lastChunkX = ((int) Math.floor(player.posX)) >> 4;
+			int lastChunkZ = ((int) Math.floor(player.posZ)) >> 4;
 			int maxChunksVisitable = 20;
 			TFC_Core.getCDM(worldObj).catchFish(lastChunkX, lastChunkZ);
 			int chunksVisited = 1;

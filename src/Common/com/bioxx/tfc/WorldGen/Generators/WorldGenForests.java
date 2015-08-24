@@ -6,6 +6,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+import cpw.mods.fml.common.IWorldGenerator;
+
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.TFCBiome;
@@ -14,8 +16,6 @@ import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenKapokTrees;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumTree;
-
-import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenForests implements IWorldGenerator
 {
@@ -106,7 +106,7 @@ public class WorldGenForests implements IWorldGenerator
 				if((spawnParam0 & 1) > 0 || (spawnParam1 & 1) > 0 || (spawnParam2 & 1) > 0)
 				{
 					//if the evt makes the location harsh for all of the trees
-					if((spawnParam0 > 0 && (spawnParam0 & 2) == 0) && (spawnParam1 > 0 && (spawnParam1 & 2) == 0) && (spawnParam2 > 0 && (spawnParam2 & 2) == 0))
+					if (spawnParam0 > 0 && (spawnParam0 & 2) == 0 && spawnParam1 > 0 && (spawnParam1 & 2) == 0 && spawnParam2 > 0 && (spawnParam2 & 2) == 0)
 					{
 						//there is a 1 in 10 chance for a tree otherwise no trees
 						if(random.nextInt(8) == 0)

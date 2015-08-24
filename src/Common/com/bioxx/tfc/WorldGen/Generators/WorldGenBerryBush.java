@@ -67,7 +67,8 @@ public class WorldGenBerryBush extends WorldGenerator
 	public boolean createBush(World world, Random random, int i, int j, int k, FloraIndex fi)
 	{
 		Block id = world.getBlock(i, j-1, k);
-		if((world.canBlockSeeTheSky(i, j, k) || world.getBlockLightValue(i, j, k) > 8) && ((TFC_Core.isSoil(id) && underBlock == Blocks.air) || id == underBlock))
+		if ((world.canBlockSeeTheSky(i, j, k) || world.getBlockLightValue(i, j, k) > 8) &&
+			(TFC_Core.isSoil(id) && underBlock == Blocks.air || id == underBlock))
 		{
 			for(short h = 0; h < bushHeight && random.nextBoolean(); h++) 
 			{

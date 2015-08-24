@@ -205,7 +205,8 @@ public class RenderPlayerTFC extends RenderPlayer
 				plume2.showModel = false;//(itemstack.getItem() == TFCItems.BronzeHelmet);
 				HornR1.showModel = false;//(itemstack.getItem() == TFCItems.WroughtIronHelmet);
 				HornL1.showModel = false;//(itemstack.getItem() == TFCItems.WroughtIronHelmet);
-				modelbiped.bipedHeadwear.showModel = slotIndex == 0 && (itemstack.getItem() != TFCItems.BronzeHelmet&&itemstack.getItem() != TFCItems.WroughtIronHelmet);
+				modelbiped.bipedHeadwear.showModel = slotIndex == 0 && itemstack.getItem() != TFCItems.BronzeHelmet &&
+														itemstack.getItem() != TFCItems.WroughtIronHelmet;
 				modelbiped.bipedBody.showModel = slotIndex == 1 || slotIndex == 2;
 				modelbiped.bipedRightArm.showModel = slotIndex == 1;
 				modelbiped.bipedLeftArm.showModel = slotIndex == 1;

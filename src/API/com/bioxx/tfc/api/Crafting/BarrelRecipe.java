@@ -4,6 +4,7 @@ import java.util.Stack;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -59,14 +60,14 @@ public class BarrelRecipe
 
 	public Boolean matches(ItemStack item, FluidStack fluid)
 	{
-		boolean iStack = removesLiquid ? true : (recipeIS != null && item != null && fluid != null && recipeFluid != null && item.stackSize >= (int)Math.ceil(fluid.amount/recipeFluid.amount));
-		boolean fStack = !removesLiquid ? true : (recipeFluid != null && item != null && fluid != null && recipeOutFluid != null && fluid.amount >= item.stackSize*recipeOutFluid.amount);
+		boolean iStack = removesLiquid ? true : recipeIS != null && item != null && fluid != null && recipeFluid != null && item.stackSize >= (int)Math.ceil(fluid.amount/recipeFluid.amount);
+		boolean fStack = !removesLiquid ? true : recipeFluid != null && item != null && fluid != null && recipeOutFluid != null && fluid.amount >= item.stackSize*recipeOutFluid.amount;
 
 		boolean anyStack = !removesLiquid && !isSealedRecipe && this.recipeOutIS == null && allowAnyStack;
-		boolean itemsEqual = (item == null && recipeIS == null) || OreDictionary.itemMatches(recipeIS, item, false);
+		boolean itemsEqual = item == null && recipeIS == null || OreDictionary.itemMatches(recipeIS, item, false);
 
-		return ((recipeIS != null && itemsEqual && (iStack || anyStack)) || recipeIS == null) &&
-				((recipeFluid != null && recipeFluid.isFluidEqual(fluid) && (fStack || anyStack)) || recipeFluid == null);
+		return (recipeIS != null && itemsEqual && (iStack || anyStack) || recipeIS == null) &&
+				(recipeFluid != null && recipeFluid.isFluidEqual(fluid) && (fStack || anyStack) || recipeFluid == null);
 	}
 
 	public Boolean isInFluid(FluidStack item)

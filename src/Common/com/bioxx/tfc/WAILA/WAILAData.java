@@ -595,7 +595,8 @@ public class WAILAData implements IWailaDataProvider
 		FluidStack fluid = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("fluidNBT"));
 		BarrelRecipe recipe = BarrelManager.getInstance().findMatchingRecipe(inStack, fluid, sealed, te.getTechLevel());
 
-		if (sealed && fluid != null && fluid.getFluid() == TFCFluids.MILKCURDLED && (inStack == null || (inStack.getItem() instanceof IFood && ((IFood) inStack.getItem()).getFoodGroup() != EnumFoodGroup.Dairy && ((IFood) inStack.getItem()).isEdible(inStack) && Food.getWeight(inStack) <= 20.0f)))
+		if (sealed && fluid != null && fluid.getFluid() == TFCFluids.MILKCURDLED && (inStack == null || 
+				inStack.getItem() instanceof IFood && ((IFood) inStack.getItem()).getFoodGroup() != EnumFoodGroup.Dairy && ((IFood) inStack.getItem()).isEdible(inStack) && Food.getWeight(inStack) <= 20.0f))
 			recipe = new BarrelRecipe(null, new FluidStack(TFCFluids.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese, 1), 160), null).setMinTechLevel(0);
 
 		// Fluid Amount
@@ -718,7 +719,7 @@ public class WAILAData implements IWailaDataProvider
 
 		if (isLit)
 		{
-			long hours = (tag.getLong("fuelTimeLeft") / TFC_Time.hourLength) - TFC_Time.getTotalHours();
+			long hours = tag.getLong("fuelTimeLeft") / TFC_Time.hourLength - TFC_Time.getTotalHours();
 
 			if (hours > 0)
 			{
@@ -1215,7 +1216,7 @@ public class WAILAData implements IWailaDataProvider
 	{
 		if (te != null)
 		{
-			int grade = (te.extraData & 7);
+			int grade = te.extraData & 7;
 			if (grade == 1)
 				ore += 35;
 			else if (grade == 2)

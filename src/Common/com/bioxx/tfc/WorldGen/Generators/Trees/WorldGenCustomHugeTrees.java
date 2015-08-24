@@ -107,7 +107,7 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 			}
 			else
 			{
-				if ((TFC_Core.isSoil(world.getBlock(xCoord, yCoord - 1, zCoord))) && yCoord < 256 - var6 - 1)
+				if (TFC_Core.isSoil(world.getBlock(xCoord, yCoord - 1, zCoord)) && yCoord < 256 - var6 - 1)
 				{
 					DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt(xCoord, zCoord, 0);
 					world.setBlock(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForDirt(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);

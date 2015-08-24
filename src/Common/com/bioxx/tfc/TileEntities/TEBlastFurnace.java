@@ -21,20 +21,15 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
+import cpw.mods.fml.client.FMLClientHandler;
+
 import com.bioxx.tfc.Blocks.Devices.BlockBlastFurnace;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
 import com.bioxx.tfc.GUI.GuiBlastFurnace;
-import com.bioxx.tfc.api.HeatIndex;
-import com.bioxx.tfc.api.HeatRegistry;
-import com.bioxx.tfc.api.Metal;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
-
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class TEBlastFurnace extends TEFireEntity implements IInventory
 {
@@ -120,7 +115,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 	public void CookItem(int i)
 	{
 		ItemStack cookingItemStack = fireItemStacks[i];
-		TECrucible crucibleTE = (worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof TECrucible) ?
+		TECrucible crucibleTE = worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof TECrucible ?
 				(TECrucible) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) : null;
 
 		/*
@@ -487,8 +482,8 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 					 * can melt down into something then add the ore to the list
 					 * of items in the fire.
 					 */
-					else if ((TFC_ItemHeat.IsCookable(entity.getEntityItem()) != -1 && _isOre)
-							|| (!_isOre && entity.getEntityItem().getItem() instanceof ISmeltable))
+					else if (TFC_ItemHeat.IsCookable(entity.getEntityItem()) != -1 && _isOre ||
+								!_isOre && entity.getEntityItem().getItem() instanceof ISmeltable)
 					{
 						int c = entity.getEntityItem().stackSize;
 						int nonConsumedOre = 0;
@@ -566,8 +561,8 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 		for (int i = 1; i <= 5; i++)
 		{
 			/*The stack must be air or already be molten rock*/
-			if((worldObj.isAirBlock(xCoord, yCoord+i, zCoord) ||
-					worldObj.getBlock(xCoord, yCoord+i, zCoord) == TFCBlocks.Molten))
+			if (worldObj.isAirBlock(xCoord, yCoord + i, zCoord) ||
+				worldObj.getBlock(xCoord, yCoord + i, zCoord) == TFCBlocks.Molten)
 			{
 				// Make sure that the Stack is surrounded by rock
 				/*if (isStackValid(xCoord, yCoord + i, zCoord))
@@ -607,7 +602,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 		{
 			EntityItem entity = (EntityItem) iterator.next();
 			ItemStack is = entity.getEntityItem();
-			if(!entity.isDead && (is.getItemDamage() == 0) && is.getItem() == TFCItems.Powder)
+			if (!entity.isDead && is.getItemDamage() == 0 && is.getItem() == TFCItems.Powder)
 			{
 				is.stackSize--;
 				if(is.stackSize == 0)

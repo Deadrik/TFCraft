@@ -26,7 +26,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.storage.WorldInfo;
+
 import net.minecraftforge.common.util.ForgeDirection;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -35,6 +37,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockSlab;
 import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Chunkdata.ChunkDataManager;
@@ -43,17 +46,16 @@ import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
 import com.bioxx.tfc.Core.Player.SkillStats;
 import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock;
 import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
 import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.WorldGen.TFCBiome;
+import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
-import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class TFC_Core
@@ -63,13 +65,13 @@ public class TFC_Core
 
 	public static ChunkDataManager getCDM(World world)
 	{
-		int key = world.isRemote ? (128 | world.provider.dimensionId) : world.provider.dimensionId;
+		int key = world.isRemote ? 128 | world.provider.dimensionId : world.provider.dimensionId;
 		return cdmMap.get(key);
 	}
 
 	public static ChunkDataManager addCDM(World world)
 	{
-		int key = world.isRemote ? (128 | world.provider.dimensionId) : world.provider.dimensionId;
+		int key = world.isRemote ? 128 | world.provider.dimensionId : world.provider.dimensionId;
 		if(!cdmMap.containsKey(key))
 			return cdmMap.put(key, new ChunkDataManager(world));
 		else return cdmMap.get(key);
@@ -77,7 +79,7 @@ public class TFC_Core
 
 	public static ChunkDataManager removeCDM(World world)
 	{
-		int key = world.isRemote ? (128 | world.provider.dimensionId) : world.provider.dimensionId;
+		int key = world.isRemote ? 128 | world.provider.dimensionId : world.provider.dimensionId;
 		return cdmMap.remove(key);
 	}
 
@@ -262,11 +264,10 @@ public class TFC_Core
 	public static boolean isRawStone(World world, int x, int y, int z)
 	{
 		Block block = world.getBlock(x, y, z);
-		return (block == TFCBlocks.StoneIgEx
+		return block == TFCBlocks.StoneIgEx
 				|| block == TFCBlocks.StoneIgIn
 				|| block == TFCBlocks.StoneSed
-				|| block == TFCBlocks.StoneMM
-				);
+				|| block == TFCBlocks.StoneMM;
 	}
 
 	public static boolean isSmoothStone(World world, int x, int y, int z)
@@ -482,7 +483,7 @@ public class TFC_Core
 	public static boolean isSaltWaterIncludeIce(Block block, int meta, Material mat)
 	{
 		return block == TFCBlocks.SaltWater || block == TFCBlocks.SaltWaterStationary
-				|| (mat == Material.ice && meta == 0);
+				|| mat == Material.ice && meta == 0;
 	}
 
 	public static boolean isFreshWater(Block block)
@@ -493,13 +494,13 @@ public class TFC_Core
 	public static boolean isFreshWaterIncludeIce(Block block, int meta)
 	{
 		return block == TFCBlocks.FreshWater || block == TFCBlocks.FreshWaterStationary
-				|| (block == TFCBlocks.Ice && meta != 0);
+				|| block == TFCBlocks.Ice && meta != 0;
 	}
 
 	public static boolean isFreshWaterIncludeIce(Block block, int meta, Material mat)
 	{
 		return block == TFCBlocks.FreshWater || block == TFCBlocks.FreshWaterStationary
-				|| (mat == Material.ice && meta != 0);
+				|| mat == Material.ice && meta != 0;
 	}
 
 	public static boolean isSoil(Block block)
@@ -775,14 +776,14 @@ public class TFC_Core
 
 	public static boolean showShiftInformation()
 	{
-		if ((FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) && (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)))
+		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
 			return true;
 		return false;
 	}
 
 	public static boolean showCtrlInformation()
 	{
-		if ((FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) && (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)))
+		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT && Keyboard.isKeyDown(Keyboard.KEY_LCONTROL))
 			return true;
 		return false;
 	}
@@ -1034,7 +1035,7 @@ public class TFC_Core
 					iinv.setInventorySlotContents(i, null);
 					continue;
 				}
-				if ((is.getItem() instanceof ItemTerra && ((ItemTerra) is.getItem()).onUpdate(is, world, x, y, z)))
+				if (is.getItem() instanceof ItemTerra && ((ItemTerra) is.getItem()).onUpdate(is, world, x, y, z))
 					continue;
 				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
 					continue;
@@ -1073,7 +1074,7 @@ public class TFC_Core
 
 			if (is != null)
 			{
-				if ((is.getItem() instanceof ItemTerra && ((ItemTerra) is.getItem()).onUpdate(is, world, x, y, z)))
+				if (is.getItem() instanceof ItemTerra && ((ItemTerra) is.getItem()).onUpdate(is, world, x, y, z))
 					continue;
 				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
 					continue;
@@ -1099,7 +1100,7 @@ public class TFC_Core
 
 			if (is != null)
 			{
-				if ((is.getItem() instanceof ItemTerra && ((ItemTerra) is.getItem()).onUpdate(is, world, x, y, z)))
+				if (is.getItem() instanceof ItemTerra && ((ItemTerra) is.getItem()).onUpdate(is, world, x, y, z))
 					continue;
 				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
 					continue;
@@ -1237,17 +1238,17 @@ public class TFC_Core
 
 	public static boolean isFence(Block b)
 	{
-		return (b == TFCBlocks.Fence || b == TFCBlocks.Fence2);
+		return b == TFCBlocks.Fence || b == TFCBlocks.Fence2;
 	}
 
 	public static boolean isVertSupport(Block b)
 	{
-		return (b == TFCBlocks.WoodSupportV || b == TFCBlocks.WoodSupportV2);
+		return b == TFCBlocks.WoodSupportV || b == TFCBlocks.WoodSupportV2;
 	}
 
 	public static boolean isHorizSupport(Block b)
 	{
-		return (b == TFCBlocks.WoodSupportH || b == TFCBlocks.WoodSupportH2);
+		return b == TFCBlocks.WoodSupportH || b == TFCBlocks.WoodSupportH2;
 	}
 
 	public static boolean isOceanicBiome(int id)

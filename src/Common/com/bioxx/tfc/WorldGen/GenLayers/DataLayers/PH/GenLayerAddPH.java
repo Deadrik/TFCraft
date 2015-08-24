@@ -37,7 +37,7 @@ public class GenLayerAddPH extends GenLayerTFC
 				int thisID = inCache[var12 + 1 + (var11 + 1) * var7];
 				this.initChunkSeed(var12 + xCoord, var11 + zCoord);
 
-				if ((id0 > thisID || id1 > thisID || id2 > thisID || id3 > thisID))
+				if (id0 > thisID || id1 > thisID || id2 > thisID || id3 > thisID)
 				{
 					int count = 1;
 					int outID = thisID;
@@ -59,7 +59,7 @@ public class GenLayerAddPH extends GenLayerTFC
 					else
 						outCache[var12 + var11 * xSize] = thisID;
 				}
-				else if ((id0 < thisID || id1 < thisID || id2 < thisID || id3 < thisID))
+				else if (id0 < thisID || id1 < thisID || id2 < thisID || id3 < thisID)
 				{
 					int count = 1;
 					int outID = thisID;

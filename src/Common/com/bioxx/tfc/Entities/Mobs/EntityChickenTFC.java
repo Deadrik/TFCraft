@@ -76,10 +76,10 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		this.tasks.addTask(6, this.aiEatGrass);
 		addAI();
 
-		size_mod =(float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion + 1)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1F) * (1.0F - dimorphism * sex));
-		strength_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
-		aggression_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
-		obedience_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + (1f/aggression_mod)));
+		size_mod = (float) Math.sqrt((rand.nextInt(rand.nextInt((degreeOfDiversion + 1) * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + 1F) * (1.0F - dimorphism * sex));
+		strength_mod = (float) Math.sqrt((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + size_mod));
+		aggression_mod = (float) Math.sqrt((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + 1));
+		obedience_mod = (float) Math.sqrt((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + 1f / aggression_mod));
 
 		/*
 		 * We hijack the growingAge to hold the day of birth rather than the number of ticks to the next growth event.
@@ -99,7 +99,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		this.posZ = posZ;
 		float m_size = genes.getFloat("m_size");
 		float f_size = genes.getFloat("f_size");
-		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((m_size + f_size)/1.9F);
+		size_mod = (rand.nextInt(degreeOfDiversion + 1) * (rand.nextBoolean() ? 1 : -1) / 10f + 1F) * (1.0F - 0.1F * sex) * (float) Math.sqrt((m_size + f_size) / 1.9F);
 
 		// We hijack the growingAge to hold the day of birth rather than number of ticks to next growth event.
 		this.setAge(TFC_Time.getTotalDays());
@@ -213,7 +213,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	public void roosterCrow()
 	{
 		if((TFC_Time.getTotalTicks()-15)%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE && isAdult() && this.worldObj.canBlockSeeTheSky((int)this.posX, (int)this.posY,(int)this.posZ)){
-			this.playSound(TFC_Sounds.ROOSTERCROW, 6, (rand.nextFloat()/2F)+0.75F);
+			this.playSound(TFC_Sounds.ROOSTERCROW, 6, rand.nextFloat() / 2F + 0.75F);
 		}
 	}
 
@@ -254,7 +254,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 				obedience_mod = TFC_Core.getSmallFloatFromByte(values[3]);
 				
 				familiarity = values[4];
-				familiarizedToday = (values[5] == 1);
+				familiarizedToday = values[5] == 1;
 			}
 		}
 	}
@@ -559,7 +559,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			if(familiarizedToday && familiarity < 100){
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
-				float familiarityChange = (6 * obedience_mod / aggression_mod);
+				float familiarityChange = 6 * obedience_mod / aggression_mod;
 				if(this.isAdult() && familiarity <= 45) // Adult caps at 45
 				{
 					familiarity += familiarityChange;
@@ -593,7 +593,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		if(stack != null && stack.getItem() != null && isFood(stack) && !familiarizedToday){
 			if (!ep.capabilities.isCreativeMode)
 			{
-				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
+				ep.inventory.setInventorySlotContents(ep.inventory.currentItem, ((ItemFoodTFC) stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this));
 			}
 			else
 			{
@@ -613,7 +613,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			this.setCustomNameTag(name);
 			return true;
 		}
-		this.playSound(this.getHurtSound(),  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
+		this.playSound(this.getHurtSound(), 6, rand.nextFloat() / 2F + (isChild() ? 1.25F : 0.75F));
 		return false;
 	}
 	

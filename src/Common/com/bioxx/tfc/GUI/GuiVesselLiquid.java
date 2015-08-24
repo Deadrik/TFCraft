@@ -36,12 +36,12 @@ public class GuiVesselLiquid extends GuiContainerTFC
 	protected void drawForeground(int guiLeft, int guiTop)
 	{
 		ItemStack stack = player.inventory.mainInventory[this.bagsSlotNum];
-		NBTTagCompound tags = (stack != null && stack.hasTagCompound()) ? stack.getTagCompound() : null;
-		if ((tags != null) && tags.hasKey("MetalType"))
+		NBTTagCompound tags = stack != null && stack.hasTagCompound() ? stack.getTagCompound() : null;
+		if (tags != null && tags.hasKey("MetalType"))
 		{
 			drawCenteredString(this.fontRendererObj, tags.getString("MetalType"), guiLeft + 87, guiTop + 13, 0);
 		}
-		if ((tags != null) && tags.hasKey("MetalAmount"))
+		if (tags != null && tags.hasKey("MetalAmount"))
 		{
 			drawCenteredString(this.fontRendererObj, tags.getInteger("MetalAmount") + " " + TFC_Core.translate("gui.units"), guiLeft + 87, guiTop + 23, 0);
 		}

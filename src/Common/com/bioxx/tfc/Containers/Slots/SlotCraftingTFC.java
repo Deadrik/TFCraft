@@ -3,7 +3,6 @@ package com.bioxx.tfc.Containers.Slots;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.SlotCrafting;
-import net.minecraft.item.ItemStack;
 
 public class SlotCraftingTFC extends SlotCrafting
 {
@@ -14,10 +13,10 @@ public class SlotCraftingTFC extends SlotCrafting
 		super(par1EntityPlayer, par2iInventory, par3iInventory, par4, par5, par6);
 	}
 
-	@Override
+	/*@Override
 	public void onCrafting(ItemStack par1ItemStack)
 	{
 		super.onCrafting(par1ItemStack);
-	}
+	}*/
 
 }

@@ -121,7 +121,7 @@ public class ItemFirestarter extends ItemTerra
 								numsticks+=entity.getEntityItem().stackSize;
 						}
 
-						if ((chance > 70 - hasStraw) && numsticks >= 3)
+						if (chance > 70 - hasStraw && numsticks >= 3)
 						{
 							for (Iterator iterator = list.iterator(); iterator.hasNext();)
 							{
@@ -216,7 +216,7 @@ public class ItemFirestarter extends ItemTerra
 					&& world.isAirBlock(x, y + 1, z)
 					&& block != TFCBlocks.Charcoal
 					&& block != Blocks.coal_block;
-			isCoal = ((block == TFCBlocks.Charcoal && world.getBlockMetadata(x, y, z) > 6) || block == Blocks.coal_block) && surroundRock && surroundSolids;
+			isCoal = (block == TFCBlocks.Charcoal && world.getBlockMetadata(x, y, z) > 6 || block == Blocks.coal_block) && surroundRock && surroundSolids;
 			isPottery = block == TFCBlocks.Pottery && surroundSolids;
 			if (isPottery)
 			{

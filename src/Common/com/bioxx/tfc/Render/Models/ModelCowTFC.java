@@ -80,7 +80,7 @@ public class ModelCowTFC extends ModelQuadruped
 		//float offset = 1.4f - percent;
 		GL11.glPushMatrix ();
 
-		GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
+		GL11.glTranslatef(0.0F, 0.75f - (0.75f * percent), 0f);
 		GL11.glScalef(ageHeadScale, ageHeadScale, ageHeadScale);
 		GL11.glTranslatef (0.0F, 0,0.1875f-(0.1875f*percent));
 		if(percent < 0.5)
@@ -106,7 +106,7 @@ public class ModelCowTFC extends ModelQuadruped
 		head.render(par7);
 		GL11.glPopMatrix();
 		GL11.glPushMatrix ();
-		GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
+		GL11.glTranslatef(0.0F, 0.75f - (0.75f * percent), 0f);
 		GL11.glScalef(1/ageScale, 1/ageScale, 1/ageScale);
 		
 		body.render(par7);			
@@ -125,8 +125,8 @@ public class ModelCowTFC extends ModelQuadruped
 	{
 		this.head.rotateAngleX = par5 / (180F / (float)Math.PI);
 		this.head.rotateAngleY = par4 / (180F / (float)Math.PI);
-		this.body.rotateAngleX = ((float)Math.PI / 2F);
-		this.udders.rotateAngleX = ((float)Math.PI / 2F);
+		this.body.rotateAngleX = (float) Math.PI / 2F;
+		this.udders.rotateAngleX = (float) Math.PI / 2F;
 		this.leg1.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
 		this.leg2.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
 		this.leg3.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;

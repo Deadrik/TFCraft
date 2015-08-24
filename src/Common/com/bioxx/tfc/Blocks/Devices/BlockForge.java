@@ -143,15 +143,15 @@ public class BlockForge extends BlockTerraContainer
 							world.getBlock(x, y, z+1).isNormalCube() && world.getBlock(x, y, z-1).isNormalCube()));*/
 
 			boolean rockXP = world.getBlock(x+1, y, z) == TFCBlocks.stoneSlabs || 
-					(world.getBlock(x+1, y, z).getMaterial() == Material.rock && world.getBlock(x+1, y, z).isNormalCube());
+					world.getBlock(x+1, y, z).getMaterial() == Material.rock && world.getBlock(x+1, y, z).isNormalCube();
 			boolean rockXN = world.getBlock(x-1, y, z) == TFCBlocks.stoneSlabs || 
-					(world.getBlock(x-1, y, z).getMaterial() == Material.rock && world.getBlock(x-1, y, z).isNormalCube());
+					world.getBlock(x-1, y, z).getMaterial() == Material.rock && world.getBlock(x-1, y, z).isNormalCube();
 			boolean rockZP = world.getBlock(x, y, z+1) == TFCBlocks.stoneSlabs || 
-					(world.getBlock(x, y, z+1).getMaterial() == Material.rock && world.getBlock(x, y, z+1).isNormalCube());
+					world.getBlock(x, y, z+1).getMaterial() == Material.rock && world.getBlock(x, y, z+1).isNormalCube();
 			boolean rockZN = world.getBlock(x, y, z-1) == TFCBlocks.stoneSlabs || 
-					(world.getBlock(x, y, z-1).getMaterial() == Material.rock && world.getBlock(x, y, z-1).isNormalCube());
+					world.getBlock(x, y, z-1).getMaterial() == Material.rock && world.getBlock(x, y, z-1).isNormalCube();
 			boolean rockYN = world.getBlock(x, y-1,  z ) == TFCBlocks.stoneSlabs ||
-					(world.getBlock(x, y-1, z).getMaterial() == Material.rock && world.getBlock(x, y-1,z).isNormalCube());
+					world.getBlock(x, y-1, z).getMaterial() == Material.rock && world.getBlock(x, y-1,z).isNormalCube();
 
 			boolean validSlabs = world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH) && world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH) &&
 					world.isSideSolid(x - 1, y, z, ForgeDirection.EAST) && world.isSideSolid(x + 1, y, z, ForgeDirection.WEST);

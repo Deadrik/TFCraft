@@ -1,6 +1,7 @@
 package com.bioxx.tfc.TileEntities;
 
 import net.minecraft.nbt.NBTTagCompound;
+
 import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.Core.TFC_Time;
@@ -15,11 +16,11 @@ public class TEOilLamp extends TELightEmitter
 	{
 	}
 
-	@Override
+	/*@Override
 	public void create()
 	{
 		super.create();
-	}
+	}*/
 
 	public FluidStack getFuel()
 	{

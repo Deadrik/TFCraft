@@ -183,7 +183,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 						if(directionZ2 == 1 && directionChange2 != 2){posZ2 = posZ2 - rand.nextInt(2);}
 						int m = world.getBlockMetadata(posX, posY, posZ);
 						boolean isCorrectRockType = world.getBlock(posX, posY, posZ) == LayerBlock;
-						boolean isCorrectMeta = (m == LayerMeta || LayerMeta == -1);
+						boolean isCorrectMeta = m == LayerMeta || LayerMeta == -1;
 						if(isCorrectRockType && isCorrectMeta)
 							world.setBlock(posX, posY, posZ, MPBlock, MPBlockMeta, 0x2);
 						blocksMade++;
@@ -194,7 +194,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 
 				int m = world.getBlockMetadata(posX, posY, posZ);
 				boolean isCorrectRockType = world.getBlock(posX, posY, posZ) == LayerBlock;
-				boolean isCorrectMeta = (m == LayerMeta || LayerMeta == -1);
+				boolean isCorrectMeta = m == LayerMeta || LayerMeta == -1;
 				if(isCorrectRockType && isCorrectMeta)
 					world.setBlock(posX, posY, posZ, MPBlock, MPBlockMeta, 0x2);
 				blocksMade++;
@@ -253,7 +253,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 						double d14 = (zCoord + 0.5D - d8) / (d10 / 2D);
 						int m = world.getBlockMetadata(xCoord, yCoord, zCoord);
 						boolean isCorrectRockType = world.getBlock(xCoord, yCoord, zCoord) == LayerBlock;
-						boolean isCorrectMeta = (m == LayerMeta || LayerMeta == -1);
+						boolean isCorrectMeta = m == LayerMeta || LayerMeta == -1;
 						if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D && isCorrectRockType && isCorrectMeta)
 							world.setBlock(xCoord, yCoord, zCoord, MPBlock, MPBlockMeta, 0x2);
 					}

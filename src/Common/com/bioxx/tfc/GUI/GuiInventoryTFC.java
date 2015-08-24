@@ -95,7 +95,7 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(par0, par1, 50.0F);
-		GL11.glScalef((-par2), par2, par2);
+		GL11.glScalef(-par2, par2, par2);
 		GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
 		float f2 = par5EntityLivingBase.renderYawOffset;
 		float f3 = par5EntityLivingBase.rotationYaw;

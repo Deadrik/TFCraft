@@ -68,25 +68,25 @@ public class ChiselHighlightHandler
 						switch (target.sideHit)
 						{
 						case 1:
-							subY -= (1d / divY);
+							subY -= 1d / divY;
 							if (hitX == 1)
-								subX -= (1d / divX);
+								subX -= 1d / divX;
 							if (hitZ == 1)
-								subZ -= (1d / divZ);
+								subZ -= 1d / divZ;
 							break;
 						case 3:
-							subZ -= (1d / divZ);
+							subZ -= 1d / divZ;
 							if (hitX == 1)
-								subX -= (1d / divX);
+								subX -= 1d / divX;
 							if (hitY == 1)
-								subY -= (1d / divY);
+								subY -= 1d / divY;
 							break;
 						case 5:
-							subX -= (1d / divX);
+							subX -= 1d / divX;
 							if (hitY == 1)
-								subY -= (1d / divY);
+								subY -= 1d / divY;
 							if (hitZ == 1)
-								subZ -= (1d / divZ);
+								subZ -= 1d / divZ;
 							break;
 						}
 

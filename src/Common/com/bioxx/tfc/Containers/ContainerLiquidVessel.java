@@ -90,7 +90,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 		//Load the metal info from the liquid container
 		ItemStack stack = player.inventory.getStackInSlot(bagsSlotNum);
 
-		NBTTagCompound nbt = (stack != null && stack.hasTagCompound()) ? stack.getTagCompound() : null;
+		NBTTagCompound nbt = stack != null && stack.hasTagCompound() ? stack.getTagCompound() : null;
 
 		if (nbt != null)
 		{
@@ -100,7 +100,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 			if (input != null && input.getItem() instanceof ItemPotteryMold && input.getItemDamage() > 1 /*Ceramic*/ && input.getItemDamage() <= 5 /*Full of Metal*/)
 				player.triggerAchievement(TFC_Achievements.achCopperAge);
 
-			Metal m = MetalRegistry.instance.getMetalFromString((nbt.getString("MetalType")));
+			Metal m = MetalRegistry.instance.getMetalFromString(nbt.getString("MetalType"));
 			metalAmount = nbt.getInteger("MetalAmount");
 
 			if (!world.isRemote && m != null && stack != null)
@@ -226,9 +226,9 @@ public class ContainerLiquidVessel extends ContainerTFC
 					return null;
 			}
 			else if (!outputSlot.getHasStack() &&
-					((slotStack.getItem() == TFCItems.CeramicMold && slotStack.getItemDamage() == 1) ||
-					(slotStack.getItem() instanceof ItemMeltedMetal && slotStack.getItemDamage() > 1) ||
-					(slotStack.getItem() instanceof ItemPotteryMold && slotStack.getItemDamage() > 0)))
+					(slotStack.getItem() == TFCItems.CeramicMold && slotStack.getItemDamage() == 1 ||
+					slotStack.getItem() instanceof ItemMeltedMetal && slotStack.getItemDamage() > 1 ||
+					slotStack.getItem() instanceof ItemPotteryMold && slotStack.getItemDamage() > 0))
 			{
 				ItemStack stack = slotStack.copy();
 				stack.stackSize = 1;

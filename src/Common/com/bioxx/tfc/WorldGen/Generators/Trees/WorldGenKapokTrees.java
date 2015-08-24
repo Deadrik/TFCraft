@@ -163,7 +163,7 @@ public class WorldGenKapokTrees extends WorldGenerator
 			z = 1 - x;
 			x*=rand.nextBoolean()? 1 : -1;
 			z*=rand.nextBoolean()? 1 : -1;
-			branchLength = (int) (((1.5D - branchSlope) * 5) + rand.nextInt(4)) + 3;
+			branchLength = (int) ((1.5D - branchSlope) * 5) + rand.nextInt(4) + 3;
 			if(trunkSize == 1)branchLength *= 0.66;
 			x*=branchLength;
 			z*=branchLength;

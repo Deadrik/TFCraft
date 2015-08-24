@@ -6,11 +6,11 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderWall  implements ISimpleBlockRenderingHandler
 {
@@ -35,7 +35,8 @@ public class RenderWall  implements ISimpleBlockRenderingHandler
 		boolean flag4Up = flag2Up && flag3Up;
 		boolean flag5Up = flag0Up && flag1Up;
 
-		if(((flag4 && flag4Up) || (flag5 && flag5Up)) && flagUp){
+		if ((flag4 && flag4Up || flag5 && flag5Up) && flagUp)
+		{
 			if (flag4)
 			{
 				renderblocks.setRenderBounds(0.3125D, 0.0D, 0.0D, 0.6875D, 1.0D, 1.0D);

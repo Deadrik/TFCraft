@@ -144,7 +144,7 @@ public class TECrop extends NetworkTileEntity
 				//Allow the fertilizer to make up for lost nutrients
 				nutri = Math.min(nutri + fert, (int)(soilMax * 1.25f));
 
-				float nutriMult = (0.2f + ((float)nutri/(float)soilMax) * 0.5f) + waterBoost;
+				float nutriMult = 0.2f + ((float) nutri / (float) soilMax) * 0.5f + waterBoost;
 
 				if(tef != null && !isDormant)
 				{
@@ -155,7 +155,7 @@ public class TECrop extends NetworkTileEntity
 						tef.DrainNutrients(3, crop.nutrientUsageMult);
 				}
 
-				float growthRate = ((((crop.numGrowthStages / (crop.growthTime * TFC_Time.timeRatio96)) + tempAdded) * nutriMult) * timeMultiplier) * TFCOptions.cropGrowthMultiplier;
+				float growthRate = (((crop.numGrowthStages / (crop.growthTime * TFC_Time.timeRatio96) + tempAdded) * nutriMult) * timeMultiplier) * TFCOptions.cropGrowthMultiplier;
 				if(tef!= null && tef.isInfested)
 					growthRate /= 2;
 				int oldGrowth = (int) Math.floor(growth);
@@ -169,7 +169,7 @@ public class TECrop extends NetworkTileEntity
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				}
 
-				if((TFCOptions.enableCropsDie && (crop.maxLifespan == -1 && growth > crop.numGrowthStages + ((float)crop.numGrowthStages / 2))) || growth < 0)
+				if (TFCOptions.enableCropsDie && (crop.maxLifespan == -1 && growth > crop.numGrowthStages + ((float) crop.numGrowthStages / 2)) || growth < 0)
 				{
 					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 				}

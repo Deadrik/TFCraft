@@ -161,7 +161,7 @@ public class CropIndex
 
 	public static float getWeight(float average, Random R)
 	{
-		float weight = average + (average * ((10*R.nextFloat())-5)/100);
+		float weight = average + (average * (10 * R.nextFloat() - 5) / 100);
 		return Helper.roundNumber(weight, 10);
 	}
 

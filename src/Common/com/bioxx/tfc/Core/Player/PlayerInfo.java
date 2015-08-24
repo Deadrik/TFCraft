@@ -71,7 +71,7 @@ public class PlayerInfo
 			}
 			
 			hoeMode = hoeMode == 3 ? 0 : ++hoeMode;
-			if (hoeMode == MODE_NUTRIENT && (!isMetalHoe || (isMetalHoe && Agrank != SkillRank.Expert && Agrank != SkillRank.Master)))
+			if (hoeMode == MODE_NUTRIENT && (!isMetalHoe || isMetalHoe && Agrank != SkillRank.Expert && Agrank != SkillRank.Master))
 				hoeMode++;
 
 			lastChange = TFC_Time.getTotalTicks();

@@ -49,11 +49,11 @@ public class ShapedRecipesTFC implements IRecipe
 				{
 					continue;
 				}
-				if ((inputIS == null && recipeIS != null) || (inputIS != null && recipeIS == null))
+				else if (inputIS == null || recipeIS == null) // No need for XOR since the X is handled above
 				{
 					return false;
 				}
-				else if (inputIS != null && recipeIS != null)
+				else
 				{
 					if (recipeIS.getItem() != inputIS.getItem())
 					{

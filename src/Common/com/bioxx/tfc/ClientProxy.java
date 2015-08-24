@@ -282,7 +282,7 @@ public class ClientProxy extends CommonProxy
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						color = (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j, k + var9));
+						color = TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j, k + var9);
 						rgb = applyColor(color, rgb);
 					}
 				}
@@ -297,7 +297,7 @@ public class ClientProxy extends CommonProxy
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						int color = (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j, k + var9));
+						int color = TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j, k + var9);
 						rgb = applyColor(color, rgb);
 					}
 				}
@@ -325,7 +325,7 @@ public class ClientProxy extends CommonProxy
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						int color = (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j, k + var9));
+						int color = TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j, k + var9);
 						rgb = applyColor(color, rgb);
 					}
 				}
@@ -361,7 +361,7 @@ public class ClientProxy extends CommonProxy
 			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			return x;
 		}
-		else if (temperature <= 10 && TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && (meta == 6))
+		else if (temperature <= 10 && TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && meta == 6)
 		{
 			for (int var8 = -1; var8 <= 1; ++var8)
 			{
@@ -423,9 +423,9 @@ public class ClientProxy extends CommonProxy
 
 	private int[] applyColor(int c, int[] rgb)
 	{
-		rgb[0] += ((c & 16711680) >> 16);
-		rgb[1] += ((c & 65280) >> 8);
-		rgb[2] += (c & 255);
+		rgb[0] += (c & 16711680) >> 16;
+		rgb[1] += (c & 65280) >> 8;
+		rgb[2] += c & 255;
 		return rgb;
 	}
 

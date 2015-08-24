@@ -36,7 +36,7 @@ public class TESRLoom extends TESRBase
 			{
 				if (TFC_Time.getTotalTicks() > te.getModel().tempTime)
 				{
-					te.getModel().tempNum = (te.getModel().tempNum + (int) (TFC_Time.getTotalTicks() - te.getModel().tempTime));
+					te.getModel().tempNum = te.getModel().tempNum + (int) (TFC_Time.getTotalTicks() - te.getModel().tempTime);
 					te.getModel().tempTime = TFC_Time.getTotalTicks();
 					if (te.getModel().tempNum >= (te.getModel().lastClothIncrease + (te.getModel().mod / 2)))
 					{

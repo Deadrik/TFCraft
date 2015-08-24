@@ -90,8 +90,8 @@ public class PrintImageMapCommand extends CommandBase
 				{
 					count++;
 					int ph = TFC_Climate.getCacheManager(world).getDrainageLayerAt(xCoord+x*skipSize, zCoord+z*skipSize).data1;
-					int g = (ph*50);
-					graphics.setColor(Color.getColor("", (g << 8)));	
+					int g = ph * 50;
+					graphics.setColor(Color.getColor("", g << 8));
 					graphics.drawRect(x+sizeHalf, z+sizeHalf, 1, 1);
 					if(count / (size*size) > perc)
 					{

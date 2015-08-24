@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
+
 import net.minecraftforge.common.AchievementPage;
 
 import com.bioxx.tfc.api.TFCBlocks;
@@ -85,7 +86,7 @@ public class TFC_Achievements
 
 	private static Achievement createAchievement(String id, String name, int posX, int posY, ItemStack is, Achievement preReq)
 	{
-		Achievement a = (new Achievement(id, name, posX, posY, is, preReq)).registerStat();
+		Achievement a = new Achievement(id, name, posX, posY, is, preReq).registerStat();
 		achlist.add(a);
 		return a;
 	}

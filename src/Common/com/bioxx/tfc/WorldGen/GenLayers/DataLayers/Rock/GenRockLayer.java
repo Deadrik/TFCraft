@@ -9,11 +9,7 @@ import javax.imageio.ImageIO;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerFuzzyZoomTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerSmoothTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerVoronoiZoomTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerZoomTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.*;
 
 public abstract class GenRockLayer extends GenLayerTFC
 {
@@ -71,7 +67,7 @@ public abstract class GenRockLayer extends GenLayerTFC
 				for(int z = 0; z < size; z++)
 				{
 					int id = ints[x*size+z];
-					int color = ((id*8)<<16)+((id*8)<<8)+((id*8));
+					int color = ((id * 8) << 16) + ((id * 8) << 8) + (id * 8);
 					graphics.setColor(Color.getColor("", color));	
 					graphics.drawRect(x, z, 1, 1);
 				}

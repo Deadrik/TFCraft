@@ -14,6 +14,9 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -30,9 +33,6 @@ import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.IBag;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
 import com.bioxx.tfc.api.Util.Helper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 {
@@ -252,8 +252,8 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				 * the other colors.
 				 */
 				int r = Math.min((j >> 16) + 0x60, 0xFF);
-				int b = Math.min(((j >> 8) & 0x00FF) + 0x60, 0xFF);
-				int g = Math.min((j & 0x0000FF) + 0x60, 0xFF);
+				int b = Math.min((j >> 8) & 0x00FF + 0x60, 0xFF);
+				int g = Math.min(j & 0x0000FF + 0x60, 0xFF);
 				return (r << 16) | (b << 8) | g;
 			}
 			else

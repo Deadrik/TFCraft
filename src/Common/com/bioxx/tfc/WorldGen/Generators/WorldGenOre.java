@@ -9,12 +9,12 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
+import cpw.mods.fml.common.IWorldGenerator;
+
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.Util.CaseInsensitiveHashMap;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
-
-import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenOre implements IWorldGenerator
 {
@@ -120,9 +120,9 @@ public class WorldGenOre implements IWorldGenerator
 					DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 0);
 					DataLayer rockLayer2 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 1);
 					DataLayer rockLayer3 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 2);
-					if ((rockLayer1.block == B && (rockLayer1.data2 == metadata || metadata == -1)) ||
-							(rockLayer2.block == B && (rockLayer2.data2 == metadata || metadata == -1)) ||
-							(rockLayer3.block == B && (rockLayer3.data2 == metadata || metadata == -1)))
+					if (rockLayer1.block == B && (rockLayer1.data2 == metadata || metadata == -1) ||
+						rockLayer2.block == B && (rockLayer2.data2 == metadata || metadata == -1) ||
+						rockLayer3.block == B && (rockLayer3.data2 == metadata || metadata == -1))
 					{
 						int grade = rand.nextInt(100);
 						if(grade<20)
@@ -153,9 +153,9 @@ public class WorldGenOre implements IWorldGenerator
 					DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 0);
 					DataLayer rockLayer2 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 1);
 					DataLayer rockLayer3 = TFC_Climate.getCacheManager(world).getRockLayerAt(chunkX, chunkZ, 2);
-					if ((rockLayer1.block == B && (rockLayer1.data2 == metadata || metadata == -1)) ||
-							(rockLayer2.block == B && (rockLayer2.data2 == metadata || metadata == -1)) ||
-							(rockLayer3.block == B && (rockLayer3.data2 == metadata || metadata == -1)))
+					if (rockLayer1.block == B && (rockLayer1.data2 == metadata || metadata == -1) ||
+						rockLayer2.block == B && (rockLayer2.data2 == metadata || metadata == -1) ||
+						rockLayer3.block == B && (rockLayer3.data2 == metadata || metadata == -1))
 					{
 						int grade = rand.nextInt(100);
 						if (grade < 20)

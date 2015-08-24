@@ -15,7 +15,7 @@ public class ChunkData
 	public long lastVisited;
 	public long previousVisit;
 	public int spawnProtection;
-	public int protectionBuffer = TFCOptions.protectionBuffer >= 0 ? (TFCOptions.protectionBuffer * -1) : -24; //Set buffer to default if invalid value in config.
+	public int protectionBuffer = TFCOptions.protectionBuffer >= 0 ? TFCOptions.protectionBuffer * -1 : -24; //Set buffer to default if invalid value in config.
 	public int[] heightmap;
 	public DataLayer[] rainfallMap;
 

@@ -10,13 +10,12 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.*;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
@@ -27,9 +26,6 @@ import com.bioxx.tfc.TileEntities.TEBloomery;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Interfaces.ICustomCollision;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCollision
 {
@@ -132,13 +128,13 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 		int[] map = bloomeryToStackMap[dir];
 		int centerX = x + map[0];
 		int centerZ = z + map[1];
-		if (isNorthStackValid(world, centerX, y, centerZ - 1) || (centerX == x && centerZ - 1 == z))
+		if (isNorthStackValid(world, centerX, y, centerZ - 1) || centerX == x && centerZ - 1 == z)
 		{
-			if (isSouthStackValid(world, centerX, y, centerZ + 1) || (centerX == x && centerZ + 1 == z))
+			if (isSouthStackValid(world, centerX, y, centerZ + 1) || centerX == x && centerZ + 1 == z)
 			{
-				if (isEastStackValid(world, centerX - 1, y, centerZ) || (centerX - 1 == x && centerZ == z))
+				if (isEastStackValid(world, centerX - 1, y, centerZ) || centerX - 1 == x && centerZ == z)
 				{
-					if (isWestStackValid(world, centerX + 1, y, centerZ) || (centerX + 1 == x && centerZ == z))
+					if (isWestStackValid(world, centerX + 1, y, centerZ) || centerX + 1 == x && centerZ == z)
 					{
 						return true;
 					}
@@ -150,9 +146,9 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 
 	private boolean isNorthStackValid(World world, int x, int y, int z)
 	{
-		if (((world.getBlock(x, y, z).getMaterial() == Material.rock ||
+		if ((world.getBlock(x, y, z).getMaterial() == Material.rock ||
 				world.getBlock(x, y, z).getMaterial() == Material.iron) &&
-				world.getBlock(x, y, z).isNormalCube()) ||
+				world.getBlock(x, y, z).isNormalCube() ||
 				TFC_Core.isSouthFaceSolid(world, x, y, z))//Since its the North Block, we need to make sure the South side facing the stack is solid
 		{
 			return true;
@@ -162,9 +158,9 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 
 	private boolean isSouthStackValid(World world, int x, int y, int z)
 	{
-		if (((world.getBlock(x, y, z).getMaterial() == Material.rock ||
+		if ((world.getBlock(x, y, z).getMaterial() == Material.rock ||
 				world.getBlock(x, y, z).getMaterial() == Material.iron) &&
-				world.getBlock(x, y, z).isNormalCube()) ||
+				world.getBlock(x, y, z).isNormalCube() ||
 				TFC_Core.isNorthFaceSolid(world, x, y, z))//Since its the South Block, we need to make sure the North side facing the stack is solid
 		{
 			return true;
@@ -174,9 +170,9 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 
 	private boolean isEastStackValid(World world, int x, int y, int z)
 	{
-		if (((world.getBlock(x, y, z).getMaterial() == Material.rock ||
+		if ((world.getBlock(x, y, z).getMaterial() == Material.rock ||
 				world.getBlock(x, y, z).getMaterial() == Material.iron) &&
-				world.getBlock(x, y, z).isNormalCube()) ||
+				world.getBlock(x, y, z).isNormalCube() ||
 				TFC_Core.isWestFaceSolid(world, x, y, z))//Since its the East Block, we need to make sure the West side facing the stack is solid
 		{
 			return true;
@@ -186,9 +182,9 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 
 	private boolean isWestStackValid(World world, int x, int y, int z)
 	{
-		if (((world.getBlock(x, y, z).getMaterial() == Material.rock ||
+		if ((world.getBlock(x, y, z).getMaterial() == Material.rock ||
 				world.getBlock(x, y, z).getMaterial() == Material.iron) &&
-				world.getBlock(x, y, z).isNormalCube()) ||
+				world.getBlock(x, y, z).isNormalCube() ||
 				TFC_Core.isEastFaceSolid(world, x, y, z))//Since its the West Block, we need to make sure the East side facing the stack is solid
 		{
 			return true;

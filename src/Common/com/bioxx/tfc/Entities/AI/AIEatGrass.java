@@ -1,15 +1,15 @@
 package com.bioxx.tfc.Entities.AI;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.Entities.IAnimal;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.Entities.IAnimal;
 
 public class AIEatGrass extends EntityAIBase
 {
@@ -36,7 +36,7 @@ public class AIEatGrass extends EntityAIBase
 			int j = MathHelper.floor_double(this.theEntity.posY);
 			int k = MathHelper.floor_double(this.theEntity.posZ);
 			boolean isGrass = TFC_Core.isLushGrass(theWorld.getBlock(i, j-1, k));
-			boolean isTallGrass = (this.theWorld.getBlock(i, j, k) == TFCBlocks.TallGrass && this.theWorld.getBlockMetadata(i, j, k) == 1);
+			boolean isTallGrass = this.theWorld.getBlock(i, j, k) == TFCBlocks.TallGrass && this.theWorld.getBlockMetadata(i, j, k) == 1;
 			return isGrass || isTallGrass;
 		}
 		return false;

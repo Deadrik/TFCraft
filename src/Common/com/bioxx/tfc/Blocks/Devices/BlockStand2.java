@@ -13,6 +13,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
@@ -21,9 +24,6 @@ import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IEquipable;
 import com.bioxx.tfc.api.Interfaces.IMultipleBlock;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockStand2 extends BlockStand implements IMultipleBlock, IEquipable
 {
@@ -80,7 +80,7 @@ public class BlockStand2 extends BlockStand implements IMultipleBlock, IEquipabl
 		if(te != null && te instanceof TEStand)
 		{
 			TEStand tes = (TEStand) te;
-			tes.yaw =(((int)((((entityliving.rotationYaw)%360)+360)+45)/90)*90)%360;
+			tes.yaw = (((int) (entityliving.rotationYaw % 360 + 360 + 45) / 90) * 90) % 360;
 			if(tes.yaw % 180 == 0)
 				tes.yaw+=180;
 			world.setBlock(i,j+1,k,this);

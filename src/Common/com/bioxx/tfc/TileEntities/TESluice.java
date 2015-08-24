@@ -1,10 +1,6 @@
 package com.bioxx.tfc.TileEntities;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import java.util.TreeSet;
+import java.util.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
@@ -19,6 +15,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Blocks.Devices.BlockSluice;
@@ -69,7 +66,7 @@ public class TESluice extends TileEntity implements IInventory
 			else
 			{
 				// slot has something, does it match the type and subtype?
-				if((stackInSlot == is) && (stackInSlot.getItemDamage() == is.getItemDamage()))
+				if (stackInSlot == is && stackInSlot.getItemDamage() == is.getItemDamage())
 				{
 					// match, add to this slot but make sure it fits
 					if(stackInSlot.stackSize + is.stackSize > this.getInventoryStackLimit())

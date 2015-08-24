@@ -51,7 +51,7 @@ public class GSPVisualCommand extends CommandBase{
 			{
 				for(int k = -radius; k <= radius;k++)
 				{
-					Chunk chunk = world.getChunkFromBlockCoords((int)player.posX + (i * 16), (int)player.posZ + (k * 16));
+					Chunk chunk = world.getChunkFromBlockCoords((int) player.posX + i * 16, (int) player.posZ + k * 16);
 					for(int x = 0; x < 16; x++)
 					{
 						for(int z = 0; z < 16; z++)

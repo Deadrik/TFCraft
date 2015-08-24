@@ -47,11 +47,11 @@ public class FoodCraftingHandler
 
 		if(iinventory != null)
 		{
-			if((craftResult.getItem() == TFCItems.WheatGrain && gridHasItem(iinventory, TFCItems.WheatWhole)) ||
-					(craftResult.getItem() == TFCItems.RyeGrain && gridHasItem(iinventory, TFCItems.RyeWhole)) || 
-					(craftResult.getItem() == TFCItems.OatGrain && gridHasItem(iinventory, TFCItems.OatWhole)) || 
-					(craftResult.getItem() == TFCItems.BarleyGrain && gridHasItem(iinventory, TFCItems.BarleyWhole)) || 
-					(craftResult.getItem() == TFCItems.RiceGrain && gridHasItem(iinventory, TFCItems.RiceWhole)))
+			if (craftResult.getItem() == TFCItems.WheatGrain && gridHasItem(iinventory, TFCItems.WheatWhole) ||
+				craftResult.getItem() == TFCItems.RyeGrain && gridHasItem(iinventory, TFCItems.RyeWhole) ||
+				craftResult.getItem() == TFCItems.OatGrain && gridHasItem(iinventory, TFCItems.OatWhole) ||
+				craftResult.getItem() == TFCItems.BarleyGrain && gridHasItem(iinventory, TFCItems.BarleyWhole) ||
+				craftResult.getItem() == TFCItems.RiceGrain && gridHasItem(iinventory, TFCItems.RiceWhole))
 			{
 				HandleItem(e.player, iinventory, Recipes.Knives);
 
@@ -372,11 +372,11 @@ public class FoodCraftingHandler
 	public static void preCraft(EntityPlayer player, ItemStack craftResult, IInventory iinventory)
 	{
 		FoodCraftingHandler.PreCrafted = true;
-		if((craftResult.getItem() == TFCItems.WheatGrain && gridHasItem(iinventory, TFCItems.WheatWhole)) ||
-				(craftResult.getItem() == TFCItems.RyeGrain && gridHasItem(iinventory, TFCItems.RyeWhole)) || 
-				(craftResult.getItem() == TFCItems.OatGrain && gridHasItem(iinventory, TFCItems.OatWhole)) || 
-				(craftResult.getItem() == TFCItems.BarleyGrain && gridHasItem(iinventory, TFCItems.BarleyWhole)) || 
-				(craftResult.getItem() == TFCItems.RiceGrain && gridHasItem(iinventory, TFCItems.RiceWhole)))
+		if (craftResult.getItem() == TFCItems.WheatGrain && gridHasItem(iinventory, TFCItems.WheatWhole) ||
+			craftResult.getItem() == TFCItems.RyeGrain && gridHasItem(iinventory, TFCItems.RyeWhole) ||
+			craftResult.getItem() == TFCItems.OatGrain && gridHasItem(iinventory, TFCItems.OatWhole) ||
+			craftResult.getItem() == TFCItems.BarleyGrain && gridHasItem(iinventory, TFCItems.BarleyWhole) ||
+			craftResult.getItem() == TFCItems.RiceGrain && gridHasItem(iinventory, TFCItems.RiceWhole))
 		{
 			HandleItem(player, iinventory, Recipes.Knives);
 			for(int i = 0; i < iinventory.getSizeInventory(); i++)

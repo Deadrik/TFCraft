@@ -94,10 +94,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		moveSpeed = 0.2F;
 		getNavigator ().setAvoidsWater (true);
 		tasks.addTask (1, new EntityAISwimming (this));
-		size_mod =(float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion + 1)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1F) * (1.0F - dimorphism * sex));
-		strength_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
-		aggression_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
-		obedience_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + (1f/aggression_mod)));
+		size_mod = (float) Math.sqrt((rand.nextInt(rand.nextInt((degreeOfDiversion + 1) * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + 1F) * (1.0F - dimorphism * sex));
+		strength_mod = (float) Math.sqrt((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + size_mod));
+		aggression_mod = (float) Math.sqrt((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + 1));
+		obedience_mod = (float) Math.sqrt((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + 1f / aggression_mod));
 		sex = rand.nextInt(2);
 		if (getGender() == GenderEnum.MALE)
 			tasks.addTask (6, new EntityAIMate (this, moveSpeed));
@@ -501,8 +501,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 				obedience_mod = TFC_Core.getSmallFloatFromByte(values[3]);
 				
 				familiarity = values[4];
-				familiarizedToday = (values[5] == 1);
-				pregnant = (values[6] == 1);
+				familiarizedToday = values[5] == 1;
+				pregnant = values[6] == 1;
 				
 				try
 				{
@@ -780,7 +780,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			if(familiarizedToday && familiarity < 100){
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
-				float familiarityChange = (3 * obedience_mod / aggression_mod); //Changed from 6 to 3 so bears are harder to tame by default. -Kitty
+				float familiarityChange = 3 * obedience_mod / aggression_mod; //Changed from 6 to 3 so bears are harder to tame by default. -Kitty
 				if(this.isAdult() && familiarity <= 80) //Adult bears cap out at 80 since it is currently impossible to get baby bears.
 				{
 					familiarity += familiarityChange;
@@ -814,7 +814,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		{
 			if (!ep.capabilities.isCreativeMode)
 			{
-				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
+				ep.inventory.setInventorySlotContents(ep.inventory.currentItem, ((ItemFoodTFC) stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this));
 			}
 			else
 			{
@@ -834,7 +834,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			this.setCustomNameTag(name);
 			return true;
 		}
-		this.playSound((isChild()?TFC_Sounds.BEARCUBCRY:TFC_Sounds.BEARCRY),  6, (rand.nextFloat()/2F)+0.75F);
+		this.playSound((isChild() ? TFC_Sounds.BEARCUBCRY : TFC_Sounds.BEARCRY), 6, rand.nextFloat() / 2F + 0.75F);
 		return false;
 	}
 	

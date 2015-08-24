@@ -25,11 +25,11 @@ public class SlotExtraEquipable extends Slot
 		return 1;
 	}
 
-	@Override
+	/*@Override
 	public ItemStack getStack(){
 		//TerraFirmaCraft.log.info("getting itemstack " + super.getStack());
 		return super.getStack();
-	}
+	}*/
 
 	/**
 	 * Leave as-is for now. In the future, modify it to allow non-armor items to be in here. Set up a method to register certain item

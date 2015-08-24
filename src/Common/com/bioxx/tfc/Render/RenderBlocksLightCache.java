@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.util.IIcon;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class RenderBlocksLightCache extends RenderBlocksFixUV
@@ -88,8 +89,8 @@ public class RenderBlocksLightCache extends RenderBlocksFixUV
 			double highBottom = (cacheBrightnessBottomLeft >> 16 & 0xff) * leftRight + (1.0d - leftRight) * (cacheBrightnessBottomRight >> 16 & 0xff);
 			int high = ((int) (highTop * topBottom + highBottom * (1.0d - topBottom))) & 0xff;
 			
-			double lowTop = ((cacheBrightnessTopLeft & 0xff)) * leftRight + (1.0d - leftRight) * ((cacheBrightnessTopRight & 0xff));
-			double lowBottom = ((cacheBrightnessBottomLeft & 0xff)) * leftRight + (1.0d - leftRight) * ((cacheBrightnessBottomRight & 0xff));
+			double lowTop = (cacheBrightnessTopLeft & 0xff) * leftRight + (1.0d - leftRight) * (cacheBrightnessTopRight & 0xff);
+			double lowBottom = (cacheBrightnessBottomLeft & 0xff) * leftRight + (1.0d - leftRight) * (cacheBrightnessBottomRight & 0xff);
 			int low = ((int) (lowTop * topBottom + lowBottom * (1.0d - topBottom))) & 0xff;
 			
 			// merge sky and block light.

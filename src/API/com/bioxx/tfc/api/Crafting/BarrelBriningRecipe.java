@@ -1,6 +1,7 @@
 package com.bioxx.tfc.api.Crafting;
 
 import net.minecraft.item.ItemStack;
+
 import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.api.Food;
@@ -20,7 +21,7 @@ public class BarrelBriningRecipe extends BarrelRecipe
 		if(item != null && item.getItem() instanceof IFood && !Food.isBrined(item))
 		{
 			float w = ((IFood) item.getItem()).getFoodWeight(item);
-			if(fluid.isFluidEqual(recipeFluid) && (w <= 1f*(fluid.amount/this.recipeFluid.amount)))
+			if (fluid.isFluidEqual(recipeFluid) && w <= 1f * (fluid.amount / this.recipeFluid.amount))
 			{
 				return true;
 			}

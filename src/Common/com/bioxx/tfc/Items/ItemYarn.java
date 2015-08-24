@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Blocks.BlockWoodSupport;
@@ -70,7 +71,7 @@ public class ItemYarn extends ItemTerra
 				int xCoord = x+(map[0] * i);
 				int yCoord = y+(map[1] * i);
 				int zCoord = z+(map[2] * i);
-				int meta = ((side & 4) >> 2);
+				int meta = (side & 4) >> 2;
 				world.setBlock(xCoord, yCoord, zCoord, TFCBlocks.SmokeRack, meta, 2);
 				is.stackSize--;
 			}

@@ -83,9 +83,9 @@ public class WorldGenSaplings
 				float tree0TempMin = EnumTree.values()[TreeType0].minTemp;
 				float tree0TempMax = EnumTree.values()[TreeType0].maxTemp;
 
-				canSpawnTemp0 = (temperature >= tree0TempMin && temperature <= tree0TempMax);
-				canSpawnRain0 = (rainfall >= tree0RainMin && rainfall <= tree0RainMax);
-				canSpawnEVT0 = (evt >= tree0EVTMin && evt <= tree0EVTMax);
+				canSpawnTemp0 = temperature >= tree0TempMin && temperature <= tree0TempMax;
+				canSpawnRain0 = rainfall >= tree0RainMin && rainfall <= tree0RainMax;
+				canSpawnEVT0 = evt >= tree0EVTMin && evt <= tree0EVTMax;
 			}
 
 			if (TreeType1 != -1)
@@ -97,9 +97,9 @@ public class WorldGenSaplings
 				float tree1TempMin = EnumTree.values()[TreeType1].minTemp;
 				float tree1TempMax = EnumTree.values()[TreeType1].maxTemp;
 
-				canSpawnTemp1 = (temperature >= tree1TempMin && temperature <= tree1TempMax);
-				canSpawnRain0 = (rainfall >= tree1RainMin && rainfall <= tree1RainMax);
-				canSpawnEVT0 = (evt >= tree1EVTMin && evt <= tree1EVTMax);
+				canSpawnTemp1 = temperature >= tree1TempMin && temperature <= tree1TempMax;
+				canSpawnRain0 = rainfall >= tree1RainMin && rainfall <= tree1RainMax;
+				canSpawnEVT0 = evt >= tree1EVTMin && evt <= tree1EVTMax;
 			}
 
 			if (TreeType2 != -1)
@@ -111,9 +111,9 @@ public class WorldGenSaplings
 				float tree2TempMin = EnumTree.values()[TreeType2].minTemp;
 				float tree2TempMax = EnumTree.values()[TreeType2].maxTemp;
 
-				canSpawnTemp2 = (temperature >= tree2TempMin && temperature <= tree2TempMax);
-				canSpawnRain0 = (rainfall >= tree2RainMin && rainfall <= tree2RainMax);
-				canSpawnEVT0 = (evt >= tree2EVTMin && evt <= tree2EVTMax);
+				canSpawnTemp2 = temperature >= tree2TempMin && temperature <= tree2TempMax;
+				canSpawnRain0 = rainfall >= tree2RainMin && rainfall <= tree2RainMax;
+				canSpawnEVT0 = evt >= tree2EVTMin && evt <= tree2EVTMax;
 			}
 
 			int randomNumber = random.nextInt(100);

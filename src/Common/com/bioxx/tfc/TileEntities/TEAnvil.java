@@ -715,7 +715,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			{
 				float temp = TFC_ItemHeat.GetTemp(anvilItemStacks[i]);
 				return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.20 && 
-						(anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true);
+						anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true;
 			}
 		}
 		return false;
@@ -732,7 +732,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			{
 				float temp = TFC_ItemHeat.GetTemp(anvilItemStacks[i]);
 				return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.40 && 
-						(anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true);
+						anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true;
 			}
 		}
 		return false;

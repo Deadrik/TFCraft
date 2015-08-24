@@ -37,17 +37,17 @@ public class TESpawnMeter extends TileEntity
 		}
 	}
 
-	@Override
+	/*@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
 		super.readFromNBT(nbttagcompound);
 	}
-
+	
 	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
-	}
+	}*/
 
 	@Override
 	public Packet getDescriptionPacket()

@@ -9,28 +9,8 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Entities.Mobs.EntityCreeperTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityDeer;
-import com.bioxx.tfc.Entities.Mobs.EntityEndermanTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityFishTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityPheasantTFC;
-import com.bioxx.tfc.Entities.Mobs.EntitySkeletonTFC;
-import com.bioxx.tfc.Entities.Mobs.EntitySlimeTFC;
-import com.bioxx.tfc.Entities.Mobs.EntitySpiderTFC;
-import com.bioxx.tfc.Entities.Mobs.EntitySquidTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityZombieTFC;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenAcaciaKoaTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomBigTree;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomCedarTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomMapleShortTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomMapleTallTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomTallTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomWillowTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenDouglasFir;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenPineShort;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenPineTall;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenRedwoodXL;
+import com.bioxx.tfc.Entities.Mobs.*;
+import com.bioxx.tfc.WorldGen.Generators.Trees.*;
 
 public class TFCBiome extends BiomeGenBase
 {
@@ -45,17 +25,17 @@ public class TFCBiome extends BiomeGenBase
 	/** An array of all the biomes, indexed by biome id. */
 	public static final TFCBiome ocean = new TFCBiome(0).setBiomeName("Ocean").setMinMaxHeight(-0.9F, 0.00001F).setBiomeColor(0x0000ff);
 	public static final TFCBiome river = new TFCBiome(7).setBiomeName("River").setMinMaxHeight(riverDepthMin, riverDepthMax).setBiomeColor(0xffffff);
-	public static final TFCBiome hell = (new TFCBiome(8)).setColor(16711680).setBiomeName("Hell").setDisableRain().setTemperatureRainfall(2.0F, 0.0F);
-	public static final TFCBiome beach = (new TFCBiome(16)).setColor(0xfade55).setBiomeName("Beach").setMinMaxHeight(0.01F, 0.02F).setBiomeColor(0xffb873);
-	public static final TFCBiome gravelbeach = (new TFCBiome(17)).setColor(0xfade55).setBiomeName("Gravel Beach").setMinMaxHeight(0.01F, 0.02F).setBiomeColor(0x8f7963);
-	public static final TFCBiome HighHills = (new TFCBiome(3)).setBiomeName("High Hills").setMinMaxHeight(0.8F, 1.6F).setBiomeColor(0x044f27);
-	public static final TFCBiome plains = (new TFCBiome(1)).setBiomeName("Plains").setMinMaxHeight(0.1F, 0.16F).setBiomeColor(0x69dfa0);
-	public static final TFCBiome swampland = (new TFCBiome(6)).setBiomeName("Swamp").setMinMaxHeight(-0.1F, 0.1F).setBiomeColor(0x1f392b).setLilyPads(8).setWaterPlants(45);
-	public static final TFCBiome HighHillsEdge = (new TFCBiome(20)).setBiomeName("High Hills Edge").setMinMaxHeight(0.2F, 0.4F).setBiomeColor(0x30a767);
-	public static final TFCBiome rollingHills = (new TFCBiome(30)).setBiomeName("Rolling Hills").setMinMaxHeight(0.1F, 0.4F).setBiomeColor(0x87b434);
-	public static final TFCBiome Mountains = (new TFCBiome(31)).setBiomeName("Mountains").setMinMaxHeight(0.8F, 1.6F).setBiomeColor(0x707960);
-	public static final TFCBiome MountainsEdge = (new TFCBiome(32)).setBiomeName("Mountains Edge").setMinMaxHeight(0.4F, 0.8F).setBiomeColor(0xb2bc9f);
-	public static final TFCBiome HighPlains = (new TFCBiome(35)).setBiomeName("High Plains").setMinMaxHeight(0.4F, 0.43F).setBiomeColor(0xa6a41c);
+	public static final TFCBiome hell = new TFCBiome(8).setColor(16711680).setBiomeName("Hell").setDisableRain().setTemperatureRainfall(2.0F, 0.0F);
+	public static final TFCBiome beach = new TFCBiome(16).setColor(0xfade55).setBiomeName("Beach").setMinMaxHeight(0.01F, 0.02F).setBiomeColor(0xffb873);
+	public static final TFCBiome gravelbeach = new TFCBiome(17).setColor(0xfade55).setBiomeName("Gravel Beach").setMinMaxHeight(0.01F, 0.02F).setBiomeColor(0x8f7963);
+	public static final TFCBiome HighHills = new TFCBiome(3).setBiomeName("High Hills").setMinMaxHeight(0.8F, 1.6F).setBiomeColor(0x044f27);
+	public static final TFCBiome plains = new TFCBiome(1).setBiomeName("Plains").setMinMaxHeight(0.1F, 0.16F).setBiomeColor(0x69dfa0);
+	public static final TFCBiome swampland = new TFCBiome(6).setBiomeName("Swamp").setMinMaxHeight(-0.1F, 0.1F).setBiomeColor(0x1f392b).setLilyPads(8).setWaterPlants(45);
+	public static final TFCBiome HighHillsEdge = new TFCBiome(20).setBiomeName("High Hills Edge").setMinMaxHeight(0.2F, 0.4F).setBiomeColor(0x30a767);
+	public static final TFCBiome rollingHills = new TFCBiome(30).setBiomeName("Rolling Hills").setMinMaxHeight(0.1F, 0.4F).setBiomeColor(0x87b434);
+	public static final TFCBiome Mountains = new TFCBiome(31).setBiomeName("Mountains").setMinMaxHeight(0.8F, 1.6F).setBiomeColor(0x707960);
+	public static final TFCBiome MountainsEdge = new TFCBiome(32).setBiomeName("Mountains Edge").setMinMaxHeight(0.4F, 0.8F).setBiomeColor(0xb2bc9f);
+	public static final TFCBiome HighPlains = new TFCBiome(35).setBiomeName("High Plains").setMinMaxHeight(0.4F, 0.43F).setBiomeColor(0xa6a41c);
 	public static final TFCBiome DeepOcean = new TFCBiome(36).setBiomeName("Deep Ocean").setMinMaxHeight(-1.5F, 0.00001F).setBiomeColor(0x0e055a);
 	public static final TFCBiome lake = new TFCBiome(2).setBiomeName("Lake").setMinMaxHeight(-0.5F, 0.001F).setBiomeColor(0x4a8e9e).setLilyPads(2);
 

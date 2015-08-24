@@ -266,7 +266,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			if(fluid.amount == getMaxLiquid() || !fluid.isFluidEqual(inFS))
 				return false;
 
-			int a = (fluid.amount+inFS.amount) - getMaxLiquid();
+			int a = fluid.amount + inFS.amount - getMaxLiquid();
 			fluid.amount = Math.min(fluid.amount+inFS.amount, getMaxLiquid());
 			if(a > 0) inFS.amount = a;
 			else inFS.amount = 0;
@@ -632,7 +632,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			if(!this.getSealed() && worldObj.canLightningStrikeAt(xCoord, yCoord+1, zCoord))
 			{
 				int count = getInvCount();	
-				if(count == 0 ||(count == 1 && this.getInputStack() != null))
+				if (count == 0 || count == 1 && this.getInputStack() != null)
 				{
 					if(this.fluid == null)
 						fluid = new FluidStack(TFCFluids.FRESHWATER, 1);
@@ -818,8 +818,8 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		ItemStack inIS = this.getInputStack();
 		if(this.getSealed() && this.fluid != null && this.fluid.getFluid() == TFCFluids.MILKCURDLED && 
-				(inIS == null || (inIS.getItem() instanceof IFood && ((IFood)inIS.getItem()).getFoodGroup() != EnumFoodGroup.Dairy && 
-				((IFood)inIS.getItem()).isEdible(inIS) && Food.getWeight(inIS) <= 20.0f)))
+				(inIS == null || inIS.getItem() instanceof IFood && ((IFood)inIS.getItem()).getFoodGroup() != EnumFoodGroup.Dairy && 
+				((IFood)inIS.getItem()).isEdible(inIS) && Food.getWeight(inIS) <= 20.0f))
 		{
 			recipe = new BarrelRecipe(null,new FluidStack(TFCFluids.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese, 1), 160), null).setMinTechLevel(0);
 			if(!worldObj.isRemote)

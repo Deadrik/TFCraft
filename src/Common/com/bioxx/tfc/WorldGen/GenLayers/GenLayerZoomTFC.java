@@ -50,7 +50,7 @@ public class GenLayerZoomTFC extends GenLayerTFC
 
 		for (int zoom = 0; zoom < zSize; ++zoom)
 		{
-			int srcPos = (zoom + (zPos & 1)) * i2 + (xPos & 1);
+			int srcPos = (zoom + (zPos & 1)) * i2 + xPos & 1;
 			System.arraycopy(out, srcPos, outCache, zoom * xSize, xSize);
 		}
 
@@ -102,7 +102,7 @@ public class GenLayerZoomTFC extends GenLayerTFC
 		else
 		{
 			int rand = this.nextInt(4);
-			return rand == 0 ? id0 : (rand == 1 ? id1 : (rand == 2 ? id2 : id3));
+			return rand == 0 ? id0 : rand == 1 ? id1 : rand == 2 ? id2 : id3;
 		}
 	}
 

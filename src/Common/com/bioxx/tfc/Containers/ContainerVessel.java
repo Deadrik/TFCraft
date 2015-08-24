@@ -75,14 +75,14 @@ public class ContainerVessel extends ContainerTFC
 	/**
 	 * Callback for when the crafting gui is closed.
 	 */
-	@Override
-	public void onContainerClosed(EntityPlayer player)
-	{
-		super.onContainerClosed(player);
-		/*if(ContainerTFC.areItemStacksEqual(bagStack, player.inventory.getCurrentItem())) {
-			saveContents(player.inventory.getStackInSlot(bagsSlotNum));
+	/*	@Override
+		public void onContainerClosed(EntityPlayer player)
+		{
+			super.onContainerClosed(player);
+	//		if(ContainerTFC.areItemStacksEqual(bagStack, player.inventory.getCurrentItem())) {
+	//			saveContents(player.inventory.getStackInSlot(bagsSlotNum));
+	//		}
 		}*/
-	}
 
 	@Override
 	public void saveContents(ItemStack is)

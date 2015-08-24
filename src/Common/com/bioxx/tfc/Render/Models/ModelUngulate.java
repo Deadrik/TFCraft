@@ -92,13 +92,13 @@ public class ModelUngulate extends ModelBase
 		LeftCalf.setRotationPoint(0F, 5F, -3F);
 		LeftCalf.setTextureSize(64, 32);
 		LeftCalf.mirror = true;
-		setRotation(LeftCalf, (3*0.2617994F)+0.52359877559829887307710723054658F, 0F, 0F);
+		setRotation(LeftCalf, 3 * 0.2617994F + 0.52359877559829887307710723054658F, 0F, 0F);
 		RightCalf = new ModelRenderer(this, 0, 0);
 		RightCalf.addBox(-1.3F, 0F, 0F, 2, 4, 3);
 		RightCalf.setRotationPoint(0F, 5F, -3F);
 		RightCalf.setTextureSize(64, 32);
 		RightCalf.mirror = true;
-		setRotation(RightCalf, (3*0.2617994F)+0.52359877559829887307710723054658F, 0F, 0F);
+		setRotation(RightCalf, 3 * 0.2617994F + 0.52359877559829887307710723054658F, 0F, 0F);
 		LeftAnkle = new ModelRenderer(this, 0, 0);
 		LeftAnkle.addBox(-0.6F, 2F, 0.2F, 2, 5, 2);
 		LeftAnkle.setRotationPoint(0F, 0F, 0F);
@@ -258,8 +258,8 @@ public class ModelUngulate extends ModelBase
 		float leftArmInitAngle =  -2*0.52359877559829887307710723054658F;
 		float leftThighInitAngle = -0.52359877559829887307710723054658F;
 		float rightThighInitAngle = -0.52359877559829887307710723054658F;
-		float rightCalfInitAngle = (3*0.2617994F)+0.52359877559829887307710723054658F;
-		float leftCalfInitAngle = (3*0.2617994F)+0.52359877559829887307710723054658F;
+		float rightCalfInitAngle = 3 * 0.2617994F + 0.52359877559829887307710723054658F;
+		float leftCalfInitAngle = 3 * 0.2617994F + 0.52359877559829887307710723054658F;
 		float rightFootInitAngle = 3*-0.2617994F;
 		//float leftFootInitAngle = 3*-0.2617994F;
 		RightWrist.rotateAngleX = Math.max(0,-MathHelper.cos(FRL*0.6662F)*1.8F*speedMod);

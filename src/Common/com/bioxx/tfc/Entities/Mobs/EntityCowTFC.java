@@ -74,10 +74,10 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		mateSizeMod = 0;
 		sex = rand.nextInt(2);
 
-		size_mod =(float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion + 1)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1F) * (1.0F - dimorphism * sex));
-		strength_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
-		aggression_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
-		obedience_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + (1f/aggression_mod)));
+		size_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt((degreeOfDiversion + 1) * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1F) * (1.0F - dimorphism * sex));
+		strength_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + size_mod));
+		aggression_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1));
+		obedience_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1f / aggression_mod));
 		this.setSize(0.9F, 1.3F);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(2, new EntityAIMateTFC(this,this.worldObj, 1.0F));
@@ -254,9 +254,9 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 				obedience_mod = TFC_Core.getSmallFloatFromByte(values[3]);
 				
 				familiarity = values[4];
-				familiarizedToday = (values[5] == 1);
-				pregnant = (values[6] == 1);
-				canMilk = (values[7] == 1);
+				familiarizedToday = values[5] == 1;
+				pregnant = values[6] == 1;
+				canMilk = values[7] == 1;
 				
 				try
 				{
@@ -397,7 +397,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		{
 			if (!player.capabilities.isCreativeMode)
 			{
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, (((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, ((ItemFoodTFC) itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this));
 			}
 			this.hunger += 24000;
 			this.func_146082_f(player);
@@ -634,7 +634,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			if(familiarizedToday && familiarity < 100){
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
-				float familiarityChange = (6 * obedience_mod / aggression_mod);
+				float familiarityChange = 6 * obedience_mod / aggression_mod;
 				if (this.isAdult() && familiarity <= 35) // Adult caps at 35
 				{
 					familiarity += familiarityChange;
@@ -659,10 +659,11 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && this.isFood(stack) && !familiarizedToday && ((isAdult() && familiarity < 50) || !isAdult())){
+		if (stack != null && this.isFood(stack) && !familiarizedToday && (isAdult() && familiarity < 50 || !isAdult()))
+		{
 			if (!ep.capabilities.isCreativeMode)
 			{
-				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
+				ep.inventory.setInventorySlotContents(ep.inventory.currentItem, ((ItemFoodTFC) stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this));
 			}
 			else
 			{
@@ -693,7 +694,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			this.setAlwaysRenderNameTag(true);
 			return true;
 		}
-		this.playSound(this.getHurtSound(),  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
+		this.playSound(this.getHurtSound(), 6, rand.nextFloat() / 2F + (isChild() ? 1.25F : 0.75F));
 		return false;
 	}
 

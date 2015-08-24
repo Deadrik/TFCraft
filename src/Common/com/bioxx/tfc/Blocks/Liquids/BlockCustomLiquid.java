@@ -198,11 +198,11 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 		case Water:  return world.getBlock(x, y, z).getMaterial() == Material.water && world.getBlockMetadata(x, y, z) == 0;
 		case Beach:
 			boolean isBeach = TFC_Core.isGround(this);
-			boolean hasWater = (
+			boolean hasWater = 
 					world.getBlock(x - 1, y, z    ).getMaterial() == Material.water ||
 					world.getBlock(x + 1, y, z    ).getMaterial() == Material.water ||
 					world.getBlock(x,     y, z - 1).getMaterial() == Material.water ||
-					world.getBlock(x,     y, z + 1).getMaterial() == Material.water);
+					world.getBlock(x,     y, z + 1).getMaterial() == Material.water;
 			return isBeach && hasWater;
 		}
 

@@ -66,7 +66,7 @@ public class GuiSkills extends GuiContainerTFC
 	{
 		bindTexture(rl);
 		guiLeft = (width - xSize) / 2;
-		guiTop = ((height - ySize) / 2) - 3; //Shifted 3 pixels up to match other inventory tabs
+		guiTop = (height - ySize) / 2 - 3; //Shifted 3 pixels up to match other inventory tabs
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize); //No inventory drawn, so shifted ySize is not necessary
 	}
 

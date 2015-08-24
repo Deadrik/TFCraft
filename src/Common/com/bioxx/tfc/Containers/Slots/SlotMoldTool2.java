@@ -19,8 +19,9 @@ public class SlotMoldTool2 extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if (((itemstack.getItem() instanceof ItemPotteryMold || itemstack.getItem() == TFCItems.CeramicMold) && itemstack.getItemDamage() == 1) ||
-				(itemstack.getItem() instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(itemstack)))
+		if ((itemstack.getItem() instanceof ItemPotteryMold || 
+				itemstack.getItem() == TFCItems.CeramicMold) && itemstack.getItemDamage() == 1 ||
+				itemstack.getItem() instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(itemstack))
 		{
 			return true;
 		}

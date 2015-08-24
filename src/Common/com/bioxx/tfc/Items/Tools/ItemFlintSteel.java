@@ -87,7 +87,8 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 
 				return true;
 			}
-			else if((world.getBlock(x, y, z) == TFCBlocks.Charcoal && world.getBlockMetadata(x, y, z) > 6) || world.getBlock(x, y, z) == Blocks.coal_block)
+			else if (world.getBlock(x, y, z) == TFCBlocks.Charcoal && world.getBlockMetadata(x, y, z) > 6 ||
+						world.getBlock(x, y, z) == Blocks.coal_block)
 			{
 				if(world.getBlock(x, y - 1, z).getMaterial() == Material.rock &&
 						world.getBlock(x + 1, y, z).getMaterial() == Material.rock &&

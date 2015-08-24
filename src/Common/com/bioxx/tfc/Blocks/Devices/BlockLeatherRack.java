@@ -14,14 +14,14 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.TileEntities.TELeatherRack;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Tools.IKnife;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockLeatherRack extends BlockTerraContainer
 {
@@ -43,7 +43,7 @@ public class BlockLeatherRack extends BlockTerraContainer
 			if(te.workedArea != -1 && entityplayer.getCurrentEquippedItem() != null && 
 					entityplayer.getCurrentEquippedItem().getItem() instanceof IKnife) // The player is trying to scrape a piece off the hide.
 			{
-				int coord = (int) Math.floor(hitX / 0.25f) + ((int) Math.floor(hitZ / 0.25f) * 4); // Get location of spot being scraped.
+				int coord = (int) Math.floor(hitX / 0.25f) + (int) Math.floor(hitZ / 0.25f) * 4; // Get location of spot being scraped.
 				te.workArea(coord); // Scrape the spot
 				NBTTagCompound nbt = new NBTTagCompound();
 				nbt.setShort("workedArea", te.workedArea); // Save the scraped spot to NBT

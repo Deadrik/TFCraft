@@ -4,10 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+
 import com.bioxx.tfc.TileEntities.TEWoodConstruct;
 import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 {
@@ -47,7 +47,7 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 		boolean render = false;
 		for(int index = 0; index < dd;)
 		{
-			int in3 = (index >> 3);
+			int in3 = index >> 3;
 			if(te.solidCheck[in3])
 			{
 				minX = 0;
@@ -65,7 +65,7 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 			{
 				minX = 0;
 				maxX = 1;
-				minY = div * ((index & 7)+in3);
+				minY = div * (index & 7 + in3);
 				maxY = minY + div;
 				minZ = 0;
 				maxZ = 1;

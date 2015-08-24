@@ -33,9 +33,9 @@ public class EntityAIPanicTFC extends EntityAIBase
 	@Override
 	public boolean shouldExecute()
 	{
-		if (this.theEntityCreature.getAITarget() == null
-				&& !this.theEntityCreature.isBurning()
-				&& ((this.theEntityCreature instanceof IAnimal && ((IAnimal) this.theEntityCreature).getAttackedVec() == null) || !(this.theEntityCreature instanceof IAnimal)))
+		if (this.theEntityCreature.getAITarget() == null && !this.theEntityCreature.isBurning() &&
+			(this.theEntityCreature instanceof IAnimal && ((IAnimal) this.theEntityCreature).getAttackedVec() == null ||
+				!(this.theEntityCreature instanceof IAnimal)))
 		{
 			return false;
 		}
@@ -76,8 +76,8 @@ public class EntityAIPanicTFC extends EntityAIBase
 
 	public Vec3 updateAttackVec(IAnimal theCreature, Vec3 attackedVec)
 	{
-		if (theCreature.getFearSource() != null
-				&& (TFC_Core.getEntityPos(theEntityCreature).distanceTo(attackedVec) > this.theEntityCreature.getDistanceToEntity(theCreature.getFearSource())))
+		if (theCreature.getFearSource() != null &&
+			TFC_Core.getEntityPos(theEntityCreature).distanceTo(attackedVec) > this.theEntityCreature.getDistanceToEntity(theCreature.getFearSource()))
 		{
 			Vec3 newVec = Vec3.createVectorHelper(theCreature.getFearSource().posX, theCreature.getFearSource().posY, theCreature.getFearSource().posZ);
 			theCreature.setAttackedVec(newVec);

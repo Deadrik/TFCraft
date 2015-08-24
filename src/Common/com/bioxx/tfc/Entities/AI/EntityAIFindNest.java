@@ -134,7 +134,7 @@ public class EntityAIFindNest extends EntityAIBase
 	@Override
 	public void startExecuting()
 	{
-		this.theCreature.getNavigator().tryMoveToXYZ((this.sitableBlockX) + 0.5D, this.sitableBlockY + 1, (this.sitableBlockZ) + 0.5D, this.field_75404_b);
+		this.theCreature.getNavigator().tryMoveToXYZ(this.sitableBlockX + 0.5D, this.sitableBlockY + 1, this.sitableBlockZ + 0.5D, this.field_75404_b);
 		this.currentTick = 0;
 		this.field_75402_d = 0;
 		this.compoundDistance = 0;
@@ -150,7 +150,7 @@ public class EntityAIFindNest extends EntityAIBase
 		
 		if (this.theCreature.getDistanceSq(this.sitableBlockX, this.sitableBlockY + 1, this.sitableBlockZ) > 1.0D)
 		{
-			this.theCreature.getNavigator().tryMoveToXYZ((this.sitableBlockX) + 0.5D, this.sitableBlockY + 1, (this.sitableBlockZ) + 0.5D, this.field_75404_b);
+			this.theCreature.getNavigator().tryMoveToXYZ(this.sitableBlockX + 0.5D, this.sitableBlockY + 1, this.sitableBlockZ + 0.5D, this.field_75404_b);
 			++this.field_75402_d;
 			this.compoundDistance += this.theCreature.getDistance(this.theCreature.lastTickPosX, this.theCreature.lastTickPosY, this.theCreature.lastTickPosZ);
 			if(this.currentTick - 40 > this.lastCheckedTick)

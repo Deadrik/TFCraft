@@ -32,10 +32,10 @@ public class BlockCustomPumpkin extends BlockPumpkin
 	@SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta)
     {
-        return side == 1 ? this.topIcon : (side == 0 ? this.topIcon : // Top or Bottom Side
-        	(meta == 2 && side == 2 ? this.faceIcon : (meta == 3 && side == 5 ? this.faceIcon : // Face Side
-        		(meta == 0 && side == 3 ? this.faceIcon : (meta == 1 && side == 4 ? this.faceIcon : // Face Side
-        			this.blockIcon))))); // Blank Side
+        return side == 1 ? this.topIcon : side == 0 ? this.topIcon : // Top or Bottom Side
+        	meta == 2 && side == 2 ? this.faceIcon : meta == 3 && side == 5 ? this.faceIcon : // Face Side
+        		meta == 0 && side == 3 ? this.faceIcon : meta == 1 && side == 4 ? this.faceIcon : // Face Side
+        			this.blockIcon; // Blank Side
     }
 
 	/**

@@ -209,7 +209,7 @@ public class BlockOre extends BlockCollapsible
 	{
 		if(te != null)
 		{
-			int grade = (te.extraData & 7);
+			int grade = te.extraData & 7;
 			if(grade == 1)
 				ore += 35;
 			else if(grade == 2)

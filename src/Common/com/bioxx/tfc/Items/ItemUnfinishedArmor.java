@@ -58,11 +58,11 @@ public class ItemUnfinishedArmor extends ItemTerra implements ISmeltable
 		return s;
 	}
 
-	@Override
+	/*@Override
 	public String getUnlocalizedName(ItemStack itemstack)
 	{
 		return super.getUnlocalizedName(itemstack);
-	}
+	}*/
 
 	@Override
 	public int getItemStackLimit()

@@ -41,8 +41,8 @@ public class BlockSlab extends BlockPartial
 		TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 		if(8 - (getTopChiselLevel(te.extraData) + getBottomChiselLevel(te.extraData)) < 3)
 		{
-			if((8 - (getSouthChiselLevel(te.extraData) + getNorthChiselLevel(te.extraData)) < 3) || 
-					(8 - (getEastChiselLevel(te.extraData) + getWestChiselLevel(te.extraData)) < 3))
+			if (8 - (getSouthChiselLevel(te.extraData) + getNorthChiselLevel(te.extraData)) < 3 || 
+					8 - (getEastChiselLevel(te.extraData) + getWestChiselLevel(te.extraData)) < 3)
 			{
 				return true;
 			}

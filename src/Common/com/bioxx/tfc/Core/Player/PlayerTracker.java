@@ -2,14 +2,8 @@ package com.bioxx.tfc.Core.Player;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraftforge.event.entity.item.ItemTossEvent;
 
-import com.bioxx.tfc.Handlers.Network.ConfigSyncPacket;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Handlers.Network.AbstractPacket;
-import com.bioxx.tfc.Handlers.Network.InitClientWorldPacket;
-import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
@@ -17,6 +11,13 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ServerDisconnectionFromClientEvent;
+
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Handlers.Network.AbstractPacket;
+import com.bioxx.tfc.Handlers.Network.ConfigSyncPacket;
+import com.bioxx.tfc.Handlers.Network.InitClientWorldPacket;
+import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
 
 public class PlayerTracker
 {
@@ -56,7 +57,7 @@ public class PlayerTracker
 	@SubscribeEvent
 	public void onPlayerRespawn(PlayerRespawnEvent event)
 	{
-		float foodLevel = (event.player.worldObj.rand.nextFloat() * 12) + 12;
+		float foodLevel = event.player.worldObj.rand.nextFloat() * 12 + 12;
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(event.player);
 		foodstats.setFoodLevel(foodLevel);
 		TFC_Core.setPlayerFoodStats(event.player, foodstats);

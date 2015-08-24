@@ -129,17 +129,17 @@ public class ArmourStandHighlightHandler
 		Vec3 playerVec = Vec3.createVectorHelper(player.posX, player.posY + player.eyeHeight, player.posZ);
 		//Vec3 negPlayerVec = Vec3.createVectorHelper(-player.lastTickPosX, -(player.lastTickPosY + player.eyeHeight), -player.lastTickPosZ);
 		//Vec3 zeroVec = Vec3.createVectorHelper(0,0,0);
-		Vec3 distBlockxyz = (playerVec.subtract(Vec3.createVectorHelper(aabb.minX,aabb.minY,aabb.minZ))).normalize();
-		Vec3 distBlockXYZ = (playerVec.subtract(Vec3.createVectorHelper(aabb.maxX,aabb.maxY,aabb.maxZ))).normalize();
+		Vec3 distBlockxyz = playerVec.subtract(Vec3.createVectorHelper(aabb.minX, aabb.minY, aabb.minZ)).normalize();
+		Vec3 distBlockXYZ = playerVec.subtract(Vec3.createVectorHelper(aabb.maxX, aabb.maxY, aabb.maxZ)).normalize();
 
-		Vec3 distBlockxyZ = (playerVec.subtract(Vec3.createVectorHelper(aabb.minX,aabb.minY,aabb.maxZ))).normalize();
-		Vec3 distBlockXYz = (playerVec.subtract(Vec3.createVectorHelper(aabb.maxX,aabb.maxY,aabb.minZ))).normalize();
+		Vec3 distBlockxyZ = playerVec.subtract(Vec3.createVectorHelper(aabb.minX, aabb.minY, aabb.maxZ)).normalize();
+		Vec3 distBlockXYz = playerVec.subtract(Vec3.createVectorHelper(aabb.maxX, aabb.maxY, aabb.minZ)).normalize();
 
-		Vec3 distBlockxYZ = (playerVec.subtract(Vec3.createVectorHelper(aabb.minX,aabb.maxY,aabb.maxZ))).normalize();
-		Vec3 distBlockXyz = (playerVec.subtract(Vec3.createVectorHelper(aabb.maxX,aabb.minY,aabb.minZ))).normalize();
+		Vec3 distBlockxYZ = playerVec.subtract(Vec3.createVectorHelper(aabb.minX, aabb.maxY, aabb.maxZ)).normalize();
+		Vec3 distBlockXyz = playerVec.subtract(Vec3.createVectorHelper(aabb.maxX, aabb.minY, aabb.minZ)).normalize();
 
-		Vec3 distBlockxYz = (playerVec.subtract(Vec3.createVectorHelper(aabb.minX,aabb.maxY,aabb.minZ))).normalize();
-		Vec3 distBlockXyZ = (playerVec.subtract(Vec3.createVectorHelper(aabb.maxX,aabb.minY,aabb.maxZ))).normalize();
+		Vec3 distBlockxYz = playerVec.subtract(Vec3.createVectorHelper(aabb.minX, aabb.maxY, aabb.minZ)).normalize();
+		Vec3 distBlockXyZ = playerVec.subtract(Vec3.createVectorHelper(aabb.maxX, aabb.minY, aabb.maxZ)).normalize();
 			//To ensure that the unit vector is actually within the space, we project the vectors onto it, and make the total length that length
 			double currentLongestProj = 0;
 			currentLongestProj = Math.max(currentLongestProj, unit.dotProduct(distBlockxyz));
@@ -161,20 +161,20 @@ public class ArmourStandHighlightHandler
 		//print(distBlockXyZ);
 		//print(distBlockxyZ);
 		//print(distBlockXYz);
-		boolean insideBoxX = ((unit.xCoord >= distBlockxyz.xCoord)&&(unit.xCoord <= distBlockXYZ.xCoord))||
-				((unit.xCoord >= distBlockxyZ.xCoord)&&(unit.xCoord <= distBlockXYz.xCoord))||
-				((unit.xCoord >= distBlockxYZ.xCoord)&&(unit.xCoord <= distBlockXyz.xCoord))||
-				((unit.xCoord >= distBlockxYz.xCoord)&&(unit.xCoord <= distBlockXyZ.xCoord));
+		boolean insideBoxX = unit.xCoord >= distBlockxyz.xCoord && unit.xCoord <= distBlockXYZ.xCoord ||
+								unit.xCoord >= distBlockxyZ.xCoord && unit.xCoord <= distBlockXYz.xCoord ||
+								unit.xCoord >= distBlockxYZ.xCoord && unit.xCoord <= distBlockXyz.xCoord ||
+								unit.xCoord >= distBlockxYz.xCoord && unit.xCoord <= distBlockXyZ.xCoord;
 
-		boolean insideBoxY = ((unit.yCoord >= distBlockxyz.yCoord)&&(unit.yCoord <= distBlockXYZ.yCoord))||
-				((unit.yCoord >= distBlockxyZ.yCoord)&&(unit.yCoord <= distBlockXYz.yCoord))||
-				((unit.yCoord >= distBlockXyz.yCoord)&&(unit.yCoord <= distBlockxYZ.yCoord))||
-				((unit.yCoord >= distBlockXyZ.yCoord)&&(unit.yCoord <= distBlockxYz.yCoord));
+		boolean insideBoxY = unit.yCoord >= distBlockxyz.yCoord && unit.yCoord <= distBlockXYZ.yCoord ||
+								unit.yCoord >= distBlockxyZ.yCoord && unit.yCoord <= distBlockXYz.yCoord ||
+								unit.yCoord >= distBlockXyz.yCoord && unit.yCoord <= distBlockxYZ.yCoord ||
+								unit.yCoord >= distBlockXyZ.yCoord && unit.yCoord <= distBlockxYz.yCoord;
 
-		boolean insideBoxZ = ((unit.zCoord >= distBlockxyz.zCoord)&&(unit.zCoord <= distBlockXYZ.zCoord))||
-				((unit.zCoord >= distBlockXYz.zCoord)&&(unit.zCoord <= distBlockxyZ.zCoord))||
-				((unit.zCoord >= distBlockXyz.zCoord)&&(unit.zCoord <= distBlockxYZ.zCoord))||
-				((unit.zCoord >= distBlockxYz.zCoord)&&(unit.zCoord <= distBlockXyZ.zCoord));
+		boolean insideBoxZ = unit.zCoord >= distBlockxyz.zCoord && unit.zCoord <= distBlockXYZ.zCoord ||
+								unit.zCoord >= distBlockXYz.zCoord && unit.zCoord <= distBlockxyZ.zCoord ||
+								unit.zCoord >= distBlockXyz.zCoord && unit.zCoord <= distBlockxYZ.zCoord ||
+								unit.zCoord >= distBlockxYz.zCoord && unit.zCoord <= distBlockXyZ.zCoord;
 		//print(playerVec);
 		//print(playerVec.addVector(unit.xCoord, unit.yCoord, unit.zCoord));
 		/*GL11.glEnable(GL11.GL_BLEND);

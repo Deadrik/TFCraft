@@ -203,10 +203,11 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	{
 		NBTTagCompound stackTagCompound = itemstack.getTagCompound();
 
-		if(entityplayer.isSneaking() && stackTagCompound == null && (itemstack.getItem().getUnlocalizedName().indexOf("Double")==-1) && this.isPlaceable(itemstack))
+		if (entityplayer.isSneaking() &&stackTagCompound == null && itemstack.getItem().getUnlocalizedName().indexOf("Double") == -1 &&
+			this.isPlaceable(itemstack))
 		{
 			int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
-			if(!world.isRemote && entityplayer.isSneaking() && (world.getBlock(x, y, z) != TFCBlocks.IngotPile || (side != 1 && side != 0)))
+			if (!world.isRemote && entityplayer.isSneaking() && (world.getBlock(x, y, z) != TFCBlocks.IngotPile || side != 1 && side != 0))
 			{
 
 				if(CreatePile(itemstack, entityplayer, world, x, y, z, side, dir))

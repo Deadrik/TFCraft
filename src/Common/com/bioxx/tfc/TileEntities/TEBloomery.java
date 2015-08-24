@@ -124,7 +124,7 @@ public class TEBloomery extends NetworkTileEntity
 			int[] direction = BlockEarlyBloomery.bloomeryToStackMap[getCharcoalDir(meta)];
 			if(bloomeryLit && TFC_Time.getTotalTicks() > fuelTimeLeft)
 			{
-				if((worldObj.getBlock(xCoord + direction[0], yCoord, zCoord + direction[1])==TFCBlocks.Molten))
+				if (worldObj.getBlock(xCoord + direction[0], yCoord, zCoord + direction[1]) == TFCBlocks.Molten)
 				{
 					if(worldObj.setBlock(xCoord + direction[0], yCoord, zCoord + direction[1], TFCBlocks.Bloom))
 					{
@@ -171,7 +171,7 @@ public class TEBloomery extends NetworkTileEntity
 				}
 			}
 
-			int moltenHeight = Math.max((count/2) - 1, 0);
+			int moltenHeight = Math.max(count / 2 - 1, 0);
 			/*Fill the bloomery stack with molten ore. */
 			for (int i = bloomeryLit ? 0:1, j = bloomeryLit ? moltenHeight + 7 : moltenHeight; j > 0; i++, j-=8)
 			{
@@ -190,7 +190,9 @@ public class TEBloomery extends NetworkTileEntity
 						int m = j > 7 ? 7 : j;
 						if(this.bloomeryLit)
 						{
-							if ((bid == TFCBlocks.Molten && (mMeta & 8) == 0) || bid.isAir(worldObj, xCoord + direction[0], yCoord + i, zCoord + direction[1]) || bid == TFCBlocks.Charcoal)
+							if (bid == TFCBlocks.Molten && (mMeta & 8) == 0 ||
+								bid.isAir(worldObj, xCoord + direction[0], yCoord + i, zCoord + direction[1]) ||
+								bid == TFCBlocks.Charcoal)
 							{
 								m += 8;
 								worldObj.setBlock(xCoord + direction[0], yCoord + i, zCoord + direction[1], TFCBlocks.Molten, m, 2);

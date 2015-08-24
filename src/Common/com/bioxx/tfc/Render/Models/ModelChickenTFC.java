@@ -78,15 +78,15 @@ public class ModelChickenTFC extends ModelBase
 
 		GL11.glPushMatrix ();
 
-		GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
+		GL11.glTranslatef(0.0F, 0.75f - (0.75f * percent), 0f);
 		GL11.glScalef(1/ageScale, 1/ageScale, 1/ageScale);
 
 		if(percent >= 0.75 && ((IAnimal)entity).getGender() == GenderEnum.MALE){
 			crown.isHidden = false;
-			this.body.rotateAngleX = ((float)Math.PI / 4F);
-			this.rightWing.rotateAngleX = ((float)Math.PI / 4F);
+			this.body.rotateAngleX = (float) Math.PI / 4F;
+			this.rightWing.rotateAngleX = (float) Math.PI / 4F;
 			rightWing.setRotationPoint(-4.0F,13.5f, -2.5F);
-			this.leftWing.rotateAngleX = ((float)Math.PI / 4F);
+			this.leftWing.rotateAngleX = (float) Math.PI / 4F;
 			leftWing.setRotationPoint(4.0F,13.5f, -2.5F);
 			this.head.setRotationPoint(0.0F, 13, -1.0F);
 			this.bill.setRotationPoint(0.0F, 13, -1.0F);
@@ -103,7 +103,7 @@ public class ModelChickenTFC extends ModelBase
 		GL11.glPopMatrix();
 
 		GL11.glPushMatrix();
-		GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
+		GL11.glTranslatef(0.0F, 0.75f - (0.75f * percent), 0f);
 		GL11.glScalef(1/ageScale, 1/ageScale, 1/ageScale);
 		this.body.render(par7);
 		this.rightLeg.render(par7);
@@ -132,7 +132,7 @@ public class ModelChickenTFC extends ModelBase
 		this.bill.rotateAngleY = this.head.rotateAngleY;
 		this.chin.rotateAngleX = this.head.rotateAngleX;
 		this.chin.rotateAngleY = this.head.rotateAngleY;
-		this.body.rotateAngleX = ((float)Math.PI / 2F);
+		this.body.rotateAngleX = (float) Math.PI / 2F;
 		/*this.tail1.rotateAngleX = ((float)Math.PI*3 / 4F);
         this.tail1.rotateAngleZ = ((float)Math.PI / 8F);
         this.tail2.rotateAngleX = ((float)Math.PI*3 / 4F);
@@ -144,8 +144,8 @@ public class ModelChickenTFC extends ModelBase
 		crown.isHidden = true;
 
 		for(int i = 0;i<32;i++){
-			tails[i].rotateAngleX = ((float)Math.PI*3 / 5F)+(float)((i%3)*Math.PI/32)*(i%2!=0?1:-1);
-			tails[i].rotateAngleZ = ((float)Math.PI / -2)+((float)Math.PI*i/31);
+			tails[i].rotateAngleX = (float) Math.PI * 3 / 5F + (float) ((i % 3) * Math.PI / 32) * (i % 2 != 0 ? 1 : -1);
+			tails[i].rotateAngleZ = (float) Math.PI / -2 + (float) Math.PI * i / 31;
 		}
 		this.rightLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
 		this.leftLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;

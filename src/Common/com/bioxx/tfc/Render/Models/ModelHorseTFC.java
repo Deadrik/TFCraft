@@ -6,14 +6,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
 import com.bioxx.tfc.api.Entities.IAnimal;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelHorseTFC extends ModelBase
@@ -159,11 +159,11 @@ public class ModelHorseTFC extends ModelBase
         this.muleLeftChest = new ModelRenderer(this, 0, 34);
         this.muleLeftChest.addBox(-3.0F, 0.0F, 0.0F, 8, 8, 3);
         this.muleLeftChest.setRotationPoint(-7.5F, 3.0F, 10.0F);
-        this.setBoxRotation(this.muleLeftChest, 0.0F, ((float)Math.PI / 2F), 0.0F);
+		this.setBoxRotation(this.muleLeftChest, 0.0F, (float) Math.PI / 2F, 0.0F);
         this.muleRightChest = new ModelRenderer(this, 0, 47);
         this.muleRightChest.addBox(-3.0F, 0.0F, 0.0F, 8, 8, 3);
         this.muleRightChest.setRotationPoint(4.5F, 3.0F, 10.0F);
-        this.setBoxRotation(this.muleRightChest, 0.0F, ((float)Math.PI / 2F), 0.0F);
+		this.setBoxRotation(this.muleRightChest, 0.0F, (float) Math.PI / 2F, 0.0F);
         this.horseSaddleBottom = new ModelRenderer(this, 80, 0);
         this.horseSaddleBottom.addBox(-5.0F, 0.0F, -3.0F, 10, 1, 8);
         this.horseSaddleBottom.setRotationPoint(0.0F, 2.0F, 2.0F);
@@ -251,9 +251,9 @@ public class ModelHorseTFC extends ModelBase
 		//float offset = 1.4f - percent;
 
 		GL11.glPushMatrix();
-		GL11.glTranslatef (0.0F, (0.3f-(0.3f*percent)), 0f);
+		GL11.glTranslatef(0.0F, 0.3f - (0.3f * percent), 0f);
 		GL11.glPushMatrix ();
-		GL11.glScalef(1/ageScale, 1/ageScale + (0.25F * (1-percent)), 1/ageScale);
+		GL11.glScalef(1 / ageScale, 1 / ageScale + 0.25F * (1 - percent), 1 / ageScale);
 		GL11.glTranslatef(0.0F, 0.95F * (1.0F - f7) * (1-percent), 0.0F);
 		/*
         if (!flag)
@@ -464,7 +464,7 @@ public class ModelHorseTFC extends ModelBase
         this.mane.rotateAngleY = this.head.rotateAngleY;
         this.muleLeftChest.rotateAngleX = f14 / 5.0F;
         this.muleRightChest.rotateAngleX = -f14 / 5.0F;
-        float f15 = ((float)Math.PI / 2F);
+		float f15 = (float) Math.PI / 2F;
 		//float f16 = ((float)Math.PI * 3F / 2F);
 		//float f17 = -1.0471976F;
         float f18 = 0.2617994F * f9;
@@ -473,16 +473,16 @@ public class ModelHorseTFC extends ModelBase
         this.frontLeftLeg.rotationPointZ = -2.0F * f9 + -8.0F * f10;
         this.frontRightLeg.rotationPointY = this.frontLeftLeg.rotationPointY;
         this.frontRightLeg.rotationPointZ = this.frontLeftLeg.rotationPointZ;
-        this.backLeftShin.rotationPointY = this.backLeftLeg.rotationPointY + MathHelper.sin(((float)Math.PI / 2F) + f18 + f10 * -f13 * 0.5F * p_78086_3_) * 7.0F;
-        this.backLeftShin.rotationPointZ = this.backLeftLeg.rotationPointZ + MathHelper.cos(((float)Math.PI * 3F / 2F) + f18 + f10 * -f13 * 0.5F * p_78086_3_) * 7.0F;
-        this.backRightShin.rotationPointY = this.backRightLeg.rotationPointY + MathHelper.sin(((float)Math.PI / 2F) + f18 + f10 * f13 * 0.5F * p_78086_3_) * 7.0F;
-        this.backRightShin.rotationPointZ = this.backRightLeg.rotationPointZ + MathHelper.cos(((float)Math.PI * 3F / 2F) + f18 + f10 * f13 * 0.5F * p_78086_3_) * 7.0F;
+		this.backLeftShin.rotationPointY = this.backLeftLeg.rotationPointY + MathHelper.sin((float) Math.PI / 2F + f18 + f10 * -f13 * 0.5F * p_78086_3_) * 7.0F;
+        this.backLeftShin.rotationPointZ = this.backLeftLeg.rotationPointZ + MathHelper.cos((float) Math.PI * 3F / 2F + f18 + f10 * -f13 * 0.5F * p_78086_3_) * 7.0F;
+        this.backRightShin.rotationPointY = this.backRightLeg.rotationPointY + MathHelper.sin((float) Math.PI / 2F + f18 + f10 * f13 * 0.5F * p_78086_3_) * 7.0F;
+        this.backRightShin.rotationPointZ = this.backRightLeg.rotationPointZ + MathHelper.cos((float) Math.PI * 3F / 2F + f18 + f10 * f13 * 0.5F * p_78086_3_) * 7.0F;
         float f20 = (-1.0471976F + f19) * f9 + f14 * f10;
         float f21 = (-1.0471976F + -f19) * f9 + -f14 * f10;
-        this.frontLeftShin.rotationPointY = this.frontLeftLeg.rotationPointY + MathHelper.sin(((float)Math.PI / 2F) + f20) * 7.0F;
-        this.frontLeftShin.rotationPointZ = this.frontLeftLeg.rotationPointZ + MathHelper.cos(((float)Math.PI * 3F / 2F) + f20) * 7.0F;
-        this.frontRightShin.rotationPointY = this.frontRightLeg.rotationPointY + MathHelper.sin(((float)Math.PI / 2F) + f21) * 7.0F;
-        this.frontRightShin.rotationPointZ = this.frontRightLeg.rotationPointZ + MathHelper.cos(((float)Math.PI * 3F / 2F) + f21) * 7.0F;
+        this.frontLeftShin.rotationPointY = this.frontLeftLeg.rotationPointY + MathHelper.sin((float) Math.PI / 2F + f20) * 7.0F;
+        this.frontLeftShin.rotationPointZ = this.frontLeftLeg.rotationPointZ + MathHelper.cos((float) Math.PI * 3F / 2F + f20) * 7.0F;
+        this.frontRightShin.rotationPointY = this.frontRightLeg.rotationPointY + MathHelper.sin((float) Math.PI / 2F + f21) * 7.0F;
+        this.frontRightShin.rotationPointZ = this.frontRightLeg.rotationPointZ + MathHelper.cos((float) Math.PI * 3F / 2F + f21) * 7.0F;
         this.backLeftLeg.rotateAngleX = f18 + -f13 * 0.5F * p_78086_3_ * f10;
         this.backLeftShin.rotateAngleX = -0.08726646F * f9 + (-f13 * 0.5F * p_78086_3_ - Math.max(0.0F, f13 * 0.5F * p_78086_3_)) * f10;
         this.backLeftHoof.rotateAngleX = this.backLeftShin.rotateAngleX;

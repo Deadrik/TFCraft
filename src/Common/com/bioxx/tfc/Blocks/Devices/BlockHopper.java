@@ -310,7 +310,7 @@ public class BlockHopper extends BlockTerraContainer
 	@SideOnly(Side.CLIENT)
 	public static IIcon getHopperIcon(String p_149916_0_)
 	{
-		return p_149916_0_.equals("hopper_outside") ? hopper_outside : (p_149916_0_.equals("hopper_inside") ? hopper_inside : null);
+		return p_149916_0_.equals("hopper_outside") ? hopper_outside : p_149916_0_.equals("hopper_inside") ? hopper_inside : null;
 	}
 
 	public static TEHopper getHopperTE(IBlockAccess access, int x, int y, int z)

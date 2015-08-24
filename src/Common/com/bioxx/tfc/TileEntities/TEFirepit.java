@@ -218,10 +218,11 @@ public class TEFirepit extends TEFireEntity implements IInventory
 					{
 						fireItemStacks[8] = output.copy();
 					}
-					else if((fireItemStacks[7].stackSize == fireItemStacks[7].getMaxStackSize() && fireItemStacks[8].stackSize == fireItemStacks[8].getMaxStackSize())
-							|| (fireItemStacks[7].getItem() != output.getItem() && fireItemStacks[8].getItem() != output.getItem())
-							|| (fireItemStacks[7].stackSize == fireItemStacks[7].getMaxStackSize() && fireItemStacks[8].getItem() != output.getItem())
-							|| (fireItemStacks[7].getItem() != output.getItem() && fireItemStacks[8].stackSize == fireItemStacks[8].getMaxStackSize()))
+					else if (fireItemStacks[7].stackSize == fireItemStacks[7].getMaxStackSize() &&
+								fireItemStacks[8].stackSize == fireItemStacks[8].getMaxStackSize() ||
+								fireItemStacks[7].getItem() != output.getItem() && fireItemStacks[8].getItem() != output.getItem() ||
+								fireItemStacks[7].stackSize == fireItemStacks[7].getMaxStackSize() && fireItemStacks[8].getItem() != output.getItem() ||
+								fireItemStacks[7].getItem() != output.getItem() && fireItemStacks[8].stackSize == fireItemStacks[8].getMaxStackSize())
 					{
 						fireItemStacks[1] = output.copy();
 					}
@@ -364,7 +365,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 				float temp = TFC_ItemHeat.GetTemp(is);
 				if (fuelTimeLeft > 0 && is.getItem() instanceof ICookableFood)
 				{
-					float inc = Food.getCooked(is) + Math.min((fireTemp / 700), 2f);
+					float inc = Food.getCooked(is) + Math.min(fireTemp / 700, 2f);
 					Food.setCooked(is, inc);
 					temp = inc;
 					if (Food.isCooked(is))
@@ -438,8 +439,8 @@ public class TEFirepit extends TEFireEntity implements IInventory
 
 			smokeFoods();
 
-			hasCookingPot = (fireItemStacks[1] != null && fireItemStacks[1].getItem() == TFCItems.PotteryPot && 
-					fireItemStacks[1].getItemDamage() == 1);
+			hasCookingPot = fireItemStacks[1] != null &&fireItemStacks[1].getItem() == TFCItems.PotteryPot &&
+							fireItemStacks[1].getItemDamage() == 1;
 
 			//Now we cook the input item
 			CookItem();
@@ -447,12 +448,12 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			//push the input fuel down the stack
 			HandleFuelStack();
 
-			if((fireTemp < 1) && (worldObj.getBlockMetadata(xCoord, yCoord, zCoord) != 0))
+			if (fireTemp < 1 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord) != 0)
 			{
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
-			else if((fireTemp >= 1) && (worldObj.getBlockMetadata(xCoord, yCoord, zCoord) != 1))
+			else if (fireTemp >= 1 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord) != 1)
 			{
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -468,7 +469,8 @@ public class TEFirepit extends TEFireEntity implements IInventory
 				}
 			}
 			else if(fuelTimeLeft <= 0 && fireTemp >= 1 && fireItemStacks[5] != null &&
-					((!worldObj.canLightningStrikeAt(xCoord, yCoord, zCoord) && !worldObj.canLightningStrikeAt(xCoord, yCoord+1, zCoord)) || !worldObj.isRaining()))
+						(!worldObj.canLightningStrikeAt(xCoord, yCoord, zCoord) && !worldObj.canLightningStrikeAt(xCoord, yCoord + 1, zCoord) ||
+							!worldObj.isRaining()))
 			{
 				if(fireItemStacks[5] != null)
 				{

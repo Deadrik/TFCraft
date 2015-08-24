@@ -62,8 +62,8 @@ public class BodyTempStats
 		extraWaterConsumed = 0; //(temperatureLevel >0 && heatStorage <= 0 && rand.nextInt(350)<100)?temperatureLevel/10:0;
 
 		if(temperatureLevel != prevTemperatureLevel &&
-				!((prevTemperatureLevel >=-10 && prevTemperatureLevel <=10) &&
-						(temperatureLevel >=-10 && temperatureLevel <=10)))
+				!(prevTemperatureLevel >=-10 && prevTemperatureLevel <=10 &&
+						temperatureLevel >=-10 && temperatureLevel <=10))
 		{
 			tellPlayerMessage(player);
 		}
@@ -140,9 +140,9 @@ public class BodyTempStats
 				for(int k = z-7;k<z+7;k++)
 				{
 					TileEntity te = player.worldObj.getTileEntity(i, j, k);
-					if((player.worldObj.getBlock(i, j, k) == Blocks.lava ||
-							player.worldObj.getBlock(i, j, k) == TFCBlocks.Lava) ||
-							(te != null && te instanceof TEFireEntity))
+					if(player.worldObj.getBlock(i, j, k) == Blocks.lava ||
+							player.worldObj.getBlock(i, j, k) == TFCBlocks.Lava ||
+							te instanceof TEFireEntity)
 					{
 						//returnAmount += (rand.nextInt(2000 - 198*(10-( (int)player.getDistance(i, j, k) )) )<10?1:0);
 						//Lava averages 700-1200 C = 950 C, assume source is lava.

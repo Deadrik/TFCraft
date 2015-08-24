@@ -67,11 +67,12 @@ public class ItemPlank extends ItemTerra
 
 			if(side == 0)
 			{
-				if((!isConstruct && isAir) || (isConstruct && isEdge && world.isAirBlock(i, j-offset, k)))
+				if (!isConstruct && isAir ||
+					isConstruct && isEdge && world.isAirBlock(i, j - offset, k))
 					world.setBlock(i, j-1, k, TFCBlocks.WoodConstruct);
 
 				TileEntity tile = world.getTileEntity(i, j-offset, k);
-				if((tile == null) || (!(tile instanceof TEWoodConstruct)))
+				if (!(tile instanceof TEWoodConstruct))
 					return false;
 				int index = dd+(x+(z*d));
 				TEWoodConstruct te = (TEWoodConstruct)tile;
@@ -85,12 +86,15 @@ public class ItemPlank extends ItemTerra
 			}
 			else if(side == 1)
 			{
-				if((!isConstruct && isAir) || (isConstruct && isEdge && world.isAirBlock(i, j+offset, k))) {
+				if (!isConstruct && isAir ||
+					isConstruct && isEdge && world.isAirBlock(i, j + offset, k))
+				{
 					world.setBlock(i, j+1, k, TFCBlocks.WoodConstruct);
 				}
 
 				TileEntity tile = world.getTileEntity(i, j+offset, k);
-				if((tile == null) || (!(tile instanceof TEWoodConstruct))) {
+				if (!(tile instanceof TEWoodConstruct))
+				{
 					return false;
 				}
 				int index = dd+(x+(z*d));
@@ -105,12 +109,15 @@ public class ItemPlank extends ItemTerra
 			}
 			else if(side == 2)
 			{
-				if((!isConstruct && isAir) || (isConstruct && isEdge && world.isAirBlock(i, j, k-offset))) {
+				if (!isConstruct && isAir ||
+					isConstruct && isEdge && world.isAirBlock(i, j, k - offset))
+				{
 					world.setBlock(i, j, k-1, TFCBlocks.WoodConstruct);
 				}
 
 				TileEntity tile = world.getTileEntity(i, j, k-offset);
-				if((tile == null) || (!(tile instanceof TEWoodConstruct))) {
+				if (!(tile instanceof TEWoodConstruct))
+				{
 					return false;
 				}
 				int index = dd2+(x+(y*d));
@@ -125,12 +132,15 @@ public class ItemPlank extends ItemTerra
 			}
 			else if(side == 3)
 			{
-				if((!isConstruct && isAir) || (isConstruct && isEdge && world.isAirBlock(i, j, k+offset))) {
+				if (!isConstruct && isAir ||
+					isConstruct && isEdge && world.isAirBlock(i, j, k + offset))
+				{
 					world.setBlock(i, j, k+1, TFCBlocks.WoodConstruct);
 				}
 
 				TileEntity tile = world.getTileEntity(i, j, k+offset);
-				if((tile == null) || (!(tile instanceof TEWoodConstruct))) {
+				if (!(tile instanceof TEWoodConstruct))
+				{
 					return false;
 				}
 				int index = dd2+(x+(y*d));
@@ -145,12 +155,15 @@ public class ItemPlank extends ItemTerra
 			}
 			else if(side == 4)
 			{
-				if((!isConstruct && isAir) || (isConstruct && isEdge && world.isAirBlock(i-offset, j, k))) {
+				if (!isConstruct && isAir ||
+					isConstruct && isEdge && world.isAirBlock(i - offset, j, k))
+				{
 					world.setBlock(i-1, j, k, TFCBlocks.WoodConstruct);
 				}
 
 				TileEntity tile = world.getTileEntity(i-offset, j, k);
-				if((tile == null) || (!(tile instanceof TEWoodConstruct))) {
+				if (!(tile instanceof TEWoodConstruct))
+				{
 					return false;
 				}
 				int index = (y+(z*d));
@@ -165,12 +178,15 @@ public class ItemPlank extends ItemTerra
 			}
 			else if(side == 5)
 			{
-				if((!isConstruct && isAir) || (isConstruct && isEdge && world.isAirBlock(i+offset, j, k))) {
+				if (!isConstruct && isAir ||
+					isConstruct && isEdge && world.isAirBlock(i + offset, j, k))
+				{
 					world.setBlock(i+1, j, k, TFCBlocks.WoodConstruct);
 				}
 
 				TileEntity tile = world.getTileEntity(i+offset, j, k);
-				if((tile == null) || (!(tile instanceof TEWoodConstruct))) {
+				if (!(tile instanceof TEWoodConstruct))
+				{
 					return false;
 				}
 				int index = (y+(z*d));

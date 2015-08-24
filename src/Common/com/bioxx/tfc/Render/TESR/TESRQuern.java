@@ -12,12 +12,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TileEntities.TEQuern;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class TESRQuern extends TESRBase implements ISimpleBlockRenderingHandler
 {
@@ -81,7 +81,8 @@ public class TESRQuern extends TESRBase implements ISimpleBlockRenderingHandler
 		double rad = 0.5; // radius of the quern stone
 
 		// This gives a vibrating animation effect, it can be commented out if it becomes a performance issue
-		if(pos > 0) C = 0.494 + ((rand.nextDouble() * (0.003 - (-0.003))) + 0.003);
+		if (pos > 0)
+			C = 0.494 + (rand.nextDouble() * (0.003 - (-0.003))) + 0.003;
 
 		for(int l = 0; l < sides; l++)
 		{
@@ -166,10 +167,10 @@ public class TESRQuern extends TESRBase implements ISimpleBlockRenderingHandler
 		double rad = 0.5; // radius of the quern stone
 
 		//Draw wooden handle
-		double a = (((pos * 4) - 5 + speed) * Math.PI) / 180;
-		double a1 = (((pos * 4) - 5.7 + speed) * Math.PI) / 180;
-		double b = (((pos * 4) + 5 + speed) * Math.PI) / 180;
-		double b1 = (((pos * 4) + 5.7 + speed) * Math.PI) / 180;
+		double a = ((pos * 4 - 5 + speed) * Math.PI) / 180;
+		double a1 = ((pos * 4 - 5.7 + speed) * Math.PI) / 180;
+		double b = ((pos * 4 + 5 + speed) * Math.PI) / 180;
+		double b1 = ((pos * 4 + 5.7 + speed) * Math.PI) / 180;
 		double x1 = Math.cos(a + angle) * (rad - 0.05) + C;
 		double y1 = Math.sin(a + angle) * (rad - 0.05) + C;
 		double xx1 = Math.cos(a1 + angle) * (rad - 0.125) + C;

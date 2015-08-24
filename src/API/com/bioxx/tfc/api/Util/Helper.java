@@ -77,7 +77,7 @@ public class Helper {
 	 */
 	public static float clamp_float(float par0, float par1, float par2)
 	{
-		return par0 < par1 ? par1 : (par0 > par2 ? par2 : par0);
+		return par0 < par1 ? par1 : par0 > par2 ? par2 : par0;
 	}
 
 	public static float roundNumber(float input, float rounding)

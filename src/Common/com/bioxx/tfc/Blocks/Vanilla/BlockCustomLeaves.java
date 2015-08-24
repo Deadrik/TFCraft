@@ -86,15 +86,26 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 		Block block = world.getBlock(x, y, z);
 		/*if(!Minecraft.isFancyGraphicsEnabled() && block == this) 
 			return false;*/
-
-		return side == 0 && this.minY > 0.0D ? true : (side == 1 && this.maxY < 1.0D ? true : (side == 2 && this.minZ > 0.0D ? true : (side == 3 && this.maxZ < 1.0D ? true : (side == 4 && this.minX > 0.0D ? true : (side == 5 && this.maxX < 1.0D ? true : !block.isOpaqueCube())))));
+		if (side == 0 && this.minY > 0.0D)
+			return true;
+		else if (side == 1 && this.maxY < 1.0D)
+			return true;
+		else if (side == 2 && this.minZ > 0.0D)
+			return true;
+		else if (side == 3 && this.maxZ < 1.0D)
+			return true;
+		else if (side == 4 && this.minX > 0.0D)
+			return true;
+		else if (side == 5 && this.maxX < 1.0D)
+			return true;
+		else
+			return !block.isOpaqueCube();
 	}
 
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
 		onNeighborBlockChange(world, x, y, z, null);
-		return;
 	}
 
 	@Override
@@ -132,7 +143,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 
 							if (block == TFCBlocks.LogNatural || block == TFCBlocks.LogNatural2)
 								this.adjacentTreeBlocks[xd + center][yd + center][zd + center] = 0;
-							else if ((block == this) && var6 == world.getBlockMetadata(xOrig + xd, yOrig + yd, zOrig + zd))
+							else if (block == this && var6 == world.getBlockMetadata(xOrig + xd, yOrig + yd, zOrig + zd))
 								this.adjacentTreeBlocks[xd + center][yd + center][zd + center] = -2;
 							else
 								this.adjacentTreeBlocks[xd + center][yd + center][zd + center] = -1;

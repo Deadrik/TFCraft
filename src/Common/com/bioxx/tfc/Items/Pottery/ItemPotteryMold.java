@@ -9,11 +9,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Core.TFC_Core;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class ItemPotteryMold extends ItemPotteryBase
 {
@@ -68,7 +68,7 @@ public class ItemPotteryMold extends ItemPotteryBase
 	{
 		if(par1ItemStack !=null && par1ItemStack.getItemDamage() > 5)
 		{
-			int damage = ((par1ItemStack.getItemDamage() - 2)%4) + 2;
+			int damage = (par1ItemStack.getItemDamage() - 2) % 4 + 2;
 			return super.getUnlocalizedName(par1ItemStack) + "." + MetaNames[damage];
 		}
 		return super.getUnlocalizedName(par1ItemStack);
@@ -79,7 +79,7 @@ public class ItemPotteryMold extends ItemPotteryBase
 	{
 		if(damage > 5)
 		{
-			damage = ((damage - 2)%4) + 2;
+			damage = (damage - 2) % 4 + 2;
 		}
 		if(damage == 0) return this.ClayIcon;
 		else if(damage == 1) return this.CeramicIcon;

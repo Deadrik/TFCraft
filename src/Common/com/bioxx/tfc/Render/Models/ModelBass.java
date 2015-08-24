@@ -156,22 +156,24 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
   @Override
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
   {
-    super.setRotationAngles(f, f1, f2, f3, f4, f5,entity);
-    
-   	n = (TFC_Time.getTotalTicks() % 30);
-   	rotateMouth = (n)*(n - 30)*(0.0044f * 0.5f);
-   	rotateSwim = (n)*(n - 30)*(-0.0044f);
-   	
-    setRotation(Mouth, -0.2617994F + (-0.2617994F *rotateMouth), 0F, 0F);
-    
-    if(entity.isInWater() || entity.isAirBorne){
-    	setRotation(TailEnd, 0F, -0.2617994F + (0.2617994F * rotateSwim * (entity.isAirBorne?4:2)), 0F);
-    	setRotation(TailFin, 0F, -0.2617994F + (0.2617994F * rotateSwim * (entity.isAirBorne?4:2)), 0F);
-    }
-    else{
-    	setRotation(TailEnd, 0F, 0F, 0F);
-    	setRotation(TailFin, 0F, 0F, 0F);
-    }
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+
+		n = TFC_Time.getTotalTicks() % 30;
+		rotateMouth = (n) * (n - 30) * (0.0044f * 0.5f);
+		rotateSwim = (n) * (n - 30) * ( -0.0044f);
+
+		setRotation(Mouth, -0.2617994F + -0.2617994F * rotateMouth, 0F, 0F);
+
+		if (entity.isInWater() || entity.isAirBorne)
+		{
+			setRotation(TailEnd, 0F, -0.2617994F + 0.2617994F * rotateSwim * (entity.isAirBorne ? 4 : 2), 0F);
+			setRotation(TailFin, 0F, -0.2617994F + 0.2617994F * rotateSwim * (entity.isAirBorne ? 4 : 2), 0F);
+		}
+		else
+		{
+			setRotation(TailEnd, 0F, 0F, 0F);
+			setRotation(TailFin, 0F, 0F, 0F);
+		}
   }
 
 }

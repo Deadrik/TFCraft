@@ -285,7 +285,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 			{
 				buttonList.add(new GuiButton(101, guiLeft,              guiTop - 50, 20, 20, "<"));
 				buttonList.add(new GuiButton(102, guiLeft + xSize - 20, guiTop - 50, 20, 20, ">"));
-				maxPages = ((tabCount - 12) / 10) + 1;
+				maxPages = (tabCount - 12) / 10 + 1;
 			}
 		}
 		else
@@ -635,7 +635,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 		super.drawScreen(par1, par2, par3);
 		CreativeTabs[] acreativetabs = CreativeTabs.creativeTabArray;
 		int start = tabPage * 10;
-		int i2 = Math.min(acreativetabs.length, ((tabPage + 1) * 10) + 2);
+		int i2 = Math.min(acreativetabs.length, (tabPage + 1) * 10 + 2);
 		if (tabPage != 0) start += 2;
 		boolean rendered = false;
 

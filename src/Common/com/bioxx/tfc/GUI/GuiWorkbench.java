@@ -18,16 +18,16 @@ public class GuiWorkbench extends GuiContainer
 		super(new ContainerWorkbench(inventoryplayer, wb,world, i, j, k));
 	}
 
-	@Override
+	/*@Override
 	public void onGuiClosed()
 	{
 		super.onGuiClosed();
-	}
+	}*/
 
 	protected void drawGuiContainerForegroundLayer()
 	{
 		fontRendererObj.drawString(TFC_Core.translate("gui.Workbench.Crafting"), 28, 6, 0x404040);
-		fontRendererObj.drawString(TFC_Core.translate("gui.Inventory"), 8, (ySize - 96) + 2, 0x404040);
+		fontRendererObj.drawString(TFC_Core.translate("gui.Inventory"), 8, ySize - 96 + 2, 0x404040);
 	}
 
 	@Override

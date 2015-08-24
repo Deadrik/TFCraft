@@ -47,9 +47,9 @@ public class GuiKnapping extends GuiContainerTFC
 				// Normal Behavior
 				if (!previouslyLoaded)
 				{
-					if (PlayerManagerTFC.getInstance().getClientPlayer().knappingInterface[(y * 5) + x])
+					if (PlayerManagerTFC.getInstance().getClientPlayer().knappingInterface[y * 5 + x])
 					{
-						resetButton((y * 5) + x);
+						resetButton(y * 5 + x);
 					}
 				}
 				// GUI has been reloaded, usually caused by looking up a recipe in NEI while having the interface open.
@@ -60,9 +60,9 @@ public class GuiKnapping extends GuiContainerTFC
 					 * Types that completely remove pieces (rocks, leather) work properly to save states when reloaded with this.
 					 */
 					if (PlayerManagerTFC.getInstance().getClientPlayer().specialCraftingType.getItem() != TFCItems.FlatClay && 
-							((ContainerSpecialCrafting) this.inventorySlots).craftMatrix.getStackInSlot((y * 5) + x) == null)
+						((ContainerSpecialCrafting) this.inventorySlots).craftMatrix.getStackInSlot(y * 5 + x) == null)
 					{
-						resetButton((y * 5) + x);
+						resetButton(y * 5 + x);
 					}
 				}
 			}

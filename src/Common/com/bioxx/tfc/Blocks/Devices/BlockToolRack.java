@@ -9,21 +9,17 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemShears;
-import net.minecraft.item.ItemSpade;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
+import net.minecraft.item.*;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
@@ -33,9 +29,6 @@ import com.bioxx.tfc.Items.Tools.ItemWeapon;
 import com.bioxx.tfc.TileEntities.TEToolRack;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockToolRack extends BlockTerraContainer
 {
@@ -172,7 +165,7 @@ public class BlockToolRack extends BlockTerraContainer
 		{
 			// tile entity should still be valid at this point, so get the wood type and drop the rack
 			TileEntity te = world.getTileEntity(x, y, z);
-			if((te != null) && (te instanceof TEToolRack))
+			if (te instanceof TEToolRack)
 			{
 				TEToolRack rack = (TEToolRack) te;
 				dropBlockAsItem(world, x, y, z, new ItemStack(TFCBlocks.ToolRack, 1, rack.woodType));

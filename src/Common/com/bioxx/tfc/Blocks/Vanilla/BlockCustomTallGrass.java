@@ -15,21 +15,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IShearable;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.ColorizerFoliageTFC;
-import com.bioxx.tfc.Core.ColorizerGrassTFC;
-import com.bioxx.tfc.Core.Recipes;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.api.TFCItems;
+import net.minecraftforge.common.IShearable;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.*;
+import com.bioxx.tfc.api.TFCItems;
 
 public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 {
@@ -250,7 +245,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 			if(w.rand.nextInt(Math.max(((int)((160)/(temp-4))),1)) < 2) //chirp intensity grows with higher temperature
 			{
 				float vol = 0.1f + (w.rand.nextFloat() * 0.20F); // keep the volume between 0 and 0.3
-				float pitch = ((temp / 100) * 2) + 0.5F + vol; // the chirp frequency will change depending on the climate temperature
+				float pitch = (temp / 100) * 2 + 0.5F + vol; // the chirp frequency will change depending on the climate temperature
 				w.playSoundEffect(x, y, z, TFC_Sounds.CRICKET, vol, pitch);
 			}
 

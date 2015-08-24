@@ -75,9 +75,9 @@ public class BlockFruitLeaves extends BlockTerraContainer
 	public IIcon getIcon(int side, int meta)
 	{
 		if (TerraFirmaCraft.proxy.getGraphicsLevel())
-			return icons[(meta & 7)];
+			return icons[meta & 7];
 		else
-			return iconsOpaque[(meta & 7)];
+			return iconsOpaque[meta & 7];
 	}
 
 	@Override
@@ -257,7 +257,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 			FloraManager manager = FloraManager.getInstance();
 			FloraIndex fi = manager.findMatchingIndex(getType(this, world.getBlockMetadata(x, y, z) & 7));
 
-			if (fi != null && (fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) || fi.inHarvest(((TFC_Time.getSeasonAdjustedMonth(z) - 1) + 12) % 12) && (meta & 8) == 8))
+			if (fi != null && (fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) || fi.inHarvest((TFC_Time.getSeasonAdjustedMonth(z) + 11) % 12) && (meta & 8) == 8))
 			{
 				TEFruitLeaves te = (TEFruitLeaves) world.getTileEntity(x, y, z);
 				if (te != null && te.hasFruit)
@@ -281,7 +281,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 			FloraManager manager = FloraManager.getInstance();
 			FloraIndex fi = manager.findMatchingIndex(getType(this, world.getBlockMetadata(x, y, z) & 7));
 
-			if(fi != null && (fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) || fi.inHarvest(((TFC_Time.getSeasonAdjustedMonth(z) - 1) + 12)%12) && (meta & 8) == 8))
+			if (fi != null && (fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) || fi.inHarvest((TFC_Time.getSeasonAdjustedMonth(z) + 11) % 12) && (meta & 8) == 8))
 			{
 				TEFruitLeaves te = (TEFruitLeaves) world.getTileEntity(x, y, z);
 				if(te != null && te.hasFruit)

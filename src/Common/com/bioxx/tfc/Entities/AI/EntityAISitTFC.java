@@ -38,7 +38,7 @@ public class EntityAISitTFC extends EntityAISit {
         else
         {
             EntityLivingBase entitylivingbase = this.theEntity.getOwner();
-            return entitylivingbase == null ? true : (this.theEntity.getDistanceSqToEntity(entitylivingbase) < 144.0D && entitylivingbase.getAITarget() != null ? (this.isSitting && !this.theEntity.isTamed()) : this.isSitting);
+			return entitylivingbase == null ? true : this.theEntity.getDistanceSqToEntity(entitylivingbase) < 144.0D && entitylivingbase.getAITarget() != null ? this.isSitting && !this.theEntity.isTamed() : this.isSitting;
         }
     }
     

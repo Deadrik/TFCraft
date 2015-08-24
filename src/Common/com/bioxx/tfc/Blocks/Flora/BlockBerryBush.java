@@ -345,7 +345,7 @@ public class BlockBerryBush extends BlockTerraContainer
 		int meta = world.getBlockMetadata(x, y, z);
 		return (world.getFullBlockLightValue(x, y, z) >= 8 || world.canBlockSeeTheSky(x, y, z)) && 
 				(this.canThisPlantGrowOnThisBlock(world.getBlock(x, y - 1, z)) || 
-						(isSamePlant(world, x, y - 1, z, world.getBlockMetadata(x, y, z)) && canStack(meta)));
+				isSamePlant(world, x, y - 1, z, world.getBlockMetadata(x, y, z)) && canStack(meta));
 	}
 
 	@Override

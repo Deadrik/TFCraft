@@ -148,7 +148,7 @@ public class ModelPheasant extends ModelBase
 
 		GL11.glPushMatrix ();
 
-		GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
+		GL11.glTranslatef(0.0F, 0.75f - (0.75f * percent), 0f);
 		GL11.glScalef(1/ageScale, 1/ageScale, 1/ageScale);
 
 		this.Head.render(par7);
@@ -159,7 +159,7 @@ public class ModelPheasant extends ModelBase
 		GL11.glPopMatrix();
 
 		GL11.glPushMatrix();
-		GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
+		GL11.glTranslatef(0.0F, 0.75f - (0.75f * percent), 0f);
 		GL11.glScalef(1/ageScale, 1/ageScale, 1/ageScale);
 		this.Body.render(par7);
 		this.RightLeg.render(par7);

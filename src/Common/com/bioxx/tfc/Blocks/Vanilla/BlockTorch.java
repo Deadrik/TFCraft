@@ -1,10 +1,5 @@
 package com.bioxx.tfc.Blocks.Vanilla;
 
-import static net.minecraftforge.common.util.ForgeDirection.EAST;
-import static net.minecraftforge.common.util.ForgeDirection.NORTH;
-import static net.minecraftforge.common.util.ForgeDirection.SOUTH;
-import static net.minecraftforge.common.util.ForgeDirection.WEST;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -22,6 +17,9 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
@@ -33,8 +31,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import static net.minecraftforge.common.util.ForgeDirection.*;
 
 public class BlockTorch extends BlockTerraContainer
 {
@@ -247,8 +244,8 @@ public class BlockTorch extends BlockTerraContainer
 		if(world.getBlockMetadata(x, y, z) < 8 && TFCOptions.torchBurnTime != 0)
 		{
 			TELightEmitter te = (TELightEmitter) world.getTileEntity(x, y, z);
-			if ( (te != null && TFC_Time.getTotalHours() > te.hourPlaced + TFCOptions.torchBurnTime) || 
-			        (world.isRaining() && world.canBlockSeeTheSky(x, y, z)) )
+			if (te != null && TFC_Time.getTotalHours() > te.hourPlaced + TFCOptions.torchBurnTime || 
+					world.isRaining() && world.canBlockSeeTheSky(x, y, z))
 			{
 				world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)+8, 3);
 			}

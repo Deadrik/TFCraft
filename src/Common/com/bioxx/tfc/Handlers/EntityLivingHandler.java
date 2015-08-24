@@ -137,8 +137,8 @@ public class EntityLivingHandler
 					{
 						for(int k = -2; k < 3; k++)
 						{
-							int lastChunkX = (((int)Math.floor(player.posX)) >> 4);
-							int lastChunkZ = (((int)Math.floor(player.posZ)) >> 4);
+							int lastChunkX = ((int) Math.floor(player.posX)) >> 4;
+							int lastChunkZ = ((int) Math.floor(player.posZ)) >> 4;
 							TFC_Core.getCDM(player.worldObj).addProtection(lastChunkX + i, lastChunkZ + k, TFCOptions.protectionGain);
 						}
 					}

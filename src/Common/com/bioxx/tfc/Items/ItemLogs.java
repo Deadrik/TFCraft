@@ -127,7 +127,7 @@ public class ItemLogs extends ItemTerra
 	{
 		if(!world.isRemote)
 		{
-			if(entityplayer.isSneaking() && (world.getBlock(x, y, z) != TFCBlocks.LogPile || (side != 1 && side != 0)))
+			if (entityplayer.isSneaking() && (world.getBlock(x, y, z) != TFCBlocks.LogPile || side != 1 && side != 0))
 			{
 				int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
 				if (side == 0)

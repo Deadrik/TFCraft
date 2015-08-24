@@ -339,7 +339,7 @@ public class BlockBarrel extends BlockTerraContainer
 				return false;
 
 			if((FluidContainerRegistry.isFilledContainer(equippedItem)
-					|| (equippedItem.getItem() instanceof IFluidContainerItem && ((IFluidContainerItem)equippedItem.getItem()).getFluid(equippedItem) != null))
+					|| equippedItem.getItem() instanceof IFluidContainerItem && ((IFluidContainerItem)equippedItem.getItem()).getFluid(equippedItem) != null)
 					&& !te.getSealed())
 			{
 				ItemStack tmp = equippedItem.copy();

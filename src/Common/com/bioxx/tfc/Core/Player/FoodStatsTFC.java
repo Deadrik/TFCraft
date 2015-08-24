@@ -9,6 +9,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -18,9 +21,6 @@ import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Util.Helper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class FoodStatsTFC
 {
@@ -112,7 +112,7 @@ public class FoodStatsTFC
 					waterLevel -= bodyTemp.getExtraWater()*drainMult;
 
 				//Food
-				float hunger = ((1 + foodExhaustionLevel) + bodyTemp.getExtraFood())*drainMult;
+				float hunger = (1 + foodExhaustionLevel + bodyTemp.getExtraFood()) * drainMult;
 				if(this.satisfaction >= hunger)
 				{
 					satisfaction -= hunger; 
@@ -183,7 +183,7 @@ public class FoodStatsTFC
 					if(waterLevel < 0)
 						waterLevel = 0;
 					if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0 && temp > 35)
-						player.attackEntityFrom((new DamageSource("heatStroke")).setDamageBypassesArmor().setDamageIsAbsolute(), 2);
+						player.attackEntityFrom(new DamageSource("heatStroke").setDamageBypassesArmor().setDamageIsAbsolute(), 2);
 				}
 			}
 		}
@@ -222,7 +222,7 @@ public class FoodStatsTFC
 
 	public int getMaxWater(EntityPlayer player)
 	{
-		return (TFC_Time.dayLength*2)+(200*player.experienceLevel);
+		return TFC_Time.dayLength * 2 + 200 * player.experienceLevel;
 	}
 
 	public float getMaxStomach(EntityPlayer player)

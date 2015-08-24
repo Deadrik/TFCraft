@@ -232,7 +232,7 @@ public class EntityStand extends EntityLiving
 				double angleTan = hitVec.yCoord / Math.sqrt(hitVec.xCoord * hitVec.xCoord + hitVec.zCoord * hitVec.zCoord);
 
 				double xzDist = Math.sqrt(Math.pow(ep.posX - this.posX,2) + Math.pow(ep.posZ - this.posZ, 2));
-				double y_level = (angleTan * xzDist) + ep.eyeHeight + ep.posY;
+				double y_level = angleTan * xzDist + ep.eyeHeight + ep.posY;
 				double y = y_level - this.posY;
 
 				int slot = -1;

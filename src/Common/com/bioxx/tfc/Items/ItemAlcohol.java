@@ -134,7 +134,7 @@ public class ItemAlcohol extends ItemTerra
 						if(fs.soberTime > TFC_Time.getTotalTicks()+10000+levelMod && !player.capabilities.isCreativeMode){
 							fs.soberTime = 0;
 
-							player.attackEntityFrom((new DamageSource("alcohol")).setDamageBypassesArmor().setDamageIsAbsolute(), player.getMaxHealth());
+							player.attackEntityFrom(new DamageSource("alcohol").setDamageBypassesArmor().setDamageIsAbsolute(), player.getMaxHealth());
 						}
 					}
 

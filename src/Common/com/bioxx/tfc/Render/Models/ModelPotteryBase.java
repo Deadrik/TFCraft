@@ -9,10 +9,10 @@ import net.minecraft.client.model.TexturedQuad;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.MathHelper;
 
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import org.lwjgl.opengl.GL11;
 
 public class ModelPotteryBase extends ModelBox 
 {
@@ -89,14 +89,14 @@ public class ModelPotteryBase extends ModelBox
 	public PositionTextureVertex [] newRing(float originX,float originY,float originZ,float offsetX,float offsetY,float offsetZ,float width){
 		PositionTextureVertex[] vert = new PositionTextureVertex[8];
 		float width_x = width / (MathHelper.sqrt_float(2) + 2);
-		vert[0] = new PositionTextureVertex(originX+offsetX-((width/2) -width_x),originY+offsetY,originZ+offsetZ-(width/2f),0,0);
-		vert[1] = new PositionTextureVertex(originX+offsetX+((width/2) -width_x),originY+offsetY,originZ+offsetZ-(width/2f),0,0);
-		vert[2] = new PositionTextureVertex(originX+offsetX+(width/2f),originY+offsetY,originZ+offsetZ-((width/2) -width_x),0,0);
-		vert[3] = new PositionTextureVertex(originX+offsetX+(width/2f),originY+offsetY,originZ+offsetZ+((width/2) -width_x),0,0);
-		vert[4] = new PositionTextureVertex(originX+offsetX+((width/2) -width_x),originY+offsetY,originZ+offsetZ+(width/2f),0,0);
-		vert[5] = new PositionTextureVertex(originX+offsetX-((width/2) -width_x),originY+offsetY,originZ+offsetZ+(width/2f),0,0);
-		vert[6] = new PositionTextureVertex(originX+offsetX-(width/2f),originY+offsetY,originZ+offsetZ+((width/2) -width_x),0,0);
-		vert[7] = new PositionTextureVertex(originX+offsetX-(width/2f),originY+offsetY,originZ+offsetZ-((width/2) -width_x),0,0);
+		vert[0] = new PositionTextureVertex(originX + offsetX - (width / 2) - width_x, originY + offsetY, originZ + offsetZ - (width / 2f), 0, 0);
+		vert[1] = new PositionTextureVertex(originX + offsetX + (width / 2) - width_x, originY + offsetY, originZ + offsetZ - (width / 2f), 0, 0);
+		vert[2] = new PositionTextureVertex(originX + offsetX + (width / 2f), originY + offsetY, originZ + offsetZ - (width / 2) - width_x, 0, 0);
+		vert[3] = new PositionTextureVertex(originX + offsetX + (width / 2f), originY + offsetY, originZ + offsetZ + (width / 2) - width_x, 0, 0);
+		vert[4] = new PositionTextureVertex(originX + offsetX + (width / 2) - width_x, originY + offsetY, originZ + offsetZ + (width / 2f), 0, 0);
+		vert[5] = new PositionTextureVertex(originX + offsetX - (width / 2) - width_x, originY + offsetY, originZ + offsetZ + (width / 2f), 0, 0);
+		vert[6] = new PositionTextureVertex(originX + offsetX - (width / 2f), originY + offsetY, originZ + offsetZ + (width / 2) - width_x, 0, 0);
+		vert[7] = new PositionTextureVertex(originX + offsetX - (width / 2f), originY + offsetY, originZ + offsetZ - (width / 2) - width_x, 0, 0);
 		return vert;
 	}
 

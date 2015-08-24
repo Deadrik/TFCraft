@@ -221,16 +221,16 @@ public class ContainerTFC extends Container
 
 	public static boolean areItemStacksEqual(ItemStack is1, ItemStack is2)
 	{
-		return is1 == null && is2 == null ? true : (is1 != null && is2 != null ? isItemStackEqual(is1, is2) : false);
+		return is1 == null && is2 == null ? true : is1 != null && is2 != null ? isItemStackEqual(is1, is2) : false;
 	}
 
 	public static boolean isItemStackEqual(ItemStack is1, ItemStack is2)
 	{
 		return is1.stackSize != is2.stackSize ? false :
-			(is1.getItem() != is2.getItem() ? false :
-				(is1.getItemDamage() != is2.getItemDamage() ? false :
-					(is1.stackTagCompound == null && is2.stackTagCompound != null ? false :
-						is1.stackTagCompound == null || areCompoundsEqual(is1, is2))));
+			is1.getItem() != is2.getItem() ? false :
+				is1.getItemDamage() != is2.getItemDamage() ? false :
+					is1.stackTagCompound == null && is2.stackTagCompound != null ? false :
+						is1.stackTagCompound == null || areCompoundsEqual(is1, is2);
 	}
 
 	public static boolean areCompoundsEqual(ItemStack is1, ItemStack is2)
@@ -241,7 +241,7 @@ public class ContainerTFC extends Container
 		NBTTagCompound is4Tags = is4.getTagCompound();
 
 		if (is3Tags == null)
-			return (is4Tags == null) || is4Tags.hasNoTags();
+			return is4Tags == null || is4Tags.hasNoTags();
 
 		if (is4Tags == null)
 			return is3Tags.hasNoTags();

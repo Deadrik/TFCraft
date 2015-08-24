@@ -114,7 +114,7 @@ public class WorldGenMinable extends WorldGenerator
 
 	void createMineWithChance(World worldObj, Random rand, int x, int z)
 	{
-		if (rarity == 1 || (rarity > 0 && rand.nextInt(rarity) == 0))
+		if (rarity == 1 || rarity > 0 && rand.nextInt(rarity) == 0)
 			createMine(worldObj, rand, x, z);
 	}
 
@@ -139,7 +139,7 @@ public class WorldGenMinable extends WorldGenerator
 				MPPrevBlock = MPBlock;
 				MPPrevMeta = minableBlockMeta;
 				mineHeight = min + rand.nextInt(max-min);
-				if (rarity == 1 || (rarity > 0 && rand.nextInt(rarity) == 0))
+				if (rarity == 1 || rarity > 0 && rand.nextInt(rarity) == 0)
 					createMine(worldObj, rand, x_Chunk, z_Chunk);
 			}
 		}
@@ -152,10 +152,10 @@ public class WorldGenMinable extends WorldGenerator
 		int densityValuePassInner = 0;
 		int densityValuePass = 0;
 		oreDensity = oreDensity * .01F;
-		oreDensity = (oreDensity * (oreDistance >> 1)) + 1F;// establishes number of times to loop
+		oreDensity = oreDensity * (oreDistance >> 1) + 1F;// establishes number of times to loop
 		loopCount = (int)(oreDensity); //stores number of times to loop
-		densityValuePassInner = ((oreDistance/loopCount)); // distance devided by number of times it will loop, establishes the number for randomization
-		densityValuePassInner += (((oreDistance - (densityValuePassInner*loopCount))/loopCount));
+		densityValuePassInner = oreDistance / loopCount; // distance devided by number of times it will loop, establishes the number for randomization
+		densityValuePassInner += (oreDistance - (densityValuePassInner * loopCount)) / loopCount;
 		densityValuePass = 0;
 		while (loopCount > 0) // loops to acumulate random values
 		{
@@ -271,7 +271,7 @@ public class WorldGenMinable extends WorldGenerator
 						int m = world.getBlockMetadata(posX, posY, posZ);
 						Block b = world.getBlock(posX, posY, posZ);
 						isCorrectRockType = b == this.genInBlock;
-						isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
+						isCorrectMeta = m == this.genInBlockMeta || this.genInBlockMeta == -1;
 
 						if (isCorrectRockType && isCorrectMeta)
 						{
@@ -301,7 +301,7 @@ public class WorldGenMinable extends WorldGenerator
 				int m = world.getBlockMetadata(posX, posY, posZ);
 				Block b = world.getBlock(posX, posY, posZ);
 				boolean isCorrectRockType = b == this.genInBlock;
-				boolean isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
+				boolean isCorrectMeta = m == this.genInBlockMeta || this.genInBlockMeta == -1;
 
 				if (isCorrectRockType && isCorrectMeta)
 				{
@@ -381,7 +381,7 @@ public class WorldGenMinable extends WorldGenerator
 								int m = world.getBlockMetadata(posX, posY, posZ);
 								Block b = world.getBlock(posX, posY, posZ);
 								boolean isCorrectRockType = b == this.genInBlock;
-								boolean isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
+								boolean isCorrectMeta = m == this.genInBlockMeta || this.genInBlockMeta == -1;
 
 								if (isCorrectRockType && isCorrectMeta)
 								{

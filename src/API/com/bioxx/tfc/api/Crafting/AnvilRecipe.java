@@ -167,7 +167,7 @@ public class AnvilRecipe
 			if (is1.getItemDamage() != 32767 && is1.getItemDamage() != is2.getItemDamage())
 				return false;
 		}
-		else if ((is1 == null && is2 != null) || (is1 != null && is2 == null))
+		else if (is1 == null && is2 != null || is1 != null && is2 == null) // XOR, if both are null return true
 			return false;
 
 		return true;

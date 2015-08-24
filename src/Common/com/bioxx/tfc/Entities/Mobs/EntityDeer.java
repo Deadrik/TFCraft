@@ -3,17 +3,8 @@ package com.bioxx.tfc.Entities.Mobs;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIEatGrass;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -85,10 +76,10 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		timeOfConception = 0;
 		mateSizeMod = 0;
 		sex = rand.nextInt(2);
-		size_mod =(float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion + 1)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1F) * (1.0F - dimorphism * sex));
-		strength_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
-		aggression_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
-		obedience_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + (1f/aggression_mod)));
+		size_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt((degreeOfDiversion + 1) * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1F) * (1.0F - dimorphism * sex));
+		strength_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + size_mod));
+		aggression_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1));
+		obedience_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1f / aggression_mod));
 		running = false;
 
 		this.setSize(0.9F, 1.3F);
@@ -171,11 +162,11 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		return this.ticksExisted > 10000 && !wasRoped;
 	}
 
-	@Override
+	/*@Override
 	protected void updateAITasks()
 	{
 		super.updateAITasks();
-	}
+	}*/
 
 	public boolean getRunning()
 	{
@@ -220,8 +211,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 				obedience_mod = TFC_Core.getSmallFloatFromByte(values[3]);
 				
 				familiarity = values[4];
-				familiarizedToday = (values[5] == 1);
-				pregnant = (values[6] == 1);
+				familiarizedToday = values[5] == 1;
+				pregnant = values[6] == 1;
 				
 				try
 				{
@@ -667,7 +658,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 			if(familiarizedToday && familiarity < 100){
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
-				float familiarityChange = (6 * obedience_mod / aggression_mod);
+				float familiarityChange = 6 * obedience_mod / aggression_mod;
 				if(this.isAdult() && familiarity <= 70) // Adult caps at 70 since babies are currently impossible
 				{
 					familiarity += familiarityChange;
@@ -720,7 +711,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 			this.setCustomNameTag(name);
 			return true;
 		}
-		this.playSound(TFC_Sounds.DEERCRY,  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
+		this.playSound(TFC_Sounds.DEERCRY, 6, rand.nextFloat() / 2F + (isChild() ? 1.25F : 0.75F));
 		return false;
 	}
 	

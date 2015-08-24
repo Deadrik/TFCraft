@@ -26,11 +26,11 @@ public class ModelStand extends ModelBiped {
 	{
 		this.bipedHeadwear.rotateAngleY = 0;
 		this.bipedHeadwear.rotateAngleX = this.bipedHead.rotateAngleX;
-		this.bipedRightArm.rotateAngleX = (MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 2.0F * par2 * 0.5F)+0.001F;
-		this.bipedLeftArm.rotateAngleX = (MathHelper.cos(par1 * 0.6662F) * 2.0F * par2 * 0.5F)+0.001F;
+		this.bipedRightArm.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 2.0F * par2 * 0.5F + 0.001F;
+		this.bipedLeftArm.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 2.0F * par2 * 0.5F + 0.001F;
 		this.bipedRightArm.rotateAngleZ = 0.00F;
 		this.bipedLeftArm.rotateAngleZ = 0.00F;
-		this.bipedRightLeg.rotateAngleX = (MathHelper.cos(par1 * 0.6662F) * 1.4F * par2)+0.001F;
+		this.bipedRightLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2 + 0.001F;
 		this.bipedLeftLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
 		this.bipedRightLeg.rotateAngleY = 0.0F;
 		this.bipedLeftLeg.rotateAngleY = 0.0F;

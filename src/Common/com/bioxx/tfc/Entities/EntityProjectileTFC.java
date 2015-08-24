@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
@@ -62,7 +63,7 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 			boolean inground = nbt.hasKey("inGround") && nbt.getByte("inGround") == 1;
 			if(inground)
 			{
-				boolean flag = this.canBePickedUp == 1 || (this.canBePickedUp == 2 && player.capabilities.isCreativeMode);
+				boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && player.capabilities.isCreativeMode;
 
 				EntityItem ei = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.pickupItem, 1, this.damageTaken));
 

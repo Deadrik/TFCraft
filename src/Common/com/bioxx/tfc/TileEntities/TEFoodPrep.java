@@ -10,6 +10,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -23,9 +26,6 @@ import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Interfaces.IItemFoodBlock;
 import com.bioxx.tfc.api.Util.Helper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TEFoodPrep extends NetworkTileEntity implements IInventory
 {
@@ -274,7 +274,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 
 	private boolean compareIngred(ItemStack is1, ItemStack is2)
 	{
-		if((is1 != null && is2 != null && is1.getItem() == is2.getItem()))
+		if (is1 != null && is2 != null && is1.getItem() == is2.getItem())
 			return false;
 		return true;
 	}

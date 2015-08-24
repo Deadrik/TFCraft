@@ -45,11 +45,11 @@ public class GuiCalendar extends GuiScreen
 		player = p;
 	}
 
-	@Override
+	/*@Override
 	public void onGuiClosed()
 	{
 		super.onGuiClosed();
-	}
+	}*/
 
 	@Override
 	public void initGui()

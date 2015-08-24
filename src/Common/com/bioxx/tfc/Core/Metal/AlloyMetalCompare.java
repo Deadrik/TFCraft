@@ -27,9 +27,8 @@ public class AlloyMetalCompare extends AlloyMetal
 		//	places. We do this to avoid rounding errors in the further
 		//	decimal places.
 		//
-		return (this.metalType == b.metalType
-				&&	(b.metal == -1 || (Math.round(b.metal * 1000f) >= Math.round(this.metalMin * 1000f)
-				&&	Math.round(b.metal * 1000f) <= Math.round(this.metalMax * 1000f))));
+		return this.metalType == b.metalType &&	(b.metal == -1 ||
+				Math.round(b.metal * 1000f) >= Math.round(this.metalMin * 1000f) && Math.round(b.metal * 1000f) <= Math.round(this.metalMax * 1000f));
 	}
 
     public float getMetalMin()

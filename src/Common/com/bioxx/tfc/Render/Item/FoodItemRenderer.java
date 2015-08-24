@@ -3,6 +3,7 @@ package com.bioxx.tfc.Render.Item;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
@@ -85,7 +86,7 @@ public class FoodItemRenderer implements IItemRenderer
 					{
 						if (decayPerc < 0.10)
 						{
-							decayTop = (decayTop * 10);
+							decayTop = decayTop * 10;
 							renderQuad(1, 13, 13 - decayTop, 1, 0x00ff00);
 						}
 						else

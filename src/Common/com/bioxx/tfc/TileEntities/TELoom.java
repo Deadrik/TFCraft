@@ -13,15 +13,15 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Render.Models.ModelLoom;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.LoomManager;
 import com.bioxx.tfc.api.Crafting.LoomRecipe;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TELoom extends NetworkTileEntity implements IInventory
 {
@@ -197,7 +197,7 @@ public class TELoom extends NetworkTileEntity implements IInventory
 			resource = LoomManager.getInstance().findPotentialRecipes(storage[0]);
 
 		ResourceLocation rl = LoomManager.getInstance().findMatchingTexture(resource);
-		return (resource != null && rl != null) ? rl : this.defaultTexture;
+		return resource != null && rl != null ? rl : this.defaultTexture;
 	}
 
 	public Item getStringType(){

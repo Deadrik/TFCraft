@@ -45,7 +45,7 @@ import com.bioxx.tfc.api.Util.Helper;
 public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 {
 	private static final IEntitySelector horseBreedingSelector = new EntityHorseBredSelector();
-	private static final IAttribute horseJumpStrength = (new RangedAttribute("horse.jumpStrengthTFC", 0.7D, 0.0D, 2.0D)).setDescription("Jump StrengthTFC").setShouldWatch(true);
+	private static final IAttribute horseJumpStrength = new RangedAttribute("horse.jumpStrengthTFC", 0.7D, 0.0D, 2.0D).setDescription("Jump StrengthTFC").setShouldWatch(true);
 
 	public int inLove;
 
@@ -97,10 +97,10 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		pregnancyRequiredTime = (int) (TFCOptions.animalTimeMultiplier * GESTATION_PERIOD * TFC_Time.ticksInMonth);
 		timeOfConception = 0;
 		sex = rand.nextInt(2);
-		size_mod =(float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion + 1)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1F) * (1.0F - dimorphism * sex));
-		strength_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
-		aggression_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
-		obedience_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + (1f/aggression_mod)));
+		size_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt((degreeOfDiversion + 1) * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1F) * (1.0F - dimorphism * sex));
+		strength_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + size_mod));
+		aggression_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1));
+		obedience_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1f / aggression_mod));
 		this.setSize(1.4F, 1.6F);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.taskEntries.clear();
@@ -268,8 +268,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				obedience_mod = TFC_Core.getSmallFloatFromByte(values[3]);
 				
 				familiarity = values[4];
-				familiarizedToday = (values[5] == 1);
-				pregnant = (values[6] == 1);
+				familiarizedToday = values[5] == 1;
+				pregnant = values[6] == 1;
 				
 				try
 				{
@@ -426,7 +426,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		if (itemstack != null && this.isBreedingItemTFC(itemstack) && checkFamiliarity(InteractionEnum.BREED,player) &&this.familiarizedToday && this.getGrowingAge() == 0 && !super.isInLove())
 		{
 			if (!player.capabilities.isCreativeMode)
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, (((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, ((ItemFoodTFC) itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this));
 			this.hunger += 24000;
 			this.setInLove(true);
 			return true;
@@ -1089,7 +1089,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			if(familiarizedToday && familiarity < 100){
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
-				float familiarityChange = (6 * obedience_mod / aggression_mod);
+				float familiarityChange = 6 * obedience_mod / aggression_mod;
 				if (this.isAdult() && familiarity <= 35) // Adult caps at 35
 				{
 					familiarity += familiarityChange;
@@ -1114,10 +1114,11 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if((this.riddenByEntity == null || !this.riddenByEntity.equals(ep)) && !familiarizedToday && stack != null && this.isFood(stack)  && ((isAdult() && familiarity < 50) || !isAdult())){
+		if ((this.riddenByEntity == null || !this.riddenByEntity.equals(ep)) && !familiarizedToday && stack != null && this.isFood(stack) && (isAdult() && familiarity < 50 || !isAdult()))
+		{
 			if (!ep.capabilities.isCreativeMode)
 			{
-				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
+				ep.inventory.setInventorySlotContents(ep.inventory.currentItem, ((ItemFoodTFC) stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this));
 			}
 			else
 			{
@@ -1142,7 +1143,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			this.setCustomNameTag(name);
 			return true;
 		}
-		this.playSound(this.getHurtSound(),  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
+		this.playSound(this.getHurtSound(), 6, rand.nextFloat() / 2F + (isChild() ? 1.25F : 0.75F));
 		return false;
 	}
 

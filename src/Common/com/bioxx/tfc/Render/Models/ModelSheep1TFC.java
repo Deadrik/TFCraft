@@ -218,7 +218,7 @@ public class ModelSheep1TFC extends ModelSheep1
 		
 		GL11.glPushMatrix ();
 
-		GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
+		GL11.glTranslatef(0.0F, 0.75f - (0.75f * percent), 0f);
 		GL11.glScalef(ageHeadScale, ageHeadScale, ageHeadScale);
 		GL11.glTranslatef (0.0F, (ageScale-1)*-0.125f,0.1875f-(0.1875f*percent));
 
@@ -227,7 +227,7 @@ public class ModelSheep1TFC extends ModelSheep1
 		
 		GL11.glPopMatrix();
 		GL11.glPushMatrix ();
-		GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
+		GL11.glTranslatef(0.0F, 0.75f - (0.75f * percent), 0f);
 		GL11.glScalef(1/ageScale, 1/ageScale, 1/ageScale);
 		this.body.render(par7);
 		this.leg1.render(par7);

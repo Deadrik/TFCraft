@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
@@ -41,9 +42,9 @@ public class ItemRawHide extends ItemLooseRock
 		if(!world.isRemote)
 		{
 			if(itemstack.getItem() == TFCItems.Hide && itemstack.getItemDamage() >= 2){
-				int d = (int)((45 + ((entityplayer.rotationYaw % 360)+360f)%360)/90)%4; //direction
-				int x2 = x+(d==1?-1:(d==3?1:0)); // the x-coord of the second block
-				int z2 = z+(d==2?-1:(d==0?1:0));
+				int d = (int) ((45 + (entityplayer.rotationYaw % 360 + 360f) % 360) / 90) % 4; //direction
+				int x2 = x + (d == 1 ? -1 : d == 3 ? 1 : 0); // the x-coord of the second block
+				int z2 = z + (d == 2 ? -1 : d == 0 ? 1 : 0);
 				if(world.getBlock(x, y, z)==TFCBlocks.Thatch && side == 1 && world.getBlock(x2,y,z2)==TFCBlocks.Thatch
 						&& world.isAirBlock(x, y+1, z) && world.isAirBlock(x2, y+1, z2)){
 					world.func_147480_a/*destroyBlock*/(x, y, z, false);

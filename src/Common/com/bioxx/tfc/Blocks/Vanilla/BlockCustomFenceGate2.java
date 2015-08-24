@@ -18,15 +18,15 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.TileEntities.TEFenceGate;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IMultipleBlock;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCustomFenceGate2 extends BlockFenceGate implements ITileEntityProvider, IMultipleBlock
 {
@@ -45,9 +45,9 @@ public class BlockCustomFenceGate2 extends BlockFenceGate implements ITileEntity
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
-		int l = (par1World.getTileEntity(par2, par3, par4)!=null)?(((TEFenceGate)(par1World.getTileEntity(par2, par3, par4))).getDirection()):0;
-		boolean open = (par1World.getTileEntity(par2, par3, par4)!=null)?(((TEFenceGate)(par1World.getTileEntity(par2, par3, par4))).getOpen()):false;
-		return open ? null : (l != 2 && l != 0 ? AxisAlignedBB.getBoundingBox(par2 + 0.375F, par3, par4, par2 + 0.625F, par3 + 1.5F, par4 + 1) : AxisAlignedBB.getBoundingBox(par2, par3, par4 + 0.375F, par2 + 1, par3 + 1.5F, par4 + 0.625F));
+		int l = par1World.getTileEntity(par2, par3, par4) != null ? ((TEFenceGate) (par1World.getTileEntity(par2, par3, par4))).getDirection() : 0;
+		boolean open = par1World.getTileEntity(par2, par3, par4) != null ? ((TEFenceGate) (par1World.getTileEntity(par2, par3, par4))).getOpen() : false;
+		return open ? null : l != 2 && l != 0 ? AxisAlignedBB.getBoundingBox(par2 + 0.375F, par3, par4, par2 + 0.625F, par3 + 1.5F, par4 + 1) : AxisAlignedBB.getBoundingBox(par2, par3, par4 + 0.375F, par2 + 1, par3 + 1.5F, par4 + 0.625F);
 	}
 
 	@SideOnly(Side.CLIENT)

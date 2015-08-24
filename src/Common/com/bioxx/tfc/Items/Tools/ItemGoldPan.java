@@ -152,7 +152,7 @@ public class ItemGoldPan extends ItemTerra
 					int bMeta = world.getBlockMetadata(x, y + 1, z);
 					if (world.getBlock(x, y + 1, z).getMaterial() == Material.water && bMeta > 0 && mop.sideHit == 1)
 					{
-						int uses = (is.getItemDamage() >> 4);
+						int uses = is.getItemDamage() >> 4;
 						if(uses > 0)
 						{
 							int type = getMetalToDrop(world, player, x, y + 1, z);
@@ -169,7 +169,7 @@ public class ItemGoldPan extends ItemTerra
 							}
 							uses--;
 							if(uses > 0)
-								is.setItemDamage((is.getItemDamage() & 15) + (uses << 4));
+								is.setItemDamage(is.getItemDamage() & 15 + (uses << 4));
 							else
 							{
 								if (world.rand.nextInt(100) == 0)

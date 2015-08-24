@@ -106,17 +106,21 @@ public class ModelLoom extends ModelBase {
 			cloth++;
 		}
 
-		if(shouldClothIncrease && tick >= ((tickMod/4)-1) && tick < (((3*tickMod)/4)-1)){
+		if (shouldClothIncrease && tick >= (tickMod / 4) - 1 && tick < ((3 * tickMod) / 4) - 1)
+		{
 			pole1String_y = pole2String_y - stringWidth;
 		}
-		else if(shouldClothIncrease && (tick >= (((3*tickMod)/4)-1) || tick < ((tickMod/4)-1))){
+		else if (shouldClothIncrease && (tick >= ((3 * tickMod) / 4) - 1 || tick < (tickMod / 4) - 1))
+		{
 			pole2String_y = pole1String_y - stringWidth;
 		}
 		
-		if(tick >=(tickMod/2) &&(isWeaving || (stillWeaving && renderOffsetPole1 != 9) ) ){
+		if (tick >= tickMod / 2 && (isWeaving || stillWeaving && renderOffsetPole1 != 9))
+		{
 			renderOffsetPole1 = 7f + (float)(2f * Math.cos(((tick)/(float)(tickMod/4))* Math.PI));
 		}
-		else if(isWeaving || (stillWeaving && renderOffsetPole2 != 9)){
+		else if (isWeaving || stillWeaving && renderOffsetPole2 != 9)
+		{
 			renderOffsetPole2 = 7f + (float)(2f * Math.cos(((tick)/(float)(tickMod/4))* Math.PI));
 		}
 		

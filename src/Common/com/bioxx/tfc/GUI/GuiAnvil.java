@@ -78,7 +78,9 @@ public class GuiAnvil extends GuiContainerTFC
 			ItemStack stack1 = this.anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT];
 			ItemStack stack2 = this.anvilTE.anvilItemStacks[TEAnvil.INPUT2_SLOT];
 
-			if ((craftingPlan != null && craftingPlan != plan) || (stack1 != null && stack1 != input) || (stack2 != null && stack2 != input2)) // Fixes NPE
+			if (craftingPlan != null && craftingPlan != plan || 
+					stack1 != null && stack1 != input || 
+					stack2 != null && stack2 != input2) // Fixes NPE
 			{
 				plan = this.anvilTE.craftingPlan;
 				this.anvilTE.updateRecipe();

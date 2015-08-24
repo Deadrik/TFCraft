@@ -184,14 +184,14 @@ public class TFC_Time
 
 	public static int getDayOfYearFromTick(long tick)
 	{
-		long years = (tick / (ticksInYear));
+		long years = tick / (ticksInYear);
 		long years2 = tick - (ticksInYear * years);
 		return (int) (years2/dayLength);
 	}
 
 	public static int getDayOfYearFromDays(long days)
 	{
-		long years = (days / daysInYear);
+		long years = days / daysInYear;
 		long years2 = days - (daysInYear * years);
 		return (int)years2;
 	}
@@ -228,12 +228,12 @@ public class TFC_Time
 
 	public static int getTotalDays()
 	{
-		return (int)Math.floor(((float)time/(float)dayLength));
+		return (int) Math.floor((float) time / (float) dayLength);
 	}
 
 	public static long getTotalHours()
 	{
-		return (time/hourLength);
+		return time / hourLength;
 	}
 
 	public static long getTotalMonths()
@@ -272,25 +272,25 @@ public class TFC_Time
 	public static boolean isSpring(int z)
 	{
 		int day = (getDayOfYear() + (z > 0 ? (daysInYear) / 2 : 0)) % daysInYear;
-		return (day >= 20 && day <= 111);
+		return day >= 20 && day <= 111;
 	}
 
 	public static boolean isSummer(int z)
 	{
 		int day = (getDayOfYear() + (z > 0 ? (daysInYear) / 2 : 0)) % daysInYear;
-		return (day >= 112 && day <= 202);
+		return day >= 112 && day <= 202;
 	}
 
 	public static boolean isFall(int z)
 	{
 		int day = (getDayOfYear() + (z > 0 ? (daysInYear) / 2 : 0)) % daysInYear;
-		return (day >= 203 && day <= 293);
+		return day >= 203 && day <= 293;
 	}
 
 	public static boolean isWinter(int z)
 	{
 		int day = (getDayOfYear() + (z > 0 ? (daysInYear) / 2 : 0)) % daysInYear;
-		return (day >= 294 || day < 20);
+		return day >= 294 || day < 20;
 	}
 
 	public static int getMonthFromDayOfYear(int day)
@@ -310,14 +310,14 @@ public class TFC_Time
 	{
 		if(day < 0)
 			day = daysInYear + day;
-		return ((day / (daysInMonth))+(z > 0 ? 6 : 0)) % 12;
+		return (day / (daysInMonth) + (z > 0 ? 6 : 0)) % 12;
 	}
 
 	public static int getDayOfMonthFromDayOfYear(int day)
 	{
 		if(day < 0)
 			day = daysInYear + day;
-		return (day - ((int)Math.floor((day / daysInMonth)) * daysInMonth));
+		return (day - ((int) Math.floor(day / daysInMonth) * daysInMonth));
 	}
 
 	public static int getPrevMonth()

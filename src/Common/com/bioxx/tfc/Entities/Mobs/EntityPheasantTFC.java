@@ -158,7 +158,7 @@ public class EntityPheasantTFC extends EntityChickenTFC
 			this.setCustomNameTag(name);
 			return true;
 		}
-		this.playSound(TFC_Sounds.PHAESANTSAY,  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
+		this.playSound(TFC_Sounds.PHAESANTSAY, 6, rand.nextFloat() / 2F + (isChild() ? 1.25F : 0.75F));
 		return false;
 	}
 	

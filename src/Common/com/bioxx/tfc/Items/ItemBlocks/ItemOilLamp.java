@@ -138,7 +138,7 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 	public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
 	{
 		FluidStack fs = FluidStack.loadFluidStackFromNBT(stack.getTagCompound());
-		if(fs == null || (fs.getFluid() != TFCFluids.OLIVEOIL && fs.getFluid() != TFCFluids.LAVA))
+		if (fs == null || fs.getFluid() != TFCFluids.OLIVEOIL && fs.getFluid() != TFCFluids.LAVA)
 		{
 			metadata += 8;
 		}

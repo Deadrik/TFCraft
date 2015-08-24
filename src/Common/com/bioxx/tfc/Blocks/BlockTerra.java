@@ -93,10 +93,10 @@ public abstract class BlockTerra extends Block
 		case Water:  return world.getBlock(x, y, z).getMaterial() == Material.water && world.getBlockMetadata(x, y, z) == 0;
 		case Beach:
 			boolean isBeach = TFC_Core.isSand(this) || TFC_Core.isGravel(this);
-			boolean hasWater = (world.getBlock(x - 1, y, z    ).getMaterial() == Material.water ||
+			boolean hasWater = world.getBlock(x - 1, y, z    ).getMaterial() == Material.water ||
 					world.getBlock(x + 1, y, z    ).getMaterial() == Material.water ||
 					world.getBlock(x,     y, z - 1).getMaterial() == Material.water ||
-					world.getBlock(x,     y, z + 1).getMaterial() == Material.water);
+					world.getBlock(x,     y, z + 1).getMaterial() == Material.water;
 			return isBeach && hasWater;
 		default: return false;
 		}

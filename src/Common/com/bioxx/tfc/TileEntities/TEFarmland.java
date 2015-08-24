@@ -43,23 +43,23 @@ public class TEFarmland extends NetworkTileEntity
 				int soilMax = getSoilMax();
 				int restoreAmount = 139;
 
-				if((worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.Crops))
+				if (worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.Crops)
 				{
 					crop = CropManager.getInstance().getCropFromId(((TECrop)worldObj.getTileEntity(xCoord, yCoord + 1, zCoord)).cropId);
 
-					if((crop.cycleType != 0))
+					if (crop.cycleType != 0)
 					{
 						if(nutrients[0] < soilMax)
 							nutrients[0] += restoreAmount + crop.nutrientExtraRestore[0];
 					}
 
-					if((crop.cycleType != 1))
+					if (crop.cycleType != 1)
 					{
 						if(nutrients[1] < soilMax)
 							nutrients[1] += restoreAmount + crop.nutrientExtraRestore[1];
 					}
 
-					if((crop.cycleType != 2))
+					if (crop.cycleType != 2)
 					{
 						if(nutrients[2] < soilMax)
 							nutrients[2] += restoreAmount + crop.nutrientExtraRestore[2];

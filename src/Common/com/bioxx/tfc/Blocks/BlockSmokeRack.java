@@ -13,7 +13,11 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.Terrain.BlockCollapsible;
@@ -23,9 +27,6 @@ import com.bioxx.tfc.TileEntities.TESmokeRack;
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSmokeRack extends BlockTerraContainer
 {
@@ -199,7 +200,7 @@ public class BlockSmokeRack extends BlockTerraContainer
 	private boolean isValidNeighbor(World world, int x, int y, int z, ForgeDirection dir)
 	{
 		Block b = world.getBlock(x, y, z);
-		if((b == this || b.isSideSolid(world, x, y, z, dir.getOpposite())))
+		if (b == this || b.isSideSolid(world, x, y, z, dir.getOpposite()))
 			return true;
 		return false;
 	}

@@ -49,7 +49,7 @@ public class RemoveChunkCommand extends CommandBase
 			{
 				for(int k = -radius; k <= radius; k++)
 				{
-					Chunk chunk = world.getChunkFromBlockCoords((int)player.posX + (i * 16), (int)player.posZ + (k * 16));
+					Chunk chunk = world.getChunkFromBlockCoords((int) player.posX + i * 16, (int) player.posZ + k * 16);
 					chunk.setStorageArrays(new ExtendedBlockStorage[16]);
 					chunk.setChunkModified();
 				}

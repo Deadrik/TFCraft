@@ -7,7 +7,11 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+
 import net.minecraftforge.oredict.OreDictionary;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.Recipes;
@@ -29,9 +33,6 @@ import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 
 public class CraftingHandler
 {
@@ -92,7 +93,7 @@ public class CraftingHandler
 			{
 				player.triggerAchievement(TFC_Achievements.achSaw);
 			}
-			else if ((item instanceof ItemAnvil1 && itemDamage == 2) || (item instanceof ItemAnvil2 && (itemDamage == 1 || itemDamage == 2)))
+			else if (item instanceof ItemAnvil1 && itemDamage == 2 || item instanceof ItemAnvil2 && (itemDamage == 1 || itemDamage == 2))
 			{
 				player.triggerAchievement(TFC_Achievements.achBronzeAge);
 			}

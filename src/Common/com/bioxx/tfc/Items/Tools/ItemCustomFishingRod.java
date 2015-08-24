@@ -193,7 +193,7 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 		}
 
 		if(!cast){
-			int j = Math.max((Math.min(this.getMaxItemUseDuration(is) - useRemaining + 10,60)/20)-1,0);
+			int j = Math.max(Math.min(this.getMaxItemUseDuration(is) - useRemaining + 10, 60) / 20 - 1, 0);
 			if(!is.hasTagCompound()){
 				is.setTagCompound(new NBTTagCompound());
 			}
@@ -206,7 +206,7 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 				tension = is.stackTagCompound.getInteger("tension");
 			}
 			int originalTex = tension / 100;
-			int texShift = ((tension%100)+1)%31;
+			int texShift = (tension % 100 + 1) % 31;
 			return getItemIconForUseDuration(Math.min(originalTex + (texShift == 10?1:0),castIconArray.length-1),cast);
 		}
 	}

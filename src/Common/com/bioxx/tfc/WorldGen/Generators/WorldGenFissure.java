@@ -223,7 +223,7 @@ public class WorldGenFissure implements IWorldGenerator
 
 		DataLayer dl = TFC_Climate.getRockLayer(world, i, j, k, TFC_Core.getRockLayerFromHeight(world, i, j, k));
 		DataLayer dl2 = TFC_Climate.getRockLayer(world, i, j, k, 2);
-		BlockMeta rockLayer = (fillBlock != null && fillBlock.getMaterial() == Material.lava) ? 
+		BlockMeta rockLayer = fillBlock != null && fillBlock.getMaterial() == Material.lava ? 
 				new BlockMeta(dl2.block, dl2.data2) : new BlockMeta(dl.block, dl.data2);
 
 				int worldX;

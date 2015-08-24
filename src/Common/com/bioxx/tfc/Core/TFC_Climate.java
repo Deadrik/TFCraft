@@ -4,14 +4,14 @@ import java.util.HashMap;
 
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.WorldCacheManager;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Util.Helper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFC_Climate
 {
@@ -128,7 +128,8 @@ public class TFC_Climate
 		if(zCoord < 0)
 			zCoord = -zCoord;
 
-		if(zCoord > getMaxZPos()) zCoord = (getMaxZPos());
+		if (zCoord > getMaxZPos())
+			zCoord = getMaxZPos();
 
 		return zFactorCache[zCoord];
 	}
@@ -153,7 +154,7 @@ public class TFC_Climate
 		if(TFC_Climate.getCacheManager(world) != null)
 		{
 			float zMod = getZFactor(z);
-			float zTemp = (zMod * getMaxTemperature())-20 + ((zMod - 0.5f)*10);
+			float zTemp = zMod * getMaxTemperature() - 20 + ((zMod - 0.5f) * 10);
 
 			float rain = getRainfall(world, x, Global.SEALEVEL, z);
 			float rainMod = (1-(rain/4000))*zMod;
@@ -204,7 +205,8 @@ public class TFC_Climate
 	{
 		if(z < 0)
 			z = -z;
-		if(z > getMaxZPos()) z = (getMaxZPos());
+		if (z > getMaxZPos())
+			z = getMaxZPos();
 		return monthTempCache[season][z];
 	}
 
@@ -325,9 +327,9 @@ public class TFC_Climate
 	 */
 	public static int getGrassColor(World world, int x, int y, int z)
 	{
-		float temp = ((getTemp(world, x, z) + getMaxTemperature()) / (getMaxTemperature() * 2));
+		float temp = (getTemp(world, x, z) + getMaxTemperature()) / (getMaxTemperature() * 2);
 
-		float rain = (getRainfall(world, x, y, z) / 8000);
+		float rain = getRainfall(world, x, y, z) / 8000;
 
 		double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
 		double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);
@@ -346,7 +348,7 @@ public class TFC_Climate
 		if(temperature > 5 && rainfall > 100)
 		{
 			float temp = (temperature + 35) / (getMaxTemperature() + 35);
-			float rain = (rainfall / 8000);
+			float rain = rainfall / 8000;
 
 			double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
 			double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);
@@ -369,7 +371,7 @@ public class TFC_Climate
 		if(rainfall > 100)
 		{
 			float temp = (getTemp(world, x, z)+35)/(getMaxTemperature()+35);
-			float rain = (rainfall / 8000);
+			float rain = rainfall / 8000;
 
 			double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
 			double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);

@@ -58,7 +58,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 		this.tasks.removeTask(this.aiArrowAttack);
 		ItemStack itemstack = this.getHeldItem();
 
-		if (itemstack != null && (itemstack.getItem() == TFCItems.Bow || (itemstack.getItem() instanceof ItemJavelin)))
+		if (itemstack != null && (itemstack.getItem() == TFCItems.Bow || itemstack.getItem() instanceof ItemJavelin))
 		{
 			this.tasks.addTask(4, this.aiArrowAttack);
 		}

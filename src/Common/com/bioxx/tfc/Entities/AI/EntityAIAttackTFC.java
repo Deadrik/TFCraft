@@ -1,9 +1,9 @@
 package com.bioxx.tfc.Entities.AI;
 
-import com.bioxx.tfc.api.Entities.IAnimal;
-
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+
+import com.bioxx.tfc.api.Entities.IAnimal;
 
 public class EntityAIAttackTFC extends  EntityAINearestAttackableTarget{
 	private IAnimal theAnimal;
@@ -17,9 +17,9 @@ public class EntityAIAttackTFC extends  EntityAINearestAttackableTarget{
 	/**
 	 * Returns whether the EntityAIBase should begin execution.
 	 */
-	@Override
+	/*@Override
 	public boolean shouldExecute()
 	{
 		return  super.shouldExecute();
-	}
+	}*/
 }

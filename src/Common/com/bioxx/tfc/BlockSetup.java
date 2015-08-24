@@ -4,131 +4,19 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 
-import com.bioxx.tfc.Blocks.BlockBloom;
-import com.bioxx.tfc.Blocks.BlockCharcoal;
-import com.bioxx.tfc.Blocks.BlockCrop;
-import com.bioxx.tfc.Blocks.BlockDetailed;
-import com.bioxx.tfc.Blocks.BlockFireBrick;
-import com.bioxx.tfc.Blocks.BlockIngotPile;
-import com.bioxx.tfc.Blocks.BlockLogPile;
-import com.bioxx.tfc.Blocks.BlockMetalSheet;
-import com.bioxx.tfc.Blocks.BlockMetalTrapDoor;
-import com.bioxx.tfc.Blocks.BlockMolten;
-import com.bioxx.tfc.Blocks.BlockPlanks;
-import com.bioxx.tfc.Blocks.BlockSlab;
-import com.bioxx.tfc.Blocks.BlockSmoke;
-import com.bioxx.tfc.Blocks.BlockSmokeRack;
-import com.bioxx.tfc.Blocks.BlockStair;
-import com.bioxx.tfc.Blocks.BlockStalactite;
-import com.bioxx.tfc.Blocks.BlockSulfur;
-import com.bioxx.tfc.Blocks.BlockThatch;
-import com.bioxx.tfc.Blocks.BlockWoodSupport;
-import com.bioxx.tfc.Blocks.BlockWoodSupport2;
-import com.bioxx.tfc.Blocks.BlockWorldItem;
-import com.bioxx.tfc.Blocks.Devices.BlockBarrel;
-import com.bioxx.tfc.Blocks.Devices.BlockBellows;
-import com.bioxx.tfc.Blocks.Devices.BlockBlastFurnace;
-import com.bioxx.tfc.Blocks.Devices.BlockChestTFC;
-import com.bioxx.tfc.Blocks.Devices.BlockCrucible;
-import com.bioxx.tfc.Blocks.Devices.BlockEarlyBloomery;
-import com.bioxx.tfc.Blocks.Devices.BlockFirepit;
-import com.bioxx.tfc.Blocks.Devices.BlockFoodPrep;
-import com.bioxx.tfc.Blocks.Devices.BlockForge;
-import com.bioxx.tfc.Blocks.Devices.BlockGrill;
-import com.bioxx.tfc.Blocks.Devices.BlockHopper;
-import com.bioxx.tfc.Blocks.Devices.BlockLargeVessel;
-import com.bioxx.tfc.Blocks.Devices.BlockLeatherRack;
-import com.bioxx.tfc.Blocks.Devices.BlockLoom;
-import com.bioxx.tfc.Blocks.Devices.BlockNestBox;
-import com.bioxx.tfc.Blocks.Devices.BlockOilLamp;
-import com.bioxx.tfc.Blocks.Devices.BlockPottery;
-import com.bioxx.tfc.Blocks.Devices.BlockQuern;
-import com.bioxx.tfc.Blocks.Devices.BlockSluice;
-import com.bioxx.tfc.Blocks.Devices.BlockSpawnMeter;
-import com.bioxx.tfc.Blocks.Devices.BlockStand;
-import com.bioxx.tfc.Blocks.Devices.BlockStand2;
-import com.bioxx.tfc.Blocks.Devices.BlockToolRack;
-import com.bioxx.tfc.Blocks.Devices.BlockWorkbench;
-import com.bioxx.tfc.Blocks.Flora.BlockBerryBush;
-import com.bioxx.tfc.Blocks.Flora.BlockFlora;
-import com.bioxx.tfc.Blocks.Flora.BlockFlower;
-import com.bioxx.tfc.Blocks.Flora.BlockFlower2;
-import com.bioxx.tfc.Blocks.Flora.BlockFruitLeaves;
-import com.bioxx.tfc.Blocks.Flora.BlockFruitWood;
-import com.bioxx.tfc.Blocks.Flora.BlockLogHoriz;
-import com.bioxx.tfc.Blocks.Flora.BlockLogHoriz2;
-import com.bioxx.tfc.Blocks.Flora.BlockLogVert;
-import com.bioxx.tfc.Blocks.Flora.BlockLogVert2;
-import com.bioxx.tfc.Blocks.Flora.BlockSapling;
-import com.bioxx.tfc.Blocks.Flora.BlockSapling2;
-import com.bioxx.tfc.Blocks.Flora.BlockWaterPlant;
-import com.bioxx.tfc.Blocks.Liquids.BlockFreshWater;
-import com.bioxx.tfc.Blocks.Liquids.BlockHotWater;
-import com.bioxx.tfc.Blocks.Liquids.BlockHotWaterStatic;
-import com.bioxx.tfc.Blocks.Liquids.BlockLava;
-import com.bioxx.tfc.Blocks.Liquids.BlockLiquidStatic;
-import com.bioxx.tfc.Blocks.Liquids.BlockSaltWater;
-import com.bioxx.tfc.Blocks.Terrain.BlockDryGrass;
-import com.bioxx.tfc.Blocks.Terrain.BlockFungi;
-import com.bioxx.tfc.Blocks.Terrain.BlockGravel;
-import com.bioxx.tfc.Blocks.Terrain.BlockIgEx;
-import com.bioxx.tfc.Blocks.Terrain.BlockIgExBrick;
-import com.bioxx.tfc.Blocks.Terrain.BlockIgExCobble;
-import com.bioxx.tfc.Blocks.Terrain.BlockIgExSmooth;
-import com.bioxx.tfc.Blocks.Terrain.BlockIgIn;
-import com.bioxx.tfc.Blocks.Terrain.BlockIgInBrick;
-import com.bioxx.tfc.Blocks.Terrain.BlockIgInCobble;
-import com.bioxx.tfc.Blocks.Terrain.BlockIgInSmooth;
-import com.bioxx.tfc.Blocks.Terrain.BlockMM;
-import com.bioxx.tfc.Blocks.Terrain.BlockMMBrick;
-import com.bioxx.tfc.Blocks.Terrain.BlockMMCobble;
-import com.bioxx.tfc.Blocks.Terrain.BlockMMSmooth;
-import com.bioxx.tfc.Blocks.Terrain.BlockMoss;
-import com.bioxx.tfc.Blocks.Terrain.BlockOre;
-import com.bioxx.tfc.Blocks.Terrain.BlockOre2;
-import com.bioxx.tfc.Blocks.Terrain.BlockOre3;
-import com.bioxx.tfc.Blocks.Terrain.BlockSand;
-import com.bioxx.tfc.Blocks.Terrain.BlockSed;
-import com.bioxx.tfc.Blocks.Terrain.BlockSedBrick;
-import com.bioxx.tfc.Blocks.Terrain.BlockSedCobble;
-import com.bioxx.tfc.Blocks.Terrain.BlockSedSmooth;
-import com.bioxx.tfc.Blocks.Vanilla.BlockBed;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomBookshelf;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomButtonWood;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomCactus;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomDoor;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFenceGate;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFenceGate2;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFlowerPot;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomIce;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLeaves;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLeaves2;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLilyPad;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomPumpkin;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomReed;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomSnow;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomTallGrass;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomVine;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomWall;
-import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFence;
-import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFence2;
-import com.bioxx.tfc.Blocks.Vanilla.BlockTorch;
+import cpw.mods.fml.common.registry.GameRegistry;
+
+import com.bioxx.tfc.Blocks.*;
+import com.bioxx.tfc.Blocks.Devices.*;
+import com.bioxx.tfc.Blocks.Flora.*;
+import com.bioxx.tfc.Blocks.Liquids.*;
+import com.bioxx.tfc.Blocks.Terrain.*;
+import com.bioxx.tfc.Blocks.Vanilla.*;
 import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Items.ItemBlocks.ItemBarrels;
-import com.bioxx.tfc.Items.ItemBlocks.ItemGrill;
-import com.bioxx.tfc.Items.ItemBlocks.ItemLargeVessel;
-import com.bioxx.tfc.Items.ItemBlocks.ItemLooms;
-import com.bioxx.tfc.Items.ItemBlocks.ItemMetalTrapDoor;
-import com.bioxx.tfc.Items.ItemBlocks.ItemOilLamp;
-import com.bioxx.tfc.Items.ItemBlocks.ItemSoil;
-import com.bioxx.tfc.Items.ItemBlocks.ItemStone;
-import com.bioxx.tfc.Items.ItemBlocks.ItemToolRack;
-import com.bioxx.tfc.Items.ItemBlocks.ItemTorch;
+import com.bioxx.tfc.Items.ItemBlocks.*;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.Constant.Global;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockSetup extends TFCBlocks
 {
@@ -377,17 +265,17 @@ public class BlockSetup extends TFCBlocks
 		StoneMMSmooth = new BlockMMSmooth().setHardness(15F).setBlockName("MMRockSmooth");
 		StoneMMBrick = new BlockMMBrick().setHardness(15F).setBlockName("MMRockBrick");
 
-		Dirt = (new com.bioxx.tfc.Blocks.Terrain.BlockDirt(0)).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("dirt");
+		Dirt = new BlockDirt(0).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("dirt");
 
-		Dirt2 = (new com.bioxx.tfc.Blocks.Terrain.BlockDirt(16)).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("dirt");
-		Clay = (new com.bioxx.tfc.Blocks.Terrain.BlockClay(0)).setHardness(3F).setStepSound(Block.soundTypeGravel).setBlockName("clay");
-		Clay2 = (new com.bioxx.tfc.Blocks.Terrain.BlockClay(16)).setHardness(3F).setStepSound(Block.soundTypeGravel).setBlockName("clay");
-		ClayGrass = new com.bioxx.tfc.Blocks.Terrain.BlockClayGrass(0).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("ClayGrass");
-		ClayGrass2 = new com.bioxx.tfc.Blocks.Terrain.BlockClayGrass(16).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("ClayGrass");
-		Grass = (new com.bioxx.tfc.Blocks.Terrain.BlockGrass()).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("Grass");
-		Grass2 = new com.bioxx.tfc.Blocks.Terrain.BlockGrass(16).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("Grass");
-		Peat = new com.bioxx.tfc.Blocks.Terrain.BlockPeat().setHardness(3F).setStepSound(Block.soundTypeGravel).setBlockName("Peat");
-		PeatGrass = new com.bioxx.tfc.Blocks.Terrain.BlockPeatGrass().setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("PeatGrass");
+		Dirt2 = new BlockDirt(16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("dirt");
+		Clay = new BlockClay(0).setHardness(3F).setStepSound(Block.soundTypeGravel).setBlockName("clay");
+		Clay2 = new BlockClay(16).setHardness(3F).setStepSound(Block.soundTypeGravel).setBlockName("clay");
+		ClayGrass = new BlockClayGrass(0).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("ClayGrass");
+		ClayGrass2 = new BlockClayGrass(16).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("ClayGrass");
+		Grass = new BlockGrass().setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("Grass");
+		Grass2 = new BlockGrass(16).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("Grass");
+		Peat = new BlockPeat().setHardness(3F).setStepSound(Block.soundTypeGravel).setBlockName("Peat");
+		PeatGrass = new BlockPeatGrass().setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("PeatGrass");
 		DryGrass = new BlockDryGrass(0).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("DryGrass");
 		DryGrass2 =new BlockDryGrass(16).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("DryGrass");
 		TallGrass = new BlockCustomTallGrass().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("TallGrass");
@@ -406,20 +294,20 @@ public class BlockSetup extends TFCBlocks
 		WoodSupportV2 = new BlockWoodSupport2(Material.wood).setBlockName("WoodSupportV2").setHardness(0.5F).setResistance(1F);
 		WoodSupportH2 = new BlockWoodSupport2(Material.wood).setBlockName("WoodSupportH2").setHardness(0.5F).setResistance(1F);
 
-		tilledSoil = new com.bioxx.tfc.Blocks.BlockFarmland(TFCBlocks.Dirt, 0).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil");
-		tilledSoil2 = new com.bioxx.tfc.Blocks.BlockFarmland(TFCBlocks.Dirt2, 16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil");
+		tilledSoil = new BlockFarmland(TFCBlocks.Dirt, 0).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil");
+		tilledSoil2 = new BlockFarmland(TFCBlocks.Dirt2, 16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil");
 
 		fruitTreeWood = new BlockFruitWood().setBlockName("fruitTreeWood").setHardness(5.5F).setResistance(2F);
 		fruitTreeLeaves = new BlockFruitLeaves(0).setBlockName("fruitTreeLeaves").setHardness(0.5F).setResistance(1F).setStepSound(Block.soundTypeGrass);
 		fruitTreeLeaves2 = new BlockFruitLeaves(8).setBlockName("fruitTreeLeaves2").setHardness(0.5F).setResistance(1F).setStepSound(Block.soundTypeGrass);
 
-		WoodConstruct = (new com.bioxx.tfc.Blocks.BlockWoodConstruct()).setHardness(4F).setStepSound(Block.soundTypeWood).setBlockName("WoodConstruct");
+		WoodConstruct = new BlockWoodConstruct().setHardness(4F).setStepSound(Block.soundTypeWood).setBlockName("WoodConstruct");
 
 		Firepit = new BlockFirepit().setBlockName("Firepit").setHardness(1).setLightLevel(0F);
 		Bellows = new BlockBellows(Material.wood).setBlockName("Bellows").setHardness(2);
 		Forge= new BlockForge().setBlockName("Forge").setHardness(20).setLightLevel(0F);
-		Anvil = new com.bioxx.tfc.Blocks.Devices.BlockAnvil().setBlockName("Anvil").setHardness(3).setResistance(100F);
-		Anvil2 = new com.bioxx.tfc.Blocks.Devices.BlockAnvil(8).setBlockName("Anvil2").setHardness(3).setResistance(100F);
+		Anvil = new BlockAnvil().setBlockName("Anvil").setHardness(3).setResistance(100F);
+		Anvil2 = new BlockAnvil(8).setBlockName("Anvil2").setHardness(3).setResistance(100F);
 
 		Molten = new BlockMolten().setBlockName("Molten").setHardness(20);
 		BlastFurnace = new BlockBlastFurnace().setBlockName("BlastFurnace").setHardness(20).setLightLevel(0F);
@@ -435,15 +323,15 @@ public class BlockSetup extends TFCBlocks
 
 		Detailed = new BlockDetailed().setBlockName("StoneDetailed").setHardness(10);
 
-		Planks = (new BlockPlanks(Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood");
-		Planks2 = (new com.bioxx.tfc.Blocks.BlockPlanks2(Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood2");
-		Leaves = (new BlockCustomLeaves()).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves").setCreativeTab(TFCTabs.TFCDecoration);
-		Leaves2 = (new BlockCustomLeaves2()).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves2");
-		Sapling = (new BlockSapling()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling");
-		Sapling2 = (new BlockSapling2()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling2");
+		Planks = new BlockPlanks(Material.wood).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood");
+		Planks2 = new BlockPlanks2(Material.wood).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood2");
+		Leaves = new BlockCustomLeaves().setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves").setCreativeTab(TFCTabs.TFCDecoration);
+		Leaves2 = new BlockCustomLeaves2().setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves2");
+		Sapling = new BlockSapling().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling");
+		Sapling2 = new BlockSapling2().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling2");
 
-		LogNatural = new com.bioxx.tfc.Blocks.Flora.BlockLogNatural().setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log");
-		LogNatural2 = new com.bioxx.tfc.Blocks.Flora.BlockLogNatural2().setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log2");
+		LogNatural = new BlockLogNatural().setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log");
+		LogNatural2 = new BlockLogNatural2().setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log2");
 		WoodVert = new BlockLogVert().setBlockName("WoodVert").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
 		WoodVert2 = new BlockLogVert2().setBlockName("WoodVert2").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
 		WoodHoriz = new BlockLogHoriz(0).setBlockName("WoodHoriz").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
@@ -507,17 +395,17 @@ public class BlockSetup extends TFCBlocks
 		Flowers2 = new BlockFlower2().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers2");
 		Fungi = new BlockFungi().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Fungi");
 
-		SaltWater = (new BlockSaltWater(TFCFluids.SALTWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWater");
-		SaltWaterStationary = (new BlockLiquidStatic(TFCFluids.SALTWATER, Material.water, SaltWater)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWaterStationary");
+		SaltWater = new BlockSaltWater(TFCFluids.SALTWATER).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWater");
+		SaltWaterStationary = new BlockLiquidStatic(TFCFluids.SALTWATER, Material.water, SaltWater).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWaterStationary");
 
-		FreshWater = (new BlockFreshWater(TFCFluids.FRESHWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWater");
-		FreshWaterStationary = (new BlockLiquidStatic(TFCFluids.FRESHWATER, Material.water, FreshWater)).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWaterStationary");
+		FreshWater = new BlockFreshWater(TFCFluids.FRESHWATER).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWater");
+		FreshWaterStationary = new BlockLiquidStatic(TFCFluids.FRESHWATER, Material.water, FreshWater).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWaterStationary");
 
-		HotWater = (new BlockHotWater(TFCFluids.HOTWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWater");
-		HotWaterStationary = (new BlockHotWaterStatic(TFCFluids.HOTWATER, Material.water, HotWater)).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWaterStationary");
+		HotWater = new BlockHotWater(TFCFluids.HOTWATER).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWater");
+		HotWaterStationary = new BlockHotWaterStatic(TFCFluids.HOTWATER, Material.water, HotWater).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWaterStationary");
 
-		Lava = (new BlockLava()).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("Lava");
-		LavaStationary = (new BlockLiquidStatic(TFCFluids.LAVA, Material.lava, Lava)).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("LavaStationary");
+		Lava = new BlockLava().setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("Lava");
+		LavaStationary = new BlockLiquidStatic(TFCFluids.LAVA, Material.lava, Lava).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("LavaStationary");
 		Ice = new BlockCustomIce().setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("Ice").setBlockTextureName("ice");
 
 		WaterPlant = new BlockWaterPlant(0).setBlockName("SeaGrassStill").setHardness(0.5f).setStepSound(Block.soundTypeGravel);
@@ -526,8 +414,8 @@ public class BlockSetup extends TFCBlocks
 		MetalSheet = new BlockMetalSheet().setBlockName("MetalSheet").setHardness(80);
 		LeatherRack = new BlockLeatherRack().setBlockName("LeatherRack").setHardness(1);
 
-		Gravel = (new BlockGravel(0)).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravel");
-		Gravel2 = (new BlockGravel(16)).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravel");
+		Gravel = new BlockGravel(0).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravel");
+		Gravel2 = new BlockGravel(16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravel");
 
 		Grill = new BlockGrill().setHardness(2F).setBlockName("Grill");
 		MetalTrapDoor = new BlockMetalTrapDoor().setHardness(2F).setBlockName("MetalTrapDoor");

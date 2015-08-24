@@ -157,7 +157,7 @@ public class ItemWoodSupport extends ItemTerraBlock
 					int j1 = b.onBlockPlaced(world, x+(dir.offsetX*count), y, z+(dir.offsetZ*count), side, hitX, hitY, hitZ, i1);
 					if (placeBlockAt(b, itemstack, player, world, x+(dir.offsetX*count), y, z+(dir.offsetZ*count), j1, 2))
 					{
-						world.playSoundEffect((float) x + (dir.offsetX * count) + 0.5F, y + 0.5F, (float) z + (dir.offsetZ * count) + 0.5F, b.stepSound.func_150496_b(), (b.stepSound.getVolume() + 1.0F) / 2.0F, b.stepSound.getPitch() * 0.8F);
+						world.playSoundEffect((float) x + dir.offsetX * count + 0.5F, y + 0.5F, (float) z + dir.offsetZ * count + 0.5F, b.stepSound.func_150496_b(), (b.stepSound.getVolume() + 1.0F) / 2.0F, b.stepSound.getPitch() * 0.8F);
 						--itemstack.stackSize;
 					}
 					count++;

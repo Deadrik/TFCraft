@@ -83,7 +83,7 @@ public class GenCommand extends CommandBase
 					TFC_Core.sendInfoMessage(player, new ChatComponentText("Invalid Tree"));
 			}
 		}
-		else if (params.length == 3 && (params[0].equalsIgnoreCase("tree") && params[2].equalsIgnoreCase("big")))
+		else if (params.length == 3 && params[0].equalsIgnoreCase("tree") && params[2].equalsIgnoreCase("big"))
 		{
 			int i = getTree(params[1]);
 

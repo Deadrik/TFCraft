@@ -109,10 +109,10 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		timeOfConception = 0;
 		mateSizeMod = 1f;
 		sex = rand.nextInt(2);
-		size_mod =(float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion + 1)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1F) * (1.0F - dimorphism * sex));
-		strength_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
-		aggression_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
-		obedience_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + (1f/aggression_mod)));
+		size_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt((degreeOfDiversion + 1) * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1F) * (1.0F - dimorphism * sex));
+		strength_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + size_mod));
+		aggression_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1));
+		obedience_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1f / aggression_mod));
 
 		/*
 		 * We hijack the growingAge to hold the day of birth rather than the number of ticks to the next growth event.
@@ -406,8 +406,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 				obedience_mod = TFC_Core.getSmallFloatFromByte(values[3]);
 				
 				familiarity = values[4];
-				familiarizedToday = (values[5] == 1);
-				pregnant = (values[6] == 1);
+				familiarizedToday = values[5] == 1;
+				pregnant = values[6] == 1;
 				happyTicks = values[7];
 				
 				try
@@ -425,7 +425,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 			if(familiarizedToday && familiarity < 100){
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
-				float familiarityChange = (6 * obedience_mod / aggression_mod);
+				float familiarityChange = 6 * obedience_mod / aggression_mod;
 				if(this.isAdult() && familiarity >= 5 && familiarity <= 35) // Adult caps at 35
 				{
 					familiarity += familiarityChange;
@@ -665,7 +665,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 					Item item = is.getItem();
 					if(item instanceof ItemFoodTFC && hunger <= 160000)
 					{
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, (((ItemFoodTFC)item).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, ((ItemFoodTFC) item).onConsumedByEntity(player.getHeldItem(), worldObj, this));
 						this.hunger += 24000;
 						return true;
 					}
@@ -685,7 +685,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 			{
 				if (!player.capabilities.isCreativeMode)
 				{
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, (((ItemFoodTFC) itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, ((ItemFoodTFC) itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this));
 				}
 
 				this.func_146082_f(player);
@@ -844,7 +844,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 			this.setCustomNameTag(name);
 			return true;
 		}
-		this.playSound("mob.wolf.growl",  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
+		this.playSound("mob.wolf.growl", 6, rand.nextFloat() / 2F + (isChild() ? 1.25F : 0.75F));
 		return false;
 	}
 

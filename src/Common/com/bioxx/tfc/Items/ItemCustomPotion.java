@@ -1,12 +1,7 @@
 package com.bioxx.tfc.Items;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
@@ -75,9 +70,9 @@ public class ItemCustomPotion extends ItemPotion
 		return is;
 	}
 
-	@Override
+	/*@Override
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
 		super.registerIcons(par1IconRegister);
-	}
+	}*/
 }

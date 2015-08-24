@@ -286,7 +286,7 @@ public class BlockLogNatural extends BlockTerra
 				if(damage+stack.getItemDamage() <= stack.getMaxDamage())
 				{
 					world.setBlock(i + x, j + y, k + z, Blocks.air, 0, 0x2);
-					if((isStone && world.rand.nextInt(10) != 0) || !isStone)
+					if (!isStone || world.rand.nextInt(10) != 0)
 						logs++;
 					if (logs >= 16)
 					{

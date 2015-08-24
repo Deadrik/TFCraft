@@ -112,7 +112,7 @@ public class ContainerPlayerTFC extends ContainerPlayer
 				slot.onSlotChange(slotStack, origStack);
 			}
 			// From crafting grid input to inventory
-			else if ((slotNum >= 1 && slotNum < 5) || (player.getEntityData().hasKey("craftingTable") && (slotNum >= 45 && slotNum < 50)))
+			else if (slotNum >= 1 && slotNum < 5 || player.getEntityData().hasKey("craftingTable") && slotNum >= 45 && slotNum < 50)
 			{
 				if (!this.mergeItemStack(slotStack, 9, 45, true))
 					return null;

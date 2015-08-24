@@ -18,14 +18,14 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.TileEntities.TESluice;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.TFCItems;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSluice extends BlockContainer
 {
@@ -200,8 +200,7 @@ public class BlockSluice extends BlockContainer
 		int dir = getDirectionFromMetadata(world.getBlockMetadata(x, y, z));
 		int[] offset = headBlockToFootBlockMap[dir];
 
-		boolean stay = (canStay(world, x, y, z, false, dir) &&
-				canStay(world, x+offset[0],y,z+offset[1],true,dir)) && 
+		boolean stay = canStay(world, x, y, z, false, dir) && canStay(world, x + offset[0], y, z + offset[1], true, dir) && 
 				(block.isAir(world, x, y, z) || block.getMaterial().isReplaceable());
 
 		return stay;
@@ -212,8 +211,7 @@ public class BlockSluice extends BlockContainer
 		int[] offset = headBlockToFootBlockMap[dir];
 		Block topBlock = world.getBlock(i, j, k);
 		Block footBlock = world.getBlock(i+offset[0],j,k+offset[1]);
-		boolean stay = (canStay(world, i,j,k,false,dir) && 
-				canStay(world, i+offset[0],j,k+offset[1],true,dir)) && 
+		boolean stay = canStay(world, i, j, k, false, dir) && canStay(world, i + offset[0], j, k + offset[1], true, dir) && 
 				(topBlock.isAir(world, i, j, k) || topBlock.getMaterial().isReplaceable()) &&
 				(footBlock.isAir(world, i+offset[0],j,k+offset[1]) || footBlock.getMaterial().isReplaceable());
 

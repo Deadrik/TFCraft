@@ -33,7 +33,7 @@ public class GuiSluice extends GuiContainerTFC
 		if (sluiceTE.waterInput && sluiceTE.waterOutput)
 		{
 			int l = 12;//sluiceInventory.getProcessScaled(12); 
-			drawTexturedModalRect(guiLeft + 80, (guiTop + 36 + 12 - 19) - l, 176, 12 - l, 14, l + 2);
+			drawTexturedModalRect(guiLeft + 80, guiTop + 36 + 12 - 19 - l, 176, 12 - l, 14, l + 2);
 		}
 		int scale = sluiceTE.getProcessScaled(24);
 		drawTexturedModalRect(guiLeft + 76, guiTop + 34, 176, 14, scale + 1, 16);

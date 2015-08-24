@@ -9,6 +9,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
@@ -17,9 +20,6 @@ import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.TileEntities.TEQuern;
 import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockQuern extends BlockTerraContainer
 {
@@ -40,8 +40,8 @@ public class BlockQuern extends BlockTerraContainer
 		TEQuern te = (TEQuern) world.getTileEntity(x, y, z);
 
 		//TerraFirmaCraft.log.info("----X:"+hitX+" Z:"+hitZ+" Y:"+hitY+" Side:"+side); //Nice way to find out where the mouse is pointing at
-		Boolean hit = (side == 1 && hitX >= 0.70 && hitX <= 90 && hitZ >= 0.70 && hitZ <= 0.90) ||
-				(side == 5 && hitZ >= 0.8 && hitZ <= 0.99 && hitY >= 0.85);
+		Boolean hit = side == 1 && hitX >= 0.70 && hitX <= 90 && hitZ >= 0.70 && hitZ <= 0.90 ||
+				side == 5 && hitZ >= 0.8 && hitZ <= 0.99 && hitY >= 0.85;
 
 		if(!world.isRemote)
 		{
@@ -52,7 +52,7 @@ public class BlockQuern extends BlockTerraContainer
 				world.playSoundEffect(x, y, z, TFC_Sounds.STONEDRAG, 1, 1);
 				entityplayer.triggerAchievement(TFC_Achievements.achQuern);
 			}
-			else if((!te.shouldRotate && !hit) || te.storage[2] == null)
+			else if (!te.shouldRotate && !hit || te.storage[2] == null)
 			{
 				entityplayer.openGui(TerraFirmaCraft.instance, 33, world, x, y, z);
 			}
@@ -67,7 +67,7 @@ public class BlockQuern extends BlockTerraContainer
 	@Override
 	public IIcon getIcon(int i, int j)
 	{
-		if(i == 0 || (i == 1 && j == 1))
+		if (i == 0 || i == 1 && j == 1)
 			return QuernTop1;
 		else if (i == 1 && j == 0)
 			return QuernTop2;

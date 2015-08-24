@@ -16,6 +16,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderGenerate;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 
@@ -24,15 +25,7 @@ import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Entities.Mobs.EntityBear;
-import com.bioxx.tfc.Entities.Mobs.EntityChickenTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityDeer;
-import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityPheasantTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityPigTFC;
-import com.bioxx.tfc.Entities.Mobs.EntitySheepTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityWolfTFC;
+import com.bioxx.tfc.Entities.Mobs.*;
 import com.bioxx.tfc.WorldGen.MapGen.MapGenCavesTFC;
 import com.bioxx.tfc.WorldGen.MapGen.MapGenRavineTFC;
 import com.bioxx.tfc.WorldGen.MapGen.MapGenRiverRavine;
@@ -187,7 +180,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 	private BiomeGenBase getBiome(int x, int z)
 	{
-		return this.biomesForGeneration[(z+1) + (x+1) * 18];
+		return this.biomesForGeneration[z + 1 + (x + 1) * 18];
 	}
 
 	@Override
@@ -505,7 +498,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						scaledNoise6Value /= 2.0D; // Results in values between 0 and -1
 						if (scaledNoise6Value < -1.0D) //Error Checking
 						scaledNoise6Value = -1.0D;
-						scaledNoise6Value /= (1.4D * 2.0D); // Results in values between 0 and -0.357143
+					scaledNoise6Value /= 1.4D * 2.0D; // Results in values between 0 and -0.357143
 					}
 					else
 					{
@@ -592,8 +585,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				}
 				for (int height = 127; height >= 0; --height)
 				{
-					int indexBig = ((arrayIndex) * worldHeight + height + indexOffset);
-					int index = ((arrayIndex) * 128 + height);
+					int indexBig = (arrayIndex) * worldHeight + height + indexOffset;
+					int index = (arrayIndex) * 128 + height;
 					//metaBig[indexBig] = 0;
 					float temp = TFC_Climate.adjustHeightToTemp(height, _temp);
 					if(TFC_Core.isBeachBiome(biome.biomeID) && height > seaLevel+h && idsTop[index] == Blocks.stone)
@@ -647,8 +640,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						if (var13 == -1)
 						{
 							//The following makes dirt behave nicer and more smoothly, instead of forming sharp cliffs.
-							int arrayIndexx = xCoord > 0? (xCoord - 1) + (zCoord * 16):-1;
-							int arrayIndexX = xCoord < 15? (xCoord + 1) + (zCoord * 16):-1;
+							int arrayIndexx = xCoord > 0 ? xCoord - 1 + (zCoord * 16) : -1;
+							int arrayIndexX = xCoord < 15 ? xCoord + 1 + (zCoord * 16) : -1;
 							int arrayIndexz = zCoord > 0? xCoord + ((zCoord-1) * 16):-1;
 							int arrayIndexZ = zCoord < 15? xCoord + ((zCoord+1) * 16):-1;
 							int var12Temp = var12;
@@ -659,45 +652,45 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 									seaLevelOffsetMap[arrayIndex]--;
 									var12--;
 									height--;
-									indexBig = ((arrayIndex) * worldHeight + height + indexOffset);
-									index = ((arrayIndex) * 128 + height);
+									indexBig = (arrayIndex) * worldHeight + height + indexOffset;
+									index = (arrayIndex) * 128 + height;
 								}
 								else if(arrayIndexX >= 0 && seaLevelOffsetMap[arrayIndex]-(3*counter) > seaLevelOffsetMap[arrayIndexX])
 								{
 									seaLevelOffsetMap[arrayIndex]--;
 									var12--;
 									height--;
-									indexBig = ((arrayIndex) * worldHeight + height + indexOffset);
-									index = ((arrayIndex) * 128 + height);
+									indexBig = (arrayIndex) * worldHeight + height + indexOffset;
+									index = (arrayIndex) * 128 + height;
 								}
 								else if(arrayIndexz >= 0 && seaLevelOffsetMap[arrayIndex]-(3*counter) > seaLevelOffsetMap[arrayIndexz])
 								{
 									seaLevelOffsetMap[arrayIndex]--;
 									var12--;
 									height--;
-									indexBig = ((arrayIndex) * worldHeight + height + indexOffset);
-									index = ((arrayIndex) * 128 + height);
+									indexBig = (arrayIndex) * worldHeight + height + indexOffset;
+									index = (arrayIndex) * 128 + height;
 								}
 								else if(arrayIndexZ >= 0 && seaLevelOffsetMap[arrayIndex]-(3*counter) > seaLevelOffsetMap[arrayIndexZ])
 								{
 									seaLevelOffsetMap[arrayIndex]--;
 									var12--;
 									height--;
-									indexBig = ((arrayIndex) * worldHeight + height + indexOffset);
-									index = ((arrayIndex) * 128 + height);
+									indexBig = (arrayIndex) * worldHeight + height + indexOffset;
+									index = (arrayIndex) * 128 + height;
 								}
 							}
-							var13 = (int)(var12 * (1d-Math.max(Math.min(((height - 16) / 80d), 1), 0)));
+							var13 = (int) (var12 * (1d - Math.max(Math.min((height - 16) / 80d, 1), 0)));
 
 							//Set soil below water
 							for(int c = 1; c < 3; c++)
 							{
-								if(indexBig + c < idsBig.length && (
-										(idsBig[indexBig + c] != surfaceBlock) &&
-										(idsBig[indexBig + c] != subSurfaceBlock) &&
-										(idsBig[indexBig + c] != TFCBlocks.SaltWaterStationary) &&
-										(idsBig[indexBig + c] != TFCBlocks.FreshWaterStationary) &&
-										(idsBig[indexBig + c] != TFCBlocks.HotWater)))
+								if(indexBig + c < idsBig.length && 
+										idsBig[indexBig + c] != surfaceBlock &&
+										idsBig[indexBig + c] != subSurfaceBlock &&
+										idsBig[indexBig + c] != TFCBlocks.SaltWaterStationary &&
+										idsBig[indexBig + c] != TFCBlocks.FreshWaterStationary &&
+										idsBig[indexBig + c] != TFCBlocks.HotWater)
 								{
 									idsBig[indexBig + c] = Blocks.air;
 									//metaBig[indexBig + c] = 0;
@@ -724,7 +717,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 											biome != TFCBiome.HighHills && biome != TFCBiome.HighHillsEdge && !cliffMap[arrayIndex]; c++)
 									{
 										int _height = height - c;
-										int _indexBig = ((arrayIndex) * worldHeight + _height + indexOffset);
+										int _indexBig = (arrayIndex) * worldHeight + _height + indexOffset;
 										idsBig[_indexBig] = subSurfaceBlock;
 										metaBig[_indexBig] = (byte)TFC_Core.getSoilMeta(rock1.data1);
 
@@ -738,7 +731,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							}
 						}
 
-						if (((height > seaLevel - 2 && height < seaLevel && idsTop[index + 1] == TFCBlocks.SaltWaterStationary)) || (height < seaLevel && idsTop[index + 1] == TFCBlocks.SaltWaterStationary))
+						if (height > seaLevel - 2 && height < seaLevel && idsTop[index + 1] == TFCBlocks.SaltWaterStationary ||
+							height < seaLevel && idsTop[index + 1] == TFCBlocks.SaltWaterStationary)
 						{
 							if (biome != TFCBiome.swampland) // Most areas have gravel and sand bottoms
 							{
@@ -799,7 +793,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				for (int height = 127; height >= 0; --height)
 				{
 					//int index = ((arrayIndex) * 128 + height);
-					int indexBig = ((arrayIndex) * 256 + height);
+					int indexBig = (arrayIndex) * 256 + height;
 					metaBig[indexBig] = 0;
 
 					if (height <= 1 + (seaLevelOffsetMap[arrayIndex] / 3) + this.rand.nextInt(3))

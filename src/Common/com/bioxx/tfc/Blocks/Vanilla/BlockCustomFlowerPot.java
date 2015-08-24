@@ -91,12 +91,12 @@ public class BlockCustomFlowerPot extends BlockFlowerPot
 			
 			// TFC Blocks
 			if (block == TFCBlocks.Cactus || block == TFCBlocks.Flora || block == TFCBlocks.Flowers || block == TFCBlocks.Flowers2 || 
-					block == TFCBlocks.Fungi || block == TFCBlocks.Sapling || block == TFCBlocks.Sapling2 || (block == TFCBlocks.TallGrass && meta == 1 /*Fern*/))
+					block == TFCBlocks.Fungi || block == TFCBlocks.Sapling || block == TFCBlocks.Sapling2 || block == TFCBlocks.TallGrass && meta == 1 /*Fern*/)
 				return true;
 			
 			// Vanilla Blocks
 			if (block == Blocks.yellow_flower || block == Blocks.red_flower || block == Blocks.cactus || block == Blocks.brown_mushroom || 
-					block == Blocks.red_mushroom || block == Blocks.sapling || block == Blocks.deadbush  || (block == Blocks.tallgrass && meta == 2 /*Fern*/))
+					block == Blocks.red_mushroom || block == Blocks.sapling || block == Blocks.deadbush  || block == Blocks.tallgrass && meta == 2 /*Fern*/)
 				return true;
 		}
 		// Currently not possible to render non-ItemBlocks in the flower pot. -Kitty

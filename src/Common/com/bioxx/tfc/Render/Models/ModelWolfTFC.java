@@ -87,7 +87,7 @@ public class ModelWolfTFC extends ModelBase
 		if(entity instanceof IAnimal)
 		{
 			GL11.glPushMatrix();
-			GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
+			GL11.glTranslatef(0.0F, 0.75f - (0.75f * percent), 0f);
 			GL11.glScalef(1/ageScale, 1/ageScale, 1/ageScale);    
 			this.wolfHeadMain.renderWithRotation(par7);
 			this.wolfBody.render(par7);
@@ -117,15 +117,15 @@ public class ModelWolfTFC extends ModelBase
 		if (entitywolf.isSitting())
 		{
 			this.wolfMane.setRotationPoint(-1.0F, 16.0F, -3.0F);
-			this.wolfMane.rotateAngleX = ((float)Math.PI * 2F / 5F);
+			this.wolfMane.rotateAngleX = (float) Math.PI * 2F / 5F;
 			this.wolfMane.rotateAngleY = 0.0F;
 			this.wolfBody.setRotationPoint(0.0F, 18.0F, 0.0F);
-			this.wolfBody.rotateAngleX = ((float)Math.PI / 4F);
+			this.wolfBody.rotateAngleX = (float) Math.PI / 4F;
 			this.wolfTail.setRotationPoint(-1.0F, 21.0F, 6.0F);
 			this.wolfLeg1.setRotationPoint(-2.5F, 22.0F, 2.0F);
-			this.wolfLeg1.rotateAngleX = ((float)Math.PI * 3F / 2F);
+			this.wolfLeg1.rotateAngleX = (float) Math.PI * 3F / 2F;
 			this.wolfLeg2.setRotationPoint(0.5F, 22.0F, 2.0F);
-			this.wolfLeg2.rotateAngleX = ((float)Math.PI * 3F / 2F);
+			this.wolfLeg2.rotateAngleX = (float) Math.PI * 3F / 2F;
 			this.wolfLeg3.rotateAngleX = 5.811947F;
 			this.wolfLeg3.setRotationPoint(-2.49F, 17.0F, -4.0F);
 			this.wolfLeg4.rotateAngleX = 5.811947F;
@@ -134,7 +134,7 @@ public class ModelWolfTFC extends ModelBase
 		else
 		{
 			this.wolfBody.setRotationPoint(0.0F, 14.0F, 2.0F);
-			this.wolfBody.rotateAngleX = ((float)Math.PI / 2F);
+			this.wolfBody.rotateAngleX = (float) Math.PI / 2F;
 			this.wolfMane.setRotationPoint(-1.0F, 14.0F, -3.0F);
 			this.wolfMane.rotateAngleX = this.wolfBody.rotateAngleX;
 			this.wolfTail.setRotationPoint(-1.0F, 12.0F, 8.0F);

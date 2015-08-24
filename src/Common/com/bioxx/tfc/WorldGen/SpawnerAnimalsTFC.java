@@ -37,7 +37,7 @@ public final class SpawnerAnimalsTFC
 		else
 		{
 			Block b = par1World.getBlock(par2, par3 - 1, par4);
-			boolean spawnBlock = (b != null && b.canCreatureSpawn(par0EnumCreatureType, par1World, par2, par3 - 1, par4));
+			boolean spawnBlock = b != null && b.canCreatureSpawn(par0EnumCreatureType, par1World, par2, par3 - 1, par4);
 			return spawnBlock && b != Blocks.bedrock &&
 					!par1World.getBlock(par2, par3, par4).isNormalCube() &&
 					!par1World.getBlock(par2, par3, par4).getMaterial().isLiquid() &&

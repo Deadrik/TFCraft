@@ -425,7 +425,7 @@ public class BlockCollapsible extends BlockTerraContainer
 				localX = block.coords.x;
 				localY = block.coords.y;
 				localZ = block.coords.z;
-				if((world.isAirBlock(worldX, worldY, worldZ)) /*&& localY < 4*/)
+				if (world.isAirBlock(worldX, worldY, worldZ) /*&& localY < 4*/)
 					checkQueue.add(checkedmap, new CollapseData(new ByteCoord(localX + 0, localY + 1, localZ + 0), block.collapseChance - incrementChance*4, TFCDirection.UP));
 				else if(world.getBlock(worldX, worldY, worldZ) instanceof BlockCollapsible && 
 						((BlockCollapsible)world.getBlock(worldX, worldY, worldZ)).tryToCollapse(world, worldX, worldY, worldZ, block.collapseChance))

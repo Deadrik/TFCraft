@@ -3,11 +3,7 @@ package com.bioxx.tfc.Handlers;
 import java.util.Random;
 
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityMultiPart;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,9 +15,12 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.MathHelper;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_MobData;
@@ -32,8 +31,6 @@ import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Events.EntityArmorCalcEvent;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class EntityDamageHandler
 {
@@ -128,7 +125,7 @@ public class EntityDamageHandler
 				//5. Damage the armor that was hit
 				armor[location].damageItem((int) processArmorDamage(armor[location], damage), entity);
 			}
-			else if(armor[location] == null || (armor[location] != null && !(armor[location].getItem() instanceof ItemTFCArmor)))
+			else if (armor[location] == null || armor[location] != null && !(armor[location].getItem() instanceof ItemTFCArmor))
 			{
 				if(entity instanceof IInnateArmor)
 				{
@@ -180,7 +177,7 @@ public class EntityDamageHandler
 		}
 		else if(damageType == EnumDamageType.GENERIC)
 		{
-			damage *= (((crushMult+slashMult+pierceMult)/3)-0.25);
+			damage *= (crushMult + slashMult + pierceMult) / 3 - 0.25;
 		}
 		return Math.max(0, damage);
 	}
@@ -249,7 +246,7 @@ public class EntityDamageHandler
 	{
 		if(AR == -1000)
 			AR=-999;
-		return (1000f / (1000f + AR));
+		return 1000f / (1000f + AR);
 	}
 
 	@SubscribeEvent

@@ -106,7 +106,8 @@ public class ItemPotteryJug extends ItemPotteryBase
 					is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
 				}
 				else if(is.stackTagCompound.hasKey("blowTime") &&	
-						(is.stackTagCompound.getLong("blowTime") + 10 < TFC_Time.getTotalTicks())){
+							is.stackTagCompound.getLong("blowTime") + 10 < TFC_Time.getTotalTicks())
+				{
 					playNote = true;
 					is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
 				}
@@ -180,7 +181,8 @@ public class ItemPotteryJug extends ItemPotteryBase
 							is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
 						}
 						else if(is.stackTagCompound.hasKey("blowTime") &&	
-								(is.stackTagCompound.getLong("blowTime") + 10 < TFC_Time.getTotalTicks())){
+									is.stackTagCompound.getLong("blowTime") + 10 < TFC_Time.getTotalTicks())
+						{
 							is.stackTagCompound.setLong("blowTime", TFC_Time.getTotalTicks());
 						}
 						else if(!is.stackTagCompound.hasKey("blowTime")){

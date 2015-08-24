@@ -18,7 +18,11 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Facing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
 import net.minecraftforge.fluids.FluidStack;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Blocks.Devices.BlockChestTFC;
 import com.bioxx.tfc.Blocks.Devices.BlockHopper;
@@ -27,9 +31,6 @@ import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.TFCItems;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TEHopper extends NetworkTileEntity implements IHopper
 {
@@ -284,7 +285,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 			{
 				for(int i = 0; i < storage.length; i++)
 				{
-					if(storage[i] == null || (ItemStack.areItemStacksEqual(storage[i], pressBlock) && storage[i].stackSize < storage[i].getMaxStackSize()))
+					if (storage[i] == null || ItemStack.areItemStacksEqual(storage[i], pressBlock) && storage[i].stackSize < storage[i].getMaxStackSize())
 					{
 						if(storage[i] == null)
 							storage[i] = pressBlock;
@@ -807,7 +808,8 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 
 	private static boolean canMergeStacks(ItemStack p_145894_0_, ItemStack p_145894_1_)
 	{
-		return p_145894_0_.getItem() != p_145894_1_.getItem() ? false : (p_145894_0_.getItemDamage() != p_145894_1_.getItemDamage() ? false : (p_145894_0_.stackSize > p_145894_0_.getMaxStackSize() ? false : ItemStack.areItemStackTagsEqual(p_145894_0_, p_145894_1_)));
+		return p_145894_0_.getItem() != p_145894_1_.getItem() ? false : p_145894_0_.getItemDamage() != p_145894_1_.getItemDamage() ? false
+				: p_145894_0_.stackSize > p_145894_0_.getMaxStackSize() ? false : ItemStack.areItemStackTagsEqual(p_145894_0_, p_145894_1_);
 	}
 
 	@Override

@@ -220,7 +220,7 @@ public class BlockCharcoal extends BlockTerra
 	public void setBlockBoundsBasedOnState(IBlockAccess bAccess, int x, int y, int z)
 	{
 		int meta = bAccess.getBlockMetadata(x, y, z);
-		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, (0.125f * meta), 1.0F);
+		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125f * meta, 1.0F);
 	}
 
 	@Override

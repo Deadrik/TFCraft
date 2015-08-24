@@ -12,13 +12,14 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Textures;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Textures;
 
 public class BlockStalactite extends BlockTerra
 {
@@ -37,8 +38,8 @@ public class BlockStalactite extends BlockTerra
 		{
 			AxisAlignedBB aabb = getCollisionBoundingBoxFromPool(world, i, j, k);
 
-			double xRand = (random.nextFloat() * (aabb.maxX - aabb.minX)) + aabb.minX;
-			double zRand = (random.nextFloat() * (aabb.maxZ - aabb.minZ)) + aabb.minZ;
+			double xRand = random.nextFloat() * (aabb.maxX - aabb.minX) + aabb.minX;
+			double zRand = random.nextFloat() * (aabb.maxZ - aabb.minZ) + aabb.minZ;
 
 			world.spawnParticle("dripWater", xRand + 0.2, aabb.minY + 0.9,  zRand + 0.2, 0.0D, 0.0D, 0.0D);
 		}
