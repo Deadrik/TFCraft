@@ -13,6 +13,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
 import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.bioxx.tfc.TerraFirmaCraft;
@@ -391,7 +392,7 @@ public class ItemMeal extends ItemTerra implements IFood
 	public int getTasteSalty(ItemStack is) {
 		int base = 0;
 		if (is != null && is.hasTagCompound() && is.getTagCompound().hasKey("tasteSalty"))
-			base = is.getTagCompound().getInteger("tasteSalty");;
+			base = is.getTagCompound().getInteger("tasteSalty");
 			return base + getTasteSaltyMod(is);
 	}
 

@@ -1,20 +1,20 @@
 package com.bioxx.tfc.Handlers.Network;
 
+import java.util.HashMap;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
-import java.util.HashMap;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+
+import cpw.mods.fml.common.network.ByteBufUtils;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.Player.SkillStats;
-
-import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class PlayerUpdatePacket extends AbstractPacket
 {
@@ -58,10 +58,10 @@ public class PlayerUpdatePacket extends AbstractPacket
 		{
 			this.playerSkills = TFC_Core.getSkillStats(P);
 		}
-		else if(this.flag == 4)
+		/*else if(this.flag == 4)
 		{
 			// flag 4 -> Send a request to the server for the skills data.
-		}
+		}*/
 	}
 
 	public PlayerUpdatePacket(int f, String name, int lvl)
@@ -102,10 +102,10 @@ public class PlayerUpdatePacket extends AbstractPacket
 		{
 			this.playerSkills.toOutBuffer(buffer);
 		}
-		else if(this.flag == 4)
+		/*else if(this.flag == 4)
 		{
 			// flag is all we need
-		}
+		}*/
 	}
 
 	@Override
@@ -145,10 +145,10 @@ public class PlayerUpdatePacket extends AbstractPacket
 				this.skillMap.put(name, lvl);
 			}
 		}
-		else if(this.flag == 4)
+		/*else if(this.flag == 4)
 		{
 			// flag is all we need
-		}
+		}*/
 	}
 
 	@Override
@@ -189,10 +189,10 @@ public class PlayerUpdatePacket extends AbstractPacket
 			}
 			skillMap.clear();
 		}
-		else if(this.flag == 4)
+		/*else if(this.flag == 4)
 		{
 			//NOOP on client
-		}
+		}*/
 	}
 
 	@Override

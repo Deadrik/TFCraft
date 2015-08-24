@@ -3,11 +3,7 @@ package com.bioxx.tfc.Entities.Mobs;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,6 +15,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.IShearable;
 
 import com.bioxx.tfc.Core.TFC_Core;
@@ -673,11 +670,8 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = (6 * obedience_mod / aggression_mod);
-				if (this.isAdult() && familiarity > 35) // Adult caps at 35
+				if (this.isAdult() && familiarity <= 35) // Adult caps at 35
 				{
-					//Nothing
-				}
-				else if(this.isAdult()){
 					familiarity += familiarityChange;
 				}
 				else if(!this.isAdult()){

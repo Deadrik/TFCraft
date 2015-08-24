@@ -133,10 +133,10 @@ public class BlockFruitWood extends BlockTerraContainer
 				}
 			}
 		}
-		else
+		/*else
 		{
 			//world.setBlock(i, j, k, this, l, 0x2);
-		}
+		}*/
 	}
 
 	@Override

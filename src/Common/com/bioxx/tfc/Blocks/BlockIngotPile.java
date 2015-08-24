@@ -18,12 +18,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
-import com.bioxx.tfc.TileEntities.TEIngotPile;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.TileEntities.TEIngotPile;
 
 public class BlockIngotPile extends BlockTerraContainer
 {
@@ -42,14 +43,6 @@ public class BlockIngotPile extends BlockTerraContainer
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
-		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
-		if(equippedItem != null)
-		{
-		}
-		else
-		{
-		}
-
 		if(world.isRemote)
 		{
 			world.getTileEntity(x, y, z).validate();

@@ -20,11 +20,7 @@ public class TESRFirepit extends TESRBase
 	{
 		//int var9;
 
-		if (par1TileEntityPit.getWorldObj() == null)
-		{
-			//var9 = 0;
-		}
-		else
+		if (par1TileEntityPit.getWorldObj() != null)
 		{
 			if(par1TileEntityPit.hasCookingPot)
 			{

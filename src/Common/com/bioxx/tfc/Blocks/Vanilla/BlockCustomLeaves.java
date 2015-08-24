@@ -17,7 +17,11 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.IShearable;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
@@ -25,9 +29,6 @@ import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCustomLeaves extends BlockLeaves implements IShearable
 {
@@ -213,7 +214,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	@Override
 	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float f, int i1)
 	{
-		if (!world.isRemote) {}
+		// Do Nothing
 	}
 
 	@Override
@@ -259,7 +260,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 			if(world.rand.nextInt(100) < 28)
 				dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.Stick, 1));
 			else if (world.rand.nextInt(100) < 6)
-				dropSapling(world, i, j, k, meta);;
+				dropSapling(world, i, j, k, meta);
 
 				super.harvestBlock(world, entityplayer, i, j, k, meta);
 		}

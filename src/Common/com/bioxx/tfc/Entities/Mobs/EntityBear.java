@@ -781,11 +781,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = (3 * obedience_mod / aggression_mod); //Changed from 6 to 3 so bears are harder to tame by default. -Kitty
-				if (this.isAdult() && familiarity > 80) //Adult bears cap out at 80 since it is currently impossible to get baby bears.
+				if(this.isAdult() && familiarity <= 80) //Adult bears cap out at 80 since it is currently impossible to get baby bears.
 				{
-					//Nothing
-				}
-				else if(this.isAdult()){
 					familiarity += familiarityChange;
 				}
 				else if(!this.isAdult()){

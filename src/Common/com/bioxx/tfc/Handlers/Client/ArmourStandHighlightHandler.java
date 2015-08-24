@@ -5,14 +5,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.TileEntities.TEStand;
 import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class ArmourStandHighlightHandler
 {
@@ -92,10 +93,10 @@ public class ArmourStandHighlightHandler
 				boxToRender = feet;
 				//TerraFirmaCraft.proxy.sendCustomPacket(stand.createHighlightPacket(1));
 			}
-			else
+			/*else
 			{
 				//TerraFirmaCraft.proxy.sendCustomPacket(stand.createHighlightPacket(-1));
-			}
+			}*/
 
 			if(boxToRender != null)
 			{

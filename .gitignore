@@ -80,3 +80,4 @@ local.properties
 
 # Other
 *Thumbs.db
+.pmd

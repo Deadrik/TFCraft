@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.TileEntities.TEPartial;
@@ -148,9 +149,7 @@ public class BlockSlab extends BlockPartial
 
 	public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
 	{
-		if(!world.isRemote)
-		{
-		}
+		// Do Nothing
 	}
 
 	@Override

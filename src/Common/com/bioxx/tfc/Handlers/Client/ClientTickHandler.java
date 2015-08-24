@@ -14,12 +14,12 @@ public class ClientTickHandler// implements ITickHandler
 	@SubscribeEvent
 	public void onClientPlayerTick(PlayerTickEvent event)
 	{
-		if(event.phase == Phase.START)
+		/*if(event.phase == Phase.START)
 		{
 //			TerraFirmaCraft.log.info("-------------PLAYER CLIENT TICK START--------------");
 //			EntityPlayer player = event.player;
 //			World world = player.worldObj;
-		}
+		}*/
 		
 		if(event.phase == Phase.END)
 		{

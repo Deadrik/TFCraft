@@ -3,18 +3,19 @@ package com.bioxx.tfc.Handlers.Client;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.event.RenderPlayerEvent;
 
-import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
-import com.bioxx.tfc.Items.ItemQuiver;
-import com.bioxx.tfc.Render.RenderLargeItem;
-import com.bioxx.tfc.Render.RenderQuiver;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
+import com.bioxx.tfc.Items.ItemQuiver;
+import com.bioxx.tfc.Render.RenderLargeItem;
+import com.bioxx.tfc.Render.RenderQuiver;
 
 public class PlayerRenderHandler {
 
@@ -48,8 +49,8 @@ public class PlayerRenderHandler {
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void onPlayerTick(TickEvent.PlayerTickEvent e) {
-		if (e.side.isClient()) {
-
-		}
+		/*if (e.side.isClient()) {
+		
+		}*/
 	}
 }

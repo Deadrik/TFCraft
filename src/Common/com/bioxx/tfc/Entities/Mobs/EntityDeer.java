@@ -668,11 +668,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = (6 * obedience_mod / aggression_mod);
-				if (this.isAdult() && familiarity > 70) // Adult caps at 70 since babies are currently impossible
+				if(this.isAdult() && familiarity <= 70) // Adult caps at 70 since babies are currently impossible
 				{
-					//Nothing
-				}
-				else if(this.isAdult()){
 					familiarity += familiarityChange;
 				}
 				else if(!this.isAdult()){

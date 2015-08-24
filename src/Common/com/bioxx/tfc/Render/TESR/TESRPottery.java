@@ -22,10 +22,7 @@ public class TESRPottery extends TESRBase
 	 */
 	public void renderAt(TEPottery te, double d, double d1, double d2, float f)
 	{
-		if (te.getWorldObj() == null)
-		{
-		}
-		else
+		if (te.getWorldObj() != null)
 		{
 			EntityItem customitem = new EntityItem(field_147501_a.field_147550_f); //tileEntityRenderer.worldObj
 			customitem.hoverStart = 0f;

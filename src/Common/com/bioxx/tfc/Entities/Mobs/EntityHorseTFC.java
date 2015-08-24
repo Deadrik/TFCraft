@@ -1090,11 +1090,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = (6 * obedience_mod / aggression_mod);
-				if (this.isAdult() && familiarity > 35) // Adult caps at 35
+				if (this.isAdult() && familiarity <= 35) // Adult caps at 35
 				{
-					//Nothing
-				}
-				else if(this.isAdult()){
 					familiarity += familiarityChange;
 				}
 				else if(!this.isAdult()){

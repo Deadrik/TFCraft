@@ -86,7 +86,7 @@ public class Recipes
 			{
 				GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.SinglePlank, 8, i), new ItemStack(TFCItems.Logs, 1, i), "itemSaw"));
 				GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.SinglePlank, 4, i), new ItemStack(TFCBlocks.Planks2, 1, l), "itemSaw"));
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.WoodSupportV2, 8, l), "A2", " 2", '2', new ItemStack(TFCItems.Logs, 1, i), 'A', "itemSaw"));;
+				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.WoodSupportV2, 8, l), "A2", " 2", '2', new ItemStack(TFCItems.Logs, 1, i), 'A', "itemSaw"));
 
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Planks2, 1, l), "11","11", '1', new ItemStack(TFCItems.SinglePlank, 1, i));
 

@@ -11,12 +11,7 @@ import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenCustomCactus;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenCustomPumpkin;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenCustomReed;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenCustomSand;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowCrops;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenWaterPlants;
+import com.bioxx.tfc.WorldGen.Generators.*;
 import com.bioxx.tfc.api.TFCBlocks;
 
 public class BiomeDecoratorTFC extends BiomeDecorator
@@ -170,11 +165,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	@Override
 	public void decorateChunk(World par1World, Random par2Random, BiomeGenBase bgb, int par3, int par4)
 	{
-		if (this.currentWorld != null)
-		{
-			// throw new RuntimeException("Already decorating!!");
-		}
-		else
+		if (this.currentWorld == null)
 		{
 			this.currentWorld = par1World;
 			this.randomGenerator = par2Random;

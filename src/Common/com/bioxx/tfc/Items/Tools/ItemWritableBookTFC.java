@@ -31,13 +31,13 @@ public class ItemWritableBookTFC extends ItemTerra
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer entityplayer)
 	{
-		if(entityplayer.worldObj.isRemote)
+		/*if(entityplayer.worldObj.isRemote)
 		{
 			//TerraFirmaCraft.log.info(par1ItemStack.hasTagCompound());
 			//TerraFirmaCraft.log.info(par1ItemStack);
 			//Can't do this
 			//Minecraft.getMinecraft().displayGuiScreen(new GuiScreenBookTFC(entityplayer, par1ItemStack, false));
-		}
+		}*/
 		return par1ItemStack;
 	}
 

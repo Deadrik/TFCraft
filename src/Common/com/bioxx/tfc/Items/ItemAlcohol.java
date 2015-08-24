@@ -10,16 +10,17 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
 import net.minecraftforge.fluids.FluidContainerRegistry;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.api.TFCItems;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemAlcohol extends ItemTerra
 {
@@ -114,9 +115,9 @@ public class ItemAlcohol extends ItemTerra
 			}
 			int levelMod = 250*player.experienceLevel;
 			if(fs.soberTime >TFC_Time.getTotalTicks()+3000+levelMod){
-				if(rand.nextInt(4)==0){
+				/*if(rand.nextInt(4)==0){
 					//player.addPotionEffect(new PotionEffect(9,time,4));
-				}
+				}*/
 				if(fs.soberTime >TFC_Time.getTotalTicks()+5000+levelMod){
 					if(rand.nextInt(4)==0){
 						player.addPotionEffect(new PotionEffect(18,time,4));

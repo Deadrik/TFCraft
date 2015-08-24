@@ -188,10 +188,10 @@ public class WorldGenKapokTrees extends WorldGenerator
 			//int[] var5 = new int[] {var4[0], var4[1], var4[2]};
 			var3[1] = var4[3];
 			int var6 = var3[1] - this.basePos[1];
-			if (this.leafNodeNeedsBase(var6))
+			/*if (this.leafNodeNeedsBase(var6))
 			{
 				//this.placeBlockLine(var3, var5, TFCBlocks.LogNatural2);
-			}
+			}*/
 		}
 	}
 

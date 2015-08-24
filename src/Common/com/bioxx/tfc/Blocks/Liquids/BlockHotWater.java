@@ -10,14 +10,15 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.fluids.Fluid;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Effects.GasFX;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockHotWater extends BlockCustomLiquid
 {
@@ -39,30 +40,29 @@ public class BlockHotWater extends BlockCustomLiquid
 		if(world.isAirBlock(i-1, j, k) || world.isAirBlock(i+1, j, k) || 
 				world.isAirBlock(i, j, k-1) || world.isAirBlock(i, j, k+1) || 
 				world.isAirBlock(i, j+1, k))
-			;
-		else return;
+		{
+			double f = (double)i + 0.5F;
+			double f1 = (double)j + 1f;
+			double f2 = (double)k + 0.5F;
 
-		double f = (double)i + 0.5F;
-		double f1 = (double)j + 1f;
-		double f2 = (double)k + 0.5F;
+			double f4 = random.nextFloat() * -0.1F;
+			double f5 = random.nextFloat() * -0.1F;
+			double f6 = random.nextFloat() * -0.1F;
 
-		double f4 = random.nextFloat() * -0.1F;
-		double f5 = random.nextFloat() * -0.1F;
-		double f6 = random.nextFloat() * -0.1F;
-
-		Minecraft.getMinecraft().effectRenderer.addEffect(new GasFX(world, f,f1,f2,f4,f5,f6));
-		f4 = random.nextFloat() * -0.1F;
-		f5 = random.nextFloat() * -0.1F;
-		f6 = random.nextFloat() * -0.1F;
-		Minecraft.getMinecraft().effectRenderer.addEffect(new GasFX(world, f,f1,f2,f4,f5,f6));
-		f4 = random.nextFloat() * -0.1F;
-		f5 = random.nextFloat() * -0.1F;
-		f6 = random.nextFloat() * -0.1F;
-		Minecraft.getMinecraft().effectRenderer.addEffect(new GasFX(world, f,f1,f2,f4,f5,f6));
-		f4 = random.nextFloat() * -0.1F;
-		f5 = random.nextFloat() * -0.1F;
-		f6 = random.nextFloat() * -0.1F;
-		Minecraft.getMinecraft().effectRenderer.addEffect(new GasFX(world, f,f1,f2,f4,f5,f6));
+			Minecraft.getMinecraft().effectRenderer.addEffect(new GasFX(world, f,f1,f2,f4,f5,f6));
+			f4 = random.nextFloat() * -0.1F;
+			f5 = random.nextFloat() * -0.1F;
+			f6 = random.nextFloat() * -0.1F;
+			Minecraft.getMinecraft().effectRenderer.addEffect(new GasFX(world, f,f1,f2,f4,f5,f6));
+			f4 = random.nextFloat() * -0.1F;
+			f5 = random.nextFloat() * -0.1F;
+			f6 = random.nextFloat() * -0.1F;
+			Minecraft.getMinecraft().effectRenderer.addEffect(new GasFX(world, f,f1,f2,f4,f5,f6));
+			f4 = random.nextFloat() * -0.1F;
+			f5 = random.nextFloat() * -0.1F;
+			f6 = random.nextFloat() * -0.1F;
+			Minecraft.getMinecraft().effectRenderer.addEffect(new GasFX(world, f,f1,f2,f4,f5,f6));
+		}
 	}
 
 	@Override

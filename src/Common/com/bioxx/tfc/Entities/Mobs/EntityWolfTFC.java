@@ -426,11 +426,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = (6 * obedience_mod / aggression_mod);
-				if (this.isAdult() && familiarity > 35) // Adult caps at 35
+				if(this.isAdult() && familiarity >= 5 && familiarity <= 35) // Adult caps at 35
 				{
-					//Nothing
-				}
-				else if(this.isAdult() && familiarity >= 5){
 					familiarity += familiarityChange;
 				}
 				else if(!this.isAdult()){

@@ -244,10 +244,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 	@Override
 	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float dropChance, int fortune)
 	{
-		if (!world.isRemote)
-		{
-			//Intentionally Blank
-		}
+		// Intentionally Blank
 	}
 
 	/* Left-Click Harvest Fruit */

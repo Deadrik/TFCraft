@@ -243,10 +243,10 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 						if(CreatePile(itemstack, entityplayer, world, x, y, z, side, dir))
 						{
 							itemstack.stackSize = itemstack.stackSize-1;
-							if (world.getTileEntity(x,y,z) != null)
+							/*if (world.getTileEntity(x,y,z) != null)
 							{
 								//((TileEntityIngotPile)world.getTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
-							}
+							}*/
 							world.addBlockEvent(x,y,z,TFCBlocks.IngotPile,0,0);
 							te.getBlockType().onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
 						}
@@ -254,10 +254,10 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 
 					}
 					itemstack.stackSize = itemstack.stackSize-1;
-					if (world.getTileEntity(x,y,z) != null)
+					/*if (world.getTileEntity(x,y,z) != null)
 					{
 						//((TileEntityIngotPile)world.getTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
-					}
+					}*/
 					world.addBlockEvent(x,y,z,TFCBlocks.IngotPile,0,0);
 					return true;
 				}
@@ -304,10 +304,10 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 				{
 					setSide(world, itemstack, m, dir, x, y, z, 1, 0, 0);
 				}
-				if (world.getTileEntity(x,y,z) != null && world.getTileEntity(x,y,z) instanceof TEIngotPile)
+				/*if (world.getTileEntity(x,y,z) != null && world.getTileEntity(x,y,z) instanceof TEIngotPile)
 				{
 					//((TileEntityIngotPile)world.getTileEntity(x,y,z)).setType(this.getItem() - 16028 - 256);
-				}
+				}*/
 				world.addBlockEvent(x,y,z,TFCBlocks.IngotPile,0,0);
 				return true;
 			}

@@ -3,19 +3,8 @@ package com.bioxx.tfc.Entities.Mobs;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIEatGrass;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
@@ -182,7 +171,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 
 		if(super.isInLove())
 		{
-			super.resetInLove();;
+			super.resetInLove();
 			setInLove(true);
 		}
 
@@ -667,11 +656,8 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = (6 * obedience_mod / aggression_mod);
-				if (this.isAdult() && familiarity > 35) // Adult caps at 35
+				if (this.isAdult() && familiarity <= 35) // Adult caps at 35
 				{
-					//Nothing
-				}
-				else if(this.isAdult()){
 					familiarity += familiarityChange;
 				}
 				else if(!this.isAdult()){

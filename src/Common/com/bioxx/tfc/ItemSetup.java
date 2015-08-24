@@ -194,7 +194,7 @@ public class ItemSetup extends TFCItems {
 		WroughtIronPick = new ItemCustomPickaxe(IronToolMaterial).setUnlocalizedName("Wrought Iron Pick").setMaxDamage(WroughtIronUses);
 		WroughtIronShovel = new ItemCustomShovel(IronToolMaterial).setUnlocalizedName("Wrought Iron Shovel").setMaxDamage(WroughtIronUses);
 		WroughtIronAxe = new ItemCustomAxe(IronToolMaterial, 185).setUnlocalizedName("Wrought Iron Axe").setMaxDamage(WroughtIronUses);
-		WroughtIronHoe = new ItemCustomHoe(IronToolMaterial).setUnlocalizedName("Wrought Iron Hoe").setMaxDamage(WroughtIronUses);;
+		WroughtIronHoe = new ItemCustomHoe(IronToolMaterial).setUnlocalizedName("Wrought Iron Hoe").setMaxDamage(WroughtIronUses);
 
 		RedSteelPick = new ItemCustomPickaxe(RedSteelToolMaterial).setUnlocalizedName("Red Steel Pick").setMaxDamage(RedSteelUses);
 		RedSteelShovel = new ItemCustomShovel(RedSteelToolMaterial).setUnlocalizedName("Red Steel Shovel").setMaxDamage(RedSteelUses);

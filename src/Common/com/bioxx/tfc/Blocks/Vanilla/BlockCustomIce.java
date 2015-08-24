@@ -11,18 +11,19 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.TFCProvider;
 import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCustomIce extends BlockIce
 {
@@ -180,13 +181,13 @@ public class BlockCustomIce extends BlockIce
 	{
 		if((world.provider) instanceof TFCProvider && !world.isRemote && world.getBlock(i, j, k) == this)
 		{
-			if(world.getBlockMetadata(i, j, k) == 1)
+			/*if(world.getBlockMetadata(i, j, k) == 1)
 			{
-				/*if(j== 143 && scanForOcean(world, i, j, k))
+				if(j== 143 && scanForOcean(world, i, j, k))
 				{
 					world.setBlockMetadataWithNotify(i, j, k, 0, 2);
-				}*/
-			}
+				}
+			}*/
 			((TFCProvider)(world.provider)).canBlockFreeze(i, j, k, false);
 		}
 	}

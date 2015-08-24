@@ -419,11 +419,7 @@ public class EntityLivingHandler
 			ArrayList<EntityItem> drop = new ArrayList<EntityItem>();
 			for(EntityItem ei : event.drops)
 			{
-				if(ei.getEntityItem().getItem() instanceof IFood)
-				{
-
-				}
-				else
+				if (!(ei.getEntityItem().getItem() instanceof IFood))
 				{
 					drop.add(ei);
 				}

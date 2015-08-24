@@ -1,7 +1,5 @@
 package com.bioxx.tfc.Blocks;
 
-import com.bioxx.tfc.Items.Tools.ItemHammer;
-import com.bioxx.tfc.api.Tools.IToolChisel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
@@ -13,12 +11,15 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
-import com.bioxx.tfc.TileEntities.TEPartial;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Items.Tools.ItemHammer;
+import com.bioxx.tfc.TileEntities.TEPartial;
+import com.bioxx.tfc.api.Tools.IToolChisel;
 
 public class BlockPartial extends BlockTerraContainer
 {
@@ -65,9 +66,7 @@ public class BlockPartial extends BlockTerraContainer
 	@Override
 	public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion ex)
 	{
-		if(!world.isRemote)
-		{
-		}
+		// Do Nothing
 	}
 
 	/**

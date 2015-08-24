@@ -5,13 +5,13 @@ import java.util.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
+import cpw.mods.fml.common.IWorldGenerator;
+
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomFruitTree;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
-
-import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenPlants implements IWorldGenerator
 {
@@ -64,9 +64,9 @@ public class WorldGenPlants implements IWorldGenerator
 		float rain = TFC_Climate.getRainfall(world, chunkX, 144, chunkZ);
 		float bioTemperature;
 
-		if(rain >= 62.5f)
+		/*if(rain >= 62.5f)
 		{
-		}
+		}*/
 		if(rain >= 125)
 		{
 			grassPerChunk+=12;

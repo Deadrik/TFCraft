@@ -16,10 +16,7 @@ public class TESRLoom extends TESRBase
 	 */
 	public void renderTileEntityLoomAt(TELoom te, double d, double d1, double d2, float f)
 	{
-		if (te.getWorldObj() == null)
-		{
-		}
-		else
+		if (te.getWorldObj() != null)
 		{
 			int stringCount = te.getStringCount();
 			int reqStringCount = te.getRequiredStringCount();
