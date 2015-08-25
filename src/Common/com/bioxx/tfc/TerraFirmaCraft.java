@@ -4,9 +4,11 @@
 package com.bioxx.tfc;
 
 import net.minecraft.world.WorldType;
+
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.common.MinecraftForge;
+
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -21,21 +23,20 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import com.bioxx.tfc.Commands.*;
-import com.bioxx.tfc.Core.Config.TFC_ConfigFiles;
 import com.bioxx.tfc.Core.*;
+import com.bioxx.tfc.Core.Config.TFC_ConfigFiles;
 import com.bioxx.tfc.Core.Player.PlayerTracker;
 import com.bioxx.tfc.Food.TFCPotion;
 import com.bioxx.tfc.Handlers.*;
 import com.bioxx.tfc.Handlers.Network.PacketPipeline;
-import com.bioxx.tfc.WorldGen.Generators.*;
 import com.bioxx.tfc.WorldGen.TFCProvider;
 import com.bioxx.tfc.WorldGen.TFCProviderHell;
 import com.bioxx.tfc.WorldGen.TFCWorldType;
-import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.WorldGen.Generators.*;
 import com.bioxx.tfc.api.SkillsManager;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
-
+import com.bioxx.tfc.api.Constant.Global;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -103,42 +104,39 @@ public class TerraFirmaCraft
 		// Register Gui Handler
 		proxy.registerGuiHandler();
 
-		if(true)
-		{
-			//Register Generators
-			//Underground Lava
-			GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.Lava, 2, true, TFCOptions.lavaFissureRarity).setUnderground(true, 20).setSeed(1), 0);
-			GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.FreshWaterStationary, 2, false, TFCOptions.waterFissureRarity), 0);
-			//Surface Hotsprings
-			GameRegistry.registerWorldGenerator(new WorldGenFissureCluster(), 1);
-			GameRegistry.registerWorldGenerator(new WorldGenOre(), 2);
-			GameRegistry.registerWorldGenerator(new WorldGenCaveDecor(), 3);
-			GameRegistry.registerWorldGenerator(new WorldGenForests(), 4);
-			GameRegistry.registerWorldGenerator(new WorldGenLooseRocks(), 5);
-			GameRegistry.registerWorldGenerator(new WorldGenSoilPits(), 6);
-			GameRegistry.registerWorldGenerator(new WorldGenLargeRock(), 7);
-			GameRegistry.registerWorldGenerator(new WorldGenPlants(), 8);
+		//Register Generators
+		//Underground Lava
+		GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.Lava, 2, true, TFCOptions.lavaFissureRarity).setUnderground(true, 20).setSeed(1), 0);
+		GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.FreshWaterStationary, 2, false, TFCOptions.waterFissureRarity), 0);
+		//Surface Hotsprings
+		GameRegistry.registerWorldGenerator(new WorldGenFissureCluster(), 1);
+		GameRegistry.registerWorldGenerator(new WorldGenOre(), 2);
+		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor(), 3);
+		GameRegistry.registerWorldGenerator(new WorldGenForests(), 4);
+		GameRegistry.registerWorldGenerator(new WorldGenLooseRocks(), 5);
+		GameRegistry.registerWorldGenerator(new WorldGenSoilPits(), 6);
+		GameRegistry.registerWorldGenerator(new WorldGenLargeRock(), 7);
+		GameRegistry.registerWorldGenerator(new WorldGenPlants(), 8);
 
-			WorldType.DEFAULT = new TFCWorldType(0, "TFCDefault");
-			WorldType.FLAT = new TFCWorldType(1, "TFCFlat");
-			WorldType.LARGE_BIOMES = new TFCWorldType(2, "TFCLargeBiomes");
-			WorldType.AMPLIFIED = new TFCWorldType(3, "TFCAmplified");
+		WorldType.DEFAULT = new TFCWorldType(0, "TFCDefault");
+		WorldType.FLAT = new TFCWorldType(1, "TFCFlat");
+		WorldType.LARGE_BIOMES = new TFCWorldType(2, "TFCLargeBiomes");
+		WorldType.AMPLIFIED = new TFCWorldType(3, "TFCAmplified");
 
-			DimensionManager.unregisterDimension(-1);
-			DimensionManager.unregisterDimension(0);
-			DimensionManager.unregisterDimension(1);
+		DimensionManager.unregisterDimension(-1);
+		DimensionManager.unregisterDimension(0);
+		DimensionManager.unregisterDimension(1);
 
-			DimensionManager.unregisterProviderType(-1);
-			DimensionManager.unregisterProviderType(0);
-			DimensionManager.unregisterProviderType(1);
-			DimensionManager.registerProviderType(-1, TFCProviderHell.class, false);
-			DimensionManager.registerProviderType(0, TFCProvider.class, true);
-			DimensionManager.registerProviderType(1, TFCProvider.class, false);
+		DimensionManager.unregisterProviderType(-1);
+		DimensionManager.unregisterProviderType(0);
+		DimensionManager.unregisterProviderType(1);
+		DimensionManager.registerProviderType(-1, TFCProviderHell.class, false);
+		DimensionManager.registerProviderType(0, TFCProvider.class, true);
+		DimensionManager.registerProviderType(1, TFCProvider.class, false);
 
-			DimensionManager.registerDimension(-1, -1);
-			DimensionManager.registerDimension(0, 0);
-			DimensionManager.registerDimension(1, 1);
-		}
+		DimensionManager.registerDimension(-1, -1);
+		DimensionManager.registerDimension(0, 0);
+		DimensionManager.registerDimension(1, 1);
 	}
 
 	@EventHandler

@@ -95,8 +95,8 @@ public class CommandTransferTamed extends CommandBase
 
 				ChatComponentTranslation chatcomponenttranslation = new ChatComponentTranslation("commands.transferTamed.display.incoming", new Object[] {sender.func_145748_c_()});
 				ChatComponentTranslation chatcomponenttranslation1 = new ChatComponentTranslation("commands.transferTamed.display.outgoing", new Object[] {entityplayermp.func_145748_c_()});
-				chatcomponenttranslation.getChatStyle().setColor(EnumChatFormatting.GRAY).setItalic(Boolean.valueOf(true));
-				chatcomponenttranslation1.getChatStyle().setColor(EnumChatFormatting.GRAY).setItalic(Boolean.valueOf(true));
+				chatcomponenttranslation.getChatStyle().setColor(EnumChatFormatting.GRAY).setItalic(Boolean.TRUE);
+				chatcomponenttranslation1.getChatStyle().setColor(EnumChatFormatting.GRAY).setItalic(Boolean.TRUE);
 				TFC_Core.sendInfoMessage(entityplayermp, chatcomponenttranslation);
 				sender.addChatMessage(chatcomponenttranslation1);
 			}

@@ -382,8 +382,9 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 			ItemStack itemstack = (ItemStack)iterator.next();
 			boolean flag = false;
 			Iterator iterator1 = itemstack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips).iterator();
+			boolean loop = true;
 
-			while (true)
+			while (loop)
 			{
 				if (iterator1.hasNext())
 				{
@@ -395,7 +396,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 
 				if (!flag)
 					iterator.remove();
-				break;
+				loop = false;
 			}
 		}
 

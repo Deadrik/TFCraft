@@ -274,7 +274,7 @@ public class TEBloomery extends NetworkTileEntity
 					else if(entity.getEntityItem().getItem() instanceof ItemOre && ((ItemOre)entity.getEntityItem().getItem()).isSmeltable(entity.getEntityItem()))
 					{
 						int c = entity.getEntityItem().stackSize;
-						for(; c > 0; )
+						while (c > 0)
 						{
 							if(charcoalCount+oreCount < (2*maxCount) && oreCount < maxCount && outCount < 1000)
 							{
@@ -298,7 +298,7 @@ public class TEBloomery extends NetworkTileEntity
 							((ISmeltable)entity.getEntityItem().getItem()).isSmeltable(entity.getEntityItem()))
 					{
 						int c = entity.getEntityItem().stackSize;
-						for(; c > 0; )
+						while (c > 0)
 						{
 							if(((ISmeltable)entity.getEntityItem().getItem()).GetMetalReturnAmount(entity.getEntityItem()) < 100 && oreCount < maxCount && outCount < 1000)
 							{
