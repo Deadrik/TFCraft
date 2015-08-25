@@ -79,7 +79,7 @@ public class TFC_Configuration extends Configuration
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
         }
         return defaultValue;
     }

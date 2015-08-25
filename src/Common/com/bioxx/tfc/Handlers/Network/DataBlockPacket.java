@@ -2,10 +2,12 @@ package com.bioxx.tfc.Handlers.Network;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.TileEntities.NetworkTileEntity;
 
 public class DataBlockPacket extends AbstractPacket
@@ -38,7 +40,7 @@ public class DataBlockPacket extends AbstractPacket
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		}
 	}
 
@@ -55,7 +57,7 @@ public class DataBlockPacket extends AbstractPacket
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		}
 
 	}

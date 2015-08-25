@@ -13,6 +13,7 @@ import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityFishTFC;
@@ -82,7 +83,7 @@ public final class SpawnerAnimalsTFC
 							}
 							catch (Exception exception)
 							{
-								exception.printStackTrace();
+								TerraFirmaCraft.log.catching(exception);
 								continue;
 							}
 							if(entityliving instanceof EntityFishTFC){

@@ -43,7 +43,7 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.ModVersion, dependencies = Reference.ModDependencies, guiFactory = Reference.GUIFactory)
 public class TerraFirmaCraft
 {
-	public static Logger log;
+	public static final Logger log = LogManager.getLogger(Reference.ModName);
 
 	@Instance(Reference.ModID)
 	public static TerraFirmaCraft instance;
@@ -61,8 +61,6 @@ public class TerraFirmaCraft
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		log = LogManager.getLogger(Reference.ModName);
-
 		TFC_ConfigFiles.preInit(event.getModConfigurationDirectory());
 		TFC_ConfigFiles.reloadGeneral(); // No special needs
 		// No world gen here, other mods may need to load first!

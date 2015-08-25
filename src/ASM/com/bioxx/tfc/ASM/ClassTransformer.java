@@ -16,7 +16,7 @@ import org.objectweb.asm.tree.*;
 
 public class ClassTransformer implements net.minecraft.launchwrapper.IClassTransformer
 {
-	public Logger log = LogManager.getLogger("TerraFirmaCraft ASM");
+	public static final Logger log = LogManager.getLogger("TerraFirmaCraft ASM");
 	protected HashMap<String, Patch> mcpMethodNodes = new HashMap<String, Patch>();
 	protected HashMap<String, Patch> obfMethodNodes = new HashMap<String, Patch>();
 	protected String mcpClassName;

@@ -10,6 +10,7 @@ import java.util.List;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.api.Metal;
 
 public class Alloy 
@@ -160,7 +161,7 @@ public class Alloy
 		}
 		catch (IOException e) 
 		{
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		}
 	}
 
@@ -179,7 +180,7 @@ public class Alloy
 		}
 		catch (IOException e)
 		{
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		}
 		return this;
 	}

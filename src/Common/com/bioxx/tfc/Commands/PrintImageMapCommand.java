@@ -105,7 +105,7 @@ public class PrintImageMapCommand extends CommandBase
 		}
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		}
 	}
 	public static void drawDrainageImage(int xCoord, int zCoord, int size, World world, String name, int skipSize)
@@ -143,7 +143,7 @@ public class PrintImageMapCommand extends CommandBase
 		}
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		}
 	}
 	public static void drawTempImage(int xCoord, int zCoord, int size, World world, String name, int skipSize)
@@ -178,7 +178,7 @@ public class PrintImageMapCommand extends CommandBase
 		}
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		}
 	}
 	public static void drawBiomeImage(int xCoord, int zCoord, int size, World world, String name, int skipSize)
@@ -211,7 +211,7 @@ public class PrintImageMapCommand extends CommandBase
 		}
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		}
 	}
 

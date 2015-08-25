@@ -82,7 +82,7 @@ public abstract class GenStabilityLayer extends GenLayerTFC
 		}
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		}
 	}
 

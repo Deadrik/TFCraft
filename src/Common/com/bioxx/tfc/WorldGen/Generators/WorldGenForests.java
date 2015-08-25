@@ -219,7 +219,7 @@ public class WorldGenForests implements IWorldGenerator
 			}
 			catch(IndexOutOfBoundsException e)
 			{
-				//e.printStackTrace();//TerraFirmaCraft.log.info("Tree0 Type: "+TreeType0);TerraFirmaCraft.log.info("Tree1 Type: "+TreeType1);TerraFirmaCraft.log.info("Tree2 Type: "+TreeType2);
+				//TerraFirmaCraft.log.catching(e);//TerraFirmaCraft.log.info("Tree0 Type: "+TreeType0);TerraFirmaCraft.log.info("Tree1 Type: "+TreeType1);TerraFirmaCraft.log.info("Tree2 Type: "+TreeType2);
 			}
 		}
 		if(completed)

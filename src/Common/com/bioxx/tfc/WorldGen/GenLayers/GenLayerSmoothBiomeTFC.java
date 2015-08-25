@@ -2,6 +2,8 @@ package com.bioxx.tfc.WorldGen.GenLayers;
 
 import net.minecraft.world.gen.layer.GenLayer;
 
+import com.bioxx.tfc.TerraFirmaCraft;
+
 public class GenLayerSmoothBiomeTFC extends GenLayerTFC
 {
 	public GenLayerSmoothBiomeTFC(long par1, GenLayer par3GenLayer)
@@ -55,7 +57,7 @@ public class GenLayerSmoothBiomeTFC extends GenLayerTFC
 						throw new Exception();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						TerraFirmaCraft.log.catching(e);
 					}
 				var10[var12 + var11 * par3] = var17;
 				validateInt(var10, var12 + var11 * par3);

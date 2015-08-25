@@ -77,7 +77,7 @@ public abstract class GenRockLayer extends GenLayerTFC
 		}
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		}
 	}
 

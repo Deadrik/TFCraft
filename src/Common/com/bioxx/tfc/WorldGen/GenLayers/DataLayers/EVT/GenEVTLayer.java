@@ -106,7 +106,7 @@ public abstract class GenEVTLayer extends GenLayerTFC
 		}
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		}
 	}
 

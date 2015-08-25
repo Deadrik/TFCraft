@@ -106,7 +106,7 @@ public abstract class GenDrainageLayer extends GenLayerTFC
 		}
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		}
 	}
 

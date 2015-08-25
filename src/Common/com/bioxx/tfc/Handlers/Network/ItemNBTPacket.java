@@ -1,9 +1,9 @@
 package com.bioxx.tfc.Handlers.Network;
 
+import java.util.LinkedList;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-
-import java.util.LinkedList;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -85,7 +85,7 @@ public class ItemNBTPacket extends AbstractPacket {
 			for (String tagName : removeNames)
 				pb.writeStringToBuffer(tagName);
 		} catch (Exception e) {
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		}
 	}
 
@@ -104,7 +104,7 @@ public class ItemNBTPacket extends AbstractPacket {
 			for (int i = 0; i < size; ++i)
 				removeNames.add(pb.readStringFromBuffer(256));
 		} catch (Exception e) {
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		}
 	}
 

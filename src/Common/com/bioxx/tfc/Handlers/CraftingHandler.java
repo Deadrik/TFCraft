@@ -135,7 +135,7 @@ public class CraftingHandler
 						} catch (Exception e1)
 						{
 							TerraFirmaCraft.log.info("--------------------------------------------------");
-							e1.printStackTrace();
+							TerraFirmaCraft.log.catching(e1);
 							TerraFirmaCraft.log.info("--------------------------------------------------");
 						}
 						PlayerInventory.upgradePlayerCrafting(player);

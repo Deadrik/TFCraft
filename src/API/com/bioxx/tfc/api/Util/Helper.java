@@ -8,6 +8,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Interfaces.ISize;
 
@@ -110,13 +111,13 @@ public class Helper {
 			f.setAccessible(true);
 			return (Integer) f.get(obj);
 		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		} catch (SecurityException e) {
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		}
 		return 0; 		
 	}
@@ -135,13 +136,13 @@ public class Helper {
 			f.setAccessible(true);
 			return (Boolean) f.get(obj);
 		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		} catch (SecurityException e) {
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		}
 		return false; 		
 	}
@@ -160,13 +161,13 @@ public class Helper {
 			f.setAccessible(true);
 			return f.get(obj);
 		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		} catch (SecurityException e) {
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			TerraFirmaCraft.log.catching(e);
 		}
 		return null; 		
 	}

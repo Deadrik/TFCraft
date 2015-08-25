@@ -74,7 +74,7 @@ public class PacketHandler// implements IPacketHandler, IConnectionHandler
 //			catch (IOException e)
 //			{
 //				// TODO Auto-generated catch block
-//				e.printStackTrace();
+//				TerraFirmaCraft.log.catching(e);
 //			}
 //
 //			((NetServerHandler)netHandler).sendPacketToPlayer(getPacket(bos));
@@ -342,7 +342,7 @@ public class PacketHandler// implements IPacketHandler, IConnectionHandler
 //		} 
 //		catch (IOException e) 
 //		{
-//			e.printStackTrace();
+//			TerraFirmaCraft.log.catching(e);
 //		}
 //	}
 
@@ -358,7 +358,7 @@ public class PacketHandler// implements IPacketHandler, IConnectionHandler
 //		} 
 //		catch (IOException e) 
 //		{
-//			e.printStackTrace();
+//			TerraFirmaCraft.log.catching(e);
 //		}
 //
 //		TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP) player, getPacket(bos));
