@@ -161,7 +161,7 @@ public class ItemMetalSheet extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public Metal GetMetalType(ItemStack is)
+	public Metal getMetalType(ItemStack is)
 	{
 		if (metal == null)
 		{
@@ -174,7 +174,7 @@ public class ItemMetalSheet extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public short GetMetalReturnAmount(ItemStack is)
+	public short getMetalReturnAmount(ItemStack is)
 	{
 		// TODO Auto-generated method stub
 		return metalAmount;
@@ -188,7 +188,7 @@ public class ItemMetalSheet extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public EnumTier GetSmeltTier(ItemStack is)
+	public EnumTier getSmeltTier(ItemStack is)
 	{
 		// TODO Auto-generated method stub
 		return EnumTier.TierI;

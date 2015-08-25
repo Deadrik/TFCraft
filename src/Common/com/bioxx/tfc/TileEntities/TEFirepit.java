@@ -63,9 +63,9 @@ public class TEFirepit extends TEFireEntity implements IInventory
 		if(fireItemStacks[1] != null)
 		{
 			HeatIndex index = manager.findMatchingIndex(fireItemStacks[1]);
-			if(index != null && TFC_ItemHeat.GetTemp(fireItemStacks[1]) > index.meltTemp)
+			if(index != null && TFC_ItemHeat.getTemp(fireItemStacks[1]) > index.meltTemp)
 			{
-				float temp = TFC_ItemHeat.GetTemp(fireItemStacks[1]);
+				float temp = TFC_ItemHeat.getTemp(fireItemStacks[1]);
 				ItemStack output = index.getOutput(fireItemStacks[1], R);
 				ItemCookEvent eventMelt = new ItemCookEvent(fireItemStacks[1], output, this);
 				MinecraftForge.EVENT_BUS.post(eventMelt);
@@ -109,7 +109,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 				if(fireItemStacks[1] != null && manager.findMatchingIndex(fireItemStacks[1]) != null)
 				{
 					//if the input is a new item, then apply the old temperature to it
-					TFC_ItemHeat.SetTemp(fireItemStacks[1], temp);
+					TFC_ItemHeat.setTemp(fireItemStacks[1], temp);
 				}
 
 				//Check if we should combine the output with a pre-existing output
@@ -132,7 +132,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 						fireItemStacks[7] = output.copy();
 						fireItemStacks[7].setItemDamage(amt4);
 
-						TFC_ItemHeat.SetTemp(fireItemStacks[7], temp);
+						TFC_ItemHeat.setTemp(fireItemStacks[7], temp);
 
 						if(fireItemStacks[1] == null && mold != null)
 							fireItemStacks[1] = mold;
@@ -152,7 +152,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 						fireItemStacks[8] = output.copy();
 						fireItemStacks[8].setItemDamage(amt4);
 
-						TFC_ItemHeat.SetTemp(fireItemStacks[8], temp);
+						TFC_ItemHeat.setTemp(fireItemStacks[8], temp);
 
 						if(fireItemStacks[1] == null && mold != null)
 							fireItemStacks[1] = mold;
@@ -162,14 +162,14 @@ public class TEFirepit extends TEFireEntity implements IInventory
 						fireItemStacks[7] = output.copy();
 						fireItemStacks[7].setItemDamage(damage);
 
-						TFC_ItemHeat.SetTemp(fireItemStacks[7], temp);
+						TFC_ItemHeat.setTemp(fireItemStacks[7], temp);
 					}
 					else if (fireItemStacks[8] != null && fireItemStacks[8].getItem() == TFCItems.CeramicMold)
 					{
 						fireItemStacks[8] = output.copy();
 						fireItemStacks[8].setItemDamage(damage);
 
-						TFC_ItemHeat.SetTemp(fireItemStacks[8], temp);
+						TFC_ItemHeat.setTemp(fireItemStacks[8], temp);
 					}
 
 					if (addLeftover)
@@ -186,13 +186,13 @@ public class TEFirepit extends TEFireEntity implements IInventory
 							fireItemStacks[dest] = output.copy();
 							fireItemStacks[dest].setItemDamage(amt4);
 
-							TFC_ItemHeat.SetTemp(fireItemStacks[dest], temp);
+							TFC_ItemHeat.setTemp(fireItemStacks[dest], temp);
 						}
 						else if(fireItemStacks[dest] != null && fireItemStacks[dest].getItem() == TFCItems.CeramicMold)
 						{
 							fireItemStacks[dest] = output.copy();
 							fireItemStacks[dest].setItemDamage(100 - leftover);
-							TFC_ItemHeat.SetTemp(fireItemStacks[dest], temp);
+							TFC_ItemHeat.setTemp(fireItemStacks[dest], temp);
 						}
 					}
 				}
@@ -288,12 +288,12 @@ public class TEFirepit extends TEFireEntity implements IInventory
 
 	public float getOutput1Temp()
 	{
-		return TFC_ItemHeat.GetTemp(fireItemStacks[7]);
+		return TFC_ItemHeat.getTemp(fireItemStacks[7]);
 	}
 
 	public float getOutput2Temp()
 	{
-		return TFC_ItemHeat.GetTemp(fireItemStacks[8]);
+		return TFC_ItemHeat.getTemp(fireItemStacks[8]);
 	}
 
 	@Override
@@ -362,7 +362,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 
 			if (index != null)
 			{
-				float temp = TFC_ItemHeat.GetTemp(is);
+				float temp = TFC_ItemHeat.getTemp(is);
 				if (fuelTimeLeft > 0 && is.getItem() instanceof ICookableFood)
 				{
 					float inc = Food.getCooked(is) + Math.min(fireTemp / 700, 2f);
@@ -388,7 +388,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 				}
 				else
 					temp -= TFC_ItemHeat.getTempDecrease(is);
-				TFC_ItemHeat.SetTemp(is, temp);
+				TFC_ItemHeat.setTemp(is, temp);
 			}
 		}
 	}

@@ -16,7 +16,7 @@ public class BarrelRecipe
 	FluidStack recipeOutFluid;
 	public int sealTime = 8;
 	public boolean removesLiquid = true;
-	boolean isSealedRecipe = true;
+	boolean sealedRecipe = true;
 	public int minTechLevel = 1;
 	public boolean allowAnyStack = true;
 
@@ -54,7 +54,7 @@ public class BarrelRecipe
 
 	public BarrelRecipe setSealedRecipe(boolean b)
 	{
-		this.isSealedRecipe = b;
+		this.sealedRecipe = b;
 		return this;
 	}
 
@@ -63,7 +63,7 @@ public class BarrelRecipe
 		boolean iStack = removesLiquid ? true : recipeIS != null && item != null && fluid != null && recipeFluid != null && item.stackSize >= (int)Math.ceil(fluid.amount/recipeFluid.amount);
 		boolean fStack = !removesLiquid ? true : recipeFluid != null && item != null && fluid != null && recipeOutFluid != null && fluid.amount >= item.stackSize*recipeOutFluid.amount;
 
-		boolean anyStack = !removesLiquid && !isSealedRecipe && this.recipeOutIS == null && allowAnyStack;
+		boolean anyStack = !removesLiquid && !sealedRecipe && this.recipeOutIS == null && allowAnyStack;
 		boolean itemsEqual = item == null && recipeIS == null || OreDictionary.itemMatches(recipeIS, item, false);
 
 		return (recipeIS != null && itemsEqual && (iStack || anyStack) || recipeIS == null) &&
@@ -131,7 +131,7 @@ public class BarrelRecipe
 
 	public boolean isSealedRecipe()
 	{
-		return this.isSealedRecipe;
+		return this.sealedRecipe;
 	}
 
 	protected int getnumberOfRuns(ItemStack inIS, FluidStack inFS)

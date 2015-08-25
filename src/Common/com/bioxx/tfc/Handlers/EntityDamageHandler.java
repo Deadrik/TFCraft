@@ -108,9 +108,9 @@ public class EntityDamageHandler
 				crushRating = ((ItemTFCArmor)armor[location].getItem()).ArmorType.getCrushingAR();
 				if(entity instanceof IInnateArmor)
 				{
-					pierceRating += ((IInnateArmor)entity).GetPierceArmor();
-					slashRating += ((IInnateArmor)entity).GetSlashArmor();
-					crushRating += ((IInnateArmor)entity).GetCrushArmor();
+					pierceRating += ((IInnateArmor)entity).getPierceArmor();
+					slashRating += ((IInnateArmor)entity).getSlashArmor();
+					crushRating += ((IInnateArmor) entity).getCrushArmor();
 				}
 
 				//3. Convert the armor rating to % damage reduction
@@ -129,9 +129,9 @@ public class EntityDamageHandler
 			{
 				if(entity instanceof IInnateArmor)
 				{
-					pierceRating += ((IInnateArmor)entity).GetPierceArmor();
-					slashRating += ((IInnateArmor)entity).GetSlashArmor();
-					crushRating += ((IInnateArmor)entity).GetCrushArmor();
+					pierceRating += ((IInnateArmor)entity).getPierceArmor();
+					slashRating += ((IInnateArmor)entity).getSlashArmor();
+					crushRating += ((IInnateArmor) entity).getCrushArmor();
 				}
 				//1. Convert the armor rating to % damage reduction
 				float pierceMult = getDamageReduction(pierceRating);
@@ -190,7 +190,7 @@ public class EntityDamageHandler
 			EntityPlayer player = (EntityPlayer)source.getSourceOfDamage();
 			if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ICausesDamage)
 			{
-				return ((ICausesDamage)player.getCurrentEquippedItem().getItem()).GetDamageType();
+				return ((ICausesDamage)player.getCurrentEquippedItem().getItem()).getDamageType();
 			}
 		}
 
@@ -199,13 +199,13 @@ public class EntityDamageHandler
 			EntityLiving el = (EntityLiving)source.getSourceOfDamage();
 			if(el.getHeldItem() != null && el.getHeldItem().getItem() instanceof ICausesDamage)
 			{
-				return ((ICausesDamage)el.getHeldItem().getItem()).GetDamageType();
+				return ((ICausesDamage)el.getHeldItem().getItem()).getDamageType();
 			}
 		}
 
 		if(source.getSourceOfDamage() instanceof ICausesDamage)
 		{
-			return ((ICausesDamage)source.getSourceOfDamage()).GetDamageType();
+			return ((ICausesDamage)source.getSourceOfDamage()).getDamageType();
 		}
 
 		return EnumDamageType.GENERIC;

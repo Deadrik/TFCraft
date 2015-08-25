@@ -547,7 +547,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	}
 
 	@Override
-	public EnumDamageType GetDamageType()
+	public EnumDamageType getDamageType()
 	{
 		return EnumDamageType.SLASHING;
 	}
@@ -741,19 +741,19 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	}
 
 	@Override
-	public int GetCrushArmor()
+	public int getCrushArmor()
 	{
 		return 0;
 	}
 
 	@Override
-	public int GetSlashArmor()
+	public int getSlashArmor()
 	{
 		return 0;
 	}
 
 	@Override
-	public int GetPierceArmor()
+	public int getPierceArmor()
 	{
 		return -335;
 	}

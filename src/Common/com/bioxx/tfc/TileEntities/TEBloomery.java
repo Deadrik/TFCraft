@@ -68,9 +68,9 @@ public class TEBloomery extends NetworkTileEntity
 
 	public boolean AddOreToFire(ItemStack is)
 	{
-		if(((ISmeltable)is.getItem()).GetMetalType(is) == Global.PIGIRON || ((ISmeltable)is.getItem()).GetMetalType(is) == Global.WROUGHTIRON)
+		if(((ISmeltable)is.getItem()).getMetalType(is) == Global.PIGIRON || ((ISmeltable)is.getItem()).getMetalType(is) == Global.WROUGHTIRON)
 		{
-			outCount += ((ISmeltable)is.getItem()).GetMetalReturnAmount(is);
+			outCount += ((ISmeltable)is.getItem()).getMetalReturnAmount(is);
 			return true;
 		}
 		return false;
@@ -299,7 +299,7 @@ public class TEBloomery extends NetworkTileEntity
 						int c = entity.getEntityItem().stackSize;
 						while (c > 0)
 						{
-							if(((ISmeltable)entity.getEntityItem().getItem()).GetMetalReturnAmount(entity.getEntityItem()) < 100 && oreCount < maxCount && outCount < 1000)
+							if(((ISmeltable)entity.getEntityItem().getItem()).getMetalReturnAmount(entity.getEntityItem()) < 100 && oreCount < maxCount && outCount < 1000)
 							{
 								if(AddOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage()))) 
 								{

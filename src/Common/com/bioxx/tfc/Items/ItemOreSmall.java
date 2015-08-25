@@ -40,7 +40,7 @@ public class ItemOreSmall extends ItemOre
 	}
 
 	@Override
-	public short GetMetalReturnAmount(ItemStack is)
+	public short getMetalReturnAmount(ItemStack is)
 	{
 		int dam = is.getItemDamage();
 		switch(dam)

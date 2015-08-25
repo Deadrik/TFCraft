@@ -146,7 +146,7 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 	}
 
 	@Override
-	public EnumDamageType GetDamageType() 
+	public EnumDamageType getDamageType() 
 	{
 		return EnumDamageType.SLASHING;
 	}
@@ -333,19 +333,19 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 	}
 
 	@Override
-	public int GetCrushArmor()
+	public int getCrushArmor()
 	{
 		return 1000;//equates to ~50% less damage taken
 	}
 
 	@Override
-	public int GetSlashArmor()
+	public int getSlashArmor()
 	{
 		return -335;//equates to ~50% more damage taken
 	}
 
 	@Override
-	public int GetPierceArmor()
+	public int getPierceArmor()
 	{
 		return 0;
 	}

@@ -69,8 +69,8 @@ public class TerraFirmaCraft
 
 		proxy.registerFluids();
 
-		BlockSetup.LoadBlocks();
-		BlockSetup.RegisterBlocks();
+		BlockSetup.loadBlocks();
+		BlockSetup.registerBlocks();
 		BlockSetup.setupFire();
 
 
@@ -97,7 +97,7 @@ public class TerraFirmaCraft
 		SkillsManager.instance.registerSkill(Global.SKILL_BUTCHERING, 100);
 
 		//Load Items
-		ItemSetup.Setup();
+		ItemSetup.setup();
 
 		// Register Gui Handler
 		proxy.registerGuiHandler();

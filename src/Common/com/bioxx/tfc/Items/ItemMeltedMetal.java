@@ -68,7 +68,7 @@ public class ItemMeltedMetal extends ItemTerra
 		if (is.hasTagCompound())
 		{
 			//NBTTagCompound stackTagCompound = is.getTagCompound();
-			if(TFC_ItemHeat.HasTemp(is) && TFC_ItemHeat.GetTemp(is) >= TFC_ItemHeat.IsCookable(is))
+			if(TFC_ItemHeat.hasTemp(is) && TFC_ItemHeat.getTemp(is) >= TFC_ItemHeat.isCookable(is))
 			{
 				if(is.getItemDamage()==0){
 					is.setItemDamage(1);

@@ -65,7 +65,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
-		arraylist.add(EnumChatFormatting.AQUA + TFC_Core.translate(GetDamageType().toString()));
+		arraylist.add(EnumChatFormatting.AQUA + TFC_Core.translate(getDamageType().toString()));
 		ItemTerraTool.addDurabilityInformation(is, arraylist);
 	}
 
@@ -94,7 +94,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	}
 
 	@Override
-	public EnumDamageType GetDamageType()
+	public EnumDamageType getDamageType()
 	{
 		return EnumDamageType.SLASHING;
 	}

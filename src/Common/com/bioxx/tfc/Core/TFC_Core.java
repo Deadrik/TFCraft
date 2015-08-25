@@ -930,7 +930,7 @@ public class TFC_Core
 
 	public static boolean isOreIron(ItemStack is)
 	{
-		return is.getItem() instanceof ItemOre && ((ItemOre) is.getItem()).GetMetalType(is) == Global.PIGIRON;
+		return is.getItem() instanceof ItemOre && ((ItemOre) is.getItem()).getMetalType(is) == Global.PIGIRON;
 	}
 
 	public static float getEntityMaxHealth(EntityLivingBase entity)
@@ -1021,7 +1021,7 @@ public class TFC_Core
 					continue;
 				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, 1f);
 				if(is != null)
-					TFC_ItemHeat.HandleItemHeat(is);
+					TFC_ItemHeat.handleItemHeat(is);
 				iinv.setInventorySlotContents(i, is);
 			}
 
@@ -1060,7 +1060,7 @@ public class TFC_Core
 					continue;
 				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, baseDecayMod);
 				if(is != null)
-					TFC_ItemHeat.HandleItemHeat(is);
+					TFC_ItemHeat.handleItemHeat(is);
 				iinv.setInventorySlotContents(i, is);
 			}
 		}
@@ -1086,7 +1086,7 @@ public class TFC_Core
 					continue;
 				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, 1);
 				if(is != null)
-					TFC_ItemHeat.HandleItemHeat(is);
+					TFC_ItemHeat.handleItemHeat(is);
 				iinv[i] = is;
 			}
 

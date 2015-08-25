@@ -126,9 +126,9 @@ public class TEForge extends TEFireEntity implements IInventory
 			HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
 			ItemStack inputCopy = fireItemStacks[i].copy();
 			
-			if(index != null && TFC_ItemHeat.GetTemp(fireItemStacks[i]) > index.meltTemp)
+			if(index != null && TFC_ItemHeat.getTemp(fireItemStacks[i]) > index.meltTemp)
 			{
-				float temperature = TFC_ItemHeat.GetTemp(fireItemStacks[i]);
+				float temperature = TFC_ItemHeat.getTemp(fireItemStacks[i]);
 				//int dam = fireItemStacks[i].getItemDamage();
 
 				// If not unshaped metal, morph the input to the output. If not an input with direct morph (sand, sticks, etc) this deletes the input item from the slot.
@@ -142,7 +142,7 @@ public class TEForge extends TEFireEntity implements IInventory
 					if(morphIndex != null)
 					{
 						// Apply old temperature to direct morphs that can continue to be heated.
-						TFC_ItemHeat.SetTemp(fireItemStacks[i], temperature);
+						TFC_ItemHeat.setTemp(fireItemStacks[i], temperature);
 					}
 				}
 				else if(index.hasOutput())
@@ -151,10 +151,10 @@ public class TEForge extends TEFireEntity implements IInventory
 					if (inputCopy.getItem() instanceof ISmeltable)
 					{
 						ISmeltable smelt = (ISmeltable)inputCopy.getItem();
-						ItemStack meltedItem = new ItemStack(smelt.GetMetalType(inputCopy).MeltedItem);
-						TFC_ItemHeat.SetTemp(meltedItem, temperature);
+						ItemStack meltedItem = new ItemStack(smelt.getMetalType(inputCopy).MeltedItem);
+						TFC_ItemHeat.setTemp(meltedItem, temperature);
 
-						int units = smelt.GetMetalReturnAmount(inputCopy);
+						int units = smelt.getMetalReturnAmount(inputCopy);
 						// Raw/Refined Blooms give at max 100 units to force players to split using the anvil
 						if (inputCopy.getItem() instanceof ItemBloom)
 							units = Math.min(100, units);
@@ -190,10 +190,10 @@ public class TEForge extends TEFireEntity implements IInventory
 					}
 
 
-					if(TFC_ItemHeat.IsCookable(fireItemStacks[i]) > -1)
+					if(TFC_ItemHeat.isCookable(fireItemStacks[i]) > -1)
 					{
 						//if the input is a new item, then apply the old temperature to it
-						TFC_ItemHeat.SetTemp(fireItemStacks[i], temperature);
+						TFC_ItemHeat.setTemp(fireItemStacks[i], temperature);
 					}
 				}
 			}

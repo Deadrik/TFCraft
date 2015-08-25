@@ -576,15 +576,15 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			BarrelPreservativeRecipe preservative = BarrelManager.getInstance().findMatchingPreservativeRepice(this, itemstack, fluid, sealed);
 			if (itemstack != null && fluid != null && fluid.getFluid() == TFCFluids.FRESHWATER)
 			{
-				if(TFC_ItemHeat.HasTemp(itemstack))
+				if(TFC_ItemHeat.hasTemp(itemstack))
 				{
-					float temp = TFC_ItemHeat.GetTemp(itemstack);
+					float temp = TFC_ItemHeat.getTemp(itemstack);
 					if(fluid.amount >= 1 && temp > 1)
 					{
 						temp -= 50;
 						fluid.amount -= 1;
-						TFC_ItemHeat.SetTemp(itemstack, temp);
-						TFC_ItemHeat.HandleItemHeat(itemstack);
+						TFC_ItemHeat.setTemp(itemstack, temp);
+						TFC_ItemHeat.handleItemHeat(itemstack);
 					}
 				}
 			}

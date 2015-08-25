@@ -27,21 +27,21 @@ public class EntityEndermanTFC extends EntityEnderman implements ICausesDamage, 
 	}
 
 	@Override
-	public EnumDamageType GetDamageType() {
+	public EnumDamageType getDamageType() {
 		// TODO Auto-generated method stub
 		return EnumDamageType.GENERIC;
 	}
 
 	@Override
-	public int GetCrushArmor() {
+	public int getCrushArmor() {
 		return -335;
 	}
 	@Override
-	public int GetSlashArmor() {
+	public int getSlashArmor() {
 		return -335;
 	}
 	@Override
-	public int GetPierceArmor() {
+	public int getPierceArmor() {
 		return -335;
 	}
 

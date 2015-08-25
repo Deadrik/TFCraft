@@ -104,12 +104,12 @@ public class ShapelessRecipesTFC implements IRecipe
 		if(rnbt != null && rnbt.hasKey("noTemp"))
 		{
 			//Recipe expects a cold item and either the input has not tag at all or at the least is missing a temperature tag
-			return inbt == null || !TFC_ItemHeat.HasTemp(inputIS);
+			return inbt == null || !TFC_ItemHeat.hasTemp(inputIS);
 		}
 
-		if(rnbt != null && TFC_ItemHeat.HasTemp(recipeIS))
+		if(rnbt != null && TFC_ItemHeat.hasTemp(recipeIS))
 		{
-			if(inbt != null && TFC_ItemHeat.HasTemp(inputIS))
+			if(inbt != null && TFC_ItemHeat.hasTemp(inputIS))
 			{
 				return HeatRegistry.getInstance().getIsLiquid(inputIS);//Recipe expects a hot item and the input is liquid
 			}

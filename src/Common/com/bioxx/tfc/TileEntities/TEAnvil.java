@@ -124,7 +124,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 					if(!eventCraft.isCanceled())
 					{
 						//Set the item temp if possible
-						TFC_ItemHeat.SetTemp(eventCraft.result, TFC_ItemHeat.GetTemp(anvilItemStacks[INPUT1_SLOT]));
+						TFC_ItemHeat.setTemp(eventCraft.result, TFC_ItemHeat.getTemp(anvilItemStacks[INPUT1_SLOT]));
 
 						ItemStack output = eventCraft.result;
 						//If the lastWorker is not null, then we attempt to apply some crafting buffs to items based on the players skills
@@ -538,7 +538,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 
 				if(result != null)
 				{
-					TFC_ItemHeat.SetTemp(result, (TFC_ItemHeat.GetTemp(anvilItemStacks[2]) + TFC_ItemHeat.GetTemp(anvilItemStacks[3])) / 2);
+					TFC_ItemHeat.setTemp(result, (TFC_ItemHeat.getTemp(anvilItemStacks[2]) + TFC_ItemHeat.getTemp(anvilItemStacks[3])) / 2);
 					if(result.stackSize <= 0)
 						result.stackSize = 1;
 					setInventorySlotContents(WELDOUT_SLOT, result);
@@ -703,12 +703,12 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	public Boolean isTemperatureWeldable(int i)
 	{
 		HeatRegistry manager = HeatRegistry.getInstance();
-		if(TFC_ItemHeat.HasTemp(anvilItemStacks[i]))
+		if(TFC_ItemHeat.hasTemp(anvilItemStacks[i]))
 		{
 			HeatIndex index = manager.findMatchingIndex(anvilItemStacks[i]);
 			if(index != null)
 			{
-				float temp = TFC_ItemHeat.GetTemp(anvilItemStacks[i]);
+				float temp = TFC_ItemHeat.getTemp(anvilItemStacks[i]);
 				return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.20 && 
 						anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true;
 			}
@@ -720,12 +720,12 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	{
 
 		HeatRegistry manager = HeatRegistry.getInstance();
-		if(TFC_ItemHeat.HasTemp(anvilItemStacks[i]))
+		if(TFC_ItemHeat.hasTemp(anvilItemStacks[i]))
 		{
 			HeatIndex index = manager.findMatchingIndex(anvilItemStacks[i]);
 			if(index != null)
 			{
-				float temp = TFC_ItemHeat.GetTemp(anvilItemStacks[i]);
+				float temp = TFC_ItemHeat.getTemp(anvilItemStacks[i]);
 				return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.40 && 
 						anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true;
 			}

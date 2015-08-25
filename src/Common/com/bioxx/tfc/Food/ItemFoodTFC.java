@@ -51,14 +51,14 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 	public int foodID;
 	public float decayRate = 1.0f;
-	public boolean isEdible = true;
+	public boolean edible = true;
 	public boolean canBeUsedRaw = true;
 	protected int tasteSweet = 0;
 	protected int tasteSour = 0;
 	protected int tasteSalty = 0;
 	protected int tasteBitter = 0;
 	protected int tasteUmami = 0;
-	protected boolean canSmoke = false;
+	protected boolean canBeSmoked = false;
 	protected float smokeAbsorb = 0.5f;
 
 	public IIcon cookedIcon;
@@ -84,7 +84,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um, boolean edible)
 	{
 		this(fg, sw, so, sa, bi, um);
-		isEdible = edible;
+		this.edible = edible;
 	}
 
 	public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um, boolean edible, boolean usable)
@@ -101,7 +101,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 	public ItemFoodTFC setCanSmoke()
 	{
-		this.canSmoke = true;
+		this.canBeSmoked = true;
 		return this;
 	}
 
@@ -220,11 +220,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 	public static void addFoodHeatInformation(ItemStack is, List<String> arraylist)
 	{
-		if (TFC_ItemHeat.HasTemp(is))
+		if (TFC_ItemHeat.hasTemp(is))
 		{
-			float meltTemp = TFC_ItemHeat.IsCookable(is);
+			float meltTemp = TFC_ItemHeat.isCookable(is);
 			if (meltTemp != -1)
-				arraylist.add(TFC_ItemHeat.getHeatColorFood(TFC_ItemHeat.GetTemp(is), meltTemp));
+				arraylist.add(TFC_ItemHeat.getHeatColorFood(TFC_ItemHeat.getTemp(is), meltTemp));
 		}
 	}
 
@@ -474,7 +474,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 	public boolean isHot(ItemStack is)
 	{
-		return TFC_ItemHeat.GetTemp(is) > TFC_ItemHeat.IsCookable(is) * 0.8;
+		return TFC_ItemHeat.getTemp(is) > TFC_ItemHeat.isCookable(is) * 0.8;
 	}
 
 	public static ItemStack createTag(ItemStack is)
@@ -621,7 +621,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	@Override
 	public boolean isEdible(ItemStack is)
 	{
-		return isEdible || Food.isCooked(is);
+		return edible || Food.isCooked(is);
 	}
 
 	@Override
@@ -756,7 +756,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 	@Override
 	public boolean canSmoke() {
-		return canSmoke;
+		return canBeSmoked;
 	}
 
 	@Override

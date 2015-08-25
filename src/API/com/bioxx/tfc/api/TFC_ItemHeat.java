@@ -169,10 +169,10 @@ public class TFC_ItemHeat
 
 	public static Boolean getIsLiquid(ItemStack is)
 	{
-		return GetTemp(is) >= IsCookable(is);
+		return getTemp(is) >= isCookable(is);
 	}
 
-	public static float IsCookable(ItemStack is)
+	public static float isCookable(ItemStack is)
 	{
 		HeatRegistry manager = HeatRegistry.getInstance();
 		if(is != null && manager!=null)
@@ -187,7 +187,7 @@ public class TFC_ItemHeat
 			return -1;
 	}
 
-	public static float GetSpecificHeat(ItemStack is)
+	public static float getSpecificHeat(ItemStack is)
 	{
 		HeatRegistry manager = HeatRegistry.getInstance();
 		if(is != null && manager!=null)
@@ -202,7 +202,7 @@ public class TFC_ItemHeat
 			return 1;
 	}
 
-	public static float IsCookable(Metal m)
+	public static float isCookable(Metal m)
 	{
 		HeatRegistry manager = HeatRegistry.getInstance();
 		if(manager!=null)
@@ -217,16 +217,16 @@ public class TFC_ItemHeat
 			return -1;
 	}
 
-	public static float GetTemp(ItemStack is)
+	public static float getTemp(ItemStack is)
 	{
-		if(HasTemp(is))
+		if(hasTemp(is))
 		{
 			return is.getTagCompound().getFloat("temperature");
 		}
 		return 0;
 	}
 
-	public static boolean HasTemp(ItemStack is)
+	public static boolean hasTemp(ItemStack is)
 	{
 		if(is != null)
 		{
@@ -241,26 +241,26 @@ public class TFC_ItemHeat
 		byte debugBump = 0;
 		if(TFCOptions.enableDebugMode)
 			debugBump = 2;
-		return TFCOptions.tempIncreaseMultiplier * GetSpecificHeat(is) + debugBump;
+		return TFCOptions.tempIncreaseMultiplier * getSpecificHeat(is) + debugBump;
 	}
 
 	public static float getTempDecrease(ItemStack is)
 	{
 		if(TFCOptions.enableDebugMode)
 			return 0;
-		return TFCOptions.tempDecreaseMultiplier * GetSpecificHeat(is);
+		return TFCOptions.tempDecreaseMultiplier * getSpecificHeat(is);
 	}
 
-	public static void HandleItemHeat(ItemStack is)
+	public static void handleItemHeat(ItemStack is)
 	{
 		if (is != null)
 		{
 			if(is.hasTagCompound())
 			{
 				NBTTagCompound comp = is.getTagCompound();
-				if(HasTemp(is))
+				if(hasTemp(is))
 				{
-					float temp = GetTemp(is);
+					float temp = getTemp(is);
 					if(temp > 0)
 					{
 						temp -= getTempDecrease(is);
@@ -275,13 +275,13 @@ public class TFC_ItemHeat
 		}
 	}
 
-	public static Boolean SetTemp(ItemStack is, float temp)
+	public static Boolean setTemp(ItemStack is, float temp)
 	{
 		if(is != null)
 		{
 			if(is.hasTagCompound())
 				is.getTagCompound().setFloat("temperature", temp);
-			else if(IsCookable(is) != -1)
+			else if(isCookable(is) != -1)
 			{
 				NBTTagCompound nbt = new NBTTagCompound();
 				nbt.setFloat("temperature", temp);
@@ -292,12 +292,12 @@ public class TFC_ItemHeat
 			return false;
 
 		if(temp <= 0)
-			RemoveTempTag(is);
+			removeTempTag(is);
 
 		return true;
 	}
 
-	public static void RemoveTempTag(ItemStack is)
+	public static void removeTempTag(ItemStack is)
 	{
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("temperature"))
 		{

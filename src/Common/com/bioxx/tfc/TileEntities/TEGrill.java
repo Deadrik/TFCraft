@@ -107,7 +107,7 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 
 			if (index != null)
 			{
-				float temp = TFC_ItemHeat.GetTemp(is);
+				float temp = TFC_ItemHeat.getTemp(is);
 				TEFireEntity fire = (TEFireEntity) te;
 				if (fire.fuelTimeLeft > 0 && is.getItem() instanceof IFood)
 				{
@@ -124,7 +124,7 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 					temp += TFC_ItemHeat.getTempIncrease(is);
 				else
 					temp -= TFC_ItemHeat.getTempDecrease(is);
-				TFC_ItemHeat.SetTemp(is, temp);
+				TFC_ItemHeat.setTemp(is, temp);
 			}
 		}
 	}
@@ -155,9 +155,9 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 				}
 			}
 
-			if(index != null && TFC_ItemHeat.GetTemp(storage[i]) > index.meltTemp)
+			if(index != null && TFC_ItemHeat.getTemp(storage[i]) > index.meltTemp)
 			{
-				float temp = TFC_ItemHeat.GetTemp(storage[i]);
+				float temp = TFC_ItemHeat.getTemp(storage[i]);
 				ItemStack output = index.getOutput(storage[i], R);
 
 				ItemCookEvent eventMelt = new ItemCookEvent(storage[i], output, this);
@@ -169,7 +169,7 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 				if(storage[i] != null && manager.findMatchingIndex(storage[i]) != null)
 				{
 					//if the input is a new item, then apply the old temperature to it
-					TFC_ItemHeat.SetTemp(storage[i], temp);
+					TFC_ItemHeat.setTemp(storage[i], temp);
 				}
 			}
 		}

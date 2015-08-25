@@ -40,7 +40,7 @@ public class BarrelManager
 		{
 			BarrelRecipe br = (BarrelRecipe) recipe;
 			if(/*item != null && */fluid != null &&/*(br.inItemStack != null && item != null) && (br.inFluid != null && fluid != null) &&*/ br.matches(item, fluid))
-				if(br.isSealedRecipe == sealed && br.minTechLevel <= techLevel)
+				if(br.sealedRecipe == sealed && br.minTechLevel <= techLevel)
 					return br;
 		}
 		return null;

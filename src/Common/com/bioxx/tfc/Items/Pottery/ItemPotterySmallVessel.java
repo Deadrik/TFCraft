@@ -112,14 +112,14 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 
 			if(bag[0] != null)
 			{
-				types[0] = ((ISmeltable)bag[0].getItem()).GetMetalType(bag[0]);
-				metalAmounts[0] = ((ISmeltable)bag[0].getItem()).GetMetalReturnAmount(bag[0]) * bag[0].stackSize;
+				types[0] = ((ISmeltable)bag[0].getItem()).getMetalType(bag[0]);
+				metalAmounts[0] = ((ISmeltable)bag[0].getItem()).getMetalReturnAmount(bag[0]) * bag[0].stackSize;
 			}
 
 			if(bag[1] != null)
 			{
-				types[1] = ((ISmeltable)bag[1].getItem()).GetMetalType(bag[1]);
-				metalAmounts[1] = ((ISmeltable)bag[1].getItem()).GetMetalReturnAmount(bag[1]) * bag[1].stackSize;
+				types[1] = ((ISmeltable)bag[1].getItem()).getMetalType(bag[1]);
+				metalAmounts[1] = ((ISmeltable)bag[1].getItem()).getMetalReturnAmount(bag[1]) * bag[1].stackSize;
 
 				if(mergeMetals(types[0], types[1], metalAmounts[0], metalAmounts[1]) != metalAmounts[0])
 				{
@@ -131,8 +131,8 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 
 			if(bag[2] != null)
 			{
-				types[2] = ((ISmeltable)bag[2].getItem()).GetMetalType(bag[2]);
-				metalAmounts[2] = ((ISmeltable)bag[2].getItem()).GetMetalReturnAmount(bag[2]) * bag[2].stackSize;
+				types[2] = ((ISmeltable)bag[2].getItem()).getMetalType(bag[2]);
+				metalAmounts[2] = ((ISmeltable)bag[2].getItem()).getMetalReturnAmount(bag[2]) * bag[2].stackSize;
 
 				if(mergeMetals(types[0], types[2], metalAmounts[0], metalAmounts[2]) != metalAmounts[0])
 				{
@@ -149,8 +149,8 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			}
 			if(bag[3] != null)
 			{
-				types[3] = ((ISmeltable)bag[3].getItem()).GetMetalType(bag[3]);
-				metalAmounts[3] = ((ISmeltable)bag[3].getItem()).GetMetalReturnAmount(bag[3]) * bag[3].stackSize;
+				types[3] = ((ISmeltable)bag[3].getItem()).getMetalType(bag[3]);
+				metalAmounts[3] = ((ISmeltable)bag[3].getItem()).getMetalReturnAmount(bag[3]) * bag[3].stackSize;
 
 				if(mergeMetals(types[0], types[3], metalAmounts[0], metalAmounts[3]) != metalAmounts[0])
 				{

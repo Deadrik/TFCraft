@@ -32,14 +32,14 @@ public class TEFireEntity extends NetworkTileEntity
 
 			if (index != null && index.hasOutput())
 			{
-				float temp = TFC_ItemHeat.GetTemp(is);
+				float temp = TFC_ItemHeat.getTemp(is);
 				if (fireTemp > temp)
 				{
 					temp += TFC_ItemHeat.getTempIncrease(is);
 				}
 				else
 					temp -= TFC_ItemHeat.getTempDecrease(is);
-				TFC_ItemHeat.SetTemp(is, temp);
+				TFC_ItemHeat.setTemp(is, temp);
 			}
 		}
 	}

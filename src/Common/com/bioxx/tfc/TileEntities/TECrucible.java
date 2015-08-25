@@ -167,10 +167,10 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				else if(itemToSmelt instanceof ISmeltable && (
 						(ISmeltable)itemToSmelt).isSmeltable(stackToSmelt) &&
 						!TFC_Core.isOreIron(stackToSmelt) &&
-						temperature >= TFC_ItemHeat.IsCookable(stackToSmelt) && cookDelay == 0)
+						temperature >= TFC_ItemHeat.isCookable(stackToSmelt) && cookDelay == 0)
 				{
-					Metal mType =((ISmeltable)itemToSmelt).GetMetalType(stackToSmelt);
-					if(addMetal(mType, ((ISmeltable)itemToSmelt).GetMetalReturnAmount(stackToSmelt)))
+					Metal mType =((ISmeltable)itemToSmelt).getMetalType(stackToSmelt);
+					if(addMetal(mType, ((ISmeltable)itemToSmelt).getMetalReturnAmount(stackToSmelt)))
 					{
 						temperature *= 0.9f;
 						cookDelay = 40;
@@ -187,12 +187,12 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 					storage[1] != null &&
 					currentAlloy.outputType != null &&
 					outputTick >= 2 &&
-					temperature >= TFC_ItemHeat.IsCookable(currentAlloy.outputType))
+					temperature >= TFC_ItemHeat.isCookable(currentAlloy.outputType))
 			{
 				if(storage[1].getItem() == TFCItems.CeramicMold)
 				{
 					storage[1] = new ItemStack(currentAlloy.outputType.MeltedItem, 1, 99);
-					TFC_ItemHeat.SetTemp(storage[1], temperature);
+					TFC_ItemHeat.setTemp(storage[1], temperature);
 					//currentAlloy.outputAmount--;
 					drainOutput(1.0f);
 					updateGui((byte) 1);
@@ -200,9 +200,9 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				else if(storage[1].getItem() == currentAlloy.outputType.MeltedItem && storage[1].getItemDamage() > 0)
 				{
 					storage[1].setItemDamage(storage[1].getItemDamage()-1);
-					float inTemp = TFC_ItemHeat.GetTemp(storage[1]);
+					float inTemp = TFC_ItemHeat.getTemp(storage[1]);
 					float temp = (temperature - inTemp) / 2;
-					TFC_ItemHeat.SetTemp(storage[1], inTemp+temp);
+					TFC_ItemHeat.setTemp(storage[1], inTemp+temp);
 					//TerraFirmaCraft.log.info(temperature +", "+inTemp+", "+temp);
 					drainOutput(1.0f);
 					storage[1].stackSize = 1;

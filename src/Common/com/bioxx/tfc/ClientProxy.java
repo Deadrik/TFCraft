@@ -62,10 +62,10 @@ public class ClientProxy extends CommonProxy
 	public void registerRenderInformation()
 	{
 		Minecraft.getMinecraft().entityRenderer = new EntityRendererTFC(Minecraft.getMinecraft(),Minecraft.getMinecraft().getResourceManager());
-		IReloadableResourceManager IRRM = (IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager();
-		IRRM.registerReloadListener(new GrassColorReloadListener());
-		IRRM.registerReloadListener(new FoliageColorReloadListener());		
-		IRRM.registerReloadListener(Minecraft.getMinecraft().entityRenderer);
+		IReloadableResourceManager iRRM = (IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager();
+		iRRM.registerReloadListener(new GrassColorReloadListener());
+		iRRM.registerReloadListener(new FoliageColorReloadListener());		
+		iRRM.registerReloadListener(Minecraft.getMinecraft().entityRenderer);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityJavelin.class, new RenderTerraJavelin());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySquidTFC.class, new RenderSquidTFC(new ModelSquidTFC(), 0.7F));
@@ -469,9 +469,9 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerPlayerRenderEventHandler()
 	{
-		PlayerRenderHandler PRHandler = new PlayerRenderHandler();
-		MinecraftForge.EVENT_BUS.register(PRHandler);
-		FMLCommonHandler.instance().bus().register(PRHandler);
+		PlayerRenderHandler pRHandler = new PlayerRenderHandler();
+		MinecraftForge.EVENT_BUS.register(pRHandler);
+		FMLCommonHandler.instance().bus().register(pRHandler);
 	}
 
 	@Override

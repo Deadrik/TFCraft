@@ -28,7 +28,7 @@ public abstract class ItemAnvil extends ItemTerraBlock implements ISmeltable, IE
 	}
 
 	@Override
-	public short GetMetalReturnAmount(ItemStack is) {
+	public short getMetalReturnAmount(ItemStack is) {
 
 		return 1400;
 	}
@@ -40,7 +40,7 @@ public abstract class ItemAnvil extends ItemTerraBlock implements ISmeltable, IE
 	}
 
 	@Override
-	public EnumTier GetSmeltTier(ItemStack is) {
+	public EnumTier getSmeltTier(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumTier.TierI;
 	}

@@ -73,7 +73,7 @@ public class ItemHammer extends ItemTerraTool implements ICausesDamage
 	}
 
 	@Override
-	public EnumDamageType GetDamageType()
+	public EnumDamageType getDamageType()
 	{
 		return EnumDamageType.CRUSHING;
 	}

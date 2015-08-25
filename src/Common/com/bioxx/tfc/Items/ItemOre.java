@@ -64,11 +64,11 @@ public class ItemOre extends ItemTerra implements ISmeltable
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
-		if(GetMetalType(is) != null)
+		if(getMetalType(is) != null)
 		{
 			if (TFC_Core.showShiftInformation())
 			{
-				arraylist.add(TFC_Core.translate("gui.units") + ": " + GetMetalReturnAmount(is));
+				arraylist.add(TFC_Core.translate("gui.units") + ": " + getMetalReturnAmount(is));
 			}
 			else
 			{
@@ -78,7 +78,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public Metal GetMetalType(ItemStack is)
+	public Metal getMetalType(ItemStack is)
 	{
 		int dam = is.getItemDamage();
 		switch(dam)
@@ -132,7 +132,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public short GetMetalReturnAmount(ItemStack is)
+	public short getMetalReturnAmount(ItemStack is)
 	{
 		int dam = is.getItemDamage();
 		switch(dam)
@@ -237,7 +237,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public EnumTier GetSmeltTier(ItemStack is)
+	public EnumTier getSmeltTier(ItemStack is)
 	{
 		int dam = is.getItemDamage();
 		switch(dam)

@@ -129,16 +129,16 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 			HeatRegistry manager = HeatRegistry.getInstance();
 			HeatIndex index = manager.findMatchingIndex(cookingItemStack);
 
-			if (index != null && TFC_ItemHeat.GetTemp(cookingItemStack) >= index.meltTemp)
+			if (index != null && TFC_ItemHeat.getTemp(cookingItemStack) >= index.meltTemp)
 			{
 				int output = 0;
 				Item cookingItem = cookingItemStack.getItem();
 
 				if (cookingItem instanceof ISmeltable)
 				{
-					output = ((ISmeltable) cookingItem).GetMetalReturnAmount(cookingItemStack);
+					output = ((ISmeltable) cookingItem).getMetalReturnAmount(cookingItemStack);
 					// Attempt to add metal to crucible.
-					if (!crucibleTE.addMetal(((ISmeltable) cookingItem).GetMetalType(cookingItemStack), output))
+					if (!crucibleTE.addMetal(((ISmeltable) cookingItem).getMetalType(cookingItemStack), output))
 						return; // Do not decrease fuel or ore if the crucible is too full.
 				}
 				else
@@ -480,7 +480,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 					 * can melt down into something then add the ore to the list
 					 * of items in the fire.
 					 */
-					else if (TFC_ItemHeat.IsCookable(entity.getEntityItem()) != -1 && _isOre ||
+					else if (TFC_ItemHeat.isCookable(entity.getEntityItem()) != -1 && _isOre ||
 								!_isOre && entity.getEntityItem().getItem() instanceof ISmeltable)
 					{
 						int c = entity.getEntityItem().stackSize;

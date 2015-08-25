@@ -40,15 +40,15 @@ public class EntityCreeperTFC extends EntityCreeper implements IInnateArmor
 	}
 
 	@Override
-	public int GetCrushArmor() {
+	public int getCrushArmor() {
 		return 1000;
 	}
 	@Override
-	public int GetSlashArmor() {
+	public int getSlashArmor() {
 		return 0;
 	}
 	@Override
-	public int GetPierceArmor() {
+	public int getPierceArmor() {
 		return -335;
 	}
 

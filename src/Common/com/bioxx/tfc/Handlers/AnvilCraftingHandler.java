@@ -23,13 +23,13 @@ public class AnvilCraftingHandler
 			TileEntity te = event.anvilTE;
 			World world = te.getWorldObj();
 			int dam = event.input1.getItemDamage();
-			float temp = event.input1.getTagCompound()!=null?TFC_ItemHeat.GetTemp(event.input1):0;
+			float temp = event.input1.getTagCompound()!=null?TFC_ItemHeat.getTemp(event.input1):0;
 			int count = dam/100;
 			int rem = dam % 100;
 			while(count > 0)
 			{
 				ItemStack out1 = new ItemStack(TFCItems.Bloom, 1, 100);
-				TFC_ItemHeat.SetTemp(out1, temp);
+				TFC_ItemHeat.setTemp(out1, temp);
 
 				EntityItem ei = new EntityItem(world, te.xCoord + 0.5, te.yCoord + 1.5, te.zCoord + 0.5, out1);
 				ei.motionX = 0; ei.motionY = 0; ei.motionZ = 0; ei.delayBeforeCanPickup = 0;
@@ -40,7 +40,7 @@ public class AnvilCraftingHandler
 			if(rem > 0)
 			{
 				ItemStack out2 = new ItemStack(TFCItems.Bloom, 1, rem);
-				TFC_ItemHeat.SetTemp(out2, temp);
+				TFC_ItemHeat.setTemp(out2, temp);
 
 				EntityItem ei = new EntityItem(world, te.xCoord + 0.5, te.yCoord + 1.5, te.zCoord + 0.5, out2);
 				ei.motionX = 0; ei.motionY = 0; ei.motionZ = 0; ei.delayBeforeCanPickup = 0;

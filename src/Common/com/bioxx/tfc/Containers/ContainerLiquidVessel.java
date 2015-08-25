@@ -109,7 +109,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 				{
 					int amt = 99;
 					ItemStack is = new ItemStack(m.MeltedItem, 1, amt);
-					TFC_ItemHeat.SetTemp(is, (short) (HeatRegistry.getInstance().getMeltingPoint(is) * 1.5f));
+					TFC_ItemHeat.setTemp(is, (short) (HeatRegistry.getInstance().getMeltingPoint(is) * 1.5f));
 					containerInv.setInventorySlotContents(0, is);
 					if (metalAmount - 1 <= 0)
 					{
@@ -128,7 +128,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 				else if (input != null && input.getItem() == m.MeltedItem && input.getItemDamage() > 0)
 				{
 					input.setItemDamage(input.getItemDamage() - 1);
-					TFC_ItemHeat.SetTemp(input, (short) (HeatRegistry.getInstance().getMeltingPoint(input) * 1.5f));
+					TFC_ItemHeat.setTemp(input, (short) (HeatRegistry.getInstance().getMeltingPoint(input) * 1.5f));
 					if (metalAmount - 1 <= 0)
 					{
 						nbt.removeTag("MetalType");
@@ -155,7 +155,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 						amt = 401;
 
 					ItemStack is = new ItemStack(input.getItem(), 1, amt);
-					TFC_ItemHeat.SetTemp(is, (short) (HeatRegistry.getInstance().getMeltingPoint(is) * 1.5f));
+					TFC_ItemHeat.setTemp(is, (short) (HeatRegistry.getInstance().getMeltingPoint(is) * 1.5f));
 					containerInv.setInventorySlotContents(0, is);
 					if (metalAmount - 1 <= 0)
 					{
@@ -188,7 +188,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 						if (input.getItemDamage() > 5)
 						{
 							input.setItemDamage(input.getItemDamage() - 4);
-							TFC_ItemHeat.SetTemp(input, (short) (HeatRegistry.getInstance().getMeltingPoint(input) * 1.5f));
+							TFC_ItemHeat.setTemp(input, (short) (HeatRegistry.getInstance().getMeltingPoint(input) * 1.5f));
 							if (metalAmount - 1 <= 0)
 							{
 								nbt.removeTag("MetalType");

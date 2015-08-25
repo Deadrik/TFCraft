@@ -194,7 +194,7 @@ public class ItemTerra extends Item implements ISize
 				is.getItem() instanceof ItemBloom ||
 				is.getItem() == TFCItems.WroughtIronKnifeHead)
 		{
-			if(TFC_ItemHeat.HasTemp(is))
+			if(TFC_ItemHeat.hasTemp(is))
 			{
 				String s = "";
 				if(HeatRegistry.getInstance().isTemperatureDanger(is))
@@ -222,9 +222,9 @@ public class ItemTerra extends Item implements ISize
 	{
 		if (is.hasTagCompound())
 		{
-			if(TFC_ItemHeat.HasTemp(is))
+			if(TFC_ItemHeat.hasTemp(is))
 			{
-				float temp = TFC_ItemHeat.GetTemp(is);
+				float temp = TFC_ItemHeat.getTemp(is);
 				float meltTemp = -1;
 				HeatIndex hi = HeatRegistry.getInstance().findMatchingIndex(is);
 				if(hi != null)

@@ -68,7 +68,7 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 	}
 
 	@Override
-	public short GetMetalReturnAmount(ItemStack is) {
+	public short getMetalReturnAmount(ItemStack is) {
 
 		return 100;
 	}
@@ -80,13 +80,13 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 	}
 
 	@Override
-	public EnumTier GetSmeltTier(ItemStack is) {
+	public EnumTier getSmeltTier(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumTier.TierI;
 	}
 
 	@Override
-	public Metal GetMetalType(ItemStack is) 
+	public Metal getMetalType(ItemStack is) 
 	{
 		int meta = is.getItemDamage();
 		switch(meta)

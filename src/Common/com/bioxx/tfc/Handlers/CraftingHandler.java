@@ -153,14 +153,14 @@ public class CraftingHandler
 						continue;
 					if(iinventory.getStackInSlot(i).getItem() instanceof ItemMeltedMetal)
 					{
-						temperature = TFC_ItemHeat.GetTemp(iinventory.getStackInSlot(i));
+						temperature = TFC_ItemHeat.getTemp(iinventory.getStackInSlot(i));
 						if (player.worldObj.rand.nextInt(20) == 0)
 							player.worldObj.playSoundAtEntity(player, TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
 						else
 							TFC_Core.giveItemToPlayer(new ItemStack(TFCItems.CeramicMold, 1, 1), player);
 					}
 				}
-				TFC_ItemHeat.SetTemp(itemstack, temperature);
+				TFC_ItemHeat.setTemp(itemstack, temperature);
 			}
 			else if(item instanceof ItemMeltedMetal)
 			{
@@ -170,9 +170,9 @@ public class CraftingHandler
 					if(iinventory.getStackInSlot(i) == null)
 						continue;
 					if(iinventory.getStackInSlot(i).getItem() instanceof ItemIngot )
-						temperature = TFC_ItemHeat.GetTemp(iinventory.getStackInSlot(i));
+						temperature = TFC_ItemHeat.getTemp(iinventory.getStackInSlot(i));
 				}
-				TFC_ItemHeat.SetTemp(itemstack, temperature);
+				TFC_ItemHeat.setTemp(itemstack, temperature);
 			}
 			else if (item == TFCItems.PotterySmallVessel && itemDamage == 0)
 			{
@@ -251,7 +251,7 @@ public class CraftingHandler
 					continue;
 				if(iinventory.getStackInSlot(i).getItem() instanceof ItemMeltedMetal)
 				{
-					temperature = TFC_ItemHeat.GetTemp(iinventory.getStackInSlot(i));
+					temperature = TFC_ItemHeat.getTemp(iinventory.getStackInSlot(i));
 					if(player.worldObj.rand.nextInt(20) == 0)
 						player.worldObj.playSoundAtEntity(player, TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
 					else
@@ -259,7 +259,7 @@ public class CraftingHandler
 					iinventory.setInventorySlotContents(i, null);
 				}
 			}
-			TFC_ItemHeat.SetTemp(itemstack, temperature);
+			TFC_ItemHeat.setTemp(itemstack, temperature);
 		}
 		else if (item instanceof ItemMeltedMetal)
 		{
@@ -269,9 +269,9 @@ public class CraftingHandler
 				if(iinventory.getStackInSlot(i) == null)
 					continue;
 				if(iinventory.getStackInSlot(i).getItem() instanceof ItemIngot)
-					temperature = TFC_ItemHeat.GetTemp(iinventory.getStackInSlot(i));
+					temperature = TFC_ItemHeat.getTemp(iinventory.getStackInSlot(i));
 			}
-			TFC_ItemHeat.SetTemp(itemstack, temperature);
+			TFC_ItemHeat.setTemp(itemstack, temperature);
 		}
 		else if (item == TFCItems.PotterySmallVessel && itemDamage == 0)
 		{

@@ -51,10 +51,10 @@ public class FoodItemRenderer implements IItemRenderer
 
 			if(type == ItemRenderType.INVENTORY)
 			{
-				if(TFC_ItemHeat.HasTemp(is))
+				if(TFC_ItemHeat.hasTemp(is))
 				{
-					float meltTemp = TFC_ItemHeat.IsCookable(is);
-					float temp = TFC_ItemHeat.GetTemp(is);
+					float meltTemp = TFC_ItemHeat.isCookable(is);
+					float temp = TFC_ItemHeat.getTemp(is);
 					if(temp > 0 && temp < meltTemp)
 					{
 						renderQuad(1, 1, 13, 1, 0);

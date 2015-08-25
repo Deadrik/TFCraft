@@ -37,7 +37,7 @@ public class FoodStatsTFC
 	public float nutrGrain = 1.0f;
 	public float nutrDairy = 1.0f;
 	public float nutrProtein = 1.0f;
-	private boolean shouldSendUpdate = true;
+	private boolean sendUpdate = true;
 
 	public long soberTime = 0;
 
@@ -153,7 +153,7 @@ public class FoodStatsTFC
 					if(this.satDairy)
 						this.addNutrition(EnumFoodGroup.Dairy, this.satisfaction*((1-this.nutrDairy)/100), false);
 				}
-				shouldSendUpdate = true;
+				sendUpdate = true;
 			}
 
 			//Heal or hurt the player based on hunger.
@@ -217,7 +217,7 @@ public class FoodStatsTFC
 		nutrProtein = Math.max(this.nutrProtein - (amount + foodExhaustionLevel), 0);
 		nutrDairy = Math.max(this.nutrDairy - (amount + foodExhaustionLevel), 0);
 
-		shouldSendUpdate = true;
+		sendUpdate = true;
 	}
 
 	public int getMaxWater(EntityPlayer player)
@@ -278,7 +278,7 @@ public class FoodStatsTFC
 			this.nutrGrain = foodCompound.getFloat("nutrGrain");
 			this.nutrProtein = foodCompound.getFloat("nutrProtein");
 			this.nutrDairy = foodCompound.getFloat("nutrDairy");
-			this.shouldSendUpdate = foodCompound.getBoolean("shouldSendUpdate");
+			this.sendUpdate = foodCompound.getBoolean("shouldSendUpdate");
 			this.satFruit = foodCompound.getBoolean("satFruit");
 			this.satVeg = foodCompound.getBoolean("satVeg");
 			this.satGrain = foodCompound.getBoolean("satGrain");
@@ -306,7 +306,7 @@ public class FoodStatsTFC
 		foodNBT.setFloat("nutrGrain", nutrGrain);
 		foodNBT.setFloat("nutrProtein", nutrProtein);
 		foodNBT.setFloat("nutrDairy", nutrDairy);
-		foodNBT.setBoolean("shouldSendUpdate", shouldSendUpdate);
+		foodNBT.setBoolean("shouldSendUpdate", sendUpdate);
 		foodNBT.setBoolean("satFruit", satFruit);
 		foodNBT.setBoolean("satVeg", satVeg);
 		foodNBT.setBoolean("satGrain", satGrain);
@@ -333,7 +333,7 @@ public class FoodStatsTFC
 	public void setFoodLevel(float par1)
 	{
 		if(par1 != this.stomachLevel)
-			shouldSendUpdate = true;
+			sendUpdate = true;
 		this.stomachLevel = par1;
 
 	}
@@ -479,13 +479,13 @@ public class FoodStatsTFC
 
 	public boolean shouldSendUpdate()
 	{
-		return shouldSendUpdate;
+		return sendUpdate;
 	}
 
 	public void restoreWater(EntityPlayer player, int w)
 	{
 		this.waterLevel = Math.min(this.waterLevel + w, this.getMaxWater(player));
-		shouldSendUpdate = true;
+		sendUpdate = true;
 		this.writeNBT(player.getEntityData());
 	}
 
@@ -503,6 +503,6 @@ public class FoodStatsTFC
 			soberTime = TFC_Time.getTotalTicks() + player.worldObj.rand.nextInt(1000) + 400;
 		else
 			soberTime += player.worldObj.rand.nextInt(1000) + 400;
-		shouldSendUpdate = true;
+		sendUpdate = true;
 	}
 }

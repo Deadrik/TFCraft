@@ -125,8 +125,8 @@ public class HeatIndex
 			else
 			{
 				is.setTagCompound(in.stackTagCompound);
-				if(TFC_ItemHeat.HasTemp(is))
-					TFC_ItemHeat.SetTemp(is, TFC_ItemHeat.GetTemp(is)*0.9f);
+				if(TFC_ItemHeat.hasTemp(is))
+					TFC_ItemHeat.setTemp(is, TFC_ItemHeat.getTemp(is)*0.9f);
 			}
 		}
 		return is;

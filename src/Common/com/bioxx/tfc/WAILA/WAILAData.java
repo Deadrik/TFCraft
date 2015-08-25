@@ -677,7 +677,7 @@ public class WAILAData implements IWailaDataProvider
 			HeatIndex index = manager.findMatchingIndex(oreStack);
 			if (index != null)
 			{
-				temperature = TFC_ItemHeat.GetTemp(oreStack);
+				temperature = TFC_ItemHeat.getTemp(oreStack);
 			}
 		}
 		String temp = TFC_ItemHeat.getHeatColor(temperature, te.maxFireTempScale);

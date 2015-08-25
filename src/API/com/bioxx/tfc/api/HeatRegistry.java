@@ -74,12 +74,12 @@ public class HeatRegistry
 
 	public Boolean isTemperatureWeldable(ItemStack is)
 	{
-		if(TFC_ItemHeat.HasTemp(is))
+		if(TFC_ItemHeat.hasTemp(is))
 		{
 			HeatIndex index = instance.findMatchingIndex(is);
 			if(index != null)
 			{
-				float temp = TFC_ItemHeat.GetTemp(is);
+				float temp = TFC_ItemHeat.getTemp(is);
 				return temp < index.meltTemp && temp > index.meltTemp *0.8;
 			}
 		}
@@ -88,12 +88,12 @@ public class HeatRegistry
 
 	public Boolean isTemperatureWorkable(ItemStack is)
 	{
-		if(TFC_ItemHeat.HasTemp(is))
+		if(TFC_ItemHeat.hasTemp(is))
 		{
 			HeatIndex index = instance.findMatchingIndex(is);
 			if(index != null)
 			{
-				float temp = TFC_ItemHeat.GetTemp(is);
+				float temp = TFC_ItemHeat.getTemp(is);
 				return temp < index.meltTemp && temp > index.meltTemp * 0.60;
 			}
 		}
@@ -102,12 +102,12 @@ public class HeatRegistry
 
 	public Boolean isTemperatureDanger(ItemStack is)
 	{
-		if(TFC_ItemHeat.HasTemp(is))
+		if(TFC_ItemHeat.hasTemp(is))
 		{
 			HeatIndex index = instance.findMatchingIndex(is);
 			if(index != null)
 			{
-				float temp = TFC_ItemHeat.GetTemp(is);
+				float temp = TFC_ItemHeat.getTemp(is);
 				return temp < index.meltTemp && temp > index.meltTemp * 0.90;
 			}
 		}

@@ -50,7 +50,7 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public Metal GetMetalType(ItemStack is)
+	public Metal getMetalType(ItemStack is)
 	{
 		if (this == TFCItems.RawBloom)
 			return Global.UNKNOWN;
@@ -59,7 +59,7 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public short GetMetalReturnAmount(ItemStack is)
+	public short getMetalReturnAmount(ItemStack is)
 	{
 		return (short) is.getItemDamage();
 	}
@@ -71,7 +71,7 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public EnumTier GetSmeltTier(ItemStack is)
+	public EnumTier getSmeltTier(ItemStack is)
 	{
 		return EnumTier.TierIII;
 	}

@@ -5,7 +5,7 @@ import net.minecraft.nbt.NBTTagList;
 public interface ISchematic 
 {
 	
-	public boolean Load();
+	public boolean load();
 	/**
 	 * @return Schematic "Height"
 	 */

@@ -208,7 +208,7 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 	}
 
 	@Override
-	public EnumDamageType GetDamageType() 
+	public EnumDamageType getDamageType() 
 	{
 		return EnumDamageType.PIERCING;
 	}

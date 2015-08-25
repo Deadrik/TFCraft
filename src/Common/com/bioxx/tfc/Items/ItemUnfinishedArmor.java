@@ -80,7 +80,7 @@ public class ItemUnfinishedArmor extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public Metal GetMetalType(ItemStack is)
+	public Metal getMetalType(ItemStack is)
 	{
 		if (metal == null)
 		{
@@ -93,7 +93,7 @@ public class ItemUnfinishedArmor extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public short GetMetalReturnAmount(ItemStack is)
+	public short getMetalReturnAmount(ItemStack is)
 	{
 		if(is.getItemDamage() == 1)
 			return metalAmount2;
@@ -107,7 +107,7 @@ public class ItemUnfinishedArmor extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public EnumTier GetSmeltTier(ItemStack is)
+	public EnumTier getSmeltTier(ItemStack is)
 	{
 		return EnumTier.TierI;
 	}

@@ -15,7 +15,7 @@ public class ItemAnvil2 extends ItemAnvil
 	}
 	
 	@Override
-	public Metal GetMetalType(ItemStack is) 
+	public Metal getMetalType(ItemStack is) 
 	{
 		int meta = is.getItemDamage();
 		switch(meta)

@@ -1400,15 +1400,15 @@ public class Recipes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), null,"scythe", AnvilReq.STEEL, new ItemStack(TFCItems.SteelScytheHead, 1)).addRecipeSkill(Global.SKILL_TOOLSMITH));
 
 		//Knifes		
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot),null,"knife", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).SetCraftingBound(40));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), null,"knife", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).SetCraftingBound(40));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), null,"knife", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).SetCraftingBound(40));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), null,"knife", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).SetCraftingBound(40));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), null,"knife", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).SetCraftingBound(40));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), null,"knife", AnvilReq.COPPER, new ItemStack(TFCItems.CopperKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).SetCraftingBound(40));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), null,"knife", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).SetCraftingBound(40));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), null,"knife", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).SetCraftingBound(40));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), null,"knife", AnvilReq.STEEL, new ItemStack(TFCItems.SteelKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).SetCraftingBound(40));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot),null,"knife", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setCraftingBound(40));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), null,"knife", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setCraftingBound(40));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), null,"knife", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setCraftingBound(40));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), null,"knife", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setCraftingBound(40));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), null,"knife", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setCraftingBound(40));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), null,"knife", AnvilReq.COPPER, new ItemStack(TFCItems.CopperKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setCraftingBound(40));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), null,"knife", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setCraftingBound(40));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), null,"knife", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setCraftingBound(40));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), null,"knife", AnvilReq.STEEL, new ItemStack(TFCItems.SteelKnifeHead, 1)).addRecipeSkill(Global.SKILL_WEAPONSMITH).setCraftingBound(40));
 
 
 		//javelin heads	

@@ -20,7 +20,7 @@ import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockSetup extends TFCBlocks
 {
-	public static void RegisterBlocks()
+	public static void registerBlocks()
 	{
 		GameRegistry.registerBlock(Ore, "Ore1");
 		GameRegistry.registerBlock(Ore2, "Ore2");
@@ -196,7 +196,7 @@ public class BlockSetup extends TFCBlocks
 		GameRegistry.registerBlock(FlowerPot, "FlowerPot");
 	}
 
-	public static void LoadBlocks()
+	public static void loadBlocks()
 	{
 		TerraFirmaCraft.log.info(new StringBuilder().append("Loading Blocks").toString());
 

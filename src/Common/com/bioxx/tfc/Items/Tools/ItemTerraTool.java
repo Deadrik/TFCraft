@@ -45,7 +45,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 		ItemTerra.addHeatInformation(is, arraylist);
 
 		if(is.getItem() instanceof ICausesDamage)
-			arraylist.add(EnumChatFormatting.AQUA + TFC_Core.translate(((ICausesDamage)this).GetDamageType().toString()));
+			arraylist.add(EnumChatFormatting.AQUA + TFC_Core.translate(((ICausesDamage)this).getDamageType().toString()));
 
 		ItemTerraTool.addDurabilityInformation(is, arraylist);
 		addExtraInformation(is, player, arraylist);

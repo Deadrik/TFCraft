@@ -249,7 +249,7 @@ public class ItemMeal extends ItemTerra implements IFood
 
 	public static boolean isWarm(ItemStack is)
 	{
-		return TFC_ItemHeat.GetTemp(is) > TFC_ItemHeat.IsCookable(is) * 0.1;
+		return TFC_ItemHeat.getTemp(is) > TFC_ItemHeat.isCookable(is) * 0.1;
 	}
 
 	@Override

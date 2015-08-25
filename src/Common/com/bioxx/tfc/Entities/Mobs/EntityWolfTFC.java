@@ -794,19 +794,19 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	}
 
 	@Override
-	public int GetCrushArmor()
+	public int getCrushArmor()
 	{
 		return 250;
 	}
 
 	@Override
-	public int GetSlashArmor()
+	public int getSlashArmor()
 	{
 		return 250;
 	}
 
 	@Override
-	public int GetPierceArmor()
+	public int getPierceArmor()
 	{
 		return -335;
 	}
@@ -868,7 +868,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	}
 
 	@Override
-	public EnumDamageType GetDamageType() 
+	public EnumDamageType getDamageType() 
 	{
 		return EnumDamageType.SLASHING;
 	}

@@ -28,7 +28,7 @@ public class EntitySpiderTFC extends EntitySpider implements ICausesDamage
 	}
 
 	@Override
-	public EnumDamageType GetDamageType()
+	public EnumDamageType getDamageType()
 	{
 		return EnumDamageType.PIERCING;
 	}

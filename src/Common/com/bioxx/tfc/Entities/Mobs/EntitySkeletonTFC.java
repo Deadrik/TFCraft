@@ -504,21 +504,21 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 	}
 
 	@Override
-	public EnumDamageType GetDamageType()
+	public EnumDamageType getDamageType()
 	{
 		return EnumDamageType.PIERCING;
 	}
 
 	@Override
-	public int GetCrushArmor() {
+	public int getCrushArmor() {
 		return -335;
 	}
 	@Override
-	public int GetSlashArmor() {
+	public int getSlashArmor() {
 		return 1000;
 	}
 	@Override
-	public int GetPierceArmor() {
+	public int getPierceArmor() {
 		return 500000;//this is not an error. this makes piercing damage useless.
 	}
 

@@ -36,7 +36,7 @@ public class AnvilRecipe
 		this.craftingValue = 70 + new Random(TFC_Core.getSuperSeed(AnvilManager.world)+(in != null ? Item.getIdFromItem(in.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(craftingBoundDefault);
 	}
 
-	public AnvilRecipe SetCraftingBound(int max)
+	public AnvilRecipe setCraftingBound(int max)
 	{
 		craftingValue = 70 + new Random(TFC_Core.getSuperSeed(AnvilManager.world)+(input1 != null ? Item.getIdFromItem(input1.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(max);
 		return this;

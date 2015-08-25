@@ -7,9 +7,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -329,7 +331,7 @@ public class CommonProxy
 	{
 	}
 
-	public void registerSkyProvider(TFCProvider P)
+	public void registerSkyProvider(TFCProvider p)
 	{
 	}
 

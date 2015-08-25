@@ -2,7 +2,9 @@ package com.bioxx.tfc.api.Interfaces;
 
 public interface IInnateArmor 
 {
-	public int GetCrushArmor();
-	public int GetSlashArmor();
-	public int GetPierceArmor();
+	public int getCrushArmor();
+
+	public int getSlashArmor();
+
+	public int getPierceArmor();
 }

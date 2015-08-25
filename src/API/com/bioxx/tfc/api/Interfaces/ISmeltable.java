@@ -6,16 +6,16 @@ import net.minecraft.item.ItemStack;
 
 public interface ISmeltable 
 {
-	public Metal GetMetalType(ItemStack is);
+	public Metal getMetalType(ItemStack is);
 	
 	/**
 	 * @return Percent of a full Unshaped Mold 0-100. Beyond 100 will give more than one mold worth of metal.
 	 */
-	public short GetMetalReturnAmount(ItemStack is);
+	public short getMetalReturnAmount(ItemStack is);
 	
 	public boolean isSmeltable(ItemStack is);
 	
-	public EnumTier GetSmeltTier(ItemStack is);
+	public EnumTier getSmeltTier(ItemStack is);
 	
 	public enum EnumTier
 	{

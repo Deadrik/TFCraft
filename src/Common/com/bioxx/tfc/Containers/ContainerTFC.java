@@ -247,8 +247,8 @@ public class ContainerTFC extends Container
 		if (is4Tags == null)
 			return is3Tags.hasNoTags();
 
-		float temp3 = TFC_ItemHeat.GetTemp(is1);
-		float temp4 = TFC_ItemHeat.GetTemp(is2);
+		float temp3 = TFC_ItemHeat.getTemp(is1);
+		float temp4 = TFC_ItemHeat.getTemp(is2);
 		is3Tags.removeTag("temp");
 		is4Tags.removeTag("temp");
 
