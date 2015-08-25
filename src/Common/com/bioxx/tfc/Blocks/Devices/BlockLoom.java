@@ -21,6 +21,9 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
@@ -30,9 +33,6 @@ import com.bioxx.tfc.TileEntities.TELoom;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockLoom extends BlockTerraContainer
 {
@@ -202,7 +202,8 @@ public class BlockLoom extends BlockTerraContainer
 		else
 		{
 			TileEntity te = world.getTileEntity(x, y, z);
-			if(te != null && te instanceof TELoom){
+			if (te instanceof TELoom)
+			{
 				TELoom loomTE = (TELoom)te;
 				//player.addChatMessage(new ChatComponentText(loomTE.rotation + ""));
 				if(!loomTE.isFinished()){
@@ -266,7 +267,7 @@ public class BlockLoom extends BlockTerraContainer
 	public int getDamageValue(World world, int x, int y, int z)
     {
 		TileEntity te = world.getTileEntity(x, y, z);
-		if (te != null && te instanceof TELoom)
+		if (te instanceof TELoom)
 			return ((TELoom)te).loomType;
 		return 0;
     }

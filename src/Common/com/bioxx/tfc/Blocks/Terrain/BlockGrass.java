@@ -119,22 +119,22 @@ public class BlockGrass extends BlockTerra
 			return TFC_Textures.InvisibleTexture;
 		else if (side == 2) //-Z
 		{
-			if(TFCOptions.enableBetterGrass == true && TFC_Core.isGrass(access.getBlock(x, y - 1, z - 1)))
+			if (TFCOptions.enableBetterGrass && TFC_Core.isGrass(access.getBlock(x, y - 1, z - 1)))
 				return isSnow(access, x, y - 1, z - 1) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
 		}
 		else if (side == 3) //+Z
 		{
-			if(TFCOptions.enableBetterGrass == true && TFC_Core.isGrass(access.getBlock(x, y - 1, z + 1)))
+			if (TFCOptions.enableBetterGrass && TFC_Core.isGrass(access.getBlock(x, y - 1, z + 1)))
 				return isSnow(access, x, y - 1, z + 1) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
 		}
 		else if (side == 4) //-X
 		{
-			if(TFCOptions.enableBetterGrass == true && TFC_Core.isGrass(access.getBlock(x - 1, y - 1, z)))
+			if (TFCOptions.enableBetterGrass && TFC_Core.isGrass(access.getBlock(x - 1, y - 1, z)))
 				return isSnow(access, x - 1, y - 1, z) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
 		}
 		else if (side == 5) //+X
 		{
-			if(TFCOptions.enableBetterGrass == true && TFC_Core.isGrass(access.getBlock(x + 1, y - 1, z)))
+			if (TFCOptions.enableBetterGrass && TFC_Core.isGrass(access.getBlock(x + 1, y - 1, z)))
 				return isSnow(access, x + 1, y - 1, z) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
 		}
 

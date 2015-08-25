@@ -1,12 +1,13 @@
 package com.bioxx.tfc.api.Crafting;
 
+import net.minecraft.item.ItemStack;
+
+import net.minecraftforge.fluids.FluidStack;
+
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
 
 public class BarrelPreservativeRecipe {
 	private boolean requiresBrined = false;
@@ -103,10 +104,7 @@ public class BarrelPreservativeRecipe {
 		{
 			return false;
 		}
-		if(liquidPerOz.amount * w > fluid.amount){
-			return false;
-		}
-		return true;
+		return liquidPerOz.amount * w <= fluid.amount;
 	}
 	
 	public BarrelPreservativeRecipe(FluidStack liquidPerOz, String unlocalizedPreservingLabel){

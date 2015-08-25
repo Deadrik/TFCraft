@@ -133,7 +133,7 @@ public class BlockSand extends BlockTerra
 					sides.add(3);
 			}
 
-			if (!canFallOneBelow && count > 2 && sides.size() >= 1)
+			if (!canFallOneBelow && count > 2 && !sides.isEmpty())
 			{
 				switch (sides.get(random.nextInt(sides.size())))
 				{

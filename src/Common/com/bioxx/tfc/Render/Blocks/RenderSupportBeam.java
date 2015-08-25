@@ -324,11 +324,8 @@ public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 		if(access.getBlock(i, j+1, k).getMaterial() == Material.water)
 			return true;
 
-		if(access.getBlock(i+1, j, k).getMaterial() == Material.water || access.getBlock(i-1, j, k).getMaterial() == Material.water ||
-				access.getBlock(i, j, k+1).getMaterial() == Material.water || access.getBlock(i, j, k-1).getMaterial() == Material.water)
-			return true;
-
-		return false;
+		return access.getBlock(i + 1, j, k).getMaterial() == Material.water ||access.getBlock(i - 1, j, k).getMaterial() == Material.water ||
+				access.getBlock(i, j, k + 1).getMaterial() == Material.water || access.getBlock(i, j, k - 1).getMaterial() == Material.water;
 	}
 
 	@Override

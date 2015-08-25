@@ -3,12 +3,13 @@ package com.bioxx.tfc.Handlers;
 import java.util.Random;
 
 import net.minecraft.util.ChatComponentTranslation;
+
 import net.minecraftforge.event.ServerChatEvent;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class ChatListenerTFC
 {
@@ -40,7 +41,7 @@ public class ChatListenerTFC
 						{
 							msg = msg + (end.substring(0, 1).toUpperCase().equals(end.substring(0, 1)) ? s2 : s2.toLowerCase());
 						}
-						if((s2.equals("S") || s2.equals("s")) && !end.substring(0, 1).equals("S") && !end.substring(0, 1).equals("s"))
+						if (("S".equals(s2) || "s".equals(s2)) && !"S".equals(end.substring(0, 1)) && !"s".equals(end.substring(0, 1)))
 						{
 							msg += (s2.toUpperCase().equals(s2) ? (end.substring(0, 1).toUpperCase().equals(end.substring(0, 1)) ? "H" : "h".toLowerCase()) : "h");
 							m++;

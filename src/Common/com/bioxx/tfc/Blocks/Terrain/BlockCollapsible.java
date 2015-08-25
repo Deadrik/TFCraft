@@ -83,10 +83,7 @@ public class BlockCollapsible extends BlockTerraContainer
 			return true;
 
 		Material material = block.getMaterial();
-		if (material == Material.water || material == Material.lava)
-			return true;
-
-		return false;
+		return material == Material.water || material == Material.lava;
 	}
 
 	public void dropCarvedStone(World world, int x, int y, int z)
@@ -500,6 +497,7 @@ public class BlockCollapsible extends BlockTerraContainer
 						checkQueue.add(checkedmap, new CollapseData(new ByteCoord(localX - 1, localY + 0, localZ - 1), block.collapseChance - incrementChanceDiag, TFCDirection.SOUTHWEST));
 						checkQueue.add(checkedmap, new CollapseData(new ByteCoord(localX + 0, localY + 0, localZ + 1), block.collapseChance - incrementChance, TFCDirection.SOUTH));
 						checkQueue.add(checkedmap, new CollapseData(new ByteCoord(localX + 0, localY + 0, localZ - 1), block.collapseChance - incrementChance, TFCDirection.NORTH));
+						break;
 					}
 					}
 				}

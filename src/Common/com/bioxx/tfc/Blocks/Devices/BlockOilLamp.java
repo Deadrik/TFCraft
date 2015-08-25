@@ -143,18 +143,13 @@ public class BlockOilLamp extends BlockTerraContainer
 
 	public static boolean isLampLit(int meta)
 	{
-		if((meta & 8) > 0)
-		{
-			return false;
-		}
-		return true;
+		return (meta & 8) <= 0;
 	}
 
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		return ret;
+		return new ArrayList<ItemStack>();
 	}
 
 	@Override
@@ -262,7 +257,7 @@ public class BlockOilLamp extends BlockTerraContainer
 	public void onBlockPlacedBy(World world, int x, int y, int z,  EntityLivingBase entity, ItemStack is) 
 	{
 		TileEntity _t =  world.getTileEntity(x, y, z);
-		if(_t != null && _t instanceof TEOilLamp)
+		if (_t instanceof TEOilLamp)
 		{
 			((TEOilLamp)_t).create();
 			FluidStack fs = FluidStack.loadFluidStackFromNBT(is.getTagCompound());

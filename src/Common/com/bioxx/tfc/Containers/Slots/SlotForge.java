@@ -20,13 +20,9 @@ public class SlotForge extends Slot
 	public boolean isItemValid(ItemStack itemstack)
 	{
 		HeatRegistry manager = HeatRegistry.getInstance();
-		if (manager.findMatchingIndex(itemstack) == null
+		return !(manager.findMatchingIndex(itemstack) == null
 				|| itemstack.getItem() instanceof ItemOre
-				|| itemstack.getItem() instanceof ItemFoodTFC)
-			return false;
-
-
-		return true;
+				|| itemstack.getItem() instanceof ItemFoodTFC);
 	}
 
 	@Override

@@ -10,10 +10,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 
-import com.bioxx.tfc.Core.TFC_Core;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class TEToolRack extends NetworkTileEntity implements IInventory
 {
@@ -44,19 +44,15 @@ public class TEToolRack extends NetworkTileEntity implements IInventory
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox()
 	{
-		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord +1, yCoord + 1, zCoord + 1);
-		return bb;
+		return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1);
 	}
 
 	public boolean contentsMatch(int index, ItemStack is)
 	{
-		if(storage[index] != null &&
+		return storage[index] != null &&
 				storage[index].getItem() == is.getItem() &&
 				storage[index].getItemDamage() == is.getItemDamage() &&
-				storage[index].stackSize < storage[index].getMaxStackSize())
-			return true;
-		else
-			return false;
+				storage[index].stackSize < storage[index].getMaxStackSize();
 	}
 
 	@Override

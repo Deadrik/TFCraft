@@ -185,17 +185,9 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	{
 		Item id = is.getItem();
 
-		if(id == TFCItems.WeakSteelIngot || id == TFCItems.HCSteelIngot || id == TFCItems.HCBlackSteelIngot || 
+		return !(id == TFCItems.WeakSteelIngot || id == TFCItems.HCSteelIngot || id == TFCItems.HCBlackSteelIngot || 
 				id == TFCItems.WeakRedSteelIngot || id == TFCItems.WeakBlueSteelIngot || 
-				id == TFCItems.HCRedSteelIngot || id == TFCItems.HCBlueSteelIngot)
-		{
-			return false;
-		}
-
-		else
-		{
-			return true;
-		}
+				id == TFCItems.HCRedSteelIngot || id == TFCItems.HCBlueSteelIngot);
 	}
 
 	@Override

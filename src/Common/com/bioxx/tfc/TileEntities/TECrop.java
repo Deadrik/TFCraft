@@ -64,7 +64,7 @@ public class TECrop extends NetworkTileEntity
 
 				TEFarmland tef = null;
 				TileEntity te = worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
-				if(te != null && te instanceof TEFarmland)
+				if (te instanceof TEFarmland)
 					tef = (TEFarmland) te;
 
 				float ambientTemp = TFC_Climate.getHeightAdjustedTempSpecificDay(worldObj, TFC_Time.getDayOfYearFromTick(growthTimer), xCoord, yCoord, zCoord);

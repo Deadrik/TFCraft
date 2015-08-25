@@ -77,7 +77,7 @@ public class BlockStand2 extends BlockStand implements IMultipleBlock, IEquipabl
 	{
 		super.onBlockPlacedBy(world, i, j, k, entityliving, is);
 		TileEntity te = world.getTileEntity(i,j,k);
-		if(te != null && te instanceof TEStand)
+		if (te instanceof TEStand)
 		{
 			TEStand tes = (TEStand) te;
 			tes.yaw = (((int) (entityliving.rotationYaw % 360 + 360 + 45) / 90) * 90) % 360;

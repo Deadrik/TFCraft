@@ -113,8 +113,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox()
 	{
-		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord +1, yCoord + 2, zCoord + 1);
-		return bb;
+		return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 2, zCoord + 1);
 	}
 
 	/**
@@ -766,7 +765,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	public static EntityItem searchForLooseInput(World p_145897_0_, double p_145897_1_, double p_145897_3_, double p_145897_5_)
 	{
 		List list = p_145897_0_.selectEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(p_145897_1_, p_145897_3_, p_145897_5_, p_145897_1_ + 1.0D, p_145897_3_ + 1.0D, p_145897_5_ + 1.0D), IEntitySelector.selectAnything);
-		return list.size() > 0 ? (EntityItem)list.get(0) : null;
+		return !list.isEmpty() ? (EntityItem) list.get(0) : null;
 	}
 
 	public static IInventory searchForOutputInventory(World world, double x, double y, double z)
@@ -778,7 +777,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		TileEntity tileentity = world.getTileEntity(i, j, k);
 
 		//First we look for a block inventory
-		if (tileentity != null && tileentity instanceof IInventory)
+		if (tileentity instanceof IInventory)
 		{
 			iinventory = (IInventory)tileentity;
 
@@ -797,7 +796,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		{
 			List list = world.getEntitiesWithinAABBExcludingEntity((Entity)null, AxisAlignedBB.getBoundingBox(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D), IEntitySelector.selectInventories);
 
-			if (list != null && list.size() > 0)
+			if (list != null && !list.isEmpty())
 			{
 				iinventory = (IInventory)list.get(world.rand.nextInt(list.size()));
 			}

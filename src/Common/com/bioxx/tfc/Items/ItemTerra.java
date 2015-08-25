@@ -212,7 +212,7 @@ public class ItemTerra extends Item implements ISize
 					s += EnumChatFormatting.WHITE + TFC_Core.translate("gui.ingot.workable");
 				}
 
-				if(!s.equals(""))
+				if (!"".equals(s))
 					arraylist.add(s);
 			}
 		}
@@ -249,8 +249,7 @@ public class ItemTerra extends Item implements ISize
 	@Override
 	public Multimap getItemAttributeModifiers()
 	{
-		Multimap multimap = HashMultimap.create();
-		return multimap;
+		return HashMultimap.create();
 	}
 
 	@Override

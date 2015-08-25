@@ -86,28 +86,17 @@ public class FloraIndex
 
 	public ItemStack getOutput()
 	{
-		ItemStack is = output.copy();
-		return is;
+		return output.copy();
 	}
 
 	public boolean inHarvest(int month)
 	{
-		if(month >= harvestStart && month <= harvestFinish)
-		{
-			return true;
-		}
-
-		return false;
+		return month >= harvestStart && month <= harvestFinish;
 	}
 
 	public boolean inBloom(int month)
 	{
-		if(month >= bloomStart && month <= bloomFinish)
-		{
-			return true;
-		}
-
-		return false;
+		return month >= bloomStart && month <= bloomFinish;
 	}
 
 	public FloraIndex setTemp(float min, float max)

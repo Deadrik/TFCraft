@@ -56,8 +56,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox()
 	{
-		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord +1, yCoord + 1, zCoord + 1);
-		return bb;
+		return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1);
 	}
 
 	public int getHealAmountFromItemStack(ItemStack is)
@@ -274,9 +273,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 
 	private boolean compareIngred(ItemStack is1, ItemStack is2)
 	{
-		if (is1 != null && is2 != null && is1.getItem() == is2.getItem())
-			return false;
-		return true;
+		return !(is1 != null && is2 != null && is1.getItem() == is2.getItem());
 	}
 
 	private void combineTastes(NBTTagCompound nbt, float[] weights, ItemStack... isArray)

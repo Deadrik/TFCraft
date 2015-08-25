@@ -18,15 +18,15 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.TileEntities.TEFenceGate;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IMultipleBlock;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCustomFenceGate extends BlockFenceGate implements ITileEntityProvider, IMultipleBlock
 {
@@ -48,7 +48,7 @@ public class BlockCustomFenceGate extends BlockFenceGate implements ITileEntityP
 		boolean open = false;
 		TileEntity te = world.getTileEntity(x, y, z);
 
-		if (te != null && te instanceof TEFenceGate) // Fixes any possible ClassCastExceptions
+		if (te instanceof TEFenceGate) // Fixes any possible ClassCastExceptions
 		{
 			direction = ((TEFenceGate) te).getDirection();
 			open = ((TEFenceGate) te).getOpen();

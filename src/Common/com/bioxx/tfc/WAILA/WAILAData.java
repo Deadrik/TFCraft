@@ -588,7 +588,7 @@ public class WAILAData implements IWailaDataProvider
 		TEBarrel te = (TEBarrel) accessor.getTileEntity();
 		NBTTagCompound tag = accessor.getNBTData();
 		ItemStack storage[] = getStorage(tag, te);
-		ItemStack inStack = storage[te.INPUT_SLOT];
+		ItemStack inStack = storage[TEBarrel.INPUT_SLOT];
 
 		Boolean sealed = te.getSealed();
 		int sealTime = accessor.getNBTInteger(tag, "SealTime");
@@ -1209,7 +1209,7 @@ public class WAILAData implements IWailaDataProvider
 			return storage;
 		}
 
-		return null;
+		return new ItemStack[0];
 	}
 
 	private int getOreGrade(TEOre te, int ore)

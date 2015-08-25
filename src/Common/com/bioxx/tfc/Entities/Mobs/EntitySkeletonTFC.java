@@ -163,14 +163,11 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 			this.attackEntityFrom(DamageSource.onFire, 50);
 	}
 
-	@Override
+	/*@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
-		if (super.attackEntityAsMob(par1Entity))
-			return true;
-		else
-			return false;
-	}
+		return super.attackEntityAsMob(par1Entity);
+	}*/
 
 	/**
 	 * Get this Entity's EnumCreatureAttribute

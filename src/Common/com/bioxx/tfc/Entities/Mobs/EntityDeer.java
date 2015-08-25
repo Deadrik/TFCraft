@@ -33,7 +33,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 {
 	/** The eat grass AI task for this mob. */
 	private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
-	private final float GESTATION_PERIOD = 7.0f;
+	private static final float GESTATION_PERIOD = 7.0f;
 	private boolean running;
 	protected long animalID;
 	protected int sex = 0;
@@ -517,11 +517,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal)
 	{
-		if(animal.getGender() != this.getGender() && this.isAdult() && animal.isAdult() && 
-				animal instanceof EntityDeer)
-			return true;
-		else
-			return false;
+		return animal.getGender() != this.getGender() &&this.isAdult() && animal.isAdult() &&
+				animal instanceof EntityDeer;
 	}
 
 	@Override

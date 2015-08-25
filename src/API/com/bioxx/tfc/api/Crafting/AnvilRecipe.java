@@ -124,9 +124,7 @@ public class AnvilRecipe
 				plan.equals(A.plan) &&
 				AnvilReq.matches(anvilreq, A.anvilreq))
 		{
-			if(this.flux && !A.flux)
-				return false;
-			return true;
+			return !this.flux || A.flux;
 		}
 		return false;
 	}

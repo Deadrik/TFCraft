@@ -103,8 +103,7 @@ public class TEBloomery extends NetworkTileEntity
 
 	private int getCharcoalDir(int meta)
 	{
-		int dir = meta & 3;
-		return dir;
+		return meta & 3;
 	}
 
 	@Override

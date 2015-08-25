@@ -50,7 +50,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	public int inLove;
 
 	private final AIEatGrass aiEatGrass = new AIEatGrass(this);
-	private final float GESTATION_PERIOD = 11.17f;
+	private static final float GESTATION_PERIOD = 11.17f;
 	protected long animalID;
 	protected int sex = 0;
 	protected int hunger = 0;
@@ -542,7 +542,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	public void clearLeashed(boolean par1, boolean par2)
 	{
 		Entity entity = getLeashedToEntity();
-		if(entity!= null && entity instanceof EntityPlayer)
+		if (entity instanceof EntityPlayer)
 		{
 			//ItemStack item = ((EntityPlayer)entity).inventory.getCurrentItem();
 			if(entity.isSneaking())
@@ -789,11 +789,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal)
 	{
-		if(animal.getGender() != this.getGender() && this.isAdult() && animal.isAdult() && 
-				animal instanceof EntityHorseTFC)
-			return true;
-		else
-			return false;
+		return animal.getGender() != this.getGender() &&this.isAdult() && animal.isAdult() &&
+				animal instanceof EntityHorseTFC;
 	}
 
 	@Override

@@ -57,7 +57,8 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 				Patch mPatch = getMethodNodeList().get(m.name + " | " + m.desc);
 				List<InstrSet> instructions = mPatch.instructions;
 				InstrSet target = null;
-				if(instructions.size() > 0) {
+				if (!instructions.isEmpty())
+				{
 					target = instructions.get(0);
 				} else {
 					log.error("Error in: {" + m.name + " | " + m.desc + "} No Instructions");
@@ -65,7 +66,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 				//Run this is we plan to just modify the method
 				if(mPatch.opType == PatchOpType.Modify)
 				{
-					for (int index = 0; index < m.instructions.size() && instructions.size() > 0; index++)
+					for (int index = 0; index < m.instructions.size() && !instructions.isEmpty(); index++ )
 					{
 						numInsertions = 0;
 						while(target != null)
@@ -83,7 +84,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 							}
 
 
-							if(instructions.size() > 0) 
+							if (!instructions.isEmpty())
 							{
 								target = instructions.get(0);
 							} 
@@ -107,7 +108,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 						}
 
 					}
-					for (int index = 0; index < m.instructions.size() && instructions.size() > 0; index++)
+					for (int index = 0; index < m.instructions.size() && !instructions.isEmpty(); index++ )
 					{
 						numInsertions = 0;
 						while(target != null)
@@ -125,7 +126,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 							}
 
 
-							if(instructions.size() > 0) 
+							if (!instructions.isEmpty())
 							{
 								target = instructions.get(0);
 							} 

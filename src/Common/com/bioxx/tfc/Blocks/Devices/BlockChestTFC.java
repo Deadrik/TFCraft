@@ -1,7 +1,5 @@
 package com.bioxx.tfc.Blocks.Devices;
 
-import static net.minecraftforge.common.util.ForgeDirection.DOWN;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,7 +18,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
@@ -29,8 +31,7 @@ import com.bioxx.tfc.TileEntities.TEChest;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import static net.minecraftforge.common.util.ForgeDirection.DOWN;
 
 public class BlockChestTFC extends BlockTerraContainer
 {
@@ -54,7 +55,7 @@ public class BlockChestTFC extends BlockTerraContainer
 	public int getDamageValue(World world, int x, int y, int z)
 	{
 		TileEntity te = world.getTileEntity(x, y, z);
-		if (te != null && te instanceof TEChest)
+		if (te instanceof TEChest)
 			return ((TEChest)te).type;
 		return 0;
 	}
@@ -70,8 +71,7 @@ public class BlockChestTFC extends BlockTerraContainer
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		return ret;
+		return new ArrayList<ItemStack>();
 	}
 
 	@Override

@@ -11,11 +11,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 
 public class TEIngotPile extends NetworkTileEntity implements IInventory
 {
@@ -53,8 +53,7 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox()
 	{
-		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord +1, yCoord + 1, zCoord + 1);
-		return bb;
+		return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1);
 	}
 
 	public int getStack()
@@ -93,11 +92,8 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 				return true;
 		}
 
-		if(storage[index].getItem() == is.getItem() && storage[index].getItem() == is.getItem() &&
-				/*storage[index].stackSize < storage[index].getMaxStackSize() &&*/ storage[index].stackSize+1 <= this.getInventoryStackLimit())
-			return true;
-
-		return false;
+		return storage[index].getItem() == is.getItem() &&storage[index].getItem() == is.getItem() &&
+				/*storage[index].stackSize < storage[index].getMaxStackSize() &&*/ storage[index].stackSize + 1 <= this.getInventoryStackLimit();
 	}
 
 	@Override

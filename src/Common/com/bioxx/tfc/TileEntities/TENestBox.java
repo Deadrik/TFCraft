@@ -49,7 +49,7 @@ public class TENestBox extends TileEntity implements IInventory
 			return ea;//(EntityAnimal)list.get(0);
 		}*/
 
-		if(list.size()!=0)
+		if (!list.isEmpty())
 		{
 			for(Object e : list)
 			{
@@ -70,7 +70,7 @@ public class TENestBox extends TileEntity implements IInventory
 				xCoord-5, yCoord, zCoord-5, 
 				xCoord+5, yCoord+2, zCoord+5));
 
-		if(list.size() != 0)
+		if (!list.isEmpty())
 		{
 			for(Object e : list)
 			{

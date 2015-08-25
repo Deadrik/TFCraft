@@ -31,7 +31,7 @@ import com.bioxx.tfc.api.Util.Helper;
 public class EntityPigTFC extends EntityPig implements IAnimal
 {
 	private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
-	private final float GESTATION_PERIOD = 3.7f;
+	private static final float GESTATION_PERIOD = 3.7f;
 	protected long animalID;
 	protected int sex;
 	protected int hunger;
@@ -537,11 +537,8 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal)
 	{
-		if(animal.getGender() != this.getGender() && this.isAdult() && animal.isAdult() && 
-				animal instanceof EntityPigTFC)
-			return true;
-		else
-			return false;
+		return animal.getGender() != this.getGender() &&this.isAdult() && animal.isAdult() &&
+				animal instanceof EntityPigTFC;
 	}
 
 	@Override

@@ -123,9 +123,7 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
 
 	public boolean inBounds(int index, int[] array)
 	{
-		if(index < array.length && index >= 0)
-			return true;
-		return false;
+		return index < array.length && index >= 0;
 	}
 
 	/**

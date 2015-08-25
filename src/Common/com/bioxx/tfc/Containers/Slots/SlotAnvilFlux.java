@@ -1,10 +1,10 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.api.TFCItems;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.api.TFCItems;
 
 public class SlotAnvilFlux extends Slot
 {
@@ -16,10 +16,6 @@ public class SlotAnvilFlux extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(itemstack.getItem() == TFCItems.Powder && itemstack.getItemDamage() == 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return itemstack.getItem() == TFCItems.Powder && itemstack.getItemDamage() == 0;
 	}
 }

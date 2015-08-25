@@ -41,10 +41,7 @@ public class BlockCustomSnow extends BlockTerra
 			return true;
 		if (block == TFCBlocks.Thatch)
 			return true;
-		if (World.doesBlockHaveSolidTopSurface(world, i, j-1, k))
-			return true;
-		
-		return false;
+		return World.doesBlockHaveSolidTopSurface(world, i, j - 1, k);
 	}
 
 	@Override
@@ -222,9 +219,6 @@ public class BlockCustomSnow extends BlockTerra
 			return false;
 		if (!canAddSnowCheckNeighbors(world, x, y, z + 1, meta))
 			return false;
-		if (!canAddSnowCheckNeighbors(world, x, y, z - 1, meta))
-			return false;
-
-		return true;
+		return canAddSnowCheckNeighbors(world, x, y, z - 1, meta);
 	}
 }

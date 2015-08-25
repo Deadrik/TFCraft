@@ -18,11 +18,6 @@ public class CollapseData
 	@Override
 	public boolean equals(Object o)
 	{
-		if(o instanceof CollapseData && ((CollapseData)o).coords.equals(coords)) 
-		{
-			return true;
-		}
-
-		return false;
+		return o instanceof CollapseData && ((CollapseData) o).coords.equals(coords);
 	}
 }

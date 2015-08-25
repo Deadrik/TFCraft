@@ -105,7 +105,7 @@ public class WorldGenMinable extends WorldGenerator
 			int posX = x + temp1;
 			int posY = temp2;
 			int posZ = z + temp3;
-			if(useMarcoVeins == false)
+			if (!useMarcoVeins)
 				BODgenerate(worldObj, rand, posX, posY, posZ, veinSi); // generate based on values
 			else
 				BODgenerateVein(worldObj, rand, posX, posY, posZ, veinSi);
@@ -130,7 +130,7 @@ public class WorldGenMinable extends WorldGenerator
 
 		if(MPChunk_X != MPPrevX || MPChunk_Z != MPPrevZ || MPPrevBlock != MPBlock || minableBlockMeta != MPPrevMeta)
 		{
-			if (generateBeforeCheck() == false)
+			if (!generateBeforeCheck())
 			{
 				MPPrevX = MPChunk_X;
 				MPPrevZ = MPChunk_Z;

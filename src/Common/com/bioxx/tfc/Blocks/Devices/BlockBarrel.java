@@ -361,7 +361,7 @@ public class BlockBarrel extends BlockTerraContainer
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
 				else
 				{
-					if ( player.inventory.addItemStackToInventory(is) == false )
+					if (!player.inventory.addItemStackToInventory(is))
 						player.dropPlayerItemWithRandomChoice(is, false); // if the new item dosn't fit, drop it.
 				}
 
@@ -394,7 +394,7 @@ public class BlockBarrel extends BlockTerraContainer
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
 				else
 				{
-					if ( player.inventory.addItemStackToInventory(is) == false )
+					if (!player.inventory.addItemStackToInventory(is))
 						player.dropPlayerItemWithRandomChoice(is, false); // if the new item dosn't fit, drop it.
 				}
 
@@ -507,7 +507,7 @@ public class BlockBarrel extends BlockTerraContainer
 	public int getDamageValue(World world, int x, int y, int z)
 	{
 		TileEntity te = world.getTileEntity(x, y, z);
-		if (te != null && te instanceof TEBarrel)
+		if (te instanceof TEBarrel)
 			return ((TEBarrel)te).barrelType;
 		return 0;
 	}

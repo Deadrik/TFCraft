@@ -399,11 +399,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal)
 	{
-		if (animal.getGender() != this.getGender() && this.isAdult() && animal.isAdult() && 
-				animal.getAnimalTypeID() == this.getAnimalTypeID())
-			return true;
-		else
-			return false;
+		return animal.getGender() != this.getGender() &&this.isAdult() && animal.isAdult() &&
+				animal.getAnimalTypeID() == this.getAnimalTypeID();
 	}
 
 	@Override

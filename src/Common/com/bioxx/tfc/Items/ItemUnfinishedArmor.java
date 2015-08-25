@@ -54,8 +54,7 @@ public class ItemUnfinishedArmor extends ItemTerra implements ISmeltable
 	@Override
 	public String getItemStackDisplayName(ItemStack itemstack)
 	{
-		String s = new StringBuilder().append(super.getItemStackDisplayName(itemstack)).toString();
-		return s;
+		return new StringBuilder().append(super.getItemStackDisplayName(itemstack)).toString();
 	}
 
 	/*@Override

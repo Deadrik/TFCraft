@@ -268,13 +268,12 @@ public class ClientProxy extends CommonProxy
 					rgb = applyColor(var10, rgb);
 				}
 			}
-			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-			return x;
+			return (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 		}
 		else if(par1IBlockAccess.getBlock(i, j, k) == TFCBlocks.Vine)
 		{
-			if (TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9
-					&& !(TFC_Climate.getCacheManager(getCurrentWorld()).getEVTLayerAt(i, k).floatdata1 < 0.8)
+			if (TFC_Time.getSeasonAdjustedMonth(k) >= 6 &&TFC_Time.getSeasonAdjustedMonth(k) < 9 &&
+				TFC_Climate.getCacheManager(getCurrentWorld()).getEVTLayerAt(i, k).floatdata1 >= 0.8
 					&& TFC_Climate.getHeightAdjustedTemp(getCurrentWorld(), i, j, k) < 30)
 			{
 				int color = 0;
@@ -286,11 +285,10 @@ public class ClientProxy extends CommonProxy
 						rgb = applyColor(color, rgb);
 					}
 				}
-				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-				return x;
+				return (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			}
-			else if (TFC_Time.getSeasonAdjustedMonth(k) >= 11 || TFC_Time.getSeasonAdjustedMonth(k) <= 0
-					&& !(TFC_Climate.getCacheManager(getCurrentWorld()).getEVTLayerAt(i, k).floatdata1 < 0.8)
+			else if (TFC_Time.getSeasonAdjustedMonth(k) >= 11 || TFC_Time.getSeasonAdjustedMonth(k) <= 0 &&
+					TFC_Climate.getCacheManager(getCurrentWorld()).getEVTLayerAt(i, k).floatdata1 >= 0.8
 					&& TFC_Climate.getHeightAdjustedTemp(getCurrentWorld(), i, j, k) < 30)
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)
@@ -301,11 +299,10 @@ public class ClientProxy extends CommonProxy
 						rgb = applyColor(color, rgb);
 					}
 				}
-				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-				return x;
+				return (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			}
-			else if (TFC_Time.getSeasonAdjustedMonth(k) >= 9 
-					&& !(TFC_Climate.getCacheManager(getCurrentWorld()).getEVTLayerAt(i, k).floatdata1 < 0.8)
+			else if (TFC_Time.getSeasonAdjustedMonth(k) >= 9 &&
+					TFC_Climate.getCacheManager(getCurrentWorld()).getEVTLayerAt(i, k).floatdata1 >= 0.8
 					&& TFC_Climate.getHeightAdjustedTemp(getCurrentWorld(), i, j, k) < 30)
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)
@@ -316,8 +313,7 @@ public class ClientProxy extends CommonProxy
 						rgb = applyColor(color, rgb);
 					}
 				}
-				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-				return x;
+				return (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			}
 			else
 			{
@@ -329,8 +325,7 @@ public class ClientProxy extends CommonProxy
 						rgb = applyColor(color, rgb);
 					}
 				}
-				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-				return x;
+				return (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			}
 		}
 		else if (TFC_Time.getSeasonAdjustedMonth(k) >= 6 && EnumTree.values()[meta].isEvergreen)
@@ -343,8 +338,7 @@ public class ClientProxy extends CommonProxy
 					rgb = applyColor(var10, rgb);
 				}
 			}
-			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-			return x;
+			return (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 		}
 		else if (temperature <= 10 && TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && (meta == 4 || meta == 7 || meta == 5 || meta == 14))
 		{
@@ -358,8 +352,7 @@ public class ClientProxy extends CommonProxy
 					rgb = applyColor(color, rgb);
 				}
 			}
-			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-			return x;
+			return (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 		}
 		else if (temperature <= 10 && TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && meta == 6)
 		{
@@ -371,10 +364,9 @@ public class ClientProxy extends CommonProxy
 					rgb = applyColor(var10, rgb);
 				}
 			}
-			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-			return x;
+			return (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 		}
-		else if (temperature <= 10 && TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && !(meta == 15))
+		else if (temperature <= 10 && TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && meta != 15)
 		{
 			for (int var8 = -1; var8 <= 1; ++var8)
 			{
@@ -384,10 +376,9 @@ public class ClientProxy extends CommonProxy
 					rgb = applyColor(var10, rgb);
 				}
 			}
-			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-			return x;
+			return (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 		}
-		else if (temperature <= 8 && TFC_Time.getSeasonAdjustedMonth(k) >= 6 && !(meta == 15))
+		else if (temperature <= 8 && TFC_Time.getSeasonAdjustedMonth(k) >= 6 && meta != 15)
 		{
 			for (int var8 = -1; var8 <= 1; ++var8)
 			{
@@ -397,8 +388,7 @@ public class ClientProxy extends CommonProxy
 					rgb = applyColor(var10, rgb);
 				}
 			}
-			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-			return x;
+			return (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 		}
 		else
 		{
@@ -410,8 +400,7 @@ public class ClientProxy extends CommonProxy
 					rgb = applyColor(var10, rgb);
 				}
 			}
-			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-			return x;
+			return (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 		}
 	}
 

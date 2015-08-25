@@ -29,14 +29,14 @@ public class OreSpawnData
 
 		meta = M;
 		rarity = R;
-		if(T.equals("default"))
+		if ("default".equals(T))
 			type = 0;
 		else
 			type = 1;
 
-		if(S.equals("small"))
+		if ("small".equals(S))
 			size = 0;
-		else if(S.equals("medium"))
+		else if ("medium".equals(S))
 			size = 1;
 		else
 			size = 2;
@@ -102,28 +102,28 @@ public class OreSpawnData
 			}				
 		}
 		
-		if (name.equalsIgnoreCase("igneous intrusive"))
+		if ("igneous intrusive".equalsIgnoreCase(name))
 		{
 			List<Integer> metadata = base.containsKey(TFCBlocks.StoneIgIn) ? base.get(TFCBlocks.StoneIgIn) : new ArrayList<Integer>();
 			metadata.add(-1);
 			base.put(TFCBlocks.StoneIgIn, metadata);
 			return;
 		}
-		else if (name.equalsIgnoreCase("igneous extrusive"))
+		else if ("igneous extrusive".equalsIgnoreCase(name))
 		{
 			List<Integer> metadata = base.containsKey(TFCBlocks.StoneIgEx) ? base.get(TFCBlocks.StoneIgEx) : new ArrayList<Integer>();
 			metadata.add(-1);
 			base.put(TFCBlocks.StoneIgEx, metadata);
 			return;
 		}
-		else if(name.equalsIgnoreCase("sedimentary"))
+		else if ("sedimentary".equalsIgnoreCase(name))
 		{
 			List<Integer> metadata = base.containsKey(TFCBlocks.StoneSed) ? base.get(TFCBlocks.StoneSed) : new ArrayList<Integer>();
 			metadata.add(-1);
 			base.put(TFCBlocks.StoneSed, metadata);
 			return;
 		}
-		else if(name.equalsIgnoreCase("metamorphic"))
+		else if ("metamorphic".equalsIgnoreCase(name))
 		{
 			List<Integer> metadata = base.containsKey(TFCBlocks.StoneMM) ? base.get(TFCBlocks.StoneMM) : new ArrayList<Integer>();
 			metadata.add(-1);

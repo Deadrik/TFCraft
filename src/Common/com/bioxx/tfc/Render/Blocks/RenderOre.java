@@ -1,7 +1,5 @@
 package com.bioxx.tfc.Render.Blocks;
 
-import com.bioxx.tfc.TileEntities.TEOre;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -9,7 +7,10 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+
+import com.bioxx.tfc.TileEntities.TEOre;
 
 public class RenderOre implements ISimpleBlockRenderingHandler
 {
@@ -44,8 +45,7 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 		TEOre te = (TEOre)worldObj.getTileEntity(xCoord, yCoord, zCoord);
 		if(te!= null && te.baseBlockID > 0)
 		{
-			IIcon var27 = Block.getBlockById(te.baseBlockID).getIcon(5, te.baseBlockMeta);
-			return var27;
+			return Block.getBlockById(te.baseBlockID).getIcon(5, te.baseBlockMeta);
 		}
 		return null;
 	}

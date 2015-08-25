@@ -95,9 +95,7 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		Block b = world.getBlock(x, y, z);
-		if (b == TFCBlocks.ToolRack)
-			return true;
-		return false;
+		return b == TFCBlocks.ToolRack;
 	}
 
 	/**

@@ -371,6 +371,7 @@ public class BlockMoss extends BlockTerra
 			break;
 		case 5:
 			b0 = 2;
+			break;
 		}
 
 		return b0 != 0 ? b0 : par9;

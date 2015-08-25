@@ -28,24 +28,15 @@ public enum AnvilReq
     
     public boolean matches(int tier)
     {
-        if(tier >= Tier)
-           return true;
-        
-        return false;
+		return tier >= Tier;
     }
     public boolean matches(AnvilReq A)
     {
-        if(A.Tier >= Tier)
-           return true;
-        
-        return false;
+		return A.Tier >= Tier;
     }
     public static boolean matches(int i, int j)
     {
-        if(j >= i)
-           return true;
-        
-        return false;
+		return j >= i;
     }
     
     public static AnvilReq getReqFromInt(int i)

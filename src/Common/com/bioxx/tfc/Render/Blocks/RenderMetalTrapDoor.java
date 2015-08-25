@@ -6,12 +6,12 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+
 import com.bioxx.tfc.Blocks.BlockMetalSheet;
 import com.bioxx.tfc.Blocks.BlockMetalTrapDoor;
 import com.bioxx.tfc.TileEntities.TEMetalTrapDoor;
 import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderMetalTrapDoor implements ISimpleBlockRenderingHandler
 {
@@ -76,6 +76,7 @@ public class RenderMetalTrapDoor implements ISimpleBlockRenderingHandler
 				}
 				default:
 					fx2 = f;
+					break;
 				}
 			}
 			else if(hinge == 1)
@@ -120,6 +121,7 @@ public class RenderMetalTrapDoor implements ISimpleBlockRenderingHandler
 				}
 				default:
 					fz2 = f;
+					break;
 				}
 			}
 			else if(hinge == 2)
@@ -164,6 +166,7 @@ public class RenderMetalTrapDoor implements ISimpleBlockRenderingHandler
 				}
 				default:
 					fx = 1-f;
+					break;
 
 				}
 			}
@@ -209,6 +212,7 @@ public class RenderMetalTrapDoor implements ISimpleBlockRenderingHandler
 				}
 				default:
 					fz = 1-f;
+					break;
 				}
 			}
 			renderer.setRenderBounds(fx+0.0001f, fy+0.0001f, fz+0.0001f, fx2-0.0001f, fy2-0.0001f, fz2-0.0001f);

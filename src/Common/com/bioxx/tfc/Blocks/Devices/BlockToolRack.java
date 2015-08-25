@@ -77,7 +77,7 @@ public class BlockToolRack extends BlockTerraContainer
 		if(!world.isRemote)
 		{
 			TileEntity te = world.getTileEntity(x, y, z);
-			if(te != null && te instanceof TEToolRack)
+			if (te instanceof TEToolRack)
 			{
 				TEToolRack tet = (TEToolRack) te;
 				int dir = world.getBlockMetadata(x, y, z);
@@ -271,7 +271,7 @@ public class BlockToolRack extends BlockTerraContainer
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack is)
 	{
 		TileEntity te = world.getTileEntity(x, y, z);
-		if(te != null && te instanceof TEToolRack)
+		if (te instanceof TEToolRack)
 		{
 			TEToolRack rack = (TEToolRack) te;
 			rack.woodType = (byte)is.getItemDamage();
@@ -351,7 +351,7 @@ public class BlockToolRack extends BlockTerraContainer
 	public int getDamageValue(World world, int x, int y, int z)
     {
 		TileEntity te = world.getTileEntity(x, y, z);
-		if (te != null && te instanceof TEToolRack)
+		if (te instanceof TEToolRack)
 			return ((TEToolRack)te).woodType;
 		return 0;
     }

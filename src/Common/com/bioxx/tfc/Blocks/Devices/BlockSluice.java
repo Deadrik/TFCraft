@@ -132,8 +132,7 @@ public class BlockSluice extends BlockContainer
 
 	public String getItemNameIS(ItemStack itemstack) 
 	{
-		String s = "Sluice";
-		return s;
+		return "Sluice";
 	}
 
 	@Override

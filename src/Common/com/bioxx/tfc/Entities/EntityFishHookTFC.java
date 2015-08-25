@@ -529,8 +529,10 @@ public class EntityFishHookTFC extends EntityFishHook
 	public Vec3 getTooFarAdjustedVec(Vec3 motionVec, double x, double y, double z){
 		Vec3 playerMotion = Vec3.createVectorHelper(this.field_146042_b.motionX, this.field_146042_b.motionY, this.field_146042_b.motionZ);
 		double subractedRatio = Math.max(1 - (this.maxDistance / this.field_146042_b.getDistance(x + playerMotion.xCoord, y + playerMotion.yCoord, z + playerMotion.zCoord)),0);
-		Vec3 dirVec = Vec3.createVectorHelper((this.field_146042_b.posX + playerMotion.xCoord - (motionVec.xCoord + x))*subractedRatio, (this.field_146042_b.posY + playerMotion.yCoord - (motionVec.yCoord + y))*subractedRatio, (this.field_146042_b.posZ + playerMotion.zCoord - (motionVec.zCoord + z))*subractedRatio);
-		return dirVec;
+		return Vec3.createVectorHelper((this.field_146042_b.posX + playerMotion.xCoord - (motionVec.xCoord + x)) *
+										subractedRatio, (this.field_146042_b.posY + playerMotion.yCoord - (motionVec.yCoord + y)) *
+														subractedRatio, (this.field_146042_b.posZ + playerMotion.zCoord - (motionVec.zCoord + z)) *
+																		subractedRatio);
 	}
 
 	public void attemptToCatch(){
@@ -619,8 +621,7 @@ public class EntityFishHookTFC extends EntityFishHook
 					}
 				}
 			}
-			int averageFishPop = totalFish / chunksVisited;
-			return averageFishPop;
+			return totalFish / chunksVisited;
 		}
 	}
 

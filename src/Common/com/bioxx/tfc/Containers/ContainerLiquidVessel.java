@@ -141,16 +141,17 @@ public class ContainerLiquidVessel extends ContainerTFC
 						nbt.setInteger("MetalAmount", metalAmount - 1);
 					}
 				}
-				else if (input != null && input.getItem() instanceof ItemPotteryMold && input.getItemDamage() == 1 && input.stackSize == 1 && metalAmount > 0 && (m.Name.equals("Copper") || m.Name.equals("Bronze") || m.Name.equals("Bismuth Bronze") || m.Name.equals("Black Bronze")))
+				else if (input != null &&input.getItem() instanceof ItemPotteryMold && input.getItemDamage() == 1 && input.stackSize == 1 && metalAmount > 0 &&
+							("Copper".equals(m.Name) || "Bronze".equals(m.Name) || "Bismuth Bronze".equals(m.Name) || "Black Bronze".equals(m.Name)))
 				{
 					int amt = -1;
-					if (m.Name.equals("Copper"))
+					if ("Copper".equals(m.Name))
 						amt = 398;
-					else if (m.Name.equals("Bronze"))
+					else if ("Bronze".equals(m.Name))
 						amt = 399;
-					else if (m.Name.equals("Bismuth Bronze"))
+					else if ("Bismuth Bronze".equals(m.Name))
 						amt = 400;
-					else if (m.Name.equals("Black Bronze"))
+					else if ("Black Bronze".equals(m.Name))
 						amt = 401;
 
 					ItemStack is = new ItemStack(input.getItem(), 1, amt);
@@ -173,13 +174,13 @@ public class ContainerLiquidVessel extends ContainerTFC
 				else if (input != null && input.getItem() instanceof ItemPotteryMold && input.getItemDamage() > 1)
 				{
 					boolean correctMetalFlag = false;
-					if (m.Name.equals("Copper") && (input.getItemDamage() - 2) % 4 == 0)
+					if ("Copper".equals(m.Name) && (input.getItemDamage() - 2) % 4 == 0)
 						correctMetalFlag = true;
-					else if (m.Name.equals("Bronze") && (input.getItemDamage() - 2) % 4 == 1)
+					else if ("Bronze".equals(m.Name) && (input.getItemDamage() - 2) % 4 == 1)
 						correctMetalFlag = true;
-					else if (m.Name.equals("Bismuth Bronze") && (input.getItemDamage() - 2) % 4 == 2)
+					else if ("Bismuth Bronze".equals(m.Name) && (input.getItemDamage() - 2) % 4 == 2)
 						correctMetalFlag = true;
-					else if (m.Name.equals("Black Bronze") && (input.getItemDamage() - 2) % 4 == 3)
+					else if ("Black Bronze".equals(m.Name) && (input.getItemDamage() - 2) % 4 == 3)
 						correctMetalFlag = true;
 
 					if (correctMetalFlag)

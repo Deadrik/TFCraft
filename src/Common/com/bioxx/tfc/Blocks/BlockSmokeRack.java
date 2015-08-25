@@ -200,9 +200,7 @@ public class BlockSmokeRack extends BlockTerraContainer
 	private boolean isValidNeighbor(World world, int x, int y, int z, ForgeDirection dir)
 	{
 		Block b = world.getBlock(x, y, z);
-		if (b == this || b.isSideSolid(world, x, y, z, dir.getOpposite()))
-			return true;
-		return false;
+		return b == this || b.isSideSolid(world, x, y, z, dir.getOpposite());
 	}
 
 	@Override

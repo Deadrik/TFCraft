@@ -1,9 +1,9 @@
 package com.bioxx.tfc.Entities;
 
-import io.netty.buffer.ByteBuf;
-
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import io.netty.buffer.ByteBuf;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
@@ -20,17 +20,18 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
+
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Blocks.Terrain.BlockCobble;
 import com.bioxx.tfc.Blocks.Terrain.BlockOre;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
-
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSpawnData
 {
@@ -179,7 +180,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 										String s = (String)iterator.next();
 										NBTBase nbtbase = this.tileEntityData.getTag(s);
 
-										if (!s.equals("x") && !s.equals("y") && !s.equals("z"))
+										if (!"x".equals(s) && !"y".equals(s) && !"z".equals(s))
 										{
 											nbttagcompound.setTag(s, nbtbase.copy());
 										}
@@ -236,12 +237,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 
 	private boolean canDestroy(Block b)
 	{
-		if(b == TFCBlocks.Charcoal)
-			return false;
-		if (b == TFCBlocks.Molten)
-			return false;
-
-		return true;
+		return !(b == TFCBlocks.Charcoal || b == TFCBlocks.Molten);
 	}
 
 	/**

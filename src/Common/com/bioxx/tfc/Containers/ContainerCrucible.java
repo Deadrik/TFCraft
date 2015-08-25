@@ -28,9 +28,7 @@ public class ContainerCrucible extends ContainerTFC
 			@Override
 			public boolean isItemValid(ItemStack itemstack)
 			{
-				if (itemstack.getItem() == TFCItems.RawBloom || itemstack.getItem() == TFCItems.Bloom && itemstack.getItemDamage() > 100)
-					return false;
-				return true;
+				return !(itemstack.getItem() == TFCItems.RawBloom || itemstack.getItem() == TFCItems.Bloom && itemstack.getItemDamage() > 100);
 			}
 		});
 

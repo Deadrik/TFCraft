@@ -45,8 +45,7 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox()
 	{
-		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord +1, yCoord + 1, zCoord + 1);
-		return bb;
+		return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1);
 	}
 
 	public boolean isOven()
@@ -89,10 +88,7 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 				wallCount++;
 		}
 
-		if(wallCount < 5)
-			return false;
-
-		return true;
+		return wallCount >= 5;
 	}
 
 	public boolean isDoor(int x, int y, int z)

@@ -443,9 +443,7 @@ public class TFC_Core
 
 	public static boolean isClay(Block block)
 	{
-		if(block == TFCBlocks.Clay || block == TFCBlocks.Clay2)
-			return true;
-		return false;
+		return block == TFCBlocks.Clay || block == TFCBlocks.Clay2;
 	}
 
 	public static boolean isSand(Block block)
@@ -776,16 +774,12 @@ public class TFC_Core
 
 	public static boolean showShiftInformation()
 	{
-		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
-			return true;
-		return false;
+		return FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);
 	}
 
 	public static boolean showCtrlInformation()
 	{
-		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT && Keyboard.isKeyDown(Keyboard.KEY_LCONTROL))
-			return true;
-		return false;
+		return FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT && Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
 	}
 
 	public static FoodStatsTFC getPlayerFoodStats(EntityPlayer player)
@@ -831,9 +825,7 @@ public class TFC_Core
 		else if(world.getBlock(x, y, z) == TFCBlocks.stoneSlabs)
 		{
 			TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
-			if(BlockSlab.getTopChiselLevel(te.extraData) != 0)
-				return false;
-			return true;
+			return BlockSlab.getTopChiselLevel(te.extraData) == 0;
 		}
 		else if(world.getBlock(x, y, z) == TFCBlocks.MetalSheet)
 		{
@@ -851,9 +843,7 @@ public class TFC_Core
 		else if(world.getBlock(x, y, z) == TFCBlocks.stoneSlabs)
 		{
 			TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
-			if(BlockSlab.getBottomChiselLevel(te.extraData) != 0)
-				return false;
-			return true;
+			return BlockSlab.getBottomChiselLevel(te.extraData) == 0;
 		}
 		else if(world.getBlock(x, y, z) == TFCBlocks.MetalSheet)
 		{
@@ -872,9 +862,7 @@ public class TFC_Core
 		else if(bid == TFCBlocks.stoneSlabs)
 		{
 			TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
-			if(BlockSlab.getNorthChiselLevel(te.extraData) != 0)
-				return false;
-			return true;
+			return BlockSlab.getNorthChiselLevel(te.extraData) == 0;
 		}
 		else if(bid == TFCBlocks.MetalSheet)
 		{
@@ -892,9 +880,7 @@ public class TFC_Core
 		else if(world.getBlock(x, y, z) == TFCBlocks.stoneSlabs)
 		{
 			TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
-			if(BlockSlab.getSouthChiselLevel(te.extraData) != 0)
-				return false;
-			return true;
+			return BlockSlab.getSouthChiselLevel(te.extraData) == 0;
 		}
 		else if(world.getBlock(x, y, z) == TFCBlocks.MetalSheet)
 		{
@@ -931,9 +917,7 @@ public class TFC_Core
 		else if(world.getBlock(x, y, z) == TFCBlocks.stoneSlabs)
 		{
 			TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
-			if(BlockSlab.getWestChiselLevel(te.extraData) != 0)
-				return false;
-			return true;
+			return BlockSlab.getWestChiselLevel(te.extraData) == 0;
 		}
 		else if(world.getBlock(x, y, z) == TFCBlocks.MetalSheet)
 		{
@@ -946,9 +930,7 @@ public class TFC_Core
 
 	public static boolean isOreIron(ItemStack is)
 	{
-		if (is.getItem() instanceof ItemOre && ((ItemOre) is.getItem()).GetMetalType(is) == Global.PIGIRON)
-			return true;
-		return false;
+		return is.getItem() instanceof ItemOre && ((ItemOre) is.getItem()).GetMetalType(is) == Global.PIGIRON;
 	}
 
 	public static float getEntityMaxHealth(EntityLivingBase entity)
@@ -971,9 +953,7 @@ public class TFC_Core
 
 	public static boolean isPlayerInDebugMode(EntityPlayer player)
 	{
-		if (TFCOptions.enableDebugMode)
-			return true;
-		return false;
+		return TFCOptions.enableDebugMode;
 	}
 
 	/**
@@ -1253,23 +1233,17 @@ public class TFC_Core
 
 	public static boolean isOceanicBiome(int id)
 	{
-		if(id == TFCBiome.ocean.biomeID || id == TFCBiome.DeepOcean.biomeID)
-			return true;
-		return false;
+		return id == TFCBiome.ocean.biomeID || id == TFCBiome.DeepOcean.biomeID;
 	}
 
 	public static boolean isMountainBiome(int id)
 	{
-		if(id == TFCBiome.Mountains.biomeID || id == TFCBiome.MountainsEdge.biomeID)
-			return true;
-		return false;
+		return id == TFCBiome.Mountains.biomeID || id == TFCBiome.MountainsEdge.biomeID;
 	}
 
 	public static boolean isBeachBiome(int id)
 	{
-		if(id == TFCBiome.beach.biomeID || id == TFCBiome.gravelbeach.biomeID)
-			return true;
-		return false;
+		return id == TFCBiome.beach.biomeID || id == TFCBiome.gravelbeach.biomeID;
 	}
 
 	public static boolean isValidCharcoalPitCover(Block block)

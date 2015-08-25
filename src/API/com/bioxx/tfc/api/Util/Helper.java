@@ -67,8 +67,7 @@ public class Helper {
 		float var20 = var14 * var16;
 
 		Vec3 var23 = var13.addVector(var18 * reach, var17 * reach, var20 * reach);
-		MovingObjectPosition var24 = world.rayTraceBlocks(var13, var23, scanFluids);
-		return var24;
+		return world.rayTraceBlocks(var13, var23, scanFluids);
 	}
 
 	/**

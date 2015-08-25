@@ -13,11 +13,11 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.gen.layer.IntCache;
 
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 public class TFCWorldChunkManager extends WorldChunkManager
 {
@@ -215,8 +215,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	{
 		int x = (int)Math.floor(Minecraft.getMinecraft().thePlayer.posX);
 		int z = (int)Math.floor(Minecraft.getMinecraft().thePlayer.posZ);
-		float temp = TFC_Climate.getHeightAdjustedTemp(Minecraft.getMinecraft().theWorld, x, y, z);
-		return temp;
+		return TFC_Climate.getHeightAdjustedTemp(Minecraft.getMinecraft().theWorld, x, y, z);
 	}
 
 	@Override

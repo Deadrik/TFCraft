@@ -21,6 +21,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
@@ -29,9 +32,6 @@ import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Crafting.AnvilReq;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockAnvil extends BlockTerraContainer
 {
@@ -103,7 +103,7 @@ public class BlockAnvil extends BlockTerraContainer
 		int direction = getDirectionFromMetadata(meta);
 		TileEntity te = par1World.getTileEntity(par2, par3, par4);
 
-		if (te != null && te instanceof TEAnvil)
+		if (te instanceof TEAnvil)
 		{
 			TEAnvil teAnvil = (TEAnvil) te;
 			if (teAnvil.AnvilTier != AnvilReq.STONE.Tier || this == TFCBlocks.Anvil2)
@@ -315,8 +315,7 @@ public class BlockAnvil extends BlockTerraContainer
 	public static int getAnvilTypeFromMeta(int j)
 	{
 		int l = 7;
-		int k = j & l;
-		return k;
+		return j & l;
 	}
 
 	public static int getDirectionFromMetadata(int i)
@@ -375,9 +374,6 @@ public class BlockAnvil extends BlockTerraContainer
 	@SideOnly(Side.CLIENT)
 	public boolean addDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
 	{
-		if (world.getBlock(x, y, z) == this)
-			return true;
-		else
-			return false;
+		return world.getBlock(x, y, z) == this;
 	}
 }

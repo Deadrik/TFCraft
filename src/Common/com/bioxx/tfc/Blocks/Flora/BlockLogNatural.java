@@ -87,9 +87,7 @@ public class BlockLogNatural extends BlockTerra
 
 	private boolean checkOut(World world, int x, int y, int z, int meta)
 	{
-		if(world.getBlock(x, y, z) == this && world.getBlockMetadata(x, y, z) == meta)
-			return true;
-		return false;
+		return world.getBlock(x, y, z) == this && world.getBlockMetadata(x, y, z) == meta;
 	}
 
 	@Override

@@ -18,6 +18,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -27,9 +30,6 @@ import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
 import com.bioxx.tfc.TileEntities.TECrop;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCrop extends BlockContainer
 {
@@ -266,9 +266,7 @@ public class BlockCrop extends BlockContainer
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		if (!(TFC_Core.isFarmland(world.getBlock(x, y - 1, z)) || TFC_Core.isSoil(world.getBlock(x, y - 1, z))))
-			return false;
-		return true;
+		return TFC_Core.isFarmland(world.getBlock(x, y - 1, z)) || TFC_Core.isSoil(world.getBlock(x, y - 1, z));
 	}
 
 	@Override

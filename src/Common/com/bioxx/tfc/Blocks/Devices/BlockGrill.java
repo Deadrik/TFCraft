@@ -146,6 +146,7 @@ public class BlockGrill extends BlockTerraContainer
 				}
 				default:
 					fx2 = f;
+					break;
 				}
 			}
 			else if (hinge == 1)
@@ -160,6 +161,7 @@ public class BlockGrill extends BlockTerraContainer
 				}
 				default:
 					fz2 = f;
+					break;
 				}
 			}
 			else if (hinge == 2)
@@ -174,6 +176,7 @@ public class BlockGrill extends BlockTerraContainer
 				}
 				default:
 					fx = 1 - f;
+					break;
 				}
 			}
 			else if (hinge == 3)
@@ -194,6 +197,7 @@ public class BlockGrill extends BlockTerraContainer
 				}
 				default:
 					fz = 1 - f;
+					break;
 				}
 			}
 

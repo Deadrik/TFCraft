@@ -6,10 +6,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
-import com.bioxx.tfc.api.TileEntities.TEFireEntity;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 public class TEBellows extends NetworkTileEntity
 {
@@ -53,8 +53,7 @@ public class TEBellows extends NetworkTileEntity
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox()
 	{
-		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord +1, yCoord + 1, zCoord + 1);
-		return bb;
+		return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1);
 	}
 
 	public void GenerateSmoke()
@@ -83,9 +82,9 @@ public class TEBellows extends NetworkTileEntity
 		TileEntity te2 = worldObj.getTileEntity(xCoord + x, yCoord - 1, zCoord + z);
 		TEFireEntity tileentityfirepit = null;
 
-		if (te != null && te instanceof TEFireEntity)
+		if (te instanceof TEFireEntity)
 			tileentityfirepit = (TEFireEntity) te;
-		else if (te2 != null && te2 instanceof TEForge)
+		else if (te2 instanceof TEForge)
 			tileentityfirepit = (TEFireEntity) te2;
 
 		if (tileentityfirepit != null)

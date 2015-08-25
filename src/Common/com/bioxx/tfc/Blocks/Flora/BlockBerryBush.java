@@ -19,6 +19,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
@@ -30,9 +33,6 @@ import com.bioxx.tfc.Food.FloraManager;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.TileEntities.TEBerryBush;
 import com.bioxx.tfc.api.Util.Helper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBerryBush extends BlockTerraContainer
 {
@@ -180,9 +180,7 @@ public class BlockBerryBush extends BlockTerraContainer
 
 	private boolean isSamePlant(IBlockAccess bAccess, int x, int y, int z, int meta)
 	{
-		if(bAccess.getBlock(x, y, z) == this && bAccess.getBlockMetadata(x, y, z) == meta)
-			return true;
-		return false;
+		return bAccess.getBlock(x, y, z) == this && bAccess.getBlockMetadata(x, y, z) == meta;
 	}
 
 	/* Left-Click Harvest Berries */
@@ -248,7 +246,7 @@ public class BlockBerryBush extends BlockTerraContainer
 
 			TileEntity te = world.getTileEntity(x, y, z);
 			TEBerryBush tebb = null;
-			if(te != null && te instanceof TEBerryBush)
+			if (te instanceof TEBerryBush)
 				tebb = (TEBerryBush) world.getTileEntity(x, y, z);
 			if(tebb != null)
 			{

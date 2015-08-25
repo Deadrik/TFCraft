@@ -1,14 +1,5 @@
 package com.bioxx.tfc.Blocks.Devices;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.TileEntities.TEBlastFurnace;
-import com.bioxx.tfc.TileEntities.TEMetalSheet;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -21,6 +12,15 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.TileEntities.TEBlastFurnace;
+import com.bioxx.tfc.TileEntities.TEMetalSheet;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 
 public class BlockBlastFurnace extends BlockTerraContainer
 {
@@ -130,9 +130,7 @@ public class BlockBlastFurnace extends BlockTerraContainer
 				return false;
 			count++;
 		}
-		if(count < 3)
-			return false;
-		return true;
+		return count >= 3;
 	}
 	
 	public boolean isValidMetalSheet(TEMetalSheet te)

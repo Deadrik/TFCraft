@@ -39,7 +39,7 @@ import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, ICausesDamage
 {
-	private final float GESTATION_PERIOD = 2.25f;
+	private static final float GESTATION_PERIOD = 2.25f;
 	protected long animalID;
 	protected int sex;
 	protected int hunger;
@@ -553,11 +553,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	@Override
 	public boolean canMateWith(IAnimal animal) 
 	{
-		if(animal.getGender() != this.getGender() && this.isAdult() && animal.isAdult() && 
-				animal instanceof EntityWolfTFC)
-			return true;
-		else
-			return false;
+		return animal.getGender() != this.getGender() &&this.isAdult() && animal.isAdult() &&
+				animal instanceof EntityWolfTFC;
 	}
 
 	@Override

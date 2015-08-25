@@ -3,7 +3,6 @@ package com.bioxx.tfc.Items.Tools;
 import java.util.List;
 import java.util.Set;
 
-import com.bioxx.tfc.api.Tools.ChiselManager;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,6 +11,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Tools.ChiselManager;
 import com.bioxx.tfc.api.Tools.IToolChisel;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -50,8 +50,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 	@Override
 	public boolean onUsed(World world, EntityPlayer player, int x, int y, int z, Block block, int meta, int side, float hitX, float hitY, float hitZ)
 	{
-			boolean success = ChiselManager.getInstance().onUsedHandler(world, player, x, y, z, block, meta, side, hitX, hitY, hitZ);
-			return success;
+		return ChiselManager.getInstance().onUsedHandler(world, player, x, y, z, block, meta, side, hitX, hitY, hitZ);
 	}
 
 	@Override
@@ -63,8 +62,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 	@Override
 	public Multimap getItemAttributeModifiers()
 	{
-		Multimap multimap = HashMultimap.create();
-		return multimap;
+		return HashMultimap.create();
 	}
 
 	@Override

@@ -47,7 +47,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 
 	/** true is the wolf is wet else false */
 	private boolean field_25052_g;
-	private final float GESTATION_PERIOD = 7.0f;
+	private static final float GESTATION_PERIOD = 7.0f;
 
 	protected long animalID;
 	protected int sex;
@@ -597,11 +597,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal) 
 	{
-		if (animal.getGender() != this.getGender() && this.isAdult() && animal.isAdult() && 
-				animal instanceof EntityBear)
-			return true;
-		else
-			return false;
+		return animal.getGender() != this.getGender() &&this.isAdult() && animal.isAdult() &&
+				animal instanceof EntityBear;
 	}
 
 	@Override

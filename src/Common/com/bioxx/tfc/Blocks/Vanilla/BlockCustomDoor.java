@@ -19,13 +19,13 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.api.Constant.Global;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCustomDoor extends BlockTerra
 {
@@ -457,7 +457,7 @@ public class BlockCustomDoor extends BlockTerra
 			// block is the top half of the door
 			// check if the bottom half of the door still exists
 			Block block = world.getBlock(x, y-1, z);
-			if (block != null && block instanceof BlockCustomDoor)	// only return an item is the bottom half of the door exists
+			if (block instanceof BlockCustomDoor) // only return an item is the bottom half of the door exists
 			{
 				// bottom half of the door still exists
 				// return the door item (used to return the door item when mouse pointer over the top half of the door)

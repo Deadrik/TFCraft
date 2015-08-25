@@ -19,14 +19,14 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.TileEntities.TEMetalTrapDoor;
 import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockMetalTrapDoor extends BlockTerraContainer
 {
@@ -174,6 +174,7 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 						}
 						default:
 							fx2 = f;
+							break;
 						}
 					}
 					else if(hinge == 1)
@@ -188,6 +189,7 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 						}
 						default:
 							fz2 = f;
+							break;
 						}
 					}
 					else if(hinge == 2)
@@ -202,6 +204,7 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 						}
 						default:
 							fx = 1-f;
+							break;
 						}
 					}
 					else if(hinge == 3)
@@ -222,6 +225,7 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 						}
 						default:
 							fz = 1-f;
+							break;
 						}
 					}
 				}
@@ -352,9 +356,6 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 	@SideOnly(Side.CLIENT)
 	public boolean addDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
 	{
-		if (world.getBlock(x, y, z) == this)
-			return true;
-		else
-			return false;
+		return world.getBlock(x, y, z) == this;
 	}
 }

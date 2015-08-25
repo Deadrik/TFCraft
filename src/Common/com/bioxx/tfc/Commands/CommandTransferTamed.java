@@ -62,7 +62,8 @@ public class CommandTransferTamed extends CommandBase
 			EntityTameable tamedEntity = null;
 			List<EntityTameable> entitiesInRange =	((EntityPlayer)sender).worldObj.getEntitiesWithinAABB(EntityTameable.class, ((EntityPlayer)sender).boundingBox.expand(3, 1, 3));
 
-			if(entitiesInRange.size() == 0){
+			if (entitiesInRange.isEmpty())
+			{
 				throw new WrongUsageException("commands.transferTamed.noTamed");
 			}
 			else if(entitiesInRange.size() > 1){

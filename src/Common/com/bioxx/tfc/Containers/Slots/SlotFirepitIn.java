@@ -1,14 +1,14 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.Items.ItemOre;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.Items.ItemOre;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
 
 public class SlotFirepitIn extends Slot
 {
@@ -26,9 +26,9 @@ public class SlotFirepitIn extends Slot
 	@Override
 	public boolean isItemValid(ItemStack is)
 	{
-		if(is.getItem() == TFCItems.Logs || is.getItem() == Item.getItemFromBlock(TFCBlocks.Peat) || is.getItem() == TFCItems.CeramicMold || is.getItem() instanceof ItemOre)
-			return false;
-		return true;
+		return !(is.getItem() == TFCItems.Logs ||is.getItem() == Item.getItemFromBlock(TFCBlocks.Peat) ||
+					is.getItem() == TFCItems.CeramicMold ||
+					is.getItem() instanceof ItemOre);
 	}
 
 	@Override

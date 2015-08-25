@@ -58,7 +58,7 @@ public class Alloy
 	{
 		Iterator<AlloyMetal> iter = a.AlloyIngred.iterator();
 		boolean matches = true;
-		while(iter.hasNext() && matches == true)
+		while (iter.hasNext() && matches)
 		{
 			AlloyMetal am = iter.next();
 			matches = searchForAlloyMetal(am);
@@ -71,7 +71,7 @@ public class Alloy
 		Iterator<AlloyMetal> iter = a.iterator();
 		boolean matches = true;
 		int amount = 0;
-		while(iter.hasNext() && matches == true)
+		while (iter.hasNext() && matches)
 		{
 			AlloyMetal am = iter.next();
 			matches = searchForAlloyMetal(am);

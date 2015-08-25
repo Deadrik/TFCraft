@@ -417,7 +417,8 @@ public class EntityFishTFC extends EntitySquid
 			destX = (int) x + this.rand.nextInt(10) * (this.rand.nextBoolean() ? (validDirs[1] ? -1 : validDirs[0] ? 1 : 0) : validDirs[0] ? 1 : validDirs[1] ? -1 : 0);
 			destY = (int) y + this.rand.nextInt(3) * (this.rand.nextBoolean() ? (validDirs[3] ? -1 : validDirs[2] ? 1 : 0) : validDirs[2] ? 1 : validDirs[3] ? -1 : 0);
 			destZ = (int) z + this.rand.nextInt(10) * (this.rand.nextBoolean() ? (validDirs[5] ? -1 : validDirs[4] ? 1 : 0) : validDirs[4] ? 1 : validDirs[5] ? -1 : 0);
-			if(nearbyPlayers.size() >0){
+			if (!nearbyPlayers.isEmpty())
+			{
 				tempX /= nearbyPlayers.size();
 				//tempY /= nearbyPlayers.size();
 				tempZ /= nearbyPlayers.size();

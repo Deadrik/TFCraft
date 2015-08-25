@@ -1,9 +1,9 @@
 package com.bioxx.tfc.Food;
 
-import com.bioxx.tfc.TileEntities.TECrop;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.TileEntities.TECrop;
 
 public class CropIndexJute extends CropIndex
 {
@@ -29,8 +29,7 @@ public class CropIndexJute extends CropIndex
 	{
 		if (Output1 != null && crop.growth >= 5)
 		{
-			ItemStack is = new ItemStack(Output1, (int)this.Output1Avg);
-			return is;
+			return new ItemStack(Output1, (int) this.Output1Avg);
 		}
 		return null;
 	}

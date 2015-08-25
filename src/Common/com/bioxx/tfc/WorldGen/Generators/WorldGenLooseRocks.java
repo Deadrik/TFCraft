@@ -10,6 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
+import cpw.mods.fml.common.IWorldGenerator;
+
 import com.bioxx.tfc.Blocks.Terrain.BlockOre;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
@@ -17,8 +19,6 @@ import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
-
-import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenLooseRocks implements IWorldGenerator
 {
@@ -77,7 +77,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 				}
 			}
 		}
-		if(coreSampleStacks.size() > 0)
+		if (!coreSampleStacks.isEmpty())
 			return coreSampleStacks.get(world.rand.nextInt(coreSampleStacks.size()));
 		return null;
 	}
@@ -142,15 +142,12 @@ public class WorldGenLooseRocks implements IWorldGenerator
 				world.getBlock(i, j + 3, k + 5).getMaterial() == Material.leaves ||
 				world.getBlock(i, j + 3, k - 5).getMaterial() == Material.leaves)
 			return true;
-
-		if(world.getBlock(i, j + 6, k).getMaterial() == Material.leaves ||
+		else
+			return world.getBlock(i, j + 6, k).getMaterial() == Material.leaves ||
 				world.getBlock(i + 5, j + 6, k).getMaterial() == Material.leaves ||
 				world.getBlock(i - 5, j + 6, k).getMaterial() == Material.leaves ||
 				world.getBlock(i, j + 6, k + 5).getMaterial() == Material.leaves ||
-				world.getBlock(i, j + 6, k - 5).getMaterial() == Material.leaves)
-			return true;
-
-		return false;
+				world.getBlock(i, j + 6, k - 5).getMaterial() == Material.leaves;
 	}
 
 }

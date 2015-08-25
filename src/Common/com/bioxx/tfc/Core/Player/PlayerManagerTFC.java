@@ -52,7 +52,7 @@ public class PlayerManagerTFC
 
 	public PlayerInfo getClientPlayer()
 	{
-		if(Players.size() > 0)
+		if (!Players.isEmpty())
 			return Players.get(0);
 		return null;
 	}

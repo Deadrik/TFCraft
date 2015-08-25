@@ -16,9 +16,7 @@ public class SlotQuern extends Slot
 	@Override
 	public boolean isItemValid(ItemStack is)
 	{
-		if(is.getItem() == TFCItems.Quern)
-			return true;
-		return false;
+		return is.getItem() == TFCItems.Quern;
 	}
 
 	@Override

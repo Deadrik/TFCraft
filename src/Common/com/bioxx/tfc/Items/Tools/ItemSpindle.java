@@ -23,8 +23,7 @@ public class ItemSpindle extends ItemTerra
 	@Override
 	public Multimap getItemAttributeModifiers()
 	{
-		Multimap multimap = HashMultimap.create();
-		return multimap;
+		return HashMultimap.create();
 	}
 	
 	@Override

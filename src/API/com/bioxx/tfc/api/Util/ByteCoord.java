@@ -21,13 +21,8 @@ public class ByteCoord
 	@Override
 	public boolean equals(Object o)
 	{
-		if(o instanceof ByteCoord && ((ByteCoord)o).x == x && 
+		return o instanceof ByteCoord &&((ByteCoord) o).x == x &&
 				((ByteCoord)o).y == y &&
-				((ByteCoord)o).z == z) 
-		{
-			return true;
-		}
-
-		return false;
+				((ByteCoord) o).z == z;
 	}
 }

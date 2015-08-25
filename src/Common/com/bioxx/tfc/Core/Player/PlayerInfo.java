@@ -103,8 +103,6 @@ public class PlayerInfo
 
 	public boolean lockMatches(int x, int y, int z)
 	{
-		if((lockX == -9999999 || lockX == x) && (lockY == -9999999 || lockY == y) && (lockZ == -9999999 || lockZ == z))
-			return true;
-		return false;
+		return (lockX == -9999999 || lockX == x) && (lockY == -9999999 || lockY == y) && (lockZ == -9999999 || lockZ == z);
 	}
 }

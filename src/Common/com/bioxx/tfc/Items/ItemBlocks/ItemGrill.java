@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Core.TFCTabs;
@@ -90,10 +91,7 @@ public class ItemGrill extends ItemTerraBlock
 		{
 			count++;
 		}
-		if(count >= 2)
-			return true;
-
-		return false;
+		return count >= 2;
 	}
 
 	@Override

@@ -350,7 +350,7 @@ public class EntityDamageHandler
 					if (target instanceof EntityDragonPart)
 					{
 						IEntityMultiPart ientitymultipart = ((EntityDragonPart)target).entityDragonObj;
-						if (ientitymultipart != null && ientitymultipart instanceof EntityLiving)
+						if (ientitymultipart instanceof EntityLiving)
 							object = ientitymultipart;
 					}
 

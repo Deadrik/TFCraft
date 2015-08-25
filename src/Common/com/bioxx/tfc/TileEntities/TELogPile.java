@@ -83,14 +83,11 @@ public class TELogPile extends TileEntity implements IInventory
 
 	public boolean contentsMatch(int index, ItemStack is)
 	{
-		if(storage[index] != null &&
+		return storage[index] != null &&
 				storage[index].getItem() == is.getItem() &&
 				storage[index].getItemDamage() == is.getItemDamage() &&
 				storage[index].stackSize < storage[index].getMaxStackSize() &&
-				storage[index].stackSize + 1 <= this.getInventoryStackLimit())
-			return true;
-		else
-			return false;
+				storage[index].stackSize + 1 <= this.getInventoryStackLimit();
 	}
 
 	public int getNumberOfLogs()

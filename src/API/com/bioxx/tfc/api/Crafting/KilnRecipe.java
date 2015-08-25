@@ -27,20 +27,12 @@ public class KilnRecipe
 	 */    
 	public boolean matches(KilnRecipe A)
 	{   
-		if(areItemStacksEqual(input1, A.input1) && A.KilnLevel == this.KilnLevel)
-		{
-			return true;
-		}
-		return false;
+		return areItemStacksEqual(input1, A.input1) && A.KilnLevel == this.KilnLevel;
 	}
 
 	public boolean isComplete(KilnRecipe A)
 	{
-		if(areItemStacksEqual(input1, A.input1) && A.KilnLevel == this.KilnLevel)
-		{
-			return true;
-		}
-		return false;
+		return areItemStacksEqual(input1, A.input1) && A.KilnLevel == this.KilnLevel;
 	}
 
 	public boolean getInheritsTag()

@@ -14,11 +14,7 @@ import net.minecraft.nbt.NBTTagList;
 
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.Metal.Alloy;
-import com.bioxx.tfc.Core.Metal.AlloyManager;
-import com.bioxx.tfc.Core.Metal.AlloyMetal;
-import com.bioxx.tfc.Core.Metal.MetalPair;
-import com.bioxx.tfc.Core.Metal.MetalRegistry;
+import com.bioxx.tfc.Core.Metal.*;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFCBlocks;
@@ -37,7 +33,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	public byte outputTick = 0;
 	public byte tempTick = 0;
 	private int cookDelay = 0;
-	public final int MAX_UNITS = 3000;
+	public static final int MAX_UNITS = 3000;
 
 	public TECrucible()
 	{

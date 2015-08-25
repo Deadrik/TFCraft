@@ -19,11 +19,7 @@ public class FoodItemRenderer implements IItemRenderer
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) 
 	{
-		if(type == ItemRenderType.INVENTORY)
-		{
-			return true;
-		}
-		return false;
+		return type == ItemRenderType.INVENTORY;
 	}
 
 	@Override

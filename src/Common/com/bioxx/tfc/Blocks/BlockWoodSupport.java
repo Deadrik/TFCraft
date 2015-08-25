@@ -15,15 +15,16 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockWoodSupport extends BlockTerra
 {
@@ -152,7 +153,7 @@ public class BlockWoodSupport extends BlockTerra
 			return new int[]{0, 0, 0, 0, w, e};
 		if(foundSV && foundSH && foundNV && foundNH)
 			return new int[]{0, 0, n, s, 0, 0};
-		return null;
+		return new int[0];
 	}
 
 	private static boolean scanVert(World world, int x, int y, int z)

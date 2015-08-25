@@ -17,12 +17,12 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Containers.ContainerChestTFC;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TEChest extends TileEntityChest implements IInventory
 {
@@ -181,7 +181,7 @@ public class TEChest extends TileEntityChest implements IInventory
 	public boolean checkType(IBlockAccess access, int x, int y, int z)
 	{
 		TileEntity te =  access.getTileEntity(x, y, z);
-		if(te != null && te instanceof TEChest)
+		if (te instanceof TEChest)
 		{
 			TEChest chest = (TEChest) access.getTileEntity(x, y, z);
 			if(chest.type == this.type)
@@ -309,8 +309,7 @@ public class TEChest extends TileEntityChest implements IInventory
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox()
 	{
-		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord - 1, yCoord, zCoord - 1, xCoord + 2, yCoord + 2, zCoord + 2);
-		return bb;
+		return AxisAlignedBB.getBoundingBox(xCoord - 1, yCoord, zCoord - 1, xCoord + 2, yCoord + 2, zCoord + 2);
 	}
 
 	@Override

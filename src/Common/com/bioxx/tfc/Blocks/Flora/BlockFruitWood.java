@@ -41,9 +41,7 @@ public class BlockFruitWood extends BlockTerraContainer
 
 	private boolean checkOut(World world, int i, int j, int k, int l)
 	{
-		if(world.getBlock(i, j, k) == this && world.getBlockMetadata(i, j, k) == l)
-			return true;
-		return false;
+		return world.getBlock(i, j, k) == this && world.getBlockMetadata(i, j, k) == l;
 	}
 
 	@Override

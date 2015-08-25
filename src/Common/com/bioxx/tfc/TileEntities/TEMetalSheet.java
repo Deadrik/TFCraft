@@ -113,9 +113,7 @@ public class TEMetalSheet extends NetworkTileEntity
 
 	public boolean isEmpty()
 	{
-		if(!TopExists() && !BottomExists() && !NorthExists() && !SouthExists() && !EastExists() && !WestExists())
-			return true;
-		return false;
+		return !TopExists() && !BottomExists() && !NorthExists() && !SouthExists() && !EastExists() && !WestExists();
 	}
 
 	@Override

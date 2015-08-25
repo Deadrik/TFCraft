@@ -56,7 +56,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	private byte workedRecently = 0;
 
 	//this is the fix the server receiving 3 packets whenever the player works an item.
-	private final byte LAG_FIX_DELAY = 5;
+	private static final byte LAG_FIX_DELAY = 5;
 	public AnvilRecipe workRecipe;
 	//private AnvilRecipe workWeldRecipe;
 	public int AnvilTier = AnvilReq.STONE.Tier; // Initialize to avoid NPE
@@ -240,7 +240,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		}
 
 		//If there are no recipes found then we need to null everything to prevent any crafting from occurring
-		if (planList.size() == 0)
+		if (planList.isEmpty())
 		{
 			workRecipe = null;
 			craftingPlan = "";
@@ -286,8 +286,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox()
 	{
-		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord +1, yCoord + 1, zCoord + 1);
-		return bb;
+		return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1);
 	}
 
 	public int getCraftingValue()
@@ -382,13 +381,9 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 
 	private boolean canBeWorked()
 	{
-		if(isTemperatureWorkable(INPUT1_SLOT) && anvilItemStacks[HAMMER_SLOT] != null && 
-				(anvilItemStacks[INPUT1_SLOT].getItemDamage() == 0 || anvilItemStacks[INPUT1_SLOT].getItem().getHasSubtypes() == true) && 
-				getAnvilType() >= craftingReq && workedRecently == 0)
-		{
-			return true;
-		}
-		return false;
+		return isTemperatureWorkable(INPUT1_SLOT) &&anvilItemStacks[HAMMER_SLOT] != null &&
+				(anvilItemStacks[INPUT1_SLOT].getItemDamage() == 0 || anvilItemStacks[INPUT1_SLOT].getItem().getHasSubtypes()) &&
+				getAnvilType() >= craftingReq && workedRecently == 0;
 	}
 
 	public void actionHeavyHammer()
@@ -523,8 +518,8 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		if(!worldObj.isRemote)
 		{
 			if(isTemperatureWeldable(WELD1_SLOT) && isTemperatureWeldable(WELD2_SLOT) && anvilItemStacks[HAMMER_SLOT] != null && 
-					(anvilItemStacks[WELD1_SLOT].getItemDamage() == 0 || anvilItemStacks[WELD1_SLOT].getItem().getHasSubtypes() == true) && 
-					(anvilItemStacks[WELD2_SLOT].getItemDamage() == 0 || anvilItemStacks[WELD2_SLOT].getItem().getHasSubtypes() == true) && 
+				(anvilItemStacks[WELD1_SLOT].getItemDamage() == 0 || anvilItemStacks[WELD1_SLOT].getItem().getHasSubtypes()) &&
+				(anvilItemStacks[WELD2_SLOT].getItemDamage() == 0 || anvilItemStacks[WELD2_SLOT].getItem().getHasSubtypes()) &&
 					workedRecently == 0 && anvilItemStacks[WELDOUT_SLOT] == null)
 			{
 				AnvilManager manager = AnvilManager.getInstance();

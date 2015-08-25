@@ -190,10 +190,8 @@ public class TFCProvider extends WorldProvider
 		Material material = worldObj.getBlock(x, y, z).getMaterial();
 		if (material == Material.snow)  // avoid vanilla MC to replace snow
 			return false;
-		if(TFCBlocks.Snow.canPlaceBlockAt(worldObj, x, y, z) && material.isReplaceable())
-			return true;
-
-		return false;
+		else
+			return TFCBlocks.Snow.canPlaceBlockAt(worldObj, x, y, z) && material.isReplaceable();
 	}
 
 	/*private boolean canSnowAtTemp(int x, int y, int z)

@@ -63,14 +63,11 @@ public class EntityAIFindNest extends EntityAIBase
 	{
 		if(theCreature instanceof EntityChickenTFC && !(theCreature instanceof EntityPheasantTFC))
 		{
-			if(((EntityChickenTFC)theCreature).isAdult() && ((EntityChickenTFC)theCreature).getFamiliarity() >= 15 &&
+			return ((EntityChickenTFC) theCreature).isAdult() &&((EntityChickenTFC) theCreature).getFamiliarity() >= 15 &&
 					this.theWorld.getBlock((int)theCreature.posX, (int)theCreature.posY,(int)theCreature.posZ) != TFCBlocks.NestBox &&
 					this.theWorld.getBlock((int)theCreature.posX, (int)theCreature.posY - 1,(int)theCreature.posZ) != TFCBlocks.NestBox &&
 					this.getNearbySitableBlockDistance() &&
-					((EntityChickenTFC)theCreature).getGender() == GenderEnum.FEMALE)
-				return true;
-			else
-				return false;
+					((EntityChickenTFC) theCreature).getGender() == GenderEnum.FEMALE;
 		}
 		/*else if(theCreature instanceof EntityPheasantTFC)
 		{

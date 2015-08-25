@@ -3,7 +3,6 @@ package com.bioxx.tfc.Handlers.Client;
 import java.awt.Color;
 import java.lang.reflect.Field;
 
-import com.bioxx.tfc.api.Tools.ChiselManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiIngame;
@@ -14,22 +13,23 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.Player.BodyTempStats;
-import com.bioxx.tfc.Core.Player.FoodStatsTFC;
-import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
-import com.bioxx.tfc.Core.Player.PlayerInfo;
-import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.Core.Player.*;
 import com.bioxx.tfc.Entities.Mobs.EntityPigTFC;
 import com.bioxx.tfc.GUI.GuiScreenHorseInventoryTFC;
 import com.bioxx.tfc.Items.ItemQuiver;
@@ -40,9 +40,7 @@ import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.api.TFCAttributes;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.ReflectionHelper;
+import com.bioxx.tfc.api.Tools.ChiselManager;
 
 public class RenderOverlayHandler
 {
@@ -115,7 +113,10 @@ public class RenderOverlayHandler
 		}
 
 		//Render Arrow and Javelin for Quiver
-		if(getQuiver()!=null && getQuiver().getItem() instanceof ItemQuiver){
+		ItemStack quiverStack = getQuiver();
+		Item quiver = quiverStack != null ? quiverStack.getItem() : null;
+		if (quiver instanceof ItemQuiver)
+		{
 			fontrenderer = mc.fontRenderer;
 
 			int xPos = 1;
@@ -124,31 +125,31 @@ public class RenderOverlayHandler
 
 			String pos = TFCOptions.quiverHUDPosition;
 
-			if (pos.equalsIgnoreCase("topright"))
+			if ("topright".equalsIgnoreCase(pos))
 			{
 				xPos = sr.getScaledWidth() - 19;
 				yPos = 1;
 				leftSide = false;
 			}
-			else if (pos.equalsIgnoreCase("right"))
+			else if ("right".equalsIgnoreCase(pos))
 			{
 				xPos = sr.getScaledWidth() - 19;
 				yPos = (sr.getScaledHeight() - 34) / 2;
 				leftSide = false;
 			}
-			else if (pos.equalsIgnoreCase("bottomright"))
+			else if ("bottomright".equalsIgnoreCase(pos))
 			{
 				xPos = sr.getScaledWidth() - 19;
 				yPos = sr.getScaledHeight() - 34;
 				leftSide = false;
 			}
-			else if (pos.equalsIgnoreCase("topleft"))
+			else if ("topleft".equalsIgnoreCase(pos))
 			{
 				xPos = 1;
 				yPos = 1;
 				leftSide = true;
 			}
-			else if (pos.equalsIgnoreCase("left"))
+			else if ("left".equalsIgnoreCase(pos))
 			{
 				xPos = 1;
 				yPos = (sr.getScaledHeight() - 34) / 2;

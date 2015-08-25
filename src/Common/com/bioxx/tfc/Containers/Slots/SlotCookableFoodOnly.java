@@ -30,7 +30,7 @@ public class SlotCookableFoodOnly extends SlotSize
 			if(efg == null)
 				return false;
 			boolean except = excpetionsFG.contains(efg);
-			boolean include = inclusionsFG.contains(efg) || inclusionsFG.size() == 0;
+			boolean include = inclusionsFG.contains(efg) || inclusionsFG.isEmpty();
 			if (except || !include)
 				return false;
 			if (itemstack.getItem() instanceof ISize && ((ISize) itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize)

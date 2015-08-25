@@ -18,8 +18,7 @@ public class ColorizerFoliageTFC
 		par2 *= par0;
 		int var4 = (int)((1.0D - par0) * 255.0D);
 		int var5 = (int)((1.0D - par2) * 255.0D);
-		int x = foliageBuffer[var5 << 8 | var4];
-		return x;
+		return foliageBuffer[var5 << 8 | var4];
 	}
 
 	/**

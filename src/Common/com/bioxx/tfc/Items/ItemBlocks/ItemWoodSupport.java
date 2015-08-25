@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Blocks.BlockWoodSupport;
@@ -55,9 +56,7 @@ public class ItemWoodSupport extends ItemTerraBlock
 			++x;
 
 		Block b = world.getBlock(x, y-1, z);
-		if (b == TFCBlocks.WoodSupportV || b == TFCBlocks.WoodSupportV2 || b.isSideSolid(world, x, y - 1, z, ForgeDirection.UP))
-			return true;
-		return false;
+		return b == TFCBlocks.WoodSupportV || b == TFCBlocks.WoodSupportV2 || b.isSideSolid(world, x, y - 1, z, ForgeDirection.UP);
 	}
 
 	@Override

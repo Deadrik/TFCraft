@@ -42,10 +42,7 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 	@Override
 	public boolean isDamaged(ItemStack is)
 	{
-		if (is.hasTagCompound())
-			return true;
-		else
-			return false;
+		return is.hasTagCompound();
 	}
 
 	@Override
@@ -79,10 +76,7 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 	@Override
 	public boolean isSmeltable(ItemStack is) {
 		FluidStack fuel = FluidStack.loadFluidStackFromNBT(is.getTagCompound());
-		if (fuel == null || fuel.amount == 0)
-			return true;
-		else
-			return false;
+		return fuel == null || fuel.amount == 0;
 	}
 
 	@Override

@@ -26,10 +26,7 @@ public class ItemArmourStand extends ItemTerraBlock
 
 	public boolean isValid(World world, int i, int j, int k)
 	{
-		if(world.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(i, j-0.1, k, i+1, j+2, k+1)).size() == 0){
-			return true;
-		}
-		return false;
+		return world.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(i, j - 0.1, k, i + 1, j + 2, k + 1)).size() == 0;
 	}
 
 	protected boolean CreateStand(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, int l)

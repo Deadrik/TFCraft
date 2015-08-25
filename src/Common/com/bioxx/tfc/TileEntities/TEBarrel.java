@@ -43,7 +43,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	public static final int MODE_IN = 0;
 	public static final int MODE_OUT = 1;
-	public final int INPUT_SLOT = 0;
+	public static final int INPUT_SLOT = 0;
 	public BarrelRecipe recipe;
 	//temporary field. No need to save
 	public boolean shouldDropItem = true;
@@ -72,8 +72,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox()
 	{
-		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord +1, yCoord + 1, zCoord + 1);
-		return bb;
+		return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1);
 	}
 
 	public void setSealed()
@@ -83,7 +82,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	public void setUnsealed(String reason)
 	{
-		if(reason.equals("killing fuse"))
+		if ("killing fuse".equals(reason))
 			sealed = false;
 	}
 

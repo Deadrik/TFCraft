@@ -60,9 +60,7 @@ public class ChunkDataManager
 
 	public boolean hasData(long key)
 	{
-		if(chunkmap.containsItem(key))
-			return true;
-		return false;
+		return chunkmap.containsItem(key);
 	}
 
 	public boolean addProtection(int x, int z, int amount)

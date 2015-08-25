@@ -1,11 +1,11 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.Items.ItemArrow;
-import com.bioxx.tfc.Items.Tools.ItemJavelin;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.Items.ItemArrow;
+import com.bioxx.tfc.Items.Tools.ItemJavelin;
 
 public class SlotQuiver extends Slot
 {
@@ -17,8 +17,6 @@ public class SlotQuiver extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(itemstack.getItem() instanceof ItemJavelin || itemstack.getItem() instanceof ItemArrow)
-			return true;
-		return false;
+		return itemstack.getItem() instanceof ItemJavelin || itemstack.getItem() instanceof ItemArrow;
 	}
 }

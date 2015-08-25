@@ -338,8 +338,7 @@ public class BlockIngotPile extends BlockTerraContainer
 	public static int getAnvilTypeFromMeta(int j)
 	{
 		int l = 7;
-		int k = j & l;
-		return k;
+		return j & l;
 	}
 
 	public static int getDirectionFromMetadata(int i)

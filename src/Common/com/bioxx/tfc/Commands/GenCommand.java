@@ -107,39 +107,39 @@ public class GenCommand extends CommandBase
 
 	public int getTree(String tree)
 	{
-		if (tree.equalsIgnoreCase("oak"))
+		if ("oak".equalsIgnoreCase(tree))
 			return 0;
-		else if (tree.equalsIgnoreCase("aspen"))
+		else if ("aspen".equalsIgnoreCase(tree))
 			return 1;
-		else if (tree.equalsIgnoreCase("birch"))
+		else if ("birch".equalsIgnoreCase(tree))
 			return 2;
-		else if (tree.equalsIgnoreCase("chestnut"))
+		else if ("chestnut".equalsIgnoreCase(tree))
 			return 3;
-		else if (tree.equalsIgnoreCase("douglasfir"))
+		else if ("douglasfir".equalsIgnoreCase(tree))
 			return 4;
-		else if (tree.equalsIgnoreCase("hickory"))
+		else if ("hickory".equalsIgnoreCase(tree))
 			return 5;
-		else if (tree.equalsIgnoreCase("maple"))
+		else if ("maple".equalsIgnoreCase(tree))
 			return 6;
-		else if (tree.equalsIgnoreCase("ash"))
+		else if ("ash".equalsIgnoreCase(tree))
 			return 7;
-		else if (tree.equalsIgnoreCase("pine"))
+		else if ("pine".equalsIgnoreCase(tree))
 			return 8;
-		else if (tree.equalsIgnoreCase("sequoia"))
+		else if ("sequoia".equalsIgnoreCase(tree))
 			return 9;
-		else if (tree.equalsIgnoreCase("spruce"))
+		else if ("spruce".equalsIgnoreCase(tree))
 			return 10;
-		else if (tree.equalsIgnoreCase("sycamore"))
+		else if ("sycamore".equalsIgnoreCase(tree))
 			return 11;
-		else if (tree.equalsIgnoreCase("whitecedar"))
+		else if ("whitecedar".equalsIgnoreCase(tree))
 			return 12;
-		else if (tree.equalsIgnoreCase("whiteelm"))
+		else if ("whiteelm".equalsIgnoreCase(tree))
 			return 13;
-		else if (tree.equalsIgnoreCase("willow"))
+		else if ("willow".equalsIgnoreCase(tree))
 			return 14;
-		else if (tree.equalsIgnoreCase("kapok"))
+		else if ("kapok".equalsIgnoreCase(tree))
 			return 15;
-		else if (tree.equalsIgnoreCase("acacia"))
+		else if ("acacia".equalsIgnoreCase(tree))
 			return 16;
 		else
 			return -1;

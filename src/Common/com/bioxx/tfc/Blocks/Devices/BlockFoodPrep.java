@@ -14,15 +14,16 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFoodPrep extends BlockTerraContainer
 {
@@ -82,8 +83,7 @@ public class BlockFoodPrep extends BlockTerraContainer
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		return ret;
+		return new ArrayList<ItemStack>();
 	}
 
 	@Override
@@ -175,9 +175,6 @@ public class BlockFoodPrep extends BlockTerraContainer
 	@SideOnly(Side.CLIENT)
 	public boolean addDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
 	{
-		if (world.getBlock(x, y, z) == this)
-			return true;
-		else
-			return false;
+		return world.getBlock(x, y, z) == this;
 	}
 }

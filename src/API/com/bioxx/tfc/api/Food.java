@@ -60,9 +60,7 @@ public class Food
 			return false;
 		if(isSalted(is1) != isSalted(is2))
 			return false;
-		if (isInfused(is1) != isInfused(is2))
-			return false;
-		return true;
+		return isInfused(is1) == isInfused(is2);
 	}
 
 	public static boolean isBrined(ItemStack is)
@@ -163,16 +161,12 @@ public class Food
 	{
 		int[] f1 = getFuelProfile(is1);
 		int[] f2 = getFuelProfile(is2);
-		if(f1[0] != f2[0] || f1[1] != f2[1] || f1[2] != f2[2] || f1[3] != f2[3] || f1[4] != f2[4])
-			return false;
-		return true;
+		return f1[0] == f2[0] && f1[1] == f2[1] && f1[2] == f2[2] && f1[3] == f2[3] && f1[4] == f2[4];
 	}
 
 	public static boolean isSameSmoked(int[] f1, int[] f2)
 	{
-		if(f1[0] != f2[0] || f1[1] != f2[1] || f1[2] != f2[2] || f1[3] != f2[3] || f1[4] != f2[4])
-			return false;
-		return true;
+		return f1[0] == f2[0] && f1[1] == f2[1] && f1[2] == f2[2] && f1[3] == f2[3] && f1[4] == f2[4];
 	}
 
 	public static void setDecay(ItemStack is, float value)
@@ -262,8 +256,7 @@ public class Food
 		int r = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f)); 
 		int b = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f));
 		int g = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f));
-		int rbg = (r << 16) + (b << 8) + g;
-		return rbg;
+		return (r << 16) + (b << 8) + g;
 	}
 
 	public static void setSweetMod(ItemStack is, int val)

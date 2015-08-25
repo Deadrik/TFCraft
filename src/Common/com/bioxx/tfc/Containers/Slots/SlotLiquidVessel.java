@@ -1,12 +1,12 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.Items.ItemMeltedMetal;
-import com.bioxx.tfc.Items.Pottery.ItemPotteryMold;
-import com.bioxx.tfc.api.TFCItems;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.Items.ItemMeltedMetal;
+import com.bioxx.tfc.Items.Pottery.ItemPotteryMold;
+import com.bioxx.tfc.api.TFCItems;
 
 public class SlotLiquidVessel extends Slot
 {
@@ -18,13 +18,9 @@ public class SlotLiquidVessel extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if (itemstack.getItem() instanceof ItemMeltedMetal && itemstack.getItemDamage() > 1 ||
+		return itemstack.getItem() instanceof ItemMeltedMetal && itemstack.getItemDamage() > 1 ||
 				itemstack.getItem() == TFCItems.CeramicMold && itemstack.getItemDamage() == 1 ||
-				itemstack.getItem() instanceof ItemPotteryMold && itemstack.getItemDamage() > 0)
-		{
-			return true;
-		}
-		return false;
+				itemstack.getItem() instanceof ItemPotteryMold && itemstack.getItemDamage() > 0;
 	}
 
 	@Override

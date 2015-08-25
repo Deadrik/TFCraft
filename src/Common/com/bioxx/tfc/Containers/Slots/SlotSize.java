@@ -26,7 +26,7 @@ public class SlotSize extends Slot
 	public boolean isItemValid(ItemStack itemstack)
 	{
 		boolean except = excpetions.contains(itemstack.getItem());
-		boolean include = inclusions.contains(itemstack.getItem()) || inclusions.size() == 0;
+		boolean include = inclusions.contains(itemstack.getItem()) || inclusions.isEmpty();
 		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize && !except && include)
 			return true;
 		else if (!(itemstack.getItem() instanceof ISize) && !except && include)

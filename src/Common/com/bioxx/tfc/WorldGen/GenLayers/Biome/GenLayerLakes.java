@@ -59,8 +59,6 @@ public class GenLayerLakes extends GenLayerTFC
 
 	boolean isOceanic(int id)
 	{
-		if(id == TFCBiome.ocean.biomeID || id == TFCBiome.DeepOcean.biomeID)
-			return true;
-		return false;
+		return id == TFCBiome.ocean.biomeID || id == TFCBiome.DeepOcean.biomeID;
 	}
 }

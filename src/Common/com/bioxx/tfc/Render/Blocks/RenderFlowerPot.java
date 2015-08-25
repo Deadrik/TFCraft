@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFlowerPot;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderFlowerPot implements ISimpleBlockRenderingHandler
@@ -48,7 +49,7 @@ public class RenderFlowerPot implements ISimpleBlockRenderingHandler
 		renderer.renderFaceYPos(block, x, y - 0.5F + r2 + 0.1875F, z, renderer.getBlockIcon(Blocks.dirt));
 		TileEntity tileentity = world.getTileEntity(x, y, z);
 
-		if (tileentity != null && tileentity instanceof TileEntityFlowerPot)
+		if (tileentity instanceof TileEntityFlowerPot)
 		{
 			Item item = ((TileEntityFlowerPot) tileentity).getFlowerPotItem();
 			int meta = ((TileEntityFlowerPot) tileentity).getFlowerPotData();

@@ -47,15 +47,12 @@ public class WeatherManager
 	public static int getDayOfWeek(long day)
 	{
 		long days = day / 6;
-		long days2 = day - (days * 6);
-		return (int)days2;
+		return (int) (day - (days * 6));
 	}
 
 	public static boolean canSnow(World world, int x, int y, int z)
 	{
-		if(TFC_Climate.getHeightAdjustedTemp(world, x, y, z) <= 0)
-			return true;
-		return false;
+		return TFC_Climate.getHeightAdjustedTemp(world, x, y, z) <= 0;
 	}
 
 	public float getLocalFog(World world, int x, int y, int z)

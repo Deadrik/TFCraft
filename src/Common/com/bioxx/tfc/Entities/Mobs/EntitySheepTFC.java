@@ -47,7 +47,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 
 	/** The eat grass AI task for this mob. */
 	public AIEatGrass aiEatGrass = new AIEatGrass(this);
-	private final float GESTATION_PERIOD = 5.0f;
+	private static final float GESTATION_PERIOD = 5.0f;
 
 	int degreeOfDiversion = 2;
 
@@ -534,11 +534,8 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal)
 	{
-		if(animal.getGender() != this.getGender() && this.isAdult() && animal.isAdult() && 
-				animal instanceof EntitySheepTFC)
-			return true;
-		else
-			return false;
+		return animal.getGender() != this.getGender() &&this.isAdult() && animal.isAdult() &&
+				animal instanceof EntitySheepTFC;
 	}
 
 	@Override

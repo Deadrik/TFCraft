@@ -122,7 +122,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 		 * Only allow the ore to be smelted if there is a tuyere in the blast furnace, 
 		 * a crucible below the blast furnace that isn't full, and the delay timer has completed.
 		 */
-		if (cookingItemStack != null && crucibleTE != null && crucibleTE.getTotalMetal() < crucibleTE.MAX_UNITS
+		if (cookingItemStack != null &&crucibleTE != null && crucibleTE.getTotalMetal() < TECrucible.MAX_UNITS
 				&& storage[1] != null /*Tuyere*/ && cookDelay == 0)
 		{
 			Random R = new Random();
@@ -330,9 +330,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 				break;
 			maxValidStackSize++;
 		}
-		if(maxValidStackSize == 0)
-			return false;
-		return true;
+		return maxValidStackSize != 0;
 	}
 
 	@Override
@@ -743,7 +741,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 		readFromNBT(pkt.func_148857_g());
 		
 		GuiScreen gui = FMLClientHandler.instance().getClient().currentScreen;
-		if(gui != null && gui instanceof GuiBlastFurnace)
+		if (gui instanceof GuiBlastFurnace)
 			((GuiBlastFurnace)gui).updateScreen();
 	}
 

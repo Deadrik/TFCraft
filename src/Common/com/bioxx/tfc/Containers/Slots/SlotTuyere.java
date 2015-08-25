@@ -1,10 +1,10 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.Items.ItemTuyere;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.Items.ItemTuyere;
 
 public class SlotTuyere extends Slot
 {
@@ -16,9 +16,7 @@ public class SlotTuyere extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(itemstack.getItem() instanceof ItemTuyere)
-			return true;
-		return false;
+		return itemstack.getItem() instanceof ItemTuyere;
 	}
 
 	@Override

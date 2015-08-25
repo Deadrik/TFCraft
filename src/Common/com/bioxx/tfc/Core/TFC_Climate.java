@@ -419,9 +419,7 @@ public class TFC_Climate
 	{
 		float rain = getRainfall(world, x, y, z);
 		float evt = getCacheManager(world).getEVTLayerAt(x, z).floatdata1;
-		if (rain >= 1000 && evt <= 0.25 && world.getBiomeGenForCoords(x, z).heightVariation < 0.15)
-			return true;
-		return false;
+		return rain >= 1000 && evt <= 0.25 && world.getBiomeGenForCoords(x, z).heightVariation < 0.15;
 	}
 
 	public static int getStability(World world, int x, int z)

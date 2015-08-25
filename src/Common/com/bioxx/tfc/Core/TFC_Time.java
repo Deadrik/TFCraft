@@ -147,16 +147,14 @@ public class TFC_Time
 	{
 		long day = getTotalDays()+1;
 		long days = day / 7;
-		long days2 = day - (days*7);
-		return (int)days2;
+		return (int) (day - (days * 7));
 	}
 
 	public static int getDayOfWeek(int tDays)
 	{
 		long day = tDays+1;
 		long days = day / 7;
-		long days2 = day - (days*7);
-		return (int)days2;
+		return (int) (day - (days * 7));
 	}
 
 	public static int getDayOfMonth()
@@ -192,8 +190,7 @@ public class TFC_Time
 	public static int getDayOfYearFromDays(long days)
 	{
 		long years = days / daysInYear;
-		long years2 = days - (daysInYear * years);
-		return (int)years2;
+		return (int) (days - (daysInYear * years));
 	}
 
 	/**Explicit month value, use getSeason(int zCoord) for anything related to a season, ie Summer, Winter etc.
@@ -204,8 +201,7 @@ public class TFC_Time
 	{
 		long totalmonths = getTotalMonths();
 		long totalmonths2 = totalmonths / 12;
-		long totalmonths3 = totalmonths-(totalmonths2 * 12);
-		return (int)totalmonths3;
+		return (int) (totalmonths - (totalmonths2 * 12));
 	}
 	/**Southern hemisphere reverses the season. Use getMonth() for the explicit month
 	 * 
@@ -222,8 +218,7 @@ public class TFC_Time
 	public static int getYear()
 	{
 		long totalmonths = getTotalMonths();
-		long totalmonths2 = totalmonths / 12;
-		return (int)totalmonths2;
+		return (int) (totalmonths / 12);
 	}
 
 	public static int getTotalDays()
@@ -249,14 +244,12 @@ public class TFC_Time
 	public static int getHour()
 	{
 		int th = (int) getTotalHours();
-		int h = getHourOfDayFromTotalHours(th);
-		return h;
+		return getHourOfDayFromTotalHours(th);
 	}
 
 	public static int getHourOfDayFromTotalHours(int th)
 	{
-		int h = (th + 6) % hoursInDay;  //gives us the remainder, days start at 6:00
-		return h;
+		return (th + 6) % hoursInDay; //gives us the remainder, days start at 6:00
 	}
 
 	public static int getDayFromTotalHours(int th)

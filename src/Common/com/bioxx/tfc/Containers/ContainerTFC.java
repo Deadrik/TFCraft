@@ -199,7 +199,8 @@ public class ContainerTFC extends Container
 		{
 			ItemStack itemstack = this.loadContents(i);
 			ItemStack itemstack1 = (ItemStack) this.inventoryItemStacks.get(i);//the real invisible item
-			if (!areItemStacksEqual(itemstack1, itemstack) && player.inventory.getItemStack() == null)
+			// This method was mysteriously deleted with no trace on github. However adding it back causes a crash.
+			// if (!areItemStacksEqual(itemstack1, itemstack) && player.inventory.getItemStack() == null)
 			{
 				_shouldReload = true;
 			}

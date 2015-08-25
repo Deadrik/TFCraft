@@ -252,7 +252,7 @@ public class WorldGenForests implements IWorldGenerator
 			{
 				for (int y1 = -2; y1 < 1; ++y1)
 				{
-					if(world.blockExists(x + x1, y + y1, z + z1) == true && TFC_Core.isWater(world.getBlock(x + x1, y + y1, z + z1)))
+					if (world.blockExists(x + x1, y + y1, z + z1) && TFC_Core.isWater(world.getBlock(x + x1, y + y1, z + z1)))
 						return true;
 				}
 			}

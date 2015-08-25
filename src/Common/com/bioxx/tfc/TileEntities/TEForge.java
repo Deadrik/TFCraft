@@ -10,17 +10,13 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemBloom;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
-import com.bioxx.tfc.api.HeatIndex;
-import com.bioxx.tfc.api.HeatRegistry;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
@@ -64,11 +60,9 @@ public class TEForge extends TEFireEntity implements IInventory
 		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord + 1).isOpaqueCube() && !worldObj.getBlock(xCoord, yCoord + 1, zCoord+2).isOpaqueCube() &&
 				worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord+2))
 			return true;
-		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1).isOpaqueCube() && !worldObj.getBlock(xCoord, yCoord + 1, zCoord-2).isOpaqueCube() &&
-				worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord-2))
-			return true;
 		else
-			return false;
+			return !worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1).isOpaqueCube() &&!worldObj.getBlock(xCoord, yCoord + 1, zCoord - 2).isOpaqueCube() &&
+					worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord - 2);
 	}
 
 	private boolean directChimney(int highestY)

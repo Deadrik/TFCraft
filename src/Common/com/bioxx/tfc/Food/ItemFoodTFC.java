@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
 import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.bioxx.tfc.Reference;
@@ -24,11 +25,7 @@ import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.Render.Item.FoodItemRenderer;
-import com.bioxx.tfc.api.Food;
-import com.bioxx.tfc.api.FoodRegistry;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
@@ -477,10 +474,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 	public boolean isHot(ItemStack is)
 	{
-		if(TFC_ItemHeat.GetTemp(is) > TFC_ItemHeat.IsCookable(is) * 0.8)
-			return true;
-		else
-			return false;
+		return TFC_ItemHeat.GetTemp(is) > TFC_ItemHeat.IsCookable(is) * 0.8;
 	}
 
 	public static ItemStack createTag(ItemStack is)

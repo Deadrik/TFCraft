@@ -32,7 +32,7 @@ import com.bioxx.tfc.api.Util.Helper;
 public class EntityCowTFC extends EntityCow implements IAnimal
 {
 	private final AIEatGrass aiEatGrass = new AIEatGrass(this);
-	private final float GESTATION_PERIOD = 9.0f;
+	private static final float GESTATION_PERIOD = 9.0f;
 	protected long animalID;
 	protected int sex = 0;
 	protected int hunger = 0;
@@ -517,11 +517,8 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal) 
 	{
-		if(animal.getGender() != this.getGender() && this.isAdult() && animal.isAdult() && 
-				animal instanceof EntityCowTFC)
-			return true;
-		else
-			return false;
+		return animal.getGender() != this.getGender() &&this.isAdult() && animal.isAdult() &&
+				animal instanceof EntityCowTFC;
 	}
 
 	@Override

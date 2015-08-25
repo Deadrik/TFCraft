@@ -18,8 +18,6 @@ public class BlockFlower2 extends BlockFlower
 		//float evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(x, z).floatdata1;
 		float rain = TFC_Climate.getRainfall(world, x, 144, z);
 		float bioTemperature =TFC_Climate.getBioTemperatureHeight(world, x, y, z) ;
-		if(bioTemperature > 5 && rain > 250)
-			return true;
-		return false;
+		return bioTemperature > 5 && rain > 250;
 	}
 }
