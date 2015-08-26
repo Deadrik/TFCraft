@@ -85,7 +85,7 @@ public class CraftingHandler
 			}
 
 			// Achievements
-			else if (item instanceof ItemCustomPickaxe)
+			if (item instanceof ItemCustomPickaxe)
 			{
 				player.triggerAchievement(TFC_Achievements.achPickaxe);
 			}
@@ -118,7 +118,7 @@ public class CraftingHandler
 				player.triggerAchievement(TFC_Achievements.achUnknown);
 
 			// Packet Sending
-			else if (item == Item.getItemFromBlock(TFCBlocks.Workbench))
+			if (item == Item.getItemFromBlock(TFCBlocks.Workbench))
 			{
 				if (!player.getEntityData().hasKey("craftingTable"))
 					player.inventory.clearInventory(Item.getItemFromBlock(TFCBlocks.Workbench), -1);
@@ -144,7 +144,7 @@ public class CraftingHandler
 			}
 
 			// NBT Transfer - Need to also do down in preCraft for shift-clicking.
-			else if (item instanceof ItemIngot)
+			if (item instanceof ItemIngot)
 			{
 				float temperature = 0;
 				for(int i = 0; i < iinventory.getSizeInventory(); i++)
