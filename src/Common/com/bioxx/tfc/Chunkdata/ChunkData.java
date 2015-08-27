@@ -19,14 +19,14 @@ public class ChunkData
 	public int[] heightmap;
 	public DataLayer[] rainfallMap;
 
-	public int sluicedAmount = 0;
+	public int sluicedAmount;
 
 	public float fishPop = -1;
 	public static final float fishPopMax = 60;
 
 	public int lastSpringGen;
-	public int cropInfestation = 0;
-	public boolean isUnloaded = false;
+	public int cropInfestation;
+	public boolean isUnloaded;
 	
 	private final Chunk chunk;
 

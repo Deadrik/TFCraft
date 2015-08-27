@@ -10,14 +10,14 @@ import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class BarrelPreservativeRecipe {
-	private boolean requiresBrined = false;
-	private boolean requiresPickled = false;
-	private boolean requiresSalted = false;
-	private boolean requiresDried = false;
-	private boolean requiresSmoked = false;
-	private boolean requiresInfused = false;
+	private boolean requiresBrined;
+	private boolean requiresPickled;
+	private boolean requiresSalted;
+	private boolean requiresDried;
+	private boolean requiresSmoked;
+	private boolean requiresInfused;
 	
-	private boolean requiresSealed = false;
+	private boolean requiresSealed;
 	
 	private boolean allowGrains = true;
 	private boolean allowProteins = true;
@@ -25,7 +25,7 @@ public class BarrelPreservativeRecipe {
 	private boolean allowFruit = true;
 	private boolean allowDairy = true;
 	
-	private FluidStack liquidPerOz = null;
+	private FluidStack liquidPerOz;
 	
 	private float environmentalDecayFactor = -1;
 	private float baseDecayModifier = -1;
@@ -55,7 +55,6 @@ public class BarrelPreservativeRecipe {
 			return false;
 		}
 		IFood iFood = ((IFood)itemStack.getItem());
-		float w = iFood.getFoodWeight(itemStack);
 		if(!allowGrains && iFood.getFoodGroup() == EnumFoodGroup.Grain)
 		{
 			return false;
@@ -104,6 +103,7 @@ public class BarrelPreservativeRecipe {
 		{
 			return false;
 		}
+		float w = iFood.getFoodWeight(itemStack);
 		return liquidPerOz.amount * w <= fluid.amount;
 	}
 	

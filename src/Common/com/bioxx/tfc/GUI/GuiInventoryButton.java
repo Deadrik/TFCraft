@@ -15,10 +15,10 @@ public class GuiInventoryButton extends GuiButton
 {
 	private static ResourceLocation texture = new ResourceLocation(Reference.ModID+":textures/gui/inventory.png");
 	public IIcon icon;
-	public int bX = 0;
-	public int bY = 0;
-	public int bW = 0;
-	public int bH = 0;
+	public int bX;
+	public int bY;
+	public int bW;
+	public int bH;
 
 	public GuiInventoryButton(int index, int xPos, int yPos, int width, int height, 
 			int buttonX, int buttonY, int buttonW, int buttonH, String s, IIcon ico)

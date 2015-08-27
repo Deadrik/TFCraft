@@ -12,7 +12,7 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class BarrelMultiItemRecipe extends BarrelRecipe
 {
-	boolean keepstacksize = true;
+	public boolean keepstacksize = true;
 	public BarrelMultiItemRecipe(ItemStack inputItem, FluidStack inputFluid,
 			ItemStack outIS, FluidStack outputFluid) {
 		super(inputItem, inputFluid, outIS, outputFluid);

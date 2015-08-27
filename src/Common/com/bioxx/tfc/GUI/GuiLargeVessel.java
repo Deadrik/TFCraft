@@ -40,7 +40,7 @@ public class GuiLargeVessel extends GuiContainerTFC
 	public static final ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_largevessel.png");
 	private TEVessel vesselTE;
 	private EntityPlayer player;
-	private int guiTab = 0;
+	private int guiTab;
 
 	public GuiLargeVessel(InventoryPlayer inventoryplayer, TEVessel te, World world, int x, int y, int z, int tab)
 	{
@@ -189,13 +189,13 @@ public class GuiLargeVessel extends GuiContainerTFC
 
 	public class GuiBarrelTabButton extends GuiButton
 	{
-		GuiLargeVessel screen;
-		IIcon buttonicon = null;
+		private GuiLargeVessel screen;
+		private IIcon buttonicon;
 
-		int xPos = 0;
-		int yPos = 172;
-		int xSize = 31;
-		int ySize = 15;
+		private int xPos;
+		private int yPos = 172;
+		private int xSize = 31;
+		private int ySize = 15;
 
 		public GuiBarrelTabButton(int index, int xPos, int yPos, int width, int height, GuiLargeVessel gui, IIcon icon, String s)
 		{

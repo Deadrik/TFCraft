@@ -14,11 +14,11 @@ import com.bioxx.tfc.api.TFCBlocks;
 public class MapGenRiverRavine extends MapGenBaseTFC
 {
 	private float[] field_35627_a = new float[1024];
-	private byte[] metaArray;
+	//private byte[] metaArray;
 
 	public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, Block[] idsBig, byte[] metaBig)
 	{
-		metaArray = metaBig;
+		//metaArray = metaBig;
 		this.range = 12;
 		//super.generate(par1IChunkProvider, par2World, par3, par4, idsBig);
 		this.recursiveGenerate(par2World, par3, par4, par3, par4, idsBig);
@@ -162,12 +162,12 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 													if(var49 < waterHeight)
 													{
 														blockArray[var47] = TFCBlocks.FreshWater;
-														metaArray[var47] = 0;
+														//metaArray[var47] = 0;
 													}
 													else
 													{
 														blockArray[var47] = Blocks.air;
-														metaArray[var47] = 0;
+														//metaArray[var47] = 0;
 													}
 												}
 											}

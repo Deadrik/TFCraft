@@ -24,9 +24,9 @@ import com.bioxx.tfc.api.TFCItems;
 
 public class BlockBlastFurnace extends BlockTerraContainer
 {
-	IIcon[] textureSide;
-	IIcon textureOn;
-	IIcon textureOff;
+	private IIcon[] textureSide;
+	private IIcon textureOn;
+	private IIcon textureOff;
 
 	public BlockBlastFurnace()
 	{

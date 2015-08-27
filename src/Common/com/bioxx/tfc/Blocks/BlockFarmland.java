@@ -16,9 +16,13 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
@@ -26,14 +30,11 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TEFarmland;
 import com.bioxx.tfc.api.Constant.Global;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class BlockFarmland extends BlockContainer
 {
 	private Block dirtBlock;
 	private IIcon[] DirtTexture;
-	private int textureOffset = 0;
+	private int textureOffset;
 
 	public BlockFarmland(Block block, int tex)
 	{
@@ -190,11 +191,10 @@ public class BlockFarmland extends BlockContainer
 	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
 	{
 		Block plant = plantable.getPlant(world, x, y + 1, z);
-		EnumPlantType plantType = plantable.getPlantType(world, x, y + 1, z);
-
 		if (plant == Blocks.pumpkin_stem || plant == Blocks.melon_stem)
 			return false;
 
+		EnumPlantType plantType = plantable.getPlantType(world, x, y + 1, z);
 		if (plantType == EnumPlantType.Crop)
 			return true;
 

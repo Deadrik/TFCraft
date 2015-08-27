@@ -19,7 +19,7 @@ import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 
 public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 {
-	public short damageTaken = 0;
+	public short damageTaken;
 	public Item pickupItem = TFCItems.Arrow;
 
 	public EntityProjectileTFC(World par1World)
@@ -63,8 +63,6 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 			boolean inground = nbt.hasKey("inGround") && nbt.getByte("inGround") == 1;
 			if(inground)
 			{
-				boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && player.capabilities.isCreativeMode;
-
 				EntityItem ei = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.pickupItem, 1, this.damageTaken));
 
 				if (this.canBePickedUp == 1)
@@ -76,6 +74,7 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 				}
 
 				ItemStack itemstack = ei.getEntityItem();
+				boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && player.capabilities.isCreativeMode;
 				if (itemstack.stackSize <= 0)
 					flag = true;
 				else if (this.canBePickedUp == 1 && !player.inventory.addItemStackToInventory(itemstack))

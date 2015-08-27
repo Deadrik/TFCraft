@@ -35,10 +35,10 @@ import com.bioxx.tfc.api.Crafting.AnvilReq;
 
 public class BlockAnvil extends BlockTerraContainer
 {
-	IIcon[] textureMapTop;
-	IIcon[] textureMapSide;
-	IIcon stoneAnvilIcon;
-	private int anvilId = 0;
+	private IIcon[] textureMapTop;
+	private IIcon[] textureMapSide;
+	private IIcon stoneAnvilIcon;
+	private int anvilId;
 
 	public BlockAnvil()
 	{

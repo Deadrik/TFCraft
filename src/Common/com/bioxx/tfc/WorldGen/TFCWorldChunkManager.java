@@ -31,7 +31,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	/** A list of biomes that the player can spawn in. */
 	protected List<BiomeGenBase> biomesToSpawnIn;
 
-	public long seed = 0;
+	public long seed;
 	public TFCWorldChunkManager()
 	{
 		super();

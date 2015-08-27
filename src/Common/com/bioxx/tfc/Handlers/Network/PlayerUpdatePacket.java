@@ -30,7 +30,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 	private SkillStats playerSkills;
 	private String skillName;
 	private int skillLevel;
-	private boolean craftingTable = false;
+	private boolean craftingTable;
 	private HashMap<String, Integer> skillMap = new HashMap<String, Integer>();
 
 	public PlayerUpdatePacket() {}

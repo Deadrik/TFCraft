@@ -6,9 +6,9 @@ import net.minecraft.nbt.NBTTagCompound;
 public class TEPartial extends NetworkTileEntity
 {
 	public short TypeID = -1;
-	public byte MetaID = 0;
-	public byte material = 0;
-	public long extraData = 0;
+	public byte MetaID;
+	public byte material;
+	public long extraData;
 
 	public TEPartial()
 	{

@@ -4,8 +4,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TEFenceGate extends NetworkTileEntity
 {
-	private boolean open = false;
-	private byte direction = 0;
+	private boolean open;
+	private byte direction;
 
 	@Override
 	public boolean canUpdate()

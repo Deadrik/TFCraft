@@ -18,9 +18,9 @@ public class ItemMetalSheet extends ItemTerra implements ISmeltable
 {
 	protected int[][] sidesMap = new int[][]{{0,-1,0},{0,1,0},{0,0,-1},{0,0,+1},{-1,0,0},{1,0,0}};
 	public int metalID;
-	String metal;
-	short metalAmount;
-	boolean smeltable = true;
+	private String metal;
+	protected short metalAmount;
+	private boolean smeltable = true;
 
 	public ItemMetalSheet(int mID)
 	{

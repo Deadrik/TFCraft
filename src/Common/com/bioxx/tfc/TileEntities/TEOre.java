@@ -8,7 +8,7 @@ public class TEOre extends NetworkTileEntity
 {
 	public int baseBlockID = -1000;
 	public int baseBlockMeta = -1000;
-	public byte extraData = 0;
+	public byte extraData;
 
 	public TEOre()
 	{

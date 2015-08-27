@@ -34,7 +34,7 @@ public class BlockCobble extends BlockTerra
 
 	protected String[] names;
 	protected IIcon[] icons;
-	protected int looseStart = 0;
+	protected int looseStart;
 
 	@SideOnly(Side.CLIENT)
 	@Override

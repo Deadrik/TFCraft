@@ -6,7 +6,7 @@ public class TEFruitLeaves extends NetworkTileEntity
 {
 	public int dayHarvested = -1000;
 	public int dayFruited = -1000;
-	public boolean hasFruit = false;
+	public boolean hasFruit;
 
 	public TEFruitLeaves()
 	{

@@ -14,7 +14,7 @@ public class TFCOptions
 	public static boolean enableBetterGrass = true;
 	public static boolean enableDebugMode;
 	public static boolean onionsAreGross;
-	public static boolean generateSmoke = false;
+	public static boolean generateSmoke;
 	public static String quiverHUDPosition = "bottomleft";
 	public static boolean enableSolidDetailed = true;
 	public static int maxRemovedSolidDetailed = 12;

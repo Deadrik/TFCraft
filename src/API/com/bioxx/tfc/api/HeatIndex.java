@@ -13,9 +13,9 @@ public class HeatIndex
 	public float meltTemp;
 	public boolean keepNBT;
 
-	private ItemStack output = null;
-	private int outputMin = 0;
-	private int outputMax = 0;
+	private ItemStack output;
+	private int outputMin;
+	private int outputMax;
 
 	private ItemStack morph;
 	public ItemStack input;

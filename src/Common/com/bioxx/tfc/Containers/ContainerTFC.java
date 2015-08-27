@@ -12,10 +12,10 @@ import com.bioxx.tfc.api.TFC_ItemHeat;
 
 public class ContainerTFC extends Container
 {
-	public int bagsSlotNum = 0;
+	public int bagsSlotNum;
 	public EntityPlayer player;
-	protected boolean isLoading = false;
-	protected boolean doItemSaving = false;
+	protected boolean isLoading;
+	protected boolean doItemSaving;
 
 	@Override
 	public boolean canInteractWith(EntityPlayer var1)
@@ -197,8 +197,8 @@ public class ContainerTFC extends Container
 
 		for (int i = 0; i < this.inventorySlots.size()-36; ++i)
 		{
-			ItemStack itemstack = this.loadContents(i);
-			ItemStack itemstack1 = (ItemStack) this.inventoryItemStacks.get(i);//the real invisible item
+			//ItemStack itemstack = this.loadContents(i);
+			//ItemStack itemstack1 = (ItemStack) this.inventoryItemStacks.get(i);//the real invisible item
 			// This method was mysteriously deleted with no trace on github. However adding it back causes a crash.
 			// if (!areItemStacksEqual(itemstack1, itemstack) && player.inventory.getItemStack() == null)
 			{

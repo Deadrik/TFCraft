@@ -20,7 +20,7 @@ import com.bioxx.tfc.api.Util.Helper;
 
 public class FoodCraftingHandler
 {
-	public static boolean PreCrafted = false;
+	public static boolean PreCrafted;
 	@SubscribeEvent
 	public void onFoodCook(ItemCookEvent event)
 	{
@@ -33,17 +33,17 @@ public class FoodCraftingHandler
 	@SubscribeEvent
 	public void onFoodCrafting(ItemCraftedEvent e)
 	{
+		if (FoodCraftingHandler.PreCrafted)
+		{
+			FoodCraftingHandler.PreCrafted = false;
+			return;
+		}
+
 		//EntityPlayer player = e.player;
 		//Item item = e.crafting.getItem();
 		ItemStack craftResult = e.crafting;
 		//int isDmg = e.crafting.getItemDamage();
 		IInventory iinventory = e.craftMatrix;
-
-		if(FoodCraftingHandler.PreCrafted)
-		{
-			FoodCraftingHandler.PreCrafted = false;
-			return;
-		}
 
 		if(iinventory != null)
 		{

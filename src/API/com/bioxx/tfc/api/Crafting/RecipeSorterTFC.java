@@ -8,7 +8,7 @@ import net.minecraft.item.crafting.ShapelessRecipes;
 
 public class RecipeSorterTFC implements Comparator
 {
-	final CraftingManagerTFC craftingManager;
+	public final CraftingManagerTFC craftingManager;
 
 	RecipeSorterTFC(CraftingManagerTFC craftingmanager)
 	{

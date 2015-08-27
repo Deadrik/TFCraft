@@ -10,12 +10,12 @@ import com.bioxx.tfc.api.TFC_ItemHeat;
 
 public class TEFireEntity extends NetworkTileEntity
 {
-	public int airFromBellows = 0;
-	public float fireTemp = 0;
+	public int airFromBellows;
+	public float fireTemp;
 	public int maxFireTempScale = 2000; // Fixes NPE
-	public int fuelTimeLeft = 0;
-	public int fuelBurnTemp = 0;
-	public int fuelTasteProfile = 0;
+	public int fuelTimeLeft;
+	public int fuelBurnTemp;
+	public int fuelTasteProfile;
 
 	public static final int AIRTOADD = 200;
 

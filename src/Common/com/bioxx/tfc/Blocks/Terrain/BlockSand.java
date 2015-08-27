@@ -25,7 +25,7 @@ import com.bioxx.tfc.api.Constant.Global;
 public class BlockSand extends BlockTerra
 {
 	protected IIcon[] icons = new IIcon[Global.STONE_ALL.length];
-	protected int textureOffset = 0;
+	protected int textureOffset;
 
 	public BlockSand(int texOff)
 	{

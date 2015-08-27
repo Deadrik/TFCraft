@@ -35,7 +35,7 @@ public class RenderWolfTFC extends RenderWolf
 	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
     {
-		float scale = ((EntityWolfTFC) par1EntityLivingBase).size_mod / 2 + 0.5f;
+		float scale = ((EntityWolfTFC) par1EntityLivingBase).getSize() / 2 + 0.5f;
 		GL11.glScalef(scale, scale, scale);
 	}
 

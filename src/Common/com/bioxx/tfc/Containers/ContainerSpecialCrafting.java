@@ -23,13 +23,13 @@ public class ContainerSpecialCrafting extends ContainerTFC
 	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 5, 5);
 
 	private SlotSpecialCraftingOutput outputSlot;
-	private boolean decreasedStack = false;
+	private boolean decreasedStack;
 
 	/** The crafting result, size 1. */
 	public IInventory craftResult = new InventoryCraftResult();
 	private World worldObj;
-	InventoryPlayer invPlayer;
-	boolean isConstructing = false;
+	private InventoryPlayer invPlayer;
+	private boolean isConstructing;
 	public ContainerSpecialCrafting(InventoryPlayer inventoryplayer, ItemStack is, World world, int x, int y, int z)
 	{
 		invPlayer = inventoryplayer;

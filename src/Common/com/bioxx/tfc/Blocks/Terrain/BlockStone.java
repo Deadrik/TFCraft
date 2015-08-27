@@ -16,14 +16,14 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Tools.IToolChisel;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockStone extends BlockCollapsible
 {
@@ -34,8 +34,8 @@ public class BlockStone extends BlockCollapsible
 
 	protected String[] names;
 	public IIcon[] icons;
-	protected int looseStart = 0;
-	protected int gemChance = 0;
+	protected int looseStart;
+	protected int gemChance;
 
 	@SideOnly(Side.CLIENT)
 	@Override

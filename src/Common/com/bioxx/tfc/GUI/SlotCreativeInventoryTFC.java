@@ -5,6 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -13,12 +14,12 @@ class SlotCreativeInventoryTFC extends Slot
 {
 	private final Slot theSlot;
 
-	final GuiContainerCreativeTFC theCreativeInventory;
+	//private final GuiContainerCreativeTFC theCreativeInventory;
 
 	public SlotCreativeInventoryTFC(GuiContainerCreativeTFC par1GuiContainerCreative, Slot par2Slot, int par3)
 	{
 		super(par2Slot.inventory, par3, 0, 0);
-		this.theCreativeInventory = par1GuiContainerCreative;
+		//this.theCreativeInventory = par1GuiContainerCreative;
 		this.theSlot = par2Slot;
 	}
 
@@ -111,7 +112,7 @@ class SlotCreativeInventoryTFC extends Slot
 		return this.theSlot.isSlotInInventory(par1IInventory, par2);
 	}
 
-	static Slot func_75240_a(SlotCreativeInventoryTFC par0SlotCreativeInventory)
+	public static Slot func_75240_a(SlotCreativeInventoryTFC par0SlotCreativeInventory)
 	{
 		return par0SlotCreativeInventory.theSlot;
 	}

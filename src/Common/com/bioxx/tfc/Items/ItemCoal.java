@@ -8,13 +8,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemCoal extends ItemTerra
 {
@@ -29,7 +29,7 @@ public class ItemCoal extends ItemTerra
 		this.setSize(EnumSize.TINY);
 	}
 
-	int[][] map = 
+	private int[][] map =
 		{   {0,-1,0},
 			{0,1,0},
 			{0,0,-1},

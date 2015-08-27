@@ -29,8 +29,8 @@ import com.bioxx.tfc.api.Interfaces.ICustomCollision;
 
 public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCollision
 {
-	IIcon textureOn;
-	IIcon textureOff;
+	private IIcon textureOn;
+	private IIcon textureOff;
 
 	public static final int bloomeryToStackMap[][] = { { 0, 1 }, { -1, 0 }, { 0, -1 }, { 1, 0 } };
 	public static final int sidesMap[][] = { { 1, 0 }, { 0, 1 }, { 1, 0 }, { 0, 1 } };

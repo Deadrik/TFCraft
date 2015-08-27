@@ -2,15 +2,15 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
-import com.bioxx.tfc.api.TFCBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+import com.bioxx.tfc.api.TFCBlocks;
+
 public class WorldGenLiquidsTFC extends WorldGenerator
 {
-	private Block liquidBlock;
+	private final Block liquidBlock;
 
 	public WorldGenLiquidsTFC(Block block)
 	{

@@ -9,7 +9,7 @@ import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 public class ItemMiscToolHead extends ItemTerra
 {
-	private ToolMaterial material = null;
+	private ToolMaterial material;
 
 	public ItemMiscToolHead()
 	{

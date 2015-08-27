@@ -5,10 +5,10 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.AxisAlignedBB;
 
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class ModelBarrel extends ModelBase
@@ -68,7 +68,7 @@ public class ModelBarrel extends ModelBase
         this.chestBelow.rotationPointZ = 1.0F;*/
 
 
-	void drawBox(AxisAlignedBB par1AxisAlignedBB)
+	public void drawBox(AxisAlignedBB par1AxisAlignedBB)
 	{
 		Tessellator var2 = Tessellator.instance;
 

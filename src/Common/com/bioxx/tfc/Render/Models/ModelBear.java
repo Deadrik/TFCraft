@@ -16,18 +16,18 @@ import org.lwjgl.opengl.GL11;
 public class ModelBear extends ModelBase
 {
 	//fields
-	ModelRenderer Neck;
-	ModelRenderer BearHead;
-	ModelRenderer Body;
-	ModelRenderer MainBody;
-	ModelRenderer Leg1;
-	ModelRenderer Leg2;
-	ModelRenderer Leg3;
-	ModelRenderer Leg4;
-	ModelRenderer Tail;
-	ModelRenderer Ear1;
-	ModelRenderer Ear2;
-	ModelRenderer Nose;
+	private ModelRenderer Neck;
+	private ModelRenderer BearHead;
+	private ModelRenderer Body;
+	private ModelRenderer MainBody;
+	private ModelRenderer Leg1;
+	private ModelRenderer Leg2;
+	private ModelRenderer Leg3;
+	private ModelRenderer Leg4;
+	private ModelRenderer Tail;
+	private ModelRenderer Ear1;
+	private ModelRenderer Ear2;
+	private ModelRenderer Nose;
 
 	public ModelBear ()
 	{

@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Items;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemPotion;
@@ -15,8 +16,8 @@ import com.bioxx.tfc.api.TFCItems;
 public class ItemCustomPotion extends ItemPotion
 {
 	/** maps potion damage values to lists of effect names */
-	private HashMap effectCache = new HashMap();
-	private static final Map field_77835_b = new LinkedHashMap();
+	/*private HashMap effectCache = new HashMap();
+	private static final Map field_77835_b = new LinkedHashMap();*/
 
 	public ItemCustomPotion()
 	{

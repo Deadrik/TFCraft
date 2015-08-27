@@ -11,8 +11,8 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class WorldGenPineShort extends WorldGenerator
 {
-	Block blockLeaf, blockWood;
-	final int metaLeaf, metaWood;
+	private final Block blockLeaf, blockWood;
+	private final int metaLeaf, metaWood;
 
 	public WorldGenPineShort(boolean par1, int id)
 	{

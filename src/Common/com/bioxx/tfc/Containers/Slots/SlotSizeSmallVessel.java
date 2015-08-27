@@ -18,8 +18,8 @@ import com.bioxx.tfc.api.Interfaces.ISize;
 
 public class SlotSizeSmallVessel extends Slot
 {
-	EnumSize size = EnumSize.SMALL;
-	List<Item> exceptions;
+	private EnumSize size = EnumSize.SMALL;
+	private List<Item> exceptions;
 
 	public SlotSizeSmallVessel(IInventory iinventory, int i, int j, int k)
 	{
@@ -30,8 +30,6 @@ public class SlotSizeSmallVessel extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		boolean except = exceptions.contains(itemstack.getItem());
-
 		if(itemstack.getItem() instanceof IBag ||
 				itemstack.getItem() instanceof ItemMeltedMetal ||
 				itemstack.getItem() instanceof ItemPotteryBase)
@@ -44,6 +42,7 @@ public class SlotSizeSmallVessel extends Slot
 				!(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("foodWeight") && itemstack.getTagCompound().hasKey("foodDecay")))
 				return false;
 
+		boolean except = exceptions.contains(itemstack.getItem());
 		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize && !except)
 			return true;
 		else if (!(itemstack.getItem() instanceof ISize) && !except)

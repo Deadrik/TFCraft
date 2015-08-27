@@ -16,7 +16,7 @@ public class EntityBarrel extends Entity
 {
 	public int fuse;
 	public ItemStack origBarrel;
-	private int gunpowder = 0;
+	private int gunpowder;
 
 	public EntityBarrel(World par1World)
 	{

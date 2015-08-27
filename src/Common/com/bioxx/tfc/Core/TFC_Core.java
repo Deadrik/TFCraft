@@ -61,7 +61,7 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 public class TFC_Core
 {
 	private static HashMap<Integer, ChunkDataManager> cdmMap = new HashMap<Integer, ChunkDataManager>();
-	public static boolean PreventEntityDataUpdate = false;
+	public static boolean PreventEntityDataUpdate;
 
 	public static ChunkDataManager getCDM(World world)
 	{
@@ -105,7 +105,7 @@ public class TFC_Core
 		return l;
 	}
 
-	static Boolean isBlockAboveSolid(IBlockAccess blockAccess, int i, int j, int k)
+	public static Boolean isBlockAboveSolid(IBlockAccess blockAccess, int i, int j, int k)
 	{
 		if(TerraFirmaCraft.proxy.getCurrentWorld().getBlock(i, j + 1, k).isOpaqueCube())
 			return true;
@@ -963,7 +963,7 @@ public class TFC_Core
 	{
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 		foodstats.addFoodExhaustion(exhaustion);
-		foodstats.addWaterExhaustion(exhaustion);
+		//foodstats.addWaterExhaustion(exhaustion);
 		TFC_Core.setPlayerFoodStats(player, foodstats);
 	}
 

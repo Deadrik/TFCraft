@@ -29,22 +29,22 @@ import com.bioxx.tfc.api.Util.Helper;
 
 public class BlockFruitLeaves extends BlockTerraContainer
 {
-	int adjacentTreeBlocks[];
-	String[] WoodNames = Global.FRUIT_META_NAMES;
-	IIcon[] icons = new IIcon[16];
-	IIcon[] iconsDead = new IIcon[16];
+	//private int adjacentTreeBlocks[];
+	private String[] WoodNames = Global.FRUIT_META_NAMES;
+	private IIcon[] icons = new IIcon[16];
+	//private IIcon[] iconsDead = new IIcon[16];
 	public static IIcon[] iconsFruit = new IIcon[16];
-	IIcon[] iconsOpaque = new IIcon[16];
-	IIcon[] iconsDeadOpaque = new IIcon[16];
+	private IIcon[] iconsOpaque = new IIcon[16];
+	//private IIcon[] iconsDeadOpaque = new IIcon[16];
 	public static IIcon[] iconsFlowers = new IIcon[16];
 
-	int Offset = 0;
+	//private int offset;
 
 	public BlockFruitLeaves(int offset)
 	{
 		super(Material.leaves);
 		this.setTickRandomly(true);
-		Offset = offset;
+		//this.offset = offset;
 	}
 
 	@Override
@@ -87,8 +87,8 @@ public class BlockFruitLeaves extends BlockTerraContainer
 		{
 			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Leaves");
 			iconsOpaque[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Leaves Opaque");
-			iconsDead[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Leaves");
-			iconsDeadOpaque[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Leaves Opaque");
+			//iconsDead[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Leaves");
+			//iconsDeadOpaque[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Leaves Opaque");
 			iconsFruit[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Fruit");
 			iconsFlowers[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Flowers");
 		}
@@ -116,14 +116,13 @@ public class BlockFruitLeaves extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			Random rand = new Random();
-
 			if (!canStay(world, x, y, z))
 			{
 				destroyLeaves(world, x, y, z);
 				return;
 			}
 
+			Random rand = new Random();
 			int meta = world.getBlockMetadata(x, y, z);
 			int m = meta - 8;
 

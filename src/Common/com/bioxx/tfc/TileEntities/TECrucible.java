@@ -27,12 +27,12 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 {
 	public HashMap<String, MetalPair> metals = new HashMap<String, MetalPair>();
 	public Alloy currentAlloy;
-	public int temperature = 0;
+	public int temperature;
 	public ItemStack[] storage;
-	public byte inputTick = 0;
-	public byte outputTick = 0;
-	public byte tempTick = 0;
-	private int cookDelay = 0;
+	public byte inputTick;
+	public byte outputTick;
+	public byte tempTick;
+	private int cookDelay;
 	public static final int MAX_UNITS = 3000;
 
 	public TECrucible()

@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -28,7 +27,7 @@ public class WorldGenMinable extends WorldGenerator
 	private int x_Chunk;
 	private int z_Chunk;
 	public Block MPBlock;
-	private int minableBlockMeta;
+	private final int minableBlockMeta;
 	public static int MPPrevX;
 	public static int MPPrevZ;
 	public static Block MPPrevBlock;
@@ -48,21 +47,21 @@ public class WorldGenMinable extends WorldGenerator
 
 	//private int mineGen = 1;
 	//private int subMineGen = 1;
-	private int rarity = 2;
-	private int veinSi = 2;
-	private int veinAm = 2;
-	private int height = 2;
+	private final int rarity;
+	private final int veinSi;
+	private final int veinAm;
+	private final int height;
 	private int mineHeight = 2;
-	private int diameter = 2;
-	private int vDens = 2;
-	private int hDens = 2;
-	private Block genInBlock = Blocks.air;
-	private int genInBlockMeta = 1;
-	private boolean useMarcoVeins = false;
-	private int grade = 0;
+	private final int diameter;
+	private final int vDens;
+	private final int hDens;
+	private final Block genInBlock;
+	private final int genInBlockMeta;
+	private final boolean useMarcoVeins;
+	private final int grade;
 
 	//==========================================mp mod
-	private Block minableBlock;
+	private final Block minableBlock;
 	private int numberOfBlocks;
 
 	public WorldGenMinable(Block block, int j, Block layerBlock, int layerMeta, int rarity, int veinSize,
@@ -95,7 +94,7 @@ public class WorldGenMinable extends WorldGenerator
 		return genBeforeCheck;
 	}
 
-	void createMine( World worldObj, Random rand, int x, int z)
+	private void createMine(World worldObj, Random rand, int x, int z)
 	{
 		for(int loopCount = 0; loopCount < veinAm; loopCount++)
 		{
@@ -112,7 +111,7 @@ public class WorldGenMinable extends WorldGenerator
 		}
 	}
 
-	void createMineWithChance(World worldObj, Random rand, int x, int z)
+	private void createMineWithChance(World worldObj, Random rand, int x, int z)
 	{
 		if (rarity == 1 || rarity > 0 && rand.nextInt(rarity) == 0)
 			createMine(worldObj, rand, x, z);

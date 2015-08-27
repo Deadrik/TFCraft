@@ -25,7 +25,7 @@ public class PlayerInventory
 	public static int invYSize = 87;
 	private static ResourceLocation invTexture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_inventory_lower.png");
 	public static InventoryCrafting containerInv;
-	private static int index = 0;
+	private static int index;
 
 	public static void buildInventoryLayout(Container container, InventoryPlayer inventory, int x, int y, boolean freezeSlot, boolean toolBarAfterMainInv)
 	{

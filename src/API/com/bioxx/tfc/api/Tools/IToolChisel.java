@@ -21,7 +21,7 @@ public interface IToolChisel
 	 * @param hitZ
 	 * @return true if the chisel has handled the event
 	 */
-	public boolean onUsed(World world, EntityPlayer player, int x, int y, int z, Block block, int meta, int side, float hitX, float hitY, float hitZ);
+	boolean onUsed(World world, EntityPlayer player, int x, int y, int z, Block block, int meta, int side, float hitX, float hitY, float hitZ);
 	
 	
 	/***
@@ -32,5 +32,5 @@ public interface IToolChisel
 	 * @param z coordinate of the block
 	 * @return true if chiseling is allowed
 	 */
-	public boolean canChisel(EntityPlayer player, int x, int y, int z);
+	boolean canChisel(EntityPlayer player, int x, int y, int z);
 }

@@ -28,8 +28,8 @@ import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockWoodSupport extends BlockTerra
 {
-	String[] woodNames;
-	IIcon[] icons;
+	protected String[] woodNames;
+	protected IIcon[] icons;
 
 	public BlockWoodSupport(Material material)
 	{

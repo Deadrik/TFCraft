@@ -70,7 +70,7 @@ public class TFCBiome extends BiomeGenBase
 	protected static WorldGenCustomShortTrees worldGenWhiteElmShortTrees;
 	protected static WorldGenCustomWillowTrees worldGenWillowShortTrees;
 
-	protected int biomeColor = 0x000000;
+	protected int biomeColor;
 	public TFCBiome(int par1)
 	{
 		super(par1);

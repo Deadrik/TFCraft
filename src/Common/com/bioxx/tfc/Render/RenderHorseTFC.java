@@ -11,13 +11,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.util.ResourceLocation;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
 import com.google.common.collect.Maps;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderHorseTFC extends RenderHorse
@@ -94,7 +94,7 @@ public class RenderHorseTFC extends RenderHorse
 	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
 	{
-		float scale = ((EntityHorseTFC)par1EntityLivingBase).size_mod;
+		float scale = ((EntityHorseTFC) par1EntityLivingBase).getSize();
 		GL11.glScalef(scale, scale, scale);
 		this.preRenderCallback((EntityHorse)par1EntityLivingBase, par2);
 	}

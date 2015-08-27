@@ -16,9 +16,9 @@ import com.bioxx.tfc.TileEntities.TEQuern;
 public class ContainerQuern extends ContainerTFC
 {
 	private World world;
-	private int posX;
+	/*private int posX;
 	private int posY;
-	private int posZ;
+	private int posZ;*/
 	private TEQuern te;
 	private EntityPlayer player;
 
@@ -27,9 +27,9 @@ public class ContainerQuern extends ContainerTFC
 		this.player = playerinv.player;
 		this.te = pile;
 		this.world = world;
-		this.posX = x;
+		/*this.posX = x;
 		this.posY = y;
-		this.posZ = z;
+		this.posZ = z;*/
 		pile.openInventory();
 		layoutContainer(playerinv, pile, 0, 0);
 		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90, false, true);

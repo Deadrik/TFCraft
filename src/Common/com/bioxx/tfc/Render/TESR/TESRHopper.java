@@ -18,7 +18,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class TESRHopper extends TESRBase
 {
-	ModelPress press = new ModelPress();
+	//private ModelPress press = new ModelPress();
 	public TESRHopper()
 	{
 		super();

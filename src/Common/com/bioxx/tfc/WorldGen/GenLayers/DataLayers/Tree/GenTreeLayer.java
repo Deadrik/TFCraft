@@ -46,7 +46,7 @@ public abstract class GenTreeLayer extends GenLayerTFC
 		return voronoiLayer;
 	}
 
-	static boolean shouldDraw = false;
+	private static boolean shouldDraw;
 	public static void drawImage(int size, GenLayerTFC genlayer, String name)
 	{
 		if(!shouldDraw)

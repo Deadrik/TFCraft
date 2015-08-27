@@ -10,12 +10,11 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
@@ -29,17 +28,14 @@ import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.IClothing;
 import com.bioxx.tfc.api.Interfaces.ISize;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 {
 	private static final String[] leatherNames = new String[] {"leather_helmet_overlay", "leather_chestplate_overlay", "leather_leggings_overlay", "leather_boots_overlay"};
 	public Armor ArmorType;
 	public IIcon overlayIcon;
-	private int thermal = 0;
-	//private int type = 0;
-	private int trueType = 0;
+	private int thermal;
+	//private int type;
+	private int trueType;
 
 	public ItemTFCArmor(Armor armor, int renderIndex, int armorSlot, int thermal, int type)
 	{

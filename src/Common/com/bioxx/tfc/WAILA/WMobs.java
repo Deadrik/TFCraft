@@ -87,7 +87,7 @@ public class WMobs implements IWailaEntityProvider
 		if (animal instanceof EntityCowTFC && animal.getGender() == GenderEnum.FEMALE && animal.isAdult())
 		{
 			EntityCowTFC cow = (EntityCowTFC) entity;
-			if (cow.canMilk)
+			if (cow.isMilkable())
 				currenttip.add(TFC_Core.translate("fluid.milk") + EnumChatFormatting.GREEN.toString() + " \u2714");
 			else
 				currenttip.add(TFC_Core.translate("fluid.milk") + EnumChatFormatting.RED.toString() + " \u2718");

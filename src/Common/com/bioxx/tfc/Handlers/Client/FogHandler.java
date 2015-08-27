@@ -13,24 +13,32 @@ import com.bioxx.tfc.Core.WeatherManager;
 
 public class FogHandler 
 {
-	double lerpTime = 14f;
-	double lerpTimer = 0f;
-	float mult = 0.0f;
-	boolean rainLast = false;
-	boolean snowLast = false;
-	boolean shouldLerp = false;
-	float fogEnd = 0;
-	float fogStart = 0;	
-	float fogDensity = 0.1f;
-	float fogEndBegin = 0;
-	float fogStartBegin = 0;	
-	float fogDensityBegin = 0.1f;
-	float fogEndFinish = 0;
-	float fogStartFinish = 0;	
-	float fogDensityFinish = 0.1f;
-	float localWorldFog = 0;
-	float snowStrength = 0;
-	int renderRange = 17;
+	private double lerpTime = 14f;
+	private double lerpTimer;
+	//private float mult;
+	private boolean rainLast;
+	private boolean snowLast;
+	private boolean shouldLerp;
+	private float fogEnd;
+	private float fogStart;
+	private float fogDensity;
+	private float fogEndBegin;
+	private float fogStartBegin;
+	private float fogDensityBegin;
+	private float fogEndFinish;
+	private float fogStartFinish;
+	private float fogDensityFinish;
+	private float localWorldFog;
+	private float snowStrength;
+	private int renderRange = 17;
+
+	public FogHandler()
+	{
+		// PMD Optimization - Initialize floats in constructors.
+		this.fogDensity = 0.1f;
+		this.fogDensityBegin = 0.1f;
+		this.fogDensityFinish = 0.1f;
+	}
 
 	@SubscribeEvent
 	public void RenderFogHandler(RenderFogEvent event)

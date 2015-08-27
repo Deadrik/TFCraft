@@ -21,8 +21,8 @@ import com.bioxx.tfc.api.TFCItems;
 public class GuiFoodPrep extends GuiContainerTFC
 {
 	private static final ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_foodprep.png");
-	TEFoodPrep foodPrepTE;
-	private int guiTab = 0;
+	private TEFoodPrep foodPrepTE;
+	private int guiTab;
 
 	public GuiFoodPrep(InventoryPlayer inventoryplayer, TEFoodPrep te, World world, int i, int j, int k, int tab)
 	{
@@ -97,13 +97,13 @@ public class GuiFoodPrep extends GuiContainerTFC
 
 	public class GuiFoodPrepTabButton extends GuiButton
 	{
-		GuiFoodPrep screen;
-		ItemStack item;
+		private GuiFoodPrep screen;
+		private ItemStack item;
 
-		int xPos = 0;
-		int yPos = 172;
-		int xSize = 31;
-		int ySize = 24;
+		private int xPos;
+		private int yPos = 172;
+		private int xSize = 31;
+		private int ySize = 24;
 
 		public GuiFoodPrepTabButton(int index, int xPos, int yPos, int width, int height, GuiFoodPrep gui, ItemStack is, String s)
 		{

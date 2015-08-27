@@ -12,7 +12,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TEWaterPlant extends NetworkTileEntity
 {
-	private Block blockType = null;
+	private Block blockType;
 
 	public TEWaterPlant()
 	{

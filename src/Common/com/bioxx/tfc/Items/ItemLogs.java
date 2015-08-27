@@ -112,7 +112,7 @@ public class ItemLogs extends ItemTerra
 		return icons[0];
 	}
 
-	IIcon[] icons = new IIcon[Global.WOOD_ALL.length];
+	private IIcon[] icons = new IIcon[Global.WOOD_ALL.length];
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{

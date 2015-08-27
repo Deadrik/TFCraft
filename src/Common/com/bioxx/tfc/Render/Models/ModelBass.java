@@ -14,24 +14,24 @@ import com.bioxx.tfc.Core.TFC_Time;
 public class ModelBass extends ModelBase
 {
   //fields
-    ModelRenderer Head;
-    ModelRenderer Mouth;
-    ModelRenderer Gils;
-    ModelRenderer Neck;
-    ModelRenderer Body;
-    ModelRenderer Back;
-    ModelRenderer Rear;
-    ModelRenderer Tail;
-    ModelRenderer TailEnd;
-    ModelRenderer TailFin;
-    ModelRenderer DorsalFin;
-    ModelRenderer AnalFin;
-    ModelRenderer PelvicFinBox;
-    ModelRenderer PectoralFinBox;
+	private ModelRenderer Head;
+	private ModelRenderer Mouth;
+	private ModelRenderer Gils;
+	private ModelRenderer Neck;
+	private ModelRenderer Body;
+	private ModelRenderer Back;
+	private ModelRenderer Rear;
+	private ModelRenderer Tail;
+	private ModelRenderer TailEnd;
+	private ModelRenderer TailFin;
+	private ModelRenderer DorsalFin;
+	private ModelRenderer AnalFin;
+	private ModelRenderer PelvicFinBox;
+	private ModelRenderer PectoralFinBox;
     
-    long n;
-    float rotateMouth;
-    float rotateSwim;
+	private long n;
+	private float rotateMouth;
+	private float rotateSwim;
   
   public ModelBass()
   {

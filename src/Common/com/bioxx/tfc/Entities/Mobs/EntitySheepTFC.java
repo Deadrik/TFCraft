@@ -46,36 +46,37 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	private int sheepTimer;
 
 	/** The eat grass AI task for this mob. */
-	public AIEatGrass aiEatGrass = new AIEatGrass(this);
+	private final AIEatGrass aiEatGrass = new AIEatGrass(this);
 	private static final float GESTATION_PERIOD = 5.0f;
+	//private static final float avgAdultWeight = 50; //The average weight of adult males in kg
+	/*
+	 * 1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
+	 * the square root of the ratio of female mass : male mass
+	 */
+	private static final float dimorphism = 0.1633f;
+	private static final int degreeOfDiversion = 2;
 
-	int degreeOfDiversion = 2;
+	private long animalID;
+	private int sex;
+	private int hunger;
+	private boolean pregnant;
+	private int pregnancyRequiredTime;
+	private long timeOfConception;
+	private float mateSizeMod;
+	private float mateStrengthMod;
+	private float mateAggroMod;
+	private float mateObedMod;
+	private float size_mod; //How large the animal is
+	private float strength_mod; //how strong the animal is
+	private float aggression_mod = 1;//How aggressive / obstinate the animal is
+	private float obedience_mod = 1; //How well the animal responds to commands.
+	private boolean inLove;
 
-	protected long animalID;
-	protected int sex = 0;
-	protected int hunger;
-	protected boolean pregnant;
-	protected int pregnancyRequiredTime;
-	protected long timeOfConception;
-	protected float mateSizeMod = 0;
-	protected float mateStrengthMod = 0;
-	protected float mateAggroMod = 0;
-	protected float mateObedMod = 0;
-	public float size_mod;			//How large the animal is
-	public float strength_mod;		//how strong the animal is
-	public float aggression_mod = 1;//How aggressive / obstinate the animal is
-	public float obedience_mod = 1;	//How well the animal responds to commands.
-	public boolean inLove;
+	private EntityPlayer shearer;
 
-	protected EntityPlayer shearer = null;
-
-	private int familiarity = 0;
-	private long lastFamiliarityUpdate = 0;
-	private boolean familiarizedToday = false;
-
-	protected float avgAdultWeight = 50;	//The average weight of adult males in kg
-	protected float dimorphism = 0.1633f;	//1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
-	//the square root of the ratio of female mass : male mass
+	private int familiarity;
+	private long lastFamiliarityUpdate;
+	private boolean familiarizedToday;
 
 	public EntitySheepTFC(World par1World)
 	{

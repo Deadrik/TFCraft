@@ -17,7 +17,7 @@ import com.bioxx.tfc.api.Util.Helper;
 public class EntityPheasantTFC extends EntityChickenTFC
 {
 	//private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
-	private boolean wasRoped = false;
+	private boolean wasRoped;
 
 	public EntityPheasantTFC(World par1World)
 	{
@@ -100,11 +100,11 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		float ageMod = TFC_Core.getPercentGrown(this);
-		this.dropItem(Items.feather, (int)(ageMod * this.size_mod * (5 + this.rand.nextInt(10))));
+		this.dropItem(Items.feather, (int) (ageMod * this.getSize() * (5 + this.rand.nextInt(10))));
 
 		if(isAdult())
 		{
-			float foodWeight = ageMod * (this.size_mod * 40);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+			float foodWeight = ageMod * (this.getSize() * 40);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
 			TFC_Core.animalDropMeat(this, TFCItems.chickenRaw, foodWeight);
 			this.dropItem(Items.bone, rand.nextInt(2) + 1);
 		}
@@ -166,7 +166,9 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
 		boolean flag = false;
 		switch(interaction){
-		case NAME: flag = familiarity > 40;break; // 5 Below adult cap since babies are impossible
+		case NAME:
+			flag = this.getFamiliarity() > 40;
+			break; // 5 Below adult cap since babies are impossible
 		default: break;
 		}
 		if(!flag && !player.worldObj.isRemote){

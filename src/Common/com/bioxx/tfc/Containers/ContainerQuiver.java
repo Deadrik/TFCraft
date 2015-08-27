@@ -15,22 +15,22 @@ import com.bioxx.tfc.Containers.Slots.SlotQuiver;
 
 public class ContainerQuiver extends ContainerTFC
 {
-	private World world;
+	/*private World world;
 	private int posX;
 	private int posY;
-	private int posZ;
+	private int posZ;*/
 	public InventoryCrafting containerInv = new InventoryCrafting(this, 4, 2);
-	private ItemStack bagStack = null;
+	//private ItemStack bagStack;
 
 	public ContainerQuiver(InventoryPlayer playerinv, World world, int x, int y, int z)
 	{
 		this.player = playerinv.player;
-		this.world = world;
+		/*this.world = world;
 		this.posX = x;
 		this.posY = y;
-		this.posZ = z;
+		this.posZ = z;*/
 		bagsSlotNum = player.inventory.currentItem;
-		bagStack = player.inventory.getCurrentItem();
+		//bagStack = player.inventory.getCurrentItem();
 
 		layoutContainer(playerinv, 0, 0);
 

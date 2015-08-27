@@ -4,5 +4,5 @@ import com.bioxx.tfc.api.Enums.EnumDamageType;
 
 public interface ICausesDamage 
 {
-	public EnumDamageType getDamageType();
+	EnumDamageType getDamageType();
 }

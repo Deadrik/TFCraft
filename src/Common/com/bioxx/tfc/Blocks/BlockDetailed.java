@@ -38,9 +38,9 @@ import com.bioxx.tfc.api.TFCOptions;
 
 public class BlockDetailed extends BlockPartial
 {
-	public static int lockX = 0;
-	public static int lockY = 0;
-	public static int lockZ = 0;
+	public static int lockX;
+	public static int lockY;
+	public static int lockZ;
 
 	public BlockDetailed()
 	{

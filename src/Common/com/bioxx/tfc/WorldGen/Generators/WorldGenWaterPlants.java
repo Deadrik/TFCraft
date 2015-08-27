@@ -13,7 +13,7 @@ import com.bioxx.tfc.TileEntities.TEWaterPlant;
 public class WorldGenWaterPlants extends WorldGenerator
 {
 	/** The ID of the plant block used in this plant generator. */
-	private Block plantBlock;
+	private final Block plantBlock;
 
 	public WorldGenWaterPlants(Block par1)
 	{

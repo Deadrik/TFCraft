@@ -36,7 +36,7 @@ public class TESluice extends TileEntity implements IInventory
 	public boolean waterInput;
 	public boolean waterOutput;
 	public byte soilType;
-	private boolean initialized = false;
+	private boolean initialized;
 	private Random random = new Random();
 	private TreeSet<Integer> coreSampleTypes = new TreeSet<Integer>();
 	private ArrayList<ItemStack> coreSampleStacks = new ArrayList<ItemStack>();

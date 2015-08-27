@@ -1,13 +1,14 @@
 package com.bioxx.tfc.api.Crafting;
 
 import net.minecraft.item.ItemStack;
+
 import net.minecraftforge.oredict.OreDictionary;
 
 public class LoomRecipe
 {
-	ItemStack inItemStack;
-	ItemStack outItemStack;
-	int inSize;
+	public ItemStack inItemStack;
+	public ItemStack outItemStack;
+	public int inSize;
 
 	public LoomRecipe(ItemStack inputItem, ItemStack outIS)
 	{

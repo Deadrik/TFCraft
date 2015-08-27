@@ -35,11 +35,11 @@ public class GuiHealth extends GuiContainerTFC
 		if (TFCOptions.enableDebugMode)
 		{
 			FoodStatsTFC food = TFC_Core.getPlayerFoodStats(player);
-			fontRendererObj.drawString("" + food.nutrFruit, 85, 13, 0, false);
-			fontRendererObj.drawString("" + food.nutrVeg, 85, 23, 0, false);
-			fontRendererObj.drawString("" + food.nutrGrain, 85, 33, 0, false);
-			fontRendererObj.drawString("" + food.nutrProtein, 85, 43, 0, false);
-			fontRendererObj.drawString("" + food.nutrDairy, 85, 53, 0, false);
+			fontRendererObj.drawString(Float.toString(food.nutrFruit), 85, 13, 0, false);
+			fontRendererObj.drawString(Float.toString(food.nutrVeg), 85, 23, 0, false);
+			fontRendererObj.drawString(Float.toString(food.nutrGrain), 85, 33, 0, false);
+			fontRendererObj.drawString(Float.toString(food.nutrProtein), 85, 43, 0, false);
+			fontRendererObj.drawString(Float.toString(food.nutrDairy), 85, 53, 0, false);
 		}
 	}
 

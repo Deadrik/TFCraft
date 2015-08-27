@@ -17,9 +17,9 @@ import com.bioxx.tfc.api.Interfaces.ISize;
 
 public class SlotChest extends Slot
 {
-	EnumSize size = EnumSize.LARGE;
+	private EnumSize size = EnumSize.LARGE;
 
-	List<Item> exceptions;
+	private List<Item> exceptions;
 
 	public SlotChest(IInventory iinventory, int i, int j, int k)
 	{
@@ -29,14 +29,13 @@ public class SlotChest extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{    	
-		boolean except = exceptions.contains(itemstack.getItem());
-
 		if((itemstack.getItem() instanceof ItemTool || itemstack.getItem() instanceof ItemTerraTool || itemstack.getItem() instanceof ItemWeapon ||
 				itemstack.getItem() instanceof ItemHoe) && itemstack.getItem() instanceof ISize && 
 				((ISize)itemstack.getItem()).getSize(itemstack).stackSize < EnumSize.SMALL.stackSize ) {
 			return false;
 		}
 
+		boolean except = exceptions.contains(itemstack.getItem());
 		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize && !except)
 		{
 			return true;

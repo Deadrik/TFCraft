@@ -8,8 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class ModelQuiver extends ModelBase {
 
-	ModelRenderer quiver;
-	ModelRenderer[] arrows = new ModelRenderer[16];
+	private ModelRenderer quiver;
+	private ModelRenderer[] arrows = new ModelRenderer[16];
 	
 	public ModelQuiver(){
 		super();

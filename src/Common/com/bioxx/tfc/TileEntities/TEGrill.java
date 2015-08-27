@@ -27,7 +27,7 @@ import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 public class TEGrill extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[6];
-	public byte data = 0;
+	public byte data;
 
 	@Override
 	public void updateEntity()

@@ -33,8 +33,8 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class BlockForge extends BlockTerraContainer
 {
-	IIcon textureOn;
-	IIcon textureOff;
+	private IIcon textureOn;
+	private IIcon textureOff;
 
 	public BlockForge()
 	{

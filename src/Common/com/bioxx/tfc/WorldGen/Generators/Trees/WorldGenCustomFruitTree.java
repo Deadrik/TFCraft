@@ -12,8 +12,8 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class WorldGenCustomFruitTree extends WorldGenerator
 {
-	private Block leavesBlock;
-	private int metaId;
+	private final Block leavesBlock;
+	private final int metaId;
 
 	public WorldGenCustomFruitTree(boolean flag, Block block, int meta)
 	{

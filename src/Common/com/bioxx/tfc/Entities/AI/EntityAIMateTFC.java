@@ -13,10 +13,10 @@ import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 public class EntityAIMateTFC extends EntityAIBase
 {
 	private IAnimal theAnimal;
-	World theWorld;
+	private World theWorld;
 	private IAnimal targetMate;
-	int matingCounter;
-	float field_48262_c;
+	private int matingCounter;
+	private float field_48262_c;
 
 	public EntityAIMateTFC (IAnimal par1EntityAnimal, World world, float par2)
 	{

@@ -31,15 +31,15 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class TEBarrel extends NetworkTileEntity implements IInventory
 {
-	public FluidStack fluid = null;
-	public byte rotation = 0;
+	public FluidStack fluid;
+	public byte rotation;
 	public int barrelType;
-	public int mode = 0;
+	public int mode;
 	public ItemStack[] storage;
-	private boolean sealed = false;
-	public int sealtime = 0;
-	public int unsealtime = 0;
-	private int processTimer = 0;
+	private boolean sealed;
+	public int sealtime;
+	public int unsealtime;
+	private int processTimer;
 
 	public static final int MODE_IN = 0;
 	public static final int MODE_OUT = 1;

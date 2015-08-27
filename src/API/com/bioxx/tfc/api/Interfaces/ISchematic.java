@@ -5,84 +5,84 @@ import net.minecraft.nbt.NBTTagList;
 public interface ISchematic 
 {
 	
-	public boolean load();
+	boolean load();
 	/**
 	 * @return Schematic "Height"
 	 */
-	public short getSizeY();
+	short getSizeY();
 	
-	public void setSizeY(short y);
+	void setSizeY(short y);
 	
 	/**
 	 * @return Schematic "Width"
 	 */
-	public short getSizeX();
+	short getSizeX();
 	
-	public void setSizeX(short x);
+	void setSizeX(short x);
 	
 	/**
 	 * @return Schematic "Length"
 	 */
-	public short getSizeZ();
+	short getSizeZ();
 	
-	public void setSizeZ(short z);
+	void setSizeZ(short z);
 	
 	/**
 	 * In normal schematic files, this is a byte array. TFC uses an int array to be able to 
 	 * support 4096 ids.
 	 * @return Schematic "Blocks"
 	 */
-	public int[] getBlockArray();
+	int[] getBlockArray();
 	
-	public void setBlockArray(int[] array);
+	void setBlockArray(int[] array);
 	
 	/**
 	 * @return Schematic "Data"
 	 */
-	public byte[] getDataArray();
+	byte[] getDataArray();
 	
-	public void setDataArray(byte[] array);
+	void setDataArray(byte[] array);
 	
 	/**
 	 * @return Schematic "TileEntities"
 	 */
-	public NBTTagList getTileEntities();
+	NBTTagList getTileEntities();
 	
-	public void setTileEntities(NBTTagList te);
+	void setTileEntities(NBTTagList te);
 	
 	/**
 	 * @return Schematic "Entities"
 	 */
-	public NBTTagList getEntities();
+	NBTTagList getEntities();
 	
-	public void setEntities(NBTTagList e);
+	void setEntities(NBTTagList e);
 	
 	/**
 	 * Gets the file path.
 	 */
-	public String getPath();
+	String getPath();
 	
 	/**
 	 * Sets the file path for future reference.
 	 * @param path The path to the schematic file
 	 */
-	public void setPath(String path);
+	void setPath(String path);
 	
 	/**
 	 * 
 	 * @return Center of the schematic X Coordinate
 	 */
-	public int getCenterX();
+	int getCenterX();
 	
 	/**
 	 * 
 	 * @return Center of the schematic Z Coordinate
 	 */
-	public int getCenterZ();
+	int getCenterZ();
 	
 	/**
 	 * Used for lookups in the schematic list.
 	 * @return File Index number
 	 */
-	public int getIndex();
+	int getIndex();
 }

@@ -17,8 +17,8 @@ import com.bioxx.tfc.api.TFCOptions;
 
 public class GuiCalendar extends GuiScreen
 {
-	World world;
-	EntityPlayer player;
+	private World world;
+	private EntityPlayer player;
 
 	private static final ResourceLocation texture = new ResourceLocation("terrafirmacraft:textures/gui/gui_calendar.png");
 

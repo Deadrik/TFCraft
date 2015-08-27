@@ -80,13 +80,12 @@ public class TEBloomery extends NetworkTileEntity
 	{
 		if(!worldObj.isRemote)
 		{
-			//get the direction that the bloomery is facing so that we know where the stack should be
-			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-			int[] direction = BlockEarlyBloomery.bloomeryToStackMap[getCharcoalDir(meta)];
-
 			if (this.charcoalCount < this.oreCount || oreCount == 0)
 				return false;
 
+			//get the direction that the bloomery is facing so that we know where the stack should be
+			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+			int[] direction = BlockEarlyBloomery.bloomeryToStackMap[getCharcoalDir(meta)];
 			Block bid = worldObj.getBlock(xCoord + direction[0], yCoord, zCoord + direction[1]);
 			if(bid == TFCBlocks.Charcoal && 
 					worldObj.getBlockMetadata(xCoord + direction[0], yCoord, zCoord + direction[1]) >= 7 && !bloomeryLit)

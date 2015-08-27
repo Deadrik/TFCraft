@@ -9,8 +9,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenMinableTFC extends WorldGenerator
 {
-	private Block minableBlock;
-	private int minableBlockMeta;
+	private final Block minableBlock;
+	private final int minableBlockMeta;
 	private int numberOfBlocks;
 	private Block LayerBlock;
 	private int LayerMeta;

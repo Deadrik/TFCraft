@@ -17,10 +17,10 @@ import com.bioxx.tfc.api.Interfaces.ISmeltable;
 public class ItemUnfinishedArmor extends ItemTerra implements ISmeltable
 {
 	public int metalID;
-	String metal;
-	short metalAmount;
-	short metalAmount2;
-	boolean smeltable = true;
+	private String metal;
+	private short metalAmount;
+	private short metalAmount2;
+	private boolean smeltable = true;
 	public ItemUnfinishedArmor() 
 	{
 		super();

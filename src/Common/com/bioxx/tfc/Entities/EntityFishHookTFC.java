@@ -57,17 +57,17 @@ public class EntityFishHookTFC extends EntityFishHook
 
 	private double maxDistance = -1;
 
-	private boolean canCatchFish = false;
+	private boolean canCatchFish;
 
 	public double pullX,pullY,pullZ;
 
 	private int lineTension;
-	private int maxLineTension = 800;
+	private static final int maxLineTension = 800;
 
-	private int reelCounter = 0;
-	private int lastCheckTick = 0;
+	private int reelCounter;
+	private int lastCheckTick;
 	
-	private boolean lineTensionSnap = false;
+	private boolean lineTensionSnap;
 
 	public EntityFishHookTFC(World par1World)
 	{
@@ -598,7 +598,6 @@ public class EntityFishHookTFC extends EntityFishHook
 			EntityPlayer player = this.field_146042_b;
 			int lastChunkX = ((int) Math.floor(player.posX)) >> 4;
 			int lastChunkZ = ((int) Math.floor(player.posZ)) >> 4;
-			int maxChunksVisitable = 20;
 
 			int chunksVisited = 0;
 			int totalFish = TFC_Core.getCDM(worldObj).getFishPop(lastChunkX, lastChunkZ);
@@ -608,6 +607,8 @@ public class EntityFishHookTFC extends EntityFishHook
 			else{
 				return 0;
 			}
+
+			int maxChunksVisitable = 20;
 			for(int radius = 1; radius < 5 && chunksVisited < maxChunksVisitable; radius++){
 				for(int i = -radius; i <= radius; i++)
 				{

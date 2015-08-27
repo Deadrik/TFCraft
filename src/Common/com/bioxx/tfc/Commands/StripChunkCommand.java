@@ -25,9 +25,7 @@ public class StripChunkCommand extends CommandBase
 	@Override
 	public void processCommand(ICommandSender sender, String[] params)
 	{
-		MinecraftServer server = MinecraftServer.getServer();
 		EntityPlayerMP player = getCommandSenderAsPlayer(sender);
-		WorldServer world = server.worldServerForDimension(player.getEntityWorld().provider.dimensionId);
 		
 		if(!TFCOptions.enableDebugMode)
 		{
@@ -35,6 +33,8 @@ public class StripChunkCommand extends CommandBase
 			return;
 		}
 
+		MinecraftServer server = MinecraftServer.getServer();
+		WorldServer world = server.worldServerForDimension(player.getEntityWorld().provider.dimensionId);
 		if(params.length == 0)
 		{
 			TFC_Core.sendInfoMessage(player, new ChatComponentText("Stripping Chunk"));

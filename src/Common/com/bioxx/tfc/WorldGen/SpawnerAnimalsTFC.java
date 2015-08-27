@@ -72,11 +72,7 @@ public final class SpawnerAnimalsTFC
 						int l2 = world.getTopSolidOrLiquidBlock(j1, k1);
 						if (canCreatureTypeSpawnAtLocation(EnumCreatureType.creature, world, j1, l2, k1))
 						{
-							float f = j1 + 0.5F;
-							float f1 = l2;
-							float f2 = k1 + 0.5F;
 							EntityLiving entityliving;
-
 							try
 							{
 								entityliving = (EntityLiving)spawnlistentry.entityClass.getConstructor(new Class[] {World.class}).newInstance(new Object[] {world});
@@ -91,6 +87,10 @@ public final class SpawnerAnimalsTFC
 									return;
 								}
 							}
+
+							float f = j1 + 0.5F;
+							float f1 = l2;
+							float f2 = k1 + 0.5F;
 							entityliving.setLocationAndAngles(f, f1, f2, par6Random.nextFloat() * 360.0F, 0.0F);
 							world.spawnEntityInWorld(entityliving);
 							entitylivingdata = entityliving.onSpawnWithEgg(entitylivingdata);

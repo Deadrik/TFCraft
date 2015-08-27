@@ -13,8 +13,8 @@ import com.bioxx.tfc.api.Interfaces.ISize;
 
 public class SlotFoodOnly extends SlotSize
 {
-	List<EnumFoodGroup> excpetionsFG = new ArrayList<EnumFoodGroup>();
-	List<EnumFoodGroup> inclusionsFG = new ArrayList<EnumFoodGroup>();
+	private List<EnumFoodGroup> excpetionsFG = new ArrayList<EnumFoodGroup>();
+	private List<EnumFoodGroup> inclusionsFG = new ArrayList<EnumFoodGroup>();
 	public SlotFoodOnly(IInventory iinventory, int i, int j, int k)
 	{
 		super(iinventory, i, j, k);

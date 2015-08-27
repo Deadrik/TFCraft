@@ -24,9 +24,9 @@ import com.bioxx.tfc.Items.ItemBlueprint;
 
 public class GuiBlueprint extends GuiScreen
 {
-	World world;
-	EntityPlayer player;
-	ItemStack stack;
+	private World world;
+	private EntityPlayer player;
+	private ItemStack stack;
 
 	private GuiTextField nameTextField;
 	private static final int x_m_bt_ind = 0;

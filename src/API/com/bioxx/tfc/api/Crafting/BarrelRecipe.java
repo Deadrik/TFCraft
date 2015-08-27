@@ -10,13 +10,13 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class BarrelRecipe
 {
-	ItemStack recipeIS;
-	FluidStack recipeFluid;
-	ItemStack recipeOutIS;
-	FluidStack recipeOutFluid;
+	public ItemStack recipeIS;
+	public FluidStack recipeFluid;
+	public ItemStack recipeOutIS;
+	public FluidStack recipeOutFluid;
 	public int sealTime = 8;
 	public boolean removesLiquid = true;
-	boolean sealedRecipe = true;
+	public boolean sealedRecipe = true;
 	public int minTechLevel = 1;
 	public boolean allowAnyStack = true;
 

@@ -4,14 +4,14 @@ import net.minecraft.item.ItemStack;
 
 public interface IEquipable 
 {
-	public EquipType getEquipType(ItemStack is);
+	EquipType getEquipType(ItemStack is);
 
-	public static enum EquipType
+	static enum EquipType
 	{
 		BACK, NULL;
 	}
 
-	public void onEquippedRender();
+	void onEquippedRender();
 
-	public boolean getTooHeavyToCarry(ItemStack is);
+	boolean getTooHeavyToCarry(ItemStack is);
 }

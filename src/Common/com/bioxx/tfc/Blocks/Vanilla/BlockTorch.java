@@ -35,7 +35,7 @@ import static net.minecraftforge.common.util.ForgeDirection.*;
 
 public class BlockTorch extends BlockTerraContainer
 {
-	IIcon offIcon;
+	private IIcon offIcon;
 	public BlockTorch()
 	{
 		super(Material.circuits);

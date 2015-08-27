@@ -15,7 +15,7 @@ public class DataCache
 	/** Reference to the WorldChunkManager */
 	private final WorldCacheManager chunkManager;
 	/** The last time this BiomeCache was cleaned, in milliseconds.*/
-	private long lastCleanupTime = 0L;
+	private long lastCleanupTime;
 	/** The map of keys to BiomeCacheBlocks. Keys are based on the chunk x, z coordinates as (x | z << 32). */
 	private LongHashMap cacheMap = new LongHashMap();
 	/** The list of cached BiomeCacheBlocks */
@@ -86,7 +86,7 @@ public class DataCache
 	/**
 	 * Get the world chunk manager object for a biome list.
 	 */
-	static WorldCacheManager getChunkManager(DataCache cache)
+	public static WorldCacheManager getChunkManager(DataCache cache)
 	{
 		return cache.chunkManager;
 	}

@@ -15,11 +15,11 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class MapGenCavesTFC extends MapGenBaseTFC
 {
-	private byte[] metaArray;
+	//private byte[] metaArray;
 
 	public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, Block[] idsBig, byte[] metaBig)
 	{
-		metaArray = metaBig;
+		//metaArray = metaBig;
 		super.generate(par1IChunkProvider, par2World, par3, par4, idsBig);
 	}
 	/**
@@ -57,8 +57,6 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 		int var27 = var25.nextInt(par16 / 2) + par16 / 4;
 		for (boolean var28 = var25.nextInt(6) == 0; par15 < par16; ++par15)
 		{
-			double var29 = width + MathHelper.sin(par15 * (float)Math.PI / par16) * par12 * 1.0F;
-			double var31 = var29 * par17;
 			float var33 = MathHelper.cos(par14);
 			float var34 = MathHelper.sin(par14);
 			i += MathHelper.cos(par13) * var33;
@@ -84,6 +82,8 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 				return;
 			}
 
+			double var29 = width + MathHelper.sin(par15 * (float) Math.PI / par16) * par12 * 1.0F;
+			double var31 = var29 * par17;
 			if (var54 || var25.nextInt(4) != 0)
 			{
 				double var35 = i - worldX;
@@ -177,12 +177,12 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 												if (var50 < 10 && TFC_Climate.getStability(this.worldObj, (int)worldX, (int)worldZ) == 1)
 												{
 													idArray[index] = TFCBlocks.Lava;
-													metaArray[index] = 0;
+													//metaArray[index] = 0;
 												}
 												else
 												{
 													idArray[index] = Blocks.air;
-													metaArray[index] = 0;
+													//metaArray[index] = 0;
 													if (isGrass && TFC_Core.isDirt(idArray[index - 1]))
 													{
 														//int meta = metaArray[index - 1];

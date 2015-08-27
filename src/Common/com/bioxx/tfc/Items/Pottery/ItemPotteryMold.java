@@ -17,10 +17,10 @@ import com.bioxx.tfc.Core.TFC_Core;
 
 public class ItemPotteryMold extends ItemPotteryBase
 {
-	IIcon CopperIcon;
-	IIcon BronzeIcon;
-	IIcon BismuthBronzeIcon;
-	IIcon BlackBronzeIcon;
+	private IIcon CopperIcon;
+	private IIcon BronzeIcon;
+	private IIcon BismuthBronzeIcon;
+	private IIcon BlackBronzeIcon;
 
 	public ItemPotteryMold()
 	{

@@ -122,7 +122,7 @@ public class EntityAIAvoidEntityTFC extends EntityAIBase
 			this.theEntity.getNavigator().setSpeed(this.farSpeed);
 	}
 
-	static EntityCreature func_98217_a(EntityAIAvoidEntityTFC par0EntityAIAvoidEntity)
+	public static EntityCreature func_98217_a(EntityAIAvoidEntityTFC par0EntityAIAvoidEntity)
 	{
 		return par0EntityAIAvoidEntity.theEntity;
 	}

@@ -2,9 +2,9 @@ package com.bioxx.tfc.api.Util;
 
 public class StopWatch {
 
-	private long startTime = 0;
-	private long stopTime = 0;
-	private boolean running = false;
+	private long startTime;
+	private long stopTime;
+	private boolean running;
 
 
 	public void start() {

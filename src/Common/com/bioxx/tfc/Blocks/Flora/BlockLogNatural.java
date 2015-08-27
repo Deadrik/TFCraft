@@ -28,11 +28,11 @@ import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockLogNatural extends BlockTerra
 {
-	String[] woodNames;
-	int searchDist = 10;
-	static int damage = 0;
-	static int logs = 0;
-	boolean isStone = false;
+	protected String[] woodNames;
+	private int searchDist = 10;
+	private static int damage;
+	private static int logs;
+	private boolean isStone;
 	public IIcon[] sideIcons;
 	public IIcon[] innerIcons;
 	public IIcon[] rotatedSideIcons;

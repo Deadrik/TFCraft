@@ -39,7 +39,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class BlockOilLamp extends BlockTerraContainer
 {
-	IIcon[] icons;
+	private IIcon[] icons;
 	public BlockOilLamp()
 	{
 		super(Material.circuits);

@@ -12,18 +12,18 @@ import com.bioxx.tfc.TileEntities.TENestBox;
 
 public class ContainerNestBox extends ContainerTFC
 {
-	private World world;
+	/*private World world;
 	private int posX;
 	private int posY;
-	private int posZ;
+	private int posZ;*/
 
 	public ContainerNestBox(InventoryPlayer playerinv, TENestBox te, World world, int x, int y, int z)
 	{
 		this.player = playerinv.player;
-		this.world = world;
+		/*this.world = world;
 		this.posX = x;
 		this.posY = y;
-		this.posZ = z;
+		this.posZ = z;*/
 
 		this.addSlotToContainer(new SlotOutputOnly(te, 0, 71, 25));
 		this.addSlotToContainer(new SlotOutputOnly(te, 1, 89, 25));

@@ -6,17 +6,17 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.TFCBlocks;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-
 public class RenderBarrel implements ISimpleBlockRenderingHandler
 {
-	static float min = 0.1F;
-	static float max = 0.9F;
+	private static final float min = 0.1F;
+	private static final float max = 0.9F;
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)

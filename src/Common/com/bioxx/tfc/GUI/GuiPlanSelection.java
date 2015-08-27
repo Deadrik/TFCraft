@@ -23,23 +23,23 @@ import com.bioxx.tfc.api.Crafting.AnvilReq;
 
 public class GuiPlanSelection extends GuiContainerTFC
 {
-	TEAnvil anvilTE;
-	EntityPlayer player;
-	World world;
-	ArrayList<Object[]> plans;
-	int x, y, z;
+	private TEAnvil anvilTE;
+	/*private EntityPlayer player;
+	private World world;*/
+	private ArrayList<Object[]> plans;
+	//private int x, y, z;
 	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_plan.png");
 
 	public GuiPlanSelection(EntityPlayer p, TEAnvil te, World w, int x, int y, int z)
 	{
 		super(new ContainerPlanSelection(p, te, w, x, y, z), 176, 130);
 		anvilTE = te;
-		player = p;
-		world = w;
+		/*player = p;
+		world = w;*/
 		this.drawInventory = false;
-		this.x = x;
+		/*this.x = x;
 		this.y = y;
-		this.z = z;
+		this.z = z;*/
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public class GuiPlanSelection extends GuiContainerTFC
 
 	}
 
-	AnvilRecipe handleMatchingRecipe(AnvilRecipe ar)
+	public AnvilRecipe handleMatchingRecipe(AnvilRecipe ar)
 	{
 		if (ar != null)
 			if (anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT] != null && anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT].getItem() == TFCItems.Bloom && ar.getCraftingResult().getItem() == TFCItems.Bloom)

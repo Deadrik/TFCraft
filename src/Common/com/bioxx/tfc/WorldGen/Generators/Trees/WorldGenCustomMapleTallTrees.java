@@ -11,7 +11,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class WorldGenCustomMapleTallTrees extends WorldGenerator
 {
-	private int treeId;
+	private final int treeId;
 
 	public WorldGenCustomMapleTallTrees(boolean flag, int id)
 	{
@@ -22,11 +22,10 @@ public class WorldGenCustomMapleTallTrees extends WorldGenerator
 	public boolean generate(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
 		int l = random.nextInt(3) + 8;
-		boolean flag = true;
-
 		if (yCoord < 1 || yCoord + l + 1 > world.getHeight())
 			return false;
 
+		boolean flag = true;
 		for (int i1 = yCoord; i1 <= yCoord + 1 + l; i1++)
 		{
 			byte byte0 = 1;

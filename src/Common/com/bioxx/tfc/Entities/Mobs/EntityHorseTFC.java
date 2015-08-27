@@ -47,46 +47,48 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	private static final IEntitySelector horseBreedingSelector = new EntityHorseBredSelector();
 	private static final IAttribute horseJumpStrength = new RangedAttribute("horse.jumpStrengthTFC", 0.7D, 0.0D, 2.0D).setDescription("Jump StrengthTFC").setShouldWatch(true);
 
-	public int inLove;
+	//private int inLove;
 
 	private final AIEatGrass aiEatGrass = new AIEatGrass(this);
 	private static final float GESTATION_PERIOD = 11.17f;
-	protected long animalID;
-	protected int sex = 0;
-	protected int hunger = 0;
-	protected boolean pregnant;
-	protected int pregnancyRequiredTime;
-	protected long timeOfConception;
-	public float size_mod;			//How large the animal is
-	public float strength_mod;		//how strong the animal is
-	public float aggression_mod = 1;//How aggressive / obstinate the animal is
-	public float obedience_mod = 1;	//How well the animal responds to commands.
+	//private final static float avgAdultWeight = 550; //The average weight of adult males in kg
+	/*
+	 * 1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
+	 * the square root of the ratio of female mass : male mass
+	 */
+	private static final float dimorphism = 0.0813f;
+	private static final int degreeOfDiversion = 2;
 
-	protected float mateSizeMod = 0;
-	protected float mateStrengthMod = 0;
-	protected float mateAggroMod = 0;
-	protected float mateObedMod = 0;
-	protected int mateType = 0;
-	protected int mateVariant = 0;
-	protected double mateMaxHealth = this.calcMaxHealth();
-	protected double mateJumpStrength = this.calcJumpStrength();
-	protected double mateMoveSpeed = this.calcMoveSpeed();
-	public boolean isInLove;
-	public Vec3 attackedVec = null;
-	public Entity fearSource = null;
+	private long animalID;
+	private int sex;
+	private int hunger;
+	private boolean pregnant;
+	private int pregnancyRequiredTime;
+	private long timeOfConception;
+	private float size_mod; //How large the animal is
+	private float strength_mod; //how strong the animal is
+	private float aggression_mod = 1;//How aggressive / obstinate the animal is
+	private float obedience_mod = 1; //How well the animal responds to commands.
 
-	int degreeOfDiversion = 2;
+	private float mateSizeMod;
+	private float mateStrengthMod;
+	private float mateAggroMod;
+	private float mateObedMod;
+	private int mateType;
+	private int mateVariant;
+	private double mateMaxHealth = this.calcMaxHealth();
+	private double mateJumpStrength = this.calcJumpStrength();
+	private double mateMoveSpeed = this.calcMoveSpeed();
+	private boolean isInLove;
+	private Vec3 attackedVec;
+	private Entity fearSource;
 
-	private String field_110286_bQ;
-	private String[] field_110280_bR = new String[3];
+	//private String field_110286_bQ;
+	//private final String[] field_110280_bR = new String[3];
 
-	private int familiarity = 0;
-	private long lastFamiliarityUpdate = 0;
-	private boolean familiarizedToday = false;
-
-	protected float avgAdultWeight = 550;			//The average weight of adult males in kg
-	protected float dimorphism = 0.0813f;		//1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
-	//the square root of the ratio of female mass : male mass
+	private int familiarity;
+	private long lastFamiliarityUpdate;
+	private boolean familiarizedToday;
 
 	public EntityHorseTFC(World par1World)
 	{
@@ -459,8 +461,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		{
 			if (itemstack != null)
 			{
-				boolean flag = false;
-
 				if (!this.isTame())
 				{
 					if (itemstack.interactWithEntity(player, this))
@@ -470,6 +470,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 					this.makeHorseRearWithSound();
 				}
+
+				boolean flag = false;
 
 				if (this.func_110229_cs()/*Donkey or Mule*/&& !this.isChested() && itemstack.getItem() == Item.getItemFromBlock(TFCBlocks.Chest))
 				{

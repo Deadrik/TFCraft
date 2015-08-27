@@ -10,13 +10,13 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
 {
 	private GenLayer biomePatternGeneratorChain;
 	private GenLayer riverPatternGeneratorChain;
-	int[] layerBiomes;
-	int[] layerRivers;
-	int[] layerOut;
-	int xn = 0;
-	int xp = 0;
-	int zn = 0;
-	int zp = 0;
+	private int[] layerBiomes;
+	private int[] layerRivers;
+	private int[] layerOut;
+	private int xn;
+	private int xp;
+	private int zn;
+	private int zp;
 
 	public GenLayerRiverMixTFC(long par1, GenLayer par3GenLayer, GenLayer par4GenLayer)
 	{

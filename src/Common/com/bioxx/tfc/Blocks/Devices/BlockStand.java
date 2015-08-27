@@ -32,7 +32,7 @@ import com.bioxx.tfc.api.Interfaces.IMultipleBlock;
 
 public class BlockStand extends BlockTerraContainer implements IMultipleBlock, IEquipable
 {
-	String[] woodNames;
+	private String[] woodNames;
 	public BlockStand()
 	{
 		super(Material.wood);

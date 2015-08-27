@@ -116,8 +116,6 @@ public class WorldGenSaplings
 				canSpawnEVT0 = evt >= tree2EVTMin && evt <= tree2EVTMax;
 			}
 
-			int randomNumber = random.nextInt(100);
-
 			//if at least one of the trees is within the temperature zone otherewise no trees
 			if(canSpawnTemp0 || canSpawnTemp1 || canSpawnTemp2)
 			{
@@ -134,6 +132,7 @@ public class WorldGenSaplings
 				return;
 			}
 
+			int randomNumber = random.nextInt(100);
 			if(randomNumber < 40)
 			{
 				if(canSpawnTemp0 && canSpawnRain0)

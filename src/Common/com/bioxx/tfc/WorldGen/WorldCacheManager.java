@@ -19,7 +19,7 @@ import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Tree.GenTreeLayer;
 
 public class WorldCacheManager 
 {	
-	World localWorld;
+	//private World localWorld;
 	//Rocks
 	protected GenLayerTFC[] rocksIndexLayer;
 	protected DataCache[] rockCache;
@@ -50,7 +50,7 @@ public class WorldCacheManager
 
 	protected LinkedHashMap<String, Float> worldTempCache;
 
-	public long seed = 0;
+	public long seed;
 
 	public static DataLayer[] RockLayer1 = new DataLayer[]{
 		DataLayer.Shale, DataLayer.Claystone, DataLayer.RockSalt, DataLayer.Limestone,
@@ -92,7 +92,7 @@ public class WorldCacheManager
 	public WorldCacheManager(World world)
 	{
 		this(world.getSeed(), world.getWorldInfo().getTerrainType());
-		localWorld = world;
+		//localWorld = world;
 	}
 
 	private WorldCacheManager(long Seed, WorldType worldtype)

@@ -23,7 +23,7 @@ public class ContainerVessel extends ContainerTFC
 {
 	private World world;
 	public InventoryCrafting containerInv = new InventoryCrafting(this, 2, 2);
-	ArrayList<Item> exceptions;
+	private ArrayList<Item> exceptions;
 	
 	public ContainerVessel(InventoryPlayer playerinv, World world, int x, int y, int z)
 	{

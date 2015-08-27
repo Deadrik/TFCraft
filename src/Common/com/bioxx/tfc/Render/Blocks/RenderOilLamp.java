@@ -12,8 +12,8 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderOilLamp implements ISimpleBlockRenderingHandler
 {
-	static float min = 0.1F;
-	static float max = 0.9F;
+	//private static float min = 0.1F;
+	//private static float max = 0.9F;
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)

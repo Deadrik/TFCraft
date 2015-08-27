@@ -16,8 +16,8 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 {
 	private float[] field_35627_a = new float[1024];
 	//private byte[] metaArray;
-	private int height = 0;
-	private int variability = 0;
+	private final int height;
+	private final int variability;
 
 	public MapGenRavineTFC(int h, int v)
 	{

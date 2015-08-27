@@ -12,7 +12,7 @@ import com.bioxx.tfc.api.TFCItems;
 
 public class GuiAnvilPlanButton extends GuiButton 
 {
-	GuiAnvil screen;
+	private GuiAnvil screen;
 	protected static final RenderItem itemRenderer = new RenderItem();
 
 	public GuiAnvilPlanButton(int index, int xPos, int yPos, int width, int height, GuiAnvil gui, String s)

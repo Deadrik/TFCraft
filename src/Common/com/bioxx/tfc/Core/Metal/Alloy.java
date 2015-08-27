@@ -18,7 +18,7 @@ public class Alloy
 	public List<AlloyMetal> AlloyIngred;
 	public Metal outputType;
 	public float outputAmount;
-	EnumTier furnaceTier;
+	protected EnumTier furnaceTier;
 
 	public Alloy(Metal type, EnumTier tier)
 	{

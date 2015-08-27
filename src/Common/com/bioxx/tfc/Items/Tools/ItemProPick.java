@@ -31,8 +31,8 @@ import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemProPick extends ItemTerra
 {
-	HashMap<String, ProspectResult> results = new HashMap<String, ProspectResult>();
-	Random random = null;
+	private HashMap<String, ProspectResult> results = new HashMap<String, ProspectResult>();
+	private Random random;
 
 	public ItemProPick()
 	{

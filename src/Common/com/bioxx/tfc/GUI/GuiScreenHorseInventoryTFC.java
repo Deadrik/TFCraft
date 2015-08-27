@@ -5,18 +5,18 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiScreenHorseInventoryTFC extends GuiContainerTFC
 {
 	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_horse.png");
-	private IInventory invHorse;
+	//private IInventory invHorse;
 	private EntityHorseTFC horse;
 	private float field_110416_x;
 	private float field_110415_y;
@@ -24,7 +24,7 @@ public class GuiScreenHorseInventoryTFC extends GuiContainerTFC
 	public GuiScreenHorseInventoryTFC(InventoryPlayer playerInv, IInventory horseInv, EntityHorseTFC entityHorse)
 	{
 		super(new ContainerHorseInventoryTFC(playerInv, horseInv, entityHorse), 176, 85);
-		this.invHorse = horseInv;
+		//this.invHorse = horseInv;
 		this.horse = entityHorse;
 		this.allowUserInput = false; // Not sure why this is here
 	}

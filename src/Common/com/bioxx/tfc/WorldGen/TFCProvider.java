@@ -19,8 +19,8 @@ import com.bioxx.tfc.api.Constant.Global;
 
 public class TFCProvider extends WorldProvider
 {
-	private int moonPhase = 0;
-	private int moonPhaseLastCalculated = 0;
+	private int moonPhase;
+	private int moonPhaseLastCalculated;
 	
 	@Override
 	protected void registerWorldChunkManager()

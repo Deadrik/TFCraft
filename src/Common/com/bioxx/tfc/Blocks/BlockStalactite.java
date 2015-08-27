@@ -23,7 +23,7 @@ import com.bioxx.tfc.Core.TFC_Textures;
 
 public class BlockStalactite extends BlockTerra
 {
-	Random R;
+	private Random R;
 
 	public BlockStalactite()
 	{

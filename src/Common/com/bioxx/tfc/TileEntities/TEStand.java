@@ -22,9 +22,9 @@ public class TEStand extends TileEntity implements IInventory
 
 	public ItemStack[] items;
 	public EntityStand entity;
-	public float yaw = 0;
-	public boolean isTop = false;
-	private boolean hasEntity = false;
+	public float yaw;
+	public boolean isTop;
+	private boolean hasEntity;
 	public int highlightedSlot;
 
 	public TEStand()

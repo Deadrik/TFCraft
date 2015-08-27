@@ -23,10 +23,10 @@ import com.bioxx.tfc.Handlers.Network.ItemRenamePacket;
 public class GuiCustomNametag extends GuiScreen
 {
 	private GuiTextField theGuiTextField;
-	World world;
-	int x;
-	int z;
-	EntityPlayer player;
+	private World world;
+	/*private int x;
+	private int z;*/
+	private EntityPlayer player;
 
 	/** The X size of the inventory window in pixels. */
 	protected int xSize = 220;
@@ -48,8 +48,8 @@ public class GuiCustomNametag extends GuiScreen
 		this.world = world;
 		this.guiLeft = (this.width - this.xSize) / 2;
 		this.guiTop = (this.height - this.ySize) / 2;
-		x = i;
-		z = k;
+		/*x = i;
+		z = k;*/
 		player = p;
 	}
 

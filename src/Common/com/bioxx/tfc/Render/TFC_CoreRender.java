@@ -35,7 +35,6 @@ public class TFC_CoreRender
 		TEPartial te = (TEPartial) renderblocks.blockAccess.getTileEntity(x, y, z);
 		//int md = renderblocks.blockAccess.getBlockMetadata(x, y, z);
 
-		boolean breaking = renderblocks.overrideBlockTexture != null;
 
 		if(te.TypeID <= 0)
 			return false;
@@ -60,6 +59,7 @@ public class TFC_CoreRender
 		renderblocks.setRenderBounds(0.0F+ (div * extraX), 0.0F+ (div * extraY), 0.0F+ (div * extraZ), 1.0F-(div * extraX2), 1-(div * extraY2), 1.0F-(div * extraZ2));
 
 		//This is the old ore code that I experimented with
+		boolean breaking = renderblocks.overrideBlockTexture != null;
 		IIcon over = renderblocks.overrideBlockTexture;
 		if(!breaking && (b == TFCBlocks.Ore || b == TFCBlocks.Ore2 || b == TFCBlocks.Ore3))
 		{
@@ -94,13 +94,13 @@ public class TFC_CoreRender
 		renderer.setRenderAllFaces(false);
 		renderer.enableRender();
 
-		int meta = renderblocks.blockAccess.getBlockMetadata(x, y, z);
+		/*int meta = renderblocks.blockAccess.getBlockMetadata(x, y, z);
 		long rvmeta = meta & 7;
-		/*float var7 = 0.0F;
+		float var7 = 0.0F;
 		float var8 = 0.5F;
 		float var9 = 0.5F;
 		float var10 = 1.0F;
-
+		
 		if ((meta & 8) != 0)
 		{
 			var7 = 0.5F;
@@ -113,7 +113,7 @@ public class TFC_CoreRender
 		if(te.TypeID <= 0)
 			return false;
 
-		rvmeta = te.extraData;
+		long rvmeta = te.extraData;
 		int type = te.TypeID;
 		int temeta = te.MetaID;
 		IIcon myTexture = renderblocks.overrideBlockTexture == null ? Block.getBlockById(type).getIcon(0, temeta) : renderblocks.overrideBlockTexture;

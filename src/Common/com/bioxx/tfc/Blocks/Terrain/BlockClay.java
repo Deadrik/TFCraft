@@ -22,7 +22,7 @@ import com.bioxx.tfc.api.Constant.Global;
 public class BlockClay extends BlockTerra
 {
 	protected IIcon[] DirtTexture;
-	protected int textureOffset = 0;
+	protected int textureOffset;
 
 	public BlockClay(int texOff)
 	{

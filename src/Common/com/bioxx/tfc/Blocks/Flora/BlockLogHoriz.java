@@ -18,7 +18,7 @@ import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockLogHoriz extends BlockLogVert
 {
-	int offset = 0;
+	protected int offset;
 
 	public BlockLogHoriz(int off)
 	{

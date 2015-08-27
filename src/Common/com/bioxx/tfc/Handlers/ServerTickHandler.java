@@ -13,8 +13,8 @@ import com.bioxx.tfc.api.TFCOptions;
 
 public class ServerTickHandler
 {
-	long wSeed = Long.MIN_VALUE;
-	public int ticks = 0;
+	private long wSeed = Long.MIN_VALUE;
+	public int ticks;
 	@SubscribeEvent
 	public void onServerWorldTick(WorldTickEvent event)
 	{

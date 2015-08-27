@@ -12,17 +12,17 @@ import com.bioxx.tfc.api.Constant.Global;
 
 public class AnvilRecipe
 {
-	ItemStack result;
-	String plan = "";
-	ItemStack input1;
-	ItemStack input2;
-	boolean flux;
-	int craftingValue;
-	int anvilreq;
-	boolean inheritsDamage;
+	public ItemStack result;
+	public String plan = "";
+	public ItemStack input1;
+	public ItemStack input2;
+	public boolean flux;
+	public int craftingValue;
+	public int anvilreq;
+	public boolean inheritsDamage;
 	public int craftingXP = 1;
 	public ArrayList<String> skillsList = new ArrayList<String>();
-	private static int craftingBoundDefault = 50;
+	public static int craftingBoundDefault = 50;
 
 	public AnvilRecipe(ItemStack in, ItemStack in2, String p, boolean flux, AnvilReq req, ItemStack result)
 	{

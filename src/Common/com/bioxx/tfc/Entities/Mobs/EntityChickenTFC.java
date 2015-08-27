@@ -34,27 +34,31 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 {
 	private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
 
-	protected int sex;
-	protected int hunger;
-	protected int age;
-	public float size_mod;			//How large the animal is
-	public float strength_mod;		//how strong the animal is
-	public float aggression_mod = 1;//How aggressive / obstinate the animal is
-	public float obedience_mod = 1;	//How well the animal responds to commands.
-	public boolean inLove;
+	/*
+	 * 1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
+	 * the square root of the ratio of female mass : male mass
+	 */
+	private static final float dimorphism = 0.0606f;
+	private static final int degreeOfDiversion = 2;
+	//private static final float avgAdultWeight = 2; //The average weight of adult males in kg
 
-	int degreeOfDiversion = 2;
+	private int sex;
+	private int hunger;
+	//private int age;
+	private float size_mod; //How large the animal is
+	private float strength_mod; //how strong the animal is
+	private float aggression_mod = 1;//How aggressive / obstinate the animal is
+	private float obedience_mod = 1; //How well the animal responds to commands.
+	private boolean inLove;
+
 	/** The time until the next egg is spawned. */
-	public long nextEgg;
-	public int EggTime = TFC_Time.dayLength;
+	private long nextEgg;
+	private static final int EggTime = TFC_Time.dayLength;
 	
-	protected int familiarity = 0;
-	private long lastFamiliarityUpdate = 0;
-	private boolean familiarizedToday = false;
+	private int familiarity;
+	private long lastFamiliarityUpdate;
+	private boolean familiarizedToday;
 	
-	protected float avgAdultWeight = 2;			//The average weight of adult males in kg
-	protected float dimorphism = 0.0606f;		//1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
-											//the square root of the ratio of female mass : male mass
 
 	public EntityChickenTFC(World par1World)
 	{

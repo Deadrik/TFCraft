@@ -12,6 +12,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -19,15 +20,15 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomDoor;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLilyPad;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IFluidBlock
 {
@@ -170,24 +171,22 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
 	{
 		Block plant = plantable.getPlant(world, x, y + 1, z);
-		EnumPlantType plantType = plantable.getPlantType(world, x, y + 1, z);
-		int meta = world.getBlockMetadata(x,y,z);
-
 		if (plant == TFCBlocks.Cactus && this == TFCBlocks.Cactus)
 		{
 			return true;
 		}
-
 		if (plant == TFCBlocks.Reeds && this == TFCBlocks.Reeds)
 		{
 			return true;
 		}
 
+		int meta = world.getBlockMetadata(x, y, z);
 		if (plant instanceof BlockCustomLilyPad && ((BlockCustomLilyPad)plant).canThisPlantGrowOnThisBlock(this, meta))
 		{
 			return true;
 		}
 
+		EnumPlantType plantType = plantable.getPlantType(world, x, y + 1, z);
 		switch (plantType)
 		{
 		case Desert: return TFC_Core.isSand(this);

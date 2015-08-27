@@ -5,13 +5,13 @@ import net.minecraft.world.World;
 
 public class ContainerBlueprint extends ContainerTFC
 {
-	private World worldObj;
-	private EntityPlayer player;
+	//private World worldObj;
+	//private EntityPlayer player;
 
 	public ContainerBlueprint(EntityPlayer p, World world, int x, int y, int z)
 	{
-		this.worldObj = world;
-		this.player = p;
+		//this.worldObj = world;
+		//this.player = p;
 	}
 
 	@Override

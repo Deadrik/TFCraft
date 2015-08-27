@@ -8,7 +8,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 public class TEMetalTrapDoor extends NetworkTileEntity
 {
 	public ItemStack sheetStack;
-	public byte data = 0;
+	public byte data;
 
 	public TEMetalTrapDoor()
 	{

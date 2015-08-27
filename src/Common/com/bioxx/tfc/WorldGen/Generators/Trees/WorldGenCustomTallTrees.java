@@ -11,7 +11,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class WorldGenCustomTallTrees extends WorldGenerator
 {
-	private int treeId;
+	private final int treeId;
 
 	public WorldGenCustomTallTrees(boolean flag, int id)
 	{
@@ -23,11 +23,12 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 	public boolean generate(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
 		int height = random.nextInt(5) + 6;
-		boolean flag = true;
 		if (yCoord < 1 || yCoord + height + 1 > world.getHeight())
 		{
 			return false;
 		}
+
+		boolean flag = true;
 		for (int y = yCoord; y <= yCoord + 1 + height; y++)
 		{
 			byte byte0 = 1;

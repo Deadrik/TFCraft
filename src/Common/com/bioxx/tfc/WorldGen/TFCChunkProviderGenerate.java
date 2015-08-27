@@ -78,32 +78,32 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	private byte[] metaBig;
 
 	/** A double array that hold terrain noise from noiseGen3 */
-	double[] noise3;
+	private double[] noise3;
 
 	/** A double array that hold terrain noise */
-	double[] noise1;
+	private double[] noise1;
 
 	/** A double array that hold terrain noise from noiseGen2 */
-	double[] noise2;
+	private double[] noise2;
 
 	/** A double array that hold terrain noise from noiseGen5 */
-	double[] noise5;
+	//private double[] noise5;
 
 	/** A double array that holds terrain noise from noiseGen6 */
-	double[] noise6;
+	private double[] noise6;
 
 	/**
 	 * Used to store the 5x5 parabolic field that is used during terrain generation.
 	 */
-	float[] parabolicField;
+	private float[] parabolicField;
 
-	int[] seaLevelOffsetMap = new int[256];
-	int[] chunkHeightMap = new int[256];
+	private int[] seaLevelOffsetMap = new int[256];
+	private int[] chunkHeightMap = new int[256];
 
-	MapGenCavesTFC caveGen = new MapGenCavesTFC();
-	MapGenRavineTFC surfaceRavineGen = new MapGenRavineTFC(125, 30);//surface
-	MapGenRavineTFC ravineGen = new MapGenRavineTFC(20, 50);//deep
-	MapGenRiverRavine riverRavineGen = new MapGenRiverRavine();
+	private MapGenCavesTFC caveGen = new MapGenCavesTFC();
+	private MapGenRavineTFC surfaceRavineGen = new MapGenRavineTFC(125, 30);//surface
+	private MapGenRavineTFC ravineGen = new MapGenRavineTFC(20, 50);//deep
+	private MapGenRiverRavine riverRavineGen = new MapGenRiverRavine();
 
 	public TFCChunkProviderGenerate(World par1World, long par2, boolean par4)
 	{

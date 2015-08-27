@@ -13,13 +13,13 @@ public class FloraIndex
 	public int harvestStart;
 	public int harvestFinish;
 	public int fruitHangTime = 1;
-	public float minTemp = 0;
+	public float minTemp;
 	public float maxTemp = 38;
 	public float minBioTemp = 10;
 	public float maxBioTemp = 30;
 	public float minRain = 125;
 	public float maxRain = 2000;
-	public float minEVT = 0.25f;
+	public float minEVT;
 	public float maxEVT = 16;
 	public ItemStack output;
 
@@ -32,6 +32,7 @@ public class FloraIndex
 	 */
 	public FloraIndex(String n, int b1, int b2, int h1, int h2, ItemStack o)
 	{
+		minEVT = 0.25f;
 		type = n;
 		bloomStart = b1;
 		bloomFinish = b2;
@@ -42,6 +43,7 @@ public class FloraIndex
 
 	public FloraIndex(String n, int h1, int h2, ItemStack o)
 	{
+		minEVT = 0.25f;
 		type = n;
 		bloomStart = 0;
 		bloomFinish = 0;

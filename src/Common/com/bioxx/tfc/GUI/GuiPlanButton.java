@@ -12,7 +12,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 public class GuiPlanButton extends GuiButton 
 {
 	public ItemStack item;
-	GuiPlanSelection screen;
+	private GuiPlanSelection screen;
 	protected static final RenderItem itemRenderer = new RenderItem();
 
 	public GuiPlanButton(int index, int xPos, int yPos, int width, int height, ItemStack ico, GuiPlanSelection gui, String s)

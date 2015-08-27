@@ -1,7 +1,5 @@
 package com.bioxx.tfc.Blocks;
 
-import static net.minecraftforge.common.util.ForgeDirection.UP;
-
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -15,7 +13,11 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
@@ -24,12 +26,11 @@ import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import static net.minecraftforge.common.util.ForgeDirection.UP;
 
 public class BlockLogPile extends BlockTerraContainer
 {
-	IIcon[] icons = new IIcon[3];
+	private IIcon[] icons = new IIcon[3];
 
 	public BlockLogPile()
 	{

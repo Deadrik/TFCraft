@@ -4,8 +4,8 @@ import com.bioxx.tfc.api.Metal;
 
 public class AlloyMetalCompare extends AlloyMetal
 {
-	float metalMin;
-	float metalMax;
+	private float metalMin;
+	private float metalMax;
 
 	public AlloyMetalCompare(Metal e, float min)
 	{

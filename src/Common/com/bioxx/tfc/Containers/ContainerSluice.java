@@ -15,8 +15,8 @@ public class ContainerSluice extends ContainerTFC
 {
 	private TESluice sluice;
 	private EntityPlayer player;
-	private int soilamt = 0;
-	private int progress = 0;
+	private int soilamt;
+	private int progress;
 
 	public ContainerSluice(InventoryPlayer inventoryplayer, TESluice tileentitysluice, World world, int x, int y, int z)
 	{

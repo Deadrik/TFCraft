@@ -30,8 +30,8 @@ import com.bioxx.tfc.api.Interfaces.IMultipleBlock;
 
 public class BlockCustomFenceGate2 extends BlockFenceGate implements ITileEntityProvider, IMultipleBlock
 {
-	String[] woodNames;
-	IIcon[] icons;
+	private String[] woodNames;
+	private IIcon[] icons;
 
 	public BlockCustomFenceGate2()
 	{

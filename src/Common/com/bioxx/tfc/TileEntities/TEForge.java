@@ -25,7 +25,7 @@ public class TEForge extends TEFireEntity implements IInventory
 {
 	public boolean isSmokeStackValid;
 	public ItemStack fireItemStacks[];
-	private int smokeTimer = 0;
+	private int smokeTimer;
 
 	public TEForge()
 	{

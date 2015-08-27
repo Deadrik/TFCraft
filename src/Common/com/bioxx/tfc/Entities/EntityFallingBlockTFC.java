@@ -212,7 +212,6 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 
 	public boolean canPlaceEntityOnSide(World world, Block fallingBlock, int x, int y, int z, boolean skipEntityCheck, int side, Entity thisEntity, ItemStack is)
 	{
-		Block block1 = world.getBlock(x, y, z);
 		AxisAlignedBB axisalignedbb = null;
 		if(!skipEntityCheck)
 		{
@@ -221,6 +220,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 				return false;
 		}
 
+		Block block1 = world.getBlock(x, y, z);
 		return (block1.getMaterial() == Material.circuits ? true : canReplace(world, x, y, z));
 	}
 

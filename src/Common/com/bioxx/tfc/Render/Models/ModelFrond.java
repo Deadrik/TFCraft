@@ -17,8 +17,8 @@ public class ModelFrond extends ModelBox
 	//private PositionTextureVertex[] vertexPositions;
     private Object[] blades;
 
-    private float lengthMod = 0.75f;
-    private float length = 8 * lengthMod;
+	private float lengthMod;
+	private float length;
 
     /** An array of 6 TexturedQuads, one for each face of a cube */
     private TexturedQuad[] quadList;
@@ -27,6 +27,8 @@ public class ModelFrond extends ModelBox
 			float originX, float originY, float originZ, int width, int height, int depth,
 			float scale) {
 		super(renderer, textureOffsetX, textureOffsetY, originX, originY, originZ, width, height, depth, scale);
+		this.lengthMod = 0.75f;
+		this.length = 8 * lengthMod;
 		/*
         this.vertexPositions = new PositionTextureVertex[8];
         this.quadList = new TexturedQuad[6];

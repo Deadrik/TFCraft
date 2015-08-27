@@ -9,6 +9,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.Containers.Slots.SlotChest;
@@ -24,7 +25,7 @@ public class ContainerBarrel extends ContainerTFC
 	public float liquidLevel;
 	public int liquidID;
 	public int sealedTime = -1;
-	public int guiTab = 0;
+	public int guiTab;
 
 	public ContainerBarrel(InventoryPlayer inventoryplayer, TEBarrel tileentitybarrel, World world, int x, int y, int z, int tab)
 	{

@@ -5,21 +5,21 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.TileEntities.TELoom;
 import com.bioxx.tfc.api.TFCBlocks;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-
 public class RenderLoom implements ISimpleBlockRenderingHandler
 {
-	static float minX = 0F;
-	static float maxX = 1F;
-	static float minY = 0F;
-	static float maxY = 1F;
-	static float minZ = 0F;
-	static float maxZ = 1F;
+	private static final float minX = 0F;
+	private static final float maxX = 1F;
+	private static final float minY = 0F;
+	private static final float maxY = 1F;
+	private static final float minZ = 0F;
+	private static final float maxZ = 1F;
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)

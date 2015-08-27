@@ -22,9 +22,9 @@ public class TEFruitTreeWood extends TileEntity implements IInventory
 	public int height;
 	public long birthTimeWood;
 	public long birthTimeLeaves;
-	static final long leafGrowthRate = 3;
-	static final long GrowTime = 30;
-	static final long branchGrowTime = 20;
+	private static final long leafGrowthRate = 3;
+	private static final long GrowTime = 30;
+	private static final long branchGrowTime = 20;
 
 	public TEFruitTreeWood()
 	{

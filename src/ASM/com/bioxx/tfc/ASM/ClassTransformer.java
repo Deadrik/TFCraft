@@ -39,7 +39,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 		return bytes;
 	}
 
-	static int numInsertions = 0;
+	public static int numInsertions;
 	protected byte[] transform(byte[] bytes)
 	{
 		ClassNode classNode = new ClassNode();
@@ -343,27 +343,27 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 		/**
 		 * InsnList of instructions that should be inserted at the specified point
 		 */
-		InsnList iList;
+		public InsnList iList;
 
 		/**
 		 * Insertion offset to from either the top of the file, or from the provided startLine
 		 */
-		int offset;
+		public int offset;
 
 		/**
 		 * The line number of the LineNumberNode to use as the starting offset, also known as the anchor point. 
 		 * If this is -1 then the top of the method is used as the anchor point
 		 */
-		int startLine = -1;
+		public int startLine = -1;
 
 		/**
 		 * The type of operation that should be performed at the given offset
 		 */
-		InstrOpType opType;
+		public InstrOpType opType;
 
 
-		int offsetSwitch = -1;
-		int offsetLine = -1;
+		public int offsetSwitch = -1;
+		public int offsetLine = -1;
 
 		public InstrSet(InsnList list, int off, InstrOpType op)
 		{
@@ -440,7 +440,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 
 	public class JumpNode extends JumpInsnNode
 	{
-		int line = 0;
+		public int line;
 		public JumpNode(int opcode, LabelNode label) {
 			super(opcode, label);
 		}

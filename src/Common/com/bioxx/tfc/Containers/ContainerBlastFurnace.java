@@ -84,7 +84,7 @@ public class ContainerBlastFurnace extends ContainerTFC
 		return origStack;
 	}
 
-	private int updatecounter = 0;
+	private int updatecounter;
 	@Override
 	public void detectAndSendChanges()
 	{

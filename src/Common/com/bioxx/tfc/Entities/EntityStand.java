@@ -22,7 +22,7 @@ public class EntityStand extends EntityLiving
 	private static int defaultEquipableLength = TFC_Core.getExtraEquipInventorySize();
 	private ItemStack[] armor;
 	private ItemStack[] equipable;
-	private float rotation = 0F;
+	private float rotation;
 	public int woodType;
 
 	public EntityStand(World par1World)

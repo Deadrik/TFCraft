@@ -14,8 +14,8 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class WorldGenRedwoodXL extends WorldGenerator
 {
-	final Block blockLeaf, blockWood;
-	final int metaLeaf, metaWood;
+	private final Block blockLeaf, blockWood;
+	private final int metaLeaf, metaWood;
 
 	public WorldGenRedwoodXL(boolean doNotify)
 	{
@@ -30,9 +30,6 @@ public class WorldGenRedwoodXL extends WorldGenerator
 	public boolean generate(World world, Random rand, int x, int y, int z)
 	{
 		final int height = rand.nextInt(20) + 22;
-		final int j = 5 + rand.nextInt(12);
-		final int k = height - j;
-		final int l = 4 + rand.nextInt(6);
 
 		if (y < 1 || y + height + 1 > 256)
 			return false;
@@ -46,6 +43,8 @@ public class WorldGenRedwoodXL extends WorldGenerator
 			return false;
 		}
 
+		final int l = 4 + rand.nextInt(6);
+		final int j = 5 + rand.nextInt(12);
 		for (int y1 = y; y1 <= y + 1 + height; y1++)
 		{
 			int k1 = 1;
@@ -94,6 +93,7 @@ public class WorldGenRedwoodXL extends WorldGenerator
 			setBlockAndNotifyAdequately(world, x - 1, y + y1, z - 1, blockWood, metaWood);
 		}
 
+		final int k = height - j;
 		for (int i3 = 0; i3 <= k; i3++)
 		{
 			final int y1 = y + height - i3;

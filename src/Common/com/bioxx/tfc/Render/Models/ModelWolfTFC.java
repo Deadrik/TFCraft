@@ -33,10 +33,10 @@ public class ModelWolfTFC extends ModelBase
 	public ModelRenderer wolfLeg4;
 
 	/** The wolf's tail */
-	ModelRenderer wolfTail;
+	private ModelRenderer wolfTail;
 
 	/** The wolf's mane */
-	ModelRenderer wolfMane;
+	private ModelRenderer wolfMane;
 
 	public ModelWolfTFC()
 	{
@@ -152,7 +152,7 @@ public class ModelWolfTFC extends ModelBase
 		this.wolfMane.rotateAngleZ = entitywolf.getShakeAngle(par4, -0.08F);
 		this.wolfBody.rotateAngleZ = entitywolf.getShakeAngle(par4, -0.16F);
 		this.wolfTail.rotateAngleZ = entitywolf.getShakeAngle(par4, -0.2F);
-		wolfTail.rotateAngleY =  0.5f*(1 - (1/(entitywolf.happyTicks + 1f)))*MathHelper.sin((float)(Math.PI * entitywolf.happyTicks / 5F));
+		wolfTail.rotateAngleY = 0.5f * (1 - (1 / (entitywolf.getHappyTicks() + 1f))) * MathHelper.sin((float) (Math.PI * entitywolf.getHappyTicks() / 5F));
 	}
 	
 	@Override
@@ -161,7 +161,7 @@ public class ModelWolfTFC extends ModelBase
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
         this.wolfHeadMain.rotateAngleX = par5 / (180F / (float)Math.PI);
         this.wolfHeadMain.rotateAngleY = par4 / (180F / (float)Math.PI);
-		if (par7Entity instanceof EntityWolfTFC && ((EntityWolfTFC) par7Entity).happyTicks > 0)
+		if (par7Entity instanceof EntityWolfTFC && ((EntityWolfTFC) par7Entity).getHappyTicks() > 0)
 			this.wolfTail.rotateAngleX = (float) (Math.PI / 4f) * 2.5F;
 		else
 			this.wolfTail.rotateAngleX = par3;

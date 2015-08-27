@@ -53,16 +53,16 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	public float decayRate = 1.0f;
 	public boolean edible = true;
 	public boolean canBeUsedRaw = true;
-	protected int tasteSweet = 0;
-	protected int tasteSour = 0;
-	protected int tasteSalty = 0;
-	protected int tasteBitter = 0;
-	protected int tasteUmami = 0;
-	protected boolean canBeSmoked = false;
-	protected float smokeAbsorb = 0.5f;
+	protected int tasteSweet;
+	protected int tasteSour;
+	protected int tasteSalty;
+	protected int tasteBitter;
+	protected int tasteUmami;
+	protected boolean canBeSmoked;
+	protected float smokeAbsorb;
 
 	public IIcon cookedIcon;
-	protected boolean hasCookedIcon = false;
+	protected boolean hasCookedIcon;
 
 	public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um)
 	{
@@ -73,6 +73,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		TFCItems.FoodList.add(this);
 		this.setMaxDamage(100);
 		this.hasSubtypes = false;
+		smokeAbsorb = 0.5f;
 		tasteSweet = sw;
 		tasteSour = so;
 		tasteSalty = sa;

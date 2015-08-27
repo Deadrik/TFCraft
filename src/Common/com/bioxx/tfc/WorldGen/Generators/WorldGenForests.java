@@ -22,15 +22,15 @@ public class WorldGenForests implements IWorldGenerator
 	/** The number of blocks to generate. */
 	//private int numberOfBlocks;
 
-	WorldGenerator gen0;
-	WorldGenerator gen1;
-	WorldGenerator gen2;
-	int TreeType0;
-	int TreeType1;
-	int TreeType2;
-	float evt;
-	float rainfall;
-	float temperature = 20f;
+	private WorldGenerator gen0;
+	private WorldGenerator gen1;
+	private WorldGenerator gen2;
+	private int TreeType0;
+	private int TreeType1;
+	private int TreeType2;
+	private float evt;
+	private float rainfall;
+	private float temperature = 20f;
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
@@ -100,7 +100,6 @@ public class WorldGenForests implements IWorldGenerator
 			{
 				if(zCoord > 14500 || zCoord < -14500)
 					gen2 = TFCBiome.getTreeGen(8, random.nextBoolean());
-				int randomNumber = random.nextInt(100);
 
 				//if at least one of the trees is within the temperature zone otherewise no trees
 				if((spawnParam0 & 1) > 0 || (spawnParam1 & 1) > 0 || (spawnParam2 & 1) > 0)
@@ -120,6 +119,7 @@ public class WorldGenForests implements IWorldGenerator
 					return;
 				}
 
+				int randomNumber = random.nextInt(100);
 				if (randomNumber < 50 && gen0 != null && (spawnParam0 == 5 || spawnParam0 == 7))
 				{
 					gen0.generate(world, random, xCoord, yCoord, zCoord);

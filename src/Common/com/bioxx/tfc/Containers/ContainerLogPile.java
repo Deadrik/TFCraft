@@ -14,9 +14,9 @@ import com.bioxx.tfc.TileEntities.TELogPile;
 public class ContainerLogPile extends ContainerTFC
 {
 	private World world;
-	private int posX;
-	private int posY;
-	private int posZ;
+	//private int posX;
+	//private int posY;
+	//private int posZ;
 	private TELogPile logpile;
 	private EntityPlayer player;
 
@@ -25,9 +25,9 @@ public class ContainerLogPile extends ContainerTFC
 		this.player = playerinv.player;
 		this.logpile = pile;
 		this.world = world;
-		this.posX = x;
-		this.posY = y;
-		this.posZ = z;
+		//this.posX = x;
+		//this.posY = y;
+		//this.posZ = z;
 		pile.openInventory();
 		layoutContainer(playerinv, pile, 0, 0);
 		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90, false, true);

@@ -10,13 +10,13 @@ import com.bioxx.tfc.api.TFCOptions;
 
 public class ChunkDataManager 
 {
-	private World world;
+	///private World world;
 
 	private LongHashMap chunkmap = new LongHashMap();
 
 	public ChunkDataManager(World world)
 	{
-		this.world = world;
+		//this.world = world;
 	}
 
 	public void removeData(int x, int z)

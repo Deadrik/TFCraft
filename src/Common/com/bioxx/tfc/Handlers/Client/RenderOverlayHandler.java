@@ -45,8 +45,8 @@ import com.bioxx.tfc.api.Tools.ChiselManager;
 public class RenderOverlayHandler
 {
 	public static ResourceLocation tfcicons = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "icons.png");
-	private FontRenderer fontrenderer = null;
-	public int recordTimer = 0;
+	private FontRenderer fontrenderer;
+	public int recordTimer;
 	private final Field _recordPlayingUpFor = ReflectionHelper.findField(GuiIngame.class, "recordPlayingUpFor", "field_73845_h");
 	private final Field _recordPlaying = ReflectionHelper.findField(GuiIngame.class, "recordPlaying", "field_73838_g");
 
@@ -161,16 +161,16 @@ public class RenderOverlayHandler
 
 			if (leftSide)
 			{
-				fontrenderer.drawString("" + getQuiverArrows(), xPos + 19, yPos + 4, Color.white.getRGB());
-				fontrenderer.drawString("" + getQuiverJavelins(), xPos + 19, yPos + 21, Color.white.getRGB());
+				fontrenderer.drawString(Integer.toString(getQuiverArrows()), xPos + 19, yPos + 4, Color.white.getRGB());
+				fontrenderer.drawString(Integer.toString(getQuiverJavelins()), xPos + 19, yPos + 21, Color.white.getRGB());
 			}
 			else
 			{
 				int arrowOffset = fontrenderer.getStringWidth(String.valueOf(getQuiverArrows())) + 1;
 				int javOffset = fontrenderer.getStringWidth(String.valueOf(getQuiverJavelins())) + 1;
 
-				fontrenderer.drawString("" + getQuiverArrows(), xPos - arrowOffset, yPos + 4, Color.white.getRGB());
-				fontrenderer.drawString("" + getQuiverJavelins(), xPos - javOffset, yPos + 21, Color.white.getRGB());
+				fontrenderer.drawString(Integer.toString(getQuiverArrows()), xPos - arrowOffset, yPos + 4, Color.white.getRGB());
+				fontrenderer.drawString(Integer.toString(getQuiverJavelins()), xPos - javOffset, yPos + 21, Color.white.getRGB());
 			}
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -242,7 +242,7 @@ public class RenderOverlayHandler
 					fontrenderer = mc.fontRenderer;
 					boolean flag1 = false;
 					int color = flag1 ? 16777215 : 8453920;
-					String text = "" + player.experienceLevel;
+					String text = Integer.toString(player.experienceLevel);
 					int x = (sr.getScaledWidth() - fontrenderer.getStringWidth(text)) / 2;
 					int y = sr.getScaledHeight() - 30;
 					fontrenderer.drawString(text, x + 1, y, 0);

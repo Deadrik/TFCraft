@@ -28,10 +28,10 @@ import com.bioxx.tfc.api.Enums.EnumSize;
 
 public class ItemFirestarter extends ItemTerra
 {
-	private boolean canBeUsed = false;
-	private boolean isCoal = false;
-	private boolean isPottery = false;
-	private boolean canBlockBurn = false;
+	private boolean canBeUsed;
+	private boolean isCoal;
+	private boolean isPottery;
+	private boolean canBlockBurn;
 
 	public ItemFirestarter()
 	{

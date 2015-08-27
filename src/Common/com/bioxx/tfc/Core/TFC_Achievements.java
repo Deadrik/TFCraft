@@ -41,7 +41,7 @@ public class TFC_Achievements
 
 	private static ArrayList<Achievement> achlist;
 	public static AchievementPage pageBiome;
-	static Achievement[] achievementsTFC;
+	public static Achievement[] achievementsTFC;
 	
 	public TFC_Achievements()
 	{

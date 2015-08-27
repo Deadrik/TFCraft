@@ -29,8 +29,8 @@ public class ContainerLiquidVessel extends ContainerTFC
 	private EntityPlayer player;
 	public InventoryCrafting containerInv = new InventoryCrafting(this, 1, 1);
 
-	public int bagsSlotNum = 0;
-	public int metalAmount = 0;
+	public int bagsSlotNum;
+	public int metalAmount;
 
 	public ContainerLiquidVessel(InventoryPlayer playerinv, World world, int x, int y, int z)
 	{

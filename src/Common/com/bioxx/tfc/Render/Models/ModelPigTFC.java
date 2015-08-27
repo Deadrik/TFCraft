@@ -17,9 +17,10 @@ public class ModelPigTFC extends ModelPig
 	{
 		this(0.0F);
 	}
-	ModelRenderer tusk1;
-	ModelRenderer tusk2;
-	ModelRenderer snout;
+
+	private ModelRenderer tusk1;
+	private ModelRenderer tusk2;
+	private ModelRenderer snout;
 
 	public ModelPigTFC(float par1)
 	{

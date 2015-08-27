@@ -1,6 +1,5 @@
 package com.bioxx.tfc.Blocks;
 
-import static net.minecraftforge.common.util.ForgeDirection.UP;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
@@ -10,6 +9,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -17,6 +17,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.TFCOptions;
+
+import static net.minecraftforge.common.util.ForgeDirection.UP;
 
 public abstract class BlockTerra extends Block
 {
@@ -74,8 +76,6 @@ public abstract class BlockTerra extends Block
 	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
 	{
 		Block plant = plantable.getPlant(world, x, y + 1, z);
-		EnumPlantType plantType = plantable.getPlantType(world, x, y + 1, z);
-
 		if (plant == Blocks.cactus && this == Blocks.cactus)
 		{
 			return true;
@@ -86,6 +86,7 @@ public abstract class BlockTerra extends Block
 			return true;
 		}
 
+		EnumPlantType plantType = plantable.getPlantType(world, x, y + 1, z);
 		switch (plantType)
 		{
 		case Cave:   return isSideSolid(world, x, y, z, UP);

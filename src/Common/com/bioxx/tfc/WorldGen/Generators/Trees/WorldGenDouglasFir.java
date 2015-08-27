@@ -11,8 +11,8 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class WorldGenDouglasFir extends WorldGenerator
 {
-	private boolean Tall = false;
-	private int metaID;
+	private boolean Tall;
+	private final int metaID;
 
 	public WorldGenDouglasFir(boolean par1, int m, boolean t)
 	{
@@ -29,11 +29,11 @@ public class WorldGenDouglasFir extends WorldGenerator
 			Tall=true;
 		if(Tall)
 			i += rand.nextInt(10);
-		boolean flag = true;
 
 		if (par4 < 1 || par4 + i + 1 > 256)
 			return false;
 
+		boolean flag = true;
 		for (int j = par4; j <= par4 + 1 + i; j++)
 		{
 			byte byte0 = 1;

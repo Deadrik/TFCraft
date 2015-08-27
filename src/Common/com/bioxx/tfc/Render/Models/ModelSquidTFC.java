@@ -11,10 +11,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ModelSquidTFC extends ModelBase
 {
 	/** The squid's body */
-	ModelRenderer squidBody;
+	private ModelRenderer squidBody;
 
 	/** The squid's tentacles */
-	ModelRenderer[] squidTentacles = new ModelRenderer[8];
+	private ModelRenderer[] squidTentacles = new ModelRenderer[8];
 
 	public ModelSquidTFC()
 	{

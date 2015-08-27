@@ -9,7 +9,6 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -34,7 +33,7 @@ import com.bioxx.tfc.api.Util.Helper;
 
 public class ItemMeal extends ItemTerra implements IFood
 {
-	PotionEffect foodEffect;
+	//private PotionEffect foodEffect;
 
 	//private boolean alwaysEdible = false;
 

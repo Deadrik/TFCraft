@@ -55,7 +55,7 @@ public class RenderPheasantTFC extends RenderChicken
 	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
 	{
-		float scale = ((EntityPheasantTFC) par1EntityLivingBase).size_mod / 3 + 0.5f;
+		float scale = ((EntityPheasantTFC) par1EntityLivingBase).getSize() / 3 + 0.5f;
 		GL11.glScalef(scale, scale, scale);
 		GL11.glRotatef(90, 0, 1, 0);
 	}

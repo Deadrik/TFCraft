@@ -31,9 +31,9 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 {
 	public ItemStack inventory[];
 	public boolean hasRack;
-	public long burnStart = 0;
-	public int straw = 0;
-	public int wood = 0;
+	public long burnStart;
+	public int straw;
+	public int wood;
 
 	public TEPottery()
 	{

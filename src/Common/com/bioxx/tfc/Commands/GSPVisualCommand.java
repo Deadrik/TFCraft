@@ -62,7 +62,7 @@ public class GSPVisualCommand extends CommandBase{
 		}
 	}
 
-	int getColor(int val)
+	private int getColor(int val)
 	{
 		return val/ (4320 / 16);
 	}

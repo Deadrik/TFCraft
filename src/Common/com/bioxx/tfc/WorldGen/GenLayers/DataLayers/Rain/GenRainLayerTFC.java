@@ -11,11 +11,7 @@ import net.minecraft.world.WorldType;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerFuzzyZoomTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerSmoothTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerVoronoiZoomTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerZoomTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.*;
 
 public abstract class GenRainLayerTFC extends GenLayerTFC
 {
@@ -74,7 +70,7 @@ public abstract class GenRainLayerTFC extends GenLayerTFC
 		return continent;
 	}
 
-	static boolean shouldDraw = false;
+	private static boolean shouldDraw;
 	public static void drawImage(int size, GenLayerTFC genlayer, String name)
 	{
 		if(!shouldDraw)

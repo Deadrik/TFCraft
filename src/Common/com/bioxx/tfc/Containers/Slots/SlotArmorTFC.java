@@ -7,15 +7,15 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-import com.bioxx.tfc.Containers.ContainerPlayerTFC;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Containers.ContainerPlayerTFC;
 
 public class SlotArmorTFC extends Slot 
 {
 	public final int armorType;
-	final ContainerPlayerTFC parent;
+	private final ContainerPlayerTFC parent;
 	public SlotArmorTFC(ContainerPlayerTFC cont, IInventory inv, int index, int x, int y, int armortype) 
 	{
 		super(inv, index, x, y);

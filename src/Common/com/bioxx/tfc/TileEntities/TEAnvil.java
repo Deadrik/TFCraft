@@ -52,8 +52,8 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 
 	public int[] stonePair;
 
-	//private boolean isDone = false;
-	private byte workedRecently = 0;
+	//private boolean isDone;
+	private byte workedRecently;
 
 	//this is the fix the server receiving 3 packets whenever the player works an item.
 	private static final byte LAG_FIX_DELAY = 5;

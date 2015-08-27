@@ -22,13 +22,13 @@ import java.util.Random;
 
 public class SimplexNoise {
 
-	SimplexNoise_Octave[] octaves;
-	double[] frequencys;
-	double[] amplitudes;
+	public SimplexNoise_Octave[] octaves;
+	public double[] frequencys;
+	public double[] amplitudes;
 
-	int largestFeature;
-	double persistence;
-	long seed;
+	public int largestFeature;
+	public double persistence;
+	public long seed;
 
 	public SimplexNoise(int largestFeature,double persistence, long seed){
 		this.largestFeature=largestFeature;

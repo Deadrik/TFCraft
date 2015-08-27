@@ -104,7 +104,6 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 	@Override
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
-		int xCoord = x; int yCoord = y; int zCoord = z;
 		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, player, !is.hasTagCompound());
 		if(is.getItemDamage() == 5 && world.getBlock(mop.blockX, mop.blockY, mop.blockZ) == TFCBlocks.LavaStationary)
 		{
@@ -116,9 +115,16 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 			return false;
 		}
 
-		if (side == 0) --yCoord;
-		else if (side == 1) ++yCoord;
-		else return false;
+		int yCoord = y;
+		if (side == 0)
+			--yCoord;
+		else if (side == 1)
+			++yCoord;
+		else
+			return false;
+
+		int xCoord = x;
+		int zCoord = z;
 		//Block block = world.getBlock(xCoord, yCoord, zCoord);
 		if(world.isAirBlock(xCoord, yCoord, zCoord))
 		{

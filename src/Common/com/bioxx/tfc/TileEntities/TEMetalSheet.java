@@ -6,7 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 public class TEMetalSheet extends NetworkTileEntity
 {
 	public ItemStack sheetStack;
-	byte sides = 0;
+	private byte sides;
 	public int metalID;
 
 	public TEMetalSheet()

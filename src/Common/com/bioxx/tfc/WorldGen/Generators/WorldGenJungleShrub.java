@@ -11,7 +11,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class WorldGenJungleShrub extends WorldGenerator
 {
-	private int meta = 15;
+	private final int meta;
 
 	public WorldGenJungleShrub(int m)
 	{

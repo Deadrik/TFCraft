@@ -8,7 +8,7 @@ import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockMM extends BlockStone
 {
-	public static boolean fallInstantly = false;
+	public static boolean fallInstantly;
 
 	public BlockMM(Material material)
 	{

@@ -15,7 +15,7 @@ public class FoodRegistry
 		return instance;
 	}
 
-	private int proteinCount = 0;
+	private int proteinCount;
 	private Map<Integer, Item> proteinMap;
 	private int vegetableCount = 10000;
 	private Map<Integer, Item> vegetableMap;

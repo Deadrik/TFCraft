@@ -23,7 +23,7 @@ public class ContainerFoodPrep extends ContainerTFC
 	//private int posZ;
 	private TEFoodPrep te;
 	private EntityPlayer player;
-	int guiTab = 0;
+	private int guiTab;
 
 	public ContainerFoodPrep(InventoryPlayer playerinv, TEFoodPrep pile, World world, int x, int y, int z, int tab)
 	{

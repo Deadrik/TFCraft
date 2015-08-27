@@ -5,6 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.PositionTextureVertex;
 import net.minecraft.client.model.TexturedQuad;
 import net.minecraft.client.renderer.Tessellator;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -13,7 +14,7 @@ public class ModelUrn extends ModelBox
 	/**
      * The (x,y,z) vertex positions and (u,v) texture coordinates for each of the 8 points on a cube
      */
-    private final PositionTextureVertex[] vertexPositions;
+	//private final PositionTextureVertex[] vertexPositions;
 
     /** An array of 6 TexturedQuads, one for each face of a cube */
     private final TexturedQuad[] quadList;
@@ -23,7 +24,7 @@ public class ModelUrn extends ModelBox
 			float scale) {
 		super(renderer, textureOffsetX, textureOffsetY, originX, originY, originZ, width, height, depth, scale);
 		
-        this.vertexPositions = new PositionTextureVertex[20];
+		//this.vertexPositions = new PositionTextureVertex[20];
         this.quadList = new TexturedQuad[17];
         float maxX = originX + width;
         float maxY = originY + height;
@@ -77,26 +78,26 @@ public class ModelUrn extends ModelBox
         PositionTextureVertex vert18 = new PositionTextureVertex(innerXO,maxY,innerZM,8.0f,0);
         PositionTextureVertex vert19 = new PositionTextureVertex(innerXM,maxY,innerZM,8.0f,8.0f);
 	
-        this.vertexPositions[0] = vert0;
-        this.vertexPositions[1] = vert1;
-        this.vertexPositions[2] = vert2;
-        this.vertexPositions[3] = vert3;
-        this.vertexPositions[4] = vert4;
-        this.vertexPositions[5] = vert5;
-        this.vertexPositions[6] = vert6;
-        this.vertexPositions[7] = vert7;
-        this.vertexPositions[8] = vert8;
-        this.vertexPositions[9] = vert9;
-        this.vertexPositions[10] = vert10;
-        this.vertexPositions[11] = vert11;
-        this.vertexPositions[12] = vert12;
-        this.vertexPositions[13] = vert13;
-        this.vertexPositions[14] = vert14;
-        this.vertexPositions[15] = vert15;
-        this.vertexPositions[16] = vert16;
-        this.vertexPositions[17] = vert17;
-        this.vertexPositions[18] = vert18;
-        this.vertexPositions[19] = vert19;
+		/*this.vertexPositions[0] = vert0;
+		this.vertexPositions[1] = vert1;
+		this.vertexPositions[2] = vert2;
+		this.vertexPositions[3] = vert3;
+		this.vertexPositions[4] = vert4;
+		this.vertexPositions[5] = vert5;
+		this.vertexPositions[6] = vert6;
+		this.vertexPositions[7] = vert7;
+		this.vertexPositions[8] = vert8;
+		this.vertexPositions[9] = vert9;
+		this.vertexPositions[10] = vert10;
+		this.vertexPositions[11] = vert11;
+		this.vertexPositions[12] = vert12;
+		this.vertexPositions[13] = vert13;
+		this.vertexPositions[14] = vert14;
+		this.vertexPositions[15] = vert15;
+		this.vertexPositions[16] = vert16;
+		this.vertexPositions[17] = vert17;
+		this.vertexPositions[18] = vert18;
+		this.vertexPositions[19] = vert19;*/
         
         this.quadList[0] = new TexturedQuad(new PositionTextureVertex[] {vert7, vert6, vert2, vert3}, 
         		textureOffsetX + depth + width, textureOffsetY + depth, textureOffsetX + depth + width + depth, textureOffsetY + depth + height, renderer.textureWidth, renderer.textureHeight);

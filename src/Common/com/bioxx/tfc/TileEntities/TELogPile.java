@@ -28,7 +28,7 @@ public class TELogPile extends TileEntity implements IInventory
 	private int logPileOpeners;
 	public boolean isOnFire;
 	public int fireTimer;
-	Queue<Vector3f> blocksToBeSetOnFire;
+	private Queue<Vector3f> blocksToBeSetOnFire;
 
 	public TELogPile()
 	{

@@ -6,12 +6,12 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import com.bioxx.tfc.api.Entities.IAnimal;
 
 public class EntityAIAttackTFC extends  EntityAINearestAttackableTarget{
-	private IAnimal theAnimal;
+	//private final IAnimal theAnimal;
 
 	public EntityAIAttackTFC(IAnimal par1EntityTameable, Class par2Class, int par3, boolean par4)
 	{
 		super((EntityCreature)par1EntityTameable, par2Class, par3, par4);
-		this.theAnimal = par1EntityTameable;
+		//this.theAnimal = par1EntityTameable;
 	}
 
 	/**

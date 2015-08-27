@@ -7,7 +7,7 @@ import net.minecraft.util.Vec3;
 
 class EntityAIAvoidEntitySelectorTFC implements IEntitySelector
 {
-	final EntityAIAvoidEntityTFC entityAvoiderAI;
+	private final EntityAIAvoidEntityTFC entityAvoiderAI;
 
 	EntityAIAvoidEntitySelectorTFC(EntityAIAvoidEntityTFC par1EntityAIAvoidEntity)
 	{

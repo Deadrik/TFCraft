@@ -14,13 +14,13 @@ public class DataCacheBlockTFC
 	/** The last time this DataCacheBlockTFC was accessed, in milliseconds. */
 	public long lastAccessTime;
 	/** The DataCache object that contains this DataCacheBlockTFC */
-	final DataCache theDataCache;
+	//private final DataCache theDataCache;
 
 	private int index;
 
 	public DataCacheBlockTFC(DataCache datacache, GenLayerTFC indexLayers, int par2, int par3, int ind)
 	{
-		this.theDataCache = datacache;
+		//this.theDataCache = datacache;
 		this.data = new DataLayer[256];
 		this.xPosition = par2;
 		this.zPosition = par3;
@@ -30,7 +30,7 @@ public class DataCacheBlockTFC
 
 	public DataCacheBlockTFC(DataCache datacache, int par2, int par3)
 	{
-		this.theDataCache = null;
+		//this.theDataCache = null;
 		this.xPosition = par2;
 		this.zPosition = par3;
 	}

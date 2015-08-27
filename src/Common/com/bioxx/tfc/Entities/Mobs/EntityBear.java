@@ -36,36 +36,36 @@ import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal, IInnateArmor
 {
-	/**
-	 * This flag is set when the bear is looking at a player with interest, i.e. with tilted head. This happens when
-	 * tamed wolf is wound and player holds porkchop (raw or cooked), or when wild wolf sees bone in player's hands.
-	 */
-	private float field_25048_b;
-	private float field_25054_c;
-	private Random rand = new Random ();
-	private float moveSpeed = 0;
+	private final Random rand = new Random();
+	private float moveSpeed;
 
 	/** true is the wolf is wet else false */
 	private boolean field_25052_g;
 	private static final float GESTATION_PERIOD = 7.0f;
+	//private final static float avgAdultWeight = 270F; //The average weight of adult males in kg
+	/*
+	 * 1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
+	 * the square root of the ratio of female mass : male mass
+	 */
+	private static final float dimorphism = 0.2182f;
+	private static final int degreeOfDiversion = 4;
 
-	protected long animalID;
-	protected int sex;
-	protected int hunger;
-	protected int age;
-	protected boolean pregnant;
-	protected int pregnancyRequiredTime;
-	protected long timeOfConception;
-	protected float mateSizeMod = 0;
-	protected float mateStrengthMod = 0;
-	protected float mateAggroMod = 0;
-	protected float mateObedMod = 0;
-	public float size_mod;			//How large the animal is
-	public float strength_mod;		//how strong the animal is
-	public float aggression_mod = 1;//How aggressive / obstinate the animal is
-	public float obedience_mod = 1;	//How well the animal responds to commands.
-	public boolean inLove;
-	private int degreeOfDiversion = 4;
+	private long animalID;
+	private int sex;
+	private int hunger;
+	//private int age;
+	private boolean pregnant;
+	private int pregnancyRequiredTime;
+	private long timeOfConception;
+	private float mateSizeMod;
+	private float mateStrengthMod;
+	private float mateAggroMod;
+	private float mateObedMod;
+	private float size_mod; //How large the animal is
+	private float strength_mod; //how strong the animal is
+	private float aggression_mod = 1;//How aggressive / obstinate the animal is
+	private float obedience_mod = 1; //How well the animal responds to commands.
+	private boolean inLove;
 	
 	private EntityAIAttackOnCollide attackAI;
 	private EntityAILeapAtTarget leapAI;
@@ -77,15 +77,11 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	private EntityAIHurtByTarget hurtAI;
 	private boolean isPeacefulAI;
 
-	private boolean wasRoped = false;
+	private boolean wasRoped;
 	
-	private int familiarity = 0;
-	private long lastFamiliarityUpdate = 0;
-	private boolean familiarizedToday = false;
-
-	protected float avgAdultWeight = 270F;			//The average weight of adult males in kg
-	protected float dimorphism = 0.2182f;		//1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
-											//the square root of the ratio of female mass : male mass
+	private int familiarity;
+	private long lastFamiliarityUpdate;
+	private boolean familiarizedToday;
 
 	public EntityBear (World par1World)
 	{
@@ -406,8 +402,6 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	public void onUpdate()
 	{
 		super.onUpdate();
-		field_25054_c = field_25048_b;
-		field_25048_b = field_25048_b + (0.0F - field_25048_b) * 0.4F;
 		if (!this.worldObj.isRemote)
 		{
 			if (!isPeacefulAI && this.worldObj.difficultySetting == EnumDifficulty.PEACEFUL)

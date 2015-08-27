@@ -17,8 +17,8 @@ public class RenderBlocksLightCache extends RenderBlocksFixUV
 	
 	private static class RenderPointData
 	{
-		int brightness;
-		float r,g,b;
+		private int brightness;
+		private float r, g, b;
 	};
 	
 	private static class RenderFaceData

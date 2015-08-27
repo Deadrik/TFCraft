@@ -4,5 +4,5 @@ import net.minecraft.block.Block;
 
 public interface IMultipleBlock 
 {
-	public Block getBlockTypeForRender();
+	Block getBlockTypeForRender();
 }

@@ -11,7 +11,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class WorldGenCustomCedarTrees extends WorldGenerator
 {
-	private int treeId;
+	private final int treeId;
 
 	public WorldGenCustomCedarTrees(boolean flag, int id)
 	{
@@ -22,10 +22,10 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 	public boolean generate(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
 		int treeHeight = random.nextInt(6) + 3;
-		boolean flag = true;
 		if (yCoord < 1 || yCoord + treeHeight + 1 > world.getHeight())
 			return false;
 
+		boolean flag = true;
 		for (int y = yCoord; y <= yCoord + 1 + treeHeight; y++)
 		{
 			byte byte0 = 1;

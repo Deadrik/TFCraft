@@ -18,21 +18,21 @@ import com.bioxx.tfc.api.Entities.IAnimal;
 public class ModelPheasant extends ModelBase
 {
 	//fields
-	ModelRenderer Body;
-	ModelRenderer Tail;
-	ModelRenderer LeftLeg;
-	ModelRenderer RightLeg;
-	ModelRenderer TailFeather;
-	ModelRenderer LeftLowerLeg;
-	ModelRenderer RightLowerLeg;
-	ModelRenderer Neck;
-	ModelRenderer Head;
-	ModelRenderer Beak;
-	ModelRenderer Chest;
-	ModelRenderer LeftWing;
-	ModelRenderer RightWing;
-	ModelRenderer LeftFoot;
-	ModelRenderer RightFoot;
+	private ModelRenderer Body;
+	private ModelRenderer Tail;
+	private ModelRenderer LeftLeg;
+	private ModelRenderer RightLeg;
+	private ModelRenderer TailFeather;
+	private ModelRenderer LeftLowerLeg;
+	private ModelRenderer RightLowerLeg;
+	private ModelRenderer Neck;
+	private ModelRenderer Head;
+	private ModelRenderer Beak;
+	private ModelRenderer Chest;
+	private ModelRenderer LeftWing;
+	private ModelRenderer RightWing;
+	private ModelRenderer LeftFoot;
+	private ModelRenderer RightFoot;
 
 	public ModelPheasant()
 	{

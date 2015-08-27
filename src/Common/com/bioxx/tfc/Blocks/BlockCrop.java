@@ -33,25 +33,25 @@ import com.bioxx.tfc.api.TFCOptions;
 
 public class BlockCrop extends BlockContainer
 {
-	IIcon[] iconsCarrots = new IIcon[5];
-	IIcon[] iconsGarlic = new IIcon[5];
-	IIcon[] iconsCorn = new IIcon[6];
-	IIcon[] iconsCabbage = new IIcon[6];
-	IIcon[] iconsTomato = new IIcon[8];
-	IIcon[] iconsPepperRed = new IIcon[7];
-	IIcon[] iconsPepperYellow = new IIcon[7];
-	IIcon[] iconsWheat = new IIcon[8];
-	IIcon[] iconsRye = new IIcon[8];
-	IIcon[] iconsBarley = new IIcon[8];
-	IIcon[] iconsOat = new IIcon[8];
-	IIcon[] iconsRice = new IIcon[8];
-	IIcon[] iconsGreenbean = new IIcon[7];
-	IIcon[] iconsOnion = new IIcon[7];
-	IIcon[] iconsPotato = new IIcon[7];
-	IIcon[] iconsSoybean = new IIcon[7];
-	IIcon[] iconsSquash = new IIcon[7];
-	IIcon[] iconsJute = new IIcon[6];
-	IIcon[] iconsSugarcane = new IIcon[8];
+	private IIcon[] iconsCarrots = new IIcon[5];
+	private IIcon[] iconsGarlic = new IIcon[5];
+	private IIcon[] iconsCorn = new IIcon[6];
+	private IIcon[] iconsCabbage = new IIcon[6];
+	private IIcon[] iconsTomato = new IIcon[8];
+	private IIcon[] iconsPepperRed = new IIcon[7];
+	private IIcon[] iconsPepperYellow = new IIcon[7];
+	private IIcon[] iconsWheat = new IIcon[8];
+	private IIcon[] iconsRye = new IIcon[8];
+	private IIcon[] iconsBarley = new IIcon[8];
+	private IIcon[] iconsOat = new IIcon[8];
+	private IIcon[] iconsRice = new IIcon[8];
+	private IIcon[] iconsGreenbean = new IIcon[7];
+	private IIcon[] iconsOnion = new IIcon[7];
+	private IIcon[] iconsPotato = new IIcon[7];
+	private IIcon[] iconsSoybean = new IIcon[7];
+	private IIcon[] iconsSquash = new IIcon[7];
+	private IIcon[] iconsJute = new IIcon[6];
+	private IIcon[] iconsSugarcane = new IIcon[8];
 
 	public IIcon iconInfest;
 

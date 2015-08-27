@@ -68,8 +68,8 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 	private Slot field_74235_v;
 	private boolean field_74234_w;
 	private CreativeCrafting field_82324_x;
-	private static int tabPage = 0;
-	private int maxPages = 0;
+	private static int tabPage;
+	private int maxPages;
 
 	public GuiContainerCreativeTFC(EntityPlayer par1EntityPlayer)
 	{
@@ -707,7 +707,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 			}
 
 			if (creativetabs != null)
-				list.add(1, "" + EnumChatFormatting.BOLD + EnumChatFormatting.BLUE + I18n.format(creativetabs.getTranslatedTabLabel()));
+				list.add(1, EnumChatFormatting.BOLD.toString() + EnumChatFormatting.BLUE + I18n.format(creativetabs.getTranslatedTabLabel()));
 
 			for (int i1 = 0; i1 < list.size(); ++i1)
 			{

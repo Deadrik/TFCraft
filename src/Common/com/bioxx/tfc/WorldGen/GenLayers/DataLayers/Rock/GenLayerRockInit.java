@@ -5,7 +5,7 @@ import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 public class GenLayerRockInit extends GenLayerTFC
 {
-	DataLayer[] layerRocks;
+	private DataLayer[] layerRocks;
 	public GenLayerRockInit(long par1, DataLayer[] rocks)
 	{
 		super(par1);

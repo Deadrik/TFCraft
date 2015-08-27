@@ -31,7 +31,7 @@ import com.bioxx.tfc.api.Util.CollapseList;
 public class BlockCollapsible extends BlockTerraContainer
 {
 	public Block dropBlock;
-	public static boolean fallInstantly = false;
+	public static boolean fallInstantly;
 
 	protected BlockCollapsible(Material material, Block block)
 	{
@@ -58,9 +58,9 @@ public class BlockCollapsible extends BlockTerraContainer
 
 	public static boolean canFallBelow(World world, int x, int y, int z)
 	{
-		Block block = world.getBlock(x, y, z);
 		if (world.isAirBlock(x, y, z))
 			return true;
+		Block block = world.getBlock(x, y, z);
 		if (block == Blocks.fire)
 			return true;
 		if (block == TFCBlocks.TallGrass)
@@ -201,11 +201,11 @@ public class BlockCollapsible extends BlockTerraContainer
 	{
 		int[] drop = getDropBlock(world, x, y, z);
 		Block fallingBlock = Block.getBlockById(drop[0]);
-		int fallingBlockMeta = drop[1];
 
 		if (world.getBlock(x, y, z) == Blocks.bedrock || world.getBlock(x, y, z) == fallingBlock)
 			return false;
 
+		int fallingBlockMeta = drop[1];
 		if (canFallBelow(world, x, y - 1, z) && !isNearSupport(world, x, y, z, 4, collapseChance) && isUnderLoad(world, x, y, z))
 		{
 			if (!world.isRemote && fallingBlock != Blocks.air)

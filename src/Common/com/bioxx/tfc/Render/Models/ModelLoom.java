@@ -14,35 +14,35 @@ import com.bioxx.tfc.TileEntities.TELoom;
 
 public class ModelLoom extends ModelBase {
 
-	ModelRenderer loomPole1;
-	ModelRenderer loomPole2;
-	ModelRenderer loomPoleBase;
+	private ModelRenderer loomPole1;
+	private ModelRenderer loomPole2;
+	//private ModelRenderer loomPoleBase;
 
-	TexturedQuad[] initialString;
-	TexturedQuad[] finalString;
+	private TexturedQuad[] initialString;
+	private TexturedQuad[] finalString;
 
-	TexturedQuad clothRender;
+	private TexturedQuad clothRender;
 
-	PositionTextureVertex vert0;
-	PositionTextureVertex vert1;
-	PositionTextureVertex vert2;
-	PositionTextureVertex vert3;
+	private PositionTextureVertex vert0;
+	private PositionTextureVertex vert1;
+	private PositionTextureVertex vert2;
+	private PositionTextureVertex vert3;
 
-	float[] stringLength = new float[16];
+	//private float[] stringLength = new float[16];
 
-	public int cloth = 0;
-	float pole1String_y = 14.5F;
-	float pole2String_y = 14.5F;
+	public int cloth;
+	private float pole1String_y = 14.5F;
+	private float pole2String_y = 14.5F;
 
-	int lastIncreaseTick_1;
-	int lastIncreaseTick_2;
+	/*private int lastIncreaseTick_1;
+	private int lastIncreaseTick_2;*/
 	
-	public int tempNum = 0;
-	public long tempTime = 0;
-	public boolean clothIncrease = false;
+	public int tempNum;
+	public long tempTime;
+	public boolean clothIncrease;
 	public int mod = 40;
-	public int lastClothIncrease = 0;
-	public boolean stillWeaving = false;
+	public int lastClothIncrease;
+	public boolean stillWeaving;
 
 	public ModelLoom(){
 		super();

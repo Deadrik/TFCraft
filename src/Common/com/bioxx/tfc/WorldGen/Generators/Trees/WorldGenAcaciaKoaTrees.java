@@ -16,39 +16,41 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 	 * Contains three sets of two values that provide complimentary indices for a given 'major' index - 1 and 2 for 0, 0
 	 * and 2 for 1, and 0 and 1 for 2.
 	 */
-	static final byte[] otherCoordPairs = new byte[] {(byte)2, (byte)0, (byte)0, (byte)1, (byte)2, (byte)1};
-	Random rand = new Random();
+	private static final byte[] otherCoordPairs = new byte[]
+	{ (byte) 2, (byte) 0, (byte) 0, (byte) 1, (byte) 2, (byte) 1 };
+	private final Random rand = new Random();
 
 	/** Reference to the World object. */
-	World worldObj;
-	int[] basePos = new int[] {0, 0, 0};
-	int heightLimit = 0;
-	int height;
-	double heightAttenuation = 0.618D;
-	double branchDensity = 1.0D;
-	double branchSlope = 0.681D;
-	double scaleWidth = 3.0D;
-	double leafDensity = 1.0D;
+	private World worldObj;
+	private int[] basePos = new int[]
+	{ 0, 0, 0 };
+	private int heightLimit;
+	private int height;
+	private static final double heightAttenuation = 0.618D;
+	//private static final double branchDensity = 1.0D;
+	private static final double branchSlope = 0.681D;
+	private double scaleWidth = 3.0D;
+	private double leafDensity = 1.0D;
 
 	/**
 	 * Currently always 1, can be set to 2 in the class constructor to generate a double-sized tree trunk for big trees.
 	 */
-	int trunkSize = 1;
+	//private static final int trunkSize = 1;
 
 	/**
 	 * Sets the limit of the random value used to initialize the height limit.
 	 */
-	int heightLimitLimit = 24;
+	private int heightLimitLimit = 24;
 
 	/**
 	 * Sets the distance limit for how far away the generator will populate leaves from the base leaf node.
 	 */
-	int leafDistanceLimit = 4;
+	private int leafDistanceLimit = 4;
 
 	/** Contains a list of a points at which to generate groups of leaves. */
-	int[][] leafNodes;
+	private int[][] leafNodes;
 
-	private int treeId;
+	private final int treeId;
 
 	public WorldGenAcaciaKoaTrees(boolean par1, int id)
 	{
@@ -60,7 +62,7 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 	 * Checks a line of blocks in the world from the first coordinate to triplet to the second, returning the distance
 	 * (in blocks) before a non-air, non-leaf block is encountered and/or the end is encountered.
 	 */
-	int checkBlockLine(int[] par1ArrayOfInteger, int[] par2ArrayOfInteger)
+	private int checkBlockLine(int[] par1ArrayOfInteger, int[] par2ArrayOfInteger)
 	{
 		int[] var3 = new int[] {0, 0, 0};
 		byte var4 = 0;
@@ -137,7 +139,7 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 	/**
 	 * Generates the leaves surrounding an individual entry in the leafNodes list.
 	 */
-	void generateLeafNode(int par1, int par2, int par3)
+	private void generateLeafNode(int par1, int par2, int par3)
 	{
 		int var4 = par2;
 		for (int var5 = par2 + this.leafDistanceLimit; var4 < var5; ++var4)
@@ -150,7 +152,7 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 	/**
 	 * Generates additional wood blocks to fill out the bases of different leaf nodes that would otherwise degrade.
 	 */
-	void generateLeafNodeBases()
+	private void generateLeafNodeBases()
 	{
 		int var1 = 0;
 		int var2 = this.leafNodes.length;
@@ -169,9 +171,9 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 	/**
 	 * Generates a list of leaf nodes for the tree, to be populated by generateLeaves.
 	 */
-	void generateLeafNodeList()
+	private void generateLeafNodeList()
 	{
-		this.height = (int)(this.heightLimit * this.heightAttenuation);
+		this.height = (int) (this.heightLimit * WorldGenAcaciaKoaTrees.heightAttenuation);
 		if (this.height >= this.heightLimit)
 			this.height = this.heightLimit - 1;
 
@@ -215,7 +217,7 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 					{
 						int[] var19 = new int[] {this.basePos[0], this.basePos[1], this.basePos[2]};
 						double var20 = Math.sqrt(Math.pow(Math.abs(this.basePos[0] - var17[0]), 2.0D) + Math.pow(Math.abs(this.basePos[2] - var17[2]), 2.0D));
-						double var22 = var20 * this.branchSlope;
+						double var22 = var20 * WorldGenAcaciaKoaTrees.branchSlope;
 
 						if (var17[1] - var22 > var5)
 							var19[1] = var5;
@@ -243,7 +245,7 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 	/**
 	 * Generates the leaf portion of the tree as specified by the leafNodes list.
 	 */
-	void generateLeaves()
+	private void generateLeaves()
 	{
 		int var1 = 0;
 
@@ -268,7 +270,7 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 	 * Places the trunk for the big tree that is being generated. Able to generate double-sized trunks by changing a
 	 * field that is always 1 to 2.
 	 */
-	void generateTrunk()
+	private void generateTrunk()
 	{
 		int var1 = this.basePos[0];
 		int var2 = this.basePos[1];
@@ -278,7 +280,7 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 		int[] var6 = new int[] {var1, var3, var4};
 		this.placeBlockLine(var5, var6, TFCBlocks.LogNatural2);
 
-		if (this.trunkSize == 2)
+		/*if (WorldGenAcaciaKoaTrees.trunkSize == 2)
 		{
 			++var5[0];
 			++var6[0];
@@ -289,10 +291,10 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 			var5[0] += -1;
 			var6[0] += -1;
 			this.placeBlockLine(var5, var6, TFCBlocks.LogNatural2);
-		}
+		}*/
 	}
 
-	void genTreeLayer(int par1, int par2, int par3, float par4, byte par5, Block par6)
+	private void genTreeLayer(int par1, int par2, int par3, float par4, byte par5, Block par6)
 	{
 		int var7 = (int)(par4 + 0.618D);
 		byte var8 = otherCoordPairs[par5];
@@ -337,7 +339,7 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 	/**
 	 * Gets the rough size of a layer of the tree.
 	 */
-	float layerSize(int par1)
+	private float layerSize(int par1)
 	{
 		if (par1 < this.heightLimit * 0.3D)
 		{
@@ -364,12 +366,12 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 	/**
 	 * Indicates whether or not a leaf node requires additional wood to be added to preserve integrity.
 	 */
-	boolean leafNodeNeedsBase(int par1)
+	private boolean leafNodeNeedsBase(int par1)
 	{
 		return par1 >= this.leafDistanceLimit;
 	}
 
-	float leafSize(int par1)
+	private float leafSize(int par1)
 	{
 		return par1 >= 0 && par1 < this.leafDistanceLimit ? par1 != 0 && par1 != this.leafDistanceLimit - 1 ? 3.0F : 2.0F : -1.0F;
 	}
@@ -377,7 +379,7 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 	/**
 	 * Places a line of the specified block ID into the world from the first coordinate triplet to the second.
 	 */
-	void placeBlockLine(int[] par1ArrayOfInteger, int[] par2ArrayOfInteger, Block par3)
+	private void placeBlockLine(int[] par1ArrayOfInteger, int[] par2ArrayOfInteger, Block par3)
 	{
 		int[] var4 = new int[] {0, 0, 0};
 		byte var5 = 0;
@@ -438,7 +440,7 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 	 * Returns a boolean indicating whether or not the current location for the tree, spanning basePos to to the height
 	 * limit, is valid.
 	 */
-	boolean validTreeLocation()
+	private boolean validTreeLocation()
 	{
 		int[] var1 = new int[] {this.basePos[0], this.basePos[1], this.basePos[2]};
 		int[] var2 = new int[] {this.basePos[0], this.basePos[1] + this.heightLimit - 1, this.basePos[2]};

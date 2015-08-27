@@ -39,7 +39,7 @@ public class GuiBarrel extends GuiContainerTFC
 	public static final ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_barrel.png");
 	protected TEBarrel barrelTE;
 	protected EntityPlayer player;
-	protected int guiTab = 0;
+	protected int guiTab;
 
 	public GuiBarrel(InventoryPlayer inventoryplayer, TEBarrel te, World world, int x, int y, int z, int tab)
 	{
@@ -188,13 +188,13 @@ public class GuiBarrel extends GuiContainerTFC
 
 	public class GuiBarrelTabButton extends GuiButton
 	{
-		GuiBarrel screen;
-		IIcon buttonicon = null;
+		private GuiBarrel screen;
+		private IIcon buttonicon;
 
-		int xPos = 0;
-		int yPos = 172;
-		int xSize = 31;
-		int ySize = 15;
+		private int xPos;
+		private int yPos = 172;
+		private int xSize = 31;
+		private int ySize = 15;
 
 		public GuiBarrelTabButton(int index, int xPos, int yPos, int width, int height, GuiBarrel gui, IIcon icon, String s)
 		{

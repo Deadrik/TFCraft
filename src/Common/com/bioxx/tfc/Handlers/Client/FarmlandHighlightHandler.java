@@ -4,7 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 import org.lwjgl.opengl.GL11;
 
@@ -22,8 +25,6 @@ import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class FarmlandHighlightHandler
 {
@@ -260,7 +261,7 @@ public class FarmlandHighlightHandler
 		}
 	}
 
-	void drawFace(AxisAlignedBB par1AxisAlignedBB)
+	public void drawFace(AxisAlignedBB par1AxisAlignedBB)
 	{
 		Tessellator var2 = Tessellator.instance;
 
@@ -273,7 +274,7 @@ public class FarmlandHighlightHandler
 		var2.draw();
 	}
 
-	void drawBox(AxisAlignedBB par1AxisAlignedBB)
+	public void drawBox(AxisAlignedBB par1AxisAlignedBB)
 	{
 		Tessellator var2 = Tessellator.instance;
 
@@ -318,7 +319,7 @@ public class FarmlandHighlightHandler
 		var2.draw();
 	}
 
-	void drawOutlinedBoundingBox(AxisAlignedBB par1AxisAlignedBB)
+	public void drawOutlinedBoundingBox(AxisAlignedBB par1AxisAlignedBB)
 	{
 		Tessellator var2 = Tessellator.instance;
 		var2.startDrawing(3);

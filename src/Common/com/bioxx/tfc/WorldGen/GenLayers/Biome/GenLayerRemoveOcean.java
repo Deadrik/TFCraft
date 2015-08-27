@@ -1,13 +1,13 @@
 package com.bioxx.tfc.WorldGen.GenLayers.Biome;
 
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
-
 import net.minecraft.world.gen.layer.IntCache;
+
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 public class GenLayerRemoveOcean extends GenLayerTFC
 {
-	int chance = 10;
-	boolean checkType = true;
+	private final int chance;
+	private final boolean checkType;
 	public GenLayerRemoveOcean(long par1, GenLayerTFC parent, int chance, boolean ct)
 	{
 		super(par1);

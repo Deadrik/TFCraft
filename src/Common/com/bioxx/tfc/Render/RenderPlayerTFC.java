@@ -33,12 +33,12 @@ public class RenderPlayerTFC extends RenderPlayer
 	public static String[] armorFilenamePrefix = new String[] {"cloth", "chain", "iron", "diamond", "gold"};
 	public static float NAME_TAG_RANGE = 64.0f;
 	public static float NAME_TAG_RANGE_SNEAK = 32.0f;
-	ModelRenderer plume;
-	ModelRenderer plume2;
-	ModelRenderer HornR1;
-	ModelRenderer HornL1;
-	ModelRenderer HornR2;
-	ModelRenderer HornL2;
+	private ModelRenderer plume;
+	private ModelRenderer plume2;
+	private ModelRenderer HornR1;
+	private ModelRenderer HornL1;
+	private ModelRenderer HornR2;
+	private ModelRenderer HornL2;
 
 
 	public RenderPlayerTFC()

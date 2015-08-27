@@ -11,6 +11,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -192,7 +193,6 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 		}
 		else if(metadata == 0 && side == 1 && player.isSneaking())
 		{
-			TEPottery te;
 			Block base = world.getBlock(x, y-1, z);
 			if(base != TFCBlocks.Pottery && world.isAirBlock(x, y, z))
 			{
@@ -206,9 +206,9 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 				return false;
 			}
 
-			if(world.getTileEntity(x, y, z) != null && world.getTileEntity(x, y, z) instanceof TEPottery)
+			if (world.getTileEntity(x, y, z) instanceof TEPottery)
 			{
-				te = (TEPottery) world.getTileEntity(x, y, z);
+				TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
 				if(te.canAddItem(0))
 				{
 					te.inventory[0] = stack.copy();

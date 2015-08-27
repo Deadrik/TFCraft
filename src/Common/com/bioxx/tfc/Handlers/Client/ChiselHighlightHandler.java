@@ -189,7 +189,7 @@ public class ChiselHighlightHandler
 		}
 	}
 
-	void drawOutlinedBoundingBox(AxisAlignedBB par1AxisAlignedBB)
+	public void drawOutlinedBoundingBox(AxisAlignedBB par1AxisAlignedBB)
 	{
 		Tessellator var2 = Tessellator.instance;
 		var2.startDrawing(3);

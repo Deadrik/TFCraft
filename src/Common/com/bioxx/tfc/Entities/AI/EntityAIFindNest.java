@@ -19,11 +19,11 @@ import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 public class EntityAIFindNest extends EntityAIBase
 {
 	private EntityCreature theCreature;
-	private double shelterX;
+	/*private double shelterX;
 	private double shelterY;
-	private double shelterZ;
+	private double shelterZ;*/
 	private int currentTick;
-	private double movementSpeed;
+	//private double movementSpeed;
 	private World theWorld;
 	private int field_75402_d;
 	private final double field_75404_b;
@@ -48,7 +48,7 @@ public class EntityAIFindNest extends EntityAIBase
 	public EntityAIFindNest(EntityAnimal eAnimal, double par2)
 	{
 		this.theCreature = eAnimal;
-		this.movementSpeed = par2;
+		//this.movementSpeed = par2;
 		this.field_75404_b = par2;
 		this.theWorld = eAnimal.worldObj;
 		this.failureDepressionMap = new HashMap<String,Long>();
@@ -183,9 +183,6 @@ public class EntityAIFindNest extends EntityAIBase
 	 */
 	protected boolean isSittableBlock(World world, int x, int y, int z)
 	{
-		Block block = world.getBlock(x, y, z);
-		//int meta = world.getBlockMetadata(x, y, z);
-
 		if(failureDepressionMap.containsKey((x + "," + y + "," + z)))
 		{
 			long time = failureDepressionMap.get((x + "," + y + "," + z));
@@ -194,6 +191,9 @@ public class EntityAIFindNest extends EntityAIBase
 			else
 				failureDepressionMap.remove(new int[]{x, y, z});
 		}
+
+		Block block = world.getBlock(x, y, z);
+		//int meta = world.getBlockMetadata(x, y, z);
 		if (block == TFCBlocks.NestBox)
 		{
 			TENestBox tileentitynest = (TENestBox) world.getTileEntity(x, y, z);

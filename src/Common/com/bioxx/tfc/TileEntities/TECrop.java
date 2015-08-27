@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
 import com.bioxx.tfc.Blocks.BlockFarmland;
-import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -31,7 +30,7 @@ public class TECrop extends NetworkTileEntity
 	private long plantedTime;//Tracks the time when the plant was planted
 	private byte sunLevel;
 	public int tendingLevel;
-	private int killLevel = 0;//We use this to make crop killing more and more likely if its cold
+	private int killLevel;//We use this to make crop killing more and more likely if its cold
 
 	public TECrop()
 	{
@@ -51,7 +50,7 @@ public class TECrop extends NetworkTileEntity
 			float timeMultiplier = 360f / TFC_Time.daysInYear;
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 			long time = TFC_Time.getTotalTicks();
-			ChunkData cd = TFC_Core.getCDM(worldObj).getData(xCoord >> 4, zCoord >> 4);
+			//ChunkData cd = TFC_Core.getCDM(worldObj).getData(xCoord >> 4, zCoord >> 4);
 			if(crop != null && growthTimer < time && sunLevel > 0)
 			{
 				sunLevel--;

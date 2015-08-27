@@ -21,9 +21,9 @@ import com.bioxx.tfc.api.Constant.Global;
 
 public class ItemLooseRock extends ItemTerra
 {
-	IIcon[] icons;
-	Item specialCraftingType;
-	ItemStack specialCraftingTypeAlternate;
+	protected IIcon[] icons;
+	protected Item specialCraftingType;
+	protected ItemStack specialCraftingTypeAlternate;
 
 	public ItemLooseRock() 
 	{

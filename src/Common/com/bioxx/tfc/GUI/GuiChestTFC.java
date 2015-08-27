@@ -22,7 +22,7 @@ public class GuiChestTFC extends GuiContainer
 	/**
 	 * window height is calculated with this values, the more rows, the heigher
 	 */
-	private int inventoryRows = 0;
+	private int inventoryRows;
 
 	public GuiChestTFC(IInventory par1IInventory, IInventory chestInv, World world, int x, int y, int z)
 	{

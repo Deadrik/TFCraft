@@ -39,29 +39,29 @@ public class FoodStatsTFC
 	public float nutrProtein = 1.0f;
 	private boolean sendUpdate = true;
 
-	public long soberTime = 0;
+	public long soberTime;
 
 	/**This is how full the player is from the food that they've eaten. 
 	 * It could also be how happy they are with what they've eaten*/
-	private float satisfaction = 0.0F;
+	private float satisfaction;
 
-	private float foodExhaustionLevel = 0;
-	private float waterExhaustionLevel = 0;
+	private float foodExhaustionLevel;
+	//private float waterExhaustionLevel;
 
 	/** The player's food timer value. */
-	public long foodTimer = 0;
-	public long foodHealTimer = 0;
+	public long foodTimer;
+	public long foodHealTimer;
 
 	public float waterLevel = TFC_Time.dayLength*2;
-	public long waterTimer = 0;
+	public long waterTimer;
 
 	public EntityPlayer player;
 	private long nameSeed = Long.MIN_VALUE;
-	private boolean satFruit = false;
-	private boolean satVeg = false;
-	private boolean satGrain = false;
-	private boolean satProtein = false;
-	private boolean satDairy = false;
+	private boolean satFruit;
+	private boolean satVeg;
+	private boolean satGrain;
+	private boolean satProtein;
+	private boolean satDairy;
 
 	public FoodStatsTFC(EntityPlayer player)
 	{
@@ -320,10 +320,10 @@ public class FoodStatsTFC
 		this.foodExhaustionLevel = par1;
 	}
 
-	public void addWaterExhaustion(float par1)
+	/*public void addWaterExhaustion(float par1)
 	{
 		this.waterExhaustionLevel = par1;
-	}
+	}*/
 
 	public float getSatisfaction()
 	{
@@ -397,7 +397,7 @@ public class FoodStatsTFC
 		return tasteFactor;
 	}
 
-	float getTasteDistanceFactor(int pref, int val)
+	public float getTasteDistanceFactor(int pref, int val)
 	{
 		int abs = Math.abs(pref-val);
 		if(abs < 11)

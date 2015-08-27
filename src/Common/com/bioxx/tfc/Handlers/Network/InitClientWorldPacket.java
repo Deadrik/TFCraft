@@ -1,22 +1,18 @@
 package com.bioxx.tfc.Handlers.Network;
 
+import java.util.HashMap;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
-import java.util.HashMap;
-
 import net.minecraft.entity.player.EntityPlayer;
+
+import cpw.mods.fml.common.network.ByteBufUtils;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Core.Player.FoodStatsTFC;
-import com.bioxx.tfc.Core.Player.PlayerInfo;
-import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
-import com.bioxx.tfc.Core.Player.SkillStats;
+import com.bioxx.tfc.Core.Player.*;
 import com.bioxx.tfc.api.TFCOptions;
-
-import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class InitClientWorldPacket extends AbstractPacket
 {
@@ -29,8 +25,8 @@ public class InitClientWorldPacket extends AbstractPacket
 	private float nutrGrain;
 	private float nutrProtein;
 	private float nutrDairy;
-	private boolean craftingTable = false;
-	private boolean debugMode = false;
+	private boolean craftingTable;
+	private boolean debugMode;
 	private SkillStats playerSkills;
 	private int daysInYear, HGRate, HGCap;
 	private HashMap<String, Integer> skillMap = new HashMap<String, Integer>();

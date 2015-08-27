@@ -30,9 +30,9 @@ import com.bioxx.tfc.api.Util.Helper;
 public class TEFoodPrep extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[11];
-	public int lastTab = 0;
-	private float[] sandwichWeights = new float[]{2,3,2,2,1};
-	private float[] saladWeights = new float[]{10,4,4,2};
+	public int lastTab;
+	private final float[] sandwichWeights = new float[]{2,3,2,2,1};
+	private final float[] saladWeights = new float[]{10,4,4,2};
 
 	@Override
 	public void updateEntity()

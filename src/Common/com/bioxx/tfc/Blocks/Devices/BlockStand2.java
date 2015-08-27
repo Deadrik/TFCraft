@@ -27,7 +27,7 @@ import com.bioxx.tfc.api.Interfaces.IMultipleBlock;
 
 public class BlockStand2 extends BlockStand implements IMultipleBlock, IEquipable
 {
-	String[] woodNames;
+	private String[] woodNames;
 	public BlockStand2()
 	{
 		super();

@@ -25,7 +25,7 @@ import com.bioxx.tfc.api.Crafting.LoomRecipe;
 
 public class TELoom extends NetworkTileEntity implements IInventory
 {
-	public byte rotation = 0;
+	public byte rotation;
 	public int loomType;
 	private ItemStack[] storage;
 
@@ -33,12 +33,12 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	private boolean weaving;
 	private boolean finished;
 
-	private ModelLoom model = null;
+	private ModelLoom model;
 
 	private int clothCompletionCount;
 
 	public LoomRecipe recipe;
-	private ResourceLocation defaultTexture = new ResourceLocation(Reference.ModID, "textures/blocks/String.png");
+	private final ResourceLocation defaultTexture = new ResourceLocation(Reference.ModID, "textures/blocks/String.png");
 
 	@Override
 	public boolean canUpdate()

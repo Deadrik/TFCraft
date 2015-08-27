@@ -26,11 +26,11 @@ public class TFC_Time
 		TFC_Core.translate("gui.Calendar.Wednesday"), TFC_Core.translate("gui.Calendar.Thursday"),
 		TFC_Core.translate("gui.Calendar.Friday"), TFC_Core.translate("gui.Calendar.Saturday")};
 
-	public static int currentDay = 0;
+	public static int currentDay;
 	public static int lastMonth = 11;
-	public static int currentMonth = 0;
-	public static int currentYear = 0;
-	private static long time = 0;
+	public static int currentMonth;
+	public static int currentYear;
+	private static long time;
 
 	public static final int January = 10;
 	public static final int February = 11;

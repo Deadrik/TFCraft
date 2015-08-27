@@ -37,7 +37,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	private ItemStack[] storage = new ItemStack[5];
 	private String customName;
 	private int cooldown = -1;
-	public int pressCooldown = 0;
+	public int pressCooldown;
 	public ItemStack pressBlock;
 
 	public TEHopper()
@@ -374,24 +374,24 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		return null;
 	}
 
-	public boolean feed()
+	/*public boolean feed()
 	{
 		if (this.worldObj != null && !this.worldObj.isRemote)
 		{
 			if (!this.isCoolingDown() && BlockHopper.func_149917_c(this.getBlockMetadata()))
 			{
 				boolean invChanged = false;
-
+	
 				if (!this.isHopperEmpty())
 				{
 					invChanged = this.tryToFeedContents();
 				}
-
+	
 				if (!this.isHopperFull())
 				{
 					invChanged = FeedHopper(this) || invChanged;
 				}
-
+	
 				if (invChanged)
 				{
 					this.setCooldown(8);
@@ -399,14 +399,14 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 					return true;
 				}
 			}
-
+	
 			return false;
 		}
 		else
 		{
 			return false;
 		}
-	}
+	}*/
 
 	public void setCooldown(int time)
 	{
@@ -454,10 +454,10 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		return true;
 	}
 
-	private boolean tryToFeedContents()
+	/*private boolean tryToFeedContents()
 	{
 		IInventory iinventory = this.getOutputInventory();
-
+	
 		if (iinventory == null)
 		{
 			return false;
@@ -465,7 +465,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		else
 		{
 			int i = Facing.oppositeSide[BlockHopper.getDirectionFromMetadata(this.getBlockMetadata())];
-
+	
 			if (this.func_152102_a(iinventory, i))
 			{
 				return false;
@@ -478,21 +478,21 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 					{
 						ItemStack itemstack = this.getStackInSlot(j).copy();
 						ItemStack itemstack1 = func_145889_a(iinventory, this.decrStackSize(j, 1), i);
-
+	
 						if (itemstack1 == null || itemstack1.stackSize == 0)
 						{
 							iinventory.markDirty();
 							return true;
 						}
-
+	
 						this.setInventorySlotContents(j, itemstack);
 					}
 				}
-
+	
 				return false;
 			}
 		}
-	}
+	}*/
 
 	private boolean func_152102_a(IInventory p_152102_1_, int p_152102_2_)
 	{
@@ -560,24 +560,24 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		return true;
 	}
 
-	public static boolean FeedHopper(IHopper hopper)
+	/*public static boolean FeedHopper(IHopper hopper)
 	{
 		IInventory inputInv = getInputInventory(hopper);
-
+	
 		if (inputInv != null)
 		{
 			byte b0 = 0;
-
+	
 			if (isSidedInvFull(inputInv, b0))
 			{
 				return false;
 			}
-
+	
 			if (inputInv instanceof ISidedInventory && b0 > -1)
 			{
 				ISidedInventory isidedinventory = (ISidedInventory)inputInv;
 				int[] aint = isidedinventory.getAccessibleSlotsFromSide(b0);
-
+	
 				for (int k = 0; k < aint.length; ++k)
 				{
 					if (feedHopper(hopper, inputInv, aint[k], b0))
@@ -589,7 +589,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 			else
 			{
 				int i = inputInv.getSizeInventory();
-
+	
 				for (int j = 0; j < i; ++j)
 				{
 					if (feedHopper(hopper, inputInv, j, b0))
@@ -602,36 +602,36 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		else
 		{
 			EntityItem entityitem = searchForLooseInput(hopper.getWorldObj(), hopper.getXPos(), hopper.getYPos() + 1.0D, hopper.getZPos());
-
+	
 			if (entityitem != null)
 			{
 				return FeedLooseItem(hopper, entityitem);
 			}
 		}
-
+	
 		return false;
-	}
+	}*/
 
-	private static boolean feedHopper(IHopper hopper, IInventory input, int p_145892_2_, int p_145892_3_)
+	/*private static boolean feedHopper(IHopper hopper, IInventory input, int p_145892_2_, int p_145892_3_)
 	{
 		ItemStack itemstack = input.getStackInSlot(p_145892_2_);
-
+	
 		if (itemstack != null && canExtractItemStack(input, itemstack, p_145892_2_, p_145892_3_))
 		{
 			ItemStack itemstack1 = itemstack.copy();
 			ItemStack itemstack2 = func_145889_a(hopper, input.decrStackSize(p_145892_2_, 1), -1);
-
+	
 			if (itemstack2 == null || itemstack2.stackSize == 0)
 			{
 				input.markDirty();
 				return true;
 			}
-
+	
 			input.setInventorySlotContents(p_145892_2_, itemstack1);
 		}
-
+	
 		return false;
-	}
+	}*/
 
 	public static boolean FeedLooseItem(IInventory hopper, EntityItem p_145898_1_)
 	{

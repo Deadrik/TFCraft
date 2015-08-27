@@ -13,9 +13,9 @@ import com.bioxx.tfc.api.Interfaces.ISize;
 
 public class SlotSize extends Slot
 {
-	EnumSize size = EnumSize.MEDIUM;
-	List<Item> excpetions = new ArrayList<Item>();
-	List<Item> inclusions = new ArrayList<Item>();
+	protected EnumSize size = EnumSize.MEDIUM;
+	private List<Item> excpetions = new ArrayList<Item>();
+	private List<Item> inclusions = new ArrayList<Item>();
 
 	public SlotSize(IInventory iinventory, int i, int j, int k)
 	{

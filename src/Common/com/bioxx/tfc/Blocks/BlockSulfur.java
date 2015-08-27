@@ -29,8 +29,8 @@ import com.bioxx.tfc.api.Interfaces.ICustomCollision;
 
 public class BlockSulfur extends BlockTerra implements ICustomCollision
 {
-	int itemMeta = Arrays.asList(Global.POWDER).indexOf("Sulfur Powder");
-	IIcon[] icons = new IIcon[4];
+	private int itemMeta = Arrays.asList(Global.POWDER).indexOf("Sulfur Powder");
+	private IIcon[] icons = new IIcon[4];
 
 	public BlockSulfur(Material material)
 	{

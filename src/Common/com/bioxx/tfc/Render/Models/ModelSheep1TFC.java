@@ -1,6 +1,5 @@
 package com.bioxx.tfc.Render.Models;
 
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelSheep1;
 import net.minecraft.entity.Entity;
 
@@ -11,21 +10,21 @@ import com.bioxx.tfc.api.Entities.IAnimal;
 public class ModelSheep1TFC extends ModelSheep1
 {
 	
-	ModelRenderer horn1;
-	ModelRenderer horn2;
-	ModelRenderer horn3;
-	ModelRenderer horn4;
-	ModelRenderer horn5;
-	ModelRenderer horn6;
-	ModelRenderer horn1b;
-	ModelRenderer horn2b;
-	ModelRenderer horn3b;
-	ModelRenderer horn4b;
-	ModelRenderer horn5b;
-	ModelRenderer horn6b;
+	/*private ModelRenderer horn1;
+	private ModelRenderer horn2;
+	private ModelRenderer horn3;
+	private ModelRenderer horn4;
+	private ModelRenderer horn5;
+	private ModelRenderer horn6;
+	private ModelRenderer horn1b;
+	private ModelRenderer horn2b;
+	private ModelRenderer horn3b;
+	private ModelRenderer horn4b;
+	private ModelRenderer horn5b;
+	private ModelRenderer horn6b;
 	
-	ModelRenderer ear;
-	ModelRenderer earb;
+	private ModelRenderer ear;
+	private ModelRenderer earb;*/
 	public ModelSheep1TFC()
 	{
 		super();

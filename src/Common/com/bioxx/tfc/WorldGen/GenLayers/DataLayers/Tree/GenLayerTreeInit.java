@@ -5,7 +5,7 @@ import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 public class GenLayerTreeInit extends GenLayerTFC
 {
-	DataLayer[] layerTrees;
+	private DataLayer[] layerTrees;
 	public GenLayerTreeInit(long par1, DataLayer[] trees)
 	{
 		super(par1);

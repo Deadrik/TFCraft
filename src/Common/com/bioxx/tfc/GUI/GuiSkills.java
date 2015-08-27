@@ -20,7 +20,7 @@ public class GuiSkills extends GuiContainerTFC
 {
 	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_skills.png");
 	protected EntityPlayer player;
-	private int skillsPage = 0;
+	private int skillsPage;
 	private static final int skillsPerPage = 9;
 
 	public GuiSkills(EntityPlayer player)
@@ -128,7 +128,7 @@ public class GuiSkills extends GuiContainerTFC
 
 	public class GuiButtonPage extends GuiButton
 	{
-		int u, v;
+		private int u, v;
 
 		public GuiButtonPage(int id, int xPos, int yPos, int xSize, int ySize, int u, int v)
 		{

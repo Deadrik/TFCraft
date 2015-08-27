@@ -17,7 +17,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class ArmourStandHighlightHandler
 {
-	AxisAlignedBB boxToRender;
+	private AxisAlignedBB boxToRender;
 	@SubscribeEvent
 	public void DrawBlockHighlightEvent(DrawBlockHighlightEvent evt)
 	{
@@ -121,7 +121,7 @@ public class ArmourStandHighlightHandler
 		}
 	}
 
-	boolean isVecInsideBox(AxisAlignedBB aabb, EntityPlayer player, Vec3 unit,double xOffset,double yOffset,double zOffset)
+	public boolean isVecInsideBox(AxisAlignedBB aabb, EntityPlayer player, Vec3 unit, double xOffset, double yOffset, double zOffset)
 	{
 		unit = player.getLookVec();
 		aabb.minY+=0.1;
@@ -210,7 +210,7 @@ public class ArmourStandHighlightHandler
 		return insideBoxX && insideBoxY && insideBoxZ;
 	}
 
-	void drawLine(Vec3 origin, Vec3 vector)
+	public void drawLine(Vec3 origin, Vec3 vector)
 	{
 		Tessellator var2 = Tessellator.instance;
 		var2.startDrawing(3);
@@ -221,7 +221,7 @@ public class ArmourStandHighlightHandler
 		var2.draw();
 	}
 
-	void drawOutlinedBoundingBox(AxisAlignedBB par1AxisAlignedBB)
+	public void drawOutlinedBoundingBox(AxisAlignedBB par1AxisAlignedBB)
 	{
 		Tessellator var2 = Tessellator.instance;
 		var2.startDrawing(3);

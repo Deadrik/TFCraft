@@ -5,7 +5,7 @@ import java.util.Random;
 public class SimplexNoise_Octave 
 {  // Simplex noise in 2D, 3D and 4D
 
-	public static long RANDOMSEED=0;
+	public static long RANDOMSEED;
 	private static int NUMBEROFSWAPS=400;  
 
 	private static Grad grad3[] = {new Grad(1,1,0),new Grad(-1,1,0),new Grad(1,-1,0),new Grad(-1,-1,0),
@@ -35,7 +35,6 @@ public class SimplexNoise_Octave
 		49,192,214, 31,181,199,106,157,184, 84,204,176,115,121,50,45,127, 4,150,254,
 		138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180};
 
-	private short p[]=new short[p_supply.length];
 
 	// To remove the need for index wrapping, double the permutation table length
 	private short perm[] = new short[512];
@@ -43,6 +42,7 @@ public class SimplexNoise_Octave
 
 	public SimplexNoise_Octave(int seed) 
 	{
+		short p[] = new short[p_supply.length];
 		p=p_supply.clone();
 
 		if (seed==RANDOMSEED)
@@ -355,7 +355,7 @@ public class SimplexNoise_Octave
 	// (array access is a lot slower than member access)
 	private static class Grad
 	{
-		double x, y, z, w;
+		private double x, y, z, w;
 
 		Grad(double x, double y, double z)
 		{

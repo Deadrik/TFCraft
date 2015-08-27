@@ -28,10 +28,10 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 public class TEQuern extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[3];
-	public int rotation = 0;
-	public boolean shouldRotate = false;
-	public int rotatetimer = 0;
-	public boolean hasQuern = false;
+	public int rotation;
+	public boolean shouldRotate;
+	public int rotatetimer;
+	public boolean hasQuern;
 
 	@Override
 	public void updateEntity()

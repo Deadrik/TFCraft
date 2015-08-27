@@ -26,7 +26,7 @@ import com.bioxx.tfc.api.Constant.Global;
 public class BlockGravel extends BlockTerra
 {
 	protected IIcon[] icons;
-	protected int textureOffset = 0;
+	protected int textureOffset;
 
 	public BlockGravel(int texOff)
 	{

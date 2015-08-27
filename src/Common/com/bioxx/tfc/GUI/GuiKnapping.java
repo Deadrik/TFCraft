@@ -16,7 +16,7 @@ import com.bioxx.tfc.api.TFCItems;
 
 public class GuiKnapping extends GuiContainerTFC
 {
-	boolean previouslyLoaded = false;
+	private boolean previouslyLoaded;
 	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_knapping.png");
 
 	public GuiKnapping(InventoryPlayer inventoryplayer, ItemStack is, World world, int x, int y, int z)

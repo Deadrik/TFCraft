@@ -13,7 +13,8 @@ public class WeatherManager
 	{
 		return instance;
 	}
-	public long seed = 0;
+
+	public long seed;
 
 	public WeatherManager()
 	{

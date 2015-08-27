@@ -17,15 +17,15 @@ import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 public class BodyTempStats
 {
-	private int temperatureLevel = 0;
-	private int prevTemperatureLevel = 0;
-	private int extraFoodConsumed = 0;
-	private int extraWaterConsumed = 0;
-	private int heatStorage = 0;
-	private long tempTimer = 0;
+	private int temperatureLevel;
+	private int prevTemperatureLevel;
+	private int extraFoodConsumed;
+	private int extraWaterConsumed;
+	private int heatStorage;
+	private long tempTimer;
 
-	Random rand = new Random();
-	ItemStack itemHead,itemChest,itemLegs,itemFeet;
+	private Random rand = new Random();
+	private ItemStack itemHead, itemChest, itemLegs, itemFeet;
 
 	public void onUpdate(EntityPlayer player)
 	{

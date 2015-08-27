@@ -9,30 +9,30 @@ import net.minecraft.util.MathHelper;
 public class ModelUngulate extends ModelBase
 {
 	//fields
-	ModelRenderer Body1;
-	ModelRenderer Neck;
-	ModelRenderer Haunch;
-	ModelRenderer UnderSide;
-	ModelRenderer Throat;
-	ModelRenderer Spine;
-	ModelRenderer LeftThigh;
-	ModelRenderer RightThigh;
-	ModelRenderer LeftCalf;
-	ModelRenderer RightCalf;
-	ModelRenderer LeftAnkle;
-	ModelRenderer RightAnkle;
-	ModelRenderer LeftFoot;
-	ModelRenderer RightFoot;
-	ModelRenderer LeftHoofBack;
-	ModelRenderer RightHoofBack;
-	ModelRenderer LeftShoulder;
-	ModelRenderer RightShoulder;
-	ModelRenderer LeftArm;
-	ModelRenderer RightArm;
-	ModelRenderer LeftWrist;
-	ModelRenderer RightWrist;
-	ModelRenderer RightHoofFront;
-	ModelRenderer LeftHoofFront;
+	private ModelRenderer Body1;
+	private ModelRenderer Neck;
+	private ModelRenderer Haunch;
+	private ModelRenderer UnderSide;
+	private ModelRenderer Throat;
+	private ModelRenderer Spine;
+	private ModelRenderer LeftThigh;
+	private ModelRenderer RightThigh;
+	private ModelRenderer LeftCalf;
+	private ModelRenderer RightCalf;
+	private ModelRenderer LeftAnkle;
+	private ModelRenderer RightAnkle;
+	private ModelRenderer LeftFoot;
+	private ModelRenderer RightFoot;
+	private ModelRenderer LeftHoofBack;
+	private ModelRenderer RightHoofBack;
+	private ModelRenderer LeftShoulder;
+	private ModelRenderer RightShoulder;
+	private ModelRenderer LeftArm;
+	private ModelRenderer RightArm;
+	private ModelRenderer LeftWrist;
+	private ModelRenderer RightWrist;
+	private ModelRenderer RightHoofFront;
+	private ModelRenderer LeftHoofFront;
 
 	public ModelUngulate()
 	{

@@ -19,12 +19,12 @@ import com.bioxx.tfc.api.Tools.ChiselMode;
  */
 public class ChiselMode_Slab extends ChiselMode {
 
-    private static String name;
+	//private static String name;
     private static ResourceLocation resourcelocation = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "icons.png");
     private static int texture_u, texture_v, divX, divY, divZ;
 
     public ChiselMode_Slab(String n){
-        name = n;
+		//name = n;
         texture_u = 40;
         texture_v = 58;
     }

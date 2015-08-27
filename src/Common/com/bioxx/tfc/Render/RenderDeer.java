@@ -29,7 +29,7 @@ public class RenderDeer extends RenderLiving
 	public void renderDeer(EntityDeer par1EntityDeer, double par2, double par4, double par6, float par8, float par9)
 	{
 		super.doRender(par1EntityDeer, par2, par4, par6, par8, par9);
-		//scale = par1EntityDeer.size_mod;
+		//scale = par1EntityDeer.getSize();
 	}
 
 	protected void func_25006_b (EntityDeer entitydeer, float f)
@@ -49,7 +49,7 @@ public class RenderDeer extends RenderLiving
 
 	protected void preRenderScale (EntityDeer par1EntityDeer, float par2)
 	{
-		GL11.glScalef (par1EntityDeer.size_mod-0.3f,par1EntityDeer.size_mod-0.3f,par1EntityDeer.size_mod-0.3f);
+		GL11.glScalef(par1EntityDeer.getSize() - 0.3f, par1EntityDeer.getSize() - 0.3f, par1EntityDeer.getSize() - 0.3f);
 	}
 
 	/**

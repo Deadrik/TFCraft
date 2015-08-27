@@ -72,7 +72,7 @@ public abstract class GenPHLayer extends GenLayerTFC
 		return continent;
 	}
 
-	static boolean shouldDraw = false;
+	private static boolean shouldDraw;
 	public static void drawImage(int size, GenLayerTFC genlayer, String name)
 	{
 		if(!shouldDraw)

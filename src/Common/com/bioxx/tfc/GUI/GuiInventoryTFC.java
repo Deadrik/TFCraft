@@ -255,7 +255,7 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 		}
 	}
 
-	long spamTimer = 0;
+	private long spamTimer;
 	@Override
 	protected boolean checkHotbarKeys(int keycode)
 	{

@@ -10,7 +10,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class TEDetailed extends NetworkTileEntity {
 	public short TypeID = -1;
-	public byte MetaID = 0;
+	public byte MetaID;
 	public BitSet data;
 	public static final byte Packet_Update = 0;
 	public static final byte Packet_Activate = 1;

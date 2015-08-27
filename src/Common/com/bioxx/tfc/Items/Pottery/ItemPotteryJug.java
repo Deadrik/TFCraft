@@ -23,7 +23,7 @@ import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemPotteryJug extends ItemPotteryBase
 {
-	IIcon WaterIcon;
+	private IIcon WaterIcon;
 
 	public ItemPotteryJug()
 	{

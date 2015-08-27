@@ -27,7 +27,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class BlockCustomIce extends BlockIce
 {
-	IIcon seaIce;
+	private IIcon seaIce;
 
 	public BlockCustomIce()
 	{
@@ -99,8 +99,6 @@ public class BlockCustomIce extends BlockIce
 	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
 	{
 		Block plant = plantable.getPlant(world, x, y + 1, z);
-		EnumPlantType plantType = plantable.getPlantType(world, x, y + 1, z);
-		int meta = world.getBlockMetadata(x,y,z);
 
 		if (plant == TFCBlocks.Cactus && this == TFCBlocks.Cactus)
 			return true;
@@ -108,9 +106,11 @@ public class BlockCustomIce extends BlockIce
 		if (plant == TFCBlocks.Reeds && this == TFCBlocks.Reeds)
 			return true;
 
+		int meta = world.getBlockMetadata(x, y, z);
 		if (plantable instanceof BlockCustomLilyPad && ((BlockCustomLilyPad)plant).canThisPlantGrowOnThisBlock(this, meta))
 			return true;
 
+		EnumPlantType plantType = plantable.getPlantType(world, x, y + 1, z);
 		switch (plantType)
 		{
 		case Desert: return TFC_Core.isSand(this);
@@ -142,12 +142,12 @@ public class BlockCustomIce extends BlockIce
 
 	protected Block getBlockMelt(World world, int i, int j, int k, boolean moving)
 	{
-		int meta = world.getBlockMetadata(i,j,k);
 		Block block = world.getBlock(i,j,k);
 
 		if(block != this)
 			return block;
 
+		int meta = world.getBlockMetadata(i, j, k);
 		switch(meta){
 		case 0: return TFCBlocks.SaltWater;
 		case 1: return TFCBlocks.FreshWater;

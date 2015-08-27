@@ -48,17 +48,17 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 
 	// We dont save this since its purpose is to just mkae certain parts of the
 	// code not run every single tick
-	public int slowCounter = 0;
+	public int slowCounter;
 
 	// Bloomery
 	public int charcoalCount;
 	public int oreCount;
 
-	ItemStack outMetal1;
-	int outMetal1Count;
+	//private ItemStack outMetal1;
+	private int outMetal1Count;
 
-	private int cookDelay = 0;
-	private int maxValidStackSize = 0;
+	private int cookDelay;
+	private int maxValidStackSize;
 
 	public TEBlastFurnace()
 	{
@@ -82,13 +82,12 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 	{
 		if (!worldObj.isRemote)
 		{
+			if (this.charcoalCount < this.oreCount)
+				return false;
+
 			// get the direction that the bloomery is facing so that we know
 			// where the stack should be
 			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-
-			if (this.charcoalCount < this.oreCount) 
-				return false;
-
 			if (this.charcoalCount >= 4 && this.fireTemp == 0)
 			{
 				fireTemp = 1;
@@ -421,7 +420,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 		return charcoalCount+oreCount;
 	}
 
-	int moltenCount = 0;
+	private int moltenCount;
 
 	@Override
 	public void updateEntity()

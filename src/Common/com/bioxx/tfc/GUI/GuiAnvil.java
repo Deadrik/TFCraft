@@ -29,13 +29,13 @@ import com.bioxx.tfc.api.Enums.RuleEnum;
 
 public class GuiAnvil extends GuiContainerTFC
 {
-	TEAnvil anvilTE;
+	public TEAnvil anvilTE;
 	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_anvil.png");
-	EntityPlayer player;
-	int x, y, z;
-	String plan = "";
-	ItemStack input = null;
-	ItemStack input2 = null;
+	private EntityPlayer player;
+	private int x, y, z;
+	private String plan = "";
+	private ItemStack input;
+	private ItemStack input2;
 
 	public GuiAnvil(InventoryPlayer inventoryplayer, TEAnvil te, World world, int x, int y, int z)
 	{

@@ -25,7 +25,7 @@ import com.bioxx.tfc.api.Constant.Global;
 public class BlockDirt extends BlockTerra
 {
 	protected IIcon[] icons;
-	protected int textureOffset = 0;
+	protected int textureOffset;
 
 	public BlockDirt(int texOff)
 	{

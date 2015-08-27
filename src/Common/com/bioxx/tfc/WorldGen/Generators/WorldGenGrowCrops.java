@@ -6,6 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
+import cpw.mods.fml.common.IWorldGenerator;
+
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.CropIndex;
@@ -13,12 +15,10 @@ import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.TileEntities.TECrop;
 import com.bioxx.tfc.api.TFCBlocks;
 
-import cpw.mods.fml.common.IWorldGenerator;
-
 public class WorldGenGrowCrops implements IWorldGenerator
 {
 	/** The ID of the plant block used in this plant generator. */
-	private int cropBlockId;
+	private final int cropBlockId;
 
 	public WorldGenGrowCrops(int par1)
 	{

@@ -31,7 +31,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 {
 	public ItemStack fireItemStacks[];
 	public boolean hasCookingPot;
-	public int smokeTimer = 0;
+	public int smokeTimer;
 
 	public TEFirepit()
 	{
@@ -65,7 +65,6 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			HeatIndex index = manager.findMatchingIndex(fireItemStacks[1]);
 			if(index != null && TFC_ItemHeat.getTemp(fireItemStacks[1]) > index.meltTemp)
 			{
-				float temp = TFC_ItemHeat.getTemp(fireItemStacks[1]);
 				ItemStack output = index.getOutput(fireItemStacks[1], R);
 				ItemCookEvent eventMelt = new ItemCookEvent(fireItemStacks[1], output, this);
 				MinecraftForge.EVENT_BUS.post(eventMelt);
@@ -105,6 +104,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 					}
 				}
 				//Morph the input
+				float temp = TFC_ItemHeat.getTemp(fireItemStacks[1]);
 				fireItemStacks[1] = index.getMorph();
 				if(fireItemStacks[1] != null && manager.findMatchingIndex(fireItemStacks[1]) != null)
 				{

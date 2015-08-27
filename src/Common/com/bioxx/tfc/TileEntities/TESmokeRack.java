@@ -18,10 +18,10 @@ public class TESmokeRack extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[2];
 	public int[] driedCounter = new int[]{0,0};
-	private int dryTimer = 0;
+	private int dryTimer;
 
 	//temporary smoke timer that should not be saved
-	public int lastSmokedTime = 0;
+	public int lastSmokedTime;
 
 	public TESmokeRack()
 	{

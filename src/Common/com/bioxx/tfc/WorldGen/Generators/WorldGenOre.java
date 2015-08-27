@@ -18,12 +18,12 @@ import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 
 public class WorldGenOre implements IWorldGenerator
 {
-	int Min;
-	int Max;
-	int ChunkX;
-	int ChunkZ;
-	World worldObj;
-	Random random;
+	//private int Min;
+	//private int Max;
+	private int ChunkX;
+	private int ChunkZ;
+	private World worldObj;
+	private Random random;
 
 	public static HashMap<String, OreSpawnData> OreList = new CaseInsensitiveHashMap<OreSpawnData>();
 

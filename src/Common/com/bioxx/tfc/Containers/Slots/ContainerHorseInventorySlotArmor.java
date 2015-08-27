@@ -5,21 +5,21 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
+
 public class ContainerHorseInventorySlotArmor extends Slot
 {
-    final EntityHorse horse;
+	private final EntityHorse horse;
 
-    final ContainerHorseInventoryTFC horseContainer;
+	//private final ContainerHorseInventoryTFC horseContainer;
 
     public ContainerHorseInventorySlotArmor(ContainerHorseInventoryTFC containerHorseInv, IInventory horseInv, int i, int j, int k, EntityHorse entityHorse)
     {
         super(horseInv, i, j, k);
-        this.horseContainer = containerHorseInv;
+		//this.horseContainer = containerHorseInv;
         this.horse = entityHorse;
     }
 

@@ -3,12 +3,13 @@ package com.bioxx.tfc.api.Crafting;
 import java.util.Stack;
 
 import net.minecraft.item.ItemStack;
+
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BarrelLiquidToLiquidRecipe extends BarrelRecipe
 {
-	FluidStack inputfluid;
+	public FluidStack inputfluid;
 	public BarrelLiquidToLiquidRecipe(FluidStack fluidInBarrel, FluidStack inputfluid, FluidStack outputFluid)
 	{
 		super(null, fluidInBarrel, null, outputFluid);

@@ -27,10 +27,10 @@ import com.bioxx.tfc.api.TFCBlocks;
 public class TEChest extends TileEntityChest implements IInventory
 {
 	private ItemStack[] chestContents = new ItemStack[18];
-	public int type = 0;
+	public int type;
 	/** Server sync counter (once per 20 ticks) */
 	private int ticksSinceSync;
-	public boolean isDoubleChest = false;
+	public boolean isDoubleChest;
 
 	public TEChest()
 	{

@@ -4,10 +4,10 @@ import net.minecraft.item.ItemStack;
 
 public class KilnRecipe
 {
-	ItemStack result;
-	ItemStack input1;
-	int KilnLevel;
-	boolean inheritsTag = true;
+	public ItemStack result;
+	public ItemStack input1;
+	public int KilnLevel;
+	public boolean inheritsTag = true;
 
 	public KilnRecipe(ItemStack in, int kl, ItemStack res)
 	{

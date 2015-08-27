@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Reference;
 public class BlockMolten extends BlockTerra
 {
-	IIcon moltenOff;
+	private IIcon moltenOff;
 	public BlockMolten()
 	{
 		super(Material.iron);

@@ -16,15 +16,15 @@ public class GuiAnvilButton extends GuiButton
 {
 	//private static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "anvilicons.png");
 	public IIcon icon;
-	public int bX = 0;
-	public int bY = 0;
-	public int bW = 0;
-	public int bH = 0;
-	public int ruleIndex = 0;
-	GuiAnvil screen;
-	byte red = (byte)255;
-	byte blue = (byte)255;
-	byte green = (byte)255;
+	public int bX;
+	public int bY;
+	public int bW;
+	public int bH;
+	public int ruleIndex;
+	private GuiAnvil screen;
+	private byte red = (byte) 255;
+	private byte blue = (byte) 255;
+	private byte green = (byte) 255;
 
 	public GuiAnvilButton(int index, int xPos, int yPos, int width, int height, IIcon ico, 
 			int buttonX, int buttonY, int buttonW, int buttonH, GuiAnvil gui, String s)

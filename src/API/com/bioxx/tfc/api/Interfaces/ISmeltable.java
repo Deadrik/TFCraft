@@ -1,21 +1,21 @@
 package com.bioxx.tfc.api.Interfaces;
 
-import com.bioxx.tfc.api.Metal;
-
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.api.Metal;
 
 public interface ISmeltable 
 {
-	public Metal getMetalType(ItemStack is);
+	Metal getMetalType(ItemStack is);
 	
 	/**
 	 * @return Percent of a full Unshaped Mold 0-100. Beyond 100 will give more than one mold worth of metal.
 	 */
-	public short getMetalReturnAmount(ItemStack is);
+	short getMetalReturnAmount(ItemStack is);
 	
-	public boolean isSmeltable(ItemStack is);
+	boolean isSmeltable(ItemStack is);
 	
-	public EnumTier getSmeltTier(ItemStack is);
+	EnumTier getSmeltTier(ItemStack is);
 	
 	public enum EnumTier
 	{

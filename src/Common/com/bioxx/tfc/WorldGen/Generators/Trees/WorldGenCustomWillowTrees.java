@@ -12,7 +12,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class WorldGenCustomWillowTrees extends WorldGenerator
 {
-	private int treeId;
+	private final int treeId;
 
 	public WorldGenCustomWillowTrees(boolean flag, int id)
 	{
@@ -20,7 +20,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 		treeId=id;
 	}
 
-	void addBranch (int x, int y, int z, int x1, int z1, Random random, World world)
+	private void addBranch(int x, int y, int z, int x1, int z1, Random random, World world)
 	{
 		if (random.nextInt (3) == 0)
 		{
@@ -39,7 +39,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 		}
 	}
 
-	void createLeafGroup (int x, int y, int z, Random random, World world)
+	private void createLeafGroup(int x, int y, int z, Random random, World world)
 	{
 		for (int y1 = 0 ; y1 < 2 ; y1++)
 		{
@@ -66,13 +66,14 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 	public boolean generate (World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
 		int height = random.nextInt (2) + 3;
-		for (; world.getBlock(xCoord, yCoord - 1, zCoord).getMaterial() == Material.water ; yCoord--)
+		while (world.getBlock(xCoord, yCoord - 1, zCoord).getMaterial() == Material.water)
 		{
+			yCoord-- ;
 		}
-		boolean flag = true;
 		if (yCoord < 1 || yCoord + height + 5 > world.getHeight())
 			return false;
 
+		boolean flag = true;
 		for (int i1 = yCoord ; i1 <= yCoord + 1 + height ; i1++)
 		{
 			byte byte0 = 1;

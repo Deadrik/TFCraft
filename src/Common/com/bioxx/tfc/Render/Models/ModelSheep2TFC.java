@@ -11,10 +11,10 @@ import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 public class ModelSheep2TFC extends ModelSheep2
 {
-	ModelRenderer horn1;
-	ModelRenderer horn2;
-	ModelRenderer horn1b;
-	ModelRenderer horn2b;
+	private ModelRenderer horn1;
+	private ModelRenderer horn2;
+	private ModelRenderer horn1b;
+	private ModelRenderer horn2b;
 	
 	public ModelSheep2TFC()
 	{

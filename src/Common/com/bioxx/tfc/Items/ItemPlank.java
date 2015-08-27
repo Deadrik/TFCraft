@@ -217,7 +217,7 @@ public class ItemPlank extends ItemTerra
 		return icons[meta];
 	}
 
-	IIcon[] icons = new IIcon[Global.WOOD_ALL.length];
+	private IIcon[] icons = new IIcon[Global.WOOD_ALL.length];
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{

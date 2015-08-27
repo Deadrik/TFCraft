@@ -17,7 +17,6 @@ import com.bioxx.tfc.api.Constant.Global;
 
 public class EntityFishTFC extends EntitySquid
 {
-
 	private float randomMotionVecX;
 	private float randomMotionVecY;
 	private float randomMotionVecZ;
@@ -28,31 +27,32 @@ public class EntityFishTFC extends EntitySquid
 	private float rotationVelocity;
 	private float field_70871_bB;
 
-	//private float prevDirection = 0;
+	//private float prevDirection;
 
 	private List<EntityPlayer> nearbyPlayers;
 
-	private boolean hooked = false;
+	private boolean hooked;
 	private int energy = 200;
-	private int tiredTicks = 0;
+	private int tiredTicks;
 
-	private int numRecoveries = 0;
+	private int numRecoveries;
 
-	private int inGroundTimer = 0;
+	private int inGroundTimer;
 
-	public float currentRenderRoll = 0;
-	public float currentRenderYaw = 0;
-	public float currentRenderPitch = 0;
+	// Public for Renderer
+	public float currentRenderRoll;
+	public float currentRenderYaw;
+	public float currentRenderPitch;
 	
 	private float currentDestX, currentDestY, currentDestZ;
 
 	private double renderMotionY, renderMotionX, renderMotionZ;
 
-	private double fishStrength;
+	private final double fishStrength;
 	
 	private double minPlayerDistance = 16;
 
-	double pullX,pullY,pullZ;
+	private double pullX, pullY, pullZ;
 
 	public EntityFishTFC(World par1World)
 	{

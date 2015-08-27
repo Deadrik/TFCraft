@@ -4,5 +4,5 @@ import com.bioxx.tfc.api.Enums.EnumAmmo;
 
 public interface IQuiverAmmo 
 {
-	public EnumAmmo getAmmoType();
+	EnumAmmo getAmmoType();
 }

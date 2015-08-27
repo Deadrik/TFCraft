@@ -2,13 +2,14 @@ package com.bioxx.tfc.Handlers.Network;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+
 import net.minecraft.entity.player.EntityPlayer;
 
 import com.bioxx.tfc.api.TFCOptions;
 
 public class DebugModePacket extends AbstractPacket
 {
-	private boolean debugMode = false;
+	private boolean debugMode;
 
 	public DebugModePacket() {}
 	

@@ -16,7 +16,7 @@ public class GuiVesselLiquid extends GuiContainerTFC
 {
 	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_vessel_liquid.png");
 
-	EntityPlayer player;
+	private EntityPlayer player;
 	private int bagsSlotNum;
 
 	public GuiVesselLiquid(InventoryPlayer inventoryplayer, World world, int i, int j, int k)

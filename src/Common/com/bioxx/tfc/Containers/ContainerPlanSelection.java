@@ -7,14 +7,14 @@ import com.bioxx.tfc.TileEntities.TEAnvil;
 
 public class ContainerPlanSelection extends ContainerTFC
 {
-	TEAnvil anvil;
-	World world;
-	EntityPlayer player;
-	String plan = "";
+	private TEAnvil anvil;
+	/*private World world;
+	private EntityPlayer player;*/
+	private String plan = "";
 	public ContainerPlanSelection(EntityPlayer p, TEAnvil a, World w, int x, int y, int z)
 	{
 		anvil = a;
-		world = w;
+		//world = w;
 		player = p;
 	}
 

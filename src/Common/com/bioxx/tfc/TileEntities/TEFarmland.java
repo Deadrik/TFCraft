@@ -17,12 +17,12 @@ public class TEFarmland extends NetworkTileEntity
 	public long nutrientTimer = -1;
 	public int[] nutrients =
 	{ getSoilMax(), getSoilMax(), getSoilMax(), 0 };
-	public boolean isInfested = false;
+	public boolean isInfested;
 
 	/**
 	 * Client only
 	 * */
-	public long timeSinceUpdate = 0;
+	public long timeSinceUpdate;
 
 	public TEFarmland()
 	{

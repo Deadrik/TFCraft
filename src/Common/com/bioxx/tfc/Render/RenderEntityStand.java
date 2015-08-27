@@ -10,7 +10,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
 import net.minecraftforge.client.ForgeHooksClient;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
@@ -18,9 +22,6 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Entities.EntityStand;
 import com.bioxx.tfc.Render.Models.ModelStand;
 import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderEntityStand extends RenderBiped
@@ -31,14 +32,14 @@ public class RenderEntityStand extends RenderBiped
 	//private static final ResourceLocation Texture = new ResourceLocation("textures/entity/zombie/zombie.png");
 	private static final ResourceLocation Texture = new ResourceLocation(Reference.ModID, "textures/mob/stand.png");
 
-	ModelRenderer plume;
-	ModelRenderer plume2;
-	ModelRenderer HornR1;
-	ModelRenderer HornL1;
-	ModelRenderer HornR2;
-	ModelRenderer HornL2;
+	private ModelRenderer plume;
+	private ModelRenderer plume2;
+	private ModelRenderer HornR1;
+	private ModelRenderer HornL1;
+	private ModelRenderer HornR2;
+	private ModelRenderer HornL2;
 
-	RenderLargeItem standBlockRenderer = new RenderLargeItem();
+	private RenderLargeItem standBlockRenderer = new RenderLargeItem();
 
 	public RenderEntityStand()
 	{

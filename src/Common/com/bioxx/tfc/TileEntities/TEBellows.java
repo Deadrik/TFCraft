@@ -13,11 +13,11 @@ import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 public class TEBellows extends NetworkTileEntity
 {
-	static final int blockMap[][] = { { 0, 1 }, { -1, 0 }, { 0, -1 }, { 1, 0 } };
-	static final int blockMap2[][] = { { 0, 2 }, { -2, 0 }, { 0, -2 }, { 2, 0 } };
-	public boolean shouldBlow = false;
-	public int blowTimer = 0;
-	public int blowDirection = 0;
+	private static final int blockMap[][] = { { 0, 1 }, { -1, 0 }, { 0, -1 }, { 1, 0 } };
+	//private static final int blockMap2[][] = { { 0, 2 }, { -2, 0 }, { 0, -2 }, { 2, 0 } };
+	public boolean shouldBlow;
+	public int blowTimer;
+	public int blowDirection;
 
 	@Override
 	public void updateEntity()

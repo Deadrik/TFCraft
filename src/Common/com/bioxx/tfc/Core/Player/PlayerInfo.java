@@ -30,8 +30,8 @@ public class PlayerInfo
 	public short moldTransferTimer = 1000;
 
 	//Clientside only variables
-	public boolean guishowFoodRestoreAmount = false;
-	public float guiFoodRestoreAmount = 0;
+	public boolean guishowFoodRestoreAmount;
+	public float guiFoodRestoreAmount;
 	public boolean[] knappingInterface;
 
 	public SkillStats tempSkills;

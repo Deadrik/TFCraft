@@ -31,7 +31,7 @@ import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockGrass extends BlockTerra
 {
-	protected int textureOffset = 0;
+	protected int textureOffset;
 
 	@SideOnly(Side.CLIENT)
 	public IIcon GrassTopTexture;

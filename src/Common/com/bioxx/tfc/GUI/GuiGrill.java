@@ -13,13 +13,13 @@ public class GuiGrill extends GuiContainerTFC
 {
 	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_grill.png");
 
-	private TEGrill grillTE;
+	//private TEGrill grillTE;
 	private TEFireEntity fireTE;
 
 	public GuiGrill(InventoryPlayer inventoryplayer, TEGrill te, World world, int x, int y, int z)
 	{
 		super(new ContainerGrill(inventoryplayer, te, world, x, y, z), 176, 85);
-		grillTE = te;
+		//grillTE = te;
 		if (world.getTileEntity(x, y - 1, z) instanceof TEFireEntity)
 			fireTE = (TEFireEntity) world.getTileEntity(x, y - 1, z);
 	}

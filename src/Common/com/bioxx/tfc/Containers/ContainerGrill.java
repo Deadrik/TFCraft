@@ -14,14 +14,14 @@ import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 public class ContainerGrill extends ContainerTFC
 {
-	private TEGrill grill;
+	//private TEGrill grill;
 	private TEFireEntity fire;
 	private float firetemp;
-	private int charcoal;
+	//private int charcoal;
 
 	public ContainerGrill(InventoryPlayer inventoryplayer, TEGrill grill, World world, int x, int y, int z)
 	{
-		this.grill = grill;
+		//this.grill = grill;
 		firetemp = -1111;
 
 		if(world.getTileEntity(x, y-1, z) instanceof TEFireEntity)

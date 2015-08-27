@@ -16,6 +16,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.Terrain.BlockSand;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -26,9 +29,6 @@ import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Util.Helper;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 {
 	@SideOnly(Side.CLIENT)
@@ -36,9 +36,9 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 	private IIcon seaWeed;
 	private IIcon catTails;
 
-	static String seaweed = Reference.ModID + ":" + "plants/seaweed";
-	static String pondweed = Reference.ModID + ":" + "plants/pondweed";
-	static String cattails = Reference.ModID + ":" + "plants/Cat Tails";
+	private static String seaweed = Reference.ModID + ":" + "plants/seaweed";
+	private static String pondweed = Reference.ModID + ":" + "plants/pondweed";
+	private static String cattails = Reference.ModID + ":" + "plants/Cat Tails";
 
 
 	public BlockWaterPlant(int texOff)

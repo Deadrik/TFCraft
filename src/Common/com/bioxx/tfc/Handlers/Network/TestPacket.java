@@ -2,15 +2,16 @@ package com.bioxx.tfc.Handlers.Network;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import net.minecraft.entity.player.EntityPlayer;
 
-import com.bioxx.tfc.TerraFirmaCraft;
+import net.minecraft.entity.player.EntityPlayer;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
 
+import com.bioxx.tfc.TerraFirmaCraft;
+
 public class TestPacket extends AbstractPacket
 {
-	String msg;
+	private String msg;
 
 	public TestPacket() {}
 

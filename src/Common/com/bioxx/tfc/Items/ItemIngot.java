@@ -1,6 +1,5 @@
 package com.bioxx.tfc.Items;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -30,11 +29,11 @@ import com.bioxx.tfc.api.Interfaces.ISmeltable;
 
 public class ItemIngot extends ItemTerra implements ISmeltable
 {
-	EnumSize size = EnumSize.SMALL;
-	BufferedImage bi;
-	String metal;
-	short metalAmount;
-	boolean smeltable = true;
+	private EnumSize size = EnumSize.SMALL;
+	//private BufferedImage bi;
+	private String metal;
+	private short metalAmount;
+	private boolean smeltable = true;
 
 	public ItemIngot()
 	{
