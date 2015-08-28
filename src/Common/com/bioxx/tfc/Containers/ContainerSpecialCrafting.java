@@ -70,20 +70,26 @@ public class ContainerSpecialCrafting extends ContainerTFC
 	@Override
 	public void onCraftMatrixChanged(IInventory ii)
 	{
-		this.craftResult.setInventorySlotContents(0, CraftingManagerTFC.getInstance().findMatchingRecipe(this.craftMatrix, worldObj));
+		ItemStack result = CraftingManagerTFC.getInstance().findMatchingRecipe(this.craftMatrix, worldObj);
 
 		// Handle decreasing the stack of the held item used to open the interface.
 		if (!decreasedStack && !isConstructing)
 		{
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(invPlayer.player);
+
 			// A valid clay recipe has been formed.
 			if (pi.specialCraftingType.getItem() == TFCItems.FlatClay)
 			{
-				if (craftResult.getStackInSlot(0) != null)
+				if (result != null)
 				{
 					setDecreasedStack(true); // Mark container so it won't decrease again.
-					if (!this.worldObj.isRemote) // Server only to prevent it removing multiple times.
+					if (!this.worldObj.isRemote && invPlayer.getCurrentItem().stackSize >= 5) // Server only to prevent it removing multiple times.
 						invPlayer.decrStackSize(invPlayer.currentItem, 5);
+					else // Clientside or if the player doesn't have enough clay, return before the output slot is set.
+					{
+						setDecreasedStack(false);
+						return;
+					}
 				}
 			}
 			// A piece of rock or leather has been removed.
@@ -94,6 +100,10 @@ public class ContainerSpecialCrafting extends ContainerTFC
 					invPlayer.consumeInventoryItem(invPlayer.getCurrentItem().getItem());
 			}
 		}
+
+		// The crafting output is only set if the input was consumed
+		if (decreasedStack)
+			this.craftResult.setInventorySlotContents(0, result);
 	}
 
 	/**
