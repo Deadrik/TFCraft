@@ -28,6 +28,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
 import com.bioxx.tfc.GUI.GuiBlastFurnace;
 import com.bioxx.tfc.api.*;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
@@ -456,22 +457,26 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 				for (Iterator iterator = list.iterator(); iterator.hasNext();)
 				{
 					EntityItem entity = (EntityItem) iterator.next();
-					boolean _isOre = TFC_Core.isOreIron(entity.getEntityItem());
+					ItemStack itemstack = entity.getEntityItem();
+					Item item = itemstack.getItem();
+					boolean _isOre = TFC_Core.isOreIron(itemstack);
+					HeatRegistry manager = HeatRegistry.getInstance();
+					HeatIndex index = manager.findMatchingIndex(itemstack);
 
-					if (entity.getEntityItem().getItem() == TFCItems.Coal &&
-							entity.getEntityItem().getItemDamage() == 1 ||
-							entity.getEntityItem().getItem() == TFCItems.Coke)
+					if (item == TFCItems.Coal &&
+							itemstack.getItemDamage() == 1 ||
+							item == TFCItems.Coke)
 					{
-						for (int c = 0; c < entity.getEntityItem().stackSize; c++)
+						for (int c = 0; c < itemstack.stackSize; c++)
 						{
 							if (getTotalCount() < 40 && charcoalCount < (this.maxValidStackSize*4))
 							{
 								charcoalCount++;
-								entity.getEntityItem().stackSize--;
+								itemstack.stackSize--;
 							}
 						}
 
-						if (entity.getEntityItem().stackSize == 0)
+						if (itemstack.stackSize == 0)
 							entity.setDead();
 					}
 					/*
@@ -479,16 +484,17 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 					 * can melt down into something then add the ore to the list
 					 * of items in the fire.
 					 */
-					else if (TFC_ItemHeat.isCookable(entity.getEntityItem()) != -1 && _isOre ||
-								!_isOre && entity.getEntityItem().getItem() instanceof ISmeltable)
+					else if (TFC_ItemHeat.isCookable(itemstack) != -1 && _isOre ||
+								!_isOre && item instanceof ISmeltable && ((ISmeltable) item).getMetalType(itemstack) == Global.PIGIRON &&
+								index != null)
 					{
-						int c = entity.getEntityItem().stackSize;
+						int c = itemstack.stackSize;
 						int nonConsumedOre = 0;
 						for (; c > 0; c--)
 						{
 							if (getTotalCount() < 40 && oreCount < (this.maxValidStackSize*4))
 							{
-								if (foundFlux(moltenCount) && AddOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage())))
+								if (foundFlux(moltenCount) && AddOreToFire(new ItemStack(item, 1, itemstack.getItemDamage())))
 									oreCount+=1;
 								else
 									nonConsumedOre++;
@@ -503,9 +509,8 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 							entity.setDead();
 						else
 						{
-							ItemStack is = entity.getEntityItem();
-							is.stackSize = c + nonConsumedOre;
-							entity.setEntityItemStack(is);
+							itemstack.stackSize = c + nonConsumedOre;
+							entity.setEntityItemStack(itemstack);
 						}
 					}
 				}
