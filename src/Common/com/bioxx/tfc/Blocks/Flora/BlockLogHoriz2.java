@@ -28,7 +28,7 @@ public class BlockLogHoriz2 extends BlockLogHoriz
 	public IIcon getIcon(int side, int meta)
 	{
 		int dir = meta >> 3;
-		meta = meta & 7 + offset;
+		meta = (meta & 7) + offset;
 
 		if(dir == 0)
 		{
@@ -51,6 +51,6 @@ public class BlockLogHoriz2 extends BlockLogHoriz
 	@Override
 	public int damageDropped(int dmg)
 	{
-		return dmg & 7 + offset + 16;
+		return (dmg & 7) + offset + 16;
 	}
 }

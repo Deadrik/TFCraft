@@ -566,9 +566,9 @@ public class TFC_CoreRender
 		if(index != null)
 		{
 			if(index.inBloom(TFC_Time.getSeasonAdjustedMonth(z)))//blooming
-				out = BlockFruitLeaves.iconsFlowers[meta & 7 + offset];
+				out = BlockFruitLeaves.iconsFlowers[(meta & 7) + offset];
 			else if(meta >= 8)//fruit
-				out = BlockFruitLeaves.iconsFruit[meta & 7 + offset];
+				out = BlockFruitLeaves.iconsFruit[(meta & 7) + offset];
 		}
 		return out;
 	}

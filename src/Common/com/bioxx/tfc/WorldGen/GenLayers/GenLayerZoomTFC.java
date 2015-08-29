@@ -50,7 +50,7 @@ public class GenLayerZoomTFC extends GenLayerTFC
 
 		for (int zoom = 0; zoom < zSize; ++zoom)
 		{
-			int srcPos = (zoom + (zPos & 1)) * i2 + xPos & 1;
+			int srcPos = (zoom + (zPos & 1)) * i2 + (xPos & 1);
 			System.arraycopy(out, srcPos, outCache, zoom * xSize, xSize);
 		}
 

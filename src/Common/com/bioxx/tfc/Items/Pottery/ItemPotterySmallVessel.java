@@ -252,8 +252,8 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				 * the other colors.
 				 */
 				int r = Math.min((j >> 16) + 0x60, 0xFF);
-				int b = Math.min((j >> 8) & 0x00FF + 0x60, 0xFF);
-				int g = Math.min(j & 0x0000FF + 0x60, 0xFF);
+				int b = Math.min(((j >> 8) & 0x00FF) + 0x60, 0xFF);
+				int g = Math.min((j & 0x0000FF) + 0x60, 0xFF);
 				return (r << 16) | (b << 8) | g;
 			}
 			else

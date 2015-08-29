@@ -169,7 +169,7 @@ public class ItemGoldPan extends ItemTerra
 							}
 							uses--;
 							if(uses > 0)
-								is.setItemDamage(is.getItemDamage() & 15 + (uses << 4));
+								is.setItemDamage((is.getItemDamage() & 15) + (uses << 4));
 							else
 							{
 								if (world.rand.nextInt(100) == 0)

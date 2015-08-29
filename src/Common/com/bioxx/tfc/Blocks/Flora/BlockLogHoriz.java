@@ -34,7 +34,7 @@ public class BlockLogHoriz extends BlockLogVert
 	public IIcon getIcon(int side, int meta)
 	{
 		int dir = meta >> 3;
-		meta = meta & 7 + offset;
+		meta = (meta & 7) + offset;
 
 		if(dir == 0)
 		{
@@ -57,7 +57,7 @@ public class BlockLogHoriz extends BlockLogVert
 	@Override
 	public int damageDropped(int dmg)
 	{
-		return dmg & 7 + offset;
+		return (dmg & 7) + offset;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

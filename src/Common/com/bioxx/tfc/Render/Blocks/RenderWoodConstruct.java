@@ -65,7 +65,7 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 			{
 				minX = 0;
 				maxX = 1;
-				minY = div * (index & 7 + in3);
+				minY = div * ((index & 7) + in3);
 				maxY = minY + div;
 				minZ = 0;
 				maxZ = 1;
