@@ -1,6 +1,7 @@
 package com.bioxx.tfc.api.Events;
 
 import net.minecraft.entity.EntityLivingBase;
+
 import net.minecraftforge.event.entity.EntityEvent;
 
 public class EntityArmorCalcEvent extends EntityEvent 

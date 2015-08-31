@@ -1,9 +1,9 @@
 package com.bioxx.tfc.Effects;
 
-import com.bioxx.tfc.Core.TFC_Textures;
-
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Core.TFC_Textures;
 
 public class GasFX extends EntityFX
 {

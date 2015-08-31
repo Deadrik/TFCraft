@@ -1,12 +1,5 @@
 package com.bioxx.tfc.Blocks.Devices;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.TileEntities.TEBellows;
-import com.bioxx.tfc.api.TFCBlocks;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,6 +9,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.TileEntities.TEBellows;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class BlockBellows extends BlockTerraContainer
 {

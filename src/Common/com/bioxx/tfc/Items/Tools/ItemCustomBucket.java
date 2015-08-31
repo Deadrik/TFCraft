@@ -9,7 +9,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
+
 import net.minecraftforge.event.entity.player.FillBucketEvent;
+
+import cpw.mods.fml.common.eventhandler.Event;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
@@ -19,8 +22,6 @@ import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
-
-import cpw.mods.fml.common.eventhandler.Event;
 
 public class ItemCustomBucket extends ItemTerra
 {

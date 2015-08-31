@@ -3,10 +3,9 @@ package com.bioxx.tfc.ASM.Transform;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bioxx.tfc.ASM.ClassTransformer;
 import org.objectweb.asm.tree.LabelNode;
 import org.objectweb.asm.tree.LineNumberNode;
-
-import com.bioxx.tfc.ASM.ClassTransformer;
 
 public class TF_EntityPlayerMP extends ClassTransformer
 {

@@ -1,10 +1,10 @@
 package com.bioxx.tfc.Entities.Mobs;
 
-import com.bioxx.tfc.Core.TFC_MobData;
-
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Core.TFC_MobData;
 
 public class EntityGhastTFC extends EntityGhast
 {

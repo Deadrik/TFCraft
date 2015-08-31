@@ -5,12 +5,12 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.TileEntities.TESmokeRack;
 import com.bioxx.tfc.api.Food;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderSmokeRack implements ISimpleBlockRenderingHandler
 {

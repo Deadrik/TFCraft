@@ -2,14 +2,15 @@ package com.bioxx.tfc.Blocks.Vanilla;
 
 import net.minecraft.block.BlockVine;
 import net.minecraft.world.IBlockAccess;
+
 import net.minecraftforge.common.IShearable;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.ColorizerFoliageTFC;
 import com.bioxx.tfc.Core.TFCTabs;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCustomVine extends BlockVine implements IShearable
 {

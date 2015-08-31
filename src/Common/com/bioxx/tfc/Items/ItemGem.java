@@ -2,13 +2,13 @@ package com.bioxx.tfc.Items;
 
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+
+import com.bioxx.tfc.Reference;
 
 public class ItemGem extends ItemTerra
 {

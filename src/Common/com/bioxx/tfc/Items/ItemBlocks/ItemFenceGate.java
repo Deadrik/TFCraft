@@ -1,9 +1,9 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
+
+import com.bioxx.tfc.api.Constant.Global;
 
 public class ItemFenceGate extends ItemTerraBlock
 {

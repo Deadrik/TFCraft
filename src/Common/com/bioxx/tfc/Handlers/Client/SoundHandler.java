@@ -1,12 +1,14 @@
 package com.bioxx.tfc.Handlers.Client;
 
-import com.bioxx.tfc.Reference;
-
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.ResourceLocation;
+
 import net.minecraftforge.client.event.sound.PlaySoundEvent17;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+
+import com.bioxx.tfc.Reference;
 
 public class SoundHandler
 {

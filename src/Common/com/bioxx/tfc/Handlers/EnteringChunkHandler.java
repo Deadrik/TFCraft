@@ -2,12 +2,13 @@ package com.bioxx.tfc.Handlers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+
 import net.minecraftforge.event.entity.EntityEvent.EnteringChunk;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class EnteringChunkHandler
 {

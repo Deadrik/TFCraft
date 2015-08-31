@@ -4,10 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+
 import com.bioxx.tfc.TileEntities.TEPottery;
 import com.bioxx.tfc.api.TFCBlocks;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderPottery implements ISimpleBlockRenderingHandler
 {

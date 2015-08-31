@@ -1,12 +1,12 @@
 package com.bioxx.tfc.GUI;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Containers.ContainerNestBox;
-import com.bioxx.tfc.TileEntities.TENestBox;
-
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Containers.ContainerNestBox;
+import com.bioxx.tfc.TileEntities.TENestBox;
 
 public class GuiNestBox extends GuiContainerTFC
 {

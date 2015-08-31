@@ -4,11 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-import com.bioxx.tfc.Core.ColorizerFoliageTFC;
-import com.bioxx.tfc.api.TFCBlocks;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.Core.ColorizerFoliageTFC;
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class ItemVine extends ItemTerraBlock
 {

@@ -8,10 +8,10 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.api.Enums.EnumWeight;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemFlowers extends ItemTerraBlock
 {

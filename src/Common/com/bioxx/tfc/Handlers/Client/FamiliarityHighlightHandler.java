@@ -5,14 +5,15 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+
 import net.minecraftforge.client.event.RenderLivingEvent.Specials.Post;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Entities.IAnimal;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class FamiliarityHighlightHandler {
 

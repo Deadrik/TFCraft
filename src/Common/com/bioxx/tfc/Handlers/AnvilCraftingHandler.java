@@ -5,13 +5,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Events.AnvilCraftEvent;
 import com.bioxx.tfc.api.Events.ItemCookEvent;
 import com.bioxx.tfc.api.Interfaces.IFood;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class AnvilCraftingHandler
 {

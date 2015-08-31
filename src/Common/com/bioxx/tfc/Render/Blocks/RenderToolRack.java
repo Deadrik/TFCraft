@@ -5,9 +5,9 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 
-import com.bioxx.tfc.TileEntities.TEToolRack;
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+
+import com.bioxx.tfc.TileEntities.TEToolRack;
 
 public class RenderToolRack implements ISimpleBlockRenderingHandler
 {

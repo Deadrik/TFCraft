@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
+
 import net.minecraftforge.common.config.Configuration;
 
 import com.bioxx.tfc.TerraFirmaCraft;

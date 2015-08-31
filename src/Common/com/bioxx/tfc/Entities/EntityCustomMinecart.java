@@ -1,12 +1,12 @@
 package com.bioxx.tfc.Entities;
 
-import com.bioxx.tfc.api.TFCBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityMinecartChest;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.api.TFCBlocks;
 
 public class EntityCustomMinecart extends EntityMinecartChest
 {

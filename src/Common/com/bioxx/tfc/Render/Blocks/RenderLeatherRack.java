@@ -5,10 +5,10 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+
 import com.bioxx.tfc.Blocks.Devices.BlockLeatherRack;
 import com.bioxx.tfc.TileEntities.TELeatherRack;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderLeatherRack implements ISimpleBlockRenderingHandler
 {

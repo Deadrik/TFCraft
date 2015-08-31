@@ -3,11 +3,11 @@ package com.bioxx.tfc.Render;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 
-import com.bioxx.tfc.TileEntities.TEChest;
-import com.bioxx.tfc.api.Constant.Global;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.TileEntities.TEChest;
+import com.bioxx.tfc.api.Constant.Global;
 
 @SideOnly(Side.CLIENT)
 public class TESRChestHelper
