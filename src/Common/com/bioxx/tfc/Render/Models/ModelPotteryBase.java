@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Render.Models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
@@ -17,7 +18,7 @@ import org.lwjgl.opengl.GL11;
 public class ModelPotteryBase extends ModelBox 
 {
 	private Object[] rings;
-	protected ArrayList<TexturedQuad> polygons;
+	protected List<TexturedQuad> polygons;
 
 	public ModelPotteryBase(ModelRenderer renderer, int textureOffsetX, int textureOffsetY,
 			float originX, float originY, float originZ, int width, int height, int depth,
@@ -100,7 +101,7 @@ public class ModelPotteryBase extends ModelBox
 		return vert;
 	}
 
-	public ArrayList<TexturedQuad> buildSides(Object[] vertices,ModelRenderer renderer, int textureOffsetX, int textureOffsetY,
+	public List<TexturedQuad> buildSides(Object[] vertices, ModelRenderer renderer, int textureOffsetX, int textureOffsetY,
 			float originX, float originY, float originZ, int width, int height, int depth,
 			float scale, boolean connectTopFace){
 

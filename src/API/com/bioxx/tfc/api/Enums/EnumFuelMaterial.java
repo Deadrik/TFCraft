@@ -31,7 +31,7 @@ public enum EnumFuelMaterial
 	{
 		burnTempMax = i;
 		burnTimeMax = j;
-		tasteProfile = taste;
+		tasteProfile = taste.clone();
 	}
 
 	public static int[] getFuelProfile(int ordinal)

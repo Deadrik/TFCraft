@@ -88,7 +88,7 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 
 	@SuppressWarnings("rawtypes")
 	// Storing both Strings and Integers in the same ArrayList
-	public ArrayList[] getQuiverJavelinTypes(ItemStack item)
+	public List[] getQuiverJavelinTypes(ItemStack item)
 	{
 		ArrayList[] pair = new ArrayList[2];
 		ArrayList<String> list = new ArrayList<String>();
@@ -127,7 +127,7 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 			arraylist.add(EnumChatFormatting.WHITE + TFC_Core.translate("gui.Advanced") + ":");
 			arraylist.add(EnumChatFormatting.ITALIC + TFC_Core.translate("gui.Bow.Arrows") + ": " + EnumChatFormatting.YELLOW + getQuiverArrows(is));
 			arraylist.add(EnumChatFormatting.ITALIC + TFC_Core.translate("gui.Bow.Javelins") + ": " + EnumChatFormatting.YELLOW + getQuiverJavelins(is));
-			ArrayList[] javData = getQuiverJavelinTypes(is);
+			List[] javData = getQuiverJavelinTypes(is);
 			for(int i = 0; i < javData[0].size();i++)
 			{
 				String s = (String)(javData[0].get(i));

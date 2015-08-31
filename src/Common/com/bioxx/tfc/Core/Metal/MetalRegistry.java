@@ -2,6 +2,7 @@ package com.bioxx.tfc.Core.Metal;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import net.minecraft.item.Item;
 
@@ -11,7 +12,7 @@ public class MetalRegistry
 {
 	public static MetalRegistry instance = new MetalRegistry();
 	
-	private HashMap<String, Metal> hash;
+	private Map<String, Metal> hash;
 	
 	public MetalRegistry()
 	{

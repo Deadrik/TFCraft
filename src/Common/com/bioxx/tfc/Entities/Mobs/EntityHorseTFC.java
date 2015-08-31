@@ -134,7 +134,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		//this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
 
-	public EntityHorseTFC(World par1World, IAnimal mother, ArrayList<Float> data, int type, int variant)
+	public EntityHorseTFC(World par1World, IAnimal mother, List<Float> data, int type, int variant)
 	{
 		this(par1World);
 		float fatherSize = 1;
@@ -285,7 +285,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	protected void entityInit()
 	{
 		super.entityInit();	
-		this.dataWatcher.addObject(13, new Integer(0)); //sex (1 or 0)
+		this.dataWatcher.addObject(13, Integer.valueOf(0)); //sex (1 or 0)
 		this.dataWatcher.addObject(15, Integer.valueOf(0));		//age
 		// EntityHorse uses object 22
 		this.dataWatcher.addObject(23, Integer.valueOf(0)); //Size, strength, aggression, obedience

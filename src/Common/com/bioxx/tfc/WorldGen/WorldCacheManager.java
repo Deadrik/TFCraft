@@ -2,6 +2,7 @@ package com.bioxx.tfc.WorldGen;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -48,7 +49,7 @@ public class WorldCacheManager
 	protected GenLayerTFC drainageIndexLayer;
 	protected DataCache drainageCache;
 
-	protected LinkedHashMap<String, Float> worldTempCache;
+	protected Map<String, Float> worldTempCache;
 
 	public long seed;
 
@@ -267,7 +268,7 @@ public class WorldCacheManager
 	 */
 	public DataLayer[] loadRockLayerGeneratorData(DataLayer[] layers, int x, int y, int width, int height, int layer)
 	{
-		return this.getDataLayerAt(rockCache, layers, rocksIndexLayer, x, y, width, height, true, layer);
+		return this.getDataLayerAt(rockCache.clone(), layers, rocksIndexLayer, x, y, width, height, true, layer);
 	}
 
 	public DataLayer getTreeLayerAt(int x, int z, int index)
@@ -281,7 +282,7 @@ public class WorldCacheManager
 	 */
 	public DataLayer[] loadTreeLayerGeneratorData(DataLayer[] layers, int x, int y, int width, int height, int layer)
 	{
-		return this.getDataLayerAt(treeCache, layers, treesIndexLayer, x, y, width, height, true, 0);
+		return this.getDataLayerAt(treeCache.clone(), layers, treesIndexLayer, x, y, width, height, true, 0);
 	}
 
 	public DataLayer getEVTLayerAt(int x, int z)
@@ -295,7 +296,7 @@ public class WorldCacheManager
 	 */
 	public DataLayer[] loadEVTLayerGeneratorData(DataLayer[] layers, int x, int y, int width, int height)
 	{
-		return this.getDataLayerAt(evtCache, layers, evtIndexLayer, x, y, width, height, true, 0);
+		return this.getDataLayerAt(evtCache, layers, evtIndexLayer, x, y, width, height, true, 0); //NOPMD
 	}
 
 	public DataLayer getRainfallLayerAt(int x, int z)
@@ -308,7 +309,7 @@ public class WorldCacheManager
 	 */
 	public DataLayer[] loadRainfallLayerGeneratorData(DataLayer[] layers, int x, int y, int width, int height)
 	{
-		return this.getDataLayerAt(rainfallCache, layers, rainfallIndexLayer, x, y, width, height, true, 0);
+		return this.getDataLayerAt(rainfallCache, layers, rainfallIndexLayer, x, y, width, height, true, 0); //NOPMD
 	}
 
 	public DataLayer getStabilityLayerAt(int x, int z)
@@ -318,7 +319,7 @@ public class WorldCacheManager
 
 	public DataLayer[] loadStabilityLayerGeneratorData(DataLayer[] layers, int x, int y, int width, int height)
 	{
-		return this.getDataLayerAt(stabilityCache, layers, stabilityIndexLayer, x, y, width, height, true, 0);
+		return this.getDataLayerAt(stabilityCache, layers, stabilityIndexLayer, x, y, width, height, true, 0); //NOPMD
 	}
 
 	public DataLayer getPHLayerAt(int x, int z)
@@ -329,7 +330,7 @@ public class WorldCacheManager
 
 	public DataLayer[] loadPHLayerGeneratorData(DataLayer[] layers, int x, int y, int width, int height)
 	{
-		return this.getDataLayerAt(phCache, layers, phIndexLayer, x, y, width, height, true, 0);
+		return this.getDataLayerAt(phCache, layers, phIndexLayer, x, y, width, height, true, 0); //NOPMD
 	}
 
 	public DataLayer getDrainageLayerAt(int x, int z)
@@ -339,6 +340,6 @@ public class WorldCacheManager
 
 	public DataLayer[] loadDrainageLayerGeneratorData(DataLayer[] layers, int x, int y, int width, int height)
 	{
-		return this.getDataLayerAt(drainageCache, layers, drainageIndexLayer, x, y, width, height, true, 0);
+		return this.getDataLayerAt(drainageCache, layers, drainageIndexLayer, x, y, width, height, true, 0); //NOPMD
 	}
 }

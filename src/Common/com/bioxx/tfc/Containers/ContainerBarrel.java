@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Containers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -40,8 +41,9 @@ public class ContainerBarrel extends ContainerTFC
 
 	}
 
-	public static ArrayList<Item> getExceptions(){
-		ArrayList<Item> exceptions = new ArrayList<Item>();
+	public static List<Item> getExceptions()
+	{
+		List<Item> exceptions = new ArrayList<Item>();
 		exceptions.add(Item.getItemFromBlock(TFCBlocks.barrel));
 		exceptions.add(Item.getItemFromBlock(TFCBlocks.vessel));
 		return exceptions;

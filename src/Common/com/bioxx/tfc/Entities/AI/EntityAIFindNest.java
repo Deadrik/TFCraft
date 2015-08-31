@@ -2,6 +2,7 @@ package com.bioxx.tfc.Entities.AI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
@@ -31,7 +32,7 @@ public class EntityAIFindNest extends EntityAIBase
 
 	//To prevent chickens from trying to sit in unreachable nests. See below in updateTask, if the chicken doesnt move >0.5 m in 40 ticks, it 
 	//gives up, and waits 1 day before trying to sit in a nest box located at the specified coordinates
-	private HashMap<String,Long> failureDepressionMap;
+	private Map<String, Long> failureDepressionMap;
 	private double compoundDistance;
 	private int lastCheckedTick;
 	private boolean end;

@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Handlers.Network;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -31,7 +32,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 	private String skillName;
 	private int skillLevel;
 	private boolean craftingTable;
-	private HashMap<String, Integer> skillMap = new HashMap<String, Integer>();
+	private Map<String, Integer> skillMap = new HashMap<String, Integer>();
 
 	public PlayerUpdatePacket() {}
 

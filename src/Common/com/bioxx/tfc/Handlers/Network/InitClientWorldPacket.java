@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Handlers.Network;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -29,7 +30,7 @@ public class InitClientWorldPacket extends AbstractPacket
 	private boolean debugMode;
 	private SkillStats playerSkills;
 	private int daysInYear, healthGainRate, healthGainCap;
-	private HashMap<String, Integer> skillMap = new HashMap<String, Integer>();
+	private Map<String, Integer> skillMap = new HashMap<String, Integer>();
 	private byte chiselMode;
 
 	public InitClientWorldPacket() {}

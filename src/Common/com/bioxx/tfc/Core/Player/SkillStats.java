@@ -1,13 +1,17 @@
 package com.bioxx.tfc.Core.Player;
 
-import io.netty.buffer.ByteBuf;
-
 import java.util.HashMap;
+import java.util.Map;
+
+import io.netty.buffer.ByteBuf;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+
 import net.minecraftforge.common.MinecraftForge;
+
+import cpw.mods.fml.common.network.ByteBufUtils;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -18,11 +22,9 @@ import com.bioxx.tfc.api.SkillsManager.Skill;
 import com.bioxx.tfc.api.Events.GetSkillMultiplierEvent;
 import com.bioxx.tfc.api.Events.PlayerSkillEvent;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
-
 public class SkillStats
 {
-	private HashMap<Skill, Integer> skillsMap;
+	private Map<Skill, Integer> skillsMap;
 	private EntityPlayer player;
 
 	public SkillStats(EntityPlayer p)

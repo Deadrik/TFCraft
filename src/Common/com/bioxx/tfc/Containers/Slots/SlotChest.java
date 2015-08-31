@@ -53,7 +53,7 @@ public class SlotChest extends Slot
 		return this;
 	}
 
-	public SlotChest addItemException(ArrayList<Item> ex)
+	public SlotChest addItemException(List<Item> ex)
 	{
 		exceptions.addAll(ex);
 		return this;

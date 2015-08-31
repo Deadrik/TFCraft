@@ -75,7 +75,7 @@ public class EntityStand extends EntityLiving
 			this.dataWatcher.addObjectByDataType(start+i+defaultArmorLength,5);
 		}
 		this.dataWatcher.addObject(start + EntityStand.defaultEquipableLength + EntityStand.defaultArmorLength, new Float(1));
-		this.dataWatcher.addObject(start + EntityStand.defaultEquipableLength + EntityStand.defaultArmorLength + 1, new Integer(0));
+		this.dataWatcher.addObject(start + EntityStand.defaultEquipableLength + EntityStand.defaultArmorLength + 1, Integer.valueOf(0));
 	}
 
 	@Override

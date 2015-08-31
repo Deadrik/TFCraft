@@ -44,11 +44,11 @@ public class TFCWorldType extends WorldType
 	public TFCBiome[] getBiomesForWorldType()
 	{
 		if(this == TFCWorldType.defaultWorldType)
-			return BIOMES_DEFAULT;
+			return BIOMES_DEFAULT.clone();
 		else if(this == TFCWorldType.flatWorldType)
-			return BIOMES_FLAT;
+			return BIOMES_FLAT.clone();
 
-		return BIOMES_UNKNOWN;
+		return BIOMES_UNKNOWN.clone();
 		//return new TFCBiome[] {TFCBiome.HighHills};
 	}
 

@@ -2,6 +2,7 @@ package com.bioxx.tfc.Items.Tools;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -31,7 +32,7 @@ import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemProPick extends ItemTerra
 {
-	private HashMap<String, ProspectResult> results = new HashMap<String, ProspectResult>();
+	private Map<String, ProspectResult> results = new HashMap<String, ProspectResult>();
 	private Random random;
 
 	public ItemProPick()

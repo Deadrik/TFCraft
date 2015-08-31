@@ -211,11 +211,11 @@ public class BlockLogNatural extends BlockTerra
 		processTree(world, x, y, z, world.getBlockMetadata(x, y, z), null);
 	}
 
-	private void processTree(World world, int x, int y, int z, ItemStack is)
+	/*private void processTree(World world, int x, int y, int z, ItemStack is)
 	{
 		//TODO Rewrite the treecap algorithm using a list of coords instead of the ugly array. Shoudl also use a maxmium list size to prevent 
 		//any memory issues and should take shortcuts to find the top of the tree and search down
-	}
+	}*/
 
 	@Deprecated
 	private void processTree(World world, int x, int y, int z, int meta, ItemStack is)

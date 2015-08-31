@@ -42,7 +42,7 @@ public class Armor
 		armorRatingSlashing = slashing;
 		armorRatingCrushing = crushing;
 		metaltype = material;
-		baseDurability = dura;
+		baseDurability = dura.clone();
 	}
 
 	public int getDurability(int slot)

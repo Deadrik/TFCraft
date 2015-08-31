@@ -1,6 +1,6 @@
 package com.bioxx.tfc.api;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
@@ -866,7 +866,7 @@ public class TFCItems
 	public static ToolMaterial redSteelToolMaterial;
 	public static ToolMaterial steelToolMaterial;
 
-	public static ArrayList<Item> foodList;
+	public static List<Item> foodList;
 
 	public static void registerItems()
 	{

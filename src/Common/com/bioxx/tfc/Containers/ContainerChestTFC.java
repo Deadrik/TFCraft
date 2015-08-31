@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Containers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -59,8 +60,9 @@ public class ContainerChestTFC extends ContainerTFC
 		PlayerInventory.buildInventoryLayout(this, (InventoryPlayer) playerInv, 8, var3 + 109, false, true);
 	}
 
-	public static ArrayList<Item> getExceptions(){
-		ArrayList<Item> exceptions = new ArrayList<Item>();
+	public static List<Item> getExceptions()
+	{
+		List<Item> exceptions = new ArrayList<Item>();
 		for (Item ingot : TEIngotPile.getIngots())
 		{
 			exceptions.add(ingot);

@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -382,7 +383,7 @@ public class BlockCollapsible extends BlockTerraContainer
 	 * The coordinates given are the coordinates of the epicenter of the collapse
 	 * @return This is a list of all coordinates which should collapse vertically, radiating outward from the epicenter
 	 */
-	public ArrayList<ByteCoord> getCollapseMap(World world, int i, int j, int k)
+	public List<ByteCoord> getCollapseMap(World world, int i, int j, int k)
 	{
 		//int checks = 0;
 		ArrayList<ByteCoord> map = new ArrayList<ByteCoord>();

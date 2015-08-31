@@ -41,7 +41,7 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 	}
 	public static Item[] getIngots()
 	{
-		return INGOTS;
+		return INGOTS.clone();
 	}
 
 	public void setType(String i)

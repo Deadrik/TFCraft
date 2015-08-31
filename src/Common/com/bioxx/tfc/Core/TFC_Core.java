@@ -3,6 +3,7 @@ package com.bioxx.tfc.Core;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -60,7 +61,7 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class TFC_Core
 {
-	private static HashMap<Integer, ChunkDataManager> cdmMap = new HashMap<Integer, ChunkDataManager>();
+	private static Map<Integer, ChunkDataManager> cdmMap = new HashMap<Integer, ChunkDataManager>();
 	public static boolean preventEntityDataUpdate;
 
 	public static ChunkDataManager getCDM(World world)

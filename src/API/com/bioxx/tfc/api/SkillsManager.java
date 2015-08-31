@@ -1,10 +1,11 @@
 package com.bioxx.tfc.api;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SkillsManager 
 {
-	private ArrayList<Skill> skillsArray = new ArrayList<Skill>();
+	private List<Skill> skillsArray = new ArrayList<Skill>();
 
 	public static SkillsManager instance = new SkillsManager();
 
@@ -18,7 +19,7 @@ public class SkillsManager
 		skillsArray.add(new Skill(name, rate));
 	}
 
-	public ArrayList<Skill> getSkillsArray()
+	public List<Skill> getSkillsArray()
 	{
 		return this.skillsArray;
 	}

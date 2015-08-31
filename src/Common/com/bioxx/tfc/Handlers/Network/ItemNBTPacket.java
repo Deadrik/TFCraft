@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Handlers.Network;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -15,8 +16,8 @@ import com.bioxx.tfc.Core.TFC_Core;
 
 public class ItemNBTPacket extends AbstractPacket {
 	private NBTTagCompound tags;
-	private LinkedList<String> tagNames;
-	private LinkedList<String> removeNames;
+	private List<String> tagNames;
+	private List<String> removeNames;
 
 	public ItemNBTPacket() {
 		tags = new NBTTagCompound();
@@ -29,14 +30,16 @@ public class ItemNBTPacket extends AbstractPacket {
 		tags = nbt;
 	}
 
-	public ItemNBTPacket(NBTTagCompound nbt, LinkedList<String> acceptedTagNames) {
+	public ItemNBTPacket(NBTTagCompound nbt, List<String> acceptedTagNames)
+	{
 		this();
 		tagNames = acceptedTagNames;
 		for (String tagName : tagNames)
 			tags.setTag(tagName, nbt.getTag(tagName));
 	}
 
-	public ItemNBTPacket(NBTTagCompound nbt, LinkedList<String> acceptedTagNames, LinkedList<String> removeTagNames) {
+	public ItemNBTPacket(NBTTagCompound nbt, List<String> acceptedTagNames, List<String> removeTagNames)
+	{
 		this();
 		tagNames = acceptedTagNames;
 		for (String tagName : tagNames)

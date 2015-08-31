@@ -2,6 +2,7 @@
 package com.bioxx.tfc.WorldGen.Generators;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -21,7 +22,7 @@ public class WorldGenMinable extends WorldGenerator
 	//==========================================mp mod
 	//private static int[] aOreCheck = new int[256];// setup array to store oreIDs for this chunk // has to be static to survive instance calls                
 	//private static int[] metaOreCheck = new int[16];// this is used to check the metaIDs of a given ore ID
-	private static ArrayList oreList = new ArrayList();
+	private static List oreList = new ArrayList();
 	public static int mPChunkX;
 	public static int mPChunkZ;
 	private int xChunk;
@@ -111,11 +112,11 @@ public class WorldGenMinable extends WorldGenerator
 		}
 	}
 
-	private void createMineWithChance(World worldObj, Random rand, int x, int z)
+	/*private void createMineWithChance(World worldObj, Random rand, int x, int z)
 	{
 		if (rarity == 1 || rarity > 0 && rand.nextInt(rarity) == 0)
 			createMine(worldObj, rand, x, z);
-	}
+	}*/
 
 	public boolean generate(World world, Random random, int x, int z, int min, int max)//obsorb default system
 	{

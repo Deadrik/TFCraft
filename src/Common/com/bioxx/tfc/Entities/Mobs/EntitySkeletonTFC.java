@@ -152,7 +152,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 	protected void entityInit()
 	{
 		super.entityInit();
-		this.dataWatcher.addObject(13, new Byte((byte)rand.nextInt(2)));
+		this.dataWatcher.addObject(13, Byte.valueOf((byte) rand.nextInt(2)));
 	}
 
 	@Override

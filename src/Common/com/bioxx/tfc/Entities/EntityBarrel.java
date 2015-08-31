@@ -77,7 +77,7 @@ public class EntityBarrel extends Entity
 	@Override
 	protected void entityInit()
 	{
-		this.dataWatcher.addObject(20, new Integer(0));
+		this.dataWatcher.addObject(20, Integer.valueOf(0));
 	}
 
 	@Override

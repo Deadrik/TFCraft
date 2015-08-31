@@ -38,8 +38,8 @@ public class ItemLooseRock extends ItemTerra
 	@Override
 	public ItemTerra setMetaNames(String[] metanames)
 	{
-		metaNames = metanames;
-		if(metanames != null)
+		metaNames = metanames.clone();
+		if (metaNames != null)
 			icons = new IIcon[metaNames.length];
 		return this;
 	}

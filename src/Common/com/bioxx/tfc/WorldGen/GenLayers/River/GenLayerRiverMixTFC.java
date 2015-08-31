@@ -95,7 +95,7 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
 				validateInt(layerOut, index);
 			}
 		}
-		return layerOut;
+		return layerOut.clone();
 	}
 
 	public void removeRiver(int index, int biomeToReplaceWith)

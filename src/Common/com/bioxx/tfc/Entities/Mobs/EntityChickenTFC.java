@@ -138,7 +138,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	protected void entityInit()
 	{
 		super.entityInit();	
-		this.dataWatcher.addObject(13, new Integer(0)); //sex (1 or 0)
+		this.dataWatcher.addObject(13, Integer.valueOf(0)); //sex (1 or 0)
 		this.dataWatcher.addObject(15, Integer.valueOf(0));		//age
 		
 		this.dataWatcher.addObject(22, Integer.valueOf(0)); //Size, strength, aggression, obedience

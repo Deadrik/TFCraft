@@ -68,7 +68,7 @@ public class BlockPottery extends BlockTerraContainer
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
 		TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
-		return side == ForgeDirection.UP && te != null && te.wood == 8;
+		return side == UP && te != null && te.wood == 8;
 	}
 
 	@Override
@@ -214,7 +214,7 @@ public class BlockPottery extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			if(!world.isSideSolid(x, y - 1, z, ForgeDirection.UP))
+			if (!world.isSideSolid(x, y - 1, z, UP))
 			{
 				((TEPottery)world.getTileEntity(x, y, z)).ejectContents();
 				world.setBlockToAir(x, y, z);

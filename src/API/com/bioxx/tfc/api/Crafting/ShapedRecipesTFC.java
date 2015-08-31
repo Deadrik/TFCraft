@@ -20,7 +20,7 @@ public class ShapedRecipesTFC implements IRecipe
 	{
 		recipeWidth = i;
 		recipeHeight = j;
-		recipeItems = aitemstack;
+		recipeItems = aitemstack.clone();
 		recipeOutput = itemstack;
 	}
 
@@ -104,7 +104,7 @@ public class ShapedRecipesTFC implements IRecipe
 
     public ItemStack[] getRecipeItems()
     {
-        return recipeItems;
+		return recipeItems.clone();
     }
 
     @Override

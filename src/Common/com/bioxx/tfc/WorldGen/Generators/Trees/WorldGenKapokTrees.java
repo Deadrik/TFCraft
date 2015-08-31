@@ -414,10 +414,10 @@ public class WorldGenKapokTrees extends WorldGenerator
 	/**
 	 * Indicates whether or not a leaf node requires additional wood to be added to preserve integrity.
 	 */
-	private boolean leafNodeNeedsBase(int par1)
+	/*private boolean leafNodeNeedsBase(int par1)
 	{
 		return par1 >= this.leafDistanceLimit;
-	}
+	}*/
 
 	private float leafSize(int par1)
 	{

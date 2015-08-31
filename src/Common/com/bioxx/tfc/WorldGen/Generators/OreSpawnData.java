@@ -3,6 +3,7 @@ package com.bioxx.tfc.WorldGen.Generators;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 
@@ -15,7 +16,7 @@ public class OreSpawnData
 {
 	public int type, size, meta, rarity, min = 5, max = 128, vDensity, hDensity;
 	public Block block;
-	public HashMap<Block, List<Integer>> base;
+	public Map<Block, List<Integer>> base;
 
 	public OreSpawnData(String t, String s, String blockName, int m, int r, String[] baseRocks)
 	{

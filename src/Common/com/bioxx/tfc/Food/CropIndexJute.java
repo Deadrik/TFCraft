@@ -20,7 +20,7 @@ public class CropIndexJute extends CropIndex
 	public CropIndexJute(int id, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nutrientUsageMultiplier, Item seed, int[] nutriRestore)
 	{
 		super(id,name,type,growth,stages,minGTemp,minATemp, seed);
-		nutrientExtraRestore = nutriRestore;
+		nutrientExtraRestore = nutriRestore.clone();
 		nutrientUsageMult = nutrientUsageMultiplier;
 	}
 

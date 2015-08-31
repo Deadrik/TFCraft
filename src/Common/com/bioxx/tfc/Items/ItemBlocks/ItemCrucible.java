@@ -1,9 +1,6 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +20,7 @@ import com.bioxx.tfc.api.Interfaces.ISize;
 
 public class ItemCrucible extends ItemTerraBlock implements ISize
 {
-	public HashMap<String, MetalPair> metals = new HashMap<String, MetalPair>();
+	public Map<String, MetalPair> metals = new HashMap<String, MetalPair>();
 	private Alloy currentAlloy; 
 	public ItemCrucible(Block par1) 
 	{

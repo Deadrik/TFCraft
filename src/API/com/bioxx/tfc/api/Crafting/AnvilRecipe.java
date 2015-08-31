@@ -1,6 +1,7 @@
 package com.bioxx.tfc.api.Crafting;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +22,7 @@ public class AnvilRecipe
 	public int anvilreq;
 	public boolean inheritsDamage;
 	public int craftingXP = 1;
-	public ArrayList<String> skillsList = new ArrayList<String>();
+	public List<String> skillsList = new ArrayList<String>();
 	public static int craftingBoundDefault = 50;
 
 	public AnvilRecipe(ItemStack in, ItemStack in2, String p, boolean flux, AnvilReq req, ItemStack result)
@@ -246,7 +247,7 @@ public class AnvilRecipe
 		return craftingXP;
 	}
 
-	public ArrayList<String> getSkillsList()
+	public List<String> getSkillsList()
 	{
 		return skillsList;
 	}

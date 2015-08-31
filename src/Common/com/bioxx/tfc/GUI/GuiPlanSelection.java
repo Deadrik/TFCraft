@@ -26,7 +26,7 @@ public class GuiPlanSelection extends GuiContainerTFC
 	private TEAnvil anvilTE;
 	/*private EntityPlayer player;
 	private World world;*/
-	private ArrayList<Object[]> plans;
+	private List<Object[]> plans;
 	//private int x, y, z;
 	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_plan.png");
 
@@ -91,7 +91,7 @@ public class GuiPlanSelection extends GuiContainerTFC
 			drawCenteredString(this.fontRendererObj, "Plans: " + anvilTE.getStackInSlot(TEAnvil.INPUT1_SLOT).getDisplayName(), guiLeft + xSize / 2, guiTop + 5, 0x000000);
 	}
 
-	private ArrayList<Object[]> getRecipes()
+	private List<Object[]> getRecipes()
 	{
 		AnvilManager manager = AnvilManager.getInstance();
 		Object[] plans = manager.getPlans().keySet().toArray();

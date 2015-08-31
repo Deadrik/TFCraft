@@ -7,7 +7,7 @@ public class ColorizerFoliageTFC
 
 	public static void setFoliageBiomeColorizer(int[] par0ArrayOfInteger)
 	{
-		foliageBuffer = par0ArrayOfInteger;
+		foliageBuffer = par0ArrayOfInteger.clone();
 	}
 
 	/**

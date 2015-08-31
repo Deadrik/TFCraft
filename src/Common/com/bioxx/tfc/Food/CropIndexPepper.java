@@ -2,10 +2,10 @@ package com.bioxx.tfc.Food;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TileEntities.TECrop;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.TileEntities.TECrop;
 
 public class CropIndexPepper extends CropIndex
 {
@@ -21,7 +21,7 @@ public class CropIndexPepper extends CropIndex
 	public CropIndexPepper(int id, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nutrientUsageMultiplier, Item seed, int[] nutriRestore)
 	{
 		super(id,name,type,growth,stages,minGTemp,minATemp, seed);
-		nutrientExtraRestore = nutriRestore;
+		nutrientExtraRestore = nutriRestore.clone();
 		nutrientUsageMult = nutrientUsageMultiplier;
 	}
 

@@ -319,7 +319,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	@Override
 	public String[] func_150125_e()
 	{
-		return this.woodNames;
+		return this.woodNames.clone();
 	}
 
 	@Override

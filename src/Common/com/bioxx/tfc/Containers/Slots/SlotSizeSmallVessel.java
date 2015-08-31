@@ -50,7 +50,7 @@ public class SlotSizeSmallVessel extends Slot
 		return false;
 	}
 
-	public SlotSizeSmallVessel addItemException(ArrayList<Item> ex)
+	public SlotSizeSmallVessel addItemException(List<Item> ex)
 	{
 		exceptions = ex;
 		return this;

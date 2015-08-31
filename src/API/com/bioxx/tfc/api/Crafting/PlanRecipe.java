@@ -1,8 +1,8 @@
 package com.bioxx.tfc.api.Crafting;
 
-import com.bioxx.tfc.api.Enums.RuleEnum;
-
 import net.minecraft.util.IIcon;
+
+import com.bioxx.tfc.api.Enums.RuleEnum;
 
 public class PlanRecipe 
 {
@@ -11,12 +11,12 @@ public class PlanRecipe
 
 	public PlanRecipe(RuleEnum[] r, IIcon i)
 	{
-		rules = r;
+		rules = r.clone();
 		icon = i;
 	}
 
 	public PlanRecipe(RuleEnum[] r)
 	{
-		rules = r;
+		rules = r.clone();
 	}
 }

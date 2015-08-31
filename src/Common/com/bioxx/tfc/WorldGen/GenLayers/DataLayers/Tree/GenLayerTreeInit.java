@@ -9,7 +9,7 @@ public class GenLayerTreeInit extends GenLayerTFC
 	public GenLayerTreeInit(long par1, DataLayer[] trees)
 	{
 		super(par1);
-		layerTrees = trees;
+		layerTrees = trees.clone();
 	}
 
 	@Override

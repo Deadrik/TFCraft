@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Core;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -39,7 +40,7 @@ public class TFC_Achievements
 	public static Achievement achBlueBucket;
 	public static Achievement achRedBucket;
 
-	private static ArrayList<Achievement> achlist;
+	private static List<Achievement> achlist;
 	public static AchievementPage pageBiome;
 	public static Achievement[] achievementsTFC;
 	

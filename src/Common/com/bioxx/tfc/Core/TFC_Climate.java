@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Core;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import net.minecraft.world.World;
 
@@ -15,7 +16,7 @@ import com.bioxx.tfc.api.Util.Helper;
 
 public class TFC_Climate
 {
-	public static HashMap<World, WorldCacheManager> worldPair = new HashMap<World, WorldCacheManager>();
+	public static Map<World, WorldCacheManager> worldPair = new HashMap<World, WorldCacheManager>();
 
 	private static final float[] Y_FACTOR_CACHE = new float[441];
 	private static final float[] Z_FACTOR_CACHE = new float[30001];

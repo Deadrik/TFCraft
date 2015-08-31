@@ -2,6 +2,7 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.List;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -73,9 +74,9 @@ public class TEWoodConstruct extends NetworkTileEntity
 		}
 	}
 
-	public ArrayList<ItemStack> getDrops()
+	public List<ItemStack> getDrops()
 	{
-		ArrayList<ItemStack> list = new ArrayList<ItemStack>();
+		List<ItemStack> list = new ArrayList<ItemStack>();
 		for(int i = 0; i < 192; i++)
 		{
 			if(data.get(i))

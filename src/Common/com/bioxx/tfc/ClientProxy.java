@@ -491,9 +491,9 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerGuiHandler()
 	{
-		NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaCraft.instance, new com.bioxx.tfc.Handlers.Client.GuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaCraft.instance, new GuiHandler());
 		// Register Gui Event Handler
-		MinecraftForge.EVENT_BUS.register(new com.bioxx.tfc.Handlers.Client.GuiHandler());
+		MinecraftForge.EVENT_BUS.register(new GuiHandler());
 	}
 
 	@Override

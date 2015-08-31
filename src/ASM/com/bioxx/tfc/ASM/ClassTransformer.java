@@ -3,8 +3,7 @@ package com.bioxx.tfc.ASM;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
-import cpw.mods.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
+import java.util.Map;
 
 import com.bioxx.tfc.TFCASMLoadingPlugin;
 import org.apache.logging.log4j.LogManager;
@@ -17,8 +16,8 @@ import org.objectweb.asm.tree.*;
 public class ClassTransformer implements net.minecraft.launchwrapper.IClassTransformer
 {
 	public static final Logger LOG = LogManager.getLogger("TerraFirmaCraft ASM");
-	protected HashMap<String, Patch> mcpMethodNodes = new HashMap<String, Patch>();
-	protected HashMap<String, Patch> obfMethodNodes = new HashMap<String, Patch>();
+	protected Map<String, Patch> mcpMethodNodes = new HashMap<String, Patch>();
+	protected Map<String, Patch> obfMethodNodes = new HashMap<String, Patch>();
 	protected String mcpClassName;
 	protected String obfClassName;
 
@@ -159,7 +158,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 		return -1;
 	}
 
-	private int findLabel(InsnList methodList, int line)
+	/*private int findLabel(InsnList methodList, int line)
 	{
 		for (int index = 0; index < methodList.size(); index++)
 		{
@@ -169,9 +168,9 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 			}
 		}
 		return -1;
-	}
+	}*/
 
-	private boolean isLabel(AbstractInsnNode current, int line)
+	/*private boolean isLabel(AbstractInsnNode current, int line)
 	{
 		if(current instanceof LineNumberNode)
 		{
@@ -182,7 +181,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 			}
 		}
 		return false;
-	}
+	}*/
 
 	private void performDirectOperation(InsnList methodInsn, InstrSet input)
 	{
@@ -257,7 +256,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 		}
 	}
 
-	protected HashMap<String, Patch> getMethodNodeList()
+	protected Map<String, Patch> getMethodNodeList()
 	{
 		if(TFCASMLoadingPlugin.runtimeDeobf)
 		{
@@ -279,7 +278,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 		return false;
 	}
 
-	private boolean compareNodes(AbstractInsnNode current,AbstractInsnNode target){
+	/*private boolean compareNodes(AbstractInsnNode current,AbstractInsnNode target){
 		if(current.getType() != target.getType()) {
 			return false;
 		}
@@ -304,13 +303,13 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 		}
 		}
 		return false;
-	}
+	}*/
 
-	private AbstractInsnNode deobf(AbstractInsnNode obf){
-		/*boolean needDeobf=tfc_carpentersblocks_adapter.coremod.TFC_CarpBlock_IFMLLoadingPlugin.runtimeDeobf;
-		if(!needDeobf){
-			return obf;
-		}*/
+	/*private AbstractInsnNode deobf(AbstractInsnNode obf){
+		//boolean needDeobf=tfc_carpentersblocks_adapter.coremod.TFC_CarpBlock_IFMLLoadingPlugin.runtimeDeobf;
+		//if(!needDeobf){
+			//return obf;
+		//}
 		FMLDeobfuscatingRemapper mapper=FMLDeobfuscatingRemapper.INSTANCE;
 		String owner,name,desc;
 		switch(obf.getType()){
@@ -336,7 +335,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 		default:
 			return obf;
 		}
-	}
+	}*/
 
 	public class InstrSet
 	{

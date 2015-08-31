@@ -1,6 +1,6 @@
 package com.bioxx.tfc.Items;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -88,7 +88,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		return this;
 	}
 
-	public void addCreativeItems(ArrayList<ItemStack> list)
+	public void addCreativeItems(List<ItemStack> list)
 	{
 		list.add(new ItemStack(this));
 	}

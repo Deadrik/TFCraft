@@ -1,6 +1,7 @@
 package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -118,7 +119,7 @@ public class WorldGenFissure implements IWorldGenerator
 		BlockMeta rockLayer = fillBlock != null ? new BlockMeta(dl.block, dl.data2) : new BlockMeta(Blocks.air, -1);
 		if(rockLayer.block == null)
 			return;
-		ArrayList<ByteCoord> map = getCollapseMap(world, x, y - creviceDepth, z);
+		List<ByteCoord> map = getCollapseMap(world, x, y - creviceDepth, z);
 		for(ByteCoord b : map)
 		{
 			world.setBlockToAir(x + b.x, y + b.y, z + b.z);
@@ -212,7 +213,7 @@ public class WorldGenFissure implements IWorldGenerator
 		}
 	}
 
-	public ArrayList<ByteCoord> getCollapseMap(World world, int i, int j, int k)
+	public List<ByteCoord> getCollapseMap(World world, int i, int j, int k)
 	{
 		//int checks = 0;
 		ArrayList<ByteCoord> map = new ArrayList<ByteCoord>();

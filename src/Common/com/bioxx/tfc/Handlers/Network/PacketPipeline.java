@@ -36,7 +36,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 {
 
 	private EnumMap<Side, FMLEmbeddedChannel> channels;
-	private LinkedList<Class<? extends AbstractPacket>> packets = new LinkedList<Class<? extends AbstractPacket>>();
+	private List<Class<? extends AbstractPacket>> packets = new LinkedList<Class<? extends AbstractPacket>>();
 	private boolean isPostInitialised;
 
 	/**

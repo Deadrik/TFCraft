@@ -38,8 +38,8 @@ public class TESluice extends TileEntity implements IInventory
 	public byte soilType;
 	private boolean initialized;
 	private Random random = new Random();
-	private TreeSet<Integer> coreSampleTypes = new TreeSet<Integer>();
-	private ArrayList<ItemStack> coreSampleStacks = new ArrayList<ItemStack>();
+	private Set<Integer> coreSampleTypes = new TreeSet<Integer>();
+	private List<ItemStack> coreSampleStacks = new ArrayList<ItemStack>();
 
 	public TESluice()
 	{

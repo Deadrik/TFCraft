@@ -9,7 +9,7 @@ public class GenLayerRockInit extends GenLayerTFC
 	public GenLayerRockInit(long par1, DataLayer[] rocks)
 	{
 		super(par1);
-		layerRocks = rocks;
+		layerRocks = rocks.clone();
 	}
 
 	@Override

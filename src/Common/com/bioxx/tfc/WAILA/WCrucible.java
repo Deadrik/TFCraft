@@ -1,9 +1,6 @@
 package com.bioxx.tfc.WAILA;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -27,7 +24,7 @@ import mcp.mobius.waila.api.IWailaRegistrar;
 
 public class WCrucible implements IWailaDataProvider
 {
-	private HashMap<String, MetalPair> metals = new HashMap<String, MetalPair>();
+	private Map<String, MetalPair> metals = new HashMap<String, MetalPair>();
 	private Alloy currentAlloy;
 
 	@Override

@@ -1,9 +1,6 @@
 package com.bioxx.tfc.TileEntities;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -25,7 +22,7 @@ import com.bioxx.tfc.api.Interfaces.ISmeltable;
 
 public class TECrucible extends NetworkTileEntity implements IInventory
 {
-	public HashMap<String, MetalPair> metals = new HashMap<String, MetalPair>();
+	public Map<String, MetalPair> metals = new HashMap<String, MetalPair>();
 	public Alloy currentAlloy;
 	public int temperature;
 	public ItemStack[] storage;

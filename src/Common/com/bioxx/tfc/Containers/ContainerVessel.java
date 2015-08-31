@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Containers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -23,7 +24,7 @@ public class ContainerVessel extends ContainerTFC
 {
 	private World world;
 	public InventoryCrafting containerInv = new InventoryCrafting(this, 2, 2);
-	private ArrayList<Item> exceptions;
+	private List<Item> exceptions;
 	
 	public ContainerVessel(InventoryPlayer playerinv, World world, int x, int y, int z)
 	{

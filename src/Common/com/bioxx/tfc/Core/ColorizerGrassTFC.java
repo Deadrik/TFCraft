@@ -7,7 +7,7 @@ public class ColorizerGrassTFC
 
 	public static void setGrassBiomeColorizer(int[] par0ArrayOfInteger)
 	{
-		grassBuffer = par0ArrayOfInteger;
+		grassBuffer = par0ArrayOfInteger.clone();
 	}
 
 	/*

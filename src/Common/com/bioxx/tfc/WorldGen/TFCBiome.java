@@ -378,7 +378,7 @@ public class TFCBiome extends BiomeGenBase
 
 	public static TFCBiome[] getBiomeGenArray()
 	{
-		return biomeList;
+		return biomeList.clone();
 	}
 
 	public TFCBiome setLilyPads(int i)

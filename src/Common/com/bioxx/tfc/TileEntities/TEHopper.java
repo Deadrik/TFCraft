@@ -8,14 +8,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.IHopper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Facing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -25,7 +23,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Blocks.Devices.BlockChestTFC;
-import com.bioxx.tfc.Blocks.Devices.BlockHopper;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.TFCBlocks;
@@ -418,41 +415,41 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		return this.cooldown > 0;
 	}
 
-	private boolean isHopperEmpty()
+	/*private boolean isHopperEmpty()
 	{
 		ItemStack[] aitemstack = this.storage;
 		int i = aitemstack.length;
-
+	
 		for (int j = 0; j < i; ++j)
 		{
 			ItemStack itemstack = aitemstack[j];
-
+	
 			if (itemstack != null)
 			{
 				return false;
 			}
 		}
-
+	
 		return true;
-	}
+	}*/
 
-	private boolean isHopperFull()
+	/*private boolean isHopperFull()
 	{
 		ItemStack[] aitemstack = this.storage;
 		int i = aitemstack.length;
-
+	
 		for (int j = 0; j < i; ++j)
 		{
 			ItemStack itemstack = aitemstack[j];
-
+	
 			if (itemstack == null || itemstack.stackSize != itemstack.getMaxStackSize())
 			{
 				return false;
 			}
 		}
-
+	
 		return true;
-	}
+	}*/
 
 	/*private boolean tryToFeedContents()
 	{
@@ -529,13 +526,13 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		return true;
 	}*/
 
-	private static boolean isSidedInvFull(IInventory inv, int side)
+	/*private static boolean isSidedInvFull(IInventory inv, int side)
 	{
 		if (inv instanceof ISidedInventory && side > -1)
 		{
 			ISidedInventory isidedinventory = (ISidedInventory)inv;
 			int[] aint = isidedinventory.getAccessibleSlotsFromSide(side);
-
+	
 			for (int l = 0; l < aint.length; ++l)
 			{
 				if (isidedinventory.getStackInSlot(aint[l]) != null)
@@ -547,7 +544,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		else
 		{
 			int j = inv.getSizeInventory();
-
+	
 			for (int k = 0; k < j; ++k)
 			{
 				if (inv.getStackInSlot(k) != null)
@@ -556,9 +553,9 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 				}
 			}
 		}
-
+	
 		return true;
-	}
+	}*/
 
 	/*public static boolean FeedHopper(IHopper hopper)
 	{
@@ -690,24 +687,24 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		return is;
 	}*/
 
-	private static boolean canFeedItemStack(IInventory inv, ItemStack is, int slot, int side)
+	/*private static boolean canFeedItemStack(IInventory inv, ItemStack is, int slot, int side)
 	{
 		return !inv.isItemValidForSlot(slot, is) ? false : !(inv instanceof ISidedInventory) || ((ISidedInventory)inv).canInsertItem(slot, is, side);
-	}
+	}*/
 
-	private static boolean canExtractItemStack(IInventory inv, ItemStack is, int slot, int side)
+	/*private static boolean canExtractItemStack(IInventory inv, ItemStack is, int slot, int side)
 	{
 		return !(inv instanceof ISidedInventory) || ((ISidedInventory)inv).canExtractItem(slot, is, side);
-	}
+	}*/
 
-	private static ItemStack feedItem(IInventory inv, ItemStack is, int slot, int side)
+	/*private static ItemStack feedItem(IInventory inv, ItemStack is, int slot, int side)
 	{
 		ItemStack itemstack1 = inv.getStackInSlot(slot);
-
+	
 		if (canFeedItemStack(inv, is, slot, side))
 		{
 			boolean changed = false;
-
+	
 			if (itemstack1 == null)
 			{
 				//Forge: BUGFIX: Again, make things respect max stack sizes.
@@ -735,7 +732,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 					changed = size > 0;
 				}
 			}
-
+	
 			if (changed)
 			{
 				if (inv instanceof TEHopper)
@@ -743,19 +740,19 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 					((TEHopper)inv).setCooldown(8);
 					inv.markDirty();
 				}
-
+	
 				inv.markDirty();
 			}
 		}
-
+	
 		return is;
-	}
+	}*/
 
-	private IInventory getOutputInventory()
+	/*private IInventory getOutputInventory()
 	{
 		int i = BlockHopper.getDirectionFromMetadata(this.getBlockMetadata());
 		return searchForOutputInventory(this.getWorldObj(), this.xCoord + Facing.offsetsXForSide[i], this.yCoord + Facing.offsetsYForSide[i], this.zCoord + Facing.offsetsZForSide[i]);
-	}
+	}*/
 
 	public static IInventory getInputInventory(IHopper hopper)
 	{
@@ -805,11 +802,11 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		return iinventory;
 	}
 
-	private static boolean canMergeStacks(ItemStack stack1, ItemStack stack2)
+	/*private static boolean canMergeStacks(ItemStack stack1, ItemStack stack2)
 	{
 		return stack1.getItem() != stack2.getItem() ? false : stack1.getItemDamage() != stack2.getItemDamage() ? false
 				: stack1.stackSize > stack1.getMaxStackSize() ? false : ItemStack.areItemStackTagsEqual(stack1, stack2);
-	}
+	}*/
 
 	@Override
 	public void handleInitPacket(NBTTagCompound nbt) {

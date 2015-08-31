@@ -2,6 +2,7 @@ package com.bioxx.tfc.Entities.Mobs;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -104,7 +105,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		//this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
 
-	public EntityPigTFC(World par1World, IAnimal mother, ArrayList<Float> data)
+	public EntityPigTFC(World par1World, IAnimal mother, List<Float> data)
 	{
 		this(par1World);
 		float fatherSize = 1;
@@ -155,7 +156,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	protected void entityInit()
 	{
 		super.entityInit();	
-		this.dataWatcher.addObject(13, new Integer(0)); //sex (1 or 0)
+		this.dataWatcher.addObject(13, Integer.valueOf(0)); //sex (1 or 0)
 		this.dataWatcher.addObject(15, Integer.valueOf(0));		//age
 		this.dataWatcher.addObject(22, Integer.valueOf(0)); //Size, strength, aggression, obedience
 		this.dataWatcher.addObject(23, Integer.valueOf(0)); // familiarity, familiarizedToday, pregnant, empty slot

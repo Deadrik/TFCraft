@@ -1,8 +1,8 @@
 package com.bioxx.tfc.WorldGen.Generators;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -25,7 +25,7 @@ public class WorldGenOre implements IWorldGenerator
 	private World worldObj;
 	private Random random;
 
-	public static HashMap<String, OreSpawnData> oreList = new CaseInsensitiveHashMap<OreSpawnData>();
+	public static Map<String, OreSpawnData> oreList = new CaseInsensitiveHashMap<OreSpawnData>();
 
 	public WorldGenOre()
 	{
@@ -66,49 +66,49 @@ public class WorldGenOre implements IWorldGenerator
 		}
 	}
 
-	private void oreSmallVein(Block block, int meta, HashMap<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private void oreSmallVein(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOreVein(block, meta ,baseRocks,
 				/*rarity*/rarity,/*veinSize*/20,/*veinAmt*/30,/*height*/5,/*diameter*/40,/*vDensity*/vDensity,/*hDensity*/hDensity,
  worldObj, random, chunkX, chunkZ, min, max);
 	}
 
-	private void oreMediumVein(Block block, int meta, HashMap<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private void oreMediumVein(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOreVein(block, meta ,baseRocks,
 				/*rarity*/rarity,/*veinSize*/30,/*veinAmt*/40,/*height*/10,/*diameter*/60,/*vDensity*/vDensity,/*hDensity*/hDensity,
  worldObj, random, chunkX, chunkZ, min, max);
 	}
 
-	private void oreLargeVein(Block block, int meta, HashMap<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private void oreLargeVein(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOreVein(block, meta ,baseRocks,
 				/*rarity*/rarity,/*veinSize*/60,/*veinAmt*/45,/*height*/20,/*diameter*/80,/*vDensity*/vDensity,/*hDensity*/hDensity,
  worldObj, random, chunkX, chunkZ, min, max);
 	}
 
-	private void oreSmall(Block block, int meta, HashMap<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private void oreSmall(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
-		createOreVein(block, meta ,baseRocks,
+		createOre(block, meta, baseRocks,
 				/*rarity*/rarity,/*veinSize*/20,/*veinAmt*/30,/*height*/5,/*diameter*/80,/*vDensity*/vDensity,/*hDensity*/hDensity,
  worldObj, random, chunkX, chunkZ, min, max);
 	}
 
-	private void oreMedium(Block block, int meta, HashMap<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private void oreMedium(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOre(block, meta ,baseRocks,
 				/*rarity*/rarity,/*veinSize*/30,/*veinAmt*/40,/*height*/10,/*diameter*/120,/*vDensity*/vDensity,/*hDensity*/hDensity,
  worldObj, random, chunkX, chunkZ, min, max);
 	}
 
-	private void oreLarge(Block block, int meta, HashMap<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	private void oreLarge(Block block, int meta, Map<Block, List<Integer>> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOre(block, meta ,baseRocks,
 				/*rarity*/rarity,/*veinSize*/60,/*veinAmt*/40,/*height*/5,/*diameter*/120,/*vDensity*/vDensity,/*hDensity*/hDensity,
  worldObj, random, chunkX, chunkZ, min, max);
 	}
 
-	private static void createOre(Block block, int j, HashMap<Block, List<Integer>> layers, int rarity, int veinSize,
+	private static void createOre(Block block, int j, Map<Block, List<Integer>> layers, int rarity, int veinSize,
 			int veinAmount, int height, int diameter, int vDensity, int hDensity, World world, Random rand, int chunkX, int chunkZ, int min, int max)
 	{
 		if(world.getWorldChunkManager() instanceof TFCWorldChunkManager)
@@ -141,7 +141,7 @@ public class WorldGenOre implements IWorldGenerator
 	}
 
 	// new int[]{TFCBlocks.StoneIgEx,-1,Blocks.sandstone,-1}
-	private static void createOreVein(Block block, int j, HashMap<Block, List<Integer>> layers, int rarity, int veinSize,
+	private static void createOreVein(Block block, int j, Map<Block, List<Integer>> layers, int rarity, int veinSize,
 			int veinAmount, int height, int diameter, int vDensity, int hDensity, World world, Random rand, int chunkX, int chunkZ, int min, int max)
 	{
 		if(world.getWorldChunkManager() instanceof TFCWorldChunkManager)
