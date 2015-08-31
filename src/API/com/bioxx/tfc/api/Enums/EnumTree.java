@@ -49,7 +49,7 @@ public enum EnumTree
 	public final boolean isEvergreen;
 
 
-	private static final EnumTree Materials[] = new EnumTree[] {
+	private static final EnumTree MATERIALS[] = new EnumTree[] {
 		OAK,ASPEN,BIRCH,CHESTNUT,DOUGLASFIR,HICKORY,KOA,ASH,MAPLE,PINE,REDWOOD,SPRUCE,
 		SYCAMORE,UTACACIA,WHITECEDAR,WHITEELM,WILLOW,KAPOK};
 

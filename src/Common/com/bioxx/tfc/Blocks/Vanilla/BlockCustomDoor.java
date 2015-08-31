@@ -30,7 +30,7 @@ import com.bioxx.tfc.api.Constant.Global;
 public class BlockCustomDoor extends BlockTerra
 {
 	private int woodType;
-	private String[] WoodNames =
+	private String[] woodNames =
 	{ "Oak Door Lower", "Oak Door Upper", "Aspen Door Lower", "Aspen Door Upper", "Birch Door Lower", "Birch Door Upper",
 			"Chestnut Door Lower","Chestnut Door Upper","Douglas Fir Door Lower","Douglas Fir Door Upper","Hickory Door Lower","Hickory Door Upper",
 			"Maple Door Lower","Maple Door Upper","Ash Door Lower","Ash Door Upper","Pine Door Lower","Pine Door Upper",
@@ -95,7 +95,7 @@ public class BlockCustomDoor extends BlockTerra
 					flag1 = !flag1;
 			}
 
-			return icons[getWoodType() + (flag1 ? WoodNames.length : 0) + (flag2 ? 1 : 0)];
+			return icons[getWoodType() + (flag1 ? woodNames.length : 0) + (flag2 ? 1 : 0)];
 		}
 		else
 		{
@@ -106,11 +106,11 @@ public class BlockCustomDoor extends BlockTerra
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		this.icons = new IIcon[WoodNames.length * 2];
-		for(int i = 0; i < WoodNames.length; i++)
+		this.icons = new IIcon[woodNames.length * 2];
+		for(int i = 0; i < woodNames.length; i++)
 		{
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/doors/"+WoodNames[i]);
-			this.icons[i + WoodNames.length] = new IconFlipped(this.icons[i], true, false);
+			icons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "wood/doors/"+woodNames[i]);
+			this.icons[i + woodNames.length] = new IconFlipped(this.icons[i], true, false);
 		}
 	}
 
@@ -450,7 +450,7 @@ public class BlockCustomDoor extends BlockTerra
 				// top half of the door still exists or is air
 				// return the door item (used to return the door item when mouse pointer over the bottom half of the door)
 				int damageValue = getDamageValue(world, x, y, z);
-				ret.add(new ItemStack(Recipes.Doors[damageValue], 1, 0));				
+				ret.add(new ItemStack(Recipes.doors[damageValue], 1, 0));				
 			}		
 		}
 		else
@@ -463,7 +463,7 @@ public class BlockCustomDoor extends BlockTerra
 				// bottom half of the door still exists
 				// return the door item (used to return the door item when mouse pointer over the top half of the door)
 				int damageValue = getDamageValue(world, x, y, z);
-				ret.add(new ItemStack(Recipes.Doors[damageValue], 1, 0));				
+				ret.add(new ItemStack(Recipes.doors[damageValue], 1, 0));				
 			}
 		}
 		
@@ -474,7 +474,7 @@ public class BlockCustomDoor extends BlockTerra
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
     {
 		int damageValue = getDamageValue(world, x, y, z);
-		return new ItemStack(Recipes.Doors[damageValue], 1, 0);
+		return new ItemStack(Recipes.doors[damageValue], 1, 0);
     }
 
 	public int getWoodType()

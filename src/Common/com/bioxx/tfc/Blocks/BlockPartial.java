@@ -103,8 +103,8 @@ public class BlockPartial extends BlockTerraContainer
 	public int getFlammability(IBlockAccess world, int x, int y, int z, ForgeDirection face)
 	{
 		TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
-		if(te.TypeID >= 0)
-			return Blocks.fire.getFlammability(Block.getBlockById(te.TypeID));
+		if(te.typeID >= 0)
+			return Blocks.fire.getFlammability(Block.getBlockById(te.typeID));
 		else return 0;
 	}
 
@@ -112,8 +112,8 @@ public class BlockPartial extends BlockTerraContainer
 	public int getFireSpreadSpeed(IBlockAccess world, int x, int y, int z, ForgeDirection face)
 	{
 		TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
-		if(te.TypeID >= 0)
-			return Blocks.fire.getEncouragement(Block.getBlockById(te.TypeID));
+		if(te.typeID >= 0)
+			return Blocks.fire.getEncouragement(Block.getBlockById(te.typeID));
 		else return 0;
 	}
 

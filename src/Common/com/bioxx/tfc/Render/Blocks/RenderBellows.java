@@ -23,7 +23,7 @@ public class RenderBellows implements ISimpleBlockRenderingHandler
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
 		//forward
-		renderer.overrideBlockTexture = BlockBellows.BellowsFront;
+		renderer.overrideBlockTexture = BlockBellows.bellowsFront;
 		renderer.setRenderBounds(0.0F, 0.0F, 0.9F, 1.0F, 1.0F, 1.0F);
 		renderInvBlock(block, renderer);
 		//mid
@@ -31,7 +31,7 @@ public class RenderBellows implements ISimpleBlockRenderingHandler
 		renderer.setRenderBounds(0.1F, 0.1F, 0.05F, 0.9F, 0.9F, 0.95F);
 		renderInvBlock(block, renderer);
 		//back
-		renderer.overrideBlockTexture = BlockBellows.BellowsBack;
+		renderer.overrideBlockTexture = BlockBellows.bellowsBack;
 		renderer.setRenderBounds(0.0F, 0.0F, 0, 1.0F, 1.0F, 0.1F);
 		renderInvBlock(block, renderer);
 

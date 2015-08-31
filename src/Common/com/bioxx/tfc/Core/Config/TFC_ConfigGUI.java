@@ -16,7 +16,7 @@ public class TFC_ConfigGUI extends GuiConfig
 {
 	public TFC_ConfigGUI(GuiScreen parent)
 	{
-		super(parent, getConfigElements(), Reference.ModID, false, false, Reference.ModName);
+		super(parent, getConfigElements(), Reference.MOD_ID, false, false, Reference.MOD_NAME);
 	}
 
 	private static List<IConfigElement> getConfigElements()

@@ -21,8 +21,8 @@ public class ItemSalad extends ItemMeal
 	{
 		super();
 		this.hasSubtypes = true;
-		this.MetaNames = new String[]{"Salad0","Salad1","Salad2","Salad3"};
-		this.MetaIcons = new IIcon[4];
+		this.metaNames = new String[]{"Salad0","Salad1","Salad2","Salad3"};
+		this.metaIcons = new IIcon[4];
 		this.setFolder("food/");
 	}
 
@@ -39,8 +39,8 @@ public class ItemSalad extends ItemMeal
 		if (nbt == null)
 			nbt = new NBTTagCompound();
 
-		int[] FG = new int[] { -1, -1, -1, -1 };
-		nbt.setIntArray("FG", FG);
+		int[] foodGroups = new int[] { -1, -1, -1, -1 };
+		nbt.setIntArray("FG", foodGroups);
 		nbt.setFloat("foodWeight", 0);
 		nbt.setFloat("foodDecay", 0);
 		nbt.setInteger("decayTimer", (int) TFC_Time.getTotalHours() + 1);
@@ -64,10 +64,10 @@ public class ItemSalad extends ItemMeal
 				world.playSoundAtEntity(player, TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
 			}
 			// If the bowl didn't break, try to add it to an existing stack of bowls in the inventory
-			else if (!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.PotteryBowl, 1, 1)))
+			else if (!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.potteryBowl, 1, 1)))
 			{
 				// If the bowl can't be fit in the inventory, put it in the newly emptied held slot
-				return new ItemStack(TFCItems.PotteryBowl, 1, 1);
+				return new ItemStack(TFCItems.potteryBowl, 1, 1);
 			}
 		}
 

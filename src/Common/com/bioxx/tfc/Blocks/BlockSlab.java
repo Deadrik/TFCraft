@@ -55,7 +55,7 @@ public class BlockSlab extends BlockPartial
 	{
 		TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 		if(te != null)
-			return Block.getBlockById(te.TypeID).getBlockHardness(world, x, y, z);
+			return Block.getBlockById(te.typeID).getBlockHardness(world, x, y, z);
 		return this.blockHardness;
 	}
 
@@ -100,7 +100,7 @@ public class BlockSlab extends BlockPartial
 		//int md = world.getBlockMetadata(i, j, k);
 		if(te != null)
 		{
-			short type = te.TypeID;
+			short type = te.typeID;
 
 			if (type <= 0) {
 				return super.getCollisionBoundingBoxFromPool(world, i, j, k);

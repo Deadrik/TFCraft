@@ -23,7 +23,7 @@ public class BlockNestBox extends BlockTerraContainer
 	public BlockNestBox()
 	{
 		super(Material.wood);
-		this.setCreativeTab(TFCTabs.TFCDecoration);
+		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 		this.setBlockBounds(0.1f, 0, 0.1f, 0.9f, 0.4f, 0.9f);
 	}
 
@@ -42,13 +42,13 @@ public class BlockNestBox extends BlockTerraContainer
 	@Override
 	public int getRenderType()
 	{
-		return TFCBlocks.NestBoxRenderId;
+		return TFCBlocks.nestBoxRenderId;
 	}
 
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		this.blockIcon = TFC_Textures.InvisibleTexture; // This gets registered in TFC.Blocks.Terrain.BlockGrass
+		this.blockIcon = TFC_Textures.invisibleTexture; // This gets registered in TFC.Blocks.Terrain.BlockGrass
 	}
 
 	@Override

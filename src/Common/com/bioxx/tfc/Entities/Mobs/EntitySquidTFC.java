@@ -63,7 +63,7 @@ public class EntitySquidTFC extends EntitySquid
 	{
 		int j = this.rand.nextInt(3 + par2) + 1;
 		for (int k = 0; k < j; ++k)
-			this.entityDropItem(new ItemStack(TFCItems.Dye, 1, 0), 0.0F);
+			this.entityDropItem(new ItemStack(TFCItems.dye, 1, 0), 0.0F);
 		//this.dropItem(TFCItems.CalamariRaw.itemID,((2+rand.nextInt(5))));
 		TFC_Core.animalDropMeat(this, TFCItems.calamariRaw, 0.5f+(1*this.rand.nextFloat()));
 	}

@@ -12,13 +12,13 @@ public interface IAnimal
 	public enum GenderEnum
 	{
 		MALE,FEMALE;
-		public static final GenderEnum[] genders = {MALE, FEMALE};
+		public static final GenderEnum[] GENDERS = {MALE, FEMALE};
 	}
 	
 	public enum InteractionEnum
 	{
 		MOUNT,SHEAR,MILK,BREED, NAME, TOLERATEPLAYER;
-		public static final InteractionEnum[] interactions = {MOUNT,SHEAR,MILK,BREED, NAME, TOLERATEPLAYER};
+		public static final InteractionEnum[] INTERACTIONS = {MOUNT,SHEAR,MILK,BREED, NAME, TOLERATEPLAYER};
 	}
 
 	GenderEnum getGender();

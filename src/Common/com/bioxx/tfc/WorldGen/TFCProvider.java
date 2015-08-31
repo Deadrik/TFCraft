@@ -59,7 +59,7 @@ public class TFCProvider extends WorldProvider
 		//so we don't needlessly recalculate
 		if(TFC_Time.getDayFromTotalHours(TFC_Time.getTotalHours()) != moonPhaseLastCalculated)
 		{
-			int daysPassed = (int)(par1 / TFC_Time.dayLength);
+			int daysPassed = (int)(par1 / TFC_Time.DAY_LENGTH);
 			int dayOfMonth = daysPassed % TFC_Time.daysInMonth;
 			float dayToLunarDayMultiplier = (float)8/TFC_Time.daysInMonth;
 			//Round rather than just cast to ensure that the full moon
@@ -89,16 +89,16 @@ public class TFCProvider extends WorldProvider
 	private boolean isNextToShoreOrIce(int x, int y, int z)
 	{
 		if(worldObj.checkChunksExist(x+1, y, z, x+1, y, z))
-			if(worldObj.getBlock(x+1, y, z) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x+1, y, z)))
+			if(worldObj.getBlock(x+1, y, z) == TFCBlocks.ice || TFC_Core.isGround(worldObj.getBlock(x+1, y, z)))
 				return true;
 		if(worldObj.checkChunksExist(x-1, y, z, x-1, y, z))
-			if(worldObj.getBlock(x-1, y, z) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x-1, y, z)))
+			if(worldObj.getBlock(x-1, y, z) == TFCBlocks.ice || TFC_Core.isGround(worldObj.getBlock(x-1, y, z)))
 				return true;
 		if(worldObj.checkChunksExist(x, y, z+1, x, y, z+1))
-			if(worldObj.getBlock(x, y, z+1) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x, y, z+1)))
+			if(worldObj.getBlock(x, y, z+1) == TFCBlocks.ice || TFC_Core.isGround(worldObj.getBlock(x, y, z+1)))
 				return true;
 		if(worldObj.checkChunksExist(x, y, z-1, x, y, z-1))
-			if(worldObj.getBlock(x, y, z-1) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x, y, z-1)))
+			if(worldObj.getBlock(x, y, z-1) == TFCBlocks.ice || TFC_Core.isGround(worldObj.getBlock(x, y, z-1)))
 				return true;
 		return false;
 	}
@@ -111,7 +111,7 @@ public class TFCProvider extends WorldProvider
 		float temp = TFC_Climate.getHeightAdjustedTemp(worldObj, x, y, z);
 		BiomeGenBase biome = worldObj.getBiomeGenForCoords(x, z);
 
-		if (temp <= 0 && biome != TFCBiome.DeepOcean)
+		if (temp <= 0 && biome != TFCBiome.DEEP_OCEAN)
 		{
 			if (worldObj.isAirBlock(x, y+1, z) && TFC_Core.isWater(id) && worldObj.rand.nextInt(4) == 0 && isNextToShoreOrIce(x,y,z))
 			{
@@ -123,13 +123,13 @@ public class TFCProvider extends WorldProvider
 
 				if((mat == Material.water || mat == Material.ice) && !salty)
 				{
-					if(id == TFCBlocks.FreshWaterStationary && meta == 0/* || id == TFCBlocks.FreshWaterFlowing.blockID*/)
+					if(id == TFCBlocks.freshWaterStationary && meta == 0/* || id == TFCBlocks.FreshWaterFlowing.blockID*/)
 					{
-						worldObj.setBlock(x, y, z, TFCBlocks.Ice, 1, 2);
+						worldObj.setBlock(x, y, z, TFCBlocks.ice, 1, 2);
 					}
-					else if(id == TFCBlocks.SaltWaterStationary && meta == 0/* || id == Block.waterMoving.blockID*/)
+					else if(id == TFCBlocks.saltWaterStationary && meta == 0/* || id == Block.waterMoving.blockID*/)
 					{
-						worldObj.setBlock(x, y, z, TFCBlocks.Ice, 0, 2);
+						worldObj.setBlock(x, y, z, TFCBlocks.ice, 0, 2);
 					}
 				}
 				return false;//(mat == Material.water) && !salty;
@@ -137,10 +137,10 @@ public class TFCProvider extends WorldProvider
 		}
 		else
 		{
-			if(id == TFCBlocks.Ice)
+			if(id == TFCBlocks.ice)
 			{
 				int chance = (int)Math.floor(Math.max(1, 6f-temp));
-				if(id == TFCBlocks.Ice && worldObj.rand.nextInt(chance) == 0)
+				if(id == TFCBlocks.ice && worldObj.rand.nextInt(chance) == 0)
 				{
 					if (worldObj.getBlock(x, y + 1, z) == Blocks.snow)
 					{
@@ -163,11 +163,11 @@ public class TFCProvider extends WorldProvider
 
 						if((meta & 1) == 0)
 						{
-							worldObj.setBlock(x, y, z, TFCBlocks.SaltWaterStationary, 0, flag);
+							worldObj.setBlock(x, y, z, TFCBlocks.saltWaterStationary, 0, flag);
 						}
 						else if((meta & 1) == 1)
 						{
-							worldObj.setBlock(x, y, z, TFCBlocks.FreshWaterStationary, 0, flag);
+							worldObj.setBlock(x, y, z, TFCBlocks.freshWaterStationary, 0, flag);
 						}
 					}
 				}
@@ -191,7 +191,7 @@ public class TFCProvider extends WorldProvider
 		if (material == Material.snow)  // avoid vanilla MC to replace snow
 			return false;
 		else
-			return TFCBlocks.Snow.canPlaceBlockAt(worldObj, x, y, z) && material.isReplaceable();
+			return TFCBlocks.snow.canPlaceBlockAt(worldObj, x, y, z) && material.isReplaceable();
 	}
 
 	/*private boolean canSnowAtTemp(int x, int y, int z)

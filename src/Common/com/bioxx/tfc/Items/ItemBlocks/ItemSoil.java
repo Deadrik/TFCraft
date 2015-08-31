@@ -37,12 +37,12 @@ public class ItemSoil extends ItemTerraBlock
 			return;
 
 		int dam = is.getItemDamage();
-		if (b == TFCBlocks.Dirt2
-				|| b == TFCBlocks.Sand2
-				|| b == TFCBlocks.Clay2
+		if (b == TFCBlocks.dirt2
+				|| b == TFCBlocks.sand2
+				|| b == TFCBlocks.clay2
 				|| TFC_Core.isGrassType2(b)
 				|| b == TFCBlocks.tilledSoil2
-				|| b == TFCBlocks.Gravel2)
+				|| b == TFCBlocks.gravel2)
 		{
 			dam += 16;
 		}

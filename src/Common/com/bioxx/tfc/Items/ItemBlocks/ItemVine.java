@@ -28,6 +28,6 @@ public class ItemVine extends ItemTerraBlock
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int par1)
 	{
-		return TFCBlocks.Vine.getIcon(0, 0);
+		return TFCBlocks.vine.getIcon(0, 0);
 	}
 }

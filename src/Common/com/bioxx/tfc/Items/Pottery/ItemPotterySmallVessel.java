@@ -42,7 +42,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	public ItemPotterySmallVessel()
 	{
 		super();
-		this.MetaNames = new String[]{"Clay Vessel", "Ceramic Vessel", "Ceramic Vessel"};
+		this.metaNames = new String[]{"Clay Vessel", "Ceramic Vessel", "Ceramic Vessel"};
 		this.setMaxStackSize(1);
 		this.setWeight(EnumWeight.MEDIUM);
 		this.setSize(EnumSize.SMALL);
@@ -68,7 +68,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	public void registerIcons(IIconRegister registerer)
 	{
 		super.registerIcons(registerer);
-		this.overlayIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + "Ceramic Vessel Overlay");
+		this.overlayIcon = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder + "Ceramic Vessel Overlay");
 	}
 
 	@Override
@@ -201,12 +201,12 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				if(types[3] != null)
 					a.add(new AlloyMetal(types[3], metalPercent[3]));
 
-				Metal match = AlloyManager.instance.matchesAlloy(a, furnaceTier);
+				Metal match = AlloyManager.INSTANCE.matchesAlloy(a, furnaceTier);
 				if(match != null)
 				{
 					Alloy output = new Alloy(match, total); 
 					NBTTagCompound tag = is.stackTagCompound;
-					tag.setString("MetalType", output.outputType.Name);
+					tag.setString("MetalType", output.outputType.name);
 					tag.setInteger("MetalAmount", (int)output.outputAmount);
 					long totalH =  TFC_Time.getTotalHours();
 					tag.setLong("TempTimer", totalH);
@@ -221,7 +221,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	{
 		if(mt0 != null && mt1 != null && m0 > 0)
 		{
-			if(mt0.Name.equals(mt1.Name))
+			if(mt0.name.equals(mt1.name))
 				return m0 + m1;
 		}
 		return m0;
@@ -252,8 +252,8 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				 * the other colors.
 				 */
 				int r = Math.min((j >> 16) + 0x60, 0xFF);
-				int b = Math.min(((j >> 8) & 0x00FF) + 0x60, 0xFF);
-				int g = Math.min((j & 0x0000FF) + 0x60, 0xFF);
+				int b = Math.min(((j >> 8) & 0x00FF) + 0x60, 0xFF); //NOPMD
+				int g = Math.min((j & 0x0000FF) + 0x60, 0xFF); //NOPMD
 				return (r << 16) | (b << 8) | g;
 			}
 			else

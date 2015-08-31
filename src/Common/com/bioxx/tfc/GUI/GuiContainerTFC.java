@@ -22,9 +22,9 @@ public class GuiContainerTFC extends GuiContainer
 	protected boolean drawInventory = true;
 	protected Slot activeSlot;
 
-	public GuiContainerTFC(Container Container, int xsize, int ysize)
+	public GuiContainerTFC(Container container, int xsize, int ysize)
 	{
-		super(Container);
+		super(container);
 		xSize = xsize;
 		ySize = ysize + PlayerInventory.invYSize;
 	}

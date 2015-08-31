@@ -28,7 +28,7 @@ public class ItemAlcohol extends ItemTerra
 	{
 		super();
 		this.setFolder("food/");
-		this.setContainerItem(TFCItems.GlassBottle);
+		this.setContainerItem(TFCItems.glassBottle);
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class ItemAlcohol extends ItemTerra
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister registerer)
 	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":Glass Bottle Overlay");		
+		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":Glass Bottle Overlay");		
 	}
 
 	@Override
@@ -144,14 +144,14 @@ public class ItemAlcohol extends ItemTerra
 		}
 
 		// First try to add the empty bottle to an existing stack of bottles in the inventory
-		if (!player.capabilities.isCreativeMode && !player.inventory.addItemStackToInventory(new ItemStack(TFCItems.GlassBottle)))
+		if (!player.capabilities.isCreativeMode && !player.inventory.addItemStackToInventory(new ItemStack(TFCItems.glassBottle)))
 		{
 			// If we couldn't fit the empty bottle in the inventory, and we drank the last alcohol bottle, put the empty bottle in the empty held slot
 			if (is.stackSize == 0)
-				return new ItemStack(TFCItems.GlassBottle);
+				return new ItemStack(TFCItems.glassBottle);
 			// If we couldn't fit the empty bottle in the inventory, and there is more alcohol left in the stack, drop the bottle on the ground
 			else
-				player.dropPlayerItemWithRandomChoice(new ItemStack(TFCItems.GlassBottle), false);
+				player.dropPlayerItemWithRandomChoice(new ItemStack(TFCItems.glassBottle), false);
 		}
 
 		return is;

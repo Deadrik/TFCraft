@@ -23,10 +23,10 @@ public class ServerTickHandler
 		{
 			if(world.provider.dimensionId == 0 && world.getWorldInfo().getSeed() != wSeed)
 			{
-				TFC_Core.SetupWorld(world);
+				TFC_Core.setupWorld(world);
 				wSeed = world.getWorldInfo().getSeed();
 			}
-			TFC_Time.UpdateTime(world);
+			TFC_Time.updateTime(world);
 
 			/*if(ServerOverrides.isServerEmpty())
 				return;*/

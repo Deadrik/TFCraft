@@ -11,12 +11,12 @@ import com.bioxx.tfc.TileEntities.TEBellows;
 
 public class TESRBellows extends TESRBase
 {
-	private static final ResourceLocation FRONT_TEXTURE = new ResourceLocation(Reference.ModID + ":textures/blocks/devices/Bellows Front.png");
-	private static final ResourceLocation BACK_TEXTURE = new ResourceLocation(Reference.ModID + ":textures/blocks/devices/Bellows Back.png");
-	private static final ResourceLocation SIDE1_TEXTURE = new ResourceLocation(Reference.ModID + ":textures/blocks/devices/Bellows82.png");
-	private static final ResourceLocation SIDE2_TEXTURE = new ResourceLocation(Reference.ModID + ":textures/blocks/devices/Bellows83.png");
-	private static final ResourceLocation SIDE3_TEXTURE = new ResourceLocation(Reference.ModID + ":textures/blocks/devices/Bellows84.png");
-	private static final ResourceLocation SIDE4_TEXTURE = new ResourceLocation(Reference.ModID + ":textures/blocks/devices/Bellows85.png");
+	private static final ResourceLocation FRONT_TEXTURE = new ResourceLocation(Reference.MOD_ID + ":textures/blocks/devices/Bellows Front.png");
+	private static final ResourceLocation BACK_TEXTURE = new ResourceLocation(Reference.MOD_ID + ":textures/blocks/devices/Bellows Back.png");
+	private static final ResourceLocation SIDE1_TEXTURE = new ResourceLocation(Reference.MOD_ID + ":textures/blocks/devices/Bellows82.png");
+	private static final ResourceLocation SIDE2_TEXTURE = new ResourceLocation(Reference.MOD_ID + ":textures/blocks/devices/Bellows83.png");
+	private static final ResourceLocation SIDE3_TEXTURE = new ResourceLocation(Reference.MOD_ID + ":textures/blocks/devices/Bellows84.png");
+	private static final ResourceLocation SIDE4_TEXTURE = new ResourceLocation(Reference.MOD_ID + ":textures/blocks/devices/Bellows85.png");
 
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f)

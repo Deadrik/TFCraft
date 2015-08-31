@@ -14,10 +14,10 @@ import net.minecraft.world.World;
 
 public class CraftingManagerTFC
 {
-	private static final CraftingManagerTFC instance = new CraftingManagerTFC();
+	private static final CraftingManagerTFC INSTANCE = new CraftingManagerTFC();
 	public static final CraftingManagerTFC getInstance()
 	{
-		return instance;
+		return INSTANCE;
 	}
 
 	private List<IRecipe> recipes;

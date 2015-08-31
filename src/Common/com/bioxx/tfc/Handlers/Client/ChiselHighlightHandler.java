@@ -21,7 +21,7 @@ import com.bioxx.tfc.api.Tools.ChiselManager;
 public class ChiselHighlightHandler
 {
 	@SubscribeEvent
-	public void DrawBlockHighlightEvent(DrawBlockHighlightEvent evt)
+	public void drawBlockHighlightEvent(DrawBlockHighlightEvent evt)
 	{
 		EntityPlayer player = evt.player;
 		World world = player.worldObj;
@@ -42,7 +42,7 @@ public class ChiselHighlightHandler
 			{
 				MovingObjectPosition target = evt.target;
 				Block id = world.getBlock(target.blockX, target.blockY, target.blockZ);
-				int mode = PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode;
+				int mode = PlayerManagerTFC.getInstance().getClientPlayer().chiselMode;
 				//double depth = (double)pi.ChiselDetailZoom/8D;
 
 				if (mode > -1)

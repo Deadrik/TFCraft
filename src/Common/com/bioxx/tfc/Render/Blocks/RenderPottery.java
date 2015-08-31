@@ -26,7 +26,7 @@ public class RenderPottery implements ISimpleBlockRenderingHandler
 		if(te.straw > 0)
 		{
 			if ( ! breaking )
-				renderer.overrideBlockTexture = TFCBlocks.Thatch.getIcon(world, x, y, z, 0);
+				renderer.overrideBlockTexture = TFCBlocks.thatch.getIcon(world, x, y, z, 0);
 			
 			renderer.setRenderBounds(0, 0, 0, 1, 0.0625*te.straw, 1);
 			renderer.renderStandardBlock(block, x, y, z);
@@ -35,7 +35,7 @@ public class RenderPottery implements ISimpleBlockRenderingHandler
 		if(te.wood > 0)
 		{
 			if ( ! breaking )
-				renderer.overrideBlockTexture = TFCBlocks.LogPile.getIcon(0, 0);
+				renderer.overrideBlockTexture = TFCBlocks.logPile.getIcon(0, 0);
 			
 			int w = te.wood;
 			if(te.wood > 4)

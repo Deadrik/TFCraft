@@ -53,7 +53,7 @@ public class ConfigSyncPacket extends AbstractPacket
 	public void handleClientSide(EntityPlayer player)
 	{
 		if (map == null) throw new IllegalStateException("Packet was not decoded");
-		TerraFirmaCraft.log.info("Applying server TFCCrafting settings");
+		TerraFirmaCraft.LOG.info("Applying server TFCCrafting settings");
 		try
 		{
 			for (Map.Entry<String, Boolean> entry : map.entrySet())
@@ -63,7 +63,7 @@ public class ConfigSyncPacket extends AbstractPacket
 		}
 		catch (IllegalAccessException e)
 		{
-			TerraFirmaCraft.log.fatal("Error loading TFCCrafting settings from server!", e);
+			TerraFirmaCraft.LOG.fatal("Error loading TFCCrafting settings from server!", e);
 		}
 	}
 

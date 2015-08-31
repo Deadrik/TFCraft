@@ -14,8 +14,8 @@ import com.bioxx.tfc.Entities.Mobs.EntityDeer;
 import com.bioxx.tfc.api.Entities.IAnimal;
 public class RenderDeer extends RenderLiving
 {
-	private static final ResourceLocation DeerTexture = new ResourceLocation(Reference.ModID, "textures/mob/deer.png");
-	private static final ResourceLocation FawnTexture = new ResourceLocation(Reference.ModID, "textures/mob/deer_fawn.png");
+	private static final ResourceLocation DEER_TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/mob/deer.png");
+	private static final ResourceLocation FAWN_TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/mob/deer_fawn.png");
 
 	//private float scale = 1.0f;
 	//private ModelDeer modeldeer;
@@ -32,9 +32,9 @@ public class RenderDeer extends RenderLiving
 		//scale = par1EntityDeer.getSize();
 	}
 
-	protected void func_25006_b (EntityDeer entitydeer, float f)
+	/*protected void func_25006_b (EntityDeer entitydeer, float f)
 	{
-	}
+	}*/
 
 	/**
 	 * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
@@ -44,7 +44,7 @@ public class RenderDeer extends RenderLiving
 	protected void preRenderCallback (EntityLivingBase par1EntityLiving, float par2)
 	{
 		preRenderScale ((EntityDeer) par1EntityLiving, par2);
-		func_25006_b ((EntityDeer) par1EntityLiving, par2);
+		//func_25006_b ((EntityDeer) par1EntityLiving, par2);
 	}
 
 	protected void preRenderScale (EntityDeer par1EntityDeer, float par2)
@@ -83,11 +83,11 @@ public class RenderDeer extends RenderLiving
 	{
 		if(!entity.isAdult())
 		{
-			return FawnTexture;
+			return FAWN_TEXTURE;
 		}
 		else
 		{
-			return DeerTexture;
+			return DEER_TEXTURE;
 		}
 	}
 

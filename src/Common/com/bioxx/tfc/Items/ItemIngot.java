@@ -38,7 +38,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	public ItemIngot()
 	{
 		super();
-		setCreativeTab(TFCTabs.TFCMaterials);
+		setCreativeTab(TFCTabs.TFC_MATERIALS);
 		this.setFolder("ingots/");
 		metalAmount = 100;
 	}
@@ -59,7 +59,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
+		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
 	}
 
 	@Override
@@ -93,14 +93,14 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		list.add(new ItemStack(this));
 	}
 
-	private boolean CreatePile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, int l)
+	private boolean createPile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, int l)
 	{
 
 		boolean fullStack = true;
 
 		TEIngotPile te = null;
 
-		if (world.getTileEntity(x, y, z) instanceof TEIngotPile && world.getBlock(x,y,z) == TFCBlocks.IngotPile)
+		if (world.getTileEntity(x, y, z) instanceof TEIngotPile && world.getBlock(x,y,z) == TFCBlocks.ingotPile)
 		{
 			te = (TEIngotPile)world.getTileEntity(x, y, z);
 			if (te.contentsMatch(0,itemstack) && te.getStackInSlot(0).stackSize < te.getInventoryStackLimit())
@@ -115,7 +115,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		{
 			if(side == 0 && world.isAirBlock(x, y-1, z) && isValid(world, x, y-1, z))
 			{
-				world.setBlock( x, y-1, z, TFCBlocks.IngotPile, l, 0x2);
+				world.setBlock( x, y-1, z, TFCBlocks.ingotPile, l, 0x2);
 				if(world.isRemote) {
 					world.markBlockForUpdate(x, y-1, z);
 				}
@@ -123,7 +123,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 			}
 			else if(side == 1 && world.isAirBlock(x, y+1, z) && isValid(world, x, y+1, z))
 			{
-				world.setBlock( x, y+1, z, TFCBlocks.IngotPile, l, 0x2);
+				world.setBlock( x, y+1, z, TFCBlocks.ingotPile, l, 0x2);
 				if(world.isRemote) {
 					world.markBlockForUpdate(x, y+1, z);
 				}
@@ -131,7 +131,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 			}
 			else if(side == 2 && world.isAirBlock(x, y, z-1) && isValid(world, x, y, z-1))
 			{
-				world.setBlock( x, y, z-1, TFCBlocks.IngotPile, l, 0x2);
+				world.setBlock( x, y, z-1, TFCBlocks.ingotPile, l, 0x2);
 				if(world.isRemote) {
 					world.markBlockForUpdate(x, y, z-1);
 				}
@@ -139,7 +139,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 			}
 			else if(side == 3 && world.isAirBlock(x, y, z+1) && isValid(world, x, y, z+1))
 			{
-				world.setBlock( x, y, z+1, TFCBlocks.IngotPile, l, 0x2);
+				world.setBlock( x, y, z+1, TFCBlocks.ingotPile, l, 0x2);
 				if(world.isRemote) {
 					world.markBlockForUpdate(x, y, z+1);
 				}
@@ -147,7 +147,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 			}
 			else if(side == 4 && world.isAirBlock(x-1, y, z) && isValid(world, x-1, y, z))
 			{
-				world.setBlock( x-1, y, z, TFCBlocks.IngotPile, l, 0x2);
+				world.setBlock( x-1, y, z, TFCBlocks.ingotPile, l, 0x2);
 				if(world.isRemote) {
 					world.markBlockForUpdate(x-1, y, z);
 				}
@@ -155,7 +155,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 			}
 			else if(side == 5 && world.isAirBlock(x+1, y, z) && isValid(world, x+1, y, z))
 			{
-				world.setBlock( x+1, y, z, TFCBlocks.IngotPile, l, 0x2);
+				world.setBlock( x+1, y, z, TFCBlocks.ingotPile, l, 0x2);
 				if(world.isRemote) {
 					world.markBlockForUpdate(x+1, y, z);
 				}
@@ -169,7 +169,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 			if(te != null)
 			{
 				te.storage[0] = new ItemStack(this,1,0);
-				te.setType(MetalRegistry.instance.getMetalFromItem(this).Name);
+				te.setType(MetalRegistry.instance.getMetalFromItem(this).name);
 
 				if(entityplayer.capabilities.isCreativeMode)
 				{
@@ -184,9 +184,9 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	{
 		Item id = is.getItem();
 
-		return !(id == TFCItems.WeakSteelIngot || id == TFCItems.HCSteelIngot || id == TFCItems.HCBlackSteelIngot || 
-				id == TFCItems.WeakRedSteelIngot || id == TFCItems.WeakBlueSteelIngot || 
-				id == TFCItems.HCRedSteelIngot || id == TFCItems.HCBlueSteelIngot);
+		return !(id == TFCItems.weakSteelIngot || id == TFCItems.highCarbonSteelIngot || id == TFCItems.highCarbonBlackSteelIngot || 
+				id == TFCItems.weakRedSteelIngot || id == TFCItems.weakBlueSteelIngot || 
+				id == TFCItems.highCarbonRedSteelIngot || id == TFCItems.highCarbonBlueSteelIngot);
 	}
 
 	@Override
@@ -198,19 +198,19 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 			this.isPlaceable(itemstack))
 		{
 			int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
-			if (!world.isRemote && entityplayer.isSneaking() && (world.getBlock(x, y, z) != TFCBlocks.IngotPile || side != 1 && side != 0))
+			if (!world.isRemote && entityplayer.isSneaking() && (world.getBlock(x, y, z) != TFCBlocks.ingotPile || side != 1 && side != 0))
 			{
 
-				if(CreatePile(itemstack, entityplayer, world, x, y, z, side, dir))
+				if(createPile(itemstack, entityplayer, world, x, y, z, side, dir))
 				{
 
 					itemstack.stackSize = itemstack.stackSize-1;
-					world.addBlockEvent(x,y,z,TFCBlocks.IngotPile,0,0);
+					world.addBlockEvent(x,y,z,TFCBlocks.ingotPile,0,0);
 					return true;
 
 				}
 			}
-			else if(world.getBlock(x, y, z) == TFCBlocks.IngotPile)
+			else if(world.getBlock(x, y, z) == TFCBlocks.ingotPile)
 			{
 				TEIngotPile te = (TEIngotPile)world.getTileEntity(x, y, z);
 				//TileEntityIngotPile te2 = (TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getTileEntity(x, y, z);
@@ -232,14 +232,14 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 					} 
 					else
 					{
-						if(CreatePile(itemstack, entityplayer, world, x, y, z, side, dir))
+						if(createPile(itemstack, entityplayer, world, x, y, z, side, dir))
 						{
 							itemstack.stackSize = itemstack.stackSize-1;
 							/*if (world.getTileEntity(x,y,z) != null)
 							{
 								//((TileEntityIngotPile)world.getTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
 							}*/
-							world.addBlockEvent(x,y,z,TFCBlocks.IngotPile,0,0);
+							world.addBlockEvent(x,y,z,TFCBlocks.ingotPile,0,0);
 							te.getBlockType().onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
 						}
 						return true;
@@ -250,7 +250,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 					{
 						//((TileEntityIngotPile)world.getTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
 					}*/
-					world.addBlockEvent(x,y,z,TFCBlocks.IngotPile,0,0);
+					world.addBlockEvent(x,y,z,TFCBlocks.ingotPile,0,0);
 					return true;
 				}
 
@@ -261,22 +261,22 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 				if(side == 1)
 				{
 					if (m>=16){
-						world.setBlock(x, y+1, z, TFCBlocks.IngotPile, m, 0x2);
+						world.setBlock(x, y+1, z, TFCBlocks.ingotPile, m, 0x2);
 						itemstack.stackSize = itemstack.stackSize-1;
 					}
 					else{
-						world.setBlock(x, y+1, z, TFCBlocks.IngotPile, m, 0x2);
+						world.setBlock(x, y+1, z, TFCBlocks.ingotPile, m, 0x2);
 						itemstack.stackSize = itemstack.stackSize-1;
 					}
 				}
 				else if(side == 0 && world.isAirBlock(x, y-1, z))
 				{
 					if(m >=16){
-						world.setBlock(x, y-1, z, TFCBlocks.IngotPile, m, 0x2);
+						world.setBlock(x, y-1, z, TFCBlocks.ingotPile, m, 0x2);
 						itemstack.stackSize = itemstack.stackSize-1;
 					}
 					else{
-						world.setBlock(x, y-1, z, TFCBlocks.IngotPile, m, 0x2);
+						world.setBlock(x, y-1, z, TFCBlocks.ingotPile, m, 0x2);
 						itemstack.stackSize = itemstack.stackSize-1;
 					}
 				}
@@ -300,7 +300,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 				{
 					//((TileEntityIngotPile)world.getTileEntity(x,y,z)).setType(this.getItem() - 16028 - 256);
 				}*/
-				world.addBlockEvent(x,y,z,TFCBlocks.IngotPile,0,0);
+				world.addBlockEvent(x,y,z,TFCBlocks.ingotPile,0,0);
 				return true;
 			}
 
@@ -310,7 +310,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 
 	public boolean isValid(World world, int i, int j, int k)
 	{
-		if(world.isSideSolid(i, j-1, k, ForgeDirection.UP) || world.getBlock(i, j-1, k)==TFCBlocks.IngotPile)
+		if(world.isSideSolid(i, j-1, k, ForgeDirection.UP) || world.getBlock(i, j-1, k)==TFCBlocks.ingotPile)
 		{
 			TileEntity te = world.getTileEntity(i, j-1, k);
 
@@ -333,18 +333,18 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		if(m < 8)
 		{
 			if(dir == 0 || dir == 2) {
-				world.setBlock(x+i, y+j, z+k, TFCBlocks.IngotPile, m, 0x2);
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.ingotPile, m, 0x2);
 			} else {
-				world.setBlock(x+i, y+j, z+k, TFCBlocks.IngotPile, m | 8, 0x2);
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.ingotPile, m | 8, 0x2);
 			}
 			itemstack.stackSize = itemstack.stackSize-1;
 		}
 		else if(m >= 16)
 		{
 			if(dir == 0 || dir == 2) {
-				world.setBlock(x+i, y+j, z+k, TFCBlocks.IngotPile, m-8, 0x2);
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.ingotPile, m-8, 0x2);
 			} else {
-				world.setBlock(x+i, y+j, z+k, TFCBlocks.IngotPile, m-8 | 8, 0x2);
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.ingotPile, m-8 | 8, 0x2);
 			}
 			itemstack.stackSize = itemstack.stackSize-1;
 		}

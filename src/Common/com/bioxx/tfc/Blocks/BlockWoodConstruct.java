@@ -61,7 +61,7 @@ public class BlockWoodConstruct extends BlockTerraContainer implements ICustomCo
 	@Override
 	public IIcon getIcon(int i, int j)
 	{
-		return TFCBlocks.Planks.getIcon(i, j);
+		return TFCBlocks.planks.getIcon(i, j);
 	}
 
 	@Override
@@ -141,8 +141,8 @@ public class BlockWoodConstruct extends BlockTerraContainer implements ICustomCo
 	{
 		TEWoodConstruct te = (TEWoodConstruct) world.getTileEntity(i, j, k);
 
-		int d = TEWoodConstruct.PlankDetailLevel;
-		int dd = TEWoodConstruct.PlankDetailLevel * TEWoodConstruct.PlankDetailLevel;
+		int d = TEWoodConstruct.plankDetailLevel;
+		int dd = TEWoodConstruct.plankDetailLevel * TEWoodConstruct.plankDetailLevel;
 
 		float div = 1f / d;
 

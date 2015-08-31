@@ -53,7 +53,7 @@ public class BlockBarrel extends BlockTerraContainer
 	public BlockBarrel()
 	{
 		super(Material.wood);
-		this.setCreativeTab(TFCTabs.TFCDevices);
+		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 		this.setBlockBounds(0.1f, 0, 0.1f, 0.9f, 1, 0.9f);
 		woodNames = Global.WOOD_ALL;
 	}
@@ -61,9 +61,9 @@ public class BlockBarrel extends BlockTerraContainer
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/BarrelHoop");
-		TFC_Textures.GuiSolidStorage = iconRegisterer.registerIcon(Reference.ModID + ":" + "button_barrel_solid");
-		TFC_Textures.GuiLiquidStorage = iconRegisterer.registerIcon(Reference.ModID + ":" + "button_barrel_liquid");
+		blockIcon = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "wood/BarrelHoop");
+		TFC_Textures.guiSolidStorage = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "button_barrel_solid");
+		TFC_Textures.guiLiquidStorage = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "button_barrel_liquid");
 	}
 
 	@Override
@@ -74,13 +74,13 @@ public class BlockBarrel extends BlockTerraContainer
 		{
 			side-=10;
 			if(side == 0 || side == 1)
-				return TFC_Textures.InvisibleTexture;
+				return TFC_Textures.invisibleTexture;
 			else
 				return blockIcon;
 		}
 		if(meta<16)
-			return TFCBlocks.Planks.getIcon(side, meta);
-		return TFCBlocks.Planks2.getIcon(side, meta-16);
+			return TFCBlocks.planks.getIcon(side, meta);
+		return TFCBlocks.planks2.getIcon(side, meta-16);
 
 
 	}
@@ -89,7 +89,7 @@ public class BlockBarrel extends BlockTerraContainer
 	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side)
 	{
 		if(side == 0 || side == 1)
-			return TFC_Textures.InvisibleTexture;
+			return TFC_Textures.invisibleTexture;
 		else
 			return blockIcon;
 	}
@@ -173,7 +173,7 @@ public class BlockBarrel extends BlockTerraContainer
 		{
 			TEBarrel te = (TEBarrel) world.getTileEntity(x, y, z);
 			// Only barrels, no large vessels. Requires at least 12 gunpowder for minimum blast strength of 1.
-			if (this == TFCBlocks.Barrel && te != null && te.getGunPowderCount() >= 12 && te.getSealed())
+			if (this == TFCBlocks.barrel && te != null && te.getGunPowderCount() >= 12 && te.getSealed())
 			{
 				spawnPowderKeg(world, x, y, z, te, true);
 				return; // Don't call super if we're going to explode so the barrel is properly destroyed.
@@ -222,8 +222,8 @@ public class BlockBarrel extends BlockTerraContainer
 		int j = 0;
 		String s = this.getUnlocalizedName();
 		for(int i = 0; i < woodNames.length;i++)
-			j = s.substring(s.indexOf("l", s.length())) == ((ItemBarrels)(TFCItems.Barrel)).MetaNames[i] ? i : 0;
-		return new ItemStack(TFCItems.Barrel, 1, j);
+			j = s.substring(s.indexOf("l", s.length())) == ((ItemBarrels)(TFCItems.barrel)).metaNames[i] ? i : 0;
+		return new ItemStack(TFCItems.barrel, 1, j);
 	}
 
 	@Override
@@ -233,7 +233,7 @@ public class BlockBarrel extends BlockTerraContainer
 		{
 			TEBarrel te = (TEBarrel) world.getTileEntity(x, y, z);
 			// Only barrels, no large vessels. Requires at least 12 gunpowder for minimum blast strength of 1.
-			if (this == TFCBlocks.Barrel && te != null && te.getGunPowderCount() >= 12 && te.getSealed())
+			if (this == TFCBlocks.barrel && te != null && te.getGunPowderCount() >= 12 && te.getSealed())
 			{
 				boolean fireNearby = false;
 				if (world.getBlock(x - 1, y, z) instanceof BlockFire)
@@ -308,7 +308,7 @@ public class BlockBarrel extends BlockTerraContainer
 			{
 				TEBarrel te = (TEBarrel) world.getTileEntity(x, y, z);
 
-				if (this == TFCBlocks.Barrel && te.getSealed() && te.getGunPowderCount() >= 12
+				if (this == TFCBlocks.barrel && te.getSealed() && te.getGunPowderCount() >= 12
 						&& player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemFlintAndSteel)
 				{
 					spawnPowderKeg(world, x, y, z, te, false);
@@ -533,18 +533,18 @@ public class BlockBarrel extends BlockTerraContainer
 			ItemStack is = new ItemStack(this, 1, te.barrelType);
 			NBTTagCompound nbt = writeBarrelToNBT(te);
 			is.setTagCompound(nbt);
-			EntityBarrel BE = new EntityBarrel(world, x, y, z, is, te.getGunPowderCount());
+			EntityBarrel entity = new EntityBarrel(world, x, y, z, is, te.getGunPowderCount());
 			te.clearInventory();
 			te.shouldDropItem = false;
 			if (shortFuse)
 			{
-				BE.setFuse(1);
-				world.spawnEntityInWorld(BE);
+				entity.setFuse(1);
+				world.spawnEntityInWorld(entity);
 			}
 			else
 			{
-				world.spawnEntityInWorld(BE);
-				world.playSoundAtEntity(BE, "game.tnt.primed", 1.0F, 1.0F);
+				world.spawnEntityInWorld(entity);
+				world.playSoundAtEntity(entity, "game.tnt.primed", 1.0F, 1.0F);
 			}
 		}
 	}

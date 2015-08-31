@@ -10,7 +10,7 @@ import com.bioxx.tfc.TileEntities.TEQuern;
 
 public class GuiQuern extends GuiContainerTFC
 {
-	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_quern.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_quern.png");
 
 	public GuiQuern(InventoryPlayer inventoryplayer, TEQuern te, World world, int x, int y, int z)
 	{

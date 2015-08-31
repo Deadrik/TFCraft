@@ -78,7 +78,7 @@ public class ContainerSpecialCrafting extends ContainerTFC
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(invPlayer.player);
 
 			// A valid clay recipe has been formed.
-			if (pi.specialCraftingType.getItem() == TFCItems.FlatClay)
+			if (pi.specialCraftingType.getItem() == TFCItems.flatClay)
 			{
 				if (result != null)
 				{

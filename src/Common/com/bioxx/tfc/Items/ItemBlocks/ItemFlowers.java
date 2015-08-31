@@ -18,7 +18,7 @@ public class ItemFlowers extends ItemTerraBlock
 	public ItemFlowers(Block b)
 	{
 		super(b);
-		MetaNames = new String[]{"flower_dandelion","flower_nasturtium", "flower_meads_milkweed", "flower_tropical_milkweed", "flower_butterfly_milkweed", "flower_calendula"};
+		metaNames = new String[]{"flower_dandelion","flower_nasturtium", "flower_meads_milkweed", "flower_tropical_milkweed", "flower_butterfly_milkweed", "flower_calendula"};
 	}
 
 	@Override

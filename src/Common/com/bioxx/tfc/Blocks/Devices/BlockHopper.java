@@ -34,23 +34,23 @@ public class BlockHopper extends BlockTerraContainer
 {
 	private final Random random = new Random();
 	@SideOnly(Side.CLIENT)
-	private static IIcon hopper_outside;
+	private static IIcon hopperoutside;
 	@SideOnly(Side.CLIENT)
-	private static IIcon hopper_top;
+	private static IIcon hopperTop;
 	@SideOnly(Side.CLIENT)
-	private static IIcon hopper_inside;
+	private static IIcon hopperInside;
 
 	public BlockHopper()
 	{
 		super(Material.iron);
-		this.setCreativeTab(TFCTabs.TFCDevices);
+		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 	}
 
 	/**
 	 * Updates the blocks bounds based on its current state. Args: world, x, y, z
 	 */
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess p_149719_1_, int p_149719_2_, int p_149719_3_, int p_149719_4_)
+	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
 	{
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 	}
@@ -111,10 +111,10 @@ public class BlockHopper extends BlockTerraContainer
 	 * Called whenever the block is added into the world. Args: world, x, y, z
 	 */
 	@Override
-	public void onBlockAdded(World p_149726_1_, int p_149726_2_, int p_149726_3_, int p_149726_4_)
+	public void onBlockAdded(World world, int x, int y, int z)
 	{
-		super.onBlockAdded(p_149726_1_, p_149726_2_, p_149726_3_, p_149726_4_);
-		this.updatePowerState(p_149726_1_, p_149726_2_, p_149726_3_, p_149726_4_);
+		super.onBlockAdded(world, x, y, z);
+		this.updatePowerState(world, x, y, z);
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class BlockHopper extends BlockTerraContainer
 		int meta = world.getBlockMetadata(x, y, z);
 		int dir = getDirectionFromMetadata(meta);
 		boolean recievesPower = !world.isBlockIndirectlyGettingPowered(x, y, z);
-		boolean hopperPower = func_149917_c(meta);
+		boolean hopperPower = checkMeta(meta);
 
 		if (recievesPower != hopperPower)
 		{
@@ -225,7 +225,7 @@ public class BlockHopper extends BlockTerraContainer
 	@Override
 	public int getRenderType()
 	{
-		return TFCBlocks.HopperRenderId;
+		return TFCBlocks.hopperRenderId;
 	}
 
 	/**
@@ -253,7 +253,7 @@ public class BlockHopper extends BlockTerraContainer
 	 */
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess p_149646_1_, int p_149646_2_, int p_149646_3_, int p_149646_4_, int p_149646_5_)
+	public boolean shouldSideBeRendered(IBlockAccess blockAccess, int x, int y, int z, int side)
 	{
 		return true;
 	}
@@ -265,7 +265,7 @@ public class BlockHopper extends BlockTerraContainer
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return side == 1 ? hopper_top : hopper_outside;
+		return side == 1 ? hopperTop : hopperoutside;
 	}
 
 	public static int getDirectionFromMetadata(int meta)
@@ -273,7 +273,7 @@ public class BlockHopper extends BlockTerraContainer
 		return meta & 7;
 	}
 
-	public static boolean func_149917_c(int meta)
+	public static boolean checkMeta(int meta)
 	{
 		return (meta & 8) != 8;
 	}
@@ -302,15 +302,15 @@ public class BlockHopper extends BlockTerraContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		hopper_outside = registerer.registerIcon("hopper_outside");
-		hopper_top = registerer.registerIcon("hopper_top");
-		hopper_inside = registerer.registerIcon("hopper_inside");
+		hopperoutside = registerer.registerIcon("hopper_outside");
+		hopperTop = registerer.registerIcon("hopper_top");
+		hopperInside = registerer.registerIcon("hopper_inside");
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static IIcon getHopperIcon(String p_149916_0_)
+	public static IIcon getHopperIcon(String s)
 	{
-		return "hopper_outside".equals(p_149916_0_) ? hopper_outside : "hopper_inside".equals(p_149916_0_) ? hopper_inside : null;
+		return "hopper_outside".equals(s) ? hopperoutside : "hopper_inside".equals(s) ? hopperInside : null;
 	}
 
 	public static TEHopper getHopperTE(IBlockAccess access, int x, int y, int z)

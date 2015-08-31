@@ -35,11 +35,11 @@ public class BlockCustomSnow extends BlockTerra
 	{
 		Block block = world.getBlock(i, j - 1, k);
 		
-		if (block == TFCBlocks.Ice)
+		if (block == TFCBlocks.ice)
 			return false;
-		if (block == TFCBlocks.Leaves || block == TFCBlocks.Leaves2)
+		if (block == TFCBlocks.leaves || block == TFCBlocks.leaves2)
 			return true;
-		if (block == TFCBlocks.Thatch)
+		if (block == TFCBlocks.thatch)
 			return true;
 		return World.doesBlockHaveSolidTopSurface(world, i, j - 1, k);
 	}
@@ -65,7 +65,7 @@ public class BlockCustomSnow extends BlockTerra
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random R, int par3)
+	public Item getItemDropped(int i, Random r, int j)
 	{
 		return Items.snowball;
 	}
@@ -105,7 +105,7 @@ public class BlockCustomSnow extends BlockTerra
 	}
 
 	@Override
-	public int quantityDropped(Random R)
+	public int quantityDropped(Random r)
 	{
 		return 1;
 	}
@@ -131,7 +131,7 @@ public class BlockCustomSnow extends BlockTerra
 	}
 
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random R)
+	public void updateTick(World world, int x, int y, int z, Random r)
 	{
 		if (!canPlaceBlockAt(world, x, y, z))
 		{
@@ -143,7 +143,7 @@ public class BlockCustomSnow extends BlockTerra
 		
 		if (world.getSavedLightValue(EnumSkyBlock.Block, x, y, z) > 11)
 		{
-			if (R.nextInt(5) == 0)
+			if (r.nextInt(5) == 0)
 			{
 				if(meta > 0)
 					world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
@@ -156,7 +156,7 @@ public class BlockCustomSnow extends BlockTerra
 		
 		if (temp <= 0 && world.isRaining())  //Raining and Below Freezing
 		{
-			if (R.nextInt(20) == 0)
+			if (r.nextInt(20) == 0)
 			{
 				int max = (world.getBlock(x, y - 1, z).getMaterial() == Material.leaves) ? 3 : 7;
 				if(meta < max && canAddSnow(world, x, y, z, meta))
@@ -171,7 +171,7 @@ public class BlockCustomSnow extends BlockTerra
 		}
 		else if (temp > 0 && world.isRaining())  //Raining and above freezing
 		{
-			if (R.nextInt(5) == 0)
+			if (r.nextInt(5) == 0)
 			{
 				if (meta > 0)
 					world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
@@ -181,7 +181,7 @@ public class BlockCustomSnow extends BlockTerra
 		}
 		else if (temp > 0)  //Above freezing, not raining
 		{
-			if (R.nextInt(20) == 0)
+			if (r.nextInt(20) == 0)
 			{
 				if(meta > 0)
 					world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
@@ -194,7 +194,7 @@ public class BlockCustomSnow extends BlockTerra
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		this.blockIcon = registerer.registerIcon(Reference.ModID + ":snow");
+		this.blockIcon = registerer.registerIcon(Reference.MOD_ID + ":snow");
 	}
 
 	private boolean canAddSnowCheckNeighbors(World world, int x, int y, int z, int meta)
@@ -203,7 +203,7 @@ public class BlockCustomSnow extends BlockTerra
  		
  		if (block.getMaterial() == Material.snow)  // if neighbor is snow, allow up to one additional level
  			return meta <= (world.getBlockMetadata(x, y, z) & 7);
-		else if (block == TFCBlocks.Leaves || block == TFCBlocks.Leaves2)  // 4 levels if adjacent to leaves (instead of just one level)
+		else if (block == TFCBlocks.leaves || block == TFCBlocks.leaves2)  // 4 levels if adjacent to leaves (instead of just one level)
 			return meta < 3;  
 		else if (block.isNormalCube())  // if neighbor is a normal block (opaque, render as normal, not power),
 			return meta < 6;            // up to 7 - leave the top layer empty so we just can see the block

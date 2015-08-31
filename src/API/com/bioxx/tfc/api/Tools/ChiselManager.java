@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class ChiselManager {
 
-    private static final ChiselManager instance = new ChiselManager();
-    public static final ChiselManager getInstance(){return instance;}
+    private static final ChiselManager INSTANCE = new ChiselManager();
+    public static final ChiselManager getInstance(){return INSTANCE;}
 
     private List<ChiselMode> chiselModes;
 
@@ -35,11 +35,11 @@ public class ChiselManager {
     }
 
     public int getTextureU(int mode){
-        return chiselModes.get(mode).getTexture_u();
+        return chiselModes.get(mode).getTextureU();
     }
 
     public int getTextureV(int mode){
-        return chiselModes.get(mode).getTexture_v();
+        return chiselModes.get(mode).getTextureV();
     }
 
     public int getDivX(int mode, Block block) { return chiselModes.get(mode).getDivX(block); }
@@ -56,7 +56,7 @@ public class ChiselManager {
         int mode = -1;
         PlayerInfo pi = null;
         pi = ChiselMode.playerInfo(world, player);
-        if(pi != null){ mode = pi.ChiselMode; }
+        if(pi != null){ mode = pi.chiselMode; }
         return chiselModes.get(mode).onUsedHandler(world, player, x, y, z, id, meta, side, hitX, hitY, hitZ);
     }
 }

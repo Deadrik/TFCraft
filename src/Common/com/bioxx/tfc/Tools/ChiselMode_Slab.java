@@ -20,13 +20,13 @@ import com.bioxx.tfc.api.Tools.ChiselMode;
 public class ChiselMode_Slab extends ChiselMode {
 
 	//private static String name;
-    private static ResourceLocation resourcelocation = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "icons.png");
-    private static int texture_u, texture_v, divX, divY, divZ;
+    private static ResourceLocation resourcelocation = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "icons.png");
+    private static int textureU, textureV, divX, divY, divZ;
 
     public ChiselMode_Slab(String n){
 		//name = n;
-        texture_u = 40;
-        texture_v = 58;
+        textureU = 40;
+        textureV = 58;
     }
 
 	@Override
@@ -36,15 +36,15 @@ public class ChiselMode_Slab extends ChiselMode {
     }
 
 	@Override
-	public int getTexture_u()
+	public int getTextureU()
 	{
-        return texture_u;
+        return textureU;
     }
 
 	@Override
-	public int getTexture_v()
+	public int getTextureV()
 	{
-        return texture_v;
+        return textureV;
     }
 
 	@Override
@@ -111,22 +111,22 @@ public class ChiselMode_Slab extends ChiselMode {
         int hasChisel = hasChisel(player);
 
         if( hasChisel >= 0 ) {
-            Block Slab = TFCBlocks.stoneSlabs;
+            Block slab = TFCBlocks.stoneSlabs;
             TEPartial te;
 
-            if (world.getBlock(x, y, z) != Slab) {
-                world.setBlock(x, y, z, Slab, side, 0x2);
+            if (world.getBlock(x, y, z) != slab) {
+                world.setBlock(x, y, z, slab, side, 0x2);
                 te = (TEPartial) world.getTileEntity(x, y, z);
-                te.TypeID = (short) Block.getIdFromBlock(id);
-                te.MetaID = (byte) meta;
+                te.typeID = (short) Block.getIdFromBlock(id);
+                te.metaID = (byte) meta;
                 te.setMaterial(world.getBlock(x, y, z).getMaterial());
             } else {
                 te = (TEPartial) world.getTileEntity(x, y, z);
-                world.notifyBlockChange(x, y, z, Slab);
+                world.notifyBlockChange(x, y, z, slab);
             }
 
             if (TFCOptions.enableDebugMode)
-                TerraFirmaCraft.log.info(side);
+                TerraFirmaCraft.LOG.info(side);
 
             long extraX = (te.extraData) & 0xf;
             long extraY = (te.extraData >> 4) & 0xf;
@@ -204,7 +204,7 @@ public class ChiselMode_Slab extends ChiselMode {
             }
 
             if (TFCOptions.enableDebugMode) {
-                TerraFirmaCraft.log.info("Extra =" + te.extraData);
+                TerraFirmaCraft.LOG.info("Extra =" + te.extraData);
             }
 
             te = (TEPartial) world.getTileEntity(x, y, z);

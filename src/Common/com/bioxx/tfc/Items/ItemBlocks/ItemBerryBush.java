@@ -9,6 +9,6 @@ public class ItemBerryBush extends ItemTerraBlock
 	public ItemBerryBush(Block par1)
 	{
 		super(par1);
-		MetaNames = BlockBerryBush.MetaNames;
+		metaNames = BlockBerryBush.metaNames;
 	}
 }

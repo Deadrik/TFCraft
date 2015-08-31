@@ -216,8 +216,8 @@ public class TENestBox extends TileEntity implements IInventory
 				{
 					if(inventory[i].getTagCompound() != null && inventory[i].getTagCompound().hasKey("Fertilized"))
 					{
-						long _time = inventory[i].getTagCompound().getLong("Fertilized");
-						if(_time <= TFC_Time.getTotalTicks())
+						long time = inventory[i].getTagCompound().getLong("Fertilized");
+						if(time <= TFC_Time.getTotalTicks())
 						{
 							EntityChickenTFC chick = new EntityChickenTFC(worldObj, xCoord + 0.5, yCoord + 1, zCoord + 0.5, 
 									(NBTTagCompound) inventory[i].getTagCompound().getTag("Genes"));

@@ -17,7 +17,7 @@ import com.bioxx.tfc.api.TFCItems;
 public class GuiKnapping extends GuiContainerTFC
 {
 	private boolean previouslyLoaded;
-	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_knapping.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_knapping.png");
 
 	public GuiKnapping(InventoryPlayer inventoryplayer, ItemStack is, World world, int x, int y, int z)
 	{
@@ -59,7 +59,7 @@ public class GuiKnapping extends GuiContainerTFC
 					 * For whatever reason all my attempts at implementing this for all crafting types just wouldn't work for the clay ones.
 					 * Types that completely remove pieces (rocks, leather) work properly to save states when reloaded with this.
 					 */
-					if (PlayerManagerTFC.getInstance().getClientPlayer().specialCraftingType.getItem() != TFCItems.FlatClay && 
+					if (PlayerManagerTFC.getInstance().getClientPlayer().specialCraftingType.getItem() != TFCItems.flatClay && 
 						((ContainerSpecialCrafting) this.inventorySlots).craftMatrix.getStackInSlot(y * 5 + x) == null)
 					{
 						resetButton(y * 5 + x);
@@ -76,7 +76,7 @@ public class GuiKnapping extends GuiContainerTFC
 	{
 		resetButton(guibutton.id);
 		AbstractPacket pkt = new KnappingUpdatePacket(guibutton.id);
-		TerraFirmaCraft.packetPipeline.sendToServer(pkt);
+		TerraFirmaCraft.PACKET_PIPELINE.sendToServer(pkt);
 	}
 
 	public void resetButton(int id)

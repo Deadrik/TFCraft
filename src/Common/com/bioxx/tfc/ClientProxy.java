@@ -52,9 +52,9 @@ public class ClientProxy extends CommonProxy
 	public void registerFluidIcons()
 	{
 		//Only bother adding fluids here if you don't want to use the default HotWater icons
-		TFCFluids.LAVA.setIcons(TFCBlocks.Lava.getIcon(0, 0), TFCBlocks.Lava.getIcon(2, 0));
-		TFCFluids.SALTWATER.setIcons(TFCBlocks.SaltWater.getIcon(0, 0), TFCBlocks.SaltWater.getIcon(2, 0));
-		TFCFluids.FRESHWATER.setIcons(TFCBlocks.FreshWater.getIcon(0, 0), TFCBlocks.FreshWater.getIcon(2, 0));
+		TFCFluids.LAVA.setIcons(TFCBlocks.lava.getIcon(0, 0), TFCBlocks.lava.getIcon(2, 0));
+		TFCFluids.SALTWATER.setIcons(TFCBlocks.saltWater.getIcon(0, 0), TFCBlocks.saltWater.getIcon(2, 0));
+		TFCFluids.FRESHWATER.setIcons(TFCBlocks.freshWater.getIcon(0, 0), TFCBlocks.freshWater.getIcon(2, 0));
 	}
 
 	@Override
@@ -108,10 +108,10 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.oreRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderOre());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.moltenRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.looseRockRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.FirepitRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.AnvilRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderAnvil());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.BellowsRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBellows());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.ForgeRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.firepitRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.anvilRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderAnvil());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.bellowsRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBellows());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.forgeRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.sluiceRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodFruitRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.leavesFruitRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
@@ -121,9 +121,9 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.cookingPitRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.leavesRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.detailedRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.WallRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderWall());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.FenceRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderFence());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.FenceGateRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderFenceGate());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.wallRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderWall());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.fenceRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderFence());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.fenceGateRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderFenceGate());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.toolRackRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderToolRack());
 		//RenderingRegistry.registerBlockHandler(TFCBlocks.foodPrepRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.quernRenderId = RenderingRegistry.getNextAvailableRenderId(), new TESRQuern());
@@ -131,7 +131,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.barrelRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBarrel());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.loomRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderLoom());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.standRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderStand());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.NestBoxRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderNestBox());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.nestBoxRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderNestBox());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.potteryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderPottery());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.tuyereRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderTuyere());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.crucibleRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderCrucible());
@@ -147,7 +147,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.smokeRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderSmoke());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.smokeRackRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderSmokeRack());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.oilLampRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderOilLamp());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.HopperRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderHopper());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.hopperRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderHopper());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.flowerPotRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderFlowerPot());
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
@@ -270,7 +270,7 @@ public class ClientProxy extends CommonProxy
 			}
 			return (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 		}
-		else if(par1IBlockAccess.getBlock(i, j, k) == TFCBlocks.Vine)
+		else if(par1IBlockAccess.getBlock(i, j, k) == TFCBlocks.vine)
 		{
 			if (TFC_Time.getSeasonAdjustedMonth(k) >= 6 &&TFC_Time.getSeasonAdjustedMonth(k) < 9 &&
 				TFC_Climate.getCacheManager(getCurrentWorld()).getEVTLayerAt(i, k).floatdata1 >= 0.8
@@ -427,9 +427,9 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerKeys()
 	{
-		KeyBindings.addKeyBinding(KeyBindingHandler.Key_ToolMode);
+		KeyBindings.addKeyBinding(KeyBindingHandler.keyToolMode);
 		KeyBindings.addIsRepeating(false);
-		KeyBindings.addKeyBinding(KeyBindingHandler.Key_LockTool);
+		KeyBindings.addKeyBinding(KeyBindingHandler.keyLockTool);
 		KeyBindings.addIsRepeating(false);
 		//ClientRegistry.registerKeyBinding(KeyBindingHandler.Key_ToolMode);
 		//ClientRegistry.registerKeyBinding(KeyBindingHandler.Key_LockTool);
@@ -514,67 +514,67 @@ public class ClientProxy extends CommonProxy
 	{
 		if (Loader.isModLoaded("NotEnoughItems") && TFCOptions.enableNEIHiding)
 		{
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Bloom));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.writabeBookTFC)); // Book
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Charcoal));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.Coke));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Crops));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Detailed));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.bloom));
+			//codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.writabeBookTFC)); // Book
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.charcoal));
+			//codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.Coke));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.crops));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.detailed));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.worldItem)); // Debris
-			for (Block door : TFCBlocks.Doors)
+			for (Block door : TFCBlocks.doors)
 			{
 				codechicken.nei.api.API.hideItem(new ItemStack(door));
 			}
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Firepit));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.FlatClay, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.FlatLeather));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.FlatRock, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.FoodPrep));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Forge));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.firepit));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.flatClay, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.flatLeather));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.flatRock, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.foodPrep));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.forge));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.fruitTreeLeaves, 1, OreDictionary.WILDCARD_VALUE));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.fruitTreeLeaves2, 1, OreDictionary.WILDCARD_VALUE));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.fruitTreeWood, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.Hemp));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.IngotPile));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.LeatherRack));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Leaves, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Leaves2, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.LogNatural, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.LogNatural2, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.LogPile));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodConstruct)); // Lumber Block
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.MetalSheet));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Molten));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Moss));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.MudBrick, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Ore));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Ore2));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Ore3));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Pottery));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.PotteryPot, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Reeds));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.Salad, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.Sandwich, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Sluice));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Smoke));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.SmokeRack));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.Soup, 1, OreDictionary.WILDCARD_VALUE));
+			//codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.Hemp));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.ingotPile));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.leatherRack));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.leaves, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.leaves2, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.logNatural, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.logNatural2, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.logPile));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.woodConstruct)); // Lumber Block
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.metalSheet));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.molten));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.moss));
+			//codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.MudBrick, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.ore));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.ore2));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.ore3));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.pottery));
+			//codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.PotteryPot, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.reeds));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.salad, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.sandwich, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.sluice));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.smoke));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.smokeRack));
+			//codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.Soup, 1, OreDictionary.WILDCARD_VALUE));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.stoneSlabs));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.stoneStairs));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.stoneStalac));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.StrawHideBed));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.Sulfur));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WaterPlant));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodHoriz, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodHoriz2, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodHoriz3, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodHoriz4, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodSupportH, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodSupportH2, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodVert, 1, OreDictionary.WILDCARD_VALUE));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.WoodVert2, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.strawHideBed));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.sulfur));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.waterPlant));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.woodHoriz, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.woodHoriz2, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.woodHoriz3, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.woodHoriz4, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.woodSupportH, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.woodSupportH2, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.woodVert, 1, OreDictionary.WILDCARD_VALUE));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.woodVert2, 1, OreDictionary.WILDCARD_VALUE));
 			
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.WintergreenLeaf));
+			/*codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.WintergreenLeaf));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.BlueberryLeaf));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.RaspberryLeaf));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.StrawberryLeaf));
@@ -584,7 +584,7 @@ public class ClientProxy extends CommonProxy
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.SnowberryLeaf));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.ElderberryLeaf));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.GooseberryLeaf));
-			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.CloudberryLeaf));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.CloudberryLeaf));*/
 
 			// Vanilla Blocks & Items
 			codechicken.nei.api.API.hideItem(new ItemStack(Blocks.double_wooden_slab, 1, OreDictionary.WILDCARD_VALUE));

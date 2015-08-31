@@ -29,9 +29,9 @@ public class ItemFruitTreeSapling extends ItemTerra
 		super();
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.setCreativeTab(TFCTabs.TFCFoods);
-		this.MetaNames = Global.FRUIT_META_NAMES;
-		this.icons = new IIcon[MetaNames.length];
+		this.setCreativeTab(TFCTabs.TFC_FOODS);
+		this.metaNames = Global.FRUIT_META_NAMES;
+		this.icons = new IIcon[metaNames.length];
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class ItemFruitTreeSapling extends ItemTerra
 	@Override
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < MetaNames.length; i++)
+		for(int i = 0; i < metaNames.length; i++)
 		{
 			list.add(new ItemStack(this, 1, i));
 		}
@@ -68,8 +68,8 @@ public class ItemFruitTreeSapling extends ItemTerra
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		for(int i = 0; i < MetaNames.length; i++)
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + MetaNames[i] + " Sapling");
+		for(int i = 0; i < metaNames.length; i++)
+			icons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "wood/fruit trees/" + metaNames[i] + " Sapling");
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class ItemFruitTreeSapling extends ItemTerra
 	public IIcon getIconIndex(ItemStack par1ItemStack)
 	{
 		int damage = par1ItemStack.getItemDamage();
-		if (damage >= MetaNames.length)
+		if (damage >= metaNames.length)
 		{
 			damage -= 8;
 			par1ItemStack.setItemDamage(damage);

@@ -69,14 +69,14 @@ public class WorldGenCustomShortTrees extends WorldGenerator
 				{
 					int j4 = i4 - zCoord;
 					if ((Math.abs(l3) != i3 || Math.abs(j4) != i3 || random.nextInt(2) != 0 && j2 != 0) && world.isAirBlock(k3, k1, i4))
-						setBlockAndNotifyAdequately(world, k3, k1, i4, TFCBlocks.Leaves, treeId);
+						setBlockAndNotifyAdequately(world, k3, k1, i4, TFCBlocks.leaves, treeId);
 				}
 			}
 		}
 
 		for (int l1 = 0; l1 < l; l1++)
 		{
-			setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId);
+			setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.logNatural, treeId);
 		}
 
 		return true;

@@ -20,7 +20,7 @@ public class ItemWoodDoor extends ItemTerra
 	{
 		super();
 		this.maxStackSize = 1;
-		this.setCreativeTab(TFCTabs.TFCDevices);
+		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 		woodType = woodID;
 		setFolder("wood/");
 	}
@@ -43,7 +43,7 @@ public class ItemWoodDoor extends ItemTerra
 			Block var11;
 
 			// No more clunky switch statement
-			var11 = TFCBlocks.Doors[woodType];
+			var11 = TFCBlocks.doors[woodType];
 
 			if (player.canPlayerEdit(i, j, k, side, is) && player.canPlayerEdit(i, j + 1, k, side, is))
 			{

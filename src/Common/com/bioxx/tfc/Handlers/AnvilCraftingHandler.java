@@ -18,7 +18,7 @@ public class AnvilCraftingHandler
 	@SubscribeEvent
 	public void onAnvilCraft(AnvilCraftEvent event)
 	{
-		if(event.input1.getItem() == TFCItems.Bloom && event.input1.getItemDamage() > 100)
+		if(event.input1.getItem() == TFCItems.bloom && event.input1.getItemDamage() > 100)
 		{
 			TileEntity te = event.anvilTE;
 			World world = te.getWorldObj();
@@ -28,7 +28,7 @@ public class AnvilCraftingHandler
 			int rem = dam % 100;
 			while(count > 0)
 			{
-				ItemStack out1 = new ItemStack(TFCItems.Bloom, 1, 100);
+				ItemStack out1 = new ItemStack(TFCItems.bloom, 1, 100);
 				TFC_ItemHeat.setTemp(out1, temp);
 
 				EntityItem ei = new EntityItem(world, te.xCoord + 0.5, te.yCoord + 1.5, te.zCoord + 0.5, out1);
@@ -39,7 +39,7 @@ public class AnvilCraftingHandler
 			}
 			if(rem > 0)
 			{
-				ItemStack out2 = new ItemStack(TFCItems.Bloom, 1, rem);
+				ItemStack out2 = new ItemStack(TFCItems.bloom, 1, rem);
 				TFC_ItemHeat.setTemp(out2, temp);
 
 				EntityItem ei = new EntityItem(world, te.xCoord + 0.5, te.yCoord + 1.5, te.zCoord + 0.5, out2);
@@ -62,12 +62,12 @@ public class AnvilCraftingHandler
 	{
 		if(event.input1 != null)
 		{
-			if((event.input1.getItem() == TFCItems.Bloom || event.input1.getItem() == TFCItems.RawBloom) && event.result.getItemDamage() > 100)
+			if((event.input1.getItem() == TFCItems.bloom || event.input1.getItem() == TFCItems.rawBloom) && event.result.getItemDamage() > 100)
 			{
 				event.result = event.input1;
 				event.result.setItemDamage(event.result.getItemDamage()-1);
 			}
-			else if((event.input1.getItem() == TFCItems.Bloom || event.input1.getItem() == TFCItems.RawBloom) && event.result.getItemDamage() <= 100)
+			else if((event.input1.getItem() == TFCItems.bloom || event.input1.getItem() == TFCItems.rawBloom) && event.result.getItemDamage() <= 100)
 			{
 				event.result.setItemDamage(100-event.input1.getItemDamage());
 			}

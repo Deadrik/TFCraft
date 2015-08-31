@@ -32,7 +32,7 @@ public class ItemCustomSeeds extends ItemTerra
 	{
 		super();
 		this.cropId = cropId;
-		this.setCreativeTab(TFCTabs.TFCFoods);
+		this.setCreativeTab(TFCTabs.TFC_FOODS);
 		this.setFolder("food/");
 		this.setWeight(EnumWeight.LIGHT);
 		this.setSize(EnumSize.TINY);
@@ -65,7 +65,7 @@ public class ItemCustomSeeds extends ItemTerra
 					return false;
 				}
 
-				world.setBlock(x, y + 1, z, TFCBlocks.Crops);
+				world.setBlock(x, y + 1, z, TFCBlocks.crops);
 
 				TECrop te = (TECrop) world.getTileEntity(x, y + 1, z);
 				te.cropId = cropId;

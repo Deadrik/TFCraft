@@ -11,8 +11,8 @@ public class ItemWoodSupport2 extends ItemWoodSupport
 		super(par1);
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
-		this.MetaNames = new String[Global.WOOD_ALL.length - 16];
-		System.arraycopy(Global.WOOD_ALL, 16, MetaNames, 0,Global.WOOD_ALL.length - 16);
+		this.metaNames = new String[Global.WOOD_ALL.length - 16];
+		System.arraycopy(Global.WOOD_ALL, 16, metaNames, 0,Global.WOOD_ALL.length - 16);
 	}
 
 

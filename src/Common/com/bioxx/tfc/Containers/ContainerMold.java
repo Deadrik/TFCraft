@@ -100,7 +100,7 @@ public class ContainerMold extends ContainerTFC
 			if(containerInv.getStackInSlot(0) != null && containerInv.getStackInSlot(1) != null)
 			{
 				if(containerInv.getStackInSlot(0).getItem() instanceof ItemMeltedMetal &&
-						containerInv.getStackInSlot(1).getItem() == TFCItems.CeramicMold &&
+						containerInv.getStackInSlot(1).getItem() == TFCItems.ceramicMold &&
 						containerInv.getStackInSlot(1).getItemDamage() == 1 &&
 						TFC_ItemHeat.getIsLiquid(containerInv.getStackInSlot(0)))
 				{
@@ -142,7 +142,7 @@ public class ContainerMold extends ContainerTFC
 					containerInv.getStackInSlot(0).setItemDamage(s0+1);
 					containerInv.getStackInSlot(1).setItemDamage(s1-1);
 					if(containerInv.getStackInSlot(0).getItemDamage() == containerInv.getStackInSlot(0).getMaxDamage())
-						containerInv.setInventorySlotContents(0, new ItemStack(TFCItems.CeramicMold, 1, 1));
+						containerInv.setInventorySlotContents(0, new ItemStack(TFCItems.ceramicMold, 1, 1));
 				}
 			}
 			else if(containerInv.getStackInSlot(0) != null && containerInv.getStackInSlot(1) != null && pi.moldTransferTimer == 100 &&
@@ -152,7 +152,7 @@ public class ContainerMold extends ContainerTFC
 				is.setTagCompound(containerInv.getStackInSlot(1).stackTagCompound);
 				craftResult.setInventorySlotContents(0, is);
 				containerInv.setInventorySlotContents(1, null);
-				containerInv.setInventorySlotContents(1, new ItemStack(TFCItems.CeramicMold, 1, 1));
+				containerInv.setInventorySlotContents(1, new ItemStack(TFCItems.ceramicMold, 1, 1));
 				containerInv.setInventorySlotContents(0, null);
 			}
 

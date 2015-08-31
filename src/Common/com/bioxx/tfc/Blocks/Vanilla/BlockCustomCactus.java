@@ -25,15 +25,15 @@ import com.bioxx.tfc.Core.TFC_Core;
 public class BlockCustomCactus extends Block implements IPlantable
 {
 	@SideOnly(Side.CLIENT)
-	private IIcon field_94380_a;
+	private IIcon cactusTopIcon;
 	@SideOnly(Side.CLIENT)
-	private IIcon field_94379_b;
+	private IIcon cactusSideIcon;
 
 	public BlockCustomCactus()
 	{
 		super(Material.cactus);
 		this.setTickRandomly(true);
-		this.setCreativeTab(TFCTabs.TFCDecoration);
+		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class BlockCustomCactus extends Block implements IPlantable
 	@Override
 	public IIcon getIcon(int par1, int par2)
 	{
-		return par1 == 1 ? this.field_94380_a : par1 == 0 ? this.field_94379_b : this.blockIcon;
+		return par1 == 1 ? this.cactusTopIcon : par1 == 0 ? this.cactusSideIcon : this.blockIcon;
 	}
 
 	/**
@@ -189,8 +189,8 @@ public class BlockCustomCactus extends Block implements IPlantable
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
 		this.blockIcon = par1IconRegister.registerIcon("cactus_side");
-		this.field_94380_a = par1IconRegister.registerIcon("cactus_top");
-		this.field_94379_b = par1IconRegister.registerIcon("cactus_bottom");
+		this.cactusTopIcon = par1IconRegister.registerIcon("cactus_top");
+		this.cactusSideIcon = par1IconRegister.registerIcon("cactus_bottom");
 	}
 
 	@Override

@@ -28,7 +28,7 @@ public class GuiPlanSelection extends GuiContainerTFC
 	private World world;*/
 	private ArrayList<Object[]> plans;
 	//private int x, y, z;
-	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_plan.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_plan.png");
 
 	public GuiPlanSelection(EntityPlayer p, TEAnvil te, World w, int x, int y, int z)
 	{
@@ -98,7 +98,7 @@ public class GuiPlanSelection extends GuiContainerTFC
 		ArrayList planList = new ArrayList();
 		for (Object p : plans)
 		{
-			AnvilRecipe ar = manager.findMatchingRecipe(new AnvilRecipe(anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT], anvilTE.anvilItemStacks[TEAnvil.INPUT2_SLOT], (String) p, AnvilReq.getReqFromInt(anvilTE.AnvilTier), null));
+			AnvilRecipe ar = manager.findMatchingRecipe(new AnvilRecipe(anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT], anvilTE.anvilItemStacks[TEAnvil.INPUT2_SLOT], (String) p, AnvilReq.getReqFromInt(anvilTE.anvilTier), null));
 
 			ar = handleMatchingRecipe(ar);
 			if (ar != null)
@@ -112,7 +112,7 @@ public class GuiPlanSelection extends GuiContainerTFC
 	public AnvilRecipe handleMatchingRecipe(AnvilRecipe ar)
 	{
 		if (ar != null)
-			if (anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT] != null && anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT].getItem() == TFCItems.Bloom && ar.getCraftingResult().getItem() == TFCItems.Bloom)
+			if (anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT] != null && anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT].getItem() == TFCItems.bloom && ar.getCraftingResult().getItem() == TFCItems.bloom)
 			{
 				if (anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT].getItemDamage() <= 100)
 					return null;

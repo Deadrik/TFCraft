@@ -13,7 +13,7 @@ import com.bioxx.tfc.api.Constant.Global;
 public class WorldGenCustomVines extends WorldGenerator
 {
 	@Override
-	public boolean generate(World world, Random R, int x, int y, int z)
+	public boolean generate(World world, Random r, int x, int y, int z)
 	{
 		int var6 = x;
 		int var7 = z;
@@ -24,17 +24,17 @@ public class WorldGenCustomVines extends WorldGenerator
 			{
 				for (int var8 = 2; var8 <= 5; ++var8)
 				{
-					if (TFCBlocks.Vine.canPlaceBlockOnSide(world, x, y, z, var8))
+					if (TFCBlocks.vine.canPlaceBlockOnSide(world, x, y, z, var8))
 					{
-						world.setBlock(x, y, z, TFCBlocks.Vine, 1 << Direction.facingToDirection[Facing.oppositeSide[var8]], 0x2);
+						world.setBlock(x, y, z, TFCBlocks.vine, 1 << Direction.facingToDirection[Facing.oppositeSide[var8]], 0x2);
 						break;
 					}
 				}
 			}
 			else
 			{
-				x = var6 + R.nextInt(4) - R.nextInt(4);
-				z = var7 + R.nextInt(4) - R.nextInt(4);
+				x = var6 + r.nextInt(4) - r.nextInt(4);
+				z = var7 + r.nextInt(4) - r.nextInt(4);
 			}
 		}
 		return true;
@@ -50,9 +50,9 @@ public class WorldGenCustomVines extends WorldGenerator
 			{
 				for (int side = 2; side <= 5; ++side)
 				{
-					if (TFCBlocks.Vine.canPlaceBlockOnSide(world, x, y, z, side))
+					if (TFCBlocks.vine.canPlaceBlockOnSide(world, x, y, z, side))
 					{
-						world.setBlock(x, y, z, TFCBlocks.Vine, 1 << Direction.facingToDirection[Facing.oppositeSide[side]], 2);
+						world.setBlock(x, y, z, TFCBlocks.vine, 1 << Direction.facingToDirection[Facing.oppositeSide[side]], 2);
 						break;
 					}
 				}

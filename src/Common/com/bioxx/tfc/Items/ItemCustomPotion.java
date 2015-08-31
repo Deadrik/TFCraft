@@ -22,7 +22,7 @@ public class ItemCustomPotion extends ItemPotion
 	public ItemCustomPotion()
 	{
 		super();
-		this.setCreativeTab(TFCTabs.TFCFoods);
+		this.setCreativeTab(TFCTabs.TFC_FOODS);
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class ItemCustomPotion extends ItemPotion
 
 			if (!broken && is.stackSize <= 0)
 			{
-				return new ItemStack(TFCItems.GlassBottle);
+				return new ItemStack(TFCItems.glassBottle);
 			}
 		}
 

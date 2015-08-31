@@ -24,7 +24,7 @@ public class EntityCustomMinecart extends EntityMinecartChest
 	public void killMinecart(DamageSource par1DamageSource)
 	{
 		super.killMinecart(par1DamageSource);
-		this.func_145778_a(Item.getItemFromBlock(TFCBlocks.Chest), 1, 0.0F);
+		this.func_145778_a(Item.getItemFromBlock(TFCBlocks.chest), 1, 0.0F);
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class EntityCustomMinecart extends EntityMinecartChest
 	@Override
 	public Block func_145817_o()/*getDefaultDisplayTile*/
 	{
-		return TFCBlocks.Chest;
+		return TFCBlocks.chest;
 	}
 
 	@Override

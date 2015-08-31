@@ -40,24 +40,24 @@ public class ChunkEventHandler
 			int month = TFC_Time.getSeasonAdjustedMonth(event.getChunk().zPosition << 4);
 			if (TFC_Time.getYear() > cd.lastSpringGen && month > 1 && month < 6)
 			{
-				int chunk_X = event.getChunk().xPosition;
-				int chunk_Z = event.getChunk().zPosition;
+				int chunkX = event.getChunk().xPosition;
+				int chunkZ = event.getChunk().zPosition;
 				if(TFC_Core.isWaterBiome(biome))
 				{
 					cd.fishPop *= Math.pow(1.2,cd.lastSpringGen - TFC_Time.getYear());
-					cd.fishPop = Math.min(cd.fishPop, ChunkData.fishPopMax);
+					cd.fishPop = Math.min(cd.fishPop, ChunkData.FISH_POP_MAX);
 				}
 				cd.lastSpringGen = TFC_Time.getYear();
 
-				Random rand = new Random(event.world.getSeed() + ((chunk_X >> 3) - (chunk_Z >> 3)) * (chunk_Z >> 3));
+				Random rand = new Random(event.world.getSeed() + ((chunkX >> 3) - (chunkZ >> 3)) * (chunkZ >> 3));
 				int cropid = rand.nextInt(CropManager.getInstance().getTotalCrops());
 				CropIndex crop = CropManager.getInstance().getCropFromId(cropid);
 				if (event.world.rand.nextInt(25) == 0 && crop != null)
 				{
 					int num = 1 + event.world.rand.nextInt(5);
 					WorldGenGrowCrops cropGen = new WorldGenGrowCrops(cropid);
-					int x = (chunk_X << 4) + event.world.rand.nextInt(16) + 8;
-					int z = (chunk_Z << 4) + event.world.rand.nextInt(16) + 8;
+					int x = (chunkX << 4) + event.world.rand.nextInt(16) + 8;
+					int z = (chunkZ << 4) + event.world.rand.nextInt(16) + 8;
 					cropGen.generate(event.world, event.world.rand, x, z, num);
 				}
 			}
@@ -67,7 +67,7 @@ public class ChunkEventHandler
 				if(TFC_Core.isWaterBiome(biome))
 				{
 					cd.fishPop *= Math.pow(1.2,cd.lastSpringGen - TFC_Time.getYear());
-					cd.fishPop = Math.min(cd.fishPop, ChunkData.fishPopMax);
+					cd.fishPop = Math.min(cd.fishPop, ChunkData.FISH_POP_MAX);
 				}
 				cd.lastSpringGen = TFC_Time.getYear();
 			}
@@ -76,7 +76,7 @@ public class ChunkEventHandler
 				if(TFC_Core.isWaterBiome(biome))
 				{
 					cd.fishPop *= Math.pow(1.2,cd.lastSpringGen - TFC_Time.getYear());
-					cd.fishPop = Math.min(cd.fishPop, ChunkData.fishPopMax);
+					cd.fishPop = Math.min(cd.fishPop, ChunkData.FISH_POP_MAX);
 				}
 				cd.lastSpringGen = TFC_Time.getYear();
 			}
@@ -84,7 +84,7 @@ public class ChunkEventHandler
 		else
 		{
 			Chunk chunk = event.getChunk();
-			ChunkData data = new ChunkData(chunk).CreateNew(event.world, chunk.xPosition, chunk.zPosition);
+			ChunkData data = new ChunkData(chunk).createNew(event.world, chunk.xPosition, chunk.zPosition);
 			data.rainfallMap = TFC_Climate.getCacheManager(event.world).loadRainfallLayerGeneratorData(data.rainfallMap, event.getChunk().xPosition * 16, event.getChunk().zPosition * 16, 16, 16);
 			TFC_Core.getCDM(event.world).addData(chunk, data);
 		}
@@ -114,7 +114,7 @@ public class ChunkEventHandler
 			createSpawn(event.world);
 		if(!event.world.isRemote && event.world.provider.dimensionId == 0 && AnvilManager.getInstance().getRecipeList().size() == 0)
 		{
-			TFC_Core.SetupWorld(event.world);
+			TFC_Core.setupWorld(event.world);
 		}
 		TFC_Climate.worldPair.put(event.world, new WorldCacheManager(event.world));
 		TFC_Core.addCDM(event.world);
@@ -139,7 +139,7 @@ public class ChunkEventHandler
 				/*if(TFC_Core.getCDM(event.world).hasData(event.getChunk()))
 					return;*/
 				NBTTagCompound levelTag = eventTag.getCompoundTag("Level");
-				ChunkData data = new ChunkData(chunk).CreateNew(event.world, levelTag.getInteger("xPos"), levelTag.getInteger("zPos"));
+				ChunkData data = new ChunkData(chunk).createNew(event.world, levelTag.getInteger("xPos"), levelTag.getInteger("zPos"));
 				TFC_Core.getCDM(event.world).addData(chunk, data);
 			}
 		}

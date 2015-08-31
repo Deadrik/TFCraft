@@ -18,6 +18,6 @@ public class EntityGhastTFC extends EntityGhast
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.GhastHealth);//MaxHealth
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.GHAST_HEALTH);//MaxHealth
 	}
 }

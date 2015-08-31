@@ -22,8 +22,8 @@ public class EntityEndermanTFC extends EntityEnderman implements ICausesDamage, 
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(TFC_MobData.EndermanDamage);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.EndermanHealth);//MaxHealth
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(TFC_MobData.ENDERMAN_DAMAGE);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.ENDERMAN_HEALTH);//MaxHealth
 	}
 
 	@Override

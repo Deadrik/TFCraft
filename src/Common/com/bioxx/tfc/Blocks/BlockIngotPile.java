@@ -233,9 +233,14 @@ public class BlockIngotPile extends BlockTerraContainer
 
 	public int getStack(World world,TEIngotPile tt)
 	{
-		TEIngotPile Te = ((TEIngotPile)world.getTileEntity(tt.xCoord, tt.yCoord, tt.zCoord));
+		if (world.getTileEntity(tt.xCoord, tt.yCoord, tt.zCoord) instanceof TEIngotPile)
+		{
+			TEIngotPile te = ((TEIngotPile) world.getTileEntity(tt.xCoord, tt.yCoord, tt.zCoord));
 
-		return Te != null ? Te.getStackInSlot(0) != null ? Te.getStackInSlot(0).stackSize : 0 : 0;
+			return te.getStackInSlot(0) != null ? te.getStackInSlot(0).stackSize : 0;
+		}
+
+		return 0;
 	}
 
 	@Override

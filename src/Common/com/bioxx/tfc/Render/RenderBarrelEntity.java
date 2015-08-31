@@ -16,12 +16,12 @@ import com.bioxx.tfc.api.TFCBlocks;
 public class RenderBarrelEntity extends Render {
 
 	@Override
-	public void doRender(Entity e, double x,double y, double z, float p_76986_8_,float p_76986_9_) 
+	public void doRender(Entity e, double x,double y, double z, float par8,float par9) 
 	{
 		EntityBarrel entity = (EntityBarrel)e;
 		GL11.glPushMatrix();
 		GL11.glTranslated(x+0.5, y, z+0.5);
-		Block block = TFCBlocks.Barrel;
+		Block block = TFCBlocks.barrel;
 		TFC_Core.bindTexture(TextureMap.locationBlocksTexture);
 		RenderBlocks.getInstance().renderBlockAsItem(block, entity.getBarrelType(), 1F);
 
@@ -29,7 +29,7 @@ public class RenderBarrelEntity extends Render {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return null;
 	}
 

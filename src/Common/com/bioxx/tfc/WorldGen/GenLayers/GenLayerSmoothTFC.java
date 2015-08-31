@@ -56,7 +56,7 @@ public class GenLayerSmoothTFC extends GenLayerTFC
 						throw new Exception();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						TerraFirmaCraft.log.catching(e);
+						TerraFirmaCraft.LOG.catching(e);
 					}
 				var10[var12 + var11 * par3] = var17;
 			}

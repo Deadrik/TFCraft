@@ -23,14 +23,14 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class BlockQuern extends BlockTerraContainer
 {
-	private IIcon QuernBase;
-	private IIcon QuernTop1;
-	private IIcon QuernTop2;
+	private IIcon quernBase;
+	private IIcon quernTop1;
+	private IIcon quernTop2;
 
 	public BlockQuern()
 	{
 		super(Material.rock);
-		this.setCreativeTab(TFCTabs.TFCDevices);
+		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 	}
 
 	@Override
@@ -68,18 +68,18 @@ public class BlockQuern extends BlockTerraContainer
 	public IIcon getIcon(int i, int j)
 	{
 		if (i == 0 || i == 1 && j == 1)
-			return QuernTop1;
+			return quernTop1;
 		else if (i == 1 && j == 0)
-			return QuernTop2;
-		return QuernBase;
+			return quernTop2;
+		return quernBase;
 	}
 
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		QuernBase = registerer.registerIcon(Reference.ModID + ":" + "devices/Quern Base");
-		QuernTop1 = registerer.registerIcon(Reference.ModID + ":" + "devices/Quern Top 1");
-		QuernTop2 = registerer.registerIcon(Reference.ModID + ":" + "devices/Quern Top 2");
+		quernBase = registerer.registerIcon(Reference.MOD_ID + ":" + "devices/Quern Base");
+		quernTop1 = registerer.registerIcon(Reference.MOD_ID + ":" + "devices/Quern Top 1");
+		quernTop2 = registerer.registerIcon(Reference.MOD_ID + ":" + "devices/Quern Top 2");
 	}
 
 	@Override

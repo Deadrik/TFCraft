@@ -32,7 +32,7 @@ public class BlockCustomIce extends BlockIce
 	public BlockCustomIce()
 	{
 		super();
-		this.setCreativeTab(TFCTabs.TFCBuilding);
+		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 	}
 
 	/**
@@ -100,10 +100,10 @@ public class BlockCustomIce extends BlockIce
 	{
 		Block plant = plantable.getPlant(world, x, y + 1, z);
 
-		if (plant == TFCBlocks.Cactus && this == TFCBlocks.Cactus)
+		if (plant == TFCBlocks.cactus && this == TFCBlocks.cactus)
 			return true;
 
-		if (plant == TFCBlocks.Reeds && this == TFCBlocks.Reeds)
+		if (plant == TFCBlocks.reeds && this == TFCBlocks.reeds)
 			return true;
 
 		int meta = world.getBlockMetadata(x, y, z);
@@ -117,7 +117,7 @@ public class BlockCustomIce extends BlockIce
 		case Nether: return this == Blocks.soul_sand;
 		case Crop:   return TFC_Core.isFarmland(this);
 		case Cave:   return isSideSolid(world, x, y, z, ForgeDirection.UP);
-		case Plains: return this == TFCBlocks.Grass || this == TFCBlocks.Grass2 || this == TFCBlocks.Dirt || this == TFCBlocks.Dirt2;
+		case Plains: return this == TFCBlocks.grass || this == TFCBlocks.grass2 || this == TFCBlocks.dirt || this == TFCBlocks.dirt2;
 		case Water:  return world.getBlock(x, y, z).getMaterial() == Material.water && world.getBlockMetadata(x, y, z) == 0;
 		case Beach:
 			boolean isBeach = TFC_Core.isDirt(this) || TFC_Core.isSand(this);
@@ -149,9 +149,9 @@ public class BlockCustomIce extends BlockIce
 
 		int meta = world.getBlockMetadata(i, j, k);
 		switch(meta){
-		case 0: return TFCBlocks.SaltWater;
-		case 1: return TFCBlocks.FreshWater;
-		default: return TFCBlocks.SaltWater;
+		case 0: return TFCBlocks.saltWater;
+		case 1: return TFCBlocks.freshWater;
+		default: return TFCBlocks.saltWater;
 		}
 	}
 
@@ -159,7 +159,7 @@ public class BlockCustomIce extends BlockIce
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		seaIce = registerer.registerIcon(Reference.ModID + ":seaIce");
+		seaIce = registerer.registerIcon(Reference.MOD_ID + ":seaIce");
 		super.registerBlockIcons(registerer);
 	}
 

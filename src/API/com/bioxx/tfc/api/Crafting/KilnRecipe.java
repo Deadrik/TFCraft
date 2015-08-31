@@ -6,33 +6,33 @@ public class KilnRecipe
 {
 	public ItemStack result;
 	public ItemStack input1;
-	public int KilnLevel;
+	public int kilnLevel;
 	public boolean inheritsTag = true;
 
 	public KilnRecipe(ItemStack in, int kl, ItemStack res)
 	{
 		this.input1 = in;
 		this.result = res;
-		this.KilnLevel = kl;
+		this.kilnLevel = kl;
 	}
 
 	public KilnRecipe(ItemStack in, int kl)
 	{
 		this.input1 = in;
-		this.KilnLevel = kl;
+		this.kilnLevel = kl;
 	}
 
 	/**
 	 * Used to check if a recipe matches current crafting inventory
 	 */    
-	public boolean matches(KilnRecipe A)
+	public boolean matches(KilnRecipe recipe)
 	{   
-		return areItemStacksEqual(input1, A.input1) && A.KilnLevel == this.KilnLevel;
+		return areItemStacksEqual(input1, recipe.input1) && recipe.kilnLevel == this.kilnLevel;
 	}
 
-	public boolean isComplete(KilnRecipe A)
+	public boolean isComplete(KilnRecipe recipe)
 	{
-		return areItemStacksEqual(input1, A.input1) && A.KilnLevel == this.KilnLevel;
+		return areItemStacksEqual(input1, recipe.input1) && recipe.kilnLevel == this.kilnLevel;
 	}
 
 	public boolean getInheritsTag()
@@ -66,7 +66,7 @@ public class KilnRecipe
 
 	public int getKilnLevel()
 	{
-		return KilnLevel;
+		return kilnLevel;
 	}
 
 	public ItemStack getInput1()

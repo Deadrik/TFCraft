@@ -19,7 +19,7 @@ public class ArmourStandHighlightHandler
 {
 	private AxisAlignedBB boxToRender;
 	@SubscribeEvent
-	public void DrawBlockHighlightEvent(DrawBlockHighlightEvent evt)
+	public void drawBlockHighlightEvent(DrawBlockHighlightEvent evt)
 	{
 		World world = evt.player.worldObj;
 		if(evt.currentItem == null && TFCBlocks.isArmourStand(world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ))
@@ -37,7 +37,7 @@ public class ArmourStandHighlightHandler
 
 			if(isTop)
 				stand = (TEStand) world.getTileEntity(evt.target.blockX, evt.target.blockY-1, evt.target.blockZ);
-			boolean NS = stand.yaw%360 == 0 || stand.yaw%360  == 180 ;
+			boolean ns = stand.yaw%360 == 0 || stand.yaw%360  == 180 ;
 			double var8 = player.lastTickPosX + (player.posX - player.lastTickPosX) * evt.partialTicks;
 			double var10 = player.lastTickPosY + (player.posY - player.lastTickPosY) * evt.partialTicks;
 			double var12 = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * evt.partialTicks;
@@ -50,7 +50,7 @@ public class ArmourStandHighlightHandler
 			AxisAlignedBB body = AxisAlignedBB.getBoundingBox(
 					evt.target.blockX+0.5 - (0.55*1), evt.target.blockY+(0.75)+(isTop?-1:0), evt.target.blockZ+0.5 - (0.17*1),
 					evt.target.blockX+0.5 + (0.55*1), evt.target.blockY+(1.5)+(isTop?-1:0), evt.target.blockZ+0.5 + (0.17*1));
-			if(!NS)
+			if(!ns)
 				body = AxisAlignedBB.getBoundingBox(
 						evt.target.blockX+0.5 - (0.17*1), evt.target.blockY+(0.75)+(isTop?-1:0), evt.target.blockZ+0.5 - (0.55*1),
 						evt.target.blockX+0.5 + (0.17*1), evt.target.blockY+(1.5)+(isTop?-1:0), evt.target.blockZ+0.5 + (0.55*1));
@@ -58,7 +58,7 @@ public class ArmourStandHighlightHandler
 			AxisAlignedBB legs = AxisAlignedBB.getBoundingBox(
 					evt.target.blockX+0.5 - (0.35*0.9), evt.target.blockY+(1.8-(1.6))+(isTop?-1:0), evt.target.blockZ+0.5 - (0.155*0.9),
 					evt.target.blockX+0.5 + (0.35*0.9), evt.target.blockY+(1.8-(1*0.9))+(isTop?-1:0), evt.target.blockZ+0.5 + (0.155*0.9));
-			if(!NS)
+			if(!ns)
 				legs = AxisAlignedBB.getBoundingBox(
 						evt.target.blockX+0.5 - (0.155*0.9), evt.target.blockY+(1.8-(1.6))+(isTop?-1:0), evt.target.blockZ+0.5 - (0.35*0.9),
 						evt.target.blockX+0.5 + (0.155*0.9), evt.target.blockY+(1.8-(1*0.9))+(isTop?-1:0), evt.target.blockZ+0.5 + (0.35*0.9));
@@ -66,7 +66,7 @@ public class ArmourStandHighlightHandler
 			AxisAlignedBB feet = AxisAlignedBB.getBoundingBox(
 					evt.target.blockX+0.5 - (0.35*1), evt.target.blockY+0.15+(isTop?-1:0), evt.target.blockZ+0.5 - (0.17*1),
 					evt.target.blockX+0.5 + (0.35*1), evt.target.blockY+(1.8-(1.4))+(isTop?-1:0), evt.target.blockZ+0.5 + (0.17*1));
-			if(!NS)
+			if(!ns)
 				feet = AxisAlignedBB.getBoundingBox(
 						evt.target.blockX+0.5 - (0.17*1), evt.target.blockY+0.15+(isTop?-1:0), evt.target.blockZ+0.5 - (0.35*1),
 						evt.target.blockX+0.5 + (0.17*1), evt.target.blockY+(1.8-(1.4))+(isTop?-1:0), evt.target.blockZ+0.5 + (0.35*1));

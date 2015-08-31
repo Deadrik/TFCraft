@@ -18,7 +18,7 @@ public class ItemGem extends ItemTerra
 		super();
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.MetaNames = new String[]{"Chipped", "Flawed", "Normal", "Flawless", "Exquisite"};
+		this.metaNames = new String[]{"Chipped", "Flawed", "Normal", "Flawless", "Exquisite"};
 	}
 
 	@Override
@@ -40,11 +40,11 @@ public class ItemGem extends ItemTerra
 	@Override
 	public void registerIcons(IIconRegister registerer)
     {
-		icons[0] = registerer.registerIcon(Reference.ModID + ":" + "gems/"+MetaNames[0] + " " + getUnlocalizedName().replace("item.", ""));
-		icons[1] = registerer.registerIcon(Reference.ModID + ":" + "gems/"+MetaNames[1] + " " + getUnlocalizedName().replace("item.", ""));
-		icons[2] = registerer.registerIcon(Reference.ModID + ":" + "gems/"+MetaNames[2] + " " + getUnlocalizedName().replace("item.", ""));
-		icons[3] = registerer.registerIcon(Reference.ModID + ":" + "gems/"+MetaNames[3] + " " + getUnlocalizedName().replace("item.", ""));
-		icons[4] = registerer.registerIcon(Reference.ModID + ":" + "gems/"+MetaNames[4] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[0] = registerer.registerIcon(Reference.MOD_ID + ":" + "gems/"+metaNames[0] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[1] = registerer.registerIcon(Reference.MOD_ID + ":" + "gems/"+metaNames[1] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[2] = registerer.registerIcon(Reference.MOD_ID + ":" + "gems/"+metaNames[2] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[3] = registerer.registerIcon(Reference.MOD_ID + ":" + "gems/"+metaNames[3] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[4] = registerer.registerIcon(Reference.MOD_ID + ":" + "gems/"+metaNames[4] + " " + getUnlocalizedName().replace("item.", ""));
     }
 
 }

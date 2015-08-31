@@ -117,38 +117,38 @@ public class AnvilRecipe
 	/**
 	 * Used to check if a recipe matches current crafting inventory
 	 */    
-	public boolean matches(AnvilRecipe A)
+	public boolean matches(AnvilRecipe recipe)
 	{   
-		if(     areItemStacksEqual(input1, A.input1) && 
-				areItemStacksEqual(input2, A.input2) &&
-				plan.equals(A.plan) &&
-				AnvilReq.matches(anvilreq, A.anvilreq))
+		if(     areItemStacksEqual(input1, recipe.input1) && 
+				areItemStacksEqual(input2, recipe.input2) &&
+				plan.equals(recipe.plan) &&
+				AnvilReq.matches(anvilreq, recipe.anvilreq))
 		{
-			return !this.flux || A.flux;
+			return !this.flux || recipe.flux;
 		}
 		return false;
 	}
 
-	public boolean isComplete(AnvilManager am, AnvilRecipe A, int[] rules)
+	public boolean isComplete(AnvilManager am, AnvilRecipe recipe, int[] rules)
 	{
-		PlanRecipe pr = am.getPlan(A.plan);
-		if(     areItemStacksEqual(input1, A.input1) && 
-				areItemStacksEqual(input2, A.input2) &&
-				plan.equals(A.plan) &&
+		PlanRecipe pr = am.getPlan(recipe.plan);
+		if(     areItemStacksEqual(input1, recipe.input1) && 
+				areItemStacksEqual(input2, recipe.input2) &&
+				plan.equals(recipe.plan) &&
 				pr.rules[0].matches(rules, 0) && pr.rules[1].matches(rules, 1) && pr.rules[2].matches(rules, 2) && 
-				craftingValue == A.craftingValue && AnvilReq.matches(anvilreq, A.anvilreq))
-			if(this.flux && A.flux)
+				craftingValue == recipe.craftingValue && AnvilReq.matches(anvilreq, recipe.anvilreq))
+			if(this.flux && recipe.flux)
 				return true;
 			else if (!this.flux)
 				return true;
 		return false;
 	}
 
-	public boolean isComplete(AnvilRecipe A)
+	public boolean isComplete(AnvilRecipe recipe)
 	{
-		if(A.input1 == this.input1 && A.input2 == input2 && 
-				craftingValue == A.craftingValue && plan.equals(A.plan) && AnvilReq.matches(anvilreq, A.anvilreq))
-			if(this.flux && A.flux)
+		if(recipe.input1 == this.input1 && recipe.input2 == input2 && 
+				craftingValue == recipe.craftingValue && plan.equals(recipe.plan) && AnvilReq.matches(anvilreq, recipe.anvilreq))
+			if(this.flux && recipe.flux)
 				return true;
 			else if (!this.flux)
 				return true;

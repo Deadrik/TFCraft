@@ -41,7 +41,7 @@ public class BlockOre3 extends BlockOre
 		int count = quantityDropped(metadata, fortune, world.rand);
 		for (int i = 0; i < count; i++)
 		{
-			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, damageDropped(metadata));
+			ItemStack itemstack = new ItemStack(TFCItems.oreChunk, 1, damageDropped(metadata));
 			ret.add(itemstack);
 		}
 		return ret;
@@ -59,7 +59,7 @@ public class BlockOre3 extends BlockOre
 				player.addExhaustion(0.075F);
 			}
 
-			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, damageDropped(meta));
+			ItemStack itemstack = new ItemStack(TFCItems.oreChunk, 1, damageDropped(meta));
 			dropBlockAsItem(world, x, y, z, itemstack);
 		}
 		return world.setBlockToAir(x, y, z);
@@ -115,7 +115,7 @@ public class BlockOre3 extends BlockOre
 	{
 		ItemStack itemstack;
 		int meta = world.getBlockMetadata(x, y, z);
-		itemstack  = new ItemStack(TFCItems.OreChunk, 1, meta + 32);
+		itemstack  = new ItemStack(TFCItems.oreChunk, 1, meta + 32);
 		dropBlockAsItem(world, x, y, z, itemstack);
 		onBlockDestroyedByExplosion(world, x, y, z, exp);
 	}

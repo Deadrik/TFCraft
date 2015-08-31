@@ -24,7 +24,7 @@ public class BlockCustomLeaves2 extends BlockCustomLeaves
 	@Override
 	public Item getItemDropped(int i, Random rand, int j)
 	{
-		return Item.getItemFromBlock(TFCBlocks.Sapling2);
+		return Item.getItemFromBlock(TFCBlocks.sapling2);
 	}
 
 	@Override

@@ -17,10 +17,10 @@ import com.bioxx.tfc.Core.TFC_Core;
 
 public class ItemPotteryMold extends ItemPotteryBase
 {
-	private IIcon CopperIcon;
-	private IIcon BronzeIcon;
-	private IIcon BismuthBronzeIcon;
-	private IIcon BlackBronzeIcon;
+	private IIcon copperIcon;
+	private IIcon bronzeIcon;
+	private IIcon bismuthBronzeIcon;
+	private IIcon blackBronzeIcon;
 
 	public ItemPotteryMold()
 	{
@@ -53,14 +53,14 @@ public class ItemPotteryMold extends ItemPotteryBase
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		this.ClayIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + MetaNames[0]);
-		this.CeramicIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + MetaNames[1]);
-		if(MetaNames.length > 2)
+		this.clayIcon = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder + metaNames[0]);
+		this.ceramicIcon = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder + metaNames[1]);
+		if(metaNames.length > 2)
 		{
-			CopperIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + MetaNames[2]);
-			BronzeIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + MetaNames[3]);
-			BismuthBronzeIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + MetaNames[4]);
-			BlackBronzeIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + MetaNames[5]);
+			copperIcon = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder + metaNames[2]);
+			bronzeIcon = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder + metaNames[3]);
+			bismuthBronzeIcon = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder + metaNames[4]);
+			blackBronzeIcon = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder + metaNames[5]);
 		}
 	}
 	@Override
@@ -69,7 +69,7 @@ public class ItemPotteryMold extends ItemPotteryBase
 		if(par1ItemStack !=null && par1ItemStack.getItemDamage() > 5)
 		{
 			int damage = (par1ItemStack.getItemDamage() - 2) % 4 + 2;
-			return super.getUnlocalizedName(par1ItemStack) + "." + MetaNames[damage];
+			return super.getUnlocalizedName(par1ItemStack) + "." + metaNames[damage];
 		}
 		return super.getUnlocalizedName(par1ItemStack);
 	}
@@ -81,14 +81,14 @@ public class ItemPotteryMold extends ItemPotteryBase
 		{
 			damage = (damage - 2) % 4 + 2;
 		}
-		if(damage == 0) return this.ClayIcon;
-		else if(damage == 1) return this.CeramicIcon;
-		else if(damage == 2) return this.CopperIcon;
-		else if(damage == 3) return this.BronzeIcon;
-		else if(damage == 4) return this.BismuthBronzeIcon;
-		else if(damage == 5) return this.BlackBronzeIcon;
+		if(damage == 0) return this.clayIcon;
+		else if(damage == 1) return this.ceramicIcon;
+		else if(damage == 2) return this.copperIcon;
+		else if(damage == 3) return this.bronzeIcon;
+		else if(damage == 4) return this.bismuthBronzeIcon;
+		else if(damage == 5) return this.blackBronzeIcon;
 
-		return this.ClayIcon;
+		return this.clayIcon;
 	}
 
 	@Override

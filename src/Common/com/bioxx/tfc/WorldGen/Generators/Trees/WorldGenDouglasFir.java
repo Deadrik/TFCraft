@@ -11,14 +11,14 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class WorldGenDouglasFir extends WorldGenerator
 {
-	private boolean Tall;
+	private boolean tall;
 	private final int metaID;
 
 	public WorldGenDouglasFir(boolean par1, int m, boolean t)
 	{
 		super(par1);
 		metaID = m;
-		Tall = t;
+		tall = t;
 	}
 
 	@Override
@@ -26,8 +26,8 @@ public class WorldGenDouglasFir extends WorldGenerator
 	{
 		int i = rand.nextInt(10) + 10;
 		if(rand.nextInt(20)==0)
-			Tall=true;
-		if(Tall)
+			tall=true;
+		if(tall)
 			i += rand.nextInt(10);
 
 		if (par4 < 1 || par4 + i + 1 > 256)
@@ -94,15 +94,15 @@ public class WorldGenDouglasFir extends WorldGenerator
 						k1 - par4 - (i / 3) + 2 == 2) &&
 						rand.nextInt(12) != 0 && world.isAirBlock(l3, k1, l4))
 					{
-						setBlockAndNotifyAdequately(world, l3, k1, l4, TFCBlocks.Leaves, metaID);
+						setBlockAndNotifyAdequately(world, l3, k1, l4, TFCBlocks.leaves, metaID);
 					}
 				}
 			}
 		}
-		setBlockAndNotifyAdequately(world, par3, par4+i, par5, TFCBlocks.Leaves, metaID);
+		setBlockAndNotifyAdequately(world, par3, par4+i, par5, TFCBlocks.leaves, metaID);
 		for (int l1 = 0; l1 < i; l1++)
 		{
-			setBlockAndNotifyAdequately(world, par3, par4 + l1, par5, TFCBlocks.LogNatural, metaID);
+			setBlockAndNotifyAdequately(world, par3, par4 + l1, par5, TFCBlocks.logNatural, metaID);
 		}
 		return true;
 	}

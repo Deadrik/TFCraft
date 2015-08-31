@@ -136,8 +136,8 @@ public class BlockLeatherRack extends BlockTerraContainer
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "Soaked Hide");
-		scrapedTex = iconRegisterer.registerIcon(Reference.ModID + ":" + "Scraped Hide");
+		this.blockIcon = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "Soaked Hide");
+		scrapedTex = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "Scraped Hide");
 	}
 
 	@Override

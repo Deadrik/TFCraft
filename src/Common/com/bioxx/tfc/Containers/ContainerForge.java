@@ -78,7 +78,7 @@ public class ContainerForge extends ContainerTFC
 			else
 			{
 				// Fill the fuel slots, and put the remaining stack in storage
-				if(slotStack.getItem() == TFCItems.Coal)
+				if(slotStack.getItem() == TFCItems.coal)
 				{
 					int j = 0;
 					while (j < 5)

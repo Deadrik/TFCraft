@@ -41,7 +41,7 @@ public class BlockLoom extends BlockTerraContainer
 	public BlockLoom()
 	{
 		super(Material.wood);
-		this.setCreativeTab(TFCTabs.TFCDevices);
+		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 		this.setBlockBounds(0.1f, 0, 0.1f, 0.9f, 1, 0.9f);
 		woodNames = Global.WOOD_ALL;
 	}
@@ -49,7 +49,7 @@ public class BlockLoom extends BlockTerraContainer
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/BarrelHoop");
+		blockIcon = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "wood/BarrelHoop");
 	}
 
 	@Override
@@ -60,13 +60,13 @@ public class BlockLoom extends BlockTerraContainer
 		{
 			side-=10;
 			if(side == 0 || side == 1)
-				return TFC_Textures.InvisibleTexture;
+				return TFC_Textures.invisibleTexture;
 			else
 				return blockIcon;
 		}
 		if(meta<16)
-			return TFCBlocks.Planks.getIcon(side, meta);
-		return TFCBlocks.Planks2.getIcon(side, meta-16);
+			return TFCBlocks.planks.getIcon(side, meta);
+		return TFCBlocks.planks2.getIcon(side, meta-16);
 
 
 	}
@@ -75,7 +75,7 @@ public class BlockLoom extends BlockTerraContainer
 	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side)
 	{
 		if(side == 0 || side == 1)
-			return TFC_Textures.InvisibleTexture;
+			return TFC_Textures.invisibleTexture;
 		else
 			return blockIcon;
 	}
@@ -151,8 +151,8 @@ public class BlockLoom extends BlockTerraContainer
 		int j = 0;
 		String s = this.getUnlocalizedName();
 		for(int i = 0; i < woodNames.length;i++)
-			j = s.substring(s.indexOf("l", s.length())) == ((ItemBarrels)(TFCItems.Loom)).MetaNames[i] ? i : 0;
-		return new ItemStack(TFCItems.Loom, 1, j);
+			j = s.substring(s.indexOf("l", s.length())) == ((ItemBarrels)(TFCItems.loom)).metaNames[i] ? i : 0;
+		return new ItemStack(TFCItems.loom, 1, j);
 	}
 
 	/**

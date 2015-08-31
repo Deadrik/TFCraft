@@ -4,7 +4,7 @@ import com.bioxx.tfc.Reference;
 
 public class TFC_Sounds
 {
-	private static final String LOCATION = Reference.ModID + ":";
+	private static final String LOCATION = Reference.MOD_ID + ":";
 	
 	public static final String FALLININGROCKSHORT = LOCATION + "rock.slide.short";
 	public static final String FALLININGROCKLONG = LOCATION + "rock.slide.long";

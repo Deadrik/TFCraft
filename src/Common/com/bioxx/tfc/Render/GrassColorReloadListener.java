@@ -15,14 +15,14 @@ import com.bioxx.tfc.Core.ColorizerGrassTFC;
 @SideOnly(Side.CLIENT)
 public class GrassColorReloadListener implements IResourceManagerReloadListener
 {
-	private static final ResourceLocation field_130078_a = new ResourceLocation("textures/colormap/grass.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation("textures/colormap/grass.png");
 
 	@Override
 	public void onResourceManagerReload(IResourceManager par1ResourceManager)
 	{
 		try
 		{
-			ColorizerGrassTFC.setGrassBiomeColorizer(TextureUtil.readImageData(par1ResourceManager, field_130078_a));
+			ColorizerGrassTFC.setGrassBiomeColorizer(TextureUtil.readImageData(par1ResourceManager, TEXTURE));
 		}
 		catch (IOException ioexception)
 		{

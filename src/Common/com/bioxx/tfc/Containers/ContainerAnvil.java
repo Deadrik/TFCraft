@@ -82,7 +82,7 @@ public class ContainerAnvil extends ContainerTFC
 					return null;
 			}
 			// Flux
-			else if(slotStack.getItem() == TFCItems.Powder && slotStack.getItemDamage() == 0)
+			else if(slotStack.getItem() == TFCItems.powder && slotStack.getItemDamage() == 0)
 			{
 				if (!this.mergeItemStack(slotStack, 6, 7, false))
 					return null;
@@ -140,7 +140,7 @@ public class ContainerAnvil extends ContainerTFC
 			ICrafting var2 = (ICrafting)this.crafters.get(var1);
 			int cv = anvil.getCraftingValue();
 			int icv = anvil.getItemCraftingValueNoSet(1);
-			int t = this.anvil.AnvilTier;
+			int t = this.anvil.anvilTier;
 
 			if (this.redIndicator != cv)
 				var2.sendProgressBarUpdate(this, 0, cv);
@@ -152,7 +152,7 @@ public class ContainerAnvil extends ContainerTFC
 
 		redIndicator = anvil.craftingValue;
 		greenIndicator = anvil.itemCraftingValue;
-		this.tier = this.anvil.AnvilTier;
+		this.tier = this.anvil.anvilTier;
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class ContainerAnvil extends ContainerTFC
 			else if (par1 == 1)
 				this.anvil.itemCraftingValue = par2;
 			else if (par1 == 2)
-				this.anvil.AnvilTier = par2;
+				this.anvil.anvilTier = par2;
 		}
 	}
 

@@ -28,23 +28,23 @@ public class CropIndex
 	public int maxLifespan = -1;
 
 	public int chanceForOutput1 = 100;
-	public Item Output1;
-	public float Output1Avg;
+	public Item output1;
+	public float output1Avg;
 
 	public int chanceForOutput2 = 100;
-	public Item Output2;
-	public float Output2Avg;
+	public Item output2;
+	public float output2Avg;
 
 	public boolean needsSunlight = true;
 	public float waterUsageMult = 1;
 	public Item seedItem;
 
-	public CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, Item seed)
+	public CropIndex(int id, String name, int type, int growth, int stages, float minGTemp, float minATemp, Item seed)
 	{
 		growthTime = growth;
 		cycleType = type;
 		cropName = name.toLowerCase();
-		cropId = ID;
+		cropId = id;
 		numGrowthStages = stages;
 		minGrowthTemp = minGTemp;
 		minAliveTemp = minATemp;
@@ -53,53 +53,53 @@ public class CropIndex
 		dormantInFrost = false;
 		seedItem = seed;
 	}
-	public CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nutrientUsageMultiplier, Item seed)
+	public CropIndex(int id, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nutrientUsageMultiplier, Item seed)
 	{
-		this(ID,name,type,growth,stages,minGTemp,minATemp,seed);
+		this(id,name,type,growth,stages,minGTemp,minATemp,seed);
 		nutrientUsageMult = nutrientUsageMultiplier;
 	}
-	public CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nutrientUsageMultiplier, Item seed, int[] nutriRestore)
+	public CropIndex(int id, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nutrientUsageMultiplier, Item seed, int[] nutriRestore)
 	{
-		this(ID,name,type,growth,stages,minGTemp,minATemp,seed);
+		this(id,name,type,growth,stages,minGTemp,minATemp,seed);
 		nutrientExtraRestore = nutriRestore;
 		nutrientUsageMult = nutrientUsageMultiplier;
 	}
 
 	public CropIndex setOutput1(Item o, float oAvg)
 	{
-		Output1 = o;
-		Output1Avg = oAvg;
+		output1 = o;
+		output1Avg = oAvg;
 		return this;
 	}
 	public CropIndex setOutput2(Item o, float oAvg)
 	{
-		Output2 = o;
-		Output2Avg = oAvg;
+		output2 = o;
+		output2Avg = oAvg;
 		return this;
 	}
 	public CropIndex setOutput1Chance(Item o, float oAvg, int chance)
 	{
-		Output1 = o;
-		Output1Avg = oAvg;
+		output1 = o;
+		output1Avg = oAvg;
 		chanceForOutput1 = chance;
 		return this;
 	}
 	public CropIndex setOutput2Chance(Item o, float oAvg, int chance)
 	{
-		Output2 = o;
-		Output2Avg = oAvg;
+		output2 = o;
+		output2Avg = oAvg;
 		chanceForOutput2 = chance;
 		return this;
 	}  
 	public ItemStack getOutput1(TECrop crop)
 	{
-		if (Output1 != null && crop.growth >= numGrowthStages)
+		if (output1 != null && crop.growth >= numGrowthStages)
 		{
-			ItemStack is = new ItemStack(Output1);
-			Random R = new Random();
-			if(R.nextInt(100) < chanceForOutput1)
+			ItemStack is = new ItemStack(output1);
+			Random r = new Random();
+			if(r.nextInt(100) < chanceForOutput1)
 			{
-				ItemFoodTFC.createTag(is, getWeight(Output1Avg, R));
+				ItemFoodTFC.createTag(is, getWeight(output1Avg, r));
 				addFlavorProfile(crop, is);
 				return is;
 			}
@@ -108,13 +108,13 @@ public class CropIndex
 	}
 	public ItemStack getOutput2(TECrop crop)
 	{
-		if (Output2 != null && crop.growth >= numGrowthStages)
+		if (output2 != null && crop.growth >= numGrowthStages)
 		{
-			ItemStack is = new ItemStack(Output2);
-			Random R = new Random();
-			if(R.nextInt(100) < chanceForOutput2)
+			ItemStack is = new ItemStack(output2);
+			Random r = new Random();
+			if(r.nextInt(100) < chanceForOutput2)
 			{
-				ItemFoodTFC.createTag(is, getWeight(Output2Avg, R));
+				ItemFoodTFC.createTag(is, getWeight(output2Avg, r));
 				addFlavorProfile(crop, is);
 				return is;
 			}
@@ -130,8 +130,8 @@ public class CropIndex
 		{
 			int soilType1 = (farmBlock == TFCBlocks.tilledSoil ? te.getWorldObj().getBlockMetadata(te.xCoord, te.yCoord-1, te.zCoord) : 
 				te.getWorldObj().getBlockMetadata(te.xCoord, te.yCoord-1, te.zCoord)+16);
-			int soilType2 = (farmBlock == TFCBlocks.Dirt ? te.getWorldObj().getBlockMetadata(te.xCoord, te.yCoord-2, te.zCoord)*2 : 
-				farmBlock == TFCBlocks.Dirt2 ? (te.getWorldObj().getBlockMetadata(te.xCoord, te.yCoord-2, te.zCoord)+16)*2 : 0);
+			int soilType2 = (farmBlock == TFCBlocks.dirt ? te.getWorldObj().getBlockMetadata(te.xCoord, te.yCoord-2, te.zCoord)*2 : 
+				farmBlock == TFCBlocks.dirt2 ? (te.getWorldObj().getBlockMetadata(te.xCoord, te.yCoord-2, te.zCoord)+16)*2 : 0);
 
 			int ph = TFC_Climate.getCacheManager(te.getWorldObj()).getPHLayerAt(te.xCoord, te.zCoord).data1*100;
 			int drainage = 0;
@@ -152,16 +152,16 @@ public class CropIndex
 
 	private void addFlavorProfile(TECrop te, ItemStack outFood)
 	{
-		Random R = getGrowthRand(te);
-		if(R != null)
+		Random r = getGrowthRand(te);
+		if(r != null)
 		{
-			Food.adjustFlavor(outFood, R);
+			Food.adjustFlavor(outFood, r);
 		}
 	}
 
-	public static float getWeight(float average, Random R)
+	public static float getWeight(float average, Random r)
 	{
-		float weight = average + (average * (10 * R.nextFloat() - 5) / 100);
+		float weight = average + (average * (10 * r.nextFloat() - 5) / 100);
 		return Helper.roundNumber(weight, 10);
 	}
 

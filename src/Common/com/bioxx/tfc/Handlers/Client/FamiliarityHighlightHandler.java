@@ -18,7 +18,7 @@ public class FamiliarityHighlightHandler {
 
 	//Assumed client only
 	@SubscribeEvent
-	public void RenderLivingEvent(Post evt){
+	public void renderLivingEvent(Post evt){
 		if(RenderManager.instance.livingPlayer instanceof EntityPlayer){
 			EntityLivingBase entity = evt.entity;
 			EntityPlayer player = (EntityPlayer)RenderManager.instance.livingPlayer;

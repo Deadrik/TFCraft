@@ -13,9 +13,9 @@ public class EntityAITargetNonTamedTFC extends EntityAITargetNonTamed
     private Class targetClass;
 	//private static final String __OBFID = "CL_00001623";
 
-    public EntityAITargetNonTamedTFC(EntityTameable theEntity, Class targetClass, int p_i1666_3_, boolean p_i1666_4_)
+    public EntityAITargetNonTamedTFC(EntityTameable theEntity, Class targetClass, int targetChance, boolean shouldCheckSight)
     {
-        super(theEntity, targetClass, p_i1666_3_, p_i1666_4_);
+        super(theEntity, targetClass, targetChance, shouldCheckSight);
         this.targetClass = targetClass;
         this.theTameable = theEntity;
     }

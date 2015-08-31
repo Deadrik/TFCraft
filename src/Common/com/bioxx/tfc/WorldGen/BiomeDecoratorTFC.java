@@ -136,7 +136,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getPrecipitationHeight(xCoord, zCoord)-1;
 			if (TFC_Climate.getBioTemperatureHeight(currentWorld, xCoord, yCoord, zCoord) >= 7)
-				new WorldGenWaterPlants(TFCBlocks.WaterPlant).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+				new WorldGenWaterPlants(TFCBlocks.waterPlant).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 		}
 	}
 
@@ -148,10 +148,10 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			int j1 = y + random.nextInt(4) - random.nextInt(4);
 			int k1 = z + random.nextInt(8) - random.nextInt(8);
 
-			if (world.isAirBlock(i1, j1, k1) && TFCBlocks.LilyPad.canPlaceBlockAt(world, i1, j1, k1) &&
+			if (world.isAirBlock(i1, j1, k1) && TFCBlocks.lilyPad.canPlaceBlockAt(world, i1, j1, k1) &&
 					TFC_Core.isFreshWater(world.getBlock(i1, j1 - 1, k1)) && !TFC_Core.isFreshWater(world.getBlock(i1, j1 - 2, k1))) // Only 1 deep water
 			{
-				world.setBlock(i1, j1, k1, TFCBlocks.LilyPad, 0, 2);
+				world.setBlock(i1, j1, k1, TFCBlocks.lilyPad, 0, 2);
 			}
 		}
 

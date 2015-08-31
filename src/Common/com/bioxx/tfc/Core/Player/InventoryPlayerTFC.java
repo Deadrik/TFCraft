@@ -108,17 +108,17 @@ public class InventoryPlayerTFC extends InventoryPlayer {
 	}
 
 	@Override
-	public int clearInventory(Item p_146027_1_, int p_146027_2_)
+	public int clearInventory(Item item, int meta)
 	{
 		for(int i = 0; i < this.extraEquipInventory.length; i++)
 		{
-			if (extraEquipInventory[i] != null && (p_146027_1_ == null || extraEquipInventory[i].getItem() == p_146027_1_) && 
-					(p_146027_2_ <= -1 || extraEquipInventory[i].getItemDamage() == p_146027_2_))
+			if (extraEquipInventory[i] != null && (item == null || extraEquipInventory[i].getItem() == item) && 
+					(meta <= -1 || extraEquipInventory[i].getItemDamage() == meta))
 			{
 				this.extraEquipInventory[i] = null;
 			}
 		}
-		return super.clearInventory(p_146027_1_, p_146027_2_);
+		return super.clearInventory(item, meta);
 	}
 
 	@Override

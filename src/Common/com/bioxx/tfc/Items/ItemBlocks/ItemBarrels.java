@@ -37,8 +37,8 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 		super(par1);
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.setCreativeTab(TFCTabs.TFCDevices);
-		this.MetaNames = Global.WOOD_ALL;
+		this.setCreativeTab(TFCTabs.TFC_DEVICES);
+		this.metaNames = Global.WOOD_ALL;
 	}
 
 	@Override
@@ -190,7 +190,7 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 	@Override
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < MetaNames.length; i++) {
+		for(int i = 0; i < metaNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}

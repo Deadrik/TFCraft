@@ -15,9 +15,9 @@ import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 public class RenderPheasantTFC extends RenderChicken
 {
-	private static final ResourceLocation FemaleTexture = new ResourceLocation(Reference.ModID, "textures/mob/PheasantF.png");
-	private static final ResourceLocation MaleTexture = new ResourceLocation(Reference.ModID, "textures/mob/PheasantM.png");
-	private static final ResourceLocation ChickTexture = new ResourceLocation(Reference.ModID, "textures/mob/pheasant_chick.png");
+	private static final ResourceLocation FEMALE_TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/mob/PheasantF.png");
+	private static final ResourceLocation MALE_TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/mob/PheasantM.png");
+	private static final ResourceLocation CHICK_TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/mob/pheasant_chick.png");
 
 	public RenderPheasantTFC(ModelBase par1ModelBase, float par2)
 	{
@@ -42,13 +42,13 @@ public class RenderPheasantTFC extends RenderChicken
 		float percent = TFC_Core.getPercentGrown(entity);
 
 		if(percent < 0.65f){
-			return ChickTexture;
+			return CHICK_TEXTURE;
 		}
 		else if(entity.getGender() == GenderEnum.MALE){
-			return MaleTexture;
+			return MALE_TEXTURE;
 		}
 		else{
-			return FemaleTexture;
+			return FEMALE_TEXTURE;
 		}
 	}
 

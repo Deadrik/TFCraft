@@ -338,12 +338,12 @@ public class RenderMetalTrapDoor implements ISimpleBlockRenderingHandler
 			renderer.renderStandardBlock(block, i, j, k);
 		}
 
-		int hingeID = te.sheetStack != null ? Math.min(((BlockMetalSheet)TFCBlocks.MetalSheet).icons.length-1, te.sheetStack.getItemDamage() >> 5) : 0;
+		int hingeID = te.sheetStack != null ? Math.min(((BlockMetalSheet)TFCBlocks.metalSheet).icons.length-1, te.sheetStack.getItemDamage() >> 5) : 0;
 		
 		boolean breaking = renderer.overrideBlockTexture != null;
 		
 		if ( ! breaking )
-			renderer.setOverrideBlockTexture(((BlockMetalSheet)TFCBlocks.MetalSheet).icons[hingeID]);
+			renderer.setOverrideBlockTexture(((BlockMetalSheet)TFCBlocks.metalSheet).icons[hingeID]);
 
 		drawHinges(block, i, j, k, renderer, side, hinge);
 		
@@ -589,10 +589,10 @@ public class RenderMetalTrapDoor implements ISimpleBlockRenderingHandler
 		renderer.setRenderBounds(0.125F, 0.4F, 0F, 1F, 0.475F, 1f);
 		renderInvBlock(block, metadata&255, renderer);
 		renderer.setRenderBounds(0.0F, 0.4F, 0.1F, 0.125F, 0.525F, 0.4f);
-		int index = Math.min(((BlockMetalSheet)TFCBlocks.MetalSheet).icons.length-1, metadata >> 5);
-		renderInvBlock(block, ((BlockMetalSheet)TFCBlocks.MetalSheet).icons[index], renderer);
+		int index = Math.min(((BlockMetalSheet)TFCBlocks.metalSheet).icons.length-1, metadata >> 5);
+		renderInvBlock(block, ((BlockMetalSheet)TFCBlocks.metalSheet).icons[index], renderer);
 		renderer.setRenderBounds(0.0F, 0.4F, 0.6F, 0.125F, 0.525F, 0.9f);
-		renderInvBlock(block, ((BlockMetalSheet)TFCBlocks.MetalSheet).icons[index], renderer);
+		renderInvBlock(block, ((BlockMetalSheet)TFCBlocks.metalSheet).icons[index], renderer);
 	}
 
 	@Override

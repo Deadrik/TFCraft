@@ -17,11 +17,12 @@ import com.bioxx.tfc.api.TFCBlocks;
 /**
  * Created by raymondbh on 08.07.2015.
  */
-public abstract class ChiselMode {
+public class ChiselMode
+{
 
 	//private String name;
     private ResourceLocation resourcelocation;
-	private int texture_u, texture_v, divX, divY, divZ;
+	private int textureU, textureV, divX, divY, divZ;
 
     public ChiselMode(){}
 
@@ -29,12 +30,12 @@ public abstract class ChiselMode {
         return resourcelocation;
     }
 
-    public int getTexture_u(){
-        return texture_u;
+    public int getTextureU(){
+        return textureU;
     }
 
-    public int getTexture_v(){
-        return texture_v;
+    public int getTextureV(){
+        return textureV;
     }
 
     public int getDivX(Block block){
@@ -54,7 +55,7 @@ public abstract class ChiselMode {
     public boolean onUsedHandler(World world, EntityPlayer player, int x, int y, int z, Block id, int meta, int side, float hitX, float hitY, float hitZ){ return false; }
 
     public boolean isChiselable(Block block){
-        boolean isChiselable = block == TFCBlocks.Planks
+        boolean isChiselable = block == TFCBlocks.planks
                 || block instanceof BlockCobble
                 || block instanceof BlockStone
                 || block instanceof BlockSmooth;

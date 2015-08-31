@@ -1,7 +1,6 @@
 package com.bioxx.tfc;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
@@ -18,7 +17,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-import com.bioxx.tfc.Core.FluidBaseTFC;
 import com.bioxx.tfc.Entities.*;
 import com.bioxx.tfc.Entities.Mobs.*;
 import com.bioxx.tfc.Handlers.GuiHandler;
@@ -193,27 +191,6 @@ public class CommonProxy
 
 	public void registerFluids()
 	{
-		TFCFluids.SALTWATER = new FluidBaseTFC("saltwater").setBaseColor(0x354d35);
-		TFCFluids.FRESHWATER = new FluidBaseTFC("freshwater").setBaseColor(0x354d35);
-		TFCFluids.HOTWATER = new FluidBaseTFC("hotwater").setBaseColor(0x1f5099).setTemperature(372/*Kelvin*/);
-		TFCFluids.LAVA = new FluidBaseTFC("lavatfc").setLuminosity(15).setDensity(3000).setViscosity(6000).setTemperature(1300).setUnlocalizedName(Blocks.lava.getUnlocalizedName());
-		TFCFluids.RUM = new FluidBaseTFC("rum").setBaseColor(0x6e0123);
-		TFCFluids.BEER = new FluidBaseTFC("beer").setBaseColor(0xc39e37);
-		TFCFluids.RYEWHISKEY = new FluidBaseTFC("ryewhiskey").setBaseColor(0xc77d51);
-		TFCFluids.WHISKEY = new FluidBaseTFC("whiskey").setBaseColor(0x583719);
-		TFCFluids.CORNWHISKEY = new FluidBaseTFC("cornwhiskey").setBaseColor(0xd9c7b7);
-		TFCFluids.SAKE = new FluidBaseTFC("sake").setBaseColor(0xb7d9bc);
-		TFCFluids.VODKA = new FluidBaseTFC("vodka").setBaseColor(0xdcdcdc);
-		TFCFluids.CIDER = new FluidBaseTFC("cider").setBaseColor(0xb0ae32);
-		TFCFluids.TANNIN = new FluidBaseTFC("tannin").setBaseColor(0x63594e);
-		TFCFluids.VINEGAR = new FluidBaseTFC("vinegar").setBaseColor(0xc7c2aa);
-		TFCFluids.BRINE = new FluidBaseTFC("brine").setBaseColor(0xdcd3c9);
-		TFCFluids.LIMEWATER = new FluidBaseTFC("limewater").setBaseColor(0xb4b4b4);
-		TFCFluids.MILK = new FluidBaseTFC("milk").setBaseColor(0xffffff);
-		TFCFluids.MILKCURDLED = new FluidBaseTFC("milkcurdled").setBaseColor(0xfffbe8);
-		TFCFluids.MILKVINEGAR = new FluidBaseTFC("milkvinegar").setBaseColor(0xfffbe8);
-		TFCFluids.OLIVEOIL = new FluidBaseTFC("oliveoil").setBaseColor(0x6a7537);
-
 		FluidRegistry.registerFluid(TFCFluids.LAVA);
 		FluidRegistry.registerFluid(TFCFluids.SALTWATER);
 		FluidRegistry.registerFluid(TFCFluids.FRESHWATER);
@@ -238,22 +215,22 @@ public class CommonProxy
 
 	public void setupFluids()
 	{
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.LAVA.getName()), new ItemStack(TFCItems.BlueSteelBucketLava), new ItemStack(TFCItems.BlueSteelBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.FRESHWATER.getName()), new ItemStack(TFCItems.RedSteelBucketWater), new ItemStack(TFCItems.RedSteelBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.SALTWATER.getName()), new ItemStack(TFCItems.RedSteelBucketSaltWater), new ItemStack(TFCItems.RedSteelBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.FRESHWATER.getName()), new ItemStack(TFCItems.WoodenBucketWater), new ItemStack(TFCItems.WoodenBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.SALTWATER.getName()), new ItemStack(TFCItems.WoodenBucketSaltWater), new ItemStack(TFCItems.WoodenBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.FRESHWATER, 1000), new ItemStack(TFCItems.PotteryJug, 1, 2), new ItemStack(TFCItems.PotteryJug,1, 1));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.RUM, 250), new ItemStack(TFCItems.Rum), new ItemStack(TFCItems.GlassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.BEER, 250), new ItemStack(TFCItems.Beer), new ItemStack(TFCItems.GlassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.RYEWHISKEY, 250), new ItemStack(TFCItems.RyeWhiskey), new ItemStack(TFCItems.GlassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.WHISKEY, 250), new ItemStack(TFCItems.Whiskey), new ItemStack(TFCItems.GlassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.CORNWHISKEY, 250), new ItemStack(TFCItems.CornWhiskey), new ItemStack(TFCItems.GlassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.SAKE, 250), new ItemStack(TFCItems.Sake), new ItemStack(TFCItems.GlassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.CIDER, 250), new ItemStack(TFCItems.Cider), new ItemStack(TFCItems.GlassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.VODKA, 250), new ItemStack(TFCItems.Vodka), new ItemStack(TFCItems.GlassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.MILK, 1000), new ItemStack(TFCItems.WoodenBucketMilk), new ItemStack(TFCItems.WoodenBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.VINEGAR, 1000), new ItemStack(TFCItems.Vinegar), new ItemStack(TFCItems.WoodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.LAVA.getName()), new ItemStack(TFCItems.blueSteelBucketLava), new ItemStack(TFCItems.blueSteelBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.FRESHWATER.getName()), new ItemStack(TFCItems.redSteelBucketWater), new ItemStack(TFCItems.redSteelBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.SALTWATER.getName()), new ItemStack(TFCItems.redSteelBucketSaltWater), new ItemStack(TFCItems.redSteelBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.FRESHWATER.getName()), new ItemStack(TFCItems.woodenBucketWater), new ItemStack(TFCItems.woodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.SALTWATER.getName()), new ItemStack(TFCItems.woodenBucketSaltWater), new ItemStack(TFCItems.woodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.FRESHWATER, 1000), new ItemStack(TFCItems.potteryJug, 1, 2), new ItemStack(TFCItems.potteryJug,1, 1));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.RUM, 250), new ItemStack(TFCItems.rum), new ItemStack(TFCItems.glassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.BEER, 250), new ItemStack(TFCItems.beer), new ItemStack(TFCItems.glassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.RYEWHISKEY, 250), new ItemStack(TFCItems.ryeWhiskey), new ItemStack(TFCItems.glassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.WHISKEY, 250), new ItemStack(TFCItems.whiskey), new ItemStack(TFCItems.glassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.CORNWHISKEY, 250), new ItemStack(TFCItems.cornWhiskey), new ItemStack(TFCItems.glassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.SAKE, 250), new ItemStack(TFCItems.sake), new ItemStack(TFCItems.glassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.CIDER, 250), new ItemStack(TFCItems.cider), new ItemStack(TFCItems.glassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.VODKA, 250), new ItemStack(TFCItems.vodka), new ItemStack(TFCItems.glassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.MILK, 1000), new ItemStack(TFCItems.woodenBucketMilk), new ItemStack(TFCItems.woodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.VINEGAR, 1000), new ItemStack(TFCItems.vinegar), new ItemStack(TFCItems.woodenBucketEmpty));
 		//FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(0), new ItemStack(TFCBlocks.OilLamp, 1, 0));//Gold
 		//FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(1), new ItemStack(TFCBlocks.OilLamp, 1, 1));//Platinum
 		//FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(2), new ItemStack(TFCBlocks.OilLamp, 1, 2));//RoseGold
@@ -266,65 +243,65 @@ public class CommonProxy
 	public void registerToolClasses()
 	{
 		//pickaxes
-		TFCItems.BismuthBronzePick.setHarvestLevel("pickaxe", 2);
-		TFCItems.BismuthBronzePick.setHarvestLevel("pickaxe", 2);
-		TFCItems.BlackBronzePick.setHarvestLevel("pickaxe", 2);
-		TFCItems.BlackSteelPick.setHarvestLevel("pickaxe", 5);
-		TFCItems.BlueSteelPick.setHarvestLevel("pickaxe", 6);
-		TFCItems.BronzePick.setHarvestLevel("pickaxe", 2);
-		TFCItems.CopperPick.setHarvestLevel("pickaxe", 1);
-		TFCItems.WroughtIronPick.setHarvestLevel("pickaxe", 3);
-		TFCItems.RedSteelPick.setHarvestLevel("pickaxe", 6);
-		TFCItems.SteelPick.setHarvestLevel("pickaxe", 4);
+		TFCItems.bismuthBronzePick.setHarvestLevel("pickaxe", 2);
+		TFCItems.bismuthBronzePick.setHarvestLevel("pickaxe", 2);
+		TFCItems.blackBronzePick.setHarvestLevel("pickaxe", 2);
+		TFCItems.blackSteelPick.setHarvestLevel("pickaxe", 5);
+		TFCItems.blueSteelPick.setHarvestLevel("pickaxe", 6);
+		TFCItems.bronzePick.setHarvestLevel("pickaxe", 2);
+		TFCItems.copperPick.setHarvestLevel("pickaxe", 1);
+		TFCItems.wroughtIronPick.setHarvestLevel("pickaxe", 3);
+		TFCItems.redSteelPick.setHarvestLevel("pickaxe", 6);
+		TFCItems.steelPick.setHarvestLevel("pickaxe", 4);
 		//shovels
-		TFCItems.IgInShovel.setHarvestLevel("shovel", 1);
-		TFCItems.IgExShovel.setHarvestLevel("shovel", 1);
-		TFCItems.SedShovel.setHarvestLevel("shovel", 1);
-		TFCItems.MMShovel.setHarvestLevel("shovel", 1);
-		TFCItems.BismuthBronzeShovel.setHarvestLevel("shovel", 2);
-		TFCItems.BlackBronzeShovel.setHarvestLevel("shovel", 2);
-		TFCItems.BlackSteelShovel.setHarvestLevel("shovel", 5);
-		TFCItems.BlueSteelShovel.setHarvestLevel("shovel", 6);
-		TFCItems.BronzeShovel.setHarvestLevel("shovel", 2);
-		TFCItems.CopperShovel.setHarvestLevel("shovel", 1);
-		TFCItems.WroughtIronShovel.setHarvestLevel("shovel", 3);
-		TFCItems.RedSteelShovel.setHarvestLevel("shovel", 6);
-		TFCItems.SteelShovel.setHarvestLevel("shovel", 4);
+		TFCItems.igInShovel.setHarvestLevel("shovel", 1);
+		TFCItems.igExShovel.setHarvestLevel("shovel", 1);
+		TFCItems.sedShovel.setHarvestLevel("shovel", 1);
+		TFCItems.mMShovel.setHarvestLevel("shovel", 1);
+		TFCItems.bismuthBronzeShovel.setHarvestLevel("shovel", 2);
+		TFCItems.blackBronzeShovel.setHarvestLevel("shovel", 2);
+		TFCItems.blackSteelShovel.setHarvestLevel("shovel", 5);
+		TFCItems.blueSteelShovel.setHarvestLevel("shovel", 6);
+		TFCItems.bronzeShovel.setHarvestLevel("shovel", 2);
+		TFCItems.copperShovel.setHarvestLevel("shovel", 1);
+		TFCItems.wroughtIronShovel.setHarvestLevel("shovel", 3);
+		TFCItems.redSteelShovel.setHarvestLevel("shovel", 6);
+		TFCItems.steelShovel.setHarvestLevel("shovel", 4);
 		//Axes
-		TFCItems.IgInAxe.setHarvestLevel("axe", 1);
-		TFCItems.IgExAxe.setHarvestLevel("axe", 1);
-		TFCItems.SedAxe.setHarvestLevel("axe", 1);
-		TFCItems.MMAxe.setHarvestLevel("axe", 1);
-		TFCItems.BismuthBronzeAxe.setHarvestLevel("axe", 2);
-		TFCItems.BlackBronzeAxe.setHarvestLevel("axe", 2);
-		TFCItems.BlackSteelAxe.setHarvestLevel("axe", 5);
-		TFCItems.BlueSteelAxe.setHarvestLevel("axe", 6);
-		TFCItems.BronzeAxe.setHarvestLevel("axe", 2);
-		TFCItems.CopperAxe.setHarvestLevel("axe", 1);
-		TFCItems.WroughtIronAxe.setHarvestLevel("axe", 3);
-		TFCItems.RedSteelAxe.setHarvestLevel("axe", 6);
-		TFCItems.SteelAxe.setHarvestLevel("axe", 4);
+		TFCItems.igInAxe.setHarvestLevel("axe", 1);
+		TFCItems.igExAxe.setHarvestLevel("axe", 1);
+		TFCItems.sedAxe.setHarvestLevel("axe", 1);
+		TFCItems.mMAxe.setHarvestLevel("axe", 1);
+		TFCItems.bismuthBronzeAxe.setHarvestLevel("axe", 2);
+		TFCItems.blackBronzeAxe.setHarvestLevel("axe", 2);
+		TFCItems.blackSteelAxe.setHarvestLevel("axe", 5);
+		TFCItems.blueSteelAxe.setHarvestLevel("axe", 6);
+		TFCItems.bronzeAxe.setHarvestLevel("axe", 2);
+		TFCItems.copperAxe.setHarvestLevel("axe", 1);
+		TFCItems.wroughtIronAxe.setHarvestLevel("axe", 3);
+		TFCItems.redSteelAxe.setHarvestLevel("axe", 6);
+		TFCItems.steelAxe.setHarvestLevel("axe", 4);
 
-		TFCItems.BismuthBronzeSaw.setHarvestLevel("axe", 2);
-		TFCItems.BlackBronzeSaw.setHarvestLevel("axe", 2);
-		TFCItems.BlackSteelSaw.setHarvestLevel("axe", 5);
-		TFCItems.BlueSteelSaw.setHarvestLevel("axe", 6);
-		TFCItems.BronzeSaw.setHarvestLevel("axe", 2);
-		TFCItems.CopperSaw.setHarvestLevel("axe", 1);
-		TFCItems.WroughtIronSaw.setHarvestLevel("axe", 3);
-		TFCItems.RedSteelSaw.setHarvestLevel("axe", 6);
-		TFCItems.SteelSaw.setHarvestLevel("axe", 4);
+		TFCItems.bismuthBronzeSaw.setHarvestLevel("axe", 2);
+		TFCItems.blackBronzeSaw.setHarvestLevel("axe", 2);
+		TFCItems.blackSteelSaw.setHarvestLevel("axe", 5);
+		TFCItems.blueSteelSaw.setHarvestLevel("axe", 6);
+		TFCItems.bronzeSaw.setHarvestLevel("axe", 2);
+		TFCItems.copperSaw.setHarvestLevel("axe", 1);
+		TFCItems.wroughtIronSaw.setHarvestLevel("axe", 3);
+		TFCItems.redSteelSaw.setHarvestLevel("axe", 6);
+		TFCItems.steelSaw.setHarvestLevel("axe", 4);
 
-		TFCItems.StoneHammer.setHarvestLevel("hammer", 1);
-		TFCItems.BismuthBronzeHammer.setHarvestLevel("hammer", 2);
-		TFCItems.BlackBronzeHammer.setHarvestLevel("hammer", 2);
-		TFCItems.BlackSteelHammer.setHarvestLevel("hammer", 5);
-		TFCItems.BlueSteelHammer.setHarvestLevel("hammer", 6);
-		TFCItems.BronzeHammer.setHarvestLevel("hammer", 2);
-		TFCItems.CopperHammer.setHarvestLevel("hammer", 1);
-		TFCItems.WroughtIronHammer.setHarvestLevel("hammer", 3);
-		TFCItems.RedSteelHammer.setHarvestLevel("hammer", 6);
-		TFCItems.SteelHammer.setHarvestLevel("hammer", 4);
+		TFCItems.stoneHammer.setHarvestLevel("hammer", 1);
+		TFCItems.bismuthBronzeHammer.setHarvestLevel("hammer", 2);
+		TFCItems.blackBronzeHammer.setHarvestLevel("hammer", 2);
+		TFCItems.blackSteelHammer.setHarvestLevel("hammer", 5);
+		TFCItems.blueSteelHammer.setHarvestLevel("hammer", 6);
+		TFCItems.bronzeHammer.setHarvestLevel("hammer", 2);
+		TFCItems.copperHammer.setHarvestLevel("hammer", 1);
+		TFCItems.wroughtIronHammer.setHarvestLevel("hammer", 3);
+		TFCItems.redSteelHammer.setHarvestLevel("hammer", 6);
+		TFCItems.steelHammer.setHarvestLevel("hammer", 4);
 	}
 
 	public void onClientLogin()

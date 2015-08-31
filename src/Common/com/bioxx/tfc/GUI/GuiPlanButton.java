@@ -13,7 +13,7 @@ public class GuiPlanButton extends GuiButton
 {
 	public ItemStack item;
 	private GuiPlanSelection screen;
-	protected static final RenderItem itemRenderer = new RenderItem();
+	protected static final RenderItem ITEM_RENDERER = new RenderItem();
 
 	public GuiPlanButton(int index, int xPos, int yPos, int width, int height, ItemStack ico, GuiPlanSelection gui, String s)
 	{
@@ -55,7 +55,7 @@ public class GuiPlanButton extends GuiButton
 	{
 		if (is != null)
 		{
-			itemRenderer.renderItemAndEffectIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), is, x, y);
+			ITEM_RENDERER.renderItemAndEffectIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), is, x, y);
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glEnable(GL11.GL_ALPHA_TEST);
 		}

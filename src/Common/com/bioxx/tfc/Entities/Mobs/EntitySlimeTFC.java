@@ -18,7 +18,7 @@ public class EntitySlimeTFC extends EntitySlime
 	@Override
 	protected void setSlimeSize(int par1)
 	{
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(par1*TFC_MobData.SlimeHealth);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(par1*TFC_MobData.SLIME_HEALTH);
 		this.setHealth(this.getMaxHealth());
 	}
 
@@ -80,6 +80,6 @@ public class EntitySlimeTFC extends EntitySlime
 	@Override
 	protected int getAttackStrength()
 	{
-		return this.getSlimeSize() * TFC_MobData.SlimeDamage;
+		return this.getSlimeSize() * TFC_MobData.SLIME_DAMAGE;
 	}
 }

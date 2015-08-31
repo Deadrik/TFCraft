@@ -65,9 +65,9 @@ public class ContainerChestTFC extends ContainerTFC
 		{
 			exceptions.add(ingot);
 		}
-		exceptions.add(TFCItems.Logs);
-		exceptions.add(Item.getItemFromBlock(TFCBlocks.Barrel));
-		exceptions.add(Item.getItemFromBlock(TFCBlocks.Vessel));
+		exceptions.add(TFCItems.logs);
+		exceptions.add(Item.getItemFromBlock(TFCBlocks.barrel));
+		exceptions.add(Item.getItemFromBlock(TFCBlocks.vessel));
 		return exceptions;
 	}
 

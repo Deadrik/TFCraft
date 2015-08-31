@@ -7,21 +7,24 @@ import com.bioxx.tfc.api.TFCOptions;
 
 public class TFC_Time
 {
-	public static String[] SEASONS = { TFC_Core.translate("gui.Calendar.EarlySpring"),
+	public static final String[] SEASONS =
+	{ TFC_Core.translate("gui.Calendar.EarlySpring"),
 		TFC_Core.translate("gui.Calendar.Spring"), TFC_Core.translate("gui.Calendar.LateSpring"),
 		TFC_Core.translate("gui.Calendar.EarlySummer"), TFC_Core.translate("gui.Calendar.Summer"),
 		TFC_Core.translate("gui.Calendar.LateSummer"), TFC_Core.translate("gui.Calendar.EarlyAutumn"),
 		TFC_Core.translate("gui.Calendar.Autumn"), TFC_Core.translate("gui.Calendar.LateAutumn"),
 		TFC_Core.translate("gui.Calendar.EarlyWinter"), TFC_Core.translate("gui.Calendar.Winter"),
 		TFC_Core.translate("gui.Calendar.LateWinter")};
-	public static String[] MONTHS  = { TFC_Core.translate("gui.Calendar.March"),
+	public static final String[] MONTHS =
+	{ TFC_Core.translate("gui.Calendar.March"),
 		TFC_Core.translate("gui.Calendar.April"),TFC_Core.translate("gui.Calendar.May"),
 		TFC_Core.translate("gui.Calendar.June"), TFC_Core.translate("gui.Calendar.July"),
 		TFC_Core.translate("gui.Calendar.August"), TFC_Core.translate("gui.Calendar.September"),
 		TFC_Core.translate("gui.Calendar.October"), TFC_Core.translate("gui.Calendar.November"),
 		TFC_Core.translate("gui.Calendar.December"), TFC_Core.translate("gui.Calendar.January"),
 		TFC_Core.translate("gui.Calendar.February")};
-	public static String[] DAYS = { TFC_Core.translate("gui.Calendar.Sunday"),
+	public static final String[] DAYS =
+	{ TFC_Core.translate("gui.Calendar.Sunday"),
 		TFC_Core.translate("gui.Calendar.Monday"), TFC_Core.translate("gui.Calendar.Tuesday"),
 		TFC_Core.translate("gui.Calendar.Wednesday"), TFC_Core.translate("gui.Calendar.Thursday"),
 		TFC_Core.translate("gui.Calendar.Friday"), TFC_Core.translate("gui.Calendar.Saturday")};
@@ -32,22 +35,22 @@ public class TFC_Time
 	public static int currentYear;
 	private static long time;
 
-	public static final int January = 10;
-	public static final int February = 11;
-	public static final int March = 0;
-	public static final int April = 1;
-	public static final int May = 2;
-	public static final int June = 3;
-	public static final int July = 4;
-	public static final int August = 5;
-	public static final int September = 6;
-	public static final int October = 7;
-	public static final int November = 8;
-	public static final int December = 9;
+	public static final int JANUARY = 10;
+	public static final int FEBRUARY = 11;
+	public static final int MARCH = 0;
+	public static final int APRIL = 1;
+	public static final int MAY = 2;
+	public static final int JUNE = 3;
+	public static final int JULY = 4;
+	public static final int AUGUST = 5;
+	public static final int SEPTEMBER = 6;
+	public static final int OCTOBER = 7;
+	public static final int NOVEMBER = 8;
+	public static final int DECEMBER = 9;
 
-	public static final long hourLength = 1000;
-	public static final int dayLength = 24000;
-	public static final int hoursInDay = (int) (dayLength / hourLength);
+	public static final long HOUR_LENGTH = 1000;
+	public static final int DAY_LENGTH = 24000;
+	public static final int HOURS_IN_DAY = (int) (DAY_LENGTH / HOUR_LENGTH);
 
 	/**
 	 * This is the year length ratio for use when your numbers are based on a 360 day year and 
@@ -62,20 +65,20 @@ public class TFC_Time
 
 	public static int daysInYear = TFCOptions.yearLength;
 	public static int daysInMonth = daysInYear/12;
-	public static long ticksInYear = daysInYear * dayLength;
-	public static long ticksInMonth = daysInMonth * dayLength;
+	public static long ticksInYear = daysInYear * DAY_LENGTH;
+	public static long ticksInMonth = daysInMonth * DAY_LENGTH;
 	public static long startTime = ticksInMonth * 3;
 
 	public static void setYearLength(int length)
 	{
 		daysInYear = length;
 		daysInMonth = daysInYear/12;
-		ticksInYear = daysInYear * dayLength;
-		ticksInMonth = daysInMonth * dayLength;
+		ticksInYear = daysInYear * DAY_LENGTH;
+		ticksInMonth = daysInMonth * DAY_LENGTH;
 		startTime = ticksInMonth * 3;
 	}
 
-	public static void UpdateTime(World world)
+	public static void updateTime(World world)
 	{
 		time = world.getWorldInfo().getWorldTime();
 
@@ -99,7 +102,7 @@ public class TFC_Time
 
 	public static String getDateStringFromHours(int tHours)
 	{
-		int tDays = tHours / hoursInDay;
+		int tDays = tHours / HOURS_IN_DAY;
 
 		int day = tDays % daysInMonth;
 		int tMonths = tDays / daysInMonth;
@@ -115,7 +118,7 @@ public class TFC_Time
 		}
 
 		// year changes at January, not March
-		if (month >= January) {
+		if (month >= JANUARY) {
 		    year += 1;
 		}
 
@@ -130,7 +133,7 @@ public class TFC_Time
 
 	public static int getHoursInMonth()
 	{
-		return hoursInDay*daysInMonth;
+		return HOURS_IN_DAY*daysInMonth;
 	}
 
 	public static String getSeason()
@@ -177,14 +180,14 @@ public class TFC_Time
 		long year = getYear();
 		long years = (ticksInYear)*year;
 		long years2 = time - years;
-		return (int) (years2/dayLength);
+		return (int) (years2/DAY_LENGTH);
 	}
 
 	public static int getDayOfYearFromTick(long tick)
 	{
 		long years = tick / (ticksInYear);
 		long years2 = tick - (ticksInYear * years);
-		return (int) (years2/dayLength);
+		return (int) (years2/DAY_LENGTH);
 	}
 
 	public static int getDayOfYearFromDays(long days)
@@ -223,12 +226,12 @@ public class TFC_Time
 
 	public static int getTotalDays()
 	{
-		return (int) Math.floor((float) time / (float) dayLength);
+		return (int) Math.floor((float) time / (float) DAY_LENGTH);
 	}
 
 	public static long getTotalHours()
 	{
-		return time / hourLength;
+		return time / HOUR_LENGTH;
 	}
 
 	public static long getTotalMonths()
@@ -249,17 +252,17 @@ public class TFC_Time
 
 	public static int getHourOfDayFromTotalHours(int th)
 	{
-		return (th + 6) % hoursInDay; //gives us the remainder, days start at 6:00
+		return (th + 6) % HOURS_IN_DAY; //gives us the remainder, days start at 6:00
 	}
 
 	public static int getDayFromTotalHours(int th)
 	{
-		return th / hoursInDay;
+		return th / HOURS_IN_DAY;
 	}
 
 	public static int getDayFromTotalHours(long th)
 	{
-		return (int) (th / hoursInDay);
+		return (int) (th / HOURS_IN_DAY);
 	}
 
 	public static boolean isSpring(int z)

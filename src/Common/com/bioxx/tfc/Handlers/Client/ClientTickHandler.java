@@ -28,7 +28,7 @@ public class ClientTickHandler// implements ITickHandler
 			World world = player.worldObj;
 
 			//Allow the client to increment time
-			TFC_Time.UpdateTime(world);
+			TFC_Time.updateTime(world);
 		}
 	}
 

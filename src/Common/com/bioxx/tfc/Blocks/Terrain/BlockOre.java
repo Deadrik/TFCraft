@@ -44,10 +44,10 @@ public class BlockOre extends BlockCollapsible
 		if(TFCOptions.enableDebugMode && world.isRemote)
 		{
 			int metadata = world.getBlockMetadata(x, y, z);
-			TerraFirmaCraft.log.info("Meta = " + (new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
+			TerraFirmaCraft.LOG.info("Meta = " + (new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
 			TEOre te = (TEOre)world.getTileEntity(x, y, z);
 			if(te != null)
-				TerraFirmaCraft.log.info("Ore  BaseID = " + te.baseBlockID + "| BaseMeta =" + te.baseBlockMeta);
+				TerraFirmaCraft.LOG.info("Ore  BaseID = " + te.baseBlockID + "| BaseMeta =" + te.baseBlockMeta);
 		}
 		return false;
 	}
@@ -103,7 +103,7 @@ public class BlockOre extends BlockCollapsible
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
 		for(int i = 0; i < blockNames.length; i++)
-			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "ores/"+ blockNames[i] + " Ore");
+			icons[i] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "ores/"+ blockNames[i] + " Ore");
 	}
 
 	@Override
@@ -128,9 +128,9 @@ public class BlockOre extends BlockCollapsible
 
 			ItemStack itemstack;
 			if(meta == 14 || meta == 15)
-				itemstack  = new ItemStack(TFCItems.Coal, 1 + world.rand.nextInt(2));
+				itemstack  = new ItemStack(TFCItems.coal, 1 + world.rand.nextInt(2));
 			else
-				itemstack  = new ItemStack(TFCItems.OreChunk, 1, damageDropped(ore));
+				itemstack  = new ItemStack(TFCItems.oreChunk, 1, damageDropped(ore));
 
 			dropBlockAsItem(world, x, y, z, itemstack);
 		}
@@ -155,9 +155,9 @@ public class BlockOre extends BlockCollapsible
 		{
 			ItemStack itemstack;
 			if (metadata == 14 || metadata == 15)
-				itemstack = new ItemStack(TFCItems.Coal);
+				itemstack = new ItemStack(TFCItems.coal);
 			else
-				itemstack = new ItemStack(TFCItems.OreChunk, 1, damageDropped(ore));
+				itemstack = new ItemStack(TFCItems.oreChunk, 1, damageDropped(ore));
 
 			ret.add(itemstack);
 		}
@@ -167,9 +167,9 @@ public class BlockOre extends BlockCollapsible
 	public static Item getDroppedItem(int meta)
 	{
 		if(meta == 14 || meta == 15)
-			return TFCItems.Coal;
+			return TFCItems.coal;
 		else
-			return TFCItems.SmallOreChunk;
+			return TFCItems.smallOreChunk;
 	}
 
 	@Override
@@ -196,9 +196,9 @@ public class BlockOre extends BlockCollapsible
 			int ore = getOreGrade(te, meta);
 
 			if(meta == 14 || meta == 15)
-				itemstack = new ItemStack(TFCItems.Coal, 1 + random.nextInt(2));
+				itemstack = new ItemStack(TFCItems.coal, 1 + random.nextInt(2));
 			else
-				itemstack = new ItemStack(TFCItems.OreChunk, 1, ore);
+				itemstack = new ItemStack(TFCItems.oreChunk, 1, ore);
 
 			dropBlockAsItem(world, x, y, z, itemstack);
 			onBlockDestroyedByExplosion(world, x, y, z, exp);

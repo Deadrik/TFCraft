@@ -32,8 +32,8 @@ public class ItemTerra extends Item implements ISize
 	protected EnumSize size = EnumSize.TINY;
 	protected EnumWeight weight = EnumWeight.LIGHT;
 
-	public String[] MetaNames;
-	public IIcon[] MetaIcons;
+	public String[] metaNames;
+	public IIcon[] metaIcons;
 	public String textureFolder;
 
 	private int craftingXP = 1;
@@ -41,14 +41,14 @@ public class ItemTerra extends Item implements ISize
 	public ItemTerra()
 	{
 		super();
-		this.setCreativeTab(TFCTabs.TFCMisc);
+		this.setCreativeTab(TFCTabs.TFC_MISC);
 		textureFolder = "";
 		setNoRepair();
 	}
 
 	public ItemTerra setMetaNames(String[] metanames)
 	{
-		MetaNames = metanames;
+		metaNames = metanames;
 		this.hasSubtypes = true;
 		return this;
 	}
@@ -68,9 +68,9 @@ public class ItemTerra extends Item implements ISize
 	@Override
 	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
-		if(MetaNames != null)
+		if(metaNames != null)
 		{
-			for(int i = 0; i < MetaNames.length; i++)
+			for(int i = 0; i < metaNames.length; i++)
 			{
 				list.add(new ItemStack(this, 1, i));
 			}
@@ -99,31 +99,31 @@ public class ItemTerra extends Item implements ISize
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		if(this.MetaNames == null)
+		if(this.metaNames == null)
 		{
 			if(this.iconString != null)
-				this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + this.getIconString());
+				this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + this.textureFolder + this.getIconString());
 			else
-				this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + this.getUnlocalizedName().replace("item.", ""));
+				this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + this.textureFolder + this.getUnlocalizedName().replace("item.", ""));
 		}
 		else
 		{
-			MetaIcons = new IIcon[MetaNames.length];
-			for(int i = 0; i < MetaNames.length; i++)
+			metaIcons = new IIcon[metaNames.length];
+			for(int i = 0; i < metaNames.length; i++)
 			{
-				MetaIcons[i] = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + MetaNames[i]);
+				metaIcons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + this.textureFolder + metaNames[i]);
 			}
 			
 			//This will prevent NullPointerException errors with other mods like NEI
-			this.itemIcon = MetaIcons[0];
+			this.itemIcon = metaIcons[0];
 		}
 	}
 
 	@Override
 	public IIcon getIconFromDamage(int i)
 	{
-		if(MetaNames != null && i < MetaNames.length)
-			return MetaIcons[i];
+		if(metaNames != null && i < metaNames.length)
+			return metaIcons[i];
 		else
 			return this.itemIcon;
 	}
@@ -131,8 +131,8 @@ public class ItemTerra extends Item implements ISize
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack)
 	{
-		if(MetaNames != null && itemstack.getItemDamage() < MetaNames.length)
-			return getUnlocalizedName().concat("." + MetaNames[itemstack.getItemDamage()]);
+		if(metaNames != null && itemstack.getItemDamage() < metaNames.length)
+			return getUnlocalizedName().concat("." + metaNames[itemstack.getItemDamage()]);
 		return super.getUnlocalizedName(itemstack);
 	}
 
@@ -192,7 +192,7 @@ public class ItemTerra extends Item implements ISize
 				is.getItem() instanceof ItemMetalSheet ||
 				is.getItem() instanceof ItemUnfinishedArmor ||
 				is.getItem() instanceof ItemBloom ||
-				is.getItem() == TFCItems.WroughtIronKnifeHead)
+				is.getItem() == TFCItems.wroughtIronKnifeHead)
 		{
 			if(TFC_ItemHeat.hasTemp(is))
 			{
@@ -232,7 +232,7 @@ public class ItemTerra extends Item implements ISize
 
 				if(meltTemp != -1)
 				{
-					if(is.getItem() == TFCItems.Stick)
+					if(is.getItem() == TFCItems.stick)
 						arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
 					else
 						arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp));

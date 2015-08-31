@@ -42,14 +42,14 @@ public class ItemFlatGeneric extends ItemTerra
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		if(this.MetaNames == null) {
-			this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", ""));
+		if(this.metaNames == null) {
+			this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", ""));
 		} else
 		{
-			icons = new IIcon[this.MetaNames.length];
-			for(int i = 0; i < this.MetaNames.length; i++)
+			icons = new IIcon[this.metaNames.length];
+			for(int i = 0; i < this.metaNames.length; i++)
 			{
-				this.icons[i] = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + MetaNames[i]);
+				this.icons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + this.textureFolder + metaNames[i]);
 			}
 		}
 	}
@@ -57,7 +57,7 @@ public class ItemFlatGeneric extends ItemTerra
 	@Override
 	public IIcon getIconFromDamage(int damage)
 	{
-		if(this.MetaNames == null) {
+		if(this.metaNames == null) {
 			return this.itemIcon;
 		} else {
 			return icons[damage];

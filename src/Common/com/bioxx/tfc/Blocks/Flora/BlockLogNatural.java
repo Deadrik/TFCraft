@@ -110,9 +110,9 @@ public class BlockLogNatural extends BlockTerra
 	{
 		for(int i = 0; i < woodNames.length; i++)
 		{
-			sideIcons[i] = reg.registerIcon(Reference.ModID + ":" + "wood/trees/" + woodNames[i] + " Log");
-			innerIcons[i] = reg.registerIcon(Reference.ModID + ":" + "wood/trees/" + woodNames[i] + " Log Top");
-			rotatedSideIcons[i] = reg.registerIcon(Reference.ModID + ":" + "wood/trees/" + woodNames[i] + " Log Side");
+			sideIcons[i] = reg.registerIcon(Reference.MOD_ID + ":" + "wood/trees/" + woodNames[i] + " Log");
+			innerIcons[i] = reg.registerIcon(Reference.MOD_ID + ":" + "wood/trees/" + woodNames[i] + " Log Top");
+			rotatedSideIcons[i] = reg.registerIcon(Reference.MOD_ID + ":" + "wood/trees/" + woodNames[i] + " Log Side");
 		}
 	}
 
@@ -127,9 +127,9 @@ public class BlockLogNatural extends BlockTerra
 		{
 			if(equip!=null)
 			{
-				for(int cnt = 0; cnt < Recipes.Axes.length && !isAxeorSaw; cnt++)
+				for(int cnt = 0; cnt < Recipes.axes.length && !isAxeorSaw; cnt++)
 				{
-					if(equip.getItem() == Recipes.Axes[cnt])
+					if(equip.getItem() == Recipes.axes[cnt])
 					{
 						isAxeorSaw = true;
 						if(cnt < 4)
@@ -143,16 +143,16 @@ public class BlockLogNatural extends BlockTerra
 						isAxeorSaw = true;
 					}
 				}*/
-				for(int cnt = 0; cnt < Recipes.Hammers.length && !isAxeorSaw; cnt++)
+				for(int cnt = 0; cnt < Recipes.hammers.length && !isAxeorSaw; cnt++)
 				{
-					if(equip.getItem() == Recipes.Hammers[cnt])
+					if(equip.getItem() == Recipes.hammers[cnt])
 						isHammer = true;
 				}
 
 				if (isAxeorSaw)
 				{
 					damage = -1;
-					ProcessTree(world, x, y, z, meta, equip);
+					processTree(world, x, y, z, meta, equip);
 
 					if (damage + equip.getItemDamage() > equip.getMaxDamage())
 					{
@@ -164,20 +164,20 @@ public class BlockLogNatural extends BlockTerra
 						equip.damageItem(damage, entityplayer);
 
 					int smallStack = logs % 16;
-					dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Logs, smallStack, damageDropped(meta)));
+					dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.logs, smallStack, damageDropped(meta)));
 					logs -= smallStack;
 
 					// In theory this section should never be triggered since the full stacks are dropped higher up the tree, but keeping it here just in case.
 					while (logs > 0)
 					{
-						dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Logs, 16, damageDropped(meta)));
+						dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.logs, 16, damageDropped(meta)));
 						logs -= 16;
 					}
 
 				}
 				else if (isHammer)
 				{
-					EntityItem item = new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, new ItemStack(TFCItems.Stick, 1 + world.rand.nextInt(3)));
+					EntityItem item = new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, new ItemStack(TFCItems.stick, 1 + world.rand.nextInt(3)));
 					world.spawnEntityInWorld(item);
 				}
 			}
@@ -208,17 +208,17 @@ public class BlockLogNatural extends BlockTerra
 	@Override
 	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion ex)
 	{
-		ProcessTree(world, x, y, z, world.getBlockMetadata(x, y, z), null);
+		processTree(world, x, y, z, world.getBlockMetadata(x, y, z), null);
 	}
 
-	private void ProcessTree(World world, int x, int y, int z, ItemStack is)
+	private void processTree(World world, int x, int y, int z, ItemStack is)
 	{
 		//TODO Rewrite the treecap algorithm using a list of coords instead of the ugly array. Shoudl also use a maxmium list size to prevent 
 		//any memory issues and should take shortcuts to find the top of the tree and search down
 	}
 
 	@Deprecated
-	private void ProcessTree(World world, int x, int y, int z, int meta, ItemStack is)
+	private void processTree(World world, int x, int y, int z, int meta, ItemStack is)
 	{
 		boolean[][][] checkArray = new boolean[searchDist * 2 + 1][256][searchDist * 2 + 1];
 		scanLogs(world, x, y, z, meta, checkArray, (byte)0, (byte)0, (byte)0, is);
@@ -227,7 +227,7 @@ public class BlockLogNatural extends BlockTerra
 	@Override
 	public Item getItemDropped(int i, Random random, int j)
 	{
-		return TFCItems.Logs;
+		return TFCItems.logs;
 	}
 
 	@Override
@@ -249,7 +249,7 @@ public class BlockLogNatural extends BlockTerra
 		if(!check)
 		{
 			world.setBlockToAir(x, y, z);
-			dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Logs, 1, meta));
+			dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.logs, 1, meta));
 		}
 	}
 
@@ -288,7 +288,7 @@ public class BlockLogNatural extends BlockTerra
 						logs++;
 					if (logs >= 16)
 					{
-						dropBlockAsItem(world, i + x, j + y, k + z, new ItemStack(TFCItems.Logs, 16, damageDropped(meta)));
+						dropBlockAsItem(world, i + x, j + y, k + z, new ItemStack(TFCItems.logs, 16, damageDropped(meta)));
 						logs -= 16;						
 					}
 					notifyLeaves(world, i + x, j + y, k + z);
@@ -300,7 +300,7 @@ public class BlockLogNatural extends BlockTerra
 				logs++;
 				if (logs >= 16)
 				{
-					dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.Logs, 16, damageDropped(meta)));
+					dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.logs, 16, damageDropped(meta)));
 					logs -= 16;						
 				}
 				notifyLeaves(world, i + x, j + y, k + z);

@@ -69,7 +69,7 @@ public class BlockHotWaterStatic extends BlockLiquidStatic
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		icons = new IIcon[]{registerer.registerIcon(Reference.ModID + ":" +"water_still"), registerer.registerIcon(Reference.ModID + ":" +"water_flow")};
+		icons = new IIcon[]{registerer.registerIcon(Reference.MOD_ID + ":" +"water_still"), registerer.registerIcon(Reference.MOD_ID + ":" +"water_flow")};
 		this.getFluid().setIcons(icons[0], icons[1]);
 	}
 

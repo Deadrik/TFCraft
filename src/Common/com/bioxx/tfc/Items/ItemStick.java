@@ -13,7 +13,7 @@ public class ItemStick extends ItemTerra
 		super();
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.setCreativeTab(TFCTabs.TFCMaterials);
+		this.setCreativeTab(TFCTabs.TFC_MATERIALS);
 	}
 
 	@Override

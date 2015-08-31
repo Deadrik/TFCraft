@@ -87,18 +87,18 @@ public abstract class NetworkTileEntity extends TileEntity
 	{
 		int dim = worldObj.provider.dimensionId;
 		if(worldObj.isRemote)
-			TerraFirmaCraft.packetPipeline.sendToServer(this.createDataPacket());
+			TerraFirmaCraft.PACKET_PIPELINE.sendToServer(this.createDataPacket());
 		else
-			TerraFirmaCraft.packetPipeline.sendToAllAround(this.createDataPacket(), 
+			TerraFirmaCraft.PACKET_PIPELINE.sendToAllAround(this.createDataPacket(), 
 					new TargetPoint(dim, xCoord,yCoord,zCoord,broadcastRange));
 	}
 
 	public void broadcastPacketInRange(AbstractPacket packet)
 	{
 		if(worldObj.isRemote)
-			TerraFirmaCraft.packetPipeline.sendToServer(packet);
+			TerraFirmaCraft.PACKET_PIPELINE.sendToServer(packet);
 		else
-			TerraFirmaCraft.packetPipeline.sendToAllAround(packet, 
+			TerraFirmaCraft.PACKET_PIPELINE.sendToAllAround(packet, 
 					new TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,broadcastRange));
 	}
 

@@ -43,7 +43,7 @@ public class BlockAnvil extends BlockTerraContainer
 	public BlockAnvil()
 	{
 		super(Material.iron);
-		this.setCreativeTab(TFCTabs.TFCDevices);
+		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 	}
 
 	public BlockAnvil(int offset)
@@ -57,13 +57,13 @@ public class BlockAnvil extends BlockTerraContainer
 	@Override
 	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List)
 	{
-		if(this == TFCBlocks.Anvil)
+		if(this == TFCBlocks.anvil)
 		{
 			for(int i = 1; i < 8; i++)
 				par3List.add(new ItemStack(this, 1, i));
 		}
 
-		if(this == TFCBlocks.Anvil2)
+		if(this == TFCBlocks.anvil2)
 		{
 			for(int i = 0; i < 3; i++)
 				par3List.add(new ItemStack(this, 1, i));
@@ -106,7 +106,7 @@ public class BlockAnvil extends BlockTerraContainer
 		if (te instanceof TEAnvil)
 		{
 			TEAnvil teAnvil = (TEAnvil) te;
-			if (teAnvil.AnvilTier != AnvilReq.STONE.Tier || this == TFCBlocks.Anvil2)
+			if (teAnvil.anvilTier != AnvilReq.STONE.Tier || this == TFCBlocks.anvil2)
 			{
 				if(direction == 0) 
 					return AxisAlignedBB.getBoundingBox(par2 + 0.2, (double)par3 + 0, (double)par4 + 0, par2 + 0.8, par3 + 0.6, (double)par4 + 1);
@@ -128,7 +128,7 @@ public class BlockAnvil extends BlockTerraContainer
 		int direction = getDirectionFromMetadata(meta);
 		TEAnvil te = (TEAnvil)world.getTileEntity(x, y, z);
 
-		if(te.AnvilTier != AnvilReq.STONE.Tier)
+		if(te.anvilTier != AnvilReq.STONE.Tier)
 		{
 			if(direction == 0)
 			{
@@ -158,7 +158,7 @@ public class BlockAnvil extends BlockTerraContainer
 		int direction = getDirectionFromMetadata(meta);
 		TEAnvil te = (TEAnvil)bAccess.getTileEntity(x, y, z);
 
-		if(te.AnvilTier != AnvilReq.STONE.Tier)
+		if(te.anvilTier != AnvilReq.STONE.Tier)
 		{
 			if(direction == 0)
 				this.setBlockBounds(0.2f, 0, 0, 0.8f, 0.6f, 1);
@@ -176,7 +176,7 @@ public class BlockAnvil extends BlockTerraContainer
 	{
 		int meta = getAnvilTypeFromMeta(j);
 
-		if (j == 0 && this == TFCBlocks.Anvil)
+		if (j == 0 && this == TFCBlocks.anvil)
 		{
 			return stoneAnvilIcon;
 		}
@@ -198,14 +198,14 @@ public class BlockAnvil extends BlockTerraContainer
 	@Override
 	public int getRenderType()
 	{
-		return TFCBlocks.AnvilRenderId;
+		return TFCBlocks.anvilRenderId;
 	}
 
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
 		int type = BlockAnvil.getAnvilTypeFromMeta(l);
-		if(this == TFCBlocks.Anvil)
+		if(this == TFCBlocks.anvil)
 		{
 			if(type == 0)
 				return;
@@ -225,7 +225,7 @@ public class BlockAnvil extends BlockTerraContainer
 	{
 		if (!par1World.isRemote && par1World.getGameRules().getGameRuleBooleanValue("doTileDrops"))
 		{
-			if(is.getItemDamage() == 0 && this == TFCBlocks.Anvil)
+			if(is.getItemDamage() == 0 && this == TFCBlocks.anvil)
 				return;
 			float f = 0.7F;
 			double d0 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
@@ -262,10 +262,10 @@ public class BlockAnvil extends BlockTerraContainer
 		world.setBlockMetadataWithNotify(i, j, k, byte0, 3);
 
 		TEAnvil te = (TEAnvil)world.getTileEntity(i, j, k);
-		if(this == TFCBlocks.Anvil)
-			te.AnvilTier = AnvilReq.getReqFromInt(meta).Tier;
-		else if(this == TFCBlocks.Anvil2)
-			te.AnvilTier = AnvilReq.getReqFromInt2(meta).Tier;
+		if(this == TFCBlocks.anvil)
+			te.anvilTier = AnvilReq.getReqFromInt(meta).Tier;
+		else if(this == TFCBlocks.anvil2)
+			te.anvilTier = AnvilReq.getReqFromInt2(meta).Tier;
 	}
 
 	@Override
@@ -340,21 +340,21 @@ public class BlockAnvil extends BlockTerraContainer
 		textureMapSide = new IIcon[anvilId == 0 ? 8 : 3];
 		for(int i = (anvilId == 0 ? 1 : 0); i < (anvilId == 0 ? 8 : 3); i++)
 		{
-			textureMapTop[i] = registerer.registerIcon(Reference.ModID + ":" + "devices/Anvil_" + (i+anvilId) + "_Top");
-			textureMapSide[i] = registerer.registerIcon(Reference.ModID + ":" + "devices/Anvil_" + (i+anvilId) + "_Side");
+			textureMapTop[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "devices/Anvil_" + (i+anvilId) + "_Top");
+			textureMapSide[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "devices/Anvil_" + (i+anvilId) + "_Side");
 		}
 
-		stoneAnvilIcon = registerer.registerIcon(Reference.ModID + ":" + "rocks/" + "Gabbro Raw");
+		stoneAnvilIcon = registerer.registerIcon(Reference.MOD_ID + ":" + "rocks/" + "Gabbro Raw");
 
-		TFC_Textures.AnvilHit = registerer.registerIcon(Reference.ModID + ":" + "Anvil Hit");
-		TFC_Textures.AnvilHitHeavy = registerer.registerIcon(Reference.ModID + ":" + "Anvil Hit Heavy");
-		TFC_Textures.AnvilHitMedium = registerer.registerIcon(Reference.ModID + ":" + "Anvil Hit Medium");
-		TFC_Textures.AnvilHitLight = registerer.registerIcon(Reference.ModID + ":" + "Anvil Hit Light");
-		TFC_Textures.AnvilDraw = registerer.registerIcon(Reference.ModID + ":" + "Anvil Draw");
-		TFC_Textures.AnvilPunch = registerer.registerIcon(Reference.ModID + ":" + "Anvil Punch");
-		TFC_Textures.AnvilBend = registerer.registerIcon(Reference.ModID + ":" + "Anvil Bend");
-		TFC_Textures.AnvilUpset = registerer.registerIcon(Reference.ModID + ":" + "Anvil Upset");
-		TFC_Textures.AnvilShrink = registerer.registerIcon(Reference.ModID + ":" + "Anvil Shrink");
+		TFC_Textures.anvilHit = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Hit");
+		TFC_Textures.anvilHitHeavy = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Hit Heavy");
+		TFC_Textures.anvilHitMedium = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Hit Medium");
+		TFC_Textures.anvilHitLight = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Hit Light");
+		TFC_Textures.anvilDraw = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Draw");
+		TFC_Textures.anvilPunch = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Punch");
+		TFC_Textures.anvilBend = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Bend");
+		TFC_Textures.anvilUpset = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Upset");
+		TFC_Textures.anvilShrink = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Shrink");
 	}
 
 	@Override

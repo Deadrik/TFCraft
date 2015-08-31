@@ -12,7 +12,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 {
-	public static boolean RenderWoodSupportBeamH(Block block, int i, int j, int k, RenderBlocks renderblocks)
+	public static boolean renderWoodSupportBeamH(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		IBlockAccess blockAccess = renderblocks.blockAccess;
 
@@ -178,7 +178,7 @@ public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 		return true;
 	}
 
-	public static boolean RenderWoodSupportBeamV(Block block, int i, int j, int k, RenderBlocks renderblocks)
+	public static boolean renderWoodSupportBeamV(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		IBlockAccess blockAccess = renderblocks.blockAccess;
 
@@ -352,11 +352,11 @@ public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == TFCBlocks.woodSupportRenderIdH)
 		{
-			return RenderWoodSupportBeamH(block, i, j, k, renderer);
+			return renderWoodSupportBeamH(block, i, j, k, renderer);
 		}
 		else if (modelId == TFCBlocks.woodSupportRenderIdV)
 		{
-			return RenderWoodSupportBeamV(block, i, j, k, renderer);
+			return renderWoodSupportBeamV(block, i, j, k, renderer);
 		}
 		return false;
 	}

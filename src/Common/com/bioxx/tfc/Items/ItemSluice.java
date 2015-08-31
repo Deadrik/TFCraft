@@ -55,12 +55,12 @@ public class ItemSluice extends ItemTerra
 			{
 				byte0 = 1;
 			}
-			if(((BlockSluice)TFCBlocks.Sluice).canPlace(world, i, j+1, k,r))
+			if(((BlockSluice)TFCBlocks.sluice).canPlace(world, i, j+1, k,r))
 			{
-				world.setBlock(i, j+1, k, TFCBlocks.Sluice, r, 0x2);
-				if(world.getBlock(i, j+1, k) == TFCBlocks.Sluice)
+				world.setBlock(i, j+1, k, TFCBlocks.sluice, r, 0x2);
+				if(world.getBlock(i, j+1, k) == TFCBlocks.sluice)
 				{
-					world.setBlock(i + byte0, j+1, k + byte1, TFCBlocks.Sluice, r + 8, 0x2);
+					world.setBlock(i + byte0, j+1, k + byte1, TFCBlocks.sluice, r + 8, 0x2);
 					if (!entityplayer.capabilities.isCreativeMode)
 						entityplayer.inventory.decrStackSize(entityplayer.inventory.currentItem, 1);
 				}

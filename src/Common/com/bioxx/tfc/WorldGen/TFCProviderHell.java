@@ -16,7 +16,7 @@ public class TFCProviderHell extends TFCProvider
 	@Override
 	protected void registerWorldChunkManager()
 	{
-		worldChunkMgr = new TFCWorldChunkManagerHell(TFCBiome.hell, 1F, 1F, this.worldObj);
+		worldChunkMgr = new TFCWorldChunkManagerHell(TFCBiome.HELL, 1F, 1F, this.worldObj);
 		if(worldObj.isRemote)
 			TFC_Climate.worldPair.put(worldObj, new WorldCacheManager(worldObj));
 		else

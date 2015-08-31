@@ -21,7 +21,7 @@ public class BlockPeat extends BlockTerra
 	public BlockPeat()
 	{
 		super(Material.ground);
-		this.setCreativeTab(TFCTabs.TFCBuilding);
+		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -37,7 +37,7 @@ public class BlockPeat extends BlockTerra
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		blockIcon = registerer.registerIcon(Reference.ModID + ":" + "soil/Peat");
+		blockIcon = registerer.registerIcon(Reference.MOD_ID + ":" + "soil/Peat");
 	}
 
 	@Override
@@ -53,6 +53,6 @@ public class BlockPeat extends BlockTerra
 	@SideOnly(Side.CLIENT)
 	public String getItemIconName()
 	{
-		return Reference.ModID + ":" + "peat";
+		return Reference.MOD_ID + ":" + "peat";
 	}
 }

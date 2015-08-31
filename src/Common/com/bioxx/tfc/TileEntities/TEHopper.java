@@ -129,9 +129,9 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	 * Returns the stack in slot i
 	 */
 	@Override
-	public ItemStack getStackInSlot(int p_70301_1_)
+	public ItemStack getStackInSlot(int i)
 	{
-		return this.storage[p_70301_1_];
+		return this.storage[i];
 	}
 
 	/**
@@ -139,25 +139,25 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	 * new stack.
 	 */
 	@Override
-	public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_)
+	public ItemStack decrStackSize(int i, int amount)
 	{
-		if (this.storage[p_70298_1_] != null)
+		if (this.storage[i] != null)
 		{
 			ItemStack itemstack;
 
-			if (this.storage[p_70298_1_].stackSize <= p_70298_2_)
+			if (this.storage[i].stackSize <= amount)
 			{
-				itemstack = this.storage[p_70298_1_];
-				this.storage[p_70298_1_] = null;
+				itemstack = this.storage[i];
+				this.storage[i] = null;
 				return itemstack;
 			}
 			else
 			{
-				itemstack = this.storage[p_70298_1_].splitStack(p_70298_2_);
+				itemstack = this.storage[i].splitStack(amount);
 
-				if (this.storage[p_70298_1_].stackSize == 0)
+				if (this.storage[i].stackSize == 0)
 				{
-					this.storage[p_70298_1_] = null;
+					this.storage[i] = null;
 				}
 
 				return itemstack;
@@ -174,12 +174,12 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	 * like when you close a workbench GUI.
 	 */
 	@Override
-	public ItemStack getStackInSlotOnClosing(int p_70304_1_)
+	public ItemStack getStackInSlotOnClosing(int i)
 	{
-		if (this.storage[p_70304_1_] != null)
+		if (this.storage[i] != null)
 		{
-			ItemStack itemstack = this.storage[p_70304_1_];
-			this.storage[p_70304_1_] = null;
+			ItemStack itemstack = this.storage[i];
+			this.storage[i] = null;
 			return itemstack;
 		}
 		else
@@ -192,13 +192,13 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	 * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
 	 */
 	@Override
-	public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_)
+	public void setInventorySlotContents(int i, ItemStack is)
 	{
-		this.storage[p_70299_1_] = p_70299_2_;
+		this.storage[i] = is;
 
-		if (p_70299_2_ != null && p_70299_2_.stackSize > this.getInventoryStackLimit())
+		if (is != null && is.stackSize > this.getInventoryStackLimit())
 		{
-			p_70299_2_.stackSize = this.getInventoryStackLimit();
+			is.stackSize = this.getInventoryStackLimit();
 		}
 	}
 
@@ -220,9 +220,9 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		return this.customName != null && this.customName.length() > 0;
 	}
 
-	public void setCustomName(String p_145886_1_)
+	public void setCustomName(String s)
 	{
-		this.customName = p_145886_1_;
+		this.customName = s;
 	}
 
 	/**
@@ -238,9 +238,9 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	 * Do not make give this method the name canInteractWith because it clashes with Container
 	 */
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer p_70300_1_)
+	public boolean isUseableByPlayer(EntityPlayer p)
 	{
-		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : p_70300_1_.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : p.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -253,7 +253,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	 * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
 	 */
 	@Override
-	public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_)
+	public boolean isItemValidForSlot(int i, ItemStack is)
 	{
 		return true;
 	}
@@ -308,8 +308,8 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 				{
 					TFC_Core.setBlockToAirWithDrops(worldObj, xCoord, yCoord+1, zCoord);
 				}
-				else if (blockAbove == TFCBlocks.StoneIgInSmooth || blockAbove == TFCBlocks.StoneSedSmooth ||
-						blockAbove == TFCBlocks.StoneMMSmooth || blockAbove == TFCBlocks.StoneIgExSmooth)
+				else if (blockAbove == TFCBlocks.stoneIgInSmooth || blockAbove == TFCBlocks.stoneSedSmooth ||
+						blockAbove == TFCBlocks.stoneMMSmooth || blockAbove == TFCBlocks.stoneIgExSmooth)
 				{
 					pressBlock = new ItemStack(blockAbove, 1, worldObj.getBlockMetadata(xCoord, yCoord+1, zCoord));
 					worldObj.setBlockToAir(xCoord, yCoord+1, zCoord);
@@ -354,7 +354,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		int amount = 0;
 		for(int i = 0; i < storage.length; i++)
 		{
-			if(storage[i] != null && storage[i].getItem() == TFCItems.Olive)
+			if(storage[i] != null && storage[i].getItem() == TFCItems.olive)
 			{
 				amount += Math.floor(Food.getWeight(storage[i]));
 			}
@@ -366,7 +366,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	{
 		for(int i = 0; i < storage.length; i++)
 		{
-			if(storage[i] != null && storage[i].getItem() == TFCItems.Olive)
+			if(storage[i] != null && storage[i].getItem() == TFCItems.olive)
 			{
 				return storage[i];
 			}
@@ -494,17 +494,17 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		}
 	}*/
 
-	private boolean func_152102_a(IInventory p_152102_1_, int p_152102_2_)
+	/*private boolean func_152102_a(IInventory inv, int side)
 	{
-		if (p_152102_1_ instanceof ISidedInventory && p_152102_2_ > -1)
+		if (inv instanceof ISidedInventory && side > -1)
 		{
-			ISidedInventory isidedinventory = (ISidedInventory)p_152102_1_;
-			int[] aint = isidedinventory.getAccessibleSlotsFromSide(p_152102_2_);
-
+			ISidedInventory isidedinventory = (ISidedInventory)inv;
+			int[] aint = isidedinventory.getAccessibleSlotsFromSide(side);
+	
 			for (int l = 0; l < aint.length; ++l)
 			{
 				ItemStack itemstack1 = isidedinventory.getStackInSlot(aint[l]);
-
+	
 				if (itemstack1 == null || itemstack1.stackSize != itemstack1.getMaxStackSize())
 				{
 					return false;
@@ -513,21 +513,21 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		}
 		else
 		{
-			int j = p_152102_1_.getSizeInventory();
-
+			int j = inv.getSizeInventory();
+	
 			for (int k = 0; k < j; ++k)
 			{
-				ItemStack itemstack = p_152102_1_.getStackInSlot(k);
-
+				ItemStack itemstack = inv.getStackInSlot(k);
+	
 				if (itemstack == null || itemstack.stackSize != itemstack.getMaxStackSize())
 				{
 					return false;
 				}
 			}
 		}
-
+	
 		return true;
-	}
+	}*/
 
 	private static boolean isSidedInvFull(IInventory inv, int side)
 	{
@@ -633,62 +633,62 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		return false;
 	}*/
 
-	public static boolean FeedLooseItem(IInventory hopper, EntityItem p_145898_1_)
+	/*public static boolean feedLooseItem(IInventory hopper, EntityItem item)
 	{
 		boolean flag = false;
-
-		if (p_145898_1_ == null)
+	
+		if (item == null)
 		{
 			return false;
 		}
 		else
 		{
-			ItemStack itemstack = p_145898_1_.getEntityItem().copy();
+			ItemStack itemstack = item.getEntityItem().copy();
 			ItemStack itemstack1 = func_145889_a(hopper, itemstack, -1);
-
+	
 			if (itemstack1 != null && itemstack1.stackSize != 0)
 			{
-				p_145898_1_.setEntityItemStack(itemstack1);
+				item.setEntityItemStack(itemstack1);
 			}
 			else
 			{
 				flag = true;
-				p_145898_1_.setDead();
+				item.setDead();
 			}
-
+	
 			return flag;
 		}
-	}
+	}*/
 
-	public static ItemStack func_145889_a(IInventory output, ItemStack is, int p_145889_2_)
+	/*public static ItemStack func_145889_a(IInventory output, ItemStack is, int side)
 	{
-		if (output instanceof ISidedInventory && p_145889_2_ > -1)
+		if (output instanceof ISidedInventory && side > -1)
 		{
 			ISidedInventory isidedinventory = (ISidedInventory)output;
-			int[] aint = isidedinventory.getAccessibleSlotsFromSide(p_145889_2_);
-
+			int[] aint = isidedinventory.getAccessibleSlotsFromSide(side);
+	
 			for (int l = 0; l < aint.length && is != null && is.stackSize > 0; ++l)
 			{
-				is = feedItem(output, is, aint[l], p_145889_2_);
+				is = feedItem(output, is, aint[l], side);
 			}
 		}
 		else
 		{
 			int j = output.getSizeInventory();
-
+	
 			for (int k = 0; k < j && is != null && is.stackSize > 0; ++k)
 			{
-				is = feedItem(output, is, k, p_145889_2_);
+				is = feedItem(output, is, k, side);
 			}
 		}
-
+	
 		if (is != null && is.stackSize == 0)
 		{
 			is = null;
 		}
-
+	
 		return is;
-	}
+	}*/
 
 	private static boolean canFeedItemStack(IInventory inv, ItemStack is, int slot, int side)
 	{
@@ -757,14 +757,14 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		return searchForOutputInventory(this.getWorldObj(), this.xCoord + Facing.offsetsXForSide[i], this.yCoord + Facing.offsetsYForSide[i], this.zCoord + Facing.offsetsZForSide[i]);
 	}
 
-	public static IInventory getInputInventory(IHopper p_145884_0_)
+	public static IInventory getInputInventory(IHopper hopper)
 	{
-		return searchForOutputInventory(p_145884_0_.getWorldObj(), p_145884_0_.getXPos(), p_145884_0_.getYPos() + 1.0D, p_145884_0_.getZPos());
+		return searchForOutputInventory(hopper.getWorldObj(), hopper.getXPos(), hopper.getYPos() + 1.0D, hopper.getZPos());
 	}
 
-	public static EntityItem searchForLooseInput(World p_145897_0_, double p_145897_1_, double p_145897_3_, double p_145897_5_)
+	public static EntityItem searchForLooseInput(World world, double x, double y, double z)
 	{
-		List list = p_145897_0_.selectEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(p_145897_1_, p_145897_3_, p_145897_5_, p_145897_1_ + 1.0D, p_145897_3_ + 1.0D, p_145897_5_ + 1.0D), IEntitySelector.selectAnything);
+		List list = world.selectEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D), IEntitySelector.selectAnything);
 		return !list.isEmpty() ? (EntityItem) list.get(0) : null;
 	}
 
@@ -805,10 +805,10 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		return iinventory;
 	}
 
-	private static boolean canMergeStacks(ItemStack p_145894_0_, ItemStack p_145894_1_)
+	private static boolean canMergeStacks(ItemStack stack1, ItemStack stack2)
 	{
-		return p_145894_0_.getItem() != p_145894_1_.getItem() ? false : p_145894_0_.getItemDamage() != p_145894_1_.getItemDamage() ? false
-				: p_145894_0_.stackSize > p_145894_0_.getMaxStackSize() ? false : ItemStack.areItemStackTagsEqual(p_145894_0_, p_145894_1_);
+		return stack1.getItem() != stack2.getItem() ? false : stack1.getItemDamage() != stack2.getItemDamage() ? false
+				: stack1.stackSize > stack1.getMaxStackSize() ? false : ItemStack.areItemStackTagsEqual(stack1, stack2);
 	}
 
 	@Override

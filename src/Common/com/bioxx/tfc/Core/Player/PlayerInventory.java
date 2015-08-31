@@ -23,7 +23,7 @@ public class PlayerInventory
 {
 	public static int invXSize = 176;
 	public static int invYSize = 87;
-	private static ResourceLocation invTexture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_inventory_lower.png");
+	private static ResourceLocation invTexture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_inventory_lower.png");
 	public static InventoryCrafting containerInv;
 	private static int index;
 

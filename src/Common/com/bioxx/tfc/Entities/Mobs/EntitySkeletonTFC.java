@@ -34,7 +34,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 {
 	private final EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 1.0D, 20, 120, 15.0F);
 	private final EntityAIAttackOnCollide aiAttackOnCollide = new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.2D, false);
-	private static final float[] armorProbability = new float[] {0.0F, 0.5F, 0.10F, 0.15F};
+	private static final float[] ARMOR_PROBABILITY = new float[] {0.0F, 0.5F, 0.10F, 0.15F};
 
 	public EntitySkeletonTFC(World par1World)
 	{
@@ -58,7 +58,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 		this.tasks.removeTask(this.aiArrowAttack);
 		ItemStack itemstack = this.getHeldItem();
 
-		if (itemstack != null && (itemstack.getItem() == TFCItems.Bow || itemstack.getItem() instanceof ItemJavelin))
+		if (itemstack != null && (itemstack.getItem() == TFCItems.bow || itemstack.getItem() instanceof ItemJavelin))
 		{
 			this.tasks.addTask(4, this.aiArrowAttack);
 		}
@@ -144,7 +144,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.SkeletonHealth);//MaxHealth
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.SKELETON_HEALTH);//MaxHealth
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
 	}
 
@@ -265,7 +265,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 			if(this.getHeldItem().getItem() instanceof ItemCustomBow)
 			{
 				amnt = this.rand.nextInt(3 + par2);
-				this.dropItem(TFCItems.Arrow, amnt);
+				this.dropItem(TFCItems.arrow, amnt);
 			}
 		}
 
@@ -317,7 +317,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 		superAddRandomArmor();
 		if(this.getSkeletonType() == 0)
 		{
-			this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.Bow));
+			this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.bow));
 		}
 		else if(this.getSkeletonType() == 1)
 		{
@@ -330,15 +330,15 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 				++i;
 
 			if(i == 0)
-				this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.SedStoneJavelin));
+				this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.sedStoneJavelin));
 			else if(i == 1)
-				this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.IgExStoneJavelin));
+				this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.igExStoneJavelin));
 			else if(i == 2)
-				this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.CopperJavelin));
+				this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.copperJavelin));
 			else if(i == 3)
-				this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.BronzeJavelin));
+				this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.bronzeJavelin));
 			else if(i == 4)
-				this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.WroughtIronJavelin));
+				this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.wroughtIronJavelin));
 		}
 	}
 
@@ -353,51 +353,51 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 		{
 		case 4:
 			if (par1 == 0)
-				return TFCItems.LeatherHelmet;
+				return TFCItems.leatherHelmet;
 			else if (par1 == 1)
-				return TFCItems.CopperHelmet;
+				return TFCItems.copperHelmet;
 			else if (par1 == 2)
-				return TFCItems.BronzeHelmet;
+				return TFCItems.bronzeHelmet;
 			else if (par1 == 3)
-				return TFCItems.WroughtIronHelmet;
+				return TFCItems.wroughtIronHelmet;
 			else if (par1 == 4)
-				return TFCItems.SteelHelmet;
+				return TFCItems.steelHelmet;
 			break;
 		case 3:
 			if (par1 == 0)
-				return TFCItems.LeatherChestplate;
+				return TFCItems.leatherChestplate;
 			else if (par1 == 1)
-				return TFCItems.CopperChestplate;
+				return TFCItems.copperChestplate;
 			else if (par1 == 2)
-				return TFCItems.BronzeChestplate;
+				return TFCItems.bronzeChestplate;
 			else if (par1 == 3)
-				return TFCItems.WroughtIronChestplate;
+				return TFCItems.wroughtIronChestplate;
 			else if (par1 == 4)
-				return TFCItems.SteelChestplate;
+				return TFCItems.steelChestplate;
 			break;
 		case 2:
 			if (par1 == 0)
-				return TFCItems.LeatherLeggings;
+				return TFCItems.leatherLeggings;
 			else if (par1 == 1)
-				return TFCItems.CopperGreaves;
+				return TFCItems.copperGreaves;
 			else if (par1 == 2)
-				return TFCItems.BronzeGreaves;
+				return TFCItems.bronzeGreaves;
 			else if (par1 == 3)
-				return TFCItems.WroughtIronGreaves;
+				return TFCItems.wroughtIronGreaves;
 			else if (par1 == 4)
-				return TFCItems.SteelGreaves;
+				return TFCItems.steelGreaves;
 			break;
 		case 1:
 			if (par1 == 0)
-				return TFCItems.LeatherBoots;
+				return TFCItems.leatherBoots;
 			else if (par1 == 1)
-				return TFCItems.CopperBoots;
+				return TFCItems.copperBoots;
 			else if (par1 == 2)
-				return TFCItems.BronzeBoots;
+				return TFCItems.bronzeBoots;
 			else if (par1 == 3)
-				return TFCItems.WroughtIronBoots;
+				return TFCItems.wroughtIronBoots;
 			else if (par1 == 4)
-				return TFCItems.SteelBoots;
+				return TFCItems.steelBoots;
 			break;
 		default:
 			return null;
@@ -408,7 +408,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 
 	private void superAddRandomArmor()
 	{
-		if (this.rand.nextFloat() < armorProbability[this.worldObj.difficultySetting.getDifficultyId()])
+		if (this.rand.nextFloat() < ARMOR_PROBABILITY[this.worldObj.difficultySetting.getDifficultyId()])
 		{
 			int i = this.rand.nextInt(2);
 			float f = this.worldObj.difficultySetting == EnumDifficulty.HARD ? 0.1F : 0.25F;
@@ -530,7 +530,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 		int z = MathHelper.floor_double(this.posZ);
 		Block b = this.worldObj.getBlock(x, y, z);
 
-		if(b == TFCBlocks.Leaves || b == TFCBlocks.Leaves2 || b == TFCBlocks.Thatch)
+		if(b == TFCBlocks.leaves || b == TFCBlocks.leaves2 || b == TFCBlocks.thatch)
 			return false;
 
 		return super.getCanSpawnHere();

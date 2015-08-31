@@ -87,8 +87,8 @@ public class TEForge extends TEFireEntity implements IInventory
 	{
 		if(fuelTimeLeft >= 0)
 		{
-			if(worldObj.getBlock(x,y,z) != TFCBlocks.Smoke)
-				worldObj.setBlock(x, y, z, TFCBlocks.Smoke);
+			if(worldObj.getBlock(x,y,z) != TFCBlocks.smoke)
+				worldObj.setBlock(x, y, z, TFCBlocks.smoke);
 		}
 		else
 		{
@@ -110,17 +110,17 @@ public class TEForge extends TEFireEntity implements IInventory
 	{
 	}
 
-	public void combineMetals(ItemStack InputItem, ItemStack DestItem)
+	public void combineMetals(ItemStack inputItem, ItemStack destItem)
 	{
-		int D1 = 100 - InputItem.getItemDamage();
-		int D2 = 100 - DestItem.getItemDamage();
-		DestItem.setItemDamage(100 - (D1 + D2));
+		int d1 = 100 - inputItem.getItemDamage();
+		int d2 = 100 - destItem.getItemDamage();
+		destItem.setItemDamage(100 - (d1 + d2));
 	}
 
-	public void CookItem(int i)
+	public void cookItem(int i)
 	{
 		HeatRegistry manager = HeatRegistry.getInstance();
-		Random R = new Random();
+		Random r = new Random();
 		if(fireItemStacks[i] != null)
 		{
 			HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
@@ -147,11 +147,11 @@ public class TEForge extends TEFireEntity implements IInventory
 				}
 				else if(index.hasOutput())
 				{
-					ItemStack output = index.getOutput(inputCopy, R);
+					ItemStack output = index.getOutput(inputCopy, r);
 					if (inputCopy.getItem() instanceof ISmeltable)
 					{
 						ISmeltable smelt = (ISmeltable)inputCopy.getItem();
-						ItemStack meltedItem = new ItemStack(smelt.getMetalType(inputCopy).MeltedItem);
+						ItemStack meltedItem = new ItemStack(smelt.getMetalType(inputCopy).meltedItem);
 						TFC_ItemHeat.setTemp(meltedItem, temperature);
 
 						int units = smelt.getMetalReturnAmount(inputCopy);
@@ -227,19 +227,19 @@ public class TEForge extends TEFireEntity implements IInventory
 
 	private ItemStack getMold()
 	{
-		if(fireItemStacks[10] != null && fireItemStacks[10].getItem() == TFCItems.CeramicMold && fireItemStacks[10].stackSize > 0)
+		if(fireItemStacks[10] != null && fireItemStacks[10].getItem() == TFCItems.ceramicMold && fireItemStacks[10].stackSize > 0)
 		{
 			return fireItemStacks[10];
 		}
-		else if(fireItemStacks[11] != null && fireItemStacks[11].getItem() == TFCItems.CeramicMold && fireItemStacks[11].stackSize > 0)
+		else if(fireItemStacks[11] != null && fireItemStacks[11].getItem() == TFCItems.ceramicMold && fireItemStacks[11].stackSize > 0)
 		{
 			return fireItemStacks[11];
 		}
-		else if(fireItemStacks[12] != null && fireItemStacks[12].getItem() == TFCItems.CeramicMold && fireItemStacks[12].stackSize > 0)
+		else if(fireItemStacks[12] != null && fireItemStacks[12].getItem() == TFCItems.ceramicMold && fireItemStacks[12].stackSize > 0)
 		{
 			return fireItemStacks[12];
 		}
-		else if(fireItemStacks[13] != null && fireItemStacks[13].getItem() == TFCItems.CeramicMold && fireItemStacks[13].stackSize > 0)
+		else if(fireItemStacks[13] != null && fireItemStacks[13].getItem() == TFCItems.ceramicMold && fireItemStacks[13].stackSize > 0)
 		{
 			return fireItemStacks[13];
 		}
@@ -304,13 +304,13 @@ public class TEForge extends TEFireEntity implements IInventory
 
 	public int getMoldIndex()
 	{
-		if(fireItemStacks[10] != null && fireItemStacks[10].getItem() == TFCItems.CeramicMold)
+		if(fireItemStacks[10] != null && fireItemStacks[10].getItem() == TFCItems.ceramicMold)
 			return 10;
-		if(fireItemStacks[11] != null && fireItemStacks[11].getItem() == TFCItems.CeramicMold)
+		if(fireItemStacks[11] != null && fireItemStacks[11].getItem() == TFCItems.ceramicMold)
 			return 11;
-		if(fireItemStacks[12] != null && fireItemStacks[12].getItem() == TFCItems.CeramicMold)
+		if(fireItemStacks[12] != null && fireItemStacks[12].getItem() == TFCItems.ceramicMold)
 			return 12;
-		if(fireItemStacks[13] != null && fireItemStacks[13].getItem() == TFCItems.CeramicMold)
+		if(fireItemStacks[13] != null && fireItemStacks[13].getItem() == TFCItems.ceramicMold)
 			return 13;
 		return -1;
 	}
@@ -333,7 +333,7 @@ public class TEForge extends TEFireEntity implements IInventory
 		return null;
 	}
 
-	public void HandleFuelStack()
+	public void handleFuelStack()
 	{
 		Random random = new Random();
 		if(fireItemStacks[7] == null)
@@ -420,31 +420,31 @@ public class TEForge extends TEFireEntity implements IInventory
 			careForInventorySlot(fireItemStacks[3]);
 			careForInventorySlot(fireItemStacks[4]);
 
-			ItemStack[] FuelStack = new ItemStack[9];
-			FuelStack[0] = fireItemStacks[5];
-			FuelStack[1] = fireItemStacks[6];
-			FuelStack[2] = fireItemStacks[7];
-			FuelStack[3] = fireItemStacks[8];
-			FuelStack[4] = fireItemStacks[9];
-			FuelStack[5] = fireItemStacks[10];
-			FuelStack[6] = fireItemStacks[11];
-			FuelStack[7] = fireItemStacks[12];
-			FuelStack[8] = fireItemStacks[13];
+			ItemStack[] fuelStack = new ItemStack[9];
+			fuelStack[0] = fireItemStacks[5];
+			fuelStack[1] = fireItemStacks[6];
+			fuelStack[2] = fireItemStacks[7];
+			fuelStack[3] = fireItemStacks[8];
+			fuelStack[4] = fireItemStacks[9];
+			fuelStack[5] = fireItemStacks[10];
+			fuelStack[6] = fireItemStacks[11];
+			fuelStack[7] = fireItemStacks[12];
+			fuelStack[8] = fireItemStacks[13];
 
 			//Now we cook the input item
-			CookItem(0);
-			CookItem(1);
-			CookItem(2);
-			CookItem(3);
-			CookItem(4);
+			cookItem(0);
+			cookItem(1);
+			cookItem(2);
+			cookItem(3);
+			cookItem(4);
 
 			//push the input fuel down the stack
-			HandleFuelStack();
+			handleFuelStack();
 
 			//Play the fire sound
-			Random R = new Random();
-			if(R.nextInt(10) == 0 && fireTemp > 20)
-				worldObj.playSoundEffect(xCoord, yCoord, zCoord, "fire.fire", 0.4F + (R.nextFloat() / 2), 0.7F + R.nextFloat());
+			Random r = new Random();
+			if(r.nextInt(10) == 0 && fireTemp > 20)
+				worldObj.playSoundEffect(xCoord, yCoord, zCoord, "fire.fire", 0.4F + (r.nextFloat() / 2), 0.7F + r.nextFloat());
 
 			if(fireTemp >= 20 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord) != 1)
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
@@ -468,7 +468,7 @@ public class TEForge extends TEFireEntity implements IInventory
 					fuelTimeLeft = 9999;
 				}
 
-				TFC_Core.handleItemTicking(FuelStack, worldObj, xCoord, yCoord, zCoord);
+				TFC_Core.handleItemTicking(fuelStack, worldObj, xCoord, yCoord, zCoord);
 			}
 			else if(fuelTimeLeft <= 0 && fireTemp >= 1 && fireItemStacks[7] != null && isSmokeStackValid)
 			{
@@ -531,23 +531,23 @@ public class TEForge extends TEFireEntity implements IInventory
 	}
 
 	public void removeSmoke() {
-		if(worldObj.getBlock(xCoord, yCoord+1, zCoord) == TFCBlocks.Smoke)
+		if(worldObj.getBlock(xCoord, yCoord+1, zCoord) == TFCBlocks.smoke)
 			worldObj.setBlockToAir(xCoord, yCoord+1, zCoord);
-		else if(worldObj.getBlock(xCoord+1, yCoord+1, zCoord) == TFCBlocks.Smoke)
+		else if(worldObj.getBlock(xCoord+1, yCoord+1, zCoord) == TFCBlocks.smoke)
 			worldObj.setBlockToAir(xCoord+1, yCoord+1, zCoord);
-		else if(worldObj.getBlock(xCoord-1, yCoord+1, zCoord) == TFCBlocks.Smoke)
+		else if(worldObj.getBlock(xCoord-1, yCoord+1, zCoord) == TFCBlocks.smoke)
 			worldObj.setBlockToAir(xCoord-1, yCoord+1, zCoord);
-		else if(worldObj.getBlock(xCoord, yCoord+1, zCoord+1) == TFCBlocks.Smoke)
+		else if(worldObj.getBlock(xCoord, yCoord+1, zCoord+1) == TFCBlocks.smoke)
 			worldObj.setBlockToAir(xCoord, yCoord+1, zCoord+1);
-		else if(worldObj.getBlock(xCoord, yCoord+1, zCoord-1) == TFCBlocks.Smoke)
+		else if(worldObj.getBlock(xCoord, yCoord+1, zCoord-1) == TFCBlocks.smoke)
 			worldObj.setBlockToAir(xCoord, yCoord+1, zCoord-1);
-		else if(worldObj.getBlock(xCoord+2, yCoord+1, zCoord) == TFCBlocks.Smoke)
+		else if(worldObj.getBlock(xCoord+2, yCoord+1, zCoord) == TFCBlocks.smoke)
 			worldObj.setBlockToAir(xCoord+2, yCoord+1, zCoord);
-		else if(worldObj.getBlock(xCoord-2, yCoord+1, zCoord) == TFCBlocks.Smoke)
+		else if(worldObj.getBlock(xCoord-2, yCoord+1, zCoord) == TFCBlocks.smoke)
 			worldObj.setBlockToAir(xCoord-2, yCoord+1, zCoord);
-		else if(worldObj.getBlock(xCoord, yCoord+1, zCoord+2) == TFCBlocks.Smoke)
+		else if(worldObj.getBlock(xCoord, yCoord+1, zCoord+2) == TFCBlocks.smoke)
 			worldObj.setBlockToAir(xCoord, yCoord+1, zCoord+2);
-		else if(worldObj.getBlock(xCoord, yCoord+1, zCoord-2) == TFCBlocks.Smoke)
+		else if(worldObj.getBlock(xCoord, yCoord+1, zCoord-2) == TFCBlocks.smoke)
 			worldObj.setBlockToAir(xCoord, yCoord+1, zCoord-2);
 	}
 

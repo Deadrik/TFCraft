@@ -103,9 +103,9 @@ public class EntityDamageHandler
 			//2. Get Armor Rating for armor in hit Location
 			if(armor[location] != null && armor[location].getItem() instanceof ItemTFCArmor)
 			{
-				pierceRating = ((ItemTFCArmor)armor[location].getItem()).ArmorType.getPiercingAR();
-				slashRating = ((ItemTFCArmor)armor[location].getItem()).ArmorType.getSlashingAR();
-				crushRating = ((ItemTFCArmor)armor[location].getItem()).ArmorType.getCrushingAR();
+				pierceRating = ((ItemTFCArmor)armor[location].getItem()).armorTypeTFC.getPiercingAR();
+				slashRating = ((ItemTFCArmor)armor[location].getItem()).armorTypeTFC.getSlashingAR();
+				crushRating = ((ItemTFCArmor)armor[location].getItem()).armorTypeTFC.getCrushingAR();
 				if(entity instanceof IInnateArmor)
 				{
 					pierceRating += ((IInnateArmor)entity).getPierceArmor();
@@ -239,14 +239,14 @@ public class EntityDamageHandler
 	}
 
 	/**
-	 * @param AR Armor Rating supplied by the armor
+	 * @param armorRating Armor Rating supplied by the armor
 	 * @return Multiplier for damage reduction e.g. damage * multiplier = final damage
 	 */
-	protected float getDamageReduction(int AR)
+	protected float getDamageReduction(int armorRating)
 	{
-		if(AR == -1000)
-			AR=-999;
-		return 1000f / (1000f + AR);
+		if(armorRating == -1000)
+			armorRating=-999;
+		return 1000f / (1000f + armorRating);
 	}
 
 	@SubscribeEvent
@@ -266,14 +266,14 @@ public class EntityDamageHandler
 		{
 			if (!target.hitByEntity(target))
 			{
-				float damageAmount = TFC_MobData.SteveDamage;
+				float damageAmount = TFC_MobData.STEVE_DAMAGE;
 				if(stack != null)
 				{
 					damageAmount = (float)player.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
 					//player.addChatMessage("Damage: " + i);
 					if(damageAmount == 1.0f)
 					{
-						damageAmount = TFC_MobData.SteveDamage;
+						damageAmount = TFC_MobData.STEVE_DAMAGE;
 						//i = player.inventory.getCurrentItem().getItem().getDamageVsEntity(target, player.inventory.getCurrentItem());
 					}
 				}

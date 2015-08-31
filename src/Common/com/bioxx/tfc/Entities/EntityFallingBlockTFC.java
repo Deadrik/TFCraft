@@ -237,7 +237,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 
 	private boolean canDestroy(Block b)
 	{
-		return !(b == TFCBlocks.Charcoal || b == TFCBlocks.Molten);
+		return !(b == TFCBlocks.charcoal || b == TFCBlocks.molten);
 	}
 
 	/**
@@ -337,11 +337,11 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 	}
 
 	@Override
-	public void addEntityCrashInfo(CrashReportCategory p_85029_1_)
+	public void addEntityCrashInfo(CrashReportCategory category)
 	{
-		super.addEntityCrashInfo(p_85029_1_);
-		p_85029_1_.addCrashSection("Immitating block ID", Integer.valueOf(Block.getIdFromBlock(this.block)));
-		p_85029_1_.addCrashSection("Immitating block data", Integer.valueOf(this.blockMeta));
+		super.addEntityCrashInfo(category);
+		category.addCrashSection("Immitating block ID", Integer.valueOf(Block.getIdFromBlock(this.block)));
+		category.addCrashSection("Immitating block data", Integer.valueOf(this.blockMeta));
 	}
 
 	@Override

@@ -25,9 +25,9 @@ public class WorldGenForests implements IWorldGenerator
 	private WorldGenerator gen0;
 	private WorldGenerator gen1;
 	private WorldGenerator gen2;
-	private int TreeType0;
-	private int TreeType1;
-	private int TreeType2;
+	private int treeType0;
+	private int treeType1;
+	private int treeType2;
 	private float evt;
 	private float rainfall;
 	private float temperature = 20f;
@@ -42,18 +42,18 @@ public class WorldGenForests implements IWorldGenerator
 		if (world.getBiomeGenForCoords(chunkX, chunkZ) instanceof TFCBiome) // Fixes ClassCastException
 		{
 			TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(chunkX, chunkZ);
-			if (biome == TFCBiome.ocean || biome == TFCBiome.DeepOcean)
+			if (biome == TFCBiome.OCEAN || biome == TFCBiome.DEEP_OCEAN)
 				return;
 
 			rainfall = TFC_Climate.getRainfall(world, chunkX, 0, chunkZ);
 			evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(chunkX + 8, chunkZ + 8).floatdata1;
-			TreeType0 = TFC_Climate.getTreeLayer(world, chunkX, Global.SEALEVEL, chunkZ, 0);
-			TreeType1 = TFC_Climate.getTreeLayer(world, chunkX, Global.SEALEVEL, chunkZ, 1);
-			TreeType2 = TFC_Climate.getTreeLayer(world, chunkX, Global.SEALEVEL, chunkZ, 2);
+			treeType0 = TFC_Climate.getTreeLayer(world, chunkX, Global.SEALEVEL, chunkZ, 0);
+			treeType1 = TFC_Climate.getTreeLayer(world, chunkX, Global.SEALEVEL, chunkZ, 1);
+			treeType2 = TFC_Climate.getTreeLayer(world, chunkX, Global.SEALEVEL, chunkZ, 2);
 
-			gen0 = TFCBiome.getTreeGen(TreeType0, random.nextBoolean());
-			gen1 = TFCBiome.getTreeGen(TreeType1, random.nextBoolean());
-			gen2 = TFCBiome.getTreeGen(TreeType2, random.nextBoolean());
+			gen0 = TFCBiome.getTreeGen(treeType0, random.nextBoolean());
+			gen1 = TFCBiome.getTreeGen(treeType1, random.nextBoolean());
+			gen2 = TFCBiome.getTreeGen(treeType2, random.nextBoolean());
 			//gen0 = new WorldGenTrees(false, 4, 1, 1, false);
 			//gen1 = new WorldGenTrees(false, 4, 1, 1, false);
 			//gen2 = new WorldGenTrees(false, 4, 1, 1, false);
@@ -87,9 +87,9 @@ public class WorldGenForests implements IWorldGenerator
 				numTrees = 30;
 
 			temperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, world.getHeightValue(xCoord, zCoord), zCoord);
-			int spawnParam0 = this.canTreeSpawn(TreeType0);
-			int spawnParam1 = this.canTreeSpawn(TreeType1);
-			int spawnParam2 = this.canTreeSpawn(TreeType2);
+			int spawnParam0 = this.canTreeSpawn(treeType0);
+			int spawnParam1 = this.canTreeSpawn(treeType1);
+			int spawnParam2 = this.canTreeSpawn(treeType2);
 
 			if(getNearWater(world, xCoord, yCoord, zCoord))
 			{

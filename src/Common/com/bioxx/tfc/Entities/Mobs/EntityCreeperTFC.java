@@ -33,7 +33,7 @@ public class EntityCreeperTFC extends EntityCreeper implements IInnateArmor
 	{
 		Entity entity = par1DamageSource.getEntity();
 		if(entity != null && entity instanceof EntityPlayer && 
-				((EntityPlayer) entity).getHeldItem() != null && ((EntityPlayer) entity).getHeldItem().getItem().equals(TFCItems.Stick)){
+				((EntityPlayer) entity).getHeldItem() != null && ((EntityPlayer) entity).getHeldItem().getItem().equals(TFCItems.stick)){
 			((EntityPlayer)entity).triggerAchievement(TFC_Achievements.achPokeCreeper);
 		}
 		return super.attackEntityFrom(par1DamageSource, par2);
@@ -60,7 +60,7 @@ public class EntityCreeperTFC extends EntityCreeper implements IInnateArmor
 		int z = MathHelper.floor_double(this.posZ);
 		Block b = this.worldObj.getBlock(x, y, z);
 
-		if(b == TFCBlocks.Leaves || b == TFCBlocks.Leaves2 || b == TFCBlocks.Thatch)
+		if(b == TFCBlocks.leaves || b == TFCBlocks.leaves2 || b == TFCBlocks.thatch)
 			return false;
 
 		return super.getCanSpawnHere();

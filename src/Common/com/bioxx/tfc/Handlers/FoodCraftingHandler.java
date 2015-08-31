@@ -20,7 +20,7 @@ import com.bioxx.tfc.api.Util.Helper;
 
 public class FoodCraftingHandler
 {
-	public static boolean PreCrafted;
+	public static boolean preCrafted;
 	@SubscribeEvent
 	public void onFoodCook(ItemCookEvent event)
 	{
@@ -33,9 +33,9 @@ public class FoodCraftingHandler
 	@SubscribeEvent
 	public void onFoodCrafting(ItemCraftedEvent e)
 	{
-		if (FoodCraftingHandler.PreCrafted)
+		if (FoodCraftingHandler.preCrafted)
 		{
-			FoodCraftingHandler.PreCrafted = false;
+			FoodCraftingHandler.preCrafted = false;
 			return;
 		}
 
@@ -47,13 +47,13 @@ public class FoodCraftingHandler
 
 		if(iinventory != null)
 		{
-			if (craftResult.getItem() == TFCItems.WheatGrain && gridHasItem(iinventory, TFCItems.WheatWhole) ||
-				craftResult.getItem() == TFCItems.RyeGrain && gridHasItem(iinventory, TFCItems.RyeWhole) ||
-				craftResult.getItem() == TFCItems.OatGrain && gridHasItem(iinventory, TFCItems.OatWhole) ||
-				craftResult.getItem() == TFCItems.BarleyGrain && gridHasItem(iinventory, TFCItems.BarleyWhole) ||
-				craftResult.getItem() == TFCItems.RiceGrain && gridHasItem(iinventory, TFCItems.RiceWhole))
+			if (craftResult.getItem() == TFCItems.wheatGrain && gridHasItem(iinventory, TFCItems.wheatWhole) ||
+				craftResult.getItem() == TFCItems.ryeGrain && gridHasItem(iinventory, TFCItems.ryeWhole) ||
+				craftResult.getItem() == TFCItems.oatGrain && gridHasItem(iinventory, TFCItems.oatWhole) ||
+				craftResult.getItem() == TFCItems.barleyGrain && gridHasItem(iinventory, TFCItems.barleyWhole) ||
+				craftResult.getItem() == TFCItems.riceGrain && gridHasItem(iinventory, TFCItems.riceWhole))
 			{
-				HandleItem(e.player, iinventory, Recipes.Knives);
+				handleItem(e.player, iinventory, Recipes.knives);
 
 				for(int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
@@ -68,8 +68,8 @@ public class FoodCraftingHandler
 						for (int j = 0; j < foodWeight; j += 4)
 							strawCount++;
 
-						if (!e.player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Straw, strawCount)))
-							e.player.dropItem(TFCItems.Straw, strawCount);
+						if (!e.player.inventory.addItemStackToInventory(new ItemStack(TFCItems.straw, strawCount)))
+							e.player.dropItem(TFCItems.straw, strawCount);
 
 						ItemFoodTFC.createTag(craftResult, foodWeight, foodDecay);
 					}
@@ -80,9 +80,9 @@ public class FoodCraftingHandler
 				craftResult = processFood(e.player, craftResult, iinventory);
 			}
 
-			if((craftResult.getItem() == TFCItems.WheatDough || craftResult.getItem() == TFCItems.RyeDough || craftResult.getItem() == TFCItems.OatDough || 
-					craftResult.getItem() == TFCItems.BarleyDough || craftResult.getItem() == TFCItems.CornmealDough || craftResult.getItem() == TFCItems.RiceDough) && 
-					(gridHasItem(iinventory, TFCItems.WoodenBucketWater) || gridHasItem(iinventory, TFCItems.RedSteelBucketWater)))
+			if((craftResult.getItem() == TFCItems.wheatDough || craftResult.getItem() == TFCItems.ryeDough || craftResult.getItem() == TFCItems.oatDough || 
+					craftResult.getItem() == TFCItems.barleyDough || craftResult.getItem() == TFCItems.cornmealDough || craftResult.getItem() == TFCItems.riceDough) && 
+					(gridHasItem(iinventory, TFCItems.woodenBucketWater) || gridHasItem(iinventory, TFCItems.redSteelBucketWater)))
 			{
 				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 				{
@@ -312,24 +312,24 @@ public class FoodCraftingHandler
 				if(iinventory.getStackInSlot(i) == null)
 					continue;
 				//If we're salting the food
-				if(iinventory.getStackInSlot(i).getItem() == TFCItems.Powder && iinventory.getStackInSlot(i).getItemDamage() == 9)
+				if(iinventory.getStackInSlot(i).getItem() == TFCItems.powder && iinventory.getStackInSlot(i).getItemDamage() == 9)
 					Food.setSalted(craftResult, true);
 				boolean f = isInvFull(player);
 
 				if(iinventory.getStackInSlot(i).getItem() instanceof ItemKnife && f)
 				{
-					if (!FoodCraftingHandler.PreCrafted)
+					if (!FoodCraftingHandler.preCrafted)
 					{
 						Food.setWeight(craftResult, finalWeight);
 						iinventory.getStackInSlot(i).stackSize = 2;
 					}
 				}
 
-				if(iinventory.getStackInSlot(i).getItem() instanceof ItemKnife && (!f || !FoodCraftingHandler.PreCrafted))
+				if(iinventory.getStackInSlot(i).getItem() instanceof ItemKnife && (!f || !FoodCraftingHandler.preCrafted))
 				{
 					if(Food.getDecay(craftResult) > 0)
 					{
-						FoodCraftingHandler.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
+						FoodCraftingHandler.damageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
 						float decay = Food.getDecay(craftResult);
 						Food.setDecay(craftResult, 0);
 						Food.setWeight(craftResult, Food.getWeight(craftResult)-decay);
@@ -343,7 +343,7 @@ public class FoodCraftingHandler
 						}
 						else
 						{
-							FoodCraftingHandler.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
+							FoodCraftingHandler.damageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
 							Food.setWeight(iinventory.getStackInSlot(foodSlot),finalWeight/2);
 							Food.setWeight(craftResult,finalWeight/2);
 							iinventory.getStackInSlot(foodSlot).stackSize = 2;
@@ -371,14 +371,14 @@ public class FoodCraftingHandler
 	 */
 	public static void preCraft(EntityPlayer player, ItemStack craftResult, IInventory iinventory)
 	{
-		FoodCraftingHandler.PreCrafted = true;
-		if (craftResult.getItem() == TFCItems.WheatGrain && gridHasItem(iinventory, TFCItems.WheatWhole) ||
-			craftResult.getItem() == TFCItems.RyeGrain && gridHasItem(iinventory, TFCItems.RyeWhole) ||
-			craftResult.getItem() == TFCItems.OatGrain && gridHasItem(iinventory, TFCItems.OatWhole) ||
-			craftResult.getItem() == TFCItems.BarleyGrain && gridHasItem(iinventory, TFCItems.BarleyWhole) ||
-			craftResult.getItem() == TFCItems.RiceGrain && gridHasItem(iinventory, TFCItems.RiceWhole))
+		FoodCraftingHandler.preCrafted = true;
+		if (craftResult.getItem() == TFCItems.wheatGrain && gridHasItem(iinventory, TFCItems.wheatWhole) ||
+			craftResult.getItem() == TFCItems.ryeGrain && gridHasItem(iinventory, TFCItems.ryeWhole) ||
+			craftResult.getItem() == TFCItems.oatGrain && gridHasItem(iinventory, TFCItems.oatWhole) ||
+			craftResult.getItem() == TFCItems.barleyGrain && gridHasItem(iinventory, TFCItems.barleyWhole) ||
+			craftResult.getItem() == TFCItems.riceGrain && gridHasItem(iinventory, TFCItems.riceWhole))
 		{
-			HandleItem(player, iinventory, Recipes.Knives);
+			handleItem(player, iinventory, Recipes.knives);
 			for(int i = 0; i < iinventory.getSizeInventory(); i++)
 			{
 				if(iinventory.getStackInSlot(i) == null)
@@ -392,9 +392,9 @@ public class FoodCraftingHandler
 			craftResult = processFood(player, craftResult, iinventory);
 		}
 
-		if((craftResult.getItem() == TFCItems.WheatDough || craftResult.getItem() == TFCItems.RyeDough || craftResult.getItem() == TFCItems.OatDough || 
-				craftResult.getItem() == TFCItems.BarleyDough || craftResult.getItem() == TFCItems.CornmealDough || craftResult.getItem() == TFCItems.RiceDough) && 
-				(gridHasItem(iinventory, TFCItems.WoodenBucketWater) || gridHasItem(iinventory, TFCItems.RedSteelBucketWater)))
+		if((craftResult.getItem() == TFCItems.wheatDough || craftResult.getItem() == TFCItems.ryeDough || craftResult.getItem() == TFCItems.oatDough || 
+				craftResult.getItem() == TFCItems.barleyDough || craftResult.getItem() == TFCItems.cornmealDough || craftResult.getItem() == TFCItems.riceDough) && 
+				(gridHasItem(iinventory, TFCItems.woodenBucketWater) || gridHasItem(iinventory, TFCItems.redSteelBucketWater)))
 		{
 			for(int i = 0; i < iinventory.getSizeInventory(); i++)
 			{
@@ -425,17 +425,17 @@ public class FoodCraftingHandler
 		return false;
 	}
 
-	public static void HandleItem(EntityPlayer entityplayer, IInventory iinventory, Item[] Items)
+	public static void handleItem(EntityPlayer entityplayer, IInventory iinventory, Item[] items)
 	{
 		for(int i = 0; i < iinventory.getSizeInventory(); i++)
 		{
 			if(iinventory.getStackInSlot(i) == null)
 				continue;
-			for(int j = 0; j < Items.length; j++)
-				DamageItem(entityplayer,iinventory,i,Items[j]);
+			for(int j = 0; j < items.length; j++)
+				damageItem(entityplayer,iinventory,i,items[j]);
 		}
 	}
-	public static void DamageItem(EntityPlayer entityplayer, IInventory iinventory, int i, Item item)
+	public static void damageItem(EntityPlayer entityplayer, IInventory iinventory, int i, Item item)
 	{
 		if(iinventory.getStackInSlot(i).getItem() == item) 
 		{

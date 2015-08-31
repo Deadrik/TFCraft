@@ -17,7 +17,7 @@ public class SlotForgeFuel extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		return itemstack.getItem() == TFCItems.Coal;
+		return itemstack.getItem() == TFCItems.coal;
 	}
 
 	@Override

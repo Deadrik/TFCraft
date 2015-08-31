@@ -11,10 +11,10 @@ import net.minecraft.world.World;
 
 public class AnvilManager
 {
-	private static final AnvilManager instance = new AnvilManager();
+	private static final AnvilManager INSTANCE = new AnvilManager();
 	public static final AnvilManager getInstance()
 	{
-		return instance;
+		return INSTANCE;
 	}
 	public static World world;
 
@@ -92,7 +92,7 @@ public class AnvilManager
 		for (int k = 0; k < recipes.size(); k++)
 		{
 			AnvilRecipe irecipe = recipes.get(k);
-			if (irecipe != null && irecipe.isComplete(instance, recipe, rules))
+			if (irecipe != null && irecipe.isComplete(INSTANCE, recipe, rules))
 				return new Object[] {irecipe, irecipe.getCraftingResult(recipe.input1)};
 		}
 

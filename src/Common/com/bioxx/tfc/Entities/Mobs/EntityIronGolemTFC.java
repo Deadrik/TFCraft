@@ -31,7 +31,7 @@ public class EntityIronGolemTFC extends EntityIronGolem
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.IronGolemHealth);//MaxHealth
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.IRON_GOLEM_HEALTH);//MaxHealth
 	}
 
 	/**
@@ -54,12 +54,12 @@ public class EntityIronGolemTFC extends EntityIronGolem
 			Block block = this.worldObj.getBlock(x, y, z);
 			int meta = this.worldObj.getBlockMetadata(x, y, z);
 			// Fix for invisible grass texture
-			if(block == TFCBlocks.Grass || block == TFCBlocks.Grass2 ||
-					block == TFCBlocks.ClayGrass || block == TFCBlocks.ClayGrass2 ||
-					block == TFCBlocks.PeatGrass ||
-					block == TFCBlocks.DryGrass || block == TFCBlocks.DryGrass2)
+			if(block == TFCBlocks.grass || block == TFCBlocks.grass2 ||
+					block == TFCBlocks.clayGrass || block == TFCBlocks.clayGrass2 ||
+					block == TFCBlocks.peatGrass ||
+					block == TFCBlocks.dryGrass || block == TFCBlocks.dryGrass2)
 			{
-				block = TFCBlocks.Dirt;
+				block = TFCBlocks.dirt;
 				meta = 1;
 			}
 
@@ -73,7 +73,7 @@ public class EntityIronGolemTFC extends EntityIronGolem
 	{
 		this.attackTimer = 10;
 		this.worldObj.setEntityState(this, (byte)4);
-		boolean var2 = entity.attackEntityFrom(DamageSource.causeMobDamage(this), TFC_MobData.IronGolemDamage + this.rand.nextInt(150));
+		boolean var2 = entity.attackEntityFrom(DamageSource.causeMobDamage(this), TFC_MobData.IRON_GOLEM_DAMAGE + this.rand.nextInt(150));
 
 		if (var2)
 			entity.motionY += 0.4000000059604645D;
@@ -104,6 +104,6 @@ public class EntityIronGolemTFC extends EntityIronGolem
 		Random ran = new Random();
 		int k = 3 + ran.nextInt(3);
 		for (int l = 0; l < k; ++l)
-			this.dropItem(TFCItems.WroughtIronIngot, 1);
+			this.dropItem(TFCItems.wroughtIronIngot, 1);
 	}
 }

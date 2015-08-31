@@ -11,12 +11,12 @@ public class BlockFireBrick extends BlockTerra
 	public BlockFireBrick()
 	{
 		super(Material.rock);
-		this.setCreativeTab(TFCTabs.TFCBuilding);
+		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 	}
 
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "rocks/Fire Brick");
+		this.blockIcon = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "rocks/Fire Brick");
 	}
 }

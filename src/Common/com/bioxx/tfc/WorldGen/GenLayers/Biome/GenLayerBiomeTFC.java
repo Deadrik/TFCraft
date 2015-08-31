@@ -12,13 +12,13 @@ public class GenLayerBiomeTFC extends GenLayerTFC
 {
 	/** this sets all the biomes that are allowed to appear in the overworld */
 	private TFCBiome[] allowedBiomes = new TFCBiome[] {
-			TFCBiome.ocean,
-			TFCBiome.HighHills,
-			TFCBiome.plains,
-			TFCBiome.HighPlains,
-			TFCBiome.swampland,
-			TFCBiome.rollingHills,
-			TFCBiome.Mountains,
+			TFCBiome.OCEAN,
+			TFCBiome.HIGH_HILLS,
+			TFCBiome.PLAINS,
+			TFCBiome.HIGH_PLAINS,
+			TFCBiome.SWAMPLAND,
+			TFCBiome.ROLLING_HILLS,
+			TFCBiome.MOUNTAINS,
 	};
 
 	public GenLayerBiomeTFC(long par1, GenLayer par3GenLayer, TFCWorldType par4)

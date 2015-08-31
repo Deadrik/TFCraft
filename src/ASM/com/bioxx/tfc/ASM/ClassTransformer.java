@@ -16,7 +16,7 @@ import org.objectweb.asm.tree.*;
 
 public class ClassTransformer implements net.minecraft.launchwrapper.IClassTransformer
 {
-	public static final Logger log = LogManager.getLogger("TerraFirmaCraft ASM");
+	public static final Logger LOG = LogManager.getLogger("TerraFirmaCraft ASM");
 	protected HashMap<String, Patch> mcpMethodNodes = new HashMap<String, Patch>();
 	protected HashMap<String, Patch> obfMethodNodes = new HashMap<String, Patch>();
 	protected String mcpClassName;
@@ -45,7 +45,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 		ClassNode classNode = new ClassNode();
 		ClassReader classReader = new ClassReader(bytes);
 		classReader.accept(classNode, 0);
-		log.info("Attempting to Transform: " + classNode.name + " | Found " + getMethodNodeList().size() + " injections");
+		LOG.info("Attempting to Transform: " + classNode.name + " | Found " + getMethodNodeList().size() + " injections");
 		// find method to inject into
 		Iterator<MethodNode> methods = classNode.methods.iterator();
 		while (methods.hasNext())
@@ -61,7 +61,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 				{
 					target = instructions.get(0);
 				} else {
-					log.error("Error in: {" + m.name + " | " + m.desc + "} No Instructions");
+					LOG.error("Error in: {" + m.name + " | " + m.desc + "} No Instructions");
 				}
 				//Run this is we plan to just modify the method
 				if(mPatch.opType == PatchOpType.Modify)
@@ -138,10 +138,10 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 						m.instructions.add(new InsnNode(Opcodes.RETURN));
 					}
 				}
-				log.info("Inserted: " + classNode.name + " : {" + m.name + " | " + m.desc + "}");
+				LOG.info("Inserted: " + classNode.name + " : {" + m.name + " | " + m.desc + "}");
 			}
 		}
-		log.info("Attempting to Transform: " + classNode.name + " Complete");
+		LOG.info("Attempting to Transform: " + classNode.name + " Complete");
 		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		classNode.accept(writer);
 		return writer.toByteArray();
@@ -186,28 +186,28 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 
 	private void performDirectOperation(InsnList methodInsn, InstrSet input)
 	{
-		AbstractInsnNode _current = methodInsn.get(input.offset+numInsertions);
+		AbstractInsnNode current = methodInsn.get(input.offset+numInsertions);
 		switch(input.opType)
 		{
 		case InsertAfter:
 			numInsertions+=input.iList.size();
-			methodInsn.insert(_current, input.iList);
+			methodInsn.insert(current, input.iList);
 			break;
 		case InsertBefore:
 			numInsertions+=input.iList.size();
-			methodInsn.insertBefore(_current, input.iList);
+			methodInsn.insertBefore(current, input.iList);
 			break;
 		case Remove:
 			numInsertions--;
-			methodInsn.remove(_current);
+			methodInsn.remove(current);
 			break;
 		case Replace:
-			if(_current instanceof JumpInsnNode && input.iList.get(0) instanceof JumpInsnNode)
+			if(current instanceof JumpInsnNode && input.iList.get(0) instanceof JumpInsnNode)
 			{
-				((JumpInsnNode)input.iList.get(0)).label = ((JumpInsnNode)_current).label;
+				((JumpInsnNode)input.iList.get(0)).label = ((JumpInsnNode)current).label;
 			}
-			methodInsn.insert(_current, input.iList);
-			methodInsn.remove(_current);
+			methodInsn.insert(current, input.iList);
+			methodInsn.remove(current);
 			break;
 		default:
 			break;
@@ -216,28 +216,28 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 
 	private void performAnchorOperation(InsnList methodInsn, InstrSet input, int anchor)
 	{
-		AbstractInsnNode _current = methodInsn.get(anchor + input.offset + numInsertions);
+		AbstractInsnNode current = methodInsn.get(anchor + input.offset + numInsertions);
 		if(input.iList.get(0) instanceof JumpInsnNode)
 		{
-			input.iList.set(input.iList.get(0), new JumpInsnNode(input.iList.get(0).getOpcode(), (LabelNode)_current.getPrevious()));
+			input.iList.set(input.iList.get(0), new JumpInsnNode(input.iList.get(0).getOpcode(), (LabelNode)current.getPrevious()));
 		}
 		switch(input.opType)
 		{
 		case InsertAfter:
 			numInsertions+=input.iList.size();
-			methodInsn.insert(_current, input.iList);
+			methodInsn.insert(current, input.iList);
 			break;
 		case InsertBefore:
 			numInsertions+=input.iList.size();
-			methodInsn.insertBefore(_current, input.iList);
+			methodInsn.insertBefore(current, input.iList);
 			break;
 		case Remove:
 			numInsertions--;
-			methodInsn.remove(_current);
+			methodInsn.remove(current);
 			break;
 		case Replace:
-			methodInsn.insert(_current, input.iList);
-			methodInsn.remove(_current);
+			methodInsn.insert(current, input.iList);
+			methodInsn.remove(current);
 			break;
 		case Switch:
 			/**
@@ -245,12 +245,12 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 			 * and then move back one, grab that node and move it to the original location
 			 * */
 			int otherAnchor = findLine(methodInsn, input.offsetLine);
-			AbstractInsnNode _other = methodInsn.get(otherAnchor + input.offsetSwitch + numInsertions);
-			methodInsn.remove(_current);
-			methodInsn.insert(_other, _current);
-			_current = methodInsn.get(anchor + input.offset + numInsertions);
-			methodInsn.remove(_other);
-			methodInsn.insertBefore(_current, _other);
+			AbstractInsnNode other = methodInsn.get(otherAnchor + input.offsetSwitch + numInsertions);
+			methodInsn.remove(current);
+			methodInsn.insert(other, current);
+			current = methodInsn.get(anchor + input.offset + numInsertions);
+			methodInsn.remove(other);
+			methodInsn.insertBefore(current, other);
 			break;
 		default:
 			break;
@@ -279,7 +279,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 		return false;
 	}
 
-	private boolean CompareNodes(AbstractInsnNode current,AbstractInsnNode target){
+	private boolean compareNodes(AbstractInsnNode current,AbstractInsnNode target){
 		if(current.getType() != target.getType()) {
 			return false;
 		}

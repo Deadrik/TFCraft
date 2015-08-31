@@ -7,11 +7,11 @@ public enum EnumDamageType
 	SLASHING(1), 
 	CRUSHING(2);
 
-	public int DamageID;
+	public int damageID;
 
 	private EnumDamageType(int id)
 	{
-		DamageID = id;
+		damageID = id;
 	}
 
 	@Override

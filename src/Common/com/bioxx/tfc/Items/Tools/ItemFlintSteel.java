@@ -29,7 +29,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 	public ItemFlintSteel()
 	{
 		super();
-		setCreativeTab(TFCTabs.TFCTools);
+		setCreativeTab(TFCTabs.TFC_TOOLS);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 					world.getBlock(x, y, z).getMaterial() != Material.wood &&
 					world.getBlock(x, y, z).getMaterial() != Material.cloth &&
 					world.isAirBlock(x, y + 1, z) &&
-					world.getBlock(x, y, z) != TFCBlocks.Charcoal &&
+					world.getBlock(x, y, z) != TFCBlocks.charcoal &&
 					world.getBlock(x, y, z) != Blocks.coal_block)
 			{
 
@@ -59,7 +59,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 					for (Iterator iterator = list.iterator(); iterator.hasNext();)
 					{
 						EntityItem entity = (EntityItem)iterator.next();
-						if (entity.getEntityItem().getItem() == TFCItems.Stick)
+						if (entity.getEntityItem().getItem() == TFCItems.stick)
 							numsticks+=entity.getEntityItem().stackSize;
 					}
 
@@ -68,13 +68,13 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 						for (Iterator iterator = list.iterator(); iterator.hasNext();)
 						{
 							EntityItem entity = (EntityItem) iterator.next();
-							if (entity.getEntityItem().getItem() == TFCItems.Stick)
+							if (entity.getEntityItem().getItem() == TFCItems.stick)
 								entity.setDead();
 							if (entity.getEntityItem().getItem() == Items.paper)
 								entity.setDead();
 						}
 						itemstack.damageItem(1, entityplayer);
-						world.setBlock(x, y + 1, z, TFCBlocks.Firepit, 1, 0x2);
+						world.setBlock(x, y + 1, z, TFCBlocks.firepit, 1, 0x2);
 						if (world.isRemote)
 							world.markBlockForUpdate(x, y + 1, z);
 						return true;
@@ -87,7 +87,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 
 				return true;
 			}
-			else if (world.getBlock(x, y, z) == TFCBlocks.Charcoal && world.getBlockMetadata(x, y, z) > 6 ||
+			else if (world.getBlock(x, y, z) == TFCBlocks.charcoal && world.getBlockMetadata(x, y, z) > 6 ||
 						world.getBlock(x, y, z) == Blocks.coal_block)
 			{
 				if(world.getBlock(x, y - 1, z).getMaterial() == Material.rock &&
@@ -98,15 +98,15 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 						surroundSolids)
 				{
 					itemstack.damageItem(1, entityplayer);
-					world.setBlock(x, y, z, TFCBlocks.Forge, 1, 0x2);
+					world.setBlock(x, y, z, TFCBlocks.forge, 1, 0x2);
 					//TEForge te = (TEForge)world.getTileEntity(x, y, z);
 					return true;
 				}
 			}
-			else if(world.getBlock(x, y, z) == TFCBlocks.Pottery && surroundSolids)
+			else if(world.getBlock(x, y, z) == TFCBlocks.pottery && surroundSolids)
 			{
 				TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
-				te.StartPitFire();
+				te.startPitFire();
 				itemstack.damageItem(1, entityplayer);
 				return true;
 			}

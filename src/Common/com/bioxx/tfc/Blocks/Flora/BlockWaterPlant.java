@@ -36,9 +36,9 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 	private IIcon seaWeed;
 	private IIcon catTails;
 
-	private static String seaweed = Reference.ModID + ":" + "plants/seaweed";
-	private static String pondweed = Reference.ModID + ":" + "plants/pondweed";
-	private static String cattails = Reference.ModID + ":" + "plants/Cat Tails";
+	private static String seaweed = Reference.MOD_ID + ":" + "plants/seaweed";
+	private static String pondweed = Reference.MOD_ID + ":" + "plants/pondweed";
+	private static String cattails = Reference.MOD_ID + ":" + "plants/Cat Tails";
 
 
 	public BlockWaterPlant(int texOff)
@@ -62,9 +62,9 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 	}
 
 	@Override
-	public int quantityDroppedWithBonus(int i, Random R)
+	public int quantityDroppedWithBonus(int i, Random r)
 	{
-		return 1 + R.nextInt(i * 2 + 1);
+		return 1 + r.nextInt(i * 2 + 1);
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 
 	private ItemStack getSeaWeed(Random r)
 	{
-		return ItemFoodTFC.createTag(new ItemStack(TFCItems.SeaWeed, 1, 0), Helper.roundNumber(2 + r.nextFloat() * 5, 10));
+		return ItemFoodTFC.createTag(new ItemStack(TFCItems.seaWeed, 1, 0), Helper.roundNumber(2 + r.nextFloat() * 5, 10));
 	}
 
 	protected boolean canThisPlantGrowUnderThisBlock(Block par1)

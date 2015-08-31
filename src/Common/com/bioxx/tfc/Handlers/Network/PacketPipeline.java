@@ -54,19 +54,19 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	{
 		if (this.packets.size() > 256)
 		{
-			TerraFirmaCraft.log.error("Error Registering Packet, Too Big: " + clazz.getName());
+			TerraFirmaCraft.LOG.error("Error Registering Packet, Too Big: " + clazz.getName());
 			return false;
 		}
 
 		if (this.packets.contains(clazz))
 		{
-			TerraFirmaCraft.log.error("Error Registering Packet, Already Exists: " + clazz.getName());
+			TerraFirmaCraft.LOG.error("Error Registering Packet, Already Exists: " + clazz.getName());
 			return false;
 		}
 
 		if (this.isPostInitialised)
 		{
-			TerraFirmaCraft.log.error("Error Registering Packet, Initialization Already Completed: " + clazz.getName());
+			TerraFirmaCraft.LOG.error("Error Registering Packet, Initialization Already Completed: " + clazz.getName());
 			return false;
 		}
 
@@ -128,7 +128,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	// Method to call from FMLInitializationEvent
 	public void initalise ()
 	{
-		this.channels = NetworkRegistry.INSTANCE.newChannel(Reference.ModChannel, this);
+		this.channels = NetworkRegistry.INSTANCE.newChannel(Reference.MOD_CHANNEL, this);
 		registerPackets();
 	}
 

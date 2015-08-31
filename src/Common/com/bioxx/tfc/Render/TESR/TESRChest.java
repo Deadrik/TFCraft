@@ -35,8 +35,8 @@ public class TESRChest extends TileEntitySpecialRenderer
 			texNormalDouble = new ResourceLocation[Global.WOOD_ALL.length];
 			for(int i = 0; i < Global.WOOD_ALL.length; i++)
 			{
-				texNormal[i] = new ResourceLocation(Reference.ModID+":textures/models/chest/normal_" + Global.WOOD_ALL[i] + ".png");
-				texNormalDouble[i] = new ResourceLocation(Reference.ModID+":textures/models/chest/normal_double_" + Global.WOOD_ALL[i] + ".png");
+				texNormal[i] = new ResourceLocation(Reference.MOD_ID+":textures/models/chest/normal_" + Global.WOOD_ALL[i] + ".png");
+				texNormalDouble[i] = new ResourceLocation(Reference.MOD_ID+":textures/models/chest/normal_double_" + Global.WOOD_ALL[i] + ".png");
 			}
 		}
 	}

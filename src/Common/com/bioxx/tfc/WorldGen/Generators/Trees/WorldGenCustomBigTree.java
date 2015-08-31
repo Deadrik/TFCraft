@@ -16,7 +16,7 @@ public class WorldGenCustomBigTree extends WorldGenerator
 	 * Contains three sets of two values that provide complimentary indices for a given 'major' index - 1 and 2 for 0, 0
 	 * and 2 for 1, and 0 and 1 for 2.
 	 */
-	private static final byte[] otherCoordPairs = new byte[] {(byte)2, (byte)0, (byte)0, (byte)1, (byte)2, (byte)1};
+	private static final byte[] OTHER_COORD_PAIRS = new byte[] {(byte)2, (byte)0, (byte)0, (byte)1, (byte)2, (byte)1};
 	private final Random rand = new Random();
 
 	/** Reference to the World object. */
@@ -24,9 +24,9 @@ public class WorldGenCustomBigTree extends WorldGenerator
 	private int[] basePos = new int[] {0, 0, 0};
 	private int heightLimit;
 	private int height;
-	private static final double heightAttenuation = 0.618D;
+	private static final double HEIGHT_ATTENUATION = 0.618D;
 	//private static final double branchDensity = 1.0D;
-	private static final double branchSlope = 0.381D;
+	private static final double BRANCH_SLOPE = 0.381D;
 	private double scaleWidth = 1.0D;
 	private double leafDensity = 1.0D;
 
@@ -79,8 +79,8 @@ public class WorldGenCustomBigTree extends WorldGenerator
 		}
 		else
 		{
-			byte var6 = otherCoordPairs[var5];
-			byte var7 = otherCoordPairs[var5 + 3];
+			byte var6 = OTHER_COORD_PAIRS[var5];
+			byte var7 = OTHER_COORD_PAIRS[var5 + 3];
 			byte var8;
 
 			if (var3[var5] > 0)
@@ -100,7 +100,7 @@ public class WorldGenCustomBigTree extends WorldGenerator
 				var13[var6] = MathHelper.floor_double(par1ArrayOfInteger[var6] + var14 * var9);
 				var13[var7] = MathHelper.floor_double(par1ArrayOfInteger[var7] + var14 * var11);
 				Block var16 = this.worldObj.getBlock(var13[0], var13[1], var13[2]);
-				if (!var16.isAir(worldObj, var13[0], var13[1], var13[2]) && (var16 != TFCBlocks.Leaves || var16 != TFCBlocks.Leaves2))
+				if (!var16.isAir(worldObj, var13[0], var13[1], var13[2]) && (var16 != TFCBlocks.leaves || var16 != TFCBlocks.leaves2))
 					break;
 			}
 
@@ -144,7 +144,7 @@ public class WorldGenCustomBigTree extends WorldGenerator
 		for (int var5 = par2 + this.leafDistanceLimit; var4 < var5; ++var4)
 		{
 			float var6 = this.leafSize(var4 - par2);
-			this.genTreeLayer(par1, var4, par3, var6, (byte)1, TFCBlocks.Leaves);
+			this.genTreeLayer(par1, var4, par3, var6, (byte)1, TFCBlocks.leaves);
 		}
 	}
 
@@ -163,7 +163,7 @@ public class WorldGenCustomBigTree extends WorldGenerator
 			var3[1] = var4[3];
 			int var6 = var3[1] - this.basePos[1];
 			if (this.leafNodeNeedsBase(var6))
-				this.placeBlockLine(var3, var5, TFCBlocks.LogNatural);
+				this.placeBlockLine(var3, var5, TFCBlocks.logNatural);
 		}
 	}
 
@@ -172,7 +172,7 @@ public class WorldGenCustomBigTree extends WorldGenerator
 	 */
 	private void generateLeafNodeList()
 	{
-		this.height = (int) (this.heightLimit * WorldGenCustomBigTree.heightAttenuation);
+		this.height = (int) (this.heightLimit * WorldGenCustomBigTree.HEIGHT_ATTENUATION);
 		if (this.height >= this.heightLimit)
 			this.height = this.heightLimit - 1;
 
@@ -216,7 +216,7 @@ public class WorldGenCustomBigTree extends WorldGenerator
 					{
 						int[] var19 = new int[] {this.basePos[0], this.basePos[1], this.basePos[2]};
 						double var20 = Math.sqrt(Math.pow(Math.abs(this.basePos[0] - var17[0]), 2.0D) + Math.pow(Math.abs(this.basePos[2] - var17[2]), 2.0D));
-						double var22 = var20 * WorldGenCustomBigTree.branchSlope;
+						double var22 = var20 * WorldGenCustomBigTree.BRANCH_SLOPE;
 
 						if (var17[1] - var22 > var5)
 							var19[1] = var5;
@@ -268,7 +268,7 @@ public class WorldGenCustomBigTree extends WorldGenerator
 		int var4 = this.basePos[2];
 		int[] var5 = new int[] {var1, var2, var4};
 		int[] var6 = new int[] {var1, var3, var4};
-		this.placeBlockLine(var5, var6, TFCBlocks.LogNatural);
+		this.placeBlockLine(var5, var6, TFCBlocks.logNatural);
 
 		/*if (WorldGenCustomBigTree.trunkSize == 2)
 		{
@@ -287,8 +287,8 @@ public class WorldGenCustomBigTree extends WorldGenerator
 	private void genTreeLayer(int par1, int par2, int par3, float par4, byte par5, Block par6)
 	{
 		int var7 = (int)(par4 + 0.618D);
-		byte var8 = otherCoordPairs[par5];
-		byte var9 = otherCoordPairs[par5 + 3];
+		byte var8 = OTHER_COORD_PAIRS[par5];
+		byte var9 = OTHER_COORD_PAIRS[par5 + 3];
 		int[] var10 = new int[] {par1, par2, par3};
 		int[] var11 = new int[] {0, 0, 0};
 		int var12 = -var7;
@@ -311,7 +311,7 @@ public class WorldGenCustomBigTree extends WorldGenerator
 				{
 					var11[var9] = var10[var9] + var13;
 					Block var14 = this.worldObj.getBlock(var11[0], var11[1], var11[2]);
-					if (!var14.isAir(worldObj, var11[0], var11[1], var11[2]) && (var14 != TFCBlocks.Leaves || var14 != TFCBlocks.Leaves2))
+					if (!var14.isAir(worldObj, var11[0], var11[1], var11[2]) && (var14 != TFCBlocks.leaves || var14 != TFCBlocks.leaves2))
 					{
 						++var13;
 					}
@@ -383,8 +383,8 @@ public class WorldGenCustomBigTree extends WorldGenerator
 
 		if (var4[var6] != 0)
 		{
-			byte var7 = otherCoordPairs[var6];
-			byte var8 = otherCoordPairs[var6 + 3];
+			byte var7 = OTHER_COORD_PAIRS[var6];
+			byte var8 = OTHER_COORD_PAIRS[var6 + 3];
 			byte var9;
 
 			if (var4[var6] > 0)

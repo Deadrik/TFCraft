@@ -79,10 +79,10 @@ public class FloraIndex
 		return this;
 	}
 
-	public ItemStack getOutput(Random R, int i)
+	public ItemStack getOutput(Random r, int i)
 	{
 		ItemStack is = output.copy();
-		is.stackSize += R.nextInt(i);
+		is.stackSize += r.nextInt(i);
 		return is;
 	}
 

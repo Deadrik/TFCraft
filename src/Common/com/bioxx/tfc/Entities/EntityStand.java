@@ -134,17 +134,17 @@ public class EntityStand extends EntityLiving
 			this.setDead();
 		}
 
-		double t_x, t_z; 	//temp x,y,z
-		t_x = this.posX;
+		double tempX, tempZ; 	//temp x,y,z
+		tempX = this.posX;
 		//t_y = this.posY;
-		t_z = this.posZ;
+		tempZ = this.posZ;
 		super.onUpdate();
 		if(this.worldObj.isRemote)
 			setSize(0.125f,2f);
 		else
 			setSize(0.1F,2);
 
-		this.setLocationAndAngles(t_x, this.posY, t_z, this.rotation, 0F);
+		this.setLocationAndAngles(tempX, this.posY, tempZ, this.rotation, 0F);
 		//this.setPositionAndRotation(t_x, this.posY, t_z, this.rotation, 0F);
 		this.setRotation(rotation, 0);
 		this.renderYawOffset = rotation;
@@ -177,22 +177,22 @@ public class EntityStand extends EntityLiving
 					this.entityDropItem(is, 0);
 				}
 			}
-			Block blockToDrop = woodType < 16? TFCBlocks.ArmourStand : TFCBlocks.ArmourStand2;
+			Block blockToDrop = woodType < 16? TFCBlocks.armorStand : TFCBlocks.armorStand2;
 			this.entityDropItem(new ItemStack(blockToDrop,1,woodType%16), 0);
 		}
 	}
 
 	/**
-	 * Imported from EntityLivingBNase because this does not exist on the server apparently
+	 * Imported from EntityLivingBase because this does not exist on the server apparently
 	 */
-	private Vec3 getPlayerLook(EntityLivingBase entity, float p_70676_1_)
+	private Vec3 getPlayerLook(EntityLivingBase entity, float mult)
 	{
 		float f1;
 		float f2;
 		float f3;
 		float f4;
 
-		if (p_70676_1_ == 1.0F)
+		if (mult == 1.0F)
 		{
 			f1 = MathHelper.cos(-entity.rotationYaw * 0.017453292F - (float)Math.PI);
 			f2 = MathHelper.sin(-entity.rotationYaw * 0.017453292F - (float)Math.PI);
@@ -202,8 +202,8 @@ public class EntityStand extends EntityLiving
 		}
 		else
 		{
-			f1 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * p_70676_1_;
-			f2 = entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * p_70676_1_;
+			f1 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * mult;
+			f2 = entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * mult;
 			f3 = MathHelper.cos(-f2 * 0.017453292F - (float)Math.PI);
 			f4 = MathHelper.sin(-f2 * 0.017453292F - (float)Math.PI);
 			float f5 = -MathHelper.cos(-f1 * 0.017453292F);
@@ -232,8 +232,8 @@ public class EntityStand extends EntityLiving
 				double angleTan = hitVec.yCoord / Math.sqrt(hitVec.xCoord * hitVec.xCoord + hitVec.zCoord * hitVec.zCoord);
 
 				double xzDist = Math.sqrt(Math.pow(ep.posX - this.posX,2) + Math.pow(ep.posZ - this.posZ, 2));
-				double y_level = angleTan * xzDist + ep.eyeHeight + ep.posY;
-				double y = y_level - this.posY;
+				double yLevel = angleTan * xzDist + ep.eyeHeight + ep.posY;
+				double y = yLevel - this.posY;
 
 				int slot = -1;
 				if(y >= 0 && y < 0.3){

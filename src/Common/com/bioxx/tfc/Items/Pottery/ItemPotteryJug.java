@@ -23,12 +23,12 @@ import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemPotteryJug extends ItemPotteryBase
 {
-	private IIcon WaterIcon;
+	private IIcon waterIcon;
 
 	public ItemPotteryJug()
 	{
 		super();
-		this.MetaNames = new String[]{"Clay Jug", "Ceramic Jug", "Water Jug"};
+		this.metaNames = new String[]{"Clay Jug", "Ceramic Jug", "Water Jug"};
 		this.stackable = false;
 
 		this.setWeight(EnumWeight.LIGHT);
@@ -213,21 +213,21 @@ public class ItemPotteryJug extends ItemPotteryBase
 	public IIcon getIconFromDamage(int damage)
 	{
 		if(damage == 0) {
-			return this.ClayIcon;
+			return this.clayIcon;
 		} else if(damage == 1) {
-			return this.CeramicIcon;
+			return this.ceramicIcon;
 		} else if(damage == 2) {
-			return this.WaterIcon;
+			return this.waterIcon;
 		}
 
-		return this.WaterIcon; 
+		return this.waterIcon; 
 	}
 
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
 		super.registerIcons(registerer);
-		this.WaterIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + "Water Jug");
+		this.waterIcon = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder + "Water Jug");
 	}
 
 	@Override

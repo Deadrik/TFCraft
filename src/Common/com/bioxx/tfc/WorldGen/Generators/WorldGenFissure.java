@@ -75,8 +75,8 @@ public class WorldGenFissure implements IWorldGenerator
 		int startZ = chunkZ + random.nextInt(16) + 8;
 		BiomeGenBase biome = world.getBiomeGenForCoords(startX, startZ);
 
-		if(rarity <= 0 || rand.nextInt(rarity) != 0 || biome == TFCBiome.beach || biome == TFCBiome.ocean || 
-				biome == TFCBiome.gravelbeach || biome == TFCBiome.lake || biome == TFCBiome.river || biome == TFCBiome.DeepOcean)
+		if(rarity <= 0 || rand.nextInt(rarity) != 0 || biome == TFCBiome.BEACH || biome == TFCBiome.OCEAN || 
+				biome == TFCBiome.GRAVEL_BEACH || biome == TFCBiome.LAKE || biome == TFCBiome.RIVER || biome == TFCBiome.DEEP_OCEAN)
 			return;
 
 		int startY = world.getTopSolidOrLiquidBlock(startX, startZ) - 1;
@@ -110,7 +110,7 @@ public class WorldGenFissure implements IWorldGenerator
 		if(checkStability && stability == 0)
 			return;
 		if(stability == 1 && fillBlock != null && fillBlock.getMaterial() == Material.water)
-			fillBlock = TFCBlocks.HotWater;
+			fillBlock = TFCBlocks.hotWater;
 		if(!TFC_Core.isGround(block))
 			return;
 

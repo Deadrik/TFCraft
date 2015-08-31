@@ -24,7 +24,7 @@ public class BlockThatch extends BlockTerra
 	public BlockThatch()
 	{
 		super(Material.grass);
-		this.setCreativeTab(TFCTabs.TFCBuilding);
+		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 		this.setBlockBounds(0f, 0, 0f, 1f, 1, 1f);
 		this.lightOpacity = 255;
 	}
@@ -32,7 +32,7 @@ public class BlockThatch extends BlockTerra
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/Thatch");
+		this.blockIcon = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "plants/Thatch");
 	}
 
 	@Override

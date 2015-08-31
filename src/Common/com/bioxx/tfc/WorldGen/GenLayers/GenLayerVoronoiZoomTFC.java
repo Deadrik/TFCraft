@@ -87,7 +87,7 @@ public class GenLayerVoronoiZoomTFC extends GenLayerTFC
 
 		for (l2 = 0; l2 < par4; ++l2)
 		{
-			System.arraycopy(aint1, (l2 + (par2 & 3)) * i2 + (par1 & 3), aint2, l2 * par3, par3);
+			System.arraycopy(aint1, (l2 + (par2 & 3)) * i2 + (par1 & 3), aint2, l2 * par3, par3); //NOPMD
 		}
 
 		return aint2;

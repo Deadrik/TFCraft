@@ -27,7 +27,7 @@ public class TESRChestHelper
 	/**
 	 * Renders a chest at 0,0,0 - used for item rendering
 	 */
-	public void renderChest(Block block, int meta, float p_147715_3_)
+	public void renderChest(Block block, int meta, float modelID)
 	{
 		TileEntityRendererDispatcher.instance.renderTileEntityAt(chestTypes[meta], 0.0D, 0.0D, 0.0D, 0.0F);
 	}

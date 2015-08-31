@@ -10,7 +10,7 @@ import com.bioxx.tfc.TileEntities.TEForge;
 
 public class GuiForge extends GuiContainerTFC
 {
-	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_forge.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_forge.png");
 
 	private TEForge forgeTE;
 

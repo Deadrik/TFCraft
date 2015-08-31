@@ -11,9 +11,9 @@ public class ItemRenamePacket extends AbstractPacket
 
 	public ItemRenamePacket(){}
 
-	public ItemRenamePacket(String S)
+	public ItemRenamePacket(String s)
 	{
-		name = S;
+		name = s;
 	}
 
 	@Override

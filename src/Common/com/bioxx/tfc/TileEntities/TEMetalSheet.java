@@ -19,32 +19,32 @@ public class TEMetalSheet extends NetworkTileEntity
 		sides = 0;
 	}
 
-	public boolean TopExists()
+	public boolean topExists()
 	{
 		return (sides & 1) > 0;
 	}
 
-	public boolean BottomExists()
+	public boolean bottomExists()
 	{
 		return (sides & 2) > 0;
 	}
 
-	public boolean NorthExists()
+	public boolean northExists()
 	{
 		return (sides & 4) > 0;
 	}
 
-	public boolean SouthExists()
+	public boolean southExists()
 	{
 		return (sides & 8) > 0;
 	}
 
-	public boolean EastExists()
+	public boolean eastExists()
 	{
 		return (sides & 16) > 0;
 	}
 
-	public boolean WestExists()
+	public boolean westExists()
 	{
 		return (sides & 32) > 0;
 	}
@@ -65,7 +65,7 @@ public class TEMetalSheet extends NetworkTileEntity
 
 	public void toggleTop(boolean setOn)
 	{
-		if(TopExists() && !setOn)
+		if(topExists() && !setOn)
 			sides -= 1;
 		else
 			sides += 1;
@@ -73,7 +73,7 @@ public class TEMetalSheet extends NetworkTileEntity
 
 	public void toggleBottom(boolean setOn)
 	{
-		if(BottomExists() && !setOn)
+		if(bottomExists() && !setOn)
 			sides -= 2;
 		else
 			sides += 2;
@@ -81,7 +81,7 @@ public class TEMetalSheet extends NetworkTileEntity
 
 	public void toggleNorth(boolean setOn)
 	{
-		if(NorthExists() && !setOn)
+		if(northExists() && !setOn)
 			sides -= 4;
 		else
 			sides += 4;
@@ -89,7 +89,7 @@ public class TEMetalSheet extends NetworkTileEntity
 
 	public void toggleSouth(boolean setOn)
 	{
-		if(SouthExists() && !setOn)
+		if(southExists() && !setOn)
 			sides -= 8;
 		else
 			sides += 8;
@@ -97,7 +97,7 @@ public class TEMetalSheet extends NetworkTileEntity
 
 	public void toggleEast(boolean setOn)
 	{
-		if(EastExists() && !setOn)
+		if(eastExists() && !setOn)
 			sides -= 16;
 		else
 			sides += 16;
@@ -105,7 +105,7 @@ public class TEMetalSheet extends NetworkTileEntity
 
 	public void toggleWest(boolean setOn)
 	{
-		if(WestExists() && !setOn)
+		if(westExists() && !setOn)
 			sides -= 32;
 		else
 			sides += 32;
@@ -113,7 +113,7 @@ public class TEMetalSheet extends NetworkTileEntity
 
 	public boolean isEmpty()
 	{
-		return !TopExists() && !BottomExists() && !NorthExists() && !SouthExists() && !EastExists() && !WestExists();
+		return !topExists() && !bottomExists() && !northExists() && !southExists() && !eastExists() && !westExists();
 	}
 
 	@Override

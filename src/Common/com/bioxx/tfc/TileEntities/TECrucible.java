@@ -56,7 +56,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			if(m != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setInteger("ID", Item.getIdFromItem(m.type.Ingot));
+				nbttagcompound1.setInteger("ID", Item.getIdFromItem(m.type.ingot));
 				nbttagcompound1.setFloat("AmountF", m.amount);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
@@ -123,7 +123,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				cookDelay--;
 
 			/*Heat the crucible based on the Forge beneath it*/
-			if(worldObj.getBlock(xCoord, yCoord - 1, zCoord) == TFCBlocks.Forge)
+			if(worldObj.getBlock(xCoord, yCoord - 1, zCoord) == TFCBlocks.forge)
 			{
 				TEForge te = (TEForge) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
 				if(te.fireTemp > temperature)
@@ -144,11 +144,11 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				{
 					if(inputTick > 10)
 					{
-						if(currentAlloy != null && currentAlloy.outputType != null && itemToSmelt == currentAlloy.outputType.MeltedItem)
+						if(currentAlloy != null && currentAlloy.outputType != null && itemToSmelt == currentAlloy.outputType.meltedItem)
 						{
 							this.addMetal(MetalRegistry.instance.getMetalFromItem(itemToSmelt), (short) 1);
 							if(stackToSmelt.getItemDamage()+1 >= storage[0].getMaxDamage())
-								storage[0] = new ItemStack(TFCItems.CeramicMold,1,1);
+								storage[0] = new ItemStack(TFCItems.ceramicMold,1,1);
 							else
 								stackToSmelt.setItemDamage(stackToSmelt.getItemDamage() + 1);
 						}
@@ -156,7 +156,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 						{
 							this.addMetal(MetalRegistry.instance.getMetalFromItem(itemToSmelt), (short) 1);
 							if(stackToSmelt.getItemDamage()+1 >= stackToSmelt.getMaxDamage())
-								storage[0] = new ItemStack(TFCItems.CeramicMold,1,1);
+								storage[0] = new ItemStack(TFCItems.ceramicMold,1,1);
 							else
 								stackToSmelt.setItemDamage(stackToSmelt.getItemDamage() + 1);
 						}
@@ -189,15 +189,15 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 					outputTick >= 2 &&
 					temperature >= TFC_ItemHeat.isCookable(currentAlloy.outputType))
 			{
-				if(storage[1].getItem() == TFCItems.CeramicMold)
+				if(storage[1].getItem() == TFCItems.ceramicMold)
 				{
-					storage[1] = new ItemStack(currentAlloy.outputType.MeltedItem, 1, 99);
+					storage[1] = new ItemStack(currentAlloy.outputType.meltedItem, 1, 99);
 					TFC_ItemHeat.setTemp(storage[1], temperature);
 					//currentAlloy.outputAmount--;
 					drainOutput(1.0f);
 					updateGui((byte) 1);
 				}
-				else if(storage[1].getItem() == currentAlloy.outputType.MeltedItem && storage[1].getItemDamage() > 0)
+				else if(storage[1].getItem() == currentAlloy.outputType.meltedItem && storage[1].getItemDamage() > 0)
 				{
 					storage[1].setItemDamage(storage[1].getItemDamage()-1);
 					float inTemp = TFC_ItemHeat.getTemp(storage[1]);
@@ -244,12 +244,12 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 	public boolean addMetal(Metal m, float amt)
 	{
-		if (getTotalMetal() + amt <= MAX_UNITS && m.Name != null && m.Name != "Unknown")
+		if (getTotalMetal() + amt <= MAX_UNITS && m.name != null && m.name != "Unknown")
 		{
-			if(metals.containsKey(m.Name))
-				metals.get(m.Name).amount += amt;
+			if(metals.containsKey(m.name))
+				metals.get(m.name).amount += amt;
 			else
-				metals.put(m.Name, new MetalPair(m, amt));
+				metals.put(m.name, new MetalPair(m, amt));
 
 			updateCurrentAlloy();
 			return true;
@@ -283,16 +283,16 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				a.add(new AlloyMetal(m.type, (m.amount / totalAmount) * 100f));
 		}
 
-		Metal match = AlloyManager.instance.matchesAlloy(a, Alloy.EnumTier.TierV);
+		Metal match = AlloyManager.INSTANCE.matchesAlloy(a, Alloy.EnumTier.TierV);
 		if(match != null)
 		{
 			currentAlloy = new Alloy(match, totalAmount); 
-			currentAlloy.AlloyIngred = a;
+			currentAlloy.alloyIngred = a;
 		}
 		else
 		{
 			currentAlloy = new Alloy(Global.UNKNOWN, totalAmount);
-			currentAlloy.AlloyIngred = a;
+			currentAlloy.alloyIngred = a;
 		}
 	}
 

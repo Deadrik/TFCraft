@@ -9,10 +9,10 @@ import net.minecraft.util.ResourceLocation;
 
 public class LoomManager
 {
-	private static final LoomManager instance = new LoomManager();
+	private static final LoomManager INSTANCE = new LoomManager();
 	public static final LoomManager getInstance()
 	{
-		return instance;
+		return INSTANCE;
 	}
 
 	private List<LoomRecipe> recipes;

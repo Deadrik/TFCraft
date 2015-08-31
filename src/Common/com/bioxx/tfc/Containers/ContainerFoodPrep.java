@@ -60,22 +60,22 @@ public class ContainerFoodPrep extends ContainerTFC
 	{
 		if(guiTab == 0)
 		{
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 0, 44, 24).addItemInclusion(TFCItems.WheatBread, TFCItems.BarleyBread, TFCItems.OatBread,
-					TFCItems.RyeBread, TFCItems.RiceBread, TFCItems.CornBread).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 62, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 80, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 98, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 116, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 0, 44, 24).addItemInclusion(TFCItems.wheatBread, TFCItems.barleyBread, TFCItems.oatBread,
+					TFCItems.ryeBread, TFCItems.riceBread, TFCItems.cornBread).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 62, 24).addItemException(TFCItems.woodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 80, 24).addItemException(TFCItems.woodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 98, 24).addItemException(TFCItems.woodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 116, 24).addItemException(TFCItems.woodenBucketMilk).setSize(EnumSize.HUGE));
 			/*this.addSlotToContainer(new SlotFoodOnly(chestInventory, 5, 125, 11).addItemInclusion(TFCItems.WheatBread, TFCItems.BarleyBread, TFCItems.OatBread, 
 					TFCItems.RyeBread, TFCItems.RiceBread, TFCItems.CornBread).setSize(EnumSize.HUGE));*/
 		}
 		else if(guiTab == 1)
 		{
 			this.addSlotToContainer(new SlotBlocked(chestInventory, 0, 15, 8));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 53, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 71, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 89, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 107, 24).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 53, 24).addItemException(TFCItems.woodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 71, 24).addItemException(TFCItems.woodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 89, 24).addItemException(TFCItems.woodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 107, 24).addItemException(TFCItems.woodenBucketMilk).setSize(EnumSize.HUGE));
 			/*this.addSlotToContainer(new SlotBlocked(chestInventory, 5, 16, 44));*/
 		}
 		this.addSlotToContainer(new SlotBlocked(chestInventory, 6, 53, 46));

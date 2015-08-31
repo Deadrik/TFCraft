@@ -37,7 +37,7 @@ public class BlockToolRack extends BlockTerraContainer
 	public BlockToolRack()
 	{
 		super(Material.wood);
-		this.setCreativeTab(TFCTabs.TFCDecoration);
+		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 		this.woodNames = Global.WOOD_ALL;
 	}
 
@@ -168,7 +168,7 @@ public class BlockToolRack extends BlockTerraContainer
 			if (te instanceof TEToolRack)
 			{
 				TEToolRack rack = (TEToolRack) te;
-				dropBlockAsItem(world, x, y, z, new ItemStack(TFCBlocks.ToolRack, 1, rack.woodType));
+				dropBlockAsItem(world, x, y, z, new ItemStack(TFCBlocks.toolRack, 1, rack.woodType));
 			}
 		}
 		return world.setBlockToAir(x, y, z); // super.removedByPlayer is deprecated, and causes a loop.
@@ -313,16 +313,16 @@ public class BlockToolRack extends BlockTerraContainer
 		TEToolRack te = (TEToolRack) bAccess.getTileEntity(x, y, z);
 
 		if(te.woodType > 15)
-			return TFCBlocks.WoodSupportV2.getIcon(side, te.woodType);
-		return TFCBlocks.WoodSupportV.getIcon(side, te.woodType);
+			return TFCBlocks.woodSupportV2.getIcon(side, te.woodType);
+		return TFCBlocks.woodSupportV.getIcon(side, te.woodType);
 	}
 
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
 		if(meta > 15)
-			return TFCBlocks.WoodSupportV2.getIcon(side, meta);
-		return TFCBlocks.WoodSupportV.getIcon(side, meta);
+			return TFCBlocks.woodSupportV2.getIcon(side, meta);
+		return TFCBlocks.woodSupportV.getIcon(side, meta);
 	}
 
 	@Override

@@ -13,7 +13,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class MapGenRiverRavine extends MapGenBaseTFC
 {
-	private float[] field_35627_a = new float[1024];
+	private float[] multipliers = new float[1024];
 	//private byte[] metaArray;
 
 	public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, Block[] idsBig, byte[] metaBig)
@@ -52,7 +52,7 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 		{
 			if (var28 == 0 || rand.nextInt(3) == 0)
 				var27 = 1.0F + rand.nextFloat() * rand.nextFloat() * 1.0F;
-			this.field_35627_a[var28] = var27 * var27;
+			this.multipliers[var28] = var27 * var27;
 		}
 
 		for (; par15 < par16; ++par15)
@@ -146,7 +146,7 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 									for (int var49 = var37 - 1; var49 >= var55; --var49)
 									{
 										double var50 = (var49 + 0.5D - startY) / var30;
-										if ((var59 * var59 + var45 * var45) * this.field_35627_a[var49] + var50 * var50 / 6.0D < 1.0D)
+										if ((var59 * var59 + var45 * var45) * this.multipliers[var49] + var50 * var50 / 6.0D < 1.0D)
 										{
 											block = blockArray[var47];
 											/*if (TFC_Core.isGrass(block))
@@ -155,13 +155,13 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 											{
 												if (var49 < 10)
 												{
-													blockArray[var47] = TFCBlocks.Lava;
+													blockArray[var47] = TFCBlocks.lava;
 												}
 												else
 												{
 													if(var49 < waterHeight)
 													{
-														blockArray[var47] = TFCBlocks.FreshWater;
+														blockArray[var47] = TFCBlocks.freshWater;
 														//metaArray[var47] = 0;
 													}
 													else

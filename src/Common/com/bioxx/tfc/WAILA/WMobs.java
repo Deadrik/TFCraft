@@ -68,7 +68,7 @@ public class WMobs implements IWailaEntityProvider
 
 		if (pregnant)
 		{
-			currenttip.add(TFC_Core.translate("entity.pregnant") + " : " + TFC_Time.getDateStringFromHours(animal.getDueDay() * TFC_Time.hoursInDay));
+			currenttip.add(TFC_Core.translate("entity.pregnant") + " : " + TFC_Time.getDateStringFromHours(animal.getDueDay() * TFC_Time.HOURS_IN_DAY));
 		}
 
 		if (config.getConfig("tfc.familiarToday"))

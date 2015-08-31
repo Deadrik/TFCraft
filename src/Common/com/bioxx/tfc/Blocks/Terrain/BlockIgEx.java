@@ -11,7 +11,7 @@ public class BlockIgEx extends BlockStone
 	public BlockIgEx(Material material)
 	{
 		super(material);
-		this.dropBlock = TFCBlocks.StoneIgExCobble;
+		this.dropBlock = TFCBlocks.stoneIgExCobble;
 		names = Global.STONE_IGEX;
 		icons = new IIcon[names.length];
 		looseStart = Global.STONE_IGEX_START;

@@ -38,7 +38,7 @@ public class ItemProPick extends ItemTerra
 	{
 		super();
 		maxStackSize = 1;
-		setCreativeTab(TFCTabs.TFCTools);
+		setCreativeTab(TFCTabs.TFC_TOOLS);
 		this.setWeight(EnumWeight.LIGHT);
 		this.setSize(EnumSize.SMALL);
 	}
@@ -46,7 +46,7 @@ public class ItemProPick extends ItemTerra
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/" + this.getUnlocalizedName().replace("item.", ""));
+		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + "tools/" + this.getUnlocalizedName().replace("item.", ""));
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class ItemProPick extends ItemTerra
 	{
 		NBTTagCompound nbt = stack.getTagCompound();
 		if(pass == 1 && nbt != null && nbt.hasKey("broken"))
-			return TFC_Textures.BrokenItem;
+			return TFC_Textures.brokenItem;
 		else
 			return getIconFromDamageForRenderPass(stack.getItemDamage(), pass);
 	}
@@ -66,7 +66,7 @@ public class ItemProPick extends ItemTerra
 		if (!world.isRemote)
 		{
 			// Negated the old condition and exiting the method here instead.
-			if (block == TFCBlocks.ToolRack)
+			if (block == TFCBlocks.toolRack)
 				return true;
 
 			// Getting the meta data only when we actually need it.
@@ -75,15 +75,15 @@ public class ItemProPick extends ItemTerra
 			SkillRank rank = TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_PROSPECTING);
 
 			// If an ore block is targeted directly, it'll tell you what it is.
-			if ((block == TFCBlocks.Ore ||	block == TFCBlocks.Ore2 || block == TFCBlocks.Ore3) && 
+			if ((block == TFCBlocks.ore ||	block == TFCBlocks.ore2 || block == TFCBlocks.ore3) && 
 					world.getTileEntity(x, y, z) instanceof TEOre)
 			{
 				TEOre te = (TEOre) world.getTileEntity(x, y, z);
-				if (block == TFCBlocks.Ore && rank == SkillRank.Master)
+				if (block == TFCBlocks.ore && rank == SkillRank.Master)
 					meta = ((BlockOre) block).getOreGrade(te, meta);
-				if (block == TFCBlocks.Ore2) meta = meta + Global.ORE_METAL.length;
-				if (block == TFCBlocks.Ore3) meta = meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length;
-				TellResult(player, new ItemStack(TFCItems.OreChunk, 1, meta));
+				if (block == TFCBlocks.ore2) meta = meta + Global.ORE_METAL.length;
+				if (block == TFCBlocks.ore3) meta = meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length;
+				tellResult(player, new ItemStack(TFCItems.oreChunk, 1, meta));
 				return true;
 			}
 
@@ -95,7 +95,7 @@ public class ItemProPick extends ItemTerra
 			// gather the blocks in a 25x25 area if it doesn't.
 			if (random.nextInt(100) >= chance && rank != SkillRank.Master)
 			{
-				TellNothingFound(player);
+				tellNothingFound(player);
 				return true;
 			}
 
@@ -115,25 +115,25 @@ public class ItemProPick extends ItemTerra
 						block = world.getBlock(blockX, blockY, blockZ);
 						meta = world.getBlockMetadata(blockX, blockY, blockZ);
 						ItemStack ore;
-						if (block == TFCBlocks.Ore && world.getTileEntity(blockX, blockY, blockZ) instanceof TEOre)
+						if (block == TFCBlocks.ore && world.getTileEntity(blockX, blockY, blockZ) instanceof TEOre)
 						{
 							TEOre te = (TEOre) world.getTileEntity(blockX, blockY, blockZ);
 							if (rank == SkillRank.Master)
-								ore = new ItemStack(TFCItems.OreChunk, 1, ((BlockOre) block).getOreGrade(te, meta));
+								ore = new ItemStack(TFCItems.oreChunk, 1, ((BlockOre) block).getOreGrade(te, meta));
 							else
-								ore = new ItemStack(TFCItems.OreChunk, 1, meta);
+								ore = new ItemStack(TFCItems.oreChunk, 1, meta);
 						}
-						else if (block == TFCBlocks.Ore2)
-							ore = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length);
-						else if (block == TFCBlocks.Ore3)
-							ore = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length);
+						else if (block == TFCBlocks.ore2)
+							ore = new ItemStack(TFCItems.oreChunk, 1, meta + Global.ORE_METAL.length);
+						else if (block == TFCBlocks.ore3)
+							ore = new ItemStack(TFCItems.oreChunk, 1, meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length);
 						else
 							continue;
 
 						String oreName = ore.getDisplayName();
 
 						if (results.containsKey(oreName))
-							results.get(oreName).Count++;
+							results.get(oreName).count++ ;
 						else
 							results.put(oreName, new ProspectResult(ore, 1));
 
@@ -145,9 +145,9 @@ public class ItemProPick extends ItemTerra
 			
 			// Tell the player what was found.
 			if (results.isEmpty()) {
-				TellNothingFound(player);
+				tellNothingFound(player);
 			} else {
-				TellResult(player);
+				tellResult(player);
 			}
 
 			results.clear();
@@ -165,7 +165,7 @@ public class ItemProPick extends ItemTerra
 	/*
 	 * Tells the player nothing was found.
 	 */
-	private void TellNothingFound(EntityPlayer player)
+	private void tellNothingFound(EntityPlayer player)
 	{
 		TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("gui.ProPick.FoundNothing"));
 	}
@@ -173,7 +173,7 @@ public class ItemProPick extends ItemTerra
 	/*
 	 * Tells the player what block of ore he found, when directly targeting an ore block.
 	 */
-	private void TellResult(EntityPlayer player, ItemStack ore)
+	private void tellResult(EntityPlayer player, ItemStack ore)
 	{
 		String oreName = ore.getUnlocalizedName() + ".name";
 		TFC_Core.sendInfoMessage(player,
@@ -186,21 +186,21 @@ public class ItemProPick extends ItemTerra
 	/*
 	 * Tells the player what ore has been found, randomly picked off the HashMap.
 	 */
-	private void TellResult(EntityPlayer player)
+	private void tellResult(EntityPlayer player)
 	{
 		TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_PROSPECTING, 1);
 		int index = random.nextInt(results.size());
 		ProspectResult result = results.values().toArray(new ProspectResult[0])[index];
-		String oreName = result.ItemStack.getUnlocalizedName() + ".name";
+		String oreName = result.itemStack.getUnlocalizedName() + ".name";
 
 		String quantityMsg;
-		if (result.Count < 10)
+		if (result.count < 10)
 			quantityMsg = "gui.ProPick.FoundTraces";
-		else if(result.Count < 20)
+		else if (result.count < 20)
 			quantityMsg = "gui.ProPick.FoundSmall";
-		else if (result.Count < 40)
+		else if (result.count < 40)
 			quantityMsg = "gui.ProPick.FoundMedium";
-		else if (result.Count < 80)
+		else if (result.count < 80)
 			quantityMsg = "gui.ProPick.FoundLarge";
 		else
 			quantityMsg = "gui.ProPick.FoundVeryLarge";
@@ -222,13 +222,13 @@ public class ItemProPick extends ItemTerra
 
 	private class ProspectResult
 	{
-		public ItemStack ItemStack;
-		public int Count;
+		public ItemStack itemStack;
+		public int count;
 
 		public ProspectResult(ItemStack itemStack, int count)
 		{
-			ItemStack = itemStack;
-			Count = count;
+			this.itemStack = itemStack;
+			this.count = count;
 		}
 	}
 

@@ -12,7 +12,7 @@ public class ItemToolRack extends ItemTerraBlock
 	public ItemToolRack(Block par1)
 	{
 		super(par1);
-		MetaNames = Global.WOOD_ALL;
+		metaNames = Global.WOOD_ALL;
 	}
 
 	@Override

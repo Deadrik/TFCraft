@@ -73,7 +73,7 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 					if ((Math.abs(l3) != treeRadius || Math.abs(j4) != treeRadius || random.nextInt(2) != 0 && treeDiameter != 0) && 
 							world.getBlock(xPos, treeHeightOffset, zPos).canBeReplacedByLeaves(world, xPos, treeHeightOffset, zPos))
 					{
-						setBlockAndNotifyAdequately(world, xPos, treeHeightOffset, zPos, TFCBlocks.Leaves, treeId);
+						setBlockAndNotifyAdequately(world, xPos, treeHeightOffset, zPos, TFCBlocks.leaves, treeId);
 					}
 				}
 			}
@@ -81,7 +81,7 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 		//Here we crate the tree trunk
 		for (int l1 = 0; l1 < treeHeight; l1++)
 		{
-			setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId);
+			setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.logNatural, treeId);
 		}
 		return true;
 	}

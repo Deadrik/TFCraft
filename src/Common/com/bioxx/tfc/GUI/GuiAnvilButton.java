@@ -67,9 +67,9 @@ public class GuiAnvilButton extends GuiButton
 				{
 					PlanRecipe p = AnvilManager.getInstance().getPlan(screen.anvilTE.craftingPlan);
 					if(p == null) return;
-					RuleEnum[] Rules = p.rules;
+					RuleEnum[] rules = p.rules;
 					//int[] ItemRules = screen.anvilTE.getItemRules();
-					this.displayString = TFC_Core.translate(Rules[ruleIndex].Name);
+					this.displayString = TFC_Core.translate(rules[ruleIndex].Name);
 				}
 			}
 

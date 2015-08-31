@@ -2,6 +2,7 @@ package com.bioxx.tfc.api.Util;
 
 import java.util.Random;
 
+@SuppressWarnings("PMD")
 public class SimplexNoise_Octave 
 {  // Simplex noise in 2D, 3D and 4D
 

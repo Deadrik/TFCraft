@@ -15,8 +15,8 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class RenderBarrel implements ISimpleBlockRenderingHandler
 {
-	private static final float min = 0.1F;
-	private static final float max = 0.9F;
+	private static final float MIN = 0.1F;
+	private static final float MAX = 0.9F;
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
@@ -26,13 +26,13 @@ public class RenderBarrel implements ISimpleBlockRenderingHandler
 		Block lidBlock;
 		if(te.barrelType < 16)
 		{
-			planksBlock = TFCBlocks.Planks;
-			lidBlock = TFCBlocks.WoodSupportH;
+			planksBlock = TFCBlocks.planks;
+			lidBlock = TFCBlocks.woodSupportH;
 		}
 		else
 		{
-			planksBlock = TFCBlocks.Planks2;
-			lidBlock = TFCBlocks.WoodSupportH2;
+			planksBlock = TFCBlocks.planks2;
+			lidBlock = TFCBlocks.woodSupportH2;
 		}
 		renderer.renderAllFaces = true;
 
@@ -40,12 +40,12 @@ public class RenderBarrel implements ISimpleBlockRenderingHandler
 		{
 			if(te.getSealed())
 			{
-				renderer.setRenderBounds(min+0.05F, min, min+0.05F, max-0.05F, 0.95F, max-0.05F);
+				renderer.setRenderBounds(MIN+0.05F, MIN, MIN+0.05F, MAX-0.05F, 0.95F, MAX-0.05F);
 				renderer.renderStandardBlock(lidBlock, x, y, z);
 			}
 			else
 			{
-				renderer.setRenderBounds(min+0.05F, min, min+0.05F, max-0.05F, min+0.05F, max-0.05F);
+				renderer.setRenderBounds(MIN+0.05F, MIN, MIN+0.05F, MAX-0.05F, MIN+0.05F, MAX-0.05F);
 				renderer.renderStandardBlock(lidBlock, x, y, z);
 
 				if(te.fluid != null && renderer.overrideBlockTexture == null)
@@ -55,30 +55,30 @@ public class RenderBarrel implements ISimpleBlockRenderingHandler
 					float f1 = (color >> 8 & 255) / 255.0F;
 					float f2 = (color & 255) / 255.0F;
 					float h = 0.75f*(te.fluid.amount/10000f);
-					renderer.setRenderBounds(min+0.05F, min+0.05, min+0.05F, max-0.05F, min+0.05f+h, max-0.05F);
+					renderer.setRenderBounds(MIN+0.05F, MIN+0.05, MIN+0.05F, MAX-0.05F, MIN+0.05f+h, MAX-0.05F);
 					IIcon still = te.fluid.getFluid().getStillIcon();
 					renderer.setOverrideBlockTexture(still);
 					renderer.renderStandardBlockWithColorMultiplier(lidBlock, x, y, z, f, f1, f2);
 					renderer.clearOverrideBlockTexture();
 				}
 			}
-			renderer.setRenderBounds(min, 0F, min+0.05F, min+0.05F, 1F, max-0.05F);
+			renderer.setRenderBounds(MIN, 0F, MIN+0.05F, MIN+0.05F, 1F, MAX-0.05F);
 			rotate(renderer, 1);
 			renderer.renderStandardBlock(planksBlock, x, y, z);
 
-			renderer.setRenderBounds(max-0.05F, 0F, min+0.05F, max, 1F, max-0.05F);
+			renderer.setRenderBounds(MAX-0.05F, 0F, MIN+0.05F, MAX, 1F, MAX-0.05F);
 			rotate(renderer, 1);
 			renderer.renderStandardBlock(planksBlock, x, y, z);
 
-			renderer.setRenderBounds(min, 0F, min, max, 1F, min+0.05F);
+			renderer.setRenderBounds(MIN, 0F, MIN, MAX, 1F, MIN+0.05F);
 			rotate(renderer, 1);
 			renderer.renderStandardBlock(planksBlock, x, y, z);
 
-			renderer.setRenderBounds(min, 0F, max-0.05F, max, 1F, max);
+			renderer.setRenderBounds(MIN, 0F, MAX-0.05F, MAX, 1F, MAX);
 			rotate(renderer, 1);
 			renderer.renderStandardBlock(planksBlock, x, y, z);
 
-			renderer.setRenderBounds(min-0.001, 0F, min-0.001, max+0.001, 1F, max+0.001);
+			renderer.setRenderBounds(MIN-0.001, 0F, MIN-0.001, MAX+0.001, 1F, MAX+0.001);
 			rotate(renderer, 0);
 			renderer.renderStandardBlock(block, x, y, z);
 		}
@@ -86,12 +86,12 @@ public class RenderBarrel implements ISimpleBlockRenderingHandler
 		{
 			if((te.rotation & 3) == 0)
 			{
-				renderer.setRenderBounds(min, min, min+0.05F, 0.95F, min+0.05F, max-0.05F);
+				renderer.setRenderBounds(MIN, MIN, MIN+0.05F, 0.95F, MIN+0.05F, MAX-0.05F);
 				renderer.renderStandardBlock(lidBlock, x, y, z);
 			}
 			if((te.rotation & 3) == 1)
 			{
-				renderer.setRenderBounds(min+0.05F, min, min,max-0.05F, min+0.05F, 0.95F);
+				renderer.setRenderBounds(MIN+0.05F, MIN, MIN,MAX-0.05F, MIN+0.05F, 0.95F);
 				renderer.renderStandardBlock(lidBlock, x, y, z);
 			}
 		}
@@ -117,36 +117,36 @@ public class RenderBarrel implements ISimpleBlockRenderingHandler
 
 		if(meta < 16)
 		{
-			lidBlock = TFCBlocks.WoodSupportH;
+			lidBlock = TFCBlocks.woodSupportH;
 		}
 		else
 		{
-			lidBlock = TFCBlocks.WoodSupportH2;
+			lidBlock = TFCBlocks.woodSupportH2;
 		}
 
-		renderer.setRenderBounds(min+0.05F, min, min+0.05F, max-0.05F, 0.95F, max-0.05F);
+		renderer.setRenderBounds(MIN+0.05F, MIN, MIN+0.05F, MAX-0.05F, 0.95F, MAX-0.05F);
 		rotate(renderer, 1);
 		renderInvBlock(lidBlock, meta, renderer);
 
-		renderer.setRenderBounds(min, 0F, min+0.05F, min+0.05F, 1F, max-0.05F);
+		renderer.setRenderBounds(MIN, 0F, MIN+0.05F, MIN+0.05F, 1F, MAX-0.05F);
 		rotate(renderer, 1);
 		renderInvBlock(block, meta, renderer);
 		rotate(renderer, 0);
 		renderInvBlockHoop(block, meta, renderer);
 
-		renderer.setRenderBounds(max-0.05F, 0F, min+0.05F, max, 1F, max-0.05F);
+		renderer.setRenderBounds(MAX-0.05F, 0F, MIN+0.05F, MAX, 1F, MAX-0.05F);
 		rotate(renderer, 1);
 		renderInvBlock(block, meta, renderer);
 		rotate(renderer, 0);
 		renderInvBlockHoop(block, meta, renderer);
 
-		renderer.setRenderBounds(min, 0F, min, max, 1F, min+0.05F);
+		renderer.setRenderBounds(MIN, 0F, MIN, MAX, 1F, MIN+0.05F);
 		rotate(renderer, 1);
 		renderInvBlock(block, meta, renderer);
 		rotate(renderer, 0);
 		renderInvBlockHoop(block, meta, renderer);
 
-		renderer.setRenderBounds(min, 0F, max-0.05F, max, 1F, max);
+		renderer.setRenderBounds(MIN, 0F, MAX-0.05F, MAX, 1F, MAX);
 		rotate(renderer, 1);
 		renderInvBlock(block, meta, renderer);
 		rotate(renderer, 0);

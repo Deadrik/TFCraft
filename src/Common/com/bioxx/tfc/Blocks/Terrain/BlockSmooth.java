@@ -62,7 +62,7 @@ public class BlockSmooth extends BlockTerra
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
 		for(int i = 0; i < names.length; i++)
-			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "rocks/"+names[i]+" Smooth");
+			icons[i] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "rocks/"+names[i]+" Smooth");
 	}
 
 	/**

@@ -16,8 +16,8 @@ import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 
 public class RenderCowTFC extends RenderCow
 {
-	private static final ResourceLocation CowTex = new ResourceLocation("textures/entity/cow/cow.png");
-	private static final ResourceLocation BullTex = new ResourceLocation(Reference.ModID, "textures/mob/bull.png");
+	private static final ResourceLocation COW_TEXTURE = new ResourceLocation("textures/entity/cow/cow.png");
+	private static final ResourceLocation BULL_TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/mob/bull.png");
 
 	public RenderCowTFC(ModelBase par1ModelBase, float par2)
 	{
@@ -40,9 +40,9 @@ public class RenderCowTFC extends RenderCow
 	protected ResourceLocation getTexture(EntityCowTFC entity)
 	{
 		if(entity.getGender() == GenderEnum.MALE) {
-			return BullTex;
+			return BULL_TEXTURE;
 		} else {
-			return CowTex;
+			return COW_TEXTURE;
 		}
 	}
 

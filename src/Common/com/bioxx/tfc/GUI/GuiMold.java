@@ -12,7 +12,7 @@ import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 
 public class GuiMold extends GuiContainerTFC
 {
-	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_mold.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_mold.png");
 	private EntityPlayer player;
 
 	public GuiMold(InventoryPlayer inventoryplayer, World world, int x, int y, int z)

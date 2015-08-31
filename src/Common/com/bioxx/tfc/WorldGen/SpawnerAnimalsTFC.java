@@ -79,11 +79,11 @@ public final class SpawnerAnimalsTFC
 							}
 							catch (Exception exception)
 							{
-								TerraFirmaCraft.log.catching(exception);
+								TerraFirmaCraft.LOG.catching(exception);
 								continue;
 							}
 							if(entityliving instanceof EntityFishTFC){
-								if(entityliving.getRNG().nextInt((int)ChunkData.fishPopMax) > TFC_Core.getCDM(world).getFishPop(j1 >> 4, k1 >> 4)){
+								if(entityliving.getRNG().nextInt((int)ChunkData.FISH_POP_MAX) > TFC_Core.getCDM(world).getFishPop(j1 >> 4, k1 >> 4)){
 									return;
 								}
 							}

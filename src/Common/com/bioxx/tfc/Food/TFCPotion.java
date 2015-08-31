@@ -59,7 +59,7 @@ public class TFCPotion extends Potion
         return this.statusIconIndex;
     }
 	
-	public static void Setup()
+	public static void setup()
 	{
 		bleed = new TFCPotion(20, true, 0xFF0000).setPotionName("effect.bleed").setIconIndex(4, 0).setEffectiveness(0.25D);
 	}

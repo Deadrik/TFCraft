@@ -10,8 +10,8 @@ public class ItemFenceGate extends ItemTerraBlock
 	public ItemFenceGate(Block par1) 
 	{
 		super(par1);
-		MetaNames = new String[16];
-		System.arraycopy(Global.WOOD_ALL, 0, MetaNames, 0, 16);
+		metaNames = new String[16];
+		System.arraycopy(Global.WOOD_ALL, 0, metaNames, 0, 16);
 	}
 	
 	@Override

@@ -12,7 +12,7 @@ import com.bioxx.tfc.api.TFCOptions;
 
 public class GuiBlastFurnace extends GuiContainerTFC
 {
-	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_blastfurnace.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_blastfurnace.png");
 
 	private TEBlastFurnace blastFurnaceTE;
 

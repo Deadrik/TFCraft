@@ -61,7 +61,7 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 public class TFC_Core
 {
 	private static HashMap<Integer, ChunkDataManager> cdmMap = new HashMap<Integer, ChunkDataManager>();
-	public static boolean PreventEntityDataUpdate;
+	public static boolean preventEntityDataUpdate;
 
 	public static ChunkDataManager getCDM(World world)
 	{
@@ -127,103 +127,103 @@ public class TFC_Core
 		return ip;
 	}
 
-	public static ItemStack RandomGem(Random random, int rockType)
+	public static ItemStack randomGem(Random random, int rockType)
 	{
 		ItemStack is = null;
 		if (random.nextInt(500) == 0)
 		{
 			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-			items.add(new ItemStack(TFCItems.GemAgate, 1, 0));
-			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 0));
-			items.add(new ItemStack(TFCItems.GemBeryl, 1, 0));
-			items.add(new ItemStack(TFCItems.GemEmerald, 1, 0));
-			items.add(new ItemStack(TFCItems.GemGarnet, 1, 0));
-			items.add(new ItemStack(TFCItems.GemJade, 1, 0));
-			items.add(new ItemStack(TFCItems.GemJasper, 1, 0));
-			items.add(new ItemStack(TFCItems.GemOpal, 1, 0));
-			items.add(new ItemStack(TFCItems.GemRuby, 1, 0));
-			items.add(new ItemStack(TFCItems.GemSapphire, 1, 0));
-			items.add(new ItemStack(TFCItems.GemTourmaline, 1, 0));
-			items.add(new ItemStack(TFCItems.GemTopaz, 1, 0));
+			items.add(new ItemStack(TFCItems.gemAgate, 1, 0));
+			items.add(new ItemStack(TFCItems.gemAmethyst, 1, 0));
+			items.add(new ItemStack(TFCItems.gemBeryl, 1, 0));
+			items.add(new ItemStack(TFCItems.gemEmerald, 1, 0));
+			items.add(new ItemStack(TFCItems.gemGarnet, 1, 0));
+			items.add(new ItemStack(TFCItems.gemJade, 1, 0));
+			items.add(new ItemStack(TFCItems.gemJasper, 1, 0));
+			items.add(new ItemStack(TFCItems.gemOpal, 1, 0));
+			items.add(new ItemStack(TFCItems.gemRuby, 1, 0));
+			items.add(new ItemStack(TFCItems.gemSapphire, 1, 0));
+			items.add(new ItemStack(TFCItems.gemTourmaline, 1, 0));
+			items.add(new ItemStack(TFCItems.gemTopaz, 1, 0));
 
 			is = (ItemStack) items.toArray()[random.nextInt(items.toArray().length)];
 		}
 		else if (random.nextInt(1000) == 0)
 		{
 			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-			items.add(new ItemStack(TFCItems.GemAgate, 1, 1));
-			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 1));
-			items.add(new ItemStack(TFCItems.GemBeryl, 1, 1));
-			items.add(new ItemStack(TFCItems.GemEmerald, 1, 1));
-			items.add(new ItemStack(TFCItems.GemGarnet, 1, 1));
-			items.add(new ItemStack(TFCItems.GemJade, 1, 1));
-			items.add(new ItemStack(TFCItems.GemJasper, 1, 1));
-			items.add(new ItemStack(TFCItems.GemOpal, 1, 1));
-			items.add(new ItemStack(TFCItems.GemRuby, 1, 1));
-			items.add(new ItemStack(TFCItems.GemSapphire, 1, 1));
-			items.add(new ItemStack(TFCItems.GemTourmaline, 1, 1));
-			items.add(new ItemStack(TFCItems.GemTopaz, 1, 1));
+			items.add(new ItemStack(TFCItems.gemAgate, 1, 1));
+			items.add(new ItemStack(TFCItems.gemAmethyst, 1, 1));
+			items.add(new ItemStack(TFCItems.gemBeryl, 1, 1));
+			items.add(new ItemStack(TFCItems.gemEmerald, 1, 1));
+			items.add(new ItemStack(TFCItems.gemGarnet, 1, 1));
+			items.add(new ItemStack(TFCItems.gemJade, 1, 1));
+			items.add(new ItemStack(TFCItems.gemJasper, 1, 1));
+			items.add(new ItemStack(TFCItems.gemOpal, 1, 1));
+			items.add(new ItemStack(TFCItems.gemRuby, 1, 1));
+			items.add(new ItemStack(TFCItems.gemSapphire, 1, 1));
+			items.add(new ItemStack(TFCItems.gemTourmaline, 1, 1));
+			items.add(new ItemStack(TFCItems.gemTopaz, 1, 1));
 
 			is = (ItemStack) items.toArray()[random.nextInt(items.toArray().length)];
 		}
 		else if (random.nextInt(2000) == 0)
 		{
 			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-			items.add(new ItemStack(TFCItems.GemAgate, 1, 2));
-			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 2));
-			items.add(new ItemStack(TFCItems.GemBeryl, 1, 2));
-			items.add(new ItemStack(TFCItems.GemEmerald, 1, 2));
-			items.add(new ItemStack(TFCItems.GemGarnet, 1, 2));
-			items.add(new ItemStack(TFCItems.GemJade, 1, 2));
-			items.add(new ItemStack(TFCItems.GemJasper, 1, 2));
-			items.add(new ItemStack(TFCItems.GemOpal, 1, 2));
-			items.add(new ItemStack(TFCItems.GemRuby, 1, 2));
-			items.add(new ItemStack(TFCItems.GemSapphire, 1, 2));
-			items.add(new ItemStack(TFCItems.GemTourmaline, 1, 2));
-			items.add(new ItemStack(TFCItems.GemTopaz, 1, 2));
+			items.add(new ItemStack(TFCItems.gemAgate, 1, 2));
+			items.add(new ItemStack(TFCItems.gemAmethyst, 1, 2));
+			items.add(new ItemStack(TFCItems.gemBeryl, 1, 2));
+			items.add(new ItemStack(TFCItems.gemEmerald, 1, 2));
+			items.add(new ItemStack(TFCItems.gemGarnet, 1, 2));
+			items.add(new ItemStack(TFCItems.gemJade, 1, 2));
+			items.add(new ItemStack(TFCItems.gemJasper, 1, 2));
+			items.add(new ItemStack(TFCItems.gemOpal, 1, 2));
+			items.add(new ItemStack(TFCItems.gemRuby, 1, 2));
+			items.add(new ItemStack(TFCItems.gemSapphire, 1, 2));
+			items.add(new ItemStack(TFCItems.gemTourmaline, 1, 2));
+			items.add(new ItemStack(TFCItems.gemTopaz, 1, 2));
 
 			is = (ItemStack) items.toArray()[random.nextInt(items.toArray().length)];
 		}
 		else if (random.nextInt(4000) == 0)
 		{
 			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-			items.add(new ItemStack(TFCItems.GemAgate, 1, 3));
-			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 3));
-			items.add(new ItemStack(TFCItems.GemBeryl, 1, 3));
-			items.add(new ItemStack(TFCItems.GemEmerald, 1, 3));
-			items.add(new ItemStack(TFCItems.GemGarnet, 1, 3));
-			items.add(new ItemStack(TFCItems.GemJade, 1, 3));
-			items.add(new ItemStack(TFCItems.GemJasper, 1, 3));
-			items.add(new ItemStack(TFCItems.GemOpal, 1, 3));
-			items.add(new ItemStack(TFCItems.GemRuby, 1, 3));
-			items.add(new ItemStack(TFCItems.GemSapphire, 1, 3));
-			items.add(new ItemStack(TFCItems.GemTourmaline, 1, 3));
-			items.add(new ItemStack(TFCItems.GemTopaz, 1, 3));
+			items.add(new ItemStack(TFCItems.gemAgate, 1, 3));
+			items.add(new ItemStack(TFCItems.gemAmethyst, 1, 3));
+			items.add(new ItemStack(TFCItems.gemBeryl, 1, 3));
+			items.add(new ItemStack(TFCItems.gemEmerald, 1, 3));
+			items.add(new ItemStack(TFCItems.gemGarnet, 1, 3));
+			items.add(new ItemStack(TFCItems.gemJade, 1, 3));
+			items.add(new ItemStack(TFCItems.gemJasper, 1, 3));
+			items.add(new ItemStack(TFCItems.gemOpal, 1, 3));
+			items.add(new ItemStack(TFCItems.gemRuby, 1, 3));
+			items.add(new ItemStack(TFCItems.gemSapphire, 1, 3));
+			items.add(new ItemStack(TFCItems.gemTourmaline, 1, 3));
+			items.add(new ItemStack(TFCItems.gemTopaz, 1, 3));
 
 			is = (ItemStack) items.toArray()[random.nextInt(items.toArray().length)];
 		}
 		else if (random.nextInt(8000) == 0)
 		{
 			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-			items.add(new ItemStack(TFCItems.GemAgate, 1, 4));
-			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 4));
-			items.add(new ItemStack(TFCItems.GemBeryl, 1, 4));
-			items.add(new ItemStack(TFCItems.GemEmerald, 1, 4));
-			items.add(new ItemStack(TFCItems.GemGarnet, 1, 4));
-			items.add(new ItemStack(TFCItems.GemJade, 1, 4));
-			items.add(new ItemStack(TFCItems.GemJasper, 1, 4));
-			items.add(new ItemStack(TFCItems.GemOpal, 1, 4));
-			items.add(new ItemStack(TFCItems.GemRuby, 1, 4));
-			items.add(new ItemStack(TFCItems.GemSapphire, 1, 4));
-			items.add(new ItemStack(TFCItems.GemTourmaline, 1, 4));
-			items.add(new ItemStack(TFCItems.GemTopaz, 1, 4));
+			items.add(new ItemStack(TFCItems.gemAgate, 1, 4));
+			items.add(new ItemStack(TFCItems.gemAmethyst, 1, 4));
+			items.add(new ItemStack(TFCItems.gemBeryl, 1, 4));
+			items.add(new ItemStack(TFCItems.gemEmerald, 1, 4));
+			items.add(new ItemStack(TFCItems.gemGarnet, 1, 4));
+			items.add(new ItemStack(TFCItems.gemJade, 1, 4));
+			items.add(new ItemStack(TFCItems.gemJasper, 1, 4));
+			items.add(new ItemStack(TFCItems.gemOpal, 1, 4));
+			items.add(new ItemStack(TFCItems.gemRuby, 1, 4));
+			items.add(new ItemStack(TFCItems.gemSapphire, 1, 4));
+			items.add(new ItemStack(TFCItems.gemTourmaline, 1, 4));
+			items.add(new ItemStack(TFCItems.gemTopaz, 1, 4));
 
 			is = (ItemStack) items.toArray()[random.nextInt(items.toArray().length)];
 		}
 		return is;
 	}
 
-	public static void SurroundWithLeaves(World world, int i, int j, int k, int meta, Random R)
+	public static void surroundWithLeaves(World world, int i, int j, int k, int meta, Random r)
 	{
 		for (int y = 2; y >= -2; y--)
 		{
@@ -232,29 +232,29 @@ public class TFC_Core
 				for (int z = 2; z >= -2; z--)
 				{
 					if(world.isAirBlock(i + x, j + y, k + z))
-						world.setBlock(i + x, j + y, k + z, TFCBlocks.Leaves, meta, 2);
+						world.setBlock(i + x, j + y, k + z, TFCBlocks.leaves, meta, 2);
 				}
 			}
 		}
 	}
 
-	public static void SetupWorld(World world)
+	public static void setupWorld(World world)
 	{
 		long seed = world.getSeed();
-		Random R = new Random(seed);
+		Random r = new Random(seed);
 		world.provider.registerWorld(world);
-		Recipes.registerAnvilRecipes(R, world);
+		Recipes.registerAnvilRecipes(r, world);
 		// TerraFirmaCraft.proxy.registerSkyProvider(world.provider);
 	}
 
-	public static void SetupWorld(World w, long seed)
+	public static void setupWorld(World w, long seed)
 	{
 		try
 		{
 			// ReflectionHelper.setPrivateValue(WorldInfo.class,
 			// w.getWorldInfo(), "randomSeed", seed);
 			ReflectionHelper.setPrivateValue(WorldInfo.class, w.getWorldInfo(), seed, 0);
-			SetupWorld(w);
+			setupWorld(w);
 		}
 		catch (Exception ex)
 		{
@@ -264,50 +264,50 @@ public class TFC_Core
 	public static boolean isRawStone(World world, int x, int y, int z)
 	{
 		Block block = world.getBlock(x, y, z);
-		return block == TFCBlocks.StoneIgEx
-				|| block == TFCBlocks.StoneIgIn
-				|| block == TFCBlocks.StoneSed
-				|| block == TFCBlocks.StoneMM;
+		return block == TFCBlocks.stoneIgEx
+				|| block == TFCBlocks.stoneIgIn
+				|| block == TFCBlocks.stoneSed
+				|| block == TFCBlocks.stoneMM;
 	}
 
 	public static boolean isSmoothStone(World world, int x, int y, int z)
 	{
 		Block block = world.getBlock(x, y, z);
-		return block == TFCBlocks.StoneIgExSmooth
-				|| block == TFCBlocks.StoneIgInSmooth
-				|| block == TFCBlocks.StoneSedSmooth
-				|| block == TFCBlocks.StoneMMSmooth;
+		return block == TFCBlocks.stoneIgExSmooth
+				|| block == TFCBlocks.stoneIgInSmooth
+				|| block == TFCBlocks.stoneSedSmooth
+				|| block == TFCBlocks.stoneMMSmooth;
 	}
 
 	public static boolean isSmoothStone(Block block)
 	{
-		return block == TFCBlocks.StoneIgExSmooth
-				|| block == TFCBlocks.StoneIgInSmooth
-				|| block == TFCBlocks.StoneSedSmooth
-				|| block == TFCBlocks.StoneMMSmooth;
+		return block == TFCBlocks.stoneIgExSmooth
+				|| block == TFCBlocks.stoneIgInSmooth
+				|| block == TFCBlocks.stoneSedSmooth
+				|| block == TFCBlocks.stoneMMSmooth;
 	}
 
 	public static boolean isBrickStone(Block block)
 	{
-		return block == TFCBlocks.StoneIgExBrick
-				|| block == TFCBlocks.StoneIgInBrick
-				|| block == TFCBlocks.StoneSedBrick
-				|| block == TFCBlocks.StoneMMBrick;
+		return block == TFCBlocks.stoneIgExBrick
+				|| block == TFCBlocks.stoneIgInBrick
+				|| block == TFCBlocks.stoneSedBrick
+				|| block == TFCBlocks.stoneMMBrick;
 	}
 
 	public static boolean isRawStone(Block block)
 	{
-		return block == TFCBlocks.StoneIgEx
-				|| block == TFCBlocks.StoneIgIn
-				|| block == TFCBlocks.StoneSed
-				|| block == TFCBlocks.StoneMM;
+		return block == TFCBlocks.stoneIgEx
+				|| block == TFCBlocks.stoneIgIn
+				|| block == TFCBlocks.stoneSed
+				|| block == TFCBlocks.stoneMM;
 	}
 
 	public static boolean isOreStone(Block block)
 	{
-		return block == TFCBlocks.Ore
-				|| block == TFCBlocks.Ore2
-				|| block == TFCBlocks.Ore3;
+		return block == TFCBlocks.ore
+				|| block == TFCBlocks.ore2
+				|| block == TFCBlocks.ore3;
 	}
 
 	public static boolean isNaturalStone(Block block)
@@ -317,64 +317,64 @@ public class TFC_Core
 
 	public static boolean isCobbleStone(Block block)
 	{
-		return block == TFCBlocks.StoneIgExCobble
-				|| block == TFCBlocks.StoneIgInCobble
-				|| block == TFCBlocks.StoneSedCobble
-				|| block == TFCBlocks.StoneMMCobble;
+		return block == TFCBlocks.stoneIgExCobble
+				|| block == TFCBlocks.stoneIgInCobble
+				|| block == TFCBlocks.stoneSedCobble
+				|| block == TFCBlocks.stoneMMCobble;
 	}
 
 	public static boolean isStoneIgEx(Block block)
 	{
-		return block == TFCBlocks.StoneIgEx
-				|| block == TFCBlocks.StoneIgExCobble
-				|| block == TFCBlocks.StoneIgExSmooth
-				|| block == TFCBlocks.StoneIgExBrick
-				|| block == TFCBlocks.WallRawIgEx
-				|| block == TFCBlocks.WallCobbleIgEx
-				|| block == TFCBlocks.WallBrickIgEx
-				|| block == TFCBlocks.WallSmoothIgEx;
+		return block == TFCBlocks.stoneIgEx
+				|| block == TFCBlocks.stoneIgExCobble
+				|| block == TFCBlocks.stoneIgExSmooth
+				|| block == TFCBlocks.stoneIgExBrick
+				|| block == TFCBlocks.wallRawIgEx
+				|| block == TFCBlocks.wallCobbleIgEx
+				|| block == TFCBlocks.wallBrickIgEx
+				|| block == TFCBlocks.wallSmoothIgEx;
 	}
 
 	public static boolean isStoneIgIn(Block block)
 	{
-		return block == TFCBlocks.StoneIgIn
-				|| block == TFCBlocks.StoneIgInCobble
-				|| block == TFCBlocks.StoneIgInSmooth
-				|| block == TFCBlocks.StoneIgInBrick
-				|| block == TFCBlocks.WallRawIgIn
-				|| block == TFCBlocks.WallCobbleIgIn
-				|| block == TFCBlocks.WallBrickIgIn
-				|| block == TFCBlocks.WallSmoothIgIn;
+		return block == TFCBlocks.stoneIgIn
+				|| block == TFCBlocks.stoneIgInCobble
+				|| block == TFCBlocks.stoneIgInSmooth
+				|| block == TFCBlocks.stoneIgInBrick
+				|| block == TFCBlocks.wallRawIgIn
+				|| block == TFCBlocks.wallCobbleIgIn
+				|| block == TFCBlocks.wallBrickIgIn
+				|| block == TFCBlocks.wallSmoothIgIn;
 	}
 
 	public static boolean isStoneSed(Block block)
 	{
-		return block == TFCBlocks.StoneSed
-				|| block == TFCBlocks.StoneSedCobble
-				|| block == TFCBlocks.StoneSedSmooth
-				|| block == TFCBlocks.StoneSedBrick
-				|| block == TFCBlocks.WallRawSed
-				|| block == TFCBlocks.WallCobbleSed
-				|| block == TFCBlocks.WallBrickSed
-				|| block == TFCBlocks.WallSmoothSed;
+		return block == TFCBlocks.stoneSed
+				|| block == TFCBlocks.stoneSedCobble
+				|| block == TFCBlocks.stoneSedSmooth
+				|| block == TFCBlocks.stoneSedBrick
+				|| block == TFCBlocks.wallRawSed
+				|| block == TFCBlocks.wallCobbleSed
+				|| block == TFCBlocks.wallBrickSed
+				|| block == TFCBlocks.wallSmoothSed;
 	}
 
 	public static boolean isStoneMM(Block block)
 	{
-		return block == TFCBlocks.StoneMM
-				|| block == TFCBlocks.StoneMMCobble
-				|| block == TFCBlocks.StoneMMSmooth
-				|| block == TFCBlocks.StoneMMBrick
-				|| block == TFCBlocks.WallRawMM
-				|| block == TFCBlocks.WallCobbleMM
-				|| block == TFCBlocks.WallBrickMM
-				|| block == TFCBlocks.WallSmoothMM;
+		return block == TFCBlocks.stoneMM
+				|| block == TFCBlocks.stoneMMCobble
+				|| block == TFCBlocks.stoneMMSmooth
+				|| block == TFCBlocks.stoneMMBrick
+				|| block == TFCBlocks.wallRawMM
+				|| block == TFCBlocks.wallCobbleMM
+				|| block == TFCBlocks.wallBrickMM
+				|| block == TFCBlocks.wallSmoothMM;
 	}
 
 	public static boolean isDirt(Block block)
 	{
-		return block == TFCBlocks.Dirt
-				|| block == TFCBlocks.Dirt2;
+		return block == TFCBlocks.dirt
+				|| block == TFCBlocks.dirt2;
 	}
 
 	public static boolean isFarmland(Block block)
@@ -385,81 +385,81 @@ public class TFC_Core
 
 	public static boolean isGrass(Block block)
 	{
-		return block == TFCBlocks.Grass
-				|| block == TFCBlocks.Grass2
-				|| block == TFCBlocks.ClayGrass
-				|| block == TFCBlocks.ClayGrass2
-				|| block == TFCBlocks.PeatGrass
-				|| block == TFCBlocks.DryGrass
-				|| block == TFCBlocks.DryGrass2;
+		return block == TFCBlocks.grass
+				|| block == TFCBlocks.grass2
+				|| block == TFCBlocks.clayGrass
+				|| block == TFCBlocks.clayGrass2
+				|| block == TFCBlocks.peatGrass
+				|| block == TFCBlocks.dryGrass
+				|| block == TFCBlocks.dryGrass2;
 	}
 
 	public static boolean isGrassNormal(Block block)
 	{
-		return block == TFCBlocks.Grass
-				|| block == TFCBlocks.Grass2;
+		return block == TFCBlocks.grass
+				|| block == TFCBlocks.grass2;
 	}
 
 
 	public static boolean isLushGrass(Block block)
 	{
-		return block == TFCBlocks.Grass
-				|| block == TFCBlocks.Grass2
-				|| block == TFCBlocks.ClayGrass
-				|| block == TFCBlocks.ClayGrass2
-				|| block == TFCBlocks.PeatGrass;
+		return block == TFCBlocks.grass
+				|| block == TFCBlocks.grass2
+				|| block == TFCBlocks.clayGrass
+				|| block == TFCBlocks.clayGrass2
+				|| block == TFCBlocks.peatGrass;
 	}
 
 	public static boolean isClayGrass(Block block)
 	{
-		return block == TFCBlocks.ClayGrass
-				|| block == TFCBlocks.ClayGrass2;
+		return block == TFCBlocks.clayGrass
+				|| block == TFCBlocks.clayGrass2;
 	}
 
 	public static boolean isPeatGrass(Block block)
 	{
-		return block == TFCBlocks.PeatGrass;
+		return block == TFCBlocks.peatGrass;
 	}
 
 	public static boolean isDryGrass(Block block)
 	{
-		return block == TFCBlocks.DryGrass
-				|| block == TFCBlocks.DryGrass2;
+		return block == TFCBlocks.dryGrass
+				|| block == TFCBlocks.dryGrass2;
 	}
 
 	public static boolean isGrassType1(Block block)
 	{
-		return block == TFCBlocks.Grass
-				|| block == TFCBlocks.ClayGrass
-				|| block == TFCBlocks.DryGrass;
+		return block == TFCBlocks.grass
+				|| block == TFCBlocks.clayGrass
+				|| block == TFCBlocks.dryGrass;
 	}
 
 	public static boolean isGrassType2(Block block)
 	{
-		return block == TFCBlocks.Grass2
-				|| block == TFCBlocks.ClayGrass2
-				|| block == TFCBlocks.DryGrass2;
+		return block == TFCBlocks.grass2
+				|| block == TFCBlocks.clayGrass2
+				|| block == TFCBlocks.dryGrass2;
 	}
 
 	public static boolean isClay(Block block)
 	{
-		return block == TFCBlocks.Clay || block == TFCBlocks.Clay2;
+		return block == TFCBlocks.clay || block == TFCBlocks.clay2;
 	}
 
 	public static boolean isSand(Block block)
 	{
-		return block == TFCBlocks.Sand
-				|| block == TFCBlocks.Sand2;
+		return block == TFCBlocks.sand
+				|| block == TFCBlocks.sand2;
 	}
 
 	public static boolean isPeat(Block block)
 	{
-		return block == TFCBlocks.Peat;
+		return block == TFCBlocks.peat;
 	}
 
 	public static boolean isHotWater(Block block)
 	{
-		return block == TFCBlocks.HotWater || block == TFCBlocks.HotWaterStationary;
+		return block == TFCBlocks.hotWater || block == TFCBlocks.hotWaterStationary;
 	}
 
 	public static boolean isWater(Block block)
@@ -470,34 +470,34 @@ public class TFC_Core
 
 	public static boolean isWaterFlowing(Block block)
 	{
-		return block == TFCBlocks.SaltWater || block == TFCBlocks.FreshWater;
+		return block == TFCBlocks.saltWater || block == TFCBlocks.freshWater;
 	}
 
 	public static boolean isSaltWater(Block block)
 	{
-		return block == TFCBlocks.SaltWater || block == TFCBlocks.SaltWaterStationary;
+		return block == TFCBlocks.saltWater || block == TFCBlocks.saltWaterStationary;
 	}
 
 	public static boolean isSaltWaterIncludeIce(Block block, int meta, Material mat)
 	{
-		return block == TFCBlocks.SaltWater || block == TFCBlocks.SaltWaterStationary
+		return block == TFCBlocks.saltWater || block == TFCBlocks.saltWaterStationary
 				|| mat == Material.ice && meta == 0;
 	}
 
 	public static boolean isFreshWater(Block block)
 	{
-		return block == TFCBlocks.FreshWater || block == TFCBlocks.FreshWaterStationary;
+		return block == TFCBlocks.freshWater || block == TFCBlocks.freshWaterStationary;
 	}
 
 	public static boolean isFreshWaterIncludeIce(Block block, int meta)
 	{
-		return block == TFCBlocks.FreshWater || block == TFCBlocks.FreshWaterStationary
-				|| block == TFCBlocks.Ice && meta != 0;
+		return block == TFCBlocks.freshWater || block == TFCBlocks.freshWaterStationary
+				|| block == TFCBlocks.ice && meta != 0;
 	}
 
 	public static boolean isFreshWaterIncludeIce(Block block, int meta, Material mat)
 	{
-		return block == TFCBlocks.FreshWater || block == TFCBlocks.FreshWaterStationary
+		return block == TFCBlocks.freshWater || block == TFCBlocks.freshWaterStationary
 				|| mat == Material.ice && meta != 0;
 	}
 
@@ -520,7 +520,7 @@ public class TFC_Core
 
 	public static boolean isGravel(Block block)
 	{
-		return block == TFCBlocks.Gravel || block == TFCBlocks.Gravel2;
+		return block == TFCBlocks.gravel || block == TFCBlocks.gravel2;
 	}
 
 	public static boolean isGround(Block block)
@@ -532,7 +532,7 @@ public class TFC_Core
 
 	public static boolean isGroundType1(Block block)
 	{
-		return isGrassType1(block) || block == TFCBlocks.Dirt || block == TFCBlocks.Gravel || block == TFCBlocks.Sand;
+		return isGrassType1(block) || block == TFCBlocks.dirt || block == TFCBlocks.gravel || block == TFCBlocks.sand;
 	}
 
 	public static boolean isSoilWAILA(Block block)
@@ -542,11 +542,11 @@ public class TFC_Core
 
 	public static int getSoilMetaFromStone(Block inBlock, int inMeta)
 	{
-		if(inBlock == TFCBlocks.StoneIgIn)
+		if(inBlock == TFCBlocks.stoneIgIn)
 			return inMeta;
-		else if(inBlock == TFCBlocks.StoneSed)
+		else if(inBlock == TFCBlocks.stoneSed)
 			return inMeta+3;
-		else if(inBlock == TFCBlocks.StoneIgEx)
+		else if(inBlock == TFCBlocks.stoneIgEx)
 			return inMeta+11;
 		else
 		{
@@ -563,13 +563,13 @@ public class TFC_Core
 
 	public static int getItemMetaFromStone(Block inBlock, int inMeta)
 	{
-		if(inBlock == TFCBlocks.StoneIgIn)
+		if(inBlock == TFCBlocks.stoneIgIn)
 			return inMeta;
-		else if(inBlock == TFCBlocks.StoneSed)
+		else if(inBlock == TFCBlocks.stoneSed)
 			return inMeta+3;
-		else if(inBlock == TFCBlocks.StoneIgEx)
+		else if(inBlock == TFCBlocks.stoneIgEx)
 			return inMeta+11;
-		else if(inBlock == TFCBlocks.StoneMM)
+		else if(inBlock == TFCBlocks.stoneMM)
 			return inMeta+15;
 		else
 			return 0;
@@ -592,100 +592,100 @@ public class TFC_Core
 	public static Block getTypeForGrass(int inMeta)
 	{
 		if(inMeta < 16)
-			return TFCBlocks.Grass;
-		return TFCBlocks.Grass2;
+			return TFCBlocks.grass;
+		return TFCBlocks.grass2;
 	}
 
 	public static Block getTypeForGrassFromDirt(Block block)
 	{
-		if(block == TFCBlocks.Dirt)
-			return TFCBlocks.Grass;
-		return TFCBlocks.Grass2;
+		if(block == TFCBlocks.dirt)
+			return TFCBlocks.grass;
+		return TFCBlocks.grass2;
 	}
 
 	public static Block getTypeForDryGrass(int inMeta)
 	{
 		if(inMeta < 16)
-			return TFCBlocks.DryGrass;
-		return TFCBlocks.DryGrass2;
+			return TFCBlocks.dryGrass;
+		return TFCBlocks.dryGrass2;
 	}
 
 	public static Block getTypeForDryGrassFromSoil(Block block)
 	{
-		if(block == TFCBlocks.Grass)
-			return TFCBlocks.DryGrass;
-		else if(block == TFCBlocks.Dirt)
-			return TFCBlocks.DryGrass;
-		return TFCBlocks.DryGrass2;
+		if(block == TFCBlocks.grass)
+			return TFCBlocks.dryGrass;
+		else if(block == TFCBlocks.dirt)
+			return TFCBlocks.dryGrass;
+		return TFCBlocks.dryGrass2;
 	}
 
 	public static Block getTypeForGrassFromSoil(Block block)
 	{
-		if(block == TFCBlocks.DryGrass)
-			return TFCBlocks.Grass;
-		else if(block == TFCBlocks.DryGrass2)
-			return TFCBlocks.Grass2;
-		else if(block == TFCBlocks.Dirt)
-			return TFCBlocks.Grass;
-		return TFCBlocks.Grass2;
+		if(block == TFCBlocks.dryGrass)
+			return TFCBlocks.grass;
+		else if(block == TFCBlocks.dryGrass2)
+			return TFCBlocks.grass2;
+		else if(block == TFCBlocks.dirt)
+			return TFCBlocks.grass;
+		return TFCBlocks.grass2;
 	}
 
 	public static Block getTypeForClayGrass(int inMeta)
 	{
 		if(inMeta < 16)
-			return TFCBlocks.ClayGrass;
-		return TFCBlocks.ClayGrass2;
+			return TFCBlocks.clayGrass;
+		return TFCBlocks.clayGrass2;
 	}
 
 	public static Block getTypeForClayGrass(Block block)
 	{
 		if (TFC_Core.isGroundType1(block))
-			return TFCBlocks.ClayGrass;
-		return TFCBlocks.ClayGrass2;
+			return TFCBlocks.clayGrass;
+		return TFCBlocks.clayGrass2;
 	}
 
 	public static Block getTypeForDirt(int inMeta)
 	{
 		if(inMeta < 16)
-			return TFCBlocks.Dirt;
-		return TFCBlocks.Dirt2;
+			return TFCBlocks.dirt;
+		return TFCBlocks.dirt2;
 	}
 
 	public static Block getTypeForDirtFromGrass(Block block)
 	{
 		if(TFC_Core.isDirt(block))
 			return block;
-		if (block == TFCBlocks.Grass || block == TFCBlocks.DryGrass)
-			return TFCBlocks.Dirt;
-		return TFCBlocks.Dirt2;
+		if (block == TFCBlocks.grass || block == TFCBlocks.dryGrass)
+			return TFCBlocks.dirt;
+		return TFCBlocks.dirt2;
 	}
 
 	public static Block getTypeForClay(int inMeta)
 	{
 		if(inMeta < 16)
-			return TFCBlocks.Clay;
-		return TFCBlocks.Clay2;
+			return TFCBlocks.clay;
+		return TFCBlocks.clay2;
 	}
 
 	public static Block getTypeForClay(Block block)
 	{
 		if (TFC_Core.isGroundType1(block))
-			return TFCBlocks.Clay;
-		return TFCBlocks.Clay2;
+			return TFCBlocks.clay;
+		return TFCBlocks.clay2;
 	}
 
 	public static Block getTypeForSand(int inMeta)
 	{
 		if(inMeta < 16)
-			return TFCBlocks.Sand;
-		return TFCBlocks.Sand2;
+			return TFCBlocks.sand;
+		return TFCBlocks.sand2;
 	}
 
 	public static Block getTypeForGravel(int inMeta)
 	{
 		if(inMeta < 16)
-			return TFCBlocks.Gravel;
-		return TFCBlocks.Gravel2;
+			return TFCBlocks.gravel;
+		return TFCBlocks.gravel2;
 	}
 
 	public static int getRockLayerFromHeight(World world, int x, int y, int z)
@@ -697,9 +697,9 @@ public class TFC_Core
 			int localX = x & 15;
 			int localZ = z & 15;
 			int localY = localX + localZ * 16;
-			if (y <= TFCOptions.RockLayer3Height + hm[localY])
+			if (y <= TFCOptions.rockLayer3Height + hm[localY])
 				return 2;
-			else if (y <= TFCOptions.RockLayer2Height + hm[localY])
+			else if (y <= TFCOptions.rockLayer2Height + hm[localY])
 				return 1;
 			else
 				return 0;
@@ -715,12 +715,12 @@ public class TFC_Core
 		{
 			if(TFC_Core.isGrassType1(block))
 			{
-				world.setBlock(i, j, k, TFCBlocks.Dirt, meta, 2);
+				world.setBlock(i, j, k, TFCBlocks.dirt, meta, 2);
 				return true;
 			}
 			else if(TFC_Core.isGrassType2(block))
 			{
-				world.setBlock(i, j, k, TFCBlocks.Dirt2, meta, 2);
+				world.setBlock(i, j, k, TFCBlocks.dirt2, meta, 2);
 				return true;
 			}
 		}
@@ -729,11 +729,11 @@ public class TFC_Core
 
 	public static EnumFuelMaterial getFuelMaterial(ItemStack is)
 	{
-		if(is.getItem() == Item.getItemFromBlock(TFCBlocks.Peat))
+		if(is.getItem() == Item.getItemFromBlock(TFCBlocks.peat))
 			return EnumFuelMaterial.PEAT;
-		if(is.getItem() == TFCItems.Coal && is.getItemDamage() == 0)
+		if(is.getItem() == TFCItems.coal && is.getItemDamage() == 0)
 			return EnumFuelMaterial.COAL;
-		else if(is.getItem() == TFCItems.Coal && is.getItemDamage() == 1)
+		else if(is.getItem() == TFCItems.coal && is.getItemDamage() == 1)
 			return EnumFuelMaterial.CHARCOAL;
 		if(is.getItemDamage() == 0)
 			return EnumFuelMaterial.ASH;
@@ -827,10 +827,10 @@ public class TFC_Core
 			TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 			return BlockSlab.getTopChiselLevel(te.extraData) == 0;
 		}
-		else if(world.getBlock(x, y, z) == TFCBlocks.MetalSheet)
+		else if(world.getBlock(x, y, z) == TFCBlocks.metalSheet)
 		{
 			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
-			if(te.TopExists())
+			if(te.topExists())
 				return true;
 		}
 		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.UP);
@@ -845,10 +845,10 @@ public class TFC_Core
 			TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 			return BlockSlab.getBottomChiselLevel(te.extraData) == 0;
 		}
-		else if(world.getBlock(x, y, z) == TFCBlocks.MetalSheet)
+		else if(world.getBlock(x, y, z) == TFCBlocks.metalSheet)
 		{
 			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
-			if(te.BottomExists())
+			if(te.bottomExists())
 				return true;
 		}
 		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.DOWN);
@@ -864,10 +864,10 @@ public class TFC_Core
 			TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 			return BlockSlab.getNorthChiselLevel(te.extraData) == 0;
 		}
-		else if(bid == TFCBlocks.MetalSheet)
+		else if(bid == TFCBlocks.metalSheet)
 		{
 			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
-			if(te.NorthExists())
+			if(te.northExists())
 				return true;
 		}
 		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.NORTH);
@@ -882,10 +882,10 @@ public class TFC_Core
 			TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 			return BlockSlab.getSouthChiselLevel(te.extraData) == 0;
 		}
-		else if(world.getBlock(x, y, z) == TFCBlocks.MetalSheet)
+		else if(world.getBlock(x, y, z) == TFCBlocks.metalSheet)
 		{
 			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
-			if(te.SouthExists())
+			if(te.southExists())
 				return true;
 		}
 		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.SOUTH);
@@ -901,10 +901,10 @@ public class TFC_Core
 			if(BlockSlab.getEastChiselLevel(te.extraData) != 0)
 				return true;
 		}
-		else if(world.getBlock(x, y, z) == TFCBlocks.MetalSheet)
+		else if(world.getBlock(x, y, z) == TFCBlocks.metalSheet)
 		{
 			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
-			if(te.EastExists())
+			if(te.eastExists())
 				return true;
 		}
 		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.EAST);
@@ -919,10 +919,10 @@ public class TFC_Core
 			TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 			return BlockSlab.getWestChiselLevel(te.extraData) == 0;
 		}
-		else if(world.getBlock(x, y, z) == TFCBlocks.MetalSheet)
+		else if(world.getBlock(x, y, z) == TFCBlocks.metalSheet)
 		{
 			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
-			if(te.WestExists())
+			if(te.westExists())
 				return true;
 		}
 		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.WEST);
@@ -1218,46 +1218,46 @@ public class TFC_Core
 
 	public static boolean isFence(Block b)
 	{
-		return b == TFCBlocks.Fence || b == TFCBlocks.Fence2;
+		return b == TFCBlocks.fence || b == TFCBlocks.fence2;
 	}
 
 	public static boolean isVertSupport(Block b)
 	{
-		return b == TFCBlocks.WoodSupportV || b == TFCBlocks.WoodSupportV2;
+		return b == TFCBlocks.woodSupportV || b == TFCBlocks.woodSupportV2;
 	}
 
 	public static boolean isHorizSupport(Block b)
 	{
-		return b == TFCBlocks.WoodSupportH || b == TFCBlocks.WoodSupportH2;
+		return b == TFCBlocks.woodSupportH || b == TFCBlocks.woodSupportH2;
 	}
 
 	public static boolean isOceanicBiome(int id)
 	{
-		return id == TFCBiome.ocean.biomeID || id == TFCBiome.DeepOcean.biomeID;
+		return id == TFCBiome.OCEAN.biomeID || id == TFCBiome.DEEP_OCEAN.biomeID;
 	}
 
 	public static boolean isMountainBiome(int id)
 	{
-		return id == TFCBiome.Mountains.biomeID || id == TFCBiome.MountainsEdge.biomeID;
+		return id == TFCBiome.MOUNTAINS.biomeID || id == TFCBiome.MOUNTAINS_EDGE.biomeID;
 	}
 
 	public static boolean isBeachBiome(int id)
 	{
-		return id == TFCBiome.beach.biomeID || id == TFCBiome.gravelbeach.biomeID;
+		return id == TFCBiome.BEACH.biomeID || id == TFCBiome.GRAVEL_BEACH.biomeID;
 	}
 
 	public static boolean isValidCharcoalPitCover(Block block)
 	{
-		if(Blocks.fire.getFlammability(block) > 0 && block != TFCBlocks.LogPile) return false;
+		if(Blocks.fire.getFlammability(block) > 0 && block != TFCBlocks.logPile) return false;
 
-		return block == TFCBlocks.LogPile
+		return block == TFCBlocks.logPile
 				|| isCobbleStone(block)
 				|| isBrickStone(block)
 				|| isSmoothStone(block)
 				|| isGround(block)
 				|| block == Blocks.glass
 				|| block == Blocks.stained_glass
-				|| block == TFCBlocks.MetalTrapDoor
+				|| block == TFCBlocks.metalTrapDoor
 				|| block == Blocks.iron_door
 				|| block.isOpaqueCube();
 	}
@@ -1313,7 +1313,7 @@ public class TFC_Core
 		return null;
 	}
 
-	public static void DestroyBlock(World world, int x, int y, int z)
+	public static void destroyBlock(World world, int x, int y, int z)
 	{
 		if(world.getBlock(x, y, z) != Blocks.air)
 		{
@@ -1360,7 +1360,7 @@ public class TFC_Core
 
 	public static boolean isWaterBiome(BiomeGenBase b)
 	{
-		return TFC_Core.isBeachBiome(b.biomeID) || TFC_Core.isOceanicBiome(b.biomeID) || b == TFCBiome.lake || b == TFCBiome.river;
+		return TFC_Core.isBeachBiome(b.biomeID) || TFC_Core.isOceanicBiome(b.biomeID) || b == TFCBiome.LAKE || b == TFCBiome.RIVER;
 	}
 
 	public static String translate(String s)

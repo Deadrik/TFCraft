@@ -3,21 +3,22 @@ package com.bioxx.tfc.Core;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFCTabs extends CreativeTabs
 {
-	public static CreativeTabs TFCBuilding = new TFCTabs("TFCBuilding");
-	public static CreativeTabs TFCDecoration = new TFCTabs("TFCDecoration");
-	public static CreativeTabs TFCDevices = new TFCTabs("TFCDevices");
-	public static CreativeTabs TFCPottery = new TFCTabs("TFCPottery");
-	public static CreativeTabs TFCMisc = new TFCTabs("TFCMisc");
-	public static CreativeTabs TFCFoods = new TFCTabs("TFCFoods");
-	public static CreativeTabs TFCTools = new TFCTabs("TFCTools");
-	public static CreativeTabs TFCWeapons = new TFCTabs("TFCWeapons");
-	public static CreativeTabs TFCArmor = new TFCTabs("TFCArmor");
-	public static CreativeTabs TFCMaterials = new TFCTabs("TFCMaterials");
+	public static final CreativeTabs TFC_BUILDING = new TFCTabs("TFCBuilding");
+	public static final CreativeTabs TFC_DECORATION = new TFCTabs("TFCDecoration");
+	public static final CreativeTabs TFC_DEVICES = new TFCTabs("TFCDevices");
+	public static final CreativeTabs TFC_POTTERY = new TFCTabs("TFCPottery");
+	public static final CreativeTabs TFC_MISC = new TFCTabs("TFCMisc");
+	public static final CreativeTabs TFC_FOODS = new TFCTabs("TFCFoods");
+	public static final CreativeTabs TFC_TOOLS = new TFCTabs("TFCTools");
+	public static final CreativeTabs TFC_WEAPONS = new TFCTabs("TFCWeapons");
+	public static final CreativeTabs TFC_ARMOR = new TFCTabs("TFCArmor");
+	public static final CreativeTabs TFC_MATERIALS = new TFCTabs("TFCMaterials");
 
 	//private int itemIndex;
 	private ItemStack is;

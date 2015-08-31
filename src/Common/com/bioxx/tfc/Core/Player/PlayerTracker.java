@@ -27,12 +27,12 @@ public class PlayerTracker
 		//		TerraFirmaCraft.log.info("-----------------------------PLAYER LOGGIN EVENT-------------------");
 		//		TerraFirmaCraft.log.info("------"+event.player.getDisplayName()+" : "+ event.player.getUniqueID().toString()+"--------");
 
-		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
+		PlayerManagerTFC.getInstance().players.add(new PlayerInfo(
 				event.player.getCommandSenderName(),
 				event.player.getUniqueID()));
 		AbstractPacket pkt = new InitClientWorldPacket(event.player);
-		TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) event.player);
-		TerraFirmaCraft.packetPipeline.sendTo(new ConfigSyncPacket(), (EntityPlayerMP) event.player);
+		TerraFirmaCraft.PACKET_PIPELINE.sendTo(pkt, (EntityPlayerMP) event.player);
+		TerraFirmaCraft.PACKET_PIPELINE.sendTo(new ConfigSyncPacket(), (EntityPlayerMP) event.player);
 
 		//		TerraFirmaCraft.log.info("-----------------------------Sending TestPacket");
 		//AbstractPacket pkt2 = new TestPacket("Sent to Player: "+event.player.getDisplayName());
@@ -78,7 +78,7 @@ public class PlayerTracker
 
 		//Send a request to the server for the skills data.
 		AbstractPacket pkt = new PlayerUpdatePacket(event.player, 3);
-		TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) event.player);
+		TerraFirmaCraft.PACKET_PIPELINE.sendTo(pkt, (EntityPlayerMP) event.player);
 	}
 
 	@SubscribeEvent

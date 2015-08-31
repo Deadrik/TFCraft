@@ -122,7 +122,7 @@ public class GuiCustomNametag extends GuiScreen
 
 			AbstractPacket pkt = new ItemRenamePacket(theGuiTextField.getText());
 			//TerraFirmaCraft.packetPipeline.sendToAll(pkt);
-			TerraFirmaCraft.packetPipeline.sendToServer(pkt);
+			TerraFirmaCraft.PACKET_PIPELINE.sendToServer(pkt);
 			
 			Minecraft.getMinecraft().displayGuiScreen(null);//player.closeScreen();
 		}
@@ -135,7 +135,7 @@ public class GuiCustomNametag extends GuiScreen
 	@Override
 	public void drawScreen(int par1, int par2, float par3)
 	{
-		TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_nametag.png"));
+		TFC_Core.bindTexture(new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_nametag.png"));
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int l = (width - xSize) / 2;

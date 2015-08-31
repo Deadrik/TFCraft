@@ -41,7 +41,7 @@ public class FogHandler
 	}
 
 	@SubscribeEvent
-	public void RenderFogHandler(RenderFogEvent event)
+	public void renderFogHandler(RenderFogEvent event)
 	{
 
 		if(event.fogMode >= 0)

@@ -35,7 +35,7 @@ public class BlockCharcoal extends BlockTerra
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Charcoal");
+		this.blockIcon = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Charcoal");
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class BlockCharcoal extends BlockTerra
 					while (world.getBlock(x, y + top + 1, z) == this)
 						++top;
 
-					dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Coal, 1, 1));
+					dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.coal, 1, 1));
 					if (side - 1 > 0)
 					{
 						if (world.getBlock(x, y + 1, z) == this)
@@ -240,7 +240,7 @@ public class BlockCharcoal extends BlockTerra
 				Random rand = new Random();
 				// Between 50% and 100% of the amount
 				amount = rand.nextInt(amount + 1) + (amount / 2);
-				dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Coal, amount, 1));
+				dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.coal, amount, 1));
 			}
 		}
 

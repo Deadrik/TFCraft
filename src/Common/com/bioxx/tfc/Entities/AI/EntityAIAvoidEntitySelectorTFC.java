@@ -20,7 +20,7 @@ class EntityAIAvoidEntitySelectorTFC implements IEntitySelector
 	@Override
 	public boolean isEntityApplicable(Entity par1Entity)
 	{
-		EntityCreature creature = EntityAIAvoidEntityTFC.func_98217_a(this.entityAvoiderAI);
+		EntityCreature creature = EntityAIAvoidEntityTFC.getEntity(this.entityAvoiderAI);
 		//TFC calculation for animal field-of-view. Generous in favour of approaching entity, with 340 degree FOV around the creature.
 		Vec3 distanceVec = Vec3.createVectorHelper(creature.posX - par1Entity.posX,creature.posY - par1Entity.posY,creature.posZ - par1Entity.posZ);
 		double cosAngleAbs = Math.abs(distanceVec.dotProduct(creature.getLookVec()) / (distanceVec.lengthVector() * creature.getLookVec().lengthVector()));

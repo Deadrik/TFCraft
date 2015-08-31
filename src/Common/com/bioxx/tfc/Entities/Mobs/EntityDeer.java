@@ -39,8 +39,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	 * 1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
 	 * the square root of the ratio of female mass : male mass
 	 */
-	private static final float dimorphism = 0.1728f;
-	private static final int degreeOfDiversion = 1;
+	private static final float DIMORPHISM = 0.1728f;
+	private static final int DEGREE_OF_DIVERSION = 1;
 
 	private boolean running;
 	private long animalID;
@@ -54,10 +54,10 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	private float mateStrengthMod;
 	private float mateAggroMod;
 	private float mateObedMod;
-	private float size_mod; //How large the animal is
-	private float strength_mod; //how strong the animal is
-	private float aggression_mod = 1;//How aggressive / obstinate the animal is
-	private float obedience_mod = 1; //How well the animal responds to commands.
+	private float sizeMod; //How large the animal is
+	private float strengthMod; //how strong the animal is
+	private float aggressionMod = 1;//How aggressive / obstinate the animal is
+	private float obedienceMod = 1; //How well the animal responds to commands.
 	private boolean inLove;
 	private Vec3 attackedVec;
 	private Entity fearSource;
@@ -78,10 +78,10 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		timeOfConception = 0;
 		mateSizeMod = 0;
 		sex = rand.nextInt(2);
-		size_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt((degreeOfDiversion + 1) * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1F) * (1.0F - dimorphism * sex));
-		strength_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + size_mod));
-		aggression_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1));
-		obedience_mod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1f / aggression_mod));
+		sizeMod = (float) Math.sqrt(((rand.nextInt(rand.nextInt((DEGREE_OF_DIVERSION + 1) * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1F) * (1.0F - DIMORPHISM * sex));
+		strengthMod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(DEGREE_OF_DIVERSION * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + sizeMod));
+		aggressionMod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(DEGREE_OF_DIVERSION * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1));
+		obedienceMod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(DEGREE_OF_DIVERSION * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1f / aggressionMod));
 		running = false;
 
 		this.setSize(0.9F, 1.3F);
@@ -108,27 +108,27 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	public EntityDeer(World par1World, IAnimal mother,  ArrayList<Float> data)
 	{
 		this(par1World);
-		float father_size = 1;
-		float father_str = 1;
-		float father_aggro = 1;
-		float father_obed = 1;
+		float fatherSize = 1;
+		float fatherStr = 1;
+		float fatherAggro = 1;
+		float fatherObed = 1;
 		for(int i = 0; i < data.size(); i++){
 			switch(i){
-			case 0:father_size = data.get(i);break;
-			case 1:father_str = data.get(i);break;
-			case 2:father_aggro = data.get(i);break;
-			case 3:father_obed = data.get(i);break;
+			case 0:fatherSize = data.get(i);break;
+			case 1:fatherStr = data.get(i);break;
+			case 2:fatherAggro = data.get(i);break;
+			case 3:fatherObed = data.get(i);break;
 			default:break;
 			}
 		}
 		this.posX = ((EntityLivingBase)mother).posX;
 		this.posY = ((EntityLivingBase)mother).posY;
 		this.posZ = ((EntityLivingBase)mother).posZ;
-		float invSizeRatio = 1f / (2 - dimorphism);
-		size_mod = (float)Math.sqrt(size_mod * size_mod * (float)Math.sqrt((mother.getSize() + father_size) * invSizeRatio));
-		strength_mod = (float)Math.sqrt(strength_mod * strength_mod * (float)Math.sqrt((mother.getStrength() + father_str) * 0.5F));
-		aggression_mod = (float)Math.sqrt(aggression_mod * aggression_mod * (float)Math.sqrt((mother.getAggression() + father_aggro) * 0.5F));
-		obedience_mod = (float)Math.sqrt(obedience_mod * obedience_mod * (float)Math.sqrt((mother.getObedience() + father_obed) * 0.5F));
+		float invSizeRatio = 1f / (2 - DIMORPHISM);
+		sizeMod = (float)Math.sqrt(sizeMod * sizeMod * (float)Math.sqrt((mother.getSize() + fatherSize) * invSizeRatio));
+		strengthMod = (float)Math.sqrt(strengthMod * strengthMod * (float)Math.sqrt((mother.getStrength() + fatherStr) * 0.5F));
+		aggressionMod = (float)Math.sqrt(aggressionMod * aggressionMod * (float)Math.sqrt((mother.getAggression() + fatherAggro) * 0.5F));
+		obedienceMod = (float)Math.sqrt(obedienceMod * obedienceMod * (float)Math.sqrt((mother.getObedience() + fatherObed) * 0.5F));
 		
 		this.familiarity = (int) (mother.getFamiliarity()<90?mother.getFamiliarity()/2:mother.getFamiliarity()*0.9f);
 		
@@ -184,10 +184,10 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
 
 				byte[] values = {
-						TFC_Core.getByteFromSmallFloat(size_mod),
-						TFC_Core.getByteFromSmallFloat(strength_mod),
-						TFC_Core.getByteFromSmallFloat(aggression_mod),
-						TFC_Core.getByteFromSmallFloat(obedience_mod),
+						TFC_Core.getByteFromSmallFloat(sizeMod),
+						TFC_Core.getByteFromSmallFloat(strengthMod),
+						TFC_Core.getByteFromSmallFloat(aggressionMod),
+						TFC_Core.getByteFromSmallFloat(obedienceMod),
 						(byte) familiarity,
 						(byte) (familiarizedToday ? 1 : 0),
 						(byte) (pregnant ? 1 : 0),
@@ -207,10 +207,10 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 				buf.putInt(this.dataWatcher.getWatchableObjectInt(23));
 				byte[] values = buf.array();
 				
-				size_mod = TFC_Core.getSmallFloatFromByte(values[0]);
-				strength_mod = TFC_Core.getSmallFloatFromByte(values[1]);
-				aggression_mod = TFC_Core.getSmallFloatFromByte(values[2]);
-				obedience_mod = TFC_Core.getSmallFloatFromByte(values[3]);
+				sizeMod = TFC_Core.getSmallFloatFromByte(values[0]);
+				strengthMod = TFC_Core.getSmallFloatFromByte(values[1]);
+				aggressionMod = TFC_Core.getSmallFloatFromByte(values[2]);
+				obedienceMod = TFC_Core.getSmallFloatFromByte(values[3]);
 				
 				familiarity = values[4];
 				familiarizedToday = values[5] == 1;
@@ -295,9 +295,9 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		/**
 		 * This Cancels out the changes made to growingAge by EntityAgeable
 		 * */
-		TFC_Core.PreventEntityDataUpdate = true;
+		TFC_Core.preventEntityDataUpdate = true;
 		super.onLivingUpdate();
-		TFC_Core.PreventEntityDataUpdate = false;
+		TFC_Core.preventEntityDataUpdate = false;
 	}
 
 	@Override
@@ -326,9 +326,9 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		float ageMod = TFC_Core.getPercentGrown(this);	
-		this.entityDropItem(new ItemStack(TFCItems.Hide, 1, Math.max(0, Math.min(2, (int)(ageMod * size_mod * 1.84)))), 0);
+		this.entityDropItem(new ItemStack(TFCItems.hide, 1, Math.max(0, Math.min(2, (int)(ageMod * sizeMod * 1.84)))), 0);
 		this.dropItem(Items.bone, (int)((rand.nextInt(4) + 2) * ageMod));
-		float foodWeight = ageMod * (this.size_mod * 2400);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+		float foodWeight = ageMod * (this.sizeMod * 2400);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
 
 		TFC_Core.animalDropMeat(this, TFCItems.venisonRaw, foodWeight);
 	}
@@ -378,15 +378,15 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		super.writeEntityToNBT(nbt);
 		nbt.setInteger ("Sex", sex);
 		nbt.setLong ("Animal ID", animalID);
-		nbt.setFloat ("Size Modifier", size_mod);
+		nbt.setFloat ("Size Modifier", sizeMod);
 		
 		nbt.setInteger("Familiarity", familiarity);
 		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);
 		nbt.setBoolean("Familiarized Today", familiarizedToday);
 
-		nbt.setFloat ("Strength Modifier", strength_mod);
-		nbt.setFloat ("Aggression Modifier", aggression_mod);
-		nbt.setFloat ("Obedience Modifier", obedience_mod);
+		nbt.setFloat ("Strength Modifier", strengthMod);
+		nbt.setFloat ("Aggression Modifier", aggressionMod);
+		nbt.setFloat ("Obedience Modifier", obedienceMod);
 		
 		nbt.setBoolean("wasRoped", wasRoped);
 
@@ -409,15 +409,15 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		super.readEntityFromNBT(nbt);
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
-		size_mod = nbt.getFloat ("Size Modifier");
+		sizeMod = nbt.getFloat ("Size Modifier");
 
 		familiarity = nbt.getInteger("Familiarity");
 		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
 		familiarizedToday = nbt.getBoolean("Familiarized Today");
 		
-		strength_mod = nbt.getFloat ("Strength Modifier");
-		aggression_mod = nbt.getFloat ("Aggression Modifier");
-		obedience_mod = nbt.getFloat ("Obedience Modifier");
+		strengthMod = nbt.getFloat ("Strength Modifier");
+		aggressionMod = nbt.getFloat ("Aggression Modifier");
+		obedienceMod = nbt.getFloat ("Obedience Modifier");
 
 		wasRoped = nbt.getBoolean("wasRoped");
 		
@@ -463,7 +463,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public void setGrowingAge(int par1)
 	{
-		if(!TFC_Core.PreventEntityDataUpdate)
+		if(!TFC_Core.preventEntityDataUpdate)
 		{
 			this.dataWatcher.updateObject(12, Integer.valueOf(par1));
 		}
@@ -501,7 +501,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public float getSize()
 	{
-		return size_mod;
+		return sizeMod;
 	}
 
 	@Override
@@ -577,7 +577,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public GenderEnum getGender()
 	{
-		return GenderEnum.genders[dataWatcher.getWatchableObjectInt(13)];
+		return GenderEnum.GENDERS[dataWatcher.getWatchableObjectInt(13)];
 	}
 
 	@Override
@@ -600,19 +600,19 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public float getStrength()
 	{
-		return strength_mod;
+		return strengthMod;
 	}
 
 	@Override
 	public float getAggression()
 	{
-		return aggression_mod;
+		return aggressionMod;
 	}
 
 	@Override
 	public float getObedience()
 	{
-		return obedience_mod;
+		return obedienceMod;
 	}
 
 	@Override
@@ -657,7 +657,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 			if(familiarizedToday && familiarity < 100){
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
-				float familiarityChange = 6 * obedience_mod / aggression_mod;
+				float familiarityChange = 6 * obedienceMod / aggressionMod;
 				if(this.isAdult() && familiarity <= 70) // Adult caps at 70 since babies are currently impossible
 				{
 					familiarity += familiarityChange;
@@ -666,7 +666,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 					float ageMod = 2f/(1f + TFC_Core.getPercentGrown(this));
 					familiarity += ageMod * familiarityChange;
 					if(familiarity > 70){
-						obedience_mod *= 1.01f;
+						obedienceMod *= 1.01f;
 					}
 				}
 			}
@@ -682,7 +682,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && stack.getItem()!= null && stack.getItem().equals(TFCItems.Powder) && stack.getItemDamage() == 9){
+		if(stack != null && stack.getItem()!= null && stack.getItem().equals(TFCItems.powder) && stack.getItemDamage() == 9){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				stack.stackSize--;

@@ -46,7 +46,7 @@ public class StripChunkCommand extends CommandBase
 					for(int y = 0; y < 256; y++)
 					{
 						Block id = chunk.getBlock(x, y, z);
-						if(id != TFCBlocks.Ore && id != TFCBlocks.Ore2 && id != TFCBlocks.Ore3 && id != Blocks.bedrock)
+						if(id != TFCBlocks.ore && id != TFCBlocks.ore2 && id != TFCBlocks.ore3 && id != Blocks.bedrock)
 							world.setBlock(x + (chunk.xPosition * 16), y, z + (chunk.zPosition * 16), Blocks.air, 0, 2);
 					}
 				}
@@ -70,7 +70,7 @@ public class StripChunkCommand extends CommandBase
 							for(int y = 0; y < 256; y++)
 							{
 								Block id = chunk.getBlock(x, y, z);
-								if(id != TFCBlocks.Ore && id != TFCBlocks.Ore2 && id != TFCBlocks.Ore3 && id != Blocks.bedrock)
+								if(id != TFCBlocks.ore && id != TFCBlocks.ore2 && id != TFCBlocks.ore3 && id != Blocks.bedrock)
 									world.setBlock(x + (chunk.xPosition * 16), y, z + (chunk.zPosition * 16), Blocks.air, 0, 2);
 							}
 						}

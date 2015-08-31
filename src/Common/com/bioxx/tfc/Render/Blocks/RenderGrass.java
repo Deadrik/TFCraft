@@ -13,10 +13,10 @@ public class RenderGrass
 		float green = 1F;
 		float blue = 1F;
 
-		if(block == TFCBlocks.Grass || block == TFCBlocks.DryGrass)
-			renderer.renderStandardBlockWithAmbientOcclusion(TFCBlocks.Dirt, x, y, z, red, blue, green);
-		else if(block == TFCBlocks.Grass2 || block == TFCBlocks.DryGrass2)
-			renderer.renderStandardBlockWithAmbientOcclusion(TFCBlocks.Dirt2, x, y, z, red, blue, green);
+		if(block == TFCBlocks.grass || block == TFCBlocks.dryGrass)
+			renderer.renderStandardBlockWithAmbientOcclusion(TFCBlocks.dirt, x, y, z, red, blue, green);
+		else if(block == TFCBlocks.grass2 || block == TFCBlocks.dryGrass2)
+			renderer.renderStandardBlockWithAmbientOcclusion(TFCBlocks.dirt2, x, y, z, red, blue, green);
 
 		renderer.renderStandardBlock(block, x, y, z);
 
@@ -29,10 +29,10 @@ public class RenderGrass
 		float green = 1F;
 		float blue = 1F;
 
-		if(block == TFCBlocks.ClayGrass)
-			renderer.renderStandardBlockWithAmbientOcclusion(TFCBlocks.Clay, x, y, z, red, blue, green);
-		else if(block == TFCBlocks.ClayGrass2)
-			renderer.renderStandardBlockWithAmbientOcclusion(TFCBlocks.Clay2, x, y, z, red, blue, green);
+		if(block == TFCBlocks.clayGrass)
+			renderer.renderStandardBlockWithAmbientOcclusion(TFCBlocks.clay, x, y, z, red, blue, green);
+		else if(block == TFCBlocks.clayGrass2)
+			renderer.renderStandardBlockWithAmbientOcclusion(TFCBlocks.clay2, x, y, z, red, blue, green);
 
 		renderer.renderStandardBlock(block, x, y, z);
 
@@ -45,7 +45,7 @@ public class RenderGrass
 		float green = 1F;
 		float blue = 1F;
 
-		renderer.renderStandardBlockWithAmbientOcclusion(TFCBlocks.Peat, x, y, z, red, blue, green);
+		renderer.renderStandardBlockWithAmbientOcclusion(TFCBlocks.peat, x, y, z, red, blue, green);
 
 		renderer.renderStandardBlock(block, x, y, z);
 

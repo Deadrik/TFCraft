@@ -34,30 +34,30 @@ public class BlockLogHoriz extends BlockLogVert
 	public IIcon getIcon(int side, int meta)
 	{
 		int dir = meta >> 3;
-		meta = (meta & 7) + offset;
+		meta = (meta & 7) + offset; //NOPMD
 
 		if(dir == 0)
 		{
 			if(side == 0 || side == 1)
-				return ((BlockLogNatural)TFCBlocks.LogNatural).sideIcons[meta];
+				return ((BlockLogNatural)TFCBlocks.logNatural).sideIcons[meta];
 			else if(side == 2 || side == 3)
-				return ((BlockLogNatural)TFCBlocks.LogNatural).innerIcons[meta];
+				return ((BlockLogNatural)TFCBlocks.logNatural).innerIcons[meta];
 			else
-				return ((BlockLogNatural)TFCBlocks.LogNatural).rotatedSideIcons[meta];
+				return ((BlockLogNatural)TFCBlocks.logNatural).rotatedSideIcons[meta];
 		}
 		else
 		{
 			if(side == 0 || side == 1 || side == 2 || side == 3)
-				return ((BlockLogNatural)TFCBlocks.LogNatural).rotatedSideIcons[meta];
+				return ((BlockLogNatural)TFCBlocks.logNatural).rotatedSideIcons[meta];
 			else
-				return ((BlockLogNatural)TFCBlocks.LogNatural).innerIcons[meta];
+				return ((BlockLogNatural)TFCBlocks.logNatural).innerIcons[meta];
 		}
 	}
 
 	@Override
 	public int damageDropped(int dmg)
 	{
-		return (dmg & 7) + offset;
+		return (dmg & 7) + offset; //NOPMD
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

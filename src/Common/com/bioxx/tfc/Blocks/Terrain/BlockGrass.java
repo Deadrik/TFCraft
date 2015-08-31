@@ -34,7 +34,7 @@ public class BlockGrass extends BlockTerra
 	protected int textureOffset;
 
 	@SideOnly(Side.CLIENT)
-	public IIcon GrassTopTexture;
+	public IIcon grassTopTexture;
 	@SideOnly(Side.CLIENT)
 	public IIcon iconSnowSide;
 	@SideOnly(Side.CLIENT)
@@ -44,14 +44,14 @@ public class BlockGrass extends BlockTerra
 	{
 		super(Material.grass);
 		this.setTickRandomly(true);
-		this.setCreativeTab(TFCTabs.TFCBuilding);
+		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 	}
 
 	public BlockGrass(int texOff)
 	{
 		this();
 		textureOffset = texOff;
-		this.setCreativeTab(TFCTabs.TFCBuilding);
+		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class BlockGrass extends BlockTerra
 
 	public static IIcon getIconSideOverlay()
 	{
-		return ((BlockGrass)TFCBlocks.Grass).iconGrassSideOverlay;
+		return ((BlockGrass)TFCBlocks.grass).iconGrassSideOverlay;
 	}
 
 	@Override
@@ -85,12 +85,12 @@ public class BlockGrass extends BlockTerra
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		GrassTopTexture = registerer.registerIcon(Reference.ModID + ":" + "GrassTop");
+		grassTopTexture = registerer.registerIcon(Reference.MOD_ID + ":" + "GrassTop");
 
-		iconSnowSide = registerer.registerIcon(Reference.ModID + ":" + "snow");
-		iconGrassSideOverlay = registerer.registerIcon(Reference.ModID + ":" + "GrassSide");
+		iconSnowSide = registerer.registerIcon(Reference.MOD_ID + ":" + "snow");
+		iconGrassSideOverlay = registerer.registerIcon(Reference.MOD_ID + ":" + "GrassSide");
 
-		TFC_Textures.InvisibleTexture = registerer.registerIcon(Reference.ModID + ":" + "Invisible");
+		TFC_Textures.invisibleTexture = registerer.registerIcon(Reference.MOD_ID + ":" + "Invisible");
 	}
 
 	/**
@@ -100,9 +100,9 @@ public class BlockGrass extends BlockTerra
 	public IIcon getIcon(int side, int meta)
 	{
 		if (side == 1)
-			return GrassTopTexture;
+			return grassTopTexture;
 		else if (side == 0)
-			return TFC_Textures.InvisibleTexture;
+			return TFC_Textures.invisibleTexture;
 		else
 			return iconGrassSideOverlay;
 	}
@@ -114,28 +114,28 @@ public class BlockGrass extends BlockTerra
 	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side)
 	{
 		if (side == 1)
-			return GrassTopTexture;
+			return grassTopTexture;
 		else if (side == 0)
-			return TFC_Textures.InvisibleTexture;
+			return TFC_Textures.invisibleTexture;
 		else if (side == 2) //-Z
 		{
 			if (TFCOptions.enableBetterGrass && TFC_Core.isGrass(access.getBlock(x, y - 1, z - 1)))
-				return isSnow(access, x, y - 1, z - 1) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
+				return isSnow(access, x, y - 1, z - 1) ? Blocks.snow.getBlockTextureFromSide(0) : grassTopTexture;
 		}
 		else if (side == 3) //+Z
 		{
 			if (TFCOptions.enableBetterGrass && TFC_Core.isGrass(access.getBlock(x, y - 1, z + 1)))
-				return isSnow(access, x, y - 1, z + 1) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
+				return isSnow(access, x, y - 1, z + 1) ? Blocks.snow.getBlockTextureFromSide(0) : grassTopTexture;
 		}
 		else if (side == 4) //-X
 		{
 			if (TFCOptions.enableBetterGrass && TFC_Core.isGrass(access.getBlock(x - 1, y - 1, z)))
-				return isSnow(access, x - 1, y - 1, z) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
+				return isSnow(access, x - 1, y - 1, z) ? Blocks.snow.getBlockTextureFromSide(0) : grassTopTexture;
 		}
 		else if (side == 5) //+X
 		{
 			if (TFCOptions.enableBetterGrass && TFC_Core.isGrass(access.getBlock(x + 1, y - 1, z)))
-				return isSnow(access, x + 1, y - 1, z) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
+				return isSnow(access, x + 1, y - 1, z) ? Blocks.snow.getBlockTextureFromSide(0) : grassTopTexture;
 		}
 
 		return iconGrassSideOverlay;
@@ -218,7 +218,7 @@ public class BlockGrass extends BlockTerra
 				if (TFC_Core.isGrass(this) && !TFC_Core.isDryGrass(this) && world.getBlock(i, j + 1, k).getMaterial() != Material.water && world.isAirBlock(i, j + 1, k))
 				{
 					if(rand.nextInt((int) ((16800-rain)/4)) == 0 && temp > 20)
-						world.setBlock(i, j + 1, k, TFCBlocks.TallGrass, (world.rand.nextInt(30) == 0 ? 1 : 0), 0x2); // 1/30 chance to spawn fern
+						world.setBlock(i, j + 1, k, TFCBlocks.tallGrass, (world.rand.nextInt(30) == 0 ? 1 : 0), 0x2); // 1/30 chance to spawn fern
 					else if (rand.nextInt(15000) == 0 && temp > 20)
 						new WorldGenSaplings().generate(world, rand, i, j, k);
 				}
@@ -272,7 +272,7 @@ public class BlockGrass extends BlockTerra
 				else if (TFC_Core.isClay(id) && rand.nextInt(10) == 0)
 					world.setBlock(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta, 0x2);
 				else if (TFC_Core.isPeat(id) && rand.nextInt(10) == 0)
-					world.setBlock(x, y, z, TFCBlocks.PeatGrass, 0, 0x2);
+					world.setBlock(x, y, z, TFCBlocks.peatGrass, 0, 0x2);
 			}
 		}
 	}
@@ -280,10 +280,10 @@ public class BlockGrass extends BlockTerra
 	@Override
 	public void onEntityWalking(World world, int x, int y, int z, Entity entity)
 	{
-		if (!world.isRemote && this != TFCBlocks.ClayGrass2 && this != TFCBlocks.ClayGrass && this != TFCBlocks.PeatGrass)
+		if (!world.isRemote && this != TFCBlocks.clayGrass2 && this != TFCBlocks.clayGrass && this != TFCBlocks.peatGrass)
 		{
-			Random R = new Random();
-			if (BlockCollapsible.canFallBelow(world, x, y - 1, z) && R.nextInt(10) == 0 && !BlockCollapsible.isNearSupport(world, x, y, z, 4, 0))
+			Random r = new Random();
+			if (BlockCollapsible.canFallBelow(world, x, y - 1, z) && r.nextInt(10) == 0 && !BlockCollapsible.isNearSupport(world, x, y, z, 4, 0))
 			{
 				int meta = world.getBlockMetadata(x, y, z);
 				world.setBlock(x, y, z, TFC_Core.getTypeForDirtFromGrass(this), meta, 0x2);

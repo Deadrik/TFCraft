@@ -82,7 +82,7 @@ public class BlockDetailed extends BlockPartial
 	public IIcon getIcon(IBlockAccess bAccess, int x, int y, int z, int side)
 	{
 		TEDetailed te = ((TEDetailed)bAccess.getTileEntity(x, y, z));
-		return te.getBlockType().getIcon(side, te.MetaID);
+		return te.getBlockType().getIcon(side, te.metaID);
 	}
 
 	@Override
@@ -111,19 +111,19 @@ public class BlockDetailed extends BlockPartial
 
 		TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 
-		int start_x = (side == ForgeDirection.EAST ? 7 : 0);
-		int end_x = (side == ForgeDirection.WEST ? 1 : 8);
+		int startX = (side == ForgeDirection.EAST ? 7 : 0);
+		int endX = (side == ForgeDirection.WEST ? 1 : 8);
 
-		int start_y = (side == ForgeDirection.UP ? 7 : 0);
-		int end_y = (side == ForgeDirection.DOWN ? 1 : 8);
+		int startY = (side == ForgeDirection.UP ? 7 : 0);
+		int endY = (side == ForgeDirection.DOWN ? 1 : 8);
 
-		int start_z = (side == ForgeDirection.SOUTH ? 7 : 0);
-		int end_z = (side == ForgeDirection.NORTH ? 1 : 8);
+		int startZ = (side == ForgeDirection.SOUTH ? 7 : 0);
+		int endZ = (side == ForgeDirection.NORTH ? 1 : 8);
 
-		for (int sub_x = start_x; sub_x < end_x; ++sub_x)
-			for (int sub_y = start_y; sub_y < end_y; ++sub_y)
-				for (int sub_z = start_z; sub_z < end_z; ++sub_z)
-					if (!te.getBlockExists(sub_x, sub_y, sub_z) && --transpCount < 0)
+		for (int subX = startX; subX < endX; ++subX)
+			for (int subY = startY; subY < endY; ++subY)
+				for (int subZ = startZ; subZ < endZ; ++subZ)
+					if (!te.getBlockExists(subX, subY, subZ) && --transpCount < 0)
 						return false;
 
 		return true;
@@ -158,7 +158,7 @@ public class BlockDetailed extends BlockPartial
 			TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 			lockX = x; lockY = y; lockZ = z;
 			NBTTagCompound nbt = new NBTTagCompound();
-			nbt.setByte("packetType", TEDetailed.Packet_Activate);
+			nbt.setByte("packetType", TEDetailed.PACKET_ACTIVATE);
 			nbt.setInteger("xSelected", xSelected);
 			nbt.setInteger("ySelected", ySelected);
 			nbt.setInteger("zSelected", zSelected);
@@ -173,7 +173,7 @@ public class BlockDetailed extends BlockPartial
 		int mode = 0;
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
 		if(pi!=null)
-			mode = pi.ChiselMode;
+			mode = pi.chiselMode;
 
 		TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 
@@ -260,7 +260,7 @@ public class BlockDetailed extends BlockPartial
 			player.inventory.mainInventory[hasChisel].damageItem(1, player);
 
 		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.setByte("packetType", TEDetailed.Packet_Update);
+		nbt.setByte("packetType", TEDetailed.PACKET_UPDATE);
 		nbt.setInteger("index", index);
 		te.createDataNBT(nbt);
 		te.broadcastPacketInRange(te.createDataPacket(nbt));
@@ -347,7 +347,7 @@ public class BlockDetailed extends BlockPartial
 
 				if (index >= 0 && te.data.get(index)) 
 				{
-					int d = TEWoodConstruct.PlankDetailLevel;
+					int d = TEWoodConstruct.plankDetailLevel;
 					//int dd = d*d;
 					float div = 1f / d;
 
@@ -471,33 +471,33 @@ public class BlockDetailed extends BlockPartial
 		return new Object[] { tracedBound, side, player.distanceTo(tracedBound) };
 	}
 
-	private boolean isVecInsideYZBounds(AxisAlignedBB bound, Vec3 Vec3) {
-		if (Vec3 == null)
+	private boolean isVecInsideYZBounds(AxisAlignedBB bound, Vec3 vec3) {
+		if (vec3 == null)
 			return false;
 		else
-			return Vec3.yCoord >= bound.minY && Vec3.yCoord <= bound.maxY && Vec3.zCoord >= bound.minZ && Vec3.zCoord <= bound.maxZ;
+			return vec3.yCoord >= bound.minY && vec3.yCoord <= bound.maxY && vec3.zCoord >= bound.minZ && vec3.zCoord <= bound.maxZ;
 	}
 
-	private boolean isVecInsideXZBounds(AxisAlignedBB bound, Vec3 Vec3) {
-		if (Vec3 == null)
+	private boolean isVecInsideXZBounds(AxisAlignedBB bound, Vec3 vec3) {
+		if (vec3 == null)
 			return false;
 		else
-			return Vec3.xCoord >= bound.minX && Vec3.xCoord <= bound.maxX && Vec3.zCoord >= bound.minZ && Vec3.zCoord <= bound.maxZ;
+			return vec3.xCoord >= bound.minX && vec3.xCoord <= bound.maxX && vec3.zCoord >= bound.minZ && vec3.zCoord <= bound.maxZ;
 	}
 
-	private boolean isVecInsideXYBounds(AxisAlignedBB bound, Vec3 Vec3) {
-		if (Vec3 == null)
+	private boolean isVecInsideXYBounds(AxisAlignedBB bound, Vec3 vec3) {
+		if (vec3 == null)
 			return false;
 		else
-			return Vec3.xCoord >= bound.minX && Vec3.xCoord <= bound.maxX && Vec3.yCoord >= bound.minY && Vec3.yCoord <= bound.maxY;
+			return vec3.xCoord >= bound.minX && vec3.xCoord <= bound.maxX && vec3.yCoord >= bound.minY && vec3.yCoord <= bound.maxY;
 	}
 
 	@Override
 	public int getFlammability(IBlockAccess world, int x, int y, int z, ForgeDirection face)
 	{
 		TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
-		if(te.TypeID >= 0)
-			return Blocks.fire.getFlammability(Block.getBlockById(te.TypeID));
+		if(te.typeID >= 0)
+			return Blocks.fire.getFlammability(Block.getBlockById(te.typeID));
 		else return 0;
 	}
 
@@ -505,8 +505,8 @@ public class BlockDetailed extends BlockPartial
 	public int getFireSpreadSpeed(IBlockAccess world, int x, int y, int z, ForgeDirection face)
 	{
 		TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
-		if(te.TypeID >= 0)
-			return Blocks.fire.getEncouragement(Block.getBlockById(te.TypeID));
+		if(te.typeID >= 0)
+			return Blocks.fire.getEncouragement(Block.getBlockById(te.typeID));
 		else return 0;
 	}
 	

@@ -76,7 +76,7 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 					int j4 = z - zCoord;
 					if ((Math.abs(l3) != i3 || Math.abs(j4) != i3 || random.nextInt(2) != 0 && j2 != 0) && world.isAirBlock(x, y, z))
 					{
-						setBlockAndNotifyAdequately(world, x, y, z, TFCBlocks.Leaves, treeId);
+						setBlockAndNotifyAdequately(world, x, y, z, TFCBlocks.leaves, treeId);
 					}
 				}
 			}
@@ -84,7 +84,7 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 
 		for (int l1 = 0; l1 < height; l1++)
 		{
-			setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId);
+			setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.logNatural, treeId);
 		}
 
 		return true;

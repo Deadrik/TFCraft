@@ -33,12 +33,12 @@ public class BlockCustomReed extends BlockReed implements IPlantable
 	@Override
 	public Item getItemDropped(int par1, Random par2, int par3)
 	{
-		return TFCItems.Reeds;
+		return TFCItems.reeds;
 	}
 
 	@Override
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return TFCItems.Reeds;
+		return TFCItems.reeds;
 	}
 }

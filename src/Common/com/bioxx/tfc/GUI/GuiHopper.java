@@ -10,7 +10,7 @@ import com.bioxx.tfc.TileEntities.TEHopper;
 
 public class GuiHopper extends GuiContainerTFC
 {
-	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_hopper.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_hopper.png");
 	public GuiHopper(InventoryPlayer inventoryplayer, TEHopper te, World world, int i, int j, int k)
 	{
 		super(new ContainerHopper(inventoryplayer, te), 176, 49);

@@ -10,10 +10,10 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class BarrelManager
 {
-	private static final BarrelManager instance = new BarrelManager();
+	private static final BarrelManager INSTANCE = new BarrelManager();
 	public static final BarrelManager getInstance()
 	{
-		return instance;
+		return INSTANCE;
 	}
 
 	private List<BarrelRecipe> recipes;

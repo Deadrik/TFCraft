@@ -8,24 +8,24 @@ import com.bioxx.tfc.api.Metal;
 
 public class AlloyManager 
 {
-	public static AlloyManager instance = new AlloyManager();
+	public static final AlloyManager INSTANCE = new AlloyManager();
 	
-	public List<Alloy> Alloys;
+	public List<Alloy> alloys;
 	
 	
 	public AlloyManager()
 	{
-		Alloys = new ArrayList<Alloy>();
+		alloys = new ArrayList<Alloy>();
 	}
 	
 	public void addAlloy(Alloy a)
 	{
-		Alloys.add(a);
+		alloys.add(a);
 	}
 	
 	public boolean matches(List<AlloyMetal> ingred)
 	{
-		Iterator<Alloy> iter = Alloys.iterator();
+		Iterator<Alloy> iter = alloys.iterator();
 		Alloy match = null;
 		while(iter.hasNext() && match == null)
 		{
@@ -37,7 +37,7 @@ public class AlloyManager
 	
 	public Metal matchesAlloy(List<AlloyMetal> ingred, Alloy.EnumTier furnaceTier)
 	{
-		Iterator<Alloy> iter = Alloys.iterator();
+		Iterator<Alloy> iter = alloys.iterator();
 		Alloy match = null;
 		while (iter.hasNext())
 		{

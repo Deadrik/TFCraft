@@ -32,8 +32,8 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	private IIcon textureOn;
 	private IIcon textureOff;
 
-	public static final int bloomeryToStackMap[][] = { { 0, 1 }, { -1, 0 }, { 0, -1 }, { 1, 0 } };
-	public static final int sidesMap[][] = { { 1, 0 }, { 0, 1 }, { 1, 0 }, { 0, 1 } };
+	public static final int BLOOMERY_TO_STACK_MAP[][] = { { 0, 1 }, { -1, 0 }, { 0, -1 }, { 1, 0 } };
+	public static final int SIDES_MAP[][] = { { 1, 0 }, { 0, 1 }, { 1, 0 }, { 0, 1 } };
 	//North = 2 = -z
 	//South = 0 = +z
 	//West = 1 = -x
@@ -42,7 +42,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	public BlockEarlyBloomery()
 	{
 		super(Material.rock);
-		this.setCreativeTab(TFCTabs.TFCDevices);
+		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 		setBlockBounds(0.0F, 0.0F, 0.0f, 0.0f, 0.0F, 0.0F);
 	}
 
@@ -69,7 +69,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 			TEBloomery te = (TEBloomery) world.getTileEntity(x, y, z);
 			ItemStack is = entityplayer.getCurrentEquippedItem();
 
-			if (is != null && (is.getItem() == TFCItems.FireStarter || is.getItem() == TFCItems.FlintSteel))
+			if (is != null && (is.getItem() == TFCItems.fireStarter || is.getItem() == TFCItems.flintSteel))
 			{
 				if (te.canLight())
 					entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
@@ -125,7 +125,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 
 	public boolean checkStack(World world, int x, int y, int z, int dir)
 	{
-		int[] map = bloomeryToStackMap[dir];
+		int[] map = BLOOMERY_TO_STACK_MAP[dir];
 		int centerX = x + map[0];
 		int centerZ = z + map[1];
 		if (isNorthStackValid(world, centerX, y, centerZ - 1) || centerX == x && centerZ - 1 == z)
@@ -183,14 +183,14 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 		if(flip)
 			dir = flipDir(dir);
 
-		int[] map = sidesMap[dir];
+		int[] map = SIDES_MAP[dir];
 
 		boolean l = false;
 		boolean r = false;
 		if((world.getBlock(x - map[0], y, z - map[1]).getMaterial() == Material.rock || world.getBlock(x - map[0], y, z - map[1]).getMaterial() == Material.iron) && world.getBlock(x - map[0], y, z - map[1]).isOpaqueCube())
 			l = true;
 
-		if (!l && world.getBlock(x - map[0], y, z - map[1]) == TFCBlocks.Detailed || world.getBlock(x - map[0], y, z - map[1]) == TFCBlocks.stoneSlabs)
+		if (!l && world.getBlock(x - map[0], y, z - map[1]) == TFCBlocks.detailed || world.getBlock(x - map[0], y, z - map[1]) == TFCBlocks.stoneSlabs)
 		{
 			switch(dir)
 			{
@@ -221,7 +221,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 		if((world.getBlock(x + map[0], y, z + map[1]).getMaterial() == Material.rock || world.getBlock(x + map[0], y, z + map[1]).getMaterial() == Material.iron) && world.getBlock(x + map[0], y, z + map[1]).isOpaqueCube())
 			r = true;
 
-		if (!r && world.getBlock(x + map[0], y, z + map[1]) == TFCBlocks.Detailed || world.getBlock(x + map[0], y, z + map[1]) == TFCBlocks.stoneSlabs)
+		if (!r && world.getBlock(x + map[0], y, z + map[1]) == TFCBlocks.detailed || world.getBlock(x + map[0], y, z + map[1]) == TFCBlocks.stoneSlabs)
 		{
 			switch(dir)
 			{
@@ -265,7 +265,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 		if((world.getBlock(x, y - 1, z).getMaterial() == Material.rock || world.getBlock(x, y - 1, z).getMaterial() == Material.iron) && world.getBlock(x, y - 1, z).isOpaqueCube())
 			b = true;
 
-		if (!b && world.getBlock(x, y - 1, z) == TFCBlocks.Detailed || world.getBlock(x, y - 1, z) == TFCBlocks.stoneSlabs)
+		if (!b && world.getBlock(x, y - 1, z) == TFCBlocks.detailed || world.getBlock(x, y - 1, z) == TFCBlocks.stoneSlabs)
 		{
 			switch(dir)
 			{
@@ -294,7 +294,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 		if((world.getBlock(x, y + 1, z).getMaterial() == Material.rock || world.getBlock(x, y + 1, z).getMaterial() == Material.iron) && world.getBlock(x, y + 1, z).isOpaqueCube())
 			t = true;
 
-		if (!t && world.getBlock(x, y + 1, z) == TFCBlocks.Detailed || world.getBlock(x, y + 1, z) == TFCBlocks.stoneSlabs)
+		if (!t && world.getBlock(x, y + 1, z) == TFCBlocks.detailed || world.getBlock(x, y + 1, z) == TFCBlocks.stoneSlabs)
 		{
 			switch(dir)
 			{
@@ -344,8 +344,8 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		textureOn = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Bloomery On");
-		textureOff = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Bloomery Off");
+		textureOn = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Bloomery On");
+		textureOff = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Bloomery Off");
 	}
 
 	@Override
@@ -376,14 +376,14 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 		{
 			world.setBlockToAir(x, y, z);
 			int meta = world.getBlockMetadata(x, y, z);
-			int[] dir = bloomeryToStackMap[meta & 3];
-			if (world.getBlock(x + dir[0], y, z + dir[1]) == TFCBlocks.Molten)
+			int[] dir = BLOOMERY_TO_STACK_MAP[meta & 3];
+			if (world.getBlock(x + dir[0], y, z + dir[1]) == TFCBlocks.molten)
 				world.setBlockToAir(x + dir[0], y, z + dir[1]);
-			if (world.getBlock(x + dir[0], y + 1, z + dir[1]) == TFCBlocks.Molten)
+			if (world.getBlock(x + dir[0], y + 1, z + dir[1]) == TFCBlocks.molten)
 				world.setBlockToAir(x + dir[0], y + 1, z + dir[1]);
-			if (world.getBlock(x + dir[0], y + 2, z + dir[1]) == TFCBlocks.Molten)
+			if (world.getBlock(x + dir[0], y + 2, z + dir[1]) == TFCBlocks.molten)
 				world.setBlockToAir(x + dir[0], y + 2, z + dir[1]);
-			if (world.getBlock(x + dir[0], y + 3, z + dir[1]) == TFCBlocks.Molten)
+			if (world.getBlock(x + dir[0], y + 3, z + dir[1]) == TFCBlocks.molten)
 				world.setBlockToAir(x + dir[0], y + 3, z + dir[1]);
 		}
 	}

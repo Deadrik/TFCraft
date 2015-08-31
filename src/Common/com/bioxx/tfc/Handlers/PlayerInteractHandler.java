@@ -48,8 +48,8 @@ public class PlayerInteractHandler
 
 	private void handleDrinkingWater(EntityPlayer entityPlayer)
 	{
-		Long last_check = lastDrink.get(entityPlayer.getUniqueID());
-		if(last_check != null && last_check + 20 > TFC_Time.getTotalTicks())
+		Long lastCheck = lastDrink.get(entityPlayer.getUniqueID());
+		if(lastCheck != null && lastCheck + 20 > TFC_Time.getTotalTicks())
 			return;
 		lastDrink.put(entityPlayer.getUniqueID(), TFC_Time.getTotalTicks());
 		World world = entityPlayer.worldObj;
@@ -87,7 +87,7 @@ public class PlayerInteractHandler
 			event.item.setInvisible(true);
 			Random rand = event.entityPlayer.worldObj.rand;
 			event.entityPlayer.worldObj.playSoundAtEntity(event.entityPlayer, "random.pop", 0.2F, ((rand.nextFloat() - rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-			ItemStack tfcSticks = new ItemStack(TFCItems.Stick, count);
+			ItemStack tfcSticks = new ItemStack(TFCItems.stick, count);
 			event.entityPlayer.inventory.addItemStackToInventory(tfcSticks);
 		}
 
@@ -99,7 +99,7 @@ public class PlayerInteractHandler
 			event.item.setInvisible(true);
 			Random rand = event.entityPlayer.worldObj.rand;
 			event.entityPlayer.worldObj.playSoundAtEntity(event.entityPlayer, "random.pop", 0.2F, ((rand.nextFloat() - rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-			ItemStack tfcPlanks = new ItemStack(TFCBlocks.Planks, count);
+			ItemStack tfcPlanks = new ItemStack(TFCBlocks.planks, count);
 			event.entityPlayer.inventory.addItemStackToInventory(tfcPlanks);
 		}
 
@@ -111,7 +111,7 @@ public class PlayerInteractHandler
 			event.item.setInvisible(true);
 			Random rand = event.entityPlayer.worldObj.rand;
 			event.entityPlayer.worldObj.playSoundAtEntity(event.entityPlayer, "random.pop", 0.2F, ((rand.nextFloat() - rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-			ItemStack jackOLanternTFC = new ItemStack(TFCBlocks.LitPumpkin, count);
+			ItemStack jackOLanternTFC = new ItemStack(TFCBlocks.litPumpkin, count);
 			event.entityPlayer.inventory.addItemStackToInventory(jackOLanternTFC);
 		}
 	}

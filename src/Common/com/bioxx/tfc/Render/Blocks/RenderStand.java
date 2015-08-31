@@ -35,8 +35,8 @@ public class RenderStand  implements ISimpleBlockRenderingHandler
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
-		Block blockToRender = block == TFCBlocks.ArmourStand ? TFCBlocks.Planks : TFCBlocks.Planks2;
-		Block woodblock = block == TFCBlocks.ArmourStand ? TFCBlocks.WoodSupportH : TFCBlocks.WoodSupportH2;
+		Block blockToRender = block == TFCBlocks.armorStand ? TFCBlocks.planks : TFCBlocks.planks2;
+		Block woodblock = block == TFCBlocks.armorStand ? TFCBlocks.woodSupportH : TFCBlocks.woodSupportH2;
 
 		float yScale = 0.7f;
 		float blockScale = 0.5f;

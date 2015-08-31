@@ -25,7 +25,7 @@ public class ItemMeltedMetal extends ItemTerra
 	{
 		super();
 		setMaxDamage(101);
-		setCreativeTab(TFCTabs.TFCMaterials);
+		setCreativeTab(TFCTabs.TFC_MATERIALS);
 		this.setFolder("ingots/");
 		this.setWeight(EnumWeight.HEAVY);
 		this.setSize(EnumSize.SMALL);
@@ -34,7 +34,7 @@ public class ItemMeltedMetal extends ItemTerra
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
+		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
 	}
 
 	@Override

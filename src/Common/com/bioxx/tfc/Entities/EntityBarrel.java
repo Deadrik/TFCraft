@@ -81,10 +81,10 @@ public class EntityBarrel extends Entity
 	}
 
 	@Override
-	public boolean interactFirst(EntityPlayer p_130002_1_)
+	public boolean interactFirst(EntityPlayer player)
 	{
 		int x = (int)Math.floor(posX); int y = (int)Math.floor(posY); int z = (int)Math.floor(posZ);
-		if(!worldObj.isRemote && worldObj.setBlock(x, y, z, TFCBlocks.Barrel, getBarrelType()&15, 0x2))
+		if(!worldObj.isRemote && worldObj.setBlock(x, y, z, TFCBlocks.barrel, getBarrelType()&15, 0x2))
 		{
 			TEBarrel te = (TEBarrel)worldObj.getTileEntity(x, y, z);
 			te.readFromItemNBT(this.origBarrel.getTagCompound());
@@ -100,7 +100,7 @@ public class EntityBarrel extends Entity
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBox(Entity p_70114_1_)
+	public AxisAlignedBB getCollisionBox(Entity entity)
 	{
 		return this.boundingBox;
 	}

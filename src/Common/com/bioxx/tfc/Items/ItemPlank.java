@@ -27,8 +27,8 @@ public class ItemPlank extends ItemTerra
 		super();
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
-		setCreativeTab(TFCTabs.TFCMaterials);
-		this.MetaNames = Global.WOOD_ALL.clone();
+		setCreativeTab(TFCTabs.TFC_MATERIALS);
+		this.metaNames = Global.WOOD_ALL.clone();
 		this.setWeight(EnumWeight.LIGHT);
 		this.setSize(EnumSize.MEDIUM);
 	}
@@ -36,13 +36,13 @@ public class ItemPlank extends ItemTerra
 	@Override
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int i, int j, int k, int side, float hitX, float hitY, float hitZ)
 	{
-		boolean isConstruct = world.getBlock(i, j, k) == TFCBlocks.WoodConstruct;
+		boolean isConstruct = world.getBlock(i, j, k) == TFCBlocks.woodConstruct;
 		int offset = !isConstruct ? 1 : 0;
 		boolean isAir = world.isAirBlock(i, j, k);
 
 		if(!world.isRemote)
 		{
-			int d = TEWoodConstruct.PlankDetailLevel;
+			int d = TEWoodConstruct.plankDetailLevel;
 			int dd = d*d;
 			int dd2 = dd*2;
 
@@ -69,7 +69,7 @@ public class ItemPlank extends ItemTerra
 			{
 				if (!isConstruct && isAir ||
 					isConstruct && isEdge && world.isAirBlock(i, j - offset, k))
-					world.setBlock(i, j-1, k, TFCBlocks.WoodConstruct);
+					world.setBlock(i, j-1, k, TFCBlocks.woodConstruct);
 
 				TileEntity tile = world.getTileEntity(i, j-offset, k);
 				if (!(tile instanceof TEWoodConstruct))
@@ -89,7 +89,7 @@ public class ItemPlank extends ItemTerra
 				if (!isConstruct && isAir ||
 					isConstruct && isEdge && world.isAirBlock(i, j + offset, k))
 				{
-					world.setBlock(i, j+1, k, TFCBlocks.WoodConstruct);
+					world.setBlock(i, j+1, k, TFCBlocks.woodConstruct);
 				}
 
 				TileEntity tile = world.getTileEntity(i, j+offset, k);
@@ -112,7 +112,7 @@ public class ItemPlank extends ItemTerra
 				if (!isConstruct && isAir ||
 					isConstruct && isEdge && world.isAirBlock(i, j, k - offset))
 				{
-					world.setBlock(i, j, k-1, TFCBlocks.WoodConstruct);
+					world.setBlock(i, j, k-1, TFCBlocks.woodConstruct);
 				}
 
 				TileEntity tile = world.getTileEntity(i, j, k-offset);
@@ -135,7 +135,7 @@ public class ItemPlank extends ItemTerra
 				if (!isConstruct && isAir ||
 					isConstruct && isEdge && world.isAirBlock(i, j, k + offset))
 				{
-					world.setBlock(i, j, k+1, TFCBlocks.WoodConstruct);
+					world.setBlock(i, j, k+1, TFCBlocks.woodConstruct);
 				}
 
 				TileEntity tile = world.getTileEntity(i, j, k+offset);
@@ -158,7 +158,7 @@ public class ItemPlank extends ItemTerra
 				if (!isConstruct && isAir ||
 					isConstruct && isEdge && world.isAirBlock(i - offset, j, k))
 				{
-					world.setBlock(i-1, j, k, TFCBlocks.WoodConstruct);
+					world.setBlock(i-1, j, k, TFCBlocks.woodConstruct);
 				}
 
 				TileEntity tile = world.getTileEntity(i-offset, j, k);
@@ -181,7 +181,7 @@ public class ItemPlank extends ItemTerra
 				if (!isConstruct && isAir ||
 					isConstruct && isEdge && world.isAirBlock(i + offset, j, k))
 				{
-					world.setBlock(i+1, j, k, TFCBlocks.WoodConstruct);
+					world.setBlock(i+1, j, k, TFCBlocks.woodConstruct);
 				}
 
 				TileEntity tile = world.getTileEntity(i+offset, j, k);
@@ -222,7 +222,7 @@ public class ItemPlank extends ItemTerra
 	public void registerIcons(IIconRegister registerer)
 	{
 		for(int i = 0; i < Global.WOOD_ALL.length; i++) {
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/"+Global.WOOD_ALL[i]+" Plank");
+			icons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "wood/"+Global.WOOD_ALL[i]+" Plank");
 		}
 	}
 

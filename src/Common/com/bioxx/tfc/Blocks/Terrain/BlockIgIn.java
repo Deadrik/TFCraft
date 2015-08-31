@@ -11,7 +11,7 @@ public class BlockIgIn extends BlockStone
 	public BlockIgIn(Material material)
 	{
 		super(material);
-		this.dropBlock = TFCBlocks.StoneIgInCobble;
+		this.dropBlock = TFCBlocks.stoneIgInCobble;
 		names = Global.STONE_IGIN;
 		icons = new IIcon[names.length];
 		looseStart = Global.STONE_IGIN_START;

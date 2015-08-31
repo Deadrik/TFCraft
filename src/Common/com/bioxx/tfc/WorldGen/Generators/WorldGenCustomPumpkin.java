@@ -20,9 +20,9 @@ public class WorldGenCustomPumpkin extends WorldGenerator
 			int var8 = par4 + par2Random.nextInt(4) - par2Random.nextInt(4);
 			int var9 = par5 + par2Random.nextInt(8) - par2Random.nextInt(8);
 			Block var5 = par1World.getBlock(var7, var8 - 1, var9);
-			if (par1World.isAirBlock(var7, var8, var9) && TFC_Core.isSoil(var5) && TFCBlocks.Pumpkin.canPlaceBlockAt(par1World, var7, var8, var9))
+			if (par1World.isAirBlock(var7, var8, var9) && TFC_Core.isSoil(var5) && TFCBlocks.pumpkin.canPlaceBlockAt(par1World, var7, var8, var9))
 			{
-				par1World.setBlock(var7, var8, var9, TFCBlocks.Pumpkin, par2Random.nextInt(4), 0x2);
+				par1World.setBlock(var7, var8, var9, TFCBlocks.pumpkin, par2Random.nextInt(4), 0x2);
 			}
 		}
 		return true;

@@ -69,7 +69,7 @@ public class BlockLogPile extends BlockTerraContainer
 				//te = (TELogPile)world.getTileEntity(i, j, k);
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
-				if(is != null && is.getItem() == TFCItems.Logs)
+				if(is != null && is.getItem() == TFCItems.logs)
 				{
 					return false;
 				}
@@ -129,18 +129,17 @@ public class BlockLogPile extends BlockTerraContainer
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		icons[0] = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Log Pile Side 0");
-		icons[1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Log Pile Side 1");
-		icons[2] = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Log Pile End");
+		icons[0] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Log Pile Side 0");
+		icons[1] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Log Pile Side 1");
+		icons[2] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Log Pile End");
 	}
 
-	public void Eject(World world, int x, int y, int z)
+	public void eject(World world, int x, int y, int z)
 	{
-		if(!world.isRemote && (TELogPile)world.getTileEntity(x, y, z) != null)
+		if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TELogPile)
 		{
-			TELogPile TELogPile;
-			TELogPile = (TELogPile)world.getTileEntity(x, y, z);
-			TELogPile.ejectContents();
+			TELogPile te = (TELogPile) world.getTileEntity(x, y, z);
+			te.ejectContents();
 			world.removeTileEntity(x, y, z);
 		}
 	}
@@ -154,25 +153,25 @@ public class BlockLogPile extends BlockTerraContainer
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
-		Eject(world, i, j, k);
+		eject(world, i, j, k);
 	}
 
 	@Override
 	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion ex)
 	{
-		Eject(world, x, y, z);
+		eject(world, x, y, z);
 	}
 
 	@Override
 	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int i)
 	{
-		Eject(world, x, y, z);
+		eject(world, x, y, z);
 	}
 
 	@Override
 	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
 	{
-		Eject(world, x, y, z);
+		eject(world, x, y, z);
 		return world.setBlockToAir(x, y, z); // super.removedByPlayer is deprecated, and causes a loop.
 	}
 

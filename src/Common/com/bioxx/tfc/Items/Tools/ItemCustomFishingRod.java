@@ -36,7 +36,7 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 		super();
 		this.setMaxDamage(64);
 		this.setMaxStackSize(1);
-		this.setCreativeTab(TFCTabs.TFCTools);
+		this.setCreativeTab(TFCTabs.TFC_TOOLS);
 		setNoRepair();
 	}
 
@@ -112,7 +112,7 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World p_77648_3_, int p_77648_4_, int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		if(player.fishEntity instanceof EntityFishHookTFC)
 		{
@@ -151,7 +151,7 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 	 * How long it takes to use or consume an item
 	 */
 	@Override
-	public int getMaxItemUseDuration(ItemStack p_77626_1_)
+	public int getMaxItemUseDuration(ItemStack is)
 	{
 		return 72000;
 	}
@@ -164,9 +164,9 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 		uncastIconArray = new IIcon[3];
 		castIconArray = new IIcon[8];
 		for (int i = 0; i < castIconArray.length; ++i)
-			castIconArray[i] = par1IconRegister.registerIcon(Reference.ModID+":"+this.getIconString() +"_cast_" + i);
+			castIconArray[i] = par1IconRegister.registerIcon(Reference.MOD_ID+":"+this.getIconString() +"_cast_" + i);
 		for (int i = 0; i < uncastIconArray.length; ++i)
-			uncastIconArray[i] = par1IconRegister.registerIcon(Reference.ModID+":"+this.getIconString() +"_uncast_" + i);
+			uncastIconArray[i] = par1IconRegister.registerIcon(Reference.MOD_ID+":"+this.getIconString() +"_uncast_" + i);
 		this.itemIcon = uncastIconArray[0];
 	}
 

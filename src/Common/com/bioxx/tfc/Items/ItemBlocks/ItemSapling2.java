@@ -10,8 +10,8 @@ public class ItemSapling2 extends ItemSapling
 	public ItemSapling2(Block b)
 	{
 		super(b);
-		this.MetaNames = new String[Global.WOOD_ALL.length - 16];
-		System.arraycopy(Global.WOOD_ALL, 16, MetaNames, 0, Global.WOOD_ALL.length - 16);
-		this.icons = new IIcon[MetaNames.length];
+		this.metaNames = new String[Global.WOOD_ALL.length - 16];
+		System.arraycopy(Global.WOOD_ALL, 16, metaNames, 0, Global.WOOD_ALL.length - 16);
+		this.icons = new IIcon[metaNames.length];
 	}
 }

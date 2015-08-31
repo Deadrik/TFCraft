@@ -22,7 +22,7 @@ public class BlockCustomPumpkin extends BlockPumpkin
 	{
 		super(lit);
 		this.isLit = lit;
-		this.setCreativeTab(TFCTabs.TFCBuilding);
+		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 	}
 
 	/**

@@ -27,7 +27,7 @@ public class RenderFallingBlock extends Render
 	 * (Render<T extends Entity) and this method has signature public void func_76986_a(T entity, double d, double d1,
 	 * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
 	 */
-	public void doRender(EntityFallingBlockTFC entity, double x, double y, double z, float p_76986_8_, float p_76986_9_)
+	public void doRender(EntityFallingBlockTFC entity, double x, double y, double z, float f, float f1)
 	{
 		World world = entity.getWorld();
 		Block block = entity.getBlock();
@@ -53,7 +53,7 @@ public class RenderFallingBlock extends Render
 	/**
 	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
 	 */
-	protected ResourceLocation getEntityTexture(EntityFallingBlockTFC p_110775_1_)
+	protected ResourceLocation getEntityTexture(EntityFallingBlockTFC entity)
 	{
 		return TextureMap.locationBlocksTexture;
 	}
@@ -62,9 +62,9 @@ public class RenderFallingBlock extends Render
 	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
 	 */
 	@Override
-	protected ResourceLocation getEntityTexture(Entity p_110775_1_)
+	protected ResourceLocation getEntityTexture(Entity entity)
 	{
-		return this.getEntityTexture((EntityFallingBlockTFC)p_110775_1_);
+		return this.getEntityTexture((EntityFallingBlockTFC)entity);
 	}
 
 	/**
@@ -74,8 +74,8 @@ public class RenderFallingBlock extends Render
 	 * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
 	 */
 	@Override
-	public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
+	public void doRender(Entity entity, double x, double y, double z, float f, float f1)
 	{
-		this.doRender((EntityFallingBlockTFC)p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
+		this.doRender((EntityFallingBlockTFC)entity, x, y, z, f, f1);
 	}
 }

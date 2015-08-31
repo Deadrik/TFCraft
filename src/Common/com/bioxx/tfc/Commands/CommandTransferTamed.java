@@ -39,13 +39,13 @@ public class CommandTransferTamed extends CommandBase
 	}
 
 	@Override
-	public boolean canCommandSenderUseCommand(ICommandSender p_71519_1_)
+	public boolean canCommandSenderUseCommand(ICommandSender sender)
 	{
 		return true;
 	}
 
 	@Override
-	public String getCommandUsage(ICommandSender p_71518_1_)
+	public String getCommandUsage(ICommandSender sender)
 	{
 		return "commands.transferTamed.usage";
 	}
@@ -111,22 +111,22 @@ public class CommandTransferTamed extends CommandBase
 	 * Adds the strings available in this command to the given list of tab completion options.
 	 */
 	@Override
-	public List addTabCompletionOptions(ICommandSender p_71516_1_, String[] p_71516_2_)
+	public List addTabCompletionOptions(ICommandSender sender, String[] string)
 	{
 		/**
 		 * Returns a List of strings (chosen from the given strings) which the last word in the given string array is a
 		 * beginning-match for. (Tab completion).
 		 */
-		return getListOfStringsMatchingLastWord(p_71516_2_, MinecraftServer.getServer().getAllUsernames());
+		return getListOfStringsMatchingLastWord(string, MinecraftServer.getServer().getAllUsernames());
 	}
 
 	/**
 	 * Return whether the specified command parameter index is a username parameter.
 	 */
 	@Override
-	public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_)
+	public boolean isUsernameIndex(String[] string, int index)
 	{
-		return p_82358_2_ == 0;
+		return index == 0;
 	}
 
 }

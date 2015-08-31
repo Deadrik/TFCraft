@@ -20,7 +20,7 @@ import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 {
 	public short damageTaken;
-	public Item pickupItem = TFCItems.Arrow;
+	public Item pickupItem = TFCItems.arrow;
 
 	public EntityProjectileTFC(World par1World)
 	{

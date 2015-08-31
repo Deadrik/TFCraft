@@ -15,9 +15,9 @@ public class TestPacket extends AbstractPacket
 
 	public TestPacket() {}
 
-	public TestPacket(String S)
+	public TestPacket(String s)
 	{
-		msg = S;
+		msg = s;
 	}
 
 	@Override
@@ -36,13 +36,13 @@ public class TestPacket extends AbstractPacket
 	@Override
 	public void handleClientSide(EntityPlayer player)
 	{
-		TerraFirmaCraft.log.info("++++++++++++Client: " + msg);
+		TerraFirmaCraft.LOG.info("++++++++++++Client: " + msg);
 	}
 
 	@Override
 	public void handleServerSide(EntityPlayer player)
 	{
-		TerraFirmaCraft.log.info("++++++++++++Server: " + msg);
+		TerraFirmaCraft.LOG.info("++++++++++++Server: " + msg);
 	}
 
 }

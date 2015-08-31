@@ -17,9 +17,9 @@ public class TFC_Climate
 {
 	public static HashMap<World, WorldCacheManager> worldPair = new HashMap<World, WorldCacheManager>();
 
-	private static final float[] yFactorCache = new float[441];
-	private static final float[] zFactorCache = new float[30001];
-	private static final float[][] monthTempCache = new float[12][30001];
+	private static final float[] Y_FACTOR_CACHE = new float[441];
+	private static final float[] Z_FACTOR_CACHE = new float[30001];
+	private static final float[][] MONTH_TEMP_CACHE = new float[12][30001];
 
 	//private static int[][] insolationMap;
 
@@ -39,7 +39,7 @@ public class TFC_Climate
 		// http://www.wolframalpha.com/input/?i=%28%28%28x%5E2+%2F+677.966%29+*+%280.5%29*%28%28%28110+-+x%29+%2B+%7C110+-+x%7C%29%2F%28110+-
 		// +x%29%29%29+%2B+%28%280.5%29*%28%28%28x+-+110%29+%2B+%7Cx+-+110%7C%29%2F%28x+-+110%29%29+*+x+*+0.16225%29%29+0+to+440
 
-		for (int y = 0; y < yFactorCache.length; y += 1) {
+		for (int y = 0; y < Y_FACTOR_CACHE.length; y += 1) {
 		    // temp = temp - (ySq / 677.966f) * (((110.01f - y) + Math.abs(110.01f - y)) / (2 * (110.01f - y)));
 		    // temp -= (0.16225 * y * (((y - 110.01f) + Math.abs(y - 110.01f)) / (2 * (y - 110.01f))));
 			
@@ -57,7 +57,7 @@ public class TFC_Climate
 				// diff <= 0
 				factor = 0.16225f * y;  // 17.85 for y=110
 			}
-			yFactorCache[y] = factor;
+			Y_FACTOR_CACHE[y] = factor;
 		}
 		
 		for(int zCoord = 0; zCoord < getMaxZPos() + 1; ++zCoord)
@@ -67,7 +67,7 @@ public class TFC_Climate
 
 			factor = (getMaxZPos()-z)/(getMaxZPos());
 
-			zFactorCache[zCoord] = factor;
+			Z_FACTOR_CACHE[zCoord] = factor;
 
 			for(int month = 0; month < 12; ++month)
 			{
@@ -80,42 +80,42 @@ public class TFC_Climate
 				{
 				case 10:
 				{
-					monthTempCache[month][zCoord] = (float)(MAXTEMP-13.5*latitudeFactor - (latitudeFactor*55));
+					MONTH_TEMP_CACHE[month][zCoord] = (float)(MAXTEMP-13.5*latitudeFactor - (latitudeFactor*55));
 					break;
 				}
 				case 9:
 				case 11:
 				{
-					monthTempCache[month][zCoord] = (float)(MAXTEMP -12.5*latitudeFactor- (latitudeFactor*53));
+					MONTH_TEMP_CACHE[month][zCoord] = (float)(MAXTEMP -12.5*latitudeFactor- (latitudeFactor*53));
 					break;
 				}
 				case 0:
 				case 8:
 				{
-					monthTempCache[month][zCoord] = (float)(MAXTEMP -10*latitudeFactor- (latitudeFactor*46));
+					MONTH_TEMP_CACHE[month][zCoord] = (float)(MAXTEMP -10*latitudeFactor- (latitudeFactor*46));
 					break;
 				}
 				case 1:
 				case 7:
 				{
-					monthTempCache[month][zCoord] = (float)(MAXTEMP -7.5*latitudeFactor- (latitudeFactor*40));
+					MONTH_TEMP_CACHE[month][zCoord] = (float)(MAXTEMP -7.5*latitudeFactor- (latitudeFactor*40));
 					break;
 				}
 				case 2:
 				case 6:
 				{
-					monthTempCache[month][zCoord] = (float)(MAXTEMP - 5*latitudeFactor- (latitudeFactor*33));
+					MONTH_TEMP_CACHE[month][zCoord] = (float)(MAXTEMP - 5*latitudeFactor- (latitudeFactor*33));
 					break;
 				}
 				case 3:
 				case 5:
 				{
-					monthTempCache[month][zCoord] = (float)(MAXTEMP -2.5*latitudeFactor- (latitudeFactor*27)); 
+					MONTH_TEMP_CACHE[month][zCoord] = (float)(MAXTEMP -2.5*latitudeFactor- (latitudeFactor*27)); 
 					break;
 				}
 				case 4:
 				{
-					monthTempCache[month][zCoord] = (float)(MAXTEMP -1.5*latitudeFactor- (latitudeFactor*27));
+					MONTH_TEMP_CACHE[month][zCoord] = (float)(MAXTEMP -1.5*latitudeFactor- (latitudeFactor*27));
 					break;
 				}
 				}
@@ -131,7 +131,7 @@ public class TFC_Climate
 		if (zCoord > getMaxZPos())
 			zCoord = getMaxZPos();
 
-		return zFactorCache[zCoord];
+		return Z_FACTOR_CACHE[zCoord];
 	}
 
 	protected static float getTemp(World world,int x, int z)
@@ -173,9 +173,9 @@ public class TFC_Climate
 				hourMod = 0.2f;
 				dailyTemp = 0;
 			} else {
-				int h = (hour - 6) % TFC_Time.hoursInDay;
+				int h = (hour - 6) % TFC_Time.HOURS_IN_DAY;
 				if (h < 0) {
-					h += TFC_Time.hoursInDay;
+					h += TFC_Time.HOURS_IN_DAY;
 				}
 
 				if(h < 12)
@@ -207,7 +207,7 @@ public class TFC_Climate
 			z = -z;
 		if (z > getMaxZPos())
 			z = getMaxZPos();
-		return monthTempCache[season][z];
+		return MONTH_TEMP_CACHE[season][z];
 	}
 
 	protected static float getTempSpecificDay(World world,int day, int x, int z)
@@ -261,10 +261,10 @@ public class TFC_Climate
 		if(y > Global.SEALEVEL)
 		{
 			int i = y - Global.SEALEVEL;
-			if (i >= yFactorCache.length) {
-				i = yFactorCache.length - 1;
+			if (i >= Y_FACTOR_CACHE.length) {
+				i = Y_FACTOR_CACHE.length - 1;
 			}
-			temp -= yFactorCache[i];
+			temp -= Y_FACTOR_CACHE[i];
 		}
 		return temp;
 	}
@@ -331,8 +331,8 @@ public class TFC_Climate
 
 		float rain = getRainfall(world, x, y, z) / 8000;
 
-		double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
-		double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);
+		double var1 = Helper.clampFloat(temp, 0.0F, 1.0F);
+		double var3 = Helper.clampFloat(rain, 0.0F, 1.0F);
 
 		return ColorizerGrassTFC.getGrassColor(var1, var3);
 	}
@@ -350,8 +350,8 @@ public class TFC_Climate
 			float temp = (temperature + 35) / (getMaxTemperature() + 35);
 			float rain = rainfall / 8000;
 
-			double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
-			double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);
+			double var1 = Helper.clampFloat(temp, 0.0F, 1.0F);
+			double var3 = Helper.clampFloat(rain, 0.0F, 1.0F);
 			return ColorizerFoliageTFC.getFoliageColor(var1, var3);
 		}
 		else
@@ -373,8 +373,8 @@ public class TFC_Climate
 			float temp = (getTemp(world, x, z)+35)/(getMaxTemperature()+35);
 			float rain = rainfall / 8000;
 
-			double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
-			double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);
+			double var1 = Helper.clampFloat(temp, 0.0F, 1.0F);
+			double var3 = Helper.clampFloat(rain, 0.0F, 1.0F);
 			return ColorizerFoliageTFC.getFoliageColor(var1, var3);
 		}
 		else
@@ -397,7 +397,7 @@ public class TFC_Climate
 		}
 
 		DataLayer dl = getCacheManager(world).getRainfallLayerAt(x, z);
-		return dl != null ? dl.floatdata1 : DataLayer.Rain_500.floatdata1;
+		return dl != null ? dl.floatdata1 : DataLayer.RAIN_500.floatdata1;
 	}
 
 	public static int getTreeLayer(World world,int x, int y, int z, int index)

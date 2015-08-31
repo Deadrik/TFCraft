@@ -25,7 +25,7 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 		this.rainfall = par3;
 		this.worldObj = world;
 		this.biomesToSpawnIn = new ArrayList<BiomeGenBase>();
-		this.biomesToSpawnIn.add(TFCBiome.hell);
+		this.biomesToSpawnIn.add(TFCBiome.HELL);
 	}
 
 	/**

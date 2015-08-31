@@ -29,21 +29,21 @@ public class GuiBlueprint extends GuiScreen
 	private ItemStack stack;
 
 	private GuiTextField nameTextField;
-	private static final int x_m_bt_ind = 0;
-	private static final int x_p_bt_ind = 1;
-	private static final int y_m_bt_ind = 2;
-	private static final int y_p_bt_ind = 3;
-	private static final int z_m_bt_ind = 4;
-	private static final int z_p_bt_ind = 5;
-	private static final int done_bt_ind = 6;
-	private static final int cancel_bt_ind = 7;
+	private static final int X_MINUS_BUTTON = 0;
+	private static final int X_PLUS_BUTTON = 1;
+	private static final int Y_MINUS_BUTTON = 2;
+	private static final int Y_PLUS_BUTTON = 3;
+	private static final int Z_MINUS_BUTTON = 4;
+	private static final int Z_PLUS_BUTTON = 5;
+	private static final int DONE_BUTTON = 6;
+	private static final int CANCEL_BUTTON = 7;
 
-	private static final String done_bt_name = "gui.done";
-	private static final String cancel_bt_name = "gui.cancel";
+	private static final String DONE_NAME = "gui.done";
+	private static final String CANCEL_NAME = "gui.cancel";
 
-	private int x_angle;
-	private int y_angle;
-	private int z_angle;
+	private int xAngle;
+	private int yAngle;
+	private int zAngle;
 
 	/** The X size of the inventory window in pixels. */
 	protected int xSize = 200;
@@ -66,9 +66,9 @@ public class GuiBlueprint extends GuiScreen
 		this.world = world;
 		player = p;
 		stack = player.inventory.getCurrentItem();
-		x_angle = stack.stackTagCompound.getInteger(ItemBlueprint.tag_x_angle);
-		y_angle = stack.stackTagCompound.getInteger(ItemBlueprint.tag_y_angle);
-		z_angle = stack.stackTagCompound.getInteger(ItemBlueprint.tag_z_angle);
+		xAngle = stack.stackTagCompound.getInteger(ItemBlueprint.TAG_X_ANGLE);
+		yAngle = stack.stackTagCompound.getInteger(ItemBlueprint.TAG_Y_ANGLE);
+		zAngle = stack.stackTagCompound.getInteger(ItemBlueprint.TAG_Z_ANGLE);
 	}
 
 	@Override
@@ -89,12 +89,12 @@ public class GuiBlueprint extends GuiScreen
 		super.initGui();
 
 		int nameTop = guiTop() + 10 + this.fontRendererObj.FONT_HEIGHT + 4;
-		int namePrefixWidth = fontRendererObj.getStringWidth(ItemBlueprint.suffix) + 4;
+		int namePrefixWidth = fontRendererObj.getStringWidth(ItemBlueprint.SUFFIX) + 4;
 		this.nameTextField = new GuiTextField(fontRendererObj, guiLeft() + 10 + namePrefixWidth, nameTop, 180 - namePrefixWidth, 20);
 		this.nameTextField.setFocused(true);
 		this.nameTextField.setCanLoseFocus(false);
 		if (!stack.hasTagCompound()
-						|| stack.stackTagCompound.getString(ItemBlueprint.tag_item_name).isEmpty())
+						|| stack.stackTagCompound.getString(ItemBlueprint.TAG_ITEM_NAME).isEmpty())
 		{
 			this.nameTextField.setText("name_it");
 			this.nameTextField.setCursorPosition(0);
@@ -103,7 +103,7 @@ public class GuiBlueprint extends GuiScreen
 		else
 		{
 			this.nameTextField.setEnabled(false);
-			this.nameTextField.setText(stack.stackTagCompound.getString(ItemBlueprint.tag_item_name));
+			this.nameTextField.setText(stack.stackTagCompound.getString(ItemBlueprint.TAG_ITEM_NAME));
 		}
 
 		Keyboard.enableRepeatEvents(true);
@@ -116,35 +116,35 @@ public class GuiBlueprint extends GuiScreen
 		this.labelList.clear();
 
 		// X:
-		this.buttonList.add(new GuiButton(x_m_bt_ind, buttonsLeftF, buttonsTop, buttonsA, buttonsA, "<"));
-		this.buttonList.add(new GuiButton(x_p_bt_ind, buttonsLeftS, buttonsTop, buttonsA, buttonsA, ">"));
+		this.buttonList.add(new GuiButton(X_MINUS_BUTTON, buttonsLeftF, buttonsTop, buttonsA, buttonsA, "<"));
+		this.buttonList.add(new GuiButton(X_PLUS_BUTTON, buttonsLeftS, buttonsTop, buttonsA, buttonsA, ">"));
 
 		// Y:
 		buttonsTop += buttonsA + 4;
-		this.buttonList.add(new GuiButton(y_m_bt_ind, buttonsLeftF, buttonsTop, buttonsA, buttonsA, "<"));
-		this.buttonList.add(new GuiButton(y_p_bt_ind, buttonsLeftS, buttonsTop, buttonsA, buttonsA, ">"));
+		this.buttonList.add(new GuiButton(Y_MINUS_BUTTON, buttonsLeftF, buttonsTop, buttonsA, buttonsA, "<"));
+		this.buttonList.add(new GuiButton(Y_PLUS_BUTTON, buttonsLeftS, buttonsTop, buttonsA, buttonsA, ">"));
 
 		// Z:
 		buttonsTop += buttonsA + 4;
-		this.buttonList.add(new GuiButton(z_m_bt_ind, buttonsLeftF, buttonsTop, buttonsA, buttonsA, "<"));
-		this.buttonList.add(new GuiButton(z_p_bt_ind, buttonsLeftS, buttonsTop, buttonsA, buttonsA, ">"));
+		this.buttonList.add(new GuiButton(Z_MINUS_BUTTON, buttonsLeftF, buttonsTop, buttonsA, buttonsA, "<"));
+		this.buttonList.add(new GuiButton(Z_PLUS_BUTTON, buttonsLeftS, buttonsTop, buttonsA, buttonsA, ">"));
 
 		// done
-		int doneWidth = fontRendererObj.getStringWidth(TFC_Core.translate(done_bt_name)) + 20;
+		int doneWidth = fontRendererObj.getStringWidth(TFC_Core.translate(DONE_NAME)) + 20;
 		this.buttonList.add(new GuiButton(
-						done_bt_ind,
+						DONE_BUTTON,
 						(width + xSize) / 2 - 10 - doneWidth, (height + ySize) / 2 - 10 - buttonsA,
 						doneWidth, buttonsA,
-						TFC_Core.translate(done_bt_name)
+						TFC_Core.translate(DONE_NAME)
 		));
 
 		// cancel
-		int cancelWidth = fontRendererObj.getStringWidth(TFC_Core.translate(cancel_bt_name)) + 20;
+		int cancelWidth = fontRendererObj.getStringWidth(TFC_Core.translate(CANCEL_NAME)) + 20;
 		this.buttonList.add(new GuiButton(
-						cancel_bt_ind,
+						CANCEL_BUTTON,
 						(width + xSize) / 2 - 10 - doneWidth - cancelWidth - 4, (height + ySize) / 2 - 10 - buttonsA,
 						cancelWidth, buttonsA,
-						TFC_Core.translate(cancel_bt_name)
+						TFC_Core.translate(CANCEL_NAME)
 		));
 	}
 
@@ -161,9 +161,9 @@ public class GuiBlueprint extends GuiScreen
 	protected void keyTyped(char par1, int par2)
 	{
 		this.nameTextField.textboxKeyTyped(par1, par2);
-		((GuiButton)this.buttonList.get(done_bt_ind)).enabled = this.nameTextField.getText().trim().length() > 0;
+		((GuiButton)this.buttonList.get(DONE_BUTTON)).enabled = this.nameTextField.getText().trim().length() > 0;
 		if (par1 == 13)
-			this.actionPerformed((GuiButton)this.buttonList.get(done_bt_ind));
+			this.actionPerformed((GuiButton)this.buttonList.get(DONE_BUTTON));
 	}
 
 	@Override
@@ -184,49 +184,49 @@ public class GuiBlueprint extends GuiScreen
 		if (!world.isRemote)
 			return;
 
-		if (guibutton.id == x_m_bt_ind)
-			x_angle = (x_angle == 0 ? 270 : x_angle - 90);
-		else if (guibutton.id == x_p_bt_ind)
-			x_angle = (x_angle == 270 ? 0 : x_angle + 90);
-		else if (guibutton.id == y_m_bt_ind)
-			y_angle = (y_angle == 0 ? 270 : y_angle - 90);
-		else if (guibutton.id == y_p_bt_ind)
-			y_angle = (y_angle == 270 ? 0 : y_angle + 90);
-		else if (guibutton.id == z_m_bt_ind)
-			z_angle = (z_angle == 0 ? 270 : z_angle - 90);
-		else if (guibutton.id == z_p_bt_ind)
-			z_angle = (z_angle == 270 ? 0 : z_angle + 90);
-		else if (guibutton.id == done_bt_ind) {
-			stack.stackTagCompound.setBoolean(ItemBlueprint.tag_completed, true);
-			stack.stackTagCompound.setString(ItemBlueprint.tag_item_name, nameTextField.getText());
-			stack.stackTagCompound.setInteger(ItemBlueprint.tag_x_angle, x_angle);
-			stack.stackTagCompound.setInteger(ItemBlueprint.tag_y_angle, y_angle);
-			stack.stackTagCompound.setInteger(ItemBlueprint.tag_z_angle, z_angle);
+		if (guibutton.id == X_MINUS_BUTTON)
+			xAngle = (xAngle == 0 ? 270 : xAngle - 90);
+		else if (guibutton.id == X_PLUS_BUTTON)
+			xAngle = (xAngle == 270 ? 0 : xAngle + 90);
+		else if (guibutton.id == Y_MINUS_BUTTON)
+			yAngle = (yAngle == 0 ? 270 : yAngle - 90);
+		else if (guibutton.id == Y_PLUS_BUTTON)
+			yAngle = (yAngle == 270 ? 0 : yAngle + 90);
+		else if (guibutton.id == Z_MINUS_BUTTON)
+			zAngle = (zAngle == 0 ? 270 : zAngle - 90);
+		else if (guibutton.id == Z_PLUS_BUTTON)
+			zAngle = (zAngle == 270 ? 0 : zAngle + 90);
+		else if (guibutton.id == DONE_BUTTON) {
+			stack.stackTagCompound.setBoolean(ItemBlueprint.TAG_COMPLETED, true);
+			stack.stackTagCompound.setString(ItemBlueprint.TAG_ITEM_NAME, nameTextField.getText());
+			stack.stackTagCompound.setInteger(ItemBlueprint.TAG_X_ANGLE, xAngle);
+			stack.stackTagCompound.setInteger(ItemBlueprint.TAG_Y_ANGLE, yAngle);
+			stack.stackTagCompound.setInteger(ItemBlueprint.TAG_Z_ANGLE, zAngle);
 
 			AbstractPacket	pkt = new ItemNBTPacket(stack.stackTagCompound);
 			((ItemNBTPacket)pkt)
-							.addAcceptedTag(ItemBlueprint.tag_completed)
-							.addAcceptedTag(ItemBlueprint.tag_item_name)
-							.addAcceptedTag(ItemBlueprint.tag_x_angle)
-							.addAcceptedTag(ItemBlueprint.tag_y_angle)
-							.addAcceptedTag(ItemBlueprint.tag_z_angle);
+							.addAcceptedTag(ItemBlueprint.TAG_COMPLETED)
+							.addAcceptedTag(ItemBlueprint.TAG_ITEM_NAME)
+							.addAcceptedTag(ItemBlueprint.TAG_X_ANGLE)
+							.addAcceptedTag(ItemBlueprint.TAG_Y_ANGLE)
+							.addAcceptedTag(ItemBlueprint.TAG_Z_ANGLE);
 
-			TerraFirmaCraft.packetPipeline.sendToServer(pkt);
+			TerraFirmaCraft.PACKET_PIPELINE.sendToServer(pkt);
 
 			Minecraft.getMinecraft().displayGuiScreen(null);
 		}
-		else if (guibutton.id == cancel_bt_ind) {
-			if (!stack.stackTagCompound.getBoolean(ItemBlueprint.tag_completed)) {
+		else if (guibutton.id == CANCEL_BUTTON) {
+			if (!stack.stackTagCompound.getBoolean(ItemBlueprint.TAG_COMPLETED)) {
 				stack.setTagCompound(new NBTTagCompound());
 				AbstractPacket pkt = new ItemNBTPacket(stack.stackTagCompound);
 				((ItemNBTPacket)pkt)
-								.addRemoveTag(ItemBlueprint.tag_completed)
-								.addRemoveTag(ItemBlueprint.tag_item_name)
-								.addRemoveTag(ItemBlueprint.tag_data)
-								.addRemoveTag(ItemBlueprint.tag_x_angle)
-								.addRemoveTag(ItemBlueprint.tag_y_angle)
-								.addRemoveTag(ItemBlueprint.tag_z_angle);
-				TerraFirmaCraft.packetPipeline.sendToServer(pkt);
+								.addRemoveTag(ItemBlueprint.TAG_COMPLETED)
+								.addRemoveTag(ItemBlueprint.TAG_ITEM_NAME)
+								.addRemoveTag(ItemBlueprint.TAG_DATA)
+								.addRemoveTag(ItemBlueprint.TAG_X_ANGLE)
+								.addRemoveTag(ItemBlueprint.TAG_Y_ANGLE)
+								.addRemoveTag(ItemBlueprint.TAG_Z_ANGLE);
+				TerraFirmaCraft.PACKET_PIPELINE.sendToServer(pkt);
 			}
 
 			Minecraft.getMinecraft().displayGuiScreen(null);
@@ -236,7 +236,7 @@ public class GuiBlueprint extends GuiScreen
 	@Override
 	public void drawScreen(int par1, int par2, float par3)
 	{
-		TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_blueprint.png"));
+		TFC_Core.bindTexture(new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_blueprint.png"));
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int left = guiLeft();
@@ -250,23 +250,23 @@ public class GuiBlueprint extends GuiScreen
 		int topShift = (20 - this.fontRendererObj.FONT_HEIGHT) / 2;
 
 		top += 10 + this.fontRendererObj.FONT_HEIGHT + 4;
-		fontRendererObj.drawString(ItemBlueprint.suffix, axesNameLeft, top + topShift, 0x000000);
+		fontRendererObj.drawString(ItemBlueprint.SUFFIX, axesNameLeft, top + topShift, 0x000000);
 		this.nameTextField.drawTextBox();
 
 		// X:
 		top += 20 + 4;
 		fontRendererObj.drawString("X:", axesNameLeft, top + topShift, 0x000000);
-		drawCenteredString(fontRendererObj, String.valueOf(x_angle), axesAngleLeft, top + topShift, 0x000000);
+		drawCenteredString(fontRendererObj, String.valueOf(xAngle), axesAngleLeft, top + topShift, 0x000000);
 
 		// Y:
 		top += 20 + 4;
 		fontRendererObj.drawString("Y:", axesNameLeft, top + topShift, 0x000000);
-		drawCenteredString(fontRendererObj, String.valueOf(y_angle), axesAngleLeft, top + topShift, 0x000000);
+		drawCenteredString(fontRendererObj, String.valueOf(yAngle), axesAngleLeft, top + topShift, 0x000000);
 
 		// Z:
 		top += 20 + 4;
 		fontRendererObj.drawString("Z:", axesNameLeft, top + topShift, 0x000000);
-		drawCenteredString(fontRendererObj, String.valueOf(z_angle), axesAngleLeft, top + topShift, 0x000000);
+		drawCenteredString(fontRendererObj, String.valueOf(zAngle), axesAngleLeft, top + topShift, 0x000000);
 
 		super.drawScreen(par1, par2, par3);
 	}

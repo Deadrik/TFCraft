@@ -37,7 +37,7 @@ public class BlockBloom extends BlockTerraContainer
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Iron Bloom");
+		this.blockIcon = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Iron Bloom");
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class BlockBloom extends BlockTerraContainer
 	}
 
 	@Override
-	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
+	public Item getItemDropped(int i, Random rand, int j)
 	{
 		return null;
 	}
@@ -56,7 +56,7 @@ public class BlockBloom extends BlockTerraContainer
 	public void onBlockPreDestroy(World world, int i, int j, int k, int meta) 
 	{
 		TEBloom te = (TEBloom)world.getTileEntity(i, j, k);
-		EntityItem ei = new EntityItem(world, i, j, k, new ItemStack(TFCItems.RawBloom, 1, te.size));
+		EntityItem ei = new EntityItem(world, i, j, k, new ItemStack(TFCItems.rawBloom, 1, te.size));
 
 		int[] pos = getBloomery(world, i, j, k);
 		ei.motionX = 0; ei.motionY = 0; ei.motionZ = 0;
@@ -67,13 +67,13 @@ public class BlockBloom extends BlockTerraContainer
 
 	public int[] getBloomery(World world, int x, int y, int z)
 	{
-		if(world.getBlock(x + 1, y, z) == TFCBlocks.EarlyBloomery)
+		if(world.getBlock(x + 1, y, z) == TFCBlocks.bloomery)
 			return new int[]{2, 0};
-		if(world.getBlock(x - 1, y, z) == TFCBlocks.EarlyBloomery)
+		if(world.getBlock(x - 1, y, z) == TFCBlocks.bloomery)
 			return new int[]{-2, 0};
-		if(world.getBlock(x, y, z + 1) == TFCBlocks.EarlyBloomery)
+		if(world.getBlock(x, y, z + 1) == TFCBlocks.bloomery)
 			return new int[]{0, 2};
-		if(world.getBlock(x, y, z - 1) == TFCBlocks.EarlyBloomery)
+		if(world.getBlock(x, y, z - 1) == TFCBlocks.bloomery)
 			return new int[]{0, -2};
 
 		return new int[]{0, 0};

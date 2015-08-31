@@ -31,14 +31,14 @@ public class RenderPlayerTFC extends RenderPlayer
 	//private static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
 
 	public static String[] armorFilenamePrefix = new String[] {"cloth", "chain", "iron", "diamond", "gold"};
-	public static float NAME_TAG_RANGE = 64.0f;
-	public static float NAME_TAG_RANGE_SNEAK = 32.0f;
+	public static final float NAME_TAG_RANGE = 64.0f;
+	public static final float NAME_TAG_RANGE_SNEAK = 32.0f;
 	private ModelRenderer plume;
 	private ModelRenderer plume2;
-	private ModelRenderer HornR1;
-	private ModelRenderer HornL1;
-	private ModelRenderer HornR2;
-	private ModelRenderer HornL2;
+	private ModelRenderer hornR1;
+	private ModelRenderer hornL1;
+	private ModelRenderer hornR2;
+	private ModelRenderer hornL2;
 
 
 	public RenderPlayerTFC()
@@ -57,33 +57,33 @@ public class RenderPlayerTFC extends RenderPlayer
 		plume2.setRotationPoint(0,-2,4);
 		plume2.rotateAngleX = (float)(Math.PI/-3f);
 		//Iron
-		HornR1 = new ModelRenderer(modelArmorChestplate,40,0);
-		HornR1.addBox(-6,-1.5f,-1.5f,3,3,6);
-		HornL1 = new ModelRenderer(modelArmorChestplate,40,0);
-		HornL1.addBox(6,-1.5f,-1.5f,3,3,6);
-		HornR1.setRotationPoint(-6, -6, 5);
-		HornL1.setRotationPoint(6, -6, 8);
-		HornR1.rotateAngleY=(float)(Math.PI/-2);
-		HornR1.rotateAngleX = (float)Math.PI*(-1f/12f);
-		HornL1.rotateAngleY=(float)(Math.PI/2);
-		HornL1.rotateAngleX = (float)Math.PI*(-1f/12f);
-		HornR2 = new ModelRenderer(modelArmorChestplate,40,9);
-		HornR2.addBox(0, 0, -5f, 2, 2, 5);
-		HornR2.setRotationPoint(-6, 0f, 2f);
-		HornR2.rotateAngleX = (float)Math.PI*(6f/12f);
-		HornR2.rotateAngleZ = (float)Math.PI*(1f/6f);
-		HornL2 = new ModelRenderer(modelArmorChestplate,40,9);
-		HornL2.addBox(0, 0, -5f, 2, 2, 5);
-		HornL2.setRotationPoint(7, 0f, 2f);
-		HornL2.rotateAngleX = (float)Math.PI*(6f/12f);
-		HornL2.rotateAngleZ = (float)Math.PI*(-1f/6f);
+		hornR1 = new ModelRenderer(modelArmorChestplate,40,0);
+		hornR1.addBox(-6,-1.5f,-1.5f,3,3,6);
+		hornL1 = new ModelRenderer(modelArmorChestplate,40,0);
+		hornL1.addBox(6,-1.5f,-1.5f,3,3,6);
+		hornR1.setRotationPoint(-6, -6, 5);
+		hornL1.setRotationPoint(6, -6, 8);
+		hornR1.rotateAngleY=(float)(Math.PI/-2);
+		hornR1.rotateAngleX = (float)Math.PI*(-1f/12f);
+		hornL1.rotateAngleY=(float)(Math.PI/2);
+		hornL1.rotateAngleX = (float)Math.PI*(-1f/12f);
+		hornR2 = new ModelRenderer(modelArmorChestplate,40,9);
+		hornR2.addBox(0, 0, -5f, 2, 2, 5);
+		hornR2.setRotationPoint(-6, 0f, 2f);
+		hornR2.rotateAngleX = (float)Math.PI*(6f/12f);
+		hornR2.rotateAngleZ = (float)Math.PI*(1f/6f);
+		hornL2 = new ModelRenderer(modelArmorChestplate,40,9);
+		hornL2.addBox(0, 0, -5f, 2, 2, 5);
+		hornL2.setRotationPoint(7, 0f, 2f);
+		hornL2.rotateAngleX = (float)Math.PI*(6f/12f);
+		hornL2.rotateAngleZ = (float)Math.PI*(-1f/6f);
 
 		modelArmorChestplate.bipedHead.addChild(plume);
 		modelArmorChestplate.bipedHead.addChild(plume2);
-		modelArmorChestplate.bipedHead.addChild(HornR1);
-		modelArmorChestplate.bipedHead.addChild(HornL1);
-		HornR1.addChild(HornR2);
-		HornL1.addChild(HornL2);
+		modelArmorChestplate.bipedHead.addChild(hornR1);
+		modelArmorChestplate.bipedHead.addChild(hornL1);
+		hornR1.addChild(hornR2);
+		hornL1.addChild(hornL2);
 	}
 
 	@Override
@@ -189,8 +189,8 @@ public class RenderPlayerTFC extends RenderPlayer
 		//RenderPlayerTFC.armorFilenamePrefix = RenderPlayer.armorFilenamePrefix;
 		plume.showModel = false;
 		plume2.showModel = false;
-		HornR1.showModel = false;
-		HornL1.showModel = false;
+		hornR1.showModel = false;
+		hornL1.showModel = false;
 		if (itemstack != null)
 		{
 			Item item = itemstack.getItem();
@@ -203,10 +203,10 @@ public class RenderPlayerTFC extends RenderPlayer
 				modelbiped.bipedHead.showModel = slotIndex == 0;
 				plume.showModel = false;//(itemstack.getItem() == TFCItems.BronzeHelmet);
 				plume2.showModel = false;//(itemstack.getItem() == TFCItems.BronzeHelmet);
-				HornR1.showModel = false;//(itemstack.getItem() == TFCItems.WroughtIronHelmet);
-				HornL1.showModel = false;//(itemstack.getItem() == TFCItems.WroughtIronHelmet);
-				modelbiped.bipedHeadwear.showModel = slotIndex == 0 && itemstack.getItem() != TFCItems.BronzeHelmet &&
-														itemstack.getItem() != TFCItems.WroughtIronHelmet;
+				hornR1.showModel = false;//(itemstack.getItem() == TFCItems.WroughtIronHelmet);
+				hornL1.showModel = false;//(itemstack.getItem() == TFCItems.WroughtIronHelmet);
+				modelbiped.bipedHeadwear.showModel = slotIndex == 0 && itemstack.getItem() != TFCItems.bronzeHelmet &&
+														itemstack.getItem() != TFCItems.wroughtIronHelmet;
 				modelbiped.bipedBody.showModel = slotIndex == 1 || slotIndex == 2;
 				modelbiped.bipedRightArm.showModel = slotIndex == 1;
 				modelbiped.bipedLeftArm.showModel = slotIndex == 1;

@@ -37,7 +37,7 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 		super(block);
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.setCreativeTab(TFCTabs.TFCPottery);
+		this.setCreativeTab(TFCTabs.TFC_POTTERY);
 	}
 
 	@Override
@@ -194,12 +194,12 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 		else if(metadata == 0 && side == 1 && player.isSneaking())
 		{
 			Block base = world.getBlock(x, y-1, z);
-			if(base != TFCBlocks.Pottery && world.isAirBlock(x, y, z))
+			if(base != TFCBlocks.pottery && world.isAirBlock(x, y, z))
 			{
 				//We only want the pottery to be placeable if the block is solid on top.
 				if(!world.isSideSolid(x, y-1, z, ForgeDirection.UP))
 					return false;
-				world.setBlock(x, y, z, TFCBlocks.Pottery);
+				world.setBlock(x, y, z, TFCBlocks.pottery);
 			}
 			else
 			{

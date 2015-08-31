@@ -67,7 +67,7 @@ public class BlockMoss extends BlockTerra
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/Moss");
+		this.blockIcon = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "plants/Moss");
 	}
 
 	@Override

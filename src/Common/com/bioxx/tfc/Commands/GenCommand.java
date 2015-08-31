@@ -50,13 +50,13 @@ public class GenCommand extends CommandBase
 				WorldGenFissure gen = null;
 				if(params[1].equals("water"))
 				{
-					gen = new WorldGenFissure(TFCBlocks.FreshWater);
+					gen = new WorldGenFissure(TFCBlocks.freshWater);
 					gen.checkStability = false;
 					TFC_Core.sendInfoMessage(player, new ChatComponentText("Generating Water"));
 				}
 				else if(params[1].equals("hotwater"))
 				{
-					gen = new WorldGenFissure(TFCBlocks.HotWater);
+					gen = new WorldGenFissure(TFCBlocks.hotWater);
 					gen.checkStability = false;
 					TFC_Core.sendInfoMessage(player, new ChatComponentText("Generating Hot Springs"));
 				}

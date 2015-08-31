@@ -8,10 +8,10 @@ import net.minecraft.item.ItemStack;
 
 public class HeatRegistry
 {
-	private static final HeatRegistry instance = new HeatRegistry();
+	private static final HeatRegistry INSTANCE = new HeatRegistry();
 	public static final HeatRegistry getInstance()
 	{
-		return instance;
+		return INSTANCE;
 	}
 
 	private List<HeatIndex> heatList;
@@ -47,7 +47,7 @@ public class HeatRegistry
 
 	public Boolean getIsLiquid(ItemStack is)
 	{       
-		HeatIndex hi = instance.findMatchingIndex(is);
+		HeatIndex hi = INSTANCE.findMatchingIndex(is);
 		if(hi != null && is.hasTagCompound())
 		{
 			float temp = 0;
@@ -76,7 +76,7 @@ public class HeatRegistry
 	{
 		if(TFC_ItemHeat.hasTemp(is))
 		{
-			HeatIndex index = instance.findMatchingIndex(is);
+			HeatIndex index = INSTANCE.findMatchingIndex(is);
 			if(index != null)
 			{
 				float temp = TFC_ItemHeat.getTemp(is);
@@ -90,7 +90,7 @@ public class HeatRegistry
 	{
 		if(TFC_ItemHeat.hasTemp(is))
 		{
-			HeatIndex index = instance.findMatchingIndex(is);
+			HeatIndex index = INSTANCE.findMatchingIndex(is);
 			if(index != null)
 			{
 				float temp = TFC_ItemHeat.getTemp(is);
@@ -104,7 +104,7 @@ public class HeatRegistry
 	{
 		if(TFC_ItemHeat.hasTemp(is))
 		{
-			HeatIndex index = instance.findMatchingIndex(is);
+			HeatIndex index = INSTANCE.findMatchingIndex(is);
 			if(index != null)
 			{
 				float temp = TFC_ItemHeat.getTemp(is);

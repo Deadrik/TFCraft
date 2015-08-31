@@ -13,7 +13,7 @@ import com.bioxx.tfc.api.TFCItems;
 public class GuiAnvilPlanButton extends GuiButton 
 {
 	private GuiAnvil screen;
-	protected static final RenderItem itemRenderer = new RenderItem();
+	protected static final RenderItem ITEM_RENDERER = new RenderItem();
 
 	public GuiAnvilPlanButton(int index, int xPos, int yPos, int width, int height, GuiAnvil gui, String s)
 	{
@@ -40,7 +40,7 @@ public class GuiAnvilPlanButton extends GuiButton
 			if (screen.anvilTE != null && !screen.anvilTE.craftingPlan.equals("") && screen.anvilTE.workRecipe != null)
 				renderInventorySlot(screen.anvilTE.workRecipe.getCraftingResult(),this.xPosition+1, this.yPosition+1);
 			else
-				renderInventorySlot(new ItemStack(TFCItems.Blueprint),this.xPosition+1, this.yPosition+1);
+				renderInventorySlot(new ItemStack(TFCItems.blueprint),this.xPosition+1, this.yPosition+1);
 
 			this.zLevel = 0;
 			this.mouseDragged(mc, x, y);
@@ -57,7 +57,7 @@ public class GuiAnvilPlanButton extends GuiButton
 	{
 		if (is != null)
 		{
-			itemRenderer.renderItemAndEffectIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), is, x, y);
+			ITEM_RENDERER.renderItemAndEffectIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), is, x, y);
 		}
 	}
 

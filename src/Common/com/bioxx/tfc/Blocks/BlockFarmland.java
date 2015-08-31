@@ -33,7 +33,7 @@ import com.bioxx.tfc.api.Constant.Global;
 public class BlockFarmland extends BlockContainer
 {
 	private Block dirtBlock;
-	private IIcon[] DirtTexture;
+	private IIcon[] dirtTexture;
 	private int textureOffset;
 
 	public BlockFarmland(Block block, int tex)
@@ -42,7 +42,7 @@ public class BlockFarmland extends BlockContainer
 		this.setTickRandomly(true);
 		this.dirtBlock = block;
 		this.textureOffset = tex;
-		this.setCreativeTab(TFCTabs.TFCBuilding);
+		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -50,9 +50,9 @@ public class BlockFarmland extends BlockContainer
 	public void registerBlockIcons(IIconRegister registerer)
 	{
 		int count = (textureOffset == 0 ? 16 : Global.STONE_ALL.length - 16);
-		DirtTexture = new IIcon[count];
+		dirtTexture = new IIcon[count];
 		for(int i = 0; i < count; i++)
-			DirtTexture[i] = registerer.registerIcon(Reference.ModID + ":" + "farmland/Farmland " + Global.STONE_ALL[i + textureOffset]);
+			dirtTexture[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "farmland/Farmland " + Global.STONE_ALL[i + textureOffset]);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -82,10 +82,10 @@ public class BlockFarmland extends BlockContainer
 	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side)
 	{
 		int meta = access.getBlockMetadata(x, y, z);
-		if(meta < 0 || meta > DirtTexture.length)
+		if(meta < 0 || meta > dirtTexture.length)
 			meta = 0;
 		if (side == 1)//top
-			return DirtTexture[meta];
+			return dirtTexture[meta];
 		else
 			return this.dirtBlock.getIcon(side, meta);
 	}
@@ -94,10 +94,10 @@ public class BlockFarmland extends BlockContainer
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
-		if(meta < 0 || meta > DirtTexture.length)
+		if(meta < 0 || meta > dirtTexture.length)
 			meta = 0;
 		if (side == ForgeDirection.UP.ordinal())
-			return DirtTexture[meta];
+			return dirtTexture[meta];
 		else
 			return this.dirtBlock.getIcon(0, meta);
 	}

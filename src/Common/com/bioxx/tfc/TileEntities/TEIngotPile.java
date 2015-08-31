@@ -21,12 +21,12 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage;
 	public String type;
-	public static Item[] INGOTS = new Item[]{TFCItems.BismuthIngot,TFCItems.BismuthBronzeIngot,TFCItems.BlackBronzeIngot,
-		TFCItems.BlackSteelIngot,TFCItems.BlueSteelIngot,TFCItems.BrassIngot,TFCItems.BronzeIngot,
-		TFCItems.CopperIngot,TFCItems.GoldIngot,TFCItems.WroughtIronIngot,TFCItems.LeadIngot,
-		TFCItems.NickelIngot,TFCItems.PigIronIngot,TFCItems.PlatinumIngot,TFCItems.RedSteelIngot,
-		TFCItems.RoseGoldIngot,TFCItems.SilverIngot,TFCItems.SteelIngot,TFCItems.SterlingSilverIngot,
-		TFCItems.TinIngot,TFCItems.ZincIngot, TFCItems.UnknownIngot};
+	public static final Item[] INGOTS = new Item[]{TFCItems.bismuthIngot,TFCItems.bismuthBronzeIngot,TFCItems.blackBronzeIngot,
+		TFCItems.blackSteelIngot,TFCItems.blueSteelIngot,TFCItems.brassIngot,TFCItems.bronzeIngot,
+		TFCItems.copperIngot,TFCItems.goldIngot,TFCItems.wroughtIronIngot,TFCItems.leadIngot,
+		TFCItems.nickelIngot,TFCItems.pigIronIngot,TFCItems.platinumIngot,TFCItems.redSteelIngot,
+		TFCItems.roseGoldIngot,TFCItems.silverIngot,TFCItems.steelIngot,TFCItems.sterlingSilverIngot,
+		TFCItems.tinIngot,TFCItems.zincIngot, TFCItems.unknownIngot};
 
 	@Override
 	public boolean canUpdate()
@@ -207,7 +207,7 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 	public void updateNeighbours()
 	{
 		if(worldObj.blockExists(xCoord, yCoord+1, zCoord) && !worldObj.isAirBlock(xCoord, yCoord+1, zCoord))
-			worldObj.getBlock(xCoord, yCoord+1, zCoord).onNeighborBlockChange(worldObj, xCoord, yCoord+1, zCoord, TFCBlocks.IngotPile);
+			worldObj.getBlock(xCoord, yCoord+1, zCoord).onNeighborBlockChange(worldObj, xCoord, yCoord+1, zCoord, TFCBlocks.ingotPile);
 	}
 
 	@Override

@@ -30,9 +30,9 @@ public class WorldGenFungi extends WorldGenerator
 			int j = y + rnd.nextInt(4) - rnd.nextInt(4);
 			int k = z + rnd.nextInt(8) - rnd.nextInt(8);
 
-			if (world.isAirBlock(i, j, k) && TFCBlocks.Fungi.canBlockStay(world, i, j, k))
+			if (world.isAirBlock(i, j, k) && TFCBlocks.fungi.canBlockStay(world, i, j, k))
 			{
-				world.setBlock(i, j, k, TFCBlocks.Fungi, meta, 0x2);
+				world.setBlock(i, j, k, TFCBlocks.fungi, meta, 0x2);
 			}
 		}
 		return true;

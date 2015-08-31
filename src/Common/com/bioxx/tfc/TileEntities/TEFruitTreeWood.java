@@ -22,9 +22,9 @@ public class TEFruitTreeWood extends TileEntity implements IInventory
 	public int height;
 	public long birthTimeWood;
 	public long birthTimeLeaves;
-	private static final long leafGrowthRate = 3;
-	private static final long GrowTime = 30;
-	private static final long branchGrowTime = 20;
+	private static final long LEAF_GROWTH_RATE = 3;
+	private static final long GROW_TIME = 30;
+	private static final long BRANCH_GROW_TIME = 20;
 
 	public TEFruitTreeWood()
 	{
@@ -80,9 +80,9 @@ public class TEFruitTreeWood extends TileEntity implements IInventory
 		if(!worldObj.isRemote)
 		{
 			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-			if(birthTimeWood + GrowTime < TFC_Time.getTotalDays() && height < 3)
+			if(birthTimeWood + GROW_TIME < TFC_Time.getTotalDays() && height < 3)
 			{
-				float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(worldObj, TFC_Time.getDayOfYearFromDays(birthTimeWood + GrowTime), xCoord, yCoord, zCoord);
+				float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(worldObj, TFC_Time.getDayOfYearFromDays(birthTimeWood + GROW_TIME), xCoord, yCoord, zCoord);
 				int t = 1;
 				if(temp > 8 && temp < 22)
 					t = 2;
@@ -94,9 +94,9 @@ public class TEFruitTreeWood extends TileEntity implements IInventory
 						worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.fruitTreeLeaves2))
 				{
 					worldObj.setBlock(xCoord, yCoord + 1, zCoord, TFCBlocks.fruitTreeWood, meta, 0x2);
-					((TEFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord + 1, zCoord)).setup(true, height + 1, GrowTime);
+					((TEFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord + 1, zCoord)).setup(true, height + 1, GROW_TIME);
 
-					setBirthWood(GrowTime);
+					setBirthWood(GROW_TIME);
 				}
 				//Otherwise we try to grow the branches outward
 				else if(height == 2 && isTrunk && worldObj.rand.nextInt(16/t) == 0)
@@ -123,11 +123,11 @@ public class TEFruitTreeWood extends TileEntity implements IInventory
 						((TEFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord, zCoord + 1)).setupBirth(false, height);
 					}
 
-					((TEFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord, zCoord)).setBirthWood(branchGrowTime);
+					((TEFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord, zCoord)).setBirthWood(BRANCH_GROW_TIME);
 				}
 			}
 
-			if(birthTimeLeaves + 2 < TFC_Time.getTotalDays() && worldObj.rand.nextInt((int) leafGrowthRate) == 0 && worldObj.getBlock(xCoord, yCoord+2, zCoord) != TFCBlocks.fruitTreeWood)
+			if(birthTimeLeaves + 2 < TFC_Time.getTotalDays() && worldObj.rand.nextInt((int) LEAF_GROWTH_RATE) == 0 && worldObj.getBlock(xCoord, yCoord+2, zCoord) != TFCBlocks.fruitTreeWood)
 			{
 				int m = meta & 7;
 				Block bid = meta < 8 ? TFCBlocks.fruitTreeLeaves : TFCBlocks.fruitTreeLeaves2;

@@ -28,29 +28,29 @@ public class BlockLogHoriz2 extends BlockLogHoriz
 	public IIcon getIcon(int side, int meta)
 	{
 		int dir = meta >> 3;
-		meta = (meta & 7) + offset;
+		meta = (meta & 7) + offset; //NOPMD
 
 		if(dir == 0)
 		{
 			if(side == 0 || side == 1)
-				return ((BlockLogNatural2)TFCBlocks.LogNatural2).sideIcons[meta];
+				return ((BlockLogNatural2)TFCBlocks.logNatural2).sideIcons[meta];
 			else if(side == 2 || side == 3)
-				return ((BlockLogNatural2)TFCBlocks.LogNatural2).innerIcons[meta];
+				return ((BlockLogNatural2)TFCBlocks.logNatural2).innerIcons[meta];
 			else
-				return ((BlockLogNatural2)TFCBlocks.LogNatural2).rotatedSideIcons[meta];
+				return ((BlockLogNatural2)TFCBlocks.logNatural2).rotatedSideIcons[meta];
 		}
 		else
 		{
 			if(side == 0 || side == 1 || side == 2 || side == 3)
-				return ((BlockLogNatural2)TFCBlocks.LogNatural2).rotatedSideIcons[meta];
+				return ((BlockLogNatural2)TFCBlocks.logNatural2).rotatedSideIcons[meta];
 			else
-				return ((BlockLogNatural2)TFCBlocks.LogNatural2).innerIcons[meta];
+				return ((BlockLogNatural2)TFCBlocks.logNatural2).innerIcons[meta];
 		}
 	}
 
 	@Override
 	public int damageDropped(int dmg)
 	{
-		return (dmg & 7) + offset + 16;
+		return (dmg & 7) + offset + 16; //NOPMD
 	}
 }

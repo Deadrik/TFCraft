@@ -18,13 +18,13 @@ import com.bioxx.tfc.api.Tools.ChiselMode;
 public class ChiselMode_Stair extends ChiselMode {
 
 	//private static String name;
-    private static ResourceLocation resourcelocation = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "icons.png");
-    private static int texture_u, texture_v, div;
+    private static ResourceLocation resourcelocation = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "icons.png");
+    private static int textureU, textureV, div;
 
     public ChiselMode_Stair(String n){
 		// name = n;
-        texture_u = 20;
-        texture_v = 58;
+        textureU = 20;
+        textureV = 58;
         div = 2;
     }
 
@@ -35,15 +35,15 @@ public class ChiselMode_Stair extends ChiselMode {
     }
 
 	@Override
-	public int getTexture_u()
+	public int getTextureU()
 	{
-        return texture_u;
+        return textureU;
     }
 
 	@Override
-	public int getTexture_v()
+	public int getTextureV()
 	{
-        return texture_v;
+        return textureV;
     }
 
 	@Override
@@ -96,8 +96,8 @@ public class ChiselMode_Stair extends ChiselMode {
             {
                 world.setBlock(x, y, z, TFCBlocks.stoneStairs, 0, 0x3);
                 te = (TEPartial)world.getTileEntity(x, y, z);
-                te.TypeID = (short) Block.getIdFromBlock(id);
-                te.MetaID = (byte) meta;
+                te.typeID = (short) Block.getIdFromBlock(id);
+                te.metaID = (byte) meta;
                 te.extraData = hit;
                 te.setMaterial(world.getBlock(x, y, z).getMaterial());
                 te.validate();

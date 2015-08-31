@@ -13,7 +13,7 @@ public class BlockMM extends BlockStone
 	public BlockMM(Material material)
 	{
 		super(material);
-		this.dropBlock = TFCBlocks.StoneMMCobble;
+		this.dropBlock = TFCBlocks.stoneMMCobble;
 		names = Global.STONE_MM;
 		icons = new IIcon[names.length];
 		looseStart = Global.STONE_MM_START;

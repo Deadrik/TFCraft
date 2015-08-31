@@ -40,7 +40,7 @@ public class Food
 		}
 		else
 		{
-			TerraFirmaCraft.log.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
+			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 			return new NBTTagCompound();
 		}
@@ -289,13 +289,13 @@ public class Food
 		nbt.setInteger("tasteUmamiMod", val);
 	}
 
-	public static void adjustFlavor(ItemStack is, Random R)
+	public static void adjustFlavor(ItemStack is, Random r)
 	{
-		Food.setSweetMod(is, R.nextInt(17) - 8);
-		Food.setSourMod(is, R.nextInt(17) - 8);
-		Food.setSaltyMod(is, R.nextInt(17) - 8);
-		Food.setBitterMod(is, R.nextInt(17) - 8);
-		Food.setSavoryMod(is, R.nextInt(17) - 8);
+		Food.setSweetMod(is, r.nextInt(17) - 8);
+		Food.setSourMod(is, r.nextInt(17) - 8);
+		Food.setSaltyMod(is, r.nextInt(17) - 8);
+		Food.setBitterMod(is, r.nextInt(17) - 8);
+		Food.setSavoryMod(is, r.nextInt(17) - 8);
 	}
 
 	public static void setMealSkill(ItemStack is, int val)

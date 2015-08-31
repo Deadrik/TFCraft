@@ -23,8 +23,8 @@ public class EntitySpiderTFC extends EntitySpider implements ICausesDamage
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(TFC_MobData.SpiderDamage);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.SpiderHealth);//MaxHealth
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(TFC_MobData.SPIDER_DAMAGE);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.SPIDER_HEALTH);//MaxHealth
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class EntitySpiderTFC extends EntitySpider implements ICausesDamage
 		int z = MathHelper.floor_double(this.posZ);
 		Block b = this.worldObj.getBlock(x, y, z);
 
-		if(b == TFCBlocks.Leaves || b == TFCBlocks.Leaves2 || b == TFCBlocks.Thatch)
+		if(b == TFCBlocks.leaves || b == TFCBlocks.leaves2 || b == TFCBlocks.thatch)
 			return false;
 
 		return super.getCanSpawnHere();

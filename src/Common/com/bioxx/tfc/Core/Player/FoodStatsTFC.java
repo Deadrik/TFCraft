@@ -52,7 +52,7 @@ public class FoodStatsTFC
 	public long foodTimer;
 	public long foodHealTimer;
 
-	public float waterLevel = TFC_Time.dayLength*2;
+	public float waterLevel = TFC_Time.DAY_LENGTH*2;
 	public long waterTimer;
 
 	public EntityPlayer player;
@@ -97,9 +97,9 @@ public class FoodStatsTFC
 				this.waterTimer = TFC_Time.startTime;
 			}
 
-			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength && !player.capabilities.isCreativeMode)
+			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.HOUR_LENGTH && !player.capabilities.isCreativeMode)
 			{
-				this.foodTimer += TFC_Time.hourLength;
+				this.foodTimer += TFC_Time.HOUR_LENGTH;
 				float drainMult = 1.0f;
 				if(player.isPlayerSleeping())
 				{
@@ -157,9 +157,9 @@ public class FoodStatsTFC
 			}
 
 			//Heal or hurt the player based on hunger.
-			if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.hourLength/2)
+			if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.HOUR_LENGTH/2)
 			{
-				this.foodHealTimer += TFC_Time.hourLength/2;
+				this.foodHealTimer += TFC_Time.HOUR_LENGTH/2;
 
 				if (this.stomachLevel >= this.getMaxStomach(player)/4 && player.shouldHeal())
 				{
@@ -222,7 +222,7 @@ public class FoodStatsTFC
 
 	public int getMaxWater(EntityPlayer player)
 	{
-		return TFC_Time.dayLength * 2 + 200 * player.experienceLevel;
+		return TFC_Time.DAY_LENGTH * 2 + 200 * player.experienceLevel;
 	}
 
 	public float getMaxStomach(EntityPlayer player)
@@ -378,8 +378,9 @@ public class FoodStatsTFC
 	 */
 	public int[] getPrefTaste()
 	{
-		Random R = new Random(getPlayerFoodSeed());
-		return new int[]{20+R.nextInt(70),20+R.nextInt(70),20+R.nextInt(70),20+R.nextInt(70),20+R.nextInt(70)};
+		Random r = new Random(getPlayerFoodSeed());
+		return new int[]
+		{ 20 + r.nextInt(70), 20 + r.nextInt(70), 20 + r.nextInt(70), 20 + r.nextInt(70), 20 + r.nextInt(70) };
 	}
 
 	public float getTasteFactor(ItemStack food)
@@ -418,8 +419,8 @@ public class FoodStatsTFC
 
 	public static int getMaxHealth(EntityPlayer player)
 	{
-		return (int)(Math.min(1000+(player.experienceLevel * TFCOptions.HealthGainRate),
-				TFCOptions.HealthGainCap) * TFC_Core.getPlayerFoodStats(player).getNutritionHealthModifier());
+		return (int)(Math.min(1000+(player.experienceLevel * TFCOptions.healthGainRate),
+				TFCOptions.healthGainCap) * TFC_Core.getPlayerFoodStats(player).getNutritionHealthModifier());
 	}
 
 	/**

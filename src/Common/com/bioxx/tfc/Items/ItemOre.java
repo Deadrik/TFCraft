@@ -24,7 +24,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 		super();
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		MetaNames = new String[]{
+		metaNames = new String[]{
 				"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
 				"Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
 				"Bituminous Coal", "Lignite", "Kaolinite", "Gypsum", "Satinspar", "Selenite", "Graphite", "Kimberlite", 
@@ -36,7 +36,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 				"Poor Native Silver", "Poor Cassiterite", "Poor Galena", "Poor Bismuthinite", "Poor Garnierite", "Poor Malachite", 
 				"Poor Magnetite", "Poor Limonite", "Poor Sphalerite", "Poor Tetrahedrite"};
 		setFolder("ore/");
-		setCreativeTab(TFCTabs.TFCMaterials);
+		setCreativeTab(TFCTabs.TFC_MATERIALS);
 	}
 
 	@Override
@@ -54,10 +54,10 @@ public class ItemOre extends ItemTerra implements ISmeltable
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		MetaIcons = new IIcon[MetaNames.length];
-		for(int i = 0; i < MetaNames.length; i++)
+		metaIcons = new IIcon[metaNames.length];
+		for(int i = 0; i < metaNames.length; i++)
 		{
-			MetaIcons[i] = registerer.registerIcon(Reference.ModID + ":" + textureFolder + MetaNames[i] + " Ore");
+			metaIcons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder + metaNames[i] + " Ore");
 		}
 	}
 

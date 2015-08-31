@@ -19,7 +19,7 @@ public class SlotLiquidVessel extends Slot
 	public boolean isItemValid(ItemStack itemstack)
 	{
 		return itemstack.getItem() instanceof ItemMeltedMetal && itemstack.getItemDamage() > 1 ||
-				itemstack.getItem() == TFCItems.CeramicMold && itemstack.getItemDamage() == 1 ||
+				itemstack.getItem() == TFCItems.ceramicMold && itemstack.getItemDamage() == 1 ||
 				itemstack.getItem() instanceof ItemPotteryMold && itemstack.getItemDamage() > 0;
 	}
 

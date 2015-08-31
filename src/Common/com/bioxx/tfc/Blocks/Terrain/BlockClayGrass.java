@@ -35,7 +35,7 @@ public class BlockClayGrass extends BlockGrass
 	@Override
 	public Item getItemDropped(int metadata, Random rand, int fortune)
 	{
-		return TFCItems.ClayBall;
+		return TFCItems.clayBall;
 	}
 
 	@Override

@@ -16,8 +16,8 @@ import com.bioxx.tfc.api.Constant.Global;
 
 public class WorldGenSoilPits implements IWorldGenerator
 {
-	private static WorldGenBerryBush cranberryGen = new WorldGenBerryBush(false, 6, 15, 1, 6, TFCBlocks.Peat);
-	private static WorldGenBerryBush cloudberryGen = new WorldGenBerryBush(false, 10, 12, 1, 6, TFCBlocks.Peat);
+	private static WorldGenBerryBush cranberryGen = new WorldGenBerryBush(false, 6, 15, 1, 6, TFCBlocks.peat);
+	private static WorldGenBerryBush cloudberryGen = new WorldGenBerryBush(false, 10, 12, 1, 6, TFCBlocks.peat);
 
 	public WorldGenSoilPits()
 	{
@@ -69,12 +69,12 @@ public class WorldGenSoilPits implements IWorldGenerator
 							{
 								if (TFC_Core.isDirt(block) || TFC_Core.isClay(block) || TFC_Core.isPeat(block))
 								{
-									world.setBlock(x, y, z, TFCBlocks.Peat, 0, 2);
+									world.setBlock(x, y, z, TFCBlocks.peat, 0, 2);
 									flag = true;
 								}
 								else if(TFC_Core.isGrass(block))
 								{
-									world.setBlock(x, y, z, TFCBlocks.PeatGrass, 0, 2);
+									world.setBlock(x, y, z, TFCBlocks.peatGrass, 0, 2);
 									flag = true;
 								}
 							}
@@ -106,12 +106,12 @@ public class WorldGenSoilPits implements IWorldGenerator
 						{
 							Block block = world.getBlock(xCoord, yCoord, zCoord);
 							DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt(xCoord, zCoord, 0);
-							if (block == TFCBlocks.Dirt || block == TFCBlocks.Dirt2)
+							if (block == TFCBlocks.dirt || block == TFCBlocks.dirt2)
 							{
 								world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForClay(block), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
 								flag = true;
 							}
-							else if(block == TFCBlocks.Grass || block == TFCBlocks.Grass2)
+							else if(block == TFCBlocks.grass || block == TFCBlocks.grass2)
 							{
 								world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForClayGrass(block), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
 								flag = true;
@@ -121,7 +121,7 @@ public class WorldGenSoilPits implements IWorldGenerator
 						{
 							int y = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
 							if(world.isAirBlock(xCoord, y, zCoord) && TFC_Core.isSoil(world.getBlock(xCoord, y-1, zCoord)))
-								world.setBlock(xCoord, y, zCoord, TFCBlocks.Flora, 0, 2);
+								world.setBlock(xCoord, y, zCoord, TFCBlocks.flora, 0, 2);
 						}
 					}
 				}

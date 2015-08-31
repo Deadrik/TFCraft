@@ -21,13 +21,13 @@ import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockClay extends BlockTerra
 {
-	protected IIcon[] DirtTexture;
+	protected IIcon[] dirtTexture;
 	protected int textureOffset;
 
 	public BlockClay(int texOff)
 	{
 		super(Material.clay);
-		this.setCreativeTab(TFCTabs.TFCBuilding);
+		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 		textureOffset = texOff;
 	}
 
@@ -52,9 +52,9 @@ public class BlockClay extends BlockTerra
 	public void registerBlockIcons(IIconRegister registerer)
 	{
 		int count = (textureOffset == 0 ? 16 : Global.STONE_ALL.length - 16);
-		DirtTexture = new IIcon[count];
+		dirtTexture = new IIcon[count];
 		for(int i = 0; i < count; i++)
-			DirtTexture[i] = registerer.registerIcon(Reference.ModID + ":" + "clay/Clay " + Global.STONE_ALL[i + textureOffset]);
+			dirtTexture[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "clay/Clay " + Global.STONE_ALL[i + textureOffset]);
 	}
 
 	/**
@@ -64,8 +64,8 @@ public class BlockClay extends BlockTerra
 	public IIcon getIcon(IBlockAccess bAccess, int x, int y, int z, int side)
 	{
 		int meta = bAccess.getBlockMetadata(x, y, z);
-		if(meta >= DirtTexture.length) return DirtTexture[DirtTexture.length - 1];
-		return DirtTexture[meta];
+		if(meta >= dirtTexture.length) return dirtTexture[dirtTexture.length - 1];
+		return dirtTexture[meta];
 	}
 
 	/**
@@ -74,8 +74,8 @@ public class BlockClay extends BlockTerra
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
-		if(meta >= DirtTexture.length) return DirtTexture[DirtTexture.length - 1];
-		return DirtTexture[meta];
+		if(meta >= dirtTexture.length) return dirtTexture[dirtTexture.length - 1];
+		return dirtTexture[meta];
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class BlockClay extends BlockTerra
 	@Override
 	public Item getItemDropped(int metadata, Random rand, int fortune)
 	{
-		return TFCItems.ClayBall;
+		return TFCItems.clayBall;
 	}
 
 	/**

@@ -14,8 +14,8 @@ import com.bioxx.tfc.TileEntities.TEBarrel;
 
 public class RenderVessel implements ISimpleBlockRenderingHandler
 {
-	private static final float min = 0.2F;
-	private static final float max = 0.8F;
+	private static final float MIN = 0.2F;
+	private static final float MAX = 0.8F;
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
@@ -27,16 +27,16 @@ public class RenderVessel implements ISimpleBlockRenderingHandler
 		{
 			if(te.getSealed())
 			{
-				renderer.setRenderBounds(min-0.025F, 0.55f, min-0.025F, max+0.025F, 0.65F, max+0.025F);
+				renderer.setRenderBounds(MIN-0.025F, 0.55f, MIN-0.025F, MAX+0.025F, 0.65F, MAX+0.025F);
 				renderer.renderStandardBlock(block, x, y, z);
 				renderer.setRenderBounds(0.4375f, 0.65f, 0.4375f, 0.5625F, 0.7F, 0.5625F);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(min+0.05F, 0, min+0.05F, max-0.05F, 0.05F, max-0.05F);
+				renderer.setRenderBounds(MIN+0.05F, 0, MIN+0.05F, MAX-0.05F, 0.05F, MAX-0.05F);
 				renderer.renderStandardBlock(block, x, y, z);
 			}
 			else
 			{
-				renderer.setRenderBounds(min+0.05F, 0, min+0.05F, max-0.05F, 0.05F, max-0.05F);
+				renderer.setRenderBounds(MIN+0.05F, 0, MIN+0.05F, MAX-0.05F, 0.05F, MAX-0.05F);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				if(te.fluid != null && renderer.overrideBlockTexture == null)
@@ -46,38 +46,38 @@ public class RenderVessel implements ISimpleBlockRenderingHandler
 					float f1 = (color >> 8 & 255) / 255.0F;
 					float f2 = (color & 255) / 255.0F;
 					float h = 0.5f*((float)te.fluid.amount/(float)te.getMaxLiquid());
-					renderer.setRenderBounds(min+0.05F, 0.05, min+0.05F, max-0.05F, 0.05f+h, max-0.05F);
+					renderer.setRenderBounds(MIN+0.05F, 0.05, MIN+0.05F, MAX-0.05F, 0.05f+h, MAX-0.05F);
 					IIcon still = te.fluid.getFluid().getStillIcon();
 					renderer.setOverrideBlockTexture(still);
 					renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, f, f1, f2);
 					renderer.clearOverrideBlockTexture();
 				}
 			}
-			renderer.setRenderBounds(min, 0F, min+0.05F, min+0.05F, 0.6F, max-0.05F);
+			renderer.setRenderBounds(MIN, 0F, MIN+0.05F, MIN+0.05F, 0.6F, MAX-0.05F);
 			renderer.renderStandardBlock(block, x, y, z);
 
-			renderer.setRenderBounds(max-0.05F, 0F, min+0.05F, max, 0.6F, max-0.05F);
+			renderer.setRenderBounds(MAX-0.05F, 0F, MIN+0.05F, MAX, 0.6F, MAX-0.05F);
 			renderer.renderStandardBlock(block, x, y, z);
 
-			renderer.setRenderBounds(min, 0F, min, max, 0.6F, min+0.05F);
+			renderer.setRenderBounds(MIN, 0F, MIN, MAX, 0.6F, MIN+0.05F);
 			renderer.renderStandardBlock(block, x, y, z);
 
-			renderer.setRenderBounds(min, 0F, max-0.05F, max, 0.6F, max);
+			renderer.setRenderBounds(MIN, 0F, MAX-0.05F, MAX, 0.6F, MAX);
 			renderer.renderStandardBlock(block, x, y, z);
 
-			renderer.setRenderBounds(min+0.05F, 0.05, min+0.05F, max-0.05F, 0.1f, max-0.05F);
+			renderer.setRenderBounds(MIN+0.05F, 0.05, MIN+0.05F, MAX-0.05F, 0.1f, MAX-0.05F);
 			renderer.renderStandardBlock(block, x, y, z);
 		}
 		else
 		{
 			if((te.rotation & 3) == 0)
 			{
-				renderer.setRenderBounds(min, min, min+0.05F, 0.95F, min+0.05F, max-0.05F);
+				renderer.setRenderBounds(MIN, MIN, MIN+0.05F, 0.95F, MIN+0.05F, MAX-0.05F);
 				renderer.renderStandardBlock(block, x, y, z);
 			}
 			if((te.rotation & 3) == 1)
 			{
-				renderer.setRenderBounds(min+0.05F, min, min,max-0.05F, min+0.05F, 0.95F);
+				renderer.setRenderBounds(MIN+0.05F, MIN, MIN,MAX-0.05F, MIN+0.05F, 0.95F);
 				renderer.renderStandardBlock(block, x, y, z);
 			}
 		}
@@ -99,11 +99,11 @@ public class RenderVessel implements ISimpleBlockRenderingHandler
 	@Override
 	public void renderInventoryBlock(Block block, int meta, int modelID, RenderBlocks renderer)
 	{
-		renderer.setRenderBounds(min-0.025F, 0.55f, min-0.025F, max+0.025F, 0.65F, max+0.025F);
+		renderer.setRenderBounds(MIN-0.025F, 0.55f, MIN-0.025F, MAX+0.025F, 0.65F, MAX+0.025F);
 		renderInvBlock(block, meta, renderer);
 		renderer.setRenderBounds(0.4375f, 0.65f, 0.4375f, 0.5625F, 0.7F, 0.5625F);
 		renderInvBlock(block, meta, renderer);
-		renderer.setRenderBounds(min, 0F, min, max, 0.6F, max);
+		renderer.setRenderBounds(MIN, 0F, MIN, MAX, 0.6F, MAX);
 		renderInvBlock(block, meta, renderer);
 
 	}

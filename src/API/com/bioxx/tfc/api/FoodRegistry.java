@@ -9,10 +9,10 @@ import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 
 public class FoodRegistry 
 {
-	private static final FoodRegistry instance = new FoodRegistry();
+	private static final FoodRegistry INSTANCE = new FoodRegistry();
 	public static final FoodRegistry getInstance()
 	{
-		return instance;
+		return INSTANCE;
 	}
 
 	private int proteinCount;

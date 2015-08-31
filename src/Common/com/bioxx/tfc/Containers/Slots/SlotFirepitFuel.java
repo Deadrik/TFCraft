@@ -19,7 +19,7 @@ public class SlotFirepitFuel extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		return itemstack.getItem() == TFCItems.Logs || itemstack.getItem() == Item.getItemFromBlock(TFCBlocks.Peat);
+		return itemstack.getItem() == TFCItems.logs || itemstack.getItem() == Item.getItemFromBlock(TFCBlocks.peat);
 	}
 
 	@Override

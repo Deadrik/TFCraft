@@ -20,7 +20,7 @@ import com.bioxx.tfc.Entities.Mobs.EntityFishTFC;
 @SideOnly(Side.CLIENT)
 public class RenderFishTFC extends RenderLiving
 {
-	private static final ResourceLocation Texture = new ResourceLocation(Reference.ModID, "textures/mob/Bass.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/mob/Bass.png");
 
 	//private float scale = 1f;
 	//private ModelBass modelbass;
@@ -107,6 +107,6 @@ public class RenderFishTFC extends RenderLiving
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		// TODO Auto-generated method stub
-		return Texture;
+		return TEXTURE;
 	}
 }

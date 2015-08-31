@@ -22,7 +22,7 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	{
 		super();
 		setHasSubtypes(true);
-		setCreativeTab(TFCTabs.TFCMaterials);
+		setCreativeTab(TFCTabs.TFC_MATERIALS);
 		this.setWeight(EnumWeight.HEAVY);
 		this.setSize(EnumSize.LARGE);
 
@@ -52,7 +52,7 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	@Override
 	public Metal getMetalType(ItemStack is)
 	{
-		if (this == TFCItems.RawBloom)
+		if (this == TFCItems.rawBloom)
 			return Global.UNKNOWN;
 
 		return Global.WROUGHTIRON;
@@ -67,7 +67,7 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	@Override
 	public boolean isSmeltable(ItemStack is)
 	{
-		return this == TFCItems.Bloom;
+		return this == TFCItems.bloom;
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class ItemMiscToolHead extends ItemTerra
 		super();
 		this.setMaxDamage(100);
 		this.setMaxStackSize(4);
-		setCreativeTab(TFCTabs.TFCMisc);
+		setCreativeTab(TFCTabs.TFC_MISC);
 		this.setFolder("toolheads/");
 		this.setWeight(EnumWeight.MEDIUM);
 		this.setSize(EnumSize.SMALL);
@@ -41,6 +41,6 @@ public class ItemMiscToolHead extends ItemTerra
 		name = name.replace("IgEx ", "");
 		name = name.replace("Sed ", "");
 		name = name.replace("MM ", "");
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + name);
+		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + this.textureFolder + name);
 	}
 }

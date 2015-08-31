@@ -31,11 +31,11 @@ public class GenLayerRiverTFC extends GenLayerTFC
 		{
 			for (int j2 = 0; j2 < par3; ++j2)
 			{
-				int k2 = this.func_151630_c(aint[j2 + 0 + (i2 + 1) * k1]);
-				int l2 = this.func_151630_c(aint[j2 + 2 + (i2 + 1) * k1]);
-				int i3 = this.func_151630_c(aint[j2 + 1 + (i2 + 0) * k1]);
-				int j3 = this.func_151630_c(aint[j2 + 1 + (i2 + 2) * k1]);
-				int k3 = this.func_151630_c(aint[j2 + 1 + (i2 + 1) * k1]);
+				int k2 = this.calcWidth(aint[j2 + 0 + (i2 + 1) * k1]);
+				int l2 = this.calcWidth(aint[j2 + 2 + (i2 + 1) * k1]);
+				int i3 = this.calcWidth(aint[j2 + 1 + (i2 + 0) * k1]);
+				int j3 = this.calcWidth(aint[j2 + 1 + (i2 + 2) * k1]);
+				int k3 = this.calcWidth(aint[j2 + 1 + (i2 + 1) * k1]);
 
 				if (k3 == k2 && k3 == i3 && k3 == l2 && k3 == j3)
 				{
@@ -43,7 +43,7 @@ public class GenLayerRiverTFC extends GenLayerTFC
 				}
 				else
 				{
-					aint1[j2 + i2 * par3] = TFCBiome.river.biomeID;
+					aint1[j2 + i2 * par3] = TFCBiome.RIVER.biomeID;
 				}
 			}
 		}
@@ -51,8 +51,8 @@ public class GenLayerRiverTFC extends GenLayerTFC
 		return aint1;
 	}
 
-	private int func_151630_c(int p_151630_1_)
+	private int calcWidth(int i)
 	{
-		return p_151630_1_ >= 2 ? 2 + (p_151630_1_ & 1) : p_151630_1_;
+		return i >= 2 ? 2 + (i & 1) : i; // Spits back 2 for even numbers >= 2 and 3 for odd numbers.
 	}
 }

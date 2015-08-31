@@ -22,7 +22,7 @@ public class ChunkData
 	public int sluicedAmount;
 
 	public float fishPop = -1;
-	public static final float fishPopMax = 60;
+	public static final float FISH_POP_MAX = 60;
 
 	public int lastSpringGen;
 	public int cropInfestation;
@@ -57,7 +57,7 @@ public class ChunkData
 		lastSpringGen = tag.getInteger("lastSpringGen");
 		cropInfestation = tag.getInteger("cropInfestation");
 
-		fishPop = Math.min(tag.getFloat("fishPopulation"),fishPopMax);
+		fishPop = Math.min(tag.getFloat("fishPopulation"),FISH_POP_MAX);
 	}
 
 	public NBTTagCompound getTag()
@@ -79,7 +79,7 @@ public class ChunkData
 		return tag;
 	}
 
-	public ChunkData CreateNew(World world, int x, int z)
+	public ChunkData createNew(World world, int x, int z)
 	{
 		chunkX = x;
 		chunkZ = z;
@@ -115,9 +115,9 @@ public class ChunkData
 		
 		if (lastVisited < now)
 		{
-			long visit = (now - lastVisited) / TFC_Time.hourLength;
+			long visit = (now - lastVisited) / TFC_Time.HOUR_LENGTH;
 			spawnProtection -= visit;
-			lastVisited += visit * TFC_Time.hourLength;  // =now, but taking rounding from integer division above into account
+			lastVisited += visit * TFC_Time.HOUR_LENGTH;  // =now, but taking rounding from integer division above into account
 
 			if (spawnProtection < protectionBuffer)
 				spawnProtection = protectionBuffer;

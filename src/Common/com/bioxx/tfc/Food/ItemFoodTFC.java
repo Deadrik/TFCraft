@@ -67,10 +67,10 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um)
 	{
 		super();
-		this.setCreativeTab(TFCTabs.TFCFoods);
+		this.setCreativeTab(TFCTabs.TFC_FOODS);
 		this.setFolder("food/");
 		foodgroup = fg;
-		TFCItems.FoodList.add(this);
+		TFCItems.foodList.add(this);
 		this.setMaxDamage(100);
 		this.hasSubtypes = false;
 		smokeAbsorb = 0.5f;
@@ -119,7 +119,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		if(hasCookedIcon)
 		{
 			String name = this.getUnlocalizedName();
-			this.cookedIcon = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + name.replace("item.", "")+" Cooked");
+			this.cookedIcon = registerer.registerIcon(Reference.MOD_ID + ":" + this.textureFolder + name.replace("item.", "")+" Cooked");
 		}
 		MinecraftForgeClient.registerItemRenderer(this, new FoodItemRenderer());
 	}
@@ -243,7 +243,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		else
 		{
 			arraylist.add(TFC_Core.translate("gui.badnbt"));
-			TerraFirmaCraft.log.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
+			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 		}
 	}
@@ -445,7 +445,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			else
 			{
 				foodstats.addNutrition(((IFood)(is.getItem())).getFoodGroup(), 1f);
-				TerraFirmaCraft.log.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
+				TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
 						TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 			}
 		}

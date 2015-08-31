@@ -32,7 +32,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 	public ItemTerraTool(float par2, ToolMaterial par3, Set<Block> par4)
 	{
 		super(par2, par3, par4);
-		this.setCreativeTab(TFCTabs.TFCTools);
+		this.setCreativeTab(TFCTabs.TFC_TOOLS);
 		setNoRepair();
 	}
 
@@ -73,9 +73,9 @@ public class ItemTerraTool extends ItemTool implements ISize
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/" + this.getUnlocalizedName().replace("item.", ""));
-		if (TFC_Textures.BrokenItem == null) TFC_Textures.BrokenItem = registerer.registerIcon(Reference.ModID + ":" + "tools/Broken Item");
-		if (TFC_Textures.WIP == null) TFC_Textures.WIP = registerer.registerIcon(Reference.ModID + ":" + "wip");
+		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + "tools/" + this.getUnlocalizedName().replace("item.", ""));
+		if (TFC_Textures.brokenItem == null) TFC_Textures.brokenItem = registerer.registerIcon(Reference.MOD_ID + ":" + "tools/Broken Item");
+		if (TFC_Textures.wip == null) TFC_Textures.wip = registerer.registerIcon(Reference.MOD_ID + ":" + "wip");
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 	{
 		NBTTagCompound nbt = stack.getTagCompound();
 		if(pass == 1 && nbt != null && nbt.hasKey("broken"))
-			return TFC_Textures.BrokenItem;
+			return TFC_Textures.brokenItem;
 		else
 			return getIconFromDamageForRenderPass(stack.getItemDamage(), pass);
 	}

@@ -10,8 +10,8 @@ public class ItemSoup extends ItemMeal
 	{
 		super();
 		this.hasSubtypes = true;
-		this.MetaNames = new String[]{"Soup0","Soup1","Soup2","Soup3"};
-		this.MetaIcons = new IIcon[4];
+		this.metaNames = new String[]{"Soup0","Soup1","Soup2","Soup3"};
+		this.metaIcons = new IIcon[4];
 		this.setFolder("food/");
 	}
 

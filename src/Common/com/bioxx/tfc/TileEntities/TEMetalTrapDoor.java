@@ -50,7 +50,7 @@ public class TEMetalTrapDoor extends NetworkTileEntity
 	@Override
 	public void handleInitPacket(NBTTagCompound nbt) {
 		data = nbt.getByte("data");
-		sheetStack = new ItemStack(TFCBlocks.MetalTrapDoor, 1, nbt.getInteger("metalID"));
+		sheetStack = new ItemStack(TFCBlocks.metalTrapDoor, 1, nbt.getInteger("metalID"));
 	}
 
 	@Override

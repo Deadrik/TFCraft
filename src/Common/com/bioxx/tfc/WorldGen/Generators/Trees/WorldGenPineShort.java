@@ -18,9 +18,9 @@ public class WorldGenPineShort extends WorldGenerator
 	{
 		super(par1);
 		metaLeaf = id;
-		blockLeaf = TFCBlocks.Leaves;
+		blockLeaf = TFCBlocks.leaves;
 		metaWood = id;
-		blockWood = TFCBlocks.LogNatural;
+		blockWood = TFCBlocks.logNatural;
 	}
 
 	@Override

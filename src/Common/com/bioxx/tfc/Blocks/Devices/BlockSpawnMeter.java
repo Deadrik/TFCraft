@@ -20,7 +20,7 @@ public class BlockSpawnMeter extends BlockTerraContainer
 	public BlockSpawnMeter()
 	{
 		super(Material.rock);
-		this.setCreativeTab(TFCTabs.TFCDevices);
+		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 		this.setLightLevel(1F);
 	}
 
@@ -54,9 +54,9 @@ public class BlockSpawnMeter extends BlockTerraContainer
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		iconTop = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/MeterTop");
+		iconTop = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/MeterTop");
 		for(int i = 0; i < 9; i++)
-			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Meter"+i);
+			icons[i] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Meter"+i);
 	}
 
 	@Override

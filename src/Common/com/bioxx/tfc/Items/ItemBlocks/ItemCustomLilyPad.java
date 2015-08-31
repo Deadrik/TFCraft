@@ -46,11 +46,11 @@ public class ItemCustomLilyPad extends ItemColored
 				if (!par3EntityPlayer.canPlayerEdit(i, j, k, movingobjectposition.sideHit, par1ItemStack))
 					return par1ItemStack;
 
-				if (TFCBlocks.LilyPad.canBlockStay(par2World, i, j + 1, k)&& par2World.isAirBlock(i, j + 1, k))
+				if (TFCBlocks.lilyPad.canBlockStay(par2World, i, j + 1, k)&& par2World.isAirBlock(i, j + 1, k))
 				{
-					par2World.setBlock(i, j + 1, k, TFCBlocks.LilyPad);
+					par2World.setBlock(i, j + 1, k, TFCBlocks.lilyPad);
 					par2World.spawnParticle("splash", i, j + 2, k, 0.0D, 0.0D, 0.0D);
-					par2World.playSoundEffect(i + 0.5F, j + 0.5F, k + 0.5F, "random.splash", 0.5F, TFCBlocks.LilyPad.stepSound.getPitch() * 0.8F);
+					par2World.playSoundEffect(i + 0.5F, j + 0.5F, k + 0.5F, "random.splash", 0.5F, TFCBlocks.lilyPad.stepSound.getPitch() * 0.8F);
 					if (!par3EntityPlayer.capabilities.isCreativeMode)
 						--par1ItemStack.stackSize;
 				}
@@ -63,6 +63,6 @@ public class ItemCustomLilyPad extends ItemColored
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
 	{
-		return TFCBlocks.LilyPad.getRenderColor(par1ItemStack.getItemDamage());
+		return TFCBlocks.lilyPad.getRenderColor(par1ItemStack.getItemDamage());
 	}
 }

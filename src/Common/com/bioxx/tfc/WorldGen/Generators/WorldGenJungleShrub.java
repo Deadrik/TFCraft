@@ -37,7 +37,7 @@ public class WorldGenJungleShrub extends WorldGenerator
 		if (TFC_Core.isSoil(block1))
 		{
 			++y;
-			this.setBlockAndNotifyAdequately(world, x, y, z, TFCBlocks.LogNatural, this.meta);
+			this.setBlockAndNotifyAdequately(world, x, y, z, TFCBlocks.logNatural, this.meta);
 
 			for (int l = y; l <= y + 2; ++l)
 			{
@@ -54,7 +54,7 @@ public class WorldGenJungleShrub extends WorldGenerator
 
 						if ((Math.abs(l1) != j1 || Math.abs(j2) != j1 || rand.nextInt(2) != 0) && world.getBlock(k1, l, i2).canBeReplacedByLeaves(world, k1, l, i2))
 						{
-							this.setBlockAndNotifyAdequately(world, k1, l, i2, TFCBlocks.Leaves, this.meta);
+							this.setBlockAndNotifyAdequately(world, k1, l, i2, TFCBlocks.leaves, this.meta);
 						}
 					}
 				}

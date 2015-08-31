@@ -80,7 +80,7 @@ public class PrintImageMapCommand extends CommandBase
 			BufferedImage outBitmap = new BufferedImage(size,size,BufferedImage.TYPE_INT_RGB);
 			Graphics2D graphics = (Graphics2D) outBitmap.getGraphics();
 			graphics.clearRect(0, 0, size, size);
-			TerraFirmaCraft.log.info(name+".bmp");
+			TerraFirmaCraft.LOG.info(name+".bmp");
 			float perc = 0.1f;
 			int sizeHalf = size/2;
 			float count = 0;
@@ -95,17 +95,17 @@ public class PrintImageMapCommand extends CommandBase
 					graphics.drawRect(x+sizeHalf, z+sizeHalf, 1, 1);
 					if(count / (size*size) > perc)
 					{
-						TerraFirmaCraft.log.info((int)(perc*100)+"%");
+						TerraFirmaCraft.LOG.info((int)(perc*100)+"%");
 						perc+=0.1f;
 					}
 				}
 			}
-			TerraFirmaCraft.log.info(name+".bmp Done!");
+			TerraFirmaCraft.LOG.info(name+".bmp Done!");
 			ImageIO.write(outBitmap, "BMP", outFile);
 		}
 		catch (Exception e) 
 		{
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		}
 	}
 	public static void drawDrainageImage(int xCoord, int zCoord, int size, World world, String name, int skipSize)
@@ -116,7 +116,7 @@ public class PrintImageMapCommand extends CommandBase
 			BufferedImage outBitmap = new BufferedImage(size,size,BufferedImage.TYPE_INT_RGB);
 			Graphics2D graphics = (Graphics2D) outBitmap.getGraphics();
 			graphics.clearRect(0, 0, size, size);
-			TerraFirmaCraft.log.info(name+".bmp");
+			TerraFirmaCraft.LOG.info(name+".bmp");
 			float perc = 0.1f;
 			int sizeHalf = size/2;
 			float count = 0;
@@ -133,17 +133,17 @@ public class PrintImageMapCommand extends CommandBase
 					graphics.drawRect(x+sizeHalf, z+sizeHalf, 1, 1);
 					if(count / (size*size) > perc)
 					{
-						TerraFirmaCraft.log.info((int)(perc*100)+"%");
+						TerraFirmaCraft.LOG.info((int)(perc*100)+"%");
 						perc+=0.1f;
 					}
 				}
 			}
-			TerraFirmaCraft.log.info(name+".bmp Done!");
+			TerraFirmaCraft.LOG.info(name+".bmp Done!");
 			ImageIO.write(outBitmap, "BMP", outFile);
 		}
 		catch (Exception e) 
 		{
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		}
 	}
 	public static void drawTempImage(int xCoord, int zCoord, int size, World world, String name, int skipSize)
@@ -154,7 +154,7 @@ public class PrintImageMapCommand extends CommandBase
 			BufferedImage outBitmap = new BufferedImage(size,size,BufferedImage.TYPE_INT_RGB);
 			Graphics2D graphics = (Graphics2D) outBitmap.getGraphics();
 			graphics.clearRect(0, 0, size, size);
-			TerraFirmaCraft.log.info(name+".bmp");
+			TerraFirmaCraft.LOG.info(name+".bmp");
 			float perc = 0.1f;
 			int sizeHalf = size/2;
 			float count = 0;
@@ -168,17 +168,17 @@ public class PrintImageMapCommand extends CommandBase
 					graphics.drawRect(x+sizeHalf, z+sizeHalf, 1, 1);
 					if(count / (size*size) > perc)
 					{
-						TerraFirmaCraft.log.info((int)(perc*100)+"%");
+						TerraFirmaCraft.LOG.info((int)(perc*100)+"%");
 						perc+=0.1f;
 					}
 				}
 			}
-			TerraFirmaCraft.log.info(name+".bmp Done!");
+			TerraFirmaCraft.LOG.info(name+".bmp Done!");
 			ImageIO.write(outBitmap, "BMP", outFile);
 		}
 		catch (Exception e) 
 		{
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		}
 	}
 	public static void drawBiomeImage(int xCoord, int zCoord, int size, World world, String name, int skipSize)
@@ -189,7 +189,7 @@ public class PrintImageMapCommand extends CommandBase
 			BufferedImage outBitmap = new BufferedImage(size,size,BufferedImage.TYPE_INT_RGB);
 			Graphics2D graphics = (Graphics2D) outBitmap.getGraphics();
 			graphics.clearRect(0, 0, size, size);
-			TerraFirmaCraft.log.info(name+".bmp");
+			TerraFirmaCraft.LOG.info(name+".bmp");
 			float perc = 0.1f;
 			float count = 0;
 			for(int x = -size/2; x < size/2; x++)
@@ -201,17 +201,17 @@ public class PrintImageMapCommand extends CommandBase
 					graphics.drawRect(x+size/2, z+size/2, 1, 1);
 					if(count / (size*size) > perc)
 					{
-						TerraFirmaCraft.log.info((int)(perc*100)+"%");
+						TerraFirmaCraft.LOG.info((int)(perc*100)+"%");
 						perc+=0.1f;
 					}
 				}
 			}
-			TerraFirmaCraft.log.info(name+".bmp Done!");
+			TerraFirmaCraft.LOG.info(name+".bmp Done!");
 			ImageIO.write(outBitmap, "BMP", outFile);
 		}
 		catch (Exception e) 
 		{
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		}
 	}
 

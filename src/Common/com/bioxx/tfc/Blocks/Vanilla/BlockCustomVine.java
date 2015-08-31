@@ -16,7 +16,7 @@ public class BlockCustomVine extends BlockVine implements IShearable
 	public BlockCustomVine()
 	{
 		super();
-		this.setCreativeTab(TFCTabs.TFCDecoration);
+		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 	}
 
 	@Override

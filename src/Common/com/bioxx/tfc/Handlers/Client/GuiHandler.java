@@ -59,7 +59,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 {
 	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) 
+	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) 
 	{
 		TileEntity te;
 		try
@@ -71,7 +71,7 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 			te = null;
 		}
 
-		switch(ID)
+		switch(id)
 		{
 		case 0:
 			return new GuiLogPile(player.inventory, (TELogPile) te, world, x, y, z);

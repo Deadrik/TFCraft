@@ -15,14 +15,14 @@ import com.bioxx.tfc.Core.ColorizerFoliageTFC;
 @SideOnly(Side.CLIENT)
 public class FoliageColorReloadListener implements IResourceManagerReloadListener
 {
-	private static final ResourceLocation field_130079_a = new ResourceLocation("textures/colormap/foliage.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation("textures/colormap/foliage.png");
 
 	@Override
 	public void onResourceManagerReload(IResourceManager par1ResourceManager)
 	{
 		try
 		{
-			ColorizerFoliageTFC.setFoliageBiomeColorizer(TextureUtil.readImageData(par1ResourceManager, field_130079_a));
+			ColorizerFoliageTFC.setFoliageBiomeColorizer(TextureUtil.readImageData(par1ResourceManager, TEXTURE));
 		}
 		catch (IOException ioexception)
 		{

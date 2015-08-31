@@ -20,40 +20,40 @@ public class WorldGenLiquidsTFC extends WorldGenerator
 	@Override
 	public boolean generate(World world, Random random, int i, int j, int k)
 	{
-		if (world.getBlock(i, j + 1, k) != TFCBlocks.StoneIgIn && world.getBlock(i, j + 1, k) != TFCBlocks.StoneSed &&
-				world.getBlock(i, j + 1, k) != TFCBlocks.StoneIgEx &&world.getBlock(i, j + 1, k) != TFCBlocks.StoneMM)
+		if (world.getBlock(i, j + 1, k) != TFCBlocks.stoneIgIn && world.getBlock(i, j + 1, k) != TFCBlocks.stoneSed &&
+				world.getBlock(i, j + 1, k) != TFCBlocks.stoneIgEx &&world.getBlock(i, j + 1, k) != TFCBlocks.stoneMM)
 		{
 			return false;
 		}
-		if (world.getBlock(i, j - 1, k) != TFCBlocks.StoneIgIn && world.getBlock(i, j - 1, k) != TFCBlocks.StoneSed &&
-				world.getBlock(i, j - 1, k) != TFCBlocks.StoneIgEx &&world.getBlock(i, j - 1, k) != TFCBlocks.StoneMM)
+		if (world.getBlock(i, j - 1, k) != TFCBlocks.stoneIgIn && world.getBlock(i, j - 1, k) != TFCBlocks.stoneSed &&
+				world.getBlock(i, j - 1, k) != TFCBlocks.stoneIgEx &&world.getBlock(i, j - 1, k) != TFCBlocks.stoneMM)
 		{
 			return false;
 		}
-		if (!world.isAirBlock(i, j, k) && world.getBlock(i, j, k) != TFCBlocks.StoneIgIn && world.getBlock(i, j, k) != TFCBlocks.StoneSed &&
-				world.getBlock(i, j, k) != TFCBlocks.StoneIgEx &&world.getBlock(i, j, k) != TFCBlocks.StoneMM)
+		if (!world.isAirBlock(i, j, k) && world.getBlock(i, j, k) != TFCBlocks.stoneIgIn && world.getBlock(i, j, k) != TFCBlocks.stoneSed &&
+				world.getBlock(i, j, k) != TFCBlocks.stoneIgEx &&world.getBlock(i, j, k) != TFCBlocks.stoneMM)
 		{
 			return false;
 		}
 
 		int l = 0;
-		if (world.getBlock(i - 1, j, k) == TFCBlocks.StoneIgIn && world.getBlock(i - 1, j, k) == TFCBlocks.StoneSed &&
-				world.getBlock(i - 1, j, k) == TFCBlocks.StoneIgEx &&world.getBlock(i - 1, j, k) == TFCBlocks.StoneMM)
+		if (world.getBlock(i - 1, j, k) == TFCBlocks.stoneIgIn && world.getBlock(i - 1, j, k) == TFCBlocks.stoneSed &&
+				world.getBlock(i - 1, j, k) == TFCBlocks.stoneIgEx &&world.getBlock(i - 1, j, k) == TFCBlocks.stoneMM)
 		{
 			l++;
 		}
-		if (world.getBlock(i + 1, j, k) == TFCBlocks.StoneIgIn && world.getBlock(i + 1, j, k) == TFCBlocks.StoneSed &&
-				world.getBlock(i + 1, j, k) == TFCBlocks.StoneIgEx &&world.getBlock(i + 1, j, k) == TFCBlocks.StoneMM)
+		if (world.getBlock(i + 1, j, k) == TFCBlocks.stoneIgIn && world.getBlock(i + 1, j, k) == TFCBlocks.stoneSed &&
+				world.getBlock(i + 1, j, k) == TFCBlocks.stoneIgEx &&world.getBlock(i + 1, j, k) == TFCBlocks.stoneMM)
 		{
 			l++;
 		}
-		if (world.getBlock(i, j, k - 1) == TFCBlocks.StoneIgIn && world.getBlock(i, j, k - 1) == TFCBlocks.StoneSed &&
-				world.getBlock(i, j, k - 1) == TFCBlocks.StoneIgEx &&world.getBlock(i, j, k - 1) == TFCBlocks.StoneMM)
+		if (world.getBlock(i, j, k - 1) == TFCBlocks.stoneIgIn && world.getBlock(i, j, k - 1) == TFCBlocks.stoneSed &&
+				world.getBlock(i, j, k - 1) == TFCBlocks.stoneIgEx &&world.getBlock(i, j, k - 1) == TFCBlocks.stoneMM)
 		{
 			l++;
 		}
-		if (world.getBlock(i, j, k + 1) == TFCBlocks.StoneIgIn && world.getBlock(i, j, k + 1) == TFCBlocks.StoneSed &&
-				world.getBlock(i, j, k + 1) == TFCBlocks.StoneIgEx &&world.getBlock(i, j, k + 1) == TFCBlocks.StoneMM)
+		if (world.getBlock(i, j, k + 1) == TFCBlocks.stoneIgIn && world.getBlock(i, j, k + 1) == TFCBlocks.stoneSed &&
+				world.getBlock(i, j, k + 1) == TFCBlocks.stoneIgEx &&world.getBlock(i, j, k + 1) == TFCBlocks.stoneMM)
 		{
 			l++;
 		}

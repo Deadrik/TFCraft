@@ -8,8 +8,8 @@ public class ItemCustomWoodH extends ItemTerraBlock
 	public ItemCustomWoodH(Block b)
 	{
 		super(b);
-		MetaNames = new String[16];
-		System.arraycopy(Global.WOOD_ALL, 0, MetaNames, 0, 8);
-		System.arraycopy(Global.WOOD_ALL, 0, MetaNames, 8, 8);
+		metaNames = new String[16];
+		System.arraycopy(Global.WOOD_ALL, 0, metaNames, 0, 8);
+		System.arraycopy(Global.WOOD_ALL, 0, metaNames, 8, 8);
 	}
 }

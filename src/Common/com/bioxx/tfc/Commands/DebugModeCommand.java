@@ -38,7 +38,7 @@ public class DebugModeCommand extends CommandBase
 			}
 
 			AbstractPacket pkt = new DebugModePacket(player);
-			TerraFirmaCraft.packetPipeline.sendTo(pkt, player);
+			TerraFirmaCraft.PACKET_PIPELINE.sendTo(pkt, player);
 		}
 	}
 

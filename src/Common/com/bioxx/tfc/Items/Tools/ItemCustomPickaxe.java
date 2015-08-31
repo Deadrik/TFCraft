@@ -24,14 +24,14 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	public ItemCustomPickaxe(ToolMaterial e)
 	{
 		super(e);
-		setCreativeTab(TFCTabs.TFCTools);
+		setCreativeTab(TFCTabs.TFC_TOOLS);
 		setNoRepair();
 	}
 
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/"+this.getUnlocalizedName().replace("item.", ""));
+		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + "tools/"+this.getUnlocalizedName().replace("item.", ""));
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	{
 		NBTTagCompound nbt = stack.getTagCompound();
 		if(pass == 1 && nbt != null && nbt.hasKey("broken"))
-			return TFC_Textures.BrokenItem;
+			return TFC_Textures.brokenItem;
 		else
 			return getIconFromDamageForRenderPass(stack.getItemDamage(), pass);
 	}

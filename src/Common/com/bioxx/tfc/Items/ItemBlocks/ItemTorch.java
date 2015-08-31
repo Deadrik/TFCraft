@@ -20,7 +20,7 @@ public class ItemTorch extends ItemTerraBlock
 	@Override
 	public boolean onEntityItemUpdate(EntityItem entityItem)
 	{
-		if(entityItem.worldObj.getBlock((int)Math.floor(entityItem.posX), (int)Math.floor(entityItem.posY)-1, (int)Math.floor(entityItem.posZ)) == TFCBlocks.LogPile)
+		if(entityItem.worldObj.getBlock((int)Math.floor(entityItem.posX), (int)Math.floor(entityItem.posY)-1, (int)Math.floor(entityItem.posZ)) == TFCBlocks.logPile)
 		{
 			int count = entityItem.getEntityData().getInteger("torchCount");
 			if(count > 160)
@@ -37,14 +37,14 @@ public class ItemTorch extends ItemTerraBlock
 				entityItem.getEntityData().setInteger("torchCount", count+1);
 			}
 		}
-		if(entityItem.worldObj.getBlock((int)Math.floor(entityItem.posX), (int)Math.floor(entityItem.posY)-1, (int)Math.floor(entityItem.posZ)) == TFCBlocks.Pottery)
+		if(entityItem.worldObj.getBlock((int)Math.floor(entityItem.posX), (int)Math.floor(entityItem.posY)-1, (int)Math.floor(entityItem.posZ)) == TFCBlocks.pottery)
 		{
 			int count = entityItem.getEntityData().getInteger("torchCount");
 			if(count > 80)
 			{
 				TEPottery tepot = (TEPottery) entityItem.worldObj.getTileEntity((int)Math.floor(entityItem.posX), (int)Math.floor(entityItem.posY)-1, (int)Math.floor(entityItem.posZ));
 				if(!entityItem.worldObj.isRemote && tepot.wood == 8 && tepot.burnStart == 0)
-					tepot.StartPitFire();
+					tepot.startPitFire();
 			}
 			else
 			{
@@ -67,7 +67,7 @@ public class ItemTorch extends ItemTerraBlock
 		if (side == 4) --xCoord;
 		if (side == 5) ++xCoord;
 		Block block = world.getBlock(xCoord, yCoord, zCoord);
-		if(block != TFCBlocks.Torch)
+		if(block != TFCBlocks.torch)
 			return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
 
 		return false;

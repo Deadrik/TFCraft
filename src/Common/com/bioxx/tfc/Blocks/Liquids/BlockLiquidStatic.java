@@ -112,7 +112,7 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 			}
 
 			// Play frog sound at night only in fresh water and above freezing temperature.
-			if(world.getBlock(x, y, z) == TFCBlocks.FreshWaterStationary
+			if(world.getBlock(x, y, z) == TFCBlocks.freshWaterStationary
 					&& world.isAirBlock(x, y + 1, z)
 					&& TFC_Climate.getHeightAdjustedTemp(world, x, y + 1, z) > 2)
 			{
@@ -123,7 +123,7 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 					{
 						for(int z1 = z - 3; z1 < z + 3; z1++)
 						{
-							if(TFC_Core.isGrass(world.getBlock(x1, y, z1)) || world.getBlock(x1, y - 1, z1) == TFCBlocks.WaterPlant)
+							if(TFC_Core.isGrass(world.getBlock(x1, y, z1)) || world.getBlock(x1, y - 1, z1) == TFCBlocks.waterPlant)
 							{
 								float mod = rand.nextFloat();
 								world.playSoundEffect(x, y, z, TFC_Sounds.FROG, (mod < 0.55F ? mod : 0.55F), (mod < 0.41F ? mod + 0.8F : 0.8F));
@@ -154,7 +154,7 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 									world.isSideSolid(i-1, j, k, ForgeDirection.EAST) || world.isSideSolid(i+1, j, k, ForgeDirection.WEST) ||
 									world.isSideSolid(i, j, k + 1, ForgeDirection.NORTH) || world.isSideSolid(i, j, k - 1, ForgeDirection.SOUTH))
 						{
-							world.setBlock(i, j, k, TFCBlocks.Sulfur, world.rand.nextInt(4), 3);
+							world.setBlock(i, j, k, TFCBlocks.sulfur, world.rand.nextInt(4), 3);
 						}
 
 					}

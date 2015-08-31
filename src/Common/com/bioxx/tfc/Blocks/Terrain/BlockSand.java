@@ -30,7 +30,7 @@ public class BlockSand extends BlockTerra
 	public BlockSand(int texOff)
 	{
 		super(Material.sand);
-		this.setCreativeTab(TFCTabs.TFCBuilding);
+		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 		textureOffset = texOff;
 	}
 
@@ -88,7 +88,7 @@ public class BlockSand extends BlockTerra
 		int count = (textureOffset == 0 ? 16 : Global.STONE_ALL.length - 16);
 		icons = new IIcon[count];
 		for(int i = 0; i < count; i++)
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "sand/Sand " + Global.STONE_ALL[i + textureOffset]);
+			icons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "sand/Sand " + Global.STONE_ALL[i + textureOffset]);
 	}
 
 	@Override

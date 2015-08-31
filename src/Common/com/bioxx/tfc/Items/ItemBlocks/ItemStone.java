@@ -10,9 +10,9 @@ public class ItemStone extends ItemTerraBlock
 	public ItemStone(Block b)
 	{
 		super(b);
-		if(TFC_Core.isStoneIgEx(b)) MetaNames = Global.STONE_IGEX;
-		else if(TFC_Core.isStoneIgIn(b)) MetaNames = Global.STONE_IGIN;
-		else if(TFC_Core.isStoneSed(b)) MetaNames = Global.STONE_SED;
-		else if(TFC_Core.isStoneMM(b)) MetaNames = Global.STONE_MM;
+		if(TFC_Core.isStoneIgEx(b)) metaNames = Global.STONE_IGEX;
+		else if(TFC_Core.isStoneIgIn(b)) metaNames = Global.STONE_IGIN;
+		else if(TFC_Core.isStoneSed(b)) metaNames = Global.STONE_SED;
+		else if(TFC_Core.isStoneMM(b)) metaNames = Global.STONE_MM;
 	}
 }

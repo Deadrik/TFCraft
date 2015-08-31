@@ -12,9 +12,9 @@ public class ItemCustomWoodH3 extends ItemTerraBlock
 	{
 		super(b);
 		int size = Global.WOOD_ALL.length - 16;
-		MetaNames = new String[size * 2];
-		System.arraycopy(Global.WOOD_ALL, 16, MetaNames, 0, size);
-		System.arraycopy(Global.WOOD_ALL, 16, MetaNames, size, size);
+		metaNames = new String[size * 2];
+		System.arraycopy(Global.WOOD_ALL, 16, metaNames, 0, size);
+		System.arraycopy(Global.WOOD_ALL, 16, metaNames, size, size);
 	}
 
 	@Override
@@ -24,12 +24,12 @@ public class ItemCustomWoodH3 extends ItemTerraBlock
 		{
 			int meta = is.getItemDamage();
 			if(meta > 15) meta -= 16;
-			if(MetaNames != null && meta < MetaNames.length)
-				return getUnlocalizedName().concat("." + MetaNames[meta]);
+			if(metaNames != null && meta < metaNames.length)
+				return getUnlocalizedName().concat("." + metaNames[meta]);
 		}
 		catch(Exception ex)
 		{
-			TerraFirmaCraft.log.error(ex.getLocalizedMessage());
+			TerraFirmaCraft.LOG.error(ex.getLocalizedMessage());
 		}
 		return "Unknown";
 	}

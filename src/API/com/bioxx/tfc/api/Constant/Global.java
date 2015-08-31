@@ -3,6 +3,7 @@ package com.bioxx.tfc.api.Constant;
 import java.util.Arrays;
 
 import com.bioxx.tfc.api.Metal;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 import com.google.common.collect.ObjectArrays;
 
@@ -94,43 +95,43 @@ public class Global
 	public static final String SKILL_BUTCHERING = "skill.butchering";
 
 
-	public static Metal BISMUTH;
-	public static Metal BISMUTHBRONZE;
-	public static Metal BLACKBRONZE;
-	public static Metal BLACKSTEEL;
-	public static Metal BLUESTEEL;
-	public static Metal BRASS;
-	public static Metal BRONZE;
-	public static Metal COPPER;
-	public static Metal GOLD;
-	public static Metal WROUGHTIRON;
-	public static Metal LEAD;
-	public static Metal NICKEL;
-	public static Metal PIGIRON;
-	public static Metal PLATINUM;
-	public static Metal REDSTEEL;
-	public static Metal ROSEGOLD;
-	public static Metal SILVER;
-	public static Metal STEEL;
-	public static Metal STERLINGSILVER;
-	public static Metal TIN;
-	public static Metal ZINC;
-	public static Metal WEAKSTEEL;
-	public static Metal HCBLACKSTEEL;
-	public static Metal WEAKREDSTEEL;
-	public static Metal HCREDSTEEL;
-	public static Metal WEAKBLUESTEEL;
-	public static Metal HCBLUESTEEL;
-	public static Metal UNKNOWN;
+	public static final Metal BISMUTH = new Metal("Bismuth", TFCItems.bismuthUnshaped, TFCItems.bismuthIngot);
+	public static final Metal BISMUTHBRONZE = new Metal("Bismuth Bronze", TFCItems.bismuthBronzeUnshaped, TFCItems.bismuthBronzeIngot);
+	public static final Metal BLACKBRONZE = new Metal("Black Bronze", TFCItems.blackBronzeUnshaped, TFCItems.blackBronzeIngot);
+	public static final Metal BLACKSTEEL = new Metal("Black Steel", TFCItems.blackSteelUnshaped, TFCItems.blackSteelIngot);
+	public static final Metal BLUESTEEL = new Metal("Blue Steel", TFCItems.blueSteelUnshaped, TFCItems.blueSteelIngot);
+	public static final Metal BRASS = new Metal("Brass", TFCItems.brassUnshaped, TFCItems.brassIngot);
+	public static final Metal BRONZE = new Metal("Bronze", TFCItems.bronzeUnshaped, TFCItems.bronzeIngot);
+	public static final Metal COPPER = new Metal("Copper", TFCItems.copperUnshaped, TFCItems.copperIngot);
+	public static final Metal GOLD = new Metal("Gold", TFCItems.goldUnshaped, TFCItems.goldIngot);
+	public static final Metal WROUGHTIRON = new Metal("Wrought Iron", TFCItems.wroughtIronUnshaped, TFCItems.wroughtIronIngot);
+	public static final Metal LEAD = new Metal("Lead", TFCItems.leadUnshaped, TFCItems.leadIngot);
+	public static final Metal NICKEL = new Metal("Nickel", TFCItems.nickelUnshaped, TFCItems.nickelIngot);
+	public static final Metal PIGIRON = new Metal("Pig Iron", TFCItems.pigIronUnshaped, TFCItems.pigIronIngot);
+	public static final Metal PLATINUM = new Metal("Platinum", TFCItems.platinumUnshaped, TFCItems.platinumIngot);
+	public static final Metal REDSTEEL = new Metal("Red Steel", TFCItems.redSteelUnshaped, TFCItems.redSteelIngot);
+	public static final Metal ROSEGOLD = new Metal("Rose Gold", TFCItems.roseGoldUnshaped, TFCItems.roseGoldIngot);
+	public static final Metal SILVER = new Metal("Silver", TFCItems.silverUnshaped, TFCItems.silverIngot);
+	public static final Metal STEEL = new Metal("Steel", TFCItems.steelUnshaped, TFCItems.steelIngot);
+	public static final Metal STERLINGSILVER = new Metal("Sterling Silver", TFCItems.sterlingSilverUnshaped, TFCItems.sterlingSilverIngot);
+	public static final Metal TIN = new Metal("Tin", TFCItems.tinUnshaped, TFCItems.tinIngot);
+	public static final Metal ZINC = new Metal("Zinc", TFCItems.zincUnshaped, TFCItems.zincIngot);
+	public static final Metal WEAKSTEEL = new Metal("Weak Steel", TFCItems.weakSteelUnshaped, TFCItems.weakSteelIngot);
+	public static final Metal HCBLACKSTEEL = new Metal("HC Black Steel", TFCItems.highCarbonBlackSteelUnshaped, TFCItems.highCarbonBlackSteelIngot);
+	public static final Metal WEAKREDSTEEL = new Metal("Weak Red Steel", TFCItems.weakRedSteelUnshaped, TFCItems.weakRedSteelIngot);
+	public static final Metal HCREDSTEEL = new Metal("HC Red Steel", TFCItems.highCarbonRedSteelUnshaped, TFCItems.highCarbonRedSteelIngot);
+	public static final Metal WEAKBLUESTEEL = new Metal("Weak Blue Steel", TFCItems.weakBlueSteelUnshaped, TFCItems.weakBlueSteelIngot);
+	public static final Metal HCBLUESTEEL = new Metal("HC Blue Steel", TFCItems.highCarbonBlueSteelUnshaped, TFCItems.highCarbonBlueSteelIngot);
+	public static final Metal UNKNOWN = new Metal("Unknown", TFCItems.unknownUnshaped, TFCItems.unknownIngot, false);
 
 	/**
 	 * Switch to TFCOptions.foodDecayRate
 	 */
 	@Deprecated
-	public static double FOOD_DECAY_RATE = TFCOptions.foodDecayRate;
+	public static double foodDecayRate = TFCOptions.foodDecayRate;
 
 	public static final float FOOD_MAX_WEIGHT = 160;
 	public static final float FOOD_MIN_DROP_WEIGHT = 0.1f;
 
-	public static int SEALEVEL = 144;
+	public static final int SEALEVEL = 144;
 }

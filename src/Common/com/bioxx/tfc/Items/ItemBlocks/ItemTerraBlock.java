@@ -21,7 +21,7 @@ import com.bioxx.tfc.api.Interfaces.ISize;
 
 public class ItemTerraBlock extends ItemBlock implements ISize
 {
-	public String[] MetaNames;
+	public String[] metaNames;
 	public IIcon[] icons;
 	public String folder;
 
@@ -43,12 +43,12 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	{
 		try
 		{
-			if(MetaNames != null && is.getItemDamage() < MetaNames.length)
-				return getUnlocalizedName().concat("." + MetaNames[is.getItemDamage()]);
+			if(metaNames != null && is.getItemDamage() < metaNames.length)
+				return getUnlocalizedName().concat("." + metaNames[is.getItemDamage()]);
 		}
 		catch(Exception ex)
 		{
-			TerraFirmaCraft.log.error(ex.getLocalizedMessage());
+			TerraFirmaCraft.LOG.error(ex.getLocalizedMessage());
 		}
 
 		return super.getUnlocalizedName(is);
@@ -84,7 +84,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 
 				if(meltTemp != -1)
 				{
-					if(is.getItem() == TFCItems.Stick)
+					if(is.getItem() == TFCItems.stick)
 						arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
 					else
 						arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp));

@@ -16,11 +16,11 @@ public class KeyBindings
 		keyBindingsList.add(new KeyBinding(name, value, category));
 	}
 
-	public static void addKeyBinding(KeyBinding KB)
+	public static void addKeyBinding(KeyBinding binding)
 	{
 		if (keyBindingsList == null)
 			keyBindingsList = new ArrayList<KeyBinding>();
-		keyBindingsList.add(KB);
+		keyBindingsList.add(binding);
 	}
 
 	public static void addIsRepeating(boolean value)

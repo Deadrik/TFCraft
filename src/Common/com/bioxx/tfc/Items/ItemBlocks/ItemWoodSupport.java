@@ -20,8 +20,8 @@ public class ItemWoodSupport extends ItemTerraBlock
 		super(par1);
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
-		this.MetaNames = new String[16];
-		System.arraycopy(Global.WOOD_ALL, 0, MetaNames, 0, 16);
+		this.metaNames = new String[16];
+		System.arraycopy(Global.WOOD_ALL, 0, metaNames, 0, 16);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class ItemWoodSupport extends ItemTerraBlock
 			++x;
 
 		Block b = world.getBlock(x, y-1, z);
-		return b == TFCBlocks.WoodSupportV || b == TFCBlocks.WoodSupportV2 || b.isSideSolid(world, x, y - 1, z, ForgeDirection.UP);
+		return b == TFCBlocks.woodSupportV || b == TFCBlocks.woodSupportV2 || b.isSideSolid(world, x, y - 1, z, ForgeDirection.UP);
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class ItemWoodSupport extends ItemTerraBlock
 		if(y < 250 && y > 0 && side == 1 && isValidUnder(world, x, y, z, side))
 		{
 			if(!player.isSneaking() && world.isAirBlock(x, y+1, z) && world.isAirBlock(x, y+2, z) && world.isAirBlock(x, y+3, z) && itemstack.stackSize >= 3 &&
-					world.getBlock(x, y, z) != TFCBlocks.WoodSupportV && world.getBlock(x, y, z) != TFCBlocks.WoodSupportV2 )
+					world.getBlock(x, y, z) != TFCBlocks.woodSupportV && world.getBlock(x, y, z) != TFCBlocks.woodSupportV2 )
 			{
 				placeBlockAt(getBlock(), itemstack, player, world, x, y+1, z, itemstack.getItemDamage(), 2);
 				placeBlockAt(getBlock(), itemstack, player, world, x, y+2, z, itemstack.getItemDamage(), 2);
@@ -115,9 +115,9 @@ public class ItemWoodSupport extends ItemTerraBlock
 		}
 		else
 		{
-			Block b = TFCBlocks.WoodSupportH;
-			if(getBlock() == TFCBlocks.WoodSupportV2)
-				b = TFCBlocks.WoodSupportH2;
+			Block b = TFCBlocks.woodSupportH;
+			if(getBlock() == TFCBlocks.woodSupportV2)
+				b = TFCBlocks.woodSupportH2;
 
 			if (side == 0)
 				--y;

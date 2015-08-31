@@ -20,7 +20,7 @@ public class ItemClay extends ItemLooseRock
 	public ItemClay()
 	{
 		super();
-		this.setCreativeTab(TFCTabs.TFCPottery);
+		this.setCreativeTab(TFCTabs.TFC_POTTERY);
 		this.icons = new IIcon[2];
 	}
 
@@ -71,7 +71,7 @@ public class ItemClay extends ItemLooseRock
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		icons[0] = registerer.registerIcon(Reference.ModID + ":" + "Clay");
-		icons[1] = registerer.registerIcon(Reference.ModID + ":" + "Fire Clay");
+		icons[0] = registerer.registerIcon(Reference.MOD_ID + ":" + "Clay");
+		icons[1] = registerer.registerIcon(Reference.MOD_ID + ":" + "Fire Clay");
 	}
 }

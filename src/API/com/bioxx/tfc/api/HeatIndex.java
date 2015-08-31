@@ -90,14 +90,14 @@ public class HeatIndex
 		return morph;
 	}
 
-	public ItemStack getOutput(Random R)
+	public ItemStack getOutput(Random r)
 	{
 		if(getOutputItem() == null)
 			return null;
 		int rand = 0;
 		if(outputMax - outputMin > 0) 
 		{
-			rand = outputMin + R.nextInt(outputMax - outputMin);
+			rand = outputMin + r.nextInt(outputMax - outputMin);
 			return new ItemStack(getOutputItem(),output.stackSize, 100-rand);
 		}
 		else 
@@ -106,9 +106,9 @@ public class HeatIndex
 		}
 	}
 
-	public ItemStack getOutput(ItemStack in, Random R)
+	public ItemStack getOutput(ItemStack in, Random r)
 	{
-		ItemStack is = getOutput(R);
+		ItemStack is = getOutput(r);
 		if(is != null && this.keepNBT)
 		{
 			if(is.hasTagCompound())

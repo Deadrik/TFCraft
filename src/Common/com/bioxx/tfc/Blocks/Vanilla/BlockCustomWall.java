@@ -33,7 +33,7 @@ public class BlockCustomWall extends BlockWall
 		super(blk);
 		this.block = blk;
 		totalsubTypes = t;
-		this.setCreativeTab(TFCTabs.TFCBuilding);
+		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class BlockCustomWall extends BlockWall
 		if(TFCOptions.enableDebugMode && world.isRemote)
 		{
 			int metadata = world.getBlockMetadata(i, j, k);
-			TerraFirmaCraft.log.info("Meta=" + (new StringBuilder()).append(this.getUnlocalizedName()).append(":").append(metadata).toString());
+			TerraFirmaCraft.LOG.info("Meta=" + (new StringBuilder()).append(this.getUnlocalizedName()).append(":").append(metadata).toString());
 		}
 	}
 
@@ -61,7 +61,7 @@ public class BlockCustomWall extends BlockWall
 		if(TFCOptions.enableDebugMode && world.isRemote)
 		{
 			int metadata = world.getBlockMetadata(x, y, z);
-			TerraFirmaCraft.log.info("Meta = " + (new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
+			TerraFirmaCraft.LOG.info("Meta = " + (new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
 		}
 		return false;
 	}
@@ -72,7 +72,7 @@ public class BlockCustomWall extends BlockWall
 	@Override
 	public int getRenderType()
 	{
-		return TFCBlocks.WallRenderId;
+		return TFCBlocks.wallRenderId;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -94,17 +94,17 @@ public class BlockCustomWall extends BlockWall
 	}
 	
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess p_149719_1_, int p_149719_2_, int p_149719_3_, int p_149719_4_)
+	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
     {
-        boolean flag0 = this.canConnectWallTo(p_149719_1_, p_149719_2_, p_149719_3_, p_149719_4_ - 1);
-        boolean flag1 = this.canConnectWallTo(p_149719_1_, p_149719_2_, p_149719_3_, p_149719_4_ + 1);
-        boolean flag2 = this.canConnectWallTo(p_149719_1_, p_149719_2_ - 1, p_149719_3_, p_149719_4_);
-        boolean flag3 = this.canConnectWallTo(p_149719_1_, p_149719_2_ + 1, p_149719_3_, p_149719_4_);
+        boolean flag0 = this.canConnectWallTo(world, x, y, z - 1);
+        boolean flag1 = this.canConnectWallTo(world, x, y, z + 1);
+        boolean flag2 = this.canConnectWallTo(world, x - 1, y, z);
+        boolean flag3 = this.canConnectWallTo(world, x + 1, y, z);
         //The up flags. These check if there is an adjacent block above us that would raise the height of the wall
-        boolean flag0Up = this.canConnectWallTo(p_149719_1_, p_149719_2_, p_149719_3_, p_149719_4_ - 1);
-        boolean flag1Up = this.canConnectWallTo(p_149719_1_, p_149719_2_, p_149719_3_, p_149719_4_ + 1);
-        boolean flag2Up = this.canConnectWallTo(p_149719_1_, p_149719_2_ - 1, p_149719_3_, p_149719_4_);
-        boolean flag3Up = this.canConnectWallTo(p_149719_1_, p_149719_2_ + 1, p_149719_3_, p_149719_4_);
+        boolean flag0Up = this.canConnectWallTo(world, x, y, z - 1);
+        boolean flag1Up = this.canConnectWallTo(world, x, y, z + 1);
+        boolean flag2Up = this.canConnectWallTo(world, x - 1, y, z);
+        boolean flag3Up = this.canConnectWallTo(world, x + 1, y, z);
         float f = 0.25F;
         float f1 = 0.75F;
         float f2 = 0.25F;
@@ -155,7 +155,7 @@ public class BlockCustomWall extends BlockWall
 	public boolean canConnectWallTo(IBlockAccess access, int i, int j, int k)
 	{
 		Block block = access.getBlock(i, j, k);
-		if (block != this && block != Blocks.fence_gate && block != TFCBlocks.FenceGate && block != TFCBlocks.FenceGate2 && !(block instanceof BlockCustomWall))
+		if (block != this && block != Blocks.fence_gate && block != TFCBlocks.fenceGate && block != TFCBlocks.fenceGate2 && !(block instanceof BlockCustomWall))
 			return block != null && block.getMaterial().isOpaque() && block.renderAsNormalBlock() ? block.getMaterial() != Material.gourd : false;
 		else
 			return true;

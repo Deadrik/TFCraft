@@ -75,7 +75,7 @@ public class WCrucible implements IWailaDataProvider
 				String metalTypeUnits = EnumChatFormatting.UNDERLINE + TFC_Core.translate("gui.metal.Unknown");
 				if (currentAlloy.outputType != null)
 				{
-					metalTypeUnits = EnumChatFormatting.UNDERLINE + TFC_Core.translate("gui.metal." + currentAlloy.outputType.Name.replace(" ", ""));
+					metalTypeUnits = EnumChatFormatting.UNDERLINE + TFC_Core.translate("gui.metal." + currentAlloy.outputType.name.replace(" ", ""));
 				}
 
 				int output = Math.round(currentAlloy.outputAmount);
@@ -83,13 +83,13 @@ public class WCrucible implements IWailaDataProvider
 
 				currenttip.add(metalTypeUnits);
 
-				for (int c = 0; c < currentAlloy.AlloyIngred.size(); c++)
+				for (int c = 0; c < currentAlloy.alloyIngred.size(); c++)
 				{
-					double m = currentAlloy.AlloyIngred.get(c).metal;
+					double m = currentAlloy.alloyIngred.get(c).metal;
 					m = Math.round(m * 100d) / 100d;
-					if (currentAlloy.AlloyIngred.get(c).metalType != null)
+					if (currentAlloy.alloyIngred.get(c).metalType != null)
 					{
-						currenttip.add("\u00B7 " + TFC_Core.translate("gui.metal." + currentAlloy.AlloyIngred.get(c).metalType.Name.replace(" ", ""))
+						currenttip.add("\u00B7 " + TFC_Core.translate("gui.metal." + currentAlloy.alloyIngred.get(c).metalType.name.replace(" ", ""))
 								+ " : " + m + "%");
 					}
 				}
@@ -129,12 +129,12 @@ public class WCrucible implements IWailaDataProvider
 
 	public boolean addMetal(Metal m, float amt)
 	{
-		if (getTotalMetal() + amt <= 3000 && m.Name != "Unknown")
+		if (getTotalMetal() + amt <= 3000 && m.name != "Unknown")
 		{
-			if (metals.containsKey(m.Name))
-				metals.get(m.Name).amount += amt;
+			if (metals.containsKey(m.name))
+				metals.get(m.name).amount += amt;
 			else
-				metals.put(m.Name, new MetalPair(m, amt));
+				metals.put(m.name, new MetalPair(m, amt));
 
 			updateCurrentAlloy();
 			return true;
@@ -167,16 +167,16 @@ public class WCrucible implements IWailaDataProvider
 				a.add(new AlloyMetal(m.type, (m.amount / totalAmount) * 100f));
 		}
 
-		Metal match = AlloyManager.instance.matchesAlloy(a, Alloy.EnumTier.TierV);
+		Metal match = AlloyManager.INSTANCE.matchesAlloy(a, Alloy.EnumTier.TierV);
 		if (match != null)
 		{
 			currentAlloy = new Alloy(match, totalAmount);
-			currentAlloy.AlloyIngred = a;
+			currentAlloy.alloyIngred = a;
 		}
 		else
 		{
 			currentAlloy = new Alloy(Global.UNKNOWN, totalAmount);
-			currentAlloy.AlloyIngred = a;
+			currentAlloy.alloyIngred = a;
 		}
 	}
 }

@@ -43,7 +43,7 @@ public abstract class SyncingOption
 		if (currentValue != enabled) // if we need to change states
 		{
 			boolean result = enabled ? CraftingManager.getInstance().getRecipeList().addAll(getRecipes()) : CraftingManager.getInstance().getRecipeList().removeAll(getRecipes());
-			if (TFCOptions.enableDebugMode) TerraFirmaCraft.log.info("Conversion option {} changed from {} to {}. Result: {}", name, currentValue, enabled, result);
+			if (TFCOptions.enableDebugMode) TerraFirmaCraft.LOG.info("Conversion option {} changed from {} to {}. Result: {}", name, currentValue, enabled, result);
 			field.setBoolean(null, enabled); // Keep the field up to date as well
 			currentValue = enabled;
 		}

@@ -18,7 +18,7 @@ public enum EnumSize
 
 	public final int stackSize;
 	private final String name;
-	private static final EnumSize Sizes[] = new EnumSize[] {
+	private static final EnumSize SIZES[] = new EnumSize[] {
 		TINY, VERYSMALL, SMALL, MEDIUM, LARGE, VERYLARGE, HUGE};
 
 	private EnumSize(String s, int i)

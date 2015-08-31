@@ -14,7 +14,7 @@ import com.bioxx.tfc.api.TFCOptions;
 
 public class GuiHealth extends GuiContainerTFC
 {
-	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_health.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_health.png");
 	protected EntityPlayer player;
 
 	public GuiHealth(EntityPlayer player)
@@ -78,10 +78,10 @@ public class GuiHealth extends GuiContainerTFC
 		this.guiLeft = (this.width - this.xSize) / 2;
 		this.guiTop = (this.height - this.ySize) / 2;
 		buttonList.clear();
-		buttonList.add(new GuiInventoryButton(0, guiLeft + 176, guiTop - 31, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Inventory"), TFC_Textures.GuiInventory));
-		buttonList.add(new GuiInventoryButton(1, guiLeft + 176, guiTop - 12, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Skills"), TFC_Textures.GuiSkills));
-		buttonList.add(new GuiInventoryButton(2, guiLeft + 176, guiTop + 7, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Calendar.Calendar"), TFC_Textures.GuiCalendar));
-		buttonList.add(new GuiInventoryButton(3, guiLeft + 176, guiTop + 26, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Health"), TFC_Textures.GuiHealth));
+		buttonList.add(new GuiInventoryButton(0, guiLeft + 176, guiTop - 31, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Inventory"), TFC_Textures.guiInventory));
+		buttonList.add(new GuiInventoryButton(1, guiLeft + 176, guiTop - 12, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Skills"), TFC_Textures.guiSkills));
+		buttonList.add(new GuiInventoryButton(2, guiLeft + 176, guiTop + 7, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Calendar.Calendar"), TFC_Textures.guiCalendar));
+		buttonList.add(new GuiInventoryButton(3, guiLeft + 176, guiTop + 26, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Health"), TFC_Textures.guiHealth));
 	}
 
 	@Override

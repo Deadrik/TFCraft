@@ -30,17 +30,17 @@ public class ItemLooseRock extends ItemTerra
 		super();
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
-		this.setCreativeTab(TFCTabs.TFCMaterials);
-		this.MetaNames = Global.STONE_ALL;
-		icons = new IIcon[MetaNames.length];
+		this.setCreativeTab(TFCTabs.TFC_MATERIALS);
+		this.metaNames = Global.STONE_ALL;
+		icons = new IIcon[metaNames.length];
 	}
 
 	@Override
 	public ItemTerra setMetaNames(String[] metanames)
 	{
-		MetaNames = metanames;
+		metaNames = metanames;
 		if(metanames != null)
-			icons = new IIcon[MetaNames.length];
+			icons = new IIcon[metaNames.length];
 		return this;
 	}
 
@@ -123,14 +123,14 @@ public class ItemLooseRock extends ItemTerra
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		for(int i = 0; i < MetaNames.length; i++)
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "rocks/" + MetaNames[i] + " Rock");
+		for(int i = 0; i < metaNames.length; i++)
+			icons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "rocks/" + metaNames[i] + " Rock");
 	}
 
 	@Override
 	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
-		for(int i = 0; i < MetaNames.length; i++)
+		for(int i = 0; i < metaNames.length; i++)
 		{
 			list.add(new ItemStack(this, 1, i));
 		}

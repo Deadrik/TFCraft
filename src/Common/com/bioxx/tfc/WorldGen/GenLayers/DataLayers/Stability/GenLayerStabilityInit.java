@@ -20,7 +20,7 @@ public class GenLayerStabilityInit extends GenLayerTFC
 			for (int x = 0; x < maxX; ++x)
 			{
 				this.initChunkSeed(par1 + x, par2 + z);
-				cache[x + z * maxX] = this.nextInt(3) == 0 ? DataLayer.SeismicUnStable.ID : DataLayer.SeismicStable.ID;
+				cache[x + z * maxX] = this.nextInt(3) == 0 ? DataLayer.SEISMIC_UNSTABLE.layerID : DataLayer.SEISMIC_STABLE.layerID;
 			}
 		}
 

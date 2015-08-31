@@ -59,7 +59,7 @@ public class BlockSulfur extends BlockTerra implements ICustomCollision
 	public void registerBlockIcons(IIconRegister registerer)
 	{
 		for(int i = 0; i < 4; i++)
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "ores/Sulfur"+i);
+			icons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "ores/Sulfur"+i);
 	}
 
 	@Override
@@ -72,12 +72,12 @@ public class BlockSulfur extends BlockTerra implements ICustomCollision
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
 		//super.harvestBlock(world, entityplayer, i, j, k, l);
-		dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.Powder, quantityDropped(new Random()), itemMeta));
+		dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.powder, quantityDropped(new Random()), itemMeta));
 	}
 
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3) {
-		return TFCItems.Powder;
+		return TFCItems.powder;
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public class BlockSulfur extends BlockTerra implements ICustomCollision
 		if(num == 0)
 		{
 			world.setBlockToAir(i, j, k);
-			dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.Powder, quantityDropped(new Random()), itemMeta));
+			dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.powder, quantityDropped(new Random()), itemMeta));
 		}
 	}
 

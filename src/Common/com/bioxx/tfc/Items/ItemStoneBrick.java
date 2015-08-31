@@ -22,9 +22,9 @@ public class ItemStoneBrick extends ItemTerra
 		super();
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
-		setCreativeTab(TFCTabs.TFCMaterials);
-		this.MetaNames = Global.STONE_ALL;
-		this.icons = new IIcon[MetaNames.length];
+		setCreativeTab(TFCTabs.TFC_MATERIALS);
+		this.metaNames = Global.STONE_ALL;
+		this.icons = new IIcon[metaNames.length];
 	}
 	public ItemStoneBrick(int id, String tex) 
 	{
@@ -111,15 +111,15 @@ public class ItemStoneBrick extends ItemTerra
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		for(int i = 0; i < MetaNames.length; i++) {
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "rocks/"+MetaNames[i]+" Brick");
+		for(int i = 0; i < metaNames.length; i++) {
+			icons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "rocks/"+metaNames[i]+" Brick");
 		}
 	}
 
 	@Override
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < MetaNames.length; i++) {
+		for(int i = 0; i < metaNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}

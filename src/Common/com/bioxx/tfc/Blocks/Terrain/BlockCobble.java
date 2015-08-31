@@ -29,7 +29,7 @@ public class BlockCobble extends BlockTerra
 	protected BlockCobble(Material material)
 	{
 		super(material);
-		this.setCreativeTab(TFCTabs.TFCBuilding);
+		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 	}
 
 	protected String[] names;
@@ -52,7 +52,7 @@ public class BlockCobble extends BlockTerra
 	{
 		// Cobblestone generated from cave ins drops loose rocks instead of the block.
 		if (meta > 7)
-			return TFCItems.LooseRock;
+			return TFCItems.looseRock;
 		else
 			return Item.getItemFromBlock(this);
 	}
@@ -127,7 +127,7 @@ public class BlockCobble extends BlockTerra
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
 		for(int i = 0; i < names.length; i++)
-			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "rocks/"+names[i]+" Cobble");
+			icons[i] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "rocks/"+names[i]+" Cobble");
 	}
 
 	@Override

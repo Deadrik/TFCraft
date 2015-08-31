@@ -40,19 +40,19 @@ import com.bioxx.tfc.api.Constant.Global;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.ModVersion, dependencies = Reference.ModDependencies, guiFactory = Reference.GUIFactory)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = Reference.MOD_DEPENDENCIES, guiFactory = Reference.GUI_FACTORY)
 public class TerraFirmaCraft
 {
-	public static final Logger log = LogManager.getLogger(Reference.ModName);
+	public static final Logger LOG = LogManager.getLogger(Reference.MOD_NAME);
 
-	@Instance(Reference.ModID)
+	@Instance(Reference.MOD_ID)
 	public static TerraFirmaCraft instance;
 
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
 	public static CommonProxy proxy;
 
 	// The packet pipeline
-	public static final PacketPipeline packetPipeline = new PacketPipeline();
+	public static final PacketPipeline PACKET_PIPELINE = new PacketPipeline();
 
 	public TerraFirmaCraft()
 	{
@@ -104,8 +104,8 @@ public class TerraFirmaCraft
 
 		//Register Generators
 		//Underground Lava
-		GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.Lava, 2, true, TFCOptions.lavaFissureRarity).setUnderground(true, 20).setSeed(1), 0);
-		GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.FreshWaterStationary, 2, false, TFCOptions.waterFissureRarity), 0);
+		GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.lava, 2, true, TFCOptions.lavaFissureRarity).setUnderground(true, 20).setSeed(1), 0);
+		GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.freshWaterStationary, 2, false, TFCOptions.waterFissureRarity), 0);
 		//Surface Hotsprings
 		GameRegistry.registerWorldGenerator(new WorldGenFissureCluster(), 1);
 		GameRegistry.registerWorldGenerator(new WorldGenOre(), 2);
@@ -141,7 +141,7 @@ public class TerraFirmaCraft
 	public void initialize(FMLInitializationEvent event)
 	{
 		// Register Packet Handler
-		packetPipeline.initalise();
+		PACKET_PIPELINE.initalise();
 
 		//Register our player tracker
 		FMLCommonHandler.instance().bus().register(new PlayerTracker());
@@ -192,19 +192,19 @@ public class TerraFirmaCraft
 		proxy.registerFluidIcons();
 
 		//Setup custom potion effects
-		TFCPotion.Setup();
+		TFCPotion.setup();
 
 		//Register all of the recipes
 		TFC_OreDictionary.registerOreDict();
 		Recipes.registerRecipes();
 
-		ItemHeat.SetupItemHeat();
+		ItemHeat.setupItemHeat();
 
 		TFC_Climate.initCache();
 
 		//Register TFC items with forge fuel handler.
 		//This is used by vanilla furnice and many other mods.
-		ItemSetup.registerFurniceFuel();
+		ItemSetup.registerFurnaceFuel();
 		GameRegistry.registerFuelHandler(new TFCFuelHandler());
 
 		//Register ChiselModes
@@ -218,7 +218,7 @@ public class TerraFirmaCraft
 	@EventHandler
 	public void postInit (FMLPostInitializationEvent evt)
 	{
-		packetPipeline.postInitialise();
+		PACKET_PIPELINE.postInitialise();
 
 		// Now that blocks are resisted, go ahead and do worldgen configs
 		TFC_ConfigFiles.reloadOres();
@@ -250,6 +250,6 @@ public class TerraFirmaCraft
 	@SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs)
 	{
-		if (eventArgs.modID.equals(Reference.ModID)) TFC_ConfigFiles.reloadAll();
+		if (eventArgs.modID.equals(Reference.MOD_ID)) TFC_ConfigFiles.reloadAll();
 	}
 }

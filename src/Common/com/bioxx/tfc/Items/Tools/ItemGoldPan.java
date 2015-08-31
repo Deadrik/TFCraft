@@ -29,8 +29,8 @@ import com.bioxx.tfc.api.Enums.EnumSize;
 
 public class ItemGoldPan extends ItemTerra
 {
-	public static String[] MetaNames = {"", "Sand", "Gravel", "Clay", "Dirt"};
-	public IIcon[] icons = new IIcon[MetaNames.length];
+	public static String[] metaNames = {"", "Sand", "Gravel", "Clay", "Dirt"};
+	public IIcon[] icons = new IIcon[metaNames.length];
 
 	//private int useTimer = 0;
 	public ItemGoldPan() 
@@ -38,7 +38,7 @@ public class ItemGoldPan extends ItemTerra
 		super();
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		setCreativeTab(TFCTabs.TFCTools);
+		setCreativeTab(TFCTabs.TFC_TOOLS);
 	}
 
 	@Override
@@ -77,11 +77,11 @@ public class ItemGoldPan extends ItemTerra
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		icons[0] = registerer.registerIcon(Reference.ModID + ":" + "tools/GoldPan_0");
-		icons[1] = registerer.registerIcon(Reference.ModID + ":" + "tools/GoldPan_1");
-		icons[2] = registerer.registerIcon(Reference.ModID + ":" + "tools/GoldPan_2");
-		icons[3] = registerer.registerIcon(Reference.ModID + ":" + "tools/GoldPan_3");
-		icons[4] = registerer.registerIcon(Reference.ModID + ":" + "tools/GoldPan_4");
+		icons[0] = registerer.registerIcon(Reference.MOD_ID + ":" + "tools/GoldPan_0");
+		icons[1] = registerer.registerIcon(Reference.MOD_ID + ":" + "tools/GoldPan_1");
+		icons[2] = registerer.registerIcon(Reference.MOD_ID + ":" + "tools/GoldPan_2");
+		icons[3] = registerer.registerIcon(Reference.MOD_ID + ":" + "tools/GoldPan_3");
+		icons[4] = registerer.registerIcon(Reference.MOD_ID + ":" + "tools/GoldPan_4");
 	}
 
 	@Override
@@ -159,7 +159,7 @@ public class ItemGoldPan extends ItemTerra
 
 							if(type != -1)
 							{
-								ItemStack out = new ItemStack(TFCItems.SmallOreChunk, 1, type);
+								ItemStack out = new ItemStack(TFCItems.smallOreChunk, 1, type);
 								world.playSoundAtEntity(player, "random.pop", 0.7F, world.rand.nextFloat() + 1);
 								if(!player.inventory.addItemStackToInventory(out))
 								{
@@ -169,7 +169,7 @@ public class ItemGoldPan extends ItemTerra
 							}
 							uses--;
 							if(uses > 0)
-								is.setItemDamage((is.getItemDamage() & 15) + (uses << 4));
+								is.setItemDamage((is.getItemDamage() & 15) + (uses << 4)); //NOPMD
 							else
 							{
 								if (world.rand.nextInt(100) == 0)
@@ -195,9 +195,9 @@ public class ItemGoldPan extends ItemTerra
 	private int getMetalToDrop(World world, EntityPlayer player, int x, int y, int z)
 	{
 		int type = -1;
-		int chunk_X = (x >> 4) << 4;
-		int chunk_Z = (z >> 4) << 4;
-		Random rand = new Random(world.getSeed() + ((chunk_X >> 3) - (chunk_Z >> 3)) * (chunk_Z >> 3));
+		int chunkX = (x >> 4) << 4;
+		int chunkZ = (z >> 4) << 4;
+		Random rand = new Random(world.getSeed() + ((chunkX >> 3) - (chunkZ >> 3)) * (chunkZ >> 3));
 		int randType = rand.nextInt(100);
 		SkillRank rank = TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_PROSPECTING);
 		float skillMod = 1-rank.ordinal()*0.111f;

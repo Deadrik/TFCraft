@@ -17,7 +17,7 @@ public class EntityBlazeTFC extends EntityBlaze
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(TFC_MobData.BlazeDamage);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.BlazeHealth);//MaxHealth
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(TFC_MobData.BLAZE_DAMAGE);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.BLAZE_HEALTH);//MaxHealth
 	}
 }

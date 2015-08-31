@@ -29,7 +29,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	{
 		super();
 		this.setMaxStackSize(1);
-		setCreativeTab(TFCTabs.TFCFoods);
+		setCreativeTab(TFCTabs.TFC_FOODS);
 		this.setFolder("tools/");
 	}
 
@@ -105,7 +105,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 
 			TFC_Core.setPlayerFoodStats(player, foodstats);
 
-			is = new ItemStack(TFCItems.WoodenBucketEmpty);
+			is = new ItemStack(TFCItems.woodenBucketEmpty);
 			is.stackTagCompound = null;
 		}
 		return is;
@@ -161,7 +161,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	@Override
 	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k) 
 	{
-		return new ItemStack(TFCItems.WoodenBucketEmpty);
+		return new ItemStack(TFCItems.woodenBucketEmpty);
 	}
 
 	@Override

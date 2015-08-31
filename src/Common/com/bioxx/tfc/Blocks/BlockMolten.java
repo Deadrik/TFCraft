@@ -24,8 +24,8 @@ public class BlockMolten extends BlockTerra
 	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z)
 	{
-		int _meta = world.getBlockMetadata(x, y, z);
-		if((_meta & 8) > 0)
+		int meta = world.getBlockMetadata(x, y, z);
+		if((meta & 8) > 0)
 			return 15;
 		return 0;
 	}
@@ -49,8 +49,8 @@ public class BlockMolten extends BlockTerra
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Molten Rock");
-		moltenOff = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Molten Rock Off");
+		this.blockIcon = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Molten Rock");
+		moltenOff = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Molten Rock Off");
 	}
 
 	@Override

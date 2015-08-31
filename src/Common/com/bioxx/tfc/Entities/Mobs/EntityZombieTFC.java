@@ -47,8 +47,8 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(TFC_MobData.ZombieDamage);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.ZombieHealth);//MaxHealth
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(TFC_MobData.ZOMBIE_DAMAGE);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.ZOMBIE_HEALTH);//MaxHealth
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 		int z = MathHelper.floor_double(this.posZ);
 		Block b = this.worldObj.getBlock(x, y, z);
 
-		if(b == TFCBlocks.Leaves || b == TFCBlocks.Leaves2 || b == TFCBlocks.Thatch)
+		if(b == TFCBlocks.leaves || b == TFCBlocks.leaves2 || b == TFCBlocks.thatch)
 			return false;
 
 		return super.getCanSpawnHere();
@@ -83,26 +83,26 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 		switch (this.rand.nextInt(3))
 		{
 		case 0:
-			Random R0 = new Random();
-			if (R0.nextInt(3) == 0)
-				this.dropItem(TFCItems.WroughtIronIngot, 1);
+			Random r0 = new Random();
+			if (r0.nextInt(3) == 0)
+				this.dropItem(TFCItems.wroughtIronIngot, 1);
 			break;
 		case 1:
-			ItemStack is1 = new ItemStack(TFCItems.Carrot);
-			Random R1 = new Random();
-			if(R1.nextInt(100) < 100)
+			ItemStack is1 = new ItemStack(TFCItems.carrot);
+			Random r1 = new Random();
+			if(r1.nextInt(100) < 100)
 			{
-				float weight = CropIndex.getWeight(30.0f, R1);
+				float weight = CropIndex.getWeight(30.0f, r1);
 				ItemFoodTFC.createTag(is1, weight, weight/2);
 				entityDropItem(is1, 0);
 			}
 			break;
 		case 2:
-			ItemStack is2 = new ItemStack(TFCItems.Potato);
-			Random R2 = new Random();
-			if(R2.nextInt(100) < 100)
+			ItemStack is2 = new ItemStack(TFCItems.potato);
+			Random r2 = new Random();
+			if(r2.nextInt(100) < 100)
 			{
-				float weight = CropIndex.getWeight(55.0f, R2);
+				float weight = CropIndex.getWeight(55.0f, r2);
 				ItemFoodTFC.createTag(is2, weight, weight/2);
 				entityDropItem(is2, 0);
 			}
@@ -123,9 +123,9 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 		{
 			int var1 = this.rand.nextInt(3);
 			if (var1 == 0)
-				this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.BronzePick));
+				this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.bronzePick));
 			else
-				this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.BronzeShovel));
+				this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.bronzeShovel));
 		}
 	}
 

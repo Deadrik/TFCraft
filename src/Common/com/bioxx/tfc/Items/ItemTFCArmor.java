@@ -30,8 +30,8 @@ import com.bioxx.tfc.api.Interfaces.ISize;
 
 public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 {
-	private static final String[] leatherNames = new String[] {"leather_helmet_overlay", "leather_chestplate_overlay", "leather_leggings_overlay", "leather_boots_overlay"};
-	public Armor ArmorType;
+	private static final String[] LEATHER_NAMES = new String[] {"leather_helmet_overlay", "leather_chestplate_overlay", "leather_leggings_overlay", "leather_boots_overlay"};
+	public Armor armorTypeTFC;
 	public IIcon overlayIcon;
 	private int thermal;
 	//private int type;
@@ -40,19 +40,19 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	public ItemTFCArmor(Armor armor, int renderIndex, int armorSlot, int thermal, int type)
 	{
 		super(ArmorMaterial.IRON, renderIndex, armorSlot%4);
-		ArmorType = armor;
+		armorTypeTFC = armor;
 		this.trueType = armorSlot;
-		this.setCreativeTab(TFCTabs.TFCArmor);
-		this.setMaxDamage(ArmorType.getDurability(armorSlot));
+		this.setCreativeTab(TFCTabs.TFC_ARMOR);
+		this.setMaxDamage(armorTypeTFC.getDurability(armorSlot));
 	}
 
 	public ItemTFCArmor(Armor armor, int renderIndex, int armorSlot, ArmorMaterial m, int thermal, int type)
 	{
 		super(m, renderIndex, armorSlot%4);
-		ArmorType = armor;
+		armorTypeTFC = armor;
 		this.trueType = armorSlot;
-		this.setCreativeTab(TFCTabs.TFCArmor);
-		this.setMaxDamage(ArmorType.getDurability(armorSlot));
+		this.setCreativeTab(TFCTabs.TFC_ARMOR);
+		this.setMaxDamage(armorTypeTFC.getDurability(armorSlot));
 	}
 
 	@Override
@@ -81,10 +81,10 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 		if (this.getArmorMaterial() == ArmorMaterial.CLOTH)
 		{
 			this.itemIcon = registerer.registerIcon("minecraft:" + getIconString());
-			overlayIcon = registerer.registerIcon("minecraft:" + leatherNames[this.armorType]);
+			overlayIcon = registerer.registerIcon("minecraft:" + LEATHER_NAMES[this.armorType]);
 		}
 		else
-			this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "armor/"+this.getUnlocalizedName().replace("item.", ""));
+			this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + "armor/"+this.getUnlocalizedName().replace("item.", ""));
 	}
 
 	@Override
@@ -127,9 +127,9 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 		if (TFC_Core.showShiftInformation()) 
 		{
 			arraylist.add(EnumChatFormatting.WHITE + TFC_Core.translate("gui.Advanced") + ":");
-			arraylist.add(EnumChatFormatting.ITALIC + TFC_Core.translate("gui.Armor.Pierce") + ": " + EnumChatFormatting.AQUA + ArmorType.getPiercingAR());
-			arraylist.add(EnumChatFormatting.ITALIC + TFC_Core.translate("gui.Armor.Slash") + ": " + EnumChatFormatting.AQUA + ArmorType.getSlashingAR());
-			arraylist.add(EnumChatFormatting.ITALIC + TFC_Core.translate("gui.Armor.Crush") + ": " + EnumChatFormatting.AQUA + ArmorType.getCrushingAR());
+			arraylist.add(EnumChatFormatting.ITALIC + TFC_Core.translate("gui.Armor.Pierce") + ": " + EnumChatFormatting.AQUA + armorTypeTFC.getPiercingAR());
+			arraylist.add(EnumChatFormatting.ITALIC + TFC_Core.translate("gui.Armor.Slash") + ": " + EnumChatFormatting.AQUA + armorTypeTFC.getSlashingAR());
+			arraylist.add(EnumChatFormatting.ITALIC + TFC_Core.translate("gui.Armor.Crush") + ": " + EnumChatFormatting.AQUA + armorTypeTFC.getCrushingAR());
 			arraylist.add("");
 			if (is.hasTagCompound())
 			{
@@ -190,8 +190,8 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
-		String m = ArmorType.metaltype.replace(" ", "").toLowerCase();
-		return Reference.ModID + String.format(":textures/models/armor/%s_%d%s.png",
+		String m = armorTypeTFC.metaltype.replace(" ", "").toLowerCase();
+		return Reference.MOD_ID + String.format(":textures/models/armor/%s_%d%s.png",
 				m, (slot == 2 ? 2 : 1), type == null ? "" : String.format("_%s", type));
 	}
 

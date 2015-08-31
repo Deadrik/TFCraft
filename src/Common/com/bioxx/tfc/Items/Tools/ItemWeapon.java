@@ -43,7 +43,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 		this.setMaxDamage(par2.getMaxUses());
 		weaponBaseDamage = damage;
 		this.toolMat = par2;
-		setCreativeTab(TFCTabs.TFCWeapons);
+		setCreativeTab(TFCTabs.TFC_WEAPONS);
 		setNoRepair();
 	}
 
@@ -58,7 +58,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	{
 		NBTTagCompound nbt = stack.getTagCompound();
 		if(pass == 1 && nbt != null && nbt.hasKey("broken"))
-			return TFC_Textures.BrokenItem;
+			return TFC_Textures.brokenItem;
 		else
 			return getIconFromDamageForRenderPass(stack.getItemDamage(), pass);
 	}
@@ -84,7 +84,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/"+this.getUnlocalizedName().replace("item.", ""));
+		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + "tools/"+this.getUnlocalizedName().replace("item.", ""));
 	}
 
 	@Override
@@ -104,7 +104,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	{
 		MovingObjectPosition mop = Helper.getMouseOverObject(player, player.worldObj);
 
-		if(mop != null && world.getBlock(mop.blockX, mop.blockY, mop.blockZ) == TFCBlocks.ToolRack)
+		if(mop != null && world.getBlock(mop.blockX, mop.blockY, mop.blockZ) == TFCBlocks.toolRack)
 			return is;
 
 		player.setItemInUse(is, this.getMaxItemUseDuration(is));

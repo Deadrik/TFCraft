@@ -12,7 +12,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class ItemReeds extends Item
 {
-	private Block reeds = TFCBlocks.Reeds;
+	private Block reeds = TFCBlocks.reeds;
 
 	public ItemReeds()
 	{
@@ -31,7 +31,7 @@ public class ItemReeds extends Item
 		{
 			side = 1;
 		}
-		else if (block != TFCBlocks.Vine && block != TFCBlocks.TallGrass && block != Blocks.deadbush)
+		else if (block != TFCBlocks.vine && block != TFCBlocks.tallGrass && block != Blocks.deadbush)
 		{
 			if (side == 0) --y;
 			if (side == 1) ++y;

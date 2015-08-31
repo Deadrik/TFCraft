@@ -21,7 +21,7 @@ public class SoundHandler
 				event.result = null;
 			else
 			{
-				iSound = PositionedSoundRecord.func_147673_a(new ResourceLocation(Reference.ModID + ":music.tfc"));
+				iSound = PositionedSoundRecord.func_147673_a(new ResourceLocation(Reference.MOD_ID + ":music.tfc"));
 				event.result = iSound;
 			}
 		}

@@ -12,10 +12,10 @@ public class WorldGenFlowers
 	public static void generate(World world, Random random, int chunkX, int chunkZ, int flowersPerChunk)
 	{
 		int flowerType = new Random(world.getSeed() + ((chunkX >> 7) - (chunkZ >> 7)) * (chunkZ >> 7)).nextInt(14);
-		BlockFlower plantBlock = (BlockFlower) TFCBlocks.Flowers;
+		BlockFlower plantBlock = (BlockFlower) TFCBlocks.flowers;
 		if(flowerType > 5)
 		{
-			plantBlock = (BlockFlower) TFCBlocks.Flowers2;
+			plantBlock = (BlockFlower) TFCBlocks.flowers2;
 			flowerType -= 5;
 		}
 		if(random.nextInt(flowersPerChunk) != 0)

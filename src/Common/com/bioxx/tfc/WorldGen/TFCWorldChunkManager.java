@@ -39,11 +39,11 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		this.biomesToSpawnIn = new ArrayList<BiomeGenBase>();
 		//this.biomesToSpawnIn.add(TFCBiome.beach);
 		this.biomesToSpawnIn.add(BiomeGenBase.forest); // There is no TFCBiome.forest
-		this.biomesToSpawnIn.add(TFCBiome.plains);
-		this.biomesToSpawnIn.add(TFCBiome.rollingHills);
-		this.biomesToSpawnIn.add(TFCBiome.swampland);
-		this.biomesToSpawnIn.add(TFCBiome.Mountains);
-		this.biomesToSpawnIn.add(TFCBiome.HighPlains);
+		this.biomesToSpawnIn.add(TFCBiome.PLAINS);
+		this.biomesToSpawnIn.add(TFCBiome.ROLLING_HILLS);
+		this.biomesToSpawnIn.add(TFCBiome.SWAMPLAND);
+		this.biomesToSpawnIn.add(TFCBiome.MOUNTAINS);
+		this.biomesToSpawnIn.add(TFCBiome.HIGH_PLAINS);
 	}
 
 	public TFCWorldChunkManager(World world)
@@ -52,17 +52,17 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		worldObj = world;
 	}
 
-	public TFCWorldChunkManager(long Seed, WorldType worldtype)
+	public TFCWorldChunkManager(long genSeed, WorldType worldtype)
 	{
 		this();
-		seed = Seed;
+		seed = genSeed;
 		//TerraFirmaCraft.log.info("================= "+worldtype.getWorldTypeName()+" =================");
 		// Making sure that only TFC World Types can be used
 		GenLayerTFC[] var4;
-		if(worldtype == TFCWorldType.FLAT)
-			var4 = GenLayerTFC.initialize(Seed, TFCWorldType.FLAT);
+		if(worldtype == TFCWorldType.flatWorldType)
+			var4 = GenLayerTFC.initialize(genSeed, TFCWorldType.flatWorldType);
 		else
-			var4 = GenLayerTFC.initialize(Seed, TFCWorldType.DEFAULT);
+			var4 = GenLayerTFC.initialize(genSeed, TFCWorldType.defaultWorldType);
 
 		this.genBiomes = var4[0];
 		this.biomeIndexLayer = var4[1];

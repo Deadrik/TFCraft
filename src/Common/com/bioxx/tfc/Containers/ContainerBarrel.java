@@ -42,8 +42,8 @@ public class ContainerBarrel extends ContainerTFC
 
 	public static ArrayList<Item> getExceptions(){
 		ArrayList<Item> exceptions = new ArrayList<Item>();
-		exceptions.add(Item.getItemFromBlock(TFCBlocks.Barrel));
-		exceptions.add(Item.getItemFromBlock(TFCBlocks.Vessel));
+		exceptions.add(Item.getItemFromBlock(TFCBlocks.barrel));
+		exceptions.add(Item.getItemFromBlock(TFCBlocks.vessel));
 		return exceptions;
 	}
 
@@ -172,7 +172,7 @@ public class ContainerBarrel extends ContainerTFC
 			{
 				this.barrel.fluid = new FluidStack(val, 1000);
 			}
-			barrel.ProcessItems();
+			barrel.processItems();
 		}
 		else if (id == 1)
 		{
@@ -182,7 +182,7 @@ public class ContainerBarrel extends ContainerTFC
 		else if (id == 2)
 		{
 			this.barrel.sealtime = val;
-			barrel.ProcessItems();
+			barrel.processItems();
 		}
 	}
 }

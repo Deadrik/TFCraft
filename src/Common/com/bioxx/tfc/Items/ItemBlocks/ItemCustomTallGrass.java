@@ -14,7 +14,7 @@ public class ItemCustomTallGrass extends ItemTerraBlock
 	public ItemCustomTallGrass(Block b)
 	{
 		super(b);
-		MetaNames = new String[] {"tallgrass", "fern", "shortgrass"};
+		metaNames = new String[] {"tallgrass", "fern", "shortgrass"};
 	}
 
 	@Override
@@ -28,6 +28,6 @@ public class ItemCustomTallGrass extends ItemTerraBlock
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int par1)
 	{
-		return TFCBlocks.TallGrass.getIcon(0, par1);
+		return TFCBlocks.tallGrass.getIcon(0, par1);
 	}
 }

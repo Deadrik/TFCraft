@@ -10,7 +10,7 @@ import com.bioxx.tfc.TileEntities.TELogPile;
 
 public class GuiLogPile extends GuiContainerTFC
 {
-	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_logpile.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_logpile.png");
 
 	public GuiLogPile(InventoryPlayer inventoryplayer, TELogPile te, World world, int x, int y, int z)
 	{

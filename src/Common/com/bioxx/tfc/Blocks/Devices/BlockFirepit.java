@@ -53,7 +53,7 @@ public class BlockFirepit extends BlockTerraContainer
 		{
 			return true;
 		}
-		else if(item == TFCItems.FireStarter || item == TFCItems.FlintSteel)
+		else if(item == TFCItems.fireStarter || item == TFCItems.flintSteel)
 		{
 			if((TEFirepit)world.getTileEntity(x, y, z) != null)
 			{
@@ -89,7 +89,7 @@ public class BlockFirepit extends BlockTerraContainer
 	@Override
 	public int getRenderType()
 	{
-		return TFCBlocks.FirepitRenderId;
+		return TFCBlocks.firepitRenderId;
 	}
 
 	@Override
@@ -174,26 +174,26 @@ public class BlockFirepit extends BlockTerraContainer
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int meta)
 	{
-		Eject(world, x, y, z);
+		eject(world, x, y, z);
 	}
 
 	@Override
 	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion exp)
 	{
-		Eject(world, x, y, z);
+		eject(world, x, y, z);
 	}
 
 	@Override
 	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta)
 	{
-		Eject(world, x, y, z);
+		eject(world, x, y, z);
 	}
 
 	//public void onBlockRemoval(World world, int x, int y, int z) {Eject(world, x, y, z);}
 
-	public void Eject(World world, int x, int y, int z)
+	public void eject(World world, int x, int y, int z)
 	{
-		if((TEFirepit)world.getTileEntity(x, y, z) != null)
+		if (world.getTileEntity(x, y, z) instanceof TEFirepit)
 		{
 			TEFirepit te = (TEFirepit)world.getTileEntity(x, y, z);
 			te.ejectContents();
@@ -216,8 +216,8 @@ public class BlockFirepit extends BlockTerraContainer
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		textureOn = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Firepit On");
-		textureOff = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Firepit Off");
+		textureOn = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Firepit On");
+		textureOff = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Firepit Off");
 	}
 
 	@Override
@@ -233,7 +233,7 @@ public class BlockFirepit extends BlockTerraContainer
 	@SideOnly(Side.CLIENT)
 	public String getItemIconName()
 	{
-		return Reference.ModID + ":" + "devices/firepit";
+		return Reference.MOD_ID + ":" + "devices/firepit";
 	}
 	
 	/**

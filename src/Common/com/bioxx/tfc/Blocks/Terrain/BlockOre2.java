@@ -44,12 +44,12 @@ public class BlockOre2 extends BlockOre
 		int count = quantityDropped(metadata, fortune, world.rand);
 		for (int i = 0; i < count; i++)
 		{
-			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, damageDropped(metadata));
+			ItemStack itemstack = new ItemStack(TFCItems.oreChunk, 1, damageDropped(metadata));
 
 			if (metadata == 5)
-				itemstack = KimberliteGemSpawn(); //Drop diamonds
+				itemstack = kimberliteGemSpawn(); //Drop diamonds
 			else if (metadata == 13)
-				itemstack = new ItemStack(TFCItems.Powder, 1, 4);
+				itemstack = new ItemStack(TFCItems.powder, 1, 4);
 
 			if (itemstack != null)
 			{
@@ -72,12 +72,12 @@ public class BlockOre2 extends BlockOre
 			}
 			Random random = new Random();
 	
-			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1 , damageDropped(meta));
+			ItemStack itemstack = new ItemStack(TFCItems.oreChunk, 1 , damageDropped(meta));
 	
 			if(meta == 5)
-				itemstack = KimberliteGemSpawn(); //Drop diamonds
+				itemstack = kimberliteGemSpawn(); //Drop diamonds
 			else if(meta == 13)
-				itemstack = new ItemStack(TFCItems.Powder, 1 + random.nextInt(3), 4);
+				itemstack = new ItemStack(TFCItems.powder, 1 + random.nextInt(3), 4);
 	
 			if (itemstack != null)
 			{
@@ -96,19 +96,19 @@ public class BlockOre2 extends BlockOre
 		return world.setBlockToAir(x, y, z);
 	}
 
-	public ItemStack KimberliteGemSpawn()
+	public ItemStack kimberliteGemSpawn()
 	{
 		Random random = new Random();
 		if(random.nextInt(25) == 0)
-			return new ItemStack(TFCItems.GemDiamond, 1, 0);
+			return new ItemStack(TFCItems.gemDiamond, 1, 0);
 		if(random.nextInt(50) == 0)
-			return new ItemStack(TFCItems.GemDiamond, 1, 1);
+			return new ItemStack(TFCItems.gemDiamond, 1, 1);
 		if(random.nextInt(75) == 0)
-			return new ItemStack(TFCItems.GemDiamond, 1, 2);
+			return new ItemStack(TFCItems.gemDiamond, 1, 2);
 		if(random.nextInt(150) == 0)
-			return new ItemStack(TFCItems.GemDiamond, 1, 3);
+			return new ItemStack(TFCItems.gemDiamond, 1, 3);
 		if(random.nextInt(300) == 0)
-			return new ItemStack(TFCItems.GemDiamond, 1, 4);
+			return new ItemStack(TFCItems.gemDiamond, 1, 4);
 		else
 			return null;
 	}
@@ -164,12 +164,12 @@ public class BlockOre2 extends BlockOre
 		Random random = new Random();
 		ItemStack itemstack;
 		int meta = world.getBlockMetadata(x, y, z);
-		itemstack  = new ItemStack(TFCItems.OreChunk, 1, meta + 16);
+		itemstack  = new ItemStack(TFCItems.oreChunk, 1, meta + 16);
 
 		if(meta == 5)
-			itemstack = KimberliteGemSpawn();
+			itemstack = kimberliteGemSpawn();
 		else if (meta == 13)
-			itemstack = new ItemStack(TFCItems.Powder, 1 + random.nextInt(3), 4);
+			itemstack = new ItemStack(TFCItems.powder, 1 + random.nextInt(3), 4);
 
 		if (itemstack != null)
 			dropBlockAsItem(world, x, y, z, itemstack);

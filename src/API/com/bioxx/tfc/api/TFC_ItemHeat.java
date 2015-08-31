@@ -207,7 +207,7 @@ public class TFC_ItemHeat
 		HeatRegistry manager = HeatRegistry.getInstance();
 		if(manager!=null)
 		{
-			HeatIndex hi = manager.findMatchingIndex(new ItemStack(m.MeltedItem));
+			HeatIndex hi = manager.findMatchingIndex(new ItemStack(m.meltedItem));
 			if(hi != null)
 				return hi.meltTemp;
 			else

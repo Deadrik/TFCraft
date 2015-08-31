@@ -19,11 +19,11 @@ import com.google.common.collect.Sets;
 
 public class ItemChisel extends ItemTerraTool implements IToolChisel
 {
-	private static final Set<Block> blocks = Sets.newHashSet(new Block[] {});
+	private static final Set<Block> BLOCKS = Sets.newHashSet(new Block[] {});
 
 	public ItemChisel(ToolMaterial e)
 	{
-		super(0, e, blocks);
+		super(0, e, BLOCKS);
 		this.setMaxDamage(e.getMaxUses() / 2);
 	}
 

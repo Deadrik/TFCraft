@@ -20,14 +20,14 @@ public class EnteringChunkHandler
 			if(!player.worldObj.isRemote)
 			{
 				NBTTagCompound nbt = player.getEntityData();
-				long spawnProtectionTimer = nbt.hasKey("spawnProtectionTimer") ? nbt.getLong("spawnProtectionTimer") : TFC_Time.getTotalTicks() + TFC_Time.hourLength;
+				long spawnProtectionTimer = nbt.hasKey("spawnProtectionTimer") ? nbt.getLong("spawnProtectionTimer") : TFC_Time.getTotalTicks() + TFC_Time.HOUR_LENGTH;
 
 
 				if(event.newChunkX != event.oldChunkX || event.newChunkZ != event.oldChunkZ )
 				{
 					TFC_Core.getCDM(event.entity.worldObj).setLastVisted(event.oldChunkX, event.oldChunkZ);
 					//Reset the timer since we've entered a new chunk
-					spawnProtectionTimer = TFC_Time.getTotalTicks() + TFC_Time.hourLength;
+					spawnProtectionTimer = TFC_Time.getTotalTicks() + TFC_Time.HOUR_LENGTH;
 					writeProtectionToNBT(nbt, spawnProtectionTimer);
 				}
 			}

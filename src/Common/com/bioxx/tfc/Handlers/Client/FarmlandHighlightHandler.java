@@ -29,7 +29,7 @@ import com.bioxx.tfc.api.Constant.Global;
 public class FarmlandHighlightHandler
 {
 	@SubscribeEvent
-	public void DrawBlockHighlightEvent(DrawBlockHighlightEvent evt)
+	public void drawBlockHighlightEvent(DrawBlockHighlightEvent evt)
 	{
 		World world = evt.player.worldObj;
 		double var8 = evt.player.lastTickPosX + (evt.player.posX - evt.player.lastTickPosX) * evt.partialTicks;
@@ -39,10 +39,10 @@ public class FarmlandHighlightHandler
 		boolean isMetalHoe = false;
 
 		if(evt.currentItem != null &&
-				evt.currentItem.getItem() != TFCItems.IgInHoe &&
-				evt.currentItem.getItem() != TFCItems.IgExHoe &&
-				evt.currentItem.getItem() != TFCItems.SedHoe &&
-				evt.currentItem.getItem() != TFCItems.MMHoe)
+				evt.currentItem.getItem() != TFCItems.igInHoe &&
+				evt.currentItem.getItem() != TFCItems.igExHoe &&
+				evt.currentItem.getItem() != TFCItems.sedHoe &&
+				evt.currentItem.getItem() != TFCItems.mMHoe)
 		{
 			isMetalHoe = true;
 		}
@@ -57,7 +57,7 @@ public class FarmlandHighlightHandler
 
 			Block b = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
 			int crop = 0;
-			if(b == TFCBlocks.Crops && (
+			if(b == TFCBlocks.crops && (
 					world.getBlock(evt.target.blockX, evt.target.blockY - 1, evt.target.blockZ) == TFCBlocks.tilledSoil ||
 					world.getBlock(evt.target.blockX, evt.target.blockY - 1, evt.target.blockZ) == TFCBlocks.tilledSoil2))
 			{
@@ -189,7 +189,7 @@ public class FarmlandHighlightHandler
 		{
 			Block b = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
 			int crop = 0;
-			if(b == TFCBlocks.Crops && (
+			if(b == TFCBlocks.crops && (
 					world.getBlock(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil ||
 					world.getBlock(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil2))
 			{
@@ -228,7 +228,7 @@ public class FarmlandHighlightHandler
 				PlayerManagerTFC.getInstance().getClientPlayer().hoeMode == 3)
 		{
 			Block b = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
-			if(b == TFCBlocks.Crops && (
+			if(b == TFCBlocks.crops && (
 					world.getBlock(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil ||
 					world.getBlock(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil2))
 			{

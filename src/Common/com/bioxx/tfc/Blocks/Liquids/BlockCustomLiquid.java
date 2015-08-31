@@ -171,11 +171,11 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
 	{
 		Block plant = plantable.getPlant(world, x, y + 1, z);
-		if (plant == TFCBlocks.Cactus && this == TFCBlocks.Cactus)
+		if (plant == TFCBlocks.cactus && this == TFCBlocks.cactus)
 		{
 			return true;
 		}
-		if (plant == TFCBlocks.Reeds && this == TFCBlocks.Reeds)
+		if (plant == TFCBlocks.reeds && this == TFCBlocks.reeds)
 		{
 			return true;
 		}
@@ -193,7 +193,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 		case Nether: return this == Blocks.soul_sand;
 		case Crop:   return TFC_Core.isFarmland(this);
 		case Cave:   return isSideSolid(world, x, y, z, ForgeDirection.UP);
-		case Plains: return this == TFCBlocks.Grass || this == TFCBlocks.Grass2 || this == TFCBlocks.Dirt || this == TFCBlocks.Dirt2;
+		case Plains: return this == TFCBlocks.grass || this == TFCBlocks.grass2 || this == TFCBlocks.dirt || this == TFCBlocks.dirt2;
 		case Water:  return world.getBlock(x, y, z).getMaterial() == Material.water && world.getBlockMetadata(x, y, z) == 0;
 		case Beach:
 			boolean isBeach = TFC_Core.isGround(this);
@@ -216,9 +216,9 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 		Random rand = new Random();
 		boolean felsicLava = true;
 
-		if(this == TFCBlocks.StoneIgIn && (meta == 2 || meta == 1))
+		if(this == TFCBlocks.stoneIgIn && (meta == 2 || meta == 1))
 			felsicLava = false;
-		else if(this == TFCBlocks.StoneIgEx && (meta == 1 || meta == 2))
+		else if(this == TFCBlocks.stoneIgEx && (meta == 1 || meta == 2))
 			felsicLava = false;
 		if (typeOfLava == 0 || typeOfLava == 2) //non flowing rock
 		{
@@ -228,19 +228,19 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 					world.setBlock(par2, par3, par4, Blocks.obsidian);
 				else
 				{
-					world.setBlock(par2, par3, par4, TFCBlocks.StoneIgEx);
+					world.setBlock(par2, par3, par4, TFCBlocks.stoneIgEx);
 					world.setBlockMetadataWithNotify(par2, par3, par4, 0, 0);
 				}
 			}
 			else
 			{
-				world.setBlock(par2, par3, par4, TFCBlocks.StoneIgEx);
+				world.setBlock(par2, par3, par4, TFCBlocks.stoneIgEx);
 				world.setBlockMetadataWithNotify(par2, par3, par4, 1, 0);
 			}
 		}
 		else if (typeOfLava == 1)
 		{
-			world.setBlock(par2, par3, par4, TFCBlocks.StoneIgExCobble);
+			world.setBlock(par2, par3, par4, TFCBlocks.stoneIgExCobble);
 			if(felsicLava)
 				world.setBlockMetadataWithNotify(par2, par3, par4, 0, 0);
 			else
@@ -296,8 +296,8 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	public boolean func_149807_p(World world, int x, int y, int z)
 	{
 		Block block = world.getBlock(x, y, z);
-		if(block == TFCBlocks.Thatch || block == TFCBlocks.Barrel || block == TFCBlocks.Vessel || block == TFCBlocks.BerryBush || 
-				block == TFCBlocks.SmokeRack || block instanceof BlockCustomDoor || block == TFCBlocks.IngotPile)
+		if(block == TFCBlocks.thatch || block == TFCBlocks.barrel || block == TFCBlocks.vessel || block == TFCBlocks.berryBush || 
+				block == TFCBlocks.smokeRack || block instanceof BlockCustomDoor || block == TFCBlocks.ingotPile)
 			return false;
 		return super.func_149807_p(world, x, y, z);
 	}

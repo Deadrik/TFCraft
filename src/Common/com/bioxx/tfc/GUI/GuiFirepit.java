@@ -10,7 +10,7 @@ import com.bioxx.tfc.TileEntities.TEFirepit;
 
 public class GuiFirepit extends GuiContainerTFC
 {
-	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_firepit.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_firepit.png");
 
 	private TEFirepit firepitTE;
 

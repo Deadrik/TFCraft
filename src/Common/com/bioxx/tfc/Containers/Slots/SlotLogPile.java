@@ -17,7 +17,7 @@ public class SlotLogPile extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		return itemstack.getItem() == TFCItems.Logs;
+		return itemstack.getItem() == TFCItems.logs;
 	}
 
 	@Override

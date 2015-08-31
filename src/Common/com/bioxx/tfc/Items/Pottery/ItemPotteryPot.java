@@ -13,7 +13,7 @@ public class ItemPotteryPot extends ItemPotteryBase
 	public ItemPotteryPot()
 	{
 		super();
-		this.MetaNames = new String[]{"Clay Pot", "Ceramic Pot"};
+		this.metaNames = new String[]{"Clay Pot", "Ceramic Pot"};
 		this.setWeight(EnumWeight.LIGHT);
 		this.setSize(EnumSize.SMALL);
 		this.setCreativeTab(null);

@@ -69,12 +69,12 @@ public class BlockHotWater extends BlockCustomLiquid
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		icons = new IIcon[]{registerer.registerIcon(Reference.ModID + ":" +"water_still"), registerer.registerIcon(Reference.ModID + ":" +"water_flow")};
-		TFC_Textures.GasFXIcon = registerer.registerIcon(Reference.ModID + ":" + "Steam");
-		TFC_Textures.GuiInventory = registerer.registerIcon(Reference.ModID + ":" + "button_inv");
-		TFC_Textures.GuiSkills = registerer.registerIcon(Reference.ModID + ":" + "button_skills");
-		TFC_Textures.GuiCalendar = registerer.registerIcon(Reference.ModID + ":" + "button_calendar");
-		TFC_Textures.GuiHealth = registerer.registerIcon(Reference.ModID + ":" + "button_health");
+		icons = new IIcon[]{registerer.registerIcon(Reference.MOD_ID + ":" +"water_still"), registerer.registerIcon(Reference.MOD_ID + ":" +"water_flow")};
+		TFC_Textures.gasFXIcon = registerer.registerIcon(Reference.MOD_ID + ":" + "Steam");
+		TFC_Textures.guiInventory = registerer.registerIcon(Reference.MOD_ID + ":" + "button_inv");
+		TFC_Textures.guiSkills = registerer.registerIcon(Reference.MOD_ID + ":" + "button_skills");
+		TFC_Textures.guiCalendar = registerer.registerIcon(Reference.MOD_ID + ":" + "button_calendar");
+		TFC_Textures.guiHealth = registerer.registerIcon(Reference.MOD_ID + ":" + "button_health");
 	}
 
 	@Override

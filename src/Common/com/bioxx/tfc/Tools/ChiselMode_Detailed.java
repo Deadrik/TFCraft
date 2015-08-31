@@ -21,14 +21,14 @@ import com.bioxx.tfc.api.Tools.ChiselMode;
 public class ChiselMode_Detailed extends ChiselMode {
 
 	//private static String name;
-    private static ResourceLocation resourcelocation = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "icons.png");
-    private static int texture_u, texture_v, div;
+    private static ResourceLocation resourcelocation = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "icons.png");
+    private static int textureU, textureV, div;
     private static Random random = new Random();
 
     public ChiselMode_Detailed(String n){
 		//name = n;
-        texture_u = 60;
-        texture_v = 58;
+        textureU = 60;
+        textureV = 58;
         div = 8;
     }
 
@@ -39,15 +39,15 @@ public class ChiselMode_Detailed extends ChiselMode {
     }
 
 	@Override
-	public int getTexture_u()
+	public int getTextureU()
 	{
-        return texture_u;
+        return textureU;
     }
 
 	@Override
-	public int getTexture_v()
+	public int getTextureV()
 	{
-        return texture_v;
+        return textureV;
     }
 
 	@Override
@@ -91,10 +91,10 @@ public class ChiselMode_Detailed extends ChiselMode {
                 int extraX2 = 8 - (int) ((tep.extraData >> 12) & 0xf);
                 int extraY2 = 8 - (int) ((tep.extraData >> 16) & 0xf);
                 int extraZ2 = 8 - (int) ((tep.extraData >> 20) & 0xf);
-                world.setBlock(x, y, z, TFCBlocks.Detailed);
+                world.setBlock(x, y, z, TFCBlocks.detailed);
                 te = (TEDetailed) world.getTileEntity(x, y, z);
-                te.TypeID = tep.TypeID;
-                te.MetaID = tep.MetaID;
+                te.typeID = tep.typeID;
+                te.metaID = tep.metaID;
 
                 for (int subX = 0; subX < 8; subX++) {
                     for (int subZ = 0; subZ < 8; subZ++) {
@@ -109,11 +109,11 @@ public class ChiselMode_Detailed extends ChiselMode {
                 return true;
             } else {
                 //Material m = world.getBlock(x, y, z).getMaterial();
-                world.setBlock(x, y, z, TFCBlocks.Detailed);
+                world.setBlock(x, y, z, TFCBlocks.detailed);
 
                 te = (TEDetailed) world.getTileEntity(x, y, z);
-                te.TypeID = (short) Block.getIdFromBlock(id);
-                te.MetaID = (byte) meta;
+                te.typeID = (short) Block.getIdFromBlock(id);
+                te.metaID = (byte) meta;
 
                 for (int subX = 0; subX < 8; subX++) {
                     for (int subZ = 0; subZ < 8; subZ++) {

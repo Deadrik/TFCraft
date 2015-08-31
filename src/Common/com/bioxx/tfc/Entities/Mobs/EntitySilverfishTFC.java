@@ -18,8 +18,8 @@ public class EntitySilverfishTFC extends EntitySilverfish
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(TFC_MobData.SilverfishDamage);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.SilverfishHealth);//MaxHealth
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(TFC_MobData.SILVERFISH_DAMAGE);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.SILVERFISH_HEALTH);//MaxHealth
 	}
 
 	/**

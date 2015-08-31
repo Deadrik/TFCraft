@@ -15,11 +15,11 @@ import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
 @SideOnly(Side.CLIENT)
 public class GuiScreenHorseInventoryTFC extends GuiContainerTFC
 {
-	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_horse.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_horse.png");
 	//private IInventory invHorse;
 	private EntityHorseTFC horse;
-	private float field_110416_x;
-	private float field_110415_y;
+	private float xSize;
+	private float ySize;
 
 	public GuiScreenHorseInventoryTFC(InventoryPlayer playerInv, IInventory horseInv, EntityHorseTFC entityHorse)
 	{
@@ -62,7 +62,7 @@ public class GuiScreenHorseInventoryTFC extends GuiContainerTFC
 		}
 
 		// Draw the horse in the box.
-		GuiInventory.func_147046_a(guiLeft + 51, guiTop + 60, 17, guiLeft + 51 - this.field_110416_x, guiTop + 75 - 50 - this.field_110415_y, this.horse);
+		GuiInventory.func_147046_a(guiLeft + 51, guiTop + 60, 17, guiLeft + 51 - this.xSize, guiTop + 75 - 50 - this.ySize, this.horse);
 	}
 
 	/**
@@ -71,8 +71,8 @@ public class GuiScreenHorseInventoryTFC extends GuiContainerTFC
 	@Override
 	public void drawScreen(int par1, int par2, float par3) // Don't know what this does, but not removing it
 	{
-		this.field_110416_x = par1;
-		this.field_110415_y = par2;
+		this.xSize = par1;
+		this.ySize = par2;
 		super.drawScreen(par1, par2, par3);
 	}
 }

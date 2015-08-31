@@ -29,8 +29,8 @@ public class ItemRawHide extends ItemLooseRock
 		super();
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
-		setCreativeTab(TFCTabs.TFCMaterials);
-		this.MetaNames = new String[]{"small","medium","large"};
+		setCreativeTab(TFCTabs.TFC_MATERIALS);
+		this.metaNames = new String[]{"small","medium","large"};
 		this.setWeight(EnumWeight.LIGHT);
 		this.setSize(EnumSize.MEDIUM);
 	}
@@ -41,22 +41,22 @@ public class ItemRawHide extends ItemLooseRock
 	{
 		if(!world.isRemote)
 		{
-			if(itemstack.getItem() == TFCItems.Hide && itemstack.getItemDamage() >= 2){
+			if(itemstack.getItem() == TFCItems.hide && itemstack.getItemDamage() >= 2){
 				int d = (int) ((45 + (entityplayer.rotationYaw % 360 + 360f) % 360) / 90) % 4; //direction
 				int x2 = x + (d == 1 ? -1 : d == 3 ? 1 : 0); // the x-coord of the second block
 				int z2 = z + (d == 2 ? -1 : d == 0 ? 1 : 0);
-				if(world.getBlock(x, y, z)==TFCBlocks.Thatch && side == 1 && world.getBlock(x2,y,z2)==TFCBlocks.Thatch
+				if(world.getBlock(x, y, z)==TFCBlocks.thatch && side == 1 && world.getBlock(x2,y,z2)==TFCBlocks.thatch
 						&& world.isAirBlock(x, y+1, z) && world.isAirBlock(x2, y+1, z2)){
 					world.func_147480_a/*destroyBlock*/(x, y, z, false);
 					world.func_147480_a/*destroyBlock*/(x2, y, z2, false);
-					world.setBlock(x, y, z, TFCBlocks.StrawHideBed, d, 2);
-					world.setBlock(x2, y, z2, TFCBlocks.StrawHideBed, d+8, 2);
+					world.setBlock(x, y, z, TFCBlocks.strawHideBed, d, 2);
+					world.setBlock(x2, y, z2, TFCBlocks.strawHideBed, d+8, 2);
 					itemstack.stackSize--;
 				}
 			}
-			else if(itemstack.getItem() == TFCItems.SoakedHide && side == ForgeDirection.UP.ordinal() )
+			else if(itemstack.getItem() == TFCItems.soakedHide && side == ForgeDirection.UP.ordinal() )
 			{
-				if(world.getBlock(x, y, z) instanceof BlockLogHoriz && world.isAirBlock( x, y + 1, z ) && world.setBlock(x, y+1, z, TFCBlocks.LeatherRack))
+				if(world.getBlock(x, y, z) instanceof BlockLogHoriz && world.isAirBlock( x, y + 1, z ) && world.setBlock(x, y+1, z, TFCBlocks.leatherRack))
 				{
 					TELeatherRack te = (TELeatherRack)world.getTileEntity(x, y+1, z);
 					te.setLeather(itemstack);
@@ -87,7 +87,7 @@ public class ItemRawHide extends ItemLooseRock
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", ""));
+		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", ""));
 	}
 
 	@Override

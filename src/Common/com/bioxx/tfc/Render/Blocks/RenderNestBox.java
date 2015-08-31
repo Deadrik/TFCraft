@@ -24,29 +24,29 @@ public class RenderNestBox  implements ISimpleBlockRenderingHandler
 		//IBlockAccess blockAccess = renderer.blockAccess;
 		renderer.renderAllFaces = true;
 		renderer.setRenderBounds(0.15F, 0.1F, 0.15F, 0.85F, 0.1F, 0.85F);
-		renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
+		renderer.renderStandardBlock(TFCBlocks.planks, i, j, k);
 
 		renderer.setRenderBounds(0.1F, 0F, 0.15F, 0.15F, 0.4F, 0.85F);
 		rotate(renderer, 1);
-		renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
+		renderer.renderStandardBlock(TFCBlocks.planks, i, j, k);
 		rotate(renderer, 0);
 		renderer.renderStandardBlock(block, i, j, k);
 
 		renderer.setRenderBounds(0.85F, 0F, 0.15F, 0.9F, 0.4F, 0.85F);
 		rotate(renderer, 1);
-		renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
+		renderer.renderStandardBlock(TFCBlocks.planks, i, j, k);
 		rotate(renderer, 0);
 		renderer.renderStandardBlock(block, i, j, k);
 
 		renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.9F, 0.4F, 0.15F);
 		rotate(renderer, 1);
-		renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
+		renderer.renderStandardBlock(TFCBlocks.planks, i, j, k);
 		rotate(renderer, 0);
 		renderer.renderStandardBlock(block, i, j, k);
 
 		renderer.setRenderBounds(0.1F, 0F, 0.85F, 0.9F, 0.4F, 0.9F);
 		rotate(renderer, 1);
-		renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
+		renderer.renderStandardBlock(TFCBlocks.planks, i, j, k);
 		rotate(renderer, 0);
 		renderer.renderStandardBlock(block, i, j, k);
 		renderer.renderAllFaces = false;
@@ -66,29 +66,29 @@ public class RenderNestBox  implements ISimpleBlockRenderingHandler
 	{
 		renderer.setRenderBounds(0.15F, 0.2F, 0.15F, 0.85F, 0.1F, 0.85F);
 		rotate(renderer, 1);
-		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
+		renderInvBlock(TFCBlocks.planks, metadata, renderer);
 
 		renderer.setRenderBounds(0.1F, 0F, 0.15F, 0.15F, 0.4F, 0.85F);
 		rotate(renderer, 1);
-		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
+		renderInvBlock(TFCBlocks.planks, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
 
 		renderer.setRenderBounds(0.85F, 0F, 0.15F, 0.9F, 0.4F, 0.85F);
 		rotate(renderer, 1);
-		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
+		renderInvBlock(TFCBlocks.planks, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
 
 		renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.9F, 0.4F, 0.15F);
 		rotate(renderer, 1);
-		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
+		renderInvBlock(TFCBlocks.planks, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
 
 		renderer.setRenderBounds(0.1F, 0F, 0.85F, 0.9F, 0.4F, 0.9F);
 		rotate(renderer, 1);
-		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
+		renderInvBlock(TFCBlocks.planks, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
 	}

@@ -24,8 +24,8 @@ public class ItemLeather extends ItemLooseRock
 	public ItemLeather() 
 	{
 		super();
-		this.setCreativeTab(TFCTabs.TFCMaterials);
-		this.MetaNames = null;
+		this.setCreativeTab(TFCTabs.TFC_MATERIALS);
+		this.metaNames = null;
 	}
 
 
@@ -85,7 +85,7 @@ public class ItemLeather extends ItemLooseRock
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", ""));
+		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", ""));
 	}
 
 	@Override

@@ -44,7 +44,7 @@ public class GenLayerLakes extends GenLayerTFC
 				if (isOceanic(var9))
 				{
 					if(!isOceanic(var10) && !isOceanic(var11) && !isOceanic(var12) && !isOceanic(var13))
-						var6[var8 + var7 * par3] = TFCBiome.lake.biomeID;
+						var6[var8 + var7 * par3] = TFCBiome.LAKE.biomeID;
 					else
 						var6[var8 + var7 * par3] = var9;
 				}
@@ -59,6 +59,6 @@ public class GenLayerLakes extends GenLayerTFC
 
 	private boolean isOceanic(int id)
 	{
-		return id == TFCBiome.ocean.biomeID || id == TFCBiome.DeepOcean.biomeID;
+		return id == TFCBiome.OCEAN.biomeID || id == TFCBiome.DEEP_OCEAN.biomeID;
 	}
 }

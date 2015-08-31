@@ -38,7 +38,7 @@ public class BlockCustomFenceGate extends BlockFenceGate implements ITileEntityP
 		woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
 		icons = new IIcon[woodNames.length];
-		this.setCreativeTab(TFCTabs.TFCDevices);
+		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 	}
 
 	@Override
@@ -72,13 +72,13 @@ public class BlockCustomFenceGate extends BlockFenceGate implements ITileEntityP
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
 		for(int i = 0; i < woodNames.length; i++)
-			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/" + woodNames[i] + " Plank");
+			icons[i] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "wood/" + woodNames[i] + " Plank");
 	}
 
 	@Override
 	public int getRenderType()
 	{
-		return TFCBlocks.FenceGateRenderId;
+		return TFCBlocks.fenceGateRenderId;
 	}
 
 	@Override
@@ -173,7 +173,7 @@ public class BlockCustomFenceGate extends BlockFenceGate implements ITileEntityP
 	@Override
 	public Block getBlockTypeForRender()
 	{
-		return TFCBlocks.FenceGate;
+		return TFCBlocks.fenceGate;
 	}
 
 	@Override

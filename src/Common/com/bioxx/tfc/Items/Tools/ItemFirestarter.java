@@ -38,7 +38,7 @@ public class ItemFirestarter extends ItemTerra
 		super();
 		this.setMaxDamage(8);
 		this.hasSubtypes = false;
-		setCreativeTab(TFCTabs.TFCTools);
+		setCreativeTab(TFCTabs.TFC_TOOLS);
 	}
 
 	@Override
@@ -59,13 +59,13 @@ public class ItemFirestarter extends ItemTerra
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack p_77661_1_)
+	public EnumAction getItemUseAction(ItemStack is)
 	{
 		return EnumAction.bow;
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack p_77626_1_)
+	public int getMaxItemUseDuration(ItemStack is)
 	{
 		return 20;
 	}
@@ -86,7 +86,7 @@ public class ItemFirestarter extends ItemTerra
 			double hitZ = mop.hitVec.zCoord;
 			int chance = world.rand.nextInt(100);
 
-			if(world.getBlock(x, y + 1, z) == TFCBlocks.Firepit)
+			if(world.getBlock(x, y + 1, z) == TFCBlocks.firepit)
 				player.stopUsingItem();
 
 			if(count > 0 && world.isRemote)
@@ -115,9 +115,9 @@ public class ItemFirestarter extends ItemTerra
 						for (Iterator iterator = list.iterator(); iterator.hasNext();)
 						{
 							EntityItem entity = (EntityItem)iterator.next();
-							if(entity.getEntityItem().getItem() == TFCItems.Straw)
+							if(entity.getEntityItem().getItem() == TFCItems.straw)
 								hasStraw = 40;
-							else if(entity.getEntityItem().getItem() == TFCItems.Stick)
+							else if(entity.getEntityItem().getItem() == TFCItems.stick)
 								numsticks+=entity.getEntityItem().stackSize;
 						}
 
@@ -126,10 +126,10 @@ public class ItemFirestarter extends ItemTerra
 							for (Iterator iterator = list.iterator(); iterator.hasNext();)
 							{
 								EntityItem entity = (EntityItem) iterator.next();
-								if (entity.getEntityItem().getItem() == TFCItems.Stick || entity.getEntityItem().getItem() == TFCItems.Straw)
+								if (entity.getEntityItem().getItem() == TFCItems.stick || entity.getEntityItem().getItem() == TFCItems.straw)
 									entity.setDead();
 							}
-							world.setBlock(x, y + 1, z, TFCBlocks.Firepit, 1, 2);
+							world.setBlock(x, y + 1, z, TFCBlocks.firepit, 1, 2);
 						}
 					}
 
@@ -140,7 +140,7 @@ public class ItemFirestarter extends ItemTerra
 				else if(isCoal)
 				{
 					if(chance > 70)
-						world.setBlock(x, y, z, TFCBlocks.Forge, 1, 2);
+						world.setBlock(x, y, z, TFCBlocks.forge, 1, 2);
 					stack.damageItem(1, player);
 				}
 				else if(isPottery)
@@ -148,7 +148,7 @@ public class ItemFirestarter extends ItemTerra
 					if(chance > 70)
 					{
 						TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
-						te.StartPitFire();
+						te.startPitFire();
 					}
 					stack.damageItem(1, player);
 				}
@@ -214,10 +214,10 @@ public class ItemFirestarter extends ItemTerra
 					&& block.getMaterial() != Material.wood
 					&& block.getMaterial() != Material.cloth
 					&& world.isAirBlock(x, y + 1, z)
-					&& block != TFCBlocks.Charcoal
+					&& block != TFCBlocks.charcoal
 					&& block != Blocks.coal_block;
-			isCoal = (block == TFCBlocks.Charcoal && world.getBlockMetadata(x, y, z) > 6 || block == Blocks.coal_block) && surroundRock && surroundSolids;
-			isPottery = block == TFCBlocks.Pottery && surroundSolids;
+			isCoal = (block == TFCBlocks.charcoal && world.getBlockMetadata(x, y, z) > 6 || block == Blocks.coal_block) && surroundRock && surroundSolids;
+			isPottery = block == TFCBlocks.pottery && surroundSolids;
 			if (isPottery)
 			{
 				isPottery = false;

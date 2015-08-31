@@ -26,8 +26,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ObjectArrays;
 
-import static com.bioxx.tfc.Reference.ModID;
-import static com.bioxx.tfc.WorldGen.Generators.WorldGenOre.OreList;
+import static com.bioxx.tfc.Reference.MOD_ID;
+import static com.bioxx.tfc.WorldGen.Generators.WorldGenOre.oreList;
 import static com.bioxx.tfc.api.TFCOptions.*;
 
 /**
@@ -118,7 +118,7 @@ public class TFC_ConfigFiles
 	{
 		reloadGeneral(); // No special needs
 		reloadOres(); // World gen voo-doo
-		TerraFirmaCraft.log.info("Reloading TFCCrafting");
+		TerraFirmaCraft.LOG.info("Reloading TFCCrafting");
 		try
 		{
 			for (SyncingOption option : SYNCING_OPTION_MAP.values())
@@ -128,7 +128,7 @@ public class TFC_ConfigFiles
 		}
 		catch (IllegalAccessException e)
 		{
-			TerraFirmaCraft.log.fatal("Fatal error reloading TFCCrafting", e);
+			TerraFirmaCraft.LOG.fatal("Fatal error reloading TFCCrafting", e);
 			Throwables.propagate(e);
 		}
 		if (craftingConfig.hasChanged()) craftingConfig.save();
@@ -137,7 +137,7 @@ public class TFC_ConfigFiles
 	public static void firstLoadCrafting()
 	{
 		if (craftingConfig == null) throw new IllegalStateException("Config reload attempt before preinit.");
-		TerraFirmaCraft.log.info("Loading TFCCrafting");
+		TerraFirmaCraft.LOG.info("Loading TFCCrafting");
 
 		if (craftingConfig.hasCategory("nei hiding"))
 		{
@@ -149,59 +149,59 @@ public class TFC_ConfigFiles
 
 		try
 		{
-			new ConversionOption("appleConversion", getAsShapeless(new ItemStack(Items.apple, 1), new ItemStack(TFCItems.RedApple, 1)));
-			new ConversionOption("arrowConversion", getAsShapeless(new ItemStack(Items.arrow, 1), new ItemStack(TFCItems.Arrow, 1)),
-					getAsShapeless(new ItemStack(TFCItems.Arrow, 1), new ItemStack(Items.arrow, 1)));
-			new ConversionOption("bowConversion", getAsShapeless(new ItemStack(Items.bow, 1), new ItemStack(TFCItems.Bow, 1, 0)),
-					getAsShapeless(new ItemStack(TFCItems.Bow, 1, 0), new ItemStack(Items.bow, 1)));
-			new ConversionOption("coalConversion", getAsShapeless(new ItemStack(Items.coal, 1), new ItemStack(TFCItems.Coal, 1)),
-					getAsShapeless(new ItemStack(TFCItems.Coal, 1), new ItemStack(Items.coal, 1)));
-			new ConversionOption("diamondConversion", getAsShapeless(new ItemStack(Items.diamond, 1), new ItemStack(TFCItems.GemDiamond,1,2)),
-					getAsShapeless(new ItemStack(Items.diamond, 2), new ItemStack(TFCItems.GemDiamond,1,3)),
-					getAsShapeless(new ItemStack(Items.diamond, 3), new ItemStack(TFCItems.GemDiamond,1,4)),
-					getAsShapeless(new ItemStack(TFCItems.GemDiamond,1,2), new ItemStack(Items.diamond)),
-					getAsShapeless(new ItemStack(TFCItems.GemDiamond,1,3), new ItemStack(Items.diamond), new ItemStack(Items.diamond)),
-					getAsShapeless(new ItemStack(TFCItems.GemDiamond,1,4), new ItemStack(Items.diamond), new ItemStack(Items.diamond), new ItemStack(Items.diamond)));
-			new ConversionOption("emeraldConversion", getAsShapeless(new ItemStack(Items.emerald, 1), new ItemStack(TFCItems.GemEmerald,1,2)),
-					getAsShapeless(new ItemStack(Items.emerald, 2), new ItemStack(TFCItems.GemEmerald,1,3)),
-					getAsShapeless(new ItemStack(Items.emerald, 3), new ItemStack(TFCItems.GemEmerald,1,4)),
-					getAsShapeless(new ItemStack(TFCItems.GemEmerald,1,2), new ItemStack(Items.emerald)),
-					getAsShapeless(new ItemStack(TFCItems.GemEmerald,1,3), new ItemStack(Items.emerald), new ItemStack(Items.emerald)),
-					getAsShapeless(new ItemStack(TFCItems.GemEmerald,1,4), new ItemStack(Items.emerald), new ItemStack(Items.emerald), new ItemStack(Items.emerald)));
+			new ConversionOption("appleConversion", getAsShapeless(new ItemStack(Items.apple, 1), new ItemStack(TFCItems.redApple, 1)));
+			new ConversionOption("arrowConversion", getAsShapeless(new ItemStack(Items.arrow, 1), new ItemStack(TFCItems.arrow, 1)),
+					getAsShapeless(new ItemStack(TFCItems.arrow, 1), new ItemStack(Items.arrow, 1)));
+			new ConversionOption("bowConversion", getAsShapeless(new ItemStack(Items.bow, 1), new ItemStack(TFCItems.bow, 1, 0)),
+					getAsShapeless(new ItemStack(TFCItems.bow, 1, 0), new ItemStack(Items.bow, 1)));
+			new ConversionOption("coalConversion", getAsShapeless(new ItemStack(Items.coal, 1), new ItemStack(TFCItems.coal, 1)),
+					getAsShapeless(new ItemStack(TFCItems.coal, 1), new ItemStack(Items.coal, 1)));
+			new ConversionOption("diamondConversion", getAsShapeless(new ItemStack(Items.diamond, 1), new ItemStack(TFCItems.gemDiamond,1,2)),
+					getAsShapeless(new ItemStack(Items.diamond, 2), new ItemStack(TFCItems.gemDiamond,1,3)),
+					getAsShapeless(new ItemStack(Items.diamond, 3), new ItemStack(TFCItems.gemDiamond,1,4)),
+					getAsShapeless(new ItemStack(TFCItems.gemDiamond,1,2), new ItemStack(Items.diamond)),
+					getAsShapeless(new ItemStack(TFCItems.gemDiamond,1,3), new ItemStack(Items.diamond), new ItemStack(Items.diamond)),
+					getAsShapeless(new ItemStack(TFCItems.gemDiamond,1,4), new ItemStack(Items.diamond), new ItemStack(Items.diamond), new ItemStack(Items.diamond)));
+			new ConversionOption("emeraldConversion", getAsShapeless(new ItemStack(Items.emerald, 1), new ItemStack(TFCItems.gemEmerald,1,2)),
+					getAsShapeless(new ItemStack(Items.emerald, 2), new ItemStack(TFCItems.gemEmerald,1,3)),
+					getAsShapeless(new ItemStack(Items.emerald, 3), new ItemStack(TFCItems.gemEmerald,1,4)),
+					getAsShapeless(new ItemStack(TFCItems.gemEmerald,1,2), new ItemStack(Items.emerald)),
+					getAsShapeless(new ItemStack(TFCItems.gemEmerald,1,3), new ItemStack(Items.emerald), new ItemStack(Items.emerald)),
+					getAsShapeless(new ItemStack(TFCItems.gemEmerald,1,4), new ItemStack(Items.emerald), new ItemStack(Items.emerald), new ItemStack(Items.emerald)));
 			new ConversionOption("fishConversion", getAsShapeless(new ItemStack(Items.fish, 1), new ItemStack(TFCItems.fishRaw, 1)));
-			new ConversionOption("fishingRodConversion", getAsShapeless(new ItemStack(Items.fishing_rod, 1), new ItemStack(TFCItems.FishingRod, 1, 0)),
-					getAsShapeless(new ItemStack(TFCItems.FishingRod, 1, 0), new ItemStack(Items.fishing_rod, 1)));
-			new ConversionOption("flintSteelConversion", getAsShapeless(new ItemStack(Items.flint_and_steel, 1, 0), new ItemStack(TFCItems.FlintSteel, 1, 0)),
-					getAsShapeless(new ItemStack(TFCItems.FlintSteel, 1, 0), new ItemStack(Items.flint_and_steel, 1, 0)));
-			new ConversionOption("leatherArmorConversion", getAsShapeless(new ItemStack(Items.leather_helmet, 1, 0), new ItemStack(TFCItems.LeatherHelmet, 1, 0)),
-					getAsShapeless(new ItemStack(TFCItems.LeatherHelmet, 1, 0), new ItemStack(Items.leather_helmet, 1, 0)),
-					getAsShapeless(new ItemStack(Items.leather_chestplate, 1, 0), new ItemStack(TFCItems.LeatherChestplate, 1, 0)),
-					getAsShapeless(new ItemStack(TFCItems.LeatherChestplate, 1, 0), new ItemStack(Items.leather_chestplate, 1, 0)),
-					getAsShapeless(new ItemStack(Items.leather_leggings, 1, 0), new ItemStack(TFCItems.LeatherLeggings, 1, 0)),
-					getAsShapeless(new ItemStack(TFCItems.LeatherLeggings, 1, 0), new ItemStack(Items.leather_leggings, 1, 0)),
-					getAsShapeless(new ItemStack(Items.leather_boots, 1, 0), new ItemStack(TFCItems.LeatherBoots, 1, 0)),
-					getAsShapeless(new ItemStack(TFCItems.LeatherBoots, 1, 0), new ItemStack(Items.leather_boots, 1, 0)));
-			new ConversionOption("leatherConversion", getAsShapeless(new ItemStack(Items.leather, 1), new ItemStack(TFCItems.Leather, 1)),
-					getAsShapeless(new ItemStack(TFCItems.Leather, 1), new ItemStack(Items.leather, 1)));
-			new ConversionOption("stoneAxeConversion", getAsShapeless(new ItemStack(Items.stone_axe, 1, 0), TFCItems.IgInAxe),
-					getAsShapeless(new ItemStack(Items.stone_axe, 1, 0), TFCItems.IgExAxe),
-					getAsShapeless(new ItemStack(Items.stone_axe, 1, 0), TFCItems.SedAxe),
-					getAsShapeless(new ItemStack(Items.stone_axe, 1, 0), TFCItems.MMAxe),
-					getAsShapeless(new ItemStack(TFCItems.IgExAxe, 1, 0), Items.stone_axe));
-			new ConversionOption("stoneHoeConversion", getAsShapeless(new ItemStack(Items.stone_hoe, 1, 0), TFCItems.IgInHoe),
-					getAsShapeless(new ItemStack(Items.stone_hoe, 1, 0), TFCItems.IgExHoe),
-					getAsShapeless(new ItemStack(Items.stone_hoe, 1, 0), TFCItems.SedHoe),
-					getAsShapeless(new ItemStack(Items.stone_hoe, 1, 0), TFCItems.MMHoe),
-					getAsShapeless(new ItemStack(TFCItems.IgExHoe, 1, 0), Items.stone_hoe));
-			new ConversionOption("stoneShovelConversion", getAsShapeless(new ItemStack(Items.stone_shovel, 1, 0), TFCItems.IgInShovel),
-					getAsShapeless(new ItemStack(Items.stone_shovel, 1, 0), TFCItems.IgExShovel),
-					getAsShapeless(new ItemStack(Items.stone_shovel, 1, 0), TFCItems.SedShovel),
-					getAsShapeless(new ItemStack(Items.stone_shovel, 1, 0), TFCItems.MMShovel),
-					getAsShapeless(new ItemStack(TFCItems.IgExShovel, 1, 0), Items.stone_shovel));
-			new ConversionOption("woodButtonConversion", getAsShapeless(new ItemStack(Blocks.wooden_button, 1), new ItemStack(TFCBlocks.ButtonWood, 1)),
-					getAsShapeless(new ItemStack(TFCBlocks.ButtonWood, 1), new ItemStack(Blocks.wooden_button, 1)));
-			new ConversionOption("workbenchConversion", getAsShapeless(new ItemStack(Blocks.crafting_table, 1), new ItemStack(TFCBlocks.Workbench, 1)),
-					getAsShapeless(new ItemStack(TFCBlocks.Workbench, 1), new ItemStack(Blocks.crafting_table, 1)));
+			new ConversionOption("fishingRodConversion", getAsShapeless(new ItemStack(Items.fishing_rod, 1), new ItemStack(TFCItems.fishingRod, 1, 0)),
+					getAsShapeless(new ItemStack(TFCItems.fishingRod, 1, 0), new ItemStack(Items.fishing_rod, 1)));
+			new ConversionOption("flintSteelConversion", getAsShapeless(new ItemStack(Items.flint_and_steel, 1, 0), new ItemStack(TFCItems.flintSteel, 1, 0)),
+					getAsShapeless(new ItemStack(TFCItems.flintSteel, 1, 0), new ItemStack(Items.flint_and_steel, 1, 0)));
+			new ConversionOption("leatherArmorConversion", getAsShapeless(new ItemStack(Items.leather_helmet, 1, 0), new ItemStack(TFCItems.leatherHelmet, 1, 0)),
+					getAsShapeless(new ItemStack(TFCItems.leatherHelmet, 1, 0), new ItemStack(Items.leather_helmet, 1, 0)),
+					getAsShapeless(new ItemStack(Items.leather_chestplate, 1, 0), new ItemStack(TFCItems.leatherChestplate, 1, 0)),
+					getAsShapeless(new ItemStack(TFCItems.leatherChestplate, 1, 0), new ItemStack(Items.leather_chestplate, 1, 0)),
+					getAsShapeless(new ItemStack(Items.leather_leggings, 1, 0), new ItemStack(TFCItems.leatherLeggings, 1, 0)),
+					getAsShapeless(new ItemStack(TFCItems.leatherLeggings, 1, 0), new ItemStack(Items.leather_leggings, 1, 0)),
+					getAsShapeless(new ItemStack(Items.leather_boots, 1, 0), new ItemStack(TFCItems.leatherBoots, 1, 0)),
+					getAsShapeless(new ItemStack(TFCItems.leatherBoots, 1, 0), new ItemStack(Items.leather_boots, 1, 0)));
+			new ConversionOption("leatherConversion", getAsShapeless(new ItemStack(Items.leather, 1), new ItemStack(TFCItems.leather, 1)),
+					getAsShapeless(new ItemStack(TFCItems.leather, 1), new ItemStack(Items.leather, 1)));
+			new ConversionOption("stoneAxeConversion", getAsShapeless(new ItemStack(Items.stone_axe, 1, 0), TFCItems.igInAxe),
+					getAsShapeless(new ItemStack(Items.stone_axe, 1, 0), TFCItems.igExAxe),
+					getAsShapeless(new ItemStack(Items.stone_axe, 1, 0), TFCItems.sedAxe),
+					getAsShapeless(new ItemStack(Items.stone_axe, 1, 0), TFCItems.mMAxe),
+					getAsShapeless(new ItemStack(TFCItems.igExAxe, 1, 0), Items.stone_axe));
+			new ConversionOption("stoneHoeConversion", getAsShapeless(new ItemStack(Items.stone_hoe, 1, 0), TFCItems.igInHoe),
+					getAsShapeless(new ItemStack(Items.stone_hoe, 1, 0), TFCItems.igExHoe),
+					getAsShapeless(new ItemStack(Items.stone_hoe, 1, 0), TFCItems.sedHoe),
+					getAsShapeless(new ItemStack(Items.stone_hoe, 1, 0), TFCItems.mMHoe),
+					getAsShapeless(new ItemStack(TFCItems.igExHoe, 1, 0), Items.stone_hoe));
+			new ConversionOption("stoneShovelConversion", getAsShapeless(new ItemStack(Items.stone_shovel, 1, 0), TFCItems.igInShovel),
+					getAsShapeless(new ItemStack(Items.stone_shovel, 1, 0), TFCItems.igExShovel),
+					getAsShapeless(new ItemStack(Items.stone_shovel, 1, 0), TFCItems.sedShovel),
+					getAsShapeless(new ItemStack(Items.stone_shovel, 1, 0), TFCItems.mMShovel),
+					getAsShapeless(new ItemStack(TFCItems.igExShovel, 1, 0), Items.stone_shovel));
+			new ConversionOption("woodButtonConversion", getAsShapeless(new ItemStack(Blocks.wooden_button, 1), new ItemStack(TFCBlocks.buttonWood, 1)),
+					getAsShapeless(new ItemStack(TFCBlocks.buttonWood, 1), new ItemStack(Blocks.wooden_button, 1)));
+			new ConversionOption("workbenchConversion", getAsShapeless(new ItemStack(Blocks.crafting_table, 1), new ItemStack(TFCBlocks.workbench, 1)),
+					getAsShapeless(new ItemStack(TFCBlocks.workbench, 1), new ItemStack(Blocks.crafting_table, 1)));
 
 			new VanillaRecipeOption("anvilRecipe", new ItemStack(Blocks.anvil));
 			new VanillaRecipeOption("arrowsRecipe", new ItemStack(Items.arrow, 4));
@@ -270,12 +270,12 @@ public class TFC_ConfigFiles
 		}
 		catch (NoSuchFieldException e)
 		{
-			TerraFirmaCraft.log.fatal("Fatal error loading TFCCrafting", e);
+			TerraFirmaCraft.LOG.fatal("Fatal error loading TFCCrafting", e);
 			Throwables.propagate(e);
 		}
 		catch (IllegalAccessException e)
 		{
-			TerraFirmaCraft.log.fatal("Fatal error loading TFCCrafting ", e);
+			TerraFirmaCraft.LOG.fatal("Fatal error loading TFCCrafting ", e);
 			Throwables.propagate(e);
 		}
 
@@ -300,7 +300,7 @@ public class TFC_ConfigFiles
 	public static void reloadGeneral()
 	{
 		if (generalConfig == null) throw new IllegalStateException("Config reload attempt before preinit.");
-		TerraFirmaCraft.log.info("Loading TFCConfig");
+		TerraFirmaCraft.LOG.info("Loading TFCConfig");
 
 		generalConfig.setCategoryLanguageKey(GENERAL, "config.gui.TFCConfig.general");
 
@@ -321,7 +321,7 @@ public class TFC_ConfigFiles
 		if (yearLength % 12 != 0) 
 		{
 			Property prop = generalConfig.get(TIME, "yearLength", 96);
-			TerraFirmaCraft.log.warn("Invalid yearLength in the config file. Changing to the next multiple of 12.");
+			TerraFirmaCraft.LOG.warn("Invalid yearLength in the config file. Changing to the next multiple of 12.");
 			yearLength = 12 + (12 * (yearLength / 12)); // Extra validation, because we need multiples of 12. Rounds up so it can never be 0.
 			prop.set(yearLength);
 		}
@@ -369,8 +369,8 @@ public class TFC_ConfigFiles
 
 		generalConfig.setCategoryLanguageKey(PLAYER, "config.gui.TFCConfig.player");
 
-		HealthGainRate = generalConfig.getInt("healthGainRate", PLAYER, HealthGainRate, 0, 100, "The rate of Health Gain per experience level. Set to 0 to turn off.", "config.gui.TFCConfig.player.healthGainRate");
-		HealthGainCap = generalConfig.getInt("healthGainCap", PLAYER, HealthGainCap, 1000, 50000, "The maximum achievable health pool total.", "config.gui.TFCConfig.player.healthGainCap");
+		healthGainRate = generalConfig.getInt("healthGainRate", PLAYER, healthGainRate, 0, 100, "The rate of Health Gain per experience level. Set to 0 to turn off.", "config.gui.TFCConfig.player.healthGainRate");
+		healthGainCap = generalConfig.getInt("healthGainCap", PLAYER, healthGainCap, 1000, 50000, "The maximum achievable health pool total.", "config.gui.TFCConfig.player.healthGainCap");
 
 		generalConfig.setCategoryLanguageKey(MATERIALS, "config.gui.TFCConfig.materials");
 
@@ -413,7 +413,7 @@ public class TFC_ConfigFiles
 		getColor(generalConfig, ANVIL_RULE_COLOR2, anvilRuleColor2, "config.gui.TFCConfig.colors.anvil.2");
 
 		//noinspection deprecation
-		Global.FOOD_DECAY_RATE = foodDecayRate; // keep deprecated value up to date
+		Global.foodDecayRate = foodDecayRate; // keep deprecated value up to date
 
 		if (generalConfig.hasChanged()) generalConfig.save();
 	}
@@ -437,58 +437,58 @@ public class TFC_ConfigFiles
 	public static void reloadOres()
 	{
 		if (oresConfig == null) throw new IllegalStateException("Config reload attempt before preinit.");
-		TerraFirmaCraft.log.info("Loading TFCOres");
+		TerraFirmaCraft.LOG.info("Loading TFCOres");
 
-		OreList.put("Native Copper", getOreData("Native Copper", "veins", "large", ModID + ":Ore1", 0, 120, new String[]{"igneous extrusive"}, 5, 128, 80, 60));
-		OreList.put("Native Gold", getOreData("Native Gold", "veins", "large", ModID + ":Ore1", 1, 120, new String[]{"igneous extrusive", "igneous intrusive"}, 5, 128, 80, 60));
-		OreList.put("Platinum", getOreData("Platinum", "veins", "small", ModID + ":Ore1", 2, 150, new String[]{"sedimentary"}, 5, 128, 40, 80));
-		OreList.put("Hematite", getOreData("Hematite", "veins", "medium", ModID + ":Ore1", 3, 125, new String[]{"igneous extrusive"}, 5, 128, 80, 60));
-		OreList.put("Silver", getOreData("Silver", "veins", "medium", ModID + ":Ore1", 4, 100, new String[]{"granite", "gneiss"}, 5, 128, 80, 60));
-		OreList.put("Cassiterite", getOreData("Cassiterite", "veins", "medium", ModID + ":Ore1", 5, 100, new String[]{"igneous intrusive"}, 5, 128, 80, 60));
-		OreList.put("Galena", getOreData("Galena", "veins", "medium", ModID + ":Ore1", 6, 100, new String[]{"igneous extrusive", "metamorphic", "granite", "limestone"}, 5, 128, 80, 60));
-		OreList.put("Bismuthinite", getOreData("Bismuthinite", "veins", "medium", ModID + ":Ore1", 7, 100, new String[]{"igneous extrusive", "sedimentary"}, 5, 128, 80, 60));
-		OreList.put("Garnierite", getOreData("Garnierite", "veins", "medium", ModID + ":Ore1", 8, 150, new String[]{"gabbro"}, 5, 128, 80, 60));
-		OreList.put("Malachite", getOreData("Malachite", "veins", "large", ModID + ":Ore1", 9, 100, new String[]{"limestone", "marble"}, 5, 128, 80, 60));
-		OreList.put("Magnetite", getOreData("Magnetite", "veins", "medium", ModID + ":Ore1", 10, 150, new String[]{"sedimentary"}, 5, 128, 80, 60));
-		OreList.put("Limonite", getOreData("Limonite", "veins", "medium", ModID + ":Ore1", 11, 150, new String[]{"sedimentary"}, 5, 128, 80, 60));
-		OreList.put("Sphalerite", getOreData("Sphalerite", "veins", "medium", ModID + ":Ore1", 12, 100, new String[]{"metamorphic"}, 5, 128, 80, 60));
-		OreList.put("Tetrahedrite", getOreData("Tetrahedrite", "veins", "medium", ModID + ":Ore1", 13, 120, new String[]{"metamorphic"}, 5, 128, 80, 60));
-		OreList.put("Bituminous Coal", getOreData("Bituminous Coal", "default", "large", ModID + ":Ore1", 14, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
-		OreList.put("Lignite", getOreData("Lignite", "default", "medium", ModID + ":Ore1", 15, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
+		oreList.put("Native Copper", getOreData("Native Copper", "veins", "large", MOD_ID + ":Ore1", 0, 120, new String[]{"igneous extrusive"}, 5, 128, 80, 60));
+		oreList.put("Native Gold", getOreData("Native Gold", "veins", "large", MOD_ID + ":Ore1", 1, 120, new String[]{"igneous extrusive", "igneous intrusive"}, 5, 128, 80, 60));
+		oreList.put("Platinum", getOreData("Platinum", "veins", "small", MOD_ID + ":Ore1", 2, 150, new String[]{"sedimentary"}, 5, 128, 40, 80));
+		oreList.put("Hematite", getOreData("Hematite", "veins", "medium", MOD_ID + ":Ore1", 3, 125, new String[]{"igneous extrusive"}, 5, 128, 80, 60));
+		oreList.put("Silver", getOreData("Silver", "veins", "medium", MOD_ID + ":Ore1", 4, 100, new String[]{"granite", "gneiss"}, 5, 128, 80, 60));
+		oreList.put("Cassiterite", getOreData("Cassiterite", "veins", "medium", MOD_ID + ":Ore1", 5, 100, new String[]{"igneous intrusive"}, 5, 128, 80, 60));
+		oreList.put("Galena", getOreData("Galena", "veins", "medium", MOD_ID + ":Ore1", 6, 100, new String[]{"igneous extrusive", "metamorphic", "granite", "limestone"}, 5, 128, 80, 60));
+		oreList.put("Bismuthinite", getOreData("Bismuthinite", "veins", "medium", MOD_ID + ":Ore1", 7, 100, new String[]{"igneous extrusive", "sedimentary"}, 5, 128, 80, 60));
+		oreList.put("Garnierite", getOreData("Garnierite", "veins", "medium", MOD_ID + ":Ore1", 8, 150, new String[]{"gabbro"}, 5, 128, 80, 60));
+		oreList.put("Malachite", getOreData("Malachite", "veins", "large", MOD_ID + ":Ore1", 9, 100, new String[]{"limestone", "marble"}, 5, 128, 80, 60));
+		oreList.put("Magnetite", getOreData("Magnetite", "veins", "medium", MOD_ID + ":Ore1", 10, 150, new String[]{"sedimentary"}, 5, 128, 80, 60));
+		oreList.put("Limonite", getOreData("Limonite", "veins", "medium", MOD_ID + ":Ore1", 11, 150, new String[]{"sedimentary"}, 5, 128, 80, 60));
+		oreList.put("Sphalerite", getOreData("Sphalerite", "veins", "medium", MOD_ID + ":Ore1", 12, 100, new String[]{"metamorphic"}, 5, 128, 80, 60));
+		oreList.put("Tetrahedrite", getOreData("Tetrahedrite", "veins", "medium", MOD_ID + ":Ore1", 13, 120, new String[]{"metamorphic"}, 5, 128, 80, 60));
+		oreList.put("Bituminous Coal", getOreData("Bituminous Coal", "default", "large", MOD_ID + ":Ore1", 14, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
+		oreList.put("Lignite", getOreData("Lignite", "default", "medium", MOD_ID + ":Ore1", 15, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
 
-		OreList.put("Kaolinite", getOreData("Kaolinite", "default", "medium", ModID + ":Ore2", 0, 90, new String[]{"sedimentary"}, 5, 128, 80, 60));
-		OreList.put("Gypsum", getOreData("Gypsum", "veins", "large", ModID + ":Ore2", 1, 120, new String[]{"sedimentary"}, 5, 128, 80, 60));
+		oreList.put("Kaolinite", getOreData("Kaolinite", "default", "medium", MOD_ID + ":Ore2", 0, 90, new String[]{"sedimentary"}, 5, 128, 80, 60));
+		oreList.put("Gypsum", getOreData("Gypsum", "veins", "large", MOD_ID + ":Ore2", 1, 120, new String[]{"sedimentary"}, 5, 128, 80, 60));
 		//WorldGenOre.OreList.put("Satinspar", getOreData("Satinspar", "veins", "small", Reference.ModID + ":Ore2", 2, 150, new String[]{"sedimentary"}, 5, 128, 40, 80));
 		//WorldGenOre.OreList.put("Selenite", getOreData("Selenite", "veins", "medium", Reference.ModID + ":Ore2", 3, 125, new String[]{"igneous extrusive"}, 5, 128, 60, 60));
-		OreList.put("Graphite", getOreData("Graphite", "veins", "medium", ModID + ":Ore2", 4, 100, new String[]{"marble", "gneiss", "quartzite", "schist"}, 5, 128, 80, 60));
-		OreList.put("Kimberlite", getOreData("Kimberlite", "veins", "medium", ModID + ":Ore2", 5, 200, new String[]{"gabbro"}, 5, 128, 30, 80));
+		oreList.put("Graphite", getOreData("Graphite", "veins", "medium", MOD_ID + ":Ore2", 4, 100, new String[]{"marble", "gneiss", "quartzite", "schist"}, 5, 128, 80, 60));
+		oreList.put("Kimberlite", getOreData("Kimberlite", "veins", "medium", MOD_ID + ":Ore2", 5, 200, new String[]{"gabbro"}, 5, 128, 30, 80));
 		//WorldGenOre.OreList.put("Petrified Wood", getOreData("Petrified Wood", "veins", "medium", Reference.ModID + ":Ore2", 6, 100, new String[]{"igneous extrusive", "metamorphic", "granite", "limestone"}, 5, 128, 60, 60));
 		//WorldGenOre.OreList.put("Sulfur", getOreData("Sulfur", "veins", "medium", Reference.ModID + ":Ore2", 7, 100, new String[]{"igneous extrusive", "sedimentary"}, 5, 128, 60, 60));
-		OreList.put("Jet", getOreData("Jet", "veins", "large", ModID + ":Ore2", 8, 110, new String[]{"sedimentary"}, 5, 128, 80, 60));
+		oreList.put("Jet", getOreData("Jet", "veins", "large", MOD_ID + ":Ore2", 8, 110, new String[]{"sedimentary"}, 5, 128, 80, 60));
 		//WorldGenOre.OreList.put("Microcline", getOreData("Microcline", "veins", "large", Reference.ModID + ":Ore2", 9, 100, new String[]{"limestone", "marble"}, 5, 128, 60, 60));
-		OreList.put("Pitchblende", getOreData("Pitchblende", "veins", "small", ModID + ":Ore2", 10, 150, new String[]{"granite"}, 5, 128, 80, 60));
-		OreList.put("Cinnabar", getOreData("Cinnabar", "veins", "small", ModID + ":Ore2", 11, 150, new String[]{"igneous extrusive", "shale", "quartzite"}, 5, 128, 30, 80));
-		OreList.put("Cryolite", getOreData("Cryolite", "veins", "small", ModID + ":Ore2", 12, 100, new String[]{"granite"}, 5, 128, 80, 60));
-		OreList.put("Saltpeter", getOreData("Saltpeter", "veins", "medium", ModID + ":Ore2", 13, 120, new String[]{"sedimentary"}, 5, 128, 80, 60));
+		oreList.put("Pitchblende", getOreData("Pitchblende", "veins", "small", MOD_ID + ":Ore2", 10, 150, new String[]{"granite"}, 5, 128, 80, 60));
+		oreList.put("Cinnabar", getOreData("Cinnabar", "veins", "small", MOD_ID + ":Ore2", 11, 150, new String[]{"igneous extrusive", "shale", "quartzite"}, 5, 128, 30, 80));
+		oreList.put("Cryolite", getOreData("Cryolite", "veins", "small", MOD_ID + ":Ore2", 12, 100, new String[]{"granite"}, 5, 128, 80, 60));
+		oreList.put("Saltpeter", getOreData("Saltpeter", "veins", "medium", MOD_ID + ":Ore2", 13, 120, new String[]{"sedimentary"}, 5, 128, 80, 60));
 		//WorldGenOre.OreList.put("Serpentine", getOreData("Serpentine", "veins", "large", Reference.ModID + ":Ore2", 14, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
-		OreList.put("Sylvite", getOreData("Sylvite", "veins", "medium", ModID + ":Ore2", 15, 100, new String[]{"rock salt"}, 5, 128, 90, 40));
+		oreList.put("Sylvite", getOreData("Sylvite", "veins", "medium", MOD_ID + ":Ore2", 15, 100, new String[]{"rock salt"}, 5, 128, 90, 40));
 
-		OreList.put("Borax", getOreData("Borax", "veins", "large", ModID + ":Ore3", 0, 120, new String[]{"rock salt"}, 5, 128, 80, 60));
-		OreList.put("Lapis Lazuli", getOreData("Lapis Lazuli", "veins", "large", ModID + ":Ore3", 2, 120, new String[]{"marble"}, 5, 128, 80, 60));
+		oreList.put("Borax", getOreData("Borax", "veins", "large", MOD_ID + ":Ore3", 0, 120, new String[]{"rock salt"}, 5, 128, 80, 60));
+		oreList.put("Lapis Lazuli", getOreData("Lapis Lazuli", "veins", "large", MOD_ID + ":Ore3", 2, 120, new String[]{"marble"}, 5, 128, 80, 60));
 		//WorldGenOre.OreList.put("Olivine", getOreData("Olivine", "veins", "small", Reference.ModID + ":Ore3", 1, 150, new String[]{"sedimentary"}, 5, 128, 40, 80));
 
 		//Surface Ore
-		OreList.put("Native Copper Surface", getOreData("Native Copper Surface", "veins", "small", ModID + ":Ore1", 0, 35, new String[]{"igneous extrusive"}, 128, 240, 40, 40));
-		OreList.put("Cassiterite Surface", getOreData("Cassiterite Surface", "veins", "small", ModID + ":Ore1", 5, 35, new String[]{"granite"}, 128, 240, 40, 40));
-		OreList.put("Bismuthinite Surface", getOreData("Bismuthinite Surface", "veins", "small", ModID + ":Ore1", 7, 35, new String[]{"igneous extrusive", "sedimentary"}, 128, 240, 40, 40));
-		OreList.put("Sphalerite Surface", getOreData("Sphalerite Surface", "veins", "small", ModID + ":Ore1", 12, 35, new String[]{"metamorphic"}, 128, 240, 40, 40));
-		OreList.put("Tetrahedrite Surface", getOreData("Tetrahedrite Surface", "veins", "small", ModID + ":Ore1", 13, 35, new String[]{"metamorphic"}, 128, 240, 40, 40));
+		oreList.put("Native Copper Surface", getOreData("Native Copper Surface", "veins", "small", MOD_ID + ":Ore1", 0, 35, new String[]{"igneous extrusive"}, 128, 240, 40, 40));
+		oreList.put("Cassiterite Surface", getOreData("Cassiterite Surface", "veins", "small", MOD_ID + ":Ore1", 5, 35, new String[]{"granite"}, 128, 240, 40, 40));
+		oreList.put("Bismuthinite Surface", getOreData("Bismuthinite Surface", "veins", "small", MOD_ID + ":Ore1", 7, 35, new String[]{"igneous extrusive", "sedimentary"}, 128, 240, 40, 40));
+		oreList.put("Sphalerite Surface", getOreData("Sphalerite Surface", "veins", "small", MOD_ID + ":Ore1", 12, 35, new String[]{"metamorphic"}, 128, 240, 40, 40));
+		oreList.put("Tetrahedrite Surface", getOreData("Tetrahedrite Surface", "veins", "small", MOD_ID + ":Ore1", 13, 35, new String[]{"metamorphic"}, 128, 240, 40, 40));
 
 		// getCategoryNames returns an ImmutableSet
 		for (String s : oresConfig.getCategoryNames())
 		{
 			// If this is a new entry, otherwise it has already been added by the previous bit of code.
-			if (!OreList.containsKey(s)) OreList.put(s, getOreData(s, "default", "small", "Ore", 0, 100, new String[] {"granite", "basalt", "sedimentary"}, 5, 128, 50, 50));
+			if (!oreList.containsKey(s)) oreList.put(s, getOreData(s, "default", "small", "Ore", 0, 100, new String[] {"granite", "basalt", "sedimentary"}, 5, 128, 50, 50));
 		}
 
 		if (oresConfig.hasChanged()) oresConfig.save();

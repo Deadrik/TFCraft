@@ -14,7 +14,7 @@ import com.bioxx.tfc.Entities.Mobs.EntityBear;
 import com.bioxx.tfc.api.Entities.IAnimal;
 public class RenderBear extends RenderLiving
 {
-	private static final ResourceLocation Texture = new ResourceLocation(Reference.ModID, "textures/mob/Bear.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/mob/Bear.png");
 
 	//private float scale = 1.1f;
 	//private ModelBear modelbear;
@@ -68,6 +68,6 @@ public class RenderBear extends RenderLiving
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		// TODO Auto-generated method stub
-		return Texture;
+		return TEXTURE;
 	}
 }

@@ -13,7 +13,7 @@ public class TEWoodConstruct extends NetworkTileEntity
 {
 	public byte[] woodTypes = new byte[192];
 	public BitSet data;
-	public static int PlankDetailLevel = 8;
+	public static int plankDetailLevel = 8;
 
 	//This should not be stored and are calculated at runtime on the client only for faster subsequent rendering operations
 	public boolean[] solidCheck = new boolean[48];
@@ -65,7 +65,7 @@ public class TEWoodConstruct extends NetworkTileEntity
 			if(data.get(i))
 			{
 				data.clear(i);
-				ItemStack stack = new ItemStack(TFCItems.SinglePlank, 1, woodTypes[i]);
+				ItemStack stack = new ItemStack(TFCItems.singlePlank, 1, woodTypes[i]);
 				EntityItem e = new EntityItem(worldObj, xCoord, yCoord, zCoord, stack);
 				e.delayBeforeCanPickup = 5;
 				worldObj.spawnEntityInWorld(e);
@@ -80,7 +80,7 @@ public class TEWoodConstruct extends NetworkTileEntity
 		{
 			if(data.get(i))
 			{
-				ItemStack stack = new ItemStack(TFCItems.SinglePlank, 1, woodTypes[i]);
+				ItemStack stack = new ItemStack(TFCItems.singlePlank, 1, woodTypes[i]);
 				list.add(stack);
 			}
 		}

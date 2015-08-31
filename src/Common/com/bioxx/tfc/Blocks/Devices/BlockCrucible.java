@@ -34,7 +34,7 @@ public class BlockCrucible extends BlockTerraContainer
 	public BlockCrucible()
 	{
 		super();
-		this.setCreativeTab(TFCTabs.TFCDevices);
+		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 		this.setBlockBounds(0.0625f, 0.25f, 0.0625f, 0.9375f, 0.9375f, 0.9375f);
 	}
 
@@ -108,7 +108,7 @@ public class BlockCrucible extends BlockTerraContainer
 			if(m != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setInteger("ID", Item.getIdFromItem(m.type.Ingot));
+				nbttagcompound1.setInteger("ID", Item.getIdFromItem(m.type.ingot));
 				nbttagcompound1.setFloat("AmountF", m.amount);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
@@ -155,8 +155,8 @@ public class BlockCrucible extends BlockTerraContainer
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
 		icons = new IIcon[2];
-		icons[0] = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Crucible Top");
-		icons[1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Crucible Side");
+		icons[0] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Crucible Top");
+		icons[1] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Crucible Side");
 	}
 
 	@Override

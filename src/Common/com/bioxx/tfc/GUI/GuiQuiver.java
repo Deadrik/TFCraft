@@ -9,7 +9,7 @@ import com.bioxx.tfc.Containers.ContainerQuiver;
 
 public class GuiQuiver extends GuiContainerTFC
 {
-	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_quiver.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_quiver.png");
 
 	public GuiQuiver(InventoryPlayer inventoryplayer, World world, int i, int j, int k)
 	{

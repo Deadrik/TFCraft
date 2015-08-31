@@ -19,16 +19,16 @@ public class RenderCrop
 	public static boolean render(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
 		IBlockAccess blockaccess = renderblocks.blockAccess;
-		TECrop te = (TECrop)blockaccess.getTileEntity(x, y, z);
+		TECrop cropTE = (TECrop)blockaccess.getTileEntity(x, y, z);
 
-		if(te != null)
-			CropManager.getInstance().getCropFromId(te.cropId);
+		if(cropTE != null)
+			CropManager.getInstance().getCropFromId(cropTE.cropId);
 		else
 			return false;
 
 		Tessellator var9 = Tessellator.instance;
 		var9.setBrightness(block.getMixedBrightnessForBlock(blockaccess, x, y, z));
-		switch(te.cropId)
+		switch(cropTE.cropId)
 		{
 		case 0://Wheat
 		{
@@ -131,10 +131,10 @@ public class RenderCrop
 			break;
 		}
 		}
-		TileEntity _te = blockaccess.getTileEntity(x, y-1, z);
+		TileEntity te = blockaccess.getTileEntity(x, y-1, z);
 		TEFarmland tef = null;
-		if (_te instanceof TEFarmland)
-			tef = (TEFarmland) _te;
+		if (te instanceof TEFarmland)
+			tef = (TEFarmland) te;
 		if(tef != null && tef.isInfested)
 		{
 

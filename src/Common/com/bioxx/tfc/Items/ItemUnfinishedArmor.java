@@ -26,7 +26,7 @@ public class ItemUnfinishedArmor extends ItemTerra implements ISmeltable
 		super();
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
-		setCreativeTab(TFCTabs.TFCMisc);
+		setCreativeTab(TFCTabs.TFC_MISC);
 		this.setFolder("armor/");
 		this.setSize(EnumSize.LARGE);
 	}
@@ -39,7 +39,7 @@ public class ItemUnfinishedArmor extends ItemTerra implements ISmeltable
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", "").replace("Unfinished ", "").replace("Stage2 ", ""));
+		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", "").replace("Unfinished ", "").replace("Stage2 ", ""));
 	}
 
 	@Override

@@ -62,7 +62,7 @@ public class EntityFishHookTFC extends EntityFishHook
 	public double pullX,pullY,pullZ;
 
 	private int lineTension;
-	private static final int maxLineTension = 800;
+	private static final int MAX_LINE_TENSION = 800;
 
 	private int reelCounter;
 	private int lastCheckTick;
@@ -485,18 +485,18 @@ public class EntityFishHookTFC extends EntityFishHook
 		if(forceRatio != 30){
 			reelCounter = 0;
 		}
-		if(lineTension >= maxLineTension / 2)
+		if(lineTension >= MAX_LINE_TENSION / 2)
 		{
 			this.maxDistance += pullVec.lengthVector() * 0.3;
 		}
-		if(lineTension > maxLineTension * 0.8 && !lineTensionSnap){
+		if(lineTension > MAX_LINE_TENSION * 0.8 && !lineTensionSnap){
 			lineTensionSnap = true;
 			TFC_Core.sendInfoMessage(this.field_146042_b, new ChatComponentTranslation("fishingRod.lineTension"));
 		}
-		else if(lineTension < maxLineTension * 0.8){
+		else if(lineTension < MAX_LINE_TENSION * 0.8){
 			lineTensionSnap = false;
 		}
-		if(lineTension >= maxLineTension){
+		if(lineTension >= MAX_LINE_TENSION){
 			this.field_146042_b.getCurrentEquippedItem().damageItem(20, field_146042_b);
 			this.ridingEntity.riddenByEntity = null;
 			this.ridingEntity = null;
@@ -538,7 +538,7 @@ public class EntityFishHookTFC extends EntityFishHook
 	public void attemptToCatch(){
 		int fishPopulation = this.getAverageFishPopFromChunks();
 		if(this.lastCheckTick == 0){
-			int maxValue = (int)(ChunkData.fishPopMax * 1.2f);
+			int maxValue = (int)(ChunkData.FISH_POP_MAX * 1.2f);
 			int minValue = 0;
 			int hour = TFC_Time.getHour();
 			if (hour >= 3 && hour <= 9 || hour >= 17 && hour < 22)

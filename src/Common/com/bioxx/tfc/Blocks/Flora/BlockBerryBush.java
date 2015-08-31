@@ -38,28 +38,28 @@ public class BlockBerryBush extends BlockTerraContainer
 {
 	public static IIcon[] icons;
 	public static IIcon[] iconsBerries;
-	public static String[] MetaNames;
+	public static String[] metaNames;
 
-	public static final int Wintergreen = 0;
-	public static final int Blueberry = 1;
-	public static final int Raspberry = 2;
-	public static final int Strawberry = 3;
-	public static final int Blackberry = 4;
-	public static final int Bunchberry = 5;
-	public static final int Cranberry = 6;
-	public static final int Snowberry = 7;
-	public static final int Elderberry = 8;
-	public static final int Gooseberry = 9;
-	public static final int Cloudberry = 10;
+	public static final int WINTERGREEN = 0;
+	public static final int BLUEBERRY = 1;
+	public static final int RASPBERRY = 2;
+	public static final int STRAWBERRY = 3;
+	public static final int BLACKBERRY = 4;
+	public static final int BUNCHBERRY = 5;
+	public static final int CRANBERRY = 6;
+	public static final int SNOWBERRY = 7;
+	public static final int ELDERBERRY = 8;
+	public static final int GOOSEBERRY = 9;
+	public static final int CLOUDBERRY = 10;
 
 	public BlockBerryBush()
 	{
 		super(Material.plants);
-		MetaNames = new String[]{"Wintergreen", "Blueberry", "Raspberry", "Strawberry", "Blackberry", "Bunchberry", "Cranberry", "Snowberry", "Elderberry", "Gooseberry", "Cloudberry"};
-		icons = new IIcon[MetaNames.length];
-		iconsBerries = new IIcon[MetaNames.length];
+		metaNames = new String[]{"Wintergreen", "Blueberry", "Raspberry", "Strawberry", "Blackberry", "Bunchberry", "Cranberry", "Snowberry", "Elderberry", "Gooseberry", "Cloudberry"};
+		icons = new IIcon[metaNames.length];
+		iconsBerries = new IIcon[metaNames.length];
 		this.setTickRandomly(true);
-		this.setCreativeTab(TFCTabs.TFCDecoration);
+		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -69,7 +69,7 @@ public class BlockBerryBush extends BlockTerraContainer
 	 */
 	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
-		for(int i = 0; i < MetaNames.length; i++)
+		for(int i = 0; i < metaNames.length; i++)
 			list.add(new ItemStack(item, 1, i));
 	}
 
@@ -82,7 +82,7 @@ public class BlockBerryBush extends BlockTerraContainer
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z)
 	{
-		int _meta = access.getBlockMetadata(x, y, z);
+		int meta = access.getBlockMetadata(x, y, z);
 
 		float minX = 0.1f;
 		float minZ = 0.1f;
@@ -90,81 +90,81 @@ public class BlockBerryBush extends BlockTerraContainer
 		float maxZ = 0.9f;
 		float maxY = 1f;
 
-		if(isSamePlant(access, x - 1, y, z, _meta)) minX = 0;
-		if(isSamePlant(access, x + 1, y, z, _meta)) maxX = 1;
-		if(isSamePlant(access, x, y, z - 1, _meta)) minZ = 0;
-		if(isSamePlant(access, x, y, z + 1, _meta)) maxZ = 1;
-		if(isSamePlant(access, x, y + 1, z, _meta)) maxY = 1;
+		if(isSamePlant(access, x - 1, y, z, meta)) minX = 0;
+		if(isSamePlant(access, x + 1, y, z, meta)) maxX = 1;
+		if(isSamePlant(access, x, y, z - 1, meta)) minZ = 0;
+		if(isSamePlant(access, x, y, z + 1, meta)) maxZ = 1;
+		if(isSamePlant(access, x, y + 1, z, meta)) maxY = 1;
 
-		switch(_meta)
+		switch(meta)
 		{
-		case Wintergreen:
+		case WINTERGREEN:
 		{
 			maxY = 0.2f;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case Blueberry:
+		case BLUEBERRY:
 		{
 			maxY = 0.85f;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case Raspberry:
+		case RASPBERRY:
 		{
 			maxY = 0.85f;
-			if(isSamePlant(access, x, y + 1, z, _meta))
+			if(isSamePlant(access, x, y + 1, z, meta))
 				maxY = 1;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case Strawberry:
+		case STRAWBERRY:
 		{
 			maxY = 0.2f;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case Blackberry:
+		case BLACKBERRY:
 		{
 			maxY = 0.85f;
-			if(isSamePlant(access, x, y + 1, z, _meta))
+			if(isSamePlant(access, x, y + 1, z, meta))
 				maxY = 1;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case Bunchberry:
+		case BUNCHBERRY:
 		{
 			maxY = 0.2f;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case Cranberry:
+		case CRANBERRY:
 		{
 			maxY = 0.6f;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case Snowberry:
+		case SNOWBERRY:
 		{
 			maxY = 0.2f;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case Elderberry:
+		case ELDERBERRY:
 		{
 			maxY = 0.85f;
-			if(isSamePlant(access, x, y + 1, z, _meta))
+			if(isSamePlant(access, x, y + 1, z, meta))
 				maxY = 1;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case Gooseberry:
+		case GOOSEBERRY:
 		{
 			maxY = 0.75f;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
-		case Cloudberry:
+		case CLOUDBERRY:
 		{
 			maxY = 0.35f;
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
@@ -250,19 +250,19 @@ public class BlockBerryBush extends BlockTerraContainer
 				tebb = (TEBerryBush) world.getTileEntity(x, y, z);
 			if(tebb != null)
 			{
-				FloraIndex _fi = FloraManager.getInstance().findMatchingIndex(getType(world.getBlockMetadata(x, y, z)));
-				float _temp = TFC_Climate.getHeightAdjustedTemp(world, x, y, z);
+				FloraIndex floraIndex = FloraManager.getInstance().findMatchingIndex(getType(world.getBlockMetadata(x, y, z)));
+				float temp = TFC_Climate.getHeightAdjustedTemp(world, x, y, z);
 
-				if(_temp >= _fi.minTemp && _temp < _fi.maxTemp)
+				if(temp >= floraIndex.minTemp && temp < floraIndex.maxTemp)
 				{
-					if(!tebb.hasFruit && _fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) && TFC_Time.getMonthsSinceDay(tebb.dayHarvested) > 0)
+					if(!tebb.hasFruit && floraIndex.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) && TFC_Time.getMonthsSinceDay(tebb.dayHarvested) > 0)
 					{
 						tebb.hasFruit = true;
 						tebb.dayFruited = TFC_Time.getTotalDays();
 						world.markBlockForUpdate(x, y, z);
 					}
 				}
-				else if(_temp < _fi.minTemp - 5 || _temp > _fi.maxTemp + 5)
+				else if(temp < floraIndex.minTemp - 5 || temp > floraIndex.maxTemp + 5)
 				{
 					if(tebb.hasFruit)
 					{
@@ -271,7 +271,7 @@ public class BlockBerryBush extends BlockTerraContainer
 					}
 				}
 
-				if(tebb.hasFruit && TFC_Time.getMonthsSinceDay(tebb.dayFruited) > _fi.fruitHangTime)
+				if(tebb.hasFruit && TFC_Time.getMonthsSinceDay(tebb.dayFruited) > floraIndex.fruitHangTime)
 				{
 					tebb.hasFruit = false;
 					world.markBlockForUpdate(x, y, z);
@@ -286,7 +286,7 @@ public class BlockBerryBush extends BlockTerraContainer
 
 	public String getType(int meta)
 	{
-		return BlockBerryBush.MetaNames[meta];
+		return BlockBerryBush.metaNames[meta];
 	}
 
 	@Override
@@ -313,8 +313,8 @@ public class BlockBerryBush extends BlockTerraContainer
 	{
 		for (int i = 0; i < icons.length; ++i)
 		{
-			icons[i] = register.registerIcon(Reference.ModID + ":" + "plants/" + MetaNames[i]);
-			iconsBerries[i] = register.registerIcon(Reference.ModID + ":" + "plants/" + MetaNames[i] + " Berry");
+			icons[i] = register.registerIcon(Reference.MOD_ID + ":" + "plants/" + metaNames[i]);
+			iconsBerries[i] = register.registerIcon(Reference.MOD_ID + ":" + "plants/" + metaNames[i] + " Berry");
 		}
 	}
 
@@ -400,14 +400,14 @@ public class BlockBerryBush extends BlockTerraContainer
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
 	{
-		int _meta = world.getBlockMetadata(x, y, z);
-		if(_meta == Blueberry ||_meta == Raspberry || _meta == Blackberry || _meta == Elderberry || _meta == Gooseberry)
+		int meta = world.getBlockMetadata(x, y, z);
+		if(meta == BLUEBERRY ||meta == RASPBERRY || meta == BLACKBERRY || meta == ELDERBERRY || meta == GOOSEBERRY)
 		{
 			entity.motionX *= 0.7D;
 			entity.motionZ *= 0.7D;
 		}
 
-		if(_meta == Raspberry || _meta == Blackberry)
+		if(meta == RASPBERRY || meta == BLACKBERRY)
 		{
 			if(entity instanceof EntityLivingBase)
 				entity.attackEntityFrom(DamageSource.cactus, 5);
@@ -415,6 +415,6 @@ public class BlockBerryBush extends BlockTerraContainer
 	}
 
 	private boolean canStack(int meta) {
-		return meta == Raspberry || meta == Blackberry || meta == Elderberry;
+		return meta == RASPBERRY || meta == BLACKBERRY || meta == ELDERBERRY;
 	}
 }

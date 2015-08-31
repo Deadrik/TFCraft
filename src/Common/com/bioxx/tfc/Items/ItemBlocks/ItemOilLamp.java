@@ -28,7 +28,7 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 	public ItemOilLamp(Block par1)
 	{
 		super(par1);
-		this.MetaNames = new String[]{"Gold", "Platinum", "RoseGold", "Silver", "SterlingSilver", "BlueSteel"};
+		this.metaNames = new String[]{"Gold", "Platinum", "RoseGold", "Silver", "SterlingSilver", "BlueSteel"};
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, player, !is.hasTagCompound());
-		if(is.getItemDamage() == 5 && world.getBlock(mop.blockX, mop.blockY, mop.blockZ) == TFCBlocks.LavaStationary)
+		if(is.getItemDamage() == 5 && world.getBlock(mop.blockX, mop.blockY, mop.blockZ) == TFCBlocks.lavaStationary)
 		{
 			if(!is.hasTagCompound())
 			{
@@ -160,9 +160,9 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 		}
 	}
 
-	public static ItemStack GetFullLamp(int meta)
+	public static ItemStack getFullLamp(int meta)
 	{
-		ItemStack is = new ItemStack(TFCBlocks.OilLamp, 1, meta);
+		ItemStack is = new ItemStack(TFCBlocks.oilLamp, 1, meta);
 		FluidStack fs = new FluidStack(TFCFluids.OLIVEOIL, 250);
 		is.setTagCompound(fs.writeToNBT(new NBTTagCompound()));
 		return is;

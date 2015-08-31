@@ -16,7 +16,7 @@ import com.bioxx.tfc.api.TFCOptions;
 
 public class GuiCrucible extends GuiContainerTFC
 {
-	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_crucible.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_crucible.png");
 
 	private TECrucible crucibleTE;
 
@@ -61,20 +61,20 @@ public class GuiCrucible extends GuiContainerTFC
 			}
 			else if (crucibleTE.currentAlloy.outputType != null)
 			{
-				this.fontRendererObj.drawString(EnumChatFormatting.UNDERLINE + TFC_Core.translate("gui.metal." + crucibleTE.currentAlloy.outputType.Name.replace(" ", "")), 7, 7, 0x000000);
+				this.fontRendererObj.drawString(EnumChatFormatting.UNDERLINE + TFC_Core.translate("gui.metal." + crucibleTE.currentAlloy.outputType.name.replace(" ", "")), 7, 7, 0x000000);
 			}
 			else
 			{
 				this.fontRendererObj.drawString(EnumChatFormatting.UNDERLINE + TFC_Core.translate("gui.metal.Unknown"), 7, 7, 0x000000);
 			}
 
-			for (int c = 0; c < crucibleTE.currentAlloy.AlloyIngred.size(); c++)
+			for (int c = 0; c < crucibleTE.currentAlloy.alloyIngred.size(); c++)
 			{
-				double m = crucibleTE.currentAlloy.AlloyIngred.get(c).metal;
+				double m = crucibleTE.currentAlloy.alloyIngred.get(c).metal;
 				m = Math.round(m * 100d) / 100d;
-				if (crucibleTE.currentAlloy.AlloyIngred.get(c).metalType != null)
+				if (crucibleTE.currentAlloy.alloyIngred.get(c).metalType != null)
 				{
-					this.fontRendererObj.drawString(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.metal." + crucibleTE.currentAlloy.AlloyIngred.get(c).metalType.Name.replace(" ", "")) + ": " + EnumChatFormatting.DARK_GREEN + m + "%", 7, 18 + 10 * (c), 0x000000);
+					this.fontRendererObj.drawString(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.metal." + crucibleTE.currentAlloy.alloyIngred.get(c).metalType.name.replace(" ", "")) + ": " + EnumChatFormatting.DARK_GREEN + m + "%", 7, 18 + 10 * (c), 0x000000);
 				}
 			}
 		}

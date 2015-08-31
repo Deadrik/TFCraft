@@ -13,7 +13,7 @@ import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 public class TEBellows extends NetworkTileEntity
 {
-	private static final int blockMap[][] = { { 0, 1 }, { -1, 0 }, { 0, -1 }, { 1, 0 } };
+	private static final int BLOCK_MAP[][] = { { 0, 1 }, { -1, 0 }, { 0, -1 }, { 1, 0 } };
 	//private static final int blockMap2[][] = { { 0, 2 }, { -2, 0 }, { 0, -2 }, { 2, 0 } };
 	public boolean shouldBlow;
 	public int blowTimer;
@@ -28,12 +28,12 @@ public class TEBellows extends NetworkTileEntity
 			{
 				blowTimer++;
 				if(worldObj.isRemote)
-					GenerateSmoke();
+					generateSmoke();
 				if(blowTimer == 5)
 				{
 					blowDirection = 1;
 					if(!worldObj.isRemote)
-						GiveAir();
+						giveAir();
 				}
 			}
 			else
@@ -56,11 +56,11 @@ public class TEBellows extends NetworkTileEntity
 		return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1);
 	}
 
-	public void GenerateSmoke()
+	public void generateSmoke()
 	{
 		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-		int x = blockMap[meta][0];
-		int z = blockMap[meta][1];
+		int x = BLOCK_MAP[meta][0];
+		int z = BLOCK_MAP[meta][1];
 		Random random = new Random();
 
 		float f = (float) xCoord + x + 0.5F;
@@ -73,11 +73,11 @@ public class TEBellows extends NetworkTileEntity
 		worldObj.spawnParticle("smoke", f + f4 - 0.3F, f1, f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
 	}
 
-	public void GiveAir()
+	public void giveAir()
 	{
 		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-		int x = blockMap[meta][0];
-		int z = blockMap[meta][1];
+		int x = BLOCK_MAP[meta][0];
+		int z = BLOCK_MAP[meta][1];
 		TileEntity te = worldObj.getTileEntity(xCoord + x, yCoord, zCoord + z);
 		TileEntity te2 = worldObj.getTileEntity(xCoord + x, yCoord - 1, zCoord + z);
 		TEFireEntity tileentityfirepit = null;

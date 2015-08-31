@@ -33,7 +33,7 @@ public class BlockFungi extends BlockMushroom
 		float var3 = 0.2F;
 		this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var3 * 2.0F, 0.5F + var3);
 		this.setTickRandomly(true);
-		this.setCreativeTab(TFCTabs.TFCDecoration);
+		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class BlockFungi extends BlockMushroom
 		for (int i = 0; i < this.icons.length; ++i)
 		{
 			// The first 2 mushrooms are from vanilla
-			this.icons[i] = register.registerIcon((icons.length > 2 ? Reference.ModID + ":plants/" : "") + Global.FUNGI_META_NAMES[i]);
+			this.icons[i] = register.registerIcon((icons.length > 2 ? Reference.MOD_ID + ":plants/" : "") + Global.FUNGI_META_NAMES[i]);
 		}
 	}
 

@@ -134,7 +134,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 								int index = (xCoord * 16 + zCoord) * 256 + y;
 								if (y >= 0 && y < 256)
 								{
-									if (idArray[index] == TFCBlocks.SaltWaterStationary || idArray[index] == TFCBlocks.FreshWaterStationary)
+									if (idArray[index] == TFCBlocks.saltWaterStationary || idArray[index] == TFCBlocks.freshWaterStationary)
 										var58 = true;
 									if (y != var57 - 1 && xCoord != var55 && xCoord != var36 - 1 && zCoord != var56 && zCoord != var40 - 1)
 										y = var57;
@@ -176,7 +176,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 
 												if (var50 < 10 && TFC_Climate.getStability(this.worldObj, (int)worldX, (int)worldZ) == 1)
 												{
-													idArray[index] = TFCBlocks.Lava;
+													idArray[index] = TFCBlocks.lava;
 													//metaArray[index] = 0;
 												}
 												else
@@ -246,20 +246,20 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 		}
 
 		Block layerID = rockLayer1.block;
-		if(layerID == TFCBlocks.StoneIgEx)
+		if(layerID == TFCBlocks.stoneIgEx)
 		{
 			width -= 0.4;
 		}
-		else if(layerID == TFCBlocks.StoneIgIn)
+		else if(layerID == TFCBlocks.stoneIgIn)
 		{
 			width -= 0.5;
 		}
-		else if(layerID == TFCBlocks.StoneSed)
+		else if(layerID == TFCBlocks.stoneSed)
 		{
 			width += 0.2;
 			var7 += 5;
 		}
-		else if(layerID == TFCBlocks.StoneMM)
+		else if(layerID == TFCBlocks.stoneMM)
 		{
 			width += 0.3;
 		}

@@ -44,7 +44,7 @@ public class TECrop extends NetworkTileEntity
 	@Override
 	public void updateEntity()
 	{
-		Random R = new Random();
+		Random r = new Random();
 		if(!worldObj.isRemote)
 		{
 			float timeMultiplier = 360f / TFC_Time.daysInYear;
@@ -148,10 +148,10 @@ public class TECrop extends NetworkTileEntity
 				if(tef != null && !isDormant)
 				{
 					if(tef.nutrients[nutriType] > 0)
-						tef.DrainNutrients(nutriType, crop.nutrientUsageMult);
+						tef.drainNutrients(nutriType, crop.nutrientUsageMult);
 					//Drain Fertilizer
 					if(tef.nutrients[3] > 0)
-						tef.DrainNutrients(3, crop.nutrientUsageMult);
+						tef.drainNutrients(3, crop.nutrientUsageMult);
 				}
 
 				float growthRate = (((crop.numGrowthStages / (crop.growthTime * TFC_Time.timeRatio96) + tempAdded) * nutriMult) * timeMultiplier) * TFCOptions.cropGrowthMultiplier;
@@ -173,7 +173,7 @@ public class TECrop extends NetworkTileEntity
 					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 				}
 
-				growthTimer += (R.nextInt(2) + 23) * TFC_Time.hourLength;
+				growthTimer += (r.nextInt(2) + 23) * TFC_Time.HOUR_LENGTH;
 			}
 			else if(crop != null && crop.needsSunlight && sunLevel <= 0)
 			{
@@ -200,7 +200,7 @@ public class TECrop extends NetworkTileEntity
 
 	public float getEstimatedGrowth(CropIndex crop)
 	{
-		return ((float)crop.numGrowthStages / (growthTimer - plantedTime / TFC_Time.dayLength)) * 1.5f;
+		return ((float)crop.numGrowthStages / (growthTimer - plantedTime / TFC_Time.DAY_LENGTH)) * 1.5f;
 	}
 
 	public void onHarvest(World world, EntityPlayer player, boolean isBreaking)

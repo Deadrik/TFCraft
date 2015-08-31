@@ -24,12 +24,12 @@ import com.google.common.collect.Sets;
 
 public class ItemHammer extends ItemTerraTool implements ICausesDamage
 {
-	private static final Set<Block> blocks = Sets.newHashSet(new Block[] {});
+	private static final Set<Block> BLOCKS = Sets.newHashSet(new Block[] {});
 	private float damageVsEntity;
 
 	public ItemHammer(ToolMaterial e, float damage)
 	{
-		super(0, e, blocks);
+		super(0, e, BLOCKS);
 		this.damageVsEntity = damage;
 	}
 
@@ -39,11 +39,11 @@ public class ItemHammer extends ItemTerraTool implements ICausesDamage
 		Block id2 = player.worldObj.getBlock(x, y, z);
 		int meta2 = player.worldObj.getBlockMetadata(x, y, z);
 
-		if(id2 == TFCBlocks.StoneIgEx || id2 == TFCBlocks.StoneIgIn)
+		if(id2 == TFCBlocks.stoneIgEx || id2 == TFCBlocks.stoneIgIn)
 		{
 			if(side == 1)
 			{
-				world.setBlock(x, y, z, TFCBlocks.Anvil);
+				world.setBlock(x, y, z, TFCBlocks.anvil);
 				player.triggerAchievement(TFC_Achievements.achAnvil);
 				TEAnvil te = (TEAnvil) world.getTileEntity(x, y, z);
 				if(te == null)

@@ -16,14 +16,14 @@ public class EntityAIMateTFC extends EntityAIBase
 	private World theWorld;
 	private IAnimal targetMate;
 	private int matingCounter;
-	private float field_48262_c;
+	private float speed;
 
 	public EntityAIMateTFC (IAnimal par1EntityAnimal, World world, float par2)
 	{
 		matingCounter = 0;
 		theAnimal = par1EntityAnimal;
 		theWorld = world;
-		field_48262_c = par2;
+		speed = par2;
 		setMutexBits (3);
 	}
 
@@ -84,7 +84,7 @@ public class EntityAIMateTFC extends EntityAIBase
 	public void updateTask ()
 	{
 		theAnimal.getEntity().getLookHelper().setLookPositionWithEntity(targetMate.getEntity(), 10F, theAnimal.getEntity().getVerticalFaceSpeed());
-		theAnimal.getEntity().getNavigator().tryMoveToEntityLiving(targetMate.getEntity(), field_48262_c);
+		theAnimal.getEntity().getNavigator().tryMoveToEntityLiving(targetMate.getEntity(), speed);
 		matingCounter++;
 
 		if (matingCounter >= 60 && theAnimal.getEntity().getDistanceSqToEntity(this.targetMate.getEntity()) < 9.0D)

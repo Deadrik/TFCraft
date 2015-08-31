@@ -42,10 +42,10 @@ public class GenLayerEVTMix extends GenLayerTFC
 				index = var8 + var7 * xSize;
 
 				if (id0 >= thisID+2 || id1 >= thisID+2 || id2 >= thisID+2 || id3 >= thisID+2)
-					if(thisID+1 < DataLayer.EVT_16.ID)
+					if(thisID+1 < DataLayer.EVT_16.layerID)
 						thisID++;
 				if (id0 <= thisID-2 || id1 <= thisID-2 || id2 <= thisID-2 || id3 <= thisID-2)
-					if(thisID-1 > DataLayer.EVT_0_125.ID)
+					if(thisID-1 > DataLayer.EVT_0_125.layerID)
 						thisID--;
 
 				outCache[index] = thisID;

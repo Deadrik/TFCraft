@@ -2,13 +2,14 @@ package com.bioxx.tfc.Items;
 
 public class ItemTuyere extends ItemTerra
 {
-	public int BlockMeta;
-	public ItemTuyere(int maxDam, int blockMeta)
+	public int blockMeta;
+
+	public ItemTuyere(int maxDam, int meta)
 	{
 		super();
 		this.hasSubtypes = false;
 		this.setMaxDamage(maxDam);
 		setFolder("tools/");
-		BlockMeta = blockMeta;
+		blockMeta = meta;
 	}
 }

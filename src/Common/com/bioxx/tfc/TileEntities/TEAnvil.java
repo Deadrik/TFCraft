@@ -59,7 +59,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	private static final byte LAG_FIX_DELAY = 5;
 	public AnvilRecipe workRecipe;
 	//private AnvilRecipe workWeldRecipe;
-	public int AnvilTier = AnvilReq.STONE.Tier; // Initialize to avoid NPE
+	public int anvilTier = AnvilReq.STONE.Tier; // Initialize to avoid NPE
 
 	public EntityPlayer lastWorker;
 
@@ -77,7 +77,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		itemCraftingValue = 0;
 		itemCraftingRules = new int[]{-1,-1,-1};
 		craftingValue = 0;
-		AnvilTier = AnvilReq.STONE.Tier;
+		anvilTier = AnvilReq.STONE.Tier;
 		stonePair = new int[]{0,0};
 		craftingPlan = "";
 	}
@@ -144,19 +144,19 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 							if (output.getItem() instanceof ItemIngot)
 							{
 								Item ingot = output.getItem();
-								if (ingot == TFCItems.BlackSteelIngot)
+								if (ingot == TFCItems.blackSteelIngot)
 									lastWorker.triggerAchievement(TFC_Achievements.achBlackSteel);
-								else if (ingot == TFCItems.BlueSteelIngot)
+								else if (ingot == TFCItems.blueSteelIngot)
 									lastWorker.triggerAchievement(TFC_Achievements.achBlueSteel);
-								else if (ingot == TFCItems.RedSteelIngot)
+								else if (ingot == TFCItems.redSteelIngot)
 									lastWorker.triggerAchievement(TFC_Achievements.achRedSteel);
 							}
 							else if (output.getItem() instanceof ItemSteelBucket)
 							{
 								Item bucket = output.getItem();
-								if (bucket == TFCItems.BlueSteelBucketEmpty)
+								if (bucket == TFCItems.blueSteelBucketEmpty)
 									lastWorker.triggerAchievement(TFC_Achievements.achBlueBucket);
-								else if (bucket == TFCItems.RedSteelBucketEmpty)
+								else if (bucket == TFCItems.redSteelBucketEmpty)
 									lastWorker.triggerAchievement(TFC_Achievements.achRedBucket);
 							}
 
@@ -203,7 +203,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		{
 			out = manager.findCompleteRecipe(new AnvilRecipe(anvilItemStacks[INPUT1_SLOT],anvilItemStacks[INPUT2_SLOT], craftingPlan,
 					workRecipe.getCraftingValue(), 
-					anvilItemStacks[FLUX_SLOT] != null ? true : false, AnvilTier, null), getItemRules());
+					anvilItemStacks[FLUX_SLOT] != null ? true : false, anvilTier, null), getItemRules());
 		}
 		return out;
 	}
@@ -226,14 +226,14 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		for(Object p : plans)
 		{
 			AnvilRecipe ar = manager.findMatchingRecipe(new AnvilRecipe(anvilItemStacks[INPUT1_SLOT], anvilItemStacks[INPUT2_SLOT], 
-					(String)p, anvilItemStacks[FLUX_SLOT] != null, AnvilTier));
+					(String)p, anvilItemStacks[FLUX_SLOT] != null, anvilTier));
 
 			if(ar != null) 
 				planList.put((String)p, ar);
 		}
 
 		//We need to pre-emptively remove split blooms from the plan list if the input bloom is too small
-		if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].getItem() == TFCItems.Bloom)
+		if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].getItem() == TFCItems.bloom)
 		{
 			if(anvilItemStacks[INPUT1_SLOT].getItemDamage() <= 100 && planList.containsKey("splitbloom"))
 				planList.remove("splitbloom");
@@ -267,7 +267,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		}
 
 		//We don't want to allow refined blooms of < 100 units to be refined into wrought iron ingots so we null the recipe unless the amount == 100
-		if (anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].getItem() == TFCItems.Bloom && workRecipe.getCraftingResult().getItem() == TFCItems.Bloom)
+		if (anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].getItem() == TFCItems.bloom && workRecipe.getCraftingResult().getItem() == TFCItems.bloom)
 		{
 			if (anvilItemStacks[INPUT1_SLOT].getItemDamage() < 100)
 			{
@@ -303,25 +303,25 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	{
 		if(anvilItemStacks[slot].hasTagCompound())
 		{
-			NBTTagCompound Tag = anvilItemStacks[slot].getTagCompound();
+			NBTTagCompound tag = anvilItemStacks[slot].getTagCompound();
 			int rule1 = -1;
 			int rule2 = -1;
-			if(Tag.hasKey("itemCraftingRule1"))
-				rule1 = Tag.getByte("itemCraftingRule1");
-			if(Tag.hasKey("itemCraftingRule2"))
-				rule2 = Tag.getByte("itemCraftingRule2");
-			if(Tag.hasKey("itemCraftingRule3"))
-				Tag.getByte("itemCraftingRule3");
+			if(tag.hasKey("itemCraftingRule1"))
+				rule1 = tag.getByte("itemCraftingRule1");
+			if(tag.hasKey("itemCraftingRule2"))
+				rule2 = tag.getByte("itemCraftingRule2");
+			if(tag.hasKey("itemCraftingRule3"))
+				tag.getByte("itemCraftingRule3");
 
 			itemCraftingRules[2] = rule2;
 			itemCraftingRules[1] = rule1;
 			itemCraftingRules[0] = rule;
 
-			Tag.setByte("itemCraftingRule1", (byte) itemCraftingRules[0]);
-			Tag.setByte("itemCraftingRule2", (byte) itemCraftingRules[1]);
-			Tag.setByte("itemCraftingRule3", (byte) itemCraftingRules[2]);
+			tag.setByte("itemCraftingRule1", (byte) itemCraftingRules[0]);
+			tag.setByte("itemCraftingRule2", (byte) itemCraftingRules[1]);
+			tag.setByte("itemCraftingRule3", (byte) itemCraftingRules[2]);
 
-			anvilItemStacks[slot].setTagCompound(Tag);
+			anvilItemStacks[slot].setTagCompound(tag);
 		}
 	}
 
@@ -329,17 +329,17 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	{
 		if(anvilItemStacks[slot].hasTagCompound())
 		{
-			NBTTagCompound Tag = anvilItemStacks[slot].getTagCompound();
-			if(Tag.hasKey("itemCraftingRule1"))
-				Tag.removeTag("itemCraftingRule1");
-			if(Tag.hasKey("itemCraftingRule2"))
-				Tag.removeTag("itemCraftingRule2");
-			if(Tag.hasKey("itemCraftingRule3"))
-				Tag.removeTag("itemCraftingRule3");
-			if(Tag.hasKey("itemCraftingValue"))
-				Tag.removeTag("itemCraftingValue");
+			NBTTagCompound tag = anvilItemStacks[slot].getTagCompound();
+			if(tag.hasKey("itemCraftingRule1"))
+				tag.removeTag("itemCraftingRule1");
+			if(tag.hasKey("itemCraftingRule2"))
+				tag.removeTag("itemCraftingRule2");
+			if(tag.hasKey("itemCraftingRule3"))
+				tag.removeTag("itemCraftingRule3");
+			if(tag.hasKey("itemCraftingValue"))
+				tag.removeTag("itemCraftingValue");
 
-			anvilItemStacks[slot].setTagCompound(Tag);
+			anvilItemStacks[slot].setTagCompound(tag);
 		}
 	}
 
@@ -526,11 +526,11 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 				//new Random(worldObj.getSeed());  // Why is this here?
 				AnvilRecipe recipe = new AnvilRecipe(anvilItemStacks[WELD1_SLOT],anvilItemStacks[WELD2_SLOT],"", 
 						0,
-						anvilItemStacks[FLUX_SLOT] != null ? true : false, AnvilTier, null);
+						anvilItemStacks[FLUX_SLOT] != null ? true : false, anvilTier, null);
 
 				AnvilRecipe recipe2 = new AnvilRecipe(anvilItemStacks[WELD2_SLOT],anvilItemStacks[WELD1_SLOT],"",
 						0,
-						anvilItemStacks[FLUX_SLOT] != null ? true : false, AnvilTier, null);
+						anvilItemStacks[FLUX_SLOT] != null ? true : false, anvilTier, null);
 
 				ItemStack result = manager.findCompleteWeldRecipe(recipe);
 				if(result == null)
@@ -558,7 +558,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	public void closeInventory()
 	{
 		workRecipe = null;
-		if(!worldObj.isRemote && anvilItemStacks[HAMMER_SLOT] == null && this.AnvilTier == AnvilReq.STONE.Tier)
+		if(!worldObj.isRemote && anvilItemStacks[HAMMER_SLOT] == null && this.anvilTier == AnvilReq.STONE.Tier)
 		{
 			ejectContents();
 			worldObj.setBlock(xCoord, yCoord, zCoord, Block.getBlockById(stonePair[0]), stonePair[1], 0x2);
@@ -655,9 +655,9 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		}
 		else if(anvilItemStacks[INPUT1_SLOT] != null && !anvilItemStacks[INPUT1_SLOT].hasTagCompound())
 		{
-			NBTTagCompound Tag = new NBTTagCompound();
-			Tag.setShort("itemCraftingValue", (short)i);
-			anvilItemStacks[INPUT1_SLOT].stackTagCompound = Tag;
+			NBTTagCompound tag = new NBTTagCompound();
+			tag.setShort("itemCraftingValue", (short)i);
+			anvilItemStacks[INPUT1_SLOT].stackTagCompound = tag;
 			return true;
 		}
 		return false;
@@ -669,16 +669,16 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			return anvilItemStacks[INPUT1_SLOT].getTagCompound().getShort("itemCraftingValue");
 		else if(anvilItemStacks[INPUT1_SLOT] != null && !anvilItemStacks[INPUT1_SLOT].hasTagCompound() && craftingValue != 0)
 		{
-			NBTTagCompound Tag = new NBTTagCompound();
-			Tag.setShort("itemCraftingValue", (short) 0);
-			anvilItemStacks[INPUT1_SLOT].setTagCompound(Tag);
+			NBTTagCompound tag = new NBTTagCompound();
+			tag.setShort("itemCraftingValue", (short) 0);
+			anvilItemStacks[INPUT1_SLOT].setTagCompound(tag);
 			return 0;
 		}
 		else if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].hasTagCompound() && !anvilItemStacks[INPUT1_SLOT].getTagCompound().hasKey("itemCraftingValue") && craftingValue != 0)
 		{
-			NBTTagCompound Tag = anvilItemStacks[1].getTagCompound();
-			Tag.setShort("itemCraftingValue", (short) 0);
-			anvilItemStacks[INPUT1_SLOT].setTagCompound(Tag);
+			NBTTagCompound tag = anvilItemStacks[1].getTagCompound();
+			tag.setShort("itemCraftingValue", (short) 0);
+			anvilItemStacks[INPUT1_SLOT].setTagCompound(tag);
 			return 0;
 		}
 		else
@@ -792,7 +792,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			}
 		}
 		nbt.setTag("Items", nbttaglist);
-		nbt.setInteger("Tier", AnvilTier);
+		nbt.setInteger("Tier", anvilTier);
 		nbt.setIntArray("stonePair", stonePair);
 		nbt.setString("plan", craftingPlan);
 	}
@@ -810,7 +810,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			if(byte0 >= 0 && byte0 < anvilItemStacks.length)
 				anvilItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 		}
-		AnvilTier = nbttagcompound.getInteger("Tier");
+		anvilTier = nbttagcompound.getInteger("Tier");
 		stonePair = nbttagcompound.getIntArray("stonePair");
 		craftingPlan = nbttagcompound.getString("plan");
 	}
@@ -825,7 +825,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 
 	@Override
 	public void handleInitPacket(NBTTagCompound nbt) {
-		AnvilTier = nbt.getInteger("AnvilTier");
+		anvilTier = nbt.getInteger("AnvilTier");
 		stonePair = nbt.getIntArray("stonePair");
 		if(nbt.hasKey("hammer"))
 		{
@@ -916,7 +916,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 
 	@Override
 	public void createInitNBT(NBTTagCompound nbt) {
-		nbt.setInteger("AnvilTier", AnvilTier);
+		nbt.setInteger("AnvilTier", anvilTier);
 		nbt.setIntArray("stonePair", stonePair);
 		if(anvilItemStacks[TEAnvil.HAMMER_SLOT] != null)
 		{
@@ -937,7 +937,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setInteger("action", i);
-		nbt.setString("playername", PlayerManagerTFC.getInstance().getClientPlayer().Name);
+		nbt.setString("playername", PlayerManagerTFC.getInstance().getClientPlayer().playerName);
 		this.broadcastPacketInRange(this.createDataPacket(nbt));
 	}
 
@@ -947,7 +947,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setInteger("action", 8);
 		nbt.setString("plan", plan);
-		nbt.setString("playername", PlayerManagerTFC.getInstance().getClientPlayer().Name);
+		nbt.setString("playername", PlayerManagerTFC.getInstance().getClientPlayer().playerName);
 		this.broadcastPacketInRange(this.createDataPacket(nbt));
 	}
 

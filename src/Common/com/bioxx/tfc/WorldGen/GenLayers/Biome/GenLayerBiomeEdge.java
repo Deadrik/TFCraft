@@ -41,33 +41,33 @@ public class GenLayerBiomeEdge extends GenLayerTFC
 				var12 = inCache[x + 1 - 1 + (z + 1) * (xSize + 2)];
 				var13 = inCache[x + 1 + (z + 1 + 1) * (xSize + 2)];
 
-				if (thisID == TFCBiome.HighHills.biomeID)
+				if (thisID == TFCBiome.HIGH_HILLS.biomeID)
 				{
-					if (var10 == TFCBiome.HighHills.biomeID && var11 == TFCBiome.HighHills.biomeID && var12 == TFCBiome.HighHills.biomeID && var13 == TFCBiome.HighHills.biomeID)
+					if (var10 == TFCBiome.HIGH_HILLS.biomeID && var11 == TFCBiome.HIGH_HILLS.biomeID && var12 == TFCBiome.HIGH_HILLS.biomeID && var13 == TFCBiome.HIGH_HILLS.biomeID)
 						outCache[x + z * xSize] = thisID;
 					else
-						outCache[x + z * xSize] = TFCBiome.HighHillsEdge.biomeID;
+						outCache[x + z * xSize] = TFCBiome.HIGH_HILLS_EDGE.biomeID;
 				}
-				else if (thisID == TFCBiome.Mountains.biomeID)
+				else if (thisID == TFCBiome.MOUNTAINS.biomeID)
 				{
-					if (var10 == TFCBiome.Mountains.biomeID && var11 == TFCBiome.Mountains.biomeID && var12 == TFCBiome.Mountains.biomeID && var13 == TFCBiome.Mountains.biomeID)
+					if (var10 == TFCBiome.MOUNTAINS.biomeID && var11 == TFCBiome.MOUNTAINS.biomeID && var12 == TFCBiome.MOUNTAINS.biomeID && var13 == TFCBiome.MOUNTAINS.biomeID)
 						outCache[x + z * xSize] = thisID;
 					else
-						outCache[x + z * xSize] = TFCBiome.MountainsEdge.biomeID;
+						outCache[x + z * xSize] = TFCBiome.MOUNTAINS_EDGE.biomeID;
 				}
-				else if (thisID == TFCBiome.swampland.biomeID)
+				else if (thisID == TFCBiome.SWAMPLAND.biomeID)
 				{
-					if (var10 == TFCBiome.swampland.biomeID && var11 == TFCBiome.swampland.biomeID && var12 == TFCBiome.swampland.biomeID && var13 == TFCBiome.swampland.biomeID)
+					if (var10 == TFCBiome.SWAMPLAND.biomeID && var11 == TFCBiome.SWAMPLAND.biomeID && var12 == TFCBiome.SWAMPLAND.biomeID && var13 == TFCBiome.SWAMPLAND.biomeID)
 						outCache[x + z * xSize] = thisID;
 					else
-						outCache[x + z * xSize] = TFCBiome.plains.biomeID;
+						outCache[x + z * xSize] = TFCBiome.PLAINS.biomeID;
 				}
-				else if (thisID == TFCBiome.HighPlains.biomeID)
+				else if (thisID == TFCBiome.HIGH_PLAINS.biomeID)
 				{
-					if (var10 == TFCBiome.HighPlains.biomeID && var11 == TFCBiome.HighPlains.biomeID && var12 == TFCBiome.HighPlains.biomeID && var13 == TFCBiome.HighPlains.biomeID)
+					if (var10 == TFCBiome.HIGH_PLAINS.biomeID && var11 == TFCBiome.HIGH_PLAINS.biomeID && var12 == TFCBiome.HIGH_PLAINS.biomeID && var13 == TFCBiome.HIGH_PLAINS.biomeID)
 						outCache[x + z * xSize] = thisID;
 					else
-						outCache[x + z * xSize] = TFCBiome.plains.biomeID;
+						outCache[x + z * xSize] = TFCBiome.PLAINS.biomeID;
 				}
 				else
 				{

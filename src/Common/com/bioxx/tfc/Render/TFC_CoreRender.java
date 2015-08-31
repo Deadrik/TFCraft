@@ -36,11 +36,11 @@ public class TFC_CoreRender
 		//int md = renderblocks.blockAccess.getBlockMetadata(x, y, z);
 
 
-		if(te.TypeID <= 0)
+		if(te.typeID <= 0)
 			return false;
 
-		int type = te.TypeID;
-		int meta = te.MetaID;
+		int type = te.typeID;
+		int meta = te.metaID;
 		Block b = Block.getBlockById(type);
 		IIcon tex = b.getIcon(0, meta);
 
@@ -61,7 +61,7 @@ public class TFC_CoreRender
 		//This is the old ore code that I experimented with
 		boolean breaking = renderblocks.overrideBlockTexture != null;
 		IIcon over = renderblocks.overrideBlockTexture;
-		if(!breaking && (b == TFCBlocks.Ore || b == TFCBlocks.Ore2 || b == TFCBlocks.Ore3))
+		if(!breaking && (b == TFCBlocks.ore || b == TFCBlocks.ore2 || b == TFCBlocks.ore3))
 		{
 			//TFCBiome biome = (TFCBiome) renderblocks.blockAccess.getBiomeGenForCoords(par2, par4);
 			renderblocks.overrideBlockTexture = getRockTexture(Minecraft.getMinecraft().theWorld, x, y, z);
@@ -110,12 +110,12 @@ public class TFC_CoreRender
 		}*/
 
 		TEPartial te = (TEPartial) renderblocks.blockAccess.getTileEntity(x, y, z);
-		if(te.TypeID <= 0)
+		if(te.typeID <= 0)
 			return false;
 
 		long rvmeta = te.extraData;
-		int type = te.TypeID;
-		int temeta = te.MetaID;
+		int type = te.typeID;
+		int temeta = te.metaID;
 		IIcon myTexture = renderblocks.overrideBlockTexture == null ? Block.getBlockById(type).getIcon(0, temeta) : renderblocks.overrideBlockTexture;
 
 		if ((rvmeta & 1) == 0)
@@ -165,7 +165,7 @@ public class TFC_CoreRender
 		return true;
 	}
 
-	public static boolean RenderSulfur(Block block, int x, int y, int z, RenderBlocks renderblocks)
+	public static boolean renderSulfur(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
 		IBlockAccess world = renderblocks.blockAccess;
 		if (world.getBlock(x, y, z + 1).isSideSolid(world, x, y, z + 1, ForgeDirection.NORTH))
@@ -202,7 +202,7 @@ public class TFC_CoreRender
 		return true;
 	}
 
-	public static boolean RenderSnow(Block block, int i, int j, int k, RenderBlocks renderblocks)
+	public static boolean renderSnow(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		int meta = renderblocks.blockAccess.getBlockMetadata(i, j, k);
 		float drift = 0.04F + (meta * 0.06F);
@@ -211,7 +211,7 @@ public class TFC_CoreRender
 		return true;
 	}
 
-	public static boolean RenderWoodTrunk(Block block, int i, int j, int k, RenderBlocks renderblocks)
+	public static boolean renderWoodTrunk(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		IBlockAccess blockAccess = renderblocks.blockAccess;
 
@@ -264,7 +264,7 @@ public class TFC_CoreRender
 
 	public static Random renderRandom = new Random();
 
-	public static boolean RenderLooseRock(Block block, int i, int j, int k, RenderBlocks renderblocks)
+	public static boolean renderLooseRock(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		boolean breaking = false;
 		/*if(renderblocks.overrideBlockTexture >= 240)
@@ -299,7 +299,7 @@ public class TFC_CoreRender
 		return true;
 	}
 
-	public static boolean RenderOre(Block block, int xCoord, int yCoord, int zCoord,float par5, float par6, float par7, RenderBlocks renderblocks, IBlockAccess iblockaccess)
+	public static boolean renderOre(Block block, int xCoord, int yCoord, int zCoord,float par5, float par6, float par7, RenderBlocks renderblocks, IBlockAccess iblockaccess)
 	{
 		/*boolean breaking = false;
         if(renderblocks.overrideBlockTexture >= 240)
@@ -330,16 +330,16 @@ public class TFC_CoreRender
 		DataLayer rockLayer2 = TFC_Climate.getCacheManager(world).getRockLayerAt(xCoord, zCoord, 1);
 		DataLayer rockLayer3 = TFC_Climate.getCacheManager(world).getRockLayerAt(xCoord, zCoord, 2);
 
-		if(yCoord <= TFCOptions.RockLayer3Height)
+		if(yCoord <= TFCOptions.rockLayer3Height)
 			var27 = rockLayer3.block.getIcon(5, rockLayer3.data2);
-		else if(yCoord <= TFCOptions.RockLayer2Height)
+		else if(yCoord <= TFCOptions.rockLayer2Height)
 			var27 = rockLayer2.block.getIcon(5, rockLayer2.data2);
 		else
 			var27 = rockLayer1.block.getIcon(5, rockLayer1.data2);
 		return var27;
 	}
 
-	public static boolean RenderMolten(Block block, int i, int j, int k, RenderBlocks renderblocks)
+	public static boolean renderMolten(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		renderblocks.renderStandardBlock(block, i, j, k);
@@ -365,7 +365,7 @@ public class TFC_CoreRender
 		return true;
 	}
 
-	public static boolean RenderSluice(Block block, int i, int j, int k, RenderBlocks renderblocks)
+	public static boolean renderSluice(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		IBlockAccess blockAccess = renderblocks.blockAccess;
 		//Tessellator tessellator = Tessellator.instance;
@@ -495,7 +495,7 @@ public class TFC_CoreRender
 		return true;
 	}
 
-	public static boolean RenderBlockWithCustomColorMultiplier(Block block, RenderBlocks renderBlocks, int xCoord, int yCoord, int zCoord, int colorMultiplier)
+	public static boolean renderBlockWithCustomColorMultiplier(Block block, RenderBlocks renderBlocks, int xCoord, int yCoord, int zCoord, int colorMultiplier)
 	{
 		int l = colorMultiplier;
 		float f = (l >> 16 & 255) / 255.0F;
@@ -519,7 +519,7 @@ public class TFC_CoreRender
 								renderBlocks.renderStandardBlockWithColorMultiplier(block, xCoord, yCoord, zCoord, f, f1, f2);
 	}
 
-	public static boolean RenderFruitLeaves(Block block, int xCoord, int yCoord, int zCoord, RenderBlocks renderblocks)
+	public static boolean renderFruitLeaves(Block block, int xCoord, int yCoord, int zCoord, RenderBlocks renderblocks)
 	{
 		int meta = renderblocks.blockAccess.getBlockMetadata(xCoord, yCoord, zCoord);
 		if(meta >= 8)
@@ -533,13 +533,13 @@ public class TFC_CoreRender
 		{
 			renderblocks.overrideBlockTexture = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
 			if(renderblocks.overrideBlockTexture != null)
-				RenderBlockWithCustomColorMultiplier(block, renderblocks, xCoord, yCoord, zCoord, 16777215);
+				renderBlockWithCustomColorMultiplier(block, renderblocks, xCoord, yCoord, zCoord, 16777215);
 			renderblocks.clearOverrideBlockTexture();
 		}
 		return true;
 	}
 
-	public static boolean RenderSeaPlant(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks)
+	public static boolean renderSeaPlant(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks)
 	{
 		boolean substrateRender = false;
 		boolean plantRender = false;
@@ -566,9 +566,9 @@ public class TFC_CoreRender
 		if(index != null)
 		{
 			if(index.inBloom(TFC_Time.getSeasonAdjustedMonth(z)))//blooming
-				out = BlockFruitLeaves.iconsFlowers[(meta & 7) + offset];
+				out = BlockFruitLeaves.iconsFlowers[(meta & 7) + offset]; //NOPMD
 			else if(meta >= 8)//fruit
-				out = BlockFruitLeaves.iconsFruit[(meta & 7) + offset];
+				out = BlockFruitLeaves.iconsFruit[(meta & 7) + offset]; //NOPMD
 		}
 		return out;
 	}

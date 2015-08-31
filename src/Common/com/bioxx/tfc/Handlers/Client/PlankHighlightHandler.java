@@ -16,7 +16,7 @@ import com.bioxx.tfc.api.TFCBlocks;
 public class PlankHighlightHandler{
 
 	@SubscribeEvent
-	public void DrawBlockHighlightEvent(DrawBlockHighlightEvent evt) 
+	public void drawBlockHighlightEvent(DrawBlockHighlightEvent evt) 
 	{
 		World world = evt.player.worldObj;
 		double var8 = evt.player.lastTickPosX + (evt.player.posX - evt.player.lastTickPosX) * evt.partialTicks;
@@ -51,7 +51,7 @@ public class PlankHighlightHandler{
 
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 
-			boolean isConstruct = world.getBlock(evt.target.blockX, evt.target.blockY, evt.target.blockZ) == TFCBlocks.WoodConstruct;
+			boolean isConstruct = world.getBlock(evt.target.blockX, evt.target.blockY, evt.target.blockZ) == TFCBlocks.woodConstruct;
 			//float div = 1f / TEWoodConstruct.PlankDetailLevel;
 			//Get the hit location in local box coords
 			double hitX = Math.round((evt.target.hitVec.xCoord - evt.target.blockX)*100)/100.0d;

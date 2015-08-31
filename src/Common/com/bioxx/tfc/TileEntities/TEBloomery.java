@@ -56,17 +56,17 @@ public class TEBloomery extends NetworkTileEntity
 	public boolean isStackValid(int i, int j, int k)
 	{
 		Block yNegBlock = worldObj.getBlock(i, j - 1, k);
-		if(yNegBlock != TFCBlocks.Molten &&
+		if(yNegBlock != TFCBlocks.molten &&
 				worldObj.getBlock(i, j - 1, k).getMaterial() != Material.rock && 
 				!worldObj.getBlock(i, j - 1, k).isNormalCube() && 
-				yNegBlock != TFCBlocks.Charcoal)
+				yNegBlock != TFCBlocks.charcoal)
 		{
 			return false;
 		}
-		return ((BlockEarlyBloomery)TFCBlocks.EarlyBloomery).checkStack(worldObj, xCoord, j, zCoord, worldObj.getBlockMetadata(xCoord, yCoord, zCoord)&3);
+		return ((BlockEarlyBloomery)TFCBlocks.bloomery).checkStack(worldObj, xCoord, j, zCoord, worldObj.getBlockMetadata(xCoord, yCoord, zCoord)&3);
 	}
 
-	public boolean AddOreToFire(ItemStack is)
+	public boolean addOreToFire(ItemStack is)
 	{
 		if(((ISmeltable)is.getItem()).getMetalType(is) == Global.PIGIRON || ((ISmeltable)is.getItem()).getMetalType(is) == Global.WROUGHTIRON)
 		{
@@ -85,13 +85,13 @@ public class TEBloomery extends NetworkTileEntity
 
 			//get the direction that the bloomery is facing so that we know where the stack should be
 			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-			int[] direction = BlockEarlyBloomery.bloomeryToStackMap[getCharcoalDir(meta)];
+			int[] direction = BlockEarlyBloomery.BLOOMERY_TO_STACK_MAP[getCharcoalDir(meta)];
 			Block bid = worldObj.getBlock(xCoord + direction[0], yCoord, zCoord + direction[1]);
-			if(bid == TFCBlocks.Charcoal && 
+			if(bid == TFCBlocks.charcoal && 
 					worldObj.getBlockMetadata(xCoord + direction[0], yCoord, zCoord + direction[1]) >= 7 && !bloomeryLit)
 			{
 				bloomeryLit = true;
-				this.fuelTimeLeft = (long) (TFC_Time.getTotalTicks() + (TFC_Time.hourLength * TFCOptions.bloomeryBurnTime));
+				this.fuelTimeLeft = (long) (TFC_Time.getTotalTicks() + (TFC_Time.HOUR_LENGTH * TFCOptions.bloomeryBurnTime));
 				if((meta & 4) == 0) 
 					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 4, 3);
 				return true;
@@ -119,12 +119,12 @@ public class TEBloomery extends NetworkTileEntity
 
 			//get the direction that the bloomery is facing so that we know where the stack should be
 			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-			int[] direction = BlockEarlyBloomery.bloomeryToStackMap[getCharcoalDir(meta)];
+			int[] direction = BlockEarlyBloomery.BLOOMERY_TO_STACK_MAP[getCharcoalDir(meta)];
 			if(bloomeryLit && TFC_Time.getTotalTicks() > fuelTimeLeft)
 			{
-				if (worldObj.getBlock(xCoord + direction[0], yCoord, zCoord + direction[1]) == TFCBlocks.Molten)
+				if (worldObj.getBlock(xCoord + direction[0], yCoord, zCoord + direction[1]) == TFCBlocks.molten)
 				{
-					if(worldObj.setBlock(xCoord + direction[0], yCoord, zCoord + direction[1], TFCBlocks.Bloom))
+					if(worldObj.setBlock(xCoord + direction[0], yCoord, zCoord + direction[1], TFCBlocks.bloom))
 					{
 						bloomeryLit = false;
 
@@ -175,7 +175,7 @@ public class TEBloomery extends NetworkTileEntity
 			{
 				Block bid = worldObj.getBlock(xCoord + direction[0], yCoord + i, zCoord + direction[1]);
 				/*The stack must be air or already be molten rock*/
-				if ((bid.isAir(worldObj, xCoord + direction[0], yCoord + i, zCoord + direction[1]) || bid == TFCBlocks.Molten || bid == TFCBlocks.Charcoal) &&
+				if ((bid.isAir(worldObj, xCoord + direction[0], yCoord + i, zCoord + direction[1]) || bid == TFCBlocks.molten || bid == TFCBlocks.charcoal) &&
 						worldObj.getBlock(xCoord + direction[0], yCoord - 1, zCoord + direction[1]).getMaterial() == Material.rock)
 				{
 					//Make sure that the Stack is surrounded by rock
@@ -188,18 +188,18 @@ public class TEBloomery extends NetworkTileEntity
 						int m = j > 7 ? 7 : j;
 						if(this.bloomeryLit)
 						{
-							if (bid == TFCBlocks.Molten && (mMeta & 8) == 0 ||
+							if (bid == TFCBlocks.molten && (mMeta & 8) == 0 ||
 								bid.isAir(worldObj, xCoord + direction[0], yCoord + i, zCoord + direction[1]) ||
-								bid == TFCBlocks.Charcoal)
+								bid == TFCBlocks.charcoal)
 							{
 								m += 8;
-								worldObj.setBlock(xCoord + direction[0], yCoord + i, zCoord + direction[1], TFCBlocks.Molten, m, 2);
+								worldObj.setBlock(xCoord + direction[0], yCoord + i, zCoord + direction[1], TFCBlocks.molten, m, 2);
 							}
 						}
 						else
 						{
 							if(count > 0)
-								worldObj.setBlock(xCoord + direction[0], yCoord + i, zCoord + direction[1], TFCBlocks.Molten, m, 2);
+								worldObj.setBlock(xCoord + direction[0], yCoord + i, zCoord + direction[1], TFCBlocks.molten, m, 2);
 							else
 								worldObj.setBlockToAir(xCoord + direction[0], yCoord + i, zCoord + direction[1]);
 						}
@@ -211,26 +211,26 @@ public class TEBloomery extends NetworkTileEntity
 				}
 			}
 
-			if(!bloomeryLit && worldObj.getBlock(xCoord + direction[0], yCoord, zCoord + direction[1]) == TFCBlocks.Bloom)
+			if(!bloomeryLit && worldObj.getBlock(xCoord + direction[0], yCoord, zCoord + direction[1]) == TFCBlocks.bloom)
 			{
 				if(isStackValid(xCoord + direction[0], yCoord + 3, zCoord + direction[1]) && 
 						isStackValid(xCoord + direction[0], yCoord + 2, zCoord + direction[1]) && 
 						isStackValid(xCoord + direction[0], yCoord + 1, zCoord + direction[1]))
 				{
-					if(worldObj.getBlock(xCoord + direction[0], yCoord + 3, zCoord + direction[1]) == TFCBlocks.Molten)
+					if(worldObj.getBlock(xCoord + direction[0], yCoord + 3, zCoord + direction[1]) == TFCBlocks.molten)
 						worldObj.setBlockToAir(xCoord + direction[0], yCoord + 3, zCoord + direction[1]);
 				}
 
 				if(isStackValid(xCoord + direction[0], yCoord + 2, zCoord + direction[1]) &&
 						isStackValid(xCoord + direction[0], yCoord + 1, zCoord + direction[1]))
 				{
-					if(worldObj.getBlock(xCoord + direction[0], yCoord + 2, zCoord + direction[1]) == TFCBlocks.Molten)
+					if(worldObj.getBlock(xCoord + direction[0], yCoord + 2, zCoord + direction[1]) == TFCBlocks.molten)
 						worldObj.setBlockToAir(xCoord + direction[0], yCoord + 2, zCoord + direction[1]);
 				}
 
 				if(isStackValid(xCoord + direction[0], yCoord + 1, zCoord + direction[1]))
 				{
-					if(worldObj.getBlock(xCoord + direction[0], yCoord + 1, zCoord + direction[1]) == TFCBlocks.Molten)
+					if(worldObj.getBlock(xCoord + direction[0], yCoord + 1, zCoord + direction[1]) == TFCBlocks.molten)
 						worldObj.setBlockToAir(xCoord + direction[0], yCoord + 1, zCoord + direction[1]);
 				}
 			}
@@ -255,7 +255,8 @@ public class TEBloomery extends NetworkTileEntity
 				for (Iterator iterator = list.iterator(); iterator.hasNext();)
 				{
 					EntityItem entity = (EntityItem)iterator.next();
-					if(entity.getEntityItem().getItem() == TFCItems.Coal && entity.getEntityItem().getItemDamage() == 1 || entity.getEntityItem().getItem() == TFCItems.Coke)
+					if (entity.getEntityItem().getItem() == TFCItems.coal &&
+						entity.getEntityItem().getItemDamage() == 1 /*|| entity.getEntityItem().getItem() == TFCItems.Coke*/)
 					{
 						for(int c = 0; c < entity.getEntityItem().stackSize; c++)
 						{
@@ -276,7 +277,7 @@ public class TEBloomery extends NetworkTileEntity
 						{
 							if(charcoalCount+oreCount < (2*maxCount) && oreCount < maxCount && outCount < 1000)
 							{
-								if(AddOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage())))
+								if(addOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage())))
 								{
 									oreCount+=1;
 									c--;
@@ -300,7 +301,7 @@ public class TEBloomery extends NetworkTileEntity
 						{
 							if(((ISmeltable)entity.getEntityItem().getItem()).getMetalReturnAmount(entity.getEntityItem()) < 100 && oreCount < maxCount && outCount < 1000)
 							{
-								if(AddOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage()))) 
+								if(addOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage()))) 
 								{
 									oreCount+=1;
 									c--;
@@ -327,7 +328,7 @@ public class TEBloomery extends NetworkTileEntity
 				else
 				{
 					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
-					worldObj.spawnEntityInWorld(new EntityItem(worldObj, xCoord, yCoord, zCoord, new ItemStack(TFCBlocks.EarlyBloomery, 1)));
+					worldObj.spawnEntityInWorld(new EntityItem(worldObj, xCoord, yCoord, zCoord, new ItemStack(TFCBlocks.bloomery, 1)));
 				}
 			}
 			else

@@ -2,14 +2,14 @@ package com.bioxx.tfc.Core;
 
 public class Vector3f 
 {
-	public float X;
-	public float Y;
-	public float Z;
+	public float x;
+	public float y;
+	public float z;
 	
-	public Vector3f(float x, float y, float z)
+	public Vector3f(float xCoord, float yCoord, float zCoord)
 	{
-		X = x;
-		Y = y;
-		Z = z;
+		x = xCoord;
+		y = yCoord;
+		z = zCoord;
 	}
 }

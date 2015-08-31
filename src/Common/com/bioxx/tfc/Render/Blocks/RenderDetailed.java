@@ -26,13 +26,13 @@ public class RenderDetailed
 		renderer.renderStandardBlock(block, i, j, k);
 		renderer.enableRender();
 		
-		if(te.TypeID <= 0)
+		if(te.typeID <= 0)
 			return false;
 
-		int type = te.TypeID;
-		int meta = te.MetaID;
+		int type = te.typeID;
+		int meta = te.metaID;
 
-		IIcon myTexture = renderblocks.overrideBlockTexture == null ? Block.getBlockById(te.TypeID).getIcon(0, te.MetaID) : renderblocks.overrideBlockTexture;
+		IIcon myTexture = renderblocks.overrideBlockTexture == null ? Block.getBlockById(te.typeID).getIcon(0, te.metaID) : renderblocks.overrideBlockTexture;
 		
 		for(int subX = 0; subX < 2; subX++)
 		{

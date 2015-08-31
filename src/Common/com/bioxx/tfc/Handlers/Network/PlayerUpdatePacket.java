@@ -35,12 +35,12 @@ public class PlayerUpdatePacket extends AbstractPacket
 
 	public PlayerUpdatePacket() {}
 
-	public PlayerUpdatePacket(EntityPlayer P, int f)
+	public PlayerUpdatePacket(EntityPlayer p, int f)
 	{
 		this.flag = (byte)f;
 		if(this.flag == 0)
 		{
-			FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(P);
+			FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(p);
 			this.stomachLevel = fs.stomachLevel;
 			this.waterLevel = fs.waterLevel;
 			this.soberTime = fs.soberTime;
@@ -52,11 +52,11 @@ public class PlayerUpdatePacket extends AbstractPacket
 		}
 		else if(this.flag == 2)
 		{
-			this.craftingTable = P.getEntityData().getBoolean("craftingTable");
+			this.craftingTable = p.getEntityData().getBoolean("craftingTable");
 		}
 		else if(this.flag == 3)
 		{
-			this.playerSkills = TFC_Core.getSkillStats(P);
+			this.playerSkills = TFC_Core.getSkillStats(p);
 		}
 		/*else if(this.flag == 4)
 		{
@@ -201,7 +201,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 		if(this.flag == 4)
 		{
 			AbstractPacket pkt = new PlayerUpdatePacket(player, 3);
-			TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
+			TerraFirmaCraft.PACKET_PIPELINE.sendTo(pkt, (EntityPlayerMP) player);
 		}
 	}
 

@@ -40,7 +40,7 @@ public class ItemCustomBow extends ItemBow implements ISize
 		super();
 		this.maxStackSize = 1;
 		this.setMaxDamage(384);
-		setCreativeTab(TFCTabs.TFCWeapons);
+		setCreativeTab(TFCTabs.TFC_WEAPONS);
 		setNoRepair();
 	}
 
@@ -72,7 +72,7 @@ public class ItemCustomBow extends ItemBow implements ISize
 		if (event.isCanceled())
 			return event.result;
 
-		if (player.capabilities.isCreativeMode || player.inventory.hasItem(TFCItems.Arrow) || consumeArrowInQuiver(player, false))
+		if (player.capabilities.isCreativeMode || player.inventory.hasItem(TFCItems.arrow) || consumeArrowInQuiver(player, false))
 			player.setItemInUse(is, this.getMaxItemUseDuration(is));
 
 		return is;
@@ -92,7 +92,7 @@ public class ItemCustomBow extends ItemBow implements ISize
 		boolean flag = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, is) > 0;
 
 		//First we run the normal ammo check to see if the arrow is in the players inventory
-		boolean hasAmmo = flag || player.inventory.hasItem(TFCItems.Arrow);
+		boolean hasAmmo = flag || player.inventory.hasItem(TFCItems.arrow);
 		boolean hasAmmoInQuiver = false;
 		//If there was no ammo in the inventory then we need to check if there is a quiver and if there is ammo inside of it.
 		if(!hasAmmo)
@@ -133,7 +133,7 @@ public class ItemCustomBow extends ItemBow implements ISize
 			if (flag)
 				entityarrow.canBePickedUp = 2;
 			else if(hasAmmo)
-				player.inventory.consumeInventoryItem(TFCItems.Arrow);
+				player.inventory.consumeInventoryItem(TFCItems.arrow);
 			else if(hasAmmoInQuiver)
 				consumeArrowInQuiver(player, true);
 
@@ -186,11 +186,11 @@ public class ItemCustomBow extends ItemBow implements ISize
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
-		this.itemIcon = par1IconRegister.registerIcon(Reference.ModID + ":" + this.getIconString() + "_standby");
+		this.itemIcon = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + this.getIconString() + "_standby");
 		iconArray = new IIcon[bowPullIconNameArray.length];
 
 		for (int i = 0; i < iconArray.length; ++i)
-			iconArray[i] = par1IconRegister.registerIcon(Reference.ModID + ":" + this.getIconString() + "_" + bowPullIconNameArray[i]);
+			iconArray[i] = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + this.getIconString() + "_" + bowPullIconNameArray[i]);
 
 	}
 

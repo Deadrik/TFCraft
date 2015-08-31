@@ -19,8 +19,8 @@ import com.bioxx.tfc.Render.RenderQuiver;
 
 public class PlayerRenderHandler {
 
-	public static final RenderQuiver renderQuiver = new RenderQuiver();
-	public static final RenderLargeItem renderLarge = new RenderLargeItem();
+	public static final RenderQuiver RENDER_QUIVER = new RenderQuiver();
+	public static final RenderLargeItem RENDER_LARGE = new RenderLargeItem();
 	
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
@@ -31,10 +31,10 @@ public class PlayerRenderHandler {
 				ItemStack[] equipables = ((InventoryPlayerTFC)((EntityPlayer)el).inventory).extraEquipInventory;
 				for(ItemStack i : equipables){
 					if(i != null && i.getItem() instanceof ItemQuiver){
-						renderQuiver.render(e.entityLiving,i);
+						RENDER_QUIVER.render(e.entityLiving,i);
 					}
 					else if(i != null){
-						renderLarge.render(el, i);
+						RENDER_LARGE.render(el, i);
 					}
 				}
 			}

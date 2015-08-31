@@ -65,7 +65,7 @@ public class BlockFoodPrep extends BlockTerraContainer
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess access, int i, int j, int k, int meta)
 	{
-		return TFC_Textures.InvisibleTexture;
+		return TFC_Textures.invisibleTexture;
 	}
 
 	@Override
@@ -115,32 +115,32 @@ public class BlockFoodPrep extends BlockTerraContainer
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
-		Eject(world,i,j,k);
+		eject(world,i,j,k);
 	}
 
 	@Override
 	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion ex)
 	{
-		Eject(par1World,par2,par3,par4);
+		eject(par1World,par2,par3,par4);
 	}
 
 	@Override
 	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5)
 	{
-		Eject(par1World,par2,par3,par4);
+		eject(par1World,par2,par3,par4);
 	}
 
 	@Override
 	public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6)
 	{
-		Eject(par1World,par2,par3,par4);
+		eject(par1World,par2,par3,par4);
 	}
 
 	//public void onBlockRemoval(World par1World, int par2, int par3, int par4) {Eject(par1World,par2,par3,par4);}
 
-	public void Eject(World par1World, int par2, int par3, int par4)
+	public void eject(World par1World, int par2, int par3, int par4)
 	{
-		if((TEFoodPrep)par1World.getTileEntity(par2, par3, par4) != null)
+		if (par1World.getTileEntity(par2, par3, par4) instanceof TEFoodPrep)
 		{
 			TEFoodPrep te = (TEFoodPrep)par1World.getTileEntity(par2, par3, par4);
 			te.ejectContents();
@@ -161,7 +161,7 @@ public class BlockFoodPrep extends BlockTerraContainer
 	@SideOnly(Side.CLIENT)
 	public String getItemIconName()
 	{
-		return Reference.ModID + ":" + "devices/foodprep";
+		return Reference.MOD_ID + ":" + "devices/foodprep";
 	}
 
 	@Override

@@ -16,13 +16,13 @@ import com.bioxx.tfc.api.Tools.ChiselMode;
  */
 public class ChiselMode_Smooth extends ChiselMode {
 	//private static String name;
-    private static ResourceLocation resourcelocation = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "icons.png");
-    private static int texture_u, texture_v, div;
+    private static ResourceLocation resourcelocation = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "icons.png");
+    private static int textureU, textureV, div;
 
     public ChiselMode_Smooth(String n){
 		//name = n;
-        texture_u = 0;
-        texture_v = 58;
+        textureU = 0;
+        textureV = 58;
         div = 1;
     }
 
@@ -32,13 +32,13 @@ public class ChiselMode_Smooth extends ChiselMode {
     }
 
     @Override
-	public int getTexture_u(){
-        return texture_u;
+	public int getTextureU(){
+        return textureU;
     }
 
     @Override
-	public int getTexture_v(){
-        return texture_v;
+	public int getTextureV(){
+        return textureV;
     }
 
 	@Override
@@ -81,14 +81,14 @@ public class ChiselMode_Smooth extends ChiselMode {
 
         int hasChisel = hasChisel(player);
         if( hasChisel >= 0 ){
-            if(id == TFCBlocks.StoneIgIn) {
-                world.setBlock(x, y, z, TFCBlocks.StoneIgInSmooth, meta, 0x2);
-            } else if(id == TFCBlocks.StoneIgEx) {
-                world.setBlock(x, y, z, TFCBlocks.StoneIgExSmooth, meta, 0x2);
-            } else if(id == TFCBlocks.StoneSed) {
-                world.setBlock(x, y, z, TFCBlocks.StoneSedSmooth, meta, 0x2);
-            } else if(id == TFCBlocks.StoneMM) {
-                world.setBlock(x, y, z, TFCBlocks.StoneMMSmooth, meta, 0x2);
+            if(id == TFCBlocks.stoneIgIn) {
+                world.setBlock(x, y, z, TFCBlocks.stoneIgInSmooth, meta, 0x2);
+            } else if(id == TFCBlocks.stoneIgEx) {
+                world.setBlock(x, y, z, TFCBlocks.stoneIgExSmooth, meta, 0x2);
+            } else if(id == TFCBlocks.stoneSed) {
+                world.setBlock(x, y, z, TFCBlocks.stoneSedSmooth, meta, 0x2);
+            } else if(id == TFCBlocks.stoneMM) {
+                world.setBlock(x, y, z, TFCBlocks.stoneMMSmooth, meta, 0x2);
             }
 
             player.inventory.mainInventory[hasChisel].damageItem(1, player);

@@ -18,7 +18,7 @@ public class SlotFirepitOut extends Slot
 
 	@Override
 	public boolean isItemValid(ItemStack itemstack) {
-		if(itemstack.getItem() == TFCItems.CeramicMold && itemstack.getItemDamage() == 1)
+		if(itemstack.getItem() == TFCItems.ceramicMold && itemstack.getItemDamage() == 1)
 		{
 			slotMax = 1;
 			return true;
@@ -28,7 +28,7 @@ public class SlotFirepitOut extends Slot
 	
 	@Override
 	public void putStack(ItemStack par1ItemStack) {
-		if (par1ItemStack != null && par1ItemStack.getItem() == TFCItems.CeramicMold && par1ItemStack.getItemDamage() == 1)
+		if (par1ItemStack != null && par1ItemStack.getItem() == TFCItems.ceramicMold && par1ItemStack.getItemDamage() == 1)
 		{
 			par1ItemStack.stackSize = 1;
 			slotMax = 1;

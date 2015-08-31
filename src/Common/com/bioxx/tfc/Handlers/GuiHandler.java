@@ -54,11 +54,11 @@ public class GuiHandler implements IGuiHandler
 {
 
 	@Override
-	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) 
+	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) 
 	{
 		TileEntity te = world.getTileEntity(x, y, z);
 
-		switch(ID)
+		switch(id)
 		{
 		case 0:
 		{
@@ -187,7 +187,7 @@ public class GuiHandler implements IGuiHandler
 	}
 
 	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
 	{
 		return null;
 	}

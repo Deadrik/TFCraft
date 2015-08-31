@@ -25,7 +25,7 @@ public class EntitySpawnHandler
 		int chunkX = (int)Math.floor(entity.posX) >> 4;
 		int chunkZ = (int)Math.floor(entity.posZ) >> 4;
 
-		if(event.world.getBlock((int)Math.floor(entity.posX), (int)Math.floor(entity.posY), (int)Math.floor(entity.posZ)) == TFCBlocks.Thatch)
+		if(event.world.getBlock((int)Math.floor(entity.posX), (int)Math.floor(entity.posY), (int)Math.floor(entity.posZ)) == TFCBlocks.thatch)
 		{
 			event.setResult(Result.DENY);
 		}

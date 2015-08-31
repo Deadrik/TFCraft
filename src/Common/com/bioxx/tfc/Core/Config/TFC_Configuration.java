@@ -40,7 +40,7 @@ public class TFC_Configuration extends Configuration
 		prop.setMaxValue(maxValue);
 		if (prop.getInt(defaultValue) < minValue || prop.getInt(defaultValue) > maxValue)
 		{
-			TerraFirmaCraft.log.warn("An invalid value has been entered for " + name + " in the config file. Reverting to the default value.");
+			TerraFirmaCraft.LOG.warn("An invalid value has been entered for " + name + " in the config file. Reverting to the default value.");
 			prop.set(defaultValue);
 			return defaultValue;
 		}
@@ -71,7 +71,7 @@ public class TFC_Configuration extends Configuration
         {
         	if(Float.parseFloat(prop.getString()) < minValue || Float.parseFloat(prop.getString()) > maxValue)
         	{
-    			TerraFirmaCraft.log.warn("An invalid value has been entered for " + name + " in the config file. Reverting to the default value.");
+    			TerraFirmaCraft.LOG.warn("An invalid value has been entered for " + name + " in the config file. Reverting to the default value.");
     			prop.set(defaultValue);
     			return defaultValue;        		
         	}
@@ -79,7 +79,7 @@ public class TFC_Configuration extends Configuration
         }
         catch (Exception e)
         {
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
         }
         return defaultValue;
     }

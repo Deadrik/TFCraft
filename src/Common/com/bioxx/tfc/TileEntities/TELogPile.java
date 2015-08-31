@@ -302,10 +302,10 @@ public class TELogPile extends TileEntity implements IInventory
 		while(blocksOnFire.size() > 0)
 		{
 			Vector3f blockOnFire = blocksOnFire.poll();
-			if (worldObj.getBlock((int) blockOnFire.X, (int) blockOnFire.Y, (int) blockOnFire.Z) != Blocks.fire)
+			if (worldObj.getBlock((int) blockOnFire.x, (int) blockOnFire.y, (int) blockOnFire.z) != Blocks.fire)
 			{
-				worldObj.setBlock((int) blockOnFire.X, (int) blockOnFire.Y, (int) blockOnFire.Z, Blocks.fire);
-				worldObj.markBlockForUpdate((int) blockOnFire.X, (int) blockOnFire.Y, (int) blockOnFire.Z);
+				worldObj.setBlock((int) blockOnFire.x, (int) blockOnFire.y, (int) blockOnFire.z, Blocks.fire);
+				worldObj.markBlockForUpdate((int) blockOnFire.x, (int) blockOnFire.y, (int) blockOnFire.z);
 			}
 		}
 	}
@@ -366,7 +366,7 @@ public class TELogPile extends TileEntity implements IInventory
 
 	private void spreadFire(int x, int y, int z)
 	{
-		if (worldObj.getBlock(x, y, z) == TFCBlocks.LogPile && worldObj.getTileEntity(x, y, z) instanceof TELogPile)
+		if (worldObj.getBlock(x, y, z) == TFCBlocks.logPile && worldObj.getTileEntity(x, y, z) instanceof TELogPile)
 		{
 			TELogPile te = (TELogPile) worldObj.getTileEntity(x, y, z);
 			if(!te.isOnFire)
@@ -378,7 +378,7 @@ public class TELogPile extends TileEntity implements IInventory
 
 	public void createCharcoal(int x, int y, int z, boolean forceComplete)
 	{
-		if(worldObj.getBlock(x, y, z) == TFCBlocks.LogPile)
+		if(worldObj.getBlock(x, y, z) == TFCBlocks.logPile)
 		{
 			TELogPile te = (TELogPile) worldObj.getTileEntity(x, y, z);
 			if(te.isOnFire && (te.fireTimer+TFCOptions.charcoalPitBurnTime < TFC_Time.getTotalHours() || forceComplete))
@@ -387,14 +387,14 @@ public class TELogPile extends TileEntity implements IInventory
 				te.clearContents();
 				float percent = 25 + worldObj.rand.nextInt(26);
 				count = (int) (count * (percent / 100));
-				worldObj.setBlock(x, y, z, TFCBlocks.Charcoal, count, 0x2);
+				worldObj.setBlock(x, y, z, TFCBlocks.charcoal, count, 0x2);
 
 				//Activate the surrounding log piles
 				createCharcoal(x+1, y, z, forceComplete); createCharcoal(x-1, y, z, forceComplete);
 				createCharcoal(x, y+1, z, forceComplete); createCharcoal(x, y-1, z, forceComplete);
 				createCharcoal(x, y, z+1, forceComplete); createCharcoal(x, y, z-1, forceComplete);
 
-				worldObj.notifyBlockOfNeighborChange(x, y, z, TFCBlocks.Charcoal);
+				worldObj.notifyBlockOfNeighborChange(x, y, z, TFCBlocks.charcoal);
 			}
 		}
 	}

@@ -94,16 +94,16 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		if(validateSandwich())//Bread
 		{
 			NBTTagCompound nbt = new NBTTagCompound();
-			ItemStack is = new ItemStack(TFCItems.Sandwich, 1);
+			ItemStack is = new ItemStack(TFCItems.sandwich, 1);
 			//Random R = new Random(getFoodSeed());
-			int[] FG = new int[]{-1,-1,-1,-1,-1};
-			if(getStackInSlot(0) != null) FG[0] = ((IFood)(getStackInSlot(0).getItem())).getFoodID();
-			if(getStackInSlot(1) != null) FG[1] = ((IFood)(getStackInSlot(1).getItem())).getFoodID();
-			if(getStackInSlot(2) != null) FG[2] = ((IFood)(getStackInSlot(2).getItem())).getFoodID();
-			if(getStackInSlot(3) != null) FG[3] = ((IFood)(getStackInSlot(3).getItem())).getFoodID();
-			if(getStackInSlot(4) != null) FG[4] = ((IFood)(getStackInSlot(4).getItem())).getFoodID();
+			int[] foodGroups = new int[]{-1,-1,-1,-1,-1};
+			if(getStackInSlot(0) != null) foodGroups[0] = ((IFood)(getStackInSlot(0).getItem())).getFoodID();
+			if(getStackInSlot(1) != null) foodGroups[1] = ((IFood)(getStackInSlot(1).getItem())).getFoodID();
+			if(getStackInSlot(2) != null) foodGroups[2] = ((IFood)(getStackInSlot(2).getItem())).getFoodID();
+			if(getStackInSlot(3) != null) foodGroups[3] = ((IFood)(getStackInSlot(3).getItem())).getFoodID();
+			if(getStackInSlot(4) != null) foodGroups[4] = ((IFood)(getStackInSlot(4).getItem())).getFoodID();
 
-			nbt.setIntArray("FG", FG);
+			nbt.setIntArray("FG", foodGroups);
 			setSandwichIcon(is);
 
 			float w = 0;
@@ -131,17 +131,17 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 
 	private void setSandwichIcon(ItemStack is)
 	{
-		if(getStackInSlot(0).getItem() == TFCItems.WheatBread)
+		if(getStackInSlot(0).getItem() == TFCItems.wheatBread)
 			is.setItemDamage(0);
-		else if(getStackInSlot(0).getItem() == TFCItems.OatBread)
+		else if(getStackInSlot(0).getItem() == TFCItems.oatBread)
 			is.setItemDamage(1);
-		else if(getStackInSlot(0).getItem() == TFCItems.BarleyBread)
+		else if(getStackInSlot(0).getItem() == TFCItems.barleyBread)
 			is.setItemDamage(2);
-		else if(getStackInSlot(0).getItem() == TFCItems.RyeBread)
+		else if(getStackInSlot(0).getItem() == TFCItems.ryeBread)
 			is.setItemDamage(3);
-		else if(getStackInSlot(0).getItem() == TFCItems.CornBread)
+		else if(getStackInSlot(0).getItem() == TFCItems.cornBread)
 			is.setItemDamage(4);
-		else if(getStackInSlot(0).getItem() == TFCItems.RiceBread)
+		else if(getStackInSlot(0).getItem() == TFCItems.riceBread)
 			is.setItemDamage(5);
 	}
 
@@ -150,17 +150,17 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		if(validateSalad())//Bread
 		{
 			NBTTagCompound nbt = new NBTTagCompound();
-			ItemStack is = new ItemStack(TFCItems.Salad, 1);
+			ItemStack is = new ItemStack(TFCItems.salad, 1);
 			//Random R = new Random(getFoodSeed());
-			int[] FG = new int[]{-1,-1,-1,-1};
-			if(getStackInSlot(1) != null) FG[0] = ((IFood)(getStackInSlot(1).getItem())).getFoodID();
-			if(getStackInSlot(2) != null) FG[1] = ((IFood)(getStackInSlot(2).getItem())).getFoodID();
-			if(getStackInSlot(3) != null) FG[2] = ((IFood)(getStackInSlot(3).getItem())).getFoodID();
-			if(getStackInSlot(4) != null) FG[3] = ((IFood)(getStackInSlot(4).getItem())).getFoodID();
+			int[] foodGroups = new int[]{-1,-1,-1,-1};
+			if(getStackInSlot(1) != null) foodGroups[0] = ((IFood)(getStackInSlot(1).getItem())).getFoodID();
+			if(getStackInSlot(2) != null) foodGroups[1] = ((IFood)(getStackInSlot(2).getItem())).getFoodID();
+			if(getStackInSlot(3) != null) foodGroups[2] = ((IFood)(getStackInSlot(3).getItem())).getFoodID();
+			if(getStackInSlot(4) != null) foodGroups[3] = ((IFood)(getStackInSlot(4).getItem())).getFoodID();
 
-			nbt.setIntArray("FG", FG);
+			nbt.setIntArray("FG", foodGroups);
 
-			is.setItemDamage(new Random(getIconSeed()).nextInt(((ItemTerra)TFCItems.Salad).MetaIcons.length));
+			is.setItemDamage(new Random(getIconSeed()).nextInt(((ItemTerra)TFCItems.salad).metaIcons.length));
 
 			float w = 0;
 			for(int i = 0; i < 4; i++)
@@ -181,7 +181,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 
 			consumeFoodWeight(saladWeights, getStackInSlot(1), getStackInSlot(2), getStackInSlot(3), getStackInSlot(4));
 
-			TFC_Core.getItemInInventory(TFCItems.PotteryBowl, this).stackSize--;
+			TFC_Core.getItemInInventory(TFCItems.potteryBowl, this).stackSize--;
 		}
 	}
 
@@ -246,7 +246,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 			if(weight < 14)
 				return false;
 
-			ItemStack bowlStack = TFC_Core.getItemInInventory(TFCItems.PotteryBowl, this);
+			ItemStack bowlStack = TFC_Core.getItemInInventory(TFCItems.potteryBowl, this);
 			if(bowlStack == null || bowlStack.getItemDamage() != 1)
 			{
 				return false;

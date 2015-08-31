@@ -31,7 +31,7 @@ public class BlockStand2 extends BlockStand implements IMultipleBlock, IEquipabl
 	public BlockStand2()
 	{
 		super();
-		this.setCreativeTab(TFCTabs.TFCDecoration);
+		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 		this.setBlockBounds(0.125f, 0, 0.125f, 0.875f, 1, 0.875f);
 		woodNames = new String[Global.WOOD_ALL.length - 16];
 		System.arraycopy(Global.WOOD_ALL, 16, woodNames, 0,Global.WOOD_ALL.length - 16);
@@ -40,14 +40,14 @@ public class BlockStand2 extends BlockStand implements IMultipleBlock, IEquipabl
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/BarrelHoop");
+		this.blockIcon = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "wood/BarrelHoop");
 	}
 
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
 		if(side == 0 || side == 1)
-			return TFC_Textures.InvisibleTexture;
+			return TFC_Textures.invisibleTexture;
 		else
 			return this.blockIcon;
 	}
@@ -120,6 +120,6 @@ public class BlockStand2 extends BlockStand implements IMultipleBlock, IEquipabl
 	@Override
 	public Block getBlockTypeForRender()
 	{
-		return TFCBlocks.Planks2;
+		return TFCBlocks.planks2;
 	}
 }

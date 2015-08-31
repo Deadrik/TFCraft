@@ -18,10 +18,10 @@ import com.bioxx.tfc.api.SkillsManager.Skill;
 
 public class GuiSkills extends GuiContainerTFC
 {
-	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_skills.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_skills.png");
 	protected EntityPlayer player;
 	private int skillsPage;
-	private static final int skillsPerPage = 9;
+	private static final int SKILLS_PER_PAGE = 9;
 
 	public GuiSkills(EntityPlayer player)
 	{
@@ -40,7 +40,7 @@ public class GuiSkills extends GuiContainerTFC
 		for (Skill o : SkillsManager.instance.getSkillsArray())
 		{
 			count++;
-			if (count < (skillsPerPage * skillsPage) + skillsPerPage && count >= (skillsPerPage * skillsPage))
+			if (count < (SKILLS_PER_PAGE * skillsPage) + SKILLS_PER_PAGE && count >= (SKILLS_PER_PAGE * skillsPage))
 			{
 				bindTexture(texture);
 				drawTexturedModalRect(4, y, 4, 208, 168, 16);
@@ -93,7 +93,7 @@ public class GuiSkills extends GuiContainerTFC
 		}
 		else if (guibutton.id == 5)
 		{
-			if (9 + (skillsPage * skillsPerPage) < SkillsManager.instance.getSkillsArray().size())
+			if (9 + (skillsPage * SKILLS_PER_PAGE) < SkillsManager.instance.getSkillsArray().size())
 				skillsPage++;
 		}
 	}
@@ -107,7 +107,7 @@ public class GuiSkills extends GuiContainerTFC
 		else
 			((GuiButton) buttonList.get(4)).enabled = true;
 
-		if (9 + (skillsPage * skillsPerPage) < SkillsManager.instance.getSkillsArray().size())
+		if (9 + (skillsPage * SKILLS_PER_PAGE) < SkillsManager.instance.getSkillsArray().size())
 			((GuiButton) buttonList.get(5)).enabled = true;
 		else
 			((GuiButton) buttonList.get(5)).enabled = false;
@@ -118,10 +118,10 @@ public class GuiSkills extends GuiContainerTFC
 		this.guiLeft = (this.width - this.xSize) / 2;
 		this.guiTop = (this.height - this.ySize) / 2;
 		buttonList.clear();
-		buttonList.add(new GuiInventoryButton(0, guiLeft + 176, guiTop, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Inventory"), TFC_Textures.GuiInventory));
-		buttonList.add(new GuiInventoryButton(1, guiLeft + 176, guiTop + 19, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Skills"), TFC_Textures.GuiSkills));
-		buttonList.add(new GuiInventoryButton(2, guiLeft + 176, guiTop + 38, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Calendar.Calendar"), TFC_Textures.GuiCalendar));
-		buttonList.add(new GuiInventoryButton(3, guiLeft + 176, guiTop + 57, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Health"), TFC_Textures.GuiHealth));
+		buttonList.add(new GuiInventoryButton(0, guiLeft + 176, guiTop, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Inventory"), TFC_Textures.guiInventory));
+		buttonList.add(new GuiInventoryButton(1, guiLeft + 176, guiTop + 19, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Skills"), TFC_Textures.guiSkills));
+		buttonList.add(new GuiInventoryButton(2, guiLeft + 176, guiTop + 38, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Calendar.Calendar"), TFC_Textures.guiCalendar));
+		buttonList.add(new GuiInventoryButton(3, guiLeft + 176, guiTop + 57, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Health"), TFC_Textures.guiHealth));
 		buttonList.add(new GuiButtonPage(4, guiLeft + 4, guiTop + 144, 30, 15, 0, 177));
 		buttonList.add(new GuiButtonPage(5, guiLeft + 142, guiTop + 144, 30, 15, 0, 192));
 	}

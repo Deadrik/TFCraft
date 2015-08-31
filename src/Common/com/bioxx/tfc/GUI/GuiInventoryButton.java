@@ -13,7 +13,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 
 public class GuiInventoryButton extends GuiButton 
 {
-	private static ResourceLocation texture = new ResourceLocation(Reference.ModID+":textures/gui/inventory.png");
+	private static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID+":textures/gui/inventory.png");
 	public IIcon icon;
 	public int bX;
 	public int bY;

@@ -147,7 +147,7 @@ public class ContainerPlayerTFC extends ContainerPlayer
 			else if (!equipmentSlot.getHasStack() && origStack.getItem() instanceof IEquipable)
 			{
 				IEquipable equipment = (IEquipable) origStack.getItem();
-				if (equipment.getEquipType(origStack) == EquipType.BACK && (equipment == TFCItems.Quiver || equipment.getTooHeavyToCarry(origStack)))
+				if (equipment.getEquipType(origStack) == EquipType.BACK && (equipment == TFCItems.quiver || equipment.getTooHeavyToCarry(origStack)))
 				{
 					ItemStack backStack = slotStack.copy();
 					backStack.stackSize = 1;

@@ -11,8 +11,8 @@ public class ItemCustomWood2 extends ItemCustomWood
 	public ItemCustomWood2(Block b)
 	{
 		super(b);
-		MetaNames = new String[Global.WOOD_ALL.length - 16];
-		System.arraycopy(Global.WOOD_ALL, 16, MetaNames, 0, Global.WOOD_ALL.length - 16);
+		metaNames = new String[Global.WOOD_ALL.length - 16];
+		System.arraycopy(Global.WOOD_ALL, 16, metaNames, 0, Global.WOOD_ALL.length - 16);
 	}
 
 	@Override
@@ -22,12 +22,12 @@ public class ItemCustomWood2 extends ItemCustomWood
 		{
 			int meta = is.getItemDamage();
 			if(meta > 15) meta -= 16;
-			if(MetaNames != null && meta < MetaNames.length)
-				return getUnlocalizedName().concat("." + MetaNames[meta]);
+			if(metaNames != null && meta < metaNames.length)
+				return getUnlocalizedName().concat("." + metaNames[meta]);
 		}
 		catch(Exception ex)
 		{
-			TerraFirmaCraft.log.error(ex.getLocalizedMessage());
+			TerraFirmaCraft.LOG.error(ex.getLocalizedMessage());
 		}
 		return "Unknown";
 	}

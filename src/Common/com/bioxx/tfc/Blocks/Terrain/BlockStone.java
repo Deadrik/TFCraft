@@ -69,13 +69,13 @@ public class BlockStone extends BlockCollapsible
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
 		for(int i = 0; i < names.length; i++)
-			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "rocks/"+names[i]+" Raw");
+			icons[i] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "rocks/"+names[i]+" Raw");
 	}
 
 	@Override
 	public Item getItemDropped(int i, Random random, int j)
 	{
-		return TFCItems.LooseRock;
+		return TFCItems.looseRock;
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class BlockStone extends BlockCollapsible
 			}
 		}
 
-		ItemStack gemStack = TFC_Core.RandomGem(world.rand, gemChance);
+		ItemStack gemStack = TFC_Core.randomGem(world.rand, gemChance);
 		if (gemStack != null)
 			ret.add(gemStack);
 
@@ -120,7 +120,7 @@ public class BlockStone extends BlockCollapsible
 
 			ItemStack is = null;
 
-			is = TFC_Core.RandomGem(random, 0);
+			is = TFC_Core.randomGem(random, 0);
 
 			if(is != null)
 			{
@@ -172,7 +172,7 @@ public class BlockStone extends BlockCollapsible
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
-		dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.LooseRock, world.rand.nextInt(2) + 1, l + looseStart));
+		dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.looseRock, world.rand.nextInt(2) + 1, l + looseStart));
 
 		super.harvestBlock(world, entityplayer, i, j, k, l);
 	}
@@ -185,7 +185,7 @@ public class BlockStone extends BlockCollapsible
 			Random random = new Random();
 			ItemStack is = null;
 
-			is = TFC_Core.RandomGem(random, gemChance);
+			is = TFC_Core.randomGem(random, gemChance);
 
 			if(is != null)
 			{

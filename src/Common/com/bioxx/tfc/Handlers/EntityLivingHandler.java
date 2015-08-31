@@ -88,7 +88,7 @@ public class EntityLivingHandler
 				if(foodstats.shouldSendUpdate())
 				{
 					AbstractPacket pkt = new PlayerUpdatePacket(player, 0);
-					TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
+					TerraFirmaCraft.PACKET_PIPELINE.sendTo(pkt, (EntityPlayerMP) player);
 				}
 				if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.25f)
 				{
@@ -129,7 +129,7 @@ public class EntityLivingHandler
 
 				//Handle Spawn Protection
 				NBTTagCompound nbt = player.getEntityData();
-				long spawnProtectionTimer = nbt.hasKey("spawnProtectionTimer") ? nbt.getLong("spawnProtectionTimer") : TFC_Time.getTotalTicks() + TFC_Time.hourLength;
+				long spawnProtectionTimer = nbt.hasKey("spawnProtectionTimer") ? nbt.getLong("spawnProtectionTimer") : TFC_Time.getTotalTicks() + TFC_Time.HOUR_LENGTH;
 				if(spawnProtectionTimer < TFC_Time.getTotalTicks())
 				{
 					//Add protection time to the chunks
@@ -143,7 +143,7 @@ public class EntityLivingHandler
 						}
 					}
 
-					spawnProtectionTimer += TFC_Time.hourLength;
+					spawnProtectionTimer += TFC_Time.HOUR_LENGTH;
 					nbt.setLong("spawnProtectionTimer", spawnProtectionTimer);
 				}
 			}
@@ -153,7 +153,7 @@ public class EntityLivingHandler
 				FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 				foodstats.clientUpdate();
 				//onUpdate(player) still has a !worldObj.isRemote check, but this allows us to render drunkenness
-				if (pi != null && pi.PlayerUUID.equals(player.getUniqueID()))
+				if (pi != null && pi.playerUUID.equals(player.getUniqueID()))
 				{
 					foodstats.onUpdate(player);
 					if (player.inventory.getCurrentItem() != null)
@@ -183,14 +183,14 @@ public class EntityLivingHandler
 	{
 		IAttributeInstance iattributeinstance = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
 
-		if (iattributeinstance.getModifier(TFCAttributes.thirstyUUID) != null)
+		if (iattributeinstance.getModifier(TFCAttributes.THIRSTY_UUID) != null)
 		{
-			iattributeinstance.removeModifier(TFCAttributes.thirsty);
+			iattributeinstance.removeModifier(TFCAttributes.THIRSTY);
 		}
 
 		if (b)
 		{
-			iattributeinstance.applyModifier(TFCAttributes.thirsty);
+			iattributeinstance.applyModifier(TFCAttributes.THIRSTY);
 		}
 	}
 
@@ -198,14 +198,14 @@ public class EntityLivingHandler
 	{
 		IAttributeInstance iattributeinstance = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
 
-		if (iattributeinstance.getModifier(TFCAttributes.overburdenedUUID) != null)
+		if (iattributeinstance.getModifier(TFCAttributes.OVERBURDENED_UUID) != null)
 		{
-			iattributeinstance.removeModifier(TFCAttributes.overburdened);
+			iattributeinstance.removeModifier(TFCAttributes.OVERBURDENED);
 		}
 
 		if (b)
 		{
-			iattributeinstance.applyModifier(TFCAttributes.overburdened);
+			iattributeinstance.applyModifier(TFCAttributes.OVERBURDENED);
 		}
 	}
 
@@ -217,7 +217,7 @@ public class EntityLivingHandler
 
 		// Force FOV to 1.0f if the player is overburdened to prevent the screen from zooming in a lot.
 		IAttributeInstance iattributeinstance = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
-		if (iattributeinstance.getModifier(TFCAttributes.overburdenedUUID) != null)
+		if (iattributeinstance.getModifier(TFCAttributes.OVERBURDENED_UUID) != null)
 		{
 			event.newfov = 1.0f;
 			return;
@@ -258,7 +258,7 @@ public class EntityLivingHandler
 			if (backItem == null && item.getItem() instanceof IEquipable)
 			{
 				IEquipable equipment = (IEquipable) item.getItem();
-				if (equipment.getEquipType(item) == EquipType.BACK && (equipment == TFCItems.Quiver || equipment.getTooHeavyToCarry(item)))
+				if (equipment.getEquipType(item) == EquipType.BACK && (equipment == TFCItems.quiver || equipment.getTooHeavyToCarry(item)))
 				{
 					player.inventory.setInventorySlotContents(36, item.copy());
 					item.stackSize = 0;
@@ -310,17 +310,17 @@ public class EntityLivingHandler
 			}
 		}
 
-		if (item.getItem() == TFCItems.LooseRock)
+		if (item.getItem() == TFCItems.looseRock)
 			player.triggerAchievement(TFC_Achievements.achLooseRock);
 		else if(item.getItem() instanceof ItemOreSmall)
 			player.triggerAchievement(TFC_Achievements.achSmallOre);
 		else if (item.getItem() instanceof ItemBloom)
 			player.triggerAchievement(TFC_Achievements.achIronAge);
-		else if(item.getItem().equals(TFCItems.GemDiamond))
+		else if(item.getItem().equals(TFCItems.gemDiamond))
 			player.triggerAchievement(TFC_Achievements.achDiamond);
-		else if(item.getItem().equals(TFCItems.Onion) && TFCOptions.onionsAreGross)
+		else if(item.getItem().equals(TFCItems.onion) && TFCOptions.onionsAreGross)
 			player.triggerAchievement(TFC_Achievements.achRutabaga);
-		else if(item.getItem().equals(TFCItems.OreChunk) && (item.getItemDamage() == 11 || item.getItemDamage()== 46 || item.getItemDamage() == 60))
+		else if(item.getItem().equals(TFCItems.oreChunk) && (item.getItemDamage() == 11 || item.getItemDamage()== 46 || item.getItemDamage() == 60))
 			player.triggerAchievement(TFC_Achievements.achLimonite);
 	}
 

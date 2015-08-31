@@ -9,11 +9,11 @@ import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.api.TFCBlocks;
 
 public class TEDetailed extends NetworkTileEntity {
-	public short TypeID = -1;
-	public byte MetaID;
+	public short typeID = -1;
+	public byte metaID;
 	public BitSet data;
-	public static final byte Packet_Update = 0;
-	public static final byte Packet_Activate = 1;
+	public static final byte PACKET_UPDATE = 0;
+	public static final byte PACKET_ACTIVATE = 1;
 	protected byte packetType = -1;
 	private BitSet quads;
 
@@ -28,11 +28,11 @@ public class TEDetailed extends NetworkTileEntity {
 	}
 
 	public int getType() {
-		return TypeID;
+		return typeID;
 	}
 
 	public int getMeta() {
-		return MetaID;
+		return metaID;
 	}
 
 	public boolean getBlockExists(int x, int y, int z) {
@@ -78,8 +78,8 @@ public class TEDetailed extends NetworkTileEntity {
 	@Override
 	public void readFromNBT(NBTTagCompound nbttc) {
 		super.readFromNBT(nbttc);
-		MetaID = nbttc.getByte("metaID");
-		TypeID = nbttc.getShort("typeID");
+		metaID = nbttc.getByte("metaID");
+		typeID = nbttc.getShort("typeID");
 		data = new BitSet(512);
 		data.or(fromByteArray(nbttc.getByteArray("data"), 512));
 		quads.or(fromByteArray(nbttc.getByteArray("quads"), 8));
@@ -91,16 +91,16 @@ public class TEDetailed extends NetworkTileEntity {
 	@Override
 	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setShort("typeID", TypeID);
-		par1NBTTagCompound.setByte("metaID", MetaID);
+		par1NBTTagCompound.setShort("typeID", typeID);
+		par1NBTTagCompound.setByte("metaID", metaID);
 		par1NBTTagCompound.setByteArray("data", toByteArray(data));
 		par1NBTTagCompound.setByteArray("quads", toByteArray(quads));
 	}
 
 	@Override
 	public void handleInitPacket(NBTTagCompound nbt) {
-		TypeID = nbt.getShort("typeID");
-		MetaID = nbt.getByte("metaID");
+		typeID = nbt.getShort("typeID");
+		metaID = nbt.getByte("metaID");
 		data = new BitSet(512);
 		data.or(fromByteArray(nbt.getByteArray("data"), 512));
 
@@ -119,7 +119,7 @@ public class TEDetailed extends NetworkTileEntity {
 	@Override
 	public void handleDataPacket(NBTTagCompound nbt) {
 		packetType = nbt.getByte("packetType");
-		if (packetType == TEDetailed.Packet_Update) {
+		if (packetType == TEDetailed.PACKET_UPDATE) {
 			int index = nbt.getInteger("index");
 			data.set(index, false);
 
@@ -133,17 +133,17 @@ public class TEDetailed extends NetworkTileEntity {
 			}
 
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		} else if (packetType == TEDetailed.Packet_Activate && !worldObj.isRemote) {
-			PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer).ChiselMode = nbt.getByte("chiselMode");
-			((BlockDetailed) TFCBlocks.Detailed).xSelected = nbt.getByte("xSelected");
-			((BlockDetailed) TFCBlocks.Detailed).ySelected = nbt.getByte("ySelected");
-			((BlockDetailed) TFCBlocks.Detailed).zSelected = nbt.getByte("zSelected");
+		} else if (packetType == TEDetailed.PACKET_ACTIVATE && !worldObj.isRemote) {
+			PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer).chiselMode = nbt.getByte("chiselMode");
+			((BlockDetailed) TFCBlocks.detailed).xSelected = nbt.getByte("xSelected");
+			((BlockDetailed) TFCBlocks.detailed).ySelected = nbt.getByte("ySelected");
+			((BlockDetailed) TFCBlocks.detailed).zSelected = nbt.getByte("zSelected");
 
-			((BlockDetailed) TFCBlocks.Detailed).onBlockActivatedServer(worldObj, xCoord, yCoord, zCoord, this.entityplayer, 0, 0, 0, 0);
+			((BlockDetailed) TFCBlocks.detailed).onBlockActivatedServer(worldObj, xCoord, yCoord, zCoord, this.entityplayer, 0, 0, 0, 0);
 
-			((BlockDetailed) TFCBlocks.Detailed).xSelected = -10;
-			((BlockDetailed) TFCBlocks.Detailed).ySelected = -10;
-			((BlockDetailed) TFCBlocks.Detailed).zSelected = -10;
+			((BlockDetailed) TFCBlocks.detailed).xSelected = -10;
+			((BlockDetailed) TFCBlocks.detailed).ySelected = -10;
+			((BlockDetailed) TFCBlocks.detailed).zSelected = -10;
 		}
 
 	}
@@ -153,9 +153,9 @@ public class TEDetailed extends NetworkTileEntity {
 		packetType = nbt.getByte("packetType");
 		/*if (packetType == TEDetailed.Packet_Update) {
 			//The data for this is already set in BlockDetailed onBlockActivatedServer()
-		} else */if (packetType == TEDetailed.Packet_Activate)
+		} else */if (packetType == TEDetailed.PACKET_ACTIVATE)
 		{
-			nbt.setByte("chiselMode", PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode);
+			nbt.setByte("chiselMode", PlayerManagerTFC.getInstance().getClientPlayer().chiselMode);
 			/*We've already added the xSelected, ySelected, and zSelected bytes to the nbt in the
 			 * BlockDetailed onBlockActivated().*/
 		}
@@ -163,8 +163,8 @@ public class TEDetailed extends NetworkTileEntity {
 
 	@Override
 	public void createInitNBT(NBTTagCompound nbt) {
-		nbt.setShort("typeID", TypeID);
-		nbt.setByte("metaID", MetaID);
+		nbt.setShort("typeID", typeID);
+		nbt.setByte("metaID", metaID);
 		nbt.setByteArray("data", toByteArray(data));
 	}
 
@@ -186,46 +186,46 @@ public class TEDetailed extends NetworkTileEntity {
 		return bytes;
 	}
 
-	public static BitSet turnCube(byte[] bytes, int x_angle, int y_angle, int z_angle) {
-		if (x_angle == 0 && y_angle == 0 && z_angle == 0)
+	public static BitSet turnCube(byte[] bytes, int xAngle, int yAngle, int zAngle) {
+		if (xAngle == 0 && yAngle == 0 && zAngle == 0)
 			return fromByteArray(bytes, 512);
 
 		BitSet data = fromByteArray(bytes, 512);
-		BitSet turned_data = new BitSet(512);
+		BitSet turnedData = new BitSet(512);
 
-		int _x, _y, _z;
+		int xCoord, yCoord, zCoord;
 		for (int x = 0; x < 8; ++x)
 			for (int z = 0; z < 8; ++z)
 				for (int y = 0; y < 8; ++y) {
-					_x = x; _y = y; _z = z;
+					xCoord = x; yCoord = y; zCoord = z;
 
 					// X:
-					for (int i = 0; i < x_angle; i += 90)
+					for (int i = 0; i < xAngle; i += 90)
 					{
-						int buf = _y;
-						_y = 7 - _z;
-						_z = buf;
+						int buf = yCoord;
+						yCoord = 7 - zCoord;
+						zCoord = buf;
 					}
 					// Z:
-					for (int i = 0; i < z_angle; i += 90)
+					for (int i = 0; i < zAngle; i += 90)
 					{
-						int buf = _x;
-						_x = 7 - _y;
-						_y = buf;
+						int buf = xCoord;
+						xCoord = 7 - yCoord;
+						yCoord = buf;
 					}
 					// Y:
-					for (int i = 0; i < y_angle; i += 90)
+					for (int i = 0; i < yAngle; i += 90)
 					{
-						int buf = _z;
-						_z = 7 - _x;
-						_x = buf;
+						int buf = zCoord;
+						zCoord = 7 - xCoord;
+						xCoord = buf;
 					}
 
-					int src_i = (x * 8 + z) * 8 + y;
-					int res_i = (_x * 8 + _z) * 8 + _y;
-					turned_data.set(res_i, data.get(src_i));
+					int srcI = (x * 8 + z) * 8 + y;
+					int resI = (xCoord * 8 + zCoord) * 8 + yCoord;
+					turnedData.set(resI, data.get(srcI));
 				}
 
-		return turned_data;
+		return turnedData;
 	}
 }

@@ -60,13 +60,13 @@ public class WAILAData implements IWailaDataProvider
 			return berryBushStack(accessor, config);
 		
 		else if (tileEntity instanceof TEBloom)
-			return new ItemStack(TFCItems.RawBloom);
+			return new ItemStack(TFCItems.rawBloom);
 
 		else if (block instanceof BlockCharcoal)
-			return new ItemStack(TFCItems.Coal, accessor.getMetadata(), 1);
+			return new ItemStack(TFCItems.coal, accessor.getMetadata(), 1);
 
 		else if (TFC_Core.isClay(block) || TFC_Core.isClayGrass(block))
-			return new ItemStack(TFCItems.ClayBall);
+			return new ItemStack(TFCItems.clayBall);
 
 		else if (block instanceof BlockCobble)
 			return new ItemStack(block, 1, accessor.getMetadata() % 8);
@@ -75,7 +75,7 @@ public class WAILAData implements IWailaDataProvider
 			return cropStack(accessor, config);
 		
 		else if (block instanceof BlockCustomDoor)
-			return new ItemStack(Recipes.Doors[((BlockCustomDoor) block).getWoodType() / 2]);
+			return new ItemStack(Recipes.doors[((BlockCustomDoor) block).getWoodType() / 2]);
 
 		else if (tileEntity instanceof TEFruitLeaves)
 			return fruitLeavesStack(accessor, config);
@@ -204,7 +204,7 @@ public class WAILAData implements IWailaDataProvider
 		else if (TFC_Core.isSoilWAILA(block))
 			currenttip = soilBody(itemStack, currenttip, accessor, config);
 
-		else if (block == TFCBlocks.Torch)
+		else if (block == TFCBlocks.torch)
 			currenttip = torchBody(itemStack, currenttip, accessor, config);
 
 		return currenttip;
@@ -350,7 +350,7 @@ public class WAILAData implements IWailaDataProvider
 	{
 		NBTTagCompound tag = accessor.getNBTData();
 		boolean hasFruit = tag.getBoolean("hasFruit");
-		FloraIndex index = FloraManager.getInstance().findMatchingIndex(BlockBerryBush.MetaNames[accessor.getMetadata()]);
+		FloraIndex index = FloraManager.getInstance().findMatchingIndex(BlockBerryBush.metaNames[accessor.getMetadata()]);
 
 		if (hasFruit)
 			return ItemFoodTFC.createTag(index.getOutput());
@@ -366,10 +366,10 @@ public class WAILAData implements IWailaDataProvider
 		CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 		ItemStack itemstack;
 
-		if (crop.Output2 != null)
-			itemstack = new ItemStack(crop.Output2);
+		if (crop.output2 != null)
+			itemstack = new ItemStack(crop.output2);
 		else
-			itemstack = new ItemStack(crop.Output1);
+			itemstack = new ItemStack(crop.output1);
 
 		ItemFoodTFC.createTag(itemstack);
 		return itemstack;
@@ -437,7 +437,7 @@ public class WAILAData implements IWailaDataProvider
 		if ((meta & 8) != 0)
 			meta -= 8;
 
-		return new ItemStack(TFCBlocks.OilLamp, 1, meta);
+		return new ItemStack(TFCBlocks.oilLamp, 1, meta);
 	}
 
 	public ItemStack oreStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
@@ -446,31 +446,31 @@ public class WAILAData implements IWailaDataProvider
 		TEOre te = (TEOre) accessor.getTileEntity();
 		ItemStack itemstack = null;
 
-		if (accessor.getBlock() == TFCBlocks.Ore) // Metals & Coal
+		if (accessor.getBlock() == TFCBlocks.ore) // Metals & Coal
 		{
 			if (config.getConfig("tfc.oreQuality"))
-				itemstack = new ItemStack(TFCItems.OreChunk, 1, getOreGrade(te, meta)); // Shows specific quality ore.
+				itemstack = new ItemStack(TFCItems.oreChunk, 1, getOreGrade(te, meta)); // Shows specific quality ore.
 			else
-				itemstack = new ItemStack(TFCItems.OreChunk, 1, meta); // All normal quality ores.
+				itemstack = new ItemStack(TFCItems.oreChunk, 1, meta); // All normal quality ores.
 
 			if (meta == 14 || meta == 15) // Bituminous Coal & Lignite
-				itemstack = new ItemStack(TFCItems.Coal);
+				itemstack = new ItemStack(TFCItems.coal);
 
 			return itemstack;
 		}
-		else if (accessor.getBlock() == TFCBlocks.Ore2) // Minerals
+		else if (accessor.getBlock() == TFCBlocks.ore2) // Minerals
 		{
-			itemstack = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length);
+			itemstack = new ItemStack(TFCItems.oreChunk, 1, meta + Global.ORE_METAL.length);
 			if (meta == 5)
-				itemstack = new ItemStack(TFCItems.GemDiamond); // Kaolinite
+				itemstack = new ItemStack(TFCItems.gemDiamond); // Kaolinite
 			else if (meta == 13)
-				itemstack = new ItemStack(TFCItems.Powder, 1, 4); // Saltpeter
+				itemstack = new ItemStack(TFCItems.powder, 1, 4); // Saltpeter
 
 			return itemstack;
 		}
-		else if (accessor.getBlock() == TFCBlocks.Ore3) // Minerals
+		else if (accessor.getBlock() == TFCBlocks.ore3) // Minerals
 		{
-			itemstack = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length);
+			itemstack = new ItemStack(TFCItems.oreChunk, 1, meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length);
 			return itemstack;
 		}
 
@@ -540,7 +540,7 @@ public class WAILAData implements IWailaDataProvider
 	{
 		int meta = accessor.getMetadata();
 
-		if (accessor.getBlock() == TFCBlocks.Ore)
+		if (accessor.getBlock() == TFCBlocks.ore)
 		{
 			if (meta == 14)
 			{
@@ -551,7 +551,7 @@ public class WAILAData implements IWailaDataProvider
 				currenttip.set(0, TFC_Core.translate("item.Ore.Lignite.name"));
 			}
 		}
-		else if (accessor.getBlock() == TFCBlocks.Ore2)
+		else if (accessor.getBlock() == TFCBlocks.ore2)
 		{
 			if (meta == 5)
 			{
@@ -577,7 +577,7 @@ public class WAILAData implements IWailaDataProvider
 		ItemStack storage[] = getStorage(tag, accessor.getTileEntity());
 		ItemStack flux = storage[TEAnvil.FLUX_SLOT];
 
-		if (flux != null && flux.getItem() == TFCItems.Powder && flux.getItemDamage() == 0 && flux.stackSize > 0)
+		if (flux != null && flux.getItem() == TFCItems.powder && flux.getItemDamage() == 0 && flux.stackSize > 0)
 			currenttip.add(TFC_Core.translate("item.Powder.Flux.name") + " : " + flux.stackSize);
 
 		return currenttip;
@@ -597,7 +597,7 @@ public class WAILAData implements IWailaDataProvider
 
 		if (sealed && fluid != null && fluid.getFluid() == TFCFluids.MILKCURDLED && (inStack == null || 
 				inStack.getItem() instanceof IFood && ((IFood) inStack.getItem()).getFoodGroup() != EnumFoodGroup.Dairy && ((IFood) inStack.getItem()).isEdible(inStack) && Food.getWeight(inStack) <= 20.0f))
-			recipe = new BarrelRecipe(null, new FluidStack(TFCFluids.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese, 1), 160), null).setMinTechLevel(0);
+			recipe = new BarrelRecipe(null, new FluidStack(TFCFluids.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.cheese, 1), 160), null).setMinTechLevel(0);
 
 		// Fluid Amount
 		if (fluid != null)
@@ -624,7 +624,7 @@ public class WAILAData implements IWailaDataProvider
 			}
 			else if (sealed && fluid != null && fluid.getFluid() == TFCFluids.BRINE)
 			{
-				if (inStack != null && inStack.getItem() instanceof IFood && (((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Fruit || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein || ((IFood) inStack.getItem()) == TFCItems.Cheese) && !Food.isBrined(inStack))
+				if (inStack != null && inStack.getItem() instanceof IFood && (((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Fruit || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein || ((IFood) inStack.getItem()) == TFCItems.cheese) && !Food.isBrined(inStack))
 				{
 					currenttip.add(TFC_Core.translate("gui.barrel.brining"));
 				}
@@ -634,7 +634,7 @@ public class WAILAData implements IWailaDataProvider
 		{
 			if (!Food.isPickled(inStack) && Food.getWeight(inStack) / fluid.amount <= Global.FOOD_MAX_WEIGHT / te.getMaxLiquid())
 			{
-				if ((((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Fruit || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein || ((IFood) inStack.getItem()) == TFCItems.Cheese) && Food.isBrined(inStack))
+				if ((((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Fruit || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein || ((IFood) inStack.getItem()) == TFCItems.cheese) && Food.isBrined(inStack))
 				{
 					currenttip.add(TFC_Core.translate("gui.barrel.pickling"));
 				}
@@ -652,7 +652,7 @@ public class WAILAData implements IWailaDataProvider
 	
 	public List<String> berryBushBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
-		FloraIndex index = FloraManager.getInstance().findMatchingIndex(BlockBerryBush.MetaNames[accessor.getMetadata()]);
+		FloraIndex index = FloraManager.getInstance().findMatchingIndex(BlockBerryBush.metaNames[accessor.getMetadata()]);
 		currenttip.add(TFC_Time.SEASONS[index.harvestStart] + " - " + TFC_Time.SEASONS[index.harvestFinish]);
 		return currenttip;
 	}
@@ -719,7 +719,7 @@ public class WAILAData implements IWailaDataProvider
 
 		if (isLit)
 		{
-			long hours = tag.getLong("fuelTimeLeft") / TFC_Time.hourLength - TFC_Time.getTotalHours();
+			long hours = tag.getLong("fuelTimeLeft") / TFC_Time.HOUR_LENGTH - TFC_Time.getTotalHours();
 
 			if (hours > 0)
 			{
@@ -787,7 +787,7 @@ public class WAILAData implements IWailaDataProvider
 			int fuelCount = 0;
 			for (ItemStack is : storage)
 			{
-				if (is != null && is.getItem() != null && (is.getItem() == TFCItems.Logs || is.getItem() == Item.getItemFromBlock(TFCBlocks.Peat)))
+				if (is != null && is.getItem() != null && (is.getItem() == TFCItems.logs || is.getItem() == Item.getItemFromBlock(TFCBlocks.peat)))
 					fuelCount++;
 			}
 
@@ -819,7 +819,7 @@ public class WAILAData implements IWailaDataProvider
 
 			for (int j = 10; j <= 13; j++) // Molds are stored in slots 7 through 9 per te.getMold()
 			{
-				if (storage[j] != null && storage[j].getItem() == TFCItems.CeramicMold && storage[j].stackSize > 0)
+				if (storage[j] != null && storage[j].getItem() == TFCItems.ceramicMold && storage[j].stackSize > 0)
 					hasMold = true;
 			}
 			if (hasMold)
@@ -929,7 +929,7 @@ public class WAILAData implements IWailaDataProvider
 
 		for (ItemStack is : storage)
 		{
-			if (is != null && is.getItem() == TFCItems.Egg)
+			if (is != null && is.getItem() == TFCItems.egg)
 			{
 				if (is.hasTagCompound() && is.getTagCompound().hasKey("Fertilized"))
 					fertEggCount++;
@@ -965,7 +965,7 @@ public class WAILAData implements IWailaDataProvider
 	{
 		int meta = accessor.getMetadata();
 
-		if (accessor.getBlock() == TFCBlocks.Ore)
+		if (accessor.getBlock() == TFCBlocks.ore)
 		{
 			switch (meta)
 			{
@@ -1021,7 +1021,7 @@ public class WAILAData implements IWailaDataProvider
 			}
 
 		}
-		else if (accessor.getBlock() == TFCBlocks.Ore2)
+		else if (accessor.getBlock() == TFCBlocks.ore2)
 		{
 			switch (meta)
 			{
@@ -1047,7 +1047,7 @@ public class WAILAData implements IWailaDataProvider
 				break;
 			}
 		}
-		else if (accessor.getBlock() == TFCBlocks.Ore3)
+		else if (accessor.getBlock() == TFCBlocks.ore3)
 		{
 			switch (meta)
 			{
@@ -1076,7 +1076,7 @@ public class WAILAData implements IWailaDataProvider
 			currenttip.add(TFC_Core.translate("gui.logs") + " : " + wood + "/8");
 		else if (burnStart > 0)
 		{
-			int hours = (int) (TFCOptions.pitKilnBurnTime - (TFC_Time.getTotalHours() - (burnStart / TFC_Time.hourLength)));
+			int hours = (int) (TFCOptions.pitKilnBurnTime - (TFC_Time.getTotalHours() - (burnStart / TFC_Time.HOUR_LENGTH)));
 			currenttip.add(hours + " " + TFC_Core.translate("gui.hoursRemaining") + " (" + Helper.roundNumber(100 - (hours / TFCOptions.pitKilnBurnTime) * 100, 10) + "%)");
 		}
 
@@ -1087,7 +1087,7 @@ public class WAILAData implements IWailaDataProvider
 	{
 		NBTTagCompound tag = accessor.getNBTData();
 		Long growTime = tag.getLong("growTime");
-		int days = (int) ((growTime - TFC_Time.getTotalTicks()) / TFC_Time.dayLength);
+		int days = (int) ((growTime - TFC_Time.getTotalTicks()) / TFC_Time.DAY_LENGTH);
 		if (days > 0)
 			currenttip.add(days + " " + TFC_Core.translate("gui.daysRemaining"));
 
@@ -1164,7 +1164,7 @@ public class WAILAData implements IWailaDataProvider
 	{
 		Block b = accessor.getBlock();
 		int dam = itemStack.getItemDamage();
-		if (b == TFCBlocks.Dirt2 || b == TFCBlocks.Sand2 || TFC_Core.isGrassType2(b) || b == TFCBlocks.Gravel2)
+		if (b == TFCBlocks.dirt2 || b == TFCBlocks.sand2 || TFC_Core.isGrassType2(b) || b == TFCBlocks.gravel2)
 		{
 			dam += 16;
 		}

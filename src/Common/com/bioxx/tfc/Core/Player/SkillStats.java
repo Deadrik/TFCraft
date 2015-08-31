@@ -78,7 +78,7 @@ public class SkillStats
 		if(player instanceof EntityPlayerMP)
 		{
 			AbstractPacket pkt = new PlayerUpdatePacket(1, skillName, i);
-			TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
+			TerraFirmaCraft.PACKET_PIPELINE.sendTo(pkt, (EntityPlayerMP) player);
 		}
 		writeNBT(player.getEntityData());
 	}

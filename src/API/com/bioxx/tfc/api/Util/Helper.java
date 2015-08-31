@@ -75,7 +75,7 @@ public class Helper {
 	 * Returns the value of the first parameter, clamped to be within the lower and upper limits given by the second and
 	 * third parameters
 	 */
-	public static float clamp_float(float par0, float par1, float par2)
+	public static float clampFloat(float par0, float par1, float par2)
 	{
 		return par0 < par1 ? par1 : par0 > par2 ? par2 : par0;
 	}
@@ -111,13 +111,13 @@ public class Helper {
 			f.setAccessible(true);
 			return (Integer) f.get(obj);
 		} catch (NoSuchFieldException e) {
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		} catch (SecurityException e) {
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		} catch (IllegalArgumentException e) {
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		} catch (IllegalAccessException e) {
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		}
 		return 0; 		
 	}
@@ -136,13 +136,13 @@ public class Helper {
 			f.setAccessible(true);
 			return (Boolean) f.get(obj);
 		} catch (NoSuchFieldException e) {
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		} catch (SecurityException e) {
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		} catch (IllegalArgumentException e) {
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		} catch (IllegalAccessException e) {
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		}
 		return false; 		
 	}
@@ -161,13 +161,13 @@ public class Helper {
 			f.setAccessible(true);
 			return f.get(obj);
 		} catch (NoSuchFieldException e) {
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		} catch (SecurityException e) {
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		} catch (IllegalArgumentException e) {
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		} catch (IllegalAccessException e) {
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		}
 		return null; 		
 	}

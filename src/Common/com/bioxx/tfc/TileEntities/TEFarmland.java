@@ -43,7 +43,7 @@ public class TEFarmland extends NetworkTileEntity
 				int soilMax = getSoilMax();
 				int restoreAmount = 139;
 
-				if (worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.Crops)
+				if (worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.crops)
 				{
 					crop = CropManager.getInstance().getCropFromId(((TECrop)worldObj.getTileEntity(xCoord, yCoord + 1, zCoord)).cropId);
 
@@ -145,7 +145,7 @@ public class TEFarmland extends NetworkTileEntity
 		return (int) (25000 * timeMultiplier);
 	}
 
-	public void DrainNutrients(int type, float multiplier)
+	public void drainNutrients(int type, float multiplier)
 	{
 		float timeMultiplier = 360f / TFC_Time.daysInYear;
 		nutrients[type] -= (100 * multiplier) * timeMultiplier;

@@ -28,7 +28,7 @@ public class ContainerCrucible extends ContainerTFC
 			@Override
 			public boolean isItemValid(ItemStack itemstack)
 			{
-				return !(itemstack.getItem() == TFCItems.RawBloom || itemstack.getItem() == TFCItems.Bloom && itemstack.getItemDamage() > 100);
+				return !(itemstack.getItem() == TFCItems.rawBloom || itemstack.getItem() == TFCItems.bloom && itemstack.getItemDamage() > 100);
 			}
 		});
 
@@ -63,7 +63,7 @@ public class ContainerCrucible extends ContainerTFC
 					return null;
 			}
 			// Ceramic molds into output slot
-			else if (slotStack.getItem() == TFCItems.CeramicMold && slotStack.getItemDamage() == 1 || slotStack.getItem() instanceof ItemMeltedMetal)
+			else if (slotStack.getItem() == TFCItems.ceramicMold && slotStack.getItemDamage() == 1 || slotStack.getItem() instanceof ItemMeltedMetal)
 			{
 				if (!this.mergeItemStack(slotStack, 1, 2, true))
 					return null;

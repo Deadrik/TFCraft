@@ -36,7 +36,7 @@ public class BlockStand extends BlockTerraContainer implements IMultipleBlock, I
 	public BlockStand()
 	{
 		super(Material.wood);
-		this.setCreativeTab(TFCTabs.TFCDecoration);
+		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 		this.setBlockBounds(0.125f, 0, 0.125f, 0.875f, 1, 0.875f);
 		woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0,16);
@@ -45,14 +45,14 @@ public class BlockStand extends BlockTerraContainer implements IMultipleBlock, I
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/BarrelHoop");
+		this.blockIcon = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "wood/BarrelHoop");
 	}
 
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
 		if(side == 0 || side == 1)
-			return TFC_Textures.InvisibleTexture;
+			return TFC_Textures.invisibleTexture;
 		else
 			return this.blockIcon;
 	}
@@ -156,7 +156,7 @@ public class BlockStand extends BlockTerraContainer implements IMultipleBlock, I
 	@Override
 	public Block getBlockTypeForRender()
 	{
-		return TFCBlocks.Planks;
+		return TFCBlocks.planks;
 	}
 
 	@Override

@@ -37,14 +37,14 @@ public class BlockCollapsible extends BlockTerraContainer
 	{
 		super(material);
 		this.dropBlock = block;
-		this.setCreativeTab(TFCTabs.TFCBuilding);
+		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 	}
 
 	protected BlockCollapsible(Material material)
 	{
 		super(material);
 		this.dropBlock = Blocks.air;
-		this.setCreativeTab(TFCTabs.TFCBuilding);
+		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 	}
 
 	public int[] getDropBlock(World world, int x, int y, int z)
@@ -63,20 +63,20 @@ public class BlockCollapsible extends BlockTerraContainer
 		Block block = world.getBlock(x, y, z);
 		if (block == Blocks.fire)
 			return true;
-		if (block == TFCBlocks.TallGrass)
+		if (block == TFCBlocks.tallGrass)
 			return true;
-		if (block == TFCBlocks.Torch)
+		if (block == TFCBlocks.torch)
 			return true;
-		if (block == TFCBlocks.SmokeRack)
+		if (block == TFCBlocks.smokeRack)
 			return true;
-		if (block == TFCBlocks.ToolRack)
+		if (block == TFCBlocks.toolRack)
 			return true;
 
 		if (block == Blocks.bedrock)
 			return false;
-		if (block == TFCBlocks.Charcoal)
+		if (block == TFCBlocks.charcoal)
 			return false;
-		if (block == TFCBlocks.Molten)
+		if (block == TFCBlocks.molten)
 			return false;
 
 		if (!block.isOpaqueCube() && !block.renderAsNormalBlock() && !world.isSideSolid(x, y, z, ForgeDirection.UP))
@@ -220,9 +220,9 @@ public class BlockCollapsible extends BlockTerraContainer
 
 					ent.aliveTimer/*fallTime*/ = -5000;
 					world.spawnEntityInWorld(ent);
-					Random R = new Random(x*y+z);
-					if(R.nextInt(100) > 90)
-						world.playSoundAtEntity(ent, TFC_Sounds.FALLININGROCKLONG, 1.0F, 0.8F + (R.nextFloat()/2));
+					Random r = new Random(x*y+z);
+					if(r.nextInt(100) > 90)
+						world.playSoundAtEntity(ent, TFC_Sounds.FALLININGROCKLONG, 1.0F, 0.8F + (r.nextFloat()/2));
 				}
 
 				if (world.getBlock(x, y, z) instanceof BlockOre && !TFCOptions.enableCaveInsDestroyOre)
@@ -233,17 +233,17 @@ public class BlockCollapsible extends BlockTerraContainer
 					world.setBlockToAir(x, y, z);
 
 				if(world.getBlock(x, y-1, z) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(x, y-1, z)).blockType == this && 
-						((TEPartial)world.getTileEntity(x, y-1, z)).MetaID == fallingBlockMeta)
+						((TEPartial)world.getTileEntity(x, y-1, z)).metaID == fallingBlockMeta)
 				{
 					world.setBlockToAir(x, y-1, z);
 
 					if(world.getBlock(x, y-2, z) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(x, y-2, z)).blockType == this && 
-							((TEPartial)world.getTileEntity(x, y-2, z)).MetaID == fallingBlockMeta)
+							((TEPartial)world.getTileEntity(x, y-2, z)).metaID == fallingBlockMeta)
 					{
 						world.setBlockToAir(x, y-2, z);
 
 						if(world.getBlock(x, y-3, z) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(x, y-3, z)).blockType == this && 
-								((TEPartial)world.getTileEntity(x, y-3, z)).MetaID == fallingBlockMeta)
+								((TEPartial)world.getTileEntity(x, y-3, z)).metaID == fallingBlockMeta)
 							world.setBlockToAir(x, y-3, z);
 					}
 				}
@@ -310,7 +310,7 @@ public class BlockCollapsible extends BlockTerraContainer
 		}
 
 		//If we are in a soft sedimentary rock layer then we increase the chance of a collapse by 10%
-		if(this == TFCBlocks.StoneSed)
+		if(this == TFCBlocks.stoneSed)
 			finalCollapseRatio -= finalCollapseRatio * softModifier;
 
 		//First we check the rng to see if a collapse is going to occur

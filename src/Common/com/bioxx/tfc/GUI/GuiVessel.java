@@ -9,7 +9,7 @@ import com.bioxx.tfc.Containers.ContainerVessel;
 
 public class GuiVessel extends GuiContainerTFC
 {
-	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_vessel.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_vessel.png");
 
 	public GuiVessel(InventoryPlayer inventoryplayer, World world, int i, int j, int k)
 	{

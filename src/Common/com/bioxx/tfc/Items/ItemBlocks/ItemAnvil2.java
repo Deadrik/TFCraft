@@ -11,7 +11,7 @@ public class ItemAnvil2 extends ItemAnvil
 	public ItemAnvil2(Block par1) 
 	{
 		super(par1);
-		this.MetaNames = new String[]{ "Rose Gold", "Bismuth Bronze", "Black Bronze"};
+		this.metaNames = new String[]{ "Rose Gold", "Bismuth Bronze", "Black Bronze"};
 	}
 	
 	@Override

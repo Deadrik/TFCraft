@@ -10,7 +10,7 @@ public enum EnumItemReach
 
 	public final double multiplier;
 	private final String name;
-	private static final EnumItemReach Sizes[] = new EnumItemReach[] {
+	private static final EnumItemReach DISTANCES[] = new EnumItemReach[] {
 		SHORT, MEDIUM, FAR};
 
 	private EnumItemReach(String s, double i)

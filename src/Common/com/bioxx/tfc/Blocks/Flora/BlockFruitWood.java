@@ -60,7 +60,7 @@ public class BlockFruitWood extends BlockTerraContainer
 	public void registerBlockIcons(IIconRegister registerer)
 	{
 		for(int i = 0; i < 9; i++)
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + Global.FRUIT_META_NAMES[i] + " Wood");
+			icons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "wood/fruit trees/" + Global.FRUIT_META_NAMES[i] + " Wood");
 	}
 
 	@Override
@@ -71,15 +71,15 @@ public class BlockFruitWood extends BlockTerraContainer
 		ItemStack equip = entityplayer.getCurrentEquippedItem();
 		if(equip!=null)
 		{
-			for(int cnt = 0; cnt < Recipes.Axes.length && !isAxeorSaw; cnt++)
+			for(int cnt = 0; cnt < Recipes.axes.length && !isAxeorSaw; cnt++)
 			{
-				if(equip.getItem() == Recipes.Axes[cnt])
+				if(equip.getItem() == Recipes.axes[cnt])
 					isAxeorSaw = true;
 			}
 
-			for(int cnt = 0; cnt < Recipes.Saws.length && !isAxeorSaw; cnt++)
+			for(int cnt = 0; cnt < Recipes.saws.length && !isAxeorSaw; cnt++)
 			{
-				if(equip.getItem() == Recipes.Saws[cnt])
+				if(equip.getItem() == Recipes.saws[cnt])
 					isAxeorSaw = true;
 			}
 		}
@@ -114,8 +114,8 @@ public class BlockFruitWood extends BlockTerraContainer
 					world.getBlock(i, j, k + 1) == this ||
 					world.getBlock(i, j, k - 1) == this)
 			{
-				Random R = new Random();
-				if(R.nextInt(100) > 50 && isAxeorSaw)
+				Random r = new Random();
+				if(r.nextInt(100) > 50 && isAxeorSaw)
 				{
 					if(l < 8 && (
 							world.getBlock(i + 1, j, k) == TFCBlocks.fruitTreeLeaves2 ||
@@ -127,7 +127,7 @@ public class BlockFruitWood extends BlockTerraContainer
 					{
 						l += 8;
 					}
-					dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.FruitTreeSapling, 1, l));
+					dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.fruitTreeSapling, 1, l));
 				}
 			}
 		}
@@ -140,7 +140,7 @@ public class BlockFruitWood extends BlockTerraContainer
 	@Override
 	public Item getItemDropped(int i, Random random, int j)
 	{
-		return TFCItems.Logs;
+		return TFCItems.logs;
 	}
 
 	@Override
@@ -332,7 +332,7 @@ public class BlockFruitWood extends BlockTerraContainer
 		}
 	}
 
-	public void SurroundWithLeaves(World world, int i, int j, int k)
+	public void surroundWithLeaves(World world, int i, int j, int k)
 	{
 		for (int y = 0; y <= 1; y++)
 		{

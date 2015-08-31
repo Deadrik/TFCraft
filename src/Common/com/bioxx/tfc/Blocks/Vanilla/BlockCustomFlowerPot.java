@@ -90,8 +90,8 @@ public class BlockCustomFlowerPot extends BlockFlowerPot
 			Block block = Block.getBlockFromItem(item);
 			
 			// TFC Blocks
-			if (block == TFCBlocks.Cactus || block == TFCBlocks.Flora || block == TFCBlocks.Flowers || block == TFCBlocks.Flowers2 || 
-					block == TFCBlocks.Fungi || block == TFCBlocks.Sapling || block == TFCBlocks.Sapling2 || block == TFCBlocks.TallGrass && meta == 1 /*Fern*/)
+			if (block == TFCBlocks.cactus || block == TFCBlocks.flora || block == TFCBlocks.flowers || block == TFCBlocks.flowers2 || 
+					block == TFCBlocks.fungi || block == TFCBlocks.sapling || block == TFCBlocks.sapling2 || block == TFCBlocks.tallGrass && meta == 1 /*Fern*/)
 				return true;
 			
 			// Vanilla Blocks
@@ -118,13 +118,13 @@ public class BlockCustomFlowerPot extends BlockFlowerPot
 	@SideOnly(Side.CLIENT)
 	public String getItemIconName()
 	{
-		return Reference.ModID + ":" + "flower_pot";
+		return Reference.MOD_ID + ":" + "flower_pot";
 	}
 
 	@Override
-	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
+	public Item getItemDropped(int i, Random rand, int j)
 	{
-		return Item.getItemFromBlock(TFCBlocks.FlowerPot);
+		return Item.getItemFromBlock(TFCBlocks.flowerPot);
 	}
 
 	@Override
@@ -136,7 +136,7 @@ public class BlockCustomFlowerPot extends BlockFlowerPot
 		{
 			return new ItemStack(teFlowerPot.getFlowerPotItem(), 1, teFlowerPot.getFlowerPotData());
 		}
-		return new ItemStack(TFCBlocks.FlowerPot);
+		return new ItemStack(TFCBlocks.flowerPot);
 	}
 
 	/**

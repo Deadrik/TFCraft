@@ -19,9 +19,9 @@ import net.minecraft.world.World;
 
 public class BlockBellows extends BlockTerraContainer
 {
-	public static IIcon[] Sides = new IIcon[4];
-	public static IIcon BellowsFront;
-	public static IIcon BellowsBack;
+	public static IIcon[] sides = new IIcon[4];
+	public static IIcon bellowsFront;
+	public static IIcon bellowsBack;
 
 	public static int getDirectionFromMetadata(int i)
 	{
@@ -31,7 +31,7 @@ public class BlockBellows extends BlockTerraContainer
 	public BlockBellows(Material material)
 	{
 		super(material);
-		this.setCreativeTab(TFCTabs.TFCDevices);
+		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 	}
 
 	@Override
@@ -65,68 +65,68 @@ public class BlockBellows extends BlockTerraContainer
 	public IIcon getIcon(int i, int j) {
 		if (i == 0)// bottom
 		{
-			if (j == 0) { return Sides[0]; }
-			else if (j == 1) { return Sides[1]; }
-			else if (j == 2) { return Sides[3]; }
-			else if (j == 3) { return Sides[2]; }
+			if (j == 0) { return sides[0]; }
+			else if (j == 1) { return sides[1]; }
+			else if (j == 2) { return sides[3]; }
+			else if (j == 3) { return sides[2]; }
 		}
 		else if (i == 1)// top
 		{
-			if (j == 0) { return Sides[0]; }
-			else if (j == 1) { return Sides[1]; }
-			else if (j == 2) { return Sides[3]; }
-			else if (j == 3) { return Sides[2]; }
+			if (j == 0) { return sides[0]; }
+			else if (j == 1) { return sides[1]; }
+			else if (j == 2) { return sides[3]; }
+			else if (j == 3) { return sides[2]; }
 		}
 		else if (i == 2)// -x
 		{
-			if (j == 0) { return BellowsBack; }
-			else if (j == 1) { return Sides[2]; } // -z
-			else if (j == 2) { return BellowsBack; }
-			else if (j == 3) { return Sides[1]; } // -z
+			if (j == 0) { return bellowsBack; }
+			else if (j == 1) { return sides[2]; } // -z
+			else if (j == 2) { return bellowsBack; }
+			else if (j == 3) { return sides[1]; } // -z
 		}
 		else if (i == 3)// -z
 		{
-			if (j == 0) { return BellowsBack; }
-			else if (j == 1) { return Sides[1]; } // -z
-			else if (j == 2) { return BellowsBack; }
-			else if (j == 3) { return Sides[2]; } // -z
+			if (j == 0) { return bellowsBack; }
+			else if (j == 1) { return sides[1]; } // -z
+			else if (j == 2) { return bellowsBack; }
+			else if (j == 3) { return sides[2]; } // -z
 		}
 		else if (i == 4)// +x
 		{
-			if (j == 0) { return Sides[2]; }
-			else if (j == 1) { return BellowsBack; } // -z
-			else if (j == 2) { return Sides[1]; }
-			else if (j == 3) { return BellowsBack; } // -z
+			if (j == 0) { return sides[2]; }
+			else if (j == 1) { return bellowsBack; } // -z
+			else if (j == 2) { return sides[1]; }
+			else if (j == 3) { return bellowsBack; } // -z
 		}
 		else if (i == 5)// -z
 		{
-			if (j == 0) { return Sides[1]; }
-			else if (j == 1) { return BellowsBack; } // -z
-			else if (j == 2) { return Sides[2]; }
-			else if (j == 3) { return BellowsBack; } // -z
+			if (j == 0) { return sides[1]; }
+			else if (j == 1) { return bellowsBack; } // -z
+			else if (j == 2) { return sides[2]; }
+			else if (j == 3) { return bellowsBack; } // -z
 		}
 		else
 		{
-			return Sides[1];
+			return sides[1];
 		}
-		return Sides[0];
+		return sides[0];
 	}
 
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		Sides[0] = registerer.registerIcon(Reference.ModID + ":" + "devices/Bellows82");
-		Sides[1] = registerer.registerIcon(Reference.ModID + ":" + "devices/Bellows83");
-		Sides[2] = registerer.registerIcon(Reference.ModID + ":" + "devices/Bellows84");
-		Sides[3] = registerer.registerIcon(Reference.ModID + ":" + "devices/Bellows85");
-		BellowsFront = registerer.registerIcon(Reference.ModID + ":" + "devices/Bellows Front");
-		BellowsBack = registerer.registerIcon(Reference.ModID + ":" + "devices/Bellows Back");
+		sides[0] = registerer.registerIcon(Reference.MOD_ID + ":" + "devices/Bellows82");
+		sides[1] = registerer.registerIcon(Reference.MOD_ID + ":" + "devices/Bellows83");
+		sides[2] = registerer.registerIcon(Reference.MOD_ID + ":" + "devices/Bellows84");
+		sides[3] = registerer.registerIcon(Reference.MOD_ID + ":" + "devices/Bellows85");
+		bellowsFront = registerer.registerIcon(Reference.MOD_ID + ":" + "devices/Bellows Front");
+		bellowsBack = registerer.registerIcon(Reference.MOD_ID + ":" + "devices/Bellows Back");
 	}
 
 	@Override
 	public int getRenderType()
 	{
-		return TFCBlocks.BellowsRenderId;
+		return TFCBlocks.bellowsRenderId;
 	}
 
 	/*@Override

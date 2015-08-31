@@ -57,7 +57,7 @@ public class GenLayerSmoothBiomeTFC extends GenLayerTFC
 						throw new Exception();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						TerraFirmaCraft.log.catching(e);
+						TerraFirmaCraft.LOG.catching(e);
 					}
 				var10[var12 + var11 * par3] = var17;
 				validateInt(var10, var12 + var11 * par3);

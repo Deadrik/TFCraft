@@ -41,8 +41,8 @@ public class ItemMeal extends ItemTerra implements IFood
 	{
 		super();
 		this.hasSubtypes = true;
-		this.MetaNames = new String[]{"Meal0","Meal1","Meal2","Meal3","Meal4","Meal5","Meal6","Meal7","Meal8","Meal9","Meal10",};
-		this.MetaIcons = new IIcon[11];
+		this.metaNames = new String[]{"Meal0","Meal1","Meal2","Meal3","Meal4","Meal5","Meal6","Meal7","Meal8","Meal9","Meal10",};
+		this.metaIcons = new IIcon[11];
 		this.setFolder("food/");
 		this.stackable = false;
 		this.setCreativeTab(null);
@@ -105,7 +105,7 @@ public class ItemMeal extends ItemTerra implements IFood
 		else
 		{
 			arraylist.add(TFC_Core.translate("gui.badnbt"));
-			TerraFirmaCraft.log.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
+			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 		}
 	}
@@ -155,20 +155,20 @@ public class ItemMeal extends ItemTerra implements IFood
 				TFC_Core.translate(FoodRegistry.getInstance().getFood(id).getUnlocalizedName() + ".name");
 	}
 
-	protected float[] getNutritionalWeights(int[] FG)
+	protected float[] getNutritionalWeights(int[] foodGroups)
 	{
-		float[] nw = new float[FG.length];
+		float[] nw = new float[foodGroups.length];
 		float[] fw = getFoodWeights();
 		float totalWeight = 0;
-		for(int i  = 0; i < FG.length; i++)
+		for(int i  = 0; i < foodGroups.length; i++)
 		{
-			if(FG[i] != -1)
+			if(foodGroups[i] != -1)
 			{
 				totalWeight += fw[i];
 			}
 		}
 
-		for(int i  = 0; i < FG.length; i++)
+		for(int i  = 0; i < foodGroups.length; i++)
 		{
 			nw[i] = fw[i]/totalWeight;
 		}

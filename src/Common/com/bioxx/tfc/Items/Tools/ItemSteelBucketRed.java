@@ -23,7 +23,7 @@ public class ItemSteelBucketRed extends ItemSteelBucket
 	{
 		String name = this.getUnlocalizedName().replace("item.", "");
 		name = name.replace("Salt ", "");
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + name);
+		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + this.textureFolder + name);
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class ItemSteelBucketRed extends ItemSteelBucket
 			{
 				if (!player.capabilities.isCreativeMode)
 				{
-					player.setCurrentItemOrArmor(0, new ItemStack(TFCItems.RedSteelBucketEmpty));
+					player.setCurrentItemOrArmor(0, new ItemStack(TFCItems.redSteelBucketEmpty));
 				}
 				world.setBlockMetadataWithNotify(x, y, z, MathHelper.clamp_int(3, 0, 3), 2);
 				world.func_147453_f(x, y, z, Blocks.cauldron);

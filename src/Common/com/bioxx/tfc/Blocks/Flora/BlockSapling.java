@@ -42,7 +42,7 @@ public class BlockSapling extends BlockTerraContainer
 		this.woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, this.woodNames, 0, 16);
 		this.setTickRandomly(true);
-		this.setCreativeTab(TFCTabs.TFCDecoration);
+		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 		this.icons = new IIcon[woodNames.length];
 	}
 
@@ -70,7 +70,7 @@ public class BlockSapling extends BlockTerraContainer
 	public void registerBlockIcons(IIconRegister registerer)
 	{
 		for(int i = 0; i < woodNames.length; i++)
-			this.icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/" + this.woodNames[i] + " Sapling");
+			this.icons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "wood/trees/" + this.woodNames[i] + " Sapling");
 
 	}
 
@@ -116,7 +116,7 @@ public class BlockSapling extends BlockTerraContainer
 
 			// Set the growTime tick timestamp to be 7-11.2 days times config multiplier from now, plus up to an extra day.
 			if (te != null && te.growTime == 0)
-				te.growTime = (long) (TFC_Time.getTotalTicks() + (TFC_Time.dayLength * 7 * growSpeed * TFCOptions.saplingTimerMultiplier) + (world.rand.nextFloat() * TFC_Time.dayLength));
+				te.growTime = (long) (TFC_Time.getTotalTicks() + (TFC_Time.DAY_LENGTH * 7 * growSpeed * TFCOptions.saplingTimerMultiplier) + (world.rand.nextFloat() * TFC_Time.DAY_LENGTH));
 		}
 	}
 

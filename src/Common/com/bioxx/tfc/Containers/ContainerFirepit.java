@@ -81,7 +81,7 @@ public class ContainerFirepit extends ContainerTFC
 				HeatRegistry manager = HeatRegistry.getInstance();
 
 				// Fuel to the fuel input slot
-				if (slotStack.getItem() == TFCItems.Logs || slotStack.getItem() == Item.getItemFromBlock(TFCBlocks.Peat))
+				if (slotStack.getItem() == TFCItems.logs || slotStack.getItem() == Item.getItemFromBlock(TFCBlocks.peat))
 				{
 					if(slotfuel[0].getHasStack())
 						return null;

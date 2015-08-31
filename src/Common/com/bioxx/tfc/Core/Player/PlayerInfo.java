@@ -14,9 +14,9 @@ import com.bioxx.tfc.api.Tools.ChiselManager;
 
 public class PlayerInfo
 {
-	public String Name;
-	public UUID PlayerUUID;
-	public byte ChiselMode;
+	public String playerName;
+	public UUID playerUUID;
+	public byte chiselMode;
 	public int hoeMode;
 
 	public int lockX = -9999999;
@@ -39,9 +39,9 @@ public class PlayerInfo
 
 	public PlayerInfo(String name, UUID uuid)
 	{
-		Name = name;
-		PlayerUUID = uuid;
-		ChiselMode = 0;
+		playerName = name;
+		playerUUID = uuid;
+		chiselMode = 0;
 		specialCraftingType = null;
 		specialCraftingTypeAlternate = null;
 		lastChange = 0;
@@ -54,7 +54,7 @@ public class PlayerInfo
 		//final int MODE_NORMAL = 0; 
 		final int MODE_NUTRIENT = 1;
 		//final int MODE_WATER= 2; final int MODE_HARVEST = 3;
-		SkillRank Agrank = TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_AGRICULTURE);
+		SkillRank agRank = TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_AGRICULTURE);
 		/*if(Agrank != SkillRank.Expert && Agrank != SkillRank.Master)
 			return;*/
 		if(lastChange+3 < TFC_Time.getTotalTicks())
@@ -62,16 +62,16 @@ public class PlayerInfo
 			boolean isMetalHoe = true;
 
 			if(player.getCurrentEquippedItem() != null &&
-					(player.getCurrentEquippedItem().getItem() == TFCItems.IgInHoe ||
-							player.getCurrentEquippedItem().getItem() == TFCItems.IgExHoe ||
-									player.getCurrentEquippedItem().getItem() == TFCItems.SedHoe ||
-											player.getCurrentEquippedItem().getItem() == TFCItems.MMHoe))
+					(player.getCurrentEquippedItem().getItem() == TFCItems.igInHoe ||
+							player.getCurrentEquippedItem().getItem() == TFCItems.igExHoe ||
+									player.getCurrentEquippedItem().getItem() == TFCItems.sedHoe ||
+											player.getCurrentEquippedItem().getItem() == TFCItems.mMHoe))
 			{
 				isMetalHoe = false;
 			}
 			
 			hoeMode = hoeMode == 3 ? 0 : ++hoeMode;
-			if (hoeMode == MODE_NUTRIENT && (!isMetalHoe || isMetalHoe && Agrank != SkillRank.Expert && Agrank != SkillRank.Master))
+			if (hoeMode == MODE_NUTRIENT && (!isMetalHoe || isMetalHoe && agRank != SkillRank.Expert && agRank != SkillRank.Master))
 				hoeMode++;
 
 			lastChange = TFC_Time.getTotalTicks();
@@ -84,21 +84,21 @@ public class PlayerInfo
 		{
 			//Bump ChiselMode on switchChiselMode,
 			//reset to zero when the last mode is reached.
-			if(ChiselMode == ChiselManager.getInstance().getSize() - 1)
+			if(chiselMode == ChiselManager.getInstance().getSize() - 1)
 			{
-				ChiselMode = 0;
+				chiselMode = 0;
 			}
 			else
 			{
-				ChiselMode++;
+				chiselMode++;
 			}
 			lastChange = TFC_Time.getTotalTicks();
 		}
 	}
 
 	//Set the ChiselMode directly on the server side.
-	public void setChiselMode(byte chiselMode){
-		ChiselMode = chiselMode;
+	public void setChiselMode(byte mode){
+		chiselMode = mode;
 	}
 
 	public boolean lockMatches(int x, int y, int z)

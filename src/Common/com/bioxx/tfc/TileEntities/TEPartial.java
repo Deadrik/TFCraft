@@ -5,8 +5,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TEPartial extends NetworkTileEntity
 {
-	public short TypeID = -1;
-	public byte MetaID;
+	public short typeID = -1;
+	public byte metaID;
 	public byte material;
 	public long extraData;
 
@@ -209,8 +209,8 @@ public class TEPartial extends NetworkTileEntity
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readFromNBT(par1NBTTagCompound);
-		MetaID = par1NBTTagCompound.getByte("metaID");
-		TypeID = par1NBTTagCompound.getShort("typeID");
+		metaID = par1NBTTagCompound.getByte("metaID");
+		typeID = par1NBTTagCompound.getShort("typeID");
 		material = par1NBTTagCompound.getByte("material");
 		extraData = par1NBTTagCompound.getLong("extraData");
 	}
@@ -222,8 +222,8 @@ public class TEPartial extends NetworkTileEntity
 	public void writeToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setShort("typeID", TypeID);
-		par1NBTTagCompound.setByte("metaID", MetaID);
+		par1NBTTagCompound.setShort("typeID", typeID);
+		par1NBTTagCompound.setByte("metaID", metaID);
 		par1NBTTagCompound.setByte("material", material);
 		par1NBTTagCompound.setLong("extraData", extraData);
 	}
@@ -231,8 +231,8 @@ public class TEPartial extends NetworkTileEntity
 	@Override
 	public void handleInitPacket(NBTTagCompound nbt)
 	{
-		MetaID = nbt.getByte("metaID");
-		TypeID = nbt.getShort("typeID");
+		metaID = nbt.getByte("metaID");
+		typeID = nbt.getShort("typeID");
 		material = nbt.getByte("material");
 		extraData = nbt.getLong("extraData");
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -254,8 +254,8 @@ public class TEPartial extends NetworkTileEntity
 	@Override
 	public void createInitNBT(NBTTagCompound nbt)
 	{
-		nbt.setShort("typeID", TypeID);
-		nbt.setByte("metaID", MetaID);
+		nbt.setShort("typeID", typeID);
+		nbt.setByte("metaID", metaID);
 		nbt.setByte("material", material);
 		nbt.setLong("extraData", extraData);
 	}

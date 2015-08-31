@@ -30,7 +30,7 @@ import com.bioxx.tfc.api.Util.Helper;
 public class BlockFruitLeaves extends BlockTerraContainer
 {
 	//private int adjacentTreeBlocks[];
-	private String[] WoodNames = Global.FRUIT_META_NAMES;
+	private String[] woodNames = Global.FRUIT_META_NAMES;
 	private IIcon[] icons = new IIcon[16];
 	//private IIcon[] iconsDead = new IIcon[16];
 	public static IIcon[] iconsFruit = new IIcon[16];
@@ -85,12 +85,12 @@ public class BlockFruitLeaves extends BlockTerraContainer
 	{
 		for(int i = 0; i < 9; i++)
 		{
-			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Leaves");
-			iconsOpaque[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Leaves Opaque");
+			icons[i] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "wood/fruit trees/" + woodNames[i] + " Leaves");
+			iconsOpaque[i] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "wood/fruit trees/" + woodNames[i] + " Leaves Opaque");
 			//iconsDead[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Leaves");
 			//iconsDeadOpaque[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Leaves Opaque");
-			iconsFruit[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Fruit");
-			iconsFlowers[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Flowers");
+			iconsFruit[i] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "wood/fruit trees/" + woodNames[i] + " Fruit");
+			iconsFlowers[i] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "wood/fruit trees/" + woodNames[i] + " Flowers");
 		}
 	}
 

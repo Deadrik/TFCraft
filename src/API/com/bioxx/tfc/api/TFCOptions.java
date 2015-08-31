@@ -66,8 +66,8 @@ public class TFCOptions
 	public static int protectionBuffer = 24;
 
 	// Player
-	public static int HealthGainRate = 20;
-	public static int HealthGainCap = 3000;
+	public static int healthGainRate = 20;
+	public static int healthGainCap = 3000;
 
 	// Materials
 	public static int smallOreUnits = 10;
@@ -93,6 +93,6 @@ public class TFCOptions
 	public static byte[] anvilRuleColor2 = {(byte) 247, (byte) 148, (byte) 49, (byte) 255};
 
 	// Not actual options, could be moved to Global perhaps?
-	public static int RockLayer2Height = 110;
-	public static int RockLayer3Height = 55;
+	public static int rockLayer2Height = 110;
+	public static int rockLayer3Height = 55;
 }

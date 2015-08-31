@@ -14,7 +14,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 
 public class GuiVesselLiquid extends GuiContainerTFC
 {
-	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_vessel_liquid.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_vessel_liquid.png");
 
 	private EntityPlayer player;
 	private int bagsSlotNum;

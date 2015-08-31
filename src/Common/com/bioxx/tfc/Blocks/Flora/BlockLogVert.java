@@ -41,21 +41,21 @@ public class BlockLogVert extends BlockTerra
 		ItemStack equip = entityplayer.getCurrentEquippedItem();
 		if(equip!=null)
 		{
-			for(int cnt = 0; cnt < Recipes.Axes.length && !isAxeorSaw; cnt++)
+			for(int cnt = 0; cnt < Recipes.axes.length && !isAxeorSaw; cnt++)
 			{
-				if(equip.getItem() == Recipes.Axes[cnt])
+				if(equip.getItem() == Recipes.axes[cnt])
 					isAxeorSaw = true;
 			}
 
-			for(int cnt = 0; cnt < Recipes.Saws.length && !isAxeorSaw; cnt++)
+			for(int cnt = 0; cnt < Recipes.saws.length && !isAxeorSaw; cnt++)
 			{
-				if(equip.getItem() == Recipes.Saws[cnt])
+				if(equip.getItem() == Recipes.saws[cnt])
 					isAxeorSaw = true;
 			}
 
-			for(int cnt = 0; cnt < Recipes.Hammers.length && !isAxeorSaw; cnt++)
+			for(int cnt = 0; cnt < Recipes.hammers.length && !isAxeorSaw; cnt++)
 			{
-				if(equip.getItem() == Recipes.Hammers[cnt])
+				if(equip.getItem() == Recipes.hammers[cnt])
 					isHammer = true;
 			}
 		}
@@ -66,7 +66,7 @@ public class BlockLogVert extends BlockTerra
 		}
 		else if(isHammer)
 		{
-			EntityItem item = new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, new ItemStack(TFCItems.Stick, 1 + world.rand.nextInt(3)));
+			EntityItem item = new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, new ItemStack(TFCItems.stick, 1 + world.rand.nextInt(3)));
 			world.spawnEntityInWorld(item);
 		}
 		else
@@ -82,16 +82,16 @@ public class BlockLogVert extends BlockTerra
 	}
 
 	@Override
-	public Item getItemDropped(int i, Random R, int j)
+	public Item getItemDropped(int i, Random r, int j)
 	{
-		return TFCItems.Logs;
+		return TFCItems.logs;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return TFCBlocks.LogNatural.getIcon(side, meta);
+		return TFCBlocks.logNatural.getIcon(side, meta);
 	}
 
 	@SideOnly(Side.CLIENT)

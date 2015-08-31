@@ -45,7 +45,7 @@ public class ItemCustomLeash extends ItemLead implements ISize
 			}
 			else
 			{
-				ItemCustomLeash.func_135066_a(par2EntityPlayer, par3World, par4, par5, par6);
+				ItemCustomLeash.tryLeash(par2EntityPlayer, par3World, par4, par5, par6);
 				return true;
 			}
 		}
@@ -55,7 +55,7 @@ public class ItemCustomLeash extends ItemLead implements ISize
 		}
 	}
 
-	public static boolean func_135066_a(EntityPlayer par0EntityPlayer, World par1World, int par2, int par3, int par4)
+	public static boolean tryLeash(EntityPlayer par0EntityPlayer, World par1World, int par2, int par3, int par4)
 	{
 		EntityLeashKnot entityleashknot = EntityLeashKnot.getKnotForBlock(par1World, par2, par3, par4);
 		boolean flag = false;
@@ -96,7 +96,7 @@ public class ItemCustomLeash extends ItemLead implements ISize
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", ""));
+		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", ""));
 	}
 
 	@Override

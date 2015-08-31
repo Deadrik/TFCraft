@@ -20,7 +20,7 @@ public class ItemCustomNameTag extends ItemTerra
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		setUnlocalizedName("Nametag");
-		setCreativeTab(TFCTabs.TFCTools);
+		setCreativeTab(TFCTabs.TFC_TOOLS);
 		setFolder("tools/");
 	}
 

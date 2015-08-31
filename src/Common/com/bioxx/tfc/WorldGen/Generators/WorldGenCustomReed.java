@@ -29,8 +29,8 @@ public class WorldGenCustomReed extends WorldGenerator
 				for (int var11 = 0; var11 < var10; ++var11)
 				{
 					//if (((BlockCustomReed)Blocks.reeds).canBlockStay(par1World, var7, var8 + var11, var9))
-					if (TFCBlocks.Reeds.canBlockStay(par1World, var7, var8 + var11, var9))
-						par1World.setBlock(var7, var8 + var11, var9, TFCBlocks.Reeds);
+					if (TFCBlocks.reeds.canBlockStay(par1World, var7, var8 + var11, var9))
+						par1World.setBlock(var7, var8 + var11, var9, TFCBlocks.reeds);
 				}
 			}
 		}

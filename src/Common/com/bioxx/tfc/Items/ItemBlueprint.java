@@ -19,14 +19,14 @@ import com.bioxx.tfc.api.Util.Helper;
 
 public class ItemBlueprint extends ItemTerra
 {
-	public static final String suffix = "BR:";
+	public static final String SUFFIX = "BR:";
 
-	public static final String tag_completed = "Completed";
-	public static final String tag_item_name = "ItemName";
-	public static final String tag_data = "Data";
-	public static final String tag_x_angle = "xAngle";
-	public static final String tag_y_angle = "yAngle";
-	public static final String tag_z_angle = "zAngle";
+	public static final String TAG_COMPLETED = "Completed";
+	public static final String TAG_ITEM_NAME = "ItemName";
+	public static final String TAG_DATA = "Data";
+	public static final String TAG_X_ANGLE = "xAngle";
+	public static final String TAG_Y_ANGLE = "yAngle";
+	public static final String TAG_Z_ANGLE = "zAngle";
 
 	public ItemBlueprint()
 	{
@@ -34,7 +34,7 @@ public class ItemBlueprint extends ItemTerra
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		setUnlocalizedName("Blueprint");
-		setCreativeTab(TFCTabs.TFCTools);
+		setCreativeTab(TFCTabs.TFC_TOOLS);
 		setFolder("tools/");
 	}
 
@@ -55,11 +55,11 @@ public class ItemBlueprint extends ItemTerra
 			x = mo.blockX; y = mo.blockY; z = mo.blockZ;
 		}
 
-		if (mo == null || world.getBlock(mo.blockX, mo.blockY, mo.blockZ) != TFCBlocks.Detailed) {
-			if (stack.hasTagCompound() && stack.stackTagCompound.getBoolean(tag_completed))
+		if (mo == null || world.getBlock(mo.blockX, mo.blockY, mo.blockZ) != TFCBlocks.detailed) {
+			if (stack.hasTagCompound() && stack.stackTagCompound.getBoolean(TAG_COMPLETED))
 				player.openGui(TerraFirmaCraft.instance, 34, player.worldObj, x, y, z);
 		}
-		else if (!stack.hasTagCompound() || !stack.stackTagCompound.getBoolean(tag_completed))
+		else if (!stack.hasTagCompound() || !stack.stackTagCompound.getBoolean(TAG_COMPLETED))
 			player.openGui(TerraFirmaCraft.instance, 34, player.worldObj, mo.blockX, mo.blockY, mo.blockZ);
 
 		return stack;
@@ -68,21 +68,21 @@ public class ItemBlueprint extends ItemTerra
 	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
-		if (world.getBlock(x, y, z) != TFCBlocks.Detailed)
+		if (world.getBlock(x, y, z) != TFCBlocks.detailed)
 			return false;
 
-		if(!stack.hasTagCompound() || !stack.stackTagCompound.getBoolean(tag_completed))
+		if(!stack.hasTagCompound() || !stack.stackTagCompound.getBoolean(TAG_COMPLETED))
 		{
 			TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 
 			byte[] data = TEDetailed.toByteArray(te.data);
 
 			NBTTagCompound nbt = new NBTTagCompound();
-			nbt.setByteArray(tag_data, data);
+			nbt.setByteArray(TAG_DATA, data);
 
 			stack.setTagCompound(nbt);
 		}
-		else if (stack.hasTagCompound() && stack.stackTagCompound.getBoolean(tag_completed))
+		else if (stack.hasTagCompound() && stack.stackTagCompound.getBoolean(TAG_COMPLETED))
 		{
 			int hasChisel = -1;
 			int hasHammer = -1;
@@ -101,10 +101,10 @@ public class ItemBlueprint extends ItemTerra
 
 			TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 			BitSet blueprintData = TEDetailed.turnCube(
-					stack.stackTagCompound.getByteArray(tag_data),
-					stack.stackTagCompound.getInteger(tag_x_angle),
-					stack.stackTagCompound.getInteger(tag_y_angle),
-					stack.stackTagCompound.getInteger(tag_z_angle)
+					stack.stackTagCompound.getByteArray(TAG_DATA),
+					stack.stackTagCompound.getInteger(TAG_X_ANGLE),
+					stack.stackTagCompound.getInteger(TAG_Y_ANGLE),
+					stack.stackTagCompound.getInteger(TAG_Z_ANGLE)
 					);
 
 			for(int c = 0; c < 512; c++)
@@ -134,8 +134,8 @@ public class ItemBlueprint extends ItemTerra
 	@Override
 	public String getItemStackDisplayName(ItemStack is)
 	{
-		if(is.hasTagCompound() && is.stackTagCompound.hasKey(tag_completed))
-			return suffix + is.stackTagCompound.getString(tag_item_name);
+		if(is.hasTagCompound() && is.stackTagCompound.hasKey(TAG_COMPLETED))
+			return SUFFIX + is.stackTagCompound.getString(TAG_ITEM_NAME);
 		else
 			return TFC_Core.translate(this.getUnlocalizedName());
 	}

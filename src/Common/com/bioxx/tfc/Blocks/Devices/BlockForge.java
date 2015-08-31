@@ -111,8 +111,8 @@ public class BlockForge extends BlockTerraContainer
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		textureOn = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Forge On");
-		textureOff = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Forge Off");
+		textureOn = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Forge On");
+		textureOff = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Forge Off");
 	}
 
 	public boolean getIsFireLit(int i)
@@ -123,7 +123,7 @@ public class BlockForge extends BlockTerraContainer
 	@Override
 	public int getRenderType()
 	{
-		return TFCBlocks.ForgeRenderId;
+		return TFCBlocks.forgeRenderId;
 	}
 
 	@Override
@@ -180,7 +180,7 @@ public class BlockForge extends BlockTerraContainer
 	@Override
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{
-		if (this == TFCBlocks.Forge)
+		if (this == TFCBlocks.forge)
 		{
 			return;
 		}
@@ -272,7 +272,7 @@ public class BlockForge extends BlockTerraContainer
 	@SideOnly(Side.CLIENT)
 	public String getItemIconName()
 	{
-		return Reference.ModID + ":" + "devices/forge";
+		return Reference.MOD_ID + ":" + "devices/forge";
 	}
 
 	/**

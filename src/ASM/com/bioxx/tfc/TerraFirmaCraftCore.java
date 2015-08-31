@@ -35,7 +35,7 @@ public class TerraFirmaCraftCore extends DummyModContainer
 		ModMetadata meta = getMetadata();
 		meta.modId = "tfc_coremod";
 		meta.name = "TFC[coremod]";
-		meta.version = Reference.ModVersion;
+		meta.version = Reference.MOD_VERSION;
 		meta.credits = "";
 		meta.authorList = Arrays.asList("Bioxx", "Dunkleosteus");
 		meta.description = "";

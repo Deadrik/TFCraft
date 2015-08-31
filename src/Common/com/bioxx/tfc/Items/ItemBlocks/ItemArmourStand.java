@@ -20,8 +20,8 @@ public class ItemArmourStand extends ItemTerraBlock
 	public ItemArmourStand(Block i)
 	{
 		super(i);
-		MetaNames = new String[16];
-		System.arraycopy(Global.WOOD_ALL, 0, MetaNames, 0, 16);
+		metaNames = new String[16];
+		System.arraycopy(Global.WOOD_ALL, 0, metaNames, 0, 16);
 	}
 
 	public boolean isValid(World world, int i, int j, int k)
@@ -29,7 +29,7 @@ public class ItemArmourStand extends ItemTerraBlock
 		return world.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(i, j - 0.1, k, i + 1, j + 2, k + 1)).size() == 0;
 	}
 
-	protected boolean CreateStand(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, int l)
+	protected boolean createStand(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, int l)
 	{
 		int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
 		if(side == 1 && world.isAirBlock(x, y + 1, z) && isValid(world, x, y + 1, z) && world.isBlockNormalCubeDefault(x, y, z, false))
@@ -57,8 +57,8 @@ public class ItemArmourStand extends ItemTerraBlock
 		if(!world.isRemote)
 		{
 			int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
-			if (CreateStand(itemstack, entityplayer, world, x, y-1, z, side, dir)) {
-				world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, TFCBlocks.LogNatural.stepSound.func_150496_b(), (TFCBlocks.LogNatural.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.LogNatural.stepSound.getPitch() * 0.8F);
+			if (createStand(itemstack, entityplayer, world, x, y-1, z, side, dir)) {
+				world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, TFCBlocks.logNatural.stepSound.func_150496_b(), (TFCBlocks.logNatural.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.logNatural.stepSound.getPitch() * 0.8F);
 			}
 			return true;
 		}

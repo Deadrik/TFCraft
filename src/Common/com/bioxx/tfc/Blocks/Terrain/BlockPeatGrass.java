@@ -38,7 +38,7 @@ public class BlockPeatGrass extends BlockGrass
 	@Override
 	public Item getItemDropped(int metadata, Random rand, int fortune)
 	{
-		return Item.getItemFromBlock(TFCBlocks.Peat);
+		return Item.getItemFromBlock(TFCBlocks.peat);
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class BlockPeatGrass extends BlockGrass
 		if(!world.blockExists(x, y-1, z))
 		{
 			int meta = world.getBlockMetadata(x, y, z);
-			world.setBlock(x, y, z, TFCBlocks.Peat, meta, 2);
+			world.setBlock(x, y, z, TFCBlocks.peat, meta, 2);
 		}
 	}
 
@@ -70,7 +70,7 @@ public class BlockPeatGrass extends BlockGrass
 	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
 		if (world.getBlock(x, y + 1, z).isSideSolid(world, x, y + 1, z, ForgeDirection.DOWN))
-			world.setBlock(x, y, z, TFCBlocks.Peat);
+			world.setBlock(x, y, z, TFCBlocks.peat);
 		else if (world.canBlockSeeTheSky(x, y + 1, z))
 		{
 			spreadGrass(world, x, y, z, rand);

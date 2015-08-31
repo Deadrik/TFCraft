@@ -14,7 +14,7 @@ import com.bioxx.tfc.api.TFCOptions;
 
 public class MapGenRavineTFC extends MapGenBaseTFC
 {
-	private float[] field_35627_a = new float[1024];
+	private float[] multipliers = new float[1024];
 	//private byte[] metaArray;
 	private final int height;
 	private final int variability;
@@ -58,7 +58,7 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 		{
 			if (var28 == 0 || var19.nextInt(3) == 0)
 				var27 = 1.0F + var19.nextFloat() * var19.nextFloat() * 1.0F;
-			this.field_35627_a[var28] = var27 * var27;
+			this.multipliers[var28] = var27 * var27;
 		}
 
 		for (; par15 < par16; ++par15)
@@ -131,7 +131,7 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 
 								if (y >= 0 && y < 256)
 								{
-									if (blockArray[index] == TFCBlocks.SaltWaterStationary ||  blockArray[index] == TFCBlocks.FreshWaterStationary)
+									if (blockArray[index] == TFCBlocks.saltWaterStationary ||  blockArray[index] == TFCBlocks.freshWaterStationary)
 										isBlocked = true;
 									if (y != minY - 1 && x != xMin && x != xMax - 1 && z != zMin && z != zMax - 1)
 										y = minY;
@@ -156,7 +156,7 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 									for (int var49 = maxY - 1; var49 >= minY; --var49)
 									{
 										double var50 = (var49 + 0.5D - yCoord) / var30;
-										if ((var59 * var59 + var45 * var45) * this.field_35627_a[var49] + var50 * var50 / 6.0D < 1.0D)
+										if ((var59 * var59 + var45 * var45) * this.multipliers[var49] + var50 * var50 / 6.0D < 1.0D)
 										{
 											if (TFC_Core.isGround(blockArray[index2]))
 											{

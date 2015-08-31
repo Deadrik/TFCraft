@@ -15,17 +15,17 @@ import com.google.common.collect.Sets;
 public class ItemCustomShovel extends ItemTerraTool
 {
 	/** an array of the blocks this spade is effective against */
-	private static final Set<Block> blocksEffectiveAgainst = Sets.newHashSet(new Block[]
+	private static final Set<Block> BLOCKS_EFFECTIVE_AGAINST = Sets.newHashSet(new Block[]
 	{
 			Blocks.grass, Blocks.dirt, Blocks.sand, Blocks.gravel, Blocks.snow, Blocks.snow_layer,
 			Blocks.clay, Blocks.farmland, Blocks.soul_sand, Blocks.mycelium,
-			TFCBlocks.Dirt, TFCBlocks.Dirt2, TFCBlocks.Grass, TFCBlocks.Grass2, TFCBlocks.ClayGrass,
-			TFCBlocks.ClayGrass2, TFCBlocks.PeatGrass, TFCBlocks.Peat, TFCBlocks.Clay, TFCBlocks.Clay2
+			TFCBlocks.dirt, TFCBlocks.dirt2, TFCBlocks.grass, TFCBlocks.grass2, TFCBlocks.clayGrass,
+			TFCBlocks.clayGrass2, TFCBlocks.peatGrass, TFCBlocks.peat, TFCBlocks.clay, TFCBlocks.clay2
 	});
 
 	public ItemCustomShovel(ToolMaterial par2EnumToolMaterial)
 	{
-		super(1.0F, par2EnumToolMaterial, blocksEffectiveAgainst);
+		super(1.0F, par2EnumToolMaterial, BLOCKS_EFFECTIVE_AGAINST);
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class ItemCustomShovel extends ItemTerraTool
 		name = name.replace("IgEx ", "");
 		name = name.replace("Sed ", "");
 		name = name.replace("MM ", "");
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/" + name);
+		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + "tools/" + name);
 	}
 
 	@Override

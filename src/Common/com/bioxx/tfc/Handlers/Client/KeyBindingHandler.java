@@ -22,8 +22,8 @@ import cpw.mods.fml.common.gameevent.InputEvent;
 public class KeyBindingHandler
 {
 	//public static KeyBinding Key_Calendar = new KeyBinding("key.Calendar", Keyboard.KEY_N/*49*/, Reference.ModName);
-	public static KeyBinding Key_ToolMode = new KeyBinding("key.ToolMode", Keyboard.KEY_M/*50*/, Reference.ModName);
-	public static KeyBinding Key_LockTool = new KeyBinding("key.LockTool", Keyboard.KEY_L/*38*/, Reference.ModName);
+	public static KeyBinding keyToolMode = new KeyBinding("key.ToolMode", Keyboard.KEY_M/*50*/, Reference.MOD_NAME);
+	public static KeyBinding keyLockTool = new KeyBinding("key.LockTool", Keyboard.KEY_L/*38*/, Reference.MOD_NAME);
 
 	@SubscribeEvent
 	public void onKeyInput(InputEvent.KeyInputEvent event)
@@ -35,22 +35,22 @@ public class KeyBindingHandler
 				FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem() != null &&
 				FMLClientHandler.instance().getClient().currentScreen == null)
 		{
-			if(Key_ToolMode.isPressed())
+			if(keyToolMode.isPressed())
 			{
 				if(player.getCurrentEquippedItem().getItem() instanceof ItemChisel)
 				{
 					pi.switchChiselMode();
 					//Let's send the actual ChiselMode so the server/client does not
 					//come out of sync.
-					AbstractPacket pkt = new KeyPressPacket(pi.ChiselMode);
-					TerraFirmaCraft.packetPipeline.sendToServer(pkt);
+					AbstractPacket pkt = new KeyPressPacket(pi.chiselMode);
+					TerraFirmaCraft.PACKET_PIPELINE.sendToServer(pkt);
 				}
 				else if(player.getCurrentEquippedItem().getItem() instanceof ItemCustomHoe)
 				{
 					pi.switchHoeMode(player);
 				}
 			}
-			else if(Key_LockTool.isPressed())
+			else if(keyLockTool.isPressed())
 			{
 				if(pi.lockX == -9999999)
 				{

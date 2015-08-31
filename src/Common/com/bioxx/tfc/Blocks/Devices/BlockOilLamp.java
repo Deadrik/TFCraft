@@ -44,7 +44,7 @@ public class BlockOilLamp extends BlockTerraContainer
 	{
 		super(Material.circuits);
 		this.setTickRandomly(true);
-		this.setCreativeTab(TFCTabs.TFCDecoration);
+		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 		setLightLevel(1.0F);
 	}
 
@@ -63,7 +63,7 @@ public class BlockOilLamp extends BlockTerraContainer
 	{
 		for(int i = 0; i < 6; i++)
 		{
-			list.add(ItemOilLamp.GetFullLamp(i));
+			list.add(ItemOilLamp.getFullLamp(i));
 		}
 	}
 
@@ -75,18 +75,18 @@ public class BlockOilLamp extends BlockTerraContainer
 		if(side == 0 || side == 1)
 		{
 			if(m == 0)
-				return TFC_Textures.SheetGold;
+				return TFC_Textures.sheetGold;
 			else if(m == 1)
-				return TFC_Textures.SheetPlatinum;
+				return TFC_Textures.sheetPlatinum;
 			else if(m == 2)
-				return TFC_Textures.SheetRoseGold;
+				return TFC_Textures.sheetRoseGold;
 			else if(m == 3)
-				return TFC_Textures.SheetSilver;
+				return TFC_Textures.sheetSilver;
 			else if(m == 4)
-				return TFC_Textures.SheetSterlingSilver;
+				return TFC_Textures.sheetSterlingSilver;
 			else if(m == 5)
-				return TFC_Textures.SheetBlueSteel;
-			else return TFC_Textures.SheetGold;
+				return TFC_Textures.sheetBlueSteel;
+			else return TFC_Textures.sheetGold;
 		}
 		else return icons[m];
 	}
@@ -103,12 +103,12 @@ public class BlockOilLamp extends BlockTerraContainer
 	public void registerBlockIcons(IIconRegister registerer)
 	{
 		icons = new IIcon[6];
-		icons[0] = registerer.registerIcon(Reference.ModID + ":" + "metal/GoldLamp");
-		icons[1] = registerer.registerIcon(Reference.ModID + ":" + "metal/PlatinumLamp");
-		icons[2] = registerer.registerIcon(Reference.ModID + ":" + "metal/RoseGoldLamp");
-		icons[3] = registerer.registerIcon(Reference.ModID + ":" + "metal/SilverLamp");
-		icons[4] = registerer.registerIcon(Reference.ModID + ":" + "metal/SterlingSilverLamp");
-		icons[5] = registerer.registerIcon(Reference.ModID + ":" + "metal/BlueSteelLamp");
+		icons[0] = registerer.registerIcon(Reference.MOD_ID + ":" + "metal/GoldLamp");
+		icons[1] = registerer.registerIcon(Reference.MOD_ID + ":" + "metal/PlatinumLamp");
+		icons[2] = registerer.registerIcon(Reference.MOD_ID + ":" + "metal/RoseGoldLamp");
+		icons[3] = registerer.registerIcon(Reference.MOD_ID + ":" + "metal/SilverLamp");
+		icons[4] = registerer.registerIcon(Reference.MOD_ID + ":" + "metal/SterlingSilverLamp");
+		icons[5] = registerer.registerIcon(Reference.MOD_ID + ":" + "metal/BlueSteelLamp");
 	}
 
 	@Override
@@ -250,26 +250,26 @@ public class BlockOilLamp extends BlockTerraContainer
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z)
 	{
-		this.func_150109_e(world, x, y, z);
+		this.tryPlace(world, x, y, z);
 	}
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z,  EntityLivingBase entity, ItemStack is) 
 	{
-		TileEntity _t =  world.getTileEntity(x, y, z);
-		if (_t instanceof TEOilLamp)
+		TileEntity te =  world.getTileEntity(x, y, z);
+		if (te instanceof TEOilLamp)
 		{
-			((TEOilLamp)_t).create();
+			((TEOilLamp)te).create();
 			FluidStack fs = FluidStack.loadFluidStackFromNBT(is.getTagCompound());
 			if(fs != null)
 			{
-				((TEOilLamp)_t).setFuelFromStack(fs);
+				((TEOilLamp)te).setFuelFromStack(fs);
 			}
 			/*else
 			{
 				//world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)+8, 0x3);
 			}*/
-			((TEOilLamp)_t).hourPlaced = (int)TFC_Time.getTotalHours();
+			((TEOilLamp)te).hourPlaced = (int)TFC_Time.getTotalHours();
 
 		}
 	}
@@ -291,7 +291,7 @@ public class BlockOilLamp extends BlockTerraContainer
 		return true;
 	}
 
-	protected boolean func_150109_e(World world, int x, int y, int z)
+	protected boolean tryPlace(World world, int x, int y, int z)
 	{
 		if (!this.canPlaceBlockAt(world, x, y, z))
 		{

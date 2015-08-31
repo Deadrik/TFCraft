@@ -50,7 +50,7 @@ public class GenLayerFuzzyZoomTFC extends GenLayerTFC
 		int[] var20 = new int[par3 * par4];
 
 		for (var13 = 0; var13 < par4; ++var13)
-			System.arraycopy(var10, (var13 + (par2 & 1)) * (var7 << 1) + (par1 & 1), var20, var13 * par3, par3);
+			System.arraycopy(var10, (var13 + (par2 & 1)) * (var7 << 1) + (par1 & 1), var20, var13 * par3, par3); //NOPMD
 
 		return var20;
 	}

@@ -19,7 +19,7 @@ public class ItemGrill extends ItemTerraBlock
 	public ItemGrill(Block par1)
 	{
 		super(par1);
-		this.setCreativeTab(TFCTabs.TFCTools);
+		this.setCreativeTab(TFCTabs.TFC_TOOLS);
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class ItemGrill extends ItemTerraBlock
 				TileEntity teFire = world.getTileEntity(x, y, z);
 				if(teFire != null && teFire instanceof TEFireEntity && checkSides(world, x, y, z))
 				{
-					if (world.setBlock( x, y+1, z, TFCBlocks.Grill, itemstack.getItemDamage(), 0x2))
+					if (world.setBlock( x, y+1, z, TFCBlocks.grill, itemstack.getItemDamage(), 0x2))
 					{
 						TEGrill teGrill = (TEGrill) world.getTileEntity(x, y+1, z);
 						teGrill.data = (byte) out;
@@ -57,7 +57,7 @@ public class ItemGrill extends ItemTerraBlock
 				}
 				else if(world.isAirBlock(x, y+2, z) && checkSides(world, x, y+1, z))
 				{
-					if (world.setBlock( x, y+2, z, TFCBlocks.Grill, itemstack.getItemDamage(), 0x2))
+					if (world.setBlock( x, y+2, z, TFCBlocks.grill, itemstack.getItemDamage(), 0x2))
 					{
 						TEGrill teGrill = (TEGrill) world.getTileEntity(x, y + 2, z);
 						teGrill.data = (byte) out;

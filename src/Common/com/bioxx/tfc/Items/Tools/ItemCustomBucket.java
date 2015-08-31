@@ -88,14 +88,14 @@ public class ItemCustomBucket extends ItemTerra
 						world.setBlockToAir(x, y, z);
 						if (player.capabilities.isCreativeMode)
 							return is;
-						return new ItemStack(TFCItems.WoodenBucketWater);
+						return new ItemStack(TFCItems.woodenBucketWater);
 					}
 					else if (TFC_Core.isSaltWater(world.getBlock(x, y, z)))
 					{
 						world.setBlockToAir(x, y, z);
 						if (player.capabilities.isCreativeMode)
 							return is;
-						return new ItemStack(TFCItems.WoodenBucketSaltWater);
+						return new ItemStack(TFCItems.woodenBucketSaltWater);
 					}
 					
 					// Handle flowing water
@@ -129,24 +129,24 @@ public class ItemCustomBucket extends ItemTerra
 						world.setBlockToAir(flowX, flowY, flowZ);
 						if (player.capabilities.isCreativeMode)
 							return is;
-						return new ItemStack(TFCItems.WoodenBucketWater);
+						return new ItemStack(TFCItems.woodenBucketWater);
 					}
 					else if (TFC_Core.isSaltWater(world.getBlock(flowX, flowY, flowZ)))
 					{
 						world.setBlockToAir(flowX, flowY, flowZ);
 						if (player.capabilities.isCreativeMode)
 							return is;
-						return new ItemStack(TFCItems.WoodenBucketSaltWater);
+						return new ItemStack(TFCItems.woodenBucketSaltWater);
 					}
 				}
 				else
 				{
-					return new ItemStack(TFCItems.WoodenBucketEmpty);
+					return new ItemStack(TFCItems.woodenBucketEmpty);
 				}
 			}
 			else if (this.bucketContents == Blocks.air && mop.entityHit instanceof EntityCowTFC && ((EntityCowTFC)mop.entityHit).getGender() == GenderEnum.FEMALE)
 			{
-				return new ItemStack(TFCItems.WoodenBucketMilk);
+				return new ItemStack(TFCItems.woodenBucketMilk);
 			}
 			return is;
 		}
@@ -161,8 +161,8 @@ public class ItemCustomBucket extends ItemTerra
 
 		if (!isEmpty && world.getBlock(x, y, z) != Blocks.cauldron && world.isAirBlock(x + map[side][0], y + map[side][1], z + map[side][2]))
 		{
-			world.setBlock( x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.FreshWater, 2, 0x1 );
-			player.setCurrentItemOrArmor(0, new ItemStack(TFCItems.WoodenBucketEmpty));
+			world.setBlock( x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.freshWater, 2, 0x1 );
+			player.setCurrentItemOrArmor(0, new ItemStack(TFCItems.woodenBucketEmpty));
 			return true;
 		}
 
@@ -173,7 +173,7 @@ public class ItemCustomBucket extends ItemTerra
 			{
 				if (!player.capabilities.isCreativeMode)
 				{
-					player.setCurrentItemOrArmor(0, new ItemStack(TFCItems.WoodenBucketEmpty));
+					player.setCurrentItemOrArmor(0, new ItemStack(TFCItems.woodenBucketEmpty));
 				}
 				world.setBlockMetadataWithNotify(x, y, z, MathHelper.clamp_int(3, 0, 3), 2);
 				world.func_147453_f(x, y, z, Blocks.cauldron);

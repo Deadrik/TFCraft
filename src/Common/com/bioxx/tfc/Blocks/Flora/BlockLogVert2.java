@@ -28,6 +28,6 @@ public class BlockLogVert2 extends BlockLogVert
 	public IIcon getIcon(int side, int meta)
 	{
 		if(meta > 15) meta -= 16;
-		return TFCBlocks.LogNatural2.getIcon(side, meta);
+		return TFCBlocks.logNatural2.getIcon(side, meta);
 	}
 }

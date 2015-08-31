@@ -30,8 +30,8 @@ public class ItemLogs extends ItemTerra
 		super();
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		setCreativeTab(TFCTabs.TFCMaterials);
-		this.MetaNames = Global.WOOD_ALL.clone();
+		setCreativeTab(TFCTabs.TFC_MATERIALS);
+		this.metaNames = Global.WOOD_ALL.clone();
 		this.setWeight(EnumWeight.MEDIUM);
 		this.setSize(EnumSize.MEDIUM);
 	}
@@ -44,12 +44,12 @@ public class ItemLogs extends ItemTerra
 		}
 	}
 
-	private boolean CreatePile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, int l)
+	private boolean createPile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, int l)
 	{
 		TELogPile te = null;
 		if(world.isAirBlock(x, y, z) && isValid(world, x, y, z))
 		{
-			world.setBlock(x, y, z, TFCBlocks.LogPile, l, 3);
+			world.setBlock(x, y, z, TFCBlocks.logPile, l, 3);
 			te = (TELogPile)world.getTileEntity(x, y, z);
 		}
 		else
@@ -117,7 +117,7 @@ public class ItemLogs extends ItemTerra
 	public void registerIcons(IIconRegister registerer)
 	{
 		for(int i = 0; i < Global.WOOD_ALL.length; i++) {
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/"+Global.WOOD_ALL[i]+" Log");
+			icons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "wood/"+Global.WOOD_ALL[i]+" Log");
 		}
 	}
 
@@ -127,7 +127,7 @@ public class ItemLogs extends ItemTerra
 	{
 		if(!world.isRemote)
 		{
-			if (entityplayer.isSneaking() && (world.getBlock(x, y, z) != TFCBlocks.LogPile || side != 1 && side != 0))
+			if (entityplayer.isSneaking() && (world.getBlock(x, y, z) != TFCBlocks.logPile || side != 1 && side != 0))
 			{
 				int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
 				if (side == 0)
@@ -142,15 +142,15 @@ public class ItemLogs extends ItemTerra
 					--x;
 				else if (side == 5)
 					++x;
-				if(world.canPlaceEntityOnSide(TFCBlocks.LogPile, x, y, z, false, side, entityplayer, itemstack))
-					if (CreatePile(itemstack, entityplayer, world, x, y, z, side, dir)) 
+				if(world.canPlaceEntityOnSide(TFCBlocks.logPile, x, y, z, false, side, entityplayer, itemstack))
+					if (createPile(itemstack, entityplayer, world, x, y, z, side, dir)) 
 					{
 						itemstack.stackSize = itemstack.stackSize-1;
 						playSound(world, x, y, z);
 					}
 				return true;
 			}
-			else if(world.getBlock(x, y, z) == TFCBlocks.LogPile)
+			else if(world.getBlock(x, y, z) == TFCBlocks.logPile)
 			{
 				TELogPile te = (TELogPile)world.getTileEntity(x, y, z);
 				if(te != null)
@@ -186,7 +186,7 @@ public class ItemLogs extends ItemTerra
 							--x;
 						else if (side == 5)
 							++x;
-						if (!CreatePile(itemstack, entityplayer, world, x, y, z, side, dir)) {
+						if (!createPile(itemstack, entityplayer, world, x, y, z, side, dir)) {
 							return true;
 						}
 
@@ -200,33 +200,33 @@ public class ItemLogs extends ItemTerra
 			else
 			{
 				int m = itemstack.getItemDamage();
-				Block block = m>15?TFCBlocks.WoodVert2:TFCBlocks.WoodVert;
+				Block block = m>15?TFCBlocks.woodVert2:TFCBlocks.woodVert;
 
-				if(side == 0 && block.canPlaceBlockAt(world, x, y-1, z) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y-1, z, false, side, null, itemstack))
+				if(side == 0 && block.canPlaceBlockAt(world, x, y-1, z) && world.canPlaceEntityOnSide(TFCBlocks.woodVert, x, y-1, z, false, side, null, itemstack))
 				{
 					world.setBlock(x, y-1, z, block, m,0x2);
 					itemstack.stackSize = itemstack.stackSize-1;
 					playSound(world, x, y, z);
 				}
-				else if(side == 1 && block.canPlaceBlockAt(world, x, y+1, z) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y+1, z, false, side, null, itemstack))
+				else if(side == 1 && block.canPlaceBlockAt(world, x, y+1, z) && world.canPlaceEntityOnSide(TFCBlocks.woodVert, x, y+1, z, false, side, null, itemstack))
 				{
 					world.setBlock(x, y+1, z, block, m,0x2);
 					itemstack.stackSize = itemstack.stackSize-1;
 					playSound(world, x, y, z);
 				}
-				else if(side == 2 && block.canPlaceBlockAt(world, x, y, z-1) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y, z-1, false, side, null, itemstack))
+				else if(side == 2 && block.canPlaceBlockAt(world, x, y, z-1) && world.canPlaceEntityOnSide(TFCBlocks.woodVert, x, y, z-1, false, side, null, itemstack))
 				{
 					setSide(world, itemstack, m, side, x, y, z-1);
 				}
-				else if(side == 3 && block.canPlaceBlockAt(world, x, y, z+1) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y, z+1, false, side, null, itemstack))
+				else if(side == 3 && block.canPlaceBlockAt(world, x, y, z+1) && world.canPlaceEntityOnSide(TFCBlocks.woodVert, x, y, z+1, false, side, null, itemstack))
 				{
 					setSide(world, itemstack, m, side, x, y, z+1);
 				}
-				else if(side == 4 && block.canPlaceBlockAt(world, x-1, y, z) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x-1, y, z, false, side, null, itemstack))
+				else if(side == 4 && block.canPlaceBlockAt(world, x-1, y, z) && world.canPlaceEntityOnSide(TFCBlocks.woodVert, x-1, y, z, false, side, null, itemstack))
 				{
 					setSide(world, itemstack, m, side, x-1, y, z);
 				}
-				else if(side == 5 && block.canPlaceBlockAt(world, x+1, y, z) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x+1, y, z, false, side, null, itemstack))
+				else if(side == 5 && block.canPlaceBlockAt(world, x+1, y, z) && world.canPlaceEntityOnSide(TFCBlocks.woodVert, x+1, y, z, false, side, null, itemstack))
 				{
 					setSide(world, itemstack, m, side, x+1, y, z);
 				}
@@ -241,13 +241,13 @@ public class ItemLogs extends ItemTerra
 		// don't call this function with side==0 or side==1, it won't do anything
 
 		int meta = m % 8;
-		Block log = TFCBlocks.WoodHoriz;
+		Block log = TFCBlocks.woodHoriz;
 		switch (m/8) {
 		case 1:
-			log = TFCBlocks.WoodHoriz2;
+			log = TFCBlocks.woodHoriz2;
 			break;
 		case 2:
-			log = TFCBlocks.WoodHoriz3;
+			log = TFCBlocks.woodHoriz3;
 			break;
 		case 3:
 			//log = TFCBlocks.WoodHoriz4;
@@ -268,6 +268,6 @@ public class ItemLogs extends ItemTerra
 
 	private void playSound(World world, int x, int y, int z)
 	{
-		world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, TFCBlocks.LogNatural.stepSound.func_150496_b(), (TFCBlocks.LogNatural.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.LogNatural.stepSound.getPitch() * 0.8F);
+		world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, TFCBlocks.logNatural.stepSound.func_150496_b(), (TFCBlocks.logNatural.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.logNatural.stepSound.getPitch() * 0.8F);
 	}
 }

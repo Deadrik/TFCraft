@@ -36,7 +36,7 @@ public class AIEatGrass extends EntityAIBase
 			int j = MathHelper.floor_double(this.theEntity.posY);
 			int k = MathHelper.floor_double(this.theEntity.posZ);
 			boolean isGrass = TFC_Core.isLushGrass(theWorld.getBlock(i, j-1, k));
-			boolean isTallGrass = this.theWorld.getBlock(i, j, k) == TFCBlocks.TallGrass && this.theWorld.getBlockMetadata(i, j, k) == 1;
+			boolean isTallGrass = this.theWorld.getBlock(i, j, k) == TFCBlocks.tallGrass && this.theWorld.getBlockMetadata(i, j, k) == 1;
 			return isGrass || isTallGrass;
 		}
 		return false;
@@ -92,7 +92,7 @@ public class AIEatGrass extends EntityAIBase
 
 			Block grass = this.theWorld.getBlock(i, j - 1, k);
 
-			if (this.theWorld.getBlock(i, j, k) == TFCBlocks.TallGrass)
+			if (this.theWorld.getBlock(i, j, k) == TFCBlocks.tallGrass)
 			{
 				this.theWorld.func_147480_a/*destroyBlock*/(i, j, k, false);
 				this.theEntity.eatGrassBonus();

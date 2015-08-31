@@ -46,9 +46,9 @@ public class WorldGenGrowCrops implements IWorldGenerator
 				if(temp > crop.minAliveTemp && month > 0 && month <= 6)
 				{
 					Block b = world.getBlock(i, j, k);
-					if (TFCBlocks.Crops.canBlockStay(world, i, j, k) && (b.isAir(world, i, j, k) || b == TFCBlocks.TallGrass))
+					if (TFCBlocks.crops.canBlockStay(world, i, j, k) && (b.isAir(world, i, j, k) || b == TFCBlocks.tallGrass))
 					{
-						if(world.setBlock(i, j, k, TFCBlocks.Crops, 0, 0x2))
+						if(world.setBlock(i, j, k, TFCBlocks.crops, 0, 0x2))
 						{
 							te = (TECrop)world.getTileEntity(i, j, k);
 							if(te != null)

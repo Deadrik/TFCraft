@@ -21,15 +21,15 @@ import com.bioxx.tfc.Core.TFC_Core;
 public class BlockFlora extends BlockTerra 
 {
 	private IIcon[] icons;
-	private String[] MetaNames;
+	private String[] metaNames;
 
 	public BlockFlora()
 	{
 		super(Material.plants);
-		MetaNames = new String[]{"Golden Rod", "Cat Tails"};
-		icons = new IIcon[MetaNames.length];
+		metaNames = new String[]{"Golden Rod", "Cat Tails"};
+		icons = new IIcon[metaNames.length];
 		this.setBlockBounds(0.3f, 0.0f, 0.3f, 0.7f, 0.7f, 0.7f);
-		this.setCreativeTab(TFCTabs.TFCDecoration);
+		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class BlockFlora extends BlockTerra
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
 		for (int i = 0; i < icons.length; ++i)
-			icons[i] = par1IconRegister.registerIcon(Reference.ModID + ":" + "plants/"+MetaNames[i]);
+			icons[i] = par1IconRegister.registerIcon(Reference.MOD_ID + ":" + "plants/"+metaNames[i]);
 	}
 
 	@SideOnly(Side.CLIENT)

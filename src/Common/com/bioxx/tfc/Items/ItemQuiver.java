@@ -27,7 +27,7 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 	public ItemQuiver()
 	{
 		super();
-		this.setCreativeTab(TFCTabs.TFCArmor);
+		this.setCreativeTab(TFCTabs.TFC_ARMOR);
 	}
 	/**
 	 * Gets an icon index based on an item's damage value and the given render pass
@@ -62,7 +62,7 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":quiver");
+		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":quiver");
 	}
 
 	public int getQuiverArrows(ItemStack item){

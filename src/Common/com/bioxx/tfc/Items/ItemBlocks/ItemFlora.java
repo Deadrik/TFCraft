@@ -8,7 +8,7 @@ public class ItemFlora extends ItemTerraBlock
 	public ItemFlora(Block par1) 
 	{
 		super(par1);
-		MetaNames = new String[]{"Golden Rod", "Cat Tails"};
+		metaNames = new String[]{"Golden Rod", "Cat Tails"};
 	}
 
 	@Override

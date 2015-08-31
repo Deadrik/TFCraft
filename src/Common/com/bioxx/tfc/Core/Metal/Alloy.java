@@ -15,7 +15,7 @@ import com.bioxx.tfc.api.Metal;
 
 public class Alloy 
 {
-	public List<AlloyMetal> AlloyIngred;
+	public List<AlloyMetal> alloyIngred;
 	public Metal outputType;
 	public float outputAmount;
 	protected EnumTier furnaceTier;
@@ -37,27 +37,27 @@ public class Alloy
 
 	public Alloy()
 	{
-		AlloyIngred = new ArrayList<AlloyMetal>();
+		alloyIngred = new ArrayList<AlloyMetal>();
 	}
 
 	public void addIngred(AlloyMetal am)
 	{
-		AlloyIngred.add(am);
+		alloyIngred.add(am);
 	}
 
 	public void addIngred(Metal e, float m)
 	{
-		AlloyIngred.add(new AlloyMetal(e, m));
+		alloyIngred.add(new AlloyMetal(e, m));
 	}
 
 	public void addIngred(Metal e, float min, float max)
 	{
-		AlloyIngred.add(new AlloyMetalCompare(e, min, max));
+		alloyIngred.add(new AlloyMetalCompare(e, min, max));
 	}
 
 	public boolean matches(Alloy a)
 	{
-		Iterator<AlloyMetal> iter = a.AlloyIngred.iterator();
+		Iterator<AlloyMetal> iter = a.alloyIngred.iterator();
 		boolean matches = true;
 		while (iter.hasNext() && matches)
 		{
@@ -87,7 +87,7 @@ public class Alloy
 
 	public boolean searchForAlloyMetal(AlloyMetal am)
 	{
-		Iterator<AlloyMetal> iter = AlloyIngred.iterator();
+		Iterator<AlloyMetal> iter = alloyIngred.iterator();
 		while(iter.hasNext())
 		{
 			AlloyMetalCompare amc = (AlloyMetalCompare) iter.next();
@@ -99,7 +99,7 @@ public class Alloy
 
 	public float getPercentForMetal(Metal m)
 	{
-		Iterator<AlloyMetal> iter = AlloyIngred.iterator();
+		Iterator<AlloyMetal> iter = alloyIngred.iterator();
 		//AlloyMetal am = new AlloyMetal(m, -1);
 		while(iter.hasNext())
 		{
@@ -146,22 +146,22 @@ public class Alloy
 		try
 		{
 			if(outputType != null)
-				dos.writeUTF(outputType.Name);
+				dos.writeUTF(outputType.name);
 			else
 				dos.writeUTF("Unknown");
 
 			dos.writeFloat(outputAmount);
-			dos.writeInt(AlloyIngred.size());
-			for(int i = 0; i < AlloyIngred.size(); i++)
+			dos.writeInt(alloyIngred.size());
+			for(int i = 0; i < alloyIngred.size(); i++)
 			{
-				AlloyMetal am = AlloyIngred.get(i);
-				dos.writeUTF(am.metalType.Name);
+				AlloyMetal am = alloyIngred.get(i);
+				dos.writeUTF(am.metalType.name);
 				dos.writeFloat(am.metal);
 			}
 		}
 		catch (IOException e) 
 		{
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		}
 	}
 
@@ -175,26 +175,26 @@ public class Alloy
 			for(int i = 0; i < size; i++)
 			{
 				AlloyMetal am = new AlloyMetal(MetalRegistry.instance.getMetalFromString(dis.readUTF()), dis.readFloat());
-				this.AlloyIngred.add(am);
+				this.alloyIngred.add(am);
 			}
 		}
 		catch (IOException e)
 		{
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		}
 		return this;
 	}
 
 	public void toNBT(NBTTagCompound nbt)
 	{
-		nbt.setString("outputType", outputType.Name);
+		nbt.setString("outputType", outputType.name);
 		nbt.setFloat("outputAmount", outputAmount);
 		NBTTagList nbtlist = new NBTTagList();
-		for(int i = 0; i < AlloyIngred.size(); i++)
+		for(int i = 0; i < alloyIngred.size(); i++)
 		{
 			NBTTagCompound nbt1 = new NBTTagCompound();
-			AlloyMetal am = AlloyIngred.get(i);
-			nbt1.setString("metalType", am.metalType.Name);
+			AlloyMetal am = alloyIngred.get(i);
+			nbt1.setString("metalType", am.metalType.name);
 			nbt1.setFloat("amount", am.metal);
 			nbtlist.appendTag(nbt1);
 		}
@@ -210,7 +210,7 @@ public class Alloy
 		{
 			NBTTagCompound nbt1 = nbtlist.getCompoundTagAt(i);
 			AlloyMetal am = new AlloyMetal(MetalRegistry.instance.getMetalFromString(nbt1.getString("metalType")), nbt1.getFloat("amount"));
-			this.AlloyIngred.add(am);
+			this.alloyIngred.add(am);
 		}
 		return this;
 	}

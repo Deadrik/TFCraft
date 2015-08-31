@@ -15,7 +15,7 @@ public class BlockDryGrass extends BlockGrass
 	public void registerBlockIcons(IIconRegister registerer)
 	{
 		super.registerBlockIcons(registerer);
-		GrassTopTexture = registerer.registerIcon(Reference.ModID + ":" + "GrassSparseOverlay");
-		iconGrassSideOverlay = registerer.registerIcon(Reference.ModID + ":" + "GrassSideSparse");
+		grassTopTexture = registerer.registerIcon(Reference.MOD_ID + ":" + "GrassSparseOverlay");
+		iconGrassSideOverlay = registerer.registerIcon(Reference.MOD_ID + ":" + "GrassSideSparse");
 	}
 }

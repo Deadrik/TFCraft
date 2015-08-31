@@ -9,7 +9,7 @@ public class ItemPotteryLargeVessel extends ItemPotteryBase
 	public ItemPotteryLargeVessel() 
 	{
 		super();
-		this.MetaNames = new String[]{"Clay Vessel [Large]", "Ceramic Vessel [Large]"};
+		this.metaNames = new String[]{"Clay Vessel [Large]", "Ceramic Vessel [Large]"};
 		this.setWeight(EnumWeight.HEAVY);
 		this.setSize(EnumSize.HUGE);
 	}

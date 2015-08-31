@@ -44,7 +44,7 @@ import com.bioxx.tfc.api.Tools.ChiselManager;
 
 public class RenderOverlayHandler
 {
-	public static ResourceLocation tfcicons = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "icons.png");
+	public static ResourceLocation tfcicons = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "icons.png");
 	private FontRenderer fontrenderer;
 	public int recordTimer;
 	private final Field _recordPlayingUpFor = ReflectionHelper.findField(GuiIngame.class, "recordPlayingUpFor", "field_73845_h");
@@ -105,7 +105,7 @@ public class RenderOverlayHandler
 			}
 			if (hasHammer)
 			{
-				int mode = PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode;
+				int mode = PlayerManagerTFC.getInstance().getClientPlayer().chiselMode;
 				TFC_Core.bindTexture(ChiselManager.getInstance().getResourceLocation(mode));
 				this.drawTexturedModalRect(mid + 95, sr.getScaledHeight() - 21, ChiselManager.getInstance().getTextureU(mode), ChiselManager.getInstance().getTextureV(mode), 20, 20);
 				TFC_Core.bindTexture(tfcicons);
@@ -214,7 +214,7 @@ public class RenderOverlayHandler
 			//Draw Notifications
 			String healthString = (int) Math.min(player.getHealth(), maxHealth) + "/" + (int) maxHealth;
 			mc.fontRenderer.drawString(healthString, mid-45-(mc.fontRenderer.getStringWidth(healthString)/2), healthRowHeight+2, Color.white.getRGB());
-			if (player.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getModifier(TFCAttributes.overburdenedUUID) != null)
+			if (player.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getModifier(TFCAttributes.OVERBURDENED_UUID) != null)
 				mc.fontRenderer.drawString(TFC_Core.translate("gui.overburdened"), mid-(mc.fontRenderer.getStringWidth(TFC_Core.translate("gui.overburdened"))/2), healthRowHeight-20, Color.red.getRGB());
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -385,12 +385,12 @@ public class RenderOverlayHandler
 
 	private int getQuiverArrows()
 	{
-		return ((ItemQuiver)(TFCItems.Quiver)).getQuiverArrows(getQuiver());
+		return ((ItemQuiver)(TFCItems.quiver)).getQuiverArrows(getQuiver());
 	}
 
 	private int getQuiverJavelins()
 	{
-		return ((ItemQuiver)(TFCItems.Quiver)).getQuiverJavelins(getQuiver());
+		return ((ItemQuiver)(TFCItems.quiver)).getQuiverJavelins(getQuiver());
 	}
 
 	public void drawTexturedModalRect(int par1, int par2, int par3, int par4, int par5, int par6)

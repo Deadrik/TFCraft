@@ -29,7 +29,7 @@ public class BlockGrill extends BlockTerraContainer
 	{
 		super(Material.iron);
 		this.setBlockBounds(0, 0, 0, 1, 0.05f, 1);
-		this.setCreativeTab(TFCTabs.TFCDevices);
+		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 	}
 
 	@Override
@@ -216,7 +216,7 @@ public class BlockGrill extends BlockTerraContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Grill Wrought Iron");
+		this.blockIcon = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Grill Wrought Iron");
 	}
 
 	@Override
@@ -229,7 +229,7 @@ public class BlockGrill extends BlockTerraContainer
 			{
 				return blockIcon;
 			}
-			return TFC_Textures.SheetWroughtIron;
+			return TFC_Textures.sheetWroughtIron;
 		}
 		return blockIcon;
 	}

@@ -105,10 +105,10 @@ public class ContainerLiquidVessel extends ContainerTFC
 
 			if (!world.isRemote && m != null && stack != null)
 			{
-				if (input != null && input.getItem() == TFCItems.CeramicMold && input.getItemDamage() == 1 && input.stackSize == 1 && metalAmount > 0)
+				if (input != null && input.getItem() == TFCItems.ceramicMold && input.getItemDamage() == 1 && input.stackSize == 1 && metalAmount > 0)
 				{
 					int amt = 99;
-					ItemStack is = new ItemStack(m.MeltedItem, 1, amt);
+					ItemStack is = new ItemStack(m.meltedItem, 1, amt);
 					TFC_ItemHeat.setTemp(is, (short) (HeatRegistry.getInstance().getMeltingPoint(is) * 1.5f));
 					containerInv.setInventorySlotContents(0, is);
 					if (metalAmount - 1 <= 0)
@@ -125,7 +125,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 
 					stack.setTagCompound(nbt);
 				}
-				else if (input != null && input.getItem() == m.MeltedItem && input.getItemDamage() > 0)
+				else if (input != null && input.getItem() == m.meltedItem && input.getItemDamage() > 0)
 				{
 					input.setItemDamage(input.getItemDamage() - 1);
 					TFC_ItemHeat.setTemp(input, (short) (HeatRegistry.getInstance().getMeltingPoint(input) * 1.5f));
@@ -142,16 +142,16 @@ public class ContainerLiquidVessel extends ContainerTFC
 					}
 				}
 				else if (input != null &&input.getItem() instanceof ItemPotteryMold && input.getItemDamage() == 1 && input.stackSize == 1 && metalAmount > 0 &&
-							("Copper".equals(m.Name) || "Bronze".equals(m.Name) || "Bismuth Bronze".equals(m.Name) || "Black Bronze".equals(m.Name)))
+							("Copper".equals(m.name) || "Bronze".equals(m.name) || "Bismuth Bronze".equals(m.name) || "Black Bronze".equals(m.name)))
 				{
 					int amt = -1;
-					if ("Copper".equals(m.Name))
+					if ("Copper".equals(m.name))
 						amt = 398;
-					else if ("Bronze".equals(m.Name))
+					else if ("Bronze".equals(m.name))
 						amt = 399;
-					else if ("Bismuth Bronze".equals(m.Name))
+					else if ("Bismuth Bronze".equals(m.name))
 						amt = 400;
-					else if ("Black Bronze".equals(m.Name))
+					else if ("Black Bronze".equals(m.name))
 						amt = 401;
 
 					ItemStack is = new ItemStack(input.getItem(), 1, amt);
@@ -174,13 +174,13 @@ public class ContainerLiquidVessel extends ContainerTFC
 				else if (input != null && input.getItem() instanceof ItemPotteryMold && input.getItemDamage() > 1)
 				{
 					boolean correctMetalFlag = false;
-					if ("Copper".equals(m.Name) && (input.getItemDamage() - 2) % 4 == 0)
+					if ("Copper".equals(m.name) && (input.getItemDamage() - 2) % 4 == 0)
 						correctMetalFlag = true;
-					else if ("Bronze".equals(m.Name) && (input.getItemDamage() - 2) % 4 == 1)
+					else if ("Bronze".equals(m.name) && (input.getItemDamage() - 2) % 4 == 1)
 						correctMetalFlag = true;
-					else if ("Bismuth Bronze".equals(m.Name) && (input.getItemDamage() - 2) % 4 == 2)
+					else if ("Bismuth Bronze".equals(m.name) && (input.getItemDamage() - 2) % 4 == 2)
 						correctMetalFlag = true;
-					else if ("Black Bronze".equals(m.Name) && (input.getItemDamage() - 2) % 4 == 3)
+					else if ("Black Bronze".equals(m.name) && (input.getItemDamage() - 2) % 4 == 3)
 						correctMetalFlag = true;
 
 					if (correctMetalFlag)
@@ -227,7 +227,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 					return null;
 			}
 			else if (!outputSlot.getHasStack() &&
-					(slotStack.getItem() == TFCItems.CeramicMold && slotStack.getItemDamage() == 1 ||
+					(slotStack.getItem() == TFCItems.ceramicMold && slotStack.getItemDamage() == 1 ||
 					slotStack.getItem() instanceof ItemMeltedMetal && slotStack.getItemDamage() > 1 ||
 					slotStack.getItem() instanceof ItemPotteryMold && slotStack.getItemDamage() > 0))
 			{

@@ -22,16 +22,16 @@ public class WorldGenMinable extends WorldGenerator
 	//private static int[] aOreCheck = new int[256];// setup array to store oreIDs for this chunk // has to be static to survive instance calls                
 	//private static int[] metaOreCheck = new int[16];// this is used to check the metaIDs of a given ore ID
 	private static ArrayList oreList = new ArrayList();
-	public static int MPChunk_X;
-	public static int MPChunk_Z;
-	private int x_Chunk;
-	private int z_Chunk;
-	public Block MPBlock;
+	public static int mPChunkX;
+	public static int mPChunkZ;
+	private int xChunk;
+	private int zChunk;
+	public Block mPBlock;
 	private final int minableBlockMeta;
-	public static int MPPrevX;
-	public static int MPPrevZ;
-	public static Block MPPrevBlock;
-	public static int MPPrevMeta;
+	public static int mPPrevX;
+	public static int mPPrevZ;
+	public static Block mPPrevBlock;
+	public static int mPPrevMeta;
 	//public static int MPPrevID3;
 	//public static int MPPrevID4;
 	private static boolean genBeforeCheck;
@@ -88,9 +88,9 @@ public class WorldGenMinable extends WorldGenerator
 	public boolean generateBeforeCheck() // takes a set of current global variables and checks to see if this ore has spawned before in this chunk
 	{
 		genBeforeCheck = false;
-		genBeforeCheck = oreList.contains(Arrays.asList(MPBlock, minableBlockMeta));
+		genBeforeCheck = oreList.contains(Arrays.asList(mPBlock, minableBlockMeta));
 		if(!genBeforeCheck)
-			oreList.add(Arrays.asList(MPBlock, minableBlockMeta));
+			oreList.add(Arrays.asList(mPBlock, minableBlockMeta));
 		return genBeforeCheck;
 	}
 
@@ -105,9 +105,9 @@ public class WorldGenMinable extends WorldGenerator
 			int posY = temp2;
 			int posZ = z + temp3;
 			if (!useMarcoVeins)
-				BODgenerate(worldObj, rand, posX, posY, posZ, veinSi); // generate based on values
+				bODgenerate(worldObj, rand, posX, posY, posZ, veinSi); // generate based on values
 			else
-				BODgenerateVein(worldObj, rand, posX, posY, posZ, veinSi);
+				bODgenerateVein(worldObj, rand, posX, posY, posZ, veinSi);
 		}
 	}
 
@@ -119,27 +119,27 @@ public class WorldGenMinable extends WorldGenerator
 
 	public boolean generate(World world, Random random, int x, int z, int min, int max)//obsorb default system
 	{
-		MPChunk_X = x;// set output chunk x // snap to grid
-		MPChunk_Z = z;// set output chunk z    
+		mPChunkX = x;// set output chunk x // snap to grid
+		mPChunkZ = z;// set output chunk z    
 		rand = random;
 		worldObj = world; // set world
 		mineCount = 0; // this is a new chunk, so list gets set to the beginning
 		oreList.clear(); // clear the list of ores, this is a new chunk   
-		MPBlock = minableBlock;// set output block
+		mPBlock = minableBlock;// set output block
 
-		if(MPChunk_X != MPPrevX || MPChunk_Z != MPPrevZ || MPPrevBlock != MPBlock || minableBlockMeta != MPPrevMeta)
+		if(mPChunkX != mPPrevX || mPChunkZ != mPPrevZ || mPPrevBlock != mPBlock || minableBlockMeta != mPPrevMeta)
 		{
 			if (!generateBeforeCheck())
 			{
-				MPPrevX = MPChunk_X;
-				MPPrevZ = MPChunk_Z;
-				x_Chunk = MPChunk_X;
-				z_Chunk = MPChunk_Z;
-				MPPrevBlock = MPBlock;
-				MPPrevMeta = minableBlockMeta;
+				mPPrevX = mPChunkX;
+				mPPrevZ = mPChunkZ;
+				xChunk = mPChunkX;
+				zChunk = mPChunkZ;
+				mPPrevBlock = mPBlock;
+				mPPrevMeta = minableBlockMeta;
 				mineHeight = min + rand.nextInt(max-min);
 				if (rarity == 1 || rarity > 0 && rand.nextInt(rarity) == 0)
-					createMine(worldObj, rand, x_Chunk, z_Chunk);
+					createMine(worldObj, rand, xChunk, zChunk);
 			}
 		}
 		return true;
@@ -164,7 +164,7 @@ public class WorldGenMinable extends WorldGenerator
 		return densityValuePass; // return proccesed random value
 	}
 
-	public boolean BODgenerateVein(World world, Random rand, int parX, int parY, int parZ, int xyz)
+	public boolean bODgenerateVein(World world, Random rand, int parX, int parY, int parZ, int xyz)
 	{
 		//==========================================mp mod
 		int posX = parX;
@@ -274,7 +274,7 @@ public class WorldGenMinable extends WorldGenerator
 
 						if (isCorrectRockType && isCorrectMeta)
 						{
-							if (MPBlock != null && world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2))
+							if (mPBlock != null && world.setBlock(posX, posY, posZ, mPBlock, minableBlockMeta, 2))
 							{
 								TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
 								if(te!= null)
@@ -304,7 +304,7 @@ public class WorldGenMinable extends WorldGenerator
 
 				if (isCorrectRockType && isCorrectMeta)
 				{
-					if (MPBlock != null && world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2))
+					if (mPBlock != null && world.setBlock(posX, posY, posZ, mPBlock, minableBlockMeta, 2))
 					{
 						TEOre te = (TEOre) world.getTileEntity(posX, posY, posZ);
 						if (te != null)
@@ -329,7 +329,7 @@ public class WorldGenMinable extends WorldGenerator
 		return true;
 	}
 
-	public boolean BODgenerate(World world, Random rand, int par3, int par4, int par5, int xyz)
+	public boolean bODgenerate(World world, Random rand, int par3, int par4, int par5, int xyz)
 	{
 		//==========================================mp mod
 		numberOfBlocks = xyz; //input number of blocks per vein
@@ -386,7 +386,7 @@ public class WorldGenMinable extends WorldGenerator
 								{
 									if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D)
 									{
-										if (MPBlock != null && world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2))
+										if (mPBlock != null && world.setBlock(posX, posY, posZ, mPBlock, minableBlockMeta, 2))
 										{
 											TEOre te = (TEOre) world.getTileEntity(posX, posY, posZ);
 											if (te != null)

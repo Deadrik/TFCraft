@@ -23,8 +23,8 @@ public class ItemCoal extends ItemTerra
 		super();
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
-		this.setCreativeTab(TFCTabs.TFCMaterials);
-		this.MetaNames = new String[] {"coal", "charcoal"};
+		this.setCreativeTab(TFCTabs.TFC_MATERIALS);
+		this.metaNames = new String[] {"coal", "charcoal"};
 		this.setWeight(EnumWeight.LIGHT);
 		this.setSize(EnumSize.TINY);
 	}
@@ -51,7 +51,7 @@ public class ItemCoal extends ItemTerra
 	{
 		if(is.getItemDamage() == 1 && !world.isRemote)
 		{
-			if(world.getBlock(x, y, z) == TFCBlocks.Charcoal)
+			if(world.getBlock(x, y, z) == TFCBlocks.charcoal)
 			{
 				int meta = world.getBlockMetadata(x, y, z);
 				if(meta < 8)
@@ -62,13 +62,13 @@ public class ItemCoal extends ItemTerra
 				}
 				else if(side == 1 && world.isAirBlock(x + map[side][0], y + map[side][1], z + map[side][2]))
 				{
-					world.setBlock(x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.Charcoal, 1, 0x2);
+					world.setBlock(x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.charcoal, 1, 0x2);
 					is.stackSize--;
 					return true;
 				}
 			}
 
-			if(world.getBlock(x + map[side][0], y + map[side][1], z + map[side][2]) == TFCBlocks.Charcoal)
+			if(world.getBlock(x + map[side][0], y + map[side][1], z + map[side][2]) == TFCBlocks.charcoal)
 			{
 				int meta = world.getBlockMetadata(x + map[side][0], y + map[side][1], z + map[side][2]);
 				if(meta < 8)
@@ -81,9 +81,9 @@ public class ItemCoal extends ItemTerra
 
 			if(world.isAirBlock(x + map[side][0], y + map[side][1], z + map[side][2]))
 			{
-				world.setBlock(x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.Charcoal, 1, 0x2);
+				world.setBlock(x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.charcoal, 1, 0x2);
 				is.stackSize--;
-				TFCBlocks.Charcoal.onNeighborBlockChange(world, x + map[side][0], y + map[side][1], z + map[side][2], world.getBlock(x + map[side][0], y + map[side][1], z + map[side][2]));
+				TFCBlocks.charcoal.onNeighborBlockChange(world, x + map[side][0], y + map[side][1], z + map[side][2], world.getBlock(x + map[side][0], y + map[side][1], z + map[side][2]));
 			}
 			return true;
 		}

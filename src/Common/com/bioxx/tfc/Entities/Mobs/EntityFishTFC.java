@@ -25,7 +25,7 @@ public class EntityFishTFC extends EntitySquid
 
 	/** change in squidRotation in radians. */
 	private float rotationVelocity;
-	private float field_70871_bB;
+	private float yawMult;
 
 	//private float prevDirection;
 
@@ -217,18 +217,18 @@ public class EntityFishTFC extends EntitySquid
 					if (f > 0.75D)
 					{
 						this.randomMotionSpeed = 1.0F;
-						this.field_70871_bB = 1.0F;
+						this.yawMult = 1.0F;
 					}
 					else
 					{
-						this.field_70871_bB *= 0.8F;
+						this.yawMult *= 0.8F;
 					}
 				}
 				else
 				{
 					this.tentacleAngle = 0.0F;
 					this.randomMotionSpeed *= 0.9F;
-					this.field_70871_bB *= 0.99F;
+					this.yawMult *= 0.99F;
 				}
 
 				if (!this.worldObj.isRemote)
@@ -242,7 +242,7 @@ public class EntityFishTFC extends EntitySquid
 				f = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
 				this.renderYawOffset += (-((float)Math.atan2(this.motionX, this.motionZ)) * 180.0F / (float)Math.PI - this.renderYawOffset) * 0.1F;
 				this.rotationYaw = this.renderYawOffset;
-				this.squidYaw += (float)Math.PI * this.field_70871_bB * 1.5F;
+				this.squidYaw += (float)Math.PI * this.yawMult * 1.5F;
 				this.squidPitch += (-((float) Math.atan2(f, this.motionY)) * 180.0F / (float) Math.PI - this.squidPitch) * 0.1F;
 			}
 			else
@@ -434,10 +434,10 @@ public class EntityFishTFC extends EntitySquid
 			}
 			
 			for(EntityPlayer p : nearbyPlayers){
-				double p_dist = p.getDistance(destX, destY, destZ);
-				if (p_dist < currentPlayerDistance || p_dist < 8 && currentPlayerDistance == 16)
+				double playerDist = p.getDistance(destX, destY, destZ);
+				if (playerDist < currentPlayerDistance || playerDist < 8 && currentPlayerDistance == 16)
 				{
-					currentPlayerDistance = p_dist;
+					currentPlayerDistance = playerDist;
 					tooCloseToPlayer = true;
 				}
 			}

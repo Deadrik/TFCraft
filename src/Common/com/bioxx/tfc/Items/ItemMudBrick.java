@@ -40,7 +40,7 @@ public class ItemMudBrick extends ItemTerra
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		overlayIcon = registerer.registerIcon(Reference.ModID+":"+this.textureFolder+"Mud Brick Overlay");
+		overlayIcon = registerer.registerIcon(Reference.MOD_ID+":"+this.textureFolder+"Mud Brick Overlay");
 		super.registerIcons(registerer);
 	}
 

@@ -83,10 +83,10 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 
 			//If there is fire nearby, the pitkiln will also catch fire and start the burn countdown
 			if(burnStart == 0 && isFireNear())
-				StartPitFire();
+				startPitFire();
 
 			//Make sure to keep the fire going throughout the length of the burn
-			if(blockAbove != Blocks.fire && TFC_Time.getTotalTicks() - burnStart <= TFC_Time.hourLength * TFCOptions.pitKilnBurnTime)
+			if(blockAbove != Blocks.fire && TFC_Time.getTotalTicks() - burnStart <= TFC_Time.HOUR_LENGTH * TFCOptions.pitKilnBurnTime)
 			{
 				if ((blockAbove.isAir(worldObj, xCoord, yCoord + 1, zCoord) || worldObj.getBlock(xCoord, yCoord + 1, zCoord).getMaterial().getCanBurn()) && isValid())
 					worldObj.setBlock(xCoord, yCoord + 1, zCoord, Blocks.fire);
@@ -101,7 +101,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 			}
 
 			//If the total time passes then we complete the burn and turn the clay into ceramic
-			if (blockAbove == Blocks.fire && TFC_Time.getTotalTicks() >= burnStart + (TFCOptions.pitKilnBurnTime * TFC_Time.hourLength))
+			if (blockAbove == Blocks.fire && TFC_Time.getTotalTicks() >= burnStart + (TFCOptions.pitKilnBurnTime * TFC_Time.HOUR_LENGTH))
 			{
 				worldObj.setBlockToAir(xCoord, yCoord + 1, zCoord);
 				if(inventory[0] != null)
@@ -155,7 +155,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 		return foundFire;
 	}
 
-	public void StartPitFire()
+	public void startPitFire()
 	{
 		if(straw == 8 && wood == 8)
 		{
@@ -175,10 +175,10 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 					if (this.inventory[i] == null)
 					{
 						wood++;
-						ItemStack _is = is.copy();
+						ItemStack itemStack = is.copy();
 						is.stackSize--;
-						_is.stackSize = 1;
-						this.setInventorySlotContents(i, _is);
+						itemStack.stackSize = 1;
+						this.setInventorySlotContents(i, itemStack);
 						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 						return true;
 					}
@@ -191,9 +191,9 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 					if (this.inventory[i] == null)
 					{
 						wood++;
-						ItemStack _is = is.copy();
-						_is.stackSize = 1;
-						this.setInventorySlotContents(i, _is);
+						ItemStack itemStack = is.copy();
+						itemStack.stackSize = 1;
+						this.setInventorySlotContents(i, itemStack);
 					}
 				}
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -231,7 +231,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 
 	public boolean isLit()
 	{
-		return TFC_Time.getTotalTicks() > burnStart && TFC_Time.getTotalTicks() - burnStart < TFC_Time.hourLength * TFCOptions.pitKilnBurnTime;
+		return TFC_Time.getTotalTicks() > burnStart && TFC_Time.getTotalTicks() - burnStart < TFC_Time.HOUR_LENGTH * TFCOptions.pitKilnBurnTime;
 	}
 
 	@Override
@@ -266,7 +266,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 
 		if(straw > 0)
 		{
-			entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, new ItemStack(TFCItems.Straw, straw));
+			entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, new ItemStack(TFCItems.straw, straw));
 			entityitem.motionX = (float)rand.nextGaussian() * f3;
 			entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 			entityitem.motionZ = (float)rand.nextGaussian() * f3;
@@ -293,7 +293,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 			int m = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 			if(m > 0)
 			{
-				entityitem = new EntityItem(worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, new ItemStack(TFCItems.Straw, m));
+				entityitem = new EntityItem(worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, new ItemStack(TFCItems.straw, m));
 				entityitem.lifespan = 48000;
 				worldObj.spawnEntityInWorld(entityitem);
 			}

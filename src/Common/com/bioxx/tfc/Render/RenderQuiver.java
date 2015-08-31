@@ -17,7 +17,7 @@ import com.bioxx.tfc.api.Interfaces.IEquipable;
 public class RenderQuiver {
 
 	private ModelQuiver quiver = new ModelQuiver();
-	private static final ResourceLocation QuiverTexture = new ResourceLocation(Reference.ModID, "textures/models/armor/leatherquiver_1.png");
+	private static final ResourceLocation QUIVER_TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/models/armor/leatherquiver_1.png");
 
 	public RenderQuiver(){
 
@@ -30,7 +30,7 @@ public class RenderQuiver {
 	public void doRender(EntityLivingBase entity, ItemStack item){
 		float entityTranslateY = entity instanceof EntityPlayer ? 0F : -1.5F;
 		GL11.glPushMatrix();
-		Minecraft.getMinecraft().renderEngine.bindTexture(QuiverTexture);
+		Minecraft.getMinecraft().renderEngine.bindTexture(QUIVER_TEXTURE);
 		if (!entity.isSneaking()){ GL11.glTranslatef(0F,  entityTranslateY + 0.0F/*0.65F*/, 0.1F);
 		}
 		else{ GL11.glTranslatef(0F,  entityTranslateY + 0.1F/*0.55F*/, 0.1F);

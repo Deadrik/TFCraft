@@ -24,7 +24,7 @@ public class TESpawnMeter extends TileEntity
 		{
 			if(timer < TFC_Time.getTotalTicks())
 			{
-				timer += TFC_Time.hourLength;
+				timer += TFC_Time.HOUR_LENGTH;
 				com.bioxx.tfc.Chunkdata.ChunkData cd = TFC_Core.getCDM(worldObj).getData(xCoord >> 4, zCoord >> 4);
 				if(cd != null)
 				{

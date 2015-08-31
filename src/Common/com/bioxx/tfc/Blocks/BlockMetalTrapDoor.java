@@ -41,7 +41,7 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 		//float f = 0.5F;
 		//float f1 = 1.0F;
 		this.setBlockBounds(0, 0, 0, 0.001f, 0.001f, 0.001f);
-		this.setCreativeTab(TFCTabs.TFCDevices);
+		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 	}
 
 	@Override
@@ -324,7 +324,7 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 	{
 		icons = new IIcon[metalNames.length];
 		for(int i = 0; i < icons.length; i++)
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "metal/"+metalNames[i]+" Trap Door");
+			icons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "metal/"+metalNames[i]+" Trap Door");
 	}
 
 	@Override
@@ -335,7 +335,7 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 		if(te!= null && te.sheetStack != null)
 			return icons[te.sheetStack.getItemDamage() & 31];
 		else
-			return TFC_Textures.InvisibleTexture;
+			return TFC_Textures.invisibleTexture;
 	}
 
 	@Override

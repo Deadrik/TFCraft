@@ -16,13 +16,13 @@ public class BlockCustomBookshelf extends BlockTerra
 	public BlockCustomBookshelf()
 	{
 		super(Material.wood);
-		this.setCreativeTab(TFCTabs.TFCBuilding);
+		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 	}
 
 	@Override
 	public IIcon getIcon(int par1, int par2)
 	{
-		return par1 != 1 && par1 != 0 ? super.getIcon(par1, par2) : TFCBlocks.Planks.getBlockTextureFromSide(par1);
+		return par1 != 1 && par1 != 0 ? super.getIcon(par1, par2) : TFCBlocks.planks.getBlockTextureFromSide(par1);
 	}
 
 	@Override

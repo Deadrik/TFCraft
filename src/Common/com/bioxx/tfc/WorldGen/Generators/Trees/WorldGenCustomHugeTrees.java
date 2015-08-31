@@ -30,7 +30,7 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 		this.leavesMetadata = par4;
 	}
 
-	private void func_48192_a(World par1World, int par2, int par3, int par4, int par5, Random par6Random)
+	private void genLeaves(World par1World, int par2, int par3, int par4, int par5, Random par6Random)
 	{
 		byte var7 = 2;
 		for (int var8 = par4 - var7; var8 <= par4; ++var8)
@@ -48,7 +48,7 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 							(par6Random.nextInt(4) != 0 || var12 * var12 + var14 * var14 <= (var10 - 1) * (var10 - 1)) && 
 							!par1World.getBlock(var11, var8, var13).isOpaqueCube())
 					{
-						this.setBlockAndNotifyAdequately(par1World, var11, var8, var13, TFCBlocks.Leaves, this.leavesMetadata);
+						this.setBlockAndNotifyAdequately(par1World, var11, var8, var13, TFCBlocks.leaves, this.leavesMetadata);
 					}
 				}
 			}
@@ -83,11 +83,11 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 						{
 							Block block = world.getBlock(tempX, blockUnder, tempZ);
 							if (!block.isAir(world, tempX, blockUnder, tempZ) &&
-									(block != TFCBlocks.Leaves || block != TFCBlocks.Leaves2) &&
-									(block != TFCBlocks.Grass || block != TFCBlocks.Grass2) &&
-									(block != TFCBlocks.Dirt || block != TFCBlocks.Dirt2) &&
-									(block != TFCBlocks.LogNatural || block != TFCBlocks.LogNatural2) &&
-									(block != TFCBlocks.Sapling || block != TFCBlocks.Sapling2) &&
+									(block != TFCBlocks.leaves || block != TFCBlocks.leaves2) &&
+									(block != TFCBlocks.grass || block != TFCBlocks.grass2) &&
+									(block != TFCBlocks.dirt || block != TFCBlocks.dirt2) &&
+									(block != TFCBlocks.logNatural || block != TFCBlocks.logNatural2) &&
+									(block != TFCBlocks.sapling || block != TFCBlocks.sapling2) &&
 									!(TFC_Core.isSoil(block)))
 							{
 								canGenHere = false;
@@ -114,76 +114,76 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 					world.setBlock(xCoord + 1, yCoord - 1, zCoord, TFC_Core.getTypeForDirt(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
 					world.setBlock(xCoord, yCoord - 1, zCoord + 1, TFC_Core.getTypeForDirt(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
 					world.setBlock(xCoord + 1, yCoord - 1, zCoord + 1, TFC_Core.getTypeForDirt(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
-					this.func_48192_a(world, xCoord, zCoord, yCoord + var6, 2, rand);
+					this.genLeaves(world, xCoord, zCoord, yCoord + var6, 2, rand);
 
 					for (int var14 = yCoord + var6 - 2 - rand.nextInt(4); var14 > yCoord + var6 / 2; var14 -= 2 + rand.nextInt(4))
 					{
 						float var15 = rand.nextFloat() * (float)Math.PI * 2.0F;
 						tempZ = xCoord + (int)(0.5F + MathHelper.cos(var15) * 4.0F);
 						var12 = zCoord + (int)(0.5F + MathHelper.sin(var15) * 4.0F);
-						this.func_48192_a(world, tempZ, var12, var14, 0, rand);
+						this.genLeaves(world, tempZ, var12, var14, 0, rand);
 
 						for (int var13 = 0; var13 < 5; ++var13)
 						{
 							tempZ = xCoord + (int) (1.5F + MathHelper.cos(var15) * var13);
 							var12 = zCoord + (int) (1.5F + MathHelper.sin(var15) * var13);
-							this.setBlockAndNotifyAdequately(world, tempZ, var14 - 3 + var13 / 2, var12, TFCBlocks.LogNatural, this.woodMetadata);
+							this.setBlockAndNotifyAdequately(world, tempZ, var14 - 3 + var13 / 2, var12, TFCBlocks.logNatural, this.woodMetadata);
 						}
 					}
 
 					for (tempX = 0; tempX < var6; ++tempX)
 					{
 						Block id = world.getBlock(xCoord, yCoord + tempX, zCoord);
-						if (id.isAir(world, xCoord, yCoord + tempX, zCoord) || id == TFCBlocks.Leaves || id == TFCBlocks.Leaves2)
+						if (id.isAir(world, xCoord, yCoord + tempX, zCoord) || id == TFCBlocks.leaves || id == TFCBlocks.leaves2)
 						{
-							this.setBlockAndNotifyAdequately(world, xCoord, yCoord + tempX, zCoord, TFCBlocks.LogNatural, this.woodMetadata);
+							this.setBlockAndNotifyAdequately(world, xCoord, yCoord + tempX, zCoord, TFCBlocks.logNatural, this.woodMetadata);
 							if (tempX > 0)
 							{
 								if (rand.nextInt(3) > 0 && world.isAirBlock(xCoord - 1, yCoord + tempX, zCoord))
-									this.setBlockAndNotifyAdequately(world, xCoord - 1, yCoord + tempX, zCoord, TFCBlocks.Vine, 8);
+									this.setBlockAndNotifyAdequately(world, xCoord - 1, yCoord + tempX, zCoord, TFCBlocks.vine, 8);
 								if (rand.nextInt(3) > 0 && world.isAirBlock(xCoord, yCoord + tempX, zCoord - 1))
-									this.setBlockAndNotifyAdequately(world, xCoord, yCoord + tempX, zCoord - 1, TFCBlocks.Vine, 1);
+									this.setBlockAndNotifyAdequately(world, xCoord, yCoord + tempX, zCoord - 1, TFCBlocks.vine, 1);
 							}
 						}
 
 						if (tempX < var6 - 1)
 						{
 							id = world.getBlock(xCoord + 1, yCoord + tempX, zCoord);
-							if (id.isAir(world, xCoord, yCoord + tempX, zCoord) || id == TFCBlocks.Leaves || id == TFCBlocks.Leaves2)
+							if (id.isAir(world, xCoord, yCoord + tempX, zCoord) || id == TFCBlocks.leaves || id == TFCBlocks.leaves2)
 							{
-								this.setBlockAndNotifyAdequately(world, xCoord + 1, yCoord + tempX, zCoord, TFCBlocks.LogNatural, this.woodMetadata);
+								this.setBlockAndNotifyAdequately(world, xCoord + 1, yCoord + tempX, zCoord, TFCBlocks.logNatural, this.woodMetadata);
 								if (tempX > 0)
 								{
 									if (rand.nextInt(3) > 0 && world.isAirBlock(xCoord + 2, yCoord + tempX, zCoord))
-										this.setBlockAndNotifyAdequately(world, xCoord + 2, yCoord + tempX, zCoord, TFCBlocks.Vine, 2);
+										this.setBlockAndNotifyAdequately(world, xCoord + 2, yCoord + tempX, zCoord, TFCBlocks.vine, 2);
 									if (rand.nextInt(3) > 0 && world.isAirBlock(xCoord + 1, yCoord + tempX, zCoord - 1))
-										this.setBlockAndNotifyAdequately(world, xCoord + 1, yCoord + tempX, zCoord - 1, TFCBlocks.Vine, 1);
+										this.setBlockAndNotifyAdequately(world, xCoord + 1, yCoord + tempX, zCoord - 1, TFCBlocks.vine, 1);
 								}
 							}
 
 							id = world.getBlock(xCoord + 1, yCoord + tempX, zCoord + 1);
-							if (id.isAir(world, xCoord, yCoord + tempX, zCoord) || id == TFCBlocks.Leaves || id == TFCBlocks.Leaves2)
+							if (id.isAir(world, xCoord, yCoord + tempX, zCoord) || id == TFCBlocks.leaves || id == TFCBlocks.leaves2)
 							{
-								this.setBlockAndNotifyAdequately(world, xCoord + 1, yCoord + tempX, zCoord + 1, TFCBlocks.LogNatural, this.woodMetadata);
+								this.setBlockAndNotifyAdequately(world, xCoord + 1, yCoord + tempX, zCoord + 1, TFCBlocks.logNatural, this.woodMetadata);
 								if (tempX > 0)
 								{
 									if (rand.nextInt(3) > 0 && world.isAirBlock(xCoord + 2, yCoord + tempX, zCoord + 1))
-										this.setBlockAndNotifyAdequately(world, xCoord + 2, yCoord + tempX, zCoord + 1, TFCBlocks.Vine, 2);
+										this.setBlockAndNotifyAdequately(world, xCoord + 2, yCoord + tempX, zCoord + 1, TFCBlocks.vine, 2);
 									if (rand.nextInt(3) > 0 && world.isAirBlock(xCoord + 1, yCoord + tempX, zCoord + 2))
-										this.setBlockAndNotifyAdequately(world, xCoord + 1, yCoord + tempX, zCoord + 2, TFCBlocks.Vine, 4);
+										this.setBlockAndNotifyAdequately(world, xCoord + 1, yCoord + tempX, zCoord + 2, TFCBlocks.vine, 4);
 								}
 							}
 
 							id = world.getBlock(xCoord, yCoord + tempX, zCoord + 1);
-							if (id.isAir(world, xCoord, yCoord + tempX, zCoord) || id == TFCBlocks.Leaves || id == TFCBlocks.Leaves2)
+							if (id.isAir(world, xCoord, yCoord + tempX, zCoord) || id == TFCBlocks.leaves || id == TFCBlocks.leaves2)
 							{
-								this.setBlockAndNotifyAdequately(world, xCoord, yCoord + tempX, zCoord + 1, TFCBlocks.LogNatural, this.woodMetadata);
+								this.setBlockAndNotifyAdequately(world, xCoord, yCoord + tempX, zCoord + 1, TFCBlocks.logNatural, this.woodMetadata);
 								if (tempX > 0)
 								{
 									if (rand.nextInt(3) > 0 && world.isAirBlock(xCoord - 1, yCoord + tempX, zCoord + 1))
-										this.setBlockAndNotifyAdequately(world, xCoord - 1, yCoord + tempX, zCoord + 1, TFCBlocks.Vine, 8);
+										this.setBlockAndNotifyAdequately(world, xCoord - 1, yCoord + tempX, zCoord + 1, TFCBlocks.vine, 8);
 									if (rand.nextInt(3) > 0 && world.isAirBlock(xCoord, yCoord + tempX, zCoord + 2))
-										this.setBlockAndNotifyAdequately(world, xCoord, yCoord + tempX, zCoord + 2, TFCBlocks.Vine, 4);
+										this.setBlockAndNotifyAdequately(world, xCoord, yCoord + tempX, zCoord + 2, TFCBlocks.vine, 4);
 								}
 							}
 						}

@@ -20,9 +20,9 @@ public class WorldGenRedwoodXL extends WorldGenerator
 	public WorldGenRedwoodXL(boolean doNotify)
 	{
 		super(doNotify);
-		blockLeaf = TFCBlocks.Leaves;
+		blockLeaf = TFCBlocks.leaves;
 		metaLeaf = 9;
-		blockWood = TFCBlocks.LogNatural;
+		blockWood = TFCBlocks.logNatural;
 		metaWood = 9;
 	}
 

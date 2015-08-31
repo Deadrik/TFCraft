@@ -7,10 +7,10 @@ import net.minecraft.item.ItemStack;
 
 public class QuernManager
 {
-	private static final QuernManager instance = new QuernManager();
+	private static final QuernManager INSTANCE = new QuernManager();
 	public static final QuernManager getInstance()
 	{
-		return instance;
+		return INSTANCE;
 	}
 
 	private List<QuernRecipe> recipes;

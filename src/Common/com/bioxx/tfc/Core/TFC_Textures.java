@@ -7,64 +7,64 @@ public class TFC_Textures
 	/**
 	 * Registered in ItemTerraTool
 	 */
-	public static IIcon BrokenItem;
-	public static IIcon WIP;
+	public static IIcon brokenItem;
+	public static IIcon wip;
 	/**
 	 * These are defined in BlockGrass
 	 */
-	public static IIcon InvisibleTexture;
+	public static IIcon invisibleTexture;
 	/**
 	 * These are defined in BlockAnvil
 	 */
-	public static IIcon AnvilHit;
-	public static IIcon AnvilHitHeavy;
-	public static IIcon AnvilHitMedium;
-	public static IIcon AnvilHitLight;
-	public static IIcon AnvilDraw;
-	public static IIcon AnvilPunch;
-	public static IIcon AnvilBend;
-	public static IIcon AnvilUpset;
-	public static IIcon AnvilShrink;
+	public static IIcon anvilHit;
+	public static IIcon anvilHitHeavy;
+	public static IIcon anvilHitMedium;
+	public static IIcon anvilHitLight;
+	public static IIcon anvilDraw;
+	public static IIcon anvilPunch;
+	public static IIcon anvilBend;
+	public static IIcon anvilUpset;
+	public static IIcon anvilShrink;
 
 	/**
 	 * These are defined in BlockTuyere
 	 */
-	public static IIcon SheetBismuth;
-	public static IIcon SheetBismuthBronze;
-	public static IIcon SheetBlackBronze;
-	public static IIcon SheetBlackSteel;
-	public static IIcon SheetBlueSteel;
-	public static IIcon SheetBrass;
-	public static IIcon SheetBronze;
-	public static IIcon SheetCopper;
-	public static IIcon SheetGold;
-	public static IIcon SheetLead;
-	public static IIcon SheetNickel;
-	public static IIcon SheetPigIron;
-	public static IIcon SheetPlatinum;
-	public static IIcon SheetRedSteel;
-	public static IIcon SheetRoseGold;
-	public static IIcon SheetSilver;
-	public static IIcon SheetSteel;
-	public static IIcon SheetSterlingSilver;
-	public static IIcon SheetTin;
-	public static IIcon SheetWroughtIron;
-	public static IIcon SheetZinc;
+	public static IIcon sheetBismuth;
+	public static IIcon sheetBismuthBronze;
+	public static IIcon sheetBlackBronze;
+	public static IIcon sheetBlackSteel;
+	public static IIcon sheetBlueSteel;
+	public static IIcon sheetBrass;
+	public static IIcon sheetBronze;
+	public static IIcon sheetCopper;
+	public static IIcon sheetGold;
+	public static IIcon sheetLead;
+	public static IIcon sheetNickel;
+	public static IIcon sheetPigIron;
+	public static IIcon sheetPlatinum;
+	public static IIcon sheetRedSteel;
+	public static IIcon sheetRoseGold;
+	public static IIcon sheetSilver;
+	public static IIcon sheetSteel;
+	public static IIcon sheetSterlingSilver;
+	public static IIcon sheetTin;
+	public static IIcon sheetWroughtIron;
+	public static IIcon sheetZinc;
 
 	/**
 	 * These are defined in BlockHotWaterStill
 	 */
-	public static IIcon GasFXIcon;
-	public static IIcon GuiInventory;
-	public static IIcon GuiSkills;
-	public static IIcon GuiCalendar;
-	public static IIcon GuiHealth;
+	public static IIcon gasFXIcon;
+	public static IIcon guiInventory;
+	public static IIcon guiSkills;
+	public static IIcon guiCalendar;
+	public static IIcon guiHealth;
 
 	/**
 	 * These are defined in BlockBarrel
 	 */
-	public static IIcon GuiSolidStorage;
-	public static IIcon GuiLiquidStorage;
-	public static IIcon GuiButtonIn;
-	public static IIcon GuiButtonOut;
+	public static IIcon guiSolidStorage;
+	public static IIcon guiLiquidStorage;
+	public static IIcon guiButtonIn;
+	public static IIcon guiButtonOut;
 }

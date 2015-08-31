@@ -77,6 +77,6 @@ public class RenderTerraJavelin extends Render
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) 
 	{
-		return new ResourceLocation(Reference.ModID, "textures/mob/javelin.png");
+		return new ResourceLocation(Reference.MOD_ID, "textures/mob/javelin.png");
 	}
 }

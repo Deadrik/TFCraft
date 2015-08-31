@@ -7,10 +7,10 @@ import net.minecraft.item.ItemStack;
 
 public class KilnCraftingManager
 {
-	private static final KilnCraftingManager instance = new KilnCraftingManager();
+	private static final KilnCraftingManager INSTANCE = new KilnCraftingManager();
 	public static final KilnCraftingManager getInstance()
 	{
-		return instance;
+		return INSTANCE;
 	}
 
 	private List<KilnRecipe> recipes;

@@ -20,7 +20,7 @@ public class SlotMoldTool2 extends Slot
 	public boolean isItemValid(ItemStack itemstack)
 	{
 		return (itemstack.getItem() instanceof ItemPotteryMold ||
-				itemstack.getItem() == TFCItems.CeramicMold) && itemstack.getItemDamage() == 1 ||
+				itemstack.getItem() == TFCItems.ceramicMold) && itemstack.getItemDamage() == 1 ||
 				itemstack.getItem() instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(itemstack);
 	}
 

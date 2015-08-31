@@ -14,9 +14,9 @@ public class ItemSapling extends ItemTerraBlock
 	public ItemSapling(Block b)
 	{
 		super(b);
-		this.MetaNames = new String[16];
-		System.arraycopy(Global.WOOD_ALL, 0, this.MetaNames, 0, 16);
-		this.icons = new IIcon[MetaNames.length];
+		this.metaNames = new String[16];
+		System.arraycopy(Global.WOOD_ALL, 0, this.metaNames, 0, 16);
+		this.icons = new IIcon[metaNames.length];
 	}
 
 	@Override
@@ -28,8 +28,8 @@ public class ItemSapling extends ItemTerraBlock
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		for(int i = 0; i < this.MetaNames.length; i++)
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/" + this.MetaNames[i] + " Sapling");
+		for(int i = 0; i < this.metaNames.length; i++)
+			icons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "wood/trees/" + this.metaNames[i] + " Sapling");
 	}
 
 	@Override

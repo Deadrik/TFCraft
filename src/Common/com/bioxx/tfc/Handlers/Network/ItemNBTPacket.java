@@ -24,23 +24,23 @@ public class ItemNBTPacket extends AbstractPacket {
 		removeNames = new LinkedList<String>();
 	}
 
-	public ItemNBTPacket(NBTTagCompound _tags) {
+	public ItemNBTPacket(NBTTagCompound nbt) {
 		this();
-		tags = _tags;
+		tags = nbt;
 	}
 
-	public ItemNBTPacket(NBTTagCompound _tags, LinkedList<String> acceptedTagNames) {
+	public ItemNBTPacket(NBTTagCompound nbt, LinkedList<String> acceptedTagNames) {
 		this();
 		tagNames = acceptedTagNames;
 		for (String tagName : tagNames)
-			tags.setTag(tagName, _tags.getTag(tagName));
+			tags.setTag(tagName, nbt.getTag(tagName));
 	}
 
-	public ItemNBTPacket(NBTTagCompound _tags, LinkedList<String> acceptedTagNames, LinkedList<String> removeTagNames) {
+	public ItemNBTPacket(NBTTagCompound nbt, LinkedList<String> acceptedTagNames, LinkedList<String> removeTagNames) {
 		this();
 		tagNames = acceptedTagNames;
 		for (String tagName : tagNames)
-			tags.setTag(tagName, _tags.getTag(tagName));
+			tags.setTag(tagName, nbt.getTag(tagName));
 		removeNames = removeTagNames;
 	}
 
@@ -61,7 +61,7 @@ public class ItemNBTPacket extends AbstractPacket {
 		return this;
 	}
 
-	public ItemNBTPacket RemoveRemoveTag(String name) {
+	public ItemNBTPacket removeRemoveTag(String name) {
 		removeNames.remove(name);
 		return this;
 	}
@@ -85,7 +85,7 @@ public class ItemNBTPacket extends AbstractPacket {
 			for (String tagName : removeNames)
 				pb.writeStringToBuffer(tagName);
 		} catch (Exception e) {
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		}
 	}
 
@@ -104,7 +104,7 @@ public class ItemNBTPacket extends AbstractPacket {
 			for (int i = 0; i < size; ++i)
 				removeNames.add(pb.readStringFromBuffer(256));
 		} catch (Exception e) {
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		}
 	}
 
@@ -120,7 +120,7 @@ public class ItemNBTPacket extends AbstractPacket {
 	    }
 	    else
 	    {
-			TerraFirmaCraft.log.error(TFC_Core.translate("error.error") + " " + stack.getUnlocalizedName() + " " +
+			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + stack.getUnlocalizedName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 			stackNBT = new NBTTagCompound();
 	    }
@@ -144,7 +144,7 @@ public class ItemNBTPacket extends AbstractPacket {
 		}
 		else
 		{
-			TerraFirmaCraft.log.error(TFC_Core.translate("error.error") + " " + stack.getUnlocalizedName() + " " +
+			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + stack.getUnlocalizedName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 			stackNBT = new NBTTagCompound();
 		}

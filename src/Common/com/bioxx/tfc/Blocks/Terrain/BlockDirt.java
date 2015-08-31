@@ -30,7 +30,7 @@ public class BlockDirt extends BlockTerra
 	public BlockDirt(int texOff)
 	{
 		super(Material.ground);
-		this.setCreativeTab(TFCTabs.TFCBuilding);
+		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 		textureOffset = texOff;
 		this.setTickRandomly(true);
 	}
@@ -89,7 +89,7 @@ public class BlockDirt extends BlockTerra
 		int count = (textureOffset == 0 ? 16 : Global.STONE_ALL.length - 16);
 		icons = new IIcon[count];
 		for (int i = 0; i < count; i++)
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "soil/Dirt " + Global.STONE_ALL[i + textureOffset]);
+			icons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "soil/Dirt " + Global.STONE_ALL[i + textureOffset]);
 	}
 
 	@Override

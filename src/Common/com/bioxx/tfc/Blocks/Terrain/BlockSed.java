@@ -11,7 +11,7 @@ public class BlockSed extends BlockStone
 	public BlockSed(Material material)
 	{
 		super(material);
-		this.dropBlock = TFCBlocks.StoneSedCobble;
+		this.dropBlock = TFCBlocks.stoneSedCobble;
 		names = Global.STONE_SED;
 		icons = new IIcon[names.length];
 		looseStart = Global.STONE_SED_START;

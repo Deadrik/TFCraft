@@ -36,7 +36,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 		super(e);
 		this.setMaxDamage(e.getMaxUses());
 		this.toolDamage = damage;
-		setCreativeTab(TFCTabs.TFCTools);
+		setCreativeTab(TFCTabs.TFC_TOOLS);
 		setNoRepair();
 	}
 
@@ -48,7 +48,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 		name = name.replace("IgEx ", "");
 		name = name.replace("Sed ", "");
 		name = name.replace("MM ", "");
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/" + name);
+		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + "tools/" + name);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	{
 		NBTTagCompound nbt = stack.getTagCompound();
 		if(pass == 1 && nbt != null && nbt.hasKey("broken"))
-			return TFC_Textures.BrokenItem;
+			return TFC_Textures.brokenItem;
 		else
 			return getIconFromDamageForRenderPass(stack.getItemDamage(), pass);
 	}

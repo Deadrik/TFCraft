@@ -14,12 +14,12 @@ import com.bioxx.tfc.api.TFCBlocks;
 
 public class RenderLoom implements ISimpleBlockRenderingHandler
 {
-	private static final float minX = 0F;
-	private static final float maxX = 1F;
-	private static final float minY = 0F;
-	private static final float maxY = 1F;
-	private static final float minZ = 0F;
-	private static final float maxZ = 1F;
+	private static final float MIN_X = 0F;
+	private static final float MAX_X = 1F;
+	private static final float MIN_Y = 0F;
+	private static final float MAX_Y = 1F;
+	private static final float MIN_Z = 0F;
+	private static final float MAX_Z = 1F;
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
@@ -28,11 +28,11 @@ public class RenderLoom implements ISimpleBlockRenderingHandler
 		Block materialBlock;
 		if(te.loomType < 16)
 		{
-			materialBlock = TFCBlocks.WoodSupportH;
+			materialBlock = TFCBlocks.woodSupportH;
 		}
 		else
 		{
-			materialBlock = TFCBlocks.WoodSupportH2;
+			materialBlock = TFCBlocks.woodSupportH2;
 		}
 		renderer.renderAllFaces = true;
 		GL11.glPushMatrix();
@@ -40,32 +40,32 @@ public class RenderLoom implements ISimpleBlockRenderingHandler
 
 
 		//Arms
-		this.setRotatedRenderBounds(renderer, te.rotation, minX+0.1F, minY, minZ+0.75F, maxX-0.8F, maxY, maxZ-0.15F);
+		this.setRotatedRenderBounds(renderer, te.rotation, MIN_X+0.1F, MIN_Y, MIN_Z+0.75F, MAX_X-0.8F, MAX_Y, MAX_Z-0.15F);
 		renderer.renderStandardBlock(materialBlock, x, y, z);
 
-		this.setRotatedRenderBounds(renderer, te.rotation, minX+0.8F, minY, minZ+0.75F, maxX-0.1F, maxY, maxZ-0.15F);
+		this.setRotatedRenderBounds(renderer, te.rotation, MIN_X+0.8F, MIN_Y, MIN_Z+0.75F, MAX_X-0.1F, MAX_Y, MAX_Z-0.15F);
 		renderer.renderStandardBlock(materialBlock, x, y, z);
 
 		//Arm holding sections
 		//L
-		this.setRotatedRenderBounds(renderer, te.rotation, minX+0.1F, minY+0.25F, minZ+0.5F, maxX-0.8F, maxY-0.7F, maxZ-0.25F);
+		this.setRotatedRenderBounds(renderer, te.rotation, MIN_X+0.1F, MIN_Y+0.25F, MIN_Z+0.5F, MAX_X-0.8F, MAX_Y-0.7F, MAX_Z-0.25F);
 		renderer.renderStandardBlock(materialBlock, x, y, z);
 
-		this.setRotatedRenderBounds(renderer, te.rotation, minX+0.1F, minY+0.05F, minZ+0.5F, maxX-0.8F, maxY-0.9F, maxZ-0.25F);
+		this.setRotatedRenderBounds(renderer, te.rotation, MIN_X+0.1F, MIN_Y+0.05F, MIN_Z+0.5F, MAX_X-0.8F, MAX_Y-0.9F, MAX_Z-0.25F);
 		renderer.renderStandardBlock(materialBlock, x, y, z);
 
 		//R
-		this.setRotatedRenderBounds(renderer, te.rotation, minX+0.8F, minY+0.25F, minZ+0.5F, maxX-0.1F, maxY-0.7F, maxZ-0.25F);
+		this.setRotatedRenderBounds(renderer, te.rotation, MIN_X+0.8F, MIN_Y+0.25F, MIN_Z+0.5F, MAX_X-0.1F, MAX_Y-0.7F, MAX_Z-0.25F);
 		renderer.renderStandardBlock(materialBlock, x, y, z);
 
-		this.setRotatedRenderBounds(renderer, te.rotation, minX+0.8F, minY+0.05F, minZ+0.5F, maxX-0.1F, maxY-0.9F, maxZ-0.25F);
+		this.setRotatedRenderBounds(renderer, te.rotation, MIN_X+0.8F, MIN_Y+0.05F, MIN_Z+0.5F, MAX_X-0.1F, MAX_Y-0.9F, MAX_Z-0.25F);
 		renderer.renderStandardBlock(materialBlock, x, y, z);
 
 		//cross
-		this.setRotatedRenderBounds(renderer, te.rotation, maxX-0.8F, minY+0.8F, minZ+0.75F, minX+0.8F, maxY-0.1F, maxZ-0.15F);
+		this.setRotatedRenderBounds(renderer, te.rotation, MAX_X-0.8F, MIN_Y+0.8F, MIN_Z+0.75F, MIN_X+0.8F, MAX_Y-0.1F, MAX_Z-0.15F);
 		renderer.renderStandardBlock(materialBlock, x, y, z);
 
-		this.setRotatedRenderBounds(renderer, te.rotation, maxX-0.8F, 0F, minZ+0.75F, minX+0.8F, minY+0.1F, maxZ-0.15F);
+		this.setRotatedRenderBounds(renderer, te.rotation, MAX_X-0.8F, 0F, MIN_Z+0.75F, MIN_X+0.8F, MIN_Y+0.1F, MAX_Z-0.15F);
 		renderer.renderStandardBlock(materialBlock, x, y, z);
 
 		rotate(renderer, 0);
@@ -82,12 +82,12 @@ public class RenderLoom implements ISimpleBlockRenderingHandler
 		renderer.uvRotateSouth = i;
 	}
 
-	private void setRotatedRenderBounds(RenderBlocks renderer, byte rotation , float x, float y, float z, float X, float Y, float Z){
+	private void setRotatedRenderBounds(RenderBlocks renderer, byte rotation , float minX, float minY, float minZ, float maxX, float maxY, float maxZ){
 		switch(rotation){
-		case 0: renderer.setRenderBounds(x,y,z,X,Y,Z); break;
-		case 1: renderer.setRenderBounds(maxZ-Z,y,x,maxZ-z,Y,X); break;
-		case 2: renderer.setRenderBounds(x,y,maxZ-Z,X,Y,maxZ-z); break;
-		case 3: renderer.setRenderBounds(z,y,x,Z,Y,X); break;
+		case 0: renderer.setRenderBounds(minX,minY,minZ,maxX,maxY,maxZ); break;
+		case 1: renderer.setRenderBounds(MAX_Z-maxZ,minY,minX,MAX_Z-minZ,maxY,maxX); break;
+		case 2: renderer.setRenderBounds(minX,minY,MAX_Z-maxZ,maxX,maxY,MAX_Z-minZ); break;
+		case 3: renderer.setRenderBounds(minZ,minY,minX,maxZ,maxY,maxX); break;
 		default: break;
 		}
 	}
@@ -99,49 +99,49 @@ public class RenderLoom implements ISimpleBlockRenderingHandler
 
 		if(meta < 16)
 		{
-			materialBlock = TFCBlocks.WoodSupportH;
+			materialBlock = TFCBlocks.woodSupportH;
 		}
 		else
 		{
-			materialBlock = TFCBlocks.WoodSupportH2;
+			materialBlock = TFCBlocks.woodSupportH2;
 		}
 
 		GL11.glPushMatrix();
 		GL11.glRotatef(180, 0, 1, 0);
 		//Arms
-		renderer.setRenderBounds(minX+0.1F, minY, minZ+0.75F, maxX-0.8F, maxY, maxZ-0.15F);
+		renderer.setRenderBounds(MIN_X+0.1F, MIN_Y, MIN_Z+0.75F, MAX_X-0.8F, MAX_Y, MAX_Z-0.15F);
 		rotate(renderer, 1);
 		renderInvBlock(materialBlock, meta, renderer);
 
-		renderer.setRenderBounds(minX+0.8F, minY, minZ+0.75F, maxX-0.1F, maxY, maxZ-0.15F);
+		renderer.setRenderBounds(MIN_X+0.8F, MIN_Y, MIN_Z+0.75F, MAX_X-0.1F, MAX_Y, MAX_Z-0.15F);
 		rotate(renderer, 1);
 		renderInvBlock(materialBlock, meta, renderer);
 
 		//Arm holding sections
 		//L
-		renderer.setRenderBounds(minX+0.1F, minY+0.35F, minZ+0.6F, maxX-0.8F, maxY-0.6F, maxZ-0.25F);
+		renderer.setRenderBounds(MIN_X+0.1F, MIN_Y+0.35F, MIN_Z+0.6F, MAX_X-0.8F, MAX_Y-0.6F, MAX_Z-0.25F);
 		rotate(renderer, 1);
 		renderInvBlock(materialBlock, meta, renderer);
 
-		renderer.setRenderBounds(minX+0.1F, minY+0.15F, minZ+0.6F, maxX-0.8F, maxY-0.8F, maxZ-0.25F);
+		renderer.setRenderBounds(MIN_X+0.1F, MIN_Y+0.15F, MIN_Z+0.6F, MAX_X-0.8F, MAX_Y-0.8F, MAX_Z-0.25F);
 		rotate(renderer, 1);
 		renderInvBlock(materialBlock, meta, renderer);
 
 		//R
-		renderer.setRenderBounds(minX+0.8F, minY+0.35F, minZ+0.6F, maxX-0.1F, maxY-0.6F, maxZ-0.25F);
+		renderer.setRenderBounds(MIN_X+0.8F, MIN_Y+0.35F, MIN_Z+0.6F, MAX_X-0.1F, MAX_Y-0.6F, MAX_Z-0.25F);
 		rotate(renderer, 1);
 		renderInvBlock(materialBlock, meta, renderer);
 
-		renderer.setRenderBounds(minX+0.8F, minY+0.15F, minZ+0.6F, maxX-0.1F, maxY-0.8F, maxZ-0.25F);
+		renderer.setRenderBounds(MIN_X+0.8F, MIN_Y+0.15F, MIN_Z+0.6F, MAX_X-0.1F, MAX_Y-0.8F, MAX_Z-0.25F);
 		rotate(renderer, 1);
 		renderInvBlock(materialBlock, meta, renderer);
 
 		//cross
-		renderer.setRenderBounds(maxX-0.8F, minY+0.8F, minZ+0.75F, minX+0.8F, maxY-0.1F, maxZ-0.15F);
+		renderer.setRenderBounds(MAX_X-0.8F, MIN_Y+0.8F, MIN_Z+0.75F, MIN_X+0.8F, MAX_Y-0.1F, MAX_Z-0.15F);
 		rotate(renderer, 1);
 		renderInvBlock(materialBlock, meta, renderer);
 
-		renderer.setRenderBounds(maxX-0.8F, 0F, minZ+0.75F, minX+0.8F, minY+0.1F, maxZ-0.15F);
+		renderer.setRenderBounds(MAX_X-0.8F, 0F, MIN_Z+0.75F, MIN_X+0.8F, MIN_Y+0.1F, MAX_Z-0.15F);
 		rotate(renderer, 1);
 		renderInvBlock(materialBlock, meta, renderer);
 

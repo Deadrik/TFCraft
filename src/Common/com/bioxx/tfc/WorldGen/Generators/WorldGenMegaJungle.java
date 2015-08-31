@@ -10,9 +10,9 @@ import net.minecraft.world.gen.feature.WorldGenHugeTrees;
 
 public class WorldGenMegaJungle extends WorldGenHugeTrees
 {
-	public WorldGenMegaJungle(boolean p_i45456_1_, int p_i45456_2_, int p_i45456_3_, int p_i45456_4_, int p_i45456_5_)
+	public WorldGenMegaJungle(boolean doBlockNotify, int baseHeight, int extraHeight, int woodMeta, int leafMeta)
 	{
-		super(p_i45456_1_, p_i45456_2_, p_i45456_3_, p_i45456_4_, p_i45456_5_);
+		super(doBlockNotify, baseHeight, extraHeight, woodMeta, leafMeta);
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class WorldGenMegaJungle extends WorldGenHugeTrees
 		}
 		else
 		{
-			this.func_150543_c(world, x, z, y + l, 2, rand);
+			this.callGenLeaves(world, x, z, y + l, 2, rand);
 
 			for (int i1 = y + l - 2 - rand.nextInt(4); i1 > y + l / 2; i1 -= 2 + rand.nextInt(4))
 			{
@@ -142,14 +142,14 @@ public class WorldGenMegaJungle extends WorldGenHugeTrees
 		}
 	}
 
-	private void func_150543_c(World p_150543_1_, int p_150543_2_, int p_150543_3_, int p_150543_4_, int p_150543_5_, Random p_150543_6_)
+	private void callGenLeaves(World world, int x, int y, int z, int offset, Random rand)
 	{
-		byte b0 = 2;
+		byte b = 2;
 
-		for (int i1 = p_150543_4_ - b0; i1 <= p_150543_4_; ++i1)
+		for (int i = z - b; i <= z; ++i)
 		{
-			int j1 = i1 - p_150543_4_;
-			this.func_150535_a(p_150543_1_, p_150543_2_, i1, p_150543_3_, p_150543_5_ + 1 - j1, p_150543_6_);
+			int j = i - z;
+			this.func_150535_a(world, x, i, y, offset + 1 - j, rand);
 		}
 	}
 }

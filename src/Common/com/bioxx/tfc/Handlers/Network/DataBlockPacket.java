@@ -40,7 +40,7 @@ public class DataBlockPacket extends AbstractPacket
 		}
 		catch (Exception e)
 		{
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		}
 	}
 
@@ -57,7 +57,7 @@ public class DataBlockPacket extends AbstractPacket
 		}
 		catch (Exception e)
 		{
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		}
 
 	}

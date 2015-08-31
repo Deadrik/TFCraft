@@ -36,7 +36,7 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class GuiBarrel extends GuiContainerTFC
 {
-	public static final ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_barrel.png");
+	public static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_barrel.png");
 	protected TEBarrel barrelTE;
 	protected EntityPlayer player;
 	protected int guiTab;
@@ -119,14 +119,14 @@ public class GuiBarrel extends GuiContainerTFC
 				buttonList.add(new GuiBarrelTabButton(2, guiLeft + 39, guiTop + 29, 16, 16, this, TFC_Core.translate("gui.Barrel.ToggleOn"), 0, 204, 16, 16));
 			else if (barrelTE.mode == TEBarrel.MODE_OUT)
 				buttonList.add(new GuiBarrelTabButton(2, guiLeft + 39, guiTop + 29, 16, 16, this, TFC_Core.translate("gui.Barrel.ToggleOff"), 0, 188, 16, 16));
-			buttonList.add(new GuiBarrelTabButton(3, guiLeft + 36, guiTop - 12, 31, 15, this, TFC_Textures.GuiSolidStorage, TFC_Core.translate("gui.Barrel.Solid")));
-			buttonList.add(new GuiBarrelTabButton(4, guiLeft + 5, guiTop - 12, 31, 15, this, TFC_Textures.GuiLiquidStorage, TFC_Core.translate("gui.Barrel.Liquid")));
+			buttonList.add(new GuiBarrelTabButton(3, guiLeft + 36, guiTop - 12, 31, 15, this, TFC_Textures.guiSolidStorage, TFC_Core.translate("gui.Barrel.Solid")));
+			buttonList.add(new GuiBarrelTabButton(4, guiLeft + 5, guiTop - 12, 31, 15, this, TFC_Textures.guiLiquidStorage, TFC_Core.translate("gui.Barrel.Liquid")));
 
 		}
 		else if (guiTab == 1)
 		{
-			buttonList.add(new GuiBarrelTabButton(0, guiLeft + 36, guiTop - 12, 31, 15, this, TFC_Textures.GuiSolidStorage, TFC_Core.translate("gui.Barrel.Solid")));
-			buttonList.add(new GuiBarrelTabButton(1, guiLeft + 5, guiTop - 12, 31, 15, this, TFC_Textures.GuiLiquidStorage, TFC_Core.translate("gui.Barrel.Liquid")));
+			buttonList.add(new GuiBarrelTabButton(0, guiLeft + 36, guiTop - 12, 31, 15, this, TFC_Textures.guiSolidStorage, TFC_Core.translate("gui.Barrel.Solid")));
+			buttonList.add(new GuiBarrelTabButton(1, guiLeft + 5, guiTop - 12, 31, 15, this, TFC_Textures.guiLiquidStorage, TFC_Core.translate("gui.Barrel.Liquid")));
 
 			if (!barrelTE.getSealed())
 				buttonList.add(new GuiButton(2, guiLeft + 6, guiTop + 33, 44, 20, TFC_Core.translate("gui.Barrel.Seal")));
@@ -218,7 +218,7 @@ public class GuiBarrel extends GuiContainerTFC
 		{
 			if (this.visible)
 			{
-				TFC_Core.bindTexture(GuiBarrel.texture);
+				TFC_Core.bindTexture(GuiBarrel.TEXTURE);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				this.zLevel = 301f;
 				this.drawTexturedModalRect(this.xPosition, this.yPosition, xPos, yPos, xSize, ySize);
@@ -284,7 +284,7 @@ public class GuiBarrel extends GuiContainerTFC
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int mouseX, int mouseY)
 	{
-		bindTexture(texture);
+		bindTexture(TEXTURE);
 		guiLeft = (width - xSize) / 2;
 		guiTop = (height - ySize) / 2;
 
@@ -333,7 +333,7 @@ public class GuiBarrel extends GuiContainerTFC
 				{
 					if (inStack != null && inStack.getItem() instanceof IFood && (((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Fruit ||
 							((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein ||
-							((IFood) inStack.getItem()) == TFCItems.Cheese) && !Food.isBrined(inStack))
+							((IFood) inStack.getItem()) == TFCItems.cheese) && !Food.isBrined(inStack))
 					{
 						drawCenteredString(this.fontRendererObj, TFC_Core.translate("gui.barrel.brining"), guiLeft + 88, guiTop + 72, 0x555555);
 					}
@@ -343,7 +343,7 @@ public class GuiBarrel extends GuiContainerTFC
 					barrelTE.getFluidStack().getFluid() == TFCFluids.VINEGAR && !Food.isPickled(inStack) && Food.getWeight(inStack) / barrelTE.getFluidStack().amount <= Global.FOOD_MAX_WEIGHT / barrelTE.getMaxLiquid())
 			{
 				if ((((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Fruit || ((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Vegetable ||
-						((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein || ((IFood) inStack.getItem()) == TFCItems.Cheese) &&
+						((IFood) inStack.getItem()).getFoodGroup() == EnumFoodGroup.Protein || ((IFood) inStack.getItem()) == TFCItems.cheese) &&
 						Food.isBrined(inStack))
 				{
 					drawCenteredString(this.fontRendererObj, TFC_Core.translate("gui.barrel.pickling"), guiLeft + 88, guiTop + 72, 0x555555);

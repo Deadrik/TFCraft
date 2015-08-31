@@ -11,7 +11,7 @@ import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 public class GuiGrill extends GuiContainerTFC
 {
-	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_grill.png");
+	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_grill.png");
 
 	//private TEGrill grillTE;
 	private TEFireEntity fireTE;

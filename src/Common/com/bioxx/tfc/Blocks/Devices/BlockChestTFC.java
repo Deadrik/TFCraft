@@ -40,7 +40,7 @@ public class BlockChestTFC extends BlockTerraContainer
 	public BlockChestTFC()
 	{
 		super(Material.wood);
-		this.setCreativeTab(TFCTabs.TFCDecoration);
+		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 		this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
 		woodNames = Global.WOOD_ALL;
 	}
@@ -95,7 +95,7 @@ public class BlockChestTFC extends BlockTerraContainer
 		if(!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops"))
 		{
 			int damageValue = getDamageValue(world, i, j, k);
-			EntityItem ei = new EntityItem(world, i, j, k, new ItemStack(TFCBlocks.Chest, 1, damageValue));
+			EntityItem ei = new EntityItem(world, i, j, k, new ItemStack(TFCBlocks.chest, 1, damageValue));
 			world.spawnEntityInWorld(ei);
 		}
 	}
@@ -347,8 +347,8 @@ public class BlockChestTFC extends BlockTerraContainer
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister p_149651_1_)
+	public void registerBlockIcons(IIconRegister register)
 	{
-		this.blockIcon = p_149651_1_.registerIcon("planks_oak");
+		this.blockIcon = register.registerIcon("planks_oak");
 	}
 }

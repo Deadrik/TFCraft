@@ -17,6 +17,6 @@ public class SlotMetal extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		return itemstack.getItem() instanceof ItemMeltedMetal || itemstack.getItem() == TFCItems.CeramicMold;
+		return itemstack.getItem() instanceof ItemMeltedMetal || itemstack.getItem() == TFCItems.ceramicMold;
 	}
 }

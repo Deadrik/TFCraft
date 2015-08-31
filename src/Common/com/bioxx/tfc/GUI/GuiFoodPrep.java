@@ -20,7 +20,7 @@ import com.bioxx.tfc.api.TFCItems;
 
 public class GuiFoodPrep extends GuiContainerTFC
 {
-	private static final ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_foodprep.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_foodprep.png");
 	private TEFoodPrep foodPrepTE;
 	private int guiTab;
 
@@ -37,7 +37,7 @@ public class GuiFoodPrep extends GuiContainerTFC
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		bindTexture(texture);
+		bindTexture(TEXTURE);
 		guiLeft = (width - xSize) / 2;
 		guiTop = (height - ySize) / 2;
 		if (guiTab == 0)
@@ -60,14 +60,14 @@ public class GuiFoodPrep extends GuiContainerTFC
 		if (guiTab == 0)
 		{
 			buttonList.add(new GuiButton(0, guiLeft + 74, guiTop + 44, 50, 20, TFC_Core.translate("gui.FoodPrep.CreateMeal")));
-			buttonList.add(new GuiFoodPrepTabButton(2, guiLeft + 36, guiTop - 21, 31, 21, this, new ItemStack(TFCItems.Salad), TFC_Core.translate("gui.FoodPrep.Salad")).setButtonCoord(31, 172));
-			buttonList.add(new GuiFoodPrepTabButton(1, guiLeft + 5, guiTop - 21, 31, 21, this, new ItemStack(TFCItems.Sandwich), TFC_Core.translate("gui.FoodPrep.Sandwich")));
+			buttonList.add(new GuiFoodPrepTabButton(2, guiLeft + 36, guiTop - 21, 31, 21, this, new ItemStack(TFCItems.salad), TFC_Core.translate("gui.FoodPrep.Salad")).setButtonCoord(31, 172));
+			buttonList.add(new GuiFoodPrepTabButton(1, guiLeft + 5, guiTop - 21, 31, 21, this, new ItemStack(TFCItems.sandwich), TFC_Core.translate("gui.FoodPrep.Sandwich")));
 		}
 		else if (guiTab == 1)
 		{
 			buttonList.add(new GuiButton(0, guiLeft + 74, guiTop + 44, 50, 20, TFC_Core.translate("gui.FoodPrep.CreateMeal")));
-			buttonList.add(new GuiFoodPrepTabButton(2, guiLeft + 36, guiTop - 21, 31, 21, this, new ItemStack(TFCItems.Salad), TFC_Core.translate("gui.FoodPrep.Salad")));
-			buttonList.add(new GuiFoodPrepTabButton(1, guiLeft + 5, guiTop - 21, 31, 21, this, new ItemStack(TFCItems.Sandwich), TFC_Core.translate("gui.FoodPrep.Sandwich")).setButtonCoord(31, 172));
+			buttonList.add(new GuiFoodPrepTabButton(2, guiLeft + 36, guiTop - 21, 31, 21, this, new ItemStack(TFCItems.salad), TFC_Core.translate("gui.FoodPrep.Salad")));
+			buttonList.add(new GuiFoodPrepTabButton(1, guiLeft + 5, guiTop - 21, 31, 21, this, new ItemStack(TFCItems.sandwich), TFC_Core.translate("gui.FoodPrep.Sandwich")).setButtonCoord(31, 172));
 		}
 	}
 
@@ -136,7 +136,7 @@ public class GuiFoodPrep extends GuiContainerTFC
 			{
 				//int k = this.getHoverState(this.field_146123_n) - 1;
 
-				TFC_Core.bindTexture(GuiFoodPrep.texture);
+				TFC_Core.bindTexture(GuiFoodPrep.TEXTURE);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				RenderHelper.disableStandardItemLighting();
 				GL11.glDisable(GL11.GL_LIGHTING);

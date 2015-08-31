@@ -117,7 +117,7 @@ public abstract class GenLayerTFC extends GenLayer
 			BufferedImage outBitmap = new BufferedImage(size,size,BufferedImage.TYPE_INT_RGB);
 			Graphics2D graphics = (Graphics2D) outBitmap.getGraphics();
 			graphics.clearRect(0, 0, size, size);
-			TerraFirmaCraft.log.info(name + ".bmp");
+			TerraFirmaCraft.LOG.info(name + ".bmp");
 			for(int x = 0; x < size; x++)
 			{
 				for(int z = 0; z < size; z++)
@@ -129,12 +129,12 @@ public abstract class GenLayerTFC extends GenLayer
 					}
 				}
 			}
-			TerraFirmaCraft.log.info(name + ".bmp");
+			TerraFirmaCraft.LOG.info(name + ".bmp");
 			ImageIO.write(outBitmap, "BMP", outFile);
 		}
 		catch (Exception e) 
 		{
-			TerraFirmaCraft.log.catching(e);
+			TerraFirmaCraft.LOG.catching(e);
 		}
 	}
 
@@ -223,7 +223,7 @@ public abstract class GenLayerTFC extends GenLayer
 			{
 				if(TFCBiome.biomeList[array[x+z*xSize]] == null)
 				{
-					TerraFirmaCraft.log.error("Error Array garbage data: " + array[x + z * xSize]);
+					TerraFirmaCraft.LOG.error("Error Array garbage data: " + array[x + z * xSize]);
 					return;
 				}
 			}

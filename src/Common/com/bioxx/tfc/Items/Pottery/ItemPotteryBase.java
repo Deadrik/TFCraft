@@ -9,7 +9,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
@@ -22,21 +26,18 @@ import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ISize;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class ItemPotteryBase extends ItemTerra implements ISize
 {
-	public IIcon ClayIcon;
-	public IIcon CeramicIcon;
+	public IIcon clayIcon;
+	public IIcon ceramicIcon;
 
 	public ItemPotteryBase() 
 	{
 		super();
 		this.hasSubtypes = true;
 		this.setFolder("pottery/");
-		setCreativeTab(TFCTabs.TFCPottery);
-		this.MetaNames = new String[]{"",""};
+		setCreativeTab(TFCTabs.TFC_POTTERY);
+		this.metaNames = new String[]{"",""};
 		this.setWeight(EnumWeight.MEDIUM);
 		this.setSize(EnumSize.SMALL);
 	}
@@ -44,14 +45,14 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		this.ClayIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + MetaNames[0]);
-		this.CeramicIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + MetaNames[1]);
+		this.clayIcon = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder + metaNames[0]);
+		this.ceramicIcon = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder + metaNames[1]);
 	}
 
 	@Override
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < MetaNames.length; i++)
+		for(int i = 0; i < metaNames.length; i++)
 			list.add(new ItemStack(this, 1, i));
 	}
 
@@ -60,9 +61,9 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 	public IIcon getIconFromDamage(int damage)
 	{
 		if(damage == 0)
-			return this.ClayIcon;
+			return this.clayIcon;
 		else
-			return this.CeramicIcon;
+			return this.ceramicIcon;
 	}
 
 	@Override
@@ -85,12 +86,12 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 			if(side == 1)
 			{
 				int offset = 0;
-				if(world.getBlock(x, y, z) != TFCBlocks.Pottery && world.isAirBlock(x, y + 1, z))
+				if(world.getBlock(x, y, z) != TFCBlocks.pottery && world.isAirBlock(x, y + 1, z))
 				{
 					//We only want the pottery to be placeable if the block is solid on top.
 					if(!world.isSideSolid(x, y, z, ForgeDirection.UP))
 						return false;
-					world.setBlock(x, y + 1, z, TFCBlocks.Pottery);
+					world.setBlock(x, y + 1, z, TFCBlocks.pottery);
 					offset = 1;
 				}
 

@@ -24,11 +24,11 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == TFCBlocks.sulfurRenderId)
 		{
-			return TFC_CoreRender.RenderSulfur(block, i, j, k, renderer);
+			return TFC_CoreRender.renderSulfur(block, i, j, k, renderer);
 		}
 		else if (modelId == TFCBlocks.moltenRenderId)
 		{
-			return TFC_CoreRender.RenderMolten(block, i, j, k, renderer);
+			return TFC_CoreRender.renderMolten(block, i, j, k, renderer);
 		}
 		else if (modelId == TFCBlocks.grassRenderId)
 		{
@@ -44,21 +44,21 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 		}
 		else if (modelId == TFCBlocks.looseRockRenderId)
 		{
-			return TFC_CoreRender.RenderLooseRock(block, i, j, k, renderer);
+			return TFC_CoreRender.renderLooseRock(block, i, j, k, renderer);
 		}
 		else if (modelId == TFCBlocks.snowRenderId)
 		{
-			return TFC_CoreRender.RenderSnow(block, i, j, k, renderer);
+			return TFC_CoreRender.renderSnow(block, i, j, k, renderer);
 		}
-		else if (modelId == TFCBlocks.FirepitRenderId)
+		else if (modelId == TFCBlocks.firepitRenderId)
 		{
 			return TFC_CoreRender.renderFirepit(block, i, j, k, renderer);
 		}
-		else if (modelId == TFCBlocks.ForgeRenderId)
+		else if (modelId == TFCBlocks.forgeRenderId)
 		{
 			return TFC_CoreRender.renderForge(block, i, j, k, renderer);
 		}
-		else if (modelId == TFCBlocks.AnvilRenderId)
+		else if (modelId == TFCBlocks.anvilRenderId)
 		{
 			return RenderAnvil.renderAnvil(block, i, j, k, renderer);
 		}
@@ -72,15 +72,15 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 		}*/
 		else if (modelId == TFCBlocks.sluiceRenderId)
 		{
-			return TFC_CoreRender.RenderSluice(block, i, j, k, renderer);
+			return TFC_CoreRender.renderSluice(block, i, j, k, renderer);
 		}
 		else if (modelId == TFCBlocks.woodFruitRenderId)
 		{
-			return TFC_CoreRender.RenderWoodTrunk(block, i, j, k, renderer);
+			return TFC_CoreRender.renderWoodTrunk(block, i, j, k, renderer);
 		}
 		else if (modelId == TFCBlocks.leavesFruitRenderId)
 		{
-			return TFC_CoreRender.RenderFruitLeaves(block, i, j, k, renderer);
+			return TFC_CoreRender.renderFruitLeaves(block, i, j, k, renderer);
 		}
 		else if (modelId == TFCBlocks.stairRenderId)
 		{
@@ -108,7 +108,7 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 		}
 		else if (modelId == TFCBlocks.waterPlantRenderId)
 		{
-			return TFC_CoreRender.RenderSeaPlant(block, i, j, k, renderer);
+			return TFC_CoreRender.renderSeaPlant(block, i, j, k, renderer);
 		}
 		return false;
 	}
@@ -133,17 +133,17 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 		if (modelID == TFCBlocks.peatGrassRenderId)
 		{
 			for(int i = 0; i < 6; i++)
-				icons[i] = TFCBlocks.Peat.getBlockTextureFromSide(i);
+				icons[i] = TFCBlocks.peat.getBlockTextureFromSide(i);
 			renderInvBlock(block, renderer, icons);
 		}
 		else if (modelID == TFCBlocks.grassRenderId)
 		{
 			for(int i = 0; i < 6; i++)
 			{
-				if (block == TFCBlocks.Dirt)
-					icons[i] = TFCBlocks.Dirt.getBlockTextureFromSide(i);
+				if (block == TFCBlocks.dirt)
+					icons[i] = TFCBlocks.dirt.getBlockTextureFromSide(i);
 				else
-					icons[i] = TFCBlocks.Dirt2.getBlockTextureFromSide(i);
+					icons[i] = TFCBlocks.dirt2.getBlockTextureFromSide(i);
 			}
 			renderInvBlock(block, renderer, icons);
 		}
@@ -151,10 +151,10 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 		{
 			for(int i = 0; i < 6; i++)
 			{
-				if (block == TFCBlocks.Clay)
-					icons[i] = TFCBlocks.Clay.getBlockTextureFromSide(i);
+				if (block == TFCBlocks.clay)
+					icons[i] = TFCBlocks.clay.getBlockTextureFromSide(i);
 				else
-					icons[i] = TFCBlocks.Clay2.getBlockTextureFromSide(i);
+					icons[i] = TFCBlocks.clay2.getBlockTextureFromSide(i);
 			}
 			renderInvBlock(block, renderer, icons);
 		}

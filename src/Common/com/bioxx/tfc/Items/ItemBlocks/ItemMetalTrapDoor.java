@@ -122,7 +122,7 @@ public class ItemMetalTrapDoor extends ItemTerraBlock
 			}
 			if(world.getBlock(x, y, z).getMaterial().isReplaceable())
 			{
-				if(world.setBlock(x, y, z, TFCBlocks.MetalTrapDoor))
+				if(world.setBlock(x, y, z, TFCBlocks.metalTrapDoor))
 				{
 					TEMetalTrapDoor te = (TEMetalTrapDoor) world.getTileEntity(x, y, z);
 					te.sheetStack = itemstack.copy();

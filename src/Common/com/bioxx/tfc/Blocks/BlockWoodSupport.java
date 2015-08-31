@@ -34,7 +34,7 @@ public class BlockWoodSupport extends BlockTerra
 	public BlockWoodSupport(Material material)
 	{
 		super(Material.wood);
-		this.setCreativeTab(TFCTabs.TFCBuilding);
+		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 		woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
 		icons = new IIcon[woodNames.length];
@@ -211,10 +211,10 @@ public class BlockWoodSupport extends BlockTerra
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		Block b = world.getBlock(x, y, z);
-		if(b == TFCBlocks.WoodSupportH || b == TFCBlocks.WoodSupportV)
-			ret.add(new ItemStack(TFCBlocks.WoodSupportV, 1, metadata));
-		else if(b == TFCBlocks.WoodSupportH2 || b == TFCBlocks.WoodSupportV2)
-			ret.add(new ItemStack(TFCBlocks.WoodSupportV2, 1, metadata));
+		if(b == TFCBlocks.woodSupportH || b == TFCBlocks.woodSupportV)
+			ret.add(new ItemStack(TFCBlocks.woodSupportV, 1, metadata));
+		else if(b == TFCBlocks.woodSupportH2 || b == TFCBlocks.woodSupportV2)
+			ret.add(new ItemStack(TFCBlocks.woodSupportV2, 1, metadata));
 		return ret;
 	}
 
@@ -225,14 +225,14 @@ public class BlockWoodSupport extends BlockTerra
 			return icons[0];
 		if(meta<icons.length)
 			return icons[meta];
-		return TFCBlocks.WoodSupportH2.getIcon(side, meta-16);
+		return TFCBlocks.woodSupportH2.getIcon(side, meta-16);
 	}
 
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
 		for(int i = 0; i < woodNames.length; i++)
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/WoodSheet/" + woodNames[i]);
+			icons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "wood/WoodSheet/" + woodNames[i]);
 	}
 
 	@Override
@@ -342,10 +342,10 @@ public class BlockWoodSupport extends BlockTerra
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
-		if(this == TFCBlocks.WoodSupportH)
-			dropBlockAsItem(world, i, j, k, new ItemStack(TFCBlocks.WoodSupportV, 1, l));
-		else if(this == TFCBlocks.WoodSupportH2)
-			dropBlockAsItem(world, i, j, k, new ItemStack(TFCBlocks.WoodSupportV2, 1, l));
+		if(this == TFCBlocks.woodSupportH)
+			dropBlockAsItem(world, i, j, k, new ItemStack(TFCBlocks.woodSupportV, 1, l));
+		else if(this == TFCBlocks.woodSupportH2)
+			dropBlockAsItem(world, i, j, k, new ItemStack(TFCBlocks.woodSupportV2, 1, l));
 		else
 			dropBlockAsItem(world, i, j, k, new ItemStack(this, 1, l));
 	}
@@ -412,10 +412,10 @@ public class BlockWoodSupport extends BlockTerra
 			}
 			else if(TFCBlocks.isBlockVSupport(world.getBlock(i, j-1, k)))
 			{
-				if(this == TFCBlocks.WoodSupportH)
-					world.setBlock(i, j, k, TFCBlocks.WoodSupportV, meta, 0x2);
-				else if(this == TFCBlocks.WoodSupportH2)
-					world.setBlock(i, j, k, TFCBlocks.WoodSupportV2, meta, 0x2);
+				if(this == TFCBlocks.woodSupportH)
+					world.setBlock(i, j, k, TFCBlocks.woodSupportV, meta, 0x2);
+				else if(this == TFCBlocks.woodSupportH2)
+					world.setBlock(i, j, k, TFCBlocks.woodSupportV2, meta, 0x2);
 			}
 		}
 	}

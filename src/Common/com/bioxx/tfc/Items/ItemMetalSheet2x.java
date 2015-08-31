@@ -14,7 +14,7 @@ public class ItemMetalSheet2x extends ItemMetalSheet
 	{
 		super(mID);
 		setMaxDamage(0);
-		this.setCreativeTab(TFCTabs.TFCMaterials);
+		this.setCreativeTab(TFCTabs.TFC_MATERIALS);
 		this.setWeight(EnumWeight.HEAVY);
 		this.setSize(EnumSize.MEDIUM);
 		metalAmount = 400;

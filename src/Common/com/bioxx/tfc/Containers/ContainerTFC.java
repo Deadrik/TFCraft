@@ -163,8 +163,8 @@ public class ContainerTFC extends Container
 	@Override
 	public void detectAndSendChanges()
 	{
-		boolean _shouldSave = false;
-		boolean _shouldReload = false;
+		boolean shouldSave = false;
+		boolean shouldReload = false;
 
 		for (int i = 0; i < this.inventorySlots.size(); ++i)
 		{
@@ -174,14 +174,14 @@ public class ContainerTFC extends Container
 			if (!areItemStacksEqual(itemstack1, itemstack))
 			{
 				if(doItemSaving && i < inventoryItemStacks.size()-36 && !isLoading)
-					_shouldSave = true;
+					shouldSave = true;
 
 				itemstack1 = itemstack == null ? null : itemstack.copy();
 				if(itemstack1 != null && itemstack1.stackSize == 0)
 					itemstack1 = null;
 				this.inventoryItemStacks.set(i, itemstack1);
 
-				if(_shouldSave)
+				if(shouldSave)
 				{
 					int slotNum = bagsSlotNum + (inventoryItemStacks.size()-36);
 					this.saveContents((ItemStack)inventoryItemStacks.get(slotNum));
@@ -202,11 +202,11 @@ public class ContainerTFC extends Container
 			// This method was mysteriously deleted with no trace on github. However adding it back causes a crash.
 			// if (!areItemStacksEqual(itemstack1, itemstack) && player.inventory.getItemStack() == null)
 			{
-				_shouldReload = true;
+				shouldReload = true;
 			}
 		}
 
-		if(_shouldReload && !isLoading)
+		if(shouldReload && !isLoading)
 			reloadContainer();
 
 		this.isLoading = false;

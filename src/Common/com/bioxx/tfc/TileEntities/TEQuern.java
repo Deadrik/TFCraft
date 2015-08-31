@@ -71,7 +71,7 @@ public class TEQuern extends NetworkTileEntity implements IInventory
 			QuernRecipe qr = QuernManager.getInstance().findMatchingRecipe(storage[0]);
 			if(qr == null)
 			{
-				TerraFirmaCraft.log.warn("QUERN RECIPE NOT FOUND! This is a BUG! -- " + storage[0].getItem().getUnlocalizedName());
+				TerraFirmaCraft.LOG.warn("QUERN RECIPE NOT FOUND! This is a BUG! -- " + storage[0].getItem().getUnlocalizedName());
 				return false; // If this happens, it's a bug!
 			}
 

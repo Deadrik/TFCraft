@@ -40,15 +40,15 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	private float moveSpeed;
 
 	/** true is the wolf is wet else false */
-	private boolean field_25052_g;
+	private boolean isWet;
 	private static final float GESTATION_PERIOD = 7.0f;
 	//private final static float avgAdultWeight = 270F; //The average weight of adult males in kg
 	/*
 	 * 1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
 	 * the square root of the ratio of female mass : male mass
 	 */
-	private static final float dimorphism = 0.2182f;
-	private static final int degreeOfDiversion = 4;
+	private static final float DIMORPHISM = 0.2182f;
+	private static final int DEGREE_OF_DIVERSION = 4;
 
 	private long animalID;
 	private int sex;
@@ -61,10 +61,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	private float mateStrengthMod;
 	private float mateAggroMod;
 	private float mateObedMod;
-	private float size_mod; //How large the animal is
-	private float strength_mod; //how strong the animal is
-	private float aggression_mod = 1;//How aggressive / obstinate the animal is
-	private float obedience_mod = 1; //How well the animal responds to commands.
+	private float sizeMod; //How large the animal is
+	private float strengthMod; //how strong the animal is
+	private float aggressionMod = 1;//How aggressive / obstinate the animal is
+	private float obedienceMod = 1; //How well the animal responds to commands.
 	private boolean inLove;
 	
 	private EntityAIAttackOnCollide attackAI;
@@ -90,10 +90,12 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		moveSpeed = 0.2F;
 		getNavigator ().setAvoidsWater (true);
 		tasks.addTask (1, new EntityAISwimming (this));
-		size_mod = (float) Math.sqrt((rand.nextInt(rand.nextInt((degreeOfDiversion + 1) * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + 1F) * (1.0F - dimorphism * sex));
-		strength_mod = (float) Math.sqrt((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + size_mod));
-		aggression_mod = (float) Math.sqrt((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + 1));
-		obedience_mod = (float) Math.sqrt((rand.nextInt(rand.nextInt(degreeOfDiversion * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + 1f / aggression_mod));
+		sizeMod = (float) Math.sqrt((rand.nextInt(rand.nextInt((DEGREE_OF_DIVERSION + 1) * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + 1F) *
+										(1.0F - DIMORPHISM * sex));
+		strengthMod = (float) Math.sqrt((rand.nextInt(rand.nextInt(DEGREE_OF_DIVERSION * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + sizeMod));
+		aggressionMod = (float) Math.sqrt((rand.nextInt(rand.nextInt(DEGREE_OF_DIVERSION * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + 1));
+		obedienceMod = (float) Math.sqrt((rand.nextInt(rand.nextInt(DEGREE_OF_DIVERSION * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f +
+											1f / aggressionMod));
 		sex = rand.nextInt(2);
 		if (getGender() == GenderEnum.MALE)
 			tasks.addTask (6, new EntityAIMate (this, moveSpeed));
@@ -138,27 +140,27 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	public EntityBear (World par1World, IAnimal mother, ArrayList<Float> data)
 	{
 		this(par1World);
-		float father_size = 1;
-		float father_str = 1;
-		float father_aggro = 1;
-		float father_obed = 1;
+		float fatherSize = 1;
+		float fatherStr = 1;
+		float fatherAggro = 1;
+		float fatherObed = 1;
 		for(int i = 0; i < data.size(); i++){
 			switch(i){
-			case 0:father_size = data.get(i);break;
-			case 1:father_str = data.get(i);break;
-			case 2:father_aggro = data.get(i);break;
-			case 3:father_obed = data.get(i);break;
+			case 0:fatherSize = data.get(i);break;
+			case 1:fatherStr = data.get(i);break;
+			case 2:fatherAggro = data.get(i);break;
+			case 3:fatherObed = data.get(i);break;
 			default:break;
 			}
 		}
 		this.posX = ((EntityLivingBase)mother).posX;
 		this.posY = ((EntityLivingBase)mother).posY;
 		this.posZ = ((EntityLivingBase)mother).posZ;
-		float invSizeRatio = 1f / (2 - dimorphism);
-		size_mod = (float)Math.sqrt(size_mod * size_mod * (float)Math.sqrt((mother.getSize() + father_size) * invSizeRatio));
-		strength_mod = (float)Math.sqrt(strength_mod * strength_mod * (float)Math.sqrt((mother.getStrength() + father_str) * 0.5F));
-		aggression_mod = (float)Math.sqrt(aggression_mod * aggression_mod * (float)Math.sqrt((mother.getAggression() + father_aggro) * 0.5F));
-		obedience_mod = (float)Math.sqrt(obedience_mod * obedience_mod * (float)Math.sqrt((mother.getObedience() + father_obed) * 0.5F));
+		float invSizeRatio = 1f / (2 - DIMORPHISM);
+		sizeMod = (float)Math.sqrt(sizeMod * sizeMod * (float)Math.sqrt((mother.getSize() + fatherSize) * invSizeRatio));
+		strengthMod = (float)Math.sqrt(strengthMod * strengthMod * (float)Math.sqrt((mother.getStrength() + fatherStr) * 0.5F));
+		aggressionMod = (float)Math.sqrt(aggressionMod * aggressionMod * (float)Math.sqrt((mother.getAggression() + fatherAggro) * 0.5F));
+		obedienceMod = (float)Math.sqrt(obedienceMod * obedienceMod * (float)Math.sqrt((mother.getObedience() + fatherObed) * 0.5F));
 		
 		this.familiarity = (int) (mother.getFamiliarity()<90?mother.getFamiliarity()/2:mother.getFamiliarity()*0.9f);
 
@@ -202,7 +204,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.BearHealth);//MaxHealth
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.BEAR_HEALTH);//MaxHealth
 	}
 
 	/**
@@ -224,15 +226,15 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		super.writeEntityToNBT (nbt);
 		nbt.setInteger ("Sex", sex);
 		nbt.setLong ("Animal ID", animalID);
-		nbt.setFloat ("Size Modifier", size_mod);
+		nbt.setFloat ("Size Modifier", sizeMod);
 		
 		nbt.setInteger("Familiarity", familiarity);
 		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);
 		nbt.setBoolean("Familiarized Today", familiarizedToday);
 
-		nbt.setFloat ("Strength Modifier", strength_mod);
-		nbt.setFloat ("Aggression Modifier", aggression_mod);
-		nbt.setFloat ("Obedience Modifier", obedience_mod);
+		nbt.setFloat ("Strength Modifier", strengthMod);
+		nbt.setFloat ("Aggression Modifier", aggressionMod);
+		nbt.setFloat ("Obedience Modifier", obedienceMod);
 		
 		nbt.setBoolean("wasRoped", wasRoped);
 
@@ -256,15 +258,15 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		super.readEntityFromNBT(nbt);
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
-		size_mod = nbt.getFloat ("Size Modifier");
+		sizeMod = nbt.getFloat ("Size Modifier");
 
 		familiarity = nbt.getInteger("Familiarity");
 		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
 		familiarizedToday = nbt.getBoolean("Familiarized Today");
 		
-		strength_mod = nbt.getFloat ("Strength Modifier");
-		aggression_mod = nbt.getFloat ("Aggression Modifier");
-		obedience_mod = nbt.getFloat ("Obedience Modifier");
+		strengthMod = nbt.getFloat ("Strength Modifier");
+		aggressionMod = nbt.getFloat ("Aggression Modifier");
+		obedienceMod = nbt.getFloat ("Obedience Modifier");
 
 		wasRoped = nbt.getBoolean("wasRoped");
 		
@@ -349,7 +351,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	{
 		float ageMod = TFC_Core.getPercentGrown(this);
 
-		this.entityDropItem(new ItemStack(TFCItems.Hide, 1, Math.max(0, Math.min(2, (int)(ageMod * 3 - 1)))), 0);
+		this.entityDropItem(new ItemStack(TFCItems.hide, 1, Math.max(0, Math.min(2, (int)(ageMod * 3 - 1)))), 0);
 		this.dropItem(Items.bone, (int) ((rand.nextInt(6) + 2) * ageMod));
 	}
 
@@ -361,15 +363,15 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public void onLivingUpdate()
 	{
-		TFC_Core.PreventEntityDataUpdate = true;
+		TFC_Core.preventEntityDataUpdate = true;
 		super.onLivingUpdate();
-		TFC_Core.PreventEntityDataUpdate = false;
+		TFC_Core.preventEntityDataUpdate = false;
 
 		if (!worldObj.isRemote)
 		{
-			if (!field_25052_g && !hasPath() && onGround)
+			if (!isWet && !hasPath() && onGround)
 			{
-				field_25052_g = true;
+				isWet = true;
 				worldObj.setEntityState(this, (byte) 8);
 			}
 
@@ -440,7 +442,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public boolean attackEntityAsMob (Entity par1Entity)
 	{
-		int dam =  (int)(TFC_MobData.BearDamage * getStrength() * getAggression() * (getSize()/2 + 0.5F));
+		int dam =  (int)(TFC_MobData.BEAR_DAMAGE * getStrength() * getAggression() * (getSize()/2 + 0.5F));
 		return par1Entity.attackEntityFrom (DamageSource.causeMobDamage (this), dam);
 	}
 
@@ -449,7 +451,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	{
 		if (par1 == 8)
 		{
-			field_25052_g = true;
+			isWet = true;
 		}
 		else
 		{
@@ -466,10 +468,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
 
 				byte[] values = {
-						TFC_Core.getByteFromSmallFloat(size_mod),
-						TFC_Core.getByteFromSmallFloat(strength_mod),
-						TFC_Core.getByteFromSmallFloat(aggression_mod),
-						TFC_Core.getByteFromSmallFloat(obedience_mod),
+						TFC_Core.getByteFromSmallFloat(sizeMod),
+						TFC_Core.getByteFromSmallFloat(strengthMod),
+						TFC_Core.getByteFromSmallFloat(aggressionMod),
+						TFC_Core.getByteFromSmallFloat(obedienceMod),
 						(byte) familiarity,
 						(byte) (familiarizedToday ? 1 : 0),
 						(byte) (pregnant ? 1 : 0),
@@ -489,10 +491,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 				buf.putInt(this.dataWatcher.getWatchableObjectInt(23));
 				byte[] values = buf.array();
 				
-				size_mod = TFC_Core.getSmallFloatFromByte(values[0]);
-				strength_mod = TFC_Core.getSmallFloatFromByte(values[1]);
-				aggression_mod = TFC_Core.getSmallFloatFromByte(values[2]);
-				obedience_mod = TFC_Core.getSmallFloatFromByte(values[3]);
+				sizeMod = TFC_Core.getSmallFloatFromByte(values[0]);
+				strengthMod = TFC_Core.getSmallFloatFromByte(values[1]);
+				aggressionMod = TFC_Core.getSmallFloatFromByte(values[2]);
+				obedienceMod = TFC_Core.getSmallFloatFromByte(values[3]);
 				
 				familiarity = values[4];
 				familiarizedToday = values[5] == 1;
@@ -530,7 +532,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public void setGrowingAge(int par1)
 	{
-		if(!TFC_Core.PreventEntityDataUpdate)
+		if(!TFC_Core.preventEntityDataUpdate)
 			this.dataWatcher.updateObject(12, Integer.valueOf(par1));
 	}
 
@@ -573,7 +575,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public float getSize() 
 	{
-		return size_mod;
+		return sizeMod;
 	}
 
 	@Override
@@ -646,7 +648,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public GenderEnum getGender() 
 	{
-		return GenderEnum.genders[dataWatcher.getWatchableObjectInt(13)];
+		return GenderEnum.GENDERS[dataWatcher.getWatchableObjectInt(13)];
 	}
 
 	@Override
@@ -697,19 +699,19 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public float getStrength()
 	{
-		return strength_mod;
+		return strengthMod;
 	}
 
 	@Override
 	public float getAggression()
 	{
-		return aggression_mod;
+		return aggressionMod;
 	}
 
 	@Override
 	public float getObedience()
 	{
-		return obedience_mod;
+		return obedienceMod;
 	}
 
 	@Override
@@ -771,7 +773,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			if(familiarizedToday && familiarity < 100){
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
-				float familiarityChange = 3 * obedience_mod / aggression_mod; //Changed from 6 to 3 so bears are harder to tame by default. -Kitty
+				float familiarityChange = 3 * obedienceMod / aggressionMod; //Changed from 6 to 3 so bears are harder to tame by default. -Kitty
 				if(this.isAdult() && familiarity <= 80) //Adult bears cap out at 80 since it is currently impossible to get baby bears.
 				{
 					familiarity += familiarityChange;
@@ -780,7 +782,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 					float ageMod = 2f/(1f + TFC_Core.getPercentGrown(this));
 					familiarity += ageMod * familiarityChange;
 					if(familiarity > 70){
-						obedience_mod *= 1.01f;
+						obedienceMod *= 1.01f;
 					}
 				}
 			}

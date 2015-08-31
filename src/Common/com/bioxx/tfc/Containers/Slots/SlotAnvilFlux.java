@@ -16,6 +16,6 @@ public class SlotAnvilFlux extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		return itemstack.getItem() == TFCItems.Powder && itemstack.getItemDamage() == 0;
+		return itemstack.getItem() == TFCItems.powder && itemstack.getItemDamage() == 0;
 	}
 }

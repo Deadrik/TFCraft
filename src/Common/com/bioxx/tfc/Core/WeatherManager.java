@@ -6,12 +6,12 @@ import net.minecraft.world.World;
 
 public class WeatherManager
 {
-	protected static final WeatherManager instance = new WeatherManager();
+	protected static final WeatherManager INSTANCE = new WeatherManager();
 	private Random rand = new Random();
 	private Random clientRand = new Random();
 	public static final WeatherManager getInstance()
 	{
-		return instance;
+		return INSTANCE;
 	}
 
 	public long seed;

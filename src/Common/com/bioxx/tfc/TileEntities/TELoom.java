@@ -38,7 +38,7 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	private int clothCompletionCount;
 
 	public LoomRecipe recipe;
-	private final ResourceLocation defaultTexture = new ResourceLocation(Reference.ModID, "textures/blocks/String.png");
+	private final ResourceLocation defaultTexture = new ResourceLocation(Reference.MOD_ID, "textures/blocks/String.png");
 
 	@Override
 	public boolean canUpdate()
@@ -184,7 +184,7 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	}
 
 	public ResourceLocation getWoodResource(){
-		return new ResourceLocation(Reference.ModID, "textures/blocks/wood/WoodSheet/"+Global.WOOD_ALL[loomType]+".png");
+		return new ResourceLocation(Reference.MOD_ID, "textures/blocks/wood/WoodSheet/"+Global.WOOD_ALL[loomType]+".png");
 	}
 
 	public ResourceLocation getStringResource(){
@@ -499,8 +499,8 @@ public class TELoom extends NetworkTileEntity implements IInventory
 
 	public static void registerRecipes()
 	{
-		LoomManager.getInstance().addRecipe(new LoomRecipe(new ItemStack(TFCItems.WoolYarn,16), new ItemStack(TFCItems.WoolCloth,1)),new ResourceLocation(Reference.ModID, "textures/blocks/String.png"));
-		LoomManager.getInstance().addRecipe(new LoomRecipe(new ItemStack(Items.string,24), new ItemStack(TFCItems.SilkCloth,1)),new ResourceLocation(Reference.ModID, "textures/blocks/Silk.png"));
-		LoomManager.getInstance().addRecipe(new LoomRecipe(new ItemStack(TFCItems.JuteFibre,12), new ItemStack(TFCItems.BurlapCloth,1)),new ResourceLocation(Reference.ModID, "textures/blocks/Rope.png"));
+		LoomManager.getInstance().addRecipe(new LoomRecipe(new ItemStack(TFCItems.woolYarn,16), new ItemStack(TFCItems.woolCloth,1)),new ResourceLocation(Reference.MOD_ID, "textures/blocks/String.png"));
+		LoomManager.getInstance().addRecipe(new LoomRecipe(new ItemStack(Items.string,24), new ItemStack(TFCItems.silkCloth,1)),new ResourceLocation(Reference.MOD_ID, "textures/blocks/Silk.png"));
+		LoomManager.getInstance().addRecipe(new LoomRecipe(new ItemStack(TFCItems.juteFiber,12), new ItemStack(TFCItems.burlapCloth,1)),new ResourceLocation(Reference.MOD_ID, "textures/blocks/Rope.png"));
 	}
 }

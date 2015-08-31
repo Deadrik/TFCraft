@@ -9,26 +9,26 @@ import com.bioxx.tfc.api.Constant.Global;
 
 public class TFCWorldType extends WorldType
 {
-	public static TFCWorldType DEFAULT;
-	public static TFCWorldType FLAT;
+	public static TFCWorldType defaultWorldType;
+	public static TFCWorldType flatWorldType;
 
 	//	private static final  BiomeGenBase[] tfcBiomes = new BiomeGenBase[] {
 	//		TFCBiome.HighHills, TFCBiome.swampland, TFCBiome.plains,
 	//		TFCBiome.plains, TFCBiome.rollingHills, TFCBiome.Mountains };
-	private static final TFCBiome[] biomesUNKNOWN = new TFCBiome[] {
-		TFCBiome.ocean
+	private static final TFCBiome[] BIOMES_UNKNOWN = new TFCBiome[] {
+		TFCBiome.OCEAN
 	};
-	private static final TFCBiome[] biomesFLAT = new TFCBiome[] {
-		TFCBiome.hell
+	private static final TFCBiome[] BIOMES_FLAT = new TFCBiome[] {
+		TFCBiome.HELL
 	};
-	private static final TFCBiome[] biomesDEFAULT = new TFCBiome[] {
-		TFCBiome.ocean,
-		TFCBiome.HighHills,
-		TFCBiome.plains,
-		TFCBiome.HighPlains,
-		TFCBiome.swampland,
-		TFCBiome.rollingHills,
-		TFCBiome.Mountains,
+	private static final TFCBiome[] BIOMES_DEFAULT = new TFCBiome[] {
+		TFCBiome.OCEAN,
+		TFCBiome.HIGH_HILLS,
+		TFCBiome.PLAINS,
+		TFCBiome.HIGH_PLAINS,
+		TFCBiome.SWAMPLAND,
+		TFCBiome.ROLLING_HILLS,
+		TFCBiome.MOUNTAINS,
 	};
 
 	public TFCWorldType(int i, String par2Str)
@@ -43,23 +43,23 @@ public class TFCWorldType extends WorldType
 
 	public TFCBiome[] getBiomesForWorldType()
 	{
-		if(this == TFCWorldType.DEFAULT)
-			return biomesDEFAULT;
-		else if(this == TFCWorldType.FLAT)
-			return biomesFLAT;
+		if(this == TFCWorldType.defaultWorldType)
+			return BIOMES_DEFAULT;
+		else if(this == TFCWorldType.flatWorldType)
+			return BIOMES_FLAT;
 
-		return biomesUNKNOWN;
+		return BIOMES_UNKNOWN;
 		//return new TFCBiome[] {TFCBiome.HighHills};
 	}
 
 	@Override
 	public WorldChunkManager getChunkManager(World world)
 	{
-		if (this == FLAT)
+		if (this == flatWorldType)
 		{
 			//			FlatGeneratorInfo var1 = FlatGeneratorInfo.createFlatGeneratorFromString(world.getWorldInfo().getGeneratorOptions());
 			//			return new TFCWorldChunkManagerHell(BiomeGenBase.getBiome(var1.getBiome()), 0.5F, 0.5F);
-			return new TFCWorldChunkManagerHell(TFCBiome.hell, 0.5F, 0.5F, world);
+			return new TFCWorldChunkManagerHell(TFCBiome.HELL, 0.5F, 0.5F, world);
 		}
 		else
 		{

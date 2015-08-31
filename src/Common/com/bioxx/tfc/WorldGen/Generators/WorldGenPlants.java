@@ -39,7 +39,7 @@ public class WorldGenPlants implements IWorldGenerator
 	private static WorldGenBerryBush snowberryGen = new WorldGenBerryBush(false, 7, 6, 1, 4);
 	private static WorldGenBerryBush elderberryGen = new WorldGenBerryBush(false, 8, 5, 2, 4);
 	private static WorldGenBerryBush gooseberryGen = new WorldGenBerryBush(false, 9, 8, 1, 4);
-	private static WorldGenBerryBush cloudberryGen = new WorldGenBerryBush(false, 10, 12, 1, 6, TFCBlocks.Peat);
+	private static WorldGenBerryBush cloudberryGen = new WorldGenBerryBush(false, 10, 12, 1, 6, TFCBlocks.peat);
 
 	public WorldGenPlants()
 	{
@@ -118,19 +118,19 @@ public class WorldGenPlants implements IWorldGenerator
 			yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
 			bioTemperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, yCoord, zCoord);
 			if (world.isAirBlock(xCoord, yCoord, zCoord) && 
-					TFCBlocks.TallGrass.canBlockStay(world, xCoord, yCoord, zCoord) &&
+					TFCBlocks.tallGrass.canBlockStay(world, xCoord, yCoord, zCoord) &&
 					!TFC_Core.isDryGrass(world.getBlock(xCoord, yCoord - 1, zCoord)))
 			{
-				world.setBlock(xCoord, yCoord, zCoord, TFCBlocks.TallGrass, (world.rand.nextInt(20) == 0 ? 1 : 0), 0x2); // tallgrass with 1/20 chance to spawn a fern
+				world.setBlock(xCoord, yCoord, zCoord, TFCBlocks.tallGrass, (world.rand.nextInt(20) == 0 ? 1 : 0), 0x2); // tallgrass with 1/20 chance to spawn a fern
 			}
 
 			if(bioTemperature >= 0)
 			{
 				if (world.isAirBlock(xCoord, yCoord, zCoord) && 
-						TFCBlocks.TallGrass.canBlockStay(world, xCoord, yCoord, zCoord) &&
+						TFCBlocks.tallGrass.canBlockStay(world, xCoord, yCoord, zCoord) &&
 						TFC_Core.isDryGrass(world.getBlock(xCoord, yCoord - 1, zCoord)))
 				{
-					world.setBlock(xCoord, yCoord, zCoord, TFCBlocks.TallGrass, (world.rand.nextInt(60) == 0 ? 1 : 2), 0x2); // shortgrass with 1/60 chance to spawn a fern
+					world.setBlock(xCoord, yCoord, zCoord, TFCBlocks.tallGrass, (world.rand.nextInt(60) == 0 ? 1 : 2), 0x2); // shortgrass with 1/60 chance to spawn a fern
 				}
 			}
 		}

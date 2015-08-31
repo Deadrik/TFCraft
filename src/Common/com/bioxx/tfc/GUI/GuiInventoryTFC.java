@@ -38,12 +38,12 @@ import com.bioxx.tfc.api.Tools.IKnife;
 
 public class GuiInventoryTFC extends InventoryEffectRenderer
 {
-	private float xSize_lo;
-	private float ySize_lo;
+	private float xSizeLow;
+	private float ySizeLow;
 	private boolean hasEffect;
-	protected static final ResourceLocation InventoryUpperTex = new ResourceLocation(Reference.ModID+":textures/gui/inventory.png");
-	protected static final ResourceLocation InventoryUpperTex2x2 = new ResourceLocation(Reference.ModID+":textures/gui/gui_inventory2x2.png");
-	protected static final ResourceLocation InventoryEffectsTex = new ResourceLocation(Reference.ModID+":textures/gui/inv_effects.png");
+	protected static final ResourceLocation UPPER_TEXTURE = new ResourceLocation(Reference.MOD_ID+":textures/gui/inventory.png");
+	protected static final ResourceLocation UPPER_TEXTURE_2X2 = new ResourceLocation(Reference.MOD_ID+":textures/gui/gui_inventory2x2.png");
+	protected static final ResourceLocation EFFECTS_TEXTURE = new ResourceLocation(Reference.MOD_ID+":textures/gui/inv_effects.png");
 	protected EntityPlayer player;
 	protected Slot activeSlot;
 
@@ -62,14 +62,14 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		if(player.getEntityData().hasKey("craftingTable"))
-			TFC_Core.bindTexture(InventoryUpperTex);
+			TFC_Core.bindTexture(UPPER_TEXTURE);
 		else
-			TFC_Core.bindTexture(InventoryUpperTex2x2);
+			TFC_Core.bindTexture(UPPER_TEXTURE_2X2);
 		int k = this.guiLeft;
 		int l = this.guiTop;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, 86);
 		//Draw the player avatar
-		drawPlayerModel(k + 51, l + 75, 30, k + 51 - this.xSize_lo, l + 75 - 50 - this.ySize_lo, this.mc.thePlayer);
+		drawPlayerModel(k + 51, l + 75, 30, k + 51 - this.xSizeLow, l + 75 - 50 - this.ySizeLow, this.mc.thePlayer);
 
 		PlayerInventory.drawInventory(this, width, height, ySize - PlayerInventory.invYSize);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -162,13 +162,13 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 
 		buttonList.clear();
 		buttonList.add(new GuiInventoryButton(0, guiLeft+176, guiTop + 3, 25, 20, 
-				0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Inventory"), TFC_Textures.GuiInventory));
+				0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Inventory"), TFC_Textures.guiInventory));
 		buttonList.add(new GuiInventoryButton(1, guiLeft+176, guiTop + 22, 25, 20, 
-				0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Skills"), TFC_Textures.GuiSkills));
+				0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Skills"), TFC_Textures.guiSkills));
 		buttonList.add(new GuiInventoryButton(2, guiLeft+176, guiTop + 41, 25, 20, 
-				0, 86, 25, 20, TFC_Core.translate("gui.Calendar.Calendar"), TFC_Textures.GuiCalendar));
+				0, 86, 25, 20, TFC_Core.translate("gui.Calendar.Calendar"), TFC_Textures.guiCalendar));
 		buttonList.add(new GuiInventoryButton(3, guiLeft+176, guiTop + 60, 25, 20, 
-				0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Health"), TFC_Textures.GuiHealth));
+				0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Health"), TFC_Textures.guiHealth));
 	}
 
 	@Override
@@ -187,8 +187,8 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		super.drawScreen(par1, par2, par3);
-		this.xSize_lo = par1;
-		this.ySize_lo = par2;
+		this.xSizeLow = par1;
+		this.ySizeLow = par2;
 		if(hasEffect)
 			displayDebuffEffects();
 
@@ -230,7 +230,7 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 						((TFCPotion) Potion.potionTypes[var8.getPotionID()]) : 
 							Potion.potionTypes[var8.getPotionID()];
 						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-						TFC_Core.bindTexture(InventoryEffectsTex);
+						TFC_Core.bindTexture(EFFECTS_TEXTURE);
 						this.drawTexturedModalRect(var1, var2, 0, 166, 140, 32);
 
 						if (var9.hasStatusIcon())

@@ -18,8 +18,8 @@ public class ItemSandwich extends ItemMeal
 	{
 		super();
 		this.hasSubtypes = true;
-		this.MetaNames = new String[]{"Sandwich Wheat","Sandwich Oat","Sandwich Barley","Sandwich Rye","Sandwich Corn","Sandwich Rice"};
-		this.MetaIcons = new IIcon[6];
+		this.metaNames = new String[]{"Sandwich Wheat","Sandwich Oat","Sandwich Barley","Sandwich Rye","Sandwich Corn","Sandwich Rice"};
+		this.metaIcons = new IIcon[6];
 		this.setFolder("food/");
 	}
 
@@ -93,8 +93,8 @@ public class ItemSandwich extends ItemMeal
 		if (nbt == null)
 			nbt = new NBTTagCompound();
 
-		int[] FG = new int[] { -1, -1, -1, -1, -1 };
-		nbt.setIntArray("FG", FG);
+		int[] foodGroups = new int[] { -1, -1, -1, -1, -1 };
+		nbt.setIntArray("FG", foodGroups);
 		nbt.setFloat("foodWeight", 0);
 		nbt.setFloat("foodDecay", 0);
 		nbt.setInteger("decayTimer", (int) TFC_Time.getTotalHours() + 1);

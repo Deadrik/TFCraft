@@ -141,7 +141,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 						{
 							Block block = world.getBlock(xOrig + xd, yOrig + yd, zOrig + zd);
 
-							if (block == TFCBlocks.LogNatural || block == TFCBlocks.LogNatural2)
+							if (block == TFCBlocks.logNatural || block == TFCBlocks.logNatural2)
 								this.adjacentTreeBlocks[xd + center][yd + center][zd + center] = 0;
 							else if (block == this && var6 == world.getBlockMetadata(xOrig + xd, yOrig + yd, zOrig + zd))
 								this.adjacentTreeBlocks[xd + center][yd + center][zd + center] = -2;
@@ -206,7 +206,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	{
 		dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
 		if(world.rand.nextInt(100) < 30)
-			dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Stick, 1));
+			dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.stick, 1));
 		world.setBlockToAir(x, y, z);
 	}
 
@@ -219,7 +219,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	@Override
 	public Item getItemDropped(int i, Random rand, int j)
 	{
-		return Item.getItemFromBlock(TFCBlocks.Sapling);
+		return Item.getItemFromBlock(TFCBlocks.sapling);
 	}
 
 	@Override
@@ -246,7 +246,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 							entityplayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
 							entityplayer.addExhaustion(0.045F);
 							if(world.rand.nextInt(100) < 11)
-								dropBlockAsItem(world, i + x, j + y, k + z, new ItemStack(TFCItems.Stick, 1));
+								dropBlockAsItem(world, i + x, j + y, k + z, new ItemStack(TFCItems.stick, 1));
 							else if (world.rand.nextInt(100) < 4)
 								dropSapling(world, i + x, j + y, k + z, meta);
 							removeLeaves(world, i + x, j + y, k + z);
@@ -269,7 +269,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 			entityplayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
 			entityplayer.addExhaustion(0.025F);
 			if(world.rand.nextInt(100) < 28)
-				dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.Stick, 1));
+				dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.stick, 1));
 			else if (world.rand.nextInt(100) < 6)
 				dropSapling(world, i, j, k, meta);
 
@@ -311,8 +311,8 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	{
 		for(int i = 0; i < this.woodNames.length; i++)
 		{
-			this.icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/trees/" + this.woodNames[i] + " Leaves Fancy");
-			this.iconsOpaque[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/trees/" + this.woodNames[i] + " Leaves");
+			this.icons[i] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "wood/trees/" + this.woodNames[i] + " Leaves Fancy");
+			this.iconsOpaque[i] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "wood/trees/" + this.woodNames[i] + " Leaves");
 		}
 	}
 

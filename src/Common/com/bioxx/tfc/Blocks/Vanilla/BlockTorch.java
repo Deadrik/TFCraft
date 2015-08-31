@@ -40,7 +40,7 @@ public class BlockTorch extends BlockTerraContainer
 	{
 		super(Material.circuits);
 		this.setTickRandomly(true);
-		this.setCreativeTab(TFCTabs.TFCDecoration);
+		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 		setLightLevel(0.9375F);
 	}
 
@@ -67,7 +67,7 @@ public class BlockTorch extends BlockTerraContainer
 	public void registerBlockIcons(IIconRegister register)
 	{
 		super.registerBlockIcons(register);
-		this.offIcon = register.registerIcon(Reference.ModID + ":" + "torch_off");
+		this.offIcon = register.registerIcon(Reference.MOD_ID + ":" + "torch_off");
 	}
 
 	@Override
@@ -76,13 +76,13 @@ public class BlockTorch extends BlockTerraContainer
 		if(!world.isRemote)
 		{
 			if(world.getBlockMetadata(x, y, z) < 8 && player.inventory.getCurrentItem() != null && 
-					player.inventory.getCurrentItem().getItem() == TFCItems.Stick)
+					player.inventory.getCurrentItem().getItem() == TFCItems.stick)
 			{	
-				player.inventory.consumeInventoryItem(TFCItems.Stick);
-				TFC_Core.giveItemToPlayer(new ItemStack(TFCBlocks.Torch), player);
+				player.inventory.consumeInventoryItem(TFCItems.stick);
+				TFC_Core.giveItemToPlayer(new ItemStack(TFCBlocks.torch), player);
 			}
 			else if(player.inventory.getCurrentItem() != null && 
-					player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(TFCBlocks.Torch))
+					player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(TFCBlocks.torch))
 			{
 				TELightEmitter te = (TELightEmitter)world.getTileEntity(x, y, z);
 				te.hourPlaced = (int)TFC_Time.getTotalHours();
@@ -101,7 +101,7 @@ public class BlockTorch extends BlockTerraContainer
 		    if(TFCOptions.enableDebugMode)
 		    {
 		        int metadata = world.getBlockMetadata(x, y, z);
-				TerraFirmaCraft.log.info("Meta = " + (new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
+				TerraFirmaCraft.LOG.info("Meta = " + (new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
 		    }
 		}
 		return true;
@@ -284,7 +284,7 @@ public class BlockTorch extends BlockTerraContainer
 
 		((TELightEmitter) world.getTileEntity(x, y, z)).create();
 
-		this.func_150109_e(world, x, y, z);
+		this.tryPlace(world, x, y, z);
 	}
 
 	/**
@@ -305,7 +305,7 @@ public class BlockTorch extends BlockTerraContainer
 
 	protected boolean checkValidity(World world, int x, int y, int z, Block b)
 	{
-		if (this.func_150109_e(world, x, y, z))
+		if (this.tryPlace(world, x, y, z))
 		{
 			int l = world.getBlockMetadata(x, y, z);
 			boolean flag = false;
@@ -352,7 +352,7 @@ public class BlockTorch extends BlockTerraContainer
 		}
 	}
 
-	protected boolean func_150109_e(World world, int x, int y, int z)
+	protected boolean tryPlace(World world, int x, int y, int z)
 	{
 		if (!this.canPlaceBlockAt(world, x, y, z))
 		{

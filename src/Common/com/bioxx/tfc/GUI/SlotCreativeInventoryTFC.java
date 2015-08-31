@@ -112,7 +112,7 @@ class SlotCreativeInventoryTFC extends Slot
 		return this.theSlot.isSlotInInventory(par1IInventory, par2);
 	}
 
-	public static Slot func_75240_a(SlotCreativeInventoryTFC par0SlotCreativeInventory)
+	public static Slot getSlot(SlotCreativeInventoryTFC par0SlotCreativeInventory)
 	{
 		return par0SlotCreativeInventory.theSlot;
 	}

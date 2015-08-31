@@ -14,30 +14,30 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.BonemealEvent;
-
-import com.bioxx.tfc.Core.TFCTabs;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import com.bioxx.tfc.Core.TFCTabs;
+
 public class ItemDyeCustom extends ItemTerra
 {
 	/** List of dye color names */
-	public static final String[] dyeColorNames = new String[] {"black", "red", "green", "brown", "blue", "purple", "cyan", "silver", "gray", "pink", "lime", "yellow", "lightBlue", "magenta", "orange", "white"};
-	public static final int[] dyeColors = new int[] {1973019, 11743532, 3887386, 5320730, 2437522, 8073150, 2651799, 2651799, 4408131, 14188952, 4312372, 14602026, 6719955, 12801229, 15435844, 15790320};
-	public static final String[] field_94595_b = new String[] {"black", "red", "green", "brown", "blue", "purple", "cyan", "silver", "gray", "pink", "lime", "yellow", "light_blue", "magenta", "orange", "white"};
+	public static final String[] DYE_COLOR_NAMES = new String[] {"black", "red", "green", "brown", "blue", "purple", "cyan", "silver", "gray", "pink", "lime", "yellow", "lightBlue", "magenta", "orange", "white"};
+	public static final int[] DYE_COLORS = new int[] {1973019, 11743532, 3887386, 5320730, 2437522, 8073150, 2651799, 2651799, 4408131, 14188952, 4312372, 14602026, 6719955, 12801229, 15435844, 15790320};
 	@SideOnly(Side.CLIENT)
-	private IIcon[] field_94594_d;
+	private IIcon[] icons;
 
 	public ItemDyeCustom()
 	{
 		super();
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
-		this.setCreativeTab(TFCTabs.TFCMaterials);
+		this.setCreativeTab(TFCTabs.TFC_MATERIALS);
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class ItemDyeCustom extends ItemTerra
 	public IIcon getIconFromDamage(int par1)
 	{
 		int j = MathHelper.clamp_int(par1, 0, 15);
-		return this.field_94594_d[j];
+		return this.icons[j];
 	}
 
 	/**
@@ -60,18 +60,18 @@ public class ItemDyeCustom extends ItemTerra
 	public String getUnlocalizedName(ItemStack par1ItemStack)
 	{
 		int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 15);
-		return super.getUnlocalizedName() + "." + dyeColorNames[i];
+		return super.getUnlocalizedName() + "." + DYE_COLOR_NAMES[i];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
-		this.field_94594_d = new IIcon[field_94595_b.length];
+		this.icons = new IIcon[DYE_COLOR_NAMES.length];
 
-		for (int i = 0; i < field_94595_b.length; ++i)
+		for (int i = 0; i < DYE_COLOR_NAMES.length; ++i)
 		{
-			this.field_94594_d[i] = par1IconRegister.registerIcon(this.getIconString() + "_" + field_94595_b[i]);
+			this.icons[i] = par1IconRegister.registerIcon(this.getIconString() + "_" + DYE_COLOR_NAMES[i]);
 		}
 	}
 

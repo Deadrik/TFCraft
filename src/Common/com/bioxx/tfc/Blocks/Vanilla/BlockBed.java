@@ -34,9 +34,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockBed extends BlockDirectional
 {
 	/** Maps the foot-of-bed block to the head-of-bed block. */
-	public static final int[][] footBlockToHeadBlockMap = new int[][] {{0, 1}, { -1, 0}, {0, -1}, {1, 0}};
+	public static final int[][] FOOT_HEAD_BLOCKMAP = new int[][] {{0, 1}, { -1, 0}, {0, -1}, {1, 0}};
 	@SideOnly(Side.CLIENT)
-	private IIcon[] field_94472_b;
+	private IIcon[] bedEndIcons;
 	@SideOnly(Side.CLIENT)
 	private IIcon[] bedSideIcons;
 	@SideOnly(Side.CLIENT)
@@ -46,7 +46,7 @@ public class BlockBed extends BlockDirectional
 	{
 		super(Material.grass);
 		this.setBounds();
-		this.setCreativeTab(TFCTabs.TFCDevices);
+		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 	}
 
 	/**
@@ -66,8 +66,8 @@ public class BlockBed extends BlockDirectional
 			if (!isBlockHeadOfBed(i1))
 			{
 				int j1 = getDirection(i1);
-				x += footBlockToHeadBlockMap[j1][0];
-				z += footBlockToHeadBlockMap[j1][1];
+				x += FOOT_HEAD_BLOCKMAP[j1][0];
+				z += FOOT_HEAD_BLOCKMAP[j1][1];
 
 				if (world.getBlock(x, y, z) != this)
 					return true;
@@ -75,7 +75,7 @@ public class BlockBed extends BlockDirectional
 				i1 = world.getBlockMetadata(x, y, z);
 			}
 
-			if (world.provider.canRespawnHere() && world.getBiomeGenForCoords(x, z) != TFCBiome.hell)
+			if (world.provider.canRespawnHere() && world.getBiomeGenForCoords(x, z) != TFCBiome.HELL)
 			{
 				if (isBedOccupied(i1))
 				{
@@ -131,8 +131,8 @@ public class BlockBed extends BlockDirectional
 				double d2 = z + 0.5D;
 				world.setBlockToAir(x, y, z);
 				int k1 = getDirection(i1);
-				x += footBlockToHeadBlockMap[k1][0];
-				z += footBlockToHeadBlockMap[k1][1];
+				x += FOOT_HEAD_BLOCKMAP[k1][0];
+				z += FOOT_HEAD_BLOCKMAP[k1][1];
 
 				if (world.getBlock(x, y, z) == this)
 				{
@@ -169,14 +169,14 @@ public class BlockBed extends BlockDirectional
 	{
 		if (par1 == 0)
 		{
-			return TFCBlocks.Planks.getBlockTextureFromSide(par1);
+			return TFCBlocks.planks.getBlockTextureFromSide(par1);
 		}
 		else
 		{
 			int k = getDirection(par2);
 			int l = Direction.bedDirection[k][par1];
 			int i1 = isBlockHeadOfBed(par2) ? 1 : 0;
-			return (i1 != 1 || l != 2) && (i1 != 0 || l != 3) ? (l != 5 && l != 4 ? this.bedTopIcons[i1] : this.bedSideIcons[i1]) : this.field_94472_b[i1];
+			return (i1 != 1 || l != 2) && (i1 != 0 || l != 3) ? (l != 5 && l != 4 ? this.bedTopIcons[i1] : this.bedSideIcons[i1]) : this.bedEndIcons[i1];
 		}
 	}
 
@@ -189,9 +189,9 @@ public class BlockBed extends BlockDirectional
 	 */
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		this.bedTopIcons = new IIcon[] {par1IconRegister.registerIcon(Reference.ModID + ":straw bed_feet_top"), par1IconRegister.registerIcon(Reference.ModID + ":straw bed_head_top")};
-		this.field_94472_b = new IIcon[] {par1IconRegister.registerIcon(Reference.ModID + ":straw bed_feet_end"), par1IconRegister.registerIcon(Reference.ModID + ":straw bed_head_end")};
-		this.bedSideIcons = new IIcon[] {par1IconRegister.registerIcon(Reference.ModID + ":straw bed_feet_side"), par1IconRegister.registerIcon(Reference.ModID + ":straw bed_head_side")};
+		this.bedTopIcons = new IIcon[] {par1IconRegister.registerIcon(Reference.MOD_ID + ":straw bed_feet_top"), par1IconRegister.registerIcon(Reference.MOD_ID + ":straw bed_head_top")};
+		this.bedEndIcons = new IIcon[] {par1IconRegister.registerIcon(Reference.MOD_ID + ":straw bed_feet_end"), par1IconRegister.registerIcon(Reference.MOD_ID + ":straw bed_head_end")};
+		this.bedSideIcons = new IIcon[] {par1IconRegister.registerIcon(Reference.MOD_ID + ":straw bed_feet_side"), par1IconRegister.registerIcon(Reference.MOD_ID + ":straw bed_head_side")};
 	}
 
 	/*
@@ -251,12 +251,12 @@ public class BlockBed extends BlockDirectional
 
 		if (isBlockHeadOfBed(i1))
 		{
-			if (par1World.getBlock(par2 - footBlockToHeadBlockMap[j1][0], par3, par4 - footBlockToHeadBlockMap[j1][1]) != this)
+			if (par1World.getBlock(par2 - FOOT_HEAD_BLOCKMAP[j1][0], par3, par4 - FOOT_HEAD_BLOCKMAP[j1][1]) != this)
 			{
 				par1World.setBlockToAir(par2, par3, par4);
 			}
 		}
-		else if (par1World.getBlock(par2 + footBlockToHeadBlockMap[j1][0], par3, par4 + footBlockToHeadBlockMap[j1][1]) != this)
+		else if (par1World.getBlock(par2 + FOOT_HEAD_BLOCKMAP[j1][0], par3, par4 + FOOT_HEAD_BLOCKMAP[j1][1]) != this)
 		{
 			par1World.setBlockToAir(par2, par3, par4);
 
@@ -325,8 +325,8 @@ public class BlockBed extends BlockDirectional
 
 		for (int k1 = 0; k1 <= 1; ++k1)
 		{
-			int l1 = par1 - footBlockToHeadBlockMap[j1][0] * k1 - 1;
-			int i2 = par3 - footBlockToHeadBlockMap[j1][1] * k1 - 1;
+			int l1 = par1 - FOOT_HEAD_BLOCKMAP[j1][0] * k1 - 1;
+			int i2 = par3 - FOOT_HEAD_BLOCKMAP[j1][1] * k1 - 1;
 			int j2 = l1 + 2;
 			int k2 = i2 + 2;
 
@@ -363,8 +363,8 @@ public class BlockBed extends BlockDirectional
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 
-		ret.add(new ItemStack(TFCItems.Hide,1,2));
-		ret.add(new ItemStack(TFCBlocks.Thatch,2,0));
+		ret.add(new ItemStack(TFCItems.hide,1,2));
+		ret.add(new ItemStack(TFCBlocks.thatch,2,0));
 		return ret;
 	}
 
@@ -387,8 +387,8 @@ public class BlockBed extends BlockDirectional
 		if (par6EntityPlayer.capabilities.isCreativeMode && isBlockHeadOfBed(par5))
 		{
 			int i1 = getDirection(par5);
-			par2 -= footBlockToHeadBlockMap[i1][0];
-			par4 -= footBlockToHeadBlockMap[i1][1];
+			par2 -= FOOT_HEAD_BLOCKMAP[i1][0];
+			par4 -= FOOT_HEAD_BLOCKMAP[i1][1];
 
 			if (par1World.getBlock(par2, par3, par4) == this)
 				par1World.setBlockToAir(par2, par3, par4);

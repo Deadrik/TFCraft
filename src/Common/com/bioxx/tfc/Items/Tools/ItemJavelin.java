@@ -44,7 +44,7 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 		this.weaponDamage = damage;
 		this.weaponRangeDamage = damage;
 		this.setMaxDamage(par2EnumToolMaterial.getMaxUses()/2);
-		setCreativeTab(TFCTabs.TFCWeapons);
+		setCreativeTab(TFCTabs.TFC_WEAPONS);
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 		name = name.replace("IgEx ", "");
 		name = name.replace("Sed ", "");
 		name = name.replace("MM ", "");
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/" + name);
+		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + "tools/" + name);
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		Block b = world.getBlock(x, y, z);
-		return b == TFCBlocks.ToolRack;
+		return b == TFCBlocks.toolRack;
 	}
 
 	/**
