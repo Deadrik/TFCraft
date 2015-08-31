@@ -602,7 +602,7 @@ public class WAILAData implements IWailaDataProvider
 		// Fluid Amount
 		if (fluid != null)
 		{
-			currenttip.add(String.valueOf(fluid.amount) + "/" + String.valueOf(te.getMaxLiquid()) + " mB");
+			currenttip.add(fluid.amount + "/" + te.getMaxLiquid() + " mB");
 		}
 
 		// Sealed Date
@@ -724,7 +724,7 @@ public class WAILAData implements IWailaDataProvider
 			if (hours > 0)
 			{
 				float percent = Helper.roundNumber(Math.min(100 - ((hours / TFCOptions.bloomeryBurnTime) * 100), 100), 10);
-				currenttip.add(hours + " " + TFC_Core.translate("gui.hoursRemaining") + " (" + String.valueOf(percent) + "%)");
+				currenttip.add(hours + " " + TFC_Core.translate("gui.hoursRemaining") + " (" + percent + "%)");
 			}
 		}
 
@@ -741,7 +741,7 @@ public class WAILAData implements IWailaDataProvider
 		int percentGrowth = (int) Math.min((growth / crop.numGrowthStages) * 100, 100);
 
 		if (percentGrowth < 100)
-			currenttip.add(TFC_Core.translate("gui.growth") + " : " + String.valueOf(percentGrowth) + "%");
+			currenttip.add(TFC_Core.translate("gui.growth") + " : " + percentGrowth + "%");
 		else
 			currenttip.add(TFC_Core.translate("gui.growth") + " : " + TFC_Core.translate("gui.mature"));
 
@@ -904,7 +904,7 @@ public class WAILAData implements IWailaDataProvider
 			{
 				String name = recipe.getOutItemStack().getDisplayName() + " : ";
 				int percent = (int) (100.0 * wovenStrings / maxStrings);
-				currenttip.add(TFC_Core.translate("gui.weaving") + " " + name + String.valueOf(percent) + "%");
+				currenttip.add(TFC_Core.translate("gui.weaving") + " " + name + percent + "%");
 			}
 		}
 

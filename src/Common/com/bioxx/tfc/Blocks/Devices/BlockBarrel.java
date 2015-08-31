@@ -222,7 +222,7 @@ public class BlockBarrel extends BlockTerraContainer
 		int j = 0;
 		String s = this.getUnlocalizedName();
 		for(int i = 0; i < woodNames.length;i++)
-			j = s.substring(s.indexOf("l", s.length())) == ((ItemBarrels)(TFCItems.barrel)).metaNames[i] ? i : 0;
+			j = s.substring(s.indexOf('l', s.length())) == ((ItemBarrels) (TFCItems.barrel)).metaNames[i] ? i : 0;
 		return new ItemStack(TFCItems.barrel, 1, j);
 	}
 

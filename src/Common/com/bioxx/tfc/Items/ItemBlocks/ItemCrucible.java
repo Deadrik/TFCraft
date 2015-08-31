@@ -13,11 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 
-import com.bioxx.tfc.Core.Metal.Alloy;
-import com.bioxx.tfc.Core.Metal.AlloyManager;
-import com.bioxx.tfc.Core.Metal.AlloyMetal;
-import com.bioxx.tfc.Core.Metal.MetalPair;
-import com.bioxx.tfc.Core.Metal.MetalRegistry;
+import com.bioxx.tfc.Core.Metal.*;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.Constant.Global;
@@ -78,7 +74,7 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 
 	public boolean addMetal(Metal m, float amt)
 	{
-		if(getTotalMetal()+amt <= 3000 && m.name != "Unknown")
+		if (getTotalMetal() + amt <= 3000 && !"Unknown".equals(m.name))
 		{
 			if(metals.containsKey(m.name))
 			{

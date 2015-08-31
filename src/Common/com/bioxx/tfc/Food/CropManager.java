@@ -34,7 +34,7 @@ public class CropManager
 	public CropIndex getCropFromName(String n)
 	{
 		for(CropIndex pi : crops)
-			if(pi.cropName.toLowerCase().equals(n))
+			if (pi.cropName.equalsIgnoreCase(n))
 				return pi;
 		return null;
 	} 

@@ -151,7 +151,7 @@ public class BlockLoom extends BlockTerraContainer
 		int j = 0;
 		String s = this.getUnlocalizedName();
 		for(int i = 0; i < woodNames.length;i++)
-			j = s.substring(s.indexOf("l", s.length())) == ((ItemBarrels)(TFCItems.loom)).metaNames[i] ? i : 0;
+			j = s.substring(s.indexOf('l', s.length())) == ((ItemBarrels) (TFCItems.loom)).metaNames[i] ? i : 0;
 		return new ItemStack(TFCItems.loom, 1, j);
 	}
 

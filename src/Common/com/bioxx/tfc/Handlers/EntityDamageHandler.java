@@ -66,10 +66,10 @@ public class EntityDamageHandler
 			event.ammount = 100;
 		else if(event.source.isExplosion())
 			event.ammount *= 30;
-		else if(event.source.damageType == "player" || event.source.damageType == "mob" || event.source.damageType == "arrow")
+		else if ("player".equals(event.source.damageType) || "mob".equals(event.source.damageType) || "arrow".equals(event.source.damageType))
 		{
 			event.ammount = applyArmorCalculations(entity, event.source, event.ammount);
-			if(event.source.damageType == "arrow")
+			if ("arrow".equals(event.source.damageType))
 			{
 				Entity e = ((EntityDamageSourceIndirect)event.source).getSourceOfDamage();
 				if(e instanceof EntityJavelin)

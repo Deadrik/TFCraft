@@ -5,10 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import mcp.mobius.waila.api.IWailaConfigHandler;
-import mcp.mobius.waila.api.IWailaDataAccessor;
-import mcp.mobius.waila.api.IWailaDataProvider;
-import mcp.mobius.waila.api.IWailaRegistrar;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,15 +15,15 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.Metal.Alloy;
-import com.bioxx.tfc.Core.Metal.AlloyManager;
-import com.bioxx.tfc.Core.Metal.AlloyMetal;
-import com.bioxx.tfc.Core.Metal.MetalPair;
-import com.bioxx.tfc.Core.Metal.MetalRegistry;
+import com.bioxx.tfc.Core.Metal.*;
 import com.bioxx.tfc.TileEntities.TECrucible;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
+import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.api.IWailaDataAccessor;
+import mcp.mobius.waila.api.IWailaDataProvider;
+import mcp.mobius.waila.api.IWailaRegistrar;
 
 public class WCrucible implements IWailaDataProvider
 {
@@ -129,7 +125,7 @@ public class WCrucible implements IWailaDataProvider
 
 	public boolean addMetal(Metal m, float amt)
 	{
-		if (getTotalMetal() + amt <= 3000 && m.name != "Unknown")
+		if (getTotalMetal() + amt <= 3000 && !"Unknown".equals(m.name))
 		{
 			if (metals.containsKey(m.name))
 				metals.get(m.name).amount += amt;
