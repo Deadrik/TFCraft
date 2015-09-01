@@ -28,6 +28,7 @@ import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockCustomLeaves extends BlockLeaves implements IShearable
@@ -247,7 +248,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 							entityplayer.addExhaustion(0.045F);
 							if(world.rand.nextInt(100) < 11)
 								dropBlockAsItem(world, i + x, j + y, k + z, new ItemStack(TFCItems.stick, 1));
-							else if (world.rand.nextInt(100) < 4)
+							else if (world.rand.nextInt(100) < 4 && TFCOptions.enableSaplingDrops)
 								dropSapling(world, i + x, j + y, k + z, meta);
 							removeLeaves(world, i + x, j + y, k + z);
 							super.harvestBlock(world, entityplayer, i + x, j + y, k + z, meta);
@@ -270,7 +271,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 			entityplayer.addExhaustion(0.025F);
 			if(world.rand.nextInt(100) < 28)
 				dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.stick, 1));
-			else if (world.rand.nextInt(100) < 6)
+			else if (world.rand.nextInt(100) < 6 && TFCOptions.enableSaplingDrops)
 				dropSapling(world, i, j, k, meta);
 
 				super.harvestBlock(world, entityplayer, i, j, k, meta);

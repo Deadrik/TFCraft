@@ -12,6 +12,7 @@ public class TFCOptions
 	public static boolean enableNEIHiding = true;
 	public static boolean enablePowderKegs = true;
 	public static boolean enableBetterGrass = true;
+	public static boolean enableSaplingDrops = true;
 	public static boolean enableDebugMode;
 	public static boolean onionsAreGross;
 	public static boolean generateSmoke;
