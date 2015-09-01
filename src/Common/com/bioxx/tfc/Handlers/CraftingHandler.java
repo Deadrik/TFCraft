@@ -85,37 +85,7 @@ public class CraftingHandler
 			}
 
 			// Achievements
-			if (item instanceof ItemCustomPickaxe)
-			{
-				player.triggerAchievement(TFC_Achievements.achPickaxe);
-			}
-			else if (item instanceof ItemCustomSaw)
-			{
-				player.triggerAchievement(TFC_Achievements.achSaw);
-			}
-			else if (item instanceof ItemAnvil1 && itemDamage == 2 || item instanceof ItemAnvil2 && (itemDamage == 1 || itemDamage == 2))
-			{
-				player.triggerAchievement(TFC_Achievements.achBronzeAge);
-			}
-			else if (item instanceof ItemMiscToolHead && ((ItemMiscToolHead) (item)).getMaterial() != null && 
-					(((ItemMiscToolHead) (item)).getMaterial() == TFCItems.igInToolMaterial || ((ItemMiscToolHead) (item)).getMaterial() == TFCItems.sedToolMaterial || 
-					((ItemMiscToolHead) (item)).getMaterial() == TFCItems.igExToolMaterial || ((ItemMiscToolHead) (item)).getMaterial() == TFCItems.mMToolMaterial))
-			{
-				player.triggerAchievement(TFC_Achievements.achStoneAge);
-
-				if (item == TFCItems.stoneKnifeHead && itemstack.stackSize == 2)
-				{
-					player.triggerAchievement(TFC_Achievements.achTwoKnives);
-				}
-			}
-			else if (item == Item.getItemFromBlock(TFCBlocks.blastFurnace))
-				player.triggerAchievement(TFC_Achievements.achBlastFurnace);
-			else if (item == TFCItems.clayBall && itemstack.getItemDamage() == 1)
-				player.triggerAchievement(TFC_Achievements.achFireClay);
-			else if (item == Item.getItemFromBlock(TFCBlocks.crucible))
-				player.triggerAchievement(TFC_Achievements.achCrucible);
-			else if (item == TFCItems.unknownIngot)
-				player.triggerAchievement(TFC_Achievements.achUnknown);
+			triggerAchievements(player, itemstack, item, itemDamage);
 
 			// Packet Sending
 			if (item == Item.getItemFromBlock(TFCBlocks.workbench))
@@ -144,101 +114,54 @@ public class CraftingHandler
 			}
 
 			// NBT Transfer - Need to also do down in preCraft for shift-clicking.
-			if (item instanceof ItemIngot)
-			{
-				float temperature = 0;
-				for(int i = 0; i < iinventory.getSizeInventory(); i++)
-				{
-					if(iinventory.getStackInSlot(i) == null)
-						continue;
-					if(iinventory.getStackInSlot(i).getItem() instanceof ItemMeltedMetal)
-					{
-						temperature = TFC_ItemHeat.getTemp(iinventory.getStackInSlot(i));
-						if (player.worldObj.rand.nextInt(20) == 0)
-							player.worldObj.playSoundAtEntity(player, TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
-						else
-							TFC_Core.giveItemToPlayer(new ItemStack(TFCItems.ceramicMold, 1, 1), player);
-					}
-				}
-				TFC_ItemHeat.setTemp(itemstack, temperature);
-			}
-			else if(item instanceof ItemMeltedMetal)
-			{
-				float temperature = 0;
-				for(int i = 0; i < iinventory.getSizeInventory(); i++)
-				{
-					if(iinventory.getStackInSlot(i) == null)
-						continue;
-					if(iinventory.getStackInSlot(i).getItem() instanceof ItemIngot )
-						temperature = TFC_ItemHeat.getTemp(iinventory.getStackInSlot(i));
-				}
-				TFC_ItemHeat.setTemp(itemstack, temperature);
-			}
-			else if (item == TFCItems.potterySmallVessel && itemDamage == 0)
-			{
-				int color = -1;
-				for(int i = 0; i < iinventory.getSizeInventory(); i++)
-				{
-					if(iinventory.getStackInSlot(i) == null)
-						continue;
-
-					int[] ids = OreDictionary.getOreIDs(iinventory.getStackInSlot(i));
-					float[] c = null;
-					for(int id : ids)
-					{
-						String name = OreDictionary.getOreName(id);
-						for (int j = 0; j < Global.DYE_NAMES.length; j++)
-						{
-							if (name.equals(Global.DYE_NAMES[j]))
-							{
-								c = EntitySheep.fleeceColorTable[j];
-								break;
-							}
-						}
-					}
-
-					if(c != null)
-					{
-						int r = (int)(c[0]*255);
-						int g = (int)(c[1]*255);
-						int b = (int)(c[2]*255);
-						r = r << 16;
-						g = g << 8;
-
-						color += r += g += b;
-					}
-				}
-
-				if(color != -1)
-				{
-					NBTTagCompound nbt = null;
-					if(itemstack.hasTagCompound())
-						nbt = itemstack.getTagCompound();
-					else
-						nbt = new NBTTagCompound();
-
-					nbt.setInteger("color", color);
-					itemstack.setTagCompound(nbt);
-				}
-			}
-
-			for(int i = 0; i < iinventory.getSizeInventory(); i++)
-			{
-				if(iinventory.getStackInSlot(i) == null)
-					continue;
-
-				// Only transfer the tag when making something out of a tool head. Don't transfer when crafting things with the completed tool.
-				// Note: If crafting recipes with armor or completed tools to further refine them are ever added, the instanceof will need to be updated. -Kitty
-				if (iinventory.getStackInSlot(i).getItem() instanceof ItemMiscToolHead && 
-						iinventory.getStackInSlot(i).hasTagCompound() && iinventory.getStackInSlot(i).getTagCompound().hasKey("craftingTag"))
-				{
-					AnvilManager.setCraftTag(itemstack, AnvilManager.getCraftTag(iinventory.getStackInSlot(i)));
-				}
-			}
+			transferNBT(false, player, itemstack, iinventory);
 		}
 	}
 
 	public static void preCraft(EntityPlayer player, ItemStack itemstack, IInventory iinventory)
+	{
+		triggerAchievements(player, itemstack, itemstack.getItem(), itemstack.getItemDamage());
+		transferNBT(true, player, itemstack, iinventory);
+	}
+
+	public static void triggerAchievements(EntityPlayer player, ItemStack itemstack, Item item, int itemDamage)
+	{
+		if (item instanceof ItemCustomPickaxe)
+		{
+			player.triggerAchievement(TFC_Achievements.achPickaxe);
+		}
+		else if (item instanceof ItemCustomSaw)
+		{
+			player.triggerAchievement(TFC_Achievements.achSaw);
+		}
+		else if (item instanceof ItemAnvil1 && itemDamage == 2 || item instanceof ItemAnvil2 && (itemDamage == 1 || itemDamage == 2))
+		{
+			player.triggerAchievement(TFC_Achievements.achBronzeAge);
+		}
+		else if (item instanceof ItemMiscToolHead &&((ItemMiscToolHead) (item)).getMaterial() != null &&
+					(((ItemMiscToolHead) (item)).getMaterial() == TFCItems.igInToolMaterial ||
+						((ItemMiscToolHead) (item)).getMaterial() == TFCItems.sedToolMaterial ||
+						((ItemMiscToolHead) (item)).getMaterial() == TFCItems.igExToolMaterial ||
+						((ItemMiscToolHead) (item)).getMaterial() == TFCItems.mMToolMaterial))
+		{
+			player.triggerAchievement(TFC_Achievements.achStoneAge);
+
+			if (item == TFCItems.stoneKnifeHead && itemstack.stackSize == 2) // stackSize is 0 for shift-click, so this will not trigger
+			{
+				player.triggerAchievement(TFC_Achievements.achTwoKnives);
+			}
+		}
+		else if (item == Item.getItemFromBlock(TFCBlocks.blastFurnace))
+			player.triggerAchievement(TFC_Achievements.achBlastFurnace);
+		else if (item == TFCItems.clayBall && itemDamage == 1)
+			player.triggerAchievement(TFC_Achievements.achFireClay);
+		else if (item == Item.getItemFromBlock(TFCBlocks.crucible))
+			player.triggerAchievement(TFC_Achievements.achCrucible);
+		else if (item == TFCItems.unknownIngot)
+			player.triggerAchievement(TFC_Achievements.achUnknown);
+	}
+
+	public static void transferNBT(boolean clearContents, EntityPlayer player, ItemStack itemstack, IInventory iinventory)
 	{
 		Item item = itemstack.getItem();
 		int itemDamage = itemstack.getItemDamage();
@@ -256,7 +179,8 @@ public class CraftingHandler
 						player.worldObj.playSoundAtEntity(player, TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
 					else
 						TFC_Core.giveItemToPlayer(new ItemStack(TFCItems.ceramicMold, 1, 1), player);
-					iinventory.setInventorySlotContents(i, null);
+					if (clearContents)
+						iinventory.setInventorySlotContents(i, null);
 				}
 			}
 			TFC_ItemHeat.setTemp(itemstack, temperature);
