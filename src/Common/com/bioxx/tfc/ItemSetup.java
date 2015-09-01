@@ -27,10 +27,7 @@ import com.bioxx.tfc.Items.Pottery.ItemPotteryJug;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryMold;
 import com.bioxx.tfc.Items.Pottery.ItemPotterySmallVessel;
 import com.bioxx.tfc.Items.Tools.*;
-import com.bioxx.tfc.api.Armor;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
@@ -642,7 +639,7 @@ public class ItemSetup extends TFCItems {
 		//MudBrick = new ItemMudBrick().setUnlocalizedName("Mud Brick").setTextureName("Mud Brick Base");
 
 		// Food related items
-		SetupFood();
+		setupFood();
 
 		fertilizer = new ItemFertilizer().setUnlocalizedName("Fertilizer").setCreativeTab(TFCTabs.TFC_MATERIALS);
 
@@ -711,7 +708,7 @@ public class ItemSetup extends TFCItems {
 	/**
 	 * 
 	 */
-	private static void SetupFood()
+	private static void setupFood()
 	{
 		foodList = new ArrayList<Item>();
 
@@ -876,6 +873,35 @@ public class ItemSetup extends TFCItems {
 
 	private static void registerMetals()
 	{
+		Global.BISMUTH = new Metal("Bismuth", TFCItems.bismuthUnshaped, TFCItems.bismuthIngot);
+		Global.BISMUTHBRONZE = new Metal("Bismuth Bronze", TFCItems.bismuthBronzeUnshaped, TFCItems.bismuthBronzeIngot);
+		Global.BLACKBRONZE = new Metal("Black Bronze", TFCItems.blackBronzeUnshaped, TFCItems.blackBronzeIngot);
+		Global.BLACKSTEEL = new Metal("Black Steel", TFCItems.blackSteelUnshaped, TFCItems.blackSteelIngot);
+		Global.BLUESTEEL = new Metal("Blue Steel", TFCItems.blueSteelUnshaped, TFCItems.blueSteelIngot);
+		Global.BRASS = new Metal("Brass", TFCItems.brassUnshaped, TFCItems.brassIngot);
+		Global.BRONZE = new Metal("Bronze", TFCItems.bronzeUnshaped, TFCItems.bronzeIngot);
+		Global.COPPER = new Metal("Copper", TFCItems.copperUnshaped, TFCItems.copperIngot);
+		Global.GOLD = new Metal("Gold", TFCItems.goldUnshaped, TFCItems.goldIngot);
+		Global.WROUGHTIRON = new Metal("Wrought Iron", TFCItems.wroughtIronUnshaped, TFCItems.wroughtIronIngot);
+		Global.LEAD = new Metal("Lead", TFCItems.leadUnshaped, TFCItems.leadIngot);
+		Global.NICKEL = new Metal("Nickel", TFCItems.nickelUnshaped, TFCItems.nickelIngot);
+		Global.PIGIRON = new Metal("Pig Iron", TFCItems.pigIronUnshaped, TFCItems.pigIronIngot);
+		Global.PLATINUM = new Metal("Platinum", TFCItems.platinumUnshaped, TFCItems.platinumIngot);
+		Global.REDSTEEL = new Metal("Red Steel", TFCItems.redSteelUnshaped, TFCItems.redSteelIngot);
+		Global.ROSEGOLD = new Metal("Rose Gold", TFCItems.roseGoldUnshaped, TFCItems.roseGoldIngot);
+		Global.SILVER = new Metal("Silver", TFCItems.silverUnshaped, TFCItems.silverIngot);
+		Global.STEEL = new Metal("Steel", TFCItems.steelUnshaped, TFCItems.steelIngot);
+		Global.STERLINGSILVER = new Metal("Sterling Silver", TFCItems.sterlingSilverUnshaped, TFCItems.sterlingSilverIngot);
+		Global.TIN = new Metal("Tin", TFCItems.tinUnshaped, TFCItems.tinIngot);
+		Global.ZINC = new Metal("Zinc", TFCItems.zincUnshaped, TFCItems.zincIngot);
+		Global.WEAKSTEEL = new Metal("Weak Steel", TFCItems.weakSteelUnshaped, TFCItems.weakSteelIngot);
+		Global.HCBLACKSTEEL = new Metal("HC Black Steel", TFCItems.highCarbonBlackSteelUnshaped, TFCItems.highCarbonBlackSteelIngot);
+		Global.WEAKREDSTEEL = new Metal("Weak Red Steel", TFCItems.weakRedSteelUnshaped, TFCItems.weakRedSteelIngot);
+		Global.HCREDSTEEL = new Metal("HC Red Steel", TFCItems.highCarbonRedSteelUnshaped, TFCItems.highCarbonRedSteelIngot);
+		Global.WEAKBLUESTEEL = new Metal("Weak Blue Steel", TFCItems.weakBlueSteelUnshaped, TFCItems.weakBlueSteelIngot);
+		Global.HCBLUESTEEL = new Metal("HC Blue Steel", TFCItems.highCarbonBlueSteelUnshaped, TFCItems.highCarbonBlueSteelIngot);
+		Global.UNKNOWN = new Metal("Unknown", TFCItems.unknownUnshaped, TFCItems.unknownIngot, false);
+
 		MetalRegistry.instance.addMetal(Global.BISMUTH, Alloy.EnumTier.TierI);
 		MetalRegistry.instance.addMetal(Global.BISMUTHBRONZE, Alloy.EnumTier.TierI);
 		MetalRegistry.instance.addMetal(Global.BLACKBRONZE, Alloy.EnumTier.TierI);
