@@ -171,25 +171,10 @@ public class CraftingHandler
 		{
 			player.triggerAchievement(TFC_Achievements.achBronzeAge);
 		}
-		else if (item instanceof ItemMiscToolHead &&((ItemMiscToolHead) (item)).getMaterial() != null &&
-					(((ItemMiscToolHead) (item)).getMaterial() == TFCItems.igInToolMaterial ||
-						((ItemMiscToolHead) (item)).getMaterial() == TFCItems.sedToolMaterial ||
-						((ItemMiscToolHead) (item)).getMaterial() == TFCItems.igExToolMaterial ||
-						((ItemMiscToolHead) (item)).getMaterial() == TFCItems.mMToolMaterial))
-		{
-			player.triggerAchievement(TFC_Achievements.achStoneAge);
-
-			if (item == TFCItems.stoneKnifeHead && itemstack.stackSize == 2) // stackSize is 0 for shift-click, so this will not trigger
-			{
-				player.triggerAchievement(TFC_Achievements.achTwoKnives);
-			}
-		}
 		else if (item == Item.getItemFromBlock(TFCBlocks.blastFurnace))
 			player.triggerAchievement(TFC_Achievements.achBlastFurnace);
 		else if (item == TFCItems.clayBall && itemDamage == 1)
 			player.triggerAchievement(TFC_Achievements.achFireClay);
-		else if (item == Item.getItemFromBlock(TFCBlocks.crucible))
-			player.triggerAchievement(TFC_Achievements.achCrucible);
 		else if (item == TFCItems.unknownIngot)
 			player.triggerAchievement(TFC_Achievements.achUnknown);
 	}

@@ -6,13 +6,17 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Containers.Slots.SlotSpecialCraftingOutput;
+import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.Items.Tools.ItemMiscToolHead;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
 
@@ -103,7 +107,27 @@ public class ContainerSpecialCrafting extends ContainerTFC
 
 		// The crafting output is only set if the input was consumed
 		if (decreasedStack)
+		{
 			this.craftResult.setInventorySlotContents(0, result);
+
+			// Trigger Achievements
+			if (result != null && invPlayer.player != null)
+			{
+				Item item = result.getItem();
+				if (item instanceof ItemMiscToolHead &&((ItemMiscToolHead) (item)).getMaterial() != null &&
+					(((ItemMiscToolHead) (item)).getMaterial() == TFCItems.igInToolMaterial ||
+						((ItemMiscToolHead) (item)).getMaterial() == TFCItems.sedToolMaterial ||
+						((ItemMiscToolHead) (item)).getMaterial() == TFCItems.igExToolMaterial ||
+						((ItemMiscToolHead) (item)).getMaterial() == TFCItems.mMToolMaterial))
+				{
+					invPlayer.player.triggerAchievement(TFC_Achievements.achStoneAge);
+					if (item == TFCItems.stoneKnifeHead && result.stackSize == 2)
+						invPlayer.player.triggerAchievement(TFC_Achievements.achTwoKnives);
+				}
+				else if (item == Item.getItemFromBlock(TFCBlocks.crucible))
+					invPlayer.player.triggerAchievement(TFC_Achievements.achCrucible);
+			}
+		}
 	}
 
 	/**
