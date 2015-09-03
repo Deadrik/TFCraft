@@ -108,7 +108,176 @@ public class FoodCraftingHandler
 		}
 	}
 
-	private static ItemStack processFood(EntityPlayer player, ItemStack craftResult, IInventory iinventory) 
+	/*
+	 * Updates the items in the input slots of the crafting grid.
+	 * NOTE: The craftResult input is not altered in this method. By the time that this is called,
+	 * craftResult should already have all the NBT data updated due to updateOutput called by
+	 * ContainerPlayerTFC.onCraftMatrixChanged()
+	 */
+	private static ItemStack processFood(EntityPlayer player, ItemStack craftResult, IInventory craftingInv) 
+	{
+		float finalWeight = 0;
+		float finalDecay = 0;
+		int[] fuelTasteProfile = new int[] {0,0,0,0,0};
+		int[] cookedTasteProfile = new int[] {0,0,0,0,0};
+		float cookedTime = 0;
+		int foodCount = 0;
+		int itemCount = 0;
+		int foodSlot = 0; //This is used when cutting food to track where the food originally was since the merge code may remove the stack
+		for(int i = 0; i < craftingInv.getSizeInventory(); i++)
+		{
+			if(craftingInv.getStackInSlot(i) == null)
+				continue;
+			itemCount++;
+			ItemStack is = craftingInv.getStackInSlot(i);
+			if (is.getItem() instanceof ItemFoodTFC && is.hasTagCompound() && is.getTagCompound().hasKey("foodWeight"))
+			{
+				foodSlot = i;
+				if(foodCount == 0)
+				{
+					fuelTasteProfile = Food.getFuelProfile(is);
+					cookedTasteProfile = Food.getCookedProfile(is);
+					cookedTime = Food.getCooked(is);
+				}
+
+				float inputWeight = Food.getWeight(is);
+				final float oldInputWeight = inputWeight;
+				float inputDecayPercent = Food.getDecay(is) / oldInputWeight;
+				float inputDecay = Food.getDecay(is);
+				float weightChange = 0;
+
+				// If the smoked or cooked profile is not the same than we can't combine
+				// Check if we can add any more to this bundle of food
+				if (finalWeight < Global.FOOD_MAX_WEIGHT && 
+						Food.isSameSmoked(cookedTasteProfile, Food.getCookedProfile(is)) &&
+						Food.isSameSmoked(fuelTasteProfile, Food.getFuelProfile(is)) &&
+						((int) Food.getCooked(is) - 600) / 120 == ((int) cookedTime - 600) / 120)
+				{
+					weightChange = Math.min((Global.FOOD_MAX_WEIGHT - finalWeight), inputWeight);
+					inputWeight -= weightChange;
+					finalWeight += weightChange;
+				}
+
+				// Only add the decay if food was actually added to the bundle
+				if(inputWeight != oldInputWeight)
+				{
+					if (inputWeight == 0) // The input is being completely combined
+					{
+						if (finalDecay < 0) // Still within the 24 hour grace period
+						{
+							if (inputDecay > finalDecay) // The input has more decay than the output
+								finalDecay = inputDecay; // Set the output's decay to the input's decay
+						}
+						else
+							finalDecay += inputDecay; // Add the decay from the input to the output
+					}
+					else
+					{
+						float decayChange = weightChange * inputDecayPercent;
+						inputDecay -= decayChange; // Remove the decay from the input
+						if (finalDecay < 0) // Still within the 24 hour grace period
+						{
+							if (decayChange > finalDecay) // The input is losing more decay than what the output currently has
+								finalDecay = decayChange; // Set the output's decay to the amount removed from the input
+						}
+						else
+							finalDecay += decayChange; // Add the decay to the output
+					}
+					foodCount++;
+				}
+
+				if (inputWeight > 0) // If we're leaving a piece of food in the crafting grid
+				{
+					Food.setWeight(is, Helper.roundNumber(inputWeight, 100));
+					Food.setDecay(is, Helper.roundNumber(inputDecay, 100));
+					is.stackSize += 1;
+					if(is.stackSize > 2)
+						is.stackSize = 2;
+				}
+			}
+		}
+
+		if(craftResult.stackSize == 0)
+			craftResult.stackSize = 1;
+
+		if (itemCount == 1) // Trimming decay with a knife from the inventory, not the crafting grid.
+		{
+			if (finalDecay > 0)
+			{
+				for(int i = 0; i < player.inventory.getSizeInventory(); i++) 
+				{
+					if(player.inventory.getStackInSlot(i) == null)
+						continue;
+					ItemStack stack = player.inventory.getStackInSlot(i);
+					if (stack.getItem() instanceof ItemKnife)
+					{
+						// Damage the Knife
+						stack.damageItem(1, player);
+						if (stack.getItemDamage() == stack.getMaxDamage())
+							player.inventory.setInventorySlotContents(i, null);
+						// No need to increase the stack size since the knife isn't in the crafting grid
+						break;
+					}
+				}
+			}
+		}
+		else
+		{
+			// Check if we are doing anything other than combining the food
+			for(int i = 0; i < craftingInv.getSizeInventory(); i++) 
+			{
+				if(craftingInv.getStackInSlot(i) == null)
+					continue;
+				ItemStack itemstack = craftingInv.getStackInSlot(i);
+				boolean fullInv = isInvFull(player);
+
+				if (itemstack.getItem() instanceof ItemKnife && fullInv)
+				{
+					if (!FoodCraftingHandler.preCrafted)
+					{
+						// Increase the knife's stack size so it will remain in the grid when crafting completes
+						itemstack.stackSize += 1;
+						if (itemstack.stackSize > 2)
+							itemstack.stackSize = 2;
+					}
+				}
+
+				if (itemstack.getItem() instanceof ItemKnife && (!fullInv || !FoodCraftingHandler.preCrafted))
+				{
+					if (finalDecay > 0) // Trimming Decay
+					{
+						FoodCraftingHandler.damageItem(player, craftingInv, i, itemstack.getItem());
+					}
+					else if (finalDecay <= 0) // Splitting food in half
+					{
+						if (finalWeight / 2f < 1) // Food is too small to split
+						{
+							// Increase the knife's stack size so it will remain in the grid when crafting completes
+							itemstack.stackSize += 1;
+							if (itemstack.stackSize > 2)
+								itemstack.stackSize = 2;
+						}
+						else
+						{
+							FoodCraftingHandler.damageItem(player, craftingInv, i, itemstack.getItem());
+							Food.setWeight(craftingInv.getStackInSlot(foodSlot), Helper.roundNumber(finalWeight / 2f, 100));
+							// Increase the food's stack size so it will remain in the grid when crafting completes
+							craftingInv.getStackInSlot(foodSlot).stackSize += 1;
+							if (craftingInv.getStackInSlot(foodSlot).stackSize > 2)
+								craftingInv.getStackInSlot(foodSlot).stackSize = 2;
+						}
+					}
+				}
+			}
+		}
+		return craftResult;
+	}
+
+	/*
+	 * Updates the output slot of the crafting grid, transferring taste profiles,
+	 * weights, decay amounts, cooking profiles, etc.
+	 */
+	public static void updateOutput(EntityPlayer player, ItemStack craftResult, IInventory craftingInv)
 	{
 		float finalWeight = 0;
 		float finalDecay = 0;
@@ -117,8 +286,8 @@ public class FoodCraftingHandler
 		int saltyMod = -1;
 		int bitterMod = -1;
 		int umamiMod = -1;
-		int[] fuelTasteProfile = new int[] {0,0,0,0,0};
-		int[] cookedTasteProfile = new int[] {0,0,0,0,0};
+		int[] fuelTasteProfile = new int[] { 0, 0, 0, 0, 0 };
+		int[] cookedTasteProfile = new int[] { 0, 0, 0, 0, 0 };
 		float cookedTime = 0;
 		String infusion = null;
 		boolean salted = true;
@@ -128,17 +297,15 @@ public class FoodCraftingHandler
 		int driedAmt = 0;
 		int foodCount = 0;
 		int itemCount = 0;
-		int foodSlot = 0; //This is used when cutting food to track where the food originally was since the merge code may remove the stack
-		for(int i = 0; i < iinventory.getSizeInventory(); i++)
+		for (int i = 0; i < craftingInv.getSizeInventory(); i++ )
 		{
-			if(iinventory.getStackInSlot(i) == null)
+			if (craftingInv.getStackInSlot(i) == null)
 				continue;
-			itemCount++;
-			if(iinventory.getStackInSlot(i).hasTagCompound() && iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight"))
+			itemCount++ ;
+			ItemStack is = craftingInv.getStackInSlot(i);
+			if (is.getItem() instanceof ItemFoodTFC && is.hasTagCompound() && is.getTagCompound().hasKey("foodWeight"))
 			{
-				ItemStack is = iinventory.getStackInSlot(i);
-				foodSlot = i;
-				if(foodCount == 0)
+				if (foodCount == 0)
 				{
 					fuelTasteProfile = Food.getFuelProfile(is);
 					cookedTasteProfile = Food.getCookedProfile(is);
@@ -146,99 +313,142 @@ public class FoodCraftingHandler
 					infusion = Food.getInfusion(is);
 					driedAmt = Food.getDried(is);
 				}
-				if(sweetMod == -1)
-					sweetMod = ((ItemFoodTFC)is.getItem()).getTasteSweetMod(is);
-				else if(sweetMod != ((ItemFoodTFC)is.getItem()).getTasteSweetMod(is))
+				if (sweetMod == -1)
+					sweetMod = ((ItemFoodTFC) is.getItem()).getTasteSweetMod(is);
+				else if (sweetMod != ((ItemFoodTFC) is.getItem()).getTasteSweetMod(is))
 					sweetMod = 0;
 
-				if(sourMod == -1)
-					sourMod = ((ItemFoodTFC)is.getItem()).getTasteSourMod(is);
-				else if(sourMod != ((ItemFoodTFC)is.getItem()).getTasteSourMod(is))
+				if (sourMod == -1)
+					sourMod = ((ItemFoodTFC) is.getItem()).getTasteSourMod(is);
+				else if (sourMod != ((ItemFoodTFC) is.getItem()).getTasteSourMod(is))
 					sourMod = 0;
 
-				if(saltyMod == -1)
-					saltyMod = ((ItemFoodTFC)is.getItem()).getTasteSaltyMod(is);
-				else if(saltyMod != ((ItemFoodTFC)is.getItem()).getTasteSaltyMod(is))
+				if (saltyMod == -1)
+					saltyMod = ((ItemFoodTFC) is.getItem()).getTasteSaltyMod(is);
+				else if (saltyMod != ((ItemFoodTFC) is.getItem()).getTasteSaltyMod(is))
 					saltyMod = 0;
 
-				if(bitterMod == -1)
-					bitterMod = ((ItemFoodTFC)is.getItem()).getTasteBitterMod(is);
-				else if(bitterMod != ((ItemFoodTFC)is.getItem()).getTasteBitterMod(is))
+				if (bitterMod == -1)
+					bitterMod = ((ItemFoodTFC) is.getItem()).getTasteBitterMod(is);
+				else if (bitterMod != ((ItemFoodTFC) is.getItem()).getTasteBitterMod(is))
 					bitterMod = 0;
 
-				if(umamiMod == -1)
-					umamiMod = ((ItemFoodTFC)is.getItem()).getTasteSavoryMod(is);
-				else if(umamiMod != ((ItemFoodTFC)is.getItem()).getTasteSavoryMod(is))
+				if (umamiMod == -1)
+					umamiMod = ((ItemFoodTFC) is.getItem()).getTasteSavoryMod(is);
+				else if (umamiMod != ((ItemFoodTFC) is.getItem()).getTasteSavoryMod(is))
 					umamiMod = 0;
 
-				float myWeight = Food.getWeight(is);
-				final float myOldWeight = myWeight;
-				float myDecayPercent = Food.getDecay(is) / myOldWeight;
-				float myDecay = Food.getDecay(is);
-				float w = 0;
+				float inputWeight = Food.getWeight(is);
+				final float oldInputWeight = inputWeight;
+				float inputDecayPercent = Food.getDecay(is) / oldInputWeight;
+				float inputDecay = Food.getDecay(is);
+				float weightChange = 0;
 
 				salted = salted && Food.isSalted(is);
 				pickled = pickled && Food.isPickled(is);
 				brined = brined && Food.isBrined(is);
 				dried = dried && Food.isDried(is);
 
-				//If the smoked or cooked profile is not the same than we cant combine
-				//Check if we can add any more to this bundle of food
-				if (finalWeight < Global.FOOD_MAX_WEIGHT && 
-						Food.isSameSmoked(cookedTasteProfile, Food.getCookedProfile(is)) &&
-						Food.isSameSmoked(fuelTasteProfile, Food.getFuelProfile(is)) &&
-						((int)Food.getCooked(is)-600)/120 == ((int)cookedTime-600)/120)
+				// If the smoked or cooked profile is not the same than we can't combine
+				// Check if we can add any more to this bundle of food
+				if (finalWeight < Global.FOOD_MAX_WEIGHT &&
+					Food.isSameSmoked(cookedTasteProfile, Food.getCookedProfile(is)) &&
+					Food.isSameSmoked(fuelTasteProfile, Food.getFuelProfile(is)) &&
+					((int) Food.getCooked(is) - 600) / 120 == ((int) cookedTime - 600) / 120)
 				{
-					w = Math.min((Global.FOOD_MAX_WEIGHT-finalWeight), myWeight);
-					myWeight -= w;
-					finalWeight += w;
+					weightChange = Math.min((Global.FOOD_MAX_WEIGHT - finalWeight), inputWeight);
+					inputWeight -= weightChange;
+					finalWeight += weightChange;
 				}
 
-				//we only add the decay if food was actually added to the bundle
-				if(myWeight != myOldWeight)
+				// Only add the decay if food was actually added to the bundle
+				if (inputWeight != oldInputWeight)
 				{
-					if(myWeight == 0)
+					if (inputWeight == 0) // The input is being completely combined
 					{
-						if(finalDecay < 0)
+						if (finalDecay < 0) // Still within the 24 hour grace period
 						{
-							if(myDecay > finalDecay)
-								finalDecay = myDecay;
+							if (inputDecay > finalDecay) // The input has more decay than the output
+								finalDecay = inputDecay; // Set the output's decay to the input's decay
 						}
 						else
-							finalDecay+=myDecay;
+							finalDecay += inputDecay; // Add the decay from the input to the output
 					}
 					else
 					{
-						float d = w * myDecayPercent;
-						myDecay-= d;
-						if(finalDecay < 0)
+						float decayChange = weightChange * inputDecayPercent;
+						inputDecay -= decayChange; // Remove the decay from the input
+						if (finalDecay < 0) // Still within the 24 hour grace period
 						{
-							if(myDecay > finalDecay)
-								finalDecay = myDecay;
+							if (decayChange > finalDecay) // The input is losing more decay than what the output currently has
+								finalDecay = decayChange; // Set the output's decay to the amount removed from the input
 						}
 						else
-							finalDecay += d;
+							finalDecay += decayChange; // Add the decay to the output
 					}
-					foodCount++;
-				}
-
-				if(myWeight > 0)
-				{
-					Food.setWeight(is, Helper.roundNumber(myWeight,100));
-					Food.setDecay(is, Helper.roundNumber(myDecay,100));
-					is.stackSize = is.stackSize + 1;
-					if(is.stackSize > 2)
-						is.stackSize = 2;
+					foodCount++ ;
 				}
 			}
 		}
 
-		craftResult = ItemFoodTFC.createTag(craftResult, Helper.roundNumber(finalWeight,10), Helper.roundNumber(finalDecay,100));
-		if(sweetMod != 0) craftResult.getTagCompound().setInteger("tasteSweetMod", sweetMod);
-		if(sourMod != 0) craftResult.getTagCompound().setInteger("tasteSourMod", sourMod);
-		if(saltyMod != 0) craftResult.getTagCompound().setInteger("tasteSaltyMod", saltyMod);
-		if(bitterMod != 0) craftResult.getTagCompound().setInteger("tasteBitterMod", bitterMod);
-		if(umamiMod != 0) craftResult.getTagCompound().setInteger("tasteUmamiMod", umamiMod);	
+		if (itemCount == 1) // Trimming decay with a knife from the inventory, not the crafting grid.
+		{
+			if (finalDecay > 0)
+			{
+				for (int i = 0; i < player.inventory.getSizeInventory(); i++ )
+				{
+					if (player.inventory.getStackInSlot(i) == null)
+						continue;
+					if (player.inventory.getStackInSlot(i).getItem() instanceof ItemKnife)
+					{
+						finalWeight -= finalDecay;
+						finalDecay = 0;
+						break;
+					}
+				}
+			}
+		}
+		else
+		{
+			// Check if we are doing anything other than combining the food
+			for (int i = 0; i < craftingInv.getSizeInventory(); i++ )
+			{
+				if (craftingInv.getStackInSlot(i) == null)
+					continue;
+				// If we're salting the food
+				if (craftingInv.getStackInSlot(i).getItem() == TFCItems.powder && craftingInv.getStackInSlot(i).getItemDamage() == 9)
+				{
+					salted = true;
+				}
+				else if (craftingInv.getStackInSlot(i).getItem() instanceof ItemKnife)
+				{
+					if (finalDecay > 0) // Trimming Decay
+					{
+						finalWeight -= finalDecay;
+						finalDecay = 0;
+					}
+					else if (finalDecay <= 0) // Splitting food in half
+					{
+						if (finalWeight / 2f >= 1) // Must be big enough to split
+						{
+							finalWeight /= 2f;
+						}
+					}
+				}
+			}
+		}
+
+		craftResult = ItemFoodTFC.createTag(craftResult, Helper.roundNumber(finalWeight, 100), Helper.roundNumber(finalDecay, 100));
+		if (sweetMod != 0)
+			craftResult.getTagCompound().setInteger("tasteSweetMod", sweetMod);
+		if (sourMod != 0)
+			craftResult.getTagCompound().setInteger("tasteSourMod", sourMod);
+		if (saltyMod != 0)
+			craftResult.getTagCompound().setInteger("tasteSaltyMod", saltyMod);
+		if (bitterMod != 0)
+			craftResult.getTagCompound().setInteger("tasteBitterMod", bitterMod);
+		if (umamiMod != 0)
+			craftResult.getTagCompound().setInteger("tasteUmamiMod", umamiMod);
 
 		if (cookedTime > 0)
 			Food.setCooked(craftResult, cookedTime);
@@ -275,84 +485,8 @@ public class FoodCraftingHandler
 		if (infusion != null)
 			Food.setInfusion(craftResult, infusion);
 
-		if(craftResult.stackSize == 0)
+		if (craftResult.stackSize == 0)
 			craftResult.stackSize = 1;
-
-		if(itemCount == 1)
-		{
-			if(Food.getDecay(craftResult) > 0)
-			{
-				int knifeSlot = -1;
-				for(int i = 0; i < player.inventory.getSizeInventory(); i++) 
-				{
-					if(player.inventory.getStackInSlot(i) == null)
-						continue;
-					if(player.inventory.getStackInSlot(i).getItem() instanceof ItemKnife)
-					{
-						knifeSlot = i;
-						break;
-					}
-				}
-				if(knifeSlot >= 0)
-				{
-					player.inventory.getStackInSlot(knifeSlot).damageItem(1 , player);
-					if(player.inventory.getStackInSlot(knifeSlot).getItemDamage() == player.inventory.getStackInSlot(knifeSlot).getMaxDamage())
-						player.inventory.setInventorySlotContents(knifeSlot, null);
-					float decay = Food.getDecay(craftResult);
-					Food.setDecay(craftResult, 0);
-					Food.setWeight(craftResult, Food.getWeight(craftResult)-decay);
-				}
-			}
-		}
-		else
-		{
-			//Check if we are doing anything other than combining the food
-			for(int i = 0; i < iinventory.getSizeInventory(); i++) 
-			{
-				if(iinventory.getStackInSlot(i) == null)
-					continue;
-				//If we're salting the food
-				if(iinventory.getStackInSlot(i).getItem() == TFCItems.powder && iinventory.getStackInSlot(i).getItemDamage() == 9)
-					Food.setSalted(craftResult, true);
-				boolean f = isInvFull(player);
-
-				if(iinventory.getStackInSlot(i).getItem() instanceof ItemKnife && f)
-				{
-					if (!FoodCraftingHandler.preCrafted)
-					{
-						Food.setWeight(craftResult, finalWeight);
-						iinventory.getStackInSlot(i).stackSize = 2;
-					}
-				}
-
-				if(iinventory.getStackInSlot(i).getItem() instanceof ItemKnife && (!f || !FoodCraftingHandler.preCrafted))
-				{
-					if(Food.getDecay(craftResult) > 0)
-					{
-						FoodCraftingHandler.damageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
-						float decay = Food.getDecay(craftResult);
-						Food.setDecay(craftResult, 0);
-						Food.setWeight(craftResult, Food.getWeight(craftResult)-decay);
-					}
-					else if(Food.getDecay(craftResult) <= 0)
-					{
-						if(finalWeight/2f < 1)
-						{
-							Food.setWeight(craftResult, finalWeight);
-							iinventory.getStackInSlot(i).stackSize = 2;
-						}
-						else
-						{
-							FoodCraftingHandler.damageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
-							Food.setWeight(iinventory.getStackInSlot(foodSlot),finalWeight/2);
-							Food.setWeight(craftResult,finalWeight/2);
-							iinventory.getStackInSlot(foodSlot).stackSize = 2;
-						}
-					}
-				}
-			}
-		}
-		return craftResult;
 	}
 
 	public static boolean isInvFull(EntityPlayer player)
@@ -447,7 +581,7 @@ public class FoodCraftingHandler
 				if (is.getItemDamage() != 0 || entityplayer.capabilities.isCreativeMode)
 				{
 					iinventory.setInventorySlotContents(index, is);
-					iinventory.getStackInSlot(index).stackSize = iinventory.getStackInSlot(index).stackSize + 1;
+					iinventory.getStackInSlot(index).stackSize += 1;
 					if(iinventory.getStackInSlot(index).stackSize > 2)
 						iinventory.getStackInSlot(index).stackSize = 2;
 				}

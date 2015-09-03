@@ -113,15 +113,48 @@ public class CraftingHandler
 				}
 			}
 
-			// NBT Transfer - Need to also do down in preCraft for shift-clicking.
-			transferNBT(false, player, itemstack, iinventory);
+			if (!player.worldObj.isRemote && item instanceof ItemIngot)
+			{
+				for (int i = 0; i < iinventory.getSizeInventory(); i++ )
+				{
+					if (iinventory.getStackInSlot(i) == null)
+						continue;
+					if (iinventory.getStackInSlot(i).getItem() instanceof ItemMeltedMetal)
+					{
+						if (player.worldObj.rand.nextInt(20) == 0)
+							player.worldObj.playSoundAtEntity(player, TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
+						else
+							TFC_Core.giveItemToPlayer(new ItemStack(TFCItems.ceramicMold, 1, 1), player);
+
+						break;
+					}
+				}
+			}
 		}
 	}
 
 	public static void preCraft(EntityPlayer player, ItemStack itemstack, IInventory iinventory)
 	{
 		triggerAchievements(player, itemstack, itemstack.getItem(), itemstack.getItemDamage());
-		transferNBT(true, player, itemstack, iinventory);
+
+		if (itemstack.getItem() instanceof ItemIngot)
+		{
+			for (int i = 0; i < iinventory.getSizeInventory(); i++ )
+			{
+				if (iinventory.getStackInSlot(i) == null)
+					continue;
+				if (iinventory.getStackInSlot(i).getItem() instanceof ItemMeltedMetal)
+				{
+					if (player.worldObj.rand.nextInt(20) == 0)
+						player.worldObj.playSoundAtEntity(player, TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
+					else
+						TFC_Core.giveItemToPlayer(new ItemStack(TFCItems.ceramicMold, 1, 1), player);
+
+					iinventory.setInventorySlotContents(i, null);
+					break;
+				}
+			}
+		}
 	}
 
 	public static void triggerAchievements(EntityPlayer player, ItemStack itemstack, Item item, int itemDamage)
@@ -161,6 +194,9 @@ public class CraftingHandler
 			player.triggerAchievement(TFC_Achievements.achUnknown);
 	}
 
+	/*
+	 * Called during ContainerPlayerTFC's onCraftMatrixChanged to update the item in the output slot.
+	 */
 	public static void transferNBT(boolean clearContents, EntityPlayer player, ItemStack itemstack, IInventory iinventory)
 	{
 		Item item = itemstack.getItem();
@@ -175,12 +211,6 @@ public class CraftingHandler
 				if(iinventory.getStackInSlot(i).getItem() instanceof ItemMeltedMetal)
 				{
 					temperature = TFC_ItemHeat.getTemp(iinventory.getStackInSlot(i));
-					if(player.worldObj.rand.nextInt(20) == 0)
-						player.worldObj.playSoundAtEntity(player, TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
-					else
-						TFC_Core.giveItemToPlayer(new ItemStack(TFCItems.ceramicMold, 1, 1), player);
-					if (clearContents)
-						iinventory.setInventorySlotContents(i, null);
 				}
 			}
 			TFC_ItemHeat.setTemp(itemstack, temperature);

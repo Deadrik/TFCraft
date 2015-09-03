@@ -2,15 +2,13 @@ package com.bioxx.tfc.Containers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ContainerPlayer;
-import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotCrafting;
+import net.minecraft.inventory.*;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Containers.Slots.SlotArmorTFC;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Food.ItemMeal;
 import com.bioxx.tfc.Handlers.CraftingHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
@@ -68,6 +66,28 @@ public class ContainerPlayerTFC extends ContainerPlayer
 		}
 		PlayerInventory.addExtraEquipables(this, playerInv, 8, 90, false);
 		this.onCraftMatrixChanged(this.craftMatrix);
+	}
+
+	/**
+	 * Callback for when the crafting matrix is changed.
+	 */
+	@Override
+	public void onCraftMatrixChanged(IInventory iinventory)
+	{
+		super.onCraftMatrixChanged(iinventory);
+
+		Slot craftOut = (Slot) this.inventorySlots.get(0);
+		if (craftOut != null && craftOut.getHasStack())
+		{
+			ItemStack craftResult = craftOut.getStack();
+			if (craftResult != null)
+			{
+				if (craftResult.getItem() instanceof ItemFoodTFC)
+					FoodCraftingHandler.updateOutput(thePlayer, craftResult, craftMatrix);
+				else
+					CraftingHandler.transferNBT(false, thePlayer, craftResult, craftMatrix);
+			}
+		}
 	}
 
 	@Override
