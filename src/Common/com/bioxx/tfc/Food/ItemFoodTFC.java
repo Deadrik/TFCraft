@@ -16,6 +16,9 @@ import net.minecraft.world.World;
 
 import net.minecraftforge.client.MinecraftForgeClient;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFCTabs;
@@ -130,6 +133,23 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		if(Food.isCooked(stack) && cookedIcon != null)
 			return cookedIcon;
 		return this.itemIcon;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean requiresMultipleRenderPasses()
+	{
+		return true;
+	}
+
+	/*
+	 * requiresMultipleRenderPasses is true so the dropped item uses the
+	 * correct icon but we don't actually need the extra render passes.
+	 */
+	@Override
+	public int getRenderPasses(int metadata)
+	{
+		return 1;
 	}
 
 	/*@Override
