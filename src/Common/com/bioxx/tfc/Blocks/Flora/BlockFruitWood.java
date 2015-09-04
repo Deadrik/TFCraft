@@ -16,9 +16,10 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import net.minecraftforge.oredict.OreDictionary;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -69,18 +70,17 @@ public class BlockFruitWood extends BlockTerraContainer
 		//we need to make sure the player has the correct tool out
 		boolean isAxeorSaw = false;
 		ItemStack equip = entityplayer.getCurrentEquippedItem();
-		if(equip!=null)
+		if (equip != null)
 		{
-			for(int cnt = 0; cnt < Recipes.axes.length && !isAxeorSaw; cnt++)
+			int[] equipIDs = OreDictionary.getOreIDs(equip);
+			for (int id : equipIDs)
 			{
-				if(equip.getItem() == Recipes.axes[cnt])
+				String name = OreDictionary.getOreName(id);
+				if ("itemAxe".equals(name) || "itemSaw".equals(name))
+				{
 					isAxeorSaw = true;
-			}
-
-			for(int cnt = 0; cnt < Recipes.saws.length && !isAxeorSaw; cnt++)
-			{
-				if(equip.getItem() == Recipes.saws[cnt])
-					isAxeorSaw = true;
+					break;
+				}
 			}
 		}
 		if(isAxeorSaw)

@@ -398,6 +398,12 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("materialWool", new ItemStack(TFCItems.wool, 1, WILD));
 
 		//Tools
+		for (Item axe : Recipes.axes)
+			OreDictionary.registerOre("itemAxe", new ItemStack(axe, 1, WILD));
+
+		for (int i = 0; i < 4; i++ )
+			OreDictionary.registerOre("itemAxeStone", new ItemStack(Recipes.axes[i], 1, WILD));
+
 		for (Item chisel : Recipes.chisels)
 			OreDictionary.registerOre("itemChisel", new ItemStack(chisel, 1, WILD));
 
@@ -409,6 +415,9 @@ public class TFC_OreDictionary
 
 		for (Item saw : Recipes.saws)
 			OreDictionary.registerOre("itemSaw", new ItemStack(saw, 1, WILD));
+
+		for (Item scythe : Recipes.scythes)
+			OreDictionary.registerOre("itemScythe", new ItemStack(scythe, 1, WILD));
 
 		//Miscellaneous Items
 		OreDictionary.registerOre("lumpClay", new ItemStack(Items.clay_ball));

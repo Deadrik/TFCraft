@@ -1,5 +1,7 @@
 package com.bioxx.tfc.Handlers;
 
+import java.util.List;
+
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -51,18 +53,22 @@ public class CraftingHandler
 			// Tool Damaging
 			if(item == TFCItems.stoneBrick)
 			{
-				handleItem(player, iinventory, Recipes.chisels);
+				List<ItemStack> chisels = OreDictionary.getOres("itemChisel", false);
+				handleItem(player, iinventory, chisels);
 			}
 			else if(item == TFCItems.singlePlank ||
 					item == Item.getItemFromBlock(TFCBlocks.woodSupportH) || item == Item.getItemFromBlock(TFCBlocks.woodSupportH2) ||
 					item == Item.getItemFromBlock(TFCBlocks.woodSupportV) || item == Item.getItemFromBlock(TFCBlocks.woodSupportV2))
 			{
-				handleItem(player, iinventory, Recipes.axes);
-				handleItem(player, iinventory, Recipes.saws);
+				List<ItemStack> axes = OreDictionary.getOres("itemAxe", false);
+				List<ItemStack> saws = OreDictionary.getOres("itemSaw", false);
+				handleItem(player, iinventory, axes);
+				handleItem(player, iinventory, saws);
 			}
 			else if (item == TFCItems.wool)
 			{
-				handleItem(player, iinventory, Recipes.knives);
+				List<ItemStack> knives = OreDictionary.getOres("itemKnife", false);
+				handleItem(player, iinventory, knives);
 				int size = 0;
 				for (int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
@@ -81,7 +87,8 @@ public class CraftingHandler
 			}
 			else if (item == TFCItems.powder && itemDamage == 0)
 			{
-				handleItem(player, iinventory, Recipes.hammers);
+				List<ItemStack> hammers = OreDictionary.getOres("itemHammer", false);
+				handleItem(player, iinventory, hammers);
 			}
 
 			// Achievements
@@ -295,6 +302,17 @@ public class CraftingHandler
 				continue;
 			for(int j = 0; j < items.length; j++)
 				damageItem(entityplayer, iinventory, i, items[j]);
+		}
+	}
+
+	public static void handleItem(EntityPlayer entityplayer, IInventory iinventory, List<ItemStack> items)
+	{
+		for (int i = 0; i < iinventory.getSizeInventory(); i++ )
+		{
+			if (iinventory.getStackInSlot(i) == null)
+				continue;
+			for (ItemStack is : items)
+				damageItem(entityplayer, iinventory, i, is.getItem());
 		}
 	}
 

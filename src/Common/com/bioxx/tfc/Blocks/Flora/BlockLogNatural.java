@@ -17,12 +17,13 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import net.minecraftforge.oredict.OreDictionary;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
-import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
 
@@ -120,36 +121,36 @@ public class BlockLogNatural extends BlockTerra
 	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int meta)
 	{		
 		//we need to make sure the player has the correct tool out
-		boolean isAxeorSaw = false;
+		boolean isAxe = false;
 		boolean isHammer = false;
 		ItemStack equip = entityplayer.getCurrentEquippedItem();
 		if(!world.isRemote)
 		{
-			if(equip!=null)
+			if (equip != null)
 			{
-				for(int cnt = 0; cnt < Recipes.axes.length && !isAxeorSaw; cnt++)
+				int[] equipIDs = OreDictionary.getOreIDs(equip);
+				for (int id : equipIDs)
 				{
-					if(equip.getItem() == Recipes.axes[cnt])
+					String name = OreDictionary.getOreName(id);
+					if ("itemAxe".equals(name))
 					{
-						isAxeorSaw = true;
-						if(cnt < 4)
-							isStone = true;
+						isAxe = true;
+						// Don't break so we can check if it is a stone axe
 					}
-				}
-				/*for(int cnt = 0; cnt < Recipes.Saws.length && !isAxeorSaw; cnt++)
-				{
-					if(equip.getItem() == Recipes.Saws[cnt])
+					else if ("itemAxeStone".equals(name))
 					{
-						isAxeorSaw = true;
+						isAxe = true;
+						isStone = true;
+						break;
 					}
-				}*/
-				for(int cnt = 0; cnt < Recipes.hammers.length && !isAxeorSaw; cnt++)
-				{
-					if(equip.getItem() == Recipes.hammers[cnt])
+					else if ("itemHammer".equals(name))
+					{
 						isHammer = true;
+						break;
+					}
 				}
 
-				if (isAxeorSaw)
+				if (isAxe)
 				{
 					damage = -1;
 					processTree(world, x, y, z, meta, equip);

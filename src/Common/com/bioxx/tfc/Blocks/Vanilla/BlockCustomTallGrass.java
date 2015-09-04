@@ -17,6 +17,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import net.minecraftforge.common.IShearable;
+import net.minecraftforge.oredict.OreDictionary;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -87,19 +88,18 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 		super.harvestBlock(world, player, i, j, k, l);
 
 		ItemStack is = player.inventory.getCurrentItem();
-		for(int c = 0; c < Recipes.knives.length && is != null; c++)
+		int[] equipIDs = OreDictionary.getOreIDs(is);
+
+		for (int id : equipIDs)
 		{
-			if(is.getItem() == Recipes.knives[c])
+			String name = OreDictionary.getOreName(id);
+			if ("itemKnife".equals(name))
 			{
 				createStraw(world, player, i, j, k);
 				is.damageItem(1, player);
 				break;
 			}
-		}
-
-		for(int c = 0; c < Recipes.scythes.length && is != null; c++)
-		{
-			if(is.getItem() == Recipes.scythes[c])
+			else if ("itemScythe".equals(name))
 			{
 				//Spawn the straw for the block that we've already destroyed
 				createStraw(world, player, i, j, k );

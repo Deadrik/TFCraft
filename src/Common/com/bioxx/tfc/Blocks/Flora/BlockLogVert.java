@@ -13,11 +13,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import net.minecraftforge.oredict.OreDictionary;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Blocks.BlockTerra;
-import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
@@ -35,39 +36,37 @@ public class BlockLogVert extends BlockTerra
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int meta)
 	{
-		//we need to make sure teh palyer has the correct tool out
+		//we need to make sure the player has the correct tool out
 		boolean isAxeorSaw = false;
 		boolean isHammer = false;
 		ItemStack equip = entityplayer.getCurrentEquippedItem();
-		if(equip!=null)
+		if (equip != null)
 		{
-			for(int cnt = 0; cnt < Recipes.axes.length && !isAxeorSaw; cnt++)
+			int[] equipIDs = OreDictionary.getOreIDs(equip);
+			for (int id : equipIDs)
 			{
-				if(equip.getItem() == Recipes.axes[cnt])
+				String name = OreDictionary.getOreName(id);
+				if ("itemAxe".equals(name) || "itemSaw".equals(name))
+				{
 					isAxeorSaw = true;
-			}
-
-			for(int cnt = 0; cnt < Recipes.saws.length && !isAxeorSaw; cnt++)
-			{
-				if(equip.getItem() == Recipes.saws[cnt])
-					isAxeorSaw = true;
-			}
-
-			for(int cnt = 0; cnt < Recipes.hammers.length && !isAxeorSaw; cnt++)
-			{
-				if(equip.getItem() == Recipes.hammers[cnt])
+					break;
+				}
+				else if ("itemHammer".equals(name))
+				{
 					isHammer = true;
+					break;
+				}
 			}
-		}
 
-		if(isAxeorSaw)
-		{
-			super.harvestBlock(world, entityplayer, x, y, z, meta);
-		}
-		else if(isHammer)
-		{
-			EntityItem item = new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, new ItemStack(TFCItems.stick, 1 + world.rand.nextInt(3)));
-			world.spawnEntityInWorld(item);
+			if (isAxeorSaw)
+			{
+				super.harvestBlock(world, entityplayer, x, y, z, meta);
+			}
+			else if (isHammer)
+			{
+				EntityItem item = new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, new ItemStack(TFCItems.stick, 1 + world.rand.nextInt(3)));
+				world.spawnEntityInWorld(item);
+			}
 		}
 		else
 		{

@@ -1,15 +1,18 @@
 package com.bioxx.tfc.Handlers;
 
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import net.minecraftforge.oredict.OreDictionary;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 
-import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.Tools.ItemKnife;
 import com.bioxx.tfc.api.Food;
@@ -53,7 +56,8 @@ public class FoodCraftingHandler
 				craftResult.getItem() == TFCItems.barleyGrain && gridHasItem(iinventory, TFCItems.barleyWhole) ||
 				craftResult.getItem() == TFCItems.riceGrain && gridHasItem(iinventory, TFCItems.riceWhole))
 			{
-				handleItem(e.player, iinventory, Recipes.knives);
+				List<ItemStack> knives = OreDictionary.getOres("itemKnife", false);
+				handleItem(e.player, iinventory, knives);
 
 				for(int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
@@ -512,7 +516,8 @@ public class FoodCraftingHandler
 			craftResult.getItem() == TFCItems.barleyGrain && gridHasItem(iinventory, TFCItems.barleyWhole) ||
 			craftResult.getItem() == TFCItems.riceGrain && gridHasItem(iinventory, TFCItems.riceWhole))
 		{
-			handleItem(player, iinventory, Recipes.knives);
+			List<ItemStack> knives = OreDictionary.getOres("itemKnife", false);
+			handleItem(player, iinventory, knives);
 			for(int i = 0; i < iinventory.getSizeInventory(); i++)
 			{
 				if(iinventory.getStackInSlot(i) == null)
@@ -569,6 +574,18 @@ public class FoodCraftingHandler
 				damageItem(entityplayer,iinventory,i,items[j]);
 		}
 	}
+
+	public static void handleItem(EntityPlayer entityplayer, IInventory iinventory, List<ItemStack> items)
+	{
+		for (int i = 0; i < iinventory.getSizeInventory(); i++ )
+		{
+			if (iinventory.getStackInSlot(i) == null)
+				continue;
+			for (ItemStack is : items)
+				damageItem(entityplayer, iinventory, i, is.getItem());
+		}
+	}
+
 	public static void damageItem(EntityPlayer entityplayer, IInventory iinventory, int i, Item item)
 	{
 		if(iinventory.getStackInSlot(i).getItem() == item) 
