@@ -93,13 +93,13 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 		for (int id : equipIDs)
 		{
 			String name = OreDictionary.getOreName(id);
-			if ("itemKnife".equals(name))
+			if (name.startsWith("itemKnife"))
 			{
 				createStraw(world, player, i, j, k);
 				is.damageItem(1, player);
 				break;
 			}
-			else if ("itemScythe".equals(name))
+			else if (name.startsWith("itemScythe"))
 			{
 				//Spawn the straw for the block that we've already destroyed
 				createStraw(world, player, i, j, k );

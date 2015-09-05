@@ -46,12 +46,12 @@ public class BlockLogVert extends BlockTerra
 			for (int id : equipIDs)
 			{
 				String name = OreDictionary.getOreName(id);
-				if ("itemAxe".equals(name) || "itemSaw".equals(name))
+				if (name.startsWith("itemAxe") || name.startsWith("itemSaw"))
 				{
 					isAxeorSaw = true;
 					break;
 				}
-				else if ("itemHammer".equals(name))
+				else if (name.startsWith("itemHammer"))
 				{
 					isHammer = true;
 					break;

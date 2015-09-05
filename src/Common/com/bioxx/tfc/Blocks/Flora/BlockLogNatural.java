@@ -132,18 +132,16 @@ public class BlockLogNatural extends BlockTerra
 				for (int id : equipIDs)
 				{
 					String name = OreDictionary.getOreName(id);
-					if ("itemAxe".equals(name))
+					if (name.startsWith("itemAxe"))
 					{
 						isAxe = true;
-						// Don't break so we can check if it is a stone axe
+						if (name.startsWith("itemAxeStone"))
+						{
+							isStone = true;
+							break;
+						}
 					}
-					else if ("itemAxeStone".equals(name))
-					{
-						isAxe = true;
-						isStone = true;
-						break;
-					}
-					else if ("itemHammer".equals(name))
+					else if (name.startsWith("itemHammer"))
 					{
 						isHammer = true;
 						break;

@@ -76,7 +76,7 @@ public class BlockFruitWood extends BlockTerraContainer
 			for (int id : equipIDs)
 			{
 				String name = OreDictionary.getOreName(id);
-				if ("itemAxe".equals(name) || "itemSaw".equals(name))
+				if (name.startsWith("itemAxe") || name.startsWith("itemSaw"))
 				{
 					isAxeorSaw = true;
 					break;
