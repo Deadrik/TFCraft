@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -81,40 +82,42 @@ public class PlayerInteractHandler
 	@SubscribeEvent
 	public void onItemPickup(EntityItemPickupEvent event)
 	{
-		if(event.item.getEntityItem().getItem() == Items.stick)
+		EntityItem item = event.item;
+		ItemStack is = item.getEntityItem();
+		EntityPlayer player = event.entityPlayer;
+
+		if (is.getItem() == Items.stick)
 		{
-			int count = event.item.getEntityItem().stackSize;
-			event.item.delayBeforeCanPickup = 100;
-			event.item.setDead();
-			event.item.setInvisible(true);
-			Random rand = event.entityPlayer.worldObj.rand;
-			event.entityPlayer.worldObj.playSoundAtEntity(event.entityPlayer, "random.pop", 0.2F, ((rand.nextFloat() - rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+			int count = is.stackSize;
+			item.delayBeforeCanPickup = 100;
+			item.setDead();
+			item.setInvisible(true);
+			Random rand = player.worldObj.rand;
+			player.worldObj.playSoundAtEntity(player, "random.pop", 0.2F, ((rand.nextFloat() - rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 			ItemStack tfcSticks = new ItemStack(TFCItems.stick, count);
-			event.entityPlayer.inventory.addItemStackToInventory(tfcSticks);
+			player.inventory.addItemStackToInventory(tfcSticks);
 		}
-
-		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(Blocks.planks))
+		else if (is.getItem() == Item.getItemFromBlock(Blocks.planks) && is.getItemDamage() == 0) // Only Oak
 		{
-			int count = event.item.getEntityItem().stackSize;
-			event.item.delayBeforeCanPickup = 100;
-			event.item.setDead();
-			event.item.setInvisible(true);
-			Random rand = event.entityPlayer.worldObj.rand;
-			event.entityPlayer.worldObj.playSoundAtEntity(event.entityPlayer, "random.pop", 0.2F, ((rand.nextFloat() - rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+			int count = is.stackSize;
+			item.delayBeforeCanPickup = 100;
+			item.setDead();
+			item.setInvisible(true);
+			Random rand = player.worldObj.rand;
+			player.worldObj.playSoundAtEntity(player, "random.pop", 0.2F, ((rand.nextFloat() - rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 			ItemStack tfcPlanks = new ItemStack(TFCBlocks.planks, count);
-			event.entityPlayer.inventory.addItemStackToInventory(tfcPlanks);
+			player.inventory.addItemStackToInventory(tfcPlanks);
 		}
-
-		if (event.item.getEntityItem().getItem() == Item.getItemFromBlock(Blocks.lit_pumpkin))
+		else if (is.getItem() == Item.getItemFromBlock(Blocks.lit_pumpkin))
 		{
-			int count = event.item.getEntityItem().stackSize;
-			event.item.delayBeforeCanPickup = 100;
-			event.item.setDead();
-			event.item.setInvisible(true);
-			Random rand = event.entityPlayer.worldObj.rand;
-			event.entityPlayer.worldObj.playSoundAtEntity(event.entityPlayer, "random.pop", 0.2F, ((rand.nextFloat() - rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+			int count = is.stackSize;
+			item.delayBeforeCanPickup = 100;
+			item.setDead();
+			item.setInvisible(true);
+			Random rand = player.worldObj.rand;
+			player.worldObj.playSoundAtEntity(player, "random.pop", 0.2F, ((rand.nextFloat() - rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 			ItemStack jackOLanternTFC = new ItemStack(TFCBlocks.litPumpkin, count);
-			event.entityPlayer.inventory.addItemStackToInventory(jackOLanternTFC);
+			player.inventory.addItemStackToInventory(jackOLanternTFC);
 		}
 	}
 }
