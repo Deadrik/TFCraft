@@ -9,6 +9,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapelessRecipes;
 
 import net.minecraftforge.common.config.ConfigCategory;
@@ -18,9 +20,13 @@ import net.minecraftforge.common.config.Property;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.Util.CaseInsensitiveHashMap;
 import com.bioxx.tfc.WorldGen.Generators.OreSpawnData;
+import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
+import com.bioxx.tfc.api.Crafting.ShapedRecipesTFC;
 import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCCrafting;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.TFCOptions;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -58,6 +64,7 @@ public class TFC_ConfigFiles
 	// Crafting
 	public static final String CONVERSION = "Conversion";
 	public static final String ENABLE_VANILLA_RECIPES = "Enable Vanilla Recipes";
+	public static final String CRAFTING_OPTIONS = "Crafting Options";
 
 	// Used internally to move from top to colors.<name>
 	private static final String[] COLOR_CATEGORIES = {COLOR_NUTRIENT_A, COLOR_NUTRIENT_B, COLOR_NUTRIENT_C, CROP_FERTILIZER_COLOR, ANVIL_RULE_COLOR0, ANVIL_RULE_COLOR1, ANVIL_RULE_COLOR2};
@@ -146,6 +153,7 @@ public class TFC_ConfigFiles
 
 		craftingConfig.setCategoryLanguageKey(CONVERSION, "config.gui.TFCCrafting.conversion");
 		craftingConfig.setCategoryLanguageKey(ENABLE_VANILLA_RECIPES, "config.gui.TFCCrafting.vanilla");
+		craftingConfig.setCategoryLanguageKey(CRAFTING_OPTIONS, "config.gui.TFCCrafting.options");
 
 		try
 		{
@@ -262,6 +270,48 @@ public class TFC_ConfigFiles
 			new VanillaRecipeOption("woodStairsRecipe", new ItemStack(Blocks.birch_stairs, 4), new ItemStack(Blocks.jungle_stairs, 4), new ItemStack(Blocks.oak_stairs, 4), new ItemStack(Blocks.spruce_stairs, 4), new ItemStack(Blocks.acacia_stairs, 4), new ItemStack(Blocks.dark_oak_stairs, 4));
 			new VanillaRecipeOption("woodToolsRecipe", new ItemStack(Items.wooden_pickaxe), new ItemStack(Items.wooden_axe), new ItemStack(Items.wooden_shovel), new ItemStack(Items.wooden_hoe), new ItemStack(Items.wooden_sword));
 			new VanillaRecipeOption("woolRecipe", new ItemStack(Blocks.wool));
+
+			/**
+			 * Custom SyncingOption for enableBowlsAlwaysBreak
+			 * getRecipes() is unused, but returns an ImmutableList of the bowl crafting recipe for conviniance & consistency.
+			 */
+			new SyncingOption("enableBowlsAlwaysBreak", TFCCrafting.class, craftingConfig, CRAFTING_OPTIONS)
+			{
+				private IRecipe recipesTFC = CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.potteryBowl, 2), new Object[] {
+					"#####",
+					"#####",
+					"#####",
+					" ### ",
+					"#   #", '#', new ItemStack(TFCItems.flatClay, 1, 1)});
+
+				@Override
+				public void apply(boolean enabled) throws IllegalAccessException
+				{
+					TerraFirmaCraft.LOG.info("TEST name {} default {} outCfg {} current {} enabled {}", name, defaultValue, ourConfigValue, currentValue, enabled);
+
+					if (currentValue != enabled) // if we need to change states
+					{
+						recipesTFC.getRecipeOutput().stackSize = enabled ? 4 : 2;
+						if (TFCOptions.enableDebugMode) TerraFirmaCraft.LOG.info("Crafting option {} changed from {} to {}. Stacksize {}", name, currentValue, enabled, recipesTFC.getRecipeOutput().stackSize);
+						field.setBoolean(null, enabled); // Keep the field up to date as well
+						currentValue = enabled;
+					}
+
+					TerraFirmaCraft.LOG.info("enableBowlsAlwaysBreak option {} changed from {} to {}. Stacksize {}", name, currentValue, enabled, recipesTFC.getRecipeOutput().stackSize);
+				}
+
+				@Override
+				public ImmutableList<IRecipe> getRecipes()
+				{
+					return ImmutableList.of(recipesTFC);
+				}
+
+				@Override
+				public String toString()
+				{
+					return name + "[default:" + defaultValue + " current:" + isAplied() + " config:" + inConfig() + " #ofRecipes: 1]";
+				}
+			};
 
 			for (SyncingOption option : SYNCING_OPTION_MAP.values())
 			{

@@ -30,7 +30,7 @@ public class CraftingManagerTFC
 		//System.out.println(new StringBuilder().append(recipes.size()).append(" recipes").toString());
 	}
 
-	public void addRecipe(ItemStack itemstack, Object aobj[])
+	public ShapedRecipesTFC addRecipe(ItemStack itemstack, Object aobj[])
 	{
 		String s = "";
 		int i = 0;
@@ -91,10 +91,12 @@ public class CraftingManagerTFC
 			}
 		}
 
-		recipes.add(new ShapedRecipesTFC(j, k, aitemstack, itemstack));
+		ShapedRecipesTFC shapedRecipesTFC = new ShapedRecipesTFC(j, k, aitemstack, itemstack);
+		recipes.add(shapedRecipesTFC);
+		return shapedRecipesTFC;
 	}
 
-	public void addShapelessRecipe(ItemStack itemstack, Object aobj[])
+	public ShapelessRecipesTFC addShapelessRecipe(ItemStack itemstack, Object aobj[])
 	{
 		ArrayList<ItemStack> arraylist = new ArrayList<ItemStack>();
 		Object aobj1[] = aobj;
@@ -121,8 +123,9 @@ public class CraftingManagerTFC
 				throw new RuntimeException("Invalid shapeless recipy!");
 			}
 		}
-
-		recipes.add(new ShapelessRecipesTFC(itemstack, arraylist));
+		ShapelessRecipesTFC recipesTFC = new ShapelessRecipesTFC(itemstack, arraylist);
+		recipes.add(recipesTFC);
+		return recipesTFC;
 	}
 
 	public ItemStack findMatchingRecipe(InventoryCrafting inventorycrafting, World world)

@@ -887,6 +887,7 @@ public class Recipes
 			" ### ",
 			" ### ",
 			"     ", '#', new ItemStack(TFCItems.flatClay, 1, 1)});
+		/* Moved to TFC_ConfigFiles.firstLoadCrafting(), as it is dependant on a configureation option.
 		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.potteryBowl, 2), new Object[]
 		{
 			"#####",
@@ -894,6 +895,7 @@ public class Recipes
 			"#####",
 			" ### ",
 			"#   #", '#', new ItemStack(TFCItems.flatClay, 1, 1)});
+		*/
 	}
 
 	private static void registerAlloys()

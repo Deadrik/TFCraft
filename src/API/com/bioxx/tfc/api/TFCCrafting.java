@@ -81,4 +81,6 @@ public class TFCCrafting
 	public static boolean woodStairsRecipe;
 	public static boolean woodToolsRecipe;
 	public static boolean woolRecipe;
+
+	public static boolean enableBowlsAlwaysBreak;
 }

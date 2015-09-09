@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.api.TFCCrafting;
 import com.bioxx.tfc.api.TFCItems;
 
 public class ItemSalad extends ItemMeal
@@ -58,8 +59,8 @@ public class ItemSalad extends ItemMeal
 		// If the last of the salad has been eaten
 		if (is.stackSize == 0)
 		{
-			// 50% chance the bowl is broken, and the sound is played
-			if (world.rand.nextInt(2) == 0)
+			// Blows always break OR 50% chance the bowl is broken, and the sound is played
+			if (TFCCrafting.enableBowlsAlwaysBreak || world.rand.nextInt(2) == 0)
 			{
 				world.playSoundAtEntity(player, TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
 			}
