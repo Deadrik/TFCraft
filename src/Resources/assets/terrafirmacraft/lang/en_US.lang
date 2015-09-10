@@ -82,6 +82,8 @@ config.gui.TFCCrafting.conversion.tooltip=WARNING: Conversions for food are irre
 
 config.gui.TFCCrafting.vanilla=Vanilla Crafting Recipes
 
+config.gui.TFCCrafting.options=Crafting Options
+
 #==============
 #= Entities = 
 #==============

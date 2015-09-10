@@ -14,6 +14,9 @@ import com.google.common.collect.ImmutableList;
 import static com.bioxx.tfc.Core.Config.TFC_ConfigFiles.SYNCING_OPTION_MAP;
 
 /**
+ * When the value (config or from server, depending on context) is true the recipes are (re)added to the recipe list. Otherwise they are removed.
+ * This behaviour may be changed by overriding the .apply(boolean) method
+ * Also keeps the static values from the class passed in the constructor in sync with the actual status of things.
  * @author Dries007
  */
 public abstract class SyncingOption
@@ -24,8 +27,8 @@ public abstract class SyncingOption
 	public final Configuration cfg;
 	public final String cat;
 
-	private boolean ourConfigValue;
-	private boolean currentValue;
+	protected boolean ourConfigValue;
+	protected boolean currentValue;
 
 	public SyncingOption(String name, Class<?> clazz, Configuration cfg, String cat) throws NoSuchFieldException, IllegalAccessException
 	{

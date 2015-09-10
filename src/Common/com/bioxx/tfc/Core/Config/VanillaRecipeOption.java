@@ -9,8 +9,7 @@ import com.google.common.collect.ImmutableList;
 
 /**
  * Used to represent the "enable vanilla recipe" option
- * When the value (config or from server, depending on context) is true the recipes are (re)added to the recipe list.
- * Also keeps the static values from the TFCCrafting class in sync with the actual status of things.
+ * This removes the recipes affected in the constructor, to be re-added later if required.
  * @author Dries007
  */
 public class VanillaRecipeOption extends SyncingOption

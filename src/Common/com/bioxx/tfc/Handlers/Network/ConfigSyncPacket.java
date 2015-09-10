@@ -34,7 +34,7 @@ public class ConfigSyncPacket extends AbstractPacket
 		for (SyncingOption option : SYNCING_OPTION_MAP.values())
 		{
 			ByteBufUtils.writeUTF8String(buffer, option.name);
-			buffer.writeBoolean(option.isAplied());
+			buffer.writeBoolean(option.inConfig());
 		}
 	}
 
