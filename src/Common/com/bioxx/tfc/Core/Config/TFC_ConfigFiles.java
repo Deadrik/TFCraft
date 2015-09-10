@@ -287,8 +287,6 @@ public class TFC_ConfigFiles
 				@Override
 				public void apply(boolean enabled) throws IllegalAccessException
 				{
-					TerraFirmaCraft.LOG.info("TEST name {} default {} outCfg {} current {} enabled {}", name, defaultValue, ourConfigValue, currentValue, enabled);
-
 					if (currentValue != enabled) // if we need to change states
 					{
 						recipesTFC.getRecipeOutput().stackSize = enabled ? 4 : 2;
@@ -296,8 +294,6 @@ public class TFC_ConfigFiles
 						field.setBoolean(null, enabled); // Keep the field up to date as well
 						currentValue = enabled;
 					}
-
-					TerraFirmaCraft.LOG.info("enableBowlsAlwaysBreak option {} changed from {} to {}. Stacksize {}", name, currentValue, enabled, recipesTFC.getRecipeOutput().stackSize);
 				}
 
 				@Override
