@@ -43,7 +43,13 @@ public class ItemFruitTreeSapling extends ItemTerra
 				world.isAirBlock(x, y + 1, z) && !world.isRemote)
 		{
 
-			world.setBlock(x, y + 1, z, TFCBlocks.fruitTreeWood, stack.getItemDamage(), 0x2);
+			int damage = stack.getItemDamage();
+			if (damage >= metaNames.length)
+			{
+				damage -= 8;
+				stack.setItemDamage(damage);
+			}
+			world.setBlock(x, y + 1, z, TFCBlocks.fruitTreeWood, damage, 0x2);
 
 			((TEFruitTreeWood)world.getTileEntity(x, y + 1, z)).setTrunk(true);
 			((TEFruitTreeWood)world.getTileEntity(x, y + 1, z)).setHeight(0);
