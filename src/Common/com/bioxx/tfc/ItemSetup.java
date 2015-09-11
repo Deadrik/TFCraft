@@ -957,7 +957,7 @@ public class ItemSetup extends TFCItems {
 
 		Alloy bismuthBronze = new Alloy(Global.BISMUTHBRONZE, Alloy.EnumTier.TierI);
 		bismuthBronze.addIngred(Global.ZINC, 19.99f, 30.01f);
-		bismuthBronze.addIngred(Global.COPPER, 49.99f, 70.01f);
+		bismuthBronze.addIngred(Global.COPPER, 49.99f, 65.01f);
 		bismuthBronze.addIngred(Global.BISMUTH, 9.99f, 20.01f);
 		AlloyManager.INSTANCE.addAlloy(bismuthBronze);
 
@@ -973,14 +973,14 @@ public class ItemSetup extends TFCItems {
 		AlloyManager.INSTANCE.addAlloy(weakSteel);
 
 		Alloy weakRedSteel = new Alloy(Global.WEAKREDSTEEL, Alloy.EnumTier.TierIII);
-		weakRedSteel.addIngred(Global.BLACKSTEEL, 49.99f, 60.01f);
+		weakRedSteel.addIngred(Global.BLACKSTEEL, 49.99f, 55.01f);
 		weakRedSteel.addIngred(Global.ROSEGOLD, 9.99f, 15.01f);
 		weakRedSteel.addIngred(Global.BRASS, 9.99f, 15.01f);
 		weakRedSteel.addIngred(Global.STEEL, 19.99f, 25.01f);
 		AlloyManager.INSTANCE.addAlloy(weakRedSteel);
 
 		Alloy weakBlueSteel = new Alloy(Global.WEAKBLUESTEEL, Alloy.EnumTier.TierIII);
-		weakBlueSteel.addIngred(Global.BLACKSTEEL, 49.99f, 60.01f);
+		weakBlueSteel.addIngred(Global.BLACKSTEEL, 49.99f, 55.01f);
 		weakBlueSteel.addIngred(Global.BISMUTHBRONZE, 9.99f, 15.01f);
 		weakBlueSteel.addIngred(Global.STERLINGSILVER, 9.99f, 15.01f);
 		weakBlueSteel.addIngred(Global.STEEL, 19.99f, 25.01f);

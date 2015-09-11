@@ -13,10 +13,7 @@ import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Metal.*;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
-import com.bioxx.tfc.api.Metal;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
 
@@ -123,7 +120,9 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			if(worldObj.getBlock(xCoord, yCoord - 1, zCoord) == TFCBlocks.forge)
 			{
 				TEForge te = (TEForge) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
-				if(te.fireTemp > temperature)
+				if (te.fireTemp >= 1 && TFCOptions.enableDebugMode)
+					temperature = 2000;
+				else if (te.fireTemp > temperature)
 					temperature++;
 			}
 			if(tempTick > 22)
