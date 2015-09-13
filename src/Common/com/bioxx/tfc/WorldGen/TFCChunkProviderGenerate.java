@@ -464,13 +464,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				float rootBlended = 0.0F;
 				float totalBlendedHeight = 0.0F;
 				byte radius = 2;
-				TFCBiome baseBiome = (TFCBiome)this.biomesForGeneration[x + 2 + (z + 2) * (xSize + 5)];
+				BiomeGenBase baseBiome = this.biomesForGeneration[x + 2 + (z + 2) * (xSize + 5)];
 
 				for (int xR = -radius; xR <= radius; ++xR)
 				{
 					for (int zR = -radius; zR <= radius; ++zR)
 					{
-						TFCBiome blendBiome = (TFCBiome)this.biomesForGeneration[x + xR + 2 + (z + zR + 2) * (xSize + 5)];
+						BiomeGenBase blendBiome = this.biomesForGeneration[x + xR + 2 + (z + zR + 2) * (xSize + 5)];
 						float blendedHeight = this.parabolicField[xR + 2 + (zR + 2) * 5] / 2.0F;
 						if (blendBiome.rootHeight > baseBiome.rootHeight)
 							blendedHeight *= 0.5F;
