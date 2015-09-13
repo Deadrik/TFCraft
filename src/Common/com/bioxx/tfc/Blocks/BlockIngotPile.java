@@ -367,19 +367,30 @@ public class BlockIngotPile extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			if(!world.isSideSolid(x, y - 1, z, ForgeDirection.UP))
+			if ( !world.isSideSolid(x, y - 1, z, ForgeDirection.UP) && world.getTileEntity(x, y, z) instanceof TEIngotPile)
 			{
-				if(world.getBlock(x, y - 1, z) == this && ((TEIngotPile)world.getTileEntity(x, y, z)).storage[0].getItem() == ((TEIngotPile)world.getTileEntity(x, y - 1, z)).storage[0].getItem())
+				TEIngotPile ingotPile = (TEIngotPile) world.getTileEntity(x, y, z);
+				Item ingot = ingotPile.storage[0] != null ? ingotPile.storage[0].getItem() : null;
+
+				if (world.getBlock(x, y - 1, z) == this && world.getTileEntity(x, y - 1, z) instanceof TEIngotPile)
 				{
-					combineIngotsDown(world, x, y, z);
+					TEIngotPile lowerPile = (TEIngotPile) world.getTileEntity(x, y - 1, z);
+					Item lowerIngot = lowerPile.storage[0] != null ? lowerPile.storage[0].getItem() : null;
+
+					if (ingot == lowerIngot)
+						combineIngotsDown(world, x, y, z);
 				}
-				else if(world.getBlock(x, y + 1, z) == this && ((TEIngotPile)world.getTileEntity(x, y, z)).storage[0].getItem() == ((TEIngotPile)world.getTileEntity(x, y + 1, z)).storage[0].getItem())
+				else if (world.getBlock(x, y + 1, z) == this && world.getTileEntity(x, y + 1, z) instanceof TEIngotPile)
 				{
-					combineIngotsUp(world, x, y, z);
+					TEIngotPile upperPile = (TEIngotPile) world.getTileEntity(x, y + 1, z);
+					Item upperIngot = upperPile.storage[0] != null ? upperPile.storage[0].getItem() : null;
+
+					if (ingot == upperIngot)
+						combineIngotsUp(world, x, y, z);
 				}
 				else
 				{
-					((TEIngotPile)world.getTileEntity(x, y, z)).ejectContents();
+					ingotPile.ejectContents();
 					world.setBlockToAir(x, y, z);
 					return;
 				}
