@@ -1209,7 +1209,7 @@ public class WAILAData implements IWailaDataProvider
 			return storage;
 		}
 
-		return new ItemStack[0];
+		return null;
 	}
 
 	private int getOreGrade(TEOre te, int ore)

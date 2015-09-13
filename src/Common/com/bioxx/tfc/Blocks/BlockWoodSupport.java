@@ -153,7 +153,7 @@ public class BlockWoodSupport extends BlockTerra
 			return new int[]{0, 0, 0, 0, w, e};
 		if(foundSV && foundSH && foundNV && foundNH)
 			return new int[]{0, 0, n, s, 0, 0};
-		return new int[0];
+		return null;
 	}
 
 	private static boolean scanVert(World world, int x, int y, int z)

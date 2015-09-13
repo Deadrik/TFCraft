@@ -192,7 +192,6 @@
    <rule ref="rulesets/java/migrating.xml/ReplaceEnumerationWithIterator"/>
    <rule ref="rulesets/java/migrating.xml/ReplaceHashtableWithMap"/>
    <rule ref="rulesets/java/migrating.xml/ReplaceVectorWithList"/>
-   <rule ref="rulesets/java/design.xml/ReturnEmptyArrayRatherThanNull"/>
    <rule ref="rulesets/java/basic.xml/ReturnFromFinallyBlock"/>
    <rule ref="rulesets/ecmascript/basic.xml/ScopeForInVariable"/>
    <rule ref="rulesets/java/migrating.xml/ShortInstantiation"/>

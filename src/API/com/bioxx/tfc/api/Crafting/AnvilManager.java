@@ -96,7 +96,7 @@ public class AnvilManager
 				return new Object[] {irecipe, irecipe.getCraftingResult(recipe.input1)};
 		}
 
-		return new Object[0];
+		return null;
 	}
 
 	public ItemStack findCompleteWeldRecipe(AnvilRecipe recipe)
