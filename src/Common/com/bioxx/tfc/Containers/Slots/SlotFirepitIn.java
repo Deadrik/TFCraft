@@ -32,9 +32,11 @@ public class SlotFirepitIn extends Slot
 	}
 
 	@Override
-	public void putStack(ItemStack par1ItemStack)
+	public void putStack(ItemStack is)
 	{
-		if (par1ItemStack != null) par1ItemStack.stackSize = 1;
-		super.putStack(par1ItemStack);
+		if (is != null)
+			is.stackSize = 1;
+		if (this.inventory != null)
+			super.putStack(is);
 	}
 }
