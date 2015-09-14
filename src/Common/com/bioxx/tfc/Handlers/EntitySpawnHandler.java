@@ -31,9 +31,12 @@ public class EntitySpawnHandler
 			event.setResult(Result.DENY);
 		}
 
-		ChunkData data = TFC_Core.getCDM(event.world).getData(chunkX, chunkZ);
-		if(!(data == null || data.getSpawnProtectionWithUpdate() <= 0))
-			event.setResult(Result.DENY);
+		if (TFC_Core.getCDM(event.world) != null)
+		{
+			ChunkData data = TFC_Core.getCDM(event.world).getData(chunkX, chunkZ);
+			if ( !(data == null || data.getSpawnProtectionWithUpdate() <= 0))
+				event.setResult(Result.DENY);
+		}
 	}
 
 	@SubscribeEvent

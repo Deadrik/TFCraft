@@ -24,7 +24,7 @@ public class EnteringChunkHandler
 				long spawnProtectionTimer = nbt.hasKey("spawnProtectionTimer") ? nbt.getLong("spawnProtectionTimer") : TFC_Time.getTotalTicks() + TFC_Time.HOUR_LENGTH;
 
 
-				if(event.newChunkX != event.oldChunkX || event.newChunkZ != event.oldChunkZ )
+				if (TFC_Core.getCDM(event.entity.worldObj) != null && (event.newChunkX != event.oldChunkX || event.newChunkZ != event.oldChunkZ))
 				{
 					TFC_Core.getCDM(event.entity.worldObj).setLastVisted(event.oldChunkX, event.oldChunkZ);
 					//Reset the timer since we've entered a new chunk

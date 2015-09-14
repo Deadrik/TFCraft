@@ -390,15 +390,20 @@ public class TFC_Climate
 
 	public static float getRainfall(World world, int x, int y, int z)
 	{
-		if(world.isRemote)
+		if (world.isRemote && TFC_Core.getCDM(world) != null)
 		{
 			ChunkData cd = TFC_Core.getCDM(world).getData(x >> 4, z >> 4);
 			if(cd!= null)
 				return cd.getRainfall(x & 15, z & 15);
 		}
 
-		DataLayer dl = getCacheManager(world).getRainfallLayerAt(x, z);
-		return dl != null ? dl.floatdata1 : DataLayer.RAIN_500.floatdata1;
+		if (getCacheManager(world) != null)
+		{
+			DataLayer dl = getCacheManager(world).getRainfallLayerAt(x, z);
+			return dl != null ? dl.floatdata1 : DataLayer.RAIN_500.floatdata1;
+		}
+
+		return DataLayer.RAIN_500.floatdata1;
 	}
 
 	public static int getTreeLayer(World world,int x, int y, int z, int index)
@@ -425,7 +430,10 @@ public class TFC_Climate
 
 	public static int getStability(World world, int x, int z)
 	{
-		return getCacheManager(world).getStabilityLayerAt(x, z).data1;
+		if (getCacheManager(world) != null)
+			return getCacheManager(world).getStabilityLayerAt(x, z).data1;
+		else
+			return 0;
 	}
 
 	public static WorldCacheManager getCacheManager(World world)

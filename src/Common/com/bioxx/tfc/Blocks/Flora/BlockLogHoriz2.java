@@ -29,6 +29,8 @@ public class BlockLogHoriz2 extends BlockLogHoriz
 	{
 		int dir = meta >> 3;
 		meta = (meta & 7) + offset; //NOPMD
+		if (meta >= ((BlockLogNatural2) TFCBlocks.logNatural2).sideIcons.length)
+			meta = 0;
 
 		if(dir == 0)
 		{

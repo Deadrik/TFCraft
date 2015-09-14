@@ -257,12 +257,12 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 
 		if (this.getSkeletonType() == 1)
 		{
-			if(this.getHeldItem().getItem() instanceof ItemJavelin && this.rand.nextFloat() < 0.03f)
+			if (this.getHeldItem() != null && this.getHeldItem().getItem() instanceof ItemJavelin && this.rand.nextFloat() < 0.03f)
 				this.dropItem(getHeldItem().getItem(), 1);
 		}
 		else
 		{
-			if(this.getHeldItem().getItem() instanceof ItemCustomBow)
+			if (this.getHeldItem() != null && this.getHeldItem().getItem() instanceof ItemCustomBow)
 			{
 				amnt = this.rand.nextInt(3 + par2);
 				this.dropItem(TFCItems.arrow, amnt);

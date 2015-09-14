@@ -212,59 +212,62 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 	{
 		int var7 = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(40) + 1) + 1);
 		double xCoord = par2 * 16 + this.rand.nextInt(16);
-		double yCoord = this.rand.nextInt(1+this.rand.nextInt(140))+60;
+		double yCoord = this.rand.nextInt(1 + this.rand.nextInt(140)) + 60;
 		double zCoord = par3 * 16 + this.rand.nextInt(16);
-		DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt((int)xCoord, (int)zCoord, 0);
-		float rain = TFC_Climate.getRainfall(world, (int)xCoord, 144, (int)zCoord);
+		float rain = TFC_Climate.getRainfall(world, (int) xCoord, 144, (int) zCoord);
 		double width = 2;
 		int caveChance = 35;
 
-		if(rain > 1000)
+		if (rain > 1000)
 		{
 			width += 0.5;
 			caveChance -= 5;
 		}
-		else if(rain > 2000)
+		else if (rain > 2000)
 		{
 			width += 1;
 			caveChance -= 10;
 		}
-		else if(rain < 1000)
+		else if (rain < 1000)
 		{
 			width -= 0.5;
 			caveChance += 5;
 		}
-		else if(rain < 500)
+		else if (rain < 500)
 		{
 			width -= 1;
 			caveChance += 10;
 		}
-		else if(rain < 250)
+		else if (rain < 250)
 		{
 			width -= 1.25;
 			caveChance += 15;
 		}
 
-		Block layerID = rockLayer1.block;
-		if(layerID == TFCBlocks.stoneIgEx)
+		if (TFC_Climate.getCacheManager(world) != null)
 		{
-			width -= 0.4;
-		}
-		else if(layerID == TFCBlocks.stoneIgIn)
-		{
-			width -= 0.5;
-		}
-		else if(layerID == TFCBlocks.stoneSed)
-		{
-			width += 0.2;
-			var7 += 5;
-		}
-		else if(layerID == TFCBlocks.stoneMM)
-		{
-			width += 0.3;
+			DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt((int)xCoord, (int)zCoord, 0);
+			Block layerID = rockLayer1.block;
+			if(layerID == TFCBlocks.stoneIgEx)
+			{
+				width -= 0.4;
+			}
+			else if(layerID == TFCBlocks.stoneIgIn)
+			{
+				width -= 0.5;
+			}
+			else if(layerID == TFCBlocks.stoneSed)
+			{
+				width += 0.2;
+				var7 += 5;
+			}
+			else if(layerID == TFCBlocks.stoneMM)
+			{
+				width += 0.3;
+			}
 		}
 
-		if(yCoord < 32)
+		if (yCoord < 32)
 			width *= 0.5;
 		else if (yCoord < 64)
 			width *= 0.65;
@@ -275,7 +278,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 		else
 			width *= 0.5;
 
-		if(this.rand.nextInt(8) == 0)
+		if (this.rand.nextInt(8) == 0)
 			width += 1;
 
 		if (this.rand.nextInt(caveChance) != 0)
@@ -292,7 +295,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 
 			for (int var16 = 0; var16 < var15; ++var16)
 			{
-				float var17 = this.rand.nextFloat() * (float)Math.PI * 2.0F;
+				float var17 = this.rand.nextFloat() * (float) Math.PI * 2.0F;
 				float var18 = (this.rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
 				float var19 = this.rand.nextFloat() * 2.0F + this.rand.nextFloat();
 				if (this.rand.nextInt(10) == 0)

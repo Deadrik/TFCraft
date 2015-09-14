@@ -32,10 +32,10 @@ public class ChunkEventHandler
 	@SubscribeEvent
 	public void onLoad(ChunkEvent.Load event)
 	{
-		if (!event.world.isRemote)
+		if (!event.world.isRemote && TFC_Core.getCDM(event.world) != null && event.getChunk() != null)
 		{
 			ChunkData cd = TFC_Core.getCDM(event.world).getData(event.getChunk().xPosition, event.getChunk().zPosition);
-			if(cd== null)
+			if (cd == null)
 				return;
 			BiomeGenBase biome = event.world.getBiomeGenForCoords(event.getChunk().xPosition, event.getChunk().zPosition);
 			int month = TFC_Time.getSeasonAdjustedMonth(event.getChunk().zPosition << 4);
@@ -82,7 +82,7 @@ public class ChunkEventHandler
 				cd.lastSpringGen = TFC_Time.getYear();
 			}
 		}
-		else
+		else if (TFC_Core.getCDM(event.world) != null && TFC_Climate.getCacheManager(event.world) != null)
 		{
 			Chunk chunk = event.getChunk();
 			ChunkData data = new ChunkData(chunk).createNew(event.world, chunk.xPosition, chunk.zPosition);
@@ -133,7 +133,8 @@ public class ChunkEventHandler
 			{
 				NBTTagCompound spawnProtectionTag = eventTag.getCompoundTag("ChunkData");
 				ChunkData data = new ChunkData(chunk, spawnProtectionTag);
-				TFC_Core.getCDM(event.world).addData(chunk, data);
+				if (TFC_Core.getCDM(event.world) != null)
+					TFC_Core.getCDM(event.world).addData(chunk, data);
 			}
 			else
 			{
@@ -141,7 +142,8 @@ public class ChunkEventHandler
 					return;*/
 				NBTTagCompound levelTag = eventTag.getCompoundTag("Level");
 				ChunkData data = new ChunkData(chunk).createNew(event.world, levelTag.getInteger("xPos"), levelTag.getInteger("zPos"));
-				TFC_Core.getCDM(event.world).addData(chunk, data);
+				if (TFC_Core.getCDM(event.world) != null)
+					TFC_Core.getCDM(event.world).addData(chunk, data);
 			}
 		}
 	}
@@ -149,7 +151,7 @@ public class ChunkEventHandler
 	@SubscribeEvent
 	public void onDataSave(ChunkDataEvent.Save event)
 	{
-		if(!event.world.isRemote)
+		if ( !event.world.isRemote && TFC_Core.getCDM(event.world) != null)
 		{
 			NBTTagCompound levelTag = event.getData().getCompoundTag("Level");
 			int x = levelTag.getInteger("xPos");

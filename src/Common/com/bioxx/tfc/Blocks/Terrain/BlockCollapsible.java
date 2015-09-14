@@ -172,11 +172,12 @@ public class BlockCollapsible extends BlockTerraContainer
 			{
 				for(int z = -range; z <= range; z++)
 				{
-					if(x == 0 && z == 0 && TFC_Core.isVertSupport(world.getBlock(i + x, j + y, k + z)))
+					// Adding world null check due to OpenEye NPE report.
+					if (x == 0 && z == 0 && world != null && TFC_Core.isVertSupport(world.getBlock(i + x, j + y, k + z)))
 					{
 						return true;
 					}
-					if(TFC_Core.isHorizSupport(world.getBlock(i + x, j + y, k + z)))
+					if (world != null && TFC_Core.isHorizSupport(world.getBlock(i + x, j + y, k + z)))
 					{
 						if(world.rand.nextFloat() < collapseChance / 100f)
 							world.setBlockToAir(i + x, j + y, k + z);

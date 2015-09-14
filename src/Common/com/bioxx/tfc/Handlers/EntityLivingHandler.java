@@ -342,6 +342,9 @@ public class EntityLivingHandler
 				pi.tempEquipment = ((InventoryPlayerTFC) player.inventory).extraEquipInventory.clone();
 			}
 		}
+
+		if (event.entity.dimension == 1)
+			event.entity.travelToDimension(0);
 	}
 
 	@SubscribeEvent

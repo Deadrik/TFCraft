@@ -105,7 +105,7 @@ public class ItemOilLamp extends ItemTerraBlock implements ISmeltable, IFluidCon
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, player, !is.hasTagCompound());
-		if(is.getItemDamage() == 5 && world.getBlock(mop.blockX, mop.blockY, mop.blockZ) == TFCBlocks.lavaStationary)
+		if (mop != null && is.getItemDamage() == 5 && world.getBlock(mop.blockX, mop.blockY, mop.blockZ) == TFCBlocks.lavaStationary)
 		{
 			if(!is.hasTagCompound())
 			{

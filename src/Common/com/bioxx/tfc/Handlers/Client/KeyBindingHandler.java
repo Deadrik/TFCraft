@@ -50,7 +50,7 @@ public class KeyBindingHandler
 					pi.switchHoeMode(player);
 				}
 			}
-			else if(keyLockTool.isPressed())
+			else if (keyLockTool.isPressed() && pi != null)
 			{
 				if(pi.lockX == -9999999)
 				{

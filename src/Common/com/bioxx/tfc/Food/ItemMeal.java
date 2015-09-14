@@ -213,17 +213,20 @@ public class ItemMeal extends ItemTerra implements IFood
 			float eatAmount = getEatAmount(foodstats, weight-decay);
 			float tasteFactor = foodstats.getTasteFactor(is);
 			//add the nutrition contents
-			int[] fg = is.getTagCompound().getIntArray("FG");
-			float[] nWeights = getNutritionalWeights(fg);
-			for(int i = 0; i < fg.length; i++)
+			if (is.hasTagCompound())
 			{
-				if(fg[i] != -1)
-					foodstats.addNutrition(FoodRegistry.getInstance().getFoodGroup(fg[i]), eatAmount*nWeights[i]*2.5f);
-			}
+				int[] fg = is.getTagCompound().getIntArray("FG");
+				float[] nWeights = getNutritionalWeights(fg);
+				for (int i = 0; i < fg.length; i++ )
+				{
+					if (fg[i] != -1)
+						foodstats.addNutrition(FoodRegistry.getInstance().getFoodGroup(fg[i]), eatAmount * nWeights[i] * 2.5f);
+				}
 
-			//fill the stomach
-			foodstats.stomachLevel += eatAmount * getFillingBoost();
-			foodstats.setSatisfaction(foodstats.getSatisfaction() + ((eatAmount/3f) * tasteFactor), fg);
+				//fill the stomach
+				foodstats.stomachLevel += eatAmount * getFillingBoost();
+				foodstats.setSatisfaction(foodstats.getSatisfaction() + ((eatAmount / 3f) * tasteFactor), fg);
+			}
 			//Now remove the eaten amount from the itemstack.
 			if(FoodStatsTFC.reduceFood(is, eatAmount))
 			{

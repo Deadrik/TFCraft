@@ -29,7 +29,8 @@ public class BlockLogNatural2 extends BlockLogNatural
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		if(meta > 15) meta -= 16;
+		if (meta >= woodNames.length)
+			meta = 0;
 		if (side == 0 || side == 1)
 			return innerIcons[meta];
 		return sideIcons[meta];

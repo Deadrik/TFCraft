@@ -77,7 +77,8 @@ public class ItemPlank extends ItemTerra
 				int index = dd+(x+(z*d));
 				TEWoodConstruct te = (TEWoodConstruct)tile;
 				te.data.set(index);
-				te.woodTypes[index] = (byte) is.getItemDamage();
+				if (index < te.woodTypes.length)
+					te.woodTypes[index] = (byte) is.getItemDamage();
 
 				NBTTagCompound nbt = new NBTTagCompound();
 				nbt.setInteger("index", index);

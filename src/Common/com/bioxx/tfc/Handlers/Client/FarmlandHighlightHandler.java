@@ -13,6 +13,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Food.CropIndex;
@@ -47,13 +48,18 @@ public class FarmlandHighlightHandler
 			isMetalHoe = true;
 		}
 
+		PlayerManagerTFC manager = PlayerManagerTFC.getInstance();
+		PlayerInfo playerInfo = manager != null ? manager.getClientPlayer() : null;
+		int hoeMode = playerInfo != null ? playerInfo.hoeMode : -1;
 
-
-		if(evt.currentItem != null && evt.currentItem.getItem() instanceof ItemCustomHoe && isMetalHoe && PlayerManagerTFC.getInstance().getClientPlayer().hoeMode == 1)
+		if (evt.currentItem != null && evt.currentItem.getItem() instanceof ItemCustomHoe && isMetalHoe && hoeMode == 1)
 		{
-			SkillRank sr = TFC_Core.getSkillStats(evt.player).getSkillRank(Global.SKILL_AGRICULTURE);
-			if(sr != SkillRank.Expert && sr != SkillRank.Master)
-				return;
+			if (TFC_Core.getSkillStats(evt.player) != null)
+			{
+				SkillRank sr = TFC_Core.getSkillStats(evt.player).getSkillRank(Global.SKILL_AGRICULTURE);
+				if (sr != SkillRank.Expert && sr != SkillRank.Master)
+					return;
+			}
 
 			Block b = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
 			int crop = 0;
@@ -184,8 +190,7 @@ public class FarmlandHighlightHandler
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
 			}
 		}
-		else if(evt.currentItem != null && evt.currentItem.getItem() instanceof ItemCustomHoe && 
-				PlayerManagerTFC.getInstance().getClientPlayer().hoeMode == 2)
+		else if (evt.currentItem != null && evt.currentItem.getItem() instanceof ItemCustomHoe && hoeMode == 2)
 		{
 			Block b = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
 			int crop = 0;
@@ -224,8 +229,7 @@ public class FarmlandHighlightHandler
 				GL11.glEnable(GL11.GL_CULL_FACE);
 			}
 		}
-		else if(evt.currentItem != null && evt.currentItem.getItem() instanceof ItemCustomHoe && 
-				PlayerManagerTFC.getInstance().getClientPlayer().hoeMode == 3)
+		else if (evt.currentItem != null && evt.currentItem.getItem() instanceof ItemCustomHoe && hoeMode == 3)
 		{
 			Block b = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
 			if(b == TFCBlocks.crops && (

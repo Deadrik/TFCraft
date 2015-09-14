@@ -140,13 +140,17 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		this.generateTerrainHigh(chunkX, chunkZ, idsTop);
 
 		biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, chunkX * 16-1, chunkZ * 16-1, 18, 18);
-		rockLayer1 = TFC_Climate.getCacheManager(worldObj).loadRockLayerGeneratorData(rockLayer1, chunkX * 16, chunkZ * 16, 16, 16, 0);
-		rockLayer2 = TFC_Climate.getCacheManager(worldObj).loadRockLayerGeneratorData(rockLayer2, chunkX * 16, chunkZ * 16, 16, 16, 1);
-		rockLayer3 = TFC_Climate.getCacheManager(worldObj).loadRockLayerGeneratorData(rockLayer3, chunkX * 16, chunkZ * 16, 16, 16, 2);
-		evtLayer = TFC_Climate.getCacheManager(worldObj).loadEVTLayerGeneratorData(evtLayer, chunkX * 16, chunkZ * 16, 16, 16);
-		rainfallLayer = TFC_Climate.getCacheManager(worldObj).loadRainfallLayerGeneratorData(rainfallLayer, chunkX * 16, chunkZ * 16, 16, 16);
-		stabilityLayer = TFC_Climate.getCacheManager(worldObj).loadStabilityLayerGeneratorData(stabilityLayer, chunkX * 16, chunkZ * 16, 16, 16);
-		drainageLayer = TFC_Climate.getCacheManager(worldObj).loadDrainageLayerGeneratorData(drainageLayer, chunkX * 16, chunkZ * 16, 16, 16);
+		if (TFC_Climate.getCacheManager(worldObj) != null)
+		{
+			rockLayer1 = TFC_Climate.getCacheManager(worldObj).loadRockLayerGeneratorData(rockLayer1, chunkX * 16, chunkZ * 16, 16, 16, 0);
+			rockLayer2 = TFC_Climate.getCacheManager(worldObj).loadRockLayerGeneratorData(rockLayer2, chunkX * 16, chunkZ * 16, 16, 16, 1);
+			rockLayer3 = TFC_Climate.getCacheManager(worldObj).loadRockLayerGeneratorData(rockLayer3, chunkX * 16, chunkZ * 16, 16, 16, 2);
+			evtLayer = TFC_Climate.getCacheManager(worldObj).loadEVTLayerGeneratorData(evtLayer, chunkX * 16, chunkZ * 16, 16, 16);
+			rainfallLayer = TFC_Climate.getCacheManager(worldObj).loadRainfallLayerGeneratorData(rainfallLayer, chunkX * 16, chunkZ * 16, 16, 16);
+			stabilityLayer = TFC_Climate.getCacheManager(worldObj).loadStabilityLayerGeneratorData(stabilityLayer, chunkX * 16, chunkZ * 16, 16, 16);
+			drainageLayer = TFC_Climate.getCacheManager(worldObj).loadDrainageLayerGeneratorData(drainageLayer, chunkX * 16, chunkZ * 16, 16, 16);
+		}
+
 		seaLevelOffsetMap = new int[256];
 
 		replaceBlocksForBiomeHigh(chunkX, chunkZ, idsTop, rand, idsBig, metaBig);

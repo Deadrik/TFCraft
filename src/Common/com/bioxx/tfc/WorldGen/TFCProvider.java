@@ -3,6 +3,7 @@ package com.bioxx.tfc.WorldGen;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
@@ -205,6 +206,15 @@ public class TFCProvider extends WorldProvider
 	public String getDimensionName()
 	{
 		return "DEFAULT";
+	}
+
+	/**
+	 * Gets the hard-coded portal location to use when entering this dimension.
+	 */
+	@Override
+	public ChunkCoordinates getEntrancePortalLocation()
+	{
+		return getSpawnPoint();
 	}
 
 	/*@Override
