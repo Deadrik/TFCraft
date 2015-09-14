@@ -29,7 +29,10 @@ public class GuiFirepit extends GuiContainerTFC
 	@Override
 	protected void drawForeground(int guiLeft, int guiTop)
 	{
-		int scale = firepitTE.getTemperatureScaled(49);
-		drawTexturedModalRect(guiLeft + 30, guiTop + 65 - scale, 185, 31, 15, 6);
+		if (firepitTE != null) // Fixes OpenEye-reported NPE
+		{
+			int scale = firepitTE.getTemperatureScaled(49);
+			drawTexturedModalRect(guiLeft + 30, guiTop + 65 - scale, 185, 31, 15, 6);
+		}
 	}
 }
