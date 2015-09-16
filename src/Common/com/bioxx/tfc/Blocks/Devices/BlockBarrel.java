@@ -415,19 +415,21 @@ public class BlockBarrel extends BlockTerraContainer
 					if(equippedItem.getTagCompound().hasKey("fluidNBT") && !equippedItem.getTagCompound().hasKey("Items") && te.getFluidLevel() < te.getMaxLiquid())
 					{
 						FluidStack fs = FluidStack.loadFluidStackFromNBT(equippedItem.getTagCompound().getCompoundTag("fluidNBT"));
-						te.addLiquid(fs);
-						if(fs.amount == 0)
+						if (te.addLiquid(fs))
 						{
-							equippedItem.getTagCompound().removeTag("Sealed");
-							equippedItem.getTagCompound().removeTag("fluidNBT");
-							if(equippedItem.getTagCompound().hasNoTags())
-								equippedItem.setTagCompound(null);
+							if (fs.amount == 0)
+							{
+								equippedItem.getTagCompound().removeTag("Sealed");
+								equippedItem.getTagCompound().removeTag("fluidNBT");
+								if (equippedItem.getTagCompound().hasNoTags())
+									equippedItem.setTagCompound(null);
+							}
+							else
+							{
+								fs.writeToNBT(equippedItem.getTagCompound().getCompoundTag("fluidNBT"));
+							}
+							return true;
 						}
-						else
-						{
-							fs.writeToNBT(equippedItem.getTagCompound().getCompoundTag("fluidNBT"));
-						}
-						return true;
 					}
 				}
 				else

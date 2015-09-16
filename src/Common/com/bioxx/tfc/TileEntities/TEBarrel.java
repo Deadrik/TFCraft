@@ -244,34 +244,42 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	public boolean addLiquid(FluidStack inFS)
 	{
-		//We dont want very hot liquids stored here so if they are much hotter than boiling water, we prevent it. 
-		if(inFS.getFluid().getTemperature(inFS) > 385)
-			return false;
-
-		if(fluid == null)
+		if (inFS != null)
 		{
-			fluid = inFS.copy();
-			if(fluid.amount > this.getMaxLiquid())
-			{
-				fluid.amount = getMaxLiquid();
-				inFS.amount = inFS.amount - this.getMaxLiquid();
-
-			}
-			else inFS.amount = 0;
-		}
-		else
-		{
-			//check if the barrel is full or if the fluid being added does not match the barrel liquid
-			if(fluid.amount == getMaxLiquid() || !fluid.isFluidEqual(inFS))
+			//We dont want very hot liquids stored here so if they are much hotter than boiling water, we prevent it. 
+			if (inFS.getFluid() != null && inFS.getFluid().getTemperature(inFS) > 385)
 				return false;
 
-			int a = fluid.amount + inFS.amount - getMaxLiquid();
-			fluid.amount = Math.min(fluid.amount+inFS.amount, getMaxLiquid());
-			if(a > 0) inFS.amount = a;
-			else inFS.amount = 0;
+			if (fluid == null)
+			{
+				fluid = inFS.copy();
+				if (fluid.amount > this.getMaxLiquid())
+				{
+					fluid.amount = getMaxLiquid();
+					inFS.amount = inFS.amount - this.getMaxLiquid();
+
+				}
+				else
+					inFS.amount = 0;
+			}
+			else
+			{
+				//check if the barrel is full or if the fluid being added does not match the barrel liquid
+				if (fluid.amount == getMaxLiquid() || !fluid.isFluidEqual(inFS))
+					return false;
+
+				int a = fluid.amount + inFS.amount - getMaxLiquid();
+				fluid.amount = Math.min(fluid.amount + inFS.amount, getMaxLiquid());
+				if (a > 0)
+					inFS.amount = a;
+				else
+					inFS.amount = 0;
+			}
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			return true;
 		}
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		return true;
+
+		return false;
 	}
 
 	public ItemStack addLiquid(ItemStack is)
