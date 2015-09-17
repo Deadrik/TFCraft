@@ -502,6 +502,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		this.rotation = nbt.getByte("rotation");
 		this.sealed = nbt.getBoolean("sealed");
+		this.sealtime = nbt.getInteger("SealTime");
 		barrelType = nbt.getInteger("barrelType");
 		if(nbt.getInteger("fluid") != -1)
 		{
@@ -522,6 +523,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		nbt.setByte("rotation", rotation);
 		nbt.setBoolean("sealed", sealed);
+		nbt.setInteger("SealTime", sealtime);
 		nbt.setInteger("fluid", fluid != null ? fluid.getFluidID() : -1);
 		nbt.setInteger("fluidAmount", fluid != null ? fluid.amount : 0);
 		nbt.setInteger("barrelType", barrelType);
@@ -555,6 +557,12 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					sealtime = (int) TFC_Time.getTotalHours();
 					unsealtime = 0;
 				}
+
+				// Broadcast the seal time to update the client
+				NBTTagCompound timeTag = new NBTTagCompound();
+				timeTag.setInteger("SealTime", sealtime);
+				this.broadcastPacketInRange(this.createDataPacket(timeTag));
+
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 
@@ -563,6 +571,12 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				int tab = nbt.getByte("tab");
 				switchTab(worldObj.getPlayerEntityByName(nbt.getString("player")), tab);
 			}
+		}
+		else
+		{
+			// Get the seal time for the client display
+			if (nbt.hasKey("SealTime"))
+				sealtime = nbt.getInteger("SealTime");
 		}
 	}
 

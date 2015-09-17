@@ -153,11 +153,6 @@ public class ContainerBarrel extends ContainerTFC
 				liquidLevel = barrel.getFluidLevel();
 				var2.sendProgressBarUpdate(this, 1, this.barrel.getFluidLevel());
 			}
-			if(this.barrel.sealtime != this.sealedTime)
-			{
-				sealedTime = barrel.sealtime;
-				var2.sendProgressBarUpdate(this, 2, sealedTime);
-			}
 		}
 	}
 
@@ -180,11 +175,6 @@ public class ContainerBarrel extends ContainerTFC
 		{
 			if(barrel.fluid != null)
 				this.barrel.fluid.amount = val;
-		}
-		else if (id == 2)
-		{
-			this.barrel.sealtime = val;
-			barrel.processItems();
 		}
 	}
 }
