@@ -1099,7 +1099,7 @@ public class TFC_Core
 	 * @param baseDecayMod 
 	 * @param nbt
 	 */
-	private static ItemStack tickDecay(ItemStack is, World world, int x, int y, int z, float environmentalDecayFactor, float baseDecayMod)
+	public static ItemStack tickDecay(ItemStack is, World world, int x, int y, int z, float environmentalDecayFactor, float baseDecayMod)
 	{
 		NBTTagCompound nbt = is.getTagCompound();
 		if (nbt == null || !nbt.hasKey("foodWeight") || !nbt.hasKey("foodDecay"))
