@@ -710,7 +710,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			{
 				float temp = TFC_ItemHeat.getTemp(anvilItemStacks[i]);
 				return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.20 && 
-						anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true;
+						(anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true);
 			}
 		}
 		return false;
@@ -727,7 +727,11 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			{
 				float temp = TFC_ItemHeat.getTemp(anvilItemStacks[i]);
 				return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.40 && 
+<<<<<<< HEAD
 						anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true;
+=======
+						(anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true);
+>>>>>>> 30ba4c1... Put the 'unneeded brackets back'
 			}
 		}
 		return false;
