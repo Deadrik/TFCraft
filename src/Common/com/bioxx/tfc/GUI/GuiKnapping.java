@@ -1,10 +1,18 @@
 package com.bioxx.tfc.GUI;
 
+import java.lang.reflect.Field;
+
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import net.minecraftforge.client.event.GuiScreenEvent.ActionPerformedEvent;
+import net.minecraftforge.common.MinecraftForge;
+
+import cpw.mods.fml.relauncher.ReflectionHelper;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
@@ -18,6 +26,7 @@ public class GuiKnapping extends GuiContainerTFC
 {
 	private boolean previouslyLoaded;
 	public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_knapping.png");
+	private final Field _selectedButton = ReflectionHelper.findField(GuiScreen.class, "selectedButton", "field_146290_a");
 
 	public GuiKnapping(InventoryPlayer inventoryplayer, ItemStack is, World world, int x, int y, int z)
 	{
@@ -110,5 +119,44 @@ public class GuiKnapping extends GuiContainerTFC
 		}
 		else
 			return false;
+	}
+
+	@Override
+	protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick)
+	{
+		if (clickedMouseButton == 0)
+		{
+			for (int i = 0; i < this.buttonList.size(); i++)
+			{
+				if (this.buttonList.get(i) instanceof GuiButton)
+				{
+					GuiButton guiButton = (GuiButton) this.buttonList.get(i);
+
+					if (guiButton.mousePressed(this.mc, mouseX, mouseY))
+					{
+						try
+						{
+							ActionPerformedEvent.Pre event = new ActionPerformedEvent.Pre(this, guiButton, this.buttonList);
+							if (MinecraftForge.EVENT_BUS.post(event))
+								break;
+							else if (_selectedButton.get(this) == event.button)
+								continue;
+							else
+								this.mouseMovedOrUp(mouseX, mouseY, 0);
+
+							_selectedButton.set(this, event.button);
+							event.button.func_146113_a(this.mc.getSoundHandler()); // Play Press Sound
+							this.actionPerformed(event.button);
+							if (this.equals(this.mc.currentScreen))
+								MinecraftForge.EVENT_BUS.post(new ActionPerformedEvent.Post(this, event.button, this.buttonList));
+						} catch (Exception e)
+						{
+							throw new RuntimeException(e);
+						}
+					}
+
+				}
+			}
+		}
 	}
 }
