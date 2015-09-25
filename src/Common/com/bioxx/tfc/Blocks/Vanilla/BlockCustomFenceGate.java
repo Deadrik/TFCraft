@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -30,8 +31,8 @@ import com.bioxx.tfc.api.Interfaces.IMultipleBlock;
 
 public class BlockCustomFenceGate extends BlockFenceGate implements ITileEntityProvider, IMultipleBlock
 {
-	private String[] woodNames;
-	private IIcon[] icons;
+	public String[] woodNames;
+	public IIcon[] icons;
 	public BlockCustomFenceGate()
 	{
 		super();
@@ -102,7 +103,9 @@ public class BlockCustomFenceGate extends BlockFenceGate implements ITileEntityP
 	@Override
 	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
-		return ((TEFenceGate)(par1IBlockAccess.getTileEntity(par2, par3, par4))).getOpen();
+		if (par1IBlockAccess.getTileEntity(par3, par3, par4) instanceof TEFenceGate)
+			return ((TEFenceGate) (par1IBlockAccess.getTileEntity(par2, par3, par4))).getOpen();
+		return false;
 	}
 
 	@Override
@@ -146,22 +149,23 @@ public class BlockCustomFenceGate extends BlockFenceGate implements ITileEntityP
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
-		/*TEFenceGate te = (TEFenceGate) world.getTileEntity(x, y, z);
+		TEFenceGate te = (TEFenceGate) world.getTileEntity(x, y, z);
 		boolean flag = world.isBlockIndirectlyGettingPowered(x, y, z);
 
-		if (flag || block != Blocks.air && block.canProvidePower())
+		if (flag || block.getMaterial() != Material.air && block.canProvidePower())
 		{
 			if (flag && !te.getOpen())
 			{
 				te.setOpen(true);
+				world.playAuxSFXAtEntity((EntityPlayer) null, 1003, x, y, z, 0);
 			}
 			else if (!flag && te.getOpen())
 			{
 				te.setOpen(false);
+				world.playAuxSFXAtEntity((EntityPlayer) null, 1003, x, y, z, 0);
 			}
 
-			world.playAuxSFXAtEntity((EntityPlayer) null, 1003, x, y, z, 0);
-		}*/
+		}
 	}
 
 	@Override
