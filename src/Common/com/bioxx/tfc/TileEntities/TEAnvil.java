@@ -703,14 +703,19 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	public Boolean isTemperatureWeldable(int i)
 	{
 		HeatRegistry manager = HeatRegistry.getInstance();
-		if(TFC_ItemHeat.hasTemp(anvilItemStacks[i]))
+		ItemStack is = anvilItemStacks[i];
+		if (TFC_ItemHeat.hasTemp(is))
 		{
-			HeatIndex index = manager.findMatchingIndex(anvilItemStacks[i]);
+			HeatIndex index = manager.findMatchingIndex(is);
 			if(index != null)
 			{
-				float temp = TFC_ItemHeat.getTemp(anvilItemStacks[i]);
-				return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.20 && 
-						anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true;
+				float temp = TFC_ItemHeat.getTemp(is);
+				float weldTemp = index.meltTemp * 0.80f;
+				if (temp < index.meltTemp && temp > weldTemp)
+				{
+					// Item isn't an unshaped ingot, or it is a full unshaped ingot
+					return !(is.getItem() instanceof ItemMeltedMetal) || is.getItemDamage() == 0;
+				}
 			}
 		}
 		return false;
@@ -718,16 +723,20 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 
 	public Boolean isTemperatureWorkable(int i)
 	{
-
 		HeatRegistry manager = HeatRegistry.getInstance();
-		if(TFC_ItemHeat.hasTemp(anvilItemStacks[i]))
+		ItemStack is = anvilItemStacks[i];
+		if (TFC_ItemHeat.hasTemp(is))
 		{
-			HeatIndex index = manager.findMatchingIndex(anvilItemStacks[i]);
+			HeatIndex index = manager.findMatchingIndex(is);
 			if(index != null)
 			{
-				float temp = TFC_ItemHeat.getTemp(anvilItemStacks[i]);
-				return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.40 && 
-						anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true;
+				float temp = TFC_ItemHeat.getTemp(is);
+				float workTemp = index.meltTemp * 0.60f;
+				if (temp < index.meltTemp && temp > workTemp)
+				{
+					// Item isn't an unshaped ingot, or it is a full unshaped ingot
+					return !(is.getItem() instanceof ItemMeltedMetal) || is.getItemDamage() == 0;
+				}
 			}
 		}
 		return false;
