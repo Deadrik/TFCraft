@@ -14,6 +14,7 @@ public class TFCOptions
 	public static boolean enableBetterGrass = true;
 	public static boolean enableSaplingDrops = true;
 	public static boolean enableDebugMode;
+	public static boolean enableFiniteWater;
 	public static boolean onionsAreGross;
 	public static boolean generateSmoke;
 	public static String quiverHUDPosition = "bottomleft";

@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 
@@ -47,15 +48,25 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 	}
 
 	@Override
-	public FluidStack drain(World world, int x, int y, int z, boolean doDrain) 
+	public FluidStack drain(World world, int x, int y, int z, boolean doDrain)
 	{
-		return null;
+		if (!isDrainableSourceBlock(world, x, y, z))
+		{
+			return null;
+		}
+
+		if (doDrain)
+		{
+			world.setBlock(x, y, z, Blocks.air);
+		}
+
+		return new FluidStack(fluidType, FluidContainerRegistry.BUCKET_VOLUME);
 	}
 
 	@Override
-	public boolean canDrain(World world, int x, int y, int z) 
+	public boolean canDrain(World world, int x, int y, int z)
 	{
-		return false;
+		return isDrainableSourceBlock(world, x, y, z);
 	}
 
 	@Override
@@ -243,5 +254,11 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 	public IIcon getIcon(int side, int meta)
 	{
 		return side != 0 && side != 1 ? this.icons[1] : this.icons[0];
+	}
+
+	public boolean isDrainableSourceBlock(IBlockAccess world, int x, int y, int z)
+	{
+		Block block = world.getBlock(x, y, z);
+		return !TFC_Core.isHotWater(block) && block == this && world.getBlockMetadata(x, y, z) == 0;
 	}
 }
