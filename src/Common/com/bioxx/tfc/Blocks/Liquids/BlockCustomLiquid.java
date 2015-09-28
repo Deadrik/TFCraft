@@ -418,7 +418,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 		{
 			if (this.blockMaterial == Material.lava && world.getBlock(x, y - 1, z).getMaterial() == Material.water)
 			{
-				setBlockforLava(world, x, y, z, 0);
+				setBlockforLava(world, x, y - 1, z, 2);
 				this.func_149799_m(world, x, y - 1, z); // Sizzling Sound & Particles
 				return;
 			}
