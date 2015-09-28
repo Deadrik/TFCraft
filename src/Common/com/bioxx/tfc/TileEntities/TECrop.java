@@ -138,7 +138,7 @@ public class TECrop extends NetworkTileEntity
 				int fert = tef != null ? tef.nutrients[3] : 0;
 				int soilMax = tef != null ? tef.getSoilMax() : 18000;
 				//waterBoost only helps if you are playing on a longer than default year length.
-				float waterBoost = BlockFarmland.isFreshWaterNearby(worldObj, xCoord, yCoord, zCoord) ? 0.1f : 0;
+				float waterBoost = BlockFarmland.isFreshWaterNearby(worldObj, xCoord, yCoord - 1, zCoord) ? 0.1f : 0;
 
 				//Allow the fertilizer to make up for lost nutrients
 				nutri = Math.min(nutri + fert, (int)(soilMax * 1.25f));
