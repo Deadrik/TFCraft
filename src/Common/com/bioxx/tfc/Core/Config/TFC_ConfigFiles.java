@@ -22,7 +22,6 @@ import com.bioxx.tfc.WorldGen.Generators.OreSpawnData;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCCrafting;
 import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
 import com.google.common.base.Throwables;
@@ -288,7 +287,8 @@ public class TFC_ConfigFiles
 					if (currentValue != enabled) // if we need to change states
 					{
 						recipesTFC.getRecipeOutput().stackSize = enabled ? 4 : 2;
-						if (TFCOptions.enableDebugMode) TerraFirmaCraft.LOG.info("Crafting option {} changed from {} to {}. Stacksize {}", name, currentValue, enabled, recipesTFC.getRecipeOutput().stackSize);
+						if (enableDebugMode)
+							TerraFirmaCraft.LOG.info("Crafting option {} changed from {} to {}. Stacksize {}", name, currentValue, enabled, recipesTFC.getRecipeOutput().stackSize);
 						field.setBoolean(null, enabled); // Keep the field up to date as well
 						currentValue = enabled;
 					}

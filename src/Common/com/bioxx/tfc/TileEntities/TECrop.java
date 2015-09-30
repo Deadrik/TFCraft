@@ -168,7 +168,9 @@ public class TECrop extends NetworkTileEntity
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				}
 
-				if (TFCOptions.enableCropsDie && (crop.maxLifespan == -1 && growth > crop.numGrowthStages + ((float) crop.numGrowthStages / 2)) || growth < 0)
+				// Wild crops will always die of old age, regardless of the config setting
+				if ((TFCOptions.enableCropsDie || !TFC_Core.isFarmland(worldObj.getBlock(xCoord, yCoord - 1, zCoord))) &&
+					(crop.maxLifespan == -1 && growth > crop.numGrowthStages + ((float) crop.numGrowthStages / 2)) || growth < 0)
 				{
 					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 				}

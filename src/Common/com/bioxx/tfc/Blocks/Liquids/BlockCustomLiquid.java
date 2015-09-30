@@ -434,7 +434,6 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 		}
 		else if (meta >= 0 && (meta == 0 || this.canStay(world, x, y - 1, z))) // Can't flow down
 		{
-			boolean[] flowDirections = this.getFlowDirections(world, x, y, z);
 			newHeight = meta + b0;
 	
 			if (meta >= 8)
@@ -446,7 +445,8 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 			{
 				return;
 			}
-	
+
+			boolean[] flowDirections = this.getFlowDirections(world, x, y, z);
 			if (flowDirections[0])
 			{
 				this.flow(world, x - 1, y, z, newHeight);
