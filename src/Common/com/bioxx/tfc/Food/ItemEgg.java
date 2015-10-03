@@ -45,7 +45,7 @@ public class ItemEgg extends ItemFoodTFC implements IFood
 		else
 		{
 			arraylist.add(TFC_Core.translate("gui.badnbt"));
-			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
+			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getDisplayName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 		}
 	}

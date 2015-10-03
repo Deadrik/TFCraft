@@ -9,6 +9,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -105,7 +106,7 @@ public class ItemMeal extends ItemTerra implements IFood
 		else
 		{
 			arraylist.add(TFC_Core.translate("gui.badnbt"));
-			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
+			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getDisplayName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 		}
 	}
@@ -207,14 +208,15 @@ public class ItemMeal extends ItemTerra implements IFood
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 		if(!world.isRemote)
 		{
-			ItemMeal item = (ItemMeal) is.getItem();
-			float weight = item.getFoodWeight(is);
-			float decay = Math.max(item.getFoodDecay(is), 0);
-			float eatAmount = getEatAmount(foodstats, weight-decay);
-			float tasteFactor = foodstats.getTasteFactor(is);
 			//add the nutrition contents
 			if (is.hasTagCompound())
 			{
+				ItemMeal item = (ItemMeal) is.getItem();
+				float weight = item.getFoodWeight(is);
+				float decay = Math.max(item.getFoodDecay(is), 0);
+				float eatAmount = getEatAmount(foodstats, weight - decay);
+				float tasteFactor = foodstats.getTasteFactor(is);
+
 				int[] fg = is.getTagCompound().getIntArray("FG");
 				float[] nWeights = getNutritionalWeights(fg);
 				for (int i = 0; i < fg.length; i++ )
@@ -226,11 +228,19 @@ public class ItemMeal extends ItemTerra implements IFood
 				//fill the stomach
 				foodstats.stomachLevel += eatAmount * getFillingBoost();
 				foodstats.setSatisfaction(foodstats.getSatisfaction() + ((eatAmount / 3f) * tasteFactor), fg);
+
+				//Now remove the eaten amount from the itemstack.
+				if (FoodStatsTFC.reduceFood(is, eatAmount))
+				{
+					is.stackSize = 0;
+				}
 			}
-			//Now remove the eaten amount from the itemstack.
-			if(FoodStatsTFC.reduceFood(is, eatAmount))
+			else
 			{
-				is.stackSize = 0;
+				String error = TFC_Core.translate("error.error") + " " + is.getDisplayName() + " " +
+								TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact");
+				TerraFirmaCraft.LOG.error(error);
+				TFC_Core.sendInfoMessage(player, new ChatComponentText(error));
 			}
 		}
 		TFC_Core.setPlayerFoodStats(player, foodstats);

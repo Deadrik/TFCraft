@@ -10,6 +10,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -263,7 +264,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		else
 		{
 			arraylist.add(TFC_Core.translate("gui.badnbt"));
-			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
+			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getDisplayName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 		}
 	}
@@ -465,8 +466,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			else
 			{
 				foodstats.addNutrition(((IFood)(is.getItem())).getFoodGroup(), 1f);
-				TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
-						TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
+
+				String error = TFC_Core.translate("error.error") + " " + is.getDisplayName() + " " +
+								TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact");
+				TerraFirmaCraft.LOG.error(error);
+				TFC_Core.sendInfoMessage(player, new ChatComponentText(error));
 			}
 		}
 

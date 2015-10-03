@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -333,17 +334,28 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	{
 		if(!entityplayer.isSneaking())
 		{
-			NBTTagCompound nbt = itemstack.getTagCompound();
-			if(itemstack.getItemDamage() == 2)
+			if (itemstack.getItemDamage() == 2)
 			{
-				if(nbt.hasKey("TempTimer"))
+				NBTTagCompound nbt = itemstack.getTagCompound();
+				if (nbt == null)
+				{
+					itemstack.setItemDamage(1);
+					if (!world.isRemote) // Prevent double logging.
+					{
+						String error = TFC_Core.translate("error.error") + " " + itemstack.getDisplayName() + " " +
+										TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact");
+						TerraFirmaCraft.LOG.error(error);
+						TFC_Core.sendInfoMessage(entityplayer, new ChatComponentText(error));
+					}
+				}
+				else if (nbt.hasKey("TempTimer"))
 				{
 					long temp = nbt.getLong("TempTimer");
 					if(TFC_Time.getTotalHours() - temp < 11)
 						entityplayer.openGui(TerraFirmaCraft.instance, 19, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
 				}
 			}
-			else if(itemstack.getItemDamage() == 1)
+			else if (itemstack.getItemDamage() == 1)
 			{
 				entityplayer.openGui(TerraFirmaCraft.instance, 39, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
 			}

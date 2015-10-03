@@ -123,7 +123,7 @@ public class ItemNBTPacket extends AbstractPacket {
 	    }
 	    else
 	    {
-			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + stack.getUnlocalizedName() + " " +
+			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + stack.getDisplayName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 			stackNBT = new NBTTagCompound();
 	    }
@@ -147,7 +147,7 @@ public class ItemNBTPacket extends AbstractPacket {
 		}
 		else
 		{
-			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + stack.getUnlocalizedName() + " " +
+			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + stack.getDisplayName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 			stackNBT = new NBTTagCompound();
 		}
