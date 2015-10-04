@@ -6,7 +6,6 @@ import java.util.List;
 
 import net.minecraft.block.BlockColored;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -28,6 +27,7 @@ import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Entities.AI.EntityAISitTFC;
+import com.bioxx.tfc.Entities.AI.EntityAITargetNonTamedTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.TFCItems;
@@ -71,28 +71,29 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	private int happyTicks;
 	private boolean wasRoped;
 
-	private EntityAITargetNonTamed targetChicken;
-	private EntityAITargetNonTamed targetPheasant;
-	private EntityAITargetNonTamed targetPig;
-	private EntityAITargetNonTamed targetCow;
-	private EntityAITargetNonTamed targetDeer;
-	private EntityAITargetNonTamed targetHorse;
+	private EntityAITargetNonTamedTFC targetChicken;
+	private EntityAITargetNonTamedTFC targetPheasant;
+	private EntityAITargetNonTamedTFC targetPig;
+	private EntityAITargetNonTamedTFC targetCow;
+	private EntityAITargetNonTamedTFC targetDeer;
+	private EntityAITargetNonTamedTFC targetHorse;
 	private boolean isPeacefulAI;
 
 	public EntityWolfTFC(World par1World)
 	{
 		super(par1World);
 		this.tasks.addTask(6, new EntityAIMateTFC(this, worldObj, 1));
-		//this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntitySheepTFC.class, 200, false));
 		this.targetTasks.removeTask(this.aiSit);
 		this.aiSit = new EntityAISitTFC(this);
 		this.tasks.addTask(2, this.aiSit);
-		this.targetChicken = new EntityAITargetNonTamed(this, EntityChickenTFC.class, 200, false);
-		this.targetPheasant = new EntityAITargetNonTamed(this, EntityPheasantTFC.class, 200, false);
-		this.targetPig = new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false);
-		this.targetCow = new EntityAITargetNonTamed(this, EntityCowTFC.class, 200, false);
-		this.targetDeer = new EntityAITargetNonTamed(this, EntityDeer.class, 200, false);
-		this.targetHorse = new EntityAITargetNonTamed(this, EntityHorseTFC.class, 200, false);
+
+		// TFC Targeting is affected by animal familiarity
+		this.targetChicken = new EntityAITargetNonTamedTFC(this, EntityChickenTFC.class, 200, false);
+		this.targetPheasant = new EntityAITargetNonTamedTFC(this, EntityPheasantTFC.class, 200, false);
+		this.targetPig = new EntityAITargetNonTamedTFC(this, EntityPigTFC.class, 200, false);
+		this.targetCow = new EntityAITargetNonTamedTFC(this, EntityCowTFC.class, 200, false);
+		this.targetDeer = new EntityAITargetNonTamedTFC(this, EntityDeer.class, 200, false);
+		this.targetHorse = new EntityAITargetNonTamedTFC(this, EntityHorseTFC.class, 200, false);
 		if (this.worldObj.difficultySetting != EnumDifficulty.PEACEFUL)
 		{
 			isPeacefulAI = false;
@@ -275,16 +276,36 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		if (hunger > 0)
 			hunger--;
 
-		if(this.getLeashed()){
-			if(this.getLeashedToEntity() instanceof EntityLeashKnot && familiarity >= 5){
+		if (this.getLeashed())
+		{
+			Entity leashedTo = getLeashedToEntity();
+			// Wolves who have been given a bone, are tied to a fence, and are not angry/targeting another animal must sit
+			if (leashedTo instanceof EntityLeashKnot && familiarity >= 5 && !this.isAngry())
+			{
+				this.aiSit.setSitting(true);
 				this.setSitting(true);
+				this.isJumping = false;
+				// Set everything to null to prevent butt scooching
+				this.setPathToEntity((PathEntity) null);
+				this.setTarget((Entity) null);
+				this.setAttackTarget((EntityLivingBase) null);
 			}
-			else if(this.getLeashedToEntity() instanceof EntityPlayer){
+			// Animals who are tied to a player, or are tied to a fence and are angry/targeting another animal are allowed to stand up and move about
+			else if (leashedTo instanceof EntityPlayer || leashedTo instanceof EntityLeashKnot && this.isAngry())
+			{
+				this.aiSit.setSitting(false);
 				this.setSitting(false);
 			}
-		}
 
-		if(this.getLeashed()&&!wasRoped)wasRoped = true;
+			if (!wasRoped)
+				wasRoped = true;
+		}
+		// Unleashed, but still sitting, and angry/targeting another animal
+		else if (this.isAngry() && this.isSitting())
+		{
+			this.aiSit.setSitting(false);
+			this.setSitting(false);
+		}
 
 		if(super.isInLove())
 			setInLove(true);
@@ -335,6 +356,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 			this.setInLove(false);
 		}
 
+		// Owners can leash a dog to themselves to calm it down
 		if(this.getLeashed() && this.isAngry() && getLeashedToEntity() == this.getOwner())
 		{
 			this.setAngry(false);
@@ -468,9 +490,9 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
-		int var2 = (int)(TFC_MobData.WOLF_DAMAGE * getStrength() * getAggression() * (getSize()/2 + 0.5F));
+		int damage = (int)(TFC_MobData.WOLF_DAMAGE * getStrength() * getAggression() * (getSize()/2 + 0.5F));
 		//TerraFirmaCraft.log.info(var2+", s: "+getStrength()+", a: "+ getAggression());
-		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
+		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), damage);
 	}
 
 	@Override

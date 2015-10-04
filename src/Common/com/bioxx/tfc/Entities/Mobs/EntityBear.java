@@ -70,10 +70,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	
 	private EntityAIAttackOnCollide attackAI;
 	private EntityAILeapAtTarget leapAI;
-	private EntityAITargetNonTamed targetSheep;
-	private EntityAITargetNonTamed targetDeer;
-	private EntityAITargetNonTamed targetPig;
-	private EntityAITargetNonTamed targetHorse;
+	private EntityAITargetNonTamedTFC targetSheep;
+	private EntityAITargetNonTamedTFC targetDeer;
+	private EntityAITargetNonTamedTFC targetPig;
+	private EntityAITargetNonTamedTFC targetHorse;
 	private EntityAITargetNonTamedTFC targetPlayer;
 	private EntityAIHurtByTarget hurtAI;
 	private boolean isPeacefulAI;
@@ -105,10 +105,12 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		tasks.addTask (9, new EntityAILookIdle (this));
 		this.attackAI = new EntityAIAttackOnCollide(this, moveSpeed * 1.5F, true);
 		this.leapAI = new EntityAILeapAtTarget(this, 0.4F);
-		this.targetSheep = new EntityAITargetNonTamed(this, EntitySheepTFC.class, 200, false);
-		this.targetDeer = new EntityAITargetNonTamed(this, EntityDeer.class, 200, false);
-		this.targetPig = new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false);
-		this.targetHorse = new EntityAITargetNonTamed(this, EntityHorseTFC.class, 200, false);
+
+		// TFC Targeting is affected by animal familiarity
+		this.targetSheep = new EntityAITargetNonTamedTFC(this, EntitySheepTFC.class, 200, false);
+		this.targetDeer = new EntityAITargetNonTamedTFC(this, EntityDeer.class, 200, false);
+		this.targetPig = new EntityAITargetNonTamedTFC(this, EntityPigTFC.class, 200, false);
+		this.targetHorse = new EntityAITargetNonTamedTFC(this, EntityHorseTFC.class, 200, false);
 		this.targetPlayer = new EntityAITargetNonTamedTFC(this, EntityPlayer.class, 200, false);
 		this.hurtAI = new EntityAIHurtByTarget(this, true);
 
