@@ -251,7 +251,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 						(byte) 0 // Empty
 				};
 				ByteBuffer buf = ByteBuffer.wrap(values);
-				this.dataWatcher.updateObject(23, buf.getInt());
+				this.dataWatcher.updateObject(26, buf.getInt());
 				this.dataWatcher.updateObject(24, buf.getInt());
 				this.dataWatcher.updateObject(25, String.valueOf(timeOfConception));
 			}
@@ -260,7 +260,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				sex = this.dataWatcher.getWatchableObjectInt(13);
 				
 				ByteBuffer buf = ByteBuffer.allocate(Long.SIZE / Byte.SIZE);
-				buf.putInt(this.dataWatcher.getWatchableObjectInt(23));
+				buf.putInt(this.dataWatcher.getWatchableObjectInt(26));
 				buf.putInt(this.dataWatcher.getWatchableObjectInt(24));
 				byte[] values = buf.array();
 				
@@ -288,7 +288,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.dataWatcher.addObject(13, Integer.valueOf(0)); //sex (1 or 0)
 		this.dataWatcher.addObject(15, Integer.valueOf(0));		//age
 		// EntityHorse uses object 22
-		this.dataWatcher.addObject(23, Integer.valueOf(0)); //Size, strength, aggression, obedience
+		this.dataWatcher.addObject(26, Integer.valueOf(0)); //Size, strength, aggression, obedience
 		this.dataWatcher.addObject(24, Integer.valueOf(0)); //familiarity, familiarizedToday, pregnant, empty slot
 		this.dataWatcher.addObject(25, String.valueOf("0")); // Time of conception, stored as a string since we can't do long
 
