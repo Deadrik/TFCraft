@@ -23,10 +23,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Blocks.Devices.BlockChestTFC;
-import com.bioxx.tfc.Blocks.Terrain.BlockCobble;
-import com.bioxx.tfc.Blocks.Terrain.BlockDirt;
-import com.bioxx.tfc.Blocks.Terrain.BlockGravel;
-import com.bioxx.tfc.Blocks.Terrain.BlockSmooth;
+import com.bioxx.tfc.Blocks.Terrain.*;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.TFCFluids;
