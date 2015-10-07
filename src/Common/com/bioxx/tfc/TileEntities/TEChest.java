@@ -157,6 +157,7 @@ public class TEChest extends TileEntityChest implements IInventory
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
 		type = pkt.func_148857_g().getInteger("woodtype");
+		this.updateContainingBlockInfo();
 	}
 
 	@Override
@@ -218,18 +219,58 @@ public class TEChest extends TileEntityChest implements IInventory
 				this.adjacentChestZPos = (TEChest)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
 
 			if (this.adjacentChestZNeg != null)
-				this.adjacentChestZNeg.updateContainingBlockInfo();
+				((TEChest) this.adjacentChestZNeg).updateSide(this, 0);
 
 			if (this.adjacentChestZPos != null)
-				this.adjacentChestZPos.updateContainingBlockInfo();
+				((TEChest) this.adjacentChestZPos).updateSide(this, 2);
 
 			if (this.adjacentChestXPos != null)
-				this.adjacentChestXPos.updateContainingBlockInfo();
+				((TEChest) this.adjacentChestXPos).updateSide(this, 1);
 
 			if (this.adjacentChestXNeg != null)
-				this.adjacentChestXNeg.updateContainingBlockInfo();
+				((TEChest) this.adjacentChestXNeg).updateSide(this, 3);
 		}
 	}
+	
+	private void updateSide(TEChest techest, int side)
+    {
+        if (techest.isInvalid())
+        {
+            this.adjacentChestChecked = false;
+        }
+        else if (this.adjacentChestChecked)
+        {
+            switch (side)
+            {
+                case 0:
+                    if (this.adjacentChestZPos != techest)
+                    {
+                        this.adjacentChestChecked = false;
+                    }
+
+                    break;
+                case 1:
+                    if (this.adjacentChestXNeg != techest)
+                    {
+                        this.adjacentChestChecked = false;
+                    }
+
+                    break;
+                case 2:
+                    if (this.adjacentChestZNeg != techest)
+                    {
+                        this.adjacentChestChecked = false;
+                    }
+
+                    break;
+                case 3:
+                    if (this.adjacentChestXPos != techest)
+                    {
+                        this.adjacentChestChecked = false;
+                    }
+            }
+        }
+    }
 
 	@Override
 	public void updateEntity()
@@ -238,7 +279,8 @@ public class TEChest extends TileEntityChest implements IInventory
 
 		TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
 		this.checkForAdjacentChests();
-
+        ++this.ticksSinceSync;
+        
 		if (!this.worldObj.isRemote && this.numPlayersUsing != 0 && (this.ticksSinceSync + this.xCoord + this.yCoord + this.zCoord) % 200 == 0)
 		{
 			this.numPlayersUsing = 0;
@@ -318,11 +360,13 @@ public class TEChest extends TileEntityChest implements IInventory
 		if (par1 == 1)
 		{
 			this.numPlayersUsing = par2;
-			this.checkForAdjacentChests();
+			return true;
 		}
-		return true;
+        else
+        {
+            return super.receiveClientEvent(par1, par2);
+        }
 	}
-
 	@Override
 	public void openInventory()
 	{
@@ -340,9 +384,10 @@ public class TEChest extends TileEntityChest implements IInventory
 	@Override
 	public void invalidate()
 	{
+		this.tileEntityInvalid = true;
 		this.updateContainingBlockInfo();
 		this.checkForAdjacentChests();
-		this.tileEntityInvalid = true;
+
 		//got rid of the super call because it may be interfering with our own calls.
 	}
 
