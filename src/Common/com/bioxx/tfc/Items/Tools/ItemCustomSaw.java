@@ -32,7 +32,7 @@ public class ItemCustomSaw extends ItemCustomAxe implements ISize
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
-		ItemTerraTool.addDurabilityInformation(is, arraylist);
+		ItemTerraTool.addSmithingBonusInformation(is, arraylist);
 	}
 
 	@Override

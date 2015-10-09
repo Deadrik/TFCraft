@@ -1,6 +1,10 @@
 package com.bioxx.tfc.Items.Tools;
 
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
@@ -42,5 +46,11 @@ public class ItemMiscToolHead extends ItemTerra
 		name = name.replace("Sed ", "");
 		name = name.replace("MM ", "");
 		this.itemIcon = registerer.registerIcon(Reference.MOD_ID + ":" + this.textureFolder + name);
+	}
+
+	@Override
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
+	{
+		ItemTerraTool.addSmithingBonusInformation(is, arraylist);
 	}
 }

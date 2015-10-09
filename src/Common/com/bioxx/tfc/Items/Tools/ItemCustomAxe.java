@@ -2,6 +2,7 @@ package com.bioxx.tfc.Items.Tools;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -66,7 +67,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
 		arraylist.add(EnumChatFormatting.AQUA + TFC_Core.translate(getDamageType().toString()));
-		ItemTerraTool.addDurabilityInformation(is, arraylist);
+		ItemTerraTool.addSmithingBonusInformation(is, arraylist);
 	}
 
 	@Override
@@ -116,6 +117,13 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	public int getMaxDamage(ItemStack is)
 	{
 		return (int) Math.floor(getMaxDamage() + (getMaxDamage() * AnvilManager.getDurabilityBuff(is)));
+	}
+
+	@Override
+	public float getDigSpeed(ItemStack stack, Block block, int meta)
+	{
+		float digSpeed = super.getDigSpeed(stack, block, meta);
+		return digSpeed + (digSpeed * AnvilManager.getDurabilityBuff(stack));
 	}
 
 	@Override

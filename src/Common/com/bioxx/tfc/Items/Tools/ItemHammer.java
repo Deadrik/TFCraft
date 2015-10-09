@@ -98,6 +98,13 @@ public class ItemHammer extends ItemTerraTool implements ICausesDamage
 	}
 
 	@Override
+	public float getDigSpeed(ItemStack stack, Block block, int meta)
+	{
+		float digSpeed = super.getDigSpeed(stack, block, meta);
+		return digSpeed + (digSpeed * AnvilManager.getDurabilityBuff(stack));
+	}
+
+	@Override
 	public EnumItemReach getReach(ItemStack is)
 	{
 		return EnumItemReach.MEDIUM;

@@ -2,6 +2,7 @@ package com.bioxx.tfc.Items.Tools;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemPickaxe;
@@ -48,7 +49,7 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
-		ItemTerraTool.addDurabilityInformation(is, arraylist);
+		ItemTerraTool.addSmithingBonusInformation(is, arraylist);
 	}
 
 	@Override
@@ -82,6 +83,13 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	public int getMaxDamage(ItemStack stack)
 	{
 		return (int) (getMaxDamage()+(getMaxDamage() * AnvilManager.getDurabilityBuff(stack)));
+	}
+
+	@Override
+	public float getDigSpeed(ItemStack stack, Block block, int meta)
+	{
+		float digSpeed = super.getDigSpeed(stack, block, meta);
+		return digSpeed + (digSpeed * AnvilManager.getDurabilityBuff(stack));
 	}
 
 	@Override
