@@ -122,4 +122,6 @@ public interface IAnimal
 	boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player);
 
 	boolean getFamiliarizedToday();
+
+	boolean canFamiliarize();
 }

@@ -27,7 +27,6 @@ import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.Items.Tools.ItemKnife;
-import com.bioxx.tfc.Items.Tools.ItemShears;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Entities.IAnimal;
@@ -56,6 +55,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	 */
 	private static final float DIMORPHISM = 0.1633f;
 	private static final int DEGREE_OF_DIVERSION = 2;
+	private static final int FAMILIARITY_CAP = 35;
 
 	private long animalID;
 	private int sex;
@@ -316,7 +316,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 
 		this.dropItem(Items.bone, (int)((rand.nextInt(5) + 2) * ageMod));
 
-		float foodWeight = ageMod*(this.sizeMod * 640);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+		float foodWeight = ageMod * (this.sizeMod * 640);
 		TFC_Core.animalDropMeat(this, TFCItems.muttonRaw, foodWeight);
 	}
 
@@ -354,34 +354,37 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
-			if(player.isSneaking() && !familiarizedToday){
+			if (player.isSneaking() && !familiarizedToday && canFamiliarize())
+			{
 				this.familiarize(player);
-				if(player.getHeldItem() != null && isFood(player.getHeldItem())){
-					return true;
-				}
+				return true;
 			}
 
 			if(getGender() == GenderEnum.FEMALE && pregnant)
 				TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.pregnant"));
 
-			shearer = player;
+			this.shearer = player;
 
-			if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemKnife && !getSheared() && this.checkFamiliarity(InteractionEnum.SHEAR, player) && getPercentGrown(this) > 0.95F)
+			// Shearing with a pair of shears is handled with ItemShears
+			if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemKnife && !getSheared() && this.checkFamiliarity(InteractionEnum.SHEAR, player) && isAdult())
 			{
-				setSheared(true);
-				if(!familiarizedToday){
-					this.familiarize(player);
+				if (!familiarizedToday && this.familiarity <= FAMILIARITY_CAP)
+				{
+					familiarizedToday = true;
+					this.getLookHelper().setLookPositionWithEntity(player, 0, 0);
+					this.playLivingSound();
 				}
-				this.entityDropItem(new ItemStack(TFCItems.wool,1), 0.0F);
-				if(!player.capabilities.isCreativeMode)
+				setSheared(true);
+				this.entityDropItem(new ItemStack(TFCItems.wool, 1), 0.0F);
+				if (!player.capabilities.isCreativeMode)
 					player.getHeldItem().damageItem(1, player);
 			}
 		}
 
 		ItemStack itemstack = player.inventory.getCurrentItem();
 
-		if (itemstack != null && this.isBreedingItemTFC(itemstack) && checkFamiliarity(InteractionEnum.BREED, player) &&
-				this.familiarizedToday && this.getGrowingAge() == 0 && !super.isInLove())
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && checkFamiliarity(InteractionEnum.BREED, player) && this.getGrowingAge() == 0 && !super.isInLove() &&
+			(this.familiarizedToday || !canFamiliarize()))
 		{
 			if (!player.capabilities.isCreativeMode)
 			{
@@ -474,7 +477,12 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		setSheared(true);
-		ret.add(new ItemStack(TFCItems.wool, 2, getFleeceColor()));
+		ret.add(new ItemStack(TFCItems.wool, 2));
+		if (!familiarizedToday && this.familiarity <= FAMILIARITY_CAP)
+		{
+			familiarizedToday = true;
+			this.playLivingSound();
+		}
 		this.worldObj.playSoundAtEntity(this, "mob.sheep.shear", 1.0F, 1.0F);
 		return ret;
 	}
@@ -670,7 +678,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = 6 * obedienceMod / aggressionMod;
-				if (this.isAdult() && familiarity <= 35) // Adult caps at 35
+				if (this.isAdult() && familiarity <= FAMILIARITY_CAP)
 				{
 					familiarity += familiarityChange;
 				}
@@ -694,7 +702,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if (stack != null && !familiarizedToday && this.isFood(stack) && (isAdult() && familiarity < 50 || !isAdult()))
+		if (stack != null && !familiarizedToday && this.isFood(stack) && canFamiliarize())
 		{
 			if (!ep.capabilities.isCreativeMode)
 			{
@@ -705,11 +713,6 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 				worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			}
 			this.hunger += 24000;
-			familiarizedToday = true;
-			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
-			this.playLivingSound();
-		}
-		else if(stack != null && stack.getItem() != null && (stack.getItem() instanceof ItemKnife || stack.getItem() instanceof ItemShears) && !getSheared() && isAdult()){
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();
@@ -748,5 +751,11 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	public int getDueDay()
 	{
 		return TFC_Time.getDayFromTotalHours((timeOfConception + pregnancyRequiredTime) / 1000);
+	}
+
+	@Override
+	public boolean canFamiliarize()
+	{
+		return !isAdult() || isAdult() && this.familiarity <= FAMILIARITY_CAP;
 	}
 }

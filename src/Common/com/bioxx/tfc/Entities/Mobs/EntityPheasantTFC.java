@@ -55,8 +55,9 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	@Override
 	public void onLivingUpdate()
 	{
-		timeUntilNextEgg = 10000;
-		if(this.getLeashed()&&!wasRoped)wasRoped = true;
+		timeUntilNextEgg = 10000; // Keep resetting timer to prevent pheasants from laying eggs
+		if (this.getLeashed() && !wasRoped)
+			wasRoped = true;
 		super.onLivingUpdate();
 	}
 
@@ -90,7 +91,7 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	@Override
 	public void roosterCrow()
 	{
-		//Nulled so that pheasant dont crow since they extend chickens
+		//Empty so that pheasants don't crow since they extend chickens
 	}
 
 	/**
@@ -104,7 +105,7 @@ public class EntityPheasantTFC extends EntityChickenTFC
 
 		if(isAdult())
 		{
-			float foodWeight = ageMod * (this.getSize() * 40);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+			float foodWeight = ageMod * (this.getSize() * 40);
 			TFC_Core.animalDropMeat(this, TFCItems.chickenRaw, foodWeight);
 			this.dropItem(Items.bone, rand.nextInt(2) + 1);
 		}
@@ -167,7 +168,7 @@ public class EntityPheasantTFC extends EntityChickenTFC
 		boolean flag = false;
 		switch(interaction){
 		case NAME:
-			flag = this.getFamiliarity() > 40;
+			flag = this.getFamiliarity() > FAMILIARITY_CAP - 5;
 			break; // 5 Below adult cap since babies are impossible
 		default: break;
 		}

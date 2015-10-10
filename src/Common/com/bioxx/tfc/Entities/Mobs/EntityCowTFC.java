@@ -41,6 +41,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	 */
 	private static final float DIMORPHISM = 0.1822f;
 	private static final int DEGREE_OF_DIVERSION = 1;
+	private static final int FAMILIARITY_CAP = 35;
 
 	private long animalID;
 	private int sex;
@@ -353,7 +354,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		this.entityDropItem(new ItemStack(TFCItems.hide, 1, Math.max(0, Math.min(2, (int)(ageMod * 3 - 1)))), 0);
 		this.dropItem(Items.bone, (int) ((rand.nextInt(6) + 3) * ageMod));
 
-		float foodWeight = ageMod * (this.sizeMod * 4000);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+		float foodWeight = ageMod * (this.sizeMod * 4000);
 
 		TFC_Core.animalDropMeat(this, TFCItems.beefRaw, foodWeight);
 	}
@@ -366,29 +367,32 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
-			if(player.isSneaking() && !familiarizedToday){
+			if (player.isSneaking() && !familiarizedToday && canFamiliarize())
+			{
 				this.familiarize(player);
-				if(player.getHeldItem() != null && isFood(player.getHeldItem())){
-					return true;
-				}
+				return true;
 			}
 
-			if(getGender()==GenderEnum.FEMALE && pregnant)
+			if (getGender() == GenderEnum.FEMALE && pregnant)
 			{
 				TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.pregnant"));
 			}
 
-			if(getGender() == GenderEnum.FEMALE && isAdult() && hasMilkTime < TFC_Time.getTotalTicks() && this.checkFamiliarity(InteractionEnum.MILK, player))
+			if (getGender() == GenderEnum.FEMALE && isAdult() && hasMilkTime < TFC_Time.getTotalTicks() && this.checkFamiliarity(InteractionEnum.MILK, player))
 			{
-				ItemStack var2 = player.inventory.getCurrentItem();
-				if (var2 != null && var2.getItem() == TFCItems.woodenBucketEmpty)
+				ItemStack heldItem = player.inventory.getCurrentItem();
+				if (heldItem != null && heldItem.getItem() == TFCItems.woodenBucketEmpty)
 				{
-					ItemStack is = new ItemStack(TFCItems.woodenBucketMilk);
-					if(!familiarizedToday){
-						this.familiarize(player);
+					if (!familiarizedToday && this.familiarity <= FAMILIARITY_CAP)
+					{
+						familiarizedToday = true;
+						this.getLookHelper().setLookPositionWithEntity(player, 0, 0);
+						this.playLivingSound();
 					}
-					ItemCustomBucketMilk.createTag(is, 20f);
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
+
+					ItemStack milkBucket = new ItemStack(TFCItems.woodenBucketMilk);
+					ItemCustomBucketMilk.createTag(milkBucket, 20f);
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, milkBucket);
 					hasMilkTime = TFC_Time.getTotalTicks() + TFC_Time.DAY_LENGTH;//Can be milked once every day
 					return true;
 				}
@@ -396,7 +400,8 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		}
 
 		ItemStack itemstack = player.inventory.getCurrentItem();
-		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.checkFamiliarity(InteractionEnum.BREED, player)  &&this.familiarizedToday&& this.getGrowingAge() == 0 && !super.isInLove())
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.checkFamiliarity(InteractionEnum.BREED, player) && this.getGrowingAge() == 0 && !super.isInLove() &&
+			(this.familiarizedToday || !canFamiliarize()))
 		{
 			if (!player.capabilities.isCreativeMode)
 			{
@@ -635,7 +640,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = 6 * obedienceMod / aggressionMod;
-				if (this.isAdult() && familiarity <= 35) // Adult caps at 35
+				if (this.isAdult() && familiarity <= FAMILIARITY_CAP)
 				{
 					familiarity += familiarityChange;
 				}
@@ -659,7 +664,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if (stack != null && this.isFood(stack) && !familiarizedToday && (isAdult() && familiarity < 50 || !isAdult()))
+		if (stack != null && this.isFood(stack) && !familiarizedToday && canFamiliarize())
 		{
 			if (!ep.capabilities.isCreativeMode)
 			{
@@ -670,16 +675,6 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 				worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			}
 			this.hunger += 24000;
-			familiarizedToday = true;
-			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
-			this.playLivingSound();
-		}
-		else if(stack != null && stack.getItem() != null && stack.getItem().equals(TFCItems.woodenBucketMilk) && isAdult()){
-			if (!ep.capabilities.isCreativeMode)
-			{
-				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,new ItemStack(TFCItems.woodenBucketEmpty,1,0));
-			}
-			worldObj.playSoundAtEntity(this, "random.drink", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();
@@ -722,6 +717,12 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	public boolean isMilkable()
 	{
 		return canMilk;
+	}
+
+	@Override
+	public boolean canFamiliarize()
+	{
+		return !isAdult() || isAdult() && this.familiarity <= FAMILIARITY_CAP;
 	}
 
 }

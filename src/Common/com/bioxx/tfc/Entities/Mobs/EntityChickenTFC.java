@@ -40,6 +40,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	 */
 	private static final float DIMORPHISM = 0.0606f;
 	private static final int DEGREE_OF_DIVERSION = 2;
+	protected static final int FAMILIARITY_CAP = 45;
 	//private static final float avgAdultWeight = 2; //The average weight of adult males in kg
 
 	private int sex;
@@ -339,7 +340,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 
 		if(isAdult())
 		{
-			float foodWeight = ageMod*(this.sizeMod * 40);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+			float foodWeight = ageMod * (this.sizeMod * 40);
 			TFC_Core.animalDropMeat(this, TFCItems.chickenRaw, foodWeight);
 			this.dropItem(Items.bone, rand.nextInt(2)+1);
 		}
@@ -487,7 +488,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 				return true;
 			}
 
-			if(player.isSneaking() && !familiarizedToday){
+			if (player.isSneaking() && !familiarizedToday && canFamiliarize())
+			{
 				this.familiarize(player);
 				return true;
 			}
@@ -561,7 +563,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = 6 * obedienceMod / aggressionMod;
-				if(this.isAdult() && familiarity <= 45) // Adult caps at 45
+				if (this.isAdult() && familiarity <= FAMILIARITY_CAP)
 				{
 					familiarity += familiarityChange;
 				}
@@ -591,7 +593,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && stack.getItem() != null && isFood(stack) && !familiarizedToday){
+		if (stack != null && isFood(stack) && !familiarizedToday && canFamiliarize())
+		{
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem, ((ItemFoodTFC) stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this));
@@ -637,5 +640,11 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	public int getDueDay()
 	{
 		return 0; // Chickens don't get pregnant
+	}
+
+	@Override
+	public boolean canFamiliarize()
+	{
+		return !isAdult() || isAdult() && this.familiarity <= FAMILIARITY_CAP;
 	}
 }

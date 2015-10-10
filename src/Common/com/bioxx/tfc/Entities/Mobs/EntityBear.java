@@ -50,6 +50,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	 */
 	private static final float DIMORPHISM = 0.2182f;
 	private static final int DEGREE_OF_DIVERSION = 4;
+	private static final int FAMILIARITY_CAP = 80; //Adult bears cap out at 80 since it is currently impossible to get baby bears.
 
 	private long animalID;
 	private int sex;
@@ -676,7 +677,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
-			if (player.isSneaking() && !familiarizedToday)
+			if (player.isSneaking() && !familiarizedToday && canFamiliarize())
 			{
 				this.familiarize(player);
 				return true;
@@ -777,7 +778,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = 3 * obedienceMod / aggressionMod; //Changed from 6 to 3 so bears are harder to tame by default. -Kitty
-				if(this.isAdult() && familiarity <= 80) //Adult bears cap out at 80 since it is currently impossible to get baby bears.
+				if (this.isAdult() && familiarity <= FAMILIARITY_CAP)
 				{
 					familiarity += familiarityChange;
 				}
@@ -806,7 +807,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if (stack != null && isFood(stack) && !familiarizedToday)
+		if (stack != null && isFood(stack) && !familiarizedToday && canFamiliarize())
 		{
 			if (!ep.capabilities.isCreativeMode)
 			{
@@ -854,5 +855,11 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	public int getDueDay()
 	{
 		return TFC_Time.getDayFromTotalHours((timeOfConception + pregnancyRequiredTime) / 1000);
+	}
+
+	@Override
+	public boolean canFamiliarize()
+	{
+		return !isAdult() || isAdult() && this.familiarity <= FAMILIARITY_CAP;
 	}
 }

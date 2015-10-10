@@ -40,6 +40,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	 */
 	private static final float DIMORPHISM = 0.271f;
 	private static final int DEGREE_OF_DIVERSION = 2;
+	private static final int FAMILIARITY_CAP = 35;
 
 	private long animalID;
 	private int sex;
@@ -329,7 +330,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
-			if (player.isSneaking() && !familiarizedToday)
+			if (player.isSneaking() && !familiarizedToday && canFamiliarize())
 			{
 				this.familiarize(player);
 				return true;
@@ -340,8 +341,8 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 
 		ItemStack itemstack = player.inventory.getCurrentItem();
 
-		if (itemstack != null && this.isBreedingItemTFC(itemstack) && checkFamiliarity(InteractionEnum.BREED, player) &&
-				this.familiarizedToday && this.getGrowingAge() == 0 && !super.isInLove())
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && checkFamiliarity(InteractionEnum.BREED, player) && this.getGrowingAge() == 0 && !super.isInLove() &&
+			(this.familiarizedToday || !canFamiliarize()))
 		{
 			if (!player.capabilities.isCreativeMode)
 			{
@@ -392,7 +393,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		this.entityDropItem(new ItemStack(TFCItems.hide, 1, Math.max(0, Math.min(2, (int)(ageMod * sizeMod)))), 0);
 		this.dropItem(Items.bone, (int) ((rand.nextInt(4) + 2) * ageMod));
 
-		float foodWeight = ageMod * (this.sizeMod * 2400);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+		float foodWeight = ageMod * (this.sizeMod * 2400);
 		TFC_Core.animalDropMeat(this, TFCItems.porkchopRaw, foodWeight);
 	}
 
@@ -656,7 +657,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = 6 * obedienceMod / aggressionMod;
-				if (this.isAdult() && familiarity <= 35) // Adult caps at 35
+				if (this.isAdult() && familiarity <= FAMILIARITY_CAP)
 				{
 					familiarity += familiarityChange;
 				}
@@ -681,7 +682,8 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	public void familiarize(EntityPlayer ep) 
 	{
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && this.isFood(stack) && !familiarizedToday){
+		if (stack != null && this.isFood(stack) && !familiarizedToday && canFamiliarize())
+		{
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem, ((ItemFoodTFC) stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this));
@@ -727,5 +729,11 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	public int getDueDay()
 	{
 		return TFC_Time.getDayFromTotalHours((timeOfConception + pregnancyRequiredTime) / 1000);
+	}
+
+	@Override
+	public boolean canFamiliarize()
+	{
+		return !isAdult() || isAdult() && this.familiarity <= FAMILIARITY_CAP;
 	}
 }

@@ -48,6 +48,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	 */
 	private static final float DIMORPHISM = 0.0786f;
 	private static final int DEGREE_OF_DIVERSION = 1;
+	private static final int FAMILIARITY_CAP = 35;
 
 	private long animalID;
 	private int sex;
@@ -453,7 +454,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = 6 * obedienceMod / aggressionMod;
-				if(this.isAdult() && familiarity >= 5 && familiarity <= 35) // Adult caps at 35
+				if (this.isAdult() && familiarity >= 5 && familiarity <= FAMILIARITY_CAP)
 				{
 					familiarity += familiarityChange;
 				}
@@ -676,7 +677,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	{
 		if(!worldObj.isRemote)
 		{
-			if (player.isSneaking() && this.getOwner() != null)
+			if (player.isSneaking() && this.getOwner() != null && canFamiliarize())
 			{
 				this.familiarize(player);
 				return true;
@@ -850,7 +851,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 
 	@Override
 	public void familiarize(EntityPlayer ep) {
-		if(happyTicks == 0 && familiarity >= 5){
+		if (happyTicks == 0 && familiarity >= 5 && !familiarizedToday && canFamiliarize())
+		{
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();
@@ -903,5 +905,11 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	public int getHappyTicks()
 	{
 		return this.happyTicks;
+	}
+
+	@Override
+	public boolean canFamiliarize()
+	{
+		return !isAdult() || isAdult() && this.familiarity <= FAMILIARITY_CAP;
 	}
 }
