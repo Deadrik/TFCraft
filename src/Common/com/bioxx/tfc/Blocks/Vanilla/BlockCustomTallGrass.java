@@ -97,6 +97,8 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 			{
 				createStraw(world, player, i, j, k);
 				is.damageItem(1, player);
+				if (is.stackSize == 0)
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 				break;
 			}
 			else if (name.startsWith("itemScythe"))
@@ -112,6 +114,8 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 						{
 							createStraw(world, player, i + x, j, k + z);
 							is.damageItem(1, player);
+							if (is.stackSize == 0)
+								player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 							world.setBlockToAir(i + x, j, k + z);
 						}
 					}
