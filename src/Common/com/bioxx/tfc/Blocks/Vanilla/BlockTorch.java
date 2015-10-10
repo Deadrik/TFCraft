@@ -89,13 +89,11 @@ public class BlockTorch extends BlockTerraContainer
 				if (world.getBlockMetadata(x, y, z) >= 8)
 				{
 				    world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)-8, 3);
-					setLightLevel(0.9375F);
 				}
 			}
 			else if (world.getBlockMetadata(x, y, z) < 8)
 			{
 				world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)+8, 3);
-				setLightLevel(0.0F);
 			}
 		}
 		else
@@ -250,7 +248,6 @@ public class BlockTorch extends BlockTerraContainer
 					world.isRaining() && world.canBlockSeeTheSky(x, y, z))
 			{
 				world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)+8, 3);
-				setLightLevel(0.0F);
 			}
 		}
 	}
