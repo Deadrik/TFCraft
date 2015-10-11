@@ -176,10 +176,10 @@ public class BlockHopper extends BlockTerraContainer
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
 	{
-		TEHopper te = (TEHopper)world.getTileEntity(x, y, z);
-
-		if (te != null)
+		if (world.getTileEntity(x, y, z) instanceof TEHopper)
 		{
+			TEHopper te = (TEHopper) world.getTileEntity(x, y, z);
+
 			for (int i1 = 0; i1 < te.getSizeInventory(); ++i1)
 			{
 				ItemStack itemstack = te.getStackInSlot(i1);

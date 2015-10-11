@@ -147,7 +147,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 		{
 			for(int z = -1; z <= 1; z++)
 			{
-				if(worldObj.getBlock(xCoord + x, yCoord + 1, zCoord + z) == Blocks.fire)
+				if (worldObj.blockExists(xCoord + x, yCoord + 1, zCoord + z) && worldObj.getBlock(xCoord + x, yCoord + 1, zCoord + z) == Blocks.fire)
 					foundFire = true;
 			}
 		}

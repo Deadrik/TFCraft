@@ -493,9 +493,12 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	{
 		int meta = world.getBlockMetadata(x, y, z);
 		int dir = meta & 3;
-		TEBloomery te = (TEBloomery)world.getTileEntity(x, y, z);
-		if(te.isFlipped)
-			dir = flipDir(dir);
+		if (world.getTileEntity(x, y, z) instanceof TEBloomery)
+		{
+			TEBloomery te = (TEBloomery) world.getTileEntity(x, y, z);
+			if (te.isFlipped)
+				dir = flipDir(dir);
+		}
 		float f = 0.125F;
 
 		if (!BlockEarlyBloomery.isOpen(meta))

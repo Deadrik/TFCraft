@@ -531,7 +531,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 	}
 	private void smokeBlock(int x, int y, int z)
 	{
-		if(worldObj.getBlock(x, y, z) == TFCBlocks.smokeRack)
+		if (worldObj.blockExists(x, y, z) && worldObj.getBlock(x, y, z) == TFCBlocks.smokeRack)
 		{
 			TESmokeRack te = (TESmokeRack) worldObj.getTileEntity(x, y, z);
 			te.lastSmokedTime = (int)TFC_Time.getTotalHours();

@@ -40,29 +40,37 @@ public class TEForge extends TEFireEntity implements IInventory
 
 	private boolean validateSmokeStack()
 	{
-
 		if (directChimney(worldObj.getPrecipitationHeight(xCoord, zCoord) - 1))
 			return true;
-		else if(!worldObj.getBlock(xCoord + 1, yCoord + 1, zCoord).isOpaqueCube() && worldObj.canBlockSeeTheSky(xCoord + 1, yCoord + 1, zCoord))
+		else if (checkChimney(xCoord + 1, yCoord + 1, zCoord))
 			return true;
-		else if(!worldObj.getBlock(xCoord - 1, yCoord + 1, zCoord).isOpaqueCube() && worldObj.canBlockSeeTheSky(xCoord - 1, yCoord + 1, zCoord))
+		else if (checkChimney(xCoord - 1, yCoord + 1, zCoord))
 			return true;
-		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord + 1).isOpaqueCube() && worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord + 1))
+		else if (checkChimney(xCoord, yCoord + 1, zCoord + 1))
 			return true;
-		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1).isOpaqueCube() && worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord - 1))
+		else if (checkChimney(xCoord, yCoord + 1, zCoord - 1))
 			return true;
-		else if(!worldObj.getBlock(xCoord + 1, yCoord + 1, zCoord).isOpaqueCube() && !worldObj.getBlock(xCoord+2, yCoord + 1, zCoord).isOpaqueCube() &&
-				worldObj.canBlockSeeTheSky(xCoord+2, yCoord + 1, zCoord))
+		else if (notOpaque(xCoord + 1, yCoord + 1, zCoord) && checkChimney(xCoord + 2, yCoord + 1, zCoord))
 			return true;
-		else if(!worldObj.getBlock(xCoord - 1, yCoord + 1, zCoord).isOpaqueCube() && !worldObj.getBlock(xCoord-2, yCoord + 1, zCoord).isOpaqueCube() &&
-				worldObj.canBlockSeeTheSky(xCoord-2, yCoord + 1, zCoord))
+		else if (notOpaque(xCoord - 1, yCoord + 1, zCoord) && checkChimney(xCoord - 2, yCoord + 1, zCoord))
 			return true;
-		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord + 1).isOpaqueCube() && !worldObj.getBlock(xCoord, yCoord + 1, zCoord+2).isOpaqueCube() &&
-				worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord+2))
+		else if (notOpaque(xCoord, yCoord + 1, zCoord + 1) && checkChimney(xCoord, yCoord + 1, zCoord + 2))
 			return true;
 		else
-			return !worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1).isOpaqueCube() &&!worldObj.getBlock(xCoord, yCoord + 1, zCoord - 2).isOpaqueCube() &&
-					worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord - 2);
+			return notOpaque(xCoord, yCoord + 1, zCoord - 1) && checkChimney(xCoord, yCoord + 1, zCoord - 2);
+	}
+
+	private boolean checkChimney(int x, int y, int z)
+	{
+		if (notOpaque(x, y, z) && worldObj.canBlockSeeTheSky(x, y, z))
+			return true;
+
+		return false;
+	}
+
+	private boolean notOpaque(int x, int y, int z)
+	{
+		return worldObj.blockExists(x, y, z) && !worldObj.getBlock(x, y, z).isOpaqueCube();
 	}
 
 	private boolean directChimney(int highestY)
@@ -506,49 +514,49 @@ public class TEForge extends TEFireEntity implements IInventory
 	{
 		if(!TFCOptions.generateSmoke)
 			return;
-		if(worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) && !worldObj.isRaining())
-			genSmokeRoot(xCoord, yCoord+1, zCoord);
-		else if(!worldObj.getBlock(xCoord + 1, yCoord + 1, zCoord).isOpaqueCube() && worldObj.canBlockSeeTheSky(xCoord + 1, yCoord + 1, zCoord))
+
+		if (checkChimney(xCoord + 1, yCoord + 1, zCoord))
 			genSmokeRoot(xCoord+1, yCoord+1, zCoord);
-		else if(!worldObj.getBlock(xCoord - 1, yCoord + 1, zCoord).isOpaqueCube() && worldObj.canBlockSeeTheSky(xCoord - 1, yCoord + 1, zCoord))
+		else if (checkChimney(xCoord - 1, yCoord + 1, zCoord))
 			genSmokeRoot(xCoord-1, yCoord+1, zCoord);
-		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord + 1).isOpaqueCube() && worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord + 1))
+		else if (checkChimney(xCoord, yCoord + 1, zCoord + 1))
 			genSmokeRoot(xCoord, yCoord+1, zCoord+1);
-		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1).isOpaqueCube() && worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord - 1))
+		else if (checkChimney(xCoord, yCoord + 1, zCoord - 1))
 			genSmokeRoot(xCoord, yCoord+1, zCoord-1);
-		else if(!worldObj.getBlock(xCoord + 2, yCoord + 1, zCoord).isOpaqueCube() && !worldObj.getBlock(xCoord+2, yCoord + 1, zCoord).isOpaqueCube() &&
-				worldObj.canBlockSeeTheSky(xCoord+2, yCoord + 1, zCoord))
+		else if (notOpaque(xCoord + 1, yCoord + 1, zCoord) && checkChimney(xCoord + 2, yCoord + 1, zCoord))
 			genSmokeRoot(xCoord+2, yCoord+1, zCoord);
-		else if(!worldObj.getBlock(xCoord - 2, yCoord + 1, zCoord).isOpaqueCube() && !worldObj.getBlock(xCoord-2, yCoord + 1, zCoord).isOpaqueCube() &&
-				worldObj.canBlockSeeTheSky(xCoord-2, yCoord + 1, zCoord))
+		else if (notOpaque(xCoord - 1, yCoord + 1, zCoord) && checkChimney(xCoord - 2, yCoord + 1, zCoord))
 			genSmokeRoot(xCoord-2, yCoord+1, zCoord);
-		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord + 2).isOpaqueCube() && !worldObj.getBlock(xCoord, yCoord + 1, zCoord+2).isOpaqueCube() &&
-				worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord+2))
+		else if (notOpaque(xCoord, yCoord + 1, zCoord + 1) && checkChimney(xCoord, yCoord + 1, zCoord + 2))
 			genSmokeRoot(xCoord, yCoord+1, zCoord+2);
-		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord - 2).isOpaqueCube() && !worldObj.getBlock(xCoord, yCoord + 1, zCoord-2).isOpaqueCube() &&
-				worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord-2))
+		else if (notOpaque(xCoord, yCoord + 1, zCoord - 1) && checkChimney(xCoord, yCoord + 1, zCoord - 2))
 			genSmokeRoot(xCoord, yCoord+1, zCoord-2);
 	}
 
 	public void removeSmoke() {
-		if(worldObj.getBlock(xCoord, yCoord+1, zCoord) == TFCBlocks.smoke)
+		if (isSmoke(xCoord, yCoord + 1, zCoord))
 			worldObj.setBlockToAir(xCoord, yCoord+1, zCoord);
-		else if(worldObj.getBlock(xCoord+1, yCoord+1, zCoord) == TFCBlocks.smoke)
+		else if (isSmoke(xCoord + 1, yCoord + 1, zCoord))
 			worldObj.setBlockToAir(xCoord+1, yCoord+1, zCoord);
-		else if(worldObj.getBlock(xCoord-1, yCoord+1, zCoord) == TFCBlocks.smoke)
+		else if (isSmoke(xCoord - 1, yCoord + 1, zCoord))
 			worldObj.setBlockToAir(xCoord-1, yCoord+1, zCoord);
-		else if(worldObj.getBlock(xCoord, yCoord+1, zCoord+1) == TFCBlocks.smoke)
+		else if (isSmoke(xCoord, yCoord + 1, zCoord + 1))
 			worldObj.setBlockToAir(xCoord, yCoord+1, zCoord+1);
-		else if(worldObj.getBlock(xCoord, yCoord+1, zCoord-1) == TFCBlocks.smoke)
+		else if (isSmoke(xCoord, yCoord + 1, zCoord - 1))
 			worldObj.setBlockToAir(xCoord, yCoord+1, zCoord-1);
-		else if(worldObj.getBlock(xCoord+2, yCoord+1, zCoord) == TFCBlocks.smoke)
+		else if (isSmoke(xCoord + 2, yCoord + 1, zCoord))
 			worldObj.setBlockToAir(xCoord+2, yCoord+1, zCoord);
-		else if(worldObj.getBlock(xCoord-2, yCoord+1, zCoord) == TFCBlocks.smoke)
+		else if (isSmoke(xCoord - 2, yCoord + 1, zCoord))
 			worldObj.setBlockToAir(xCoord-2, yCoord+1, zCoord);
-		else if(worldObj.getBlock(xCoord, yCoord+1, zCoord+2) == TFCBlocks.smoke)
+		else if (isSmoke(xCoord, yCoord + 1, zCoord + 2))
 			worldObj.setBlockToAir(xCoord, yCoord+1, zCoord+2);
-		else if(worldObj.getBlock(xCoord, yCoord+1, zCoord-2) == TFCBlocks.smoke)
+		else if (isSmoke(xCoord, yCoord + 1, zCoord - 2))
 			worldObj.setBlockToAir(xCoord, yCoord+1, zCoord-2);
+	}
+
+	private boolean isSmoke(int x, int y, int z)
+	{
+		return worldObj.blockExists(x, y, z) && worldObj.getBlock(x, y, z) == TFCBlocks.smoke;
 	}
 
 	@Override

@@ -54,10 +54,10 @@ public class BlockCrucible extends BlockTerraContainer
 	@Override
 	public void breakBlock(World world, int i, int j, int k, Block block, int par6)
 	{
-		TECrucible te = (TECrucible)world.getTileEntity(i, j, k);
-
-		if (te != null)
+		if (world.getTileEntity(i, j, k) instanceof TECrucible)
 		{
+			TECrucible te = (TECrucible) world.getTileEntity(i, j, k);
+
 			ItemStack is = new ItemStack(Item.getItemFromBlock(block), 1);
 			NBTTagCompound nbt = writeCrucibleToNBT(te);
 			is.setTagCompound(nbt);

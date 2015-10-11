@@ -78,17 +78,20 @@ public class TEBellows extends NetworkTileEntity
 		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 		int x = BLOCK_MAP[meta][0];
 		int z = BLOCK_MAP[meta][1];
-		TileEntity te = worldObj.getTileEntity(xCoord + x, yCoord, zCoord + z);
-		TileEntity te2 = worldObj.getTileEntity(xCoord + x, yCoord - 1, zCoord + z);
-		TEFireEntity tileentityfirepit = null;
+		if (worldObj.blockExists(xCoord + x, yCoord, zCoord + z))
+		{
+			TileEntity te = worldObj.getTileEntity(xCoord + x, yCoord, zCoord + z);
+			TileEntity te2 = worldObj.getTileEntity(xCoord + x, yCoord - 1, zCoord + z);
+			TEFireEntity tileentityfirepit = null;
 
-		if (te instanceof TEFireEntity)
-			tileentityfirepit = (TEFireEntity) te;
-		else if (te2 instanceof TEForge)
-			tileentityfirepit = (TEFireEntity) te2;
+			if (te instanceof TEFireEntity)
+				tileentityfirepit = (TEFireEntity) te;
+			else if (te2 instanceof TEForge)
+				tileentityfirepit = (TEFireEntity) te2;
 
-		if (tileentityfirepit != null)
-			tileentityfirepit.receiveAirFromBellows();
+			if (tileentityfirepit != null)
+				tileentityfirepit.receiveAirFromBellows();
+		}
 	}
 
 	@Override

@@ -161,10 +161,10 @@ public class BlockLoom extends BlockTerraContainer
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
 	{
-		TELoom te = (TELoom)world.getTileEntity(x, y, z);
-
-		if (te != null)
+		if (world.getTileEntity(x, y, z) instanceof TELoom)
 		{
+			TELoom te = (TELoom) world.getTileEntity(x, y, z);
+
 			ItemStack is = new ItemStack(Item.getItemFromBlock(block), 1, te.loomType);
 			NBTTagCompound nbt = writeLoomToNBT(te);
 			is.setTagCompound(nbt);

@@ -196,20 +196,16 @@ public class TEChest extends TileEntityChest implements IInventory
 			this.adjacentChestXNeg = null;
 			this.adjacentChestZPos = null;
 
-			if (this.worldObj.getBlock(this.xCoord - 1, this.yCoord, this.zCoord) == TFCBlocks.chest && 
-					checkType(worldObj, xCoord - 1, yCoord, zCoord))
+			if (isChest(xCoord - 1, yCoord, zCoord))
 				this.adjacentChestXNeg = (TEChest)this.worldObj.getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
 
-			if (this.worldObj.getBlock(this.xCoord + 1, this.yCoord, this.zCoord) == TFCBlocks.chest && 
-					checkType(worldObj, xCoord + 1, yCoord, zCoord))
+			if (isChest(xCoord + 1, yCoord, zCoord))
 				this.adjacentChestXPos = (TEChest)this.worldObj.getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
 
-			if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord - 1) == TFCBlocks.chest && 
-					checkType(worldObj, xCoord, yCoord, zCoord-1))
+			if (isChest(xCoord, yCoord, zCoord - 1))
 				this.adjacentChestZNeg = (TEChest)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
 
-			if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord + 1) == TFCBlocks.chest && 
-					checkType(worldObj, xCoord, yCoord, zCoord+1))
+			if (isChest(xCoord, yCoord, zCoord + 1))
 				this.adjacentChestZPos = (TEChest)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
 
 			/*
@@ -236,6 +232,11 @@ public class TEChest extends TileEntityChest implements IInventory
 				((TEChest) this.adjacentChestXNeg).updateSide(this, 3);
 			}
 		}
+	}
+
+	private boolean isChest(int x, int y, int z)
+	{
+		return this.worldObj.getBlock(x, y, z) == TFCBlocks.chest && checkType(worldObj, x, y, z);
 	}
 
 	private void updateSide(TileEntityChest teChest, int side)
@@ -274,6 +275,7 @@ public class TEChest extends TileEntityChest implements IInventory
 				{
 					this.adjacentChestChecked = false;
 				}
+				break;
 			}
 		}
 	}
