@@ -209,6 +209,7 @@ public class TFCBlocks
 
 	public static Block bookshelf;
 	public static Block torch;
+	public static Block torchOff;
 	public static Block chest;
 	public static Block workbench;
 	public static Block cactus;

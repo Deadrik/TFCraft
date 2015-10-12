@@ -35,7 +35,7 @@ import static net.minecraftforge.common.util.ForgeDirection.*;
 
 public class BlockTorch extends BlockTerraContainer
 {
-	private IIcon offIcon;
+	protected IIcon offIcon;
 	public BlockTorch()
 	{
 		super(Material.circuits);
@@ -75,25 +75,30 @@ public class BlockTorch extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			if(world.getBlockMetadata(x, y, z) < 8 && player.inventory.getCurrentItem() != null && 
-					player.inventory.getCurrentItem().getItem() == TFCItems.stick)
+			int meta = world.getBlockMetadata(x, y, z);
+			ItemStack is = player.inventory.getCurrentItem();
+			Item item = is != null ? is.getItem() : null;
+
+			// Making new torches. Keep meta check just in case there are some burned out torches that haven't converted yet.
+			if (meta < 8 && item == TFCItems.stick)
 			{	
 				player.inventory.consumeInventoryItem(TFCItems.stick);
 				TFC_Core.giveItemToPlayer(new ItemStack(TFCBlocks.torch), player);
 			}
-			else if(player.inventory.getCurrentItem() != null && 
-					player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(TFCBlocks.torch))
+			// Refreshing torch timer, or re-lighting burned out torches that haven't converted yet.
+			else if (item == Item.getItemFromBlock(TFCBlocks.torch))
 			{
 				TELightEmitter te = (TELightEmitter)world.getTileEntity(x, y, z);
 				te.hourPlaced = (int)TFC_Time.getTotalHours();
-				if (world.getBlockMetadata(x, y, z) >= 8)
+				if (meta >= 8)
 				{
-				    world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)-8, 3);
+					world.setBlockMetadataWithNotify(x, y, z, meta - 8, 3);
 				}
 			}
-			else if (world.getBlockMetadata(x, y, z) < 8)
+			// Extinguish the torch
+			else
 			{
-				world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)+8, 3);
+				world.setBlock(x, y, z, TFCBlocks.torchOff, meta, 3);
 			}
 		}
 		else
@@ -112,6 +117,7 @@ public class BlockTorch extends BlockTerraContainer
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 
+		// Breaking torches that haven't converted yet.
 		if(metadata >= 8)
 			return ret;
 
@@ -236,19 +242,24 @@ public class BlockTorch extends BlockTerraContainer
 	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
 		super.updateTick(world, x, y, z, rand);
+		int meta = world.getBlockMetadata(x, y, z);
 
-		if (world.getBlockMetadata(x, y, z) == 0)
+		if (meta == 0)
 		{
 			this.onBlockAdded(world, x, y, z);
 		}
-		if(world.getBlockMetadata(x, y, z) < 8 && TFCOptions.torchBurnTime != 0)
+		if (TFCOptions.torchBurnTime != 0 && world.getTileEntity(x, y, z) instanceof TELightEmitter)
 		{
 			TELightEmitter te = (TELightEmitter) world.getTileEntity(x, y, z);
-			if (te != null && TFC_Time.getTotalHours() > te.hourPlaced + TFCOptions.torchBurnTime || 
+			if (TFC_Time.getTotalHours() > te.hourPlaced + TFCOptions.torchBurnTime ||
 					world.isRaining() && world.canBlockSeeTheSky(x, y, z))
 			{
-				world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)+8, 3);
+				world.setBlock(x, y, z, TFCBlocks.torchOff, meta, 3);
 			}
+		}
+		else if (meta >= 8)
+		{
+			world.setBlock(x, y, z, TFCBlocks.torchOff, meta - 8, 3);
 		}
 	}
 

@@ -564,6 +564,7 @@ public class ClientProxy extends CommonProxy
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.stoneStalac));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.strawHideBed));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.sulfur));
+			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.torchOff));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.waterPlant));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.woodHoriz, 1, OreDictionary.WILDCARD_VALUE));
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.woodHoriz2, 1, OreDictionary.WILDCARD_VALUE));

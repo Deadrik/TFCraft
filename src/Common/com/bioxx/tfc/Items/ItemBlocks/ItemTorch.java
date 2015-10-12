@@ -67,7 +67,7 @@ public class ItemTorch extends ItemTerraBlock
 		if (side == 4) --xCoord;
 		if (side == 5) ++xCoord;
 		Block block = world.getBlock(xCoord, yCoord, zCoord);
-		if(block != TFCBlocks.torch)
+		if (block != TFCBlocks.torch && block != TFCBlocks.torchOff)
 			return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
 
 		return false;

@@ -2091,6 +2091,7 @@ tile.BasicPipe.name=Pipe
 tile.ValvePipe.name=Valve Pipe
 tile.Smoke.name=Smoke
 tile.Torch.name=Torch
+tile.TorchOff.name=Extinguished Torch
 tile.Chest.name=Chest
 tile.Bookshelf.name=Bookshelf
 tile.Workbench.name=Workbench
