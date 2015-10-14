@@ -122,7 +122,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
 		ItemTerra.addHeatInformation(is, arraylist);
-		ItemTerraTool.addDurabilityInformation(is, arraylist);
+		ItemTerraTool.addSmithingBonusInformation(is, arraylist);
 
 		if (TFC_Core.showShiftInformation()) 
 		{

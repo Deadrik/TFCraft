@@ -254,7 +254,9 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 24, 0, 0));
 		float temp = TFC_Climate.getBioTemperatureHeight(world, x, world.getTopSolidOrLiquidBlock(x, z), z);
 		float rain = TFC_Climate.getRainfall(world, x, 150, z);
-		float evt = TFC_Climate.getCacheManager(world).getEVTLayerAt( x, z).floatdata1;
+		float evt = 0.0f;
+		if (TFC_Climate.getCacheManager(world) != null && TFC_Climate.getCacheManager(world).getEVTLayerAt(x, z) != null)
+			evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(x, z).floatdata1;
 		boolean isMountainous = biome == TFCBiome.MOUNTAINS || biome == TFCBiome.HIGH_HILLS;
 		//To adjust animal spawning at higher altitudes
 		int mountainousAreaModifier = isMountainous? - 1 : 0;

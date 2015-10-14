@@ -231,7 +231,7 @@ public class BlockGrass extends BlockTerra
 					{
 						for(int z = -4; z < 5 && !nearWater; z++)
 						{
-							if(j < 250 && j > Global.SEALEVEL && world.getBlock(i+x, j-y, k+z).getMaterial() == Material.water)
+							if (j < 250 && j > Global.SEALEVEL && world.blockExists(i + x, j - y, k + z) && world.getBlock(i + x, j - y, k + z).getMaterial() == Material.water)
 								nearWater = true;
 						}
 					}
@@ -259,7 +259,7 @@ public class BlockGrass extends BlockTerra
 			int z = k + rand.nextInt(3) - 1;
 			int y = world.getTopSolidOrLiquidBlock(x, z) - 1;
 
-			if (world.getBlock(x, y + 1, z).getMaterial() != Material.water)
+			if (world.blockExists(x, y, z) && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
 			{
 				float rain = TFC_Climate.getRainfall(world, x, y, z);
 

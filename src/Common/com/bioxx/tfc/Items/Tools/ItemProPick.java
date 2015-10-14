@@ -246,9 +246,16 @@ public class ItemProPick extends ItemTerra
 	}
 
 	@Override
+	public float getDigSpeed(ItemStack stack, Block block, int meta)
+	{
+		float digSpeed = super.getDigSpeed(stack, block, meta);
+		return digSpeed + (digSpeed * AnvilManager.getDurabilityBuff(stack));
+	}
+
+	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
-		ItemTerraTool.addDurabilityInformation(is, arraylist);
+		ItemTerraTool.addSmithingBonusInformation(is, arraylist);
 	}
 }

@@ -42,6 +42,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	 */
 	private static final float DIMORPHISM = 0.1728f;
 	private static final int DEGREE_OF_DIVERSION = 1;
+	private static final int FAMILIARITY_CAP = 70; // Adult caps at 70 since babies are currently impossible
 
 	private boolean running;
 	private long animalID;
@@ -329,7 +330,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		float ageMod = TFC_Core.getPercentGrown(this);	
 		this.entityDropItem(new ItemStack(TFCItems.hide, 1, Math.max(0, Math.min(2, (int)(ageMod * sizeMod * 1.84)))), 0);
 		this.dropItem(Items.bone, (int)((rand.nextInt(4) + 2) * ageMod));
-		float foodWeight = ageMod * (this.sizeMod * 2400);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+		float foodWeight = ageMod * (this.sizeMod * 2400);
 
 		TFC_Core.animalDropMeat(this, TFCItems.venisonRaw, foodWeight);
 	}
@@ -351,7 +352,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
-			if(player.isSneaking()){
+			if (player.isSneaking() && canFamiliarize())
+			{
 				this.familiarize(player);
 				return true;
 			}
@@ -659,7 +661,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = 6 * obedienceMod / aggressionMod;
-				if(this.isAdult() && familiarity <= 70) // Adult caps at 70 since babies are currently impossible
+				if (this.isAdult() && familiarity <= FAMILIARITY_CAP)
 				{
 					familiarity += familiarityChange;
 				}
@@ -683,7 +685,9 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && stack.getItem()!= null && stack.getItem().equals(TFCItems.powder) && stack.getItemDamage() == 9){
+		if (stack != null && stack.getItem() != null && stack.getItem().equals(TFCItems.powder) && stack.getItemDamage() == 9 &&
+			!familiarizedToday && canFamiliarize())
+		{
 			if (!ep.capabilities.isCreativeMode)
 			{
 				stack.stackSize--;
@@ -695,7 +699,6 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();
 		}
-
 	}
 	
 	//Unused for now
@@ -734,5 +737,11 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	public int getDueDay()
 	{
 		return TFC_Time.getDayFromTotalHours((timeOfConception + pregnancyRequiredTime) / 1000);
+	}
+
+	@Override
+	public boolean canFamiliarize()
+	{
+		return !isAdult() || isAdult() && this.familiarity <= FAMILIARITY_CAP;
 	}
 }

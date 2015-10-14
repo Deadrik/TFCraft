@@ -229,11 +229,9 @@ public class BlockForge extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			TEForge te = (TEForge)world.getTileEntity(x, y, z);
-
-			if (te != null)
+			if (world.getTileEntity(x, y, z) instanceof TEForge)
 			{
-				te.removeSmoke();
+				((TEForge) world.getTileEntity(x, y, z)).removeSmoke();
 			}
 		}
 

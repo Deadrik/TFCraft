@@ -157,6 +157,8 @@ public class TEChest extends TileEntityChest implements IInventory
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
 		type = pkt.func_148857_g().getInteger("woodtype");
+		// Reset the check flag in case the client has desynced from the server
+		this.adjacentChestChecked = false;
 	}
 
 	@Override
@@ -169,13 +171,6 @@ public class TEChest extends TileEntityChest implements IInventory
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
 	{
 		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
-	}
-
-	@Override
-	public void updateContainingBlockInfo()
-	{
-		super.updateContainingBlockInfo();
-		this.adjacentChestChecked = false;
 	}
 
 	public boolean checkType(IBlockAccess access, int x, int y, int z)
@@ -201,33 +196,87 @@ public class TEChest extends TileEntityChest implements IInventory
 			this.adjacentChestXNeg = null;
 			this.adjacentChestZPos = null;
 
-			if (this.worldObj.getBlock(this.xCoord - 1, this.yCoord, this.zCoord) == TFCBlocks.chest && 
-					checkType(worldObj, xCoord - 1, yCoord, zCoord))
+			if (isChest(xCoord - 1, yCoord, zCoord))
 				this.adjacentChestXNeg = (TEChest)this.worldObj.getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
 
-			if (this.worldObj.getBlock(this.xCoord + 1, this.yCoord, this.zCoord) == TFCBlocks.chest && 
-					checkType(worldObj, xCoord + 1, yCoord, zCoord))
+			if (isChest(xCoord + 1, yCoord, zCoord))
 				this.adjacentChestXPos = (TEChest)this.worldObj.getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
 
-			if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord - 1) == TFCBlocks.chest && 
-					checkType(worldObj, xCoord, yCoord, zCoord-1))
+			if (isChest(xCoord, yCoord, zCoord - 1))
 				this.adjacentChestZNeg = (TEChest)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
 
-			if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord + 1) == TFCBlocks.chest && 
-					checkType(worldObj, xCoord, yCoord, zCoord+1))
+			if (isChest(xCoord, yCoord, zCoord + 1))
 				this.adjacentChestZPos = (TEChest)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
 
+			/*
+			* Use updateSide because this method runs every render tick and 
+			* there's no need to also edit the blockType and blockMetadata
+			*/
 			if (this.adjacentChestZNeg != null)
-				this.adjacentChestZNeg.updateContainingBlockInfo();
+			{
+				((TEChest) this.adjacentChestZNeg).updateSide(this, 0);
+			}
 
 			if (this.adjacentChestZPos != null)
-				this.adjacentChestZPos.updateContainingBlockInfo();
+			{
+				((TEChest) this.adjacentChestZPos).updateSide(this, 2);
+			}
 
 			if (this.adjacentChestXPos != null)
-				this.adjacentChestXPos.updateContainingBlockInfo();
+			{
+				((TEChest) this.adjacentChestXPos).updateSide(this, 1);
+			}
 
 			if (this.adjacentChestXNeg != null)
-				this.adjacentChestXNeg.updateContainingBlockInfo();
+			{
+				((TEChest) this.adjacentChestXNeg).updateSide(this, 3);
+			}
+		}
+	}
+
+	private boolean isChest(int x, int y, int z)
+	{
+		return this.worldObj.getBlock(x, y, z) == TFCBlocks.chest && checkType(worldObj, x, y, z);
+	}
+
+	private void updateSide(TileEntityChest teChest, int side)
+	{
+		if (teChest.isInvalid())
+		{
+			this.adjacentChestChecked = false;
+		}
+		else if (this.adjacentChestChecked)
+		{
+			switch (side)
+			{
+			case 0:
+				if (this.adjacentChestZPos != teChest)
+				{
+					this.adjacentChestChecked = false;
+				}
+
+				break;
+			case 1:
+				if (this.adjacentChestXNeg != teChest)
+				{
+					this.adjacentChestChecked = false;
+				}
+
+				break;
+			case 2:
+				if (this.adjacentChestZNeg != teChest)
+				{
+					this.adjacentChestChecked = false;
+				}
+
+				break;
+			case 3:
+				if (this.adjacentChestXPos != teChest)
+				{
+					this.adjacentChestChecked = false;
+				}
+				break;
+			}
 		}
 	}
 
@@ -238,6 +287,7 @@ public class TEChest extends TileEntityChest implements IInventory
 
 		TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
 		this.checkForAdjacentChests();
+		this.ticksSinceSync++;
 
 		if (!this.worldObj.isRemote && this.numPlayersUsing != 0 && (this.ticksSinceSync + this.xCoord + this.yCoord + this.zCoord) % 200 == 0)
 		{
@@ -313,17 +363,6 @@ public class TEChest extends TileEntityChest implements IInventory
 	}
 
 	@Override
-	public boolean receiveClientEvent(int par1, int par2)
-	{
-		if (par1 == 1)
-		{
-			this.numPlayersUsing = par2;
-			this.checkForAdjacentChests();
-		}
-		return true;
-	}
-
-	@Override
 	public void openInventory()
 	{
 		++this.numPlayersUsing;
@@ -335,15 +374,6 @@ public class TEChest extends TileEntityChest implements IInventory
 	{
 		--this.numPlayersUsing;
 		this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, TFCBlocks.chest, 1, this.numPlayersUsing);
-	}
-
-	@Override
-	public void invalidate()
-	{
-		this.updateContainingBlockInfo();
-		this.checkForAdjacentChests();
-		this.tileEntityInvalid = true;
-		//got rid of the super call because it may be interfering with our own calls.
 	}
 
 	@Override

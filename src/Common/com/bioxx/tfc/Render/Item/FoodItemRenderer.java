@@ -31,7 +31,10 @@ public class FoodItemRenderer implements IItemRenderer
 	public void renderItem(ItemRenderType type, ItemStack is, Object... data) 
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		if(is.getItem() instanceof IFood && is.hasTagCompound())
 		{			
 			renderIcon(0, 0, is.getItem().getIconIndex(is), 16, 16);
@@ -104,7 +107,7 @@ public class FoodItemRenderer implements IItemRenderer
 			renderIcon(0, 0, is.getItem().getIconIndex(is), 16, 16);
 		}
 
-		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glPopAttrib();
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 

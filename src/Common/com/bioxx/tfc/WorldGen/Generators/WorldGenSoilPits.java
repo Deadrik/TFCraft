@@ -105,16 +105,19 @@ public class WorldGenSoilPits implements IWorldGenerator
 						for (int yCoord = j - depth; yCoord <= j + depth; ++yCoord)
 						{
 							Block block = world.getBlock(xCoord, yCoord, zCoord);
-							DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt(xCoord, zCoord, 0);
-							if (block == TFCBlocks.dirt || block == TFCBlocks.dirt2)
+							if (TFC_Climate.getCacheManager(world) != null)
 							{
-								world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForClay(block), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
-								flag = true;
-							}
-							else if(block == TFCBlocks.grass || block == TFCBlocks.grass2)
-							{
-								world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForClayGrass(block), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
-								flag = true;
+								DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt(xCoord, zCoord, 0);
+								if (block == TFCBlocks.dirt || block == TFCBlocks.dirt2)
+								{
+									world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForClay(block), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
+									flag = true;
+								}
+								else if (block == TFCBlocks.grass || block == TFCBlocks.grass2)
+								{
+									world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForClayGrass(block), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
+									flag = true;
+								}
 							}
 						}
 						if(flag && rand.nextInt(15) == 0)

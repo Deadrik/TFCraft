@@ -277,28 +277,28 @@ public class BlockFruitWood extends BlockTerraContainer
 					world.getBlock(i, j+1, k) != this)
 			{
 				int r = rand.nextInt(4);
-				if(r == 0 && world.isAirBlock(i+1, j, k) || world.getBlock(i+1, j, k) == TFCBlocks.fruitTreeLeaves)
+				if (r == 0 && world.blockExists(i + 1, j, k) && (world.isAirBlock(i + 1, j, k) || world.getBlock(i + 1, j, k) == TFCBlocks.fruitTreeLeaves))
 				{
 					world.setBlock(i+1, j, k, this, world.getBlockMetadata(i, j, k), 0x2);
 					((TEFruitTreeWood)world.getTileEntity(i+1, j, k)).setTrunk(false);
 					((TEFruitTreeWood)world.getTileEntity(i+1, j, k)).setHeight(te.height);
 					((TEFruitTreeWood)world.getTileEntity(i+1, j, k)).setBirth();
 				}
-				else if(r == 1 && world.isAirBlock(i, j, k-1) || world.getBlock(i, j, k-1) == TFCBlocks.fruitTreeLeaves)
+				else if (r == 1 && world.blockExists(i, j, k - 1) && (world.isAirBlock(i, j, k - 1) || world.getBlock(i, j, k - 1) == TFCBlocks.fruitTreeLeaves))
 				{
 					world.setBlock(i, j, k-1, this, world.getBlockMetadata(i, j, k), 0x2);
 					((TEFruitTreeWood)world.getTileEntity(i, j, k-1)).setTrunk(false);
 					((TEFruitTreeWood)world.getTileEntity(i, j, k-1)).setHeight(te.height);
 					((TEFruitTreeWood)world.getTileEntity(i, j, k-1)).setBirth();
 				}
-				else if(r == 2 && world.isAirBlock(i-1, j, k) || world.getBlock(i-1, j, k) == TFCBlocks.fruitTreeLeaves)
+				else if (r == 2 && world.blockExists(i - 1, j, k) && (world.isAirBlock(i - 1, j, k) || world.getBlock(i - 1, j, k) == TFCBlocks.fruitTreeLeaves))
 				{
 					world.setBlock(i-1, j, k, this, world.getBlockMetadata(i, j, k), 0x2);
 					((TEFruitTreeWood)world.getTileEntity(i-1, j, k)).setTrunk(false);
 					((TEFruitTreeWood)world.getTileEntity(i-1, j, k)).setHeight(te.height);
 					((TEFruitTreeWood)world.getTileEntity(i-1, j, k)).setBirth();
 				}
-				else if(r == 3 && world.isAirBlock(i, j, k+1) || world.getBlock(i, j, k+1) == TFCBlocks.fruitTreeLeaves)
+				else if (r == 3 && world.blockExists(i, j, k + 1) && (world.isAirBlock(i, j, k + 1) || world.getBlock(i, j, k + 1) == TFCBlocks.fruitTreeLeaves))
 				{
 					world.setBlock(i, j, k+1, this, world.getBlockMetadata(i, j, k), 0x2);
 					((TEFruitTreeWood)world.getTileEntity(i, j, k+1)).setTrunk(false);
@@ -312,21 +312,21 @@ public class BlockFruitWood extends BlockTerraContainer
 			{
 				if (world.isAirBlock(i, j + 1, k) && world.isAirBlock(i, j + 2, k) && BlockFruitLeaves.canStay(world, i, j + 1, k))//above
 					world.setBlock(i, j+1, k, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
-				else if (world.isAirBlock(i + 1, j, k) && world.isAirBlock(i + 1, j + 1, k) && BlockFruitLeaves.canStay(world, i + 1, j, k))//+x
+				else if (world.blockExists(i + 1, j, k) && world.isAirBlock(i + 1, j, k) && world.isAirBlock(i + 1, j + 1, k) && BlockFruitLeaves.canStay(world, i + 1, j, k)) //+x
 					world.setBlock(i+1, j, k, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
-				else if (world.isAirBlock(i - 1, j, k) && world.isAirBlock(i - 1, j + 1, k) && BlockFruitLeaves.canStay(world, i - 1, j, k))//-x
+				else if (world.blockExists(i - 1, j, k) && world.isAirBlock(i - 1, j, k) && world.isAirBlock(i - 1, j + 1, k) && BlockFruitLeaves.canStay(world, i - 1, j, k)) //-x
 					world.setBlock(i-1, j, k, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
-				else if (world.isAirBlock(i, j, k + 1) && world.isAirBlock(i, j + 1, k + 1) && BlockFruitLeaves.canStay(world, i, j, k + 1))//+z
+				else if (world.blockExists(i, j, k + 1) && world.isAirBlock(i, j, k + 1) && world.isAirBlock(i, j + 1, k + 1) && BlockFruitLeaves.canStay(world, i, j, k + 1)) //+z
 					world.setBlock(i, j, k+1, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
-				else if (world.isAirBlock(i, j, k - 1) && world.isAirBlock(i, j + 1, k - 1) && BlockFruitLeaves.canStay(world, i, j, k - 1))//-z
+				else if (world.blockExists(i, j, k - 1) && world.isAirBlock(i, j, k - 1) && world.isAirBlock(i, j + 1, k - 1) && BlockFruitLeaves.canStay(world, i, j, k - 1)) //-z
 					world.setBlock(i, j, k-1, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
-				else if (world.isAirBlock(i + 1, j, k - 1) && world.isAirBlock(i + 1, j + 1, k - 1) && BlockFruitLeaves.canStay(world, i + 1, j, k - 1))//+x/-z
+				else if (world.blockExists(i + 1, j, k - 1) && world.isAirBlock(i + 1, j, k - 1) && world.isAirBlock(i + 1, j + 1, k - 1) && BlockFruitLeaves.canStay(world, i + 1, j, k - 1)) //+x/-z
 					world.setBlock(i+1, j, k-1, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
-				else if (world.isAirBlock(i + 1, j, k + 1) && world.isAirBlock(i + 1, j + 1, k + 1) && BlockFruitLeaves.canStay(world, i + 1, j, k + 1))//+x/+z
+				else if (world.blockExists(i + 1, j, k + 1) && world.isAirBlock(i + 1, j, k + 1) && world.isAirBlock(i + 1, j + 1, k + 1) && BlockFruitLeaves.canStay(world, i + 1, j, k + 1)) //+x/+z
 					world.setBlock(i+1, j, k+1, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
-				else if (world.isAirBlock(i - 1, j, k - 1) && world.isAirBlock(i - 1, j + 1, k - 1) && BlockFruitLeaves.canStay(world, i - 1, j, k - 1))//-x/-z
+				else if (world.blockExists(i - 1, j, k - 1) && world.isAirBlock(i - 1, j, k - 1) && world.isAirBlock(i - 1, j + 1, k - 1) && BlockFruitLeaves.canStay(world, i - 1, j, k - 1)) //-x/-z
 					world.setBlock(i-1, j, k-1, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
-				else if (world.isAirBlock(i - 1, j, k + 1) && world.isAirBlock(i - 1, j + 1, k + 1) && BlockFruitLeaves.canStay(world, i - 1, j, k + 1))//-x/+z
+				else if (world.blockExists(i - 1, j, k + 1) && world.isAirBlock(i - 1, j, k + 1) && world.isAirBlock(i - 1, j + 1, k + 1) && BlockFruitLeaves.canStay(world, i - 1, j, k + 1)) //-x/+z
 					world.setBlock(i-1, j, k+1, TFCBlocks.fruitTreeLeaves, world.getBlockMetadata(i, j, k), 0x2);
 			}
 		}

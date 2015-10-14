@@ -56,17 +56,22 @@ public class BlockLogNatural extends BlockTerra
 		{
 			if(!world.getBlock(x, y - 1, z).isOpaqueCube())
 			{
-				if(world.getBlock(x + 1, y, z) != this && world.getBlock(x - 1, y, z) != this &&
-						world.getBlock(x, y, z + 1) != this && world.getBlock(x, y, z - 1) != this &&
-						world.getBlock(x + 1, y, z + 1) != this && world.getBlock(x + 1, y, z - 1) != this &&
-						world.getBlock(x - 1, y, z + 1) != this && world.getBlock(x - 1, y, z - 1) != this &&
-						world.getBlock(x + 1, y - 1, z) != this && world.getBlock(x - 1, y - 1, z) != this &&
-						world.getBlock(x, y - 1, z + 1) != this && world.getBlock(x, y - 1, z - 1) != this &&
-						world.getBlock(x + 1, y - 1, z + 1) != this && world.getBlock(x + 1, y - 1, z - 1) != this &&
-						world.getBlock(x - 1, y - 1, z + 1) != this && world.getBlock(x - 1, y - 1, z - 1) != this)
+				if (noLogsNearby(world, x + 1, y, z) && noLogsNearby(world, x - 1, y, z) &&
+					noLogsNearby(world, x, y, z + 1) && noLogsNearby(world, x, y, z - 1) &&
+					noLogsNearby(world, x + 1, y, z + 1) && noLogsNearby(world, x + 1, y, z - 1) &&
+					noLogsNearby(world, x - 1, y, z + 1) && noLogsNearby(world, x - 1, y, z - 1) &&
+					noLogsNearby(world, x + 1, y - 1, z) && noLogsNearby(world, x - 1, y - 1, z) &&
+					noLogsNearby(world, x, y - 1, z + 1) && noLogsNearby(world, x, y - 1, z - 1) &&
+					noLogsNearby(world, x + 1, y - 1, z + 1) && noLogsNearby(world, x + 1, y - 1, z - 1) &&
+					noLogsNearby(world, x - 1, y - 1, z + 1) && noLogsNearby(world, x - 1, y - 1, z - 1))
 					world.setBlock(x, y, z, Blocks.air, 0, 0x2);
 			}
 		}
+	}
+
+	private boolean noLogsNearby(World world, int x, int y, int z)
+	{
+		return world.blockExists(x, y, z) && world.getBlock(x, y, z) != this;
 	}
 
 	@SideOnly(Side.CLIENT)

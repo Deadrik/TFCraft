@@ -47,14 +47,14 @@ public class ItemTerraTool extends ItemTool implements ISize
 		if(is.getItem() instanceof ICausesDamage)
 			arraylist.add(EnumChatFormatting.AQUA + TFC_Core.translate(((ICausesDamage)this).getDamageType().toString()));
 
-		ItemTerraTool.addDurabilityInformation(is, arraylist);
+		ItemTerraTool.addSmithingBonusInformation(is, arraylist);
 		addExtraInformation(is, player, arraylist);
 	}
 
-	public static void addDurabilityInformation(ItemStack is, List<String> arraylist)
+	public static void addSmithingBonusInformation(ItemStack is, List<String> arraylist)
 	{
 		if (AnvilManager.getDurabilityBuff(is) > 0)
-			arraylist.add(TFC_Core.translate("gui.Durability") + " : +" + Helper.roundNumber(AnvilManager.getDurabilityBuff(is) * 100, 10) + "%");
+			arraylist.add(TFC_Core.translate("gui.SmithingBonus") + " : +" + Helper.roundNumber(AnvilManager.getDurabilityBuff(is) * 100, 10) + "%");
 	}
 
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
@@ -106,6 +106,13 @@ public class ItemTerraTool extends ItemTool implements ISize
 	public int getMaxDamage(ItemStack stack)
 	{
 		return (int) (getMaxDamage()+(getMaxDamage() * AnvilManager.getDurabilityBuff(stack)));
+	}
+
+	@Override
+	public float getDigSpeed(ItemStack stack, Block block, int meta)
+	{
+		float digSpeed = super.getDigSpeed(stack, block, meta);
+		return digSpeed + (digSpeed * AnvilManager.getDurabilityBuff(stack));
 	}
 
 	@Override

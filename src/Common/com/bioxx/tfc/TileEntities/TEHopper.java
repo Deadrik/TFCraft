@@ -23,9 +23,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Blocks.Devices.BlockChestTFC;
+import com.bioxx.tfc.Blocks.Terrain.*;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Food;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.TFCItems;
 
@@ -301,12 +301,11 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 			Block blockAbove = worldObj.getBlock(xCoord, yCoord+1, zCoord);
 			if(blockAbove != null && this.hasPressableItem() > 0)
 			{
-				if(pressBlock != null)
+				if (pressBlock != null && !(blockAbove instanceof BlockCobble || blockAbove instanceof BlockGravel || blockAbove instanceof BlockSand || blockAbove instanceof BlockDirt))
 				{
 					TFC_Core.setBlockToAirWithDrops(worldObj, xCoord, yCoord+1, zCoord);
 				}
-				else if (blockAbove == TFCBlocks.stoneIgInSmooth || blockAbove == TFCBlocks.stoneSedSmooth ||
-						blockAbove == TFCBlocks.stoneMMSmooth || blockAbove == TFCBlocks.stoneIgExSmooth)
+				else if (blockAbove instanceof BlockSmooth)
 				{
 					pressBlock = new ItemStack(blockAbove, 1, worldObj.getBlockMetadata(xCoord, yCoord+1, zCoord));
 					worldObj.setBlockToAir(xCoord, yCoord+1, zCoord);

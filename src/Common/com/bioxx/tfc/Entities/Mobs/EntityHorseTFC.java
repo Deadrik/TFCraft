@@ -58,6 +58,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	 */
 	private static final float DIMORPHISM = 0.0813f;
 	private static final int DEGREE_OF_DIVERSION = 2;
+	private static final int FAMILIARITY_CAP = 35;
 
 	private long animalID;
 	private int sex;
@@ -176,7 +177,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		if (hunger > 0)
 			hunger--;
 
-		if(this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && rand.nextInt(600) == 0 && !familiarizedToday){
+		if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && rand.nextInt(600) == 0 && !familiarizedToday && canFamiliarize())
+		{
 			this.familiarize(((EntityPlayer)this.riddenByEntity));
 		}
 
@@ -414,7 +416,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		ItemStack itemstack = player.inventory.getCurrentItem();
 		if(!worldObj.isRemote)
 		{
-			if (player.isSneaking() && !familiarizedToday && itemstack != null)
+			if (player.isSneaking() && !familiarizedToday && itemstack != null && canFamiliarize())
 			{
 				this.familiarize(player);
 				return true;
@@ -425,7 +427,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 		}
 
-		if (itemstack != null && this.isBreedingItemTFC(itemstack) && checkFamiliarity(InteractionEnum.BREED,player) &&this.familiarizedToday && this.getGrowingAge() == 0 && !super.isInLove())
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && checkFamiliarity(InteractionEnum.BREED, player) && this.getGrowingAge() == 0 && !super.isInLove() &&
+			(this.familiarizedToday || !canFamiliarize()))
 		{
 			if (!player.capabilities.isCreativeMode)
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, ((ItemFoodTFC) itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this));
@@ -1089,7 +1092,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				lastFamiliarityUpdate = totalDays;
 				familiarizedToday = false;
 				float familiarityChange = 6 * obedienceMod / aggressionMod;
-				if (this.isAdult() && familiarity <= 35) // Adult caps at 35
+				if (this.isAdult() && familiarity <= FAMILIARITY_CAP)
 				{
 					familiarity += familiarityChange;
 				}
@@ -1113,7 +1116,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if ((this.riddenByEntity == null || !this.riddenByEntity.equals(ep)) && !familiarizedToday && stack != null && this.isFood(stack) && (isAdult() && familiarity < 50 || !isAdult()))
+		if ((this.riddenByEntity == null || !this.riddenByEntity.equals(ep)) && !familiarizedToday && stack != null && this.isFood(stack) && canFamiliarize())
 		{
 			if (!ep.capabilities.isCreativeMode)
 			{
@@ -1128,7 +1131,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();
 		}
-		if(this.riddenByEntity != null && this.riddenByEntity.equals(ep) && isAdult()){
+		if (this.riddenByEntity != null && this.riddenByEntity.equals(ep) && isAdult())
+		{
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();
@@ -1165,5 +1169,11 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	public int getDueDay()
 	{
 		return TFC_Time.getDayFromTotalHours((timeOfConception + pregnancyRequiredTime) / 1000);
+	}
+
+	@Override
+	public boolean canFamiliarize()
+	{
+		return !isAdult() || isAdult() && this.familiarity <= FAMILIARITY_CAP;
 	}
 }

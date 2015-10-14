@@ -80,23 +80,23 @@ public class BlockBlastFurnace extends BlockTerraContainer
 	
 	public boolean checkStackAt(World world, int x, int y, int z)
 	{
-		Block firebrick = TFCBlocks.fireBrick;
+		if (checkBlock(world, x + 1, y, z, x, z) && checkBlock(world, x - 1, y, z, x, z) && checkBlock(world, x, y, z + 1, x, z) &&
+			checkBlock(world, x, y, z - 1, x, z) && (world.isAirBlock(x, y, z) || world.getBlock(x, y, z) == TFCBlocks.molten))
+			return true;
 
-		if(world.getBlock(x+1, y, z) == firebrick && checkBlock(world, x+1, y, z, x, z))
-			if(world.getBlock(x-1, y, z) == firebrick && checkBlock(world, x-1, y, z, x, z))
-				if(world.getBlock(x, y, z+1) == firebrick && checkBlock(world, x, y, z+1, x, z))
-					if(world.getBlock(x, y, z-1) == firebrick && checkBlock(world, x, y, z-1, x, z))
-						if(world.isAirBlock(x, y, z) || world.getBlock(x, y, z) == TFCBlocks.molten)
-							return true;
 		return false;
 	}
 
 	public boolean checkBlock(World world, int x, int y, int z, int stackX, int stackZ)
 	{
+		if (!world.blockExists(x, y, z) || world.getBlock(x, y, z) != TFCBlocks.fireBrick)
+			return false;
+
 		int count = 0;
 		int xCoord = x-1;
 		int zCoord = z;
-		if(!(xCoord == stackX && zCoord == stackZ) && world.getBlock(xCoord, y, zCoord) == TFCBlocks.metalSheet)
+		if (world.blockExists(xCoord, y, zCoord) &&!(xCoord == stackX && zCoord == stackZ) &&
+				world.getBlock(xCoord, y, zCoord) == TFCBlocks.metalSheet && world.getTileEntity(xCoord, y, zCoord) instanceof TEMetalSheet)
 		{
 			TEMetalSheet te = (TEMetalSheet)world.getTileEntity(xCoord, y, zCoord);
 			if(!te.westExists() || !isValidMetalSheet(te))
@@ -105,7 +105,8 @@ public class BlockBlastFurnace extends BlockTerraContainer
 		}
 		xCoord = x+1;
 		zCoord = z;
-		if(!(xCoord == stackX && zCoord == stackZ) && world.getBlock(xCoord, y, zCoord) == TFCBlocks.metalSheet)
+		if (world.blockExists(xCoord, y, zCoord) &&!(xCoord == stackX && zCoord == stackZ) &&
+				world.getBlock(xCoord, y, zCoord) == TFCBlocks.metalSheet && world.getTileEntity(xCoord, y, zCoord) instanceof TEMetalSheet)
 		{
 			TEMetalSheet te = (TEMetalSheet)world.getTileEntity(xCoord, y, zCoord);
 			if(!te.eastExists() || !isValidMetalSheet(te))
@@ -114,7 +115,8 @@ public class BlockBlastFurnace extends BlockTerraContainer
 		}
 		xCoord = x;
 		zCoord = z-1;
-		if(!(xCoord == stackX && zCoord == stackZ) && world.getBlock(xCoord, y, zCoord) == TFCBlocks.metalSheet)
+		if (world.blockExists(xCoord, y, zCoord) &&!(xCoord == stackX && zCoord == stackZ) &&
+				world.getBlock(xCoord, y, zCoord) == TFCBlocks.metalSheet && world.getTileEntity(xCoord, y, zCoord) instanceof TEMetalSheet)
 		{
 			TEMetalSheet te = (TEMetalSheet)world.getTileEntity(xCoord, y, zCoord);
 			if(!te.southExists() || !isValidMetalSheet(te))
@@ -123,7 +125,8 @@ public class BlockBlastFurnace extends BlockTerraContainer
 		}
 		xCoord = x;
 		zCoord = z+1;
-		if(!(xCoord == stackX && zCoord == stackZ) && world.getBlock(xCoord, y, zCoord) == TFCBlocks.metalSheet)
+		if (world.blockExists(xCoord, y, zCoord) &&!(xCoord == stackX && zCoord == stackZ) &&
+				world.getBlock(xCoord, y, zCoord) == TFCBlocks.metalSheet && world.getTileEntity(xCoord, y, zCoord) instanceof TEMetalSheet)
 		{
 			TEMetalSheet te = (TEMetalSheet)world.getTileEntity(xCoord, y, zCoord);
 			if(!te.northExists() || !isValidMetalSheet(te))

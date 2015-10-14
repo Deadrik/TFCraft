@@ -165,7 +165,7 @@ public class BlockFungi extends BlockMushroom
 				{
 					for (k = y - 1; k <= y + 1; ++k)
 					{
-						if (world.getBlock(i, k, j) == this)
+						if (world.blockExists(i, j, k) && world.getBlock(i, k, j) == this)
 						{
 							--var7;
 							if (var7 <= 0)
@@ -181,7 +181,7 @@ public class BlockFungi extends BlockMushroom
 
 			for (int var11 = 0; var11 < 4; ++var11)
 			{
-				if (world.isAirBlock(i, j, k) && this.canBlockStay(world, i, j, k))
+				if (world.blockExists(i, j, k) && world.isAirBlock(i, j, k) && this.canBlockStay(world, i, j, k))
 				{
 					x = i;
 					y = j;
@@ -193,7 +193,7 @@ public class BlockFungi extends BlockMushroom
 				k = z + rnd.nextInt(3) - 1;
 			}
 
-			if (world.isAirBlock(i, j, k) && this.canBlockStay(world, i, j, k))
+			if (world.blockExists(i, j, k) && world.isAirBlock(i, j, k) && this.canBlockStay(world, i, j, k))
 				world.setBlock(i, j, k, this, meta, 2);
 		}
 	}

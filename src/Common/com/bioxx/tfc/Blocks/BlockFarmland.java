@@ -149,9 +149,12 @@ public class BlockFarmland extends BlockContainer
 			{
 				for (int z = k - 4; z <= k + 4; ++z)
 				{
-					Block b = world.getBlock(x, y, z);
-					if (TFC_Core.isFreshWater(b))
-						return true;
+					if (world.blockExists(x, y, z))
+					{
+						Block b = world.getBlock(x, y, z);
+						if (TFC_Core.isFreshWater(b))
+							return true;
+					}
 				}
 			}
 		}

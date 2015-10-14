@@ -227,7 +227,7 @@ public class ItemSetup extends TFCItems {
 		bronzeSword = new ItemCustomSword(bronzeToolMaterial,				220).setUnlocalizedName("Bronze Sword").setMaxDamage(bronzeUses);
 		copperSword = new ItemCustomSword(copperToolMaterial, 				165).setUnlocalizedName("Copper Sword").setMaxDamage(copperUses);
 		wroughtIronSword = new ItemCustomSword(ironToolMaterial,			240).setUnlocalizedName("Wrought Iron Sword").setMaxDamage(wroughtIronUses);
-		redSteelSword = new ItemCustomSword(redSteelToolMaterial,			305).setUnlocalizedName("Red Steel Sword").setMaxDamage(redSteelUses);
+		redSteelSword = new ItemCustomSword(redSteelToolMaterial,			315).setUnlocalizedName("Red Steel Sword").setMaxDamage(redSteelUses);
 		steelSword = new ItemCustomSword(steelToolMaterial,					265).setUnlocalizedName("Steel Sword").setMaxDamage(steelUses);
 
 		bismuthBronzeMace = new ItemCustomSword(bismuthBronzeToolMaterial,  210,EnumDamageType.CRUSHING).setUnlocalizedName("Bismuth Bronze Mace").setMaxDamage(bismuthBronzeUses);
@@ -237,7 +237,7 @@ public class ItemSetup extends TFCItems {
 		bronzeMace = new ItemCustomSword(bronzeToolMaterial, 				220,EnumDamageType.CRUSHING).setUnlocalizedName("Bronze Mace").setMaxDamage(bronzeUses);
 		copperMace = new ItemCustomSword(copperToolMaterial, 				165,EnumDamageType.CRUSHING).setUnlocalizedName("Copper Mace").setMaxDamage(copperUses);
 		wroughtIronMace = new ItemCustomSword(ironToolMaterial, 			240,EnumDamageType.CRUSHING).setUnlocalizedName("Wrought Iron Mace").setMaxDamage(wroughtIronUses);
-		redSteelMace = new ItemCustomSword(redSteelToolMaterial, 			305,EnumDamageType.CRUSHING).setUnlocalizedName("Red Steel Mace").setMaxDamage(redSteelUses);
+		redSteelMace = new ItemCustomSword(redSteelToolMaterial, 			315,EnumDamageType.CRUSHING).setUnlocalizedName("Red Steel Mace").setMaxDamage(redSteelUses);
 		steelMace = new ItemCustomSword(steelToolMaterial, 					265,EnumDamageType.CRUSHING).setUnlocalizedName("Steel Mace").setMaxDamage(steelUses);
 
 		bismuthBronzeSaw = new ItemCustomSaw(bismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Saw").setMaxDamage(bismuthBronzeUses);
