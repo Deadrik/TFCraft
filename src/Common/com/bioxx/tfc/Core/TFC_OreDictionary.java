@@ -40,6 +40,10 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("treeLeaves", new ItemStack(TFCBlocks.leaves, 1, WILD));
 		OreDictionary.registerOre("treeLeaves", new ItemStack(TFCBlocks.leaves2, 1, WILD));
 
+		//Wood Crafts
+		OreDictionary.registerOre("chestWood", new ItemStack(TFCBlocks.chest, 1, WILD));
+		OreDictionary.registerOre("barrelWood", new ItemStack(TFCBlocks.barrel, 1, WILD));
+
 		//Ores
 		OreDictionary.registerOre("oreNormalCopper", new ItemStack(TFCItems.oreChunk, 1, 0)); //Native Copper
 		OreDictionary.registerOre("oreNormalCopper", new ItemStack(TFCItems.oreChunk, 1, 9)); //Malachite
@@ -205,6 +209,7 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("plateSterlingSilver", new ItemStack(TFCItems.sterlingSilverSheet));
 		OreDictionary.registerOre("platePlatinum", new ItemStack(TFCItems.platinumSheet));
 		OreDictionary.registerOre("plateWroughtIron", new ItemStack(TFCItems.wroughtIronSheet));
+		OreDictionary.registerOre("plateIron", new ItemStack(TFCItems.wroughtIronSheet));
 		OreDictionary.registerOre("plateNickel", new ItemStack(TFCItems.nickelSheet));
 		OreDictionary.registerOre("platePigIron", new ItemStack(TFCItems.pigIronSheet));
 		OreDictionary.registerOre("plateSteel", new ItemStack(TFCItems.steelSheet));
@@ -428,34 +433,6 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("itemChiselRedSteel", new ItemStack(TFCItems.redSteelChisel, 1, WILD));
 		OreDictionary.registerOre("itemChiselSteel", new ItemStack(TFCItems.steelChisel, 1, WILD));
 
-		for (Item hammer : Recipes.hammers)
-			OreDictionary.registerOre("itemHammer", new ItemStack(hammer, 1, WILD));
-
-		OreDictionary.registerOre("itemHammerStone", new ItemStack(TFCItems.stoneHammer, 1, WILD));
-		OreDictionary.registerOre("itemHammerBismuthBronze", new ItemStack(TFCItems.bismuthBronzeHammer, 1, WILD));
-		OreDictionary.registerOre("itemHammerBlackBronze", new ItemStack(TFCItems.blackBronzeHammer, 1, WILD));
-		OreDictionary.registerOre("itemHammerBlackSteel", new ItemStack(TFCItems.blackSteelHammer, 1, WILD));
-		OreDictionary.registerOre("itemHammerBlueSteel", new ItemStack(TFCItems.blueSteelHammer, 1, WILD));
-		OreDictionary.registerOre("itemHammerBronze", new ItemStack(TFCItems.bronzeHammer, 1, WILD));
-		OreDictionary.registerOre("itemHammerCopper", new ItemStack(TFCItems.copperHammer, 1, WILD));
-		OreDictionary.registerOre("itemHammerWroughtIron", new ItemStack(TFCItems.wroughtIronHammer, 1, WILD));
-		OreDictionary.registerOre("itemHammerRedSteel", new ItemStack(TFCItems.redSteelHammer, 1, WILD));
-		OreDictionary.registerOre("itemHammerSteel", new ItemStack(TFCItems.steelHammer, 1, WILD));
-
-		for (Item knife : Recipes.knives)
-			OreDictionary.registerOre("itemKnife", new ItemStack(knife, 1, WILD));
-
-		OreDictionary.registerOre("itemKnifeStone", new ItemStack(TFCItems.stoneKnife, 1, WILD));
-		OreDictionary.registerOre("itemKnifeBismuthBronze", new ItemStack(TFCItems.bismuthBronzeKnife, 1, WILD));
-		OreDictionary.registerOre("itemKnifeBlackBronze", new ItemStack(TFCItems.blackBronzeKnife, 1, WILD));
-		OreDictionary.registerOre("itemKnifeBlackSteel", new ItemStack(TFCItems.blackSteelKnife, 1, WILD));
-		OreDictionary.registerOre("itemKnifeBlueSteel", new ItemStack(TFCItems.blueSteelKnife, 1, WILD));
-		OreDictionary.registerOre("itemKnifeBronze", new ItemStack(TFCItems.bronzeKnife, 1, WILD));
-		OreDictionary.registerOre("itemKnifeCopper", new ItemStack(TFCItems.copperKnife, 1, WILD));
-		OreDictionary.registerOre("itemKnifeWroughtIron", new ItemStack(TFCItems.wroughtIronKnife, 1, WILD));
-		OreDictionary.registerOre("itemKnifeRedSteel", new ItemStack(TFCItems.redSteelKnife, 1, WILD));
-		OreDictionary.registerOre("itemKnifeSteel", new ItemStack(TFCItems.steelKnife, 1, WILD));
-
 		for (Item saw : Recipes.saws)
 			OreDictionary.registerOre("itemSaw", new ItemStack(saw, 1, WILD));
 
@@ -482,7 +459,143 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("itemScytheRedSteel", new ItemStack(TFCItems.redSteelScythe, 1, WILD));
 		OreDictionary.registerOre("itemScytheSteel", new ItemStack(TFCItems.steelScythe, 1, WILD));
 
+		for (Item knife : Recipes.knives)
+			OreDictionary.registerOre("itemKnife", new ItemStack(knife, 1, WILD));
+
+		OreDictionary.registerOre("itemKnifeStone", new ItemStack(TFCItems.stoneKnife, 1, WILD));
+		OreDictionary.registerOre("itemKnifeBismuthBronze", new ItemStack(TFCItems.bismuthBronzeKnife, 1, WILD));
+		OreDictionary.registerOre("itemKnifeBlackBronze", new ItemStack(TFCItems.blackBronzeKnife, 1, WILD));
+		OreDictionary.registerOre("itemKnifeBlackSteel", new ItemStack(TFCItems.blackSteelKnife, 1, WILD));
+		OreDictionary.registerOre("itemKnifeBlueSteel", new ItemStack(TFCItems.blueSteelKnife, 1, WILD));
+		OreDictionary.registerOre("itemKnifeBronze", new ItemStack(TFCItems.bronzeKnife, 1, WILD));
+		OreDictionary.registerOre("itemKnifeCopper", new ItemStack(TFCItems.copperKnife, 1, WILD));
+		OreDictionary.registerOre("itemKnifeWroughtIron", new ItemStack(TFCItems.wroughtIronKnife, 1, WILD));
+		OreDictionary.registerOre("itemKnifeRedSteel", new ItemStack(TFCItems.redSteelKnife, 1, WILD));
+		OreDictionary.registerOre("itemKnifeSteel", new ItemStack(TFCItems.steelKnife, 1, WILD));
+
+		for (Item pick : Recipes.picks)
+			OreDictionary.registerOre("itemPick", new ItemStack(pick, 1, WILD));
+
+		OreDictionary.registerOre("itemPickBismuthBronze", new ItemStack(TFCItems.bismuthBronzePick, 1, WILD));
+		OreDictionary.registerOre("itemPickBlackBronze", new ItemStack(TFCItems.blackBronzePick, 1, WILD));
+		OreDictionary.registerOre("itemPickBlackSteel", new ItemStack(TFCItems.blackSteelPick, 1, WILD));
+		OreDictionary.registerOre("itemPickBlueSteel", new ItemStack(TFCItems.blueSteelPick, 1, WILD));
+		OreDictionary.registerOre("itemPickBronze", new ItemStack(TFCItems.bronzePick, 1, WILD));
+		OreDictionary.registerOre("itemPickCopper", new ItemStack(TFCItems.copperPick, 1, WILD));
+		OreDictionary.registerOre("itemPickWroughtIron", new ItemStack(TFCItems.wroughtIronPick, 1, WILD));
+		OreDictionary.registerOre("itemPickRedSteel", new ItemStack(TFCItems.redSteelPick, 1, WILD));
+		OreDictionary.registerOre("itemPickSteel", new ItemStack(TFCItems.steelPick, 1, WILD));
+
+		for (Item proPick : Recipes.proPicks)
+			OreDictionary.registerOre("itemProPick", new ItemStack(proPick, 1, WILD));
+
+		OreDictionary.registerOre("itemProPickBismuthBronze", new ItemStack(TFCItems.proPickBismuthBronze, 1, WILD));
+		OreDictionary.registerOre("itemProPickBlackBronze", new ItemStack(TFCItems.proPickBlackBronze, 1, WILD));
+		OreDictionary.registerOre("itemProPickBlackSteel", new ItemStack(TFCItems.proPickBlackSteel, 1, WILD));
+		OreDictionary.registerOre("itemProPickBlueSteel", new ItemStack(TFCItems.proPickBlueSteel, 1, WILD));
+		OreDictionary.registerOre("itemProPickBronze", new ItemStack(TFCItems.proPickBronze, 1, WILD));
+		OreDictionary.registerOre("itemProPickCopper", new ItemStack(TFCItems.proPickCopper, 1, WILD));
+		OreDictionary.registerOre("itemProPickWroughtIron", new ItemStack(TFCItems.proPickIron, 1, WILD));
+		OreDictionary.registerOre("itemProPickRedSteel", new ItemStack(TFCItems.proPickRedSteel, 1, WILD));
+		OreDictionary.registerOre("itemProPickSteel", new ItemStack(TFCItems.proPickSteel, 1, WILD));
+
+		for (Item shovel : Recipes.shovels)
+			OreDictionary.registerOre("itemShovel", new ItemStack(shovel, 1, WILD));
+
+		OreDictionary.registerOre("itemShovelStoneSed", new ItemStack(TFCItems.sedShovel, 1, WILD));
+		OreDictionary.registerOre("itemShovelStoneIgIn", new ItemStack(TFCItems.igInShovel, 1, WILD));
+		OreDictionary.registerOre("itemShovelStoneIgEx", new ItemStack(TFCItems.igExShovel, 1, WILD));
+		OreDictionary.registerOre("itemShovelStoneMM", new ItemStack(TFCItems.mMShovel, 1, WILD));
+		OreDictionary.registerOre("itemShovelBismuthBronze", new ItemStack(TFCItems.bismuthBronzeShovel, 1, WILD));
+		OreDictionary.registerOre("itemShovelBlackBronze", new ItemStack(TFCItems.blackBronzeShovel, 1, WILD));
+		OreDictionary.registerOre("itemShovelBlackSteel", new ItemStack(TFCItems.blackSteelShovel, 1, WILD));
+		OreDictionary.registerOre("itemShovelBlueSteel", new ItemStack(TFCItems.blueSteelShovel, 1, WILD));
+		OreDictionary.registerOre("itemShovelBronze", new ItemStack(TFCItems.bronzeShovel, 1, WILD));
+		OreDictionary.registerOre("itemShovelCopper", new ItemStack(TFCItems.copperShovel, 1, WILD));
+		OreDictionary.registerOre("itemShovelWroughtIron", new ItemStack(TFCItems.wroughtIronShovel, 1, WILD));
+		OreDictionary.registerOre("itemShovelRedSteel", new ItemStack(TFCItems.redSteelShovel, 1, WILD));
+		OreDictionary.registerOre("itemShovelSteel", new ItemStack(TFCItems.steelShovel, 1, WILD));
+
+		for (Item hoe : Recipes.hoes)
+			OreDictionary.registerOre("itemHoe", new ItemStack(hoe, 1, WILD));
+
+		OreDictionary.registerOre("itemHoeStoneSed", new ItemStack(TFCItems.sedHoe, 1, WILD));
+		OreDictionary.registerOre("itemHoeStoneIgIn", new ItemStack(TFCItems.igInHoe, 1, WILD));
+		OreDictionary.registerOre("itemHoeStoneIgEx", new ItemStack(TFCItems.igExHoe, 1, WILD));
+		OreDictionary.registerOre("itemHoeStoneMM", new ItemStack(TFCItems.mMHoe, 1, WILD));
+		OreDictionary.registerOre("itemHoeBismuthBronze", new ItemStack(TFCItems.bismuthBronzeHoe, 1, WILD));
+		OreDictionary.registerOre("itemHoeBlackBronze", new ItemStack(TFCItems.blackBronzeHoe, 1, WILD));
+		OreDictionary.registerOre("itemHoeBlackSteel", new ItemStack(TFCItems.blackSteelHoe, 1, WILD));
+		OreDictionary.registerOre("itemHoeBlueSteel", new ItemStack(TFCItems.blueSteelHoe, 1, WILD));
+		OreDictionary.registerOre("itemHoeBronze", new ItemStack(TFCItems.bronzeHoe, 1, WILD));
+		OreDictionary.registerOre("itemHoeCopper", new ItemStack(TFCItems.copperHoe, 1, WILD));
+		OreDictionary.registerOre("itemHoeWroughtIron", new ItemStack(TFCItems.wroughtIronHoe, 1, WILD));
+		OreDictionary.registerOre("itemHoeRedSteel", new ItemStack(TFCItems.redSteelHoe, 1, WILD));
+		OreDictionary.registerOre("itemHoeSteel", new ItemStack(TFCItems.steelHoe, 1, WILD));
+
+		for (Item hammer : Recipes.hammers)
+			OreDictionary.registerOre("itemHammer", new ItemStack(hammer, 1, WILD));
+
+		OreDictionary.registerOre("itemHammerStone", new ItemStack(TFCItems.stoneHammer, 1, WILD));
+		OreDictionary.registerOre("itemHammerBismuthBronze", new ItemStack(TFCItems.bismuthBronzeHammer, 1, WILD));
+		OreDictionary.registerOre("itemHammerBlackBronze", new ItemStack(TFCItems.blackBronzeHammer, 1, WILD));
+		OreDictionary.registerOre("itemHammerBlackSteel", new ItemStack(TFCItems.blackSteelHammer, 1, WILD));
+		OreDictionary.registerOre("itemHammerBlueSteel", new ItemStack(TFCItems.blueSteelHammer, 1, WILD));
+		OreDictionary.registerOre("itemHammerBronze", new ItemStack(TFCItems.bronzeHammer, 1, WILD));
+		OreDictionary.registerOre("itemHammerCopper", new ItemStack(TFCItems.copperHammer, 1, WILD));
+		OreDictionary.registerOre("itemHammerWroughtIron", new ItemStack(TFCItems.wroughtIronHammer, 1, WILD));
+		OreDictionary.registerOre("itemHammerRedSteel", new ItemStack(TFCItems.redSteelHammer, 1, WILD));
+		OreDictionary.registerOre("itemHammerSteel", new ItemStack(TFCItems.steelHammer, 1, WILD));
+
+		//Weapons are also registered with their material to help prevent issues with unification.
+		for (Item sword : Recipes.swords)
+			OreDictionary.registerOre("itemSword", new ItemStack(sword, 1, WILD));
+
+		OreDictionary.registerOre("itemSwordBismuthBronze", new ItemStack(TFCItems.bismuthBronzeSword, 1, WILD));
+		OreDictionary.registerOre("itemSwordBlackBronze", new ItemStack(TFCItems.blackBronzeSword, 1, WILD));
+		OreDictionary.registerOre("itemSwordBlackSteel", new ItemStack(TFCItems.blackSteelSword, 1, WILD));
+		OreDictionary.registerOre("itemSwordBlueSteel", new ItemStack(TFCItems.blueSteelSword, 1, WILD));
+		OreDictionary.registerOre("itemSwordBronze", new ItemStack(TFCItems.bronzeSword, 1, WILD));
+		OreDictionary.registerOre("itemSwordCopper", new ItemStack(TFCItems.copperSword, 1, WILD));
+		OreDictionary.registerOre("itemSwordWroughtIron", new ItemStack(TFCItems.wroughtIronSword, 1, WILD));
+		OreDictionary.registerOre("itemSwordRedSteel", new ItemStack(TFCItems.redSteelSword, 1, WILD));
+		OreDictionary.registerOre("itemSwordSteel", new ItemStack(TFCItems.steelSword, 1, WILD));
+
+		for (Item mace : Recipes.maces)
+			OreDictionary.registerOre("itemMace", new ItemStack(mace, 1, WILD));
+
+		OreDictionary.registerOre("itemMaceBismuthBronze", new ItemStack(TFCItems.bismuthBronzeMace, 1, WILD));
+		OreDictionary.registerOre("itemMaceBlackBronze", new ItemStack(TFCItems.blackBronzeMace, 1, WILD));
+		OreDictionary.registerOre("itemMaceBlackSteel", new ItemStack(TFCItems.blackSteelMace, 1, WILD));
+		OreDictionary.registerOre("itemMaceBlueSteel", new ItemStack(TFCItems.blueSteelMace, 1, WILD));
+		OreDictionary.registerOre("itemMaceBronze", new ItemStack(TFCItems.bronzeMace, 1, WILD));
+		OreDictionary.registerOre("itemMaceCopper", new ItemStack(TFCItems.copperMace, 1, WILD));
+		OreDictionary.registerOre("itemMaceWroughtIron", new ItemStack(TFCItems.wroughtIronMace, 1, WILD));
+		OreDictionary.registerOre("itemMaceRedSteel", new ItemStack(TFCItems.redSteelMace, 1, WILD));
+		OreDictionary.registerOre("itemMaceSteel", new ItemStack(TFCItems.steelMace, 1, WILD));
+
+		for (Item javelin : Recipes.javelins)
+			OreDictionary.registerOre("itemJavelin", new ItemStack(javelin, 1, WILD));
+
+		OreDictionary.registerOre("itemJavelinStoneSed", new ItemStack(TFCItems.sedStoneJavelin, 1, WILD));
+		OreDictionary.registerOre("itemJavelinStoneIgIn", new ItemStack(TFCItems.igInStoneJavelin, 1, WILD));
+		OreDictionary.registerOre("itemJavelinStoneIgEx", new ItemStack(TFCItems.igExStoneJavelin, 1, WILD));
+		OreDictionary.registerOre("itemJavelinStoneMM", new ItemStack(TFCItems.mMStoneJavelin, 1, WILD));
+		OreDictionary.registerOre("itemJavelinBismuthBronze", new ItemStack(TFCItems.bismuthBronzeJavelin, 1, WILD));
+		OreDictionary.registerOre("itemJavelinBlackBronze", new ItemStack(TFCItems.blackBronzeJavelin, 1, WILD));
+		OreDictionary.registerOre("itemJavelinBlackSteel", new ItemStack(TFCItems.blackSteelJavelin, 1, WILD));
+		OreDictionary.registerOre("itemJavelinBlueSteel", new ItemStack(TFCItems.blueSteelJavelin, 1, WILD));
+		OreDictionary.registerOre("itemJavelinBronze", new ItemStack(TFCItems.bronzeJavelin, 1, WILD));
+		OreDictionary.registerOre("itemJavelinCopper", new ItemStack(TFCItems.copperJavelin, 1, WILD));
+		OreDictionary.registerOre("itemJavelinWroughtIron", new ItemStack(TFCItems.wroughtIronJavelin, 1, WILD));
+		OreDictionary.registerOre("itemJavelinRedSteel", new ItemStack(TFCItems.redSteelJavelin, 1, WILD));
+		OreDictionary.registerOre("itemJavelinSteel", new ItemStack(TFCItems.steelJavelin, 1, WILD));
+
+
 		//Miscellaneous Items
+		OreDictionary.registerOre("toolFlintSteel", new ItemStack(Items.flint_and_steel, 1, WILD));
+		OreDictionary.registerOre("toolFlintSteel", new ItemStack(TFCItems.flintSteel, 1, WILD));
+
 		OreDictionary.registerOre("lumpClay", new ItemStack(Items.clay_ball));
 		OreDictionary.registerOre("lumpClay", new ItemStack(TFCItems.clayBall, 1, 0));
 
@@ -522,6 +635,10 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("blockSand", new ItemStack(TFCBlocks.sand, 1, WILD));
 		OreDictionary.registerOre("blockSand", new ItemStack(TFCBlocks.sand2, 1, WILD));
 
+		OreDictionary.registerOre("blockGravel", new ItemStack(Blocks.gravel));
+		OreDictionary.registerOre("blockGravel", new ItemStack(TFCBlocks.gravel, 1, WILD));
+		OreDictionary.registerOre("blockGravel", new ItemStack(TFCBlocks.gravel2, 1, WILD));
+
 		OreDictionary.registerOre("blockDirt", new ItemStack(Blocks.dirt));
 		OreDictionary.registerOre("blockDirt", new ItemStack(TFCBlocks.dirt, 1, WILD));
 		OreDictionary.registerOre("blockDirt", new ItemStack(TFCBlocks.dirt2, 1, WILD));
@@ -533,5 +650,26 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("blockPumpkin", new ItemStack(TFCBlocks.pumpkin));
 		OreDictionary.registerOre("blockLitPumpkin", new ItemStack(Blocks.lit_pumpkin));
 		OreDictionary.registerOre("blockLitPumpkin", new ItemStack(TFCBlocks.litPumpkin));
+
+		//Seed Bags
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsWheat, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsMaize, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsTomato, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsBarley, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsRye, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsOat, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsRice, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsPotato, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsOnion, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsCabbage, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsGarlic, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsCarrot, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsSugarcane, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsYellowBellPepper, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsRedBellPepper, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsSoybean, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsGreenbean, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsSquash, 1, WILD));
+		OreDictionary.registerOre("bagSeed", new ItemStack(TFCItems.seedsJute, 1, WILD));
 	}
 }
