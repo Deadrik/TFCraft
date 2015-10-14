@@ -663,9 +663,47 @@ public class ItemSetup extends TFCItems {
 				blackSteelSaw,blueSteelSaw,bronzeSaw,copperSaw,
 				wroughtIronSaw,redSteelSaw,steelSaw};
 
+		Recipes.scythes = new Item[]{bismuthBronzeScythe,blackBronzeScythe,
+				blackSteelScythe,blueSteelScythe,bronzeScythe,copperScythe,
+				wroughtIronScythe,redSteelScythe,steelScythe};
+
 		Recipes.knives = new Item[]{stoneKnife,bismuthBronzeKnife,blackBronzeKnife,
 				blackSteelKnife,blueSteelKnife,bronzeKnife,copperKnife,
 				wroughtIronKnife,redSteelKnife,steelKnife};
+
+		Recipes.picks = new Item[]{bismuthBronzePick,blackBronzePick,
+				blackSteelPick,blueSteelPick,bronzePick,copperPick,
+				wroughtIronPick,redSteelPick,steelPick};
+
+		Recipes.proPicks = new Item[]{proPickBismuthBronze,proPickBlackBronze,
+				proPickBlackSteel,proPickBlueSteel,proPickBronze,proPickCopper,
+				proPickIron,proPickRedSteel,proPickSteel};
+
+		Recipes.shovels = new Item[]{sedShovel,igInShovel,igExShovel,mMShovel,
+				bismuthBronzeShovel,blackBronzeShovel,
+				blackSteelShovel,blueSteelShovel,bronzeShovel,copperShovel,
+				wroughtIronShovel,redSteelShovel,steelShovel};
+
+		Recipes.hoes = new Item[]{sedHoe,igInHoe,igExHoe,mMHoe,
+				bismuthBronzeHoe,blackBronzeHoe,
+				blackSteelHoe,blueSteelHoe,bronzeHoe,copperHoe,
+				wroughtIronHoe,redSteelHoe,steelHoe};
+
+		Recipes.hammers  = new Item[]{stoneHammer,bismuthBronzeHammer,blackBronzeHammer,
+				blackSteelHammer,blueSteelHammer,bronzeHammer,copperHammer,
+				wroughtIronHammer,redSteelHammer,steelHammer};
+
+		Recipes.swords = new Item[]{bismuthBronzeSword,blackBronzeSword,
+				blackSteelSword,blueSteelSword,bronzeSword,copperSword,
+				wroughtIronSword,redSteelSword,steelSword};
+
+		Recipes.maces = new Item[]{bismuthBronzeMace,blackBronzeMace,
+				blackSteelMace,blueSteelMace,bronzeMace,copperMace,
+				wroughtIronMace,redSteelMace,steelMace};
+
+		Recipes.javelins = new Item[]{sedStoneJavelin,igInStoneJavelin,igExStoneJavelin,mMStoneJavelin,bismuthBronzeJavelin,blackBronzeJavelin,
+				blackSteelJavelin,blueSteelJavelin,bronzeJavelin,copperJavelin,
+				wroughtIronJavelin,redSteelJavelin,steelJavelin};
 
 		Recipes.meltedMetal = new Item[]{bismuthUnshaped, bismuthBronzeUnshaped,blackBronzeUnshaped,
 				blackSteelUnshaped,blueSteelUnshaped,brassUnshaped,bronzeUnshaped,
@@ -675,13 +713,6 @@ public class ItemSetup extends TFCItems {
 				highCarbonBlackSteelUnshaped, highCarbonBlueSteelUnshaped, highCarbonRedSteelUnshaped, 
 				weakBlueSteelUnshaped, weakRedSteelUnshaped};
 
-		Recipes.hammers  = new Item[]{stoneHammer,bismuthBronzeHammer,blackBronzeHammer,
-				blackSteelHammer,blueSteelHammer,bronzeHammer,copperHammer,
-				wroughtIronHammer,redSteelHammer,steelHammer};
-
-		Recipes.scythes = new Item[]{bismuthBronzeScythe,blackBronzeScythe,
-				blackSteelScythe,blueSteelScythe,bronzeScythe,copperScythe,
-				wroughtIronScythe,redSteelScythe,steelScythe};
 
 		Recipes.spindle = new Item[]{spindle};
 
