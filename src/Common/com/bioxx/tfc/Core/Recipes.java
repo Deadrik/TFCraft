@@ -38,8 +38,16 @@ public class Recipes
 	public static Item[] knives;
 	public static Item[] meltedMetal;
 	public static Item[] hammers;
+	public static Item[] picks;
+	public static Item[] proPicks;
+	public static Item[] shovels;
+	public static Item[] hoes;
+	public static Item[] swords;
+	public static Item[] maces;
+	public static Item[] javelins;
 	public static Item[] spindle;
 	public static Item[] gems;
+	public static Item[] seeds;
 	public static Item[] doors;
 
 	public static final int WILD = OreDictionary.WILDCARD_VALUE;
