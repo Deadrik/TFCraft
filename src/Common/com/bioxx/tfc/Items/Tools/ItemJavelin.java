@@ -239,13 +239,6 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 	}
 
 	@Override
-	public float getDigSpeed(ItemStack stack, Block block, int meta)
-	{
-		float digSpeed = super.getDigSpeed(stack, block, meta);
-		return digSpeed + (digSpeed * AnvilManager.getDurabilityBuff(stack));
-	}
-
-	@Override
 	public EnumAmmo getAmmoType() 
 	{
 		return EnumAmmo.JAVELIN;
