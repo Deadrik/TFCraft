@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -39,16 +40,20 @@ public class BlockLeatherRack extends BlockTerraContainer
 	{
 		if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TELeatherRack) // Instanceof check to avoid TE casting crashes.
 		{
-			TELeatherRack te = (TELeatherRack)world.getTileEntity(x, y, z);
-			if(te.workedArea != -1 && entityplayer.getCurrentEquippedItem() != null && 
-					entityplayer.getCurrentEquippedItem().getItem() instanceof IKnife) // The player is trying to scrape a piece off the hide.
+			TELeatherRack te = (TELeatherRack) world.getTileEntity(x, y, z);
+			ItemStack equipped = entityplayer.getCurrentEquippedItem();
+			
+			if (te.workedArea != -1 && equipped != null && equipped.getItem() instanceof IKnife) // The player is trying to scrape a piece off the hide.
 			{
 				int coord = (int) Math.floor(hitX / 0.25f) + (int) Math.floor(hitZ / 0.25f) * 4; // Get location of spot being scraped.
-				te.workArea(coord); // Scrape the spot
-				NBTTagCompound nbt = new NBTTagCompound();
-				nbt.setShort("workedArea", te.workedArea); // Save the scraped spot to NBT
-				te.broadcastPacketInRange(te.createDataPacket(nbt));
-				entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer); // Damage the knife
+				if (((te.workedArea >> coord) & 1) == 0) // If the area hasn't been scraped yet
+				{
+					te.workArea(coord); // Scrape the spot
+					NBTTagCompound nbt = new NBTTagCompound();
+					nbt.setShort("workedArea", te.workedArea); // Save the scraped spot to NBT
+					te.broadcastPacketInRange(te.createDataPacket(nbt));
+					equipped.damageItem(1, entityplayer); // Damage the knife
+				}
 			}
 			else // Any other situation where the block is clicked, but the player is not properly trying to scrape a hide.
 			{
