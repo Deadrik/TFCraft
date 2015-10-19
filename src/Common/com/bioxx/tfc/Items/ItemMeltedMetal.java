@@ -26,7 +26,7 @@ public class ItemMeltedMetal extends ItemTerra
 		setMaxDamage(101);
 		setCreativeTab(TFCTabs.TFC_MATERIALS);
 		this.setFolder("ingots/");
-		this.setWeight(EnumWeight.HEAVY);
+		this.setWeight(EnumWeight.MEDIUM);
 		this.setSize(EnumSize.SMALL);
 	}	
 
