@@ -122,11 +122,12 @@ public class CraftingHandler
 
 			if (!player.worldObj.isRemote && item instanceof ItemIngot)
 			{
-				for (int i = 0; i < iinventory.getSizeInventory(); i++ )
+				for (int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
-					if (iinventory.getStackInSlot(i) == null)
+					ItemStack is = iinventory.getStackInSlot(i);
+					if (is == null)
 						continue;
-					if (iinventory.getStackInSlot(i).getItem() instanceof ItemMeltedMetal)
+					else if (is.getItem() instanceof ItemMeltedMetal)
 					{
 						if (player.worldObj.rand.nextInt(20) == 0)
 							player.worldObj.playSoundAtEntity(player, TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
@@ -143,25 +144,6 @@ public class CraftingHandler
 	public static void preCraft(EntityPlayer player, ItemStack itemstack, IInventory iinventory)
 	{
 		triggerAchievements(player, itemstack, itemstack.getItem(), itemstack.getItemDamage());
-
-		if (itemstack.getItem() instanceof ItemIngot)
-		{
-			for (int i = 0; i < iinventory.getSizeInventory(); i++ )
-			{
-				if (iinventory.getStackInSlot(i) == null)
-					continue;
-				if (iinventory.getStackInSlot(i).getItem() instanceof ItemMeltedMetal)
-				{
-					if (player.worldObj.rand.nextInt(20) == 0)
-						player.worldObj.playSoundAtEntity(player, TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
-					else
-						TFC_Core.giveItemToPlayer(new ItemStack(TFCItems.ceramicMold, 1, 1), player);
-
-					iinventory.setInventorySlotContents(i, null);
-					break;
-				}
-			}
-		}
 	}
 
 	public static void triggerAchievements(EntityPlayer player, ItemStack itemstack, Item item, int itemDamage)

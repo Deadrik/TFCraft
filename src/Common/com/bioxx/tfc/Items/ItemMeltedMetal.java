@@ -20,7 +20,6 @@ import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemMeltedMetal extends ItemTerra
 {
-
 	public ItemMeltedMetal() 
 	{
 		super();
@@ -38,18 +37,15 @@ public class ItemMeltedMetal extends ItemTerra
 	}
 
 	@Override
-	public boolean canStack() 
+	public int getItemStackLimit(ItemStack is)
 	{
-		return false;
-	}
+		// Partially-filled and hot unshaped ingots cannot stack
+		if (isDamaged(is) || is.hasTagCompound() && TFC_ItemHeat.hasTemp(is))
+		{
+			return 1;
+		}
 
-
-	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
-	{
-
-		super.addInformation(is, player, arraylist, flag);
-
+		return super.getItemStackLimit(is);
 	}
 
 	@Override
