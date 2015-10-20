@@ -35,11 +35,9 @@ public class BlockCustomSnow extends BlockTerra
 	{
 		Block block = world.getBlock(i, j - 1, k);
 		
-		if (block == TFCBlocks.ice)
+		if (block == TFCBlocks.ice || block == TFCBlocks.pottery)
 			return false;
-		if (block == TFCBlocks.leaves || block == TFCBlocks.leaves2)
-			return true;
-		if (block == TFCBlocks.thatch)
+		if (block == TFCBlocks.leaves || block == TFCBlocks.leaves2 || block == TFCBlocks.thatch)
 			return true;
 		return World.doesBlockHaveSolidTopSurface(world, i, j - 1, k);
 	}
