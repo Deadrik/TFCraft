@@ -1,9 +1,6 @@
 package com.bioxx.tfc.Items.Tools;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -22,6 +19,8 @@ import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEOre;
+import com.bioxx.tfc.WorldGen.Generators.OreSpawnData;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenOre;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
@@ -87,6 +86,19 @@ public class ItemProPick extends ItemTerra
 				tellResult(player, new ItemStack(TFCItems.oreChunk, 1, meta));
 				return true;
 			}
+			else if (!TFC_Core.isGround(block)) // Exclude ground blocks to help with performance
+			{
+				Iterator iter = WorldGenOre.oreList.values().iterator();
+				while (iter.hasNext())
+				{
+					OreSpawnData osd = (OreSpawnData) iter.next();
+					if (osd != null && block == osd.block)
+					{
+						tellResult(player, new ItemStack(block));
+						return true;
+					}
+				}
+			}
 
 			random = new Random(x * z + y);
 			int chance = 60 + ((rank.ordinal()+1)*10);
@@ -115,7 +127,7 @@ public class ItemProPick extends ItemTerra
 
 						block = world.getBlock(blockX, blockY, blockZ);
 						meta = world.getBlockMetadata(blockX, blockY, blockZ);
-						ItemStack ore;
+						ItemStack ore = null;
 						if (block == TFCBlocks.ore && world.getTileEntity(blockX, blockY, blockZ) instanceof TEOre)
 						{
 							TEOre te = (TEOre) world.getTileEntity(blockX, blockY, blockZ);
@@ -128,18 +140,34 @@ public class ItemProPick extends ItemTerra
 							ore = new ItemStack(TFCItems.oreChunk, 1, meta + Global.ORE_METAL.length);
 						else if (block == TFCBlocks.ore3)
 							ore = new ItemStack(TFCItems.oreChunk, 1, meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length);
+						else if (!TFC_Core.isGround(block)) // Exclude ground blocks to help with performance
+						{
+							Iterator iter = WorldGenOre.oreList.values().iterator();
+							while (iter.hasNext())
+							{
+								OreSpawnData osd = (OreSpawnData) iter.next();
+								if (osd != null && block == osd.block)
+								{
+									ore = new ItemStack(block);
+									break;
+								}
+							}
+						}
 						else
 							continue;
 
-						String oreName = ore.getDisplayName();
+						if (ore != null)
+						{
+							String oreName = ore.getDisplayName();
 
-						if (results.containsKey(oreName))
-							results.get(oreName).count++ ;
-						else
-							results.put(oreName, new ProspectResult(ore, 1));
+							if (results.containsKey(oreName))
+								results.get(oreName).count++;
+							else
+								results.put(oreName, new ProspectResult(ore, 1));
 
-						ore = null;
-						oreName = null;
+							ore = null;
+							oreName = null;
+						}
 					}
 				}
 			}
