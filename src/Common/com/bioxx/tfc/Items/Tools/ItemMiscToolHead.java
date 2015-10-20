@@ -9,9 +9,14 @@ import net.minecraft.item.ItemStack;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.api.Metal;
+import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
-public class ItemMiscToolHead extends ItemTerra
+import com.bioxx.tfc.api.Interfaces.ISmeltable;
+
+public class ItemMiscToolHead extends ItemTerra implements ISmeltable
 {
 	private ToolMaterial material;
 
@@ -52,5 +57,35 @@ public class ItemMiscToolHead extends ItemTerra
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 		ItemTerraTool.addSmithingBonusInformation(is, arraylist);
+	}
+
+	@Override
+	public Metal getMetalType(ItemStack is)
+	{
+		if (this == TFCItems.wroughtIronKnifeHead)
+			return Global.WROUGHTIRON;
+		else
+			return null;
+	}
+
+	@Override
+	public short getMetalReturnAmount(ItemStack is)
+	{
+		if (this == TFCItems.wroughtIronKnifeHead)
+			return 100;
+		else
+			return 0;
+	}
+
+	@Override
+	public boolean isSmeltable(ItemStack is)
+	{
+		return this == TFCItems.wroughtIronKnifeHead;
+	}
+
+	@Override
+	public EnumTier getSmeltTier(ItemStack is)
+	{
+		return EnumTier.TierIII;
 	}
 }
