@@ -66,9 +66,12 @@ public class GuiBlueprint extends GuiScreen
 		this.world = world;
 		player = p;
 		stack = player.inventory.getCurrentItem();
-		xAngle = stack.stackTagCompound.getInteger(ItemBlueprint.TAG_X_ANGLE);
-		yAngle = stack.stackTagCompound.getInteger(ItemBlueprint.TAG_Y_ANGLE);
-		zAngle = stack.stackTagCompound.getInteger(ItemBlueprint.TAG_Z_ANGLE);
+		if (stack.hasTagCompound())
+		{
+			xAngle = stack.stackTagCompound.getInteger(ItemBlueprint.TAG_X_ANGLE);
+			yAngle = stack.stackTagCompound.getInteger(ItemBlueprint.TAG_Y_ANGLE);
+			zAngle = stack.stackTagCompound.getInteger(ItemBlueprint.TAG_Z_ANGLE);
+		}
 	}
 
 	@Override
@@ -89,8 +92,7 @@ public class GuiBlueprint extends GuiScreen
 		super.initGui();
 
 		int nameTop = guiTop() + 10 + this.fontRendererObj.FONT_HEIGHT + 4;
-		int namePrefixWidth = fontRendererObj.getStringWidth(ItemBlueprint.SUFFIX) + 4;
-		this.nameTextField = new GuiTextField(fontRendererObj, guiLeft() + 10 + namePrefixWidth, nameTop, 180 - namePrefixWidth, 20);
+		this.nameTextField = new GuiTextField(fontRendererObj, guiLeft() + 14, nameTop, 176, 20);
 		this.nameTextField.setFocused(true);
 		this.nameTextField.setCanLoseFocus(false);
 		if (!stack.hasTagCompound()
@@ -103,6 +105,7 @@ public class GuiBlueprint extends GuiScreen
 		else
 		{
 			this.nameTextField.setEnabled(false);
+			this.nameTextField.setFocused(false);
 			this.nameTextField.setText(stack.stackTagCompound.getString(ItemBlueprint.TAG_ITEM_NAME));
 		}
 
@@ -243,14 +246,16 @@ public class GuiBlueprint extends GuiScreen
 		int top = guiTop();
 		drawTexturedModalRect(left, top, 0, 0, xSize, ySize);
 
-		drawCenteredString(fontRendererObj, TFC_Core.translate("gui.Blueprint"), this.width / 2, top + 10, 0x000000);
+		if (!stack.hasTagCompound() || stack.stackTagCompound.getString(ItemBlueprint.TAG_ITEM_NAME).isEmpty())
+			drawCenteredString(fontRendererObj, TFC_Core.translate("gui.Blueprint"), this.width / 2, top + 10, 0x000000);
+		else
+			drawCenteredString(fontRendererObj, TFC_Core.translate("gui.Rotate"), this.width / 2, top + 10, 0x000000);
 
 		int axesNameLeft = left + 10;
 		int axesAngleLeft = axesNameLeft + fontRendererObj.getStringWidth("X: ") + 4 + 20 + fontRendererObj.getStringWidth("360") / 2;
 		int topShift = (20 - this.fontRendererObj.FONT_HEIGHT) / 2;
 
 		top += 10 + this.fontRendererObj.FONT_HEIGHT + 4;
-		fontRendererObj.drawString(ItemBlueprint.SUFFIX, axesNameLeft, top + topShift, 0x000000);
 		this.nameTextField.drawTextBox();
 
 		// X:

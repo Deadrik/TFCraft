@@ -117,22 +117,25 @@ public class ItemNBTPacket extends AbstractPacket {
 		NBTTagCompound stackNBT;
 	    ItemStack stack = player.inventory.getCurrentItem();
 	    
-	    if (stack.hasTagCompound())
+		if (stack != null)
 	    {
-			stackNBT = stack.stackTagCompound;
-	    }
-	    else
-	    {
-			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + stack.getDisplayName() + " " +
-					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
-			stackNBT = new NBTTagCompound();
-	    }
+			if (stack.hasTagCompound())
+			{
+				stackNBT = stack.stackTagCompound;
+			}
+			else
+			{
+				TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") +" " + stack.getDisplayName() + " " +
+											TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
+				stackNBT = new NBTTagCompound();
+			}
 
-		for (String tagName : tagNames)
-			stackNBT.setTag(tagName, tags.getTag(tagName));
-		for (String tagName : removeNames)
-			stackNBT.removeTag(tagName);
-		player.inventory.getCurrentItem().setTagCompound(stackNBT);
+			for (String tagName : tagNames)
+				stackNBT.setTag(tagName, tags.getTag(tagName));
+			for (String tagName : removeNames)
+				stackNBT.removeTag(tagName);
+			player.inventory.getCurrentItem().setTagCompound(stackNBT);
+	    }
 	}
 
 	@Override
@@ -141,20 +144,23 @@ public class ItemNBTPacket extends AbstractPacket {
 		NBTTagCompound stackNBT;
 		ItemStack stack = player.inventory.getCurrentItem();
 
-		if (stack.hasTagCompound())
+		if (stack != null)
 		{
-			stackNBT = stack.stackTagCompound;
+			if (stack.hasTagCompound())
+			{
+				stackNBT = stack.stackTagCompound;
+			}
+			else
+			{
+				TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") +" " + stack.getDisplayName() + " " +
+											TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
+				stackNBT = new NBTTagCompound();
+			}
+			for (String tagName : tagNames)
+				stackNBT.setTag(tagName, tags.getTag(tagName));
+			for (String tagName : removeNames)
+				stackNBT.removeTag(tagName);
+			player.inventory.getCurrentItem().setTagCompound(stackNBT);
 		}
-		else
-		{
-			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + stack.getDisplayName() + " " +
-					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
-			stackNBT = new NBTTagCompound();
-		}
-		for (String tagName : tagNames)
-			stackNBT.setTag(tagName, tags.getTag(tagName));
-		for (String tagName : removeNames)
-			stackNBT.removeTag(tagName);
-		player.inventory.getCurrentItem().setTagCompound(stackNBT);
 	}
 }

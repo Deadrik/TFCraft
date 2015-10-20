@@ -1,10 +1,12 @@
 package com.bioxx.tfc.Items;
 
 import java.util.BitSet;
+import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
@@ -96,7 +98,13 @@ public class ItemBlueprint extends ItemTerra
 				}
 
 				if (hasChisel == -1 || hasHammer == -1)
+				{
+					if (!world.isRemote)
+					{
+						TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("gui.Blueprint.missingTool"));
+					}
 					return false;
+				}
 			}
 
 			TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
@@ -125,7 +133,12 @@ public class ItemBlueprint extends ItemTerra
 			{
 				world.markBlockForUpdate(x, y, z);
 				if (!player.capabilities.isCreativeMode)
+				{
 					stack.stackSize--;
+
+					if (stack.stackSize <= 0)
+						stack = null;
+				}
 			}
 		}
 		return false;
@@ -135,8 +148,24 @@ public class ItemBlueprint extends ItemTerra
 	public String getItemStackDisplayName(ItemStack is)
 	{
 		if(is.hasTagCompound() && is.stackTagCompound.hasKey(TAG_COMPLETED))
-			return SUFFIX + is.stackTagCompound.getString(TAG_ITEM_NAME);
+			return is.stackTagCompound.getString(TAG_ITEM_NAME);
 		else
 			return TFC_Core.translate(this.getUnlocalizedName());
+	}
+
+	@Override
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
+	{
+		if (TFC_Core.showShiftInformation())
+		{
+			arraylist.add(TFC_Core.translate("gui.Help"));
+			arraylist.add(TFC_Core.translate("gui.Blueprint.Inst0"));
+			if (is.hasTagCompound() && !is.stackTagCompound.getString(ItemBlueprint.TAG_ITEM_NAME).isEmpty())
+				arraylist.add(TFC_Core.translate("gui.Blueprint.Inst1"));
+		}
+		else
+		{
+			arraylist.add(TFC_Core.translate("gui.ShowHelp"));
+		}
 	}
 }

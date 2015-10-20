@@ -2380,6 +2380,10 @@ gui.plans.trapdoor=Trap Door
 
 #== Misc GUI ==
 gui.Blueprint=Blueprint
+gui.Rotate=Change Rotation
+gui.Blueprint.Inst0=§bRight Click §7on a detailed block to use.
+gui.Blueprint.Inst1=Or §bRight Click §7to change blueprint rotation.
+gui.Blueprint.missingTool=Blueprint requires chisel and hammer to use.
 gui.Nametag=Nametag
 gui.fertilized=Fertilized
 gui.Inventory=Inventory
