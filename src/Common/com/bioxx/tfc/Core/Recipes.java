@@ -49,6 +49,7 @@ public class Recipes
 	public static Item[] gems;
 	public static Item[] seeds;
 	public static Item[] doors;
+	public static Item[] tuyeres;
 
 	public static final int WILD = OreDictionary.WILDCARD_VALUE;
 

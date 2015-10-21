@@ -716,6 +716,10 @@ public class ItemSetup extends TFCItems {
 				bronzeJavelin,copperJavelin,wroughtIronJavelin,
 				redSteelJavelin,steelJavelin};
 
+		Recipes.tuyeres = new Item[]{tuyereBismuthBronze,tuyereBlackBronze,
+				tuyereBlackSteel,tuyereBlueSteel,tuyereBronze,tuyereCopper,
+				tuyereWroughtIron,tuyereRedSteel,tuyereSteel};
+
 		Recipes.spindle = new Item[]{spindle};
 
 		Recipes.gems  = new Item[]{gemAgate, gemAmethyst, gemBeryl, gemDiamond, gemEmerald, gemGarnet, 
