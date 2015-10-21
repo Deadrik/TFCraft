@@ -2351,6 +2351,20 @@ gui.metal.WeakSteel=Weak Steel
 gui.metal.WroughtIron=Wrought Iron
 gui.metal.Zinc=Zinc
 
+
+#== GUI Ores - Mostly for WAILA ==
+gui.ore.platinum=Not used
+gui.ore.lead=Not used
+gui.ore.gypsum=Not used
+gui.ore.satinspar=Not used
+gui.ore.selenite=Not used
+gui.ore.petrified.wood=Not used
+gui.ore.jet=Not used
+gui.ore.microcline=Not used
+gui.ore.pitchblende=Not used
+gui.ore.serpentine=Not used
+gui.ore.olivine=Not used
+
 #== Plans GUI ==
 gui.plans.axe=Axe
 gui.plans.bootsplate=Boots
