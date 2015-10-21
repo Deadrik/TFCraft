@@ -21,6 +21,7 @@ public class TFCOptions
 	public static String quiverHUDPosition = "bottomleft";
 	public static boolean enableSolidDetailed = true;
 	public static int maxRemovedSolidDetailed = 12;
+	public static int hammerBreakSpeed = 90;
 
 	// Time
 	public static int yearLength = 96;
