@@ -279,7 +279,7 @@ public class TEBloomery extends NetworkTileEntity
 							int c = entity.getEntityItem().stackSize;
 							while (c > 0)
 							{
-								if (charcoalCount + oreCount < (2 * maxCount) && oreCount < maxCount && outCount < 1000)
+								if (charcoalCount + oreCount < (2 * maxCount) && oreCount < maxCount && outCount < 2000)
 								{
 									if (addOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage())))
 									{
