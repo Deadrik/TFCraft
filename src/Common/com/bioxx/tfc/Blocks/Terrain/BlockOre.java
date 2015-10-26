@@ -20,6 +20,7 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.TileEntities.TEOre;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.api.TFCBlocks;
@@ -117,22 +118,36 @@ public class BlockOre extends BlockCollapsible
 	{
 		if(!world.isRemote)
 		{
+			boolean dropOres = false;
+			boolean hasHammer = false;
 			int meta = world.getBlockMetadata(x, y, z);
-			TEOre te = (TEOre)world.getTileEntity(x, y, z);
-			int ore = getOreGrade(te, meta);
+			boolean isCoal = meta == 14 || meta == 15;
+			ItemStack itemstack = null;
 			if(player != null)
 			{
 				TFC_Core.addPlayerExhaustion(player, 0.001f);
 				player.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
+				dropOres = player.canHarvestBlock(this);
+				ItemStack heldItem = player.getCurrentEquippedItem();
+				hasHammer = heldItem != null && heldItem.getItem() instanceof ItemHammer;
 			}
 
-			ItemStack itemstack;
-			if(meta == 14 || meta == 15)
-				itemstack  = new ItemStack(TFCItems.coal, 1 + world.rand.nextInt(2));
-			else
-				itemstack  = new ItemStack(TFCItems.oreChunk, 1, damageDropped(ore));
+			if (player == null || dropOres)
+			{
+				if (isCoal)
+					itemstack = new ItemStack(TFCItems.coal, 1 + world.rand.nextInt(2));
+				else
+				{
+					TEOre te = (TEOre) world.getTileEntity(x, y, z);
+					int ore = getOreGrade(te, meta);
+					itemstack = new ItemStack(TFCItems.oreChunk, 1, damageDropped(ore));
+				}
+			}
+			else if (hasHammer && !isCoal)
+				itemstack = new ItemStack(TFCItems.smallOreChunk, 1, meta);
 
-			dropBlockAsItem(world, x, y, z, itemstack);
+			if (itemstack != null)
+				dropBlockAsItem(world, x, y, z, itemstack);
 		}
 		return world.setBlockToAir(x, y, z);
 	}

@@ -52,15 +52,20 @@ public class BlockOre3 extends BlockOre
 	{
 		if(!world.isRemote)
 		{
-			int meta = world.getBlockMetadata(x, y, z);
+			boolean dropOres = false;
 			if(player != null)
 			{
 				player.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
 				player.addExhaustion(0.075F);
+				dropOres = player.canHarvestBlock(this);
 			}
 
-			ItemStack itemstack = new ItemStack(TFCItems.oreChunk, 1, damageDropped(meta));
-			dropBlockAsItem(world, x, y, z, itemstack);
+			if (player == null || dropOres)
+			{
+				int meta = world.getBlockMetadata(x, y, z);
+				ItemStack itemstack = new ItemStack(TFCItems.oreChunk, 1, damageDropped(meta));
+				dropBlockAsItem(world, x, y, z, itemstack);
+			}
 		}
 		return world.setBlockToAir(x, y, z);
 	}
