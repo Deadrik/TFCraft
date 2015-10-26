@@ -16,11 +16,12 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
+import net.minecraftforge.oredict.OreDictionary;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.TileEntities.TEOre;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.api.TFCBlocks;
@@ -129,7 +130,19 @@ public class BlockOre extends BlockCollapsible
 				player.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
 				dropOres = player.canHarvestBlock(this);
 				ItemStack heldItem = player.getCurrentEquippedItem();
-				hasHammer = heldItem != null && heldItem.getItem() instanceof ItemHammer;
+				if (heldItem != null)
+				{
+					int[] itemIDs = OreDictionary.getOreIDs(heldItem);
+					for (int id : itemIDs)
+					{
+						String name = OreDictionary.getOreName(id);
+						if (name.startsWith("itemHammer"))
+						{
+							hasHammer = true;
+							break;
+						}
+					}
+				}
 			}
 
 			if (player == null || dropOres)
