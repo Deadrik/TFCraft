@@ -11,17 +11,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
-
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Core.WeatherManager;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Constant.Global;
@@ -648,9 +647,9 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				}
 			}
 
-			//If lightning can strike here then it means that the barrel can see the sky, so rain can hit it. If true then we fill
-			//the barrel when its raining.
-			if(!this.getSealed() && worldObj.canLightningStrikeAt(xCoord, yCoord+1, zCoord))
+			//Check the general isRaining function. Supports weather2 localized rainstorms.
+			//Fill the barrel when its raining.
+			if(!this.getSealed() &&  WeatherManager.isRainingOnCoord(this.worldObj, xCoord, yCoord + 1, zCoord))
 			{
 				int count = getInvCount();	
 				if (count == 0 || count == 1 && this.getInputStack() != null)

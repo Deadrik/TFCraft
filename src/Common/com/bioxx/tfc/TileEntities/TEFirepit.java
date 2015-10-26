@@ -12,14 +12,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
-
 import net.minecraftforge.common.MinecraftForge;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Core.WeatherManager;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
@@ -469,8 +468,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 				}
 			}
 			else if(fuelTimeLeft <= 0 && fireTemp >= 1 && fireItemStacks[5] != null &&
-						(!worldObj.canLightningStrikeAt(xCoord, yCoord, zCoord) && !worldObj.canLightningStrikeAt(xCoord, yCoord + 1, zCoord) ||
-							!worldObj.isRaining()))
+						 !WeatherManager.isRainingOnCoord(worldObj, xCoord, yCoord, zCoord))
 			{
 				if(fireItemStacks[5] != null)
 				{

@@ -10,10 +10,10 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.WeatherManager;
 import com.bioxx.tfc.Items.ItemBloom;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.api.*;
@@ -85,7 +85,7 @@ public class TEForge extends TEFireEntity implements IInventory
 		else // Can't see the sky, chimney is blocked
 			isBlocked = true;
 
-		return !worldObj.isRaining() && !isBlocked; // Direct chimney is valid when it is not blocked and it isn't raining.
+		return !WeatherManager.isRainingOnCoord(worldObj, xCoord, yCoord, zCoord) && !isBlocked; // Direct chimney is valid when it is not blocked and it isn't raining.
 	}
 
 	private void genSmokeRoot(int x, int y, int z)
@@ -457,7 +457,7 @@ public class TEForge extends TEFireEntity implements IInventory
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
 
 			//If the fire is still burning and has fuel
-			if(fuelTimeLeft > 0 && fireTemp >= 1 && (!worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || !worldObj.isRaining()))
+			if(fuelTimeLeft > 0 && fireTemp >= 1 && !WeatherManager.isRainingOnCoord(worldObj, xCoord, yCoord, zCoord))
 			{
 				float desiredTemp = handleTemp();
 				handleTempFlux(desiredTemp);

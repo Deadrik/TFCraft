@@ -1,7 +1,9 @@
 package com.bioxx.tfc.Core;
 
+
 import java.util.Random;
 
+import cpw.mods.fml.common.Loader;
 import net.minecraft.world.World;
 
 public class WeatherManager
@@ -83,5 +85,20 @@ public class WeatherManager
 		int hour = TFC_Time.getHour();
 		clientRand.setSeed(TFC_Time.getTotalDays()+hour);
 		return clientRand.nextFloat();
+	}
+	public static boolean isRainingOnCoord(World worldObj, int xCoord, int yCoord, int zCoord)
+	{
+
+		if (worldObj.getBlock(xCoord, yCoord, zCoord) != null && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord))
+		{
+			if (Loader.isModLoaded("weather2") && !worldObj.isRemote)
+			{
+				com.bioxx.tfc.ModSupport.Weather2 weather2 = new com.bioxx.tfc.ModSupport.Weather2();
+				return weather2.isRainingOnCoord(worldObj, xCoord, yCoord, zCoord);
+			}
+			return worldObj.isRaining();	
+		}
+		return false;
+		
 	}
 }

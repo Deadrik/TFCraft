@@ -5,13 +5,13 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Core.WeatherManager;
 import com.bioxx.tfc.api.Food;
 
 public class TESmokeRack extends NetworkTileEntity implements IInventory
@@ -45,7 +45,7 @@ public class TESmokeRack extends NetworkTileEntity implements IInventory
 			dryFoods();
 		}
 
-		if(!worldObj.isRaining() && TFC_Time.getTotalHours() > this.lastSmokedTime+1)
+		if(!WeatherManager.isRainingOnCoord(worldObj, xCoord, yCoord, zCoord) && TFC_Time.getTotalHours() > this.lastSmokedTime+1)
 			TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord, env, base);
 		else if(TFC_Climate.getHeightAdjustedTemp(worldObj, xCoord, yCoord, zCoord) > 0)
 			TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord, env*2, base*2);

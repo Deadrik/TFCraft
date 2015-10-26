@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.WeatherManager;
 import com.bioxx.tfc.api.TFCBlocks;
 
 public class BlockCustomSnow extends BlockTerra
@@ -152,7 +153,7 @@ public class BlockCustomSnow extends BlockTerra
 		
 		float temp = TFC_Climate.getHeightAdjustedTemp(world, x, y, z);
 		
-		if (temp <= 0 && world.isRaining())  //Raining and Below Freezing
+		if (temp <= 0 && WeatherManager.isRainingOnCoord(world,x, y, z))  //Raining and Below Freezing
 		{
 			if (r.nextInt(20) == 0)
 			{
@@ -167,7 +168,7 @@ public class BlockCustomSnow extends BlockTerra
 		{
 			world.setBlock(x, y, z, Blocks.air, 0, 0x2);
 		}
-		else if (temp > 0 && world.isRaining())  //Raining and above freezing
+		else if (temp > 0 &&  WeatherManager.isRainingOnCoord(world,x, y, z))  //Raining and above freezing
 		{
 			if (r.nextInt(5) == 0)
 			{
