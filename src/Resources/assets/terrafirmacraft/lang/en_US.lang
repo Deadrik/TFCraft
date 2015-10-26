@@ -2624,7 +2624,7 @@ gui.goldpan.overused=This area seems to be overworked. You probably wouldn't fin
 gui.seeds.failedTemp=It's too cold to plant this, it wouldn't survive very long.
 gui.seeds.failedSun=There's not enough sunlight to plant this, it wouldn't survive very long.
 gui.forge.badChimney=There isn't enough ventilation to use this.
-
+gui.warning.heatstroke=You are suffering heatstroke. Drink fresh water quickly!
 gui.ProPick.Found=Found
 gui.ProPick.FoundTraces=Found traces of
 gui.ProPick.FoundSmall=Found a small sample of
