@@ -4,16 +4,18 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
 import net.minecraftforge.client.event.GuiOpenEvent;
-
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cuchaz.ships.core.ShipIntermediary;
 
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
 import com.bioxx.tfc.GUI.*;
+import com.bioxx.tfc.ModSupport.ShipsMod;
 import com.bioxx.tfc.TileEntities.*;
 
 public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
@@ -22,9 +24,17 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) 
 	{
 		TileEntity te;
+
 		try
 		{
 			te= world.getTileEntity(x, y, z);
+			if (te == null && Loader.isModLoaded("cuchaz.ships"))
+			{
+				com.bioxx.tfc.ModSupport.ShipsMod shipsMod = new ShipsMod();
+				world = shipsMod.getShipsWorld(world, player.inventory);
+				te = world.getTileEntity(x, y, z);
+			}
+
 		}
 		catch(Exception e)
 		{
