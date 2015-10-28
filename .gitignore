@@ -4,6 +4,7 @@
 .gradle
 build/
 
+
 # Ignore Gradle GUI config
 gradle-app.setting
 
@@ -81,3 +82,21 @@ local.properties
 # Other
 *Thumbs.db
 .pmd
+src/Resources/META-INF/TConstruct_at.cfg
+src/Resources/META-INF/cofhlib_at.cfg
+src/Resources/META-INF/CofH_at.cfg
+src/Resources/META-INF/fml_at.cfg
+src/Resources/META-INF/farseek_at.cfg
+src/Resources/META-INF/forge_at.cfg
+src/Resources/META-INF/hee_at.cfg
+src/Resources/META-INF/funkylocomotion_at.cfg
+src/Resources/META-INF/inpuretools_at.cfg
+src/Resources/META-INF/inpure_at.cfg
+src/Resources/META-INF/mariculture_at.cfg
+src/Resources/META-INF/mcdiscord_at.cfg
+src/Resources/META-INF/micdoodlecore_at.cfg
+src/Resources/META-INF/nei_at.cfg
+src/Resources/META-INF/oc_at.cfg
+src/Resources/META-INF/openbees_at.cfg
+src/Resources/META-INF/PneumaticCraft_at.cfg
+src/Resources/META-INF/simplyjetpacks_at.cfg
