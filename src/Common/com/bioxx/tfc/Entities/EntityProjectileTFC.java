@@ -14,6 +14,7 @@ import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
 import com.bioxx.tfc.Items.Tools.ItemJavelin;
 import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 
@@ -21,6 +22,8 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 {
 	public short damageTaken;
 	public Item pickupItem = TFCItems.arrow;
+	public float damageBuff;
+	public float duraBuff;
 
 	public EntityProjectileTFC(World par1World)
 	{
@@ -63,7 +66,13 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 			boolean inground = nbt.hasKey("inGround") && nbt.getByte("inGround") == 1;
 			if(inground)
 			{
-				EntityItem ei = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.pickupItem, 1, this.damageTaken));
+				ItemStack is = new ItemStack(this.pickupItem, 1, this.damageTaken);
+				if (duraBuff != 0)
+					AnvilManager.setDurabilityBuff(is, duraBuff);
+				if (damageBuff != 0)
+					AnvilManager.setDamageBuff(is, damageBuff);
+
+				EntityItem ei = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, is);
 
 				if (this.canBePickedUp == 1)
 				{
@@ -74,6 +83,7 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 				}
 
 				ItemStack itemstack = ei.getEntityItem();
+
 				boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && player.capabilities.isCreativeMode;
 				if (itemstack.stackSize <= 0)
 					flag = true;

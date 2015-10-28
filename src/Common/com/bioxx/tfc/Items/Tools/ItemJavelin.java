@@ -120,7 +120,9 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 			float force = Math.min(var6/20.0f, 1.0f);
 
 			EntityJavelin javelin = new EntityJavelin(world, player, 1.5f*force);
-			javelin.setDamage(getRangedDamage());
+			javelin.setDamage(getRangedDamage(itemstack));
+			javelin.duraBuff = AnvilManager.getDurabilityBuff(itemstack);
+			javelin.damageBuff = AnvilManager.getDamageBuff(itemstack);
 
 			int var9 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, itemstack);
 
@@ -214,9 +216,12 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 	}
 
 	@Override
-	public float getRangedDamage() 
+	public float getRangedDamage(ItemStack is)
 	{
-		return weaponRangeDamage;
+		if (is != null)
+			return weaponRangeDamage + (weaponRangeDamage * AnvilManager.getDamageBuff(is));
+		else
+			return weaponRangeDamage;
 	}
 
 	@Override

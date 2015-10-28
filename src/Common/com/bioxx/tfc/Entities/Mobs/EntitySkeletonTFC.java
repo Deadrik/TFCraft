@@ -466,7 +466,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 			if(is!= null && is.getItem() instanceof IProjectile)
 			{
 				projectile = new EntityJavelin(this.worldObj, this, par1EntityLiving, 1.6F, 12.0F);
-				double dam = ((IProjectile)is.getItem()).getRangedDamage();
+				double dam = ((IProjectile) is.getItem()).getRangedDamage(is);
 				projectile.setDamage(dam);
 			}
 		}
