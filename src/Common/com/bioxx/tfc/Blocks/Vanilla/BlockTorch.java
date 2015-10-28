@@ -248,18 +248,21 @@ public class BlockTorch extends BlockTerraContainer
 		{
 			this.onBlockAdded(world, x, y, z);
 		}
-		if (TFCOptions.torchBurnTime != 0 && world.getTileEntity(x, y, z) instanceof TELightEmitter)
+		if (!world.isRemote)
 		{
-			TELightEmitter te = (TELightEmitter) world.getTileEntity(x, y, z);
-			if (TFC_Time.getTotalHours() > te.hourPlaced + TFCOptions.torchBurnTime ||
-					world.isRaining() && world.canBlockSeeTheSky(x, y, z))
+			if (TFCOptions.torchBurnTime != 0 && world.getTileEntity(x, y, z) instanceof TELightEmitter)
 			{
-				world.setBlock(x, y, z, TFCBlocks.torchOff, meta, 3);
+				TELightEmitter te = (TELightEmitter) world.getTileEntity(x, y, z);
+				if (TFC_Time.getTotalHours() > te.hourPlaced + TFCOptions.torchBurnTime ||
+					world.isRaining() && world.canBlockSeeTheSky(x, y, z))
+				{
+					world.setBlock(x, y, z, TFCBlocks.torchOff, meta, 3);
+				}
 			}
-		}
-		else if (meta >= 8)
-		{
-			world.setBlock(x, y, z, TFCBlocks.torchOff, meta - 8, 3);
+			else if (meta >= 8)
+			{
+				world.setBlock(x, y, z, TFCBlocks.torchOff, meta - 8, 3);
+			}
 		}
 	}
 
