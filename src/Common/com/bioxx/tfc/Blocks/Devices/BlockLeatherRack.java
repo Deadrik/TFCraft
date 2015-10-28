@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -89,7 +90,7 @@ public class BlockLeatherRack extends BlockTerraContainer
 	{
 		super.onNeighborBlockChange(world, i, j, k, par5);
 		if(!canBlockStay(world,i,j,k))
-			world.setBlockToAir(i, j, k);
+			world.setBlock(i, j, k, Blocks.air, 0, 2);
 	}
 
 	@Override
