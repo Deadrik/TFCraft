@@ -71,12 +71,13 @@ public class WorldGenPineTall extends WorldGenerator
 			else
 			{
 				block = world.getBlock(xCoord, yCoord - 1, zCoord);
-				Block dirt =  TFC_Core.getTypeForDirtFromGrass(block);
-				int dirtMeta =  world.getBlockMetadata(xCoord, yCoord-1, zCoord);
 
 				if (TFC_Core.isSoil(block) && yCoord < world.getActualHeight() - treeHeight - 1)
 				{
-					this.setBlockAndNotifyAdequately(world, xCoord, yCoord - 1, zCoord, dirt, dirtMeta);
+					Block soil = TFC_Core.getTypeForSoil(block);
+					int soilMeta = world.getBlockMetadata(xCoord, yCoord - 1, zCoord);
+
+					this.setBlockAndNotifyAdequately(world, xCoord, yCoord - 1, zCoord, soil, soilMeta);
 					var18 = 0;
 
 					for (x = yCoord + treeHeight; x >= yCoord + var7; --x)

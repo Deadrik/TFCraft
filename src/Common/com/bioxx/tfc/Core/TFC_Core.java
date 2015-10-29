@@ -661,6 +661,21 @@ public class TFC_Core
 		return TFCBlocks.dirt2;
 	}
 
+	public static Block getTypeForSoil(Block block)
+	{
+		if (TFC_Core.isGrass(block))
+		{
+			if (TFC_Core.isGrassType1(block))
+				return TFCBlocks.dirt;
+			else if (TFC_Core.isGrassType2(block))
+				return TFCBlocks.dirt2;
+			else if (TFC_Core.isPeatGrass(block))
+				return TFCBlocks.peat;
+		}
+
+		return block;
+	}
+
 	public static Block getTypeForClay(int inMeta)
 	{
 		if(inMeta < 16)

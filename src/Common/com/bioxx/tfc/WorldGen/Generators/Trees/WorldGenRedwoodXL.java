@@ -72,14 +72,40 @@ public class WorldGenRedwoodXL extends WorldGenerator
 			}
 		}
 
-		if(TFC_Core.isGrass(world.getBlock(x, y - 1, z)))
-			world.setBlock(x, y - 1, z, TFC_Core.getTypeForDirtFromGrass(world.getBlock(x, y - 1, z)), world.getBlockMetadata(x, y - 1, z), 2);
-		if(TFC_Core.isGrass(world.getBlock(x-1, y - 1, z)))
-			world.setBlock(x - 1, y - 1, z, TFC_Core.getTypeForDirtFromGrass(world.getBlock(x-1, y - 1, z)), world.getBlockMetadata(x-1, y - 1, z), 2);
-		if(TFC_Core.isGrass(world.getBlock(x, y - 1, z-1)))
-			world.setBlock(x, y - 1, z - 1, TFC_Core.getTypeForDirtFromGrass(world.getBlock(x, y - 1, z-1)), world.getBlockMetadata(x, y - 1, z-1), 2);
-		if(TFC_Core.isGrass(world.getBlock(x-1, y - 1, z-1)))
-			world.setBlock(x - 1, y - 1, z - 1, TFC_Core.getTypeForDirtFromGrass(world.getBlock(x-1, y - 1, z-1)), world.getBlockMetadata(x-1, y - 1, z-1), 2);
+		Block block = world.getBlock(x, y - 1, z);
+		Block soil = null;
+		int soilMeta = 0;
+
+		if (TFC_Core.isGrass(block))
+		{
+			soil = TFC_Core.getTypeForSoil(block);
+			soilMeta = world.getBlockMetadata(x, y - 1, z);
+			world.setBlock(x, y - 1, z, soil, soilMeta, 2);
+		}
+
+		block = world.getBlock(x - 1, y - 1, z);
+		if (TFC_Core.isGrass(block))
+		{
+			soil = TFC_Core.getTypeForSoil(block);
+			soilMeta = world.getBlockMetadata(x - 1, y - 1, z);
+			world.setBlock(x - 1, y - 1, z, soil, soilMeta, 2);
+		}
+
+		block = world.getBlock(x, y - 1, z - 1);
+		if (TFC_Core.isGrass(block))
+		{
+			soil = TFC_Core.getTypeForSoil(block);
+			soilMeta = world.getBlockMetadata(x, y - 1, z - 1);
+			world.setBlock(x, y - 1, z - 1, soil, soilMeta, 2);
+		}
+
+		block = world.getBlock(x - 1, y - 1, z - 1);
+		if (TFC_Core.isGrass(block))
+		{
+			soil = TFC_Core.getTypeForSoil(block);
+			soilMeta = world.getBlockMetadata(x - 1, y - 1, z - 1);
+			world.setBlock(x - 1, y - 1, z - 1, soil, soilMeta, 2);
+		}
 
 		int l1 = rand.nextInt(2);
 		int j2 = 1;
