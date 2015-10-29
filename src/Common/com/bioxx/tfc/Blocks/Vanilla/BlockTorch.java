@@ -250,22 +250,17 @@ public class BlockTorch extends BlockTerraContainer
 		}
 		if (!world.isRemote)
 		{
-<<<<<<< HEAD
 			if (TFCOptions.torchBurnTime != 0 && world.getTileEntity(x, y, z) instanceof TELightEmitter)
 			{
 				TELightEmitter te = (TELightEmitter) world.getTileEntity(x, y, z);
 				if (TFC_Time.getTotalHours() > te.hourPlaced + TFCOptions.torchBurnTime ||
-					world.isRaining() && world.canBlockSeeTheSky(x, y, z))
+						WeatherManager.isRainingOnCoord(world, x, y, z))
 				{
 					world.setBlock(x, y, z, TFCBlocks.torchOff, meta, 3);
 				}
 			}
 			else if (meta >= 8)
-=======
-			TELightEmitter te = (TELightEmitter) world.getTileEntity(x, y, z);
-			if (TFC_Time.getTotalHours() > te.hourPlaced + TFCOptions.torchBurnTime ||
-					WeatherManager.isRainingOnCoord(world, x, y, z))
->>>>>>> 251f0f1... Replace all world.isRaining with custom function
+
 			{
 				world.setBlock(x, y, z, TFCBlocks.torchOff, meta - 8, 3);
 			}
