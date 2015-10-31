@@ -172,16 +172,18 @@ public class TECrop extends NetworkTileEntity
 				if ((TFCOptions.enableCropsDie || !TFC_Core.isFarmland(worldObj.getBlock(xCoord, yCoord - 1, zCoord))) &&
 					(crop.maxLifespan == -1 && growth > crop.numGrowthStages + ((float) crop.numGrowthStages / 2)) || growth < 0)
 				{
-					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+					killCrop(crop);
 				}
 
 				growthTimer += (r.nextInt(2) + 23) * TFC_Time.HOUR_LENGTH;
 			}
+			// Not enough sunlight
 			else if(crop != null && crop.needsSunlight && sunLevel <= 0)
 			{
 				killCrop(crop);
 			}
 
+			// Snowing
 			if(worldObj.isRaining() && TFC_Climate.getHeightAdjustedTemp(worldObj, xCoord, yCoord, zCoord) < 0)
 			{
 				if(crop != null && !crop.dormantInFrost || growth > 1)
@@ -247,7 +249,7 @@ public class TECrop extends NetworkTileEntity
 	{
 		ItemStack is = crop.getSeed();
 		is.stackSize = 1;
-		if (TFC_Core.isFarmland(worldObj.getBlock(xCoord, yCoord - 1, zCoord)))
+		if (TFC_Core.isFarmland(worldObj.getBlock(xCoord, yCoord - 1, zCoord)) && TFCOptions.enableSeedDrops)
 		{
 			if(worldObj.setBlock(xCoord, yCoord, zCoord, TFCBlocks.worldItem))
 			{
