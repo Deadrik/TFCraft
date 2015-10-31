@@ -14,16 +14,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
 import net.minecraftforge.common.util.ForgeDirection;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerra;
+import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Core.*;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenLooseRocks;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenSaplings;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
@@ -215,12 +215,32 @@ public class BlockGrass extends BlockTerra
 				float rain = TFC_Climate.getRainfall(world, i, j + 1, k);
 				float temp = TFC_Climate.getHeightAdjustedTemp(world, i, j+1, k);
 
-				if (TFC_Core.isGrass(this) && !TFC_Core.isDryGrass(this) && world.getBlock(i, j + 1, k).getMaterial() != Material.water && world.isAirBlock(i, j + 1, k))
+				if (TFC_Core.isGrass(this)  && world.getBlock(i, j + 1, k).getMaterial() != Material.water)
 				{
-					if(rand.nextInt((int) ((16800-rain)/4)) == 0 && temp > 20)
-						world.setBlock(i, j + 1, k, TFCBlocks.tallGrass, (world.rand.nextInt(30) == 0 ? 1 : 0), 0x2); // 1/30 chance to spawn fern
-					else if (rand.nextInt(15000) == 0 && temp > 20)
-						new WorldGenSaplings().generate(world, rand, i, j, k);
+					int chunkX = (int)Math.floor(i) >> 4;
+					int chunkZ = (int)Math.floor(k) >> 4;
+
+					if (TFC_Core.getCDM(world) != null)
+					{
+						ChunkData data = TFC_Core.getCDM(world).getData(chunkX, chunkZ);
+						if (data == null || data.getSpawnProtectionWithUpdate() <= 1320)
+						{
+							if(temp > 20 && !TFC_Core.isDryGrass(this) && world.isAirBlock(i, j + 1, k) )
+							{
+								if (rand.nextInt((int) ((16800-rain)/4)) == 0)
+									world.setBlock(i, j + 1, k, TFCBlocks.tallGrass, (world.rand.nextInt(30) == 0 ? 1 : 0), 0x2); // 1/30 chance to spawn fern	
+								else if (rand.nextInt(15000) == 0)
+									new WorldGenSaplings().generate(world, rand, i, j, k);	
+							}
+							else if (rand.nextInt(15000) == 0 && !WorldGenLooseRocks.rocksNearby(world, i, j, k) && temp < 15)
+								new WorldGenLooseRocks().generateRocks(world, rand, i, j, k);
+							else if (rand.nextInt(15000) == 0 && temp < 15)
+								new WorldGenLooseRocks().generateSticks(world, rand, i, j, k);
+
+						}
+						
+					}
+					
 				}
 
 				boolean nearWater = false;

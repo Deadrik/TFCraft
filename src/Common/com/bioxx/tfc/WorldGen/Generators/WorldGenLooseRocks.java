@@ -26,7 +26,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 	{
 	}
 
-	private boolean generateRocks(World world, Random random, int i, int j, int k)
+	public boolean generateRocks(World world, Random random, int i, int j, int k)
 	{
 		if ((world.isAirBlock(i, j + 1, k) || world.getBlock(i, j + 1, k) == Blocks.snow || world.getBlock(i, j + 1, k) == TFCBlocks.tallGrass) && 
 				(world.getBlock(i, j, k).getMaterial() == Material.grass || world.getBlock(i, j, k).getMaterial() == Material.rock) && world.getBlock(i, j, k).isOpaqueCube())
@@ -113,7 +113,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 		}
 	}
 
-	private boolean generateSticks(World world, Random random, int i, int j, int k)
+	public boolean generateSticks(World world, Random random, int i, int j, int k)
 	{
 		if ((world.isAirBlock(i, j + 1, k) || world.getBlock(i, j + 1, k) == Blocks.snow || world.getBlock(i, j + 1, k) == TFCBlocks.tallGrass) && 
 				(world.getBlock(i, j, k).getMaterial() == Material.grass || world.getBlock(i, j, k).getMaterial() == Material.rock ||
@@ -150,4 +150,20 @@ public class WorldGenLooseRocks implements IWorldGenerator
 				world.getBlock(i, j + 6, k - 5).getMaterial() == Material.leaves;
 	}
 
+	public static boolean rocksNearby(World world, int i, int j, int k)
+	{
+		if ((world.getBlock(i + 1, j + 1, k) != TFCBlocks.worldItem) || 
+				(world.getBlock(i + 1, j + 1, k + 1) != TFCBlocks.worldItem) ||
+				(world.getBlock(i, j + 1, k + 1) != TFCBlocks.worldItem) ||
+				(world.getBlock(i - 1, j + 1, k) != TFCBlocks.worldItem) ||
+				(world.getBlock(i - 1, j + 1, k + 1) != TFCBlocks.worldItem) ||
+				(world.getBlock(i - 1, j + 1, k - 1) != TFCBlocks.worldItem) ||
+				(world.getBlock(i, j + 1, k - 1) != TFCBlocks.worldItem) ||
+				(world.getBlock(i + 1, j + 1, k) != TFCBlocks.worldItem))
+			{
+				return true;
+			}
+		
+		return false;
+	}
 }
