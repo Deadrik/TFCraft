@@ -817,7 +817,6 @@ public class TFCItems
 	public static int igExStoneUses = 70;
 	public static int sedStoneUses = 50;
 	public static int mMStoneUses = 55;
-
 	//Tier 1
 	public static int copperUses = 600;
 	//Tier 2
@@ -834,22 +833,26 @@ public class TFCItems
 	public static int blueSteelUses = 6500;
 	public static int redSteelUses = 6500;
 
-
+	//Tier 0
+	public static float igInStoneEff = 7.0F;
+	public static float igExStoneEff = 7.0F;
+	public static float sedStoneEff = 6.0F;
+	public static float mMStoneEff = 6.5F;
 	//Tier 1
-	public static float copperEff = 8;
+	public static float copperEff = 8.0F;
 	//Tier 2
-	public static float bronzeEff = 11;
-	public static float bismuthBronzeEff = 10;
-	public static float blackBronzeEff = 9;
+	public static float bronzeEff = 11.0F;
+	public static float bismuthBronzeEff = 10.0F;
+	public static float blackBronzeEff = 9.0F;
 	//Tier 3
-	public static float wroughtIronEff = 12;
+	public static float wroughtIronEff = 12.0F;
 	//Tier 4
-	public static float steelEff = 14;
+	public static float steelEff = 14.0F;
 	//Tier 5
-	public static float blackSteelEff = 16;
+	public static float blackSteelEff = 16.0F;
 	//Tier 6
-	public static float blueSteelEff = 18;
-	public static float redSteelEff = 18;
+	public static float blueSteelEff = 18.0F;
+	public static float redSteelEff = 18.0F;
 
 	public static ToolMaterial igInToolMaterial;
 	public static ToolMaterial sedToolMaterial;

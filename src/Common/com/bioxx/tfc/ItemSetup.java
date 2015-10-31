@@ -38,26 +38,27 @@ public class ItemSetup extends TFCItems {
 
 	public static void setup()
 	{
+																 // Harvest Level	Durability			Mining Speed		Damage	Enchant
 		//Tier 0
-		igInToolMaterial = EnumHelper.addToolMaterial("IgIn", 1, igInStoneUses, 7F, 40, 5);
-		sedToolMaterial = EnumHelper.addToolMaterial("Sed", 1, sedStoneUses, 6F, 40, 5);
-		igExToolMaterial = EnumHelper.addToolMaterial("IgEx", 1, igExStoneUses, 7F, 40, 5);
-		mMToolMaterial = EnumHelper.addToolMaterial("MM", 1, mMStoneUses, 6.5F, 40, 5);
+		igInToolMaterial = EnumHelper.addToolMaterial("IgIn", 					1,	igInStoneUses, 		igInStoneEff, 		40,		5);
+		sedToolMaterial = EnumHelper.addToolMaterial("Sed", 					1, 	sedStoneUses, 		sedStoneEff, 		40, 	5);
+		igExToolMaterial = EnumHelper.addToolMaterial("IgEx", 					1,	igExStoneUses, 		igExStoneEff, 		40,		5);
+		mMToolMaterial = EnumHelper.addToolMaterial("MM", 						1,	mMStoneUses, 		mMStoneEff, 		40, 	5);
 		//Tier 1
-		copperToolMaterial = EnumHelper.addToolMaterial("Copper", 2, 				copperUses, 		copperEff, 			65, 8);
+		copperToolMaterial = EnumHelper.addToolMaterial("Copper", 				2,	copperUses, 		copperEff, 			65, 	8);
 		//Tier 2
-		bronzeToolMaterial = EnumHelper.addToolMaterial("Bronze", 2, 				bronzeUses, 		bronzeEff, 			100, 13);
-		bismuthBronzeToolMaterial = EnumHelper.addToolMaterial("BismuthBronze", 2, 	bismuthBronzeUses, 	bismuthBronzeEff, 	90, 10);
-		blackBronzeToolMaterial = EnumHelper.addToolMaterial("BlackBronze", 2, 		blackBronzeUses, 	blackBronzeEff, 	95, 10);
+		bronzeToolMaterial = EnumHelper.addToolMaterial("Bronze", 				2,	bronzeUses, 		bronzeEff, 			100, 	13);
+		bismuthBronzeToolMaterial = EnumHelper.addToolMaterial("BismuthBronze", 2, 	bismuthBronzeUses, 	bismuthBronzeEff, 	90, 	10);
+		blackBronzeToolMaterial = EnumHelper.addToolMaterial("BlackBronze", 	2,	blackBronzeUses, 	blackBronzeEff, 	95, 	10);
 		//Tier 3
-		ironToolMaterial = EnumHelper.addToolMaterial("Iron", 2, 					wroughtIronUses, 	wroughtIronEff, 	135, 10);
+		ironToolMaterial = EnumHelper.addToolMaterial("Iron", 					2, 	wroughtIronUses, 	wroughtIronEff, 	135, 	10);
 		//Tier 4
-		steelToolMaterial = EnumHelper.addToolMaterial("Steel", 2, 					steelUses, 			steelEff, 			170, 10);
+		steelToolMaterial = EnumHelper.addToolMaterial("Steel", 				2,	steelUses, 			steelEff, 			170, 	10);
 		//Tier 5
-		blackSteelToolMaterial = EnumHelper.addToolMaterial("BlackSteel", 2, 		blackSteelUses, 	blackSteelEff, 		205, 12);
+		blackSteelToolMaterial = EnumHelper.addToolMaterial("BlackSteel", 		2,	blackSteelUses, 	blackSteelEff, 		205, 	12);
 		//Tier 6
-		blueSteelToolMaterial = EnumHelper.addToolMaterial("BlueSteel", 3, 			blueSteelUses, 		blueSteelEff, 		240, 22);
-		redSteelToolMaterial = EnumHelper.addToolMaterial("RedSteel", 3, 			redSteelUses, 		redSteelEff, 		240, 22);
+		blueSteelToolMaterial = EnumHelper.addToolMaterial("BlueSteel", 		3,	blueSteelUses, 		blueSteelEff, 		240, 	22);
+		redSteelToolMaterial = EnumHelper.addToolMaterial("RedSteel", 			3,	redSteelUses, 		redSteelEff, 		240, 	22);
 
 		TerraFirmaCraft.LOG.info(new StringBuilder().append("Loading Items").toString());
 
