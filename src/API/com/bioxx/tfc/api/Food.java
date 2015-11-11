@@ -12,6 +12,8 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class Food 
 {
+	private static final String NBT_FOOD_DECAY = "foodDecay";
+	private static final String NBT_FOOD_WEIGHT = "foodWeight";
 	public static final int DRYHOURS = 4;
 	public static final int SMOKEHOURS = 12;
 
@@ -172,16 +174,20 @@ public class Food
 	public static void setDecay(ItemStack is, float value)
 	{
 		NBTTagCompound nbt = getNBT(is);
-		nbt.setFloat("foodDecay", value);
+		nbt.setFloat(NBT_FOOD_DECAY, value);
 		if(value > getWeight(is))
 			is.stackSize = 0;
+	}
+	
+	public static boolean hasDecay(ItemStack is){
+		return is.hasTagCompound() && is.getTagCompound().hasKey(NBT_FOOD_DECAY);
 	}
 
 	public static float getDecay(ItemStack is)
 	{
 		NBTTagCompound nbt = getNBT(is);
-		if (nbt.hasKey("foodDecay"))
-			return nbt.getFloat("foodDecay");
+		if (nbt.hasKey(NBT_FOOD_DECAY))
+			return nbt.getFloat(NBT_FOOD_DECAY);
 		else
 			return 0;
 	}
@@ -204,16 +210,20 @@ public class Food
 	public static void setWeight(ItemStack is, float value)
 	{
 		NBTTagCompound nbt = getNBT(is);
-		nbt.setFloat("foodWeight", value);
+		nbt.setFloat(NBT_FOOD_WEIGHT, value);
 		if(getDecay(is) > value || value <= 0)
 			is.stackSize = 0;
 	}
 
+	public static boolean hasWeight(ItemStack is){
+		return is.hasTagCompound() && is.getTagCompound().hasKey(NBT_FOOD_WEIGHT);
+	}
+	
 	public static float getWeight(ItemStack is)
 	{
 		NBTTagCompound nbt = getNBT(is);
-		if (nbt.hasKey("foodWeight"))
-			return nbt.getFloat("foodWeight");
+		if (nbt.hasKey(NBT_FOOD_WEIGHT))
+			return nbt.getFloat(NBT_FOOD_WEIGHT);
 		else
 			return 0;
 	}
