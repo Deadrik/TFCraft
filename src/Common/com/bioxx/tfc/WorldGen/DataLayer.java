@@ -31,24 +31,24 @@ public class DataLayer
 	public static final DataLayer GNEISS = new DataLayer(21, TFCBlocks.stoneMM, 4, 19, "Gneiss");
 	public static final DataLayer MARBLE = new DataLayer(22, TFCBlocks.stoneMM, 5, 20, "Marble");
 
-	public static final DataLayer NO_TREE = new DataLayer(29, -1);
-	public static final DataLayer ASH = new DataLayer(30, 7);
-	public static final DataLayer ASPEN = new DataLayer(31, 1);
-	public static final DataLayer BIRCH = new DataLayer(32, 2);
-	public static final DataLayer CHESTNUT = new DataLayer(33, 3);
-	public static final DataLayer DOUGLASFIR = new DataLayer(34, 4);
-	public static final DataLayer HICKORY = new DataLayer(35, 5);
-	public static final DataLayer KOA = new DataLayer(45, 0);
-	public static final DataLayer MAPLE = new DataLayer(36, 6);
-	public static final DataLayer OAK = new DataLayer(37, 0);
-	public static final DataLayer PINE = new DataLayer(38, 8);
-	public static final DataLayer REDWOOD = new DataLayer(39, 9);
-	public static final DataLayer SPRUCE = new DataLayer(40, 10);
-	public static final DataLayer SYCAMORE = new DataLayer(41, 11);
-	public static final DataLayer SAVANNAHACACIA = new DataLayer(46, 0);
-	public static final DataLayer WHITECEDAR = new DataLayer(42, 12);
-	public static final DataLayer WHITEELM = new DataLayer(43, 13);
-	public static final DataLayer WILLOW = new DataLayer(44, 14);
+	public static final DataLayer NO_TREE = new DataLayer(29, "No Tree", -1);
+	public static final DataLayer ASH = new DataLayer(30, "Ash", 7);
+	public static final DataLayer ASPEN = new DataLayer(31, "Aspen", 1);
+	public static final DataLayer BIRCH = new DataLayer(32, "Birch", 2);
+	public static final DataLayer CHESTNUT = new DataLayer(33, "Chestnut", 3);
+	public static final DataLayer DOUGLASFIR = new DataLayer(34, "Douglas Fir", 4);
+	public static final DataLayer HICKORY = new DataLayer(35, "Hickory", 5);
+	public static final DataLayer KOA = new DataLayer(45, "Acacia Koa", 0);
+	public static final DataLayer MAPLE = new DataLayer(36, "Maple", 6);
+	public static final DataLayer OAK = new DataLayer(37, "Oak", 0);
+	public static final DataLayer PINE = new DataLayer(38, "Pine", 8);
+	public static final DataLayer REDWOOD = new DataLayer(39, "Sequoia", 9);
+	public static final DataLayer SPRUCE = new DataLayer(40, "Spruce", 10);
+	public static final DataLayer SYCAMORE = new DataLayer(41, "Sycamore", 11);
+	public static final DataLayer SAVANNAHACACIA = new DataLayer(46, "Acacia Savannah", 0);
+	public static final DataLayer WHITECEDAR = new DataLayer(42, "White Cedar", 12);
+	public static final DataLayer WHITEELM = new DataLayer(43, "White Elm", 13);
+	public static final DataLayer WILLOW = new DataLayer(44, "Willow", 14);
 
 	public static final DataLayer EVT_0_125 = new DataLayer(80, "0.125", 0.125f);
 	public static final DataLayer EVT_0_25 = new DataLayer(81, "0.25", 0.25f);
@@ -89,7 +89,7 @@ public class DataLayer
 	public int data1;
 	public int data2;//used as metadata in rocks
 	public float floatdata1;
-	public String name = "";
+	private String name = "";
 
 	public DataLayer(int index, int i)
 	{
@@ -150,5 +150,10 @@ public class DataLayer
 		data2 = 0;
 		name = n;
 		layers[index] = this;
+	}
+
+	public String getName()
+	{
+		return name;
 	}
 }

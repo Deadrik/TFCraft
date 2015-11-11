@@ -237,6 +237,7 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new GetBodyTemp());
 		evt.registerServerCommand(new RemoveChunkCommand());
 		evt.registerServerCommand(new StripChunkCommand());
+		evt.registerServerCommand(new ClearChunkCommand());
 		evt.registerServerCommand(new GSPVisualCommand());
 		evt.registerServerCommand(new RemoveAreaCommand());
 		evt.registerServerCommand(new DebugModeCommand());
