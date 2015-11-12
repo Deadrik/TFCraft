@@ -80,7 +80,7 @@ public class BarrelMultiItemRecipe extends BarrelRecipe
 	{
 		if (inIS != null && inFS != null && inIS.getItem() instanceof IFood)
 		{
-			float w = ((IFood) inIS.getItem()).getFoodWeight(inIS);
+			float w = Food.getWeight(inIS);
 			if (inFS.isFluidEqual(recipeFluid) && w * recipeOutFluid.amount <= inFS.amount)
 			{
 				return OreDictionary.itemMatches(recipeIS, inIS, false);

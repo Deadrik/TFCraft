@@ -6,12 +6,11 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.TFCCrafting;
 import com.bioxx.tfc.api.TFCItems;
 
@@ -36,17 +35,9 @@ public class ItemSalad extends ItemMeal
 	//Creates empty food to prevent NBT errors when food is loaded in NEI
 	public static ItemStack createTag(ItemStack is)
 	{
-		NBTTagCompound nbt = is.getTagCompound();
-		if (nbt == null)
-			nbt = new NBTTagCompound();
-
+		ItemMeal.createTag(is);
 		int[] foodGroups = new int[] { -1, -1, -1, -1 };
-		nbt.setIntArray("FG", foodGroups);
-		nbt.setFloat("foodWeight", 0);
-		nbt.setFloat("foodDecay", 0);
-		nbt.setInteger("decayTimer", (int) TFC_Time.getTotalHours() + 1);
-
-		is.setTagCompound(nbt);
+		Food.setFoodGroups(is, foodGroups);
 		return is;
 	}
 

@@ -161,12 +161,12 @@ public class EntityLivingHandler
 						if(player.inventory.getCurrentItem().getItem() instanceof ItemMeal)
 						{
 							pi.guishowFoodRestoreAmount = true;
-							pi.guiFoodRestoreAmount = ((ItemMeal)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
+							pi.guiFoodRestoreAmount = Food.getWeight(player.inventory.getCurrentItem());
 						}
 						else if(player.inventory.getCurrentItem().getItem() instanceof ItemFoodTFC)
 						{
 							pi.guishowFoodRestoreAmount = true;
-							pi.guiFoodRestoreAmount = ((ItemFoodTFC)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
+							pi.guiFoodRestoreAmount = Food.getWeight(player.inventory.getCurrentItem());
 						}
 						else
 							pi.guishowFoodRestoreAmount = false;
@@ -376,11 +376,11 @@ public class EntityLivingHandler
 							continue;
 						foundFood = true;
 
-						int sweetMod = ((ItemFoodTFC) is.getItem()).getTasteSweetMod(is);
-						int sourMod = ((ItemFoodTFC) is.getItem()).getTasteSourMod(is);
-						int saltyMod = ((ItemFoodTFC) is.getItem()).getTasteSaltyMod(is);
-						int bitterMod = ((ItemFoodTFC) is.getItem()).getTasteBitterMod(is);
-						int umamiMod = ((ItemFoodTFC) is.getItem()).getTasteSavoryMod(is);
+						int sweetMod = Food.getSweetMod(is);
+						int sourMod = Food.getSourMod(is);
+						int saltyMod = Food.getSaltyMod(is);
+						int bitterMod = Food.getBitterMod(is);
+						int umamiMod = Food.getSavoryMod(is);
 
 						float oldWeight = Food.getWeight(is);
 						Food.setWeight(is, 0);
@@ -394,11 +394,16 @@ public class EntityLivingHandler
 
 							ItemStack result = ItemFoodTFC.createTag(new ItemStack(is.getItem(), 1), fw);
 
-							if(sweetMod != 0) result.getTagCompound().setInteger("tasteSweetMod", sweetMod);
-							if(sourMod != 0) result.getTagCompound().setInteger("tasteSourMod", sourMod);
-							if(saltyMod != 0) result.getTagCompound().setInteger("tasteSaltyMod", saltyMod);
-							if(bitterMod != 0) result.getTagCompound().setInteger("tasteBitterMod", bitterMod);
-							if(umamiMod != 0) result.getTagCompound().setInteger("tasteUmamiMod", umamiMod);	
+							if (sweetMod != 0)
+								Food.setSweetMod(result, sweetMod);
+							if (sourMod != 0)
+								Food.setSourMod(result, sourMod);
+							if (saltyMod != 0)
+								Food.setSaltyMod(result, saltyMod);
+							if (bitterMod != 0)
+								Food.setBitterMod(result, bitterMod);
+							if (umamiMod != 0)
+								Food.setSavoryMod(result, umamiMod);
 
 							drop.add(new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ, result));
 						}

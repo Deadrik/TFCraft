@@ -5,11 +5,10 @@ import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 
-import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.api.Food;
 
 public class ItemSandwich extends ItemMeal
 {
@@ -26,20 +25,13 @@ public class ItemSandwich extends ItemMeal
 	@Override
 	protected void addFGInformation(ItemStack is, List<String> arraylist)
 	{
-		if (is.hasTagCompound())
+		int[] fg = Food.getFoodGroups(is);
+		for (int i = 0; i < fg.length; i++)
 		{
-			NBTTagCompound nbt = is.getTagCompound();
-			if(nbt.hasKey("FG"))
-			{
-				int[] fg = nbt.getIntArray("FG");
-				for(int i = 0; i < fg.length; i++)
-				{
-					if(i == 5 && fg[5] == fg[0])
-						return;
-					if(fg[i] != -1)
-						arraylist.add(localize(fg[i]));
-				}
-			}
+			if (i == 5 && fg[5] == fg[0])
+				return;
+			if (fg[i] != -1)
+				arraylist.add(localize(fg[i]));
 		}
 	}
 
@@ -89,17 +81,9 @@ public class ItemSandwich extends ItemMeal
 	//Creates empty food to prevent NBT errors when food is loaded in NEI
 	public static ItemStack createTag(ItemStack is)
 	{
-		NBTTagCompound nbt = is.getTagCompound();
-		if (nbt == null)
-			nbt = new NBTTagCompound();
-
-		int[] foodGroups = new int[] { -1, -1, -1, -1, -1 };
-		nbt.setIntArray("FG", foodGroups);
-		nbt.setFloat("foodWeight", 0);
-		nbt.setFloat("foodDecay", 0);
-		nbt.setInteger("decayTimer", (int) TFC_Time.getTotalHours() + 1);
-
-		is.setTagCompound(nbt);
+		ItemMeal.createTag(is);
+		int[] foodGroups = new int[] { -1, -1, -1, -1 };
+		Food.setFoodGroups(is, foodGroups);
 		return is;
 	}
 }

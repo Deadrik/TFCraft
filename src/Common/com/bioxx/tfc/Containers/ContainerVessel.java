@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
 import com.bioxx.tfc.Containers.Slots.SlotSizeSmallVessel;
 import com.bioxx.tfc.TileEntities.TEIngotPile;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
@@ -91,17 +92,17 @@ public class ContainerVessel extends ContainerTFC
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < containerInv.getSizeInventory(); i++)
 		{
-			if(containerInv.getStackInSlot(i) != null && containerInv.getStackInSlot(i).getItem() instanceof IFood)
+			ItemStack contentStack = containerInv.getStackInSlot(i);
+			if (contentStack != null && contentStack.getItem() instanceof IFood)
 			{
-				NBTTagCompound nbt = containerInv.getStackInSlot(i).getTagCompound();
-				if(nbt.hasKey("foodDecay") && nbt.getFloat("foodDecay")/Global.FOOD_MAX_WEIGHT > 0.9f)
+				if (Food.getDecay(contentStack) / Global.FOOD_MAX_WEIGHT > 0.9f)
 					containerInv.setInventorySlotContents(i, null);
 			}
-			if(containerInv.getStackInSlot(i) != null)
+			if (contentStack != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte)i);
-				containerInv.getStackInSlot(i).writeToNBT(nbttagcompound1);
+				contentStack.writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}

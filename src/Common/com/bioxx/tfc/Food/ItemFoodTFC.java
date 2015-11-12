@@ -271,27 +271,23 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 	public void addFoodInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
-		NBTTagCompound tag = is.getTagCompound();
+		float ounces = Helper.roundNumber(Food.getWeight(is), 100);
+		if (ounces > 0)
+			arraylist.add(TFC_Core.translate("gui.food.amount") + " " + ounces + " oz / " + Global.FOOD_MAX_WEIGHT + " oz");
 
-		if (tag.hasKey("foodWeight") && tag.getFloat("foodWeight") != 999)
+		float decay = Food.getDecay(is);
+		if (decay > 0)
+			arraylist.add(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.food.decay") + " " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
+		if (TFCOptions.enableDebugMode)
 		{
-			float ounces = Helper.roundNumber(tag.getFloat("foodWeight"), 100);
-			if (ounces > 0)
-				arraylist.add(TFC_Core.translate("gui.food.amount") + " " + ounces + " oz / " + Global.FOOD_MAX_WEIGHT + " oz");
-			float decay = tag.getFloat("foodDecay");
-			if (decay > 0)
-				arraylist.add(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.food.decay") + " " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
-			if (TFCOptions.enableDebugMode)
-			{
-				arraylist.add(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.food.decay") + ": " + decay);
-				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay Rate: " + this.getDecayRate(is));
-			}
-
-			if (TFC_Core.showCtrlInformation())
-				ItemFoodTFC.addTasteInformation(is, player, arraylist);
-			else
-				arraylist.add(TFC_Core.translate("gui.showtaste"));
+			arraylist.add(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.food.decay") + ": " + decay);
+			arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay Rate: " + Helper.roundNumber(this.getDecayRate(is), 100));
 		}
+
+		if (TFC_Core.showCtrlInformation())
+			ItemFoodTFC.addTasteInformation(is, player, arraylist);
+		else
+			arraylist.add(TFC_Core.translate("gui.showtaste"));
 	}
 
 	public static void addTasteInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
@@ -449,8 +445,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			if(is.hasTagCompound())
 			{
 				//NBTTagCompound nbt = is.getTagCompound();
-				float weight = ((IFood)(is.getItem())).getFoodWeight(is);
-				float decay = Math.max(((IFood)(is.getItem())).getFoodDecay(is), 0);
+				float weight = Food.getWeight(is);
+				float decay = Math.max(Food.getDecay(is), 0);
 
 				float eatAmount = Math.min(weight - decay, 5f);
 				float stomachDiff = foodstats.stomachLevel+eatAmount-foodstats.getMaxStomach(foodstats.player);
@@ -485,9 +481,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		{
 			if(!world.isRemote)
 			{
-				ItemFoodTFC item = (ItemFoodTFC) is.getItem();
-				float weight = item.getFoodWeight(is);
-				float decay = Math.max(item.getFoodDecay(is), 0);
+				float weight = Food.getWeight(is);
+				float decay = Math.max(Food.getDecay(is), 0);
 				float eatAmount = Math.min(weight - decay, 5f);
 				if(FoodStatsTFC.reduceFood(is, eatAmount))
 					is.stackSize = 0;
@@ -504,57 +499,26 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 	public static ItemStack createTag(ItemStack is)
 	{
-		NBTTagCompound nbt = is.getTagCompound();
-		if(nbt == null)
-			nbt = new NBTTagCompound();
-		nbt.setFloat("foodWeight", 999);
-		nbt.setFloat("foodDecay", -24);
-		nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours() + 1);
-
-		is.setTagCompound(nbt);
-		return is;
+		return ItemFoodTFC.createTag(is, 999);
 	}
 
 	public static ItemStack createTag(ItemStack is, float weight)
 	{
-		NBTTagCompound nbt = is.getTagCompound();
-		if(nbt == null)
-			nbt = new NBTTagCompound();
-		nbt.setFloat("foodWeight", weight);
-		nbt.setFloat("foodDecay", -24);
-		nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours() + 1);
+		if (!is.hasTagCompound())
+			is.setTagCompound(new NBTTagCompound());
 
-		is.setTagCompound(nbt);
+		Food.setWeight(is, weight);
+		Food.setDecay(is, -24);
+		Food.setDecayTimer(is, (int) TFC_Time.getTotalHours() + 1);
+
 		return is;
 	}
 
 	public static ItemStack createTag(ItemStack is, float weight, float decay)
 	{
 		is = ItemFoodTFC.createTag(is, weight);
-		is.getTagCompound().setFloat("foodDecay", decay);
+		Food.setDecay(is, decay);
 		return is;
-	}
-
-	@Override
-	public float getFoodWeight(ItemStack is)
-	{
-		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodWeight"))
-		{
-			NBTTagCompound nbt = is.getTagCompound();
-			return nbt.getFloat("foodWeight");
-		}
-		return 0f;
-	}
-
-	@Override
-	public float getFoodDecay(ItemStack is)
-	{
-		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodDecay"))
-		{
-			NBTTagCompound nbt = is.getTagCompound();
-			return nbt.getFloat("foodDecay");
-		}
-		return 0f;
 	}
 
 	@Override
@@ -572,8 +536,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	@Override
 	public int getDisplayDamage(ItemStack is)
 	{
-		float decay = getFoodDecay(is);
-		float weight = getFoodWeight(is);
+		float decay = Food.getDecay(is);
+		float weight = Food.getWeight(is);
 		int percent = (int) ((decay / weight) * 100);
 		percent = percent > 0 ? percent < 100 ? percent : 100 : 0;
 		return percent;
@@ -597,7 +561,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	@Override
 	public EnumSize getSize(ItemStack is)
 	{
-		float weight = getFoodWeight(is);
+		float weight = Food.getWeight(is);
 		if(weight <= 20)
 			return EnumSize.TINY;
 		else if(weight <= 40)
@@ -611,7 +575,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	@Override
 	public EnumWeight getWeight(ItemStack is)
 	{
-		float weight = getFoodWeight(is);
+		float weight = Food.getWeight(is);
 		if(weight < 80)
 			return EnumWeight.LIGHT;
 		else if(weight < 160)
@@ -665,14 +629,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			base += Food.getCookedProfile(is)[0];
 			base += Food.getFuelProfile(is)[0]*getSmokeAbsorbMultiplier();
 		}
-		return Math.max(base + getTasteSweetMod(is), 0);
-	}
-
-	public int getTasteSweetMod(ItemStack is) {
-		int mod = 0;
-		if(is != null)
-			mod = is.getTagCompound().getInteger("tasteSweetMod");
-		return mod;
+		return Math.max(base + Food.getSweetMod(is), 0);
 	}
 
 	@Override
@@ -689,14 +646,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			base += 5;
 		if(Food.isPickled(is))
 			base += 30;
-		return Math.max(base + getTasteSourMod(is), 0);
-	}
-
-	public int getTasteSourMod(ItemStack is) {
-		int mod = 0;
-		if(is != null)
-			mod = is.getTagCompound().getInteger("tasteSourMod");
-		return mod;
+		return Math.max(base + Food.getSourMod(is), 0);
 	}
 
 	@Override
@@ -714,14 +664,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		if(Food.isBrined(is))
 			base += 10;
 
-		return Math.max(base + getTasteSaltyMod(is), 0);
-	}
-
-	public int getTasteSaltyMod(ItemStack is) {
-		int mod = 0;
-		if(is != null)
-			mod = is.getTagCompound().getInteger("tasteSaltyMod");
-		return mod;
+		return Math.max(base + Food.getSaltyMod(is), 0);
 	}
 
 	@Override
@@ -734,14 +677,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			base += Food.getCookedProfile(is)[3];
 			base += Food.getFuelProfile(is)[3]*getSmokeAbsorbMultiplier();
 		}
-		return Math.max(base + getTasteBitterMod(is), 0);
-	}
-
-	public int getTasteBitterMod(ItemStack is) {
-		int mod = 0;
-		if(is != null)
-			mod = is.getTagCompound().getInteger("tasteBitterMod");
-		return mod;
+		return Math.max(base + Food.getBitterMod(is), 0);
 	}
 
 	@Override
@@ -754,14 +690,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			base += Food.getCookedProfile(is)[4];
 			base += Food.getFuelProfile(is)[4]*getSmokeAbsorbMultiplier();
 		}
-		return Math.max(base + getTasteSavoryMod(is), 0);
-	}
-
-	public int getTasteSavoryMod(ItemStack is) {
-		int mod = 0;
-		if(is != null)
-			mod = is.getTagCompound().getInteger("tasteUmamiMod");
-		return mod;
+		return Math.max(base + Food.getSavoryMod(is), 0);
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
@@ -71,7 +72,7 @@ public class ItemEgg extends ItemFoodTFC implements IFood
 	@Override
 	public float getDecayRate(ItemStack is)
 	{
-		if(is.getTagCompound().hasKey("Pickled"))
+		if (Food.isPickled(is))
 			return 0.3f;
 		return 0.5f;
 	}

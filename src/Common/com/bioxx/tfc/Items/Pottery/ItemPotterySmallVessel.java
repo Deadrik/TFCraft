@@ -28,6 +28,7 @@ import com.bioxx.tfc.Core.Metal.AlloyMetal;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.Items.ItemOreSmall;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
@@ -409,8 +410,8 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 						{
 							if(itemstack.getItem() instanceof ItemFoodTFC)
 							{
-								float decay = itemstack.getTagCompound().getFloat("foodDecay");
-								float weight = Helper.roundNumber(itemstack.getTagCompound().getFloat("foodWeight"), 100);
+								float decay = Food.getDecay(itemstack);
+								float weight = Helper.roundNumber(Food.getWeight(itemstack), 100);
 
 								String ds = " " + EnumChatFormatting.DARK_GRAY + Helper.roundNumber(decay / weight * 100, 10) + "%";
 								if (decay <= 0)

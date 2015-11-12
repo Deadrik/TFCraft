@@ -16,11 +16,11 @@ import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Render.EntityRendererTFC;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.FoodRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
-import com.bioxx.tfc.api.Util.Helper;
 
 public class FoodStatsTFC
 {
@@ -431,16 +431,15 @@ public class FoodStatsTFC
 	{
 		if(is.hasTagCompound())
 		{
-			float weight = is.getTagCompound().getFloat("foodWeight");
-			float decay = is.getTagCompound().hasKey("foodDecay") ? is.getTagCompound().getFloat("foodDecay") : 0;
+			float weight = Food.getWeight(is);
+			float decay = Food.getDecay(is);
 			if(decay >= 0 && (weight - decay) - amount <= 0)
 				return true;
 			else if(decay <= 0 && weight - amount <= 0)
 				return true;
 			else
 			{
-				is.getTagCompound().setFloat("foodWeight", Helper.roundNumber(weight - amount, 10));
-				//is.getTagCompound().setFloat("foodDecay", Helper.roundNumber(decay - amount, 10));
+				Food.setWeight(is, weight - amount);
 			}
 		}
 		return false;

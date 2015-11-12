@@ -272,7 +272,7 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 			for(int i = 9; i < 45 && getEmptyCraftSlot() != -1; i++)
 			{
 				ItemStack is = this.inventorySlots.getSlot(i).getStack();
-				if(is != null && is.getItem() == iType && Food.areEqual(activeIS, is) && ((IFood)is.getItem()).getFoodWeight(is) < Global.FOOD_MAX_WEIGHT)
+				if (is != null && is.getItem() == iType && Food.areEqual(activeIS, is) && Food.getWeight(is) < Global.FOOD_MAX_WEIGHT)
 					this.handleMouseClick(this.inventorySlots.getSlot(i), i, getEmptyCraftSlot(), 7);
 			}
 
@@ -304,7 +304,7 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 				int knifeDamage = inventorySlots.getSlot(knifeSlot).getStack().getItemDamage();
 				if(knifeDamage >= inventorySlots.getSlot(knifeSlot).getStack().getMaxDamage())
 					break;
-				if(is != null && !(is.getItem() instanceof ItemMeal) && is.getItem() instanceof IFood && ((IFood)is.getItem()).getFoodDecay(is) > 0 && 
+				if (is != null && !(is.getItem() instanceof ItemMeal) && is.getItem() instanceof IFood && Food.getDecay(is) > 0 &&
 						Food.getDecayTimer(is) >= TFC_Time.getTotalHours())
 				{
 					this.handleMouseClick(this.inventorySlots.getSlot(i), i, getEmptyCraftSlot(), 7);

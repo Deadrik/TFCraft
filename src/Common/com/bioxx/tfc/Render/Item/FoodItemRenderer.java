@@ -38,7 +38,7 @@ public class FoodItemRenderer implements IItemRenderer
 		if(is.getItem() instanceof IFood && is.hasTagCompound())
 		{			
 			renderIcon(0, 0, is.getItem().getIconIndex(is), 16, 16);
-			float decayPerc = Math.max(((IFood)is.getItem()).getFoodDecay(is) / ((IFood)is.getItem()).getFoodWeight(is), 0);
+			float decayPerc = Math.max(Food.getDecay(is) / Food.getWeight(is), 0);
 			float cookPerc = Math.max(Math.min(Food.getCooked(is)/600f, 1), 0);
 			if(is.getItem() instanceof ItemFoodTFC)
 			{
@@ -77,7 +77,7 @@ public class FoodItemRenderer implements IItemRenderer
 					}
 				}
 			
-				float weightPerc = ((IFood) is.getItem()).getFoodWeight(is) / ((IFood) is.getItem()).getFoodMaxWeight(is);
+				float weightPerc = Food.getWeight(is) / ((IFood) is.getItem()).getFoodMaxWeight(is);
 
 				if (weightPerc <= 1) // Only draw bars if the weight is within the max weight. Food created using the blank createTag (weight = 999) will not have the bars.
 				{

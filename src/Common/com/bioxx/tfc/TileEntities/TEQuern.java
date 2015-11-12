@@ -20,6 +20,7 @@ import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.QuernManager;
 import com.bioxx.tfc.api.Crafting.QuernRecipe;
@@ -84,44 +85,34 @@ public class TEQuern extends NetworkTileEntity implements IInventory
 
 			if (qr.getInItem().getItem() instanceof IFood)
 			{
-				if(storage[1] != null &&
-						storage[1].hasTagCompound() &&
-						storage[1].getTagCompound().hasKey("foodWeight") &&
-						storage[1].getTagCompound().hasKey("foodDecay") &&
-						storage[0].hasTagCompound() &&
-						storage[0].getTagCompound().hasKey("foodWeight") &&
-						storage[0].getTagCompound().hasKey("foodDecay"))
+				if (storage[1] != null)
 				{
-					//float flourDecay = storage[0].getTagCompound().getFloat("foodDecay");
-					float slot0Weight = storage[0].getTagCompound().getFloat("foodWeight");
-					float slot1Weight = storage[1].getTagCompound().getFloat("foodWeight");
+					float slot0Weight = Food.getWeight(storage[0]);
+					float slot1Weight = Food.getWeight(storage[1]);
 					float newWeight = slot0Weight + slot1Weight;
 
 					if(newWeight > Global.FOOD_MAX_WEIGHT)
 					{
-						storage[1].getTagCompound().setFloat("foodWeight", newWeight - Global.FOOD_MAX_WEIGHT);
+						Food.setWeight(storage[1], newWeight - Global.FOOD_MAX_WEIGHT);
 
 						ItemStack tossStack = storage[1].copy();
-						tossStack.getTagCompound().setFloat("foodWeight", Global.FOOD_MAX_WEIGHT);
+						Food.setWeight(tossStack, Global.FOOD_MAX_WEIGHT);
 						ejectItem(tossStack);
 					}
 					else
 					{
-						storage[1].getTagCompound().setFloat("foodWeight", newWeight);
+						Food.setWeight(storage[1], newWeight);
 					}
 					storage[0] = null;
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 					return true;
 				}
 
-				if(storage[1] == null &&
-						storage[0].hasTagCompound() &&
-						storage[0].getTagCompound().hasKey("foodWeight") &&
-						storage[0].getTagCompound().hasKey("foodDecay"))
+				if (storage[1] == null)
 				{
 					storage[1] = qr.getResult().copy();
-					float flourWeight = storage[0].getTagCompound().getFloat("foodWeight");
-					float flourDecay = storage[0].getTagCompound().getFloat("foodDecay");
+					float flourWeight = Food.getWeight(storage[0]);
+					float flourDecay = Food.getDecay(storage[0]);
 					ItemFoodTFC.createTag(storage[1], flourWeight, flourDecay);
 					storage[0] = null;
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);

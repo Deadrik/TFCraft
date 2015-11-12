@@ -13,11 +13,8 @@ public interface IFood
 
 	float getDecayRate(ItemStack is);
 
-	float getFoodWeight(ItemStack is);
-
 	float getFoodMaxWeight(ItemStack is);
 
-	float getFoodDecay(ItemStack is);
 	/**
 	 * @return Returns an ItemStack that will replace the current ItemStack when the food has reached maximum decay.
 	 * Normally returns null.

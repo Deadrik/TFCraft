@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryBase;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Interfaces.IBag;
 import com.bioxx.tfc.api.Interfaces.IFood;
@@ -39,7 +40,7 @@ public class SlotSizeSmallVessel extends Slot
 
 		if (itemstack.getItem() instanceof ISize && ((ISize) itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize &&
 				(itemstack.getItem() instanceof IFood || itemstack.getItem() instanceof IItemFoodBlock) &&
-				!(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("foodWeight") && itemstack.getTagCompound().hasKey("foodDecay")))
+				!(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey(Food.WEIGHT_TAG) && itemstack.getTagCompound().hasKey(Food.DECAY_TAG)))
 				return false;
 
 		boolean except = exceptions.contains(itemstack.getItem());

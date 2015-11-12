@@ -55,8 +55,8 @@ public class BarrelAlcoholRecipe extends BarrelRecipe
 				{
 					return false;
 				}
-				float recipeWeight = recipeIS.getTagCompound().getFloat("foodWeight");
-				float itemstackWeight = itemstack.getTagCompound().getFloat("foodWeight");
+				float recipeWeight = Food.getWeight(recipeIS);
+				float itemstackWeight = Food.getWeight(itemstack);
 				float percent = itemstackWeight/(recipeWeight * ((float)inFluid.amount/(float)recipeFluid.amount));
 				if (percent < 0.25f || percent > 0.75f)
 					return false;

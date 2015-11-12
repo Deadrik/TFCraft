@@ -1112,26 +1112,27 @@ public class TFC_Core
 
 	/**
 	 * @param is
-	 * @param baseDecayMod 
+	 * @param baseDecayMod
 	 * @param nbt
 	 */
 	public static ItemStack tickDecay(ItemStack is, World world, int x, int y, int z, float environmentalDecayFactor, float baseDecayMod)
 	{
 		NBTTagCompound nbt = is.getTagCompound();
-		if (nbt == null || !nbt.hasKey("foodWeight") || !nbt.hasKey("foodDecay"))
+		if (nbt == null || !nbt.hasKey(Food.WEIGHT_TAG) || !nbt.hasKey(Food.DECAY_TAG))
 			return is;
 
+		int decayTimer = Food.getDecayTimer(is);
 		// if the tick timer is up then we cause decay.
-		if (nbt.getInteger("decayTimer") < TFC_Time.getTotalHours())
+		if (decayTimer < TFC_Time.getTotalHours())
 		{
-			int timeDiff = (int) (TFC_Time.getTotalHours() - nbt.getInteger("decayTimer"));
+			int timeDiff = (int) (TFC_Time.getTotalHours() - decayTimer);
 			float protMult = 1;
 
 			if(TFCOptions.useDecayProtection)
 			{
 				if(timeDiff > TFCOptions.decayProtectionDays * 24)
 				{
-					nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours() - 24);
+					Food.setDecayTimer(is, (int) TFC_Time.getTotalHours() - 24);
 				}
 				else if(timeDiff > 24)
 				{
@@ -1139,24 +1140,23 @@ public class TFC_Core
 				}
 			}
 
-			float decay = nbt.getFloat("foodDecay");
+			float decay = Food.getDecay(is);
 			float thisDecayRate = 1.0f;
 			// Get the base food decay rate
 			if (is.getItem() instanceof IFood)
 				thisDecayRate = ((IFood) is.getItem()).getDecayRate(is);
-			// check if the food has a specially applied decay rate in its nbt
-			// for some reason
-			if (nbt.hasKey("decayRate"))
-				thisDecayRate = nbt.getFloat("decayRate");
+			// check if the food has a specially applied decay rate in its nbt (meals, sandwiches, salads)
+			else
+				thisDecayRate = Food.getDecayRate(is);
 
 			/*
 			 * Here we calculate the decayRate based on the environment. We do
 			 * this before everything else so that its only done once per
 			 * inventory
 			 */
-			//int day = TFC_Time.getDayOfYearFromDays(TFC_Time.getDayFromTotalHours(nbt.getInteger("decayTimer")));
-			//float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world,day,nbt.getInteger("decayTimer"), x, y, z);
-			float temp = getCachedTemp(world, x, y, z, nbt.getInteger("decayTimer"));
+			//int day = TFC_Time.getDayOfYearFromDays(TFC_Time.getDayFromTotalHours(nbt.getInteger(Food.DECAY_TIMER_TAG)));
+			//float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world,day,nbt.getInteger(Food.DECAY_TIMER_TAG), x, y, z);
+			float temp = getCachedTemp(world, x, y, z, decayTimer);
 			float environmentalDecay = getEnvironmentalDecay(temp) * environmentalDecayFactor;
 
 			if (decay < 0)
@@ -1169,7 +1169,7 @@ public class TFC_Core
 			}
 			else if (decay == 0)
 			{
-				decay = (nbt.getFloat("foodWeight") * (world.rand.nextFloat() * 0.005f))*TFCOptions.decayMultiplier;
+				decay = (Food.getWeight(is) * (world.rand.nextFloat() * 0.005f)) * TFCOptions.decayMultiplier;
 			}
 			else
 			{
@@ -1177,19 +1177,17 @@ public class TFC_Core
 				fdr *= thisDecayRate * baseDecayMod * environmentalDecay * protMult * TFCOptions.decayMultiplier;
 				decay *= 1 + fdr;
 			}
-			nbt.setInteger("decayTimer", nbt.getInteger("decayTimer") + 1);
-			nbt.setFloat("foodDecay", decay);
+			Food.setDecayTimer(is, decayTimer + 1);
+			Food.setDecay(is, decay);
 		}
 
-		if (nbt.getFloat("foodDecay") / nbt.getFloat("foodWeight") > 0.9f)
+		if (Food.getDecay(is) / Food.getWeight(is) > 0.9f)
 		{
 			if(is.getItem() instanceof IFood)
 				is = ((IFood)is.getItem()).onDecayed(is, world, x, y, z);
 			else
 				is.stackSize = 0;
 		}
-		else
-			is.setTagCompound(nbt);
 
 		return is;
 	}

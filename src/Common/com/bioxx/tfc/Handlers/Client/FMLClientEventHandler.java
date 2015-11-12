@@ -22,6 +22,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Food.ItemMeal;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.FoodRegistry;
 
 public class FMLClientEventHandler 
@@ -67,7 +68,7 @@ public class FMLClientEventHandler
 		{
 			if (slot.getHasStack() && slot.getStack().getItem() instanceof ItemMeal && slot.getStack().hasTagCompound())
 			{
-				int[] fg = slot.getStack().getTagCompound().getIntArray("FG");
+				int[] fg = Food.getFoodGroups(slot.getStack());
 				TFC_Core.bindTexture(TextureMap.locationItemsTexture);
 				GL11.glColor4f(1, 1, 1, 1.0F);
 				for(int i = 0; i < fg.length; i++)
