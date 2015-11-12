@@ -24,6 +24,8 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class FoodStatsTFC
 {
+	private boolean updateStats = !TFCOptions.enableDebugMode; // Replace with true to allow stat depleting with debug mode enabled
+
 	/** The player's food level. This measures how much food the player can handle.*/
 	public float stomachLevel = 24;
 	private float stomachMax = 24.0f;
@@ -41,7 +43,7 @@ public class FoodStatsTFC
 
 	public long soberTime;
 
-	/**This is how full the player is from the food that they've eaten. 
+	/**This is how full the player is from the food that they've eaten.
 	 * It could also be how happy they are with what they've eaten*/
 	private float satisfaction;
 
@@ -97,7 +99,7 @@ public class FoodStatsTFC
 				this.waterTimer = TFC_Time.startTime;
 			}
 
-			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.HOUR_LENGTH && !player.capabilities.isCreativeMode)
+			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.HOUR_LENGTH && !player.capabilities.isCreativeMode && updateStats)
 			{
 				this.foodTimer += TFC_Time.HOUR_LENGTH;
 				float drainMult = 1.0f;
@@ -108,20 +110,20 @@ public class FoodStatsTFC
 				//Water
 				if(player.isSprinting())
 					waterLevel -= 5+(tempWaterMod);
-				if(!player.capabilities.isCreativeMode)
+				if (!player.capabilities.isCreativeMode && updateStats)
 					waterLevel -= bodyTemp.getExtraWater()*drainMult;
 
 				//Food
 				float hunger = (1 + foodExhaustionLevel + bodyTemp.getExtraFood()) * drainMult;
 				if(this.satisfaction >= hunger)
 				{
-					satisfaction -= hunger; 
+					satisfaction -= hunger;
 					hunger = 0;
 					foodExhaustionLevel = 0;
 				}
 				else
 				{
-					hunger -= satisfaction; 
+					hunger -= satisfaction;
 					satisfaction = 0;
 					foodExhaustionLevel = 0;
 				}
@@ -174,7 +176,7 @@ public class FoodStatsTFC
 				}*/
 			}
 
-			if(!player.capabilities.isCreativeMode)
+			if (!player.capabilities.isCreativeMode && updateStats)
 			{
 				for(;waterTimer < TFC_Time.getTotalTicks();  waterTimer++)
 				{
@@ -209,7 +211,7 @@ public class FoodStatsTFC
 		}
 	}
 
-	protected void reduceNutrition(float amount) 
+	protected void reduceNutrition(float amount)
 	{
 		nutrFruit = Math.max(this.nutrFruit - (amount + foodExhaustionLevel), 0);
 		nutrVeg = Math.max(this.nutrVeg - (amount + foodExhaustionLevel), 0);
@@ -380,7 +382,7 @@ public class FoodStatsTFC
 	{
 		Random r = new Random(getPlayerFoodSeed());
 		return new int[]
-		{ 20 + r.nextInt(70), 20 + r.nextInt(70), 20 + r.nextInt(70), 20 + r.nextInt(70), 20 + r.nextInt(70) };
+				{ 20 + r.nextInt(70), 20 + r.nextInt(70), 20 + r.nextInt(70), 20 + r.nextInt(70), 20 + r.nextInt(70) };
 	}
 
 	public float getTasteFactor(ItemStack food)
@@ -424,7 +426,7 @@ public class FoodStatsTFC
 	}
 
 	/**
-	 * 
+	 *
 	 * @return return true if the itemstack should be consumed, else return false
 	 */
 	public static boolean reduceFood(ItemStack is, float amount)

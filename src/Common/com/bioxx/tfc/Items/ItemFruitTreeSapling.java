@@ -53,7 +53,7 @@ public class ItemFruitTreeSapling extends ItemTerra
 
 			((TEFruitTreeWood)world.getTileEntity(x, y + 1, z)).setTrunk(true);
 			((TEFruitTreeWood)world.getTileEntity(x, y + 1, z)).setHeight(0);
-			((TEFruitTreeWood)world.getTileEntity(x, y + 1, z)).setBirth();
+			((TEFruitTreeWood)world.getTileEntity(x, y + 1, z)).initBirth();
 
 			stack.stackSize = stack.stackSize - 1;
 			return true;
