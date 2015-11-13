@@ -24,7 +24,6 @@ import com.bioxx.tfc.api.Util.Helper;
 public class FoodCraftingHandler
 {
 	public static boolean preCrafted;
-	private static List<ItemStack> knives = OreDictionary.getOres("itemKnife", false);
 	@SubscribeEvent
 	public void onFoodCook(ItemCookEvent event)
 	{
@@ -50,6 +49,7 @@ public class FoodCraftingHandler
 		{
 			if (refiningGrain(craftResult, craftingInv))
 			{
+				List<ItemStack> knives = OreDictionary.getOres("itemKnife", false);
 				handleItem(e.player, craftingInv, knives);
 
 				for(int i = 0; i < craftingInv.getSizeInventory(); i++)
@@ -525,6 +525,7 @@ public class FoodCraftingHandler
 		FoodCraftingHandler.preCrafted = true;
 		if (refiningGrain(craftResult, craftingInv))
 		{
+			List<ItemStack> knives = OreDictionary.getOres("itemKnife", false);
 			handleItem(player, craftingInv, knives);
 			for(int i = 0; i < craftingInv.getSizeInventory(); i++)
 			{
