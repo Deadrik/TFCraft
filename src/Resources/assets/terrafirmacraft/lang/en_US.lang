@@ -2127,6 +2127,7 @@ tile.Moss.name=Moss
 tile.Thatch.name=Thatch
 tile.Flora.Golden Rod.name=Goldenrod
 tile.Flora.Cat Tails.name=Cattails
+tile.Flora.Pond Weed.name=Pond Weed
 
 item.Seeds Sugarcane.name=Sugarcane Seeds
 item.Seeds Hemp.name=Hemp Seeds
