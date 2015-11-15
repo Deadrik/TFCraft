@@ -126,7 +126,7 @@ public class ContainerPlayerTFC extends ContainerPlayer
 				FoodCraftingHandler.preCraft(player, slotStack, craftMatrix);
 				CraftingHandler.preCraft(player, slotStack, craftMatrix);
 
-				if (!this.mergeItemStack(slotStack, 9, 45, true))
+				if (!this.mergeItemStack(slotStack, 9, 45, true, true))
 					return null;
 
 				slot.onSlotChange(slotStack, origStack);
@@ -134,13 +134,13 @@ public class ContainerPlayerTFC extends ContainerPlayer
 			// From crafting grid input to inventory
 			else if (slotNum >= 1 && slotNum < 5 || player.getEntityData().hasKey("craftingTable") && slotNum >= 45 && slotNum < 50)
 			{
-				if (!this.mergeItemStack(slotStack, 9, 45, true))
+				if (!this.mergeItemStack(slotStack, 9, 45, true, false))
 					return null;
 			}
 			// From armor or equipment slot to inventory
 			else if (slotNum >= 5 && slotNum < 9 || slotNum == 50)
 			{
-				if (!this.mergeItemStack(slotStack, 9, 45, true))
+				if (!this.mergeItemStack(slotStack, 9, 45, true, false))
 					return null;
 			}
 			// From inventory to armor slots
@@ -153,13 +153,13 @@ public class ContainerPlayerTFC extends ContainerPlayer
 
 					if (!((Slot) this.inventorySlots.get(armorSlotNum)).getHasStack())
 					{
-						if (!this.mergeItemStack(slotStack, armorSlotNum, armorSlotNum + 1, false))
+						if (!this.mergeItemStack(slotStack, armorSlotNum, armorSlotNum + 1, false, false))
 							return null;
 					}
 				}
 				else if (!((Slot) this.inventorySlots.get(armorSlotNum)).getHasStack())
 				{
-					if (!this.mergeItemStack(slotStack, armorSlotNum, armorSlotNum + 1, false))
+					if (!this.mergeItemStack(slotStack, armorSlotNum, armorSlotNum + 1, false, false))
 						return null;
 				}
 			}
@@ -178,31 +178,31 @@ public class ContainerPlayerTFC extends ContainerPlayer
 			// Food from inventory/hotbar to crafting grid
 			else if (slotNum >= 9 && slotNum < 45 && origStack.getItem() instanceof IFood && !(origStack.getItem() instanceof ItemMeal) && !isCraftingGridFull())
 			{
-				if (!this.mergeItemStack(slotStack, 1, 5, false) && slotStack.stackSize == 0)
+				if (!this.mergeItemStack(slotStack, 1, 5, false, false) && slotStack.stackSize == 0)
 					return null;
 				else if (slotStack.stackSize > 0 && player.getEntityData().hasKey("craftingTable") && !this.mergeItemStack(slotStack, 45, 50, false))
 					return null;
 				else if (slotStack.stackSize > 0 && slotNum >= 9 && slotNum < 36)
 				{
-					if (!this.mergeItemStack(slotStack, 36, 45, false))
+					if (!this.mergeItemStack(slotStack, 36, 45, false, false))
 						return null;
 				}
 				else if (slotStack.stackSize > 0 && slotNum >= 36 && slotNum < 45)
 				{
-					if (!this.mergeItemStack(slotStack, 9, 36, false))
+					if (!this.mergeItemStack(slotStack, 9, 36, false, false))
 						return null;
 				}
 			}
 			// From inventory to hotbar
 			else if (slotNum >= 9 && slotNum < 36)
 			{
-				if (!this.mergeItemStack(slotStack, 36, 45, false))
+				if (!this.mergeItemStack(slotStack, 36, 45, false, false))
 					return null;
 			}
 			// From hotbar to inventory
 			else if (slotNum >= 36 && slotNum < 45)
 			{
-				if (!this.mergeItemStack(slotStack, 9, 36, false))
+				if (!this.mergeItemStack(slotStack, 9, 36, false, false))
 					return null;
 			}
 
@@ -275,5 +275,115 @@ public class ContainerPlayerTFC extends ContainerPlayer
 	public EntityPlayer getPlayer()
 	{
 		return this.thePlayer;
+	}
+
+	protected boolean mergeItemStack(ItemStack is, int slotStart, int slotFinish, boolean reverseOrder, boolean craftingOutput)
+	{
+		boolean merged = false;
+		int slotIndex = slotStart;
+
+		if (reverseOrder)
+			slotIndex = slotFinish - 1;
+
+		Slot slot;
+		ItemStack slotstack;
+
+		if (is.isStackable())
+		{
+			while (is.stackSize > 0 && (!reverseOrder && slotIndex < slotFinish || reverseOrder && slotIndex >= slotStart))
+			{
+				slot = (Slot) this.inventorySlots.get(slotIndex);
+				slotstack = slot.getStack();
+
+				if (slotstack != null && slotstack.getItem() == is.getItem()
+				//&& !is.getHasSubtypes()
+				&& is.getItemDamage() == slotstack.getItemDamage() && ItemStack.areItemStackTagsEqual(is, slotstack) && slotstack.stackSize < slot.getSlotStackLimit())
+				{
+					int mergedStackSize = is.stackSize + getSmaller(slotstack.stackSize, slot.getSlotStackLimit());
+
+					//First we check if we can add the two stacks together and the resulting stack is smaller than the maximum size for the slot or the stack
+					if (mergedStackSize <= is.getMaxStackSize() && mergedStackSize <= slot.getSlotStackLimit())
+					{
+						is.stackSize = 0;
+						slotstack.stackSize = mergedStackSize;
+						slot.onSlotChanged();
+						merged = true;
+					}
+					// Do not attempt merge stacks resulting in greater than the max size for slot/stack if shift-clicking the crafting grid output
+					else if (!craftingOutput && slotstack.stackSize < is.getMaxStackSize() && slotstack.stackSize < slot.getSlotStackLimit())
+					{
+						// Slot stack size is greater than or equal to the item's max stack size. Most containers are this case.
+						if (slot.getSlotStackLimit() >= is.getMaxStackSize())
+						{
+							is.stackSize -= is.getMaxStackSize() - slotstack.stackSize;
+							slotstack.stackSize = is.getMaxStackSize();
+							slot.onSlotChanged();
+							merged = true;
+						}
+						// Slot stack size is smaller than the item's normal max stack size. Example: Log Piles
+						else if (slot.getSlotStackLimit() < is.getMaxStackSize())
+						{
+							is.stackSize -= slot.getSlotStackLimit() - slotstack.stackSize;
+							slotstack.stackSize = slot.getSlotStackLimit();
+							slot.onSlotChanged();
+							merged = true;
+						}
+					}
+				}
+
+				if (reverseOrder)
+					--slotIndex;
+				else
+					++slotIndex;
+			}
+		}
+
+		if (is.stackSize > 0)
+		{
+			if (reverseOrder)
+				slotIndex = slotFinish - 1;
+			else
+				slotIndex = slotStart;
+
+			while (!reverseOrder && slotIndex < slotFinish || reverseOrder && slotIndex >= slotStart)
+			{
+				slot = (Slot) this.inventorySlots.get(slotIndex);
+				slotstack = slot.getStack();
+				if (slotstack == null && slot.isItemValid(is) && slot.getSlotStackLimit() < is.stackSize)
+				{
+					ItemStack copy = is.copy();
+					copy.stackSize = slot.getSlotStackLimit();
+					is.stackSize -= slot.getSlotStackLimit();
+					slot.putStack(copy);
+					slot.onSlotChanged();
+					merged = true;
+					//this.bagsSlotNum = slotIndex;
+					break;
+				}
+				else if (slotstack == null && slot.isItemValid(is))
+				{
+					slot.putStack(is.copy());
+					slot.onSlotChanged();
+					is.stackSize = 0;
+					merged = true;
+					break;
+				}
+
+				if (reverseOrder)
+					--slotIndex;
+				else
+					++slotIndex;
+			}
+		}
+
+		return merged;
+	}
+
+	protected int getSmaller(int i, int j)
+	{
+		if (i < j)
+			return i;
+		else
+			return j;
 	}
 }

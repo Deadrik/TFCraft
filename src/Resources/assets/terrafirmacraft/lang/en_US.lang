@@ -2406,6 +2406,7 @@ gui.Advanced=Advanced
 gui.Shift=Shift
 gui.Hold=Hold
 gui.SmithingBonus=Smithing Bonus
+gui.ItemWorked=This item has been worked
 
 gui.slot=Slot
 gui.slot.back=Back

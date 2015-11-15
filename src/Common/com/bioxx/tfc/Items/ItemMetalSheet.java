@@ -10,6 +10,7 @@ import com.bioxx.tfc.Core.Metal.MetalRegistry;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
@@ -192,5 +193,18 @@ public class ItemMetalSheet extends ItemTerra implements ISmeltable
 	{
 		// TODO Auto-generated method stub
 		return EnumTier.TierI;
+	}
+
+	@Override
+	public int getItemStackLimit(ItemStack is)
+	{
+		// hot or worked sheets cannot stack
+		if (is.hasTagCompound() && (TFC_ItemHeat.hasTemp(is) ||
+									(is.getTagCompound().hasKey("itemCraftingValue") && is.getTagCompound().getShort("itemCraftingValue") != 0)))
+		{
+			return 1;
+		}
+
+		return super.getItemStackLimit(is);
 	}
 }

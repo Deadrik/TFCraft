@@ -179,7 +179,7 @@ public class ItemTerra extends Item implements ISize
 		if (is.hasTagCompound())
 		{
 			if(is.getTagCompound().hasKey("itemCraftingValue") && is.getTagCompound().getShort("itemCraftingValue") != 0)
-				arraylist.add("This Item Has Been Worked");
+				arraylist.add(TFC_Core.translate("gui.ItemWorked"));
 		}
 
 		addItemInformation(is, player, arraylist);
