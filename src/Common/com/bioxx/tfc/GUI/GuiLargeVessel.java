@@ -10,10 +10,13 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.common.Loader;
 
 import org.lwjgl.opengl.GL11;
 
@@ -26,6 +29,7 @@ import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.api.Food;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
@@ -381,5 +385,75 @@ public class GuiLargeVessel extends GuiContainerTFC
 	public void drawCenteredString(FontRenderer fontrenderer, String s, int i, int j, int k)
 	{
 		fontrenderer.drawString(s, i - fontrenderer.getStringWidth(s) / 2, j, k);
+	}
+
+	@Override
+	public void drawScreen(int x, int y, float par3)
+	{
+		drawScreenSuperFixed(x, y, par3);
+		if (vesselTE.getSealed())
+		{
+			GL11.glPushMatrix();
+			if (guiTab == 0)
+			{
+				Slot inputSlot = this.inventorySlots.getSlot(TEBarrel.INPUT_SLOT);
+				drawSlotOverlay(inputSlot);
+			}
+			else if (guiTab == 1)
+			{
+				for (int i = 0; i < vesselTE.storage.length; ++i)
+				{
+					Slot slot = this.inventorySlots.getSlot(i);
+					drawSlotOverlay(slot);
+				}
+			}
+
+			GL11.glPopMatrix();
+		}
+	}
+
+	private void drawSlotOverlay(Slot slot)
+	{
+		GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		int xPos = slot.xDisplayPosition + guiLeft - 1;
+		int yPos = slot.yDisplayPosition + guiTop - 1;
+		GL11.glColorMask(true, true, true, false);
+		this.drawGradientRect(xPos, yPos, xPos + 18, yPos + 18, 0x75FFFFFF, 0x75FFFFFF);
+		GL11.glColorMask(true, true, true, true);
+		GL11.glEnable(GL11.GL_LIGHTING);
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
+	}
+
+	private void drawScreenSuperFixed(int x, int y, float par3)
+	{
+		InventoryPlayer inventoryPlayer = mc.thePlayer.inventory;
+		// A hacky fix is required when NEI is loaded to prevent rendering tooltips on sealed slots
+		if (Loader.isModLoaded("NotEnoughItems") && vesselTE.getSealed() &&
+			inventoryPlayer.getItemStack() == null) // The player's cursor isn't holding anything
+		{
+			for (int i = 0; i < vesselTE.storage.length; i++)
+			{
+				if (guiTab == 0 && i != 0) // Only do the first slot for the liquid tab
+					break;
+
+				Slot slot = (Slot) this.inventorySlots.inventorySlots.get(i);
+
+				// Mouse is currently over a non-empty slot that has hovering disabled
+				if (func_146978_c(slot.xDisplayPosition, slot.yDisplayPosition, 16, 16, x, y) &&
+					slot.getHasStack() && !slot.func_111238_b())
+				{
+					// Place an invisible item on the player's cursor to prevent tooltip rendering when NEI is installed
+					inventoryPlayer.setItemStack(new ItemStack(TFCBlocks.crops)); // Crops are invisible in the inventory
+				}
+			}
+
+			super.drawScreen(x, y, par3);
+
+			// Reset the cursor
+			inventoryPlayer.setItemStack(null);
+		}
+		else
+			super.drawScreen(x, y, par3);
 	}
 }
