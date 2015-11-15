@@ -90,7 +90,7 @@ public class GenCommand extends CommandBase
 			if (i != -1)
 			{
 				TFC_Core.sendInfoMessage(player, new ChatComponentText("Generating Big " + params[1] + " Tree"));
-				WorldGenerator treeGen = TFCBiome.getTreeGen(i, false);
+				WorldGenerator treeGen = TFCBiome.getTreeGen(i, true);
 				if (!treeGen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int) player.posX, (int) player.posY, (int) player.posZ))
 					TFC_Core.sendInfoMessage(player, new ChatComponentText("Generation Failed"));
 			}
