@@ -29,8 +29,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import codechicken.nei.guihook.GuiContainerManager;
-import codechicken.nei.guihook.IContainerTooltipHandler;
 import com.bioxx.tfc.Core.ColorizerFoliageTFC;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -522,7 +520,7 @@ public class ClientProxy extends CommonProxy
 	{
 		if (Loader.isModLoaded("NotEnoughItems"))
 		{
-			GuiContainerManager.addTooltipHandler(new IContainerTooltipHandler()
+			codechicken.nei.guihook.GuiContainerManager.addTooltipHandler(new codechicken.nei.guihook.IContainerTooltipHandler()
 			{
 				@Override
 				public List<String> handleTooltip(GuiContainer gui, int mousex, int mousey, List<String> currenttip)
