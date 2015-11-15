@@ -64,7 +64,7 @@ public class FMLClientEventHandler
 		int shifty = 0;
 
 		Slot slot = gui.getSlotAtPosition(mouseX, mouseY);
-		if (slot != null)
+		if (slot != null && slot.func_111238_b())
 		{
 			if (slot.getHasStack() && slot.getStack().getItem() instanceof ItemMeal && slot.getStack().hasTagCompound())
 			{
