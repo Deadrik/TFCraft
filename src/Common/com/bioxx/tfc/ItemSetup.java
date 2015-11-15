@@ -259,6 +259,7 @@ public class ItemSetup extends TFCItems {
 		highCarbonRedSteelIngot = new ItemIngot(false).setUnlocalizedName("HC Red Steel Ingot");
 		highCarbonSteelIngot = new ItemIngot(false).setUnlocalizedName("HC Steel Ingot");
 
+		smallMetalChunk = new ItemNugget().setUnlocalizedName("MetalNugget");
 		oreChunk = new ItemOre().setFolder("ore/").setUnlocalizedName("Ore");
 		smallOreChunk = new ItemOreSmall().setUnlocalizedName("Small Ore");
 		powder = new ItemTerra().setMetaNames(Global.POWDER).setUnlocalizedName("Powder").setCreativeTab(TFCTabs.TFC_MATERIALS);

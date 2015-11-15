@@ -1859,6 +1859,31 @@ item.Weak Steel Unshaped.name=Unshaped: Weak Steel
 item.Wrought Iron Unshaped.name=Unshaped: Wrought Iron
 item.Zinc Unshaped.name=Unshaped: Zinc
 
+#== Nugget ==
+
+item.MetalNugget.Bismuth.name=Bismuth Nugget
+item.MetalNugget.Bismuth Bronze.name=Bismuth Bronze Nugget
+item.MetalNugget.Black Bronze.name=Black Bronze Nugget
+item.MetalNugget.Black Steel.name=Black Steel Nugget
+item.MetalNugget.Blue Steel.name=Blue Steel Nugget
+item.MetalNugget.Brass.name=Brass Nugget
+item.MetalNugget.Bronze.name=Bronze Nugget
+item.MetalNugget.Copper.name=Copper Nugget
+item.MetalNugget.Gold.name=Gold Nugget
+item.MetalNugget.Wrought Iron.name=Wrought Iron Nugget
+item.MetalNugget.Lead.name=Lead Nugget
+item.MetalNugget.Nickel.name=Nickel Nugget
+item.MetalNugget.Pig Iron.name=Pig Iron Nugget
+item.MetalNugget.Platinum.name=Platinum Nugget
+item.MetalNugget.Red Steel.name=Red Steel Nugget
+item.MetalNugget.Rose Gold.name=Rose Gold Nugget
+item.MetalNugget.Silver.name=Silver Nugget
+item.MetalNugget.Steel.name=Steel Nugget
+item.MetalNugget.Sterling Silver.name=Sterling Silver Nugget
+item.MetalNugget.Tin.name=Tin Nugget
+item.MetalNugget.Zinc.name=Zinc Nugget
+
+
 #== Ingot ==
 item.Bismuth Bronze Ingot.name=Bismuth Bronze Ingot
 item.Bismuth Ingot.name=Bismuth Ingot

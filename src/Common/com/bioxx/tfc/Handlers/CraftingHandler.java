@@ -56,6 +56,11 @@ public class CraftingHandler
 				List<ItemStack> chisels = OreDictionary.getOres("itemChisel", false);
 				handleItem(player, iinventory, chisels);
 			}
+			else if(item == TFCItems.smallMetalChunk)
+			{
+				List<ItemStack> chisels = OreDictionary.getOres("itemChisel", false);
+				handleItem(player, iinventory, chisels);
+			}
 			else if(item == TFCItems.singlePlank ||
 					item == Item.getItemFromBlock(TFCBlocks.woodSupportH) || item == Item.getItemFromBlock(TFCBlocks.woodSupportH2) ||
 					item == Item.getItemFromBlock(TFCBlocks.woodSupportV) || item == Item.getItemFromBlock(TFCBlocks.woodSupportV2))
