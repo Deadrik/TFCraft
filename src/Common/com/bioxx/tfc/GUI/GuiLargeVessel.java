@@ -16,8 +16,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.common.Loader;
-
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
@@ -29,7 +27,6 @@ import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.api.Food;
-import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
