@@ -390,7 +390,7 @@ public class GuiBarrel extends GuiContainerTFC
 	@Override
 	public void drawScreen(int x, int y, float par3)
 	{
-		drawScreenSuperFixed(x, y, par3);
+		super.drawScreen(x, y, par3);
 		if (barrelTE.getSealed())
 		{
 			GL11.glPushMatrix();
@@ -423,37 +423,5 @@ public class GuiBarrel extends GuiContainerTFC
 		GL11.glColorMask(true, true, true, true);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
-	}
-
-	private void drawScreenSuperFixed(int x, int y, float par3)
-	{
-		InventoryPlayer inventoryPlayer = mc.thePlayer.inventory;
-		// A hacky fix is required when NEI is loaded to prevent rendering tooltips on sealed slots
-		if (Loader.isModLoaded("NotEnoughItems") && barrelTE.getSealed() &&
-			inventoryPlayer.getItemStack() == null) // The player's cursor isn't holding anything
-		{
-			for (int i = 0; i < barrelTE.storage.length; i++)
-			{
-				if (guiTab == 0 && i != 0) // Only do the first slot for the liquid tab
-					break;
-
-				Slot slot = (Slot) this.inventorySlots.inventorySlots.get(i);
-
-				// Mouse is currently over a non-empty slot that has hovering disabled
-				if (func_146978_c(slot.xDisplayPosition, slot.yDisplayPosition, 16, 16, x, y) &&
-					slot.getHasStack() && !slot.func_111238_b())
-				{
-					// Place an invisible item on the player's cursor to prevent tooltip rendering when NEI is installed
-					inventoryPlayer.setItemStack(new ItemStack(TFCBlocks.crops)); // Crops are invisible in the inventory
-				}
-			}
-
-			super.drawScreen(x, y, par3);
-
-			// Reset the cursor
-			inventoryPlayer.setItemStack(null);
-		}
-		else
-			super.drawScreen(x, y, par3);
 	}
 }

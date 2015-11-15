@@ -1,7 +1,10 @@
 package com.bioxx.tfc;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.resources.IReloadableResourceManager;
@@ -9,6 +12,7 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -25,6 +29,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import codechicken.nei.guihook.GuiContainerManager;
+import codechicken.nei.guihook.IContainerTooltipHandler;
 import com.bioxx.tfc.Core.ColorizerFoliageTFC;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -512,8 +518,33 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void hideNEIItems()
 	{
-		if (Loader.isModLoaded("NotEnoughItems") && TFCOptions.enableNEIHiding)
+		if (Loader.isModLoaded("NotEnoughItems"))
 		{
+			GuiContainerManager.addTooltipHandler(new IContainerTooltipHandler()
+			{
+				@Override
+				public List<String> handleTooltip(GuiContainer gui, int mousex, int mousey, List<String> currenttip)
+				{
+					return currenttip;
+				}
+
+				@Override
+				public List<String> handleItemDisplayName(GuiContainer gui, ItemStack itemstack, List<String> currenttip)
+				{
+					return currenttip;
+				}
+
+				@Override
+				public List<String> handleItemTooltip(GuiContainer gui, ItemStack itemstack, int mousex, int mousey, List<String> currenttip)
+				{
+					Slot slot = gui.getSlotAtPosition(mousex, mousey);
+					if (slot != null && !slot.func_111238_b()) currenttip.clear();
+					return currenttip;
+				}
+			});
+
+			if (!TFCOptions.enableNEIHiding) return;
+
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.bloom));
 			//codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.writabeBookTFC)); // Book
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCBlocks.charcoal));
