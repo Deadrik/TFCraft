@@ -1172,27 +1172,28 @@ public class WAILAData implements IWailaDataProvider
 
 		for (int i = 0; i < storage.length; i++)
 		{
-			if (storage[i] != null)
+			ItemStack is = storage[i];
+			if (is != null)
 			{
-				int dryHours = Food.DRYHOURS - Food.getDried(storage[i]);
-				int smokeHours = Food.SMOKEHOURS - Food.getSmokeCounter(storage[i]);
+				int dryHours = Food.DRYHOURS - Food.getDried(is);
+				int smokeHours = Food.SMOKEHOURS - Food.getSmokeCounter(is);
 
-				if (smokeHours > 0 && smokeHours < Food.SMOKEHOURS)
+				if (smokeHours < Food.SMOKEHOURS && !Food.isSmoked(is))
 				{
+					smokeHours++; // Display timer off by one
 					float percent = Helper.roundNumber(100 - (100f * smokeHours) / Food.SMOKEHOURS, 10);
-					currenttip.add(TFC_Core.translate("word.smoked") + " " + storage[i].getDisplayName());
+					currenttip.add(TFC_Core.translate("word.smoking") + " " + is.getDisplayName());
 					currenttip.add("\u00B7 " + smokeHours + " " + TFC_Core.translate("gui.hoursRemaining") + " (" + percent + "%)");
 				}
-				else if (dryHours > 0 && dryHours < Food.DRYHOURS)
+				else if (dryHours < Food.DRYHOURS && !Food.isDried(is))
 				{
 					float percent = Helper.roundNumber(100 - (100f * dryHours) / Food.DRYHOURS, 10);
-					currenttip.add(TFC_Core.translate("word.dried") + " " + storage[i].getDisplayName());
+					currenttip.add(TFC_Core.translate("word.drying") + " " + is.getDisplayName());
 					currenttip.add("\u00B7 " + dryHours + " " + TFC_Core.translate("gui.hoursRemaining") + " (" + percent + "%)");
 				}
 				else
-					currenttip.add(storage[i].getDisplayName());
+					currenttip.add(is.getDisplayName());
 			}
-
 		}
 
 		return currenttip;

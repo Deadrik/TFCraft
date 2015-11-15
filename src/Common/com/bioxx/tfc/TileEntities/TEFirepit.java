@@ -531,26 +531,33 @@ public class TEFirepit extends TEFireEntity implements IInventory
 	}
 	private void smokeBlock(int x, int y, int z)
 	{
-		if (worldObj.blockExists(x, y, z) && worldObj.getBlock(x, y, z) == TFCBlocks.smokeRack)
+		if (worldObj.blockExists(x, y, z) && worldObj.getBlock(x, y, z) == TFCBlocks.smokeRack &&
+			worldObj.getTileEntity(x, y, z) instanceof TESmokeRack)
 		{
+			boolean broadcast = false;
 			TESmokeRack te = (TESmokeRack) worldObj.getTileEntity(x, y, z);
 			te.lastSmokedTime = (int)TFC_Time.getTotalHours();
-			if(te.getStackInSlot(0) != null)
+
+			for (int i = 0; i < te.storage.length; i++)
 			{
-				ItemStack is = te.getStackInSlot(0);
-				if (Food.getSmokeCounter(is) < Food.SMOKEHOURS)
-					Food.setSmokeCounter(is, Food.getSmokeCounter(is)+1);
-				else
-					Food.setFuelProfile(is, EnumFuelMaterial.getFuelProfile(fuelTasteProfile));
+				ItemStack is = te.getStackInSlot(i);
+				if (is != null)
+				{
+					if (Food.getSmokeCounter(is) < Food.SMOKEHOURS) // Smoking in progress
+					{
+						// Smoking does not make up for lost time to balance fuel consumption
+						Food.setSmokeCounter(is, Food.getSmokeCounter(is) + 1);
+					}
+					else // Smoking complete
+					{
+						Food.setFuelProfile(is, EnumFuelMaterial.getFuelProfile(fuelTasteProfile));
+						broadcast = true; // Broadcast change to update string color
+					}
+				}
 			}
-			if(te.getStackInSlot(1) != null)
-			{
-				ItemStack is = te.getStackInSlot(1);
-				if (Food.getSmokeCounter(is) < Food.SMOKEHOURS)
-					Food.setSmokeCounter(is, Food.getSmokeCounter(is)+1);
-				else
-					Food.setFuelProfile(is, EnumFuelMaterial.getFuelProfile(fuelTasteProfile));
-			}
+
+			if (broadcast)
+				te.broadcastPacketInRange();
 		}
 	}
 

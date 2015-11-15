@@ -2529,7 +2529,9 @@ word.brined=Brined
 word.cooked=Cooked
 word.salted=Salted
 word.smoked=Smoked
+word.smoking=Smoking
 word.dried=Dried
+word.drying=Drying
 
 food.cooked.rare=Rare
 food.cooked.medrare=Medium Rare
