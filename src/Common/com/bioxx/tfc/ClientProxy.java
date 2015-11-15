@@ -36,6 +36,8 @@ import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.*;
 import com.bioxx.tfc.Entities.Mobs.*;
+import com.bioxx.tfc.GUI.GuiBarrel;
+import com.bioxx.tfc.GUI.GuiLargeVessel;
 import com.bioxx.tfc.Handlers.BiomeEventHandler;
 import com.bioxx.tfc.Handlers.Client.*;
 import com.bioxx.tfc.Render.*;
@@ -537,8 +539,11 @@ public class ClientProxy extends CommonProxy
 				@Override
 				public List<String> handleItemTooltip(GuiContainer gui, ItemStack itemstack, int mousex, int mousey, List<String> currenttip)
 				{
-					Slot slot = gui.getSlotAtPosition(mousex, mousey);
-					if (slot != null && !slot.func_111238_b()) currenttip.clear();
+					if (gui instanceof GuiLargeVessel || gui instanceof GuiBarrel)
+					{
+						Slot slot = gui.getSlotAtPosition(mousex, mousey);
+						if (slot != null && !slot.func_111238_b()) currenttip.clear();
+					}
 					return currenttip;
 				}
 			});
