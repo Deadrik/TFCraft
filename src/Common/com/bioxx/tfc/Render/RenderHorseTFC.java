@@ -94,7 +94,7 @@ public class RenderHorseTFC extends RenderHorse
 	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
 	{
-		float scale = ((EntityHorseTFC) par1EntityLivingBase).getSize();
+		float scale = ((EntityHorseTFC) par1EntityLivingBase).getSizeMod();
 		GL11.glScalef(scale, scale, scale);
 		this.preRenderCallback((EntityHorse)par1EntityLivingBase, par2);
 	}

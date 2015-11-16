@@ -32,34 +32,33 @@ import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityChickenTFC extends EntityChicken implements IAnimal
 {
-	private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
-
 	/*
 	 * 1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
 	 * the square root of the ratio of female mass : male mass
 	 */
 	private static final float DIMORPHISM = 0.0606f;
+
 	private static final int DEGREE_OF_DIVERSION = 2;
 	protected static final int FAMILIARITY_CAP = 45;
-	//private static final float avgAdultWeight = 2; //The average weight of adult males in kg
+	private static final int EGG_TIME = TFC_Time.DAY_LENGTH;
 
+	private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
 	private int sex;
 	private int hunger;
-	//private int age;
 	private float sizeMod; //How large the animal is
 	private float strengthMod; //how strong the animal is
 	private float aggressionMod = 1;//How aggressive / obstinate the animal is
+
 	private float obedienceMod = 1; //How well the animal responds to commands.
 	private boolean inLove;
-
+	
 	/** The time until the next egg is spawned. */
 	private long nextEgg;
-	private static final int EGG_TIME = TFC_Time.DAY_LENGTH;
-	
 	private int familiarity;
 	private long lastFamiliarityUpdate;
-	private boolean familiarizedToday;
 	
+
+	private boolean familiarizedToday;
 
 	public EntityChickenTFC(World par1World)
 	{
@@ -126,13 +125,77 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	}
 
 	@Override
-	/**
-	 * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
-	 * the animal type)
-	 */
-	public boolean isBreedingItem(ItemStack par1ItemStack)
+	protected void applyEntityAttributes()
 	{
-		return false;
+		super.applyEntityAttributes();
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50);//MaxHealth
+	}
+
+	@Override
+	public boolean canFamiliarize()
+	{
+		return !isAdult() || isAdult() && this.familiarity <= FAMILIARITY_CAP;
+	}
+
+	@Override
+	public boolean canMateWith(IAnimal animal)
+	{
+		return animal.getGender() != this.getGender() &&this.isAdult() && animal.isAdult() &&
+				animal.getAnimalTypeID() == this.getAnimalTypeID();
+	}
+
+	@Override
+	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
+		boolean flag = false;
+		switch(interaction){
+		case NAME:
+			flag = familiarity > 50;
+			break; //Set 5 higher than adult cap.
+		default: break;
+		}
+		if(!flag && player != null && !player.worldObj.isRemote){
+			TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.notFamiliar"));
+		}
+		return flag;
+	}
+
+	@Override
+	public EntityChicken createChild(EntityAgeable entityAgeable)
+	{
+		return (EntityChicken) createChildTFC(entityAgeable);
+	}
+
+	// This should only be called when spawning baby chickens with a spawn egg, so both size values come from the animal clicked on.
+	@Override
+	public EntityAgeable createChildTFC(EntityAgeable entityageable)
+	{
+		if (entityageable instanceof IAnimal)
+		{
+			IAnimal animal = (IAnimal) entityageable;
+			NBTTagCompound nbt = new NBTTagCompound();
+			nbt.setFloat("m_size", animal.getSizeMod());
+			nbt.setFloat("f_size", animal.getSizeMod());
+			return new EntityChickenTFC(worldObj, posX, posY, posZ, nbt);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Drop 0-2 items of this living's type
+	 */
+	@Override
+	protected void dropFewItems(boolean par1, int par2)
+	{
+		float ageMod = TFC_Core.getPercentGrown(this);
+		this.dropItem(Items.feather,(int) (ageMod * this.sizeMod * (5+this.rand.nextInt(10))));
+
+		if(isAdult())
+		{
+			float foodWeight = ageMod * (this.sizeMod * 40);
+			TFC_Core.animalDropMeat(this, TFCItems.chickenRaw, foodWeight);
+			this.dropItem(Items.bone, rand.nextInt(2)+1);
+		}
 	}
 
 	@Override
@@ -146,6 +209,223 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		this.dataWatcher.addObject(23, Integer.valueOf(0)); //familiarity, familiarizedToday, empty slot, empty slot
 	}
 
+	@Override
+	public void familiarize(EntityPlayer ep) {
+		ItemStack stack = ep.getHeldItem();
+		if (stack != null && isFood(stack) && !familiarizedToday && canFamiliarize())
+		{
+			if (!ep.capabilities.isCreativeMode)
+			{
+				ep.inventory.setInventorySlotContents(ep.inventory.currentItem, ((ItemFoodTFC) stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this));
+			}
+			else
+			{
+				worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			}
+			this.hunger += 24000;
+			familiarizedToday = true;
+			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
+			this.playLivingSound();
+		}
+	}
+
+	@Override
+	public float getAggressionMod()
+	{
+		return aggressionMod;
+	}
+
+	@Override
+	public int getAnimalTypeID()
+	{
+		return Helper.stringToInt("chicken");
+	}
+
+	@Override
+	public Vec3 getAttackedVec()
+	{
+		return null;
+	}
+
+	@Override
+	public int getBirthDay()
+	{
+		return this.dataWatcher.getWatchableObjectInt(15);
+	}
+
+	/**
+	 * Returns the item ID for the item the mob drops on death.
+	 */
+	@Override
+	protected Item getDropItem()
+	{
+		return Items.feather;
+	}
+
+	@Override
+	public int getDueDay()
+	{
+		return 0; // Chickens don't get pregnant
+	}
+
+	public ItemStack getEggs()
+	{
+		if(TFC_Time.getTotalTicks() >= this.nextEgg)
+		{
+			this.nextEgg = TFC_Time.getTotalTicks() + EGG_TIME;
+			return new ItemStack(TFCItems.egg, 1);
+		}
+		return null;
+	}
+
+	@Override
+	public EntityLiving getEntity() 
+	{
+		return this;
+	}
+
+	@Override
+	public int getFamiliarity() {
+		return familiarity;
+	}
+
+	@Override
+	public boolean getFamiliarizedToday()
+	{
+		return familiarizedToday;
+	}
+
+	@Override
+	public Entity getFearSource()
+	{
+		return null;
+	}
+
+	@Override
+	public GenderEnum getGender()
+	{
+		return GenderEnum.GENDERS[dataWatcher.getWatchableObjectInt(13)];
+	}
+
+	@Override
+	public int getHunger()
+	{
+		return hunger;
+	}
+
+	@Override
+	public boolean getInLove()
+	{
+		return inLove;
+	}
+
+	public long getLastFamiliarityUpdate()
+	{
+		return lastFamiliarityUpdate;
+	}
+
+	public long getNextEgg()
+	{
+		return nextEgg;
+	}
+
+	@Override
+	public int getNumberOfDaysToAdult()
+	{
+		return (int) (TFCOptions.animalTimeMultiplier * TFC_Time.daysInMonth * 4.14);
+	}
+
+	@Override
+	public float getObedienceMod()
+	{
+		return obedienceMod;
+	}
+
+	public int getSex()
+	{
+		return sex;
+	}
+
+	@Override
+	public float getSizeMod()
+	{
+		return sizeMod;
+	}
+
+	@Override
+	public float getStrengthMod()
+	{
+		return strengthMod;
+	}
+
+	@Override
+	public void handleFamiliarityUpdate() {
+		int totalDays = TFC_Time.getTotalDays();
+		if(lastFamiliarityUpdate < totalDays){
+			if(familiarizedToday && familiarity < 100){
+				lastFamiliarityUpdate = totalDays;
+				familiarizedToday = false;
+				float familiarityChange = 6 * obedienceMod / aggressionMod;
+				if (this.isAdult() && familiarity <= FAMILIARITY_CAP)
+				{
+					familiarity += familiarityChange;
+				}
+				else if(!this.isAdult()){
+					float ageMod = 2f/(1f + TFC_Core.getPercentGrown(this));
+					familiarity += ageMod * familiarityChange;
+					if(familiarity > 70){
+						obedienceMod *= 1.01f;
+					}
+				}
+			}
+			else if(familiarity < 30){
+				familiarity -= 2*(TFC_Time.getTotalDays() - lastFamiliarityUpdate);
+				lastFamiliarityUpdate = totalDays;
+			}
+		}
+		if(familiarity > 100)familiarity = 100;
+		if(familiarity < 0)familiarity = 0;
+	}
+
+	/**
+	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
+	 */
+	@Override
+	public boolean interact(EntityPlayer player)
+	{
+		ItemStack itemstack = player.getHeldItem();
+
+		if(!worldObj.isRemote)
+		{
+			if (isAdult() && player.isSneaking() && !isFood(itemstack) && attackEntityFrom(DamageSource.generic, 5))
+			{
+				player.inventory.addItemStackToInventory(new ItemStack(Items.feather, 1));
+				familiarity -= 4; //Plucking feathers decreases familiarity
+				return true;
+			}
+
+			if (player.isSneaking() && !familiarizedToday && canFamiliarize())
+			{
+				this.familiarize(player);
+				return true;
+			}
+		}
+
+		if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
+			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"), player)){
+				itemstack.stackSize--;
+			}
+			return true;
+		}
+		return super.interact(player);
+	}
+
+	@Override
+	public boolean isAdult()
+	{
+		return getBirthDay()+getNumberOfDaysToAdult() <= TFC_Time.getTotalDays();
+	}
+
 	/**
 	 * Returns true if the newer Entity AI code should be run
 	 */
@@ -156,10 +436,36 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	/**
+	 * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
+	 * the animal type)
+	 */
+	public boolean isBreedingItem(ItemStack par1ItemStack)
 	{
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50);//MaxHealth
+		return false;
+	}
+
+	@Override
+	public boolean isChild()
+	{
+		return !isAdult();
+	}
+
+	@Override
+	public boolean isFood(ItemStack item) {
+		return item != null && (item.getItem() == TFCItems.wheatGrain || item.getItem() == TFCItems.oatGrain || item.getItem() == TFCItems.riceGrain ||
+				item.getItem() == TFCItems.barleyGrain || item.getItem() == TFCItems.ryeGrain || item.getItem() == TFCItems.maizeEar);
+	}
+
+	@Override
+	public boolean isPregnant() 
+	{
+		return false;
+	}
+
+	@Override
+	public void mate(IAnimal otherAnimal)
+	{
 	}
 
 	/**
@@ -215,11 +521,125 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		}
 	}
 
+	/**
+	 * (abstract) Protected helper method to read subclass entity data from NBT.
+	 */
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt)
+	{
+		super.readEntityFromNBT(nbt);
+		sex = nbt.getInteger ("Sex");
+		sizeMod = nbt.getFloat ("Size Modifier");
+
+		familiarity = nbt.getInteger("Familiarity");
+		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
+		familiarizedToday = nbt.getBoolean("Familiarized Today");
+		
+		strengthMod = nbt.getFloat ("Strength Modifier");
+		aggressionMod = nbt.getFloat ("Aggression Modifier");
+		obedienceMod = nbt.getFloat ("Obedience Modifier");
+
+		hunger = nbt.getInteger ("Hunger");
+		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
+		nextEgg = nbt.getLong("nextEgg");
+	}
+
 	public void roosterCrow()
 	{
 		if((TFC_Time.getTotalTicks()-15)%TFC_Time.DAY_LENGTH == 0 && getGender() == GenderEnum.MALE && isAdult() && this.worldObj.canBlockSeeTheSky((int)this.posX, (int)this.posY,(int)this.posZ)){
 			this.playSound(TFC_Sounds.ROOSTERCROW, 6, rand.nextFloat() / 2F + 0.75F);
 		}
+	}
+
+	@Override
+	public void setAge(int par1)
+	{
+		this.dataWatcher.updateObject(15, Integer.valueOf(par1));
+	}
+
+	@Override
+	public void setAggressionMod(float aggressionMod)
+	{
+		this.aggressionMod = aggressionMod;
+	}
+	
+	@Override
+	public void setAttackedVec(Vec3 attackedVec)
+	{
+	}
+
+	@Override
+	public void setBirthDay(int day)
+	{
+		this.dataWatcher.updateObject(15, day);
+	}
+
+	@Override
+	public void setFamiliarity(int familiarity)
+	{
+		this.familiarity = familiarity;
+	}
+
+	public void setFamiliarizedToday(boolean familiarizedToday)
+	{
+		this.familiarizedToday = familiarizedToday;
+	}
+
+	@Override
+	public void setFearSource(Entity fearSource)
+	{
+	}
+
+	@Override
+	public void setGrowingAge(int par1)
+	{
+		if(!TFC_Core.preventEntityDataUpdate)
+			this.dataWatcher.updateObject(12, Integer.valueOf(par1));
+	}
+
+	@Override
+	public void setHunger(int h)
+	{
+		hunger = h;
+	}
+
+	@Override
+	public void setInLove(boolean b)
+	{
+		this.inLove = b;
+	}
+
+	public void setLastFamiliarityUpdate(long lastFamiliarityUpdate)
+	{
+		this.lastFamiliarityUpdate = lastFamiliarityUpdate;
+	}
+
+	public void setNextEgg(long nextEgg)
+	{
+		this.nextEgg = nextEgg;
+	}
+
+	@Override
+	public void setObedienceMod(float obedienceMod)
+	{
+		this.obedienceMod = obedienceMod;
+	}
+
+	public void setSex(int sex)
+	{
+		this.sex = sex;
+	}
+
+	@Override
+	public void setSizeMod(float sizeMod)
+	{
+		this.sizeMod = sizeMod;
+	}
+
+	@Override
+	public void setStrengthMod(float strengthMod)
+	{
+		this.strengthMod = strengthMod;
 	}
 
 	public void syncData()
@@ -264,6 +684,17 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		}
 	}
 
+	@Override
+	public boolean trySetName(String name, EntityPlayer player) {
+		if (this.checkFamiliarity(InteractionEnum.NAME, player))
+		{
+			this.setCustomNameTag(name);
+			return true;
+		}
+		this.playSound(this.getHurtSound(), 6, rand.nextFloat() / 2F + (isChild() ? 1.25F : 0.75F));
+		return false;
+	}
+
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
@@ -285,366 +716,5 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		nbt.setInteger ("Hunger", hunger);
 		nbt.setInteger("Age", getBirthDay());
 		nbt.setLong("nextEgg", nextEgg);
-	}
-
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
-	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt)
-	{
-		super.readEntityFromNBT(nbt);
-		sex = nbt.getInteger ("Sex");
-		sizeMod = nbt.getFloat ("Size Modifier");
-
-		familiarity = nbt.getInteger("Familiarity");
-		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
-		familiarizedToday = nbt.getBoolean("Familiarized Today");
-		
-		strengthMod = nbt.getFloat ("Strength Modifier");
-		aggressionMod = nbt.getFloat ("Aggression Modifier");
-		obedienceMod = nbt.getFloat ("Obedience Modifier");
-
-		hunger = nbt.getInteger ("Hunger");
-		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
-		nextEgg = nbt.getLong("nextEgg");
-	}
-
-	/**
-	 * Returns the item ID for the item the mob drops on death.
-	 */
-	@Override
-	protected Item getDropItem()
-	{
-		return Items.feather;
-	}
-
-	public ItemStack getEggs()
-	{
-		if(TFC_Time.getTotalTicks() >= this.nextEgg)
-		{
-			this.nextEgg = TFC_Time.getTotalTicks() + EGG_TIME;
-			return new ItemStack(TFCItems.egg, 1);
-		}
-		return null;
-	}
-
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2)
-	{
-		float ageMod = TFC_Core.getPercentGrown(this);
-		this.dropItem(Items.feather,(int) (ageMod * this.sizeMod * (5+this.rand.nextInt(10))));
-
-		if(isAdult())
-		{
-			float foodWeight = ageMod * (this.sizeMod * 40);
-			TFC_Core.animalDropMeat(this, TFCItems.chickenRaw, foodWeight);
-			this.dropItem(Items.bone, rand.nextInt(2)+1);
-		}
-	}
-
-	@Override
-	public void setGrowingAge(int par1)
-	{
-		if(!TFC_Core.preventEntityDataUpdate)
-			this.dataWatcher.updateObject(12, Integer.valueOf(par1));
-	}
-
-	@Override
-	public boolean isChild()
-	{
-		return !isAdult();
-	}
-
-	@Override
-	public EntityChicken createChild(EntityAgeable entityAgeable)
-	{
-		return (EntityChicken) createChildTFC(entityAgeable);
-	}
-
-	@Override
-	public int getBirthDay()
-	{
-		return this.dataWatcher.getWatchableObjectInt(15);
-	}
-
-	@Override
-	public int getNumberOfDaysToAdult()
-	{
-		return (int) (TFCOptions.animalTimeMultiplier * TFC_Time.daysInMonth * 4.14);
-	}
-
-	@Override
-	public boolean isAdult()
-	{
-		return getBirthDay()+getNumberOfDaysToAdult() <= TFC_Time.getTotalDays();
-	}
-
-	@Override
-	public float getSize()
-	{
-		return sizeMod;
-	}
-
-	@Override
-	public boolean isPregnant() 
-	{
-		return false;
-	}
-
-	@Override
-	public EntityLiving getEntity() 
-	{
-		return this;
-	}
-
-	@Override
-	public boolean canMateWith(IAnimal animal)
-	{
-		return animal.getGender() != this.getGender() &&this.isAdult() && animal.isAdult() &&
-				animal.getAnimalTypeID() == this.getAnimalTypeID();
-	}
-
-	@Override
-	public void mate(IAnimal otherAnimal)
-	{
-	}
-
-	@Override
-	public boolean getInLove()
-	{
-		return inLove;
-	}
-
-	@Override
-	public void setInLove(boolean b)
-	{
-		this.inLove = b;
-	}
-
-	@Override
-	public int getAnimalTypeID()
-	{
-		return Helper.stringToInt("chicken");
-	}
-
-	@Override
-	public int getHunger()
-	{
-		return hunger;
-	}
-
-	@Override
-	public void setHunger(int h)
-	{
-		hunger = h;
-	}
-
-	@Override
-	public GenderEnum getGender()
-	{
-		return GenderEnum.GENDERS[dataWatcher.getWatchableObjectInt(13)];
-	}
-
-	// This should only be called when spawning baby chickens with a spawn egg, so both size values come from the animal clicked on.
-	@Override
-	public EntityAgeable createChildTFC(EntityAgeable entityageable)
-	{
-		if (entityageable instanceof IAnimal)
-		{
-			IAnimal animal = (IAnimal) entityageable;
-			NBTTagCompound nbt = new NBTTagCompound();
-			nbt.setFloat("m_size", animal.getSize());
-			nbt.setFloat("f_size", animal.getSize());
-			return new EntityChickenTFC(worldObj, posX, posY, posZ, nbt);
-		}
-
-		return null;
-	}
-
-	@Override
-	public void setAge(int par1)
-	{
-		this.dataWatcher.updateObject(15, Integer.valueOf(par1));
-	}
-
-	/**
-	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-	 */
-	@Override
-	public boolean interact(EntityPlayer player)
-	{
-		ItemStack itemstack = player.getHeldItem();
-
-		if(!worldObj.isRemote)
-		{
-			if (isAdult() && player.isSneaking() && !isFood(itemstack) && attackEntityFrom(DamageSource.generic, 5))
-			{
-				player.inventory.addItemStackToInventory(new ItemStack(Items.feather, 1));
-				familiarity -= 4; //Plucking feathers decreases familiarity
-				return true;
-			}
-
-			if (player.isSneaking() && !familiarizedToday && canFamiliarize())
-			{
-				this.familiarize(player);
-				return true;
-			}
-		}
-
-		if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
-			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"), player)){
-				itemstack.stackSize--;
-			}
-			return true;
-		}
-		return super.interact(player);
-	}
-
-	@Override
-	public float getStrength()
-	{
-		return strengthMod;
-	}
-
-	@Override
-	public float getAggression()
-	{
-		return aggressionMod;
-	}
-
-	@Override
-	public float getObedience()
-	{
-		return obedienceMod;
-	}
-
-	@Override
-	public Vec3 getAttackedVec()
-	{
-		return null;
-	}
-
-	@Override
-	public void setAttackedVec(Vec3 attackedVec)
-	{
-	}
-
-	@Override
-	public Entity getFearSource()
-	{
-		return null;
-	}
-
-	@Override
-	public void setFearSource(Entity fearSource)
-	{
-	}
-
-	@Override
-	public int getFamiliarity() {
-		return familiarity;
-	}
-
-	@Override
-	public boolean getFamiliarizedToday()
-	{
-		return familiarizedToday;
-	}
-
-	@Override
-	public void handleFamiliarityUpdate() {
-		int totalDays = TFC_Time.getTotalDays();
-		if(lastFamiliarityUpdate < totalDays){
-			if(familiarizedToday && familiarity < 100){
-				lastFamiliarityUpdate = totalDays;
-				familiarizedToday = false;
-				float familiarityChange = 6 * obedienceMod / aggressionMod;
-				if (this.isAdult() && familiarity <= FAMILIARITY_CAP)
-				{
-					familiarity += familiarityChange;
-				}
-				else if(!this.isAdult()){
-					float ageMod = 2f/(1f + TFC_Core.getPercentGrown(this));
-					familiarity += ageMod * familiarityChange;
-					if(familiarity > 70){
-						obedienceMod *= 1.01f;
-					}
-				}
-			}
-			else if(familiarity < 30){
-				familiarity -= 2*(TFC_Time.getTotalDays() - lastFamiliarityUpdate);
-				lastFamiliarityUpdate = totalDays;
-			}
-		}
-		if(familiarity > 100)familiarity = 100;
-		if(familiarity < 0)familiarity = 0;
-	}
-	
-	@Override
-	public boolean isFood(ItemStack item) {
-		return item != null && (item.getItem() == TFCItems.wheatGrain || item.getItem() == TFCItems.oatGrain || item.getItem() == TFCItems.riceGrain ||
-				item.getItem() == TFCItems.barleyGrain || item.getItem() == TFCItems.ryeGrain || item.getItem() == TFCItems.maizeEar);
-	}
-
-	@Override
-	public void familiarize(EntityPlayer ep) {
-		ItemStack stack = ep.getHeldItem();
-		if (stack != null && isFood(stack) && !familiarizedToday && canFamiliarize())
-		{
-			if (!ep.capabilities.isCreativeMode)
-			{
-				ep.inventory.setInventorySlotContents(ep.inventory.currentItem, ((ItemFoodTFC) stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this));
-			}
-			else
-			{
-				worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
-			}
-			this.hunger += 24000;
-			familiarizedToday = true;
-			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
-			this.playLivingSound();
-		}
-	}
-	
-	@Override
-	public boolean trySetName(String name, EntityPlayer player) {
-		if (this.checkFamiliarity(InteractionEnum.NAME, player))
-		{
-			this.setCustomNameTag(name);
-			return true;
-		}
-		this.playSound(this.getHurtSound(), 6, rand.nextFloat() / 2F + (isChild() ? 1.25F : 0.75F));
-		return false;
-	}
-	
-	@Override
-	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
-		boolean flag = false;
-		switch(interaction){
-		case NAME:
-			flag = familiarity > 50;
-			break; //Set 5 higher than adult cap.
-		default: break;
-		}
-		if(!flag && player != null && !player.worldObj.isRemote){
-			TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.notFamiliar"));
-		}
-		return flag;
-	}
-
-	@Override
-	public int getDueDay()
-	{
-		return 0; // Chickens don't get pregnant
-	}
-
-	@Override
-	public boolean canFamiliarize()
-	{
-		return !isAdult() || isAdult() && this.familiarity <= FAMILIARITY_CAP;
 	}
 }

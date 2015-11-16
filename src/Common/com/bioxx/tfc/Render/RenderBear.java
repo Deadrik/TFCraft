@@ -38,7 +38,7 @@ public class RenderBear extends RenderLiving
 
 	protected void preRenderScale (EntityBear par1EntityBear, float par2)
 	{
-		GL11.glScalef(0.3f + par1EntityBear.getSize(), 0.3f + par1EntityBear.getSize(), 0.3f + par1EntityBear.getSize());
+		GL11.glScalef(0.3f + par1EntityBear.getSizeMod(), 0.3f + par1EntityBear.getSizeMod(), 0.3f + par1EntityBear.getSizeMod());
 	}
 
 

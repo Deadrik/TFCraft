@@ -39,16 +39,8 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	 */
 	public static final float[][] FLEECE_COLOR_TABLE = new float[][] {{1.0F, 1.0F, 1.0F}, {0.95F, 0.7F, 0.2F}, {0.9F, 0.5F, 0.85F}, {0.6F, 0.7F, 0.95F}, {0.9F, 0.9F, 0.2F}, {0.5F, 0.8F, 0.1F}, {0.95F, 0.7F, 0.8F}, {0.3F, 0.3F, 0.3F}, {0.6F, 0.6F, 0.6F}, {0.3F, 0.6F, 0.7F}, {0.7F, 0.4F, 0.9F}, {0.2F, 0.4F, 0.8F}, {0.5F, 0.4F, 0.3F}, {0.4F, 0.5F, 0.2F}, {0.8F, 0.3F, 0.3F}, {0.1F, 0.1F, 0.1F}};
 
-	/**
-	 * Used to control movement as well as wool regrowth. Set to 40 on handleHealthUpdate and counts down with each
-	 * tick.
-	 */
-	private int sheepTimer;
-
-	/** The eat grass AI task for this mob. */
-	private final AIEatGrass aiEatGrass = new AIEatGrass(this);
 	private static final float GESTATION_PERIOD = 5.0f;
-	//private static final float avgAdultWeight = 50; //The average weight of adult males in kg
+
 	/*
 	 * 1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
 	 * the square root of the ratio of female mass : male mass
@@ -56,6 +48,13 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	private static final float DIMORPHISM = 0.1633f;
 	private static final int DEGREE_OF_DIVERSION = 2;
 	private static final int FAMILIARITY_CAP = 35;
+	/**
+	 * Used to control movement as well as wool regrowth. Set to 40 on handleHealthUpdate and counts down with each
+	 * tick.
+	 */
+	private int sheepTimer;
+	/** The eat grass AI task for this mob. */
+	protected final AIEatGrass aiEatGrass = new AIEatGrass(this);
 
 	private long animalID;
 	private int sex;
@@ -72,9 +71,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	private float aggressionMod = 1;//How aggressive / obstinate the animal is
 	private float obedienceMod = 1; //How well the animal responds to commands.
 	private boolean inLove;
-
 	private EntityPlayer shearer;
-
 	private int familiarity;
 	private long lastFamiliarityUpdate;
 	private boolean familiarizedToday;
@@ -137,15 +134,103 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		this.posZ = ((EntityLivingBase)mother).posZ;
 
 		float invSizeRatio = 1f / (2 - DIMORPHISM);
-		sizeMod = (float)Math.sqrt(sizeMod * sizeMod * (float)Math.sqrt((mother.getSize() + fatherSize) * invSizeRatio));
-		strengthMod = (float)Math.sqrt(strengthMod * strengthMod * (float)Math.sqrt((mother.getStrength() + fatherStr) * 0.5F));
-		aggressionMod = (float)Math.sqrt(aggressionMod * aggressionMod * (float)Math.sqrt((mother.getAggression() + fatherAggro) * 0.5F));
-		obedienceMod = (float)Math.sqrt(obedienceMod * obedienceMod * (float)Math.sqrt((mother.getObedience() + fatherObed) * 0.5F));
+		sizeMod = (float)Math.sqrt(sizeMod * sizeMod * (float)Math.sqrt((mother.getSizeMod() + fatherSize) * invSizeRatio));
+		strengthMod = (float)Math.sqrt(strengthMod * strengthMod * (float)Math.sqrt((mother.getStrengthMod() + fatherStr) * 0.5F));
+		aggressionMod = (float)Math.sqrt(aggressionMod * aggressionMod * (float)Math.sqrt((mother.getAggressionMod() + fatherAggro) * 0.5F));
+		obedienceMod = (float)Math.sqrt(obedienceMod * obedienceMod * (float)Math.sqrt((mother.getObedienceMod() + fatherObed) * 0.5F));
 
 		this.familiarity = (int) (mother.getFamiliarity()<90?mother.getFamiliarity()/2:mother.getFamiliarity()*0.9f);
 
 		// We hijack the growingAge to hold the day of birth rather than number of ticks to next growth event.
 		this.setAge(TFC_Time.getTotalDays());
+	}
+
+	@Override
+	protected void applyEntityAttributes()
+	{
+		super.applyEntityAttributes();
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(400);//MaxHealth
+	}
+
+	@Override
+	public boolean canFamiliarize()
+	{
+		return !isAdult() || isAdult() && this.familiarity <= FAMILIARITY_CAP;
+	}
+
+	@Override
+	public boolean canMateWith(IAnimal animal)
+	{
+		return animal.getGender() != this.getGender() &&this.isAdult() && animal.isAdult() &&
+				animal instanceof EntitySheepTFC;
+	}
+
+	@Override
+	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player)
+	{
+		boolean flag = false;
+		switch (interaction)
+		{
+		case BREED:
+			flag = familiarity > 20;
+			break;
+		case SHEAR:
+			flag = familiarity > 10;
+			break;
+		case NAME:
+			flag = familiarity > 40;
+			break; // 5 higher than adult cap
+		default:
+			break;
+		}
+		if (!flag && player != null && !player.worldObj.isRemote)
+		{
+			TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.notFamiliar"));
+		}
+		return flag;
+	}
+
+	@Override
+	public EntitySheep createChild(EntityAgeable entityageable)
+	{
+		return (EntitySheep) createChildTFC(entityageable);
+	}
+
+	@Override
+	public EntityAgeable createChildTFC(EntityAgeable eAgeable)
+	{
+		ArrayList<Float> data = new ArrayList<Float>();
+		data.add(eAgeable.getEntityData().getFloat("MateSize"));
+		data.add(eAgeable.getEntityData().getFloat("MateStrength"));
+		data.add(eAgeable.getEntityData().getFloat("MateAggro"));
+		data.add(eAgeable.getEntityData().getFloat("MateObed"));
+		return new EntitySheepTFC(worldObj, this, data);
+	}
+
+	/**
+	 * Drop 0-2 items of this living's type
+	 */
+	@Override
+	protected void dropFewItems(boolean par1, int par2)
+	{
+		float ageMod = TFC_Core.getPercentGrown(this);
+
+		if (!this.getSheared())
+			this.entityDropItem(new ItemStack(TFCItems.sheepSkin, 1, Math.max(0, Math.min(2, (int) (ageMod * sizeMod)))), 0.0F);
+		else
+			this.entityDropItem(new ItemStack(TFCItems.hide, 1, Math.max(0, Math.min(2, (int) (ageMod * sizeMod)))), 0.0F);
+
+		this.dropItem(Items.bone, (int) ((rand.nextInt(5) + 2) * ageMod));
+
+		float foodWeight = ageMod * (this.sizeMod * 640);
+		TFC_Core.animalDropMeat(this, TFCItems.muttonRaw, foodWeight);
+	}
+
+	@Override
+	public void eatGrassBonus()
+	{
+		this.setSheared(false);
+		hunger += 24000;
 	}
 
 	@Override
@@ -159,182 +244,53 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		this.dataWatcher.addObject(23, Integer.valueOf(0)); //familiarity, familiarizedToday, pregnant, empty slot
 		this.dataWatcher.addObject(24, String.valueOf("0")); // Time of conception, stored as a string since we can't do long
 	}
-
 	@Override
-	protected void applyEntityAttributes()
+	public void familiarize(EntityPlayer ep)
 	{
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(400);//MaxHealth
-	}
-
-	@Override
-	protected void updateAITasks()
-	{
-		this.sheepTimer = this.aiEatGrass.getEatGrassTick();
-		super.updateAITasks();
-	}
-
-	private float getPercentGrown(IAnimal animal)
-	{
-		float birth = animal.getBirthDay();
-		float time = TFC_Time.getTotalDays();
-		float percent =(time-birth)/animal.getNumberOfDaysToAdult();
-		return Math.min(percent, 1f);
-	}
-
-	/**
-	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
-	 * use this to react to sunlight and start to burn.
-	 */
-	@Override
-	public void onLivingUpdate()
-	{
-		if (this.worldObj.isRemote)
-			this.sheepTimer = Math.max(0, this.sheepTimer - 1);
-
-		//Handle Hunger ticking
-		if (hunger > 168000)
-			hunger = 168000;
-		if (hunger > 0)
-			hunger--;
-
-		if(super.isInLove())
+		ItemStack stack = ep.getHeldItem();
+		if (stack != null && !familiarizedToday && this.isFood(stack) && canFamiliarize())
 		{
-			super.resetInLove();
-			setInLove(true);
-		}
-
-		this.handleFamiliarityUpdate();
-
-		syncData();
-		if(isAdult())
-			setGrowingAge(0);
-		else
-			setGrowingAge(-1);
-
-		if (!this.worldObj.isRemote && isPregnant())
-			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
+			if (!ep.capabilities.isCreativeMode)
 			{
-				int i = rand.nextInt(3) + 1;
-				for (int x = 0; x<i;x++)
-				{
-					ArrayList<Float> data = new ArrayList<Float>();
-					data.add(mateSizeMod);
-					EntitySheepTFC baby = new EntitySheepTFC(worldObj, this, data);
-					baby.setLocationAndAngles (posX+(rand.nextFloat()-0.5F)*2F,posY,posZ+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
-					baby.rotationYawHead = baby.rotationYaw;
-					baby.renderYawOffset = baby.rotationYaw;
-					worldObj.spawnEntityInWorld(baby);
-					baby.setAge(TFC_Time.getTotalDays());
-				}
-				pregnant = false;
-			}
-
-		/**
-		 * This Cancels out the changes made to growingAge by EntityAgeable
-		 * */
-		TFC_Core.preventEntityDataUpdate = true;
-		super.onLivingUpdate();
-		TFC_Core.preventEntityDataUpdate = false;
-
-		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead){
-			this.heal(1);
-		}
-		else if(hunger < 144000 && super.isInLove()){
-			this.setInLove(false);
-		}
-	}
-
-	public void syncData()
-	{
-		if(dataWatcher!= null)
-		{
-			if(!this.worldObj.isRemote)
-			{
-				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
-
-				byte[] values = {
-						TFC_Core.getByteFromSmallFloat(sizeMod),
-						TFC_Core.getByteFromSmallFloat(strengthMod),
-						TFC_Core.getByteFromSmallFloat(aggressionMod),
-						TFC_Core.getByteFromSmallFloat(obedienceMod),
-						(byte) familiarity,
-						(byte) (familiarizedToday ? 1 : 0),
-						(byte) (pregnant ? 1 : 0),
-						(byte) 0 // Empty
-				};
-				ByteBuffer buf = ByteBuffer.wrap(values);
-				this.dataWatcher.updateObject(22, buf.getInt());
-				this.dataWatcher.updateObject(23, buf.getInt());
-				this.dataWatcher.updateObject(24, String.valueOf(timeOfConception));
+				ep.inventory.setInventorySlotContents(ep.inventory.currentItem, ((ItemFoodTFC) stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this));
 			}
 			else
 			{
-				sex = this.dataWatcher.getWatchableObjectInt(13);
-				
-				ByteBuffer buf = ByteBuffer.allocate(Long.SIZE / Byte.SIZE);
-				buf.putInt(this.dataWatcher.getWatchableObjectInt(22));
-				buf.putInt(this.dataWatcher.getWatchableObjectInt(23));
-				byte[] values = buf.array();
-				
-				sizeMod = TFC_Core.getSmallFloatFromByte(values[0]);
-				strengthMod = TFC_Core.getSmallFloatFromByte(values[1]);
-				aggressionMod = TFC_Core.getSmallFloatFromByte(values[2]);
-				obedienceMod = TFC_Core.getSmallFloatFromByte(values[3]);
-				
-				familiarity = values[4];
-				familiarizedToday = values[5] == 1;
-				pregnant = values[6] == 1;
-				
-				try
-				{
-					timeOfConception = Long.parseLong(this.dataWatcher.getWatchableObjectString(24));
-				} catch (NumberFormatException e){}
+				worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			}
+			this.hunger += 24000;
+			familiarizedToday = true;
+			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
+			this.playLivingSound();
 		}
 	}
 
 	@Override
-	public void eatGrassBonus()
+	public float getAggressionMod()
 	{
-		this.setSheared(false);
-		hunger += 24000;
+		return aggressionMod;
 	}
 
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2)
+	public long getAnimalID()
 	{
-		float ageMod = TFC_Core.getPercentGrown(this);
-
-		if(!this.getSheared())
-			this.entityDropItem(new ItemStack(TFCItems.sheepSkin,1,Math.max(0,Math.min(2,(int)(ageMod * sizeMod)))), 0.0F);
-		else
-			this.entityDropItem(new ItemStack(TFCItems.hide, 1, Math.max(0, Math.min(2, (int)(ageMod * sizeMod)))), 0.0F);
-
-		this.dropItem(Items.bone, (int)((rand.nextInt(5) + 2) * ageMod));
-
-		float foodWeight = ageMod * (this.sizeMod * 640);
-		TFC_Core.animalDropMeat(this, TFCItems.muttonRaw, foodWeight);
+		return animalID;
 	}
 
 	@Override
-	public boolean isBreedingItem(ItemStack par1ItemStack)
+	public int getAnimalTypeID()
 	{
-		return false;
+		return Helper.stringToInt("sheep");
+	}
+	@Override
+	public Vec3 getAttackedVec()
+	{
+		return null;
 	}
 
-	public boolean isBreedingItemTFC(ItemStack item)
-	{
-		return !pregnant && isFood(item);
-	}
-	
 	@Override
-	public boolean isFood(ItemStack item) {
-		return item != null && (item.getItem() == TFCItems.wheatGrain ||item.getItem() == TFCItems.oatGrain||item.getItem() == TFCItems.riceGrain||
-				item.getItem() == TFCItems.barleyGrain||item.getItem() == TFCItems.ryeGrain||item.getItem() == TFCItems.maizeEar);
+	public int getBirthDay()
+	{
+		return this.dataWatcher.getWatchableObjectInt(15);
 	}
 
 	/**
@@ -344,6 +300,153 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	protected Item getDropItem()
 	{
 		return TFCItems.wool;
+	}
+
+	@Override
+	public int getDueDay()
+	{
+		return TFC_Time.getDayFromTotalHours((timeOfConception + pregnancyRequiredTime) / 1000);
+	}
+
+	@Override
+	public EntityLiving getEntity()
+	{
+		return this;
+	}
+
+	@Override
+	public int getFamiliarity()
+	{
+		return familiarity;
+	}
+
+	@Override
+	public boolean getFamiliarizedToday()
+	{
+		return familiarizedToday;
+	}
+
+	@Override
+	public Entity getFearSource()
+	{
+		return null;
+	}
+
+	@Override
+	public GenderEnum getGender()
+	{
+		return GenderEnum.GENDERS[dataWatcher.getWatchableObjectInt(13)];
+	}
+
+	@Override
+	public int getHunger()
+	{
+		return hunger;
+	}
+
+	@Override
+	public boolean getInLove()
+	{
+		return inLove;
+	}
+
+	public long getLastFamiliarityUpdate()
+	{
+		return lastFamiliarityUpdate;
+	}
+
+	@Override
+	public int getNumberOfDaysToAdult()
+	{
+		return (int) (TFCOptions.animalTimeMultiplier * TFC_Time.daysInMonth * 12);
+	}
+
+	@Override
+	public float getObedienceMod()
+	{
+		return obedienceMod;
+	}
+
+	private float getPercentGrown(IAnimal animal)
+	{
+		float birth = animal.getBirthDay();
+		float time = TFC_Time.getTotalDays();
+		float percent = (time - birth) / animal.getNumberOfDaysToAdult();
+		return Math.min(percent, 1f);
+	}
+
+	public int getPregnancyRequiredTime()
+	{
+		return pregnancyRequiredTime;
+	}
+
+	public int getSex()
+	{
+		return sex;
+	}
+
+	public EntityPlayer getShearer()
+	{
+		return shearer;
+	}
+	
+	public int getSheepTimer()
+	{
+		return sheepTimer;
+	}
+
+	@Override
+	public float getSizeMod()
+	{
+		return sizeMod;
+	}
+
+	@Override
+	public float getStrengthMod()
+	{
+		return strengthMod;
+	}
+
+	public long getTimeOfConception()
+	{
+		return timeOfConception;
+	}
+
+	@Override
+	public void handleFamiliarityUpdate()
+	{
+		int totalDays = TFC_Time.getTotalDays();
+		if (lastFamiliarityUpdate < totalDays)
+		{
+			if (familiarizedToday && familiarity < 100)
+			{
+				lastFamiliarityUpdate = totalDays;
+				familiarizedToday = false;
+				float familiarityChange = 6 * obedienceMod / aggressionMod;
+				if (this.isAdult() && familiarity <= FAMILIARITY_CAP)
+				{
+					familiarity += familiarityChange;
+				}
+				else if (!this.isAdult())
+				{
+					float ageMod = 2f / (1f + TFC_Core.getPercentGrown(this));
+					familiarity += ageMod * familiarityChange;
+					if (familiarity > 70)
+					{
+						obedienceMod *= 1.01f;
+					}
+				}
+			}
+			else if (familiarity < 30)
+			{
+				familiarity -= 2 * (TFC_Time.getTotalDays() - lastFamiliarityUpdate);
+				lastFamiliarityUpdate = totalDays;
+			}
+		}
+		if (familiarity > 100)
+			familiarity = 100;
+		if (familiarity < 0)
+			familiarity = 0;
 	}
 
 	/**
@@ -407,69 +510,126 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		}
 	}
 
-	/**
-	 * (abstract) Protected helper method to write subclass entity data to NBT.
-	 */
 	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt)
+	public boolean isAdult()
 	{
-		super.writeEntityToNBT(nbt);
-		nbt.setInteger ("Sex", sex);
-		nbt.setLong ("Animal ID", animalID);
-		nbt.setFloat ("Size Modifier", sizeMod);
-
-		nbt.setInteger("Familiarity", familiarity);
-		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);
-		nbt.setBoolean("Familiarized Today", familiarizedToday);
-
-		nbt.setFloat ("Strength Modifier", strengthMod);
-		nbt.setFloat ("Aggression Modifier", aggressionMod);
-		nbt.setFloat ("Obedience Modifier", obedienceMod);
-
-		nbt.setInteger ("Hunger", hunger);
-		nbt.setBoolean("Pregnant", pregnant);
-		nbt.setFloat("MateSize", mateSizeMod);
-		nbt.setFloat("MateStrength", mateStrengthMod);
-		nbt.setFloat("MateAggro", mateAggroMod);
-		nbt.setFloat("MateObed", mateObedMod);
-		nbt.setLong("ConceptionTime",timeOfConception);
-		nbt.setInteger("Age", getBirthDay());
+		return getBirthDay() + getNumberOfDaysToAdult() <= TFC_Time.getTotalDays();
 	}
 
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
 	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt)
+	public boolean isBreedingItem(ItemStack par1ItemStack)
 	{
-		super.readEntityFromNBT(nbt);
-		animalID = nbt.getLong ("Animal ID");
-		sex = nbt.getInteger ("Sex");
-		sizeMod = nbt.getFloat ("Size Modifier");
+		return false;
+	}
 
-		strengthMod = nbt.getFloat ("Strength Modifier");
-		aggressionMod = nbt.getFloat ("Aggression Modifier");
-		obedienceMod = nbt.getFloat ("Obedience Modifier");
+	public boolean isBreedingItemTFC(ItemStack item)
+	{
+		return !pregnant && isFood(item);
+	}
 
-		familiarity = nbt.getInteger("Familiarity");
-		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
-		familiarizedToday = nbt.getBoolean("Familiarized Today");
+	@Override
+	public boolean isChild()
+	{
+		return !isAdult();
+	}
 
-		hunger = nbt.getInteger ("Hunger");
-		pregnant = nbt.getBoolean("Pregnant");
-		mateSizeMod = nbt.getFloat("MateSize");
-		mateStrengthMod = nbt.getFloat("MateStrength");
-		mateAggroMod = nbt.getFloat("MateAggro");
-		mateObedMod = nbt.getFloat("MateObed");
-		timeOfConception = nbt.getLong("ConceptionTime");
-		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
-		this.setAge(nbt.getInteger ("Age"));
+	@Override
+	public boolean isFood(ItemStack item)
+	{
+		return item != null && (item.getItem() == TFCItems.wheatGrain ||item.getItem() == TFCItems.oatGrain || item.getItem() == TFCItems.riceGrain ||
+								item.getItem() == TFCItems.barleyGrain || item.getItem() == TFCItems.ryeGrain || item.getItem() == TFCItems.maizeEar);
+	}
+
+	@Override
+	public boolean isPregnant()
+	{
+		return pregnant;
 	}
 
 	@Override
 	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z)
 	{
-		return !getSheared() && isAdult() && shearer != null && checkFamiliarity(InteractionEnum.SHEAR,shearer);
+		return !getSheared() && isAdult() && shearer != null && checkFamiliarity(InteractionEnum.SHEAR, shearer);
+	}
+
+	@Override
+	public void mate(IAnimal otherAnimal)
+	{
+		if (getGender() == GenderEnum.MALE)
+		{
+			otherAnimal.mate(this);
+			return;
+		}
+		timeOfConception = TFC_Time.getTotalTicks();
+		pregnant = true;
+		resetInLove();
+		otherAnimal.setInLove(false);
+		mateSizeMod = otherAnimal.getSizeMod();
+	}
+
+	/**
+	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
+	 * use this to react to sunlight and start to burn.
+	 */
+	@Override
+	public void onLivingUpdate()
+	{
+		if (this.worldObj.isRemote)
+			this.sheepTimer = Math.max(0, this.sheepTimer - 1);
+
+		//Handle Hunger ticking
+		if (hunger > 168000)
+			hunger = 168000;
+		if (hunger > 0)
+			hunger--;
+
+		if (super.isInLove())
+		{
+			super.resetInLove();
+			setInLove(true);
+		}
+
+		this.handleFamiliarityUpdate();
+
+		syncData();
+		if (isAdult())
+			setGrowingAge(0);
+		else
+			setGrowingAge(-1);
+
+		if (!this.worldObj.isRemote && isPregnant())
+			if (TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
+			{
+				int i = rand.nextInt(3) + 1;
+				for (int x = 0; x < i; x++)
+				{
+					ArrayList<Float> data = new ArrayList<Float>();
+					data.add(mateSizeMod);
+					EntitySheepTFC baby = new EntitySheepTFC(worldObj, this, data);
+					baby.setLocationAndAngles(posX + (rand.nextFloat() - 0.5F) * 2F, posY, posZ + (rand.nextFloat() - 0.5F) * 2F, 0.0F, 0.0F);
+					baby.rotationYawHead = baby.rotationYaw;
+					baby.renderYawOffset = baby.rotationYaw;
+					worldObj.spawnEntityInWorld(baby);
+					baby.setAge(TFC_Time.getTotalDays());
+				}
+				pregnant = false;
+			}
+
+		/**
+		 * This Cancels out the changes made to growingAge by EntityAgeable
+		 * */
+		TFC_Core.preventEntityDataUpdate = true;
+		super.onLivingUpdate();
+		TFC_Core.preventEntityDataUpdate = false;
+
+		if (hunger > 144000 && rand.nextInt(100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead)
+		{
+			this.heal(1);
+		}
+		else if (hunger < 144000 && super.isInLove())
+		{
+			this.setInLove(false);
+		}
 	}
 
 	@Override
@@ -487,128 +647,34 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		return ret;
 	}
 
+	/**
+	 * (abstract) Protected helper method to read subclass entity data from NBT.
+	 */
 	@Override
-	public void setGrowingAge(int par1)
+	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
-		if(!TFC_Core.preventEntityDataUpdate)
-			this.dataWatcher.updateObject(12, Integer.valueOf(par1));
-	}
+		super.readEntityFromNBT(nbt);
+		animalID = nbt.getLong("Animal ID");
+		sex = nbt.getInteger("Sex");
+		sizeMod = nbt.getFloat("Size Modifier");
 
-	@Override
-	public boolean isChild()
-	{
-		return !isAdult();
-	}
+		strengthMod = nbt.getFloat("Strength Modifier");
+		aggressionMod = nbt.getFloat("Aggression Modifier");
+		obedienceMod = nbt.getFloat("Obedience Modifier");
 
-	@Override
-	public EntitySheep createChild(EntityAgeable entityageable)
-	{
-		return (EntitySheep) createChildTFC(entityageable);
-	}
+		familiarity = nbt.getInteger("Familiarity");
+		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
+		familiarizedToday = nbt.getBoolean("Familiarized Today");
 
-	@Override
-	public int getBirthDay()
-	{
-		return this.dataWatcher.getWatchableObjectInt(15);
-	}
-
-	@Override
-	public int getNumberOfDaysToAdult()
-	{
-		return (int) (TFCOptions.animalTimeMultiplier * TFC_Time.daysInMonth * 12);
-	}
-
-	@Override
-	public boolean isAdult()
-	{
-		return getBirthDay()+getNumberOfDaysToAdult() <= TFC_Time.getTotalDays();
-	}
-
-	@Override
-	public float getSize()
-	{
-		return sizeMod;
-	}
-
-	@Override
-	public boolean isPregnant()
-	{
-		return pregnant;
-	}
-
-	@Override
-	public EntityLiving getEntity()
-	{
-		return this;
-	}
-
-	@Override
-	public boolean canMateWith(IAnimal animal)
-	{
-		return animal.getGender() != this.getGender() &&this.isAdult() && animal.isAdult() &&
-				animal instanceof EntitySheepTFC;
-	}
-
-	@Override
-	public void mate(IAnimal otherAnimal)
-	{
-		if (getGender() == GenderEnum.MALE)
-		{
-			otherAnimal.mate(this);
-			return;
-		}
-		timeOfConception = TFC_Time.getTotalTicks();
-		pregnant = true;
-		resetInLove();
-		otherAnimal.setInLove(false);
-		mateSizeMod = otherAnimal.getSize();
-	}
-
-	@Override
-	public boolean getInLove()
-	{
-		return inLove;
-	}
-
-	@Override
-	public void setInLove(boolean b)
-	{
-		this.inLove = b;
-	}
-
-	@Override
-	public int getAnimalTypeID()
-	{
-		return Helper.stringToInt("sheep");
-	}
-
-	@Override
-	public int getHunger()
-	{
-		return hunger;
-	}
-
-	@Override
-	public void setHunger(int h)
-	{
-		hunger = h;
-	}
-
-	@Override
-	public GenderEnum getGender()
-	{
-		return GenderEnum.GENDERS[dataWatcher.getWatchableObjectInt(13)];
-	}
-
-	@Override
-	public EntityAgeable createChildTFC(EntityAgeable eAgeable)
-	{
-		ArrayList<Float> data = new ArrayList<Float>();
-		data.add(eAgeable.getEntityData().getFloat("MateSize"));
-		data.add(eAgeable.getEntityData().getFloat("MateStrength"));
-		data.add(eAgeable.getEntityData().getFloat("MateAggro"));
-		data.add(eAgeable.getEntityData().getFloat("MateObed"));
-		return new EntitySheepTFC(worldObj, this, data);
+		hunger = nbt.getInteger("Hunger");
+		pregnant = nbt.getBoolean("Pregnant");
+		mateSizeMod = nbt.getFloat("MateSize");
+		mateStrengthMod = nbt.getFloat("MateStrength");
+		mateAggroMod = nbt.getFloat("MateAggro");
+		mateObedMod = nbt.getFloat("MateObed");
+		timeOfConception = nbt.getLong("ConceptionTime");
+		this.dataWatcher.updateObject(15, nbt.getInteger("Age"));
+		this.setAge(nbt.getInteger("Age"));
 	}
 
 	@Override
@@ -618,104 +684,158 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	}
 
 	@Override
-	public float getStrength()
+	public void setAggressionMod(float aggressionMod)
 	{
-		return strengthMod;
+		this.aggressionMod = aggressionMod;
 	}
 
-	@Override
-	public float getAggression()
+	public void setAnimalID(long animalID)
 	{
-		return aggressionMod;
-	}
-
-	@Override
-	public float getObedience()
-	{
-		return obedienceMod;
-	}
-
-	@Override
-	public Vec3 getAttackedVec()
-	{
-		return null;
+		this.animalID = animalID;
 	}
 
 	@Override
 	public void setAttackedVec(Vec3 attackedVec)
 	{
-		// TODO Auto-generated method stub
+		// None
 	}
 
 	@Override
-	public Entity getFearSource()
+	public void setBirthDay(int day)
 	{
-		return null;
+		this.dataWatcher.updateObject(15, day);
+	}
+
+	@Override
+	public void setFamiliarity(int familiarity)
+	{
+		this.familiarity = familiarity;
+	}
+
+	public void setFamiliarizedToday(boolean familiarizedToday)
+	{
+		this.familiarizedToday = familiarizedToday;
 	}
 
 	@Override
 	public void setFearSource(Entity fearSource)
 	{
-		// TODO Auto-generated method stub
+		// None
 	}
 
 	@Override
-	public int getFamiliarity() {
-		return familiarity;
-	}
-
-	@Override
-	public boolean getFamiliarizedToday()
+	public void setGrowingAge(int par1)
 	{
-		return familiarizedToday;
+		if (!TFC_Core.preventEntityDataUpdate)
+			this.dataWatcher.updateObject(12, Integer.valueOf(par1));
 	}
 
 	@Override
-	public void handleFamiliarityUpdate() {
-		int totalDays = TFC_Time.getTotalDays();
-		if(lastFamiliarityUpdate < totalDays){
-			if(familiarizedToday && familiarity < 100){
-				lastFamiliarityUpdate = totalDays;
-				familiarizedToday = false;
-				float familiarityChange = 6 * obedienceMod / aggressionMod;
-				if (this.isAdult() && familiarity <= FAMILIARITY_CAP)
-				{
-					familiarity += familiarityChange;
-				}
-				else if(!this.isAdult()){
-					float ageMod = 2f/(1f + TFC_Core.getPercentGrown(this));
-					familiarity += ageMod * familiarityChange;
-					if(familiarity > 70){
-						obedienceMod *= 1.01f;
-					}
-				}
-			}
-			else if(familiarity < 30){
-				familiarity -= 2*(TFC_Time.getTotalDays() - lastFamiliarityUpdate);
-				lastFamiliarityUpdate = totalDays;
-			}
-		}
-		if(familiarity > 100)familiarity = 100;
-		if(familiarity < 0)familiarity = 0;
+	public void setHunger(int h)
+	{
+		hunger = h;
 	}
 
 	@Override
-	public void familiarize(EntityPlayer ep) {
-		ItemStack stack = ep.getHeldItem();
-		if (stack != null && !familiarizedToday && this.isFood(stack) && canFamiliarize())
+	public void setInLove(boolean b)
+	{
+		this.inLove = b;
+	}
+
+	public void setLastFamiliarityUpdate(long lastFamiliarityUpdate)
+	{
+		this.lastFamiliarityUpdate = lastFamiliarityUpdate;
+	}
+
+	@Override
+	public void setObedienceMod(float obedienceMod)
+	{
+		this.obedienceMod = obedienceMod;
+	}
+
+	public void setPregnancyRequiredTime(int pregnancyRequiredTime)
+	{
+		this.pregnancyRequiredTime = pregnancyRequiredTime;
+	}
+
+	public void setPregnant(boolean pregnant)
+	{
+		this.pregnant = pregnant;
+	}
+
+	public void setSex(int sex)
+	{
+		this.sex = sex;
+	}
+
+	public void setShearer(EntityPlayer shearer)
+	{
+		this.shearer = shearer;
+	}
+
+	public void setSheepTimer(int sheepTimer)
+	{
+		this.sheepTimer = sheepTimer;
+	}
+
+	@Override
+	public void setSizeMod(float sizeMod)
+	{
+		this.sizeMod = sizeMod;
+	}
+
+	@Override
+	public void setStrengthMod(float strengthMod)
+	{
+		this.strengthMod = strengthMod;
+	}
+
+	public void setTimeOfConception(long timeOfConception)
+	{
+		this.timeOfConception = timeOfConception;
+	}
+
+	public void syncData()
+	{
+		if (dataWatcher != null)
 		{
-			if (!ep.capabilities.isCreativeMode)
+			if (!this.worldObj.isRemote)
 			{
-				ep.inventory.setInventorySlotContents(ep.inventory.currentItem, ((ItemFoodTFC) stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this));
+				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
+
+				byte[] values = { TFC_Core.getByteFromSmallFloat(sizeMod), TFC_Core.getByteFromSmallFloat(strengthMod), TFC_Core.getByteFromSmallFloat(aggressionMod), TFC_Core.getByteFromSmallFloat(obedienceMod), (byte) familiarity, (byte) (familiarizedToday
+						? 1 : 0), (byte) (pregnant ? 1 : 0), (byte) 0 // Empty
+				};
+				ByteBuffer buf = ByteBuffer.wrap(values);
+				this.dataWatcher.updateObject(22, buf.getInt());
+				this.dataWatcher.updateObject(23, buf.getInt());
+				this.dataWatcher.updateObject(24, String.valueOf(timeOfConception));
 			}
 			else
 			{
-				worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
+				sex = this.dataWatcher.getWatchableObjectInt(13);
+
+				ByteBuffer buf = ByteBuffer.allocate(Long.SIZE / Byte.SIZE);
+				buf.putInt(this.dataWatcher.getWatchableObjectInt(22));
+				buf.putInt(this.dataWatcher.getWatchableObjectInt(23));
+				byte[] values = buf.array();
+
+				sizeMod = TFC_Core.getSmallFloatFromByte(values[0]);
+				strengthMod = TFC_Core.getSmallFloatFromByte(values[1]);
+				aggressionMod = TFC_Core.getSmallFloatFromByte(values[2]);
+				obedienceMod = TFC_Core.getSmallFloatFromByte(values[3]);
+
+				familiarity = values[4];
+				familiarizedToday = values[5] == 1;
+				pregnant = values[6] == 1;
+
+				try
+				{
+					timeOfConception = Long.parseLong(this.dataWatcher.getWatchableObjectString(24));
+				} catch (NumberFormatException e)
+				{
+				}
 			}
-			this.hunger += 24000;
-			familiarizedToday = true;
-			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
-			this.playLivingSound();
 		}
 	}
 
@@ -731,31 +851,38 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	}
 
 	@Override
-	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
-		boolean flag = false;
-		switch(interaction){
-		case BREED: flag = familiarity > 20;break;
-		case SHEAR: flag = familiarity > 10;break;
-		case NAME:
-			flag = familiarity > 40;
-			break; // 5 higher than adult cap
-		default: break;
-		}
-		if(!flag && player != null && !player.worldObj.isRemote){
-			TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.notFamiliar"));
-		}
-		return flag;
+	protected void updateAITasks()
+	{
+		this.sheepTimer = this.aiEatGrass.getEatGrassTick();
+		super.updateAITasks();
 	}
 
+	/**
+	 * (abstract) Protected helper method to write subclass entity data to NBT.
+	 */
 	@Override
-	public int getDueDay()
+	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
-		return TFC_Time.getDayFromTotalHours((timeOfConception + pregnancyRequiredTime) / 1000);
-	}
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger("Sex", sex);
+		nbt.setLong("Animal ID", animalID);
+		nbt.setFloat("Size Modifier", sizeMod);
 
-	@Override
-	public boolean canFamiliarize()
-	{
-		return !isAdult() || isAdult() && this.familiarity <= FAMILIARITY_CAP;
+		nbt.setInteger("Familiarity", familiarity);
+		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);
+		nbt.setBoolean("Familiarized Today", familiarizedToday);
+
+		nbt.setFloat("Strength Modifier", strengthMod);
+		nbt.setFloat("Aggression Modifier", aggressionMod);
+		nbt.setFloat("Obedience Modifier", obedienceMod);
+
+		nbt.setInteger("Hunger", hunger);
+		nbt.setBoolean("Pregnant", pregnant);
+		nbt.setFloat("MateSize", mateSizeMod);
+		nbt.setFloat("MateStrength", mateStrengthMod);
+		nbt.setFloat("MateAggro", mateAggroMod);
+		nbt.setFloat("MateObed", mateObedMod);
+		nbt.setLong("ConceptionTime", timeOfConception);
+		nbt.setInteger("Age", getBirthDay());
 	}
 }

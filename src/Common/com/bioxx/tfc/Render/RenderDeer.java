@@ -49,7 +49,7 @@ public class RenderDeer extends RenderLiving
 
 	protected void preRenderScale (EntityDeer par1EntityDeer, float par2)
 	{
-		GL11.glScalef(par1EntityDeer.getSize() - 0.3f, par1EntityDeer.getSize() - 0.3f, par1EntityDeer.getSize() - 0.3f);
+		GL11.glScalef(par1EntityDeer.getSizeMod() - 0.3f, par1EntityDeer.getSizeMod() - 0.3f, par1EntityDeer.getSizeMod() - 0.3f);
 	}
 
 	/**

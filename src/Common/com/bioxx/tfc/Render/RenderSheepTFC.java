@@ -49,7 +49,7 @@ public class RenderSheepTFC extends RenderSheep
 	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
 	{
-		float scale = ((EntitySheepTFC) par1EntityLivingBase).getSize() / 2 + 0.5f;
+		float scale = ((EntitySheepTFC) par1EntityLivingBase).getSizeMod() / 2 + 0.5f;
 		GL11.glScalef(scale, scale, scale);
 	}
 

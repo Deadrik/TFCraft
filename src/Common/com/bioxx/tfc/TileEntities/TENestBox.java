@@ -249,8 +249,8 @@ public class TENestBox extends TileEntity implements IInventory
 	public NBTTagCompound createGenes(EntityChickenTFC mother, EntityChickenTFC father)
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.setFloat("m_size", mother.getSize());
-		nbt.setFloat("f_size", father.getSize());
+		nbt.setFloat("m_size", mother.getSizeMod());
+		nbt.setFloat("f_size", father.getSizeMod());
 		return nbt;
 	}
 

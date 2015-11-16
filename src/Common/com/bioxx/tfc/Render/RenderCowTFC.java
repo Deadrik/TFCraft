@@ -49,7 +49,7 @@ public class RenderCowTFC extends RenderCow
 	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
 	{
-		float scale = ((EntityCowTFC) par1EntityLivingBase).getSize();
+		float scale = ((EntityCowTFC) par1EntityLivingBase).getSizeMod();
 		GL11.glScalef(scale, scale, scale);
 	}
 
