@@ -76,7 +76,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	protected EntityAITargetNonTamedTFC targetCow;
 	protected EntityAITargetNonTamedTFC targetDeer;
 	protected EntityAITargetNonTamedTFC targetHorse;
-	private boolean isPeacefulAI;
+	private boolean peacefulAI;
 
 	public EntityWolfTFC(World par1World)
 	{
@@ -95,7 +95,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		this.targetHorse = new EntityAITargetNonTamedTFC(this, EntityHorseTFC.class, 200, false);
 		if (this.worldObj.difficultySetting != EnumDifficulty.PEACEFUL)
 		{
-			isPeacefulAI = false;
+			peacefulAI = false;
 			this.targetTasks.addTask(7, targetChicken);
 			this.targetTasks.addTask(7, targetPheasant);
 			this.targetTasks.addTask(7, targetPig);
@@ -104,7 +104,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 			this.targetTasks.addTask(7, targetHorse);
 		}
 		else
-			isPeacefulAI = true;
+			peacefulAI = true;
 
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
@@ -608,7 +608,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 
 	public boolean isPeacefulAI()
 	{
-		return isPeacefulAI;
+		return peacefulAI;
 	}
 
 	@Override
@@ -751,9 +751,9 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		super.onUpdate();
 		if (!this.worldObj.isRemote)
 		{
-			if (!isPeacefulAI && this.worldObj.difficultySetting == EnumDifficulty.PEACEFUL)
+			if (!peacefulAI && this.worldObj.difficultySetting == EnumDifficulty.PEACEFUL)
 			{
-				isPeacefulAI = true;
+				peacefulAI = true;
 				this.targetTasks.removeTask(targetChicken);
 				this.targetTasks.removeTask(targetPheasant);
 				this.targetTasks.removeTask(targetPig);
@@ -761,9 +761,9 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 				this.targetTasks.removeTask(targetDeer);
 				this.targetTasks.removeTask(targetHorse);
 			}
-			else if (isPeacefulAI && this.worldObj.difficultySetting != EnumDifficulty.PEACEFUL)
+			else if (peacefulAI && this.worldObj.difficultySetting != EnumDifficulty.PEACEFUL)
 			{
-				isPeacefulAI = false;
+				peacefulAI = false;
 				this.targetTasks.addTask(7, targetChicken);
 				this.targetTasks.addTask(7, targetPheasant);
 				this.targetTasks.addTask(7, targetPig);
@@ -890,7 +890,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 
 	public void setPeacefulAI(boolean isPeacefulAI)
 	{
-		this.isPeacefulAI = isPeacefulAI;
+		this.peacefulAI = isPeacefulAI;
 	}
 
 	public void setPregnancyRequiredTime(int pregnancyRequiredTime)

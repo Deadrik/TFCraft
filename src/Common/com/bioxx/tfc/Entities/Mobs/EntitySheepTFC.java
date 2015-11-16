@@ -367,14 +367,6 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		return obedienceMod;
 	}
 
-	private float getPercentGrown(IAnimal animal)
-	{
-		float birth = animal.getBirthDay();
-		float time = TFC_Time.getTotalDays();
-		float percent = (time - birth) / animal.getNumberOfDaysToAdult();
-		return Math.min(percent, 1f);
-	}
-
 	public int getPregnancyRequiredTime()
 	{
 		return pregnancyRequiredTime;

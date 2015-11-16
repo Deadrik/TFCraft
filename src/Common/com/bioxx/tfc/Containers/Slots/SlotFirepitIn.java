@@ -26,8 +26,8 @@ public class SlotFirepitIn extends Slot
 	public boolean isItemValid(ItemStack is)
 	{
 		HeatRegistry manager = HeatRegistry.getInstance();
-		return (is.getItem() == TFCItems.fireStarter ||
-				is.getItem() == TFCItems.flintSteel) ||
+		return is.getItem() == TFCItems.fireStarter ||
+				is.getItem() == TFCItems.flintSteel ||
 				!(manager.findMatchingIndex(is) == null ||
 					is.getItem() instanceof ItemOre);
 	}

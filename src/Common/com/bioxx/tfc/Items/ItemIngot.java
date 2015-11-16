@@ -389,7 +389,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	{
 		// hot or worked ingots cannot stack
 		if (is.hasTagCompound() && (TFC_ItemHeat.hasTemp(is) ||
-									(is.getTagCompound().hasKey("itemCraftingValue") && is.getTagCompound().getShort("itemCraftingValue") != 0)))
+									is.getTagCompound().hasKey("itemCraftingValue") && is.getTagCompound().getShort("itemCraftingValue") != 0))
 		{
 			return 1;
 		}

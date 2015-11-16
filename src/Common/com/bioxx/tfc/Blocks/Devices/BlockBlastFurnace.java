@@ -80,11 +80,8 @@ public class BlockBlastFurnace extends BlockTerraContainer
 	
 	public boolean checkStackAt(World world, int x, int y, int z)
 	{
-		if (checkBlock(world, x + 1, y, z, x, z) && checkBlock(world, x - 1, y, z, x, z) && checkBlock(world, x, y, z + 1, x, z) &&
-			checkBlock(world, x, y, z - 1, x, z) && (world.isAirBlock(x, y, z) || world.getBlock(x, y, z) == TFCBlocks.molten))
-			return true;
-
-		return false;
+		return checkBlock(world, x + 1, y, z, x, z) &&checkBlock(world, x - 1, y, z, x, z) && checkBlock(world, x, y, z + 1, x, z) &&
+				checkBlock(world, x, y, z - 1, x, z) && (world.isAirBlock(x, y, z) || world.getBlock(x, y, z) == TFCBlocks.molten);
 	}
 
 	public boolean checkBlock(World world, int x, int y, int z, int stackX, int stackZ)

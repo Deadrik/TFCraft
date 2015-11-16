@@ -62,10 +62,7 @@ public class TEForge extends TEFireEntity implements IInventory
 
 	private boolean checkChimney(int x, int y, int z)
 	{
-		if (notOpaque(x, y, z) && worldObj.canBlockSeeTheSky(x, y, z))
-			return true;
-
-		return false;
+		return notOpaque(x, y, z) && worldObj.canBlockSeeTheSky(x, y, z);
 	}
 
 	private boolean notOpaque(int x, int y, int z)

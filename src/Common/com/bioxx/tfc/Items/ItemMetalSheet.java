@@ -200,7 +200,7 @@ public class ItemMetalSheet extends ItemTerra implements ISmeltable
 	{
 		// hot or worked sheets cannot stack
 		if (is.hasTagCompound() && (TFC_ItemHeat.hasTemp(is) ||
-									(is.getTagCompound().hasKey("itemCraftingValue") && is.getTagCompound().getShort("itemCraftingValue") != 0)))
+									is.getTagCompound().hasKey("itemCraftingValue") && is.getTagCompound().getShort("itemCraftingValue") != 0))
 		{
 			return 1;
 		}

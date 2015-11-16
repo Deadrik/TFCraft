@@ -70,18 +70,15 @@ public class Food
 
 	public static boolean areEqual(ItemStack is1, ItemStack is2)
 	{
-		if (isBrined(is1) != isBrined(is2) ||
-			isPickled(is1) != isPickled(is2) ||
-			isCooked(is1) != isCooked(is2) ||
-			isDried(is1) != isDried(is2) ||
-			isSmoked(is1) != isSmoked(is2) ||
-			(isSmoked(is1) && isSmoked(is2) && !isSameSmoked(is1, is2)) ||
-			isSalted(is1) != isSalted(is2) ||
-			isInfused(is1) != isInfused(is2) ||
-			(isInfused(is1) && isInfused(is2) && !getInfusion(is1).equals(getInfusion(is2))))
-			return false;
-
-		return true;
+		return isBrined(is1) == isBrined(is2) &&
+				isPickled(is1) == isPickled(is2) &&
+				isCooked(is1) == isCooked(is2) &&
+				isDried(is1) == isDried(is2) &&
+				isSalted(is1) == isSalted(is2) &&
+				(isInfused(is1) && isInfused(is2) && getInfusion(is1).equals(getInfusion(is2)) ||
+					!isInfused(is1) && !isInfused(is2)) &&
+				(isSmoked(is1) && isSmoked(is2) && isSameSmoked(is1, is2) ||
+					!isSmoked(is1) && !isSmoked(is2));
 	}
 
 	public static boolean isBrined(ItemStack is)
