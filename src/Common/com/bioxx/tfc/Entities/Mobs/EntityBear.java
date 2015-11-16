@@ -89,7 +89,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	{
 		super (par1World);
 		setSize (1.2F, 1.2F);
-		moveSpeed = 0.2F;
+		moveSpeed = 0.4F;
 		getNavigator ().setAvoidsWater (true);
 		tasks.addTask (1, new EntityAISwimming (this));
 		sizeMod = (float) Math.sqrt((rand.nextInt(rand.nextInt((DEGREE_OF_DIVERSION + 1) * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + 1F) *
@@ -112,7 +112,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		this.targetDeer = new EntityAITargetNonTamedTFC(this, EntityDeer.class, 200, false);
 		this.targetPig = new EntityAITargetNonTamedTFC(this, EntityPigTFC.class, 200, false);
 		this.targetHorse = new EntityAITargetNonTamedTFC(this, EntityHorseTFC.class, 200, false);
-		this.targetPlayer = new EntityAITargetNonTamedTFC(this, EntityPlayer.class, 200, false);
+		this.targetPlayer = new EntityAITargetNonTamedTFC(this, EntityPlayer.class, 20, false);
 		this.hurtAI = new EntityAIHurtByTarget(this, true);
 
 		if (par1World.difficultySetting != EnumDifficulty.PEACEFUL)
