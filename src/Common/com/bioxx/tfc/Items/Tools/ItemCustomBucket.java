@@ -10,6 +10,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 
 import cpw.mods.fml.common.eventhandler.Event;
@@ -78,7 +79,7 @@ public class ItemCustomBucket extends ItemTerra
 						return is;
 
 					FillBucketEvent event = new FillBucketEvent(player, is, world, mop);
-					if (event.isCanceled())
+					if (MinecraftForge.EVENT_BUS.post(event) || event.isCanceled())
 						return is;
 
 					if (event.getResult() == Event.Result.ALLOW)
