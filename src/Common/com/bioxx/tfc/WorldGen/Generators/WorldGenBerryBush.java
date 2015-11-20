@@ -68,7 +68,9 @@ public class WorldGenBerryBush extends WorldGenerator
 	{
 		Block id = world.getBlock(i, j-1, k);
 		if ((world.canBlockSeeTheSky(i, j, k) || world.getBlockLightValue(i, j, k) > 8) &&
-			(TFC_Core.isSoil(id) && underBlock == Blocks.air || id == underBlock))
+			(TFC_Core.isSoil(id) && underBlock == Blocks.air ||
+				id == underBlock ||
+				TFC_Core.isGrass(underBlock) && id == TFC_Core.getTypeForSoil(underBlock)))
 		{
 			for(short h = 0; h < bushHeight && random.nextBoolean(); h++) 
 			{

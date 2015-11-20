@@ -16,8 +16,8 @@ import com.bioxx.tfc.api.Constant.Global;
 
 public class WorldGenSoilPits implements IWorldGenerator
 {
-	private static WorldGenBerryBush cranberryGen = new WorldGenBerryBush(false, 6, 15, 1, 6, TFCBlocks.peat);
-	private static WorldGenBerryBush cloudberryGen = new WorldGenBerryBush(false, 10, 12, 1, 6, TFCBlocks.peat);
+	private static WorldGenBerryBush cranberryGen = new WorldGenBerryBush(false, 6, 15, 1, 6, TFCBlocks.peatGrass);
+	private static WorldGenBerryBush cloudberryGen = new WorldGenBerryBush(false, 10, 12, 1, 6, TFCBlocks.peatGrass);
 
 	public WorldGenSoilPits()
 	{
@@ -40,8 +40,8 @@ public class WorldGenSoilPits implements IWorldGenerator
 		{
 			if(random.nextInt(5) == 0)
 			{
-				if(!cranberryGen.generate(world, random, x, world.getTopSolidOrLiquidBlock(x, z) + 1, z))
-					cloudberryGen.generate(world, random, x, world.getTopSolidOrLiquidBlock(x, z) + 1, z);
+				if (!cloudberryGen.generate(world, random, x, world.getTopSolidOrLiquidBlock(x, z) + 1, z))
+					cranberryGen.generate(world, random, x, world.getTopSolidOrLiquidBlock(x, z) + 1, z);
 			}
 		}
 	}
