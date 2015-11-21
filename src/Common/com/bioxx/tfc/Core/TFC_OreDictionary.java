@@ -365,11 +365,11 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("stoneCobble", new ItemStack(TFCBlocks.stoneSedCobble, 1, WILD));
 
 		//Stone Bricks
-		OreDictionary.registerOre("stoneBricks", new ItemStack(Blocks.stonebrick));
-		OreDictionary.registerOre("stoneBricks", new ItemStack(TFCBlocks.stoneIgExBrick, 1, WILD));
-		OreDictionary.registerOre("stoneBricks", new ItemStack(TFCBlocks.stoneIgInBrick, 1, WILD));
-		OreDictionary.registerOre("stoneBricks", new ItemStack(TFCBlocks.stoneMMBrick, 1, WILD));
-		OreDictionary.registerOre("stoneBricks", new ItemStack(TFCBlocks.stoneSedBrick, 1, WILD));
+		OreDictionary.registerOre("stoneBrick", new ItemStack(Blocks.stonebrick));
+		OreDictionary.registerOre("stoneBrick", new ItemStack(TFCBlocks.stoneIgExBrick, 1, WILD));
+		OreDictionary.registerOre("stoneBrick", new ItemStack(TFCBlocks.stoneIgInBrick, 1, WILD));
+		OreDictionary.registerOre("stoneBrick", new ItemStack(TFCBlocks.stoneMMBrick, 1, WILD));
+		OreDictionary.registerOre("stoneBrick", new ItemStack(TFCBlocks.stoneSedBrick, 1, WILD));
 
 		//Smooth Stone
 		OreDictionary.registerOre("stoneSmooth", new ItemStack(TFCBlocks.stoneIgExSmooth, 1, WILD));
