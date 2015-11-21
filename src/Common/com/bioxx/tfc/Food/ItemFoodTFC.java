@@ -198,26 +198,28 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	@Override
 	public String getItemStackDisplayName(ItemStack is)
 	{
-		String s = "";
-		if(Food.isPickled(is))
-			s += TFC_Core.translate("word.pickled") + " ";
-		else if(Food.isBrined(is) && !Food.isDried(is))
-			s += TFC_Core.translate("word.brined") + " ";
+		StringBuilder name = new StringBuilder();
+		if (is.hasTagCompound()) // Circular reference avoidance
+		{
+			if(Food.isPickled(is))
+				name.append(TFC_Core.translate("word.pickled")).append(' ');
+			else if(Food.isBrined(is) && !Food.isDried(is))
+				name.append(TFC_Core.translate("word.brined")).append(' ');
 
-		if(Food.isSalted(is))
-			s += TFC_Core.translate("word.salted") + " ";
-		if(Food.isCooked(is))
-			s += TFC_Core.translate("word.cooked") + " ";
-		else if(Food.isSmoked(is))
-			s += TFC_Core.translate("word.smoked") + " ";
+			if(Food.isSalted(is))
+				name.append(TFC_Core.translate("word.salted")).append(' ');
+			if(Food.isCooked(is))
+				name.append(TFC_Core.translate("word.cooked")).append(' ');
+			else if(Food.isSmoked(is))
+				name.append(TFC_Core.translate("word.smoked")).append(' ');
 
-		if(Food.isDried(is) && !Food.isCooked(is))
-			s += TFC_Core.translate("word.dried") + " ";
-		if(Food.isInfused(is))
-			s += TFC_Core.translate(Food.getInfusion(is) + ".name") + " ";
-		s += TFC_Core.translate(this.getUnlocalizedNameInefficiently(is) + ".name");
-		s += getCookedLevelString(is);
-		return s.trim();
+			if(Food.isDried(is) && !Food.isCooked(is))
+				name.append(TFC_Core.translate("word.dried")).append(' ');
+			if(Food.isInfused(is))
+				name.append(TFC_Core.translate(Food.getInfusion(is) + ".name")).append(' ');
+		}
+
+		return name.append(TFC_Core.translate(this.getUnlocalizedName(is) + ".name")).append(getCookedLevelString(is)).toString();
 	}
 
 	protected String getCookedLevelString(ItemStack is)
