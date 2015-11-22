@@ -26,7 +26,7 @@ public class Weather2 implements IWeather2
 		WeatherManagerServer wms = ServerTickHandler.lookupDimToWeatherMan.get(dim);
 		Vec3 startVec3 = Vec3.createVectorHelper(xCoord, yCoord, zCoord);
 		
-		List<StormObject> storms =  wms.getStormsAround(startVec3, 150);
+		List<StormObject> storms =  wms.getStormsAround(startVec3, 200);
 
 		for (int i = 0; i < storms.size(); i++) {
 			StormObject storm = storms.get(i);
