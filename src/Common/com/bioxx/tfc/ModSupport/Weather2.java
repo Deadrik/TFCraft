@@ -26,19 +26,21 @@ public class Weather2 implements IWeather2
 		WeatherManagerServer wms = ServerTickHandler.lookupDimToWeatherMan.get(dim);
 		Vec3 startVec3 = Vec3.createVectorHelper(xCoord, yCoord, zCoord);
 		
-		List<StormObject> storms =  wms.getStormsAround(startVec3, 200);
-
-		for (int i = 0; i < storms.size(); i++) {
-			StormObject storm = storms.get(i);
-			
-			if (storm != null && storm.isPrecipitating()) 
-			{
-				double radius = (double) storm.size / 0.75;
-				Vec3 location = storm.pos;
-				if (startVec3.distanceTo(location) <= radius * 1.2F)
+		if (wms != null && startVec3 != null){
+			List<StormObject> storms =  wms.getStormsAround(startVec3, 200);
+	
+			for (int i = 0; i < storms.size(); i++) {
+				StormObject storm = storms.get(i);
+				
+				if (storm != null && storm.isPrecipitating()) 
 				{
-					return true;				
-				}	
+					double radius = (double) storm.size / 0.75;
+					Vec3 location = storm.pos;
+					if (startVec3.distanceTo(location) <= radius * 1.2F)
+					{
+						return true;				
+					}	
+				}
 			}
 		}
 		return false;	
