@@ -332,7 +332,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		if(temp <= -10)
 		{
 			spawnableCreatureList.clear();
-			spawnableCreatureList.add(new SpawnListEntry(EntityPolarBear.class, 1, 1, 3));
+			spawnableCreatureList.add(new SpawnListEntry(EntityPolarBear.class, 1, 1, 2));
 		}
 		return spawnableCreatureList;
 	}
