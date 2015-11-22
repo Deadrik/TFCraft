@@ -328,6 +328,12 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1, 1, 2));
 			spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 1 + mountainousAreaModifier, 1, 1));
 		}
+		//Polar
+		if(temp <= -10)
+		{
+			spawnableCreatureList.clear();
+			spawnableCreatureList.add(new SpawnListEntry(EntityPolarBear.class, 1, 1, 3));
+		}
 		return spawnableCreatureList;
 	}
 
