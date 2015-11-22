@@ -223,7 +223,7 @@ public class BlockGrass extends BlockTerra
 					if (TFC_Core.getCDM(world) != null)
 					{
 						ChunkData data = TFC_Core.getCDM(world).getData(chunkX, chunkZ);
-						if (data == null || data.getSpawnProtectionWithUpdate() <= 1320)
+						if (data == null || data.getSpawnProtectionWithUpdate() <= 234)
 						{
 							if(temp > 20 && !TFC_Core.isDryGrass(this) && world.isAirBlock(i, j + 1, k) )
 							{
