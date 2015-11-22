@@ -62,7 +62,7 @@ public class Food
 		}
 		else
 		{
-			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getDisplayName() + " " +
+			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 			return new NBTTagCompound();
 		}

@@ -343,7 +343,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 					itemstack.setItemDamage(1);
 					if (!world.isRemote) // Prevent double logging.
 					{
-						String error = TFC_Core.translate("error.error") + " " + itemstack.getDisplayName() + " " +
+						String error = TFC_Core.translate("error.error") + " " + itemstack.getUnlocalizedName() + " " +
 										TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact");
 						TerraFirmaCraft.LOG.error(error);
 						TFC_Core.sendInfoMessage(entityplayer, new ChatComponentText(error));

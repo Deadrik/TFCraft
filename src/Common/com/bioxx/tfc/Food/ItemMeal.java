@@ -104,7 +104,7 @@ public class ItemMeal extends ItemTerra implements IFood
 		else
 		{
 			arraylist.add(TFC_Core.translate("gui.badnbt"));
-			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getDisplayName() + " " +
+			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 		}
 	}
@@ -225,7 +225,7 @@ public class ItemMeal extends ItemTerra implements IFood
 			}
 			else
 			{
-				String error = TFC_Core.translate("error.error") + " " + is.getDisplayName() + " " +
+				String error = TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
 						TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact");
 				TerraFirmaCraft.LOG.error(error);
 				TFC_Core.sendInfoMessage(player, new ChatComponentText(error));

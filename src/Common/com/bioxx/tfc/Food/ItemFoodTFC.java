@@ -266,7 +266,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		else
 		{
 			arraylist.add(TFC_Core.translate("gui.badnbt"));
-			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getDisplayName() + " " +
+			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
 		}
 	}
@@ -274,7 +274,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	public void addFoodInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
 		float ounces = Helper.roundNumber(Food.getWeight(is), 100);
-		if (ounces > 0)
+		if (ounces > 0 && ounces <= Global.FOOD_MAX_WEIGHT)
 			arraylist.add(TFC_Core.translate("gui.food.amount") + " " + ounces + " oz / " + Global.FOOD_MAX_WEIGHT + " oz");
 
 		float decay = Food.getDecay(is);
@@ -465,7 +465,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			{
 				foodstats.addNutrition(((IFood)(is.getItem())).getFoodGroup(), 1f);
 
-				String error = TFC_Core.translate("error.error") + " " + is.getDisplayName() + " " +
+				String error = TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
 								TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact");
 				TerraFirmaCraft.LOG.error(error);
 				TFC_Core.sendInfoMessage(player, new ChatComponentText(error));

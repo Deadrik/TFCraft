@@ -1679,58 +1679,66 @@ public class Recipes
 
 	public static void registerFoodRecipes()
 	{
+		addFoodRefineRecipe(TFCItems.wheatWhole, TFCItems.wheatGrain);
+		addFoodRefineRecipe(TFCItems.ryeWhole, TFCItems.ryeGrain);
+		addFoodRefineRecipe(TFCItems.barleyWhole, TFCItems.barleyGrain);
+		addFoodRefineRecipe(TFCItems.oatWhole, TFCItems.oatGrain);
+		addFoodRefineRecipe(TFCItems.riceWhole, TFCItems.riceGrain);
 
-		GameRegistry.addRecipe(new ShapelessOreRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.wheatGrain, 1), 0), new ItemStack(TFCItems.wheatWhole, 1), "itemKnife"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.ryeGrain, 1), 0), new ItemStack(TFCItems.ryeWhole, 1), "itemKnife"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.barleyGrain, 1), 0), new ItemStack(TFCItems.barleyWhole, 1), "itemKnife"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.oatGrain, 1), 0), new ItemStack(TFCItems.oatWhole, 1), "itemKnife"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.riceGrain, 1), 0), new ItemStack(TFCItems.riceWhole, 1), "itemKnife"));
+		addFoodDoughRecipe(TFCItems.wheatGround, TFCItems.wheatDough, TFCItems.woodenBucketWater);
+		addFoodDoughRecipe(TFCItems.barleyGround, TFCItems.barleyDough, TFCItems.woodenBucketWater);
+		addFoodDoughRecipe(TFCItems.ryeGround, TFCItems.ryeDough, TFCItems.woodenBucketWater);
+		addFoodDoughRecipe(TFCItems.oatGround, TFCItems.oatDough, TFCItems.woodenBucketWater);
+		addFoodDoughRecipe(TFCItems.riceGround, TFCItems.riceDough, TFCItems.woodenBucketWater);
+		addFoodDoughRecipe(TFCItems.cornmealGround, TFCItems.cornmealDough, TFCItems.woodenBucketWater);
+		addFoodDoughRecipe(TFCItems.wheatGround, TFCItems.wheatDough, TFCItems.redSteelBucketWater);
+		addFoodDoughRecipe(TFCItems.barleyGround, TFCItems.barleyDough, TFCItems.redSteelBucketWater);
+		addFoodDoughRecipe(TFCItems.ryeGround, TFCItems.ryeDough, TFCItems.redSteelBucketWater);
+		addFoodDoughRecipe(TFCItems.oatGround, TFCItems.oatDough, TFCItems.redSteelBucketWater);
+		addFoodDoughRecipe(TFCItems.riceGround, TFCItems.riceDough, TFCItems.redSteelBucketWater);
+		addFoodDoughRecipe(TFCItems.cornmealGround, TFCItems.cornmealDough, TFCItems.redSteelBucketWater);
 
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.wheatDough, 1), 0), TFCItems.wheatGround,TFCItems.woodenBucketWater);
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.barleyDough, 1), 0), TFCItems.barleyGround,TFCItems.woodenBucketWater);
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.ryeDough, 1), 0), TFCItems.ryeGround,TFCItems.woodenBucketWater);
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.oatDough, 1), 0), TFCItems.oatGround,TFCItems.woodenBucketWater);
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.riceDough, 1), 0), TFCItems.riceGround,TFCItems.woodenBucketWater);
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.cornmealDough, 1), 0), TFCItems.cornmealGround, TFCItems.woodenBucketWater);
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.wheatDough, 1), 0), TFCItems.wheatGround,TFCItems.redSteelBucketWater);
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.barleyDough, 1), 0), TFCItems.barleyGround,TFCItems.redSteelBucketWater);
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.ryeDough, 1), 0), TFCItems.ryeGround,TFCItems.redSteelBucketWater);
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.oatDough, 1), 0), TFCItems.oatGround,TFCItems.redSteelBucketWater);
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.riceDough, 1), 0), TFCItems.riceGround,TFCItems.redSteelBucketWater);
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.cornmealDough, 1), 0), TFCItems.cornmealGround, TFCItems.redSteelBucketWater);
-
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.venisonRaw, 1), 0), new ItemStack(TFCItems.venisonRaw, 1), new ItemStack(TFCItems.powder, 1, 9));
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.beefRaw, 1), 0), new ItemStack(TFCItems.beefRaw, 1), new ItemStack(TFCItems.powder, 1, 9));
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.chickenRaw, 1), 0), new ItemStack(TFCItems.chickenRaw, 1), new ItemStack(TFCItems.powder, 1, 9));
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.porkchopRaw, 1), 0), new ItemStack(TFCItems.porkchopRaw, 1), new ItemStack(TFCItems.powder, 1, 9));
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.fishRaw, 1), 0), new ItemStack(TFCItems.fishRaw, 1), new ItemStack(TFCItems.powder, 1, 9));
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.calamariRaw, 1), 0), new ItemStack(TFCItems.calamariRaw, 1), new ItemStack(TFCItems.powder, 1, 9));
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.muttonRaw, 1), 0), new ItemStack(TFCItems.muttonRaw, 1), new ItemStack(TFCItems.powder, 1, 9));
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.horseMeatRaw, 1), 0), new ItemStack(TFCItems.horseMeatRaw, 1), new ItemStack(TFCItems.powder, 1, 9));
+		addFoodSaltRecipe(TFCItems.venisonRaw);
+		addFoodSaltRecipe(TFCItems.beefRaw);
+		addFoodSaltRecipe(TFCItems.chickenRaw);
+		addFoodSaltRecipe(TFCItems.porkchopRaw);
+		addFoodSaltRecipe(TFCItems.fishRaw);
+		addFoodSaltRecipe(TFCItems.calamariRaw);
+		addFoodSaltRecipe(TFCItems.muttonRaw);
+		addFoodSaltRecipe(TFCItems.horseMeatRaw);
 		for(Item i : TFCItems.foodList)
 		{
 			addFoodMergeRecipe(i);
-			GameRegistry.addRecipe(new ShapelessOreRecipe(ItemFoodTFC.createTag(new ItemStack(i, 1), 0), new ItemStack(i, 1), "itemKnife"));
-			GameRegistry.addRecipe(new ShapelessOreRecipe(ItemFoodTFC.createTag(new ItemStack(i, 1), 0), new ItemStack(i, 1)));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(ItemFoodTFC.createTag(new ItemStack(i, 1)), ItemFoodTFC.createTag(new ItemStack(i, 1)), "itemKnife"));
+			GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(i, 1)), ItemFoodTFC.createTag(new ItemStack(i, 1)));
 		}
+	}
+
+	public static void addFoodSaltRecipe(Item food)
+	{
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), new ItemStack(TFCItems.powder, 1, 9));
+	}
+
+	public static void addFoodRefineRecipe(Item foodInput, Item foodOutput)
+	{
+		GameRegistry.addRecipe(new ShapelessOreRecipe(ItemFoodTFC.createTag(new ItemStack(foodOutput, 1)), ItemFoodTFC.createTag(new ItemStack(foodInput, 1)), "itemKnife"));
+	}
+
+	public static void addFoodDoughRecipe(Item foodInput, Item foodOutput, Item bucket)
+	{
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(foodOutput, 1)), ItemFoodTFC.createTag(new ItemStack(foodInput, 1)), bucket);
 	}
 
 	public static void addFoodMergeRecipe(Item food)
 	{
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1), 0), new ItemStack(food, 1), new ItemStack(food, 1));
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1), 0), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1));
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1), 0), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1),
-				new ItemStack(food, 1));
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1), 0), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1),
-				new ItemStack(food, 1), new ItemStack(food, 1));
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1), 0), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1),
-				new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1));
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1), 0), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1),
-				new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1));
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1), 0), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1),
-				new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1));
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1), 0), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1),
-				new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1));
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)));
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)));
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)));
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)));
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)));
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)));
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)));
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)), ItemFoodTFC.createTag(new ItemStack(food, 1)));
 	}
 
 	public static void registerKilnRecipes()
