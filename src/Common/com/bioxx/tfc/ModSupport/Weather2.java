@@ -35,7 +35,7 @@ public class Weather2 implements IWeather2
 			{
 				double radius = (double) storm.size / 0.75;
 				Vec3 location = storm.pos;
-				if (startVec3.distanceTo(location) < radius)
+				if (startVec3.distanceTo(location) <= radius * 1.2F)
 				{
 					return true;				
 				}	
