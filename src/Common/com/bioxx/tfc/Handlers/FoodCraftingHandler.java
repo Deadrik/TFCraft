@@ -78,7 +78,8 @@ public class FoodCraftingHandler
 
 					float grainWeight = Food.getWeight(inputStack);
 					float grainDecay = Food.getDecay(inputStack);
-					grainWeight -= grainDecay;
+					if (grainDecay >= 0) // Account for -24.0 decay on fresh food
+						grainWeight -= grainDecay;
 					grainWeight -= Math.min(grainWeight, 80);
 
 					inputStack = ItemFoodTFC.createTag(inputStack, grainWeight, 0);
@@ -430,7 +431,8 @@ public class FoodCraftingHandler
 				{
 					float grainWeight = Food.getWeight(inputStack);
 					float grainDecay = Food.getDecay(inputStack);
-					grainWeight -= grainDecay;
+					if (grainDecay >= 0) // Account for -24.0 decay on fresh food
+						grainWeight -= grainDecay;
 					float doughWeight = Math.min(grainWeight, 80) * 2;
 					finalWeight = doughWeight;
 					finalDecay = 0;
@@ -553,7 +555,8 @@ public class FoodCraftingHandler
 
 				float grainWeight = Food.getWeight(inputStack);
 				float grainDecay = Food.getDecay(inputStack);
-				grainWeight -= grainDecay;
+				if (grainDecay >= 0) // Account for -24.0 decay on fresh food
+					grainWeight -= grainDecay;
 				float doughWeight = Math.min(grainWeight, 80);
 				grainWeight -= doughWeight;
 
