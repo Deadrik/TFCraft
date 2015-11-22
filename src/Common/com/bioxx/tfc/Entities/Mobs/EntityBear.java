@@ -86,7 +86,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	{
 		super (par1World);
 		setSize (1.2F, 1.2F);
-		moveSpeed = 0.4F;
+		moveSpeed = 0.3F;
 		getNavigator ().setAvoidsWater (true);
 		tasks.addTask (1, new EntityAISwimming (this));
 		sizeMod = (float) Math.sqrt((rand.nextInt(rand.nextInt((DEGREE_OF_DIVERSION + 1) * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + 1F) *
