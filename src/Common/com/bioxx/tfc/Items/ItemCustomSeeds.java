@@ -59,7 +59,7 @@ public class ItemCustomSeeds extends ItemTerra
 					return false;
 				}
 
-				if(TFC_Climate.getHeightAdjustedTemp(world, x, y, z) <= crop.minAliveTemp)
+				if (TFC_Climate.getHeightAdjustedTemp(world, x, y, z) <= crop.minAliveTemp && !crop.dormantInFrost)
 				{
 					TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("gui.seeds.failedTemp"));
 					return false;
