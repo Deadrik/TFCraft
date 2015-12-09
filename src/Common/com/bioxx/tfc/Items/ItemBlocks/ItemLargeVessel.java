@@ -148,7 +148,7 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 				Fluid fluid = ((IFluidBlock) world.getBlock(i, j, k)).getFluid();
 				int temp = fluid.getTemperature();
 				int v = 0;
-				if (temp < 575)
+				if (temp < 575 && fluid != TFCFluids.HOTWATER)
 				{
 					world.setBlockToAir(i, j, k);
 
