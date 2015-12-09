@@ -2,6 +2,7 @@ package com.bioxx.tfc.Items.ItemBlocks;
 
 import java.util.List;
 
+import com.bioxx.tfc.api.TFCFluids;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -134,28 +135,38 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 				int j = mop.blockY;
 				int k = mop.blockZ;
 
-				if (!player.canPlayerEdit(i, j, k, mop.sideHit, is) || !(world.getBlock(i, j, k) instanceof IFluidBlock) || is.hasTagCompound())
-				{
+				if (!player.canPlayerEdit(i, j, k, mop.sideHit, is) || !(world.getBlock(i, j, k) instanceof IFluidBlock) || is.hasTagCompound()) {
 					return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
 				}
 
-				Fluid fluid = ((IFluidBlock)world.getBlock(i, j, k)).getFluid();
-
-				world.setBlockToAir(i, j, k);
-
-				if (is.stackSize == 1)
+				Fluid fluid = ((IFluidBlock) world.getBlock(i, j, k)).getFluid();
+				int temp = fluid.getTemperature();
+				int v = 0;
+				if (temp < 575)
 				{
-					ItemBarrels.fillItemBarrel(is, new FluidStack(fluid, 10000), 10000);	
-				}	
-				else
-				{
+					world.setBlockToAir(i, j, k);
+
+					if (fluid == TFCFluids.FRESHWATER || fluid == TFCFluids.SALTWATER)
+					{
+						v = 10000;
+					}
+					else
+						v = 1000;
+
+					if (is.stackSize == 1)
+					{
+						ItemBarrels.fillItemBarrel(is, new FluidStack(fluid, v), 10000);
+					}
+					else
+					{
 					is.stackSize--;
 					ItemStack outIS = is.copy();
 					outIS.stackSize = 1;
-					ItemBarrels.fillItemBarrel(outIS, new FluidStack(fluid, 10000), 10000);
+					ItemBarrels.fillItemBarrel(outIS, new FluidStack(fluid, v), 10000);
 					if (!player.inventory.addItemStackToInventory(outIS))
 					{
 						player.entityDropItem(outIS, 0);
+					}
 					}
 				}
 				return true;

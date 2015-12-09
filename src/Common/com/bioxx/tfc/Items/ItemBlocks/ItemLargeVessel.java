@@ -2,6 +2,7 @@ package com.bioxx.tfc.Items.ItemBlocks;
 
 import java.util.List;
 
+import com.bioxx.tfc.api.TFCFluids;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -140,28 +141,38 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 				int j = mop.blockY;
 				int k = mop.blockZ;
 
-				if (!player.canPlayerEdit(i, j, k, mop.sideHit, is) || !(world.getBlock(i, j, k) instanceof IFluidBlock) || is.hasTagCompound() || is.getItemDamage() == 0)
-				{
+				if (!player.canPlayerEdit(i, j, k, mop.sideHit, is) || !(world.getBlock(i, j, k) instanceof IFluidBlock) || is.hasTagCompound()) {
 					return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
 				}
 
-				Fluid fluid = ((IFluidBlock)world.getBlock(i, j, k)).getFluid();
-
-				world.setBlockToAir(i, j, k);
-
-				if (is.stackSize == 1)
+				Fluid fluid = ((IFluidBlock) world.getBlock(i, j, k)).getFluid();
+				int temp = fluid.getTemperature();
+				int v = 0;
+				if (temp < 575)
 				{
-					ItemBarrels.fillItemBarrel(is, new FluidStack(fluid, 5000), 5000);
-				}
-				else
-				{
-					is.stackSize--;
-					ItemStack outIS = is.copy();
-					outIS.stackSize = 1;
-					ItemBarrels.fillItemBarrel(outIS, new FluidStack(fluid, 5000), 5000);
-					if (!player.inventory.addItemStackToInventory(outIS))
+					world.setBlockToAir(i, j, k);
+
+					if (fluid == TFCFluids.FRESHWATER || fluid == TFCFluids.SALTWATER)
 					{
-						player.entityDropItem(outIS, 0);
+						v = 5000;
+					}
+					else
+						v = 1000;
+
+					if (is.stackSize == 1)
+					{
+						ItemBarrels.fillItemBarrel(is, new FluidStack(fluid, v), 5000);
+					}
+					else
+					{
+						is.stackSize--;
+						ItemStack outIS = is.copy();
+						outIS.stackSize = 1;
+						ItemBarrels.fillItemBarrel(outIS, new FluidStack(fluid, v), 5000);
+						if (!player.inventory.addItemStackToInventory(outIS))
+						{
+							player.entityDropItem(outIS, 0);
+						}
 					}
 				}
 				return true;

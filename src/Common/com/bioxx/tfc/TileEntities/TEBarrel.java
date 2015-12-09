@@ -246,7 +246,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		if (inFS != null)
 		{
 			//We dont want very hot liquids stored here so if they are much hotter than boiling water, we prevent it. 
-			if (inFS.getFluid() != null && inFS.getFluid().getTemperature(inFS) > 385)
+			if (inFS.getFluid() != null && inFS.getFluid().getTemperature(inFS) > 575)
 				return false;
 
 			if (fluid == null)
