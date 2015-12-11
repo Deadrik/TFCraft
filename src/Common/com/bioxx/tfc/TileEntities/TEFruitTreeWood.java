@@ -100,7 +100,8 @@ public class TEFruitTreeWood extends TileEntity implements IInventory
 
 				//First we attempt to grow the trunk of the tree higher
 				if (birthTimeWood + TRUNK_GROW_TIME < TFC_Time.getTotalDays() && height < 3 && isTrunk && worldObj.rand.nextInt(16 / t) == 0 &&
-						(worldObj.isAirBlock(xCoord, yCoord + 1, zCoord) || worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.fruitTreeLeaves))
+						(worldObj.isAirBlock(xCoord, yCoord + 1, zCoord) || worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.fruitTreeLeaves ||
+						 worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.fruitTreeLeaves2))
 				{
 					worldObj.setBlock(xCoord, yCoord + 1, zCoord, TFCBlocks.fruitTreeWood, meta, 0x2);
 					if (worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TEFruitTreeWood)
@@ -164,51 +165,52 @@ public class TEFruitTreeWood extends TileEntity implements IInventory
 
 				if (birthTimeLeaves + 2 < TFC_Time.getTotalDays() && worldObj.rand.nextInt((int) LEAF_GROWTH_RATE) == 0 && worldObj.getBlock(xCoord, yCoord + 2, zCoord) != TFCBlocks.fruitTreeWood)
 				{
-					Block bid = TFCBlocks.fruitTreeLeaves;
+					int m = meta & 7;
+					Block bid = meta < 8 ? TFCBlocks.fruitTreeLeaves : TFCBlocks.fruitTreeLeaves2;
 
 					if (checkLeaves(xCoord, yCoord + 1, zCoord)) //above
 					{
-						worldObj.setBlock(xCoord, yCoord + 1, zCoord, bid, meta, 0x2);
+						worldObj.setBlock(xCoord, yCoord + 1, zCoord, bid, m, 0x2);
 						worldObj.markBlockForUpdate(xCoord, yCoord + 1, zCoord);
 					}
 					else if (checkLeaves(xCoord + 1, yCoord, zCoord)) //+x
 					{
-						worldObj.setBlock(xCoord + 1, yCoord, zCoord, bid, meta, 0x2);
+						worldObj.setBlock(xCoord + 1, yCoord, zCoord, bid, m, 0x2);
 						worldObj.markBlockForUpdate(xCoord + 1, yCoord, zCoord);
 					}
 					else if (checkLeaves(xCoord - 1, yCoord, zCoord)) //-x
 					{
-						worldObj.setBlock(xCoord - 1, yCoord, zCoord, bid, meta, 0x2);
+						worldObj.setBlock(xCoord - 1, yCoord, zCoord, bid, m, 0x2);
 						worldObj.markBlockForUpdate(xCoord - 1, yCoord, zCoord);
 					}
 					else if (checkLeaves(xCoord, yCoord, zCoord + 1)) //+z
 					{
-						worldObj.setBlock(xCoord, yCoord, zCoord + 1, bid, meta, 0x2);
+						worldObj.setBlock(xCoord, yCoord, zCoord + 1, bid, m, 0x2);
 						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord + 1);
 					}
 					else if (checkLeaves(xCoord, yCoord, zCoord - 1)) //-z
 					{
-						worldObj.setBlock(xCoord, yCoord, zCoord - 1, bid, meta, 0x2);
+						worldObj.setBlock(xCoord, yCoord, zCoord - 1, bid, m, 0x2);
 						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord - 1);
 					}
 					else if (checkLeaves(xCoord + 1, yCoord, zCoord - 1)) //+x/-z
 					{
-						worldObj.setBlock(xCoord + 1, yCoord, zCoord - 1, bid, meta, 0x2);
+						worldObj.setBlock(xCoord + 1, yCoord, zCoord - 1, bid, m, 0x2);
 						worldObj.markBlockForUpdate(xCoord + 1, yCoord, zCoord - 1);
 					}
 					else if (checkLeaves(xCoord + 1, yCoord, zCoord + 1)) //+x/+z
 					{
-						worldObj.setBlock(xCoord + 1, yCoord, zCoord + 1, bid, meta, 0x2);
+						worldObj.setBlock(xCoord + 1, yCoord, zCoord + 1, bid, m, 0x2);
 						worldObj.markBlockForUpdate(xCoord + 1, yCoord, zCoord + 1);
 					}
 					else if (checkLeaves(xCoord - 1, yCoord, zCoord - 1)) //-x/-z
 					{
-						worldObj.setBlock(xCoord - 1, yCoord, zCoord - 1, bid, meta, 0x2);
+						worldObj.setBlock(xCoord - 1, yCoord, zCoord - 1, bid, m, 0x2);
 						worldObj.markBlockForUpdate(xCoord - 1, yCoord, zCoord - 1);
 					}
 					else if (checkLeaves(xCoord - 1, yCoord, zCoord + 1)) //-x/+z
 					{
-						worldObj.setBlock(xCoord - 1, yCoord, zCoord + 1, bid, meta, 0x2);
+						worldObj.setBlock(xCoord - 1, yCoord, zCoord + 1, bid, m, 0x2);
 						worldObj.markBlockForUpdate(xCoord - 1, yCoord, zCoord + 1);
 					}
 
