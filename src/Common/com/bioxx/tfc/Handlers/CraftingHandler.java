@@ -49,26 +49,8 @@ public class CraftingHandler
 
 		//int index = 0;
 		if(iinventory != null)
-		{
-			// Tool Damaging
-			if(item == TFCItems.stoneBrick)
+			if (item == TFCItems.wool)
 			{
-				List<ItemStack> chisels = OreDictionary.getOres("itemChisel", false);
-				handleItem(player, iinventory, chisels);
-			}
-			else if(item == TFCItems.singlePlank ||
-					item == Item.getItemFromBlock(TFCBlocks.woodSupportH) || item == Item.getItemFromBlock(TFCBlocks.woodSupportH2) ||
-					item == Item.getItemFromBlock(TFCBlocks.woodSupportV) || item == Item.getItemFromBlock(TFCBlocks.woodSupportV2))
-			{
-				List<ItemStack> axes = OreDictionary.getOres("itemAxe", false);
-				List<ItemStack> saws = OreDictionary.getOres("itemSaw", false);
-				handleItem(player, iinventory, axes);
-				handleItem(player, iinventory, saws);
-			}
-			else if (item == TFCItems.wool)
-			{
-				List<ItemStack> knives = OreDictionary.getOres("itemKnife", false);
-				handleItem(player, iinventory, knives);
 				int size = 0;
 				for (int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
@@ -80,15 +62,6 @@ public class CraftingHandler
 				boolean add = !player.inventory.addItemStackToInventory(new ItemStack(TFCItems.hide, 1, size));
 				if (add)
 					player.entityDropItem(new ItemStack(TFCItems.hide, 1, size), 1);
-			}
-			else if(item == TFCItems.woolYarn)
-			{
-				handleItem(player, iinventory, Recipes.spindle);
-			}
-			else if (item == TFCItems.powder && itemDamage == 0)
-			{
-				List<ItemStack> hammers = OreDictionary.getOres("itemHammer", false);
-				handleItem(player, iinventory, hammers);
 			}
 
 			// Achievements
