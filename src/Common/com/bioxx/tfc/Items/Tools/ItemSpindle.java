@@ -25,9 +25,43 @@ public class ItemSpindle extends ItemTerra
 	{
 		return HashMultimap.create();
 	}
-	
+
 	@Override
-	public EnumItemReach getReach(ItemStack is){
+	public boolean doesContainerItemLeaveCraftingGrid(ItemStack ItemStack)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean getShareTag()
+	{
+		return true;
+	}
+
+	@Override
+	public ItemStack getContainerItem(ItemStack itemStack)
+	{
+		ItemStack container = itemStack.copy();
+		container.setItemDamage(container.getItemDamage() + 1);
+		container.stackSize = 1;
+		return container;
+	}
+
+	@Override
+	public boolean hasContainerItem(ItemStack stack)
+	{
+		return true;
+	}
+
+	@Override
+	public boolean isRepairable()
+	{
+		return false;
+	}
+
+	@Override
+	public EnumItemReach getReach(ItemStack is)
+	{
 		return EnumItemReach.SHORT;
 	}
 
