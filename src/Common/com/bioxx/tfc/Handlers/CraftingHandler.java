@@ -111,7 +111,6 @@ public class CraftingHandler
 					}
 				}
 			}
-		}
 	}
 
 	public static void preCraft(EntityPlayer player, ItemStack itemstack, IInventory iinventory)
