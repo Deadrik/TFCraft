@@ -25,6 +25,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEBarrel;
+import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
@@ -33,6 +34,8 @@ import com.bioxx.tfc.api.Util.Helper;
 
 public class ItemBarrels extends ItemTerraBlock implements IEquipable
 {
+	private static final int MAX_LIQUID = 10000;
+
 	public ItemBarrels(Block par1)
 	{
 		super(par1);
@@ -139,23 +142,36 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 					return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
 				}
 
-				Fluid fluid = ((IFluidBlock)world.getBlock(i, j, k)).getFluid();
-
-				world.setBlockToAir(i, j, k);
-
-				if (is.stackSize == 1)
+				Fluid fluid = ((IFluidBlock) world.getBlock(i, j, k)).getFluid();
+				int temp = fluid.getTemperature();
+				int volume = 0;
+				if (temp < Global.HOT_LIQUID_TEMP && fluid != TFCFluids.HOTWATER)
 				{
-					ItemBarrels.fillItemBarrel(is, new FluidStack(fluid, 10000), 10000);	
-				}	
-				else
-				{
-					is.stackSize--;
-					ItemStack outIS = is.copy();
-					outIS.stackSize = 1;
-					ItemBarrels.fillItemBarrel(outIS, new FluidStack(fluid, 10000), 10000);
-					if (!player.inventory.addItemStackToInventory(outIS))
+					world.setBlockToAir(i, j, k);
+
+					if (fluid == TFCFluids.FRESHWATER || fluid == TFCFluids.SALTWATER)
 					{
-						player.entityDropItem(outIS, 0);
+						volume = MAX_LIQUID;
+					}
+					else
+					{
+						volume = 1000;
+					}
+
+					if (is.stackSize == 1)
+					{
+						ItemBarrels.fillItemBarrel(is, new FluidStack(fluid, volume), MAX_LIQUID);
+					}
+					else
+					{
+						is.stackSize--;
+						ItemStack outIS = is.copy();
+						outIS.stackSize = 1;
+						ItemBarrels.fillItemBarrel(outIS, new FluidStack(fluid, volume), MAX_LIQUID);
+						if (!player.inventory.addItemStackToInventory(outIS))
+						{
+							player.entityDropItem(outIS, 0);
+						}
 					}
 				}
 				return true;
@@ -164,8 +180,6 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 
 		return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
 	}
-
-
 
 	@Override
 	public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
