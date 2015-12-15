@@ -156,8 +156,9 @@ public class BlockFungi extends BlockMushroom
 			byte var6 = 4;
 			int var7 = 5;
 			int i;
-			int j;
-			int k;
+			// These variables are used a bit oddly, but that's the way vanilla decided to do it
+			int j; // Initially used for z, then switched to y
+			int k; // Initially used for y, then switched to z
 
 			for (i = x - var6; i <= x + var6; ++i)
 			{
@@ -165,7 +166,7 @@ public class BlockFungi extends BlockMushroom
 				{
 					for (k = y - 1; k <= y + 1; ++k)
 					{
-						if (world.blockExists(i, j, k) && world.getBlock(i, k, j) == this)
+						if (world.blockExists(i, k, j) && world.getBlock(i, k, j) == this) // Correctly doing x, y, z
 						{
 							--var7;
 							if (var7 <= 0)
