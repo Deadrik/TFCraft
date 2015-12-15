@@ -2,7 +2,6 @@ package com.bioxx.tfc.Items.ItemBlocks;
 
 import java.util.List;
 
-import com.bioxx.tfc.api.TFCFluids;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,6 +25,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEBarrel;
+import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
@@ -34,6 +34,8 @@ import com.bioxx.tfc.api.Util.Helper;
 
 public class ItemBarrels extends ItemTerraBlock implements IEquipable
 {
+	private static final int MAX_LIQUID = 10000;
+
 	public ItemBarrels(Block par1)
 	{
 		super(par1);
@@ -135,38 +137,41 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 				int j = mop.blockY;
 				int k = mop.blockZ;
 
-				if (!player.canPlayerEdit(i, j, k, mop.sideHit, is) || !(world.getBlock(i, j, k) instanceof IFluidBlock) || is.hasTagCompound()) {
+				if (!player.canPlayerEdit(i, j, k, mop.sideHit, is) || !(world.getBlock(i, j, k) instanceof IFluidBlock) || is.hasTagCompound())
+				{
 					return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
 				}
 
 				Fluid fluid = ((IFluidBlock) world.getBlock(i, j, k)).getFluid();
 				int temp = fluid.getTemperature();
-				int v = 0;
-				if (temp < 575 && fluid != TFCFluids.HOTWATER)
+				int volume = 0;
+				if (temp < Global.HOT_LIQUID_TEMP && fluid != TFCFluids.HOTWATER)
 				{
 					world.setBlockToAir(i, j, k);
 
 					if (fluid == TFCFluids.FRESHWATER || fluid == TFCFluids.SALTWATER)
 					{
-						v = 10000;
+						volume = MAX_LIQUID;
 					}
 					else
-						v = 1000;
+					{
+						volume = 1000;
+					}
 
 					if (is.stackSize == 1)
 					{
-						ItemBarrels.fillItemBarrel(is, new FluidStack(fluid, v), 10000);
+						ItemBarrels.fillItemBarrel(is, new FluidStack(fluid, volume), MAX_LIQUID);
 					}
 					else
 					{
-					is.stackSize--;
-					ItemStack outIS = is.copy();
-					outIS.stackSize = 1;
-					ItemBarrels.fillItemBarrel(outIS, new FluidStack(fluid, v), 10000);
-					if (!player.inventory.addItemStackToInventory(outIS))
-					{
-						player.entityDropItem(outIS, 0);
-					}
+						is.stackSize--;
+						ItemStack outIS = is.copy();
+						outIS.stackSize = 1;
+						ItemBarrels.fillItemBarrel(outIS, new FluidStack(fluid, volume), MAX_LIQUID);
+						if (!player.inventory.addItemStackToInventory(outIS))
+						{
+							player.entityDropItem(outIS, 0);
+						}
 					}
 				}
 				return true;
@@ -175,8 +180,6 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 
 		return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
 	}
-
-
 
 	@Override
 	public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
@@ -208,13 +211,13 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 	}
 
 	@Override
-	public EquipType getEquipType(ItemStack is) 
+	public EquipType getEquipType(ItemStack is)
 	{
 		return EquipType.BACK;
 	}
 
 	@Override
-	public void onEquippedRender() 
+	public void onEquippedRender()
 	{
 		GL11.glTranslatef(0, -0.3f, -0F);
 	}
@@ -251,7 +254,7 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 			}
 			else return is;
 		}
-		else 
+		else
 		{
 			nbt.setTag("fluidNBT", fs.writeToNBT(new NBTTagCompound()));
 			nbt.setBoolean("Sealed", true);
@@ -262,4 +265,3 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 		return is;
 	}
 }
-

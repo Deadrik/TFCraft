@@ -2,7 +2,6 @@ package com.bioxx.tfc.Items.ItemBlocks;
 
 import java.util.List;
 
-import com.bioxx.tfc.api.TFCFluids;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -26,6 +25,8 @@ import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEPottery;
 import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCFluids;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.IEquipable;
@@ -33,6 +34,8 @@ import com.bioxx.tfc.api.Util.Helper;
 
 public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 {
+	private static final int MAX_LIQUID = 5000;
+
 	public ItemLargeVessel(Block block)
 	{
 		super(block);
@@ -141,34 +144,37 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 				int j = mop.blockY;
 				int k = mop.blockZ;
 
-				if (!player.canPlayerEdit(i, j, k, mop.sideHit, is) || !(world.getBlock(i, j, k) instanceof IFluidBlock) || is.hasTagCompound()) {
+				if (!player.canPlayerEdit(i, j, k, mop.sideHit, is) || !(world.getBlock(i, j, k) instanceof IFluidBlock) || is.hasTagCompound() || is.getItemDamage() == 0)
+				{
 					return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
 				}
 
 				Fluid fluid = ((IFluidBlock) world.getBlock(i, j, k)).getFluid();
 				int temp = fluid.getTemperature();
-				int v = 0;
-				if (temp < 575 && fluid != TFCFluids.HOTWATER)
+				int volume = 0;
+
+				if (temp < Global.HOT_LIQUID_TEMP && fluid != TFCFluids.HOTWATER)
 				{
 					world.setBlockToAir(i, j, k);
-
 					if (fluid == TFCFluids.FRESHWATER || fluid == TFCFluids.SALTWATER)
 					{
-						v = 5000;
+						volume = MAX_LIQUID;
 					}
 					else
-						v = 1000;
+					{
+						volume = 1000;
+					}
 
 					if (is.stackSize == 1)
 					{
-						ItemBarrels.fillItemBarrel(is, new FluidStack(fluid, v), 5000);
+						ItemBarrels.fillItemBarrel(is, new FluidStack(fluid, volume), MAX_LIQUID);
 					}
 					else
 					{
 						is.stackSize--;
 						ItemStack outIS = is.copy();
 						outIS.stackSize = 1;
-						ItemBarrels.fillItemBarrel(outIS, new FluidStack(fluid, v), 5000);
+						ItemBarrels.fillItemBarrel(outIS, new FluidStack(fluid, volume), MAX_LIQUID);
 						if (!player.inventory.addItemStackToInventory(outIS))
 						{
 							player.entityDropItem(outIS, 0);
@@ -251,4 +257,3 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 		return is.hasTagCompound();
 	}
 }
-

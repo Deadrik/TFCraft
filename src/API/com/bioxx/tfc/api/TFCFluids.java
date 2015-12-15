@@ -10,7 +10,7 @@ public class TFCFluids
 {
 	public static final Fluid SALTWATER = new FluidBaseTFC("saltwater").setBaseColor(0x354d35);
 	public static final Fluid FRESHWATER = new FluidBaseTFC("freshwater").setBaseColor(0x354d35);
-	public static final Fluid HOTWATER = new FluidBaseTFC("hotwater").setBaseColor(0x1f5099).setTemperature(372/*Kelvin*/);
+	public static final Fluid HOTWATER = new FluidBaseTFC("hotwater").setBaseColor(0x1f5099).setTemperature(350/*Kelvin, Rough temp of spring in Aachen, Germany*/);
 	public static final Fluid LAVA = new FluidBaseTFC("lavatfc").setLuminosity(15).setDensity(3000).setViscosity(6000).setTemperature(1300).setUnlocalizedName(Blocks.lava.getUnlocalizedName());
 	public static final Fluid RUM = new FluidBaseTFC("rum").setBaseColor(0x6e0123);
 	public static final Fluid BEER = new FluidBaseTFC("beer").setBaseColor(0xc39e37);
