@@ -357,8 +357,7 @@ public class RenderOverlayHandler
 					TFC_Climate.getRainfall(mc.theWorld, xCoord, yCoord, zCoord), 
 					TFC_Climate.getHeightAdjustedTemp(mc.theWorld, xCoord, yCoord, zCoord),
 					TFC_Climate.getBioTemperatureHeight(mc.theWorld, xCoord, yCoord, zCoord),
-					TFC_Climate.getHeightAdjustedTemp(mc.theWorld, xCoord, yCoord, zCoord)+BodyTempStats.applyTemperatureFromHeatSources(player),
-					evt.floatdata1}));
+					TFC_Climate.getHeightAdjustedTemp(mc.theWorld, xCoord, yCoord, zCoord),evt.floatdata1}));
 
 			if(TFCOptions.enableDebugMode)
 			{
