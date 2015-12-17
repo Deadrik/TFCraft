@@ -284,10 +284,12 @@ public class TEChest extends TileEntityChest implements IInventory
 	public void updateEntity()
 	{
 		//super.updateEntity();
-
-		TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
-		this.checkForAdjacentChests();
 		this.ticksSinceSync++;
+		if ((this.ticksSinceSync + this.xCoord + this.yCoord + this.zCoord) % 200 == 0)
+		{
+			TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);	
+		}
+		this.checkForAdjacentChests();
 
 		if (!this.worldObj.isRemote && this.numPlayersUsing != 0 && (this.ticksSinceSync + this.xCoord + this.yCoord + this.zCoord) % 200 == 0)
 		{
