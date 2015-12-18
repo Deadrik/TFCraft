@@ -29,7 +29,10 @@ import org.lwjgl.opengl.GL11;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.Player.*;
+import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
+import com.bioxx.tfc.Core.Player.PlayerInfo;
+import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityPigTFC;
 import com.bioxx.tfc.GUI.GuiScreenHorseInventoryTFC;
 import com.bioxx.tfc.Items.ItemQuiver;
@@ -353,11 +356,10 @@ public class RenderOverlayHandler
 			int yCoord = (int)player.posY;
 			int zCoord = (int)player.posZ;
 			DataLayer evt = TFC_Climate.getCacheManager(mc.theWorld).getEVTLayerAt(xCoord, zCoord);
-			event.left.add(String.format("rain: %.0f, temp: %.2f, average bio temp: %.2f, apparent temp: %.2f, evt: %.3f", new Object[] {
+			event.left.add(String.format("rain: %.0f, temp: %.2f, average bio temp: %.2f, evt: %.3f", new Object[] {
 					TFC_Climate.getRainfall(mc.theWorld, xCoord, yCoord, zCoord), 
 					TFC_Climate.getHeightAdjustedTemp(mc.theWorld, xCoord, yCoord, zCoord),
 					TFC_Climate.getBioTemperatureHeight(mc.theWorld, xCoord, yCoord, zCoord),
-					TFC_Climate.getHeightAdjustedTemp(mc.theWorld, xCoord, yCoord, zCoord)+BodyTempStats.applyTemperatureFromHeatSources(player),
 					evt.floatdata1}));
 
 			if(TFCOptions.enableDebugMode)
