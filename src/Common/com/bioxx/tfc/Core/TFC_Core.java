@@ -1038,7 +1038,7 @@ public class TFC_Core
 					continue;
 				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, 1f);
 				if(is != null)
-					TFC_ItemHeat.handleItemHeat(is);
+					TFC_ItemHeat.handleItemHeat(is, environmentalDecayFactor);
 				iinv.setInventorySlotContents(i, is);
 			}
 
@@ -1103,7 +1103,7 @@ public class TFC_Core
 					continue;
 				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, 1);
 				if(is != null)
-					TFC_ItemHeat.handleItemHeat(is);
+					TFC_ItemHeat.handleItemHeat(is, environmentalDecayFactor);
 				iinv[i] = is;
 			}
 
