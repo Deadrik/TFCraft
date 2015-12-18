@@ -49,9 +49,6 @@ public class FoodCraftingHandler
 		{
 			if (refiningGrain(craftResult, craftingInv))
 			{
-				List<ItemStack> knives = OreDictionary.getOres("itemKnife", false);
-				handleItem(e.player, craftingInv, knives);
-
 				for(int i = 0; i < craftingInv.getSizeInventory(); i++)
 				{
 					ItemStack inputStack = craftingInv.getStackInSlot(i);
@@ -214,48 +211,20 @@ public class FoodCraftingHandler
 		else
 		{
 			// Check if we are doing anything other than combining the food
-			for(int i = 0; i < craftingInv.getSizeInventory(); i++)
-			{
+			for(int i = 0; i < craftingInv.getSizeInventory(); i++) {
 				ItemStack itemstack = craftingInv.getStackInSlot(i);
 				if (itemstack == null)
 					continue;
 				boolean fullInv = isInvFull(player);
 
-				if (itemstack.getItem() instanceof ItemKnife && fullInv)
-				{
-					if (!FoodCraftingHandler.preCrafted)
+				if (itemstack.getItem() instanceof ItemKnife && (!fullInv || !FoodCraftingHandler.preCrafted)) {
+					if (finalDecay <= 0 && (finalWeight / 2f) >= 1) // Splitting food in half AND Food isn't too small to split
 					{
-						// Increase the knife's stack size so it will remain in the grid when crafting completes
-						itemstack.stackSize++;
-						if (itemstack.stackSize > 2)
-							itemstack.stackSize = 2;
-					}
-				}
-
-				if (itemstack.getItem() instanceof ItemKnife && (!fullInv || !FoodCraftingHandler.preCrafted))
-				{
-					if (finalDecay > 0) // Trimming Decay
-					{
-						FoodCraftingHandler.damageItem(player, craftingInv, i, itemstack.getItem());
-					}
-					else if (finalDecay <= 0) // Splitting food in half
-					{
-						if (finalWeight / 2f < 1) // Food is too small to split
-						{
-							// Increase the knife's stack size so it will remain in the grid when crafting completes
-							itemstack.stackSize++;
-							if (itemstack.stackSize > 2)
-								itemstack.stackSize = 2;
-						}
-						else
-						{
-							FoodCraftingHandler.damageItem(player, craftingInv, i, itemstack.getItem());
-							Food.setWeight(craftingInv.getStackInSlot(foodSlot), Helper.roundNumber(finalWeight / 2f, 100));
-							// Increase the food's stack size so it will remain in the grid when crafting completes
-							craftingInv.getStackInSlot(foodSlot).stackSize++;
-							if (craftingInv.getStackInSlot(foodSlot).stackSize > 2)
-								craftingInv.getStackInSlot(foodSlot).stackSize = 2;
-						}
+						Food.setWeight(craftingInv.getStackInSlot(foodSlot), Helper.roundNumber(finalWeight / 2f, 100));
+						// Increase the food's stack size so it will remain in the grid when crafting completes
+						craftingInv.getStackInSlot(foodSlot).stackSize++;
+						if (craftingInv.getStackInSlot(foodSlot).stackSize > 2)
+							craftingInv.getStackInSlot(foodSlot).stackSize = 2;
 					}
 				}
 			}
@@ -527,8 +496,6 @@ public class FoodCraftingHandler
 		FoodCraftingHandler.preCrafted = true;
 		if (refiningGrain(craftResult, craftingInv))
 		{
-			List<ItemStack> knives = OreDictionary.getOres("itemKnife", false);
-			handleItem(player, craftingInv, knives);
 			for(int i = 0; i < craftingInv.getSizeInventory(); i++)
 			{
 				ItemStack inputStack = craftingInv.getStackInSlot(i);
@@ -583,47 +550,4 @@ public class FoodCraftingHandler
 		}
 		return false;
 	}
-
-	public static void handleItem(EntityPlayer entityplayer, IInventory iinventory, Item[] items)
-	{
-		for(int i = 0; i < iinventory.getSizeInventory(); i++)
-		{
-			if(iinventory.getStackInSlot(i) == null)
-				continue;
-			for(int j = 0; j < items.length; j++)
-				damageItem(entityplayer,iinventory,i,items[j]);
-		}
-	}
-
-	public static void handleItem(EntityPlayer entityplayer, IInventory iinventory, List<ItemStack> items)
-	{
-		for (int i = 0; i < iinventory.getSizeInventory(); i++ )
-		{
-			if (iinventory.getStackInSlot(i) == null)
-				continue;
-			for (ItemStack is : items)
-				damageItem(entityplayer, iinventory, i, is.getItem());
-		}
-	}
-
-	public static void damageItem(EntityPlayer entityplayer, IInventory iinventory, int i, Item item)
-	{
-		if(iinventory.getStackInSlot(i).getItem() == item)
-		{
-			int index = i;
-			ItemStack is = iinventory.getStackInSlot(index).copy();
-			if(is != null)
-			{
-				is.damageItem(1 , entityplayer);
-				if (is.getItemDamage() != 0 || entityplayer.capabilities.isCreativeMode)
-				{
-					iinventory.setInventorySlotContents(index, is);
-					iinventory.getStackInSlot(index).stackSize++;
-					if(iinventory.getStackInSlot(index).stackSize > 2)
-						iinventory.getStackInSlot(index).stackSize = 2;
-				}
-			}
-		}
-	}
-
 }
