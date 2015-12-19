@@ -23,6 +23,7 @@ import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
 import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.*;
@@ -750,7 +751,12 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				}
 				else if(FluidContainerRegistry.isEmptyContainer(container))
 				{
-					this.setInventorySlotContents(0, this.removeLiquid(getInputStack()));
+					ItemStack fullContainer = this.removeLiquid(getInputStack());
+					if (fullContainer.getItem() == TFCItems.woodenBucketMilk)
+					{
+						ItemCustomBucketMilk.createTag(fullContainer, 20f);
+					}
+					this.setInventorySlotContents(0, fullContainer);
 				}
 			}
 		}
