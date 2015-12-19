@@ -274,30 +274,7 @@ public class TFC_ItemHeat
 			}
 		}
 	}
-	
-	public static void handleItemHeat(ItemStack is, float ticks)
-	{
-		if (is != null)
-		{
-			if(is.hasTagCompound())
-			{
-				NBTTagCompound comp = is.getTagCompound();
-				if(hasTemp(is))
-				{
-					float temp = getTemp(is);
-					if(temp > 0)
-					{
-						temp =  temp - (ticks * getTempDecrease(is));
-						comp.setFloat("temperature",temp);
-					}
-					if(temp <= 0)
-						comp.removeTag("temperature");
-					if(comp.hasNoTags())
-						is.stackTagCompound = null;
-				}
-			}
-		}
-	}
+
 	public static Boolean setTemp(ItemStack is, float temp)
 	{
 		if(is != null)
