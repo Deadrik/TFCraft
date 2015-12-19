@@ -217,6 +217,9 @@ public class WAILAData implements IWailaDataProvider
 		else if (TFC_Core.isSoilWAILA(block))
 			currenttip = soilBody(itemStack, currenttip, accessor, config);
 
+		else if (tileEntity instanceof TESpawnMeter)
+			currenttip = spawnMeterBody(itemStack, currenttip, accessor, config);
+
 		else if (block == TFCBlocks.torch)
 			currenttip = torchBody(itemStack, currenttip, accessor, config);
 
@@ -335,6 +338,9 @@ public class WAILAData implements IWailaDataProvider
 		reg.registerHeadProvider(new WAILAData(), TESmokeRack.class);
 		reg.registerBodyProvider(new WAILAData(), TESmokeRack.class);
 		reg.registerNBTProvider(new WAILAData(), TESmokeRack.class);
+
+		reg.registerBodyProvider(new WAILAData(), TESpawnMeter.class);
+		reg.registerNBTProvider(new WAILAData(), TESpawnMeter.class);
 
 		// Soil
 		reg.registerBodyProvider(new WAILAData(), BlockDirt.class);
@@ -1194,6 +1200,19 @@ public class WAILAData implements IWailaDataProvider
 				else
 					currenttip.add(is.getDisplayName());
 			}
+		}
+
+		return currenttip;
+	}
+
+	public List<String> spawnMeterBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		int hours = tag.getInteger("protectionHours");
+
+		if (hours > 0)
+		{
+			currenttip.add(hours + " " + TFC_Core.translate("gui.hoursRemaining"));
 		}
 
 		return currenttip;
