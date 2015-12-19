@@ -353,11 +353,12 @@ public class RenderOverlayHandler
 			int yCoord = (int)player.posY;
 			int zCoord = (int)player.posZ;
 			DataLayer evt = TFC_Climate.getCacheManager(mc.theWorld).getEVTLayerAt(xCoord, zCoord);
-			event.left.add(String.format("rain: %.0f, temp: %.2f, average bio temp: %.2f, apparent temp: %.2f, evt: %.3f", new Object[] {
-					TFC_Climate.getRainfall(mc.theWorld, xCoord, yCoord, zCoord), 
+//			event.left.add(String.format("rain: %.0f, temp: %.2f, average bio temp: %.2f, apparent temp: %.2f, evt: %.3f", new Object[] {
+			event.left.add(String.format("rain: %.0f, temp: %.2f, average bio temp: %.2f, evt: %.3f", new Object[] {
+					TFC_Climate.getRainfall(mc.theWorld, xCoord, yCoord, zCoord),
 					TFC_Climate.getHeightAdjustedTemp(mc.theWorld, xCoord, yCoord, zCoord),
 					TFC_Climate.getBioTemperatureHeight(mc.theWorld, xCoord, yCoord, zCoord),
-					TFC_Climate.getHeightAdjustedTemp(mc.theWorld, xCoord, yCoord, zCoord),evt.floatdata1}));
+//					TFC_Climate.getHeightAdjustedTemp(mc.theWorld, xCoord, yCoord, zCoord),evt.floatdata1}));
 
 			if(TFCOptions.enableDebugMode)
 			{
