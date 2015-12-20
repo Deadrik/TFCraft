@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import com.bioxx.tfc.TileEntities.TEBarrel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -1037,8 +1038,10 @@ public class TFC_Core
 				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
 					continue;
 				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, 1f);
-				if(is != null)
+				if(is != null && (iinv instanceof InventoryPlayer || iinv instanceof TEBarrel))
 					TFC_ItemHeat.handleItemHeat(is);
+				else
+					TFC_ItemHeat.handleItemHeatStorage(is);
 				iinv.setInventorySlotContents(i, is);
 			}
 
@@ -1076,8 +1079,10 @@ public class TFC_Core
 				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
 					continue;
 				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, baseDecayMod);
-				if(is != null)
+				if(is != null && (iinv instanceof InventoryPlayer || iinv instanceof TEBarrel))
 					TFC_ItemHeat.handleItemHeat(is);
+				else
+					TFC_ItemHeat.handleItemHeatStorage(is);
 				iinv.setInventorySlotContents(i, is);
 			}
 		}
