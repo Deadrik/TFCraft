@@ -39,6 +39,9 @@ public class ItemMeal extends ItemTerra implements IFood
 
 	//private boolean alwaysEdible = false;
 
+	/**Maximum amount of a meal to be consumed.*/
+	public float maxEatAmount = 5.0f;
+	
 	public ItemMeal()
 	{
 		super();
@@ -177,7 +180,7 @@ public class ItemMeal extends ItemTerra implements IFood
 	 */
 	protected float getEatAmount(FoodStatsTFC fs, float amount)
 	{
-		float eatAmount = Math.min(amount, 5);
+		float eatAmount = Math.min(amount, this.maxEatAmount);
 		float stomachDiff = fs.stomachLevel+eatAmount-fs.getMaxStomach(fs.player);
 		if(stomachDiff > 0)
 			eatAmount-=stomachDiff;
@@ -189,6 +192,15 @@ public class ItemMeal extends ItemTerra implements IFood
 		return 1.0f;
 	}
 
+	/**
+	 * Sets the maximum amount of a meal that can be consumed in one use
+	 * @param amount Maximum amount to be consumed in units relative to maximum stomach levels
+	 */
+	public void setMaxEatAmount(float amount)
+	{
+		this.maxEatAmount = amount;
+	}
+	
 	@Override
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{

@@ -68,6 +68,9 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	public IIcon cookedIcon;
 	protected boolean hasCookedIcon;
 
+	/**Maximum amount of a food to be consumed.*/
+	public float maxEatAmount = 5.0f;
+	
 	public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um)
 	{
 		super();
@@ -104,6 +107,17 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		return this;
 	}
 
+	/**
+	 * Sets the maximum amount of a food that can be consumed in one use
+	 * @param amount Maximum amount to be consumed in units relative to maximum stomach levels
+	 * @return Resulting food item
+	 */
+	public ItemFoodTFC setMaxEatAmount(float amount)
+	{
+		this.maxEatAmount = amount;
+		return this;
+	}
+	
 	public ItemFoodTFC setCanSmoke()
 	{
 		this.canBeSmoked = true;
@@ -450,7 +464,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 				float weight = Food.getWeight(is);
 				float decay = Math.max(Food.getDecay(is), 0);
 
-				float eatAmount = Math.min(weight - decay, 5f);
+				float eatAmount = Math.min(weight - decay, this.maxEatAmount);
 				float stomachDiff = foodstats.stomachLevel+eatAmount-foodstats.getMaxStomach(foodstats.player);
 				if(stomachDiff > 0)
 					eatAmount-=stomachDiff;
