@@ -12,6 +12,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.Tools.ItemKnife;
 import com.bioxx.tfc.api.Food;
@@ -64,8 +65,7 @@ public class FoodCraftingHandler
 					for (int j = 0; j < foodWeight; j += 4)
 						strawCount++;
 
-					if (!e.player.inventory.addItemStackToInventory(new ItemStack(TFCItems.straw, strawCount)))
-						e.player.dropItem(TFCItems.straw, strawCount);
+					TFC_Core.giveItemToPlayer(new ItemStack(TFCItems.straw, strawCount), e.player);
 				}
 			}
 			else if (makingDough(craftResult, craftingInv))
@@ -541,8 +541,7 @@ public class FoodCraftingHandler
 				for (int j = 0; j < foodWeight; j += 4)
 					strawCount++;
 
-				if (!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.straw, strawCount)))
-					player.dropItem(TFCItems.straw, strawCount);
+				TFC_Core.giveItemToPlayer(new ItemStack(TFCItems.straw, strawCount), player);
 			}
 		}
 		else if (makingDough(craftResult, craftingInv))

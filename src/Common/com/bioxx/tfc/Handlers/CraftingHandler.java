@@ -77,9 +77,8 @@ public class CraftingHandler
 					if (iinventory.getStackInSlot(i).getItem() == TFCItems.sheepSkin)
 						size = iinventory.getStackInSlot(i).getItemDamage();
 				}
-				boolean add = !player.inventory.addItemStackToInventory(new ItemStack(TFCItems.hide, 1, size));
-				if (add)
-					player.entityDropItem(new ItemStack(TFCItems.hide, 1, size), 1);
+
+				TFC_Core.giveItemToPlayer(new ItemStack(TFCItems.hide, 1, size), player);
 			}
 			else if(item == TFCItems.woolYarn)
 			{
