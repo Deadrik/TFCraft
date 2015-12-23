@@ -361,6 +361,7 @@ public class TFC_ConfigFiles
 		quiverHUDPosition = generalConfig.getString("quiverHUDPosition", GENERAL, quiverHUDPosition, "Valid position strings are: bottomleft, left, topleft, bottomright, right, topright", new String[]{"bottomleft", "left", "topleft", "bottomright", "right", "topright"}, "config.gui.TFCConfig.general.quiverHUDPosition");
 		enableSolidDetailed = generalConfig.getBoolean("enableSolidDetailed", GENERAL, enableSolidDetailed, "Should sides of detailed blocks be considered solid?", "config.gui.TFCConfig.general.enableSolidDetailed");
 		maxRemovedSolidDetailed = generalConfig.getInt("maxRemovedSolidDetailed", GENERAL, maxRemovedSolidDetailed, 0, 64, "Maximum count of removed sub-blocks on one side for the detailed block side to still be solid.", "config.gui.TFCConfig.general.maxRemovedSolidDetailed");
+		enableToolModeIndicator = generalConfig.getBoolean("enableToolModeIndicator", GENERAL, enableToolModeIndicator, "Set to false to hide the tool mode indicator that is displayed next to the hotbar for tools such as chisels and hoes.", "config.gui.TFCConfig.general.enableToolModeIndicator");
 
 		generalConfig.setCategoryLanguageKey(TIME, "config.gui.TFCConfig.time");
 

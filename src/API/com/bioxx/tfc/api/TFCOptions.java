@@ -21,6 +21,7 @@ public class TFCOptions
 	public static String quiverHUDPosition = "bottomleft";
 	public static boolean enableSolidDetailed = true;
 	public static int maxRemovedSolidDetailed = 12;
+	public static boolean enableToolModeIndicator = true;
 
 	// Time
 	public static int yearLength = 96;

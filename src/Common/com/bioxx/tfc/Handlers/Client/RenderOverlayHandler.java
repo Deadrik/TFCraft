@@ -13,6 +13,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -78,6 +79,8 @@ public class RenderOverlayHandler
 		ScaledResolution sr = event.resolution;
 		Minecraft mc = Minecraft.getMinecraft();
 		EntityPlayer player = mc.thePlayer;
+		InventoryPlayer playerInventory = player.inventory;
+		PlayerInfo playerInfo = PlayerManagerTFC.getInstance().getClientPlayer();
 
 		int healthRowHeight = sr.getScaledHeight() - 40;
 		int armorRowHeight = healthRowHeight - 10;
@@ -87,31 +90,34 @@ public class RenderOverlayHandler
 		TFC_Core.bindTexture(tfcicons);
 
 		//Render Tool Mode
-		if (player.inventory.getCurrentItem() != null &&
-				player.inventory.getCurrentItem().getItem() instanceof ItemCustomHoe)
+		if (TFCOptions.enableToolModeIndicator && playerInventory.getCurrentItem() != null)
 		{
-			int mode = PlayerManagerTFC.getInstance().getClientPlayer().hoeMode;
-			this.drawTexturedModalRect(mid + 95, sr.getScaledHeight() - 21, 0+(20*mode), 38, 20, 20);
-		}
-		else if (player.inventory.getCurrentItem() != null &&
-				player.inventory.getCurrentItem().getItem() instanceof ItemChisel)
-		{
-			boolean hasHammer = false;
+			Item currentItem = playerInventory.getCurrentItem().getItem();
 
-			for (int i = 0; i < 9; i++)
+			if (currentItem instanceof ItemCustomHoe)
 			{
-				if (player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemHammer)
-				{
-					hasHammer = true;
-					break;
-				}
+				int mode = playerInfo.hoeMode;
+				this.drawTexturedModalRect(mid + 95, sr.getScaledHeight() - 21, 0 + (20 * mode), 38, 20, 20);
 			}
-			if (hasHammer)
+			else if (currentItem instanceof ItemChisel)
 			{
-				int mode = PlayerManagerTFC.getInstance().getClientPlayer().chiselMode;
-				TFC_Core.bindTexture(ChiselManager.getInstance().getResourceLocation(mode));
-				this.drawTexturedModalRect(mid + 95, sr.getScaledHeight() - 21, ChiselManager.getInstance().getTextureU(mode), ChiselManager.getInstance().getTextureV(mode), 20, 20);
-				TFC_Core.bindTexture(tfcicons);
+				boolean hasHammer = false;
+
+				for (int i = 0; i < 9; i++)
+				{
+					if (playerInventory.mainInventory[i] != null && playerInventory.mainInventory[i].getItem() instanceof ItemHammer)
+					{
+						hasHammer = true;
+						break;
+					}
+				}
+				if (hasHammer)
+				{
+					int mode = playerInfo.chiselMode;
+					TFC_Core.bindTexture(ChiselManager.getInstance().getResourceLocation(mode));
+					this.drawTexturedModalRect(mid + 95, sr.getScaledHeight() - 21, ChiselManager.getInstance().getTextureU(mode), ChiselManager.getInstance().getTextureV(mode), 20, 20);
+					TFC_Core.bindTexture(tfcicons);
+				}
 			}
 		}
 
@@ -180,7 +186,6 @@ public class RenderOverlayHandler
 			TFC_Core.bindTexture(tfcicons);
 		}
 
-		PlayerInfo playerclient = PlayerManagerTFC.getInstance().getClientPlayer();
 		if(mc.playerController.gameIsSurvivalOrAdventure())
 		{
 			//Draw Health
@@ -201,9 +206,9 @@ public class RenderOverlayHandler
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.drawTexturedModalRect(mid+1, healthRowHeight, 0, 20, 90, 5);
-			if(playerclient != null && playerclient.guishowFoodRestoreAmount)
+			if (playerInfo.guishowFoodRestoreAmount)
 			{
-				float percentFood2 = Math.min(percentFood + playerclient.guiFoodRestoreAmount / foodstats.getMaxStomach(player), 1);
+				float percentFood2 = Math.min(percentFood + playerInfo.guiFoodRestoreAmount / foodstats.getMaxStomach(player), 1);
 				GL11.glColor4f(0.0F, 0.6F, 0.0F, 0.3F);
 				this.drawTexturedModalRect(mid+1, healthRowHeight, 0, 25, (int) (90*(percentFood2)), 5);
 			}
