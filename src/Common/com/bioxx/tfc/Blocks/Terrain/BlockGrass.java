@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -257,24 +258,53 @@ public class BlockGrass extends BlockTerra
 		{
 			int x = i + rand.nextInt(3) - 1;
 			int z = k + rand.nextInt(3) - 1;
-			int y = world.getTopSolidOrLiquidBlock(x, z) - 1;
-
-			if (world.blockExists(x, y, z) && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
+			if (world.blockExists(x, Global.SEALEVEL, z))
 			{
-				float rain = TFC_Climate.getRainfall(world, x, y, z);
+				int y = this.getTopSolidBlock(world, x, z);
 
-				Block id = world.getBlock(x, y, z);
-				int meta = world.getBlockMetadata(x, y, z);
+				if (y > 0)
+				{
+					float rain = TFC_Climate.getRainfall(world, x, y, z);
+					Block id = world.getBlock(x, y, z);
+					int meta = world.getBlockMetadata(x, y, z);
 
-				//Spread to other blocks
-				if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0)
-					world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRainByBlock(id, rain), meta, 0x2);
-				else if (TFC_Core.isClay(id) && rand.nextInt(10) == 0)
-					world.setBlock(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta, 0x2);
-				else if (TFC_Core.isPeat(id) && rand.nextInt(10) == 0)
-					world.setBlock(x, y, z, TFCBlocks.peatGrass, 0, 0x2);
+					//Spread to other blocks
+					if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0)
+						world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRainByBlock(id, rain), meta, 0x2);
+					else if (TFC_Core.isClay(id) && rand.nextInt(10) == 0)
+						world.setBlock(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta, 0x2);
+					else if (TFC_Core.isPeat(id) && rand.nextInt(10) == 0)
+						world.setBlock(x, y, z, TFCBlocks.peatGrass, 0, 0x2);
+				}
 			}
 		}
+	}
+
+	/**
+	 * Edited version of getTopSolidOrLiquidBlock from World.class to account for transparent blocks and ignore liquids
+	 */
+	public int getTopSolidBlock(World world, int xCoord, int zCoord)
+	{
+		Chunk chunk = world.getChunkFromBlockCoords(xCoord, zCoord);
+		int x = xCoord;
+		int z = zCoord;
+		int y = chunk.getTopFilledSegment() + 15;
+		xCoord &= 15;
+
+		for (zCoord &= 15; y > 0; --y)
+		{
+			Block block = chunk.getBlock(xCoord, y, zCoord);
+			Material material = block.getMaterial();
+			boolean solidTopOrBottom = world.isSideSolid(x, y, z, ForgeDirection.UP) || world.isSideSolid(x, y, z, ForgeDirection.DOWN);
+
+			if (block.isOpaqueCube() && block.renderAsNormalBlock() && solidTopOrBottom &&
+				material.blocksMovement() && material != Material.leaves && material != Material.water && !block.isFoliage(world, x, y, z))
+			{
+				return y;
+			}
+		}
+
+		return -1;
 	}
 
 	@Override
@@ -303,7 +333,7 @@ public class BlockGrass extends BlockTerra
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
 	{
-		if(world.isAirBlock(x, y - 1, z))
+		if (world.isAirBlock(x, y - 1, z) && !BlockCollapsible.isNearSupport(world, x, y, z, 4, 0))
 		{
 			int meta = world.getBlockMetadata(x, y, z);
 			world.setBlock(x, y, z, TFC_Core.getTypeForDirtFromGrass(this), meta, 0x2);
