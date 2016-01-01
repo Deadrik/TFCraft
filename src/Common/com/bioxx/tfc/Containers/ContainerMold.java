@@ -3,6 +3,7 @@ package com.bioxx.tfc.Containers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -92,71 +93,79 @@ public class ContainerMold extends ContainerTFC
 		{
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
 			short oldTransferTimer = pi.moldTransferTimer;
+			ItemStack sourceStack = containerInv.getStackInSlot(0);
+			ItemStack inputStack = containerInv.getStackInSlot(1);
 
-			if(containerInv.getStackInSlot(0) != null && containerInv.getStackInSlot(1) != null)
+			if (sourceStack != null && inputStack != null)
 			{
-				if(containerInv.getStackInSlot(0).getItem() instanceof ItemMeltedMetal &&
-						containerInv.getStackInSlot(1).getItem() == TFCItems.ceramicMold &&
-						containerInv.getStackInSlot(1).getItemDamage() == 1 &&
-						TFC_ItemHeat.getIsLiquid(containerInv.getStackInSlot(0)))
+				Item sourceItem = sourceStack.getItem();
+				Item inputItem = inputStack.getItem();
+				int inputDamage = inputStack.getItemDamage();
+
+				if (sourceItem instanceof ItemMeltedMetal && inputItem == TFCItems.ceramicMold && inputDamage == 1 && TFC_ItemHeat.getIsLiquid(sourceStack))
 				{
-					ItemStack is = containerInv.getStackInSlot(0).copy();
+					ItemStack is = sourceStack.copy();
 					is.setItemDamage(100);
-					containerInv.setInventorySlotContents(1,is);
+					containerInv.setInventorySlotContents(1, is);
 					pi.moldTransferTimer = 100;
 				}
-				else if(containerInv.getStackInSlot(0).getItem() instanceof ItemMeltedMetal && 
-						containerInv.getStackInSlot(1).getItem() instanceof ItemMeltedMetal && 
-						containerInv.getStackInSlot(0).getItem() == containerInv.getStackInSlot(1).getItem() &&
-						containerInv.getStackInSlot(1).getItemDamage() != 0)
+				else if (sourceItem instanceof ItemMeltedMetal && inputItem instanceof ItemMeltedMetal && sourceItem == inputItem && inputDamage != 0)
 				{
 					pi.moldTransferTimer = 100;
 				}
 			}
 
-			if(containerInv.getStackInSlot(1) != null && pi.moldTransferTimer < 100 && 
+			if (inputStack != null && pi.moldTransferTimer < 100 &&
 					CraftingManagerTFC.getInstance().findMatchingRecipe(this.containerInv, world) != null)
 			{
 				pi.moldTransferTimer++;
 			}
 
-			if(containerInv.getStackInSlot(0) != null && containerInv.getStackInSlot(1) != null && pi.moldTransferTimer == 1000)
-				pi.moldTransferTimer = 0;
-
-			if(containerInv.getStackInSlot(0) == null || containerInv.getStackInSlot(1) == null)
-				pi.moldTransferTimer = 1000;
-
-			if(containerInv.getStackInSlot(0) != null && containerInv.getStackInSlot(1) != null && pi.moldTransferTimer == 100 &&
-					containerInv.getStackInSlot(0).getItem() instanceof ItemMeltedMetal && 
-					containerInv.getStackInSlot(1).getItem() instanceof ItemMeltedMetal)
+			if (sourceStack != null && inputStack != null && pi.moldTransferTimer == 1000)
 			{
-				if(containerInv.getStackInSlot(0).getItem() == containerInv.getStackInSlot(1).getItem() && containerInv.getStackInSlot(1).getItemDamage() != 0)
-				{
-					int s0 = containerInv.getStackInSlot(0).getItemDamage();
-					int s1 = containerInv.getStackInSlot(1).getItemDamage();
+				pi.moldTransferTimer = 0;
+			}
 
-					containerInv.getStackInSlot(0).setItemDamage(s0+1);
-					containerInv.getStackInSlot(1).setItemDamage(s1-1);
-					if(containerInv.getStackInSlot(0).getItemDamage() == containerInv.getStackInSlot(0).getMaxDamage())
-						containerInv.setInventorySlotContents(0, new ItemStack(TFCItems.ceramicMold, 1, 1));
+			if (sourceStack == null || inputStack == null)
+			{
+				pi.moldTransferTimer = 1000;
+			}
+
+			if (sourceStack != null && inputStack != null && pi.moldTransferTimer == 100)
+			{
+				Item sourceItem = sourceStack.getItem();
+				Item inputItem = inputStack.getItem();
+				int newSourceDamage = sourceStack.getItemDamage() + 1;
+				int inputDamage = inputStack.getItemDamage();
+				ItemStack recipeOutput = CraftingManagerTFC.getInstance().findMatchingRecipe(this.containerInv, world);
+
+				if (sourceItem instanceof ItemMeltedMetal && inputItem instanceof ItemMeltedMetal)
+				{
+					if (sourceItem == inputItem && inputDamage != 0)
+					{
+						sourceStack.setItemDamage(newSourceDamage);
+						inputStack.setItemDamage(inputDamage - 1);
+						if (newSourceDamage >= sourceStack.getMaxDamage() - 1) // Subtract one so we never have an unshaped metal with 0/100 units
+						{
+							containerInv.setInventorySlotContents(0, new ItemStack(TFCItems.ceramicMold, 1, 1));
+						}
+					}
+				}
+				else if (recipeOutput != null)
+				{
+					recipeOutput.setTagCompound(inputStack.stackTagCompound);
+					craftResult.setInventorySlotContents(0, recipeOutput);
+					containerInv.setInventorySlotContents(1, null);
+					containerInv.setInventorySlotContents(1, new ItemStack(TFCItems.ceramicMold, 1, 1));
+					containerInv.setInventorySlotContents(0, null);
 				}
 			}
-			else if(containerInv.getStackInSlot(0) != null && containerInv.getStackInSlot(1) != null && pi.moldTransferTimer == 100 &&
-					CraftingManagerTFC.getInstance().findMatchingRecipe(this.containerInv, world) != null)
-			{
-				ItemStack is = CraftingManagerTFC.getInstance().findMatchingRecipe(this.containerInv, world);
-				is.setTagCompound(containerInv.getStackInSlot(1).stackTagCompound);
-				craftResult.setInventorySlotContents(0, is);
-				containerInv.setInventorySlotContents(1, null);
-				containerInv.setInventorySlotContents(1, new ItemStack(TFCItems.ceramicMold, 1, 1));
-				containerInv.setInventorySlotContents(0, null);
-			}
 
-			for (int var1 = 0; var1 < this.crafters.size(); ++var1)
+			for (int i = 0; i < this.crafters.size(); ++i)
 			{
-				ICrafting var2 = (ICrafting)this.crafters.get(var1);
+				ICrafting player = (ICrafting)this.crafters.get(i);
 				if (pi.moldTransferTimer != oldTransferTimer)
-					var2.sendProgressBarUpdate(this, 0, pi.moldTransferTimer);
+					player.sendProgressBarUpdate(this, 0, pi.moldTransferTimer);
 			}
 		}
 	}
