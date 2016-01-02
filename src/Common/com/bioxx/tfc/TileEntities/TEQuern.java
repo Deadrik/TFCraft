@@ -161,6 +161,7 @@ public class TEQuern extends NetworkTileEntity implements IInventory
 	{
 		if(storage[slot] != null)
 		{
+			// Use a non-player, non-null entity so the handstone is damaged even when the player is in creative mode
 			storage[slot].damageItem(slot, new EntityCowTFC(this.worldObj));
 			if(storage[slot].stackSize == 0 || storage[slot].getItemDamage() == storage[slot].getMaxDamage())
 			{
