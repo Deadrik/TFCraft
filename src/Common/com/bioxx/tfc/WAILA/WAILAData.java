@@ -13,6 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+
 import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.Blocks.BlockCharcoal;
@@ -41,7 +42,6 @@ import com.bioxx.tfc.api.Crafting.*;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Util.Helper;
-
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
@@ -216,10 +216,10 @@ public class WAILAData implements IWailaDataProvider
 
 		else if (TFC_Core.isSoilWAILA(block))
 			currenttip = soilBody(itemStack, currenttip, accessor, config);
-		
-		else if (tileEntity instanceof TEWorldItem)
-			currenttip =  worldBody(itemStack, currenttip, accessor, config);
-		
+
+		else if (tileEntity instanceof TESpawnMeter)
+			currenttip = spawnMeterBody(itemStack, currenttip, accessor, config);
+
 		else if (block == TFCBlocks.torch)
 			currenttip = torchBody(itemStack, currenttip, accessor, config);
 
@@ -339,6 +339,9 @@ public class WAILAData implements IWailaDataProvider
 		reg.registerBodyProvider(new WAILAData(), TESmokeRack.class);
 		reg.registerNBTProvider(new WAILAData(), TESmokeRack.class);
 
+		reg.registerBodyProvider(new WAILAData(), TESpawnMeter.class);
+		reg.registerNBTProvider(new WAILAData(), TESpawnMeter.class);
+
 		// Soil
 		reg.registerBodyProvider(new WAILAData(), BlockDirt.class);
 		reg.registerBodyProvider(new WAILAData(), BlockSand.class);
@@ -353,7 +356,6 @@ public class WAILAData implements IWailaDataProvider
 
 		reg.registerStackProvider(new WAILAData(), TEWorldItem.class);
 		reg.registerNBTProvider(new WAILAData(), TEWorldItem.class);
-		reg.registerBodyProvider(new WAILAData(), TEWorldItem.class);
 	}
 
 	// Stacks
@@ -1020,7 +1022,7 @@ public class WAILAData implements IWailaDataProvider
 				currenttip.add(TFC_Core.translate("gui.metal.Gold"));
 				break;
 			case 2:
-				currenttip.add(TFC_Core.translate("gui.ore.Platinum"));
+				currenttip.add(TFC_Core.translate("gui.metal.Platinum") + " - " + TFC_Core.translate("gui.useless"));
 				break;
 			case 3:
 			case 10:
@@ -1034,7 +1036,7 @@ public class WAILAData implements IWailaDataProvider
 				currenttip.add(TFC_Core.translate("gui.metal.Tin"));
 				break;
 			case 6:
-				currenttip.add(TFC_Core.translate("gui.ore.Lead"));
+				currenttip.add(TFC_Core.translate("gui.metal.Lead") + " - " + TFC_Core.translate("gui.useless"));
 				break;
 			case 7:
 				currenttip.add(TFC_Core.translate("gui.metal.Bismuth"));
@@ -1068,28 +1070,14 @@ public class WAILAData implements IWailaDataProvider
 			switch (meta)
 			{
 			case 1:
-				currenttip.add(TFC_Core.translate("gui.ore.gypsum"));
-				break;
 			case 2:
-				currenttip.add(TFC_Core.translate("gui.ore.satinspar"));
-				break;
 			case 3:
-				currenttip.add(TFC_Core.translate("gui.ore.selenite"));
-				break;
 			case 6:
-				currenttip.add(TFC_Core.translate("gui.ore.petrifiedwood"));
-				break;
 			case 8:
-				currenttip.add(TFC_Core.translate("gui.ore.jet"));
-				break;
 			case 9:
-				currenttip.add(TFC_Core.translate("gui.ore.microcline"));
-				break;
 			case 10:
-				currenttip.add(TFC_Core.translate("gui.ore.pitchblende"));
-				break;
 			case 14:
-				currenttip.add(TFC_Core.translate("gui.ore.serpentine"));
+				currenttip.add(TFC_Core.translate("gui.useless"));
 				break;
 			case 5:
 				currenttip.add(TFC_Core.translate("item.Diamond.Normal.name"));
@@ -1111,7 +1099,7 @@ public class WAILAData implements IWailaDataProvider
 				currenttip.add(TFC_Core.translate("item.Powder.Flux.name"));
 				break;
 			case 1:
-				currenttip.add(TFC_Core.translate("gui.ore.olivine"));
+				currenttip.add(TFC_Core.translate("gui.useless"));
 				break;
 			}
 		}
@@ -1217,6 +1205,19 @@ public class WAILAData implements IWailaDataProvider
 		return currenttip;
 	}
 
+	public List<String> spawnMeterBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		int hours = tag.getInteger("protectionHours");
+
+		if (hours > 0)
+		{
+			currenttip.add(hours + " " + TFC_Core.translate("gui.hoursRemaining"));
+		}
+
+		return currenttip;
+	}
+
 	public List<String> soilBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		Block b = accessor.getBlock();
@@ -1247,57 +1248,6 @@ public class WAILAData implements IWailaDataProvider
 		return currenttip;
 	}
 
-	public List<String> worldBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
-	{
-		int meta = itemStack.getItemDamage();
-		Item item = itemStack.getItem();
-		
-		if (item == TFCItems.smallOreChunk)
-		{
-			switch (meta)
-			{
-			case 0:
-			case 9:
-			case 13:
-				currenttip.add(TFC_Core.translate("gui.metal.Copper"));
-				break;
-			case 1:
-				currenttip.add(TFC_Core.translate("gui.metal.Gold"));
-				break;
-			case 2:
-				currenttip.add(TFC_Core.translate("gui.metal.Platinum"));
-				break;
-			case 3:
-			case 10:
-			case 11:
-				currenttip.add(TFC_Core.translate("gui.metal.Iron"));
-				break;
-			case 4:
-				currenttip.add(TFC_Core.translate("gui.metal.Silver"));
-				break;
-			case 5:
-				currenttip.add(TFC_Core.translate("gui.metal.Tin"));
-				break;
-			case 6:
-				currenttip.add(TFC_Core.translate("gui.metal.Lead"));
-				break;
-			case 7:
-				currenttip.add(TFC_Core.translate("gui.metal.Bismuth"));
-				break;
-			case 8:
-				currenttip.add(TFC_Core.translate("gui.metal.Nickel"));
-				break;
-			case 12:
-				currenttip.add(TFC_Core.translate("gui.metal.Zinc"));
-				break;
-			case 14:
-			case 15:
-				currenttip.add(TFC_Core.translate("item.coal.coal.name"));
-				return currenttip;
-			}
-		}
-		return currenttip;
-	}
 	// Other
 	private ItemStack[] getStorage(NBTTagCompound tag, TileEntity te)
 	{

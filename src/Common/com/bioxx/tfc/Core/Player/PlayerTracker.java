@@ -14,6 +14,7 @@ import cpw.mods.fml.common.network.FMLNetworkEvent.ServerDisconnectionFromClient
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.Config.TFC_ConfigFiles;
 import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.ConfigSyncPacket;
 import com.bioxx.tfc.Handlers.Network.InitClientWorldPacket;
@@ -30,6 +31,7 @@ public class PlayerTracker
 		PlayerManagerTFC.getInstance().players.add(new PlayerInfo(
 				event.player.getCommandSenderName(),
 				event.player.getUniqueID()));
+		TFC_ConfigFiles.reloadAll();
 		AbstractPacket pkt = new InitClientWorldPacket(event.player);
 		TerraFirmaCraft.PACKET_PIPELINE.sendTo(pkt, (EntityPlayerMP) event.player);
 		TerraFirmaCraft.PACKET_PIPELINE.sendTo(new ConfigSyncPacket(), (EntityPlayerMP) event.player);

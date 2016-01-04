@@ -93,8 +93,8 @@ public class ChunkData
 	{
 		updateSpawnProtection();
 
-		if(spawnProtection > 4320)
-			spawnProtection = 4320;
+		if (spawnProtection > 24 * TFC_Time.daysInMonth * TFCOptions.maxProtectionMonths)
+			spawnProtection = 24 * TFC_Time.daysInMonth * TFCOptions.maxProtectionMonths;
 
 		return spawnProtection;
 	}
@@ -105,8 +105,8 @@ public class ChunkData
 		
 		spawnProtection += amount;
 
-		if(spawnProtection > 4320)
-			spawnProtection = 4320;
+		if (spawnProtection > 24 * TFC_Time.daysInMonth * TFCOptions.maxProtectionMonths)
+			spawnProtection = 24 * TFC_Time.daysInMonth * TFCOptions.maxProtectionMonths;
 	}
 	
 	private void updateSpawnProtection()
