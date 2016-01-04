@@ -100,8 +100,8 @@ public class TEFruitTreeWood extends TileEntity implements IInventory
 
 				//First we attempt to grow the trunk of the tree higher
 				if (birthTimeWood + TRUNK_GROW_TIME < TFC_Time.getTotalDays() && height < 3 && isTrunk && worldObj.rand.nextInt(16 / t) == 0 &&
-						(worldObj.isAirBlock(xCoord, yCoord + 1, zCoord) || worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.fruitTreeLeaves ||
-						 worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.fruitTreeLeaves2))
+					(worldObj.isAirBlock(xCoord, yCoord + 1, zCoord) || worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.fruitTreeLeaves ||
+						worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.fruitTreeLeaves2))
 				{
 					worldObj.setBlock(xCoord, yCoord + 1, zCoord, TFCBlocks.fruitTreeWood, meta, 0x2);
 					if (worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TEFruitTreeWood)
@@ -118,8 +118,8 @@ public class TEFruitTreeWood extends TileEntity implements IInventory
 						worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.fruitTreeWood) // Only grow branches if the tree is full height
 				{
 					int r = worldObj.rand.nextInt(4);
-					if (r == 0 && worldObj.blockExists(xCoord + 1, yCoord, zCoord) && worldObj.isAirBlock(xCoord + 1, yCoord, zCoord) ||
-							worldObj.getBlock(xCoord + 1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves || worldObj.getBlock(xCoord + 1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves2)
+					if (r == 0 && worldObj.blockExists(xCoord + 1, yCoord, zCoord) && (worldObj.isAirBlock(xCoord + 1, yCoord, zCoord) ||
+						worldObj.getBlock(xCoord + 1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves || worldObj.getBlock(xCoord + 1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves2))
 					{
 						worldObj.setBlock(xCoord + 1, yCoord, zCoord, TFCBlocks.fruitTreeWood, meta, 0x2);
 						if (worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof TEFruitTreeWood)
@@ -128,8 +128,8 @@ public class TEFruitTreeWood extends TileEntity implements IInventory
 							branchTE.setupBirth(false, height, birthTimeWood + BRANCH_GROW_TIME, birthTimeLeaves);
 						}
 					}
-					else if (r == 1 && worldObj.blockExists(xCoord, yCoord, zCoord - 1) && worldObj.isAirBlock(xCoord, yCoord, zCoord - 1) ||
-							worldObj.getBlock(xCoord, yCoord, zCoord - 1) == TFCBlocks.fruitTreeLeaves || worldObj.getBlock(xCoord + 1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves2)
+					else if (r == 1 && worldObj.blockExists(xCoord, yCoord, zCoord - 1) && (worldObj.isAirBlock(xCoord, yCoord, zCoord - 1) ||
+							worldObj.getBlock(xCoord, yCoord, zCoord - 1) == TFCBlocks.fruitTreeLeaves || worldObj.getBlock(xCoord, yCoord, zCoord - 1) == TFCBlocks.fruitTreeLeaves2))
 					{
 						worldObj.setBlock(xCoord, yCoord, zCoord - 1, TFCBlocks.fruitTreeWood, meta, 0x2);
 						if (worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof TEFruitTreeWood)
@@ -138,8 +138,8 @@ public class TEFruitTreeWood extends TileEntity implements IInventory
 							branchTE.setupBirth(false, height, birthTimeWood + BRANCH_GROW_TIME, birthTimeLeaves);
 						}
 					}
-					else if (r == 2 && worldObj.blockExists(xCoord - 1, yCoord, zCoord) && worldObj.isAirBlock(xCoord - 1, yCoord, zCoord) ||
-							worldObj.getBlock(xCoord - 1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves || worldObj.getBlock(xCoord + 1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves2)
+					else if (r == 2 && worldObj.blockExists(xCoord - 1, yCoord, zCoord) && (worldObj.isAirBlock(xCoord - 1, yCoord, zCoord) ||
+							worldObj.getBlock(xCoord - 1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves || worldObj.getBlock(xCoord - 1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves2))
 					{
 						worldObj.setBlock(xCoord - 1, yCoord, zCoord, TFCBlocks.fruitTreeWood, meta, 0x2);
 						if (worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof TEFruitTreeWood)
@@ -148,8 +148,8 @@ public class TEFruitTreeWood extends TileEntity implements IInventory
 							branchTE.setupBirth(false, height, birthTimeWood + BRANCH_GROW_TIME, birthTimeLeaves);
 						}
 					}
-					else if (r == 3 && worldObj.blockExists(xCoord, yCoord, zCoord + 1) && worldObj.isAirBlock(xCoord, yCoord, zCoord + 1) ||
-							worldObj.getBlock(xCoord, yCoord, zCoord + 1) == TFCBlocks.fruitTreeLeaves || worldObj.getBlock(xCoord + 1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves2)
+					else if (r == 3 && worldObj.blockExists(xCoord, yCoord, zCoord + 1) && (worldObj.isAirBlock(xCoord, yCoord, zCoord + 1) ||
+							worldObj.getBlock(xCoord, yCoord, zCoord + 1) == TFCBlocks.fruitTreeLeaves || worldObj.getBlock(xCoord, yCoord, zCoord + 1) == TFCBlocks.fruitTreeLeaves2))
 					{
 						worldObj.setBlock(xCoord, yCoord, zCoord + 1, TFCBlocks.fruitTreeWood, meta, 0x2);
 						if (worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof TEFruitTreeWood)
