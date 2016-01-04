@@ -361,7 +361,7 @@ public class TFC_ConfigFiles
 		quiverHUDPosition = generalConfig.getString("quiverHUDPosition", GENERAL, quiverHUDPosition, "Valid position strings are: bottomleft, left, topleft, bottomright, right, topright", new String[]{"bottomleft", "left", "topleft", "bottomright", "right", "topright"}, "config.gui.TFCConfig.general.quiverHUDPosition");
 		enableSolidDetailed = generalConfig.getBoolean("enableSolidDetailed", GENERAL, enableSolidDetailed, "Should sides of detailed blocks be considered solid?", "config.gui.TFCConfig.general.enableSolidDetailed");
 		maxRemovedSolidDetailed = generalConfig.getInt("maxRemovedSolidDetailed", GENERAL, maxRemovedSolidDetailed, 0, 64, "Maximum count of removed sub-blocks on one side for the detailed block side to still be solid.", "config.gui.TFCConfig.general.maxRemovedSolidDetailed");
-		hammerBreakSpeed = generalConfig.getInt("hammerBreakSpeed", GENERAL, hammerBreakSpeed, 1, 360, "Divisor to set speed of Hammer breaking Smooth and Brick Blocks. Higher is SLOWER!", "config.gui.TFCConfig.general.hammerBreakSpeed"); 
+		hammerBreakSpeed = generalConfig.getInt("hammerBreakSpeed", GENERAL, hammerBreakSpeed, 1, 360, "Divisor to set speed of Hammer breaking Smooth and Brick Blocks. Higher is SLOWER!", "config.gui.TFCConfig.general.hammerBreakSpeed");
 		generalConfig.setCategoryLanguageKey(TIME, "config.gui.TFCConfig.time");
 
 		yearLength = generalConfig.getInt("yearLength", TIME, yearLength, 96, 12000, "This is how many days are in a year. Keep this to multiples of 12.", "config.gui.TFCConfig.time.yearLength");

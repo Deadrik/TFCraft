@@ -580,7 +580,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			if (TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
 			{
 				EntityCowTFC baby = (EntityCowTFC) createChildTFC(this);
-				baby.setLocationAndAngles(posX + (rand.nextFloat() - 0.5F) * 2F, posY, posZ + (rand.nextFloat() - 0.5F) * 2F, 0.0F, 0.0F);
+				baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
 				baby.rotationYawHead = baby.rotationYaw;
 				baby.renderYawOffset = baby.rotationYaw;
 				worldObj.spawnEntityInWorld(baby);

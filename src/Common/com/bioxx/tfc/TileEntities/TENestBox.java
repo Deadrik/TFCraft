@@ -221,8 +221,7 @@ public class TENestBox extends TileEntity implements IInventory
 						{
 							EntityChickenTFC chick = new EntityChickenTFC(worldObj, xCoord + 0.5, yCoord + 1, zCoord + 0.5, 
 									(NBTTagCompound) inventory[i].getTagCompound().getTag("Genes"));
-							Random rand = new Random();
-							chick.setLocationAndAngles (xCoord + (rand.nextFloat() - 0.5F) * 2F, yCoord, zCoord + (rand.nextFloat() - 0.5F) * 2F, 0.0F, 0.0F);
+							chick.setLocationAndAngles(xCoord + 0.5, yCoord + 1, zCoord + 0.5, 0.0F, 0.0F);
 							chick.rotationYawHead = chick.rotationYaw;
 							chick.renderYawOffset = chick.rotationYaw;
 							worldObj.spawnEntityInWorld(chick);

@@ -136,25 +136,38 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			if(stackToSmelt != null)
 			{
 				Item itemToSmelt = stackToSmelt.getItem();
+				int newDamage = stackToSmelt.getItemDamage() + 1;
+				int maxDamage = stackToSmelt.getMaxDamage() - 1; // Subtract one so we never have an unshaped metal with 0/100 units
+
 				if(itemToSmelt instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(storage[0]))
 				{
 					if(inputTick > 10)
 					{
-						if(currentAlloy != null && currentAlloy.outputType != null && itemToSmelt == currentAlloy.outputType.meltedItem)
+						Metal inputMetal = MetalRegistry.instance.getMetalFromItem(itemToSmelt);
+
+						if (currentAlloy != null && currentAlloy.outputType != null && itemToSmelt == currentAlloy.outputType.meltedItem)
 						{
-							this.addMetal(MetalRegistry.instance.getMetalFromItem(itemToSmelt), (short) 1);
-							if(stackToSmelt.getItemDamage()+1 >= storage[0].getMaxDamage())
-								storage[0] = new ItemStack(TFCItems.ceramicMold,1,1);
+							this.addMetal(inputMetal, (short) 1);
+							if (newDamage >= maxDamage)
+							{
+								storage[0] = new ItemStack(TFCItems.ceramicMold, 1, 1);
+							}
 							else
-								stackToSmelt.setItemDamage(stackToSmelt.getItemDamage() + 1);
+							{
+								stackToSmelt.setItemDamage(newDamage);
+							}
 						}
 						else
 						{
-							this.addMetal(MetalRegistry.instance.getMetalFromItem(itemToSmelt), (short) 1);
-							if(stackToSmelt.getItemDamage()+1 >= stackToSmelt.getMaxDamage())
-								storage[0] = new ItemStack(TFCItems.ceramicMold,1,1);
+							this.addMetal(inputMetal, (short) 1);
+							if (newDamage >= maxDamage)
+							{
+								storage[0] = new ItemStack(TFCItems.ceramicMold, 1, 1);
+							}
 							else
-								stackToSmelt.setItemDamage(stackToSmelt.getItemDamage() + 1);
+							{
+								stackToSmelt.setItemDamage(newDamage);
+							}
 						}
 						inputTick = 0;
 						updateGui((byte) 0);
