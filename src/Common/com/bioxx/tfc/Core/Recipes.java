@@ -322,6 +322,8 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.smallMetalChunk, 10, 18), new ItemStack(TFCItems.sterlingSilverIngot), "itemChisel"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.smallMetalChunk, 10, 19), new ItemStack(TFCItems.tinIngot), "itemChisel"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.smallMetalChunk, 10, 20), new ItemStack(TFCItems.zincIngot), "itemChisel"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.smallMetalChunk, 10, 21), new ItemStack(TFCItems.electrumIngot), "itemChisel"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.smallMetalChunk, 10, 22), new ItemStack(TFCItems.cupronickelIngot), "itemChisel"));
 
 		//Ingot -> Unshaped
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.bismuthUnshaped, 1, 0),
