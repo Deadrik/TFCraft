@@ -1915,6 +1915,9 @@ item.Weak Red Steel Ingot.name=Weak Red Steel Ingot
 item.Weak Steel Ingot.name=Weak Steel Ingot
 item.Wrought Iron Ingot.name=Wrought Iron Ingot
 item.Zinc Ingot.name=Zinc Ingot
+item.Electrum Ingot.name=Electrum Ingot
+item.Cupronickel Ingot.name=Cupronickel Ingot
+
 
 #== Double Ingot ==
 item.Bismuth Bronze Double Ingot.name=Bismuth Bronze Double Ingot
@@ -1938,6 +1941,8 @@ item.Sterling Silver Double Ingot.name=Sterling Silver Double Ingot
 item.Tin Double Ingot.name=Tin Double Ingot
 item.Wrought Iron Double Ingot.name=Wrought Iron Double Ingot
 item.Zinc Double Ingot.name=Zinc Double Ingot
+item.Electrum Double Ingot.name=Electrum Double Ingot
+item.Cupronickel Double Ingot.name=Cupronickel Double Ingot
 
 #== Sheet ==
 item.Bismuth Bronze Sheet.name=Bismuth Bronze Sheet
@@ -1961,6 +1966,8 @@ item.Sterling Silver Sheet.name=Sterling Silver Sheet
 item.Tin Sheet.name=Tin Sheet
 item.Wrought Iron Sheet.name=Wrought Iron Sheet
 item.Zinc Sheet.name=Zinc Sheet
+item.Electrum Sheet.name=Electrum Sheet
+item.Cupronickel Sheet.name=Cupronickel Sheet
 
 #== DoubleSheet ==
 item.Bismuth Bronze Double Sheet.name=Bismuth Bronze Double Sheet
@@ -1984,6 +1991,8 @@ item.Sterling Silver Double Sheet.name=Sterling Silver Double Sheet
 item.Tin Double Sheet.name=Tin Double Sheet
 item.Wrought Iron Double Sheet.name=Wrought Iron Double Sheet
 item.Zinc Double Sheet.name=Zinc Double Sheet
+item.Electrum Double Sheet.name=Electrum Double Sheet
+item.Cupronickel Double Sheet.name=Cupronickel Double Sheet
 
 #== Misc ==
 item.Blueprint=Blueprint
@@ -2031,6 +2040,8 @@ tile.MetalBlock.Steel.name=Steel Block
 tile.MetalBlock.Sterling Silver.name=Sterling Silver Block
 tile.MetalBlock.Tin.name=Tin Block
 tile.MetalBlock.Zinc.name=Zinc Block
+tile.MetalBlock.Electrum.name=Electrum Block
+tile.MetalBlock.Cupronickel.name=Cupronickel Block
 
 #== Anvils ==
 tile.Anvil.Stone.name=Stone Anvil
@@ -2399,6 +2410,8 @@ gui.metal.WeakRedSteel=Weak Red Steel
 gui.metal.WeakSteel=Weak Steel
 gui.metal.WroughtIron=Wrought Iron
 gui.metal.Zinc=Zinc
+gui.metal.Electrum=Electrum
+gui.metal.Cupronickel=Cupronickel
 
 
 #== GUI Ores - Mostly for WAILA ==
@@ -2441,6 +2454,7 @@ gui.plans.tuyere=Tuyere
 gui.plans.grill=Grill
 gui.plans.shears=Shears
 gui.plans.trapdoor=Trap Door
+gui.plans.block=Block
 
 #== Misc GUI ==
 gui.Blueprint=Blueprint

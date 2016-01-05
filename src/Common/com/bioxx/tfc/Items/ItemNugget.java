@@ -27,7 +27,7 @@ public class ItemNugget extends ItemTerra implements ISmeltable
         metaNames = new String[]{
                 "Bismuth", "Bismuth Bronze", "Black Bronze", "Black Steel", "Blue Steel", "Brass", "Bronze", "Copper", "Gold",
                 "Wrought Iron", "Lead", "Nickel", "Pig Iron", "Platinum",
-                "Red Steel", "Rose Gold", "Silver", "Steel", "Sterling Silver", "Tin", "Zinc"};
+                "Red Steel", "Rose Gold", "Silver", "Steel", "Sterling Silver", "Tin", "Zinc", "Electrum", "Cupronickel"};
         setFolder("ingots/");
         setCreativeTab(TFCTabs.TFC_MATERIALS);
         this.setWeight(EnumWeight.MEDIUM);
@@ -89,105 +89,23 @@ public class ItemNugget extends ItemTerra implements ISmeltable
             case 18: return Global.STERLINGSILVER;
             case 19: return Global.TIN;
             case 20: return Global.ZINC;
+            case 21: return Global.ELECTRUM;
+            case 22: return Global.CUPRONICKEL;
         }
         return null;
     }
 
     @Override
     public short getMetalReturnAmount(ItemStack is)
-    {
-        int dam = is.getItemDamage();
-        switch(dam)
-        {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-            case 11:
-            case 12:
-            case 13:
-            case 14:
-            case 15:
-            case 16:
-            case 17:
-            case 18:
-            case 19:
-            case 20:
-                return metalAmount;
-        }
-        return 0;
-    }
+    { return metalAmount; }
 
     @Override
     public boolean isSmeltable(ItemStack is)
-    {
-        switch(is.getItemDamage())
-        {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-            case 11:
-            case 12:
-            case 13:
-            case 14:
-            case 15:
-            case 16:
-            case 17:
-            case 18:
-            case 19:
-            case 20:
-                return true;
-            default:
-                return false;
-        }
-    }
+    { return true; }
 
     @Override
     public EnumTier getSmeltTier(ItemStack is)
-    {
-        int dam = is.getItemDamage();
-        switch(dam)
-        {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-            case 11:
-            case 12:
-            case 13:
-            case 14:
-            case 15:
-            case 16:
-            case 17:
-            case 18:
-            case 19:
-            case 20:
-                return EnumTier.TierI;
-        }
-        return EnumTier.TierX;
-    }
+    { return EnumTier.TierI; }
 
 }
 

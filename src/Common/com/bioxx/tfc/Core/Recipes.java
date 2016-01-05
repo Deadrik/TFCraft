@@ -1311,6 +1311,8 @@ public class Recipes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.sterlingSilverIngot2x), null, "sheet", false, AnvilReq.BRONZE, new ItemStack(TFCItems.sterlingSilverSheet)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.tinIngot2x), null, "sheet", false, AnvilReq.STONE, new ItemStack(TFCItems.tinSheet)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.zincIngot2x), null, "sheet", false, AnvilReq.STONE, new ItemStack(TFCItems.zincSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.electrumIngot2x), null, "sheet", false, AnvilReq.COPPER, new ItemStack(TFCItems.electrumSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.cupronickelIngot2x), null, "sheet", false, AnvilReq.COPPER, new ItemStack(TFCItems.cupronickelSheet)));
 
 		//Blocks
 
@@ -1335,6 +1337,8 @@ public class Recipes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.sterlingSilverSheet2x), new ItemStack(TFCItems.sterlingSilverSheet2x),"block", AnvilReq.BRONZE, new ItemStack(TFCBlocks.metalBlock2, 1, 2)).addRecipeSkill(Global.SKILL_GENERAL_SMITHING).setCraftingXP(1));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.tinSheet2x), new ItemStack(TFCItems.tinSheet2x),"block", AnvilReq.STONE, new ItemStack(TFCBlocks.metalBlock2, 1, 3)).addRecipeSkill(Global.SKILL_GENERAL_SMITHING).setCraftingXP(1));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.zincSheet2x), new ItemStack(TFCItems.zincSheet2x),"block", AnvilReq.STONE, new ItemStack(TFCBlocks.metalBlock2, 1, 4)).addRecipeSkill(Global.SKILL_GENERAL_SMITHING).setCraftingXP(1));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.electrumSheet2x), new ItemStack(TFCItems.electrumSheet2x),"block", AnvilReq.STONE, new ItemStack(TFCBlocks.metalBlock2, 1, 5)).addRecipeSkill(Global.SKILL_GENERAL_SMITHING).setCraftingXP(1));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.cupronickelSheet2x), new ItemStack(TFCItems.cupronickelSheet2x),"block", AnvilReq.STONE, new ItemStack(TFCBlocks.metalBlock2, 1, 6)).addRecipeSkill(Global.SKILL_GENERAL_SMITHING).setCraftingXP(1));
 
 		//Picks
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthBronzeIngot), null, "pickaxe", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.bismuthBronzePickaxeHead, 1)).addRecipeSkill(Global.SKILL_TOOLSMITH));
@@ -1587,7 +1591,7 @@ public class Recipes
 		addTrapDoor(TFCItems.goldSheet, 8);addTrapDoor(TFCItems.wroughtIronSheet, 9);addTrapDoor(TFCItems.leadSheet, 10);addTrapDoor(TFCItems.nickelSheet, 11);
 		addTrapDoor(TFCItems.nickelSheet, 12);addTrapDoor(TFCItems.platinumSheet, 13);addTrapDoor(TFCItems.redSteelSheet, 14);addTrapDoor(TFCItems.roseGoldSheet, 15);
 		addTrapDoor(TFCItems.silverSheet, 16);addTrapDoor(TFCItems.steelSheet, 17);addTrapDoor(TFCItems.sterlingSilverSheet, 18);addTrapDoor(TFCItems.tinSheet, 19);
-		addTrapDoor(TFCItems.zincSheet, 20);
+		addTrapDoor(TFCItems.zincSheet, 20);addTrapDoor(TFCItems.electrumSheet, 21);addTrapDoor(TFCItems.cupronickelSheet, 22);
 
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronIngot2x), new ItemStack(TFCItems.wroughtIronIngot2x),"grill", AnvilReq.WROUGHTIRON, new ItemStack(TFCBlocks.grill, 1, 0)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronKnifeHead), new ItemStack(TFCItems.wroughtIronKnifeHead),"shears", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.shears, 1, 0)));
@@ -1625,6 +1629,8 @@ public class Recipes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.sterlingSilverIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.metalTrapDoor, 1, index + (18 << 5))));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.tinIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.metalTrapDoor, 1, index + (19 << 5))));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.zincIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.metalTrapDoor, 1, index + (20 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.electrumIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.metalTrapDoor, 1, index + (22 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.cupronickelIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.metalTrapDoor, 1, index + (22 << 5))));
 	}
 
 	/**
@@ -1656,6 +1662,8 @@ public class Recipes
 		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.sterlingSilverIngot),new ItemStack(TFCItems.sterlingSilverIngot),AnvilReq.BRONZE, new ItemStack(TFCItems.sterlingSilverIngot2x, 1)));
 		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.tinIngot),new ItemStack(TFCItems.tinIngot),AnvilReq.STONE, new ItemStack(TFCItems.tinIngot2x, 1)));
 		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.zincIngot),new ItemStack(TFCItems.zincIngot),AnvilReq.STONE, new ItemStack(TFCItems.zincIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.electrumIngot),new ItemStack(TFCItems.electrumIngot),AnvilReq.COPPER, new ItemStack(TFCItems.electrumIngot2x, 1)));
+		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.cupronickelIngot),new ItemStack(TFCItems.cupronickelIngot),AnvilReq.COPPER, new ItemStack(TFCItems.cupronickelIngot2x, 1)));
 		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.weakSteelIngot),new ItemStack(TFCItems.pigIronIngot),AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.highCarbonBlackSteelIngot, 1)));
 		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.weakBlueSteelIngot),new ItemStack(TFCItems.blackSteelIngot),AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.highCarbonBlueSteelIngot, 1)));
 		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.weakRedSteelIngot),new ItemStack(TFCItems.blackSteelIngot),AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.highCarbonRedSteelIngot, 1)));
@@ -1681,6 +1689,8 @@ public class Recipes
 		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.sterlingSilverSheet),new ItemStack(TFCItems.sterlingSilverSheet),AnvilReq.BRONZE, new ItemStack(TFCItems.sterlingSilverSheet2x, 1)));
 		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.tinSheet),new ItemStack(TFCItems.tinSheet),AnvilReq.STONE, new ItemStack(TFCItems.tinSheet2x, 1)));
 		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.zincSheet),new ItemStack(TFCItems.zincSheet),AnvilReq.STONE, new ItemStack(TFCItems.zincSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.electrumSheet),new ItemStack(TFCItems.electrumSheet),AnvilReq.COPPER, new ItemStack(TFCItems.electrumSheet2x, 1)));
+		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.cupronickelSheet),new ItemStack(TFCItems.cupronickelSheet),AnvilReq.COPPER, new ItemStack(TFCItems.cupronickelSheet2x, 1)));
 
 		//chest
 		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthBronzeUnfinishedChestplate,1,0),new ItemStack(TFCItems.bismuthBronzeSheet2x),true,AnvilReq.COPPER, new ItemStack(TFCItems.bismuthBronzeUnfinishedChestplate,1, 1)));

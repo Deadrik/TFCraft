@@ -24,6 +24,8 @@ public class ItemMetalBlock2 extends ItemMetalBlock {
             case 2: return Global.STERLINGSILVER;
             case 3: return Global.TIN;
             case 4: return Global.ZINC;
+            case 5: return Global.ELECTRUM;
+            case 6: return Global.CUPRONICKEL;
         }
         return null;
     }
