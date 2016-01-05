@@ -176,6 +176,8 @@ public class TFCBlocks
 	public static Block crucible;
 	public static Block fireBrick;
 	public static Block metalSheet;
+	public static Block metalBlock;
+	public static Block metalBlock2;
 
 	public static Block nestBox;
 

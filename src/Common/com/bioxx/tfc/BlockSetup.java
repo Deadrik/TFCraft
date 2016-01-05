@@ -143,6 +143,9 @@ public class BlockSetup extends TFCBlocks
 
 		GameRegistry.registerBlock(fireBrick, "FireBrick");
 		GameRegistry.registerBlock(metalSheet, "MetalSheet");
+		GameRegistry.registerBlock(metalBlock, ItemMetalBlock1.class, "MetalBlock");
+		GameRegistry.registerBlock(metalBlock2, ItemMetalBlock2.class, "MetalBlock2");
+
 
 		// Wooden Doors
 		for (int i=0; i < Global.WOOD_ALL.length; i++)
@@ -415,6 +418,8 @@ public class BlockSetup extends TFCBlocks
 		fireBrick = new BlockFireBrick().setBlockName("FireBrick").setHardness(8);
 		metalSheet = new BlockMetalSheet().setBlockName("MetalSheet").setHardness(80);
 		leatherRack = new BlockLeatherRack().setBlockName("LeatherRack").setHardness(1);
+		metalBlock = new BlockMetal(Material.iron) {}.setHardness(16F).setResistance(10F).setStepSound(Block.soundTypeMetal).setBlockName("MetalBlock");
+		metalBlock2 = new BlockMetal2(Material.iron) {}.setHardness(16F).setResistance(10F).setStepSound(Block.soundTypeMetal).setBlockName("MetalBlock");
 
 		gravel = new BlockGravel(0).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravel");
 		gravel2 = new BlockGravel(16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravel");
@@ -438,6 +443,8 @@ public class BlockSetup extends TFCBlocks
 		ore.setHarvestLevel("pickaxe", 1);
 		ore2.setHarvestLevel("pickaxe", 1);
 		ore3.setHarvestLevel("pickaxe", 1);
+		metalBlock.setHarvestLevel("pickaxe", 1);
+		metalBlock2.setHarvestLevel("pickaxe", 1);
 
 		dirt.setHarvestLevel("shovel", 0);
 		dirt2.setHarvestLevel("shovel", 0);
