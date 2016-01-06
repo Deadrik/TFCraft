@@ -90,7 +90,7 @@ public class RenderOverlayHandler
 		TFC_Core.bindTexture(tfcicons);
 
 		//Render Tool Mode
-		if (TFCOptions.enableToolModeIndicator && playerInventory.getCurrentItem() != null)
+		if (TFCOptions.enableToolModeIndicator && playerInventory.getCurrentItem() != null && playerInfo != null)
 		{
 			Item currentItem = playerInventory.getCurrentItem().getItem();
 
@@ -206,7 +206,7 @@ public class RenderOverlayHandler
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.drawTexturedModalRect(mid+1, healthRowHeight, 0, 20, 90, 5);
-			if (playerInfo.guishowFoodRestoreAmount)
+			if (playerInfo != null && playerInfo.guishowFoodRestoreAmount)
 			{
 				float percentFood2 = Math.min(percentFood + playerInfo.guiFoodRestoreAmount / foodstats.getMaxStomach(player), 1);
 				GL11.glColor4f(0.0F, 0.6F, 0.0F, 0.3F);
