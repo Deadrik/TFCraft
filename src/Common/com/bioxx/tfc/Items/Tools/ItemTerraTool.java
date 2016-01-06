@@ -12,6 +12,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 
+import net.minecraftforge.common.ForgeHooks;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -112,7 +114,12 @@ public class ItemTerraTool extends ItemTool implements ISize
 	public float getDigSpeed(ItemStack stack, Block block, int meta)
 	{
 		float digSpeed = super.getDigSpeed(stack, block, meta);
-		return digSpeed + (digSpeed * AnvilManager.getDurabilityBuff(stack));
+
+		if (ForgeHooks.isToolEffective(stack, block, meta))
+		{
+			return digSpeed + (digSpeed * AnvilManager.getDurabilityBuff(stack));
+		}
+		return digSpeed;
 	}
 
 	@Override
