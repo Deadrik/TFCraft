@@ -50,6 +50,8 @@ public class TFC_Textures
 	public static IIcon sheetTin;
 	public static IIcon sheetWroughtIron;
 	public static IIcon sheetZinc;
+	public static IIcon sheetElectrum;
+	public static IIcon sheetCupronickel;
 
 	/**
 	 * These are defined in BlockHotWaterStill

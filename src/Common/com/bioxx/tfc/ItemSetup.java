@@ -1070,8 +1070,8 @@ public class ItemSetup extends TFCItems {
 		steelSheet = 			((ItemMetalSheet) new ItemMetalSheet(17).setUnlocalizedName("Steel Sheet")).setMetal("Steel", 200);
 		tinSheet = 				((ItemMetalSheet) new ItemMetalSheet(19).setUnlocalizedName("Tin Sheet")).setMetal("Tin", 200);
 		zincSheet = 			((ItemMetalSheet) new ItemMetalSheet(20).setUnlocalizedName("Zinc Sheet")).setMetal("Zinc", 200);
-		electrumSheet = 		((ItemMetalSheet) new ItemMetalSheet(1).setUnlocalizedName("Electrum Sheet")).setMetal("Electrum", 200);
-		cupronickelSheet = 		((ItemMetalSheet) new ItemMetalSheet(0).setUnlocalizedName("Cupronickel Sheet")).setMetal("Cupronickel", 200);
+		electrumSheet = 		((ItemMetalSheet) new ItemMetalSheet(21).setUnlocalizedName("Electrum Sheet")).setMetal("Electrum", 200);
+		cupronickelSheet = 		((ItemMetalSheet) new ItemMetalSheet(22).setUnlocalizedName("Cupronickel Sheet")).setMetal("Cupronickel", 200);
 
 		bismuthSheet2x = 		((ItemMetalSheet2x) new ItemMetalSheet2x(0).setUnlocalizedName("Bismuth Double Sheet")).setMetal("Bismuth", 400);
 		bismuthBronzeSheet2x = 	((ItemMetalSheet2x) new ItemMetalSheet2x(1).setUnlocalizedName("Bismuth Bronze Double Sheet")).setMetal("Bismuth Bronze", 400);
@@ -1086,8 +1086,8 @@ public class ItemSetup extends TFCItems {
 		steelSheet2x = 			((ItemMetalSheet2x) new ItemMetalSheet2x(17).setUnlocalizedName("Steel Double Sheet")).setMetal("Steel", 400);
 		tinSheet2x = 			((ItemMetalSheet2x) new ItemMetalSheet2x(19).setUnlocalizedName("Tin Double Sheet")).setMetal("Tin", 400);
 		zincSheet2x = 			((ItemMetalSheet2x) new ItemMetalSheet2x(20).setUnlocalizedName("Zinc Double Sheet")).setMetal("Zinc", 400);
-		electrumSheet2x = 		((ItemMetalSheet2x) new ItemMetalSheet2x(1).setUnlocalizedName("Electrum Double Sheet")).setMetal("Electrum", 400);
-		cupronickelSheet2x = 	((ItemMetalSheet2x) new ItemMetalSheet2x(0).setUnlocalizedName("Cupronickel Double Sheet")).setMetal("Cupronickel", 400);
+		electrumSheet2x = 		((ItemMetalSheet2x) new ItemMetalSheet2x(21).setUnlocalizedName("Electrum Double Sheet")).setMetal("Electrum", 400);
+		cupronickelSheet2x = 	((ItemMetalSheet2x) new ItemMetalSheet2x(22).setUnlocalizedName("Cupronickel Double Sheet")).setMetal("Cupronickel", 400);
 
 		i = 0;
 		brassSheet = 			new ItemMetalSheet(5).setMetal("Brass", 200).setUnlocalizedName(namesNSO[i++]+" Sheet");
