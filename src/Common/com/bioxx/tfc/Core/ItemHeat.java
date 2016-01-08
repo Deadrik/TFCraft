@@ -105,7 +105,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,0), bismuthRaw,new ItemStack(TFCItems.bismuthUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,1), bismuthBronzeRaw,new ItemStack(TFCItems.bismuthBronzeUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,2), blackBronzeRaw,new ItemStack(TFCItems.blackBronzeUnshaped,1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,3), blackBronzeRaw,new ItemStack(TFCItems.blackSteelUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,3), blackSteelRaw,new ItemStack(TFCItems.blackSteelUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,4), blueSteelRaw,new ItemStack(TFCItems.blueSteelUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,5), brassRaw,new ItemStack(TFCItems.brassUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,6), bronzeRaw,new ItemStack(TFCItems.bronzeUnshaped,1)));
@@ -129,7 +129,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,0), bismuthRaw,new ItemStack(TFCItems.bismuthUnshaped,8,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,1), bismuthBronzeRaw,new ItemStack(TFCItems.bismuthBronzeUnshaped,8,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,2), blackBronzeRaw,new ItemStack(TFCItems.blackBronzeUnshaped,8,0)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,3), blackBronzeRaw,new ItemStack(TFCItems.blackSteelUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,3), blackSteelRaw,new ItemStack(TFCItems.blackSteelUnshaped,8,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,4), blueSteelRaw,new ItemStack(TFCItems.blueSteelUnshaped,8,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,5), brassRaw,new ItemStack(TFCItems.brassUnshaped,8,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,6), bronzeRaw,new ItemStack(TFCItems.bronzeUnshaped,8,0)));
