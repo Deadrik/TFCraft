@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import com.bioxx.tfc.TileEntities.TEAnvil;
-import com.bioxx.tfc.TileEntities.TEBarrel;
+import com.bioxx.tfc.TileEntities.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -52,8 +51,6 @@ import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock;
-import com.bioxx.tfc.TileEntities.TEMetalSheet;
-import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.*;
 import com.bioxx.tfc.api.Constant.Global;
@@ -1039,7 +1036,7 @@ public class TFC_Core
 				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
 					continue;
 				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, 1f);
-				if(is != null && (iinv instanceof InventoryPlayer || iinv instanceof TEBarrel || iinv instanceof TEAnvil))
+				if(is != null && (iinv instanceof InventoryPlayer || iinv instanceof TEBarrel || iinv instanceof TEAnvil || iinv instanceof TEForge))
 					TFC_ItemHeat.handleItemHeat(is);
 				else
 					TFC_ItemHeat.handleItemHeatStorage(is);

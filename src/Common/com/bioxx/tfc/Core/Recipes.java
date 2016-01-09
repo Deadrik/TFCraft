@@ -1639,7 +1639,7 @@ public class Recipes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.sterlingSilverIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.metalTrapDoor, 1, index + (18 << 5))));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.tinIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.metalTrapDoor, 1, index + (19 << 5))));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.zincIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.metalTrapDoor, 1, index + (20 << 5))));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.electrumIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.metalTrapDoor, 1, index + (22 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.electrumIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.metalTrapDoor, 1, index + (21 << 5))));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.cupronickelIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.metalTrapDoor, 1, index + (22 << 5))));
 	}
 
