@@ -2598,6 +2598,7 @@ gui.gems=Gems
 gui.familiarized=Familiarized
 gui.familiarity=Familiarity
 gui.baby=Baby
+gui.enoughSpace=Clear space for growth
 option.tfc.oreQuality=Show ore quality
 option.tfc.gender=Show animal gender
 option.tfc.familiarToday=Show animal familiarized

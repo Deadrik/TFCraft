@@ -1130,10 +1130,17 @@ public class WAILAData implements IWailaDataProvider
 	public List<String> saplingBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		NBTTagCompound tag = accessor.getNBTData();
-		Long growTime = tag.getLong("growTime");
+		boolean enoughSpace = tag.getBoolean("enoughSpace");
+		long growTime = tag.getLong("growTime");
 		int days = (int) ((growTime - TFC_Time.getTotalTicks()) / TFC_Time.DAY_LENGTH);
 		if (days > 0)
+		{
 			currenttip.add(days + " " + TFC_Core.translate("gui.daysRemaining"));
+		}
+		else if (!enoughSpace)
+		{
+			currenttip.add(TFC_Core.translate("gui.enoughSpace"));
+		}
 
 		return currenttip;
 	}
