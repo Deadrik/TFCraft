@@ -390,11 +390,13 @@ public class ItemHeat
 		//Electrum
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.electrumIngot,1), electrumRaw,new ItemStack(TFCItems.electrumUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.electrumIngot2x,1), electrumRaw,new ItemStack(TFCItems.electrumUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.electrumUnshaped,1), electrumRaw,new ItemStack(TFCItems.electrumUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.electrumSheet,1), electrumRaw,new ItemStack(TFCItems.electrumUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.electrumSheet2x,1), electrumRaw,new ItemStack(TFCItems.electrumUnshaped,4,0)));
 		//Cupronickel
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.cupronickelIngot,1), cupronickelRaw,new ItemStack(TFCItems.cupronickelUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.cupronickelIngot2x,1), cupronickelRaw,new ItemStack(TFCItems.cupronickelUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.cupronickelUnshaped,1), cupronickelRaw,new ItemStack(TFCItems.cupronickelUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.cupronickelSheet,1), cupronickelRaw,new ItemStack(TFCItems.cupronickelUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.cupronickelSheet2x,1), cupronickelRaw,new ItemStack(TFCItems.cupronickelUnshaped,4,0)));
 		//Ceramics
