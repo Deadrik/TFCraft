@@ -1036,7 +1036,8 @@ public class TFC_Core
 				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
 					continue;
 				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, 1f);
-				if(is != null && (iinv instanceof InventoryPlayer || iinv instanceof TEBarrel || iinv instanceof TEAnvil || iinv instanceof TEForge || iinv instanceof TEFirepit))
+				if(is != null && (iinv instanceof InventoryPlayer || iinv instanceof TEBarrel || iinv instanceof TEAnvil || iinv instanceof TEForge || iinv instanceof TEFirepit
+				|| iinv instanceof TEVessel || iinv instanceof TEFoodPrep))
 					TFC_ItemHeat.handleItemHeat(is);
 				else
 					TFC_ItemHeat.handleItemHeatStorage(is);
