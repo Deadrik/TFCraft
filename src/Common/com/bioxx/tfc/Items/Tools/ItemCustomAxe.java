@@ -17,6 +17,8 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import net.minecraftforge.common.ForgeHooks;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -160,7 +162,12 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	public float getDigSpeed(ItemStack stack, Block block, int meta)
 	{
 		float digSpeed = super.getDigSpeed(stack, block, meta);
-		return digSpeed + (digSpeed * AnvilManager.getDurabilityBuff(stack));
+
+		if (ForgeHooks.isToolEffective(stack, block, meta))
+		{
+			return digSpeed + (digSpeed * AnvilManager.getDurabilityBuff(stack));
+		}
+		return digSpeed;
 	}
 
 	@Override

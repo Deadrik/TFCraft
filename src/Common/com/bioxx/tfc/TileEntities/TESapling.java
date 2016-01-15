@@ -9,6 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 public class TESapling extends TileEntity
 {
 	public long growTime;
+	public boolean enoughSpace = true;
 	
 	public TESapling()
 	{
@@ -21,17 +22,19 @@ public class TESapling extends TileEntity
 	}
 	
 	@Override
-	public void readFromNBT(NBTTagCompound nbttagcompound)
+	public void readFromNBT(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbttagcompound);
-		growTime = nbttagcompound.getLong("growTime");
+		super.readFromNBT(nbt);
+		growTime = nbt.getLong("growTime");
+		enoughSpace = nbt.getBoolean("enoughSpace");
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
+	public void writeToNBT(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbttagcompound);
-		nbttagcompound.setLong("growTime", growTime);
+		super.writeToNBT(nbt);
+		nbt.setLong("growTime", growTime);
+		nbt.setBoolean("enoughSpace", enoughSpace);
 	}
 	
 	@Override

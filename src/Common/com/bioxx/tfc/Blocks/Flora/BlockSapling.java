@@ -74,14 +74,23 @@ public class BlockSapling extends BlockTerraContainer
 
 	}
 
-	public void growTree(World world, int i, int j, int k, Random rand)
+	public void growTree(World world, int i, int j, int k, Random rand, long timestamp)
 	{
-		int l = world.getBlockMetadata(i, j, k);
+		int meta = world.getBlockMetadata(i, j, k);
 		world.setBlockToAir(i, j, k);
-		Object obj = TFCBiome.getTreeGen(l, rand.nextBoolean());
+		WorldGenerator worldGen = TFCBiome.getTreeGen(meta, rand.nextBoolean());
 
-		if (obj!= null && !((WorldGenerator) obj).generate(world, rand, i, j, k))
-			world.setBlock(i, j, k, this, l, 3);
+		if (worldGen != null && !worldGen.generate(world, rand, i, j, k))
+		{
+			world.setBlock(i, j, k, this, meta, 3);
+			if (world.getTileEntity(i, j, k) instanceof TESapling)
+			{
+				TESapling te = (TESapling) world.getTileEntity(i, j, k);
+				te.growTime = timestamp;
+				te.enoughSpace = false;
+				te.markDirty();
+			}
+		}
 	}
 
 	@Override
@@ -123,19 +132,20 @@ public class BlockSapling extends BlockTerraContainer
 	@Override
 	public void updateTick(World world, int i, int j, int k, Random rand)
 	{
-		if (world.isRemote)
-			return;
-
-		super.updateTick(world, i, j, k, rand);
-
-		if (world.getTileEntity(i, j, k) instanceof TESapling)
+		if (!world.isRemote)
 		{
-			TESapling te = (TESapling) world.getTileEntity(i, j, k);
+			super.updateTick(world, i, j, k, rand);
 
-			if (world.getBlockLightValue(i, j + 1, k) >= 9 && te != null && TFC_Time.getTotalTicks() > te.growTime)
-				growTree(world, i, j, k, rand);
+			if (world.getTileEntity(i, j, k) instanceof TESapling)
+			{
+				long timestamp = ((TESapling) world.getTileEntity(i, j, k)).growTime;
+
+				if (world.getBlockLightValue(i, j + 1, k) >= 9 && TFC_Time.getTotalTicks() > timestamp)
+				{
+					growTree(world, i, j, k, rand, timestamp);
+				}
+			}
 		}
-		//this.checkChange(world, i, j, k);
 	}
 
 	/**

@@ -11,6 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 
@@ -184,7 +185,12 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	public float getDigSpeed(ItemStack stack, Block block, int meta)
 	{
 		float digSpeed = super.getDigSpeed(stack, block, meta);
-		return digSpeed + (digSpeed * AnvilManager.getDurabilityBuff(stack));
+
+		if (ForgeHooks.isToolEffective(stack, block, meta))
+		{
+			return digSpeed + (digSpeed * AnvilManager.getDurabilityBuff(stack));
+		}
+		return digSpeed;
 	}
 
 	@Override
