@@ -22,6 +22,7 @@ public class TFCOptions
 	public static boolean enableSolidDetailed = true;
 	public static int maxRemovedSolidDetailed = 12;
 	public static int hammerBreakSpeed = 90;
+	public static boolean enableToolModeIndicator = true;
 
 	// Time
 	public static int yearLength = 96;
