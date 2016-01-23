@@ -30,12 +30,15 @@ public class TEChest extends TileEntityChest implements IInventory
 	public int type;
 	/** Server sync counter (once per 20 ticks) */
 	private int ticksSinceSync;
+	public int cooldown = 5;
+	private boolean typeSynced;
 	public boolean isDoubleChest;
 
 	public TEChest()
 	{
 
 	}
+
 	public TEChest(int i, boolean isDouble)
 	{
 		type = i;
@@ -159,6 +162,8 @@ public class TEChest extends TileEntityChest implements IInventory
 		type = pkt.func_148857_g().getInteger("woodtype");
 		// Reset the check flag in case the client has desynced from the server
 		this.adjacentChestChecked = false;
+		this.typeSynced = true;
+		this.cooldown = 0;
 	}
 
 	@Override
@@ -179,7 +184,7 @@ public class TEChest extends TileEntityChest implements IInventory
 		if (te instanceof TEChest)
 		{
 			TEChest chest = (TEChest) access.getTileEntity(x, y, z);
-			if(chest.type == this.type)
+			if (chest.type == this.type && this.cooldown == 0 && chest.cooldown == 0)
 				return true;
 		}
 		return false;
@@ -286,6 +291,25 @@ public class TEChest extends TileEntityChest implements IInventory
 		//super.updateEntity();
 
 		TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
+
+		if (type == 0 && !typeSynced) // Cooldown only required for oak chests
+		{
+			if (cooldown == 0)
+			{
+				this.adjacentChestChecked = false;
+				this.isDoubleChest = false;
+				typeSynced = true;
+			}
+			else if (cooldown > 0)
+			{
+				cooldown--;
+			}
+		}
+		else if (cooldown != 0)
+		{
+			cooldown = 0;
+		}
+
 		this.checkForAdjacentChests();
 		this.ticksSinceSync++;
 
