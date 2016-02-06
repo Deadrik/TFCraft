@@ -428,6 +428,12 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
+			ItemStack bucket = player.inventory.getCurrentItem();
+			if (bucket != null && bucket.getItem() == Items.bucket)
+			{
+				return false;
+			}
+
 			if (player.isSneaking() && !familiarizedToday && canFamiliarize())
 			{
 				this.familiarize(player);
