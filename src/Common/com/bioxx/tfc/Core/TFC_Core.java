@@ -1136,7 +1136,8 @@ public class TFC_Core
 			{
 				if(timeDiff > TFCOptions.decayProtectionDays * 24)
 				{
-					Food.setDecayTimer(is, (int) TFC_Time.getTotalHours() - 24);
+					decayTimer = (int) ((TFC_Time.getTotalHours() - (TFCOptions.decayProtectionDays * 24)) - 1);
+					protMult = 1-(timeDiff/(TFCOptions.decayProtectionDays * 24));
 				}
 				else if(timeDiff > 24)
 				{
