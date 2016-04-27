@@ -761,7 +761,7 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("blockSand", new ItemStack(TFCBlocks.sand, 1, WILD));
 		OreDictionary.registerOre("blockSand", new ItemStack(TFCBlocks.sand2, 1, WILD));
 
-		OreDictionary.registerOre("blockGravel", new ItemStack(Blocks.gravel));
+		//OreDictionary.registerOre("blockGravel", new ItemStack(Blocks.gravel));
 		OreDictionary.registerOre("blockGravel", new ItemStack(TFCBlocks.gravel, 1, WILD));
 		OreDictionary.registerOre("blockGravel", new ItemStack(TFCBlocks.gravel2, 1, WILD));
 
