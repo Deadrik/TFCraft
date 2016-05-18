@@ -637,7 +637,10 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 		resetInLove();
 		setInLove(false);
 		otherAnimal.setInLove(false);
+		mateAggroMod = otherAnimal.getAggressionMod();
+		mateObedMod = otherAnimal.getObedienceMod();
 		mateSizeMod = otherAnimal.getSizeMod();
+		mateStrengthMod = otherAnimal.getStrengthMod();
 	}
 
 	/**

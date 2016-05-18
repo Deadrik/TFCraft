@@ -537,7 +537,10 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		pregnant = true;
 		resetInLove();
 		otherAnimal.setInLove(false);
+		mateAggroMod = otherAnimal.getAggressionMod();
+		mateObedMod = otherAnimal.getObedienceMod();
 		mateSizeMod = otherAnimal.getSizeMod();
+		mateStrengthMod = otherAnimal.getStrengthMod();
 	}
 
 	@Override

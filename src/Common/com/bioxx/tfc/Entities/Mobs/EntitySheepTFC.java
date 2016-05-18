@@ -6,11 +6,15 @@ import java.util.List;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAITempt;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.Vec3;
@@ -48,6 +52,14 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	private static final float DIMORPHISM = 0.1633f;
 	private static final int DEGREE_OF_DIVERSION = 2;
 	private static final int FAMILIARITY_CAP = 35;
+	private final InventoryCrafting colorCrafting = new InventoryCrafting(new Container()
+	{
+		@Override
+		public boolean canInteractWith(EntityPlayer p_75145_1_)
+		{
+			return false;
+		}
+	}, 2, 1);
 	/**
 	 * Used to control movement as well as wool regrowth. Set to 40 on handleHealthUpdate and counts down with each
 	 * tick.
@@ -66,6 +78,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	private float mateStrengthMod;
 	private float mateAggroMod;
 	private float mateObedMod;
+	private int mateColor;
 	private float sizeMod; //How large the animal is
 	private float strengthMod; //how strong the animal is
 	private float aggressionMod = 1;//How aggressive / obstinate the animal is
@@ -91,6 +104,9 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16f, 0.25F, 0.3F));
 		this.tasks.addTask(6, this.aiEatGrass);
+
+		this.colorCrafting.setInventorySlotContents(0, new ItemStack(Items.dye, 1, 0));
+		this.colorCrafting.setInventorySlotContents(1, new ItemStack(Items.dye, 1, 0));
 
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
@@ -190,6 +206,27 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		return flag;
 	}
 
+	public int combineColors(EntityAnimal parent, int mateColor)
+	{
+		int parent1Color = 15 - ((EntitySheep) parent).getFleeceColor();
+		int parent2Color = 15 - mateColor;
+		this.colorCrafting.getStackInSlot(0).setItemDamage(parent1Color);
+		this.colorCrafting.getStackInSlot(1).setItemDamage(parent2Color);
+		ItemStack itemstack = CraftingManager.getInstance().findMatchingRecipe(this.colorCrafting, ((EntitySheep) parent).worldObj);
+		int babyColor;
+
+		if (itemstack != null && itemstack.getItem() == Items.dye)
+		{
+			babyColor = itemstack.getItemDamage();
+		}
+		else
+		{
+			babyColor = this.worldObj.rand.nextBoolean() ? parent1Color : parent2Color;
+		}
+
+		return babyColor;
+	}
+
 	@Override
 	public EntitySheep createChild(EntityAgeable entityageable)
 	{
@@ -204,7 +241,10 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		data.add(eAgeable.getEntityData().getFloat("MateStrength"));
 		data.add(eAgeable.getEntityData().getFloat("MateAggro"));
 		data.add(eAgeable.getEntityData().getFloat("MateObed"));
-		return new EntitySheepTFC(worldObj, this, data);
+		EntitySheepTFC baby = new EntitySheepTFC(worldObj, this, data);
+		int colorMeta = this.combineColors(this, ((EntitySheepTFC) eAgeable).mateColor);
+		baby.setFleeceColor(15 - colorMeta);
+		return baby;
 	}
 
 	/**
@@ -556,7 +596,11 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		pregnant = true;
 		resetInLove();
 		otherAnimal.setInLove(false);
+		mateAggroMod = otherAnimal.getAggressionMod();
+		mateObedMod = otherAnimal.getObedienceMod();
 		mateSizeMod = otherAnimal.getSizeMod();
+		mateStrengthMod = otherAnimal.getStrengthMod();
+		mateColor = ((EntitySheepTFC) otherAnimal).getFleeceColor();
 	}
 
 	/**
@@ -595,9 +639,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 				int i = rand.nextInt(3) + 1;
 				for (int x = 0; x < i; x++)
 				{
-					ArrayList<Float> data = new ArrayList<Float>();
-					data.add(mateSizeMod);
-					EntitySheepTFC baby = new EntitySheepTFC(worldObj, this, data);
+					EntitySheepTFC baby = (EntitySheepTFC) createChildTFC(this);
 					baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
 					baby.rotationYawHead = baby.rotationYaw;
 					baby.renderYawOffset = baby.rotationYaw;
@@ -664,6 +706,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		mateStrengthMod = nbt.getFloat("MateStrength");
 		mateAggroMod = nbt.getFloat("MateAggro");
 		mateObedMod = nbt.getFloat("MateObed");
+		mateColor = nbt.getInteger("MateColor");
 		timeOfConception = nbt.getLong("ConceptionTime");
 		this.dataWatcher.updateObject(15, nbt.getInteger("Age"));
 		this.setAge(nbt.getInteger("Age"));
@@ -874,6 +917,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		nbt.setFloat("MateStrength", mateStrengthMod);
 		nbt.setFloat("MateAggro", mateAggroMod);
 		nbt.setFloat("MateObed", mateObedMod);
+		nbt.setInteger("MateColor", mateColor);
 		nbt.setLong("ConceptionTime", timeOfConception);
 		nbt.setInteger("Age", getBirthDay());
 	}
