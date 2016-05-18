@@ -30,7 +30,12 @@ public class TESpawnMeter extends NetworkTileEntity
 					{
 						protection = cd.spawnProtection;
 						int meta = 0;
-						meta = protection > 384 ? 8 : protection / 48;
+						if (protection > 0) // Meta should be 0 (non-lit meter) if there is still a buffer
+						{
+							// Meter is fully lit with 16 days of protection, regardless of config settings
+							meta = protection > 384 ? 8 : protection / 48;
+						}
+
 						if (meta != worldObj.getBlockMetadata(xCoord, yCoord, zCoord))
 						{
 							worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta, 0x3);
