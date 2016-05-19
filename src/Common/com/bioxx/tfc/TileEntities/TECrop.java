@@ -184,7 +184,7 @@ public class TECrop extends NetworkTileEntity
 			}
 
 			// Snowing
-			if(worldObj.isRaining() && TFC_Climate.getHeightAdjustedTemp(worldObj, xCoord, yCoord, zCoord) < 0)
+			if (TFC_Core.isExposedToRain(worldObj, xCoord, yCoord, zCoord) && TFC_Climate.getHeightAdjustedTemp(worldObj, xCoord, yCoord, zCoord) < 0)
 			{
 				if(crop != null && !crop.dormantInFrost || growth > 1)
 				{

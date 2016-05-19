@@ -254,7 +254,7 @@ public class BlockTorch extends BlockTerraContainer
 			{
 				TELightEmitter te = (TELightEmitter) world.getTileEntity(x, y, z);
 				if (TFC_Time.getTotalHours() > te.hourPlaced + TFCOptions.torchBurnTime ||
-					world.isRaining() && world.canBlockSeeTheSky(x, y, z))
+					TFC_Core.isExposedToRain(world, x, y, z))
 				{
 					world.setBlock(x, y, z, TFCBlocks.torchOff, meta, 3);
 				}

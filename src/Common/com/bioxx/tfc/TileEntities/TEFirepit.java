@@ -469,8 +469,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 				}
 			}
 			else if(fuelTimeLeft <= 0 && fireTemp >= 1 && fireItemStacks[5] != null &&
-						(!worldObj.canLightningStrikeAt(xCoord, yCoord, zCoord) && !worldObj.canLightningStrikeAt(xCoord, yCoord + 1, zCoord) ||
-							!worldObj.isRaining()))
+						!TFC_Core.isExposedToRain(worldObj, xCoord, yCoord, zCoord))
 			{
 				if(fireItemStacks[5] != null)
 				{
