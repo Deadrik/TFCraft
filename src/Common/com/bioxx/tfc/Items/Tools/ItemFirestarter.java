@@ -15,9 +15,8 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 
-import net.minecraftforge.common.util.ForgeDirection;
-
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEPottery;
@@ -31,7 +30,6 @@ public class ItemFirestarter extends ItemTerra
 	private boolean canBeUsed;
 	private boolean isCoal;
 	private boolean isPottery;
-	private boolean canBlockBurn;
 
 	public ItemFirestarter()
 	{
@@ -91,7 +89,7 @@ public class ItemFirestarter extends ItemTerra
 
 			if(count > 0 && world.isRemote)
 			{
-				Boolean genSmoke = canBeUsed || isCoal || isPottery || canBlockBurn;
+				Boolean genSmoke = canBeUsed || isCoal || isPottery;
 
 				if(genSmoke && chance > 70)
 					world.spawnParticle("smoke", hitX, hitY, hitZ, 0.0F, 0.1F, 0.0F);
@@ -152,12 +150,6 @@ public class ItemFirestarter extends ItemTerra
 					}
 					stack.damageItem(1, player);
 				}
-				else if(canBlockBurn)
-				{
-					if(chance > 70)
-						world.setBlock(x, y + 1, z, Blocks.fire);
-					stack.damageItem(1, player);
-				}
 			}
 		}
 	}
@@ -165,7 +157,7 @@ public class ItemFirestarter extends ItemTerra
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
-		if(canBeUsed || isCoal || isPottery || canBlockBurn)
+		if (canBeUsed || isCoal || isPottery)
 			player.setItemInUse(is, this.getMaxItemUseDuration(is));
 		return is;
 	}
@@ -174,9 +166,6 @@ public class ItemFirestarter extends ItemTerra
 	public boolean onItemUseFirst(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		this.setFlags(player);
-		// If the firestarter should be used with all flammable blocks, uncomment the next line.
-		//canBlockBurn = side == 1 && Blocks.fire.canCatchFire(world, x, y, z, ForgeDirection.UP);
-
 		return false;
 	}
 
@@ -198,19 +187,10 @@ public class ItemFirestarter extends ItemTerra
 			int side = mop.sideHit;
 
 			Block block = world.getBlock(x, y, z);
-			boolean surroundSolids = world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH)
-					&& world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH)
-					&& world.isSideSolid(x - 1, y, z, ForgeDirection.EAST)
-					&& world.isSideSolid(x + 1, y, z, ForgeDirection.WEST);
-			boolean surroundRock = world.getBlock(x, y - 1, z).getMaterial() == Material.rock
-					&& world.getBlock(x + 1, y, z).getMaterial() == Material.rock
-					&& world.getBlock(x - 1, y, z).getMaterial() == Material.rock
-					&& world.getBlock(x, y, z + 1).getMaterial() == Material.rock
-					&& world.getBlock(x, y, z - 1).getMaterial() == Material.rock
-					&& world.getBlock(x, y - 1, z).isNormalCube();
+			boolean surroundSolids = TFC_Core.isSurroundedSolid(world, x, y, z);
+			boolean surroundRock = TFC_Core.isSurroundedStone(world, x, y, z);
 			canBeUsed = side == 1
-					&& block.isNormalCube()
-					&& block.isOpaqueCube()
+					&& TFC_Core.isTopFaceSolid(world, x, y, z)
 					&& block.getMaterial() != Material.wood
 					&& block.getMaterial() != Material.cloth
 					&& world.isAirBlock(x, y + 1, z)
@@ -220,10 +200,8 @@ public class ItemFirestarter extends ItemTerra
 			isPottery = block == TFCBlocks.pottery && surroundSolids;
 			if (isPottery)
 			{
-				isPottery = false;
 				TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
-				if (!te.isLit() && te.wood == 8)
-					isPottery = true;
+				isPottery = !te.isLit() && te.wood == 8;
 			}
 		}
 	}

@@ -3,11 +3,11 @@ package com.bioxx.tfc.Items.Tools;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -35,22 +35,33 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
-		if(!world.isRemote)
+		if (!world.isRemote)
 		{
-			boolean surroundSolids = TFC_Core.isNorthFaceSolid(world, x, y, z + 1) &&
-					TFC_Core.isSouthFaceSolid(world, x, y, z - 1) &&
-					TFC_Core.isEastFaceSolid(world, x - 1, y, z) &&
-					TFC_Core.isWestFaceSolid(world, x + 1, y, z);
-
-			if(side == 1 && world.getBlock(x, y, z).isNormalCube() &&
-					world.getBlock(x, y, z).isOpaqueCube() &&
-					world.getBlock(x, y, z).getMaterial() != Material.wood &&
-					world.getBlock(x, y, z).getMaterial() != Material.cloth &&
-					world.isAirBlock(x, y + 1, z) &&
-					world.getBlock(x, y, z) != TFCBlocks.charcoal &&
-					world.getBlock(x, y, z) != Blocks.coal_block)
+			Block block = world.getBlock(x, y, z);
+			boolean surroundSolids = TFC_Core.isSurroundedSolid(world, x, y, z);
+			// Attempt to create forge
+			if (block == TFCBlocks.charcoal && world.getBlockMetadata(x, y, z) > 6 ||
+				block == Blocks.coal_block)
 			{
-
+				if (TFC_Core.isSurroundedStone(world, x, y, z) && surroundSolids)
+				{
+					triggerUse(itemstack, entityplayer, world, x, y, z);
+					world.setBlock(x, y, z, TFCBlocks.forge, 1, 0x2);
+					return true;
+				}
+			}
+			// Attempt to light pottery
+			else if (block == TFCBlocks.pottery && surroundSolids)
+			{
+				TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
+				te.startPitFire();
+				triggerUse(itemstack, entityplayer, world, x, y, z);
+				return true;
+			}
+			// Attempt to create fire pit
+			else if (side == 1 && TFC_Core.isTopFaceSolid(world, x, y, z) && world.isAirBlock(x, y + 1, z) &&
+					block.getMaterial() != Material.wood && block.getMaterial() != Material.cloth)
+			{
 				List list = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(x, y + 1, z, x + 1, y + 2, z + 1));
 				int numsticks = 0;
 
@@ -58,9 +69,9 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 				{
 					for (Iterator iterator = list.iterator(); iterator.hasNext();)
 					{
-						EntityItem entity = (EntityItem)iterator.next();
+						EntityItem entity = (EntityItem) iterator.next();
 						if (entity.getEntityItem().getItem() == TFCItems.stick)
-							numsticks+=entity.getEntityItem().stackSize;
+							numsticks += entity.getEntityItem().stackSize;
 					}
 
 					if (numsticks >= 3)
@@ -68,57 +79,34 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 						for (Iterator iterator = list.iterator(); iterator.hasNext();)
 						{
 							EntityItem entity = (EntityItem) iterator.next();
-							if (entity.getEntityItem().getItem() == TFCItems.stick)
-								entity.setDead();
-							if (entity.getEntityItem().getItem() == Items.paper)
+							if (entity.getEntityItem().getItem() == TFCItems.stick || entity.getEntityItem().getItem() == TFCItems.straw)
 								entity.setDead();
 						}
-						itemstack.damageItem(1, entityplayer);
+						triggerUse(itemstack, entityplayer, world, x, y, z);
 						world.setBlock(x, y + 1, z, TFCBlocks.firepit, 1, 0x2);
 						if (world.isRemote)
 							world.markBlockForUpdate(x, y + 1, z);
 						return true;
 					}
 				}
+			}
 
-				itemstack.setItemDamage(itemstack.getItemDamage() + 1);
-				if(itemstack.getItemDamage() >= itemstack.getMaxDamage())
-					itemstack.stackSize = 0;
-
-				return true;
-			}
-			else if (world.getBlock(x, y, z) == TFCBlocks.charcoal && world.getBlockMetadata(x, y, z) > 6 ||
-						world.getBlock(x, y, z) == Blocks.coal_block)
+			// Only triggers if all previous attempts failed
+			if (!block.onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ))
 			{
-				if(world.getBlock(x, y - 1, z).getMaterial() == Material.rock &&
-						world.getBlock(x + 1, y, z).getMaterial() == Material.rock &&
-						world.getBlock(x - 1, y, z).getMaterial() == Material.rock &&
-						world.getBlock(x, y, z + 1).getMaterial() == Material.rock &&
-						world.getBlock(x, y, z - 1).getMaterial() == Material.rock &&
-						surroundSolids)
-				{
-					itemstack.damageItem(1, entityplayer);
-					world.setBlock(x, y, z, TFCBlocks.forge, 1, 0x2);
-					//TEForge te = (TEForge)world.getTileEntity(x, y, z);
-					return true;
-				}
+				return super.onItemUse(itemstack, entityplayer, world, x, y, z, side, hitX, hitY, hitZ);
 			}
-			else if(world.getBlock(x, y, z) == TFCBlocks.pottery && surroundSolids)
-			{
-				TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
-				te.startPitFire();
-				itemstack.damageItem(1, entityplayer);
-				return true;
-			}
-			else if(!(world.getBlock(x,y,z)).onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ))
-			{
-				super.onItemUse(itemstack, entityplayer, world, x, y, z, side, hitX, hitY, hitZ);
-			}
-			else
-				return true;
 		}
+
 		return false;
 	}
+
+	private void triggerUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z)
+	{
+		world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, "fire.ignite", 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
+		is.damageItem(1, player);
+	}
+
 
 	@Override
 	public EnumSize getSize(ItemStack is)

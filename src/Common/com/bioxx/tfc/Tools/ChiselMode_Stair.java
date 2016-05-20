@@ -107,18 +107,27 @@ public class ChiselMode_Stair extends ChiselMode {
                 te = (TEPartial)world.getTileEntity(x, y, z);
                 world.notifyBlockChange(x, y, z, id);
             }
-            if( hitY > 0.5F ) {
-                if( hitX <= 0.5F && hitZ >= 0.5F && (te.extraData & 1) == 0) hit = 1;
-                if( hitX >= 0.5F && hitZ <= 0.5F && (te.extraData & 2) == 0) hit = 2;
-                if( hitX <= 0.5F && hitZ <= 0.5F && (te.extraData & 4) == 0) hit = 4;
-                if( hitX >= 0.5F && hitZ >= 0.5F && (te.extraData & 8) == 0) hit = 8;
+			if (hitY > 0.5F)
+			{ // Top Half
+				if (hitX <= 0.5F && hitZ >= 0.5F && (te.extraData & 1) == 0)
+					hit = 1; // South West
+				if (hitX >= 0.5F && hitZ <= 0.5F && (te.extraData & 2) == 0)
+					hit = 2; // North East
+				if (hitX <= 0.5F && hitZ <= 0.5F && (te.extraData & 4) == 0)
+					hit = 4; // North West
+				if (hitX >= 0.5F && hitZ >= 0.5F && (te.extraData & 8) == 0)
+					hit = 8; // South East
             }
-            else
+			else // Bottom Half
             {
-                if( hitX <= 0.5F && hitZ >= 0.5F && (te.extraData & 16) == 0) hit = 16;
-                if( hitX >= 0.5F && hitZ <= 0.5F && (te.extraData & 32) == 0) hit = 32;
-                if( hitX <= 0.5F && hitZ <= 0.5F && (te.extraData & 64) == 0) hit = 64;
-                if( hitX >= 0.5F && hitZ >= 0.5F && (te.extraData & 128) == 0) hit = 128;
+				if (hitX <= 0.5F && hitZ >= 0.5F && (te.extraData & 16) == 0)
+					hit = 16; // South West
+				if (hitX >= 0.5F && hitZ <= 0.5F && (te.extraData & 32) == 0)
+					hit = 32; // North East
+				if (hitX <= 0.5F && hitZ <= 0.5F && (te.extraData & 64) == 0)
+					hit = 64; // North West
+				if (hitX >= 0.5F && hitZ >= 0.5F && (te.extraData & 128) == 0)
+					hit = 128; // South East
             }
 
             te.extraData |= hit;

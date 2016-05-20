@@ -81,15 +81,25 @@ public class BlockStair extends BlockPartial implements ICustomCollision
 	{
 		TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 		long rvmeta = te.extraData;
-		switch(side)
+
+		// Left byte bottom, Right byte top
+		// Bits are SE, NW, NE, SW - 1 means square is missing
+		switch (side)
 		{
-		case DOWN:return (rvmeta & 15) == 15;
-		case UP:return (rvmeta & 240) == 240;
-		case NORTH:return (rvmeta & 102) == 102;
-		case SOUTH:return (rvmeta & 153) == 153;
-		case EAST:return (rvmeta & 170) == 170;
-		case WEST:return (rvmeta & 85) == 85;
-		default: return false;
+		case DOWN:
+			return (rvmeta & 0b1111_0000) == 0;
+		case UP:
+			return (rvmeta & 0b0000_1111) == 0;
+		case NORTH:
+			return (rvmeta & 0b0110_0110) == 0;
+		case SOUTH:
+			return (rvmeta & 0b1001_1001) == 0;
+		case EAST:
+			return (rvmeta & 0b1010_1010) == 0;
+		case WEST:
+			return (rvmeta & 0b0101_0101) == 0;
+		default:
+			return false;
 		}
 	}
 
