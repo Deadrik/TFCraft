@@ -96,7 +96,7 @@ public class WeatherManager
 				com.bioxx.tfc.ModSupport.Weather2 weather2 = new com.bioxx.tfc.ModSupport.Weather2();
 				return weather2.isRainingOnCoord(worldObj, xCoord, yCoord, zCoord);
 			}
-			return worldObj.isRaining();	
+			return TFC_Core.isExposedToRain(worldObj, xCoord, yCoord, zCoord);
 		}
 		return false;
 		

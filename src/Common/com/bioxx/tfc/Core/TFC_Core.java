@@ -8,6 +8,8 @@ import java.util.Random;
 
 import com.bioxx.tfc.TileEntities.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockGlass;
+import net.minecraft.block.BlockStainedGlass;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
@@ -1397,5 +1399,24 @@ public class TFC_Core
 	public static long getSuperSeed(World w)
 	{
 		return w.getSeed()+w.getWorldInfo().getNBTTagCompound().getLong("superseed");
+	}
+	
+	public static boolean isExposedToRain(World world, int x, int y, int z)
+	{
+		int highestY = world.getPrecipitationHeight(x, z) - 1;
+		boolean isExposed = true;
+		if (world.canBlockSeeTheSky(x, y + 1, z)) // Either no blocks, or transparent blocks above.
+		{
+			// Glass blocks, or blocks with a solid top or bottom block the rain.
+			if (world.getBlock(x, highestY, z) instanceof BlockGlass
+					|| world.getBlock(x, highestY, z) instanceof BlockStainedGlass
+					|| world.isSideSolid(x, highestY, z, ForgeDirection.UP) 
+					|| world.isSideSolid(x, highestY, z, ForgeDirection.DOWN))
+				isExposed = false;
+		}
+		else // Can't see the sky
+			isExposed = false;
+
+		return world.isRaining() && isExposed;
 	}
 }
