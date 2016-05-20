@@ -19,13 +19,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import net.minecraftforge.common.IShearable;
+import net.minecraftforge.oredict.OreDictionary;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
@@ -232,49 +232,55 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int meta)
 	{
-		ItemStack itemstack = entityplayer.inventory.getCurrentItem();
-		if (!world.isRemote && itemstack != null && itemstack.getItem() instanceof ItemCustomScythe)
+		if (!world.isRemote)
 		{
-			for(int x = -1; x < 2; x++)
+			ItemStack itemstack = entityplayer.inventory.getCurrentItem();
+			boolean foundScythe = false;
+			int[] equipIDs = OreDictionary.getOreIDs(itemstack);
+			for (int id : equipIDs)
 			{
-				for(int z = -1; z < 2; z++)
+				String name = OreDictionary.getOreName(id);
+				if (name.startsWith("itemScythe"))
 				{
-					for(int y = -1; y < 2; y++)
+					foundScythe = true;
+					for (int x = -1; x < 2; x++)
 					{
-						if(world.getBlock( i + x, j + y, k + z).getMaterial() == Material.leaves &&
-								entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem) != null)
+						for (int z = -1; z < 2; z++)
 						{
-							entityplayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
-							entityplayer.addExhaustion(0.045F);
-							if(world.rand.nextInt(100) < 11)
-								dropBlockAsItem(world, i + x, j + y, k + z, new ItemStack(TFCItems.stick, 1));
-							else if (world.rand.nextInt(100) < 4 && TFCOptions.enableSaplingDrops)
-								dropSapling(world, i + x, j + y, k + z, meta);
-							removeLeaves(world, i + x, j + y, k + z);
-							super.harvestBlock(world, entityplayer, i + x, j + y, k + z, meta);
+							for (int y = -1; y < 2; y++)
+							{
+								if (world.getBlock(i + x, j + y, k + z).getMaterial() == Material.leaves &&
+									entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem) != null)
+								{
+									entityplayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
+									entityplayer.addExhaustion(0.045F);
+									if (world.rand.nextInt(100) < 11)
+										dropBlockAsItem(world, i + x, j + y, k + z, new ItemStack(TFCItems.stick, 1));
+									else if (world.rand.nextInt(100) < 4 && TFCOptions.enableSaplingDrops)
+										dropSapling(world, i + x, j + y, k + z, meta);
+									removeLeaves(world, i + x, j + y, k + z);
+									super.harvestBlock(world, entityplayer, i + x, j + y, k + z, meta);
 
-							int ss = itemstack.stackSize;
-							int dam = itemstack.getItemDamage() + 2;
-
-							if(dam >= itemstack.getItem().getMaxDamage())
-								entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
-							else
-								entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, new ItemStack(itemstack.getItem(), ss, dam));
+									itemstack.damageItem(1, entityplayer);
+									if (itemstack.stackSize == 0)
+										entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
+								}
+							}
 						}
 					}
 				}
 			}
-		}
-		else if(!world.isRemote)
-		{
-			entityplayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
-			entityplayer.addExhaustion(0.025F);
-			if(world.rand.nextInt(100) < 28)
-				dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.stick, 1));
-			else if (world.rand.nextInt(100) < 6 && TFCOptions.enableSaplingDrops)
-				dropSapling(world, i, j, k, meta);
+			if (!foundScythe)
+			{
+				entityplayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
+				entityplayer.addExhaustion(0.025F);
+				if (world.rand.nextInt(100) < 28)
+					dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.stick, 1));
+				else if (world.rand.nextInt(100) < 6 && TFCOptions.enableSaplingDrops)
+					dropSapling(world, i, j, k, meta);
 
 				super.harvestBlock(world, entityplayer, i, j, k, meta);
+			}
 		}
 	}
 

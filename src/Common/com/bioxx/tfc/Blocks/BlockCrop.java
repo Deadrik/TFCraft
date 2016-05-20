@@ -18,6 +18,8 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import net.minecraftforge.oredict.OreDictionary;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -26,7 +28,6 @@ import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
-import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
 import com.bioxx.tfc.TileEntities.TECrop;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
@@ -185,32 +186,34 @@ public class BlockCrop extends BlockContainer
 	@Override
 	public void onBlockHarvested(World world, int i, int j, int k, int l, EntityPlayer player)
 	{
-		ItemStack itemstack = player.inventory.getCurrentItem();
 		TECrop te = (TECrop) world.getTileEntity(i, j, k);
-
-		//Handle Scythe
-		if(!world.isRemote && itemstack != null && itemstack.getItem() instanceof ItemCustomScythe)
+		if (!world.isRemote)
 		{
-			for(int x = -1; x < 2; x++)
+			ItemStack itemstack = player.inventory.getCurrentItem();
+			int[] equipIDs = OreDictionary.getOreIDs(itemstack);
+
+			for (int id : equipIDs)
 			{
-				for(int z = -1; z < 2; z++)
+				String name = OreDictionary.getOreName(id);
+				if (name.startsWith("itemScythe"))
 				{
-					if(world.getBlock( i+x, j, k+z) == this && player.inventory.getStackInSlot(player.inventory.currentItem) != null)
+					for (int x = -1; x < 2; x++)
 					{
-						player.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
-						TECrop teX = (TECrop) world.getTileEntity(i + x, j, k + z);
-						teX.onHarvest(world, player, true);
+						for (int z = -1; z < 2; z++)
+						{
+							if (world.getBlock(i + x, j, k + z) == this && player.inventory.getStackInSlot(player.inventory.currentItem) != null)
+							{
+								player.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
+								TECrop teX = (TECrop) world.getTileEntity(i + x, j, k + z);
+								teX.onHarvest(world, player, true);
 
-						//breakBlock(world, i + x, j, k + z, l, 0);
-						world.setBlockToAir(i + x, j, k + z);
+								world.setBlockToAir(i + x, j, k + z);
 
-						int ss = itemstack.stackSize;
-						int dam = itemstack.getItemDamage() + 2;
-
-						if(dam >= itemstack.getItem().getMaxDamage())
-							player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-						else
-							player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(itemstack.getItem(), ss, dam));
+								itemstack.damageItem(1, player);
+								if (itemstack.stackSize == 0)
+									player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+							}
+						}
 					}
 				}
 			}

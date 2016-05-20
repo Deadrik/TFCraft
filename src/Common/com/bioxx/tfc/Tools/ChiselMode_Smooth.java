@@ -79,21 +79,25 @@ public class ChiselMode_Smooth extends ChiselMode {
             return false;
         }
 
-        int hasChisel = hasChisel(player);
-        if( hasChisel >= 0 ){
-            if(id == TFCBlocks.stoneIgIn) {
-                world.setBlock(x, y, z, TFCBlocks.stoneIgInSmooth, meta, 0x2);
-            } else if(id == TFCBlocks.stoneIgEx) {
-                world.setBlock(x, y, z, TFCBlocks.stoneIgExSmooth, meta, 0x2);
-            } else if(id == TFCBlocks.stoneSed) {
-                world.setBlock(x, y, z, TFCBlocks.stoneSedSmooth, meta, 0x2);
-            } else if(id == TFCBlocks.stoneMM) {
-                world.setBlock(x, y, z, TFCBlocks.stoneMMSmooth, meta, 0x2);
+		if (TFC_Core.isRawStone(id))
+		{
+            int hasChisel = hasChisel(player);
+            if( hasChisel >= 0 ){
+                if(id == TFCBlocks.stoneIgIn) {
+                    world.setBlock(x, y, z, TFCBlocks.stoneIgInSmooth, meta, 0x2);
+                } else if(id == TFCBlocks.stoneIgEx) {
+                    world.setBlock(x, y, z, TFCBlocks.stoneIgExSmooth, meta, 0x2);
+                } else if(id == TFCBlocks.stoneSed) {
+                    world.setBlock(x, y, z, TFCBlocks.stoneSedSmooth, meta, 0x2);
+                } else if(id == TFCBlocks.stoneMM) {
+                    world.setBlock(x, y, z, TFCBlocks.stoneMMSmooth, meta, 0x2);
+                }
+
+                player.inventory.mainInventory[hasChisel].damageItem(1, player);
+				return true;
             }
+		}
 
-            player.inventory.mainInventory[hasChisel].damageItem(1, player);
-        }
-
-        return true;
+		return false;
     }
 }
