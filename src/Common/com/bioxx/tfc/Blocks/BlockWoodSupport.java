@@ -98,61 +98,100 @@ public class BlockWoodSupport extends BlockTerra
 		int s = 0; boolean foundSV = false; boolean foundSH = true;
 		int e = 0; boolean foundEV = false; boolean foundEH = true;
 		int w = 0; boolean foundWV = false; boolean foundWH = true;
-		for(int i = 1; i <= range; i++)
+		boolean clearNorthPath = true;
+		boolean clearSouthPath = true;
+		boolean clearEastPath = true;
+		boolean clearWestPath = true;
+
+		for (int i = 1; i <= range; i++)
 		{
-			if(!foundEV)
+			if (!foundEV)
 			{
-				if(!checkConnection)
-					e++;
-				else if(checkConnection && !TFCBlocks.isBlockHSupport(world.getBlock(x+i, y, z)) && !TFCBlocks.isBlockVSupport(world.getBlock(x+i, y, z))) 
+				if (!checkConnection)
+				{
+					if (world.isAirBlock(x + i, y, z) || TFCBlocks.isBlockVSupport(world.getBlock(x + i, y, z)))
+						e++;
+					else
+						clearEastPath = false;
+				}
+				else if (checkConnection && !TFCBlocks.isBlockHSupport(world.getBlock(x + i, y, z)) && !TFCBlocks.isBlockVSupport(world.getBlock(x + i, y, z)))
 					foundEH = false;
-				else e++;
-				if(TFCBlocks.isBlockVSupport(world.getBlock(x+i, y, z)) && (e >= 0 || i == 1))
-					if(scanVert(world, x+i, y, z))
+				else
+					e++;
+				if (clearEastPath && TFCBlocks.isBlockVSupport(world.getBlock(x + i, y, z)) && (e >= 0 || i == 1))
+				{
+					if (scanVert(world, x + i, y, z))
 						foundEV = true;
-					else e -= 50;
+					else
+						e -= 50;
+				}
 			}
-			if(!foundWV)
+			if (!foundWV)
 			{
-				if(!checkConnection)
-					w++;
-				else if(checkConnection && !TFCBlocks.isBlockHSupport(world.getBlock(x-i, y, z)) && !TFCBlocks.isBlockVSupport(world.getBlock(x-i, y, z))) 
+				if (!checkConnection)
+				{
+					if (world.isAirBlock(x - i, y, z) || TFCBlocks.isBlockVSupport(world.getBlock(x - i, y, z)))
+						w++;
+					else
+						clearWestPath = false;
+				}
+				else if (checkConnection && !TFCBlocks.isBlockHSupport(world.getBlock(x - i, y, z)) && !TFCBlocks.isBlockVSupport(world.getBlock(x - i, y, z)))
 					foundWH = false;
-				else w++;
-				if(TFCBlocks.isBlockVSupport(world.getBlock(x-i, y, z)) && (w >= 0 || i == 1))
-					if(scanVert(world, x-i, y, z))
+				else
+					w++;
+				if (clearWestPath && TFCBlocks.isBlockVSupport(world.getBlock(x - i, y, z)) && (w >= 0 || i == 1))
+				{
+					if (scanVert(world, x - i, y, z))
 						foundWV = true;
-					else w -= 50;
+					else
+						w -= 50;
+				}
 			}
-			if(!foundSV)
+			if (!foundSV)
 			{
-				if(!checkConnection)
-					s++;
-				else if(checkConnection && !TFCBlocks.isBlockHSupport(world.getBlock(x, y, z+i)) && !TFCBlocks.isBlockVSupport(world.getBlock(x, y, z+i))) 
+				if (!checkConnection)
+				{
+					if (world.isAirBlock(x, y, z + i) || TFCBlocks.isBlockVSupport(world.getBlock(x, y, z + i)))
+						s++;
+					else
+						clearSouthPath = false;
+
+				}
+				else if (checkConnection && !TFCBlocks.isBlockHSupport(world.getBlock(x, y, z + i)) && !TFCBlocks.isBlockVSupport(world.getBlock(x, y, z + i)))
 					foundSH = false;
-				else s++;
-
-				if(TFCBlocks.isBlockVSupport(world.getBlock(x, y, z+i)) && (s >= 0 || i == 1))
-					if(scanVert(world, x, y, z+i))
+				else
+					s++;
+				if (clearSouthPath && TFCBlocks.isBlockVSupport(world.getBlock(x, y, z + i)) && (s >= 0 || i == 1))
+				{
+					if (scanVert(world, x, y, z + i))
 						foundSV = true;
+				}
 			}
-			if(!foundNV)
+			if (!foundNV)
 			{
-				if(!checkConnection)
-					n++;
-				else if(checkConnection && !TFCBlocks.isBlockHSupport(world.getBlock(x, y, z-i)) && !TFCBlocks.isBlockVSupport(world.getBlock(x, y, z-i))) 
+				if (!checkConnection)
+				{
+					if (world.isAirBlock(x, y, z - i) || TFCBlocks.isBlockVSupport(world.getBlock(x, y, z - i)))
+						n++;
+					else
+						clearNorthPath = false;
+				}
+				else if (checkConnection && !TFCBlocks.isBlockHSupport(world.getBlock(x, y, z - i)) && !TFCBlocks.isBlockVSupport(world.getBlock(x, y, z - i)))
 					foundNH = false;
-				else n++;
-
-				if(TFCBlocks.isBlockVSupport(world.getBlock(x, y, z-i)) && (n >= 0 || i == 1))
-					if(scanVert(world, x, y, z-i))
+				else
+					n++;
+				if (clearNorthPath && TFCBlocks.isBlockVSupport(world.getBlock(x, y, z - i)) && (n >= 0 || i == 1))
+				{
+					if (scanVert(world, x, y, z - i))
 						foundNV = true;
+				}
 			}
 		}
-		if(foundEV && foundEH && foundWV && foundWH)
-			return new int[]{0, 0, 0, 0, w, e};
-		if(foundSV && foundSH && foundNV && foundNH)
-			return new int[]{0, 0, n, s, 0, 0};
+
+		if (foundEV && foundEH && foundWV && foundWH)
+			return new int[] { 0, 0, 0, 0, w, e };
+		if (foundSV && foundSH && foundNV && foundNH)
+			return new int[] { 0, 0, n, s, 0, 0 };
 		return null;
 	}
 
@@ -376,7 +415,7 @@ public class BlockWoodSupport extends BlockTerra
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entity, ItemStack is) 
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entity, ItemStack is)
 	{
 		super.onBlockPlacedBy(world, i, j, k, entity, is);
 		//if(!world.isRemote)
@@ -397,8 +436,8 @@ public class BlockWoodSupport extends BlockTerra
 		{
 			//if the block directly beneath the support is not solid or a support then break the support
 			if(!world.getBlock(i, j-1, k).isOpaqueCube() && !TFCBlocks.isBlockVSupport(world.getBlock(i, j-1, k)))
-			{	
-				harvestBlock(world, null, i, j, k,  meta);
+			{
+				harvestBlock(world, null, i, j, k, meta);
 				world.setBlockToAir(i, j, k);
 			}
 		}
@@ -407,7 +446,7 @@ public class BlockWoodSupport extends BlockTerra
 			boolean b1 = !isSupportConnected(world,i,j,k);
 			if( b1)
 			{
-				harvestBlock(world, null, i, j, k,  meta);
+				harvestBlock(world, null, i, j, k, meta);
 				world.setBlockToAir(i, j, k);
 			}
 			else if(TFCBlocks.isBlockVSupport(world.getBlock(i, j-1, k)))
