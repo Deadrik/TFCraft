@@ -795,9 +795,11 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					}
 					else
 					{
-						this.fluid = recipe.getResultFluid(origIS, origFS, time);
+						this.fluid = recipe.getResultFluid(origIS, origFS, time).copy();
 						if (fluid != null && !(recipe instanceof BarrelLiquidToLiquidRecipe) && origFS != null)
 							this.fluid.amount = origFS.amount;
+
+						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 					}
 
 					if (origFS != null && origFS.getFluid() != TFCFluids.MILKCURDLED && this.fluid.getFluid() == TFCFluids.MILKCURDLED)
