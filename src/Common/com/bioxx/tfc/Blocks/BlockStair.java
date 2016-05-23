@@ -87,17 +87,17 @@ public class BlockStair extends BlockPartial implements ICustomCollision
 		switch (side)
 		{
 		case DOWN:
-			return (rvmeta & 0b1111_0000) == 0;
+			return (rvmeta & 240) == 0; // 0b1111_0000
 		case UP:
-			return (rvmeta & 0b0000_1111) == 0;
+			return (rvmeta & 15) == 0; // 0b0000_1111
 		case NORTH:
-			return (rvmeta & 0b0110_0110) == 0;
+			return (rvmeta & 102) == 0; // 0b0110_0110
 		case SOUTH:
-			return (rvmeta & 0b1001_1001) == 0;
+			return (rvmeta & 153) == 0; // 0b1001_1001
 		case EAST:
-			return (rvmeta & 0b1010_1010) == 0;
+			return (rvmeta & 170) == 0; // 0b1010_1010
 		case WEST:
-			return (rvmeta & 0b0101_0101) == 0;
+			return (rvmeta & 85) == 0; // 0b0101_0101
 		default:
 			return false;
 		}
