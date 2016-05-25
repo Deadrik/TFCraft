@@ -195,7 +195,8 @@ public class ItemFirestarter extends ItemTerra
 					&& block.getMaterial() != Material.cloth
 					&& world.isAirBlock(x, y + 1, z)
 					&& block != TFCBlocks.charcoal
-					&& block != Blocks.coal_block;
+					&& block != Blocks.coal_block
+					&& block != TFCBlocks.pottery;
 			isCoal = (block == TFCBlocks.charcoal && world.getBlockMetadata(x, y, z) > 6 || block == Blocks.coal_block) && surroundRock && surroundSolids;
 			isPottery = block == TFCBlocks.pottery && surroundSolids;
 			if (isPottery)
