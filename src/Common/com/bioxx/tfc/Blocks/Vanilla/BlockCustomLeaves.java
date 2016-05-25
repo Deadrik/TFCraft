@@ -235,14 +235,12 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 		if (!world.isRemote)
 		{
 			ItemStack itemstack = entityplayer.inventory.getCurrentItem();
-			boolean foundScythe = false;
 			int[] equipIDs = OreDictionary.getOreIDs(itemstack);
 			for (int id : equipIDs)
 			{
 				String name = OreDictionary.getOreName(id);
 				if (name.startsWith("itemScythe"))
 				{
-					foundScythe = true;
 					for (int x = -1; x < 2; x++)
 					{
 						for (int z = -1; z < 2; z++)
@@ -268,19 +266,20 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 							}
 						}
 					}
+					return;
 				}
 			}
-			if (!foundScythe)
-			{
-				entityplayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
-				entityplayer.addExhaustion(0.025F);
-				if (world.rand.nextInt(100) < 28)
-					dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.stick, 1));
-				else if (world.rand.nextInt(100) < 6 && TFCOptions.enableSaplingDrops)
-					dropSapling(world, i, j, k, meta);
 
-				super.harvestBlock(world, entityplayer, i, j, k, meta);
-			}
+			// Only executes if scythe wasn't found
+			entityplayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
+			entityplayer.addExhaustion(0.025F);
+			if (world.rand.nextInt(100) < 28)
+				dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.stick, 1));
+			else if (world.rand.nextInt(100) < 6 && TFCOptions.enableSaplingDrops)
+				dropSapling(world, i, j, k, meta);
+
+			super.harvestBlock(world, entityplayer, i, j, k, meta);
+
 		}
 	}
 
