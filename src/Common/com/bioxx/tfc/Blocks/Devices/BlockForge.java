@@ -9,6 +9,8 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -16,8 +18,6 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -27,7 +27,6 @@ import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.Tools.ItemFirestarter;
-import com.bioxx.tfc.Items.Tools.ItemFlintSteel;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.api.TFCBlocks;
 
@@ -45,59 +44,48 @@ public class BlockForge extends BlockTerraContainer
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
-		//int meta = world.getBlockMetadata(i, j, k);
-		//int xCoord = i;
-		//int yCoord = j;
-		//int zCoord = k;
-		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
-
-		if(world.isRemote)
+		if (!world.isRemote && world.getTileEntity(i, j, k) instanceof TEForge)
 		{
-			return true;
-		}
-		else if(equippedItem != null && (equippedItem.getItem() instanceof ItemFirestarter || equippedItem.getItem() instanceof ItemFlintSteel))
-		{
-			if((TEForge)world.getTileEntity(i, j, k) != null)
+			ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
+			TEForge tef = (TEForge) world.getTileEntity(i, j, k);
+			if (equippedItem != null)
 			{
-				TEForge tef = (TEForge)world.getTileEntity(i, j, k);
-				if (!tef.isSmokeStackValid)
+				Item item = equippedItem.getItem();
+				if (item instanceof ItemFirestarter || item instanceof ItemFlintAndSteel)
 				{
-					TFC_Core.sendInfoMessage(entityplayer, new ChatComponentTranslation("gui.forge.badChimney"));
-					return true;
-				}
-
-				if (tef.fireTemp <= 0 && tef.fireItemStacks[7] != null)
-				{
-					tef.fireTemp = 10;
-					tef.fuelBurnTemp = 20;
-					tef.fuelTimeLeft = 10;
-					int ss = entityplayer.inventory.getCurrentItem().stackSize;
-					int dam = entityplayer.inventory.getCurrentItem().getItemDamage()+1;
-
-					if(dam >= entityplayer.getCurrentEquippedItem().getItem().getMaxDamage())
-						entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
-					else
-						entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, new ItemStack(entityplayer.getCurrentEquippedItem().getItem(),ss,dam));
-
-					world.setBlockMetadataWithNotify(i, j, k, 2, 3);
+					if (!tef.isSmokeStackValid)
+					{
+						TFC_Core.sendInfoMessage(entityplayer, new ChatComponentTranslation("gui.forge.badChimney"));
+						return true;
+					}
+					else if (tef.fireTemp <= 0 && tef.fireItemStacks[7] != null)
+					{
+						tef.fireTemp = 10;
+						tef.fuelBurnTemp = 20;
+						tef.fuelTimeLeft = 10;
+						if (item instanceof ItemFlintAndSteel)
+						{
+							Random rand = new Random();
+							world.playSoundEffect(i + 0.5D, j + 0.5D, k + 0.5D, "fire.ignite", 1.0F, rand.nextFloat() * 0.4F + 0.8F);
+						}
+						equippedItem.damageItem(1, entityplayer);
+						world.setBlockMetadataWithNotify(i, j, k, 2, 3);
+						return true;
+					}
 				}
 			}
-			return true;
-		}
-		else
-		{
-			if((TEForge)world.getTileEntity(i, j, k)!=null)
+
+			if (tef.isSmokeStackValid)
 			{
-				TEForge tef = (TEForge)world.getTileEntity(i, j, k);
-				if(tef.isSmokeStackValid)
-				{
-					entityplayer.openGui(TerraFirmaCraft.instance, 23, world, i, j, k);
-				}
-				else
-					TFC_Core.sendInfoMessage(entityplayer, new ChatComponentTranslation("gui.forge.badChimney"));
+				entityplayer.openGui(TerraFirmaCraft.instance, 23, world, i, j, k);
 			}
-			return true;
+			else
+			{
+				TFC_Core.sendInfoMessage(entityplayer, new ChatComponentTranslation("gui.forge.badChimney"));
+			}
 		}
+
+		return true;
 	}
 
 	@Override
@@ -137,37 +125,11 @@ public class BlockForge extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			/*boolean surroundSolids = (world.getBlock(x+1, y, z).getMaterial() == Material.rock && world.getBlock(x-1, y, z).getMaterial() == Material.rock && 
-					world.getBlock(x, y, z+1).getMaterial() == Material.rock && world.getBlock(x, y, z-1).getMaterial() == Material.rock &&
-					world.getBlock(x, y-1, z).isNormalCube() && (world.getBlock(x+1, y, z).isNormalCube() && world.getBlock(x-1, y, z).isNormalCube() && 
-							world.getBlock(x, y, z+1).isNormalCube() && world.getBlock(x, y, z-1).isNormalCube()));*/
-
-			boolean rockXP = world.getBlock(x+1, y, z) == TFCBlocks.stoneSlabs || 
-					world.getBlock(x+1, y, z).getMaterial() == Material.rock && world.getBlock(x+1, y, z).isNormalCube();
-			boolean rockXN = world.getBlock(x-1, y, z) == TFCBlocks.stoneSlabs || 
-					world.getBlock(x-1, y, z).getMaterial() == Material.rock && world.getBlock(x-1, y, z).isNormalCube();
-			boolean rockZP = world.getBlock(x, y, z+1) == TFCBlocks.stoneSlabs || 
-					world.getBlock(x, y, z+1).getMaterial() == Material.rock && world.getBlock(x, y, z+1).isNormalCube();
-			boolean rockZN = world.getBlock(x, y, z-1) == TFCBlocks.stoneSlabs || 
-					world.getBlock(x, y, z-1).getMaterial() == Material.rock && world.getBlock(x, y, z-1).isNormalCube();
-			boolean rockYN = world.getBlock(x, y-1,  z ) == TFCBlocks.stoneSlabs ||
-					world.getBlock(x, y-1, z).getMaterial() == Material.rock && world.getBlock(x, y-1,z).isNormalCube();
-
-			boolean validSlabs = world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH) && world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH) &&
-					world.isSideSolid(x - 1, y, z, ForgeDirection.EAST) && world.isSideSolid(x + 1, y, z, ForgeDirection.WEST);
-
-			if (!(rockXP && rockXN && rockZP && rockZN && rockYN) || !validSlabs)
+			if (!TFC_Core.isSurroundedSolid(world, x, y, z) || !TFC_Core.isSurroundedStone(world, x, y, z))
 			{
 				((TEForge)world.getTileEntity(x, y, z)).ejectContents();
 				world.setBlockToAir(x, y, z);
 			}
-			/*else
-			{
-				if(world.getTileEntity(x, y, z) != null)
-				{
-					//((TEForge)world.getBlockTileEntity(x, y, z)).isValid = false;
-				}
-			}*/
 		}
 	}
 

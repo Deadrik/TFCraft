@@ -215,12 +215,14 @@ public class BlockCrop extends BlockContainer
 							}
 						}
 					}
+
+					return;
 				}
 			}
 		}
-		else
-			//Handle Loot Drop
-			te.onHarvest(world, player, true);
+
+		// Only executes if scythe wasn't found
+		te.onHarvest(world, player, true);
 	}
 
 	/**

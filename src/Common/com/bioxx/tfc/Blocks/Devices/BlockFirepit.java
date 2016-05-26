@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -24,9 +25,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Items.Tools.ItemFirestarter;
 import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
 
 public class BlockFirepit extends BlockTerraContainer
 {
@@ -42,40 +44,38 @@ public class BlockFirepit extends BlockTerraContainer
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
-		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
-		Item item;
-		if(equippedItem != null)
-			item = entityplayer.getCurrentEquippedItem().getItem();
-		else
-			item = null;
-
-		if(world.isRemote)
+		if (!world.isRemote)
 		{
-			return true;
-		}
-		else if(item == TFCItems.fireStarter || item == TFCItems.flintSteel)
-		{
-			if((TEFirepit)world.getTileEntity(x, y, z) != null)
+			ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
+			if (equippedItem != null)
 			{
-				TEFirepit te = (TEFirepit)world.getTileEntity(x, y, z);
-				if(te.fireTemp < 210 && te.fireItemStacks[5] != null)
+				Item item = entityplayer.getCurrentEquippedItem().getItem();
+				if (item instanceof ItemFirestarter || item instanceof ItemFlintAndSteel)
 				{
-					te.fireTemp = 300;
-					int ss = entityplayer.inventory.getCurrentItem().stackSize;
-					int dam = entityplayer.inventory.getCurrentItem().getItemDamage();
-					entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, 
-							new ItemStack(entityplayer.getCurrentEquippedItem().getItem(), ss, dam));
-					world.setBlockMetadataWithNotify(x, y, z, 1, 3);
+					if ((TEFirepit) world.getTileEntity(x, y, z) != null)
+					{
+						TEFirepit te = (TEFirepit) world.getTileEntity(x, y, z);
+						if (te.fireTemp < 210 && te.fireItemStacks[5] != null)
+						{
+							te.fireTemp = 300;
+							if (item instanceof ItemFlintAndSteel)
+							{
+								Random rand = new Random();
+								world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, "fire.ignite", 1.0F, rand.nextFloat() * 0.4F + 0.8F);
+							}
+							equippedItem.damageItem(1, entityplayer);
+							world.setBlockMetadataWithNotify(x, y, z, 1, 3);
+							return true;
+						}
+					}
 				}
 			}
-			return true;
-		}
-		else
-		{
-			if((TEFirepit)world.getTileEntity(x, y, z) != null)
+
+			if ((TEFirepit) world.getTileEntity(x, y, z) != null)
 				entityplayer.openGui(TerraFirmaCraft.instance, 20, world, x, y, z);
-			return true;
 		}
+
+		return true;
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public class BlockFirepit extends BlockTerraContainer
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
-		if(!world.getBlock(x, y - 1, z).isOpaqueCube())
+		if (!TFC_Core.isTopFaceSolid(world, x, y - 1, z))
 		{
 			((TEFirepit)world.getTileEntity(x, y, z)).ejectContents();
 			world.setBlockToAir(x, y, z);
