@@ -1149,8 +1149,10 @@ public class TFC_Core
 
 			float decay = Food.getDecay(is);
 			float thisDecayRate = 1.0f;
-			// Get the base food decay rate
-			if (is.getItem() instanceof IFood)
+			if (is.getItem() instanceof IFood && Food.getWeight(is) > Global.FOOD_MAX_WEIGHT)
+				thisDecayRate = 100f;
+				// Get the base food decay rate
+			else if (is.getItem() instanceof IFood)
 				thisDecayRate = ((IFood) is.getItem()).getDecayRate(is);
 			// check if the food has a specially applied decay rate in its nbt (meals, sandwiches, salads)
 			else
