@@ -55,8 +55,8 @@ public class EntityDamageHandler
 		}
 		else if(event.source == DamageSource.fall)
 		{
-			float healthMod = TFC_Core.getEntityMaxHealth(entity)/1000f;
-			event.ammount *= 80*healthMod;
+			//float healthMod = TFC_Core.getEntityMaxHealth(entity)/1000f;
+			event.ammount *= 80/*healthMod*/;
 		}
 		else if(event.source == DamageSource.drown)
 		{
@@ -78,9 +78,14 @@ public class EntityDamageHandler
 		{
 			event.ammount *= 30;
 		}
-		else if (event.source == DamageSource.magic && entity.getHealth() > 25)
+		else if (event.source == DamageSource.magic || event.source == DamageSource.wither)
+		{
+			if ((entity.getHealth() - 25) > (TFC_Core.getEntityMaxHealth(entity)/10f))
 		{
 			event.ammount = 25;
+		}
+			else
+				event.ammount = (entity.getHealth() - (TFC_Core.getEntityMaxHealth(entity)/10f));
 		}
 		else if ("player".equals(event.source.damageType) || "mob".equals(event.source.damageType) || "arrow".equals(event.source.damageType))
 		{
