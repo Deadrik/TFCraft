@@ -3,6 +3,7 @@
 ### Gradle ###
 .gradle
 build/
+libs/
 
 
 # Ignore Gradle GUI config
