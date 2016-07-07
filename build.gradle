@@ -31,7 +31,7 @@ allprojects {
     apply plugin: 'maven'
     group = config.group_name
     version = config.mod_version
-	archivesBaseName = "[${config.minecraft_version}]${config.mod_id}"
+    archivesBaseName = "[${config.minecraft_version}]${config.mod_id}"
 
     minecraft {
     version = config.minecraft_version + "-" + config.forge_version
@@ -104,7 +104,8 @@ from(sourceSets.main.resources.srcDirs) {
 
         // replaces
         expand ([
-            'mod_version': version,
+            'mod_version': project.config.mod_version,
+            'tfc_version': project.config.tfc_version,
             'minecraft_version': project.config.minecraft_version,
         ])
     }
