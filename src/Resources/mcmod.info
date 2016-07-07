@@ -14,7 +14,7 @@
     "screenshots": [  ],
     "parent": "",
     "requiredMods": [  ],
-    "dependencies": ["Forge@[10.13.4.1448,)"],
+    "dependencies": ["Forge@[10.13.4.1558,)"],
     "dependants": [  ],
     "useDependencyInformation": "true"
   }]

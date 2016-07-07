@@ -40,6 +40,7 @@ import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Entities.EntityBarrel;
 import com.bioxx.tfc.Items.ItemBlocks.ItemBarrels;
 import com.bioxx.tfc.Items.ItemBlocks.ItemLargeVessel;
+import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCItems;
@@ -383,6 +384,11 @@ public class BlockBarrel extends BlockTerraContainer
 				if (ItemStack.areItemStacksEqual(equippedItem, is))
 				{
 					return false;
+				}
+
+				if (is.getItem() == TFCItems.woodenBucketMilk)
+				{
+					ItemCustomBucketMilk.createTag(is, 20f);
 				}
 
 				equippedItem.stackSize--;

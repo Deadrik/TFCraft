@@ -41,6 +41,8 @@ public class ItemHeat
 		HeatRaw sterlingSilverRaw = new HeatRaw(0.35, 900);//sh = 0.72F; boil = 2212; melt = 893;
 		HeatRaw tinRaw = new HeatRaw(0.14, 230);
 		HeatRaw zincRaw = new HeatRaw(0.21, 420);//sh = 0.66F; boil = 907; melt = 420;
+		HeatRaw electrumRaw = new HeatRaw(0.55, 1060);
+		HeatRaw cupronickelRaw = new HeatRaw(0.48, 1453);
 
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.oreChunk,1,0), copperRaw,new ItemStack(TFCItems.copperUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.oreChunk,1,1), goldRaw,new ItemStack(TFCItems.goldUnshaped,1)));
@@ -99,10 +101,54 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallOreChunk,1,11), ironRaw,new ItemStack(TFCItems.pigIronUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallOreChunk,1,12), zincRaw,new ItemStack(TFCItems.zincUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallOreChunk,1,13), copperRaw,new ItemStack(TFCItems.copperUnshaped,1)));
-		// Invallid
-		// manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,35), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,1)));
-		// manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,36), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)));
-		// manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,37), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,1)));
+
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,0), bismuthRaw,new ItemStack(TFCItems.bismuthUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,1), bismuthBronzeRaw,new ItemStack(TFCItems.bismuthBronzeUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,2), blackBronzeRaw,new ItemStack(TFCItems.blackBronzeUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,3), blackSteelRaw,new ItemStack(TFCItems.blackSteelUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,4), blueSteelRaw,new ItemStack(TFCItems.blueSteelUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,5), brassRaw,new ItemStack(TFCItems.brassUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,6), bronzeRaw,new ItemStack(TFCItems.bronzeUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,7), copperRaw,new ItemStack(TFCItems.copperUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,8), goldRaw,new ItemStack(TFCItems.goldUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,9), ironRaw,new ItemStack(TFCItems.wroughtIronUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,10), leadRaw,new ItemStack(TFCItems.leadUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,11), nickelRaw,new ItemStack(TFCItems.nickelUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,12), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,13), platinumRaw,new ItemStack(TFCItems.platinumUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,14), redSteelRaw,new ItemStack(TFCItems.redSteelUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,15), roseGoldRaw,new ItemStack(TFCItems.roseGoldUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,16), silverRaw,new ItemStack(TFCItems.silverUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,17), steelRaw,new ItemStack(TFCItems.steelUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,18), sterlingSilverRaw,new ItemStack(TFCItems.sterlingSilverUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,19), tinRaw,new ItemStack(TFCItems.tinUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,20), zincRaw,new ItemStack(TFCItems.zincUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,21), electrumRaw,new ItemStack(TFCItems.electrumUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.smallMetalChunk,1,22), cupronickelRaw,new ItemStack(TFCItems.cupronickelUnshaped,1)));
+
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,0), bismuthRaw,new ItemStack(TFCItems.bismuthUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,1), bismuthBronzeRaw,new ItemStack(TFCItems.bismuthBronzeUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,2), blackBronzeRaw,new ItemStack(TFCItems.blackBronzeUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,3), blackSteelRaw,new ItemStack(TFCItems.blackSteelUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,4), blueSteelRaw,new ItemStack(TFCItems.blueSteelUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,5), brassRaw,new ItemStack(TFCItems.brassUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,6), bronzeRaw,new ItemStack(TFCItems.bronzeUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,7), copperRaw,new ItemStack(TFCItems.copperUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,8), goldRaw,new ItemStack(TFCItems.goldUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,9), ironRaw,new ItemStack(TFCItems.wroughtIronUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,10), leadRaw,new ItemStack(TFCItems.leadUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,11), nickelRaw,new ItemStack(TFCItems.nickelUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,12), pigIronRaw,new ItemStack(TFCItems.pigIronUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,13), platinumRaw,new ItemStack(TFCItems.platinumUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,14), redSteelRaw,new ItemStack(TFCItems.redSteelUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock,1,15), roseGoldRaw,new ItemStack(TFCItems.roseGoldUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock2,1,0), silverRaw,new ItemStack(TFCItems.silverUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock2,1,1), steelRaw,new ItemStack(TFCItems.steelUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock2,1,2), sterlingSilverRaw,new ItemStack(TFCItems.sterlingSilverUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock2,1,3), tinRaw,new ItemStack(TFCItems.tinUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock2,1,4), zincRaw,new ItemStack(TFCItems.zincUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock2,1,5), electrumRaw,new ItemStack(TFCItems.electrumUnshaped,8,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.metalBlock2,1,6), cupronickelRaw,new ItemStack(TFCItems.cupronickelUnshaped,8,0)));
 
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.weakSteelUnshaped,1), steelRaw,new ItemStack(TFCItems.weakSteelUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.weakRedSteelUnshaped,1), redSteelRaw,new ItemStack(TFCItems.weakRedSteelUnshaped,1)));
@@ -341,6 +387,18 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.zincUnshaped,1), zincRaw,new ItemStack(TFCItems.zincUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.zincSheet,1), zincRaw,new ItemStack(TFCItems.zincUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.zincSheet2x,1), zincRaw,new ItemStack(TFCItems.zincUnshaped,4,0)));
+		//Electrum
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.electrumIngot,1), electrumRaw,new ItemStack(TFCItems.electrumUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.electrumIngot2x,1), electrumRaw,new ItemStack(TFCItems.electrumUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.electrumUnshaped,1), electrumRaw,new ItemStack(TFCItems.electrumUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.electrumSheet,1), electrumRaw,new ItemStack(TFCItems.electrumUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.electrumSheet2x,1), electrumRaw,new ItemStack(TFCItems.electrumUnshaped,4,0)));
+		//Cupronickel
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.cupronickelIngot,1), cupronickelRaw,new ItemStack(TFCItems.cupronickelUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.cupronickelIngot2x,1), cupronickelRaw,new ItemStack(TFCItems.cupronickelUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.cupronickelUnshaped,1), cupronickelRaw,new ItemStack(TFCItems.cupronickelUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.cupronickelSheet,1), cupronickelRaw,new ItemStack(TFCItems.cupronickelUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.cupronickelSheet2x,1), cupronickelRaw,new ItemStack(TFCItems.cupronickelUnshaped,4,0)));
 		//Ceramics
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.sand, 1, WILDCARD_VALUE), 1, 600, new ItemStack(Blocks.glass, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.sand2, 1, WILDCARD_VALUE), 1, 600, new ItemStack(Blocks.glass, 1)));

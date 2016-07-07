@@ -4,6 +4,7 @@ import java.util.Stack;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -194,12 +195,22 @@ public class BarrelRecipe
 	{
 		if(recipeOutFluid != null)
 		{
-			FluidStack fs = recipeOutFluid.copy();
-			if (!removesLiquid && fs != null && inFS != null)
+			FluidStack fs = null;
+			// The FluidStack .copy() method does not make a copy of the NBT tag, which may have been the cause of the quantum entanglement
+			if (recipeOutFluid.tag != null)
+			{
+				fs = new FluidStack(recipeOutFluid.getFluid(), recipeOutFluid.amount, (NBTTagCompound) recipeOutFluid.tag.copy());
+			}
+			else
+			{
+				fs = new FluidStack(recipeOutFluid.getFluid(), recipeOutFluid.amount);
+			}
+			
+			if (!removesLiquid && inFS != null)
 			{
 				fs.amount = inFS.amount;
 			}
-			else if (fs != null && inIS != null)
+			else if (inIS != null)
 			{
 				fs.amount *= inIS.stackSize;
 			}

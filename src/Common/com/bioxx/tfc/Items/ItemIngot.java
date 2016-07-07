@@ -19,6 +19,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
+import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFCBlocks;
@@ -388,10 +389,13 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	public int getItemStackLimit(ItemStack is)
 	{
 		// hot or worked ingots cannot stack
-		if (is.hasTagCompound() && (TFC_ItemHeat.hasTemp(is) ||
-									is.getTagCompound().hasKey("itemCraftingValue") && is.getTagCompound().getShort("itemCraftingValue") != 0))
+		if (is.hasTagCompound())
 		{
-			return 1;
+			NBTTagCompound tag = is.getTagCompound();
+			if (TFC_ItemHeat.hasTemp(is) || tag.hasKey(TEAnvil.ITEM_CRAFTING_VALUE_TAG) || tag.hasKey(TEAnvil.ITEM_CRAFTING_RULE_1_TAG))
+			{
+				return 1;
+			}
 		}
 
 		return super.getItemStackLimit(is);

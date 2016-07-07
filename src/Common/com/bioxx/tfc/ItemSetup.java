@@ -111,6 +111,8 @@ public class ItemSetup extends TFCItems {
 		sterlingSilverIngot = new ItemIngot().setUnlocalizedName("Sterling Silver Ingot");
 		tinIngot = new ItemIngot().setUnlocalizedName("Tin Ingot");
 		zincIngot = new ItemIngot().setUnlocalizedName("Zinc Ingot");
+		electrumIngot = new ItemIngot().setUnlocalizedName("Electrum Ingot");
+		cupronickelIngot = new ItemIngot().setUnlocalizedName("Cupronickel Ingot");
 
 		bismuthIngot2x = ((ItemIngot)new ItemIngot().setUnlocalizedName("Bismuth Double Ingot")).setSize(EnumSize.LARGE).setMetal("Bismuth", 200);
 		bismuthBronzeIngot2x  = ((ItemIngot)new ItemIngot().setUnlocalizedName("Bismuth Bronze Double Ingot")).setSize(EnumSize.LARGE).setMetal("Bismuth Bronze", 200);
@@ -133,6 +135,8 @@ public class ItemSetup extends TFCItems {
 		sterlingSilverIngot2x  = ((ItemIngot)new ItemIngot().setUnlocalizedName("Sterling Silver Double Ingot")).setSize(EnumSize.LARGE).setMetal("Sterling Silver", 200);
 		tinIngot2x  = ((ItemIngot)new ItemIngot().setUnlocalizedName("Tin Double Ingot")).setSize(EnumSize.LARGE).setMetal("Tin", 200);
 		zincIngot2x  = ((ItemIngot)new ItemIngot().setUnlocalizedName("Zinc Double Ingot")).setSize(EnumSize.LARGE).setMetal("Zinc", 200);
+		electrumIngot2x = ((ItemIngot)new ItemIngot().setUnlocalizedName("Electrum Double Ingot")).setSize(EnumSize.LARGE).setMetal("Electrum", 200);
+		cupronickelIngot2x = ((ItemIngot)new ItemIngot().setUnlocalizedName("Cupronickel Double Ingot")).setSize(EnumSize.LARGE).setMetal("Cupronickel", 200);
 
 		gemRuby = new ItemGem().setUnlocalizedName("Ruby");
 		gemSapphire = new ItemGem().setUnlocalizedName("Sapphire");
@@ -317,6 +321,8 @@ public class ItemSetup extends TFCItems {
 		sterlingSilverUnshaped = new ItemMeltedMetal().setUnlocalizedName("Sterling Silver Unshaped");
 		tinUnshaped = new ItemMeltedMetal().setUnlocalizedName("Tin Unshaped");
 		zincUnshaped = new ItemMeltedMetal().setUnlocalizedName("Zinc Unshaped");
+		electrumUnshaped = new ItemMeltedMetal().setUnlocalizedName("Electrum Unshaped");
+		cupronickelUnshaped = new ItemMeltedMetal().setUnlocalizedName("Cupronickel Unshaped");
 
 		//Hammers
 		stoneHammer = new ItemHammer(igInToolMaterial, 60).setUnlocalizedName("Stone Hammer").setMaxDamage(igInStoneUses);
@@ -673,7 +679,7 @@ public class ItemSetup extends TFCItems {
 				blackSteelUnshaped,blueSteelUnshaped,brassUnshaped,bronzeUnshaped,
 				copperUnshaped,goldUnshaped,wroughtIronUnshaped,leadUnshaped,nickelUnshaped,pigIronUnshaped,
 				platinumUnshaped,redSteelUnshaped,roseGoldUnshaped,silverUnshaped,
-				steelUnshaped,sterlingSilverUnshaped,tinUnshaped,zincUnshaped, highCarbonSteelUnshaped, weakSteelUnshaped,
+				steelUnshaped,sterlingSilverUnshaped,tinUnshaped,zincUnshaped,electrumUnshaped,cupronickelUnshaped, highCarbonSteelUnshaped, weakSteelUnshaped,
 				highCarbonBlackSteelUnshaped, highCarbonBlueSteelUnshaped, highCarbonRedSteelUnshaped, 
 				weakBlueSteelUnshaped, weakRedSteelUnshaped};
 
@@ -936,6 +942,8 @@ public class ItemSetup extends TFCItems {
 		Global.STERLINGSILVER = new Metal("Sterling Silver", TFCItems.sterlingSilverUnshaped, TFCItems.sterlingSilverIngot);
 		Global.TIN = new Metal("Tin", TFCItems.tinUnshaped, TFCItems.tinIngot);
 		Global.ZINC = new Metal("Zinc", TFCItems.zincUnshaped, TFCItems.zincIngot);
+		Global.ELECTRUM = new Metal("Electrum", TFCItems.electrumUnshaped, TFCItems.electrumIngot);
+		Global.CUPRONICKEL = new Metal("Cupronickel", TFCItems.cupronickelUnshaped, TFCItems.cupronickelIngot);
 		Global.WEAKSTEEL = new Metal("Weak Steel", TFCItems.weakSteelUnshaped, TFCItems.weakSteelIngot);
 		Global.HCBLACKSTEEL = new Metal("HC Black Steel", TFCItems.highCarbonBlackSteelUnshaped, TFCItems.highCarbonBlackSteelIngot);
 		Global.WEAKREDSTEEL = new Metal("Weak Red Steel", TFCItems.weakRedSteelUnshaped, TFCItems.weakRedSteelIngot);
@@ -965,6 +973,8 @@ public class ItemSetup extends TFCItems {
 		MetalRegistry.instance.addMetal(Global.STERLINGSILVER, Alloy.EnumTier.TierI);
 		MetalRegistry.instance.addMetal(Global.TIN, Alloy.EnumTier.TierI);
 		MetalRegistry.instance.addMetal(Global.ZINC, Alloy.EnumTier.TierI);
+		MetalRegistry.instance.addMetal(Global.ELECTRUM, Alloy.EnumTier.TierI);
+		MetalRegistry.instance.addMetal(Global.CUPRONICKEL, Alloy.EnumTier.TierI);
 		MetalRegistry.instance.addMetal(Global.WEAKSTEEL, Alloy.EnumTier.TierV);
 		MetalRegistry.instance.addMetal(Global.HCBLACKSTEEL, Alloy.EnumTier.TierV);
 		MetalRegistry.instance.addMetal(Global.WEAKREDSTEEL, Alloy.EnumTier.TierV);
@@ -1027,6 +1037,17 @@ public class ItemSetup extends TFCItems {
 		weakBlueSteel.addIngred(Global.STERLINGSILVER, 9.99f, 15.01f);
 		weakBlueSteel.addIngred(Global.STEEL, 19.99f, 25.01f);
 		AlloyManager.INSTANCE.addAlloy(weakBlueSteel);
+
+		Alloy electrum = new Alloy(Global.ELECTRUM, Alloy.EnumTier.TierI);
+		electrum.addIngred(Global.GOLD, 44.99f, 55.01f);
+		electrum.addIngred(Global.SILVER, 44.99f, 55.01f);
+		AlloyManager.INSTANCE.addAlloy(electrum);
+
+		Alloy cupronickel = new Alloy(Global.CUPRONICKEL, Alloy.EnumTier.TierI);
+		cupronickel.addIngred(Global.COPPER, 44.99f, 55.01f);
+		cupronickel.addIngred(Global.NICKEL, 44.99f, 55.01f);
+		AlloyManager.INSTANCE.addAlloy(cupronickel);
+
 	}
 
 	public static void setupArmor()
@@ -1049,6 +1070,8 @@ public class ItemSetup extends TFCItems {
 		steelSheet = 			((ItemMetalSheet) new ItemMetalSheet(17).setUnlocalizedName("Steel Sheet")).setMetal("Steel", 200);
 		tinSheet = 				((ItemMetalSheet) new ItemMetalSheet(19).setUnlocalizedName("Tin Sheet")).setMetal("Tin", 200);
 		zincSheet = 			((ItemMetalSheet) new ItemMetalSheet(20).setUnlocalizedName("Zinc Sheet")).setMetal("Zinc", 200);
+		electrumSheet = 		((ItemMetalSheet) new ItemMetalSheet(21).setUnlocalizedName("Electrum Sheet")).setMetal("Electrum", 200);
+		cupronickelSheet = 		((ItemMetalSheet) new ItemMetalSheet(22).setUnlocalizedName("Cupronickel Sheet")).setMetal("Cupronickel", 200);
 
 		bismuthSheet2x = 		((ItemMetalSheet2x) new ItemMetalSheet2x(0).setUnlocalizedName("Bismuth Double Sheet")).setMetal("Bismuth", 400);
 		bismuthBronzeSheet2x = 	((ItemMetalSheet2x) new ItemMetalSheet2x(1).setUnlocalizedName("Bismuth Bronze Double Sheet")).setMetal("Bismuth Bronze", 400);
@@ -1063,6 +1086,8 @@ public class ItemSetup extends TFCItems {
 		steelSheet2x = 			((ItemMetalSheet2x) new ItemMetalSheet2x(17).setUnlocalizedName("Steel Double Sheet")).setMetal("Steel", 400);
 		tinSheet2x = 			((ItemMetalSheet2x) new ItemMetalSheet2x(19).setUnlocalizedName("Tin Double Sheet")).setMetal("Tin", 400);
 		zincSheet2x = 			((ItemMetalSheet2x) new ItemMetalSheet2x(20).setUnlocalizedName("Zinc Double Sheet")).setMetal("Zinc", 400);
+		electrumSheet2x = 		((ItemMetalSheet2x) new ItemMetalSheet2x(21).setUnlocalizedName("Electrum Double Sheet")).setMetal("Electrum", 400);
+		cupronickelSheet2x = 	((ItemMetalSheet2x) new ItemMetalSheet2x(22).setUnlocalizedName("Cupronickel Double Sheet")).setMetal("Cupronickel", 400);
 
 		i = 0;
 		brassSheet = 			new ItemMetalSheet(5).setMetal("Brass", 200).setUnlocalizedName(namesNSO[i++]+" Sheet");

@@ -50,22 +50,43 @@ public class EntityDamageHandler
 		}
 
 		if(event.source == DamageSource.onFire)
+		{
 			event.ammount = 50;
+		}
 		else if(event.source == DamageSource.fall)
 		{
-			float healthMod = TFC_Core.getEntityMaxHealth(entity)/1000f;
-			event.ammount *= 80*healthMod;
+			//float healthMod = TFC_Core.getEntityMaxHealth(entity)/1000f;
+			event.ammount *= 80/*healthMod*/;
 		}
 		else if(event.source == DamageSource.drown)
+		{
 			event.ammount = 50;
+		}
 		else if(event.source == DamageSource.lava)
+		{
 			event.ammount = 100;
+		}
 		else if(event.source == DamageSource.inWall)
+		{
 			event.ammount = 100;
+		}
 		else if(event.source == DamageSource.fallingBlock)
+		{
 			event.ammount = 100;
+		}
 		else if(event.source.isExplosion())
+		{
 			event.ammount *= 30;
+		}
+		else if (event.source == DamageSource.magic || event.source == DamageSource.wither)
+		{
+			if ((entity.getHealth() - 25) > (TFC_Core.getEntityMaxHealth(entity)/10f))
+		{
+			event.ammount = 25;
+		}
+			else
+				event.ammount = (entity.getHealth() - (TFC_Core.getEntityMaxHealth(entity)/10f));
+		}
 		else if ("player".equals(event.source.damageType) || "mob".equals(event.source.damageType) || "arrow".equals(event.source.damageType))
 		{
 			event.ammount = applyArmorCalculations(entity, event.source, event.ammount);

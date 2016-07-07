@@ -54,17 +54,15 @@ public class WorldGenLooseRocks implements IWorldGenerator
 	{
 		ArrayList<Item> coreSample = new ArrayList<Item>();
 		ArrayList<ItemStack> coreSampleStacks = new ArrayList<ItemStack>();
-		int x1 = (xCoord >> 4) << 4;
-		int z1 = (zCoord >> 4) << 4;
-		for(int x = 0; x <= 15; x++)
+		for (int x = -15; x < 16; x++)
 		{
-			for(int z = 0; z <= 15; z++)
+			for (int z = -15; z < 16; z++)
 			{
 				for(int y = yCoord; y > yCoord-35; y--)
 				{
-					if(world.getBlock(x1 + x, y, z1 + z) == TFCBlocks.ore)
+					if (world.blockExists(xCoord + x, y, zCoord + z) && world.getBlock(xCoord + x, y, zCoord + z) == TFCBlocks.ore)
 					{
-						int m = world.getBlockMetadata(x1 + x, y, z1 + z);
+						int m = world.getBlockMetadata(xCoord + x, y, zCoord + z);
 						if(!coreSample.contains(BlockOre.getDroppedItem(m)))
 						{
 							if(m!= 14 && m != 15)
@@ -97,19 +95,19 @@ public class WorldGenLooseRocks implements IWorldGenerator
 		}
 
 		//rocks/ore
-		for (int var2 = 0; var2 < 8; var2++)
+		for (int itemCount = 0; itemCount < 8; itemCount++)
 		{
-			int var7 = chunkX + random.nextInt(16) + 8;
-			int var3 = chunkZ + random.nextInt(16) + 8;
-			generateRocks(world, random, var7, world.getTopSolidOrLiquidBlock(var7, var3) - 1, var3);
+			int xCoord = chunkX + random.nextInt(16) + 8;
+			int zCoord = chunkZ + random.nextInt(16) + 8;
+			generateRocks(world, random, xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord) - 1, zCoord);
 		}
 
 		//sticks
-		for (int var2 = 0; var2 < 5; var2++)
+		for (int stickCount = 0; stickCount < 5; stickCount++)
 		{
-			int var7 = chunkX + random.nextInt(16) + 8;
-			int var3 = chunkZ + random.nextInt(16) + 8;
-			generateSticks(world, random, var7, world.getTopSolidOrLiquidBlock(var7, var3) - 1, var3);
+			int xCoord = chunkX + random.nextInt(16) + 8;
+			int zCoord = chunkZ + random.nextInt(16) + 8;
+			generateSticks(world, random, xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord) - 1, zCoord);
 		}
 	}
 

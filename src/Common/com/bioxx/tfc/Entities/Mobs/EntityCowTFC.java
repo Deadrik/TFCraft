@@ -428,6 +428,12 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
+			ItemStack bucket = player.inventory.getCurrentItem();
+			if (bucket != null && bucket.getItem() == Items.bucket)
+			{
+				return false;
+			}
+
 			if (player.isSneaking() && !familiarizedToday && canFamiliarize())
 			{
 				this.familiarize(player);
@@ -537,7 +543,10 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		pregnant = true;
 		resetInLove();
 		otherAnimal.setInLove(false);
+		mateAggroMod = otherAnimal.getAggressionMod();
+		mateObedMod = otherAnimal.getObedienceMod();
 		mateSizeMod = otherAnimal.getSizeMod();
+		mateStrengthMod = otherAnimal.getStrengthMod();
 	}
 
 	@Override
@@ -580,7 +589,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			if (TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
 			{
 				EntityCowTFC baby = (EntityCowTFC) createChildTFC(this);
-				baby.setLocationAndAngles(posX + (rand.nextFloat() - 0.5F) * 2F, posY, posZ + (rand.nextFloat() - 0.5F) * 2F, 0.0F, 0.0F);
+				baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
 				baby.rotationYawHead = baby.rotationYaw;
 				baby.renderYawOffset = baby.rotationYaw;
 				worldObj.spawnEntityInWorld(baby);

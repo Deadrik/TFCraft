@@ -13,6 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+
 import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.Blocks.BlockCharcoal;
@@ -41,7 +42,6 @@ import com.bioxx.tfc.api.Crafting.*;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Util.Helper;
-
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
@@ -216,10 +216,13 @@ public class WAILAData implements IWailaDataProvider
 
 		else if (TFC_Core.isSoilWAILA(block))
 			currenttip = soilBody(itemStack, currenttip, accessor, config);
-		
+
 		else if (tileEntity instanceof TEWorldItem)
 			currenttip =  worldBody(itemStack, currenttip, accessor, config);
-		
+
+		else if (tileEntity instanceof TESpawnMeter)
+			currenttip = spawnMeterBody(itemStack, currenttip, accessor, config);
+
 		else if (block == TFCBlocks.torch)
 			currenttip = torchBody(itemStack, currenttip, accessor, config);
 
@@ -339,6 +342,9 @@ public class WAILAData implements IWailaDataProvider
 		reg.registerBodyProvider(new WAILAData(), TESmokeRack.class);
 		reg.registerNBTProvider(new WAILAData(), TESmokeRack.class);
 
+		reg.registerBodyProvider(new WAILAData(), TESpawnMeter.class);
+		reg.registerNBTProvider(new WAILAData(), TESpawnMeter.class);
+
 		// Soil
 		reg.registerBodyProvider(new WAILAData(), BlockDirt.class);
 		reg.registerBodyProvider(new WAILAData(), BlockSand.class);
@@ -347,13 +353,13 @@ public class WAILAData implements IWailaDataProvider
 
 		reg.registerBodyProvider(new WAILAData(), BlockTorch.class);
 		reg.registerNBTProvider(new WAILAData(), BlockTorch.class);
-
 		reg.registerStackProvider(new WAILAData(), BlockWaterPlant.class);
 		reg.registerHeadProvider(new WAILAData(), BlockWaterPlant.class);
 
 		reg.registerStackProvider(new WAILAData(), TEWorldItem.class);
 		reg.registerNBTProvider(new WAILAData(), TEWorldItem.class);
 		reg.registerBodyProvider(new WAILAData(), TEWorldItem.class);
+
 	}
 
 	// Stacks
@@ -1079,6 +1085,9 @@ public class WAILAData implements IWailaDataProvider
 			case 6:
 				currenttip.add(TFC_Core.translate("gui.ore.petrifiedwood"));
 				break;
+			case 7:
+				currenttip.add(TFC_Core.translate("gui.ore.sulphur"));
+				break;
 			case 8:
 				currenttip.add(TFC_Core.translate("gui.ore.jet"));
 				break;
@@ -1142,10 +1151,17 @@ public class WAILAData implements IWailaDataProvider
 	public List<String> saplingBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		NBTTagCompound tag = accessor.getNBTData();
-		Long growTime = tag.getLong("growTime");
+		boolean enoughSpace = tag.getBoolean("enoughSpace");
+		long growTime = tag.getLong("growTime");
 		int days = (int) ((growTime - TFC_Time.getTotalTicks()) / TFC_Time.DAY_LENGTH);
 		if (days > 0)
+		{
 			currenttip.add(days + " " + TFC_Core.translate("gui.daysRemaining"));
+		}
+		else if (!enoughSpace)
+		{
+			currenttip.add(TFC_Core.translate("gui.enoughSpace"));
+		}
 
 		return currenttip;
 	}
@@ -1217,6 +1233,19 @@ public class WAILAData implements IWailaDataProvider
 		return currenttip;
 	}
 
+	public List<String> spawnMeterBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		int hours = tag.getInteger("protectionHours");
+
+		if (hours > 0)
+		{
+			currenttip.add(hours + " " + TFC_Core.translate("gui.hoursRemaining"));
+		}
+
+		return currenttip;
+	}
+
 	public List<String> soilBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		Block b = accessor.getBlock();
@@ -1251,7 +1280,7 @@ public class WAILAData implements IWailaDataProvider
 	{
 		int meta = itemStack.getItemDamage();
 		Item item = itemStack.getItem();
-		
+
 		if (item == TFCItems.smallOreChunk)
 		{
 			switch (meta)
@@ -1298,6 +1327,7 @@ public class WAILAData implements IWailaDataProvider
 		}
 		return currenttip;
 	}
+
 	// Other
 	private ItemStack[] getStorage(NBTTagCompound tag, TileEntity te)
 	{

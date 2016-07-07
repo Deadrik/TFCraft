@@ -78,6 +78,13 @@ public class Global
 	};
 	public static final String[] ORE_MINERAL2 = {"Borax", "Olivine", "Lapis Lazuli"};
 
+	public static final String[] METAL_ALL = {
+			"Bismuth", "Bismuth Bronze", "Black Bronze", "Black Steel", "Blue Steel",
+			"Brass", "Bronze", "Copper", "Gold", "Wrought Iron", "Lead", "Nickel",
+			"Pig Iron", "Platinum", "Red Steel", "Rose Gold", "Silver", "Steel",
+			"Sterling Silver", "Tin", "Zinc", "Electrum", "Cupronickel"
+	};
+
 	public static final String[] WOOD_ALL = {
 		"Oak","Aspen","Birch","Chestnut",
 		"Douglas Fir","Hickory","Maple","Ash",
@@ -115,6 +122,8 @@ public class Global
 	public static Metal STERLINGSILVER;
 	public static Metal TIN;
 	public static Metal ZINC;
+	public static Metal ELECTRUM;
+	public static Metal CUPRONICKEL;
 	public static Metal WEAKSTEEL;
 	public static Metal HCBLACKSTEEL;
 	public static Metal WEAKREDSTEEL;

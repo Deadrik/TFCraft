@@ -1859,6 +1859,8 @@ item.Weak Red Steel Unshaped.name=Unshaped: Weak Red Steel
 item.Weak Steel Unshaped.name=Unshaped: Weak Steel
 item.Wrought Iron Unshaped.name=Unshaped: Wrought Iron
 item.Zinc Unshaped.name=Unshaped: Zinc
+item.Electrum Unshaped.name=Unshaped: Electrum
+item.Cupronickel Unshaped.name=Unshaped: Cupronickel
 
 #== Nugget ==
 
@@ -1883,6 +1885,8 @@ item.MetalNugget.Steel.name=Steel Nugget
 item.MetalNugget.Sterling Silver.name=Sterling Silver Nugget
 item.MetalNugget.Tin.name=Tin Nugget
 item.MetalNugget.Zinc.name=Zinc Nugget
+item.MetalNugget.Electrum.name=Electrum Nugget
+item.MetalNugget.Cupronickel.name=Cupronickel Nugget
 
 
 #== Ingot ==
@@ -1915,6 +1919,9 @@ item.Weak Red Steel Ingot.name=Weak Red Steel Ingot
 item.Weak Steel Ingot.name=Weak Steel Ingot
 item.Wrought Iron Ingot.name=Wrought Iron Ingot
 item.Zinc Ingot.name=Zinc Ingot
+item.Electrum Ingot.name=Electrum Ingot
+item.Cupronickel Ingot.name=Cupronickel Ingot
+
 
 #== Double Ingot ==
 item.Bismuth Bronze Double Ingot.name=Bismuth Bronze Double Ingot
@@ -1938,6 +1945,8 @@ item.Sterling Silver Double Ingot.name=Sterling Silver Double Ingot
 item.Tin Double Ingot.name=Tin Double Ingot
 item.Wrought Iron Double Ingot.name=Wrought Iron Double Ingot
 item.Zinc Double Ingot.name=Zinc Double Ingot
+item.Electrum Double Ingot.name=Electrum Double Ingot
+item.Cupronickel Double Ingot.name=Cupronickel Double Ingot
 
 #== Sheet ==
 item.Bismuth Bronze Sheet.name=Bismuth Bronze Sheet
@@ -1961,6 +1970,8 @@ item.Sterling Silver Sheet.name=Sterling Silver Sheet
 item.Tin Sheet.name=Tin Sheet
 item.Wrought Iron Sheet.name=Wrought Iron Sheet
 item.Zinc Sheet.name=Zinc Sheet
+item.Electrum Sheet.name=Electrum Sheet
+item.Cupronickel Sheet.name=Cupronickel Sheet
 
 #== DoubleSheet ==
 item.Bismuth Bronze Double Sheet.name=Bismuth Bronze Double Sheet
@@ -1984,6 +1995,8 @@ item.Sterling Silver Double Sheet.name=Sterling Silver Double Sheet
 item.Tin Double Sheet.name=Tin Double Sheet
 item.Wrought Iron Double Sheet.name=Wrought Iron Double Sheet
 item.Zinc Double Sheet.name=Zinc Double Sheet
+item.Electrum Double Sheet.name=Electrum Double Sheet
+item.Cupronickel Double Sheet.name=Cupronickel Double Sheet
 
 #== Misc ==
 item.Blueprint=Blueprint
@@ -2008,6 +2021,31 @@ tile.MetalSheet.name=Metal Sheet
 tile.ingotpile.name=Ingot Pile
 tile.SmokeRack.name=Smoke Rack
 tile.FlowerPot.name=Flower Pot
+
+#== Metal Blocks ==
+tile.MetalBlock.Bismuth.name=Bismuth Block
+tile.MetalBlock.Bismuth Bronze.name=Bismuth Bronze Block
+tile.MetalBlock.Black Bronze.name=Black Bronze Block
+tile.MetalBlock.Black Steel.name=Black Steel Block
+tile.MetalBlock.Blue Steel.name=Blue Steel Block
+tile.MetalBlock.Brass.name=Brass Block
+tile.MetalBlock.Bronze.name=Bronze Block
+tile.MetalBlock.Copper.name=Copper Block
+tile.MetalBlock.Gold.name=Gold Block
+tile.MetalBlock.Wrought Iron.name=Wrought Iron Block
+tile.MetalBlock.Lead.name=Lead Block
+tile.MetalBlock.Nickel.name=Nickel Block
+tile.MetalBlock.Pig Iron.name=Pig Iron Block
+tile.MetalBlock.Platinum.name=Platinum Block
+tile.MetalBlock.Red Steel.name=Red Steel Block
+tile.MetalBlock.Rose Gold.name=Rose Gold Block
+tile.MetalBlock.Silver.name=Silver Block
+tile.MetalBlock.Steel.name=Steel Block
+tile.MetalBlock.Sterling Silver.name=Sterling Silver Block
+tile.MetalBlock.Tin.name=Tin Block
+tile.MetalBlock.Zinc.name=Zinc Block
+tile.MetalBlock.Electrum.name=Electrum Block
+tile.MetalBlock.Cupronickel.name=Cupronickel Block
 
 #== Anvils ==
 tile.Anvil.Stone.name=Stone Anvil
@@ -2035,6 +2073,7 @@ tile.ClayGrass.name=Clay Grass
 tile.dirt.name=Dirt
 tile.sand.name=Sand
 tile.Peat.name=Peat
+tile.gravels.name=Gravel
 tile.tilledSoil.name=Farmland
 tile.LooseRock.name=Debris
 tile.Ice.name=Ice
@@ -2376,6 +2415,8 @@ gui.metal.WeakRedSteel=Weak Red Steel
 gui.metal.WeakSteel=Weak Steel
 gui.metal.WroughtIron=Wrought Iron
 gui.metal.Zinc=Zinc
+gui.metal.Electrum=Electrum
+gui.metal.Cupronickel=Cupronickel
 
 
 #== GUI Ores - Mostly for WAILA ==
@@ -2418,6 +2459,7 @@ gui.plans.tuyere=Tuyere
 gui.plans.grill=Grill
 gui.plans.shears=Shears
 gui.plans.trapdoor=Trap Door
+gui.plans.block=Block
 
 #== Misc GUI ==
 gui.Blueprint=Blueprint
@@ -2638,6 +2680,7 @@ gui.gems=Gems
 gui.familiarized=Familiarized
 gui.familiarity=Familiarity
 gui.baby=Baby
+gui.enoughSpace=Clear space for growth
 option.tfc.oreQuality=Show ore quality
 option.tfc.gender=Show animal gender
 option.tfc.familiarToday=Show animal familiarized

@@ -1,18 +1,15 @@
 package com.bioxx.tfc.TileEntities;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
 import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 
-public class TESpawnMeter extends TileEntity
+public class TESpawnMeter extends NetworkTileEntity
 {
 	private long timer;
+	private int protection;
 	public TESpawnMeter()
 	{
 		timer = TFC_Time.getTotalTicks();
@@ -31,39 +28,59 @@ public class TESpawnMeter extends TileEntity
 					ChunkData cd = TFC_Core.getCDM(worldObj).getData(xCoord >> 4, zCoord >> 4);
 					if (cd != null)
 					{
-						int protection = cd.spawnProtection;
+						protection = cd.spawnProtection;
 						int meta = 0;
-						meta = protection > 384 ? 8 : protection / 48;
-						worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta, 0x2);
+						if (protection > 0) // Meta should be 0 (non-lit meter) if there is still a buffer
+						{
+							// Meter is fully lit with 16 days of protection, regardless of config settings
+							meta = protection > 384 ? 8 : protection / 48;
+						}
+
+						if (meta != worldObj.getBlockMetadata(xCoord, yCoord, zCoord))
+						{
+							worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta, 0x3);
+						}
 					}
 				}
 			}
 		}
 	}
 
-	/*@Override
-	public void readFromNBT(NBTTagCompound nbttagcompound)
+	@Override
+	public void readFromNBT(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbttagcompound);
+		super.readFromNBT(nbt);
+		protection = nbt.getInteger("protectionHours");
 	}
 	
 	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
+	public void writeToNBT(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbttagcompound);
-	}*/
-
-	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
+		super.writeToNBT(nbt);
+		nbt.setInteger("protectionHours", protection);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	public void handleInitPacket(NBTTagCompound nbt)
 	{
-		readFromNBT(pkt.func_148857_g());
+		protection = nbt.getInteger("protectionHours");
+	}
+
+	@Override
+	public void handleDataPacket(NBTTagCompound nbt)
+	{
+		protection = nbt.getInteger("protectionHours");
+	}
+
+	@Override
+	public void createDataNBT(NBTTagCompound nbt)
+	{
+		nbt.setInteger("protectionHours", protection);
+	}
+
+	@Override
+	public void createInitNBT(NBTTagCompound nbt)
+	{
+		nbt.setInteger("protectionHours", protection);
 	}
 }

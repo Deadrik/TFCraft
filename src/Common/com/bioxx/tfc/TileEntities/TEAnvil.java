@@ -71,6 +71,11 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	public static final int FLUX_SLOT = 6;
 	public static final int HAMMER_SLOT = 0;
 
+	public static final String ITEM_CRAFTING_VALUE_TAG = "itemCraftingValue";
+	public static final String ITEM_CRAFTING_RULE_1_TAG = "itemCraftingRule1";
+	public static final String ITEM_CRAFTING_RULE_2_TAG = "itemCraftingRule2";
+	public static final String ITEM_CRAFTING_RULE_3_TAG = "itemCraftingRule3";
+
 	public TEAnvil()
 	{
 		anvilItemStacks = new ItemStack[19];
@@ -118,7 +123,6 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 				//This is where the crafting is completed and the result is added to the anvil
 				if(result != null)
 				{
-
 					AnvilCraftEvent eventCraft = new AnvilCraftEvent(lastWorker, this, anvilItemStacks[INPUT1_SLOT], anvilItemStacks[INPUT2_SLOT], result);
 					MinecraftForge.EVENT_BUS.post(eventCraft);
 					if(!eventCraft.isCanceled())
@@ -134,7 +138,6 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 							{
 								AnvilManager.setDurabilityBuff(output, recipe.getSkillMult(lastWorker));
 								AnvilManager.setDamageBuff(output, recipe.getSkillMult(lastWorker));
-
 							}
 							else if (output.getItem() instanceof ItemTFCArmor)
 							{
@@ -168,8 +171,8 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 
 						if(anvilItemStacks[INPUT2_SLOT] != null)
 							anvilItemStacks[INPUT2_SLOT].stackSize--;
-
 					}
+
 					workRecipe = null;
 					craftingPlan = "";
 					craftingValue = 0;
@@ -306,20 +309,26 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			NBTTagCompound tag = anvilItemStacks[slot].getTagCompound();
 			int rule1 = -1;
 			int rule2 = -1;
-			if(tag.hasKey("itemCraftingRule1"))
-				rule1 = tag.getByte("itemCraftingRule1");
-			if(tag.hasKey("itemCraftingRule2"))
-				rule2 = tag.getByte("itemCraftingRule2");
-			if(tag.hasKey("itemCraftingRule3"))
-				tag.getByte("itemCraftingRule3");
+			if (tag.hasKey(ITEM_CRAFTING_RULE_1_TAG))
+			{
+				rule1 = tag.getByte(ITEM_CRAFTING_RULE_1_TAG);
+			}
+			if (tag.hasKey(ITEM_CRAFTING_RULE_2_TAG))
+			{
+				rule2 = tag.getByte(ITEM_CRAFTING_RULE_2_TAG);
+			}
+			if (tag.hasKey(ITEM_CRAFTING_RULE_3_TAG))
+			{
+				tag.getByte(ITEM_CRAFTING_RULE_3_TAG);
+			}
 
 			itemCraftingRules[2] = rule2;
 			itemCraftingRules[1] = rule1;
 			itemCraftingRules[0] = rule;
 
-			tag.setByte("itemCraftingRule1", (byte) itemCraftingRules[0]);
-			tag.setByte("itemCraftingRule2", (byte) itemCraftingRules[1]);
-			tag.setByte("itemCraftingRule3", (byte) itemCraftingRules[2]);
+			tag.setByte(ITEM_CRAFTING_RULE_1_TAG, (byte) itemCraftingRules[0]);
+			tag.setByte(ITEM_CRAFTING_RULE_2_TAG, (byte) itemCraftingRules[1]);
+			tag.setByte(ITEM_CRAFTING_RULE_3_TAG, (byte) itemCraftingRules[2]);
 
 			anvilItemStacks[slot].setTagCompound(tag);
 		}
@@ -327,17 +336,15 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 
 	public void removeRules(int slot)
 	{
-		if(anvilItemStacks[slot].hasTagCompound())
+		if (anvilItemStacks[slot].hasTagCompound())
 		{
 			NBTTagCompound tag = anvilItemStacks[slot].getTagCompound();
-			if(tag.hasKey("itemCraftingRule1"))
-				tag.removeTag("itemCraftingRule1");
-			if(tag.hasKey("itemCraftingRule2"))
-				tag.removeTag("itemCraftingRule2");
-			if(tag.hasKey("itemCraftingRule3"))
-				tag.removeTag("itemCraftingRule3");
-			if(tag.hasKey("itemCraftingValue"))
-				tag.removeTag("itemCraftingValue");
+
+			// No need to check if the tag has the key before removing it thanks to gagMap functionality
+			tag.removeTag(ITEM_CRAFTING_RULE_1_TAG);
+			tag.removeTag(ITEM_CRAFTING_RULE_2_TAG);
+			tag.removeTag(ITEM_CRAFTING_RULE_3_TAG);
+			tag.removeTag(ITEM_CRAFTING_VALUE_TAG);
 
 			anvilItemStacks[slot].setTagCompound(tag);
 		}
@@ -346,22 +353,37 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	public int[] getItemRules()
 	{
 		int[] rules = new int[3];
-		if(anvilItemStacks[1] != null && anvilItemStacks[1].hasTagCompound())
+		ItemStack input = anvilItemStacks[INPUT1_SLOT];
+
+		if (input != null && input.hasTagCompound())
 		{
-			if(anvilItemStacks[1].stackTagCompound.hasKey("itemCraftingRule1"))
-				rules[0] = anvilItemStacks[1].stackTagCompound.getByte("itemCraftingRule1");
+			NBTTagCompound tag = input.getTagCompound();
+			if (tag.hasKey(ITEM_CRAFTING_RULE_1_TAG))
+			{
+				rules[0] = tag.getByte(ITEM_CRAFTING_RULE_1_TAG);
+			}
 			else
+			{
 				rules[0] = RuleEnum.ANY.Action;
+			}
 
-			if(anvilItemStacks[1].stackTagCompound.hasKey("itemCraftingRule2"))
-				rules[1] = anvilItemStacks[1].stackTagCompound.getByte("itemCraftingRule2");
+			if (tag.hasKey(ITEM_CRAFTING_RULE_2_TAG))
+			{
+				rules[1] = tag.getByte(ITEM_CRAFTING_RULE_2_TAG);
+			}
 			else
+			{
 				rules[1] = RuleEnum.ANY.Action;
+			}
 
-			if(anvilItemStacks[1].stackTagCompound.hasKey("itemCraftingRule3"))
-				rules[2] = anvilItemStacks[1].stackTagCompound.getByte("itemCraftingRule3");
+			if (tag.hasKey(ITEM_CRAFTING_RULE_3_TAG))
+			{
+				rules[2] = tag.getByte(ITEM_CRAFTING_RULE_3_TAG);
+			}
 			else
+			{
 				rules[2] = RuleEnum.ANY.Action;
+			}
 		}
 		else
 		{
@@ -369,6 +391,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 			rules[1] = RuleEnum.ANY.Action;
 			rules[2] = RuleEnum.ANY.Action;
 		}
+
 		return rules;
 	}
 
@@ -640,64 +663,59 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 
 	public boolean setItemCraftingValue(int i)
 	{
-		if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].hasTagCompound() && anvilItemStacks[INPUT1_SLOT].getTagCompound().hasKey("itemCraftingValue"))
+		ItemStack input = anvilItemStacks[INPUT1_SLOT];
+		if (input != null)
 		{
-			short icv = anvilItemStacks[INPUT1_SLOT].getTagCompound().getShort("itemCraftingValue");
-			if(icv+i >= 0)
-				anvilItemStacks[INPUT1_SLOT].getTagCompound().setShort("itemCraftingValue", (short) (icv + i));
+			NBTTagCompound tag = null;
+			if (input.hasTagCompound())
+			{
+				tag = input.getTagCompound();
+				if (tag.hasKey(ITEM_CRAFTING_VALUE_TAG))
+				{
+					short craftingValue = tag.getShort(ITEM_CRAFTING_VALUE_TAG);
+					// Use Math.max to prevent negative values
+					tag.setShort(ITEM_CRAFTING_VALUE_TAG, (short) Math.max(0, craftingValue + i));
+				}
+				else
+				{
+					// Use Math.max to prevent negative values
+					tag.setShort(ITEM_CRAFTING_VALUE_TAG, (short) Math.max(0, i));
+				}
+			}
+			else
+			{
+				tag = new NBTTagCompound();
+				// Use Math.max to prevent negative values
+				tag.setShort(ITEM_CRAFTING_VALUE_TAG, (short) Math.max(0, i));
+				input.setTagCompound(tag);
+			}
+
 			return true;
 		}
-		else if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].hasTagCompound())
-		{
-			if(i >= 0)
-				anvilItemStacks[INPUT1_SLOT].getTagCompound().setShort("itemCraftingValue", (short)i);
-			return true;
-		}
-		else if(anvilItemStacks[INPUT1_SLOT] != null && !anvilItemStacks[INPUT1_SLOT].hasTagCompound())
-		{
-			NBTTagCompound tag = new NBTTagCompound();
-			tag.setShort("itemCraftingValue", (short)i);
-			anvilItemStacks[INPUT1_SLOT].stackTagCompound = tag;
-			return true;
-		}
+
 		return false;
 	}
 
 	public int getItemCraftingValue()
 	{
-		if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].hasTagCompound() && anvilItemStacks[INPUT1_SLOT].getTagCompound().hasKey("itemCraftingValue"))
-			return anvilItemStacks[INPUT1_SLOT].getTagCompound().getShort("itemCraftingValue");
-		else if(anvilItemStacks[INPUT1_SLOT] != null && !anvilItemStacks[INPUT1_SLOT].hasTagCompound() && craftingValue != 0)
+		ItemStack input = anvilItemStacks[INPUT1_SLOT];
+		if (input != null && input.hasTagCompound() && input.getTagCompound().hasKey(ITEM_CRAFTING_VALUE_TAG))
 		{
-			NBTTagCompound tag = new NBTTagCompound();
-			tag.setShort("itemCraftingValue", (short) 0);
-			anvilItemStacks[INPUT1_SLOT].setTagCompound(tag);
-			return 0;
+			return input.getTagCompound().getShort(ITEM_CRAFTING_VALUE_TAG);
 		}
-		else if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].hasTagCompound() && !anvilItemStacks[INPUT1_SLOT].getTagCompound().hasKey("itemCraftingValue") && craftingValue != 0)
-		{
-			NBTTagCompound tag = anvilItemStacks[1].getTagCompound();
-			tag.setShort("itemCraftingValue", (short) 0);
-			anvilItemStacks[INPUT1_SLOT].setTagCompound(tag);
-			return 0;
-		}
-		else
-			return 0;
+
+		return 0;
 	}
 
 	public int getItemCraftingValueNoSet(int i)
 	{
-		if(anvilItemStacks[i] != null && anvilItemStacks[i].hasTagCompound())
+		ItemStack input = anvilItemStacks[i];
+		if (input != null && input.hasTagCompound() && input.getTagCompound().hasKey(ITEM_CRAFTING_VALUE_TAG))
 		{
-			if(!anvilItemStacks[i].getTagCompound().hasKey("itemCraftingValue"))
-				return 0;
-			else
-				return anvilItemStacks[i].getTagCompound().getShort("itemCraftingValue");
+			return input.getTagCompound().getShort(ITEM_CRAFTING_VALUE_TAG);
 		}
-		else if(anvilItemStacks[i] != null && !anvilItemStacks[i].hasTagCompound())
-			return 0;
-		else
-			return 0;
+
+		return 0;
 	}
 
 	public Boolean isTemperatureWeldable(int i)

@@ -3,10 +3,12 @@ package com.bioxx.tfc.Items;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
+import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFCBlocks;
@@ -199,10 +201,13 @@ public class ItemMetalSheet extends ItemTerra implements ISmeltable
 	public int getItemStackLimit(ItemStack is)
 	{
 		// hot or worked sheets cannot stack
-		if (is.hasTagCompound() && (TFC_ItemHeat.hasTemp(is) ||
-									is.getTagCompound().hasKey("itemCraftingValue") && is.getTagCompound().getShort("itemCraftingValue") != 0))
+		if (is.hasTagCompound())
 		{
-			return 1;
+			NBTTagCompound tag = is.getTagCompound();
+			if (TFC_ItemHeat.hasTemp(is) || tag.hasKey(TEAnvil.ITEM_CRAFTING_VALUE_TAG) || tag.hasKey(TEAnvil.ITEM_CRAFTING_RULE_1_TAG))
+			{
+				return 1;
+			}
 		}
 
 		return super.getItemStackLimit(is);
