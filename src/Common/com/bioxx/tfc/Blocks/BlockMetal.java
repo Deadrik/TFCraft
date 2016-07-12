@@ -3,6 +3,7 @@ package com.bioxx.tfc.Blocks;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Tools.IToolChisel;
 import cpw.mods.fml.relauncher.Side;
@@ -12,9 +13,11 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -85,4 +88,13 @@ public class BlockMetal extends BlockTerra
         }
         return false;
     }
+    
+    @Override
+    public boolean isBeaconBase(IBlockAccess worldObj, int x, int y, int z, int beaconX, int beaconY, int beaconZ)
+    {
+
+    	return true;
+    	
+    }
+
 }
