@@ -35,6 +35,9 @@ import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
 import com.bioxx.tfc.api.Util.Helper;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class EntityPolarBear extends EntityTameable implements ICausesDamage, IAnimal, IInnateArmor
 {
 	private static final float GESTATION_PERIOD = 7.0f;
@@ -65,6 +68,8 @@ public class EntityPolarBear extends EntityTameable implements ICausesDamage, IA
 	private float aggressionMod = 1;//How aggressive / obstinate the animal is
 	private float obedienceMod = 1; //How well the animal responds to commands.
 	private boolean inLove;
+    private float mouthOpenness;
+    private float prevMouthOpenness;
 	
 	protected EntityAIAttackOnCollide attackAI;
 	protected EntityAILeapAtTarget leapAI;
@@ -357,7 +362,7 @@ public class EntityPolarBear extends EntityTameable implements ICausesDamage, IA
 	protected String getDeathSound ()
 	{
 		if(!isChild())
-			return TFC_Sounds.BEARDEATH;
+			return TFC_Sounds.PBEARDEATH;
 		else
 			return TFC_Sounds.BEARCUBCRY;
 	}
@@ -426,7 +431,7 @@ public class EntityPolarBear extends EntityTameable implements ICausesDamage, IA
 	protected String getHurtSound ()
 	{
 		if(!isChild())
-			return TFC_Sounds.BEARHURT;
+			return TFC_Sounds.PBEARHURT;
 		else
 			return TFC_Sounds.BEARCUBCRY;
 	}
@@ -449,11 +454,11 @@ public class EntityPolarBear extends EntityTameable implements ICausesDamage, IA
 	protected String getLivingSound ()
 	{
 		if(isAdult() && worldObj.rand.nextInt(100) < 5)
-			return TFC_Sounds.BEARCRY;
+			return TFC_Sounds.PBEARCRY;
 		else if(isChild() && worldObj.rand.nextInt(100) < 5)
 			return TFC_Sounds.BEARCUBCRY;
 
-		return isChild() ? null : TFC_Sounds.BEARSAY;
+		return isChild() ? null : TFC_Sounds.PBEARSAY;
 	}
 
 	/**
@@ -972,4 +977,15 @@ public class EntityPolarBear extends EntityTameable implements ICausesDamage, IA
 		nbt.setLong("ConceptionTime",timeOfConception);
 		nbt.setInteger("Age", getBirthDay());
 	}
+
+
+	public float getRearingAmount(float p_78086_4_) {
+		return 0;
+	}
+	
+    @SideOnly(Side.CLIENT)
+    public float adjustMouth(float p_110201_1_)
+    {
+        return this.prevMouthOpenness + (this.mouthOpenness - this.prevMouthOpenness) * p_110201_1_;
+    }
 }

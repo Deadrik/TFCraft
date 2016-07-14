@@ -31,6 +31,10 @@ public class TFC_Sounds
 	public static final String PHAESANTDEATH = LOCATION + "mob.pheasant.death";
 	public static final String CRICKET = LOCATION + "mob.cricket";
 	public static final String FROG = LOCATION + "mob.frog";
+	public static final String PBEARSAY = LOCATION + "mob.polarbear.say";
+	public static final String PBEARCRY = LOCATION + "mob.polarbear.cry";
+	public static final String PBEARHURT = LOCATION + "mob.polarbear.hurt";
+	public static final String PBEARDEATH = LOCATION + "mob.polarbear.death";
 
 	public static final String TFCMUSIC = LOCATION + "music.tfc";
 }

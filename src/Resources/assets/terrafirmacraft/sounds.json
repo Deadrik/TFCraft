@@ -210,7 +210,41 @@
       "frog1"
     ]
   },
-
+  "mob.polarbear.death": {
+    "category": "ambient",
+    "sounds": [
+      "pbear_death1",
+      "pbear_death2",
+      "pbear_death3"
+    ]
+  },
+    "mob.polarbear.hurt": {
+    "category": "ambient",
+    "sounds": [
+      "pbear_hurt1",
+      "pbear_hurt2",
+      "pbear_hurt3",
+      "pbear_hurt4"
+    ]
+  },
+    "mob.polarbear.say": {
+    "category": "ambient",
+    "sounds": [
+      "pbear_idle1",
+      "pbear_idle2",
+      "pbear_idle3",
+      "pbear_idle4"
+    ]
+  },
+    "mob.polarbear.cry": {
+    "category": "ambient",
+    "sounds": [
+      "pbear_warning1",
+      "pbear_warning2",
+      "pbear_warning3"
+    ]
+  },
+  
   "music.tfc": {
     "category": "music",
     "sounds": [
