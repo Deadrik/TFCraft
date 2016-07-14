@@ -655,6 +655,7 @@ public class TFCItems
 	public static Item porkchopRaw;
 	public static Item fishRaw;
 	public static Item beefRaw;
+	public static Item bearRaw;
 	public static Item chickenRaw;
 
 	public static Item looseRock;

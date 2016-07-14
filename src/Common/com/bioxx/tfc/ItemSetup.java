@@ -768,6 +768,7 @@ public class ItemSetup extends TFCItems {
 		porkchopRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Porkchop");
 		fishRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, true).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Fish");
 		beefRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 0, 0, 50, false, false).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Beef");
+		bearRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 0, 0, 50, false, false).setDecayRate(4.0f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Bear");
 		chickenRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Chicken");
 		soybean = new ItemFoodTFC(EnumFoodGroup.Protein, 10, 0, 0, 0, 40, true).setUnlocalizedName("Soybeans");
 		eggCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 25).setDecayRate(2.5f).setUnlocalizedName("Egg Cooked");
