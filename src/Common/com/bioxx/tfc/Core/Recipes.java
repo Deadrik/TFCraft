@@ -124,7 +124,10 @@ public class Recipes
 		for (int k = 0; k < 3; k++)
 		{
 			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.wool, 1 + k, 0), new ItemStack(TFCItems.sheepSkin, 1, k), "itemKnife"));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.wool, 1 + k, 0), new ItemStack(TFCItems.pbearSkin, 1, k), "itemKnife"));
+			
 		}
+
 
 		//Dyes
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.dye,1,4), new ItemStack(TFCItems.powder,1,6)); // Lapis - Blue
@@ -1770,6 +1773,7 @@ public class Recipes
 
 		addFoodSaltRecipe(TFCItems.venisonRaw);
 		addFoodSaltRecipe(TFCItems.beefRaw);
+		addFoodSaltRecipe(TFCItems.bearRaw);
 		addFoodSaltRecipe(TFCItems.chickenRaw);
 		addFoodSaltRecipe(TFCItems.porkchopRaw);
 		addFoodSaltRecipe(TFCItems.fishRaw);

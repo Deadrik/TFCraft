@@ -729,6 +729,7 @@ public class TFCItems
 	public static Item scrapedHide;
 	public static Item prepHide;
 	public static Item sheepSkin;
+	public static Item pbearSkin;
 	public static Item leather;
 	public static Item flatLeather;
 
@@ -1377,6 +1378,7 @@ public class TFCItems
 		GameRegistry.registerItem(scrapedHide , scrapedHide.getUnlocalizedName());
 		GameRegistry.registerItem(prepHide , prepHide.getUnlocalizedName());
 		GameRegistry.registerItem(sheepSkin , sheepSkin.getUnlocalizedName());
+		GameRegistry.registerItem(pbearSkin , pbearSkin.getUnlocalizedName());
 		GameRegistry.registerItem(flatLeather , flatLeather.getUnlocalizedName());
 		GameRegistry.registerItem(leather , leather.getUnlocalizedName());
 		GameRegistry.registerItem(straw , straw.getUnlocalizedName());
@@ -1520,6 +1522,7 @@ public class TFCItems
 		GameRegistry.registerItem(porkchopRaw, porkchopRaw.getUnlocalizedName());
 		GameRegistry.registerItem(fishRaw, fishRaw.getUnlocalizedName());
 		GameRegistry.registerItem(beefRaw, beefRaw.getUnlocalizedName());
+		GameRegistry.registerItem(bearRaw, bearRaw.getUnlocalizedName());
 		GameRegistry.registerItem(chickenRaw, chickenRaw.getUnlocalizedName());
 		GameRegistry.registerItem(seaWeed, seaWeed.getUnlocalizedName());
 

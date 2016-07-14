@@ -58,6 +58,8 @@ public class CraftingHandler
 						continue;
 					if (iinventory.getStackInSlot(i).getItem() == TFCItems.sheepSkin)
 						size = iinventory.getStackInSlot(i).getItemDamage();
+					if (iinventory.getStackInSlot(i).getItem() == TFCItems.pbearSkin)
+						size = iinventory.getStackInSlot(i).getItemDamage();
 				}
 
 				TFC_Core.giveItemToPlayer(new ItemStack(TFCItems.hide, 1, size), player);

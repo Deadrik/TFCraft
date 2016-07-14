@@ -580,6 +580,7 @@ public class ItemSetup extends TFCItems {
 		prepHide = new ItemRawHide().setFolder("tools/").setFolder("tools/").setUnlocalizedName("Prep Hide").setCreativeTab(TFCTabs.TFC_MATERIALS);
 
 		sheepSkin = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Sheep Skin").setCreativeTab(TFCTabs.TFC_MATERIALS);
+		pbearSkin = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Polar Bear Skin").setCreativeTab(TFCTabs.TFC_MATERIALS);
 		flatLeather = new ItemFlatGeneric().setFolder("tools/").setUnlocalizedName("Flat Leather");
 		leather = new ItemLeather().setSpecialCraftingType(flatLeather).setFolder("tools/").setUnlocalizedName("TFC Leather");
 

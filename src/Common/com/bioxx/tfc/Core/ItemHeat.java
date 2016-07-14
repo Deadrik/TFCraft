@@ -410,6 +410,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.porkchopRaw, 1), 1, 1200, null));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.fishRaw, 1), 1, 1200, null));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.beefRaw, 1), 1, 1200, null));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.bearRaw, 1), 1, 1200, null));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.chickenRaw, 1), 1, 1200, null));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.soybean, 1), 1, 1200, null));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.eggCooked, 1), 1, 1200, null));

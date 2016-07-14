@@ -334,6 +334,7 @@ item.Wintergreen Leaf.name=Wintergreen Leaf
 
 #== Protein ==
 item.Beef.name=Beef
+item.Bear.name=Bear
 item.Calamari.name=Calamari
 item.egg.name=Egg
 item.Fish.name=Fish
@@ -2136,6 +2137,9 @@ item.Prep Hide.large.name=Large Prepared Hide
 item.Sheep Skin.small.name=Small Sheepskin
 item.Sheep Skin.medium.name=Medium Sheepskin
 item.Sheep Skin.large.name=Large Sheepskin
+item.Polar Bear Skin.small.name=Small Polar Bear Skin
+item.Polar Bear Skin.medium.name=Medium Polar Bear Skin
+item.Polar Bear Skin.large.name=Large Polar Bear Skin
 item.TFC Leather.name=Leather
 item.Flat Leather.name=Flat Leather
 item.leather.name=Leather
