@@ -35,6 +35,15 @@ public class TFC_Sounds
 	public static final String PBEARCRY = LOCATION + "mob.polarbear.cry";
 	public static final String PBEARHURT = LOCATION + "mob.polarbear.hurt";
 	public static final String PBEARDEATH = LOCATION + "mob.polarbear.death";
+	public static final String CATHITT = LOCATION + "mob.cat.hitt";
+	public static final String CATHISS = LOCATION + "mob.cat.hiss";
+	public static final String CATPURR = LOCATION + "mob.cat.purr";
+	public static final String CATPURREOW = LOCATION + "mob.cat.purreow";
+	public static final String CATMEOW = LOCATION + "mob.cat.meow";
+	public static final String CATCOUGH = LOCATION + "mob.cat.cough";
+	public static final String KITTENMEOW = LOCATION + "mob.kitten.meow";
+	
+	
 
 	public static final String TFCMUSIC = LOCATION + "music.tfc";
 }

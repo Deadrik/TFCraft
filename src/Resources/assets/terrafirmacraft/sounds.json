@@ -255,7 +255,7 @@
       "mob.cat.hiss": {
     "category": "ambient",
     "sounds": [
-      "cat_his1",
+      "cat_hiss1",
       "cat_hiss2",
       "cat_hiss3"
     ]
@@ -272,7 +272,7 @@
     "category": "ambient",
     "sounds": [
       "cat_purreow1",
-      "cat_purreow2",
+      "cat_purreow2"
     ]
   },
     "mob.cat.meow": {
@@ -284,6 +284,21 @@
       "cat_meow4"
     ]
   },
+    "mob.cat.cough": {
+    "category": "ambient",
+    "sounds": [
+      "cat_cough"
+    ]
+  },
+    "mob.kitten.meow": {
+    "category": "ambient",
+    "sounds": [
+      "kitten_meow1",
+      "kitten_meow2",
+      "kitten_meow3"
+    ]
+  },
+    
   "music.tfc": {
     "category": "music",
     "sounds": [
