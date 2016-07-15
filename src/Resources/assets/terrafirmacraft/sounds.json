@@ -244,7 +244,46 @@
       "pbear_warning3"
     ]
   },
-  
+    "mob.cat.hitt": {
+    "category": "ambient",
+    "sounds": [
+      "cat_hitt1",
+      "cat_hitt2",
+      "cat_hitt3"
+    ]
+  },
+      "mob.cat.hiss": {
+    "category": "ambient",
+    "sounds": [
+      "cat_his1",
+      "cat_hiss2",
+      "cat_hiss3"
+    ]
+  },
+    "mob.cat.purr": {
+    "category": "ambient",
+    "sounds": [
+      "cat_purr1",
+      "cat_purr2",
+      "cat_purr3"
+    ]
+  },  
+    "mob.cat.purreow": {
+    "category": "ambient",
+    "sounds": [
+      "cat_purreow1",
+      "cat_purreow2",
+    ]
+  },
+    "mob.cat.meow": {
+    "category": "ambient",
+    "sounds": [
+      "cat_meow1",
+      "cat_meow2",
+      "cat_meow3",
+      "cat_meow4"
+    ]
+  },
   "music.tfc": {
     "category": "music",
     "sounds": [

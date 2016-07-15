@@ -137,6 +137,7 @@ public class CommonProxy
 		EntityRegistry.registerGlobalEntityID(EntityPigZombieTFC.class, "pigZombieTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xb6735f, 0x260026);
 		EntityRegistry.registerGlobalEntityID(EntityIronGolemTFC.class, "irongolemTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xbfb99a, 0x260026);
 		EntityRegistry.registerGlobalEntityID(EntityCreeperTFC.class, "creeperTFC", EntityRegistry.findGlobalUniqueEntityId(), 0x66c55c, 0x260026);
+		EntityRegistry.registerGlobalEntityID(EntityOcelotTFC.class, "ocelotTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xff0000, 0xffffff);
 
 		EntityRegistry.registerGlobalEntityID(EntitySheepTFC.class, "sheepTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xcdbfb4, 0x260026);
 		EntityRegistry.registerGlobalEntityID(EntityPheasantTFC.class, "pheasantTFC", EntityRegistry.findGlobalUniqueEntityId(), 0x822c1c, 0x260026);
@@ -177,7 +178,7 @@ public class CommonProxy
 		EntityRegistry.registerModEntity(EntityFishTFC.class, "fishTFC", 27, TerraFirmaCraft.instance, 64, 5, true);
 		EntityRegistry.registerModEntity(EntityFallingBlockTFC.class, "fallingBlock", 28, TerraFirmaCraft.instance, 160, 20, true);
 		EntityRegistry.registerModEntity(EntityBarrel.class, "barrel", 29, TerraFirmaCraft.instance, 64, 20, true);
-
+		EntityRegistry.registerModEntity(EntityOcelotTFC.class, "ocelotTFC", 31, TerraFirmaCraft.instance, 160, 5, true);
 		/*Function<EntitySpawnMessage, Entity> spawnFunction = new Function<EntitySpawnMessage, Entity>()
 				{
 			@Override

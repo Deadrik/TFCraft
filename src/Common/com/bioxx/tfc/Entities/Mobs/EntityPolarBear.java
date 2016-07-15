@@ -35,6 +35,7 @@ import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
 import com.bioxx.tfc.api.Util.Helper;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -278,9 +279,13 @@ public class EntityPolarBear extends EntityTameable implements ICausesDamage, IA
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
+		Item itemCBRecord = GameRegistry.findItem("technodefirmacraft", "record_CigBeer");
+	    ItemStack cbRecordItemStack = new ItemStack(itemCBRecord,1);
 		float ageMod = TFC_Core.getPercentGrown(this);
-
-		this.entityDropItem(new ItemStack(TFCItems.pbearSkin, 2, Math.max(0, Math.min(2, (int)(ageMod * 3 - 1)))), 0);
+		if(rand.nextInt(10)==0){
+			this.entityDropItem(cbRecordItemStack, 0);	
+		}
+		this.entityDropItem(new ItemStack(TFCItems.pbearSkin, 1, Math.max(0, Math.min(2, (int)(ageMod * 3 - 1)))), 0);
 		this.dropItem(Items.bone, (int) ((rand.nextInt(6) + 2) * ageMod));
 		float foodWeight = ageMod * (this.sizeMod * 4000);
 		TFC_Core.animalDropMeat(this, TFCItems.bearRaw, foodWeight);

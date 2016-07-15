@@ -1,6 +1,8 @@
 package com.bioxx.tfc;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelOcelot;
+import net.minecraft.client.renderer.entity.RenderOcelot;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.resources.IReloadableResourceManager;
@@ -38,6 +40,7 @@ import com.bioxx.tfc.api.TFCFluids;
 import com.bioxx.tfc.api.Enums.EnumTree;
 import com.bioxx.tfc.api.Util.KeyBindings;
 
+
 public class ClientProxy extends CommonProxy
 {
 
@@ -64,6 +67,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntitySquidTFC.class, new RenderSquidTFC(new ModelSquidTFC(), 0.7F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCowTFC.class, new RenderCowTFC(new ModelCowTFC(), 0.7F));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySheepTFC.class, new RenderSheepTFC(new ModelSheep2TFC(), new ModelSheep1TFC(), 0.4F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityOcelotTFC.class, new RenderOcelotTFC(new ModelOcelotTFC(), 0.4F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityWolfTFC.class, new RenderWolfTFC(new ModelWolfTFC(), new ModelWolfTFC(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBear.class, new RenderBear(new ModelBear(), 0.9F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPolarBear.class, new RenderPolarBear(new ModelBear(), 0.9F));

@@ -1,74 +1,54 @@
 package com.bioxx.tfc.Entities.Mobs;
 
+
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-
-import net.minecraftforge.common.IShearable;
-
+import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Entities.AI.AIEatGrass;
-import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
-import com.bioxx.tfc.Items.Tools.ItemKnife;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 import com.bioxx.tfc.api.Util.Helper;
 
-public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
+import net.minecraft.entity.ai.EntityAIFollowOwner;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAIOcelotAttack;
+import net.minecraft.entity.ai.EntityAIOcelotSit;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITargetNonTamed;
+import net.minecraft.entity.ai.EntityAITempt;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.passive.EntityOcelot;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
+
+public class EntityOcelotTFC extends EntityOcelot implements IAnimal 
 {
-	/**
-	 * Holds the RGB table of the sheep colors - in OpenGL glColor3f values - used to render the sheep colored fleece.
-	 */
-	public static final float[][] FLEECE_COLOR_TABLE = new float[][] {{1.0F, 1.0F, 1.0F}, {0.95F, 0.7F, 0.2F}, {0.9F, 0.5F, 0.85F}, {0.6F, 0.7F, 0.95F}, {0.9F, 0.9F, 0.2F}, {0.5F, 0.8F, 0.1F}, {0.95F, 0.7F, 0.8F}, {0.3F, 0.3F, 0.3F}, {0.6F, 0.6F, 0.6F}, {0.3F, 0.6F, 0.7F}, {0.7F, 0.4F, 0.9F}, {0.2F, 0.4F, 0.8F}, {0.5F, 0.4F, 0.3F}, {0.4F, 0.5F, 0.2F}, {0.8F, 0.3F, 0.3F}, {0.1F, 0.1F, 0.1F}};
-
-	private static final float GESTATION_PERIOD = 5.0f;
-
-	/*
-	 * 1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
-	 * the square root of the ratio of female mass : male mass
-	 */
-	private static final float DIMORPHISM = 0.1633f;
-	private static final int DEGREE_OF_DIVERSION = 2;
-	private static final int FAMILIARITY_CAP = 35;
-	private final InventoryCrafting colorCrafting = new InventoryCrafting(new Container()
-	{
-		@Override
-		public boolean canInteractWith(EntityPlayer p_75145_1_)
-		{
-			return false;
-		}
-	}, 2, 1);
-	/**
-	 * Used to control movement as well as wool regrowth. Set to 40 on handleHealthUpdate and counts down with each
-	 * tick.
-	 */
-	private int sheepTimer;
-	/** The eat grass AI task for this mob. */
-	protected final AIEatGrass aiEatGrass = new AIEatGrass(this);
-
-	private long animalID;
+    /** The tempt AI task for this mob, used to prevent taming while it is fleeing. */
+    private EntityAITempt aiTempt;
+    private int catTimer;
+    private long animalID;
 	private int sex;
 	private int hunger;
 	private boolean pregnant;
@@ -84,31 +64,39 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	private float aggressionMod = 1;//How aggressive / obstinate the animal is
 	private float obedienceMod = 1; //How well the animal responds to commands.
 	private boolean inLove;
-	private EntityPlayer shearer;
+
 	private int familiarity;
 	private long lastFamiliarityUpdate;
 	private boolean familiarizedToday;
+	
+	private static final float GESTATION_PERIOD = 6.0f;
+	/*
+	 * 1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
+	 * the square root of the ratio of female mass : male mass
+	 */
+	private static final float DIMORPHISM = 0.1822f;
+	private static final int DEGREE_OF_DIVERSION = 1;
+	private static final int FAMILIARITY_CAP = 35;
+    
+	public EntityOcelotTFC(World p_i1688_1_) {
+	    
+		super(p_i1688_1_);
 
-	public EntitySheepTFC(World par1World)
-	{
-		super(par1World);
-		this.setSize(0.9F, 1.3F);
-		this.getNavigator().setAvoidsWater(true);
-		this.tasks.addTask(2, new EntityAIMateTFC(this,worldObj, 1.0f));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.wheatGrain, false));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.ryeGrain, false));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.riceGrain, false));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.barleyGrain, false));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.oatGrain, false));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.maizeEar, false));
-		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
-		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16f, 0.25F, 0.3F));
-		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPolarBear.class, 16f, 0.25F, 0.3F));
-		this.tasks.addTask(6, this.aiEatGrass);
 
-		this.colorCrafting.setInventorySlotContents(0, new ItemStack(Items.dye, 1, 0));
-		this.colorCrafting.setInventorySlotContents(1, new ItemStack(Items.dye, 1, 0));
-
+        this.setSize(0.6F, 0.8F);
+        this.getNavigator().setAvoidsWater(true);
+        this.tasks.addTask(2, this.aiSit);
+        this.tasks.addTask(3, this.aiTempt = new EntityAITempt(this, 0.6D, TFCItems.fishRaw, false));
+        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityPlayer.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 5.0F));
+        this.tasks.addTask(6, new EntityAIFollowParent(this, 1.1D));
+        this.tasks.addTask(7, new EntityAIOcelotSit(this, 1.33D));
+        this.tasks.addTask(8, new EntityAILeapAtTarget(this, 0.3F));
+        this.tasks.addTask(9, new EntityAIOcelotAttack(this));
+        this.tasks.addTask(2, new EntityAIMateTFC(this,this.worldObj, 1.0F));
+        this.tasks.addTask(11, new EntityAIWander(this, 0.8D));
+        this.tasks.addTask(12, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
+        this.targetTasks.addTask(1, new EntityAITargetNonTamed(this, EntityChickenTFC.class, 750, true));
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
 		pregnant = false;
@@ -120,17 +108,15 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		strengthMod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(DEGREE_OF_DIVERSION * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + sizeMod));
 		aggressionMod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(DEGREE_OF_DIVERSION * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1));
 		obedienceMod = (float) Math.sqrt(((rand.nextInt(rand.nextInt(DEGREE_OF_DIVERSION * 10) + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f + 1f / aggressionMod));
-
+		
 		/*
 		 * We hijack the growingAge to hold the day of birth rather than the number of ticks to the next growth event.
 		 * We want spawned animals to be adults, so we set their birthdays far enough back in time such that they reach adulthood now.
 		 */
 		this.setAge(TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
-		//For Testing Only(makes spawned animals into babies)
-		//this.setGrowingAge((int) TFC_Time.getTotalDays());
+		
 	}
-
-	public EntitySheepTFC(World par1World, IAnimal mother, List<Float> data)
+	public EntityOcelotTFC(World par1World, IAnimal mother, List<Float> data)
 	{
 		this(par1World);
 		float fatherSize = 1;
@@ -161,8 +147,87 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		// We hijack the growingAge to hold the day of birth rather than number of ticks to next growth event.
 		this.setAge(TFC_Time.getTotalDays());
 	}
-
+	
+	/**
+     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
+     */
 	@Override
+    public boolean interact(EntityPlayer player)
+    {
+        ItemStack itemstack = player.inventory.getCurrentItem();
+
+        if(!worldObj.isRemote)
+		{
+			if (player.isSneaking() && !familiarizedToday && canFamiliarize())
+			{
+				this.familiarize(player);
+				return true;
+			}
+			if(player.getHeldItem() != null)
+			{
+				ItemStack is = player.getHeldItem();
+				if(isFood(is))
+				{
+					Item item = is.getItem();
+					if(item instanceof ItemFoodTFC && hunger <= 160000)
+					{
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, ((ItemFoodTFC) item).onConsumedByEntity(player.getHeldItem(), worldObj, this));
+						this.hunger += 24000;
+						this.familiarity += 1;
+						return true;
+					}
+				}
+			}
+			else if(this.isTamed())
+	        {
+	            if (this.func_152114_e(player))
+	            {
+	                this.aiSit.setSitting(!this.isSitting());
+	                return true;
+	            }
+	        }
+			if(getGender() == GenderEnum.FEMALE && pregnant)
+				TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.pregnant"));
+			
+			if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.checkFamiliarity(InteractionEnum.BREED, player) && this.getGrowingAge() == 0 && !super.isInLove() &&
+				(this.familiarizedToday || !canFamiliarize()))
+			{
+				if (!player.capabilities.isCreativeMode)
+				{
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, ((ItemFoodTFC) itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this));
+				}
+				this.hunger += 24000;
+				this.func_146082_f(player);
+				return true;
+			}
+            if (this.familiarity > 20 && !this.isTamed())
+            {
+                this.setTamed(true);
+                this.setTameSkin(1 + this.worldObj.rand.nextInt(3));
+                this.func_152115_b(player.getUniqueID().toString());
+                this.playTameEffect(true);
+                this.aiSit.setSitting(true);
+                this.worldObj.setEntityState(this, (byte)7);
+    			return true;
+            }
+            
+        }
+        else if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName"))
+        {
+			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"),player))
+			{
+				itemstack.stackSize--;
+			}
+			return true;
+		}
+		return false;
+		
+		//return super.interact(player);
+		
+	}
+   
+    
+    @Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
@@ -179,9 +244,11 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	public boolean canMateWith(IAnimal animal)
 	{
 		return animal.getGender() != this.getGender() &&this.isAdult() && animal.isAdult() &&
-				animal instanceof EntitySheepTFC;
+				animal instanceof EntityOcelotTFC;
 	}
 
+	
+	
 	@Override
 	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player)
 	{
@@ -190,9 +257,6 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		{
 		case BREED:
 			flag = familiarity > 20;
-			break;
-		case SHEAR:
-			flag = familiarity > 10;
 			break;
 		case NAME:
 			flag = familiarity > 40;
@@ -206,78 +270,18 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		}
 		return flag;
 	}
-
-	public int combineColors(EntityAnimal parent, int mateColor)
-	{
-		int parent1Color = 15 - ((EntitySheep) parent).getFleeceColor();
-		int parent2Color = 15 - mateColor;
-		this.colorCrafting.getStackInSlot(0).setItemDamage(parent1Color);
-		this.colorCrafting.getStackInSlot(1).setItemDamage(parent2Color);
-		ItemStack itemstack = CraftingManager.getInstance().findMatchingRecipe(this.colorCrafting, ((EntitySheep) parent).worldObj);
-		int babyColor;
-
-		if (itemstack != null && itemstack.getItem() == Items.dye)
-		{
-			babyColor = itemstack.getItemDamage();
-		}
-		else
-		{
-			babyColor = this.worldObj.rand.nextBoolean() ? parent1Color : parent2Color;
-		}
-
-		return babyColor;
-	}
-
+	
 	@Override
-	public EntitySheep createChild(EntityAgeable entityageable)
+	public EntityOcelot createChild(EntityAgeable entityageable)
 	{
-		return (EntitySheep) createChildTFC(entityageable);
-	}
-
-	@Override
-	public EntityAgeable createChildTFC(EntityAgeable eAgeable)
-	{
-		ArrayList<Float> data = new ArrayList<Float>();
-		data.add(eAgeable.getEntityData().getFloat("MateSize"));
-		data.add(eAgeable.getEntityData().getFloat("MateStrength"));
-		data.add(eAgeable.getEntityData().getFloat("MateAggro"));
-		data.add(eAgeable.getEntityData().getFloat("MateObed"));
-		EntitySheepTFC baby = new EntitySheepTFC(worldObj, this, data);
-		int colorMeta = this.combineColors(this, ((EntitySheepTFC) eAgeable).mateColor);
-		baby.setFleeceColor(15 - colorMeta);
-		return baby;
-	}
-
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2)
-	{
-		float ageMod = TFC_Core.getPercentGrown(this);
-
-		if (!this.getSheared())
-			this.entityDropItem(new ItemStack(TFCItems.sheepSkin, 1, Math.max(0, Math.min(2, (int) (ageMod * sizeMod)))), 0.0F);
-		else
-			this.entityDropItem(new ItemStack(TFCItems.hide, 1, Math.max(0, Math.min(2, (int) (ageMod * sizeMod)))), 0.0F);
-
-		this.dropItem(Items.bone, (int) ((rand.nextInt(5) + 2) * ageMod));
-
-		float foodWeight = ageMod * (this.sizeMod * 640);
-		TFC_Core.animalDropMeat(this, TFCItems.muttonRaw, foodWeight);
-	}
-
-	@Override
-	public void eatGrassBonus()
-	{
-		this.setSheared(false);
-		hunger += 24000;
+		return (EntityOcelot) createChildTFC(entityageable);
 	}
 
 	@Override
 	protected void entityInit()
 	{
-		super.entityInit();	
+		super.entityInit();
+        this.dataWatcher.addObject(26, Byte.valueOf((byte)0));  //set skin
 		this.dataWatcher.addObject(13, Integer.valueOf(0)); //sex (1 or 0)
 		this.dataWatcher.addObject(15, Integer.valueOf(0));		//age
 		
@@ -333,16 +337,36 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	{
 		return this.dataWatcher.getWatchableObjectInt(15);
 	}
-
-	/**
-	 * Returns the item ID for the item the mob drops on death.
-	 */
+    /**
+     * Checks if the entity's current position is a valid location to spawn this entity.
+     */
+    @Override
+	public boolean getCanSpawnHere()
+    {
+        if(TFC_Climate.getBioTemperatureHeight(this.worldObj, (int)this.posX, (int) this.posY, (int) this.posZ) > 10)
+        {
+        	return this.worldObj.checkNoEntityCollision(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(this.boundingBox);
+        }
+        else
+        {
+        	return false;
+        }
+        
+    }
+		
 	@Override
-	protected Item getDropItem()
-	{
-		return TFCItems.wool;
+	public EntityAgeable createChildTFC(EntityAgeable eAgeable) 
+		{
+			ArrayList<Float> data = new ArrayList<Float>();
+			data.add(eAgeable.getEntityData().getFloat("MateSize"));
+			data.add(eAgeable.getEntityData().getFloat("MateStrength"));
+			data.add(eAgeable.getEntityData().getFloat("MateAggro"));
+			data.add(eAgeable.getEntityData().getFloat("MateObed"));
+			EntityOcelotTFC baby = new EntityOcelotTFC(worldObj, this, data);
+			
+			return baby;
 	}
-
+	
 	@Override
 	public int getDueDay()
 	{
@@ -354,7 +378,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	{
 		return this;
 	}
-
+	
 	@Override
 	public int getFamiliarity()
 	{
@@ -366,19 +390,17 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	{
 		return familiarizedToday;
 	}
-
+	
 	@Override
-	public Entity getFearSource()
-	{
+	public Entity getFearSource() {
+
 		return null;
 	}
-
 	@Override
-	public GenderEnum getGender()
-	{
+	public GenderEnum getGender() {
 		return GenderEnum.GENDERS[dataWatcher.getWatchableObjectInt(13)];
 	}
-
+	
 	@Override
 	public int getHunger()
 	{
@@ -390,12 +412,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	{
 		return inLove;
 	}
-
-	public long getLastFamiliarityUpdate()
-	{
-		return lastFamiliarityUpdate;
-	}
-
+	
 	@Override
 	public int getNumberOfDaysToAdult()
 	{
@@ -412,22 +429,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	{
 		return pregnancyRequiredTime;
 	}
-
-	public int getSex()
-	{
-		return sex;
-	}
-
-	public EntityPlayer getShearer()
-	{
-		return shearer;
-	}
 	
-	public int getSheepTimer()
-	{
-		return sheepTimer;
-	}
-
 	@Override
 	public float getSizeMod()
 	{
@@ -439,12 +441,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	{
 		return strengthMod;
 	}
-
-	public long getTimeOfConception()
-	{
-		return timeOfConception;
-	}
-
+	
 	@Override
 	public void handleFamiliarityUpdate()
 	{
@@ -482,73 +479,12 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 			familiarity = 0;
 	}
 
-	/**
-	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-	 */
-	@Override
-	public boolean interact(EntityPlayer player)
-	{
-		if(!worldObj.isRemote)
-		{
-			if (player.isSneaking() && !familiarizedToday && canFamiliarize())
-			{
-				this.familiarize(player);
-				return true;
-			}
-
-			if(getGender() == GenderEnum.FEMALE && pregnant)
-				TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.pregnant"));
-
-			this.shearer = player;
-
-			// Shearing with a pair of shears is handled with ItemShears
-			if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemKnife && !getSheared() && this.checkFamiliarity(InteractionEnum.SHEAR, player) && isAdult())
-			{
-				if (!familiarizedToday && this.familiarity <= FAMILIARITY_CAP)
-				{
-					familiarizedToday = true;
-					this.getLookHelper().setLookPositionWithEntity(player, 0, 0);
-					this.playLivingSound();
-				}
-				setSheared(true);
-				this.entityDropItem(new ItemStack(TFCItems.wool, 1), 0.0F);
-				if (!player.capabilities.isCreativeMode)
-					player.getHeldItem().damageItem(1, player);
-			}
-		}
-
-		ItemStack itemstack = player.inventory.getCurrentItem();
-
-		if (itemstack != null && this.isBreedingItemTFC(itemstack) && checkFamiliarity(InteractionEnum.BREED, player) && this.getGrowingAge() == 0 && !super.isInLove() &&
-			(this.familiarizedToday || !canFamiliarize()))
-		{
-			if (!player.capabilities.isCreativeMode)
-			{
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, ((ItemFoodTFC) itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this));
-			}
-
-			this.hunger += 24000;
-			this.func_146082_f(player);
-			return true;
-		}
-		else if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
-			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"),player)){
-				itemstack.stackSize--;
-			}
-			return true;
-		}
-		else
-		{
-			return super.interact(player);
-		}
-	}
-
 	@Override
 	public boolean isAdult()
 	{
 		return getBirthDay() + getNumberOfDaysToAdult() <= TFC_Time.getTotalDays();
 	}
-
+	
 	@Override
 	public boolean isBreedingItem(ItemStack par1ItemStack)
 	{
@@ -557,34 +493,22 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 
 	public boolean isBreedingItemTFC(ItemStack item)
 	{
-		return !pregnant && isFood(item);
+		return !pregnant && (item.getItem() == TFCItems.beefRaw);
 	}
-
-	@Override
-	public boolean isChild()
-	{
-		return !isAdult();
-	}
-
+	
+	
 	@Override
 	public boolean isFood(ItemStack item)
 	{
-		return item != null && (item.getItem() == TFCItems.wheatGrain ||item.getItem() == TFCItems.oatGrain || item.getItem() == TFCItems.riceGrain ||
-								item.getItem() == TFCItems.barleyGrain || item.getItem() == TFCItems.ryeGrain || item.getItem() == TFCItems.maizeEar);
+		return item != null && (item.getItem() == TFCItems.fishRaw);
 	}
-
+	
 	@Override
 	public boolean isPregnant()
 	{
 		return pregnant;
 	}
-
-	@Override
-	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z)
-	{
-		return !getSheared() && isAdult() && shearer != null && checkFamiliarity(InteractionEnum.SHEAR, shearer);
-	}
-
+	
 	@Override
 	public void mate(IAnimal otherAnimal)
 	{
@@ -601,18 +525,13 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		mateObedMod = otherAnimal.getObedienceMod();
 		mateSizeMod = otherAnimal.getSizeMod();
 		mateStrengthMod = otherAnimal.getStrengthMod();
-		mateColor = ((EntitySheepTFC) otherAnimal).getFleeceColor();
+		
 	}
-
-	/**
-	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
-	 * use this to react to sunlight and start to burn.
-	 */
 	@Override
 	public void onLivingUpdate()
 	{
 		if (this.worldObj.isRemote)
-			this.sheepTimer = Math.max(0, this.sheepTimer - 1);
+			this.catTimer = Math.max(0, this.catTimer - 1);
 
 		//Handle Hunger ticking
 		if (hunger > 168000)
@@ -622,7 +541,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 
 		if (super.isInLove())
 		{
-			super.resetInLove();
+			//super.resetInLove();
 			setInLove(true);
 		}
 
@@ -635,20 +554,22 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 			setGrowingAge(-1);
 
 		if (!this.worldObj.isRemote && isPregnant())
+		{
+			
 			if (TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
 			{
-				int i = rand.nextInt(3) + 1;
-				for (int x = 0; x < i; x++)
-				{
-					EntitySheepTFC baby = (EntitySheepTFC) createChildTFC(this);
+					EntityOcelotTFC baby = (EntityOcelotTFC) createChildTFC(this);
 					baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
 					baby.rotationYawHead = baby.rotationYaw;
 					baby.renderYawOffset = baby.rotationYaw;
 					worldObj.spawnEntityInWorld(baby);
 					baby.setAge(TFC_Time.getTotalDays());
-				}
-				pregnant = false;
+					baby.setTamed(true);
+					baby.setTameSkin(this.getTameSkin());
+					pregnant = false;
 			}
+			
+		}
 
 		/**
 		 * This Cancels out the changes made to growingAge by EntityAgeable
@@ -665,172 +586,79 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		{
 			this.setInLove(false);
 		}
+
 	}
 
-	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune)
-	{
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		setSheared(true);
-		ret.add(new ItemStack(TFCItems.wool, 2));
-		if (!familiarizedToday && this.familiarity <= FAMILIARITY_CAP)
-		{
-			familiarizedToday = true;
-			this.playLivingSound();
-		}
-		this.worldObj.playSoundAtEntity(this, "mob.sheep.shear", 1.0F, 1.0F);
-		return ret;
-	}
-
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
-	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt)
-	{
-		super.readEntityFromNBT(nbt);
-		animalID = nbt.getLong("Animal ID");
-		sex = nbt.getInteger("Sex");
-		sizeMod = nbt.getFloat("Size Modifier");
-
-		strengthMod = nbt.getFloat("Strength Modifier");
-		aggressionMod = nbt.getFloat("Aggression Modifier");
-		obedienceMod = nbt.getFloat("Obedience Modifier");
-
-		familiarity = nbt.getInteger("Familiarity");
-		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
-		familiarizedToday = nbt.getBoolean("Familiarized Today");
-
-		hunger = nbt.getInteger("Hunger");
-		pregnant = nbt.getBoolean("Pregnant");
-		mateSizeMod = nbt.getFloat("MateSize");
-		mateStrengthMod = nbt.getFloat("MateStrength");
-		mateAggroMod = nbt.getFloat("MateAggro");
-		mateObedMod = nbt.getFloat("MateObed");
-		mateColor = nbt.getInteger("MateColor");
-		timeOfConception = nbt.getLong("ConceptionTime");
-		this.dataWatcher.updateObject(15, nbt.getInteger("Age"));
-		this.setAge(nbt.getInteger("Age"));
-	}
 
 	@Override
 	public void setAge(int par1)
 	{
 		this.dataWatcher.updateObject(15, Integer.valueOf(par1));
 	}
-
+	
 	@Override
 	public void setAggressionMod(float aggressionMod)
 	{
 		this.aggressionMod = aggressionMod;
 	}
-
-	public void setAnimalID(long animalID)
-	{
-		this.animalID = animalID;
-	}
-
+	
 	@Override
-	public void setAttackedVec(Vec3 attackedVec)
-	{
+	public void setAttackedVec(Vec3 attackedVec) {
 		// None
+		
 	}
-
 	@Override
-	public void setBirthDay(int day)
-	{
+	public void setBirthDay(int day) {
 		this.dataWatcher.updateObject(15, day);
+		
 	}
-
 	@Override
-	public void setFamiliarity(int familiarity)
-	{
-		this.familiarity = familiarity;
+	public void setFamiliarity(int f) {
+		this.familiarity = f;
+		
 	}
-
-	public void setFamiliarizedToday(boolean familiarizedToday)
-	{
-		this.familiarizedToday = familiarizedToday;
-	}
-
 	@Override
-	public void setFearSource(Entity fearSource)
-	{
+	public void setFearSource(Entity fearSource) {
 		// None
+		
 	}
-
 	@Override
-	public void setGrowingAge(int par1)
-	{
-		if (!TFC_Core.preventEntityDataUpdate)
-			this.dataWatcher.updateObject(12, Integer.valueOf(par1));
-	}
-
-	@Override
-	public void setHunger(int h)
-	{
+	public void setHunger(int h) {
 		hunger = h;
+		
 	}
-
 	@Override
-	public void setInLove(boolean b)
-	{
+	public void setInLove(boolean b) {
 		this.inLove = b;
+		
 	}
-
-	public void setLastFamiliarityUpdate(long lastFamiliarityUpdate)
-	{
-		this.lastFamiliarityUpdate = lastFamiliarityUpdate;
-	}
-
 	@Override
-	public void setObedienceMod(float obedienceMod)
-	{
+	public void setObedienceMod(float obedience) {
 		this.obedienceMod = obedienceMod;
+		
 	}
-
-	public void setPregnancyRequiredTime(int pregnancyRequiredTime)
-	{
-		this.pregnancyRequiredTime = pregnancyRequiredTime;
-	}
-
-	public void setPregnant(boolean pregnant)
-	{
-		this.pregnant = pregnant;
-	}
-
-	public void setSex(int sex)
-	{
-		this.sex = sex;
-	}
-
-	public void setShearer(EntityPlayer shearer)
-	{
-		this.shearer = shearer;
-	}
-
-	public void setSheepTimer(int sheepTimer)
-	{
-		this.sheepTimer = sheepTimer;
-	}
-
 	@Override
-	public void setSizeMod(float sizeMod)
-	{
-		this.sizeMod = sizeMod;
+	public void setSizeMod(float size) {
+		this.sizeMod = size;
+		
 	}
-
 	@Override
-	public void setStrengthMod(float strengthMod)
-	{
-		this.strengthMod = strengthMod;
+	public void setStrengthMod(float strength) {
+		this.strengthMod = strength;
+		
 	}
 
-	public void setTimeOfConception(long timeOfConception)
-	{
-		this.timeOfConception = timeOfConception;
+	
+	@Override
+	public boolean trySetName(String name, EntityPlayer player) {
+		if (this.checkFamiliarity(InteractionEnum.NAME, player))
+		{
+			this.setCustomNameTag(name);
+			return true;
+		}
+		this.playSound(this.getHurtSound(), 6, rand.nextFloat() / 2F + (isChild() ? 1.25F : 0.75F));
+		return false;
 	}
-
 	public void syncData()
 	{
 		if (dataWatcher != null)
@@ -874,25 +702,45 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 			}
 		}
 	}
-
-	@Override
-	public boolean trySetName(String name, EntityPlayer player) {
-		if (this.checkFamiliarity(InteractionEnum.NAME, player))
-		{
-			this.setCustomNameTag(name);
-			return true;
-		}
-		this.playSound(this.getHurtSound(), 6, rand.nextFloat() / 2F + (isChild() ? 1.25F : 0.75F));
-		return false;
-	}
-
+	
 	@Override
 	protected void updateAITasks()
 	{
-		this.sheepTimer = this.aiEatGrass.getEatGrassTick();
+		//this.catTimer = this.aiEatGrass.getEatGrassTick();
 		super.updateAITasks();
 	}
 
+	/**
+	 * (abstract) Protected helper method to read subclass entity data from NBT.
+	 */
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt)
+	{
+		super.readEntityFromNBT(nbt);
+		animalID = nbt.getLong("Animal ID");
+		sex = nbt.getInteger("Sex");
+		sizeMod = nbt.getFloat("Size Modifier");
+
+		strengthMod = nbt.getFloat("Strength Modifier");
+		aggressionMod = nbt.getFloat("Aggression Modifier");
+		obedienceMod = nbt.getFloat("Obedience Modifier");
+
+		familiarity = nbt.getInteger("Familiarity");
+		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
+		familiarizedToday = nbt.getBoolean("Familiarized Today");
+
+		hunger = nbt.getInteger("Hunger");
+		pregnant = nbt.getBoolean("Pregnant");
+		mateSizeMod = nbt.getFloat("MateSize");
+		mateStrengthMod = nbt.getFloat("MateStrength");
+		mateAggroMod = nbt.getFloat("MateAggro");
+		mateObedMod = nbt.getFloat("MateObed");
+		mateColor = nbt.getInteger("MateColor");
+		timeOfConception = nbt.getLong("ConceptionTime");
+		this.dataWatcher.updateObject(15, nbt.getInteger("Age"));
+		this.setAge(nbt.getInteger("Age"));
+	}
+	
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
@@ -922,4 +770,51 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		nbt.setLong("ConceptionTime", timeOfConception);
 		nbt.setInteger("Age", getBirthDay());
 	}
+	
+	@Override
+    public int getTameSkin()
+    {
+        return this.dataWatcher.getWatchableObjectByte(26);
+    }
+	@Override
+    public void setTameSkin(int p_70912_1_)
+    {
+        this.dataWatcher.updateObject(26, Byte.valueOf((byte)p_70912_1_));
+    }
+    
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+	@Override
+    protected String getLivingSound()
+    {
+        return this.isTamed() ? (this.isInLove() ? "mob.cat.purr" : (this.rand.nextInt(4) == 0 ? "mob.cat.purreow" : "mob.cat.meow")) : "";
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+	@Override
+    protected String getHurtSound()
+    {
+        return "mob.cat.hiss";
+    }
+
+    /**
+     * Returns the sound this mob makes on death.
+     */
+	@Override
+    protected String getDeathSound()
+    {
+        return "mob.cat.hitt";
+    }
+
+    /**
+     * Returns the volume for the sounds this mob makes.
+     */
+	@Override
+    protected float getSoundVolume()
+    {
+        return 0.4F;
+    }
 }

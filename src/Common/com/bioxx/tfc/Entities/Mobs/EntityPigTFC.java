@@ -80,6 +80,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPigTFC.class, 6.0F));
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16f, 0.25F, 0.3F));
+		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPolarBear.class, 16f, 0.25F, 0.3F));
 		this.tasks.addTask(8, new EntityAILookIdle(this));
 
 		hunger = 168000;

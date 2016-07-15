@@ -99,6 +99,7 @@ entity.pigTFC.name=Pig
 entity.sheepTFC.name=Sheep
 entity.squidTFC.name=Squid
 entity.wolfTFC.name=Wolf
+entity.ocelotTFC.name=Ocelot
 
 entity.blazeTFC.name=Blaze
 entity.caveSpiderTFC.name=Cave Spider
