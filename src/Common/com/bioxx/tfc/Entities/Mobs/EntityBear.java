@@ -24,6 +24,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
 import com.bioxx.tfc.Entities.AI.EntityAITargetNonTamedTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
@@ -98,6 +99,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		sex = rand.nextInt(2);
 		if (getGender() == GenderEnum.MALE)
 			tasks.addTask (6, new EntityAIMate (this, moveSpeed));
+		this.tasks.addTask(1, new EntityAIAvoidEntityTFC(this, EntityOcelotTFC.class, 16.0F, 1.2D, 1.6D));
 		tasks.addTask (7, new EntityAIWander (this, moveSpeed));
 		tasks.addTask (8, new EntityAIWatchClosest (this, EntityPlayer.class, 8F));
 		tasks.addTask (9, new EntityAILookIdle (this));

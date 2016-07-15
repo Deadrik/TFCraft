@@ -5,74 +5,56 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
+
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
+import com.bioxx.tfc.Entities.AI.EntityAIOcelotSitTFC;
+import com.bioxx.tfc.Entities.AI.EntityAISitTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 import com.bioxx.tfc.api.Util.Helper;
+
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAIMate;
 import net.minecraft.entity.ai.EntityAIOcelotAttack;
-import net.minecraft.entity.ai.EntityAIOcelotSit;
-import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAISit;
 import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityOcelot;
+import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-public class EntityOcelotTFC extends EntityOcelot implements IAnimal 
+public class EntityOcelotTFC extends EntityTameable implements IAnimal 
 {
-    /** The tempt AI task for this mob, used to prevent taming while it is fleeing. */
 
-    private int catTimer;
-    private long animalID;
-	private int sex;
-	private int hunger;
-	private boolean pregnant;
-	private int pregnancyRequiredTime;
-	private long timeOfConception;
-	private float mateSizeMod;
-	private float mateStrengthMod;
-	private float mateAggroMod;
-	private float mateObedMod;
-	private int mateColor;
-	private float sizeMod; //How large the animal is
-	private float strengthMod; //how strong the animal is
-	private float aggressionMod = 1;//How aggressive / obstinate the animal is
-	private float obedienceMod = 1; //How well the animal responds to commands.
-	private boolean inLove;
-	private boolean adultTaskSet = false;
 
-	private int familiarity;
-	private long lastFamiliarityUpdate;
-	private boolean familiarizedToday;
-	
-	private static final float GESTATION_PERIOD = 6.0f;
+    private static final float GESTATION_PERIOD = 6.0f;
 	/*
 	 * 1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
 	 * the square root of the ratio of female mass : male mass
@@ -80,20 +62,46 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 	private static final float DIMORPHISM = 0.1822f;
 	private static final int DEGREE_OF_DIVERSION = 1;
 	private static final int FAMILIARITY_CAP = 35;
+	private long animalID;
+	private int sex;
+	private int hunger;
+	private boolean pregnant;
+	private int pregnancyRequiredTime;
+	private long timeOfConception;
+	private float mateSizeMod;
+	
+	private float mateStrengthMod;
+	private float mateAggroMod;
+	private float mateObedMod;
+	private int mateColor;
+	private float sizeMod; //How large the animal is
+	private float strengthMod; //how strong the animal is
+
+	private float aggressionMod = 1;//How aggressive / obstinate the animal is
+	private float obedienceMod = 1; //How well the animal responds to commands.
+	private boolean inLove;
+    private boolean adultTaskSet = false;
+    
+	private int familiarity;
+	private long lastFamiliarityUpdate;
+	private boolean familiarizedToday;
+	private EntityAITempt aiTempt;
+	private Vec3 attackedVec;
+	private Entity fearSource;
     
 	public EntityOcelotTFC(World p_i1688_1_) {
-	    
 		super(p_i1688_1_);
 
 
         this.setSize(0.6F, 0.8F);
         this.getNavigator().setAvoidsWater(true);
+        this.aiSit = new EntityAISit(this);  
         this.tasks.addTask(2, this.aiSit);
-        this.tasks.addTask(3, new EntityAITempt(this, 0.6D, TFCItems.fishRaw, false));
+        this.tasks.addTask(3, this.aiTempt = new EntityAITempt(this, 0.6D, TFCItems.fishRaw, false));
         this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityPlayer.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 5.0F));
         this.tasks.addTask(6, new EntityAIFollowParent(this, 1.1D));
-        this.tasks.addTask(7, new EntityAIOcelotSit(this, 1.33D));
+        this.tasks.addTask(7, new EntityAIOcelotSitTFC(this, 1.33D));
         this.tasks.addTask(8, new EntityAILeapAtTarget(this, 0.3F));
         this.tasks.addTask(9, new EntityAIOcelotAttack(this));
         this.tasks.addTask(2, new EntityAIMateTFC(this,this.worldObj, 1.0F));
@@ -152,106 +160,60 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 		this.setAge(TFC_Time.getTotalDays());
 	}
 	
-	/**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
 	@Override
-    public boolean interact(EntityPlayer player)
-    {
-        ItemStack itemstack = player.inventory.getCurrentItem();
-
-        if(!worldObj.isRemote)
-		{
-			if (player.isSneaking() && !familiarizedToday && canFamiliarize())
-			{
-				this.familiarize(player);
-				return true;
-			}
-			if(player.getHeldItem() != null)
-			{
-				ItemStack is = player.getHeldItem();
-				if(isFood(is))
-				{
-					Item item = is.getItem();
-					if(item instanceof ItemFoodTFC && hunger <= 160000)
-					{
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, ((ItemFoodTFC) item).onConsumedByEntity(player.getHeldItem(), worldObj, this));
-						this.hunger += 24000;
-						this.familiarity += 1;
-						return true;
-					}
-				}
-			}
-			else if(this.isTamed())
-	        {
-	            if (this.func_152114_e(player))
-	            {
-	                this.aiSit.setSitting(!this.isSitting());
-	                return true;
-	            }
-	        }
-			if(getGender() == GenderEnum.FEMALE && pregnant)
-				TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.pregnant"));
-			
-			if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.checkFamiliarity(InteractionEnum.BREED, player) && this.getGrowingAge() == 0 && !super.isInLove() &&
-				(this.familiarizedToday || !canFamiliarize()))
-			{
-				if (!player.capabilities.isCreativeMode)
-				{
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, ((ItemFoodTFC) itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this));
-				}
-				this.hunger += 24000;
-				this.func_146082_f(player);
-				return true;
-			}
-            if (this.familiarity > 20 && !this.isTamed())
-            {
-                this.setTamed(true);
-                this.setTameSkin(1 + this.worldObj.rand.nextInt(3));
-                this.func_152115_b(player.getUniqueID().toString());
-                this.playTameEffect(true);
-                this.aiSit.setSitting(true);
-                this.worldObj.setEntityState(this, (byte)7);
-    			return true;
-            }
-            
-        }
-        else if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName"))
-        {
-			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"),player))
-			{
-				itemstack.stackSize--;
-			}
-			return true;
-		}
-		return false;
-		
-		//return super.interact(player);
-		
-	}
-   
-    
-    @Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(400);//MaxHealth
 	}
+   
+    
+    public boolean attackEntityAsMob(Entity p_70652_1_)
+    {
+        return p_70652_1_.attackEntityFrom(DamageSource.causeMobDamage(this), 3.0F);
+    }
+
+	/**
+     * Called when the entity is attacked.
+     */
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float p_70097_2_)
+    {
+    	Entity entity = par1DamageSource.getEntity();
+        if (this.isEntityInvulnerable())
+        {
+            return false;
+        }
+        else
+        {
+        	this.aiSit.setSitting(false);
+            return super.attackEntityFrom(par1DamageSource, p_70097_2_);
+        }
+    }
+	
+	@Override
+	protected boolean canDespawn()
+	{
+		if (!this.isAdult()) // Babies can't despawn
+			return false;
+		if (this.getOwner() != null) // Can't despawn if fed bones
+			return false;
+		return ticksExisted > 20000;
+	}
 
 	@Override
 	public boolean canFamiliarize()
 	{
-		return !isAdult() || isAdult() && this.familiarity <= FAMILIARITY_CAP;
+		return !isAdult() || (isAdult() && this.familiarity <= FAMILIARITY_CAP);
 	}
 
+	
+	
 	@Override
 	public boolean canMateWith(IAnimal animal)
 	{
 		return animal.getGender() != this.getGender() &&this.isAdult() && animal.isAdult() &&
 				animal instanceof EntityOcelotTFC;
 	}
-
-	
 	
 	@Override
 	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player)
@@ -274,11 +236,30 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 		}
 		return flag;
 	}
-	
+
 	@Override
 	public EntityOcelot createChild(EntityAgeable entityageable)
 	{
 		return (EntityOcelot) createChildTFC(entityageable);
+	}
+	@Override
+	public EntityAgeable createChildTFC(EntityAgeable eAgeable) 
+		{
+			ArrayList<Float> data = new ArrayList<Float>();
+			data.add(eAgeable.getEntityData().getFloat("MateSize"));
+			data.add(eAgeable.getEntityData().getFloat("MateStrength"));
+			data.add(eAgeable.getEntityData().getFloat("MateAggro"));
+			data.add(eAgeable.getEntityData().getFloat("MateObed"));
+			EntityOcelotTFC baby = new EntityOcelotTFC(worldObj, this, data);
+			
+			return baby;
+	}
+
+	@Override
+	protected void dropFewItems(boolean par1, int par2)
+	{
+		this.entityDropItem(new ItemStack(TFCItems.hide, 1, 0),0);
+		
 	}
 
 	@Override
@@ -293,6 +274,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 		this.dataWatcher.addObject(23, Integer.valueOf(0)); //familiarity, familiarizedToday, pregnant, empty slot
 		this.dataWatcher.addObject(24, String.valueOf("0")); // Time of conception, stored as a string since we can't do long
 	}
+
 	@Override
 	public void familiarize(EntityPlayer ep)
 	{
@@ -313,27 +295,33 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 			this.playLivingSound();
 		}
 	}
+	@Override
+	public int getAge() {
+	
+		return getBirthDay();
+	}
 
 	@Override
 	public float getAggressionMod()
 	{
 		return aggressionMod;
 	}
-
-	public long getAnimalID()
+     public long getAnimalID()
 	{
 		return animalID;
 	}
 
+	
 	@Override
 	public int getAnimalTypeID()
 	{
-		return Helper.stringToInt("sheep");
+		return Helper.stringToInt("ocelot");
 	}
+	
 	@Override
 	public Vec3 getAttackedVec()
 	{
-		return null;
+		return attackedVec;
 	}
 
 	@Override
@@ -341,12 +329,17 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 	{
 		return this.dataWatcher.getWatchableObjectInt(15);
 	}
-     /**
+	
+	/**
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
     @Override
 	public boolean getCanSpawnHere()
     {
+        if (this.worldObj.rand.nextInt(3) == 0)
+        {
+            return false;
+        }
         if(TFC_Climate.getBioTemperatureHeight(this.worldObj, (int)this.posX, (int) this.posY, (int) this.posZ) > 10)
         {
         	return this.worldObj.checkNoEntityCollision(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(this.boundingBox);
@@ -358,19 +351,26 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
         
     }
 
+	/**
+     * Gets the name of this command sender (usually username, but possibly "Rcon")
+     */
+    public String getCommandSenderName()
+    {
+        return this.hasCustomNameTag() ? this.getCustomNameTag() : (this.isTamed() ? StatCollector.translateToLocal("entity.Cat.name") : super.getCommandSenderName());
+    }
 	
+	/**
+     * Returns the sound this mob makes on death.
+     */
 	@Override
-	public EntityAgeable createChildTFC(EntityAgeable eAgeable) 
-		{
-			ArrayList<Float> data = new ArrayList<Float>();
-			data.add(eAgeable.getEntityData().getFloat("MateSize"));
-			data.add(eAgeable.getEntityData().getFloat("MateStrength"));
-			data.add(eAgeable.getEntityData().getFloat("MateAggro"));
-			data.add(eAgeable.getEntityData().getFloat("MateObed"));
-			EntityOcelotTFC baby = new EntityOcelotTFC(worldObj, this, data);
-			
-			return baby;
-	}
+    protected String getDeathSound()
+    {
+        return TFC_Sounds.CATHITT;
+    }
+	protected Item getDropItem()
+    {
+        return TFCItems.hide;
+    }
 	
 	@Override
 	public int getDueDay()
@@ -395,28 +395,57 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 	{
 		return familiarizedToday;
 	}
-	
+
 	@Override
 	public Entity getFearSource() {
 
-		return null;
+		return this.fearSource;
 	}
+	
 	@Override
 	public GenderEnum getGender() {
 		return GenderEnum.GENDERS[dataWatcher.getWatchableObjectInt(13)];
 	}
-	
+
 	@Override
 	public int getHunger()
 	{
 		return hunger;
 	}
+	
+	/**
+     * Returns the sound this mob makes when it is hurt.
+     */
+	@Override
+    protected String getHurtSound()
+    {
+		return TFC_Sounds.CATHISS;
+    }
 
 	@Override
 	public boolean getInLove()
 	{
 		return inLove;
 	}
+	
+	/**
+     * Returns the sound this mob makes while it's alive.
+     */
+	@Override
+    protected String getLivingSound()
+    {
+		if (this.isTamed())
+		{
+			if (this.isAdult())
+				return (this.isInLove() ? TFC_Sounds.CATPURR : (this.rand.nextInt(4) == 0 ? TFC_Sounds.CATPURREOW : TFC_Sounds.CATMEOW ));
+			else
+			{
+				return TFC_Sounds.KITTENMEOW;
+			}
+		}
+		return "";
+		
+    }
 	
 	@Override
 	public int getNumberOfDaysToAdult()
@@ -429,7 +458,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 	{
 		return obedienceMod;
 	}
-
+	
 	public int getPregnancyRequiredTime()
 	{
 		return pregnancyRequiredTime;
@@ -440,13 +469,33 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 	{
 		return sizeMod;
 	}
-
+	
+	/**
+     * Returns the volume for the sounds this mob makes.
+     */
+	@Override
+    protected float getSoundVolume()
+    {
+        return 0.4F;
+    }
 	@Override
 	public float getStrengthMod()
 	{
 		return strengthMod;
 	}
-	
+
+	public int getTameSkin()
+    {
+        return this.dataWatcher.getWatchableObjectInt(26);
+    }
+	// Coughs up a ball of wool with a nice phlegmy sound.
+	public void Hairball()
+	{
+		this.worldObj.playSoundAtEntity(this, TFC_Sounds.CATCOUGH, 1.0F, 1.0F);
+		ItemStack item = new ItemStack(TFCItems.wool, 1);
+		this.entityDropItem(item, 1.0f);
+		
+	}
 	@Override
 	public void handleFamiliarityUpdate()
 	{
@@ -483,13 +532,88 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 		if (familiarity < 0)
 			familiarity = 0;
 	}
+	
+	/**
+     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
+     */
+	@Override
+    public boolean interact(EntityPlayer player)
+    {
+        ItemStack itemstack = player.inventory.getCurrentItem();
 
-	// Coughs up a ball of wool with a nice phlegmy sound.
-	public void Hairball()
-	{
-		this.worldObj.playSoundAtEntity(this, TFC_Sounds.CATCOUGH, 1.0F, 1.0F);
-		ItemStack item = new ItemStack(TFCItems.wool, 1);
-		this.entityDropItem(item, 1.0f);
+        if(!worldObj.isRemote)
+		{
+			if (!this.aiTempt.isRunning() && player.isSneaking() && this.getOwner() == null && canFamiliarize() && player.getDistanceSqToEntity(this) < 9.0D)
+			{
+				this.familiarize(player);
+				return true;
+			}
+			if(player.getHeldItem() != null)
+			{
+				
+				if(isFood(itemstack))
+				{
+					Item item = itemstack.getItem();
+					if(item instanceof ItemFoodTFC && hunger <= 160000)
+					{
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, ((ItemFoodTFC) item).onConsumedByEntity(player.getHeldItem(), worldObj, this));
+						this.hunger += 24000;
+						this.familiarity += 1;
+						worldObj.playSoundAtEntity(this, TFC_Sounds.CATPURR, 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
+						return true;
+					}
+				}
+			}
+			else if(this.isTamed())
+	        {
+	            if (this.func_152114_e(player))
+	            {
+	                this.aiSit.setSitting(!this.isSitting());
+
+	                this.isJumping = false;
+	                this.setPathToEntity((PathEntity)null);
+	                this.setTarget((Entity)null);
+	                this.setAttackTarget((EntityLivingBase)null);
+	                return true;
+	            }
+	        }
+			if(getGender() == GenderEnum.FEMALE && pregnant)
+				TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.pregnant"));
+			
+			if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.checkFamiliarity(InteractionEnum.BREED, player) && this.getGrowingAge() == 0 && !super.isInLove() &&
+				(this.familiarizedToday || !canFamiliarize()))
+			{
+				if (!player.capabilities.isCreativeMode)
+				{
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, ((ItemFoodTFC) itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this));
+				}
+				this.hunger += 24000;
+				this.func_146082_f(player);
+				return true;
+			}
+            if (this.familiarity > 20 && !this.isTamed())
+            {
+                this.setTamed(true);
+                this.setTameSkin(1 + this.worldObj.rand.nextInt(5));
+                this.func_152115_b(player.getUniqueID().toString());
+                this.playTameEffect(true);
+                worldObj.playSoundAtEntity(this, TFC_Sounds.CATPURR, 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
+                this.aiSit.setSitting(false);
+                this.worldObj.setEntityState(this, (byte)7);
+    			return true;
+            }
+            
+        }
+        else if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName"))
+        {
+			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"),player))
+			{
+				itemstack.stackSize--;
+			}
+			return true;
+		}
+		
+		return super.interact(player);
 		
 	}
 	
@@ -498,30 +622,32 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 	{
 		return getBirthDay() + getNumberOfDaysToAdult() <= TFC_Time.getTotalDays();
 	}
-	
+	/**
+     * Returns true if the newer Entity AI code should be run
+     */
+    public boolean isAIEnabled()
+    {
+        return true;
+    }
 	@Override
 	public boolean isBreedingItem(ItemStack par1ItemStack)
 	{
 		return false;
 	}
-
 	public boolean isBreedingItemTFC(ItemStack item)
 	{
 		return !pregnant && (item.getItem() == TFCItems.beefRaw);
 	}
-	
 	@Override
 	public boolean isFood(ItemStack item)
 	{
 		return item != null && (item.getItem() == TFCItems.fishRaw);
 	}
-	
 	@Override
 	public boolean isPregnant()
 	{
 		return pregnant;
 	}
-	
 	@Override
 	public void mate(IAnimal otherAnimal)
 	{
@@ -544,8 +670,6 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 	@Override
 	public void onLivingUpdate()
 	{
-		if (this.worldObj.isRemote)
-			this.catTimer = Math.max(0, this.catTimer - 1);
 
 		//Handle Hunger ticking
 		if (hunger > 168000)
@@ -576,7 +700,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 			setGrowingAge(-1);
 		}
 		//hair ball
-		if(rand.nextInt(90000)== 0  & this.isSitting() && this.isTamed() && isAdult())
+		if(!this.worldObj.isRemote && rand.nextInt(120000)== 0  & this.isSitting() && this.isTamed() && isAdult())
 		{
 			this.Hairball();
 		}
@@ -620,29 +744,70 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 		TFC_Core.preventEntityDataUpdate = false;
 
 	}
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData p_110161_1_)
+    {
+        p_110161_1_ = super.onSpawnWithEgg(p_110161_1_);
 
+        if (this.worldObj.rand.nextInt(7) == 0)
+        {
+            for (int i = 0; i < 2; ++i)
+            {
+                EntityOcelotTFC entityocelot = new EntityOcelotTFC(this.worldObj);
+                entityocelot.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
+                entityocelot.setGrowingAge(-24000);
+                this.worldObj.spawnEntityInWorld(entityocelot);
+            }
+        }
+
+        return p_110161_1_;
+    }
+	/**
+	 * (abstract) Protected helper method to read subclass entity data from NBT.
+	 */
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt)
+	{
+		super.readEntityFromNBT(nbt);
+		animalID = nbt.getLong("Animal ID");
+		sex = nbt.getInteger("Sex");
+		sizeMod = nbt.getFloat("Size Modifier");
+		adultTaskSet =nbt.getBoolean("AdultTaskSet");
+		strengthMod = nbt.getFloat("Strength Modifier");
+		aggressionMod = nbt.getFloat("Aggression Modifier");
+		obedienceMod = nbt.getFloat("Obedience Modifier");
+		familiarity = nbt.getInteger("Familiarity");
+		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
+		familiarizedToday = nbt.getBoolean("Familiarized Today");
+		this.dataWatcher.updateObject(26, nbt.getInteger("CatType"));
+		hunger = nbt.getInteger("Hunger");
+		pregnant = nbt.getBoolean("Pregnant");
+		mateSizeMod = nbt.getFloat("MateSize");
+		mateStrengthMod = nbt.getFloat("MateStrength");
+		mateAggroMod = nbt.getFloat("MateAggro");
+		mateObedMod = nbt.getFloat("MateObed");
+		mateColor = nbt.getInteger("MateColor");
+		timeOfConception = nbt.getLong("ConceptionTime");
+		this.dataWatcher.updateObject(15, nbt.getInteger("Age"));
+		this.setAge(nbt.getInteger("Age"));
+	}
+
+	
 	public void setAdultTasks()
 	{
         this.getNavigator().setAvoidsWater(true);
-        this.tasks.addTask(3, new EntityAITempt(this, 0.6D, TFCItems.fishRaw, false));
+        this.aiSit = new EntityAISitTFC(this); 
+        this.tasks.addTask(2, this.aiSit);
+        this.tasks.addTask(3, this.aiTempt = new EntityAITempt(this, 0.6D, TFCItems.fishRaw, false));
         this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityPlayer.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 5.0F));
         this.tasks.addTask(6, new EntityAIFollowParent(this, 1.1D));
-        this.tasks.addTask(7, new EntityAIOcelotSit(this, 1.33D));
+        this.tasks.addTask(7, new EntityAIOcelotSitTFC(this, 1.33D));
         this.tasks.addTask(8, new EntityAILeapAtTarget(this, 0.3F));
         this.tasks.addTask(9, new EntityAIOcelotAttack(this));
         this.tasks.addTask(2, new EntityAIMateTFC(this,this.worldObj, 1.0F));
         this.tasks.addTask(11, new EntityAIWander(this, 0.8D));
         this.tasks.addTask(12, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
         this.targetTasks.addTask(1, new EntityAITargetNonTamed(this, EntityChickenTFC.class, 750, true));	
-	}
-	public void setKittenTasks(EntityOcelotTFC entity)
-	{
-	    entity.getNavigator().setAvoidsWater(true);
-	    entity.tasks.addTask(1, new EntityAIFollowParent(this, 1.1D));
-        entity.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
-        entity.aiSit.setSitting(false);
-
 	}
 	@Override
 	public void setAge(int par1)
@@ -655,71 +820,86 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 	{
 		this.aggressionMod = aggressionMod;
 	}
-	
+
 	@Override
 	public void setAttackedVec(Vec3 attackedVec) {
 		// None
 		
 	}
+	
 	@Override
 	public void setBirthDay(int day) {
 		this.dataWatcher.updateObject(15, day);
 		
 	}
-	@Override
+	
+
+    @Override
 	public void setFamiliarity(int f) {
 		this.familiarity = f;
 		
 	}
-	@Override
+
+    
+    @Override
 	public void setFearSource(Entity fearSource) {
-		// None
+    	
+    	this.fearSource = fearSource;
 		
 	}
-	@Override
+    
+    @Override
 	public void setGrowingAge(int par1)
 	{
 		if(!TFC_Core.preventEntityDataUpdate)
 			this.dataWatcher.updateObject(12, Integer.valueOf(par1));
 	}
-	@Override
+
+    @Override
 	public void setHunger(int h) {
 		hunger = h;
 		
 	}
-	@Override
+	
+    @Override
 	public void setInLove(boolean b) {
 		this.inLove = b;
 		
+	}
+
+    public void setKittenTasks(EntityOcelotTFC entity)
+	{
+	    entity.getNavigator().setAvoidsWater(true);
+        this.aiSit = new EntityAISitTFC(this); 
+        this.tasks.addTask(2, this.aiSit);
+	    entity.tasks.addTask(1, new EntityAIFollowParent(this, 1.1D));
+        entity.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
+        entity.aiSit.setSitting(false);
+
 	}
 	@Override
 	public void setObedienceMod(float obedience) {
 		this.obedienceMod = obedienceMod;
 		
-	}
-	@Override
+	}		
+    @Override
 	public void setSizeMod(float size) {
 		this.sizeMod = size;
 		
 	}
-	@Override
+
+    @Override
 	public void setStrengthMod(float strength) {
 		this.strengthMod = strength;
 		
 	}
+    public void setTameSkin(int skin)
+    {
+        this.dataWatcher.updateObject(26, skin);
+    }
 
-	
-	@Override
-	public boolean trySetName(String name, EntityPlayer player) {
-		if (this.checkFamiliarity(InteractionEnum.NAME, player))
-		{
-			this.setCustomNameTag(name);
-			return true;
-		}
-		this.playSound(this.getHurtSound(), 6, rand.nextFloat() / 2F + (isChild() ? 1.25F : 0.75F));
-		return false;
-	}
-	public void syncData()
+    
+    public void syncData()
 	{
 		if (dataWatcher != null)
 		{
@@ -763,46 +943,57 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 			}
 		}
 	}
-	
-	@Override
+    @Override
+	public boolean trySetName(String name, EntityPlayer player) {
+		if (this.checkFamiliarity(InteractionEnum.NAME, player))
+		{
+			this.setCustomNameTag(name);
+			return true;
+		}
+		this.playSound(this.getHurtSound(), 6, rand.nextFloat() / 2F + (isChild() ? 1.25F : 0.75F));
+		return false;
+	}
+
+    @Override
 	protected void updateAITasks()
 	{
 		//this.catTimer = this.aiEatGrass.getEatGrassTick();
 		super.updateAITasks();
 	}
+    
+    /**
+     * main AI tick function, replaces updateEntityActionState
+     */
+    public void updateAITick()
+    {
+        if (this.getMoveHelper().isUpdating())
+        {
+            double d0 = this.getMoveHelper().getSpeed();
 
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
-	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt)
-	{
-		super.readEntityFromNBT(nbt);
-		animalID = nbt.getLong("Animal ID");
-		sex = nbt.getInteger("Sex");
-		sizeMod = nbt.getFloat("Size Modifier");
-		adultTaskSet =nbt.getBoolean("AdultTaskSet");
-		strengthMod = nbt.getFloat("Strength Modifier");
-		aggressionMod = nbt.getFloat("Aggression Modifier");
-		obedienceMod = nbt.getFloat("Obedience Modifier");
-		this.setSitting(nbt.getBoolean("Sitting"));
-		familiarity = nbt.getInteger("Familiarity");
-		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
-		familiarizedToday = nbt.getBoolean("Familiarized Today");
-
-		hunger = nbt.getInteger("Hunger");
-		pregnant = nbt.getBoolean("Pregnant");
-		mateSizeMod = nbt.getFloat("MateSize");
-		mateStrengthMod = nbt.getFloat("MateStrength");
-		mateAggroMod = nbt.getFloat("MateAggro");
-		mateObedMod = nbt.getFloat("MateObed");
-		mateColor = nbt.getInteger("MateColor");
-		timeOfConception = nbt.getLong("ConceptionTime");
-		this.dataWatcher.updateObject(15, nbt.getInteger("Age"));
-		this.setAge(nbt.getInteger("Age"));
-	}
-	
-	/**
+            if (d0 == 0.6D)
+            {
+                this.setSneaking(true);
+                this.setSprinting(false);
+            }
+            else if (d0 == 1.33D)
+            {
+                this.setSneaking(false);
+                this.setSprinting(true);
+            }
+            else
+            {
+                this.setSneaking(false);
+                this.setSprinting(false);
+            }
+        }
+        else
+        {
+            this.setSneaking(false);
+            this.setSprinting(false);
+        }
+    }
+    
+    /**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
 	@Override
@@ -816,11 +1007,10 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 		nbt.setInteger("Familiarity", familiarity);
 		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);
 		nbt.setBoolean("Familiarized Today", familiarizedToday);
-		nbt.setBoolean("Sitting", this.isSitting());
 		nbt.setFloat("Strength Modifier", strengthMod);
 		nbt.setFloat("Aggression Modifier", aggressionMod);
 		nbt.setFloat("Obedience Modifier", obedienceMod);
-
+		nbt.setInteger("CatType", this.dataWatcher.getWatchableObjectInt(26));
 		nbt.setInteger("Hunger", hunger);
 		nbt.setBoolean("Pregnant", pregnant);
 		nbt.setFloat("MateSize", mateSizeMod);
@@ -831,61 +1021,5 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimal
 		nbt.setLong("ConceptionTime", timeOfConception);
 		nbt.setInteger("Age", getBirthDay());
 	}
-	
-	@Override
-    public int getTameSkin()
-    {
-        return this.dataWatcher.getWatchableObjectInt(26);
-    }
-	@Override
-    public void setTameSkin(int skin)
-    {
-        this.dataWatcher.updateObject(26, skin);
-    }
-    
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-	@Override
-    protected String getLivingSound()
-    {
-		if (this.isTamed())
-		{
-			if (this.isAdult())
-				return (this.isInLove() ? TFC_Sounds.CATPURR : (this.rand.nextInt(4) == 0 ? TFC_Sounds.CATPURREOW : TFC_Sounds.CATMEOW ));
-			else
-			{
-				return TFC_Sounds.KITTENMEOW;
-			}
-		}
-		return "";
-		
-    }
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-	@Override
-    protected String getHurtSound()
-    {
-		return TFC_Sounds.CATHISS;
-    }
-	
-    /**
-     * Returns the sound this mob makes on death.
-     */
-	@Override
-    protected String getDeathSound()
-    {
-        return TFC_Sounds.CATHITT;
-    }
-
-    /**
-     * Returns the volume for the sounds this mob makes.
-     */
-	@Override
-    protected float getSoundVolume()
-    {
-        return 0.4F;
-    }
 }

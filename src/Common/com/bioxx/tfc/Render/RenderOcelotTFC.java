@@ -19,10 +19,17 @@ import com.bioxx.tfc.Reference;
 @SideOnly(Side.CLIENT)
 public class RenderOcelotTFC extends RenderLiving
 {
-    private static final ResourceLocation blackOcelotTextures = new ResourceLocation(Reference.MOD_ID, "textures/mob/cat/black.png");
-    private static final ResourceLocation ocelotTextures = new ResourceLocation(Reference.MOD_ID , "textures/mob/cat/ocelot.png");
+	private static final ResourceLocation ocelotTextures = new ResourceLocation(Reference.MOD_ID , "textures/mob/cat/ocelot.png");
+	private static final ResourceLocation blackOcelotTextures = new ResourceLocation(Reference.MOD_ID, "textures/mob/cat/black.png");
     private static final ResourceLocation redOcelotTextures = new ResourceLocation(Reference.MOD_ID, "textures/mob/cat/red.png");
     private static final ResourceLocation siameseOcelotTextures = new ResourceLocation(Reference.MOD_ID , "textures/mob/cat/siamese.png");
+    private static final ResourceLocation herosiamOcelotTextures = new ResourceLocation(Reference.MOD_ID , "textures/mob/cat/hero_siam.png");
+    private static final ResourceLocation red_cat_tigerOcelotTextures = new ResourceLocation(Reference.MOD_ID , "textures/mob/cat/red_cat_tiger.png");
+    private static final ResourceLocation cute_catOcelotTextures = new ResourceLocation(Reference.MOD_ID , "textures/mob/cat/cute_cat.png");
+    private static final ResourceLocation calicoOcelotTextures = new ResourceLocation(Reference.MOD_ID , "textures/mob/cat/calico.png");
+    
+    
+    
 
 
     public RenderOcelotTFC(ModelBase p_i1264_1_, float p_i1264_2_)
@@ -57,6 +64,13 @@ public class RenderOcelotTFC extends RenderLiving
                 return redOcelotTextures;
             case 3:
                 return siameseOcelotTextures;
+            case 4:
+            	return herosiamOcelotTextures;
+            case 5:
+            	return red_cat_tigerOcelotTextures;
+            case 6:
+            	return calicoOcelotTextures;
+            	
         }
     }
 

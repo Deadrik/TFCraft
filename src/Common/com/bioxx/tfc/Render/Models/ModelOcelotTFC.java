@@ -7,9 +7,11 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntityOcelot;
+
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
+
+import com.bioxx.tfc.Entities.Mobs.EntityOcelotTFC;
 
 @SideOnly(Side.CLIENT)
 public class ModelOcelotTFC extends ModelBase
@@ -156,7 +158,7 @@ public class ModelOcelotTFC extends ModelBase
      */
     public void setLivingAnimations(EntityLivingBase p_78086_1_, float p_78086_2_, float p_78086_3_, float p_78086_4_)
     {
-        EntityOcelot entityocelot = (EntityOcelot)p_78086_1_;
+        EntityOcelotTFC entityocelot = (EntityOcelotTFC)p_78086_1_;
         this.ocelotBody.rotationPointY = 12.0F;
         this.ocelotBody.rotationPointZ = -10.0F;
         this.ocelotHead.rotationPointY = 15.0F;

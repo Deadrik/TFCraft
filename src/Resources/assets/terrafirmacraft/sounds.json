@@ -233,7 +233,9 @@
       "pbear_idle1",
       "pbear_idle2",
       "pbear_idle3",
-      "pbear_idle4"
+      "pbear_idle4",
+      "pbear_idle5",
+      "pbear_idle6"
     ]
   },
     "mob.polarbear.cry": {
