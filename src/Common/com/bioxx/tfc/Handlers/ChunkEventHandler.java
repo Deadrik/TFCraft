@@ -52,16 +52,16 @@ public class ChunkEventHandler
 					cd.fishPop *= Math.pow(1.2,cd.lastSpringGen - TFC_Time.getYear());
 					cd.fishPop = Math.min(cd.fishPop, ChunkData.FISH_POP_MAX);
 					
-					int waterPlantsPerChunk = 10;
-					int var2;
-					for (var2 = 0; var2 < waterPlantsPerChunk; ++var2)
-					{
-						int xCoord = (chunkX << 4) + rand.nextInt(16) + 8;
-						int zCoord = (chunkZ << 4) + rand.nextInt(16) + 8;
-						int yCoord = event.world.getPrecipitationHeight(xCoord, zCoord)-1;
-						if (TFC_Climate.getBioTemperatureHeight(event.world, xCoord, yCoord, zCoord) >= 7)
-							new WorldGenWaterPlants(TFCBlocks.waterPlant).generate(event.world, rand, xCoord, yCoord, zCoord);
-					}
+//					int waterPlantsPerChunk = 10;
+//					int var2;
+//					for (var2 = 0; var2 < waterPlantsPerChunk; ++var2)
+//					{
+//						int xCoord = (chunkX << 4) + rand.nextInt(16) + 8;
+//						int zCoord = (chunkZ << 4) + rand.nextInt(16) + 8;
+//						int yCoord = event.world.getPrecipitationHeight(xCoord, zCoord)-1;
+//						if (TFC_Climate.getBioTemperatureHeight(event.world, xCoord, yCoord, zCoord) >= 7)
+//							new WorldGenWaterPlants(TFCBlocks.waterPlant).generate(event.world, rand, xCoord, yCoord, zCoord);
+//					}
 				}
 				cd.lastSpringGen = TFC_Time.getYear();
 
