@@ -195,7 +195,7 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
 	{
 		if (!this.isAdult()) // Babies can't despawn
 			return false;
-		if (this.getOwner() != null) // Can't despawn if fed bones
+		if (this.getOwner() != null) // Can't despawn if yeah gots an owner!
 			return false;
 		return ticksExisted > 20000;
 	}
@@ -443,7 +443,7 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
 				return TFC_Sounds.KITTENMEOW;
 			}
 		}
-		return "";
+		return null;
 		
     }
 	

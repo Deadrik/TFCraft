@@ -107,7 +107,7 @@ public class EntityPolarBear extends EntityTameable implements ICausesDamage, IA
 		sex = rand.nextInt(2);
 		if (getGender() == GenderEnum.MALE)
 			tasks.addTask (6, new EntityAIMate (this, moveSpeed));
-		this.tasks.addTask(1, new EntityAIAvoidEntityTFC(this, EntityOcelotTFC.class, 16.0F, 1.2D, 1.6D));
+		this.tasks.addTask(1, new EntityAIAvoidEntityTFC(this, EntityOcelotTFC.class, 32.0F, 1.2D, 1.6D));
 		tasks.addTask (7, new EntityAIWander (this, moveSpeed));
 		tasks.addTask (8, new EntityAIWatchClosest (this, EntityPlayer.class, 8F));
 		tasks.addTask (9, new EntityAILookIdle (this));
