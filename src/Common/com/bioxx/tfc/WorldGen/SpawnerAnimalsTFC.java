@@ -17,6 +17,7 @@ import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityFishTFC;
+import com.bioxx.tfc.Entities.Mobs.EntityOcelotTFC;
 
 public final class SpawnerAnimalsTFC
 {
@@ -92,9 +93,21 @@ public final class SpawnerAnimalsTFC
 							float f1 = l2;
 							float f2 = k1 + 0.5F;
 							entityliving.setLocationAndAngles(f, f1, f2, par6Random.nextFloat() * 360.0F, 0.0F);
-							world.spawnEntityInWorld(entityliving);
-							entitylivingdata = entityliving.onSpawnWithEgg(entitylivingdata);
-							flag = true;
+							if(entityliving instanceof EntityOcelotTFC){
+								if(entityliving.getCanSpawnHere()){
+									world.spawnEntityInWorld(entityliving);
+									entitylivingdata = entityliving.onSpawnWithEgg(entitylivingdata);
+									flag = true;
+								}
+							}
+							else
+							{
+								world.spawnEntityInWorld(entityliving);
+								entitylivingdata = entityliving.onSpawnWithEgg(entitylivingdata);
+								flag = true;	
+							}
+
+							
 						}
 
 						j1 += par6Random.nextInt(5) - par6Random.nextInt(5);

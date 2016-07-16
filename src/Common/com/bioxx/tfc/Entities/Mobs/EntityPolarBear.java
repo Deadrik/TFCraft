@@ -289,7 +289,7 @@ public class EntityPolarBear extends EntityTameable implements ICausesDamage, IA
 		}
 		this.entityDropItem(new ItemStack(TFCItems.pbearSkin, 1, Math.max(0, Math.min(2, (int)(ageMod * 3 - 1)))), 0);
 		this.dropItem(Items.bone, (int) ((rand.nextInt(6) + 2) * ageMod));
-		float foodWeight = ageMod * (this.sizeMod * 4000);
+		float foodWeight = ageMod * (this.sizeMod * 1500);
 		TFC_Core.animalDropMeat(this, TFCItems.bearRaw, foodWeight);
 	}
 

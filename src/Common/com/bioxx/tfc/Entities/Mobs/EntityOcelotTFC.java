@@ -18,6 +18,7 @@ import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Enums.EnumTree;
 import com.bioxx.tfc.api.Util.Helper;
 
 
@@ -37,6 +38,7 @@ import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -197,7 +199,7 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
 			return false;
 		if (this.getOwner() != null) // Can't despawn if yeah gots an owner!
 			return false;
-		return ticksExisted > 20000;
+		return ticksExisted > 40000;
 	}
 
 	@Override
@@ -205,7 +207,6 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
 	{
 		return !isAdult() || (isAdult() && this.familiarity <= FAMILIARITY_CAP);
 	}
-
 	
 	
 	@Override
@@ -336,14 +337,25 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
     @Override
 	public boolean getCanSpawnHere()
     {
-        if (this.worldObj.rand.nextInt(3) == 0)
-        {
-            return false;
-        }
-        if(TFC_Climate.getBioTemperatureHeight(this.worldObj, (int)this.posX, (int) this.posY, (int) this.posZ) > 10)
-        {
-        	return this.worldObj.checkNoEntityCollision(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(this.boundingBox);
-        }
+    	if(this.worldObj.rand.nextInt(10)== 10)
+    	{
+    		float evt = TFC_Climate.getCacheManager(this.worldObj).getEVTLayerAt(this.chunkCoordX + 8, this.chunkCoordZ + 8).floatdata1;
+    		float temperatureAvg = TFC_Climate.getBioTemperature(this.worldObj,(int) this.posX, (int) this.posZ);
+    		float rainfall = TFC_Climate.getRainfall(this.worldObj, this.chunkCoordX, 0, this.chunkCoordZ);
+    		
+    		if(evt <= EnumTree.KOA.maxEVT &&
+    				rainfall >= EnumTree.KOA.minRain &&
+    				rainfall <= EnumTree.KOA.maxRain && 
+    				temperatureAvg >= EnumTree.KOA.minTemp &&
+    				temperatureAvg <= EnumTree.KOA.maxTemp)
+    		{
+    			return this.worldObj.checkNoEntityCollision(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(this.boundingBox);	
+    		}
+    		else
+    		{
+    			return false;
+    		}
+    	}
         else
         {
         	return false;
