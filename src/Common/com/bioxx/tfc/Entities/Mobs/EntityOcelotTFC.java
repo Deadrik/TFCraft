@@ -548,6 +548,10 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
 				this.familiarize(player);
 				return true;
 			}
+			else
+			{
+				TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.notFamiliar"));
+			}
 			if(player.getHeldItem() != null)
 			{
 				
