@@ -37,6 +37,8 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	protected String[] woodNames;
 	protected IIcon[] icons;
 	protected IIcon[] iconsOpaque;
+	public int recursionCount;
+	public int recursionLimit=TFCOptions.recursionLimit;
 
 	public BlockCustomLeaves()
 	{
@@ -107,12 +109,22 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
 		onNeighborBlockChange(world, x, y, z, null);
+		int l = world.getBlockMetadata(x, y, z);
+		if(l == 9)
+		{
+			super.updateTick(world, x, y, z, rand);
+		}
 	}
 
 	@Override
 	public void beginLeavesDecay(World world, int x, int y, int z)
 	{
-		//We don't do vanilla leaves decay
+		int l = world.getBlockMetadata(x, y, z);
+		if(l == 9)
+		{
+			super.beginLeavesDecay(world, x, y, z);
+			world.scheduleBlockUpdate(x, y, z, this, world.rand.nextInt(30));
+		}
 	}
 
 	@Override
@@ -193,7 +205,15 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 			if (res < 0)
 			{
 				if(world.getChunkFromBlockCoords(xOrig, zOrig) != null)
-					this.destroyLeaves(world, xOrig, yOrig, zOrig);
+					recursionCount += 1;
+					if(recursionCount<=recursionLimit){
+						this.destroyLeaves(world, xOrig, yOrig, zOrig);
+					}
+					else{
+						TerraFirmaCraft.LOG.warn(new StringBuilder().append("*** Recursion Limit " + recursionLimit + " REACHED***").toString());
+						this.beginLeavesDecay(world,  xOrig, yOrig, zOrig);
+					}
+					recursionCount -= 1;
 			}
 		}
 	}
