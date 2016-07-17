@@ -34,6 +34,7 @@ import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAIOcelotAttack;
 import net.minecraft.entity.ai.EntityAISit;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
@@ -97,6 +98,7 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
 
         this.setSize(0.6F, 0.8F);
         this.getNavigator().setAvoidsWater(true);
+        this.tasks.addTask(1, new EntityAISwimming(this));
         this.aiSit = new EntityAISit(this);  
         this.tasks.addTask(2, this.aiSit);
         this.tasks.addTask(3, this.aiTempt = new EntityAITempt(this, 0.6D, TFCItems.fishRaw, false));
