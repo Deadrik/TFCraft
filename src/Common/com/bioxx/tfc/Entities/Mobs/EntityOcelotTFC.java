@@ -337,29 +337,20 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
     @Override
 	public boolean getCanSpawnHere()
     {
-    	if(this.worldObj.rand.nextInt(10)== 10)
+    	
+    	if(this.worldObj.rand.nextInt(30) == 0)
     	{
-    		float evt = TFC_Climate.getCacheManager(this.worldObj).getEVTLayerAt(this.chunkCoordX + 8, this.chunkCoordZ + 8).floatdata1;
     		float temperatureAvg = TFC_Climate.getBioTemperature(this.worldObj,(int) this.posX, (int) this.posZ);
-    		float rainfall = TFC_Climate.getRainfall(this.worldObj, this.chunkCoordX, 0, this.chunkCoordZ);
+    		float rainfall = TFC_Climate.getRainfall(this.worldObj, (int) this.posX, 0, (int) this.posZ);
     		
-    		if(evt <= EnumTree.KOA.maxEVT &&
-    				rainfall >= EnumTree.KOA.minRain &&
-    				rainfall <= EnumTree.KOA.maxRain && 
-    				temperatureAvg >= EnumTree.KOA.minTemp &&
-    				temperatureAvg <= EnumTree.KOA.maxTemp)
+    		if(		rainfall >= 1500 &&
+    				temperatureAvg >= 23 &&
+    				temperatureAvg <= 44)
     		{
-    			return this.worldObj.checkNoEntityCollision(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(this.boundingBox);	
-    		}
-    		else
-    		{
-    			return false;
+    			return this.worldObj.checkNoEntityCollision(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(this.boundingBox);
     		}
     	}
-        else
-        {
-        	return false;
-        }
+    	return false;
         
     }
 
@@ -764,17 +755,10 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
     {
         p_110161_1_ = super.onSpawnWithEgg(p_110161_1_);
 
-        if (this.worldObj.rand.nextInt(7) == 0)
-        {
-            for (int i = 0; i < 2; ++i)
-            {
-                EntityOcelotTFC entityocelot = new EntityOcelotTFC(this.worldObj);
-                entityocelot.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
-                entityocelot.setGrowingAge(-24000);
-                this.worldObj.spawnEntityInWorld(entityocelot);
-            }
-        }
-
+        EntityOcelotTFC entityocelot = new EntityOcelotTFC(this.worldObj);
+        entityocelot.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
+        entityocelot.setGrowingAge(-24000);
+        this.worldObj.spawnEntityInWorld(entityocelot);
         return p_110161_1_;
     }
 	/**
