@@ -201,6 +201,8 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
 			return false;
 		if (this.getOwner() != null) // Can't despawn if yeah gots an owner!
 			return false;
+		if (this.isTamed())
+			return false;
 		return ticksExisted > 40000;
 	}
 
@@ -602,12 +604,13 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
 			}
             if (this.familiarity > 20 && !this.isTamed())
             {
+            	this.setFamiliarity(35);
                 this.setTamed(true);
                 this.setTameSkin(1 + this.worldObj.rand.nextInt(5));
                 this.func_152115_b(player.getUniqueID().toString());
                 this.playTameEffect(true);
                 worldObj.playSoundAtEntity(this, TFC_Sounds.CATPURR, 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
-                this.aiSit.setSitting(false);
+                this.aiSit.setSitting(true);
                 this.worldObj.setEntityState(this, (byte)7);
     			return true;
             }
@@ -959,7 +962,6 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
     @Override
 	protected void updateAITasks()
 	{
-		//this.catTimer = this.aiEatGrass.getEatGrassTick();
 		super.updateAITasks();
 	}
     
