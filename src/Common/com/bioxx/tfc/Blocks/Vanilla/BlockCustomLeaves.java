@@ -120,7 +120,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	public void beginLeavesDecay(World world, int x, int y, int z)
 	{
 		int l = world.getBlockMetadata(x, y, z);
-		if(l == 9)
+		if(l == 9 | l == 15)
 		{
 			super.beginLeavesDecay(world, x, y, z);
 			world.scheduleBlockUpdate(x, y, z, this, world.rand.nextInt(30));

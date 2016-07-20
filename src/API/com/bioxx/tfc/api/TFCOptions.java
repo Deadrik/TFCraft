@@ -23,7 +23,7 @@ public class TFCOptions
 	public static int maxRemovedSolidDetailed = 12;
 	public static int hammerBreakSpeed = 90;
 	public static boolean enableToolModeIndicator = true;
-	public static int recursionLimit = 240;
+	public static int recursionLimit = 220;
 
 	// Time
 	public static int yearLength = 96;
