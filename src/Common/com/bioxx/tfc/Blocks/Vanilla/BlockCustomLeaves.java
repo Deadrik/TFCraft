@@ -109,8 +109,8 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
 		onNeighborBlockChange(world, x, y, z, null);
-		int l = world.getBlockMetadata(x, y, z);
-		if(l == 17)
+		Block block = world.getBlock(x, y, z);
+		if(block instanceof BlockCustomLeaves2)
 		{
 			this.destroyLeaves(world, x, y, z);
 		}
@@ -121,14 +121,38 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	public void beginLeavesDecay(World world, int x, int y, int z)
 	{
 
-		int i2 = world.getBlockMetadata(x, y, z);
-		if(i2!=17)
+		if(this.recursionCount > this.recursionLimit)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) | 17, 4);
+			Block destroyBlock = TFCBlocks.leaves2;
+			world.setBlock(x, y, z, destroyBlock, 1, 4);
+			world.scheduleBlockUpdate(x, y, z, destroyBlock, world.rand.nextInt(30));
 		}
-		world.scheduleBlockUpdate(x, y, z, this, world.rand.nextInt(30));
 
 }
+    @Override
+	public void breakBlock(World p_149749_1_, int p_149749_2_, int p_149749_3_, int p_149749_4_, Block p_149749_5_, int p_149749_6_)
+    {
+        byte b0 = 1;
+        int i1 = b0 + 1;
+
+        if (p_149749_1_.checkChunksExist(p_149749_2_ - i1, p_149749_3_ - i1, p_149749_4_ - i1, p_149749_2_ + i1, p_149749_3_ + i1, p_149749_4_ + i1))
+        {
+            for (int j1 = -b0; j1 <= b0; ++j1)
+            {
+                for (int k1 = -b0; k1 <= b0; ++k1)
+                {
+                    for (int l1 = -b0; l1 <= b0; ++l1)
+                    {
+                        Block block = p_149749_1_.getBlock(p_149749_2_ + j1, p_149749_3_ + k1, p_149749_4_ + l1);
+                        if (block.isLeaves(p_149749_1_, p_149749_2_ + j1, p_149749_3_ + k1, p_149749_4_ + l1))
+                        {
+                            //block.beginLeavesDecay(p_149749_1_, p_149749_2_ + j1, p_149749_3_ + k1, p_149749_4_ + l1);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 	@Override
 	public void onNeighborBlockChange(World world, int xOrig, int yOrig, int zOrig, Block b)
