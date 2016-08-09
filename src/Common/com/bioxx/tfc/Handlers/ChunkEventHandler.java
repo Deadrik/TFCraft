@@ -25,6 +25,7 @@ import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.WorldGen.WorldCacheManager;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowCrops;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenPlants;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenWaterPlants;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
@@ -51,6 +52,7 @@ public class ChunkEventHandler
 				{
 					cd.fishPop *= Math.pow(1.2,cd.lastSpringGen - TFC_Time.getYear());
 					cd.fishPop = Math.min(cd.fishPop, ChunkData.FISH_POP_MAX);
+					//seaweed regen
 					if(rand.nextInt(50) == 0)
 					{
 						int waterPlantsPerChunk = 10;
@@ -67,7 +69,7 @@ public class ChunkEventHandler
 				}
 				cd.lastSpringGen = TFC_Time.getYear();
 
-				
+				//crop regen
 				int cropid = rand.nextInt(CropManager.getInstance().getTotalCrops());
 				CropIndex crop = CropManager.getInstance().getCropFromId(cropid);
 				if (event.world.rand.nextInt(25) == 0 && crop != null)
@@ -78,6 +80,15 @@ public class ChunkEventHandler
 					int z = (chunkZ << 4) + event.world.rand.nextInt(16) + 8;
 					cropGen.generate(event.world, event.world.rand, x, z, num);
 				}
+				//berry bush regen
+				if (event.world.rand.nextInt(500) == 0)
+				{
+					WorldGenPlants plants = new WorldGenPlants();
+					plants.genBushes(rand, chunkX, chunkZ, event.world);
+				}
+					
+				
+				
 			}
 			else if(TFC_Time.getYear() > cd.lastSpringGen && month >= 6)
 			{

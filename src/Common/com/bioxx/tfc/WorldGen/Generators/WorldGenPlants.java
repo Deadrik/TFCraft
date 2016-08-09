@@ -227,7 +227,7 @@ public class WorldGenPlants implements IWorldGenerator
 
 	}
 
-	private void genBushes(Random random, int chunkX, int chunkZ, World world)
+	public void genBushes(Random random, int chunkX, int chunkZ, World world)
 	{
 		int xCoord;
 		int yCoord;
