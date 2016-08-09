@@ -13,12 +13,15 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIOcelotSitTFC;
 import com.bioxx.tfc.Entities.AI.EntityAISitTFC;
+import com.bioxx.tfc.Entities.AI.EntityAITargetNonTamedTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Enums.EnumTree;
+import com.bioxx.tfc.api.Enums.EnumDamageType;
+import com.bioxx.tfc.api.Interfaces.ICausesDamage;
+import com.bioxx.tfc.api.Interfaces.IInnateArmor;
 import com.bioxx.tfc.api.Util.Helper;
 
 
@@ -39,8 +42,6 @@ import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -53,7 +54,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-public class EntityOcelotTFC extends EntityTameable implements IAnimal 
+public class EntityOcelotTFC extends EntityTameable implements IAnimal, IInnateArmor, ICausesDamage
 {
 
 
@@ -91,6 +92,8 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
 	private EntityAITempt aiTempt;
 	private Vec3 attackedVec;
 	private Entity fearSource;
+	protected EntityAITargetNonTamedTFC targetChicken;
+	
     
 	public EntityOcelotTFC(World p_i1688_1_) {
 		super(p_i1688_1_);
@@ -111,7 +114,8 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
         this.tasks.addTask(2, new EntityAIMateTFC(this,this.worldObj, 1.0F));
         this.tasks.addTask(11, new EntityAIWander(this, 0.8D));
         this.tasks.addTask(12, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
-        this.targetTasks.addTask(1, new EntityAITargetNonTamed(this, EntityChickenTFC.class, 750, true));
+        this.targetChicken = new EntityAITargetNonTamedTFC(this, EntityChickenTFC.class, 200, false);
+        
 
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
@@ -182,7 +186,7 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
      */
     public boolean attackEntityFrom(DamageSource par1DamageSource, float p_70097_2_)
     {
-    	Entity entity = par1DamageSource.getEntity();
+
         if (this.isEntityInvulnerable())
         {
             return false;
@@ -243,9 +247,9 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
 	}
 
 	@Override
-	public EntityOcelot createChild(EntityAgeable entityageable)
+	public EntityOcelotTFC createChild(EntityAgeable entityageable)
 	{
-		return (EntityOcelot) createChildTFC(entityageable);
+		return (EntityOcelotTFC) createChildTFC(entityageable);
 	}
 	@Override
 	public EntityAgeable createChildTFC(EntityAgeable eAgeable) 
@@ -279,6 +283,13 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
 		this.dataWatcher.addObject(23, Integer.valueOf(0)); //familiarity, familiarizedToday, pregnant, empty slot
 		this.dataWatcher.addObject(24, String.valueOf("0")); // Time of conception, stored as a string since we can't do long
 	}
+	
+    /**
+     * Called when the mob is falling. Calculates and applies fall damage.
+     */
+	@Override
+	protected void fall(float p_70069_1_) {}
+
 
 	@Override
 	public void familiarize(EntityPlayer ep)
@@ -555,10 +566,7 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
 				this.familiarize(player);
 				return true;
 			}
-			else
-			{
-				TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.notFamiliar"));
-			}
+			
 			if(player.getHeldItem() != null)
 			{
 				
@@ -614,17 +622,15 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
                 this.worldObj.setEntityState(this, (byte)7);
     			return true;
             }
-            
+            if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName"))
+            {
+    			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"),player))
+    			{
+    				itemstack.stackSize--;
+    			}
+    			return true;
+    		}
         }
-        else if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName"))
-        {
-			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"),player))
-			{
-				itemstack.stackSize--;
-			}
-			return true;
-		}
-		
 		return super.interact(player);
 		
 	}
@@ -1024,6 +1030,23 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal
 		nbt.setInteger("MateColor", mateColor);
 		nbt.setLong("ConceptionTime", timeOfConception);
 		nbt.setInteger("Age", getBirthDay());
+	}
+	@Override
+	public EnumDamageType getDamageType() {
+		return EnumDamageType.SLASHING;
+	}
+	@Override
+	public int getCrushArmor() {
+		return 250;
+	}
+	@Override
+	public int getSlashArmor() {
+
+		return 250;
+	}
+	@Override
+	public int getPierceArmor() {
+		return -335;
 	}
 
 }
