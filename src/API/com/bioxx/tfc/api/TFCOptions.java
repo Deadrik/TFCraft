@@ -81,6 +81,8 @@ public class TFCOptions
 	public static int normalOreUnits = 25;
 	public static int richOreUnits = 35;
 
+	// Crafting
+	public static boolean enableAluminumSmelting = false;
 	// Server
 	public static int simSpeedNoPlayers = 100;
 

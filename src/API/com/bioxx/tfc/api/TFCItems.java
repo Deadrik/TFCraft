@@ -58,6 +58,9 @@ public class TFCItems
 	public static Item zincIngot;
 	public static Item electrumIngot;
 	public static Item cupronickelIngot;
+	public static Item osmiumIngot;
+	public static Item aluminumIngot;
+	public static Item tungstenIngot;
 
 	public static Item bismuthIngot2x;
 	public static Item bismuthBronzeIngot2x;
@@ -82,6 +85,9 @@ public class TFCItems
 	public static Item zincIngot2x;
 	public static Item electrumIngot2x;
 	public static Item cupronickelIngot2x;
+	public static Item osmiumIngot2x;
+	public static Item aluminumIngot2x;
+	public static Item tungstenIngot2x;
 
 	public static Item igInShovel;
 	public static Item igInAxe;
@@ -179,6 +185,7 @@ public class TFCItems
 
 	public static Item coal;
 	public static Item oreChunk;
+	public static Item oreMineralChunk;
 	public static Item smallOreChunk;
 	public static Item logs;
 	public static Item barrel;
@@ -279,6 +286,9 @@ public class TFCItems
 	public static Item zincUnshaped;
 	public static Item electrumUnshaped;
 	public static Item cupronickelUnshaped;
+	public static Item osmiumUnshaped;
+	public static Item aluminumUnshaped;
+	public static Item tungstenUnshaped;
 	public static Item ceramicMold;
 	public static Item ink;
 
@@ -438,6 +448,9 @@ public class TFCItems
 	public static Item zincSheet;
 	public static Item electrumSheet;
 	public static Item cupronickelSheet;
+	public static Item osmiumSheet;
+	public static Item aluminumSheet;
+	public static Item tungstenSheet;
 
 	public static Item brassSheet;
 	public static Item goldSheet;
@@ -463,6 +476,9 @@ public class TFCItems
 	public static Item zincSheet2x;
 	public static Item electrumSheet2x;
 	public static Item cupronickelSheet2x;
+	public static Item osmiumSheet2x;
+	public static Item aluminumSheet2x;
+	public static Item tungstenSheet2x;
 
 	public static Item brassSheet2x;
 	public static Item goldSheet2x;
@@ -925,6 +941,9 @@ public class TFCItems
 		GameRegistry.registerItem(zincIngot, zincIngot.getUnlocalizedName());
 		GameRegistry.registerItem(electrumIngot, electrumIngot.getUnlocalizedName());
 		GameRegistry.registerItem(cupronickelIngot, cupronickelIngot.getUnlocalizedName());
+		GameRegistry.registerItem(osmiumIngot, osmiumIngot.getUnlocalizedName());
+		GameRegistry.registerItem(aluminumIngot, aluminumIngot.getUnlocalizedName());
+		GameRegistry.registerItem(tungstenIngot, tungstenIngot.getUnlocalizedName());
 
 		GameRegistry.registerItem(bismuthIngot2x, bismuthIngot2x.getUnlocalizedName());
 		GameRegistry.registerItem(bismuthBronzeIngot2x, bismuthBronzeIngot2x.getUnlocalizedName());
@@ -949,6 +968,9 @@ public class TFCItems
 		GameRegistry.registerItem(zincIngot2x, zincIngot2x.getUnlocalizedName());
 		GameRegistry.registerItem(electrumIngot2x, electrumIngot2x.getUnlocalizedName());
 		GameRegistry.registerItem(cupronickelIngot2x, cupronickelIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(osmiumIngot2x, osmiumIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(aluminumIngot2x, aluminumIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(tungstenIngot2x, tungstenIngot2x.getUnlocalizedName());
 
 		GameRegistry.registerItem(gemRuby, gemRuby.getUnlocalizedName());
 		GameRegistry.registerItem(gemSapphire, gemSapphire.getUnlocalizedName());
@@ -1127,6 +1149,9 @@ public class TFCItems
 		GameRegistry.registerItem(zincUnshaped, zincUnshaped.getUnlocalizedName());
 		GameRegistry.registerItem(electrumUnshaped, electrumUnshaped.getUnlocalizedName());
 		GameRegistry.registerItem(cupronickelUnshaped, cupronickelUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(osmiumUnshaped, osmiumUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(aluminumUnshaped, aluminumUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(tungstenUnshaped, tungstenUnshaped.getUnlocalizedName());
 
 		GameRegistry.registerItem(stoneHammer, stoneHammer.getUnlocalizedName());
 		GameRegistry.registerItem(bismuthBronzeHammer, bismuthBronzeHammer.getUnlocalizedName());
@@ -1565,6 +1590,10 @@ public class TFCItems
 		GameRegistry.registerItem(zincSheet, zincSheet.getUnlocalizedName());
 		GameRegistry.registerItem(electrumSheet, electrumSheet.getUnlocalizedName());
 		GameRegistry.registerItem(cupronickelSheet, cupronickelSheet.getUnlocalizedName());
+		GameRegistry.registerItem(osmiumSheet, osmiumSheet.getUnlocalizedName());
+		GameRegistry.registerItem(aluminumSheet, aluminumSheet.getUnlocalizedName());
+		GameRegistry.registerItem(tungstenSheet, tungstenSheet.getUnlocalizedName());
+
 		GameRegistry.registerItem(bismuthSheet2x, bismuthSheet2x.getUnlocalizedName());
 		GameRegistry.registerItem(bismuthBronzeSheet2x, bismuthBronzeSheet2x.getUnlocalizedName());
 		GameRegistry.registerItem(blackBronzeSheet2x, blackBronzeSheet2x.getUnlocalizedName());
@@ -1580,6 +1609,10 @@ public class TFCItems
 		GameRegistry.registerItem(zincSheet2x, zincSheet2x.getUnlocalizedName());
 		GameRegistry.registerItem(electrumSheet2x, electrumSheet2x.getUnlocalizedName());
 		GameRegistry.registerItem(cupronickelSheet2x, cupronickelSheet2x.getUnlocalizedName());
+		GameRegistry.registerItem(osmiumSheet2x, osmiumSheet2x.getUnlocalizedName());
+		GameRegistry.registerItem(aluminumSheet2x, aluminumSheet2x.getUnlocalizedName());
+		GameRegistry.registerItem(tungstenSheet2x, tungstenSheet2x.getUnlocalizedName());
+
 		GameRegistry.registerItem(brassSheet, brassSheet.getUnlocalizedName());
 		GameRegistry.registerItem(goldSheet, goldSheet.getUnlocalizedName());
 		GameRegistry.registerItem(leadSheet, leadSheet.getUnlocalizedName());

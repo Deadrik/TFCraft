@@ -265,6 +265,7 @@ public class ItemSetup extends TFCItems {
 
 		smallMetalChunk = new ItemNugget().setUnlocalizedName("MetalNugget");
 		oreChunk = new ItemOre().setFolder("ore/").setUnlocalizedName("Ore");
+		oreMineralChunk = new ItemMineralOre().setFolder("ore/").setUnlocalizedName("Ore");
 		smallOreChunk = new ItemOreSmall().setUnlocalizedName("Small Ore");
 		powder = new ItemTerra().setMetaNames(Global.POWDER).setUnlocalizedName("Powder").setCreativeTab(TFCTabs.TFC_MATERIALS);
 		logs = new ItemLogs().setUnlocalizedName("Log");

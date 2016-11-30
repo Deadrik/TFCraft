@@ -84,6 +84,7 @@ public class TFCBlocks
 	public static Block ore;
 	public static Block ore2;
 	public static Block ore3;
+	public static Block ore4;
 	public static Block sulfur;
 	public static Block planks;
 	public static Block planks2;
@@ -177,7 +178,7 @@ public class TFCBlocks
 	public static Block fireBrick;
 	public static Block metalSheet;
 	public static Block metalBlock;
-	public static Block metalBlock2;
+	public static Block metalAlloyBlock;
 
 	public static Block nestBox;
 

@@ -2,6 +2,7 @@ package com.bioxx.tfc.Items.Tools;
 
 import java.util.*;
 
+import com.bioxx.tfc.Blocks.Terrain.BlockOre2;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -83,8 +84,10 @@ public class ItemProPick extends ItemTerra
 				TEOre te = (TEOre) world.getTileEntity(x, y, z);
 				if (block == TFCBlocks.ore && rank == SkillRank.Master)
 					meta = ((BlockOre) block).getOreGrade(te, meta);
-				if (block == TFCBlocks.ore2) meta = meta + Global.ORE_METAL.length;
-				if (block == TFCBlocks.ore3) meta = meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length;
+				if (block == TFCBlocks.ore2 && rank == SkillRank.Master)
+					meta = ((BlockOre2) block).getOreGrade(te, meta);
+				if (block == TFCBlocks.ore3) meta = meta + Global.ORE_METAL.length + Global.ORE_METAL2.length;
+				if (block == TFCBlocks.ore4) meta = meta + Global.ORE_METAL.length + Global.ORE_METAL2.length + Global.ORE_MINERAL.length;
 				tellResult(player, new ItemStack(TFCItems.oreChunk, 1, meta));
 				return true;
 			}
@@ -96,7 +99,7 @@ public class ItemProPick extends ItemTerra
 					OreSpawnData osd = (OreSpawnData) iter.next();
 					if (osd != null && block == osd.block)
 					{
-						tellResult(player, new ItemStack(block));
+						tellResult(player, new ItemStack(block, 1, meta));
 						return true;
 					}
 				}
@@ -150,7 +153,7 @@ public class ItemProPick extends ItemTerra
 								OreSpawnData osd = (OreSpawnData) iter.next();
 								if (osd != null && block == osd.block)
 								{
-									ore = new ItemStack(block);
+									ore = new ItemStack(block, 1, meta);
 									break;
 								}
 							}

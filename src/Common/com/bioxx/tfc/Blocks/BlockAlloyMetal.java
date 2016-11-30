@@ -19,14 +19,14 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class BlockMetal2 extends BlockMetal
+public class BlockAlloyMetal extends BlockMetal
 {
-    public BlockMetal2(Material material)
+    public BlockAlloyMetal(Material material)
     {
         super(Material.iron);
         setCreativeTab(TFCTabs.TFC_MATERIALS);
-        metalNames = new String[Global.METAL_ALL.length-16];
-        System.arraycopy(Global.METAL_ALL, 16, metalNames, 0, Global.METAL_ALL.length-16);
+        metalNames = new String[Global.ALLOYS_ALL.length];
+        System.arraycopy(Global.ALLOYS_ALL, 0, metalNames, 0, Global.METAL_ALL.length);
         icons = new IIcon[metalNames.length];
     }
 }

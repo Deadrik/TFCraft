@@ -52,6 +52,9 @@ public class TFC_Textures
 	public static IIcon sheetZinc;
 	public static IIcon sheetElectrum;
 	public static IIcon sheetCupronickel;
+	public static IIcon sheetOsmium;
+	public static IIcon sheetAluminum;
+	public static IIcon sheetTungsten;
 
 	/**
 	 * These are defined in BlockHotWaterStill

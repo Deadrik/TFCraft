@@ -25,6 +25,7 @@ public class BlockSetup extends TFCBlocks
 		GameRegistry.registerBlock(ore, "Ore1");
 		GameRegistry.registerBlock(ore2, "Ore2");
 		GameRegistry.registerBlock(ore3, "Ore3");
+		GameRegistry.registerBlock(ore4, "Ore4");
 		GameRegistry.registerBlock(stoneIgIn, ItemStone.class, "StoneIgIn");
 		GameRegistry.registerBlock(stoneIgEx, ItemStone.class, "StoneIgEx");
 		GameRegistry.registerBlock(stoneSed, ItemStone.class, "StoneSed");
@@ -144,7 +145,7 @@ public class BlockSetup extends TFCBlocks
 		GameRegistry.registerBlock(fireBrick, "FireBrick");
 		GameRegistry.registerBlock(metalSheet, "MetalSheet");
 		GameRegistry.registerBlock(metalBlock, ItemMetalBlock1.class, "MetalBlock");
-		GameRegistry.registerBlock(metalBlock2, ItemMetalBlock2.class, "MetalBlock2");
+		GameRegistry.registerBlock(metalAlloyBlock, ItemMetalAlloyBlock.class, "MetalAlloyBlock");
 
 
 		// Wooden Doors
@@ -290,6 +291,7 @@ public class BlockSetup extends TFCBlocks
 		ore = new BlockOre(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
 		ore2 = new BlockOre2(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
 		ore3 = new BlockOre3(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
+		ore4 = new BlockOre4(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
 		worldItem = new BlockWorldItem().setHardness(0.05F).setResistance(1F).setBlockName("LooseRock");
 		sulfur = new BlockSulfur(Material.rock).setBlockName("Sulfur").setHardness(0.5F).setResistance(1F);
 
@@ -419,7 +421,7 @@ public class BlockSetup extends TFCBlocks
 		metalSheet = new BlockMetalSheet().setBlockName("MetalSheet").setHardness(80);
 		leatherRack = new BlockLeatherRack().setBlockName("LeatherRack").setHardness(1);
 		metalBlock = new BlockMetal(Material.iron) {}.setHardness(16F).setResistance(10F).setStepSound(Block.soundTypeMetal).setBlockName("MetalBlock");
-		metalBlock2 = new BlockMetal2(Material.iron) {}.setHardness(16F).setResistance(10F).setStepSound(Block.soundTypeMetal).setBlockName("MetalBlock");
+		metalAlloyBlock = new BlockAlloyMetal(Material.iron) {}.setHardness(16F).setResistance(10F).setStepSound(Block.soundTypeMetal).setBlockName("MetalBlock");
 
 		gravel = new BlockGravel(0).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravels");
 		gravel2 = new BlockGravel(16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravels");
@@ -444,7 +446,7 @@ public class BlockSetup extends TFCBlocks
 		ore2.setHarvestLevel("pickaxe", 1);
 		ore3.setHarvestLevel("pickaxe", 1);
 		metalBlock.setHarvestLevel("pickaxe", 1);
-		metalBlock2.setHarvestLevel("pickaxe", 1);
+		metalAlloyBlock.setHarvestLevel("pickaxe", 1);
 
 		dirt.setHarvestLevel("shovel", 0);
 		dirt2.setHarvestLevel("shovel", 0);

@@ -48,6 +48,7 @@ public class TFC_ConfigFiles
 	public static final String PROTECTION = "spawn protection";
 	public static final String PLAYER = "player";
 	public static final String MATERIALS = "materials";
+	public static final String CRAFTING = "crafting";
 	public static final String SERVER = "server";
 	public static final String OVERWORKED = "overworked chunks";
 	public static final String COLORS = "colors";
@@ -426,6 +427,7 @@ public class TFC_ConfigFiles
 		poorOreUnits = generalConfig.getInt("poorOreUnits", MATERIALS, poorOreUnits, 1, 150, "The metal units provided by a single piece of poor ore.", "config.gui.TFCConfig.materials.poorOreUnits");
 		normalOreUnits = generalConfig.getInt("normalOreUnits", MATERIALS, normalOreUnits, 1, 250, "The metal units provided by a single piece of normal ore.", "config.gui.TFCConfig.materials.normalOreUnits");
 		richOreUnits = generalConfig.getInt("richOreUnits", MATERIALS, richOreUnits, 1, 350, "The metal units provided by a single piece of rich ore", "config.gui.TFCConfig.materials.richOreUnits");
+		enableAluminumSmelting = generalConfig.getBoolean("enableAluminumSmelting", CRAFTING, enableAluminumSmelting, "Set to true to allow Aluminum ore to be meltalbe in crucible.", "config.gui.TFCConfig.ores.enableAluminumSmelting");
 
 		generalConfig.setCategoryLanguageKey(SERVER, "config.gui.TFCConfig.server");
 
