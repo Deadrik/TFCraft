@@ -27,6 +27,7 @@ public class TFCItems
 	public static Item gemDiamond;
 
 	public static Item smallMetalChunk;
+	public static Item metalDust;
 
 	public static Item bismuthIngot;
 	public static Item bismuthBronzeIngot;
@@ -187,6 +188,7 @@ public class TFCItems
 	public static Item oreChunk;
 	public static Item oreMineralChunk;
 	public static Item smallOreChunk;
+	public static Item orePile;
 	public static Item logs;
 	public static Item barrel;
 	public static Item loom;
@@ -1093,9 +1095,12 @@ public class TFCItems
 		GameRegistry.registerItem(highCarbonSteelIngot, highCarbonSteelIngot.getUnlocalizedName());
 
 		GameRegistry.registerItem(smallMetalChunk, smallMetalChunk.getUnlocalizedName());
+		GameRegistry.registerItem(metalDust, metalDust.getUnlocalizedName());
 
 		GameRegistry.registerItem(oreChunk, oreChunk.getUnlocalizedName());
+		GameRegistry.registerItem(oreMineralChunk, oreMineralChunk.getUnlocalizedName());
 		GameRegistry.registerItem(smallOreChunk, smallOreChunk.getUnlocalizedName());
+		GameRegistry.registerItem(orePile, orePile.getUnlocalizedName());
 		GameRegistry.registerItem(logs, logs.getUnlocalizedName());
 
 		GameRegistry.registerItem(igInStoneJavelin, igInStoneJavelin.getUnlocalizedName());

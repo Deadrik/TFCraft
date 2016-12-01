@@ -503,29 +503,38 @@ public class TFC_ConfigFiles
 		oreList.put("Limonite", getOreData("Limonite", "veins", "medium", MOD_ID + ":Ore1", 11, 150, new String[]{"sedimentary"}, 5, 128, 80, 60));
 		oreList.put("Sphalerite", getOreData("Sphalerite", "veins", "medium", MOD_ID + ":Ore1", 12, 100, new String[]{"metamorphic"}, 5, 128, 80, 60));
 		oreList.put("Tetrahedrite", getOreData("Tetrahedrite", "veins", "medium", MOD_ID + ":Ore1", 13, 120, new String[]{"metamorphic"}, 5, 128, 80, 60));
-		oreList.put("Bituminous Coal", getOreData("Bituminous Coal", "default", "large", MOD_ID + ":Ore1", 14, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
-		oreList.put("Lignite", getOreData("Lignite", "default", "medium", MOD_ID + ":Ore1", 15, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
+		oreList.put("Native Osmium", getOreData("Native Osmium", "veins", "medium", MOD_ID + ":Ore1", 14, 100, new String[]{"sedimentary"}, 5, 128, 80, 40));
+		oreList.put("Bauxite", getOreData("Bauxite", "veins", "medium", MOD_ID + ":Ore1", 15, 120, new String[]{"granite", "gneiss", "basalt", "shale"}, 5, 128, 80, 60));
+		oreList.put("Scheelite", getOreData("Scheelite", "veins", "medium", MOD_ID + ":Ore2", 0, 150, new String[]{"igneous intrusive"}, 5, 128, 80, 60));
+		oreList.put("Wolframite", getOreData("Wolframite", "veins", "medium", MOD_ID + ":Ore2", 1, 150, new String[]{"igneous intrusive"}, 5, 128, 80, 60));
 
-		oreList.put("Kaolinite", getOreData("Kaolinite", "default", "medium", MOD_ID + ":Ore2", 0, 90, new String[]{"sedimentary"}, 5, 128, 80, 60));
-		oreList.put("Gypsum", getOreData("Gypsum", "veins", "large", MOD_ID + ":Ore2", 1, 120, new String[]{"sedimentary"}, 5, 128, 80, 60));
-		//WorldGenOre.OreList.put("Satinspar", getOreData("Satinspar", "veins", "small", Reference.ModID + ":Ore2", 2, 150, new String[]{"sedimentary"}, 5, 128, 40, 80));
-		//WorldGenOre.OreList.put("Selenite", getOreData("Selenite", "veins", "medium", Reference.ModID + ":Ore2", 3, 125, new String[]{"igneous extrusive"}, 5, 128, 60, 60));
-		oreList.put("Graphite", getOreData("Graphite", "veins", "medium", MOD_ID + ":Ore2", 4, 100, new String[]{"marble", "gneiss", "quartzite", "schist"}, 5, 128, 80, 60));
-		oreList.put("Kimberlite", getOreData("Kimberlite", "veins", "medium", MOD_ID + ":Ore2", 5, 200, new String[]{"gabbro"}, 5, 128, 30, 80));
-		//WorldGenOre.OreList.put("Petrified Wood", getOreData("Petrified Wood", "veins", "medium", Reference.ModID + ":Ore2", 6, 100, new String[]{"igneous extrusive", "metamorphic", "granite", "limestone"}, 5, 128, 60, 60));
-		//WorldGenOre.OreList.put("Sulfur", getOreData("Sulfur", "veins", "medium", Reference.ModID + ":Ore2", 7, 100, new String[]{"igneous extrusive", "sedimentary"}, 5, 128, 60, 60));
-		oreList.put("Jet", getOreData("Jet", "veins", "large", MOD_ID + ":Ore2", 8, 110, new String[]{"sedimentary"}, 5, 128, 80, 60));
-		//WorldGenOre.OreList.put("Microcline", getOreData("Microcline", "veins", "large", Reference.ModID + ":Ore2", 9, 100, new String[]{"limestone", "marble"}, 5, 128, 60, 60));
-		oreList.put("Pitchblende", getOreData("Pitchblende", "veins", "small", MOD_ID + ":Ore2", 10, 150, new String[]{"granite"}, 5, 128, 80, 60));
-		oreList.put("Cinnabar", getOreData("Cinnabar", "veins", "small", MOD_ID + ":Ore2", 11, 150, new String[]{"igneous extrusive", "shale", "quartzite"}, 5, 128, 30, 80));
-		oreList.put("Cryolite", getOreData("Cryolite", "veins", "small", MOD_ID + ":Ore2", 12, 100, new String[]{"granite"}, 5, 128, 80, 60));
-		oreList.put("Saltpeter", getOreData("Saltpeter", "veins", "medium", MOD_ID + ":Ore2", 13, 120, new String[]{"sedimentary"}, 5, 128, 80, 60));
-		//WorldGenOre.OreList.put("Serpentine", getOreData("Serpentine", "veins", "large", Reference.ModID + ":Ore2", 14, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
-		oreList.put("Sylvite", getOreData("Sylvite", "veins", "medium", MOD_ID + ":Ore2", 15, 100, new String[]{"rock salt"}, 5, 128, 90, 40));
 
-		oreList.put("Borax", getOreData("Borax", "veins", "large", MOD_ID + ":Ore3", 0, 120, new String[]{"rock salt"}, 5, 128, 80, 60));
-		oreList.put("Lapis Lazuli", getOreData("Lapis Lazuli", "veins", "large", MOD_ID + ":Ore3", 2, 120, new String[]{"marble"}, 5, 128, 80, 60));
-		//WorldGenOre.OreList.put("Olivine", getOreData("Olivine", "veins", "small", Reference.ModID + ":Ore3", 1, 150, new String[]{"sedimentary"}, 5, 128, 40, 80));
+
+		oreList.put("Kaolinite", getOreData("Kaolinite", "default", "medium", MOD_ID + ":Ore3", 0, 90, new String[]{"sedimentary"}, 5, 128, 80, 60));
+		oreList.put("Gypsum", getOreData("Gypsum", "veins", "large", MOD_ID + ":Ore3", 1, 120, new String[]{"sedimentary"}, 5, 128, 80, 60));
+		//WorldGenOre.OreList.put("Satinspar", getOreData("Satinspar", "veins", "small", Reference.ModID + ":Ore3", 2, 150, new String[]{"sedimentary"}, 5, 128, 40, 80));
+		//WorldGenOre.OreList.put("Selenite", getOreData("Selenite", "veins", "medium", Reference.ModID + ":Ore3", 3, 125, new String[]{"igneous extrusive"}, 5, 128, 60, 60));
+		oreList.put("Graphite", getOreData("Graphite", "veins", "medium", MOD_ID + ":Ore3", 4, 100, new String[]{"marble", "gneiss", "quartzite", "schist"}, 5, 128, 80, 60));
+		oreList.put("Kimberlite", getOreData("Kimberlite", "veins", "medium", MOD_ID + ":Ore3", 5, 200, new String[]{"gabbro"}, 5, 128, 30, 80));
+		oreList.put("Petrified Wood", getOreData("Petrified Wood", "veins", "small", MOD_ID + ":Ore3", 6, 100, new String[]{"chert", "claystone", "conglomerate", "shale", "limestone"}, 5, 128, 80, 60));
+		//WorldGenOre.OreList.put("Sulfur", getOreData("Sulfur", "veins", "medium", Reference.ModID + ":Ore3", 7, 100, new String[]{"igneous extrusive", "sedimentary"}, 5, 128, 60, 60));
+		oreList.put("Jet", getOreData("Jet", "veins", "large", MOD_ID + ":Ore3", 8, 110, new String[]{"sedimentary"}, 5, 128, 80, 60));
+		//WorldGenOre.OreList.put("Microcline", getOreData("Microcline", "veins", "large", Reference.ModID + ":Ore3", 9, 100, new String[]{"limestone", "marble"}, 5, 128, 60, 60));
+		oreList.put("Pitchblende", getOreData("Pitchblende", "veins", "small", MOD_ID + ":Ore3", 10, 150, new String[]{"granite"}, 5, 128, 80, 60));
+		oreList.put("Cinnabar", getOreData("Cinnabar", "veins", "small", MOD_ID + ":Ore3", 11, 150, new String[]{"igneous extrusive", "shale", "quartzite"}, 5, 128, 30, 80));
+		oreList.put("Cryolite", getOreData("Cryolite", "veins", "small", MOD_ID + ":Ore3", 12, 100, new String[]{"granite"}, 5, 128, 80, 60));
+		oreList.put("Saltpeter", getOreData("Saltpeter", "veins", "medium", MOD_ID + ":Ore3", 13, 120, new String[]{"sedimentary"}, 5, 128, 80, 60));
+		//WorldGenOre.OreList.put("Serpentine", getOreData("Serpentine", "veins", "large", Reference.ModID + ":Ore3", 14, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
+		oreList.put("Borax", getOreData("Borax", "veins", "large", MOD_ID + ":Ore3", 15, 120, new String[]{"rock salt"}, 5, 128, 80, 60));
+
+		oreList.put("Bituminous Coal", getOreData("Bituminous Coal", "default", "large", MOD_ID + ":Ore4", 0, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
+		oreList.put("Lignite", getOreData("Lignite", "default", "medium", MOD_ID + ":Ore4", 1, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
+		//WorldGenOre.OreList.put("Olivine", getOreData("Olivine", "veins", "small", Reference.ModID + ":Ore4", 2, 150, new String[]{"sedimentary"}, 5, 128, 40, 80));
+		oreList.put("Lapis Lazuli", getOreData("Lapis Lazuli", "veins", "large", MOD_ID + ":Ore4", 3, 120, new String[]{"marble"}, 5, 128, 80, 60));
+		oreList.put("Sylvite", getOreData("Sylvite", "veins", "medium", MOD_ID + ":Ore4", 4, 100, new String[]{"rock salt"}, 5, 128, 90, 40));
+		oreList.put("Apatite", getOreData("Apatite", "default", "large", MOD_ID + ":Ore4", 5, 150, new String[]{"chalk", "conglomerate", "limestone", "shale"}, 5, 128, 90, 40));
+		oreList.put("Scapolite", getOreData("Scapolite", "veins", "medium", MOD_ID + ":Ore4", 6, 120, new String[]{"gabbro", "diorite", "gneiss", "limestone"}, 5, 128, 80, 60));
+		oreList.put("Strontium", getOreData("Strontium", "veins", "medium", MOD_ID + ":Ore4", 7, 150, new String[]{"sedimentary"}, 5, 128, 80, 60));
 
 		//Surface Ore
 		oreList.put("Native Copper Surface", getOreData("Native Copper Surface", "veins", "small", MOD_ID + ":Ore1", 0, 35, new String[]{"igneous extrusive"}, 128, 240, 40, 40));
@@ -533,6 +542,7 @@ public class TFC_ConfigFiles
 		oreList.put("Bismuthinite Surface", getOreData("Bismuthinite Surface", "veins", "small", MOD_ID + ":Ore1", 7, 35, new String[]{"igneous extrusive", "sedimentary"}, 128, 240, 40, 40));
 		oreList.put("Sphalerite Surface", getOreData("Sphalerite Surface", "veins", "small", MOD_ID + ":Ore1", 12, 35, new String[]{"metamorphic"}, 128, 240, 40, 40));
 		oreList.put("Tetrahedrite Surface", getOreData("Tetrahedrite Surface", "veins", "small", MOD_ID + ":Ore1", 13, 35, new String[]{"metamorphic"}, 128, 240, 40, 40));
+		oreList.put("Scheelite Surface", getOreData("Scheelite Surface", "veins", "medium", MOD_ID + ":Ore1", 2, 120, new String[]{"granite"}, 128, 240, 40, 40));
 
 		// getCategoryNames returns an ImmutableSet
 		for (String s : oresConfig.getCategoryNames())

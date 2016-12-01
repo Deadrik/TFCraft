@@ -74,40 +74,58 @@ public class Global
 			"Scheelite", "Wolframite"
 	};
 
+	public static final String[] ORE_METAL_ALL = {
+			"Native Copper", "Native Gold", "Native Platinum", "Hematite",
+			"Native Silver", "Cassiterite", "Galena", "Bismuthinite",
+			"Garnierite", "Malachite", "Magnetite", "Limonite",
+			"Sphalerite", "Tetrahedrite", "Native Osmium", "Bauxite",
+			"Scheelite", "Wolframite"
+	};
+
+	public static final String[] ORE_MINERAL = {
+			"Kaolinite", "Gypsum", "Satinspar",  "Selenite", "Graphite",
+			"Kimberlite", "Petrified Wood", "Sulfur", "Jet", "Microcline",
+			"Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine",
+			"Borax"
+	};
+	public static final String[] ORE_MINERAL2 = {
+			"Bituminous Coal", "Lignite", "Olivine", "Lapis Lazuli", "Sylvite",
+			"Apatite", "Scapolite", "Strontium"
+	};
+
+	public static final String[] MINERAL_ALL = {
+			"Kaolinite", "Gypsum", "Satinspar",  "Selenite", "Graphite",
+			"Kimberlite", "Petrified Wood", "Sulfur", "Jet", "Microcline",
+			"Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine",
+			"Borax", "Bituminous Coal", "Lignite", "Olivine", "Lapis Lazuli",
+			"Sylvite", "Apatite", "Scapolite", "Strontium"
+	};
+
 	public static final String[] METAL_ALL = {
 			"Bismuth", "Copper", "Gold", "Wrought Iron", "Lead", "Nickel", "Pig Iron", "Platinum",
 			"Silver", "Steel", "Tin", "Zinc", "Osmium", "Aluminum", "Tungsten"
 	};
 
-	public static final String[] ORE_MINERAL = {
-		"Kaolinite", "Gypsum", "Satinspar",  "Selenite", "Graphite",
-		"Kimberlite", "Petrified Wood", "Sulfur", "Jet", "Microcline",
-		"Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine",
-		"Borax"
-	};
-	public static final String[] ORE_MINERAL2 = {
-		"Bituminous Coal", "Lignite", "Olivine", "Lapis Lazuli", "Sylvite",
-		"Apatite", "Scapolite", "Strontium"
-	};
 
-	public static final String[] MINERAL_ALL = {
-		"Kaolinite", "Gypsum", "Satinspar",  "Selenite", "Graphite",
-		"Kimberlite", "Petrified Wood", "Sulfur", "Jet", "Microcline",
-		"Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine",
-		"Borax", "Bituminous Coal", "Lignite", "Olivine", "Lapis Lazuli",
-		"Sylvite", "Apatite", "Scapolite", "Strontium"
-	};
 	public static final String[] ALLOYS_ALL = {
 			"Bismuth Bronze", "Black Bronze", "Black Steel", "Blue Steel", "Brass", "Bronze",
 			"High Carbon Black Steel", "High Carbon Blue Steel", "High Carbon Red Steel",
 			"Red Steel", "Rose Gold", "Sterling Silver", "Weak Steel", "Weak Blue Steel", "Weak Red Steel",
-			"Electrum", "Cupronickel", "Invar", "Aluminum Brass", "Alumite", "Manyullyn", "Stainless Steel"
+			"Electrum", "Cupronickel"
 	};
 
 	public static final String[] ALLOYS_USABLE = {
 			"Bismuth Bronze", "Black Bronze", "Black Steel", "Blue Steel", "Brass", "Bronze",
-			"Red Steel", "Rose Gold", "Sterling Silver", "Electrum", "Cupronickel", "Invar", "Aluminum Brass",
-			"Alumite", "Manyullyn", "Stainless Steel"
+			"Red Steel", "Rose Gold", "Sterling Silver", "Electrum", "Cupronickel"
+	};
+
+	public static final String[] METAL_ALLOY_ALL = {
+			"Bismuth", "Copper", "Gold", "Wrought Iron", "Lead", "Nickel", "Pig Iron", "Platinum",
+			"Silver", "Steel", "Tin", "Zinc", "Osmium", "Aluminum", "Tungsten",
+			"Bismuth Bronze", "Black Bronze", "Black Steel", "Blue Steel", "Brass", "Bronze",
+			"High Carbon Black Steel", "High Carbon Blue Steel", "High Carbon Red Steel",
+			"Red Steel", "Rose Gold", "Sterling Silver", "Weak Steel", "Weak Blue Steel", "Weak Red Steel",
+			"Electrum", "Cupronickel"
 	};
 
 	public static final String[] WOOD_ALL = {

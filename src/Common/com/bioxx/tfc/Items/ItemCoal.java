@@ -24,7 +24,7 @@ public class ItemCoal extends ItemTerra
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
 		this.setCreativeTab(TFCTabs.TFC_MATERIALS);
-		this.metaNames = new String[] {"coal", "charcoal"};
+		this.metaNames = new String[] {"coal", "charcoal", "coke"};
 		this.setWeight(EnumWeight.LIGHT);
 		this.setSize(EnumSize.TINY);
 	}

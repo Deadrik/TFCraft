@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Items;
 
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -34,7 +35,7 @@ public class ItemMetalDust extends ItemMetal
         metaIcons = new IIcon[metaNames.length];
         for(int i = 0; i < metaNames.length; i++)
         {
-            metaIcons[i] = registerer.registerIcon(ModDetails.ModID + ":" + textureFolder + metaNames[i] + " Dust");
+            metaIcons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder + metaNames[i] + " Dust");
         }
     }
 

@@ -464,8 +464,8 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 					HeatIndex index = manager.findMatchingIndex(itemstack);
 
 					if (item == TFCItems.coal &&
-							itemstack.getItemDamage() == 1 /*||
-							item == TFCItems.Coke*/)
+							(itemstack.getItemDamage() == 1 ||
+							itemstack.getItemDamage() == 2))
 					{
 						for (int c = 0; c < itemstack.stackSize; c++)
 						{

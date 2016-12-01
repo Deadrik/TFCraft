@@ -2026,12 +2026,12 @@ tile.FlowerPot.name=Flower Pot
 
 #== Metal Blocks ==
 tile.MetalBlock.Bismuth.name=Bismuth Block
-tile.MetalBlock.Bismuth Bronze.name=Bismuth Bronze Block
-tile.MetalBlock.Black Bronze.name=Black Bronze Block
-tile.MetalBlock.Black Steel.name=Black Steel Block
-tile.MetalBlock.Blue Steel.name=Blue Steel Block
-tile.MetalBlock.Brass.name=Brass Block
-tile.MetalBlock.Bronze.name=Bronze Block
+tile.MetalAlloyBlock.Bismuth Bronze.name=Bismuth Bronze Block
+tile.MetalAlloyBlock.Black Bronze.name=Black Bronze Block
+tile.MetalAlloyBlock.Black Steel.name=Black Steel Block
+tile.MetalAlloyBlock.Blue Steel.name=Blue Steel Block
+tile.MetalAlloyBlock.Brass.name=Brass Block
+tile.MetalAlloyBlock.Bronze.name=Bronze Block
 tile.MetalBlock.Copper.name=Copper Block
 tile.MetalBlock.Gold.name=Gold Block
 tile.MetalBlock.Wrought Iron.name=Wrought Iron Block
@@ -2039,16 +2039,18 @@ tile.MetalBlock.Lead.name=Lead Block
 tile.MetalBlock.Nickel.name=Nickel Block
 tile.MetalBlock.Pig Iron.name=Pig Iron Block
 tile.MetalBlock.Platinum.name=Platinum Block
-tile.MetalBlock.Red Steel.name=Red Steel Block
-tile.MetalBlock.Rose Gold.name=Rose Gold Block
+tile.MetalAlloyBlock.Red Steel.name=Red Steel Block
+tile.MetalAlloyBlock.Rose Gold.name=Rose Gold Block
 tile.MetalBlock.Silver.name=Silver Block
 tile.MetalBlock.Steel.name=Steel Block
-tile.MetalBlock.Sterling Silver.name=Sterling Silver Block
+tile.MetalAlloyBlock.Sterling Silver.name=Sterling Silver Block
 tile.MetalBlock.Tin.name=Tin Block
 tile.MetalBlock.Zinc.name=Zinc Block
-tile.MetalBlock.Electrum.name=Electrum Block
-tile.MetalBlock.Cupronickel.name=Cupronickel Block
-
+tile.MetalAlloyBlock.Electrum.name=Electrum Block
+tile.MetalAlloyBlock.Cupronickel.name=Cupronickel Block
+tile.MetalBlock.Osmium.name=Osmium Block
+tile.MetalBlock.Aluminum.name=Aluminum Block
+tile.MetalBlock.Tungsten.name=Tungsten Block
 #== Anvils ==
 tile.Anvil.Stone.name=Stone Anvil
 tile.Anvil.Bismuth.name=Bismuth Anvil

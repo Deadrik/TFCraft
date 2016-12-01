@@ -753,6 +753,8 @@ public class TFC_Core
 			return EnumFuelMaterial.COAL;
 		else if(is.getItem() == TFCItems.coal && is.getItemDamage() == 1)
 			return EnumFuelMaterial.CHARCOAL;
+		else if(is.getItem() == TFCItems.coal && is.getItemDamage() == 2)
+			return EnumFuelMaterial.COKE;
 		if(is.getItemDamage() == 0)
 			return EnumFuelMaterial.ASH;
 		else if (is.getItemDamage() == 1)

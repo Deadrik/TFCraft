@@ -2,6 +2,7 @@ package com.bioxx.tfc.Items;
 
 import java.util.List;
 
+import com.bioxx.tfc.api.Constant.Global;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -20,20 +21,21 @@ public class ItemOreSmall extends ItemOre
 		super();
 		this.setWeight(EnumWeight.HEAVY);
 		this.setSize(EnumSize.TINY);
+		metaNames = Global.ORE_METAL_ALL;
 	}
 
 	@Override
 	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
-		for(int i = 0; i < 14; i++)
+		for(int i = 0; i < Global.ORE_METAL_ALL.length; i++)
 			list.add(new ItemStack(this, 1, i));
 	}
 
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		metaIcons = new IIcon[14];
-		for(int i = 0; i < 14; i++)
+		metaIcons = new IIcon[Global.ORE_METAL_ALL.length];
+		for(int i = 0; i < Global.ORE_METAL_ALL.length; i++)
 		{
 			metaIcons[i] = registerer.registerIcon(Reference.MOD_ID + ":" + textureFolder+metaNames[i] + " Small Ore");
 		}
@@ -63,42 +65,6 @@ public class ItemOreSmall extends ItemOre
 		case 15:
 		case 16:
 		case 17: return (short) TFCOptions.smallOreUnits;
-		case 18:
-		case 19:
-		case 20:
-		case 21:
-		case 22:
-		case 23:
-		case 24:
-		case 25:
-		case 26:
-		case 27:
-		case 28:
-		case 29:
-		case 30:
-		case 31:
-		case 32:
-		case 33:
-		case 34:
-		case 35:
-		case 36:
-		case 37:
-		case 38:
-		case 39:
-		case 40:
-		case 41:
-		case 42:
-		case 43:
-		case 44:
-		case 45:
-		case 46:
-		case 47:
-		case 48:
-		case 49:
-		case 50:
-		case 51:
-		case 52:
-		case 53: return 0;
 		}
 		return 0;
 	}

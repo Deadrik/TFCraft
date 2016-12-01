@@ -25,8 +25,8 @@ public class BlockAlloyMetal extends BlockMetal
     {
         super(Material.iron);
         setCreativeTab(TFCTabs.TFC_MATERIALS);
-        metalNames = new String[Global.ALLOYS_ALL.length];
-        System.arraycopy(Global.ALLOYS_ALL, 0, metalNames, 0, Global.METAL_ALL.length);
+        metalNames = new String[Global.ALLOYS_USABLE.length];
+        System.arraycopy(Global.ALLOYS_USABLE, 0, metalNames, 0, Global.ALLOYS_USABLE.length);
         icons = new IIcon[metalNames.length];
     }
 }

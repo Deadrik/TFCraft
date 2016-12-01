@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Items;
 
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;

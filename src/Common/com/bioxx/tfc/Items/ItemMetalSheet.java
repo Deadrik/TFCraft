@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Items;
 
+import com.bioxx.tfc.Items.ItemTerra;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

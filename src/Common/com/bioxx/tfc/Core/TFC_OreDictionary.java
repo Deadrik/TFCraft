@@ -31,6 +31,7 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("plankWood", new ItemStack(TFCBlocks.planks2, 1, WILD));
 
 		OreDictionary.registerOre("woodLumber", new ItemStack(TFCItems.singlePlank, 1, WILD));
+		OreDictionary.registerOre("slabWood", new ItemStack(TFCItems.singlePlank, 1, WILD));
 
 		OreDictionary.registerOre("stickWood", new ItemStack(TFCItems.stick));
 
@@ -140,31 +141,31 @@ public class TFC_OreDictionary
 
 
 
-		OreDictionary.registerOre("oreKaolinite", new ItemStack(TFCItems.oreChunk, 1, 0));
-		OreDictionary.registerOre("oreGypsum", new ItemStack(TFCItems.oreChunk, 1, 1));
-		OreDictionary.registerOre("oreSatinspar", new ItemStack(TFCItems.oreChunk, 1, 2));
-		OreDictionary.registerOre("oreSelenite", new ItemStack(TFCItems.oreChunk, 1, 3));
-		OreDictionary.registerOre("oreGraphite", new ItemStack(TFCItems.oreChunk, 1, 4));
-		OreDictionary.registerOre("oreDiamond", new ItemStack(TFCItems.oreChunk, 1, 5)); //Kimberlite
-		OreDictionary.registerOre("orePetrifiedWood", new ItemStack(TFCItems.oreChunk, 1, 6));
-		OreDictionary.registerOre("oreSulfur", new ItemStack(TFCItems.oreChunk, 1, 7));
-		OreDictionary.registerOre("oreJet", new ItemStack(TFCItems.oreChunk, 1, 8));
-		OreDictionary.registerOre("oreMicrocline", new ItemStack(TFCItems.oreChunk, 1, 9));
-		OreDictionary.registerOre("oreUranium", new ItemStack(TFCItems.oreChunk, 1, 10)); //Pitchblende
+		OreDictionary.registerOre("oreKaolinite", new ItemStack(TFCItems.oreMineralChunk, 1, 0));
+		OreDictionary.registerOre("oreGypsum", new ItemStack(TFCItems.oreMineralChunk, 1, 1));
+		OreDictionary.registerOre("oreSatinspar", new ItemStack(TFCItems.oreMineralChunk, 1, 2));
+		OreDictionary.registerOre("oreSelenite", new ItemStack(TFCItems.oreMineralChunk, 1, 3));
+		OreDictionary.registerOre("oreGraphite", new ItemStack(TFCItems.oreMineralChunk, 1, 4));
+		OreDictionary.registerOre("oreDiamond", new ItemStack(TFCItems.oreMineralChunk, 1, 5)); //Kimberlite
+		OreDictionary.registerOre("orePetrifiedWood", new ItemStack(TFCItems.oreMineralChunk, 1, 6));
+		OreDictionary.registerOre("oreSulfur", new ItemStack(TFCItems.oreMineralChunk, 1, 7));
+		OreDictionary.registerOre("oreJet", new ItemStack(TFCItems.oreMineralChunk, 1, 8));
+		OreDictionary.registerOre("oreMicrocline", new ItemStack(TFCItems.oreMineralChunk, 1, 9));
+		OreDictionary.registerOre("oreUranium", new ItemStack(TFCItems.oreMineralChunk, 1, 10)); //Pitchblende
 
-		OreDictionary.registerOre("oreRedstone", new ItemStack(TFCItems.oreChunk, 1, 11)); //Cinnabar
-		OreDictionary.registerOre("oreRedstone", new ItemStack(TFCItems.oreChunk, 1, 12)); //Cryolite
-		OreDictionary.registerOre("oreSaltpeter", new ItemStack(TFCItems.oreChunk, 1, 13));
-		OreDictionary.registerOre("oreSerpentine", new ItemStack(TFCItems.oreChunk, 1, 14));
-		OreDictionary.registerOre("oreBorax", new ItemStack(TFCItems.oreChunk, 1, 15));
+		OreDictionary.registerOre("oreRedstone", new ItemStack(TFCItems.oreMineralChunk, 1, 11)); //Cinnabar
+		OreDictionary.registerOre("oreRedstone", new ItemStack(TFCItems.oreMineralChunk, 1, 12)); //Cryolite
+		OreDictionary.registerOre("oreSaltpeter", new ItemStack(TFCItems.oreMineralChunk, 1, 13));
+		OreDictionary.registerOre("oreSerpentine", new ItemStack(TFCItems.oreMineralChunk, 1, 14));
+		OreDictionary.registerOre("oreBorax", new ItemStack(TFCItems.oreMineralChunk, 1, 15));
 		OreDictionary.registerOre("oreCoal", new ItemStack(TFCItems.oreMineralChunk, 1, 16)); //Bituminous Coal
 		OreDictionary.registerOre("oreCoal", new ItemStack(TFCItems.oreMineralChunk, 1, 17)); //Lignite
-		OreDictionary.registerOre("oreOlivine", new ItemStack(TFCItems.oreChunk, 1, 18));
-		OreDictionary.registerOre("oreLapis", new ItemStack(TFCItems.oreChunk, 1, 19));
-		OreDictionary.registerOre("oreSylvite", new ItemStack(TFCItems.oreChunk, 1, 20));
-		OreDictionary.registerOre("oreApatite", new ItemStack(TFCItems.oreChunk, 1, 21));
-		OreDictionary.registerOre("oreScapolite", new ItemStack(TFCItems.oreChunk, 1, 22));
-		OreDictionary.registerOre("oreStrontium", new ItemStack(TFCItems.oreChunk, 1, 23));
+		OreDictionary.registerOre("oreOlivine", new ItemStack(TFCItems.oreMineralChunk, 1, 18));
+		OreDictionary.registerOre("oreLapis", new ItemStack(TFCItems.oreMineralChunk, 1, 19));
+		OreDictionary.registerOre("oreSylvite", new ItemStack(TFCItems.oreMineralChunk, 1, 20));
+		OreDictionary.registerOre("oreApatite", new ItemStack(TFCItems.oreMineralChunk, 1, 21));
+		OreDictionary.registerOre("oreScapolite", new ItemStack(TFCItems.oreMineralChunk, 1, 22));
+		OreDictionary.registerOre("oreStrontium", new ItemStack(TFCItems.oreMineralChunk, 1, 23));
 
 		//Ore Powders
 		OreDictionary.registerOre("dustFlux", new ItemStack(TFCItems.powder, 1, 0)); //Flux
@@ -328,33 +329,35 @@ public class TFC_OreDictionary
 
 		//Blocks
 		OreDictionary.registerOre("blockBismuth", new ItemStack(TFCBlocks.metalBlock, 1, 0));
-		OreDictionary.registerOre("blockAnyBronze", new ItemStack(TFCBlocks.metalBlock, 1, 1));
-		OreDictionary.registerOre("blockBismuthBronze", new ItemStack(TFCBlocks.metalBlock, 1, 1));
-		OreDictionary.registerOre("blockAnyBronze", new ItemStack(TFCBlocks.metalBlock, 1, 2));
-		OreDictionary.registerOre("blockBlackBronze", new ItemStack(TFCBlocks.metalBlock, 1, 2));
-		OreDictionary.registerOre("blockBlackSteel", new ItemStack(TFCBlocks.metalBlock, 1, 3));
-		OreDictionary.registerOre("blockBlueSteel", new ItemStack(TFCBlocks.metalBlock, 1, 4));
-		OreDictionary.registerOre("blockBrass", new ItemStack(TFCBlocks.metalBlock, 1, 5));
-		OreDictionary.registerOre("blockAnyBronze", new ItemStack(TFCBlocks.metalBlock, 1, 6));
-		OreDictionary.registerOre("blockBronze", new ItemStack(TFCBlocks.metalBlock, 1, 6));
-		OreDictionary.registerOre("blockCopper", new ItemStack(TFCBlocks.metalBlock, 1, 7));
-		OreDictionary.registerOre("blockGold", new ItemStack(TFCBlocks.metalBlock, 1, 8));
-		OreDictionary.registerOre("blockWroughtIron", new ItemStack(TFCBlocks.metalBlock, 1, 9));
-		OreDictionary.registerOre("blockIron", new ItemStack(TFCBlocks.metalBlock, 1, 9));
-		OreDictionary.registerOre("blockLead", new ItemStack(TFCBlocks.metalBlock, 1, 10));
-		OreDictionary.registerOre("blockNickel", new ItemStack(TFCBlocks.metalBlock, 1, 11));
-		OreDictionary.registerOre("blockPigIron", new ItemStack(TFCBlocks.metalBlock, 1, 12));
-		OreDictionary.registerOre("blockPlatinum", new ItemStack(TFCBlocks.metalBlock, 1, 13));
-		OreDictionary.registerOre("blockRedSteel", new ItemStack(TFCBlocks.metalBlock, 1, 14));
-		OreDictionary.registerOre("blockRoseGold", new ItemStack(TFCBlocks.metalBlock, 1, 15));
-		OreDictionary.registerOre("blockSilver", new ItemStack(TFCBlocks.metalBlock2, 1, 0));
-		OreDictionary.registerOre("blockSteel", new ItemStack(TFCBlocks.metalBlock2, 1, 1));
-		OreDictionary.registerOre("blockSterlingSilver", new ItemStack(TFCBlocks.metalBlock2, 1, 2));
-		OreDictionary.registerOre("blockTin", new ItemStack(TFCBlocks.metalBlock2, 1, 3));
-		OreDictionary.registerOre("blockZinc", new ItemStack(TFCBlocks.metalBlock2, 1, 4));
-		OreDictionary.registerOre("blockElectrum", new ItemStack(TFCBlocks.metalBlock2, 1, 5));
-		OreDictionary.registerOre("blockCupronickel", new ItemStack(TFCBlocks.metalBlock2, 1, 6));
-		OreDictionary.registerOre("blockConstantan", new ItemStack(TFCBlocks.metalBlock2, 1, 6));
+		OreDictionary.registerOre("blockCopper", new ItemStack(TFCBlocks.metalBlock, 1, 1));
+		OreDictionary.registerOre("blockGold", new ItemStack(TFCBlocks.metalBlock, 1, 2));
+		OreDictionary.registerOre("blockWroughtIron", new ItemStack(TFCBlocks.metalBlock, 1, 3));
+		OreDictionary.registerOre("blockIron", new ItemStack(TFCBlocks.metalBlock, 1, 4));
+		OreDictionary.registerOre("blockLead", new ItemStack(TFCBlocks.metalBlock, 1, 5));
+		OreDictionary.registerOre("blockNickel", new ItemStack(TFCBlocks.metalBlock, 1, 6));
+		OreDictionary.registerOre("blockPigIron", new ItemStack(TFCBlocks.metalBlock, 1, 7));
+		OreDictionary.registerOre("blockPlatinum", new ItemStack(TFCBlocks.metalBlock, 1, 8));
+		OreDictionary.registerOre("blockSilver", new ItemStack(TFCBlocks.metalBlock, 1, 9));
+		OreDictionary.registerOre("blockSteel", new ItemStack(TFCBlocks.metalBlock, 1, 10));
+		OreDictionary.registerOre("blockTin", new ItemStack(TFCBlocks.metalBlock, 1, 11));
+		OreDictionary.registerOre("blockZinc", new ItemStack(TFCBlocks.metalBlock, 1, 12));
+
+
+		OreDictionary.registerOre("blockAnyBronze", new ItemStack(TFCBlocks.metalAlloyBlock, 1, 0));
+		OreDictionary.registerOre("blockBismuthBronze", new ItemStack(TFCBlocks.metalAlloyBlock, 1, 0));
+		OreDictionary.registerOre("blockAnyBronze", new ItemStack(TFCBlocks.metalAlloyBlock, 1, 1));
+		OreDictionary.registerOre("blockBlackBronze", new ItemStack(TFCBlocks.metalAlloyBlock, 1, 1));
+		OreDictionary.registerOre("blockBlackSteel", new ItemStack(TFCBlocks.metalAlloyBlock, 1, 2));
+		OreDictionary.registerOre("blockBlueSteel", new ItemStack(TFCBlocks.metalAlloyBlock, 1, 3));
+		OreDictionary.registerOre("blockBrass", new ItemStack(TFCBlocks.metalAlloyBlock, 1, 4));
+		OreDictionary.registerOre("blockAnyBronze", new ItemStack(TFCBlocks.metalAlloyBlock, 1, 5));
+		OreDictionary.registerOre("blockBronze", new ItemStack(TFCBlocks.metalAlloyBlock, 1, 5));
+		OreDictionary.registerOre("blockRedSteel", new ItemStack(TFCBlocks.metalAlloyBlock, 1, 6));
+		OreDictionary.registerOre("blockRoseGold", new ItemStack(TFCBlocks.metalAlloyBlock, 1, 7));
+		OreDictionary.registerOre("blockSterlingSilver", new ItemStack(TFCBlocks.metalAlloyBlock, 1, 8));
+		OreDictionary.registerOre("blockElectrum", new ItemStack(TFCBlocks.metalAlloyBlock, 1, 9));
+		OreDictionary.registerOre("blockCupronickel", new ItemStack(TFCBlocks.metalAlloyBlock, 1, 10));
+		OreDictionary.registerOre("blockConstantan", new ItemStack(TFCBlocks.metalAlloyBlock, 1, 10));
 
 		//Gems
 		OreDictionary.registerOre("gemChippedAgate", new ItemStack(TFCItems.gemAgate));
@@ -446,6 +449,7 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("gemCoal", new ItemStack(TFCItems.coal, 1, 0));
 		OreDictionary.registerOre("gemCharcoal", new ItemStack(Items.coal, 1, 1));
 		OreDictionary.registerOre("gemCharcoal", new ItemStack(TFCItems.coal, 1, 1));
+		OreDictionary.registerOre("dustCoke", new ItemStack(TFCItems.coal, 1, 2));
 
 		//Stone
 		OreDictionary.registerOre("stone", new ItemStack(TFCBlocks.stoneIgEx, 1, WILD));

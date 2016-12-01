@@ -21,7 +21,8 @@ public enum EnumFuelMaterial
 	PEAT("PEAT", 680, 2500, 			new int[]{/*Sweet*/-10,/*Sour*/0,/*Salty*/0,/*Bitter*/10,/*Savory*/0}),
 	ACACIA("ACACIA",650, 1000, 			new int[]{/*Sweet*/6,/*Sour*/6,/*Salty*/0,/*Bitter*/9,/*Savory*/-6}),
 	CHARCOAL("CHARCOAL", 1350, 1800, 	new int[]{/*Sweet*/-10,/*Sour*/8,/*Salty*/0,/*Bitter*/4,/*Savory*/15}),
-	COAL("COAL", 1400, 2200, 			new int[]{/*Sweet*/-18,/*Sour*/13,/*Salty*/0,/*Bitter*/20,/*Savory*/12});
+	COAL("COAL", 1400, 2200, 			new int[]{/*Sweet*/-18,/*Sour*/13,/*Salty*/0,/*Bitter*/20,/*Savory*/12}),
+	COKE("COKE", 1700, 2200,            new int[]{/*Sweet*/-15,/*Sour*/10,/*Salty*/0,/*Bitter*/10,/*Savory*/15});
 
 	public final int burnTimeMax;
 	public final int burnTempMax;//degrees celcius

@@ -26,7 +26,8 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 		TFCItems.copperIngot,TFCItems.goldIngot,TFCItems.wroughtIronIngot,TFCItems.leadIngot,
 		TFCItems.nickelIngot,TFCItems.pigIronIngot,TFCItems.platinumIngot,TFCItems.redSteelIngot,
 		TFCItems.roseGoldIngot,TFCItems.silverIngot,TFCItems.steelIngot,TFCItems.sterlingSilverIngot,
-		TFCItems.tinIngot,TFCItems.zincIngot, TFCItems.unknownIngot};
+		TFCItems.tinIngot,TFCItems.zincIngot, TFCItems.osmiumIngot, TFCItems.aluminumIngot, TFCItems.electrumIngot,
+		TFCItems.cupronickelIngot, TFCItems.unknownIngot};
 
 	@Override
 	public boolean canUpdate()
