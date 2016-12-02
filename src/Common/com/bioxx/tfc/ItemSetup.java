@@ -915,7 +915,7 @@ public class ItemSetup extends TFCItems {
 
 
 
-		fruitTreeSapling = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling");
+		//fruitTreeSapling = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling");
 
 		//mushroom is a food now, with foodID 61
 		//pumpkin is a food now, id = 61

@@ -78,6 +78,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TEDetailed.class, "Detailed");
 		GameRegistry.registerTileEntity(TESpawnMeter.class, "SpawnMeter");
 		GameRegistry.registerTileEntity(TESapling.class, "Sapling");
+		GameRegistry.registerTileEntity(TEFruitTreeSapling.class, "FruitTreeSapling");
 		GameRegistry.registerTileEntity(TEWoodConstruct.class, "WoodConstruct");
 		GameRegistry.registerTileEntity(TEBarrel.class, "Barrel");
 		GameRegistry.registerTileEntity(TEFenceGate.class, "FenceGate");

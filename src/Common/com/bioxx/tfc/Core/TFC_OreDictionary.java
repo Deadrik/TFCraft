@@ -829,16 +829,16 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("seedJute", new ItemStack(TFCItems.seedsJute, 1, WILD));
 
 		//Fruit Tree Saplings
-		OreDictionary.registerOre("fruitTreeSapling", new ItemStack(TFCItems.fruitTreeSapling, 1, WILD));
-		OreDictionary.registerOre("fruitTreeSaplingRedApple", new ItemStack(TFCItems.fruitTreeSapling, 1, 0));
-		OreDictionary.registerOre("fruitTreeSaplingBanana", new ItemStack(TFCItems.fruitTreeSapling, 1, 1));
-		OreDictionary.registerOre("fruitTreeSaplingOrange", new ItemStack(TFCItems.fruitTreeSapling, 1, 2));
-		OreDictionary.registerOre("fruitTreeSaplingGreenApple", new ItemStack(TFCItems.fruitTreeSapling, 1, 3));
-		OreDictionary.registerOre("fruitTreeSaplingLemon", new ItemStack(TFCItems.fruitTreeSapling, 1, 4));
-		OreDictionary.registerOre("fruitTreeSaplingOlive", new ItemStack(TFCItems.fruitTreeSapling, 1, 5));
-		OreDictionary.registerOre("fruitTreeSaplingCherry", new ItemStack(TFCItems.fruitTreeSapling, 1, 6));
-		OreDictionary.registerOre("fruitTreeSaplingPeach", new ItemStack(TFCItems.fruitTreeSapling, 1, 7));
-		OreDictionary.registerOre("fruitTreeSaplingPlum", new ItemStack(TFCItems.fruitTreeSapling, 1, 8));
+		OreDictionary.registerOre("fruitTreeSapling", new ItemStack(TFCBlocks.fruitTreeSapling, 1, WILD));
+		OreDictionary.registerOre("fruitTreeSaplingRedApple", new ItemStack(TFCBlocks.fruitTreeSapling, 1, 0));
+		OreDictionary.registerOre("fruitTreeSaplingBanana", new ItemStack(TFCBlocks.fruitTreeSapling, 1, 1));
+		OreDictionary.registerOre("fruitTreeSaplingOrange", new ItemStack(TFCBlocks.fruitTreeSapling, 1, 2));
+		OreDictionary.registerOre("fruitTreeSaplingGreenApple", new ItemStack(TFCBlocks.fruitTreeSapling, 1, 3));
+		OreDictionary.registerOre("fruitTreeSaplingLemon", new ItemStack(TFCBlocks.fruitTreeSapling, 1, 4));
+		OreDictionary.registerOre("fruitTreeSaplingOlive", new ItemStack(TFCBlocks.fruitTreeSapling, 1, 5));
+		OreDictionary.registerOre("fruitTreeSaplingCherry", new ItemStack(TFCBlocks.fruitTreeSapling, 1, 6));
+		OreDictionary.registerOre("fruitTreeSaplingPeach", new ItemStack(TFCBlocks.fruitTreeSapling, 1, 7));
+		OreDictionary.registerOre("fruitTreeSaplingPlum", new ItemStack(TFCBlocks.fruitTreeSapling, 1, 8));
 
 		//Berry Bushes
 		OreDictionary.registerOre("bushBerry", new ItemStack(TFCBlocks.berryBush, 1, WILD));

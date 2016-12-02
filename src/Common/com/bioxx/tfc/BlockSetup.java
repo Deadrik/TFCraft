@@ -78,6 +78,7 @@ public class BlockSetup extends TFCBlocks
 		GameRegistry.registerBlock(leaves2, ItemCustomWood2.class, "leaves2");
 		GameRegistry.registerBlock(sapling, ItemSapling.class, "sapling");
 		GameRegistry.registerBlock(sapling2, ItemSapling2.class, "sapling2");
+		GameRegistry.registerBlock(fruitTreeSapling, ItemFruitTreeSapling.class, "fruitTreeSapling");
 		GameRegistry.registerBlock(planks, ItemCustomWood.class, "planks");
 		GameRegistry.registerBlock(planks2, ItemCustomWood2.class, "planks2");
 
@@ -336,6 +337,7 @@ public class BlockSetup extends TFCBlocks
 		leaves2 = new BlockCustomLeaves2().setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves2");
 		sapling = new BlockSapling().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling");
 		sapling2 = new BlockSapling2().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling2");
+		fruitTreeSapling = new BlockFruitTreeSapling().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("fruitTreeSapling");
 
 		logNatural = new BlockLogNatural().setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log");
 		logNatural2 = new BlockLogNatural2().setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log2");

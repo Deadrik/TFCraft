@@ -601,7 +601,7 @@ public class TFCItems
 	public static Item seedsSquash;
 	public static Item seedsJute;
 
-	public static Item fruitTreeSapling;
+	//public static Item fruitTreeSapling;
 
 	public static Item redApple;
 	public static Item greenApple;
@@ -1469,7 +1469,7 @@ public class TFCItems
 
 
 		TerraFirmaCraft.LOG.info("Registering Food");
-		GameRegistry.registerItem(fruitTreeSapling, fruitTreeSapling.getUnlocalizedName());
+		//GameRegistry.registerItem(fruitTreeSapling, fruitTreeSapling.getUnlocalizedName());
 		GameRegistry.registerItem(redApple, redApple.getUnlocalizedName());
 		GameRegistry.registerItem(banana, banana.getUnlocalizedName());
 		GameRegistry.registerItem(orange, orange.getUnlocalizedName());

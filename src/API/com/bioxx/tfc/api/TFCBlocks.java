@@ -92,6 +92,7 @@ public class TFCBlocks
 	public static Block sapling;
 	public static Block leaves2;
 	public static Block sapling2;
+	public static Block fruitTreeSapling;
 	public static Block woodSupportV;
 	public static Block woodSupportH;
 	public static Block woodSupportV2;
