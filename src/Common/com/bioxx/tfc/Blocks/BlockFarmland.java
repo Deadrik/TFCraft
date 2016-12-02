@@ -117,30 +117,9 @@ public class BlockFarmland extends BlockContainer
 	@Override
 	public Item getItemDropped(int metadata, Random rand, int fortune)
 	{
-		return Item.getItemById(0);
+		return TFC_Core.getTypeForDirtFromGrass(this).getItemDropped(metadata, rand, fortune);
 	}
 
-	/**
-	 * returns true if there is at least one cropblock nearby (x-1 to x+1, y+1, z-1 to z+1)
-	 */
-	/*private boolean isCropsNearby(World world, int x, int y, int z)
-	{
-		byte var5 = 0;
-		for (int var6 = x - var5; var6 <= x + var5; ++var6)
-		{
-			for (int var7 = z - var5; var7 <= z + var5; ++var7)
-			{
-				Block var8 = world.getBlock(var6, y + 1, var7);
-				if (var8 instanceof IPlantable && canSustainPlant(world, x, y, z, ForgeDirection.UP, (IPlantable)var8))
-					return true;
-			}
-		}
-		return false;
-	}*/
-
-	/**
-	 * returns true if there's water nearby (x-4 to x+4, y to y+1, k-4 to k+4)
-	 */
 	public static boolean isFreshWaterNearby(World world, int i, int j, int k)
 	{
 		for (int x = i - 4; x <= i + 4; ++x)

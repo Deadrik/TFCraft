@@ -658,10 +658,11 @@ public class TFC_Core
 	{
 		if(TFC_Core.isDirt(block))
 			return block;
-		if (block == TFCBlocks.grass || block == TFCBlocks.dryGrass)
+		if (block == TFCBlocks.grass || block == TFCBlocks.dryGrass || block == TFCBlocks.tilledSoil)
 			return TFCBlocks.dirt;
 		return TFCBlocks.dirt2;
 	}
+
 
 	public static Block getTypeForSoil(Block block)
 	{
