@@ -56,7 +56,7 @@ public class TFC_Climate
 		getInstance()._initCache();
 	}
 	//the private functions contain the original code
-	private void _initCache(){
+	protected void _initCache(){
 		//internationally accepted average lapse time is 6.49 K / 1000 m, for the first 11 km of the atmosphere. I suggest graphing our temperature
 				//across the 110 m against 2750 m, so that gives us a change of 1.6225 / 10 blocks, which isn't /terrible/
 				//Now going to attemp exonential growth. calculations but change in temperature at 17.8475 for our system, so that should be the drop at 255.
@@ -247,7 +247,7 @@ public class TFC_Climate
 	{
 		return getInstance()._getHeightAdjustedTemp(world, x, y, z);
 	}
-	private float _getHeightAdjustedTemp(World world, int x, int y, int z)
+	protected float _getHeightAdjustedTemp(World world, int x, int y, int z)
 	{
 		float temp = getTemp(world, x, z);
 		temp += getTemp(world, x+1, z);
@@ -283,7 +283,7 @@ public class TFC_Climate
 	{
 		return getInstance()._adjustHeightToTemp(y, temp);
 	}
-	private float _adjustHeightToTemp(int y, float temp)
+	protected float _adjustHeightToTemp(int y, float temp)
 	{
 		//internationally accepted average lapse time is 6.49 K / 1000 m, for the first 11 km of the atmosphere. I suggest graphing our temperature
 		//across the 110 m against 2750 m, so that gives us a change of 1.6225 / 10 blocks, which isn't /terrible/
@@ -309,7 +309,7 @@ public class TFC_Climate
 	{
 		return getInstance()._getHeightAdjustedTempSpecificDay(world, day, x, y, z);
 	}
-	private float _getHeightAdjustedTempSpecificDay(World world,int day, int x, int y, int z)
+	protected float _getHeightAdjustedTempSpecificDay(World world,int day, int x, int y, int z)
 	{
 		float temp = getTempSpecificDay(world, day, x, z);
 		temp = adjustHeightToTemp(y,temp);
@@ -320,7 +320,7 @@ public class TFC_Climate
 	{
 		return getInstance()._getHeightAdjustedTempSpecificDay(world, day, hour, x, y, z);
 	}
-	private float _getHeightAdjustedTempSpecificDay(World world,int day, int hour, int x, int y, int z)
+	protected float _getHeightAdjustedTempSpecificDay(World world,int day, int hour, int x, int y, int z)
 	{
 		float temp = getTemp(world, day, hour, x, z);
 		temp = adjustHeightToTemp(y,temp);
@@ -331,7 +331,7 @@ public class TFC_Climate
 	{
 		return getInstance()._getHeightAdjustedBioTemp(world, day, x, y, z);
 	}
-	private float _getHeightAdjustedBioTemp(World world,int day, int x, int y, int z)
+	protected float _getHeightAdjustedBioTemp(World world,int day, int x, int y, int z)
 	{
 		float temp = getBioTemp(world, day, x, z);
 		temp = adjustHeightToTemp(y,temp);
@@ -342,7 +342,7 @@ public class TFC_Climate
 	{
 		return getInstance()._getMaxTemperature();
 	}
-	private float _getMaxTemperature()
+	protected float _getMaxTemperature()
 	{
 		return 52;
 	}
@@ -351,7 +351,7 @@ public class TFC_Climate
 	{
 		return getInstance()._getBioTemperatureHeight(world, x, y, z);
 	}
-	private float _getBioTemperatureHeight(World world,int x, int y, int z)
+	protected float _getBioTemperatureHeight(World world,int x, int y, int z)
 	{
 		float temp = 0;
 		for(int i = 0; i < 12; i++)
@@ -368,7 +368,7 @@ public class TFC_Climate
 	{
 		return getInstance()._getBioTemperature(world, x, z);
 	}
-	private float _getBioTemperature(World world,int x, int z)
+	protected float _getBioTemperature(World world,int x, int z)
 	{
 		float temp = 0;
 		for(int i = 0; i < 24; i++)
@@ -389,7 +389,7 @@ public class TFC_Climate
 	{
 		return getInstance()._getGrassColor(world, x, y, z);
 	}
-	private int _getGrassColor(World world, int x, int y, int z)
+	protected int _getGrassColor(World world, int x, int y, int z)
 	{
 		float temp = (getTemp(world, x, z) + getMaxTemperature()) / (getMaxTemperature() * 2);
 
@@ -409,7 +409,7 @@ public class TFC_Climate
 	{
 		return getInstance()._getFoliageColor(world, x, y, z);
 	}
-	private int _getFoliageColor(World world, int x, int y, int z)
+	protected int _getFoliageColor(World world, int x, int y, int z)
 	{
 		float temperature = getHeightAdjustedTempSpecificDay(world, TFC_Time.getDayOfYear(), x, y, z);
 		float rainfall = getRainfall(world, x, y, z);
@@ -436,7 +436,7 @@ public class TFC_Climate
 	{
 		return getInstance()._getFoliageColorEvergreen(world, x, y, z);
 	}
-	private int _getFoliageColorEvergreen(World world, int x, int y, int z)
+	protected int _getFoliageColorEvergreen(World world, int x, int y, int z)
 	{
 		//int month = TFC_Time.getSeasonAdjustedMonth(z);
 		float rainfall = getRainfall(world, x, y, z);
@@ -462,7 +462,7 @@ public class TFC_Climate
 	{
 		return getInstance()._getRainfall(world, x, y, z);
 	}
-	private float _getRainfall(World world, int x, int y, int z)
+	protected float _getRainfall(World world, int x, int y, int z)
 	{
 		if (world.isRemote && TFC_Core.getCDM(world) != null)
 		{
@@ -484,7 +484,7 @@ public class TFC_Climate
 	{
 		return getInstance()._getTreeLayer(world, x, y, z, index);
 	}
-	private int _getTreeLayer(World world,int x, int y, int z, int index)
+	protected int _getTreeLayer(World world,int x, int y, int z, int index)
 	{
 		return getCacheManager(world).getTreeLayerAt(x, z, index).data1;
 	}
@@ -493,7 +493,7 @@ public class TFC_Climate
 	{
 		return getInstance()._getRockLayer(world, x, y, z, index);
 	}
-	private DataLayer _getRockLayer(World world,int x, int y, int z, int index)
+	protected DataLayer _getRockLayer(World world,int x, int y, int z, int index)
 	{
 		return getCacheManager(world).getRockLayerAt(x, z, index);
 	}
@@ -502,7 +502,7 @@ public class TFC_Climate
 	{
 		return getInstance()._getMaxZPos();
 	}
-	private int _getMaxZPos()
+	protected int _getMaxZPos()
 	{
 		return 30000;
 	}
@@ -511,7 +511,7 @@ public class TFC_Climate
 	{
 		return getInstance()._isSwamp(world, x, y, z);
 	}
-	private boolean _isSwamp(World world, int x, int y, int z)
+	protected boolean _isSwamp(World world, int x, int y, int z)
 	{
 		float rain = getRainfall(world, x, y, z);
 		float evt = getCacheManager(world).getEVTLayerAt(x, z).floatdata1;
@@ -522,7 +522,7 @@ public class TFC_Climate
 	{
 		return getInstance()._getStability(world, x, z);
 	}
-	private int _getStability(World world, int x, int z)
+	protected int _getStability(World world, int x, int z)
 	{
 		if (getCacheManager(world) != null)
 			return getCacheManager(world).getStabilityLayerAt(x, z).data1;
@@ -534,7 +534,7 @@ public class TFC_Climate
 	{
 		return getInstance()._getCacheManager(world);
 	}
-	private WorldCacheManager _getCacheManager(World world)
+	protected WorldCacheManager _getCacheManager(World world)
 	{
 		return worldPair.get(world);
 	}
@@ -543,7 +543,7 @@ public class TFC_Climate
 	{
 		getInstance()._removeCacheManager(world);;
 	}
-	private void _removeCacheManager(World world)
+	protected void _removeCacheManager(World world)
 	{
 		if(worldPair.containsKey(world))
 			worldPair.remove(world);
