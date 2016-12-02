@@ -28,7 +28,7 @@ public class TFC_Climate
 	//private static int[][] insolationMap;
 
 	//it is not possible to create an instance ecept for the class itself
-	private TFC_Climate()
+	protected TFC_Climate()
 	{
 		
 	}
