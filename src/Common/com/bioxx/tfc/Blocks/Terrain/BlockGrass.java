@@ -232,10 +232,12 @@ public class BlockGrass extends BlockTerra
 								else if (rand.nextInt(15000) == 0)
 									new WorldGenSaplings().generate(world, rand, i, j, k);	
 							}
-							else if (rand.nextInt(20000) == 0 && !WorldGenLooseRocks.rocksNearby(world, i, j, k) && temp < 15)
-								new WorldGenLooseRocks().generateRocks(world, rand, i, j, k);
-							else if (rand.nextInt(20000) == 0 && temp < 15)
-								new WorldGenLooseRocks().generateSticks(world, rand, i, j, k);
+							else if (TFCOptions.enableDebrisRegen) {
+								if (rand.nextInt(20000) == 0 && !WorldGenLooseRocks.rocksNearby(world, i, j, k) && temp < 15)
+									new WorldGenLooseRocks().generateRocks(world, rand, i, j, k);
+								if (rand.nextInt(20000) == 0 && temp < 15)
+									new WorldGenLooseRocks().generateSticks(world, rand, i, j, k);
+							}
 
 						}
 						

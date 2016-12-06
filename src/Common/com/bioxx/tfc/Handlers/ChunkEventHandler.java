@@ -3,6 +3,7 @@ package com.bioxx.tfc.Handlers;
 import java.util.List;
 import java.util.Random;
 
+import com.bioxx.tfc.api.TFCOptions;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.ChunkPosition;
@@ -53,17 +54,17 @@ public class ChunkEventHandler
 					cd.fishPop *= Math.pow(1.2,cd.lastSpringGen - TFC_Time.getYear());
 					cd.fishPop = Math.min(cd.fishPop, ChunkData.FISH_POP_MAX);
 					//seaweed regen
-					if(rand.nextInt(50) == 0)
-					{
-						int waterPlantsPerChunk = 10;
-						int var2;
-						for (var2 = 0; var2 < waterPlantsPerChunk; ++var2)
-						{
-							int xCoord = (chunkX << 4) + rand.nextInt(16) + 8;
-							int zCoord = (chunkZ << 4) + rand.nextInt(16) + 8;
-							int yCoord = event.world.getPrecipitationHeight(xCoord, zCoord)-1;
-							if (TFC_Climate.getBioTemperatureHeight(event.world, xCoord, yCoord, zCoord) >= 7)
-								new WorldGenWaterPlants(TFCBlocks.waterPlant).generate(event.world, rand, xCoord, yCoord, zCoord);
+					if(TFCOptions.enableSeaweedRegen) {
+						if (rand.nextInt(50) == 0) {
+							int waterPlantsPerChunk = 10;
+							int var2;
+							for (var2 = 0; var2 < waterPlantsPerChunk; ++var2) {
+								int xCoord = (chunkX << 4) + rand.nextInt(16) + 8;
+								int zCoord = (chunkZ << 4) + rand.nextInt(16) + 8;
+								int yCoord = event.world.getPrecipitationHeight(xCoord, zCoord) - 1;
+								if (TFC_Climate.getBioTemperatureHeight(event.world, xCoord, yCoord, zCoord) >= 7)
+									new WorldGenWaterPlants(TFCBlocks.waterPlant).generate(event.world, rand, xCoord, yCoord, zCoord);
+							}
 						}
 					}
 				}
@@ -80,15 +81,13 @@ public class ChunkEventHandler
 					int z = (chunkZ << 4) + event.world.rand.nextInt(16) + 8;
 					cropGen.generate(event.world, event.world.rand, x, z, num);
 				}
-				//berry bush regen
-				if (event.world.rand.nextInt(500) == 0)
-				{
-					WorldGenPlants plants = new WorldGenPlants();
-					plants.genBushes(rand, chunkX, chunkZ, event.world);
+				if(TFCOptions.enableBerryBushRegen) {
+					//berry bush regen
+					if (event.world.rand.nextInt(500) == 0) {
+						WorldGenPlants plants = new WorldGenPlants();
+						plants.genBushes(rand, chunkX, chunkZ, event.world);
+					}
 				}
-					
-				
-				
 			}
 			else if(TFC_Time.getYear() > cd.lastSpringGen && month >= 6)
 			{

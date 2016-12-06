@@ -14,6 +14,9 @@ public class TFCOptions
 	public static boolean enableBetterGrass = true;
 	public static boolean enableSaplingDrops = true;
 	public static boolean enableSeedDrops = true;
+	public static boolean enableSeaweedRegen = false;
+	public static boolean enableBerryBushRegen = false;
+	public static boolean enableDebrisRegen = false;
 	public static boolean enableDebugMode;
 	public static boolean enableFiniteWater;
 	public static boolean onionsAreGross;
