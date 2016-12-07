@@ -2,12 +2,16 @@ package com.bioxx.tfc.Core.Player;
 
 import java.util.Random;
 
+import com.bioxx.tfc.Food.TFCPotion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -186,8 +190,14 @@ public class FoodStatsTFC
 						waterLevel = 0;
 					if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0 && temp > 35)
 					{
-						TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("gui.warning.heatstroke"));
-						player.attackEntityFrom(new DamageSource("heatStroke").setDamageBypassesArmor().setDamageIsAbsolute(), 2);
+						boolean heatstroke = true;
+
+						if (heatstroke && player.worldObj.canBlockSeeTheSky(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ)))
+							{
+								        player.addPotionEffect(new PotionEffect(TFCPotion.heatstroke.id, 20, 0, false));
+										//TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("gui.warning.heatstroke"));
+										player.attackEntityFrom(new DamageSource("heatStroke").setDamageBypassesArmor().setDamageIsAbsolute(), 2);
+									}
 					}
 						
 				}

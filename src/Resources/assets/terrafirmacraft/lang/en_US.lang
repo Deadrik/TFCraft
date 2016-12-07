@@ -1,4 +1,4 @@
-﻿#en_US
+#en_US
 #This is the Main language configuration file
 #
 #If you want to color code the text then I recommend you visit http://www.minecraftwiki.net/wiki/Formatting_codes#Color_codes
@@ -14,6 +14,7 @@ key.ToolMode=Cycle Tool Mode
 key.LockTool=Lock Tool Location
 
 effect.bleed=Bleeding
+effect.heatstroke=Heatstroke
 death.attack.alcohol=%1$s died of alcohol poisoning
 death.attack.heatStroke=%1$s died of heat stroke
 death.attack.caveIn=%1$s was crushed by falling cobblestone
