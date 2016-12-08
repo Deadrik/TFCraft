@@ -34,6 +34,8 @@ import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 
+import static net.minecraft.init.Items.glass_bottle;
+
 public class ItemSetup extends TFCItems {
 
 	public static void setup()
@@ -69,7 +71,7 @@ public class ItemSetup extends TFCItems {
 		Items.bow = (ItemBow) bow;
 		arrow = new ItemArrow().setUnlocalizedName("arrow").setCreativeTab(TFCTabs.TFC_WEAPONS);
 		dye = new ItemDyeCustom().setUnlocalizedName("dyePowder").setTextureName("dye_powder").setCreativeTab(TFCTabs.TFC_MATERIALS);
-		glassBottle = new ItemGlassBottle().setUnlocalizedName("Glass Bottle");
+		//glassBottle = new ItemGlassBottle().setUnlocalizedName("Glass Bottle");
 		potion = new ItemCustomPotion().setUnlocalizedName("potion").setTextureName("potion");
 		rope = new ItemCustomLeash().setUnlocalizedName("Rope").setCreativeTab(TFCTabs.TFC_TOOLS);
 		Items.lead = rope;
@@ -489,6 +491,7 @@ public class ItemSetup extends TFCItems {
 		woodenBucketWater = new ItemCustomBucket(TFCBlocks.freshWater, woodenBucketEmpty).setUnlocalizedName("Wooden Bucket Water");
 		woodenBucketSaltWater = new ItemCustomBucket(TFCBlocks.saltWater, woodenBucketEmpty).setUnlocalizedName("Wooden Bucket Salt Water");
 		woodenBucketMilk = new ItemCustomBucketMilk().setUnlocalizedName("Wooden Bucket Milk").setContainerItem(woodenBucketEmpty).setCreativeTab(TFCTabs.TFC_FOODS);
+		bottleMilk = new ItemBottleMilk().setUnlocalizedName("Bottle of Milk").setContainerItem(glass_bottle).setCreativeTab(TFCTabs.TFC_FOODS);
 
 		bismuthBronzeKnifeHead = new ItemMiscToolHead().setUnlocalizedName("Bismuth Bronze Knife Blade");
 		blackBronzeKnifeHead = new ItemMiscToolHead().setUnlocalizedName("Black Bronze Knife Blade");

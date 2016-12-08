@@ -579,6 +579,7 @@ public class TFCItems
 	public static Item woodenBucketWater;
 	public static Item woodenBucketSaltWater;
 	public static Item woodenBucketMilk;
+	public static Item bottleMilk;
 
 	/**Food Related Items and Blocks*/
 	public static Item seedsWheat;
@@ -1306,6 +1307,7 @@ public class TFCItems
 		GameRegistry.registerItem(woodenBucketWater, woodenBucketWater.getUnlocalizedName());
 		GameRegistry.registerItem(woodenBucketSaltWater, woodenBucketSaltWater.getUnlocalizedName());
 		GameRegistry.registerItem(woodenBucketMilk, woodenBucketMilk.getUnlocalizedName());
+		GameRegistry.registerItem(bottleMilk, bottleMilk.getUnlocalizedName());
 
 		GameRegistry.registerItem(bismuthBronzeKnifeHead, bismuthBronzeKnifeHead.getUnlocalizedName());
 		GameRegistry.registerItem(blackBronzeKnifeHead, blackBronzeKnifeHead.getUnlocalizedName());
@@ -1378,7 +1380,7 @@ public class TFCItems
 		GameRegistry.registerItem(doorKapok, doorKapok.getUnlocalizedName());
 		GameRegistry.registerItem(doorAcacia, doorAcacia.getUnlocalizedName());
 
-		GameRegistry.registerItem(glassBottle, glassBottle.getUnlocalizedName());
+		//GameRegistry.registerItem(glassBottle, glassBottle.getUnlocalizedName());
 		GameRegistry.registerItem(beer, beer.getUnlocalizedName());
 		GameRegistry.registerItem(cider, cider.getUnlocalizedName());
 		GameRegistry.registerItem(rum, rum.getUnlocalizedName());

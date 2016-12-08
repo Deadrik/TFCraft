@@ -165,7 +165,7 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.painting, 1), "###", "#$#", "###", '#', "stickWood", '$', "materialCloth"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.carpet, 2, 0), "$$", '$', "materialCloth"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCBlocks.litPumpkin, 1), "blockTorch", "blockPumpkin"));
-		GameRegistry.addRecipe(new ItemStack(TFCItems.glassBottle, 3), "# #", " # ", '#', new ItemStack(Blocks.glass));
+		//GameRegistry.addRecipe(new ItemStack(TFCItems.glassBottle, 3), "# #", " # ", '#', new ItemStack(Blocks.glass));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.paper, 3), "###", '#', "itemReed"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Items.book, 1), new ItemStack(Items.paper), new ItemStack(Items.paper), new ItemStack(Items.paper), "materialLeather"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.compass, 1), "I", "R", "G", 'I', "oreSmallIron", 'R', Items.redstone, 'G', new ItemStack(TFCItems.goldPan)));
@@ -594,7 +594,7 @@ public class Recipes
 		removeRecipe(new ItemStack(Items.flint_and_steel));
 		removeRecipe(new ItemStack(Items.coal, 9));
 		removeRecipe(new ItemStack(Items.sugar));
-		removeRecipe(new ItemStack(Items.glass_bottle, 3));
+		//removeRecipe(new ItemStack(Items.glass_bottle, 3));
 		removeRecipe(new ItemStack(Items.paper, 3));
 		removeRecipe(new ItemStack(Items.comparator));
 		removeRecipe(new ItemStack(Blocks.dispenser));

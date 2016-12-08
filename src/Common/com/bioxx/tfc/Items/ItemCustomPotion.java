@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -64,7 +65,7 @@ public class ItemCustomPotion extends ItemPotion
 
 			if (!broken && is.stackSize <= 0)
 			{
-				return new ItemStack(TFCItems.glassBottle);
+				return new ItemStack(Items.glass_bottle);
 			}
 		}
 
