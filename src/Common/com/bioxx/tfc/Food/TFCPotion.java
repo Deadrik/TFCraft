@@ -63,7 +63,7 @@ public class TFCPotion extends Potion
 	public static void setup()
 	{
 		bleed = new TFCPotion(20, true, 0xFF0000).setPotionName("effect.bleed").setIconIndex(4, 0).setEffectiveness(0.25D);
-        heatstroke = new TFCPotion(18, true, 0xFFFF00).setPotionName("effect.heatstroke").setIconIndex(3, 1).setEffectiveness(0.25D);
+        heatstroke = new TFCPotion(24, true, 0xFFFF00).setPotionName("effect.heatstroke").setIconIndex(3, 1).setEffectiveness(0.25D);
 	}
 
 }
