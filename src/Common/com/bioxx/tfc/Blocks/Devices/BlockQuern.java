@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Blocks.Devices;
 
+import com.bioxx.tfc.api.TFCOptions;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,9 +40,16 @@ public class BlockQuern extends BlockTerraContainer
 		super.onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
 		TEQuern te = (TEQuern) world.getTileEntity(x, y, z);
 
-		//TerraFirmaCraft.log.info("----X:"+hitX+" Z:"+hitZ+" Y:"+hitY+" Side:"+side); //Nice way to find out where the mouse is pointing at
-		Boolean hit = side == 1 && hitX >= 0.70 && hitX <= 90 && hitZ >= 0.70 && hitZ <= 0.90 ||
-				side == 5 && hitZ >= 0.8 && hitZ <= 0.99 && hitY >= 0.85;
+		if(TFCOptions.enableDebugMode)
+		{
+			TerraFirmaCraft.LOG.info("----X:"+hitX+" Z:"+hitZ+" Y:"+hitY+" Side:"+side); //Nice way to find out where the mouse is pointing at
+		}
+		Boolean hit = side == 1 && hitX >= 0.68 && hitX <= 1.0 && hitZ >= 0.68 && hitZ <= 1.0 ||
+
+				side == 2 && hitX >= 0.67 && hitX <= 0.85 && hitY >= 0.83 ||
+				side == 3 && hitX >= 0.67 && hitX <= 0.85 && hitY >= 0.83 ||
+				side == 4 && hitZ >= 0.67 && hitZ <= 0.85 && hitY >= 0.83 ||
+				side == 5 && hitZ >= 0.67 && hitZ <= 0.85 && hitY >= 0.83;
 
 		if(!world.isRemote)
 		{
