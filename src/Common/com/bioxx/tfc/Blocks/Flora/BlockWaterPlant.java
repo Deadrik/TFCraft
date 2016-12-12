@@ -90,7 +90,7 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 			if (TFC_Core.isSaltWater(world.getBlock(x, y+1, z)) && entityplayer.inventory.getCurrentItem() != null && 
 					entityplayer.inventory.getCurrentItem().getItem() instanceof ItemKnife)
 			{
-				dropBlockAsItem(world, x, y, z, getSeaWeed(world.rand));
+				dropBlockAsItem(world, x, y+1, z, getSeaWeed(world.rand));
 				doBeforeFall(world, x, y, z);
 			}
 		}
@@ -105,7 +105,7 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 			if (TFC_Core.isSaltWater(world.getBlock(x, y + 1, z)) && entityplayer.inventory.getCurrentItem() != null && 
 					entityplayer.inventory.getCurrentItem().getItem() instanceof ItemKnife)
 			{
-				dropBlockAsItem(world, x, y, z, getSeaWeed(world.rand));
+				dropBlockAsItem(world, x, y+1, z, getSeaWeed(world.rand));
 				doBeforeFall(world, x, y, z);
 				return true;
 			}
