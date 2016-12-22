@@ -79,6 +79,39 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	}
 
 	@Override
+	public boolean doesContainerItemLeaveCraftingGrid(ItemStack ItemStack)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean getShareTag()
+	{
+		return true;
+	}
+
+	@Override
+	public ItemStack getContainerItem(ItemStack itemStack)
+	{
+		ItemStack container = itemStack.copy();
+		container.setItemDamage(container.getItemDamage() + 1);
+		container.stackSize = 1;
+		return container;
+	}
+
+	@Override
+	public boolean hasContainerItem(ItemStack stack)
+	{
+		return true;
+	}
+
+	@Override
+	public boolean isRepairable()
+	{
+		return false;
+	}
+
+	@Override
 	public EnumSize getSize(ItemStack is)
 	{
 		return EnumSize.LARGE;
