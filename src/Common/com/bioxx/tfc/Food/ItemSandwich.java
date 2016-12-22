@@ -20,6 +20,7 @@ public class ItemSandwich extends ItemMeal
 		this.metaNames = new String[]{"Sandwich Wheat","Sandwich Oat","Sandwich Barley","Sandwich Rye","Sandwich Corn","Sandwich Rice"};
 		this.metaIcons = new IIcon[6];
 		this.setFolder("food/");
+		this.setMaxEatAmount(10f);
 	}
 
 	@Override
@@ -33,16 +34,6 @@ public class ItemSandwich extends ItemMeal
 			if (fg[i] != -1)
 				arraylist.add(localize(fg[i]));
 		}
-	}
-
-	@Override
-	protected float getEatAmount(FoodStatsTFC fs, float amount)
-	{
-		float eatAmount = Math.min(amount, 10);
-		float stomachDiff = fs.stomachLevel+eatAmount-fs.getMaxStomach(fs.player);
-		if(stomachDiff > 0)
-			eatAmount-=stomachDiff;
-		return eatAmount;
 	}
 
 	@Override
