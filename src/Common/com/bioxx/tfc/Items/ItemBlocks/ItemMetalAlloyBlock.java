@@ -9,8 +9,8 @@ public class ItemMetalAlloyBlock extends ItemMetalBlock {
     public ItemMetalAlloyBlock(Block b)
     {
         super(b);
-        metaNames = new String[Global.ALLOYS_ALL.length];
-        System.arraycopy(Global.ALLOYS_ALL, 0, metaNames, 0, Global.ALLOYS_ALL.length);
+        metaNames = new String[Global.ALLOYS_USABLE.length];
+        System.arraycopy(Global.ALLOYS_USABLE, 0, metaNames, 0, Global.ALLOYS_USABLE.length);
         setFolder("metal/");
     }
     @Override
