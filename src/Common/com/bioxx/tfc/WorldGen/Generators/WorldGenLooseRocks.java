@@ -3,6 +3,7 @@ package com.bioxx.tfc.WorldGen.Generators;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.bioxx.tfc.Blocks.Terrain.BlockOre2;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -60,16 +61,20 @@ public class WorldGenLooseRocks implements IWorldGenerator
 			{
 				for(int y = yCoord; y > yCoord-35; y--)
 				{
-					if (world.blockExists(xCoord + x, y, zCoord + z) && world.getBlock(xCoord + x, y, zCoord + z) == TFCBlocks.ore)
+					if (world.blockExists(xCoord + x, y, zCoord + z) &&
+							(world.getBlock(xCoord + x, y, zCoord + z) == TFCBlocks.ore ||
+							 world.getBlock(xCoord + x, y, zCoord + z) == TFCBlocks.ore2))
 					{
 						int m = world.getBlockMetadata(xCoord + x, y, zCoord + z);
 						if(!coreSample.contains(BlockOre.getDroppedItem(m)))
 						{
-							if(m!= 14 && m != 15)
-							{
 								coreSample.add(BlockOre.getDroppedItem(m));
 								coreSampleStacks.add(new ItemStack(BlockOre.getDroppedItem(m), 1, m));
-							}
+						}
+						if(!coreSample.contains(BlockOre2.getDroppedItem(m)))
+						{
+							coreSample.add(BlockOre2.getDroppedItem(m));
+							coreSampleStacks.add(new ItemStack(BlockOre2.getDroppedItem(m), 1, m));
 						}
 					}
 				}
