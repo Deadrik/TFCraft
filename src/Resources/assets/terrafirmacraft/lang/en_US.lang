@@ -997,6 +997,7 @@ item.Ore Pile.Wolframite.name=Wolframite Ore Pile
 #== Ore Blocks ==
 tile.MineralOre.name=Ore
 tile.MineralOre.Bituminous Coal.name=Bituminous Coal
+tile.MineralOre.Lignite.name=Lignite
 tile.MineralOre.Borax.name=Borax
 tile.MineralOre.Cinnabar.name=Cinnabar
 tile.MineralOre.Cryolite.name=Cryolite
@@ -2531,20 +2532,28 @@ gui.metal.WroughtIron=Wrought Iron
 gui.metal.Zinc=Zinc
 gui.metal.Electrum=Electrum
 gui.metal.Cupronickel=Cupronickel
+gui.metal.Osmium=Osmium
+gui.metal.Aluminum=Aluminum
+gui.metal.Tungsten=Tungsten
 
 
 #== GUI Ores - Mostly for WAILA ==
-gui.ore.platinum=Not used
-gui.ore.lead=Not used
-gui.ore.gypsum=Not used
+
+gui.ore.kaolinite=Fire Clay
+gui.ore.gypsum=Decorative
 gui.ore.satinspar=Not used
 gui.ore.selenite=Not used
-gui.ore.petrified.wood=Not used
-gui.ore.jet=Not used
+gui.ore.graphite=Fire Clay
+gui.ore.petrifiedwood=Netherrack
+gui.ore.sulfur=Not used
+gui.ore.jet=Decorative
 gui.ore.microcline=Not used
-gui.ore.pitchblende=Not used
-gui.ore.serpentine=Not used
+gui.ore.pitchblende=Uranium
+gui.ore.serpentine=Decorative
 gui.ore.olivine=Not used
+gui.ore.apatite=Apatite
+gui.ore.scapolite=Glowstone
+gui.ore.strontium=Blaze Rod
 
 #== Plans GUI ==
 gui.plans.axe=Axe
