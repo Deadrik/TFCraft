@@ -90,7 +90,7 @@ public class Global
 	};
 	public static final String[] ORE_MINERAL2 = {
 			"Bituminous Coal", "Lignite", "Olivine", "Lapis Lazuli", "Sylvite",
-			"Apatite", "Scapolite", "Strontium"
+			"Apatite", "Scapolite", "Strontium", "Quartz"
 	};
 
 	public static final String[] MINERAL_ALL = {
@@ -98,7 +98,7 @@ public class Global
 			"Kimberlite", "Petrified Wood", "Sulfur", "Jet", "Microcline",
 			"Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine",
 			"Borax", "Bituminous Coal", "Lignite", "Olivine", "Lapis Lazuli",
-			"Sylvite", "Apatite", "Scapolite", "Strontium"
+			"Sylvite", "Apatite", "Scapolite", "Strontium", "Quartz"
 	};
 
 	public static final String[] METAL_ALL = {

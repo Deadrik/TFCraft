@@ -223,6 +223,8 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("oreApatite", new ItemStack(TFCItems.oreMineralChunk, 1, 21));
 		OreDictionary.registerOre("oreScapolite", new ItemStack(TFCItems.oreMineralChunk, 1, 22));
 		OreDictionary.registerOre("oreStrontium", new ItemStack(TFCItems.oreMineralChunk, 1, 23));
+		OreDictionary.registerOre("oreQuartz", new ItemStack(TFCItems.oreMineralChunk, 1, 24));
+		OreDictionary.registerOre("gemQuartz", new ItemStack(TFCItems.oreMineralChunk, 1, 24));
 
 		//Ore Powders
 		OreDictionary.registerOre("dustFlux", new ItemStack(TFCItems.powder, 1, 0)); //Flux

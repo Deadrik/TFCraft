@@ -1181,6 +1181,9 @@ public class WAILAData implements IWailaDataProvider
 			case 15:
 				currenttip.add(TFC_Core.translate("gui.ore.strontium"));
 				break;
+			case 16:
+				currenttip.add(TFC_Core.translate("gui.ore.quartz"));
+				break;
 			}
 		}
 

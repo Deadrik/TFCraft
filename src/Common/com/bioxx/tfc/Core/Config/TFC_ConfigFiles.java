@@ -538,6 +538,7 @@ public class TFC_ConfigFiles
 		oreList.put("Apatite", getOreData("Apatite", "default", "large", MOD_ID + ":Ore4", 5, 150, new String[]{"chalk", "conglomerate", "limestone", "shale"}, 5, 128, 90, 40));
 		oreList.put("Scapolite", getOreData("Scapolite", "veins", "medium", MOD_ID + ":Ore4", 6, 120, new String[]{"gabbro", "diorite", "gneiss", "limestone"}, 5, 128, 80, 60));
 		oreList.put("Strontium", getOreData("Strontium", "veins", "medium", MOD_ID + ":Ore4", 7, 150, new String[]{"sedimentary"}, 5, 128, 80, 60));
+		oreList.put("Quartz", getOreData("Quartz", "veins", "small", MOD_ID + ":Ore4", 8, 150, new String[]{"rhyolite", "granite", "shale", "schist", "gneiss", "quartzite"}, 5, 128, 80, 60));
 
 		//Surface Ore
 		oreList.put("Native Copper Surface", getOreData("Native Copper Surface", "veins", "small", MOD_ID + ":Ore1", 0, 35, new String[]{"igneous extrusive"}, 128, 240, 40, 40));
