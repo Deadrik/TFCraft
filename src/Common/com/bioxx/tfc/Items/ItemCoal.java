@@ -44,6 +44,7 @@ public class ItemCoal extends ItemTerra
 	{
 		list.add(new ItemStack(item, 1, 0));
 		list.add(new ItemStack(item, 1, 1));
+		list.add(new ItemStack(item, 1, 2));
 	}
 
 	@Override
