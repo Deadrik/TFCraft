@@ -109,6 +109,7 @@ public class TFCBlocks
 	public static Block peatGrass;
 	public static Block worldItem;
 	public static Block logPile;
+	public static Block coalPile;
 	public static Block tilledSoil;
 	public static Block tilledSoil2;
 	public static Block firepit;
@@ -132,6 +133,7 @@ public class TFCBlocks
 	public static Block tallGrass;
 	public static Block charcoal;
 	public static Block detailed;
+	public static Block cokeblock;
 
 	public static Block woodConstruct;
 	public static Block woodVert;

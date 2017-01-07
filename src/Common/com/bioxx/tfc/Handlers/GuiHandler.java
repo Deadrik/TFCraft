@@ -141,6 +141,8 @@ public class GuiHandler implements IGuiHandler
 		{
 			return new ContainerHopper(player.inventory, ((TEHopper) te));
 		}
+			case 50:
+				return new ContainerCoalPile(player.inventory, ((TECoalPile) te), world, x, y, z);
 		default:
 		{
 			return null;

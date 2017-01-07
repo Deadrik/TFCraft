@@ -3,6 +3,7 @@ package com.bioxx.tfc.TileEntities;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -350,6 +351,8 @@ public class TELogPile extends TileEntity implements IInventory
 
 	public void activateCharcoal()
 	{
+		TerraFirmaCraft.LOG.info("activating fire");
+
 		this.fireTimer = (int) TFC_Time.getTotalHours();
 		this.isOnFire = true;
 
@@ -366,6 +369,8 @@ public class TELogPile extends TileEntity implements IInventory
 
 	private void spreadFire(int x, int y, int z)
 	{
+		TerraFirmaCraft.LOG.info("spreading fire");
+
 		if (worldObj.getBlock(x, y, z) == TFCBlocks.logPile && worldObj.getTileEntity(x, y, z) instanceof TELogPile)
 		{
 			TELogPile te = (TELogPile) worldObj.getTileEntity(x, y, z);

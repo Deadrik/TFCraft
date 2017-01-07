@@ -187,6 +187,9 @@ public class WAILAData implements IWailaDataProvider
 		else if (tileEntity instanceof TELogPile)
 			currenttip = logPileBody(itemStack, currenttip, accessor, config);
 
+		else if (tileEntity instanceof TECoalPile)
+			currenttip = coalPileBody(itemStack, currenttip, accessor, config);
+
 		else if (tileEntity instanceof TELoom)
 			currenttip = loomBody(itemStack, currenttip, accessor, config);
 
@@ -303,6 +306,9 @@ public class WAILAData implements IWailaDataProvider
 
 		reg.registerBodyProvider(new WAILAData(), TELogPile.class);
 		reg.registerNBTProvider(new WAILAData(), TELogPile.class);
+
+		reg.registerBodyProvider(new WAILAData(), TECoalPile.class);
+		reg.registerNBTProvider(new WAILAData(), TECoalPile.class);
 
 		reg.registerStackProvider(new WAILAData(), TELoom.class);
 		reg.registerBodyProvider(new WAILAData(), TELoom.class);
@@ -931,6 +937,50 @@ public class WAILAData implements IWailaDataProvider
 						}
 					}
 					currenttip.add(log + count); // Add to the HUD display
+					counted[j] = true; // Mark the initial slot as accounted for
+				}
+			}
+		}
+
+		return currenttip;
+	}
+
+	public List<String> coalPileBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config)
+	{
+		NBTTagCompound tag = accessor.getNBTData();
+		Boolean isOnFire = tag.getBoolean("isOnFire");
+
+		if (isOnFire)
+		{
+			int fireTimer = tag.getInteger("fireTimer");
+			int hours = (int) (TFCOptions.charcoalPitBurnTime - (TFC_Time.getTotalHours() - fireTimer));
+			currenttip.add(hours + " " + TFC_Core.translate("gui.hoursRemaining") + " (" + Helper.roundNumber(100 - (hours / TFCOptions.charcoalPitBurnTime) * 100, 10) + "%)");
+		}
+		else
+		{
+			ItemStack storage[] = getStorage(tag, accessor.getTileEntity());
+			boolean counted[] = new boolean[] {false, false, false, false}; // Used to keep track of which slots have already been combined into others.
+
+			/**
+			 * Rather than just display the number of logs in each slot, I wanted to display the total number of each type of log in the pile.
+			 * There's very likely a much better way to do this, but it's all I could come up with for now.
+			 * Optimization PRs welcome. :) Kitty
+			 */
+			for (int j = 0; j < storage.length; j++) // Loop through the 4 storage slots
+			{
+				if (storage[j] != null && !counted[j]) // Make sure the slot is not empty, and has not already been accounted for
+				{
+					String coal = storage[j].getDisplayName() + " : ";
+					int count = storage[j].stackSize;
+					for (int k = j + 1; k < storage.length; k++) // Loop through all slots after the one being checked
+					{
+						if (storage[k] != null && storage[j].isItemEqual(storage[k])) // Make sure the comparison slot isn't empty, and see if it's the same type of log
+						{
+							count += storage[k].stackSize; // Increase the count for that log type
+							counted[k] = true; // Mark the combined slot as accounted for
+						}
+					}
+					currenttip.add(coal + count); // Add to the HUD display
 					counted[j] = true; // Mark the initial slot as accounted for
 				}
 			}

@@ -67,6 +67,7 @@ public class CommonProxy
 	public void registerTileEntities(boolean b)
 	{
 		GameRegistry.registerTileEntity(TELogPile.class, "TerraLogPile");
+		GameRegistry.registerTileEntity(TECoalPile.class, "TerraCokePit");
 		GameRegistry.registerTileEntity(TEWorkbench.class, "TerraWorkbench");
 		GameRegistry.registerTileEntity(TEForge.class, "TerraForge");
 		GameRegistry.registerTileEntity(TEBlastFurnace.class, "TerraBloomery");

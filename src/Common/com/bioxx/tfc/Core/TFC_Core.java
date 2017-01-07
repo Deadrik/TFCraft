@@ -1106,10 +1106,12 @@ public class TFC_Core
 		}
 	}
 
+
+
 	/**
 	 * @param is
 	 * @param baseDecayMod
-	 * @param nbt
+	// * @param nbt
 	 */
 	public static ItemStack tickDecay(ItemStack is, World world, int x, int y, int z, float environmentalDecayFactor, float baseDecayMod)
 	{
@@ -1262,9 +1264,10 @@ public class TFC_Core
 
 	public static boolean isValidCharcoalPitCover(Block block)
 	{
-		if(Blocks.fire.getFlammability(block) > 0 && block != TFCBlocks.logPile) return false;
+		if(Blocks.fire.getFlammability(block) > 0 && (block != TFCBlocks.logPile || block != TFCBlocks.coalPile)) return false;
 
 		return block == TFCBlocks.logPile
+				|| block == TFCBlocks.coalPile
 				|| isCobbleStone(block)
 				|| isBrickStone(block)
 				|| isSmoothStone(block)

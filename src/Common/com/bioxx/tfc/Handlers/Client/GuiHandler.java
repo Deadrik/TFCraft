@@ -116,9 +116,9 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 		case 48:
 			return new GuiCustomNametag(player, world, x, y, z);
 		case 49:
-		{
 			return new GuiHopper(player.inventory, ((TEHopper) te), world, x, y, z);
-		}
+		case 50:
+			return new GuiCoalPile(player.inventory, ((TECoalPile) te), world, x, y, z);
 		default:
 			return null;
 		}
