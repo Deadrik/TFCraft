@@ -16,12 +16,12 @@ public class SlotCoalPile extends Slot
     @Override
     public boolean isItemValid(ItemStack itemstack)
     {
-        return itemstack.getItem() == TFCItems.coal;
+        return (itemstack.getItem() == TFCItems.coal && itemstack.getItemDamage() == 0);
     }
 
     @Override
     public int getSlotStackLimit()
     {
-        return 3;
+        return 4;
     }
 }

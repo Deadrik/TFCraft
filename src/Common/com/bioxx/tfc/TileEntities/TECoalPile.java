@@ -138,7 +138,7 @@ public class TECoalPile extends TileEntity implements IInventory
     @Override
     public int getInventoryStackLimit()
     {
-        return 3;
+        return 4;
     }
 
     @Override
@@ -387,7 +387,7 @@ public class TECoalPile extends TileEntity implements IInventory
             {
                 int count = te.getNumberOfCoal();
                 te.clearContents();
-                if(count == 12) {
+                if(count == 16) {
                     worldObj.setBlock(x, y, z, TFCBlocks.cokeblock, 0, 0x2);
                 }
                 else

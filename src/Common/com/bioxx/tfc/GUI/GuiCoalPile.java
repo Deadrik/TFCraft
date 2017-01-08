@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class GuiCoalPile extends GuiContainerTFC {
-    public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_logpile.png");
+    public static ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, Reference.ASSET_PATH_GUI + "gui_coalpile.png");
 
     public GuiCoalPile(InventoryPlayer inventoryplayer, TECoalPile te, World world, int x, int y, int z) {
         super(new ContainerCoalPile(inventoryplayer, te, world, x, y, z), 176, 85);

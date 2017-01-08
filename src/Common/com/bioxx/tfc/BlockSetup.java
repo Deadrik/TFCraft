@@ -455,7 +455,6 @@ public class BlockSetup extends TFCBlocks
 		ore3.setHarvestLevel("pickaxe", 1);
 		metalBlock.setHarvestLevel("pickaxe", 1);
 		metalAlloyBlock.setHarvestLevel("pickaxe", 1);
-		cokeblock.setHarvestLevel("pickaxe", 1);
 
 		dirt.setHarvestLevel("shovel", 0);
 		dirt2.setHarvestLevel("shovel", 0);
@@ -498,6 +497,8 @@ public class BlockSetup extends TFCBlocks
 		woodHoriz4.setHarvestLevel("hammer", 1);
 		woodVert.setHarvestLevel("hammer", 1);
 		woodVert2.setHarvestLevel("hammer", 1);
+		cokeblock.setHarvestLevel("hammer", 1);
+
 	}
 
 	public static void setupFire()

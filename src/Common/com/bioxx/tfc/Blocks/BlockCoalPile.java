@@ -125,9 +125,9 @@ public class BlockCoalPile extends BlockTerraContainer
     @Override
     public void registerBlockIcons(IIconRegister iconRegisterer)
     {
-        icons[0] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Log Pile Side 0");
-        icons[1] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Log Pile Side 1");
-        icons[2] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Log Pile End");
+        icons[0] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Coal Pile Side 0");
+        icons[1] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Coal Pile Side 1");
+        icons[2] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "devices/Coal Pile End");
     }
 
     public void eject(World world, int x, int y, int z)

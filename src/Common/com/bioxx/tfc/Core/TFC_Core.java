@@ -1264,7 +1264,11 @@ public class TFC_Core
 
 	public static boolean isValidCharcoalPitCover(Block block)
 	{
-		if(Blocks.fire.getFlammability(block) > 0 && (block != TFCBlocks.logPile || block != TFCBlocks.coalPile)) return false;
+		Boolean pile = false;
+		if(block == TFCBlocks.logPile || block == TFCBlocks.coalPile)
+		{ pile = true; }
+		if(Blocks.fire.getFlammability(block) > 0 && pile == false)
+			return false;
 
 		return block == TFCBlocks.logPile
 				|| block == TFCBlocks.coalPile
