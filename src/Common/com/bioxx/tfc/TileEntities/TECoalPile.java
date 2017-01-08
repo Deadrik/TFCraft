@@ -383,7 +383,7 @@ public class TECoalPile extends TileEntity implements IInventory
         if(worldObj.getBlock(x, y, z) == TFCBlocks.coalPile)
         {
             TECoalPile te = (TECoalPile) worldObj.getTileEntity(x, y, z);
-            if(te.isOnFire && (te.fireTimer+TFCOptions.charcoalPitBurnTime < TFC_Time.getTotalHours() || forceComplete))
+            if(te.isOnFire && (te.fireTimer+TFCOptions.cokePitBurnTime < TFC_Time.getTotalHours() || forceComplete))
             {
                 int count = te.getNumberOfCoal();
                 te.clearContents();
@@ -398,7 +398,7 @@ public class TECoalPile extends TileEntity implements IInventory
                 createCoke(x, y+1, z, forceComplete); createCoke(x, y-1, z, forceComplete);
                 createCoke(x, y, z+1, forceComplete); createCoke(x, y, z-1, forceComplete);
 
-                worldObj.notifyBlockOfNeighborChange(x, y, z, TFCBlocks.charcoal);
+                worldObj.notifyBlockOfNeighborChange(x, y, z, TFCBlocks.cokeblock);
             }
         }
     }

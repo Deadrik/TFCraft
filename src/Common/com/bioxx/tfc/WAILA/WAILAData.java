@@ -953,8 +953,8 @@ public class WAILAData implements IWailaDataProvider
 		if (isOnFire)
 		{
 			int fireTimer = tag.getInteger("fireTimer");
-			int hours = (int) (TFCOptions.charcoalPitBurnTime - (TFC_Time.getTotalHours() - fireTimer));
-			currenttip.add(hours + " " + TFC_Core.translate("gui.hoursRemaining") + " (" + Helper.roundNumber(100 - (hours / TFCOptions.charcoalPitBurnTime) * 100, 10) + "%)");
+			int hours = (int) (TFCOptions.cokePitBurnTime - (TFC_Time.getTotalHours() - fireTimer));
+			currenttip.add(hours + " " + TFC_Core.translate("gui.hoursRemaining") + " (" + Helper.roundNumber(100 - (hours / TFCOptions.cokePitBurnTime) * 100, 10) + "%)");
 		}
 		else
 		{

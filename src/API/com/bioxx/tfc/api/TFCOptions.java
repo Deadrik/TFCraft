@@ -33,6 +33,7 @@ public class TFCOptions
 	public static float pitKilnBurnTime = 8.0f;
 	public static float bloomeryBurnTime = 14.4f;
 	public static float charcoalPitBurnTime = 18.0f;
+	public static float cokePitBurnTime = 96.0f;
 	public static int torchBurnTime = 48;
 	public static float saplingTimerMultiplier = 1.0f;
 	public static float tempIncreaseMultiplier = 1.0f;
