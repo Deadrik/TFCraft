@@ -202,10 +202,7 @@ public class BlockCoalPile extends BlockTerraContainer
             if (te.isOnFire && te.fireTimer + TFCOptions.charcoalPitBurnTime < TFC_Time.getTotalHours())
             {
                 te.createCoke(x, y, z, true);
-                TerraFirmaCraft.LOG.info("Tick All DONE");
-
             }
-            TerraFirmaCraft.LOG.info("Tick not done");
 
         }
     }

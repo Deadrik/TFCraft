@@ -311,7 +311,6 @@ public class TECoalPile extends TileEntity implements IInventory
 
     public void extinguishFire()
     {
-        TerraFirmaCraft.LOG.info("extinguishing?");
         if(isOnFire)
         {
             if(worldObj.getBlock(xCoord + 1, yCoord, zCoord) == Blocks.fire)
@@ -350,7 +349,6 @@ public class TECoalPile extends TileEntity implements IInventory
 
     public void activateCoke()
     {
-        TerraFirmaCraft.LOG.info("activate pile");
         this.fireTimer = (int) TFC_Time.getTotalHours();
         this.isOnFire = true;
 
@@ -367,7 +365,6 @@ public class TECoalPile extends TileEntity implements IInventory
 
     private void spreadFire(int x, int y, int z)
     {
-        TerraFirmaCraft.LOG.info("spreading fire");
         if (worldObj.getBlock(x, y, z) == TFCBlocks.coalPile && worldObj.getTileEntity(x, y, z) instanceof TECoalPile)
         {
             TECoalPile te = (TECoalPile) worldObj.getTileEntity(x, y, z);
