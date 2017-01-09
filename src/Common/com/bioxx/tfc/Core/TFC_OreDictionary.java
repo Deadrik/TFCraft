@@ -628,6 +628,11 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("itemJavelinStoneHead", new ItemStack(TFCItems.sedStoneJavelinHead, 1, WILD));
 
 		// Tools are also registered with their material to help prevent issues with unification.
+
+		OreDictionary.registerOre("itemHammerTier3", new ItemStack(TFCItems.steelHammer, 1, WILD));
+		OreDictionary.registerOre("itemHammerTier3", new ItemStack(TFCItems.blackSteelHammer, 1, WILD));
+		OreDictionary.registerOre("itemHammerTier3", new ItemStack(TFCItems.blueSteelHammer, 1, WILD));
+		OreDictionary.registerOre("itemHammerTier3", new ItemStack(TFCItems.redSteelHammer, 1, WILD));
 		for (Item axe : Recipes.axes)
 			OreDictionary.registerOre("itemAxe", new ItemStack(axe, 1, WILD));
 
