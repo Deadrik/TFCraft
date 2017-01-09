@@ -71,12 +71,15 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("dustAluminum", new ItemStack(TFCItems.metalDust, 1, 13)); //Aluminum
 		OreDictionary.registerOre("dustTungsten", new ItemStack(TFCItems.metalDust, 1, 14)); //Tungsten
 
+		OreDictionary.registerOre("dustAnyBronze", new ItemStack(TFCItems.metalDust, 1, 15)); //BismuthBronze
 		OreDictionary.registerOre("dustBismuthBronze", new ItemStack(TFCItems.metalDust, 1, 15)); //BismuthBronze
+		OreDictionary.registerOre("dustAnyBronze", new ItemStack(TFCItems.metalDust, 1, 16)); //BlackBronze
 		OreDictionary.registerOre("dustBlackBronze", new ItemStack(TFCItems.metalDust, 1, 16)); //BlackBronze
 		OreDictionary.registerOre("dustBlackSteel", new ItemStack(TFCItems.metalDust, 1, 17)); //BlackSteel
 		OreDictionary.registerOre("dustBlueSteel", new ItemStack(TFCItems.metalDust, 1, 18)); //BlueSteel
 		OreDictionary.registerOre("dustBrass", new ItemStack(TFCItems.metalDust, 1, 19)); //Brass
 		OreDictionary.registerOre("dustBronze", new ItemStack(TFCItems.metalDust, 1, 20)); //Bronze
+		OreDictionary.registerOre("dustAnyBronze", new ItemStack(TFCItems.metalDust, 1, 20)); //Bronze
 		OreDictionary.registerOre("dustHCBlackSteel", new ItemStack(TFCItems.metalDust, 1, 21)); //HCBlackSteel
 		OreDictionary.registerOre("dustHCBlueSteel", new ItemStack(TFCItems.metalDust, 1, 22)); //HCBlueSteel
 		OreDictionary.registerOre("dustHCRedSteel", new ItemStack(TFCItems.metalDust, 1, 23)); //HCRedSteel
@@ -236,34 +239,43 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("dustSalt", new ItemStack(TFCItems.powder, 1, 9)); //Salt
 
 		//Nuggets
-		OreDictionary.registerOre("blockBismuth", new ItemStack(TFCBlocks.metalBlock, 1, 0));
-		OreDictionary.registerOre("nuggetAnyBronze", new ItemStack(TFCItems.smallMetalChunk, 1, 1));
-		OreDictionary.registerOre("nuggetBismuthBronze", new ItemStack(TFCItems.smallMetalChunk, 1, 1));
-		OreDictionary.registerOre("nuggetAnyBronze", new ItemStack(TFCItems.smallMetalChunk, 1, 2));
-		OreDictionary.registerOre("nuggetBlackBronze", new ItemStack(TFCItems.smallMetalChunk, 1, 2));
-		OreDictionary.registerOre("nuggetBlackSteel", new ItemStack(TFCItems.smallMetalChunk, 1, 3));
-		OreDictionary.registerOre("nuggetBlueSteel", new ItemStack(TFCItems.smallMetalChunk, 1, 4));
-		OreDictionary.registerOre("nuggetBrass", new ItemStack(TFCItems.smallMetalChunk, 1, 5));
-		OreDictionary.registerOre("nuggetAnyBronze", new ItemStack(TFCItems.smallMetalChunk, 1, 6));
-		OreDictionary.registerOre("nuggetBronze", new ItemStack(TFCItems.smallMetalChunk, 1, 6));
-		OreDictionary.registerOre("nuggetCopper", new ItemStack(TFCItems.smallMetalChunk, 1, 7));
-		OreDictionary.registerOre("nuggetGold", new ItemStack(TFCItems.smallMetalChunk, 1, 8));
-		OreDictionary.registerOre("nuggetWroughtIron", new ItemStack(TFCItems.smallMetalChunk, 1, 9));
-		OreDictionary.registerOre("nuggetIron", new ItemStack(TFCItems.smallMetalChunk, 1, 9));
-		OreDictionary.registerOre("nuggetLead", new ItemStack(TFCItems.smallMetalChunk, 1, 10));
-		OreDictionary.registerOre("nuggetNickel", new ItemStack(TFCItems.smallMetalChunk, 1, 11));
-		OreDictionary.registerOre("nuggetPigIron", new ItemStack(TFCItems.smallMetalChunk, 1, 12));
-		OreDictionary.registerOre("nuggetPlatinum", new ItemStack(TFCItems.smallMetalChunk, 1, 13));
-		OreDictionary.registerOre("nuggetRedSteel", new ItemStack(TFCItems.smallMetalChunk, 1, 14));
-		OreDictionary.registerOre("nuggetRoseGold", new ItemStack(TFCItems.smallMetalChunk, 1, 15));
-		OreDictionary.registerOre("nuggetSilver", new ItemStack(TFCItems.smallMetalChunk, 1, 16));
-		OreDictionary.registerOre("nuggetSteel", new ItemStack(TFCItems.smallMetalChunk, 1, 17));
-		OreDictionary.registerOre("nuggetSterlingSilver", new ItemStack(TFCItems.smallMetalChunk, 1, 18));
-		OreDictionary.registerOre("nuggetTin", new ItemStack(TFCItems.smallMetalChunk, 1, 19));
-		OreDictionary.registerOre("nuggetZinc", new ItemStack(TFCItems.smallMetalChunk, 1, 20));
-		OreDictionary.registerOre("nuggetElectrum", new ItemStack(TFCItems.smallMetalChunk, 1, 21));
-		OreDictionary.registerOre("nuggetCupronickel", new ItemStack(TFCItems.smallMetalChunk, 1, 22));
-		OreDictionary.registerOre("nuggetConstantan", new ItemStack(TFCItems.smallMetalChunk, 1, 22));
+		OreDictionary.registerOre("nuggetBismuth", new ItemStack(TFCItems.smallMetalChunk, 1, 0)); //Bismuth
+		OreDictionary.registerOre("nuggetCopper", new ItemStack(TFCItems.smallMetalChunk, 1, 1)); //Copper
+		OreDictionary.registerOre("nuggetGold", new ItemStack(TFCItems.smallMetalChunk, 1, 2)); //Gold
+		OreDictionary.registerOre("nuggetIron", new ItemStack(TFCItems.smallMetalChunk, 1, 3)); //Iron
+		OreDictionary.registerOre("nuggetLead", new ItemStack(TFCItems.smallMetalChunk, 1, 4)); //Lead
+		OreDictionary.registerOre("nuggetNickel", new ItemStack(TFCItems.smallMetalChunk, 1, 5)); //Nickel
+		OreDictionary.registerOre("nuggetPigIron", new ItemStack(TFCItems.smallMetalChunk, 1, 6)); //PigIron
+		OreDictionary.registerOre("nuggetPlatinum", new ItemStack(TFCItems.smallMetalChunk, 1, 7)); //Platinum
+		OreDictionary.registerOre("nuggetSilver", new ItemStack(TFCItems.smallMetalChunk, 1, 8)); //Silver
+		OreDictionary.registerOre("nuggetSteel", new ItemStack(TFCItems.smallMetalChunk, 1, 9)); //Steel
+		OreDictionary.registerOre("nuggetTin", new ItemStack(TFCItems.smallMetalChunk, 1, 10)); //Tin
+		OreDictionary.registerOre("nuggetZinc", new ItemStack(TFCItems.smallMetalChunk, 1, 11)); //Zinc
+		OreDictionary.registerOre("nuggetOsmium", new ItemStack(TFCItems.smallMetalChunk, 1, 12)); //Osmium
+		OreDictionary.registerOre("nuggetAluminum", new ItemStack(TFCItems.smallMetalChunk, 1, 13)); //Aluminum
+		OreDictionary.registerOre("nuggetTungsten", new ItemStack(TFCItems.smallMetalChunk, 1, 14)); //Tungsten
+
+		OreDictionary.registerOre("nuggetBismuthBronze", new ItemStack(TFCItems.smallMetalChunk, 1, 15)); //BismuthBronze
+		OreDictionary.registerOre("nuggetAnyBronze", new ItemStack(TFCItems.smallMetalChunk, 1, 15)); //BismuthBronze
+		OreDictionary.registerOre("nuggetBlackBronze", new ItemStack(TFCItems.smallMetalChunk, 1, 16)); //BlackBronze
+		OreDictionary.registerOre("nuggetAnyBronze", new ItemStack(TFCItems.smallMetalChunk, 1, 16)); //BlackBronze
+		OreDictionary.registerOre("nuggetBlackSteel", new ItemStack(TFCItems.smallMetalChunk, 1, 17)); //BlackSteel
+		OreDictionary.registerOre("nuggetBlueSteel", new ItemStack(TFCItems.smallMetalChunk, 1, 18)); //BlueSteel
+		OreDictionary.registerOre("nuggetBrass", new ItemStack(TFCItems.smallMetalChunk, 1, 19)); //Brass
+		OreDictionary.registerOre("nuggetBronze", new ItemStack(TFCItems.smallMetalChunk, 1, 20)); //Bronze
+		OreDictionary.registerOre("nuggetAnyBronze", new ItemStack(TFCItems.smallMetalChunk, 1, 20)); //Bronze
+		OreDictionary.registerOre("nuggetHCBlackSteel", new ItemStack(TFCItems.smallMetalChunk, 1, 21)); //HCBlackSteel
+		OreDictionary.registerOre("nuggetHCBlueSteel", new ItemStack(TFCItems.smallMetalChunk, 1, 22)); //HCBlueSteel
+		OreDictionary.registerOre("nuggetHCRedSteel", new ItemStack(TFCItems.smallMetalChunk, 1, 23)); //HCRedSteel
+		OreDictionary.registerOre("nuggetRedSteel", new ItemStack(TFCItems.smallMetalChunk, 1, 24)); //RedSteel
+		OreDictionary.registerOre("nuggetRoseGold", new ItemStack(TFCItems.smallMetalChunk, 1, 25)); //RoseGold
+		OreDictionary.registerOre("nuggetSterlingSilver", new ItemStack(TFCItems.smallMetalChunk, 1, 26)); //SterlingSilver
+		OreDictionary.registerOre("nuggetWeakSteel", new ItemStack(TFCItems.smallMetalChunk, 1, 27)); //WeakSteel
+		OreDictionary.registerOre("nuggetWeakBlueSteel", new ItemStack(TFCItems.smallMetalChunk, 1, 28)); //WeakBlueSteel
+		OreDictionary.registerOre("nuggetWeakRedSteel", new ItemStack(TFCItems.smallMetalChunk, 1, 29)); //WeakRedSteel
+		OreDictionary.registerOre("nuggetElectrum", new ItemStack(TFCItems.smallMetalChunk, 1, 30)); //Electrum
+		OreDictionary.registerOre("nuggetCupronickel", new ItemStack(TFCItems.smallMetalChunk, 1, 31)); //Cupronickel
+		OreDictionary.registerOre("nuggetConstantan", new ItemStack(TFCItems.smallMetalChunk, 1, 31)); //Cupronickel
 
 		//Ingots
 		OreDictionary.registerOre("ingotBismuth", new ItemStack(TFCItems.bismuthIngot));
