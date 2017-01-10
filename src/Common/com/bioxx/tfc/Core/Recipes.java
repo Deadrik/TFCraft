@@ -2484,9 +2484,6 @@ public class Recipes
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreChunk, 1, 29), new ItemStack(TFCItems.powder, 6, 7)));//Rich Limonite Powder
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreMineralChunk, 1, 20), new ItemStack(TFCItems.fertilizer, 4)));//Sylvite to Fertilizer
 		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.looseRock, 1, 5), new ItemStack(TFCItems.powder, 4, 9)));//Rock Salt to Salt
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreMineralChunk, 1, 8), new ItemStack(TFCItems.powder, 1, 10)));//Jet to Jet Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreMineralChunk, 1, 14), new ItemStack(TFCItems.powder, 1, 11)));//Serpentine to Serepentine Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.oreMineralChunk, 1, 24), new ItemStack(TFCItems.powder, 1, 12)));//Quartz to Quartz Powder
 
 	}
 

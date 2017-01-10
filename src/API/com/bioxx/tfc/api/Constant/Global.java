@@ -31,8 +31,7 @@ public class Global
 	/* Powder */
 	public static final String[] POWDER = {
 		"Flux", "Kaolinite Powder", "Graphite Powder", "Sulfur Powder", "Saltpeter Powder",
-		"Hematite Powder", "Lapis Lazuli Powder", "Limonite Powder", "Malachite Powder", "Salt",
-		"Jet Powder", "Serpentine Powder", "Quartz Powder"
+		"Hematite Powder", "Lapis Lazuli Powder", "Limonite Powder", "Malachite Powder", "Salt"
 	};
 	
 	/* Dyes, used for carpets and small vessels */
