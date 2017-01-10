@@ -65,6 +65,7 @@ public class Recipes
 			GameRegistry.addRecipe(new ItemStack(doors[i]), "WW", "WW", "WW", 'W', new ItemStack(TFCItems.singlePlank, 1, i));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.chest, 1, i), "###", "# #", "###", '#', new ItemStack(TFCItems.singlePlank, 1, i)));
 			GameRegistry.addRecipe(new ItemStack(TFCBlocks.toolRack, 1, i), "###", "   ", "###", '#', new ItemStack(TFCItems.singlePlank, 1, i));
+			//GameRegistry.addRecipe(new ItemStack(TFCBlocks.bookshelf, 1, i), "###", "BBB", "###", '#', new ItemStack(TFCItems.singlePlank, 1, i), 'B', new ItemStack(Items.book));
 			int l = i%16;
 			if(i==l)
 			{

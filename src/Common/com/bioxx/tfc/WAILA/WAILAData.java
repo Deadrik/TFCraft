@@ -1223,15 +1223,12 @@ public class WAILAData implements IWailaDataProvider
 				currenttip.add(TFC_Core.translate("gui.ore.apatite"));
 				break;
 			case 6:
-				currenttip.add(TFC_Core.translate("gui.ore.petrifiedwood"));
-				break;
-			case 7:
 				currenttip.add(TFC_Core.translate("gui.ore.scapolite"));
 				break;
-			case 15:
+			case 7:
 				currenttip.add(TFC_Core.translate("gui.ore.strontium"));
 				break;
-			case 16:
+			case 15:
 				currenttip.add(TFC_Core.translate("gui.ore.quartz"));
 				break;
 			}
