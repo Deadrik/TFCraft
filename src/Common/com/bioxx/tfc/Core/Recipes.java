@@ -425,6 +425,23 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.smallMetalChunk, 10, 29), new ItemStack(TFCItems.weakRedSteelIngot), "itemChisel"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.smallMetalChunk, 10, 30), new ItemStack(TFCItems.electrumIngot), "itemChisel"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.smallMetalChunk, 10, 31), new ItemStack(TFCItems.cupronickelIngot), "itemChisel"));
+
+//Alloy Dust Crafting
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.metalDust, 9, 15), "CCC", "ZBZ", "CCC", 'C', "dustCopper", 'Z', "dustZinc", 'B', "dustBismuth"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.metalDust, 9, 16), "CGC", "SCS", "CGC", 'C', "dustCopper", 'G', "dustGold", 'S', "dustSilver"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.metalDust, 9, 19), "CCC", "CZC", "CCC", 'C', "dustCopper", 'Z', "dustZinc"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.metalDust, 9, 20), "CCC", "CTC", "CCC", 'C', "dustCopper", 'T', "dustTin"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.metalDust, 1, 21), "dustWeakSteel", "dustPigIron"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.metalDust, 1, 22), "dustWeakBlueSteel","dustBlackSteel"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.metalDust, 1, 23), "dustWeakRedSteel", "dustBlackSteel"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.metalDust, 9, 25), "GGG", "CGC", "GGG", 'C', "dustCopper", 'G', "dustGold"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.metalDust, 9, 26), "SSS", "CCC", "SSS", 'C', "dustCopper", 'S', "dustSilver"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.metalDust, 9, 27), "SNS", "BSB", "SNS", 'S', "dustSteel", 'N', "dustNickel", 'B', "dustBlackBronze"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.metalDust, 9, 28), "BbB", "SBS", "BsB", 'B', "dustBlackSteel", 'b', "dustBismuthBronze", 'S', "dustSteel", 's', "dustSterlingSilver"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.metalDust, 9, 29), "BbB", "SBS", "BRB", 'B', "dustBlackSteel", 'b', "dustBrass", 'S', "dustSteel", 'R', "dustRoseGold"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.metalDust, 2, 30), "dustGold", "dustSilver"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.metalDust, 2, 31), "dustCopper", "dustNickel"));
+
 //Ingot -> Unshaped
 //Metals
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.bismuthUnshaped, 1, 0),
