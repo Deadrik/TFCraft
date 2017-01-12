@@ -630,13 +630,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						convertStone(indexOffset+height, arrayIndex, indexBig, idsBig, metaBig, rock1, rock2, rock3);
 
 						//First we check to see if its a cold desert
-						if(rain < 125 && temp < 1.5f)
+						if(rain < 126 && temp < 1.5f)
 						{
 							surfaceBlock = TFC_Core.getTypeForSand(rock1.data1);
 							subSurfaceBlock = TFC_Core.getTypeForSand(rock1.data1);
 						}
 						//Next we check for all other warm deserts
-						else if(rain < 125 && biome.heightVariation < 0.5f && temp > 20f)
+						else if(rain < 126 && biome.heightVariation < 0.5f && temp > 20f)
 						{
 							surfaceBlock = TFC_Core.getTypeForSand(rock1.data1);
 							subSurfaceBlock = TFC_Core.getTypeForSand(rock1.data1);
