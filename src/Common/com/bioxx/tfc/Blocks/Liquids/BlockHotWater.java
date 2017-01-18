@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -92,8 +93,10 @@ public class BlockHotWater extends BlockCustomLiquid
 			EntityLivingBase e = ((EntityLivingBase) entity);
 			if(world.rand.nextInt(25) == 0 && e.getHealth() < e.getMaxHealth())
 			{
-				float diff = e.getMaxHealth() - e.getHealth();
-				e.heal(Math.max(diff * 0.001f, 0.0001f));
+				if(!e.isPotionActive(Potion.regeneration) || !e.isPotionActive(Potion.heal)) {
+					float diff = e.getMaxHealth() - e.getHealth();
+					e.heal(Math.max(diff * 0.001f, 0.0001f));
+				}
 			}
 		}
 	}
