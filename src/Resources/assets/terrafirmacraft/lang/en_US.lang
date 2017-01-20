@@ -2233,7 +2233,11 @@ item.WoolCloth.name=Wool Cloth
 item.SilkCloth.name=Silk Cloth
 item.BurlapCloth.name=Burlap Cloth
 item.Mortar.name=Mortar
-item.Vinegar.name=Vinegar
+item.Vinegar.name=Bucket of Vinegar
+item.Brine.name=Bucket of Brine
+item.OliveOil.name=Bucket of Olive Oil
+item.Limewater.name=Bucket of Limewater
+item.Tannin.name=Bucket of Tannin
 
 item.Hide.small.name=Small Raw Hide
 item.Hide.medium.name=Medium Raw Hide

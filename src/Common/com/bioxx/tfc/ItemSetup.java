@@ -589,6 +589,10 @@ public class ItemSetup extends TFCItems {
 		stoneBrick = new ItemStoneBrick().setFolder("tools/").setUnlocalizedName("ItemStoneBrick");
 		mortar = new ItemTerra().setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFC_MATERIALS);
 		vinegar = new ItemCustomBucket(Blocks.air).setFolder("food/").setUnlocalizedName("Vinegar").setContainerItem(woodenBucketEmpty).setCreativeTab(TFCTabs.TFC_FOODS);
+		brine = new ItemCustomBucket(Blocks.air).setFolder("food/").setUnlocalizedName("Brine").setContainerItem(woodenBucketEmpty).setCreativeTab(TFCTabs.TFC_FOODS);
+		oliveOil = new ItemCustomBucket(Blocks.air).setFolder("food/").setUnlocalizedName("OliveOil").setContainerItem(woodenBucketEmpty).setCreativeTab(TFCTabs.TFC_FOODS);
+		limewater = new ItemCustomBucket(Blocks.air).setFolder("food/").setUnlocalizedName("Limewater").setContainerItem(woodenBucketEmpty).setCreativeTab(TFCTabs.TFC_MATERIALS);
+		tannin = new ItemCustomBucket(Blocks.air).setFolder("food/").setUnlocalizedName("Tannin").setContainerItem(woodenBucketEmpty).setCreativeTab(TFCTabs.TFC_MATERIALS);
 		hide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Hide").setCreativeTab(TFCTabs.TFC_MATERIALS);
 		soakedHide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Soaked Hide").setCreativeTab(TFCTabs.TFC_MATERIALS);
 		scrapedHide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Scraped Hide").setCreativeTab(TFCTabs.TFC_MATERIALS);

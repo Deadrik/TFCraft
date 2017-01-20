@@ -743,6 +743,10 @@ public class TFCItems
 	public static Item stoneBrick;
 	public static Item mortar;
 	public static Item vinegar;
+	public static Item brine;
+	public static Item oliveOil;
+	public static Item limewater;
+	public static Item tannin;
 	public static Item hide;
 	public static Item soakedHide;
 	public static Item scrapedHide;
@@ -1404,6 +1408,10 @@ public class TFCItems
 
 		GameRegistry.registerItem(mortar , mortar.getUnlocalizedName());
 		GameRegistry.registerItem(vinegar , vinegar.getUnlocalizedName());
+		GameRegistry.registerItem(brine , brine.getUnlocalizedName());
+		GameRegistry.registerItem(oliveOil , oliveOil.getUnlocalizedName());
+		GameRegistry.registerItem(limewater , limewater.getUnlocalizedName());
+		GameRegistry.registerItem(tannin , tannin.getUnlocalizedName());
 
 		GameRegistry.registerItem(hide , hide.getUnlocalizedName());
 		GameRegistry.registerItem(soakedHide , soakedHide.getUnlocalizedName());

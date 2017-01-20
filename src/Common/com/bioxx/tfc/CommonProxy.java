@@ -237,7 +237,11 @@ public class CommonProxy
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.VODKA, 250), new ItemStack(TFCItems.vodka), new ItemStack(Items.glass_bottle));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.MILK, 250), new ItemStack(TFCItems.bottleMilk), new ItemStack(Items.glass_bottle));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.MILK, 1000), new ItemStack(TFCItems.woodenBucketMilk), new ItemStack(TFCItems.woodenBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.VINEGAR, 1000), new ItemStack(TFCItems.vinegar), new ItemStack(TFCItems.woodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.VINEGAR.getName()), new ItemStack(TFCItems.vinegar), new ItemStack(TFCItems.woodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.BRINE.getName()), new ItemStack(TFCItems.brine), new ItemStack(TFCItems.woodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.OLIVEOIL.getName()), new ItemStack(TFCItems.oliveOil), new ItemStack(TFCItems.woodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.LIMEWATER.getName()), new ItemStack(TFCItems.limewater), new ItemStack(TFCItems.woodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.TANNIN.getName()), new ItemStack(TFCItems.tannin), new ItemStack(TFCItems.woodenBucketEmpty));
 		//FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(0), new ItemStack(TFCBlocks.OilLamp, 1, 0));//Gold
 		//FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(1), new ItemStack(TFCBlocks.OilLamp, 1, 1));//Platinum
 		//FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(2), new ItemStack(TFCBlocks.OilLamp, 1, 2));//RoseGold
