@@ -276,120 +276,22 @@ public class Recipes
 		}
 
 //Ore Piles Stuff
+
+//Pile = i. Normal ore = i. Rich ore = (i+18). Poor ore = (i+36)
+		for (int i = 0; i < 18; i++) {
 //Rich to Poor
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 36), new ItemStack(TFCItems.oreChunk, 1, 18), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 37), new ItemStack(TFCItems.oreChunk, 1, 19), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 38), new ItemStack(TFCItems.oreChunk, 1, 20), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 39), new ItemStack(TFCItems.oreChunk, 1, 21), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 40), new ItemStack(TFCItems.oreChunk, 1, 22), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 41), new ItemStack(TFCItems.oreChunk, 1, 23), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 42), new ItemStack(TFCItems.oreChunk, 1, 24), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 43), new ItemStack(TFCItems.oreChunk, 1, 25), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 44), new ItemStack(TFCItems.oreChunk, 1, 26), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 45), new ItemStack(TFCItems.oreChunk, 1, 27), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 46), new ItemStack(TFCItems.oreChunk, 1, 28), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 47), new ItemStack(TFCItems.oreChunk, 1, 29), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 48), new ItemStack(TFCItems.oreChunk, 1, 30), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 49), new ItemStack(TFCItems.oreChunk, 1, 31), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 50), new ItemStack(TFCItems.oreChunk, 1, 32), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 51), new ItemStack(TFCItems.oreChunk, 1, 33), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 52), new ItemStack(TFCItems.oreChunk, 1, 34), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, 53), new ItemStack(TFCItems.oreChunk, 1, 35), "itemHammerTier3"));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.oreChunk, 3, i + 36), new ItemStack(TFCItems.oreChunk, 1, i + 18), "itemHammerTier3"));
 //Poor to Pile
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 0), new ItemStack(TFCItems.oreChunk, 4, 36), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 1), new ItemStack(TFCItems.oreChunk, 4, 37), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 2), new ItemStack(TFCItems.oreChunk, 4, 38), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 3), new ItemStack(TFCItems.oreChunk, 4, 39), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 4), new ItemStack(TFCItems.oreChunk, 4, 40), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 5), new ItemStack(TFCItems.oreChunk, 4, 41), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 6), new ItemStack(TFCItems.oreChunk, 4, 42), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 7), new ItemStack(TFCItems.oreChunk, 4, 43), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 8), new ItemStack(TFCItems.oreChunk, 4, 44), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 9), new ItemStack(TFCItems.oreChunk, 4, 45), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 10), new ItemStack(TFCItems.oreChunk, 4, 46), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 11), new ItemStack(TFCItems.oreChunk, 4, 47), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 12), new ItemStack(TFCItems.oreChunk, 4, 48), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 13), new ItemStack(TFCItems.oreChunk, 4, 49), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 14), new ItemStack(TFCItems.oreChunk, 4, 50), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 15), new ItemStack(TFCItems.oreChunk, 4, 51), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 16), new ItemStack(TFCItems.oreChunk, 4, 52), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 17), new ItemStack(TFCItems.oreChunk, 4, 53), "itemHammerTier3"));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, i), new ItemStack(TFCItems.oreChunk, 1, i + 36), new ItemStack(TFCItems.oreChunk, 1, i + 36), new ItemStack(TFCItems.oreChunk, 1, i + 36), new ItemStack(TFCItems.oreChunk, 1, i + 36), "itemHammerTier3"));
 //Normal to Pile
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 0), new ItemStack(TFCItems.oreChunk, 2, 0), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 1), new ItemStack(TFCItems.oreChunk, 2, 1), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 2), new ItemStack(TFCItems.oreChunk, 2, 2), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 3), new ItemStack(TFCItems.oreChunk, 2, 3), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 4), new ItemStack(TFCItems.oreChunk, 2, 4), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 5), new ItemStack(TFCItems.oreChunk, 2, 5), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 6), new ItemStack(TFCItems.oreChunk, 2, 6), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 7), new ItemStack(TFCItems.oreChunk, 2, 7), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 8), new ItemStack(TFCItems.oreChunk, 2, 8), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 9), new ItemStack(TFCItems.oreChunk, 2, 9), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 10), new ItemStack(TFCItems.oreChunk, 2, 10), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 11), new ItemStack(TFCItems.oreChunk, 2, 11), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 12), new ItemStack(TFCItems.oreChunk, 2, 12), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 13), new ItemStack(TFCItems.oreChunk, 2, 13), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 14), new ItemStack(TFCItems.oreChunk, 2, 14), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 15), new ItemStack(TFCItems.oreChunk, 2, 15), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 16), new ItemStack(TFCItems.oreChunk, 2, 16), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 17), new ItemStack(TFCItems.oreChunk, 2, 17), "itemHammerTier3"));
-//Poor + Normal to Pile
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 0), new ItemStack(TFCItems.oreChunk, 1, 0), new ItemStack(TFCItems.oreChunk, 2, 36), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 1), new ItemStack(TFCItems.oreChunk, 1, 1), new ItemStack(TFCItems.oreChunk, 2, 37), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 2), new ItemStack(TFCItems.oreChunk, 1, 2), new ItemStack(TFCItems.oreChunk, 2, 38), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 3), new ItemStack(TFCItems.oreChunk, 1, 3), new ItemStack(TFCItems.oreChunk, 2, 39), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 4), new ItemStack(TFCItems.oreChunk, 1, 4), new ItemStack(TFCItems.oreChunk, 2, 40), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 5), new ItemStack(TFCItems.oreChunk, 1, 5), new ItemStack(TFCItems.oreChunk, 2, 41), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 6), new ItemStack(TFCItems.oreChunk, 1, 6), new ItemStack(TFCItems.oreChunk, 2, 42), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 7), new ItemStack(TFCItems.oreChunk, 1, 7), new ItemStack(TFCItems.oreChunk, 2, 43), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 8), new ItemStack(TFCItems.oreChunk, 1, 8), new ItemStack(TFCItems.oreChunk, 2, 44), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 9), new ItemStack(TFCItems.oreChunk, 1, 9), new ItemStack(TFCItems.oreChunk, 2, 45), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 10), new ItemStack(TFCItems.oreChunk, 1, 10), new ItemStack(TFCItems.oreChunk, 2, 46), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 11), new ItemStack(TFCItems.oreChunk, 1, 11), new ItemStack(TFCItems.oreChunk, 2, 47), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 12), new ItemStack(TFCItems.oreChunk, 1, 12), new ItemStack(TFCItems.oreChunk, 2, 48), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 13), new ItemStack(TFCItems.oreChunk, 1, 13), new ItemStack(TFCItems.oreChunk, 2, 49), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 14), new ItemStack(TFCItems.oreChunk, 1, 14), new ItemStack(TFCItems.oreChunk, 2, 50), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 15), new ItemStack(TFCItems.oreChunk, 1, 15), new ItemStack(TFCItems.oreChunk, 2, 51), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 16), new ItemStack(TFCItems.oreChunk, 1, 16), new ItemStack(TFCItems.oreChunk, 2, 52), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 17), new ItemStack(TFCItems.oreChunk, 1, 17), new ItemStack(TFCItems.oreChunk, 2, 53), "itemHammerTier3"));
-//Poor + Rich to Pile
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 0), new ItemStack(TFCItems.oreChunk, 1, 18), new ItemStack(TFCItems.oreChunk, 1, 36), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 1), new ItemStack(TFCItems.oreChunk, 1, 19), new ItemStack(TFCItems.oreChunk, 1, 37), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 2), new ItemStack(TFCItems.oreChunk, 1, 20), new ItemStack(TFCItems.oreChunk, 1, 38), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 3), new ItemStack(TFCItems.oreChunk, 1, 21), new ItemStack(TFCItems.oreChunk, 1, 39), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 4), new ItemStack(TFCItems.oreChunk, 1, 22), new ItemStack(TFCItems.oreChunk, 1, 40), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 5), new ItemStack(TFCItems.oreChunk, 1, 23), new ItemStack(TFCItems.oreChunk, 1, 41), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 6), new ItemStack(TFCItems.oreChunk, 1, 24), new ItemStack(TFCItems.oreChunk, 1, 42), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 7), new ItemStack(TFCItems.oreChunk, 1, 25), new ItemStack(TFCItems.oreChunk, 1, 43), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 8), new ItemStack(TFCItems.oreChunk, 1, 26), new ItemStack(TFCItems.oreChunk, 1, 44), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 9), new ItemStack(TFCItems.oreChunk, 1, 27), new ItemStack(TFCItems.oreChunk, 1, 45), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 10), new ItemStack(TFCItems.oreChunk, 1, 28), new ItemStack(TFCItems.oreChunk, 1, 46), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 11), new ItemStack(TFCItems.oreChunk, 1, 29), new ItemStack(TFCItems.oreChunk, 1, 47), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 12), new ItemStack(TFCItems.oreChunk, 1, 30), new ItemStack(TFCItems.oreChunk, 1, 48), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 13), new ItemStack(TFCItems.oreChunk, 1, 31), new ItemStack(TFCItems.oreChunk, 1, 49), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 14), new ItemStack(TFCItems.oreChunk, 1, 32), new ItemStack(TFCItems.oreChunk, 1, 50), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 15), new ItemStack(TFCItems.oreChunk, 1, 33), new ItemStack(TFCItems.oreChunk, 1, 51), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 16), new ItemStack(TFCItems.oreChunk, 1, 34), new ItemStack(TFCItems.oreChunk, 1, 52), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, 17), new ItemStack(TFCItems.oreChunk, 1, 35), new ItemStack(TFCItems.oreChunk, 1, 53), "itemHammerTier3"));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, i), new ItemStack(TFCItems.oreChunk, 1, i), new ItemStack(TFCItems.oreChunk, 1, i), "itemHammerTier3"));
 //Rich to Pile
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 0), new ItemStack(TFCItems.oreChunk, 4, 18), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 1), new ItemStack(TFCItems.oreChunk, 4, 19), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 2), new ItemStack(TFCItems.oreChunk, 4, 20), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 3), new ItemStack(TFCItems.oreChunk, 4, 21), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 4), new ItemStack(TFCItems.oreChunk, 4, 22), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 5), new ItemStack(TFCItems.oreChunk, 4, 23), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 6), new ItemStack(TFCItems.oreChunk, 4, 24), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 7), new ItemStack(TFCItems.oreChunk, 4, 25), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 8), new ItemStack(TFCItems.oreChunk, 4, 26), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 9), new ItemStack(TFCItems.oreChunk, 4, 27), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 10), new ItemStack(TFCItems.oreChunk, 4, 28), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 11), new ItemStack(TFCItems.oreChunk, 4, 29), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 12), new ItemStack(TFCItems.oreChunk, 4, 30), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 13), new ItemStack(TFCItems.oreChunk, 4, 31), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 14), new ItemStack(TFCItems.oreChunk, 4, 32), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 15), new ItemStack(TFCItems.oreChunk, 4, 33), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 16), new ItemStack(TFCItems.oreChunk, 4, 34), "itemHammerTier3"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, 17), new ItemStack(TFCItems.oreChunk, 4, 35), "itemHammerTier3"));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 3, i), new ItemStack(TFCItems.oreChunk, 1, i + 18), new ItemStack(TFCItems.oreChunk, 1, i + 18), new ItemStack(TFCItems.oreChunk, 1, i + 18), new ItemStack(TFCItems.oreChunk, 1, i + 18), "itemHammerTier3"));
+//Poor + Normal to Pile
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, i), new ItemStack(TFCItems.oreChunk, 1, i), new ItemStack(TFCItems.oreChunk, 1, i + 36), new ItemStack(TFCItems.oreChunk, 1, i + 36), "itemHammerTier3"));
+//Poor + Rich to Pile
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.orePile, 1, i), new ItemStack(TFCItems.oreChunk, 1, i + 18), new ItemStack(TFCItems.oreChunk, 1, i + 36), "itemHammerTier3"));
+		}
 //Ingot -> Nugget
 //Metals
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.smallMetalChunk, 10, 0), new ItemStack(TFCItems.bismuthIngot), "itemChisel"));
