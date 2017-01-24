@@ -31,12 +31,9 @@ public class BarrelAlcoholRecipe extends BarrelRecipe
 	@Override
 	public FluidStack getResultFluid(ItemStack inIS, FluidStack inFS, int sealedTime)
 	{
-		float amt = inFS.amount/10000f;
 		FluidStack out = recipeOutFluid.copy();
 		if(out.tag == null)
 			out.tag = new NBTTagCompound();
-		float weight = Food.getWeight(inIS);
-		out.tag.setFloat("potency", (weight/Food.getWeight(recipeIS))/amt);
 		return recipeOutFluid;
 	}
 
@@ -58,7 +55,7 @@ public class BarrelAlcoholRecipe extends BarrelRecipe
 				float recipeWeight = Food.getWeight(recipeIS);
 				float itemstackWeight = Food.getWeight(itemstack);
 				float percent = itemstackWeight/(recipeWeight * ((float)inFluid.amount/(float)recipeFluid.amount));
-				if (percent < 0.25f || percent > 0.75f)
+				if (percent != 1.0f)
 					return false;
 			}
 		}
