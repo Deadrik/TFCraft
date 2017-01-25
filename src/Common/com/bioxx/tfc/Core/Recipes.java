@@ -118,7 +118,7 @@ public class Recipes
 //Flux Powder
 		for (int i = 0; i < Global.STONE_FLUXINDEX.length; i++)
 			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.powder, 2, 0), new ItemStack(TFCItems.looseRock, 1, Global.STONE_FLUXINDEX[i]), "itemHammer"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.powder, 6, 0), new ItemStack(TFCItems.oreChunk, 1, 32), "itemHammer"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.powder, 6, 0), new ItemStack(TFCItems.oreMineralChunk, 1, 15), "itemHammer"));
 //Anvils
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil, 1, 1), "###"," # ","###", '#', "ingotDoubleCopper"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.anvil, 1, 2), "###"," # ","###", '#', "ingotDoubleBronze"));
