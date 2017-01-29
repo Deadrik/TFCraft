@@ -24,7 +24,7 @@ public class BlockOre3 extends BlockOre
 	@Override
 	public int damageDropped(int dmg)
 	{
-		return dmg + Global.ORE_METAL.length + Global.ORE_METAL2.length;
+		return dmg;
 	}
 
 	@Override

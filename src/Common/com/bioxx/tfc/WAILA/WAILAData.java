@@ -595,11 +595,11 @@ public class WAILAData implements IWailaDataProvider
 		{
 			if (meta == 5)
 			{
-				currenttip.set(0, EnumChatFormatting.WHITE.toString() + TFC_Core.translate("item.Ore.Kimberlite.name"));
+				currenttip.set(0, EnumChatFormatting.WHITE.toString() + TFC_Core.translate("item.MineralOre.Kimberlite.name"));
 			}
 			else if (meta == 13)
 			{
-				currenttip.set(0, EnumChatFormatting.WHITE.toString() + TFC_Core.translate("item.Ore.Saltpeter.name"));
+				currenttip.set(0, EnumChatFormatting.WHITE.toString() + TFC_Core.translate("item.MineralOre.Saltpeter.name"));
 			}
 		}
 
