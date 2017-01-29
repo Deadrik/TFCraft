@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Entities.Mobs;
 
+import com.bioxx.tfc.api.TFCItems;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -44,13 +45,13 @@ public class EntityPigZombieTFC extends EntityZombieTFC
 
 		var3 = this.rand.nextInt(2 + par2);
 		for (var4 = 0; var4 < var3; ++var4)
-			this.dropItem(Items.gold_nugget, 1);
+			this.dropItem(Items.bone, 1);
 	}
 
 	@Override
 	protected void dropRareDrop(int par1)
 	{
-		this.dropItem(Items.gold_ingot, 1);
+		this.dropItem(TFCItems.goldIngot, 1);
 	}
 
 	/**
@@ -65,7 +66,7 @@ public class EntityPigZombieTFC extends EntityZombieTFC
 	@Override
 	protected void addRandomArmor()
 	{
-		this.setCurrentItemOrArmor(0, new ItemStack(Items.golden_sword));
+		this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.copperSword));
 	}
 
 	@Override
