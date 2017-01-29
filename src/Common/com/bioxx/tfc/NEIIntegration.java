@@ -90,6 +90,7 @@ public class NEIIntegration
 			API.hideItem(new ItemStack(TFCBlocks.ore));
 			API.hideItem(new ItemStack(TFCBlocks.ore2));
 			API.hideItem(new ItemStack(TFCBlocks.ore3));
+			API.hideItem(new ItemStack(TFCBlocks.ore4));
 			API.hideItem(new ItemStack(TFCBlocks.pottery));
 			//codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.PotteryPot, 1, OreDictionary.WILDCARD_VALUE));
 			API.hideItem(new ItemStack(TFCBlocks.reeds));
