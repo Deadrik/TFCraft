@@ -67,7 +67,7 @@ public class WorldGenPlants implements IWorldGenerator
 		/*if(rain >= 62.5f)
 		{
 		}*/
-		if(rain >= 125)
+		if(rain > 125)
 		{
 			grassPerChunk+=12;
 			mushroomsPerChunk += 1;
