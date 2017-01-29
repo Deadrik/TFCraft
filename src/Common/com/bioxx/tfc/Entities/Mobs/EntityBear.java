@@ -89,6 +89,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		setSize (1.2F, 1.2F);
 		moveSpeed = 0.4F;
 		getNavigator ().setAvoidsWater (true);
+		getNavigator ().setCanSwim(true);
 		tasks.addTask (1, new EntityAISwimming (this));
 		sizeMod = (float) Math.sqrt((rand.nextInt(rand.nextInt((DEGREE_OF_DIVERSION + 1) * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + 1F) *
 										(1.0F - DIMORPHISM * sex));
@@ -443,9 +444,9 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	protected String getLivingSound ()
 	{
-		if(isAdult() && worldObj.rand.nextInt(100) < 5)
+		if(isAdult() && worldObj.rand.nextInt(100) < 16)
 			return TFC_Sounds.BEARCRY;
-		else if(isChild() && worldObj.rand.nextInt(100) < 5)
+		else if(isChild() && worldObj.rand.nextInt(100) < 16)
 			return TFC_Sounds.BEARCUBCRY;
 
 		return isChild() ? null : TFC_Sounds.BEARSAY;
@@ -511,7 +512,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	protected float getSoundVolume ()
 	{
-		return 0.4F;
+		return 0.75F;
 	}
 
 	@Override
