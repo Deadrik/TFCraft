@@ -454,6 +454,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.oilLamp, 1, 4), sterlingSilverRaw, null));
 //Misc
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.wroughtIronKnifeHead, 1), ironRaw, new ItemStack(TFCItems.wroughtIronUnshaped, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.blackSteelKnifeHead, 1), blackSteelRaw, new ItemStack(TFCItems.blackSteelUnshaped, 1)));
 //Ceramics
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.sand, 1, WILDCARD_VALUE), 1, 600, new ItemStack(Blocks.glass, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.sand2, 1, WILDCARD_VALUE), 1, 600, new ItemStack(Blocks.glass, 1)));

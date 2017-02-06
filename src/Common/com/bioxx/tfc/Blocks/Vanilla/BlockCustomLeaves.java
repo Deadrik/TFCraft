@@ -314,6 +314,24 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 						}
 					}
 					return;
+				} else if (name.startsWith("itemShearsBlackSteel"))
+				{
+					if (itemstack.getItemDamage() < 13) {
+						entityplayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
+						entityplayer.addExhaustion(0.045F);
+						if (TFCOptions.enableSaplingDrops)
+							dropRareSapling(world, i, j, k, meta);
+						super.harvestBlock(world, entityplayer, i, j, k, meta);
+
+						itemstack.damageItem(4, entityplayer);
+						if (itemstack.stackSize == 0)
+							entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
+					}
+					else {
+						itemstack.damageItem(itemstack.getItemDamage(), entityplayer);
+						if (itemstack.stackSize == 0)
+							entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
+					}
 				}
 			}
 
@@ -325,6 +343,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 			else if (world.rand.nextInt(100) < 6 && TFCOptions.enableSaplingDrops)
 				dropSapling(world, i, j, k, meta);
 
+
 			super.harvestBlock(world, entityplayer, i, j, k, meta);
 
 		}
@@ -333,6 +352,11 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	protected void dropSapling(World world, int x, int y, int z, int meta)
 	{
 		if (meta != 9 && meta != 15)
+			dropBlockAsItem(world, x, y, z, new ItemStack(this.getItemDropped(0, null, 0), 1, meta));
+	}
+	protected void dropRareSapling(World world, int x, int y, int z, int meta)
+	{
+		if (meta != 15)
 			dropBlockAsItem(world, x, y, z, new ItemStack(this.getItemDropped(0, null, 0), 1, meta));
 	}
 

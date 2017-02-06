@@ -846,6 +846,7 @@ public class TFCItems
 	//public static Item Stew;
 	public static Item salad;
 	public static Item shears;
+	public static Item shearsBlackSteel;
 
 	/**
 	 * Item Uses Setup
@@ -1731,6 +1732,7 @@ public class TFCItems
 		GameRegistry.registerItem(sugar, sugar.getUnlocalizedName());
 
 		GameRegistry.registerItem(shears, shears.getUnlocalizedName());
+		GameRegistry.registerItem(shearsBlackSteel, shearsBlackSteel.getUnlocalizedName());
 
 		TerraFirmaCraft.LOG.info("All Items Registered");
 	}

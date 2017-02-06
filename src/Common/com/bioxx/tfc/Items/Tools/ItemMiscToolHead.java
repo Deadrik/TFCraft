@@ -64,14 +64,15 @@ public class ItemMiscToolHead extends ItemTerra implements ISmeltable
 	{
 		if (this == TFCItems.wroughtIronKnifeHead)
 			return Global.WROUGHTIRON;
-		else
+		else if (this == TFCItems.blackSteelKnifeHead)
+			return Global.BLACKSTEEL;
 			return null;
 	}
 
 	@Override
 	public short getMetalReturnAmount(ItemStack is)
 	{
-		if (this == TFCItems.wroughtIronKnifeHead)
+		if (this == TFCItems.wroughtIronKnifeHead || this == TFCItems.blackSteelKnifeHead)
 			return 100;
 		else
 			return 0;
@@ -80,7 +81,10 @@ public class ItemMiscToolHead extends ItemTerra implements ISmeltable
 	@Override
 	public boolean isSmeltable(ItemStack is)
 	{
-		return this == TFCItems.wroughtIronKnifeHead;
+		if (this == TFCItems.wroughtIronKnifeHead || this == TFCItems.blackSteelKnifeHead)
+			return true;
+		else
+			return false;
 	}
 
 	@Override

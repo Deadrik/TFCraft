@@ -81,6 +81,7 @@ public class ItemSetup extends TFCItems {
 		sluiceItem = new ItemSluice().setFolder("devices/").setUnlocalizedName("SluiceItem").setCreativeTab(TFCTabs.TFC_DEVICES);
 
 		shears = new ItemShears(0, ironToolMaterial).setUnlocalizedName("shears").setTextureName("shears");
+		shearsBlackSteel = new ItemShears(0, blackSteelToolMaterial).setUnlocalizedName("Black Steel Shears").setMaxDamage(16).setTextureName("Black Steel Shears");
 
 		proPickBismuthBronze = new ItemProPick().setUnlocalizedName("Bismuth Bronze ProPick").setMaxDamage(bismuthBronzeUses/3);
 		proPickBlackBronze = new ItemProPick().setUnlocalizedName("Black Bronze ProPick").setMaxDamage(blackBronzeUses/3);

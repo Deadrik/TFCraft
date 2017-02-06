@@ -32,12 +32,6 @@ public class ItemShears extends ItemTerraTool
 	}
 
 	@Override
-	public void registerIcons(IIconRegister registerer)
-	{
-		this.itemIcon = registerer.registerIcon("minecraft:" + this.getUnlocalizedName().replace("item.", ""));
-	}
-
-	@Override
 	public EnumSize getSize(ItemStack is)
 	{
 		return EnumSize.SMALL;

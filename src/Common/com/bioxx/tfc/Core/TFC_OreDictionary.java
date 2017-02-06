@@ -834,6 +834,8 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("itemTuyereRedSteel", new ItemStack(TFCItems.tuyereRedSteel, 1, WILD));
 		OreDictionary.registerOre("itemTuyereSteel", new ItemStack(TFCItems.tuyereSteel, 1, WILD));
 
+		OreDictionary.registerOre("itemShearsBlackSteel", new ItemStack(TFCItems.shearsBlackSteel, 1, WILD));
+
 		//Miscellaneous Items
 		OreDictionary.registerOre("lumpClay", new ItemStack(Items.clay_ball));
 		OreDictionary.registerOre("lumpClay", new ItemStack(TFCItems.clayBall, 1, 0));

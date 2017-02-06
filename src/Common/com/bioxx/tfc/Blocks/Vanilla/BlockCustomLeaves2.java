@@ -28,9 +28,11 @@ public class BlockCustomLeaves2 extends BlockCustomLeaves
 	}
 
 	@Override
-	protected void dropSapling(World world, int x, int y, int z, int meta)
+	protected void dropRareSapling(World world, int x, int y, int z, int meta)
 	{
-		if (meta != 0)
-			dropBlockAsItem(world, x, y, z, new ItemStack(this.getItemDropped(0, null, 0), 1, meta));
+		if (meta == 0)
+			return;
 	}
+
+
 }

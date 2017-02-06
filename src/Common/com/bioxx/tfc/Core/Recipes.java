@@ -1631,6 +1631,8 @@ public class Recipes
 //Shears
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronKnifeHead), new ItemStack(TFCItems.wroughtIronKnifeHead),"shears", AnvilReq.WROUGHTIRON,
 				new ItemStack(TFCItems.shears, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.blackSteelKnifeHead), new ItemStack(TFCItems.blackSteelKnifeHead),"shears", AnvilReq.BLACKSTEEL,
+				new ItemStack(TFCItems.shearsBlackSteel, 1, 0)));
 //Weapons
 //Knifes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.bismuthBronzeIngot),null,"knife", AnvilReq.BISMUTHBRONZE,
