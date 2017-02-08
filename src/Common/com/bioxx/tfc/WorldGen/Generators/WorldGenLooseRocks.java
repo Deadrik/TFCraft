@@ -76,7 +76,6 @@ public class WorldGenLooseRocks implements IWorldGenerator
 						int m = world.getBlockMetadata(xCoord + x, y, zCoord + z);
 						if (!coreSample.contains(BlockOre2.getDroppedItem(m))) {
 							coreSample.add(BlockOre2.getDroppedItem(m));
-							TerraFirmaCraft.LOG.info(m);
 							coreSampleStacks.add(new ItemStack(BlockOre2.getDroppedItem(m + 16), 1, m + 16));
 						}
 					}
