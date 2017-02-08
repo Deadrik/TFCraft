@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.bioxx.tfc.Blocks.Terrain.BlockOre2;
+import com.bioxx.tfc.TerraFirmaCraft;
+import net.minecraft.block.BlockObsidian;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -62,19 +64,20 @@ public class WorldGenLooseRocks implements IWorldGenerator
 				for(int y = yCoord; y > yCoord-35; y--)
 				{
 					if (world.blockExists(xCoord + x, y, zCoord + z) &&
-							(world.getBlock(xCoord + x, y, zCoord + z) == TFCBlocks.ore ||
-							 world.getBlock(xCoord + x, y, zCoord + z) == TFCBlocks.ore2))
-					{
+							(world.getBlock(xCoord + x, y, zCoord + z) == TFCBlocks.ore)) {
 						int m = world.getBlockMetadata(xCoord + x, y, zCoord + z);
-						if(!coreSample.contains(BlockOre.getDroppedItem(m)))
-						{
-								coreSample.add(BlockOre.getDroppedItem(m));
-								coreSampleStacks.add(new ItemStack(BlockOre.getDroppedItem(m), 1, m));
+						if (!coreSample.contains(BlockOre.getDroppedItem(m))) {
+							coreSample.add(BlockOre.getDroppedItem(m));
+							coreSampleStacks.add(new ItemStack(BlockOre.getDroppedItem(m), 1, m));
 						}
-						if(!coreSample.contains(BlockOre2.getDroppedItem(m)))
-						{
+					}
+					else if (world.blockExists(xCoord + x, y, zCoord + z) &&
+							(world.getBlock(xCoord + x, y, zCoord +z) == TFCBlocks.ore2)) {
+						int m = world.getBlockMetadata(xCoord + x, y, zCoord + z);
+						if (!coreSample.contains(BlockOre2.getDroppedItem(m))) {
 							coreSample.add(BlockOre2.getDroppedItem(m));
-							coreSampleStacks.add(new ItemStack(BlockOre2.getDroppedItem(m), 1, m));
+							TerraFirmaCraft.LOG.info(m);
+							coreSampleStacks.add(new ItemStack(BlockOre2.getDroppedItem(m + 16), 1, m + 16));
 						}
 					}
 				}
