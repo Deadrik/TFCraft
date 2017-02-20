@@ -14,9 +14,9 @@ public class TFCOptions
 	public static boolean enableBetterGrass = true;
 	public static boolean enableSaplingDrops = true;
 	public static boolean enableSeedDrops = true;
-	public static boolean enableSeaweedRegen = false;
-	public static boolean enableBerryBushRegen = false;
-	public static boolean enableDebrisRegen = false;
+	public static boolean enableSeaweedRegen = true;
+	public static boolean enableBerryBushRegen = true;
+	public static boolean enableDebrisRegen = true;
 	public static boolean enableDebugMode;
 	public static boolean enableFiniteWater;
 	public static boolean onionsAreGross;
@@ -27,6 +27,8 @@ public class TFCOptions
 	public static int hammerBreakSpeed = 90;
 	public static boolean enableToolModeIndicator = true;
 	public static int recursionLimit = 220;
+	public static int bleedEffectID = 28;
+	public static int heatStrokeEffectID = 29;
 
 	// Time
 	public static int yearLength = 96;
