@@ -512,7 +512,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	protected float getSoundVolume ()
 	{
-		return 0.75F;
+		return 2.0F;
 	}
 
 	@Override
@@ -926,7 +926,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			this.setCustomNameTag(name);
 			return true;
 		}
-		this.playSound((isChild() ? TFC_Sounds.BEARCUBCRY : TFC_Sounds.BEARCRY), 6, rand.nextFloat() / 2F + 0.75F);
+		this.playSound((isChild() ? TFC_Sounds.BEARCUBCRY : TFC_Sounds.BEARCRY), this.getSoundVolume(), rand.nextFloat() / 2F + 0.75F);
 		return false;
 	}
 

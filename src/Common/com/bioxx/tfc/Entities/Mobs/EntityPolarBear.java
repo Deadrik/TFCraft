@@ -528,7 +528,7 @@ public class EntityPolarBear extends EntityTameable implements ICausesDamage, IA
 	@Override
 	protected float getSoundVolume ()
 	{
-		return 0.4F;
+		return 2.0F;
 	}
 
 	@Override
@@ -942,7 +942,7 @@ public class EntityPolarBear extends EntityTameable implements ICausesDamage, IA
 			this.setCustomNameTag(name);
 			return true;
 		}
-		this.playSound((isChild() ? TFC_Sounds.BEARCUBCRY : TFC_Sounds.BEARCRY), 6, rand.nextFloat() / 2F + 0.75F);
+		this.playSound((isChild() ? TFC_Sounds.BEARCUBCRY : TFC_Sounds.BEARCRY), this.getSoundVolume(), rand.nextFloat() / 2F + 0.75F);
 		return false;
 	}
 

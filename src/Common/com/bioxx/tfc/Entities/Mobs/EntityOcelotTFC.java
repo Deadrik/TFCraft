@@ -509,7 +509,7 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal, IInnateA
 	// Coughs up a ball of wool with a nice phlegmy sound.
 	public void Hairball()
 	{
-		this.worldObj.playSoundAtEntity(this, TFC_Sounds.CATCOUGH, 1.0F, 1.0F);
+		this.worldObj.playSoundAtEntity(this, TFC_Sounds.CATCOUGH, this.getSoundVolume(), 1.0F);
 		ItemStack item = new ItemStack(TFCItems.wool, 1);
 		this.entityDropItem(item, 1.0f);
 		
@@ -578,7 +578,7 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal, IInnateA
 						player.inventory.setInventorySlotContents(player.inventory.currentItem, ((ItemFoodTFC) item).onConsumedByEntity(player.getHeldItem(), worldObj, this));
 						this.hunger += 24000;
 						this.familiarity += 1;
-						worldObj.playSoundAtEntity(this, TFC_Sounds.CATPURR, 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
+						worldObj.playSoundAtEntity(this, TFC_Sounds.CATPURR, this.getSoundVolume(), worldObj.rand.nextFloat() * 0.1F + 0.9F);
 						return true;
 					}
 				}
@@ -617,7 +617,7 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal, IInnateA
                 this.setTameSkin(1 + this.worldObj.rand.nextInt(5));
                 this.func_152115_b(player.getUniqueID().toString());
                 this.playTameEffect(true);
-                worldObj.playSoundAtEntity(this, TFC_Sounds.CATPURR, 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
+                worldObj.playSoundAtEntity(this, TFC_Sounds.CATPURR, this.getSoundVolume(), worldObj.rand.nextFloat() * 0.1F + 0.9F);
                 this.aiSit.setSitting(true);
                 this.worldObj.setEntityState(this, (byte)7);
     			return true;
@@ -961,7 +961,7 @@ public class EntityOcelotTFC extends EntityTameable implements IAnimal, IInnateA
 			this.setCustomNameTag(name);
 			return true;
 		}
-		this.playSound(this.getHurtSound(), 6, rand.nextFloat() / 2F + (isChild() ? 1.25F : 0.75F));
+		this.playSound(this.getHurtSound(), this.getSoundVolume(), rand.nextFloat() / 2F + (isChild() ? 1.25F : 0.75F));
 		return false;
 	}
 
