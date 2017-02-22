@@ -3,6 +3,7 @@ package com.bioxx.tfc.Blocks.Vanilla;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.bioxx.tfc.Core.WeatherManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -47,7 +48,8 @@ public class BlockTorchOff extends BlockTorch
 		if (!world.isRemote)
 		{
 			if (player.inventory.getCurrentItem() != null &&
-				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(TFCBlocks.torch))
+				player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(TFCBlocks.torch) &&
+					!WeatherManager.isRainingOnCoord(world, x, y, z))
 			{
 				int meta = world.getBlockMetadata(x, y, z);
 				world.setBlock(x, y, z, TFCBlocks.torch, meta, 3);
