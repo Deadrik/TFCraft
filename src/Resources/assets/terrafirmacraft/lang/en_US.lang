@@ -1788,6 +1788,9 @@ item.Red Steel Tuyere.name=Red Steel Tuyere
 item.Steel Tuyere.name=Steel Tuyere
 item.Wrought Iron Tuyere.name=Wrought Iron Tuyere
 
+#== Shears ==
+item.Black Steel Shears.name=Black Steel Shears
+
 #== Armor ==
 #=== Helmet ===
 item.Bismuth Bronze Unfinished Helmet.name=Unfinished Bismuth Bronze Helmet
