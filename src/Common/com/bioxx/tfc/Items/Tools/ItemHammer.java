@@ -1,10 +1,23 @@
 package com.bioxx.tfc.Items.Tools;
 
 
-import java.util.Set;
-
+import com.bioxx.tfc.Blocks.Terrain.BlockOre;
+import com.bioxx.tfc.Blocks.Terrain.BlockSmooth;
+import com.bioxx.tfc.Blocks.Terrain.BlockStone;
+import com.bioxx.tfc.Core.TFC_Achievements;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.TileEntities.TEAnvil;
+import com.bioxx.tfc.api.Crafting.AnvilManager;
+import com.bioxx.tfc.api.Enums.EnumDamageType;
+import com.bioxx.tfc.api.Enums.EnumItemReach;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Interfaces.ICausesDamage;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCOptions;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,26 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Blocks.Terrain.BlockCobble;
-import com.bioxx.tfc.Blocks.Terrain.BlockDirt;
-import com.bioxx.tfc.Blocks.Terrain.BlockGravel;
-import com.bioxx.tfc.Blocks.Terrain.BlockOre;
-import com.bioxx.tfc.Blocks.Terrain.BlockSand;
-import com.bioxx.tfc.Blocks.Terrain.BlockSmooth;
-import com.bioxx.tfc.Blocks.Terrain.BlockStone;
-import com.bioxx.tfc.Core.TFC_Achievements;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.TileEntities.TEAnvil;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Crafting.AnvilManager;
-import com.bioxx.tfc.api.Enums.EnumDamageType;
-import com.bioxx.tfc.api.Enums.EnumItemReach;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Interfaces.ICausesDamage;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
+import java.util.Set;
 
 public class ItemHammer extends ItemTerraTool implements ICausesDamage
 {

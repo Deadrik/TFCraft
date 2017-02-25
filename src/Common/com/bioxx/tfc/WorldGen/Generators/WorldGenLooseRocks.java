@@ -1,11 +1,14 @@
 package com.bioxx.tfc.WorldGen.Generators;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import com.bioxx.tfc.Blocks.Terrain.BlockOre;
 import com.bioxx.tfc.Blocks.Terrain.BlockOre2;
-import com.bioxx.tfc.TerraFirmaCraft;
-import net.minecraft.block.BlockObsidian;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.TileEntities.TEWorldItem;
+import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.WorldGen.TFCBiome;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
+import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -13,15 +16,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
-import cpw.mods.fml.common.IWorldGenerator;
-
-import com.bioxx.tfc.Blocks.Terrain.BlockOre;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.TileEntities.TEWorldItem;
-import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class WorldGenLooseRocks implements IWorldGenerator
 {

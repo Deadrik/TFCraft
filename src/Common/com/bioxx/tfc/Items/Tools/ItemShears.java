@@ -1,11 +1,10 @@
 package com.bioxx.tfc.Items.Tools;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,12 +14,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
-
 import net.minecraftforge.common.IShearable;
 
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-import com.google.common.collect.Sets;
+import java.util.ArrayList;
+import java.util.Random;
 
 
 public class ItemShears extends ItemTerraTool

@@ -1,19 +1,9 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import com.bioxx.tfc.TileEntities.TEOre;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.stats.StatList;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
-
-import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.TFCItems;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
 
 public class BlockOre2 extends BlockOre
 {

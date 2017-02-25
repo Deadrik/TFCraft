@@ -1,8 +1,7 @@
 package com.bioxx.tfc.Items;
 
-import java.util.Iterator;
-import java.util.List;
-
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemPotion;
@@ -10,9 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.TFCItems;
+import java.util.Iterator;
+import java.util.List;
 
 public class ItemCustomPotion extends ItemPotion
 {

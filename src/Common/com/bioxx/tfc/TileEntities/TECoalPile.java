@@ -3,7 +3,6 @@ package com.bioxx.tfc.TileEntities;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Vector3f;
-import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
 import net.minecraft.block.Block;

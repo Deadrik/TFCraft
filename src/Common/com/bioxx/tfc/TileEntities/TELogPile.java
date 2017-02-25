@@ -1,9 +1,10 @@
 package com.bioxx.tfc.TileEntities;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
-
-import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Core.Vector3f;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCOptions;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,11 +18,8 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Core.Vector3f;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCOptions;
+import java.util.ArrayDeque;
+import java.util.Queue;
 
 public class TELogPile extends TileEntity implements IInventory
 {

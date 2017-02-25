@@ -1,18 +1,15 @@
 package com.bioxx.tfc.Render;
 
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Entities.Mobs.EntityPolarBear;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.api.Entities.IAnimal;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Entities.Mobs.EntityBear;
-import com.bioxx.tfc.Entities.Mobs.EntityPolarBear;
-import com.bioxx.tfc.api.Entities.IAnimal;
 public class RenderPolarBear extends RenderLiving
 {
 	private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/mob/PolarBear.png");

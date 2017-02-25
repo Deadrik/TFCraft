@@ -1,7 +1,9 @@
 package com.bioxx.tfc.Food;
 
-import java.util.List;
-
+import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.api.Food;
+import com.bioxx.tfc.api.TFCCrafting;
+import com.bioxx.tfc.api.TFCItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -9,10 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.api.Food;
-import com.bioxx.tfc.api.TFCCrafting;
-import com.bioxx.tfc.api.TFCItems;
+import java.util.List;
 
 public class ItemSalad extends ItemMeal
 {

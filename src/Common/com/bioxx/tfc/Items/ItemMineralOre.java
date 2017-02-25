@@ -1,7 +1,6 @@
 package com.bioxx.tfc.Items;
 
 import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -9,8 +8,6 @@ import com.bioxx.tfc.api.Enums.EnumWeight;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-
-import java.util.List;
 
 public class ItemMineralOre extends ItemTerra
 {
