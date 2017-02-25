@@ -1,15 +1,13 @@
 package com.bioxx.tfc.api.Crafting;
 
-import java.util.Stack;
-
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.api.Food;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.api.Food;
+import java.util.Stack;
 
 public class BarrelAlcoholRecipe extends BarrelRecipe
 {
@@ -52,11 +50,13 @@ public class BarrelAlcoholRecipe extends BarrelRecipe
 				{
 					return false;
 				}
+				float decayPercent = Food.getDecay(itemstack) / Food.getWeight(itemstack) * 100;
 				float recipeWeight = Food.getWeight(recipeIS);
 				float itemstackWeight = Food.getWeight(itemstack);
 				float percent = itemstackWeight/(recipeWeight * ((float)inFluid.amount/(float)recipeFluid.amount));
-				if (percent != 1.0f)
+				if (decayPercent > 10.0F || percent < 1.0F || percent > 1.12501F) {
 					return false;
+				}
 			}
 		}
 		return OreDictionary.itemMatches(recipeIS, itemstack, false) && inFluid.isFluidEqual(recipeFluid);

@@ -18,14 +18,18 @@ public class BarrelVinegarRecipe extends BarrelRecipe
 	}
 
 	@Override
-	public Boolean matches(ItemStack item, FluidStack fluid)
+	public Boolean matches(ItemStack itemstack, FluidStack inFluid)
 	{
-		if(item != null && item.getItem() instanceof IFood)
+		if(itemstack != null && itemstack.getItem() instanceof IFood)
 		{
-			if (fluid.isFluidEqual(recipeFluid) && ((IFood) item.getItem()).getFoodGroup() == EnumFoodGroup.Fruit && Food.getWeight(item) >= 1f * (fluid.amount / 100))
+			if (!((Food.getDecay(itemstack) / Food.getWeight(itemstack) * 100) > 5.0F) && (inFluid.isFluidEqual(recipeFluid) &&
+					((IFood) itemstack.getItem()).getFoodGroup() == EnumFoodGroup.Fruit &&
+					((Food.getWeight(itemstack) >= 1F * (inFluid.amount / 100)) &&
+					Food.getWeight(itemstack) <= 1.0501F * (inFluid.amount / 100))))
 			{
 				return true;
 			}
+
 		}
 		return false;
 	}
