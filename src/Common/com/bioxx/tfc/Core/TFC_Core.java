@@ -1401,7 +1401,6 @@ public class TFC_Core
 		boolean isExposed = true;
 		if (world.canBlockSeeTheSky(x, y + 1, z)) // Either no blocks, or transparent blocks above.
 		{
-			TerraFirmaCraft.LOG.info("can see sky and highestY > y");
 			// Glass blocks, or blocks with a solid top or bottom block the rain.
 			if (highestY > y && (world.getBlock(x, highestY, z) instanceof BlockGlass
 					|| world.getBlock(x, highestY, z) instanceof BlockStainedGlass
