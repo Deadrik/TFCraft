@@ -1,9 +1,17 @@
 package com.bioxx.tfc.Core.Config;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.Map;
-
+import com.bioxx.tfc.Core.Util.CaseInsensitiveHashMap;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.WorldGen.Generators.OreSpawnData;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCCrafting;
+import com.bioxx.tfc.api.TFCItems;
+import com.google.common.base.Throwables;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ObjectArrays;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -11,23 +19,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapelessRecipes;
-
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.Util.CaseInsensitiveHashMap;
-import com.bioxx.tfc.WorldGen.Generators.OreSpawnData;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCCrafting;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
-import com.google.common.base.Throwables;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ObjectArrays;
+import java.io.File;
+import java.util.Arrays;
+import java.util.Map;
 
 import static com.bioxx.tfc.Reference.MOD_ID;
 import static com.bioxx.tfc.WorldGen.Generators.WorldGenOre.oreList;
@@ -530,7 +528,7 @@ public class TFC_ConfigFiles
 		oreList.put("Cinnabar", getOreData("Cinnabar", "veins", "small", MOD_ID + ":Ore3", 11, 150, new String[]{"igneous extrusive", "shale", "quartzite"}, 5, 128, 30, 80));
 		oreList.put("Cryolite", getOreData("Cryolite", "veins", "small", MOD_ID + ":Ore3", 12, 100, new String[]{"granite"}, 5, 128, 80, 60));
 		oreList.put("Saltpeter", getOreData("Saltpeter", "veins", "medium", MOD_ID + ":Ore3", 13, 120, new String[]{"sedimentary"}, 5, 128, 80, 60));
-		//WorldGenOre.OreList.put("Serpentine", getOreData("Serpentine", "veins", "large", Reference.ModID + ":Ore3", 14, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
+		oreList.put("Serpentine", getOreData("Serpentine", "veins", "large", MOD_ID + ":Ore3", 14, 150, new String[]{"sedimentary"}, 5, 128, 90, 40));
 		oreList.put("Borax", getOreData("Borax", "veins", "large", MOD_ID + ":Ore3", 15, 120, new String[]{"rock salt"}, 5, 128, 80, 60));
 
 		oreList.put("Bituminous Coal", getOreData("Bituminous Coal", "default", "large", MOD_ID + ":Ore4", 0, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
