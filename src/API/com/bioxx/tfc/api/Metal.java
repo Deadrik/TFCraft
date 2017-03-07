@@ -1,6 +1,7 @@
 package com.bioxx.tfc.api;
 
 import net.minecraft.item.Item;
+import net.minecraft.util.StatCollector;
 
 public class Metal
 {
@@ -27,5 +28,14 @@ public class Metal
 		meltedItem = m;
 		ingot = i;
 		canUse = use;
+	}
+	
+	public String getMetalName()
+	{
+		if (Name == "Pig Iron")
+			return StatCollector.translateToLocal("gui.metal.Iron");
+		
+		String name = Name.replace(" ", "");
+		return StatCollector.translateToLocal("gui.metal."+name);
 	}
 }
