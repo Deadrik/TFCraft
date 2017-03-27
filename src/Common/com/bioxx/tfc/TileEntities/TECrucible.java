@@ -136,39 +136,31 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			if(stackToSmelt != null)
 			{
 				Item itemToSmelt = stackToSmelt.getItem();
-				int newDamage = stackToSmelt.getItemDamage() + 1;
-				int maxDamage = stackToSmelt.getMaxDamage() - 1; // Subtract one so we never have an unshaped metal with 0/100 units
-
 				if(itemToSmelt instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(storage[0]))
+				//Ingot_Mold to Crucible transfer:
 				{
 					if(inputTick > 10)
 					{
 						Metal inputMetal = MetalRegistry.instance.getMetalFromItem(itemToSmelt);
 
-						if (currentAlloy != null && currentAlloy.outputType != null && itemToSmelt == currentAlloy.outputType.meltedItem)
+						// +++ BEGIN REWRITTEN CODE [Precision Smelter] +++ 
+						int curUnits = ((ItemMeltedMetal) itemToSmelt).getMetalUnits(stackToSmelt);
+						
+						if (curUnits > 0)
 						{
+							curUnits--;
 							this.addMetal(inputMetal, (short) 1);
-							if (newDamage >= maxDamage)
-							{
-								storage[0] = new ItemStack(TFCItems.ceramicMold, 1, 1);
-							}
-							else
-							{
-								stackToSmelt.setItemDamage(newDamage);
-							}
+						}
+
+						if (curUnits <= 0)
+						{
+							storage[0] = new ItemStack(TFCItems.ceramicMold, 1, 1);
 						}
 						else
 						{
-							this.addMetal(inputMetal, (short) 1);
-							if (newDamage >= maxDamage)
-							{
-								storage[0] = new ItemStack(TFCItems.ceramicMold, 1, 1);
-							}
-							else
-							{
-								stackToSmelt.setItemDamage(newDamage);
-							}
+							((ItemMeltedMetal) itemToSmelt).setMetalUnits(stackToSmelt, curUnits);
 						}
+						// +++ END REWRITTEN CODE +++ 
 						inputTick = 0;
 						updateGui((byte) 0);
 					}
@@ -200,13 +192,13 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			{
 				if(storage[1].getItem() == TFCItems.ceramicMold)
 				{
-					storage[1] = new ItemStack(currentAlloy.outputType.meltedItem, 1, 99);
+					storage[1] = new ItemStack(currentAlloy.outputType.meltedItem, 1, 100); //+++ REWRITTEN [Precision Smelter]
 					TFC_ItemHeat.setTemp(storage[1], temperature);
 					//currentAlloy.outputAmount--;
 					drainOutput(1.0f);
 					updateGui((byte) 1);
 				}
-				else if(storage[1].getItem() == currentAlloy.outputType.meltedItem && storage[1].getItemDamage() > 0)
+				else if(storage[1].getItem() == currentAlloy.outputType.meltedItem && storage[1].getItemDamage() > 1) //+++ REWRITTEN [Precision Smelter]
 				{
 					storage[1].setItemDamage(storage[1].getItemDamage()-1);
 					float inTemp = TFC_ItemHeat.getTemp(storage[1]);
@@ -220,7 +212,8 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				outputTick = 0;
 			}
 
-			if(currentAlloy != null && this.getTotalMetal() < 1)
+			if(currentAlloy != null && this.getTotalMetal() < 0.99) //+++ REWRITTEN [Precision Smelter]
+			// "< 0.99" instead of "< 1" fixes metal loss due to floating point roundoff error
 			{
 				metals = new HashMap<String, MetalPair>();
 				updateCurrentAlloy();
