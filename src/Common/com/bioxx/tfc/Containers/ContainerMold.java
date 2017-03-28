@@ -105,7 +105,7 @@ public class ContainerMold extends ContainerTFC
 				if (sourceItem instanceof ItemMeltedMetal && inputItem == TFCItems.ceramicMold && inputDamage == 1 && TFC_ItemHeat.getIsLiquid(sourceStack))
 				{
 					ItemStack is = sourceStack.copy();
-					is.setItemDamage(100);
+					is.setItemDamage(101); //+++ REWRITTEN [Precision Smelter]
 					containerInv.setInventorySlotContents(1, is);
 					pi.moldTransferTimer = 100;
 				}
@@ -135,17 +135,20 @@ public class ContainerMold extends ContainerTFC
 			{
 				Item sourceItem = sourceStack.getItem();
 				Item inputItem = inputStack.getItem();
-				int newSourceDamage = sourceStack.getItemDamage() + 1;
-				int inputDamage = inputStack.getItemDamage();
 				ItemStack recipeOutput = CraftingManagerTFC.getInstance().findMatchingRecipe(this.containerInv, world);
 
 				if (sourceItem instanceof ItemMeltedMetal && inputItem instanceof ItemMeltedMetal)
+				// Ingot_Mold to Ingot_Mold transfer:
+				// +++ BEGIN REWRITTEN CODE [Precision Smelter] +++ 
 				{
-					if (sourceItem == inputItem && inputDamage != 0)
+					int sourceUnits = ((ItemMeltedMetal) sourceItem).getMetalUnits(sourceStack);
+					int inputUnits = ((ItemMeltedMetal) inputItem).getMetalUnits(inputStack);
+					if (sourceItem == inputItem && sourceUnits > 0 && inputUnits < 100)
 					{
-						sourceStack.setItemDamage(newSourceDamage);
-						inputStack.setItemDamage(inputDamage - 1);
-						if (newSourceDamage >= sourceStack.getMaxDamage() - 1) // Subtract one so we never have an unshaped metal with 0/100 units
+						((ItemMeltedMetal) sourceItem).setMetalUnits(sourceStack, sourceUnits - 1);
+						((ItemMeltedMetal) inputItem).setMetalUnits(inputStack, inputUnits + 1);
+						if (sourceUnits <= 1 )
+				// +++ END REWRITTEN CODE +++ 
 						{
 							containerInv.setInventorySlotContents(0, new ItemStack(TFCItems.ceramicMold, 1, 1));
 						}
