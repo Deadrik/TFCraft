@@ -107,7 +107,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 			{
 				if (input != null && input.getItem() == TFCItems.ceramicMold && input.getItemDamage() == 1 && input.stackSize == 1 && metalAmount > 0)
 				{
-					int amt = 99;
+					int amt = 100; //+++ REWRITTEN [Precision Smelter]
 					ItemStack is = new ItemStack(m.meltedItem, 1, amt);
 					TFC_ItemHeat.setTemp(is, (short) (HeatRegistry.getInstance().getMeltingPoint(is) * 1.5f));
 					containerInv.setInventorySlotContents(0, is);
@@ -125,7 +125,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 
 					stack.setTagCompound(nbt);
 				}
-				else if (input != null && input.getItem() == m.meltedItem && input.getItemDamage() > 0)
+				else if (input != null && input.getItem() == m.meltedItem && input.getItemDamage() > 1) // +++ REWRITTEN [Precision Smelter]
 				{
 					input.setItemDamage(input.getItemDamage() - 1);
 					TFC_ItemHeat.setTemp(input, (short) (HeatRegistry.getInstance().getMeltingPoint(input) * 1.5f));

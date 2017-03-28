@@ -51,12 +51,50 @@ public class ItemMeltedMetal extends ItemTerra
 	@Override
 	public void addItemInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{		
-		if (is.getItemDamage() > 1)
+// +++ BEGIN REWRITTEN CODE [Precision Smelter] +++ 
+		int u = ((ItemMeltedMetal) is.getItem()).getMetalUnits(is);
+		if (u < 100)
 		{
-			arraylist.add(TFC_Core.translate("gui.units") + ": " + (100 - is.getItemDamage()) + " / 100");
+			arraylist.add(TFC_Core.translate("gui.units") + ": " + u + " / 100");
 		}
+// +++ END REWRITTEN CODE +++ 
 	}
 
+// +++ BEGIN NEW CODE [Precision Smelter] +++ 
+/* These new "getMetalUnits" & "setMetalUnits" methods implement    
+   the most logical & unambiguous way to define the amount of Metal Units in a mold based on its ItemDamage:   
+  	Damage 	Units	State
+	------	-----	-----
+	0	100 	solid
+	1	100	liquid
+	2	99	any
+	...
+	x	101-x	any
+	...
+	100	1	any
+	101	0	any
+
+    *In the old code Damage=1 meant 2 things: "100 units liquid" & "99 units any", which caused several glitches
+*/	
+	public int getMetalUnits(ItemStack is)
+    {
+    	int d = is.getItemDamage();
+    	if (d <= 1)  return 100;
+    	else  return 101 - d;
+    }
+
+	public void setMetalUnits(ItemStack is, int u)
+    {
+    	if (u < 100)  is.setItemDamage(101 - Math.max(0,u));
+    	else
+    	{
+    		if(TFC_ItemHeat.hasTemp(is) && TFC_ItemHeat.getTemp(is) >= TFC_ItemHeat.isCookable(is))
+    			is.setItemDamage(1);
+    		else  is.setItemDamage(0);
+        }
+    }
+// +++ END NEW CODE +++ 
+    
 	@Override
 	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
 	{
