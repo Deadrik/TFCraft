@@ -47,7 +47,7 @@ public class ItemMeltedMetal extends ItemTerra
 
 		return super.getItemStackLimit(is);
 	}
-	
+
 	@Override
 	public void addItemInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{		
@@ -65,14 +65,14 @@ public class ItemMeltedMetal extends ItemTerra
    the most logical & unambiguous way to define the amount of Metal Units in a mold based on its ItemDamage:   
   	Damage 	Units	State
 	------	-----	-----
-	0		100 	solid
-	1		100		liquid
-	2		99		any
+	0	100 	solid
+	1	100	liquid
+	2	99	any
 	...
-	x		101-x	any
-	... 
-	100		1		any
-	101		0		any
+	x	101-x	any
+	...
+	100	1	any
+	101	0	any
 
     *In the old code Damage=1 meant 2 things: "100 units liquid" & "99 units any", which caused several glitches
 */	
