@@ -140,6 +140,7 @@ public class EntityDamageHandler
 
 				//5. Damage the armor that was hit
 				armor[location].damageItem((int) processArmorDamage(armor[location], damage), entity);
+				if (armor[location].stackSize <= 0)  armor[location] = null; //+++ NEW CODE [Precision Smelter] +++
 			}
 			else if (armor[location] == null || armor[location] != null && !(armor[location].getItem() instanceof ItemTFCArmor))
 			{
