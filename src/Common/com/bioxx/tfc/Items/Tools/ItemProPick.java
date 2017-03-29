@@ -65,7 +65,7 @@ public class ItemProPick extends ItemTerra
 	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		Block block = world.getBlock(x, y, z);
-		if (!world.isRemote)
+		if (world.isRemote)
 		{
 			// Negated the old condition and exiting the method here instead.
 			if (block == TFCBlocks.toolRack)
