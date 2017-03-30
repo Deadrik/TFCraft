@@ -1,9 +1,6 @@
-﻿#de_DE
-#Das ist die deutsche Sprachkonfigurationsdatei, erstellt von Three_Pounds (Items) und Emris (GUI). Überarbeitet von _Tsigje_, Strohtaler.
-
-
-
-
+#de_DE
+#Das ist die deutsche Sprachkonfigurationsdatei, erstellt von Three_Pounds (Items) und Emris (GUI).
+#Überarbeitet von ACGaming, _Tsigje_, Strohtaler.
 
 generator.TFCDefault=TFC Standard
 generator.TFCFlat=Flach (unbenutzt)
@@ -14,8 +11,94 @@ key.ToolMode=Werkzeugmodus wechseln
 key.LockTool=Werkzeugziel festlegen
 
 effect.bleed=Blutung
-death.attack.alcohol=%1$s ist an Alkoholvergiftung gestorben
-death.attack.heatStroke=%1$s ist an Hitzeschlag gestorben
+death.attack.alcohol=%1$s ist an einer Alkoholvergiftung gestorben
+death.attack.heatStroke=%1$s ist an einem Hitzeschlag gestorben
+death.attack.caveIn=%1$s wurde von fallendem Bruchstein erschlagen
+
+#==============
+#= Gui config =
+#==============
+# --- General Config File ---
+# ---------------------------
+config.gui.TFCConfig=TFCConfig.cfg
+config.gui.TFCConfig.tooltip=Generelle Konfigurationsdatei
+
+config.gui.TFCConfig.general=Generell
+config.gui.TFCConfig.general.tooltip=Verschiedene Optionen
+
+config.gui.TFCConfig.time=Zeit
+config.gui.TFCConfig.time.tooltip=Zeit- und kalenderabhängige Optionen
+
+config.gui.TFCConfig.fooddecay=Zerfall
+config.gui.TFCConfig.fooddecay.tooltip=Zerfallsabhängige Optionen
+
+config.gui.TFCConfig.caveins=Einbrüche
+config.gui.TFCConfig.caveins.tooltip=Einbruchabhängige Optionen
+
+config.gui.TFCConfig.worldgen=Weltgenerierung
+config.gui.TFCConfig.worldgen.tooltip=Weltgenerierungsabhängige Optionen
+
+config.gui.TFCConfig.crops=Pflanzen
+config.gui.TFCConfig.crops.tooltip=Pflanzenwachstumsabhängige Optionen
+
+config.gui.TFCConfig.protection=Spawnschutz
+config.gui.TFCConfig.protection.tooltip=Mobspawnschutzabhängige Optionen
+
+config.gui.TFCConfig.player=Spieler
+config.gui.TFCConfig.player.tooltip=Spielerabhängige Optionen
+
+config.gui.TFCConfig.materials=Materialien
+config.gui.TFCConfig.materials.tooltip=Materialienabhängige Optionen
+
+config.gui.TFCConfig.server=Server
+config.gui.TFCConfig.server.tooltip=Serverabhängige Optionen
+
+config.gui.TFCConfig.overworked=Überarbeitung
+config.gui.TFCConfig.overworked.tooltip=Chunküberarbeitungsabhängige Optionen
+
+config.gui.TFCConfig.colors=Farben
+config.gui.TFCConfig.colors.tooltip=Farbabhängige Optionen
+
+config.gui.TFCConfig.colors.r=Rot
+config.gui.TFCConfig.colors.g=Grün
+config.gui.TFCConfig.colors.b=Blau
+config.gui.TFCConfig.colors.a=Alpha
+
+config.gui.TFCConfig.colors.nutrient_a.tooltip=Nährstoff A Feldhacken-Einblendungsfarbe
+config.gui.TFCConfig.colors.nutrient_b.tooltip=Nährstoff B Feldhacken-Einblendungsfarbe
+config.gui.TFCConfig.colors.nutrient_c.tooltip=Nährstoff C Feldhacken-Einblendungsfarbe
+config.gui.TFCConfig.colors.fertilizer.tooltip=Dünger Feldhacken-Einblendungsfarbe
+config.gui.TFCConfig.colors.anvil.0.tooltip=Amboss Regel 0 Farbe
+config.gui.TFCConfig.colors.anvil.1.tooltip=Amboss Regel 1 Farbe
+config.gui.TFCConfig.colors.anvil.2.tooltip=Amboss Regel 2 Farbe
+
+# --- Crafting Config File ---
+# ----------------------------
+config.gui.TFCCrafting.conversion=Vanilla-Umwandlungen
+config.gui.TFCCrafting.conversion.tooltip=WARNUNG: Essensumwandlungen sind nicht rückgängig zu machen!
+
+config.gui.TFCCrafting.vanilla=Vanilla-Herstellungsrezepte
+
+config.gui.TFCCrafting.options=Herstellungsoptionen
+
+com.bioxx.tfc.Core.TFC_ConfigGUI.GeneralConfig.tooltip=Verschiedene Optionen
+com.bioxx.tfc.Core.TFC_ConfigGUI.TimeConfig.tooltip=Zeitabhängige Optionen
+com.bioxx.tfc.Core.TFC_ConfigGUI.FoodDecayConfig.tooltip=Zerfallsabhängige Optionen
+com.bioxx.tfc.Core.TFC_ConfigGUI.CaveInConfig.tooltip=Einbruchabhängige Optionen
+com.bioxx.tfc.Core.TFC_ConfigGUI.WorldGenConfig.tooltip=Weltgenerierungsabhängige Optionen
+com.bioxx.tfc.Core.TFC_ConfigGUI.ColorAConfig.tooltip=Nährstoff A Feldhacken-Einblendungsfarbe
+com.bioxx.tfc.Core.TFC_ConfigGUI.ColorBConfig.tooltip=Nährstoff B Feldhacken-Einblendungsfarbe
+com.bioxx.tfc.Core.TFC_ConfigGUI.ColorCConfig.tooltip=Nährstoff C Feldhacken-Einblendungsfarbe
+com.bioxx.tfc.Core.TFC_ConfigGUI.ColorFertConfig.tooltip=Dünger Feldhacken-Einblendungsfarbe
+com.bioxx.tfc.Core.TFC_ConfigGUI.Color0Config.tooltip=Amboss Regel 0 Farbe
+com.bioxx.tfc.Core.TFC_ConfigGUI.Color1Config.tooltip=Amboss Regel 1 Farbe
+com.bioxx.tfc.Core.TFC_ConfigGUI.Color2Config.tooltip=Amboss Regel 2 Farbe
+com.bioxx.tfc.Core.TFC_ConfigGUI.CropConfig.tooltip=Pflanzenwachstumsabhängige Optionen
+com.bioxx.tfc.Core.TFC_ConfigGUI.ProtectionConfig.tooltip=Mobspawnschutzabhängige Optionen
+com.bioxx.tfc.Core.TFC_ConfigGUI.PlayerConfig.tooltip=Spielerabhängige Optionen
+com.bioxx.tfc.Core.TFC_ConfigGUI.MaterialConfig.tooltip=Materialienabhängige Optionen
+com.bioxx.tfc.Core.TFC_ConfigGUI.ServerConfig.tooltip=Serverabhängige Optionen
+com.bioxx.tfc.Core.TFC_ConfigGUI.OverworkedConfig.tooltip=Chunküberarbeitungsabhängige Optionen
 
 #==============
 #= Entities = 
@@ -51,6 +134,10 @@ entity.barrel.name=Fass
 entity.fallingBlock.name=Fallender Block
 
 entity.notFamiliar=Das Tier ist nicht zahm genug.
+entity.pregnant=Schwanger
+entity.male=Männlich
+entity.female=Weiblich
+
 fishingRod.lineTension=Die Angelschnur wird bald reißen.
 fishingRod.lineSnap=Die Angelschnur ist gerissen.
 fishingRod.bite=Oh! Ein Fisch hat angebissen!
@@ -61,24 +148,26 @@ fishingRod.gotAway=Es hat sich losgerissen....
 #================
 achievement.achLooseRock=Es ist ein Stein
 achievement.achLooseRock.desc=Nehme einen Stein auf
+achievement.achTwoKnives=Double Trouble
+achievement.achTwoKnives.desc=Fertige zwei Messerklingen auf einmal
 achievement.achSmallOre=Kein Stein auf dem anderen
 achievement.achSmallOre.desc=Finde einen Erzbrocken
 achievement.achWildVegetable=Sammler
-achievement.achWildVegetable.desc=Finde wildes Gemüse
+achievement.achWildVegetable.desc=Finde eine wilde Pflanze
 achievement.achRutabaga=Rübenziehen
 achievement.achRutabaga.desc=Finde eine Rübe
 achievement.achQuern=Müller
 achievement.achQuern.desc=Verwende einen Mühlstein
 achievement.achStoneAge=Paläolithisch!
-achievement.achStoneAge.desc=Mache ein Steinwerkzeug, um in das Steinzeitalter aufzubrechen
-achievement.achCopperAge=Chalcolithisch!
+achievement.achStoneAge.desc=Fertige ein Steinwerkzeug, um in das Steinzeitalter aufzubrechen
+achievement.achCopperAge=Chalkolithisch!
 achievement.achCopperAge.desc=Gieße etwas aus Metall, um das Kupferzeitalter zu betreten
 achievement.achSaw=Schreiner
 achievement.achSaw.desc=Fertige eine Säge
 achievement.achAnvil=Hammer Time
-achievement.achAnvil.desc=Mache einen Steinamboss
+achievement.achAnvil.desc=Fertige einen Steinamboss
 achievement.achPickaxe=Glück auf! (Endlich)
-achievement.achPickaxe.desc=Mache eine Spitzhacke
+achievement.achPickaxe.desc=Fertige eine Spitzhacke
 achievement.achDiamond=DIAM- Warte, doch nicht
 achievement.achDiamond.desc=Finde einen Diamanten
 achievement.achLimonite=Brauneisen!
@@ -89,6 +178,24 @@ achievement.achIronAge=Die Eisenzeit
 achievement.achIronAge.desc=Fertige eine Eisenluppe, um in die Eisenzeit vorzudringen
 achievement.achPokeCreeper=Steve Irwin
 achievement.achPokeCreeper.desc=Schlag es mit einem Stock
+achievement.achBlastFurnace=Hoch hinaus
+achievement.achBlastFurnace.desc=Fertige einen Hochofen
+achievement.achFireClay=Ins Feuer
+achievement.achFireClay.desc=Fertige Schamotte
+achievement.achCrucible=Metallurgietisch
+achievement.achCrucible.desc=Fertige einen Schmelztiegel
+achievement.achUnknown=Hoppla!
+achievement.achUnknown.desc=Fertige einen unbekannten Barren
+achievement.achBlackSteel=Any Color You Like
+achievement.achBlackSteel.desc=Fertige einen Schwarzstahlbarren
+achievement.achBlueSteel=Zoolander
+achievement.achBlueSteel.desc=Fertige einen Blaustahlbarren
+achievement.achRedSteel=Vermillion Dollar Metal
+achievement.achRedSteel.desc=Fertige einen Rotstahlbarren
+achievement.achBlueBucket=Lava Bucket HO!
+achievement.achBlueBucket.desc=Fertige einen Blaustahleimer
+achievement.achRedBucket=Tsunami
+achievement.achRedBucket.desc=Fertige einen Rotstahleimer
 
 #============
 #= Commands =
@@ -371,7 +478,7 @@ item.Mace Mold.Ceramic Mold Mace Bronze.name=Streitkolben-Keramikform (Bronze)
 item.Mace Mold.Ceramic Mold Mace Black Bronze.name=Streitkolben-Keramikform (Schwarze Bronze)
 item.Mace Mold.Ceramic Mold Mace Bismuth Bronze.name=Streitkolben-Keramikform (Bismutbronze)
 
-item.Pick Mold.Clay Mold Pick.name=Spitzhackem-Tonform
+item.Pick Mold.Clay Mold Pick.name=Spitzhacken-Tonform
 item.Pick Mold.Ceramic Mold Pick.name=Spitzhacken-Keramikform
 item.Pick Mold.Ceramic Mold Pick Copper.name=Spitzhacken-Keramikform (Kupfer)
 item.Pick Mold.Ceramic Mold Pick Bronze.name=Spitzhacken-Keramikform (Bronze)
@@ -1298,25 +1405,21 @@ item.Stone Hammer Head.name=Stein-Hammerkopf
 item.Stone Knife Blade.name=Stein-Messerklinge
 
 item.IgIn Stone Axe Head.name=Stein-Axtkopf
-item.IgIn Stone Chisel Head.name=Stein-Meißelschneide
 item.IgIn Stone Hoe Head.name=Stein-Hackenblatt
 item.IgIn Stone Javelin Head.name=Stein-Speerkopf
 item.IgIn Stone Shovel Head.name=Stein-Schaufelblatt
 
 item.Sed Stone Axe Head.name=Stein-Axtkopf
-item.Sed Stone Chisel Head.name=Stein-Meißelschneide
 item.Sed Stone Hoe Head.name=Stein-Hackenblatt
 item.Sed Stone Javelin Head.name=Stein-Speerkopf
 item.Sed Stone Shovel Head.name=Stein-Schaufelblatt
 
 item.IgEx Stone Axe Head.name=Stein-Axtkopf
-item.IgEx Stone Chisel Head.name=Stein-Meißelschneide
 item.IgEx Stone Hoe Head.name=Stein-Hackenblatt
 item.IgEx Stone Javelin Head.name=Stein-Speerkopf
 item.IgEx Stone Shovel Head.name=Stein-Schaufelblatt
 
 item.MM Stone Axe Head.name=Stein-Axtkopf
-item.MM Stone Chisel Head.name=Stein-Meißelschneide
 item.MM Stone Hoe Head.name=Stein-Hackenblatt
 item.MM Stone Javelin Head.name=Stein-Speerkopf
 item.MM Stone Shovel Head.name=Stein-Schaufelblatt
@@ -1327,8 +1430,6 @@ item.IgIn Stone Axe.name=Stein-Axt
 item.Sed Stone Axe.name=Stein-Axt
 item.IgEx Stone Axe.name=Stein-Axt
 item.MM Stone Axe.name=Stein-Axt
-
-item.Stone Chisel.name=Stein-Meißel
 
 item.Stone Hammer.name=Stein-Hammer
 
@@ -1896,6 +1997,7 @@ tile.FoodPrep.name=Nahrungszubereitungplatz
 tile.MetalSheet.name=Blechverkleidung
 tile.ingotpile.name=Barrenstapel
 tile.SmokeRack.name=Räuchergitter
+tile.FlowerPot.name=Blumentopf
 
 #== Anvils ==
 tile.Anvil.Stone.name=Stein-Amboss
@@ -1995,7 +2097,7 @@ item.fishingRod.name=Angelrute
 item.Quiver.name=Köcher
 item.Rope.name=Seil
 item.Mud Brick.name=Lehmziegel
-item.Wet Mud Brick.name=feuchter Lehmziegel
+item.Wet Mud Brick.name=Feuchter Lehmziegel
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Stroh- & Fellbett
@@ -2005,6 +2107,7 @@ tile.BasicPipe.name=Rohr
 tile.ValvePipe.name=Rohr mit Ventil
 tile.Smoke.name=Rauch
 tile.Torch.name=Fackel
+tile.TorchOff.name=Ausgebrannte Fackel
 tile.Chest.name=Truhe
 tile.Bookshelf.name=Bücherregal
 tile.Workbench.name=Werkbank
@@ -2012,13 +2115,13 @@ tile.ButtonWood.name=Holzknopf
 tile.Firepit.name=Feuerstelle
 tile.LogPile.name=Holzstapel
 tile.Charcoal.name=Holzkohle
-tile.StoneDetailed.name=Detailiert
+tile.StoneDetailed.name=Detailliert
 tile.stoneStairs.name=Treppe
 tile.stoneSlabs.name=Platte
 tile.stoneStalac.name=Stalaktit
 tile.WoodConstruct.name=Bauholz
 tile.MetalTrapDoor.name=Falltür
-tile.Vessel.name=großes Gefäß
+tile.Vessel.name=Großes Gefäß
 tile.Grill.name=Grill
 
 tile.Sulfur.name=Schwefel
@@ -2040,6 +2143,7 @@ tile.Moss.name=Moos
 tile.Thatch.name=Strohballen
 tile.Flora.Golden Rod.name=Goldruten
 tile.Flora.Cat Tails.name=Rohrkolben
+tile.Flora.Pond Weed.name=Wasserpest
 
 item.Seeds Sugarcane.name=Zuckerrohrsamen
 item.Seeds Hemp.name=Hanfsamen
@@ -2175,7 +2279,7 @@ gui.Bloomery.Ore=Erz
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=Kalender
-gui.Calendar.DateBioxx=Bioxx Geburtstag!
+gui.Calendar.DateBioxx=Bioxx' Geburtstag!
 gui.Calendar.DateDunk=Dunks Geburtstag!
 gui.Calendar.DateKitty=Kittys Geburtstag!
 
@@ -2226,7 +2330,7 @@ gui.Calendar.1Month=1 Monat
 gui.Calendar.1Year=1 Jahr
 
 #== Food GUI ==
-gui.FoodPrep.CreateMeal=erstellen
+gui.FoodPrep.CreateMeal=Erstellen
 gui.FoodPrep.Effect=Wirkung
 gui.FoodPrep.Energy=Energie
 gui.FoodPrep.Filling=Sättigung
@@ -2294,14 +2398,19 @@ gui.plans.trapdoor=Falltür
 
 #== Misc GUI ==
 gui.Blueprint=Bauplan
+gui.Rotate=Drehung ändern
+gui.Blueprint.Inst0=§bRechtsklick §7auf einen detaillierten Block zum Verwenden.
+gui.Blueprint.Inst1=Oder §bRechtsklick §7um die Bauplandrehung zu ändern.
+gui.Blueprint.missingTool=Ein Bauplan benötigt Meißel und Hammer für den Einsatz.
 gui.Nametag=Namensschild
 gui.fertilized=Gedüngt
 gui.Inventory=Inventar
-gui.ClearSlot=Einen Ausgangsslot leeren.
+gui.ClearSlot=Ausgangsslot leeren
 gui.LogPile=Holzstapel
 gui.Output=Ausgabe
 gui.done=Fertig
 gui.cancel=Abbrechen
+gui.empty=Leer
 gui.Sluice.Soil=Erdreich
 gui.Sluice.Overworked=Überarbeitet
 gui.Workbench.Crafting=Handwerk
@@ -2313,6 +2422,8 @@ gui.badnbt=FEHLENDE Info
 gui.Advanced=Fortgeschritten
 gui.Shift=Umschalt-Taste
 gui.Hold=Gedrückt halten:
+gui.SmithingBonus=Schmiedebonus
+gui.ItemWorked=Dieser Gegenstand wurde bearbeitet
 
 gui.slot=Platz
 gui.slot.back=Rücken
@@ -2436,7 +2547,9 @@ word.brined=gepökelt
 word.cooked=gekocht
 word.salted=gesalzen
 word.smoked=geräuchert
+word.smoking=räuchernd
 word.dried=getrocknet
+word.drying=trocknend
 
 food.cooked.rare=Roh
 food.cooked.medrare=Halb durch
@@ -2457,15 +2570,15 @@ gui.ItemHeat.Solidified=Erkaltet
 gui.ItemHeat.Caution=Achtung!
 gui.ItemHeat.Warming=Warm
 gui.ItemHeat.Hot=Heiß
-gui.ItemHeat.VeryHot=Sehr Heiß
-gui.ItemHeat.FaintRed=Schwach Rot
-gui.ItemHeat.DarkRed=Dunkel Rot
-gui.ItemHeat.BrightRed=Hell Rot
+gui.ItemHeat.VeryHot=Sehr heiß
+gui.ItemHeat.FaintRed=Schwach rot
+gui.ItemHeat.DarkRed=Dunkelrot
+gui.ItemHeat.BrightRed=Hellrot
 gui.ItemHeat.Orange=Orange
 gui.ItemHeat.Yellow=Gelb
-gui.ItemHeat.YellowWhite=Gelb-Weiß
+gui.ItemHeat.YellowWhite=Gelb-weiß
 gui.ItemHeat.White=Weiß
-gui.ItemHeat.BrilliantWhite=Glänzend Weiß
+gui.ItemHeat.BrilliantWhite=Glänzend weiß
 
 gui.ingot.workable=schmiedbar
 gui.ingot.weldable=schweißbar
@@ -2499,12 +2612,22 @@ gui.eggs=Eier
 gui.fertEggs=Befruchtete Eier
 gui.logs=Baumstämme
 gui.gems=Edelsteine
+gui.familiarized=Gewöhnt
+gui.familiarity=Vertrautheit
+gui.baby=Baby
+gui.enoughSpace=Genug Platz zum Wachsen
+option.tfc.oreQuality=Zeige Erzqualität
+option.tfc.gender=Zeige Tiergeschlecht
+option.tfc.familiarToday=Zeige Tiergewöhnung
+option.tfc.familiarity=Zeige Tiervertrautheit
+option.tfc.baby=Zeige, ob Tier ein Baby ist
 
 #== Chat Messages ==
-gui.GoldPan.UseFull=Muss unter fließendem Wasser verwendet werden.
-gui.goldpan.overused=Dieser Bereich sieht überarbeitet aus. Du wirst wahrscheinlich nicht viel finden
+gui.goldpan.useFlowing=Muss unter fließendem Wasser verwendet werden.
+gui.goldpan.overused=Dieser Bereich sieht überarbeitet aus. Du wirst wahrscheinlich nicht viel finden.
 gui.seeds.failedTemp=Es ist zu kalt, um das zu pflanzen, es würde nicht lange überleben.
 gui.seeds.failedSun=Es fehlt Sonnenlicht, um das zu pflanzen, es würde nicht lange überleben.
+gui.forge.badChimney=Es ist nicht genug Belüftung vorhanden, um das zu benutzen.
 
 gui.ProPick.Found=Die Probe enthielt
 gui.ProPick.FoundTraces=Die Probe enthielt Spuren von
@@ -2559,6 +2682,6 @@ tile.OilLamp.Platinum.name=Platin-Öllampe
 tile.OilLamp.RoseGold.name=Rotgold-Öllampe
 tile.OilLamp.Silver.name=Silberne Öllampe
 tile.OilLamp.SterlingSilver.name=Sterlingsilber-Öllampe
-tile.OilLamp.BlueSteel.name=Blau-Stahl-Öllampe
+tile.OilLamp.BlueSteel.name=Blaustahl-Öllampe
 gui.plans.hopper=Trichter
 gui.plans.oillamp=Öllampe
