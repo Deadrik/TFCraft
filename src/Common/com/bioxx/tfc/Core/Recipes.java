@@ -1218,6 +1218,10 @@ public class Recipes
 		//We need to set the world ref so that all anvil recipes can generate correctly
 		AnvilManager.world = world;
 
+        manager.getRecipeList().clear();
+        manager.getWeldRecipeList().clear();
+        manager.getPlans().clear();
+
 		manager.addPlan("ingot", new PlanRecipe(
 				new RuleEnum[] {RuleEnum.HITLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.HITTHIRDFROMLAST}));
 		manager.addPlan("sheet", new PlanRecipe(
