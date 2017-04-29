@@ -23,6 +23,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Items.ItemCustomLeash;
+import com.bioxx.tfc.Items.Tools.ItemFirestarter;
+import com.bioxx.tfc.Items.Tools.ItemFlintSteel;
 import com.bioxx.tfc.Items.Tools.ItemProPick;
 import com.bioxx.tfc.Items.Tools.ItemSpindle;
 import com.bioxx.tfc.Items.Tools.ItemWeapon;
@@ -145,11 +148,14 @@ public class BlockToolRack extends BlockTerraContainer
 				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemAxe ||
 				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemSpade ||
 				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemShears ||
-				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemSpindle);
+				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemSpindle ||
+				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemFirestarter ||
+				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemCustomLeash ||
+				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemFlintSteel);
 		if(te.storage[slot] == null && hasToolInHand)
 		{
 			te.storage[slot] = entityplayer.getCurrentEquippedItem().copy();
-			entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem] = null;
+			entityplayer.getCurrentEquippedItem().stackSize--;
 		}
 		else if(te.storage[slot] != null)
 		{
