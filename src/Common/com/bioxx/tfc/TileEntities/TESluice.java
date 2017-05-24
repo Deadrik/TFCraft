@@ -2,6 +2,7 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.*;
 
+import com.bioxx.tfc.Blocks.Terrain.BlockOre2;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -230,6 +231,7 @@ public class TESluice extends TileEntity implements IInventory
 									{
 										coreSampleTypes.add(m);
 										coreSampleStacks.add(new ItemStack(BlockOre.getDroppedItem(m), 1, m));
+										coreSampleStacks.add(new ItemStack(BlockOre2.getDroppedItem(m), 1, m));
 									}
 								}
 							}

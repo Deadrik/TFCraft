@@ -1,9 +1,17 @@
 package com.bioxx.tfc.Entities.Mobs;
 
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
+import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.Items.ItemCustomNameTag;
+import com.bioxx.tfc.Items.Tools.ItemHammer;
+import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Util.Helper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -18,16 +26,9 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
-import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
-import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.Items.ItemCustomNameTag;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Util.Helper;
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EntityPigTFC extends EntityPig implements IAnimal
 {
@@ -80,6 +81,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPigTFC.class, 6.0F));
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16f, 0.25F, 0.3F));
+		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPolarBear.class, 16f, 0.25F, 0.3F));
 		this.tasks.addTask(8, new EntityAILookIdle(this));
 
 		hunger = 168000;
@@ -450,6 +452,11 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 			}
 			return true;
 		}
+		else if(itemstack != null && itemstack.getItem() instanceof ItemHammer)
+		{
+			this.trySetPigvil(player);
+			return true;
+		}
 		else
 		{
 			if (super.interact(player))
@@ -802,6 +809,26 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 			return true;
 		}
 		this.playSound(this.getHurtSound(), 6, rand.nextFloat() / 2F + (isChild() ? 1.25F : 0.75F));
+		return false;
+	}
+
+	public boolean trySetPigvil(EntityPlayer player) {
+		ItemStack itemstack = player.inventory.getCurrentItem();
+
+		if (!this.hasCustomNameTag() && "Pakratt0013".equals((player.getDisplayName())) &&
+				this.checkFamiliarity(InteractionEnum.MOUNT, player) && itemstack != null && itemstack.getItem() == TFCItems.steelHammer)
+		{
+			this.setCustomNameTag("Pigvil");
+			this.setSizeMod(1.50F);
+			this.playSound(TFC_Sounds.METALIMPACT, 0.1F, 0.1F + (rand.nextFloat()/4));
+			return true;
+		}
+		else if (this.hasCustomNameTag() && "Pigvil".equals(this.getCustomNameTag())) {
+			this.playSound(TFC_Sounds.METALIMPACT, 0.1F, 0.1F + (rand.nextFloat() / 4));
+			return true;
+		}
+		else
+			this.playSound(this.getHurtSound(), 6, rand.nextFloat() / 2F + (isChild() ? 1.25F : 0.75F));
 		return false;
 	}
 

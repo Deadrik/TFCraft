@@ -122,7 +122,7 @@ public class BlockFruitWood extends BlockTerraContainer
 					{
 						l += 8;
 					}
-					dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.fruitTreeSapling, 1, l));
+					dropBlockAsItem(world, i, j, k, new ItemStack(TFCBlocks.fruitTreeSapling, 1, l));
 				}
 			}
 		}

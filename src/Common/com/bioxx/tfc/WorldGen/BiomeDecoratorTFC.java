@@ -126,7 +126,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
 			float temperature = TFC_Climate.getBioTemperatureHeight(currentWorld, xCoord, this.currentWorld.getHeightValue(xCoord, zCoord), zCoord);
 			float rainfall = TFC_Climate.getRainfall(currentWorld, xCoord, yCoord, zCoord);
-			if (temperature > 20 && rainfall < 125)
+			if (temperature > 20 && rainfall < 126)
 				new WorldGenCustomCactus().generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 		}
 

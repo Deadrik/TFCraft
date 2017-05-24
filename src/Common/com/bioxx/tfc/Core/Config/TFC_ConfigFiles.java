@@ -1,9 +1,17 @@
 package com.bioxx.tfc.Core.Config;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.Map;
-
+import com.bioxx.tfc.Core.Util.CaseInsensitiveHashMap;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.WorldGen.Generators.OreSpawnData;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCCrafting;
+import com.bioxx.tfc.api.TFCItems;
+import com.google.common.base.Throwables;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ObjectArrays;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -11,23 +19,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapelessRecipes;
-
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.Util.CaseInsensitiveHashMap;
-import com.bioxx.tfc.WorldGen.Generators.OreSpawnData;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCCrafting;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
-import com.google.common.base.Throwables;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ObjectArrays;
+import java.io.File;
+import java.util.Arrays;
+import java.util.Map;
 
 import static com.bioxx.tfc.Reference.MOD_ID;
 import static com.bioxx.tfc.WorldGen.Generators.WorldGenOre.oreList;
@@ -48,6 +46,7 @@ public class TFC_ConfigFiles
 	public static final String PROTECTION = "spawn protection";
 	public static final String PLAYER = "player";
 	public static final String MATERIALS = "materials";
+	public static final String CRAFTING = "crafting";
 	public static final String SERVER = "server";
 	public static final String OVERWORKED = "overworked chunks";
 	public static final String COLORS = "colors";
@@ -355,16 +354,21 @@ public class TFC_ConfigFiles
 		enableBetterGrass = generalConfig.getBoolean("enableBetterGrass", GENERAL, enableBetterGrass, "If true, then the side of a grass block which has another grass block adjacent and one block lower than it will show as completely grass.", "config.gui.TFCConfig.general.enableBetterGrass");
 		enableSaplingDrops = generalConfig.getBoolean("enableSaplingDrops", GENERAL, enableSaplingDrops, "Set this to false to disable saplings dropping from harvested leaf blocks.", "config.gui.TFCConfig.general.enableSaplingDrops");
 		enableSeedDrops = generalConfig.getBoolean("enableSeedDrops", GENERAL, enableSeedDrops, "Set this to false to disable seeds being placed on the ground when a crop on farmland dies from natural causes such as freezing temperatures, old age, or not enough sunlight.", "config.gui.TFCConfig.general.enableSeedDrops");
+		enableSeaweedRegen = generalConfig.getBoolean("enableSeaweedRegen", GENERAL, enableSeaweedRegen, "Set this to true to enable Seaweed to slowly regenerate every year.");
+		enableBerryBushRegen = generalConfig.getBoolean("enableBerryBushRegen", GENERAL, enableBerryBushRegen, "Set this to true to enable Berry bushes to slowly regenerate every year.");
+		enableDebrisRegen = generalConfig.getBoolean("enableDebrisRegen", GENERAL, enableDebrisRegen, "Set this to true to enable sticks, rocks and ore pieces to slowly regenerate every year.");
 		enableDebugMode = generalConfig.getBoolean("enableDebugMode", GENERAL, enableDebugMode, "Set this to true if you want to turn on debug mode which is useful for bug hunting.", "config.gui.TFCConfig.general.enableDebugMode");
 		enableFiniteWater = generalConfig.getBoolean("enableFiniteWater", GENERAL, enableFiniteWater, "Set this to true to enable finite water. Two adjacent source water blocks will not create a third.", "config.gui.TFCConfig.general.enableFiniteWater");
 		onionsAreGross = generalConfig.getBoolean("onionsAreGross", GENERAL, onionsAreGross, "Set this to true if you don't like onions.", "config.gui.TFCConfig.general.onionsAreGross");
 		quiverHUDPosition = generalConfig.getString("quiverHUDPosition", GENERAL, quiverHUDPosition, "Valid position strings are: bottomleft, left, topleft, bottomright, right, topright", new String[]{"bottomleft", "left", "topleft", "bottomright", "right", "topright"}, "config.gui.TFCConfig.general.quiverHUDPosition");
 		enableSolidDetailed = generalConfig.getBoolean("enableSolidDetailed", GENERAL, enableSolidDetailed, "Should sides of detailed blocks be considered solid?", "config.gui.TFCConfig.general.enableSolidDetailed");
 		maxRemovedSolidDetailed = generalConfig.getInt("maxRemovedSolidDetailed", GENERAL, maxRemovedSolidDetailed, 0, 64, "Maximum count of removed sub-blocks on one side for the detailed block side to still be solid.", "config.gui.TFCConfig.general.maxRemovedSolidDetailed");
+		hammerBreakSpeed = generalConfig.getInt("hammerBreakSpeed", GENERAL, hammerBreakSpeed, 1, 360, "Divisor to set speed of Hammer breaking Smooth and Brick Blocks. Higher is SLOWER!", "config.gui.TFCConfig.general.hammerBreakSpeed");
+		recursionLimit = generalConfig.getInt("recursionLimit", GENERAL, 240, 1, 240, "Prevents crashes due to too many leaf blocks breaking.");
+		bleedEffectID = generalConfig.getInt("bleedID", GENERAL, 28, 24, 255, "The Potion ID for the Bleed potion effect.");
+		heatStrokeEffectID = generalConfig.getInt("heatStrokeID", GENERAL, 29, 24, 255, "The Potion ID for the Heat Stroke potion effect.");
 		enableToolModeIndicator = generalConfig.getBoolean("enableToolModeIndicator", GENERAL, enableToolModeIndicator, "Set to false to hide the tool mode indicator that is displayed next to the hotbar for tools such as chisels and hoes.", "config.gui.TFCConfig.general.enableToolModeIndicator");
-
 		generalConfig.setCategoryLanguageKey(TIME, "config.gui.TFCConfig.time");
-
 		yearLength = generalConfig.getInt("yearLength", TIME, yearLength, 96, 12000, "This is how many days are in a year. Keep this to multiples of 12.", "config.gui.TFCConfig.time.yearLength");
 		if (yearLength % 12 != 0) 
 		{
@@ -376,6 +380,7 @@ public class TFC_ConfigFiles
 		pitKilnBurnTime = generalConfig.getFloat("pitKilnBurnTime", TIME, pitKilnBurnTime, 1.0f, 2304.0f, "This is the number of hours that the pit kiln should burn before being completed.", "config.gui.TFCConfig.time.pitKilnBurnTime");
 		bloomeryBurnTime = generalConfig.getFloat("bloomeryBurnTime", TIME, bloomeryBurnTime, 1.0f, 2304.0f, "This is the number of hours that the bloomery should burn before being completed.", "config.gui.TFCConfig.time.bloomeryBurnTime");
 		charcoalPitBurnTime = generalConfig.getFloat("charcoalPitBurnTime", TIME, charcoalPitBurnTime, 1.0f, 2304.0f, "This is the number of hours that the charcoal pit should burn before being completed.", "config.gui.TFCConfig.time.charcoalPitBurnTime");
+		cokePitBurnTime = generalConfig.getFloat("cokePitBurnTime", TIME, cokePitBurnTime, 1.0f, 2304.0f, "This is the number of hours that the coke pit should burn before being completed.", "config.gui.TFCConfig.time.cokePitBurnTime");
 		torchBurnTime = generalConfig.getInt("torchBurnTime", TIME, torchBurnTime, 0, 2304, "This is how many in-game hours torches will last before burning out. Set to 0 for infinitely burning torches.", "config.gui.TFCConfig.time.torchBurnTime");
 		saplingTimerMultiplier = generalConfig.getFloat("saplingTimerMultiplier", TIME, saplingTimerMultiplier, 0.01f, 100.0f, "This is a global multiplier for the number of days required before a sapling can grow into a tree. Decrease for faster sapling growth.", "config.gui.TFCConfig.time.saplingTimerMultiplier");
 		tempIncreaseMultiplier = generalConfig.getFloat("tempIncreaseMultiplier", TIME, tempIncreaseMultiplier, 0.01f, 100.0f, "This is a global multiplier for the rate at which items heat up. Increase to make items heat up faster.", "config.gui.TFCConfig.time.tempIncreaseMultiplier");
@@ -426,6 +431,7 @@ public class TFC_ConfigFiles
 		poorOreUnits = generalConfig.getInt("poorOreUnits", MATERIALS, poorOreUnits, 1, 150, "The metal units provided by a single piece of poor ore.", "config.gui.TFCConfig.materials.poorOreUnits");
 		normalOreUnits = generalConfig.getInt("normalOreUnits", MATERIALS, normalOreUnits, 1, 250, "The metal units provided by a single piece of normal ore.", "config.gui.TFCConfig.materials.normalOreUnits");
 		richOreUnits = generalConfig.getInt("richOreUnits", MATERIALS, richOreUnits, 1, 350, "The metal units provided by a single piece of rich ore", "config.gui.TFCConfig.materials.richOreUnits");
+		enableAluminumSmelting = generalConfig.getBoolean("enableAluminumSmelting", CRAFTING, enableAluminumSmelting, "Set to true to allow Aluminum ore to be meltalbe in crucible.", "config.gui.TFCConfig.ores.enableAluminumSmelting");
 
 		generalConfig.setCategoryLanguageKey(SERVER, "config.gui.TFCConfig.server");
 
@@ -501,29 +507,39 @@ public class TFC_ConfigFiles
 		oreList.put("Limonite", getOreData("Limonite", "veins", "medium", MOD_ID + ":Ore1", 11, 150, new String[]{"sedimentary"}, 5, 128, 80, 60));
 		oreList.put("Sphalerite", getOreData("Sphalerite", "veins", "medium", MOD_ID + ":Ore1", 12, 100, new String[]{"metamorphic"}, 5, 128, 80, 60));
 		oreList.put("Tetrahedrite", getOreData("Tetrahedrite", "veins", "medium", MOD_ID + ":Ore1", 13, 120, new String[]{"metamorphic"}, 5, 128, 80, 60));
-		oreList.put("Bituminous Coal", getOreData("Bituminous Coal", "default", "large", MOD_ID + ":Ore1", 14, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
-		oreList.put("Lignite", getOreData("Lignite", "default", "medium", MOD_ID + ":Ore1", 15, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
+		oreList.put("Native Osmium", getOreData("Native Osmium", "veins", "medium", MOD_ID + ":Ore1", 14, 100, new String[]{"sedimentary"}, 5, 128, 80, 40));
+		oreList.put("Bauxite", getOreData("Bauxite", "veins", "medium", MOD_ID + ":Ore1", 15, 120, new String[]{"granite", "gneiss", "basalt", "shale"}, 5, 128, 80, 60));
+		oreList.put("Scheelite", getOreData("Scheelite", "veins", "medium", MOD_ID + ":Ore2", 0, 150, new String[]{"igneous intrusive"}, 5, 128, 80, 60));
+		oreList.put("Wolframite", getOreData("Wolframite", "veins", "medium", MOD_ID + ":Ore2", 1, 150, new String[]{"igneous intrusive"}, 5, 128, 80, 60));
 
-		oreList.put("Kaolinite", getOreData("Kaolinite", "default", "medium", MOD_ID + ":Ore2", 0, 90, new String[]{"sedimentary"}, 5, 128, 80, 60));
-		oreList.put("Gypsum", getOreData("Gypsum", "veins", "large", MOD_ID + ":Ore2", 1, 120, new String[]{"sedimentary"}, 5, 128, 80, 60));
-		//WorldGenOre.OreList.put("Satinspar", getOreData("Satinspar", "veins", "small", Reference.ModID + ":Ore2", 2, 150, new String[]{"sedimentary"}, 5, 128, 40, 80));
-		//WorldGenOre.OreList.put("Selenite", getOreData("Selenite", "veins", "medium", Reference.ModID + ":Ore2", 3, 125, new String[]{"igneous extrusive"}, 5, 128, 60, 60));
-		oreList.put("Graphite", getOreData("Graphite", "veins", "medium", MOD_ID + ":Ore2", 4, 100, new String[]{"marble", "gneiss", "quartzite", "schist"}, 5, 128, 80, 60));
-		oreList.put("Kimberlite", getOreData("Kimberlite", "veins", "medium", MOD_ID + ":Ore2", 5, 200, new String[]{"gabbro"}, 5, 128, 30, 80));
-		//WorldGenOre.OreList.put("Petrified Wood", getOreData("Petrified Wood", "veins", "medium", Reference.ModID + ":Ore2", 6, 100, new String[]{"igneous extrusive", "metamorphic", "granite", "limestone"}, 5, 128, 60, 60));
-		//WorldGenOre.OreList.put("Sulfur", getOreData("Sulfur", "veins", "medium", Reference.ModID + ":Ore2", 7, 100, new String[]{"igneous extrusive", "sedimentary"}, 5, 128, 60, 60));
-		oreList.put("Jet", getOreData("Jet", "veins", "large", MOD_ID + ":Ore2", 8, 110, new String[]{"sedimentary"}, 5, 128, 80, 60));
-		//WorldGenOre.OreList.put("Microcline", getOreData("Microcline", "veins", "large", Reference.ModID + ":Ore2", 9, 100, new String[]{"limestone", "marble"}, 5, 128, 60, 60));
-		oreList.put("Pitchblende", getOreData("Pitchblende", "veins", "small", MOD_ID + ":Ore2", 10, 150, new String[]{"granite"}, 5, 128, 80, 60));
-		oreList.put("Cinnabar", getOreData("Cinnabar", "veins", "small", MOD_ID + ":Ore2", 11, 150, new String[]{"igneous extrusive", "shale", "quartzite"}, 5, 128, 30, 80));
-		oreList.put("Cryolite", getOreData("Cryolite", "veins", "small", MOD_ID + ":Ore2", 12, 100, new String[]{"granite"}, 5, 128, 80, 60));
-		oreList.put("Saltpeter", getOreData("Saltpeter", "veins", "medium", MOD_ID + ":Ore2", 13, 120, new String[]{"sedimentary"}, 5, 128, 80, 60));
-		//WorldGenOre.OreList.put("Serpentine", getOreData("Serpentine", "veins", "large", Reference.ModID + ":Ore2", 14, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
-		oreList.put("Sylvite", getOreData("Sylvite", "veins", "medium", MOD_ID + ":Ore2", 15, 100, new String[]{"rock salt"}, 5, 128, 90, 40));
 
-		oreList.put("Borax", getOreData("Borax", "veins", "large", MOD_ID + ":Ore3", 0, 120, new String[]{"rock salt"}, 5, 128, 80, 60));
-		oreList.put("Lapis Lazuli", getOreData("Lapis Lazuli", "veins", "large", MOD_ID + ":Ore3", 2, 120, new String[]{"marble"}, 5, 128, 80, 60));
-		//WorldGenOre.OreList.put("Olivine", getOreData("Olivine", "veins", "small", Reference.ModID + ":Ore3", 1, 150, new String[]{"sedimentary"}, 5, 128, 40, 80));
+
+		oreList.put("Kaolinite", getOreData("Kaolinite", "default", "medium", MOD_ID + ":Ore3", 0, 90, new String[]{"sedimentary"}, 5, 128, 80, 60));
+		oreList.put("Gypsum", getOreData("Gypsum", "veins", "large", MOD_ID + ":Ore3", 1, 120, new String[]{"sedimentary"}, 5, 128, 80, 60));
+		//WorldGenOre.OreList.put("Satinspar", getOreData("Satinspar", "veins", "small", Reference.ModID + ":Ore3", 2, 150, new String[]{"sedimentary"}, 5, 128, 40, 80));
+		//WorldGenOre.OreList.put("Selenite", getOreData("Selenite", "veins", "medium", Reference.ModID + ":Ore3", 3, 125, new String[]{"igneous extrusive"}, 5, 128, 60, 60));
+		oreList.put("Graphite", getOreData("Graphite", "veins", "medium", MOD_ID + ":Ore3", 4, 100, new String[]{"marble", "gneiss", "quartzite", "schist"}, 5, 128, 80, 60));
+		oreList.put("Kimberlite", getOreData("Kimberlite", "veins", "medium", MOD_ID + ":Ore3", 5, 200, new String[]{"gabbro"}, 5, 128, 30, 80));
+		oreList.put("Petrified Wood", getOreData("Petrified Wood", "veins", "small", MOD_ID + ":Ore3", 6, 100, new String[]{"chert", "claystone", "conglomerate", "shale", "limestone"}, 5, 128, 80, 60));
+		//WorldGenOre.OreList.put("Sulfur", getOreData("Sulfur", "veins", "medium", Reference.ModID + ":Ore3", 7, 100, new String[]{"igneous extrusive", "sedimentary"}, 5, 128, 60, 60));
+		oreList.put("Jet", getOreData("Jet", "veins", "large", MOD_ID + ":Ore3", 8, 110, new String[]{"sedimentary"}, 5, 128, 80, 60));
+		//WorldGenOre.OreList.put("Microcline", getOreData("Microcline", "veins", "large", Reference.ModID + ":Ore3", 9, 100, new String[]{"limestone", "marble"}, 5, 128, 60, 60));
+		oreList.put("Pitchblende", getOreData("Pitchblende", "veins", "small", MOD_ID + ":Ore3", 10, 150, new String[]{"granite"}, 5, 128, 80, 60));
+		oreList.put("Cinnabar", getOreData("Cinnabar", "veins", "small", MOD_ID + ":Ore3", 11, 150, new String[]{"igneous extrusive", "shale", "quartzite"}, 5, 128, 30, 80));
+		oreList.put("Cryolite", getOreData("Cryolite", "veins", "small", MOD_ID + ":Ore3", 12, 100, new String[]{"granite"}, 5, 128, 80, 60));
+		oreList.put("Saltpeter", getOreData("Saltpeter", "veins", "medium", MOD_ID + ":Ore3", 13, 120, new String[]{"sedimentary"}, 5, 128, 80, 60));
+		oreList.put("Serpentine", getOreData("Serpentine", "veins", "large", MOD_ID + ":Ore3", 14, 150, new String[]{"sedimentary"}, 5, 128, 90, 40));
+		oreList.put("Borax", getOreData("Borax", "veins", "large", MOD_ID + ":Ore3", 15, 120, new String[]{"rock salt"}, 5, 128, 80, 60));
+
+		oreList.put("Bituminous Coal", getOreData("Bituminous Coal", "default", "large", MOD_ID + ":Ore4", 0, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
+		oreList.put("Lignite", getOreData("Lignite", "default", "medium", MOD_ID + ":Ore4", 1, 100, new String[]{"sedimentary"}, 5, 128, 90, 40));
+		//WorldGenOre.OreList.put("Olivine", getOreData("Olivine", "veins", "small", Reference.ModID + ":Ore4", 2, 150, new String[]{"sedimentary"}, 5, 128, 40, 80));
+		oreList.put("Lapis Lazuli", getOreData("Lapis Lazuli", "veins", "large", MOD_ID + ":Ore4", 3, 120, new String[]{"marble"}, 5, 128, 80, 60));
+		oreList.put("Sylvite", getOreData("Sylvite", "veins", "medium", MOD_ID + ":Ore4", 4, 100, new String[]{"rock salt"}, 5, 128, 90, 40));
+		oreList.put("Apatite", getOreData("Apatite", "default", "large", MOD_ID + ":Ore4", 5, 150, new String[]{"chalk", "conglomerate", "limestone", "shale"}, 5, 128, 90, 40));
+		oreList.put("Scapolite", getOreData("Scapolite", "veins", "medium", MOD_ID + ":Ore4", 6, 120, new String[]{"gabbro", "diorite", "gneiss", "limestone"}, 5, 128, 80, 60));
+		oreList.put("Strontium", getOreData("Strontium", "veins", "medium", MOD_ID + ":Ore4", 7, 150, new String[]{"sedimentary"}, 5, 128, 80, 60));
+		oreList.put("Quartz", getOreData("Quartz", "veins", "small", MOD_ID + ":Ore4", 8, 150, new String[]{"rhyolite", "granite", "shale", "schist", "gneiss", "quartzite"}, 5, 128, 80, 60));
 
 		//Surface Ore
 		oreList.put("Native Copper Surface", getOreData("Native Copper Surface", "veins", "small", MOD_ID + ":Ore1", 0, 35, new String[]{"igneous extrusive"}, 128, 240, 40, 40));
@@ -531,6 +547,7 @@ public class TFC_ConfigFiles
 		oreList.put("Bismuthinite Surface", getOreData("Bismuthinite Surface", "veins", "small", MOD_ID + ":Ore1", 7, 35, new String[]{"igneous extrusive", "sedimentary"}, 128, 240, 40, 40));
 		oreList.put("Sphalerite Surface", getOreData("Sphalerite Surface", "veins", "small", MOD_ID + ":Ore1", 12, 35, new String[]{"metamorphic"}, 128, 240, 40, 40));
 		oreList.put("Tetrahedrite Surface", getOreData("Tetrahedrite Surface", "veins", "small", MOD_ID + ":Ore1", 13, 35, new String[]{"metamorphic"}, 128, 240, 40, 40));
+		oreList.put("Scheelite Surface", getOreData("Scheelite Surface", "veins", "medium", MOD_ID + ":Ore1", 2, 120, new String[]{"granite"}, 128, 240, 40, 40));
 
 		// getCategoryNames returns an ImmutableSet
 		for (String s : oresConfig.getCategoryNames())

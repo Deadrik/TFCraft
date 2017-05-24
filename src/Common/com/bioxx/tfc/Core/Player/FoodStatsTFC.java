@@ -1,26 +1,27 @@
 package com.bioxx.tfc.Core.Player;
 
-import java.util.Random;
-
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Food.TFCPotion;
+import com.bioxx.tfc.Render.EntityRendererTFC;
+import com.bioxx.tfc.api.Enums.EnumFoodGroup;
+import com.bioxx.tfc.api.Food;
+import com.bioxx.tfc.api.FoodRegistry;
+import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.TFCOptions;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Render.EntityRendererTFC;
-import com.bioxx.tfc.api.Food;
-import com.bioxx.tfc.api.FoodRegistry;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Enums.EnumFoodGroup;
-import com.bioxx.tfc.api.Interfaces.IFood;
+import java.util.Random;
 
 public class FoodStatsTFC
 {
@@ -185,7 +186,17 @@ public class FoodStatsTFC
 					if(waterLevel < 0)
 						waterLevel = 0;
 					if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0 && temp > 35)
-						player.attackEntityFrom(new DamageSource("heatStroke").setDamageBypassesArmor().setDamageIsAbsolute(), 2);
+					{
+						boolean heatstroke = true;
+
+						if (heatstroke && player.worldObj.canBlockSeeTheSky(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ)))
+							{
+								        player.addPotionEffect(new PotionEffect(TFCPotion.heatstroke.id, 20, 0, false));
+										//TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("gui.warning.heatstroke"));
+										player.attackEntityFrom(new DamageSource("heatStroke").setDamageBypassesArmor().setDamageIsAbsolute(), 2);
+									}
+					}
+						
 				}
 			}
 		}

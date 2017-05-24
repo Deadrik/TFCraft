@@ -321,12 +321,20 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		{
 			spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 2 + mountainousAreaModifier, 2 + mountainousAreaModifier, 4 + mountainousAreaModifier));
 			spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 3 + mountainousAreaModifier, 1, 4 + mountainousAreaModifier));
+			spawnableCreatureList.add(new SpawnListEntry(EntityOcelotTFC.class, 5, 1, 1));
 		}
 		//Swamp
 		if(TFC_Climate.isSwamp(world, x,150,z))
 		{
 			spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1, 1, 2));
 			spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 1 + mountainousAreaModifier, 1, 1));
+			spawnableCreatureList.add(new SpawnListEntry(EntityOcelotTFC.class, 5, 1, 1));
+		}
+		//Polar
+		if(temp <= -10)
+		{
+			spawnableCreatureList.clear();
+			spawnableCreatureList.add(new SpawnListEntry(EntityPolarBear.class, 1, 1, 2));
 		}
 		return spawnableCreatureList;
 	}
@@ -622,13 +630,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						convertStone(indexOffset+height, arrayIndex, indexBig, idsBig, metaBig, rock1, rock2, rock3);
 
 						//First we check to see if its a cold desert
-						if(rain < 125 && temp < 1.5f)
+						if(rain < 126 && temp < 1.5f)
 						{
 							surfaceBlock = TFC_Core.getTypeForSand(rock1.data1);
 							subSurfaceBlock = TFC_Core.getTypeForSand(rock1.data1);
 						}
 						//Next we check for all other warm deserts
-						else if(rain < 125 && biome.heightVariation < 0.5f && temp > 20f)
+						else if(rain < 126 && biome.heightVariation < 0.5f && temp > 20f)
 						{
 							surfaceBlock = TFC_Core.getTypeForSand(rock1.data1);
 							subSurfaceBlock = TFC_Core.getTypeForSand(rock1.data1);

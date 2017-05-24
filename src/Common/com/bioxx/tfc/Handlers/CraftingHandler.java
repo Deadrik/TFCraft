@@ -16,7 +16,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 
 import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
@@ -49,26 +48,8 @@ public class CraftingHandler
 
 		//int index = 0;
 		if(iinventory != null)
-		{
-			// Tool Damaging
-			if(item == TFCItems.stoneBrick)
+			if (item == TFCItems.wool)
 			{
-				List<ItemStack> chisels = OreDictionary.getOres("itemChisel", false);
-				handleItem(player, iinventory, chisels);
-			}
-			else if(item == TFCItems.singlePlank ||
-					item == Item.getItemFromBlock(TFCBlocks.woodSupportH) || item == Item.getItemFromBlock(TFCBlocks.woodSupportH2) ||
-					item == Item.getItemFromBlock(TFCBlocks.woodSupportV) || item == Item.getItemFromBlock(TFCBlocks.woodSupportV2))
-			{
-				List<ItemStack> axes = OreDictionary.getOres("itemAxe", false);
-				List<ItemStack> saws = OreDictionary.getOres("itemSaw", false);
-				handleItem(player, iinventory, axes);
-				handleItem(player, iinventory, saws);
-			}
-			else if (item == TFCItems.wool)
-			{
-				List<ItemStack> knives = OreDictionary.getOres("itemKnife", false);
-				handleItem(player, iinventory, knives);
 				int size = 0;
 				for (int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
@@ -76,18 +57,11 @@ public class CraftingHandler
 						continue;
 					if (iinventory.getStackInSlot(i).getItem() == TFCItems.sheepSkin)
 						size = iinventory.getStackInSlot(i).getItemDamage();
+					if (iinventory.getStackInSlot(i).getItem() == TFCItems.pbearSkin)
+						size = iinventory.getStackInSlot(i).getItemDamage();
 				}
 
 				TFC_Core.giveItemToPlayer(new ItemStack(TFCItems.hide, 1, size), player);
-			}
-			else if(item == TFCItems.woolYarn)
-			{
-				handleItem(player, iinventory, Recipes.spindle);
-			}
-			else if (item == TFCItems.powder && itemDamage == 0)
-			{
-				List<ItemStack> hammers = OreDictionary.getOres("itemHammer", false);
-				handleItem(player, iinventory, hammers);
 			}
 
 			// Achievements
@@ -137,7 +111,6 @@ public class CraftingHandler
 					}
 				}
 			}
-		}
 	}
 
 	public static void preCraft(EntityPlayer player, ItemStack itemstack, IInventory iinventory)

@@ -1,5 +1,29 @@
 package com.bioxx.tfc;
 
+import com.bioxx.tfc.Core.ColorizerFoliageTFC;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.*;
+import com.bioxx.tfc.Entities.Mobs.*;
+import com.bioxx.tfc.Handlers.BiomeEventHandler;
+import com.bioxx.tfc.Handlers.Client.*;
+import com.bioxx.tfc.Render.Blocks.*;
+import com.bioxx.tfc.Render.*;
+import com.bioxx.tfc.Render.Models.*;
+import com.bioxx.tfc.Render.RenderFallingBlock;
+import com.bioxx.tfc.Render.TESR.*;
+import com.bioxx.tfc.TileEntities.*;
+import com.bioxx.tfc.api.Enums.EnumTree;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCFluids;
+import com.bioxx.tfc.api.Util.KeyBindings;
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.entity.*;
@@ -8,35 +32,9 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.common.MinecraftForge;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import com.bioxx.tfc.Core.ColorizerFoliageTFC;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Entities.*;
-import com.bioxx.tfc.Entities.Mobs.*;
-import com.bioxx.tfc.Handlers.BiomeEventHandler;
-import com.bioxx.tfc.Handlers.Client.*;
-import com.bioxx.tfc.Render.*;
-import com.bioxx.tfc.Render.RenderFallingBlock;
-import com.bioxx.tfc.Render.Blocks.*;
-import com.bioxx.tfc.Render.Models.*;
-import com.bioxx.tfc.Render.TESR.*;
-import com.bioxx.tfc.TileEntities.*;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCFluids;
-import com.bioxx.tfc.api.Enums.EnumTree;
-import com.bioxx.tfc.api.Util.KeyBindings;
 
 public class ClientProxy extends CommonProxy
 {
@@ -64,8 +62,10 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntitySquidTFC.class, new RenderSquidTFC(new ModelSquidTFC(), 0.7F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCowTFC.class, new RenderCowTFC(new ModelCowTFC(), 0.7F));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySheepTFC.class, new RenderSheepTFC(new ModelSheep2TFC(), new ModelSheep1TFC(), 0.4F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityOcelotTFC.class, new RenderOcelotTFC(new ModelOcelotTFC(), 0.4F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityWolfTFC.class, new RenderWolfTFC(new ModelWolfTFC(), new ModelWolfTFC(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBear.class, new RenderBear(new ModelBear(), 0.9F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityPolarBear.class, new RenderPolarBear(new ModelBear(), 0.9F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPheasantTFC.class, new RenderPheasantTFC(new ModelPheasant(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityChickenTFC.class, new RenderChickenTFC(new ModelChickenTFC(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPigTFC.class, new RenderPigTFC(new ModelPigTFC(), new ModelPigTFC(0.5F), 0.7F));

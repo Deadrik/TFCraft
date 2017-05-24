@@ -67,7 +67,7 @@ public class WorldGenPlants implements IWorldGenerator
 		/*if(rain >= 62.5f)
 		{
 		}*/
-		if(rain >= 125)
+		if(rain > 125)
 		{
 			grassPerChunk+=12;
 			mushroomsPerChunk += 1;
@@ -227,7 +227,7 @@ public class WorldGenPlants implements IWorldGenerator
 
 	}
 
-	private void genBushes(Random random, int chunkX, int chunkZ, World world)
+	public void genBushes(Random random, int chunkX, int chunkZ, World world)
 	{
 		int xCoord;
 		int yCoord;

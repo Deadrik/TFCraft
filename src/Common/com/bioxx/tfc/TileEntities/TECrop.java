@@ -16,6 +16,7 @@ import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Core.WeatherManager;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.api.TFCBlocks;
@@ -183,8 +184,7 @@ public class TECrop extends NetworkTileEntity
 				killCrop(crop);
 			}
 
-			// Snowing
-			if (TFC_Core.isExposedToRain(worldObj, xCoord, yCoord, zCoord) && TFC_Climate.getHeightAdjustedTemp(worldObj, xCoord, yCoord, zCoord) < 0)
+			if(WeatherManager.isRainingOnCoord(worldObj, xCoord, yCoord, zCoord) && TFC_Climate.getHeightAdjustedTemp(worldObj, xCoord, yCoord, zCoord) < 0)
 			{
 				if(crop != null && !crop.dormantInFrost || growth > 1)
 				{

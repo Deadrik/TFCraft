@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Food;
 
+import com.bioxx.tfc.api.TFCOptions;
 import net.minecraft.potion.Potion;
 
 import cpw.mods.fml.relauncher.Side;
@@ -8,6 +9,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TFCPotion extends Potion
 {
     public static Potion bleed;
+    public static Potion heatstroke;
     public static Potion nausea;
     
     /** The name of the Potion. */
@@ -61,7 +63,8 @@ public class TFCPotion extends Potion
 	
 	public static void setup()
 	{
-		bleed = new TFCPotion(20, true, 0xFF0000).setPotionName("effect.bleed").setIconIndex(4, 0).setEffectiveness(0.25D);
+		bleed = new TFCPotion(TFCOptions.bleedEffectID, true, 0xFF0000).setPotionName("effect.bleed").setIconIndex(4, 0).setEffectiveness(0.25D);
+        heatstroke = new TFCPotion(TFCOptions.heatStrokeEffectID, true, 0xFFFF00).setPotionName("effect.heatstroke").setIconIndex(3, 1).setEffectiveness(0.25D);
 	}
 
 }

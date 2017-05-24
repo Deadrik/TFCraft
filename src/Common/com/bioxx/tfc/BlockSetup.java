@@ -25,6 +25,7 @@ public class BlockSetup extends TFCBlocks
 		GameRegistry.registerBlock(ore, "Ore1");
 		GameRegistry.registerBlock(ore2, "Ore2");
 		GameRegistry.registerBlock(ore3, "Ore3");
+		GameRegistry.registerBlock(ore4, "Ore4");
 		GameRegistry.registerBlock(stoneIgIn, ItemStone.class, "StoneIgIn");
 		GameRegistry.registerBlock(stoneIgEx, ItemStone.class, "StoneIgEx");
 		GameRegistry.registerBlock(stoneSed, ItemStone.class, "StoneSed");
@@ -60,6 +61,7 @@ public class BlockSetup extends TFCBlocks
 		GameRegistry.registerBlock(tallGrass, ItemCustomTallGrass.class, "TallGrass");
 		GameRegistry.registerBlock(worldItem, "LooseRock");
 		GameRegistry.registerBlock(logPile, "LogPile");
+		GameRegistry.registerBlock(coalPile, "coalPile");
 		GameRegistry.registerBlock(charcoal, "Charcoal");
 		GameRegistry.registerBlock(detailed, "Detailed");
 
@@ -77,6 +79,7 @@ public class BlockSetup extends TFCBlocks
 		GameRegistry.registerBlock(leaves2, ItemCustomWood2.class, "leaves2");
 		GameRegistry.registerBlock(sapling, ItemSapling.class, "sapling");
 		GameRegistry.registerBlock(sapling2, ItemSapling2.class, "sapling2");
+		GameRegistry.registerBlock(fruitTreeSapling, ItemFruitTreeSapling.class, "fruitTreeSapling");
 		GameRegistry.registerBlock(planks, ItemCustomWood.class, "planks");
 		GameRegistry.registerBlock(planks2, ItemCustomWood2.class, "planks2");
 
@@ -143,6 +146,11 @@ public class BlockSetup extends TFCBlocks
 
 		GameRegistry.registerBlock(fireBrick, "FireBrick");
 		GameRegistry.registerBlock(metalSheet, "MetalSheet");
+		GameRegistry.registerBlock(metalBlock, ItemMetalBlock1.class, "MetalBlock");
+		GameRegistry.registerBlock(metalAlloyBlock, ItemMetalAlloyBlock.class, "MetalAlloyBlock");
+
+		GameRegistry.registerBlock(cokeblock, ItemTerraBlock.class, "FuelBlock");
+
 
 		// Wooden Doors
 		for (int i=0; i < Global.WOOD_ALL.length; i++)
@@ -227,6 +235,8 @@ public class BlockSetup extends TFCBlocks
 		Blocks.vine.setCreativeTab(null);
 		Blocks.flower_pot.setCreativeTab(null);
 
+		cokeblock = new BlockFuel().setHardness(3F).setResistance(10F).setBlockName("CokeBlock");
+
 		bookshelf = new BlockCustomBookshelf().setHardness(1.5F).setStepSound(Block.soundTypeWood).setBlockName("Bookshelf").setBlockTextureName("bookshelf");
 		torch = new BlockTorch().setHardness(0.0F).setStepSound(Block.soundTypeWood).setBlockName("Torch").setBlockTextureName("torch_on");
 		torchOff = new BlockTorchOff().setHardness(0.0F).setStepSound(Block.soundTypeWood).setBlockName("TorchOff").setBlockTextureName("torch_on");
@@ -287,10 +297,12 @@ public class BlockSetup extends TFCBlocks
 		ore = new BlockOre(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
 		ore2 = new BlockOre2(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
 		ore3 = new BlockOre3(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
+		ore4 = new BlockOre4(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
 		worldItem = new BlockWorldItem().setHardness(0.05F).setResistance(1F).setBlockName("LooseRock");
 		sulfur = new BlockSulfur(Material.rock).setBlockName("Sulfur").setHardness(0.5F).setResistance(1F);
 
 		logPile = new BlockLogPile().setHardness(10F).setResistance(1F).setBlockName("LogPile");
+		coalPile = new BlockCoalPile().setHardness(10F).setResistance(1F).setBlockName("CoalPile");
 		woodSupportV = new BlockWoodSupport(Material.wood).setBlockName("WoodSupportV").setHardness(0.5F).setResistance(1F);
 		woodSupportH = new BlockWoodSupport(Material.wood).setBlockName("WoodSupportH").setHardness(0.5F).setResistance(1F);
 		woodSupportV2 = new BlockWoodSupport2(Material.wood).setBlockName("WoodSupportV2").setHardness(0.5F).setResistance(1F);
@@ -331,6 +343,7 @@ public class BlockSetup extends TFCBlocks
 		leaves2 = new BlockCustomLeaves2().setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves2");
 		sapling = new BlockSapling().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling");
 		sapling2 = new BlockSapling2().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling2");
+		fruitTreeSapling = new BlockFruitTreeSapling().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("fruitTreeSapling");
 
 		logNatural = new BlockLogNatural().setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log");
 		logNatural2 = new BlockLogNatural2().setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log2");
@@ -415,9 +428,11 @@ public class BlockSetup extends TFCBlocks
 		fireBrick = new BlockFireBrick().setBlockName("FireBrick").setHardness(8);
 		metalSheet = new BlockMetalSheet().setBlockName("MetalSheet").setHardness(80);
 		leatherRack = new BlockLeatherRack().setBlockName("LeatherRack").setHardness(1);
+		metalBlock = new BlockMetal(Material.iron) {}.setHardness(16F).setResistance(10F).setStepSound(Block.soundTypeMetal).setBlockName("MetalBlock");
+		metalAlloyBlock = new BlockAlloyMetal(Material.iron) {}.setHardness(16F).setResistance(10F).setStepSound(Block.soundTypeMetal).setBlockName("MetalBlock");
 
-		gravel = new BlockGravel(0).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravel");
-		gravel2 = new BlockGravel(16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravel");
+		gravel = new BlockGravel(0).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravels");
+		gravel2 = new BlockGravel(16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravels");
 
 		grill = new BlockGrill().setHardness(2F).setBlockName("Grill");
 		metalTrapDoor = new BlockMetalTrapDoor().setHardness(2F).setBlockName("MetalTrapDoor");
@@ -438,6 +453,8 @@ public class BlockSetup extends TFCBlocks
 		ore.setHarvestLevel("pickaxe", 1);
 		ore2.setHarvestLevel("pickaxe", 1);
 		ore3.setHarvestLevel("pickaxe", 1);
+		metalBlock.setHarvestLevel("pickaxe", 1);
+		metalAlloyBlock.setHarvestLevel("pickaxe", 1);
 
 		dirt.setHarvestLevel("shovel", 0);
 		dirt2.setHarvestLevel("shovel", 0);
@@ -480,6 +497,8 @@ public class BlockSetup extends TFCBlocks
 		woodHoriz4.setHarvestLevel("hammer", 1);
 		woodVert.setHarvestLevel("hammer", 1);
 		woodVert2.setHarvestLevel("hammer", 1);
+		cokeblock.setHarvestLevel("hammer", 1);
+
 	}
 
 	public static void setupFire()
@@ -515,6 +534,8 @@ public class BlockSetup extends TFCBlocks
 		Blocks.fire.setFireInfo(barrel, 5, 20);
 		Blocks.fire.setFireInfo(crops, 20, 20);
 		Blocks.fire.setFireInfo(logPile, 10, 10);
+		Blocks.fire.setFireInfo(coalPile, 10, 10);
+		Blocks.fire.setFireInfo(cokeblock, 10, 10);
 		//Blocks.fire.setFireInfo(Charcoal, 100, 20);
 		for (int i=0; i < Global.WOOD_ALL.length; i++)
 			Blocks.fire.setFireInfo(doors[i], 5, 20);

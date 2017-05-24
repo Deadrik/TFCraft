@@ -78,16 +78,12 @@ public class BlockOre extends BlockCollapsible
 	@Override
 	public int damageDropped(int dmg)
 	{
-		if (dmg == 14 || dmg == 15) // coal
-			return 0;
 		return dmg;
 	}
 
 	@Override
 	public int quantityDropped(int meta, int fortune, Random random)
 	{
-		if (meta == 14 || meta == 15) // coal
-			return 1 + random.nextInt(2);
 		return 1;
 	}
 
@@ -122,7 +118,6 @@ public class BlockOre extends BlockCollapsible
 			boolean dropOres = false;
 			boolean hasHammer = false;
 			int meta = world.getBlockMetadata(x, y, z);
-			boolean isCoal = meta == 14 || meta == 15;
 			ItemStack itemstack = null;
 			if(player != null)
 			{
@@ -147,16 +142,11 @@ public class BlockOre extends BlockCollapsible
 
 			if (player == null || dropOres)
 			{
-				if (isCoal)
-					itemstack = new ItemStack(TFCItems.coal, 1 + world.rand.nextInt(2));
-				else
-				{
 					TEOre te = (TEOre) world.getTileEntity(x, y, z);
 					int ore = getOreGrade(te, meta);
 					itemstack = new ItemStack(TFCItems.oreChunk, 1, damageDropped(ore));
-				}
 			}
-			else if (hasHammer && !isCoal)
+			else if (hasHammer)
 				itemstack = new ItemStack(TFCItems.smallOreChunk, 1, meta);
 
 			if (itemstack != null)
@@ -182,10 +172,7 @@ public class BlockOre extends BlockCollapsible
 		for (int i = 0; i < count; i++)
 		{
 			ItemStack itemstack;
-			if (metadata == 14 || metadata == 15)
-				itemstack = new ItemStack(TFCItems.coal);
-			else
-				itemstack = new ItemStack(TFCItems.oreChunk, 1, damageDropped(ore));
+			itemstack = new ItemStack(TFCItems.oreChunk, 1, damageDropped(ore));
 
 			ret.add(itemstack);
 		}
@@ -194,10 +181,10 @@ public class BlockOre extends BlockCollapsible
 
 	public static Item getDroppedItem(int meta)
 	{
-		if(meta == 14 || meta == 15)
-			return TFCItems.coal;
-		else
+		if(meta < (Global.ORE_METAL.length + 1))
 			return TFCItems.smallOreChunk;
+		else
+			return null;
 	}
 
 	@Override
@@ -223,10 +210,7 @@ public class BlockOre extends BlockCollapsible
 			int meta = world.getBlockMetadata(x, y, z);
 			int ore = getOreGrade(te, meta);
 
-			if(meta == 14 || meta == 15)
-				itemstack = new ItemStack(TFCItems.coal, 1 + random.nextInt(2));
-			else
-				itemstack = new ItemStack(TFCItems.oreChunk, 1, ore);
+			itemstack = new ItemStack(TFCItems.oreChunk, 1, ore);
 
 			dropBlockAsItem(world, x, y, z, itemstack);
 			onBlockDestroyedByExplosion(world, x, y, z, exp);
@@ -239,9 +223,9 @@ public class BlockOre extends BlockCollapsible
 		{
 			int grade = te.extraData & 7;
 			if(grade == 1)
-				ore += 35;
+				ore += 18;
 			else if(grade == 2)
-				ore += 49;
+				ore += 36;
 		}
 		return ore;
 	}

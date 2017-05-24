@@ -1,22 +1,21 @@
 package com.bioxx.tfc.Render;
 
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Entities.Mobs.EntityPigTFC;
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.api.Entities.IAnimal;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderPig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Entities.Mobs.EntityPigTFC;
-import com.bioxx.tfc.api.Entities.IAnimal;
 
 public class RenderPigTFC extends RenderPig
 {
 
 	private static final ResourceLocation PIG_TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/mob/pig.png");
+	private static final ResourceLocation PIGVIL_TEXTURE = new ResourceLocation(Reference.MOD_ID,"textures/mob/pigvil.png");
 	public RenderPigTFC(ModelBase par1ModelBase, ModelBase par2ModelBase, float par3)
 	{
 		super(par1ModelBase,par2ModelBase, par3);
@@ -46,5 +45,18 @@ public class RenderPigTFC extends RenderPig
 	protected ResourceLocation getEntityTexture(Entity entity)
 	{
 		return PIG_TEXTURE;
+	}
+
+	protected int shouldRenderPass(EntityPigTFC pig, int p_77032_2_, float p_77032_3_)
+	{
+		if(pig.hasCustomNameTag() && "Pigvil".equals(pig.getCustomNameTag())) {
+			this.bindTexture(PIGVIL_TEXTURE);
+			return 1;
+		}
+		return -1;
+	}
+	protected int shouldRenderPass(EntityLivingBase p_77032_1_, int p_77032_2_, float p_77032_3_)
+	{
+		return this.shouldRenderPass((EntityPigTFC)p_77032_1_, p_77032_2_, p_77032_3_);
 	}
 }

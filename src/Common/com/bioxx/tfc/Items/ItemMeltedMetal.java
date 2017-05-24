@@ -2,6 +2,7 @@ package com.bioxx.tfc.Items;
 
 import java.util.List;
 
+import com.bioxx.tfc.Items.ItemTerra;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

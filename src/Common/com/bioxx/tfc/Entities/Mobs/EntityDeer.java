@@ -92,6 +92,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPlayer.class, 12.0F, 0.5F, 0.7F));
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16f, 0.25F, 0.3F));
+		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPolarBear.class, 16f, 0.25F, 0.3F));
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
 		this.tasks.addTask(5, this.aiEatGrass);
 		this.tasks.addTask(1, new EntityAIWander(this, 0.5));

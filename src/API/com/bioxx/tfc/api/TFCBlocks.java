@@ -84,6 +84,7 @@ public class TFCBlocks
 	public static Block ore;
 	public static Block ore2;
 	public static Block ore3;
+	public static Block ore4;
 	public static Block sulfur;
 	public static Block planks;
 	public static Block planks2;
@@ -91,6 +92,7 @@ public class TFCBlocks
 	public static Block sapling;
 	public static Block leaves2;
 	public static Block sapling2;
+	public static Block fruitTreeSapling;
 	public static Block woodSupportV;
 	public static Block woodSupportH;
 	public static Block woodSupportV2;
@@ -107,6 +109,7 @@ public class TFCBlocks
 	public static Block peatGrass;
 	public static Block worldItem;
 	public static Block logPile;
+	public static Block coalPile;
 	public static Block tilledSoil;
 	public static Block tilledSoil2;
 	public static Block firepit;
@@ -130,6 +133,7 @@ public class TFCBlocks
 	public static Block tallGrass;
 	public static Block charcoal;
 	public static Block detailed;
+	public static Block cokeblock;
 
 	public static Block woodConstruct;
 	public static Block woodVert;
@@ -176,6 +180,8 @@ public class TFCBlocks
 	public static Block crucible;
 	public static Block fireBrick;
 	public static Block metalSheet;
+	public static Block metalBlock;
+	public static Block metalAlloyBlock;
 
 	public static Block nestBox;
 
@@ -246,7 +252,7 @@ public class TFCBlocks
 
 	public static boolean isBlockAFence(Block block)
 	{
-		return block == fence || block == fence2 || BlockFence.func_149825_a(block);
+		return block == fence || block == fence2 || BlockFence.func_149825_a(block) || block instanceof BlockFence;
 	}
 
 	public static boolean canFenceConnectTo(Block block)

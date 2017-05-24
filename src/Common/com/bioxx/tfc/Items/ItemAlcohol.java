@@ -1,26 +1,23 @@
 package com.bioxx.tfc.Items;
 
-import java.util.Random;
-
+import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Reference;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
 import net.minecraftforge.fluids.FluidContainerRegistry;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Core.Player.FoodStatsTFC;
-import com.bioxx.tfc.api.TFCItems;
+import java.util.Random;
 
 public class ItemAlcohol extends ItemTerra
 {
@@ -28,7 +25,7 @@ public class ItemAlcohol extends ItemTerra
 	{
 		super();
 		this.setFolder("food/");
-		this.setContainerItem(TFCItems.glassBottle);
+		this.setContainerItem(Items.glass_bottle);
 	}
 
 	@Override
@@ -144,14 +141,14 @@ public class ItemAlcohol extends ItemTerra
 		}
 
 		// First try to add the empty bottle to an existing stack of bottles in the inventory
-		if (!player.capabilities.isCreativeMode && !player.inventory.addItemStackToInventory(new ItemStack(TFCItems.glassBottle)))
+		if (!player.capabilities.isCreativeMode && !player.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle)))
 		{
 			// If we couldn't fit the empty bottle in the inventory, and we drank the last alcohol bottle, put the empty bottle in the empty held slot
 			if (is.stackSize == 0)
-				return new ItemStack(TFCItems.glassBottle);
+				return new ItemStack(Items.glass_bottle);
 			// If we couldn't fit the empty bottle in the inventory, and there is more alcohol left in the stack, drop the bottle on the ground
 			else
-				player.dropPlayerItemWithRandomChoice(new ItemStack(TFCItems.glassBottle), false);
+				player.dropPlayerItemWithRandomChoice(new ItemStack(Items.glass_bottle), false);
 		}
 
 		return is;

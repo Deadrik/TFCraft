@@ -4,12 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.world.World;
-
+import net.minecraft.world.biome.BiomeGenBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.WorldCacheManager;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Util.Helper;
@@ -423,9 +424,14 @@ public class TFC_Climate
 
 	public static boolean isSwamp(World world, int x, int y, int z)
 	{
-		float rain = getRainfall(world, x, y, z);
-		float evt = getCacheManager(world).getEVTLayerAt(x, z).floatdata1;
-		return rain >= 1000 && evt <= 0.25 && world.getBiomeGenForCoords(x, z).heightVariation < 0.15;
+		BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+		if (biome == TFCBiome.SWAMPLAND){
+			return true;
+		}
+		return false;
+//		float rain = getRainfall(world, x, y, z);
+//		float evt = getCacheManager(world).getEVTLayerAt(x, z).floatdata1;
+//		return rain >= 500 && evt <= 1.0 && world.getBiomeGenForCoords(x, z).heightVariation < 0.25;
 	}
 
 	public static int getStability(World world, int x, int z)

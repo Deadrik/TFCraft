@@ -1,8 +1,14 @@
 package com.bioxx.tfc.WorldGen.Generators;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import com.bioxx.tfc.Blocks.Terrain.BlockOre;
+import com.bioxx.tfc.Blocks.Terrain.BlockOre2;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.TileEntities.TEWorldItem;
+import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.WorldGen.TFCBiome;
+import com.bioxx.tfc.api.TFCBlocks;
+import com.bioxx.tfc.api.TFCItems;
+import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -10,15 +16,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
-import cpw.mods.fml.common.IWorldGenerator;
-
-import com.bioxx.tfc.Blocks.Terrain.BlockOre;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.TileEntities.TEWorldItem;
-import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.TFCItems;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class WorldGenLooseRocks implements IWorldGenerator
 {
@@ -26,7 +25,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 	{
 	}
 
-	private boolean generateRocks(World world, Random random, int i, int j, int k)
+	public boolean generateRocks(World world, Random random, int i, int j, int k)
 	{
 		if ((world.isAirBlock(i, j + 1, k) || world.getBlock(i, j + 1, k) == Blocks.snow || world.getBlock(i, j + 1, k) == TFCBlocks.tallGrass) && 
 				(world.getBlock(i, j, k).getMaterial() == Material.grass || world.getBlock(i, j, k).getMaterial() == Material.rock) && world.getBlock(i, j, k).isOpaqueCube())
@@ -60,16 +59,20 @@ public class WorldGenLooseRocks implements IWorldGenerator
 			{
 				for(int y = yCoord; y > yCoord-35; y--)
 				{
-					if (world.blockExists(xCoord + x, y, zCoord + z) && world.getBlock(xCoord + x, y, zCoord + z) == TFCBlocks.ore)
-					{
+					if (world.blockExists(xCoord + x, y, zCoord + z) &&
+							(world.getBlock(xCoord + x, y, zCoord + z) == TFCBlocks.ore)) {
 						int m = world.getBlockMetadata(xCoord + x, y, zCoord + z);
-						if(!coreSample.contains(BlockOre.getDroppedItem(m)))
-						{
-							if(m!= 14 && m != 15)
-							{
-								coreSample.add(BlockOre.getDroppedItem(m));
-								coreSampleStacks.add(new ItemStack(BlockOre.getDroppedItem(m), 1, m));
-							}
+						if (!coreSample.contains(BlockOre.getDroppedItem(m))) {
+							coreSample.add(BlockOre.getDroppedItem(m));
+							coreSampleStacks.add(new ItemStack(BlockOre.getDroppedItem(m), 1, m));
+						}
+					}
+					else if (world.blockExists(xCoord + x, y, zCoord + z) &&
+							(world.getBlock(xCoord + x, y, zCoord +z) == TFCBlocks.ore2)) {
+						int m = world.getBlockMetadata(xCoord + x, y, zCoord + z);
+						if (!coreSample.contains(BlockOre2.getDroppedItem(m))) {
+							coreSample.add(BlockOre2.getDroppedItem(m));
+							coreSampleStacks.add(new ItemStack(BlockOre2.getDroppedItem(m + 16), 1, m + 16));
 						}
 					}
 				}
@@ -111,7 +114,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 		}
 	}
 
-	private boolean generateSticks(World world, Random random, int i, int j, int k)
+	public boolean generateSticks(World world, Random random, int i, int j, int k)
 	{
 		if ((world.isAirBlock(i, j + 1, k) || world.getBlock(i, j + 1, k) == Blocks.snow || world.getBlock(i, j + 1, k) == TFCBlocks.tallGrass) && 
 				(world.getBlock(i, j, k).getMaterial() == Material.grass || world.getBlock(i, j, k).getMaterial() == Material.rock ||
@@ -148,4 +151,20 @@ public class WorldGenLooseRocks implements IWorldGenerator
 				world.getBlock(i, j + 6, k - 5).getMaterial() == Material.leaves;
 	}
 
+	public static boolean rocksNearby(World world, int i, int j, int k)
+	{
+		if ((world.getBlock(i + 1, j + 1, k) != TFCBlocks.worldItem) || 
+				(world.getBlock(i + 1, j + 1, k + 1) != TFCBlocks.worldItem) ||
+				(world.getBlock(i, j + 1, k + 1) != TFCBlocks.worldItem) ||
+				(world.getBlock(i - 1, j + 1, k) != TFCBlocks.worldItem) ||
+				(world.getBlock(i - 1, j + 1, k + 1) != TFCBlocks.worldItem) ||
+				(world.getBlock(i - 1, j + 1, k - 1) != TFCBlocks.worldItem) ||
+				(world.getBlock(i, j + 1, k - 1) != TFCBlocks.worldItem) ||
+				(world.getBlock(i + 1, j + 1, k) != TFCBlocks.worldItem))
+			{
+				return true;
+			}
+		
+		return false;
+	}
 }

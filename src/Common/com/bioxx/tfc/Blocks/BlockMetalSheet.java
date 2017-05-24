@@ -37,7 +37,7 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 	public IIcon[] icons;
 	public String[] metalNames = {"Bismuth","Bismuth Bronze","Black Bronze","Black Steel","Blue Steel","Brass","Bronze",
 			"Copper","Gold","Wrought Iron","Lead","Nickel","Pig Iron","Platinum","Red Steel","Rose Gold","Silver","Steel",
-			"Sterling Silver","Tin","Zinc"};
+			"Sterling Silver","Tin","Zinc", "Electrum", "Cupronickel", "Osmium", "Aluminum", "Tungsten"};
 	public BlockMetalSheet()
 	{
 		super(Material.iron);
@@ -144,6 +144,11 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 		TFC_Textures.sheetSterlingSilver = icons[18];
 		TFC_Textures.sheetTin = icons[19];
 		TFC_Textures.sheetZinc = icons[20];
+		TFC_Textures.sheetElectrum = icons[21];
+		TFC_Textures.sheetCupronickel = icons[22];
+		TFC_Textures.sheetOsmium = icons[23];
+		TFC_Textures.sheetAluminum = icons[24];
+		TFC_Textures.sheetTungsten = icons[25];
 	}
 
 	@Override

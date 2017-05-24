@@ -260,7 +260,7 @@ public class TEBloomery extends NetworkTileEntity
 					{
 						EntityItem entity = (EntityItem) iterator.next();
 						if (entity.getEntityItem().getItem() == TFCItems.coal &&
-							entity.getEntityItem().getItemDamage() == 1 /*|| entity.getEntityItem().getItem() == TFCItems.Coke*/)
+								(entity.getEntityItem().getItemDamage() == 1 || entity.getEntityItem().getItemDamage() == 2))
 						{
 							for (int c = 0; c < entity.getEntityItem().stackSize; c++)
 							{
@@ -279,7 +279,7 @@ public class TEBloomery extends NetworkTileEntity
 							int c = entity.getEntityItem().stackSize;
 							while (c > 0)
 							{
-								if (charcoalCount + oreCount < (2 * maxCount) && oreCount < maxCount && outCount < 1000)
+								if (charcoalCount + oreCount < (2 * maxCount) && oreCount < maxCount && outCount < 5000)
 								{
 									if (addOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage())))
 									{

@@ -1,15 +1,13 @@
 package com.bioxx.tfc.Render.Models;
 
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
-
 import org.lwjgl.opengl.GL11;
-
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 
 public class ModelPigTFC extends ModelPig
 {

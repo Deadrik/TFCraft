@@ -1,9 +1,22 @@
 package com.bioxx.tfc.Entities.Mobs;
 
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_MobData;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
+import com.bioxx.tfc.Entities.AI.EntityAISitTFC;
+import com.bioxx.tfc.Entities.AI.EntityAITargetNonTamedTFC;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.Items.ItemCustomNameTag;
+import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Enums.EnumDamageType;
+import com.bioxx.tfc.api.Interfaces.ICausesDamage;
+import com.bioxx.tfc.api.Interfaces.IInnateArmor;
+import com.bioxx.tfc.api.TFCItems;
+import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Util.Helper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockColored;
 import net.minecraft.entity.*;
 import net.minecraft.entity.passive.EntityWolf;
@@ -19,24 +32,9 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_MobData;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
-import com.bioxx.tfc.Entities.AI.EntityAISitTFC;
-import com.bioxx.tfc.Entities.AI.EntityAITargetNonTamedTFC;
-import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.Items.ItemCustomNameTag;
-import com.bioxx.tfc.api.TFCItems;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Enums.EnumDamageType;
-import com.bioxx.tfc.api.Interfaces.ICausesDamage;
-import com.bioxx.tfc.api.Interfaces.IInnateArmor;
-import com.bioxx.tfc.api.Util.Helper;
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, ICausesDamage
 {
@@ -294,13 +292,13 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	@Override
 	public int getCrushArmor()
 	{
-		return 250;
+		return -335;
 	}
 
 	@Override
 	public EnumDamageType getDamageType()
 	{
-		return EnumDamageType.SLASHING;
+		return EnumDamageType.CRUSHING;
 	}
 	@Override
 	public int getDueDay()
@@ -376,7 +374,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	@Override
 	public int getPierceArmor()
 	{
-		return -335;
+		return 250;
 	}
 
 	public int getPregnancyRequiredTime()

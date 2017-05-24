@@ -3,6 +3,7 @@ package com.bioxx.tfc.Handlers;
 import java.util.List;
 import java.util.Random;
 
+import com.bioxx.tfc.api.TFCOptions;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.ChunkPosition;
@@ -25,6 +26,9 @@ import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.WorldGen.WorldCacheManager;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowCrops;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenPlants;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenWaterPlants;
+import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 
 public class ChunkEventHandler
@@ -43,14 +47,30 @@ public class ChunkEventHandler
 			{
 				int chunkX = event.getChunk().xPosition;
 				int chunkZ = event.getChunk().zPosition;
+				Random rand = new Random(event.world.getSeed() + ((chunkX >> 3) - (chunkZ >> 3)) * (chunkZ >> 3));
+				
 				if(TFC_Core.isWaterBiome(biome))
 				{
 					cd.fishPop *= Math.pow(1.2,cd.lastSpringGen - TFC_Time.getYear());
 					cd.fishPop = Math.min(cd.fishPop, ChunkData.FISH_POP_MAX);
+					//seaweed regen
+					if(TFCOptions.enableSeaweedRegen) {
+						if (rand.nextInt(50) == 0) {
+							int waterPlantsPerChunk = 10;
+							int var2;
+							for (var2 = 0; var2 < waterPlantsPerChunk; ++var2) {
+								int xCoord = (chunkX << 4) + rand.nextInt(16) + 8;
+								int zCoord = (chunkZ << 4) + rand.nextInt(16) + 8;
+								int yCoord = event.world.getPrecipitationHeight(xCoord, zCoord) - 1;
+								if (TFC_Climate.getBioTemperatureHeight(event.world, xCoord, yCoord, zCoord) >= 7)
+									new WorldGenWaterPlants(TFCBlocks.waterPlant).generate(event.world, rand, xCoord, yCoord, zCoord);
+							}
+						}
+					}
 				}
 				cd.lastSpringGen = TFC_Time.getYear();
 
-				Random rand = new Random(event.world.getSeed() + ((chunkX >> 3) - (chunkZ >> 3)) * (chunkZ >> 3));
+				//crop regen
 				int cropid = rand.nextInt(CropManager.getInstance().getTotalCrops());
 				CropIndex crop = CropManager.getInstance().getCropFromId(cropid);
 				if (event.world.rand.nextInt(25) == 0 && crop != null)
@@ -60,6 +80,13 @@ public class ChunkEventHandler
 					int x = (chunkX << 4) + event.world.rand.nextInt(16) + 8;
 					int z = (chunkZ << 4) + event.world.rand.nextInt(16) + 8;
 					cropGen.generate(event.world, event.world.rand, x, z, num);
+				}
+				if(TFCOptions.enableBerryBushRegen) {
+					//berry bush regen
+					if (event.world.rand.nextInt(500) == 0) {
+						WorldGenPlants plants = new WorldGenPlants();
+						plants.genBushes(rand, chunkX, chunkZ, event.world);
+					}
 				}
 			}
 			else if(TFC_Time.getYear() > cd.lastSpringGen && month >= 6)

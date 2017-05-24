@@ -37,6 +37,8 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	protected String[] woodNames;
 	protected IIcon[] icons;
 	protected IIcon[] iconsOpaque;
+	public int recursionCount;
+	public int recursionLimit=TFCOptions.recursionLimit;
 
 	public BlockCustomLeaves()
 	{
@@ -107,13 +109,50 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
 		onNeighborBlockChange(world, x, y, z, null);
+		Block block = world.getBlock(x, y, z);
+		if(block instanceof BlockCustomLeaves2)
+		{
+			this.destroyLeaves(world, x, y, z);
+		}
+		
 	}
 
 	@Override
 	public void beginLeavesDecay(World world, int x, int y, int z)
 	{
-		//We don't do vanilla leaves decay
-	}
+
+		if(this.recursionCount > this.recursionLimit)
+		{
+			Block destroyBlock = TFCBlocks.leaves2;
+			world.setBlock(x, y, z, destroyBlock, 1, 4);
+			world.scheduleBlockUpdate(x, y, z, destroyBlock, world.rand.nextInt(30));
+		}
+
+}
+    @Override
+	public void breakBlock(World p_149749_1_, int p_149749_2_, int p_149749_3_, int p_149749_4_, Block p_149749_5_, int p_149749_6_)
+    {
+        byte b0 = 1;
+        int i1 = b0 + 1;
+
+        if (p_149749_1_.checkChunksExist(p_149749_2_ - i1, p_149749_3_ - i1, p_149749_4_ - i1, p_149749_2_ + i1, p_149749_3_ + i1, p_149749_4_ + i1))
+        {
+            for (int j1 = -b0; j1 <= b0; ++j1)
+            {
+                for (int k1 = -b0; k1 <= b0; ++k1)
+                {
+                    for (int l1 = -b0; l1 <= b0; ++l1)
+                    {
+                        Block block = p_149749_1_.getBlock(p_149749_2_ + j1, p_149749_3_ + k1, p_149749_4_ + l1);
+                        if (block.isLeaves(p_149749_1_, p_149749_2_ + j1, p_149749_3_ + k1, p_149749_4_ + l1))
+                        {
+                            //block.beginLeavesDecay(p_149749_1_, p_149749_2_ + j1, p_149749_3_ + k1, p_149749_4_ + l1);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 	@Override
 	public void onNeighborBlockChange(World world, int xOrig, int yOrig, int zOrig, Block b)
@@ -193,7 +232,15 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 			if (res < 0)
 			{
 				if(world.getChunkFromBlockCoords(xOrig, zOrig) != null)
-					this.destroyLeaves(world, xOrig, yOrig, zOrig);
+					recursionCount += 1;
+					if(recursionCount<=recursionLimit){
+						this.destroyLeaves(world, xOrig, yOrig, zOrig);
+					}
+					else{
+						TerraFirmaCraft.LOG.warn(new StringBuilder().append("*** Recursion Limit " + recursionLimit + " REACHED***").toString());
+						this.beginLeavesDecay(world,  xOrig, yOrig, zOrig);
+					}
+					recursionCount -= 1;
 			}
 		}
 	}
@@ -267,6 +314,24 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 						}
 					}
 					return;
+				} else if (name.startsWith("itemShearsBlackSteel"))
+				{
+					if (itemstack.getItemDamage() < 13) {
+						entityplayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
+						entityplayer.addExhaustion(0.045F);
+						if (TFCOptions.enableSaplingDrops)
+							dropRareSapling(world, i, j, k, meta);
+						super.harvestBlock(world, entityplayer, i, j, k, meta);
+
+						itemstack.damageItem(4, entityplayer);
+						if (itemstack.stackSize == 0)
+							entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
+					}
+					else {
+						itemstack.damageItem(itemstack.getItemDamage(), entityplayer);
+						if (itemstack.stackSize == 0)
+							entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
+					}
 				}
 			}
 
@@ -278,6 +343,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 			else if (world.rand.nextInt(100) < 6 && TFCOptions.enableSaplingDrops)
 				dropSapling(world, i, j, k, meta);
 
+
 			super.harvestBlock(world, entityplayer, i, j, k, meta);
 
 		}
@@ -286,6 +352,11 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	protected void dropSapling(World world, int x, int y, int z, int meta)
 	{
 		if (meta != 9 && meta != 15)
+			dropBlockAsItem(world, x, y, z, new ItemStack(this.getItemDropped(0, null, 0), 1, meta));
+	}
+	protected void dropRareSapling(World world, int x, int y, int z, int meta)
+	{
+		if (meta != 15)
 			dropBlockAsItem(world, x, y, z, new ItemStack(this.getItemDropped(0, null, 0), 1, meta));
 	}
 

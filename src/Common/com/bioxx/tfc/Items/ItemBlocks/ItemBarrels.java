@@ -211,13 +211,13 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 	}
 
 	@Override
-	public EquipType getEquipType(ItemStack is) 
+	public EquipType getEquipType(ItemStack is)
 	{
 		return EquipType.BACK;
 	}
 
 	@Override
-	public void onEquippedRender() 
+	public void onEquippedRender()
 	{
 		GL11.glTranslatef(0, -0.3f, -0F);
 	}
@@ -254,7 +254,7 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 			}
 			else return is;
 		}
-		else 
+		else
 		{
 			nbt.setTag("fluidNBT", fs.writeToNBT(new NBTTagCompound()));
 			nbt.setBoolean("Sealed", true);
@@ -265,4 +265,3 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 		return is;
 	}
 }
-

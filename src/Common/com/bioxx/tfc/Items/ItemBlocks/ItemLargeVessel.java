@@ -257,4 +257,3 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 		return is.hasTagCompound();
 	}
 }
-

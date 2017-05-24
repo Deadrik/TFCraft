@@ -14,6 +14,9 @@ public class TFCOptions
 	public static boolean enableBetterGrass = true;
 	public static boolean enableSaplingDrops = true;
 	public static boolean enableSeedDrops = true;
+	public static boolean enableSeaweedRegen = true;
+	public static boolean enableBerryBushRegen = true;
+	public static boolean enableDebrisRegen = true;
 	public static boolean enableDebugMode;
 	public static boolean enableFiniteWater;
 	public static boolean onionsAreGross;
@@ -21,13 +24,18 @@ public class TFCOptions
 	public static String quiverHUDPosition = "bottomleft";
 	public static boolean enableSolidDetailed = true;
 	public static int maxRemovedSolidDetailed = 12;
+	public static int hammerBreakSpeed = 90;
 	public static boolean enableToolModeIndicator = true;
+	public static int recursionLimit = 220;
+	public static int bleedEffectID = 28;
+	public static int heatStrokeEffectID = 29;
 
 	// Time
 	public static int yearLength = 96;
 	public static float pitKilnBurnTime = 8.0f;
 	public static float bloomeryBurnTime = 14.4f;
 	public static float charcoalPitBurnTime = 18.0f;
+	public static float cokePitBurnTime = 96.0f;
 	public static int torchBurnTime = 48;
 	public static float saplingTimerMultiplier = 1.0f;
 	public static float tempIncreaseMultiplier = 1.0f;
@@ -79,6 +87,8 @@ public class TFCOptions
 	public static int normalOreUnits = 25;
 	public static int richOreUnits = 35;
 
+	// Crafting
+	public static boolean enableAluminumSmelting = false;
 	// Server
 	public static int simSpeedNoPlayers = 100;
 

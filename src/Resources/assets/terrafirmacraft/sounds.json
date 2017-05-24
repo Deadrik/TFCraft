@@ -30,7 +30,7 @@
   },
 
   "mob.rooster.cry": {
-    "category": "ambient",
+    "category": "neutral",
     "sounds": [
       "rooster1"
     ]
@@ -86,7 +86,7 @@
   },
 
   "mob.deer.say": {
-    "category": "ambient",
+    "category": "neutral",
     "sounds": [
       "deer1",
       "deer2",
@@ -99,7 +99,7 @@
   },
 
   "mob.deer.cry": {
-    "category": "ambient",
+    "category": "neutral",
     "sounds": [
       "deercry1",
       "deercry2",
@@ -109,21 +109,21 @@
   },
 
   "mob.deer.hurt": {
-    "category": "ambient",
+    "category": "neutral",
     "sounds": [
       "deerhurt1"
     ]
   },
 
   "mob.deer.death": {
-    "category": "ambient",
+    "category": "neutral",
     "sounds": [
       "deerdeath1"
     ]
   },
 
   "mob.bear.say": {
-    "category": "ambient",
+    "category": "hostile",
     "sounds": [
       "bear1",
       "bear2",
@@ -135,7 +135,7 @@
   },
 
   "mob.bear.cry": {
-    "category": "ambient",
+    "category": "hostile",
     "sounds": [
       "bearcry1",
       "bearcry2",
@@ -145,28 +145,28 @@
   },
 
   "mob.bear.cub.cry": {
-    "category": "ambient",
+    "category": "hostile",
     "sounds": [
       "bearcubcry1"
     ]
   },
 
   "mob.bear.hurt": {
-    "category": "ambient",
+    "category": "hostile",
     "sounds": [
       "bearhurt1"
     ]
   },
 
     "mob.bear.death": {
-    "category": "ambient",
+    "category": "hostile",
     "sounds": [
       "beardeath1"
     ]
   },
 
   "mob.pheasant.say": {
-    "category": "ambient",
+    "category": "neutral",
     "sounds": [
       "pheasant1",
       "pheasant2"
@@ -174,21 +174,21 @@
   },
 
   "mob.pheasant.chick.say": {
-    "category": "ambient",
+    "category": "neutral",
     "sounds": [
       "pheasantchick1"
     ]
   },
 
   "mob.pheasant.hurt": {
-    "category": "ambient",
+    "category": "neutral",
     "sounds": [
       "pheasanthurt1"
     ]
   },
 
   "mob.pheasant.death": {
-    "category": "ambient",
+    "category": "neutral",
     "sounds": [
       "pheasantdeath1"
     ]
@@ -210,7 +210,97 @@
       "frog1"
     ]
   },
-
+  "mob.polarbear.death": {
+    "category": "hostile",
+    "sounds": [
+      "pbear_death1",
+      "pbear_death2",
+      "pbear_death3"
+    ]
+  },
+    "mob.polarbear.hurt": {
+    "category": "hostile",
+    "sounds": [
+      "pbear_hurt1",
+      "pbear_hurt2",
+      "pbear_hurt3",
+      "pbear_hurt4"
+    ]
+  },
+    "mob.polarbear.say": {
+    "category": "hostile",
+    "sounds": [
+      "pbear_idle1",
+      "pbear_idle2",
+      "pbear_idle3",
+      "pbear_idle4",
+      "pbear_idle5",
+      "pbear_idle6"
+    ]
+  },
+    "mob.polarbear.cry": {
+    "category": "hostile",
+    "sounds": [
+      "pbear_warning1",
+      "pbear_warning2",
+      "pbear_warning3"
+    ]
+  },
+    "mob.cat.hitt": {
+    "category": "neutral",
+    "sounds": [
+      "cat_hitt1",
+      "cat_hitt2",
+      "cat_hitt3"
+    ]
+  },
+      "mob.cat.hiss": {
+    "category": "neutral",
+    "sounds": [
+      "cat_hiss1",
+      "cat_hiss2",
+      "cat_hiss3"
+    ]
+  },
+    "mob.cat.purr": {
+    "category": "neutral",
+    "sounds": [
+      "cat_purr1",
+      "cat_purr2",
+      "cat_purr3"
+    ]
+  },  
+    "mob.cat.purreow": {
+    "category": "neutral",
+    "sounds": [
+      "cat_purreow1",
+      "cat_purreow2"
+    ]
+  },
+    "mob.cat.meow": {
+    "category": "neutral",
+    "sounds": [
+      "cat_meow1",
+      "cat_meow2",
+      "cat_meow3",
+      "cat_meow4"
+    ]
+  },
+    "mob.cat.cough": {
+    "category": "neutral",
+    "sounds": [
+      "cat_cough"
+    ]
+  },
+    "mob.kitten.meow": {
+    "category": "neutral",
+    "sounds": [
+      "kitten_meow1",
+      "kitten_meow2",
+      "kitten_meow3"
+    ]
+  },
+    
   "music.tfc": {
     "category": "music",
     "sounds": [

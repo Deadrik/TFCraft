@@ -27,10 +27,18 @@ public class BlockCustomLeaves2 extends BlockCustomLeaves
 		return Item.getItemFromBlock(TFCBlocks.sapling2);
 	}
 
-	@Override
 	protected void dropSapling(World world, int x, int y, int z, int meta)
 	{
 		if (meta != 0)
 			dropBlockAsItem(world, x, y, z, new ItemStack(this.getItemDropped(0, null, 0), 1, meta));
 	}
+
+	@Override
+	protected void dropRareSapling(World world, int x, int y, int z, int meta)
+	{
+		if (meta == 0)
+			return;
+	}
+
+
 }

@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
+import com.bioxx.tfc.TileEntities.TECoalPile;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,6 +28,23 @@ public class ItemTorch extends ItemTerraBlock
 			{
 				TELogPile te = (TELogPile) entityItem.worldObj.getTileEntity((int)Math.floor(entityItem.posX), (int)Math.floor(entityItem.posY)-1, (int)Math.floor(entityItem.posZ));
 				te.activateCharcoal();
+				te.lightNeighbors();
+				entityItem.setDead();
+			}
+			else
+			{
+				if(entityItem.worldObj.rand.nextInt(10) < 2)
+					entityItem.worldObj.spawnParticle("lava", entityItem.posX, entityItem.posY, entityItem.posZ, -0.5F + entityItem.worldObj.rand.nextFloat(), -0.5F + entityItem.worldObj.rand.nextFloat(), -0.5F + entityItem.worldObj.rand.nextFloat());
+				entityItem.getEntityData().setInteger("torchCount", count+1);
+			}
+		}
+		if(entityItem.worldObj.getBlock((int)Math.floor(entityItem.posX), (int)Math.floor(entityItem.posY)-1, (int)Math.floor(entityItem.posZ)) == TFCBlocks.coalPile)
+		{
+			int count = entityItem.getEntityData().getInteger("torchCount");
+			if(count > 160)
+			{
+				TECoalPile te = (TECoalPile) entityItem.worldObj.getTileEntity((int)Math.floor(entityItem.posX), (int)Math.floor(entityItem.posY)-1, (int)Math.floor(entityItem.posZ));
+				te.activateCoke();
 				te.lightNeighbors();
 				entityItem.setDead();
 			}

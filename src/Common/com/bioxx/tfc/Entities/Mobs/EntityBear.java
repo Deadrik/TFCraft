@@ -24,6 +24,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
 import com.bioxx.tfc.Entities.AI.EntityAITargetNonTamedTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
@@ -88,6 +89,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		setSize (1.2F, 1.2F);
 		moveSpeed = 0.4F;
 		getNavigator ().setAvoidsWater (true);
+		getNavigator ().setCanSwim(true);
 		tasks.addTask (1, new EntityAISwimming (this));
 		sizeMod = (float) Math.sqrt((rand.nextInt(rand.nextInt((DEGREE_OF_DIVERSION + 1) * 10) + 1) * (rand.nextBoolean() ? 1 : -1) * 0.01f + 1F) *
 										(1.0F - DIMORPHISM * sex));
@@ -98,6 +100,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		sex = rand.nextInt(2);
 		if (getGender() == GenderEnum.MALE)
 			tasks.addTask (6, new EntityAIMate (this, moveSpeed));
+		this.tasks.addTask(1, new EntityAIAvoidEntityTFC(this, EntityOcelotTFC.class, 32.0F, 1.2D, 1.6D));
 		tasks.addTask (7, new EntityAIWander (this, moveSpeed));
 		tasks.addTask (8, new EntityAIWatchClosest (this, EntityPlayer.class, 8F));
 		tasks.addTask (9, new EntityAILookIdle (this));
@@ -270,6 +273,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 
 		this.entityDropItem(new ItemStack(TFCItems.hide, 1, Math.max(0, Math.min(2, (int)(ageMod * 3 - 1)))), 0);
 		this.dropItem(Items.bone, (int) ((rand.nextInt(6) + 2) * ageMod));
+		float foodWeight = ageMod * (this.sizeMod * 1000);
+		TFC_Core.animalDropMeat(this, TFCItems.bearRaw, foodWeight);
 	}
 
 	@Override
@@ -439,9 +444,9 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	protected String getLivingSound ()
 	{
-		if(isAdult() && worldObj.rand.nextInt(100) < 5)
+		if(isAdult() && worldObj.rand.nextInt(100) < 16)
 			return TFC_Sounds.BEARCRY;
-		else if(isChild() && worldObj.rand.nextInt(100) < 5)
+		else if(isChild() && worldObj.rand.nextInt(100) < 16)
 			return TFC_Sounds.BEARCUBCRY;
 
 		return isChild() ? null : TFC_Sounds.BEARSAY;
@@ -507,7 +512,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	protected float getSoundVolume ()
 	{
-		return 0.4F;
+		return 2.0F;
 	}
 
 	@Override
@@ -921,7 +926,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			this.setCustomNameTag(name);
 			return true;
 		}
-		this.playSound((isChild() ? TFC_Sounds.BEARCUBCRY : TFC_Sounds.BEARCRY), 6, rand.nextFloat() / 2F + 0.75F);
+		this.playSound((isChild() ? TFC_Sounds.BEARCUBCRY : TFC_Sounds.BEARCRY), this.getSoundVolume(), rand.nextFloat() / 2F + 0.75F);
 		return false;
 	}
 

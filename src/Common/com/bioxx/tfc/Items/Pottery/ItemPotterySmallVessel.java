@@ -3,6 +3,7 @@ package com.bioxx.tfc.Items.Pottery;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bioxx.tfc.Items.ItemNugget;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -95,7 +96,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		{
 			if(bag[i] != null)
 			{
-				if(!(bag[i].getItem() instanceof ItemOreSmall) && !(bag[i].getItem() instanceof ItemOre))
+				if(!(bag[i].getItem() instanceof ItemOreSmall) && !(bag[i].getItem() instanceof ItemOre) && !(bag[i].getItem() instanceof ItemNugget))
 					canCookAlloy = false;
 			}
 		}

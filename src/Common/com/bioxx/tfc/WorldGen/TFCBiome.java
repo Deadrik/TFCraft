@@ -125,10 +125,12 @@ public class TFCBiome extends BiomeGenBase
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 8, 2, 4));
 		 */
 		//This is to balance out the spawning, so that entities with weight 1 spawn less
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 16, 0, 0));
+		//this.spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 16, 0, 0));
 
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 2, 1, 4));
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 1, 1, 4));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 6, 1, 4));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 4, 1, 4));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityOcelotTFC.class, 4, 1, 1));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 1, 1, 1));
 
 		this.spawnableWaterCreatureList.clear();
 		switch(par1){

@@ -1,6 +1,7 @@
 package com.bioxx.tfc;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
@@ -66,6 +67,7 @@ public class CommonProxy
 	public void registerTileEntities(boolean b)
 	{
 		GameRegistry.registerTileEntity(TELogPile.class, "TerraLogPile");
+		GameRegistry.registerTileEntity(TECoalPile.class, "TerraCokePit");
 		GameRegistry.registerTileEntity(TEWorkbench.class, "TerraWorkbench");
 		GameRegistry.registerTileEntity(TEForge.class, "TerraForge");
 		GameRegistry.registerTileEntity(TEBlastFurnace.class, "TerraBloomery");
@@ -78,6 +80,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TEDetailed.class, "Detailed");
 		GameRegistry.registerTileEntity(TESpawnMeter.class, "SpawnMeter");
 		GameRegistry.registerTileEntity(TESapling.class, "Sapling");
+		GameRegistry.registerTileEntity(TEFruitTreeSapling.class, "FruitTreeSapling");
 		GameRegistry.registerTileEntity(TEWoodConstruct.class, "WoodConstruct");
 		GameRegistry.registerTileEntity(TEBarrel.class, "Barrel");
 		GameRegistry.registerTileEntity(TEFenceGate.class, "FenceGate");
@@ -120,6 +123,7 @@ public class CommonProxy
 		EntityRegistry.registerGlobalEntityID(EntityCowTFC.class, "cowTFC", EntityRegistry.findGlobalUniqueEntityId(), 0x3d2f23, 0x260026);
 		EntityRegistry.registerGlobalEntityID(EntityWolfTFC.class, "wolfTFC", EntityRegistry.findGlobalUniqueEntityId(), 0x938f8c, 0x260026);
 		EntityRegistry.registerGlobalEntityID(EntityBear.class, "bearTFC", EntityRegistry.findGlobalUniqueEntityId(), 0x5c4b3b, 0x260026);
+		EntityRegistry.registerGlobalEntityID(EntityPolarBear.class, "polarbearTFC", EntityRegistry.findGlobalUniqueEntityId(), 0x0d0d0d, 0x260026);
 		EntityRegistry.registerGlobalEntityID(EntityChickenTFC.class, "chickenTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xf3f45e, 0x260026);
 		EntityRegistry.registerGlobalEntityID(EntityPigTFC.class, "pigTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xe78786, 0x260026);
 		EntityRegistry.registerGlobalEntityID(EntityDeer.class, "deerTFC", EntityRegistry.findGlobalUniqueEntityId(), 0x7c624c, 0x260026);
@@ -136,6 +140,7 @@ public class CommonProxy
 		EntityRegistry.registerGlobalEntityID(EntityPigZombieTFC.class, "pigZombieTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xb6735f, 0x260026);
 		EntityRegistry.registerGlobalEntityID(EntityIronGolemTFC.class, "irongolemTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xbfb99a, 0x260026);
 		EntityRegistry.registerGlobalEntityID(EntityCreeperTFC.class, "creeperTFC", EntityRegistry.findGlobalUniqueEntityId(), 0x66c55c, 0x260026);
+		EntityRegistry.registerGlobalEntityID(EntityOcelotTFC.class, "ocelotTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xff0000, 0xffffff);
 
 		EntityRegistry.registerGlobalEntityID(EntitySheepTFC.class, "sheepTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xcdbfb4, 0x260026);
 		EntityRegistry.registerGlobalEntityID(EntityPheasantTFC.class, "pheasantTFC", EntityRegistry.findGlobalUniqueEntityId(), 0x822c1c, 0x260026);
@@ -154,6 +159,7 @@ public class CommonProxy
 		EntityRegistry.registerModEntity(EntityCowTFC.class, "cowTFC", 6, TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityWolfTFC.class, "wolfTFC", 7, TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityBear.class, "bearTFC", 8, TerraFirmaCraft.instance, 160, 5, true);
+		EntityRegistry.registerModEntity(EntityPolarBear.class, "polarbearTFC", 30, TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityChickenTFC.class, "chickenTFC", 9, TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityPigTFC.class, "pigTFC", 10, TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityDeer.class, "deerTFC", 11, TerraFirmaCraft.instance, 160, 5, true);
@@ -175,7 +181,7 @@ public class CommonProxy
 		EntityRegistry.registerModEntity(EntityFishTFC.class, "fishTFC", 27, TerraFirmaCraft.instance, 64, 5, true);
 		EntityRegistry.registerModEntity(EntityFallingBlockTFC.class, "fallingBlock", 28, TerraFirmaCraft.instance, 160, 20, true);
 		EntityRegistry.registerModEntity(EntityBarrel.class, "barrel", 29, TerraFirmaCraft.instance, 64, 20, true);
-
+		EntityRegistry.registerModEntity(EntityOcelotTFC.class, "ocelotTFC", 31, TerraFirmaCraft.instance, 160, 5, true);
 		/*Function<EntitySpawnMessage, Entity> spawnFunction = new Function<EntitySpawnMessage, Entity>()
 				{
 			@Override
@@ -221,16 +227,21 @@ public class CommonProxy
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.FRESHWATER.getName()), new ItemStack(TFCItems.woodenBucketWater), new ItemStack(TFCItems.woodenBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.SALTWATER.getName()), new ItemStack(TFCItems.woodenBucketSaltWater), new ItemStack(TFCItems.woodenBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.FRESHWATER, 1000), new ItemStack(TFCItems.potteryJug, 1, 2), new ItemStack(TFCItems.potteryJug,1, 1));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.RUM, 250), new ItemStack(TFCItems.rum), new ItemStack(TFCItems.glassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.BEER, 250), new ItemStack(TFCItems.beer), new ItemStack(TFCItems.glassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.RYEWHISKEY, 250), new ItemStack(TFCItems.ryeWhiskey), new ItemStack(TFCItems.glassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.WHISKEY, 250), new ItemStack(TFCItems.whiskey), new ItemStack(TFCItems.glassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.CORNWHISKEY, 250), new ItemStack(TFCItems.cornWhiskey), new ItemStack(TFCItems.glassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.SAKE, 250), new ItemStack(TFCItems.sake), new ItemStack(TFCItems.glassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.CIDER, 250), new ItemStack(TFCItems.cider), new ItemStack(TFCItems.glassBottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.VODKA, 250), new ItemStack(TFCItems.vodka), new ItemStack(TFCItems.glassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.RUM, 250), new ItemStack(TFCItems.rum), new ItemStack(Items.glass_bottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.BEER, 250), new ItemStack(TFCItems.beer), new ItemStack(Items.glass_bottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.RYEWHISKEY, 250), new ItemStack(TFCItems.ryeWhiskey), new ItemStack(Items.glass_bottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.WHISKEY, 250), new ItemStack(TFCItems.whiskey), new ItemStack(Items.glass_bottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.CORNWHISKEY, 250), new ItemStack(TFCItems.cornWhiskey), new ItemStack(Items.glass_bottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.SAKE, 250), new ItemStack(TFCItems.sake), new ItemStack(Items.glass_bottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.CIDER, 250), new ItemStack(TFCItems.cider), new ItemStack(Items.glass_bottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.VODKA, 250), new ItemStack(TFCItems.vodka), new ItemStack(Items.glass_bottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.MILK, 250), new ItemStack(TFCItems.bottleMilk), new ItemStack(Items.glass_bottle));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.MILK, 1000), new ItemStack(TFCItems.woodenBucketMilk), new ItemStack(TFCItems.woodenBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.VINEGAR, 1000), new ItemStack(TFCItems.vinegar), new ItemStack(TFCItems.woodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.VINEGAR.getName()), new ItemStack(TFCItems.vinegar), new ItemStack(TFCItems.woodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.BRINE.getName()), new ItemStack(TFCItems.brine), new ItemStack(TFCItems.woodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.OLIVEOIL.getName()), new ItemStack(TFCItems.oliveOil), new ItemStack(TFCItems.woodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.LIMEWATER.getName()), new ItemStack(TFCItems.limewater), new ItemStack(TFCItems.woodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(TFCFluids.TANNIN.getName()), new ItemStack(TFCItems.tannin), new ItemStack(TFCItems.woodenBucketEmpty));
 		//FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(0), new ItemStack(TFCBlocks.OilLamp, 1, 0));//Gold
 		//FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(1), new ItemStack(TFCBlocks.OilLamp, 1, 1));//Platinum
 		//FluidContainerRegistry.registerFluidContainer(new FluidStack(TFCFluids.OLIVEOIL, 250), ItemOilLamp.GetFullLamp(2), new ItemStack(TFCBlocks.OilLamp, 1, 2));//RoseGold

@@ -289,6 +289,11 @@ public class TEChest extends TileEntityChest implements IInventory
 	public void updateEntity()
 	{
 		//super.updateEntity();
+		this.ticksSinceSync++;
+		if ((this.ticksSinceSync) % 20 == 0)
+		{
+			TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
+		}
 
 		TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
 
@@ -311,7 +316,6 @@ public class TEChest extends TileEntityChest implements IInventory
 		}
 
 		this.checkForAdjacentChests();
-		this.ticksSinceSync++;
 
 		if (!this.worldObj.isRemote && this.numPlayersUsing != 0 && (this.ticksSinceSync + this.xCoord + this.yCoord + this.zCoord) % 200 == 0)
 		{

@@ -1,4 +1,4 @@
-﻿#en_US
+#en_US
 #This is the Main language configuration file
 #
 #If you want to color code the text then I recommend you visit http://www.minecraftwiki.net/wiki/Formatting_codes#Color_codes
@@ -14,6 +14,7 @@ key.ToolMode=Cycle Tool Mode
 key.LockTool=Lock Tool Location
 
 effect.bleed=Bleeding
+effect.heatstroke=Heatstroke
 death.attack.alcohol=%1$s died of alcohol poisoning
 death.attack.heatStroke=%1$s died of heat stroke
 death.attack.caveIn=%1$s was crushed by falling cobblestone
@@ -88,6 +89,7 @@ config.gui.TFCCrafting.options=Crafting Options
 #= Entities = 
 #==============
 entity.bearTFC.name=Bear
+entity.polarbearTFC.name=Polar Bear
 entity.chickenTFC.name=Chicken
 entity.cowTFC.name=Cow
 entity.deerTFC.name=Deer
@@ -98,6 +100,7 @@ entity.pigTFC.name=Pig
 entity.sheepTFC.name=Sheep
 entity.squidTFC.name=Squid
 entity.wolfTFC.name=Wolf
+entity.ocelotTFC.name=Ocelot
 
 entity.blazeTFC.name=Blaze
 entity.caveSpiderTFC.name=Cave Spider
@@ -284,15 +287,15 @@ item.Orange.name=Orange
 item.Peach.name=Peach
 item.Plum.name=Plum
 
-item.FruitSapling.Green Apple.name=Green Apple Tree Sapling
-item.FruitSapling.Red Apple.name=Red Apple Tree Sapling
-item.FruitSapling.Banana.name=Banana Tree Sapling
-item.FruitSapling.Cherry.name=Cherry Tree Sapling
-item.FruitSapling.Lemon.name=Lemon Tree Sapling
-item.FruitSapling.Olive.name=Olive Tree Sapling
-item.FruitSapling.Orange.name=Orange Tree Sapling
-item.FruitSapling.Peach.name=Peach Tree Sapling
-item.FruitSapling.Plum.name=Plum Tree Sapling
+tile.fruitTreeSapling.Green Apple.name=Green Apple Tree Sapling
+tile.fruitTreeSapling.Red Apple.name=Red Apple Tree Sapling
+tile.fruitTreeSapling.Banana.name=Banana Tree Sapling
+tile.fruitTreeSapling.Cherry.name=Cherry Tree Sapling
+tile.fruitTreeSapling.Lemon.name=Lemon Tree Sapling
+tile.fruitTreeSapling.Olive.name=Olive Tree Sapling
+tile.fruitTreeSapling.Orange.name=Orange Tree Sapling
+tile.fruitTreeSapling.Peach.name=Peach Tree Sapling
+tile.fruitTreeSapling.Plum.name=Plum Tree Sapling
 
 #=== Berry Bushes ===
 tile.BerryBush.Blackberry.name=Blackberry Bush
@@ -333,6 +336,7 @@ item.Wintergreen Leaf.name=Wintergreen Leaf
 
 #== Protein ==
 item.Beef.name=Beef
+item.Bear.name=Bear
 item.Calamari.name=Calamari
 item.egg.name=Egg
 item.Fish.name=Fish
@@ -870,27 +874,31 @@ tile.MMRockBrick.Slate.name=Slate Bricks
 #= Ore =
 #=======
 #== Ore Items ==
-item.Ore.Bituminous Coal.name=Bituminous Coal
-item.Ore.Borax.name=Borax
-item.Ore.Cinnabar.name=Cinnabar
-item.Ore.Cryolite.name=Cryolite
-item.Ore.Graphite.name=Graphite
-item.Ore.Gypsum.name=Gypsum
-item.Ore.Jet.name=Jet
-item.Ore.Kaolinite.name=Kaolinite
-item.Ore.Kimberlite.name=Kimberlite
-item.Ore.Lapis Lazuli.name=Lapis Lazuli
-item.Ore.Lignite.name=Lignite
-item.Ore.Microcline.name=Microcline
-item.Ore.Olivine.name=Olivine
-item.Ore.Petrified Wood.name=Petrified Wood
-item.Ore.Pitchblende.name=Pitchblende
-item.Ore.Saltpeter.name=Saltpeter
-item.Ore.Satinspar.name=Satinspar
-item.Ore.Selenite.name=Selenite
-item.Ore.Serpentine.name=Serpentine
-item.Ore.Sulfur.name=Sulfur
-item.Ore.Sylvite.name=Sylvite
+item.MineralOre.Bituminous Coal.name=Bituminous Coal
+item.MineralOre.Borax.name=Borax
+item.MineralOre.Cinnabar.name=Cinnabar
+item.MineralOre.Cryolite.name=Cryolite
+item.MineralOre.Graphite.name=Graphite
+item.MineralOre.Gypsum.name=Gypsum
+item.MineralOre.Jet.name=Jet
+item.MineralOre.Kaolinite.name=Kaolinite
+item.MineralOre.Kimberlite.name=Kimberlite
+item.MineralOre.Lapis Lazuli.name=Lapis Lazuli
+item.MineralOre.Lignite.name=Lignite
+item.MineralOre.Microcline.name=Microcline
+item.MineralOre.Olivine.name=Olivine
+item.MineralOre.Petrified Wood.name=Petrified Wood
+item.MineralOre.Pitchblende.name=Pitchblende
+item.MineralOre.Saltpeter.name=Saltpeter
+item.MineralOre.Satinspar.name=Satinspar
+item.MineralOre.Selenite.name=Selenite
+item.MineralOre.Serpentine.name=Serpentine
+item.MineralOre.Sulfur.name=Sulfur
+item.MineralOre.Sylvite.name=Sylvite
+item.MineralOre.Apatite.name=Apatite
+item.MineralOre.Scapolite.name=Scapolite
+item.MineralOre.Strontium.name=Strontium
+item.MineralOre.Quartz.name=Quartz
 
 item.Ore.Bismuthinite.name=Bismuthinite
 item.Ore.Cassiterite.name=Cassiterite
@@ -906,6 +914,10 @@ item.Ore.Native Platinum.name=Native Platinum
 item.Ore.Native Silver.name=Native Silver
 item.Ore.Sphalerite.name=Sphalerite
 item.Ore.Tetrahedrite.name=Tetrahedrite
+item.Ore.Bauxite.name=Bauxite
+item.Ore.Native Osmium.name=Native Osmium
+item.Ore.Scheelite.name=Scheelite
+item.Ore.Wolframite.name=Wolframite
 
 item.Ore.Rich Bismuthinite.name=Rich Bismuthinite
 item.Ore.Rich Cassiterite.name=Rich Cassiterite
@@ -921,6 +933,10 @@ item.Ore.Rich Native Platinum.name=Rich Native Platinum
 item.Ore.Rich Native Silver.name=Rich Native Silver
 item.Ore.Rich Sphalerite.name=Rich Sphalerite
 item.Ore.Rich Tetrahedrite.name=Rich Tetrahedrite
+item.Ore.Rich Bauxite.name=Rich Bauxite
+item.Ore.Rich Native Osmium.name=Rich Native Osmium
+item.Ore.Rich Scheelite.name=Rich Scheelite
+item.Ore.Rich Wolframite.name=Rich Wolframite
 
 item.Ore.Poor Bismuthinite.name=Poor Bismuthinite
 item.Ore.Poor Cassiterite.name=Poor Cassiterite
@@ -936,6 +952,10 @@ item.Ore.Poor Native Platinum.name=Poor Native Platinum
 item.Ore.Poor Native Silver.name=Poor Native Silver
 item.Ore.Poor Sphalerite.name=Poor Sphalerite
 item.Ore.Poor Tetrahedrite.name=Poor Tetrahedrite
+item.Ore.Poor Bauxite.name=Poor Bauxite
+item.Ore.Poor Native Osmium.name=Poor Native Osmium
+item.Ore.Poor Scheelite.name=Poor Scheelite
+item.Ore.Poor Wolframite.name=Poor Wolframite
 
 item.Small Ore.Bismuthinite.name=Small Bismuthinite
 item.Small Ore.Cassiterite.name=Small Cassiterite
@@ -951,31 +971,60 @@ item.Small Ore.Native Platinum.name=Native Platinum Nugget
 item.Small Ore.Native Silver.name=Native Silver Nugget
 item.Small Ore.Sphalerite.name=Small Sphalerite
 item.Small Ore.Tetrahedrite.name=Small Tetrahedrite
+item.Small Ore.Bauxite.name=Small Bauxite
+item.Small Ore.Native Osmium.name=Native Osmium Nugget
+item.Small Ore.Scheelite.name=Small Scheelite
+item.Small Ore.Wolframite.name=Small Wolframite
+
+item.Ore Pile.Bauxite.name=Bauxite Ore Pile
+item.Ore Pile.Bismuthinite.name=Bismuthinite Ore Pile
+item.Ore Pile.Cassiterite.name=Cassiterite Ore Pile
+item.Ore Pile.Galena.name=Galena Ore Pile
+item.Ore Pile.Garnierite.name=Garnierite Ore Pile
+item.Ore Pile.Hematite.name=Hematite Ore Pile
+item.Ore Pile.Limonite.name=Limonite Ore Pile
+item.Ore Pile.Magnetite.name=Magnetite Ore Pile
+item.Ore Pile.Malachite.name=Malachite Ore Pile
+item.Ore Pile.Native Copper.name=Native Copper Ore Pile
+item.Ore Pile.Native Gold.name=Native Gold Ore Pile
+item.Ore Pile.Native Osmium.name=Native Osmium Ore Pile
+item.Ore Pile.Native Platinum.name=Native Platinum Ore Pile
+item.Ore Pile.Scheelite.name=Scheelite Ore Pile
+item.Ore Pile.Native Silver.name=Native Silver Ore Pile
+item.Ore Pile.Sphalerite.name=Sphalerite Ore Pile
+item.Ore Pile.Tetrahedrite.name=Tetrahedrite Ore Pile
+item.Ore Pile.Wolframite.name=Wolframite Ore Pile
 
 #== Ore Blocks ==
-tile.Ore.name=Ore
-tile.Ore.Bituminous Coal.name=Bituminous Coal
-tile.Ore.Borax.name=Borax
-tile.Ore.Cinnabar.name=Cinnabar
-tile.Ore.Cryolite.name=Cryolite
-tile.Ore.Graphite.name=Graphite
-tile.Ore.Gypsum.name=Gypsum
-tile.Ore.Jet.name=Jet
-tile.Ore.Kaolinite.name=Kaolinite
-tile.Ore.Kimberlite.name=Kimberlite
-tile.Ore.Lapis Lazuli.name=Lapis Lazuli
-tile.Ore.Lignite.name=Lignite
-tile.Ore.Microcline.name=Microcline
-tile.Ore.Olivine.name=Olivine
-tile.Ore.Petrified Wood.name=Petrified Wood
-tile.Ore.Pitchblende.name=Pitchblende
-tile.Ore.Saltpeter.name=Saltpeter
-tile.Ore.Satinspar.name=Satinspar
-tile.Ore.Selenite.name=Selenite
-tile.Ore.Serpentine.name=Serpentine
-tile.Ore.Sulfur.name=Sulfur
-tile.Ore.Sylvite.name=Sylvite
+tile.MineralOre.name=Ore
+tile.MineralOre.Bituminous Coal.name=Bituminous Coal
+tile.MineralOre.Lignite.name=Lignite
+tile.MineralOre.Borax.name=Borax
+tile.MineralOre.Cinnabar.name=Cinnabar
+tile.MineralOre.Cryolite.name=Cryolite
+tile.MineralOre.Graphite.name=Graphite
+tile.MineralOre.Gypsum.name=Gypsum
+tile.MineralOre.Jet.name=Jet
+tile.MineralOre.Kaolinite.name=Kaolinite
+tile.MineralOre.Kimberlite.name=Kimberlite
+tile.MineralOre.Lapis Lazuli.name=Lapis Lazuli
+tile.MineralOre.Lignite.name=Lignite
+tile.MineralOre.Microcline.name=Microcline
+tile.MineralOre.Olivine.name=Olivine
+tile.MineralOre.Petrified Wood.name=Petrified Wood
+tile.MineralOre.Pitchblende.name=Pitchblende
+tile.MineralOre.Saltpeter.name=Saltpeter
+tile.MineralOre.Satinspar.name=Satinspar
+tile.MineralOre.Selenite.name=Selenite
+tile.MineralOre.Serpentine.name=Serpentine
+tile.MineralOre.Sulfur.name=Sulfur
+tile.MineralOre.Sylvite.name=Sylvite
+tile.MineralOre.Apatite.name=Apatite
+tile.MineralOre.Scapolite.name=Scapolite
+tile.MineralOre.Strontium.name=Strontium
+tile.MineralOre.Quartz.name=Quartz
 
+tile.Ore.Bauxite.name=Bauxite
 tile.Ore.Bismuthinite.name=Bismuthinite
 tile.Ore.Cassiterite.name=Cassiterite
 tile.Ore.Galena.name=Galena
@@ -986,10 +1035,13 @@ tile.Ore.Magnetite.name=Magnetite
 tile.Ore.Malachite.name=Malachite
 tile.Ore.Native Copper.name=Native Copper
 tile.Ore.Native Gold.name=Native Gold
+tile.Ore.Native Osmium.name=Native Osmium
 tile.Ore.Native Platinum.name=Native Platinum
 tile.Ore.Native Silver.name=Native Silver
+tile.Ore.Scheelite.name=Scheelite
 tile.Ore.Sphalerite.name=Sphalerite
 tile.Ore.Tetrahedrite.name=Tetrahedrite
+tile.Ore.Wolframite.name=Worlframite
 
 #========
 #= Wood =
@@ -1736,6 +1788,9 @@ item.Red Steel Tuyere.name=Red Steel Tuyere
 item.Steel Tuyere.name=Steel Tuyere
 item.Wrought Iron Tuyere.name=Wrought Iron Tuyere
 
+#== Shears ==
+item.Black Steel Shears.name=Black Steel Shears
+
 #== Armor ==
 #=== Helmet ===
 item.Bismuth Bronze Unfinished Helmet.name=Unfinished Bismuth Bronze Helmet
@@ -1858,6 +1913,81 @@ item.Weak Red Steel Unshaped.name=Unshaped: Weak Red Steel
 item.Weak Steel Unshaped.name=Unshaped: Weak Steel
 item.Wrought Iron Unshaped.name=Unshaped: Wrought Iron
 item.Zinc Unshaped.name=Unshaped: Zinc
+item.Electrum Unshaped.name=Unshaped: Electrum
+item.Cupronickel Unshaped.name=Unshaped: Cupronickel
+item.Osmium Unshaped.name=Unshaped: Osmium
+item.Aluminum Unshaped.name=Unshaped: Aluminum
+item.Tungsten Unshaped.name=Unshaped: Tungsten
+
+#== Nugget ==
+
+item.MetalNugget.Bismuth.name=Bismuth Nugget
+item.MetalNugget.Bismuth Bronze.name=Bismuth Bronze Nugget
+item.MetalNugget.Black Bronze.name=Black Bronze Nugget
+item.MetalNugget.Black Steel.name=Black Steel Nugget
+item.MetalNugget.Blue Steel.name=Blue Steel Nugget
+item.MetalNugget.Brass.name=Brass Nugget
+item.MetalNugget.Bronze.name=Bronze Nugget
+item.MetalNugget.Copper.name=Copper Nugget
+item.MetalNugget.Gold.name=Gold Nugget
+item.MetalNugget.High Carbon Black Steel.name=High Carbon Black Steel Nugget
+item.MetalNugget.High Carbon Blue Steel.name=High Carbon Blue Steel Nugget
+item.MetalNugget.High Carbon Red Steel.name=High Carbon Red Steel Nugget
+item.MetalNugget.Wrought Iron.name=Wrought Iron Nugget
+item.MetalNugget.Lead.name=Lead Nugget
+item.MetalNugget.Nickel.name=Nickel Nugget
+item.MetalNugget.Pig Iron.name=Pig Iron Nugget
+item.MetalNugget.Platinum.name=Platinum Nugget
+item.MetalNugget.Red Steel.name=Red Steel Nugget
+item.MetalNugget.Rose Gold.name=Rose Gold Nugget
+item.MetalNugget.Silver.name=Silver Nugget
+item.MetalNugget.Steel.name=Steel Nugget
+item.MetalNugget.Sterling Silver.name=Sterling Silver Nugget
+item.MetalNugget.Tin.name=Tin Nugget
+item.MetalNugget.Weak Steel.name=Weak Steel Nugget
+item.MetalNugget.Weak Blue Steel.name=Weak Blue Steel Nugget
+item.MetalNugget.Weak Red Steel.name=Weak Red Steel Nugget
+item.MetalNugget.Zinc.name=Zinc Nugget
+item.MetalNugget.Electrum.name=Electrum Nugget
+item.MetalNugget.Cupronickel.name=Cupronickel Nugget
+item.MetalNugget.Osmium.name=Osmium Nugget
+item.MetalNugget.Aluminum.name=Aluminum Nugget
+item.MetalNugget.Tungsten.name=Tungsten Nugget
+
+#== Dust ==
+
+item.MetalDust.Bismuth.name=Bismuth Dust
+item.MetalDust.Bismuth Bronze.name=Bismuth Bronze Dust
+item.MetalDust.Black Bronze.name=Black Bronze Dust
+item.MetalDust.Black Steel.name=Black Steel Dust
+item.MetalDust.Blue Steel.name=Blue Steel Dust
+item.MetalDust.Brass.name=Brass Dust
+item.MetalDust.Bronze.name=Bronze Dust
+item.MetalDust.Copper.name=Copper Dust
+item.MetalDust.Gold.name=Gold Dust
+item.MetalDust.High Carbon Black Steel.name=High Carbon Black Steel Dust
+item.MetalDust.High Carbon Blue Steel.name=High Carbon Blue Steel Dust
+item.MetalDust.High Carbon Red Steel.name=High Carbon Red Steel Dust
+item.MetalDust.Wrought Iron.name=Wrought Iron Dust
+item.MetalDust.Lead.name=Lead Dust
+item.MetalDust.Nickel.name=Nickel Dust
+item.MetalDust.Pig Iron.name=Pig Iron Dust
+item.MetalDust.Platinum.name=Platinum Dust
+item.MetalDust.Red Steel.name=Red Steel Dust
+item.MetalDust.Rose Gold.name=Rose Gold Dust
+item.MetalDust.Silver.name=Silver Dust
+item.MetalDust.Steel.name=Steel Dust
+item.MetalDust.Sterling Silver.name=Sterling Silver Dust
+item.MetalDust.Tin.name=Tin Dust
+item.MetalDust.Weak Steel.name=Weak Steel Dust
+item.MetalDust.Weak Blue Steel.name=Weak Blue Steel Dust
+item.MetalDust.Weak Red Steel.name=Weak Red Steel Dust
+item.MetalDust.Zinc.name=Zinc Dust
+item.MetalDust.Electrum.name=Electrum Dust
+item.MetalDust.Cupronickel.name=Cupronickel Dust
+item.MetalDust.Osmium.name=Osmium Dust
+item.MetalDust.Aluminum.name=Aluminum Dust
+item.MetalDust.Tungsten.name=Tungsten Dust
 
 #== Ingot ==
 item.Bismuth Bronze Ingot.name=Bismuth Bronze Ingot
@@ -1889,6 +2019,12 @@ item.Weak Red Steel Ingot.name=Weak Red Steel Ingot
 item.Weak Steel Ingot.name=Weak Steel Ingot
 item.Wrought Iron Ingot.name=Wrought Iron Ingot
 item.Zinc Ingot.name=Zinc Ingot
+item.Electrum Ingot.name=Electrum Ingot
+item.Cupronickel Ingot.name=Cupronickel Ingot
+item.Osmium Ingot.name=Osmium Ingot
+item.Aluminum Ingot.name=Aluminum Ingot
+item.Tungsten Ingot.name=Tungsten Ingot
+
 
 #== Double Ingot ==
 item.Bismuth Bronze Double Ingot.name=Bismuth Bronze Double Ingot
@@ -1912,6 +2048,11 @@ item.Sterling Silver Double Ingot.name=Sterling Silver Double Ingot
 item.Tin Double Ingot.name=Tin Double Ingot
 item.Wrought Iron Double Ingot.name=Wrought Iron Double Ingot
 item.Zinc Double Ingot.name=Zinc Double Ingot
+item.Electrum Double Ingot.name=Electrum Double Ingot
+item.Cupronickel Double Ingot.name=Cupronickel Double Ingot
+item.Osmium Double Ingot.name=Osmium Double Ingot
+item.Aluminum Double Ingot.name=Aluminum Double Ingot
+item.Tungsten Double Ingot.name=Tungsten Double Ingot
 
 #== Sheet ==
 item.Bismuth Bronze Sheet.name=Bismuth Bronze Sheet
@@ -1935,6 +2076,11 @@ item.Sterling Silver Sheet.name=Sterling Silver Sheet
 item.Tin Sheet.name=Tin Sheet
 item.Wrought Iron Sheet.name=Wrought Iron Sheet
 item.Zinc Sheet.name=Zinc Sheet
+item.Electrum Sheet.name=Electrum Sheet
+item.Cupronickel Sheet.name=Cupronickel Sheet
+item.Osmium Sheet.name=Osmium Sheet
+item.Aluminum Sheet.name=Aluminum Sheet
+item.Tungsten Sheet.name=Tungsten Sheet
 
 #== DoubleSheet ==
 item.Bismuth Bronze Double Sheet.name=Bismuth Bronze Double Sheet
@@ -1958,6 +2104,11 @@ item.Sterling Silver Double Sheet.name=Sterling Silver Double Sheet
 item.Tin Double Sheet.name=Tin Double Sheet
 item.Wrought Iron Double Sheet.name=Wrought Iron Double Sheet
 item.Zinc Double Sheet.name=Zinc Double Sheet
+item.Electrum Double Sheet.name=Electrum Double Sheet
+item.Cupronickel Double Sheet.name=Cupronickel Double Sheet
+item.Osmium Double Sheet.name=Osmium Double Sheet
+item.Aluminum Double Sheet.name=Aluminum Double Sheet
+item.Tungsten Double Sheet.name=Tungsten Double Sheet
 
 #== Misc ==
 item.Blueprint=Blueprint
@@ -1982,6 +2133,34 @@ tile.MetalSheet.name=Metal Sheet
 tile.ingotpile.name=Ingot Pile
 tile.SmokeRack.name=Smoke Rack
 tile.FlowerPot.name=Flower Pot
+
+#== Metal Blocks ==
+tile.MetalBlock.Bismuth.name=Bismuth Block
+tile.MetalBlock.Bismuth Bronze.name=Bismuth Bronze Block
+tile.MetalBlock.Black Bronze.name=Black Bronze Block
+tile.MetalBlock.Black Steel.name=Black Steel Block
+tile.MetalBlock.Blue Steel.name=Blue Steel Block
+tile.MetalBlock.Brass.name=Brass Block
+tile.MetalBlock.Bronze.name=Bronze Block
+tile.MetalBlock.Copper.name=Copper Block
+tile.MetalBlock.Gold.name=Gold Block
+tile.MetalBlock.Wrought Iron.name=Wrought Iron Block
+tile.MetalBlock.Lead.name=Lead Block
+tile.MetalBlock.Nickel.name=Nickel Block
+tile.MetalBlock.Pig Iron.name=Pig Iron Block
+tile.MetalBlock.Platinum.name=Platinum Block
+tile.MetalBlock.Red Steel.name=Red Steel Block
+tile.MetalBlock.Rose Gold.name=Rose Gold Block
+tile.MetalBlock.Silver.name=Silver Block
+tile.MetalBlock.Steel.name=Steel Block
+tile.MetalBlock.Sterling Silver.name=Sterling Silver Block
+tile.MetalBlock.Tin.name=Tin Block
+tile.MetalBlock.Zinc.name=Zinc Block
+tile.MetalBlock.Electrum.name=Electrum Block
+tile.MetalBlock.Cupronickel.name=Cupronickel Block
+tile.MetalBlock.Osmium.name=Osmium Block
+tile.MetalBlock.Aluminum.name=Aluminum Block
+tile.MetalBlock.Tungsten.name=Tungsten Block
 
 #== Anvils ==
 tile.Anvil.Stone.name=Stone Anvil
@@ -2009,6 +2188,7 @@ tile.ClayGrass.name=Clay Grass
 tile.dirt.name=Dirt
 tile.sand.name=Sand
 tile.Peat.name=Peat
+tile.gravels.name=Gravel
 tile.tilledSoil.name=Farmland
 tile.LooseRock.name=Debris
 tile.Ice.name=Ice
@@ -2022,6 +2202,7 @@ item.book.name=Book
 item.stick.name=Stick
 item.coal.coal.name=Coal
 item.coal.charcoal.name=Charcoal
+item.coal.coke.name=Coke Dust
 item.Fertilizer.name=Fertilizer
 item.Reeds.name=Reeds
 
@@ -2029,6 +2210,7 @@ item.Wooden Bucket Empty.name=Wooden Bucket (Empty)
 item.Wooden Bucket Water.name=Wooden Bucket (Fresh Water)
 item.Wooden Bucket Salt Water.name=Wooden Bucket (Salt Water)
 item.Wooden Bucket Milk.name=Wooden Bucket (Milk)
+item.Bottle of Milk.name=Bottle of Milk
 item.Lime Water.name=Limewater
 
 item.Red Steel Bucket Empty.name=Red Steel Bucket (Empty)
@@ -2054,7 +2236,11 @@ item.WoolCloth.name=Wool Cloth
 item.SilkCloth.name=Silk Cloth
 item.BurlapCloth.name=Burlap Cloth
 item.Mortar.name=Mortar
-item.Vinegar.name=Vinegar
+item.Vinegar.name=Bucket of Vinegar
+item.Brine.name=Bucket of Brine
+item.OliveOil.name=Bucket of Olive Oil
+item.Limewater.name=Bucket of Limewater
+item.Tannin.name=Bucket of Tannin
 
 item.Hide.small.name=Small Raw Hide
 item.Hide.medium.name=Medium Raw Hide
@@ -2071,6 +2257,9 @@ item.Prep Hide.large.name=Large Prepared Hide
 item.Sheep Skin.small.name=Small Sheepskin
 item.Sheep Skin.medium.name=Medium Sheepskin
 item.Sheep Skin.large.name=Large Sheepskin
+item.Polar Bear Skin.small.name=Small Polar Bear Skin
+item.Polar Bear Skin.medium.name=Medium Polar Bear Skin
+item.Polar Bear Skin.large.name=Large Polar Bear Skin
 item.TFC Leather.name=Leather
 item.Flat Leather.name=Flat Leather
 item.leather.name=Leather
@@ -2098,7 +2287,9 @@ tile.Workbench.name=Workbench
 tile.ButtonWood.name=Wooden Button
 tile.Firepit.name=Firepit
 tile.LogPile.name=Log Pile
+tile.CoalPile.name=Coal Pile
 tile.Charcoal.name=Charcoal
+tile.CokeBlock.name=Coke Block
 tile.StoneDetailed.name=Detailed
 tile.stoneStairs.name=Stair
 tile.stoneSlabs.name=Slab
@@ -2350,6 +2541,31 @@ gui.metal.WeakRedSteel=Weak Red Steel
 gui.metal.WeakSteel=Weak Steel
 gui.metal.WroughtIron=Wrought Iron
 gui.metal.Zinc=Zinc
+gui.metal.Electrum=Electrum
+gui.metal.Cupronickel=Cupronickel
+gui.metal.Osmium=Osmium
+gui.metal.Aluminum=Aluminum
+gui.metal.Tungsten=Tungsten
+
+
+#== GUI Ores - Mostly for WAILA ==
+
+gui.ore.kaolinite=Fire Clay
+gui.ore.gypsum=Decorative
+gui.ore.satinspar=Not used
+gui.ore.selenite=Not used
+gui.ore.graphite=Fire Clay
+gui.ore.petrifiedwood=Netherrack
+gui.ore.sulfur=Not used
+gui.ore.jet=Decorative
+gui.ore.microcline=Not used
+gui.ore.pitchblende=Uranium
+gui.ore.serpentine=Decorative
+gui.ore.olivine=Not used
+gui.ore.apatite=Apatite
+gui.ore.scapolite=Glowstone
+gui.ore.strontium=Blaze Rod
+gui.ore.quartz=Decorative
 
 #== Plans GUI ==
 gui.plans.axe=Axe
@@ -2378,6 +2594,7 @@ gui.plans.tuyere=Tuyere
 gui.plans.grill=Grill
 gui.plans.shears=Shears
 gui.plans.trapdoor=Trap Door
+gui.plans.block=Block
 
 #== Misc GUI ==
 gui.Blueprint=Blueprint
@@ -2390,6 +2607,7 @@ gui.fertilized=Fertilized
 gui.Inventory=Inventory
 gui.ClearSlot=Clear an output slot.
 gui.LogPile=Log Pile
+gui.CoalPile=Coal Pile
 gui.Output=Output
 gui.done=Done
 gui.cancel=Cancel
@@ -2611,7 +2829,7 @@ gui.goldpan.overused=This area seems to be overworked. You probably wouldn't fin
 gui.seeds.failedTemp=It's too cold to plant this, it wouldn't survive very long.
 gui.seeds.failedSun=There's not enough sunlight to plant this, it wouldn't survive very long.
 gui.forge.badChimney=There isn't enough ventilation to use this.
-
+gui.warning.heatstroke=You are suffering heatstroke. Drink fresh water quickly!
 gui.ProPick.Found=Found
 gui.ProPick.FoundTraces=Found traces of
 gui.ProPick.FoundSmall=Found a small sample of

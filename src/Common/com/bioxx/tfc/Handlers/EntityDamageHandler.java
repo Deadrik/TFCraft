@@ -17,6 +17,7 @@ import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.MathHelper;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
@@ -55,8 +56,8 @@ public class EntityDamageHandler
 		}
 		else if(event.source == DamageSource.fall)
 		{
-			float healthMod = TFC_Core.getEntityMaxHealth(entity)/1000f;
-			event.ammount *= 80*healthMod;
+			//float healthMod = TFC_Core.getEntityMaxHealth(entity)/1000f;
+			event.ammount *= 80/*healthMod*/;
 		}
 		else if(event.source == DamageSource.drown)
 		{
@@ -78,9 +79,14 @@ public class EntityDamageHandler
 		{
 			event.ammount *= 30;
 		}
-		else if (event.source == DamageSource.magic && entity.getHealth() > 25)
+		else if (event.source == DamageSource.magic || event.source == DamageSource.wither)
+		{
+			if ((entity.getHealth() - 25) > (TFC_Core.getEntityMaxHealth(entity)/10f))
 		{
 			event.ammount = 25;
+		}
+			else
+				event.ammount = (entity.getHealth() - (TFC_Core.getEntityMaxHealth(entity)/10f));
 		}
 		else if ("player".equals(event.source.damageType) || "mob".equals(event.source.damageType) || "arrow".equals(event.source.damageType))
 		{
@@ -391,5 +397,22 @@ public class EntityDamageHandler
 			}
 		}
 		event.setCanceled(true);
+	}
+	@SubscribeEvent
+	public void onHeal(LivingHealEvent event)
+	{
+		EntityLivingBase entity = event.entityLiving;
+		if(entity.isPotionActive(Potion.heal))
+			if(event.amount > 1 && event.amount < 9)
+				event.amount = event.amount * (entity.getMaxHealth() * 0.025f);
+	}
+	@SubscribeEvent
+	public void  onRegenHeal(LivingHealEvent event)
+	{
+		EntityLivingBase entity = event.entityLiving;
+		if (entity.isPotionActive(Potion.regeneration))
+		{
+				event.amount = event.amount * (entity.getMaxHealth() * 0.01f);
+		}
 	}
 }

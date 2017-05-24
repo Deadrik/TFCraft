@@ -228,7 +228,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 		{
 			if(felsicLava)
 			{
-				if(rand.nextInt(10)==0 && typeOfLava == 0)
+				if (typeOfLava == 0)
 					world.setBlock(x, y, z, Blocks.obsidian);
 				else
 				{

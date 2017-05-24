@@ -2,14 +2,18 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
 
+import net.minecraft.block.BlockGlass;
+import net.minecraft.block.BlockStainedGlass;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.WeatherManager;
 import com.bioxx.tfc.Items.ItemBloom;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.api.*;
@@ -36,7 +40,7 @@ public class TEForge extends TEFireEntity implements IInventory
 
 	private boolean validateSmokeStack()
 	{
-		if (!TFC_Core.isExposedToRain(worldObj, xCoord, yCoord, zCoord))
+		if (directChimney(worldObj.getPrecipitationHeight(xCoord, zCoord) - 1))
 			return true;
 		else if (checkChimney(xCoord + 1, yCoord + 1, zCoord))
 			return true;
@@ -64,6 +68,24 @@ public class TEForge extends TEFireEntity implements IInventory
 	private boolean notOpaque(int x, int y, int z)
 	{
 		return worldObj.blockExists(x, y, z) && !worldObj.getBlock(x, y, z).isOpaqueCube();
+	}
+
+	private boolean directChimney(int highestY)
+	{
+		boolean isBlocked = false;
+		if (worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord)) // Either no blocks, or transparent blocks above.
+		{
+			// Glass blocks, or blocks with a solid top or bottom block the chimney.
+			if (worldObj.getBlock(xCoord, highestY, zCoord) instanceof BlockGlass
+					|| worldObj.getBlock(xCoord, highestY, zCoord) instanceof BlockStainedGlass
+					|| worldObj.isSideSolid(xCoord, highestY, zCoord, ForgeDirection.UP) 
+					|| worldObj.isSideSolid(xCoord, highestY, zCoord, ForgeDirection.DOWN))
+				isBlocked = true;
+		}
+		else // Can't see the sky, chimney is blocked
+			isBlocked = true;
+
+		return !WeatherManager.isRainingOnCoord(worldObj, xCoord, yCoord, zCoord) && !isBlocked; // Direct chimney is valid when it is not blocked and it isn't raining.
 	}
 
 	private void genSmokeRoot(int x, int y, int z)
@@ -435,7 +457,7 @@ public class TEForge extends TEFireEntity implements IInventory
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
 
 			//If the fire is still burning and has fuel
-			if (fuelTimeLeft > 0 && fireTemp >= 1 && !TFC_Core.isExposedToRain(worldObj, xCoord, yCoord, zCoord))
+			if(fuelTimeLeft > 0 && fireTemp >= 1 && !WeatherManager.isRainingOnCoord(worldObj, xCoord, yCoord, zCoord))
 			{
 				float desiredTemp = handleTemp();
 				handleTempFlux(desiredTemp);

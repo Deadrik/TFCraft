@@ -91,7 +91,8 @@ public class BlockCustomFlowerPot extends BlockFlowerPot
 			
 			// TFC Blocks
 			if (block == TFCBlocks.cactus || block == TFCBlocks.flora || block == TFCBlocks.flowers || block == TFCBlocks.flowers2 || 
-					block == TFCBlocks.fungi || block == TFCBlocks.sapling || block == TFCBlocks.sapling2 || block == TFCBlocks.tallGrass && meta == 1 /*Fern*/)
+					block == TFCBlocks.fungi || block == TFCBlocks.sapling || block == TFCBlocks.sapling2 || block == TFCBlocks.tallGrass && meta == 1 /*Fern*/||
+					block == TFCBlocks.fruitTreeSapling)
 				return true;
 			
 			// Vanilla Blocks

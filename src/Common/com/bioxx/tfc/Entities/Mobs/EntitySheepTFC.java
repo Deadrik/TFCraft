@@ -103,6 +103,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.maizeEar, false));
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16f, 0.25F, 0.3F));
+		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPolarBear.class, 16f, 0.25F, 0.3F));
 		this.tasks.addTask(6, this.aiEatGrass);
 
 		this.colorCrafting.setInventorySlotContents(0, new ItemStack(Items.dye, 1, 0));
