@@ -1,5 +1,5 @@
-﻿#zh_CN
-#本文件为简体中文语言配置文件,翻译者:crafteverywhere, moshee
+#zh_CN
+#本文件为简体中文语言配置文件,翻译者:crafteverywhere, moshee（233Isaac修复翻译 增加翻译）
 #Terrafirmcraft 群峦传说
 
 
@@ -16,6 +16,73 @@ key.LockTool=锁定工具位置
 effect.bleed=流血
 death.attack.alcohol=%1$s死于酒精中毒
 death.attack.heatStroke=%1$s死于中暑
+death.attack.caveIn=%1$s死于塌方
+
+#==============
+#= Gui config =
+#==============
+# --- General Config File ---
+# ---------------------------
+config.gui.TFCConfig=TFCConfig.cfg
+config.gui.TFCConfig.tooltip=General configuration file
+
+config.gui.TFCConfig.general=General
+config.gui.TFCConfig.general.tooltip=Miscellaneous options
+
+config.gui.TFCConfig.time=Time
+config.gui.TFCConfig.time.tooltip=Time and Calendar related options
+
+config.gui.TFCConfig.fooddecay=Food decay
+config.gui.TFCConfig.fooddecay.tooltip=Food decay related options
+
+config.gui.TFCConfig.caveins=Cave-ins
+config.gui.TFCConfig.caveins.tooltip=Cave-in related options
+
+config.gui.TFCConfig.worldgen=World generation
+config.gui.TFCConfig.worldgen.tooltip=World gen options
+
+config.gui.TFCConfig.crops=Crops
+config.gui.TFCConfig.crops.tooltip=Crop related options
+
+config.gui.TFCConfig.protection=Spawn protection
+config.gui.TFCConfig.protection.tooltip=Spawn protection related options
+
+config.gui.TFCConfig.player=Player
+config.gui.TFCConfig.player.tooltip=Options related to 'the player'
+
+config.gui.TFCConfig.materials=Materials
+config.gui.TFCConfig.materials.tooltip=Material related options
+
+config.gui.TFCConfig.server=Server
+config.gui.TFCConfig.server.tooltip=Server only options
+
+config.gui.TFCConfig.overworked=Overworked
+config.gui.TFCConfig.overworked.tooltip=Overworked chunks options
+
+config.gui.TFCConfig.colors=Colors
+config.gui.TFCConfig.colors.tooltip=Ingame color settings
+
+config.gui.TFCConfig.colors.r=Red
+config.gui.TFCConfig.colors.g=Green
+config.gui.TFCConfig.colors.b=Blue
+config.gui.TFCConfig.colors.a=Alpha
+
+config.gui.TFCConfig.colors.nutrient_a.tooltip=Nutrient A Hoe Overlay Color
+config.gui.TFCConfig.colors.nutrient_b.tooltip=Nutrient B Hoe Overlay Color
+config.gui.TFCConfig.colors.nutrient_c.tooltip=Nutrient C Hoe Overlay Color
+config.gui.TFCConfig.colors.fertilizer.tooltip=Fertilizer Hoe Overlay Color
+config.gui.TFCConfig.colors.anvil.0.tooltip=Anvil Rule 0 Color
+config.gui.TFCConfig.colors.anvil.1.tooltip=Anvil Rule 1 Color
+config.gui.TFCConfig.colors.anvil.2.tooltip=Anvil Rule 2 Color
+
+# --- Crafting Config File ---
+# ----------------------------
+config.gui.TFCCrafting.conversion=Vanilla Conversions
+config.gui.TFCCrafting.conversion.tooltip=WARNING: Conversions for food are irreversible!
+
+config.gui.TFCCrafting.vanilla=Vanilla Crafting Recipes
+
+config.gui.TFCCrafting.options=Crafting Options
 
 #==============
 #= Entities = 
@@ -50,7 +117,11 @@ entity.standTFC.name=装备架
 entity.barrel.name=桶
 entity.fallingBlock.name=下落方块
 
-entity.notFamiliar=这只动物跟你还不熟.
+entity.notFamiliar=这只动物跟你还不熟.每天(手持粮食或者肉(狼)shift+右键)喂养来增加熟悉度.
+entity.pregnant=怀孕
+entity.male=公的
+entity.female=母的
+
 fishingRod.lineTension=鱼线要绷断了！
 fishingRod.lineSnap=鱼线绷断了！
 fishingRod.bite=哇,上钩了!
@@ -61,6 +132,8 @@ fishingRod.gotAway=它跑掉了...
 #================
 achievement.achLooseRock=确凿无疑是块岩石
 achievement.achLooseRock.desc=拾取岩石
+achievement.achTwoKnives=双重麻烦
+achievement.achTwoKnives.desc=一次敲制出两个石刀刃
 achievement.achSmallOre=无石不翻
 achievement.achSmallOre.desc=找到矿石颗粒
 achievement.achWildVegetable=采集者
@@ -89,6 +162,24 @@ achievement.achIronAge=灰铁时代
 achievement.achIronAge.desc=采掘到铁块进入灰铁时代
 achievement.achPokeCreeper=[鳄鱼先生]史蒂夫·欧文
 achievement.achPokeCreeper.desc=用棍子戳它
+achievement.achBlastFurnace=点火升空
+achievement.achBlastFurnace.desc=制造出高炉 
+achievement.achFireClay=热情似火
+achievement.achFireClay.desc=制造出陶土
+achievement.achCrucible=冶金术
+achievement.achCrucible.desc=制造出坩埚
+achievement.achUnknown=哎呀
+achievement.achUnknown.desc=制造出未知金属
+achievement.achBlackSteel=你喜欢什么颜色？
+achievement.achBlackSteel.desc=制造出黑钢
+achievement.achBlueSteel=超级名模
+achievement.achBlueSteel.desc=制造出蓝钢
+achievement.achRedSteel=红色金属的财富！
+achievement.achRedSteel.desc=制造出红钢
+achievement.achBlueBucket=熔岩桶 哈！
+achievement.achBlueBucket.desc=制造出蓝钢桶
+achievement.achRedBucket=海啸
+achievement.achRedBucket.desc=制造出红钢桶
 
 #============
 #= Commands =
@@ -118,7 +209,7 @@ fluid.whiskey=威士忌
 fluid.cornwhiskey=玉米威士忌
 fluid.milk=牛奶
 fluid.milkcurdled=凝乳
-fluid.milkvinegar=奶醋
+fluid.milkvinegar=醋奶
 fluid.limewater=石灰水
 fluid.tannin=鞣酸
 fluid.vinegar=醋
@@ -206,7 +297,7 @@ item.FruitSapling.Plum.name=李树苗
 #=== Berry Bushes ===
 tile.BerryBush.Blackberry.name=黑莓灌木
 tile.BerryBush.Blueberry.name=蓝莓灌木
-tile.BerryBush.Bunchberry.name=加拿大草茱萸
+tile.BerryBush.Bunchberry.name=草茱萸
 tile.BerryBush.Cloudberry.name=云莓灌木
 tile.BerryBush.Cranberry.name=蔓越莓灌木
 tile.BerryBush.Elderberry.name=接骨木
@@ -218,19 +309,19 @@ tile.BerryBush.Wintergreen.name=冬青灌木
 
 item.Blackberry.name=黑莓
 item.Blueberry.name=蓝莓
-item.Bunchberry.name=山茱萸浆果
+item.Bunchberry.name=草茱萸浆果
 item.Cloudberry.name=云莓
 item.Cranberry.name=蔓越莓
 item.Elderberry.name=接骨木浆果
 item.Gooseberry.name=鹅莓
-item.Raspberry.name=树莓(覆盆子)
+item.Raspberry.name=树莓
 item.Snowberry.name=雪果
 item.Strawberry.name=草莓
 item.Wintergreen Berry.name=冬青浆果
 
 item.Blackberry Leaf.name=黑莓叶
 item.Blueberry Leaf.name=蓝莓叶
-item.Bunchberry Leaf.name=加拿大草茱萸叶
+item.Bunchberry Leaf.name=草茱萸
 item.Cloudberry Leaf.name=云莓叶
 item.Cranberry Leaf.name=蔓越莓叶
 item.Elderberry Leaf.name=接骨木叶
@@ -308,7 +399,7 @@ item.Flat Clay.clay flat dark fire.name=压平的深色耐火粘土
 
 item.Jug.Clay Jug.name=粘土壶
 item.Jug.Ceramic Jug.name=陶瓷壶
-item.Jug.Water Jug.name=水壶
+item.Jug.Water Jug.name=陶瓷水壶
 
 item.Pot.Clay Pot.name=粘土罐
 item.Pot.Ceramic Pot.name=陶瓷罐
@@ -419,7 +510,7 @@ item.Spindle Head.Spindle Head.name=纺锤头
 
 item.Fire Brick.Fire Brick.name=耐火砖
 item.Fire Brick.Clay Fire Brick.name=耐火粘土砖
-tile.FireBrick.name=耐火砖方块
+tile.FireBrick.name=耐火砖块
 tile.Pottery.name=陶器
 
 item.ClayBowl.Ceramic Bowl.name=瓷碗
@@ -506,7 +597,7 @@ item.dyePowder.cyan.name=青色颜料
 item.dyePowder.gray.name=灰色颜料
 item.dyePowder.green.name=绿色颜料
 item.dyePowder.lightBlue.name=浅蓝色颜料
-item.dyePowder.lime.name=柠檬色颜料
+item.dyePowder.lime.name=黄绿色颜料
 item.dyePowder.magenta.name=品红色颜料
 item.dyePowder.orange.name=橙色颜料
 item.dyePowder.pink.name=粉色颜料
@@ -599,92 +690,92 @@ item.FlatRock.Shale.name=页岩
 item.FlatRock.Slate=板岩
 
 #== Stone Blocks ==
-tile.WallCobble.Andesite.name=页岩圆石墙
-tile.WallCobble.Basalt.name=泥岩圆石墙
-tile.WallCobble.Chalk.name=英安岩圆石墙
-tile.WallCobble.Chert.name=安山岩圆石墙
-tile.WallCobble.Claystone.name=白云岩圆石墙
-tile.WallCobble.Conglomerate.name=流纹岩圆石墙
-tile.WallCobble.Dacite.name=粘土岩圆石墙
+tile.WallCobble.Andesite.name=安山岩圆石墙
+tile.WallCobble.Basalt.name=玄武岩圆石墙
+tile.WallCobble.Chalk.name=白垩岩圆石墙
+tile.WallCobble.Chert.name=角岩圆石墙
+tile.WallCobble.Claystone.name=粘土岩圆石墙
+tile.WallCobble.Conglomerate.name=砾岩圆石墙
+tile.WallCobble.Dacite.name=英安岩圆石墙
 tile.WallCobble.Diorite.name=闪长岩圆石墙
-tile.WallCobble.Dolomite.name=玄武岩圆石墙
+tile.WallCobble.Dolomite.name=白云岩圆石墙
 tile.WallCobble.Gabbro.name=辉长岩圆石墙
 tile.WallCobble.Gneiss.name=片麻岩圆石墙
 tile.WallCobble.Granite.name=花岗石圆石墙
-tile.WallCobble.Limestone.name=白垩岩圆石墙
+tile.WallCobble.Limestone.name=石灰岩圆石墙
 tile.WallCobble.Marble.name=大理石圆石墙
 tile.WallCobble.Phyllite.name=千枚岩圆石墙
 tile.WallCobble.Quartzite.name=硅岩圆石墙
-tile.WallCobble.Rhyolite.name=沙泥岩圆石墙
-tile.WallCobble.Rock Salt.name=角岩圆石墙
+tile.WallCobble.Rhyolite.name=流纹岩圆石墙
+tile.WallCobble.Rock Salt.name=盐岩圆石墙
 tile.WallCobble.Schist.name=片岩圆石墙
-tile.WallCobble.Shale.name=砾岩圆石墙
+tile.WallCobble.Shale.name=页岩圆石墙
 tile.WallCobble.Slate.name=板岩圆石墙
 
-tile.WallRaw.Andesite.name=页岩墙
-tile.WallRaw.Basalt.name=泥岩墙
-tile.WallRaw.Chalk.name=英安岩墙
-tile.WallRaw.Chert.name=安山岩墙
-tile.WallRaw.Claystone.name=白云岩墙
-tile.WallRaw.Conglomerate.name=流纹岩墙
-tile.WallRaw.Dacite.name=粘土岩墙
+tile.WallRaw.Andesite.name=安山岩墙
+tile.WallRaw.Basalt.name=玄武岩墙
+tile.WallRaw.Chalk.name=白垩岩墙
+tile.WallRaw.Chert.name=角岩墙
+tile.WallRaw.Claystone.name=粘土岩墙
+tile.WallRaw.Conglomerate.name=砾岩墙
+tile.WallRaw.Dacite.name=英安岩墙
 tile.WallRaw.Diorite.name=闪长岩墙
-tile.WallRaw.Dolomite.name=玄武岩墙
+tile.WallRaw.Dolomite.name=白云岩墙
 tile.WallRaw.Gabbro.name=辉长岩墙
 tile.WallRaw.Gneiss.name=片麻岩墙
 tile.WallRaw.Granite.name=花岗石墙
-tile.WallRaw.Limestone.name=白垩岩墙
+tile.WallRaw.Limestone.name=石灰岩墙
 tile.WallRaw.Marble.name=大理石墙
 tile.WallRaw.Phyllite.name=千枚岩墙
 tile.WallRaw.Quartzite.name=硅岩墙
-tile.WallRaw.Rhyolite.name=沙泥岩墙
-tile.WallRaw.Rock Salt.name=角岩墙
+tile.WallRaw.Rhyolite.name=流纹岩墙
+tile.WallRaw.Rock Salt.name=盐岩墙
 tile.WallRaw.Schist.name=片岩墙
-tile.WallRaw.Shale.name=砾岩墙
+tile.WallRaw.Shale.name=页岩墙
 tile.WallRaw.Slate.name=板岩墙
 
-tile.WallBrick.Andesite.name=页岩砖墙
-tile.WallBrick.Basalt.name=泥岩砖墙
-tile.WallBrick.Chalk.name=英安岩砖墙
-tile.WallBrick.Chert.name=安山岩砖墙
-tile.WallBrick.Claystone.name=白云岩砖墙
-tile.WallBrick.Conglomerate.name=流纹岩砖墙
-tile.WallBrick.Dacite.name=粘土岩砖墙
+tile.WallBrick.Andesite.name=安山岩砖墙
+tile.WallBrick.Basalt.name=玄武岩砖墙
+tile.WallBrick.Chalk.name=白垩岩砖墙
+tile.WallBrick.Chert.name=角岩砖墙
+tile.WallBrick.Claystone.name=粘土岩砖墙
+tile.WallBrick.Conglomerate.name=砾岩砖墙
+tile.WallBrick.Dacite.name=英安岩砖墙
 tile.WallBrick.Diorite.name=闪长岩砖墙
-tile.WallBrick.Dolomite.name=玄武岩砖墙
+tile.WallBrick.Dolomite.name=白云岩砖墙
 tile.WallBrick.Gabbro.name=辉长岩砖墙
 tile.WallBrick.Gneiss.name=片麻岩砖墙
 tile.WallBrick.Granite.name=花岗石砖墙
-tile.WallBrick.Limestone.name=白垩岩砖墙
+tile.WallBrick.Limestone.name=石灰岩砖墙
 tile.WallBrick.Marble.name=大理石砖墙
 tile.WallBrick.Phyllite.name=千枚岩砖墙
 tile.WallBrick.Quartzite.name=硅岩砖墙
-tile.WallBrick.Rhyolite.name=沙泥岩砖墙
-tile.WallBrick.Rock Salt.name=角岩砖墙
+tile.WallBrick.Rhyolite.name=流纹岩砖墙
+tile.WallBrick.Rock Salt.name=盐岩砖墙
 tile.WallBrick.Schist.name=片岩砖墙
-tile.WallBrick.Shale.name=砾岩砖墙
+tile.WallBrick.Shale.name=页岩砖墙
 tile.WallBrick.Slate.name=板岩砖墙
 
-tile.WallSmooth.Andesite.name=页岩光滑墙壁
-tile.WallSmooth.Basalt.name=泥岩光滑墙壁
-tile.WallSmooth.Chalk.name=英安岩光滑墙壁
-tile.WallSmooth.Chert.name=安山岩光滑墙壁
-tile.WallSmooth.Claystone.name=白云岩光滑墙壁
-tile.WallSmooth.Conglomerate.name=流纹岩光滑墙壁
-tile.WallSmooth.Dacite.name=粘土岩光滑墙壁
+tile.WallSmooth.Andesite.name=安山岩光滑墙壁
+tile.WallSmooth.Basalt.name=玄武岩光滑墙壁
+tile.WallSmooth.Chalk.name=白垩岩光滑墙壁
+tile.WallSmooth.Chert.name=角岩光滑墙壁
+tile.WallSmooth.Claystone.name=粘土岩光滑墙壁
+tile.WallSmooth.Conglomerate.name=砾岩光滑墙壁
+tile.WallSmooth.Dacite.name=英安岩光滑墙壁
 tile.WallSmooth.Diorite.name=闪长岩光滑墙壁
-tile.WallSmooth.Dolomite.name=玄武岩光滑墙壁
+tile.WallSmooth.Dolomite.name=白云岩光滑墙壁
 tile.WallSmooth.Gabbro.name=辉长岩光滑墙壁
 tile.WallSmooth.Gneiss.name=片麻岩光滑墙壁
 tile.WallSmooth.Granite.name=花岗石光滑墙壁
-tile.WallSmooth.Limestone.name=白垩岩光滑墙壁
+tile.WallSmooth.Limestone.name=石灰岩光滑墙壁
 tile.WallSmooth.Marble.name=大理石光滑墙壁
 tile.WallSmooth.Phyllite.name=千枚岩光滑墙壁
 tile.WallSmooth.Quartzite.name=硅岩光滑墙壁
-tile.WallSmooth.Rhyolite.name=沙泥岩光滑墙壁
-tile.WallSmooth.Rock Salt.name=角岩光滑墙壁
+tile.WallSmooth.Rhyolite.name=流纹岩光滑墙壁
+tile.WallSmooth.Rock Salt.name=盐岩光滑墙壁
 tile.WallSmooth.Schist.name=片岩光滑墙壁
-tile.WallSmooth.Shale.name=砾岩光滑墙壁
+tile.WallSmooth.Shale.name=页岩光滑墙壁
 tile.WallSmooth.Slate.name=板岩光滑墙壁
 
 tile.IgExRock.Andesite.name=安山岩
@@ -731,27 +822,27 @@ tile.MMRockCobble.Schist.name=片岩圆石
 tile.SedRockCobble.Shale.name=页岩圆石
 tile.MMRockCobble.Slate.name=板岩圆石
 
-tile.IgExRockSmooth.Andesite.name=光滑英安岩
+tile.IgExRockSmooth.Andesite.name=光滑安山岩
 tile.IgExRockSmooth.Basalt.name=光滑玄武岩
-tile.SedRockSmooth.Chalk.name=光滑砂岩
-tile.SedRockSmooth.Chert.name=光滑页岩
-tile.SedRockSmooth.Claystone.name=光滑砾岩
-tile.SedRockSmooth.Conglomerate.name=光滑泥岩
-tile.IgExRockSmooth.Dacite.name=光滑流纹岩
-tile.IgInRockSmooth.Diorite.name=光滑辉长岩
-tile.SedRockSmooth.Dolomite.name=光滑岩盐
-tile.IgInRockSmooth.Gabbro.name=光滑花岗岩
-tile.MMRockSmooth.Gneiss.name=光滑片岩
-tile.IgInRockSmooth.Granite.name=光滑闪长岩
+tile.SedRockSmooth.Chalk.name=光滑白垩岩
+tile.SedRockSmooth.Chert.name=光滑角岩
+tile.SedRockSmooth.Claystone.name=光滑粘土岩
+tile.SedRockSmooth.Conglomerate.name=光滑砾岩
+tile.IgExRockSmooth.Dacite.name=光滑英安岩
+tile.IgInRockSmooth.Diorite.name=光滑闪长岩
+tile.SedRockSmooth.Dolomite.name=光滑白云岩
+tile.IgInRockSmooth.Gabbro.name=光滑辉长岩
+tile.MMRockSmooth.Gneiss.name=光滑片麻岩
+tile.IgInRockSmooth.Granite.name=光滑花岗石
 tile.SedRockSmooth.Limestone.name=光滑石灰岩
-tile.MMRockSmooth.Marble.name=光滑板岩
+tile.MMRockSmooth.Marble.name=光滑大理石
 tile.MMRockSmooth.Phyllite.name=光滑千枚岩
-tile.MMRockSmooth.Quartzite.name=光滑片麻岩
-tile.IgExRockSmooth.Rhyolite.name=光滑安山岩
-tile.SedRockSmooth.Rock Salt.name=光滑白云石
-tile.MMRockSmooth.Schist.name=光滑硅岩
-tile.SedRockSmooth.Shale.name=光滑粘土石
-tile.MMRockSmooth.Slate.name=光滑大理石
+tile.MMRockSmooth.Quartzite.name=光滑硅岩
+tile.IgExRockSmooth.Rhyolite.name=光滑流纹岩
+tile.SedRockSmooth.Rock Salt.name=光滑盐岩
+tile.MMRockSmooth.Schist.name=光滑片岩
+tile.SedRockSmooth.Shale.name=光滑页岩
+tile.MMRockSmooth.Slate.name=光滑板岩
 
 tile.IgExRockBrick.Andesite.name=安山岩砖块
 tile.IgExRockBrick.Basalt.name=玄武岩砖块
@@ -918,7 +1009,7 @@ item.Log.Pine.name=松树原木
 item.Log.Sequoia.name=红杉树原木
 item.Log.Spruce.name=云杉树原木
 item.Log.Sycamore.name=悬铃树原木
-item.Log.White Cedar.name=北美香柏树原木
+item.Log.White Cedar.name=香柏树原木
 item.Log.White Elm.name=榆树原木
 item.Log.Willow.name=柳树原木
 
@@ -936,7 +1027,7 @@ item.SinglePlank.Pine.name=松树木材
 item.SinglePlank.Sequoia.name=红杉木材
 item.SinglePlank.Spruce.name=云杉木材
 item.SinglePlank.Sycamore.name=悬铃木材
-item.SinglePlank.White Cedar.name=北美香柏木材
+item.SinglePlank.White Cedar.name=香柏木材
 item.SinglePlank.White Elm.name=榆树木材
 item.SinglePlank.Willow.name=杨柳木材
 
@@ -954,7 +1045,7 @@ item.Pine Door.name=松木门
 item.Sequoia Door.name=红杉木门
 item.Spruce Door.name=云杉木门
 item.Sycamore Door.name=悬铃木门
-item.White Cedar Door.name=北美香柏木门
+item.White Cedar Door.name=香柏木门
 item.White Elm Door.name=榆树木门
 item.Willow Door.name=杨柳木门
 
@@ -972,7 +1063,7 @@ item.Barrel.Pine.name=松木桶
 item.Barrel.Sequoia.name=红杉木桶
 item.Barrel.Spruce.name=云杉木桶
 item.Barrel.Sycamore.name=悬铃木桶
-item.Barrel.White Cedar.name=北美香柏木桶
+item.Barrel.White Cedar.name=香柏木桶
 item.Barrel.White Elm.name=榆树木桶
 item.Barrel.Willow.name=杨柳木桶
 
@@ -990,7 +1081,7 @@ item.Loom.Pine.name=松树织布机
 item.Loom.Sequoia.name=红杉织布机
 item.Loom.Spruce.name=云杉织布机
 item.Loom.Sycamore.name=悬铃木织布机
-item.Loom.White Cedar.name=北美香柏树织布机
+item.Loom.White Cedar.name=香柏树织布机
 item.Loom.White Elm.name=榆树织布机
 item.Loom.Willow.name=杨柳织布机
 
@@ -1009,7 +1100,7 @@ tile.Chest.Pine.name=松树箱子
 tile.Chest.Sequoia.name=红杉箱子
 tile.Chest.Spruce.name=云杉箱子
 tile.Chest.Sycamore.name=悬铃木箱子
-tile.Chest.White Cedar.name=北美香柏树箱子
+tile.Chest.White Cedar.name=香柏树箱子
 tile.Chest.White Elm.name=榆树箱子
 tile.Chest.Willow.name=杨柳箱子
 
@@ -1027,7 +1118,7 @@ tile.log.Pine.name=松原木
 tile.log.Sequoia.name=红杉原木
 tile.log.Spruce.name=云杉原木
 tile.log.Sycamore.name=悬铃原木
-tile.log.White Cedar.name=北美香柏原木
+tile.log.White Cedar.name=香柏原木
 tile.log.White Elm.name=榆树原木
 tile.log.Willow.name=杨柳原木
 
@@ -1045,7 +1136,7 @@ tile.WoodVert.Pine.name=松原木
 tile.WoodVert.Sequoia.name=红杉原木
 tile.WoodVert.Spruce.name=云杉原木
 tile.WoodVert.Sycamore.name=悬铃原木
-tile.WoodVert.White Cedar.name=北美香柏原木
+tile.WoodVert.White Cedar.name=香柏原木
 tile.WoodVert.White Elm.name=榆树原木
 tile.WoodVert.Willow.name=杨柳原木
 
@@ -1063,7 +1154,7 @@ tile.WoodHoriz2.Pine.name=松原木
 tile.WoodHoriz2.Sequoia.name=红杉原木
 tile.WoodHoriz2.Spruce.name=云杉原木
 tile.WoodHoriz2.Sycamore.name=悬铃原木
-tile.WoodHoriz2.White Cedar.name=北美香柏原木
+tile.WoodHoriz2.White Cedar.name=香柏原木
 tile.WoodHoriz2.White Elm.name=榆树原木
 tile.WoodHoriz2.Willow.name=杨柳原木
 
@@ -1081,7 +1172,7 @@ tile.sapling.Pine.name=松树苗
 tile.sapling.Sequoia.name=红杉树苗
 tile.sapling.Spruce.name=云杉树苗
 tile.sapling.Sycamore.name=悬铃树苗
-tile.sapling.White Cedar.name=北美香柏树苗
+tile.sapling.White Cedar.name=香柏树苗
 tile.sapling.White Elm.name=榆树树苗
 tile.sapling.Willow.name=杨柳树苗
 
@@ -1100,7 +1191,7 @@ tile.leaves.Pine.name=松树叶
 tile.leaves.Sequoia.name=红杉树叶
 tile.leaves.Spruce.name=云杉树叶
 tile.leaves.Sycamore.name=悬铃树叶
-tile.leaves.White Cedar.name=北美香柏树叶
+tile.leaves.White Cedar.name=香柏树叶
 tile.leaves.White Elm.name=榆树树叶
 tile.leaves.Willow.name=杨柳树叶
 
@@ -1118,7 +1209,7 @@ tile.wood.Pine.name=松木板
 tile.wood.Sequoia.name=红杉木板
 tile.wood.Spruce.name=云杉木板
 tile.wood.Sycamore.name=悬铃木板
-tile.wood.White Cedar.name=北美香柏木板
+tile.wood.White Cedar.name=香柏木板
 tile.wood.White Elm.name=榆树木板
 tile.wood.Willow.name=杨柳木板
 
@@ -1140,7 +1231,7 @@ tile.Door Pine.name=松木门
 tile.Door Sequoia.name=红杉木门
 tile.Door Spruce.name=云杉木门
 tile.Door Sycamore.name=悬铃木门
-tile.Door White Cedar.name=北美香柏木门
+tile.Door White Cedar.name=香柏木门
 tile.Door White Elm.name=榆树木门
 tile.Door Willow.name=杨柳木门
 
@@ -1158,7 +1249,7 @@ tile.Barrel.Pine.name=松木桶
 tile.Barrel.Sequoia.name=红杉木桶
 tile.Barrel.Spruce.name=云杉木桶
 tile.Barrel.Sycamore.name=悬铃木桶
-tile.Barrel.White Cedar.name=北美香柏木桶
+tile.Barrel.White Cedar.name=香柏木桶
 tile.Barrel.White Elm.name=榆树木桶
 tile.Barrel.Willow.name=杨柳木桶
 
@@ -1176,7 +1267,7 @@ tile.Loom.Pine.name=松树织布机
 tile.Loom.Sequoia.name=红杉织布机
 tile.Loom.Spruce.name=云杉织布机
 tile.Loom.Sycamore.name=悬铃木织布机
-tile.Loom.White Cedar.name=北美香柏树织布机
+tile.Loom.White Cedar.name=香柏树织布机
 tile.Loom.White Elm.name=榆树织布机
 tile.Loom.Willow.name=杨柳织布机
 
@@ -1194,7 +1285,7 @@ tile.FenceTFC.Pine.name=松木栅栏
 tile.FenceTFC.Sequoia.name=红杉木栅栏
 tile.FenceTFC.Spruce.name=云杉木栅栏
 tile.FenceTFC.Sycamore.name=悬铃木栅栏
-tile.FenceTFC.White Cedar.name=北美香柏木栅栏
+tile.FenceTFC.White Cedar.name=香柏木栅栏
 tile.FenceTFC.White Elm.name=榆树木栅栏
 tile.FenceTFC.Willow.name=杨柳木栅栏
 
@@ -1212,7 +1303,7 @@ tile.FenceGateTFC.Pine.name=松木栅栏门
 tile.FenceGateTFC.Sequoia.name=红杉木栅栏门
 tile.FenceGateTFC.Spruce.name=云杉木栅栏门
 tile.FenceGateTFC.Sycamore.name=悬铃木栅栏门
-tile.FenceGateTFC.White Cedar.name=北美香柏木栅栏门
+tile.FenceGateTFC.White Cedar.name=香柏木栅栏门
 tile.FenceGateTFC.White Elm.name=榆树木栅栏门
 tile.FenceGateTFC.Willow.name=杨柳木栅栏门
 
@@ -1230,7 +1321,7 @@ tile.ArmourStand.Pine.name=松木盔甲架
 tile.ArmourStand.Sequoia.name=红杉木盔甲架
 tile.ArmourStand.Spruce.name=云杉木盔甲架
 tile.ArmourStand.Sycamore.name=悬铃木盔甲架
-tile.ArmourStand.White Cedar.name=北美香柏木盔甲架
+tile.ArmourStand.White Cedar.name=香柏木盔甲架
 tile.ArmourStand.White Elm.name=榆树木盔甲架
 tile.ArmourStand.Willow.name=杨柳木盔甲架
 
@@ -1248,7 +1339,7 @@ tile.WoodSupportV.Pine.name=松木支撑柱
 tile.WoodSupportV.Sequoia.name=红杉木支撑柱
 tile.WoodSupportV.Spruce.name=云杉木支撑柱
 tile.WoodSupportV.Sycamore.name=悬铃木支撑柱
-tile.WoodSupportV.White Cedar.name=北美香柏树支撑柱
+tile.WoodSupportV.White Cedar.name=香柏树支撑柱
 tile.WoodSupportV.White Elm.name=榆树木支撑柱
 tile.WoodSupportV.Willow.name=杨柳木支撑柱
 
@@ -1267,7 +1358,7 @@ tile.WoodSupportH.Pine.name=松木支撑柱
 tile.WoodSupportH.Sequoia.name=红杉木支撑柱
 tile.WoodSupportH.Spruce.name=云杉木支撑柱
 tile.WoodSupportH.Sycamore.name=悬铃木支撑柱
-tile.WoodSupportH.White Cedar.name=北美香柏树支撑柱
+tile.WoodSupportH.White Cedar.name=香柏树支撑柱
 tile.WoodSupportH.White Elm.name=榆树木支撑柱
 tile.WoodSupportH.Willow.name=杨柳木支撑柱
 
@@ -1285,7 +1376,7 @@ tile.Toolrack.Pine.name=松木工具架
 tile.Toolrack.Sequoia.name=红杉木工具架
 tile.Toolrack.Spruce.name=云杉木工具架
 tile.Toolrack.Sycamore.name=悬铃木工具架
-tile.Toolrack.White Cedar.name=北美香柏木工具架
+tile.Toolrack.White Cedar.name=香柏木工具架
 tile.Toolrack.White Elm.name=榆树木工具架
 tile.Toolrack.Willow.name=杨柳木工具架
 
@@ -1481,7 +1572,7 @@ item.Black Steel Shovel Head.name=黑钢铲子头部
 item.Blue Steel Shovel Head.name=蓝钢铲子头部
 item.Bronze Shovel Head.name=青铜铲子头部
 item.Copper Shovel Head.name=铜铲子头部
-item.Red Steel Shovel Head.name=玫瑰金铲子头部
+item.Red Steel Shovel Head.name=红钢铲子头部
 item.Steel Shovel Head.name=钢铲子头部
 item.Wrought Iron Shovel Head.name=锻铁铲子头部
 
@@ -1653,15 +1744,15 @@ item.Wrought Iron Tuyere.name=锻铁鼓风嘴
 
 #== Armor ==
 #=== Helmet ===
-item.Bismuth Bronze Unfinished Helmet.name=未完成铋青铜头盔阶
-item.Black Bronze Unfinished Helmet.name=未完成黑青铜头盔阶
-item.Black Steel Unfinished Helmet.name=未完成黑钢头盔阶
-item.Blue Steel Unfinished Helmet.name=未完成蓝钢头盔阶
-item.Bronze Unfinished Helmet.name=未完成青铜头盔阶
-item.Copper Unfinished Helmet.name=未完成铜头盔阶
-item.Red Steel Unfinished Helmet.name=未完成红钢头盔阶
-item.Steel Unfinished Helmet.name=未完成钢头盔阶
-item.Wrought Iron Unfinished Helmet.name=未完成锻铁头盔阶
+item.Bismuth Bronze Unfinished Helmet.name=未完成铋青铜头盔
+item.Black Bronze Unfinished Helmet.name=未完成黑青铜头盔
+item.Black Steel Unfinished Helmet.name=未完成黑钢头盔
+item.Blue Steel Unfinished Helmet.name=未完成蓝钢头盔
+item.Bronze Unfinished Helmet.name=未完成青铜头盔
+item.Copper Unfinished Helmet.name=未完成铜头盔
+item.Red Steel Unfinished Helmet.name=未完成红钢头盔
+item.Steel Unfinished Helmet.name=未完成钢头盔
+item.Wrought Iron Unfinished Helmet.name=未完成锻铁头盔
 item.Bismuth Bronze Helmet.name=铋青铜头盔
 item.Black Bronze Helmet.name=黑青铜头盔
 item.Black Steel Helmet.name=黑钢头盔
@@ -1674,15 +1765,15 @@ item.Wrought Iron Helmet.name=锻铁头盔
 item.helmetCloth.name=皮革帽子
 
 #=== Chestplate ===
-item.Bismuth Bronze Unfinished Chestplate.name=未完成铋青铜胸甲阶
-item.Black Bronze Unfinished Chestplate.name=未完成黑青铜胸甲阶
-item.Black Steel Unfinished Chestplate.name=未完成黑钢胸甲阶
-item.Blue Steel Unfinished Chestplate.name=未完成蓝钢胸甲阶
-item.Bronze Unfinished Chestplate.name=未完成青铜胸甲阶
-item.Copper Unfinished Chestplate.name=未完成铜胸甲阶
-item.Red Steel Unfinished Chestplate.name=未完成红钢胸甲阶
-item.Steel Unfinished Chestplate.name=未完成钢胸甲阶
-item.Wrought Iron Unfinished Chestplate.name=未完成锻铁胸甲阶
+item.Bismuth Bronze Unfinished Chestplate.name=未完成铋青铜胸甲
+item.Black Bronze Unfinished Chestplate.name=未完成黑青铜胸甲
+item.Black Steel Unfinished Chestplate.name=未完成黑钢胸甲
+item.Blue Steel Unfinished Chestplate.name=未完成蓝钢胸甲
+item.Bronze Unfinished Chestplate.name=未完成青铜胸甲
+item.Copper Unfinished Chestplate.name=未完成铜胸甲
+item.Red Steel Unfinished Chestplate.name=未完成红钢胸甲
+item.Steel Unfinished Chestplate.name=未完成钢胸甲
+item.Wrought Iron Unfinished Chestplate.name=未完成锻铁胸甲
 item.Bismuth Bronze Chestplate.name=铋青铜胸甲
 item.Black Bronze Chestplate.name=黑青铜胸甲
 item.Black Steel Chestplate.name=黑钢胸甲
@@ -1695,15 +1786,15 @@ item.Wrought Iron Chestplate.name=锻铁胸甲
 item.chestplateCloth.name=皮革衬衫
 
 #=== Greaves ===
-item.Bismuth Bronze Unfinished Greaves.name=未完成铋青铜护胫阶
-item.Black Bronze Unfinished Greaves.name=未完成黑青铜护胫阶
-item.Black Steel Unfinished Greaves.name=未完成黑钢护胫阶
-item.Blue Steel Unfinished Greaves.name=未完成蓝钢护胫阶
-item.Bronze Unfinished Greaves.name=未完成青铜护胫阶
-item.Copper Unfinished Greaves.name=未完成铜护胫阶
-item.Red Steel Unfinished Greaves.name=未完成红钢护胫阶
-item.Steel Unfinished Greaves.name=未完成钢护胫阶
-item.Wrought Iron Unfinished Greaves.name=未完成锻铁护胫阶
+item.Bismuth Bronze Unfinished Greaves.name=未完成铋青铜护胫
+item.Black Bronze Unfinished Greaves.name=未完成黑青铜护胫
+item.Black Steel Unfinished Greaves.name=未完成黑钢护胫
+item.Blue Steel Unfinished Greaves.name=未完成蓝钢护胫
+item.Bronze Unfinished Greaves.name=未完成青铜护胫
+item.Copper Unfinished Greaves.name=未完成铜护胫
+item.Red Steel Unfinished Greaves.name=未完成红钢护胫
+item.Steel Unfinished Greaves.name=未完成钢护胫
+item.Wrought Iron Unfinished Greaves.name=未完成锻铁护胫
 item.Bismuth Bronze Greaves.name=铋青铜护胫
 item.Black Bronze Greaves.name=黑青铜护胫
 item.Black Steel Greaves.name=黑钢护胫
@@ -1875,7 +1966,7 @@ item.Wrought Iron Double Sheet.name=锻铁双层薄板
 item.Zinc Double Sheet.name=锌双层薄板
 
 #== Misc ==
-item.Blueprint=图纸
+item.Blueprint=蓝图
 
 #===========
 #= Devices =
@@ -1883,12 +1974,12 @@ item.Blueprint=图纸
 tile.Bellows.name=风箱
 tile.Forge.name=锻造炉
 tile.BlastFurnace.name=高炉
-tile.SpawnMeter.name=保护计
+tile.SpawnMeter.name=刷怪保护器
 tile.Quern.name=磨石座
 tile.EarlyBloomery.name=锻铁炉
 tile.Molten.name=熔化炉
 tile.Crucible.name=坩埚
-tile.NestBox.name=窝箱
+tile.NestBox.name=鸡窝
 item.SluiceItem.name=洗矿槽
 tile.Sluice.name=洗矿槽
 tile.LeatherRack.name=鞣革架
@@ -1896,6 +1987,7 @@ tile.FoodPrep.name=厨台
 tile.MetalSheet.name=金属板
 tile.ingotpile.name=金属锭
 tile.SmokeRack.name=烟熏架
+tile.FlowerPot.name=花盆
 
 #== Anvils ==
 tile.Anvil.Stone.name=石砧
@@ -2005,6 +2097,7 @@ tile.BasicPipe.name=管道
 tile.ValvePipe.name=阀门
 tile.Smoke.name=烟
 tile.Torch.name=火把
+tile.TorchOff.name=熄灭了的火把
 tile.Chest.name=箱子
 tile.Bookshelf.name=书架
 tile.Workbench.name=工作台
@@ -2014,7 +2107,7 @@ tile.LogPile.name=原木垛
 tile.Charcoal.name=木炭
 tile.StoneDetailed.name=砾石
 tile.stoneStairs.name=楼梯
-tile.stoneSlabs.name=台阶
+tile.stoneSlabs.name=台
 tile.stoneStalac.name=钟乳石
 tile.WoodConstruct.name=木材
 tile.MetalTrapDoor.name=活板门
@@ -2040,6 +2133,7 @@ tile.Moss.name=苔藓
 tile.Thatch.name=茅草
 tile.Flora.Golden Rod.name=秋麒麟
 tile.Flora.Cat Tails.name=香蒲
+tile.Flora.Pond Weed.name=池塘杂草
 
 item.Seeds Sugarcane.name=甘蔗种子
 item.Seeds Hemp.name=亚麻种子
@@ -2059,7 +2153,7 @@ tile.Flowers.flower_meads_milkweed.name=乳草
 tile.Flowers.flower_tropical_milkweed.name=热带乳草
 tile.Flowers.flower_butterfly_milkweed.name=蝶乳草
 tile.Flowers.flower_calendula.name=金盏花
-tile.Flowers2.flower_rose.name=罂粟
+tile.Flowers2.flower_rose.name=虞美人
 tile.Flowers2.flower_blue_orchid.name=兰花
 tile.Flowers2.flower_allium.name=绒球葱
 tile.Flowers2.flower_houstonia.name=茜草花
@@ -2143,9 +2237,9 @@ gui.Anvil.Rule43=弯曲,非最末
 
 #== Tools/Weapons/Armor GUI ==
 gui.Armor.ForgedBy=锻造者：
-gui.Armor.Crush=碎裂
-gui.Armor.Pierce=穿刺
-gui.Armor.Slash=砍痕
+gui.Armor.Crush=碎裂抗性
+gui.Armor.Pierce=穿刺抗性
+gui.Armor.Slash=砍痕抗性
 
 gui.Bow.Javelins=标枪
 gui.Bow.Arrows=箭
@@ -2162,7 +2256,7 @@ gui.Barrel.Seal=密封
 gui.Barrel.Unseal=开封
 gui.Barrel.ToggleOff=出
 gui.Barrel.ToggleOn=进
-gui.Barrel.SealedOn=封闭
+gui.Barrel.SealedOn=密封日期
 gui.Barrel.Solid=存储固体
 gui.Barrel.Liquid=存储流体
 gui.barrel.pickling=腌制中的
@@ -2294,6 +2388,10 @@ gui.plans.trapdoor=活板门
 
 #== Misc GUI ==
 gui.Blueprint=蓝图
+gui.Rotate=旋转
+gui.Blueprint.Inst0=§b右击§7对方块使用.
+gui.Blueprint.Inst1=Or §b右击§7旋转蓝图.
+gui.Blueprint.missingTool=蓝图需要凿子和锤子来使用.
 gui.Nametag=命名牌
 gui.fertilized=已受精
 gui.Inventory=物品栏
@@ -2302,6 +2400,7 @@ gui.LogPile=原木垛
 gui.Output=出产
 gui.done=完成
 gui.cancel=取消
+gui.empty=Empty
 gui.Sluice.Soil=土壤
 gui.Sluice.Overworked=过度筛取
 gui.Workbench.Crafting=合成
@@ -2313,9 +2412,11 @@ gui.badnbt=NBT信息损毁
 gui.Advanced=高级
 gui.Shift=稍微变形
 gui.Hold=未变形
+gui.SmithingBonus=锻造奖励
+gui.ItemWorked=这个物品已经被加工过了
 
-gui.slot=格子
-gui.slot.back=返回
+gui.slot=可装备至装备栏
+gui.slot.back=背部（胸甲旁边的格子）
 
 gui.ShowHelp=§8帮助: (按住§fShift§8)
 gui.Help=§8帮助:
@@ -2335,8 +2436,8 @@ gui.Nutrient.A=营养成分A
 gui.Nutrient.B=营养成分B
 gui.Nutrient.C=营养成分C
 
-gui.stage1=第一阶段
-gui.stage2=第二阶段
+gui.stage1=第一段
+gui.stage2=第二段
 
 gui.Size.Tiny=微小
 gui.Size.VerySmall=很小
@@ -2436,7 +2537,9 @@ word.brined=盐渍
 word.cooked=烤熟
 word.salted=抹盐
 word.smoked=熏制
+word.smoking=熏制中
 word.dried=风干
+word.drying=风干中
 
 food.cooked.rare=二分熟
 food.cooked.medrare=四分熟
@@ -2479,32 +2582,42 @@ gui.units=单位
 
 #== WAILA ==
 gui.useless=无用
-gui.growth=生成中
+gui.growth=生长中
 gui.mature=成熟
 gui.metal.Iron=铁
 gui.tier=级别
 gui.fuel=燃料
 gui.Green Apple=青苹果树
 gui.Red Apple=红苹果树
-gui.Banana=橡胶树
+gui.Banana=香蕉树
 gui.Cherry=樱桃树
 gui.Lemon=柠檬树
 gui.Olive=橄榄树
-gui.Orange=橘子树
+gui.Orange=橙子树
 gui.Peach=桃树
-gui.Plum=梅树
+gui.Plum=李子树
 gui.pile=堆叠
 gui.weaving=纺织
 gui.eggs=鸡蛋
 gui.fertEggs=已受精的鸡蛋
 gui.logs=原木
 gui.gems=宝石
+gui.familiarized=每日喂食
+gui.familiarity=熟悉度
+gui.baby=小
+gui.enoughSpace=需要清理周围空间来长大
+option.tfc.oreQuality=显示矿石质量
+option.tfc.gender=显示动物性别
+option.tfc.familiarToday=显示动物每日喂食
+option.tfc.familiarity=显示动物熟悉度
+option.tfc.baby=显示动物是否是小的
 
 #== Chat Messages ==
 gui.GoldPan.UseFull=必须在流动水中使用
 gui.goldpan.overused=这片区域资源似乎已经采尽,你可能不会再发现更多了.
 gui.seeds.failedTemp=这里太冷了，无法进行种植，作物活不长。
 gui.seeds.failedSun=这里日照不足，无法进行种植，作物活不长。
+gui.forge.badChimney=没有足够的露天位置来使用熔炉.
 
 gui.ProPick.Found=发现了
 gui.ProPick.FoundTraces=发现了微量的
